@@ -1,0 +1,79 @@
+name: Release Creation
+
+on:
+  release:
+    types: [published]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+
+    - name: Load system manifest
+      id: manifest
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./system.json"
+
+
+    - name: Set up variables
+      id: vars
+      run: |
+        VERSION=${GITHUB_REF/refs\/tags\//}
+        SYSTEM_ID=${{steps.manifest.outputs.id}}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "SYSTEM_ID=$SYSTEM_ID" >> $GITHUB_ENV
+        echo "ZIP_NAME=$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
+        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
+        echo "SYSTEMRELEASE_INSTALL_URL_ID=https://github.com/${{github.repository}}/releases/download/$VERSION/system.json" >> $GITHUB_ENV
+
+
+    # Adjust download URL and version in manifest
+    - name: Adjust manifest
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: "system.json"
+      env:
+        download: ${{env.RELEASE_DOWNLOAD_URL}}
+        version: ${{env.VERSION}}
+
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        cache: 'npm'
+
+
+    # `npm ci` is recommended:
+    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+    - name: Install Dependencies
+      run: npm ci
+
+
+    # Run our `build` script
+    - name: Build All
+      run: |
+        npm run build --if-present
+        mv --force ${{env.SYSTEM_ID}}-compiled.mjs ${{env.SYSTEM_ID}}.mjs
+
+    # Create a zip file with all files required by the module to add to the release
+    - run: zip ${{env.ZIP_NAME}} -r artwork lang packs/*.db templates ${{env.SYSTEM_ID}}.css ${{env.SYSTEM_ID}}.mjs ${{env.SYSTEM_ID}}-compiled.mjs.map LICENSE README.md system.json template.json
+
+
+    # Create a release for this specific version
+    - name: Update Release with Files
+      id: create_version_release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true # Set this to false if you want to prevent updating existing releases
+        name: ${{env.VERSION}}
+        draft: false
+        prerelease: false
+        token: ${{secrets.GITHUB_TOKEN}}
+        artifacts: './system.json, ./${{env.ZIP_NAME}}'
+        tag: ${{env.VERSION}}
+        body: '${{github.event.release.body}} **Installation:** To manually install this release, please use the following manifest URL: ${{env.RELEASE_INSTALL_URL}}'
