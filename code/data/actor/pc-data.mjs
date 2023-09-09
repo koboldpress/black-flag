@@ -1,4 +1,5 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
+import Proficiency from "../../documents/proficiency.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
@@ -26,7 +27,9 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				})
 				// Bonuses?
 				// Minimums?
-			})),
+			}), {
+				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true
+			}),
 			attributes: new foundry.data.fields.SchemaField({
 				ac: new foundry.data.fields.SchemaField({
 					// Formulas
@@ -84,7 +87,9 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 					})
 					// Bonuses?
 					// Minimum?
-				})),
+				}), {
+					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true
+				}),
 				tools: new MappingField(new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
@@ -143,5 +148,26 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				// TODO: Perhaps condition immunities could just be stored with damage immunities
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*  Data Preparation                   */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareBaseData() {
+		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
+		for ( const [key, ability] of Object.entries(this.abilities) ) {
+			const config = CONFIG.BlackFlag.abilities[key];
+			ability.labels = config.labels;
+		}
+		for ( const [key, skill] of Object.entries(this.proficiencies.skills) ) {
+			const config = CONFIG.BlackFlag.skills[key];
+			skill.label = config.label;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedData() {
 	}
 }

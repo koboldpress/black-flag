@@ -57,6 +57,11 @@
 			.abilities {
 				grid-column: 1 / 8;
 				grid-row: 1 / 3;
+				display: flex;
+
+				:is(div) {
+					flex-grow: 1;
+				}
 			}
 			.skills {
 				grid-column: 1 / 4;
