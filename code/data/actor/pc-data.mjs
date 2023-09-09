@@ -140,6 +140,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
 					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
 				})
+				// TODO: Perhaps condition immunities could just be stored with damage immunities
 			})
 		};
 	}
