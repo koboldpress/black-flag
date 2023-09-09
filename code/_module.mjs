@@ -5,6 +5,8 @@
  * Issue Tracker: https://github.com/koboldpress/black-flag/issues
  */
 
+import "../styles/_module.css";
+
 globalThis.BlackFlag = {
 	modules: {}
 };
