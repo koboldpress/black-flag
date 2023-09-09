@@ -1,11 +1,11 @@
 {
 	"scripts": {
-		"build": "npm run build:code && npm run build:styles",
-		"build:code": "rollup black-flag.mjs -f es -o black-flag-compiled.mjs -m --sourcemapFile black-flag.mjs",
+		"build": "npm run build:code",
+		"build:code": "rollup --config",
 		"build:styles": "postcss styles/_module.css -o black-flag.css -m",
-		"lint": "eslint --ext .mjs ./",
-		"lint:fix": "eslint --ext .mjs ./ --fix",
-		"watch": "postcss styles/_module.css -o black-flag.css -m -w"
+		"lint": "eslint --ext .mjs ./code",
+		"lint:fix": "eslint --ext .mjs ./code --fix",
+		"watch": "rollup --config --watch"
 	},
 	"devDependencies": {
 		"eslint": "^8.48.0",
@@ -14,6 +14,7 @@
 		"postcss-cli": "^10.1.0",
 		"postcss-import": "^15.1.0",
 		"postcss-preset-env": "^9.1.3",
-		"rollup": "^3.29.0"
+		"rollup": "^3.29.0",
+		"rollup-plugin-postcss": "^4.0.2"
 	}
 }
