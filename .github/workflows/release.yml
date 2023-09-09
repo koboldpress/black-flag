@@ -28,7 +28,7 @@ jobs:
         echo "SYSTEM_ID=$SYSTEM_ID" >> $GITHUB_ENV
         echo "ZIP_NAME=$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
         echo "RELEASE_DOWNLOAD_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
-        echo "SYSTEMRELEASE_INSTALL_URL_ID=https://github.com/${{github.repository}}/releases/download/$VERSION/system.json" >> $GITHUB_ENV
+        echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/system.json" >> $GITHUB_ENV
 
 
     # Adjust download URL and version in manifest
@@ -56,17 +56,48 @@ jobs:
 
     # Run our `build` script
     - name: Build All
-      run: |
-        npm run build --if-present
-        mv --force ${{env.SYSTEM_ID}}-compiled.mjs ${{env.SYSTEM_ID}}.mjs
+      run: npm run build --if-present
+
+    # Determine what files should be imported from system.json
+    - name: Compile includes
+      id: includes
+      uses: actions/github-script@v6
+      env:
+        ESMODULES: ${{steps.manifest.outputs.esmodules}}
+        FLAGS: ${{steps.manifest.outputs.flags}}
+        LANGUAGES: ${{steps.manifest.outputs.languages}}
+        PACKS: ${{steps.manifest.outputs.packs}}
+        STYLES: ${{steps.manifest.outputs.styles}}
+      with:
+        result-encoding: string
+        script: |
+          const manifest = {
+            esmodules: JSON.parse(process.env.ESMODULES),
+            flags: JSON.parse(process.env.FLAGS),
+            languages: JSON.parse(process.env.LANGUAGES),
+            packs: JSON.parse(process.env.PACKS),
+            styles: JSON.parse(process.env.STYLES)
+          };
+          const includes = [
+            "system.json",
+            "template.json",
+            ...(manifest.esmodules ?? []),
+            ...(manifest.esmodules?.map(s => `${s}.map`) ?? []),
+            ...(manifest.styles ?? []),
+            ...(manifest.packs?.map(p => p.path) ?? []),
+            ...(manifest.languages?.map(l => l.path) ?? []),
+            ...(manifest.flags?.build?.includes ?? [])
+          ];
+          return includes.join(" ");
+
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip ${{env.ZIP_NAME}} -r artwork lang packs/*.db templates ${{env.SYSTEM_ID}}.css ${{env.SYSTEM_ID}}.mjs ${{env.SYSTEM_ID}}-compiled.mjs.map LICENSE README.md system.json template.json
+    - name: Zip Contents
+      run: zip ${{env.ZIP_NAME}} -r ${{steps.includes.outputs.result}}
 
 
     # Create a release for this specific version
     - name: Update Release with Files
-      id: create_version_release
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true # Set this to false if you want to prevent updating existing releases
@@ -76,4 +107,6 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
         artifacts: './system.json, ./${{env.ZIP_NAME}}'
         tag: ${{env.VERSION}}
-        body: '${{github.event.release.body}} **Installation:** To manually install this release, please use the following manifest URL: ${{env.RELEASE_INSTALL_URL}}'
+        body: |
+          ${{github.event.release.body}}
+          **Installation:** To manually install this release, please use the following manifest URL: ${{env.RELEASE_INSTALL_URL}}
