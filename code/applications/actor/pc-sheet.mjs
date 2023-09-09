@@ -11,4 +11,14 @@ export default class PCSheet extends ActorSheet {
 			template: "systems/black-flag/templates/actor/pc.hbs"
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*  Context Preparation                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async getData(options) {
+		const context = await super.getData(options);
+		context.system = this.document.system;
+		return context;
+	}
 }
