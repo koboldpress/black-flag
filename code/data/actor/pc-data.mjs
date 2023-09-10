@@ -1,7 +1,6 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import FormulaField from "../fields/formula-field.mjs";
-import MappingField from "../fields/mapping-field.mjs";
+import * as fields from "../fields/_module.mjs";
 
 export default class PCData extends foundry.abstract.TypeDataModel {
 
@@ -19,7 +18,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 
 	static defineSchema() {
 		return {
-			abilities: new MappingField(new foundry.data.fields.SchemaField({
+			abilities: new fields.MappingField(new foundry.data.fields.SchemaField({
 				base: new foundry.data.fields.NumberField({min: 0, integer: true}),
 				max: new foundry.data.fields.NumberField({min: 0, initial: 20, integer: true}),
 				saveProficiency: new foundry.data.fields.SchemaField({
@@ -81,7 +80,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 				}),
-				skills: new MappingField(new foundry.data.fields.SchemaField({
+				skills: new fields.MappingField(new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
 					})
@@ -90,7 +89,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				}), {
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true
 				}),
-				tools: new MappingField(new foundry.data.fields.SchemaField({
+				tools: new fields.MappingField(new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
 					})
@@ -104,22 +103,41 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				})
 			}),
 			progression: new foundry.data.fields.SchemaField({
-				// XP
-				// Levels
-				// Advancement choices
+				abilities: new foundry.data.fields.SchemaField({
+					method: new foundry.data.fields.StringField(),
+					rolls: new foundry.data.fields.ArrayField(new foundry.data.fields.JSONField()),
+					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true}))
+					// For rolls, this indicates which roll index was associated with which score
+					// For point buy, this indicates how many points were added to a certain score
+					// For standard array, this indicates which value was assigned to a certain score
+				}),
+				// TODO: Rather than ObjectField, this type should be based on advancement data being stored
+				advancement: new fields.MappingField(new foundry.data.fields.ObjectField()),
+				levels: new fields.MappingField(new foundry.data.fields.SchemaField({
+					class: new fields.IdentifierField(),
+					time: new fields.TimeField()
+				})),
+				xp: new foundry.data.fields.SchemaField({
+					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
+					log: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+						amount: new foundry.data.fields.NumberField({nullable: false, initial: 0, min: 0, integer: true}),
+						time: new fields.TimeField(),
+						source: new foundry.data.fields.StringField()
+					}))
+				})
 			}),
 			// Rolls (contains bonuses, minimums, ability overrides, etc.)?
 			// Spellcasting
 			traits: new foundry.data.fields.SchemaField({
 				movement: new foundry.data.fields.SchemaField({
 					base: new foundry.data.fields.NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
-					types: new MappingField(new FormulaField({deterministic: true})),
+					types: new fields.MappingField(new fields.FormulaField({deterministic: true})),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 					// Units?
 					// Multiplier
 				}),
 				senses: new foundry.data.fields.SchemaField({
-					types: new MappingField(new FormulaField({deterministic: true})),
+					types: new fields.MappingField(new fields.FormulaField({deterministic: true})),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 				}),
 				size: new foundry.data.fields.StringField(),
