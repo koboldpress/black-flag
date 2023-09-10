@@ -1,1 +1,1 @@
-export default class BFActor extends Actor {}
+export default class BlackFlagActor extends Actor {}

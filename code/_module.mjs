@@ -45,8 +45,10 @@ Hooks.once("i18nInit", function() {
 });
 
 Hooks.once("ready", function() {
-
+	config.registration.registerItemTypes();
 });
+
+config.registration.setupRegistrationHooks();
 
 export {
 	applications,

@@ -107,7 +107,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	 * Validate each value of the object.
 	 * @param {object} value - The object to validate.
 	 * @param {object} options - Validation options.
-	 * @returns {[key: string]: Error} - An object of value-specific errors by key.
+	 * @returns {{[key: string]: Error}} - An object of value-specific errors by key.
 	 */
 	_validateValues(value, options) {
 		const errors = {};

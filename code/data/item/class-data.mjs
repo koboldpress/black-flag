@@ -17,6 +17,7 @@ export default class ClassData extends foundry.abstract.TypeDataModel {
 		return {
 			type: "class",
 			localization: "BF.Item.Type.Class",
+			register: true,
 			sheet: {
 				application: ClassSheet,
 				label: "BF.Sheet.Concept"

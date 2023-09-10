@@ -3,7 +3,7 @@ import log from "../utils/logging.mjs";
 /**
  * Automatically register Document sheets using category information from config or metadata in SystemDataModels.
  * @param {typeof Document} documentType - Type of document to register (e.g. Actor or Item).
- * @param {[key: string]: CategoryConfiguration>} [categories] - Categories to register.
+ * @param {{[key: string]: CategoryConfiguration}} [categories] - Categories to register.
  */
 export function registerSheets(documentType, categories={}) {
 	log(`Registering ${documentType.name} sheets`, {level: "groupCollapsed"});

@@ -5,7 +5,7 @@ export * as fields from "./fields/_module.mjs";
 /**
  * Register the provided data models with Foundry using metadata.
  * @param {typeof Document} documentType - Document type to which these models will be registered.
- * @param {[key: string]: SystemDataModel} models - Models to register grouped by type name.
+ * @param {{[key: string]: SystemDataModel}} models - Models to register grouped by type name.
  */
 export function registerDataModels(documentType, models) {
 	const config = CONFIG[documentType.name];

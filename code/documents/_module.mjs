@@ -1,5 +1,6 @@
 import log from "../utils/logging.mjs";
-import BFActor from "./actor.mjs";
+import BlackFlagActor from "./actor.mjs";
+import BlackFlagItem from "./item.mjs";
 
 /**
  * Register the various documents & type labels provided by the system during initialization.
@@ -7,8 +8,9 @@ import BFActor from "./actor.mjs";
 export function registerDocumentClasses() {
 	log("Registering document classes");
 
-	CONFIG.Actor.documentClass = BFActor;
+	CONFIG.Actor.documentClass = BlackFlagActor;
+	CONFIG.Item.documentClass = BlackFlagItem;
 }
 
-export {BFActor};
+export {BlackFlagActor, BlackFlagItem};
 export {default as Proficiency} from "./proficiency.mjs";
