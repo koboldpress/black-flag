@@ -29,13 +29,15 @@ Hooks.once("init", function() {
 
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
-	data.registerDataModels("Actor", data.actor.config);
+	data.registerDataModels(Actor, data.actor.config);
+	data.registerDataModels(Item, data.item.config);
 	documents.registerDocumentClasses();
 	settings.registerSettings();
 });
 
 Hooks.once("setup", function() {
 	applications.registerSheets(Actor);
+	applications.registerSheets(Item);
 });
 
 Hooks.once("i18nInit", function() {

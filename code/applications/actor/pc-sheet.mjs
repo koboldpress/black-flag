@@ -13,12 +13,13 @@ export default class PCSheet extends ActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Context Preparation                */
+	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
 		const context = await super.getData(options);
 		context.system = this.document.system;
+		context.source = this.document.toObject().system;
 		return context;
 	}
 }
