@@ -1,0 +1,61 @@
+<section>
+	<fieldset class="abilities">
+		<legend>Abilities</legend>
+		{{#each system.abilities as |ability key|}}
+			<div data-key="{{key}}">
+				<label>{{localize ability.labels.full}}</label>
+			</div>
+		{{/each}}
+	</fieldset>
+	<fieldset class="skills">
+		<legend>Skills</legend>
+		{{#each system.proficiencies.skills as |skill key|}}
+			<div data-key="{{key}}">
+				<label>{{localize skill.label}}</label>
+			</div>
+		{{/each}}
+	</fieldset>
+	<fieldset class="tools">
+		<legend>Tools</legend>
+		{{#each system.proficiencies.tools as |tool key|}}
+			<div data-key="{{key}}">
+				<label>{{tool.label}}</label>
+			</div>
+		{{/each}}
+	</fieldset>
+	<fieldset class="hit-points">
+		<legend>Hit Points</legend>
+		<span>x / x</span>
+	</fieldset>
+	<fieldset class="hit-dice">
+		<legend>Hit Dice</legend>
+		<span>x / x dx</span>
+	</fieldset>
+	<fieldset class="armor-class">
+		<legend>Armor Class</legend>
+		<span>xx</span>
+	</fieldset>
+	<fieldset class="initiative">
+		<legend>Initiative</legend>
+		<span>+x</span>
+	</fieldset>
+	<fieldset class="movement">
+		<legend>Speed</legend>
+		<span>x ft.</span>
+	</fieldset>
+	<fieldset class="luck">
+		<legend>Luck</legend>
+		<span>x</span>
+	</fieldset>
+	<fieldset class="traits">
+		<legend>Traits</legend>
+		<span>Resistances, Immunities, Vulnerabilities</span>
+		<span>Armor Proficiencies</span>
+		<span>Weapon Proficiencies</span>
+		<span>Languages</span>
+	</fieldset>
+	<fieldset class="actions">
+		<legend>Actions</legend>
+		<span>Bunch o stuff</span>
+	</fieldset>
+</section>

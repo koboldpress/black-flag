@@ -1,0 +1,45 @@
+<main>
+	<section class="leveling">
+		List current overall level, XP if XP mode is selected, level-up button, etc.
+	</section>
+	<section class="details">
+		<fieldset class="ability-mode">
+			<legend>Abilities</legend>
+		</fieldset>
+		{{#*inline "blackFlag.typeControl"}}
+			{{#with (lookup system.progression type)}}
+				<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
+			{{else}}
+				<a data-action="progression" data-sub-action="select" data-type="{{type}}">Choose</a>
+			{{/with}}
+		{{/inline}}
+		{{!--
+		<fieldset class="lineage">
+			<legend>Lineage</legend>
+			{{> "blackFlag.typeControl" type="lineage"}}
+		</fieldset>
+		<fieldset class="heritage">
+			<legend>Heritage</legend>
+			{{> "blackFlag.typeControl" type="heritage"}}
+		</fieldset>
+		<fieldset class="background">
+			<legend>Background</legend>
+			{{> "blackFlag.typeControl" type="background"}}
+		</fieldset>--}}
+	</section>
+	<section class="levels">
+		{{#each system.progression.levels as |level number|}}
+			<div class="level">
+				<h3>
+					<span class="level">Level {{number}}</span>
+					<span class="class">{{level.class.name}}</span>
+				</h3>
+				<p>List level's advancements</p>
+			</div>
+		{{else}}
+			<p>
+				<a data-action="progression" data-sub-action="select" data-type="class">Choose</a>
+			</p>
+		{{/each}}
+	</section>
+</main>

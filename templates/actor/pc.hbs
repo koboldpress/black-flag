@@ -1,4 +1,4 @@
-<form class="{{cssClass}}" autocomplete="off">{{log this}}
+<form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-head">
 		<img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img">
 		<h1>
@@ -8,103 +8,42 @@
 			<legend>{{localize "BF.Proficiency.Abbreviation"}}</legend>
 			<span>{{system.attributes.proficiency}}</span>
 		</fieldset>
-		<fieldset class="progression">
+		<fieldset class="progression" data-group="progression">
 			<legend>{{localize "BF.Progression.Label"}}</legend>
-			<span>Level?</span>
+			<a data-tab="front">Return</a>
+			<a data-tab="back">Level</a>
 		</fieldset>
 	</header>
 
-	<nav class="sheet-navigation tabs" data-group="primary">
-		<a data-tab="main">Main</a>
-		<a data-tab="spellcasting">Spellcasting</a>
-		<a data-tab="inventory">Inventory</a>
-		<a data-tab="features">Features</a>
-		<a data-tab="biography">Biography</a>
-	</nav>
+	<div class="tab" data-group="progression" data-tab="front">
+		<nav class="sheet-navigation tabs" data-group="primary">
+			<a data-tab="main">Main</a>
+			<a data-tab="spellcasting">Spellcasting</a>
+			<a data-tab="inventory">Inventory</a>
+			<a data-tab="features">Features</a>
+			<a data-tab="biography">Biography</a>
+		</nav>
+		
+		<main>
+			<div class="tab" data-group="primary" data-tab="main">
+				{{> "blackFlag.pc-main"}}
+			</div>
+			<div class="tab" data-group="primary" data-tab="spellcasting">
+				{{> "blackFlag.pc-spellcasting"}}
+			</div>
+			<div class="tab" data-group="primary" data-tab="inventory">
+				{{> "blackFlag.pc-inventory"}}
+			</div>
+			<div class="tab" data-group="primary" data-tab="features">
+				{{> "blackFlag.pc-features"}}
+			</div>
+			<div class="tab" data-group="primary" data-tab="biography">
+				{{> "blackFlag.pc-biography"}}
+			</div>
+		</main>
+	</div>
 
-	<main>
-		<div class="tab" data-group="primary" data-tab="main">
-			<section>
-				<fieldset class="abilities">
-					<legend>Abilities</legend>
-					{{#each system.abilities as |ability key|}}
-						<div data-key="{{key}}">
-							<label>{{localize ability.labels.full}}</label>
-						</div>
-					{{/each}}
-				</fieldset>
-				<fieldset class="skills">
-					<legend>Skills</legend>
-					{{#each system.proficiencies.skills as |skill key|}}
-						<div data-key="{{key}}">
-							<label>{{localize skill.label}}</label>
-						</div>
-					{{/each}}
-				</fieldset>
-				<fieldset class="tools">
-					<legend>Tools</legend>
-					{{#each system.proficiencies.tools as |tool key|}}
-						<div data-key="{{key}}">
-							<label>{{tool.label}}</label>
-						</div>
-					{{/each}}
-				</fieldset>
-				<fieldset class="hit-points">
-					<legend>Hit Points</legend>
-					<span>x / x</span>
-				</fieldset>
-				<fieldset class="hit-dice">
-					<legend>Hit Dice</legend>
-					<span>x / x dx</span>
-				</fieldset>
-				<fieldset class="armor-class">
-					<legend>Armor Class</legend>
-					<span>xx</span>
-				</fieldset>
-				<fieldset class="initiative">
-					<legend>Initiative</legend>
-					<span>+x</span>
-				</fieldset>
-				<fieldset class="movement">
-					<legend>Speed</legend>
-					<span>x ft.</span>
-				</fieldset>
-				<fieldset class="luck">
-					<legend>Luck</legend>
-					<span>x</span>
-				</fieldset>
-				<fieldset class="traits">
-					<legend>Traits</legend>
-					<span>Resistances, Immunities, Vulnerabilities</span>
-					<span>Armor Proficiencies</span>
-					<span>Weapon Proficiencies</span>
-					<span>Languages</span>
-				</fieldset>
-				<fieldset class="actions">
-					<legend>Actions</legend>
-					<span>Bunch o stuff</span>
-				</fieldset>
-			</section>
-		</div>
-		<div class="tab" data-group="primary" data-tab="spellcasting">
-			<section>
-				<p>Spellcasting to be implemented&hellip;</p>
-			</section>
-		</div>
-		<div class="tab" data-group="primary" data-tab="inventory">
-			<section>
-				<p>Inventory to be implemented&hellip;</p>
-			</section>
-		</div>
-		<div class="tab" data-group="primary" data-tab="features">
-			<section>
-				<p>Features to be implemented&hellip;</p>
-			</section>
-		</div>
-		<div class="tab" data-group="primary" data-tab="biography">
-			<section>
-				<p>Biography to be implemented&hellip;</p>
-			</section>
-		</div>
-	</main>
+	<div class="tab" data-group="progression" data-tab="back">
+		{{> "blackFlag.pc-progression"}}
+	</div>
 </form>

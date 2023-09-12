@@ -1,36 +1,20 @@
-<form class="{{cssClass}}" autocomplete="off">{{log this}}
+<form class="{{cssClass}}" autocomplete="off">
 
+	<section class="summary">
+		{{> "blackFlag.class-summary" edit=true}}
+	</section>
+
+	<section class="advancemnet">
+		Advancement stuff
+	</section>
+
+	{{!-- TODO: Add color control back in once it is decided how it will be used
 	<header class="sheet-header">
-		<img class="profile" src="{{item.img}}" title="{{item.title}}" data-edit="img">
-		<h1>
-			<input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}">
-		</h1>
 		<label class="color">
 			<span>Color</span>
 			<input name="system.description.color" type="color" value="{{system.description.color}}">
 		</label>
 	</header>
-
-	<main class="sheet-body">
-		<fieldset class="description">
-			<legend>{{localize "BF.Item.Description.Label"}}</legend>
-			{{editor enriched.description target="system.description.value" button=false
-				editable=editable engine="prosemirror" collaborate=false}}
-			<label class="journal">
-				<span>
-					{{localize "BF.Item.Journal.Label"}}
-					<i class="hint fa-solid fa-circle-question" data-tooltip="BF.Item.Journal.Hint"></i>
-				</span>
-				<em>Drop area</em>
-			</label>
-			<label class="source">
-				<span>
-					{{localize "BF.Item.Source.Label"}}
-					<i class="hint fa-solid fa-circle-question" data-tooltip="BF.Item.Source.Hint"></i>
-				</span>
-				<input name="system.description.source" type="text" value="{{system.description.source}}">
-			</label>
-		</fieldset>
-	</main>
+	--}}
 
 </form>

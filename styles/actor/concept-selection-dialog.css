@@ -1,0 +1,21 @@
+.concept-selection-dialog.class .window-content {
+	max-width: min(1400px, 75vw);
+	overflow-x: scroll;
+	padding: 0;
+
+	form {
+		display: flex;
+		flex-direction: row;
+		
+		.option {
+			display: flex;
+			flex-direction: column;
+		
+			.choose {
+				width: unset;
+				margin-inline: 0.5rem;
+				margin-block: 0.5rem;
+			}
+		}
+	}
+}

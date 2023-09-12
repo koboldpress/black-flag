@@ -33,6 +33,7 @@ Hooks.once("init", function() {
 	data.registerDataModels(Item, data.item.config);
 	documents.registerDocumentClasses();
 	settings.registerSettings();
+	utils.registerHandlebarsPartials();
 });
 
 Hooks.once("setup", function() {

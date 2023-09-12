@@ -12,7 +12,7 @@
 			height: 60px;
 		}
 
-		:is(h1) {
+		& h1 {
 			flex: 1 0 50%;
 			margin: 0;
 			border: none;
@@ -29,10 +29,14 @@
 
 		.progression {
 			flex: 1 0 20%;
+
+			.active {
+				display: none;
+			}
 		}
 	}
 
-	:is(main) {
+	[data-tab="front"] > main {
 		flex-grow: 1;
 
 		& > div {
@@ -96,5 +100,9 @@
 				grid-row: 5 / 13;
 			}
 		}
+	}
+
+	[data-tab="back"] > main {
+		
 	}
 }

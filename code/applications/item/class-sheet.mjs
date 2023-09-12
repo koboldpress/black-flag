@@ -5,8 +5,8 @@ export default class ClassSheet extends BaseItemSheet {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "class", "item", "sheet"],
 			template: "systems/black-flag/templates/item/class.hbs",
-			width: 450,
-			height: "auto"
+			width: 810,
+			height: 900
 		});
 	}
 }

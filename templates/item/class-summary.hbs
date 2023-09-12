@@ -1,0 +1,49 @@
+<figure class="poster">{{log this}}
+	<img src="{{item.img}}"{{#if edit}} data-edit="img"{{/if}}>
+	<h1 class="name">
+		{{#if edit}}
+			<input type="text" name="name" value="{{item.name}}" placeholder="{{localize 'Name'}}">
+		{{else}}
+			{{item.name}}
+		{{/if}}
+	</h1>
+	<div class="source">
+		{{#if edit}}
+			<input type="text" name="system.description.source" value="{{system.description.source}}" placeholder="{{localize 'Source'}}">
+		{{else}}
+			{{system.description.source}}
+		{{/if}}
+	</div>
+	<div class="banner-mask" inert></div>
+</figure>
+<div class="info">
+	<div class="description">
+		{{#if edit}}
+			{{editor enriched.description target="system.description.value" button=false
+				editable=editable engine="prosemirror" collaborate=false}}
+		{{else}}
+			{{{enriched.description}}}
+		{{/if}}
+		{{#if system.description.journal}}
+			<a class="content-link" data-uuid="{{system.description.journal}}">
+				More Information
+			</a>
+		{{else if edit}}
+			<p class="drop-area">Drop journal entry here</p>
+		{{/if}}
+	</div>
+	<ul class="traits">
+		<li class="hit-die">
+			Hit Die: dx
+		</li>
+		<li class="key-ability">
+			Key Ability: x or y
+		</li>
+		<li>
+			Proficiencies
+		</li>
+		<li>
+			Spellcasting if applicable
+		</li>
+	</ul>
+</div>

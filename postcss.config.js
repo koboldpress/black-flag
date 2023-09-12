@@ -1,6 +1,12 @@
+const postcssPresetEnv = require("postcss-preset-env");
+
 module.exports = {
 	plugins: [
 		require("postcss-import"),
-		require("postcss-preset-env")
+		postcssPresetEnv({
+			features: {
+				"is-pseudo-class": false
+			}
+		})
 	]
 };

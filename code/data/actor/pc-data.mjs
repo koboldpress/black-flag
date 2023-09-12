@@ -113,8 +113,11 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				}),
 				// TODO: Rather than ObjectField, this type should be based on advancement data being stored
 				advancement: new fields.MappingField(new foundry.data.fields.ObjectField()),
+				background: new fields.RegisteredDocumentField("background"),
+				heritage: new fields.RegisteredDocumentField("heritage"),
+				lineage: new fields.RegisteredDocumentField("lineage"),
 				levels: new fields.MappingField(new foundry.data.fields.SchemaField({
-					class: new fields.IdentifierField(),
+					class: new fields.RegisteredDocumentField("class"),
 					time: new fields.TimeField()
 				})),
 				xp: new foundry.data.fields.SchemaField({
