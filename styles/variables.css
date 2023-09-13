@@ -1,5 +1,13 @@
 :root {
+	--bf-blue: rgb(45, 82, 129);
+
+	--bf-gradiant-blue: linear-gradient(
+		color-mix(in oklab, var(--bf-blue), white 30%),
+		color-mix(in oklab, var(--bf-blue), white 10%),
+		color-mix(in oklab, var(--bf-blue), black 20%)
+	);
+
 	--bf-color-border-black: rgb(0, 0, 0);
-	--bf-color-border-blue: rgb(45, 82, 129);
+	--bf-color-border-blue: var(--bf-blue);
 	--bf-color-border-gray: rgb(180, 180, 180);
 }

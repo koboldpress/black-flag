@@ -105,11 +105,9 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 			progression: new foundry.data.fields.SchemaField({
 				abilities: new foundry.data.fields.SchemaField({
 					method: new foundry.data.fields.StringField(),
-					rolls: new foundry.data.fields.ArrayField(new foundry.data.fields.JSONField()),
-					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true}))
-					// For rolls, this indicates which roll index was associated with which score
-					// For point buy, this indicates how many points were added to a certain score
-					// For standard array, this indicates which value was assigned to a certain score
+					rolls: new foundry.data.fields.ArrayField(new fields.RollField()),
+					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true})),
+					bonuses: new fields.MappingField(new foundry.data.fields.NumberField({integer: true}))
 				}),
 				// TODO: Rather than ObjectField, this type should be based on advancement data being stored
 				advancement: new fields.MappingField(new foundry.data.fields.ObjectField()),
@@ -180,6 +178,8 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			const config = CONFIG.BlackFlag.abilities[key];
 			ability.labels = config.labels;
+			ability.value = ability.base;
+			ability.mod = ability.value ? Math.floor((ability.value - 10) / 2) : null;
 		}
 		for ( const [key, skill] of Object.entries(this.proficiencies.skills) ) {
 			const config = CONFIG.BlackFlag.skills[key];

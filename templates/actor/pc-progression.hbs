@@ -5,6 +5,11 @@
 	<section class="details">
 		<fieldset class="ability-mode">
 			<legend>Abilities</legend>
+			{{#if system.progression.abilities.assignmentComplete}}
+				Done
+			{{else}}
+				<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
+			{{/if}}
 		</fieldset>
 		{{#*inline "blackFlag.typeControl"}}
 			{{#with (lookup system.progression type)}}

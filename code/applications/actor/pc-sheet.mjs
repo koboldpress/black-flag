@@ -1,4 +1,5 @@
 import log from "../../utils/logging.mjs";
+import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 
 export default class PCSheet extends ActorSheet {
@@ -52,6 +53,8 @@ export default class PCSheet extends ActorSheet {
 		switch (action) {
 			case "progression":
 				switch (subAction) {
+					case "assign-abilities":
+						return (new AbilityAssignmentDialog(this.actor)).render(true);
 					case "select":
 						if ( !properties.type ) return;
 						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);

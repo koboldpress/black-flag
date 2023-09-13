@@ -1,0 +1,289 @@
+/**
+ * Dialog for choosing ability assignment mode and performing the assignment.
+ */
+export default class AbilityAssignmentDialog extends DocumentSheet {
+
+	static get defaultOptions() {
+		return foundry.utils.mergeObject(super.defaultOptions, {
+			classes: ["black-flag", "ability-assignment-dialog"],
+			template: "systems/black-flag/templates/actor/ability-assignment-dialog.hbs",
+			height: "auto",
+			width: 700,
+			sheetConfig: false,
+			closeOnSubmit: false
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get title() {
+		return game.i18n.localize("BF.AbilityAssignment.Label");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Context Preparation         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async getData(options) {
+		const context = await super.getData(options);
+		context.CONFIG = CONFIG.BlackFlag;
+		context.system = this.document.system;
+		context.source = this.document.toObject().system;
+		switch (this.document.system.progression.abilities.method) {
+			case "rolling":
+				this.getRollingData(context);
+				break;
+			case "point-buy":
+				this.getPointBuyData(context);
+				break;
+			case "standard-array":
+				this.getStandardArrayData(context);
+				break;
+		}
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare context data for rolling method.
+	 * @param {object} context - Context being prepared.
+	 */
+	getRollingData(context) {
+		context.scores = [];
+		const progression = this.document.system.progression.abilities;
+		let bonusCount = 0;
+		for ( const [key, c] of Object.entries(CONFIG.BlackFlag.abilities) ) {
+			const value = progression.assignments[key] ?? null;
+			const bonus = progression.bonuses[key] ?? null;
+			if ( bonus !== null ) bonusCount++;
+			context.scores.push({
+				key, label: c.labels.full, value, bonus,
+				maxBonus: CONFIG.BlackFlag.abilityRolling.max - (progression.rolls[value]?.total ?? 0)
+			});
+		}
+		const allBonuses = bonusCount >= CONFIG.BlackFlag.abilityRolling.bonuses.length;
+		context.ready = context.scores.every(s => s.value !== null) && allBonuses;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare context data for point-buy method.
+	 * @param {object} context - Context being prepared.
+	 */
+	getPointBuyData(context) {
+		const existingAssignments = this.document.system.progression.abilities.assignments;
+		const config = CONFIG.BlackFlag.pointBuy;
+		const sortedKeys = Object.keys(config.costs).map(k => Number(k)).sort((lhs, rhs) => lhs - rhs);
+		const minScore = sortedKeys.shift();
+		const maxScore = sortedKeys.pop();
+		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+
+		context.points = { max: config.points };
+		context.points.spent = Object.values(existingAssignments)
+			.reduce((spent, assignments) => spent + config.costs[minScore + assignments] ?? 0, 0);
+		context.points.remaining = context.points.max - context.points.spent;
+
+		context.pointList = Array.fromRange(context.points.max).map(number => ({
+			number: number + 1, spent: number >= context.points.remaining
+		}));
+		context.scores = [];
+		for ( const [key, c] of Object.entries(CONFIG.BlackFlag.abilities) ) {
+			const assignments = existingAssignments[key] ?? 0;
+			const score = { key, label: c.labels.full, assignments };
+			score.value = minScore + assignments;
+			score.isMin = score.value === minScore;
+			score.isMax = score.value === maxScore;
+			score.existingCost = config.costs[score.value] ?? 0;
+			score.nextCost = !score.isMax ? (config.costs[score.value + 1] - score.existingCost) : null;
+			score.costDescription = score.isMax ? "—" : game.i18n.format(
+				`BF.AbilityAssignment.Method.PointBuy.Cost.Point[${pluralRules.select(score.nextCost)}]`, {number: score.nextCost}
+			);
+			score.canAfford = (score.nextCost !== null) && (score.nextCost <= context.points.remaining);
+			context.scores.push(score);
+		}
+
+		context.ready = context.points.remaining === 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare context data for standard array method.
+	 * @param {object} context - Context being prepared.
+	 */
+	getStandardArrayData(context) {
+		context.scores = [];
+		for ( const [key, c] of Object.entries(CONFIG.BlackFlag.abilities) ) {
+			const value = this.document.system.progression.abilities.assignments[key] ?? null;
+			context.scores.push({ key, label: c.labels.full, value });
+		}
+		context.ready = context.scores.every(s => s.value !== null);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * How many points are required to achieve a certain score.
+	 * @param {number} score
+	 * @returns {number}
+	 */
+	pointCostForScore(score) {
+		return Object.entries(CONFIG.BlackFlag.pointBuy.costs)
+			.filter(([k, v]) => k <= score)
+			.reduce((t, [, v]) => t + v, 0);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
+
+		html.querySelector('[data-action="reset"]')?.addEventListener("click", event => {
+			const updates = {"system.progression.abilities.method": ""};
+			Object.keys(this.document.system.progression.abilities.assignments).forEach(key =>
+				updates[`system.progression.abilities.assignments.-=${key}`] = null
+			);
+			Object.keys(this.document.system.progression.abilities.bonuses).forEach(key =>
+				updates[`system.progression.abilities.bonuses.-=${key}`] = null
+			);
+			this.document.update(updates);
+		});
+
+		html.querySelector('[data-action="confirm"]')?.addEventListener("click", this._onConfirmScoring.bind(this));
+
+		for ( const element of html.querySelectorAll('[data-action="select-method"]') ) {
+			element.addEventListener("click", event =>
+				this.document.update({"system.progression.abilities.method": event.currentTarget.dataset.method})
+			);
+		}
+
+		html.querySelector('[data-action="roll"]')?.addEventListener("click", this._onRollScores.bind(this));
+
+		for ( const element of html.querySelectorAll(".score button:not([disabled])") ) {
+			element.addEventListener("click", this._onPointBuyAction.bind(this));
+		}
+
+		for ( const element of html.querySelectorAll('.score [type="radio"]') ) {
+			element.addEventListener("change", this._onAssignmentChoice.bind(this));
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle assigning a value to an ability score in rolling & standard array methods.
+	 * @param {Event} event - Triggering change event.
+	 */
+	async _onAssignmentChoice(event) {
+		const name = event.target.name;
+		const key = event.target.closest("[data-key]").dataset.key;
+		const value = Number(event.currentTarget.value);
+		const updates = {[`system.progression.abilities.${name}.${key}`]: value};
+
+		// Uncheck any other entries in this row
+		const existingAssignments = this.document.system.progression.abilities[name];
+		const otherChecked = Object.entries(existingAssignments).find(([k, v]) => k !== key && v === value)?.[0];
+		if ( otherChecked ) {
+			const value = existingAssignments[key];
+			updates[`system.progression.abilities.${name}.${otherChecked}`] = name === "bonuses" ? null : value ?? null;
+		}
+
+		await this.document.update(updates);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle buying & selling scores during point-buy.
+	 * @param {ClickEvent} event - Triggering click event.
+	 */
+	async _onPointBuyAction(event) {
+		const { action } = event.currentTarget.dataset;
+		const key = event.target.closest("[data-key]").dataset.key;
+		const current = this.document.system.progression.abilities.assignments[key] ?? 0;
+		await this.document.update({
+			[`system.progression.abilities.assignments.${key}`]: action === "buy" ? current + 1 : current - 1
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Roll ability scores and store results.
+	 * @param {ClickEvent} event - Triggering click event.
+	 */
+	async _onRollScores(event) {
+		// Perform necessary rolls
+		const rollCount = Object.keys(CONFIG.BlackFlag.abilities).length;
+		const rolls = await Promise.all(Array.fromRange(rollCount).map(async r => {
+			const roll = new Roll(CONFIG.BlackFlag.abilityRolling.formula);
+			await roll.evaluate();
+			return roll;
+		}));
+		rolls.sort((lhs, rhs) => rhs.total - lhs.total);
+
+		// Create chat message with roll results
+		const cls = getDocumentClass("ChatMessage");
+		const flavor = game.i18n.localize("BF.AbilityAssignment.RolledAbilityScores");
+		const messageData = {
+			flavor,
+			title: `${flavor}: ${this.document.name}`,
+			speaker: cls.getSpeaker({actor: this.document}),
+			user: game.user.id,
+			type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+			content: "",
+			sound: CONFIG.sounds.dice,
+			rolls,
+			"flags.blackFlag.type": "abilityScores"
+		};
+		const message = new cls(messageData);
+		await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
+
+		// Save rolls
+		await this.document.update({"system.progression.abilities.rolls": rolls});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Confirm scoring and set base ability scores.
+	 * @param {ClickEvent} event - Triggering click event.
+	 */
+	async _onConfirmScoring(event) {
+		const progression = this.document.system.progression.abilities;
+		const updates = {};
+		switch (progression.method) {
+			case "rolling":
+				for ( const [key, idx] of Object.entries(progression.assignments) ) {
+					const bonus = CONFIG.BlackFlag.abilityRolling.bonuses[progression.bonuses[key]] ?? 0;
+					updates[`system.abilities.${key}.base`] = progression.rolls[idx].total + bonus;
+				}
+			  break;
+			case "point-buy":
+				const minScore = Object.keys(CONFIG.BlackFlag.pointBuy.costs).reduce((m, s) =>
+					Number(s) < m ? Number(s) : m
+				, Infinity);
+				for ( const key of Object.keys(CONFIG.BlackFlag.abilities) ) {
+					const assignments = progression.assignments[key] ?? 0;
+					updates[`system.abilities.${key}.base`] = minScore + assignments;
+				}
+				break;
+			case "standard-array":
+				for ( const [key, idx] of Object.entries(progression.assignments) ) {
+					updates[`system.abilities.${key}.base`] = CONFIG.BlackFlag.standardArray[idx];
+				}
+				break;
+		}
+		await this.document.update(updates);
+		this.close();
+	}
+}

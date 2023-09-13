@@ -4,6 +4,7 @@
 		{{#each system.abilities as |ability key|}}
 			<div data-key="{{key}}">
 				<label>{{localize ability.labels.full}}</label>
+				<span>{{ability.value}}<br>{{ability.mod}}</span>
 			</div>
 		{{/each}}
 	</fieldset>

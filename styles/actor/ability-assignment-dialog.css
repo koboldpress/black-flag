@@ -1,0 +1,222 @@
+.ability-assignment-dialog form {
+
+	& h1 {
+		display: flex;
+		justify-content: space-between;
+		margin: -0.5rem;
+		margin-block-end: 0.5rem;
+		border-block-end: 2px solid white;
+		padding: 0.5rem;
+		background: var(--bf-gradiant-blue);
+		color: white;
+		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+
+		& button {
+			width: unset;
+			color: white;
+			border-radius: 0 10px;
+			padding-inline: 1rem;
+			background: rgba(0, 0, 0, 0.25);
+			box-shadow: 0 0 0 1px rgba(0, 0, 0, 1);
+		}
+	}
+
+	& button:disabled {
+		opacity: 0.5;
+	}
+
+	.mode-selection {
+		display: flex;
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		> li {
+			flex: 33% 0 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+
+			> h2 {
+				border: none;
+				text-align: center;
+			}
+
+			> img {
+				border: none;
+				width: 150px;
+				height: 150px;
+				filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.25));
+			}
+
+			> p {
+				flex-grow: 1;
+			}
+		}
+	}
+
+	.scores {
+		display: flex;
+		justify-content: space-evenly;
+		margin-block: 1rem;
+	
+		.score {
+			flex: calc(100% / 6) 1 1;
+			display: flex;
+			flex-wrap: wrap;
+			row-gap: 0.5em;
+			padding-inline: 0.25rem;
+	
+			> legend {
+				font-size: var(--font-size-12);
+			}
+
+			> label {
+				flex: 100% 1 0;
+				border: 1px solid var(--bf-blue);
+				border-radius: 5px;
+				font-size: var(--font-size-24);
+				text-align: center;
+				cursor: pointer;
+			
+				&:hover:not(.disabled) {
+					backdrop-filter: brightness(90%);
+					box-shadow: 0 0 3px var(--bf-blue);
+				}
+				&.checked {
+					border: 1px solid black;
+					backdrop-filter: brightness(80%);
+				}
+				&.disabled {
+					opacity: 50%;
+				}
+			
+				> input {
+					position: absolute;
+					appearance: none;
+					margin: 0;
+				}
+			}
+
+			> hr {
+				flex: 100% 1 0;
+				border: 0.5px solid var(--bf-blue);
+				margin-inline: -0.25rem;
+			}
+		}
+	}
+
+	.rolling {
+		[data-action="roll"] {
+			margin: 2rem;
+			width: calc(100% - 4rem);
+		}
+	}
+
+	.point-buy {
+		.points {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 1px;
+
+			.point {
+				width: 1em;
+				height: 1em;
+				border: 1px solid black;
+				border-radius: 3px;
+				background-color: var(--bf-blue);
+				box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+
+				&.spent {
+					background-color: color-mix(in oklab, var(--bf-blue), white 50%);
+				}
+			}
+			.count {
+				flex: 100% 1 0;
+				color: var(--bf-blue);
+				font-size: var(--font-size-11);
+				font-weight: bold;
+				text-align: center;
+			}
+		}
+
+		.scores {
+			.score {
+				.current-score {
+					flex: 100% 1 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 1.5em;
+					font-size: var(--font-size-24);
+				}
+
+				> button {
+					flex: 40% 1 1;
+					width: unset;
+					height: unset;
+					line-height: 1.75em;
+					text-align: center;
+
+					> i {
+						margin: 0;
+					}
+				}
+
+				.cost {
+					flex: 100% 1 0;
+					text-align: center;
+				}
+			}
+		}
+
+		& table {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0;
+			margin-block-end: 1rem;
+			border: none;
+			background: none;
+
+			> caption {
+				flex: 100% 1 0;
+				padding-block: 0.25em;
+				color: var(--bf-blue);
+				font-weight: 200;
+				text-transform: uppercase;
+			}
+
+			& tr {
+				display: flex;
+				flex-direction: column;
+			}
+
+			& :is(th, td) {
+				padding-inline: 1em;
+				text-align: center;
+			}
+
+			> thead {
+				background-color: var(--bf-blue);
+				text-shadow: none;
+				text-transform: uppercase;
+			}
+
+			> tbody {
+				flex-grow: 1;
+				display: flex;
+				& tr {
+					flex-grow: 1;
+					border-inline-end: 1px solid var(--bf-color-border-blue);
+
+					&:last-of-type {
+						border-inline-end-width: 2px;
+					}
+				}
+			}
+		}
+	}
+}
