@@ -20,7 +20,7 @@
 			</h1>
 			<p>{{localize "BF.AbilityAssignment.ScoringMethods.Hint"}}</p>
 			<ul class="mode-selection">
-				{{#each CONFIG.abilityAssignmentMethods as |method key|}}
+				{{#each CONFIG.abilityAssignment.methods as |method key|}}
 					<li class="key">
 						<h2>{{localize method.label}}</h2>
 						<img src="{{method.icon}}">
@@ -73,7 +73,7 @@
 							<span class="no-rolls">{{localize "BF.AbilityAssignment.Method.Rolling.NoRolls"}}</span>
 						{{/each}}
 						<hr>
-						{{#each @root.CONFIG.abilityRolling.bonuses as |bonus|}}
+						{{#each @root.CONFIG.abilityAssignment.rolling.bonuses as |bonus|}}
 							<label class="{{#if (eq @index ../this.bonus)}}checked{{/if}}
 								{{~#if (or (eq ../this.value null) (gt bonus ../this.maxBonus))}}disabled{{/if}}">
 								<input type="radio" name="bonuses" value="{{@index}}" {{checked (eq @index ../this.bonus)}}
@@ -124,7 +124,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{{#each CONFIG.pointBuy.costs as |cost score|}}
+					{{#each CONFIG.abilityAssignment.pointBuy.costs as |cost score|}}
 						<tr>
 							<th scope="row">{{score}}</th>
 							<td>{{cost}}</td>
@@ -143,7 +143,7 @@
 				{{#each scores}}
 					<fieldset data-key="{{this.key}}">
 						<legend>{{localize this.label}}</legend>
-						{{#each @root.CONFIG.standardArray as |number|}}
+						{{#each @root.CONFIG.abilityAssignment.standardArray as |number|}}
 							<label{{#if (eq @index ../this.value)}} class="checked"{{/if}}>
 								<input type="radio" name="assignments" value="{{@index}}" {{checked (eq @index ../this.value)}}>
 								<span>{{number}}</span>

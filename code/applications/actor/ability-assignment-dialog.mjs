@@ -79,11 +79,11 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 			if ( bonus !== null ) bonusCount++;
 			context.scores.push({
 				key, label: c.labels.full, value, bonus,
-				maxBonus: CONFIG.BlackFlag.abilityRolling.max - (progression.rolls[value]?.total ?? 0)
+				maxBonus: CONFIG.BlackFlag.abilityAssignment.rolling.max - (progression.rolls[value]?.total ?? 0)
 			});
 		}
 
-		const allBonuses = bonusCount >= CONFIG.BlackFlag.abilityRolling.bonuses.length;
+		const allBonuses = bonusCount >= CONFIG.BlackFlag.abilityAssignment.rolling.bonuses.length;
 		context.ready = context.scores.every(s => s.value !== null) && allBonuses;
 	}
 
@@ -95,7 +95,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	 */
 	getPointBuyData(context) {
 		const existingAssignments = this.document.system.progression.abilities.assignments;
-		const config = CONFIG.BlackFlag.pointBuy;
+		const config = CONFIG.BlackFlag.abilityAssignment.pointBuy;
 		const sortedKeys = Object.keys(config.costs).map(k => Number(k)).sort((lhs, rhs) => lhs - rhs);
 		const minScore = sortedKeys.shift();
 		const maxScore = sortedKeys.pop();
@@ -153,7 +153,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	 * @returns {number}
 	 */
 	pointCostForScore(score) {
-		return Object.entries(CONFIG.BlackFlag.pointBuy.costs)
+		return Object.entries(CONFIG.BlackFlag.abilityAssignment.pointBuy.costs)
 			.filter(([k, v]) => k <= score)
 			.reduce((t, [, v]) => t + v, 0);
 	}
@@ -251,7 +251,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	 */
 	async _onRollScore(event) {
 		const idx = event.target.closest("[data-index]").dataset.index;
-		const roll = new Roll(CONFIG.BlackFlag.abilityRolling.formula);
+		const roll = new Roll(CONFIG.BlackFlag.abilityAssignment.rolling.formula);
 		await roll.evaluate();
 
 		// Create chat message with roll results
@@ -292,12 +292,12 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 		switch (progression.method) {
 			case "rolling":
 				for ( const [key, idx] of Object.entries(progression.assignments) ) {
-					const bonus = CONFIG.BlackFlag.abilityRolling.bonuses[progression.bonuses[key]] ?? 0;
+					const bonus = CONFIG.BlackFlag.abilityAssignment.rolling.bonuses[progression.bonuses[key]] ?? 0;
 					updates[`system.abilities.${key}.base`] = progression.rolls[idx].total + bonus;
 				}
 			  break;
 			case "point-buy":
-				const minScore = Object.keys(CONFIG.BlackFlag.pointBuy.costs).reduce((m, s) =>
+				const minScore = Object.keys(CONFIG.BlackFlag.abilityAssignment.pointBuy.costs).reduce((m, s) =>
 					Number(s) < m ? Number(s) : m
 				, Infinity);
 				for ( const key of Object.keys(CONFIG.BlackFlag.abilities) ) {
@@ -307,7 +307,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 				break;
 			case "standard-array":
 				for ( const [key, idx] of Object.entries(progression.assignments) ) {
-					updates[`system.abilities.${key}.base`] = CONFIG.BlackFlag.standardArray[idx];
+					updates[`system.abilities.${key}.base`] = CONFIG.BlackFlag.abilityAssignment.standardArray[idx];
 				}
 				break;
 			case "manual":
