@@ -1,23 +1,34 @@
 <section>
 	<fieldset class="abilities">
-		<legend>Abilities</legend>
+		<legend>{{localize "BF.Ability.Label[other]"}}</legend>
 		{{#each system.abilities as |ability key|}}
-			<div data-key="{{key}}">
+			<div class="ability" data-key="{{key}}">
 				<label>{{localize ability.labels.full}}</label>
-				<span>{{ability.value}}<br>{{ability.mod}}</span>
+				<span class="value">{{ability.value}}</span>
+				<span class="mod">{{ability.mod}}</span>
 			</div>
 		{{/each}}
 	</fieldset>
 	<fieldset class="skills">
-		<legend>Skills</legend>
+		<legend>{{localize "BF.Skill.Label[other]"}}</legend>
 		{{#each system.proficiencies.skills as |skill key|}}
-			<div data-key="{{key}}">
-				<label>{{localize skill.label}}</label>
+			<div class="skill" data-key="{{key}}">
+				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
+					data-rounding="{{skill.proficiency.rounding}}">
+					{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
+					<input type="hidden" name="system.proficiencies.skills.proficiency.multiplier" value="{{skill._source.multiplier}}">
+				</div>
+				<span class="name">{{localize skill.labels.name}}</span>
+				<span class="ability">
+					{{localize (lookup (lookup (lookup @root.system.abilities skill.ability) "labels") "abbreviation")}}
+				</span>
+				<span class="mod">{{skill.mod}}</span>
+				<span class="passive">({{skill.passive}})</span>
 			</div>
 		{{/each}}
 	</fieldset>
 	<fieldset class="tools">
-		<legend>Tools</legend>
+		<legend>{{localize "BF.Tool.Label[other]"}}</legend>
 		{{#each system.proficiencies.tools as |tool key|}}
 			<div data-key="{{key}}">
 				<label>{{tool.label}}</label>
@@ -25,27 +36,27 @@
 		{{/each}}
 	</fieldset>
 	<fieldset class="hit-points">
-		<legend>Hit Points</legend>
+		<legend>{{localize "BF.HitPoint.Label[other]"}}</legend>
 		<span>x / x</span>
 	</fieldset>
 	<fieldset class="hit-dice">
-		<legend>Hit Dice</legend>
+		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
 		<span>x / x dx</span>
 	</fieldset>
 	<fieldset class="armor-class">
-		<legend>Armor Class</legend>
+		<legend>{{localize "BF.ArmorClass.Label"}}</legend>
 		<span>xx</span>
 	</fieldset>
 	<fieldset class="initiative">
-		<legend>Initiative</legend>
-		<span>+x</span>
+		<legend>{{localize "BF.Initiative.Label"}}</legend>
+		<span>{{numberFormat system.attributes.initiative.mod sign=true}}</span>
 	</fieldset>
 	<fieldset class="movement">
-		<legend>Speed</legend>
+		<legend>{{localize "BF.Speed.Label"}}</legend>
 		<span>x ft.</span>
 	</fieldset>
 	<fieldset class="luck">
-		<legend>Luck</legend>
+		<legend>{{localize "BF.Luck.Label"}}</legend>
 		<span>x</span>
 	</fieldset>
 	<fieldset class="traits">

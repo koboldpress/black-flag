@@ -33,6 +33,8 @@ Hooks.once("init", function() {
 	data.registerDataModels(Item, data.item.config);
 	documents.registerDocumentClasses();
 	settings.registerSettings();
+	utils.preCacheSVG();
+	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
 });
 

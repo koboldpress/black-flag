@@ -119,3 +119,14 @@ export const abilityAssignment = {
 	},
 	standardArray: [16, 14, 14, 13, 10, 8]
 };
+
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Default abilities used throughout the system.
+ * @enum {string}
+ */
+export const defaultAbilities = {
+	hitPoints: "constitution",
+	initiative: "dexterity"
+};

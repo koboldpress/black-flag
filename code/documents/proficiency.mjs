@@ -58,7 +58,7 @@ export default class Proficiency {
 	 */
 	get flat() {
 		const roundMethod = (this.rounding === "down") ? Math.floor : Math.ceil;
-		return roundMethod(this.multiplier * this._baseProficiency);
+		return roundMethod(this.multiplier * this.#baseProficiency);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,12 +68,12 @@ export default class Proficiency {
 	 * @type {string}
 	 */
 	get dice() {
-		if ( (this._baseProficiency === 0) || (this.multiplier === 0) ) return "0";
+		if ( (this.#baseProficiency === 0) || (this.multiplier === 0) ) return "0";
 		const roundTerm = (this.rounding === "down") ? "floor" : "ceil";
 		if ( this.multiplier === 0.5 ) {
-			return `${roundTerm}(1d${this._baseProficiency * 2} / 2)`;
+			return `${roundTerm}(1d${this.#baseProficiency * 2} / 2)`;
 		} else {
-			return `${this.multiplier}d${this._baseProficiency * 2}`;
+			return `${this.multiplier}d${this.#baseProficiency * 2}`;
 		}
 	}
 
@@ -94,7 +94,7 @@ export default class Proficiency {
 	 * @type {boolean}
 	 */
 	get hasProficiency() {
-		return (this._baseProficiency > 0) && (this.multiplier > 0);
+		return (this.#baseProficiency > 0) && (this.multiplier > 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

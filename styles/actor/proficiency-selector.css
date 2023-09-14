@@ -1,0 +1,59 @@
+.proficiency-selector {
+	--blank-color: rgba(0, 0, 0, 0.15);
+	--proficient-color: var(--bf-color);
+	--top-color: var(--blank-color);
+	--bottom-color: var(--blank-color);
+	--side-color: var(--blank-color);
+
+	> svg {
+		position: relative;
+		top: 2px;
+		width: 12px;
+		height: 12px;
+
+		& rect {
+			stroke-linejoin: bevel;
+		}
+		.top {
+			fill: var(--top-color);
+			stroke: var(--top-color);
+		}
+		.bottom {
+			fill: var(--bottom-color);
+			stroke: var(--bottom-color);
+		}
+		.side {
+			fill: var(--side-color);
+			stroke: var(--side-color);
+		}
+	}
+
+	&:is([data-multiplier="1"], [data-multiplier="2"]) {
+		--top-color: var(--proficient-color);
+		--bottom-color: var(--proficient-color);
+	}
+	&[data-multiplier="2"] {
+		--side-color: var(--proficient-color);
+	}
+	&[data-multiplier="0.5"][data-rounding="up"] {
+		--top-color: var(--proficient-color);
+	}
+	&[data-multiplier="0.5"][data-rounding="down"] {
+		--bottom-color: var(--proficient-color);
+	}
+
+	.selector-icon {
+		width: 100%;
+		height: 100%;
+		background-image: url("artwork/interface/proficiency-0.svg");
+		background-position: center;
+		background-size: contain;
+
+		&.multiplier-0.5 {
+			background-image: url("artwork/interface/proficiency-0.5.svg");
+		}
+		&.multiplier-1 {
+			background-image: url("artwork/interface/proficiency-1.svg");
+		}
+	}
+}

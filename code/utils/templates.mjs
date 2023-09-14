@@ -1,3 +1,30 @@
+import { loadCachedSVG } from "./svg.mjs";
+
+/* <><><><> <><><><> <><><><> <><><><> */
+/*         Handlebars Helpers          */
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Render an SVG file inline as HTML.
+ * @param {string} path - Path to the SVG file.
+ * @param {object} options
+ * @returns {string}
+ */
+function inlineSVG(path, options={}) {
+	return new Handlebars.SafeString(loadCachedSVG(path));
+}
+
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Register custom Handlebars helpers for use by the system.
+ */
+export function registerHandlebarsHelpers() {
+	Handlebars.registerHelper({
+		"blackFlag-inlineSVG": inlineSVG
+	});
+}
+
 /* <><><><> <><><><> <><><><> <><><><> */
 /*         Handlebars Partials         */
 /* <><><><> <><><><> <><><><> <><><><> */

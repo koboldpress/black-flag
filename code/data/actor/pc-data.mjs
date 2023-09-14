@@ -1,8 +1,9 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
+import ActorDataModel from "../abstract/actor-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 
-export default class PCData extends foundry.abstract.TypeDataModel {
+export default class PCData extends ActorDataModel {
 
 	static metadata = {
 		type: "pc",
@@ -21,8 +22,10 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 			abilities: new fields.MappingField(new foundry.data.fields.SchemaField({
 				base: new foundry.data.fields.NumberField({min: 0, integer: true}),
 				max: new foundry.data.fields.NumberField({min: 0, initial: 20, integer: true}),
-				saveProficiency: new foundry.data.fields.SchemaField({
-					multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
+				save: new foundry.data.fields.SchemaField({
+					proficiency: new foundry.data.fields.SchemaField({
+						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
+					})
 				})
 				// Bonuses?
 				// Minimums?
@@ -82,7 +85,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 				}),
 				skills: new fields.MappingField(new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
-						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
+						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
 					})
 					// Bonuses?
 					// Minimum?
@@ -170,25 +173,77 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Data Preparation                   */
+	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseData() {
-		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
+	prepareBaseAbilities() {
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
-			const config = CONFIG.BlackFlag.abilities[key];
-			ability.labels = config.labels;
+			ability._source = this._source.abilities?.[key] ?? {};
+			ability.check ??= {};
 			ability.value = ability.base;
-			ability.mod = ability.value ? Math.floor((ability.value - 10) / 2) : null;
-		}
-		for ( const [key, skill] of Object.entries(this.proficiencies.skills) ) {
-			const config = CONFIG.BlackFlag.skills[key];
-			skill.label = config.label;
 		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedData() {
+	prepareBaseProficiency() {
+		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedAbilities() {
+		for ( const [key, ability] of Object.entries(this.abilities) ) {
+			const config = CONFIG.BlackFlag.abilities[key];
+			ability.mod = ability.value ? Math.floor((ability.value - 10) / 2) : null;
+
+			ability.check.proficiency = new Proficiency(
+				this.attributes.proficiency, 0, "down"
+			);
+			ability.save.proficiency = new Proficiency(
+				this.attributes.proficiency, ability.save.proficiency.multiplier, "down"
+			);
+
+			ability.check.mod = ability.mod + ability.check.proficiency.flat;
+			ability.save.mod = ability.mod + ability.save.proficiency.flat;
+			ability.dc = 8 + ability.mod + this.attributes.proficiency;
+
+			ability.labels = config.labels;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedInitiative() {
+		const init = this.attributes.initiative ??= {};
+		init.ability = CONFIG.BlackFlag.defaultAbilities.initiative;
+		const ability = this.abilities[init.ability];
+
+		init.proficiency = new Proficiency(this.attributes.prof, 0);
+		init.mod = (ability?.mod ?? 0) + init.proficiency.flat;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedSkills() {
+		for ( const [key, skill] of Object.entries(this.proficiencies.skills) ) {
+			skill._source = this._source.skills?.[key] ?? {};
+			const config = CONFIG.BlackFlag.skills[key];
+
+			skill.ability = config.ability;
+
+			skill.proficiency = new Proficiency(
+				this.attributes.proficiency, skill.proficiency.multiplier, "down"
+			);
+
+			const ability = this.abilities[skill.ability];
+			skill.mod = (ability?.mod ?? 0) + skill.proficiency.flat;
+			skill.passive = 10 + skill.mod;
+
+			skill.labels = {
+				name: config.label,
+				ability: ability?.labels.abbreviation
+			};
+		}
 	}
 }
