@@ -1,4 +1,4 @@
-<form autocomplete="off">
+<form autocomplete="off" style="--score-count: {{scoreCount}};">
 	{{#*inline ".header"}}
 		<h1>
 			{{localize title}}
@@ -10,7 +10,14 @@
 	{{/inline}}
 	{{#unless system.progression.abilities.method}}
 		<section class="method-selection">
-			<h1>{{localize "BF.AbilityAssignment.ScoringMethods.Label"}}</h1>
+			<h1>
+				{{localize "BF.AbilityAssignment.ScoringMethods.Label"}}
+				{{#if allowManualAssignment}}
+					<button data-action="select-method" data-method="manual">
+						{{localize "BF.AbilityAssignment.Method.Manual.Label"}}
+					</button>
+				{{/if}}
+			</h1>
 			<p>{{localize "BF.AbilityAssignment.ScoringMethods.Hint"}}</p>
 			<ul class="mode-selection">
 				{{#each CONFIG.abilityAssignmentMethods as |method key|}}
@@ -28,38 +35,59 @@
 	{{else if (eq system.progression.abilities.method "rolling")}}
 		<section class="rolling">
 			{{> ".header" title="BF.AbilityAssignment.Method.Rolling.Label"}}
-			{{#unless system.progression.abilities.rolls.length}}
-				<button data-action="roll">
-					{{localize "BF.AbilityAssignment.Action.RollScores"}}
-				</button>
-			{{else}}
-				<div class="scores">
-					{{#each scores}}
-						<fieldset class="score" data-key="{{this.key}}">
-							<legend>{{localize this.label}}</legend>
-							{{#each ../system.progression.abilities.rolls as |roll|}}
-								<label{{#if (eq @index ../this.value)}} class="checked"{{/if}}>
-									<input type="radio" name="assignments" value="{{@index}}" {{checked (eq @index ../this.value)}}>
-									<span>{{roll.total}}</span>
+			<div class="rolls">
+				{{#each rolls}}
+					<fieldset data-index="{{@index}}">
+						{{#if this.roll}}
+							<div class="dice-tooltip">
+								<ol class="dice-rolls">
+									{{#each results}}
+										<li class="roll {{this.classes}}">{{this.result}}</li>
+									{{/each}}
+								</ol>
+							</div>
+						{{/if}}
+						<button data-action="roll"{{#if roll.total}} class="total"{{/if}}
+							{{disabled (and roll.total (not @root.allowRerolls))}}>
+							{{#if roll.total}}
+								{{roll.total}}
+							{{else}}
+								{{localize "BF.AbilityAssignment.Action.Roll"}}
+							{{/if}}
+						</button>
+					</fieldset>
+				{{/each}}
+			</div>
+			<div class="scores">
+				{{#each scores}}
+					<fieldset data-key="{{this.key}}">
+						<legend>{{localize this.label}}</legend>
+						{{#each ../sortedRolls as |roll|}}
+							{{#if this.roll}}
+								<label{{#if (eq this.index ../this.value)}} class="checked"{{/if}}>
+									<input type="radio" name="assignments" value="{{this.index}}" {{checked (eq this.index ../this.value)}}>
+									<span>{{this.roll.total}}</span>
 								</label>
-							{{/each}}
-							<hr>
-							{{#each @root.CONFIG.abilityRolling.bonuses as |bonus|}}
-								<label class="{{#if (eq @index ../this.bonus)}}checked{{/if}}
-									{{~#if (or (not ../this.value) (gt bonus ../this.maxBonus))}}disabled{{/if}}">
-									<input type="radio" name="bonuses" value="{{@index}}" {{checked (eq @index ../this.bonus)}}
-										{{disabled (or (not ../this.value) (gt bonus ../this.maxBonus))}}>
-									<span>{{numberFormat bonus sign=true}}</span>
-									{{!-- TODO: Replace this with a custom, properly localized number formatter --}}
-								</label>
-							{{/each}}
-						</fieldset>
-					{{/each}}
-				</div>
-				<button data-action="confirm" {{disabled (not ready)}}>
-					{{localize "BF.AbilityAssignment.Action.Confirm"}}
-				</button>
-			{{/unless}}
+							{{/if}}
+						{{else}}
+							<span class="no-rolls">{{localize "BF.AbilityAssignment.Method.Rolling.NoRolls"}}</span>
+						{{/each}}
+						<hr>
+						{{#each @root.CONFIG.abilityRolling.bonuses as |bonus|}}
+							<label class="{{#if (eq @index ../this.bonus)}}checked{{/if}}
+								{{~#if (or (eq ../this.value null) (gt bonus ../this.maxBonus))}}disabled{{/if}}">
+								<input type="radio" name="bonuses" value="{{@index}}" {{checked (eq @index ../this.bonus)}}
+									{{disabled (or (eq ../this.value null) (gt bonus ../this.maxBonus))}}>
+								<span>{{numberFormat bonus sign=true}}</span>
+								{{!-- TODO: Replace this with a custom, properly localized number formatter --}}
+							</label>
+						{{/each}}
+					</fieldset>
+				{{/each}}
+			</div>
+			<button data-action="confirm" {{disabled (not ready)}}>
+				{{localize "BF.AbilityAssignment.Action.Confirm"}}
+			</button>
 		</section>
 	{{else if (eq system.progression.abilities.method "point-buy")}}
 		<section class="point-buy">
@@ -74,7 +102,7 @@
 			</div>
 			<div class="scores">
 				{{#each scores}}
-					<fieldset class="score" data-key="{{this.key}}">
+					<fieldset data-key="{{this.key}}">
 						<legend>{{localize this.label}}</legend>
 						<span class="current-score">{{this.value}}</span>
 						<button data-action="sell" {{disabled this.isMin}}>
@@ -113,7 +141,7 @@
 			{{> ".header" title="BF.AbilityAssignment.Method.StandardArray.Label"}}
 			<div class="scores">
 				{{#each scores}}
-					<fieldset class="score" data-key="{{this.key}}">
+					<fieldset data-key="{{this.key}}">
 						<legend>{{localize this.label}}</legend>
 						{{#each @root.CONFIG.standardArray as |number|}}
 							<label{{#if (eq @index ../this.value)}} class="checked"{{/if}}>
@@ -121,6 +149,22 @@
 								<span>{{number}}</span>
 							</label>
 						{{/each}}
+					</fieldset>
+				{{/each}}
+			</div>
+			<button data-action="confirm" {{disabled (not ready)}}>
+				{{localize "BF.AbilityAssignment.Action.Confirm"}}
+			</button>
+		</section>
+	{{else if (eq system.progression.abilities.method "manual")}}
+		<section class="manual">
+			{{> ".header" title="BF.AbilityAssignment.Method.Manual.Label"}}
+			<div class="scores">
+				{{#each scores}}
+					<fieldset data-key="{{this.key}}">
+						<legend>{{localize this.label}}</legend>
+						<input type="number" name="system.progression.abilities.assignments.{{this.key}}"
+							value="{{this.value}}" min=0 step=1>
 					</fieldset>
 				{{/each}}
 			</div>

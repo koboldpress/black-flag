@@ -105,7 +105,7 @@ export default class PCData extends foundry.abstract.TypeDataModel {
 			progression: new foundry.data.fields.SchemaField({
 				abilities: new foundry.data.fields.SchemaField({
 					method: new foundry.data.fields.StringField(),
-					rolls: new foundry.data.fields.ArrayField(new fields.RollField()),
+					rolls: new foundry.data.fields.ArrayField(new fields.RollField({ nullable: true })),
 					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true})),
 					bonuses: new fields.MappingField(new foundry.data.fields.NumberField({integer: true}))
 				}),
