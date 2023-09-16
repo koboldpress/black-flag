@@ -1,0 +1,52 @@
+<section class="advancement">
+	<header>
+		<h2>{{localize "BF.Advancement.Label"}}</h2>
+		{{#if editable}}
+			<div class="controls">
+				<a data-action="advancement" data-sub-action="add">
+					<i class="fa-solid fa-plus"></i>
+				</a>
+			</div>
+		{{/if}}
+	</header>
+	<ol class="level-list">
+		{{#each advancement as |data level|}}
+			<li data-level="{{level}}">
+				<div class="header">
+					<h3>
+						{{#if (eq level "unconfigured")}}
+							{{localize "BF.Advancement.Core.Level.None"}}
+						{{else}}
+							{{localize "BF.Advancement.Core.Level.Specific" level=level}}
+						{{/if}}
+					</h3>
+				</div>
+				<ol class="advancement-list">
+					{{#each data.items}}
+						<li data-advancement-id="{{this.id}}">
+							<div class="advancement-name">
+								<figure class="icon">
+									<img src="{{this.icon}}">
+								</figure>
+								<h4>{{{this.title}}}</h4>
+							</div>
+							{{#if @root.editable}}
+								<div class="controls">
+									<a data-action="advancement" data-sub-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">
+										<i class="fas fa-edit"></i>
+									</a>
+									<a data-action="advancement" data-sub-action="delete" data-tooltip="BF.Advancement.Core.Action.Delete">
+										<i class="fas fa-trash"></i>
+									</a>
+								</div>
+							{{/if}}
+							{{#if this.summary}}
+								<div class="summary">{{{this.summary}}}</div>
+							{{/if}}
+						</li>
+					{{/each}}
+				</ol>
+			</li>
+		{{/each}}
+	</ol>
+</section>

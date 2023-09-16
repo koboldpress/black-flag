@@ -112,8 +112,12 @@ export default class PCData extends ActorDataModel {
 					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true})),
 					bonuses: new fields.MappingField(new foundry.data.fields.NumberField({integer: true}))
 				}),
-				// TODO: Rather than ObjectField, this type should be based on advancement data being stored
-				advancement: new fields.MappingField(new foundry.data.fields.ObjectField()),
+				// TODO: Currently falls back to being a plain object. This logic will need to be improved to ensure
+				// advancement value type data is properly loaded once advancements can be loaded.
+				advancement: new fields.MappingField(new fields.TypeField({
+					determineType: value => "",
+					modelLookup: type => null
+				})),
 				background: new fields.RegisteredDocumentField("background"),
 				heritage: new fields.RegisteredDocumentField("heritage"),
 				lineage: new fields.RegisteredDocumentField("lineage"),
@@ -176,6 +180,14 @@ export default class PCData extends ActorDataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareBaseRegistration() {
+		if ( !CONFIG.BlackFlag.registration.ready ) {
+			CONFIG.BlackFlag.registration.reinitiatlizeOnReady.add(this.parent);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareBaseAbilities() {
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			ability._source = this._source.abilities?.[key] ?? {};
@@ -210,6 +222,20 @@ export default class PCData extends ActorDataModel {
 
 			ability.labels = config.labels;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedHitPoints() {
+		// TODO: This will need to be updated to handle multiple classes later, but will work for level 1
+		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
+		if ( !hpAdvancement ) return;
+		const hp = this.attributes.hp;
+		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
+		const base = hpAdvancement.getAdjustedTotal(this.parent, ability?.mod ?? 0);
+		hp.max = base;
+		hp.value = Math.clamped(hp.value, 0, hp.max);
+		hp.damage = hp.max - hp.value;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

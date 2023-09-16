@@ -1,9 +1,9 @@
-export default class SystemDataModel extends foundry.abstract.DataModel {
+export default class BaseDataModel extends foundry.abstract.DataModel {
 
 	/**
 	 * Metadata that describes a system data type.
 	 *
-	 * @typedef {object} SystemDataMetadata
+	 * @typedef {object} BaseDataMetadata
 	 * @property {string} type - Name of type to which this system data model belongs.
 	 * @property {string} [module] - For module-defined types, which module provides this type.
 	 * @property {string} [category] - Which category in the create item dialog should this Document be listed?
@@ -16,7 +16,7 @@ export default class SystemDataModel extends foundry.abstract.DataModel {
 
 	/**
 	 * Metadata that describes a type.
-	 * @type {SystemDataMetadata}
+	 * @type {BaseDataMetadata}
 	 */
 	static metadata = {};
 

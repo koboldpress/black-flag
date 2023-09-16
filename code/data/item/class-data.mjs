@@ -1,4 +1,5 @@
 import ClassSheet from "../../applications/item/class-sheet.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 
 /**
@@ -11,13 +12,15 @@ import * as fields from "../fields/_module.mjs";
  * @property {object} identifier
  * @property {string} identifier.value - Class's identifier.
  */
-export default class ClassData extends foundry.abstract.TypeDataModel {
+export default class ClassData extends ItemDataModel {
 
 	static get metadata() {
 		return {
 			type: "class",
 			localization: "BF.Item.Type.Class",
-			register: true,
+			register: {
+				cache: true
+			},
 			sheet: {
 				application: ClassSheet,
 				label: "BF.Sheet.Concept"
@@ -29,6 +32,7 @@ export default class ClassData extends foundry.abstract.TypeDataModel {
 
 	static defineSchema() {
 		return {
+			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				journal: new foundry.data.fields.StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
@@ -39,5 +43,14 @@ export default class ClassData extends foundry.abstract.TypeDataModel {
 				value: new fields.IdentifierField()
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedDetails() {
+		const hpAdvancement = this.advancement.byType("hitPoints")[0];
+		this.hitDie = hpAdvancement ? `d${hpAdvancement.configuration.denomination}` : "";
 	}
 }

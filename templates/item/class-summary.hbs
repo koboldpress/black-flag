@@ -1,4 +1,4 @@
-<figure class="poster">{{log this}}
+<figure class="poster">
 	<img src="{{item.img}}"{{#if edit}} data-edit="img"{{/if}}>
 	<h1 class="name">
 		{{#if edit}}
@@ -33,9 +33,11 @@
 		{{/if}}
 	</div>
 	<ul class="traits">
-		<li class="hit-die">
-			Hit Die: dx
-		</li>
+		{{#if system.hitDie}}
+			<li class="hit-die">
+				{{localize "BF.HitDie.Label[one]"}}: {{system.hitDie}}
+			</li>
+		{{/if}}
 		<li class="key-ability">
 			Key Ability: x or y
 		</li>

@@ -2,6 +2,9 @@ import log from "./logging.mjs";
 
 const cache = {};
 
+/**
+ * Pre-load specified SVG files for later inlining in templates.
+ */
 export function preCacheSVG() {
 	const files = [
 		"interface/proficiency.svg"
@@ -15,7 +18,7 @@ export function preCacheSVG() {
 	}
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Load a cached SVG file for display in HTML.

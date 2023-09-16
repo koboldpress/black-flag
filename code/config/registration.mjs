@@ -16,7 +16,7 @@ import { slugify } from "../utils/text.mjs";
  */
 export const all = {};
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Has the initial registration been completed?
@@ -24,9 +24,17 @@ export const all = {};
  */
 export let ready = false;
 
-/* <><><><> <><><><> <><><><> <><><><> */
-/*               Lookup                */
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Documents that will be reinitialized when registration is ready to ensure they can access cached data.
+ * @type {Document[]}
+ */
+export const reinitiatlizeOnReady = new Set();
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                         Lookup                        */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Fetch the item registration for the provided identifier if it exists.
@@ -38,7 +46,7 @@ export function get(type, identifier) {
 	return all[type]?.[identifier];
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * @callback RegistrationFilterCallback
@@ -65,7 +73,7 @@ export async function filter(type, callbackFn) {
 	return obj;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Fetch all registered items of the specified type.
@@ -76,9 +84,9 @@ export function list(type) {
 	return all[type];
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
-/*            Registration             */
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                      Registration                     */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Register all item types with `register` to to `true` in their metadata.
@@ -106,10 +114,12 @@ export function registerItemTypes() {
 		 * @memberof hookEvents
 		 */
 		Hooks.callAll("blackFlag.registrationComplete");
+
+		reinitiatlizeOnReady.forEach(d => d.reset());
 	});
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Register all items of the specified type within compendiums or the world. Should only be called once per item type.
@@ -117,11 +127,14 @@ export function registerItemTypes() {
  * @param {Map[]} [indexes] - Previously prepared indexes of all Item compendiums.
  * @returns {{
  *   type: string,
+ *   shouldCache: boolean,
  *   registrations: {[key: string]: ItemRegistration}
  * }}
  * @private
  */
 async function _registerItemType(type, indexes) {
+	const config = CONFIG.Item.dataModels[type].metadata.register;
+
 	indexes = await (indexes ?? _indexCompendiums());
 	const registerItem = (item, uuidPrefix) => {
 		const identifier = item.system?.identifier?.value ?? slugify(item.name, { strict: true });
@@ -148,13 +161,18 @@ async function _registerItemType(type, indexes) {
 	}
 	console.groupEnd();
 
+	if ( config?.cache === true ) await Promise.all(
+		Object.values(registrations).map(async r => r.cached = await fromUuid(r.sources[0]))
+	);
+
 	return {
 		type,
+		shouldCache: config?.cache === true,
 		registrations: sortObjectEntries(registrations, "name")
 	};
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Enable the hooks needed to handle registration changes during item CRUD operations.
@@ -166,11 +184,11 @@ export function setupRegistrationHooks() {
 	Hooks.on("deleteItem", _onDeleteItem);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 const message = operation => `Attempted to ${operation} item before registration was completed which may lead to invalid registration data. Wait until the "blackFlag.registrationComplete" hook has fired or "CONFIG.BlackFlag.registration.ready" is true before performing any automatic item management.`;
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Register a new item type when an item is created.
@@ -189,7 +207,7 @@ function _onCreateItem(item, options, userId) {
 	all[type] = sortObjectEntries(source, "name");
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Store the item's identifier before it is changed.
@@ -203,7 +221,7 @@ function _preUpdateItem(item, changes, options, userId) {
 	options.blackFlag.identifier = item.identifier;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Update a registered item's name or image if it is the primary for an identifier or move
@@ -235,7 +253,7 @@ function _onUpdateItem(item, changes, options, userId) {
 	all[type] = sortObjectEntries(source, "name");
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Un-register an item when it has been deleted.
@@ -252,9 +270,9 @@ function _onDeleteItem(item, options, userId) {
 	_handleDelete(source, item.identifier, item);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
-/*                Utils                */
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                         Utils                         */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Handle creating an entry.
@@ -269,7 +287,7 @@ function _handleCreate(source, identifier, item) {
 	source[identifier].sources.push(item.uuid);
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Handle deleting an entry.
@@ -288,7 +306,7 @@ function _handleDelete(source, identifier, item) {
 	source[identifier].img = newSource.img;
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Re-index all Item compendiums to include the identifier.

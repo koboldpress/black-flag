@@ -1,8 +1,8 @@
 import { loadCachedSVG } from "./svg.mjs";
 
-/* <><><><> <><><><> <><><><> <><><><> */
-/*         Handlebars Helpers          */
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                   Handlebars Helpers                  */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Render an SVG file inline as HTML.
@@ -14,7 +14,7 @@ function inlineSVG(path, options={}) {
 	return new Handlebars.SafeString(loadCachedSVG(path));
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Register custom Handlebars helpers for use by the system.
@@ -25,9 +25,9 @@ export function registerHandlebarsHelpers() {
 	});
 }
 
-/* <><><><> <><><><> <><><><> <><><><> */
-/*         Handlebars Partials         */
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                  Handlebars Partials                  */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Register & pre-load handlebars partial templates.
@@ -41,7 +41,9 @@ export async function registerHandlebarsPartials() {
 		"actor/pc-main.hbs",
 		"actor/pc-progression.hbs",
 		"actor/pc-spellcasting.hbs",
-		"item/class-summary.hbs"
+		"advancement/advancement-controls.hbs",
+		"item/class-summary.hbs",
+		"item/item-advancement.hbs"
 	];
 
 	const paths = {};

@@ -1,5 +1,6 @@
 import log from "../utils/logging.mjs";
 import BlackFlagActor from "./actor.mjs";
+import * as advancement from "./advancement/_module.mjs";
 import BlackFlagItem from "./item.mjs";
 
 /**
@@ -10,7 +11,12 @@ export function registerDocumentClasses() {
 
 	CONFIG.Actor.documentClass = BlackFlagActor;
 	CONFIG.Item.documentClass = BlackFlagItem;
+
+	CONFIG.Advancement = {
+		documentClass: advancement.Advancement,
+		types: CONFIG.BlackFlag._advancementTypes
+	};
 }
 
-export {BlackFlagActor, BlackFlagItem};
+export {BlackFlagActor, advancement, BlackFlagItem};
 export {default as Proficiency} from "./proficiency.mjs";

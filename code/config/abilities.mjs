@@ -57,7 +57,7 @@ export const abilities = {
 	}
 };
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for ability assignment methods.
@@ -120,7 +120,7 @@ export const abilityAssignment = {
 	standardArray: [16, 14, 14, 13, 10, 8]
 };
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Default abilities used throughout the system.

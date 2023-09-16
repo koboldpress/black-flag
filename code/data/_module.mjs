@@ -1,7 +1,4 @@
-export * as abstract from "./abstract/_module.mjs";
-export * as actor from "./actor/_module.mjs";
-export * as item from "./item/_module.mjs";
-export * as fields from "./fields/_module.mjs";
+import log from "../utils/logging.mjs";
 
 /**
  * Register the provided data models with Foundry using metadata.
@@ -9,6 +6,8 @@ export * as fields from "./fields/_module.mjs";
  * @param {{[key: string]: SystemDataModel}} models - Models to register grouped by type name.
  */
 export function registerDataModels(documentType, models) {
+	log(`Registering ${documentType.name.toLowerCase()} data models`);
+
 	const config = CONFIG[documentType.name];
 	config.typeLabelsPlural ??= {};
 	for ( let [type, model] of Object.entries(models) ) {
@@ -19,3 +18,9 @@ export function registerDataModels(documentType, models) {
 		if ( model.metadata.icon ) config.typeIcons[type] = model.metadata.icon;
 	}
 }
+
+export * as abstract from "./abstract/_module.mjs";
+export * as actor from "./actor/_module.mjs";
+export * as advancement from "./advancement/_module.mjs";
+export * as item from "./item/_module.mjs";
+export * as fields from "./fields/_module.mjs";

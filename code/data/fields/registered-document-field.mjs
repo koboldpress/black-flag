@@ -28,6 +28,6 @@ export default class RegisteredDocumentField extends IdentifierField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	initialize(value, model, options={}) {
-		return () => CONFIG.BlackFlag.registration.get(this.type, value);
+		return () => CONFIG.BlackFlag.registration.get(this.type, value)?.cached;
 	}
 }

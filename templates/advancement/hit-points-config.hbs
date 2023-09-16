@@ -1,0 +1,11 @@
+<form autocomplete="off">
+	<section>
+		{{> "blackFlag.advancement-controls"}}
+		<fieldset>
+			<label>{{localize "BF.HitDie.Label[one]"}}</label>
+			<select name="configuration.denomination">
+				{{selectOptions hitDieSizes selected=configuration.denomination}}
+			</select>
+		</fieldset>
+	</section>
+</form>
