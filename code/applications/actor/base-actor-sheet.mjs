@@ -92,6 +92,6 @@ export default class BaseActorSheet extends ActorSheet {
 						return item?.sheet.render(true);
 				}
 		}
-		return log(`Unrecognized action: ${action}`, { level: "warn" });
+		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}
 }

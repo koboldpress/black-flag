@@ -242,6 +242,7 @@ export default class PCData extends ActorDataModel {
 				number: data.levels
 			});
 		}
+		this.progression.level = Object.keys(this.progression.levels).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -332,5 +333,24 @@ export default class PCData extends ActorDataModel {
 			existingClass = (await this.parent.createEmbeddedDocuments("Item", [cls.toObject()], {render: false}))[0];
 		}
 		return this.parent.update({[`system.progression.levels.${newLevel}.class`]: existingClass});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Level down the character one level.
+	 * @returns {Promise}
+	 */
+	async levelDown() {
+		const highestLevel = this.progression.levels[this.progression.level];
+		const cls = highestLevel.class;
+		const levels = this.progression.classes[cls.identifier].levels;
+
+		// TODO: Unapply any advancement
+
+		await this.parent.update({[`system.progression.levels.-=${this.progression.level}`]: null});
+		if ( levels <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id]);
+
+		return this.parent;
 	}
 }

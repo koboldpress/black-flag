@@ -17,12 +17,71 @@ export default class PCSheet extends BaseActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Advancement flows currently displayed on the sheet.
+	 * @type {[key: string]: AdvancementFlow}
+	 */
+	advancementFlows = {};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
 		const context = await super.getData(options);
+
+		this.prepareProgression(context);
+
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare levels on the progression tab and assign them advancement flows.
+	 * @param {object} context - Context being prepared.
+	 */
+	async prepareProgression(context) {
+		context.progressionLevels = {};
+		const flowIds = new Set(Object.keys(this.advancementFlows));
+
+		for ( let [level, data] of Object.entries(context.system.progression.levels) ) {
+			level = Number(level);
+			context.progressionLevels[level] = {
+				...data,
+				class: data.class,
+				flows: [],
+				highestLevel: level === context.system.progression.level
+			};
+			const levels = { character: level, class: level };
+			// TODO: Adjust this to provide proper class level once multi-classing is enabled
+
+			for ( const advancement of this.actor.advancementForLevel(Number(level)) ) {
+				const id = `${advancement.valueID}#${level}`;
+				const flow = this.advancementFlows[id]
+					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, levels);
+				flowIds.delete(id);
+				context.progressionLevels[level].flows.push(flow);
+			}
+		}
+
+		// Remove any flows that no longer have associated advancements
+		flowIds.forEach(id => delete this.advancementFlows[id]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _render(force, options) {
+		await super._render(force, options);
+		if ( this._state !== Application.RENDER_STATES.RENDERED ) return;
+
+		// Render advancement steps
+		for ( const flow of Object.values(this.advancementFlows) ) {
+			flow._element = null;
+			await flow._render(true, options);
+		}
+		this.setPosition();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -41,6 +100,16 @@ export default class PCSheet extends BaseActorSheet {
 				switch (subAction) {
 					case "assign-abilities":
 						return (new AbilityAssignmentDialog(this.actor)).render(true);
+					case "level-down":
+						return Dialog.confirm({
+							title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`,
+							content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${
+								game.i18n.localize("BF.Progression.Action.LevelDown.Message")
+							}</p>`,
+							yes: () => this.actor.system.levelDown()
+						});
+					case "level-up":
+						return this.actor.system.levelUp();
 					case "select":
 						if ( !properties.type ) return;
 						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);

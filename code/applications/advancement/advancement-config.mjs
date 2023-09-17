@@ -34,7 +34,7 @@ export default class AdvancementConfig extends FormApplication {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement", "config"],
+			classes: ["black-flag", "advancement-config"],
 			template: "systems/black-flag/templates/advancement/advancement-config.hbs",
 			width: 400,
 			height: "auto",
@@ -74,8 +74,9 @@ export default class AdvancementConfig extends FormApplication {
 		const levels = Object.fromEntries(Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]));
 		const context = {
 			CONFIG: CONFIG.BlackFlag,
-			...this.advancement.toObject(false),
+			configuration: this.advancement.configuration,
 			source: this.advancement.toObject(),
+			advancement: this.advancement,
 			default: {
 				title: this.advancement.constructor.metadata.title,
 				icon: this.advancement.constructor.metadata.icon,

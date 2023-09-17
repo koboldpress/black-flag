@@ -7,7 +7,7 @@ export default class HitPointsConfig extends AdvancementConfig {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement", "config", "hit-points"],
+			classes: ["black-flag", "advancement-config", "hit-points"],
 			template: "systems/black-flag/templates/advancement/hit-points-config.hbs"
 		});
 	}

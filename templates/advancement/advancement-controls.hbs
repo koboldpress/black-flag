@@ -1,19 +1,17 @@
-<fieldset>
-	<label>{{localize "BF.Advancement.Core.Title"}}</label>
+<label>
+	<span>{{localize "BF.Advancement.Core.Title"}}</span>
 	<input type="text" name="title" value="{{source.title}}" placeholder="{{default.title}}">
-</fieldset>
+</label>
 
-<fieldset>
-	<label>{{localize "BF.Advancement.Core.Icon"}}</label>
-	<div class="fields">
-		{{filePicker type="image" target="icon"}}
-		<input type="text" name="icon" value="{{source.icon}}" placeholder="{{default.icon}}">
-	</div>
-</fieldset>
+<label class="file">
+	<span>{{localize "BF.Advancement.Core.Icon"}}</span>
+	{{filePicker type="image" target="icon"}}
+	<input type="text" name="icon" value="{{source.icon}}" placeholder="{{default.icon}}">
+</label>
 
 {{#if showIdentifier}}
-	<fieldset>
-		<label>{{localize "BF.Identifier.Label"}}</label>
+	<label>
+		<span>{{localize "BF.Identifier.Label"}}</span>
 		<input type="text" name="identifier" value="{{source.identifier}}" placeholder="{{default.identifier}}">
 		{{#if default.identifierHint}}
 			<p class="hint">
@@ -21,14 +19,14 @@
 				<!-- <a class="identifier-hint-copy" data-tooltip="BF.Identifier.Action.Copy"><i class="far fa-clipboard"></i></a> -->
 			</p>
 		{{/if}}
-	</fieldset>
+	</label>
 {{/if}}
 
 {{#if showLevelSelector}}
-	<fieldset>
-		<label>{{localize "BF.Level.Label[one]"}}</label>
+	<label>
+		<span>{{localize "BF.Level.Label[one]"}}</span>
 		<select name="level" data-dtype="Number">
 			{{selectOptions levels selected=level}}
 		</select>
-	</fieldset>
+	</label>
 {{/if}}

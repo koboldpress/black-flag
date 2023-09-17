@@ -1,0 +1,35 @@
+<form id="{{appId}}" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+	<header>
+		<div class="advancement-name">
+			<figure class="icon">
+				<img src="{{icon}}">
+			</figure>
+			<h4>{{{title}}}</h4>
+		</div>
+		{{#if configure}}
+			{{#if isFirstLevel}}
+
+				<p>
+					{{{localize "BF.Advancement.HitPoints.Starting" max=denomination}}}
+					<input type="hidden" name="useMax" value="true" data-dtype="Boolean">
+				</p>
+
+			{{else}}
+			
+				<fieldset class="rolls">
+					<label>
+						<span>{{localize "BF.Advancement.HitPoints.Average"}}</span>
+						<input class="averageCheckbox" type="checkbox" name="useAverage" {{checked data.useAverage}}>
+					</label>
+					<div class="fields">
+						<input class="rollResult" type="number" name="value" value="{{data.value}}" {{disabled data.useAverage}}>
+						<button class="rollButton" type="button" name="roll" {{disabled data.useAverage}}>
+							<i class="fas fa-dice-d{{denomination}}"></i> {{localize "EH.Action.Roll" type=(concat "d" denomination)}}
+						</button>
+					</div>
+				</fieldset>
+			
+			{{/if}}
+		{{/if}}
+	</header>
+</form>

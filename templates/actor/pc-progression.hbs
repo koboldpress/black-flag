@@ -1,6 +1,9 @@
 <main>
 	<section class="leveling">
-		List current overall level, XP if XP mode is selected, level-up button, etc.
+		<fieldset>
+			<legend>{{localize "BF.Progression.Label"}}</legend>
+			<p>List current overall level, XP if XP mode is selected, level-up button, etc.</p>
+		</fieldset>
 	</section>
 	<section class="details">
 		<fieldset class="ability-selection">
@@ -78,13 +81,24 @@
 		{{/each}}
 	</section>
 	<section class="levels">
-		{{#each system.progression.levels as |level number|}}
-			<div class="level">
+		{{#each progressionLevels as |level number|}}
+			<div class="level" data-level="{{number}}">
 				<h3>
 					<span class="level">{{localize "BF.Level.Specific" level=number}}</span>
 					<span class="class">{{level.class.name}}</span>
+					{{#if (and @root.editingMode level.highestLevel)}}
+						<span class="controls">
+							<a data-action="progression" data-sub-action="level-down">
+								<i class="fa-solid fa-arrow-down-wide-short"></i>
+							</a>
+						</span>
+					{{/if}}
 				</h3>
-				<p>List level's advancements</p>
+				<section class="advancement-flows">
+					{{#each level.flows as |flow|}}
+						<template id="{{flow.id}}"></template>
+					{{/each}}
+				</section>
 			</div>
 		{{/each}}
 	</section>

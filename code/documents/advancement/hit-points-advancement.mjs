@@ -1,5 +1,5 @@
 import HitPointsConfig from "../../applications/advancement/hit-points-config.mjs";
-// import HitPointsFlow from "../../applications/advancement/hit-points-flow.mjs";
+import HitPointsFlow from "../../applications/advancement/hit-points-flow.mjs";
 import { HitPointsConfigurationData, HitPointsValueData } from "../../data/advancement/hit-points-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -24,7 +24,7 @@ export default class HitPointsAdvancement extends Advancement {
 			multiLevel: true,
 			apps: {
 				config: HitPointsConfig,
-				// flow: HitPointsFlow
+				flow: HitPointsFlow
 			}
 		});
 	}
@@ -34,12 +34,11 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Current hit dice denomination. This fetches from the actor first to take any changes
-	 * through active effects into account.
+	 * Hit points granted if the average amount is taken.
 	 * @type {number}
 	 */
-	get denomination() {
-		return this.actor?.system.attributes.hd.denomination ?? this.configuration.denomination;
+	get average() {
+		return (this.configuration.denomination / 2) + 1;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -49,23 +48,40 @@ export default class HitPointsAdvancement extends Advancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Total hit points provided by this advancement.
+	 * @type {number}
+	 */
+	get total() {
+		return Object.keys(this.value.granted ?? {}).reduce((t, l) => t + this.valueForLevel(parseInt(l)), 0);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	configuredForLevel(actor, level) {
-		return this.valueForLevel(actor, level) !== null;
+	configuredForLevel(level) {
+		return this.valueForLevel(level) !== null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	titleForLevel(level, { flow=false }={}) {
+		const hp = this.valueForLevel(level);
+		if ( !hp || !flow ) return this.title;
+		return `${this.title}: <strong>${hp}</strong>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Hit points given at the provided level.
-	 * @param {BlackFlagActor} actor - Actor for which the value is being retrieved.
 	 * @param {number} level - Level for which to get hit points.
 	 * @returns {number|null} - Hit points for level or null if none have been taken.
 	 */
-	valueForLevel(actor, level) {
-		return this.constructor.valueForLevel(this.value(actor).granted ?? {}, this.denomination, level);
+	valueForLevel(level) {
+		return this.constructor.valueForLevel(this.value.granted ?? {}, this.configuration.denomination, level);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -100,26 +116,14 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/**
 	 * Add the ability modifier and any bonuses to the provided hit points value to get the number to apply.
-	 * @param {BlackFlagActor} actor - Actor for which the value is being calculated.
 	 * @param {number} value - Hit points taken at a given level.
 	 * @returns {number} - Hit points adjusted with ability modifier and per-level bonuses.
 	 */
-	#getApplicableValue(actor, value) {
+	#getApplicableValue(value) {
 		const abilityId = CONFIG.BlackFlag.defaultAbilities.hitPoints || "constitution";
-		value = Math.max(value + (actor.system.abilities[abilityId]?.mod ?? 0), 1);
-		value += simplifyBonus(actor.system.attributes.hp.bonuses.level, actor.getRollData());
+		value = Math.max(value + (this.actor.system.abilities[abilityId]?.mod ?? 0), 1);
+		// value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
 		return value;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Total hit points provided by this advancement.
-	 * @param {BlackFlagActor} actor - Actor for which the total is being calculated.
-	 * @returns {number} - Hit points currently selected.
-	 */
-	total(actor) {
-		return Object.keys(this.value(actor).granted ?? {}).reduce((t, l) => t + this.valueForLevel(parseInt(l)), 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -127,20 +131,19 @@ export default class HitPointsAdvancement extends Advancement {
 	/**
 	 * Total hit points taking the provided ability modifier into account, with a minimum of 1 per level.
 	 * This method is designed to ensure no level provides negative HP even if the constitution modifier is negative.
-	 * @param {BlackFlagActor} actor - Actor for which the total is being calculated.
 	 * @param {number} mod - Modifier to add per level.
 	 * @returns {number} - Total hit points plus modifier.
 	 */
-	getAdjustedTotal(actor, mod) {
-		return Object.keys(this.value(actor).granted ?? {}).reduce((total, level) => {
-			return total + Math.max(this.valueForLevel(actor, parseInt(level)) + mod, 1);
+	getAdjustedTotal(mod) {
+		return Object.keys(this.value.granted ?? {}).reduce((total, level) => {
+			return total + Math.max(this.valueForLevel(parseInt(level)) + mod, 1);
 		}, 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	apply(actor, level, data) {
-		// let value = this.constructor.valueForLevel(data, this.denomination, level);
+	apply(level, data) {
+		// let value = this.constructor.valueForLevel(data, this.configuration.denomination, level);
 		// if ( value === undefined ) return;
 		// this.actor.updateSource({
 		// 	"system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)

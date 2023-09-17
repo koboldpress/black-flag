@@ -1,4 +1,5 @@
 import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
+import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 
 /**
@@ -88,7 +89,8 @@ export default class Advancement extends BaseAdvancement {
 			},
 			multiLevel: false,
 			apps: {
-				config: AdvancementConfig
+				config: AdvancementConfig,
+				flow: AdvancementFlow
 			}
 		};
 	}
@@ -148,6 +150,16 @@ export default class Advancement extends BaseAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Value data for this advancement stored on an actor.
+	 * @type {DataModel|object}
+	 */
+	get value() {
+		return this.actor?.system.progression?.advancement[this.valueID] ?? {};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -190,13 +202,10 @@ export default class Advancement extends BaseAdvancement {
 	 * Title displayed in advancement list for a specific level.
 	 * @param {number} level - Level for which to generate a title.
 	 * @param {object} [options={}]
-	 * @param {BlackFlagActor} [options.actor] - Actor on which the advancement is applied.
-	 * @param {object} [options.configMode=false] - Is the advancement's item sheet in configuration mode? When in
-	 *                                              config mode, the choices already made on this actor should not
-	 *                                              be displayed.
+	 * @param {object} [options.flow=false] - Is this title being used in an advancement flow?
 	 * @returns {string} - HTML title with any level-specific information.
 	 */
-	titleForLevel(level, { actor, configMode=false }={}) {
+	titleForLevel(level, { flow=false }={}) {
 		return this.title;
 	}
 
@@ -206,13 +215,10 @@ export default class Advancement extends BaseAdvancement {
 	 * Summary content displayed beneath the title in the advancement list.
 	 * @param {number} level - Level for which to generate the summary.
 	 * @param {object} [options={}]
-	 * @param {BlackFlagActor} [options.actor] - Actor on which the advancement is applied.
-	 * @param {object} [options.configMode=false] - Is the advancement's item sheet in configuration mode? When in
-	 *                                              config mode, the choices already made on this actor should not
-	 *                                              be displayed.
+	 * @param {object} [options.flow=false] - Is this summary being used in an advancement flow?
 	 * @returns {string} - HTML content of the summary.
 	 */
-	summaryForLevel(level, { actor, configMode=false }={}) {
+	summaryForLevel(level, { flow=false }={}) {
 		return "";
 	}
 
@@ -373,59 +379,44 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Value data for this advancement stored on an actor.
-	 * @type {DataModel|object}
-	 */
-	value(actor) {
-		return actor.system.progression?.advancement[this.valueID] ?? {};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Dynamic changes this advancement applies to the actor during data preparation. Changes will be made
 	 * after base data is prepared any before active effects are applied using a mechanism similar to active
 	 * effects. By default changes will be made in advancement order, but if priority is provided it can be
 	 * used to adjust the order.
-	 * @param {BlackFlagActor} actor - Actor to which the changes should be applied.
 	 * @param {number} level - Level for changes to apply.
 	 * @returns {EffectChangeData[]}
 	 * @abstract
 	 */
-	changes(actor, level) { }
+	changes(level) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Locally apply this advancement to the actor.
-	 * @param {BlackFlagActor} actor - Actor to which the changes should be applied.
 	 * @param {number} level - Level being advanced.
 	 * @param {object} data - Data from the advancement form.
 	 * @abstract
 	 */
-	async apply(actor, level, data) { }
+	async apply(level, data) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Locally apply this advancement from stored data, if possible. If stored data can not be restored for any reason,
 	 * throw an AdvancementError to display the advancement flow UI.
-	 * @param {BlackFlagActor} actor - Actor to which the changes should be applied.
 	 * @param {number} level - Level being advanced.
 	 * @param {object} data - Data from {@link Advancement#reverse} needed to restore this advancement.
 	 * @abstract
 	 */
-	async restore(actor, level, data) { }
+	async restore(level, data) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Locally remove this advancement's changes from the actor.
-	 * @param {BlackFlagActor} actor - Actor to which the changes should be applied.
 	 * @param {number} level - Level being removed.
 	 * @returns {object} - Data that can be passed to the {@link Advancement#restore} method to restore this reversal.
 	 * @abstract
 	 */
-	async reverse(actor, level) { }
-
+	async reverse(level) { }
 }

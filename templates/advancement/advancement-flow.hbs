@@ -1,0 +1,14 @@
+<form id="{{appId}}" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+	<header>
+		<div class="advancement-name">
+			<figure class="icon">
+				<img src="{{icon}}">
+			</figure>
+			<h4>{{{title}}}</h4>
+		</div>
+	</header>
+
+	{{#if summary}}
+		<div class="summary">{{{summary}}}</div>
+	{{/if}}
+</form>
