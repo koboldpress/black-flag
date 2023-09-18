@@ -118,11 +118,11 @@ export default class PCData extends ActorDataModel {
 					determineType: value => "",
 					modelLookup: type => null
 				})),
-				background: new fields.RegisteredDocumentField("background"),
-				heritage: new fields.RegisteredDocumentField("heritage"),
-				lineage: new fields.RegisteredDocumentField("lineage"),
+				background: new fields.LocalDocumentField(foundry.documents.BaseItem),
+				heritage: new fields.LocalDocumentField(foundry.documents.BaseItem),
+				lineage: new fields.LocalDocumentField(foundry.documents.BaseItem),
 				levels: new fields.MappingField(new foundry.data.fields.SchemaField({
-					class: new fields.RegisteredDocumentField("class"),
+					class: new fields.LocalDocumentField(foundry.documents.BaseItem),
 					time: new fields.TimeField()
 				})),
 				xp: new foundry.data.fields.SchemaField({
@@ -291,5 +291,46 @@ export default class PCData extends ActorDataModel {
 				ability: ability?.labels.abbreviation
 			};
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Progression             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Set a lineage, heritage, or background item on the actor.
+	 * @param {BlackFlagItem} document - Document to set.
+	 * @returns {Promise}
+	 */
+	async setConcept(document) {
+		if ( !["lineage", "heritage", "background"].includes(document.type) ) throw new Error(
+			`Documents of the type ${document.type} cannot be set using the setConcept method.`
+		);
+		if ( this.progression[document.type] ) throw new Error(
+			`A ${document.type} already exists on the actor ${this.parent.name}.`
+		);
+
+		const newDocument = await this.parent.createEmbeddedDocuments("Item", [document.toObject()], {render: false});
+		return this.parent.update({[`system.progression.${document.type}`]: newDocument[0]});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Level up using the provided class.
+	 * @param {BlackFlagItem} cls - Class in which to level up.
+	 * @returns {Promise}
+	 */
+	async levelUp(cls) {
+		const newLevel = (this.progression.level ?? 0) + 1;
+		if ( newLevel > CONFIG.BlackFlag.maxLevel ) throw new Error(
+			`Character cannot be leveled up past ${CONFIG.BlackFlag.maxLevel}.`
+		);
+
+		let existingClass = this.progression.classes[cls.identifier]?.document;
+		if ( !existingClass ) {
+			existingClass = (await this.parent.createEmbeddedDocuments("Item", [cls.toObject()], {render: false}))[0];
+		}
+		return this.parent.update({[`system.progression.levels.${newLevel}.class`]: existingClass});
 	}
 }

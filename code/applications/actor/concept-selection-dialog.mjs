@@ -100,7 +100,8 @@ export default class ConceptSelectionDialog extends FormApplication {
 		event.preventDefault();
 		const uuid = event.target.closest("[data-uuid]").dataset.uuid;
 		const document = await fromUuid(uuid);
-		this.actor.setConcept(this.type, document);
+		if ( this.type === "class" ) await this.actor.system.levelUp(document);
+		else await this.actor.system.setConcept(document);
 		this.close();
 	}
 }
