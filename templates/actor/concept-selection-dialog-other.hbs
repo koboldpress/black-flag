@@ -1,3 +1,29 @@
-<form class="{{cssClass}}" autocomplete="off">
-	
+<form autocomplete="off">
+	{{#each options}}
+		<section class="option" data-uuid="{{this.document.uuid}}">
+			<figure class="poster">
+				<img src="{{this.document.img}}">
+				<button class="choose">{{localize "BF.Action.Choose.Generic"}}</button>
+				<div class="window-mask" inert></div>
+			</figure>
+			<div class="info">
+				<header>
+					<h1 class="name">{{this.document.name}}</h1>
+					<div class="source">{{this.system.description.source}}</div>
+				</header>
+				<div class="description">
+					{{{this.enriched.description}}}
+					{{#if this.system.description.journal}}
+						<a class="content-link" data-uuid="{{this.system.description.journal}}">
+							More Information
+						</a>
+					{{/if}}
+				</div>
+			</div>
+		</section>
+	{{else}}
+		<section class="empty">
+			<p>{{localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural}}</p>
+		</section>
+	{{/each}}
 </form>

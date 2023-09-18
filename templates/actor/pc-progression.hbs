@@ -3,34 +3,58 @@
 		List current overall level, XP if XP mode is selected, level-up button, etc.
 	</section>
 	<section class="details">
-		<fieldset class="ability-mode">
-			<legend>Abilities</legend>
+		<fieldset class="ability-selection">
+			<legend>{{localize "BF.Ability.Label[other]"}}</legend>
 			{{#if system.progression.abilities.assignmentComplete}}
-				Done
+				{{#with (lookup CONFIG.abilityAssignment.methods system.progression.abilities.method) as |method|}}
+					<figure class="icon">
+						<img src="{{method.icon}}">
+					</figure>
+					<span>
+						{{localize (lookup method "label")}}
+					</span>
+				{{/with}}
 			{{else}}
-				<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
+				<span>
+					<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
+				</span>
 			{{/if}}
 		</fieldset>
 		{{#*inline "blackFlag.typeControl"}}
 			{{#with (lookup system.progression type)}}
-				<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
+				<figure class="icon">
+					<img src="{{this.img}}">
+				</figure>
+				<span>
+					<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
+				</span>
+				{{#if @root.editingMode}}
+					<span class="controls">
+						<a data-action="item" data-sub-action="delete" data-item-id="{{this.id}}">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					</span>
+				{{/if}}
 			{{else}}
-				<a data-action="progression" data-sub-action="select" data-type="{{type}}">Choose</a>
+				<span>
+					<a data-action="progression" data-sub-action="select" data-type="{{type}}">
+						{{localize "BF.Action.Choose.Generic"}}
+					</a>
+				</span>
 			{{/with}}
 		{{/inline}}
-		{{!--
 		<fieldset class="lineage">
-			<legend>Lineage</legend>
+			<legend>{{localize "BF.Item.Type.Lineage[one]"}}</legend>
 			{{> "blackFlag.typeControl" type="lineage"}}
 		</fieldset>
 		<fieldset class="heritage">
-			<legend>Heritage</legend>
+			<legend>{{localize "BF.Item.Type.Heritage[one]"}}</legend>
 			{{> "blackFlag.typeControl" type="heritage"}}
 		</fieldset>
 		<fieldset class="background">
-			<legend>Background</legend>
+			<legend>{{localize "BF.Item.Type.Background[one]"}}</legend>
 			{{> "blackFlag.typeControl" type="background"}}
-		</fieldset>--}}
+		</fieldset>
 	</section>
 	<section class="levels">
 		{{#each system.progression.levels as |level number|}}

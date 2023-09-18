@@ -189,10 +189,12 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseAbilities() {
+		this.progression.abilities.assignmentComplete = true;
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			ability._source = this._source.abilities?.[key] ?? {};
 			ability.check ??= {};
 			ability.value = ability.base;
+			if ( !ability.base ) this.progression.abilities.assignmentComplete = false;
 		}
 	}
 

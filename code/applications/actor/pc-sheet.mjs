@@ -1,8 +1,8 @@
-import log from "../../utils/logging.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
+import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 
-export default class PCSheet extends ActorSheet {
+export default class PCSheet extends BaseActorSheet {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -12,8 +12,7 @@ export default class PCSheet extends ActorSheet {
 			tabs: [
 				{group: "progression", navSelector: ".progression", contentSelector: "form", initial: "front"},
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
-			],
-			template: "systems/black-flag/templates/actor/pc.hbs"
+			]
 		});
 	}
 
@@ -23,24 +22,11 @@ export default class PCSheet extends ActorSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
-		context.system = this.document.system;
-		context.source = this.document.toObject().system;
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for ( const element of html.querySelectorAll("[data-action]") ) {
-			element.addEventListener("click", this._onAction.bind(this));
-		}
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -58,9 +44,8 @@ export default class PCSheet extends ActorSheet {
 					case "select":
 						if ( !properties.type ) return;
 						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);
-					default: break;
 				}
 		}
-		return log(`Unrecognized action: ${action}`, { level: "warn" });
+		return super._onAction(event);
 	}
 }

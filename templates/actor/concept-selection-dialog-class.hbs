@@ -1,12 +1,12 @@
 <form autocomplete="off">
 	{{#each options}}
 		<section class="option" data-uuid="{{this.document.uuid}}">
-			{{> "blackFlag.class-summary" item=this.document system=this.document.system enriched=this.enriched}}
-			<button class="choose">Choose {{this.document.name}}</button>
+			{{> "blackFlag.concept-summary" item=this.document system=this.document.system enriched=this.enriched}}
+			<button class="choose">{{localize "BF.Action.Choose.Specific" option=this.document.name}}</button>
 		</section>
 	{{else}}
 		<section class="empty">
-			<p>No options available, create a class in the world or enable a compendium containing classes.</p>
+			<p>{{localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural}}</p>
 		</section>
 	{{/each}}
 </form>

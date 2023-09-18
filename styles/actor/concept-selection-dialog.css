@@ -1,5 +1,20 @@
+.concept-selection-dialog {
+	.empty {
+		height: 100%;
+		width: 100%;
+		padding: 1rem;
+		font-size: var(--font-size-16);
+
+		> p {
+			max-width: 30em;
+		}
+	}
+}
+
 .concept-selection-dialog.class .window-content {
+	height: 800px;
 	max-width: min(1400px, 75vw);
+	min-width: 400px;
 	overflow-x: scroll;
 	padding: 0;
 
@@ -15,6 +30,90 @@
 				width: unset;
 				margin-inline: 0.5rem;
 				margin-block: 0.5rem;
+			}
+		}
+	}
+}
+
+.concept-selection-dialog:not(.class) .window-content {
+	max-height: min(800px, 75vh);
+	min-height: 400px;
+	max-width: min(800px, 75vw);
+	min-width: 500px;
+	overflow-y: scroll;
+	padding: 0;
+
+	form {
+		.option {
+			contain: layout;
+			height: calc(200px + 2px);
+			width: 100%;
+			border-block-end: 2px solid black;
+
+			.poster {
+				margin: 0;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: 160px;
+				contain: layout;
+				
+				& img {
+					width: 146px;
+					height: 146px;
+					margin: 2px;
+					border: none;
+				}
+
+				& button {
+					position: absolute;
+					width: calc(130px - 2px);
+					top: 160px;
+					bottom: 10px;
+					left: 10px;
+					right: 20px;
+					z-index: 1;
+					background: rgb(228, 228, 202);
+					font-weight: bold;
+					font-variant: small-caps;
+				}
+
+				.window-mask {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background-image: url("artwork/interface/window-mask.svg");
+					background-repeat: no-repeat;
+					background-size: contain;
+					z-index: 0;
+				}
+			}
+
+			.info {
+				margin-inline-start: 150px;
+				display: flex;
+				flex-wrap: wrap;
+				align-content: flex-start;
+				padding: 1rem;
+
+				> header {
+					flex: 100% 1 0;
+					display: flex;
+					align-items: first baseline;
+					justify-content: space-between;
+
+					.name {
+						border: none;
+						margin: 0;
+						font-size: var(--font-size-20);
+					}
+					.source {
+						font-variant: small-caps;
+					}
+				}
 			}
 		}
 	}

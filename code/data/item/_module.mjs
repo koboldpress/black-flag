@@ -1,9 +1,20 @@
+import BackgroundData from "./background-data.mjs";
 import ClassData from "./class-data.mjs";
+import HeritageData from "./heritage-data.mjs";
+import LineageData from "./lineage-data.mjs";
 
 export {
-	ClassData
+	BackgroundData,
+	ClassData,
+	HeritageData,
+	LineageData
 };
 
+export {default as ConceptTemplate} from "./templates/concept-template.mjs";
+
 export const config = {
-	class: ClassData
+	background: BackgroundData,
+	class: ClassData,
+	heritage: HeritageData,
+	lineage: LineageData
 };

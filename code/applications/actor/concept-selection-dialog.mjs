@@ -2,9 +2,7 @@
  * Dialog that presents a list of class, subclass, lineage, heritage, or background options for the player to choose.
  */
 export default class ConceptSelectionDialog extends FormApplication {
-	constructor(actor, type, options) {
-		// TODO: Set width & height appropriate depending on type
-
+	constructor(actor, type, options={}) {
 		super(options);
 		this.options.classes.push(type);
 		this.actor = actor;
@@ -32,8 +30,8 @@ export default class ConceptSelectionDialog extends FormApplication {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept-selection-dialog"],
-			height: 800,
-			width: "auto"
+			width: "auto",
+			height: "auto"
 		});
 	}
 
@@ -46,16 +44,25 @@ export default class ConceptSelectionDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get title() {
+		return game.i18n.format("BF.ConceptSelection.Title", {
+			type: game.i18n.localize(CONFIG.Item.typeLabels[this.type])
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
-		context.options = [];
 		context.options = await Promise.all(
 			Object.values(CONFIG.BlackFlag.registration.list(this.type) ?? {}).map(o => this.getOptionData(o))
 		);
+		context.typeName = game.i18n.localize(CONFIG.Item.typeLabels[this.type]).toLowerCase();
+		context.typeNamePlural = game.i18n.localize(CONFIG.Item.typeLabelsPlural[this.type]).toLowerCase();
 		return context;
 	}
 

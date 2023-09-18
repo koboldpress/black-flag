@@ -38,14 +38,20 @@
 				{{localize "BF.HitDie.Label[one]"}}: {{system.hitDie}}
 			</li>
 		{{/if}}
-		<li class="key-ability">
-			Key Ability: x or y
-		</li>
-		<li>
-			Proficiencies
-		</li>
-		<li>
-			Spellcasting if applicable
-		</li>
+		{{#if system.keyAbility}}
+			<li class="key-ability">
+				Key Ability: x or y
+			</li>
+		{{/if}}
+		{{#if system.proficiencies}}
+			<li>
+				Proficiencies
+			</li>
+		{{/if}}
+		{{#if system.spellcasting}}
+			<li>
+				Spellcasting if applicable
+			</li>
+		{{/if}}
 	</ul>
 </div>
