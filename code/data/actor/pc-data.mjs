@@ -228,6 +228,24 @@ export default class PCData extends ActorDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareDerivedClasses() {
+		this.progression.classes = {};
+		for ( const data of Object.values(this.progression.levels) ) {
+			const document = data.class;
+			if ( !document ) continue;
+			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
+			classData.levels += 1;
+		}
+		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+		for ( const data of Object.values(this.progression.classes) ) {
+			data.levelsLabel = game.i18n.format(`BF.Level.Count[${pluralRules.select(data.levels)}]`, {
+				number: data.levels
+			});
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareDerivedHitPoints() {
 		// TODO: This will need to be updated to handle multiple classes later, but will work for level 1
 		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];

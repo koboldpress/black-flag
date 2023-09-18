@@ -55,20 +55,37 @@
 			<legend>{{localize "BF.Item.Type.Background[one]"}}</legend>
 			{{> "blackFlag.typeControl" type="background"}}
 		</fieldset>
+		{{#each system.progression.classes as |data identifier|}}
+			<fieldset class="class" data-class="{{identifier}}">
+				<legend>{{localize "BF.Item.Type.Class[one]"}}</legend>
+				<figure class="icon">
+					<img src="{{data.document.img}}">
+				</figure>
+				<span>
+					<a data-action="item" data-sub-action="view" data-item-id="{{data.document.id}}">{{data.document.name}}</a>
+				</span>
+				<span class="levels">{{data.levelsLabel}}</span>
+			</fieldset>
+		{{else}}
+			<fieldset class="class" data-class="{{identifier}}">
+				<legend>{{localize "BF.Item.Type.Class[one]"}}</legend>
+				<span>
+					<a data-action="progression" data-sub-action="select" data-type="class">
+						{{localize "BF.Action.Choose.Generic"}}
+					</a>
+				</span>
+			</fieldset>
+		{{/each}}
 	</section>
 	<section class="levels">
 		{{#each system.progression.levels as |level number|}}
 			<div class="level">
 				<h3>
-					<span class="level">Level {{number}}</span>
+					<span class="level">{{localize "BF.Level.Specific" level=number}}</span>
 					<span class="class">{{level.class.name}}</span>
 				</h3>
 				<p>List level's advancements</p>
 			</div>
-		{{else}}
-			<p>
-				<a data-action="progression" data-sub-action="select" data-type="class">Choose</a>
-			</p>
 		{{/each}}
 	</section>
 </main>

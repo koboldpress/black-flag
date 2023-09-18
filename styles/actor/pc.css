@@ -1,0 +1,24 @@
+@import "main-tab.css";
+@import "progression-tab.css";
+
+.black-flag.pc.sheet {
+	.profile {
+		border: 1px solid transparent;
+		border-radius: 0;
+
+		&[data-edit] {
+			border-color: var(--bf-color-border-blue);
+		}
+	}
+
+	input[name="name"] {
+		border: 1px solid var(--bf-color-border-blue);
+		border-radius: 0;
+
+		&:disabled {
+			border-width: 2px;
+			background: none;
+			color: black;
+		}
+	}
+}
