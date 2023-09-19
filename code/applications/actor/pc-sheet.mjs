@@ -109,7 +109,10 @@ export default class PCSheet extends BaseActorSheet {
 							yes: () => this.actor.system.levelDown()
 						});
 					case "level-up":
-						return this.actor.system.levelUp();
+						const cls = this.actor.system.progression.levels[1]?.class;
+						// TODO: Will need to present a dialog confirming whether to level up existing class or multiclass
+						if ( cls ) return this.actor.system.levelUp(cls);
+						properties.type = "class";
 					case "select":
 						if ( !properties.type ) return;
 						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);

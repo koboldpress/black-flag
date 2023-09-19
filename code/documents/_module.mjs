@@ -19,4 +19,5 @@ export function registerDocumentClasses() {
 }
 
 export {BlackFlagActor, advancement, BlackFlagItem};
+export {DocumentMixin} from "./mixin.mjs";
 export {default as Proficiency} from "./proficiency.mjs";

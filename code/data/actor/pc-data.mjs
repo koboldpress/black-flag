@@ -230,11 +230,12 @@ export default class PCData extends ActorDataModel {
 
 	prepareDerivedClasses() {
 		this.progression.classes = {};
-		for ( const data of Object.values(this.progression.levels) ) {
+		for ( const [level, data] of Object.entries(this.progression.levels) ) {
 			const document = data.class;
 			if ( !document ) continue;
 			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
 			classData.levels += 1;
+			data.levels = { character: Number(level), class: classData.levels };
 		}
 		const pluralRules = new Intl.PluralRules(game.i18n.lang);
 		for ( const data of Object.values(this.progression.classes) ) {
@@ -253,7 +254,7 @@ export default class PCData extends ActorDataModel {
 		if ( !hpAdvancement ) return;
 		const hp = this.attributes.hp;
 		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
-		const base = hpAdvancement.getAdjustedTotal(this.parent, ability?.mod ?? 0);
+		const base = hpAdvancement.getAdjustedTotal(ability?.mod ?? 0);
 		hp.max = base;
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
@@ -323,16 +324,27 @@ export default class PCData extends ActorDataModel {
 	 * @returns {Promise}
 	 */
 	async levelUp(cls) {
-		const newLevel = (this.progression.level ?? 0) + 1;
-		if ( newLevel > CONFIG.BlackFlag.maxLevel ) throw new Error(
+		const levels = {
+			character: (this.progression.level ?? 0) + 1,
+			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1
+		};
+		if ( levels.character > CONFIG.BlackFlag.maxLevel ) throw new Error(
 			`Character cannot be leveled up past ${CONFIG.BlackFlag.maxLevel}.`
 		);
 
+		// Create class if it doesn't already exist on actor
 		let existingClass = this.progression.classes[cls.identifier]?.document;
 		if ( !existingClass ) {
 			existingClass = (await this.parent.createEmbeddedDocuments("Item", [cls.toObject()], {render: false}))[0];
 		}
-		return this.parent.update({[`system.progression.levels.${newLevel}.class`]: existingClass});
+
+		// Add new progression data
+		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass});
+
+		// Apply advancements for the new level
+		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
+			await advancement.apply(levels, undefined, { initial: true });
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -342,15 +354,18 @@ export default class PCData extends ActorDataModel {
 	 * @returns {Promise}
 	 */
 	async levelDown() {
-		const highestLevel = this.progression.levels[this.progression.level];
-		const cls = highestLevel.class;
-		const levels = this.progression.classes[cls.identifier].levels;
+		const cls = this.progression.levels[this.progression.level].class;
+		const levels = { character: this.progression.level, class: this.progression.classes[cls.identifier].levels };
 
-		// TODO: Unapply any advancement
+		// Remove advancements for the old level
+		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
+			await advancement.reverse(levels);
+		}
 
+		// Remove progression data for level
 		await this.parent.update({[`system.progression.levels.-=${this.progression.level}`]: null});
-		if ( levels <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id]);
 
-		return this.parent;
+		// If class has no more levels, remove it from the actor
+		if ( levels.class <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id]);
 	}
 }

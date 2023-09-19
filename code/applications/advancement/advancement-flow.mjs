@@ -63,7 +63,8 @@ export default class AdvancementFlow extends FormApplication {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/advancement-flow.hbs",
-			popOut: false
+			popOut: false,
+			closeOnSubmit: false
 		});
 	}
 
@@ -105,17 +106,17 @@ export default class AdvancementFlow extends FormApplication {
 			appId: this.id,
 			advancement: this.advancement,
 			type: this.advancement.constructor.typeName,
-			title: this.advancement.titleForLevel(level, { actor: this.actor, flow: true }),
+			title: this.advancement.titleForLevel(level, { flow: true }),
 			icon: this.advancement.icon,
-			summary: this.advancement.summaryForLevel(level, { actor: this.actor, flow: true }),
+			summary: this.advancement.summaryForLevel(level, { flow: true }),
 			levels: this.levels,
-			configure: !this.advancement.configuredForLevel(this.actor, level)
+			needsConfiguration: !this.advancement.configuredForLevel(level)
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _updateObject(event, formData) {
-		await this.advancement.apply(actor, this.levels, formData);
+		await this.advancement.apply(this.levels, formData);
 	}
 }

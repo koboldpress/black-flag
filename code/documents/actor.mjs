@@ -1,4 +1,6 @@
-export default class BlackFlagActor extends Actor {
+import { DocumentMixin } from "./mixin.mjs";
+
+export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
@@ -20,8 +22,8 @@ export default class BlackFlagActor extends Actor {
 	 */
 	*advancementForLevel(level=0) {
 		for ( const item of this.items ) {
-			for ( const advancement of item.system.advancement?.values() ?? [] ) {
-				if ( advancement.levels.includes(level) ) yield advancement;
+			for ( const advancement of item.advancementForLevel(level) ) {
+				yield advancement;
 			}
 		}
 	}

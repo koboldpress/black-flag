@@ -40,7 +40,7 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 		let keys = [];
 		for ( const key in (prototype ? this.prototype : this) ) { keys.push(key); }
 		for ( let cls of [this, ...foundry.utils.getParentClasses(this)].reverse() ) {
-			if ( ["Base", "SystemDataModel", "DataModel"].includes(cls.name) ) continue;
+			if ( ["Base", "BaseDataModel", "DataModel"].includes(cls.name) ) continue;
 			if ( prototype ) cls = cls.prototype;
 			keys.push(...Object.getOwnPropertyNames(cls));
 		}

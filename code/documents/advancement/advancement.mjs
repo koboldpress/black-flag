@@ -120,22 +120,21 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Key under which the value data is stored on the actor.
-	 * @type {string}
-	 */
-	get valueID() {
-		if ( this.item.isEmbedded ) return `${this.item.id}_${this.id}`;
-		return `${this.item.identifier}_${this.id}`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Item to which this advancement belongs.
 	 * @type {BlackFlagItem}
 	 */
 	get item() {
 		return this.parent.parent;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Actor to which this advancement's item belongs, if the item is embedded.
+	 * @type {BlackFlagActor|null}
+	 */
+	get actor() {
+		return this.item.parent ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -156,7 +155,17 @@ export default class Advancement extends BaseAdvancement {
 	 * @type {DataModel|object}
 	 */
 	get value() {
-		return this.actor?.system.progression?.advancement[this.valueID] ?? {};
+		return foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Key path under which the value data is stored on the actor.
+	 * @type {string}
+	 */
+	get valueKeyPath() {
+		return `system.progression.advancement.${this.item.id}.${this.id}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -353,6 +362,20 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Update this advancement's value data stored on the actor.
+	 * @param {object} [updates={}] - A differential data object.
+	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the update workflow.
+	 * @returns {Promise<Advancement>} - Updated advancement instance.
+	 */
+	async updateValue(updates={}, context={}) {
+		if ( !this.parent.isEmbedded ) throw new Error("Cannot update values for an advancement not stored on an actor.");
+		await this.parent.actor.update({[`system.progression.advancement.${this.valueID}`]: updates}, context);
+		return this;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Can an advancement of this type be added to the provided item?
 	 * @param {BlackFlagItem} item - Item to check against.
 	 * @returns {boolean} - Should this be enabled as an option on the {@link AdvancementSelection} dialog?
@@ -379,6 +402,13 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * @typedef {object} AdvancementLevels
+	 *
+	 * @property {number} character - Character levels for advancement being applied.
+	 * @property {number} class - Levels in whatever class was advanced at current level.
+	 */
+
+	/**
 	 * Dynamic changes this advancement applies to the actor during data preparation. Changes will be made
 	 * after base data is prepared any before active effects are applied using a mechanism similar to active
 	 * effects. By default changes will be made in advancement order, but if priority is provided it can be
@@ -393,30 +423,20 @@ export default class Advancement extends BaseAdvancement {
 
 	/**
 	 * Locally apply this advancement to the actor.
-	 * @param {number} level - Level being advanced.
-	 * @param {object} data - Data from the advancement form.
+	 * @param {AdvancementLevels} levels - Levels being advanced.
+	 * @param {object} [data] - Data from the advancement form.
+	 * @param {object} options
+	 * @param {boolean} [options.initial=false] - Is this the initial application?
 	 * @abstract
 	 */
-	async apply(level, data) { }
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Locally apply this advancement from stored data, if possible. If stored data can not be restored for any reason,
-	 * throw an AdvancementError to display the advancement flow UI.
-	 * @param {number} level - Level being advanced.
-	 * @param {object} data - Data from {@link Advancement#reverse} needed to restore this advancement.
-	 * @abstract
-	 */
-	async restore(level, data) { }
+	async apply(levels, data, { initial=false }={}) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Locally remove this advancement's changes from the actor.
-	 * @param {number} level - Level being removed.
-	 * @returns {object} - Data that can be passed to the {@link Advancement#restore} method to restore this reversal.
+	 * @param {AdvancementLevels} levels - Levels being removed.
 	 * @abstract
 	 */
-	async reverse(level) { }
+	async reverse(levels) { }
 }

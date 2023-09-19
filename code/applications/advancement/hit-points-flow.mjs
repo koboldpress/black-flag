@@ -14,65 +14,45 @@ export default class HitPointsFlow extends AdvancementFlow {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
-		const source = this.advancement.value;
-		const value = source.granted?.[this.level];
-
-		// If value is empty, `useAverage` should default to the value selected at the previous level
-		let useAverage = value === "avg";
-		if ( !value ) {
-			const lastValue = source.granted?.[this.level - 1];
-			if ( lastValue === "avg" ) useAverage = true;
-		}
-
 		return foundry.utils.mergeObject(super.getData(), {
 			isFirstLevel: this.levels.character === 1,
-			denomination: this.advancement.configuration.denomination,
-			data: {
-				value: Number.isInteger(value) ? value : "",
-				useAverage
-			}
+			denomination: this.advancement.configuration.denomination
 		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	activateListeners(html) {
-		this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
-			this.form.querySelector(".rollResult").disabled = event.target.checked;
-			this.form.querySelector(".rollButton").disabled = event.target.checked;
-			this._updateRollResult();
-		});
-		this.form.querySelector(".rollButton")?.addEventListener("click", async () => {
-			const roll = await this.advancement.actor.rollHitPoints();
-			this.form.querySelector(".rollResult").value = roll?.total ?? 0;
-		});
-		this._updateRollResult();
-	}
+	async _updateObject(event, formData) {
+		const action = event.submitter.dataset.action;
 
-	/* <><><><> <><><><> <><><><> <><><><> */
+		// Take the average value
+		if ( action === "take-average" ) {
+			return this.advancement.apply(this.levels, { [this.levels.class]: "avg" });
+		} else if ( action === "roll" ) {
+			const roll = new Roll(`1d${this.advancement.configuration.denomination}`);
+			await roll.evaluate();
 
-	/**
-	 * Update the roll result display when the average result is taken.
-	 * @internal
-	 */
-	_updateRollResult() {
-		if ( !this.form.elements.useAverage?.checked ) return;
-		this.form.elements.value.value = this.advancement.average;
-	}
+			// Create chat message with roll results
+			const cls = getDocumentClass("ChatMessage");
+			const flavor = game.i18n.format("BF.Action.Roll.Specific", {
+				type: game.i18n.localize("BF.HitPoint.Label[other]")
+			});
+			const messageData = {
+				flavor,
+				title: `${flavor}: ${this.advancement.actor.name}`,
+				speaker: cls.getSpeaker({actor: this.advancement.actor}),
+				user: game.user.id,
+				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+				content: "",
+				sound: CONFIG.sounds.dice,
+				rolls: [roll],
+				"flags.blackFlag.type": "hitPoints"
+			};
+			const message = new cls(messageData);
+			await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	_updateObject(event, formData) {
-		let value;
-		if ( formData.useMax ) value = "max";
-		else if ( formData.useAverage ) value = "avg";
-		else if ( Number.isInteger(formData.value) ) value = parseInt(formData.value);
-
-		if ( value !== undefined ) return this.advancement.apply(this.level, { [this.level]: value });
-
-		this.form.querySelector(".rollResult")?.classList.add("error");
-		const errorType = formData.value ? "Invalid" : "Empty";
-		throw new Advancement.ERROR(game.i18n.localize(`Advancement.HitPoints.Error.${errorType}`));
+			return this.advancement.apply(this.levels, { [this.levels.class]: roll });
+		}
 	}
 }
 

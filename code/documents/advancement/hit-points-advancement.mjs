@@ -97,7 +97,7 @@ export default class HitPointsAdvancement extends Advancement {
 		const value = data[level];
 		if ( value === "max" ) return denomination;
 		if ( value === "avg" ) return (denomination / 2) + 1;
-		if ( value instanceof Roll ) return value.total;
+		if ( value.total ) return value.total;
 		if ( Number.isNumeric(value) ) return Number(value);
 		return null;
 	}
@@ -118,8 +118,9 @@ export default class HitPointsAdvancement extends Advancement {
 	 * Add the ability modifier and any bonuses to the provided hit points value to get the number to apply.
 	 * @param {number} value - Hit points taken at a given level.
 	 * @returns {number} - Hit points adjusted with ability modifier and per-level bonuses.
+	 * @internal
 	 */
-	#getApplicableValue(value) {
+	_getApplicableValue(value) {
 		const abilityId = CONFIG.BlackFlag.defaultAbilities.hitPoints || "constitution";
 		value = Math.max(value + (this.actor.system.abilities[abilityId]?.mod ?? 0), 1);
 		// value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
@@ -142,12 +143,40 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	apply(level, data) {
-		// let value = this.constructor.valueForLevel(data, this.configuration.denomination, level);
-		// if ( value === undefined ) return;
-		// this.actor.updateSource({
-		// 	"system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
-		// });
-		// this.updateSource({ "value.granted": data });
+	async apply(levels, data, { initial=false }={}) {
+		if ( initial ) {
+			data ??= this.value.granted ?? {};
+
+			// If 1st character level, always use max HP
+			if ( levels.character === 1 ) data[levels.class] = "max";
+
+			// TODO: If previously level used average, use that again
+			// else if (  ) data[levels.class] = "avg";
+
+			// Otherwise user intervention is required
+			else return;
+		}
+
+		let value = this.constructor.valueForLevel(data, this.configuration.denomination, levels.class);
+		if ( value === undefined ) return;
+
+		const updates = {
+			"system.attributes.hp.value": (this.actor.system.attributes.hp.value ?? 0) + this._getApplicableValue(value),
+			[`${this.valueKeyPath}.granted`]: data
+		};
+		return await this.actor.update(updates);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async reverse(levels) {
+		let value = this.valueForLevel(levels.class);
+		if ( value === undefined ) return;
+
+		const updates = {
+			"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
+			[`${this.valueKeyPath}.granted.-=${levels.class}`]: null
+		};
+		return await this.actor.update(updates);
 	}
 }

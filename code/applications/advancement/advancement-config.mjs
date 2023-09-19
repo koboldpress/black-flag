@@ -72,6 +72,7 @@ export default class AdvancementConfig extends FormApplication {
 
 	getData() {
 		const levels = Object.fromEntries(Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]));
+		// TODO: Allow "any level" for non-class items
 		const context = {
 			CONFIG: CONFIG.BlackFlag,
 			configuration: this.advancement.configuration,
