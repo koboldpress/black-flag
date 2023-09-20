@@ -34,7 +34,97 @@ export default class BaseActorSheet extends ActorSheet {
 
 		context.editingMode = this.editingMode;
 
+		await this.prepareItems(context);
+
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the items for display on the sheet.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 * @abstract
+	 */
+	async prepareItems(context) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Sort provided items into sections defined in `CONFIG.BlackFlag.sheetSections` for this actor type.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 * @param {async Function} callback - Method called for each item after it is added to a section.
+	 */
+	async _prepareItemSections(context, callback) {
+		context.sections = this._buildSections();
+
+		for ( const item of Array.from(context.actor.items).sort((a, b) => a.sort - b.sort) ) {
+			const section = this._organizeItem(item, context.sections);
+			if ( callback ) await callback(item, section);
+		}
+
+		for ( const tab of Object.values(context.sections) ) {
+			for ( const [key, section] of Object.entries(tab) ) {
+				if ( !this.editingMode && section.options?.autoHide && !section.items.length ) delete tab[key];
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Construct sheet sections based on data in `CONFIG.BlackFlag.sheetSections`.
+	 * @returns {object}
+	 * @internal
+	 */
+	_buildSections() {
+		const sections = {};
+
+		for ( const config of CONFIG.BlackFlag.sheetSections[this.actor.type] ?? {} ) {
+			const tab = sections[config.tab] ??= {};
+			tab[config.id] = {
+				config,
+				label: game.i18n.localize(config.label),
+				items: [],
+				options: config.options
+			};
+		}
+
+		return sections;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Place an item in the appropriate section.
+	 * @param {BlackFlagItem} item - Item to organize.
+	 * @param {object} sections - Sections to populate.
+	 * @returns {object} - Section into which the item was inserted.
+	 * @internal
+	 */
+	_organizeItem(item, sections) {
+		const checkFilter = (item, filter) => Object.entries(filter)
+			.every(([key, value]) => foundry.utils.getProperty(item, key) === value);
+
+		for ( const tab of Object.values(sections) ) {
+			for ( const section of Object.values(tab) ) {
+				for ( const type of section.config?.types ?? [] ) {
+					if ( checkFilter(item, type) ) {
+						section.items.push(item);
+						return section;
+					}
+				}
+			}
+		}
+
+		// No matching section found, add to uncategorized section if editing mode is enabled
+		if ( !this.editingMode ) return;
+		const firstTab = Object.keys(sections)[0];
+		const section = sections[firstTab].uncategorized ??= {
+			label: game.i18n.localize("BF.Item.Type.Unidentified[other]"), items: []
+		};
+		section.items.push(item);
+		return section;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,7 +173,8 @@ export default class BaseActorSheet extends ActorSheet {
 		const { action, subAction, ...properties } = event.currentTarget.dataset;
 		switch (action) {
 			case "item":
-				const item = this.actor.items.get(properties.itemId);
+				const itemId = properties.itemId ?? event.target.closest("[data-item-id]")?.dataset.itemId;
+				const item = this.actor.items.get(itemId);
 				switch (subAction) {
 					case "delete":
 						return item?.deleteDialog();

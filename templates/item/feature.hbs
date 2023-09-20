@@ -10,6 +10,28 @@
 	</header>
 
 	<main class="sheet-body">
+		<div class="category">
+			<label>
+				<span>{{localize "BF.Item.Feature.Category.Label"}}</span>
+				<select name="system.type.category">
+					{{selectOptions featureCategories selected=system.type.category blank=""}}
+				</select>
+			</label>
+			{{#if featureTypes}}
+				<label>
+					<span>{{localize "BF.Item.Feature.Type.Label"}}</span>
+					<select name="system.type.value">
+						{{selectOptions featureTypes selected=system.type.value blank=""}}
+					</select>
+				</label>
+			{{/if}}
+			{{#if (eq system.type.category "class")}}
+				<label>
+					<span>{{localize "BF.Level.Label[one]"}}</span>
+					<input type="number" name="system.level.value" value="{{system.level.value}}">
+				</label>
+			{{/if}}
+		</div>
 		{{editor enriched.description target="system.description.value" button=true
 			editable=editable engine="prosemirror" collaborate=false}}
 		<label class="source">

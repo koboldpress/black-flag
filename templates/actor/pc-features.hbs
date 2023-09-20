@@ -1,3 +1,36 @@
-<section>
-	<p>Features to be implemented&hellip;</p>
+<section class="features">
+	{{!-- TODO: Filters by action type --}}
+
+	<ol class="items-list">
+		{{#each sections.features as |section sectionId|}}
+			<li class="section" data-section="{{sectionId}}">
+				<header class="items-header">
+					<h3>{{localize section.label}}</h3>
+				</header>
+				<ol class="item-list">
+					{{#each section.items as |item|}}
+						<li class="item" data-item-id="{{item.id}}">
+							<div class="item-name">
+								{{item.name}}
+							</div>
+							<fieldset class="controls">
+								{{#if @root.editingMode}}
+									<a data-action="item" data-sub-action="edit">
+										<i class="fa-solid fa-edit"></i>
+									</a>
+									<a data-action="item" data-sub-action="delete">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								{{else}}
+									<a data-action="item" data-sub-action="view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+								{{/if}}
+							</fieldset>
+						</li>
+					{{/each}}
+				</ol>
+			</li>
+		{{/each}}
+	</ol>
 </section>
