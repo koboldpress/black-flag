@@ -1,3 +1,4 @@
+import { linkForUUID } from "./document.mjs";
 import { loadCachedSVG } from "./svg.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -74,7 +75,8 @@ function inlineSVG(path, options={}) {
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		"blackFlag-groupedSelectOptions": groupedSelectOptions,
-		"blackFlag-inlineSVG": inlineSVG
+		"blackFlag-inlineSVG": inlineSVG,
+		"blackFlag-linkForUUID": linkForUUID
 	});
 }
 

@@ -8,7 +8,7 @@ export default class PCData extends ActorDataModel {
 	static metadata = {
 		type: "pc",
 		category: "person",
-		localization: "ToV.Actor.Type.PC",
+		localization: "BF.Actor.Type.PC",
 		sheet: {
 			application: PCSheet,
 			label: "BF.Sheet.PC"

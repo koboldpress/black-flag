@@ -1,0 +1,22 @@
+<form autocomplete="off">
+	<section>
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+		</fieldset>
+		<fieldset class="items drop-target">
+			<legend>{{localize "DOCUMENT.Items"}}</legend>
+			<ol>
+				{{#each configuration.pool}}
+					<li data-item-uuid="{{this.uuid}}">
+						<span class="name">{{{blackFlag-linkForUUID this.uuid}}}</span>
+						<span class="controls">
+							<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+						</span>
+					</li>
+				{{/each}}
+			</ol>
+			<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+		</fieldset>
+	</section>
+</form>

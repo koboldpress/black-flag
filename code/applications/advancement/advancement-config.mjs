@@ -25,6 +25,14 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Indicates that a `dragleave` listener is currently registered to the drop area.
+	 * @type {boolean}
+	 */
+	#dragLeaveListener = false;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Parent item to which this advancement belongs.
 	 * @type {BlackFlagItem}
 	 */
@@ -104,11 +112,16 @@ export default class AdvancementConfig extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	activateListeners(html) {
-		super.activateListeners(html);
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
 
 		// Remove an item from the list
-		if ( this.options.dropKeyPath ) html.on("click", "[data-action='delete']", this._onItemDelete.bind(this));
+		if ( this.options.dropKeyPath ) {
+			for ( const element of html.querySelectorAll('[data-action="delete"]') ) {
+				element.addEventListener("click", this._onItemDelete.bind(this));
+			}
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -161,7 +174,7 @@ export default class AdvancementConfig extends FormApplication {
 		if ( !uuidToDelete ) return;
 		const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
 		const updates = { configuration: await this.prepareConfigurationUpdate({
-			[this.options.dropKeyPath]: items.filter(uuid => uuid !== uuidToDelete)
+			[this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
 		}) };
 		await this.advancement.update(updates);
 	}
@@ -174,7 +187,37 @@ export default class AdvancementConfig extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async _onDragOver(event) {
+		// If over a drop target, highlight it and display preview in area
+		const dropTarget = event.target.closest(".drop-target");
+		if ( !dropTarget ) return;
+
+		dropTarget.classList.add("drag-over");
+
+		if ( !this.#dragLeaveListener ) {
+			dropTarget.addEventListener("dragleave", this._onDragLeave.bind(this), { once: true });
+			this.#dragLeaveListener = true;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Remove drag target highlight when drag leaves.
+	 * @param {DragEvent} event
+	 */
+	async _onDragLeave(event) {
+		this.#dragLeaveListener = false;
+		const dropTarget = event.target.closest(".drop-target");
+		if ( !dropTarget ) return;
+		dropTarget.classList.remove("drag-over");
+	 }
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async _onDrop(event) {
+		this._onDragLeave(event);
+
 		if ( !this.options.dropKeyPath ) throw new Error(
 			"AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
 			+ " drag and drop on advancement config items."
@@ -200,11 +243,14 @@ export default class AdvancementConfig extends FormApplication {
 		}
 
 		// Abort if this uuid exists already
-		if ( existingItems.includes(item.uuid) ) {
+		if ( existingItems.find(i => i.uuid === item.uuid) ) {
 			return ui.notifications.warn(game.i18n.localize("BF.Advancement.Config.Warning.Duplicate"));
 		}
+		// TODO: Allow dragging to re-order entries
 
-		await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [...existingItems, item.uuid]});
+		await this.advancement.update({
+			[`configuration.${this.options.dropKeyPath}`]: [...existingItems, { uuid: item.uuid }]
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

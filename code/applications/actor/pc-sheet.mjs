@@ -64,7 +64,7 @@ export default class PCSheet extends BaseActorSheet {
 			// TODO: Adjust this to provide proper class level once multi-classing is enabled
 
 			for ( const advancement of this.actor.advancementForLevel(Number(level)) ) {
-				const id = `${advancement.valueID}#${level}`;
+				const id = `${advancement.item.id}.${advancement.id}#${level}`;
 				const flow = this.advancementFlows[id]
 					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, levels);
 				flowIds.delete(id);

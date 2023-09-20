@@ -13,6 +13,10 @@ import * as advancement from "../documents/advancement/_module.mjs";
  * @enum {AdvancementTypeConfig}
  */
 export const _advancementTypes = {
+	grantFeatures: {
+		documentClass: advancement.GrantFeatures,
+		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+	},
 	hitPoints: {
 		documentClass: advancement.HitPointsAdvancement,
 		validItemTypes: new Set(["class"])

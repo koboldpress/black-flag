@@ -11,7 +11,7 @@
 	</header>
 	<ol class="level-list">
 		{{#each advancement as |data level|}}
-			<li data-level="{{level}}">
+			<li class="advancement-level" data-level="{{level}}">
 				<div class="header">
 					<h3>
 						{{#if (eq level "unconfigured")}}
@@ -23,7 +23,7 @@
 				</div>
 				<ol class="advancement-list">
 					{{#each data.items}}
-						<li data-advancement-id="{{this.id}}">
+						<li class="advancement-entry" data-advancement-id="{{this.id}}">
 							<div class="advancement-name">
 								<figure class="icon">
 									<img src="{{this.icon}}">
@@ -31,7 +31,7 @@
 								<h4>{{{this.title}}}</h4>
 							</div>
 							{{#if @root.editable}}
-								<div class="controls">
+								<div class="advancement-controls">
 									<a data-action="advancement" data-sub-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">
 										<i class="fas fa-edit"></i>
 									</a>
@@ -41,7 +41,7 @@
 								</div>
 							{{/if}}
 							{{#if this.summary}}
-								<div class="summary">{{{this.summary}}}</div>
+								<div class="advancement-summary">{{{this.summary}}}</div>
 							{{/if}}
 						</li>
 					{{/each}}

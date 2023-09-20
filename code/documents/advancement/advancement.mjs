@@ -344,6 +344,7 @@ export default class Advancement extends BaseAdvancement {
 	 */
 	async update(data={}, context={}) {
 		await this.item.updateEmbeddedDocuments("Advancement", [{ ...data, _id: this.id }], context);
+		if ( context.render !== false ) this.render();
 		return this;
 	}
 

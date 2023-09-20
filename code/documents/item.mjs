@@ -22,8 +22,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @yields {Advancement}
 	 */
 	*advancementForLevel(level=0) {
-		for ( const advancement of this.system.advancement?.values() ?? [] ) {
-			if ( advancement.levels.includes(level) ) yield advancement;
+		for ( const advancement of this.system.advancement?.byLevel(level) ?? [] ) {
+			yield advancement;
 		}
 	}
 

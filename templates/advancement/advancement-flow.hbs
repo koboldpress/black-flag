@@ -1,4 +1,4 @@
-<form id="{{appId}}" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
 	<header>
 		<div class="advancement-name">
 			<figure class="icon">
@@ -9,6 +9,6 @@
 	</header>
 
 	{{#if summary}}
-		<div class="summary">{{{summary}}}</div>
+		<div class="advancement-summary">{{{summary}}}</div>
 	{{/if}}
 </form>

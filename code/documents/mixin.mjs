@@ -63,25 +63,34 @@ export const DocumentMixin = Base => class extends Base {
 		const lastCreated = game.settings.get(game.system.id, "lastCreatedTypes");
 		const selectedType = data.type ?? lastCreated[documentName] ?? CONFIG[documentName]?.defaultType ?? types[0];
 
-		const categories = {};
-		for ( const [key, value] of Object.entries(CONFIG[documentName]?.categories) ) {
-			categories[key] = { label: game.i18n.localize(value.label), children: {} };
-			for ( const type of value.types ) {
-				categories[key].children[type] = {
-					label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[type] ?? type),
-					chosen: type === selectedType
-				};
+		let categories;
+		if ( !foundry.utils.isEmpty(CONFIG[documentName]?.categories) ) {
+			categories = {};
+			for ( const [key, value] of Object.entries(CONFIG[documentName]?.categories) ) {
+				categories[key] = { label: game.i18n.localize(value.label), children: {} };
+				for ( const type of value.types ) {
+					categories[key].children[type] = {
+						label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[type] ?? type),
+						chosen: type === selectedType
+					};
+				}
 			}
 		}
 
 		// Render the document creation form
+		console.log(types);
 		const html = await renderTemplate("systems/black-flag/templates/item/item-create.hbs", {
 			folders,
 			name: data.name || game.i18n.format("DOCUMENT.New", {type: label}),
 			folder: data.folder,
 			hasFolders: folders.length >= 1,
 			type: selectedType,
-			categories
+			categories,
+			types: types.reduce((obj, t) => {
+				const label = CONFIG[documentName]?.typeLabels?.[t] ?? t;
+				obj[t] = game.i18n.localize(label);
+				return obj;
+			}, {})
 		});
 
 		// Render the confirmation dialog window

@@ -5,7 +5,8 @@ module.exports = {
 		require("postcss-import"),
 		postcssPresetEnv({
 			features: {
-				"is-pseudo-class": false
+				"is-pseudo-class": false,
+				"logical-properties-and-values": false
 			}
 		})
 	]

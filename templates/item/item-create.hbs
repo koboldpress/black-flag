@@ -10,7 +10,11 @@
 		<label>{{localize "Type"}}</label>
 		<div class="form-fields">
 			<select name="type">
-				{{blackFlag-groupedSelectOptions categories selected=type}}
+				{{#if categories}}
+					{{blackFlag-groupedSelectOptions categories selected=type}}
+				{{else}}
+					{{selectOptions types selected=type}}
+				{{/if}}
 			</select>
 		</div>
 	</div>
