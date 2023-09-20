@@ -1,5 +1,6 @@
+export * from "./array.mjs";
 export {default as log} from "./logging.mjs";
-export * from "./objects.mjs";
+export * from "./object.mjs";
 export * from "./svg.mjs";
 export * from "./templates.mjs";
 export * from "./text.mjs";

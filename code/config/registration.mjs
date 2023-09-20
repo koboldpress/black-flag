@@ -1,4 +1,4 @@
-import { sortObjectEntries } from "../utils/objects.mjs";
+import { sortObjectEntries } from "../utils/object.mjs";
 import log from "../utils/logging.mjs";
 import { slugify } from "../utils/text.mjs";
 

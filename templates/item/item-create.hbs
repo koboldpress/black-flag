@@ -1,0 +1,35 @@
+<form id="document-create" autocomplete="off">
+	<div class="form-group">
+		<label>{{localize "Name"}}</label>
+			<div class="form-fields">
+				<input type="text" name="name" placeholder="{{name}}" autofocus>
+			</div>
+	</div>
+
+	<div class="form-group">
+		<label>{{localize "Type"}}</label>
+		<div class="form-fields">
+			<select name="type">
+				{{blackFlag-groupedSelectOptions categories selected=type}}
+			</select>
+		</div>
+	</div>
+
+	{{#if hasFolders}}
+		<div class="form-group">
+			<label>{{localize "DOCUMENT.Folder"}}</label>
+			<div class="form-fields">
+				<select name="folder">
+					{{#select folder}}
+						<option value=""></option>
+						{{#each folders}}
+							<option value="{{this.id}}">{{this.name}}</option>
+						{{/each}}
+					{{/select}}
+				</select>
+			</div>
+		</div>
+	{{/if}}
+
+	{{{content}}}
+</form>

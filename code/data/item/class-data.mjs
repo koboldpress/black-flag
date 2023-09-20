@@ -8,6 +8,7 @@ export default class ClassData extends ConceptTemplate {
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "class",
+			category: "concept",
 			localization: "BF.Item.Type.Class"
 		});
 	}

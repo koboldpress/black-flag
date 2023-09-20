@@ -1,3 +1,4 @@
+import { insertBetween } from "../utils/array.mjs";
 import log from "../utils/logging.mjs";
 
 /**
@@ -9,6 +10,7 @@ export function registerDataModels(documentType, models) {
 	log(`Registering ${documentType.name.toLowerCase()} data models`);
 
 	const config = CONFIG[documentType.name];
+	config.categories = CONFIG.BlackFlag._documentCategories[documentType.name];
 	config.typeLabelsPlural ??= {};
 	for ( let [type, model] of Object.entries(models) ) {
 		if ( model.metadata.module ) type = `${model.metadata.module}.${type}`;
@@ -16,6 +18,10 @@ export function registerDataModels(documentType, models) {
 		config.typeLabels[type] = `${model.metadata.localization}[one]`;
 		config.typeLabelsPlural[type] = `${model.metadata.localization}[other]`;
 		if ( model.metadata.icon ) config.typeIcons[type] = model.metadata.icon;
+		if ( config.categories?.[model.metadata.category] ) {
+			const types = config.categories[model.metadata.category].types;
+			if ( !types.includes(type) ) insertBetween(types, type, model.metadata.categoryPosition);
+		}
 	}
 }
 

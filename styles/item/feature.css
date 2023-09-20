@@ -1,0 +1,60 @@
+.black-flag.feature.sheet form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	.sheet-header {
+		.icon {
+			flex: 64px 0 0;
+			margin: 0;
+
+			> img {
+				width: 64px;
+				height: 64px;
+			}
+		}
+		> h1 {
+			flex-grow: 1;
+		}
+	}
+
+	.sheet-body {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+
+		.editor {
+			flex-grow: 1;
+
+			&:not(.prosemirror) {
+				margin-inline: 0.5rem;
+			}
+			&.prosemirror {
+				height: 100%;
+				max-width: unset;
+				margin-inline: -0.5rem;
+			}
+		}
+
+		.source {
+			display: flex;
+			gap: 0.5rem;
+			align-items: first baseline;
+			margin-inline-end: 1rem;
+
+			> span {
+				font-size: var(--font-size-12);
+				font-variant: small-caps;
+				font-weight: 700;
+			}
+			> input {
+				flex-grow: 1;
+				width: unset;
+				height: unset;
+				padding-inline: 0.35em;
+				font-size: var(--font-size-12);
+				font-variant: small-caps;
+			}
+		}
+	}
+}

@@ -36,4 +36,15 @@ export function registerSettings() {
 		default: false,
 		type: Boolean
 	});
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Hidden Settings           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	game.settings.register(game.system.id, "lastCreatedTypes", {
+		scope: "client",
+		config: false,
+		default: {},
+		type: Object
+	});
 }
