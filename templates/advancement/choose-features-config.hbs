@@ -1,0 +1,82 @@
+<form autocomplete="off">
+	<section class="left-column">
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+			<label>
+				<span>
+					{{localize "BF.Advancement.Core.Hint.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Advancement.Core.Hint.Hint"></i>
+				</span>
+				<textarea name="configuration.hint">{{configuration.hint}}</textarea>
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>{{localize "BF.Advancement.ChooseFeatures.ChoiceDetails"}}</legend>
+			<label>
+				<span>
+					{{localize "BF.Advancement.Config.AllowDrops.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Advancement.Config.AllowDrops.Hint"></i>
+				</span>
+				<input type="checkbox" name="configuration.allowDrops" {{checked configuration.allowDrops}}>
+			</label>
+			<label>
+				<span>{{localize "BF.Advancement.ChooseFeatures.Type.Label"}}</span>
+				<select name="configuration.type">
+					{{selectOptions validTypes selected=configuration.type}}
+				</select>
+			</label>
+			{{#if typeRestriction}}
+				<label>
+					<span>{{typeRestriction.categoryLabel}}</span>
+					<select name="configuration.restriction.category">
+						{{selectOptions typeRestriction.categoryOptions selected=configuration.restriction.category blank="—"}}
+					</select>
+				</label>
+
+				{{#if typeRestriction.typeOptions}}
+					<label>
+						<span>{{typeRestriction.typeLabel}}</span>
+						<select name="configuration.restriction.type">
+							{{selectOptions typeRestriction.typeOptions selected=configuration.restriction.type blank="—"}}
+						</select>
+					</label>
+				{{/if}}
+			{{/if}}
+		</fieldset>
+		<fieldset class="items drop-area drop-target">
+			<legend>{{localize "DOCUMENT.Items"}}</legend>
+			<ol>
+				{{#each configuration.pool}}
+					<li data-item-uuid="{{this.uuid}}">
+						<span class="name">{{{blackFlag-linkForUUID this.uuid}}}</span>
+						<span class="controls">
+							<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+						</span>
+					</li>
+				{{/each}}
+			</ol>
+			<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+		</fieldset>
+	</section>
+
+	<section class="right-column">
+		<fieldset>
+			<legend>
+				{{localize "BF.Advancement.ChooseFeatures.Choices.Label"}}
+				<i class="hintIcon" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint"></i>
+			</legend>
+			<ol class="level-list">
+				{{#each levels as |label level|}}
+					<li class="level">
+						<label>
+							<span>{{label}}</span>
+							{{numberInput (lookup ../configuration.choices level) placeholder="0"
+								name=(concat "configuration.choices." level) min=1 step=1}}
+						</label>
+					</li>
+				{{/each}}
+			</ol>
+		</fieldset>
+	</section>
+</form>

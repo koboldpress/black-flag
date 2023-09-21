@@ -1,0 +1,23 @@
+<form autocomplete="off" class="drop-target">
+	{{#each choices}}
+		<section class="option" data-uuid="{{this.document.uuid}}">
+			<div class="info">
+				<header>
+					<h1 class="name">{{this.document.name}}</h1>
+					<div class="source">{{this.system.description.source}}</div>
+				</header>
+				<div class="description">
+					{{{this.enriched.description}}}
+				</div>
+			</div>
+			<div class="choose">
+				<button class="choose">{{localize "BF.Action.Choose.Generic"}}</button>
+			</div>
+		</section>
+	{{/each}}
+	{{#if allowDrops}}
+		<section class="drop-area">
+			<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+		</section>
+	{{/if}}
+</form>

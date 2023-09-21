@@ -25,10 +25,10 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Indicates that a `dragleave` listener is currently registered to the drop area.
-	 * @type {boolean}
+	 * Stored information about the current drag event.
+	 * @type {{ listener: boolean, time: number|null, payload: object|null, valid: boolean }}
 	 */
-	#dragLeaveListener = false;
+	#dragData = { listener: false, time: null, payload: null, valid: null };
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -188,16 +188,34 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onDragOver(event) {
-		// If over a drop target, highlight it and display preview in area
-		const dropTarget = event.target.closest(".drop-target");
+		// TODO: Convert to _onDragEnter listener
+
+		const dropTarget = event.target.closest(".drop-area");
 		if ( !dropTarget ) return;
 
-		dropTarget.classList.add("drag-over");
+		const diff = Date.now() - this.#dragData.time;
+		this.#dragData.time = Date.now();
 
-		if ( !this.#dragLeaveListener ) {
+		if ( !this.#dragData.listener ) {
 			dropTarget.addEventListener("dragleave", this._onDragLeave.bind(this), { once: true });
-			this.#dragLeaveListener = true;
+			this.#dragData.listener = true;
 		}
+
+		const data = TextEditor.getDragEventData(event);
+		if ( !this.#dragData.payload
+			|| !foundry.utils.isEmpty(foundry.utils.diffObject(data, this.#dragData.payload))
+			|| diff > 10000 ) {
+			try {
+				const item = await Item.implementation.fromDropData(data);
+				this._validateDroppedItem(event, item);
+				this.#dragData.payload = data;
+				this.#dragData.valid = true;
+			} catch(err) {
+				this.#dragData.valid = false;
+			}
+		}
+		dropTarget.classList.add(this.#dragData.valid ? "valid" : "invalid");
+		event.dataTransfer.dropEffect = this.#dragData.valid ? "copy" : "all";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -207,11 +225,12 @@ export default class AdvancementConfig extends FormApplication {
 	 * @param {DragEvent} event
 	 */
 	async _onDragLeave(event) {
-		this.#dragLeaveListener = false;
-		const dropTarget = event.target.closest(".drop-target");
+		this.#dragData.listener = false;
+		const dropTarget = event.target?.closest(".drop-area");
 		if ( !dropTarget ) return;
-		dropTarget.classList.remove("drag-over");
-	 }
+		dropTarget.classList.remove("valid");
+		dropTarget.classList.remove("invalid");
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -237,11 +256,6 @@ export default class AdvancementConfig extends FormApplication {
 
 		const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
 
-		// Abort if this uuid is the parent item
-		if ( item.uuid === this.item.uuid ) {
-			return ui.notifications.error(game.i18n.localize("BF.Advancement.Config.Warning.Recursive"));
-		}
-
 		// Abort if this uuid exists already
 		if ( existingItems.find(i => i.uuid === item.uuid) ) {
 			return ui.notifications.warn(game.i18n.localize("BF.Advancement.Config.Warning.Duplicate"));
@@ -263,6 +277,10 @@ export default class AdvancementConfig extends FormApplication {
 	 * @throws An error if the item is invalid.
 	 * @protected
 	 */
-	_validateDroppedItem(event, item) {}
-
+	_validateDroppedItem(event, item) {
+		// Abort if this uuid is the parent item
+		if ( item.uuid === this.item.uuid ) {
+			throw new Error(game.i18n.localize("BF.Advancement.Config.Warning.Recursive"));
+		}
+	}
 }

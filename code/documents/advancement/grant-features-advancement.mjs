@@ -72,21 +72,35 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	/**
+	 * Create items on the actor with the proper flags.
+	 * @param {string[]} uuids - UUIDs of items to create.
+	 * @returns {object[]} - Array of data for storing in value.
+	 */
+	async createItems(uuids) {
 		const items = [];
 		const added = [];
-		for ( const { uuid } of Object.values(this.configuration.pool) ) {
+		for ( const uuid of uuids ) {
 			const source = await fromUuid(uuid);
 			if ( !source ) continue;
 			const id = foundry.utils.randomID();
 			items.push(source.clone({
 				_id: id,
+				folder: null,
+				sort: null,
 				"flags.black-flag.sourceId": uuid,
 				"flags.black-flag-advancementOrigin": `${this.item.id}.${this.id}`
 			}, {keepId: true}).toObject());
 			added.push({ document: id, uuid });
 		}
 		await this.actor.createEmbeddedDocuments("Item", items, {keepId: true, render: false});
+		return added;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async apply(levels, data, { initial=false }={}) {
+		const added = await this.createItems(Object.values(this.configuration.pool).map(d => d.uuid));
 		// TODO: Choose character or class level depending on item type
 		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(levels.character)}`]: added});
 	}
@@ -99,9 +113,11 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? [])
 			.map(d => d.document.id ?? d.document).filter(id => this.actor.items.has(id));
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, {render: false});
-		return await this.actor.update({[`${this.valueKeyPath}.${keyPath.replace(/\.([\w\d]+)$/, ".-=$1")}`]: null});
+		return await this.actor.update({[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null});
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Helper Methods            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -115,7 +131,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	_validateItemType(item, { strict=true }={}) {
 		if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
 		const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
-		if ( strict ) throw new Error(game.i18n.format("BF.Advancement.Config.Warning.Invalid", {type}));
+		if ( strict ) throw new Error(game.i18n.format("BF.Advancement.Config.Warning.Invalid", { type }));
 		return false;
 	}
 }

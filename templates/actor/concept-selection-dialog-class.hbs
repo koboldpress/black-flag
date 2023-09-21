@@ -1,5 +1,5 @@
 <form autocomplete="off">
-	{{#each options}}
+	{{#each choices}}
 		<section class="option" data-uuid="{{this.document.uuid}}">
 			{{> "blackFlag.concept-summary" item=this.document system=this.document.system enriched=this.enriched}}
 			<button class="choose">{{localize "BF.Action.Choose.Specific" option=this.document.name}}</button>

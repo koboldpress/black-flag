@@ -1,0 +1,30 @@
+<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+	<header>
+		<div class="advancement-name">
+			<figure class="icon">
+				<img src="{{icon}}">
+			</figure>
+			<h4>{{{title}}}</h4>
+		</div>
+		{{#if needsConfiguration}}
+			<div class="advancement-actions">
+				<button data-action="select-choice">
+					{{localize "BF.Advancement.ChooseFeatures.Action.Choose"}}
+				</button>
+			</div>
+		{{/if}}
+	</header>
+
+	<div class="advancement-summary">
+		{{#each choosen}}
+			<span class="choice-entry">
+				{{{blackFlag-linkForUUID this.uuid}}}
+				{{#if (or @root.editingMode @root.needsConfiguration)}}
+					<a data-action="remove-choice" data-id="{{this.id}}">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				{{/if}}
+			</span>
+		{{/each}}
+	</div>
+</form>

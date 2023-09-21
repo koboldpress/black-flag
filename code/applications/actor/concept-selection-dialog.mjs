@@ -58,7 +58,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
-		context.options = await Promise.all(
+		context.choices = await Promise.all(
 			Object.values(CONFIG.BlackFlag.registration.list(this.type) ?? {}).map(o => this.getOptionData(o))
 		);
 		context.typeName = game.i18n.localize(CONFIG.Item.typeLabels[this.type]).toLowerCase();

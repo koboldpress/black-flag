@@ -105,6 +105,7 @@ export default class AdvancementFlow extends FormApplication {
 		return {
 			appId: this.id,
 			advancement: this.advancement,
+			editingMode: this.advancement.actor.sheet.editingMode ?? false,
 			type: this.advancement.constructor.typeName,
 			title: this.advancement.titleForLevel(level, { flow: true }),
 			icon: this.advancement.icon,

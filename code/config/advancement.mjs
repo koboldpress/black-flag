@@ -13,6 +13,10 @@ import * as advancement from "../documents/advancement/_module.mjs";
  * @enum {AdvancementTypeConfig}
  */
 export const _advancementTypes = {
+	chooseFeatures: {
+		documentClass: advancement.ChooseFeatures,
+		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+	},
 	grantFeatures: {
 		documentClass: advancement.GrantFeatures,
 		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
@@ -37,4 +41,4 @@ export const hitDieSizes = [4, 6, 8, 10, 12];
  * Maximum character level.
  * @type {number}
  */
-export const maxLevel = 20;
+export const maxLevel = 5;

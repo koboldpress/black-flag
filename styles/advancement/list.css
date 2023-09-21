@@ -1,4 +1,7 @@
 .advancement-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
 	margin: 1rem;
 	margin-block-start: 0.5rem;
 	padding: 0;
@@ -8,9 +11,21 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		gap: 0.5rem;
+
+		&:not(:last-of-type) {
+			border-block-end: 1px solid var(--bf-color-border-gray);
+			padding-block-end: 0.25rem;
+		}
+
+		.advancement-controls {
+			display: flex;
+			gap: 1rem;
+		}
 
 		.advancement-summary {
 			flex: 100% 1 1;
+			padding-block-end: 0.25rem;
 		}
 	}
 }
