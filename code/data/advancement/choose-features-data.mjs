@@ -1,12 +1,12 @@
-import MappingField from "../fields/mapping-field.mjs";
+import * as fields from "../fields/_module.mjs";
 
-export default class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
+export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			hint: new foundry.data.fields.StringField({
 				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
 			}),
-			choices: new MappingField(new foundry.data.fields.NumberField({min: 1, integer: true}), {
+			choices: new fields.MappingField(new foundry.data.fields.NumberField({min: 1, integer: true}), {
 				label: "BF.Advancement.ChooseFeatures.Choices.Label", hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
 			}),
 			allowDrops: new foundry.data.fields.BooleanField({
@@ -23,6 +23,20 @@ export default class ItemChoiceConfigurationData extends foundry.abstract.DataMo
 				category: new foundry.data.fields.StringField({label: "BF.Item.Feature.Category.Label"}),
 				type: new foundry.data.fields.StringField({label: "BF.Item.Feature.Type.Label"})
 			})
+		};
+	}
+}
+
+/**
+ * Value data for the Choose Features advancement.
+ */
+export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
+	static defineSchema() {
+		return {
+			added: new fields.MappingField(new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+				document: new fields.LocalDocumentField(foundry.documents.BaseItem),
+				uuid: new foundry.data.fields.StringField()
+			})), {required: false, initial: undefined})
 		};
 	}
 }

@@ -114,10 +114,7 @@ export default class PCData extends ActorDataModel {
 				}),
 				// TODO: Currently falls back to being a plain object. This logic will need to be improved to ensure
 				// advancement value type data is properly loaded once advancements can be loaded.
-				advancement: new fields.MappingField(new fields.TypeField({
-					determineType: value => "",
-					modelLookup: type => null
-				})),
+				advancement: new fields.AdvancementValueField(),
 				background: new fields.LocalDocumentField(foundry.documents.BaseItem),
 				heritage: new fields.LocalDocumentField(foundry.documents.BaseItem),
 				lineage: new fields.LocalDocumentField(foundry.documents.BaseItem),

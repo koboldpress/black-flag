@@ -1,6 +1,8 @@
 import ChooseFeaturesConfig from "../../applications/advancement/choose-features-config.mjs";
 import ChooseFeaturesFlow from "../../applications/advancement/choose-features-flow.mjs";
-import ChooseFeaturesConfigurationData from "../../data/advancement/choose-features-data.mjs";
+import {
+	ChooseFeaturesConfigurationData, ChooseFeaturesValueData
+} from "../../data/advancement/choose-features-data.mjs";
 import { linkForUUID } from "../../utils/document.mjs";
 import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 
@@ -14,7 +16,8 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		return foundry.utils.mergeObject(super.metadata, {
 			name: "chooseFeatures",
 			dataModels: {
-				configuration: ChooseFeaturesConfigurationData
+				configuration: ChooseFeaturesConfigurationData,
+				value: ChooseFeaturesValueData
 			},
 			order: 50,
 			icon: "systems/black-flag/artwork/advancement/choose-features.svg",
@@ -83,11 +86,11 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	async apply(levels, data, { initial=false }={}) {
 		if ( initial || !data?.length ) return;
-		const added = await this.createItems(data);
 		// TODO: Move this selection logic into separate method
 		const level = this.item.type === "class" ? levels.class : levels.character;
-		const existing = foundry.utils.getProperty(this.value, this.storagePath(level)) ?? [];
-		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(level)}`]: existing.concat(added)});
+		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
+		const added = await this.createItems(data, existing);
+		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(level)}`]: added});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -97,7 +100,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		// TODO: Move this selection logic into separate method
 		const level = this.item.type === "class" ? levels.class : levels.character;
 		const keyPath = this.storagePath(level);
-		const addedCollection = foundry.utils.getProperty(this.value, keyPath).filter(a => a.document !== id);
+		const addedCollection = foundry.utils.getProperty(this.value._source, keyPath).filter(a => a.document !== id);
 		await this.actor.deleteEmbeddedDocuments("Item", [id], {render: false});
 		return await this.actor.update({[`${this.valueKeyPath}.${keyPath}`]: addedCollection});
 	}

@@ -5,7 +5,7 @@
  */
 
 /**
- * Data field that selects the appropriate advancement data model if available, otherwise defaults to generic
+ * Data field that selects the appropriate data model if available, otherwise defaults to generic
  * `ObjectField` to prevent issues with custom types that aren't currently loaded.
  *
  * @param {TypeFieldOptions} [options={}]

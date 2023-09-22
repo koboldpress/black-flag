@@ -1,4 +1,5 @@
 export * from "./advancement-field.mjs";
+export {default as AdvancementValueField} from "./advancement-value-field.mjs";
 export {default as FormulaField} from "./formula-field.mjs";
 export {default as IdentifierField} from "./identifier-field.mjs";
 export {default as LocalDocumentField} from "./local-document-field.mjs";

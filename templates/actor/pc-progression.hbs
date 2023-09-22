@@ -82,10 +82,10 @@
 		{{/each}}
 	</section>
 	<section class="levels">
-		{{#each progressionLevels as |level number|}}
-			<div class="level" data-level="{{number}}">
+		{{#each progressionLevels as |level|}}
+			<div class="level" data-level="{{level.number}}">
 				<h3>
-					<span class="level">{{localize "BF.Level.Specific" level=number}}</span>
+					<span class="level">{{localize "BF.Level.Specific" level=level.number}}</span>
 					<span class="class">{{level.class.name}}</span>
 					{{#if (and @root.editingMode level.highestLevel)}}
 						<span class="controls">

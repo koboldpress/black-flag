@@ -38,7 +38,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	configuredForLevel(level) {
-		return !foundry.utils.isEmpty(this.value);
+		return !foundry.utils.isEmpty(this.value.added);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -50,11 +50,9 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		}
 
 		// Link to items on the actor
-		return this.value.added.map(data => {
-			const item = this.actor.items.get(data.document);
-			// TODO: Won't be necessary once advancement data has proper data model applied
-			return item?.toAnchor({classes: ["content-link"]}).outerHTML ?? " ";
-		}).join("");
+		return this.value.added.map(data =>
+			data.document?.toAnchor({classes: ["content-link"]}).outerHTML ?? " "
+		).join("");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -75,11 +73,12 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/**
 	 * Create items on the actor with the proper flags.
 	 * @param {string[]} uuids - UUIDs of items to create.
+	 * @param {object[]} [existing] - Existing granted items.
 	 * @returns {object[]} - Array of data for storing in value.
 	 */
-	async createItems(uuids) {
+	async createItems(uuids, existing) {
 		const items = [];
-		const added = [];
+		const added = existing ?? [];
 		for ( const uuid of uuids ) {
 			const source = await fromUuid(uuid);
 			if ( !source ) continue;
@@ -110,8 +109,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	async reverse(levels) {
 		// TODO: Choose character or class level depending on item type
 		const keyPath = this.storagePath(levels.character);
-		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? [])
-			.map(d => d.document.id ?? d.document).filter(id => this.actor.items.has(id));
+		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, {render: false});
 		return await this.actor.update({[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null});
 	}

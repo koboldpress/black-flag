@@ -49,12 +49,13 @@ export default class PCSheet extends BaseActorSheet {
 	 * @param {object} context - Context being prepared.
 	 */
 	async prepareProgression(context) {
-		context.progressionLevels = {};
+		context.progressionLevels = [];
 		const flowIds = new Set(Object.keys(this.advancementFlows));
 
-		for ( let [level, data] of Object.entries(context.system.progression.levels) ) {
+		for ( let [level, data] of Object.entries(context.system.progression.levels).reverse() ) {
 			level = Number(level);
-			context.progressionLevels[level] = {
+			const levelData = {
+				number: level,
 				...data,
 				class: data.class,
 				flows: [],
@@ -68,8 +69,10 @@ export default class PCSheet extends BaseActorSheet {
 				const flow = this.advancementFlows[id]
 					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, levels);
 				flowIds.delete(id);
-				context.progressionLevels[level].flows.push(flow);
+				levelData.flows.push(flow);
 			}
+
+			context.progressionLevels.push(levelData);
 		}
 
 		// Remove any flows that no longer have associated advancements
@@ -117,7 +120,13 @@ export default class PCSheet extends BaseActorSheet {
 					case "level-up":
 						const cls = this.actor.system.progression.levels[1]?.class;
 						// TODO: Will need to present a dialog confirming whether to level up existing class or multiclass
-						if ( cls ) return this.actor.system.levelUp(cls);
+						if ( cls ) {
+							try {
+								return await this.actor.system.levelUp(cls);
+							} catch(err) {
+								return ui.notifications.warn(err.message);
+							}
+						}
 						properties.type = "class";
 					case "select":
 						if ( !properties.type ) return;

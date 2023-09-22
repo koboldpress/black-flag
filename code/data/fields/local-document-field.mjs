@@ -42,9 +42,22 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Step up through model's parents to find the specified collection.
+	 * @param {DataModel} model
+	 * @param {string} collection
+	 * @returns {EmbeddedCollection|void}
+	 */
+	_findCollection(model, collection) {
+		if ( !model.parent ) return;
+		return model.parent[collection] ?? this._findCollection(model.parent, collection);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	initialize(value, model, options={}) {
 		if ( this.idOnly ) return value;
-		const collection = model.parent?.[this.model.metadata.collection];
+		const collection = this._findCollection(model, this.model.metadata.collection);
 		return () => collection?.get(value) ?? null;
 	}
 
