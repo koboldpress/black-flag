@@ -73,7 +73,7 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareWarnings(levels, notifications) {
-		if ( this.configuredForLevel(levels.class) ) return;
+		if ( this.configuredForLevel(levels) ) return;
 		notifications.set(this.warningKey(levels), {
 			category: `level-${levels.character}`, section: "progression", level: "warn",
 			message: game.i18n.localize("BF.Advancement.HitPoints.Notification")
@@ -84,14 +84,14 @@ export default class HitPointsAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	configuredForLevel(level) {
-		return this.valueForLevel(level) !== null;
+	configuredForLevel(levels) {
+		return this.valueForLevel(levels.class) !== null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	titleForLevel(level, { flow=false }={}) {
-		const hp = this.valueForLevel(level);
+	titleForLevel(levels, { flow=false }={}) {
+		const hp = this.valueForLevel(levels.class);
 		if ( !hp || !flow ) return this.title;
 		return `${this.title}: <strong>${hp}</strong>`;
 	}
@@ -169,12 +169,14 @@ export default class HitPointsAdvancement extends Advancement {
 	async apply(levels, data, { initial=false }={}) {
 		if ( initial ) {
 			data ??= this.value.granted ?? {};
+			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
+			const previous = previousLevel?.class?.system.advancement.byType("hitPoints")[0];
 
 			// If 1st character level, always use max HP
 			if ( levels.character === 1 ) data[levels.class] = "max";
 
-			// TODO: If previously level used average, use that again
-			// else if (  ) data[levels.class] = "avg";
+			// If previously level used average, use that again
+			else if ( previous?.value.granted?.[previousLevel?.levels.class] === "avg" ) data[levels.class] = "avg";
 
 			// Otherwise user intervention is required
 			else return;

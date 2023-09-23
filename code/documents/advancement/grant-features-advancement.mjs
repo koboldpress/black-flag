@@ -37,15 +37,15 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	configuredForLevel(level) {
+	configuredForLevel(levels) {
 		return !foundry.utils.isEmpty(this.value.added);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	summaryForLevel(level, { flow=false }={}) {
+	summaryForLevel(levels, { flow=false }={}) {
 		// Link to compendium items
-		if ( !flow || !this.configuredForLevel(level) ) {
+		if ( !flow || !this.configuredForLevel(this.relavantLevel(levels)) ) {
 			return this.configuration.pool.reduce((html, item) => html + linkForUUID(item.uuid), " ");
 		}
 
@@ -100,15 +100,13 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	async apply(levels, data, { initial=false }={}) {
 		const added = await this.createItems(Object.values(this.configuration.pool).map(d => d.uuid));
-		// TODO: Choose character or class level depending on item type
-		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(levels.character)}`]: added});
+		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(this.relavantLevel(levels))}`]: added});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async reverse(levels) {
-		// TODO: Choose character or class level depending on item type
-		const keyPath = this.storagePath(levels.character);
+		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, {render: false});
 		return await this.actor.update({[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null});

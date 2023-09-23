@@ -53,15 +53,13 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	 * @returns {string}
 	 */
 	warningKey(levels) {
-		return `${this.relativeID}.${levels.class}.choice-required`;
+		return `${this.relativeID}.${this.relavantLevel(levels)}.choice-required`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareWarnings(levels, notifications) {
-		// TODO: Move this selection logic into separate method
-		const level = this.item.type === "class" ? levels.class : levels.character;
-		const choicesNeeded = (this.configuration.choices[level] ?? 0) - (this.value.added?.[level]?.length ?? 0);
+		const choicesNeeded = this.choicesRequired(this.relavantLevel(levels));
 		if ( choicesNeeded <= 0 ) return;
 		const pluralRules = new Intl.PluralRules(game.i18n.lang);
 		notifications.set(this.warningKey(levels), {
@@ -76,17 +74,25 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	configuredForLevel(level) {
-		// TODO: This method will need to be provided with proper level
-		const selectedCount = this.value.added?.[level]?.length ?? 0;
-		const targetCount = this.configuration.choices[level] ?? 0;
-		return selectedCount >= targetCount;
+	/**
+	 * Number of choices that still need to be made for the specified level.
+	 * @param {number} level
+	 * @returns {number}
+	 */
+	choicesRequired(level) {
+		return (this.configuration.choices[level] ?? 0) - (this.value.added?.[level]?.length ?? 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	titleForLevel(level, { flow=false }={}) {
-		const choiceCount = this.configuration.choices[level];
+	configuredForLevel(levels) {
+		return this.choicesRequired(this.relavantLevel(levels)) <= 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	titleForLevel(levels, { flow=false }={}) {
+		const choiceCount = this.configuration.choices[this.relavantLevel(levels)];
 		if ( !choiceCount ) return this.title;
 		return `${this.title} <span class="choice-count">(${game.i18n.format("BF.Advancement.ChooseFeatures.Choose", {
 			number: choiceCount
@@ -97,8 +103,8 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	summaryForLevel(level, { flow=false }={}) {
-		const items = this.value.added?.[level];
+	summaryForLevel(levels, { flow=false }={}) {
+		const items = this.value.added?.[this.relavantLevel(levels)];
 		if ( !items || !flow ) return "";
 		return Object.values(items).reduce((html, data) => html + linkForUUID(data.uuid), "");
 	}
@@ -115,8 +121,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	async apply(levels, data, { initial=false }={}) {
 		if ( initial || !data?.length ) return;
-		// TODO: Move this selection logic into separate method
-		const level = this.item.type === "class" ? levels.class : levels.character;
+		const level = this.relavantLevel(levels);
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
 		const added = await this.createItems(data, existing);
 		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(level)}`]: added});
@@ -126,9 +131,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	async reverse(levels, id) {
 		if ( !id ) return super.reverse(levels);
-		// TODO: Move this selection logic into separate method
-		const level = this.item.type === "class" ? levels.class : levels.character;
-		const keyPath = this.storagePath(level);
+		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const addedCollection = foundry.utils.getProperty(this.value._source, keyPath).filter(a => a.document !== id);
 		await this.actor.deleteEmbeddedDocuments("Item", [id], {render: false});
 		return await this.actor.update({[`${this.valueKeyPath}.${keyPath}`]: addedCollection});

@@ -35,12 +35,13 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 		}
 
 		for ( const level of this.item.system.advancement.levels ) {
+			const levels = { character: level, class: level };
 			const items = this.item.system.advancement.byLevel(level).map(a => ({
 				id: a.id,
-				order: a.sortingValueForLevel(level),
-				title: a.titleForLevel(level),
+				order: a.sortingValueForLevel(levels),
+				title: a.titleForLevel(levels),
 				icon: a.icon,
-				summary: a.summaryForLevel(level)
+				summary: a.summaryForLevel(levels)
 			}));
 			if ( !items.length ) continue;
 			advancement[level] = { items: items.sort((a, b) => a.order.localeCompare(b.order)) };

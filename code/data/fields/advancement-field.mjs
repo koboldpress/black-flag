@@ -42,7 +42,8 @@ export class AdvancementCollection extends Collection {
 			}
 		}
 		Object.entries(this.#levels).forEach(([lvl, data]) => data.sort((a, b) =>
-			a.sortingValueForLevel(lvl).localeCompare(b.sortingValueForLevel(lvl))
+			a.sortingValueForLevel({character: lvl, class: lvl})
+				.localeCompare(b.sortingValueForLevel({character: lvl, class: lvl}))
 		));
 	}
 

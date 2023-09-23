@@ -207,10 +207,10 @@ export default class Advancement extends BaseAdvancement {
 
 	/**
 	 * Has the player made choices for this advancement at the specified level?
-	 * @param {number} level - Level for which to check configuration.
+	 * @param {AdvancementLevels} levels - Level for which to check configuration.
 	 * @returns {boolean} - Have any available choices been made?
 	 */
-	configuredForLevel(level) {
+	configuredForLevel(levels) {
 		return true;
 	}
 
@@ -218,23 +218,23 @@ export default class Advancement extends BaseAdvancement {
 
 	/**
 	 * Value used for sorting this advancement at a certain level.
-	 * @param {number} level - Level for which this entry is being sorted.
+	 * @param {AdvancementLevels} levels - Level for which this entry is being sorted.
 	 * @returns {string} - String that can be used for sorting.
 	 */
-	sortingValueForLevel(level) {
-		return `${this.constructor.metadata.order.paddedString(4)} ${this.titleForLevel(level)}`;
+	sortingValueForLevel(levels) {
+		return `${this.constructor.metadata.order.paddedString(4)} ${this.titleForLevel(levels)}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Title displayed in advancement list for a specific level.
-	 * @param {number} level - Level for which to generate a title.
+	 * @param {AdvancementLevels} levels - Level for which to generate a title.
 	 * @param {object} [options={}]
 	 * @param {object} [options.flow=false] - Is this title being used in an advancement flow?
 	 * @returns {string} - HTML title with any level-specific information.
 	 */
-	titleForLevel(level, { flow=false }={}) {
+	titleForLevel(levels, { flow=false }={}) {
 		return this.title;
 	}
 
@@ -242,12 +242,12 @@ export default class Advancement extends BaseAdvancement {
 
 	/**
 	 * Summary content displayed beneath the title in the advancement list.
-	 * @param {number} level - Level for which to generate the summary.
+	 * @param {AdvancementLevels} levels - Level for which to generate the summary.
 	 * @param {object} [options={}]
 	 * @param {object} [options.flow=false] - Is this summary being used in an advancement flow?
 	 * @returns {string} - HTML content of the summary.
 	 */
-	summaryForLevel(level, { flow=false }={}) {
+	summaryForLevel(levels, { flow=false }={}) {
 		return "";
 	}
 
@@ -434,11 +434,11 @@ export default class Advancement extends BaseAdvancement {
 	 * after base data is prepared any before active effects are applied using a mechanism similar to active
 	 * effects. By default changes will be made in advancement order, but if priority is provided it can be
 	 * used to adjust the order.
-	 * @param {number} level - Level for changes to apply.
+	 * @param {AdvancementLevels} levels - Levels being applied.
 	 * @returns {EffectChangeData[]}
 	 * @abstract
 	 */
-	changes(level) { }
+	changes(levels) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -460,4 +460,17 @@ export default class Advancement extends BaseAdvancement {
 	 * @abstract
 	 */
 	async reverse(levels) { }
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Helper Methods            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Select the relevant level from the provided levels data.
+	 * @param {AdvancementLevels} levels
+	 * @returns {string}
+	 */
+	relavantLevel(levels) {
+		return ["class", "subclass"].includes(this.item.type) ? levels.class : levels.character;
+	}
 }

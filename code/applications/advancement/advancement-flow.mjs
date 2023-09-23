@@ -101,17 +101,16 @@ export default class AdvancementFlow extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
-		const level = ["class", "subclass"].includes(this.item.type) ? this.levels.class : this.levels.character;
 		return {
 			appId: this.id,
 			advancement: this.advancement,
 			editingMode: this.advancement.actor.sheet.editingMode ?? false,
 			type: this.advancement.constructor.typeName,
-			title: this.advancement.titleForLevel(level, { flow: true }),
+			title: this.advancement.titleForLevel(this.levels, { flow: true }),
 			icon: this.advancement.icon,
-			summary: this.advancement.summaryForLevel(level, { flow: true }),
+			summary: this.advancement.summaryForLevel(this.levels, { flow: true }),
 			levels: this.levels,
-			needsConfiguration: !this.advancement.configuredForLevel(level)
+			needsConfiguration: !this.advancement.configuredForLevel(this.levels)
 		};
 	}
 
