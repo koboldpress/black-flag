@@ -79,8 +79,10 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
-		const levels = Object.fromEntries(Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]));
-		// TODO: Allow "any level" for non-class items
+		const levels = Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]);
+		if ( this.advancement.supportsAnyLevel ) {
+			levels.unshift([0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")]);
+		}
 		const context = {
 			CONFIG: CONFIG.BlackFlag,
 			configuration: this.advancement.configuration,
@@ -92,7 +94,7 @@ export default class AdvancementConfig extends FormApplication {
 				identifier: this.advancement.title.slugify({ strict: true }),
 				identifierHint: this.advancement.constructor.metadata.identifier.hint
 			},
-			levels,
+			levels:  Object.fromEntries(levels),
 			showIdentifier: this.advancement.constructor.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.constructor.metadata.multiLevel
 		};

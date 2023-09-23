@@ -16,6 +16,8 @@
 					<h3>
 						{{#if (eq level "unconfigured")}}
 							{{localize "BF.Advancement.Core.Level.None"}}
+						{{else if (eq level "0")}}
+							{{localize "BF.Advancement.Core.Level.Any.Long"}}
 						{{else}}
 							{{localize "BF.Level.Specific" level=level}}
 						{{/if}}

@@ -53,22 +53,21 @@ export default class PCSheet extends BaseActorSheet {
 		context.progressionLevels = [];
 		const flowIds = new Set(Object.keys(this.advancementFlows));
 
-		for ( let [level, data] of Object.entries(context.system.progression.levels).reverse() ) {
-			level = Number(level);
+		const levels = [{ levels: { character: 0, class: 0 }}, ...Object.values(context.system.progression.levels)];
+		for ( let data of levels.reverse() ) {
+			const level = data.levels.character;
 			const levelData = {
 				number: level,
 				...data,
 				class: data.class,
 				flows: [],
-				highestLevel: level === context.system.progression.level
+				highestLevel: (level !== 0) && (level === context.system.progression.level)
 			};
-			const levels = { character: level, class: level };
-			// TODO: Adjust this to provide proper class level once multi-classing is enabled
 
-			for ( const advancement of this.actor.advancementForLevel(Number(level)) ) {
+			for ( const advancement of this.actor.advancementForLevel(level) ) {
 				const id = `${advancement.item.id}.${advancement.id}#${level}`;
 				const flow = this.advancementFlows[id]
-					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, levels);
+					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, data.levels);
 				flowIds.delete(id);
 				levelData.flows.push(flow);
 			}

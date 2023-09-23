@@ -29,7 +29,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 				modelLookup: type => this.metadata.dataModels?.configuration ?? null
 			}, {required: true}),
 			level: new foundry.data.fields.NumberField({
-				integer: true, initial: this.metadata?.multiLevel ? undefined : 1, min: 0
+				integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0
 			}),
 			title: new foundry.data.fields.StringField({initial: undefined}),
 			icon: new foundry.data.fields.FilePathField({initial: undefined, categories: ["IMAGE"]}),

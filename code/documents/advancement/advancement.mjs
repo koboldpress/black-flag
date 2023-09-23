@@ -54,9 +54,9 @@ export default class Advancement extends BaseAdvancement {
 	 *
 	 * @typedef {object} AdvancementMetadata
 	 * @property {string} name - Type name of the advancement.
-	 * @property {object} dataModels
-	 * @property {DataModel} configuration - Data model used for validating configuration data.
-	 * @property {DataModel} value - Data model used for validating value data.
+	 * @property {object} [dataModels]
+	 * @property {DataModel} [dataModels.configuration] - Data model used for validating configuration data.
+	 * @property {DataModel} [dataModels.value] - Data model used for validating value data.
 	 * @property {number} order - Number used to determine default sorting order of advancement items.
 	 * @property {string} icon - Icon used for this advancement type if no user icon is specified.
 	 * @property {string} title - Title to be displayed if no user title is specified.
@@ -161,11 +161,24 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Can this advancement be set to "any level".
+	 * @type {boolean}
+	 */
+	get supportsAnyLevel() {
+		return !["class", "subclass"].includes(this.item.type);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Value data for this advancement stored on an actor.
 	 * @type {DataModel|object}
 	 */
 	get value() {
-		return foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
+		const value = foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
+		const DataModel = this.constructor.metadata.dataModels?.value;
+		if ( !DataModel || value instanceof DataModel ) return value;
+		return new DataModel(value, { parent: this });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -189,6 +202,7 @@ export default class Advancement extends BaseAdvancement {
 		this.title = this.title || this.constructor.metadata.title;
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
+		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.supportsAnyLevel ? 0 : 1;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

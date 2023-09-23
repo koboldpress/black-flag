@@ -78,7 +78,6 @@ export const DocumentMixin = Base => class extends Base {
 		}
 
 		// Render the document creation form
-		console.log(types);
 		const html = await renderTemplate("systems/black-flag/templates/item/item-create.hbs", {
 			folders,
 			name: data.name || game.i18n.format("DOCUMENT.New", {type: label}),

@@ -100,7 +100,13 @@
 		{{#each progressionLevels as |level|}}
 			<div class="level" data-level="{{level.number}}">
 				<h3>
-					<span class="level">{{localize "BF.Level.Specific" level=level.number}}</span>
+					<span class="level">
+						{{#if (eq level.number 0)}}
+							{{localize "BF.Progression.Base"}}
+						{{else}}
+							{{localize "BF.Level.Specific" level=level.number}}
+						{{/if}}
+					</span>
 					<span class="class">
 						{{level.class.name}}
 						{{blackFlag-notificationBadge @root.actor category=(concat "level-" level.number)}}

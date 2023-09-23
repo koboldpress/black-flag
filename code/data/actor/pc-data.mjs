@@ -346,7 +346,8 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedAdvancementWarnings() {
-		for ( const data of Object.values(this.progression.levels) ) {
+		const anyLevel = { levels: { character: 0, class: 0 } };
+		for ( const data of [anyLevel, ...Object.values(this.progression.levels)] ) {
 			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
 				advancement.prepareWarnings(data.levels, this.parent.notifications);
 			}
