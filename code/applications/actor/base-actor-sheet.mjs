@@ -1,4 +1,5 @@
 import log from "../../utils/logging.mjs";
+import NotificationTooltip from "../notification-tooltip.mjs";
 
 /**
  * Sheet class containing implementation shared across all actor types.
@@ -28,6 +29,7 @@ export default class BaseActorSheet extends ActorSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
+		context.appID = this.id;
 		context.CONFIG = CONFIG.BlackFlag;
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
@@ -156,6 +158,8 @@ export default class BaseActorSheet extends ActorSheet {
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
+
+		NotificationTooltip.activateListeners(this.actor, html);
 
 		for ( const element of html.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", this._onAction.bind(this));

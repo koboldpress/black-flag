@@ -10,7 +10,7 @@ export default class PCSheet extends BaseActorSheet {
 			width: 820,
 			height: 740,
 			tabs: [
-				{group: "progression", navSelector: ".progression", contentSelector: "form", initial: "front"},
+				{group: "progression", navSelector: ".progression", contentSelector: ".sheet-container", initial: "front"},
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
 			]
 		});
@@ -32,6 +32,7 @@ export default class PCSheet extends BaseActorSheet {
 		const context = await super.getData(options);
 
 		this.prepareProgression(context);
+		if ( !this.actor.notifications ) this.actor.reset();
 
 		return context;
 	}

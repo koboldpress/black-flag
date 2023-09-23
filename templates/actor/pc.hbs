@@ -1,21 +1,31 @@
-<form class="{{cssClass}}" autocomplete="off">
+<div class="sheet-container">
 	<header class="sheet-head">
 		<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if editingMode}} data-edit="img"{{/if}}>
 		<h1>
-			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" {{disabled (not editingMode)}}>
+			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
+				form="{{appID}}-main-form" {{disabled (not editingMode)}}>
 		</h1>
 		<fieldset class="proficiency-bonus">
 			<legend>{{localize "BF.Proficiency.Abbreviation"}}</legend>
 			<span>{{system.attributes.proficiency}}</span>
 		</fieldset>
 		<fieldset class="progression" data-group="progression">
-			<legend>{{localize "BF.Progression.Label"}}</legend>
-			<a data-tab="front">Return</a>
-			<a data-tab="back">Level</a>
+			<legend>
+				{{localize "BF.Progression.Label"}}
+				{{blackFlag-notificationBadge actor section="progression"}}
+			</legend>
+			<a data-tab="front">
+				<span class="text">{{localize "BF.Progression.Action.Return"}}</span>
+				<span class="icon"><i class="fa-solid fa-reply"></i></span>
+			</a>
+			<a data-tab="back">
+				<span class="text">{{localize "BF.Level.Specific" level=system.progression.level}}</span>
+				<span class="icon"><i class="fa-solid fa-arrow-down-up-across-line"></i></span>
+			</a>
 		</fieldset>
 	</header>
 
-	<div class="tab" data-group="progression" data-tab="front">
+	<form id="{{appID}}-main-form" class="tab" data-group="progression" data-tab="front">
 		<nav class="sheet-navigation tabs" data-group="primary">
 			<a data-tab="main">Main</a>
 			<a data-tab="spellcasting">Spellcasting</a>
@@ -23,7 +33,7 @@
 			<a data-tab="features">Features</a>
 			<a data-tab="biography">Biography</a>
 		</nav>
-		
+
 		<main>
 			<div class="tab" data-group="primary" data-tab="main">
 				{{> "blackFlag.pc-main"}}
@@ -41,9 +51,9 @@
 				{{> "blackFlag.pc-biography"}}
 			</div>
 		</main>
-	</div>
+	</form>
 
 	<div class="tab" data-group="progression" data-tab="back">
 		{{> "blackFlag.pc-progression"}}
 	</div>
-</form>
+</div>

@@ -1,0 +1,60 @@
+.notification-badge {
+	--_notification-background-color: var(--_notification-base-color);
+	--_notification-border-color: color-mix(in oklab, var(--_notification-base-color), black 40%);
+	--_notification-symbol-color: color-mix(in oklab, var(--_notification-base-color), black 40%);
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.3em;
+	height: 1.3em;
+	margin-inline-start: 0.25em;
+
+	border: 1px dotted var(--_notification-border-color);
+	border-radius: 1em;
+
+	box-shadow: 0 2px 3px rgba(0 0 0 / 0.35);
+
+	background-color: var(--_notification-background-color);
+	color: black;
+
+	cursor: help;
+
+	&[data-notification-level="info"] {
+		--_notification-base-color: var(--notification-info-color);
+	}
+	&[data-notification-level="warn"] {
+		--_notification-base-color: var(--notification-warn-color);
+	}
+	&[data-notification-level="error"] {
+		--_notification-base-color: var(--notification-error-color);
+	}
+
+	> i {
+		font-size: 1em;
+	}
+}
+
+.notification-tooltip {
+	.notification-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+
+		margin: 0;
+		padding: 0.25rem;
+		padding-inline-end: 0.5rem;
+
+		list-style: none;
+
+		.notification-entry {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+	}
+
+	.notification-badge {
+		cursor: default;
+	}
+}

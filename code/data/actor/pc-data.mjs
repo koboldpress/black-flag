@@ -293,6 +293,57 @@ export default class PCData extends ActorDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedCharacterCreationWarnings() {
+		let order = 0;
+
+		// 1. Choose Class
+		if ( !Object.keys(this.progression.classes).length ) {
+			order++;
+			this.parent.notifications.set("no-class", {
+				level: "warn", category: "class", section: "progression", order,
+				message: game.i18n.localize("BF.Progression.Step.ChooseClass")
+			});
+		}
+
+		// 2. Determine Ability Scores
+		if ( !this.progression.abilities.assignmentComplete ) {
+			order++;
+			this.parent.notifications.set("no-abilities", {
+				level: "warn", category: "abilities", section: "progression", order,
+				message: game.i18n.localize("BF.Progression.Step.DetermineAbilityScores")
+			});
+		}
+
+		// 3. Choose a Lineage
+		if ( !this.progression.lineage ) {
+			order++;
+			this.parent.notifications.set("no-lineage", {
+				level: "warn", category: "lineage", section: "progression", order,
+				message: game.i18n.localize("BF.Progression.Step.ChooseLineage")
+			});
+		}
+
+		// 4. Choose a Heritage
+		if ( !this.progression.heritage ) {
+			order++;
+			this.parent.notifications.set("no-heritage", {
+				level: "warn", category: "heritage", section: "progression", order,
+				message: game.i18n.localize("BF.Progression.Step.ChooseHeritage")
+			});
+		}
+
+		// 5. Choose a Background
+		if ( !this.progression.background ) {
+			order++;
+			this.parent.notifications.set("no-background", {
+				level: "warn", category: "background", section: "progression", order,
+				message: game.i18n.localize("BF.Progression.Step.ChooseBackground")
+			});
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Progression             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

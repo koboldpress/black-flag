@@ -1,3 +1,4 @@
+import NotificationTooltip from "../applications/notification-tooltip.mjs";
 import { linkForUUID } from "./document.mjs";
 import { loadCachedSVG } from "./svg.mjs";
 
@@ -61,10 +62,44 @@ function groupedSelectOptions(choices, options) {
  * Render an SVG file inline as HTML.
  * @param {string} path - Path to the SVG file.
  * @param {object} options
- * @returns {string}
+ * @returns {Handlebars.SafeString}
  */
 function inlineSVG(path, options={}) {
 	return new Handlebars.SafeString(loadCachedSVG(path));
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Display a notification badge if necessary.
+ * @param {Document} document - Document from which the notifications should be gathered.
+ * @param {object} options
+ * @param {object} options.hash
+ * @param {string} [options.hash.key] - Display if a notification of this key is set.
+ * @param {string} [options.hash.category] - Display if any notifications in this category are set.
+ * @param {string} [options.hash.section] - Display if any notifications in this section are set.
+ * @param {boolean} [options.hash.displayOrder] - Should a number be displayed for the order?
+ * @returns {Handlebars.SafeString|void}
+ */
+function notificationBadge(document, options={}) {
+	const { key, category, section, ...generationOptions } = options.hash;
+	if ( !document.notifications ) return;
+
+	let notifications = [];
+	if ( key ) {
+		const notification = document.notifications.get(key);
+		if ( notification ) notifications.push(notification);
+	} else {
+		notifications = document.notifications.filter(notification => {
+			if ( category && (category !== notification.category) ) return false;
+			if ( section && (section !== notification.section) ) return false;
+			return true;
+		});
+	}
+
+	if ( !notifications.length ) return;
+
+	return new Handlebars.SafeString(NotificationTooltip.generateBadge(notifications, generationOptions));
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -76,7 +111,8 @@ export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		"blackFlag-groupedSelectOptions": groupedSelectOptions,
 		"blackFlag-inlineSVG": inlineSVG,
-		"blackFlag-linkForUUID": linkForUUID
+		"blackFlag-linkForUUID": linkForUUID,
+		"blackFlag-notificationBadge": notificationBadge
 	});
 }
 

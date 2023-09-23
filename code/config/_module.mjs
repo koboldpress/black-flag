@@ -3,6 +3,7 @@ import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
 import * as documents from "./documents.mjs";
 import * as items from "./items.mjs";
+import * as notifications from "./notifications.mjs";
 import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
 
@@ -12,6 +13,7 @@ export default {
 	...advancement,
 	...documents,
 	...items,
+	...notifications,
 	registration,
 	...skills
 };

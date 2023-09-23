@@ -1,6 +1,9 @@
 <section>
 	<fieldset class="abilities">
-		<legend>{{localize "BF.Ability.Label[other]"}}</legend>
+		<legend>
+			{{localize "BF.Ability.Label[other]"}}
+			{{blackFlag-notificationBadge actor category="abilities"}}
+		</legend>
 		{{#each system.abilities as |ability key|}}
 			<div class="ability" data-key="{{key}}">
 				<label>{{localize ability.labels.full}}</label>
@@ -10,7 +13,10 @@
 		{{/each}}
 	</fieldset>
 	<fieldset class="skills">
-		<legend>{{localize "BF.Skill.Label[other]"}}</legend>
+		<legend>
+			{{localize "BF.Skill.Label[other]"}}
+			{{blackFlag-notificationBadge actor category="skills"}}
+		</legend>
 		{{#each system.proficiencies.skills as |skill key|}}
 			<div class="skill" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
@@ -28,7 +34,10 @@
 		{{/each}}
 	</fieldset>
 	<fieldset class="tools">
-		<legend>{{localize "BF.Tool.Label[other]"}}</legend>
+		<legend>
+			{{localize "BF.Tool.Label[other]"}}
+			{{blackFlag-notificationBadge actor category="tools"}}
+		</legend>
 		{{#each system.proficiencies.tools as |tool key|}}
 			<div data-key="{{key}}">
 				<label>{{tool.label}}</label>

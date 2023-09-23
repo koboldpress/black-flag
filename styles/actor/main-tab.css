@@ -1,4 +1,4 @@
-.black-flag.pc.sheet .window-content > form {
+.black-flag.pc.sheet .sheet-container {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
@@ -29,6 +29,34 @@
 
 		.progression {
 			flex: 1 0 20%;
+			padding: 0;
+
+			> legend {
+				margin-inline: 0.65rem;
+			}
+
+			[data-tab] {
+				display: flex;
+				margin-block-start: -1ex;
+				padding-block: 0.25rem;
+				padding-inline: 0.65rem;
+				align-items: center;
+				justify-content: space-evenly;
+				width: 100%;
+				height: calc(100% + 1ex);
+			}
+
+			.text {
+				font-size: var(--font-size-18);
+				font-weight: 100;
+			}
+
+			.icon {
+				opacity: 0.5;
+			}
+			& a:hover .icon {
+				opacity: 1;
+			}
 
 			.active {
 				display: none;

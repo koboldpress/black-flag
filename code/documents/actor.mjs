@@ -1,9 +1,26 @@
 import { DocumentMixin } from "./mixin.mjs";
+import NotificationsCollection from "./notifications.mjs";
 
 export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Collection of notifications that should be displayed on the actor sheet.
+	 */
+	notifications;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareData() {
+		this.notifications = new NotificationsCollection();
+		super.prepareData();
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	applyActiveEffects() {

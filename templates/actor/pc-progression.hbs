@@ -8,7 +8,10 @@
 	</section>
 	<section class="details">
 		<fieldset class="ability-selection">
-			<legend>{{localize "BF.Ability.Label[other]"}}</legend>
+			<legend>
+				{{localize "BF.Ability.Label[other]"}}
+				{{blackFlag-notificationBadge actor key="no-abilities" displayOrder=true}}
+			</legend>
 			{{#if system.progression.abilities.assignmentComplete}}
 				{{#with (lookup CONFIG.abilityAssignment.methods system.progression.abilities.method) as |method|}}
 					<figure class="icon">
@@ -48,15 +51,24 @@
 			{{/with}}
 		{{/inline}}
 		<fieldset class="lineage">
-			<legend>{{localize "BF.Item.Type.Lineage[one]"}}</legend>
+			<legend>
+				{{localize "BF.Item.Type.Lineage[one]"}}
+				{{blackFlag-notificationBadge actor category="lineage" displayOrder=true}}
+			</legend>
 			{{> "blackFlag.typeControl" type="lineage"}}
 		</fieldset>
 		<fieldset class="heritage">
-			<legend>{{localize "BF.Item.Type.Heritage[one]"}}</legend>
+			<legend>
+				{{localize "BF.Item.Type.Heritage[one]"}}
+				{{blackFlag-notificationBadge actor category="heritage" displayOrder=true}}
+			</legend>
 			{{> "blackFlag.typeControl" type="heritage"}}
 		</fieldset>
 		<fieldset class="background">
-			<legend>{{localize "BF.Item.Type.Background[one]"}}</legend>
+			<legend>
+				{{localize "BF.Item.Type.Background[one]"}}
+				{{blackFlag-notificationBadge actor category="background" displayOrder=true}}
+			</legend>
 			{{> "blackFlag.typeControl" type="background"}}
 		</fieldset>
 		{{#each system.progression.classes as |data identifier|}}
@@ -72,7 +84,10 @@
 			</fieldset>
 		{{else}}
 			<fieldset class="class" data-class="{{identifier}}">
-				<legend>{{localize "BF.Item.Type.Class[one]"}}</legend>
+				<legend>
+					{{localize "BF.Item.Type.Class[one]"}}
+					{{blackFlag-notificationBadge actor key="no-class" displayOrder=true}}
+				</legend>
 				<span>
 					<a data-action="progression" data-sub-action="select" data-type="class">
 						{{localize "BF.Action.Choose.Generic"}}
