@@ -16,8 +16,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 	getData() {
 		return foundry.utils.mergeObject(super.getData(), {
 			denomination: this.advancement.configuration.denomination,
-			isFirstLevel: this.levels.character === 1,
-			warningKey: this.advancement.warningKey(this.levels)
+			isFirstLevel: this.levels.character === 1
 		});
 	}
 

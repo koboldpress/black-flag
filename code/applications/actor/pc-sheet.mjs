@@ -88,6 +88,7 @@ export default class PCSheet extends BaseActorSheet {
 		// Render advancement steps
 		for ( const flow of Object.values(this.advancementFlows) ) {
 			flow._element = null;
+			// TODO: Some sort of race condition here when advancement is being applied
 			await flow._render(true, options);
 		}
 		this.setPosition();

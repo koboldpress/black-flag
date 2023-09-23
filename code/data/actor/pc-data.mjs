@@ -30,13 +30,13 @@ export default class PCData extends ActorDataModel {
 				// Bonuses?
 				// Minimums?
 			}), {
-				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true
+				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
 			}),
 			attributes: new foundry.data.fields.SchemaField({
 				ac: new foundry.data.fields.SchemaField({
 					// Formulas
 					// Override
-				}),
+				}, {label: "BF.ArmorClass.Label"}),
 				death: new foundry.data.fields.SchemaField({
 					// Successes
 					// Failures
@@ -48,18 +48,18 @@ export default class PCData extends ActorDataModel {
 					// Spent per denomination
 					// Minimum roll
 					// Recovery percentage
-				}),
+				}, {label: "BF.HitDie.Label[other]"}),
 				hp: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
 					temp: new foundry.data.fields.NumberField({min: 0, integer: true})
 					// Temp max
 					// Bonuses
 					// Multiplier
-				}),
+				}, {label: "BF.HitPoint.Label[other]"}),
 				// Initiative?
 				luck: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.NumberField({min: 0, max: 5, integer: true})
-				})
+				}, {label: "BF.Luck.Label"})
 			}),
 			biography: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField(),
@@ -90,7 +90,7 @@ export default class PCData extends ActorDataModel {
 					// Bonuses?
 					// Minimum?
 				}), {
-					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true
+					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
 				tools: new fields.MappingField(new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
@@ -99,7 +99,7 @@ export default class PCData extends ActorDataModel {
 					// Default ability
 					// Bonuses?
 					// Minimum?
-				})),
+				}), {label: "BF.Tool.Label[other]"}),
 				weapons: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
 					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
@@ -121,7 +121,7 @@ export default class PCData extends ActorDataModel {
 				levels: new fields.MappingField(new foundry.data.fields.SchemaField({
 					class: new fields.LocalDocumentField(foundry.documents.BaseItem),
 					time: new fields.TimeField()
-				})),
+				}), {label: "BF.Level.Label[other]"}),
 				xp: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
 					log: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
@@ -130,7 +130,7 @@ export default class PCData extends ActorDataModel {
 						source: new foundry.data.fields.StringField()
 					}))
 				})
-			}),
+			}, {label: "BF.Progression.Label"}),
 			// Rolls (contains bonuses, minimums, ability overrides, etc.)?
 			// Spellcasting
 			traits: new foundry.data.fields.SchemaField({
@@ -140,12 +140,12 @@ export default class PCData extends ActorDataModel {
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 					// Units?
 					// Multiplier
-				}),
+				}, {label: "BF.Speed.Label"}),
 				senses: new foundry.data.fields.SchemaField({
 					types: new fields.MappingField(new fields.FormulaField({deterministic: true})),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 				}),
-				size: new foundry.data.fields.StringField(),
+				size: new foundry.data.fields.StringField({label: "BF.Size.Label"}),
 				type: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.StringField(),
 					tags: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
@@ -169,7 +169,7 @@ export default class PCData extends ActorDataModel {
 					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
 				})
 				// TODO: Perhaps condition immunities could just be stored with damage immunities
-			})
+			}, {label: "BF.Trait.Label[other]"})
 		};
 	}
 

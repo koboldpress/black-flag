@@ -7,3 +7,5 @@ export {default as ChooseFeaturesFlow} from "./choose-features-flow.mjs";
 export {default as GrantFeaturesConfig} from "./grant-features-config.mjs";
 export {default as HitPointsConfig} from "./hit-points-config.mjs";
 export {default as HitPointsFlow} from "./hit-points-flow.mjs";
+export {default as SizeConfig} from "./size-config.mjs";
+export {default as SizeFlow} from "./size-flow.mjs";

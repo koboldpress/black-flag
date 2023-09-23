@@ -1,0 +1,20 @@
+<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+	<header>
+		<div class="advancement-name">
+			<figure class="icon">
+				<img src="{{icon}}">
+			</figure>
+			<h4>
+				{{{title}}}
+				{{blackFlag-notificationBadge advancement.actor key=warningKey}}
+			</h4>
+		</div>
+		{{#if needsConfiguration}}
+			<div class="advancement-actions">
+				<select name="size">
+					{{selectOptions sizes blank=(localize "BF.Advancement.Size.Notification") localize=true}}
+				</select>
+			</div>
+		{{/if}}
+	</header>
+</form>

@@ -110,7 +110,8 @@ export default class AdvancementFlow extends FormApplication {
 			icon: this.advancement.icon,
 			summary: this.advancement.summaryForLevel(this.levels, { flow: true }),
 			levels: this.levels,
-			needsConfiguration: !this.advancement.configuredForLevel(this.levels)
+			needsConfiguration: !this.advancement.configuredForLevel(this.levels),
+			warningKey: this.advancement.warningKey(this.levels)
 		};
 	}
 

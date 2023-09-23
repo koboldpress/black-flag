@@ -16,9 +16,8 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 
 	getData() {
 		const context = super.getData();
-		// TODO: Select proper level here using future method on advancement
-		context.choosen = (this.advancement.value.added?.[this.levels.class] ?? []).map(a => a.document);
-		context.warningKey = this.advancement.warningKey(this.levels);
+		const level = this.advancement.relavantLevel(this.levels);
+		context.choosen = (this.advancement.value.added?.[level] ?? []).map(a => a.document);
 		return context;
 	}
 

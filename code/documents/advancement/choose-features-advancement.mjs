@@ -47,11 +47,6 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Generate a warning key for the specified level.
-	 * @param {AdvancementLevels} levels
-	 * @returns {string}
-	 */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.choice-required`;
 	}

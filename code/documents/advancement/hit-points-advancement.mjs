@@ -61,11 +61,6 @@ export default class HitPointsAdvancement extends Advancement {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Generate a warning key for the specified level.
-	 * @param {AdvancementLevels} levels
-	 * @returns {string}
-	 */
 	warningKey(levels) {
 		return `${this.relativeID}.${levels.class}.hit-points-not-configured`;
 	}

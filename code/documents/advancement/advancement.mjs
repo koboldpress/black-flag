@@ -208,6 +208,17 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Generate a warning key for the specified level.
+	 * @param {AdvancementLevels} levels
+	 * @returns {string}
+	 */
+	warningKey(levels) {
+		return `${this.relativeID}.${this.relavantLevel(levels)}.warning`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare any warnings that should be displayed on the actor.
 	 * @param {AdvancementLevels} levels - Levels for which the warning should be generated.
 	 * @param {NotificationCollection} notifications - Collection into which notifications should be set.

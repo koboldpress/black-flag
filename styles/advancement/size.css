@@ -1,0 +1,26 @@
+.advancement-config.size.app form {
+	.size-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 3rem;
+
+		> li {
+			flex: 40% 1 1;
+
+			> label {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border-radius: 5px;
+				padding-inline-start: 0.25em;
+
+				&:hover {
+					background-color: rgba(0 0 0 / 0.1);
+				}
+			}
+		}
+	}
+}

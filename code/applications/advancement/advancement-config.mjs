@@ -94,7 +94,7 @@ export default class AdvancementConfig extends FormApplication {
 				identifier: this.advancement.title.slugify({ strict: true }),
 				identifierHint: this.advancement.constructor.metadata.identifier.hint
 			},
-			levels:  Object.fromEntries(levels),
+			levels: Object.fromEntries(levels),
 			showIdentifier: this.advancement.constructor.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.constructor.metadata.multiLevel
 		};

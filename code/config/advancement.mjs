@@ -24,6 +24,10 @@ export const _advancementTypes = {
 	hitPoints: {
 		documentClass: advancement.HitPointsAdvancement,
 		validItemTypes: new Set(["class"])
+	},
+	size: {
+		documentClass: advancement.SizeAdvancement,
+		validItemTypes: new Set(["lineage"])
 	}
 };
 

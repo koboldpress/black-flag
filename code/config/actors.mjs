@@ -49,3 +49,44 @@ export const sheetSections = {
 		}
 	]
 };
+
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Configuration data for creature sizes.
+ *
+ * @typedef {object} SizeConfiguration
+ * @property {string} label - Localized label for this size.
+ * @property {number|{width: number, height: number}} scale - Default token scale for a creature of this size.
+ */
+
+/**
+ * Creature sizes defined by the system.
+ * @enum {SizeConfiguration}
+ */
+export const sizes = {
+	tiny: {
+		label: "BF.Size.Tiny",
+		scale: 0.5
+	},
+	small: {
+		label: "BF.Size.Small",
+		scale: 1
+	},
+	medium: {
+		label: "BF.Size.Medium",
+		scale: 1
+	},
+	large: {
+		label: "BF.Size.Large",
+		scale: 2
+	},
+	huge: {
+		label: "BF.Size.Huge",
+		scale: 3
+	},
+	gargantuan: {
+		label: "BF.Size.Gargantuan",
+		scale: 4
+	}
+};

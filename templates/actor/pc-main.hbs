@@ -69,7 +69,13 @@
 		<span>x</span>
 	</fieldset>
 	<fieldset class="traits">
-		<legend>Traits</legend>
+		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
+		{{#if (or system.traits.size @root.editingMode)}}
+			<div class="trait size">
+				<label>{{localize "BF.Size.Label"}}:</label>
+				<span>{{localize (lookup (lookup CONFIG.sizes system.traits.size) "label")}}</span>
+			</div>
+		{{/if}}
 		<span>Resistances, Immunities, Vulnerabilities</span>
 		<span>Armor Proficiencies</span>
 		<span>Weapon Proficiencies</span>
