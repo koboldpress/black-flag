@@ -44,6 +44,35 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Preparation Methods         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Generate a warning key for the specified level.
+	 * @param {AdvancementLevels} levels
+	 * @returns {string}
+	 */
+	warningKey(levels) {
+		return `${this.relativeID}.${levels.class}.choice-required`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareWarnings(levels, notifications) {
+		// TODO: Move this selection logic into separate method
+		const level = this.item.type === "class" ? levels.class : levels.character;
+		const choicesNeeded = (this.configuration.choices[level] ?? 0) - (this.value.added?.[level]?.length ?? 0);
+		if ( choicesNeeded <= 0 ) return;
+		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+		notifications.set(this.warningKey(levels), {
+			category: `level-${levels.character}`, section: "progression", level: "warn",
+			message: game.i18n.format(`BF.Advancement.ChooseFeatures.Notification[${pluralRules.select(choicesNeeded)}]`, {
+				title: this.title, number: choicesNeeded
+			})
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

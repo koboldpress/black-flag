@@ -101,7 +101,10 @@
 			<div class="level" data-level="{{level.number}}">
 				<h3>
 					<span class="level">{{localize "BF.Level.Specific" level=level.number}}</span>
-					<span class="class">{{level.class.name}}</span>
+					<span class="class">{{log (concat "level-" level.number)}}
+						{{level.class.name}}
+						{{blackFlag-notificationBadge @root.actor category=(concat "level-" level.number)}}
+					</span>
 					{{#if (and @root.editingMode level.highestLevel)}}
 						<span class="controls">
 							<a data-action="progression" data-sub-action="level-down">

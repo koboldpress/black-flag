@@ -82,14 +82,17 @@ function inlineSVG(path, options={}) {
  * @returns {Handlebars.SafeString|void}
  */
 function notificationBadge(document, options={}) {
-	const { key, category, section, ...generationOptions } = options.hash;
+	let { key, category, section, ...generationOptions } = options.hash;
 	if ( !document.notifications ) return;
+	if ( foundry.utils.getType(key) === "Object" ) key = key.string;
+	if ( foundry.utils.getType(category) === "Object" ) category = category.string;
+	if ( foundry.utils.getType(section) === "Object" ) section = section.string;
 
 	let notifications = [];
 	if ( key ) {
 		const notification = document.notifications.get(key);
 		if ( notification ) notifications.push(notification);
-	} else {
+	} else if ( category || section ) {
 		notifications = document.notifications.filter(notification => {
 			if ( category && (category !== notification.category) ) return false;
 			if ( section && (section !== notification.section) ) return false;
@@ -99,7 +102,7 @@ function notificationBadge(document, options={}) {
 
 	if ( !notifications.length ) return;
 
-	return new Handlebars.SafeString(NotificationTooltip.generateBadge(notifications, generationOptions));
+	return new Handlebars.SafeString(NotificationTooltip.generateBadge(notifications, document.uuid, generationOptions));
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

@@ -48,6 +48,7 @@ Hooks.once("i18nInit", function() {
 });
 
 Hooks.once("ready", function() {
+	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();
 });
 

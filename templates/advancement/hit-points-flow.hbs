@@ -4,7 +4,10 @@
 			<figure class="icon">
 				<img src="{{icon}}">
 			</figure>
-			<h4>{{{title}}}</h4>
+			<h4>
+				{{{title}}}
+				{{blackFlag-notificationBadge advancement.actor key=warningKey}}
+			</h4>
 		</div>
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">

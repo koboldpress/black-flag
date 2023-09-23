@@ -58,6 +58,29 @@ export default class HitPointsAdvancement extends Advancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Preparation Methods         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Generate a warning key for the specified level.
+	 * @param {AdvancementLevels} levels
+	 * @returns {string}
+	 */
+	warningKey(levels) {
+		return `${this.relativeID}.${levels.class}.hit-points-not-configured`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareWarnings(levels, notifications) {
+		if ( this.configuredForLevel(levels.class) ) return;
+		notifications.set(this.warningKey(levels), {
+			category: `level-${levels.character}`, section: "progression", level: "warn",
+			message: game.i18n.localize("BF.Advancement.HitPoints.Notification")
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

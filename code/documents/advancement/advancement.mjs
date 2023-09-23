@@ -110,6 +110,16 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Unique ID for this advancement on an actor.
+	 * @type {string}
+	 */
+	get relativeID() {
+		return `${this.item.id}.${this.id}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Globally unique identifier for this advancement.
 	 * @type {string}
 	 */
@@ -165,7 +175,7 @@ export default class Advancement extends BaseAdvancement {
 	 * @type {string}
 	 */
 	get valueKeyPath() {
-		return `system.progression.advancement.${this.item.id}.${this.id}`;
+		return `system.progression.advancement.${this.relativeID}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -180,6 +190,16 @@ export default class Advancement extends BaseAdvancement {
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare any warnings that should be displayed on the actor.
+	 * @param {AdvancementLevels} levels - Levels for which the warning should be generated.
+	 * @param {NotificationCollection} notifications - Collection into which notifications should be set.
+	 * @abstract
+	 */
+	prepareWarnings(levels, notifications) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */

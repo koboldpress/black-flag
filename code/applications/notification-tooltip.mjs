@@ -16,19 +16,14 @@ export default class NotificationTooltip extends Application {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Activate tooltip listeners on the provided HTML.
-	 * @param {Document} document - Document which contains the necessary notification information.
-	 * @param {Element} html
+	 * Activate global tooltip listeners on the page.
 	 */
-	static activateListeners(document, html) {
-		const activateTooltip = event => {
-			const keys = event.currentTarget.dataset.notificationKeys.split(";");
-			const tooltip = new NotificationTooltip(document, keys);
-			tooltip.renderTooltip(event.currentTarget);
-		};
-		for ( const element of html.querySelectorAll(".notification-badge") ) {
-			element.addEventListener("pointerenter", activateTooltip);
-		}
+	static activateListeners() {
+		document.body.addEventListener("pointerenter", event => {
+			const element = event.target;
+			if ( !element.classList.contains("notification-badge") ) return;
+			this.renderTooltip(element);
+		}, true);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,11 +31,12 @@ export default class NotificationTooltip extends Application {
 	/**
 	 * Generate a badge for the provided set of notifications.
 	 * @param {object[]} notifications - Notifications for which to generate the badge.
+	 * @param {string} uuid - UUID of the document to which these notifications belong.
 	 * @param {object} [options={}]
 	 * @param {boolean} [options.displayOrder=false] - Should a number be displayed for the order?
 	 * @returns {string}
 	 */
-	static generateBadge(notifications, { displayOrder=false }={}) {
+	static generateBadge(notifications, uuid, { displayOrder=false }={}) {
 		let level = "info";
 		let order = Infinity;
 		for ( const notification of notifications ) {
@@ -59,9 +55,28 @@ export default class NotificationTooltip extends Application {
 		}
 
 		const keys = notifications.map(n => n.key).join(";");
-		return `<div class="notification-badge" data-notification-level="${level}" data-notification-keys="${keys}">${center}</div>`;
+		return `<div class="notification-badge" data-uuid="${uuid}" data-notification-level="${level}" data-notification-keys="${keys}">${center}</div>`;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Render this app to a tooltip.
+	 * @param {HTMLElement} element - The element to which the tooltip should be attached.
+	 */
+	static async renderTooltip(element) {
+		const keys = element.dataset.notificationKeys.split(";");
+		const uuid = element.dataset.uuid;
+		if ( !keys || !uuid ) return;
+		const document = await fromUuid(uuid);
+		const tooltip = new NotificationTooltip(document, keys);
+		const context = await tooltip.getData(this.options);
+		const content = (await tooltip._renderInner(context))[0];
+		game.tooltip.activate(element, { content, cssClass: "notification-tooltip" });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -79,6 +94,8 @@ export default class NotificationTooltip extends Application {
 	notificationKeys;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Context Preparation         */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
 		const context = await super.getData(options);
@@ -86,22 +103,10 @@ export default class NotificationTooltip extends Application {
 			.reduce((arr, k) => {
 				const data = foundry.utils.deepClone(this.document.notifications?.get(k));
 				if ( !data ) return arr;
-				data.badge = this.constructor.generateBadge([data], {displayOrder: true});
+				data.badge = this.constructor.generateBadge([data], this.document.uuid, {displayOrder: true});
 				arr.push(data);
 				return arr;
 			}, []).sort((lhs, rhs) => lhs.order - rhs.order);
 		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Render this app to a tooltip.
-	 * @param {HTMLElement} element - The element to which the tooltip should be attached.
-	 */
-	async renderTooltip(element) {
-		const context = await this.getData(this.options);
-		const content = (await this._renderInner(context))[0];
-		game.tooltip.activate(element, { content, cssClass: "notification-tooltip" });
 	}
 }

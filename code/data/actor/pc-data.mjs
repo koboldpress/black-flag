@@ -302,7 +302,7 @@ export default class PCData extends ActorDataModel {
 			order++;
 			this.parent.notifications.set("no-class", {
 				level: "warn", category: "class", section: "progression", order,
-				message: game.i18n.localize("BF.Progression.Step.ChooseClass")
+				message: game.i18n.localize("BF.Progression.Notification.ChooseClass")
 			});
 		}
 
@@ -311,7 +311,7 @@ export default class PCData extends ActorDataModel {
 			order++;
 			this.parent.notifications.set("no-abilities", {
 				level: "warn", category: "abilities", section: "progression", order,
-				message: game.i18n.localize("BF.Progression.Step.DetermineAbilityScores")
+				message: game.i18n.localize("BF.Progression.Notification.DetermineAbilityScores")
 			});
 		}
 
@@ -320,7 +320,7 @@ export default class PCData extends ActorDataModel {
 			order++;
 			this.parent.notifications.set("no-lineage", {
 				level: "warn", category: "lineage", section: "progression", order,
-				message: game.i18n.localize("BF.Progression.Step.ChooseLineage")
+				message: game.i18n.localize("BF.Progression.Notification.ChooseLineage")
 			});
 		}
 
@@ -329,7 +329,7 @@ export default class PCData extends ActorDataModel {
 			order++;
 			this.parent.notifications.set("no-heritage", {
 				level: "warn", category: "heritage", section: "progression", order,
-				message: game.i18n.localize("BF.Progression.Step.ChooseHeritage")
+				message: game.i18n.localize("BF.Progression.Notification.ChooseHeritage")
 			});
 		}
 
@@ -338,8 +338,18 @@ export default class PCData extends ActorDataModel {
 			order++;
 			this.parent.notifications.set("no-background", {
 				level: "warn", category: "background", section: "progression", order,
-				message: game.i18n.localize("BF.Progression.Step.ChooseBackground")
+				message: game.i18n.localize("BF.Progression.Notification.ChooseBackground")
 			});
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedAdvancementWarnings() {
+		for ( const data of Object.values(this.progression.levels) ) {
+			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
+				advancement.prepareWarnings(data.levels, this.parent.notifications);
+			}
 		}
 	}
 
