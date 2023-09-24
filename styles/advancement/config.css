@@ -70,6 +70,38 @@
 		}
 	}
 
+	.option-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 3rem;
+
+		> li {
+			flex: 40% 1 1;
+
+			> label {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border-radius: 5px;
+				padding-inline-start: 0.25em;
+
+				& input:is([type="checkbox"], [type="radio"]) {
+					flex: 0 0 20px;
+					width: 20px;
+					height: 20px;
+					margin: 3px 5px;
+				}
+
+				&:hover {
+					background-color: rgba(0 0 0 / 0.1);
+				}
+			}
+		}
+	}
+
 	.level-list {
 		margin: 0;
 		padding: 0;

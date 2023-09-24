@@ -25,6 +25,10 @@ export const _advancementTypes = {
 		documentClass: advancement.HitPointsAdvancement,
 		validItemTypes: new Set(["class"])
 	},
+	keyAbility: {
+		documentClass: advancement.KeyAbilityAdvancement,
+		validItemTypes: new Set(["class"])
+	},
 	property: {
 		documentClass: advancement.PropertyAdvancement,
 		validItemTypes: new Set(["background", "class", "heritage", "lineage"])

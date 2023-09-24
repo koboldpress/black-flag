@@ -9,6 +9,12 @@
 				<label>{{localize ability.labels.full}}</label>
 				<span class="value">{{ability.value}}</span>
 				<span class="mod">{{ability.mod}}</span>
+				<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
+					data-rounding="{{ability.save.proficiency.rounding}}">
+					{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
+					<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
+						value="{{ability._source.save.proficiency.multiplier}}">
+				</div>
 			</div>
 		{{/each}}
 	</fieldset>
@@ -22,7 +28,8 @@
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
 					data-rounding="{{skill.proficiency.rounding}}">
 					{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
-					<input type="hidden" name="system.proficiencies.skills.proficiency.multiplier" value="{{skill._source.multiplier}}">
+					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
+						value="{{skill._source.proficiency.multiplier}}">
 				</div>
 				<span class="name">{{localize skill.labels.name}}</span>
 				<span class="ability">

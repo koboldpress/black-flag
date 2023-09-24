@@ -24,7 +24,7 @@ export default class PCData extends ActorDataModel {
 				max: new foundry.data.fields.NumberField({min: 0, initial: 20, integer: true}),
 				save: new foundry.data.fields.SchemaField({
 					proficiency: new foundry.data.fields.SchemaField({
-						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
+						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
 					})
 				})
 				// Bonuses?
