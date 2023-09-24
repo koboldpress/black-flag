@@ -1,0 +1,39 @@
+<form autocomplete="off">
+	<section>
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+		</fieldset>
+		<fieldset class="active-effect-sheet">
+			<legend>Changes</legend>
+			<header class="effect-change effects-header flexrow">
+				<div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+				<div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+				<div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+				<div class="effect-controls">
+						<a class="effect-control" data-action="add"><i class="fa-regular fa-square-plus"></i></a>
+				</div>
+			</header>
+			<ol class="changes-list">
+				{{#each configuration.changes as |change|}}
+					<li class="effect-change flexrow" data-index="{{@index}}">
+						<div class="key">
+							<input type="text" name="configuration.changes.{{@index}}.key" value="{{change.key}}">
+						</div>
+						<div class="mode">
+							<select name="configuration.changes.{{@index}}.mode" data-dtype="Number">
+								{{selectOptions ../modes selected=change.mode}}
+							</select>
+						</div>
+						<div class="value">
+							<input type="text" name="configuration.changes.{{@index}}.value" value="{{change.value}}">
+						</div>
+						<div class="effect-controls">
+							<a class="effect-control" data-action="delete"><i class="fa-solid fa-trash"></i></a>
+						</div>
+					</li>
+				{{/each}}
+			</ol>
+		</fieldset>
+	</section>
+</form>
