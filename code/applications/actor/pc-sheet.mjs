@@ -32,7 +32,6 @@ export default class PCSheet extends BaseActorSheet {
 		const context = await super.getData(options);
 
 		this.prepareProgression(context);
-		if ( !this.actor.notifications ) this.actor.reset();
 
 		return context;
 	}

@@ -75,6 +75,17 @@ export default class SizeAdvancement extends Advancement {
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	changes(levels) {
+		if ( !this.value.selected ) return;
+		return [{
+			key: "system.traits.size",
+			mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+			value: this.value.selected
+		}];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async apply(levels, data, { initial=false }={}) {
 		if ( initial ) {
 			if ( this.configuration.options.size !== 1 ) return;
@@ -82,14 +93,14 @@ export default class SizeAdvancement extends Advancement {
 		}
 		if ( !data ) return;
 
-		const updates = { "system.traits.size": data, [`${this.valueKeyPath}.selected`]: data };
+		const updates = { [`${this.valueKeyPath}.selected`]: data };
 		return await this.actor.update(updates);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async reverse(levels) {
-		const updates = { "system.traits.size": "", [`${this.valueKeyPath}.-=selected`]: null };
+		const updates = { [`${this.valueKeyPath}.-=selected`]: null };
 		return await this.actor.update(updates);
 	}
 }
