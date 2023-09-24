@@ -135,4 +135,69 @@ export default class PCSheet extends BaseActorSheet {
 		}
 		return super._onAction(event);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Drag & Drop             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onDropItem(event, data) {
+		if ( !this.actor.isOwner ) return false;
+		const item = await Item.implementation.fromDropData(data);
+		const itemData = item.toObject();
+
+		// Handle item sorting within the same Actor
+		if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
+
+		// Create the owned item
+		return this._onDropItemCreate(event, item);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onDropFolder(event, data) {
+		if ( !this.actor.isOwner ) return [];
+		const folder = await Folder.implementation.fromDropData(data);
+		if ( folder.type !== "Item" ) return [];
+		const droppedItems = await Promise.all(folder.contents.map(async item => {
+			if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
+			return item;
+		}));
+		return this._onDropItemCreate(event, droppedItems);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onDropItemCreate(event, items) {
+		if ( !(items instanceof Array) ) items = [items];
+
+		const { classes, concepts, others } = items.reduce((types, item) => {
+			if ( item.type === "class" ) types.classes.push(item);
+			else if ( ["background", "heritage", "lineage"].includes(item.type) ) types.concepts.push(item);
+			else types.others.push(item);
+			return types;
+		}, { classes: [], concepts: [], others: [] });
+
+		// For classes, call level up method
+		for ( const cls of classes ) {
+			try {
+				await this.actor.system.levelUp(cls);
+			} catch(err) {
+				ui.notifications.warn(err.message);
+			}
+		}
+
+		// For concepts, use the set concept method
+		for ( const concept of concepts ) {
+			try {
+				await this.actor.system.setConcept(concept);
+			} catch(err) {
+				ui.notifications.warn(err.message);
+			}
+		}
+
+		// For normal items, create normally
+		if ( others.length ) {
+			await this.actor.createEmbeddedDocuments("Item", [others]);
+		}
+	}
 }

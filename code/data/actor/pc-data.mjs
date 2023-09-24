@@ -365,10 +365,10 @@ export default class PCData extends ActorDataModel {
 	 */
 	async setConcept(document) {
 		if ( !["lineage", "heritage", "background"].includes(document.type) ) throw new Error(
-			`Documents of the type ${document.type} cannot be set using the setConcept method.`
+			game.i18n.format("BF.ConceptSelection.Warning.InvalidType", {type: document.type})
 		);
 		if ( this.progression[document.type] ) throw new Error(
-			`A ${document.type} already exists on the actor ${this.parent.name}.`
+			game.i18n.format("BF.ConceptSelection.Warning.Duplicate", {type: document.type, name: this.parent.name})
 		);
 
 		const newDocument = await this.parent.createEmbeddedDocuments("Item", [document.toObject()], {render: false});
@@ -388,7 +388,7 @@ export default class PCData extends ActorDataModel {
 			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1
 		};
 		if ( levels.character > CONFIG.BlackFlag.maxLevel ) throw new Error(
-			`Character cannot be leveled up past ${CONFIG.BlackFlag.maxLevel}.`
+			game.i18n.format("BF.Level.Warning.Max", {max: CONFIG.BlackFlag.maxLevel})
 		);
 
 		// Create class if it doesn't already exist on actor
