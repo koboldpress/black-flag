@@ -1,5 +1,6 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
+import { simplifyBonus } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 
@@ -45,7 +46,9 @@ export default class PCData extends ActorDataModel {
 					// Target threshold override
 				}),
 				hd: new foundry.data.fields.SchemaField({
-					// Spent per denomination
+					d: new fields.MappingField(new foundry.data.fields.SchemaField({
+						spent: new foundry.data.fields.NumberField({min: 0, integer: true})
+					}))
 					// Minimum roll
 					// Recovery percentage
 				}, {label: "BF.HitDie.Label[other]"}),
@@ -136,7 +139,9 @@ export default class PCData extends ActorDataModel {
 			traits: new foundry.data.fields.SchemaField({
 				movement: new foundry.data.fields.SchemaField({
 					base: new foundry.data.fields.NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
-					types: new fields.MappingField(new fields.FormulaField({deterministic: true})),
+					types: new fields.MappingField(new fields.FormulaField({deterministic: true}), {
+						initial: { walk: "@base" }
+					}),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 					// Units?
 					// Multiplier
@@ -203,6 +208,43 @@ export default class PCData extends ActorDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareEmbeddedClasses() {
+		this.progression.classes = {};
+		for ( const [level, data] of Object.entries(this.progression.levels) ) {
+			const document = data.class;
+			if ( !document ) continue;
+			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
+			classData.levels += 1;
+			data.levels = { character: Number(level), class: classData.levels };
+		}
+		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+		for ( const data of Object.values(this.progression.classes) ) {
+			data.levelsLabel = game.i18n.format(`BF.Level.Count[${pluralRules.select(data.levels)}]`, {
+				number: data.levels
+			});
+		}
+		this.progression.level = Object.keys(this.progression.levels).length;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareEmbeddedHitDice() {
+		const hd = this.attributes.hd;
+		for ( const data of Object.values(this.progression.levels) ) {
+			const cls = data.class;
+			const hpAdvancement = cls.system.advancement.byType("hitPoints")[0];
+			if ( !hpAdvancement ) continue;
+			const denom = hd.d[hpAdvancement.configuration.denomination] ??= { spent: 0 };
+			denom.max ??= 0;
+			denom.max += 1;
+		}
+		for ( const denom of Object.values(hd.d) ) {
+			denom.available = denom.max - denom.spent;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareDerivedAbilities() {
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			const config = CONFIG.BlackFlag.abilities[key];
@@ -225,22 +267,11 @@ export default class PCData extends ActorDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedClasses() {
-		this.progression.classes = {};
-		for ( const [level, data] of Object.entries(this.progression.levels) ) {
-			const document = data.class;
-			if ( !document ) continue;
-			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
-			classData.levels += 1;
-			data.levels = { character: Number(level), class: classData.levels };
+	prepareDerivedArmorClass() {
+		const ac = this.attributes.ac;
+		if ( this.abilities.dexterity.mod !== null ) {
+			ac.value = 8 + this.abilities.dexterity.mod;
 		}
-		const pluralRules = new Intl.PluralRules(game.i18n.lang);
-		for ( const data of Object.values(this.progression.classes) ) {
-			data.levelsLabel = game.i18n.format(`BF.Level.Count[${pluralRules.select(data.levels)}]`, {
-				number: data.levels
-			});
-		}
-		this.progression.level = Object.keys(this.progression.levels).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -266,6 +297,37 @@ export default class PCData extends ActorDataModel {
 
 		init.proficiency = new Proficiency(this.attributes.prof, 0);
 		init.mod = (ability?.mod ?? 0) + init.proficiency.flat;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedMovement() {
+		const movement = this.traits.movement;
+		const rollData = this.parent.getRollData({ deterministic: true });
+		rollData.base = movement.base;
+
+		// Calculate each special movement type using base speed
+		for ( const [type, formula] of Object.entries(movement.types) ) {
+			const speed = simplifyBonus(formula, rollData);
+			movement.types[type] = speed;
+		}
+
+		// Prepare movement label to display on sheet
+		const numberFormatter = new Intl.NumberFormat(game.i18n.lang, { style: "unit", unit: "foot" });
+		const labels = Object.entries(movement.types)
+			.filter(([type, speed]) => speed > 0)
+			.sort((lhs, rhs) => rhs[1] - lhs[1])
+			.map(([type, speed]) => {
+				const config = CONFIG.BlackFlag.movementTypes[type];
+				const label = config ? game.i18n.localize(config.label) : type;
+				return `${label} ${numberFormatter.format(speed)}`;
+			});
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+		movement.labels ??= {
+			primary: labels.shift(),
+			secondary: listFormatter.format(labels)
+		};
+		console.log(movement.labels);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

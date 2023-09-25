@@ -1,4 +1,28 @@
 /**
+ * Movement types that can be used by actors.
+ * @enum {LabeledConfiguration}
+ */
+export const movementTypes = {
+	walk: {
+		label: "BF.Movement.Type.Walk"
+	},
+	climb: {
+		label: "BF.Movement.Type.Climb"
+	},
+	swim: {
+		label: "BF.Movement.Type.Swim"
+	},
+	fly: {
+		label: "BF.Movement.Type.Fly"
+	},
+	burrow: {
+		label: "BF.Movement.Type.Burrow"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for sheet sections.
  *
  * @typedef {object} SheetSectionConfiguration

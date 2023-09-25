@@ -57,11 +57,14 @@
 	</fieldset>
 	<fieldset class="hit-dice">
 		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
-		<span>x / x dx</span>
+		{{#each system.attributes.hd.d as |data denomination|}}
+			<span class="denomination">{{data.available}} / {{data.max}} - d{{denomination}}</span>
+			{{!-- TODO: Display dice icon instead of or in addition to denomination text --}}
+		{{/each}}
 	</fieldset>
 	<fieldset class="armor-class">
 		<legend>{{localize "BF.ArmorClass.Label"}}</legend>
-		<span>xx</span>
+		<span>{{system.attributes.ac.value}}</span>
 	</fieldset>
 	<fieldset class="initiative">
 		<legend>{{localize "BF.Initiative.Label"}}</legend>
@@ -69,7 +72,10 @@
 	</fieldset>
 	<fieldset class="movement">
 		<legend>{{localize "BF.Speed.Label"}}</legend>
-		<span>x ft.</span>
+		<span class="primary">{{system.traits.movement.labels.primary}}</span>
+		{{#if system.traits.movement.labels.secondary}}
+			<span class="secondary">{{system.traits.movement.labels.secondary}}</span>
+		{{/if}}
 	</fieldset>
 	<fieldset class="luck">
 		<legend>{{localize "BF.Luck.Label"}}</legend>
@@ -83,13 +89,9 @@
 				<span>{{localize (lookup (lookup CONFIG.sizes system.traits.size) "label")}}</span>
 			</div>
 		{{/if}}
-		<span>Resistances, Immunities, Vulnerabilities</span>
-		<span>Armor Proficiencies</span>
-		<span>Weapon Proficiencies</span>
-		<span>Languages</span>
 	</fieldset>
 	<fieldset class="actions">
 		<legend>Actions</legend>
-		<span>Bunch o stuff</span>
+		<span>Actions to be implemented&hellip;</span>
 	</fieldset>
 </section>
