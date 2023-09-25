@@ -1,11 +1,6 @@
 <form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
 	<header>
-		<div class="advancement-name">
-			<figure class="icon">
-				<img src="{{icon}}">
-			</figure>
-			<h4>{{{title}}}</h4>
-		</div>
+		{{> "blackFlag.advancement-name"}}
 	</header>
 
 	{{#if summary}}

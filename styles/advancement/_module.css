@@ -11,7 +11,18 @@
 	gap: 0.5rem;
 
 	> figure {
+		display: flex;
+		gap: 0.5rem;
 		margin: 0;
+
+		.advancement-origin {
+			width: 7px;
+			height: 7px;
+			margin-inline-start: -10px;
+			align-self: center;
+			border-radius: 7px;
+			background-color: var(--bf-advancement-color, black);
+		}
 
 		> img {
 			width: 1.5em;

@@ -136,6 +136,7 @@ export async function registerHandlebarsPartials() {
 		"actor/pc-progression.hbs",
 		"actor/pc-spellcasting.hbs",
 		"advancement/advancement-controls.hbs",
+		"advancement/advancement-name.hbs",
 		"item/concept-summary.hbs",
 		"item/item-advancement.hbs"
 	];

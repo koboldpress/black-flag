@@ -7,6 +7,17 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Accent color used for certain parts of the UI.
+	 * @type {string}
+	 */
+	get accentColor() {
+		if ( this.system.color ) return this.system.color;
+		return "var(--bf-blue);";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get identifier() {
 		if ( this.system.identifier?.value ) return this.system.identifier.value;
 		return slugify(this.name, {strict: true});

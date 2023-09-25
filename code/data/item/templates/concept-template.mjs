@@ -24,17 +24,30 @@ export default class ConceptTemplate extends ItemDataModel {
 
 	static defineSchema() {
 		return {
+			color: new foundry.data.fields.ColorField(),
 			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				journal: new foundry.data.fields.StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"}),
-				color: new foundry.data.fields.ColorField()
+				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
 			identifier: new foundry.data.fields.SchemaField({
 				value: new fields.IdentifierField()
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * List of the traits to display on the item sheet.
+	 * @type {object[]}
+	 * @abstract
+	 */
+	get traits() {
+		return [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

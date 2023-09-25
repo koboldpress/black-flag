@@ -7,9 +7,16 @@
 			{{item.name}}
 		{{/if}}
 	</h1>
+	{{#if (and edit (eq item.type "class"))}}
+		<div class="color">
+			<input name="system.color" type="color" value="{{system.color}}"
+				title="{{localize 'BF.AccentColor.Label'}}" aria-label="{{localize 'BF.AccentColor.Label'}}">
+		</div>
+	{{/if}}
 	<div class="source">
 		{{#if edit}}
-			<input type="text" name="system.description.source" value="{{system.description.source}}" placeholder="{{localize 'Source'}}">
+			<input type="text" name="system.description.source" value="{{system.description.source}}"
+				placeholder="{{localize 'BF.Item.Source.Label'}}" aria-label="{{localize 'BF.Item.Source.Label'}}">
 		{{else}}
 			{{system.description.source}}
 		{{/if}}
@@ -33,16 +40,11 @@
 		{{/if}}
 	</div>
 	<ul class="traits">
-		{{#if system.hitDie}}
-			<li class="hit-die">
-				{{localize "BF.HitDie.Label[one]"}}: {{system.hitDie}}
+		{{#each system.traits as |trait|}}
+			<li class="trait">
+				{{localize trait.label}}: {{trait.value}}
 			</li>
-		{{/if}}
-		{{#if system.keyAbility}}
-			<li class="key-ability">
-				Key Ability: x or y
-			</li>
-		{{/if}}
+		{{/each}}
 		{{#if system.proficiencies}}
 			<li>
 				Proficiencies

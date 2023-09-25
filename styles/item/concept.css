@@ -10,7 +10,6 @@
 		}
 	}
 
-
 	.sheet-header {
 		.color {
 			flex: 0 0 2em;
@@ -96,7 +95,20 @@
 			}
 		}
 
-		:is(.source, .source input) {
+		.color {
+			position: absolute;
+			top: 25px;
+			left: 15px;
+
+			> input {
+				width: 25px;
+				height: 25px;
+				padding: 3px;
+				border-radius: 10px;
+			}
+		}
+
+		.source, .source input {
 			border-radius: 5px;
 			padding-inline: 0.5em;
 			color: white;

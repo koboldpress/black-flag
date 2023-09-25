@@ -60,7 +60,8 @@ export default class KeyAbilityAdvancement extends Advancement {
 
 		const localize = key => {
 			const config = CONFIG.BlackFlag.abilities[key];
-			return (config ? game.i18n.localize(config.labels.abbreviation) : key).toUpperCase();
+			if ( !key || !config ) return "";
+			return game.i18n.localize(config.labels.abbreviation).toUpperCase();
 		};
 
 		const options = flow && this.value.selected ? [this.value.selected] : this.configuration.options;

@@ -1,18 +1,9 @@
-<form autocomplete="off">
+<form autocomplete="off"{{#if system.color}} style="--bf-item-color: {{system.color}};"{{/if}}>
 
 	<section class="summary">
 		{{> "blackFlag.concept-summary" edit=true}}
 	</section>
 
 	{{> "blackFlag.item-advancement"}}
-
-	{{!-- TODO: Add color control back in once it is decided how it will be used
-	<header class="sheet-header">
-		<label class="color">
-			<span>Color</span>
-			<input name="system.description.color" type="color" value="{{system.description.color}}">
-		</label>
-	</header>
-	--}}
 
 </form>

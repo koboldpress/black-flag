@@ -13,13 +13,43 @@ export default class ClassData extends ConceptTemplate {
 		});
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get traits() {
+		const traits = [];
+		if ( this.hitDie ) traits.push({
+			label: "BF.HitDie.Label[one]",
+			value: this.hitDie
+		});
+		if ( this.keyAbility ) traits.push({
+			label: "BF.Advancement.KeyAbility.Title",
+			value: this.keyAbility
+		});
+		// TODO: Proficiencies
+		// TODO: Spellcasting
+		return traits;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedDetails() {
+		// Hit Die
 		const hpAdvancement = this.advancement.byType("hitPoints")[0];
 		this.hitDie = hpAdvancement ? `d${hpAdvancement.configuration.denomination}` : "";
+
+		// Key Ability
+		const keyAbilityAdvancement = this.advancement.byType("keyAbility")[0];
+		if ( keyAbilityAdvancement ) {
+			const keyAbilityOptions = keyAbilityAdvancement.configuration.options.map(o => {
+				const label = CONFIG.BlackFlag.abilities[o]?.labels.full;
+				return label ? game.i18n.localize(label) : o;
+			});
+			const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "disjunction" });
+			this.keyAbility = listFormatter.format(keyAbilityOptions);
+		}
 	}
 }
