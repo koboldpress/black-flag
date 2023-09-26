@@ -1,10 +1,9 @@
 /**
  * Configuration data for skills.
  *
- * @typedef {object} SkillConfiguration
+ * @typedef {LabeledConfiguration} SkillConfiguration
  * @property {string} abbreviation - Shortened version of the skill used for conversion from dnd5e & other features.
  * @property {string} ability - Key for the default ability used by this skill.
- * @property {string} label - Localized label.
  */
 
 /**

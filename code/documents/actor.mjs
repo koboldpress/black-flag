@@ -43,28 +43,21 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * Apply any transformations to the Actor which are caused by dynamic Advancement.
 	 */
 	applyAdvancementEffects() {
-		const applier = new ActiveEffect({ name: "temp" });
+		const cls = getDocumentClass("ActiveEffect");
+		const applier = new cls({ name: "temp" });
 		const overrides = {};
 
 		const levels = Array.fromRange(Object.keys(this.system.progression?.levels ?? {}).length + 1);
 		for ( const level of levels ) {
-			const changes = [];
 			for ( const advancement of this.advancementForLevel(level) ) {
-				const advChanges = advancement.changes({character: level, class: level})?.map(change => {
+				advancement.changes({character: level, class: level})?.map(change => {
 					const c = foundry.utils.deepClone(change);
 					c.advancement = advancement;
 					c.priority ??= c.mode * 10;
 					return c;
-				});
-				if ( !advChanges?.length ) continue;
-				changes.push(...advChanges);
-			}
-			changes.sort((lhs, rhs) => lhs.priority - rhs.priority);
-
-			for ( const change of changes ) {
-				if ( !change.key ) continue;
-				const theseChanges = applier.apply(this, change);
-				Object.assign(overrides, theseChanges);
+				})
+					.sort((lhs, rhs) => lhs.priority - rhs.priority)
+					.forEach(c => Object.assign(overrides, applier.apply(this, c)));
 			}
 		}
 

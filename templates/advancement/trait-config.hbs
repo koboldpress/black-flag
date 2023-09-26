@@ -1,0 +1,89 @@
+<form autocomplete="off">
+	<section class="left-column">
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+			<label>
+				<span>{{localize "BF.Advancement.Trait.Mode.Label"}}</span>
+				<select name="configuration.mode">
+					{{selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label" localize=true}}
+				</select>
+				<p class="hint">
+					{{localize (lookup (lookup CONFIG.traitModes configuration.mode) "hint")}}
+				</p>
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>
+				{{localize "BF.Advancement.Trait.Guaranteed.Label"}}
+				<i class="hintIcon" data-tooltip="BF.Advancement.Trait.Guaranteed.Hint"></i>
+			</legend>
+			<ul class="selected-index-list">
+				<li>
+					<label>
+						<input type="radio" name="selectedIndex" value="-1" {{checked (eq selectedIndex -1)}}>
+						<span>{{grants.label}}</span>
+					</label>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>
+				{{localize "BF.Advancement.Trait.Choices.Label"}}
+				<i class="hintIcon" data-tooltip="BF.Advancement.Trait.Choices.Hint"></i>
+			</legend>
+			<ul class="selected-index-list">
+				{{#each choices}}
+					<li>
+						<label>
+							<input type="radio" name="selectedIndex" value="{{@index}}" {{checked (eq ../selectedIndex @index)}}>
+							<span>{{this.label}}</span>
+						</label>
+						<a data-action="remove-choice"><i class="fa-solid fa-minus"></i></a>
+					</li>
+				{{/each}}
+			</ul>
+			<a data-action="add-choice">
+				<i class="fas fa-plus"></i> {{localize "BF.Advancement.Trait.Action.AddChoiceGroup"}}
+			</a>
+			{{#if (ne selectedIndex -1)}}
+				<label>
+					<span>{{localize "BF.Advancement.Trait.Count.Label"}}</span>
+					<input type="number" name="configuration.count" min="1" step="1" value="{{count}}">
+				</legend>
+			{{/if}}
+		</fieldset>
+	</section>
+
+	<section class="right-column">
+		<fieldset>
+			<legend>{{localize selectedTraitHeader}}</legend>
+			<label>
+				<span>{{localize "BF.Trait.Type"}}</span>
+				<select name="selectedTrait">
+					{{selectOptions validTraitTypes selected=selectedTrait localize=true}}
+				</select>
+			</label>
+
+			{{#*inline ".trait-list"}}
+				<ol class="trait-list">
+					{{#each choices as |choice key|}}
+						<li>
+							<label>
+								<input type="checkbox" name="configuration.checked.{{key}}"
+									{{checked choice.chosen}} {{disabled choice.disabled}}>
+								{{choice.label}}
+							</label>
+							{{#if choice.children}}
+								{{> ".trait-list" choices=choice.children}}
+							{{/if}}
+						</li>
+					{{/each}}
+				</ol>
+			{{/inline}}
+
+			{{> ".trait-list" choices=choiceOptions}}
+
+		</fieldset>
+	</section>
+</form>

@@ -89,6 +89,12 @@
 				<span>{{localize (lookup (lookup CONFIG.sizes system.traits.size) "label")}}</span>
 			</div>
 		{{/if}}
+		{{#if lists.languages}}
+			<div class="trait languages">
+				<label>{{localize "BF.Language.Label[other]"}}</label>
+				<span>{{lists.languages}}</span>
+			</div>
+		{{/if}}
 	</fieldset>
 	<fieldset class="actions">
 		<legend>Actions</legend>

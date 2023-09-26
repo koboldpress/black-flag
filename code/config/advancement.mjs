@@ -36,6 +36,10 @@ export const _advancementTypes = {
 	size: {
 		documentClass: advancement.SizeAdvancement,
 		validItemTypes: new Set(["lineage"])
+	},
+	trait: {
+		documentClass: advancement.TraitAdvancement,
+		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
 	}
 };
 
@@ -54,3 +58,28 @@ export const hitDieSizes = [4, 6, 8, 10, 12];
  * @type {number}
  */
 export const maxLevel = 5;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Modes used within a trait advancement.
+ * @enum {LabeledConfiguration}
+ */
+export const traitModes = {
+	default: {
+		label: "BF.Advancement.Trait.Mode.Default.Label",
+		hint: "BF.Advancement.Trait.Mode.Default.Hint"
+	},
+	expertise: {
+		label: "BF.Advancement.Trait.Mode.Expertise.Label",
+		hint: "BF.Advancement.Trait.Mode.Expertise.Hint"
+	},
+	forcedExpertise: {
+		label: "BF.Advancement.Trait.Mode.Force.Label",
+		hint: "BF.Advancement.Trait.Mode.Force.Hint"
+	},
+	upgrade: {
+		label: "BF.Advancement.Trait.Mode.Upgrade.Label",
+		hint: "BF.Advancement.Trait.Mode.Upgrade.Hint"
+	}
+};

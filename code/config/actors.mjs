@@ -20,7 +20,7 @@ export const movementTypes = {
 	}
 };
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for sheet sections.
@@ -74,13 +74,12 @@ export const sheetSections = {
 	]
 };
 
-/* <><><><> <><><><> <><><><> <><><><> */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for creature sizes.
  *
- * @typedef {object} SizeConfiguration
- * @property {string} label - Localized label for this size.
+ * @typedef {LabeledConfiguration} SizeConfiguration
  * @property {number|{width: number, height: number}} scale - Default token scale for a creature of this size.
  */
 

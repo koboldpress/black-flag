@@ -11,7 +11,8 @@ import { loadCachedSVG } from "./svg.mjs";
  * in <optgroup> based on the provided categories.
  *
  * @param {SelectChoices} choices - Choices to format.
- * @param {object} [options]
+ * @param {object} options
+ * @param {object} options.hash
  * @param {boolean} [options.localize] - Should the label be localized?
  * @param {string} [options.blank] - Name for the empty option, if one should be added.
  * @param {string} [options.labelAttr] - Attribute pointing to label string.
@@ -20,11 +21,11 @@ import { loadCachedSVG } from "./svg.mjs";
  * @returns {Handlebars.SafeString} - Formatted option list.
  */
 function groupedSelectOptions(choices, options) {
-	const localize = options.localize ?? false;
-	const blank = options.blank ?? null;
-	const labelAttr = options.labelAttr ?? "label";
-	const chosenAttr = options.chosenAttr ?? "chosen";
-	const childrenAttr = options.childrenAttr ?? "children";
+	const localize = options.hash.localize ?? false;
+	const blank = options.hash.blank ?? null;
+	const labelAttr = options.hash.labelAttr ?? "label";
+	const chosenAttr = options.hash.chosenAttr ?? "chosen";
+	const childrenAttr = options.hash.childrenAttr ?? "children";
 
 	// Create an option
 	const option = (name, label, chosen) => {

@@ -26,6 +26,23 @@
 		.advancement-summary {
 			flex: 100% 1 1;
 			padding-block-end: 0.25rem;
+
+			& p {
+				margin-block: 0;
+			}
+		}
+	}
+
+	.choice-entry {
+		.choice-name, .content-link {
+			border: 1px solid color-mix(in oklab, var(--bf-item-color, var(--bf-blue)), black 35%);
+			padding-inline: 0.25rem;
+			border-radius: 5px;
+			background-color: color-mix(in oklab, color-mix(in oklab, var(--bf-item-color, var(--bf-blue)), white 90%), transparent 50%);
+		}
+	
+		[data-action] {
+			margin-inline: 0.25rem;
 		}
 	}
 }

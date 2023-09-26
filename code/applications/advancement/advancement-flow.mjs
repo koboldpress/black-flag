@@ -103,6 +103,7 @@ export default class AdvancementFlow extends FormApplication {
 	getData() {
 		return {
 			appId: this.id,
+			accentColor: this.advancement.item.accentColor,
 			advancement: this.advancement,
 			editingMode: this.advancement.actor.sheet.editingMode ?? false,
 			type: this.advancement.constructor.typeName,

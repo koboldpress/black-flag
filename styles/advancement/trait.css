@@ -1,0 +1,51 @@
+.advancement-config.app form {
+	.selected-index-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		& li {
+			display: flex;
+			gap: 0.5rem;
+
+			& label {
+				flex-grow: 1;
+				flex-wrap: nowrap;
+				align-items: center;
+			
+				& input[type="radio"] {
+					flex: 0 0 20px;
+					top: 0;
+					width: 20px;
+					height: 20px;
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	[data-action="add-choice"] {
+		display: block;
+		padding: 0.5rem;
+		text-align: center;
+	}
+
+	.trait-list {
+		list-style: none;
+		margin: 0;
+		margin-block-start: 0.5rem;
+		padding: 0;
+
+		& label {
+			align-items: center;
+		}
+
+		& .trait-list {
+			margin-block-start: 0;
+			margin-inline-start: 1rem;
+		}
+	}
+}

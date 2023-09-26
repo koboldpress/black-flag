@@ -2,25 +2,23 @@
 	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
 	<header>
 		{{> "blackFlag.advancement-name"}}
-		{{#if needsConfiguration}}
-			<div class="advancement-actions">
-				<button data-action="select-choice">
-					{{localize "BF.Advancement.ChooseFeatures.Action.Choose"}}
-				</button>
-			</div>
-		{{/if}}
 	</header>
 
 	<div class="advancement-summary">
-		{{#each choosen}}
+		{{#each chosen as |choice|}}
 			<span class="choice-entry">
-				{{{blackFlag-linkForUUID this.uuid}}}
-				{{#if (or @root.editingMode @root.needsConfiguration)}}
-					<a data-action="remove-choice" data-id="{{this.id}}">
+				<span class="choice-name">{{this.label}}</span>
+				{{~#if (or @root.editingMode @root.needsConfiguration)}}
+					<a data-action="remove-choice" data-key="{{this.key}}">
 						<i class="fa-solid fa-trash"></i>
 					</a>
 				{{/if}}
 			</span>
 		{{/each}}
+		{{#if needsConfiguration}}
+			<select name="added">
+				{{blackFlag-groupedSelectOptions availableChoices blank=blankLabel}}
+			</select>
+		{{/if}}
 	</div>
 </form>

@@ -27,7 +27,7 @@
 				</span>
 			{{/if}}
 		</fieldset>
-		{{#*inline "blackFlag.typeControl"}}
+		{{#*inline ".typeControl"}}
 			{{#with (lookup system.progression type)}}
 				<figure class="icon">
 					<img src="{{this.img}}">
@@ -55,21 +55,21 @@
 				{{localize "BF.Item.Type.Lineage[one]"}}
 				{{blackFlag-notificationBadge actor category="lineage" displayOrder=true}}
 			</legend>
-			{{> "blackFlag.typeControl" type="lineage"}}
+			{{> ".typeControl" type="lineage"}}
 		</fieldset>
 		<fieldset class="heritage">
 			<legend>
 				{{localize "BF.Item.Type.Heritage[one]"}}
 				{{blackFlag-notificationBadge actor category="heritage" displayOrder=true}}
 			</legend>
-			{{> "blackFlag.typeControl" type="heritage"}}
+			{{> ".typeControl" type="heritage"}}
 		</fieldset>
 		<fieldset class="background">
 			<legend>
 				{{localize "BF.Item.Type.Background[one]"}}
 				{{blackFlag-notificationBadge actor category="background" displayOrder=true}}
 			</legend>
-			{{> "blackFlag.typeControl" type="background"}}
+			{{> ".typeControl" type="background"}}
 		</fieldset>
 		{{#each system.progression.classes as |data identifier|}}
 			<fieldset class="class" data-class="{{identifier}}">

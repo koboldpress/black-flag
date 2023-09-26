@@ -44,6 +44,21 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async prepareLists(context) {
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, {type: "unit", style: "short"});
+		context.lists ??= {};
+
+		context.lists.languages = listFormatter.format(
+			context.system.proficiencies.languages.value.reduce((arr, language) => {
+				const label = CONFIG.BlackFlag.languages[language]?.label;
+				arr.push(label ? game.i18n.localize(label) : language);
+				return arr;
+			}, [])
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Prepare levels on the progression tab and assign them advancement flows.
 	 * @param {object} context - Context being prepared.

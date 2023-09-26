@@ -1,4 +1,5 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off">
+<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
+	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
 	<header>
 		{{> "blackFlag.advancement-name"}}
 		{{#if needsConfiguration}}

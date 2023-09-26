@@ -6,6 +6,14 @@ import * as items from "./items.mjs";
 import * as notifications from "./notifications.mjs";
 import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
+import * as traits from "./traits.mjs";
+
+/**
+ * Basic configuration information with a static label.
+ *
+ * @typedef {object} LabeledConfiguration
+ * @property {string} label - Localized label.
+ */
 
 export default {
 	...abilities,
@@ -15,5 +23,6 @@ export default {
 	...items,
 	...notifications,
 	registration,
-	...skills
+	...skills,
+	...traits
 };

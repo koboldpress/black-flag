@@ -77,6 +77,8 @@ export default class AdvancementConfig extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Context Preparation         */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
 		const levels = Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]);
@@ -103,15 +105,13 @@ export default class AdvancementConfig extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Perform any changes to configuration data before it is saved to the advancement.
-	 * @param {object} configuration - Configuration object.
-	 * @returns {object} - Modified configuration.
-	 */
-	async prepareConfigurationUpdate(configuration) {
-		return configuration;
+	render(force=false, options={}) {
+		this.advancement.apps[this.appId] = this;
+		return super.render(force, options);
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	activateListeners(jQuery) {
@@ -128,13 +128,6 @@ export default class AdvancementConfig extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	render(force=false, options={}) {
-		this.advancement.apps[this.appId] = this;
-		return super.render(force, options);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	async _updateObject(event, formData) {
 		let updates = foundry.utils.expandObject(formData);
 		if ( updates.configuration ) {
@@ -146,18 +139,12 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Helper method to take an object and apply updates that remove any empty keys.
-	 * @param {object} object - Object to be cleaned.
-	 * @returns {object} - Copy of object with only non false-ish values included and others marked
-	 *                     using `-=` syntax to be removed by update process.
-	 * @protected
+	 * Perform any changes to configuration data before it is saved to the advancement.
+	 * @param {object} configuration - Configuration object.
+	 * @returns {object} - Modified configuration.
 	 */
-	static _cleanedObject(object) {
-		return Object.entries(object).reduce((obj, [key, value]) => {
-			if ( value ) obj[key] = value;
-			else obj[`-=${key}`] = null;
-			return obj;
-		}, {});
+	async prepareConfigurationUpdate(configuration) {
+		return configuration;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

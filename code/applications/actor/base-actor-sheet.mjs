@@ -37,6 +37,7 @@ export default class BaseActorSheet extends ActorSheet {
 		context.editingMode = this.editingMode;
 
 		await this.prepareItems(context);
+		await this.prepareLists(context);
 
 		return context;
 	}
@@ -128,6 +129,14 @@ export default class BaseActorSheet extends ActorSheet {
 		section.items.push(item);
 		return section;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare various lists that might be displayed on the actor's sheet.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 */
+	async prepareLists(context) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

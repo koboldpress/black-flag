@@ -1,3 +1,4 @@
+import { cleanedObjectUpdate } from "../../utils/object.mjs";
 import GrantFeaturesConfig from "./grant-features-config.mjs";
 
 /**
@@ -46,7 +47,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async prepareConfigurationUpdate(configuration) {
-		if ( configuration.choices ) configuration.choices = this.constructor._cleanedObject(configuration.choices);
+		if ( configuration.choices ) configuration.choices = cleanedObjectUpdate(configuration.choices);
 
 		// Ensure items are still valid if type restriction has changed
 		const pool = [];

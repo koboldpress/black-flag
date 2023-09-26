@@ -83,7 +83,6 @@ export default class PCData extends ActorDataModel {
 				}),
 				languages: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
 					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
 				}),
 				skills: new fields.MappingField(new foundry.data.fields.SchemaField({
@@ -327,7 +326,6 @@ export default class PCData extends ActorDataModel {
 			primary: labels.shift(),
 			secondary: listFormatter.format(labels)
 		};
-		console.log(movement.labels);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
