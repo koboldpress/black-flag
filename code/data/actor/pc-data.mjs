@@ -454,16 +454,19 @@ export default class PCData extends ActorDataModel {
 		// Create class if it doesn't already exist on actor
 		let existingClass = this.progression.classes[cls.identifier]?.document;
 		if ( !existingClass ) {
-			existingClass = (await this.parent.createEmbeddedDocuments("Item", [cls.toObject()], {render: false}))[0];
+			existingClass = (await this.parent.createEmbeddedDocuments("Item", [cls.toObject()], { render: false }))[0];
 		}
 
 		// Add new progression data
-		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass});
+		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass}, { render: false });
 
 		// Apply advancements for the new level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
-			await advancement.apply(levels, undefined, { initial: true });
+			await advancement.apply(levels, undefined, { initial: true, render: false });
 		}
+
+		// TODO: Need to find a way to re-render on all clients
+		this.parent.render();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -478,13 +481,16 @@ export default class PCData extends ActorDataModel {
 
 		// Remove advancements for the old level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
-			await advancement.reverse(levels);
+			await advancement.reverse(levels, undefined, { render: false });
 		}
 
 		// Remove progression data for level
-		await this.parent.update({[`system.progression.levels.-=${this.progression.level}`]: null});
+		await this.parent.update({[`system.progression.levels.-=${this.progression.level}`]: null}, { render: false });
 
 		// If class has no more levels, remove it from the actor
-		if ( levels.class <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id]);
+		if ( levels.class <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id], { render: false });
+
+		// TODO: Need to find a way to re-render on all clients
+		this.parent.render();
 	}
 }

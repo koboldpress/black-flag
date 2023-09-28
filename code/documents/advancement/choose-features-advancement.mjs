@@ -114,12 +114,12 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	async apply(levels, data, { initial=false, render=true }={}) {
 		if ( initial || !data?.length ) return;
 		const level = this.relavantLevel(levels);
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
 		const added = await this.createItems(data, existing);
-		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(level)}`]: added});
+		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(level)}`]: added}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -129,7 +129,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const addedCollection = foundry.utils.getProperty(this.value._source, keyPath).filter(a => a.document !== id);
 		await this.actor.deleteEmbeddedDocuments("Item", [id], {render: false});
-		return await this.actor.update({[`${this.valueKeyPath}.${keyPath}`]: addedCollection});
+		return await this.actor.update({[`${this.valueKeyPath}.${keyPath}`]: addedCollection}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -86,21 +86,19 @@ export default class SizeAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	async apply(levels, data, { initial=false, render=true }={}) {
 		if ( initial ) {
 			if ( this.configuration.options.size !== 1 ) return;
 			data = this.configuration.options.first();
 		}
 		if ( !data ) return;
 
-		const updates = { [`${this.valueKeyPath}.selected`]: data };
-		return await this.actor.update(updates);
+		return await this.actor.update({[`${this.valueKeyPath}.selected`]: data}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels) {
-		const updates = { [`${this.valueKeyPath}.-=selected`]: null };
-		return await this.actor.update(updates);
+	async reverse(levels, data, { render=true }={}) {
+		return await this.actor.update({[`${this.valueKeyPath}.-=selected`]: null}, { render });
 	}
 }

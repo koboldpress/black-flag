@@ -74,9 +74,11 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	 * Create items on the actor with the proper flags.
 	 * @param {string[]} uuids - UUIDs of items to create.
 	 * @param {object[]} [existing] - Existing granted items.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
 	 * @returns {object[]} - Array of data for storing in value.
 	 */
-	async createItems(uuids, existing) {
+	async createItems(uuids, existing, { render=false }={}) {
 		const items = [];
 		const added = existing ?? [];
 		for ( const uuid of uuids ) {
@@ -92,24 +94,28 @@ export default class GrantFeaturesAdvancement extends Advancement {
 			}, {keepId: true}).toObject());
 			added.push({ document: id, uuid });
 		}
-		await this.actor.createEmbeddedDocuments("Item", items, {keepId: true, render: false});
+		await this.actor.createEmbeddedDocuments("Item", items, {keepId: true, render});
 		return added;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	async apply(levels, data, { initial=false, render=true }={}) {
 		const added = await this.createItems(Object.values(this.configuration.pool).map(d => d.uuid));
-		return await this.actor.update({[`${this.valueKeyPath}.${this.storagePath(this.relavantLevel(levels))}`]: added});
+		return await this.actor.update({
+			[`${this.valueKeyPath}.${this.storagePath(this.relavantLevel(levels))}`]: added
+		}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels) {
+	async reverse(levels, data, { render=true }={}) {
 		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, {render: false});
-		return await this.actor.update({[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null});
+		return await this.actor.update({
+			[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null
+		}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

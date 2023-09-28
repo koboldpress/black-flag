@@ -470,21 +470,25 @@ export default class Advancement extends BaseAdvancement {
 	/**
 	 * Locally apply this advancement to the actor.
 	 * @param {AdvancementLevels} levels - Levels being advanced.
-	 * @param {object} [data] - Data from the advancement form.
-	 * @param {object} options
+	 * @param {*} [data] - Data from the advancement form.
+	 * @param {object} [options={}]
 	 * @param {boolean} [options.initial=false] - Is this the initial application?
+	 * @param {boolean} [options.render=true] - Should the update re-render the actor?
 	 * @abstract
 	 */
-	async apply(levels, data, { initial=false }={}) { }
+	async apply(levels, data, { initial=false, render=true }={}) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Locally remove this advancement's changes from the actor.
 	 * @param {AdvancementLevels} levels - Levels being removed.
+	 * @param {*} [data] - Data that might guide the reversing process.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.render=true] - Should the update re-render the actor?
 	 * @abstract
 	 */
-	async reverse(levels) { }
+	async reverse(levels, data, { render=true }={}) { }
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Helper Methods            */

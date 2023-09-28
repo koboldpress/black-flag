@@ -35,10 +35,10 @@ export function actorValues(actor, trait) {
 	const field = actor.system.schema.getField(keyPath.replace("system.", ""));
 	if ( field instanceof MappingField ) {
 		Object.entries(data).forEach(([k, d]) =>
-			values[k] = foundry.utils.getProperty(d, `${trait === "saves" ? "save." : ""}proficiency.multiplier`)
+			values[`${trait}:${k}`] = foundry.utils.getProperty(d, `${trait === "saves" ? "save." : ""}proficiency.multiplier`)
 		);
 	} else {
-		data.value.forEach(v => values[v] = 1);
+		data.value.forEach(v => values[`${trait}:${v}`] = 1);
 	}
 
 	return values;
@@ -102,25 +102,36 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 	let result = {};
 	if ( prefixed && any ) {
 		const key = `${trait}:*`;
-		result[key] = { label: keyLabel(key).titleCase(), chosen: chosen.has(key) };
+		result[key] = { label: keyLabel(key).titleCase(), chosen: chosen.has(key), sorting: false };
 	}
 
-	for ( let [key, data] of Object.entries(categories(trait)) ) {
-		const label = foundry.utils.getType(data) === "Object"
+	const prepareCategory = (key, data, result, prefix) => {
+		let label = foundry.utils.getType(data) === "Object"
 			? foundry.utils.getProperty(data, traitConfig.labelKeyPath ?? "label") : data;
-		if ( prefixed ) key = `${trait}:${key}`;
+		if ( !label ) {
+			const localization = foundry.utils.getProperty(data, "localization");
+			if ( localization ) label = `${localization}[other]`;
+			else label = key;
+		}
+		if ( prefixed ) key = `${prefix}:${key}`;
 		result[key] = {
 			label: game.i18n.localize(label),
 			chosen: chosen.has(key),
-			sorted: traitConfig.sortCategories !== false
+			sorting: traitConfig.sortCategories !== false
 		};
-	}
+		if ( data.children ) {
+			const children = result[key].children = {};
+			if ( prefixed && any ) {
+				const anyKey = `${key}:*`;
+				children[anyKey] = { label: keyLabel(anyKey).titleCase(), chosen: chosen.has(anyKey), sorting: false };
+			}
+			Object.entries(data.children).forEach(([k, v]) => prepareCategory(k, v, children, key));
+		}
+	};
 
-	// Sort
-	const choices = new SelectChoices(result);
-	choices.sort();
+	Object.entries(categories(trait)).forEach(([k, v]) => prepareCategory(k, v, result, trait));
 
-	return choices;
+	return new SelectChoices(result).sorted();
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -184,33 +195,34 @@ export function keyLabel(key, { count, trait, final }={}) {
 	if ( !traitConfig ) return key;
 	const type = game.i18n.localize(`${traitConfig.labels.localization}[${pluralRules.select(count ?? 1)}]`).toLowerCase();
 
-	const categoryKey = parts.shift();
+	const searchTrait = (parts, traits, type) => {
+		const firstKey = parts.shift();
 
-	// "skills:*" => Any skill or Any one skill
-	if ( categoryKey === "*" ) {
-		const key = `BF.Advancement.Trait.Choice.${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
-		return game.i18n.format(key, { count: localizedCount, type });
-	}
+		if ( firstKey === "*" ) {
+			const key = `BF.Advancement.Trait.Choice.${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
+			return game.i18n.format(key, { count: localizedCount, type });
+		}
 
-	const category = categories(trait)[categoryKey];
-	if ( category ) {
-		if ( foundry.utils.getType(category) !== "Object" ) return category;
-		return game.i18n.localize(foundry.utils.getProperty(category, traitConfig.labelKeyPath ?? "label"));
-	}
+		const category = traits[firstKey];
+		if ( !category ) return key;
+		const localization = foundry.utils.getProperty(category, "localization");
+		let label = foundry.utils.getType(category) !== "Object" ? category
+			: foundry.utils.getProperty(category, traitConfig.labelKeyPath ?? "label") ?? `${localization}[other]`;
 
-	// TODO: Rework this logic when children are properly added
-// 	for ( const childrenKey of Object.values(traitConfig.children ?? {}) ) {
-// 		if ( CONFIG.BlackFlag[childrenKey]?.[key] ) return CONFIG.BlackFlag[childrenKey]?.[key];
-// 	}
-// 
-// 	for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
-// 		if ( !CONFIG.BlackFlag[idsKey]?.[key] ) continue;
-// 		const index = getBaseItem(CONFIG.BlackFlag[idsKey][key], { indexOnly: true });
-// 		if ( index ) return index.name;
-// 		else break;
-// 	}
+		if ( !parts.length ) {
+			if ( !label ) return key;
+			return game.i18n.localize(label);
+		}
 
-	return key;
+		if ( !category.children ) return key;
+
+		if ( localization ) type = game.i18n.localize(`${localization}[${pluralRules.select(count ?? 1)}]`);
+		else type = label;
+
+		return searchTrait(parts, category.children, type);
+	};
+
+	return searchTrait(parts, categories(trait), type);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

@@ -64,9 +64,12 @@ export default class ConceptTemplate extends ItemDataModel {
 		log(`Applying advancement for ${this.parent.name}`);
 		for ( const level of levels ) {
 			for ( const advancement of this.parent.advancementForLevel(level.character)) {
-				await advancement.apply(level, undefined, { initial: true });
+				await advancement.apply(level, undefined, { initial: true, render: false });
 			}
 		}
+
+		// TODO: Need to find a way to re-render on all clients
+		this.parent.render();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -81,11 +84,14 @@ export default class ConceptTemplate extends ItemDataModel {
 		for ( const level of levels.reverse() ) {
 			// TODO: These advancements should be unapplied in reverse order
 			for ( const advancement of this.parent.advancementForLevel(level.character)) {
-				await advancement.reverse(level);
+				await advancement.reverse(level, undefined, { render: false });
 			}
 		}
 
 		// Remove any remaining advancement data
-		await this.parent.actor.update({[`system.progression.advancement.-=${this.parent.id}`]: null});
+		await this.parent.actor.update({[`system.progression.advancement.-=${this.parent.id}`]: null}, { render: false });
+
+		// TODO: Need to find a way to re-render on all clients
+		this.parent.render();
 	}
 }

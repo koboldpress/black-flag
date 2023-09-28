@@ -9,7 +9,8 @@ export default class HeritageData extends ConceptTemplate {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "heritage",
 			category: "concept",
-			localization: "BF.Item.Type.Heritage"
+			localization: "BF.Item.Type.Heritage",
+			accentColor: "#aa0000"
 		});
 	}
 }

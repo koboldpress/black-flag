@@ -9,7 +9,8 @@ export default class BackgroundData extends ConceptTemplate {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "background",
 			category: "concept",
-			localization: "BF.Item.Type.Background"
+			localization: "BF.Item.Type.Background",
+			accentColor: "#0000aa"
 		});
 	}
 }

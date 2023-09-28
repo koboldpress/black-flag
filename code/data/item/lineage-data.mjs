@@ -9,7 +9,8 @@ export default class LineageData extends ConceptTemplate {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "lineage",
 			category: "concept",
-			localization: "BF.Item.Type.Lineage"
+			localization: "BF.Item.Type.Lineage",
+			accentColor: "#00aa00"
 		});
 	}
 }

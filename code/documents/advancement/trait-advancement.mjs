@@ -36,7 +36,7 @@ export default class TraitAdvancement extends Advancement {
 	 */
 	prepareData() {
 		const traitConfig = CONFIG.BlackFlag.traits[this.bestGuessTrait()];
-		this.title = this.title || traitConfig?.labels.title || this.constructor.metadata.title;
+		this.title = this.title || game.i18n.localize(traitConfig?.labels.title) || this.constructor.metadata.title;
 		this.icon = this.icon || traitConfig?.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
 		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.supportsAnyLevel ? 0 : 1;
@@ -113,7 +113,7 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	async apply(levels, data, { initial=false, render=true }={}) {
 		if ( initial ) {
 			data = new Set();
 
@@ -135,12 +135,12 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels, key) {
+	async reverse(levels, data, { render=true }={}) {
 		if ( !this.value.selected ) return;
-		if ( !key ) return await this.actor.update({[`${this.valueKeyPath}.-=selected`]: null});
+		if ( !data ) return await this.actor.update({[`${this.valueKeyPath}.-=selected`]: null});
 
 		const selectedCollection = this.value.selected;
-		selectedCollection.delete(key);
+		selectedCollection.delete(data);
 		return await this.actor.update({[`${this.valueKeyPath}.selected`]: Array.from(selectedCollection)});
 	}
 
@@ -164,10 +164,9 @@ export default class TraitAdvancement extends Advancement {
 
 		for ( const trait of traitTypes ) {
 			const actorValues = Trait.actorValues(this.actor, trait);
-			const choices = Trait.choices(trait);
-			for ( const k of choices.set ) {
-				const key = `${trait}:${k}`;
-				const value = actorValues[k];
+			const choices = Trait.choices(trait, { prefixed: true });
+			for ( const key of choices.set ) {
+				const value = actorValues[key];
 				if ( this.configuration.mode === "default" ) {
 					if ( value >= 1 ) selected.add(key);
 					else available.add(key);
@@ -262,8 +261,10 @@ export default class TraitAdvancement extends Advancement {
 			return { available: [], choices: new SelectChoices() };
 		}
 
-		let available = choices.map(c => Trait.mixedChoices(c));
-		if ( this.configuration.grants.size ) available.unshift(Trait.mixedChoices(this.configuration.grants));
+		let available = [
+			...this.configuration.grants.map(g => Trait.mixedChoices(new Set([g]))),
+			...choices.map(c => Trait.mixedChoices(c))
+		];
 		available.sort((lhs, rhs) => lhs.set.size - rhs.set.size);
 
 		// Remove any fulfilled grants

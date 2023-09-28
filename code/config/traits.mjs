@@ -12,7 +12,7 @@
  * @property {string} [actorKeyPath] - Key path to this trait on the actor, if it isn't `traits.{name}` for traits
  *                                     or `proficiencies.{name}` for proficiencies.
  * @property {string} [configKey] - Key of the trait options if it isn't the same as the trait name.
- * @property {boolean} [sortCategories=false] - Should top-level categories should be sorted?
+ * @property {boolean} [sortCategories=true] - Should top-level categories should be sorted?
  */
 
 /**
@@ -20,9 +20,36 @@
  * @enum {TraitConfiguration}
  */
 export const traits = {
+	armor: {
+		labels: {
+			title: "BF.Armor.Label[other]",
+			localization: "BF.Armor.Label"
+		},
+		icon: "systems/black-flag/artwork/traits/armor.svg",
+		type: "proficiency",
+		sortCategories: false
+	},
+	weapons: {
+		labels: {
+			title: "BF.Weapon.Label[other]",
+			localization: "BF.Weapon.Label"
+		},
+		icon: "systems/black-flag/artwork/traits/weapons.svg",
+		type: "proficiency",
+		sortCategories: false
+	},
+	tools: {
+		labels: {
+			title: "BF.Tool.Label[other]",
+			localization: "BF.Tool.Label"
+		},
+		icon: "systems/black-flag/artwork/traits/tools.svg",
+		type: "proficiency",
+		expertise: true
+	},
 	saves: {
 		labels: {
-			title: "Saving Throw Proficiencies",
+			title: "BF.SavingThrow.Label[other]",
 			localization: "BF.Ability.Label"
 		},
 		localization: "BF.SavingThrow.Label",
@@ -34,7 +61,7 @@ export const traits = {
 	},
 	skills: {
 		labels: {
-			title: "Skill Proficiencies",
+			title: "BF.Skill.Label[other]",
 			localization: "BF.Skill.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/skills.svg",
@@ -43,7 +70,7 @@ export const traits = {
 	},
 	languages: {
 		labels: {
-			title: "Language Proficiencies",
+			title: "BF.Language.Label[other]",
 			localization: "BF.Language.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/languages.svg",

@@ -30,14 +30,6 @@ export default class SelectChoices {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Most recent filter applied to this SelectChoices.
-	 * @type {Set<string>}
-	 */
-	#lastFilter;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Create a set of available choice keys.
 	 * @type {Set<string>}
 	 */

@@ -161,7 +161,7 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false }={}) {
+	async apply(levels, data, { initial=false, render=true }={}) {
 		if ( initial ) {
 			data ??= this.value.granted ?? {};
 			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
@@ -180,23 +180,21 @@ export default class HitPointsAdvancement extends Advancement {
 		let value = this.constructor.valueForLevel(data, this.configuration.denomination, levels.class);
 		if ( value === undefined ) return;
 
-		const updates = {
+		return await this.actor.update({
 			"system.attributes.hp.value": (this.actor.system.attributes.hp.value ?? 0) + this._getApplicableValue(value),
 			[`${this.valueKeyPath}.granted`]: data
-		};
-		return await this.actor.update(updates);
+		}, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels) {
+	async reverse(levels, data, { render=true }={}) {
 		let value = this.valueForLevel(levels.class);
 		if ( value === undefined ) return;
 
-		const updates = {
+		return await this.actor.update({
 			"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
 			[`${this.valueKeyPath}.granted.-=${levels.class}`]: null
-		};
-		return await this.actor.update(updates);
+		}, { render });
 	}
 }

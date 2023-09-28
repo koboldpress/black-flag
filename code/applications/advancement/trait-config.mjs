@@ -9,10 +9,7 @@ export default class TraitConfig extends AdvancementConfig {
 	constructor(...args) {
 		super(...args);
 		this.selected = (this.config.choices.length && !this.config.grants.size) ? 0 : -1;
-		// TODO: Set initial trait type
-		// If granted, use the first type found in prefixes
-		// If choices, use the type defined in the first choice
-		this.trait = "languages";
+		this.trait = this.advancement.bestGuessTrait() ?? "skills";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -86,7 +83,7 @@ export default class TraitConfig extends AdvancementConfig {
 			context.default.title = game.i18n.localize(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
-		context.choiceOptions = await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
+		context.choiceOptions = Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
 		context.selectedTraitHeader = `${traitConfig.labels.localization}[other]`;
 		context.selectedTrait = this.trait;
 
