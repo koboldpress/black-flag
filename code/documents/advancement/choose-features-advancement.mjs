@@ -153,7 +153,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 		// Type restriction is set and the item type does not match the selected type
 		if ( type && (type !== item.type) ) {
-			const typeLabel = game.i18n.localize(CONFIG.Item.typeLabels[restriction]);
+			const typeLabel = game.i18n.localize(CONFIG.Item.typeLabels[type]);
 			if ( strict ) throw new Error(game.i18n.format("BF.Advancement.ChooseFeatures.Warning.Type", {type: typeLabel}));
 			return false;
 		}

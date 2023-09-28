@@ -1,4 +1,7 @@
-<form autocomplete="off" class="drop-target">
+<form autocomplete="off" class="drop-target">{{log this}}
+	{{#if advancement.configuration.hint}}
+		<p>{{advancement.configuration.hint}}</p>
+	{{/if}}
 	{{#each choices}}
 		<section class="option" data-uuid="{{this.document.uuid}}">
 			<div class="info">
@@ -17,7 +20,7 @@
 	{{/each}}
 	{{#if allowDrops}}
 		<section class="drop-area">
-			<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+			<p class="hint">{{dropLabel}}</p>
 		</section>
 	{{/if}}
 </form>

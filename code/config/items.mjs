@@ -2,7 +2,7 @@
  * Configuration data for feature type categories.
  *
  * @typedef {object} FeatureCategoryConfiguration
- * @property {string} label - Localized label for this category.
+ * @property {string} localization - Pluralizable label for this category.
  * @property {{[key: string]: FeatureTypeConfiguration}} [types] - Types available in this category.
  */
 
@@ -36,5 +36,30 @@ export const featureCategories = {
 	},
 	heritage: {
 		localization: "BF.Item.Feature.Category.Heritage"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Configuration data for talent type categories.
+ *
+ * @typedef {object} TalentCategoryConfiguration
+ * @property {string} localization - Pluralizable label for this category.
+ */
+
+/**
+ * Categories of talent items.
+ * @enum {TalentCategoryConfiguration}
+ */
+export const talentCategories = {
+	magic: {
+		localization: "BF.Item.Talent.Category.Magic"
+	},
+	martial: {
+		localization: "BF.Item.Talent.Category.Martial"
+	},
+	technical: {
+		localization: "BF.Item.Talent.Category.Technical"
 	}
 };

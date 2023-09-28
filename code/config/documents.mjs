@@ -9,7 +9,7 @@ export const _documentCategories = {
 		},
 		feature: {
 			label: "BF.Item.Category.Feature.Label",
-			types: ["feature"]
+			types: ["feature", "talent"]
 		}
 	}
 };

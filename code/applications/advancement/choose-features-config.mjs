@@ -39,7 +39,10 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 				typeOptions: selectedCategory?.types ? makeLabels(selectedCategory.types) : null
 			};
 		} else if ( this.advancement.configuration.type === "talent" ) {
-			// TODO: Display option to select specific talent lists
+			context.typeRestriction = {
+				categoryLabel: game.i18n.localize("BF.Item.Talent.Category.Label"),
+				categoryOptions: makeLabels(CONFIG.BlackFlag.talentCategories)
+			};
 		}
 		return context;
 	}

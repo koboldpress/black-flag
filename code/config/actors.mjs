@@ -48,12 +48,12 @@ export const sheetSections = {
 			label: "BF.Item.Feature.Category.Class[other]"
 			// TODO: Create categories for each class when multi-classing is supported
 		},
-		// {
-		// 	id: "talents",
-		// 	tab: "features",
-		// 	types: [{type: "talent"}],
-		// 	label: "BF.Item.Type.Talent[other]"
-		// },
+		{
+			id: "talents",
+			tab: "features",
+			types: [{type: "talent"}],
+			label: "BF.Item.Type.Talent[other]"
+		},
 		{
 			id: "lineage-features",
 			tab: "features",

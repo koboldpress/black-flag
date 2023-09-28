@@ -71,12 +71,16 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
+		context.advancement = this.advancement;
 		context.allowDrops = this.advancement.configuration.allowDrops;
 		context.choices = await Promise.all(
 			Object.values(this.advancement.configuration.pool)
 				.filter(c => !this.advancement.itemChosen(c.uuid))
 				.map(c => this.getChoiceData(c.uuid))
 		);
+		context.dropLabel = game.i18n.format("BF.Advancement.ChooseFeatures.Drop", {
+			type: game.i18n.localize(`BF.Item.Type.${this.advancement.configuration.type.capitalize()}[one]`).toLowerCase()
+		});
 		// TODO: Filter out any choices made a previous levels
 		return context;
 	}
