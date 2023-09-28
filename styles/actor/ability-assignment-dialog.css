@@ -1,7 +1,7 @@
 .ability-assignment-dialog form {
 	--score-count: 6;
 
-	& h1 {
+	h1 {
 		display: flex;
 		justify-content: space-between;
 		margin: -0.5rem;
@@ -12,7 +12,7 @@
 		color: white;
 		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
 
-		& button {
+		button {
 			width: unset;
 			color: white;
 			border-radius: 0 10px;
@@ -22,7 +22,7 @@
 		}
 	}
 
-	& button:disabled {
+	button:disabled {
 		opacity: 0.5;
 	}
 
@@ -197,7 +197,7 @@
 			}
 		}
 
-		& table {
+		table {
 			display: flex;
 			flex-wrap: wrap;
 			margin: 0;
@@ -213,12 +213,12 @@
 				text-transform: uppercase;
 			}
 
-			& tr {
+			tr {
 				display: flex;
 				flex-direction: column;
 			}
 
-			& :is(th, td) {
+			:is(th, td) {
 				padding-inline: 1em;
 				text-align: center;
 			}
@@ -246,7 +246,7 @@
 
 	.manual {
 		.scores {
-			& input {
+			input {
 				height: 3rem;
 				font-size: var(--font-size-24);
 				text-align: center;

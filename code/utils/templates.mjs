@@ -1,5 +1,6 @@
 import NotificationTooltip from "../applications/notification-tooltip.mjs";
 import { linkForUUID } from "./document.mjs";
+import { numberFormat } from "./number.mjs";
 import { loadCachedSVG } from "./svg.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -116,7 +117,8 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-groupedSelectOptions": groupedSelectOptions,
 		"blackFlag-inlineSVG": inlineSVG,
 		"blackFlag-linkForUUID": linkForUUID,
-		"blackFlag-notificationBadge": notificationBadge
+		"blackFlag-notificationBadge": notificationBadge,
+		"blackFlag-numberFormat": (number, options) => numberFormat(number, options.hash)
 	});
 }
 

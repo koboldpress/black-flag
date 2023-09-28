@@ -12,7 +12,7 @@
 			height: 60px;
 		}
 
-		& h1 {
+		h1 {
 			flex: 1 0 50%;
 			margin: 0;
 			border: none;
@@ -67,7 +67,7 @@
 	[data-tab="front"] > main {
 		flex-grow: 1;
 
-		& > div {
+		> div {
 			height: 100%;
 		}
 
@@ -82,29 +82,125 @@
 				grid-column: 1 / -1;
 				grid-row: 1 / span 2;
 				display: flex;
+				flex-wrap: wrap;
+				gap: 3rem 0;
 				justify-content: space-between;
+				margin-block-start: 0.5rem;
+				margin-block-end: 1rem;
 
-				> .ability {
-					flex-basis: 6em;
+				.ability {
+					flex-basis: 6rem;
+					contain: layout;
+					display: flex;
+					justify-content: center;
+					margin-block-start: 0rem;
+					margin-block-end: -1rem;
+					padding-block-end: 1.5rem;
 
-					> label {
-						display: block;
-						font-size: var(--font-size-12);
-						font-weight: bold;
-						text-align: center;
-						text-transform: uppercase;
-					}
 					.value {
-						display: block;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 90%;
+						aspect-ratio: 1;
+						background-color: white;
+						border: 2px solid var(--bf-color-border-gray);
+						border-radius: 100%;
 						font-size: var(--font-size-16);
 						text-align: center;
 					}
-					.mod {
-						display: block;
-						border: 1px solid var(--bf-color-border-gray);
+
+					.ability-score {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 6.5rem;
+						height: 6.5rem;
 						border-radius: 100%;
-						padding: 0.25em;
-						text-align: center;
+						background-color: var(--bf-color-border-blue);
+						z-index: 2;
+
+						label {
+							display: flex;
+							flex-direction: column;
+							.label {
+								order: 2;
+								font-size: var(--font-size-11);
+								font-weight: bold;
+								text-transform: uppercase;
+							}
+							.score {
+								order: 1;
+								font-size: var(--font-size-24);
+							}
+						}
+					}
+					.ability-mod {
+						position: absolute;
+						bottom: -0.5rem;
+						display: flex;
+						align-items: flex-start;
+						justify-content: center;
+						width: 3.5rem;
+						height: calc(3.5rem + 2px);
+						background-color: var(--bf-color-border-blue);
+						border-radius: 100%;
+						z-index: 3;
+
+						.value {
+							font-size: var(--font-size-16);
+						}
+					}
+					.ability-save {
+						position: absolute;
+						top: -1.5rem;
+						right: -2rem;
+						width: 4rem;
+						height: 4rem;
+						z-index: 1;
+
+						.proficiency-selector {
+							position: absolute;
+							left: -0.7rem;
+							top: 0.5rem;
+						}
+						label {
+							width: 100%;
+							height: 100%;
+							padding: 0.25rem;
+							display: flex;
+							flex-direction: column;
+							contain: layout;
+
+							.label {
+								position: absolute;
+								top: 0px;
+								bottom: 0px;
+								right: 0px;
+								left: 0px;
+								rotate: -120deg;
+								path {
+									fill: transparent;
+								}
+								text {
+									fill: rgba(0, 0, 0, 0.6);
+									font-size: 0.55rem;
+									text-transform: uppercase;
+								}
+							}
+							.mod {
+								position: absolute;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								top: 0;
+								bottom: 0;
+								right: 0;
+								left: 0;
+								padding-inline-start: 0;
+								padding-block-end: 0;
+							}
+						}
 					}
 				}
 			}

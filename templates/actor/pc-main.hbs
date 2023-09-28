@@ -6,14 +6,35 @@
 		</legend>
 		{{#each system.abilities as |ability key|}}
 			<div class="ability" data-key="{{key}}">
-				<label>{{localize ability.labels.full}}</label>
-				<span class="value">{{ability.value}}</span>
-				<span class="mod">{{ability.mod}}</span>
-				<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
-					data-rounding="{{ability.save.proficiency.rounding}}">
-					{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
-					<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
-						value="{{ability._source.save.proficiency.multiplier}}">
+				<div class="ability-score">
+					<span class="value">
+						<label>
+							<span class="label">{{localize ability.labels.full}}</span>
+							<span class="score">{{ability.value}}</span>
+						</label>
+					</span>
+				</div>
+				<div class="ability-mod">
+					<span class="value">{{numberFormat ability.check.mod sign=true}}</span>
+				</div>
+				<div class="ability-save">
+					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
+						data-rounding="{{ability.save.proficiency.rounding}}">
+						{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
+						<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
+							value="{{ability._source.save.proficiency.multiplier}}">
+					</div>
+					<span class="value">
+						<label>
+							<svg class="label" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<defs>
+									<path id="path-0" d="M 45.5 27.5 A 18 18 0 0 1 27.5 45.5 A 18 18 0 0 1 9.5 27.5 A 18 18 0 0 1 27.5 9.5 A 18 18 0 0 1 45.5 27.5 Z"/>
+								</defs>
+								<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.Label.Short"}}</textPath></text>
+							</svg>
+							<span class="mod">{{numberFormat ability.save.mod sign=true}}</span>
+						</label>
+					</span>
 				</div>
 			</div>
 		{{/each}}
