@@ -54,9 +54,12 @@ export default class PCData extends ActorDataModel {
 				}, {label: "BF.HitDie.Label[other]"}),
 				hp: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
-					temp: new foundry.data.fields.NumberField({min: 0, integer: true})
+					temp: new foundry.data.fields.NumberField({min: 0, integer: true}),
 					// Temp max
-					// Bonuses
+					bonuses: new foundry.data.fields.SchemaField({
+						level: new fields.FormulaField({deterministic: true}),
+						overall: new fields.FormulaField({deterministic: true})
+					})
 					// Multiplier
 				}, {label: "BF.HitPoint.Label[other]"}),
 				// Initiative?
@@ -276,13 +279,19 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedHitPoints() {
-		// TODO: This will need to be updated to handle multiple classes later, but will work for level 1
+		// TODO: This will need to be updated to handle multiple classes later, but will work for a single class
 		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
 		if ( !hpAdvancement ) return;
+
+		const rollData = this.parent.getRollData({ deterministic: true });
 		const hp = this.attributes.hp;
 		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
+
 		const base = hpAdvancement.getAdjustedTotal(ability?.mod ?? 0);
-		hp.max = base;
+		const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.progression.level;
+		const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+
+		hp.max = base + levelBonus + overallBonus;
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 	}
