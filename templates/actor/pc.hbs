@@ -27,11 +27,12 @@
 
 	<form id="{{appID}}-main-form" class="tab" data-group="progression" data-tab="front">
 		<nav class="sheet-navigation tabs" data-group="primary">
-			<a data-tab="main">Main</a>
-			<a data-tab="spellcasting">Spellcasting</a>
-			<a data-tab="inventory">Inventory</a>
-			<a data-tab="features">Features</a>
-			<a data-tab="biography">Biography</a>
+			<a data-tab="main">{{localize "BF.Sheet.Tab.Main"}}</a>
+			<a data-tab="spellcasting">{{localize "BF.Sheet.Tab.Spellcasting"}}</a>
+			<a data-tab="inventory">{{localize "BF.Sheet.Tab.Inventory"}}</a>
+			<a data-tab="features">{{localize "BF.Sheet.Tab.Features"}}</a>
+			<a data-tab="biography">{{localize "BF.Sheet.Tab.Biography"}}</a>
+			<a data-tab="effects">{{localize "BF.Sheet.Tab.Effects"}}</a>
 		</nav>
 
 		<main>
@@ -49,6 +50,9 @@
 			</div>
 			<div class="tab" data-group="primary" data-tab="biography">
 				{{> "blackFlag.pc-biography"}}
+			</div>
+			<div class="tab" data-group="primary" data-tab="effects">
+				{{> "blackFlag.active-effects"}}
 			</div>
 		</main>
 	</form>

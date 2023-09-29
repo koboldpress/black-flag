@@ -1,0 +1,41 @@
+.black-flag.sheet .effects {
+	flex-grow: 1;
+	padding: 0.5rem;
+
+	header {
+		display: flex;
+		align-items: first baseline;
+		justify-content: space-between;
+
+		h2 {
+			border: none;
+		}
+	}
+
+	> ol {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.controls {
+		display: flex;
+		gap: 0.5rem;
+		padding-inline: 0.5rem;
+	}
+
+	.effect-name {
+		flex: 1 0 30%;
+	}
+	.effect-source {
+		flex: 0 1 25%;
+	}
+	.effect-duration {
+		flex: 0 1 25%;
+	}
+	.effect-controls {
+		flex: 0 1 15%;
+		display: flex;
+		justify-content: flex-end;
+	}
+}

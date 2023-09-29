@@ -1,0 +1,58 @@
+<section class="effects">
+	<header>
+		<h2>{{localize "BF.Effect.Label[other]"}}</h2>
+	</header>
+	
+	<ol class="items-list effects-lists">
+		{{#each effects as |section sid|}}
+			{{#unless section.hidden}}
+				<li class="item-category effect-category" data-section-id="{{sid}}">
+					<div class="header">
+						<h3 class="effect-name">{{localize section.label}}</h3>
+						{{#if section.displaySource}}
+							<div class="effect-source">{{localize "BF.Effect.Source"}}</div>
+						{{/if}}
+						<div class="effect-duration">{{localize "BF.Effect.Duration"}}</div>
+						<div class="effect-controls">
+							{{#if @root.editable}}
+								<a data-action="effect" data-sub-action="add">
+									<i class="fas fa-plus"></i>
+								</a>
+							{{/if}}
+						</div>
+					</div>
+
+					<ol class="item-list effect-list">
+						{{#each section.effects as |effect|}}
+							<li class="item-entry effect-entry" data-effect-id="{{effect.id}}">
+								<div class="item-name effect-name">
+									<figure class="icon">
+										<img class="item-image" src="{{effect.icon}}">
+									</figure>
+									<h4>{{effect.name}}</h4>
+								</div>
+								{{#if section.displaySource}}
+									<div class="effect-source">{{effect.sourceName}}</div>
+								{{/if}}
+								<div class="effect-duration">{{effect.duration.label}}</div>
+								<div class="item-controls effect-controls">
+									{{#if @root.editable}}
+										<a data-action="effect" data-sub-action="toggle">
+											<i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
+										</a>
+										<a data-action="effect" data-sub-action="edit">
+											<i class="fas fa-edit"></i>
+										</a>
+										<a data-action="effect" data-sub-action="delete">
+											<i class="fas fa-trash"></i>
+										</a>
+									{{/if}}
+								</div>
+							</li>
+						{{/each}}
+					</ol>
+				</li>
+			{{/unless}}
+		{{/each}}
+	</ol>	
+</section>

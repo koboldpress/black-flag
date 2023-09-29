@@ -1,3 +1,4 @@
+import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import log from "../../utils/logging.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 
@@ -35,6 +36,10 @@ export default class BaseActorSheet extends ActorSheet {
 		context.source = this.document.toObject().system;
 
 		context.editingMode = this.editingMode;
+
+		context.effects = BlackFlagActiveEffect.prepareSheetSections(
+			this.document.allApplicableEffects(), { displaySource: true }
+		);
 
 		await this.prepareItems(context);
 		await this.prepareLists(context);
@@ -185,6 +190,8 @@ export default class BaseActorSheet extends ActorSheet {
 	async _onAction(event) {
 		const { action, subAction, ...properties } = event.currentTarget.dataset;
 		switch (action) {
+			case "effect":
+				return BlackFlagActiveEffect.onEffectAction.bind(this)(event);
 			case "item":
 				const itemId = properties.itemId ?? event.target.closest("[data-item-id]")?.dataset.itemId;
 				const item = this.actor.items.get(itemId);

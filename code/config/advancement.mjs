@@ -8,6 +8,8 @@ import * as advancement from "../documents/advancement/_module.mjs";
  * @property {Set<string>} validItemTypes - Types to which this advancement can be added.
  */
 
+const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage", "talent"];
+
 /**
  * Advancement types that can be added to items.
  * @enum {AdvancementTypeConfig}
@@ -15,11 +17,11 @@ import * as advancement from "../documents/advancement/_module.mjs";
 export const _advancementTypes = {
 	chooseFeatures: {
 		documentClass: advancement.ChooseFeatures,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
 	grantFeatures: {
 		documentClass: advancement.GrantFeatures,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
 	hitPoints: {
 		documentClass: advancement.HitPointsAdvancement,
@@ -31,7 +33,7 @@ export const _advancementTypes = {
 	},
 	property: {
 		documentClass: advancement.PropertyAdvancement,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
 	size: {
 		documentClass: advancement.SizeAdvancement,
@@ -39,7 +41,7 @@ export const _advancementTypes = {
 	},
 	trait: {
 		documentClass: advancement.TraitAdvancement,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage"])
+		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	}
 };
 

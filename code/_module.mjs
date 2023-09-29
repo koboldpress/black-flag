@@ -29,6 +29,7 @@ Hooks.once("init", function() {
 
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
+	CONFIG.ActiveEffect.legacyTransferral = false;
 	data.registerDataModels(Actor, data.actor.config);
 	data.registerDataModels(Item, data.item.config);
 	documents.registerDocumentClasses();

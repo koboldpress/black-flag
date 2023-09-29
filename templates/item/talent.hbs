@@ -9,24 +9,37 @@
 		</h1>
 	</header>
 
+	<nav class="sheet-navigation tabs" data-group="primary">
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="effects">{{localize "BF.Sheet.Tab.AdvancementEffects"}}</a>
+	</nav>
+	
 	<main class="sheet-body">
-		<div class="category">
-			<label>
-				<span>{{localize "BF.Item.Talent.Category.Label"}}</span>
-				<select name="system.type.category">
-					{{selectOptions talentCategories selected=system.type.category blank=""}}
-				</select>
-			</label>
+		<div class="tab" data-group="primary" data-tab="details">
+			<section>
+				<div class="category">
+					<label>
+						<span>{{localize "BF.Item.Talent.Category.Label"}}</span>
+						<select name="system.type.category">
+							{{selectOptions talentCategories selected=system.type.category blank=""}}
+						</select>
+					</label>
+				</div>
+				{{editor enriched.description target="system.description.value" button=true
+					editable=editable engine="prosemirror" collaborate=false}}
+				<label class="source">
+					<span>
+						{{localize "BF.Item.Source.Label"}}
+						<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
+					</span>
+					<input type="text" name="system.description.source" value="{{system.description.source}}">
+				</label>
+			</section>
 		</div>
-		{{editor enriched.description target="system.description.value" button=true
-			editable=editable engine="prosemirror" collaborate=false}}
-		<label class="source">
-			<span>
-				{{localize "BF.Item.Source.Label"}}
-				<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
-			</span>
-			<input type="text" name="system.description.source" value="{{system.description.source}}">
-		</label>
+		<div class="tab" data-group="primary" data-tab="effects">
+			{{> "blackFlag.active-effects"}}
+			{{> "blackFlag.item-advancement"}}
+		</div>
 	</main>
 
 </form>

@@ -1,11 +1,11 @@
 import FeatureSheet from "../../applications/item/feature-sheet.mjs";
-import ItemDataModel from "../abstract/item-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
+import AdvancementTemplate from "./templates/advancement-template.mjs";
 
 /**
  * Data definition for Feature items.
  */
-export default class FeatureData extends ItemDataModel {
+export default class FeatureData extends AdvancementTemplate {
 
 	static get metadata() {
 		return {
@@ -23,6 +23,7 @@ export default class FeatureData extends ItemDataModel {
 
 	static defineSchema() {
 		return {
+			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})

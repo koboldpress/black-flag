@@ -212,7 +212,7 @@ export default class PCSheet extends BaseActorSheet {
 
 		// For normal items, create normally
 		if ( others.length ) {
-			await this.actor.createEmbeddedDocuments("Item", [others]);
+			await this.actor.createEmbeddedDocuments("Item", others);
 		}
 	}
 }
