@@ -15,7 +15,7 @@
 					</span>
 				</div>
 				<div class="ability-mod">
-					<span class="value">{{numberFormat ability.check.mod sign=true}}</span>
+					<span class="value">{{blackFlag-number ability.check.mod sign=true}}</span>
 				</div>
 				<div class="ability-save">
 					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
@@ -32,7 +32,7 @@
 								</defs>
 								<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.Label.Short"}}</textPath></text>
 							</svg>
-							<span class="mod">{{numberFormat ability.save.mod sign=true}}</span>
+							<span class="mod">{{blackFlag-number ability.save.mod sign=true}}</span>
 						</label>
 					</span>
 				</div>
@@ -89,7 +89,7 @@
 	</fieldset>
 	<fieldset class="initiative">
 		<legend>{{localize "BF.Initiative.Label"}}</legend>
-		<span>{{numberFormat system.attributes.initiative.mod sign=true}}</span>
+		<span>{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
 	</fieldset>
 	<fieldset class="movement">
 		<legend>{{localize "BF.Speed.Label"}}</legend>

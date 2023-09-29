@@ -14,9 +14,12 @@
 				<div class="description">
 					{{{this.enriched.description}}}
 					{{#if this.system.description.journal}}
-						<a class="content-link" data-uuid="{{this.system.description.journal}}">
-							More Information
-						</a>
+						<p>
+							<a class="content-link" data-uuid="{{this.system.description.journal}}">
+								<i class="fa-solid fa-book-open"></i>
+								{{localize "BF.Journal.Link.MoreInformation"}}
+							</a>
+						</p>
 					{{/if}}
 				</div>
 			</div>

@@ -23,7 +23,7 @@
 	</div>
 	<div class="banner-mask" inert></div>
 </figure>
-<div class="info">
+<div class="info drop-target">
 	<div class="description">
 		{{#if edit}}
 			{{editor enriched.description target="system.description.value" button=false
@@ -31,13 +31,23 @@
 		{{else}}
 			{{{enriched.description}}}
 		{{/if}}
-		{{#if system.description.journal}}
-			<a class="content-link" data-uuid="{{system.description.journal}}">
-				More Information
-			</a>
-		{{else if edit}}
-			<p class="drop-area">Drop journal entry here</p>
-		{{/if}}
+		<div class="drop-area journal-link">
+			{{#if system.description.journal}}
+				<p>
+					<a class="content-link" data-uuid="{{system.description.journal}}">
+						<i class="fa-solid fa-book-open"></i>
+						{{localize "BF.Journal.Link.MoreInformation"}}
+					</a>
+					{{#if edit}}
+						<a data-action="journal-link" data-sub-action="delete">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					{{/if}}
+				</p>
+			{{else if edit}}
+				<p class="hint">{{localize "BF.Journal.Link.DropArea"}}</p>
+			{{/if}}
+		</div>
 	</div>
 	<ul class="traits">
 		{{#each system.traits as |trait|}}
@@ -45,15 +55,5 @@
 				{{localize trait.label}}: {{trait.value}}
 			</li>
 		{{/each}}
-		{{#if system.proficiencies}}
-			<li>
-				Proficiencies
-			</li>
-		{{/if}}
-		{{#if system.spellcasting}}
-			<li>
-				Spellcasting if applicable
-			</li>
-		{{/if}}
 	</ul>
 </div>

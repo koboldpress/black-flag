@@ -118,7 +118,7 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-inlineSVG": inlineSVG,
 		"blackFlag-linkForUUID": linkForUUID,
 		"blackFlag-notificationBadge": notificationBadge,
-		"blackFlag-numberFormat": (number, options) => numberFormat(number, options.hash)
+		"blackFlag-number": (number, options) => numberFormat(number, options.hash)
 	});
 }
 

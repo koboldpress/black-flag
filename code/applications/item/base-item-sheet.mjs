@@ -1,3 +1,5 @@
+import { log } from "../../utils/_module.mjs";
+
 export default class BaseItemSheet extends ItemSheet {
 
 	/**
@@ -28,5 +30,30 @@ export default class BaseItemSheet extends ItemSheet {
 		}, {});
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
+
+		for ( const element of html.querySelectorAll("[data-action]") ) {
+			element.addEventListener("click", this._onAction.bind(this));
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle a click on an action link.
+	 * @param {ClickEvent} event - Triggering click event.
+	 * @returns {Promise}
+	 */
+	async _onAction(event) {
+		const { action, subAction } = event.currentTarget.dataset;
+		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}
 }

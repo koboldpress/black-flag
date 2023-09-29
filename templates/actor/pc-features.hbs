@@ -3,17 +3,17 @@
 
 	<ol class="items-list">
 		{{#each sections.features as |section sectionId|}}
-			<li class="section" data-section="{{sectionId}}">
-				<header class="items-header">
+			<li class="item-category" data-section="{{sectionId}}">
+				<header class="header">
 					<h3>{{localize section.label}}</h3>
 				</header>
 				<ol class="item-list">
 					{{#each section.items as |item|}}
-						<li class="item" data-item-id="{{item.id}}">
+						<li class="item-entry" data-item-id="{{item.id}}">
 							<div class="item-name">
 								{{item.name}}
 							</div>
-							<fieldset class="controls">
+							<div class="item-controls">
 								{{#if @root.editingMode}}
 									<a data-action="item" data-sub-action="edit">
 										<i class="fa-solid fa-edit"></i>
@@ -26,7 +26,7 @@
 										<i class="fa-regular fa-eye"></i>
 									</a>
 								{{/if}}
-							</fieldset>
+							</div>
 						</li>
 					{{/each}}
 				</ol>

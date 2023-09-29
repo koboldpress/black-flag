@@ -78,8 +78,7 @@
 								{{~#if (or (eq ../this.value null) (gt bonus ../this.maxBonus))}}disabled{{/if}}">
 								<input type="radio" name="bonuses" value="{{@index}}" {{checked (eq @index ../this.bonus)}}
 									{{disabled (or (eq ../this.value null) (gt bonus ../this.maxBonus))}}>
-								<span>{{numberFormat bonus sign=true}}</span>
-								{{!-- TODO: Replace this with a custom, properly localized number formatter --}}
+								<span>{{blackFlag-number bonus sign=true}}</span>
 							</label>
 						{{/each}}
 					</fieldset>
@@ -97,7 +96,8 @@
 					<div class="point{{#if this.spent}} spent{{/if}}"></div>
 				{{/each}}
 				<div class="count">
-					{{points.remaining}}/{{points.max}} points
+					{{localize "BF.AbilityAssignment.Method.PointBuy.Cost.Remaining"
+						remaining=(blackFlag-number points.remaining) max=(blackFlag-number points.max)}}
 				</div>
 			</div>
 			<div class="scores">
