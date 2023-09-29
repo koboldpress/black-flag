@@ -1,13 +1,16 @@
 {
 	"scripts": {
-		"build": "npm run build:code",
+		"build": "npm run build:code && npm run build:db",
 		"build:code": "rollup --config",
+		"build:db": "node ./utils/cli.mjs package pack",
 		"build:styles": "postcss styles/_module.css -o black-flag.css -m",
+		"build:json": "node ./utils/cli.mjs package unpack",
 		"lint": "eslint --ext .mjs ./code",
 		"lint:fix": "eslint --ext .mjs ./code --fix",
 		"watch": "rollup --config --watch"
 	},
 	"devDependencies": {
+		"@foundryvtt/foundryvtt-cli": "^1.0.0-rc.4",
 		"eslint": "^8.48.0",
 		"eslint-plugin-jsdoc": "^46.5.1",
 		"postcss": "^8.4.29",
@@ -15,6 +18,7 @@
 		"postcss-import": "^15.1.0",
 		"postcss-preset-env": "^9.1.3",
 		"rollup": "^3.29.0",
-		"rollup-plugin-postcss": "^4.0.2"
+		"rollup-plugin-postcss": "^4.0.2",
+		"yargs": "^17.7.2"
 	}
 }
