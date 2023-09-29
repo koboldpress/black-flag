@@ -18,6 +18,18 @@ export default class AdvancementFlow extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	static get defaultOptions() {
+		return foundry.utils.mergeObject(super.defaultOptions, {
+			template: "systems/black-flag/templates/advancement/advancement-flow.hbs",
+			popOut: false,
+			closeOnSubmit: false
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * ID of the advancement this flow modifies.
 	 * @type {string}
@@ -60,16 +72,6 @@ export default class AdvancementFlow extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			template: "systems/black-flag/templates/advancement/advancement-flow.hbs",
-			popOut: false,
-			closeOnSubmit: false
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	get element() {
 		// Fix an issue with jQuery not being able to fetch element properly
 		if ( this._element ) return this._element;
@@ -99,6 +101,8 @@ export default class AdvancementFlow extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Context Preparation         */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
 		return {
@@ -114,6 +118,19 @@ export default class AdvancementFlow extends FormApplication {
 			needsConfiguration: !this.advancement.configuredForLevel(this.levels),
 			warningKey: this.advancement.warningKey(this.levels)
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
+
+		html.querySelector('[data-action="reverse"]')?.addEventListener("click", event => {
+			this.advancement.reverse(this.levels);
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
