@@ -36,6 +36,7 @@ Hooks.once("init", function() {
 	data.registerDataModels(Item, data.item.config);
 	dice.registerDice();
 	documents.registerDocumentClasses();
+	settings.registerKeybindings();
 	settings.registerSettings();
 	utils.preCacheSVG();
 	utils.registerHandlebarsHelpers();

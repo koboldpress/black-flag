@@ -202,6 +202,9 @@ export default class BaseActorSheet extends ActorSheet {
 					case "view":
 						return item?.sheet.render(true);
 				}
+			case "roll":
+				properties.event = event;
+				return this.actor.roll(subAction, properties);
 		}
 		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}

@@ -1,6 +1,61 @@
 import log from "./utils/logging.mjs";
 
 /**
+ * Register custom keybindings offered by Everyday Heroes.
+ */
+export function registerKeybindings() {
+	log("Registering keybindings");
+
+	game.keybindings.register(game.system.id, "challengeRollNormal", {
+		name: "BF.Keybinding.ChallengeRoll.Normal.Label",
+		editable: [
+			{ key: "ShiftLeft" },
+			{ key: "ShiftRight" }
+		]
+	});
+
+	game.keybindings.register(game.system.id, "challengeRollAdvantage", {
+		name: "BF.Keybinding.ChallengeRoll.Advantage.Label",
+		editable: [
+			{ key: "AltLeft" },
+			{ key: "AltRight" }
+		]
+	});
+
+	game.keybindings.register(game.system.id, "challengeRollDisadvantage", {
+		name: "BF.Keybinding.ChallengeRoll.Disadvantage.Label",
+		editable: [
+			{ key: "CtrlLeft" },
+			{ key: "CtrlRight" },
+			{ key: "OSLeft" },
+			{ key: "OSRight" }
+		]
+	});
+
+	game.keybindings.register(game.system.id, "damageRollNormal", {
+		name: "BF.Keybinding.DamageRoll.Normal.Label",
+		editable: [
+			{ key: "ShiftLeft" },
+			{ key: "ShiftRight" },
+			{ key: "CtrlLeft" },
+			{ key: "CtrlRight" },
+			{ key: "OSLeft" },
+			{ key: "OSRight" }
+		]
+	});
+
+	game.keybindings.register(game.system.id, "damageRollCritical", {
+		name: "BF.Keybinding.DamageRoll.Critical.Label",
+		editable: [
+			{ key: "AltLeft" },
+			{ key: "AltRight" }
+		]
+	});
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Register the system's settings.
  */
 export function registerSettings() {

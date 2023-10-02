@@ -15,7 +15,9 @@
 					</span>
 				</div>
 				<div class="ability-mod">
-					<span class="value">{{blackFlag-number ability.check.mod sign=true}}</span>
+					<a class="value" data-action="roll" data-sub-action="ability-check" data-ability="{{key}}">
+						{{blackFlag-number ability.check.mod sign=true}}
+					</a>
 				</div>
 				<div class="ability-save">
 					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
@@ -24,17 +26,15 @@
 						<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
 							value="{{ability._source.save.proficiency.multiplier}}">
 					</div>
-					<span class="value">
-						<label>
-							<svg class="label" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-								<defs>
-									<path id="path-0" d="M 45.5 27.5 A 18 18 0 0 1 27.5 45.5 A 18 18 0 0 1 9.5 27.5 A 18 18 0 0 1 27.5 9.5 A 18 18 0 0 1 45.5 27.5 Z"/>
-								</defs>
-								<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.Label.Short"}}</textPath></text>
-							</svg>
-							<span class="mod">{{blackFlag-number ability.save.mod sign=true}}</span>
-						</label>
-					</span>
+					<a class="value" data-action="roll" data-sub-action="ability-save" data-ability="{{key}}">
+						<svg class="label" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<defs>
+								<path id="path-0" d="M 45.5 27.5 A 18 18 0 0 1 27.5 45.5 A 18 18 0 0 1 9.5 27.5 A 18 18 0 0 1 27.5 9.5 A 18 18 0 0 1 45.5 27.5 Z"/>
+							</defs>
+							<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.Label.Short"}}</textPath></text>
+						</svg>
+						<span class="mod">{{blackFlag-number ability.save.mod sign=true}}</span>
+					</a>
 				</div>
 			</div>
 		{{/each}}
@@ -52,11 +52,15 @@
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
 						value="{{skill._source.proficiency.multiplier}}">
 				</div>
-				<span class="name">{{localize skill.labels.name}}</span>
-				<span class="ability">
-					{{localize (lookup (lookup (lookup @root.system.abilities skill.ability) "labels") "abbreviation")}}
-				</span>
-				<span class="mod">{{skill.mod}}</span>
+				<a class="skill-roll" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
+					<span class="name">
+						{{localize skill.labels.name}}
+					</span>
+					<span class="ability">
+						{{localize (lookup (lookup (lookup @root.system.abilities skill.ability) "labels") "abbreviation")}}
+					</span>
+					<span class="mod">{{blackFlag-number skill.mod}}</span>
+				</a>
 				<span class="passive">({{skill.passive}})</span>
 			</div>
 		{{/each}}
