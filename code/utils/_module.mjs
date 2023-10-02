@@ -1,5 +1,6 @@
 export * from "./array.mjs";
 export * from "./document.mjs";
+export * from "./dice.mjs";
 export * from "./formula.mjs";
 export {default as log} from "./logging.mjs";
 export * from "./number.mjs";

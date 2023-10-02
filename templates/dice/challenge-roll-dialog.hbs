@@ -1,0 +1,39 @@
+<form class="dialog-content" autocomplete="off">
+	<fieldset class="formulas">
+		<legend>{{localize "BF.Roll.Formula.Label"}}</legend>
+		<ul class="formulas">
+			{{#each rolls}}<li class="formula">{{this.formula}}</li>{{/each}}
+		</ul>
+		<label>
+			<span>{{localize "BF.Roll.ExtraTerms.Label"}}</span>
+			<input type="text" name="bonus" value="{{bonus}}" placeholder="">
+		</label>
+	</fieldset>
+
+	<fieldset>
+		<legend>Roll Configuration</legend>
+		{{#if options.chooseAbility}}
+			<label>
+				<span>{{localize "BF.Ability.Label[one]"}}</span>
+				<select name="ability">
+					{{selectOptions abilities selected=selectedAbility localize=true}}
+				</select>
+			</label>
+		{{/if}}
+		<label>
+			<span>{{localize "BF.Roll.Mode.Label"}}</span>
+			<select name="rollMode">
+				{{selectOptions rollModes selected=default.rollMode localize=true}}
+			</select>
+		</label>
+	</fieldset>
+
+	<nav class="dialog-buttons">
+		<ul>
+			{{#each buttons as |button action|}}
+				<li><button data-action="{{action}}">{{{button.icon}}} {{{button.label}}}</button></li>
+			{{/each}}
+		</ul>
+	</nav>
+</form>
+

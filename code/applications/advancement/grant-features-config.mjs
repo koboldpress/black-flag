@@ -14,7 +14,7 @@ export default class GrantFeaturesConfig extends AdvancementConfig {
 		});
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_validateDroppedItem(event, item) {
 		super._validateDroppedItem(event, item);
