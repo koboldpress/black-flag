@@ -1,0 +1,28 @@
+<form autocomplete="off">
+	<h2>
+		<select name="abilityId">
+			{{selectOptions abilities selected=abilityId blank=(localize "BF.Global")}}
+		</select>
+	</h2>
+
+	{{#if ability}}
+	  <fieldset>
+			<legend>{{localize "BF.Proficiency.Label[one]"}}</legend>
+			<label>
+				<span>{{localize "BF.SavingThrow.LabelLong[other]"}}</span>
+				<select name="system.abilities.{{abilityId}}.save.proficiency.multiplier">
+					{{selectOptions proficiencyLevels selected=ability.save.proficiency.multiplier}}
+				</select>
+			</label>
+		</fieldset>
+		<!-- TODO: Ability min modifiers -->
+	{{else}}
+	  <!-- TODO: Global base check proficiency -->
+	  <!-- TODO: Global base save proficiency -->
+		<!-- TODO: Global ability min modifiers -->
+	{{/if}}
+	
+	{{#each modifierSections as |section key|}}
+		{{> "blackFlag.modifier-list" key=key section=section}}
+	{{/each}}
+</form>

@@ -2,6 +2,11 @@
 	<fieldset class="abilities">
 		<legend>
 			{{localize "BF.Ability.Label[other]"}}
+			{{#if editingMode}}
+				<a data-action="config" data-type="ability">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
 			{{blackFlag-notificationBadge actor category="abilities"}}
 		</legend>
 		{{#each system.abilities as |ability key|}}
@@ -31,7 +36,7 @@
 							<defs>
 								<path id="path-0" d="M 45.5 27.5 A 18 18 0 0 1 27.5 45.5 A 18 18 0 0 1 9.5 27.5 A 18 18 0 0 1 27.5 9.5 A 18 18 0 0 1 45.5 27.5 Z"/>
 							</defs>
-							<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.Label.Short"}}</textPath></text>
+							<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.LabelShort[one]"}}</textPath></text>
 						</svg>
 						<span class="mod">{{blackFlag-number ability.save.mod sign=true}}</span>
 					</a>
@@ -42,6 +47,11 @@
 	<fieldset class="skills">
 		<legend>
 			{{localize "BF.Skill.Label[other]"}}
+			{{#if editingMode}}
+				<a data-action="config" data-type="skill">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
 			{{blackFlag-notificationBadge actor category="skills"}}
 		</legend>
 		{{#each system.proficiencies.skills as |skill key|}}

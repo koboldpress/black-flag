@@ -1,0 +1,29 @@
+<fieldset class="modifier-list" data-modifier-section="{{key}}">
+	<legend>{{section.label}}</legend>
+	{{#if section.modifiers.length}}
+		<ul class="modifiers">
+			{{#each section.modifiers}}
+				<li class="modifier" data-index="{{this.index}}">
+					<input type="text" name="modifier.{{this.index}}.formula" value="{{this.formula}}"
+						placeholder="{{localize 'BF.Roll.Formula.Label'}}" {{disabled (ne this.source "manual")}}>
+					<div class="modifier-controls">
+						{{#if (eq this.source "manual")}}
+							<a data-action="modifier" data-sub-action="delete">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						{{/if}}
+						{{!-- TODO: Display source --}}
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+	<a data-action="modifier" data-sub-action="add">
+		<i class="fa-solid fa-plus"></i>
+		{{#if section.addType}}
+			{{localize "BF.Action.Add.Specific" type=section.addType}}
+		{{else}}
+			{{localize "BF.Action.Add.Generic"}}
+		{{/if}}
+	</a>
+</fieldset>

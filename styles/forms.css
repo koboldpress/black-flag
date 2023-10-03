@@ -5,6 +5,18 @@ fieldset {
 		font-weight: bold;
 		text-transform: uppercase;
 	}
+
+	label {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: first baseline;
+		gap: 0.5rem;
+
+		span:first-child {
+			font-weight: bold;
+			font-variant: small-caps;
+		}
+	}
 }
 
 .drop-area {

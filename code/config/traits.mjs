@@ -49,10 +49,10 @@ export const traits = {
 	},
 	saves: {
 		labels: {
-			title: "BF.SavingThrow.Label[other]",
+			title: "BF.SavingThrow.LabelLong[other]",
 			localization: "BF.Ability.Label"
 		},
-		localization: "BF.SavingThrow.Label",
+		localization: "BF.SavingThrow.LabelLong",
 		icon: "systems/black-flag/artwork/traits/saves.svg",
 		type: "proficiency",
 		labelKeyPath: "labels.full",

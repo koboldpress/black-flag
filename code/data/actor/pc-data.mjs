@@ -185,14 +185,6 @@ export default class PCData extends ActorDataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseRegistration() {
-		if ( !CONFIG.BlackFlag.registration.ready ) {
-			CONFIG.BlackFlag.registration.reinitiatlizeOnReady.add(this.parent);
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	prepareBaseAbilities() {
 		this.progression.abilities.assignmentComplete = true;
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
@@ -201,6 +193,16 @@ export default class PCData extends ActorDataModel {
 			ability.value = ability.base;
 			if ( !ability.base ) this.progression.abilities.assignmentComplete = false;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareBaseModifiers() {
+		this.modifiers.forEach(modifier => Object.defineProperty(modifier, "source", {
+			value: "manual",
+			enumerable: false,
+			writable: false
+		}));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -312,6 +314,16 @@ export default class PCData extends ActorDataModel {
 
 		init.proficiency = new Proficiency(this.attributes.prof, 0);
 		init.mod = (ability?.mod ?? 0) + init.proficiency.flat;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedModifiers() {
+		this.modifiers.forEach((modifier, index) => Object.defineProperty(modifier, "index", {
+			value: index,
+			enumerable: false,
+			writable: false
+		}));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -442,6 +454,48 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Build a bonus formula or value from the provided modifiers.
+	 * @param {object[]} modifiers - Modifiers from which to build the bonus.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.deterministic=false] - Should only deterministic modifiers be included?
+	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
+	 * @returns {string|number}
+	 */
+	buildBonus(modifiers, { deterministic=false, rollData={} }={}) {
+		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
+		return modifiers.filter(m => m.formula).map(m => m.formula).join(" + ");
+		// TODO: Should formula data be replaced?
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Modifiers              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add a new modifier.
+	 * @param {object} data
+	 */
+	async addModifier(data) {
+		const modifierCollection = this.toObject().modifiers;
+		modifierCollection.push(data);
+		await this.parent.update({"system.modifiers": modifierCollection});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Delete a modifier.
+	 * @param {number} index
+	 */
+	async deleteModifier(index) {
+		const modifierCollection = this.toObject().modifiers;
+		modifierCollection.splice(index, 1);
+		await this.parent.update({"system.modifiers": modifierCollection});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Get a list of modifiers that match the provided data.
 	 * @param {object|object[]} data - Description of modifiers to find.
 	 * @param {string} [type="bonus"] - Modifier type to find.
@@ -458,17 +512,14 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Build a bonus formula or value from the provided modifiers.
-	 * @param {object[]} modifiers - Modifiers from which to build the bonus.
-	 * @param {object} [options={}]
-	 * @param {boolean} [options.deterministic=false] - Should only deterministic modifiers be included?
-	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
-	 * @returns {string|number}
+	 * Update a modifier.
+	 * @param {number} index
+	 * @param {object} updates
 	 */
-	buildBonus(modifiers, { deterministic=false, rollData={} }={}) {
-		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
-		return modifiers.map(m => m.formula).join(" + ");
-		// TODO: Should formula data be replaced?
+	async updateModifier(index, updates) {
+		const modifierCollection = this.toObject().modifiers;
+		foundry.utils.mergeObject(modifierCollection[index], updates);
+		await this.parent.update({"system.modifiers": modifierCollection});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,0 +1,49 @@
+.black-flag.config.app form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	h2 {
+		margin: 0;
+		border: 0;
+
+		select {
+			width: 100%;
+			height: unset;
+			padding-block: 0.25rem;
+			text-align: center;
+		}
+	}
+
+	label > :is(input, select) {
+		flex-grow: 1;
+	}
+
+	.modifier-list {
+		ul {
+			list-style: none;
+			margin: 0;
+			margin-block-end: 0.5rem;
+			padding: 0;
+		}
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.modifier-controls {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 1rem;
+		}
+
+		[data-sub-action="add"] {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}

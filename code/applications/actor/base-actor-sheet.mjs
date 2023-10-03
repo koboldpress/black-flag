@@ -1,6 +1,8 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import log from "../../utils/logging.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
+import AbilityConfig from "./dialogs/ability-config.mjs";
+import SkillConfig from "./dialogs/skill-config.mjs";
 
 /**
  * Sheet class containing implementation shared across all actor types.
@@ -190,6 +192,11 @@ export default class BaseActorSheet extends ActorSheet {
 	async _onAction(event) {
 		const { action, subAction, ...properties } = event.currentTarget.dataset;
 		switch (action) {
+			case "config":
+				switch (properties.type) {
+					case "ability": return new AbilityConfig(properties.key, this.actor).render(true);
+					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
+				}
 			case "effect":
 				return BlackFlagActiveEffect.onEffectAction.bind(this)(event);
 			case "item":
