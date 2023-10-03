@@ -99,7 +99,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 			default: this.options.default ?? {},
 			rolls: this.rolls,
 			rollModes: CONFIG.Dice.rollModes,
-			bonus: this.rolls[0].data.bonus,
+			situational: this.rolls[0].data.situational,
 			buttons: this.getButtons()
 		}, super.getData(options));
 	}
@@ -153,9 +153,9 @@ export default class BaseConfigurationDialog extends FormApplication {
 		config = foundry.utils.mergeObject({parts: [], data: {}, options: {}}, config);
 		if ( this.buildConfig ) config = this.buildConfig(config, formData);
 
-		if ( formData.bonus && (config.extraTerms !== false) ) {
-			config.parts.push("@bonus");
-			config.data.bonus = formData.bonus;
+		if ( formData.situational && (config.extraTerms !== false) ) {
+			config.parts.push("@situational");
+			config.data.situational = formData.situational;
 		}
 
 		if ( formData.rollMode ) {

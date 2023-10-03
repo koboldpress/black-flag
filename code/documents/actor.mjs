@@ -127,11 +127,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async rollAbilityCheck(config={}, message={}, dialog={}) {
 		const ability = this.system.abilities[config.ability];
 		if ( !ability ) return;
+		const rollData = this.getRollData();
 
 		const { parts, data } = buildRoll({
 			mod: ability.mod,
-			prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null
-		}, this.getRollData());
+			prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
+			bonus: this.system.buildBonus(ability.check.modifiers, { rollData })
+		}, rollData);
 
 		const rollConfig = foundry.utils.mergeObject({ data }, config);
 		rollConfig.parts = parts.concat(config.parts ?? []);
@@ -197,11 +199,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async rollAbilitySave(config={}, message={}, dialog={}) {
 		const ability = this.system.abilities[config.ability];
 		if ( !ability ) return;
+		const rollData = this.getRollData();
 
 		const { parts, data } = buildRoll({
 			mod: ability.mod,
-			prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null
-		}, this.getRollData());
+			prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
+			bonus: this.system.buildBonus(ability.save.modifiers, { rollData })
+		}, rollData);
 
 		const rollConfig = foundry.utils.mergeObject({ data }, config);
 		rollConfig.parts = parts.concat(config.parts ?? []);
@@ -275,6 +279,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async rollSkill(config={}, message={}, dialog={}) {
 		const skill = this.system.proficiencies.skills[config.skill];
 		if ( !skill ) return;
+		const rollData = this.getRollData();
 
 		const prepareSkillConfig = (baseConfig={}, formData={}) => {
 			const abilityId = formData.ability ?? baseConfig.ability ?? skill.ability;
@@ -282,8 +287,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 			const { parts, data } = buildRoll({
 				mod: ability?.mod,
-				prof: skill.proficiency.hasProficiency ? skill.proficiency.proficiency.term : null
-			}, this.getRollData());
+				prof: skill.proficiency.hasProficiency ? skill.proficiency.proficiency.term : null,
+				bonus: this.system.buildBonus(this.system.getModifiers([
+					{ type: "ability-check", ability: abilityId },
+					{ type: "skill", ability: abilityId, skill: config.skill }
+				]), { rollData })
+			}, rollData);
 			data.abilityId = abilityId;
 
 			const rollConfig = foundry.utils.mergeObject(baseConfig, { data }, { inplace: false });

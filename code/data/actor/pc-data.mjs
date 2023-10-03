@@ -1,6 +1,6 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { simplifyBonus } from "../../utils/_module.mjs";
+import { filter, simplifyBonus } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 
@@ -79,6 +79,7 @@ export default class PCData extends ActorDataModel {
 				// Backstory?
 				// Allies & Organizations?
 			}),
+			modifiers: new foundry.data.fields.ArrayField(new fields.ModifierField()),
 			proficiencies: new foundry.data.fields.SchemaField({
 				armor: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
@@ -248,6 +249,7 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedAbilities() {
+		const rollData = this.parent.getRollData({ deterministic: true });
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			const config = CONFIG.BlackFlag.abilities[key];
 			ability.mod = ability.value ? Math.floor((ability.value - 10) / 2) : null;
@@ -259,8 +261,13 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, ability.save.proficiency.multiplier, "down"
 			);
 
-			ability.check.mod = ability.mod + ability.check.proficiency.flat;
-			ability.save.mod = ability.mod + ability.save.proficiency.flat;
+			ability.check.modifiers = this.getModifiers([{ type: "ability-check", ability: key }]);
+			ability.check.bonus = this.buildBonus(ability.check.modifiers, { deterministic: true, rollData });
+			ability.save.modifiers = this.getModifiers([{ type: "ability-save", ability: key }]);
+			ability.save.bonus = this.buildBonus(ability.save.modifiers, { deterministic: true, rollData });
+
+			ability.check.mod = ability.mod + ability.check.proficiency.flat + ability.check.bonus;
+			ability.save.mod = ability.mod + ability.save.proficiency.flat + ability.save.bonus;
 			ability.dc = 8 + ability.mod + this.attributes.proficiency;
 
 			ability.labels = config.labels;
@@ -340,6 +347,7 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedSkills() {
+		const rollData = this.parent.getRollData({ deterministic: true });
 		for ( const [key, skill] of Object.entries(this.proficiencies.skills) ) {
 			skill._source = this._source.skills?.[key] ?? {};
 			const config = CONFIG.BlackFlag.skills[key];
@@ -350,8 +358,14 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, skill.proficiency.multiplier, "down"
 			);
 
+			skill.modifiers = this.getModifiers([
+				{ type: "ability-check", ability: skill.ability },
+				{ type: "skill", ability: skill.ability, skill: key }
+			]);
+			skill.bonus = this.buildBonus(skill.modifiers, { deterministic: true, rollData });
+
 			const ability = this.abilities[skill.ability];
-			skill.mod = (ability?.mod ?? 0) + skill.proficiency.flat;
+			skill.mod = (ability?.mod ?? 0) + skill.bonus + skill.proficiency.flat;
 			skill.passive = 10 + skill.mod;
 
 			skill.labels = {
@@ -421,6 +435,40 @@ export default class PCData extends ActorDataModel {
 				advancement.prepareWarnings(data.levels, this.parent.notifications);
 			}
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get a list of modifiers that match the provided data.
+	 * @param {object|object[]} data - Description of modifiers to find.
+	 * @param {string} [type="bonus"] - Modifier type to find.
+	 * @returns {object[]}
+	 */
+	getModifiers(data, type="bonus") {
+		if ( foundry.utils.getType(data) !== "Array" ) data = [data];
+		return this.modifiers.filter(modifier => {
+			if ( modifier.type !== type ) return false;
+			return data.some(d => filter.performCheck(d, modifier.filter));
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Build a bonus formula or value from the provided modifiers.
+	 * @param {object[]} modifiers - Modifiers from which to build the bonus.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.deterministic=false] - Should only deterministic modifiers be included?
+	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
+	 * @returns {string|number}
+	 */
+	buildBonus(modifiers, { deterministic=false, rollData={} }={}) {
+		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
+		return modifiers.map(m => m.formula).join(" + ");
+		// TODO: Should formula data be replaced?
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
