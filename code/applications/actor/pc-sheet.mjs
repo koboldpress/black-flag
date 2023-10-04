@@ -33,6 +33,10 @@ export default class PCSheet extends BaseActorSheet {
 
 		this.prepareProgression(context);
 
+		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
+			selected: context.system.attributes.luck.value >= l
+		}));
+
 		return context;
 	}
 
@@ -120,6 +124,12 @@ export default class PCSheet extends BaseActorSheet {
 	async _onAction(event) {
 		const { action, subAction, ...properties } = event.currentTarget.dataset;
 		switch (action) {
+			case "luck":
+				switch (subAction) {
+					case "add":
+						return this.actor.system.addLuck();
+				}
+				break;
 			case "progression":
 				switch (subAction) {
 					case "assign-abilities":
@@ -147,6 +157,7 @@ export default class PCSheet extends BaseActorSheet {
 						if ( !properties.type ) return;
 						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);
 				}
+				break;
 		}
 		return super._onAction(event);
 	}

@@ -501,6 +501,60 @@ export default class PCData extends ActorDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*                Luck                 */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add a luck point, resetting the luck value if the character already has the max.
+	 * @returns {Promise}
+	 */
+	async addLuck() {
+		const luck = this.attributes.luck;
+		let newValue = luck.value + 1;
+		if ( newValue > CONFIG.BlackFlag.luck.max ) {
+			const rollConfig = { parts: ["1d4"] };
+			const type = game.i18n.localize("BF.Luck.Label");
+			const flavor = game.i18n.format("BF.Roll.Action.RerollSpecific", { type });
+			const messageConfig = { data: {
+				title: `${flavor}: ${this.name}`,
+				flavor,
+				speaker: ChatMessage.getSpeaker({ actor: this.parent }),
+				"flags.black-flag.roll": {
+					type: "luck"
+				}
+			}};
+			const dialogConfig = { configure: false };
+
+			/**
+			 * A hook event that fires before luck is re-rolled.
+			 * @function blackFlag.preRollLuck
+			 * @memberof hookEvents
+			 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
+			 * @param {BaseRollConfiguration} config - Configuration data for the pending roll.
+			 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
+			 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+			 * @returns {boolean} - Explicitly return `false` to prevent the roll.
+			 */
+			if ( Hooks.call("blackFlag.preRollLuck", this.parent, rollConfig, messageConfig, dialogConfig) === false ) return;
+
+			const rolls = await CONFIG.Dice.BaseRoll.build(rollConfig, messageConfig, dialogConfig);
+
+			/**
+			 * A hook event that fires after luck has been re-rolled.
+			 * @function blackFlag.rollLuck
+			 * @memberof hookEvents
+			 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
+			 * @param {BaseRoll[]} rolls - The resulting rolls.
+			 */
+			if ( rolls?.length ) Hooks.callAll("blackFlag.rollLuck", this.parent, rolls);
+
+			newValue = rolls[0].total;
+		}
+
+		return this.parent.update({"system.attributes.luck.value": newValue});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Modifiers              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

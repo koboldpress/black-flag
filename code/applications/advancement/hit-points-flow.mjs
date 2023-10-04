@@ -34,7 +34,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
 			// Create chat message with roll results
 			const cls = getDocumentClass("ChatMessage");
-			const flavor = game.i18n.format("BF.Action.Roll.Specific", {
+			const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", {
 				type: game.i18n.localize("BF.HitPoint.Label[other]")
 			});
 			const messageData = {

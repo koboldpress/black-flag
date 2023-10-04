@@ -1,4 +1,23 @@
 /**
+ * Configuration data for luck points.
+ * @type {{
+ *   costs: {[key: string]: number},
+ *   rerollFormula: string,
+ *   max: number
+ * }}
+ */
+export const luck = {
+	costs: {
+		bonus: 1,
+		reroll: 3
+	},
+	max: 5,
+	rerollFormula: "1d4"
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Movement types that can be used by actors.
  * @enum {LabeledConfiguration}
  */

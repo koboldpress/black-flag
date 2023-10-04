@@ -114,7 +114,14 @@
 	</fieldset>
 	<fieldset class="luck">
 		<legend>{{localize "BF.Luck.Label"}}</legend>
-		<span>x</span>
+		<ol class="luck-points">
+			{{#each luckPoints}}
+				<li class="luck-point{{#if this.selected}} selected{{/if}}"></li>
+			{{/each}}
+		</ol>
+		<a data-action="luck" data-sub-action="add">
+			<i class="fa-solid fa-plus"></i>
+		</a>
 	</fieldset>
 	<fieldset class="traits">
 		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
