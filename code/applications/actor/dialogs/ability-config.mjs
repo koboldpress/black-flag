@@ -62,36 +62,59 @@ export default class AbilityConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareModifiers() {
-		const checkLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
+		const checkBonusLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
 			type: game.i18n.localize("BF.Check.Label[one]"), bonus: game.i18n.localize("BF.Bonus.Label[other]")
 		});
-		const saveLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
+		const checkMinLabel = game.i18n.format("BF.Roll.Minimum.LabelSpecific", {
+			type: game.i18n.localize("BF.Check.Label[one]")
+		});
+		const saveBonusLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
 			type: game.i18n.localize("BF.SavingThrow.LabelShort[one]"), bonus: game.i18n.localize("BF.Bonus.Label[other]")
 		});
-		const addType = game.i18n.localize("BF.Bonus.Label[one]");
+		const saveMinLabel = game.i18n.format("BF.Roll.Minimum.LabelSpecific", {
+			type: game.i18n.localize("BF.SavingThrow.LabelShort[one]")
+		});
+		const addBonus = game.i18n.localize("BF.Bonus.Label[one]");
+		const addMin = game.i18n.localize("BF.Roll.Minimum.Label[one]");
 		if ( this.abilityId ) {
 			const ability = this.document.system.abilities[this.abilityId];
 			const filter = modifier => modifier.filter.some(f => f.k === "ability" && f.v === this.abilityId);
 			return {
-				check: {
-					label: checkLabel, addType,
-					modifiers: ability?.check.modifiers.filter(filter) ?? []
+				"check-bonus": {
+					label: checkBonusLabel, addType: addBonus,
+					modifiers: ability.check.modifiers.bonus.filter(filter)
 				},
-				save: {
-					label: saveLabel, addType,
-					modifiers: ability?.save.modifiers.filter(filter) ?? []
+				"check-min": {
+					label: checkMinLabel, addType: addMin,
+					modifiers: ability.check.modifiers.minimum.filter(filter)
+				},
+				"save-bonus": {
+					label: saveBonusLabel, addType: addBonus,
+					modifiers: ability.save.modifiers.bonus.filter(filter)
+				},
+				"save-min": {
+					label: saveMinLabel, addType: addMin,
+					modifiers: ability.save.modifiers.minimum.filter(filter)
 				}
 			};
 		}
 		const filter = modifier => !modifier.filter.some(f => f.k === "ability");
 		return {
-			check: {
-				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: checkLabel }), addType,
+			"check-bonus": {
+				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: checkBonusLabel }), addType: addBonus,
 				modifiers: this.document.system.getModifiers({ type: "ability-check" }).filter(filter)
 			},
-			save: {
-				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: saveLabel }), addType,
+			"check-min": {
+				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: checkMinLabel }), addType: addMin,
+				modifiers: this.document.system.getModifiers({ type: "ability-check" }, "min").filter(filter)
+			},
+			"save-bonus": {
+				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: saveBonusLabel }), addType: addBonus,
 				modifiers: this.document.system.getModifiers({ type: "ability-save" }).filter(filter)
+			},
+			"save-min": {
+				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: saveMinLabel }), addType: addMin,
+				modifiers: this.document.system.getModifiers({ type: "ability-save" }, "min").filter(filter)
 			}
 		};
 	}
@@ -111,7 +134,8 @@ export default class AbilityConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_getModifierData(section) {
-		const data = { type: "bonus", formula: "", filter: [{ k: "type", v: `ability-${section}` }] };
+		const [sec, type] = section.split("-");
+		const data = { type, formula: "", filter: [{ k: "type", v: `ability-${sec}` }] };
 		if ( this.abilityId ) data.filter.push({ k: "ability", v: this.abilityId });
 		return data;
 	}

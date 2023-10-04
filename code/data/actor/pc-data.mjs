@@ -200,7 +200,7 @@ export default class PCData extends ActorDataModel {
 	prepareBaseModifiers() {
 		this.modifiers.forEach(modifier => Object.defineProperty(modifier, "source", {
 			value: "manual",
-			enumerable: false,
+			enumerable: true,
 			writable: false
 		}));
 	}
@@ -263,10 +263,16 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, ability.save.proficiency.multiplier, "down"
 			);
 
-			ability.check.modifiers = this.getModifiers([{ type: "ability-check", ability: key }]);
-			ability.check.bonus = this.buildBonus(ability.check.modifiers, { deterministic: true, rollData });
-			ability.save.modifiers = this.getModifiers([{ type: "ability-save", ability: key }]);
-			ability.save.bonus = this.buildBonus(ability.save.modifiers, { deterministic: true, rollData });
+			ability.check.modifiers = {
+				bonus: this.getModifiers({ type: "ability-check", ability: key }),
+				minimum: this.getModifiers({ type: "ability-check", ability: key }, "min")
+			};
+			ability.check.bonus = this.buildBonus(ability.check.modifiers.bonus, { deterministic: true, rollData });
+			ability.save.modifiers = {
+				bonus: this.getModifiers({ type: "ability-save", ability: key }),
+				minimum: this.getModifiers({ type: "ability-save", ability: key }, "min")
+			};
+			ability.save.bonus = this.buildBonus(ability.save.modifiers.bonus, { deterministic: true, rollData });
 
 			ability.check.mod = ability.mod + ability.check.proficiency.flat + ability.check.bonus;
 			ability.save.mod = ability.mod + ability.save.proficiency.flat + ability.save.bonus;
@@ -324,6 +330,7 @@ export default class PCData extends ActorDataModel {
 			enumerable: false,
 			writable: false
 		}));
+		// TODO: Attribute each non-manual modifier to a source (e.g. effect or advancement)
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -370,15 +377,24 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, skill.proficiency.multiplier, "down"
 			);
 
-			skill.modifiers = this.getModifiers([
-				{ type: "ability-check", ability: skill.ability },
-				{ type: "skill", ability: skill.ability, skill: key }
-			]);
-			skill.bonus = this.buildBonus(skill.modifiers, { deterministic: true, rollData });
+			skill.modifiers = {
+				check: this.getModifiers([
+					{ type: "ability-check", ability: skill.ability },
+					{ type: "skill-check", ability: skill.ability, skill: key }
+				]),
+				passive: this.getModifiers([
+					{ type: "skill-passive", ability: skill.ability, skill: key }
+				]),
+				minimum: this.getModifiers([
+					{ type: "ability-check", ability: skill.ability },
+					{ type: "skill-check", ability: skill.ability, skill: key }
+				], "min")
+			};
+			skill.bonus = this.buildBonus(skill.modifiers.check, { deterministic: true, rollData });
 
 			const ability = this.abilities[skill.ability];
 			skill.mod = (ability?.mod ?? 0) + skill.bonus + skill.proficiency.flat;
-			skill.passive = 10 + skill.mod;
+			skill.passive = 10 + skill.mod + this.buildBonus(skill.modifiers.passive, { deterministic: true, rollData });
 
 			skill.labels = {
 				name: config.label,
@@ -465,6 +481,23 @@ export default class PCData extends ActorDataModel {
 		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
 		return modifiers.filter(m => m.formula).map(m => m.formula).join(" + ");
 		// TODO: Should formula data be replaced?
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Build a minimum roll value from the provided modifiers.
+	 * @param {object[]} modifiers - Modifiers from which to build the minimum.
+	 * @param {object} [options={}]
+	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
+	 * @returns {number|null}
+	 */
+	buildMinimum(modifiers, { rollData={} }={}) {
+		const minimum = modifiers.reduce((min, mod) => {
+			const value = simplifyBonus(mod.formula, rollData);
+			return value > min ? value : min;
+		}, -Infinity);
+		return Number.isFinite(minimum) ? minimum : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

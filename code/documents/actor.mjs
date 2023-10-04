@@ -132,10 +132,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const { parts, data } = buildRoll({
 			mod: ability.mod,
 			prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
-			bonus: this.system.buildBonus(ability.check.modifiers, { rollData })
+			bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
 		}, rollData);
 
-		const rollConfig = foundry.utils.mergeObject({ data }, config);
+		const rollConfig = foundry.utils.mergeObject({
+			data,
+			options: {
+				minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData })
+			}
+		}, config);
 		rollConfig.parts = parts.concat(config.parts ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.CheckSpecific", {
@@ -204,10 +209,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const { parts, data } = buildRoll({
 			mod: ability.mod,
 			prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
-			bonus: this.system.buildBonus(ability.save.modifiers, { rollData })
+			bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
 		}, rollData);
 
-		const rollConfig = foundry.utils.mergeObject({ data }, config);
+		const rollConfig = foundry.utils.mergeObject({
+			data,
+			options: {
+				minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData })
+			}
+		}, config);
 		rollConfig.parts = parts.concat(config.parts ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.SaveSpecificLong", {
@@ -285,17 +295,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			const abilityId = formData.ability ?? baseConfig.ability ?? skill.ability;
 			const ability = this.system.abilities[abilityId];
 
+			const modifierData = [
+				{ type: "ability-check", ability: abilityId },
+				{ type: "skill-check", ability: abilityId, skill: config.skill }
+			];
+
 			const { parts, data } = buildRoll({
 				mod: ability?.mod,
 				prof: skill.proficiency.hasProficiency ? skill.proficiency.proficiency.term : null,
-				bonus: this.system.buildBonus(this.system.getModifiers([
-					{ type: "ability-check", ability: abilityId },
-					{ type: "skill", ability: abilityId, skill: config.skill }
-				]), { rollData })
+				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
 			}, rollData);
 			data.abilityId = abilityId;
 
-			const rollConfig = foundry.utils.mergeObject(baseConfig, { data }, { inplace: false });
+			const rollConfig = foundry.utils.mergeObject(baseConfig, {
+				data,
+				options: {
+					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
+				}
+			}, { inplace: false });
 			rollConfig.parts = parts.concat(config.parts ?? []);
 
 			return rollConfig;
