@@ -1,6 +1,7 @@
 import log from "../utils/logging.mjs";
 import BlackFlagActiveEffect from "./active-effect.mjs";
 import BlackFlagActor from "./actor.mjs";
+import BlackFlagChatMessage from "./chat-message.mjs";
 import * as advancement from "./advancement/_module.mjs";
 import BlackFlagItem from "./item.mjs";
 
@@ -12,6 +13,7 @@ export function registerDocumentClasses() {
 
 	CONFIG.ActiveEffect.documentClass = BlackFlagActiveEffect;
 	CONFIG.Actor.documentClass = BlackFlagActor;
+	CONFIG.ChatMessage.documentClass = BlackFlagChatMessage;
 	CONFIG.Item.documentClass = BlackFlagItem;
 
 	CONFIG.Advancement = {
@@ -20,7 +22,7 @@ export function registerDocumentClasses() {
 	};
 }
 
-export {BlackFlagActiveEffect, BlackFlagActor, advancement, BlackFlagItem};
+export {BlackFlagActiveEffect, BlackFlagActor, BlackFlagChatMessage, advancement, BlackFlagItem};
 export {DocumentMixin} from "./mixin.mjs";
 export {default as NotificationsCollection} from "./notifications.mjs";
 export {default as Proficiency} from "./proficiency.mjs";
