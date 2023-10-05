@@ -1,3 +1,5 @@
+import { log } from "../../utils/_module.mjs";
+
 /**
  * Dialog that presents a list of features from which to choose.
  */
@@ -73,11 +75,11 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		context.CONFIG = CONFIG.BlackFlag;
 		context.advancement = this.advancement;
 		context.allowDrops = this.advancement.configuration.allowDrops;
-		context.choices = await Promise.all(
+		context.choices = (await Promise.all(
 			Object.values(this.advancement.configuration.pool)
 				.filter(c => !this.advancement.itemChosen(c.uuid))
 				.map(c => this.getChoiceData(c.uuid))
-		);
+		)).filter(c => c);
 		context.dropLabel = game.i18n.format("BF.Advancement.ChooseFeatures.Drop", {
 			type: game.i18n.localize(`BF.Item.Type.${this.advancement.configuration.type.capitalize()}[one]`).toLowerCase()
 		});
@@ -94,6 +96,10 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	 */
 	async getChoiceData(uuid) {
 		const document = await fromUuid(uuid);
+		if ( !document ) {
+			log(`Choice document could not be found: ${uuid}`, { level: "warn" });
+			return null;
+		}
 		const optionContext = { document, system: document.system };
 		optionContext.enriched = {
 			description: await TextEditor.enrichHTML(document.system.description.value, {secrets: false, async: true})

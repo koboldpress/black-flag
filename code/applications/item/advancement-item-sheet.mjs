@@ -120,6 +120,7 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 	 * @returns {Promise|void}
 	 */
 	_onAdvancementAction(target, action) {
+		event.stopImmediatePropagation();
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.item.system.advancement.get(id);
 		if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;

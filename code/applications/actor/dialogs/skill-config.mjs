@@ -124,7 +124,6 @@ export default class SkillConfig extends BaseConfig {
 		const [sec, type] = section.split("-");
 		const data = { type: type, formula: "", filter: [{ k: "type", v: `skill-${sec}` }] };
 		if ( this.skillId ) data.filter.push({ k: "skill", v: this.skillId });
-		console.log(data);
 		return data;
 	}
 }
