@@ -53,8 +53,8 @@ export default class PCData extends ActorDataModel {
 					// Recovery percentage
 				}, {label: "BF.HitDie.Label[other]"}),
 				hp: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
-					temp: new foundry.data.fields.NumberField({min: 0, integer: true}),
+					value: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong"}),
+					temp: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong"}),
 					// Temp max
 					bonuses: new foundry.data.fields.SchemaField({
 						level: new fields.FormulaField({deterministic: true}),
@@ -158,25 +158,28 @@ export default class PCData extends ActorDataModel {
 					value: new foundry.data.fields.StringField(),
 					tags: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
 				}),
-				resistances: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
-					bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+				condition: new foundry.data.fields.SchemaField({
+					immunities: new foundry.data.fields.SchemaField({
+						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
+						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+					})
 				}),
-				immunities: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
-					bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
-				}),
-				vulnerabilities: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
-				}),
-				conditionImmunities: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+				damage: new foundry.data.fields.SchemaField({
+					resistances: new foundry.data.fields.SchemaField({
+						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
+						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
+						bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+					}),
+					immunities: new foundry.data.fields.SchemaField({
+						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
+						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
+						bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+					}),
+					vulnerabilities: new foundry.data.fields.SchemaField({
+						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
+						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+					})
 				})
-				// TODO: Perhaps condition immunities could just be stored with damage immunities
 			}, {label: "BF.Trait.Label[other]"})
 		};
 	}

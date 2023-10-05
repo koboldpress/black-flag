@@ -255,6 +255,72 @@
 			.hit-points {
 				grid-column: 10 / 13;
 				grid-row: 3 / span 2;
+
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+				padding-block-end: 0.25rem;
+
+				> div {
+					display: flex;
+					margin-inline: calc(-0.25rem - 3px);
+					border: 1px solid var(--bf-color-border-gray);
+					border-radius: 6px;
+
+					> * {
+						flex: 1 1 40%;
+
+						&:first-child {
+							border-top-left-radius: 6px;
+							border-bottom-left-radius: 6px;
+						}
+						&:last-child {
+							border-top-right-radius: 6px;
+							border-bottom-right-radius: 6px;
+						}
+					}
+					.separator {
+						flex: 0 0 1px;
+						border-inline-end: 1px solid var(--bf-color-border-gray);
+					}
+				}
+
+				label {
+					contain: layout;
+					background-color: white;
+
+					.label {
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						opacity: 0.6;
+						font-size: var(--font-size-11);
+						text-align: center;
+					}
+					.value {
+						flex-grow: 1;
+						display: block;
+						height: unset;
+						border: none;
+						padding-block-start: 0.75rem;
+						background: none;
+						text-align: center;
+					}
+				}
+
+				.main-hit-points {
+					.value {
+						font-size: var(--font-size-20);
+						padding-block-start: 1rem;
+						padding-block-end: 0.5rem;
+					}
+				}
+				.other-hit-points {
+					.value {
+						font-size: var(--font-size-16);
+					}
+				}
 			}
 			.hit-dice {
 				grid-column: 10 / 13;

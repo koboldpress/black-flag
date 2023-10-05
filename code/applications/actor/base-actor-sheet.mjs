@@ -180,6 +180,11 @@ export default class BaseActorSheet extends ActorSheet {
 		for ( const element of html.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
+
+		// Hit Points
+		for ( const element of html.querySelectorAll('[name$=".hp.value"]') ) {
+			element.addEventListener("change", this._onChangeHP.bind(this));
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -214,5 +219,26 @@ export default class BaseActorSheet extends ActorSheet {
 				return this.actor.roll(subAction, properties);
 		}
 		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle changes to the HP and damage on character sheets.
+	 * @param {Event} event - Triggering event.
+	 * @returns {Promise}
+	 */
+	async _onChangeHP(event) {
+		event.stopPropagation();
+		let value = event.target.value.trim();
+		let delta;
+		if ( value.startsWith("+") || value.startsWith("-") ) delta = parseInt(value);
+		else {
+			if ( value.startsWith("=") ) value = value.slice(1);
+			delta = parseInt(value) - foundry.utils.getProperty(this.actor, event.target.name);
+		}
+
+		const changed = await this.actor.applyDamage(delta, { multiplier: -1 });
+		if ( !changed ) event.target.value = foundry.utils.getProperty(this.actor, event.target.name);
 	}
 }

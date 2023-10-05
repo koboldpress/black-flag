@@ -88,7 +88,23 @@
 	</fieldset>
 	<fieldset class="hit-points">
 		<legend>{{localize "BF.HitPoint.Label[other]"}}</legend>
-		<span>{{system.attributes.hp.value}} / {{system.attributes.hp.max}}</span>
+		<div class="main-hit-points">
+			<label class="current-hit-points">
+				<span class="label">{{localize "BF.HitPoint.Current.LabelShort"}}</span>
+				<input class="value" type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}">
+			</label>
+			<div class="separator"></div>
+			<label class="max-hit-points">
+				<span class="label">{{localize "BF.HitPoint.Max.LabelShort"}}</span>
+				<span class="value">{{system.attributes.hp.max}}</span>
+			</label>
+		</div>
+		<div class="other-hit-points">
+			<label class="temp-hit-points">
+				<span class="label">{{localize "BF.HitPoint.Temp.LabelShort"}}</span>
+				<input class="value" type="text" name="system.attributes.hp.temp" value="{{system.attributes.hp.temp}}">
+			</label>
+		</div>
 	</fieldset>
 	<fieldset class="hit-dice">
 		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>

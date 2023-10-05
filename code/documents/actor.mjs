@@ -84,6 +84,117 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Description of a source of damage.
+	 *
+	 * @typedef {object} DamageDescription
+	 * @property {number} value - Amount of damage.
+	 * @property {string} type - Type of damage.
+	 * @property {BlackFlagActor|BlackFlagItem} [source] - Source of the damage.
+	 */
+
+	/**
+	 * Apply damage to the actor.
+	 * @param {DamageDescription[]|number} damage - Damages to apply.
+	 * @param {object} [options={}]
+	 * @param {number} [options.multiplier=1] - Amount by which to multiply all damage (before damage resistance, etc).
+	 * @param {object} [options.ignore]
+	 * @param {boolean} [options.ignore.all=false] - Should all damage modification be ignored?
+	 * @param {boolean} [options.ignore.immunity=false] - Should this actor's damage immunity be ignored?
+	 * @param {boolean} [options.ignore.reduction=false] - Should this actor's damage reduction be ignored?
+	 * @param {boolean} [options.ignore.resistance=false] - Should this actor's damage resistance be ignored?
+	 * @param {boolean} [options.ignore.vulnerability=false] - Should this actor's damage vulnerability be ignored?
+	 * @returns {Promise<BlackFlagActor>} - The actor after the update has been performed.
+	 */
+	async applyDamage(damage, options={}) {
+		const hp = this.system.attributes.hp;
+		if ( !hp ) return;
+
+		if ( Number.isNumeric(damage) ) {
+			damage = [{ value: damage }];
+			options.ignore ??= { all: true };
+		}
+
+		let inverted = false;
+		let multiplier = options.multiplier ?? 1;
+
+		// TODO: Pre-apply damage hook
+
+		if ( multiplier < 0 ) {
+			inverted = true;
+			multiplier *= -1;
+		}
+
+		let amount = damage.reduce((total, d) => {
+			// TODO: Ignore damage types with immunity
+
+			// Apply damage multiplier
+			let value = d.value * multiplier;
+
+			// TODO: Apply type-specific damage resistances & vulnerabilities
+
+			// TODO: Apply type-specific damage reduction, ensuring damage reduction doesn't cause healing by accident
+
+			return total + value;
+		}, 0);
+
+		// TODO: Apply overall damage resistance & vulnerability
+
+		// TODO: Apply overall damage reduction
+
+		// Round damage down
+		amount = Math.floor(amount);
+
+		// Invert damage if multiplier is negative
+		if ( inverted ) amount *= -1;
+
+		// Subtract from temp HP first & then from normal HP
+		const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
+		const deltaHP = Math.clamped(amount - deltaTemp, -(hp.damage ?? Infinity), hp.value);
+		const updates = {
+			"system.attributes.hp.temp": hp.temp - deltaTemp,
+			"system.attributes.hp.value": hp.value - deltaHP
+		};
+		amount = deltaTemp + deltaHP;
+
+		// TODO: Apply damage hook
+
+		// Call core's hook so anything watching token bar changes can respond
+		if ( Hooks.call("modifyTokenAttribute", {
+			attribute: "attributes.hp", value: amount, isDelta: false, isBar: true
+		}, updates) === false ) return false;
+
+		if ( !deltaTemp && !deltaHP ) return false;
+		return this.update(updates, { deltaHP: -amount });
+	}
+
+	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+
+	/**
+	 * Apply temp HP to the actor, but only if it's more than the actor's current temp HP.
+	 * @param {number} amount - Amount of temp HP to apply.
+	 * @returns {Promise<ActorEH>} - The actor after the update has been performed.
+	 */
+	async applyTempHP(amount=0) {
+		const hp = this.system.attributes.hp;
+		if ( !hp ) return;
+		return amount > hp.temp ? this.update({"system.attributes.hp.temp": amount}) : this;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async modifyTokenAttribute(attribute, value, isDelta, isBar) {
+		if ( ["attributes.hp", "attributes.hp.value"].includes(attribute) ) {
+			const hp = this.system.attributes.hp;
+			const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
+			return this.applyDamage(delta);
+		}
+		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+	}
+
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Rolling               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
