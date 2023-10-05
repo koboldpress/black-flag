@@ -14,9 +14,15 @@ import { cleanPackEntry } from "./clean.mjs";
  */
 export default async function packDB(packName, options={}) {
 	// Determine which source folders to process
-	const folders = (await readdir(PACK_SRC, { withFileTypes: true })).filter(file =>
-		file.isDirectory() && ( !packName || (packName === file.name) )
-	);
+	let folders;
+	try {
+		folders = (await readdir(PACK_SRC, { withFileTypes: true })).filter(file =>
+			file.isDirectory() && ( !packName || (packName === file.name) )
+		);
+	} catch(err) {
+		console.error(err.message);
+		return;
+	}
 
 	for ( const folder of folders ) {
 		const src = Path.join(PACK_SRC, folder.name);
