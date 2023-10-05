@@ -1,0 +1,48 @@
+.chat-message .luck-controls {
+	display: flex;
+	gap: 2px;
+	margin-block-start: 0.5rem;
+	border: 1px solid var(--bf-color-border-blue);
+	border-radius: 7px;
+	padding: 2px;
+
+	.luck-points {
+		justify-content: center;
+		flex-wrap: wrap-reverse;
+		gap: 0;
+		font-size: 0.5rem;
+	}
+
+	> * {
+		flex: 1 1 33%;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		gap: 0.25rem;
+		padding-block: 0.25rem;
+		padding-inline: 0.15rem;
+	}
+
+	.luck-total {
+		padding-inline-start: 0.5rem;
+		padding-inline-end: 0.25rem;
+
+		span {
+			flex-shrink: 0;
+		}
+		.luck-points {
+			flex: 0 0 4.5em;
+		}
+	}
+
+	button {
+		width: unset;
+		margin: 0;
+		border: 1px solid var(--bf-color-border-gray);
+		border-radius: 5px;
+
+		&:disabled {
+			opacity: 0.5;
+		}
+	}
+}

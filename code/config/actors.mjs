@@ -3,7 +3,8 @@
  * @type {{
  *   costs: {[key: string]: number},
  *   rerollFormula: string,
- *   max: number
+ *   max: number,
+ *   validRollTypes: Set<string>
  * }}
  */
 export const luck = {
@@ -12,7 +13,8 @@ export const luck = {
 		reroll: 3
 	},
 	max: 5,
-	rerollFormula: "1d4"
+	rerollFormula: "1d4",
+	validRollTypes: new Set(["ability-check", "ability-save", "attack", "skill"])
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

@@ -1,0 +1,22 @@
+.luck-points {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	gap: 0.5rem;
+
+	.luck-point {
+		width: 1.5em;
+		height: 1.5em;
+		border: 1px solid var(--bf-color-border-gray);
+		border-radius: 100%;
+
+		&.selected {
+			background-color: color-mix(in oklab, var(--bf-blue), rgba(0, 0, 0, 0.25) 20%);
+		}
+	}
+
+	&.cost .luck-point {
+		background-color: var(--bf-color-border-gray);
+	}
+}
