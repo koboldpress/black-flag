@@ -1,4 +1,4 @@
-import { buildRoll, log } from "../utils/_module.mjs";
+import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
 
@@ -193,6 +193,232 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Resting               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration options for a rest.
+	 *
+	 * @typedef {object} RestConfiguration
+	 * @property {string} type - Type of rest performed (e.g. "short" or "long").
+	 * @property {boolean} dialog - Present a dialog window for any rest configuration.
+	 * @property {boolean} chat - Should a chat message be created to summarize the results of the rest?
+	 */
+
+	/**
+	 * Results from a rest operation.
+	 *
+	 * @typedef {object} RestResult
+	 * @property {string} type - Type of rest performed (e.g. "short" or "long").
+	 * @property {object} deltas
+	 * @property {number} deltas.hitPoints - Hit points recovered during the rest.
+	 * @property {object} deltas.hitDice - Hit dice spent or recovered during the rest, grouped by size.
+	 * @property {number} deltas.hitDice.total - Combined hit dice delta.
+	 * @property {object} actorUpdates - Updates applied to the actor.
+	 * @property {object[]} itemUpdates - Updates applied to the actor's items.
+	 * @property {BaseRoll[]} rolls - Any rolls that occurred during the rest process, not including hit dice.
+	 */
+
+	/**
+	 * Take a short rest, possibly spending hit dice and recovering resources and item uses.
+	 * @param {RestConfiguration} [config={}] - Configuration options for a short rest.
+	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
+	 */
+	async shortRest(config={}) {
+		return this.rest(foundry.utils.mergeObject({ type: "short" }, config));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Take a long rest, possibly recovering hit points, resources, and item uses.
+	 * @param {RestConfiguration} [config={}] - Configuration options for a long rest.
+	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
+	 */
+	async longRest(config={}) {
+		return this.rest(foundry.utils.mergeObject({ type: "long" }, config));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform all of the changes needed when the actor rests.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {object} [deltas={}] - Any changes that have been made earlier in the process.
+	 * @returns {Promise<RestResult>} - Final result of the rest operation.
+	 */
+	async rest(config={}, deltas={}) {
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		if ( !restConfig ) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
+		config = foundry.utils.mergeObject({ dialog: true, chat: true }, config);
+
+		const initialHitDice = Object.entries(this.system.attributes.hd.d).reduce((obj, [d, v]) => {
+			obj[d] = v.spent;
+			return obj;
+		}, {});
+		const initialHitPoints = this.system.attributes.hp.value;
+
+		/**
+		 * A hook event that fires before the rest dialog is shown.
+		 * @function blackFlag.preRestConfiguration
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - The actor that is being rested.
+		 * @param {RestConfiguration} config - Configuration options for the rest.
+		 * @returns {boolean} - Explicitly return `false` to prevent the rest from being started.
+		 */
+		if ( Hooks.call("blackFlag.preRestConfiguration", this, config) === false ) return;
+
+		const result = {
+			type: config.type,
+			deltas: {},
+			actorUpdates: {},
+			itemUpdates: [],
+			rolls: []
+		};
+		const RestDialog = config.dialog ? restConfig.dialogClass : null;
+		if ( RestDialog ) {
+			try { foundry.utils.mergeObject(result, await RestDialog.rest(this, config)); }
+			catch(err) { return; }
+		}
+
+		/**
+		 * A hook event that fires after the rest dialog is shown.
+		 * @function blackFlag.restConfiguration
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - The actor that is being rested.
+		 * @param {RestConfiguration} config - Configuration options for the rest.
+		 * @param {RestResult} result - Details on the rest to be completed.
+		 * @returns {boolean} - Explicitly return `false` to prevent the rest from being continued.
+		 */
+		if ( Hooks.call("blackFlag.restConfiguration", this, config, result) === false ) return;
+
+		let totalHD = 0;
+		result.deltas.hitDice = Object.keys(this.system.attributes.hd.d).reduce((obj, d) => {
+			obj[d] = (result.deltas.hitDice?.[d] ?? 0) + initialHitDice[d] - this.system.attributes.hd.d[d];
+			totalHD += obj[d];
+			return obj;
+		}, {});
+		result.deltas.hitDice.total = totalHD;
+		result.deltas.hitPoints = (result.deltas.hitPoints ?? 0) + this.system.attributes.hp.value - initialHitPoints;
+
+		this._getRestHitDiceRecovery(config, result);
+		this._getRestHitPointRecovery(config, result);
+
+		/**
+		 * A hook event that fires after rest result is calculated, but before any updates are performed.
+		 * @function blackFlag.preRestCompleted
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - The actor that is being rested.
+		 * @param {RestResult} result - Details on the rest to be completed.
+		 * @returns {boolean} - Explicitly return `false` to prevent the rest updates from being performed.
+		 */
+		if ( Hooks.call("blackFlag.preRestCompleted", this, result) === false ) return result;
+
+		await this.update(result.actorUpdates);
+		await this.updateEmbeddedDocuments("Item", result.itemUpdates);
+
+		if ( chat ) await this._displayRestResultMessage(result);
+
+		/**
+		 * A hook event that fires when the rest process is completed for an actor.
+		 * @function blackFlag.restCompleted
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - The actor that just completed resting.
+		 * @param {RestResult} result - Details on the rest completed.
+		 */
+		Hooks.callAll("blackFlag.restCompleted", this, result);
+
+		return result;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any hit dice recover needed for this rest.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 * @internal
+	 */
+	_getRestHitDiceRecovery(config={}, result={}) {
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		if ( !restConfig.recoverHitDice ) return;
+		// const hd = this.system.attributes.hd;
+		// const final = Math.clamped(hd.spent - Math.ceil(hd.max * hd.recovery), 0, hd.max);
+		// foundry.utils.mergeObject(result, {
+		// 	deltas: {
+		// 		hitDice: (result.deltas?.hitDice ?? 0) + hd.spent - final
+		// 	},
+		// 	actorUpdates: {
+		// 		"system.attributes.hd.spent": final
+		// 	}
+		// });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any hit point recovery needed for this rest.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 * @internal
+	 */
+	_getRestHitPointRecovery(config={}, result={}) {
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		if ( !restConfig.recoverHitPoints ) return;
+		const hp = this.system.attributes.hp;
+		const percentage = CONFIG.BlackFlag.rest.hitPointsRecoveryPercentage;
+		const final = Math.clamped(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
+		foundry.utils.mergeObject(result, {
+			deltas: {
+				hitPoints: (result.deltas?.hitPoints ?? 0) + hp.damage - final
+			},
+			actorUpdates: {
+				"system.attributes.hp.value": final,
+				"system.attributes.hp.temp": 0
+			}
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the result of a rest operation in chat.
+	 * @param {RestResult} result - Results of the rest.
+	 * @returns {Promise<ChatMessage>}
+	 * @internal
+	 */
+	async _displayRestResultMessage(result) {
+		const restConfig = CONFIG.BlackFlag.rest.types[result.type];
+
+		// Determine what localization string should be used for the message content
+		let resultType = "Basic";
+		if ( result.deltas.hitPoints && result.deltas.hitDice.total ) resultType = "Full";
+		else if ( (result.type === "long") && result.deltas.hitPoints ) resultType = "HitPoints";
+		else if ( (result.type === "long") && result.deltas.hitDice.total ) resultType = "HitDice";
+		const localizationString = `${restConfig.resultMessages}.${resultType}`;
+
+		// Prepare localization data
+		const pluralRules = new Intl.PluralRules(game.i18n.lang);
+		const localizationData = {
+			name: this.name,
+			hitDice: numberFormat(result.type === "long" ? result.deltas.hitDice.total : -result.deltas.hitDice.total),
+			hitDiceLabel: game.i18n.localize(`BF.HitDie.Label[${pluralRules.select(result.deltas.hitDice.total)}]`).toLowerCase(),
+			hitPoints: numberFormat(result.deltas.hitPoints),
+			hitPointsLabel: game.i18n.localize(`BF.HitPoint.Label[${pluralRules.select(result.deltas.hitPoints)}]`)
+				.toLowerCase()
+		};
+
+		const chatData = {
+			user: game.user.id,
+			speaker: {actor: this, alias: this.name},
+			flavor: game.i18n.localize(restConfig.label),
+			rolls: result.rolls,
+			content: game.i18n.format(localizationString, localizationData)
+		};
+		ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
+		return ChatMessage.create(chatData);
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Rolling               */

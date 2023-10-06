@@ -113,6 +113,14 @@
 			{{!-- TODO: Display dice icon instead of or in addition to denomination text --}}
 		{{/each}}
 	</fieldset>
+	<fieldset class="resting">
+		<legend>{{localize "BF.Rest.Label"}}</legend>
+		{{#each CONFIG.rest.types as |data key|}}
+			<button data-action="rest" data-type="{{key}}">
+				{{localize data.label}}
+			</button>
+		{{/each}}
+	</fieldset>
 	<fieldset class="armor-class">
 		<legend>{{localize "BF.ArmorClass.Label"}}</legend>
 		<span>{{system.attributes.ac.value}}</span>

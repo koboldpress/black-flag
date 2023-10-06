@@ -1,0 +1,32 @@
+.rest.dialog form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+
+	.hit-die-roll {
+		justify-content: space-between;
+
+		span:first-child {
+			font-size: var(--font-size-16);
+			font-variant: none;
+			font-weight: normal;
+		}
+
+		button {
+			flex: 33% 0 0;
+			width: unset;
+		}
+	}
+
+	.dialog-buttons ul {
+		display: flex;
+		gap: 0.5rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			flex: 1 1 20%;
+		}
+	}
+}

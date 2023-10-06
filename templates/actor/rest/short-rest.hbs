@@ -1,0 +1,30 @@
+<form class="dialog-content short-rest" autocomplete="off">
+	<section class="main-form">
+		<p>{{content}}</p>
+	
+		<fieldset class="hit-dice">
+			<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
+			<label>
+				<span>{{localize "BF.HitPoint.Damage.Label"}}</span>
+				<span>{{blackFlag-number hp.damage}}</span>
+			</label>
+			{{#each hd.d as |hd denom|}}
+				<label class="hit-die-roll">
+					<span>d{{denom}} ({{localize "BF.HitDie.Available" number=(blackFlag-number hd.available)}})</span>
+					<button data-action="roll-hit-die" data-denomination="{{denom}}" {{disabled (eq hd.available 0)}}>
+						<i class="fa-solid fa-dice-d{{denom}}"></i>
+						{{localize "BF.Roll.Action.RollSpecific" type=(concat "d" denom)}}
+					</button>
+				</label>
+			{{/each}}
+		</fieldset>
+	</section>
+
+	<nav class="dialog-buttons">
+		<ul>
+			{{#each buttons as |button id|}}
+				<li><button class="dialog-button" data-button="{{id}}">{{{button.icon}}} {{{button.label}}}</button></li>
+			{{/each}}
+		</ul>
+	</nav>
+</form>

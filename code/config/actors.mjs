@@ -1,3 +1,5 @@
+import { LongRestDialog, ShortRestDialog } from "../applications/actor/_module.mjs";
+
 /**
  * Configuration data for luck points.
  * @type {{
@@ -39,6 +41,55 @@ export const movementTypes = {
 	burrow: {
 		label: "BF.Movement.Type.Burrow"
 	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Configuration data for a rest type.
+ *
+ * @typedef {object} RestConfiguration
+ * @property {{[key: string]: RestTypeConfiguration}} types - Rest types supported.
+ * @property {number} hitPointsRecoveryPercentage - Percentage of hit points recovered during a rest.
+ * @property {number} hitDiceRecoveryPercentage - Percentage of hit dice recovered during a rest.
+ */
+
+/**
+ * Configuration data for a rest type.
+ *
+ * @typedef {LabeledConfiguration} RestTypeConfiguration
+ * @property {string} hint - Localizable hint about the rest.
+ * @property {string} resultMessages - Prefix for any result messages. A "Base" message must be provided,
+ *                                     with optional "Full", "HitDice", & "HitPoints" variants depending
+ *                                     on what resources can be recovered.
+ * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
+ * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
+ * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
+ */
+
+/**
+ * Types of rests an actor can take.
+ * @type {RestConfiguration}
+ */
+export const rest = {
+	types: {
+		short: {
+			label: "BF.Rest.Type.Short.Label",
+			hint: "BF.Rest.Type.Short.Hint",
+			resultMessages: "BF.Rest.Result.Short",
+			dialogClass: ShortRestDialog
+		},
+		long: {
+			label: "BF.Rest.Type.Long.Label",
+			hint: "BF.Rest.Type.Long.Hint",
+			resultMessages: "BF.Rest.Result.Long",
+			dialogClass: LongRestDialog,
+			recoverHitPoints: true,
+			recoverHitDice: true
+		}
+	},
+	hitPointsRecoveryPercentage: 1,
+	hitDiceRecoveryPercentage: 0.5
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

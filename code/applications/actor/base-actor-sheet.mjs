@@ -1,8 +1,8 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import log from "../../utils/logging.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
-import AbilityConfig from "./dialogs/ability-config.mjs";
-import SkillConfig from "./dialogs/skill-config.mjs";
+import AbilityConfig from "./config/ability-config.mjs";
+import SkillConfig from "./config/skill-config.mjs";
 
 /**
  * Sheet class containing implementation shared across all actor types.
@@ -214,6 +214,8 @@ export default class BaseActorSheet extends ActorSheet {
 					case "view":
 						return item?.sheet.render(true);
 				}
+			case "rest":
+				return this.actor.rest({type: properties.type});
 			case "roll":
 				properties.event = event;
 				return this.actor.roll(subAction, properties);
