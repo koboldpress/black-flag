@@ -214,7 +214,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @property {object} deltas
 	 * @property {number} deltas.hitPoints - Hit points recovered during the rest.
 	 * @property {object} deltas.hitDice - Hit dice spent or recovered during the rest, grouped by size.
-	 * @property {number} deltas.hitDice.total - Combined hit dice delta.
 	 * @property {object} actorUpdates - Updates applied to the actor.
 	 * @property {object[]} itemUpdates - Updates applied to the actor's items.
 	 * @property {BaseRoll[]} rolls - Any rolls that occurred during the rest process, not including hit dice.
@@ -294,8 +293,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if ( Hooks.call("blackFlag.restConfiguration", this, config, result) === false ) return;
 
 		let totalHD = 0;
-		result.deltas.hitDice = Object.keys(this.system.attributes.hd.d).reduce((obj, d) => {
-			obj[d] = (result.deltas.hitDice?.[d] ?? 0) + initialHitDice[d] - this.system.attributes.hd.d[d];
+		const hd = this.system.attributes.hd;
+		result.deltas.hitDice = Object.keys(hd.d).reduce((obj, d) => {
+			obj[d] = (result.deltas.hitDice?.[d] ?? 0) + initialHitDice[d] - hd.d[d].spent;
 			totalHD += obj[d];
 			return obj;
 		}, {});
@@ -343,16 +343,27 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	_getRestHitDiceRecovery(config={}, result={}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
 		if ( !restConfig.recoverHitDice ) return;
-		// const hd = this.system.attributes.hd;
-		// const final = Math.clamped(hd.spent - Math.ceil(hd.max * hd.recovery), 0, hd.max);
-		// foundry.utils.mergeObject(result, {
-		// 	deltas: {
-		// 		hitDice: (result.deltas?.hitDice ?? 0) + hd.spent - final
-		// 	},
-		// 	actorUpdates: {
-		// 		"system.attributes.hd.spent": final
-		// 	}
-		// });
+		const hd = this.system.attributes.hd;
+
+		// Determine maximum number of hit dice to recover
+		let hitDiceToRecover = Math.ceil(this.system.progression.level * CONFIG.BlackFlag.rest.hitDiceRecoveryPercentage);
+
+		const deltas = {};
+		const updates = {};
+		for ( const denomination of Object.keys(hd.d).map(d => Number(d)).sort((lhs, rhs) => rhs - lhs) ) {
+			const spent = hd.d[denomination].spent;
+			const delta = Math.min(spent, hitDiceToRecover);
+			if ( delta > 0 ) {
+				hitDiceToRecover -= delta;
+				deltas[denomination] = (result.deltas?.hitDice[denomination] ?? 0) + delta;
+				updates[`d.${denomination}.spent`] = spent - delta;
+			}
+		}
+
+		foundry.utils.mergeObject(result, {
+			deltas: { hitDice: deltas },
+			actorUpdates: { "system.attributes.hd": updates }
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -371,7 +382,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const final = Math.clamped(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
 		foundry.utils.mergeObject(result, {
 			deltas: {
-				hitPoints: (result.deltas?.hitPoints ?? 0) + hp.damage - final
+				hitPoints: (result.deltas?.hitPoints ?? 0) + final - hp.value
 			},
 			actorUpdates: {
 				"system.attributes.hp.value": final,
@@ -391,19 +402,21 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async _displayRestResultMessage(result) {
 		const restConfig = CONFIG.BlackFlag.rest.types[result.type];
 
+		const totalHD = Object.keys(this.system.attributes.hd.d).reduce((t, d) => t + result.deltas.hitDice[d], 0);
+
 		// Determine what localization string should be used for the message content
 		let resultType = "Basic";
-		if ( result.deltas.hitPoints && result.deltas.hitDice.total ) resultType = "Full";
+		if ( result.deltas.hitPoints && totalHD ) resultType = "Full";
 		else if ( (result.type === "long") && result.deltas.hitPoints ) resultType = "HitPoints";
-		else if ( (result.type === "long") && result.deltas.hitDice.total ) resultType = "HitDice";
+		else if ( (result.type === "long") && totalHD ) resultType = "HitDice";
 		const localizationString = `${restConfig.resultMessages}.${resultType}`;
 
 		// Prepare localization data
 		const pluralRules = new Intl.PluralRules(game.i18n.lang);
 		const localizationData = {
 			name: this.name,
-			hitDice: numberFormat(result.type === "long" ? result.deltas.hitDice.total : -result.deltas.hitDice.total),
-			hitDiceLabel: game.i18n.localize(`BF.HitDie.Label[${pluralRules.select(result.deltas.hitDice.total)}]`).toLowerCase(),
+			hitDice: numberFormat(result.type === "long" ? totalHD : -totalHD),
+			hitDiceLabel: game.i18n.localize(`BF.HitDie.Label[${pluralRules.select(totalHD)}]`).toLowerCase(),
 			hitPoints: numberFormat(result.deltas.hitPoints),
 			hitPointsLabel: game.i18n.localize(`BF.HitPoint.Label[${pluralRules.select(result.deltas.hitPoints)}]`)
 				.toLowerCase()
@@ -438,6 +451,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				return this.rollAbilityCheck(config, message, dialog);
 			case "ability-save":
 				return this.rollAbilitySave(config, message, dialog);
+			case "hit-die":
+				return this.rollHitDie(config, message, dialog);
 			case "skill":
 				return this.rollSkill(config, message, dialog);
 			default:
@@ -602,6 +617,109 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
 		if ( rolls?.length ) Hooks.callAll("blackFlag.rollAbilitySave", this, rolls, config.ability);
+
+		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration data for a hit die roll.
+	 *
+	 * @typedef {BaseRollConfiguration} HitDieRollConfiguration
+	 * @property {number} [denomination] - Denomination of hit dice to roll.
+	 * @property {boolean} [modifySpentHitDie=true] - Should the actor's spent hit die count be updated?
+	 * @property {boolean} [modifyHitPoints=true] - Should the actor's hit points be updated after the roll?
+	 */
+
+	/**
+	 * Roll one of the actor's hit die and add its value to their health.
+	 * @param {HitDieRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @returns {Promise<BaseRoll[]|void>}
+	 */
+	async rollHitDie(config={}, message={}, dialog={}) {
+		// If no denomination is chosen, use the highest HD that is available
+		if ( !config.denomination ) {
+			config.denomination = Object.entries(this.system.attributes.hd.d)
+				.filter(([k, v]) => v.available > 0)
+				.sort((lhs, rhs) => rhs[1].available - lhs[1].available)[0]?.[0];
+			if ( !config.denomination ) {
+				return ui.notifications.warn("BF.HitDie.Warning.NoneAvailableGeneric", { localize: true });
+			}
+		}
+
+		// Ensure there is a hit die to spend
+		else if ( !this.system.attributes.hd.d[config.denomination]?.available ) {
+			return ui.notifications.warn(game.i18n.format("BF.HitDie.Warning.NoneAvailableSpecific", {
+				denomination: config.denomination
+			}));
+		}
+
+		config.denomination = Number(config.denomination);
+		const rollConfig = foundry.utils.mergeObject({ data: this.getRollData() }, config);
+		rollConfig.parts = [
+			`max(0, 1d${config.denomination} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`
+		].concat(config.parts ?? []);
+
+		const type = game.i18n.localize("BF.HitDie.Label[one]");
+		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
+		const messageConfig = foundry.utils.mergeObject({
+			data: {
+				title: `${flavor}: ${this.name}`,
+				flavor: flavor,
+				speaker: ChatMessage.getSpeaker({ actor: this }),
+				"flags.everyday-heroes.roll": {
+					type: "hit-die",
+					denomination: config.denomination
+				}
+			}
+		}, message);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			configure: false,
+			options: {
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+			}
+		}, dialog);
+
+		/**
+		 * A hook event that fires before a hit die is rolled.
+		 * @function blackFlag.preRollHitDie
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
+		 * @param {HitDieRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
+		 */
+		if ( Hooks.call("blackFlag.preRollHitDie", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+
+		const rolls = await CONFIG.Dice.BaseRoll.build(rollConfig, messageConfig, dialogConfig);
+
+		const updates = {};
+		if ( rollConfig.modifySpentHitDie !== false ) {
+			const hd = this.system.attributes.hd.d[config.denomination];
+			updates[`system.attributes.hd.d.${config.denomination}.spent`] = hd.spent + 1;
+		}
+		if ( rollConfig.modifyHitPoints !== false ) {
+			const hp = this.system.attributes.hp;
+			updates["system.attributes.hp.value"] = Math.min(hp.max, hp.value + (rolls[0]?.total ?? 0));
+		}
+
+		/**
+		 * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
+		 * @function blackFlag.rollHitDie
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
+		 * @param {BaseRoll[]} rolls - The resulting rolls.
+		 * @param {object} updates - Updates that will be applied to the actor.
+		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
+		 */
+		if ( Hooks.call("blackFlag.rollHitDie", this, rolls, updates) === false ) return rolls;
+
+		if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
 
 		return rolls;
 	}

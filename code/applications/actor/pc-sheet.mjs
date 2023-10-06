@@ -163,6 +163,24 @@ export default class PCSheet extends BaseActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_updateObject(event, formData) {
+		const updates = foundry.utils.expandObject(formData);
+
+		// Intercept updates to available hit dice
+		const hdUpdates = foundry.utils.getProperty(updates, "system.attributes.hd.d");
+		if ( hdUpdates ) {
+			const hd = this.actor.system.attributes.hd;
+			for ( const [denomination, update] of Object.entries(hdUpdates) ) {
+				const d = hd.d[denomination];
+				updates.system.attributes.hd.d[denomination].spent = Math.clamped(d.max - update.available, 0, d.max);
+			}
+		}
+
+		return super._updateObject(event, foundry.utils.flattenObject(updates));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

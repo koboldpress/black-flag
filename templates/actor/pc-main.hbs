@@ -109,8 +109,21 @@
 	<fieldset class="hit-dice">
 		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
 		{{#each system.attributes.hd.d as |data denomination|}}
-			<span class="denomination">{{data.available}} / {{data.max}} - d{{denomination}}</span>
-			{{!-- TODO: Display dice icon instead of or in addition to denomination text --}}
+			<div class="denomination">
+				<label class="label">d{{denomination}}</label>
+				{{#if @root.editingMode}}
+					<input class="value" type="number" name="system.attributes.hd.d.{{denomination}}.available"
+						value="{{data.available}}" step=1 min=0 max={{data.max}}>
+				{{else}}
+					<span class="value">{{blackFlag-number data.available}}</span>
+				{{/if}}
+				<div class="separator"></div>
+				<span class="max">{{blackFlag-number data.max}}</span>
+				<button data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
+					{{disabled (eq data.available 0)}}>
+					<i class="fa-solid fa-dice-d{{denomination}}"></i>
+				</button>
+			</div>
 		{{/each}}
 	</fieldset>
 	<fieldset class="resting">

@@ -295,6 +295,68 @@
 			.hit-dice {
 				grid-column: 10 / 13;
 				grid-row: 5 / span 2;
+				padding-block-end: 0.25rem;
+
+				.denomination {
+					display: flex;
+					margin-inline: calc(-0.25rem - 3px);
+					background: white;
+					border: 1px solid var(--bf-color-border-gray);
+
+					&:first-of-type {
+						border-top-left-radius: 6px;
+						border-top-right-radius: 6px;
+					}
+					&:last-of-type {
+						border-bottom-left-radius: 6px;
+						border-bottom-right-radius: 6px;
+					}
+					&:not(:last-of-type) {
+						border-block-end: none;
+					}
+
+					> * {
+						flex: 25% 1 1;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						padding-block: 0.15rem;
+						padding-inline: 0.5rem;
+						font-size: var(--font-size-14);
+					}
+					label {
+						font-variant: small-caps;
+					}
+					.value {
+						height: unset;
+						width: 5px;
+						min-width: 0;
+						justify-content: flex-end;
+						border: none;
+						background: none;
+						text-align: end;
+					}
+					input.value {
+						outline: 1px solid color-mix(in oklab, var(--bf-color-border-blue), transparent 60%);
+					}
+					.separator {
+						flex: 2px 0 0;
+						border-inline-start: 2px solid var(--bf-color-border-gray);
+						padding: 0;
+						transform: skew(-20deg);
+					}
+					.max {
+						justify-content: flex-start;
+					}
+					button {
+						background: none;
+						border: none;
+
+						&:disabled {
+							opacity: 0.25;
+						}
+					}
+				}
 			}
 			.initiative {
 				grid-column: 4 / span 3;
