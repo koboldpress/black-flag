@@ -60,61 +60,43 @@ export default class AbilityConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareModifiers() {
+		let checkModifiers;
+		let saveModifiers;
+		let global;
 		if ( this.abilityId ) {
-			const ability = this.document.system.abilities[this.abilityId];
-			const filter = modifier => modifier.filter.some(f => f.k === "ability" && f.v === this.abilityId);
-			return [
-				{
-					category: "check", type: "bonus", label: "BF.Check.Label[one]",
-					modifiers: ability.check.modifiers.bonus.filter(filter)
-				},
-				{
-					category: "check", type: "min", label: "BF.Check.Label[one]",
-					modifiers: ability.check.modifiers.minimum.filter(filter)
-				},
-				{
-					category: "check", type: "note", label: "BF.Check.Label[one]",
-					modifiers: ability.check.modifiers.notes.filter(filter)
-				},
-				{
-					category: "save", type: "bonus", label: "BF.SavingThrow.LabelShort[one]",
-					modifiers: ability.save.modifiers.bonus.filter(filter)
-				},
-				{
-					category: "save", type: "min", label: "BF.SavingThrow.LabelShort[one]",
-					modifiers: ability.save.modifiers.minimum.filter(filter)
-				},
-				{
-					category: "save", type: "note", label: "BF.SavingThrow.LabelShort[one]",
-					modifiers: ability.save.modifiers.notes.filter(filter)
-				}
-			];
+			checkModifiers = this.getModifiers([{k: "type", v: "ability-check"}, {k: "ability", v: this.abilityId}]);
+			saveModifiers = this.getModifiers([{k: "type", v: "ability-save"}, {k: "ability", v: this.abilityId}]);
+			global = false;
+		} else {
+			const filter = modifier => !modifier.filter.some(f => f.k === "ability");
+			checkModifiers = this.getModifiers([{k: "type", v: "ability-check"}], [], filter);
+			saveModifiers = this.getModifiers([{k: "type", v: "ability-save"}], [], filter);
+			global = true;
 		}
-		const filter = modifier => !modifier.filter.some(f => f.k === "ability");
 		return [
 			{
-				category: "check", type: "bonus", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-check" }).filter(filter)
+				category: "check", type: "bonus", label: "BF.Check.Label[one]", global, showProficiency: true,
+				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "check", type: "min", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-check" }, "min").filter(filter)
+				category: "check", type: "min", label: "BF.Check.Label[one]", showProficiency: true,
+				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "check", type: "note", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-check" }, "note").filter(filter)
+				category: "check", type: "note", label: "BF.Check.Label[one]",
+				modifiers: checkModifiers.filter(m => m.type === "note")
 			},
 			{
-				category: "save", type: "bonus", label: "BF.SavingThrow.LabelShort[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-save" }).filter(filter)
+				category: "save", type: "bonus", label: "BF.SavingThrow.LabelShort[one]", showProficiency: true,
+				modifiers: saveModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "save", type: "min", label: "BF.SavingThrow.LabelShort[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-save" }, "min").filter(filter)
+				category: "save", type: "min", label: "BF.SavingThrow.LabelShort[one]", showProficiency: true,
+				modifiers: saveModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "save", type: "note", label: "BF.SavingThrow.LabelShort[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "ability-save" }, "note").filter(filter)
+				category: "save", type: "note", label: "BF.SavingThrow.LabelShort[one]",
+				modifiers: saveModifiers.filter(m => m.type === "note")
 			}
 		];
 	}

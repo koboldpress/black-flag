@@ -34,16 +34,9 @@ function _check(data, keyPath, value, operation="_") {
 	const operator = OPERATOR_FUNCTIONS[operation];
 	if ( operator ) return operator(data, value);
 
-	const invert = operation.startsWith("!");
-	if ( invert ) {
-		operation = operation.replace("!", "");
-		if ( !operation ) operation = "_";
-	}
-
 	const comparison = COMPARISON_FUNCTIONS[operation];
 	if ( !comparison ) throw new Error(`Comparison function "${operation}" could not be found.`);
-	const result = comparison(foundry.utils.getProperty(data, keyPath), value);
-	return invert ? !result : result;
+	return comparison(foundry.utils.getProperty(data, keyPath), value);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -273,7 +266,7 @@ export function in_(data, value) {
  * @returns {boolean}
  */
 export function gt(data, value) {
-	return Number(value) > Number(data);
+	return Number(data) > Number(value);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -285,7 +278,7 @@ export function gt(data, value) {
  * @returns {boolean}
  */
 export function gte(data, value) {
-	return Number(value) >= Number(data);
+	return Number(data) >= Number(value);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -297,7 +290,7 @@ export function gte(data, value) {
  * @returns {boolean}
  */
 export function lt(data, value) {
-	return Number(value) < Number(data);
+	return Number(data) < Number(value);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -309,5 +302,5 @@ export function lt(data, value) {
  * @returns {boolean}
  */
 export function lte(data, value) {
-	return Number(value) <= Number(data);
+	return Number(data) <= Number(value);
 }

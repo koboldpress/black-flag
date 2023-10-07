@@ -22,6 +22,12 @@
 						<input type="text" name="modifier.{{this.index}}.note.text" value="{{this.note.text}}"
 							placeholder="{{localize 'BF.Note.Label[one]'}}" {{disabled (ne this.source "manual")}}>
 					{{else}}
+						{{#if ../../section.showProficiency}}
+							<label class="proficiency">
+								<span>{{localize "BF.Modifier.Proficiency.Label"}}</span>
+								<input type="checkbox" name="modifier.{{this.index}}.requireProficiency" {{checked this.requireProficiency}}>
+							</label>
+						{{/if}}
 						<input type="text" name="modifier.{{this.index}}.formula" value="{{this.formula}}"
 							placeholder="{{localize 'BF.Roll.Formula.Label'}}" {{disabled (ne this.source "manual")}}>
 					{{/if}}

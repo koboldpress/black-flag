@@ -58,45 +58,35 @@ export default class SkillConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareModifiers() {
+		let checkModifiers;
+		let passiveModifiers;
+		let global;
 		if ( this.skillId ) {
-			const skill = this.document.system.proficiencies.skills[this.skillId];
-			const filter = modifier => modifier.filter.some(f => f.k === "skill" && f.v === this.skillId);
-			return [
-				{
-					category: "check", type: "bonus", label: "BF.Check.Label[one]",
-					modifiers: skill.modifiers.check.filter(filter)
-				},
-				{
-					category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric",
-					modifiers: skill.modifiers.passive.filter(filter)
-				},
-				{
-					category: "check", type: "min", label: "BF.Check.Label[one]",
-					modifiers: skill.modifiers.minimum.filter(filter)
-				},
-				{
-					category: "check", type: "note", label: "BF.Check.Label[one]",
-					modifiers: skill.modifiers.notes.filter(filter)
-				}
-			];
+			checkModifiers = this.getModifiers([{k: "type", v: "skill-check"}, {k: "skill", v: this.skillId}]);
+			passiveModifiers = this.getModifiers([{k: "type", v: "skill-passive"}, {k: "skill", v: this.skillId}]);
+			global = false;
+		} else {
+			const filter = modifier => !modifier.filter.some(f => f.k === "skill");
+			checkModifiers = this.getModifiers([{k: "type", v: "skill-check"}], [], filter);
+			passiveModifiers = this.getModifiers([{k: "type", v: "skill-passive"}], [], filter);
+			global = true;
 		}
-		const filter = modifier => !modifier.filter.some(f => f.k === "skill");
 		return [
 			{
-				category: "check", type: "bonus", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "skill-check" }).filter(filter)
+				category: "check", type: "bonus", label: "BF.Check.Label[one]", global, showProficiency: global,
+				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric", global: true,
-				modifiers: this.document.system.getModifiers({ type: "skill-passive" }).filter(filter)
+				category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric", global, showProficiency: global,
+				modifiers: passiveModifiers
 			},
 			{
-				category: "check", type: "min", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "skill-check" }, "min").filter(filter)
+				category: "check", type: "min", label: "BF.Check.Label[one]", global, showProficiency: global,
+				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "check", type: "note", label: "BF.Check.Label[one]", global: true,
-				modifiers: this.document.system.getModifiers({ type: "skill-check" }, "note").filter(filter)
+				category: "check", type: "note", label: "BF.Check.Label[one]", global,
+				modifiers: checkModifiers.filter(m => m.type === "note")
 			}
 		];
 	}

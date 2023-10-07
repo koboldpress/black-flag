@@ -754,8 +754,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
-				{ type: "ability-check", ability: abilityId },
-				{ type: "skill-check", ability: abilityId, skill: config.skill }
+				{ type: "ability-check", ability: abilityId, proficiency: skill.proficiency.multiplier },
+				{ type: "skill-check", ability: abilityId, skill: config.skill, proficiency: skill.proficiency.multiplier }
 			];
 
 			const { parts, data } = buildRoll({
