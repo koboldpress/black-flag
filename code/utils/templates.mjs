@@ -142,6 +142,7 @@ export async function registerHandlebarsPartials() {
 		"actor/pc-spellcasting.hbs",
 		"advancement/advancement-controls.hbs",
 		"advancement/advancement-name.hbs",
+		"dice/roll-notes.hbs",
 		"item/concept-summary.hbs",
 		"item/item-advancement.hbs"
 	];

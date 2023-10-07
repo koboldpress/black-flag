@@ -24,7 +24,6 @@ import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
  *
  * @typedef {object} BaseMessageConfiguration
  * @property {boolean} [create=true] - Should a message be created when this roll is complete?
- * @property {Application} [applicationClass] - Alternate configuration dialog application to use.
  * @property {string} [rollMode] - The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
  * @property {PreCreateMessageCallback} [preCreate] - Message configuration callback.
  * @property {object} [data={}] - Additional data used when creating the message.
@@ -43,7 +42,7 @@ import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
  *
  * @typedef {object} BaseDialogConfiguration
  * @property {boolean} [configure=true] - Should the roll configuration dialog be displayed?
- * @property {BaseRollBuilder} [rollBuilder] - Method for constructing a roll from roll configuration.
+ * @property {typeof BaseConfigurationDialog} - [applicationClass] - Alternate configuration dialog application to use.
  * @property {BaseConfigurationDialogOptions} [options] - Additional options passed through to the configuration dialog.
  */
 
@@ -54,17 +53,9 @@ import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
  * @property {object} default
  * @property {number} default.rollMode - The roll mode that is selected by default.
  * @property {typeof BaseRoll} rollType - Roll type to use when constructing final roll.
+ * @property {Modifier[]} rollNotes - Notes to display with the roll.
  * @property {*} resolve - Method to call when resolving successfully.
  * @property {*} reject - Method to call when the dialog is closed or process fails.
- */
-
-/**
- * Method for constructing a roll from the provided roll configuration.
- *
- * @callback BaseRollBuilder
- * @param {BaseRollConfiguration} config - Roll configuration data.
- * @param {object} formData - Data provided by the configuration form.
- * @returns {BaseRoll}
  */
 
 /**

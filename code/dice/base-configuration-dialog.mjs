@@ -1,19 +1,12 @@
 /**
  * Roll configuration dialog.
  *
- * @param {BaseRollBuilder} [buildConfig] - Roll config builder.
  * @param {BaseRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
  * @param {BaseConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class BaseConfigurationDialog extends FormApplication {
-	constructor(buildConfig, rollConfig=[], options={}) {
+	constructor(rollConfig=[], options={}) {
 		super(null, options);
-
-		/**
-		 * Roll builder.
-		 * @type {BaseRollBuilder}
-		 */
-		Object.defineProperty(this, "buildConfig", { value: buildConfig, writable: false, enumerable: true });
 
 		/**
 		 * Roll configurations.
@@ -67,7 +60,6 @@ export default class BaseConfigurationDialog extends FormApplication {
 	static async configure(rollConfig={}, options={}) {
 		return new Promise((resolve, reject) => {
 			new this(
-				options.buildConfig,
 				rollConfig,
 				foundry.utils.mergeObject({ resolve, reject }, options.options)
 			).render(true);
@@ -99,6 +91,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 			default: this.options.default ?? {},
 			rolls: this.rolls,
 			rollModes: CONFIG.Dice.rollModes,
+			rollNotes: foundry.utils.deepClone(this.options.rollNotes ?? []),
 			situational: this.rolls[0].data.situational,
 			buttons: this.getButtons()
 		}, super.getData(options));
@@ -139,6 +132,18 @@ export default class BaseConfigurationDialog extends FormApplication {
 	submit(button, event) {
 		event?.preventDefault();
 		super.submit(button, event);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Type-specific roll configuration.
+	 * @param {BaseRollConfiguration} config - Roll configuration data.
+	 * @param {object} formData - Data provided by the configuration form.
+	 * @returns {BaseRollConfiguration}
+	 */
+	buildConfig(config, formData) {
+		return config;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

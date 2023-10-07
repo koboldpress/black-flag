@@ -11,7 +11,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>Roll Configuration</legend>
+		<legend>{{localize "BF.Roll.Configuration.LabelGeneric"}}</legend>
 		{{#if options.chooseAbility}}
 			<label>
 				<span>{{localize "BF.Ability.Label[one]"}}</span>
@@ -27,6 +27,8 @@
 			</select>
 		</label>
 	</fieldset>
+
+	{{> "blackFlag.roll-notes"}}
 
 	<nav class="dialog-buttons">
 		<ul>

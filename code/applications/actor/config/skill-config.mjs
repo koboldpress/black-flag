@@ -60,50 +60,47 @@ export default class SkillConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareModifiers() {
-		const checkBonusLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
-			type: game.i18n.localize("BF.Check.Label[one]"), bonus: game.i18n.localize("BF.Bonus.Label[other]")
-		});
-		const passiveBonusLabel = game.i18n.format("BF.Bonus.LabelSpecific", {
-			type: game.i18n.localize("BF.Skill.Passive.LabelGeneric"), bonus: game.i18n.localize("BF.Bonus.Label[other]")
-		});
-		const checkMinLabel = game.i18n.format("BF.Roll.Minimum.LabelSpecific", {
-			type: game.i18n.localize("BF.Check.Label[one]")
-		});
-		const addBonus = game.i18n.localize("BF.Bonus.Label[one]");
-		const addMin = game.i18n.localize("BF.Roll.Minimum.Label[one]");
 		if ( this.skillId ) {
 			const skill = this.document.system.proficiencies.skills[this.skillId];
 			const filter = modifier => modifier.filter.some(f => f.k === "skill" && f.v === this.skillId);
-			return {
-				"check-bonus": {
-					label: checkBonusLabel, addType: addBonus,
+			return [
+				{
+					category: "check", type: "bonus", label: "BF.Check.Label[one]",
 					modifiers: skill.modifiers.check.filter(filter)
 				},
-				"passive-bonus": {
-					label: passiveBonusLabel, addType: addBonus,
+				{
+					category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric",
 					modifiers: skill.modifiers.passive.filter(filter)
 				},
-				"check-min": {
-					label: checkMinLabel, addType: addMin,
+				{
+					category: "check", type: "min", label: "BF.Check.Label[one]",
 					modifiers: skill.modifiers.minimum.filter(filter)
+				},
+				{
+					category: "check", type: "note", label: "BF.Check.Label[one]",
+					modifiers: skill.modifiers.notes.filter(filter)
 				}
-			};
+			];
 		}
 		const filter = modifier => !modifier.filter.some(f => f.k === "skill");
-		return {
-			"check-bonus": {
-				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: checkBonusLabel }), addType: addBonus,
+		return [
+			{
+				category: "check", type: "bonus", label: "BF.Check.Label[one]", global: true,
 				modifiers: this.document.system.getModifiers({ type: "skill-check" }).filter(filter)
 			},
-			"passive-bonus": {
-				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: passiveBonusLabel }), addType: addBonus,
+			{
+				category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric", global: true,
 				modifiers: this.document.system.getModifiers({ type: "skill-passive" }).filter(filter)
 			},
-			"check-min": {
-				label: game.i18n.format("BF.Bonus.LabelGlobal", { type: checkMinLabel }), addType: addMin,
+			{
+				category: "check", type: "min", label: "BF.Check.Label[one]", global: true,
 				modifiers: this.document.system.getModifiers({ type: "skill-check" }, "min").filter(filter)
+			},
+			{
+				category: "check", type: "note", label: "BF.Check.Label[one]", global: true,
+				modifiers: this.document.system.getModifiers({ type: "skill-check" }, "note").filter(filter)
 			}
-		};
+		];
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -120,9 +117,8 @@ export default class SkillConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_getModifierData(section) {
-		const [sec, type] = section.split("-");
-		const data = { type: type, formula: "", filter: [{ k: "type", v: `skill-${sec}` }] };
+	_getModifierData(category, type) {
+		const data = { type, filter: [{ k: "type", v: `skill-${category}` }] };
 		if ( this.skillId ) data.filter.push({ k: "skill", v: this.skillId });
 		return data;
 	}

@@ -1,7 +1,16 @@
 /**
+ * A filter description.
+ *
+ * @typedef {object} FilterDescription
+ * @property {string} k - Key on the data object to check.
+ * @property {*} v - Value to compare.
+ * @property {string} [o=_] - Operator or comparison function to use.
+ */
+
+/**
  * Check some data against a filter to determine if it matches.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  * @throws
  */
@@ -54,7 +63,7 @@ export const OPERATOR_FUNCTIONS = {
 /**
  * Perform an AND check against all filters.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function AND(data, filter) {
@@ -66,7 +75,7 @@ export function AND(data, filter) {
 /**
  * Perform an NAND check against all filters.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function NAND(data, filter) {
@@ -78,7 +87,7 @@ export function NAND(data, filter) {
 /**
  * Perform an OR check against all filters.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function OR(data, filter) {
@@ -90,7 +99,7 @@ export function OR(data, filter) {
 /**
  * Perform an NOR check against all filters.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function NOR(data, filter) {
@@ -102,7 +111,7 @@ export function NOR(data, filter) {
 /**
  * Perform an XOR check against all filters.
  * @param {object} data - Data to check.
- * @param {object[]} filter - Filter to compare against.
+ * @param {FilterDescription[]} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function XOR(data, filter) {
@@ -121,7 +130,7 @@ export function XOR(data, filter) {
 /**
  * Invert the result of a nested check,
  * @param {object} data - Data to check.
- * @param {object} filter - Filter to compare against.
+ * @param {FilterDescription} filter - Filter to compare against.
  * @returns {boolean}
  */
 export function NOT(data, filter) {

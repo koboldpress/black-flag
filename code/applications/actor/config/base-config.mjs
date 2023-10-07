@@ -74,10 +74,11 @@ export default class BaseConfig extends DocumentSheet {
 	async _onModifierAction(event) {
 		const { subAction } = event.currentTarget.dataset;
 		const index = event.target.closest("[data-index]")?.dataset.index;
-		const section = event.target.closest("[data-modifier-section]").dataset.modifierSection;
+		const category = event.target.closest("[data-modifier-category]").dataset.modifierCategory;
+		const type = event.target.closest("[data-modifier-type]").dataset.modifierType;
 		switch (subAction) {
 			case "add":
-				const data = this._getModifierData(section);
+				const data = this._getModifierData(category, type);
 				return this.document.system.addModifier(data);
 			case "delete":
 				return this.document.system.deleteModifier(index);
@@ -88,11 +89,12 @@ export default class BaseConfig extends DocumentSheet {
 
 	/**
 	 * Produce modifier creation data.
-	 * @param {string} section - Modifier section.
+	 * @param {string} category - Modifier category.
+	 * @param {string} type - Modifier type.
 	 * @returns {object}
 	 * @abstract
 	 */
-	_getModifierData(section) {}
+	_getModifierData(category, type) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

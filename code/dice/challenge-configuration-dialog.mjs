@@ -7,7 +7,6 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			template: "systems/black-flag/templates/dice/challenge-roll-dialog.hbs",
 			rollType: CONFIG.Dice.ChallengeRoll
 		});
 	}
@@ -18,22 +17,27 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 
 	getButtons() {
 		return {
-			advantage: { label: game.i18n.localize("BF.Roll.Action.Advantage") },
-			normal: { label: game.i18n.localize("BF.Roll.Action.Normal") },
-			disadvantage: { label: game.i18n.localize("BF.Roll.Action.Disadvantage") }
+			advantage: { label: game.i18n.localize("BF.Roll.Action.Advantage.Label") },
+			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") },
+			disadvantage: { label: game.i18n.localize("BF.Roll.Action.Disadvantage.Label") }
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData(options={}) {
-		return foundry.utils.mergeObject({
-			abilities: Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, ability]) => {
-				obj[key] = ability.labels.full;
-				return obj;
-			}, {}),
-			selectedAbility: this.rolls[0].data.abilityId
-		}, super.getData(options));
+		const context = super.getData(options);
+		context.rollNotes.forEach(n => {
+			switch (n.note?.rollMode) {
+				case CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE:
+					return n.advantageAbbreviation = "BF.Roll.Action.Advantage.Abbreviation";
+				case CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE:
+					return n.advantageAbbreviation = "BF.Roll.Action.Disadvantage.Abbreviation";
+				case CONFIG.Dice.ChallengeDie.MODES.NORMAL:
+					return n.advantageAbbreviation = "BF.Roll.Action.Normal.Abbreviation";
+			}
+		});
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

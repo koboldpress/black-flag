@@ -39,12 +39,69 @@
 		}
 	}
 
-	.dialog-buttons ul {
+	.dialog-buttons {
+		flex-grow: 1;
 		display: flex;
-		gap: 0.5rem;
+		align-items: flex-end;
 
-		li {
-			flex: 1 1 33%;
+		ul {
+			display: flex;
+			gap: 0.5rem;
+	
+			li {
+				flex: 1 1 33%;
+			}
+		}
+	}
+
+	.roll-notes {
+		label {
+			flex-wrap: nowrap;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		p {
+			margin: 0;
+		}
+	
+		.advantage-mode {
+			margin: 0;
+			contain: layout;
+
+			img {
+				width: 30px;
+				height: 30px;
+				border: none;
+			}
+			figcaption {
+				position: absolute;
+				top: 0;
+				bottom: 5px;
+				left: 0;
+				right: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0;
+				padding: 0;
+				color: white;
+			}
+
+			&[data-advantage-mode="0"] {
+				img {
+					filter: contrast(25%);
+				}
+			}
+			&[data-advantage-mode="1"] {
+				img {
+					filter: contrast(25%) sepia(100%) hue-rotate(80deg) saturate(200%) brightness(95%);
+				}
+			}
+			&[data-advantage-mode="-1"] {
+				img {
+					filter: contrast(25%) sepia(100%) hue-rotate(320deg) saturate(300%) brightness(95%);
+				}
+			}
 		}
 	}
 }

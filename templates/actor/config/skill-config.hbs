@@ -20,8 +20,8 @@
 	  <!-- TODO: Global base skill proficiency -->
 		<!-- TODO: Global skill min modifiers -->
 	{{/if}}
-	
-	{{#each modifierSections as |section key|}}
-		{{> "blackFlag.modifier-list" key=key section=section}}
+
+	{{#each modifierSections}}
+		{{> "blackFlag.modifier-list" section=this}}
 	{{/each}}
 </form>

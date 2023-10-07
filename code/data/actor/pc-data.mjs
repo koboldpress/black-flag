@@ -79,7 +79,7 @@ export default class PCData extends ActorDataModel {
 				// Backstory?
 				// Allies & Organizations?
 			}),
-			modifiers: new foundry.data.fields.ArrayField(new fields.ModifierField()),
+			modifiers: new fields.ModifierField(),
 			proficiencies: new foundry.data.fields.SchemaField({
 				armor: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
@@ -266,14 +266,18 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, ability.save.proficiency.multiplier, "down"
 			);
 
+			const checkData = { type: "ability-check", ability: key, proficiency: ability.check.proficiency.multiplier };
 			ability.check.modifiers = {
-				bonus: this.getModifiers({ type: "ability-check", ability: key }),
-				minimum: this.getModifiers({ type: "ability-check", ability: key }, "min")
+				bonus: this.getModifiers(checkData),
+				minimum: this.getModifiers(checkData, "min"),
+				notes: this.getModifiers(checkData, "note")
 			};
 			ability.check.bonus = this.buildBonus(ability.check.modifiers.bonus, { deterministic: true, rollData });
+			const saveData = { type: "ability-save", ability: key, proficiency: ability.save.proficiency.multiplier };
 			ability.save.modifiers = {
-				bonus: this.getModifiers({ type: "ability-save", ability: key }),
-				minimum: this.getModifiers({ type: "ability-save", ability: key }, "min")
+				bonus: this.getModifiers(saveData),
+				minimum: this.getModifiers(saveData, "min"),
+				notes: this.getModifiers(saveData, "note")
 			};
 			ability.save.bonus = this.buildBonus(ability.save.modifiers.bonus, { deterministic: true, rollData });
 
@@ -380,18 +384,15 @@ export default class PCData extends ActorDataModel {
 				this.attributes.proficiency, skill.proficiency.multiplier, "down"
 			);
 
+			const checkData = [
+				{ type: "ability-check", ability: skill.ability, proficiency: skill.proficiency.multiplier },
+				{ type: "skill-check", ability: skill.ability, skill: key, proficiency: skill.proficiency.multiplier }
+			];
 			skill.modifiers = {
-				check: this.getModifiers([
-					{ type: "ability-check", ability: skill.ability },
-					{ type: "skill-check", ability: skill.ability, skill: key }
-				]),
-				passive: this.getModifiers([
-					{ type: "skill-passive", ability: skill.ability, skill: key }
-				]),
-				minimum: this.getModifiers([
-					{ type: "ability-check", ability: skill.ability },
-					{ type: "skill-check", ability: skill.ability, skill: key }
-				], "min")
+				check: this.getModifiers(checkData),
+				passive: this.getModifiers({ type: "skill-passive", ability: skill.ability, skill: key }),
+				minimum: this.getModifiers(checkData, "min"),
+				notes: this.getModifiers(checkData, "note")
 			};
 			skill.bonus = this.buildBonus(skill.modifiers.check, { deterministic: true, rollData });
 

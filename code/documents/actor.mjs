@@ -1,3 +1,4 @@
+import SkillConfigurationDialog from "../dice/skill-configuration-dialog.mjs";
 import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
@@ -513,6 +514,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
+				rollNotes: ability.check.modifiers.notes,
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		}, dialog);
@@ -590,6 +592,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
+				rollNotes: ability.save.modifiers.notes,
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		}, dialog);
@@ -757,7 +760,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 			const { parts, data } = buildRoll({
 				mod: ability?.mod,
-				prof: skill.proficiency.hasProficiency ? skill.proficiency.proficiency.term : null,
+				prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
 				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
 			}, rollData);
 			data.abilityId = abilityId;
@@ -770,10 +773,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}, { inplace: false });
 			rollConfig.parts = parts.concat(config.parts ?? []);
 
-			return rollConfig;
+			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
 		};
 
-		const rollConfig = prepareSkillConfig(config);
+		const { rollConfig, rollNotes } = prepareSkillConfig(config);
 
 		const type = game.i18n.format("BF.Skill.Action.CheckSpecific", {
 			skill: game.i18n.localize(CONFIG.BlackFlag.skills[config.skill].label)
@@ -792,9 +795,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		}, message);
 
 		const dialogConfig = foundry.utils.mergeObject({
-			buildConfig: prepareSkillConfig,
+			applicationClass: SkillConfigurationDialog,
 			options: {
+				buildConfig: prepareSkillConfig,
 				chooseAbility: true,
+				rollNotes,
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		}, dialog);

@@ -1,0 +1,14 @@
+{{#if rollNotes.length}}
+	<fieldset class="roll-notes">
+		<legend>Notes</legend>
+		{{#each rollNotes}}
+			<label>
+				<figure class="advantage-mode" data-advantage-mode="{{this.note.rollMode}}">
+					<img src="icons/dice/d20black.svg">
+					<figcaption>{{localize this.advantageAbbreviation}}</figcaption>
+				</figure>
+				<p>{{this.note.text}}</p>
+			</label>
+		{{/each}}
+	</fieldset>
+{{/if}}

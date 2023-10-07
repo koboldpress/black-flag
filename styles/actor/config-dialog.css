@@ -30,7 +30,11 @@
 		li {
 			display: flex;
 			align-items: center;
-			gap: 1rem;
+			gap: 0.5rem;
+
+			.roll-mode {
+				width: 4em;
+			}
 		}
 
 		.modifier-controls {
@@ -38,6 +42,7 @@
 			align-items: center;
 			justify-content: flex-end;
 			gap: 1rem;
+			margin-inline-start: 0.5rem;
 		}
 
 		[data-sub-action="add"] {
