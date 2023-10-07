@@ -68,15 +68,16 @@
 			margin: 0;
 			contain: layout;
 
-			img {
-				width: 30px;
-				height: 30px;
-				border: none;
+			.die-icon {
+				width: 25px;
+				height: 25px;
+				background-position: center top;
+				background-size: 30px;
 			}
 			figcaption {
 				position: absolute;
 				top: 0;
-				bottom: 5px;
+				bottom: 0;
 				left: 0;
 				right: 0;
 				display: flex;
@@ -88,17 +89,17 @@
 			}
 
 			&[data-advantage-mode="0"] {
-				img {
+				.die-icon {
 					filter: contrast(25%);
 				}
 			}
 			&[data-advantage-mode="1"] {
-				img {
+				.die-icon {
 					filter: contrast(25%) sepia(100%) hue-rotate(80deg) saturate(200%) brightness(95%);
 				}
 			}
 			&[data-advantage-mode="-1"] {
-				img {
+				.die-icon {
 					filter: contrast(25%) sepia(100%) hue-rotate(320deg) saturate(300%) brightness(95%);
 				}
 			}

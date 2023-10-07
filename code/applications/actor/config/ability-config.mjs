@@ -17,9 +17,7 @@ export default class AbilityConfig extends BaseConfig {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "ability"],
-			template: "systems/black-flag/templates/actor/config/ability-config.hbs",
-			width: 400,
-			height: "auto"
+			template: "systems/black-flag/templates/actor/config/ability-config.hbs"
 		});
 	}
 

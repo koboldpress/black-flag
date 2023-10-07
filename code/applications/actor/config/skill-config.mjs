@@ -17,9 +17,7 @@ export default class SkillConfig extends BaseConfig {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "skill"],
-			template: "systems/black-flag/templates/actor/config/skill-config.hbs",
-			width: 400,
-			height: "auto"
+			template: "systems/black-flag/templates/actor/config/skill-config.hbs"
 		});
 	}
 

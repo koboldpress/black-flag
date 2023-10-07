@@ -6,6 +6,8 @@ export default class BaseConfig extends DocumentSheet {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
+			width: 450,
+			height: "auto",
 			submitOnChange: true,
 			closeOnSubmit: false
 		});
