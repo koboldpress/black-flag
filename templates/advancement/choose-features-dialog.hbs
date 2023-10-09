@@ -10,11 +10,18 @@
 					<div class="source">{{this.system.description.source}}</div>
 				</header>
 				<div class="description">
+					{{#if this.prerequisite}}
+						<p class="prerequisite">
+							{{localize "BF.Prerequisite.Label"}}: {{{this.prerequisite}}}
+						</p>
+					{{/if}}
 					{{{this.enriched.description}}}
 				</div>
 			</div>
 			<div class="choose">
-				<button class="choose">{{localize "BF.Action.Choose.Generic"}}</button>
+				<button type="button" class="choose" {{disabled this.invalid}}>
+					{{localize "BF.Action.Choose.Generic"}}
+				</button>
 			</div>
 		</section>
 	{{/each}}

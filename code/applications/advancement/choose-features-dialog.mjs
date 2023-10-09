@@ -104,6 +104,8 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		optionContext.enriched = {
 			description: await TextEditor.enrichHTML(document.system.description.value, {secrets: false, async: true})
 		};
+		optionContext.prerequisite = document.system.createPrerequisiteLabel(this.advancement.actor);
+		optionContext.invalid = document.system.validatePrerequisites(this.advancement.actor) !== true;
 		return optionContext;
 	}
 
