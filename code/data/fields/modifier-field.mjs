@@ -1,3 +1,4 @@
+import FilterField from "./filter-field.mjs";
 import FormulaField from "./formula-field.mjs";
 
 /**
@@ -17,7 +18,7 @@ export default class ModifierField extends foundry.data.fields.ArrayField {
 	constructor(options) {
 		super(new foundry.data.fields.SchemaField({
 			type: new foundry.data.fields.StringField(),
-			filter: new foundry.data.fields.ArrayField(new foundry.data.fields.ObjectField()),
+			filter: new FilterField(),
 			formula: new FormulaField({required: false, initial: undefined}),
 			note: new foundry.data.fields.SchemaField({
 				rollMode: new foundry.data.fields.NumberField(),
@@ -26,9 +27,3 @@ export default class ModifierField extends foundry.data.fields.ArrayField {
 		}), options);
 	}
 }
-
-// {
-// 	type: "note",
-// 	filter: [{k: "type", v: "skill-check"}, {k: "skill", v: "acrobatics"}],
-// 	note: { rollMode: 1, text: "Advantage on all acrobatics checks to avoid falling prone." }
-// };

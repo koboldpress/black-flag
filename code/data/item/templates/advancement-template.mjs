@@ -1,9 +1,16 @@
 import log from "../../../utils/logging.mjs";
+import * as fields from "../../fields/_module.mjs";
 
 /**
  * Data definition template for items with advancement.
  */
 export default class AdvancementTemplate extends foundry.abstract.DataModel {
+
+	static defineSchema() {
+		return {
+			advancement: new fields.AdvancementField()
+		};
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

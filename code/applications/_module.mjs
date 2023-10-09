@@ -5,9 +5,10 @@ import log from "../utils/logging.mjs";
  * @param {typeof Document} documentType - Type of document to register (e.g. Actor or Item).
  * @param {{[key: string]: CategoryConfiguration}} [categories] - Categories to register.
  */
-export function registerSheets(documentType, categories={}) {
+export function registerSheets(documentType, categories) {
 	log(`Registering ${documentType.name} sheets`, {level: "groupCollapsed"});
 	const models = CONFIG[documentType.name].dataModels;
+	categories = CONFIG[documentType.name].categories ?? {};
 	const registered = new Set();
 	for ( const [key, category] of Object.entries(categories) ) {
 		if ( !category.sheet ) continue;

@@ -14,7 +14,9 @@ export {
 	TalentData
 };
 
+export {default as AdvancementTemplate} from "./templates/advancement-template.mjs";
 export {default as ConceptTemplate} from "./templates/concept-template.mjs";
+export {default as FeatureTemplate} from "./templates/feature-template.mjs";
 
 export const config = {
 	background: BackgroundData,

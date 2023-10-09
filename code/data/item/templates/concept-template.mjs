@@ -22,7 +22,6 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
-			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				journal: new foundry.data.fields.StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
