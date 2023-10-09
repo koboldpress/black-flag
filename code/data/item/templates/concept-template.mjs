@@ -1,11 +1,10 @@
 import ConceptSheet from "../../../applications/item/concept-sheet.mjs";
 import * as fields from "../../fields/_module.mjs";
-import AdvancementTemplate from "./advancement-template.mjs";
 
 /**
  * Data definition template for Concept items (class, background, lineage, heritage).
  */
-export default class ConceptTemplate extends AdvancementTemplate {
+export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	static get metadata() {
 		return {
@@ -23,7 +22,6 @@ export default class ConceptTemplate extends AdvancementTemplate {
 
 	static defineSchema() {
 		return {
-			color: new foundry.data.fields.ColorField(),
 			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),

@@ -1,11 +1,12 @@
 import TalentSheet from "../../applications/item/talent-sheet.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 
 /**
  * Data definition for Talent items.
  */
-export default class TalentData extends AdvancementTemplate {
+export default class TalentData extends ItemDataModel.mixin(AdvancementTemplate) {
 
 	static get metadata() {
 		return {
@@ -22,7 +23,7 @@ export default class TalentData extends AdvancementTemplate {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static defineSchema() {
-		return {
+		return this.mergeSchema(super.defineSchema(), {
 			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
@@ -36,6 +37,6 @@ export default class TalentData extends AdvancementTemplate {
 			})
 			// TODO: Requirements
 			// TODO: Whether this talent can be taken multiple times
-		};
+		});
 	}
 }

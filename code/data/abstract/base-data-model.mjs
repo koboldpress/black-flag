@@ -25,6 +25,131 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	static _enableV10Validation = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Base templates used for construction.
+	 * @type {*[]}
+	 * @private
+	 */
+	static _schemaTemplates = [];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * A list of properties that should not be mixed-in to the final type.
+	 * @type {Set<string>}
+	 * @private
+	 */
+	static _immiscible = new Set(["length", "mixed", "name", "prototype", "migrateData", "defineSchema"]);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static defineSchema() {
+		const schema = {};
+		for ( const template of this._schemaTemplates ) {
+			this.mergeSchema(schema, this[`${template.name}_defineSchema`]?.() ?? {});
+		}
+		return schema;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Merge two schema definitions together as well as possible.
+	 * @param {DataSchema} a - First schema that forms the basis for the merge. *Will be mutated.*
+	 * @param {DataSchema} b - Second schema that will be merged in, overwriting any non-mergeable properties.
+	 * @returns {DataSchema} - Fully merged schema.
+	 */
+	static mergeSchema(a, b) {
+		for ( const key of Object.keys(b) ) {
+			if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
+				a[key] = b[key];
+				continue;
+			}
+			const mergedOptions = { ...a[key].options, ...b[key].options };
+			switch (b[key].constructor) {
+				case foundry.data.fields.SchemaField:
+					const fields = this.mergeSchema(a[key].fields, b[key].fields);
+					Object.values(fields).forEach(f => f.parent = undefined);
+					a[key] = new foundry.data.fields.SchemaField(fields, mergedOptions);
+					break;
+				case foundry.data.fields.ArrayField:
+				case foundry.data.fields.SetField:
+					const elementOptions = foundry.utils.mergeObject(a[key].element.options, b[key].element.options);
+					const ElementType = (b[key].element || a[key].element).constructor;
+					a[key] = new b[key].constructor(new ElementType(elementOptions), mergedOptions);
+					break;
+				case BlackFlag.data.fields.MappingField:
+					mergedOptions.extraFields = this.mergeSchema(
+						a[key].options.extraFields ?? {}, b[key].options.extraFields ?? {}
+					);
+					const modelOptions = foundry.utils.mergeObject(a[key].model.options, b[key].model.options);
+					const ModelType = (b[key].model || a[key].model).constructor;
+					a[key] = new b[key].constructor(new ModelType(modelOptions), mergedOptions);
+					break;
+				default:
+					a[key] = new b[key].constructor(mergedOptions);
+			}
+		}
+		return a;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Mix multiple templates with the base type.
+	 * @param {...*} templates - Template classes to mix.
+	 * @returns {typeof SystemDataModel} - Final prepared type.
+	 */
+	static mixin(...templates) {
+		const Base = class extends this {};
+		Object.defineProperty(Base, "_schemaTemplates", {
+			value: Object.seal([...this._schemaTemplates, ...templates]),
+			writable: false,
+			configurable: false
+		});
+
+		for ( const template of templates ) {
+			let defineSchema;
+
+			// Take all static methods and fields from template and mix in to base class
+			for ( const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template)) ) {
+				if ( key === "defineSchema" ) defineSchema = descriptor;
+				if ( this._immiscible.has(key) ) continue;
+				Object.defineProperty(Base, key, { ...descriptor, enumerable: true });
+			}
+
+			// Take all instance methods and fields from template and mix in to base class
+			for ( const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template.prototype)) ) {
+				if ( ["constructor"].includes(key) ) continue;
+				Object.defineProperty(Base.prototype, key, { ...descriptor, enumerable: true });
+			}
+
+			// Copy over defineSchema with a custom name
+			if ( defineSchema ) {
+				Object.defineProperty(Base, `${template.name}_defineSchema`, defineSchema);
+			}
+		}
+
+		return Base;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether this class mixes in a specific template.
+	 * @param {*} template
+	 * @returns {boolean}
+	 */
+	static mixes(template) {
+		if ( foundry.utils.getType(template) === "string" ) {
+			return this._schemaTemplates.find(t => t.name === template) !== undefined;
+		} else {
+			return this._schemaTemplates.includes(template);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

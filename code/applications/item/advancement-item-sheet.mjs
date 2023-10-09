@@ -56,14 +56,6 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		if ( this.isEditable ) {
-			for ( const a of html.querySelectorAll('[data-action="advancement"]') ) a.addEventListener("click", event => {
-				const target = event.currentTarget;
-				if ( target.dataset.action ) this._onAdvancementAction(target, target.dataset.subAction);
-			});
-		}
 
 		const contextOptions = this._getAdvancementContextMenuOptions();
 		/**
@@ -113,6 +105,14 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	_onAction(event) {
+		const { action, subAction } = event.currentTarget.dataset;
+		if ( action !== "advancement" ) return super._onAction(event);
+		this._onAdvancementAction(event.currentTarget, subAction);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Handle one of the advancement actions from the buttons or context menu.
 	 * @param {Element} target - Button or context menu entry that triggered this action.
@@ -120,7 +120,6 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 	 * @returns {Promise|void}
 	 */
 	_onAdvancementAction(target, action) {
-		event.stopImmediatePropagation();
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.item.system.advancement.get(id);
 		if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
@@ -136,5 +135,4 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 				return log(`Invalid advancement action type clicked ${action}.`, { level: "warn" });
 		}
 	}
-
 }

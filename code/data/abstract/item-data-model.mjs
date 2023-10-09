@@ -11,6 +11,7 @@ export default class ItemDataModel extends BaseDataModel {
 	 * Metadata that describes an item data type.
 	 *
 	 * @typedef {BaseDataMetadata} ItemDataMetadata
+	 * @property {string} [accentColor] - Accent color to use if none is specified by system data.
 	 * @property {boolean|ItemRegistrationConfig} [register] - Register all items of this type within the central list.
 	 */
 

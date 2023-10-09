@@ -1,15 +1,25 @@
+import ItemDataModel from "../abstract/item-data-model.mjs";
+import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
 
 /**
  * Data definition for Class items.
  */
-export default class ClassData extends ConceptTemplate {
+export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
 
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "class",
 			category: "concept",
 			localization: "BF.Item.Type.Class"
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static defineSchema() {
+		return this.mergeSchema(super.defineSchema(), {
+			color: new foundry.data.fields.ColorField()
 		});
 	}
 

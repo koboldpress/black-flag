@@ -1,11 +1,12 @@
 import FeatureSheet from "../../applications/item/feature-sheet.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import * as fields from "../fields/_module.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 
 /**
  * Data definition for Feature items.
  */
-export default class FeatureData extends AdvancementTemplate {
+export default class FeatureData extends ItemDataModel.mixin(AdvancementTemplate) {
 
 	static get metadata() {
 		return {
@@ -22,7 +23,7 @@ export default class FeatureData extends AdvancementTemplate {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static defineSchema() {
-		return {
+		return this.mergeSchema(super.defineSchema(), {
 			advancement: new fields.AdvancementField(),
 			description: new foundry.data.fields.SchemaField({
 				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
@@ -38,6 +39,6 @@ export default class FeatureData extends AdvancementTemplate {
 				category: new foundry.data.fields.StringField(),
 				value: new foundry.data.fields.StringField()
 			})
-		};
+		});
 	}
 }

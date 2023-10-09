@@ -1,10 +1,9 @@
 import log from "../../../utils/logging.mjs";
-import ItemDataModel from "../../abstract/item-data-model.mjs";
 
 /**
  * Data definition template for items with advancement.
  */
-export default class AdvancementTemplate extends ItemDataModel {
+export default class AdvancementTemplate extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
