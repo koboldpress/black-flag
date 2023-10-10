@@ -1,0 +1,51 @@
+{{#if data.title.show}}
+<header>
+	<h{{title.level1}}>{{data.name}}</h{{title.level1}}>
+</header>
+{{/if}}
+
+{{#if linked.document}}
+
+	<section>
+		{{{enriched.introduction}}}
+
+		<h{{title.level2}}>{{localize "BF.JournalPage.Class.Features.Header"}}</h{{title.level2}}>
+		<p>
+			{{localize "BF.JournalPage.Class.Features.Description" name=linked.name lowercaseName=linked.lowercaseName}}
+		</p>
+
+		{{#if (or advancement.hp enriched.additionalHitPoints)}}
+			<h{{title.level3}}>{{localize "BF.JournalPage.Class.HitPoints.Header"}}</h{{title.level3}}>
+			<p>
+				{{{localize "BF.JournalPage.Class.HitDice" dice=advancement.hp.hitDice class=linked.lowercaseName}}}<br>
+				{{{localize "BF.JournalPage.Class.HitPoints.Level1" max=advancement.hp.max}}}<br>
+				{{{localize "BF.JournalPage.Class.HitPoints.LevelX" dice=advancement.hp.hitDice
+					average=advancement.hp.average class=linked.lowercaseName}}}
+			</p>
+			{{{enriched.additionalHitPoints}}}
+		{{/if}}
+
+		{{#if (or advancement.traits enriched.additionalTraits)}}
+			<h{{title.level3}}>{{localize "BF.JournalPage.Class.Traits.Header"}}</h{{title.level3}}>
+			{{{enriched.additionalTraits}}}
+		{{/if}}
+
+		{{#if (or advancement.equipment enriched.additionalEquipment)}}
+			<h{{title.level3}}>{{localize "BF.JournalPage.Class.Equipment.Header"}}</h{{title.level3}}>
+			{{{enriched.additionalEquipment}}}
+		{{/if}}
+
+		{{> "blackFlag.journal-table" table=table level=title.level3
+			caption=(localize "BF.JournalPage.Class.Table.Caption" class=linked.name)}}
+
+		{{#each features}}
+			<h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
+			{{{this.description}}}
+		{{/each}}
+	</section>
+
+{{else}}
+	<section>
+		{{localize "BF.JournalPage.Class.NoClass"}}
+	</section>
+{{/if}}

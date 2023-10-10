@@ -7,14 +7,18 @@ export const _documentCategories = {
 	Item: {
 		concept: {
 			label: "BF.Item.Category.Concept.Label",
-			types: ["class", "lineage", "heritage", "background"]
+			types: ["class", "lineage", "heritage", "background"],
+			sheet: {
+				application: itemSheet.ConceptSheet,
+				label: "BF.Sheet.Default.Concept"
+			}
 		},
 		feature: {
 			label: "BF.Item.Category.Feature.Label",
 			types: ["feature", "talent"],
 			sheet: {
 				application: itemSheet.FeatureSheet,
-				label: "BF.Sheet.Feature"
+				label: "BF.Sheet.Default.Feature"
 			}
 		}
 	}

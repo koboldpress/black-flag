@@ -1,0 +1,76 @@
+:is(.journal-entry .journal-entry-content, .editor) {
+	h1 {
+		border: none;
+		color: var(--bf-text-color-blue);
+		font-size: var(--font-size-48);
+		font-weight: 900;
+		text-transform: uppercase;
+	}
+	h2 {
+		border-block-end: 1px solid var(--bf-color-border-blue);
+		color: var(--bf-text-color-blue);
+		font-size: var(--font-size-32);
+		font-weight: 800;
+		font-variant: small-caps;
+	}
+	h3 {
+		border: none;
+		color: var(--bf-text-color-blue);
+		font-size: var(--font-size-24);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	h4 {
+		border-block-end: 1px solid var(--bf-color-border-blue);
+		color: var(--bf-text-color-blue);
+		font-size: var(--font-size-20);
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+	h5 {
+		margin-block: 0.5em 0;
+		color: var(--bf-text-color-blue);
+		font-size: var(--font-size-18);
+		font-weight: 500;
+		text-transform: uppercase;
+	}
+	h6 {
+		font-size: var(--font-size-16);
+		font-weight: 400;
+	}
+
+	table {
+		margin-block-start: 1rem;
+		border-block: 2px solid var(--bf-color-border-blue);
+		background: none;
+
+		caption {
+			color: var(--bf-text-color-blue);
+			font-weight: 200;
+			text-align: start;
+			text-transform: uppercase;
+		}
+
+		thead {
+			background: var(--bf-text-color-blue);
+			color: white;
+			text-shadow: none;
+
+			th {
+				padding-inline: 0.5em;
+				font-size: var(--font-size-14);
+				text-align: start;
+				text-transform: uppercase;
+			}
+		}
+
+		tbody {
+			tr:not(:last-child) {
+				border-block-end: 0.5px solid var(--bf-color-border-blue);
+			}
+			tr:nth-child(2n) {
+				background: lch(0% 0% 0deg / 0.05);
+			}
+		}
+	}
+}

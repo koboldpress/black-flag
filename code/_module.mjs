@@ -34,6 +34,7 @@ Hooks.once("init", function() {
 	CONFIG.ActiveEffect.legacyTransferral = false;
 	data.registerDataModels(Actor, data.actor.config);
 	data.registerDataModels(Item, data.item.config);
+	data.registerDataModels(JournalEntryPage, data.journal.config);
 	dice.registerDice();
 	documents.registerDocumentClasses();
 	settings.registerKeybindings();
@@ -46,6 +47,7 @@ Hooks.once("init", function() {
 Hooks.once("setup", function() {
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
+	applications.registerSheets(JournalEntryPage);
 });
 
 Hooks.once("i18nInit", function() {

@@ -1,4 +1,3 @@
-import ConceptSheet from "../../../applications/item/concept-sheet.mjs";
 import * as fields from "../../fields/_module.mjs";
 
 /**
@@ -8,13 +7,7 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	static get metadata() {
 		return {
-			register: {
-				cache: true
-			},
-			sheet: {
-				application: ConceptSheet,
-				label: "BF.Sheet.Concept"
-			}
+			register: true
 		};
 	}
 

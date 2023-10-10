@@ -12,7 +12,7 @@ export default class PCData extends ActorDataModel {
 		localization: "BF.Actor.Type.PC",
 		sheet: {
 			application: PCSheet,
-			label: "BF.Sheet.PC"
+			label: "BF.Sheet.Default.PC"
 		}
 	};
 

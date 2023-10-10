@@ -25,14 +25,16 @@
 						</select>
 					</label>
 				</div>
-				<div class="prerequisite">
-					<span>{{localize "BF.Prerequisite.Label"}}: {{system.restriction.label}}</span>
-					{{#if editable}}
-						<a data-action="config" data-type="prerequisite">
-							<i class="fa-solid fa-cog"></i>
-						</a>
-					{{/if}}
-				</div>
+				{{#if (or editable system.restriction.label)}}
+					<div class="prerequisite">
+						<span>{{localize "BF.Prerequisite.Label"}}: {{system.restriction.label}}</span>
+						{{#if editable}}
+							<a data-action="config" data-type="prerequisite">
+								<i class="fa-solid fa-cog"></i>
+							</a>
+						{{/if}}
+					</div>
+				{{/if}}
 				{{editor enriched.description target="system.description.value" button=true
 					editable=editable engine="prosemirror" collaborate=false}}
 				<label class="source">
