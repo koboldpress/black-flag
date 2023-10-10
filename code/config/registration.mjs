@@ -217,8 +217,7 @@ function _onCreateItem(item, options, userId) {
  * @param {string} userId - ID of the user that update the item.
  */
 function _preUpdateItem(item, changes, options, userId) {
-	options.blackFlag ??= {};
-	options.blackFlag.identifier = item.identifier;
+	foundry.utils.setProperty(options, `blackFlag.identifier.${item.id}`, item.identifier);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -238,10 +237,11 @@ function _onUpdateItem(item, changes, options, userId) {
 	const source = all[type] ??= {};
 
 	// Identifier has changed, move this to the new location
-	if ( item.identifier !== options.blackFlag?.identifier ) {
+	const oldIdentifier = foundry.utils.getProperty(options, `blackFlag.identifier.${item.id}`);
+	if ( item.identifier !== oldIdentifier ) {
 		if ( !source[item.identifier] ) _handleCreate(source, item.identifier, item);
 		else source[item.identifier].sources.push(item.uuid);
-		_handleDelete(source, options.blackFlag.identifier, item);
+		_handleDelete(source, oldIdentifier, item);
 	} else if ( !source[item.identifier] ) _handleCreate(source, item.identifier, item);
 
 	// Cached values should only be updated if this is the last item in the sources list
