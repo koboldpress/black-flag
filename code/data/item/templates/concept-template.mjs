@@ -38,4 +38,23 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 	get traits() {
 		return [];
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create one or more advancement documents when this item is created.
+	 * @param {object[]} data - Initial data for advancement documents. Must include "type".
+	 * @internal
+	 */
+	_createInitialAdvancement(data) {
+		const advancement = {};
+		for ( const initialData of data ) {
+			const AdvancementClass = CONFIG.Advancement.types[initialData.type].documentClass;
+			if ( !initialData._id ) initialData._id = foundry.utils.randomID();
+			advancement[initialData._id] = new AdvancementClass(initialData, { parent: this.parent }).toObject();
+		}
+		this.parent.updateSource({"system.advancement": advancement});
+	}
 }

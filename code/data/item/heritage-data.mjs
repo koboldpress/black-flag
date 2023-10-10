@@ -14,4 +14,16 @@ export default class HeritageData extends ItemDataModel.mixin(AdvancementTemplat
 			accentColor: "#aa0000"
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_preCreateAdvancement(data, options, user) {
+		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+		this._createInitialAdvancement([{
+			type: "trait", title: "Languages",
+			configuration: { grants: ["languages:common"], choices: [{ count: 1, pool: "languages:*" }] }
+		}]);
+	}
 }

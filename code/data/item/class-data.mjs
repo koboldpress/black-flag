@@ -62,4 +62,16 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 			this.keyAbility = listFormatter.format(keyAbilityOptions);
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_preCreateAdvancement(data, options, user) {
+		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+		this._createInitialAdvancement([
+			{ type: "hitPoints" }, { type: "keyAbility" },
+			{ type: "trait", configuration: { choices: [{ count: 2, pool: ["skills:*"] }] } }
+		]);
+	}
 }

@@ -5,7 +5,7 @@ export class SizeConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			options: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-				initial: ["small", "medium"], label: "BF.Advancement.Size.Options.Label", hint: "BF.Advancement.Size.Options.Hint"
+				initial: ["medium"], label: "BF.Advancement.Size.Options.Label", hint: "BF.Advancement.Size.Options.Hint"
 			})
 		};
 	}
