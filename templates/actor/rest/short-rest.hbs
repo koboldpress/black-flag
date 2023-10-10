@@ -12,7 +12,7 @@
 				<label class="hit-die-roll">
 					<span>d{{denom}} ({{localize "BF.HitDie.Available" number=(blackFlag-number hd.available)}})</span>
 					<button data-action="roll-hit-die" data-denomination="{{denom}}" {{disabled (eq hd.available 0)}}>
-						<i class="fa-solid fa-dice-d{{denom}}"></i>
+						<i class="die-icon d{{denom}}"></i>
 						{{localize "BF.Roll.Action.RollSpecific" type=(concat "d" denom)}}
 					</button>
 				</label>
