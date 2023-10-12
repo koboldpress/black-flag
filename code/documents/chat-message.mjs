@@ -116,7 +116,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if ( this.user !== game.user ) return false;
 
 		// Only PCs can spend luck
-		if ( actor.type !== "pc" ) return false;
+		if ( actor?.type !== "pc" ) return false;
 
 		// Only display the UI if roll was within the past 5 minutes
 		if ( this.timestamp < (Date.now() - this.constructor.LUCK_CONTROL_PERIOD) ) return false;
