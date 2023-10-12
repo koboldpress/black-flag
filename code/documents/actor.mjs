@@ -830,4 +830,65 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		return rolls;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Context Menus            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Set up any hooks relevant to actor rendering.
+	 */
+	static setupHooks() {
+		Hooks.on("getActorDirectoryEntryContext", this.getActorDirectoryEntryContext);
+		Hooks.on("getUserContextOptions", this.getUserContextOptions);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the "Grant Luck" context option for GMs on PC actors in sidebar.
+	 * @param {jQuery} jQuery - The Application's rendered HTML.
+	 * @param {ContextMenuEntry[]} menuItems - The array of menu items being rendered.
+	 */
+	static getActorDirectoryEntryContext(jQuery, menuItems) {
+		const ownershipIndex = menuItems.findIndex(o => o.icon.includes("fa-lock"));
+		console.log(menuItems, ownershipIndex);
+		menuItems.splice(ownershipIndex + 1, 0, {
+			name: "BF.Luck.Action.Grant",
+			icon: '<i class="fa-solid fa-clover"></i>',
+			condition: li => {
+				if ( !game.user.isGM ) return false;
+				const actor = game.actors.get(li[0].dataset.documentId);
+				return actor?.type === "pc";
+			},
+			callback: li => {
+				const actor = game.actors.get(li[0].dataset.documentId);
+				actor.system.addLuck();
+			}
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the "Grant Luck" context option for GMs on players.
+	 * @param {jQuery} jQuery - The Application's rendered HTML.
+	 * @param {ContextMenuEntry[]} menuItems - The array of menu items being rendered.
+	 */
+	static getUserContextOptions(jQuery, menuItems) {
+		const viewAvatarIndex = menuItems.findIndex(o => o.icon.includes("fa-image"));
+		menuItems.splice(viewAvatarIndex + 1, 0, {
+			name: "BF.Luck.Action.Grant",
+			icon: '<i class="fa-solid fa-clover"></i>',
+			condition: li => {
+				if ( !game.user.isGM ) return false;
+				const user = game.users.get(li[0].dataset.userId);
+				return user.character?.type === "pc";
+			},
+			callback: li => {
+				const actor = game.users.get(li[0].dataset.userId).character;
+				actor.system.addLuck();
+			}
+		});
+	}
 }

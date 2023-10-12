@@ -59,7 +59,8 @@ Hooks.once("ready", function() {
 	config.registration.registerItemTypes();
 });
 
-config.registration.setupRegistrationHooks();
+config.registration.setupHooks();
+documents.BlackFlagActor.setupHooks();
 
 export {
 	applications,

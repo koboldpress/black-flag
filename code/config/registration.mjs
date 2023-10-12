@@ -177,7 +177,7 @@ async function _registerItemType(type, indexes) {
 /**
  * Enable the hooks needed to handle registration changes during item CRUD operations.
  */
-export function setupRegistrationHooks() {
+export function setupHooks() {
 	Hooks.on("createItem", _onCreateItem);
 	Hooks.on("preUpdateItem", _preUpdateItem);
 	Hooks.on("updateItem", _onUpdateItem);
