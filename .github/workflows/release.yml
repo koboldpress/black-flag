@@ -31,7 +31,6 @@ jobs:
         echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/system.json" >> $GITHUB_ENV
 
 
-    # Adjust download URL and version in manifest
     - name: Adjust manifest
       uses: microsoft/variable-substitution@v1
       with:
@@ -39,26 +38,24 @@ jobs:
       env:
         download: ${{env.RELEASE_DOWNLOAD_URL}}
         version: ${{env.VERSION}}
+        flags.hotReload: false
 
 
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16.x'
+        node-version: '19.x'
         cache: 'npm'
 
 
-    # `npm ci` is recommended:
-    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
     - name: Install Dependencies
       run: npm ci
 
 
-    # Run our `build` script
     - name: Build All
       run: npm run build --if-present
 
-    # Determine what files should be imported from system.json
+
     - name: Compile includes
       id: includes
       uses: actions/github-script@v6
@@ -91,19 +88,17 @@ jobs:
           return includes.join(" ");
 
 
-    # Create a zip file with all files required by the module to add to the release
     - name: Zip Contents
       run: zip ${{env.ZIP_NAME}} -r ${{steps.includes.outputs.result}}
 
 
-    # Create a release for this specific version
     - name: Update Release with Files
       uses: ncipollo/release-action@v1
       with:
-        allowUpdates: true # Set this to false if you want to prevent updating existing releases
+        allowUpdates: true
         name: ${{env.VERSION}}
         draft: false
-        prerelease: false
+        prerelease: ${{github.event.release.prerelease}}
         token: ${{secrets.GITHUB_TOKEN}}
         artifacts: './system.json, ./${{env.ZIP_NAME}}'
         tag: ${{env.VERSION}}
