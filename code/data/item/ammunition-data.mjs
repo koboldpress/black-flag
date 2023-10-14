@@ -1,9 +1,11 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import PhysicalTemplate from "./templates/physical-template.mjs";
 
 /**
  * Data definition for Ammunition items.
+ * @mixes PhysicalTemplate
  */
-export default class AmmunitionData extends ItemDataModel {
+export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	static get metadata() {
 		return {
@@ -24,24 +26,7 @@ export default class AmmunitionData extends ItemDataModel {
 			}),
 			type: new foundry.data.fields.SchemaField({
 				category: new foundry.data.fields.StringField({label: "BF.Equipment.Category.Label"})
-			}),
-			price: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
-					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Price.Label"
-				}),
-				denomination: new foundry.data.fields.StringField({
-					blank: false, initial: "gp", label: "BF.Currency.Denomination.Label"
-				})
-			}, {label: "BF.Price.Label"}),
-			quantity: new foundry.data.fields.NumberField({
-				nullable: false, initial: 1, min: 0, integer: true, label: "BF.Quantity.Label"
-			}),
-			weight: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
-					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Weight.Label"
-				}),
-				units: new foundry.data.fields.StringField({initial: "pound"})
-			}, {label: "BF.Weight.Label"})
+			})
 			// TODO: Properties (magical?, adamantine?, silvered?)
 			// TODO: Damage bonuses
 		});

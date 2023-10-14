@@ -1,9 +1,11 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import PhysicalTemplate from "./templates/physical-template.mjs";
 
 /**
  * Data definition for Weapon items.
+ * @mixes PhysicalTemplate
  */
-export default class WeaponData extends ItemDataModel {
+export default class WeaponData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	static get metadata() {
 		return {
@@ -27,23 +29,6 @@ export default class WeaponData extends ItemDataModel {
 				category: new foundry.data.fields.StringField({label: "BF.Equipment.Category.Label"}),
 				base: new foundry.data.fields.StringField({label: "BF.Equipment.Base.Label"})
 			}),
-			price: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
-					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Price.Label"
-				}),
-				denomination: new foundry.data.fields.StringField({
-					blank: false, initial: "gp", label: "BF.Currency.Denomination.Label"
-				})
-			}, {label: "BF.Price.Label"}),
-			quantity: new foundry.data.fields.NumberField({
-				nullable: false, initial: 1, min: 0, integer: true, label: "BF.Quantity.Label"
-			}),
-			weight: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
-					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Weight.Label"
-				}),
-				units: new foundry.data.fields.StringField({initial: "pound"})
-			}, {label: "BF.Weight.Label"}),
 			options: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
 				label: "BF.Weapon.Option.Label[other]"
 			}),
@@ -61,7 +46,7 @@ export default class WeaponData extends ItemDataModel {
 			range: new foundry.data.fields.SchemaField({
 				short: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
 				long: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),
-				reach: new foundry.data.fields.NumberField({min: 0, step: 0.1}),
+				reach: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Reach.Label"}),
 				units: new foundry.data.fields.StringField()
 			}, {label: "BF.Range.Label"})
 

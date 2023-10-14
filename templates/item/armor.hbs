@@ -94,22 +94,22 @@
 					</label>
 					{{#if properties.cumbersome.selected}}
 						<label class="strength-required">
-							<span>Required Strength</span>
+							<span>{{localize "BF.Armor.RequiredStrength.Label"}}</span>
 							<input type="number" name="system.armor.requiredStrength" step=1 min=0
 								value="{{source.armor.requiredStrength}}">
 						</label>
 					{{/if}}
 				</fieldset>
 				<fieldset>
-					<legend>Overrides</legend>
+					<legend>{{localize "BF.Override.Label[other]"}}</legend>
 					<div class="modifier-overrides field-group">
-						<span>Modifier</span>
+						<span>{{localize "BF.Armor.Modifier.Label"}}</span>
 						<label class="minimum">
-							<span>Minimum</span>
+							<span>{{localize "BF.Number.Minimum"}}</span>
 							<input type="number" name="system.overrides.minModifier" step=1 value="{{source.overrides.minModifier}}">
 						</label>
 						<label class="maximum">
-							<span>Maximum</span>
+							<span>{{localize "BF.Number.Maximum"}}</span>
 							<input type="number" name="system.overrides.maxModifier" step=1 value="{{source.overrides.maxModifier}}">
 						</label>
 					</div>
@@ -117,5 +117,4 @@
 			</section>
 		</div>
 	</main>
-
 </form>
