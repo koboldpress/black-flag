@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Types of tools offered by the system.
  * @enum {NestedTypeConfiguration}
@@ -105,3 +107,8 @@ export const tools = {
 		}
 	}
 };
+localizeConfig(tools, { pluralRule: "other" });
+localizeConfig(tools.artisan.children);
+localizeConfig(tools.gaming.children);
+localizeConfig(tools.musicalInstrument.children);
+localizeConfig(tools.vehicle.children);

@@ -852,7 +852,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	static getActorDirectoryEntryContext(jQuery, menuItems) {
 		const ownershipIndex = menuItems.findIndex(o => o.icon.includes("fa-lock"));
-		console.log(menuItems, ownershipIndex);
 		menuItems.splice(ownershipIndex + 1, 0, {
 			name: "BF.Luck.Action.Grant",
 			icon: '<i class="fa-solid fa-clover"></i>',

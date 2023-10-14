@@ -11,7 +11,8 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "class",
 			category: "concept",
-			localization: "BF.Item.Type.Class"
+			localization: "BF.Item.Type.Class",
+			icon: "fa-solid fa-landmark-dome"
 		});
 	}
 

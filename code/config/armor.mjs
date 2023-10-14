@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Types of armor offered by the system.
  * @enum {NestedTypeConfiguration}
@@ -50,5 +52,27 @@ export const armor = {
 	},
 	shield: {
 		localization: "BF.Armor.Category.Shield"
+	}
+};
+localizeConfig(armor, { sort: false });
+localizeConfig(armor.light.children);
+localizeConfig(armor.medium.children);
+localizeConfig(armor.heavy.children);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Properties that can be applied to armor.
+ * @enum {LabeledConfiguration}
+ */
+export const armorProperties = {
+	cumbersome: {
+		label: "BF.Armor.Property.Cumbersome.Label"
+	},
+	naturalMaterials: {
+		label: "BF.Armor.Property.NaturalMaterials.Label"
+	},
+	noisy: {
+		label: "BF.Armor.Property.Noisy.Label"
 	}
 };

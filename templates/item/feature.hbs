@@ -10,12 +10,12 @@
 	</header>
 
 	<nav class="sheet-navigation tabs" data-group="primary">
-		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Details"}}</a>
 		<a data-tab="effects">{{localize "BF.Sheet.Tab.AdvancementEffects"}}</a>
 	</nav>
 
 	<main class="sheet-body">
-		<div class="tab" data-group="primary" data-tab="details">
+		<div class="tab" data-group="primary" data-tab="description">
 			<section>
 				<div class="category">
 					<label>
@@ -49,8 +49,10 @@
 						{{/if}}
 					</div>
 				{{/if}}
-				{{editor enriched.description target="system.description.value" button=true
-					editable=editable engine="prosemirror" collaborate=false}}
+				<div class="description-area">
+					{{editor enriched.description target="system.description.value" button=true
+						editable=editable engine="prosemirror" collaborate=false}}
+				</div>
 				<label class="source">
 					<span>
 						{{localize "BF.Item.Source.Label"}}

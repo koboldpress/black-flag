@@ -1,0 +1,166 @@
+<form autocomplete="off">
+
+	<header class="sheet-header">
+		<figure class="icon">
+			<img src="{{document.img}}">
+		</figure>
+		<h1>
+			<input type="text" name="name" value="{{document.name}}">
+		</h1>
+	</header>
+
+	<nav class="sheet-navigation tabs" data-group="primary">
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+	</nav>
+
+	<main class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="description">
+			<section>
+				<div class="category">
+					<label>
+						<span>{{localize "BF.Equipment.Category.Label"}}</span>
+						<select name="system.type.category">
+							{{selectOptions categories selected=system.type.category blank=""}}
+						</select>
+					</label>
+					{{#if (eq item.type "weapon")}}
+						<label>
+							<span>{{localize "BF.Weapon.Type.Label"}}</span>
+							<select name="system.type.value">
+								{{selectOptions CONFIG.weaponTypes selected=system.type.value labelAttr="label" localize=true}}
+							</select>
+						</label>
+					{{/if}}
+					{{!-- TODO: Melee or ranged --}}
+					{{#if baseTypes}}
+						<label>
+							<span>{{localize "BF.Equipment.Base.Label"}}</span>
+							<select name="system.type.base">
+								{{selectOptions baseTypes selected=system.type.base blank=""}}
+							</select>
+						</label>
+					{{/if}}
+				</div>
+				<div class="description-area">
+					<div class="sidebar">
+						<label class="quantity">
+							<span>{{localize "BF.Quantity.Label"}}</span>
+							<input type="number" name="system.quantity" min=0 step=1 value="{{source.quantity}}">
+						</label>
+						<label class="price">
+							<span>{{localize "BF.Price.Label"}}</span>
+							<input type="number" name="system.price.value" min=0 step=0.01 value="{{source.price.value}}">
+							<select name="system.price.denomination">
+								{{selectOptions CONFIG.currencies selected=source.price.denomination
+									labelAttr="abbreviation" localize=true}}
+							</select>
+						</label>
+						<label class="weight">
+							<span>{{localize "BF.Weight.Label"}}</span>
+							<input type="number" name="system.weight.value" min=0 step=0.01 value="{{source.weight.value}}">
+							<select name="system.weight.units">
+								{{selectOptions CONFIG.weightUnits selected=source.weight.units
+									labelAttr="abbreviation" localize=true}}
+							</select>
+						</label>
+						{{!-- TODO: Weapon details --}}
+					</div>
+					{{editor enriched.description target="system.description.value" button=true
+						editable=editable engine="prosemirror" collaborate=false}}
+				</div>
+				<label class="source">
+					<span>
+						{{localize "BF.Item.Source.Label"}}
+						<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
+					</span>
+					<input type="text" name="system.description.source" value="{{system.description.source}}">
+				</label>
+			</section>
+		</div>
+		<div class="tab" data-group="primary" data-tab="details">
+			<section>
+				<fieldset class="properties checkbox-list">
+					<legend>{{localize "BF.Property.Label[other]"}}</legend>
+					{{#each properties as |property key|}}
+						<label>
+							<input type="checkbox" name="system.properties.{{key}}" {{checked property.selected}}>
+							{{property.label}}
+						</label>
+					{{/each}}
+				</fieldset>
+				<fieldset>
+					<legend>Weapon Details</legend>
+					<div class="damage field-group">
+						<span>{{localize "BF.Damage.Label"}}</span>
+						<label class="die-count">
+							<span>{{localize "BF.Die.Number.Label"}}</span>
+							<input type="number" name="system.damage.number" step=1 min=1 value="{{source.damage.number}}">
+						</label>
+						<label class="die-denomination">
+							<span>{{localize "BF.Die.Denomination.Label"}}</span>
+							<select name="system.damage.denomination">
+								{{selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination}}
+							</select>
+						</label>
+						<label>
+							<span>Type</span>
+							<select name="system.damage.type">
+								{{selectOptions CONFIG.damageTypes selected=source.damage.type
+									labelAttr="label" localize=true sort=true blank=""}}
+							</select>
+						</label>
+					</div>
+					{{#if properties.ammunition.selected}}
+						<label class="ammunition-type">
+							<span>{{localize "BF.Ammunition.Type.Label"}}</span>
+							<select name="system.ammunition.type">
+								{{selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank=""}}
+							</select>
+						</label>
+					{{/if}}
+					{{#if (eq source.type.value "ranged")}}
+						<div class="range field-group">
+							<span>{{localize "BF.Range.Label"}}</span>
+							<label>
+								<span>{{localize "BF.Range.Short.Label"}}</span>
+								<input type="number" name="system.range.short" step=0.1 min=0 value="{{source.range.short}}">
+							</label>
+							<label>
+								<span>{{localize "BF.Range.Long.Label"}}</span>
+								<input type="number" name="system.range.long" step=0.1 min=0 value="{{source.range.long}}">
+							</label>
+							{{!-- TODO: Range units, only if reach isn't also displayed --}}
+						</div>
+					{{/if}}
+					{{#if properties.reach.selected}}
+						<label class="reach">
+							<span>{{localize "BF.Reach.Label"}}</span>
+							<input type="number" name="system.range.reach" step="0.1" min="0" value="{{source.range.reach}}" placeholder="+5">
+							{{!-- TODO: Reach units --}}
+						</label>
+					{{/if}}
+				</fieldset>
+				<fieldset class="options checkbox-list">
+					<legend>{{localize "BF.Weapon.Option.Label[other]"}}</legend>
+					{{#each options as |option key|}}
+						<label>
+							<input type="checkbox" name="system.options.{{key}}" {{checked option.selected}}>
+							{{option.label}}
+						</label>
+					{{/each}}
+				</fieldset>
+				{{!-- TODO: Bonuses & Overrides
+				<fieldset>
+					<legend>Bonuses</legend>
+					
+				</fieldset>
+				<fieldset>
+					<legend>Overrides</legend>
+					
+				</fieldset>--}}
+			</section>
+		</div>
+	</main>
+
+</form>

@@ -1,4 +1,3 @@
-import * as advancement from "../../documents/advancement/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
@@ -12,6 +11,7 @@ export default class LineageData extends ItemDataModel.mixin(AdvancementTemplate
 			type: "lineage",
 			category: "concept",
 			localization: "BF.Item.Type.Lineage",
+			icon: "fa-solid fa-globe",
 			accentColor: "#00aa00"
 		});
 	}

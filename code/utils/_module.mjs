@@ -3,6 +3,7 @@ export * from "./document.mjs";
 export * from "./dice.mjs";
 export * as filter from "./filter.mjs";
 export * from "./formula.mjs";
+export * from "./localization.mjs";
 export {default as log} from "./logging.mjs";
 export * from "./number.mjs";
 export * from "./object.mjs";

@@ -4,6 +4,7 @@ import FeatureData from "./feature-data.mjs";
 import HeritageData from "./heritage-data.mjs";
 import LineageData from "./lineage-data.mjs";
 import TalentData from "./talent-data.mjs";
+import WeaponData from "./weapon-data.mjs";
 
 export {
 	BackgroundData,
@@ -11,7 +12,8 @@ export {
 	FeatureData,
 	HeritageData,
 	LineageData,
-	TalentData
+	TalentData,
+	WeaponData
 };
 
 export {default as AdvancementTemplate} from "./templates/advancement-template.mjs";
@@ -24,5 +26,6 @@ export const config = {
 	feature: FeatureData,
 	heritage: HeritageData,
 	lineage: LineageData,
-	talent: TalentData
+	talent: TalentData,
+	weapon: WeaponData
 };

@@ -19,3 +19,18 @@ export const challengeRollModes = {
 		value: -1
 	}
 };
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Standard dice spread available for things like damage.
+ * @type {number[]}
+ */
+export const dieSteps = [4, 6, 8, 10, 12, 20, 100];
+
+Object.defineProperty(dieSteps, "labeled", {
+	get() {
+		return Object.fromEntries(dieSteps.map(v => [v, `d${v}`]));
+	},
+	enumerable: false
+});

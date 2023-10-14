@@ -1,7 +1,9 @@
 import * as abilities from "./abilities.mjs";
 import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
+import * as ammunition from "./ammunition.mjs";
 import * as armor from "./armor.mjs";
+import * as damage from "./damage.mjs";
 import * as dice from "./dice.mjs";
 import * as documents from "./documents.mjs";
 import * as items from "./items.mjs";
@@ -11,6 +13,7 @@ import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
 import * as tools from "./tools.mjs";
 import * as traits from "./traits.mjs";
+import * as units from "./units.mjs";
 import * as weapons from "./weapons.mjs";
 
 /**
@@ -33,7 +36,9 @@ export default {
 	...abilities,
 	...actors,
 	...advancement,
+	...ammunition,
 	...armor,
+	...damage,
 	...dice,
 	...documents,
 	...items,
@@ -43,5 +48,6 @@ export default {
 	...skills,
 	...tools,
 	...traits,
+	...units,
 	...weapons
 };

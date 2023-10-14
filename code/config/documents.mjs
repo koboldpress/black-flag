@@ -20,6 +20,14 @@ export const _documentCategories = {
 				application: itemSheet.FeatureSheet,
 				label: "BF.Sheet.Default.Feature"
 			}
+		},
+		equipment: {
+			label: "BF.Item.Category.Equipment.Label",
+			types: ["weapon"],
+			sheet: {
+				application: itemSheet.EquipmentSheet,
+				label: "BF.Sheet.Default.Equipment"
+			}
 		}
 	}
 };

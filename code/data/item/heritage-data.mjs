@@ -11,6 +11,7 @@ export default class HeritageData extends ItemDataModel.mixin(AdvancementTemplat
 			type: "heritage",
 			category: "concept",
 			localization: "BF.Item.Type.Heritage",
+			icon: "fa-solid fa-monument",
 			accentColor: "#aa0000"
 		});
 	}

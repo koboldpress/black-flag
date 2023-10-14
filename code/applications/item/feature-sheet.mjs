@@ -6,7 +6,7 @@ export default class FeatureSheet extends AdvancementItemSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "feature", "item", "sheet"],
-			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details"}],
+			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
 			width: 600,
 			height: 500
 		});

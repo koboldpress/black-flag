@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for feature type categories.
  *
@@ -38,6 +40,8 @@ export const featureCategories = {
 		localization: "BF.Item.Feature.Category.Heritage"
 	}
 };
+localizeConfig(featureCategories);
+localizeConfig(featureCategories.class.types);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -63,3 +67,4 @@ export const talentCategories = {
 		localization: "BF.Item.Talent.Category.Technical"
 	}
 };
+localizeConfig(talentCategories);
