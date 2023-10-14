@@ -1,3 +1,4 @@
+import AmmunitionData from "./ammunition-data.mjs";
 import ArmorData from "./armor-data.mjs";
 import BackgroundData from "./background-data.mjs";
 import ClassData from "./class-data.mjs";
@@ -8,6 +9,8 @@ import TalentData from "./talent-data.mjs";
 import WeaponData from "./weapon-data.mjs";
 
 export {
+	AmmunitionData,
+	ArmorData,
 	BackgroundData,
 	ClassData,
 	FeatureData,
@@ -22,6 +25,7 @@ export {default as ConceptTemplate} from "./templates/concept-template.mjs";
 export {default as FeatureTemplate} from "./templates/feature-template.mjs";
 
 export const config = {
+	ammunition: AmmunitionData,
 	armor: ArmorData,
 	background: BackgroundData,
 	class: ClassData,
