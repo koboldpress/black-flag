@@ -65,6 +65,19 @@ export default class WeaponData extends ItemDataModel.mixin(PhysicalTemplate) {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	get traits() {
+		const traits = [
+			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
+			...this.properties.map(p => this.validProperties[p]?.label)
+		];
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
+		// Ranged
+		// Reach (total)
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get validCategories() {
 		return CONFIG.BlackFlag.weapons;
 	}

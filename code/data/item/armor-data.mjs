@@ -53,21 +53,17 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Hint displayed in the editing interface (e.g. " + DEX modifier (max 2)").
-	 * @type {string}
-	 */
-	get modifierHint() {
-		const maxModifier = this.overrides.maxModifier ?? CONFIG.BlackFlag.armor[this.type.category]?.modifier?.max;
-		if ( maxModifier === 0 ) return "";
-
-		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
-		const hint = game.i18n.format("BF.Armor.Value.ModifierHint", {
-			ability: game.i18n.localize(ability.labels.abbreviation).toUpperCase()
-		});
-		if ( !maxModifier ) return hint;
-
-		return game.i18n.format("BF.Armor.Value.ModifierMax", { hint, max: numberFormat(maxModifier) });
+	get traits() {
+		const traits = [
+			this.type.category === "shield"
+				? `+${numberFormat(this.armor.value)}`
+				: `${game.i18n.localize("BF.ArmorClass.Abbreviation")}: ${
+					numberFormat(this.armor.value)} ${this.modifierHint(false)}`,
+			...this.properties.map(p => this.validProperties[p]?.label)
+		];
+		// TODO: Display required strength with cumbersome property
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
+		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -80,5 +76,27 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	get validProperties() {
 		return CONFIG.BlackFlag.armorProperties;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Hint displayed in the editing interface (e.g. " + DEX modifier (max 2)").
+	 * @param {boolean} [long=true] - Use the long format?
+	 * @returns {string}
+	 */
+	modifierHint(long=true) {
+		const maxModifier = this.overrides.maxModifier ?? CONFIG.BlackFlag.armor[this.type.category]?.modifier?.max;
+		if ( maxModifier === 0 ) return "";
+
+		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
+		const hint = game.i18n.format(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
+			ability: game.i18n.localize(ability.labels.abbreviation).toUpperCase()
+		});
+		if ( !maxModifier ) return hint;
+
+		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: numberFormat(maxModifier) });
 	}
 }

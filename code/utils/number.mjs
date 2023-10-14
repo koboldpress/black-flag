@@ -1,3 +1,5 @@
+import { isValidUnit } from "./validation.mjs";
+
 /**
  * Format a number based on the current locale.
  * @param {number} value - A numeric value to format.
@@ -35,6 +37,10 @@ export function numberFormat(value, options={}) {
 
 	const formatter = new Intl.NumberFormat(game.i18n.lang, formatterOptions);
 	let formatted = formatter.format(value);
+
+	if ( options.unit && (options.unitFallback !== false) ) {
+		// TODO: Display units that aren't part of javascript library
+	}
 
 	return formatted;
 }

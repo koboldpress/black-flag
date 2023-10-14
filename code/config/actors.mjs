@@ -114,6 +114,12 @@ export const rest = {
 export const sheetSections = {
 	pc: [
 		{
+			id: "equipment",
+			tab: "inventory",
+			types: [{type: "ammunition"}, {type: "armor"}, {type: "weapon"}],
+			label: "BF.Item.Category.Equipment.Label"
+		},
+		{
 			id: "class-features",
 			tab: "features",
 			types: [{type: "feature", "system.type.category": "class"}],
