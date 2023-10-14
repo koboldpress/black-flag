@@ -22,6 +22,16 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Full type with module prefix if it is a module-defined type.
+	 * @type {string}
+	 */
+	static get fullType() {
+		return this.metadata.module ? `${this.metadata.module}.${this.metadata.type}` : this.metadata.type;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static _enableV10Validation = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */

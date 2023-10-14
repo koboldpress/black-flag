@@ -69,9 +69,10 @@ export const DocumentMixin = Base => class extends Base {
 			for ( const [key, value] of Object.entries(CONFIG[documentName]?.categories) ) {
 				categories[key] = { label: game.i18n.localize(value.label), children: {} };
 				for ( const type of value.types ) {
-					categories[key].children[type] = {
-						label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[type] ?? type),
-						chosen: type === selectedType
+					const name = type.fullType;
+					categories[key].children[name] = {
+						label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[name] ?? name),
+						chosen: name === selectedType
 					};
 				}
 			}

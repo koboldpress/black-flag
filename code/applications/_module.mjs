@@ -12,7 +12,7 @@ export function registerSheets(documentType, categories) {
 	const registered = new Set();
 	for ( const [key, category] of Object.entries(categories) ) {
 		if ( !category.sheet ) continue;
-		const filtered = category.types.filter(t => !models[t]?.metadata?.sheet);
+		const filtered = category.types.filter(t => !t.metadata?.sheet).map(f => f.fullType);
 		filtered.forEach(f => registered.add(f));
 		DocumentSheetConfig.registerSheet(documentType, game.system.id, category.sheet.application, {
 			types: Array.from(filtered), makeDefault: true, label: category.sheet.label

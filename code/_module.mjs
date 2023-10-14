@@ -32,9 +32,9 @@ Hooks.once("init", function() {
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;
-	data.registerDataModels(Actor, data.actor.config);
-	data.registerDataModels(Item, data.item.config);
-	data.registerDataModels(JournalEntryPage, data.journal.config);
+	data.registerDataModels(Actor);
+	data.registerDataModels(Item);
+	data.registerDataModels(JournalEntryPage);
 	dice.registerDice();
 	documents.registerDocumentClasses();
 	settings.registerKeybindings();

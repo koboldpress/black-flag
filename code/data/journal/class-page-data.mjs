@@ -1,9 +1,10 @@
 import ClassPageSheet from "../../applications/journal/class-page-sheet.mjs";
+import BaseDataModel from "../abstract/base-data-model.mjs";
 
 /**
  * Data definition for Class Summary journal entry pages.
  */
-export default class ClassJournalPageData extends foundry.abstract.DataModel {
+export default class ClassJournalPageData extends BaseDataModel {
 
 	static get metadata() {
 		return {
