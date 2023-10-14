@@ -12,7 +12,8 @@ export default class PCSheet extends BaseActorSheet {
 			tabs: [
 				{group: "progression", navSelector: ".progression", contentSelector: ".sheet-container", initial: "front"},
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
-			]
+			],
+			scrollY: [".window-content"]
 		});
 	}
 
@@ -109,7 +110,9 @@ export default class PCSheet extends BaseActorSheet {
 			// TODO: Some sort of race condition here when advancement is being applied
 			await flow._render(true, options);
 		}
+
 		this.setPosition();
+		if ( this.options.scrollY ) this._restoreScrollPositions(this.element);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
