@@ -23,7 +23,7 @@ export const _documentCategories = {
 		},
 		equipment: {
 			label: "BF.Item.Category.Equipment.Label",
-			types: ["weapon"],
+			types: ["armor", "weapon"],
 			sheet: {
 				application: itemSheet.EquipmentSheet,
 				label: "BF.Sheet.Default.Equipment"

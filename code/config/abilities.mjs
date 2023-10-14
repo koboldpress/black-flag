@@ -127,6 +127,7 @@ export const abilityAssignment = {
  * @enum {string}
  */
 export const defaultAbilities = {
+	armor: "dexterity",
 	hitPoints: "constitution",
 	initiative: "dexterity"
 };

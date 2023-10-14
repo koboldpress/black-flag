@@ -24,14 +24,6 @@
 							{{selectOptions categories selected=system.type.category blank=""}}
 						</select>
 					</label>
-					{{#if (eq item.type "weapon")}}
-						<label>
-							<span>{{localize "BF.Weapon.Type.Label"}}</span>
-							<select name="system.type.value">
-								{{selectOptions CONFIG.weaponTypes selected=system.type.value labelAttr="label" localize=true}}
-							</select>
-						</label>
-					{{/if}}
 					{{#if baseTypes}}
 						<label>
 							<span>{{localize "BF.Equipment.Base.Label"}}</span>
@@ -63,7 +55,6 @@
 									labelAttr="abbreviation" localize=true}}
 							</select>
 						</label>
-						{{!-- TODO: Weapon details --}}
 					</div>
 					{{editor enriched.description target="system.description.value" button=true
 						editable=editable engine="prosemirror" collaborate=false}}
@@ -89,75 +80,40 @@
 					{{/each}}
 				</fieldset>
 				<fieldset>
-					<legend>Weapon Details</legend>
-					<div class="damage field-group">
-						<span>{{localize "BF.Damage.Label"}}</span>
-						<label class="die-count">
-							<span>{{localize "BF.Die.Number.Label"}}</span>
-							<input type="number" name="system.damage.number" step=1 min=1 value="{{source.damage.number}}">
-						</label>
-						<label class="die-denomination">
-							<span>{{localize "BF.Die.Denomination.Label"}}</span>
-							<select name="system.damage.denomination">
-								{{selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination}}
-							</select>
-						</label>
-						<label>
-							<span>Type</span>
-							<select name="system.damage.type">
-								{{selectOptions CONFIG.damageTypes selected=source.damage.type
-									labelAttr="label" localize=true sort=true blank=""}}
-							</select>
-						</label>
-					</div>
-					{{#if properties.ammunition.selected}}
-						<label class="ammunition-type">
-							<span>{{localize "BF.Ammunition.Type.Label"}}</span>
-							<select name="system.ammunition.type">
-								{{selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank=""}}
-							</select>
+					<legend>Armor Details</legend>
+					<label class="armor-value">
+						{{#if (eq system.type.category "shield")}}
+							<span>{{localize "BF.Shield.Bonus.Label"}}</span>
+							<span>+</span>
+							<input type="number" name="system.armor.value" step=1 min=0 value="{{source.armor.value}}">
+						{{else}}
+							<span>{{localize "BF.Armor.Value.Label"}}</span>
+							<input type="number" name="system.armor.value" step=1 min=0 value="{{source.armor.value}}">
+							<span>{{system.modifierHint}}</span>
+						{{/if}}
+					</label>
+					{{#if properties.cumbersome.selected}}
+						<label class="strength-required">
+							<span>Required Strength</span>
+							<input type="number" name="system.armor.requiredStrength" step=1 min=0
+								value="{{source.armor.requiredStrength}}">
 						</label>
 					{{/if}}
-					{{#if (eq source.type.value "ranged")}}
-						<div class="range field-group">
-							<span>{{localize "BF.Range.Label"}}</span>
-							<label>
-								<span>{{localize "BF.Range.Short.Label"}}</span>
-								<input type="number" name="system.range.short" step=0.1 min=0 value="{{source.range.short}}">
-							</label>
-							<label>
-								<span>{{localize "BF.Range.Long.Label"}}</span>
-								<input type="number" name="system.range.long" step=0.1 min=0 value="{{source.range.long}}">
-							</label>
-							{{!-- TODO: Range units, only if reach isn't also displayed --}}
-						</div>
-					{{/if}}
-					{{#if properties.reach.selected}}
-						<label class="reach">
-							<span>{{localize "BF.Reach.Label"}}</span>
-							<input type="number" name="system.range.reach" step="0.1" min="0" value="{{source.range.reach}}" placeholder="+5">
-							{{!-- TODO: Reach units --}}
-						</label>
-					{{/if}}
-				</fieldset>
-				<fieldset class="options checkbox-list">
-					<legend>{{localize "BF.Weapon.Option.Label[other]"}}</legend>
-					{{#each options as |option key|}}
-						<label>
-							<input type="checkbox" name="system.options.{{key}}" {{checked option.selected}}>
-							{{option.label}}
-						</label>
-					{{/each}}
-				</fieldset>
-				{{!-- TODO: Bonuses & Overrides
-				<fieldset>
-					<legend>Bonuses</legend>
-					
 				</fieldset>
 				<fieldset>
 					<legend>Overrides</legend>
-					
-				</fieldset>--}}
+					<div class="modifier-overrides field-group">
+						<span>Modifier</span>
+						<label class="minimum">
+							<span>Minimum</span>
+							<input type="number" name="system.overrides.minModifier" step=1 value="{{source.overrides.minModifier}}">
+						</label>
+						<label class="maximum">
+							<span>Maximum</span>
+							<input type="number" name="system.overrides.maxModifier" step=1 value="{{source.overrides.maxModifier}}">
+						</label>
+					</div>
+				</fieldset>
 			</section>
 		</div>
 	</main>

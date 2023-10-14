@@ -1,6 +1,15 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Configuration data for armor categories & base types.
+ *
+ * @typedef {NestedTypeConfiguration} ArmorTypeConfiguration
+ * @property {object} [modifier]
+ * @property {number} [modifier.min] - Minimum value of the modifier to be applied to this armor's calculation.
+ * @property {number} [modifier.max] - Maximum value of the modifier to be applied to this armor's calculation.
+ */
+
+/**
  * Types of armor offered by the system.
  * @enum {NestedTypeConfiguration}
  */
@@ -31,6 +40,9 @@ export const armor = {
 			halfPlate: {
 				label: "BF.Armor.Type.HalfPlate"
 			}
+		},
+		modifier: {
+			max: 2
 		}
 	},
 	heavy: {
@@ -48,6 +60,10 @@ export const armor = {
 			plate: {
 				label: "BF.Armor.Type.Plate"
 			}
+		},
+		modifier: {
+			min: 0,
+			max: 0
 		}
 	},
 	shield: {

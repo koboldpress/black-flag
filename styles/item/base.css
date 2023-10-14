@@ -131,20 +131,21 @@
 				}
 			}
 		}
+	}
 
-		[data-tab="details"] {
-			fieldset:not(.checkbox-list) {
-				display: flex;
-				flex-direction: column;
-				gap: 0.5rem;
-
-				> :is(label, .field-group) {
-					> span:first-of-type {
-						width: 12em;
-					}
-					> input, select {
-						flex-grow: 1;
-					}
+	[data-tab="details"] {
+		fieldset:not(.checkbox-list) {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+	
+			> :is(label, .field-group) {
+				> span:first-of-type {
+					width: 12em;
+				}
+				> input, select {
+					flex-grow: 1;
+					width: unset;
 				}
 			}
 		}
