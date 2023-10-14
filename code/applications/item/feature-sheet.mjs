@@ -29,17 +29,12 @@ export default class FeatureSheet extends AdvancementItemSheet {
 
 		context.effects = BlackFlagActiveEffect.prepareSheetSections(context.item.effects);
 
-		const makeLabels = obj => Object.fromEntries(Object.entries(obj)
-			.map(([k, d]) => [k, game.i18n.localize(`${d.localization}[one]`)])
-			.sort((lhs, rhs) => lhs[1].localeCompare(rhs[1]))
-		);
-
 		if ( this.document.type === "feature" ) {
-			context.featureCategories = makeLabels(CONFIG.BlackFlag.featureCategories);
+			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;
 			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
-			context.featureTypes = featureCategory?.types ? makeLabels(featureCategory.types) : null;
+			context.featureTypes = featureCategory?.children?.localized ?? null;
 		} else if ( this.document.type === "talent" ) {
-			context.talentCategories = makeLabels(CONFIG.BlackFlag.talentCategories);
+			context.talentCategories = CONFIG.BlackFlag.talentCategories.localized;
 		}
 
 		return context;

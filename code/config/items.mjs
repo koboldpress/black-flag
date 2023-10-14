@@ -1,27 +1,14 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
- * Configuration data for feature type categories.
- *
- * @typedef {object} FeatureCategoryConfiguration
- * @property {string} localization - Pluralizable label for this category.
- * @property {{[key: string]: FeatureTypeConfiguration}} [types] - Types available in this category.
- */
-
-/**
- * @typedef {object} FeatureTypeConfiguration
- * @property {string} localization - Pluralizable localized label for this type.
- */
-
-/**
  * Classifications of feature items (e.g. Class Feature, Heritage Trait) and any types available within that
- * category (e.g. Channel Divinity, Martial Action)
- * @enum {FeatureCategoryConfiguration}
+ * category (e.g. Channel Divinity, Martial Action).
+ * @enum {NestedTypeConfiguration}
  */
 export const featureCategories = {
 	class: {
 		localization: "BF.Item.Feature.Category.Class",
-		types: {
+		children: {
 			channelDivinity: {
 				localization: "BF.Item.Feature.Type.ChannelDivinity"
 			},
@@ -34,14 +21,20 @@ export const featureCategories = {
 		}
 	},
 	lineage: {
-		localization: "BF.Item.Feature.Category.Lineage"
+		localization: "BF.Item.Feature.Category.Lineage",
+		children: {
+			naturalAdaptation: {
+				localization: "BF.Item.Feature.Type.NaturalAdaptation"
+			}
+		}
 	},
 	heritage: {
 		localization: "BF.Item.Feature.Category.Heritage"
 	}
 };
-localizeConfig(featureCategories);
-localizeConfig(featureCategories.class.types);
+localizeConfig(featureCategories, { sort: false });
+localizeConfig(featureCategories.class.children);
+localizeConfig(featureCategories.lineage.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
