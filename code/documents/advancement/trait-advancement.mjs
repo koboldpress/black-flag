@@ -80,7 +80,9 @@ export default class TraitAdvancement extends Advancement {
 
 	summaryForLevel(levels, { flow=false }={}) {
 		if ( flow ) return "";
-		return `<p>${Trait.localizedList(this.configuration.grants, this.configuration.choices)}</p>`;
+		return `<p>${Trait.localizedList(
+			this.configuration.grants, this.configuration.choices, { choiceMode: this.configuration.choiceMode }
+		)}</p>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -185,11 +187,12 @@ export default class TraitAdvancement extends Advancement {
 
 	/**
 	 * Guess the trait type from the grants & choices on this advancement.
+	 * @param {Set<string>[]} [pools] - Trait pools to use when figuring out the type.
 	 * @returns {string|void}
 	 */
-	bestGuessTrait() {
+	bestGuessTrait(pools) {
 		let trait;
-		const pools = [this.configuration.grants, ...this.configuration.choices.map(c => c.pool)];
+		pools ??= [this.configuration.grants, ...this.configuration.choices.map(c => c.pool)];
 		for ( const pool of pools ) {
 			for ( const key of pool ) {
 				const type = key.split(":").shift();
@@ -224,11 +227,15 @@ export default class TraitAdvancement extends Advancement {
 		const remainingSet = new Set(available.flatMap(a => Array.from(a.set)));
 		choices.filter(remainingSet);
 
+		// Simplify label if exclusive mode and more than one set of choices still available
+		const simplifyNotification = this.configuration.choiceMode === "exclusive"
+			&& (new Set(available.map(a => a._index))).size > 1;
+
 		return {
 			choices,
-			label: game.i18n.format("BF.Advancement.Trait.Notification", {
+			label: game.i18n.format(`BF.Advancement.Trait.Notification${simplifyNotification ? "Simple" : ""}`, {
 				count: numberFormat(available.length, { spelledOut: true }),
-				type: Trait.traitLabel(this.bestGuessTrait(), available.length)
+				type: Trait.traitLabel(this.bestGuessTrait(available.map(a => a.set)), available.length)
 			})
 		};
 	}
@@ -247,10 +254,12 @@ export default class TraitAdvancement extends Advancement {
 		};
 
 		// Duplicate choices a number of times equal to their count to get numbers correct
-		const choices = this.configuration.choices.reduce((arr, choice) => {
+		const choices = Array.from(this.configuration.choices.entries()).reduce((arr, [index, choice]) => {
+			const set = new Set(choice.pool);
+			set._index = index;
 			let count = choice.count;
 			while ( count > 0 ) {
-				arr.push(new Set(choice.pool));
+				arr.push(set);
 				count -= 1;
 			}
 			return arr;
@@ -263,18 +272,71 @@ export default class TraitAdvancement extends Advancement {
 
 		let available = [
 			...this.configuration.grants.map(g => Trait.mixedChoices(new Set([g]))),
-			...choices.map(c => Trait.mixedChoices(c))
+			...choices.map(c => {
+				const choices = Trait.mixedChoices(c);
+				if ( c._index !== undefined ) Object.defineProperty(choices, "_index", { value: c._index, enumerable: false });
+				return choices;
+			})
 		];
 		available.sort((lhs, rhs) => lhs.set.size - rhs.set.size);
 
 		// Remove any fulfilled grants
-		for ( const key of selected.item ) available.findSplice(grant => grant.set.has(key));
+		if ( this.configuration.choiceMode === "inclusive" ) this.removeFullfilledInclusive(available, selected);
+		else this.removeFullfilledExclusive(available, selected);
 
 		// Merge all possible choices into a single SelectChoices
 		const allChoices = Trait.mixedChoices(actorData.available);
 		allChoices.exclude(new Set([...(selected.actor ?? []), ...selected.item]));
-		available = available.map(a => allChoices.filtered(a));
+		available = available.map(a => {
+			const filtered = allChoices.filtered(a);
+			if ( a._index !== undefined ) Object.defineProperty(filtered, "_index", { value: a._index, enumerable: false });
+			return filtered;
+		});
 
 		return { available, choices: allChoices };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Remove any fulfilled grants, handling choices using the "inclusive" elimination mode.
+	 * @param {Set<string>[]} available - List of grant/choice pools.
+	 * @param {Set<string>} selected - Currently selected trait keys.
+	 */
+	removeFullfilledInclusive(available, selected) {
+		for ( const key of selected.item ) available.findSplice(grant => grant.set.has(key));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Remove any fulfilled grants, handling choices using the "exclusive" elimination mode.
+	 * @param {Set<string>[]} available - List of grant/choice pools.
+	 * @param {Set<string>} selected - Currently selected trait keys.
+	 */
+	removeFullfilledExclusive(available, selected) {
+		const indices = new Set(available.map(a => a._index));
+		for ( const key of selected.item ) {
+			// Remove first selected grant
+			const index = available.findIndex(grant => grant.set.has(key));
+			const firstMatch = available[index];
+			available.splice(index, 1);
+
+			if ( firstMatch?._index !== undefined ) {
+				for ( const index of indices ) {
+					if ( index === firstMatch._index ) continue;
+					// If it has an index, remove any other choices by index that don't have this choice
+					const anyMatch = available.filter(a => a._index === index).some(grant => grant.set.has(key));
+					if ( !anyMatch ) {
+						let removeIndex = available.findIndex(a => a._index === index);
+						while ( removeIndex !== -1 ) {
+							available.splice(removeIndex, 1);
+							removeIndex = available.findIndex(a => a._index === index);
+						}
+						indices.delete(index);
+					}
+				}
+			}
+		}
 	}
 }

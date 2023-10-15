@@ -32,6 +32,22 @@
 				{{localize "BF.Advancement.Trait.Choices.Label"}}
 				<i class="hintIcon" data-tooltip="BF.Advancement.Trait.Choices.Hint"></i>
 			</legend>
+			<label>
+				<span>{{localize "BF.Advancement.Trait.Choice.Mode.Label"}}</span>
+				<select name="configuration.choiceMode">
+					{{#select configuration.choiceMode}}
+						<option value="inclusive">{{localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Label"}}</option>
+						<option value="exclusive">{{localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Label"}}</option>
+					{{/select}}
+				</select>
+				<p class="hint">
+					{{#if (eq configuration.choiceMode "inclusive")}}
+						{{localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Hint"}}
+					{{else}}
+						{{localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Hint"}}
+					{{/if}}
+				</p>
+			</label>
 			<ul class="selected-index-list">
 				{{#each choices}}
 					<li>
@@ -39,7 +55,7 @@
 							<input type="radio" name="selectedIndex" value="{{@index}}" {{checked (eq ../selectedIndex @index)}}>
 							<span>{{this.label}}</span>
 						</label>
-						<a data-action="remove-choice"><i class="fa-solid fa-minus"></i></a>
+						<a data-action="remove-choice"><i class="fa-solid fa-trash"></i></a>
 					</li>
 				{{/each}}
 			</ul>

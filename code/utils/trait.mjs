@@ -274,14 +274,24 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
  * Create a human readable description of trait grants & choices.
  * @param {Set<string>} grants - Guaranteed trait grants.
  * @param {TraitChoice[]} [choices=[]] - Trait choices.
+ * @param {object} [options={}]
+ * @param {string} [options.choiceMode="inclusive"] - Choice mode.
  * @returns {string}
  */
-export function localizedList(grants, choices=[]) {
-	const sections = Array.from(grants).map(g => keyLabel(g));
+export function localizedList(grants, choices=[], { choiceMode="inclusive" }={}) {
+	const choiceSections = [];
 
 	for ( const [index, choice] of choices.entries() ) {
-		const final = index === choices.length - 1;
-		sections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
+		const final = choiceMode === "exclusive" ? false : index === choices.length - 1;
+		choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
+	}
+
+	let sections = Array.from(grants).map(g => keyLabel(g));
+	if ( choiceMode === "inclusive" ) {
+		sections = sections.concat(choiceSections);
+	} else {
+		const choiceListFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+		sections.push(choiceListFormatter.format(choiceSections));
 	}
 
 	const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });

@@ -13,7 +13,11 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 					initial: 1, positive: true, integer: true, label: "BF.Advancement.Trait.Count.Label"
 				}),
 				pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
-			}), {label: "BF.Advancement.Trait.Choices.Label", hint: "BF.Advancement.Trait.Choices.Hint"})
+			}), {label: "BF.Advancement.Trait.Choices.Label", hint: "BF.Advancement.Trait.Choices.Hint"}),
+			choiceMode: new foundry.data.fields.StringField({
+				initial: "inclusive", label: "BF.Advancement.Trait.Choice.Mode.Label",
+				hint: "BF.Advancement.Trait.Choice.Mode.Hint"
+			})
 		};
 	}
 }
