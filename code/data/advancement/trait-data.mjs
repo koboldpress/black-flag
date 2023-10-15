@@ -4,6 +4,9 @@
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
+			hint: new foundry.data.fields.StringField({
+				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
+			}),
 			mode: new foundry.data.fields.StringField({initial: "default"}),
 			grants: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
 				label: "BF.Advancement.Trait.Guaranteed.Label", hint: "BF.Advancement.Trait.Guaranteed.Hint"

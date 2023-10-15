@@ -5,6 +5,7 @@
 	</header>
 
 	<div class="advancement-summary">
+		{{#if needsConfiguration}}{{{summary}}}{{/if}}
 		{{#each chosen as |choice|}}
 			<span class="choice-entry">
 				<span class="choice-name">{{this.label}}</span>

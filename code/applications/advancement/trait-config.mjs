@@ -87,6 +87,10 @@ export default class TraitConfig extends AdvancementConfig {
 		context.selectedTraitHeader = `${traitConfig.labels.localization}[other]`;
 		context.selectedTrait = this.trait;
 
+		context.hintPlaceholder = Trait.localizedList(
+			this.config.grants, this.config.choices, { choiceMode: this.config.choiceMode }
+		);
+
 		return context;
 	}
 
@@ -156,6 +160,7 @@ export default class TraitConfig extends AdvancementConfig {
 			return this.render();
 		} else if ( event.target.name === "selectedIndex" ) {
 			this.selected = Number(event.target.value ?? -1);
+			// TODO: Change "type" to first trait option in selected choice
 			return this.render();
 		}
 		// TOOD: If mode is changed, ensure no invalid traits are selected & change selected type if current
