@@ -9,9 +9,11 @@ export default class TraitConfig extends AdvancementConfig {
 	constructor(...args) {
 		super(...args);
 		this.selected = (this.config.choices.length && !this.config.grants.size) ? 0 : -1;
-		this.trait = this.advancement.bestGuessTrait() ?? "skills";
+		this.trait = this.types.first() ?? "skills";
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -38,6 +40,17 @@ export default class TraitConfig extends AdvancementConfig {
 	 * @type {string}
 	 */
 	trait;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * List of trait types for the current selected configuration.
+	 * @type {Set<string>}
+	 */
+	get types() {
+		const pool = this.selected === -1 ? this.config.grants : this.config.choices[this.selected].pool;
+		return new Set(Array.from(pool).map(k => k.split(":").shift()));
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -154,6 +167,7 @@ export default class TraitConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onChangeInput(event) {
+		// Display new set of trait choices
 		if ( event.target.name === "selectedTrait" ) {
 			this.trait = event.target.value;
 
@@ -164,11 +178,16 @@ export default class TraitConfig extends AdvancementConfig {
 			}
 
 			return this.render();
-		} else if ( event.target.name === "selectedIndex" ) {
+		}
+
+		// Change selected configuration set
+		if ( event.target.name === "selectedIndex" ) {
 			this.selected = Number(event.target.value ?? -1);
-			// TODO: Change "type" to first trait option in selected choice
+			const types = this.types;
+			if ( types.size && !types.has(this.trait) ) this.trait = types.first();
 			return this.render();
 		}
+
 		// TOOD: If mode is changed, ensure no invalid traits are selected & change selected type if current
 		// type is not valid
 
