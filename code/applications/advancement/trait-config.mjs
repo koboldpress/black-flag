@@ -86,7 +86,7 @@ export default class TraitConfig extends AdvancementConfig {
 		// Build list of valid options based on current mode
 		context.validTraitTypes = Object.entries(CONFIG.BlackFlag.traits).reduce((obj, [key, config]) => {
 			if ( this.config.mode === "default"
-				|| ((config.type === "proficiency") && config.expertise)) obj[key] = config.labels.title;
+				|| ((config.type === "proficiency") && config.expertise) ) obj[key] = config.labels.title;
 			return obj;
 		}, {});
 
@@ -188,8 +188,13 @@ export default class TraitConfig extends AdvancementConfig {
 			return this.render();
 		}
 
-		// TOOD: If mode is changed, ensure no invalid traits are selected & change selected type if current
-		// type is not valid
+		// If mode is changed from default to one of the others change selected type if current type is not valid
+		if ( (event.target.name === "configuration.mode")
+			&& (event.target.value !== "default")
+			&& (this.config.mode === "default") ) {
+			const validTraitTypes = filteredKeys(CONFIG.BlackFlag.traits, c => c.type === "proficiency" && c.expertise);
+			if ( !validTraitTypes.includes(this.trait) ) this.trait = validTraitTypes[0];
+		}
 
 		super._onChangeInput(event);
 	}
@@ -229,6 +234,14 @@ export default class TraitConfig extends AdvancementConfig {
 			c.pool = Array.from(c.pool);
 		});
 		configuration.choices = choicesCollection;
+		configuration.grants ??= foundry.utils.deepClone(this.config.grants);
+
+		// If one of the expertise modes is selected, filter out any traits that are not of a valid type
+		if ( (configuration.mode ?? this.config.mode) !== "default" ) {
+			const validTraitTypes = filteredKeys(CONFIG.BlackFlag.traits, c => c.type === "proficiency" && c.expertise);
+			configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
+			configuration.choices.forEach(c => c.pool = c.pool.filter(k => validTraitTypes.some(t => k.startsWith(t))));
+		}
 
 		return configuration;
 	}
