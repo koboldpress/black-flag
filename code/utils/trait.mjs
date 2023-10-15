@@ -102,7 +102,7 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 	let result = {};
 	if ( prefixed && any ) {
 		const key = `${trait}:*`;
-		result[key] = { label: keyLabel(key).titleCase(), chosen: chosen.has(key), sorting: false };
+		result[key] = { label: keyLabel(key).titleCase(), chosen: chosen.has(key), sorting: false, wildcard: true };
 	}
 
 	const prepareCategory = (key, data, result, prefix) => {
@@ -123,7 +123,9 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 			const children = result[key].children = {};
 			if ( prefixed && any ) {
 				const anyKey = `${key}:*`;
-				children[anyKey] = { label: keyLabel(anyKey).titleCase(), chosen: chosen.has(anyKey), sorting: false };
+				children[anyKey] = {
+					label: keyLabel(anyKey).titleCase(), chosen: chosen.has(anyKey), sorting: false, wildcard: true
+				};
 			}
 			Object.entries(data.children).forEach(([k, v]) => prepareCategory(k, v, children, key));
 		}

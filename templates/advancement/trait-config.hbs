@@ -92,7 +92,7 @@
 				<ol class="trait-list">
 					{{#each choices as |choice key|}}
 						<li>
-							<label>
+							<label {{~#if choice.wildcard}} class="wildcard"{{/if}}>
 								<input type="checkbox" name="configuration.checked.{{key}}"
 									{{checked choice.chosen}} {{disabled choice.disabled}}>
 								{{choice.label}}
