@@ -27,7 +27,7 @@
 				<div class="ability-save">
 					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
 						data-rounding="{{ability.save.proficiency.rounding}}">
-						{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
+						<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
 						<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
 							value="{{ability._source.save.proficiency.multiplier}}">
 					</div>
@@ -58,7 +58,7 @@
 			<div class="skill" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
 					data-rounding="{{skill.proficiency.rounding}}">
-					{{blackFlag-inlineSVG "systems/black-flag/artwork/interface/proficiency.svg"}}
+					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
 						value="{{skill._source.proficiency.multiplier}}">
 				</div>
@@ -121,7 +121,7 @@
 				<span class="max">{{blackFlag-number data.max}}</span>
 				<button data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
 					{{disabled (eq data.available 0)}}>
-					<i class="die-icon d{{denomination}} blue"></i>
+					<svg class="die-icon blue"><use xlink:href="#blackFlag-d{{denomination}}"></use></svg>
 				</button>
 			</div>
 		{{/each}}

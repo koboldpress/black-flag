@@ -1,7 +1,6 @@
 import NotificationTooltip from "../applications/notification-tooltip.mjs";
 import { linkForUUID } from "./document.mjs";
 import { numberFormat } from "./number.mjs";
-import { loadCachedSVG } from "./svg.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                   Handlebars Helpers                  */
@@ -61,18 +60,6 @@ function groupedSelectOptions(choices, options) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Render an SVG file inline as HTML.
- * @param {string} path - Path to the SVG file.
- * @param {object} options
- * @returns {Handlebars.SafeString}
- */
-function inlineSVG(path, options={}) {
-	return new Handlebars.SafeString(loadCachedSVG(path));
-}
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
  * Display a notification badge if necessary.
  * @param {Document} document - Document from which the notifications should be gathered.
  * @param {object} options
@@ -115,7 +102,6 @@ function notificationBadge(document, options={}) {
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		"blackFlag-groupedSelectOptions": groupedSelectOptions,
-		"blackFlag-inlineSVG": inlineSVG,
 		"blackFlag-linkForUUID": linkForUUID,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash)

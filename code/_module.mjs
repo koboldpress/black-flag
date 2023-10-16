@@ -39,7 +39,7 @@ Hooks.once("init", function() {
 	documents.registerDocumentClasses();
 	settings.registerKeybindings();
 	settings.registerSettings();
-	utils.preCacheSVG();
+	utils.cacheInterfaceSVG();
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
 });

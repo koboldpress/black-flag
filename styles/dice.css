@@ -4,20 +4,20 @@
 	padding: 0;
 	width: 1.25em;
 	height: 1.25em;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
 
-	&.d4 { background-image: url("artwork/dice/black/d4.svg"); }
-	&.d6 { background-image: url("artwork/dice/black/d6.svg"); }
-	&.d8 { background-image: url("artwork/dice/black/d8.svg"); }
-	&.d10 { background-image: url("artwork/dice/black/d10.svg"); }
-	&.d12 { background-image: url("artwork/dice/black/d12.svg"); }
-	&.d20 { background-image: url("artwork/dice/black/d20.svg"); }
-	&.blue.d4 { background-image: url("artwork/dice/blue/d4.svg"); }
-	&.blue.d6 { background-image: url("artwork/dice/blue/d6.svg"); }
-	&.blue.d8 { background-image: url("artwork/dice/blue/d8.svg"); }
-	&.blue.d10 { background-image: url("artwork/dice/blue/d10.svg"); }
-	&.blue.d12 { background-image: url("artwork/dice/blue/d12.svg"); }
-	&.blue.d20 { background-image: url("artwork/dice/blue/d20.svg"); }
+	--die-blue-color: var(--bf-blue);
+	--die-green-color: color-mix(in oklab, var(--bf-dice-color-critical-success), black 20%);
+	--die-red-color: color-mix(in oklab, var(--bf-dice-color-critical-failure), black 20%);
+
+	--die-fill: lch(0%, 0%, 0deg);
+	&.blue { --die-fill: var(--die-blue-color); }
+	&.green { --die-fill: var(--die-green-color); }
+	&.red { --die-fill: var(--die-red-color); }
+	&.white { --die-fill: lch(100%, 0%, 0deg); }
+}
+
+#blackFlag-d4, #blackFlag-d6, #blackFlag-d8, #blackFlag-d10, #blackFlag-d12, #blackFlag-d20 {
+	path {
+		fill: var(--die-fill, lch(0%, 0%, 0deg));
+	}
 }

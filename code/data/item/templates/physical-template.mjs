@@ -47,6 +47,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 				});
 				// TODO: Adjust total displayed to use smallest logical units (so 5 cp x 20 = 100 cp => 1 gp)
 			},
+			configurable: true,
 			enumerable: false
 		});
 		Object.defineProperty(this.weight, "label", {
@@ -54,6 +55,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 				if ( !this.value ) return "—";
 				return numberFormat(this.total, { unit: this.units });
 			},
+			configurable: true,
 			enumerable: false
 		});
 	}

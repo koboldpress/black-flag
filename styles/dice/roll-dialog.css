@@ -67,6 +67,8 @@
 		.advantage-mode {
 			margin: 0;
 			contain: layout;
+			width: 25px;
+			height: 25px;
 
 			.die-icon {
 				width: 25px;
@@ -86,20 +88,11 @@
 				color: white;
 			}
 
-			&[data-advantage-mode="0"] {
-				.die-icon {
-					filter: contrast(25%);
-				}
+			&[data-advantage-mode="1"] .die-icon {
+				--die-fill: var(--die-green-color);
 			}
-			&[data-advantage-mode="1"] {
-				.die-icon {
-					filter: contrast(25%) sepia(100%) hue-rotate(80deg) saturate(200%) brightness(95%);
-				}
-			}
-			&[data-advantage-mode="-1"] {
-				.die-icon {
-					filter: contrast(25%) sepia(100%) hue-rotate(320deg) saturate(300%) brightness(95%);
-				}
+			&[data-advantage-mode="-1"] .die-icon {
+				--die-fill: var(--die-red-color);
 			}
 		}
 	}

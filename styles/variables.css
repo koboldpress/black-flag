@@ -1,29 +1,29 @@
 :root {
-	--bf-blue: rgb(45, 82, 129);
+	--bf-blue: oklch(43.45% 0.089 255.25);
 
 	--bf-color-border-black: rgb(0, 0, 0);
 	--bf-color-border-blue: var(--bf-blue);
 	--bf-color-border-light-blue: color-mix(in oklab, var(--bf-color-border-blue), cyan 40%);
 	--bf-color-border-gray: rgb(180, 180, 180);
 
-	--bf-dice-color-critical-failure: lch(50% 75% 50deg);
-	--bf-dice-color-critical-success: lch(50% 75% 120deg);
-	--bf-dice-color-failure: lch(25% 75% 50deg);
-	--bf-dice-color-failure-background: lch(90% 10% 25deg);
-	--bf-dice-color-success: lch(25% 75% 120deg);
-	--bf-dice-color-success-background: lch(90% 10% 125deg);
+	--bf-dice-color-critical-failure: oklch(59.85% 0.259 27);
+	--bf-dice-color-critical-success: oklch(67.5% 0.257 142.41);
+	--bf-dice-color-failure: oklch(25% 75% 50deg);
+	--bf-dice-color-failure-background: oklch(90% 10% 25deg);
+	--bf-dice-color-success: oklch(25% 75% 120deg);
+	--bf-dice-color-success-background: oklch(90% 10% 125deg);
 
-	--bf-text-color-blue: lch(28% 16% 268deg);
+	--bf-text-color-blue: oklch(28% 16% 268deg);
 
-	--bf-header-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.25);
+	--bf-header-shadow: 0px 3px 3px 2px rgb(0 0 0 / 0.25);
 
 	--bf-gradiant-blue: linear-gradient(
-		color-mix(in oklab, var(--bf-blue), white 30%),
-		color-mix(in oklab, var(--bf-blue), white 10%),
-		color-mix(in oklab, var(--bf-blue), black 20%)
+		color-mix(in oklch, var(--bf-blue), white 30%),
+		color-mix(in oklch, var(--bf-blue), white 10%),
+		color-mix(in oklch, var(--bf-blue), black 20%)
 	);
 
-	--notification-info-color: lch(80% 20% 250deg);
-	--notification-warn-color: lch(90% 70% 90deg);
-	--notification-error-color: lch(70% 100% 50deg);
+	--notification-info-color: oklch(80% 20% 250deg);
+	--notification-warn-color: oklch(90% 70% 90deg);
+	--notification-error-color: oklch(70% 100% 50deg);
 }
