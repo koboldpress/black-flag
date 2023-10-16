@@ -2,7 +2,7 @@
 
 	<header class="sheet-header">
 		<figure class="icon">
-			<img src="{{document.img}}">
+			<img src="{{document.img}}" data-edit="img">
 		</figure>
 		<h1>
 			<input type="text" name="name" value="{{document.name}}">
@@ -89,7 +89,7 @@
 						{{else}}
 							<span>{{localize "BF.Armor.Value.Label"}}</span>
 							<input type="number" name="system.armor.value" step=1 min=0 value="{{source.armor.value}}">
-							<span>{{system.modifierHint}}</span>
+							<span>{{modifierHint}}</span>
 						{{/if}}
 					</label>
 					{{#if properties.cumbersome.selected}}

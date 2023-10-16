@@ -42,6 +42,9 @@ export default class EquipmentSheet extends BaseItemSheet {
 			return obj;
 		}, {});
 
+		// Hack for armor to get around handlebars' weird behavior when calling methods
+		context.modifierHint = context.system.modifierHint?.();
+
 		return context;
 	}
 

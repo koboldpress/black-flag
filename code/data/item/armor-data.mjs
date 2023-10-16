@@ -88,6 +88,7 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 	 * @returns {string}
 	 */
 	modifierHint(long=true) {
+		console.log(this);
 		const maxModifier = this.overrides.maxModifier ?? CONFIG.BlackFlag.armor[this.type.category]?.modifier?.max;
 		if ( maxModifier === 0 ) return "";
 
