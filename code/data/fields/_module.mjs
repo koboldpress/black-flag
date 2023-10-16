@@ -1,3 +1,4 @@
+export * from "./activity-field.mjs";
 export * from "./advancement-field.mjs";
 export {default as AdvancementValueField} from "./advancement-value-field.mjs";
 export {default as FilterField} from "./filter-field.mjs";

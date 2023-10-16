@@ -1,4 +1,5 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import { ActivityField } from "../fields/_module.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
@@ -24,6 +25,7 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
+			activities: new ActivityField(),
 			description: new SchemaField({
 				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})

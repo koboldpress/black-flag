@@ -1,5 +1,6 @@
 import * as abilities from "./abilities.mjs";
 import * as activation from "./activation.mjs";
+import * as activity from "./activity.mjs";
 import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
 import * as ammunition from "./ammunition.mjs";
@@ -54,6 +55,7 @@ import * as weapons from "./weapons.mjs";
 export default {
 	...abilities,
 	...activation,
+	...activity,
 	...actors,
 	...advancement,
 	...ammunition,
