@@ -1,5 +1,5 @@
 import Proficiency from "../../documents/proficiency.mjs";
-import { log } from "../../utils/_module.mjs";
+import { log, Trait } from "../../utils/_module.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
 /**
@@ -73,6 +73,25 @@ export default class ClassPageSheet extends JournalPageSheet {
 				average: hp.average
 			};
 		}
+
+		const traits = item.system.advancement.byType("trait");
+		const keyAbility = item.system.advancement.byType("keyAbility")[0];
+		const makeTrait = type => {
+			const advancement = traits.find(a => a.bestGuessTrait() === type);
+			if ( !advancement ) return game.i18n.localize("BF.Proficiency.None");
+			return Trait.localizedList(
+				advancement.configuration.grants,
+				advancement.configuration.choices,
+				{ choiceMode: advancement.configuration.choiceMode }
+			);
+		};
+		advancement.traits = {
+			armor: makeTrait("armor"),
+			weapons: makeTrait("weapons"),
+			tools: makeTrait("tools"),
+			saves: keyAbility?.journalSummary() ?? game.i18n.localize("BF.Proficiency.None"),
+			skills: makeTrait("skills")
+		};
 
 		return advancement;
 	}

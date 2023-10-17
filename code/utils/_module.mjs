@@ -10,5 +10,5 @@ export * from "./object.mjs";
 export * from "./svg.mjs";
 export * from "./templates.mjs";
 export * from "./text.mjs";
-export * as trait from "./trait.mjs";
+export * as Trait from "./trait.mjs";
 export * as validators from "./validation.mjs";

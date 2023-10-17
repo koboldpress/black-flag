@@ -70,8 +70,39 @@ export default class KeyAbilityAdvancement extends Advancement {
 		const abilities = [key, secondary].filter(a => a);
 		if ( !abilities.length ) return this.title;
 
-		const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "conjunction" });
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "conjunction", style: "short" });
 		return `${this.title}: <em>${listFormatter.format(abilities)}</em>`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Summary that is used in class journal pages.
+	 * @returns {string}
+	 */
+	journalSummary() {
+		const localize = key => {
+			const config = CONFIG.BlackFlag.abilities[key];
+			if ( !key || !config ) return "";
+			return game.i18n.localize(config.labels.abbreviation).toUpperCase();
+		};
+
+		let first;
+		let second = localize(this.configuration.secondary);
+		if ( this.configuration.options.size > 1 ) {
+			first = second;
+			const choiceListFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction", style: "short" });
+			second = game.i18n.format("BF.JournalPage.Class.Traits.SavesChoice", {
+				choices: choiceListFormatter.format(this.configuration.options.map(o => localize(o)))
+			});
+		} else {
+			first = localize(this.configuration.options.first());
+		}
+
+		const abilities = [first, second].filter(a => a);
+		if ( !abilities.length ) return "";
+		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit", style: "short" });
+		return listFormatter.format(abilities);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
