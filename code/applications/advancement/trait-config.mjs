@@ -91,13 +91,13 @@ export default class TraitConfig extends AdvancementConfig {
 		}, {});
 
 		// Get information on currently selected trait and build choices list
-		const traitConfig = CONFIG.BlackFlag.traits[this.trait];
+		const traitConfig = CONFIG.BlackFlag.traits[this.advancement.bestGuessTrait()];
 		if ( traitConfig ) {
 			context.default.title = game.i18n.localize(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
 		context.choiceOptions = Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
-		context.selectedTraitHeader = `${traitConfig.labels.localization}[other]`;
+		context.selectedTraitHeader = `${CONFIG.BlackFlag.traits[this.trait].labels.localization}[other]`;
 		context.selectedTrait = this.trait;
 
 		context.hintPlaceholder = Trait.localizedList(
@@ -138,7 +138,7 @@ export default class TraitConfig extends AdvancementConfig {
 		event.preventDefault();
 		switch (event.currentTarget.dataset.action) {
 			case "add-choice":
-				this.config.choices.push({ count: 1, trait: this.trait });
+				this.config.choices.push({ count: 1 });
 				this.selected = this.config.choices.length - 1;
 				break;
 
@@ -155,13 +155,13 @@ export default class TraitConfig extends AdvancementConfig {
 
 		// Fix to prevent sets in grants & choice pools being saved as `[object Set]`
 		// TOOD: Remove this when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
-		this.advancement.configuration.grants = Array.from(this.advancement.configuration.grants);
-		this.advancement.configuration.choices.forEach(c => {
+		this.config.grants = Array.from(this.advancement.configuration.grants);
+		this.config.choices.forEach(c => {
 			if ( !c.pool ) return;
 			c.pool = Array.from(c.pool);
 		});
 
-		await this.advancement.update({configuration: this.advancement.configuration});
+		await this.advancement.update({configuration: this.config});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -170,13 +170,6 @@ export default class TraitConfig extends AdvancementConfig {
 		// Display new set of trait choices
 		if ( event.target.name === "selectedTrait" ) {
 			this.trait = event.target.value;
-
-			//  Update trait in selected choice
-			const selectedChoice = this.config.choices[this.selected];
-			if ( selectedChoice && !selectedChoice.pool?.size ) {
-				return this.submit({ updateData: { "configuration.trait": this.trait } });
-			}
-
 			return this.render();
 		}
 
@@ -234,7 +227,7 @@ export default class TraitConfig extends AdvancementConfig {
 			c.pool = Array.from(c.pool);
 		});
 		configuration.choices = choicesCollection;
-		configuration.grants ??= foundry.utils.deepClone(this.config.grants);
+		configuration.grants ??= Array.from(this.config.grants);
 
 		// If one of the expertise modes is selected, filter out any traits that are not of a valid type
 		if ( (configuration.mode ?? this.config.mode) !== "default" ) {

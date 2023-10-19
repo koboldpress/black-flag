@@ -243,7 +243,7 @@ export default class TraitAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Determine what something something...
+	 * Determine which of the provided grants, if any, still needs to be fulfilled.
 	 * @returns {{ available: SelectChoices[], choices: SelectChoices }}
 	 */
 	unfulfilledChoices() {

@@ -141,7 +141,7 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 /**
  * Prepare an object with all possible choices from a set of keys. These choices will be grouped by
  * trait type if more than one type is present.
- * @param {string[]} keys - Prefixed trait keys.
+ * @param {Set<string>} keys - Prefixed trait keys.
  * @returns {SelectChoices}
  */
 export function mixedChoices(keys) {
