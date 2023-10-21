@@ -1,0 +1,36 @@
+<section class="activities">
+	<fieldset>
+		<legend>
+			{{localize "BF.Activity.Label[other]"}}
+			<a data-action="activity" data-sub-action="add">
+				<i class="fa-solid fa-plus"></i>
+			</a>
+		</legend>
+		<ul class="items-list activity-list">
+			{{#each system.activities}}
+				<li class="item-entry activity-entry" data-activity-id="{{this.id}}">
+					<div class="item-name activity-name">
+						<figure class="icon">
+							<img src="{{this.img}}">
+						</figure>
+						<h4>{{this.name}}</h4>
+					</div>
+					<div class="item-controls activity-controls">
+						{{#if @root.editable}}
+							<a data-action="activity" data-sub-action="edit">
+								<i class="fa-solid fa-edit"></i>
+							</a>
+							<a data-action="activity" data-sub-action="delete">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						{{else}}
+							<a data-action="activity" data-sub-action="view">
+								<i class="fa-solid fa-eye"></i>
+							</a>
+						{{/if}}
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	</fieldset>
+</section>

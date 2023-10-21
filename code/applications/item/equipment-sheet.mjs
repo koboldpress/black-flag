@@ -1,7 +1,7 @@
 import { filteredKeys } from "../../utils/_module.mjs";
-import BaseItemSheet from "./base-item-sheet.mjs";
+import ActivityItemSheet from "./activity-item-sheet.mjs";
 
-export default class EquipmentSheet extends BaseItemSheet {
+export default class EquipmentSheet extends ActivityItemSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "equipment", "item", "sheet"],
@@ -50,19 +50,6 @@ export default class EquipmentSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	_onAction(event) {
-
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_getSubmitData(updateData={}) {

@@ -1,10 +1,13 @@
-import * as activity from "../documents/activity/_module.mjs";
+import * as applications from "../applications/activity/_module.mjs";
+import * as documents from "../documents/activity/_module.mjs";
 
 /**
  * Configuration data for activity types.
  *
  * @typedef {object} ActivityTypeConfig
- * @property {typeof Activity} documentClass -  for system data.
+ * @property {typeof Activity} documentClass - Main document class that defines activity's behavior.
+ * @property {object} sheetClasses
+ * @property {typeof ActivityConfig} sheetClasses.config - Configuration sheet.
  */
 
 /**
@@ -12,7 +15,14 @@ import * as activity from "../documents/activity/_module.mjs";
  * @enum {ActivityTypeConfig}
  */
 export const _activityTypes = {
+	base: {
+		documentClass: documents.Activity,
+		sheetClasses: {
+			config: applications.ActivityConfig
+		}
+	},
 	attack: {
-		documentClass: activity.AttackActivity
+		documentClass: documents.AttackActivity,
+		sheetClasses: {}
 	}
 };

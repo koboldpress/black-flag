@@ -6,12 +6,30 @@ import TypeField from "../fields/type-field.mjs";
 export default class BaseActivity extends foundry.abstract.DataModel {
 
 	/**
+	 * Base type information for an activity.
+	 *
+	 * @typedef {PseudoDocumentsMetadata} BaseActivityMetadata
+	 * @property {string} type - Type of the activity.
+	 */
+
+	/**
+	 * @type {BaseActivityMetadata}
+	 */
+	static metadata = Object.freeze({
+		name: "Activity",
+		collection: "activities",
+		type: "base"
+	});
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Name of this activity type that will be stored in config and used for lookups.
 	 * @type {string}
 	 * @protected
 	 */
 	static get typeName() {
-		return this.metadata?.name ?? this.name.replace(/Activity$/, "");
+		return this.metadata.type ?? this.name.replace(/Activity$/, "");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -23,11 +41,11 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				required: true, readOnly: true, initial: this.typeName, validate: v => v === this.typeName,
 				validationError: `must be the same as the Activity type name ${this.typeName}`
 			}),
+			name: new foundry.data.fields.StringField({initial: undefined}),
+			img: new foundry.data.fields.FilePathField({initial: undefined, categories: ["IMAGE"]}),
 			system: new TypeField({
 				modelLookup: type => this.metadata.dataModel ?? null
-			}),
-			title: new foundry.data.fields.StringField({initial: undefined}),
-			icon: new foundry.data.fields.FilePathField({initial: undefined, categories: ["IMAGE"]})
+			})
 		};
 	}
 }

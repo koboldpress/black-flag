@@ -144,6 +144,7 @@ export async function registerHandlebarsPartials() {
 		"advancement/advancement-name.hbs",
 		"dice/roll-notes.hbs",
 		"item/concept-summary.hbs",
+		"item/item-activities.hbs",
 		"item/item-advancement.hbs",
 		"journal/journal-table.hbs"
 	];

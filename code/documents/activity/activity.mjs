@@ -12,8 +12,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Information on how an advancement type is configured.
 	 *
-	 * @typedef {PseudoDocumentsMetadata} ActivityMetadata
-	 * @property {string} name - Type name of the advancement.
+	 * @typedef {BaseActivityMetadata} ActivityMetadata
 	 * @property {typeof DataModel} [dataModel] - Data model for custom system data.
 	 * @property {string} icon - Icon used if no user icon is specified.
 	 * @property {string} title - Title to be displayed if no user title is specified.
@@ -24,15 +23,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Configuration information for this activity type.
 	 * @type {ActivityMetadata}
 	 */
-	static get metadata() {
-		return {
-			pseudoDocumentType: "Activity",
-			pseudoDocumentCollection: "activities",
-			icon: "",
-			title: "",
-			hint: ""
-		};
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		icon: "",
+		title: "BF.Activity.Label[one]",
+		hint: ""
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -46,8 +41,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Prepare data for the Advancement.
 	 */
 	prepareData() {
-		this.title = this.title || this.constructor.metadata.title;
-		this.icon = this.icon || this.constructor.metadata.icon;
+		this.name = this.name || game.i18n.localize(this.constructor.metadata.title);
+		this.img = this.img || this.constructor.metadata.icon;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
