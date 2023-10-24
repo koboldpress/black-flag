@@ -20,4 +20,18 @@ export class AttackData extends foundry.abstract.DataModel {
 			}, {label: "BF.Damage.Label"})
 		};
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareData() {
+		const item = this.parent.item.system ?? {};
+		const propertiesToSet = ["type.value", "type.classification"];
+		for ( const keyPath of propertiesToSet ) {
+			const activityProperty = foundry.utils.getProperty(this, keyPath);
+			const itemProperty = foundry.utils.getProperty(item, keyPath);
+			if ( !activityProperty && itemProperty ) foundry.utils.setProperty(this, keyPath, itemProperty);
+		}
+	}
 }

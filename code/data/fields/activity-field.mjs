@@ -15,6 +15,11 @@ export class ActivityField extends MappingField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	static hierarchical = true;
+	// TODO: Rework this to be more like EmbeddedCollection
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	initialize(value, model, options) {
 		return new ActivityCollection(model, super.initialize(value, model, options));
 	}

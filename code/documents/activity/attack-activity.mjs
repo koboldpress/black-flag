@@ -10,5 +10,4 @@ export default class AttackActivity extends Activity {
 		title: "BF.Activity.Attack.Title",
 		hint: "BF.Activity.Attack.Hint"
 	}, {inplace: false}));
-
 }

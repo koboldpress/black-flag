@@ -98,4 +98,15 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 	get validProperties() {
 		return CONFIG.BlackFlag.weaponProperties;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareBaseProperties() {
+		Object.defineProperty(this.type, "classification", {
+			value: "weapon",
+			writable: false
+		});
+	}
 }

@@ -43,6 +43,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	prepareData() {
 		this.name = this.name || game.i18n.localize(this.constructor.metadata.title);
 		this.img = this.img || this.constructor.metadata.icon;
+		this.system.prepareData?.();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
