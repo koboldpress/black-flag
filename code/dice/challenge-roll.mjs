@@ -1,6 +1,6 @@
-import { areKeysPressed } from "../utils/dice.mjs";
+import ChallengeConfigurationDialog from "../applications/dice/challenge-configuration-dialog.mjs";
+import { areKeysPressed } from "../utils/_module.mjs";
 import BaseRoll from "./base-roll.mjs";
-import ChallengeConfigurationDialog from "./challenge-configuration-dialog.mjs";
 
 /**
  * Challenge roll configuration data.

@@ -12,6 +12,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if ( this.isRoll ) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
+			this._renderDamageUI(html);
 		}
 
 		return jQuery;
@@ -32,6 +33,28 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			else if ( roll.isCriticalFailure ) result.classList.add("critical-failure");
 			if ( roll.isSuccess ) result.classList.add("success");
 			else if ( roll.isFailure ) result.classList.add("failure");
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Damage Rolls            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display total damage and apply damage controls.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_renderDamageUI(html) {
+		if ( !this.rolls.every(r => r instanceof CONFIG.Dice.DamageRoll) ) return;
+		if ( this.rolls.length > 1 ) {
+			const total = this.rolls.reduce((t, r) => t + r.total, 0);
+			html.querySelector(".message-content")?.insertAdjacentHTML("beforeend", `
+				<div class="damage dice-roll">
+				  <div class="dice-result">
+					  <h4 class="dice-total damage-total">${game.i18n.localize("Total")}: ${total}</h4>
+				  </div>
+				</div>
+			`);
 		}
 	}
 

@@ -1,4 +1,4 @@
-import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
+import BaseConfigurationDialog from "../applications/dice/base-configuration-dialog.mjs";
 
 /**
  * Base roll configuration data.

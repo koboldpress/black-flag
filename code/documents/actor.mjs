@@ -1,4 +1,4 @@
-import SkillConfigurationDialog from "../dice/skill-configuration-dialog.mjs";
+import SkillConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
 import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";

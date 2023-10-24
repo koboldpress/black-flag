@@ -2,7 +2,11 @@
 	<fieldset class="formulas">
 		<legend>{{localize "BF.Roll.Formula.Label"}}</legend>
 		<ul class="formulas">
-			{{#each rolls}}<li class="formula">{{this.formula}}</li>{{/each}}
+			{{#each rolls}}
+				<li class="formula">
+					<span class="formula-text">{{this.formula}}</span>
+				</li>
+			{{/each}}
 		</ul>
 		<label>
 			<span>{{localize "BF.Roll.ExtraTerms.Label"}}</span>
