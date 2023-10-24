@@ -1,3 +1,5 @@
+import { log } from "../../utils/_module.mjs";
+
 /**
  * Base configuration application for activities that can be extended by other types to implement custom
  * editing interfaces.
@@ -6,6 +8,13 @@
  * @param {object} [options={}] - Additional options passed to FormApplication.
  */
 export default class ActivityConfig extends FormApplication {
+	constructor(activity, options={}) {
+		super(activity, options);
+		this.#activityId = activity.id;
+		this.item = activity.item;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -21,22 +30,28 @@ export default class ActivityConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * The ID of the activity being created or edited.
+	 * @type {string}
+	 */
+	#activityId;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The activity being created or edited.
 	 * @type {Activity}
 	 */
 	get activity() {
-		return this.object;
+		return this.item.getEmbeddedDocument("Activity", this.#activityId);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * The item to which the activity belongs.
+	 * Parent item to which this activity belongs.
 	 * @type {BlackFlagItem}
 	 */
-	get item() {
-		return this.activity.item;
-	}
+	item;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -61,7 +76,7 @@ export default class ActivityConfig extends FormApplication {
 			CONFIG: CONFIG.BlackFlag,
 			activity: this.activity,
 			system: this.activity.system,
-			source: this.activity.toObject(),
+			source: this.activity.system.toObject(),
 			default: {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon
@@ -85,9 +100,34 @@ export default class ActivityConfig extends FormApplication {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
+		for ( const element of html.querySelectorAll("[data-action]") ) {
+			element.addEventListener("click", this._onAction.bind(this));
+		}
+
 		for ( const element of html.querySelectorAll("img[data-edit]") ) {
 			element.addEventListener("click", this._onEditIcon.bind(this));
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle a sheet action.
+	 * @param {ClickEvent} event - The click event.
+	 * @returns {Promise}
+	 */
+	_onAction(event) {
+		const { action, subAction } = event.currentTarget.dataset;
+		switch ( action ) {
+			case "damage":
+				const index = event.currentTarget.closest("[data-index]")?.dataset.index;
+				const damageCollection = this.activity.system.toObject().damage?.parts ?? [];
+				if ( subAction === "add" ) damageCollection.push({});
+				else if ( subAction === "delete" ) damageCollection.splice(index, 1);
+				else break;
+				return this.submit({ updateData: { "system.damage.parts": damageCollection }});
+		}
+		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -117,6 +157,14 @@ export default class ActivityConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _updateObject(event, formData) {
-		await this.activity.update(formData);
+		const updates = foundry.utils.expandObject(formData);
+
+		if ( foundry.utils.hasProperty(updates, "system.damage.parts") ) {
+			updates.system.damage.parts = Object.entries(updates.system.damage.parts).reduce((arr, [k, v]) => {
+				arr[k] = v;
+				return arr;
+			}, []);
+		}
+		await this.activity.update(updates);
 	}
 }

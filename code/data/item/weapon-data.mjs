@@ -1,5 +1,5 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import { ActivityField } from "../fields/_module.mjs";
+import { ActivityField, DamageField } from "../fields/_module.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
@@ -44,11 +44,7 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 			ammunition: new SchemaField({
 				type: new StringField({label: "BF.Ammunition.Type.Label"})
 			}, {label: "BF.Item.Type.Ammunition[one]"}),
-			damage: new SchemaField({
-				number: new NumberField({min: 0, integer: true, label: "BF.Die.Number.Label"}),
-				denomination: new NumberField({min: 1, integer: true, label: "BF.Die.Denomination.Label"}),
-				type: new StringField({label: "BF.Damage.Type.Label"})
-			}, {label: "BF.Damage.Label"}),
+			damage: new DamageField(),
 			range: new SchemaField({
 				short: new NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
 				long: new NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),

@@ -23,6 +23,18 @@ export const _activityTypes = {
 	},
 	attack: {
 		documentClass: documents.AttackActivity,
-		sheetClasses: {}
+		sheetClasses: {
+			config: applications.AttackConfig
+		}
 	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Different classifications of attack types.
+ * @enum {string}
+ */
+export const attackTypes = {
+	weapon: "BF.Weapon.Label[one]"
 };
