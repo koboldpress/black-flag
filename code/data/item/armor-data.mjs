@@ -1,12 +1,14 @@
 import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
 /**
  * Data definition for Armor items.
+ * @mixes ProficiencyTemplate
  * @mixes PhysicalTemplate
  */
-export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
+export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate) {
 
 	static get metadata() {
 		return {
@@ -51,6 +53,10 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static proficiencyCategory = "armor";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get traits() {

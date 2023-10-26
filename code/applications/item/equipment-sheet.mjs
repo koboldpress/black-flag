@@ -76,6 +76,10 @@ export default class EquipmentSheet extends BaseItemSheet {
 			data.system.properties = filteredKeys(data.system.properties);
 		}
 
+		if ( foundry.utils.hasProperty(data, "system.overrides.proficiency") ) {
+			if ( data.system.overrides.proficiency === "null" ) data.system.overrides.proficiency = null;
+		}
+
 		return foundry.utils.flattenObject(data);
 	}
 }

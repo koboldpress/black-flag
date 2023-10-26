@@ -149,15 +149,19 @@
 						</label>
 					{{/each}}
 				</fieldset>
-				{{!-- TODO: Bonuses & Overrides
-				<fieldset>
-					<legend>{{localize "BF.Bonus.Label[other]"}}</legend>
-					
-				</fieldset>
 				<fieldset>
 					<legend>{{localize "BF.Override.Label[other]"}}</legend>
-					
-				</fieldset>--}}
+					<label>
+						<span>{{localize "BF.Proficiency.Label[one]"}}</span>
+						<select name="system.overrides.proficiency">
+							{{#select source.overrides.proficiency}}
+								<option value="null">{{localize "BF.Proficiency.Override.Auto"}}</option>
+								<option value="true">{{localize "BF.Proficiency.Override.Always"}}</option>
+								<option value="false">{{localize "BF.Proficiency.Override.Never"}}</option>
+							{{/select}}
+						</select>
+					</label>
+				</fieldset>
 			</section>
 		</div>
 	</main>

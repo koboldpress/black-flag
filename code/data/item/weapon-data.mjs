@@ -1,11 +1,13 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
 /**
  * Data definition for Weapon items.
+ * @mixes ProficiencyTemplate
  * @mixes PhysicalTemplate
  */
-export default class WeaponData extends ItemDataModel.mixin(PhysicalTemplate) {
+export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate) {
 
 	static get metadata() {
 		return {
@@ -53,7 +55,6 @@ export default class WeaponData extends ItemDataModel.mixin(PhysicalTemplate) {
 			// Attack ability override
 			// Damage ability override
 			// Critical threshold override
-			// Proficiency override
 			// Attack bonus
 			// Damage bonus
 			// Critical damage bonus
@@ -63,6 +64,10 @@ export default class WeaponData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static proficiencyCategory = "weapons";
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get traits() {
