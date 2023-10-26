@@ -210,7 +210,6 @@ export default class PCData extends ActorDataModel {
 				id: baseFormula
 			}, {inplace: false}));
 		}
-		ac.bonus = 0;
 		ac.cover = 0;
 		Object.defineProperty(ac, "label", {
 			get() {
@@ -334,11 +333,12 @@ export default class PCData extends ActorDataModel {
 
 		const rollData = this.parent.getRollData({deterministic: true});
 		rollData.attributes.ac = ac;
+		const acData = { type: "armor-class", armored: !!ac.equippedArmor, shielded: !!ac.equippedShield };
 
 		// Filter formulas to only ones that match current armor settings
 		const validFormulas = ac.formulas.filter(formula => {
-			if ( (formula.armored !== null) && (formula.armored !== !!ac.equippedArmor) ) return false;
-			if ( (formula.shielded !== null) && (formula.shielded !== !!ac.equippedShield) ) return false;
+			if ( (formula.armored !== null) && (formula.armored !== !!acData.armored) ) return false;
+			if ( (formula.shielded !== null) && (formula.shielded !== !!acData.shielded) ) return false;
 			return true;
 		});
 
@@ -353,7 +353,6 @@ export default class PCData extends ActorDataModel {
 					ac.currentFormula = config;
 				}
 			} catch(error) {
-				console.warn(error.message);
 				this.parent.notifications.set(`ac-formula-error-${index}`, {
 					level: "error", category: "armor-class", section: "main",
 					message: game.i18n.format("BF.Armor.Formula.Error", {formula: config.formula, error: error.message})
@@ -367,9 +366,11 @@ export default class PCData extends ActorDataModel {
 
 		ac.shield = ac.equippedShield?.system.armor.value ?? 0;
 
+		ac.modifiers = this.getModifiers(acData);
+		ac.bonus = this.buildBonus(ac.modifiers, { deterministic: true, rollData });
+
 		if ( ac.override ) ac.value = ac.override;
 		else ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
-		// TODO: Handle bonuses using modifiers
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
