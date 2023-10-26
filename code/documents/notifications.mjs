@@ -3,6 +3,7 @@
  *
  * @typedef {object} NotificationData
  * @property {string} key - Unique key for this notification.
+ * @property {string} [document] - ID of a document that is causing this notification.
  * @property {string} [category] - Type of data to which this notification applies (e.g. abilities, lineage).
  * @property {string} [section] - Sheet section that should display a notice about this
  *                                notification (e.g. progression, inventory).

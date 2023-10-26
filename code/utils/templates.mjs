@@ -65,15 +65,17 @@ function groupedSelectOptions(choices, options) {
  * @param {object} options
  * @param {object} options.hash
  * @param {string} [options.hash.key] - Display if a notification of this key is set.
+ * @param {string} [options.hash.document] - Display if any notifications for this document ID are set.
  * @param {string} [options.hash.category] - Display if any notifications in this category are set.
  * @param {string} [options.hash.section] - Display if any notifications in this section are set.
  * @param {boolean} [options.hash.displayOrder] - Should a number be displayed for the order?
  * @returns {Handlebars.SafeString|void}
  */
 function notificationBadge(document, options={}) {
-	let { key, category, section, ...generationOptions } = options.hash;
+	let { key, document: id, category, section, ...generationOptions } = options.hash;
 	if ( !document.notifications ) return;
 	if ( foundry.utils.getType(key) === "Object" ) key = key.string;
+	if ( foundry.utils.getType(id) === "Object" ) id = id.string;
 	if ( foundry.utils.getType(category) === "Object" ) category = category.string;
 	if ( foundry.utils.getType(section) === "Object" ) section = section.string;
 
@@ -81,8 +83,9 @@ function notificationBadge(document, options={}) {
 	if ( key ) {
 		const notification = document.notifications.get(key);
 		if ( notification ) notifications.push(notification);
-	} else if ( category || section ) {
+	} else if ( id || category || section ) {
 		notifications = document.notifications.filter(notification => {
+			if ( id && (id !== notification.document) ) return false;
 			if ( category && (category !== notification.category) ) return false;
 			if ( section && (section !== notification.section) ) return false;
 			return true;

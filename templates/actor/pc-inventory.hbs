@@ -19,9 +19,14 @@
 				</header>
 				<ol class="item-list">
 					{{#each section.items as |item|}}
-						<li class="item-entry" data-item-id="{{item.id}}">
+						<li class="item" data-item-id="{{item.id}}">
+							<div class="item-equipped">
+								<input type="checkbox" name="item.{{item.id}}.flags.black-flag.relationship.equipped"
+									{{checked item.system.equipped}}>
+							</div>
 							<div class="item-name">
 								{{item.name}}
+								{{blackFlag-notificationBadge actor document=item.id}}
 							</div>
 							<div class="item-details inventory-details">
 								<div class="weight">{{item.system.weight.label}}</div>

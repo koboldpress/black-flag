@@ -243,4 +243,19 @@ export default class BaseActorSheet extends ActorSheet {
 		const changed = await this.actor.applyDamage(delta, { multiplier: -1 });
 		if ( !changed ) event.target.value = foundry.utils.getProperty(this.actor, event.target.name);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _updateObject(event, formData) {
+		const updates = foundry.utils.expandObject(formData);
+
+		// Preserve item updates to send to items
+		const itemUpdates = Object.entries(updates.item ?? {}).map(([_id, data]) => {
+			return { _id, ...data };
+		});
+		delete updates.item;
+
+		await super._updateObject(event, foundry.utils.flattenObject(updates));
+		await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
+	}
 }

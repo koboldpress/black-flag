@@ -30,6 +30,17 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareBaseEquipped() {
+		Object.defineProperty(this, "equipped", {
+			get() {
+				return this.parent.flags["black-flag"]?.relationship?.equipped ?? false;
+			},
+			configurable: true
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareDerivedTotals() {
 		this.price.total = this.price.value * this.quantity;
 		this.weight.total = this.weight.value * this.quantity;

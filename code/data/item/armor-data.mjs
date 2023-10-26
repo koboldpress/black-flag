@@ -92,13 +92,17 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 
 	prepareDerivedEquipArmor() {
 		const ac = this.parent.actor?.system.attributes?.ac;
-		if ( !ac ) return;
+		if ( !ac || !this.equipped ) return;
 
-		// TODO: Don't apply if not equipped
 		const target = this.type.category === "shield" ? "equippedShield" : "equippedArmor";
 		if ( ac[target] ) {
 			if ( ac[target] === this.parent ) return;
-			console.warn("More than one armor equipped!");
+			this.parent.actor.notifications.set(`armor-${this.parent.id}-equipped`, {
+				level: "warn", category: "armor-class", section: "inventory", document: this.parent.id,
+				message: game.i18n.format("BF.Armor.Warning.TooMany", {
+					type: game.i18n.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
+				})
+			});
 			return;
 		}
 
