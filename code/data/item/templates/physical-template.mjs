@@ -27,18 +27,19 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Preparation          */
+	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseEquipped() {
-		Object.defineProperty(this, "equipped", {
-			get() {
-				return this.parent.flags["black-flag"]?.relationship?.equipped ?? false;
-			},
-			configurable: true
-		});
+	/**
+	 * Is this item currently equipped?
+	 * @type {boolean}
+	 */
+	get equipped() {
+		return this.parent.flags["black-flag"]?.relationship?.equipped ?? false;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedTotals() {

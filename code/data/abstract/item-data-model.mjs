@@ -53,4 +53,15 @@ export default class ItemDataModel extends BaseDataModel {
 	prepareFinalData() {
 		this.constructor._getMethods({ startingWith: "prepareFinal", notEndingWith: "Data" }).forEach(k => this[k]());
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preCreate(data, options, user) {
+		await super._preCreate(data, options, user);
+
+		// Clear "relationship" flags when moved or created
+		this.parent.updateSource({"flags.black-flag.-=relationship": null});
+	}
 }

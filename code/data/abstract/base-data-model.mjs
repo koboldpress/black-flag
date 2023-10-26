@@ -179,7 +179,7 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 			if ( prototype ) cls = cls.prototype;
 			keys.push(...Object.getOwnPropertyNames(cls));
 		}
-		if ( startingWith ) keys = keys.filter(key => key.startsWith(startingWith));
+		if ( startingWith ) keys = keys.filter(key => key.startsWith(startingWith) && key !== startingWith);
 		if ( notEndingWith ) keys = keys.filter(key => !key.endsWith(notEndingWith));
 		return keys;
 	}
