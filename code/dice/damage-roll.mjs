@@ -17,7 +17,7 @@ import BaseRoll from "./base-roll.mjs";
  * @property {boolean} [critical] - Does this roll do critical damage?
  * @property {number} [multiplier=2] - Amount by which to multiply critical damage.
  * @property {boolean} [multiplyNumeric=false] - Should numeric terms be multiplied along side dice
- *                                                        during criticals?
+ *                                               during criticals?
  * @property {number} [bonusDice=0] - Additional dice added to first term when calculating critical damage.
  * @property {string} [bonusDamage] - Additional, unmodified, damage formula added when calculating a critical.
  * @property {string} [type] - Type of damage represented.

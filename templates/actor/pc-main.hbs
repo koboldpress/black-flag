@@ -135,8 +135,17 @@
 		{{/each}}
 	</fieldset>
 	<fieldset class="armor-class">
-		<legend>{{localize "BF.ArmorClass.Label"}}</legend>
-		<span>{{system.attributes.ac.value}}</span>
+		<legend>
+			{{localize "BF.ArmorClass.Label"}}
+			{{blackFlag-notificationBadge actor category="armor-class"}}
+		</legend>
+		<div class="ac-shield">
+			<svg class="frame"><use xlink:href="#blackFlag-armorClass"/></svg>
+			<span class="value">{{system.attributes.ac.value}}</span>
+		</div>
+		<div class="ac-label">
+			{{localize system.attributes.ac.label}}
+		</div>
 	</fieldset>
 	<fieldset class="initiative">
 		<legend>{{localize "BF.Initiative.Label"}}</legend>

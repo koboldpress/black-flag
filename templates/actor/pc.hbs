@@ -27,12 +27,30 @@
 
 	<form id="{{appID}}-main-form" class="tab" data-group="progression" data-tab="front">
 		<nav class="sheet-navigation tabs" data-group="primary">
-			<a data-tab="main">{{localize "BF.Sheet.Tab.Main"}}</a>
-			<a data-tab="spellcasting">{{localize "BF.Sheet.Tab.Spellcasting"}}</a>
-			<a data-tab="inventory">{{localize "BF.Sheet.Tab.Inventory"}}</a>
-			<a data-tab="features">{{localize "BF.Sheet.Tab.Features"}}</a>
-			<a data-tab="biography">{{localize "BF.Sheet.Tab.Biography"}}</a>
-			<a data-tab="effects">{{localize "BF.Sheet.Tab.Effects"}}</a>
+			<a data-tab="main">
+				{{localize "BF.Sheet.Tab.Main"}}
+				{{blackFlag-notificationBadge actor section="main"}}
+			</a>
+			<a data-tab="spellcasting">
+				{{localize "BF.Sheet.Tab.Spellcasting"}}
+				{{blackFlag-notificationBadge actor section="spellcasting"}}
+			</a>
+			<a data-tab="inventory">
+				{{localize "BF.Sheet.Tab.Inventory"}}
+				{{blackFlag-notificationBadge actor section="inventory"}}
+			</a>
+			<a data-tab="features">
+				{{localize "BF.Sheet.Tab.Features"}}
+				{{blackFlag-notificationBadge actor section="features"}}
+			</a>
+			<a data-tab="biography">
+				{{localize "BF.Sheet.Tab.Biography"}}
+				{{blackFlag-notificationBadge actor section="biography"}}
+			</a>
+			<a data-tab="effects">
+				{{localize "BF.Sheet.Tab.Effects"}}
+				{{blackFlag-notificationBadge actor section="effects"}}
+			</a>
 		</nav>
 
 		<main>

@@ -28,15 +28,22 @@ export default class PCData extends ActorDataModel {
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
 					})
 				})
-				// Bonuses?
-				// Minimums?
 			}), {
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
 			}),
 			attributes: new foundry.data.fields.SchemaField({
 				ac: new foundry.data.fields.SchemaField({
-					// Formulas
-					// Override
+					baseFormulas: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+						initial: ["unarmored", "armored"]
+					}),
+					formulas: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
+						label: new foundry.data.fields.StringField(),
+						formula: new fields.FormulaField({deterministic: true}),
+						armored: new foundry.data.fields.BooleanField({nullable: true, initial: null}),
+						shielded: new foundry.data.fields.BooleanField({nullable: true, initial: null})
+					})),
+					flat: new foundry.data.fields.NumberField({min: 0, integer: true}),
+					override: new foundry.data.fields.NumberField({min: 0, integer: true})
 				}, {label: "BF.ArmorClass.Label"}),
 				death: new foundry.data.fields.SchemaField({
 					// Successes
@@ -49,7 +56,6 @@ export default class PCData extends ActorDataModel {
 					d: new fields.MappingField(new foundry.data.fields.SchemaField({
 						spent: new foundry.data.fields.NumberField({min: 0, integer: true})
 					}))
-					// Minimum roll
 					// Recovery percentage
 				}, {label: "BF.HitDie.Label[other]"}),
 				hp: new foundry.data.fields.SchemaField({
@@ -93,8 +99,6 @@ export default class PCData extends ActorDataModel {
 					proficiency: new foundry.data.fields.SchemaField({
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
 					})
-					// Bonuses?
-					// Minimum?
 				}), {
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
@@ -103,8 +107,6 @@ export default class PCData extends ActorDataModel {
 						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
 					})
 					// Default ability
-					// Bonuses?
-					// Minimum?
 				}), {label: "BF.Tool.Label[other]"}),
 				weapons: new foundry.data.fields.SchemaField({
 					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
@@ -196,6 +198,30 @@ export default class PCData extends ActorDataModel {
 			ability.value = ability.base;
 			if ( !ability.base ) this.progression.abilities.assignmentComplete = false;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareBaseArmorFormulas() {
+		const ac = this.attributes.ac;
+		for ( const baseFormula of ac.baseFormulas ) {
+			const data = CONFIG.BlackFlag.armorFormulas[baseFormula];
+			if ( data ) ac.formulas.push(foundry.utils.mergeObject(data, {
+				id: baseFormula
+			}, {inplace: false}));
+		}
+		ac.bonus = 0;
+		ac.cover = 0;
+		Object.defineProperty(ac, "label", {
+			get() {
+				const label = [];
+				if ( this.currentFormula?.id === "armored" ) label.push(this.equippedArmor.name);
+				else if ( this.currentFormula?.label ) label.push(game.i18n.localize(this.currentFormula.label));
+				if ( this.equippedShield ) label.push(this.equippedShield.name);
+				return game.i18n.getListFormatter({ style: "short", type: "unit" }).format(label);
+			},
+			configurable: true
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -293,9 +319,57 @@ export default class PCData extends ActorDataModel {
 
 	prepareDerivedArmorClass() {
 		const ac = this.attributes.ac;
-		if ( this.abilities.dexterity.mod !== null ) {
-			ac.value = 8 + this.abilities.dexterity.mod;
+
+		// If armor is equipped, prepare clamped abilities
+		ac.clamped = Object.entries(this.abilities).reduce((obj, [k, v]) => {
+			obj[k] = Math.clamped(
+				v.mod,
+				ac.equippedArmor?.system.modifier.min ?? -Infinity,
+				ac.equippedArmor?.system.modifier.max ?? Infinity
+			);
+			return obj;
+		}, {});
+
+		ac.armor = ac.equippedArmor?.system.armor.value ?? 0;
+
+		const rollData = this.parent.getRollData({deterministic: true});
+		rollData.attributes.ac = ac;
+
+		// Filter formulas to only ones that match current armor settings
+		const validFormulas = ac.formulas.filter(formula => {
+			if ( (formula.armored !== null) && (formula.armored !== !!ac.equippedArmor) ) return false;
+			if ( (formula.shielded !== null) && (formula.shielded !== !!ac.equippedShield) ) return false;
+			return true;
+		});
+
+		// Iterate of all armor class formulas, calculating their final values
+		ac.base = -Infinity;
+		for ( const [index, config] of validFormulas.entries() ) {
+			try {
+				const replaced = Roll.replaceFormulaData(config.formula, rollData);
+				const result = Roll.safeEval(replaced);
+				if ( result > ac.base ) {
+					ac.base = result;
+					ac.currentFormula = config;
+				}
+			} catch(error) {
+				console.warn(error.message);
+				this.parent.notifications.set(`ac-formula-error-${index}`, {
+					level: "error", category: "armor-class", section: "main",
+					message: game.i18n.format("BF.Armor.Formula.Error", {formula: config.formula, error: error.message})
+				});
+			}
 		}
+		if ( !Number.isFinite(ac.base) ) {
+			ac.base = 10;
+			ac.currentFormula = null;
+		}
+
+		ac.shield = ac.equippedShield?.system.armor.value ?? 0;
+
+		if ( ac.override ) ac.value = ac.override;
+		else ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+		// TODO: Handle bonuses using modifiers
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

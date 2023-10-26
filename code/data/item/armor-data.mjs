@@ -38,14 +38,14 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 					min: 0, integer: true, label: "BF.Armor.RequiredStrength.Label"
 				})
 			}),
-			overrides: new foundry.data.fields.SchemaField({
-				minModifier: new foundry.data.fields.NumberField({
+			modifier: new foundry.data.fields.SchemaField({
+				min: new foundry.data.fields.NumberField({
 					required: false, initial: undefined, integer: true, label: "BF.Armor.Modifier.Minimum.Label"
 				}),
-				maxModifier: new foundry.data.fields.NumberField({
+				max: new foundry.data.fields.NumberField({
 					required: false, initial: undefined, integer: true, label: "BF.Armor.Modifier.Maximum.Label"
 				})
-			}, {label: "BF.Override.Label[other]"})
+			})
 		});
 	}
 
@@ -79,6 +79,48 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedArmorValue() {
+		if ( !this.armor.value && (this.type.category === "shield") ) {
+			this.armor.value = 2;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedEquipArmor() {
+		const ac = this.parent.actor?.system.attributes?.ac;
+		if ( !ac ) return;
+
+		// TODO: Don't apply if not equipped
+		const target = this.type.category === "shield" ? "equippedShield" : "equippedArmor";
+		if ( ac[target] ) {
+			if ( ac[target] === this.parent ) return;
+			console.warn("More than one armor equipped!");
+			return;
+		}
+
+		Object.defineProperty(ac, target, {
+			value: this.parent,
+			configurable: true,
+			enumerable: false
+		});
+
+		// TODO: Add roll notes if wearing armor you aren't proficient in
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedModifiers() {
+		const armorConfig = CONFIG.BlackFlag.armor[this.type.category]?.modifier;
+		if ( !armorConfig ) return;
+		this.modifier.min ??= armorConfig.min;
+		this.modifier.max ??= armorConfig.max;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -88,16 +130,14 @@ export default class ArmorData extends ItemDataModel.mixin(PhysicalTemplate) {
 	 * @returns {string}
 	 */
 	modifierHint(long=true) {
-		console.log(this);
-		const maxModifier = this.overrides.maxModifier ?? CONFIG.BlackFlag.armor[this.type.category]?.modifier?.max;
-		if ( maxModifier === 0 ) return "";
+		if ( this.modifier.maxModifier === 0 ) return "";
 
 		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
 		const hint = game.i18n.format(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
 			ability: game.i18n.localize(ability.labels.abbreviation).toUpperCase()
 		});
-		if ( !maxModifier ) return hint;
+		if ( !this.modifier.maxModifier ) return hint;
 
-		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: numberFormat(maxModifier) });
+		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: numberFormat(this.modifier.maxModifier) });
 	}
 }

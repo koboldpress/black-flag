@@ -78,6 +78,42 @@ localizeConfig(armor.heavy.children);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Configuration for armor formulas.
+ *
+ * @typedef {LabeledConfiguration} ArmorFormulaConfiguration
+ * @property {string} formula - The formula used for calculation.
+ * @property {boolean|null} armored - Whether this formula requires armor, requires no armor, or doesn't restrict.
+ * @property {boolean|null} shielded - Whether this formula requires shield, requires no shield, or doesn't restrict.
+ */
+
+/**
+ * Different armor formulas provided out of the box.
+ * @enum {ArmorFormulaConfiguration}
+ */
+export const armorFormulas = {
+	unarmored: {
+		label: "BF.Armor.Formula.Unarmored",
+		formula: "10 + @abilities.dexterity.mod",
+		armored: false,
+		shielded: null
+	},
+	armored: {
+		label: "BF.Armor.Formula.Armored",
+		formula: "@attributes.ac.armor + @attributes.ac.clamped.dexterity",
+		armored: true,
+		shielded: null
+	},
+	natural: {
+		label: "BF.Armor.Formula.Natural",
+		formula: "@attributes.ac.flat",
+		armored: null,
+		shielded: null
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Properties that can be applied to armor.
  * @enum {LabeledConfiguration}
  */
