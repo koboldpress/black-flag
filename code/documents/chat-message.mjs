@@ -63,6 +63,34 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Find the combatant associated with this message.
+	 * @param {number} initiative - Initiative total to use to find exact matches.
+	 * @returns {Combatant|void}
+	 */
+	getCombatant(initiative) {
+		if ( !initiative ) {
+			const rollIndex = this.rolls.findIndex(r => r instanceof CONFIG.Dice.ChallengeRoll);
+			initiative = this.rolls[rollIndex]?.total;
+		}
+
+		const { exactMatch, tokenMatch, actorMatch } = Array.from(game.combats.map(c => Array.from(c.combatants)))
+			.flat()
+			.reduce((obj, combatant) => {
+				if ( obj.exactMatch ) return obj;
+				if ( combatant.sceneId === this.speaker.scene ) {
+					if ( combatant.tokenId === this.speaker.token ) {
+						obj.tokenMatch = combatant;
+						if ( combatant.initiative === initiative ) obj.exactMatch = combatant;
+					} else if ( combatant.actorId === this.speaker.actor ) obj.actorMatch = combatant;
+				}
+				return obj;
+			}, {});
+		return exactMatch ?? tokenMatch ?? actorMatch;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * How long should luck be able to be applied to rolls (in milliseconds).
 	 * @type {number}
 	 */
@@ -144,6 +172,9 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		// Only display the UI if roll was within the past 5 minutes
 		if ( this.timestamp < (Date.now() - this.constructor.LUCK_CONTROL_PERIOD) ) return false;
 
+		// Only display initiative rolls if a combatant is found
+		if ( this.getFlag("core", "initiativeRoll") ) return !!this.getCombatant();
+
 		// Only certain roll types can be modified by luck
 		const rollType = this.flags[game.system.id]?.roll?.type;
 		return CONFIG.BlackFlag.luck.validRollTypes.has(rollType);
@@ -168,6 +199,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		const rollIndex = this.rolls.findIndex(r => r instanceof CONFIG.Dice.ChallengeRoll);
 		const roll = this.rolls[rollIndex];
 		if ( !roll ) return;
+		const originalTotal = roll.total;
 
 		// Update the roll with bonus
 		let bonusTerm = roll.terms.find(t => t.options.luckBonus);
@@ -194,6 +226,11 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 		// Spend luck on actor
 		await actor.update({"system.attributes.luck.value": actor.system.attributes.luck.value - cost});
+
+		// Update initiative if necessary
+		if ( this.getFlag("core", "initiativeRoll") ) {
+			await this.getCombatant(originalTotal)?.update({initiative: roll.total});
+		}
 
 		// Re-render the chat message
 		await this.update(messageUpdates);
@@ -223,6 +260,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		const rollIndex = this.rolls.findIndex(r => r instanceof CONFIG.Dice.ChallengeRoll);
 		const roll = this.rolls[rollIndex];
 		if ( !roll ) return;
+		const originalTotal = roll.total;
 
 		// If more than one result is present, prompt for which should be re-rolled
 		const die = roll.challengeDie;
@@ -282,6 +320,11 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 		// Spend luck on actor
 		await actor.update({"system.attributes.luck.value": actor.system.attributes.luck.value - cost});
+
+		// Update initiative if necessary
+		if ( this.getFlag("core", "initiativeRoll") ) {
+			await this.getCombatant(originalTotal)?.update({initiative: roll.total});
+		}
 
 		// Re-render the chat message
 		await this.update(messageUpdates);
