@@ -1,4 +1,6 @@
-import * as fields from "../../fields/_module.mjs";
+import { IdentifierField } from "../../fields/_module.mjs";
+
+const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Concept items (class, background, lineage, heritage).
@@ -15,13 +17,13 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
-			description: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				journal: new foundry.data.fields.StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				journal: new StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			identifier: new foundry.data.fields.SchemaField({
-				value: new fields.IdentifierField()
+			identifier: new SchemaField({
+				value: new IdentifierField()
 			})
 		};
 	}

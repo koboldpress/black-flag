@@ -1,5 +1,7 @@
 import { filter, numberFormat } from "../../../utils/_module.mjs";
-import * as fields from "../../fields/_module.mjs";
+import { FilterField, IdentifierField } from "../../fields/_module.mjs";
+
+const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Feature and Talent items.
@@ -16,19 +18,19 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
-			description: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			identifier: new foundry.data.fields.SchemaField({
-				value: new fields.IdentifierField()
+			identifier: new SchemaField({
+				value: new IdentifierField()
 			}),
-			restriction: new foundry.data.fields.SchemaField({
-				filters: new fields.FilterField()
+			restriction: new SchemaField({
+				filters: new FilterField()
 			}),
-			type: new foundry.data.fields.SchemaField({
-				category: new foundry.data.fields.StringField(),
-				value: new foundry.data.fields.StringField()
+			type: new SchemaField({
+				category: new StringField(),
+				value: new StringField()
 			})
 		};
 	}

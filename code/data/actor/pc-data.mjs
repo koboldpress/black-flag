@@ -2,7 +2,11 @@ import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { filter, simplifyBonus } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
-import * as fields from "../fields/_module.mjs";
+import {
+	AdvancementValueField, FormulaField, LocalDocumentField, MappingField, ModifierField, RollField, TimeField
+} from "../fields/_module.mjs";
+
+const { ArrayField, BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class PCData extends ActorDataModel {
 
@@ -20,166 +24,163 @@ export default class PCData extends ActorDataModel {
 
 	static defineSchema() {
 		return {
-			abilities: new fields.MappingField(new foundry.data.fields.SchemaField({
-				base: new foundry.data.fields.NumberField({min: 0, integer: true}),
-				max: new foundry.data.fields.NumberField({min: 0, initial: 20, integer: true}),
-				save: new foundry.data.fields.SchemaField({
-					proficiency: new foundry.data.fields.SchemaField({
-						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
-					})
+			abilities: new MappingField(new SchemaField({
+				base: new NumberField({min: 0, integer: true}),
+				max: new NumberField({min: 0, initial: 20, integer: true}),
+				save: new SchemaField({
+					proficiency: new SchemaField({ multiplier: new NumberField({min: 0, max: 2, initial: 0, step: 0.5}) })
 				})
 			}), {
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
 			}),
-			attributes: new foundry.data.fields.SchemaField({
-				ac: new foundry.data.fields.SchemaField({
-					baseFormulas: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			attributes: new SchemaField({
+				ac: new SchemaField({
+					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored"]
 					}),
-					formulas: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-						label: new foundry.data.fields.StringField(),
-						formula: new fields.FormulaField({deterministic: true}),
-						armored: new foundry.data.fields.BooleanField({nullable: true, initial: null}),
-						shielded: new foundry.data.fields.BooleanField({nullable: true, initial: null})
+					formulas: new ArrayField(new SchemaField({
+						label: new StringField(),
+						formula: new FormulaField({deterministic: true}),
+						armored: new BooleanField({nullable: true, initial: null}),
+						shielded: new BooleanField({nullable: true, initial: null})
 					})),
-					flat: new foundry.data.fields.NumberField({min: 0, integer: true}),
-					override: new foundry.data.fields.NumberField({min: 0, integer: true})
+					flat: new NumberField({min: 0, integer: true}),
+					override: new NumberField({min: 0, integer: true})
 				}, {label: "BF.ArmorClass.Label"}),
-				death: new foundry.data.fields.SchemaField({
+				death: new SchemaField({
 					// Successes
 					// Failures
 					// Successes required override
 					// Failures required override
 					// Target threshold override
 				}),
-				hd: new foundry.data.fields.SchemaField({
-					d: new fields.MappingField(new foundry.data.fields.SchemaField({
-						spent: new foundry.data.fields.NumberField({min: 0, integer: true})
+				hd: new SchemaField({
+					d: new MappingField(new SchemaField({
+						spent: new NumberField({min: 0, integer: true})
 					}))
 					// Recovery percentage
 				}, {label: "BF.HitDie.Label[other]"}),
-				hp: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong"}),
-					temp: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong"}),
+				hp: new SchemaField({
+					value: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong"}),
+					temp: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong"}),
 					// Temp max
-					bonuses: new foundry.data.fields.SchemaField({
-						level: new fields.FormulaField({deterministic: true}),
-						overall: new fields.FormulaField({deterministic: true})
+					bonuses: new SchemaField({
+						level: new FormulaField({deterministic: true}),
+						overall: new FormulaField({deterministic: true})
 					})
 					// Multiplier
 				}, {label: "BF.HitPoint.Label[other]"}),
-				// Initiative?
-				luck: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.NumberField({min: 0, max: 5, integer: true})
+				luck: new SchemaField({
+					value: new NumberField({min: 0, max: 5, integer: true})
 				}, {label: "BF.Luck.Label"})
 			}),
-			biography: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField(),
-				age: new foundry.data.fields.StringField(),
-				height: new foundry.data.fields.StringField(),
-				weight: new foundry.data.fields.StringField(),
-				eyes: new foundry.data.fields.StringField(),
-				skin: new foundry.data.fields.StringField(),
-				hair: new foundry.data.fields.StringField()
+			biography: new SchemaField({
+				value: new HTMLField(),
+				age: new StringField(),
+				height: new StringField(),
+				weight: new StringField(),
+				eyes: new StringField(),
+				skin: new StringField(),
+				hair: new StringField()
 				// Motivation?
 				// Backstory?
 				// Allies & Organizations?
 			}),
-			modifiers: new fields.ModifierField(),
-			proficiencies: new foundry.data.fields.SchemaField({
-				armor: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+			modifiers: new ModifierField(),
+			proficiencies: new SchemaField({
+				armor: new SchemaField({
+					value: new SetField(new StringField()),
+					custom: new ArrayField(new StringField())
 				}),
-				languages: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+				languages: new SchemaField({
+					value: new SetField(new StringField()),
+					tags: new SetField(new StringField())
 				}),
-				skills: new fields.MappingField(new foundry.data.fields.SchemaField({
-					proficiency: new foundry.data.fields.SchemaField({
-						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 0, step: 0.5})
+				skills: new MappingField(new SchemaField({
+					proficiency: new SchemaField({
+						multiplier: new NumberField({min: 0, max: 2, initial: 0, step: 0.5})
 					})
 				}), {
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
-				tools: new fields.MappingField(new foundry.data.fields.SchemaField({
-					proficiency: new foundry.data.fields.SchemaField({
-						multiplier: new foundry.data.fields.NumberField({min: 0, max: 2, initial: 1, step: 0.5})
+				tools: new MappingField(new SchemaField({
+					proficiency: new SchemaField({
+						multiplier: new NumberField({min: 0, max: 2, initial: 1, step: 0.5})
 					})
 					// Default ability
 				}), {label: "BF.Tool.Label[other]"}),
-				weapons: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-					custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+				weapons: new SchemaField({
+					value: new SetField(new StringField()),
+					custom: new ArrayField(new StringField())
 				})
 			}),
-			progression: new foundry.data.fields.SchemaField({
-				abilities: new foundry.data.fields.SchemaField({
-					method: new foundry.data.fields.StringField(),
-					rolls: new foundry.data.fields.ArrayField(new fields.RollField({ nullable: true })),
-					assignments: new fields.MappingField(new foundry.data.fields.NumberField({min: 0, integer: true})),
-					bonuses: new fields.MappingField(new foundry.data.fields.NumberField({integer: true}))
+			progression: new SchemaField({
+				abilities: new SchemaField({
+					method: new StringField(),
+					rolls: new ArrayField(new RollField({ nullable: true })),
+					assignments: new MappingField(new NumberField({min: 0, integer: true})),
+					bonuses: new MappingField(new NumberField({integer: true}))
 				}),
 				// TODO: Currently falls back to being a plain object. This logic will need to be improved to ensure
 				// advancement value type data is properly loaded once advancements can be loaded.
-				advancement: new fields.AdvancementValueField(),
-				background: new fields.LocalDocumentField(foundry.documents.BaseItem),
-				heritage: new fields.LocalDocumentField(foundry.documents.BaseItem),
-				lineage: new fields.LocalDocumentField(foundry.documents.BaseItem),
-				levels: new fields.MappingField(new foundry.data.fields.SchemaField({
-					class: new fields.LocalDocumentField(foundry.documents.BaseItem),
-					time: new fields.TimeField()
+				advancement: new AdvancementValueField(),
+				background: new LocalDocumentField(foundry.documents.BaseItem),
+				heritage: new LocalDocumentField(foundry.documents.BaseItem),
+				lineage: new LocalDocumentField(foundry.documents.BaseItem),
+				levels: new MappingField(new SchemaField({
+					class: new LocalDocumentField(foundry.documents.BaseItem),
+					time: new TimeField()
 				}), {label: "BF.Level.Label[other]"}),
-				xp: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.NumberField({min: 0, integer: true}),
-					log: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-						amount: new foundry.data.fields.NumberField({nullable: false, initial: 0, min: 0, integer: true}),
-						time: new fields.TimeField(),
-						source: new foundry.data.fields.StringField()
+				xp: new SchemaField({
+					value: new NumberField({min: 0, integer: true}),
+					log: new ArrayField(new SchemaField({
+						amount: new NumberField({nullable: false, initial: 0, min: 0, integer: true}),
+						time: new TimeField(),
+						source: new StringField()
 					}))
 				})
 			}, {label: "BF.Progression.Label"}),
 			// Rolls (contains bonuses, minimums, ability overrides, etc.)?
 			// Spellcasting
-			traits: new foundry.data.fields.SchemaField({
-				movement: new foundry.data.fields.SchemaField({
-					base: new foundry.data.fields.NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
-					types: new fields.MappingField(new fields.FormulaField({deterministic: true}), {
+			traits: new SchemaField({
+				movement: new SchemaField({
+					base: new NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
+					types: new MappingField(new FormulaField({deterministic: true}), {
 						initial: { walk: "@base" }
 					}),
-					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+					tags: new SetField(new StringField())
 					// Units?
 					// Multiplier
 				}, {label: "BF.Speed.Label"}),
-				senses: new foundry.data.fields.SchemaField({
-					types: new fields.MappingField(new fields.FormulaField({deterministic: true})),
-					tags: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+				senses: new SchemaField({
+					types: new MappingField(new FormulaField({deterministic: true})),
+					tags: new SetField(new StringField())
 				}),
-				size: new foundry.data.fields.StringField({label: "BF.Size.Label"}),
-				type: new foundry.data.fields.SchemaField({
-					value: new foundry.data.fields.StringField(),
-					tags: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+				size: new StringField({label: "BF.Size.Label"}),
+				type: new SchemaField({
+					value: new StringField(),
+					tags: new ArrayField(new StringField())
 				}),
-				condition: new foundry.data.fields.SchemaField({
-					immunities: new foundry.data.fields.SchemaField({
-						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+				condition: new SchemaField({
+					immunities: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField())
 					})
 				}),
-				damage: new foundry.data.fields.SchemaField({
-					resistances: new foundry.data.fields.SchemaField({
-						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
-						bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+				damage: new SchemaField({
+					resistances: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField()),
+						bypasses: new SetField(new StringField())
 					}),
-					immunities: new foundry.data.fields.SchemaField({
-						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField()),
-						bypasses: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+					immunities: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField()),
+						bypasses: new SetField(new StringField())
 					}),
-					vulnerabilities: new foundry.data.fields.SchemaField({
-						value: new foundry.data.fields.SetField(new foundry.data.fields.StringField()),
-						custom: new foundry.data.fields.ArrayField(new foundry.data.fields.StringField())
+					vulnerabilities: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField())
 					})
 				})
 			}, {label: "BF.Trait.Label[other]"})

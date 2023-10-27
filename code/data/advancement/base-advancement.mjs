@@ -1,6 +1,8 @@
 import IdentifierField from "../fields/identifier-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 
+const { DocumentIdField, FilePathField, NumberField, ObjectField, StringField } = foundry.data.fields;
+
 /**
  * Base data model for advancement.
  */
@@ -19,8 +21,8 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
-			_id: new foundry.data.fields.DocumentIdField({initial: () => foundry.utils.randomID()}),
-			type: new foundry.data.fields.StringField({
+			_id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+			type: new StringField({
 				required: true, readOnly: true, initial: this.typeName, validate: v => v === this.typeName,
 				validationError: `must be the same as the Advancement type name ${this.typeName}`
 			}),
@@ -28,12 +30,12 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 			configuration: new TypeField({
 				modelLookup: type => this.metadata.dataModels?.configuration ?? null
 			}, {required: true}),
-			level: new foundry.data.fields.NumberField({
+			level: new NumberField({
 				integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0
 			}),
-			title: new foundry.data.fields.StringField({initial: undefined}),
-			icon: new foundry.data.fields.FilePathField({initial: undefined, categories: ["IMAGE"]}),
-			flags: new foundry.data.fields.ObjectField()
+			title: new StringField({initial: undefined}),
+			icon: new FilePathField({initial: undefined, categories: ["IMAGE"]}),
+			flags: new ObjectField()
 		};
 	}
 }

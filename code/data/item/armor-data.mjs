@@ -3,6 +3,8 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
+const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Armor items.
  * @mixes ProficiencyTemplate
@@ -23,28 +25,28 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			type: new foundry.data.fields.SchemaField({
-				category: new foundry.data.fields.StringField({label: "BF.Equipment.Category.Label"}),
-				base: new foundry.data.fields.StringField({label: "BF.Equipment.Base.Label"})
+			type: new SchemaField({
+				category: new StringField({label: "BF.Equipment.Category.Label"}),
+				base: new StringField({label: "BF.Equipment.Base.Label"})
 			}),
-			properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			properties: new SetField(new StringField(), {
 				label: "BF.Property.Label[other]"
 			}),
-			armor: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.Armor.Value.Label"}),
-				requiredStrength: new foundry.data.fields.NumberField({
+			armor: new SchemaField({
+				value: new NumberField({min: 0, integer: true, label: "BF.Armor.Value.Label"}),
+				requiredStrength: new NumberField({
 					min: 0, integer: true, label: "BF.Armor.RequiredStrength.Label"
 				})
 			}),
-			modifier: new foundry.data.fields.SchemaField({
-				min: new foundry.data.fields.NumberField({
+			modifier: new SchemaField({
+				min: new NumberField({
 					required: false, initial: undefined, integer: true, label: "BF.Armor.Modifier.Minimum.Label"
 				}),
-				max: new foundry.data.fields.NumberField({
+				max: new NumberField({
 					required: false, initial: undefined, integer: true, label: "BF.Armor.Modifier.Maximum.Label"
 				})
 			})

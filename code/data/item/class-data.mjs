@@ -2,6 +2,8 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
 
+const { ColorField } = foundry.data.fields;
+
 /**
  * Data definition for Class items.
  */
@@ -20,7 +22,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			color: new foundry.data.fields.ColorField()
+			color: new ColorField()
 		});
 	}
 

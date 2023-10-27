@@ -1,4 +1,6 @@
-import MappingField from "../fields/mapping-field.mjs";
+import { MappingField } from "../fields/_module.mjs";
+
+const { JSONField, NumberField } = foundry.data.fields;
 
 /**
  * Configuration data for the Hit Points advancement.
@@ -8,7 +10,7 @@ import MappingField from "../fields/mapping-field.mjs";
 export class HitPointsConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			denomination: new foundry.data.fields.NumberField({initial: 4, label: "BF.HitDice.Label[one]"})
+			denomination: new NumberField({initial: 4, label: "BF.HitDice.Label[one]"})
 		};
 	}
 }
@@ -25,7 +27,7 @@ export class HitPointsConfigurationData extends foundry.abstract.DataModel {
 export class HitPointsValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			granted: new MappingField(new foundry.data.fields.JSONField(), {required: false, initial: undefined})
+			granted: new MappingField(new JSONField(), {required: false, initial: undefined})
 		};
 	}
 }

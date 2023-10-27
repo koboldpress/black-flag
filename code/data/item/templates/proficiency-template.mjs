@@ -1,13 +1,15 @@
 import { Trait } from "../../../utils/_module.mjs";
 
+const { BooleanField, SchemaField } = foundry.data.fields;
+
 /**
  * Data definition template for items with proficiency.
  */
 export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			overrides: new foundry.data.fields.SchemaField({
-				proficiency: new foundry.data.fields.BooleanField({nullable: true, initial: null})
+			overrides: new SchemaField({
+				proficiency: new BooleanField({nullable: true, initial: null})
 			})
 		};
 	}

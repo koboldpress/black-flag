@@ -1,27 +1,29 @@
 import { numberFormat } from "../../../utils/_module.mjs";
 
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Data definition template for Physical items.
  */
 export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			price: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
+			price: new SchemaField({
+				value: new NumberField({
 					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Price.Label"
 				}),
-				denomination: new foundry.data.fields.StringField({
+				denomination: new StringField({
 					blank: false, initial: "gp", label: "BF.Currency.Denomination.Label"
 				})
 			}, {label: "BF.Price.Label"}),
-			quantity: new foundry.data.fields.NumberField({
+			quantity: new NumberField({
 				nullable: false, initial: 1, min: 0, integer: true, label: "BF.Quantity.Label"
 			}),
-			weight: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.NumberField({
+			weight: new SchemaField({
+				value: new NumberField({
 					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Weight.Label"
 				}),
-				units: new foundry.data.fields.StringField({initial: "pound"})
+				units: new StringField({initial: "pound"})
 			}, {label: "BF.Weight.Label"})
 		};
 	}

@@ -1,6 +1,8 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
+const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Ammunition items.
  * @mixes PhysicalTemplate
@@ -20,12 +22,12 @@ export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			type: new foundry.data.fields.SchemaField({
-				category: new foundry.data.fields.StringField({label: "BF.Equipment.Category.Label"})
+			type: new SchemaField({
+				category: new StringField({label: "BF.Equipment.Category.Label"})
 			})
 			// TODO: Properties (magical?, adamantine?, silvered?)
 			// TODO: Damage bonuses

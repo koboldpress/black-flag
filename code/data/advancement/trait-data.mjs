@@ -1,23 +1,25 @@
+const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Configuration data for the Trait advancement.
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			hint: new foundry.data.fields.StringField({
+			hint: new StringField({
 				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
 			}),
-			mode: new foundry.data.fields.StringField({initial: "default"}),
-			grants: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			mode: new StringField({initial: "default"}),
+			grants: new SetField(new StringField(), {
 				label: "BF.Advancement.Trait.Guaranteed.Label", hint: "BF.Advancement.Trait.Guaranteed.Hint"
 			}),
-			choices: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
-				count: new foundry.data.fields.NumberField({
+			choices: new ArrayField(new SchemaField({
+				count: new NumberField({
 					initial: 1, positive: true, integer: true, label: "BF.Advancement.Trait.Count.Label"
 				}),
-				pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField())
+				pool: new SetField(new StringField())
 			}), {label: "BF.Advancement.Trait.Choices.Label", hint: "BF.Advancement.Trait.Choices.Hint"}),
-			choiceMode: new foundry.data.fields.StringField({
+			choiceMode: new StringField({
 				initial: "inclusive", label: "BF.Advancement.Trait.Choice.Mode.Label",
 				hint: "BF.Advancement.Trait.Choice.Mode.Hint"
 			})
@@ -31,7 +33,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
 export class TraitValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			selected: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			selected: new SetField(new StringField(), {
 				required: false, initial: undefined
 			})
 		};

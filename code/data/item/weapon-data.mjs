@@ -2,6 +2,8 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
+const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
 /**
  * Data definition for Weapon items.
  * @mixes ProficiencyTemplate
@@ -22,34 +24,34 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new foundry.data.fields.StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			type: new foundry.data.fields.SchemaField({
-				value: new foundry.data.fields.StringField({initial: "melee"}),
-				category: new foundry.data.fields.StringField({label: "BF.Equipment.Category.Label"}),
-				base: new foundry.data.fields.StringField({label: "BF.Equipment.Base.Label"})
+			type: new SchemaField({
+				value: new StringField({initial: "melee"}),
+				category: new StringField({label: "BF.Equipment.Category.Label"}),
+				base: new StringField({label: "BF.Equipment.Base.Label"})
 			}),
-			options: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			options: new SetField(new StringField(), {
 				label: "BF.Weapon.Option.Label[other]"
 			}),
-			properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
+			properties: new SetField(new StringField(), {
 				label: "BF.Property.Label[other]"
 			}),
-			ammunition: new foundry.data.fields.SchemaField({
-				type: new foundry.data.fields.StringField({label: "BF.Ammunition.Type.Label"})
+			ammunition: new SchemaField({
+				type: new StringField({label: "BF.Ammunition.Type.Label"})
 			}, {label: "BF.Item.Type.Ammunition[one]"}),
-			damage: new foundry.data.fields.SchemaField({
-				number: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.Die.Number.Label"}),
-				denomination: new foundry.data.fields.NumberField({min: 1, integer: true, label: "BF.Die.Denomination.Label"}),
-				type: new foundry.data.fields.StringField({label: "BF.Damage.Type.Label"})
+			damage: new SchemaField({
+				number: new NumberField({min: 0, integer: true, label: "BF.Die.Number.Label"}),
+				denomination: new NumberField({min: 1, integer: true, label: "BF.Die.Denomination.Label"}),
+				type: new StringField({label: "BF.Damage.Type.Label"})
 			}, {label: "BF.Damage.Label"}),
-			range: new foundry.data.fields.SchemaField({
-				short: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
-				long: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),
-				reach: new foundry.data.fields.NumberField({min: 0, step: 0.1, label: "BF.Reach.Label"}),
-				units: new foundry.data.fields.StringField()
+			range: new SchemaField({
+				short: new NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
+				long: new NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),
+				reach: new NumberField({min: 0, step: 0.1, label: "BF.Reach.Label"}),
+				units: new StringField()
 			}, {label: "BF.Range.Label"})
 
 			// Attack ability override
