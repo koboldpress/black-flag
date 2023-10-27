@@ -6,6 +6,7 @@ export {default as IdentifierField} from "./identifier-field.mjs";
 export {default as LocalDocumentField} from "./local-document-field.mjs";
 export {default as MappingField} from "./mapping-field.mjs";
 export {default as ModifierField} from "./modifier-field.mjs";
+export {default as ProficiencyField} from "./proficiency-field.mjs";
 export {default as RollField} from "./roll-field.mjs";
 export {default as TimeField} from "./time-field.mjs";
 export {default as TypeField} from "./type-field.mjs";

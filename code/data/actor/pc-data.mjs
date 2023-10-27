@@ -3,7 +3,8 @@ import Proficiency from "../../documents/proficiency.mjs";
 import { filter, simplifyBonus } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import {
-	AdvancementValueField, FormulaField, LocalDocumentField, MappingField, ModifierField, RollField, TimeField
+	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
+	ModifierField, ProficiencyField, RollField, TimeField
 } from "../fields/_module.mjs";
 
 const { ArrayField, BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -28,7 +29,7 @@ export default class PCData extends ActorDataModel {
 				base: new NumberField({min: 0, integer: true}),
 				max: new NumberField({min: 0, initial: 20, integer: true}),
 				save: new SchemaField({
-					proficiency: new SchemaField({ multiplier: new NumberField({min: 0, max: 2, initial: 0, step: 0.5}) })
+					proficiency: new ProficiencyField({ rounding: false })
 				})
 			}), {
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
@@ -70,6 +71,10 @@ export default class PCData extends ActorDataModel {
 					})
 					// Multiplier
 				}, {label: "BF.HitPoint.Label[other]"}),
+				initiative: new SchemaField({
+					ability: new StringField(),
+					proficiency: new ProficiencyField()
+				}),
 				luck: new SchemaField({
 					value: new NumberField({min: 0, max: 5, integer: true})
 				}, {label: "BF.Luck.Label"})
@@ -97,16 +102,12 @@ export default class PCData extends ActorDataModel {
 					tags: new SetField(new StringField())
 				}),
 				skills: new MappingField(new SchemaField({
-					proficiency: new SchemaField({
-						multiplier: new NumberField({min: 0, max: 2, initial: 0, step: 0.5})
-					})
+					proficiency: new ProficiencyField({ rounding: false })
 				}), {
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
 				tools: new MappingField(new SchemaField({
-					proficiency: new SchemaField({
-						multiplier: new NumberField({min: 0, max: 2, initial: 1, step: 0.5})
-					})
+					proficiency: new ProficiencyField({ rounding: false })
 					// Default ability
 				}), {label: "BF.Tool.Label[other]"}),
 				weapons: new SchemaField({
@@ -400,11 +401,26 @@ export default class PCData extends ActorDataModel {
 
 	prepareDerivedInitiative() {
 		const init = this.attributes.initiative ??= {};
-		init.ability = CONFIG.BlackFlag.defaultAbilities.initiative;
+		init.ability ??= CONFIG.BlackFlag.defaultAbilities.initiative;
 		const ability = this.abilities[init.ability];
 
-		init.proficiency = new Proficiency(this.attributes.prof, 0);
-		init.mod = (ability?.mod ?? 0) + init.proficiency.flat;
+		init.proficiency = new Proficiency(this.attributes.prof, init.proficiency.multiplier, init.proficiency.rounding);
+
+		const initiativeData = [
+			{ type: "ability-check", ability: init.ability, proficiency: init.proficiency.multiplier },
+			{ type: "initiative" }
+		];
+		init.modifiers = {
+			_data: initiativeData,
+			bonus: this.getModifiers(initiativeData),
+			min: this.getModifiers(initiativeData, "min"),
+			note: this.getModifiers(initiativeData, "note")
+		};
+		init.bonus = this.buildBonus(init.modifiers.bonus, {
+			deterministic: true, rollData: this.parent.getRollData({deterministic: true})
+		});
+
+		init.mod = (ability?.mod ?? 0) + init.proficiency.flat + init.bonus;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
