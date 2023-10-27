@@ -5,6 +5,7 @@ export {default as PCSheet} from "./pc-sheet.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
 export {default as BaseConfig} from "./config/base-config.mjs";
+export {default as InitiativeConfig} from "./config/initiative-config.mjs";
 export {default as SkillConfig} from "./config/skill-config.mjs";
 
 export {default as BaseRestDialog} from "./rest/base-rest-dialog.mjs";

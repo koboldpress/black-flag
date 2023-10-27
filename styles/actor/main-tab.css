@@ -82,6 +82,7 @@
 				grid-column: 1 / -1;
 				grid-row: 1 / span 2;
 				display: flex;
+				flex-direction: row;
 				flex-wrap: wrap;
 				gap: 3rem 0;
 				justify-content: space-evenly;
@@ -425,8 +426,7 @@
 			.luck {
 				grid-column: 7 / span 3;
 				grid-row: 3;
-				display: flex;
-				gap: 0.5rem;
+				flex-direction: row;
 				align-items: center;
 				justify-content: space-between;
 			}
@@ -448,7 +448,7 @@
 				grid-column: 7 / span 3;
 				grid-row: 4;
 
-				display: flex;
+				flex-direction: row;
 				gap: 0.25rem;
 
 				button {
@@ -462,6 +462,7 @@
 				grid-column: 1 / 4;
 				grid-row: 3 / 10;
 				padding: 0.35rem;
+				gap: 0;
 
 				> .skill {
 					display: flex;

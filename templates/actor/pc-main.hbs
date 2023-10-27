@@ -148,7 +148,14 @@
 		</div>
 	</fieldset>
 	<fieldset class="initiative">
-		<legend>{{localize "BF.Initiative.Label"}}</legend>
+		<legend>
+			{{localize "BF.Initiative.Label"}}
+			{{#if editingMode}}
+				<a data-action="config" data-type="initiative">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
+		</legend>
 		<div class="initiative-box">
 			<span class="value">{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
 			<button type="button" data-action="roll" data-sub-action="initiative">

@@ -401,14 +401,18 @@ export default class PCData extends ActorDataModel {
 
 	prepareDerivedInitiative() {
 		const init = this.attributes.initiative ??= {};
-		init.ability ??= CONFIG.BlackFlag.defaultAbilities.initiative;
+		init.ability ||= CONFIG.BlackFlag.defaultAbilities.initiative;
 		const ability = this.abilities[init.ability];
 
-		init.proficiency = new Proficiency(this.attributes.prof, init.proficiency.multiplier, init.proficiency.rounding);
+		init.proficiency = new Proficiency(
+			this.attributes.proficiency,
+			init.proficiency.multiplier,
+			init.proficiency.rounding
+		);
 
 		const initiativeData = [
 			{ type: "ability-check", ability: init.ability, proficiency: init.proficiency.multiplier },
-			{ type: "initiative" }
+			{ type: "initiative", proficiency: init.proficiency.multiplier }
 		];
 		init.modifiers = {
 			_data: initiativeData,

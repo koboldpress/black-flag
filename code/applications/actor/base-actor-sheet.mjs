@@ -2,6 +2,7 @@ import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import log from "../../utils/logging.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
+import InitiativeConfig from "./config/initiative-config.mjs";
 import SkillConfig from "./config/skill-config.mjs";
 
 /**
@@ -200,6 +201,7 @@ export default class BaseActorSheet extends ActorSheet {
 			case "config":
 				switch (properties.type) {
 					case "ability": return new AbilityConfig(properties.key, this.actor).render(true);
+					case "initiative": return new InitiativeConfig(this.actor).render(true);
 					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
 				}
 			case "effect":

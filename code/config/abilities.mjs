@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for abilities.
  *
@@ -56,6 +58,7 @@ export const abilities = {
 		}
 	}
 };
+localizeConfig(abilities, { labelKeyPath: "labels.full" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
