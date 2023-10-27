@@ -455,6 +455,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				return this.rollAbilitySave(config, message, dialog);
 			case "hit-die":
 				return this.rollHitDie(config, message, dialog);
+			case "initiative":
+				return this.configureInitiativeRoll(config, message, dialog);
 			case "skill":
 				return this.rollSkill(config, message, dialog);
 			default:
@@ -792,8 +794,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		let rolls;
 		if ( dialogConfig.configure ) {
+			let DialogClass = dialogConfig.applicationClass ?? Roll.DefaultConfigurationDialog;
 			try {
-				rolls = await Roll.ConfigurationDialog.configure(rollConfig, dialogConfig);
+				rolls = await DialogClass.configure([rollConfig], dialogConfig);
 			} catch(err) {
 				if ( !err ) return;
 				throw err;

@@ -119,7 +119,7 @@
 				{{/if}}
 				<div class="separator"></div>
 				<span class="max">{{blackFlag-number data.max}}</span>
-				<button data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
+				<button type="button" data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
 					{{disabled (eq data.available 0)}}>
 					<svg class="die-icon blue"><use xlink:href="#blackFlag-d{{denomination}}"></use></svg>
 				</button>
@@ -129,7 +129,7 @@
 	<fieldset class="resting">
 		<legend>{{localize "BF.Rest.Label"}}</legend>
 		{{#each CONFIG.rest.types as |data key|}}
-			<button data-action="rest" data-type="{{key}}">
+			<button type="button" data-action="rest" data-type="{{key}}">
 				{{localize data.label}}
 			</button>
 		{{/each}}
@@ -149,7 +149,12 @@
 	</fieldset>
 	<fieldset class="initiative">
 		<legend>{{localize "BF.Initiative.Label"}}</legend>
-		<span>{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
+		<div class="initiative-box">
+			<span class="value">{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
+			<button type="button" data-action="roll" data-sub-action="initiative">
+				<svg class="die-icon blue"><use xlink:href="#blackFlag-d20"></use></svg>
+			</button>
+		</div>
 	</fieldset>
 	<fieldset class="movement">
 		<legend>{{localize "BF.Speed.Label"}}</legend>
