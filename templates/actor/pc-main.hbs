@@ -15,13 +15,13 @@
 					<span class="value">
 						<label>
 							<span class="label">{{localize ability.labels.full}}</span>
-							<span class="score">{{ability.value}}</span>
+							<span class="score">{{#if ability.valid}}{{ability.value}}{{else}}&mdash;{{/if}}</span>
 						</label>
 					</span>
 				</div>
 				<div class="ability-mod">
 					<a class="value" data-action="roll" data-sub-action="ability-check" data-ability="{{key}}">
-						{{blackFlag-number ability.check.mod sign=true}}
+						{{#if ability.valid}}{{blackFlag-number ability.check.mod sign=true}}{{else}}&mdash;{{/if}}
 					</a>
 				</div>
 				<div class="ability-save">
@@ -38,7 +38,9 @@
 							</defs>
 							<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.LabelShort[one]"}}</textPath></text>
 						</svg>
-						<span class="mod">{{blackFlag-number ability.save.mod sign=true}}</span>
+						<span class="mod">
+							{{#if ability.valid}}{{blackFlag-number ability.save.mod sign=true}}{{else}}&mdash;{{/if}}
+						</span>
 					</a>
 				</div>
 			</div>
@@ -69,9 +71,9 @@
 					<span class="ability">
 						{{localize (lookup (lookup (lookup @root.system.abilities skill.ability) "labels") "abbreviation")}}
 					</span>
-					<span class="mod">{{blackFlag-number skill.mod}}</span>
+					<span class="mod">{{#if skill.valid}}{{blackFlag-number skill.mod}}{{else}}&mdash;{{/if}}</span>
 				</a>
-				<span class="passive">({{skill.passive}})</span>
+				<span class="passive">{{#if skill.valid}}({{skill.passive}}){{/if}}</span>
 			</div>
 		{{/each}}
 	</fieldset>
@@ -137,6 +139,11 @@
 	<fieldset class="armor-class">
 		<legend>
 			{{localize "BF.ArmorClass.Label"}}
+			{{#if editingMode}}
+				<a data-action="config" data-type="armor-class">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
 			{{blackFlag-notificationBadge actor category="armor-class"}}
 		</legend>
 		<div class="ac-shield">

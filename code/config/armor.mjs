@@ -92,19 +92,19 @@ localizeConfig(armor.heavy.children);
  */
 export const armorFormulas = {
 	unarmored: {
-		label: "BF.Armor.Formula.Unarmored",
+		label: "BF.ArmorClass.Formula.Unarmored",
 		formula: "10 + @abilities.dexterity.mod",
 		armored: false,
 		shielded: null
 	},
 	armored: {
-		label: "BF.Armor.Formula.Armored",
+		label: "BF.ArmorClass.Formula.Armored",
 		formula: "@attributes.ac.armor + @attributes.ac.clamped.dexterity",
 		armored: true,
 		shielded: null
 	},
 	natural: {
-		label: "BF.Armor.Formula.Natural",
+		label: "BF.ArmorClass.Formula.Natural",
 		formula: "@attributes.ac.flat",
 		armored: null,
 		shielded: null

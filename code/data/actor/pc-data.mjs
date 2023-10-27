@@ -38,15 +38,19 @@ export default class PCData extends ActorDataModel {
 				ac: new SchemaField({
 					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored"]
-					}),
+					}, { label: "BF.ArmorClass.Formula.DefaultLabel[other]" }),
 					formulas: new ArrayField(new SchemaField({
 						label: new StringField(),
 						formula: new FormulaField({deterministic: true}),
 						armored: new BooleanField({nullable: true, initial: null}),
 						shielded: new BooleanField({nullable: true, initial: null})
-					})),
-					flat: new NumberField({min: 0, integer: true}),
-					override: new NumberField({min: 0, integer: true})
+					}), { label: "BF.ArmorClass.Formula.Label[other]" }),
+					flat: new NumberField({
+						min: 0, integer: true, label: "BF.ArmorClass.Flat.Label", hint: "BF.ArmorClass.Flat.Hint"
+					}),
+					override: new NumberField({
+						min: 0, integer: true, label: "BF.ArmorClass.Override.Label", hint: "BF.ArmorClass.Override.Hint"
+					})
 				}, {label: "BF.ArmorClass.Label"}),
 				death: new SchemaField({
 					// Successes
@@ -284,7 +288,8 @@ export default class PCData extends ActorDataModel {
 		const rollData = this.parent.getRollData({ deterministic: true });
 		for ( const [key, ability] of Object.entries(this.abilities) ) {
 			const config = CONFIG.BlackFlag.abilities[key];
-			ability.mod = ability.value ? Math.floor((ability.value - 10) / 2) : null;
+			ability.valid = !!ability.value;
+			ability.mod = ability.valid ? Math.floor((ability.value - 10) / 2) : 0;
 
 			ability.check.proficiency = new Proficiency(
 				this.attributes.proficiency, 0, "down"
@@ -334,6 +339,7 @@ export default class PCData extends ActorDataModel {
 		}, {});
 
 		ac.armor = ac.equippedArmor?.system.armor.value ?? 0;
+		ac.flat ??= 10;
 
 		const rollData = this.parent.getRollData({deterministic: true});
 		rollData.attributes.ac = ac;
@@ -359,12 +365,12 @@ export default class PCData extends ActorDataModel {
 			} catch(error) {
 				this.parent.notifications.set(`ac-formula-error-${index}`, {
 					level: "error", category: "armor-class", section: "main",
-					message: game.i18n.format("BF.Armor.Formula.Error", {formula: config.formula, error: error.message})
+					message: game.i18n.format("BF.ArmorClass.Formula.Error", {formula: config.formula, error: error.message})
 				});
 			}
 		}
 		if ( !Number.isFinite(ac.base) ) {
-			ac.base = 10;
+			ac.base = ac.flat;
 			ac.currentFormula = null;
 		}
 
@@ -495,6 +501,7 @@ export default class PCData extends ActorDataModel {
 			skill.bonus = this.buildBonus(skill.modifiers.check, { deterministic: true, rollData });
 
 			const ability = this.abilities[skill.ability];
+			skill.valid = ability.valid;
 			skill.mod = (ability?.mod ?? 0) + skill.bonus + skill.proficiency.flat;
 			skill.passive = 10 + skill.mod + this.buildBonus(skill.modifiers.passive, { deterministic: true, rollData });
 
@@ -704,11 +711,12 @@ export default class PCData extends ActorDataModel {
 	 * Update a modifier.
 	 * @param {number} index
 	 * @param {object} updates
+	 * @param {DocumentModificationContext} options
 	 */
-	async updateModifier(index, updates) {
+	async updateModifier(index, updates, options) {
 		const modifierCollection = this.toObject().modifiers;
 		foundry.utils.mergeObject(modifierCollection[index], updates);
-		await this.parent.update({"system.modifiers": modifierCollection});
+		await this.parent.update({"system.modifiers": modifierCollection}, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

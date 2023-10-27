@@ -17,10 +17,14 @@
 
 	label > :is(input, select) {
 		flex-grow: 1;
+		width: unset;
 	}
 
 	.modifier-list {
 		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
 			list-style: none;
 			margin: 0;
 			margin-block-end: 0.5rem;

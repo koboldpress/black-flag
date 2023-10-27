@@ -140,7 +140,7 @@ export default class BaseConfig extends DocumentSheet {
 					if ( updates.requireProficiency ) updates.filter.push({k: "proficiency", v: 1, o: "gte"});
 					else updates.filter.findSplice(f => f.k === "proficiency");
 				}
-				await this.document.system.updateModifier(Number(index), updates);
+				await this.document.system.updateModifier(Number(index), updates, { render: false });
 			}
 			delete data.modifier;
 			formData = foundry.utils.flattenObject(data);

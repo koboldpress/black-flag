@@ -9,7 +9,6 @@ import * as documents from "./documents.mjs";
 import * as items from "./items.mjs";
 import * as modifiers from "./modifiers.mjs";
 import * as notifications from "./notifications.mjs";
-import * as proficiency from "./proficiency.mjs";
 import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
 import * as tools from "./tools.mjs";
@@ -45,7 +44,6 @@ export default {
 	...items,
 	...modifiers,
 	...notifications,
-	...proficiency,
 	registration,
 	...skills,
 	...tools,
