@@ -72,9 +72,9 @@ export default class PCData extends ActorDataModel {
 					// Multiplier
 				}, {label: "BF.HitPoint.Label[other]"}),
 				initiative: new SchemaField({
-					ability: new StringField(),
+					ability: new StringField({label: "BF.Initiative.Ability.Label"}),
 					proficiency: new ProficiencyField()
-				}),
+				}, {label: "BF.Initiative.Label"}),
 				luck: new SchemaField({
 					value: new NumberField({min: 0, max: 5, integer: true})
 				}, {label: "BF.Luck.Label"})

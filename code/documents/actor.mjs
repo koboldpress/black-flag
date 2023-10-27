@@ -731,6 +731,114 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Construct an initiative roll.
+	 * @param {ChallengeRollOptions} [options] - Options for the roll.
+	 * @returns {ChallengeRollConfiguration}
+	 */
+	getInitiativeRollConfig(options={}) {
+		const init = this.system.attributes?.initiative ?? {};
+		const abilityKey = init.ability ?? CONFIG.BlackFlag.defaultAbilities.initiative;
+		const ability = this.system.abilities?.[abilityKey] ?? {};
+
+		const { parts, data } = buildRoll({
+			mod: ability.mod,
+			prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
+			bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
+			tiebreaker: (game.settings.get(game.system.id, "initiativeTiebreaker") && ability) ? ability.value / 100 : null
+		}, this.getRollData());
+
+		const rollOptions = foundry.utils.mergeObject({
+			minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
+		}, options);
+
+		const rollConfig = { data, parts, options: rollOptions };
+
+		/**
+		 * A hook event that fires when initiative roll configuration is being prepared.
+		 * @function blackFlag.initiativeConfig
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the initiative is being configured.
+		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 */
+		Hooks.callAll("blackFlag.initiativeConfig", this, rollConfig);
+
+		return rollConfig;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Present the initiative roll configuration dialog and then roll initiative.
+	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {BaseMessageConfiguration} message - Configuration data that guides roll message creation (ignored).
+	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @returns {Promise<Combat|void>}
+	 */
+	async configureInitiativeRoll(config={}, message={}, dialog={}) {
+		const init = this.system.attributes?.initiative ?? {};
+		const rollConfig = foundry.utils.mergeObject(this.getInitiativeRollConfig(config.options), config);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			options: {
+				rollNotes: this.system.getModifiers(init.modifiers?._data, "note"),
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", {
+					type: game.i18n.localize("BF.Initiative.Label")
+				})
+			}
+		}, dialog);
+
+		const Roll = CONFIG.Dice.ChallengeRoll;
+		Roll.applyKeybindings(rollConfig, dialogConfig);
+
+		let rolls;
+		if ( dialogConfig.configure ) {
+			try {
+				rolls = await Roll.ConfigurationDialog.configure(rollConfig, dialogConfig);
+			} catch(err) {
+				if ( !err ) return;
+				throw err;
+			}
+		} else {
+			rolls = Roll.create(rollConfig);
+		}
+
+		this._cachedInitiativeRolls = rolls;
+		await this.rollInitiative({createCombatants: true});
+		delete this._cachedInitiativeRolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async rollInitiative(options={}) {
+		/**
+		 * A hook event that fires before initiative is rolled for an Actor.
+		 * @function blackFlag.preRollInitiative
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the initiative is being rolled.
+		 * @param {ChallengeRoll[]} roll - The initiative rolls.
+		 * @returns {boolean} - Explicitly return `false` to prevent initiative from being rolled.
+		 */
+		if ( Hooks.call("blackFlag.preRollInitiative", this, this._cachedInitiativeRolls) === false ) return;
+
+		const combat = await super.rollInitiative(options);
+		const combatants = this.isToken ? this.getActiveTokens(false, true)
+			.filter(t => game.combat.getCombatantByToken(t.id)) : [game.combat.getCombatantByActor(this.id)];
+
+		/**
+		 * A hook event that fires after an Actor has rolled for initiative.
+		 * @function blackFlag.rollInitiative
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - The Actor that has rolled initiative.
+		 * @param {CombatantEH[]} combatants - The associated Combatants in the Combat.
+		 */
+		Hooks.callAll("blackFlag.rollInitiative", this, combatants);
+
+		return combat;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Configuration information for a skill roll.
 	 *
 	 * @typedef {ChallengeRollConfiguration} SkillRollConfiguration

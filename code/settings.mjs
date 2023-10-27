@@ -74,6 +74,15 @@ export function registerSettings() {
 		}
 	});
 
+	game.settings.register(game.system.id, "initiativeTiebreaker", {
+		name: "BF.Settings.InitiativeTiebreaker.Label",
+		hint: "BF.Settings.InitiativeTiebreaker.Hint",
+		scope: "world",
+		config: true,
+		default: false,
+		type: Boolean
+	});
+
 	game.settings.register(game.system.id, "abilitySelectionManual", {
 		name: "BF.Settings.AbilitySelectionManual.Label",
 		hint: "BF.Settings.AbilitySelectionManual.Hint",
