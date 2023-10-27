@@ -29,6 +29,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	prepareData() {
 		this.notifications = new NotificationsCollection();
 		super.prepareData();
+		this.items.forEach(i => i.system.prepareFinalData?.());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -514,7 +515,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
-				rollNotes: ability.check.modifiers.notes,
+				rollNotes: this.system.getModifiers(ability.check.modifiers._data, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		}, dialog);
@@ -592,7 +593,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
-				rollNotes: ability.save.modifiers.notes,
+				rollNotes: this.system.getModifiers(ability.save.modifiers._data, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 			}
 		}, dialog);

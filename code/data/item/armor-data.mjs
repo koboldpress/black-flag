@@ -105,9 +105,9 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 			if ( ac[target] === this.parent ) return;
 			this.parent.actor.notifications.set(`armor-${this.parent.id}-equipped`, {
 				level: "warn", category: "armor-class", section: "inventory", document: this.parent.id,
-				message: game.i18n.format("BF.Armor.Warning.TooMany", {
-					type: game.i18n.localize(`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`)
-				})
+				message: game.i18n.format("BF.Armor.Notification.TooMany", { type: game.i18n.localize(
+					`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`
+				).toLowerCase() })
 			});
 			return;
 		}
@@ -117,8 +117,6 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 			configurable: true,
 			enumerable: false
 		});
-
-		// TODO: Add roll notes if wearing armor you aren't proficient in
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -128,6 +126,27 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 		if ( !armorConfig ) return;
 		this.modifier.min ??= armorConfig.min;
 		this.modifier.max ??= armorConfig.max;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareFinalProficiencyWarnings() {
+		if ( this.equipped && (this.proficient === false) ) {
+			const message = game.i18n.format("BF.Armor.Notification.NotProficient", { type: game.i18n.localize(
+				`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`
+			).toLowerCase() });
+			this.parent.actor.notifications.set(`armor-${this.parent.id}-proficiency`, {
+				label: "info", document: this.parent.id, message
+			});
+			this.parent.actor.system.modifiers.push({
+				type: "note", filter: [{ k: "type", v: "ability-check" }, {
+					o: "OR", v: [{ k: "ability", v: "strength" }, { k: "ability", v: "dexterity" }]
+				}], note: {
+					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
+					text: game.i18n.format("BF.Armor.Notification.NotProficientNote", { name: this.parent.name })
+				}
+			});
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -293,6 +293,7 @@ export default class PCData extends ActorDataModel {
 
 			const checkData = { type: "ability-check", ability: key, proficiency: ability.check.proficiency.multiplier };
 			ability.check.modifiers = {
+				_data: checkData,
 				bonus: this.getModifiers(checkData),
 				minimum: this.getModifiers(checkData, "min"),
 				notes: this.getModifiers(checkData, "note")
@@ -300,6 +301,7 @@ export default class PCData extends ActorDataModel {
 			ability.check.bonus = this.buildBonus(ability.check.modifiers.bonus, { deterministic: true, rollData });
 			const saveData = { type: "ability-save", ability: key, proficiency: ability.save.proficiency.multiplier };
 			ability.save.modifiers = {
+				_data: saveData,
 				bonus: this.getModifiers(saveData),
 				minimum: this.getModifiers(saveData, "min"),
 				notes: this.getModifiers(saveData, "note")
