@@ -64,12 +64,12 @@
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
 						value="{{skill._source.proficiency.multiplier}}">
 				</div>
-				<a class="skill-roll" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
+				<a data-action="roll" data-sub-action="skill" data-skill="{{key}}">
 					<span class="name">
 						{{localize skill.labels.name}}
 					</span>
 					<span class="ability">
-						{{localize (lookup (lookup (lookup @root.system.abilities skill.ability) "labels") "abbreviation")}}
+						{{lookup @root.CONFIG.abilities.localizedAbbreviations skill.ability}}
 					</span>
 					<span class="mod">{{#if skill.valid}}{{blackFlag-number skill.mod}}{{else}}&mdash;{{/if}}</span>
 				</a>
@@ -83,8 +83,22 @@
 			{{blackFlag-notificationBadge actor category="tools"}}
 		</legend>
 		{{#each system.proficiencies.tools as |tool key|}}
-			<div data-key="{{key}}">
-				<label>{{tool.label}}</label>
+			<div class="tool" data-key="{{key}}">
+				<div class="proficiency-selector" data-multiplier="{{tool.proficiency.multiplier}}"
+					data-rounding="{{tool.proficiency.rounding}}">
+					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
+					<input type="hidden" name="system.proficiencies.tools.{{key}}.proficiency.multiplier"
+						value="{{tool._source.proficiency.multiplier}}">
+				</div>
+				<a data-action="roll" data-sub-action="tool" data-tool="{{key}}">
+					<span class="name">
+						{{localize tool.label}}
+					</span>
+					<span class="ability">
+						{{lookup @root.CONFIG.abilities.localizedAbbreviations tool.ability}}
+					</span>
+					<span class="mod">{{#if tool.valid}}{{blackFlag-number tool.mod}}{{/if}}</span>
+				</a>
 			</div>
 		{{/each}}
 	</fieldset>

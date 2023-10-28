@@ -59,6 +59,7 @@ export const abilities = {
 	}
 };
 localizeConfig(abilities, { labelKeyPath: "labels.full" });
+localizeConfig(abilities, { labelKeyPath: "labels.abbreviation", propertyName: "localizedAbbreviations" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

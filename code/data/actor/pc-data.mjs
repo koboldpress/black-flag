@@ -1,6 +1,6 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { filter, simplifyBonus } from "../../utils/_module.mjs";
+import { filter, simplifyBonus, Trait } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import {
 	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
@@ -501,7 +501,7 @@ export default class PCData extends ActorDataModel {
 			skill.bonus = this.buildBonus(skill.modifiers.check, { deterministic: true, rollData });
 
 			const ability = this.abilities[skill.ability];
-			skill.valid = ability.valid;
+			skill.valid = ability?.valid;
 			skill.mod = (ability?.mod ?? 0) + skill.bonus + skill.proficiency.flat;
 			skill.passive = 10 + skill.mod + this.buildBonus(skill.modifiers.passive, { deterministic: true, rollData });
 
@@ -509,6 +509,43 @@ export default class PCData extends ActorDataModel {
 				name: config.label,
 				ability: ability?.labels.abbreviation
 			};
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedTools() {
+		const rollData = this.parent.getRollData({ deterministic: true });
+		for ( const [key, tool] of Object.entries(this.proficiencies.tools) ) {
+			tool._source = this._source.tools?.[key] ?? {};
+			const config = Trait.configForKey(key, { trait: "tools" });
+
+			tool.ability = config?.ability;
+
+			tool.proficiency = new Proficiency(
+				this.attributes.proficiency, tool.proficiency.multiplier, "down"
+			);
+
+			const checkData = [
+				{ type: "ability-check", ability: tool.ability, proficiency: tool.proficiency.multiplier },
+				{ type: "tool-check", tool: key, proficiency: tool.proficiency.multiplier }
+			];
+			tool.modifiers = {
+				_data: checkData,
+				check: this.getModifiers(checkData),
+				minimum: this.getModifiers(checkData, "min"),
+				notes: this.getModifiers(checkData, "note")
+			};
+			tool.bonus = this.buildBonus(tool.modifiers.check, { deterministic: true, rollData });
+
+			const ability = this.abilities[tool.ability];
+			tool.valid = ability?.valid ?? false;
+			tool.mod = (ability?.mod ?? 0) + tool.bonus + tool.proficiency.flat;
+
+			Object.defineProperty(tool, "label", {
+				get() { return config.label; },
+				enumerable: false
+			});
 		}
 	}
 

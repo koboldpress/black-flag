@@ -71,6 +71,48 @@ export function changeKeyPath(key, trait) {
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Find the configuration object for the provided trait key.
+ * @param {string} key - Key for which the configuration should be found.
+ * @param {object} [options={}]
+ * @param {string} [options.trait] - Explicitly set trait type if non-prefixed key is provided.
+ * @returns {object|void}
+ */
+export function configForKey(key, { trait }={}) {
+	const parts = key.split(":");
+	if ( !trait && (parts.length < 2) ) return;
+	else trait ??= parts.shift();
+
+	const traitConfig = CONFIG.BlackFlag.traits[trait];
+	const traitData = CONFIG.BlackFlag[traitConfig.configKey ?? trait];
+
+	// Top-level trait or non-prefixed key
+	if ( parts.length === 1 ) {
+		const searchCategory = (data, key) => {
+			for ( const [k, v] of Object.entries(data) ) {
+				if ( k === key ) return v;
+				if ( v.children ) {
+					const result = searchCategory(v.children, key);
+					if ( result ) return result;
+				}
+			}
+		};
+		return searchCategory(traitData, parts.shift());
+	}
+
+	// Prefixed key
+	else {
+		const searchCategory = (data, parts) => {
+			key = parts.shift();
+			if ( parts.length ) return searchCategory(data[key]?.children ?? {}, parts);
+			else return data[key];
+		};
+		return searchCategory(traitData, parts);
+	}
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                         Lists                         */
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -205,7 +247,8 @@ export function keyLabel(key, { count, trait, final }={}) {
 			return game.i18n.format(key, { count: localizedCount, type });
 		}
 
-		const category = traits[firstKey];
+		let category = traits[firstKey];
+		if ( !category && !parts.length ) category = configForKey(firstKey, { trait });
 		if ( !category ) return key;
 		const localization = foundry.utils.getProperty(category, "localization");
 		let label = foundry.utils.getType(category) !== "Object" ? category

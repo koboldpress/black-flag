@@ -1,5 +1,5 @@
 import SkillConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
+import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
 
@@ -459,6 +459,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				return this.configureInitiativeRoll(config, message, dialog);
 			case "skill":
 				return this.rollSkill(config, message, dialog);
+			case "tool":
+				return this.rollTool(config, message, dialog);
 			default:
 				return log(`Unknown roll type clicked ${type}`, { level: "warn" });
 		}
@@ -939,6 +941,111 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.skills`.
 		 */
 		if ( rolls?.length ) Hooks.callAll("blackFlag.rollSkill", this, rolls, config.skill);
+
+		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration information for a tool roll.
+	 *
+	 * @typedef {ChallengeRollConfiguration} ToolRollConfiguration
+	 * @property {string} tool - The tool to roll.
+	 * @property {string} [ability] - The ability to be rolled with the tool.
+	 */
+
+	/**
+	 * Roll a Tool check.
+	 * @param {ToolRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @returns {Promise<ChallengeRoll[]|void>}
+	 */
+	async rollTool(config={}, message={}, dialog={}) {
+		const tool = this.system.proficiencies.tools[config.tool];
+		const toolConfig = Trait.configForKey(config.tool, { trait: "tools" });
+		if ( !tool || !toolConfig ) return;
+		const rollData = this.getRollData();
+
+		const prepareToolConfig = (baseConfig={}, formData={}) => {
+			const abilityId = formData.ability ?? baseConfig.ability ?? tool.ability;
+			const ability = this.system.abilities[abilityId];
+
+			const modifierData = [
+				{ type: "ability-check", ability: abilityId, proficiency: tool.proficiency.multiplier },
+				{ type: "tool-check", ability: abilityId, tool: config.tool, proficiency: tool.proficiency.multiplier }
+			];
+
+			const { parts, data } = buildRoll({
+				mod: ability?.mod,
+				prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
+				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+			}, rollData);
+			data.abilityId = abilityId;
+
+			const rollConfig = foundry.utils.mergeObject(baseConfig, {
+				data,
+				options: {
+					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
+				}
+			}, { inplace: false });
+			rollConfig.parts = parts.concat(config.parts ?? []);
+
+			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
+		};
+
+		const { rollConfig, rollNotes } = prepareToolConfig(config);
+
+		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
+			tool: game.i18n.localize(toolConfig.label)
+		});
+		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const messageConfig = foundry.utils.mergeObject({
+			data: {
+				title: `${flavor}: ${this.name}`,
+				flavor: type,
+				speaker: ChatMessage.getSpeaker({ actor: this }),
+				"flags.black-flag.roll": {
+					type: "tool",
+					tool: config.tool
+				}
+			}
+		}, message);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			applicationClass: SkillConfigurationDialog,
+			options: {
+				buildConfig: prepareToolConfig,
+				chooseAbility: true,
+				rollNotes,
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+			}
+		}, dialog);
+
+		/**
+		 * A hook event that fires before a tool check is rolled.
+		 * @function blackFlag.preRollTool
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
+		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
+		 */
+		if ( Hooks.call("blackFlag.preRollTool", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+
+		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
+
+		/**
+		 * A hook event that fires after a tool check has been rolled.
+		 * @function blackFlag.rollTool
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
+		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.tools`.
+		 */
+		if ( rolls?.length ) Hooks.callAll("blackFlag.rollTool", this, rolls, config.tool);
 
 		return rolls;
 	}
