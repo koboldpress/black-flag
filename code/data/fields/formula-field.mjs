@@ -28,4 +28,67 @@ export default class FormulaField extends foundry.data.fields.StringField {
 		else Roll.validate(value);
 		super._validateType(value);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*      Active Effect Application      */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_bfCastDelta(value) {
+		return this._cast(value).trim();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_bfApplyAdd(actor, change, current, delta, changes) {
+		if ( !current ) {
+			changes[change.key] = delta;
+			return;
+		}
+		let operator = "+";
+		if ( delta.startsWith("+") ) {
+			delta = delta.replace("+", "").trim();
+		} else if ( delta.startsWith("-") ) {
+			delta = delta.replace("-", "").trim();
+			operator = "-";
+		}
+		changes[change.key] = `${current} ${operator} ${delta}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_bfApplyMultiply(actor, change, current, delta, changes) {
+		if ( !current ) {
+			changes[change.key] = delta;
+			return;
+		}
+		const terms = (new Roll(current)).terms;
+		if ( terms.length > 1 ) changes[change.key] = `(${current}) * ${delta}`;
+		else changes[change.key] = `${current} * ${delta}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_bfApplyUpgrade(actor, change, current, delta, changes) {
+		if ( !current ) {
+			changes[change.key] = delta;
+			return;
+		}
+		const terms = (new Roll(current)).terms;
+		if ( (terms.length === 1) && (terms[0].fn === "max") ) {
+			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
+		} else changes[change.key] = `max(${current}, ${delta})`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_bfApplyDowngrade(actor, change, current, delta, changes) {
+		if ( !current ) {
+			changes[change.key] = delta;
+			return;
+		}
+		const terms = (new Roll(current)).terms;
+		if ( (terms.length === 1) && (terms[0].fn === "min") ) {
+			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
+		} else changes[change.key] = `min(${current}, ${delta})`;
+	}
 }

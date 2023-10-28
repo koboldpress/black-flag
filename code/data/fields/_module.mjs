@@ -10,3 +10,5 @@ export {default as ProficiencyField} from "./proficiency-field.mjs";
 export {default as RollField} from "./roll-field.mjs";
 export {default as TimeField} from "./time-field.mjs";
 export {default as TypeField} from "./type-field.mjs";
+
+export {default as applyEffectApplicationPatches} from "./effect-patches.mjs";
