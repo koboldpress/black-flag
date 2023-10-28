@@ -32,6 +32,7 @@ Hooks.once("init", function() {
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;
+	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);
 	data.registerDataModels(JournalEntryPage);
