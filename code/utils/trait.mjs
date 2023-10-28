@@ -236,9 +236,10 @@ export function keyLabel(key, { count, trait, final }={}) {
  * @param {boolean} [options.only=false] - Is this choice on its own, or part of a larger list?
  * @param {boolean} [options.final=false] - If this choice is part of a list of other grants or choices,
  *                                          is it in the final position?
+ * @param {string} [options.trait] - Explicitly set trait type if non-prefixed keys are provided.
  * @returns {string}
  */
-export function choiceLabel(choice, { only=false, final=false }={}) {
+export function choiceLabel(choice, { only=false, final=false, trait }={}) {
 	if ( !choice.pool.size ) return "";
 	const count = numberFormat(choice.count, { spelledOut: true });
 
@@ -247,7 +248,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 	// { count: 3, pool: ["skills:*"] } (final) -> three other skills
 	if ( (choice.pool.size === 1) ) {
 		return keyLabel(choice.pool.first(), {
-			count: (choice.count > 1 || !only) ? choice.count : null, final: final && !only
+			count: (choice.count > 1 || !only) ? choice.count : null, final: final && !only, trait
 		});
 	}
 
@@ -258,12 +259,12 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 	// { count: 1, pool: ["thief", "skills:*"] } -> Thieves Tools or any skill
 	// { count: 1, pool: ["thief", "tools:artisan:*"] } -> Thieves' Tools or any artisan tool
 	if ( (choice.count === 1) && only ) {
-		return listFormatter.format(choice.pool.map(p => keyLabel(p)));
+		return listFormatter.format(choice.pool.map(p => keyLabel(p, { trait })));
 	}
 
 	// Select from a list of options
 	// { count: 2, pool: ["thief", "skills:*"] } -> Choose two from thieves tools or any skill
-	const choices = choice.pool.map(key => keyLabel(key, choice.trait));
+	const choices = choice.pool.map(key => keyLabel(key, { trait }));
 	return game.i18n.format("BF.Advancement.Trait.Choice.List", {
 		count: count,
 		list: listFormatter.format(choices)
@@ -278,9 +279,11 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
  * @param {TraitChoice[]} [choices=[]] - Trait choices.
  * @param {object} [options={}]
  * @param {string} [options.choiceMode="inclusive"] - Choice mode.
+ * @param {string} [options.style="long"] - List style type used (see Intl.ListFormatter).
+ * @param {string} [options.trait] - Explicitly set trait type if non-prefixed keys are provided.
  * @returns {string}
  */
-export function localizedList(grants, choices=[], { choiceMode="inclusive" }={}) {
+export function localizedList(grants, choices=[], { choiceMode="inclusive", style="long", trait }={}) {
 	const choiceSections = [];
 
 	for ( const [index, choice] of choices.entries() ) {
@@ -288,15 +291,15 @@ export function localizedList(grants, choices=[], { choiceMode="inclusive" }={})
 		choiceSections.push(choiceLabel(choice, { final, only: !grants.size && choices.length === 1 }));
 	}
 
-	let sections = Array.from(grants).map(g => keyLabel(g));
+	let sections = Array.from(grants).map(g => keyLabel(g, { trait }));
 	if ( choiceMode === "inclusive" ) {
 		sections = sections.concat(choiceSections);
 	} else {
-		const choiceListFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "disjunction" });
+		const choiceListFormatter = new Intl.ListFormat(game.i18n.lang, { style, type: "disjunction" });
 		sections.push(choiceListFormatter.format(choiceSections));
 	}
 
-	const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+	const listFormatter = new Intl.ListFormat(game.i18n.lang, { style, type: "conjunction" });
 	if ( !sections.length || grants.size ) return listFormatter.format(sections);
 	return game.i18n.format("BF.Advancement.Trait.Choice.Wrapper", {
 		choices: listFormatter.format(sections)

@@ -46,7 +46,7 @@ export default class BaseActorSheet extends ActorSheet {
 		);
 
 		await this.prepareItems(context);
-		await this.prepareLists(context);
+		await this.prepareTraits(context);
 
 		return context;
 	}
@@ -142,10 +142,10 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare various lists that might be displayed on the actor's sheet.
+	 * Prepare various traits that might be displayed on the actor's sheet.
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 */
-	async prepareLists(context) {}
+	async prepareTraits(context) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

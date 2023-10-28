@@ -163,7 +163,7 @@
 				</a>
 			{{/if}}
 		</legend>
-		<div class="initiative-box">
+		<div class="block">
 			<span class="value">{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
 			<button type="button" data-action="roll" data-sub-action="initiative">
 				<svg class="die-icon blue"><use xlink:href="#blackFlag-d20"></use></svg>
@@ -190,18 +190,12 @@
 	</fieldset>
 	<fieldset class="traits">
 		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
-		{{#if (or system.traits.size @root.editingMode)}}
-			<div class="trait size">
-				<label>{{localize "BF.Size.Label"}}:</label>
-				<span>{{localize (lookup (lookup CONFIG.sizes system.traits.size) "label")}}</span>
+		{{#each traits}}
+			<div class="trait block {{this.key}} {{this.classes}}">
+				<label><span>{{localize this.label}}</span></label>
+				<span>{{this.value}}</span>
 			</div>
-		{{/if}}
-		{{#if lists.languages}}
-			<div class="trait languages">
-				<label>{{localize "BF.Language.Label[other]"}}</label>
-				<span>{{lists.languages}}</span>
-			</div>
-		{{/if}}
+		{{/each}}
 	</fieldset>
 	<fieldset class="actions">
 		<legend>Actions</legend>

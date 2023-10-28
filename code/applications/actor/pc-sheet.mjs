@@ -1,3 +1,4 @@
+import { Trait } from "../../utils/_module.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
@@ -49,21 +50,6 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async prepareLists(context) {
-		const listFormatter = new Intl.ListFormat(game.i18n.lang, {type: "unit", style: "short"});
-		context.lists ??= {};
-
-		context.lists.languages = listFormatter.format(
-			context.system.proficiencies.languages.value.reduce((arr, language) => {
-				const label = CONFIG.BlackFlag.languages[language]?.label;
-				arr.push(label ? game.i18n.localize(label) : language);
-				return arr;
-			}, [])
-		);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Prepare levels on the progression tab and assign them advancement flows.
 	 * @param {object} context - Context being prepared.
@@ -96,6 +82,65 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Remove any flows that no longer have associated advancements
 		flowIds.forEach(id => delete this.advancementFlows[id]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async prepareTraits(context) {
+		context.traits = [];
+		const { traits, proficiencies } = context.system;
+		const none = game.i18n.localize("None");
+
+		// Senses
+
+		// Size
+		const size = CONFIG.BlackFlag.sizes[traits.size];
+		if ( size || this.editingMode ) {
+			context.traits.push({
+				key: "size",
+				classes: "single",
+				label: "BF.Size.Label",
+				value: size ? game.i18n.localize(size.label) : none
+			});
+		}
+
+		// Creature Type
+		// const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
+		// if ( type || this.editingMode ) {
+		// 	const tagFormatter = game.i18n.getListFormatter({ type: "unit" });
+		// 	context.traits.push({
+		// 		key: "type",
+		// 		classes: "single",
+		// 		label: "BF.CreatureType.Label",
+		// 		value: type ? `${game.i18n.localize(type.label)}${traits.type.tags.size ? ` (${
+		// 			tagFormatter.format(traits.type.tags)
+		// 		})` : ""}` : none
+		// 	});
+		// }
+
+		// Languages
+		// TODO: Add language tags
+		context.traits.push({
+			key: "languages",
+			label: "BF.Language.Label[other]",
+			value: Trait.localizedList(proficiencies.languages.value, [], { style: "short", trait: "languages" }) || none
+		});
+
+		// Armor
+		context.traits.push({
+			key: "armor",
+			label: "BF.Armor.Label[other]",
+			value: Trait.localizedList(proficiencies.armor.value, [], { style: "short", trait: "armor" }) || none
+		});
+
+		// Weapons
+		context.traits.push({
+			key: "weapons",
+			label: "BF.Weapon.Label[other]",
+			value: Trait.localizedList(proficiencies.weapons.value, [], { style: "short", trait: "weapons" }) || none
+		});
+
+		// TODO: Resistances, Immunities, & Vulnerabilities
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
