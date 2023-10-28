@@ -57,14 +57,14 @@
 			{{blackFlag-notificationBadge actor category="skills"}}
 		</legend>
 		{{#each system.proficiencies.skills as |skill key|}}
-			<div class="skill" data-key="{{key}}">
+			<div class="skill block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
 					data-rounding="{{skill.proficiency.rounding}}">
 					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
 						value="{{skill._source.proficiency.multiplier}}">
 				</div>
-				<a data-action="roll" data-sub-action="skill" data-skill="{{key}}">
+				<button type="button" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
 					<span class="name">
 						{{localize skill.labels.name}}
 					</span>
@@ -72,8 +72,7 @@
 						{{lookup @root.CONFIG.abilities.localizedAbbreviations skill.ability}}
 					</span>
 					<span class="mod">{{#if skill.valid}}{{blackFlag-number skill.mod}}{{else}}&mdash;{{/if}}</span>
-				</a>
-				<span class="passive">{{#if skill.valid}}({{skill.passive}}){{/if}}</span>
+				</button>
 			</div>
 		{{/each}}
 	</fieldset>
@@ -83,14 +82,14 @@
 			{{blackFlag-notificationBadge actor category="tools"}}
 		</legend>
 		{{#each system.proficiencies.tools as |tool key|}}
-			<div class="tool" data-key="{{key}}">
+			<div class="tool block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{tool.proficiency.multiplier}}"
 					data-rounding="{{tool.proficiency.rounding}}">
 					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
 					<input type="hidden" name="system.proficiencies.tools.{{key}}.proficiency.multiplier"
 						value="{{tool._source.proficiency.multiplier}}">
 				</div>
-				<a data-action="roll" data-sub-action="tool" data-tool="{{key}}">
+				<button type="button" data-action="roll" data-sub-action="tool" data-tool="{{key}}">
 					<span class="name">
 						{{localize tool.label}}
 					</span>
@@ -98,7 +97,7 @@
 						{{lookup @root.CONFIG.abilities.localizedAbbreviations tool.ability}}
 					</span>
 					<span class="mod">{{#if tool.valid}}{{blackFlag-number tool.mod}}{{/if}}</span>
-				</a>
+				</button>
 			</div>
 		{{/each}}
 	</fieldset>
