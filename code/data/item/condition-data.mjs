@@ -3,7 +3,7 @@ import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { IdentifierField } from "../fields/_module.mjs";
 
-const { SchemaField } = foundry.data.fields;
+const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Condition items.
@@ -29,6 +29,10 @@ export default class ConditionData extends ItemDataModel {
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
+			description: new SchemaField({
+				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+			}),
 			identifier: new SchemaField({
 				value: new IdentifierField()
 			})
