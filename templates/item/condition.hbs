@@ -23,7 +23,49 @@
 					</span>
 					<input type="text" name="system.description.source" value="{{system.description.source}}">
 				</label>
-				<div class="effects-list"></div>
+				<div class="levels">
+					<ol class="levels-list">
+						{{#each levels as |level|}}
+							<li class="level">
+								<fieldset data-effect-id="{{level.effect.id}}">
+									<legend>
+										{{#if @root.multipleLevels}}
+											{{localize "BF.Level.Label[one]"}}
+											<input type="number" name="effects.{{level.effect.id}}.flags.black-flag.condition.level"
+												value="{{level.level}}">
+										{{/if}}
+										{{localize "BF.Condition.Effects.Label"}}
+										{{#if @root.editable}}
+											<a data-action="level" data-sub-action="delete">
+												<i class="fa-solid fa-trash"></i>
+											</a>
+										{{/if}}
+									</legend>
+									{{editor level.enriched target=(concat "effects." level.effect.id ".description") button=false
+										       editable=@root.editable engine="prosemirror" collaborate=false}}
+									<div class="active-effect-sheet">
+										<header class="effect-change effects-header flexrow">
+											<div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+											<div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+											<div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+											<div class="effect-controls">
+												<a data-action="change" data-sub-action="add"><i class="fa-regular fa-square-plus"></i></a>
+											</div>
+										</header>
+										<ol class="changes-list">
+											{{#each level.effect.changes as |change|}}
+												{{> "blackFlag.active-effect-change" change=this prefix=(concat "effects." level.effect.id ".")}}
+											{{/each}}
+										</ol>
+									</div>
+								</fieldset>
+							</li>
+						{{/each}}
+					</ol>
+					<a data-action="level" data-sub-action="add">
+						<i class="fas fa-plus"></i> {{localize "BF.Condition.Action.AddLevel"}}
+					</a>
+				</div>
 			</section>
 		</div>
 	</main>
