@@ -51,6 +51,12 @@ export const _documentCategories = {
 				application: itemSheet.EquipmentSheet,
 				label: "BF.Sheet.Default.Equipment"
 			}
+		},
+		meta: {
+			label: "BF.Item.Category.Meta.Label",
+			types: [
+				itemTypes.ConditionData
+			]
 		}
 	},
 	JournalEntryPage: {
