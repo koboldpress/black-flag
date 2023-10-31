@@ -267,6 +267,18 @@ export default class PCData extends ActorDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareEmbeddedConditions() {
+		this.conditions = {};
+		for ( const effect of this.parent.effects ) {
+			const identifier = effect.statuses.first();
+			const level = foundry.utils.getProperty(effect, "flags.black-flag.condition.level");
+			if ( !identifier ) continue;
+			this.conditions[identifier] = Math.max(this.conditions[identifier] ?? 0, level ?? 1);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareEmbeddedHitDice() {
 		const hd = this.attributes.hd;
 		for ( const data of Object.values(this.progression.levels) ) {
@@ -647,6 +659,39 @@ export default class PCData extends ActorDataModel {
 			return value > min ? value : min;
 		}, -Infinity);
 		return Number.isFinite(minimum) ? minimum : null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Set a condition to a level or remove it by setting level to 0.
+	 * @param {string} condition - Identifier for the condition to modify.
+	 * @param {number} [level] - New level to set, or nothing to remove the condition.
+	 * @returns {Promise}
+	 */
+	async setConditionLevel(condition, level) {
+		if ( this.conditions[condition] === level ) return;
+
+		const effects = this.parent.effects.filter(e => e.statuses.has(condition));
+		const toDelete = [];
+
+		// No level, remove all associated effects
+		if ( !level ) effects.forEach(e => toDelete.push(e.id));
+
+		// Lower level, remove any unnecessary effects
+		else if ( level < this.conditions[condition] ) effects.forEach(e =>
+			foundry.utils.getProperty(e, "flags.black-flag.condition.level") > level ? toDelete.push(e.id) : null
+		);
+
+		// Higher level, add any required effects
+		else {
+			const document = CONFIG.BlackFlag.registration.get("condition", condition)?.cached;
+			if ( !document ) return;
+			const toAdd = document.system.levels.slice(this.conditions[condition] ?? 0, level);
+			await this.parent.createEmbeddedDocuments("ActiveEffect", toAdd.map(add => add.effect.toObject()));
+		}
+
+		if ( toDelete.length ) await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

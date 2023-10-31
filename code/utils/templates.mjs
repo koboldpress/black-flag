@@ -123,6 +123,7 @@ export async function registerHandlebarsPartials() {
 	const partials = [
 		"active-effect/active-effects.hbs",
 		"active-effect/active-effect-change.hbs",
+		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-biography.hbs",
 		"actor/pc-features.hbs",

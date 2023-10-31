@@ -1,5 +1,5 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import log from "../../utils/logging.mjs";
+import { log, numberFormat, sortObjectEntries } from "../../utils/_module.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -13,6 +13,14 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is the sheet currently in a mode to add new conditions?
+	 * @type {boolean}
+	 */
+	conditionAddMode = false;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -39,16 +47,58 @@ export default class BaseActorSheet extends ActorSheet {
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
 
+		context.conditionAddMode = this.conditionAddMode;
 		context.editingMode = this.editingMode;
 
 		context.effects = BlackFlagActiveEffect.prepareSheetSections(
 			this.document.allApplicableEffects(), { displaySource: true }
 		);
 
+		await this.prepareConditions(context);
 		await this.prepareItems(context);
 		await this.prepareTraits(context);
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare conditions for display.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 */
+	async prepareConditions(context) {
+		context.conditions = {};
+		if ( this.conditionAddMode ) {
+			for ( const effect of CONFIG.statusEffects ) {
+				const document = CONFIG.BlackFlag.registration.get("condition", effect.id)?.cached;
+				if ( context.system.conditions[effect.id] || !document ) continue;
+				context.conditions[effect.id] = {
+					label: effect.name,
+					levels: null,
+					document,
+					value: 0
+				};
+			}
+		} else {
+			for ( const [id, value] of Object.entries(context.system.conditions) ) {
+				const document = CONFIG.BlackFlag.registration.get("condition", id)?.cached;
+				if ( !document ) continue;
+				const levels = document.system.levels.length || 1;
+				context.conditions[id] = {
+					label: document.name,
+					levels: Array.fromRange(levels).map(idx => ({
+						number: numberFormat(idx + 1),
+						selected: value > idx,
+						description: document.system.levels[idx]?.effect?.description
+							|| (levels === 1 ? document.system.description.value : "") // TODO: Enrich this!
+					})),
+					document,
+					value
+				};
+			}
+		}
+		context.conditions = sortObjectEntries(context.conditions, "label");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -199,6 +249,19 @@ export default class BaseActorSheet extends ActorSheet {
 	async _onAction(event) {
 		const { action, subAction, ...properties } = event.currentTarget.dataset;
 		switch (action) {
+			case "condition":
+				const condition = event.target.closest("[data-condition]")?.dataset.condition;
+				switch (subAction) {
+					case "add":
+						this.conditionAddMode = !this.conditionAddMode;
+						return this.render();
+					case "delete":
+						return this.actor.system.setConditionLevel(condition);
+					case "set-level":
+						this.conditionAddMode = false;
+						return this.actor.system.setConditionLevel(condition, Number(properties.level));
+				}
+				break;
 			case "config":
 				switch (properties.type) {
 					case "ability": return new AbilityConfig(properties.key, this.actor).render(true);
@@ -206,6 +269,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "initiative": return new InitiativeConfig(this.actor).render(true);
 					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
 				}
+				break;
 			case "effect":
 				return BlackFlagActiveEffect.onEffectAction.bind(this)(event);
 			case "item":
@@ -218,6 +282,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "view":
 						return item?.sheet.render(true);
 				}
+				break;
 			case "rest":
 				return this.actor.rest({type: properties.type});
 			case "roll":

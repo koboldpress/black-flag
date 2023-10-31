@@ -1,0 +1,53 @@
+<section class="conditions">
+	<ol class="items-list effects-list">
+		<li class="item-category effect-category">
+			<div class="header">
+				<h3 class="effect-name">{{localize "BF.Item.Type.Condition[other]"}}</h3>
+				<div class="effect-controls">
+					{{#if conditionAddMode}}
+						<a data-action="condition" data-sub-action="add">
+							<i class="fa-solid fa-xmark"></i>
+						</a>
+					{{else if editable}}
+						<a data-action="condition" data-sub-action="add">
+							<i class="fa-solid fa-plus"></i>
+						</a>
+					{{/if}}
+				</div>
+			</div>
+			<ol class="item-list effect-list">
+				{{#each conditions as |condition key|}}
+					<li class="item effect-entry" data-condition="{{key}}">
+						<div class="item-name effect-name">
+							<figure class="icon">
+								<img class="item-image" src="{{condition.document.img}}">
+							</figure>
+							<h4>{{condition.label}}</h4>
+						</div>
+						<div class="condition-levels">
+							<ol class="levels">
+								{{#each condition.levels as |level|}}
+									<li class="{{#if level.selected}}selected{{/if}}" {{#if @root.editable}}data-action="condition"{{/if}}
+										data-sub-action="set-level" data-level="{{level.number}}" data-tooltip="{{level.description}}">
+										{{level.number}}
+									</li>
+								{{/each}}
+							</ol>
+						</div>
+						<div class="item-controls effect-controls">
+							{{#if @root.conditionAddMode}}
+								<a data-action="condition" data-sub-action="set-level" data-level="1">
+									<i class="fa-solid fa-square-plus"></i>
+								</a>
+							{{else if @root.editable}}
+								<a data-action="condition" data-sub-action="delete">
+									<i class="fa-solid fa-square-minus"></i>
+								</a>
+							{{/if}}
+						</div>
+					</li>
+				{{/each}}
+			</ol>
+		</li>
+	</ol>
+</section>

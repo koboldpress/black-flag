@@ -1,0 +1,44 @@
+.black-flag.actor.sheet .conditions {
+	.condition-levels {
+		flex: 1 1 50%;
+		display: flex;
+
+		.levels {
+			display: flex;
+			height: 1.5em;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+	
+			li {
+				flex: 1 0 2em;
+				text-align: center;
+				border: 1px solid var(--bf-color-border-gray);
+				border-radius: 1.5em;
+				background-color: var(--bf-color-fill);
+
+				&[data-action] {
+					cursor: pointer;
+				}
+				&[data-action]:focus, &[data-action]:hover {
+					box-shadow: 0 0 4px 1px var(--bf-color-border-light-blue);
+					z-index: 10;
+				}
+
+				&.selected {
+					background-color: var(--bf-blue);
+					color: white;
+				}
+				&:not(:first-of-type) {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+					margin-inline-start: -1px;
+				}
+				&:not(:last-of-type) {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
+			}
+		}
+	}
+}
