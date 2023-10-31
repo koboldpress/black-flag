@@ -250,14 +250,16 @@ function _onUpdateItem(item, changes, options, userId) {
 	source[item.identifier].name = item.name;
 	source[item.identifier].img = item.img;
 
-	/**
-	 * A hook event that fires when a registration entry is updated.
-	 * @function blackFlag.registrationUpdated
-	 * @memberof hookEvents
-	 * @param {string} identifier - Identifier of the entry being updated.
-	 * @param {BlackFlagItem} item - Item whose update caused the change.
-	 */
-	Hooks.callAll("blackFlag.registrationUpdated", item.identifier, item);
+	_handleCache(source, item.identifier, item).then(() => {
+		/**
+		 * A hook event that fires when a registration entry is updated.
+		 * @function blackFlag.registrationUpdated
+		 * @memberof hookEvents
+		 * @param {string} identifier - Identifier of the entry being updated.
+		 * @param {BlackFlagItem} item - Item whose update caused the change.
+		 */
+		Hooks.callAll("blackFlag.registrationUpdated", item.identifier, item);
+	});
 
 	all[type] = sortObjectEntries(source, "name");
 }
@@ -284,27 +286,45 @@ function _onDeleteItem(item, options, userId) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Handle caching an item into registration.
+ * @param {{[key: string]: ItemRegistration}} source - Item registration for this item's type.
+ * @param {string} identifier - Identifier for this entry.
+ * @param {ItemEH|string} item - Item to be cached or UUID of item.
+ */
+async function _handleCache(source, identifier, item) {
+	if ( foundry.utils.getType(item) === "string" ) item = await fromUuid(item);
+	if ( !CONFIG.Item.dataModels[item.type].metadata.register?.cache ) return;
+	source[identifier].cache = item;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Handle creating an entry.
  * @param {{[key: string]: ItemRegistration}} source - Item registration for this item's type.
  * @param {string} identifier - Identifier to use for creating the entry.
  * @param {ItemEH} item - Item being created.
  */
 function _handleCreate(source, identifier, item) {
-	if ( !source[identifier] ) {
-		/**
-		 * A hook event that fires when an entry is added to registration.
-		 * @function blackFlag.registrationCreated
-		 * @memberof hookEvents
-		 * @param {string} identifier - Identifier of the entry being added.
-		 * @param {BlackFlagItem} item - Item whose creation caused the change.
-		 */
-		Hooks.callAll("blackFlag.registrationCreated", identifier, item);
-	}
+	const created = !source[identifier];
 
 	source[identifier] ??= { sources: [] };
 	source[identifier].name = item.name;
 	source[identifier].img = item.img;
 	source[identifier].sources.push(item.uuid);
+
+	if ( created ) {
+		_handleCache(source, identifier, item).then(() => {
+			/**
+			 * A hook event that fires when an entry is added to registration.
+			 * @function blackFlag.registrationCreated
+			 * @memberof hookEvents
+			 * @param {string} identifier - Identifier of the entry being added.
+			 * @param {BlackFlagItem} item - Item whose creation caused the change.
+			 */
+			Hooks.callAll("blackFlag.registrationCreated", identifier, item);
+		});
+	}
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -335,7 +355,9 @@ function _handleDelete(source, identifier, item) {
 	source[identifier].name = newSource.name;
 	source[identifier].img = newSource.img;
 
-	Hooks.callAll("blackFlag.registrationUpdated", identifier, item);
+	_handleCache(source, identifier, item).then(() => {
+		Hooks.callAll("blackFlag.registrationUpdated", identifier, item);
+	});
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
