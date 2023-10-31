@@ -250,6 +250,15 @@ function _onUpdateItem(item, changes, options, userId) {
 	source[item.identifier].name = item.name;
 	source[item.identifier].img = item.img;
 
+	/**
+	 * A hook event that fires when a registration entry is updated.
+	 * @function blackFlag.registrationUpdated
+	 * @memberof hookEvents
+	 * @param {string} identifier - Identifier of the entry being updated.
+	 * @param {BlackFlagItem} item - Item whose update caused the change.
+	 */
+	Hooks.callAll("blackFlag.registrationUpdated", item.identifier, item);
+
 	all[type] = sortObjectEntries(source, "name");
 }
 
@@ -281,6 +290,17 @@ function _onDeleteItem(item, options, userId) {
  * @param {ItemEH} item - Item being created.
  */
 function _handleCreate(source, identifier, item) {
+	if ( !source[identifier] ) {
+		/**
+		 * A hook event that fires when an entry is added to registration.
+		 * @function blackFlag.registrationCreated
+		 * @memberof hookEvents
+		 * @param {string} identifier - Identifier of the entry being added.
+		 * @param {BlackFlagItem} item - Item whose creation caused the change.
+		 */
+		Hooks.callAll("blackFlag.registrationCreated", identifier, item);
+	}
+
 	source[identifier] ??= { sources: [] };
 	source[identifier].name = item.name;
 	source[identifier].img = item.img;
@@ -299,11 +319,23 @@ function _handleDelete(source, identifier, item) {
 	source[identifier].sources.findSplice(i => i === item.uuid);
 	if ( source[identifier].sources.length === 0 ) {
 		delete source[identifier];
+
+		/**
+		 * A hook event that fires when an entry is removed from registration.
+		 * @function blackFlag.registrationDeleted
+		 * @memberof hookEvents
+		 * @param {string} identifier - Identifier of the entry being removed.
+		 * @param {BlackFlagItem} item - Item whose deletion caused the change.
+		 */
+		Hooks.callAll("blackFlag.registrationDeleted", identifier, item);
+
 		return;
 	}
 	const newSource = fromUuidSync(source[identifier].sources[source[identifier].sources.length - 1]);
 	source[identifier].name = newSource.name;
 	source[identifier].img = newSource.img;
+
+	Hooks.callAll("blackFlag.registrationUpdated", identifier, item);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
