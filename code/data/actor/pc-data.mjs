@@ -543,7 +543,10 @@ export default class PCData extends ActorDataModel {
 			tool.mod = (ability?.mod ?? 0) + tool.bonus + tool.proficiency.flat;
 
 			Object.defineProperty(tool, "label", {
-				get() { return config.label; },
+				get() {
+					if ( !config ) return "";
+					return config.label ?? `${config.localization}[other]`;
+				},
 				enumerable: false
 			});
 		}

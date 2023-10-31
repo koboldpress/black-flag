@@ -964,8 +964,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async rollTool(config={}, message={}, dialog={}) {
 		const tool = this.system.proficiencies.tools[config.tool];
-		const toolConfig = Trait.configForKey(config.tool, { trait: "tools" });
-		if ( !tool || !toolConfig ) return;
+		if ( !tool ) return;
 		const rollData = this.getRollData();
 
 		const prepareToolConfig = (baseConfig={}, formData={}) => {
@@ -998,7 +997,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const { rollConfig, rollNotes } = prepareToolConfig(config);
 
 		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
-			tool: game.i18n.localize(toolConfig.label)
+			tool: game.i18n.localize(tool.label)
 		});
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject({
