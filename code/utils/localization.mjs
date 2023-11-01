@@ -31,7 +31,7 @@ export function makeLabels(object, {
 }={}) {
 	const localized = Object.entries(object)
 		.map(([k, d]) => [k, game.i18n.localize(
-			foundry.utils.getProperty(d, labelKeyPath) ?? `${foundry.utils.getProperty(d, "localizationKeyPath")}[one]`
+			foundry.utils.getProperty(d, labelKeyPath) ?? `${foundry.utils.getProperty(d, localizationKeyPath)}[one]`
 		)]);
 	if ( sort ) localized.sort((lhs, rhs) => lhs[1].localeCompare(rhs[1]));
 	return Object.fromEntries(localized);
