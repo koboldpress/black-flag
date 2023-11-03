@@ -36,7 +36,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 				categoryLabel: game.i18n.localize("BF.Item.Feature.Category.Label"),
 				categoryOptions: makeLabels(CONFIG.BlackFlag.featureCategories),
 				typeLabel: game.i18n.localize("BF.Item.Feature.Type.Label"),
-				typeOptions: selectedCategory?.types ? makeLabels(selectedCategory.types) : null
+				typeOptions: selectedCategory?.children ? makeLabels(selectedCategory.children) : null
 			};
 		} else if ( this.advancement.configuration.type === "talent" ) {
 			context.typeRestriction = {
