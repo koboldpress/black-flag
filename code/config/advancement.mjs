@@ -39,6 +39,10 @@ export const _advancementTypes = {
 		documentClass: advancement.SizeAdvancement,
 		validItemTypes: new Set(["lineage"])
 	},
+	spellcasting: {
+		documentClass: advancement.SpellcastingAdvancement,
+		validItemTypes: new Set(["class"])
+	},
 	trait: {
 		documentClass: advancement.TraitAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES)

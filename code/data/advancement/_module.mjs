@@ -5,4 +5,5 @@ export * from "./hit-points-data.mjs";
 export * from "./key-ability-data.mjs";
 export * from "./property-data.mjs";
 export * from "./size-data.mjs";
+export * from "./spellcasting-data.mjs";
 export * from "./trait-data.mjs";

@@ -9,6 +9,47 @@ export const maxSpellRing = 9;
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Configuration data for different types of spellcasting supported.
+ *
+ * @typedef {LabeledConfiguration} SpellcastingTypeConfiguration
+ * @property {{[key: string]: SpellcastingProgressionConfiguration}} [progression] - Progression modes for this type.
+ */
+
+/**
+ * Configuration data for a spellcasting progression mode.
+ *
+ * @typedef {LabeledConfiguration} SpellcastingProgressionConfiguration
+ * @property {number} [divisor=1] - Value by which the class levels are divided to determine spellcasting level.
+ * @property {boolean} [roundUp=false] - Should fractional values should be rounded up by default?
+ */
+
+/**
+ * Different spellcasting types and their progression.
+ * @type {SpellcastingTypeConfiguration}
+ */
+export const spellcastingTypes = {
+	leveled: {
+		label: "BF.Spellcasting.Type.Leveled.Label",
+		progression: {
+			full: {
+				label: "BF.Spellcasting.Progression.Full.Label",
+				divisor: 1
+			},
+			half: {
+				label: "BF.Spellcasting.Progression.Half.Label",
+				divisor: 2
+			},
+			third: {
+				label: "BF.Spellcasting.Progression.Third.Label",
+				divisor: 3
+			}
+		}
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Types of circles to which a spell can belong.
  * @enum {LabeledConfiguration}
  */
