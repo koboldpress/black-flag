@@ -6,10 +6,11 @@ import {
 	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
 	ModifierField, ProficiencyField, RollField, TimeField
 } from "../fields/_module.mjs";
+import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 
 const { ArrayField, BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
-export default class PCData extends ActorDataModel {
+export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 	static metadata = {
 		type: "pc",
@@ -24,7 +25,7 @@ export default class PCData extends ActorDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static defineSchema() {
-		return {
+		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(new SchemaField({
 				base: new NumberField({min: 0, integer: true}),
 				max: new NumberField({min: 0, initial: 20, integer: true}),
@@ -145,8 +146,6 @@ export default class PCData extends ActorDataModel {
 					}))
 				})
 			}, {label: "BF.Progression.Label"}),
-			// Rolls (contains bonuses, minimums, ability overrides, etc.)?
-			// Spellcasting
 			traits: new SchemaField({
 				movement: new SchemaField({
 					base: new NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
@@ -189,7 +188,7 @@ export default class PCData extends ActorDataModel {
 					})
 				})
 			}, {label: "BF.Trait.Label[other]"})
-		};
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -521,6 +520,42 @@ export default class PCData extends ActorDataModel {
 				name: config.label,
 				ability: ability?.labels.abbreviation
 			};
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedSpellcasting() {
+		// Calculate spellcasting DC per-class
+
+		// Combine class spellcasting data to total progression
+		const progression = { leveled: 0 };
+		const types = {};
+
+		// Grab any class with spellcasting and tally up different types
+		const spellcastingClasses = Object.values(this.progression.classes).filter(classData => {
+			const spellcasting = classData.document.system.spellcasting;
+			if ( !spellcasting?.type ) return false;
+			types[spellcasting.type] ??= 0;
+			types[spellcasting.type] += 1;
+			return true;
+		});
+
+		for ( const cls of spellcastingClasses ) {
+			const doc = cls.document;
+			this.constructor.computeClassProgression(
+				progression, doc, { actor: this.parent, levels: cls.levels, count: types[doc.system.spellcasting.type] }
+			);
+		}
+		console.log(progression);
+
+		for ( const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes) ) this.constructor.prepareSpellcastingSlots(
+			this.spellcasting.rings, type, progression, { actor: this }
+		);
+		console.log(this.spellcasting.rings);
+
+		for ( const ring of Object.values(this.spellcasting.rings) ) {
+			ring.value = Math.clamped(ring.max - ring.spent, 0, ring.max);
 		}
 	}
 

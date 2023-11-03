@@ -86,6 +86,22 @@ export const spellComponents = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Number of spell slots per-ring for each spellcasting level. First set of indices correspond to spellcaster level
+ * and the second correspond to rings.
+ * @type {number[][]}
+ */
+export const spellSlotTable = [
+	[],
+	[, 2],       // Level 1
+	[, 3],       // Level 2
+	[, 4, 2],    // Level 3
+	[, 4, 3],    // Level 4
+	[, 4, 3, 2]  // Level 5
+];
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * List of spell rings with localized names.
  * @param {boolean} [plural=false] - Return the plural names where relevant.
  * @returns {[key: number]: string]}
