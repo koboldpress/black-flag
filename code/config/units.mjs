@@ -42,6 +42,52 @@ export const currencies = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Time periods usable by the system, split into combat periods and otherwise.
+ * @type {{
+ *   combat: {[key: string]: LabeledConfiguration},
+ *   clock: {[key: string]: LabeledConfiguration}
+ * }}
+ */
+export const timeUnits = {
+	combat: {
+		label: "BF.Time.Category.Combat.Label",
+		children: {
+			turn: {
+				localization: "BF.Time.Unit.Turn.Label"
+			},
+			round: {
+				localization: "BF.Time.Unit.Round.Label"
+			},
+			encounter: {
+				localization: "BF.Time.Unit.Encounter.Label"
+			}
+		}
+	},
+	time: {
+		label: "BF.Time.Category.Time.Label",
+		children: {
+			minute: {
+				localization: "BF.Time.Unit.Minute.Label"
+			},
+			hour: {
+				localization: "BF.Time.Unit.Hour.Label"
+			},
+			day: {
+				localization: "BF.Time.Unit.Day.Label"
+			},
+			month: {
+				localization: "BF.Time.Unit.Month.Label"
+			},
+			year: {
+				localization: "BF.Time.Unit.Year.Label"
+			}
+		}
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Units that can represent weight in the system.
  * @enum {UnitConfiguration}
  */

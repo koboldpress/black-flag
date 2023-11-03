@@ -55,7 +55,8 @@ export const _documentCategories = {
 		meta: {
 			label: "BF.Item.Category.Meta.Label",
 			types: [
-				itemTypes.ConditionData
+				itemTypes.ConditionData,
+				itemTypes.SpellData
 			]
 		}
 	},

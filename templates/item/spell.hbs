@@ -1,0 +1,167 @@
+<form autocomplete="off">
+
+	<header class="sheet-header">
+		<figure class="icon">
+			<img src="{{document.img}}" data-edit="img">
+		</figure>
+		<h1>
+			<input type="text" name="name" value="{{document.name}}">
+		</h1>
+	</header>
+
+	<nav class="sheet-navigation tabs" data-group="primary">
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+	</nav>
+
+	<main class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="description">
+			<section>
+				<div class="category">
+					<label>
+						<span>{{localize "BF.Spell.Ring.Label"}}</span>
+						<select name="system.ring.base">
+							{{selectOptions spellRings selected=source.ring.base}}
+						</select>
+					</label>
+					<label>
+						<span>{{localize "BF.Spell.Circle.Label"}}</span>
+						<select name="system.circle">
+							{{selectOptions CONFIG.spellCircles selected=system.circle labelAttr="label" blank="" localize=true}}
+						</select>
+					</label>
+					<label>
+						<span>{{localize "BF.Spell.School.Label"}}</span>
+						<select name="system.school">
+							{{selectOptions CONFIG.spellSchools selected=system.school labelAttr="label" blank="" localize=true}}
+						</select>
+					</label>
+				</div>
+				<div class="description-area">
+					{{editor enriched.description target="system.description.value" button=true
+						editable=editable engine="prosemirror" collaborate=false}}
+				</div>
+				<label class="source">
+					<span>
+						{{localize "BF.Item.Source.Label"}}
+						<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
+					</span>
+					<input type="text" name="system.description.source" value="{{system.description.source}}">
+				</label>
+			</section>
+		</div>
+		<div class="tab" data-group="primary" data-tab="details">
+			<section>
+				<fieldset class="casting">
+					<legend>{{localize "BF.Spell.Casting.Label"}}</legend>
+					<div class="field-group">
+						<span>{{localize "BF.Spell.CastingTime.Label"}}</span>
+						{{#if system.casting.scalar}}
+							<label>
+								<span>{{localize "BF.Activation.Cost.Label"}}</span>
+								<input type="number" name="system.casting.value" value="{{source.casting.value}}" min="0" step="1">
+							</label>
+						{{/if}}
+						<label>
+							<span>{{localize "BF.Activation.Type.Label"}}</span>
+							<select name="system.casting.type">
+								{{blackFlag-groupedSelectOptions activationOptions}}
+							</select>
+						</label>
+					</div>
+					<label>
+						<span>{{localize "BF.Activation.Condition.Label"}}</span>
+						<input type="text" name="system.activation.condition" value="{{system.activation.condition}}">
+					</label>
+					<div class="field-group">
+						<span>{{localize "BF.Duration.Label"}}</span>
+						{{#if system.duration.scalar}}
+							<label>
+								<span>{{localize "BF.Duration.Value.Label"}}</span>
+								<input type="text" name="system.duration.value" value="{{source.duration.value}}">
+							</label>
+							{{!-- TODO: If formula is used, add tooltip to display value at various levels --}}
+						{{/if}}
+						<label>
+							<span>{{localize "BF.Duration.Type.Label"}}</span>
+							<select name="system.duration.units">
+								{{blackFlag-groupedSelectOptions durationOptions}}
+							</select>
+						</label>
+					</div>
+					{{#if (eq system.duration.units "special")}}
+						<label>
+							<span>special</span>
+							<input type="text" name="system.duration.special" value="{{system.duration.special}}">
+						</label>
+					{{/if}}
+					<div class="field-group">
+						<span>tags</span>
+						<div class="tags checkbox-list">
+							{{#each tags as |tag key|}}
+								<label>
+									<input type="checkbox" name="system.tags.{{key}}" {{checked tag.selected}}>
+									{{tag.label}}
+								</label>
+							{{/each}}
+						</div>
+					</div>
+				</fieldset>
+				<fieldset class="targeting">
+					<legend>targeting</legend>
+					Self/x targets
+					Area of effect
+					<div class="range field-group">
+						<span>{{localize "BF.Range.Label"}}</span>
+						<label>
+							<span>{{localize "BF.Range.Value.Label"}}</span>
+							<input type="number" name="system.range.short" step=0.1 min=0 value="{{source.range.short}}">{{!-- TODO: Formula field --}}
+						</label>
+						<label>
+							<span>{{localize "BF.Range.Units.Label"}}</span>
+							
+						</label>
+					</div>
+				</fieldset>
+				<fieldset class="components">
+					<legend>{{localize "BF.Spell.Component.Label"}}</legend>
+					<div class="checkbox-list">
+						{{#each components as |component key|}}
+							<label>
+								<input type="checkbox" name="system.components.required.{{key}}" {{checked component.selected}}>
+								{{component.label}}
+							</label>
+						{{/each}}
+					</div>
+					{{#if components.material.selected}}
+						<label>
+							<span>{{localize "BF.Spell.Component.Material.Description.Label"}}</span>
+							<input type="text" name="system.components.material.description"
+								value="{{system.components.material.description}}">
+						</label>
+						<div class="field-group">
+							<span>{{localize "BF.Spell.Component.Material.Cost.Label"}}</span>
+							<label>
+								<span>{{localize "BF.Spell.Component.Material.Cost.Label"}}</span>
+								<input type="number" name="system.components.material.cost" value="{{system.components.material.cost}}">
+							</label>
+							<label>
+								<span>{{localize "BF.Currency.Denomination.Label"}}</span>
+								<select name="system.components.material.denomination">
+									{{selectOptions CONFIG.currencies selected=system.components.material.denomination
+										labelAttr="abbreviation" localize=true}}
+								</select>
+							</label>
+							<label>
+								<span>{{localize "BF.Spell.Component.Material.Consumed.Label"}}</span>
+								<input type="checkbox" name="system.components.material.consumed"
+									{{checked system.components.material.consumed}} {{disabled (not system.components.material.cost)}}>
+							</label>
+						</div>
+					{{/if}}
+				</fieldset>
+			</section>
+		</div>
+	</main>
+
+</form>

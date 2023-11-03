@@ -1,4 +1,5 @@
 import * as abilities from "./abilities.mjs";
+import * as activation from "./activation.mjs";
 import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
 import * as ammunition from "./ammunition.mjs";
@@ -12,6 +13,7 @@ import * as modifiers from "./modifiers.mjs";
 import * as notifications from "./notifications.mjs";
 import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
+import * as spellcasting from "./spellcasting.mjs";
 import * as tools from "./tools.mjs";
 import * as traits from "./traits.mjs";
 import * as units from "./units.mjs";
@@ -25,6 +27,13 @@ import * as weapons from "./weapons.mjs";
  */
 
 /**
+ * Configuration that includes full label and abbreviation.
+ *
+ * @typedef {LabeledConfiguration} AbbreviatedConfiguration
+ * @property {string} abbreviation - Abbreviated name.
+ */
+
+/**
  * Nested type configuration for traits & proficiencies.
  *
  * @typedef {object} NestedTypeConfiguration
@@ -35,6 +44,7 @@ import * as weapons from "./weapons.mjs";
 
 export default {
 	...abilities,
+	...activation,
 	...actors,
 	...advancement,
 	...ammunition,
@@ -48,6 +58,7 @@ export default {
 	...notifications,
 	registration,
 	...skills,
+	...spellcasting,
 	...tools,
 	...traits,
 	...units,

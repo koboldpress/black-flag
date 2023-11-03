@@ -27,6 +27,9 @@ function groupedSelectOptions(choices, options) {
 	const chosenAttr = options.hash.chosenAttr ?? "chosen";
 	const childrenAttr = options.hash.childrenAttr ?? "children";
 
+	const getLabel = value => foundry.utils.getType(value) === "Object"
+		? foundry.utils.getProperty(value, labelAttr) : value;
+
 	// Create an option
 	const option = (name, label, chosen) => {
 		if ( localize ) label = game.i18n.localize(label);
@@ -35,7 +38,7 @@ function groupedSelectOptions(choices, options) {
 
 	// Create an group
 	const group = category => {
-		let label = category[labelAttr];
+		let label = getLabel(category);
 		if ( localize ) game.i18n.localize(label);
 		html += `<optgroup label="${label}">`;
 		children(category[childrenAttr]);
@@ -46,7 +49,7 @@ function groupedSelectOptions(choices, options) {
 	const children = children => {
 		for ( let [name, child] of Object.entries(children) ) {
 			if ( child[childrenAttr] ) group(child);
-			else option(name, child[labelAttr], child[chosenAttr] ?? false);
+			else option(name, getLabel(child), child[chosenAttr] ?? false);
 		}
 	};
 

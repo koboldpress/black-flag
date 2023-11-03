@@ -45,6 +45,27 @@ export default class SelectChoices {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Retrieve a value for the specific key.
+	 * @param {string} key
+	 * @returns {object}
+	 */
+	get(key) {
+		// TODO: Might want to change this to a breadth-first search
+		const search = (data, key) => {
+			for ( const [k, v] of Object.entries(data) ) {
+				if ( k === key ) return v;
+				if ( v.children ) {
+					const result = search(v.children, key);
+					if ( result ) return result;
+				}
+			}
+		};
+		return search(this, key);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Create a clone of this object.
 	 * @returns {SelectChoices}
 	 */

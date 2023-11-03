@@ -6,6 +6,7 @@ export {default as ConditionData} from "./condition-data.mjs";
 export {default as FeatureData} from "./feature-data.mjs";
 export {default as HeritageData} from "./heritage-data.mjs";
 export {default as LineageData} from "./lineage-data.mjs";
+export {default as SpellData} from "./spell-data.mjs";
 export {default as TalentData} from "./talent-data.mjs";
 export {default as WeaponData} from "./weapon-data.mjs";
 

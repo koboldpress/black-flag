@@ -78,6 +78,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const keyAbility = item.system.advancement.byType("keyAbility")[0];
 		const makeTrait = type => {
 			const advancement = traits.find(a => a.bestGuessTrait() === type);
+			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "secondary"`
 			if ( !advancement ) return game.i18n.localize("BF.Proficiency.None");
 			return Trait.localizedList(
 				advancement.configuration.grants,
