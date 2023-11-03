@@ -1,21 +1,19 @@
 .advancement-config.app form {
 	label {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		align-items: first baseline;
+		align-items: stretch;
+		> span:first-child {
+			flex: 0 1 min(10em, 33%);
+			align-self: center;
+		}
 
 		+ label {
 			margin-block-start: 0.5rem;
 		}
 
-		> span:first-child {
-			font-weight: bold;
-			font-variant: small-caps;
-		}
 		> input:not([type="checkbox"]), select {
 			flex-grow: 1;
 			width: unset;
+			align-self: center;
 		}
 
 		&.file {

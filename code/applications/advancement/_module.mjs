@@ -12,3 +12,4 @@ export {default as KeyAbilityFlow} from "./key-ability-flow.mjs";
 export {default as PropertyConfig} from "./property-config.mjs";
 export {default as SizeConfig} from "./size-config.mjs";
 export {default as SizeFlow} from "./size-flow.mjs";
+export {default as SpellcastingConfig} from "./spellcasting-config.mjs";

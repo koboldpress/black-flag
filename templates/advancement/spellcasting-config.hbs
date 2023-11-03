@@ -1,0 +1,64 @@
+<form autocomplete="off">
+	<section>
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+		</fieldset>
+		<fieldset>
+			<legend>{{localize "BF.Spellcasting.Details.Label"}}</legend>
+			{{#if displayType}}
+				<label>
+					<span>
+						{{localize "BF.Spellcsating.Type.Label"}}
+						<i class="hintIcon" data-tooltip="BF.Spellcsating.Type.Hint"></i>
+					</span>
+					<select name="configuration.type">
+						{{selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true}}
+					</select>
+				</label>
+			{{/if}}
+			{{#if progressionOptions}}
+				<label>
+					<span>
+						{{localize "BF.Spellcasting.Progression.Label"}}
+						<i class="hintIcon" data-tooltip="BF.Spellcasting.Progression.Hint"></i>
+					</span>
+					<select name="configuration.progression">
+						{{selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true}}
+					</select>
+				</label>
+			{{/if}}
+			<label>
+				<span>
+					{{localize "BF.Spellcasting.Preparation.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Spellcasting.Preparation.Hint"></i>
+				</span>
+				<input type="checkbox" name="configuration.preparation" {{checked configuration.preparation}}
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>gaining spells</legend>
+			<label>
+				<span>{{localize "BF.Spell.Circle.Label"}}</span>
+				<select name="configuration.circle">
+					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
+				</select>
+			</label>
+			{{!--
+			<label>
+				<span>
+					{{localize "BF.Spellcasting.CantripsKnown.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Spellcasting.CantripsKnown.Hint"></i>
+				</span>
+				
+			</label>
+			<label>
+				<span>
+					{{localize "BF.Spellcasting.RitualsKnown.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Spellcasting.RitualsKnown.Hint"></i>
+				</span>
+				
+			</label>--}}
+		</fieldset>
+	</section>
+</form>
