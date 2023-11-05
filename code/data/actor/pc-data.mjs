@@ -547,12 +547,10 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				progression, doc, { actor: this.parent, levels: cls.levels, count: types[doc.system.spellcasting.type] }
 			);
 		}
-		console.log(progression);
 
 		for ( const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes) ) this.constructor.prepareSpellcastingSlots(
 			this.spellcasting.rings, type, progression, { actor: this }
 		);
-		console.log(this.spellcasting.rings);
 
 		for ( const ring of Object.values(this.spellcasting.rings) ) {
 			ring.value = Math.clamped(ring.max - ring.spent, 0, ring.max);

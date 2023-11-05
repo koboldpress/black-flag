@@ -108,11 +108,36 @@ export const rest = {
  */
 
 /**
+ * Method that expands a single section into multiple based on actor's data.
+ *
+ * @callback ExpandSheetSectionCallback
+ * @param {BlackFlagActor} actor - Actor whose sheet is being rendered.
+ * @param {object} sectionData - Existing data for the section being expanded.
+ * @returns {object[]} - Sections that should replace the expanded section.
+ */
+
+/**
  * Sections that will appear on actor sheets. They are arrays of objects grouped by actor type.
  * @enum {SheetSectionConfiguration[]}
  */
 export const sheetSections = {
 	pc: [
+		{
+			id: "ring-*",
+			tab: "spellcasting",
+			types: [{type: "spell"}],
+			expand: (actor, sectionData) => {
+				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
+					const cantrip = number === "0";
+					const id = cantrip ? "cantrip" : `ring-${number}`;
+					const ring = actor.system.spellcasting.rings[id] ?? {};
+					const types = [{type: "spell", "system.ring.base": Number(number)}];
+					return foundry.utils.mergeObject(sectionData, {
+						id, label, types, options: { autoHide: !ring.max && !cantrip }, ring
+					}, {inplace: false});
+				});
+			}
+		},
 		{
 			id: "equipment",
 			tab: "inventory",

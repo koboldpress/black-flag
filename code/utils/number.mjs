@@ -34,6 +34,10 @@ export function getNumberFormatter(options={}) {
  * @returns {string}
  */
 export function numberFormat(value, options={}) {
+	if ( !Number.isFinite(value) ) {
+		value = "∞";
+		if ( !options.spelledOut ) return value;
+	}
 	if ( options.spelledOut ) {
 		const key = `BF.Number[${value}]`;
 		if ( game.i18n.has(key) ) return game.i18n.localize(key);

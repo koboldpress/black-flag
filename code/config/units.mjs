@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration for system various units.
  *
@@ -38,6 +40,26 @@ export const currencies = {
 		conversion: 1100
 	}
 };
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Units that can be used for measuring distances.
+ * @enum {UnitConfiguration}
+ */
+export const distanceUnits = {
+	foot: {
+		localization: "BF.Distance.Unit.Foot.Label",
+		abbreviation: "BF.Distance.Unit.Foot.Abbreviation",
+		conversion: 1
+	},
+	mile: {
+		localization: "BF.Distance.Unit.Mile.Label",
+		abbreviation: "BF.Distance.Unit.Mile.Abbreviation",
+		conversion: 1 / 5280
+	}
+};
+localizeConfig(distanceUnits, { pluralRule: "other" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -98,3 +120,4 @@ export const weightUnits = {
 		conversion: 1
 	}
 };
+localizeConfig(weightUnits, { pluralRule: "other" });

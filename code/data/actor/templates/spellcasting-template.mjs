@@ -122,7 +122,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
 		Object.defineProperty(cantrips, "label", {
 			get() {
-				return CONFIG.BlackFlag.spellRings("other")[0] ?? "";
+				return CONFIG.BlackFlag.spellRings(true)[0] ?? "";
 			},
 			enumerable: false
 		});
@@ -131,12 +131,12 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		const levels = Math.clamped(progression.leveled, 0, CONFIG.BlackFlag.maxLevel);
 		const slots = CONFIG.BlackFlag.spellSlotTable[Math.min(levels, CONFIG.BlackFlag.spellSlotTable.length)] ?? [];
 		for ( const level of Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1) ) {
-			const slot = spells[`ring${level}`] ??= { spent: 0 };
+			const slot = spells[`ring-${level}`] ??= { spent: 0 };
 			slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level] ?? 0;
 			Object.defineProperty(slot, "level", { value: level, enumerable: false, writable: false });
 			Object.defineProperty(slot, "label", {
 				get() {
-					return CONFIG.BlackFlag.spellRings("other")[level] ?? "";
+					return CONFIG.BlackFlag.spellRings(true)[level] ?? "";
 				},
 				enumerable: false
 			});

@@ -144,12 +144,8 @@ export default class BaseActorSheet extends ActorSheet {
 
 		for ( const config of CONFIG.BlackFlag.sheetSections[this.actor.type] ?? {} ) {
 			const tab = sections[config.tab] ??= {};
-			tab[config.id] = {
-				config,
-				label: game.i18n.localize(config.label),
-				items: [],
-				options: config.options
-			};
+			const toAdd = config.expand ? config.expand(this.actor, config) : [config];
+			toAdd.forEach(c => tab[c.id] = { ...c, items: [] });
 		}
 
 		return sections;
@@ -170,7 +166,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 		for ( const tab of Object.values(sections) ) {
 			for ( const section of Object.values(tab) ) {
-				for ( const type of section.config?.types ?? [] ) {
+				for ( const type of section.types ?? [] ) {
 					if ( checkFilter(item, type) ) {
 						section.items.push(item);
 						return section;

@@ -71,7 +71,7 @@
 					</div>
 					<label>
 						<span>{{localize "BF.Activation.Condition.Label"}}</span>
-						<input type="text" name="system.activation.condition" value="{{system.activation.condition}}">
+						<input type="text" name="system.casting.condition" value="{{system.casting.condition}}">
 					</label>
 					<div class="field-group">
 						<span>{{localize "BF.Duration.Label"}}</span>
@@ -113,14 +113,31 @@
 					Area of effect
 					<div class="range field-group">
 						<span>{{localize "BF.Range.Label"}}</span>
+						{{#if system.range.scalar}}
+							<label>
+								<span>{{localize "BF.Range.Value.Label"}}</span>
+								<input type="number" name="system.range.value" step=0.1 min=0 value="{{source.range.value}}">
+								{{!-- TODO: Formula field --}}
+							</label>
+						{{/if}}
 						<label>
-							<span>{{localize "BF.Range.Value.Label"}}</span>
-							<input type="number" name="system.range.short" step=0.1 min=0 value="{{source.range.short}}">{{!-- TODO: Formula field --}}
+							<span>{{localize "BF.Range.Unit.Label"}}</span>
+							<select name="system.range.units">
+								{{#select system.range.units}}
+									<option></option>
+									{{selectOptions CONFIG.rangeTypes labelAttr="label" localize=true}}
+									<optgroup label="{{localize 'BF.Distance.Label'}}">
+										{{selectOptions CONFIG.distanceUnits.localized}}
+									</optgroup>
+								{{/select}}
+							</select>
 						</label>
-						<label>
-							<span>{{localize "BF.Range.Units.Label"}}</span>
-							
-						</label>
+						{{#if (eq system.range.units "special")}}
+							<label>
+								<span>{{localize "BF.Item.Description.Label"}}</span>
+								<input type="text" name="system.range.special" value="{{system.range.special}}">
+							</label>
+						{{/if}}
 					</div>
 				</fieldset>
 				<fieldset class="components">

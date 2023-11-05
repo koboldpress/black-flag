@@ -1,3 +1,73 @@
-<section>
-	<p>Spellcasting to be implemented&hellip;</p>
+<section class="spellcasting">
+	<table>
+		<thead>
+			<!-- TODO: Filters in the header -->
+		</thead>
+		{{#each sections.spellcasting as |section sectionId|}}
+			<tbody data-section="{{sectionId}}">
+				<tr>
+					<td class="name">{{localize section.label}}</td>
+					<td class="slots">
+						<div class="layout">
+							{{blackFlag-number section.ring.value}} / {{blackFlag-number section.ring.max}}
+						</div>
+					</td>
+					<th class="casting" scope="col">{{localize "BF.Spell.Casting.Label"}}</th>
+					<th class="range" scope="col">{{localize "BF.Range.Label"}}</th>
+					<th class="target" scope="col">target</th>
+					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
+					<td class="controls"></td>
+				</tr>
+				{{#each section.items as |spell|}}
+					<tr data-item-id="{{spell.id}}"><!-- TODO: Data based on type, prepared state -->
+						<th class="name" scope="row">
+							<div class="layout">
+								<figure>
+									<img src="{{spell.img}}">
+								</figure>
+								<span>{{spell.name}}</span>
+								{{blackFlag-notificationBadge actor document=spell.id}}
+							</div>
+						</th>
+						<td class="components">
+							<div class="layout">
+								{{{spell.system.components.label}}}
+							</div>
+						</td>
+						<td class="casting">
+							{{{spell.system.casting.label}}}
+						</td>
+						<td class="range">
+							{{{spell.system.range.label}}}
+						</td>
+						<td class="target">
+							{{{spell.system.target.label}}}
+						</td>
+						<td class="traits">
+							
+						</td>
+						<td class="controls">
+							<div class="layout">
+								{{#if @root.editingMode}}
+									<a data-action="item" data-sub-action="edit">
+										<i class="fa-solid fa-edit"></i>
+									</a>
+									<a data-action="item" data-sub-action="delete">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								{{else}}
+									<a data-action="item" data-sub-action="view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+								{{/if}}
+							</div>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		{{/each}}
+		<tfoot>
+			<!-- TODO: Preparation details and whatnot in footer -->
+		</tfoot>
+	</table>
 </section>

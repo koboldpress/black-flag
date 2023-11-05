@@ -48,6 +48,10 @@ export default class SpellSheet extends BaseItemSheet {
 			data.system.components.required = filteredKeys(data.system.components.required);
 		}
 
+		if ( foundry.utils.hasProperty(data, "system.tags") ) {
+			data.system.tags = filteredKeys(data.system.tags);
+		}
+
 		return foundry.utils.flattenObject(data);
 	}
 }

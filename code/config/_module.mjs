@@ -14,6 +14,7 @@ import * as notifications from "./notifications.mjs";
 import * as registration from "./registration.mjs";
 import * as skills from "./skills.mjs";
 import * as spellcasting from "./spellcasting.mjs";
+import * as targeting from "./targeting.mjs";
 import * as tools from "./tools.mjs";
 import * as traits from "./traits.mjs";
 import * as units from "./units.mjs";
@@ -59,6 +60,7 @@ export default {
 	registration,
 	...skills,
 	...spellcasting,
+	...targeting,
 	...tools,
 	...traits,
 	...units,

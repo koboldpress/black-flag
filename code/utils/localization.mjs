@@ -75,6 +75,7 @@ export function makeLabels(object, {
 export function makeLabel(input, { pluralRule="one", labelKeyPath="label", localizationKeyPath="localization" }={}) {
 	return game.i18n.localize(
 		foundry.utils.getType(input) === "string" ? input
-			: foundry.utils.getProperty(input, labelKeyPath) ?? `${foundry.utils.getProperty(input, localizationKeyPath)}[one]`
+			: foundry.utils.getProperty(input, labelKeyPath)
+      ?? `${foundry.utils.getProperty(input, localizationKeyPath)}[${pluralRule}]`
 	);
 }
