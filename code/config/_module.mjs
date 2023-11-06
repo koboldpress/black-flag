@@ -28,6 +28,13 @@ import * as weapons from "./weapons.mjs";
  */
 
 /**
+ * Basic configuration information with a pluralizable label.
+ *
+ * @typedef {object} LocalizedConfiguration
+ * @property {string} localization - Pluralizable label.
+ */
+
+/**
  * Configuration that includes full label and abbreviation.
  *
  * @typedef {LabeledConfiguration} AbbreviatedConfiguration

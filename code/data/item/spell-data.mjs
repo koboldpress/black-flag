@@ -3,7 +3,7 @@ import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Spell items.
@@ -42,31 +42,46 @@ export default class SpellData extends ItemDataModel {
 				base: new NumberField({label: "BF.Spell.Ring.Base.Label"})
 			}, {label: "BF.Spell.Ring.Label"}),
 			casting: new SchemaField({
-				value: new NumberField({min: 0, integer: true}),
+				value: new NumberField({min: 0, integer: true, label: "BF.Activation.Cost.Label"}),
 				type: new StringField({initial: "action", label: "BF.Activation.Type.Label"}),
 				condition: new StringField({label: "BF.Activation.Condition.Label"})
-			}),
-			duration: new SchemaField({
-				value: new FormulaField({deterministic: true, label: "BF.Duration.Value.Label"}),
-				units: new StringField({initial: "instantaneous", label: "BF.Duration.Type.Label"}),
-				special: new StringField()
-			}, {label: "BF.Time.Duration.Label"}),
-			// Area of effect (part of activities?)
-			// Targets (part of activities?)
+			}, {label: "BF.Spell.CastingTime.Label"}),
 			components: new SchemaField({
 				required: new SetField(new StringField()),
 				material: new SchemaField({
-					description: new StringField(),
-					cost: new NumberField({min: 0, integer: true}), // TODO: Should this be a formula so it can scale with level?
-					denomination: new StringField()
-				})
-			}),
-			tags: new SetField(new StringField()),
+					description: new StringField({label: "BF.Spell.Component.Material.Description.Label"}),
+					cost: new NumberField({min: 0, integer: true, label: "BF.Spell.Component.Material.Cost.Label"}),
+					denomination: new StringField({label: "BF.Currency.Denomination.Label"})
+				}, {label: "BF.Spell.Component.Material.Label"})
+			}, {label: "BF.Spell.Component.Label"}),
+			duration: new SchemaField({
+				value: new FormulaField({deterministic: true, label: "BF.Duration.Value.Label"}),
+				units: new StringField({initial: "instantaneous", label: "BF.Duration.Type.Label"}),
+				special: new StringField({label: "BF.Duration.Special"})
+			}, {label: "BF.Time.Duration.Label"}),
+			tags: new SetField(new StringField(), {label: "BF.Spell.Tag.Label"}),
+			target: new SchemaField({
+				// TODO: Consider allowing multiple templates to be defined for things like "Wall of Ice",
+				// though that might also be part of separate activities
+				template: new SchemaField({
+					count: new NumberField({initial: 1, positive: true, integer: true}),
+					size: new FormulaField({deterministic: true, label: "BF.AreaOfEffect.Size.Label"}),
+					type: new StringField({label: "BF.AreaOfEffect.Type.Label"}),
+					width: new FormulaField({deterministic: true, label: "BF.AreaOfEffect.Size.Width.Label"}),
+					height: new FormulaField({deterministic: true, label: "BF.AreaOfEffect.Size.Height.Label"}),
+					units: new StringField({initial: "foot", label: "BF.AreaOfEffect.Units.Label"})
+					// TODO: Consider adding support for template artwork
+				}, {label: "BF.AreaOfEffect.Label"}),
+				affects: new SchemaField({
+					count: new FormulaField({deterministic: true, label: "BF.Target.Count.Label"}),
+					type: new StringField({label: "BF.Target.Type.Label"}),
+					choice: new BooleanField()
+				}, {label: "BF.Target.Label"})
+			}, {label: "BF.Targeting.Label"}),
 			range: new SchemaField({
-				// TODO: This should probably be formula field so they can scale
-				value: new NumberField({min: 0, step: 0.1, label: "BF.Range.Value.Label"}),
-				units: new StringField(),
-				special: new StringField()
+				value: new FormulaField({deterministic: true, label: "BF.Range.Value.Label"}),
+				units: new StringField({label: "BF.Range.Unit.Label"}),
+				special: new StringField({label: "BF.Range.Special.Label"})
 			}, {label: "BF.Range.Label"})
 			// TODO: Determine how spell scaling can happen
 		});
@@ -114,6 +129,14 @@ export default class SpellData extends ItemDataModel {
 		Object.defineProperty(this.range, "scalar", {
 			get() {
 				return this.units in CONFIG.BlackFlag.distanceUnits;
+			},
+			configurable: true,
+			enumerable: false
+		});
+
+		Object.defineProperty(this.target.affects, "scalar", {
+			get() {
+				return this.type && this.type !== "special";
 			},
 			configurable: true,
 			enumerable: false
@@ -181,5 +204,22 @@ export default class SpellData extends ItemDataModel {
 			configurable: true,
 			enumerable: false
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedTarget() {
+		if ( this.target.template.type ) this.target.affects.type ||= "creature";
+		Object.defineProperty(this.target.affects, "placeholder", {
+			value: this.target.template.type ? game.i18n.localize("BF.Target.Count.Every") : 1,
+			configurable: true,
+			enumerable: false
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareFinalFormulas() {
+		// TODO: Resolve range & duration formulas
 	}
 }

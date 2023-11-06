@@ -91,12 +91,12 @@
 					</div>
 					{{#if (eq system.duration.units "special")}}
 						<label>
-							<span>special</span>
+							<span>{{localize "BF.Duration.Special"}}</span>
 							<input type="text" name="system.duration.special" value="{{system.duration.special}}">
 						</label>
 					{{/if}}
 					<div class="field-group">
-						<span>tags</span>
+						<span>{{localize "BF.Spell.Tag.Label"}}</span>
 						<div class="tags checkbox-list">
 							{{#each tags as |tag key|}}
 								<label>
@@ -108,37 +108,101 @@
 					</div>
 				</fieldset>
 				<fieldset class="targeting">
-					<legend>targeting</legend>
-					Self/x targets
-					Area of effect
-					<div class="range field-group">
-						<span>{{localize "BF.Range.Label"}}</span>
-						{{#if system.range.scalar}}
+					<legend>{{localize "BF.Targeting.Label"}}</legend>
+					<div class="field-group">
+						<span>{{localize "BF.Target.Label"}}</span>
+						{{#if system.target.affects.scalar}}
 							<label>
-								<span>{{localize "BF.Range.Value.Label"}}</span>
-								<input type="number" name="system.range.value" step=0.1 min=0 value="{{source.range.value}}">
-								{{!-- TODO: Formula field --}}
+								<span>{{localize "BF.Target.Count.Label"}}</span>
+								<input type="text" name="system.target.affects.count" value="{{source.target.affects.count}}"
+									placeholder="{{system.target.affects.placeholder}}">
 							</label>
 						{{/if}}
 						<label>
-							<span>{{localize "BF.Range.Unit.Label"}}</span>
-							<select name="system.range.units">
-								{{#select system.range.units}}
-									<option></option>
-									{{selectOptions CONFIG.rangeTypes labelAttr="label" localize=true}}
-									<optgroup label="{{localize 'BF.Distance.Label'}}">
-										{{selectOptions CONFIG.distanceUnits.localized}}
-									</optgroup>
+							<span>{{localize "BF.Target.Type.Label"}}</span>
+							<select name="system.target.affects.type">
+								{{#select system.target.affects.type}}
+									{{#unless system.target.template.type}}
+										<option value="">{{localize "BF.Range.Type.Self.Label"}}</option>
+									{{/unless}}
+									{{selectOptions CONFIG.targetTypes.localized}}
 								{{/select}}
 							</select>
 						</label>
-						{{#if (eq system.range.units "special")}}
-							<label>
-								<span>{{localize "BF.Item.Description.Label"}}</span>
-								<input type="text" name="system.range.special" value="{{system.range.special}}">
-							</label>
-						{{/if}}
 					</div>
+					{{#if (eq system.target.affects.type "special")}}
+						<label>
+							<span>{{localize "BF.Target.Special.Label"}}</span>
+							<input type="text" name="system.target.affects.special" value="{{system.target.affects.special}}">
+						</label>
+					{{/if}}
+					<!-- TODO: If area of effect, does it only affect targets of your choice -->
+					{{#if system.target.affects.type}}
+						<div class="range field-group">
+							<span>{{localize "BF.Range.Label"}}</span>
+							{{#if system.range.scalar}}
+								<label>
+									<span>{{localize "BF.Range.Value.Label"}}</span>
+									<input type="text" name="system.range.value" value="{{source.range.value}}">
+								</label>
+							{{/if}}
+							<label>
+								<span>{{localize "BF.Range.Unit.Label"}}</span>
+								<select name="system.range.units">
+									{{#select system.range.units}}
+										<option></option>
+										{{selectOptions CONFIG.rangeTypes labelAttr="label" localize=true}}
+										<optgroup label="{{localize 'BF.Distance.Label'}}">
+											{{selectOptions CONFIG.distanceUnits.localized}}
+										</optgroup>
+									{{/select}}
+								</select>
+							</label>
+							{{#if (eq system.range.units "special")}}
+								<label>
+									<span>{{localize "BF.Range.Special.Label"}}</span>
+									<input type="text" name="system.range.special" value="{{system.range.special}}">
+								</label>
+							{{/if}}
+						</div>
+					{{/if}}
+					<label>
+						<span>{{localize "BF.AreaOfEffect.Type.Label"}}</span>
+						<select name="system.target.template.type">
+							{{#select system.target.template.type}}
+								<option value=""></option>
+								{{selectOptions CONFIG.areaOfEffectTypes.localized}}
+							{{/select}}
+						</select>
+						<!-- TODO: Add template count -->
+					</label>
+					{{#if aoeSizes}}
+						<div class="field-group">
+							<span>{{localize "BF.AreaOfEffect.Size.Label"}}</span>
+							<label>
+								<span>{{localize aoeSizes.size}}</span>
+								<input type="text" name="system.target.template.size" value="{{source.target.template.size}}">
+							</label>
+							{{#if aoeSizes.width}}
+								<label>
+									<span>{{localize "BF.AreaOfEffect.Size.Width.Label"}}</span>
+									<input type="text" name="system.target.template.width" value="{{source.target.template.width}}">
+								</label>
+							{{/if}}
+							{{#if aoeSizes.height}}
+								<label>
+									<span>{{localize "BF.AreaOfEffect.Size.Height.Label"}}</span>
+									<input type="text" name="system.target.template.height" value="{{source.target.template.height}}">
+								</label>
+							{{/if}}
+							<label>
+								<span>{{localize "BF.AreaOfEffect.Units.Label"}}</span>
+								<select name="system.target.template.units">
+									{{selectOptions CONFIG.distanceUnits.localized selected=system.target.template.units}}
+								</select>
+							</label>
+						</div>
+					{{/if}}
 				</fieldset>
 				<fieldset class="components">
 					<legend>{{localize "BF.Spell.Component.Label"}}</legend>

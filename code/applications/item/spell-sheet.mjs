@@ -34,6 +34,18 @@ export default class SpellSheet extends BaseItemSheet {
 		context.durationOptions = CONFIG.BlackFlag.durationOptions({ chosen: context.system.duration.units });
 		context.spellRings = CONFIG.BlackFlag.spellRings();
 
+		const sizes = CONFIG.BlackFlag.areaOfEffectTypes[context.system.target.template.type]?.sizes;
+		if ( sizes ) {
+			context.aoeSizes = {
+				size: "BF.AreaOfEffect.Size.Label",
+				width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
+				height: sizes.includes("height")
+			};
+			if ( sizes.includes("radius") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Radius.Label";
+			else if ( sizes.includes("length") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Length.Label";
+			else if ( sizes.includes("width") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Width.Label";
+		}
+
 		return context;
 	}
 
