@@ -75,8 +75,9 @@ export default class SpellData extends ItemDataModel {
 				affects: new SchemaField({
 					count: new FormulaField({deterministic: true, label: "BF.Target.Count.Label"}),
 					type: new StringField({label: "BF.Target.Type.Label"}),
-					choice: new BooleanField()
-				}, {label: "BF.Target.Label"})
+					choice: new BooleanField(),
+					special: new StringField({label: "BF.Target.Special.Label"})
+				}, {label: "BF.Target.Label[one]"})
 			}, {label: "BF.Targeting.Label"}),
 			range: new SchemaField({
 				value: new FormulaField({deterministic: true, label: "BF.Range.Value.Label"}),
@@ -154,7 +155,7 @@ export default class SpellData extends ItemDataModel {
 				let label = game.i18n.format("BF.Activation.Scalar.Label", {
 					number: numberFormat(this.value ?? 1), type: type.label
 				});
-				if ( this.condition ) label = `<span data-tooltip="${this.condition}">${label}*</span>`;
+				if ( this.condition ) label = `<span data-tooltip="${this.condition.capitalize()}">${label}*</span>`;
 				return label;
 			},
 			configurable: true,
@@ -204,6 +205,49 @@ export default class SpellData extends ItemDataModel {
 			configurable: true,
 			enumerable: false
 		});
+
+		Object.defineProperty(this.target, "label", {
+			get() {
+				return this.template.label || this.affects.label || "";
+			},
+			configurable: true,
+			enumerable: true
+		});
+
+		Object.defineProperty(this.target.affects, "label", {
+			get() {
+				const type = CONFIG.BlackFlag.targetTypes[this.type];
+				if ( !type ) return game.i18n.localize("BF.Range.Type.Self.Label");
+				if ( this.type === "special" ) {
+					let label = game.i18n.localize(type.label);
+					if ( this.special ) label = `<span data-tooltip="${this.special.capitalize()}">${label}*</span>`;
+					return label;
+				}
+				const shortKey = `BF.Target.Label[${getPluralRules().select(this.count ?? 1)}]`;
+				const longKey = type.label ?? `${type.localization}[${getPluralRules().select(this.count ?? 1)}]`;
+				const number = numberFormat(this.count ?? 1);
+				return `<span data-tooltip="${`${number} ${game.i18n.localize(longKey)}`}">${
+					number} ${game.i18n.localize(shortKey)}*</span>`;
+			},
+			configurable: true,
+			enumerable: true
+		});
+
+		Object.defineProperty(this.target.template, "label", {
+			get() {
+				if ( !this.type ) return "";
+				const unit = CONFIG.BlackFlag.distanceUnits[this.units];
+				let label = `<span class="number">${numberFormat(this.size, { unit, unitDisplay: "narrow" })}</span>`;
+				let tooltip = `${numberFormat(this.size)} ${game.i18n.localize(`${unit.localization}[one]`)}`;
+				const areaConfig = CONFIG.BlackFlag.areaOfEffectTypes[this.type];
+				if ( areaConfig?.icon ) label += ` <img class="area-icon" src="${areaConfig.icon}">`;
+				if ( areaConfig?.localization ) tooltip += ` ${game.i18n.localize(`${areaConfig.localization}[one]`)}`;
+				else if ( areaConfig?.label ) tooltip += ` ${game.i18n.localize(areaConfig.label)}`;
+				return `<span class="area-label" data-tooltip="${tooltip}">${label}</span>`;
+			},
+			configurable: true,
+			enumerable: true
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -215,6 +259,7 @@ export default class SpellData extends ItemDataModel {
 			configurable: true,
 			enumerable: false
 		});
+		// TODO: If target is self, then range is also self
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

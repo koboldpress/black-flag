@@ -51,11 +51,13 @@ export const distanceUnits = {
 	foot: {
 		localization: "BF.Distance.Unit.Foot.Label",
 		abbreviation: "BF.Distance.Unit.Foot.Abbreviation",
+		formattingUnit: "foot",
 		conversion: 1
 	},
 	mile: {
 		localization: "BF.Distance.Unit.Mile.Label",
 		abbreviation: "BF.Distance.Unit.Mile.Abbreviation",
+		formattingUnit: "mile",
 		conversion: 1 / 5280
 	}
 };

@@ -15,6 +15,7 @@ export function isValidIdentifier(identifier) {
  * @returns {boolean}
  */
 export function isValidUnit(unit) {
+	if ( foundry.utils.getType(unit) === "Object" ) unit = unit.formattingUnit;
 	try {
 		const formatter = new Intl.NumberFormat(game.i18n.lang, { style: "unit", unit });
 		formatter.format(1);

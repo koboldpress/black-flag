@@ -34,6 +34,8 @@ export function getNumberFormatter(options={}) {
  * @returns {string}
  */
 export function numberFormat(value, options={}) {
+	value = Number(value);
+
 	if ( !Number.isFinite(value) ) {
 		value = "∞";
 		if ( !options.spelledOut ) return value;
@@ -55,21 +57,22 @@ export function numberFormat(value, options={}) {
 	}
 	if ( options.unit && isValidUnit(options.unit) ) {
 		formatterOptions.style = "unit";
-		formatterOptions.unit = options.unit;
+		formatterOptions.unit = options.unit.formattingUnit ?? options.unit;
 		formatterOptions.unitDisplay = options.unitDisplay;
 		options.unitFallback = false;
 	}
 
 	let formatted = getNumberFormatter(formatterOptions).format(value);
 
-	if ( options.unit && (options.unitFallback !== false) ) {
-		// TODO: Display units that aren't part of javascript library
-	}
-
 	if ( options.ordinal ) {
 		const rule = getPluralRules({ type: "ordinal" }).select(value);
 		const key = `BF.Number.Ordinal[${rule}]`;
-		if ( game.i18n.has(key) ) return game.i18n.format(key, { number: formatted });
+		if ( game.i18n.has(key) ) formatted = game.i18n.format(key, { number: formatted });
+	}
+
+	if ( options.unit?.localization && (options.unitFallback !== false) ) {
+		const key = `${options.unit.localization}[${getPluralRules().select(value)}]`;
+		formatted += ` ${game.i18n.localize(key).toLowerCase()}`;
 	}
 
 	return formatted;

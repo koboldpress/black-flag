@@ -16,39 +16,48 @@ import { localizeConfig } from "../utils/_module.mjs";
 export const areaOfEffectTypes = {
 	cone: {
 		localization: "BF.AreaOfEffect.Type.Cone.Label",
+		icon: "systems/black-flag/artwork/interface/area/cone.svg",
 		template: "cone",
 		sizes: ["length"]
 	},
 	cube: {
 		localization: "BF.AreaOfEffect.Type.Cube.Label",
+		icon: "systems/black-flag/artwork/interface/area/cube.svg",
 		template: "ray",
 		sizes: ["width"]
 	},
 	cylinder: {
 		localization: "BF.AreaOfEffect.Type.Cylinder.Label",
+		icon: "systems/black-flag/artwork/interface/area/cylinder.svg",
 		template: "circle",
 		sizes: ["radius", "height"]
 	},
 	line: {
 		localization: "BF.AreaOfEffect.Type.Line.Label",
+		icon: "systems/black-flag/artwork/interface/area/line.svg",
 		template: "ray",
 		sizes: ["length", "width"]
 	},
 	radius: {
 		localization: "BF.AreaOfEffect.Type.Radius.Label",
+		icon: "systems/black-flag/artwork/interface/area/radius.svg",
 		template: "circle",
 		sizes: ["radius"]
 	},
 	sphere: {
 		localization: "BF.AreaOfEffect.Type.Sphere.Label",
+		icon: "systems/black-flag/artwork/interface/area/sphere.svg",
 		template: "circle",
 		sizes: ["radius"]
 	},
 	square: {
 		localization: "BF.AreaOfEffect.Type.Square.Label",
+		icon: "systems/black-flag/artwork/interface/area/square.svg",
 		template: "rect"
 	}
-	// TODO: Consider adding wall
+	// TODO: Consider adding wall w/ thickness
+	// TODO: Consider adding ring w/ thickness
+	// TODO: Consider adding dome w/ height & thickness
 };
 localizeConfig(areaOfEffectTypes);
 
