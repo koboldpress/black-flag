@@ -12,6 +12,7 @@ export const maxSpellRing = 9;
  * Configuration data for different types of spellcasting supported.
  *
  * @typedef {LabeledConfiguration} SpellcastingTypeConfiguration
+ * @property {string} [trait] - How this progression will be displayed in a trait list, if no progression trait set.
  * @property {{[key: string]: SpellcastingProgressionConfiguration}} [progression] - Progression modes for this type.
  */
 
@@ -19,6 +20,7 @@ export const maxSpellRing = 9;
  * Configuration data for a spellcasting progression mode.
  *
  * @typedef {LabeledConfiguration} SpellcastingProgressionConfiguration
+ * @property {string} [trait] - How this progression will be displayed in a trait list.
  * @property {number} [divisor=1] - Value by which the class levels are divided to determine spellcasting level.
  * @property {boolean} [roundUp=false] - Should fractional values should be rounded up by default?
  */
@@ -30,6 +32,7 @@ export const maxSpellRing = 9;
 export const spellcastingTypes = {
 	leveled: {
 		label: "BF.Spellcasting.Type.Leveled.Label",
+		trait: "BF.Spellcasting.Type.Trait",
 		progression: {
 			full: {
 				label: "BF.Spellcasting.Progression.Full.Label",
@@ -37,10 +40,12 @@ export const spellcastingTypes = {
 			},
 			half: {
 				label: "BF.Spellcasting.Progression.Half.Label",
+				trait: "BF.Spellcasting.Progression.Half.Trait",
 				divisor: 2
 			},
 			third: {
 				label: "BF.Spellcasting.Progression.Third.Label",
+				trait: "BF.Spellcasting.Progression.Third.Trait",
 				divisor: 3
 			}
 		}

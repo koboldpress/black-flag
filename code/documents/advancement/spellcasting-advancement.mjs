@@ -19,4 +19,12 @@ export default class SpellcastingAdvancement extends Advancement {
 			}
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Display Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	summaryForLevel(levels, { flow=false }={}) {
+		return flow ? "" : this.configuration.label;
+	}
 }

@@ -25,4 +25,24 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			// TODO: Add system for granting spells at level-up
 		};
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Summary label for this spellcasting configuration.
+	 * @type {string}
+	 */
+	get label() {
+		const circle = CONFIG.BlackFlag.spellCircles[this.circle]?.label;
+		const prepared = this.preparation ? "BF.Spellcasting.Preparation.Trait" : null;
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.type];
+		const progression = typeConfig?.progression?.[this.progression]?.trait ?? typeConfig?.trait;
+		return game.i18n.format("BF.Spellcasting.Trait.Display", {
+			circle: circle ? game.i18n.localize(circle) : "",
+			prepared: prepared ? game.i18n.localize(prepared) : "",
+			progression: progression ? game.i18n.localize(progression) : ""
+		}).trim();
+	}
 }

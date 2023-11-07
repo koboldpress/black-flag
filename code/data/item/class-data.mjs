@@ -50,8 +50,10 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 			label: "BF.Advancement.KeyAbility.Title",
 			value: this.keyAbility
 		});
-		// TODO: Proficiencies
-		// TODO: Spellcasting
+		if ( this.spellcasting ) traits.push({
+			label: "BF.Spellcasting.Label",
+			value: this.spellcasting.label
+		});
 		return traits;
 	}
 
