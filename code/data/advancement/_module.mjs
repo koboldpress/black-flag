@@ -4,6 +4,7 @@ export * from "./grant-features-data.mjs";
 export * from "./hit-points-data.mjs";
 export * from "./key-ability-data.mjs";
 export * from "./property-data.mjs";
+export * as scaleValue from "./scale-value/_module.mjs";
 export * from "./size-data.mjs";
 export * from "./spellcasting-data.mjs";
 export * from "./trait-data.mjs";

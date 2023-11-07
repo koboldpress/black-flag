@@ -2,6 +2,9 @@ import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
+/**
+ * Configuration data for the Choose Features advancement.
+ */
 export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {

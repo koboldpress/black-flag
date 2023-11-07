@@ -1,3 +1,4 @@
+import { scaleValue } from "../data/advancement/_module.mjs";
 import * as advancement from "../documents/advancement/_module.mjs";
 
 /**
@@ -35,6 +36,17 @@ export const _advancementTypes = {
 		documentClass: advancement.PropertyAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
+	scaleValue: {
+		validItemTypes: new Set(["background", "class", "heritage", "lineage"]),
+		dataTypes: {
+			cr: scaleValue.ScaleTypeCR,
+			dice: scaleValue.ScaleTypeDice,
+			distance: scaleValue.ScaleTypeDistance,
+			number: scaleValue.ScaleTypeNumber,
+			string: scaleValue.ScaleTypeString,
+			usage: scaleValue.ScaleTypeUsage
+		}
+	},
 	size: {
 		documentClass: advancement.SizeAdvancement,
 		validItemTypes: new Set(["lineage"])
@@ -64,6 +76,14 @@ export const hitDieSizes = [4, 6, 8, 10, 12];
  * @type {number}
  */
 export const maxLevel = 5;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * List of die faces that can be chosen within a dice Scale Value.
+ * @type {number[]}
+ */
+export const scaleDiceSizes = [2, 3, 4, 6, 8, 10, 12, 20, 100];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
