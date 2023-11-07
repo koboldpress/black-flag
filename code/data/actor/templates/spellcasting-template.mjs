@@ -121,10 +121,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		cantrips.max = Infinity;
 		Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
 		Object.defineProperty(cantrips, "label", {
-			get() {
-				return CONFIG.BlackFlag.spellRings(true)[0] ?? "";
-			},
-			enumerable: false
+			value: CONFIG.BlackFlag.spellRings(true)[0] ?? "", enumerable: false
 		});
 		// TODO: Only add cantrips if at least one class can cast them (no need on Paladins)
 
@@ -135,10 +132,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level] ?? 0;
 			Object.defineProperty(slot, "level", { value: level, enumerable: false, writable: false });
 			Object.defineProperty(slot, "label", {
-				get() {
-					return CONFIG.BlackFlag.spellRings(true)[level] ?? "";
-				},
-				enumerable: false
+				value: CONFIG.BlackFlag.spellRings(true)[level] ?? "", enumerable: false
 			});
 		}
 	}
