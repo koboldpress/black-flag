@@ -1,6 +1,5 @@
 import Advancement from "./advancement.mjs";
 import ScaleValueConfig from "../../applications/advancement/scale-value-config.mjs";
-// import ScaleValueFlow from "../../applications/advancement/scale-value-flow.mjs";
 import { ScaleValueConfigurationData } from "../../data/advancement/scale-value/_module.mjs";
 
 /**
@@ -23,8 +22,7 @@ export default class ScaleValueAdvancement extends Advancement {
 		},
 		multiLevel: true,
 		apps: {
-			config: ScaleValueConfig,
-			// flow: ScaleValueFlow
+			config: ScaleValueConfig
 		}
 	}, {inplace: false}));
 
@@ -69,6 +67,11 @@ export default class ScaleValueAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	changes(levels) {
-		return [];
+		const value = this.valueForLevel(this.relavantLevel(levels));
+		return value ? [{
+			key: `system.scale.${this.item.identifier}.${this.identifier}`,
+			mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+			value
+		}] : null;
 	}
 }

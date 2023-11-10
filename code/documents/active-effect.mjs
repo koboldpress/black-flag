@@ -57,6 +57,13 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_parseOrString(raw) {
+		if ( raw instanceof foundry.abstract.DataModel ) return raw;
+		return super._parseOrString(raw);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Sheet Display            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
