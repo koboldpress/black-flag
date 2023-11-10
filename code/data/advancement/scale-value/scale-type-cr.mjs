@@ -23,11 +23,12 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get display() {
+		let value = super.display;
 		switch ( this.value ) {
-			case 0.125: return "&frac18;";
-			case 0.25: return "&frac14;";
-			case 0.5: return "&frac12;";
-			default: return super.display;
+			case 0.125: value = "&frac18;";
+			case 0.25: value = "&frac14;";
+			case 0.5: value = "&frac12;";
 		}
+		return game.i18n.format("BF.ChallengeRating.Specific", { value });
 	}
 }

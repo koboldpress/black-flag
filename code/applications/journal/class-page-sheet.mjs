@@ -1,6 +1,6 @@
 import SpellcastingTemplate from "../../data/actor/templates/spellcasting-template.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { log, Trait } from "../../utils/_module.mjs";
+import { linkForUUID, log, Trait } from "../../utils/_module.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
 /**
@@ -128,11 +128,13 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _getTable(item, initialLevel=1) {
 		const hasFeatures = !!item.system.advancement.byType("grantFeatures");
+		const scaleValues = this._getScaleValues(item);
 		const spellProgression = await this._getSpellProgression(item);
 
 		const headers = [[{content: game.i18n.localize("BF.Level.Label[one]")}]];
 		if ( item.type === "class" ) headers[0].push({content: game.i18n.localize("BF.Proficiency.Bonus.Abbreviation")});
 		if ( hasFeatures ) headers[0].push({content: game.i18n.localize("BF.Item.Type.Feature[other]")});
+		headers[0].push(...scaleValues.column.map(a => ({content: a.title})));
 		if ( spellProgression ) {
 			if ( spellProgression.headers.length > 1 ) {
 				headers[0].forEach(h => h.rowSpan = 2);
@@ -146,26 +148,34 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const cols = [{ class: "level", span: 1 }];
 		if ( item.type === "class" ) cols.push({class: "prof", span: 1});
 		if ( hasFeatures ) cols.push({class: "features", span: 1});
+		if ( scaleValues.column.length ) cols.push({class: "scale", span: scaleValues.column.length});
 		if ( spellProgression ) cols.push(...spellProgression.cols);
 
-		const makeLink = async uuid => (await fromUuid(uuid))?.toAnchor({classes: ["content-link"]}).outerHTML;
-		// TODO: See if this can be replaced by linkForUUID
-
 		const rows = [];
-		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - (initialLevel - 1)), initialLevel) ) {
-			const features = [];
+		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - initialLevel + 1), initialLevel) ) {
+			const features = {};
 			for ( const advancement of item.system.advancement.byLevel(level) ) {
 				switch ( advancement.constructor.typeName ) {
 					case "grantFeatures":
-						features.push(...await Promise.all(advancement.configuration.pool.map(d => makeLink(d.uuid))));
+						advancement.configuration.pool.forEach(d => features[d.uuid] = linkForUUID(d.uuid, { element: true }));
 						break;
 				}
+			}
+
+			for ( const scale of scaleValues.grouped ) {
+				if ( !scale.configuration.scale[level] ) continue;
+				const uuid = scale.configuration.item.uuid;
+				features[uuid] ??= linkForUUID(uuid, { element: true });
+				features[uuid].innerHTML += ` (${scale.valueForLevel(level).display})`;
 			}
 
 			// Level & proficiency bonus
 			const cells = [{class: "level", content: level.ordinalString()}]; // TODO: Use proper ordinal localization
 			if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
-			if ( hasFeatures ) cells.push({class: "features", content: features.join(", ")});
+			if ( hasFeatures ) cells.push({
+				class: "features", content: Object.values(features).map(f => f.outerHTML).join(", ")
+			});
+			scaleValues.column.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
 			const spellCells = spellProgression?.rows[rows.length];
 			if ( spellCells ) cells.push(...spellCells);
 
@@ -173,6 +183,21 @@ export default class ClassPageSheet extends JournalPageSheet {
 		}
 
 		return { headers, cols, rows };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Sort scale values into ones displayed in their own column versus ones grouped with features.
+	 * @param {Item5e} item - Class or subclass item being prepared.
+	 * @returns {{grouped: ScaleValueAdvancement[], column: ScaleValueAdvancement[]}}
+	 */
+	_getScaleValues(item) {
+		return item.system.advancement.byType("scaleValue").reduce(({ column, grouped }, scale) => {
+			if ( fromUuidSync(scale.configuration.item.uuid) ) grouped.push(scale);
+			else column.push(scale);
+			return { column, grouped };
+		}, { column: [], grouped: [] });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
