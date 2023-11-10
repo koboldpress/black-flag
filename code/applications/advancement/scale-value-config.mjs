@@ -10,7 +10,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 			classes: ["black-flag", "advancement-config", "scale-value", "two-column"],
 			template: "systems/black-flag/templates/advancement/scale-value-config.hbs",
 			width: 600,
-			dragDrop: [{ dropSelector: ".drop-target" }],
+			dragDrop: [{ dropSelector: "form" }],
 			dropKeyPath: "item.uuid"
 		});
 	}

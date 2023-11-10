@@ -64,6 +64,18 @@ export default class AdvancementConfig extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Does the drop target support multiple documents?
+	 * @type {boolean|null}
+	 */
+	get multiDrop() {
+		if ( !this.options.dropKeyPath ) return null;
+		const field = this.advancement.metadata.dataModels?.configuration?.schema.getField(this.options.dropKeyPath);
+		return field instanceof foundry.data.fields.ArrayField;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get title() {
 		const type = game.i18n.localize(this.advancement.metadata.title);
 		return `${game.i18n.format("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
@@ -161,10 +173,15 @@ export default class AdvancementConfig extends FormApplication {
 		event.preventDefault();
 		const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
 		if ( !uuidToDelete ) return;
-		const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-		const updates = { configuration: await this.prepareConfigurationUpdate({
-			[this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
-		}) };
+		let updates;
+		if ( this.multiDrop ) {
+			const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+			updates = { configuration: await this.prepareConfigurationUpdate({
+				[this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
+			}) };
+		} else {
+			updates = {[`configuration.${this.options.dropKeyPath}`]: null};
+		}
 		await this.advancement.update(updates);
 	}
 
@@ -243,17 +260,18 @@ export default class AdvancementConfig extends FormApplication {
 			return ui.notifications.error(err.message);
 		}
 
-		const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+		let existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+		if ( !this.multiDrop ) existingItems = [{uuid: existingItems}];
 
 		// Abort if this uuid exists already
 		if ( existingItems.find(i => i.uuid === item.uuid) ) {
-			return ui.notifications.warn(game.i18n.localize("BF.Advancement.Config.Warning.Duplicate"));
+			ui.notifications.warn("BF.Advancement.Config.Warning.Duplicate", {localize: true});
+			return null;
 		}
 		// TODO: Allow dragging to re-order entries
 
-		await this.advancement.update({
-			[`configuration.${this.options.dropKeyPath}`]: [...existingItems, { uuid: item.uuid }]
-		});
+		const newValue = this.multiDrop ? [...existingItems, { uuid: item.uuid }] : item.uuid;
+		await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: newValue});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

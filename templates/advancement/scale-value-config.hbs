@@ -18,18 +18,20 @@
 				{{localize "BF.Advancement.ScaleValue.Item.Label"}}
 				<i class="hintIcon" data-tooltip="BF.Advancement.ScaleValue.Item.Hint"></i>
 			</legend>
-			<div class="drop-area">
-				Drop area
+			<div class="items drop-area drop-target">
+				{{#if configuration.item.uuid}}
+					<ol class="dropped-item-list">
+						<li data-item-uuid="{{configuration.item.uuid}}">
+							<span class="name">{{{blackFlag-linkForUUID configuration.item.uuid}}}</span>
+							<span class="controls">
+								<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+							</span>
+						</li>
+					</ol>
+				{{else}}
+					<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+				{{/if}}
 			</div>
-			{{#if configuration.item.uuid}}
-				<label>
-					<span>
-						{{localize "BF.Advancement.ScaleValue.Item.Grouped.Label"}}
-						<i class="hintIcon" data-tooltip="BF.Advancement.ScaleValue.Item.Grouped.Hint"></i>
-					</span>
-					<input type="checkbox" name="configuration.item.grouped" {{checked configuration.item.grouped}}>
-				</label>
-			{{/if}}
 		</fieldset>
 	</section>
 
@@ -92,16 +94,6 @@
 		<div class="form-group drop-target">
 			<label>{{localize "DND5E.AdvancementScaleValueItemLabel"}}</label>
 			<div class="form-fields">
-				{{#if configuration.item.uuid}}
-					<div class="item-name">{{{dnd5e-linkForUuid configuration.item.uuid}}}</div>
-					<div class="item-controls flexrow" data-item-uuid="{{configuration.item.uuid}}">
-						<a class="item-control item-action" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
-							<i class="fas fa-trash"></i>
-						</a>
-					</div>
-				{{else}}
-					Drop Here
-				{{/if}}
 			</div>
 			<p class="hint">{{localize "DND5E.AdvancementScaleValueItemHint"}}</p>
 		</div>
