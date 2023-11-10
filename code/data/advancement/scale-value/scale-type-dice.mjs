@@ -8,8 +8,8 @@ const { NumberField } = foundry.data.fields;
 export default class ScaleTypeDice extends ScaleTypeString {
 	static defineSchema() {
 		return {
-			number: new NumberField({nullable: true, integer: true, positive: true}),
-			denomination: new NumberField({required: true, integer: true, positive: true})
+			number: new NumberField({nullable: true, initial: null, integer: true, positive: true}),
+			denomination: new NumberField({required: true, initial: 6, integer: true, positive: true})
 		};
 	}
 
@@ -17,7 +17,8 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
 		label: "BF.Advancement.ScaleValue.Type.Dice.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Dice.Hint"
+		hint: "BF.Advancement.ScaleValue.Type.Dice.Hint",
+		input: "dice"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -30,13 +31,6 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	get formula() {
-		if ( !this.denomination ) return null;
-		return `${this.number ?? ""}${this.die}`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * The die value to be rolled with the leading "d" (e.g. "d4").
 	 * @type {string}
@@ -44,5 +38,21 @@ export default class ScaleTypeDice extends ScaleTypeString {
 	get die() {
 		if ( !this.denomination ) return "";
 		return `d${this.denomination}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get formula() {
+		if ( !this.denomination ) return null;
+		return `${this.number ?? ""}${this.die}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get placeholder() {
+		const placeholder = foundry.utils.deepClone(this);
+		placeholder.number ??= "";
+		placeholder.denomination = this.denomination ? `d${this.denomination}` : "";
+		return placeholder;
 	}
 }

@@ -11,8 +11,8 @@
 		}
 
 		> input:not([type="checkbox"]), select {
+			width: 10em;
 			flex-grow: 1;
-			width: unset;
 			align-self: center;
 		}
 
@@ -82,7 +82,7 @@
 		gap: 0.25rem 3rem;
 
 		> li {
-			flex: 40% 1 1;
+			flex: 1 1 40%;
 
 			> label {
 				display: flex;
@@ -109,12 +109,15 @@
 		margin: 0;
 		padding: 0;
 		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
 
 		.level label {
 			flex-wrap: unset;
 
 			> span:first-of-type {
-				flex: 1em 1 0;
+				flex: 1 0 1em;
 			}
 
 			> input {

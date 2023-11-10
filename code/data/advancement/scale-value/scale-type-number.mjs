@@ -17,7 +17,7 @@ export default class ScaleTypeNumber extends ScaleTypeString {
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
 		label: "BF.Advancement.ScaleValue.Type.Number.Label",
 		hint: "BF.Advancement.ScaleValue.Type.Number.Hint",
-		isNumeric: true
+		input: "number"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

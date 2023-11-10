@@ -47,9 +47,9 @@ export default class AdvancementSelection extends Dialog {
 			if ( !(advancement.prototype instanceof BlackFlag.documents.advancement.Advancement)
 				|| !config.validItemTypes.has(this.item.type) ) continue;
 			context.types[name] = {
-				label: advancement.metadata.title,
+				label: game.i18n.localize(advancement.metadata.title),
 				icon: advancement.metadata.icon,
-				hint: advancement.metadata.hint,
+				hint: game.i18n.localize(advancement.metadata.hint),
 				disabled: !advancement.availableForItem(this.item)
 			};
 		}

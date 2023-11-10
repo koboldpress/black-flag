@@ -6,7 +6,7 @@ const { StringField } = foundry.data.fields;
 export default class ScaleTypeString extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			value: new StringField({required: true})
+			value: new StringField({blank: false})
 		};
 	}
 
@@ -18,7 +18,8 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 * @typedef {object} ScaleValueTypeMetadata
 	 * @property {string} label - Name of this type.
 	 * @property {string} hint - Hint for this type shown in the scale value configuration.
-	 * @property {boolean} isNumeric - When using the default editing interface, should numeric inputs be used?
+	 * @property {string} input - What input interface should be displayed. Default values are "string", "number", "dice",
+	 *                            and "distance".
 	 */
 
 	/**
@@ -28,7 +29,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	static metadata = Object.freeze({
 		label: "BF.Advancement.ScaleValue.Type.String.Label",
 		hint: "BF.Advancement.ScaleValue.Type.String.Hint",
-		isNumeric: false
+		input: "string"
 	});
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -46,10 +47,15 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * This scale value prepared to be used in roll formulas.
-	 * @type {string|null}
+	 * For scale values with multiple properties, have missing properties inherit from earlier filled-in values.
+	 * @param {ScaleTypeString} value - The primary value.
+	 * @param {ScaleTypeString} lastValue - The previous value.
+	 * @returns {ScaleTypeString}
 	 */
-	get formula() { return this.value; }
+	static merge(value, lastValue) {
+		Object.keys(lastValue ?? {}).forEach(k => value[k] ??= lastValue[k]);
+		return value;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -57,7 +63,41 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 * This scale value formatted for display.
 	 * @type {string|null}
 	 */
-	get display() { return this.formula; }
+	get display() {
+		return this.formula;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this value currently considered empty?
+	 * @type {boolean}
+	 */
+	get empty() {
+		return !Object.values(this).some(v => !!v);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * This scale value prepared to be used in roll formulas.
+	 * @type {string}
+	 */
+	get formula() {
+		return this.value ? `${this.value}` : "";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Format this object as a placeholder for display in the config form.
+	 * @returns {ScaleValueString}
+	 */
+	get placeholder() {
+		const placeholder = foundry.utils.deepClone(this);
+		placeholder.value ??= "";
+		return placeholder;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

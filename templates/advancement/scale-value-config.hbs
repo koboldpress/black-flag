@@ -1,0 +1,109 @@
+<form autocomplete="off">
+	<section class="left-column">
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+			<label>
+				<span>{{localize "BF.Advancement.ScaleValue.Type.Label"}}</span>
+				<select name="configuration.type">
+					{{selectOptions types selected=configuration.type}}
+				</select>
+				<p class="hint type-hint">
+					{{localize type.hint}}
+				</p>
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>
+				{{localize "BF.Advancement.ScaleValue.Item.Label"}}
+				<i class="hintIcon" data-tooltip="BF.Advancement.ScaleValue.Item.Hint"></i>
+			</legend>
+			<div class="drop-area">
+				Drop area
+			</div>
+			{{#if configuration.item.uuid}}
+				<label>
+					<span>
+						{{localize "BF.Advancement.ScaleValue.Item.Grouped.Label"}}
+						<i class="hintIcon" data-tooltip="BF.Advancement.ScaleValue.Item.Grouped.Hint"></i>
+					</span>
+					<input type="checkbox" name="configuration.item.grouped" {{checked configuration.item.grouped}}>
+				</label>
+			{{/if}}
+		</fieldset>
+	</section>
+
+	<section class="right-column">
+		<fieldset>
+			<legend>levels</legend>
+			<ol class="level-list">
+				<li class="level header">
+					<label>
+						<span></span>
+						{{#if (eq @root.type.input "string")}}
+							<span>Value</span>
+						{{else if (eq @root.type.input "number")}}
+							<span>Value</span>
+						{{else if (eq @root.type.input "distance")}}
+							<span>Value</span>
+							<span>Units</span>
+						{{else if (eq @root.type.input "dice")}}
+							<span>Number</span>
+							<span>Denomination</span>
+						{{/if}}
+					</label>
+				</li>
+				{{#each levels as |data level|}}
+					<li class="level {{@root.configuration.type}}" data-level="{{level}}">
+						<label>
+							<span>{{level}}</span>
+							{{#if (eq @root.type.input "string")}}
+								<input type="text" name="configuration.scale.{{level}}.value" value="{{data.value.value}}"
+									placeholder="{{data.placeholder.value}}">
+							{{else if (eq @root.type.input "number")}}
+								<input type="number" name="configuration.scale.{{level}}.value" step="any" value="{{data.value.value}}"
+									placeholder="{{data.placeholder.value}}">
+							{{else if (eq @root.type.input "distance")}}
+								<input type="number" name="configuration.scale.{{level}}.value" step="any" value="{{data.value.value}}"
+									placeholder="{{data.placeholder.value}}">
+								<select name="configuration.scale.{{level}}.units"
+									{{~#unless data.value.units}} class="placeholder"{{/unless}}>
+									{{selectOptions @root.CONFIG.distanceUnits.localized selected=data.value.units
+										blank=data.placeholder.units}}
+								</select>
+							{{else if (eq @root.type.input "dice")}}
+								<input type="number" name="configuration.scale.{{level}}.number" step="1" value="{{data.value.number}}"
+									placeholder="{{data.placeholder.number}}">
+								<select name="configuration.scale.{{level}}.denomination" data-dtype="Number"
+									{{~#unless data.value.denomination}} class="placeholder"{{/unless}}>
+									{{selectOptions @root.faces selected=data.value.denomination blank=data.placeholder.denomination}}
+								</select>
+							{{/if}}
+							<a data-action="delete-value"><i class="fa-solid fa-trash"></i></a>
+						</label>
+					</li>
+				{{/each}}
+			</ol>
+		</fieldset>
+	</section>
+</form>
+
+{{!--
+		<div class="form-group drop-target">
+			<label>{{localize "DND5E.AdvancementScaleValueItemLabel"}}</label>
+			<div class="form-fields">
+				{{#if configuration.item.uuid}}
+					<div class="item-name">{{{dnd5e-linkForUuid configuration.item.uuid}}}</div>
+					<div class="item-controls flexrow" data-item-uuid="{{configuration.item.uuid}}">
+						<a class="item-control item-action" data-action="delete" title="{{localize 'DND5E.ItemDelete'}}">
+							<i class="fas fa-trash"></i>
+						</a>
+					</div>
+				{{else}}
+					Drop Here
+				{{/if}}
+			</div>
+			<p class="hint">{{localize "DND5E.AdvancementScaleValueItemHint"}}</p>
+		</div>
+	</div>
+--}}

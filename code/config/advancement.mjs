@@ -37,14 +37,15 @@ export const _advancementTypes = {
 		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
 	scaleValue: {
+		documentClass: advancement.ScaleValueAdvancement,
 		validItemTypes: new Set(["background", "class", "heritage", "lineage"]),
 		dataTypes: {
+			string: scaleValue.ScaleTypeString,
 			cr: scaleValue.ScaleTypeCR,
 			dice: scaleValue.ScaleTypeDice,
 			distance: scaleValue.ScaleTypeDistance,
 			number: scaleValue.ScaleTypeNumber,
-			string: scaleValue.ScaleTypeString,
-			usage: scaleValue.ScaleTypeUsage
+			// usage: scaleValue.ScaleTypeUsage
 		}
 	},
 	size: {

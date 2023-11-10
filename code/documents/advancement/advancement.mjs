@@ -81,7 +81,7 @@ export default class Advancement extends BaseAdvancement {
 		return {
 			order: 100,
 			icon: "icons/svg/upgrade.svg",
-			title: game.i18n.localize("BF.Advancement.Core.Title"),
+			title: "BF.Advancement.Core.Title",
 			hint: "",
 			identifier: {
 				configurable: false,
@@ -93,6 +93,10 @@ export default class Advancement extends BaseAdvancement {
 				flow: AdvancementFlow
 			}
 		};
+	}
+
+	get metadata() {
+		return this.constructor.metadata;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -199,7 +203,7 @@ export default class Advancement extends BaseAdvancement {
 	 * Prepare data for the Advancement.
 	 */
 	prepareData() {
-		this.title = this.title || this.constructor.metadata.title;
+		this.title = this.title || game.i18n.localize(this.constructor.metadata.title);
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
 		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.supportsAnyLevel ? 0 : 1;

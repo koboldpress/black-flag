@@ -65,7 +65,7 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get title() {
-		const type = this.advancement.constructor.metadata.title;
+		const type = game.i18n.localize(this.advancement.metadata.title);
 		return `${game.i18n.format("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
 	}
 
@@ -91,14 +91,14 @@ export default class AdvancementConfig extends FormApplication {
 			source: this.advancement.toObject(),
 			advancement: this.advancement,
 			default: {
-				title: this.advancement.constructor.metadata.title,
-				icon: this.advancement.constructor.metadata.icon,
+				title: game.i18n.localize(this.advancement.metadata.title),
+				icon: this.advancement.metadata.icon,
 				identifier: this.advancement.title.slugify({ strict: true }),
-				identifierHint: this.advancement.constructor.metadata.identifier.hint
+				identifierHint: this.advancement.metadata.identifier.hint
 			},
 			levels: Object.fromEntries(levels),
-			showIdentifier: this.advancement.constructor.metadata.identifier.configurable,
-			showLevelSelector: !this.advancement.constructor.metadata.multiLevel
+			showIdentifier: this.advancement.metadata.identifier.configurable,
+			showLevelSelector: !this.advancement.metadata.multiLevel
 		};
 		return context;
 	}

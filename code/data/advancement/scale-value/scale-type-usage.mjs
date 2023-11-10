@@ -8,8 +8,8 @@ const { NumberField, StringField } = foundry.data.fields;
 export default class ScaleTypeUsage extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
-			value: new NumberField({required: true, initial: 1, integer: true, positive: true}),
-			per: new StringField({required: true, blank: false, initial: "sr"})
+			value: new NumberField({nullable: true, integer: true, min: 0}),
+			per: new StringField({blank: false, initial: "sr"})
 		};
 	}
 
@@ -32,6 +32,7 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get display() {
-		return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods[this.per]}`;
+		return this.value;
+		// return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods[this.per]}`;
 	}
 }

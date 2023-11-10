@@ -18,7 +18,8 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
 		label: "BF.Advancement.ScaleValue.Type.Distance.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Distance.Hint"
+		hint: "BF.Advancement.ScaleValue.Type.Distance.Hint",
+		input: "distance"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -26,5 +27,13 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 	get display() {
 		const unit = CONFIG.BlackFlag.distanceUnits[this.units ?? "foot"];
 		return numberFormat(this.value, { unit });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get placeholder() {
+		const placeholder = super.placeholder;
+		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[this.units] ?? "";
+		return placeholder;
 	}
 }
