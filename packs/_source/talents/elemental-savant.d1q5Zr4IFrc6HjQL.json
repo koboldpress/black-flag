@@ -1,0 +1,59 @@
+{
+  "folder": "Y7Db5YMWkaspCbJA",
+  "name": "Elemental Savant",
+  "type": "talent",
+  "img": "icons/magic/symbols/elements-air-earth-fire-water.webp",
+  "system": {
+    "description": {
+      "value": "<p>Choose one of the following elemental damage types: acid, cold, fire, lightning, or thunder. When you cast a spell that deals damage, you can convert the damage type of that spell to your chosen elemental damage type. You must decide to convert the damage type when you declare you are casting the spell.</p><p>Additionally, when you roll damage for a spell that naturally uses your chosen elemental damage type—not a spell you convert to your chosen type—you can reroll any damage dice results of 1. You must keep the new result.</p><p>You can select this talent multiple times, selecting a different damage type each time.</p>",
+      "source": "Player's Guide"
+    },
+    "identifier": {},
+    "type": {
+      "category": "magic"
+    },
+    "advancement": {},
+    "restriction": {
+      "filters": [
+        {
+          "k": "system.spellcasting.present",
+          "v": [
+            {
+              "k": "system.spellcasting.spells.total",
+              "v": 1,
+              "o": "gte"
+            },
+            {
+              "k": "system.spellcasting.slots.max",
+              "v": 1,
+              "o": "gte"
+            }
+          ],
+          "o": "OR"
+        },
+        {
+          "k": "system.spellcasting.spells.damaging",
+          "v": 1,
+          "o": "gte"
+        }
+      ],
+      "allowMultipleTimes": false
+    }
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.315",
+    "createdTime": 1695925368848,
+    "modifiedTime": 1699730400250,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "d1q5Zr4IFrc6HjQL",
+  "sort": 300000,
+  "_key": "!items!d1q5Zr4IFrc6HjQL"
+}

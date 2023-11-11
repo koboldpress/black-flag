@@ -1,0 +1,54 @@
+{
+  "folder": "Y7Db5YMWkaspCbJA",
+  "name": "Combat Casting",
+  "type": "talent",
+  "img": "icons/equipment/shield/heater-steel-segmented-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p>Experience on the battlefield has given you superior focus to cast your spells. You gain the following benefits:</p><ul><li><p>You automatically succeed on CON saves to maintain your concentration on a spell if the DC is equal to or lower than a number equal to 8 + your PB (minimum DC 10).</p></li><li><p>When a hostile creature provokes an opportunity attack from you, you can use your reaction to cast a cantrip instead of making a melee attack.</p></li><li><p>You can use a shield or weapon you are holding as a spellcasting focus—as normal, you can use the same hand or hands holding this focus to perform somatic spell components.</p></li></ul>",
+      "source": "Player's Guide"
+    },
+    "identifier": {},
+    "type": {
+      "category": "magic"
+    },
+    "advancement": {},
+    "restriction": {
+      "filters": [
+        {
+          "k": "system.spellcasting.present",
+          "v": [
+            {
+              "k": "system.spellcasting.spells.total",
+              "v": 1,
+              "o": "gte"
+            },
+            {
+              "k": "system.spellcasting.slots.max",
+              "v": 1,
+              "o": "gte"
+            }
+          ],
+          "o": "OR"
+        }
+      ],
+      "allowMultipleTimes": false
+    }
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.315",
+    "createdTime": 1695925153294,
+    "modifiedTime": 1699730331891,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "r8ZTz5fXwJEdjv6E",
+  "sort": 200000,
+  "_key": "!items!r8ZTz5fXwJEdjv6E"
+}
