@@ -1,9 +1,23 @@
+import { filteredKeys } from "../../../utils/_module.mjs";
+
 const { StringField } = foundry.data.fields;
 
 /**
  * Base scale value data type that stores generic string values.
  */
 export default class ScaleTypeString extends foundry.abstract.DataModel {
+	constructor(data={}, options={}) {
+		const explicitKeys = filteredKeys(data);
+		super(data, options);
+		Object.defineProperty(this, "_explicitKeys", {
+			value: explicitKeys,
+			writable: false,
+			enumerable: false
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	static defineSchema() {
 		return {
 			value: new StringField({blank: false})
@@ -94,7 +108,8 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 * @returns {ScaleValueString}
 	 */
 	get placeholder() {
-		const placeholder = foundry.utils.deepClone(this);
+		const placeholder = {};
+		this._explicitKeys.forEach(k => placeholder[k] = this[k]);
 		placeholder.value ??= "";
 		return placeholder;
 	}

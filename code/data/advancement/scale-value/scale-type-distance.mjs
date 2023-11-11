@@ -10,7 +10,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
-			units: new StringField({label: "BF.Distance.Unit.Label"})
+			units: new StringField({initial: "foot", label: "BF.Distance.Unit.Label"})
 		};
 	}
 
@@ -33,7 +33,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	get placeholder() {
 		const placeholder = super.placeholder;
-		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[this.units] ?? "";
+		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[placeholder.units ?? "foot"];
 		return placeholder;
 	}
 }

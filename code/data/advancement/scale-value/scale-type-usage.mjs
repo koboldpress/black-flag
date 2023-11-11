@@ -40,7 +40,7 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 
 	get placeholder() {
 		const placeholder = super.placeholder;
-		placeholder.per = CONFIG.BlackFlag.recoveryPeriods.localized[this.per] ?? "";
+		placeholder.per = CONFIG.BlackFlag.recoveryPeriods.localized[placeholder.per ?? "sr"];
 		return placeholder;
 	}
 }

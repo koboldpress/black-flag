@@ -9,7 +9,8 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
 			value: new NumberField({required: true, min: 0})
-			// TODO: Add CR validator
+			// TODO: Convert to CRField that stores the value as a decimal (0.5) and coverts to and from
+			// fractions ("1/2" or "½") for display
 		};
 	}
 

@@ -50,9 +50,9 @@ export default class ScaleTypeDice extends ScaleTypeString {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get placeholder() {
-		const placeholder = foundry.utils.deepClone(this);
+		const placeholder = super.placeholder;
 		placeholder.number ??= "";
-		placeholder.denomination = this.denomination ? `d${this.denomination}` : "";
+		placeholder.denomination = placeholder.denomination ? `d${placeholder.denomination}` : "d6";
 		return placeholder;
 	}
 }

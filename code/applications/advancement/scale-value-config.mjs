@@ -35,7 +35,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		const types = CONFIG.Advancement.types.scaleValue.dataTypes;
 		const type = types[config.type];
 		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type];
-		const emptyPlaceholder = Object.fromEntries(Object.entries(new ScaleValueType()).map(e => [e[0], ""]));
+		const emptyPlaceholder = new ScaleValueType().placeholder;
 		return foundry.utils.mergeObject(super.getData(), {
 			default: {
 				identifierHint: game.i18n.format(this.advancement.metadata.identifier.hint, {
