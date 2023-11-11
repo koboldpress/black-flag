@@ -1,0 +1,71 @@
+{
+  "name": "Acid Arrow",
+  "type": "spell",
+  "img": "icons/magic/acid/projectile-needles-salvo-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>You launch a missile of acid toward your target.</em></p><p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "minute",
+      "special": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 5,
+        "description": "powdered rhubarb leaf and an adder’s stomach",
+        "denomination": "gp"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": 90
+    },
+    "circle": "arcane",
+    "school": "evocation",
+    "tags": [],
+    "target": {
+      "affects": {
+        "type": "creatureObject",
+        "count": "1"
+      },
+      "template": {
+        "type": ""
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.313",
+    "createdTime": 1698881084085,
+    "modifiedTime": 1699301959255,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "bzHSWjBAIuT9ujHD",
+  "sort": 200000,
+  "_key": "!items!bzHSWjBAIuT9ujHD"
+}

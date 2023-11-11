@@ -1,0 +1,75 @@
+{
+  "name": "Fireball",
+  "type": "spell",
+  "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>You hurl a small ball of flame that explodes in a huge conflagration.</em></p><p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot- radius sphere centered on that point must make a DEX save. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a tiny ball of bat guano and sulfur",
+        "denomination": "pp"
+      }
+    },
+    "tags": [],
+    "range": {
+      "value": "60",
+      "units": "foot"
+    },
+    "circle": "arcane",
+    "school": "evocation",
+    "target": {
+      "template": {
+        "type": "sphere",
+        "size": "20",
+        "width": "",
+        "height": "",
+        "count": 1,
+        "units": "foot"
+      },
+      "affects": {
+        "type": "creature",
+        "count": "",
+        "choice": false
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.313",
+    "createdTime": 1699297018533,
+    "modifiedTime": 1699301150983,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "VYvD59yJYefhAwOI",
+  "sort": 0,
+  "_key": "!items!VYvD59yJYefhAwOI"
+}

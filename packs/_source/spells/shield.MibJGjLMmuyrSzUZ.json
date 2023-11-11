@@ -1,0 +1,67 @@
+{
+  "name": "Shield",
+  "type": "spell",
+  "img": "icons/magic/defensive/barrier-shield-dome-deflect-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>You create a ward at the last moment, protecting yourself from all but the stoutest of strikes.</em></p><p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from <em>magic missile</em>.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "reaction",
+      "condition": "when you are hit by an attack or targeted by the magic missile spell"
+    },
+    "duration": {
+      "units": "round",
+      "value": "1"
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null
+      }
+    },
+    "tags": [],
+    "range": {
+      "units": "self",
+      "value": null
+    },
+    "circle": "arcane",
+    "school": "abjuration",
+    "target": {
+      "affects": {
+        "type": "",
+        "count": ""
+      },
+      "template": {
+        "type": ""
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.313",
+    "createdTime": 1699211483460,
+    "modifiedTime": 1699301528473,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "MibJGjLMmuyrSzUZ",
+  "sort": 100000,
+  "_key": "!items!MibJGjLMmuyrSzUZ"
+}

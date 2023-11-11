@@ -1,0 +1,73 @@
+{
+  "name": "Alarm",
+  "type": "spell",
+  "img": "icons/magic/sonic/bell-alarm-red-purple.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>Lines of magic flare and fade, outlining a warded area you choose.</em></p><p>You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is mental or audible.</p><p>A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.</p><p>An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.</p><p>If you perform this ritual a second time before the duration of the first alarm spell has ended, the first alarm immediately ends.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "duration": {
+      "units": "hour",
+      "value": "8"
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 10,
+        "description": "a silver hand bell worth 10 gp",
+        "denomination": "gp"
+      }
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
+    "circle": "arcane",
+    "school": "abjuration",
+    "target": {
+      "affects": {
+        "type": "special",
+        "count": "",
+        "special": "a door, a window, or an area within range that is no larger than a 20-foot cube"
+      },
+      "template": {
+        "type": ""
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.3.003",
+    "coreVersion": "11.313",
+    "createdTime": 1699211110623,
+    "modifiedTime": 1699316373833,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "QwpAynYICG3vjDSL",
+  "sort": 300000,
+  "_key": "!items!QwpAynYICG3vjDSL"
+}
