@@ -18,6 +18,7 @@ import * as targeting from "./targeting.mjs";
 import * as tools from "./tools.mjs";
 import * as traits from "./traits.mjs";
 import * as units from "./units.mjs";
+import * as usage from "./usage.mjs";
 import * as weapons from "./weapons.mjs";
 
 /**
@@ -71,5 +72,6 @@ export default {
 	...tools,
 	...traits,
 	...units,
+	...usage,
 	...weapons
 };

@@ -41,7 +41,7 @@
 			<ol class="level-list">
 				<li class="level header">
 					<label>
-						<span></span>
+						<span></span><!-- TODO: Properly fetch these headers from the data model -->
 						{{#if (eq @root.type.input "string")}}
 							<span>Value</span>
 						{{else if (eq @root.type.input "number")}}
@@ -52,6 +52,9 @@
 						{{else if (eq @root.type.input "dice")}}
 							<span>Number</span>
 							<span>Denomination</span>
+						{{else if (eq @root.type.input "usage")}}
+							<span>Number</span>
+							<span>Period</span>
 						{{/if}}
 					</label>
 				</li>
@@ -79,6 +82,14 @@
 								<select name="configuration.scale.{{level}}.denomination" data-dtype="Number"
 									{{~#unless data.value.denomination}} class="placeholder"{{/unless}}>
 									{{selectOptions @root.faces selected=data.value.denomination blank=data.placeholder.denomination}}
+								</select>
+							{{else if (eq @root.type.input "usage")}}
+								<input type="number" name="configuration.scale.{{level}}.value" step="any" value="{{data.value.value}}"
+									placeholder="{{data.placeholder.value}}">
+								<select name="configuration.scale.{{level}}.per"
+									{{~#unless data.value.per}} class="placeholder"{{/unless}}>
+									{{selectOptions @root.CONFIG.recoveryPeriods.localized selected=data.value.per
+										blank=data.placeholder.per}}
 								</select>
 							{{/if}}
 							<a data-action="delete-value"><i class="fa-solid fa-trash"></i></a>

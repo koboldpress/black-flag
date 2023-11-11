@@ -34,6 +34,8 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		const config = this.advancement.configuration;
 		const types = CONFIG.Advancement.types.scaleValue.dataTypes;
 		const type = types[config.type];
+		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type];
+		const emptyPlaceholder = Object.fromEntries(Object.entries(new ScaleValueType()).map(e => [e[0], ""]));
 		return foundry.utils.mergeObject(super.getData(), {
 			default: {
 				identifierHint: game.i18n.format(this.advancement.metadata.identifier.hint, {
@@ -48,7 +50,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 			faces: Object.fromEntries(CONFIG.BlackFlag.scaleDiceSizes.map(die => [die, `d${die}`])),
 			levels: this.levelRange.reduce((obj, level) => {
 				obj[level] = {
-					placeholder: this.advancement.valueForLevel(level - 1)?.placeholder ?? {},
+					placeholder: this.advancement.valueForLevel(level - 1)?.placeholder ?? emptyPlaceholder,
 					value: this.advancement.configuration.scale[level] ?? {}
 				};
 				return obj;
@@ -115,7 +117,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		for ( const level of this.levelRange ) {
 			const value = this.advancement.valueForLevel(level);
 			if ( value ) updates.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
-			else updates.configuraiton.scale[`-=${level}`] = null;
+			else updates.configuration.scale[`-=${level}`] = null;
 		}
 		updates.configuration.type = type;
 

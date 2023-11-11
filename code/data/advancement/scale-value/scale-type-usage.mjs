@@ -17,7 +17,8 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
 		label: "BF.Advancement.ScaleValue.Type.Usage.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Usage.Hint"
+		hint: "BF.Advancement.ScaleValue.Type.Usage.Hint",
+		input: "usage"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -32,7 +33,14 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get display() {
-		return this.value;
-		// return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods[this.per]}`;
+		return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per]}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get placeholder() {
+		const placeholder = super.placeholder;
+		placeholder.per = CONFIG.BlackFlag.recoveryPeriods.localized[this.per] ?? "";
+		return placeholder;
 	}
 }

@@ -45,7 +45,7 @@ export const _advancementTypes = {
 			dice: scaleValue.ScaleTypeDice,
 			distance: scaleValue.ScaleTypeDistance,
 			number: scaleValue.ScaleTypeNumber,
-			// usage: scaleValue.ScaleTypeUsage
+			usage: scaleValue.ScaleTypeUsage
 		}
 	},
 	size: {
