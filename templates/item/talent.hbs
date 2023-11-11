@@ -27,7 +27,10 @@
 				</div>
 				{{#if (or editable system.restriction.label)}}
 					<div class="prerequisite">
-						<span>{{localize "BF.Prerequisite.Label"}}: {{system.restriction.label}}</span>
+						<span>
+							{{localize "BF.Prerequisite.Label"}}: {{#if system.restriction.label}}
+								{{~system.restriction.label}}{{else}}{{localize "None"}}{{/if}}
+						</span>
 						{{#if editable}}
 							<a data-action="config" data-type="prerequisite">
 								<i class="fa-solid fa-cog"></i>

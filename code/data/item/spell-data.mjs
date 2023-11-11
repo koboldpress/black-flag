@@ -264,7 +264,22 @@ export default class SpellData extends ItemDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Resolve range, duration, and target formulas.
+	 */
 	prepareFinalFormulas() {
 		// TODO: Resolve range & duration formulas
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contribute to total spell numbers on actor if embedded.
+	 */
+	prepareFinalStats() {
+		const stats = this.parent.actor?.system.spellcasting?.spells;
+		if ( !stats ) return;
+		stats.total += 1;
+		// TODO: If does damage, add to "damaging"
 	}
 }

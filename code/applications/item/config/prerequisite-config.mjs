@@ -43,7 +43,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 			source: this.document.toObject().system,
 			system: this.document.system,
 			abilities: this.prepareAbilities(),
-			// TODO: Spellcasting
+			spellcasting: this.prepareSpellcasting(),
 			traits: this.prepareTraits()
 		}, await super.getData(options));
 		return context;
@@ -54,7 +54,6 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/**
 	 * Prepare minimum abilities.
 	 * @returns {object}
-	 * @abstract
 	 */
 	prepareAbilities() {
 		const abilities = {};
@@ -71,9 +70,21 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Prepare spellcasting restrictions.
+	 * @returns {object}
+	 */
+	prepareSpellcasting() {
+		const spellcasting = {};
+		spellcasting.present = this.filters.find(f => f.k === "system.spellcasting.present")?.v;
+		spellcasting.damage = this.filters.find(f => f.k === "system.spellcasting.spells.damaging")?.v;
+		return spellcasting;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare trait restrictions.
 	 * @returns {object}
-	 * @abstract
 	 */
 	prepareTraits() {
 		const traits = {};
@@ -98,7 +109,11 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		};
 
 		Object.entries(data.abilities).forEach(([k, v]) => updateFilter(`system.abilities.${k}.value`, v, "gte"));
-		// TODO: Spellcasting
+		updateFilter("system.spellcasting.present", data.spellcasting?.present ? [
+			{k: "system.spellcasting.spells.total", v: 1, o: "gte"},
+			{k: "system.spellcasting.slots.max", v: 1, o: "gte"}
+		] : 0, "OR");
+		updateFilter("system.spellcasting.spells.damaging", data.spellcasting?.damage ? 1 : 0, "gte");
 		updateFilter("system.traits.size", data.traits?.size);
 
 		super._updateObject(event, {"system.restriction.filters": filters});

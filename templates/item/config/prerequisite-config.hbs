@@ -9,7 +9,17 @@
 		{{/each}}
 	</fieldset>
 	<fieldset class="spellcasting">
-		<legend>Spellcasting</legend>
+		<legend>{{localize "BF.Spellcasting.Label"}}</legend>
+		<label>
+			<span>{{localize "BF.Prerequisite.Spellcasting.Label"}}</span>
+			<input type="checkbox" name="spellcasting.present" {{checked spellcasting.present}}>
+		</label>
+		{{#if spellcasting.present}}
+			<label>
+				<span>{{localize "BF.Prerequisite.SpellcastingDamage.ConfigLabel"}}</span>
+				<input type="checkbox" name="spellcasting.damage" {{checked spellcasting.damage}}>
+			</label>
+		{{/if}}
 	</fieldset>
 	<fieldset class="traits">
 		<legend>{{localize "BF.Trait.Label[other]"}}</legend>

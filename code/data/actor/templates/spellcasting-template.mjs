@@ -83,7 +83,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare actor's spell slots using progression data.
-	 * @param {object} spells - The `system.spells` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.rings` object within actor's data. *Will be mutated.*
 	 * @param {string} type - Type of spellcasting slots being prepared.
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} [config]
@@ -110,7 +110,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare leveled spell slots using progression data.
-	 * @param {object} spells - The `system.spells` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.rings` object within actor's data. *Will be mutated.*
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} config
 	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.

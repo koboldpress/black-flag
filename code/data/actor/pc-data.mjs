@@ -246,6 +246,13 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareBaseSpellcasting() {
+		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
+		this.spellcasting.spells ??= { total: 0, damaging: 0 };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareEmbeddedClasses() {
 		this.progression.classes = {};
 		for ( const [level, data] of Object.entries(this.progression.levels) ) {
@@ -526,7 +533,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedSpellcasting() {
-		// Calculate spellcasting DC per-class
+		// TODO: Calculate spellcasting DC per-class
 
 		// Combine class spellcasting data to total progression
 		const progression = { leveled: 0 };
@@ -554,6 +561,11 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 		for ( const ring of Object.values(this.spellcasting.rings) ) {
 			ring.value = Math.clamped(ring.max - ring.spent, 0, ring.max);
+			if ( Number.isFinite(ring.max) ) {
+				this.spellcasting.slots.value += ring.value;
+				this.spellcasting.slots.spent += ring.spent;
+				this.spellcasting.slots.max += ring.max;
+			}
 		}
 	}
 

@@ -71,7 +71,16 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			})));
 		}
 
-		// TODO: Spellcasting
+		// Spellcasting
+		const damageSpellsFilter = this.restriction.filters.find(f => f.k === "system.spellcasting.spells.damaging");
+		if ( damageSpellsFilter ) {
+			prerequisites.push(validate(damageSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")));
+		} else {
+			const spellcastingFilter = this.restriction.filters.find(f => f.k === "system.spellcasting.present");
+			if ( spellcastingFilter ) prerequisites.push(validate(
+				spellcastingFilter, game.i18n.localize("BF.Prerequisite.Spellcasting.Label")
+			));
+		}
 
 		// Traits
 		const sizeFilter = this.restriction.filters.find(f => f.k === "system.traits.size");
@@ -104,6 +113,14 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 					ability: game.i18n.localize(CONFIG.BlackFlag.abilities[abilityKey].labels.full).toLowerCase(),
 					value: numberFormat(invalidFilter.v)
 				}));
+			}
+
+			// Spellcasting
+			else if ( invalidFilter.k === "system.spellcasting.spells.damaging" ) {
+				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning"));
+			}
+			else if ( invalidFilter.k === "system.spellcasting.present" ) {
+				messages.push(game.i18n.localize("BF.Prerequisite.Spellcasting.Warning"));
 			}
 
 			// Sizes
