@@ -426,6 +426,35 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Delete this Advancement, removing it from the database.
+	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the deletion workflow.
+	 * @returns {Promise<Advancement>} - The deleted Document instance.
+	 */
+	async delete(context={}) {
+		const deleted = await this.item.deleteEmbeddedDocuments("Advancement", [this.id], context);
+		return deleted.shift();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Present a Dialog form to confirm deletion of this Advancement.
+	 * @param {object} [options] - Positioning and sizing options for the resulting dialog.
+	 * @returns {Promise<Advancement>} - A Promise which resolves to the deleted Advancement.
+	 */
+	async deleteDialog(options={}) {
+		const type = game.i18n.localize(this.metadata.title);
+		return Dialog.confirm({
+			title: `${game.i18n.format("DOCUMENT.Delete", {type})}: ${this.name}`,
+			content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {type})}</p>`,
+			yes: this.delete.bind(this),
+			options: options
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Can an advancement of this type be added to the provided item?
 	 * @param {BlackFlagItem} item - Item to check against.
 	 * @returns {boolean} - Should this be enabled as an option on the {@link AdvancementSelection} dialog?

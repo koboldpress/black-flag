@@ -126,7 +126,7 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 		switch (action) {
 			case "add": return AdvancementSelection.createDialog(this.item);
 			case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-			case "delete": return this.item.deleteEmbeddedDocuments("Advancement", [id]);
+			case "delete": return advancement.deleteDialog();
 			case "duplicate":
 				const data = advancement.toObject();
 				delete data._id;
