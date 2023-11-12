@@ -114,8 +114,8 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		const reference = `@scale.ID.${scaleData.identifier}`;
 		const config = this.advancement.configuration[name];
 		const newFormula = config.formula ? `${reference} + ${config.formula}` : reference;
-		await this.item.createEmbeddedDocuments("Advancement", [scaleData], { renderSheet: true });
 		await this.advancement.update({[`configuration.${name}.formula`]: newFormula});
+		await this.item.createEmbeddedDocuments("Advancement", [scaleData], { renderSheet: true });
 		this.render();
 	}
 }
