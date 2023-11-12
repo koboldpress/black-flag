@@ -8,6 +8,7 @@ export default class PCSheet extends BaseActorSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "actor", "sheet", "pc"],
+			dragDrop: [{dragSelector: "[data-item-id]"}],
 			width: 820,
 			height: 740,
 			tabs: [

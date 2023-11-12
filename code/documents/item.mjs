@@ -39,6 +39,17 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareEmbeddedDocuments() {
+		super.prepareEmbeddedDocuments();
+		if ( this.system.advancement ) {
+			for ( const e of this.getEmbeddedCollection("Advancement") ) {
+				e.prepareData();
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Embedded Operations         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

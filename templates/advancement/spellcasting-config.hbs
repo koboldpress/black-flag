@@ -37,28 +37,51 @@
 			</label>
 		</fieldset>
 		<fieldset>
-			<legend>gaining spells</legend>
+			<legend>{{localize "BF.Advancement.Spellcasting.GainingSpells"}}</legend>
 			<label>
 				<span>{{localize "BF.Spell.Circle.Label"}}</span>
 				<select name="configuration.circle">
 					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
 				</select>
 			</label>
-			{{!--
-			<label>
-				<span>
-					{{localize "BF.Spellcasting.CantripsKnown.Label"}}
-					<i class="hintIcon" data-tooltip="BF.Spellcasting.CantripsKnown.Hint"></i>
-				</span>
-				
-			</label>
-			<label>
-				<span>
-					{{localize "BF.Spellcasting.RitualsKnown.Label"}}
-					<i class="hintIcon" data-tooltip="BF.Spellcasting.RitualsKnown.Hint"></i>
-				</span>
-				
-			</label>--}}
+			{{#each formulas as |data name|}}
+				<div class="field-group formula-controls" data-name="{{name}}">
+					<span>
+						{{localize data.label}}
+						<i class="hintIcon" data-tooltip="{{data.hint}}"></i>
+					</span>
+					{{#if data.displayFormula}}
+						<input type="text" name="configuration.{{name}}.formula" value="{{data.formula}}">
+						{{#if data.scaleValue}}
+							<button type="button" data-action="formula" data-sub-action="view-scale-value">
+								<i class="fa-solid fa-edit"></i> <i class="fa-solid fa-scale-unbalanced"></i>
+							</button>
+						{{else}}
+							<button type="button" data-action="formula" data-sub-action="use-scale-value">
+								<i class="fa-solid fa-plus"></i> <i class="fa-solid fa-scale-unbalanced"></i>
+							</button>
+						{{/if}}
+					{{else if data.scaleValue}}
+						<button type="button" data-action="formula" data-sub-action="view-scale-value">
+							<i class="fa-solid fa-edit"></i>
+							{{localize "BF.Advancement.ScaleValue.Title"}}
+						</button>
+						<button type="button" data-action="formula" data-sub-action="customize">
+							<i class="fa-solid fa-edit"></i>
+							{{localize "BF.Formula"}}
+						</button>
+					{{else}}
+						<button type="button" data-action="formula" data-sub-action="use-scale-value">
+							<i class="fa-solid fa-plus"></i>
+							{{localize "BF.Advancement.ScaleValue.Title"}}
+						</button>
+						<button type="button" data-action="formula" data-sub-action="use-formula">
+							<i class="fa-solid fa-plus"></i>
+							{{localize "BF.Formula"}}
+						</button>
+					{{/if}}
+				</div>
+			{{/each}}
 		</fieldset>
 	</section>
 </form>

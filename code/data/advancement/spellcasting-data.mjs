@@ -1,6 +1,6 @@
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
@@ -16,12 +16,12 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
 			preparation: new BooleanField({initial: true, label: "BF.Spellcasting.Prepared.Label"}),
 			focus: new StringField(),
-			cantrips: new FormulaField({
-				deterministic: true, label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint"
-			}),
-			rituals: new FormulaField({
-				deterministic: true, label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"
-			})
+			cantrips: new SchemaField({
+				formula: new FormulaField({deterministic: true})
+			}, {label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint"}),
+			rituals: new SchemaField({
+				formula: new FormulaField({deterministic: true})
+			}, {label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"})
 			// TODO: Add system for granting spells at level-up
 		};
 	}
@@ -44,5 +44,41 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			prepared: prepared ? game.i18n.localize(prepared) : "",
 			progression: progression ? game.i18n.localize(progression) : ""
 		}).trim();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareData() {
+		const regex = /@scale\.(?:[a-z0-9_-]+)\.([a-z0-9_-]+)/i;
+		const scaleValues = this.parent.item.system?.advancement.byType("scaleValue") ?? [];
+		if ( !scaleValues ) {
+			console.log("!!!", this.parent, this.parent.item);
+			return;
+		}
+
+		const prepareScale = obj => {
+			const matches = (obj.formula ?? "").match(regex) ?? [];
+			Object.defineProperty(obj, "scaleValue", {
+				get() {
+					return scaleValues.find(s => s.identifier === matches[1]);
+				},
+				configurable: true,
+				enumerable: false
+			});
+			Object.defineProperty(obj, "displayFormula", {
+				get() {
+					if ( !obj.formula ) return false;
+					if ( obj.formula.trim() !== matches[0] ) return true;
+					return !this.scaleValue;
+				},
+				configurable: true,
+				enumerable: false
+			});
+		};
+
+		prepareScale(this.cantrips);
+		prepareScale(this.rituals);
 	}
 }

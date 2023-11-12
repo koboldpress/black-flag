@@ -66,25 +66,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll('[data-action="delete-value"]') ) {
-			element.addEventListener("click", this._onDeleteValue.bind(this));
-		}
-
 		// this.form.querySelector(".identifier-hint-copy").addEventListener("click", this._onIdentifierHintCopy.bind(this));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Handle deleting a value.
-	 * @param {ClickEvent} event - Triggering click event.
-	 * @returns {Promise}
-	 */
-	async _onDeleteValue(event) {
-		event.target.closest("li")
-			.querySelectorAll(":is(input, select)")
-			.forEach(i => i.value = "");
-		this.submit();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

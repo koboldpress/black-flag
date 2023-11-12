@@ -34,12 +34,18 @@ export default class Advancement extends BaseAdvancement {
 			writable: false,
 			enumerable: false
 		});
+
+		/**
+		 * A cached reference to the FormApplication instance used to configure this Advancement.
+		 */
+		Object.defineProperty(this, "_sheet", { value: null, writable: true, enumerable: false });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_initialize(options) {
 		super._initialize(options);
+		if ( !game._documentsReady ) return;
 		return this.prepareData();
 	}
 
@@ -154,6 +160,21 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Lazily obtain a FormApplication instance used to configure this PseudoDocument, or null if no sheet is available.
+	 * @type {FormApplication|null}
+	 */
+	get sheet() {
+		if ( !this._sheet ) {
+			const cls = this.metadata.apps.config;
+			if ( !cls ) return null;
+			this._sheet = new cls(this, {editable: this.item.isOwner});
+		}
+		return this._sheet;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * List of levels in which this advancement object should be displayed. Will be a list of class levels if this
 	 * advancement is being applied to classes or subclasses, otherwise a list of character levels.
 	 * @returns {number[]}
@@ -207,6 +228,8 @@ export default class Advancement extends BaseAdvancement {
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
 		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.supportsAnyLevel ? 0 : 1;
+		if ( foundry.utils.getType(this.configuration?.prepareData) === "function" ) this.configuration.prepareData();
+		if ( foundry.utils.getType(this.value?.prepareData) === "function" ) this.value.prepareData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
