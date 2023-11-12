@@ -24,6 +24,7 @@ export default class SizeConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
+		context.showLevelSelector = false;
 		return context;
 	}
 

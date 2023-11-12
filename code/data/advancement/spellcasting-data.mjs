@@ -53,16 +53,12 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	prepareData() {
 		const regex = /@scale\.(?:[a-z0-9_-]+)\.([a-z0-9_-]+)/i;
 		const scaleValues = this.parent.item.system?.advancement.byType("scaleValue") ?? [];
-		if ( !scaleValues ) {
-			console.log("!!!", this.parent, this.parent.item);
-			return;
-		}
 
 		const prepareScale = obj => {
 			const matches = (obj.formula ?? "").match(regex) ?? [];
 			Object.defineProperty(obj, "scaleValue", {
 				get() {
-					return scaleValues.find(s => s.identifier === matches[1]);
+					return scaleValues?.find(s => s.identifier === matches[1]);
 				},
 				configurable: true,
 				enumerable: false

@@ -24,6 +24,14 @@ export default class SizeAdvancement extends Advancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Instance Properties         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get levels() {
+		return [0];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

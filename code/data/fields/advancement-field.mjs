@@ -36,15 +36,15 @@ export class AdvancementCollection extends Collection {
 			this.set(id, entry);
 			this.#types[entry.type] ??= [];
 			this.#types[entry.type].push(entry);
-			for ( const level of entry.levels ) {
-				this.#levels[level] ??= [];
-				this.#levels[level].push(entry);
-			}
+			// for ( const level of entry.levels ) {
+			// 	this.#levels[level] ??= [];
+			// 	this.#levels[level].push(entry);
+			// }
 		}
-		Object.entries(this.#levels).forEach(([lvl, data]) => data.sort((a, b) =>
-			a.sortingValueForLevel({character: lvl, class: lvl})
-				.localeCompare(b.sortingValueForLevel({character: lvl, class: lvl}))
-		));
+		// Object.entries(this.#levels).forEach(([lvl, data]) => data.sort((a, b) =>
+		// 	a.sortingValueForLevel({character: lvl, class: lvl})
+		// 		.localeCompare(b.sortingValueForLevel({character: lvl, class: lvl}))
+		// ));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,11 +68,34 @@ export class AdvancementCollection extends Collection {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Cached store of advancements by level.
+	 * @type {object}
+	 * @private
+	 */
+	#_levels;
+
+	/**
 	 * Pre-filtered and -sorted arrays of advancements per-level.
 	 * @type {object}
 	 * @private
 	 */
-	#levels = {};
+	get #levels() {
+		if ( !this.#_levels ) {
+			const levels = {};
+			for ( const advancement of this ) {
+				for ( const level of advancement.levels ) {
+					levels[level] ??= [];
+					levels[level].push(advancement);
+				}
+			}
+			Object.entries(levels).forEach(([lvl, data]) => data.sort((a, b) =>
+				a.sortingValueForLevel({character: lvl, class: lvl})
+					.localeCompare(b.sortingValueForLevel({character: lvl, class: lvl}))
+			));
+			this.#_levels = levels;
+		}
+		return this.#_levels;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
