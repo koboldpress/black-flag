@@ -114,7 +114,13 @@
           "progression": "full",
           "circle": "divine",
           "type": "leveled",
-          "preparation": true
+          "preparation": true,
+          "cantrips": {
+            "formula": "@scale.ID.cantrips-known"
+          },
+          "rituals": {
+            "formula": "@scale.ID.rituals-known"
+          }
         },
         "flags": {}
       },
@@ -196,6 +202,45 @@
             "uuid": "Compendium.black-flag.classes.Item.j66k3KrqCJuW5L4g"
           }
         }
+      },
+      "71Q8Z9hr0o6K9IP8": {
+        "type": "scaleValue",
+        "title": "Cantrips Known",
+        "identifier": "cantrips-known",
+        "configuration": {
+          "type": "number",
+          "scale": {
+            "1": {
+              "value": 3
+            },
+            "4": {
+              "value": 4
+            }
+          }
+        },
+        "_id": "71Q8Z9hr0o6K9IP8",
+        "icon": ""
+      },
+      "Q5UyUN97mQyucTyc": {
+        "type": "scaleValue",
+        "title": "Rituals Known",
+        "identifier": "rituals-known",
+        "configuration": {
+          "type": "number",
+          "scale": {
+            "1": {
+              "value": 1
+            },
+            "3": {
+              "value": 2
+            },
+            "5": {
+              "value": 3
+            }
+          }
+        },
+        "_id": "Q5UyUN97mQyucTyc",
+        "icon": ""
       }
     },
     "color": "#313a98"
@@ -211,7 +256,7 @@
     "systemVersion": "0.3.003",
     "coreVersion": "11.315",
     "createdTime": 1694467685894,
-    "modifiedTime": 1699661974042,
+    "modifiedTime": 1699818197046,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "sA0d2k4NbcaVFvMK",
