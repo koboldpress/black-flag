@@ -1,5 +1,7 @@
 .black-flag.actor.sheet section.spellcasting {
 	table {
+		border: none;
+
 		tbody {
 			tr {
 				:is(td, th) {
@@ -21,13 +23,33 @@
 					border-inline-end: 1px solid var(--bf-color-border-gray);
 					mask-image: linear-gradient(to bottom, transparent, #000 30% 70%, transparent);
 				}
+
+				.controls {
+					width: 1em;
+					.layout {
+						justify-content: flex-end;
+					}
+				} 
 			}
 
 			> tr:first-child {
+				position: relative;
 				border: 2px inset color-mix(in oklab, var(--bf-color-border-blue), white 40%);
 				font-family: var(--bf-font-header);
 				font-weight: 600;
 
+				&::after {
+					content: "";
+					position: absolute;
+					inset: 3px;
+					border: 1px solid var(--bf-color-border-gray);
+					box-shadow: 0px 0px 3px rgb(0 0 0 / 0.25);
+					z-index: 0;
+				}
+
+				> * {
+					z-index: 1;
+				}
 				.name {
 					padding-inline-start: 0.5rem;
 					font-variant: small-caps;
