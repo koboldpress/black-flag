@@ -1,6 +1,18 @@
 import { LongRestDialog, ShortRestDialog } from "../applications/actor/_module.mjs";
 
 /**
+ * Configuration information for death saves.
+ * @type {object}
+ */
+export const deathSave = {
+	target: 10,
+	successThreshold: 3,
+	failureThreshold: 3
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for luck points.
  * @type {{
  *   costs: {[key: string]: number},

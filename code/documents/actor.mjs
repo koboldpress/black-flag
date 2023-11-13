@@ -176,7 +176,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Apply temp HP to the actor, but only if it's more than the actor's current temp HP.
 	 * @param {number} amount - Amount of temp HP to apply.
-	 * @returns {Promise<ActorEH>} - The actor after the update has been performed.
+	 * @returns {Promise<BlackFlagActor>} - The actor after the update has been performed.
 	 */
 	async applyTempHP(amount=0) {
 		const hp = this.system.attributes.hp;
@@ -453,6 +453,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				return this.rollAbilityCheck(config, message, dialog);
 			case "ability-save":
 				return this.rollAbilitySave(config, message, dialog);
+			case "death-save":
+				return this.rollDeathSave(config, message, dialog);
 			case "hit-die":
 				return this.rollHitDie(config, message, dialog);
 			case "initiative":
@@ -625,6 +627,167 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
 		if ( rolls?.length ) Hooks.callAll("blackFlag.rollAbilitySave", this, rolls, config.ability);
+
+		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration data for death saving throw rolls.
+	 *
+	 * @typedef {ChallengeRollConfiguration} DeathSaveRollConfiguration
+	 * @property {number} [successThreshold] - Number of successes required to stabilize.
+	 * @property {number} [failureThreshold] - Number of failures required to die.
+	 */
+
+	/**
+	 * Roll a death saving throw.
+	 * @param {DeathSaveRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @returns {Promise<ChallengeRoll[]|void>}
+	 */
+	async rollDeathSave(config={}, message={}, dialog={}) {
+		const death = this.system.attributes.death;
+
+		const modifierData = { type: "death-save" };
+		const rollData = this.getRollData();
+
+		const { parts, data } = buildRoll({
+			bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+		}, rollData);
+
+		const rollConfig = foundry.utils.mergeObject({
+			data,
+			successThreshold: death.overrides.success
+				? death.overrides.success : CONFIG.BlackFlag.deathSave.successThreshold,
+			failureThreshold: death.overrides.failure
+				? death.overrides.failure : CONFIG.BlackFlag.deathSave.failureThreshold,
+			options: {
+				minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+				target: death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
+			}
+		}, config);
+		rollConfig.parts = parts.concat(config.parts ?? []);
+
+		const type = game.i18n.localize("BF.Death.Label[one]");
+		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const messageConfig = foundry.utils.mergeObject({
+			data: {
+				title: `${flavor}: ${this.name}`,
+				flavor,
+				speaker: ChatMessage.getSpeaker({actor: this}),
+				"flags.black-flag.roll": {
+					type: "death-save"
+				}
+			}
+		}, message);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			options: {
+				rollNotes: this.system.getModifiers(modifierData, "note"),
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+			}
+		}, dialog);
+
+		/**
+		 * A hook event that fires before an death save is rolled for an Actor.
+		 * @function blackFlag.preRollDeathSave
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the death save is being rolled.
+		 * @param {DeathSaveRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @returns {boolean} - Explicitly return `false` to prevent death save from being rolled.
+		 */
+		if ( Hooks.call("blackFlag.preRollDeathSave", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+
+		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
+		if ( !rolls?.length ) return;
+		const roll = rolls[0];
+
+		const details = {};
+
+		// Save success
+		if ( roll.total >= (roll.options.target ?? CONFIG.BlackFlag.deathSave.target) ) {
+			let successes = (death.success || 0) + 1;
+
+			// Critical success, you're back up!
+			if ( roll.isCriticalSuccess ) {
+				details.updates = {
+					"system.attributes.death.status": "alive",
+					"system.attributes.death.success": 0,
+					"system.attributes.death.failure": 0,
+					"system.attributes.hp.value": 1
+				};
+				details.chatString = "BF.Death.Message.CriticalSuccess";
+			}
+
+			// Three successes, you're stabilized
+			else if ( successes >= rollConfig.successThreshold ) {
+				details.updates = {
+					"system.attributes.death.status": "stable",
+					"system.attributes.death.success": 0,
+					"system.attributes.death.failure": 0
+				};
+				details.chatString = "BF.Death.Message.Success";
+				details.count = rollConfig.successThreshold;
+			}
+
+			// Increment successes
+			else details.updates = {
+				"system.attributes.death.success": Math.clamped(successes, 0, rollConfig.successThreshold)
+			};
+		}
+
+		// Save failure
+		else {
+			let failures = (death.failure || 0) + (roll.isCriticalFailure ? 2 : 1);
+			details.updates = {
+				"system.attributes.death.failure": Math.clamped(failures, 0, rollConfig.failureThreshold)
+			};
+			// Three failures, you're dead
+			if ( failures >= rollConfig.failureThreshold ) {
+				details.updates["system.attributes.death.status"] = "dead";
+				details.chatString = "BF.Death.Message.Failure";
+				details.count = rollConfig.failureThreshold;
+			}
+		}
+
+		/**
+		 * A hook event that fires after a death saving throw has been rolled for an Actor, but before
+		 * updates have been performed.
+		 * @function blackFlag.rollDeathSave
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the death saving throw has been rolled.
+		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {object} details
+		 * @param {object} details.updates - Updates that will be applied to the actor as a result of this save.
+		 * @param {string} details.chatString - Localizable string displayed in the create chat message. If not set,
+		 *                                      then no chat message will be displayed.
+		 * @param {number} details.count - Number of rolls succeeded or failed to result in this message.
+		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
+		 */
+		if ( Hooks.call("blackFlag.rollDeathSave", this, rolls, details) === false ) return roll;
+
+		if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
+
+		// Display success/failure chat message
+		if ( details.chatString ) {
+			const pluralRule = (new Intl.PluralRules(game.i18n.lang)).select(details.count);
+			const numberFormatter = new Intl.NumberFormat(game.i18n.lang);
+			const counted = game.i18n.format("BF.Death.Message.Counted", {
+				count: numberFormatter.format(details.count),
+				label: game.i18n.localize(`BF.Death.Message.Label[${pluralRule}]`)
+			});
+			let chatData = {
+				content: game.i18n.format(details.chatString, {name: this.name, counted}),
+				speaker: messageConfig.data.speaker
+			};
+			ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+			await ChatMessage.create(chatData);
+		}
 
 		return rolls;
 	}

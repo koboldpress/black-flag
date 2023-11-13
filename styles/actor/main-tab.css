@@ -348,45 +348,47 @@
 					}
 				}
 				.death-saves {
-					display: grid;
-					grid-template-columns: 1fr 1fr 1fr;
-					gap: 0 0.5rem;
-					background-color: var(--bf-color-fill);
-
-					label:first-child {
-						display: block;
-						grid-column: 1 / -1;
+					label {
+						display: grid;
+						grid-template-columns: 1fr 1fr;
+						gap: 0 0.5rem;
 						color: var(--bf-text-color-light-label);
 						font-size: var(--font-size-11);
-						font-variant: small-caps;
-						font-weight: 700;
 						text-align: center;
-					}
-					button {
-						background: none;
-						border: none;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						height: 100%;
-						z-index: 1;
-					}
-					.successes, .failures {
-						flex-wrap: nowrap;
-						align-items: center;
-						padding-inline: 0.25rem;
-						background: none;
-						input {
-							text-align: center;
-							background: none;
-							border: none;
+
+						> span:first-child {
+							grid-column: 1 / -1;
 						}
 					}
-					.successes > i {
-						color: var(--bf-dice-color-critical-success);
+					a {
+						grid-column: 1 / -1;
+						&:hover {
+							filter: drop-shadow(0 0 4px var(--bf-color-border-light-blue));
+						}
 					}
-					.failures > i {
-						color: var(--bf-dice-color-critical-failure);
+					.death-saves-control {
+						width: 100%;
+						grid-column: 1 / -1;
+						aspect-ratio: 4 / 1;
+
+						&:is([data-success="1"], [data-success="2"], [data-success="3"]) {
+							--success-1-fill: url('#blackFlag-deathSaves-gradient-success-1');
+						}
+						&:is([data-failure="1"], [data-failure="2"], [data-failure="3"]) {
+							--failure-1-fill: url('#blackFlag-deathSaves-gradient-failure-1');
+						}
+						&:is([data-success="2"], [data-success="3"]) {
+							--success-2-fill: url('#blackFlag-deathSaves-gradient-success-2');
+						}
+						&:is([data-failure="2"], [data-failure="3"]) {
+							--failure-2-fill: url('#blackFlag-deathSaves-gradient-failure-2');
+						}
+						&:is([data-success="3"]) {
+							--success-3-fill: url('#blackFlag-deathSaves-gradient-success-3');
+						}
+						&:is([data-failure="3"]) {
+							--failure-3-fill: url('#blackFlag-deathSaves-gradient-failure-3');
+						}
 					}
 				}
 			}

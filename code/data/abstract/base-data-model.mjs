@@ -232,11 +232,12 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 * @param {object} data - The initial data object provided to the document creation request.
 	 * @param {object} options - Additional options which modify the creation request.
 	 * @param {User} user - The User requesting the document creation.
+	 * @returns {boolean} - Return false to prevent document creation.
 	 * @protected
 	 */
 	async _preCreate(data, options, user) {
 		for ( const name of this.constructor._getMethods({ startingWith: "_preCreate" }) ) {
-			await this[name](data, options, user);
+			if ( await this[name](data, options, user) === false ) return false;
 		}
 	}
 
@@ -247,11 +248,12 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 * @param {object} changed - The differential data that is changed relative to the documents prior values.
 	 * @param {object} options - Additional options which modify the update request.
 	 * @param {User} user - The User requesting the document update.
+	 * @returns {boolean} - Return false to prevent document update.
 	 * @protected
 	 */
 	async _preUpdate(changed, options, user) {
 		for ( const name of this.constructor._getMethods({ startingWith: "_preUpdate" }) ) {
-			await this[name](changed, options, user);
+			if ( await this[name](changed, options, user) === false ) return false;
 		}
 	}
 
@@ -261,11 +263,12 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 * Pre-deletion logic for this system data.
 	 * @param {object} options - Additional options which modify the deletion request.
 	 * @param {User} user - The User requesting the document deletion.
+	 * @returns {boolean} - Return false to prevent document deletion.
 	 * @protected
 	 */
 	async _preDelete(options, user) {
 		for ( const name of this.constructor._getMethods({ startingWith: "_preDelete" }) ) {
-			await this[name](options, user);
+			if ( await this[name](options, user) === false ) return false;
 		}
 	}
 

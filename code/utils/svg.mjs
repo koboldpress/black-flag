@@ -10,6 +10,7 @@ export function cacheInterfaceSVG() {
 		d10: "systems/black-flag/artwork/interface/dice/d10.svg",
 		d12: "systems/black-flag/artwork/interface/dice/d12.svg",
 		d20: "systems/black-flag/artwork/interface/dice/d20.svg",
+		deathSaves: "systems/black-flag/artwork/interface/death-saves.svg",
 		proficiency: "systems/black-flag/artwork/interface/proficiency.svg"
 	});
 }

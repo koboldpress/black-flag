@@ -60,10 +60,18 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 					}),
 					failure: new NumberField({
 						nullable: false, initial: 0, min: 0, integer: true, label: "BF.Death.Failure.Label"
+					}),
+					overrides: new SchemaField({
+						success: new NumberField({
+							label: "BF.Death.Override.Success.Label", hint: "BF.Death.Override.Success.hint"
+						}),
+						failure: new NumberField({
+							label: "BF.Death.Override.Failure.Label", hint: "BF.Death.Override.Failure.hint"
+						}),
+						target: new NumberField({
+							label: "BF.Death.Override.Target.Label", hint: "BF.Death.Override.Target.hint"
+						})
 					})
-					// Successes required override
-					// Failures required override
-					// Target threshold override
 				}),
 				hd: new SchemaField({
 					d: new MappingField(new SchemaField({
@@ -932,5 +940,22 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 		// TODO: Need to find a way to re-render on all clients
 		this.parent.render();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preUpdateHP(changed, options, user) {
+		const changedHP = foundry.utils.getProperty(changed, "system.attributes.hp.value");
+		if ( changedHP !== undefined ) {
+			if ( (changedHP > 0) || (this.attributes.hp.max === 0) ) {
+				foundry.utils.setProperty(changed, "system.attributes.death.status", "alive");
+				foundry.utils.setProperty(changed, "system.attributes.death.success", 0);
+				foundry.utils.setProperty(changed, "system.attributes.death.failure", 0);
+			} else if ( this.attributes.death.status === "alive" ) {
+				foundry.utils.setProperty(changed, "system.attributes.death.status", "dying");
+			}
+		}
 	}
 }

@@ -123,17 +123,15 @@
 			</div>
 		{{else}}
 			<div class="death-saves">
-				<label>{{localize "BF.Death.Label[other]"}}</label>
-				<button type="button" data-action="roll" data-sub-action="death-save">
-					<svg class="die-icon blue"><use xlink:href="#blackFlag-d20"></use></svg>
-				</button>
-				<label class="successes">
-					<i class="fa-regular fa-thumbs-up"></i>
-					<input type="number" name="system.attributes.death.success" value="{{system.attributes.death.success}}">
-				</label>
-				<label class="failures">
-					<i class="fa-regular fa-thumbs-down"></i>
-					<input type="number" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}">
+				<label>
+					<span>{{localize "BF.Death.Label[other]"}}</span>
+					<a data-action="roll" data-sub-action="death-save">
+						<svg class="death-saves-control"
+							data-success="{{system.attributes.death.success}}"
+							data-failure="{{system.attributes.death.failure}}">
+							<use xlink:href="#blackFlag-deathSaves"></use>
+						</svg>
+					</a>
 				</label>
 			</div>
 		{{/unless}}

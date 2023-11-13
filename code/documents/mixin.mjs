@@ -6,26 +6,29 @@
 export const DocumentMixin = Base => class extends Base {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Socket Event Handlers                    */
+	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _preCreate(data, options, userId) {
-		await super._preCreate(data, options, userId);
-		await this.system._preCreate?.(data, options, userId);
+	async _preCreate(data, options, user) {
+		let allowed = await super._preCreate(data, options, user);
+		if ( allowed !== false ) allowed = await this.system._preCreate?.(data, options, user);
+		return allowed;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _preUpdate(changed, options, userId) {
-		await super._preUpdate(changed, options, userId);
-		await this.system._preUpdate?.(changed, options, userId);
+	async _preUpdate(changed, options, user) {
+		let allowed = await super._preUpdate(changed, options, user);
+		if ( allowed !== false ) allowed = await this.system._preUpdate?.(changed, options, user);
+		return allowed;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _preDelete(options, userId) {
-		await super._preDelete(options, userId);
-		await this.system._preUpdate?.(options, userId);
+	async _preDelete(options, user) {
+		let allowed = await super._preDelete(options, user);
+		if ( allowed !== false ) allowed = await this.system._preDelete?.(options, user);
+		return allowed;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
