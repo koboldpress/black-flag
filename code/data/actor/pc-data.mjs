@@ -308,8 +308,9 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 			denom.max ??= 0;
 			denom.max += 1;
 		}
-		for ( const denom of Object.values(hd.d) ) {
-			denom.available = denom.max - denom.spent;
+		for ( const [key, denom] of Object.entries(hd.d) ) {
+			if ( denom.max ) denom.available = denom.max - denom.spent;
+			else delete hd.d[key];
 		}
 	}
 
