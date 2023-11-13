@@ -318,9 +318,8 @@
 
 					.label {
 						position: absolute;
-						top: 0;
-						left: 0;
-						right: 0;
+						inset-block-start: 0;
+						inset-inline: 0;
 						color: var(--bf-text-color-light-label);
 						font-size: var(--font-size-11);
 						text-align: center;
@@ -346,6 +345,48 @@
 				.other-hit-points {
 					.value {
 						font-size: var(--font-size-16);
+					}
+				}
+				.death-saves {
+					display: grid;
+					grid-template-columns: 1fr 1fr 1fr;
+					gap: 0 0.5rem;
+					background-color: var(--bf-color-fill);
+
+					label:first-child {
+						display: block;
+						grid-column: 1 / -1;
+						color: var(--bf-text-color-light-label);
+						font-size: var(--font-size-11);
+						font-variant: small-caps;
+						font-weight: 700;
+						text-align: center;
+					}
+					button {
+						background: none;
+						border: none;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 100%;
+						z-index: 1;
+					}
+					.successes, .failures {
+						flex-wrap: nowrap;
+						align-items: center;
+						padding-inline: 0.25rem;
+						background: none;
+						input {
+							text-align: center;
+							background: none;
+							border: none;
+						}
+					}
+					.successes > i {
+						color: var(--bf-dice-color-critical-success);
+					}
+					.failures > i {
+						color: var(--bf-dice-color-critical-failure);
 					}
 				}
 			}

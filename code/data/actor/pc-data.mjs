@@ -54,8 +54,13 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 					})
 				}, {label: "BF.ArmorClass.Label"}),
 				death: new SchemaField({
-					// Successes
-					// Failures
+					status: new StringField({initial: "alive", blank: false}),
+					success: new NumberField({
+						nullable: false, initial: 0, min: 0, integer: true, label: "BF.Death.Success.Label"
+					}),
+					failure: new NumberField({
+						nullable: false, initial: 0, min: 0, integer: true, label: "BF.Death.Failure.Label"
+					})
 					// Successes required override
 					// Failures required override
 					// Target threshold override

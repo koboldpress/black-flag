@@ -114,12 +114,29 @@
 				<span class="value">{{system.attributes.hp.max}}</span>
 			</label>
 		</div>
-		<div class="other-hit-points">
-			<label class="temp-hit-points">
-				<span class="label">{{localize "BF.HitPoint.Temp.LabelShort"}}</span>
-				<input class="value" type="text" name="system.attributes.hp.temp" value="{{system.attributes.hp.temp}}">
-			</label>
-		</div>
+		{{#unless (and (not system.attributes.hp.value) system.attributes.hp.max)}}
+			<div class="other-hit-points">
+				<label class="temp-hit-points">
+					<span class="label">{{localize "BF.HitPoint.Temp.LabelShort"}}</span>
+					<input class="value" type="text" name="system.attributes.hp.temp" value="{{system.attributes.hp.temp}}">
+				</label>
+			</div>
+		{{else}}
+			<div class="death-saves">
+				<label>{{localize "BF.Death.Label[other]"}}</label>
+				<button type="button" data-action="roll" data-sub-action="death-save">
+					<svg class="die-icon blue"><use xlink:href="#blackFlag-d20"></use></svg>
+				</button>
+				<label class="successes">
+					<i class="fa-regular fa-thumbs-up"></i>
+					<input type="number" name="system.attributes.death.success" value="{{system.attributes.death.success}}">
+				</label>
+				<label class="failures">
+					<i class="fa-regular fa-thumbs-down"></i>
+					<input type="number" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}">
+				</label>
+			</div>
+		{{/unless}}
 	</fieldset>
 	<fieldset class="hit-dice">
 		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
