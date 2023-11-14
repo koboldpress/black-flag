@@ -9,7 +9,7 @@ import * as advancement from "../documents/advancement/_module.mjs";
  * @property {Set<string>} validItemTypes - Types to which this advancement can be added.
  */
 
-const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage", "talent"];
+const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage", "subclass", "talent"];
 
 /**
  * Advancement types that can be added to items.
@@ -38,7 +38,7 @@ export const _advancementTypes = {
 	},
 	scaleValue: {
 		documentClass: advancement.ScaleValueAdvancement,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage"]),
+		validItemTypes: new Set(["background", "class", "heritage", "lineage", "subclass"]),
 		dataTypes: {
 			string: scaleValue.ScaleTypeString,
 			cr: scaleValue.ScaleTypeCR,
@@ -54,7 +54,7 @@ export const _advancementTypes = {
 	},
 	spellcasting: {
 		documentClass: advancement.SpellcastingAdvancement,
-		validItemTypes: new Set(["class"])
+		validItemTypes: new Set(["class", "subclass"])
 	},
 	trait: {
 		documentClass: advancement.TraitAdvancement,
