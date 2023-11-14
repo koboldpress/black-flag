@@ -20,6 +20,7 @@ export const _documentCategories = {
 			label: "BF.Item.Category.Concept.Label",
 			types: [
 				itemTypes.ClassData,
+				itemTypes.SubclassData,
 				itemTypes.LineageData,
 				itemTypes.HeritageData,
 				itemTypes.BackgroundData
