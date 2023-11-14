@@ -12,6 +12,16 @@ export default class ConceptSheet extends AdvancementItemSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async getData(options) {
+		const context = await super.getData(options);
+		context.showClassSelector = context.editable && this.item.type === "subclass";
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

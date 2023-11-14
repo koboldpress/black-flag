@@ -24,7 +24,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			identifier: new SchemaField({
-				class: new IdentifierField()
+				class: new IdentifierField({label: "BF.Item.Type.Class[one]"})
 			})
 		});
 	}

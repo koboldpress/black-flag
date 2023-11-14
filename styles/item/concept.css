@@ -192,6 +192,22 @@
 			}
 		}
 
+		.class-selector {
+			display: flex;
+			gap: 0.5rem;
+			align-items: first baseline;
+			margin-block-start: 0.5rem;
+
+			span {
+				font-family: var(--bf-font-primary);
+				font-variant: small-caps;
+				font-weight: bold;
+			}
+			select {
+				flex-grow: 1;
+			}
+		}
+
 		.traits {
 			display: flex;
 			flex-direction: column;

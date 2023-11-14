@@ -31,6 +31,14 @@
 		{{else}}
 			{{{enriched.description}}}
 		{{/if}}
+		{{#if showClassSelector}}
+			<label class="class-selector">
+				<span>{{localize "BF.Item.Type.Class[one]"}}</span>
+				<select name="system.identifier.class">
+					{{selectOptions CONFIG.registration.all.class selected=system.identifier.class labelAttr="name" blank=""}}
+				</select>
+			</label>
+		{{/if}}
 		<div class="drop-area journal-link">
 			{{#if system.description.journal}}
 				<p>

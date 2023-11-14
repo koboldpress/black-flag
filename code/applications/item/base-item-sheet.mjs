@@ -11,7 +11,7 @@ export default class BaseItemSheet extends ItemSheet {
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
