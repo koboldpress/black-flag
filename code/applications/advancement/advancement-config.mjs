@@ -93,10 +93,10 @@ export default class AdvancementConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData() {
-		const levels = Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l]);
-		if ( this.advancement.supportsAnyLevel ) {
-			levels.unshift([0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")]);
-		}
+		const levels = [
+			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
+			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
+		].slice(this.advancement.minimumLevel);
 		const context = {
 			CONFIG: CONFIG.BlackFlag,
 			configuration: this.advancement.configuration,

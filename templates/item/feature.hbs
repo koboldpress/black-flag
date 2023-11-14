@@ -28,7 +28,30 @@
 						<label>
 							<span>{{localize "BF.Item.Feature.Type.Label"}}</span>
 							<select name="system.type.value">
-								{{selectOptions featureTypes selected=system.type.value blank=""}}
+								{{#select featureTypes.selected}}
+									<option value=""></option>
+									{{#if (eq system.type.category "class")}}
+										<optgroup label="{{localize 'BF.Item.Type.Class[other]'}}">
+											{{selectOptions CONFIG.registration.all.class labelAttr="name"}}
+										</optgroup>
+										<optgroup label="{{localize 'BF.Item.Type.Subclass[other]'}}">
+											{{selectOptions CONFIG.registration.all.subclass labelAttr="name"}}
+										</optgroup>
+									{{else if (eq system.type.category "lineage")}}
+										<optgroup label="{{localize 'BF.Item.Type.Lineage[other]'}}">
+											{{selectOptions CONFIG.registration.all.lineage labelAttr="name"}}
+										</optgroup>
+									{{else if (eq system.type.category "heritage")}}
+										<optgroup label="{{localize 'BF.Item.Type.Heritage[other]'}}">
+											{{selectOptions CONFIG.registration.all.heritage labelAttr="name"}}
+										</optgroup>
+									{{/if}}
+									{{#if featureTypes.options}}
+										<optgroup label="{{featureTypes.label}}">
+											{{selectOptions featureTypes.options}}
+										</optgroup>
+									{{/if}}
+								{{/select}}
 							</select>
 						</label>
 					{{/if}}

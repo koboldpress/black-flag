@@ -194,11 +194,15 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Can this advancement be set to "any level".
-	 * @type {boolean}
+	 * Minimum level that can be set for a specific advancement based on its item type.
+	 * @type {number}
 	 */
-	get supportsAnyLevel() {
-		return !["class", "subclass"].includes(this.item.type) && !this.level.classIdentifier;
+	get minimumLevel() {
+		switch ( this.item.type ) {
+			case "class": return 1;
+			case "subclass": return 3;
+			default: return this.level.classIdentifier ? 1 : 0;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -235,7 +239,7 @@ export default class Advancement extends BaseAdvancement {
 		this.title = this.title || game.i18n.localize(this.constructor.metadata.title);
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.constructor.metadata.multiLevel ) this.level.value ??= this.supportsAnyLevel ? 0 : 1;
+		if ( !this.constructor.metadata.multiLevel ) this.level.value ??= this.minimumLevel;
 		if ( foundry.utils.getType(this.configuration?.prepareData) === "function" ) this.configuration.prepareData();
 		if ( foundry.utils.getType(this.value?.prepareData) === "function" ) this.value.prepareData();
 	}

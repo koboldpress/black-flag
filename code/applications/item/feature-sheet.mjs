@@ -21,7 +21,7 @@ export default class FeatureSheet extends AdvancementItemSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
@@ -32,7 +32,13 @@ export default class FeatureSheet extends AdvancementItemSheet {
 		if ( this.document.type === "feature" ) {
 			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;
 			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
-			context.featureTypes = featureCategory?.children?.localized ?? null;
+			context.featureTypes = {
+				label: game.i18n.format("BF.Item.Feature.Type.LabelSpecific", {
+					type: game.i18n.localize(`${featureCategory.localization}[one]`)
+				}),
+				options: featureCategory?.children?.localized ?? null,
+				selected: context.system.type.value || context.system.identifier.associated
+			};
 		} else if ( this.document.type === "talent" ) {
 			context.talentCategories = CONFIG.BlackFlag.talentCategories.localized;
 		}
@@ -65,5 +71,26 @@ export default class FeatureSheet extends AdvancementItemSheet {
 				}
 		}
 		return super._onAction(event);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_updateObject(event, formData) {
+		const update = foundry.utils.expandObject(formData);
+
+		// Figure out where to save the value of Feature Type
+		const type = foundry.utils.getProperty(update, "system.type.value");
+		if ( type && (this.document.type === "feature") ) {
+			const category = foundry.utils.getProperty(update, "system.type.category") ?? this.document.system.type.category;
+			const featureTypes = CONFIG.BlackFlag.featureCategories[category]?.children ?? {};
+			if ( !(type in featureTypes) ) {
+				foundry.utils.setProperty(update, "system.identifier.associated", type);
+				foundry.utils.setProperty(update, "system.type.value", "");
+			} else {
+				foundry.utils.setProperty(update, "system.identifier.associated", "");
+			}
+		}
+
+		super._updateObject(event, foundry.utils.flattenObject(update));
 	}
 }

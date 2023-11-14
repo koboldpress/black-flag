@@ -22,7 +22,7 @@ export default class FeatureData extends ItemDataModel.mixin(AdvancementTemplate
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			identifier: new SchemaField({
-				class: new IdentifierField()
+				associated: new IdentifierField()
 			}),
 			level: new SchemaField({
 				value: new NumberField({min: 0, integer: true})
