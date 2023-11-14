@@ -273,7 +273,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 			if ( !document ) continue;
 			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
 			classData.levels += 1;
-			data.levels = { character: Number(level), class: classData.levels };
+			data.levels = { character: Number(level), class: classData.levels, identifier: document.identifier };
 		}
 		const pluralRules = new Intl.PluralRules(game.i18n.lang);
 		for ( const data of Object.values(this.progression.classes) ) {
@@ -418,7 +418,8 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedHitPoints() {
-		// TODO: This will need to be updated to handle multiple classes later, but will work for a single class
+		const hpAdvancements = Object.values(this.progression.classes)
+			.map(c => c.document?.system.advancement.byType("hitPoints")[0]).filter(a => a);
 		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
 		if ( !hpAdvancement ) return;
 
@@ -426,7 +427,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		const hp = this.attributes.hp;
 		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
 
-		const base = hpAdvancement.getAdjustedTotal(ability?.mod ?? 0);
+		const base = hpAdvancements.reduce((total, a) => total + a.getAdjustedTotal(ability?.mod ?? 0), 0);
 		const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.progression.level;
 		const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
 
@@ -680,7 +681,8 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		const anyLevel = { levels: { character: 0, class: 0 } };
 		for ( const data of [anyLevel, ...Object.values(this.progression.levels)] ) {
 			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
-				advancement.prepareWarnings(data.levels, this.parent.notifications);
+				const level = advancement.relavantLevel(data.levels);
+				if ( level !== null ) advancement.prepareWarnings(level, this.parent.notifications);
 			}
 		}
 	}
@@ -894,7 +896,8 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	async levelUp(cls) {
 		const levels = {
 			character: (this.progression.level ?? 0) + 1,
-			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1
+			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1,
+			identifier: cls.identifier
 		};
 		if ( levels.character > CONFIG.BlackFlag.maxLevel ) throw new Error(
 			game.i18n.format("BF.Level.Warning.Max", {max: CONFIG.BlackFlag.maxLevel})
@@ -926,7 +929,11 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	 */
 	async levelDown() {
 		const cls = this.progression.levels[this.progression.level].class;
-		const levels = { character: this.progression.level, class: this.progression.classes[cls.identifier].levels };
+		const levels = {
+			character: this.progression.level,
+			class: this.progression.classes[cls.identifier].levels,
+			identifier: cls.identifier
+		};
 
 		// Remove advancements for the old level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {

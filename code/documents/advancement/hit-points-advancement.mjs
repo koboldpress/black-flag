@@ -80,13 +80,13 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	configuredForLevel(levels) {
-		return this.valueForLevel(levels.class) !== null;
+		return this.valueForLevel(this.relavantLevel(levels)) !== null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	titleForLevel(levels, { flow=false }={}) {
-		const hp = this.valueForLevel(levels.class);
+		const hp = this.valueForLevel(this.relavantLevel(levels));
 		if ( !hp || !flow ) return this.title;
 		return `${this.title}: <strong>${hp}</strong>`;
 	}
@@ -162,22 +162,23 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async apply(levels, data, { initial=false, render=true }={}) {
+		const level = this.relavantLevel(levels);
 		if ( initial ) {
 			data ??= this.value.granted ?? {};
 			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
 			const previous = previousLevel?.class?.system.advancement.byType("hitPoints")[0];
 
 			// If 1st character level, always use max HP
-			if ( levels.character === 1 ) data[levels.class] = "max";
+			if ( levels.character === 1 ) data[level] = "max";
 
 			// If previously level used average, use that again
-			else if ( previous?.value.granted?.[previousLevel?.levels.class] === "avg" ) data[levels.class] = "avg";
+			else if ( previous?.value.granted?.[previousLevel?.levels.class] === "avg" ) data[level] = "avg";
 
 			// Otherwise user intervention is required
 			else return;
 		}
 
-		let value = this.constructor.valueForLevel(data, this.configuration.denomination, levels.class);
+		let value = this.constructor.valueForLevel(data, this.configuration.denomination, level);
 		if ( value === undefined ) return;
 
 		return await this.actor.update({
@@ -189,12 +190,13 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async reverse(levels, data, { render=true }={}) {
-		let value = this.valueForLevel(levels.class);
+		const level = this.relavantLevel(levels);
+		let value = this.valueForLevel(level);
 		if ( value === undefined ) return;
 
 		return await this.actor.update({
 			"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
-			[`${this.valueKeyPath}.granted.-=${levels.class}`]: null
+			[`${this.valueKeyPath}.granted.-=${level}`]: null
 		}, { render });
 	}
 }

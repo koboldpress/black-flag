@@ -21,11 +21,10 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 		if ( (game.user.id !== userId) || !progression ) return;
 
 		// Apply all advancements for this item up to current level
-		// TODO: Special handling is necessary here to for classes & subclasses
-		const levels = [{character: 0, class: 0}, ...Object.values(progression.levels).map(l => l.levels)];
+		const levels = [{ character: 0, class: 0 }, ...Object.values(progression.levels).map(l => l.levels)];
 		log(`Applying advancement for ${this.parent.name}`);
 		for ( const level of levels ) {
-			for ( const advancement of this.parent.advancementForLevel(level.character)) {
+			for ( const advancement of this.parent.advancementForLevel(level) ) {
 				await advancement.apply(level, undefined, { initial: true, render: false });
 			}
 		}
@@ -40,12 +39,11 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 		const progression = this.parent.actor?.system.progression;
 		if ( (game.user.id !== userId) || !progression ) return;
 
-		const levels = [{character: 0, class: 0}, ...Object.values(progression.levels).map(l => l.levels)];
-		// TODO: Special handling is necessary here to for classes & subclasses
+		const levels = [{ character: 0, class: 0 }, ...Object.values(progression.levels).map(l => l.levels)];
 		log(`Removing advancement for ${this.parent.name}`);
 		for ( const level of levels.reverse() ) {
 			// TODO: These advancements should be unapplied in reverse order
-			for ( const advancement of this.parent.advancementForLevel(level.character)) {
+			for ( const advancement of this.parent.advancementForLevel(level) ) {
 				await advancement.reverse(level, undefined, { render: false });
 			}
 		}

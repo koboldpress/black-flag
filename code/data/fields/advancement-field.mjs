@@ -36,15 +36,7 @@ export class AdvancementCollection extends Collection {
 			this.set(id, entry);
 			this.#types[entry.type] ??= [];
 			this.#types[entry.type].push(entry);
-			// for ( const level of entry.levels ) {
-			// 	this.#levels[level] ??= [];
-			// 	this.#levels[level].push(entry);
-			// }
 		}
-		// Object.entries(this.#levels).forEach(([lvl, data]) => data.sort((a, b) =>
-		// 	a.sortingValueForLevel({character: lvl, class: lvl})
-		// 		.localeCompare(b.sortingValueForLevel({character: lvl, class: lvl}))
-		// ));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

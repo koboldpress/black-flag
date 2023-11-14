@@ -291,7 +291,7 @@ export default class TraitAdvancement extends Advancement {
 			const filtered = allChoices.filtered(a);
 			if ( a._index !== undefined ) Object.defineProperty(filtered, "_index", { value: a._index, enumerable: false });
 			return filtered;
-		});
+		}).filter(a => !foundry.utils.isEmpty(a));
 
 		return { available, choices: allChoices };
 	}

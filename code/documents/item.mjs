@@ -29,12 +29,19 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/**
 	 * Get advancement for this item.
-	 * @param {number} level - Level for which to get the advancement.
+	 * @param {number|AdvancementLevels} levels - Level for which to get the advancement.
 	 * @yields {Advancement}
 	 */
-	*advancementForLevel(level=0) {
-		for ( const advancement of this.system.advancement?.byLevel(level) ?? [] ) {
-			yield advancement;
+	*advancementForLevel(levels=0) {
+		if ( foundry.utils.getType(levels) === "number" ) {
+			for ( const advancement of this.system.advancement?.byLevel(levels) ?? [] ) {
+				yield advancement;
+			}
+		} else {
+			for ( const advancement of this.system.advancement ) {
+				const level = advancement.relavantLevel(levels);
+				if ( advancement.levels.includes(level) ) yield advancement;
+			}
 		}
 	}
 

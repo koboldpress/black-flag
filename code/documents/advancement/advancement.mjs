@@ -3,6 +3,14 @@ import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 
 /**
+ * @typedef {object} AdvancementLevels
+ *
+ * @property {number} character - Character levels for advancement being applied.
+ * @property {number} class - Levels in whatever class was advanced at current level.
+ * @property {string} [identifier] - Class identifier if relevant.
+ */
+
+/**
  * Error that can be thrown during the advancement update preparation process.
  */
 class AdvancementError extends Error {
@@ -504,13 +512,6 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * @typedef {object} AdvancementLevels
-	 *
-	 * @property {number} character - Character levels for advancement being applied.
-	 * @property {number} class - Levels in whatever class was advanced at current level.
-	 */
-
-	/**
 	 * Dynamic changes this advancement applies to the actor during data preparation. Changes will be made
 	 * after base data is prepared any before active effects are applied using a mechanism similar to active
 	 * effects. By default changes will be made in advancement order, but if priority is provided it can be
@@ -551,11 +552,18 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Select the relevant level from the provided levels data.
+	 * Select the relevant level from the provided levels data, or return null if not applicable.
 	 * @param {AdvancementLevels} levels
-	 * @returns {string}
+	 * @returns {number|null}
 	 */
 	relavantLevel(levels) {
-		return ["class", "subclass"].includes(this.item.type) ? levels.class : levels.character;
+		if ( (levels.character === 0) || (levels.class === 0) ) return 0;
+
+		// Classes & subclasses are always based on class level, as long as identifiers match
+		if ( ["class", "subclass"].includes(this.item.type) ) {
+			return (this.item.identifier === levels.identifier) ? levels.class : null;
+		}
+
+		return levels.character;
 	}
 }

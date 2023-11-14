@@ -1,5 +1,5 @@
 import SkillConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
+import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
 
@@ -50,10 +50,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const applier = new cls({ name: "temp" });
 		const overrides = {};
 
-		const levels = Array.fromRange(Object.keys(this.system.progression?.levels ?? {}).length + 1);
+		const levels = [
+			{ character: 0, class: 0 }, ...Object.values(this.system.progression?.levels ?? {}).map(l => l.levels)
+		];
 		for ( const level of levels ) {
-			for ( const advancement of this.advancementForLevel(level) ) {
-				advancement.changes({character: level, class: level})?.map(change => {
+			for ( const advancement of this.advancementForLevel(level.character) ) {
+				advancement.changes(level)?.map(change => {
 					const c = foundry.utils.deepClone(change);
 					c.advancement = advancement;
 					c.priority ??= c.mode * 10;
@@ -73,13 +75,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * Get advancement for the actor.
-	 * @param {number} level - Level for which to get the advancement.
+	 * @param {number} level - Character level for which to get the advancement.
 	 * @yields {Advancement}
 	 */
 	*advancementForLevel(level=0) {
-		// TODO: Rework to support different character/class levels
+		const levels = level > 0 ? this.system.progression.levels[level]?.levels : { character: 0, class: 0 };
+		if ( !levels ) return;
 		for ( const item of this.items ) {
-			for ( const advancement of item.advancementForLevel(level) ) {
+			for ( const advancement of item.advancementForLevel(levels) ) {
 				yield advancement;
 			}
 		}

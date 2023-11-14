@@ -24,10 +24,11 @@ export default class HitPointsFlow extends AdvancementFlow {
 
 	async _updateObject(event, formData) {
 		const action = event.submitter.dataset.action;
+		const level = this.advancement.relavantLevel(this.levels);
 
 		// Take the average value
 		if ( action === "take-average" ) {
-			return this.advancement.apply(this.levels, { [this.levels.class]: "avg" });
+			return this.advancement.apply(this.levels, { [level]: "avg" });
 		} else if ( action === "roll" ) {
 			const roll = new Roll(`1d${this.advancement.configuration.denomination}`);
 			await roll.evaluate();
@@ -51,7 +52,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 			const message = new cls(messageData);
 			await cls.create(message.toObject(), { rollMode: game.settings.get("core", "rollMode") });
 
-			return this.advancement.apply(this.levels, { [this.levels.class]: roll });
+			return this.advancement.apply(this.levels, { [level]: roll });
 		}
 	}
 }
