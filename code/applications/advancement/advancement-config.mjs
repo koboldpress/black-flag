@@ -109,6 +109,7 @@ export default class AdvancementConfig extends FormApplication {
 				identifierHint: this.advancement.metadata.identifier.hint
 			},
 			levels: Object.fromEntries(levels),
+			showClassIdentifier: this.item.system.metadata?.category === "features",
 			showIdentifier: this.advancement.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.metadata.multiLevel
 		};
@@ -144,6 +145,9 @@ export default class AdvancementConfig extends FormApplication {
 		let updates = foundry.utils.expandObject(formData);
 		if ( updates.configuration ) {
 			updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
+		}
+		if ( updates.level?.classIdentifier && (updates.level?.value === 0) ) {
+			updates.level.value = 1;
 		}
 		await this.advancement.update(updates);
 	}

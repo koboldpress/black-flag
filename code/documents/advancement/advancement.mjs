@@ -198,7 +198,7 @@ export default class Advancement extends BaseAdvancement {
 	 * @type {boolean}
 	 */
 	get supportsAnyLevel() {
-		return !["class", "subclass"].includes(this.item.type);
+		return !["class", "subclass"].includes(this.item.type) && !this.level.classIdentifier;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -562,6 +562,11 @@ export default class Advancement extends BaseAdvancement {
 		// Classes & subclasses are always based on class level, as long as identifiers match
 		if ( ["class", "subclass"].includes(this.item.type) ) {
 			return (this.item.identifier === levels.identifier) ? levels.class : null;
+		}
+
+		// Class level if explicit class identifier is set and it matches provided identifier
+		if ( this.level.classIdentifier ) {
+			return (this.level.classIdentifier === levels.identifier) ? levels.class : null;
 		}
 
 		return levels.character;

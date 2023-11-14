@@ -20,6 +20,10 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 */
 	static metadata = {};
 
+	get metadata() {
+		return this.constructor.metadata;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

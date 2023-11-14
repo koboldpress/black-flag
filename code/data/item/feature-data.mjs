@@ -11,10 +11,10 @@ const { NumberField, SchemaField } = foundry.data.fields;
 export default class FeatureData extends ItemDataModel.mixin(AdvancementTemplate, FeatureTemplate) {
 
 	static get metadata() {
-		return {
+		return foundry.utils.mergeObject(super.metadata, {
 			type: "feature",
 			localization: "BF.Item.Type.Feature"
-		};
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

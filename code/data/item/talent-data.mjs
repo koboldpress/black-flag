@@ -10,10 +10,10 @@ const { BooleanField, SchemaField } = foundry.data.fields;
 export default class TalentData extends ItemDataModel.mixin(AdvancementTemplate, FeatureTemplate) {
 
 	static get metadata() {
-		return {
+		return foundry.utils.mergeObject(super.metadata, {
 			type: "talent",
 			localization: "BF.Item.Type.Talent"
-		};
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -32,9 +32,11 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 			}, {required: true}),
 			level: new SchemaField({
 				value: new NumberField({
-					integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0
+					integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0, label: "BF.Level.Label[one]"
 				}),
-				classIdentifier: new IdentifierField()
+				classIdentifier: new IdentifierField({
+					label: "BF.Advancement.Core.Level.Reference.Label", hint: "BF.Advancement.Core.Level.Reference.Hint"
+				})
 			}),
 			title: new StringField({label: "BF.Advancement.Core.Title.Label"}),
 			icon: new FilePathField({categories: ["IMAGE"], label: "BF.Advancement.Core.Icon.Label"}),

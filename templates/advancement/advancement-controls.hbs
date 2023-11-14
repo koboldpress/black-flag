@@ -30,3 +30,20 @@
 		</select>
 	</label>
 {{/if}}
+{{log this}}
+{{#if showClassIdentifier}}
+	<label>
+		<span>
+			{{localize "BF.Advancement.Core.Level.Reference.Label"}}
+			<i class="hintIcon" data-tooltip="BF.Advancement.Core.Level.Reference.Hint"></i>
+		</span>
+		<select name="level.classIdentifier">
+			{{#select advancement.level.classIdentifier}}
+				<option value="">{{localize "BF.Level.Overall"}}</option>
+				<optgroup label="{{localize 'BF.Level.Class'}}">
+					{{selectOptions CONFIG.registration.all.class labelAttr="name"}}
+				</optgroup>
+			{{/select}}
+		</select>
+	</label>
+{{/if}}
