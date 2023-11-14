@@ -188,7 +188,7 @@ export default class Advancement extends BaseAdvancement {
 	 * @returns {number[]}
 	 */
 	get levels() {
-		return this.level !== undefined ? [this.level] : [];
+		return this.level?.value !== undefined ? [this.level.value] : [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -235,7 +235,7 @@ export default class Advancement extends BaseAdvancement {
 		this.title = this.title || game.i18n.localize(this.constructor.metadata.title);
 		this.icon = this.icon || this.constructor.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.supportsAnyLevel ? 0 : 1;
+		if ( !this.constructor.metadata.multiLevel ) this.level.value ??= this.supportsAnyLevel ? 0 : 1;
 		if ( foundry.utils.getType(this.configuration?.prepareData) === "function" ) this.configuration.prepareData();
 		if ( foundry.utils.getType(this.value?.prepareData) === "function" ) this.value.prepareData();
 	}

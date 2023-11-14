@@ -1,7 +1,7 @@
 import IdentifierField from "../fields/identifier-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 
-const { DocumentIdField, FilePathField, NumberField, ObjectField, StringField } = foundry.data.fields;
+const { DocumentIdField, FilePathField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Base data model for advancement.
@@ -30,11 +30,14 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 			configuration: new TypeField({
 				modelLookup: type => this.metadata.dataModels?.configuration ?? null
 			}, {required: true}),
-			level: new NumberField({
-				integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0
+			level: new SchemaField({
+				value: new NumberField({
+					integer: true, initial: this.metadata?.multiLevel ? undefined : null, min: 0
+				}),
+				classIdentifier: new IdentifierField()
 			}),
-			title: new StringField({initial: undefined}),
-			icon: new FilePathField({initial: undefined, categories: ["IMAGE"]}),
+			title: new StringField({label: "BF.Advancement.Core.Title.Label"}),
+			icon: new FilePathField({categories: ["IMAGE"], label: "BF.Advancement.Core.Icon.Label"}),
 			flags: new ObjectField()
 		};
 	}

@@ -28,6 +28,14 @@ export default class KeyAbilityAdvancement extends Advancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Instance Properties         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get levels() {
+		return [1];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
