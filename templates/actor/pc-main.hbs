@@ -2,7 +2,7 @@
 	<fieldset class="abilities">
 		<legend>
 			{{localize "BF.Ability.Label[other]"}}
-			{{#if editingMode}}
+			{{#if modes.editing}}
 				<a data-action="config" data-type="ability">
 					<i class="fa-solid fa-cog"></i>
 				</a>
@@ -49,7 +49,7 @@
 	<fieldset class="skills">
 		<legend>
 			{{localize "BF.Skill.Label[other]"}}
-			{{#if editingMode}}
+			{{#if modes.editing}}
 				<a data-action="config" data-type="skill">
 					<i class="fa-solid fa-cog"></i>
 				</a>
@@ -141,7 +141,7 @@
 		{{#each system.attributes.hd.d as |data denomination|}}
 			<div class="denomination">
 				<label class="label">d{{denomination}}</label>
-				{{#if @root.editingMode}}
+				{{#if @root.modes.editing}}
 					<input class="value" type="number" name="system.attributes.hd.d.{{denomination}}.available"
 						value="{{data.available}}" step=1 min=0 max={{data.max}}>
 				{{else}}
@@ -167,7 +167,7 @@
 	<fieldset class="armor-class">
 		<legend>
 			{{localize "BF.ArmorClass.Label"}}
-			{{#if editingMode}}
+			{{#if modes.editing}}
 				<a data-action="config" data-type="armor-class">
 					<i class="fa-solid fa-cog"></i>
 				</a>
@@ -185,7 +185,7 @@
 	<fieldset class="initiative">
 		<legend>
 			{{localize "BF.Initiative.Label"}}
-			{{#if editingMode}}
+			{{#if modes.editing}}
 				<a data-action="config" data-type="initiative">
 					<i class="fa-solid fa-cog"></i>
 				</a>

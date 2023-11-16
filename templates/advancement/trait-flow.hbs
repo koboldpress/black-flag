@@ -9,7 +9,7 @@
 		{{#each chosen as |choice|}}
 			<span class="choice-entry">
 				<span class="choice-name">{{this.label}}</span>
-				{{~#if (or @root.editingMode @root.needsConfiguration)}}
+				{{~#if (or @root.modes.editing @root.needsConfiguration)}}
 					<a data-action="remove-choice" data-key="{{this.key}}">
 						<i class="fa-solid fa-trash"></i>
 					</a>

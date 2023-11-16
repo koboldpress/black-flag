@@ -16,18 +16,13 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Is the sheet currently in a mode to add new conditions?
-	 * @type {boolean}
+	 * Sheet modes that can be active.
+	 * @type {{[key: string]: boolean]}}
 	 */
-	conditionAddMode = false;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Is the sheet currently in editing mode?
-	 * @type {boolean}
-	 */
-	editingMode = false;
+	modes = {
+		conditionAdd: false,
+		editing: false
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -47,8 +42,7 @@ export default class BaseActorSheet extends ActorSheet {
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
 
-		context.conditionAddMode = this.conditionAddMode;
-		context.editingMode = this.editingMode;
+		context.modes = this.modes;
 
 		context.effects = BlackFlagActiveEffect.prepareSheetSections(
 			this.document.allApplicableEffects(), { displaySource: true }
@@ -69,7 +63,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async prepareConditions(context) {
 		context.conditions = {};
-		if ( this.conditionAddMode ) {
+		if ( this.modes.conditionAdd ) {
 			for ( const effect of CONFIG.statusEffects ) {
 				const document = CONFIG.BlackFlag.registration.get("condition", effect.id)?.cached;
 				if ( context.system.conditions[effect.id] || !document ) continue;
@@ -127,7 +121,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 		for ( const tab of Object.values(context.sections) ) {
 			for ( const [key, section] of Object.entries(tab) ) {
-				if ( !this.editingMode && section.options?.autoHide && !section.items.length ) delete tab[key];
+				if ( !this.modes.editing && section.options?.autoHide && !section.items.length ) delete tab[key];
 			}
 		}
 	}
@@ -176,7 +170,7 @@ export default class BaseActorSheet extends ActorSheet {
 		}
 
 		// No matching section found, add to uncategorized section if editing mode is enabled
-		if ( !this.editingMode ) return;
+		if ( !this.modes.editing ) return;
 		const firstTab = Object.keys(sections)[0];
 		const section = sections[firstTab].uncategorized ??= {
 			label: game.i18n.localize("BF.Item.Type.Unidentified[other]"), items: []
@@ -199,14 +193,14 @@ export default class BaseActorSheet extends ActorSheet {
 		let buttons = super._getHeaderButtons();
 		if ( this.options.editable && (game.user.isGM || this.actor.isOwner) ) {
 			const closeIndex = buttons.findIndex(btn => btn.label === "Sheet");
-			const getLabel = () => this.editingMode ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked";
-			const getIcon = () => `fa-solid fa-lock${this.editingMode ? "-open" : ""}`;
+			const getLabel = () => this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked";
+			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""}`;
 			buttons.splice(closeIndex, 0, {
 				label: getLabel(),
 				class: "toggle-editing-mode",
 				icon: getIcon(),
 				onclick: ev => {
-					this.editingMode = !this.editingMode;
+					this.modes.editing = !this.modes.editing;
 					ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> ${game.i18n.localize(getLabel())}`;
 					this.render();
 				}

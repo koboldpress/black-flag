@@ -109,7 +109,7 @@ export default class AdvancementFlow extends FormApplication {
 			appId: this.id,
 			accentColor: this.advancement.item.accentColor,
 			advancement: this.advancement,
-			editingMode: this.advancement.actor.sheet.editingMode ?? false,
+			modes: { editing: this.advancement.actor.sheet.modes.editing ?? false },
 			type: this.advancement.constructor.typeName,
 			title: this.advancement.titleForLevel(this.levels, { flow: true }),
 			icon: this.advancement.icon,

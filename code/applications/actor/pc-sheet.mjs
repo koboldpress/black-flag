@@ -97,7 +97,7 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
-		if ( size || this.editingMode ) {
+		if ( size || this.modes.editing ) {
 			context.traits.push({
 				key: "size",
 				classes: "single",
@@ -108,7 +108,7 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Creature Type
 		// const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
-		// if ( type || this.editingMode ) {
+		// if ( type || this.modes.editing ) {
 		// 	const tagFormatter = game.i18n.getListFormatter({ type: "unit" });
 		// 	context.traits.push({
 		// 		key: "type",

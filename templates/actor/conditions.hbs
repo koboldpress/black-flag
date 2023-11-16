@@ -4,7 +4,7 @@
 			<div class="header">
 				<h3 class="effect-name">{{localize "BF.Item.Type.Condition[other]"}}</h3>
 				<div class="effect-controls">
-					{{#if conditionAddMode}}
+					{{#if modes.conditionAdd}}
 						<a data-action="condition" data-sub-action="add">
 							<i class="fa-solid fa-xmark"></i>
 						</a>
@@ -35,7 +35,7 @@
 							</ol>
 						</div>
 						<div class="item-controls effect-controls">
-							{{#if @root.conditionAddMode}}
+							{{#if @root.modes.conditionAdd}}
 								<a data-action="condition" data-sub-action="set-level" data-level="1">
 									<i class="fa-solid fa-square-plus"></i>
 								</a>

@@ -15,7 +15,7 @@
 		{{#each choosen}}
 			<span class="choice-entry">
 				{{{blackFlag-linkForUUID this.uuid}}}
-				{{#if (or @root.editingMode @root.needsConfiguration)}}
+				{{#if (or @root.modes.editing @root.needsConfiguration)}}
 					<a data-action="remove-choice" data-id="{{this.id}}">
 						<i class="fa-solid fa-trash"></i>
 					</a>

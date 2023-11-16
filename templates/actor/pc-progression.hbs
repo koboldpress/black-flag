@@ -49,7 +49,7 @@
 				<span>
 					<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
 				</span>
-				{{#if @root.editingMode}}
+				{{#if @root.modes.editing}}
 					<span class="controls">
 						<a data-action="item" data-sub-action="delete" data-item-id="{{this.id}}">
 							<i class="fa-solid fa-trash"></i>
@@ -101,7 +101,7 @@
 							<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
 								{{data.subclass.name}}
 							</a>
-							{{#if @root.editingMode}}
+							{{#if @root.modes.editing}}
 								<a data-action="item" data-sub-action="delete" data-item-id="{{data.subclass.id}}">
 									<i class="fa-solid fa-trash"></i>
 								</a>
@@ -146,7 +146,7 @@
 						{{level.class.name}}
 						{{blackFlag-notificationBadge @root.actor category=(concat "level-" level.number)}}
 					</span>
-					{{#if (and @root.editingMode level.highestLevel)}}
+					{{#if (and @root.modes.editing level.highestLevel)}}
 						<span class="controls">
 							<a data-action="progression" data-sub-action="level-down">
 								<i class="fa-solid fa-arrow-down-wide-short"></i>

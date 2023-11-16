@@ -1,9 +1,9 @@
 <div class="sheet-container">
 	<header class="sheet-head">
-		<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if editingMode}} data-edit="img"{{/if}}>
+		<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
 		<h1>
 			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
-				form="{{appID}}-main-form" {{disabled (not editingMode)}}>
+				form="{{appID}}-main-form" {{disabled (not modes.editing)}}>
 		</h1>
 		<fieldset class="proficiency-bonus">
 			<legend>{{localize "BF.Proficiency.Abbreviation"}}</legend>
