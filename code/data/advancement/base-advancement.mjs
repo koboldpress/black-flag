@@ -36,6 +36,9 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 				}),
 				classIdentifier: new IdentifierField({
 					label: "BF.Advancement.Core.Level.Reference.Label", hint: "BF.Advancement.Core.Level.Reference.Hint"
+				}),
+				classRestriction: new StringField({
+					choices: ["original", "multiclass"], label: "BF.Advancement.Core.ClassRestriction.Label"
 				})
 			}),
 			title: new StringField({label: "BF.Advancement.Core.Title.Label"}),

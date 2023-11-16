@@ -47,3 +47,19 @@
 		</select>
 	</label>
 {{/if}}
+
+{{#if showClassRestriction}}
+	<label>
+		<span>
+			{{localize "BF.Advancement.Core.ClassRestriction.Label"}}
+			<i class="hintIcon" data-tooltip="BF.Advancement.Core.ClassRestriction.Hint"></i>
+		</span>
+		<select name="level.classRestriction">
+			{{#select advancement.level.classRestriction}}
+				<option value="">{{localize "BF.Advancement.Core.ClassRestriction.None"}}</option>
+				<option value="original">{{localize "BF.Advancement.Core.ClassRestriction.Original"}}</option>
+				<option value="multiclass">{{localize "BF.Advancement.Core.ClassRestriction.Multiclass"}}</option>
+			{{/select}}
+		</select>
+	</label>
+{{/if}}

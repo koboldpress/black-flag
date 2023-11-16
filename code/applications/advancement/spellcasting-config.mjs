@@ -60,6 +60,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
+		context.showClassRestriction = false;
 
 		return context;
 	}

@@ -592,6 +592,11 @@ export default class Advancement extends BaseAdvancement {
 		// Otherwise revert to character level
 		else return levels.character;
 
+		if ( this.level.classRestriction ) {
+			const isOriginalClass = this.item.actor?.system.progression.classes[identifier]?.originalClass;
+			if ( (this.level.classRestriction === "original") !== isOriginalClass ) return null;
+		}
+
 		return identifier === levels.identifier ? levels.class : !levels.identifier ? levels.character : null;
 	}
 }

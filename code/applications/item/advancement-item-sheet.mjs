@@ -29,7 +29,8 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 					id: a.id,
 					order: a.constructor.order,
 					title: a.title,
-					icon: a.icon
+					icon: a.icon,
+					classRestriction: a.level.classRestriction
 				}))
 			};
 		}
@@ -41,6 +42,7 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 				order: a.sortingValueForLevel(levels),
 				title: a.titleForLevel(levels),
 				icon: a.icon,
+				classRestriction: a.level.classRestriction,
 				summary: a.summaryForLevel(levels)
 			}));
 			if ( !items.length ) continue;

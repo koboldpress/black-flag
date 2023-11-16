@@ -126,7 +126,8 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	changes(levels) {
-		if ( !this.configuredForLevel(levels) ) return;
+		const isOriginalClass = this.item.actor.system.progression.classes[this.item.identifier].originalClass;
+		if ( !this.configuredForLevel(levels) || !isOriginalClass ) return;
 		return [{
 			key: `system.abilities.${this.value.selected}.save.proficiency.multiplier`,
 			mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,

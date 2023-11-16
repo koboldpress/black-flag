@@ -276,7 +276,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 			const document = data.class;
 			if ( !document ) continue;
 			const classData = this.progression.classes[data.class.identifier] ??= {
-				document, subclass: subclasses[document.identifier], levels: 0
+				document, subclass: subclasses[document.identifier], levels: 0, originalClass: Number(level) === 1
 			};
 			classData.levels += 1;
 			data.levels = { character: Number(level), class: classData.levels, identifier: document.identifier };

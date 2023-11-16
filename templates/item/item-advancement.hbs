@@ -32,6 +32,13 @@
 								</figure>
 								<h4>{{{this.title}}}</h4>
 							</div>
+							<div class="class-restriction">
+								{{#if (eq this.classRestriction "original")}}
+									{{localize "BF.Advancement.Core.ClassRestriction.Multiclass"}}
+								{{else if (eq this.classRestriction "multiclass")}}
+									{{localize "BF.Advancement.Core.ClassRestriction.Original"}}
+								{{/if}}
+							</div>
 							{{#if @root.editable}}
 								<div class="advancement-controls">
 									<a data-action="advancement" data-sub-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">

@@ -17,6 +17,7 @@ export default class HitPointsConfig extends AdvancementConfig {
 	getData(options) {
 		const context = super.getData(options);
 		context.hitDieSizes = Object.fromEntries(CONFIG.BlackFlag.hitDieSizes.map(n => [n, `d${n}`]));
+		context.showClassRestriction = false;
 		return context;
 	}
 }

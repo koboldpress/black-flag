@@ -110,6 +110,7 @@ export default class AdvancementConfig extends FormApplication {
 			},
 			levels: Object.fromEntries(levels),
 			showClassIdentifier: this.item.system.metadata?.category === "features",
+			showClassRestriction: ["class", "subclass"].includes(this.item.type) || !!this.advancement.level.classIdentifier,
 			showIdentifier: this.advancement.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.metadata.multiLevel
 		};

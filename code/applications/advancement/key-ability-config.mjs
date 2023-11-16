@@ -25,6 +25,7 @@ export default class KeyAbilityConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
+		context.showClassRestriction = false;
 		context.showLevelSelector = false;
 		return context;
 	}
