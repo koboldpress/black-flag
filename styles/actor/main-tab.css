@@ -50,6 +50,18 @@
 
 		.proficiency-bonus {
 			flex: 0 0 10%;
+			position: relative;
+
+			> span {
+				position: absolute;
+				inset: 0;
+				inset-block-start: -0.5ex;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding-inline-end: 0.33ex;
+				font-size: var(--font-size-20);
+			}
 		}
 
 		.progression {
