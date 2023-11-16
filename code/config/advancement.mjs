@@ -89,6 +89,14 @@ export const scaleDiceSizes = [2, 3, 4, 6, 8, 10, 12, 20, 100];
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Level at which classes grant subclasses.
+ * @type {number}
+ */
+export const subclassLevel = 3;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Modes used within a trait advancement.
  * @enum {LabeledConfiguration}
  */

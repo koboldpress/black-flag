@@ -290,7 +290,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				enumerable: false
 			});
 			Object.defineProperty(data, "requiresSubclass", {
-				value: !data.subclass && data.levels >= 3,
+				value: !data.subclass && data.levels >= CONFIG.BlackFlag.subclassLevel,
 				enumerable: false,
 				writable: false
 			});
@@ -965,6 +965,12 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
 			this.parent.enqueueAdvancementChange(advancement, "reverse", [levels, undefined, { render: false }]);
 		}
+
+		// Remove subclass if less than 3rd level
+		const subclass = this.progression.classes[cls.identifier].subclass;
+		if ( (levels.class <= CONFIG.BlackFlag.subclassLevel) && subclass ) this.parent.enqueueAdvancementChange(
+			this.parent, "deleteEmbeddedDocuments", ["Item", [subclass.id], { render: false }]
+		);
 
 		// Remove progression data for level
 		this.parent.enqueueAdvancementChange(this.parent, "update", [
