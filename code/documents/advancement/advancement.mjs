@@ -188,7 +188,7 @@ export default class Advancement extends BaseAdvancement {
 	 * @returns {number[]}
 	 */
 	get levels() {
-		return this.level?.value !== undefined ? [this.level.value] : [];
+		return ![null, undefined].includes(this.level?.value) ? [this.level.value] : [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -253,6 +253,20 @@ export default class Advancement extends BaseAdvancement {
 	 */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.warning`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform preliminary operations before an Advancement is created.
+	 * @param {object} data - The initial data object provided to the document creation request.
+	 * @returns {boolean|void} - A return value of false indicates the creation operation should be cancelled.
+	 * @protected
+	 */
+	_preCreate(data) {
+		if ( foundry.utils.hasProperty(data, "level")
+			|| this.constructor.metadata.multiLevel ) return;
+		this.updateSource({"level.value": this.minimumLevel});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -361,10 +375,14 @@ export default class Advancement extends BaseAdvancement {
 		if ( !context.parent ) throw new Error("Cannot create advancements without a parent.");
 		const updates = data.reduce((updates, data) => {
 			if ( !context.keepId || !data._id ) data._id = foundry.utils.randomID();
-			updates[data._id] = data;
 			const c = CONFIG.Advancement.types[data.type];
-			if ( !c?.validItemTypes.has(context.parent.type) || !c?.documentClass.availableForItem(context.parent) ) {
-				throw new Error(`${data.type} advancement cannot be added to ${context.parent.name}`);
+			const createData = foundry.utils.deepClone(data);
+			const created = new c.documentClass(data, {parent: context.parent});
+			if ( created._preCreate(createData) !== false ) {
+				updates[data._id] = created.toObject();
+				if ( !c.validItemTypes.has(context.parent.type) || !c.documentClass.availableForItem(context.parent) ) {
+					throw new Error(`${data.type} advancement cannot be added to ${context.parent.name}`);
+				}
 			}
 			return updates;
 		}, {});
