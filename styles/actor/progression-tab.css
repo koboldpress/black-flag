@@ -29,7 +29,7 @@
 					flex-grow: 1;
 				}
 				&.controls {
-					opacity: 0.6;
+					opacity: 60%;
 				}
 				&.levels {
 					font-size: var(--font-size-14);
@@ -39,6 +39,11 @@
 				.subclass {
 					padding-inline-start: 0.25rem;
 					font-size: var(--font-size-13);
+
+					[data-sub-action="delete"] {
+						padding-inline-start: 0.25rem;
+						opacity: 60%;
+					}
 				}
 				.subclass::before { content: "["; }
 				.subclass::after { content: "]"; }

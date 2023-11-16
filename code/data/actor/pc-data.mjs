@@ -923,15 +923,14 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		}
 
 		// Add new progression data
-		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass}, { render: false });
+		await this.parent.update(
+			{[`system.progression.levels.${levels.character}.class`]: existingClass}, { render: false }
+		);
 
 		// Apply advancements for the new level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
-			await advancement.apply(levels, undefined, { initial: true, render: false });
+			this.parent.enqueueAdvancementChange(advancement, "apply", [levels, undefined, { initial: true, render: false }]);
 		}
-
-		// TODO: Need to find a way to re-render on all clients
-		this.parent.render();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -950,17 +949,18 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 		// Remove advancements for the old level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
-			await advancement.reverse(levels, undefined, { render: false });
+			this.parent.enqueueAdvancementChange(advancement, "reverse", [levels, undefined, { render: false }]);
 		}
 
 		// Remove progression data for level
-		await this.parent.update({[`system.progression.levels.-=${this.progression.level}`]: null}, { render: false });
+		this.parent.enqueueAdvancementChange(this.parent, "update", [
+			{[`system.progression.levels.-=${this.progression.level}`]: null}, { render: false }
+		]);
 
 		// If class has no more levels, remove it from the actor
-		if ( levels.class <= 1 ) await this.parent.deleteEmbeddedDocuments("Item", [cls.id], { render: false });
-
-		// TODO: Need to find a way to re-render on all clients
-		this.parent.render();
+		if ( levels.class <= 1 ) this.parent.enqueueAdvancementChange(
+			this.parent, "deleteEmbeddedDocuments", ["Item", [cls.id], { render: false }]
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -84,6 +84,11 @@
 							<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
 								{{data.subclass.name}}
 							</a>
+							{{#if @root.editingMode}}
+								<a data-action="item" data-sub-action="delete" data-item-id="{{data.subclass.id}}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							{{/if}}
 						</span>
 					{{/if}}
 				</span>

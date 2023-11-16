@@ -16,7 +16,7 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _onCreateApplyAdvancement(data, options, userId) {
+	_onCreateApplyAdvancement(data, options, userId) {
 		const progression = this.parent.actor?.system.progression;
 		if ( (game.user.id !== userId) || !progression || !this.advancement.size ) return;
 
@@ -25,17 +25,16 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 		log(`Applying advancement for ${this.parent.name}`);
 		for ( const level of levels ) {
 			for ( const advancement of this.parent.advancementForLevel(level) ) {
-				await advancement.apply(level, undefined, { initial: true, render: false });
+				this.parent.actor.enqueueAdvancementChange(advancement, "apply", [
+					level, undefined, { initial: true, render: false }
+				]);
 			}
 		}
-
-		// TODO: Need to find a way to re-render on all clients
-		this.parent.render();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _onDeleteRevertAdvancement(options, userId) {
+	_onDeleteRevertAdvancement(options, userId) {
 		const progression = this.parent.actor?.system.progression;
 		if ( (game.user.id !== userId) || !progression || !this.advancement.size ) return;
 
@@ -44,14 +43,13 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 		for ( const level of levels.reverse() ) {
 			// TODO: These advancements should be unapplied in reverse order
 			for ( const advancement of this.parent.advancementForLevel(level) ) {
-				await advancement.reverse(level, undefined, { render: false });
+				this.parent.actor.enqueueAdvancementChange(advancement, "reverse", [level, undefined, { render: false }]);
 			}
 		}
 
 		// Remove any remaining advancement data
-		await this.parent.actor.update({[`system.progression.advancement.-=${this.parent.id}`]: null}, { render: false });
-
-		// TODO: Need to find a way to re-render on all clients
-		this.parent.render();
+		this.parent.actor.enqueueAdvancementChange(this.parent.actor, "update", [
+			{ [`system.progression.advancement.-=${this.parent.id}`]: null }, { render: false }
+		]);
 	}
 }

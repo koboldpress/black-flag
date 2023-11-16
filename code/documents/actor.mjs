@@ -10,17 +10,33 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Collection of notifications that should be displayed on the actor sheet.
-	 */
-	notifications = this.notifications;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * An object that tracks which tracks the changes to the data model which were applied by advancement.
 	 * @type {object}
 	 */
 	advancementOverrides = this.advancementOverrides ?? {};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Are advancement changes currently being applied?.
+	 * @type {boolean}
+	 */
+	#advancementProcessing = false;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Internal queue of advancement operations to apply.
+	 * @type {{advancement: Advancement, functionName: string, parameters: *[]}[]}
+	 */
+	#advancementQueue = [];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Collection of notifications that should be displayed on the actor sheet.
+	 */
+	notifications = this.notifications;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
@@ -189,6 +205,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Add an advancement change to the application queue. Will automatically start processing advancements if
+	 * processing is not currently ongoing.
+	 * @param {Advancement} advancement - Advancement upon which the function will be called.
+	 * @param {string} functionName - Name of the function to call.
+	 * @param {*[]} parameters - Parameters that should be called on the function.
+	 */
+	enqueueAdvancementChange(advancement, functionName, parameters) {
+		this.#advancementQueue.push({ advancement, functionName, parameters });
+		if ( !this.#advancementProcessing ) this.#processAdvancementChanges();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async modifyTokenAttribute(attribute, value, isDelta, isBar) {
 		if ( ["attributes.hp", "attributes.hp.value"].includes(attribute) ) {
 			const hp = this.system.attributes.hp;
@@ -196,6 +226,26 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			return this.applyDamage(delta);
 		}
 		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Begin stepping through the advancement queue.
+	 */
+	async #processAdvancementChanges() {
+		if ( this.#advancementProcessing ) throw new Error("Advancement processing already in progress.");
+		if ( !this.#advancementQueue.length ) return;
+		this.#advancementProcessing = true;
+
+		do {
+			const op = this.#advancementQueue.shift();
+			await op.advancement[op.functionName].bind(op.advancement)(...op.parameters);
+		} while ( this.#advancementQueue.length );
+
+		this.#advancementProcessing = false;
+		this.render();
+		// TODO: Need to find a way to re-render on all clients
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
