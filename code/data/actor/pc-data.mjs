@@ -289,6 +289,11 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				configurable: true,
 				enumerable: false
 			});
+			Object.defineProperty(data, "requiresSubclass", {
+				value: !data.subclass && data.levels >= 3,
+				enumerable: false,
+				writable: false
+			});
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
 	}
@@ -686,6 +691,16 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				message: game.i18n.localize("BF.Progression.Notification.ChooseBackground")
 			});
 		}
+
+		// 6. Choose a Subclass
+		for ( const [key, data] of Object.entries(this.progression.classes) ) {
+			if ( !data.requiresSubclass ) continue;
+			order++;
+			this.parent.notifications.set(`no-subclass-${key}`, {
+				level: "warn", category: "class", section: "progression", document: data.document.id, order,
+				message: game.i18n.format("BF.Progression.Notification.ChooseSubclass", { class: data.document.name })
+			});
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -694,8 +709,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		const anyLevel = { levels: { character: 0, class: 0 } };
 		for ( const data of [anyLevel, ...Object.values(this.progression.levels)] ) {
 			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
-				const level = advancement.relavantLevel(data.levels);
-				if ( level !== null ) advancement.prepareWarnings(level, this.parent.notifications);
+				advancement.prepareWarnings(data.levels, this.parent.notifications);
 			}
 		}
 	}

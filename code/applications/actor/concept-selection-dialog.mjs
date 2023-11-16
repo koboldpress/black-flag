@@ -3,9 +3,8 @@
  */
 export default class ConceptSelectionDialog extends FormApplication {
 	constructor(actor, type, options={}) {
-		super(options);
+		super(actor, options);
 		this.options.classes.push(type);
-		this.actor = actor;
 		this.type = type;
 	}
 
@@ -15,7 +14,9 @@ export default class ConceptSelectionDialog extends FormApplication {
 	 * Actor to which the item will be applied.
 	 * @type {BlackFlagActor}
 	 */
-	actor;
+	get actor() {
+		return this.object;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -31,7 +32,8 @@ export default class ConceptSelectionDialog extends FormApplication {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept-selection-dialog"],
 			width: "auto",
-			height: "auto"
+			height: "auto",
+			classIdentifier: null
 		});
 	}
 
@@ -40,7 +42,8 @@ export default class ConceptSelectionDialog extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get template() {
-		return `systems/black-flag/templates/actor/concept-selection-dialog-${this.type === "class" ? "class" : "other"}.hbs`;
+		const type = ["class", "subclass"].includes(this.type) ? "class" : "other";
+		return `systems/black-flag/templates/actor/concept-selection-dialog-${type}.hbs`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -60,6 +63,9 @@ export default class ConceptSelectionDialog extends FormApplication {
 		context.CONFIG = CONFIG.BlackFlag;
 		context.choices = await Promise.all(
 			Object.values(CONFIG.BlackFlag.registration.list(this.type) ?? {}).map(o => this.getOptionData(o))
+		);
+		if ( this.type === "subclass" ) context.choices = context.choices.filter(choice =>
+			choice.document.system.identifier.class === this.options.classIdentifier
 		);
 		context.typeName = game.i18n.localize(CONFIG.Item.typeLabels[this.type]).toLowerCase();
 		context.typeNamePlural = game.i18n.localize(CONFIG.Item.typeLabelsPlural[this.type]).toLowerCase();
@@ -101,6 +107,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 		const uuid = event.target.closest("[data-uuid]").dataset.uuid;
 		const document = await fromUuid(uuid);
 		if ( this.type === "class" ) await this.actor.system.levelUp(document);
+		else if ( this.type === "subclass" ) await this.actor.createEmbeddedDocuments("Item", [document.toObject()]);
 		else await this.actor.system.setConcept(document);
 		this.close();
 	}

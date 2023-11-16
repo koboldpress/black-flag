@@ -73,7 +73,10 @@
 		</fieldset>
 		{{#each system.progression.classes as |data identifier|}}
 			<fieldset class="class" data-class="{{identifier}}">
-				<legend>{{localize "BF.Item.Type.Class[one]"}}</legend>
+				<legend>
+					{{localize "BF.Item.Type.Class[one]"}}
+					{{blackFlag-notificationBadge @root.actor category="class" document=data.document.id displayOrder=true}}
+				</legend>
 				<figure class="icon">
 					<img src="{{data.document.img}}">
 				</figure>
@@ -89,6 +92,12 @@
 									<i class="fa-solid fa-trash"></i>
 								</a>
 							{{/if}}
+						</span>
+					{{else if data.requiresSubclass}}
+						<span class="subclass">
+							<a data-action="progression" data-sub-action="select" data-type="subclass">
+								Choose Subclass
+							</a>
 						</span>
 					{{/if}}
 				</span>

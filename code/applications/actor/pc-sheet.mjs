@@ -204,7 +204,8 @@ export default class PCSheet extends BaseActorSheet {
 						properties.type = "class";
 					case "select":
 						if ( !properties.type ) return;
-						return (new ConceptSelectionDialog(this.actor, properties.type)).render(true);
+						const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
+						return (new ConceptSelectionDialog(this.actor, properties.type, { classIdentifier })).render(true);
 				}
 				break;
 		}

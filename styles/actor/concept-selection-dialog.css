@@ -1,33 +1,36 @@
 .concept-selection-dialog {
+	--entry-size: 400px;
+
 	.empty {
-		height: 100%;
-		width: 100%;
+		block-size: 100%;
+		inline-size: 100%;
 		padding: 1rem;
 		font-size: var(--font-size-16);
 
 		> p {
-			max-width: 30em;
+			max-inline-size: 30em;
 		}
 	}
 }
 
-.concept-selection-dialog.class .window-content {
-	height: 800px;
-	max-width: min(1400px, 75vw);
-	min-width: 400px;
-	overflow-x: scroll;
+.concept-selection-dialog:is(.class, .subclass) .window-content {
+	block-size: 800px;
+	max-inline-size: min(1400px, 75vw);
+	min-inline-size: var(--entry-size);
+	overflow-inline: scroll;
 	padding: 0;
 
 	form {
 		display: flex;
 		flex-direction: row;
-		
+
 		.option {
 			display: flex;
 			flex-direction: column;
-		
+			max-inline-size: var(--entry-size);
+
 			.choose {
-				width: unset;
+				inline-size: unset;
 				margin-inline: 0.5rem;
 				margin-block: 0.5rem;
 			}
@@ -35,44 +38,47 @@
 	}
 }
 
-.concept-selection-dialog:not(.class) .window-content {
-	max-height: min(800px, 75vh);
-	min-height: 400px;
-	max-width: min(800px, 75vw);
-	min-width: 500px;
-	overflow-y: scroll;
+.concept-selection-dialog:not(:is(.class, .subclass)) .window-content {
+	--entry-size: 200px;
+
+	max-block-size: min(800px, 75vh);
+	min-block-size: calc(var(--entry-size) * 2);
+	max-inline-size: min(800px, 75vw);
+	min-inline-size: 500px;
+	overflow-block: scroll;
 	padding: 0;
 
 	form {
 		.option {
 			contain: layout;
-			height: calc(200px + 2px);
-			width: 100%;
+			block-size: calc(var(--entry-size) + 2px);
+			inline-size: 100%;
 			border-block-end: 2px solid black;
 
 			.poster {
+				--poster-size: 160px;
+
 				margin: 0;
 				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				width: 160px;
+				inset-block: 0;
+				inset-inline-start: 0;
+				inline-size: var(--poster-size);
 				contain: layout;
-				
+
 				img {
-					width: 146px;
-					height: 146px;
+					block-size: 146px;
+					inline-size: 146px;
 					margin: 2px;
 					border: none;
 				}
 
 				button {
 					position: absolute;
-					width: calc(130px - 2px);
-					top: 160px;
-					bottom: 10px;
-					left: 10px;
-					right: 20px;
+					inline-size: calc(130px - 2px);
+					inset-block-start: var(--poster-size);
+					inset-block-end: 10px;
+					inset-inline-start: 10px;
+					inset-inline-end: 20px;
 					z-index: 1;
 					background: rgb(228, 228, 202);
 					font-weight: bold;
@@ -81,10 +87,7 @@
 
 				.window-mask {
 					position: absolute;
-					top: 0;
-					bottom: 0;
-					left: 0;
-					right: 0;
+					inset: 0;
 					background-image: url("artwork/interface/window-mask.svg");
 					background-repeat: no-repeat;
 					background-size: contain;
@@ -100,7 +103,7 @@
 				padding: 1rem;
 
 				> header {
-					flex: 100% 1 0;
+					flex: 1 0 100%;
 					display: flex;
 					align-items: first baseline;
 					justify-content: space-between;
