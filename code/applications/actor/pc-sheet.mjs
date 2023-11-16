@@ -2,6 +2,7 @@ import { Trait } from "../../utils/_module.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
+import LevelUpDialog from "./level-up-dialog.mjs";
 
 export default class PCSheet extends BaseActorSheet {
 
@@ -192,13 +193,18 @@ export default class PCSheet extends BaseActorSheet {
 							yes: () => this.actor.system.levelDown()
 						});
 					case "level-up":
+						const allowMulticlassing = true;
+						// TODO: Check actual multi-classing settings
 						const cls = this.actor.system.progression.levels[1]?.class;
-						// TODO: Will need to present a dialog confirming whether to level up existing class or multiclass
 						if ( cls ) {
-							try {
-								return await this.actor.system.levelUp(cls);
-							} catch(err) {
-								return ui.notifications.warn(err.message);
+							if ( allowMulticlassing ) {
+								return (new LevelUpDialog(this.actor)).render(true);
+							} else {
+								try {
+									return await this.actor.system.levelUp(cls);
+								} catch(err) {
+									return ui.notifications.warn(err.message);
+								}
 							}
 						}
 						properties.type = "class";

@@ -1,7 +1,20 @@
 .black-flag .items-list {
+	--image-size: 30px;
+	--gap-size: 0.5rem;
+	--name-font-size: var(--font-size-14);
+	--details-font-size: var(--font-size-12);
+}
+.black-flag .items-list.large {
+	--image-size: 50px;
+	--gap-size: 1rem;
+	--name-font-size: var(--font-size-16);
+	--details-font-size: var(--font-size-14);
+}
+
+.black-flag .items-list {
 	display: flex;
 	flex-direction: column;
-	gap: 0.25rem;
+	gap: calc(var(--gap-size) / 2);
 	margin: 1rem;
 	margin-block-start: 0.5rem;
 	padding: 0;
@@ -11,7 +24,7 @@
 		.header {
 			display: flex;
 			align-items: first baseline;
-			gap: 0.5rem;
+			gap: var(--gap-size);
 
 			border: 2px groove white;
 			border-start-start-radius: 1em;
@@ -21,7 +34,7 @@
 			background: var(--bf-item-gradiant);
 			box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.35);
 			color: white;
-			font-size: var(--font-size-14);
+			font-size: var(--name-font-size);
 
 			h3 {
 				border: none;
@@ -31,7 +44,7 @@
 
 			.item-details {
 				font-family: var(--bf-font-header);
-				font-size: var(--font-size-12);
+				font-size: var(--details-font-size);
 			}
 		}
 	}
@@ -50,7 +63,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.5rem;
+		gap: var(--gap-size);
 		padding-inline: 0;
 
 		&:not(:last-of-type) {
@@ -60,18 +73,24 @@
 	}
 
 	.item-name {
-		width: 14rem;
+		inline-size: 14rem;
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--gap-size);
+		font-size: var(--name-font-size);
 
 		.icon {
 			margin: 0;
 	
 			img {
 				border: none;
-				width: 30px;
-				height: 30px;
+				block-size: var(--image-size);
+				inline-size: var(--image-size);
+			}
+
+			&.spacer {
+				block-size: var(--image-size);
+				inline-size: var(--image-size);
 			}
 		}
 	
@@ -83,10 +102,10 @@
 	.item-details {
 		flex-grow: 1;
 		display: flex;
-		font-size: var(--font-size-12);
+		font-size: var(--details-font-size);
 
 		> div {
-			width: 4rem;
+			inline-size: 4rem;
 			padding-inline: 0.5rem;
 		}
 	}

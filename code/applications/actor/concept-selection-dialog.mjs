@@ -64,6 +64,10 @@ export default class ConceptSelectionDialog extends FormApplication {
 		context.choices = await Promise.all(
 			Object.values(CONFIG.BlackFlag.registration.list(this.type) ?? {}).map(o => this.getOptionData(o))
 		);
+		if ( this.type === "class" ) {
+			const existingClasses = new Set(Object.keys(this.actor.system.progression.classes));
+			context.choices = context.choices.filter(choice => !existingClasses.has(choice.document.identifier));
+		}
 		if ( this.type === "subclass" ) context.choices = context.choices.filter(choice =>
 			choice.document.system.identifier.class === this.options.classIdentifier
 		);
