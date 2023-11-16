@@ -33,6 +33,14 @@ export let ready = false;
 export const reinitiatlizeOnReady = new Set();
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Should world items be included in the registration?
+ * @type {boolean}
+ */
+const REGISTER_WORLD_ITEMS = false;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                         Lookup                        */
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -154,10 +162,12 @@ async function _registerItemType(type, indexes) {
 			registerItem(item, `Compendium.${pack}`);
 		}
 	}
-	for ( const item of game.items.values() ) {
-		if ( item.system.constructor.metadata?.type !== type ) continue;
-		log(`Registering ${item.name} in world`);
-		registerItem(item, "Item");
+	if ( REGISTER_WORLD_ITEMS ) {
+		for ( const item of game.items.values() ) {
+			if ( item.system.constructor.metadata?.type !== type ) continue;
+			log(`Registering ${item.name} in world`);
+			registerItem(item, "Item");
+		}
 	}
 	console.groupEnd();
 
@@ -198,6 +208,7 @@ const message = operation => `Attempted to ${operation} item before registration
  */
 function _onCreateItem(item, options, userId) {
 	if ( item.isEmbedded || !item.system.constructor.metadata.register ) return;
+	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
 	if ( !ready ) log(message("create"), { level: "warn" });
 	const type = item.system.constructor.metadata.type;
 	let source = all[type] ??= {};
@@ -232,6 +243,7 @@ function _preUpdateItem(item, changes, options, userId) {
  */
 function _onUpdateItem(item, changes, options, userId) {
 	if ( item.isEmbedded || !item.system.constructor.metadata.register ) return;
+	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
 	if ( !ready ) log(message("update"), { level: "warn" });
 	const type = item.system.constructor.metadata.type;
 	const source = all[type] ??= {};
@@ -274,6 +286,7 @@ function _onUpdateItem(item, changes, options, userId) {
  */
 function _onDeleteItem(item, options, userId) {
 	if ( item.isEmbedded || !item.system.constructor.metadata.register ) return;
+	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
 	if ( !ready ) log(message("delete"), { level: "warn" });
 	const type = item.system.constructor.metadata.type;
 	const source = all[type] ??= {};
