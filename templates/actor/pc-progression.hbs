@@ -2,8 +2,22 @@
 	<section class="leveling">
 		<fieldset>
 			<legend>{{localize "BF.Progression.Label"}}</legend>
-			<p>List current overall level, XP if XP mode is selected, level-up button, etc.</p>
-			<a data-action="progression" data-sub-action="level-up">Level Up</a>
+			<div class="wrapper">
+				<span class="current-level">
+					{{#if system.progression.level}}
+						{{localize "BF.Level.Specific" level=(blackFlag-number system.progression.level)}}
+					{{else}}
+						{{localize "BF.Level.None"}}
+					{{/if}}
+				</span>
+				{{#unless (eq system.progression.level CONFIG.maxLevel)}}
+					<a data-action="progression" data-sub-action="level-up">
+						<i class="fa-solid fa-arrow-up-wide-short"></i>
+						{{localize "BF.Progression.Action.LevelUp.Label"}}
+					</a>
+				{{/unless}}
+				<!-- XP bar -->
+			</div>
 		</fieldset>
 	</section>
 	<section class="details">
