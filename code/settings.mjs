@@ -101,6 +101,15 @@ export function registerSettings() {
 		type: Boolean
 	});
 
+	game.settings.register(game.system.id, "allowMulticlassing", {
+		name: "BF.Settings.Multiclassing.Label",
+		hint: "BF.Settings.Multiclassing.Hint",
+		scope: "world",
+		config: true,
+		default: true,
+		type: Boolean
+	});
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Hidden Settings           */
 	/* <><><><> <><><><> <><><><> <><><><> */

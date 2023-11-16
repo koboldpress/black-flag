@@ -193,8 +193,7 @@ export default class PCSheet extends BaseActorSheet {
 							yes: () => this.actor.system.levelDown()
 						});
 					case "level-up":
-						const allowMulticlassing = true;
-						// TODO: Check actual multi-classing settings
+						const allowMulticlassing = game.settings.get(game.system.id, "allowMulticlassing");
 						const cls = this.actor.system.progression.levels[1]?.class;
 						if ( cls ) {
 							if ( allowMulticlassing ) {

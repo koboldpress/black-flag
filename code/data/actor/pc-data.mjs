@@ -921,6 +921,13 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	 * @returns {Promise}
 	 */
 	async levelUp(cls) {
+		if ( !game.settings.get(game.system.id, "allowMulticlassing") ) {
+			const existingClass = Object.keys(this.progression.classes)[0];
+			if ( existingClass && existingClass !== cls.identifier ) {
+				throw new Error(game.i18n.localize("BF.Progression.Warning.NoMulticlassing"));
+			}
+		}
+
 		const levels = {
 			character: (this.progression.level ?? 0) + 1,
 			class: (this.progression.classes[cls.identifier]?.levels ?? 0) + 1,
