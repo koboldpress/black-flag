@@ -1,6 +1,6 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { filter, simplifyBonus, Trait } from "../../utils/_module.mjs";
+import { filter, getPluralRules, simplifyBonus, Trait } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import {
 	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
@@ -268,17 +268,26 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 	prepareEmbeddedClasses() {
 		this.progression.classes = {};
+		const subclasses = this.parent.items.filter(i => i.type === "subclass").reduce((obj, i) => {
+			obj[i.system.identifier.class] = i;
+			return obj;
+		}, {});
 		for ( const [level, data] of Object.entries(this.progression.levels) ) {
 			const document = data.class;
 			if ( !document ) continue;
-			const classData = this.progression.classes[data.class.identifier] ??= { document, levels: 0 };
+			const classData = this.progression.classes[data.class.identifier] ??= {
+				document, subclass: subclasses[document.identifier], levels: 0
+			};
 			classData.levels += 1;
 			data.levels = { character: Number(level), class: classData.levels, identifier: document.identifier };
 		}
-		const pluralRules = new Intl.PluralRules(game.i18n.lang);
 		for ( const data of Object.values(this.progression.classes) ) {
-			data.levelsLabel = game.i18n.format(`BF.Level.Count[${pluralRules.select(data.levels)}]`, {
-				number: data.levels
+			Object.defineProperty(data, "levelsLabel", {
+				get() {
+					return game.i18n.format(`BF.Level.Count[${getPluralRules().select(this.levels)}]`, { number: this.levels });
+				},
+				configurable: true,
+				enumerable: false
 			});
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
@@ -554,9 +563,12 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		const progression = { leveled: 0 };
 		const types = {};
 
+		// TODO: Determine if more sophisticated merging of spellcasting configs is needed here
+		const getSpellcasting = d => d.subclass?.system.spellcasting ?? d.document.system.spellcasting;
+
 		// Grab any class with spellcasting and tally up different types
 		const spellcastingClasses = Object.values(this.progression.classes).filter(classData => {
-			const spellcasting = classData.document.system.spellcasting;
+			const spellcasting = getSpellcasting(classData);
 			if ( !spellcasting?.type ) return false;
 			types[spellcasting.type] ??= 0;
 			types[spellcasting.type] += 1;
@@ -565,8 +577,9 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 		for ( const cls of spellcastingClasses ) {
 			const doc = cls.document;
+			const spellcasting = getSpellcasting(cls);
 			this.constructor.computeClassProgression(
-				progression, doc, { actor: this.parent, levels: cls.levels, count: types[doc.system.spellcasting.type] }
+				progression, doc, { actor: this.parent, levels: cls.levels, count: types[spellcasting.type], spellcasting }
 			);
 		}
 

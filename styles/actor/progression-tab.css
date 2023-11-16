@@ -36,6 +36,12 @@
 					font-variant: small-caps;
 					font-weight: bold;
 				}
+				.subclass {
+					padding-inline-start: 0.25rem;
+					font-size: var(--font-size-13);
+				}
+				.subclass::before { content: "["; }
+				.subclass::after { content: "]"; }
 			}
 		}
 

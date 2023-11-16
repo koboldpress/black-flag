@@ -79,6 +79,13 @@
 				</figure>
 				<span>
 					<a data-action="item" data-sub-action="view" data-item-id="{{data.document.id}}">{{data.document.name}}</a>
+					{{#if data.subclass}}
+						<span class="subclass">
+							<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
+								{{data.subclass.name}}
+							</a>
+						</span>
+					{{/if}}
 				</span>
 				<span class="levels">{{data.levelsLabel}}</span>
 			</fieldset>

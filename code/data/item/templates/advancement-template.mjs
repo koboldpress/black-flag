@@ -18,7 +18,7 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 
 	async _onCreateApplyAdvancement(data, options, userId) {
 		const progression = this.parent.actor?.system.progression;
-		if ( (game.user.id !== userId) || !progression ) return;
+		if ( (game.user.id !== userId) || !progression || !this.advancement.size ) return;
 
 		// Apply all advancements for this item up to current level
 		const levels = [{ character: 0, class: 0 }, ...Object.values(progression.levels).map(l => l.levels)];
@@ -37,7 +37,7 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 
 	async _onDeleteRevertAdvancement(options, userId) {
 		const progression = this.parent.actor?.system.progression;
-		if ( (game.user.id !== userId) || !progression ) return;
+		if ( (game.user.id !== userId) || !progression || !this.advancement.size ) return;
 
 		const levels = [{ character: 0, class: 0 }, ...Object.values(progression.levels).map(l => l.levels)];
 		log(`Removing advancement for ${this.parent.name}`);

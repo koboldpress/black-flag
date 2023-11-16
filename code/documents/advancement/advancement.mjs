@@ -562,17 +562,18 @@ export default class Advancement extends BaseAdvancement {
 	 */
 	relavantLevel(levels) {
 		if ( (levels.character === 0) || (levels.class === 0) ) return 0;
+		let identifier;
 
 		// Classes & subclasses are always based on class level, as long as identifiers match
-		if ( ["class", "subclass"].includes(this.item.type) ) {
-			return (this.item.identifier === levels.identifier) ? levels.class : null;
-		}
+		if ( this.item.type === "class" ) identifier = this.item.identifier;
+		else if ( this.item.type === "subclass" ) identifier = this.item.system.identifier.class;
 
 		// Class level if explicit class identifier is set and it matches provided identifier
-		if ( this.level.classIdentifier ) {
-			return (this.level.classIdentifier === levels.identifier) ? levels.class : null;
-		}
+		else if ( this.level.classIdentifier ) identifier = this.level.classIdentifier;
 
-		return levels.character;
+		// Otherwise revert to character level
+		else return levels.character;
+
+		return identifier === levels.identifier ? levels.class : !levels.identifier ? levels.character : null;
 	}
 }
