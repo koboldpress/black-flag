@@ -14,69 +14,72 @@
 				{{localize "BF.Progression.Label"}}
 				{{blackFlag-notificationBadge actor section="progression"}}
 			</legend>
-			<a data-tab="front">
-				<span class="text">{{localize "BF.Progression.Action.Return"}}</span>
-				<span class="icon"><i class="fa-solid fa-reply"></i></span>
-			</a>
-			<a data-tab="back">
-				<span class="text">{{localize "BF.Level.Specific" level=system.progression.level}}</span>
-				<span class="icon"><i class="fa-solid fa-arrow-down-up-across-line"></i></span>
+			<a data-action="toggle-mode" data-type="progression">
+				{{#unless modes.progression}}
+					<span class="text">{{localize "BF.Level.Specific" level=system.progression.level}}</span>
+					<span class="icon"><i class="fa-solid fa-arrow-down-up-across-line"></i></span>
+				{{else}}
+					<span class="text">{{localize "BF.Progression.Action.Return"}}</span>
+					<span class="icon"><i class="fa-solid fa-reply"></i></span>
+				{{/unless}}
 			</a>
 		</fieldset>
 	</header>
 
-	<form id="{{appID}}-main-form" class="tab" data-group="progression" data-tab="front">
-		<nav class="sheet-navigation tabs" data-group="primary">
-			<a data-tab="main">
-				{{localize "BF.Sheet.Tab.Main"}}
-				{{blackFlag-notificationBadge actor section="main"}}
-			</a>
-			<a data-tab="spellcasting">
-				{{localize "BF.Sheet.Tab.Spellcasting"}}
-				{{blackFlag-notificationBadge actor section="spellcasting"}}
-			</a>
-			<a data-tab="inventory">
-				{{localize "BF.Sheet.Tab.Inventory"}}
-				{{blackFlag-notificationBadge actor section="inventory"}}
-			</a>
-			<a data-tab="features">
-				{{localize "BF.Sheet.Tab.Features"}}
-				{{blackFlag-notificationBadge actor section="features"}}
-			</a>
-			<a data-tab="biography">
-				{{localize "BF.Sheet.Tab.Biography"}}
-				{{blackFlag-notificationBadge actor section="biography"}}
-			</a>
-			<a data-tab="effects">
-				{{localize "BF.Sheet.Tab.Effects"}}
-				{{blackFlag-notificationBadge actor section="effects"}}
-			</a>
-		</nav>
-
-		<main>
-			<div class="tab" data-group="primary" data-tab="main">
-				{{> "blackFlag.pc-main"}}
-			</div>
-			<div class="tab" data-group="primary" data-tab="spellcasting">
-				{{> "blackFlag.pc-spellcasting"}}
-			</div>
-			<div class="tab" data-group="primary" data-tab="inventory">
-				{{> "blackFlag.pc-inventory"}}
-			</div>
-			<div class="tab" data-group="primary" data-tab="features">
-				{{> "blackFlag.pc-features"}}
-			</div>
-			<div class="tab" data-group="primary" data-tab="biography">
-				{{> "blackFlag.pc-biography"}}
-			</div>
-			<div class="tab" data-group="primary" data-tab="effects">
-				{{> "blackFlag.conditions"}}
-				{{> "blackFlag.active-effects"}}
-			</div>
-		</main>
-	</form>
-
-	<div class="tab" data-group="progression" data-tab="back">
-		{{> "blackFlag.pc-progression"}}
-	</div>
+	{{#unless modes.progression}}
+		<form class="front" id="{{appID}}-main-form">
+			<nav class="sheet-navigation tabs" data-group="primary">
+				<a data-tab="main">
+					{{localize "BF.Sheet.Tab.Main"}}
+					{{blackFlag-notificationBadge actor section="main"}}
+				</a>
+				<a data-tab="spellcasting">
+					{{localize "BF.Sheet.Tab.Spellcasting"}}
+					{{blackFlag-notificationBadge actor section="spellcasting"}}
+				</a>
+				<a data-tab="inventory">
+					{{localize "BF.Sheet.Tab.Inventory"}}
+					{{blackFlag-notificationBadge actor section="inventory"}}
+				</a>
+				<a data-tab="features">
+					{{localize "BF.Sheet.Tab.Features"}}
+					{{blackFlag-notificationBadge actor section="features"}}
+				</a>
+				<a data-tab="biography">
+					{{localize "BF.Sheet.Tab.Biography"}}
+					{{blackFlag-notificationBadge actor section="biography"}}
+				</a>
+				<a data-tab="effects">
+					{{localize "BF.Sheet.Tab.Effects"}}
+					{{blackFlag-notificationBadge actor section="effects"}}
+				</a>
+			</nav>
+		
+			<main>
+				<div class="tab" data-group="primary" data-tab="main">
+					{{> "blackFlag.pc-main"}}
+				</div>
+				<div class="tab" data-group="primary" data-tab="spellcasting">
+					{{> "blackFlag.pc-spellcasting"}}
+				</div>
+				<div class="tab" data-group="primary" data-tab="inventory">
+					{{> "blackFlag.pc-inventory"}}
+				</div>
+				<div class="tab" data-group="primary" data-tab="features">
+					{{> "blackFlag.pc-features"}}
+				</div>
+				<div class="tab" data-group="primary" data-tab="biography">
+					{{> "blackFlag.pc-biography"}}
+				</div>
+				<div class="tab" data-group="primary" data-tab="effects">
+					{{> "blackFlag.conditions"}}
+					{{> "blackFlag.active-effects"}}
+				</div>
+			</main>
+		</form>
+	{{else}}
+		<div class="back">
+			{{> "blackFlag.pc-progression"}}
+		</div>
+	{{/unless}}
 </div>

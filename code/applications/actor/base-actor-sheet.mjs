@@ -243,12 +243,12 @@ export default class BaseActorSheet extends ActorSheet {
 				const condition = event.target.closest("[data-condition]")?.dataset.condition;
 				switch (subAction) {
 					case "add":
-						this.conditionAddMode = !this.conditionAddMode;
+						this.modes.conditionAdd = !this.modes.conditionAdd;
 						return this.render();
 					case "delete":
 						return this.actor.system.setConditionLevel(condition);
 					case "set-level":
-						this.conditionAddMode = false;
+						this.modes.conditionAdd = false;
 						return this.actor.system.setConditionLevel(condition, Number(properties.level));
 				}
 				break;
@@ -278,6 +278,9 @@ export default class BaseActorSheet extends ActorSheet {
 			case "roll":
 				properties.event = event;
 				return this.actor.roll(subAction, properties);
+			case "toggle-mode":
+				this.modes[properties.type] = !this.modes[properties.type];
+				return this.render();
 		}
 		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}

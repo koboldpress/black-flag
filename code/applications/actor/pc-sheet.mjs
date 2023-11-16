@@ -13,7 +13,6 @@ export default class PCSheet extends BaseActorSheet {
 			width: 820,
 			height: 740,
 			tabs: [
-				{group: "progression", navSelector: ".progression", contentSelector: ".sheet-container", initial: "front"},
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
 			],
 			scrollY: [".window-content"]
@@ -29,13 +28,21 @@ export default class PCSheet extends BaseActorSheet {
 	advancementFlows = {};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	modes = {
+		conditionAdd: false,
+		editing: false,
+		progression: false
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
 		const context = await super.getData(options);
 
-		this.prepareProgression(context);
+		if ( this.modes.progression ) this.prepareProgression(context);
 
 		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
 			selected: context.system.attributes.luck.value >= l
@@ -149,7 +156,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	async _render(force, options) {
 		await super._render(force, options);
-		if ( this._state !== Application.RENDER_STATES.RENDERED ) return;
+		if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.modes.progression ) return;
 
 		// Render advancement steps
 		for ( const flow of Object.values(this.advancementFlows) ) {

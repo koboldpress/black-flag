@@ -5,7 +5,7 @@
 				<h3 class="effect-name">{{localize "BF.Item.Type.Condition[other]"}}</h3>
 				<div class="effect-controls">
 					{{#if modes.conditionAdd}}
-						<a data-action="condition" data-sub-action="add">
+						<a data-action="toggle-mode" data-type="conditionAdd">
 							<i class="fa-solid fa-xmark"></i>
 						</a>
 					{{else if editable}}
