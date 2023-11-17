@@ -945,7 +945,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 
 		// Add new progression data
 		await this.parent.update(
-			{[`system.progression.levels.${levels.character}.class`]: existingClass}, { render: false }
+			{[`system.progression.levels.${levels.character}.class`]: existingClass}
 		);
 
 		// Apply advancements for the new level
