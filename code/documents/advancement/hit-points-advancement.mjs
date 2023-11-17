@@ -125,7 +125,7 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static availableForItem(item) {
-		return !item.system.advancement.byType("hitPoints").length;
+		return !item.system.advancement.byType(this.metadata.name).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

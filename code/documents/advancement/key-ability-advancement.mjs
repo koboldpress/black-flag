@@ -118,7 +118,7 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static availableForItem(item) {
-		return !item.system.advancement.byType("keyAbility").length;
+		return !item.system.advancement.byType(this.metadata.name).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

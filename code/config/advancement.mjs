@@ -28,6 +28,10 @@ export const _advancementTypes = {
 		documentClass: advancement.HitPointsAdvancement,
 		validItemTypes: new Set(["class"])
 	},
+	improvement: {
+		documentClass: advancement.ImprovementAdvancement,
+		validItemTypes: new Set(["class"])
+	},
 	keyAbility: {
 		documentClass: advancement.KeyAbilityAdvancement,
 		validItemTypes: new Set(["class"])

@@ -16,8 +16,12 @@ export class KeyAbilityConfigurationData extends foundry.abstract.DataModel {
 	}
 }
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
 /**
- * Value data for the Size advancement.
+ * Value data for the Key Ability advancement.
+ *
+ * @property {string} selected - Which ability was selected as key?
  */
 export class KeyAbilityValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
