@@ -24,15 +24,15 @@ export class ImprovementConfigurationData extends foundry.abstract.DataModel {
  * Value data for the Improvement advancement.
  *
  * @property {string} ability - Which ability score was improved?
- * @property {object} added
- * @property {BlackFlagItem} added.document - Local document added.
- * @property {string} added.uuid - Origin UUID of the added document.
+ * @property {object} talent
+ * @property {BlackFlagItem} talent.document - Local document added.
+ * @property {string} talent.uuid - Origin UUID of the added document.
  */
 export class ImprovementValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			ability: new StringField({required: false, initial: undefined}),
-			added: new SchemaField({
+			talent: new SchemaField({
 				document: new LocalDocumentField(foundry.documents.BaseItem),
 				uuid: new StringField() // TODO: Replace with UUIDField when available
 			}, {required: false, initial: undefined})

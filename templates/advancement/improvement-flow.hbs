@@ -1,0 +1,24 @@
+<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
+	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+	<header>
+		{{> "blackFlag.advancement-name"}}
+		{{#if needsConfiguration}}
+			<div class="advancement-actions">
+				{{#if selectAbility}}
+					<select name="ability">
+						{{selectOptions abilities blank=(localize "BF.Advancement.Improvement.Notification.Ability") localize=true}}
+					</select>
+				{{/if}}
+				{{#if selectTalent}}
+					<button type="submit" data-action="select-choice">
+						{{localize "BF.Advancement.Improvement.Action.Choose"}}
+					</button>
+				{{/if}}
+			</div>
+		{{/if}}
+	</header>
+
+	{{#if summary}}
+		<div class="advancement-summary">{{{summary}}}</div>
+	{{/if}}
+</form>

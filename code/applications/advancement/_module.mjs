@@ -8,6 +8,7 @@ export {default as GrantFeaturesConfig} from "./grant-features-config.mjs";
 export {default as HitPointsConfig} from "./hit-points-config.mjs";
 export {default as HitPointsFlow} from "./hit-points-flow.mjs";
 export {default as ImprovementConfig} from "./improvement-config.mjs";
+export {default as ImprovementFlow} from "./improvement-flow.mjs";
 export {default as KeyAbilityConfig} from "./key-ability-config.mjs";
 export {default as KeyAbilityFlow} from "./key-ability-flow.mjs";
 export {default as PropertyConfig} from "./property-config.mjs";

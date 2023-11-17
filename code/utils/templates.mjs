@@ -84,8 +84,14 @@ function notificationBadge(document, options={}) {
 
 	let notifications = [];
 	if ( key ) {
-		const notification = document.notifications.get(key);
-		if ( notification ) notifications.push(notification);
+		if ( key.endsWith("*") ) {
+			notifications = document.notifications.filter(notification =>
+				notification.key.startsWith(key.replace("*", ""))
+			);
+		} else {
+			const notification = document.notifications.get(key);
+			if ( notification ) notifications.push(notification);
+		}
 	} else if ( id || category || section ) {
 		notifications = document.notifications.filter(notification => {
 			if ( id && (id !== notification.document) ) return false;

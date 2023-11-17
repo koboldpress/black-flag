@@ -21,6 +21,26 @@ export function performCheck(data, filter=[]) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Determine the unique keys referenced by a set of filters.
+ * @param {FilterDescription[]} filter - Filter to examine.
+ * @returns {Set<string>}
+ */
+export function uniqueKeys(filter=[]) {
+	const keys = new Set();
+	const _uniqueKeys = filters => {
+		for ( const f of filters ) {
+			const operator = f.o in OPERATOR_FUNCTIONS;
+			if ( operator && (foundry.utils.getType(f.v) === "Array") ) _uniqueKeys(f.v);
+			else if ( !operator ) keys.add(f.k);
+		}
+	};
+	_uniqueKeys(filter);
+	return keys;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Internal check implementation.
  * @param {object} data - Data to check.
  * @param {string} [keyPath] - Path to individual piece within data to check.

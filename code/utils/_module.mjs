@@ -7,6 +7,7 @@ export * from "./localization.mjs";
 export {default as log} from "./logging.mjs";
 export * from "./number.mjs";
 export * from "./object.mjs";
+export * as search from "./search.mjs";
 export * from "./svg.mjs";
 export * from "./templates.mjs";
 export * from "./text.mjs";

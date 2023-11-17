@@ -3,7 +3,7 @@ import ChooseFeaturesFlow from "../../applications/advancement/choose-features-f
 import {
 	ChooseFeaturesConfigurationData, ChooseFeaturesValueData
 } from "../../data/advancement/choose-features-data.mjs";
-import { linkForUUID } from "../../utils/document.mjs";
+import { linkForUUID, log } from "../../utils/_module.mjs";
 import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 
 /**
@@ -40,7 +40,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get levels() {
-		return Array.from(Object.keys(this.configuration.choices));
+		return Object.keys(this.configuration.choices).map(k => Number(k));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -191,6 +191,23 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		}
 
 		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Produce a list of items that can be chosen.
+	 * @returns {BlackFlagItem[]}
+	 */
+	async choices() {
+		const choices = [];
+		for ( const c of Object.values(this.configuration.pool) ) {
+			if ( this.itemChosen(c.uuid) ) continue;
+			const document = await fromUuid(c.uuid);
+			if ( document ) choices.push(document);
+			else log(`Choice document could not be found: ${uuid}`, { level: "warn" });
+		}
+		return choices;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
