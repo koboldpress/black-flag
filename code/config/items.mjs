@@ -61,3 +61,4 @@ export const talentCategories = {
 	}
 };
 localizeConfig(talentCategories);
+localizeConfig(talentCategories, { propertyName: "localizedPlural", pluralRule: "other" });

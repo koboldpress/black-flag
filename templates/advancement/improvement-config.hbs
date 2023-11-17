@@ -1,0 +1,14 @@
+<form autocomplete="off">
+	<section>
+		<fieldset>
+			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
+			{{> "blackFlag.advancement-controls"}}
+			<label>
+				<span>{{localize "BF.Advancement.Improvement.TalentList.Label"}}</span>
+				<select name="configuration.talentList">
+					{{selectOptions CONFIG.talentCategories.localizedPlural selected=configuration.talentList}}
+				</select>
+			</label>
+		</fieldset>
+	</section>
+</form>

@@ -10,7 +10,10 @@ const { SchemaField, StringField } = foundry.data.fields;
 export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			talentList: new StringField({label: "BF.Advancement.Improvement.TalentList.Label"})
+			talentList: new StringField({
+				initial: () => Object.keys(CONFIG.BlackFlag.talentCategories)[0],
+				label: "BF.Advancement.Improvement.TalentList.Label"
+			})
 		};
 	}
 }

@@ -1,6 +1,7 @@
-// import ImprovementConfig from "../../applications/advancement/improvement-config.mjs";
+import ImprovementConfig from "../../applications/advancement/improvement-config.mjs";
 // import ImprovementFlow from "../../applications/advancement/improvement-flow.mjs";
 import { ImprovementConfigurationData, ImprovementValueData } from "../../data/advancement/improvement-data.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -20,10 +21,10 @@ export default class ImprovementAdvancement extends Advancement {
 			icon: "systems/black-flag/artwork/advancement/improvement.svg",
 			title: game.i18n.localize("BF.Advancement.Improvement.Title"),
 			hint: game.i18n.localize("BF.Advancement.Improvement.Hint"),
-			// apps: {
-			// 	config: ImprovementConfig,
-			// 	flow: ImprovementFlow
-			// }
+			apps: {
+				config: ImprovementConfig,
+				// flow: ImprovementFlow
+			}
 		});
 	}
 
@@ -56,8 +57,16 @@ export default class ImprovementAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	titleForLevel(levels, { flow=false }={}) {
-		return super.titleForLevel(levels, { flow });
+	summaryForLevel(levels, { flow=false }={}) {
+		if ( flow ) {
+			return ""; // TODO: Display selected improvement
+		} else {
+			const choices = [
+				`${game.i18n.localize("BF.Ability.Label[one]")} ${numberFormat(1, { sign: true })}`,
+				CONFIG.BlackFlag.talentCategories.localized[this.configuration.talentList]
+			];
+			return choices.map(c => `<span class="choice-entry"><span class="choice-name">${c}</span></span>`).join(" ");
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
