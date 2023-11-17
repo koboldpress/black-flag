@@ -6,27 +6,25 @@ import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 
 /**
  * Advancement that allows player to increase one ability score and select a talent from a specific talent list.
- * **Can only be added to classes.**
+ * **Can only be added to classes and each class can only have one.**
  */
 export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "improvement",
-			dataModels: {
-				configuration: ImprovementConfigurationData,
-				value: ImprovementValueData
-			},
-			order: 45,
-			icon: "systems/black-flag/artwork/advancement/improvement.svg",
-			title: game.i18n.localize("BF.Advancement.Improvement.Title"),
-			hint: game.i18n.localize("BF.Advancement.Improvement.Hint"),
-			apps: {
-				config: ImprovementConfig,
-				flow: ImprovementFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		name: "improvement",
+		dataModels: {
+			configuration: ImprovementConfigurationData,
+			value: ImprovementValueData
+		},
+		order: 45,
+		icon: "systems/black-flag/artwork/advancement/improvement.svg",
+		title: "BF.Advancement.Improvement.Title",
+		hint: "BF.Advancement.Improvement.Hint",
+		apps: {
+			config: ImprovementConfig,
+			flow: ImprovementFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -155,7 +153,12 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	 * @returns {BlackFlagItem[]}
 	 */
 	async choices() {
-		// TODO: Take "expanded talent list" from subclass into account
-		return search.compendiums(Item, "talent", [{k: "system.type.category", v: this.configuration.talentList}]) ?? [];
+		let filter = { k: "system.type.category", v: this.configuration.talentList };
+		const subclass = this.actor.system.progression.classes[this.item.identifier].subclass;
+		const expandedTalentList = subclass?.system.advancement.byType("expandedTalentList")[0];
+		if ( expandedTalentList ) filter = {
+			o: "OR", v: [filter, { k: "system.type.category", v: expandedTalentList.configuration.talentList }]
+		};
+		return search.compendiums(Item, "talent", [filter]) ?? [];
 	}
 }

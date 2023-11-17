@@ -17,6 +17,7 @@ export default class ImprovementConfig extends AdvancementConfig {
 	getData(options) {
 		const context = super.getData(options);
 		context.showClassRestriction = false;
+		if ( this.advancement.metadata.name === "expandedTalentList" ) context.showLevelSelector = false;
 		return context;
 	}
 }

@@ -17,11 +17,15 @@ const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage"
  */
 export const _advancementTypes = {
 	chooseFeatures: {
-		documentClass: advancement.ChooseFeatures,
+		documentClass: advancement.ChooseFeaturesAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
+	expandedTalentList: {
+		documentClass: advancement.ExpandedTalentListAdvancement,
+		validItemTypes: new Set(["subclass"])
+	},
 	grantFeatures: {
-		documentClass: advancement.GrantFeatures,
+		documentClass: advancement.GrantFeaturesAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES)
 	},
 	hitPoints: {

@@ -8,22 +8,20 @@ import Advancement from "./advancement.mjs";
  */
 export default class GrantFeaturesAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "grantFeatures",
-			dataModels: {
-				configuration: GrantFeaturesConfigurationData,
-				value: GrantFeaturesValueData
-			},
-			order: 40,
-			icon: "systems/black-flag/artwork/advancement/grant-features.svg",
-			title: game.i18n.localize("BF.Advancement.GrantFeatures.Title"),
-			hint: game.i18n.localize("BF.Advancement.GrantFeatures.Hint"),
-			apps: {
-				config: GrantFeaturesConfig
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		name: "grantFeatures",
+		dataModels: {
+			configuration: GrantFeaturesConfigurationData,
+			value: GrantFeaturesValueData
+		},
+		order: 40,
+		icon: "systems/black-flag/artwork/advancement/grant-features.svg",
+		title: "BF.Advancement.GrantFeatures.Title",
+		hint: "BF.Advancement.GrantFeatures.Hint",
+		apps: {
+			config: GrantFeaturesConfig
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

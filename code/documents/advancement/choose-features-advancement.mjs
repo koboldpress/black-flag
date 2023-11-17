@@ -12,24 +12,22 @@ import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
  */
 export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "chooseFeatures",
-			dataModels: {
-				configuration: ChooseFeaturesConfigurationData,
-				value: ChooseFeaturesValueData
-			},
-			order: 50,
-			icon: "systems/black-flag/artwork/advancement/choose-features.svg",
-			title: game.i18n.localize("BF.Advancement.ChooseFeatures.Title"),
-			hint: game.i18n.localize("BF.Advancement.ChooseFeatures.Hint"),
-			multiLevel: true,
-			apps: {
-				config: ChooseFeaturesConfig,
-				flow: ChooseFeaturesFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		name: "chooseFeatures",
+		dataModels: {
+			configuration: ChooseFeaturesConfigurationData,
+			value: ChooseFeaturesValueData
+		},
+		order: 50,
+		icon: "systems/black-flag/artwork/advancement/choose-features.svg",
+		title: "BF.Advancement.ChooseFeatures.Title",
+		hint: "BF.Advancement.ChooseFeatures.Hint",
+		multiLevel: true,
+		apps: {
+			config: ChooseFeaturesConfig,
+			flow: ChooseFeaturesFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
