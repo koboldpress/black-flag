@@ -80,6 +80,23 @@
 			tr:nth-child(2n) {
 				background: lch(0% 0% 0deg / 0.05);
 			}
+			td {
+				padding-inline: 0.5em;
+			}
+		}
+	}
+
+	aside {
+		border-block: 3px solid black;
+		padding-block: 0.5em;
+		padding-inline: 1em;
+		background: rgb(0 0 0 / 0.05);
+
+		p:first-child > strong:first-child:last-child {
+			color: var(--bf-text-color-blue);
+			font-family: var(--bf-font-header);
+			font-size: var(--font-size-16);
+			text-transform: uppercase;
 		}
 	}
 }

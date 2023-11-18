@@ -53,6 +53,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_preCreate(data) {
+		if ( foundry.utils.hasProperty(data, "level") ) return;
+		this.updateSource({ "level.value": 4 });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
