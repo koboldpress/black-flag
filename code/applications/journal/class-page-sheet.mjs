@@ -154,10 +154,17 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const rows = [];
 		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - initialLevel + 1), initialLevel) ) {
 			const features = {};
+			if ( level === CONFIG.BlackFlag.subclassLevel ) {
+				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
+			}
+
 			for ( const advancement of item.system.advancement.byLevel(level) ) {
 				switch ( advancement.constructor.typeName ) {
 					case "grantFeatures":
 						advancement.configuration.pool.forEach(d => features[d.uuid] = linkForUUID(d.uuid, { element: true }));
+						break;
+					case "improvement":
+						features[advancement.uuid] = game.i18n.localize("BF.Advancement.Improvement.Title");
 						break;
 				}
 			}
@@ -173,7 +180,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 			const cells = [{class: "level", content: level.ordinalString()}]; // TODO: Use proper ordinal localization
 			if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
 			if ( hasFeatures ) cells.push({
-				class: "features", content: Object.values(features).map(f => f.outerHTML).join(", ")
+				class: "features", content: Object.values(features).map(f =>
+					foundry.utils.getType(f) === "string" ? f : f.outerHTML
+				).join(", ")
 			});
 			scaleValues.column.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
 			const spellCells = spellProgression?.rows[rows.length];
@@ -262,26 +271,50 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/**
 	 * Fetch data for each class feature listed.
 	 * @param {BlackFlagItem} item - Class or subclass item belonging to this journal.
-	 * @param {boolean} [optional=false] - Should optional features be fetched rather than required features?
 	 * @returns {object[]}   Prepared features.
 	 */
-	async _getFeatures(item, optional=false) {
-		const prepareFeature = async uuid => {
-			const document = await fromUuid(uuid);
-			return {
-				document,
-				name: document.name,
-				description: await TextEditor.enrichHTML(document.system.description.value, {
-					relativeTo: item, secrets: false, async: true
-				})
-			};
-		};
-
+	async _getFeatures(item) {
 		let features = [];
 		for ( const advancement of item.system.advancement.byType("grantFeatures") ) {
-			features.push(...advancement.configuration.pool.map(d => prepareFeature(d.uuid)));
+			const level = advancement.level.value;
+			features.push(...advancement.configuration.pool.map(d => this._prepareFeature(item, d.uuid, level)));
 		}
-		return Promise.all(features);
+
+		for ( const advancement of item.system.advancement.byType("improvement") ) {
+			features.push({
+				level: advancement.level.value,
+				name: advancement.titleForLevel(),
+				document: advancement,
+				description: advancement.journalSummary()
+			});
+		}
+
+		features.push({
+			level: CONFIG.BlackFlag.subclassLevel,
+			name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
+			description: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder")
+		});
+
+		return (await Promise.all(features)).sort((lhs, rhs) => lhs.level - rhs.level);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a feature document for display.
+	 * @param {BlackFlagItem} item - Class or subclass item belonging to this journal.
+	 * @param {BlackFlagItem} uuid - UUID of the feature to prepare.
+	 * @param {number} level - Level in which the feature is displayed.
+	 * @returns {object}
+	 */
+	async _prepareFeature(item, uuid, level) {
+		const document = await fromUuid(uuid);
+		return {
+			level, document, name: document.name,
+			description: await TextEditor.enrichHTML(document.system.description.value, {
+				relativeTo: item, secrets: false, async: true
+			})
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

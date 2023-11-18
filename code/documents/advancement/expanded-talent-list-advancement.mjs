@@ -40,6 +40,23 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Summary that is used in class journal pages.
+	 * @returns {string}
+	 */
+	journalSummary() {
+		const className = CONFIG.BlackFlag.registration.class.all[this.item.system.identifier.class] ?? "";
+		// TODO: Join original talent list from class & new one provided here
+		return `<p>${game.i18n.format("BF.Advancement.ExpandedTalentList.JournalDescription", {
+			class: className,
+			classLowercase: className.toLowerCase(),
+			talentList: CONFIG.BlackFlag.talentCategories.localized[this.configuration.talentList],
+			talentListPlural: CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
+		})}</p>`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -97,6 +97,19 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Summary that is used in class journal pages.
+	 * @returns {string}
+	 */
+	journalSummary() {
+		return `<p>${game.i18n.format("BF.Advancement.Improvement.JournalDescription", {
+			talentList: CONFIG.BlackFlag.talentCategories.localized[this.configuration.talentList],
+			talentListPlural: CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
+		})}</p>`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
