@@ -44,6 +44,7 @@ export default class PCSheet extends BaseActorSheet {
 
 		if ( this.modes.progression ) this.prepareProgression(context);
 
+		context.displayXPBar = game.settings.get(game.system.id, "levelingMode") === "xp";
 		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
 			selected: context.system.attributes.luck.value >= l
 		}));

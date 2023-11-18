@@ -61,6 +61,19 @@ export function registerKeybindings() {
 export function registerSettings() {
 	log("Registering system settings");
 
+	game.settings.register(game.system.id, "levelingMode", {
+		name: "BF.Settings.LevelingMode.Label",
+		hint: "BF.Settings.LevelingMode.Hint",
+		scope: "world",
+		config: true,
+		default: "xp",
+		type: String,
+		choices: {
+			xp: "BF.Settings.LevelingMode.XP",
+			milestone: "BF.Settings.LevelingMode.Milestone"
+		}
+	});
+
 	game.settings.register(game.system.id, "proficiencyMode", {
 		name: "BF.Settings.ProficiencyMode.Label",
 		hint: "BF.Settings.ProficiencyMode.Hint",
