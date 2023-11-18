@@ -227,6 +227,18 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_updateObject(event, formData) {
+		// XP-specific updates
+		if ( event.submitter?.name === "addXP" ) {
+			if ( Number.isNumeric(formData.experiencePoints) ) {
+				const update = {
+					value: this.actor.system.progression.xp.value + formData.experiencePoints,
+					log: this.actor.system.progression.xp.log.concat([{ amount: formData.experiencePoints, source: "manual" }])
+				};
+				this.actor.update({"system.progression.xp": update});
+			}
+			return;
+		}
+
 		const updates = foundry.utils.expandObject(formData);
 
 		// Intercept updates to available hit dice

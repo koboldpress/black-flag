@@ -1,136 +1,154 @@
 <main>
-	<section class="leveling">
-		<fieldset>
-			<legend>{{localize "BF.Progression.Label"}}</legend>
-			<div class="wrapper">
-				<span class="current-level">
-					{{#if system.progression.level}}
-						{{localize "BF.Level.Specific" level=(blackFlag-number system.progression.level)}}
-					{{else}}
-						{{localize "BF.Level.None"}}
-					{{/if}}
-				</span>
-				{{#unless (eq system.progression.level CONFIG.maxLevel)}}
-					<a data-action="progression" data-sub-action="level-up">
-						<i class="fa-solid fa-arrow-up-wide-short"></i>
-						{{localize "BF.Progression.Action.LevelUp.Label"}}
-					</a>
-				{{/unless}}
-				<!-- XP bar -->
-			</div>
-		</fieldset>
-	</section>
-	<section class="details">
-		<fieldset class="ability-selection">
-			<legend>
-				{{localize "BF.Ability.Label[other]"}}
-				{{blackFlag-notificationBadge actor key="no-abilities" displayOrder=true}}
-			</legend>
-			{{#if system.progression.abilities.assignmentComplete}}
-				{{#with (lookup CONFIG.abilityAssignment.methods system.progression.abilities.method) as |method|}}
-					<figure class="icon">
-						<img src="{{method.icon}}">
-					</figure>
-					<span>
-						{{localize (lookup method "label")}}
+	<form>
+		<section class="leveling">
+			<fieldset>
+				<legend>{{localize "BF.Progression.Label"}}</legend>
+				<div class="wrapper">
+					<span class="current-level">
+						{{#if system.progression.level}}
+							{{localize "BF.Level.Specific" level=(blackFlag-number system.progression.level)}}
+						{{else}}
+							{{localize "BF.Level.None"}}
+						{{/if}}
 					</span>
-				{{/with}}
-			{{else}}
-				<span>
-					<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
-				</span>
-			{{/if}}
-		</fieldset>
-		{{#*inline ".typeControl"}}
-			{{#with (lookup system.progression type)}}
-				<figure class="icon">
-					<img src="{{this.img}}">
-				</figure>
-				<span>
-					<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
-				</span>
-				{{#if @root.modes.editing}}
-					<span class="controls">
-						<a data-action="item" data-sub-action="delete" data-item-id="{{this.id}}">
-							<i class="fa-solid fa-trash"></i>
+					{{#unless (eq system.progression.level CONFIG.maxLevel)}}
+						<a data-action="progression" data-sub-action="level-up">
+							<i class="fa-solid fa-arrow-up-wide-short"></i>
+							{{localize "BF.Progression.Action.LevelUp.Label"}}
 						</a>
+					{{/unless}}
+					<div class="xp">
+						<div class="bar" role="meter" style="--bar-percentage: {{system.progression.xp.percentage}}%;"
+							aria-labelledby="{{appiD}}-xp-bar-label" aria-valuenow="{{system.progression.xp.percentage}}"
+							aria-valuetext="{{localize 'BF.ExperiencePoints.LabelSpecific' value=system.progression.xp.value}}"
+							aria-valuemin="{{system.progression.xp.min}}" aria-valuemax="{{system.progression.xp.max}}">
+						</div>
+						<label id="{{appiD}}-xp-bar-label">{{localize 'BF.ExperiencePoints.Label'}}</label>
+						<div class="input">
+							<input type="number" name="experiencePoints" placeholder="{{localize 'BF.ExperiencePoints.Action.Add'}}">
+							<button type="submit" name="addXP"><i class="fa-solid fa-plus"></i></button>
+						</div>
+						<div class="values">
+							<span class="min">{{blackFlag-number system.progression.xp.value}}</span>
+							<span class="sep">/</span>
+							<span class="max">{{blackFlag-number system.progression.xp.max}}</span>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="details">
+			<fieldset class="ability-selection">
+				<legend>
+					{{localize "BF.Ability.Label[other]"}}
+					{{blackFlag-notificationBadge actor key="no-abilities" displayOrder=true}}
+				</legend>
+				{{#if system.progression.abilities.assignmentComplete}}
+					{{#with (lookup CONFIG.abilityAssignment.methods system.progression.abilities.method) as |method|}}
+						<figure class="icon">
+							<img src="{{method.icon}}">
+						</figure>
+						<span>
+							{{localize (lookup method "label")}}
+						</span>
+					{{/with}}
+				{{else}}
+					<span>
+						<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
 					</span>
 				{{/if}}
-			{{else}}
-				<span>
-					<a data-action="progression" data-sub-action="select" data-type="{{type}}">
-						{{localize "BF.Action.Choose.Generic"}}
-					</a>
-				</span>
-			{{/with}}
-		{{/inline}}
-		<fieldset class="lineage">
-			<legend>
-				{{localize "BF.Item.Type.Lineage[one]"}}
-				{{blackFlag-notificationBadge actor category="lineage" displayOrder=true}}
-			</legend>
-			{{> ".typeControl" type="lineage"}}
-		</fieldset>
-		<fieldset class="heritage">
-			<legend>
-				{{localize "BF.Item.Type.Heritage[one]"}}
-				{{blackFlag-notificationBadge actor category="heritage" displayOrder=true}}
-			</legend>
-			{{> ".typeControl" type="heritage"}}
-		</fieldset>
-		<fieldset class="background">
-			<legend>
-				{{localize "BF.Item.Type.Background[one]"}}
-				{{blackFlag-notificationBadge actor category="background" displayOrder=true}}
-			</legend>
-			{{> ".typeControl" type="background"}}
-		</fieldset>
-		{{#each system.progression.classes as |data identifier|}}
-			<fieldset class="class" data-class="{{identifier}}">
-				<legend>
-					{{localize "BF.Item.Type.Class[one]"}}
-					{{blackFlag-notificationBadge @root.actor category="class" document=data.document.id displayOrder=true}}
-				</legend>
-				<figure class="icon">
-					<img src="{{data.document.img}}">
-				</figure>
-				<span>
-					<a data-action="item" data-sub-action="view" data-item-id="{{data.document.id}}">{{data.document.name}}</a>
-					{{#if data.subclass}}
-						<span class="subclass">
-							<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
-								{{data.subclass.name}}
-							</a>
-							{{#if @root.modes.editing}}
-								<a data-action="item" data-sub-action="delete" data-item-id="{{data.subclass.id}}">
-									<i class="fa-solid fa-trash"></i>
-								</a>
-							{{/if}}
-						</span>
-					{{else if data.requiresSubclass}}
-						<span class="subclass">
-							<a data-action="progression" data-sub-action="select" data-type="subclass">
-								{{localize "BF.Action.Choose.Specific" option=(localize "BF.Item.Type.Subclass[one]")}}
+			</fieldset>
+			{{#*inline ".typeControl"}}
+				{{#with (lookup system.progression type)}}
+					<figure class="icon">
+						<img src="{{this.img}}">
+					</figure>
+					<span>
+						<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
+					</span>
+					{{#if @root.modes.editing}}
+						<span class="controls">
+							<a data-action="item" data-sub-action="delete" data-item-id="{{this.id}}">
+								<i class="fa-solid fa-trash"></i>
 							</a>
 						</span>
 					{{/if}}
-				</span>
-				<span class="levels">{{data.levelsLabel}}</span>
-			</fieldset>
-		{{else}}
-			<fieldset class="class" data-class="{{identifier}}">
+				{{else}}
+					<span>
+						<a data-action="progression" data-sub-action="select" data-type="{{type}}">
+							{{localize "BF.Action.Choose.Generic"}}
+						</a>
+					</span>
+				{{/with}}
+			{{/inline}}
+			<fieldset class="lineage">
 				<legend>
-					{{localize "BF.Item.Type.Class[one]"}}
-					{{blackFlag-notificationBadge actor key="no-class" displayOrder=true}}
+					{{localize "BF.Item.Type.Lineage[one]"}}
+					{{blackFlag-notificationBadge actor category="lineage" displayOrder=true}}
 				</legend>
-				<span>
-					<a data-action="progression" data-sub-action="select" data-type="class">
-						{{localize "BF.Action.Choose.Generic"}}
-					</a>
-				</span>
+				{{> ".typeControl" type="lineage"}}
 			</fieldset>
-		{{/each}}
-	</section>
+			<fieldset class="heritage">
+				<legend>
+					{{localize "BF.Item.Type.Heritage[one]"}}
+					{{blackFlag-notificationBadge actor category="heritage" displayOrder=true}}
+				</legend>
+				{{> ".typeControl" type="heritage"}}
+			</fieldset>
+			<fieldset class="background">
+				<legend>
+					{{localize "BF.Item.Type.Background[one]"}}
+					{{blackFlag-notificationBadge actor category="background" displayOrder=true}}
+				</legend>
+				{{> ".typeControl" type="background"}}
+			</fieldset>
+			{{#each system.progression.classes as |data identifier|}}
+				<fieldset class="class" data-class="{{identifier}}">
+					<legend>
+						{{localize "BF.Item.Type.Class[one]"}}
+						{{blackFlag-notificationBadge @root.actor category="class" document=data.document.id displayOrder=true}}
+					</legend>
+					<figure class="icon">
+						<img src="{{data.document.img}}">
+					</figure>
+					<span>
+						<a data-action="item" data-sub-action="view" data-item-id="{{data.document.id}}">{{data.document.name}}</a>
+						{{#if data.subclass}}
+							<span class="subclass">
+								<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
+									{{data.subclass.name}}
+								</a>
+								{{#if @root.modes.editing}}
+									<a data-action="item" data-sub-action="delete" data-item-id="{{data.subclass.id}}">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								{{/if}}
+							</span>
+						{{else if data.requiresSubclass}}
+							<span class="subclass">
+								<a data-action="progression" data-sub-action="select" data-type="subclass">
+									{{localize "BF.Action.Choose.Specific" option=(localize "BF.Item.Type.Subclass[one]")}}
+								</a>
+							</span>
+						{{/if}}
+					</span>
+					<span class="levels">{{data.levelsLabel}}</span>
+				</fieldset>
+			{{else}}
+				<fieldset class="class" data-class="{{identifier}}">
+					<legend>
+						{{localize "BF.Item.Type.Class[one]"}}
+						{{blackFlag-notificationBadge actor key="no-class" displayOrder=true}}
+					</legend>
+					<span>
+						<a data-action="progression" data-sub-action="select" data-type="class">
+							{{localize "BF.Action.Choose.Generic"}}
+						</a>
+					</span>
+				</fieldset>
+			{{/each}}
+		</section>
+	</form>
 	<section class="levels">
 		{{#each progressionLevels as |level|}}
 			<div class="level" data-level="{{level.number}}">

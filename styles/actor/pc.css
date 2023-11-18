@@ -4,6 +4,13 @@
 @import "spellcasting-tab.css";
 
 .black-flag.pc.sheet {
+	min-block-size: 500px;
+	min-inline-size: 500px;
+
+	.sheet-container {
+		container: sheet / inline-size;
+	}
+
 	.profile {
 		border: 1px solid transparent;
 		border-radius: 0;
@@ -22,9 +29,5 @@
 			background: none;
 			color: black;
 		}
-	}
-
-	form.hidden {
-		display: none;
 	}
 }

@@ -30,7 +30,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				base: new NumberField({min: 0, integer: true}),
 				max: new NumberField({min: 0, initial: 20, integer: true}),
 				save: new SchemaField({
-					proficiency: new ProficiencyField({ rounding: false })
+					proficiency: new ProficiencyField({rounding: false})
 				})
 			}), {
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
@@ -151,13 +151,15 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 					time: new TimeField()
 				}), {label: "BF.Level.Label[other]"}),
 				xp: new SchemaField({
-					value: new NumberField({min: 0, integer: true}),
+					value: new NumberField({
+						nullable: false, initial: 0, min: 0, integer: true, label: "BF.ExperiencePoints.Current.Label"
+					}),
 					log: new ArrayField(new SchemaField({
 						amount: new NumberField({nullable: false, initial: 0, min: 0, integer: true}),
 						time: new TimeField(),
 						source: new StringField()
 					}))
-				})
+				}, {label: "BF.ExperiencePoints.Label"})
 			}, {label: "BF.Progression.Label"}),
 			traits: new SchemaField({
 				movement: new SchemaField({
@@ -308,6 +310,24 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 			if ( !identifier ) continue;
 			this.conditions[identifier] = Math.max(this.conditions[identifier] ?? 0, level ?? 1);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareEmbeddedExperiencePoints() {
+		const xp = this.progression.xp;
+		const getXP = level => CONFIG.BlackFlag.experiencePoints[Math.clamped(
+			level, 1, CONFIG.BlackFlag.experiencePoints.length
+		)];
+		xp.max = getXP(this.progression.level + 1);
+		xp.min = getXP(this.progression.level);
+		Object.defineProperty(xp, "percentage", {
+			get() {
+				const result = Math.clamped(Math.round((this.value - this.min) * 100 / (this.max - this.min)), 0, 100);
+				return Number.isNaN(result) ? 100 : result;
+			},
+			enumerable: false
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
