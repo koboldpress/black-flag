@@ -46,7 +46,7 @@ export const _advancementTypes = {
 	},
 	scaleValue: {
 		documentClass: advancement.ScaleValueAdvancement,
-		validItemTypes: new Set(["background", "class", "heritage", "lineage", "subclass"]),
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
 		dataTypes: {
 			string: scaleValue.ScaleTypeString,
 			cr: scaleValue.ScaleTypeCR,
