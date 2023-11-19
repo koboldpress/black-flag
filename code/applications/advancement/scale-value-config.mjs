@@ -9,9 +9,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "scale-value", "two-column"],
 			template: "systems/black-flag/templates/advancement/scale-value-config.hbs",
-			width: 600,
-			dragDrop: [{ dropSelector: "form" }],
-			dropKeyPath: "item.uuid"
+			width: 600
 		});
 	}
 
@@ -39,7 +37,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		return foundry.utils.mergeObject(super.getData(), {
 			default: {
 				identifierHint: game.i18n.format(this.advancement.metadata.identifier.hint, {
-					parentIdentifier: this.item.identifier,
+					parentIdentifier: this.advancement.parentIdentifier,
 					identifier: this.advancement.identifier
 				})
 			},

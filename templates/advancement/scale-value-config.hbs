@@ -13,26 +13,6 @@
 				</p>
 			</label>
 		</fieldset>
-		<fieldset>
-			<legend>
-				{{localize "BF.Advancement.ScaleValue.Item.Label"}}
-				<i class="hintIcon" data-tooltip="BF.Advancement.ScaleValue.Item.Hint"></i>
-			</legend>
-			<div class="items drop-area drop-target">
-				{{#if configuration.item.uuid}}
-					<ol class="dropped-item-list">
-						<li data-item-uuid="{{configuration.item.uuid}}">
-							<span class="name">{{{blackFlag-linkForUUID configuration.item.uuid}}}</span>
-							<span class="controls">
-								<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
-							</span>
-						</li>
-					</ol>
-				{{else}}
-					<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
-				{{/if}}
-			</div>
-		</fieldset>
 	</section>
 
 	<section class="right-column">
@@ -99,13 +79,3 @@
 		</fieldset>
 	</section>
 </form>
-
-{{!--
-		<div class="form-group drop-target">
-			<label>{{localize "DND5E.AdvancementScaleValueItemLabel"}}</label>
-			<div class="form-fields">
-			</div>
-			<p class="hint">{{localize "DND5E.AdvancementScaleValueItemHint"}}</p>
-		</div>
-	</div>
---}}

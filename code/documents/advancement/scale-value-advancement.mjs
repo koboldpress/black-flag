@@ -30,6 +30,17 @@ export default class ScaleValueAdvancement extends Advancement {
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Identifier under which this scale value will be grouped. Will default to the item's identifier unless
+	 * the level is linked to a specific class, in which case it will use the class identifier.
+	 * @type {string}
+	 */
+	get parentIdentifier() {
+		return this.level.classIdentifier ? this.level.classIdentifier : this.item.identifier;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get levels() {
 		return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
 	}
@@ -69,7 +80,7 @@ export default class ScaleValueAdvancement extends Advancement {
 	changes(levels) {
 		const value = this.valueForLevel(this.relavantLevel(levels));
 		return value ? [{
-			key: `system.scale.${this.item.identifier}.${this.identifier}`,
+			key: `system.scale.${this.parentIdentifier}.${this.identifier}`,
 			mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
 			value
 		}] : null;
