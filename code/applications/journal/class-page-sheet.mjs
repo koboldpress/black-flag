@@ -40,7 +40,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		);
 
 		const linked = await fromUuid(this.document.system.item);
-		context.subclasses = await this._getSubclasses(this.document.system.subclasses);
+		const subclasses = await Promise.all(this.document.system.subclasses.map(s => fromUuid(s)));
 
 		if ( !linked ) return context;
 		context.linked = {
@@ -49,13 +49,44 @@ export default class ClassPageSheet extends JournalPageSheet {
 			lowercaseName: linked.name.toLowerCase()
 		};
 
+		const features = await this._prefetchFeatures([linked, ...subclasses]);
+
 		context.advancement = this._getAdvancement(linked);
 		context.enriched = await this._getDescriptions(context.document);
-		context.table = await this._getTable(linked);
-		context.features = await this._getFeatures(linked);
-		context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+		context.table = await this._getTable(linked, { features });
+		context.features = await this._getFeatures(linked, { features });
+		if ( subclasses.length ) context.subclasses = (await this._getSubclasses(subclasses, { features }))
+			.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Pre-fetch all features associated with the provided items through grant & choose features advancements.
+	 * @param {BlackFlagItem[]} items - Items from which the features should be fetched.
+	 * @param {boolean} [subfeatures=true] - Should the fetching process repeat for found features?
+	 * @returns {Collection<string, BlackFlagItem>} - Mapping of UUIDs to feature items.
+	 * @internal
+	 */
+	async _prefetchFeatures(items, subfeatures=true) {
+		const uuidsToFetch = items.map(i => {
+			const advancements = i.system.advancement?.byType("grantFeatures")
+				.concat(i.system.advancement?.byType("chooseFeatures"));
+			return advancements.flatMap(a => a.configuration.pool.map(p => p.uuid));
+		}).flat();
+
+		const fetched = new Collection(
+			await Promise.all(
+				uuidsToFetch.map(async uuid => [uuid, await fromUuid(uuid)])
+			)
+		);
+
+		if ( subfeatures ) (await this._prefetchFeatures(fetched, false))
+			.forEach(f => fetched.set(f.uuid, f));
+
+		return fetched;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -64,6 +95,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * Prepare features granted by various advancement types.
 	 * @param {BlackFlagItem} item - Class item belonging to this journal.
 	 * @returns {object} - Prepared advancement section.
+	 * @internal
 	 */
 	_getAdvancement(item) {
 		const advancement = {};
@@ -106,6 +138,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * Enrich all of the entries within the descriptions object on the sheet's system data.
 	 * @param {JournalEntryPage} page - Journal page being enriched.
 	 * @returns {Promise<object>} - Object with enriched descriptions.
+	 * @internal
 	 */
 	async _getDescriptions(page) {
 		return Object.fromEntries(await Promise.all(Object.entries(page.system.description ?? {})
@@ -125,12 +158,15 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/**
 	 * Prepare table based on Grant Features advancement & Scale Value advancement.
 	 * @param {BlackFlagItem} item - Class item belonging to this journal.
-	 * @param {number} [initialLevel=1] - Level at which the table begins.
+	 * @param {object} options
+	 * @param {Collection<BlackFlagItem>} options.features - Pre-fetched feature items.
+	 * @param {number} [options.initialLevel=1] - Level at which the table begins.
 	 * @returns {object} - Prepared table data.
+	 * @internal
 	 */
-	async _getTable(item, initialLevel=1) {
+	async _getTable(item, { features, initialLevel=1 }) {
 		const hasFeatures = !!item.system.advancement.byType("grantFeatures");
-		const scaleValues = this._getScaleValues(item);
+		const scaleValues = this._getScaleValues(item, { features });
 		const spellProgression = await this._getSpellProgression(item);
 
 		const headers = [[{content: game.i18n.localize("BF.Level.Label[one]")}]];
@@ -153,6 +189,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 		if ( scaleValues.column.length ) cols.push({class: "scale", span: scaleValues.column.length});
 		if ( spellProgression ) cols.push(...spellProgression.cols);
 
+		const featuresInTable = new Set();
+
 		const rows = [];
 		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - initialLevel + 1), initialLevel) ) {
 			const features = {};
@@ -171,12 +209,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 						break;
 				}
 			}
+			Object.keys(features).forEach(uuid => featuresInTable.add(uuid));
 
-			for ( const scale of scaleValues.grouped ) {
-				if ( !scale.configuration.scale[level] ) continue;
-				const uuid = scale.configuration.item.uuid;
+			for ( const uuid of featuresInTable ) {
+				const scales = scaleValues.grouped.get(uuid)?.filter(s => s.configuration.scale[level]);
+				if ( !scales?.length ) continue;
+				const values = scales.map(s => s.valueForLevel(level).display);
 				features[uuid] ??= linkForUUID(uuid, { element: true });
-				features[uuid].innerHTML += ` (${scale.valueForLevel(level).display})`;
+				features[uuid].innerHTML += ` (${game.i18n.getListFormatter({ type: "unit" }).format(values)})`;
 			}
 
 			// Level & proficiency bonus
@@ -205,14 +245,18 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/**
 	 * Sort scale values into ones displayed in their own column versus ones grouped with features.
 	 * @param {Item5e} item - Class or subclass item being prepared.
-	 * @returns {{grouped: ScaleValueAdvancement[], column: ScaleValueAdvancement[]}}
+	 * @param {object} options
+	 * @param {Collection<BlackFlagItem>} options.features - Pre-fetched feature items.
+	 * @returns {{column: ScaleValueAdvancement[], grouped: Collection<ScaleValueAdvancement[]>}}
 	 */
-	_getScaleValues(item) {
-		return item.system.advancement.byType("scaleValue").reduce(({ column, grouped }, scale) => {
-			if ( fromUuidSync(scale.configuration.item.uuid) ) grouped.push(scale);
-			else column.push(scale);
-			return { column, grouped };
-		}, { column: [], grouped: [] });
+	_getScaleValues(item, { features }) {
+		return {
+			column: item.system.advancement.byType("scaleValue"),
+			grouped: features.reduce((collection, feature) => {
+				collection.set(feature.uuid, feature.system.advancement.byType("scaleValue"));
+				return collection;
+			}, new Collection())
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -277,17 +321,27 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/**
 	 * Fetch data for each class feature listed.
 	 * @param {BlackFlagItem} item - Class or subclass item belonging to this journal.
+	 * @param {object} options
+	 * @param {Collection<BlackFlagItem>} options.features - Pre-fetched feature items.
 	 * @returns {object[]}   Prepared features.
 	 */
-	async _getFeatures(item) {
-		let features = [];
+	async _getFeatures(item, { features }) {
+		let prepared = [];
 		for ( const advancement of item.system.advancement.byType("grantFeatures") ) {
 			const level = advancement.level.value;
-			features.push(...advancement.configuration.pool.map(d => this._prepareFeature(item, d.uuid, level)));
+			prepared.push(...advancement.configuration.pool.map(async d => {
+				const document = features.get(d.uuid);
+				return {
+					level, document, name: document.name,
+					description: await TextEditor.enrichHTML(document.system.description.value, {
+						relativeTo: item, secrets: false, async: true
+					})
+				};
+			}));
 		}
 
 		for ( const advancement of item.system.advancement.byType("improvement") ) {
-			features.push({
+			prepared.push({
 				level: advancement.level.value,
 				name: advancement.titleForLevel(),
 				document: advancement,
@@ -295,7 +349,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 			});
 		}
 
-		if ( item.type === "class" ) features.push({
+		if ( item.type === "class" ) prepared.push({
 			level: CONFIG.BlackFlag.subclassLevel,
 			name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
 			description: this.document.system.description.subclassAdvancement ? await TextEditor.enrichHTML(
@@ -306,7 +360,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 		if ( item.type === "subclass" ) {
 			const advancement = item.system.advancement.byType("expandedTalentList")[0];
-			if ( advancement ) features.push({
+			if ( advancement ) prepared.push({
 				level: CONFIG.BlackFlag.subclassLevel,
 				name: advancement.titleForLevel(),
 				document: advancement,
@@ -314,49 +368,30 @@ export default class ClassPageSheet extends JournalPageSheet {
 			});
 		}
 
-		return (await Promise.all(features)).sort((lhs, rhs) => lhs.level - rhs.level);
+		return (await Promise.all(prepared)).sort((lhs, rhs) => lhs.level - rhs.level);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare a feature document for display.
-	 * @param {BlackFlagItem} item - Class or subclass item belonging to this journal.
-	 * @param {BlackFlagItem} uuid - UUID of the feature to prepare.
-	 * @param {number} level - Level in which the feature is displayed.
-	 * @returns {object}
+	 * Prepare the context for any linked subclasses.
+	 * @param {BlackFlagItem[]} subclasses - Subclasses to prepare.
+	 * @param {object} options
+	 * @param {Collection<BlackFlagItem>} options.features - Pre-fetched feature items.
+	 * @returns {object[]} - Prepared subclasses.
 	 */
-	async _prepareFeature(item, uuid, level) {
-		const document = await fromUuid(uuid);
-		return {
-			level, document, name: document.name,
-			description: await TextEditor.enrichHTML(document.system.description.value, {
-				relativeTo: item, secrets: false, async: true
-			})
-		};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Fetch each subclass and prepare their contexts.
-	 * @param {Set<string>} uuids - UUIDs for each subclass.
-	 * @returns {object[]|null} - Prepared subclasses.
-	 */
-	async _getSubclasses(uuids) {
-		const subclasses = await Promise.all(uuids.map(async uuid => {
-			const document = await fromUuid(uuid);
+	async _getSubclasses(subclasses, { features }) {
+		return await Promise.all(subclasses.map(async document => {
 			return {
 				document,
 				name: document.name,
 				description: await TextEditor.enrichHTML(document.system.description.value, {
 					relativeTo: document, secrets: false, async: true
 				}),
-				features: await this._getFeatures(document),
-				table: await this._getTable(document, CONFIG.BlackFlag.subclassLevel)
+				features: await this._getFeatures(document, { features }),
+				table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
 			};
 		}));
-		return subclasses.length ? subclasses : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

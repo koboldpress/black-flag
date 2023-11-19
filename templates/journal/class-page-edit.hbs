@@ -78,10 +78,10 @@
 				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
 			</button>
 		</label>
-		<ol class="items-list">{{log subclasses}}
-			{{#each subclasses}}
-				<li class="item" data-item-uuid="{{this.document.uuid}}" data-item-type="subclass">
-					<div class="item-name">{{{blackFlag-linkForUUID this.document.uuid}}}</div>
+		<ol class="items-list">
+			{{#each system.subclasses}}
+				<li class="item" data-item-uuid="{{this}}" data-item-type="subclass">
+					<div class="item-name">{{{blackFlag-linkForUUID this}}}</div>
 					<div class="item-controls"><a data-action="delete"><i class="fa-solid fa-trash"></i></a></div>
 				</li>
 			{{/each}}
