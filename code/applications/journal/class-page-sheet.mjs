@@ -165,8 +165,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 					case "grantFeatures":
 						advancement.configuration.pool.forEach(d => features[d.uuid] = linkForUUID(d.uuid, { element: true }));
 						break;
+					case "expandedTalentList":
 					case "improvement":
-						features[advancement.uuid] = game.i18n.localize("BF.Advancement.Improvement.Title");
+						features[advancement.uuid] = advancement.titleForLevel({ character: level, class: level });
 						break;
 				}
 			}
@@ -294,8 +295,6 @@ export default class ClassPageSheet extends JournalPageSheet {
 			});
 		}
 
-		// TODO: Expanded talent list
-
 		if ( item.type === "class" ) features.push({
 			level: CONFIG.BlackFlag.subclassLevel,
 			name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
@@ -304,6 +303,16 @@ export default class ClassPageSheet extends JournalPageSheet {
 					relativeTo: item, secrets: false, async: true
 				}) : game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder")
 		});
+
+		if ( item.type === "subclass" ) {
+			const advancement = item.system.advancement.byType("expandedTalentList")[0];
+			if ( advancement ) features.push({
+				level: CONFIG.BlackFlag.subclassLevel,
+				name: advancement.titleForLevel(),
+				document: advancement,
+				description: await advancement.journalSummary()
+			});
+		}
 
 		return (await Promise.all(features)).sort((lhs, rhs) => lhs.level - rhs.level);
 	}

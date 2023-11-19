@@ -57,6 +57,19 @@ export function get(type, identifier) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Fetch the source item registered if it exists.
+ * @param {string} type - Item type to get.
+ * @param {string} identifier - Identifier to get.
+ * @returns {ItemEH|undefined}
+ */
+export async function getSource(type, identifier) {
+	const registration = get(type, identifier);
+	return registration ? await fromUuid(registration.sources[registration.sources.length - 1]) : undefined;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * @callback RegistrationFilterCallback
  * @param {Document} element - The current element being processed.
  * @param {string} identifier - Identifier of the item.
