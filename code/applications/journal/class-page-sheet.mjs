@@ -1,6 +1,6 @@
 import SpellcastingTemplate from "../../data/actor/templates/spellcasting-template.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { linkForUUID, log, Trait } from "../../utils/_module.mjs";
+import { linkForUUID, log, numberFormat, Trait } from "../../utils/_module.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
 /**
@@ -326,6 +326,12 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object[]}   Prepared features.
 	 */
 	async _getFeatures(item, { features }) {
+		const makeTag = level => game.i18n.format("BF.Item.Tag", {
+			level: numberFormat(level, { ordinal: true }),
+			owner: item.name,
+			type: game.i18n.localize("BF.Item.Type.Feature[one]")
+		});
+
 		let prepared = [];
 		for ( const advancement of item.system.advancement.byType("grantFeatures") ) {
 			const level = advancement.level.value;
@@ -335,7 +341,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 					level, document, name: document.name,
 					description: await TextEditor.enrichHTML(document.system.description.value, {
 						relativeTo: item, secrets: false, async: true
-					})
+					}),
+					tag: makeTag(level)
 				};
 			}));
 		}
@@ -345,7 +352,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 				level: advancement.level.value,
 				name: advancement.titleForLevel(),
 				document: advancement,
-				description: advancement.journalSummary()
+				description: advancement.journalSummary(),
+				tag: makeTag(advancement.level.value)
 			});
 		}
 
@@ -355,7 +363,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 			description: this.document.system.description.subclassAdvancement ? await TextEditor.enrichHTML(
 				this.document.system.description.subclassAdvancement, {
 					relativeTo: item, secrets: false, async: true
-				}) : game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder")
+				}) : game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
+			tag: makeTag(CONFIG.BlackFlag.subclassLevel)
 		});
 
 		if ( item.type === "subclass" ) {
@@ -364,7 +373,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 				level: CONFIG.BlackFlag.subclassLevel,
 				name: advancement.titleForLevel(),
 				document: advancement,
-				description: await advancement.journalSummary()
+				description: await advancement.journalSummary(),
+				tag: makeTag(CONFIG.BlackFlag.subclassLevel)
 			});
 		}
 
