@@ -50,6 +50,27 @@
 			<em>{{this.tag}}</em>
 			{{{this.description}}}
 		{{/each}}
+
+		{{#if (or enriched.subclassSection subclasses)}}
+			<h{{title.level1}}>{{localize "BF.JournalPage.Class.Subclass.Header" class=linked.name}}</h{{title.level1}}>
+			{{{enriched.subclassSection}}}
+
+			{{#each subclasses}}
+				<h{{@root.title.level2}}>{{this.name}}</h{{@root.title.level2}}>
+				{{{this.description}}}
+
+				{{#if this.table}}
+					{{> "blackFlag.journal-table" table=table level=title.level3 class="progression"
+						caption=(localize "BF.JournalPage.Class.Table.Caption" class=this.name)}}
+				{{/if}}
+
+				{{#each features}}
+					<h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
+					<em>{{this.tag}}</em>
+					{{{this.description}}}
+				{{/each}}
+			{{/each}}
+		{{/if}}
 	</section>
 
 {{else}}

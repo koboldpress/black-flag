@@ -40,6 +40,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		);
 
 		const linked = await fromUuid(this.document.system.item);
+		context.subclasses = await this._getSubclasses(this.document.system.subclasses);
 
 		if ( !linked ) return context;
 		context.linked = {
@@ -52,6 +53,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		context.enriched = await this._getDescriptions(context.document);
 		context.table = await this._getTable(linked);
 		context.features = await this._getFeatures(linked);
+		context.subclasses?.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 
 		return context;
 	}
@@ -79,7 +81,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const keyAbility = item.system.advancement.byType("keyAbility")[0];
 		const makeTrait = type => {
 			const advancement = traits.find(a => a.bestGuessTrait() === type);
-			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "secondary"`
+			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "multiclass"`
 			if ( !advancement ) return game.i18n.localize("BF.Proficiency.None");
 			return Trait.localizedList(
 				advancement.configuration.grants,
@@ -154,7 +156,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const rows = [];
 		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - initialLevel + 1), initialLevel) ) {
 			const features = {};
-			if ( level === CONFIG.BlackFlag.subclassLevel ) {
+			if ( (item.type === "class") && (level === CONFIG.BlackFlag.subclassLevel) ) {
 				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
 			}
 
@@ -185,10 +187,13 @@ export default class ClassPageSheet extends JournalPageSheet {
 				).join(", ")
 			});
 			scaleValues.column.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
-			const spellCells = spellProgression?.rows[rows.length];
+			const spellCells = spellProgression?.rows[level - 1];
 			if ( spellCells ) cells.push(...spellCells);
 
-			rows.push(cells);
+			// Skip empty rows on subclasses
+			if ( (item.type !== "subclass") || !foundry.utils.isEmpty(features) || scaleValues.length || spellCells ) {
+				rows.push(cells);
+			}
 		}
 
 		return { headers, cols, rows };
@@ -289,10 +294,15 @@ export default class ClassPageSheet extends JournalPageSheet {
 			});
 		}
 
-		features.push({
+		// TODO: Expanded talent list
+
+		if ( item.type === "class" ) features.push({
 			level: CONFIG.BlackFlag.subclassLevel,
 			name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
-			description: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder")
+			description: this.document.system.description.subclassAdvancement ? await TextEditor.enrichHTML(
+				this.document.system.description.subclassAdvancement, {
+					relativeTo: item, secrets: false, async: true
+				}) : game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder")
 		});
 
 		return (await Promise.all(features)).sort((lhs, rhs) => lhs.level - rhs.level);
@@ -315,6 +325,29 @@ export default class ClassPageSheet extends JournalPageSheet {
 				relativeTo: item, secrets: false, async: true
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Fetch each subclass and prepare their contexts.
+	 * @param {Set<string>} uuids - UUIDs for each subclass.
+	 * @returns {object[]|null} - Prepared subclasses.
+	 */
+	async _getSubclasses(uuids) {
+		const subclasses = await Promise.all(uuids.map(async uuid => {
+			const document = await fromUuid(uuid);
+			return {
+				document,
+				name: document.name,
+				description: await TextEditor.enrichHTML(document.system.description.value, {
+					relativeTo: document, secrets: false, async: true
+				}),
+				features: await this._getFeatures(document),
+				table: await this._getTable(document, CONFIG.BlackFlag.subclassLevel)
+			};
+		}));
+		return subclasses.length ? subclasses : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -349,14 +382,19 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _onAction(event) {
 		const { action, ...properties } = event.currentTarget.dataset;
-		switch (action) {
+		switch ( action ) {
 			case "delete":
 				const container = event.currentTarget.closest("[data-item-uuid]");
 				const uuidToDelete = container?.dataset.itemUuid;
 				if ( !uuidToDelete ) return;
-				switch (container.dataset.itemType) {
+				switch ( container.dataset.itemType ) {
 					case "class":
 						await this.document.update({"system.item": ""});
+						return this.render();
+					case "subclass":
+						const subclassCollection = this.document.system.subclasses;
+						subclassCollection.delete(uuidToDelete);
+						await this.document.update({"system.subclasses": Array.from(subclassCollection)});
 						return this.render();
 				}
 				break;
@@ -382,6 +420,11 @@ export default class ClassPageSheet extends JournalPageSheet {
 		switch ( item.type ) {
 			case "class":
 				await this.document.update({"system.item": item.uuid});
+				return this.render();
+			case "subclass":
+				const subclassCollection = this.document.system.subclasses;
+				subclassCollection.add(item.uuid);
+				await this.document.update({"system.subclasses": Array.from(subclassCollection)});
 				return this.render();
 			default:
 				return false;
