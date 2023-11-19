@@ -64,7 +64,8 @@ export const _documentCategories = {
 	JournalEntryPage: {
 		summaries: {
 			types: [
-				journalTypes.ClassJournalPageData
+				journalTypes.ClassJournalPageData,
+				journalTypes.SubclassJournalPageData
 			]
 		}
 	}

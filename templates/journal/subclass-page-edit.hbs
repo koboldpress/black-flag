@@ -1,0 +1,29 @@
+<form class="{{cssClass}} drop-target" autocomplete="off">
+	{{> journalEntryPageHeader}}
+
+	<fieldset class="drop-area">
+		<legend>{{localize "BF.Item.Type.Subclass[one]"}}</legend>
+		<label>
+			<span>{{localize "BF.JournalPage.Subclass.Item.Label"}}</span>
+			{{#if document.system.item}}
+				<div class="item" data-item-uuid="{{document.system.item}}" data-item-type="linked">
+					{{{blackFlag-linkForUUID document.system.item}}}
+					<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+				</div>
+			{{else}}
+				<p class="drop hint">
+					{{localize "BF.JournalPage.Subclass.Item.Hint"}}
+				</p>
+			{{/if}}
+		</label>
+		<label>
+			<span>
+				{{localize "BF.JournalPage.Class.Introduction.Label"}}
+				<i class="hintIcon" data-tooltip="BF.JournalPage.Subclass.Introduction.Hint"></i>
+			</span>
+			<button type="button" data-action="launch-text-editor" data-target="system.description.introduction">
+				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			</button>
+		</label>
+	</fieldset>
+</form>

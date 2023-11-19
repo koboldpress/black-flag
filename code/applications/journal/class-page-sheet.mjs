@@ -20,15 +20,29 @@ export default class ClassPageSheet extends JournalPageSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get template() {
-		return `systems/black-flag/templates/journal/class-page-${this.isEditable ? "edit" : "view"}.hbs`;
+		return `systems/black-flag/templates/journal/${this.type}-page-${this.isEditable ? "edit" : "view"}.hbs`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Whether this page represents a class or subclass.
+	 * @type {string}
+	 */
+	get type() {
+		return this.document.system.metadata.type;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	toc = {};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options={}) {
@@ -40,7 +54,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 		);
 
 		const linked = await fromUuid(this.document.system.item);
-		const subclasses = await Promise.all(this.document.system.subclasses.map(s => fromUuid(s)));
+		const subclasses = this.type === "class" ? await Promise.all(this.document.system.subclasses.map(s => fromUuid(s)))
+			: [];
 
 		if ( !linked ) return context;
 		context.linked = {
@@ -405,8 +420,6 @@ export default class ClassPageSheet extends JournalPageSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Rendering              */
-	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _renderInner(...args) {
 		const html = await super._renderInner(...args);
@@ -442,7 +455,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 				const uuidToDelete = container?.dataset.itemUuid;
 				if ( !uuidToDelete ) return;
 				switch ( container.dataset.itemType ) {
-					case "class":
+					case "linked":
 						await this.document.update({"system.item": ""});
 						return this.render();
 					case "subclass":
@@ -471,8 +484,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 		if ( data?.type !== "Item" ) return false;
 		const item = await Item.implementation.fromDropData(data);
-		switch ( item.type ) {
-			case "class":
+		const type = this.type === item.type ? "linked" : item.type;
+		switch ( type ) {
+			case "linked":
 				await this.document.update({"system.item": item.uuid});
 				return this.render();
 			case "subclass":
