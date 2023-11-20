@@ -157,7 +157,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 		if ( !data?.key || (data?.key === "ability") ) valueUpdates["-=ability"] = null;
 		if ( !data?.key || (data?.key === "talent") ) {
-			await this.value.talent.document?.delete();
+			await this.value.talent?.document?.delete();
 			valueUpdates["-=talent"] = null;
 		}
 

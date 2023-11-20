@@ -34,11 +34,13 @@ Hooks.once("init", function() {
 	CONFIG.ActiveEffect.legacyTransferral = false;
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	applications.registerCustomElements();
+	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);
 	data.registerDataModels(JournalEntryPage);
 	dice.registerDice();
+	documents.BlackFlagActor.setupHooks();
 	documents.registerDocumentClasses();
 	settings.registerKeybindings();
 	settings.registerSettings();
@@ -61,9 +63,6 @@ Hooks.once("ready", function() {
 	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();
 });
-
-config.registration.setupHooks();
-documents.BlackFlagActor.setupHooks();
 
 export {
 	applications,

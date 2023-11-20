@@ -245,7 +245,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		this.#advancementProcessing = false;
 		this.render();
-		// TODO: Need to find a way to re-render on all clients
+
+		game.socket.emit(`system.${game.system.id}`, {
+			operation: "advancementChangesComplete",
+			actorId: this.id
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1275,6 +1279,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	static setupHooks() {
 		Hooks.on("getActorDirectoryEntryContext", this.getActorDirectoryEntryContext);
 		Hooks.on("getUserContextOptions", this.getUserContextOptions);
+		game.socket.on(`system.${game.system.id}`, data => {
+			if ( data?.operation === "advancementChangesComplete" ) game.actors.get(data.actorId)?.render();
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
