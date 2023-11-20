@@ -33,6 +33,7 @@ Hooks.once("init", function() {
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
+	applications.registerCustomElements();
 	data.fields.applyEffectApplicationPatches();
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);

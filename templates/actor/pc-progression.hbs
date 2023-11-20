@@ -17,25 +17,7 @@
 							{{localize "BF.Progression.Action.LevelUp.Label"}}
 						</a>
 					{{/unless}}
-					{{#if displayXPBar}}
-						<div class="xp">
-							<div class="bar" role="meter" style="--bar-percentage: {{system.progression.xp.percentage}}%;"
-								aria-labelledby="{{appiD}}-xp-bar-label" aria-valuenow="{{system.progression.xp.percentage}}"
-								aria-valuetext="{{localize 'BF.ExperiencePoints.LabelSpecific' value=system.progression.xp.value}}"
-								aria-valuemin="{{system.progression.xp.min}}" aria-valuemax="{{system.progression.xp.max}}">
-							</div>
-							<label id="{{appiD}}-xp-bar-label">{{localize 'BF.ExperiencePoints.Label'}}</label>
-							<div class="input">
-								<input type="number" name="experiencePoints" placeholder="{{localize 'BF.ExperiencePoints.Action.Add'}}">
-								<button type="submit" name="addXP"><i class="fa-solid fa-plus"></i></button>
-							</div>
-							<div class="values">
-								<span class="min">{{blackFlag-number system.progression.xp.value}}</span>
-								<span class="sep">/</span>
-								<span class="max">{{blackFlag-number system.progression.xp.max}}</span>
-							</div>
-						</div>
-					{{/if}}
+					{{#if displayXPBar}}<blackFlag-xpBar>{{/if}}
 				</div>
 			</fieldset>
 		</section>

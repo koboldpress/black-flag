@@ -1,4 +1,5 @@
 import log from "../utils/logging.mjs";
+import * as actor from "./actor/_module.mjs";
 
 /**
  * Automatically register Document sheets using category information from config or metadata in SystemDataModels.
@@ -34,7 +35,17 @@ export function registerSheets(documentType, categories) {
 	console.groupEnd();
 }
 
-export * as actor from "./actor/_module.mjs";
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Register any custom elements on the page.
+ */
+export function registerCustomElements() {
+	log("Registering custom elements");
+	window.customElements.define("blackflag-xpbar", actor.XPBarComponent);
+}
+
+export { actor };
 export * as advancement from "./advancement/_module.mjs";
 export {default as BlackFlagCombatTracker} from "./combat-tracker.mjs";
 export {default as BlackFlagDialog} from "./dialog.mjs";
