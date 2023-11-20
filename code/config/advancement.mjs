@@ -1,3 +1,4 @@
+import * as sheets from "../applications/advancement/_module.mjs";
 import { scaleValue } from "../data/advancement/_module.mjs";
 import * as advancement from "../documents/advancement/_module.mjs";
 
@@ -16,37 +17,73 @@ const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage"
  * @enum {AdvancementTypeConfig}
  */
 export const _advancementTypes = {
+	base: {
+		documentClass: advancement.Advancement,
+		validItemTypes: new Set(),
+		sheetClasses: {
+			config: sheets.AdvancementConfig,
+			flow: sheets.AdvancementFlow
+		}
+	},
 	chooseFeatures: {
 		documentClass: advancement.ChooseFeaturesAdvancement,
-		validItemTypes: new Set(_ALL_ITEM_TYPES)
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.ChooseFeaturesConfig,
+			flow: sheets.ChooseFeaturesFlow
+		}
 	},
 	expandedTalentList: {
 		documentClass: advancement.ExpandedTalentListAdvancement,
-		validItemTypes: new Set(["subclass"])
+		validItemTypes: new Set(["subclass"]),
+		sheetClasses: {
+			config: sheets.ImprovementConfig
+		}
 	},
 	grantFeatures: {
 		documentClass: advancement.GrantFeaturesAdvancement,
-		validItemTypes: new Set(_ALL_ITEM_TYPES)
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.GrantFeaturesConfig
+		}
 	},
 	hitPoints: {
 		documentClass: advancement.HitPointsAdvancement,
-		validItemTypes: new Set(["class"])
+		validItemTypes: new Set(["class"]),
+		sheetClasses: {
+			config: sheets.HitPointsConfig,
+			flow: sheets.HitPointsFlow
+		}
 	},
 	improvement: {
 		documentClass: advancement.ImprovementAdvancement,
-		validItemTypes: new Set(["class"])
+		validItemTypes: new Set(["class"]),
+		sheetClasses: {
+			config: sheets.ImprovementConfig,
+			flow: sheets.ImprovementFlow
+		}
 	},
 	keyAbility: {
 		documentClass: advancement.KeyAbilityAdvancement,
-		validItemTypes: new Set(["class"])
+		validItemTypes: new Set(["class"]),
+		sheetClasses: {
+			config: sheets.KeyAbilityConfig,
+			flow: sheets.KeyAbilityFlow
+		}
 	},
 	property: {
 		documentClass: advancement.PropertyAdvancement,
-		validItemTypes: new Set(_ALL_ITEM_TYPES)
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.PropertyConfig
+		}
 	},
 	scaleValue: {
 		documentClass: advancement.ScaleValueAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.ScaleValueConfig
+		},
 		dataTypes: {
 			string: scaleValue.ScaleTypeString,
 			cr: scaleValue.ScaleTypeCR,
@@ -58,15 +95,26 @@ export const _advancementTypes = {
 	},
 	size: {
 		documentClass: advancement.SizeAdvancement,
-		validItemTypes: new Set(["lineage"])
+		validItemTypes: new Set(["lineage"]),
+		sheetClasses: {
+			config: sheets.SizeConfig,
+			flow: sheets.SizeFlow
+		}
 	},
 	spellcasting: {
 		documentClass: advancement.SpellcastingAdvancement,
-		validItemTypes: new Set(["class", "subclass"])
+		validItemTypes: new Set(["class", "subclass"]),
+		sheetClasses: {
+			config: sheets.SpellcastingConfig
+		}
 	},
 	trait: {
 		documentClass: advancement.TraitAdvancement,
-		validItemTypes: new Set(_ALL_ITEM_TYPES)
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.TraitConfig,
+			flow: sheets.TraitFlow
+		}
 	}
 };
 

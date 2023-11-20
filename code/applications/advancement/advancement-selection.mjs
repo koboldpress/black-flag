@@ -24,8 +24,8 @@ export default class AdvancementSelection extends Dialog {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "dialog", "advancement-selection"],
-			template: "systems/black-flag/templates/advancement/advancement-selection.hbs",
+			classes: ["black-flag", "dialog", "pseudo-document-selection"],
+			template: "systems/black-flag/templates/pseudo-document-selection.hbs",
 			title: "BF.Advancement.Selection.Title",
 			width: 500,
 			height: "auto"
@@ -54,6 +54,7 @@ export default class AdvancementSelection extends Dialog {
 			};
 		}
 		context.types = BlackFlag.utils.sortObjectEntries(context.types, "label");
+		context.buttonLabel = game.i18n.localize("BF.Advancement.Core.Action.Create");
 		return context;
 	}
 

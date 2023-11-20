@@ -29,7 +29,7 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
 			type: new SchemaField({
-				value: new StringField({initial: "melee"}),
+				value: new StringField({initial: "melee", label: "BF.Weapon.Type.Label"}),
 				category: new StringField({label: "BF.Equipment.Category.Label"}),
 				base: new StringField({label: "BF.Equipment.Base.Label"})
 			}),

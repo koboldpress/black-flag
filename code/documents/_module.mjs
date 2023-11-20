@@ -33,4 +33,5 @@ export {
 export {DocumentMixin} from "./mixin.mjs";
 export {default as NotificationsCollection} from "./notifications.mjs";
 export {default as Proficiency} from "./proficiency.mjs";
+export {default as PseudoDocumentMixin} from "./pseudo-document.mjs";
 export {default as SelectChoices} from "./select-choices.mjs";

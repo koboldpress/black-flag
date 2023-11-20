@@ -8,7 +8,7 @@ import { ScaleValueConfigurationData } from "../../data/advancement/scale-value/
 export default class ScaleValueAdvancement extends Advancement {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		name: "scaleValue",
+		type: "scaleValue",
 		dataModels: {
 			configuration: ScaleValueConfigurationData
 		},

@@ -24,6 +24,17 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get pseudoDocumentHierarchy() {
+		const hierarchy = {};
+		for ( const [fieldName, field] of this.system.schema.entries() ) {
+			if ( field.constructor.hierarchical ) hierarchy[fieldName] = field;
+		}
+		Object.defineProperty(this, "pseudoDocumentHierarchy", {value: Object.freeze(hierarchy), writable: false});
+		return this.pseudoDocumentHierarchy;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Methods               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -49,8 +60,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	prepareEmbeddedDocuments() {
 		super.prepareEmbeddedDocuments();
-		if ( this.system.advancement ) {
-			for ( const e of this.getEmbeddedCollection("Advancement") ) {
+		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
+			for ( const e of this.getEmbeddedCollection(collectionName) ) {
 				e.prepareData();
 			}
 		}
@@ -60,11 +71,18 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/*         Embedded Operations         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	static getCollectionName(name) {
+		if ( name === "Activity" ) name = "activities";
+		if ( name === "Advancement" ) name = "advancement";
+		if ( ["activities", "advancement"].includes(name) ) return name;
+		return super.getCollectionName(name);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	getEmbeddedCollection(embeddedName) {
-		if ( embeddedName === "Advancement" ) {
-			if ( !this.system.advancement ) throw new Error("Item does not support advancement.");
-			return this.system.advancement;
-		}
-		return super.getEmbeddedCollection(embeddedName);
+		const collectionName = this.constructor.getCollectionName(embeddedName);
+		const field = this.pseudoDocumentHierarchy[collectionName];
+		return field ? this.system[collectionName] : super.getEmbeddedCollection(embeddedName);
 	}
 }

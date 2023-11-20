@@ -5,23 +5,21 @@ import Advancement from "./advancement.mjs";
 
 export default class SizeAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "size",
-			dataModels: {
-				configuration: SizeConfigurationData,
-				value: SizeValueData
-			},
-			order: 10,
-			icon: "systems/black-flag/artwork/advancement/size.svg",
-			title: game.i18n.localize("BF.Advancement.Size.Title"),
-			hint: game.i18n.localize("BF.Advancement.Size.Hint"),
-			apps: {
-				config: SizeConfig,
-				flow: SizeFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		type: "size",
+		dataModels: {
+			configuration: SizeConfigurationData,
+			value: SizeValueData
+		},
+		order: 10,
+		icon: "systems/black-flag/artwork/advancement/size.svg",
+		title: "BF.Advancement.Size.Title",
+		hint: "BF.Advancement.Size.Hint",
+		apps: {
+			config: SizeConfig,
+			flow: SizeFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */

@@ -1,6 +1,7 @@
 import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
 import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import PseudoDocumentMixin from "../pseudo-document.mjs";
 
 /**
  * @typedef {object} AdvancementLevels
@@ -26,38 +27,7 @@ class AdvancementError extends Error {
  * @param {object} [options={}] - Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement extends BaseAdvancement {
-	constructor(data, {parent=null, ...options}={}) {
-		if ( parent instanceof Item ) parent = parent.system;
-		super(data, {parent, ...options});
-
-		/**
-		 * A collection of Application instances which should be re-rendered whenever this document is updated.
-		 * The keys of this object are the application ids and the values are Application instances. Each
-		 * Application in this object will have its render method called by {@link Document#render}.
-		 * @type {[key: string]: Application}
-		 */
-		Object.defineProperty(this, "apps", {
-			value: {},
-			writable: false,
-			enumerable: false
-		});
-
-		/**
-		 * A cached reference to the FormApplication instance used to configure this Advancement.
-		 */
-		Object.defineProperty(this, "_sheet", { value: null, writable: true, enumerable: false });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	_initialize(options) {
-		super._initialize(options);
-		if ( !game._documentsReady ) return;
-		return this.prepareData();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
+export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
 	static ERROR = AdvancementError;
 
@@ -66,8 +36,7 @@ export default class Advancement extends BaseAdvancement {
 	/**
 	 * Information on how an advancement type is configured.
 	 *
-	 * @typedef {object} AdvancementMetadata
-	 * @property {string} name - Type name of the advancement.
+	 * @typedef {BaseAdvancementMetadata} AdvancementMetadata
 	 * @property {object} [dataModels]
 	 * @property {DataModel} [dataModels.configuration] - Data model used for validating configuration data.
 	 * @property {DataModel} [dataModels.value] - Data model used for validating value data.
@@ -91,95 +60,24 @@ export default class Advancement extends BaseAdvancement {
 	 * Configuration information for this advancement type.
 	 * @type {AdvancementMetadata}
 	 */
-	static get metadata() {
-		return {
-			order: 100,
-			icon: "icons/svg/upgrade.svg",
-			title: "BF.Advancement.Core.Title",
-			hint: "",
-			identifier: {
-				configurable: false,
-				hint: ""
-			},
-			multiLevel: false,
-			apps: {
-				config: AdvancementConfig,
-				flow: AdvancementFlow
-			}
-		};
-	}
-
-	get metadata() {
-		return this.constructor.metadata;
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		order: 100,
+		icon: "icons/svg/upgrade.svg",
+		title: "BF.Advancement.Core.Title",
+		hint: "",
+		identifier: {
+			configurable: false,
+			hint: ""
+		},
+		multiLevel: false,
+		apps: {
+			config: AdvancementConfig,
+			flow: AdvancementFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Unique identifier for this advancement within its item.
-	 * @type {string}
-	 */
-	get id() {
-		return this._id;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Unique ID for this advancement on an actor.
-	 * @type {string}
-	 */
-	get relativeID() {
-		return `${this.item.id}.${this.id}`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Globally unique identifier for this advancement.
-	 * @type {string}
-	 */
-	get uuid() {
-		return `${this.item.uuid}.Advancement.${this.id}`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Item to which this advancement belongs.
-	 * @type {BlackFlagItem}
-	 */
-	get item() {
-		return this.parent.parent;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Actor to which this advancement's item belongs, if the item is embedded.
-	 * @type {BlackFlagActor|null}
-	 */
-	get actor() {
-		return this.item.parent ?? null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Lazily obtain a FormApplication instance used to configure this PseudoDocument, or null if no sheet is available.
-	 * @type {FormApplication|null}
-	 */
-	get sheet() {
-		if ( !this._sheet ) {
-			const cls = this.metadata.apps.config;
-			if ( !cls ) return null;
-			this._sheet = new cls(this, {editable: this.item.isOwner});
-		}
-		return this._sheet;
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -213,7 +111,7 @@ export default class Advancement extends BaseAdvancement {
 	 */
 	get value() {
 		const value = foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
-		const DataModel = this.constructor.metadata.dataModels?.value;
+		const DataModel = this.metadata.dataModels?.value;
 		if ( !DataModel || value instanceof DataModel ) return value;
 		return new DataModel(value, { parent: this });
 	}
@@ -232,16 +130,20 @@ export default class Advancement extends BaseAdvancement {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Prepare data for the Advancement.
-	 */
 	prepareData() {
-		this.title = this.title || game.i18n.localize(this.constructor.metadata.title);
-		this.icon = this.icon || this.constructor.metadata.icon;
+		this.title = this.title || game.i18n.localize(this.metadata.title);
+		this.icon = this.icon || this.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.constructor.metadata.multiLevel ) this.level.value ??= this.minimumLevel;
+		if ( !this.metadata.multiLevel ) this.level.value ??= this.minimumLevel;
 		if ( foundry.utils.getType(this.configuration?.prepareData) === "function" ) this.configuration.prepareData();
 		if ( foundry.utils.getType(this.value?.prepareData) === "function" ) this.value.prepareData();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_preCreate(data) {
+		if ( foundry.utils.hasProperty(data, "level") || this.metadata.multiLevel ) return;
+		this.updateSource({"level.value": this.minimumLevel});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -253,20 +155,6 @@ export default class Advancement extends BaseAdvancement {
 	 */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.warning`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Perform preliminary operations before an Advancement is created.
-	 * @param {object} data - The initial data object provided to the document creation request.
-	 * @returns {boolean|void} - A return value of false indicates the creation operation should be cancelled.
-	 * @protected
-	 */
-	_preCreate(data) {
-		if ( foundry.utils.hasProperty(data, "level")
-			|| this.constructor.metadata.multiLevel ) return;
-		this.updateSource({"level.value": this.minimumLevel});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -300,7 +188,7 @@ export default class Advancement extends BaseAdvancement {
 	 * @returns {string} - String that can be used for sorting.
 	 */
 	sortingValueForLevel(levels) {
-		return `${this.constructor.metadata.order.paddedString(4)} ${this.titleForLevel(levels)}`;
+		return `${this.metadata.order.paddedString(4)} ${this.titleForLevel(levels)}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -330,136 +218,14 @@ export default class Advancement extends BaseAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Render all of the Application instances which are connected to this advancement.
-	 * @param {boolean} [force=false] - Force rendering
-	 * @param {object} [context={}] - Optional context
-	 */
-	render(force=false, context={}) {
-		for ( const app of Object.values(this.apps) ) app.render(force, context);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Remove unnecessary keys from the context before passing it through to the update update.
-	 * @param {DocumentModificationContext} context
-	 * @returns {DocumentModificationContext}
-	 * @internal
-	 */
-	static _clearedDocumentModificationContext(context) {
-		context = foundry.utils.deepClone(context);
-		delete context.parent;
-		delete context.pack;
-		delete context.keepId;
-		delete context.keepEmbeddedIds;
-		delete context.renderSheet;
-		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Create multiple Documents using provided input data.
-	 * Data is provided as an array of objects where each individual object becomes one new Document.
-	 * See Foundry's Document#createDocuments documentation for more information.
-	 *
-	 * @param {object[]} data - An array of data objects used to create multiple documents.
-	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the creation workflow.
-	 * @returns {Promise<Advancement[]>} - An array of created Document instances.
-	 */
-	static async createDocuments(data=[], context={}) {
-		if ( !context.parent ) throw new Error("Cannot create advancements without a parent.");
-		const updates = data.reduce((updates, data) => {
-			if ( !context.keepId || !data._id ) data._id = foundry.utils.randomID();
-			const c = CONFIG.Advancement.types[data.type];
-			const createData = foundry.utils.deepClone(data);
-			const created = new c.documentClass(data, {parent: context.parent});
-			if ( created._preCreate(createData) !== false ) {
-				updates[data._id] = created.toObject();
-				if ( !c.validItemTypes.has(context.parent.type) || !c.documentClass.availableForItem(context.parent) ) {
-					throw new Error(`${data.type} advancement cannot be added to ${context.parent.name}`);
-				}
-			}
-			return updates;
-		}, {});
-		await context.parent.update({"system.advancement": updates}, this._clearedDocumentModificationContext(context));
-		const documents = Object.keys(updates).map(id => context.parent.getEmbeddedDocument("Advancement", id));
-		if ( context.renderSheet ) documents.forEach(d => (new d.constructor.metadata.apps.config(d)).render(true));
-		return documents;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Update multiple Document instances using provided differential data.
-	 * Data is provided as an array of objects where each individual object updates one existing Document.
-	 * See Foundry's Document#updateDocuments documentation for more information.
-	 *
-	 * @param {object[]} updates - An array of differential data objects, each used to update a single Document.
-	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the update workflow.
-	 * @returns {Promise<Document[]>} - An array of updated Document instances.
-	 */
-	static async updateDocuments(updates=[], context={}) {
-		if ( !context.parent ) throw new Error("Cannot update advancements without a parent.");
-		updates = updates.reduce((updates, data) => {
-			if ( !data._id ) throw new Error("ID must be provided when updating an advancement");
-			updates[data._id] = data;
-			return updates;
-		}, {});
-		await context.parent.update({"system.advancement": updates}, this._clearedDocumentModificationContext(context));
-		return Object.keys(updates).map(id => context.parent.getEmbeddedDocument("Advancement", id));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Delete one or multiple existing Documents using an array of provided ids.
-	 * Data is provided as an array of string ids for the documents to delete.
-	 * See Foundry's Document#deleteDocuments documentation for more information.
-	 *
-	 * @param {string[]} ids - An array of string ids for the documents to be deleted.
-	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the deletion workflow.
-	 * @returns {Promise<Document[]>} - An array of deleted Document instances.
-	 */
-	static async deleteDocuments(ids, context={}) {
-		if ( !context.parent ) throw new Error("Cannot delete advancements without a parent.");
-		const { updates, documents } = ids.reduce(({ updates, documents }, id) => {
-			documents.push(context.parent.getEmbeddedDocument("Advancement", id));
-			updates[`system.advancement.-=${id}`] = null;
-			return { updates, documents };
-		}, { updates: {}, documents: [] });
-		await context.parent.update(updates, this._clearedDocumentModificationContext(context));
-		return documents;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Update this advancement.
-	 * @param {object} [data={}] - Updates to apply to this advancement.
-	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the update workflow.
-	 * @returns {Promise<Advancement>} - This advancement after updates have been applied.
-	 */
-	async update(data={}, context={}) {
-		await this.item.updateEmbeddedDocuments("Advancement", [{ ...data, _id: this.id }], context);
-		if ( context.render !== false ) this.render();
-		return this;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Update this advancement's data on the item without performing a database commit.
-	 * @param {object} updates - Updates to apply to this advancement.
-	 * @returns {Advancement} - This advancement after updates have been applied.
-	 */
-	updateSource(updates) {
-		super.updateSource(updates);
-		return this;
+	static _validateDocumentCreation(data, context) {
+		const c = CONFIG.Advancement.types[data.type];
+		if ( !c?.validItemTypes.has(context.parent.type) || !c?.documentClass.availableForItem(context.parent) ) {
+			throw new Error(`${data.type} advancement cannot be added to ${context.parent.name}`);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -479,35 +245,6 @@ export default class Advancement extends BaseAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Delete this Advancement, removing it from the database.
-	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the deletion workflow.
-	 * @returns {Promise<Advancement>} - The deleted Document instance.
-	 */
-	async delete(context={}) {
-		const deleted = await this.item.deleteEmbeddedDocuments("Advancement", [this.id], context);
-		return deleted.shift();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Present a Dialog form to confirm deletion of this Advancement.
-	 * @param {object} [options] - Positioning and sizing options for the resulting dialog.
-	 * @returns {Promise<Advancement>} - A Promise which resolves to the deleted Advancement.
-	 */
-	async deleteDialog(options={}) {
-		const type = game.i18n.localize(this.metadata.title);
-		return Dialog.confirm({
-			title: `${game.i18n.format("DOCUMENT.Delete", {type})}: ${this.name}`,
-			content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {type})}</p>`,
-			yes: this.delete.bind(this),
-			options: options
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Can an advancement of this type be added to the provided item?
 	 * @param {BlackFlagItem} item - Item to check against.
 	 * @returns {boolean} - Should this be enabled as an option on the {@link AdvancementSelection} dialog?
@@ -517,20 +254,22 @@ export default class Advancement extends BaseAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Application Methods         */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Serialize salient information for this Advancement when dragging it.
-	 * @returns {object} - An object of drag data.
+	 * Create a new flow application for this advancement.
+	 * @param {BlackFlagActor} actor - Actor to which the advancement is being applied.
+	 * @param {AdvancementLevels} levels - Level for which to configure this flow.
+	 * @param {object} [options={}] - Application rendering options.
+	 * @returns {AdvancementFlow}
 	 */
-	toDragData() {
-		const dragData = { type: "Advancement" };
-		if ( this.id ) dragData.uuid = this.uuid;
-		else dragData.data = this.toObject();
-		return dragData;
+	flow(actor, levels, options) {
+		const FlowClass = CONFIG.Advancement.types[this.type]?.sheetClasses?.flow
+			?? CONFIG.Advancement.types[CONST.BASE_DOCUMENT_TYPE].sheetClasses.flow;
+		return new FlowClass(actor, this, levels, options);
 	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

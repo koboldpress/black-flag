@@ -81,8 +81,7 @@ export default class PCSheet extends BaseActorSheet {
 
 			for ( const advancement of this.actor.advancementForLevel(level) ) {
 				const id = `${advancement.item.id}.${advancement.id}#${level}`;
-				const flow = this.advancementFlows[id]
-					??= new advancement.constructor.metadata.apps.flow(this.actor, advancement, data.levels);
+				const flow = this.advancementFlows[id] ??= advancement.flow(this.actor, data.levels);
 				flowIds.delete(id);
 				levelData.flows.push(flow);
 			}

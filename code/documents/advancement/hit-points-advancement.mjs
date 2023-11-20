@@ -10,24 +10,22 @@ import Advancement from "./advancement.mjs";
  */
 export default class HitPointsAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "hitPoints",
-			dataModels: {
-				configuration: HitPointsConfigurationData,
-				value: HitPointsValueData
-			},
-			order: 10,
-			icon: "systems/black-flag/artwork/advancement/hit-points.svg",
-			title: game.i18n.localize("BF.Advancement.HitPoints.Title"),
-			hint: game.i18n.localize("BF.Advancement.HitPoints.Hint"),
-			multiLevel: true,
-			apps: {
-				config: HitPointsConfig,
-				flow: HitPointsFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		type: "hitPoints",
+		dataModels: {
+			configuration: HitPointsConfigurationData,
+			value: HitPointsValueData
+		},
+		order: 10,
+		icon: "systems/black-flag/artwork/advancement/hit-points.svg",
+		title: "BF.Advancement.HitPoints.Title",
+		hint: "BF.Advancement.HitPoints.Hint",
+		multiLevel: true,
+		apps: {
+			config: HitPointsConfig,
+			flow: HitPointsFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -163,10 +161,12 @@ export default class HitPointsAdvancement extends Advancement {
 
 	async apply(levels, data, { initial=false, render=true }={}) {
 		const level = this.relavantLevel(levels);
+		console.log(levels, level, data, initial);
 		if ( initial ) {
 			data ??= this.value.granted ?? {};
 			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
 			const previous = previousLevel?.class?.system.advancement.byType("hitPoints")[0];
+			console.log(previousLevel, previous);
 
 			// If 1st character level, always use max HP
 			if ( levels.character === 1 ) data[level] = "max";

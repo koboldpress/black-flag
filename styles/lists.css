@@ -57,7 +57,9 @@
 		margin-inline: 1rem;
 		padding: 0;
 	}
+}
 
+.black-flag :is(.items-list, .item-list) {
 	.item {
 		display: flex;
 		flex-wrap: wrap;
@@ -70,6 +72,10 @@
 			border-block-end: 1px solid var(--bf-color-border-gray);
 			padding-block-end: 0.25rem;
 		}
+
+		&.add-control {
+			justify-content: center;
+		}
 	}
 
 	.item-name {
@@ -81,7 +87,7 @@
 
 		.icon {
 			margin: 0;
-	
+
 			img {
 				border: none;
 				block-size: var(--image-size);
@@ -93,7 +99,7 @@
 				inline-size: var(--image-size);
 			}
 		}
-	
+
 		h4 {
 			margin: 0;
 		}
@@ -111,6 +117,7 @@
 	}
 
 	.item-controls {
+		align-self: center;
 		display: flex;
 		gap: 0.75rem;
 	}

@@ -162,9 +162,6 @@ export const weaponProperties = {
 	loading: {
 		label: "BF.Weapon.Property.Loading.Label"
 	},
-	range: {
-		label: "BF.Weapon.Property.Range.Label"
-	},
 	reach: {
 		label: "BF.Weapon.Property.Reach.Label"
 	},

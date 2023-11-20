@@ -125,9 +125,9 @@ export default class AdvancementItemSheet extends BaseItemSheet {
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.item.system.advancement.get(id);
 		if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
-		switch (action) {
+		switch ( action ) {
 			case "add": return AdvancementSelection.createDialog(this.item);
-			case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
+			case "edit": return advancement.sheet.render(true);
 			case "delete": return advancement.deleteDialog();
 			case "duplicate":
 				const data = advancement.toObject();

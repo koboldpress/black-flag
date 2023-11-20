@@ -9,23 +9,21 @@ import Advancement from "./advancement.mjs";
 
 export default class TraitAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "trait",
-			dataModels: {
-				configuration: TraitConfigurationData,
-				value: TraitValueData
-			},
-			order: 30,
-			icon: "systems/black-flag/artwork/advancement/trait.svg",
-			title: game.i18n.localize("BF.Advancement.Trait.Title"),
-			hint: game.i18n.localize("BF.Advancement.Trait.Hint"),
-			apps: {
-				config: TraitConfig,
-				flow: TraitFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		type: "trait",
+		dataModels: {
+			configuration: TraitConfigurationData,
+			value: TraitValueData
+		},
+		order: 30,
+		icon: "systems/black-flag/artwork/advancement/trait.svg",
+		title: "BF.Advancement.Trait.Title",
+		hint: "BF.Advancement.Trait.Hint",
+		apps: {
+			config: TraitConfig,
+			flow: TraitFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
@@ -36,10 +34,10 @@ export default class TraitAdvancement extends Advancement {
 	 */
 	prepareData() {
 		const traitConfig = CONFIG.BlackFlag.traits[this.bestGuessTrait()];
-		this.title = this.title || game.i18n.localize(traitConfig?.labels.title) || this.constructor.metadata.title;
-		this.icon = this.icon || traitConfig?.icon || this.constructor.metadata.icon;
+		this.title = this.title || game.i18n.localize(traitConfig?.labels.title) || this.metadata.title;
+		this.icon = this.icon || traitConfig?.icon || this.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.constructor.metadata.multiLevel ) this.level ??= this.minimumLevel;
+		if ( !this.metadata.multiLevel ) this.level ??= this.minimumLevel;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -73,7 +71,7 @@ export default class TraitAdvancement extends Advancement {
 		const traitOrder = Object.keys(CONFIG.BlackFlag.traits).findIndex(k => k === this.bestGuessTrait());
 		const modeOrder = Object.keys(CONFIG.BlackFlag.traitModes).findIndex(k => k === this.configuration.mode);
 		const order = traitOrder + (modeOrder * 100);
-		return `${this.constructor.metadata.order.paddedString(4)} ${order.paddedString(4)} ${this.titleForLevel(levels)}`;
+		return `${this.metadata.order.paddedString(4)} ${order.paddedString(4)} ${this.titleForLevel(levels)}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

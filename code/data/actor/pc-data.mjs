@@ -964,12 +964,11 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		}
 
 		// Add new progression data
-		await this.parent.enqueueAdvancementChange(this.parent, "update", [
-			{ [`system.progression.levels.${levels.character}.class`]: existingClass }, { render: false }
-		]);
+		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass});
 
 		// Apply advancements for the new level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
+			console.log(advancement);
 			this.parent.enqueueAdvancementChange(advancement, "apply", [levels, undefined, { initial: true, render: false }]);
 		}
 	}

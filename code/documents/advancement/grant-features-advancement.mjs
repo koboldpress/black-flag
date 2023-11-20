@@ -9,7 +9,7 @@ import Advancement from "./advancement.mjs";
 export default class GrantFeaturesAdvancement extends Advancement {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		name: "grantFeatures",
+		type: "grantFeatures",
 		dataModels: {
 			configuration: GrantFeaturesConfigurationData,
 			value: GrantFeaturesValueData

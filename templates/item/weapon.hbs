@@ -103,7 +103,7 @@
 							</select>
 						</label>
 						<label>
-							<span>Type</span>
+							<span>{{localize "BF.Damage.Type.Label"}}</span>
 							<select name="system.damage.type">
 								{{selectOptions CONFIG.damageTypes selected=source.damage.type
 									labelAttr="label" localize=true sort=true blank=""}}
@@ -118,7 +118,7 @@
 							</select>
 						</label>
 					{{/if}}
-					{{#if (eq source.type.value "ranged")}}
+					{{#if (or (eq source.type.value "ranged") properties.thrown.selected)}}
 						<div class="range field-group">
 							<span>{{localize "BF.Range.Label"}}</span>
 							<label>

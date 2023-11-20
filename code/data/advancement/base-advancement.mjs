@@ -9,12 +9,30 @@ const { DocumentIdField, FilePathField, NumberField, ObjectField, SchemaField, S
 export default class BaseAdvancement extends foundry.abstract.DataModel {
 
 	/**
+	 * Base type information for an advancement.
+	 *
+	 * @typedef {PseudoDocumentsMetadata} BaseAdvancementMetadata
+	 * @property {string} type - Type of the advancement.
+	 */
+
+	/**
+	 * @type {BaseAdvancementMetadata}
+	 */
+	static metadata = Object.freeze({
+		name: "Advancement",
+		collection: "advancement",
+		type: "base"
+	});
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Name of this advancement type that will be stored in config and used for lookups.
 	 * @type {string}
 	 * @protected
 	 */
 	static get typeName() {
-		return this.metadata?.name ?? this.name.replace(/Advancement$/, "");
+		return this.metadata.type ?? this.name.replace(/Advancement$/, "");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

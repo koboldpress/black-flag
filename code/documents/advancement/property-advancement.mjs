@@ -4,21 +4,19 @@ import Advancement from "./advancement.mjs";
 
 export default class PropertyAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "property",
-			dataModels: {
-				configuration: PropertyConfigurationData
-			},
-			order: 2,
-			icon: "systems/black-flag/artwork/advancement/property.svg",
-			title: game.i18n.localize("BF.Advancement.Property.Title"),
-			hint: game.i18n.localize("BF.Advancement.Property.Hint"),
-			apps: {
-				config: PropertyConfig
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		type: "property",
+		dataModels: {
+			configuration: PropertyConfigurationData
+		},
+		order: 2,
+		icon: "systems/black-flag/artwork/advancement/property.svg",
+		title: "BF.Advancement.Property.Title",
+		hint: "BF.Advancement.Property.Hint",
+		apps: {
+			config: PropertyConfig
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */

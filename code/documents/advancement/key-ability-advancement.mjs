@@ -9,23 +9,21 @@ import Advancement from "./advancement.mjs";
  */
 export default class KeyAbilityAdvancement extends Advancement {
 
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			name: "keyAbility",
-			dataModels: {
-				configuration: KeyAbilityConfigurationData,
-				value: KeyAbilityValueData
-			},
-			order: 15,
-			icon: "systems/black-flag/artwork/advancement/key-ability.svg",
-			title: game.i18n.localize("BF.Advancement.KeyAbility.Title"),
-			hint: game.i18n.localize("BF.Advancement.KeyAbility.Hint"),
-			apps: {
-				config: KeyAbilityConfig,
-				flow: KeyAbilityFlow
-			}
-		});
-	}
+	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+		type: "keyAbility",
+		dataModels: {
+			configuration: KeyAbilityConfigurationData,
+			value: KeyAbilityValueData
+		},
+		order: 15,
+		icon: "systems/black-flag/artwork/advancement/key-ability.svg",
+		title: "BF.Advancement.KeyAbility.Title",
+		hint: "BF.Advancement.KeyAbility.Hint",
+		apps: {
+			config: KeyAbilityConfig,
+			flow: KeyAbilityFlow
+		}
+	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */

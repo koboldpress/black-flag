@@ -10,7 +10,7 @@ export default class AdvancementValueField extends foundry.data.fields.ObjectFie
 			if ( !item ) continue;
 			for ( const [advancementID, advancementValue] of Object.entries(values ?? {}) ) {
 				const advancement = item.system.advancement?.get(advancementID);
-				const dataModel = advancement?.constructor.metadata.dataModels?.value;
+				const dataModel = advancement?.metadata.dataModels?.value;
 				if ( !dataModel ) continue;
 				obj[itemID][advancementID] = new dataModel(advancementValue, { parent: model, ...options });
 			}

@@ -15,6 +15,11 @@ export class AdvancementField extends MappingField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	static hierarchical = true;
+	// TODO: Rework this to be more like EmbeddedCollection
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	initialize(value, model, options) {
 		return new AdvancementCollection(model, super.initialize(value, model, options));
 	}

@@ -13,7 +13,7 @@ import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		name: "chooseFeatures",
+		type: "chooseFeatures",
 		dataModels: {
 			configuration: ChooseFeaturesConfigurationData,
 			value: ChooseFeaturesValueData
