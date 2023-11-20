@@ -1,7 +1,9 @@
-import PropertyConfig from "../../applications/advancement/property-config.mjs";
 import { PropertyConfigurationData } from "../../data/advancement/property-data.mjs";
 import Advancement from "./advancement.mjs";
 
+/**
+ * Advancement that applies arbitrary changes to the actor using an ActiveEffect-like system.
+ */
 export default class PropertyAdvancement extends Advancement {
 
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
@@ -12,10 +14,7 @@ export default class PropertyAdvancement extends Advancement {
 		order: 2,
 		icon: "systems/black-flag/artwork/advancement/property.svg",
 		title: "BF.Advancement.Property.Title",
-		hint: "BF.Advancement.Property.Hint",
-		apps: {
-			config: PropertyConfig
-		}
+		hint: "BF.Advancement.Property.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

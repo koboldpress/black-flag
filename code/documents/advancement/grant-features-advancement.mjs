@@ -1,4 +1,3 @@
-import GrantFeaturesConfig from "../../applications/advancement/grant-features-config.mjs";
 import { GrantFeaturesConfigurationData, GrantFeaturesValueData } from "../../data/advancement/grant-features-data.mjs";
 import { linkForUUID } from "../../utils/document.mjs";
 import Advancement from "./advancement.mjs";
@@ -17,10 +16,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		order: 40,
 		icon: "systems/black-flag/artwork/advancement/grant-features.svg",
 		title: "BF.Advancement.GrantFeatures.Title",
-		hint: "BF.Advancement.GrantFeatures.Hint",
-		apps: {
-			config: GrantFeaturesConfig
-		}
+		hint: "BF.Advancement.GrantFeatures.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,5 +1,3 @@
-import KeyAbilityConfig from "../../applications/advancement/key-ability-config.mjs";
-import KeyAbilityFlow from "../../applications/advancement/key-ability-flow.mjs";
 import { KeyAbilityConfigurationData, KeyAbilityValueData } from "../../data/advancement/key-ability-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -18,11 +16,7 @@ export default class KeyAbilityAdvancement extends Advancement {
 		order: 15,
 		icon: "systems/black-flag/artwork/advancement/key-ability.svg",
 		title: "BF.Advancement.KeyAbility.Title",
-		hint: "BF.Advancement.KeyAbility.Hint",
-		apps: {
-			config: KeyAbilityConfig,
-			flow: KeyAbilityFlow
-		}
+		hint: "BF.Advancement.KeyAbility.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

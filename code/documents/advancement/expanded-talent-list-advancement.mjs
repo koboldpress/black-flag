@@ -1,4 +1,3 @@
-import ImprovementConfig from "../../applications/advancement/improvement-config.mjs";
 import { ImprovementConfigurationData } from "../../data/advancement/improvement-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -16,10 +15,7 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 		order: 45,
 		icon: "systems/black-flag/artwork/advancement/improvement.svg",
 		title: "BF.Advancement.ExpandedTalentList.Title",
-		hint: "BF.Advancement.ExpandedTalentList.Hint",
-		apps: {
-			config: ImprovementConfig
-		}
+		hint: "BF.Advancement.ExpandedTalentList.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

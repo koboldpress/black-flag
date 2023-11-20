@@ -1,4 +1,3 @@
-import SpellcastingConfig from "../../applications/advancement/spellcasting-config.mjs";
 import { SpellcastingConfigurationData } from "../../data/advancement/spellcasting-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -12,10 +11,7 @@ export default class SpellcastingAdvancement extends Advancement {
 		order: 35,
 		icon: "systems/black-flag/artwork/advancement/spellcasting.svg",
 		title: "BF.Advancement.Spellcasting.Title",
-		hint: "BF.Advancement.Spellcasting.Hint",
-		apps: {
-			config: SpellcastingConfig
-		}
+		hint: "BF.Advancement.Spellcasting.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

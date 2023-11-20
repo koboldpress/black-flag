@@ -1,5 +1,3 @@
-import HitPointsConfig from "../../applications/advancement/hit-points-config.mjs";
-import HitPointsFlow from "../../applications/advancement/hit-points-flow.mjs";
 import { HitPointsConfigurationData, HitPointsValueData } from "../../data/advancement/hit-points-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -20,11 +18,7 @@ export default class HitPointsAdvancement extends Advancement {
 		icon: "systems/black-flag/artwork/advancement/hit-points.svg",
 		title: "BF.Advancement.HitPoints.Title",
 		hint: "BF.Advancement.HitPoints.Hint",
-		multiLevel: true,
-		apps: {
-			config: HitPointsConfig,
-			flow: HitPointsFlow
-		}
+		multiLevel: true
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

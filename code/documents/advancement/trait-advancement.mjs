@@ -1,5 +1,3 @@
-import TraitConfig from "../../applications/advancement/trait-config.mjs";
-import TraitFlow from "../../applications/advancement/trait-flow.mjs";
 import { TraitConfigurationData, TraitValueData } from "../../data/advancement/trait-data.mjs";
 import SelectChoices from "../../documents/select-choices.mjs";
 import { numberFormat } from "../../utils/number.mjs";
@@ -18,11 +16,7 @@ export default class TraitAdvancement extends Advancement {
 		order: 30,
 		icon: "systems/black-flag/artwork/advancement/trait.svg",
 		title: "BF.Advancement.Trait.Title",
-		hint: "BF.Advancement.Trait.Hint",
-		apps: {
-			config: TraitConfig,
-			flow: TraitFlow
-		}
+		hint: "BF.Advancement.Trait.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

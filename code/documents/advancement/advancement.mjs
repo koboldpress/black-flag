@@ -1,5 +1,3 @@
-import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
-import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 import PseudoDocumentMixin from "../pseudo-document.mjs";
 
@@ -51,9 +49,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 *                                  the level selection control in the configuration window is hidden and the
 	 *                                  advancement should provide its own implementation of `Advancement#levels`
 	 *                                  and potentially its own level configuration interface.
-	 * @property {object} apps
-	 * @property {*} apps.config - Subclass of AdvancementConfig that allows for editing of this advancement type.
-	 * @property {*} apps.flow - Subclass of AdvancementFlow that is displayed while fulfilling this advancement.
 	 */
 
 	/**
@@ -69,11 +64,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 			configurable: false,
 			hint: ""
 		},
-		multiLevel: false,
-		apps: {
-			config: AdvancementConfig,
-			flow: AdvancementFlow
-		}
+		multiLevel: false
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

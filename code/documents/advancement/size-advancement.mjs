@@ -1,5 +1,3 @@
-import SizeConfig from "../../applications/advancement/size-config.mjs";
-import SizeFlow from "../../applications/advancement/size-flow.mjs";
 import { SizeConfigurationData, SizeValueData } from "../../data/advancement/size-data.mjs";
 import Advancement from "./advancement.mjs";
 
@@ -14,11 +12,7 @@ export default class SizeAdvancement extends Advancement {
 		order: 10,
 		icon: "systems/black-flag/artwork/advancement/size.svg",
 		title: "BF.Advancement.Size.Title",
-		hint: "BF.Advancement.Size.Hint",
-		apps: {
-			config: SizeConfig,
-			flow: SizeFlow
-		}
+		hint: "BF.Advancement.Size.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,5 +1,3 @@
-import ChooseFeaturesConfig from "../../applications/advancement/choose-features-config.mjs";
-import ChooseFeaturesFlow from "../../applications/advancement/choose-features-flow.mjs";
 import {
 	ChooseFeaturesConfigurationData, ChooseFeaturesValueData
 } from "../../data/advancement/choose-features-data.mjs";
@@ -22,11 +20,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		icon: "systems/black-flag/artwork/advancement/choose-features.svg",
 		title: "BF.Advancement.ChooseFeatures.Title",
 		hint: "BF.Advancement.ChooseFeatures.Hint",
-		multiLevel: true,
-		apps: {
-			config: ChooseFeaturesConfig,
-			flow: ChooseFeaturesFlow
-		}
+		multiLevel: true
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

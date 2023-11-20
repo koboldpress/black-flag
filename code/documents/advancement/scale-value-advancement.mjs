@@ -1,6 +1,5 @@
-import Advancement from "./advancement.mjs";
-import ScaleValueConfig from "../../applications/advancement/scale-value-config.mjs";
 import { ScaleValueConfigurationData } from "../../data/advancement/scale-value/_module.mjs";
+import Advancement from "./advancement.mjs";
 
 /**
  * Advancement that represents a value that scales with class level.
@@ -20,10 +19,7 @@ export default class ScaleValueAdvancement extends Advancement {
 			configurable: true,
 			hint: "BF.Advancement.ScaleValue.Identifier.Hint"
 		},
-		multiLevel: true,
-		apps: {
-			config: ScaleValueConfig
-		}
+		multiLevel: true
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

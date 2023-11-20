@@ -1,5 +1,3 @@
-import ImprovementConfig from "../../applications/advancement/improvement-config.mjs";
-import ImprovementFlow from "../../applications/advancement/improvement-flow.mjs";
 import { ImprovementConfigurationData, ImprovementValueData } from "../../data/advancement/improvement-data.mjs";
 import { linkForUUID, numberFormat, search } from "../../utils/_module.mjs";
 import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
@@ -19,11 +17,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		order: 45,
 		icon: "systems/black-flag/artwork/advancement/improvement.svg",
 		title: "BF.Advancement.Improvement.Title",
-		hint: "BF.Advancement.Improvement.Hint",
-		apps: {
-			config: ImprovementConfig,
-			flow: ImprovementFlow
-		}
+		hint: "BF.Advancement.Improvement.Hint"
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */
