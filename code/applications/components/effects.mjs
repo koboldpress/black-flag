@@ -14,6 +14,17 @@ export default class EffectsElement extends HTMLElement {
 				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
+
+		const contextOptions = this.#getContextMenuOptions();
+		/**
+		 * A hook event that fires when the context menu for the effects list is constructed.
+		 * @function blackFlag.getActiveEffectContext
+		 * @memberof hookEvents
+		 * @param {ActivitiesElement} html - The HTML element to which the context options are attached.
+		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
+		 */
+		Hooks.call("blackFlag.getActiveEffectContext", this, contextOptions);
+		if ( contextOptions ) ContextMenu.create(this.#app, this, "[data-effect-id]", contextOptions);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -103,6 +114,56 @@ export default class EffectsElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Get the set of ContextMenu options which should be applied for activity entries.
+	 * @returns {ContextMenuEntry[]} - Context menu entries.
+	 */
+	#getContextMenuOptions() {
+		return [
+			{
+				name: "BF.Effect.Action.Disable",
+				icon: "<i class='fa-solid fa-times fa-fw'></i>",
+				condition: li => {
+					const id = li[0].closest("[data-effect-id]")?.dataset.effectId;
+					const effect = this.effects.get(id);
+					return this.isEditable && !effect?.disabled;
+				},
+				callback: li => this.#onAction(li[0], "toggle")
+			},
+			{
+				name: "BF.Effect.Action.Enable",
+				icon: "<i class='fa-solid fa-check fa-fw'></i>",
+				condition: li => {
+					const id = li[0].closest("[data-effect-id]")?.dataset.effectId;
+					const effect = this.effects.get(id);
+					return this.isEditable && effect?.disabled;
+				},
+				callback: li => this.#onAction(li[0], "toggle")
+			},
+			{
+				name: "BF.Effect.Action.Edit",
+				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
+				condition: li => this.isEditable,
+				callback: li => this.#onAction(li[0], "edit")
+			},
+			{
+				name: "BF.Effect.Action.Duplicate",
+				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
+				condition: li => this.isEditable,
+				callback: li => this.#onAction(li[0], "duplicate")
+			},
+			{
+				name: "BF.Effect.Action.Delete",
+				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
+				condition: li => this.isEditable,
+				callback: li => this.#onAction(li[0], "delete"),
+				group: "destructive"
+			}
+		];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Handle one of the actions from the buttons or context menu.
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
@@ -111,10 +172,10 @@ export default class EffectsElement extends HTMLElement {
 	#onAction(target, action) {
 		const id = target.closest("[data-effect-id]")?.dataset.effectId;
 		const effect = this.effects.get(id);
-		const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
-		if ( ["edit", "delete", "duplicate", "toggle", "view"].includes(action) && !effect ) return;
+		if ( (action !== "add") && !effect ) return;
 		switch ( action ) {
 			case "add":
+				const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
 				return this.document.createEmbeddedDocuments("ActiveEffect", [{
 					label: game.i18n.localize("BF.Effect.New"),
 					icon: (this.document instanceof Item) ? this.document.img : "icons/svg/aura.svg",
@@ -129,6 +190,10 @@ export default class EffectsElement extends HTMLElement {
 				return effect.sheet.render(true);
 			case "delete":
 				return effect.deleteDialog();
+			case "duplicate":
+				const data = effect.toObject();
+				delete data._id;
+				return this.document.createEmbeddedDocuments("ActiveEffect", [data]);
 			case "toggle":
 				return effect.update({ disabled: !effect.disabled });
 			default:
