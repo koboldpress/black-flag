@@ -128,6 +128,15 @@ export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, 
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_preCreateActivities(data, options, user) {
+		if ( data._id || foundry.utils.hasProperty(data, "system.activities") ) return;
+		this._createInitialActivities([{ type: "attack" }]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

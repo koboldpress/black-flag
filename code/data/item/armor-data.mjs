@@ -161,14 +161,14 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 	 * @returns {string}
 	 */
 	modifierHint(long=true) {
-		if ( this.modifier.maxModifier === 0 ) return "";
+		if ( this.modifier.max === 0 ) return "";
 
 		const ability = CONFIG.BlackFlag.abilities[CONFIG.BlackFlag.defaultAbilities.armor];
 		const hint = game.i18n.format(`BF.Armor.Modifier.Description.${long ? "Long" : "Short"}`, {
 			ability: game.i18n.localize(ability.labels.abbreviation).toUpperCase()
 		});
-		if ( !this.modifier.maxModifier ) return hint;
+		if ( !this.modifier.max ) return hint;
 
-		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: numberFormat(this.modifier.maxModifier) });
+		return game.i18n.format("BF.Armor.Modifier.Description.Max", { hint, max: numberFormat(this.modifier.max) });
 	}
 }
