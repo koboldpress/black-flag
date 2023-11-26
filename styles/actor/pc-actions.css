@@ -9,6 +9,7 @@ blackFlag-pcActions {
 	}
 	li {
 		display: flex;
+		align-items: center;
 		gap: 0.5rem;
 	}
 	button[data-action="activate"] {
@@ -38,6 +39,20 @@ blackFlag-pcActions {
 		&:hover {
 			background: var(--bf-button-background-color-focus);
 			color: var(--bf-button-text-color-focus);
+		}
+	}
+
+	hgroup {
+		flex: 0 0 10em;
+		h6 {
+			margin: 0;
+			font-size: var(--font-size-10);
+			font-weight: normal;
+			font-variant: small-caps;
+		}
+		p {
+			margin: 0;
+			font-size: var(--font-size-13);
 		}
 	}
 }

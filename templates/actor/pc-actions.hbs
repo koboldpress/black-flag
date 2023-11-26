@@ -4,8 +4,12 @@
 		<ul>
 			{{#each this.activities}}
 				<li data-activity="{{this.uuid}}">
-					<button type="button" data-action="activate">use</button>
-					{{this.name}}
+					<button type="button" data-action="activate">{{localize "BF.Activity.Action.Use"}}</button>
+					<hgroup>
+						<h6>{{this.item.name}}</h6>
+						<p>{{this.name}}</p>
+					</hgroup>
+					<!-- Get specific details from activity -->
 				</li>
 			{{/each}}
 		</ul>
