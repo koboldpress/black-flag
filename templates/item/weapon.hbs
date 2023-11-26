@@ -99,7 +99,7 @@
 						<label class="die-denomination">
 							<span>{{localize "BF.Die.Denomination.Label"}}</span>
 							<select name="system.damage.denomination">
-								{{selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination}}
+								{{selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination blank=""}}
 							</select>
 						</label>
 						<label>
