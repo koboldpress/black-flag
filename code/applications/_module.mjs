@@ -45,6 +45,7 @@ export function registerCustomElements() {
 	log("Registering custom elements");
 	window.customElements.define("blackflag-activities", components.ActivitiesElement);
 	window.customElements.define("blackflag-advancement", components.AdvancementElement);
+	window.customElements.define("blackflag-effects", components.EffectsElement);
 	window.customElements.define("blackflag-pcactions", components.PCActionsElement);
 	window.customElements.define("blackflag-xpbar", components.XPBarElement);
 }

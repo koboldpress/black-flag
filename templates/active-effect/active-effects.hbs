@@ -1,4 +1,4 @@
-<section class="effects">
+<blackFlag-effects>
 	<header>
 		<h2>{{localize "BF.Effect.Label[other]"}}</h2>
 	</header>
@@ -15,7 +15,7 @@
 						<div class="effect-duration">{{localize "BF.Effect.Duration"}}</div>
 						<div class="effect-controls">
 							{{#if @root.editable}}
-								<a data-action="effect" data-sub-action="add">
+								<a data-action="add">
 									<i class="fas fa-plus"></i>
 								</a>
 							{{/if}}
@@ -37,14 +37,18 @@
 								<div class="effect-duration">{{effect.duration.label}}</div>
 								<div class="item-controls effect-controls">
 									{{#if @root.editable}}
-										<a data-action="effect" data-sub-action="toggle">
-											<i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
+										<a data-action="toggle">
+											<i class="fa-solid {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}"></i>
 										</a>
-										<a data-action="effect" data-sub-action="edit">
-											<i class="fas fa-edit"></i>
+										<a data-action="edit">
+											<i class="fa-solid fa-edit"></i>
 										</a>
-										<a data-action="effect" data-sub-action="delete">
-											<i class="fas fa-trash"></i>
+										<a data-action="delete">
+											<i class="fa-solid fa-trash"></i>
+										</a>
+									{{else}}
+										<a data-action="view">
+											<i class="fa-solid fa-eye"></i>
 										</a>
 									{{/if}}
 								</div>
@@ -55,4 +59,4 @@
 			{{/unless}}
 		{{/each}}
 	</ol>	
-</section>
+</blackFlag-effects>

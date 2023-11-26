@@ -155,12 +155,10 @@ export default class HitPointsAdvancement extends Advancement {
 
 	async apply(levels, data, { initial=false, render=true }={}) {
 		const level = this.relavantLevel(levels);
-		console.log(levels, level, data, initial);
 		if ( initial ) {
 			data ??= this.value.granted ?? {};
 			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
 			const previous = previousLevel?.class?.system.advancement.byType("hitPoints")[0];
-			console.log(previousLevel, previous);
 
 			// If 1st character level, always use max HP
 			if ( levels.character === 1 ) data[level] = "max";

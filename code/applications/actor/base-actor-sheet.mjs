@@ -1,5 +1,6 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import { log, numberFormat, sortObjectEntries } from "../../utils/_module.mjs";
+import EffectsElement from "../components/effects.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -44,9 +45,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 		context.modes = this.modes;
 
-		context.effects = BlackFlagActiveEffect.prepareSheetSections(
-			this.document.allApplicableEffects(), { displaySource: true }
-		);
+		context.effects = EffectsElement.prepareContext(this.document.allApplicableEffects(), { displaySource: true });
 
 		await this.prepareActions(context);
 		await this.prepareConditions(context);

@@ -77,7 +77,7 @@ export default class AdvancementElement extends HTMLElement {
 	 * @param {AdvancementCollection} advancement
 	 * @returns {object}
 	 */
-	static prepareAdvancement(advancement) {
+	static prepareContext(advancement) {
 		const context = {};
 
 		const needingConfiguration = advancement.filter(a => !a.levels.length);

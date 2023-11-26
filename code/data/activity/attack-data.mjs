@@ -34,7 +34,6 @@ export class AttackData extends foundry.abstract.DataModel {
 		for ( const keyPath of propertiesToSet ) {
 			const activityProperty = foundry.utils.getProperty(this, keyPath);
 			const itemProperty = foundry.utils.getProperty(item, keyPath);
-			console.log(this.parent.item.name, keyPath, activityProperty, itemProperty);
 			if ( !activityProperty && itemProperty ) foundry.utils.setProperty(this, keyPath, itemProperty);
 		}
 	}

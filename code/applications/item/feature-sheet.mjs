@@ -1,5 +1,6 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import AdvancementElement from "../components/advancement.mjs";
+import EffectsElement from "../components/effects.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 import PrerequisiteConfig from "./config/prerequisite-config.mjs";
 
@@ -28,8 +29,8 @@ export default class FeatureSheet extends BaseItemSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
-		context.advancement = AdvancementElement.prepareAdvancement(this.item.system.advancement);
-		context.effects = BlackFlagActiveEffect.prepareSheetSections(context.item.effects);
+		context.advancement = AdvancementElement.prepareContext(this.item.system.advancement);
+		context.effects = EffectsElement.prepareContext(this.item.effects);
 
 		if ( this.document.type === "feature" ) {
 			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;

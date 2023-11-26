@@ -18,7 +18,7 @@ export default class ConceptSheet extends BaseItemSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
-		context.advancement = AdvancementElement.prepareAdvancement(this.item.system.advancement);
+		context.advancement = AdvancementElement.prepareContext(this.item.system.advancement);
 		context.showClassSelector = context.editable && this.item.type === "subclass";
 		return context;
 	}
