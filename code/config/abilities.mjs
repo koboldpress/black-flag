@@ -133,5 +133,7 @@ export const abilityAssignment = {
 export const defaultAbilities = {
 	armor: "dexterity",
 	hitPoints: "constitution",
-	initiative: "dexterity"
+	initiative: "dexterity",
+	meleeAttack: "strength",
+	rangedAttack: "dexterity"
 };

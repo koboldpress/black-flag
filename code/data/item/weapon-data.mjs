@@ -1,16 +1,16 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import { ActivityField, DamageField } from "../fields/_module.mjs";
-import ProficiencyTemplate from "./templates/proficiency-template.mjs";
-import PhysicalTemplate from "./templates/physical-template.mjs";
+import { DamageField } from "../fields/_module.mjs";
+import { ActivitiesTemplate, ProficiencyTemplate, PhysicalTemplate } from "./templates/_module.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Weapon items.
+ * @mixes ActivitiesTemplate
  * @mixes ProficiencyTemplate
  * @mixes PhysicalTemplate
  */
-export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate) {
+export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, ProficiencyTemplate, PhysicalTemplate) {
 
 	static get metadata() {
 		return {
@@ -25,7 +25,6 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			activities: new ActivityField(),
 			description: new SchemaField({
 				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
@@ -70,6 +69,24 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Ability used for attacks and damage with this weapon.
+	 * @type {string|null}
+	 */
+	get ability() {
+		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
+		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
+
+		if ( this.properties.has("finesse") ) {
+			const abilities = this.parent.actor?.system.abilities;
+			if ( abilities ) return abilities[ranged]?.mod > abilities[melee]?.mod ? ranged : melee;
+		}
+
+		return this.type.value === "ranged" ? ranged : melee;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get traits() {
 		const traits = [
 			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
@@ -108,5 +125,17 @@ export default class WeaponData extends ItemDataModel.mixin(ProficiencyTemplate,
 			value: "weapon",
 			writable: false
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritdoc */
+	*actions() {
+		// TODO: Only return activities if weapon is equipped
+		for ( const action of super.actions() ) {
+			yield action;
+		}
 	}
 }

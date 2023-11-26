@@ -40,7 +40,7 @@
 			</label>
 			<ul class="item-list damages-list">
 				{{#each source.damage.parts}}
-					<li class="item-entry" data-index="{{@index}}">
+					<li class="item" data-index="{{@index}}">
 						<div class="damage field-group">
 							<label class="die-count">
 								<span>{{localize "BF.Die.Number.Label"}}</span>
@@ -67,7 +67,7 @@
 						</div>
 					</li>
 				{{/each}}
-				<li class="item-entry add-control">
+				<li class="item add-control">
 					<a data-action="damage" data-sub-action="add">
 					 <i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
 					</a>

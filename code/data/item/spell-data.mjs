@@ -2,14 +2,15 @@ import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import { ActivitiesTemplate } from "./templates/_module.mjs";
 
 const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Spell items.
- * @mixes ProficiencyTemplate
+ * @mixes ActivitiesTemplate
  */
-export default class SpellData extends ItemDataModel {
+export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	static get metadata() {
 		return {

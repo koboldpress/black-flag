@@ -1,3 +1,4 @@
+import Proficiency from "../../../documents/proficiency.mjs";
 import { Trait } from "../../../utils/_module.mjs";
 
 const { BooleanField, SchemaField } = foundry.data.fields;
@@ -26,7 +27,7 @@ export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Is the current actor proficient with this weapon?
+	 * Is the current actor proficient with this item?
 	 * @type {boolean|null}
 	 */
 	get proficient() {
@@ -37,5 +38,18 @@ export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 		);
 		if ( !actorProficiency ) return true;
 		return actorProficiency.has(this.type.category) || actorProficiency.has(this.type.base);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Proficiency description.
+	 * @type {Proficiency}
+	 */
+	get proficiency() {
+		return new Proficiency(
+			this.parent.actor?.system.attributes?.proficiency ?? 0,
+			this.proficient ? 1 : 0
+		);
 	}
 }

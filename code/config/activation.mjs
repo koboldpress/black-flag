@@ -1,5 +1,5 @@
 import SelectChoices from "../documents/select-choices.mjs";
-import { makeLabel } from "../utils/_module.mjs";
+import { localizeConfig, makeLabel } from "../utils/_module.mjs";
 import { timeUnits } from "./units.mjs";
 
 /**
@@ -11,20 +11,22 @@ export const actionTypes = {
 		label: "BF.Activation.Category.Standard.Label",
 		children: {
 			action: {
-				label: "BF.Activation.Type.Action"
+				localization: "BF.Activation.Type.Action"
 			},
 			bonus: {
-				label: "BF.Activation.Type.BonusAction"
+				localization: "BF.Activation.Type.BonusAction"
 			},
 			reaction: {
-				label: "BF.Activation.Type.Reaction"
+				localization: "BF.Activation.Type.Reaction"
 			},
 			free: {
-				label: "BF.Activation.Type.FreeAction"
+				localization: "BF.Activation.Type.FreeAction"
 			}
 		}
 	}
 };
+localizeConfig(actionTypes.standard.children);
+localizeConfig(actionTypes.standard.children, { propertyName: "localizedPlural", pluralRule: "other" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

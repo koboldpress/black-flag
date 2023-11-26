@@ -58,12 +58,6 @@ export default function PseudoDocumentMixin(Base) {
 		 * Configuration information for PseudoDocuments.
 		 * @type {PseudoDocumentsMetadata}
 		 */
-		static metadata = Object.freeze({});
-
-		/**
-		 * Configuration information for PseudoDocuments.
-		 * @type {PseudoDocumentsMetadata}
-		 */
 		get metadata() {
 			return this.constructor.metadata;
 		}

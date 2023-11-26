@@ -49,20 +49,9 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				yield advancement;
 			}
 		} else {
-			for ( const advancement of this.system.advancement ) {
+			for ( const advancement of this.system.advancement ?? [] ) {
 				const level = advancement.relavantLevel(levels);
 				if ( advancement.levels.includes(level) ) yield advancement;
-			}
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareEmbeddedDocuments() {
-		super.prepareEmbeddedDocuments();
-		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
-			for ( const e of this.getEmbeddedCollection(collectionName) ) {
-				e.prepareData();
 			}
 		}
 	}

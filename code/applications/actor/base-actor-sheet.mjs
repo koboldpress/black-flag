@@ -48,11 +48,33 @@ export default class BaseActorSheet extends ActorSheet {
 			this.document.allApplicableEffects(), { displaySource: true }
 		);
 
+		await this.prepareActions(context);
 		await this.prepareConditions(context);
 		await this.prepareItems(context);
 		await this.prepareTraits(context);
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare actions for display.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 */
+	async prepareActions(context) {
+		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.standard.children.localizedPlural)
+			.reduce((obj, [key, label]) => {
+				obj[key] = { label, activities: [] };
+				return obj;
+			}, {});
+		for ( const item of this.actor.items ) {
+			for ( const action of item.system.actions?.() ?? [] ) {
+				if ( action.actionType in context.actions ) context.actions[action.actionType].activities.push(action);
+				else context.actions.other.activities.push(action);
+			}
+		}
+		// TODO: Figure out how these should be sorted
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

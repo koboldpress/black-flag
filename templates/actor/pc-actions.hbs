@@ -1,0 +1,13 @@
+<blackFlag-pcActions>
+	{{#each actions}}
+		<h4>{{this.label}}</h4>
+		<ul>
+			{{#each this.activities}}
+				<li data-activity="{{this.uuid}}">
+					<button type="button" data-action="activate">use</button>
+					{{this.name}}
+				</li>
+			{{/each}}
+		</ul>
+	{{/each}}	
+</blackFlag-pcActions>

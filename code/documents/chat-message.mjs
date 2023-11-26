@@ -9,6 +9,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if ( !this.isContentVisible ) return jQuery;
 		const html = jQuery[0];
 
+		await this._activateActivityListeners(html);
 		if ( this.isRoll ) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
@@ -34,6 +35,22 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			if ( roll.isSuccess ) result.classList.add("success");
 			else if ( roll.isFailure ) result.classList.add("failure");
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Activity Actions           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add event listeners to an activity card or remove the controls if activity could not be found.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	async _activateActivityListeners(html) {
+		const uuid = this.getFlag(game.system.id, "uuid");
+		if ( (this.getFlag(game.system.id, "type") !== "activity") || !uuid ) return;
+
+		const activity = await fromUuid(uuid);
+		activity?.activateChatListeners(this, html);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

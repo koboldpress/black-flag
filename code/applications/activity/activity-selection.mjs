@@ -45,9 +45,9 @@ export default class ActivitySelection extends Dialog {
 			if ( name === CONST.BASE_DOCUMENT_TYPE ) continue;
 			const activity = config.documentClass;
 			context.types[name] = {
-				label: activity.metadata.title,
+				label: game.i18n.localize(activity.metadata.title),
 				icon: activity.metadata.icon,
-				hint: activity.metadata.hint
+				hint: game.i18n.localize(activity.metadata.hint)
 			};
 		}
 		context.types = BlackFlag.utils.sortObjectEntries(context.types, "label");

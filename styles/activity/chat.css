@@ -1,0 +1,65 @@
+.activity.chat-card {
+	--card-border-radius: 4px;
+	--card-button-inset: 2px;
+
+	header {
+		display: flex;
+		gap: 0.5rem;
+		border: 2px solid var(--bf-color-border-gray);
+		border-radius: var(--card-border-radius);
+
+		img {
+			margin: -2px;
+			inline-size: 45px;
+			block-size: 45px;
+			padding: 2px;
+			border: 2px solid var(--bf-color-border-blue);
+			border-radius: var(--card-border-radius);
+			object-fit: scale-down;
+		}
+		.hgroup {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			h5 {
+				margin: 0;
+				font-size: var(--font-size-14);
+				font-weight: normal;
+			}
+			p {
+				margin: 0;
+				font-size: var(--font-size-11);
+				font-weight: light;
+			}
+		}
+	}
+
+	.menu {
+		display: flex;
+		gap: 0.25rem;
+		flex-direction: column;
+		list-style: none;
+		padding: 0;
+	}
+
+	button {
+		position: relative;
+		border: 1px solid var(--bf-color-border-gray);
+		border-radius: var(--card-border-radius);
+		background: var(--bf-color-fill);
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: var(--card-button-inset);
+			border: 1px solid var(--bf-color-border-blue);
+			border-radius: calc(var(--bf-button-border-radius) - var(--bf-button-inset));
+			z-index: 1;
+		}
+
+		&:hover, &:focus {
+			box-shadow: 0 0 5px var(--bf-color-border-light-blue);
+		}
+	}
+}

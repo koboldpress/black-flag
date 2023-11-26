@@ -7,6 +7,23 @@ import { numberFormat } from "./number.mjs";
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * A helper that converts the provided object into a series of `data-` entries.
+ * @param {object} context - Current evaluation context.
+ * @param {object} options - Handlebars options.
+ * @returns {string}
+ */
+function dataset(context, options) {
+	const entries = [];
+	for ( let [key, value] of Object.entries(context ?? {}) ) {
+		key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
+		entries.push(`data-${key}="${value}"`);
+	}
+	return new Handlebars.SafeString(entries.join(" "));
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * A helper to create a set of <option> elements in a <select> block grouped together
  * in <optgroup> based on the provided categories.
  *
@@ -113,6 +130,7 @@ function notificationBadge(document, options={}) {
  */
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
+		"blackFlag-dataset": dataset,
 		"blackFlag-groupedSelectOptions": groupedSelectOptions,
 		"blackFlag-linkForUUID": linkForUUID,
 		"blackFlag-notificationBadge": notificationBadge,
@@ -134,6 +152,7 @@ export async function registerHandlebarsPartials() {
 		"active-effect/active-effect-change.hbs",
 		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",
+		"actor/pc-actions.hbs",
 		"actor/pc-biography.hbs",
 		"actor/pc-features.hbs",
 		"actor/pc-inventory.hbs",

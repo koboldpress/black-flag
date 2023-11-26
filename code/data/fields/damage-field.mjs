@@ -14,4 +14,22 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 			// TODO: Add custom critical handling on a per-damage basis
 		}, { label: "BF.Damage.Label", ...options });
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	initialize(value, model, options={}) {
+		const obj = super.initialize(value, model, options);
+
+		Object.defineProperty(obj, "formula", {
+			get() {
+				if ( this.custom ) return this.custom;
+				if ( !this.number || !this.denomination ) return "";
+				return `${this.number}d${this.denomination}`;
+			},
+			configurable: true,
+			enumerable: false
+		});
+
+		return obj;
+	}
 }

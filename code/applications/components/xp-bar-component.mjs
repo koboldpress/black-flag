@@ -1,4 +1,4 @@
-import { numberFormat } from "../../../utils/_module.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 
 /**
  * Custom element for displaying the XP bar on the character sheet.
@@ -44,7 +44,7 @@ export default class XPBarComponent extends HTMLElement {
 		const bar = this.querySelector('[role="meter"]');
 		bar.style = `--bar-percentage: ${xp.percentage}%;`;
 		bar.setAttribute("aria-valuenow", xp.percentage);
-		bar.setAttribute("aria-valueText", game.i18n.format("BF.ExperiencePoints.LabelSpecific", {value: xp.value}));
+		bar.setAttribute("aria-valuetext", game.i18n.format("BF.ExperiencePoints.LabelSpecific", {value: xp.value}));
 		bar.setAttribute("aria-valuemin", xp.min);
 		bar.setAttribute("aria-valuemax", xp.max);
 		this.querySelector('[name="xpChange"]').value = "";
@@ -65,18 +65,20 @@ export default class XPBarComponent extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * ID of the change listener.
+	 * @type {number}
+	 */
+	#hookID;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Actor that this XP bar is representing.
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
 		return this.#app.document;
 	}
-
-	/**
-	 * ID of the change listener.
-	 * @type {number}
-	 */
-	#hookID;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */

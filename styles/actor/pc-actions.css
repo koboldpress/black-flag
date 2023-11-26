@@ -1,0 +1,43 @@
+blackFlag-pcActions {
+	h4 {
+		font-family: var(--bf-font-primary);
+		font-weight: 700;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	li {
+		display: flex;
+		gap: 0.5rem;
+	}
+	button[data-action="activate"] {
+		position: relative;
+		inline-size: unset;
+		block-size: 2em;
+		padding-inline: 0.5em;
+		border: 1px solid var(--bf-color-border-blue);
+		border-radius: var(--bf-button-border-radius);
+		background: var(--bf-button-background-color-regular);
+		color: var(--bf-button-text-color-regular);
+		font-size: var(--font-size-11);
+		line-height: 1em;
+		text-transform: uppercase;
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset: var(--bf-button-inset);
+			border: 1px solid var(--bf-color-border-gray);
+			border-radius: calc(var(--bf-button-border-radius) - var(--bf-button-inset));
+		}
+
+		&:hover, &:focus {
+			box-shadow: 0 0 5px var(--bf-color-border-light-blue);
+		}
+		&:hover {
+			background: var(--bf-button-background-color-focus);
+			color: var(--bf-button-text-color-focus);
+		}
+	}
+}
