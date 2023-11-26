@@ -1,8 +1,8 @@
-<section class="activities">
+<blackFlag-activities>
 	<fieldset>
 		<legend>
 			{{localize "BF.Activity.Label[other]"}}
-			<a data-action="activity" data-sub-action="add">
+			<a data-action="add">
 				<i class="fa-solid fa-plus"></i>
 			</a>
 		</legend>
@@ -17,14 +17,14 @@
 					</div>
 					<div class="item-controls activity-controls">
 						{{#if @root.editable}}
-							<a data-action="activity" data-sub-action="edit">
+							<a data-action="edit">
 								<i class="fa-solid fa-edit"></i>
 							</a>
-							<a data-action="activity" data-sub-action="delete">
+							<a data-action="delete">
 								<i class="fa-solid fa-trash"></i>
 							</a>
 						{{else}}
-							<a data-action="activity" data-sub-action="view">
+							<a data-action="view">
 								<i class="fa-solid fa-eye"></i>
 							</a>
 						{{/if}}
@@ -33,4 +33,4 @@
 			{{/each}}
 		</ul>
 	</fieldset>
-</section>
+</blackFlag-activities>

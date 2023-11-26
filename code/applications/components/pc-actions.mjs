@@ -1,7 +1,7 @@
 /**
  * Custom element for displaying the actions on the character sheet.
  */
-export default class PCActionsComponent extends HTMLElement {
+export default class PCActionsElement extends HTMLElement {
 
 	connectedCallback() {
 		this.#app = ui.windows[this.closest(".app")?.dataset.appid];

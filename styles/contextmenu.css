@@ -1,0 +1,16 @@
+#context-menu {
+	[data-group-id] {
+		position: relative;
+		margin-block-start: 0.5rem;
+		&::before {
+			content: "";
+			inset-inline: 0;
+			inset-block-start: -0.25rem;
+			position: absolute;
+			border-block-start: 1px solid white;
+		}
+	}
+	[data-group-id="destructive"] i {
+		color: var(--bf-context-option-color-destructive);
+	}
+}

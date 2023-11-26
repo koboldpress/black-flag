@@ -1,7 +1,7 @@
 import { filteredKeys } from "../../utils/_module.mjs";
-import ActivityItemSheet from "./activity-item-sheet.mjs";
+import BaseItemSheet from "./base-item-sheet.mjs";
 
-export default class EquipmentSheet extends ActivityItemSheet {
+export default class EquipmentSheet extends BaseItemSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "equipment", "item", "sheet"],

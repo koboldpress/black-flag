@@ -3,7 +3,7 @@ import { numberFormat } from "../../utils/_module.mjs";
 /**
  * Custom element for displaying the XP bar on the character sheet.
  */
-export default class XPBarComponent extends HTMLElement {
+export default class XPBarElement extends HTMLElement {
 
 	connectedCallback() {
 		this.#app = ui.windows[this.closest(".app")?.dataset.appid];

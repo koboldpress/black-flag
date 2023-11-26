@@ -43,8 +43,9 @@ export function registerSheets(documentType, categories) {
  */
 export function registerCustomElements() {
 	log("Registering custom elements");
-	window.customElements.define("blackflag-pcactions", components.PCActionsComponent);
-	window.customElements.define("blackflag-xpbar", components.XPBarComponent);
+	window.customElements.define("blackflag-activities", components.ActivitiesElement);
+	window.customElements.define("blackflag-pcactions", components.PCActionsElement);
+	window.customElements.define("blackflag-xpbar", components.XPBarElement);
 }
 
 export { actor, components };
