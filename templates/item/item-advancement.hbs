@@ -1,9 +1,9 @@
-<section class="advancement">
+<blackFlag-advancement>
 	<header>
 		<h2>{{localize "BF.Advancement.Label"}}</h2>
 		{{#if editable}}
 			<div class="controls">
-				<a data-action="advancement" data-sub-action="add">
+				<a data-action="add">
 					<i class="fa-solid fa-plus"></i>
 				</a>
 			</div>
@@ -41,10 +41,10 @@
 							</div>
 							{{#if @root.editable}}
 								<div class="advancement-controls">
-									<a data-action="advancement" data-sub-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">
+									<a data-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">
 										<i class="fas fa-edit"></i>
 									</a>
-									<a data-action="advancement" data-sub-action="delete" data-tooltip="BF.Advancement.Core.Action.Delete">
+									<a data-action="delete" data-tooltip="BF.Advancement.Core.Action.Delete">
 										<i class="fas fa-trash"></i>
 									</a>
 								</div>
@@ -58,4 +58,4 @@
 			</li>
 		{{/each}}
 	</ol>
-</section>
+</blackFlag-advancement>

@@ -1,8 +1,9 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import AdvancementItemSheet from "./advancement-item-sheet.mjs";
+import AdvancementElement from "../components/advancement.mjs";
+import BaseItemSheet from "./base-item-sheet.mjs";
 import PrerequisiteConfig from "./config/prerequisite-config.mjs";
 
-export default class FeatureSheet extends AdvancementItemSheet {
+export default class FeatureSheet extends BaseItemSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "feature", "item", "sheet"],
@@ -27,12 +28,13 @@ export default class FeatureSheet extends AdvancementItemSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
+		context.advancement = AdvancementElement.prepareAdvancement(this.item.system.advancement);
 		context.effects = BlackFlagActiveEffect.prepareSheetSections(context.item.effects);
 
 		if ( this.document.type === "feature" ) {
 			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;
 			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
-			context.featureTypes = {
+			if ( featureCategory ) context.featureTypes = {
 				label: game.i18n.format("BF.Item.Feature.Type.LabelSpecific", {
 					type: game.i18n.localize(`${featureCategory.localization}[one]`)
 				}),

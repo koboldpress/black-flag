@@ -1,6 +1,7 @@
-import AdvancementItemSheet from "./advancement-item-sheet.mjs";
+import AdvancementElement from "../components/advancement.mjs";
+import BaseItemSheet from "./base-item-sheet.mjs";
 
-export default class ConceptSheet extends AdvancementItemSheet {
+export default class ConceptSheet extends BaseItemSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept", "item", "sheet"],
@@ -17,6 +18,7 @@ export default class ConceptSheet extends AdvancementItemSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
+		context.advancement = AdvancementElement.prepareAdvancement(this.item.system.advancement);
 		context.showClassSelector = context.editable && this.item.type === "subclass";
 		return context;
 	}
