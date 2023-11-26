@@ -36,5 +36,6 @@ export const _activityTypes = {
  * @enum {string}
  */
 export const attackTypes = {
+	spell: "BF.Item.Type.Spell[one]",
 	weapon: "BF.Weapon.Label[one]"
 };

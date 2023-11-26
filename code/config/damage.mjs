@@ -9,6 +9,9 @@
  * @enum {DamageTypeConfiguration}
  */
 export const damageTypes = {
+	acid: {
+		label: "BF.Damage.Type.Acid"
+	},
 	bludgeoning: {
 		label: "BF.Damage.Type.Bludgeoning"
 	},
@@ -44,8 +47,5 @@ export const damageTypes = {
 	},
 	thunder: {
 		label: "BF.Damage.Type.Thunder"
-	},
-	void: {
-		label: "BF.Damage.Type.Void"
 	}
 };

@@ -16,11 +16,16 @@ export default class AttackConfig extends ActivityConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData(options) {
+		const defaultType = this.item.system.type?.value;
+		const defaultClassification = this.item.system.type?.classification;
 		const context = foundry.utils.mergeObject(super.getData(options), {
 			labels: {
-				// TODO: Generate these labels properly based on item (BF.Default.Specific)
-				defaultType: "Default (melee)",
-				defaultClassification: "Default (weapon)"
+				defaultType: defaultType ? game.i18n.format("BF.Default.Specific", {
+					default: game.i18n.localize(CONFIG.BlackFlag.weaponTypes[defaultType])?.toLowerCase() ?? ""
+				}) : null,
+				defaultClassification: defaultClassification ? game.i18n.format("BF.Default.Specific", {
+					default: game.i18n.localize(CONFIG.BlackFlag.attackTypes[defaultClassification])?.toLowerCase() ?? ""
+				}) : null
 			}
 		});
 		return context;
