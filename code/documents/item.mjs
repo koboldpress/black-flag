@@ -58,6 +58,24 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	getRollData({ deterministic=false }={}) {
+		if ( !this.actor ) return null;
+		const actorRollData = this.actor.getRollData({ deterministic });
+		const rollData = {
+			...actorRollData,
+			item: this.toObject(false).system
+		};
+
+		const abilityKey = this.system.ability;
+		if ( abilityKey && ("abilities" in rollData) ) {
+			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
+		}
+
+		return rollData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareEmbeddedDocuments() {
 		super.prepareEmbeddedDocuments();
 		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {

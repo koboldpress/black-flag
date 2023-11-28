@@ -1,0 +1,50 @@
+<form autocomplete="off">
+	<header class="sheet-header">
+		<figure class="icon">
+			<img src="{{activity.img}}" data-edit="img">
+		</figure>
+		<h1>
+			<input type="text" name="name" value="{{activity._source.name}}" placeholder="{{default.title}}">
+		</h1>
+	</header>
+
+	<main class="sheet-body">
+		<fieldset>
+			<legend>{{localize "BF.Activity.SavingThrow.Challenge"}}</legend>
+			<div class="field-group">
+				<label>
+					<span>{{localize "BF.Activity.SavingThrow.OpposedAbility.Label"}}</span>
+					<select name="system.ability">
+						{{selectOptions CONFIG.abilities.localized selected=system.ability}}
+					</select>
+				</label>
+				<span class="vs">{{localize "BF.Activity.SavingThrow.Versus"}}</span>
+				<label>
+					<span>{{localize "BF.DifficultyClass.Ability.Label"}}</span>
+					<select name="system.dc.ability">
+						{{#select system.dc.ability}}
+							<option value="">{{localize "BF.Default.Generic"}}</option>
+							<hr>
+							<optgroup label="{{localize 'BF.DifficultyClass.Formula.Default'}}">
+								{{selectOptions CONFIG.abilities.localized}}
+							</optgroup>
+							<hr>
+							<option value="custom">{{localize "BF.Formula.Custom.Label"}}</option>
+						{{/select}}
+					</select>
+				</label>
+			</div>
+			{{#if (eq system.dc.ability "custom")}}
+				<label>
+					<span>{{localize "BF.DifficultyClass.Formula.Label"}}</span>
+					<input type="text" name="system.dc.formula" value="{{system.dc.formula}}">
+				</label>
+			{{/if}}
+		</fieldset>
+
+		<fieldset>
+			<legend>{{localize "BF.Damage.Label"}}</legend>
+			{{> "blackFlag.activity-damage-parts"}}
+		</fieldset>
+	</main>
+</form>

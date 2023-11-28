@@ -16,15 +16,16 @@ export default class AttackConfig extends ActivityConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData(options) {
-		const defaultType = this.item.system.type?.value;
-		const defaultClassification = this.item.system.type?.classification;
-		const context = foundry.utils.mergeObject(super.getData(options), {
+		const context = super.getData(options);
+		const defaultType = CONFIG.BlackFlag.weaponTypes[this.item.system.type?.value]?.label;
+		const defaultClassification = CONFIG.BlackFlag.attackTypes[this.item.system.type?.classification];
+		foundry.utils.mergeObject(context, {
 			labels: {
 				defaultType: defaultType ? game.i18n.format("BF.Default.Specific", {
-					default: game.i18n.localize(CONFIG.BlackFlag.weaponTypes[defaultType])?.toLowerCase() ?? ""
+					default: game.i18n.localize(defaultType).toLowerCase()
 				}) : null,
 				defaultClassification: defaultClassification ? game.i18n.format("BF.Default.Specific", {
-					default: game.i18n.localize(CONFIG.BlackFlag.attackTypes[defaultClassification])?.toLowerCase() ?? ""
+					default: game.i18n.localize(defaultClassification).toLowerCase()
 				}) : null
 			}
 		});

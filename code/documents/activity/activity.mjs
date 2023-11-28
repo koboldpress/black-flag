@@ -204,4 +204,20 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				return this[method]();
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Retrieve a list of targets based on selected tokens.
+	 * @returns {BlackFlagActor[]}
+	 */
+	getActionTargets() {
+		let targets = canvas.tokens.controlled.filter(t => t.actor);
+		if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
+		if ( !targets.length ) ui.notifications.warn("BF.Activity.Core.Warning.NoTargets", {localize: true});
+		// TODO: Alternatively fetch targeted tokens
+		return targets;
+	}
 }

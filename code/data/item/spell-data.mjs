@@ -93,6 +93,27 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Ability used for attacks, save DCs, and damage with this spell.
+	 * @type {string|null}
+	 */
+	get ability() {
+		// TODO: Return specific ability based on character's spellcasting
+		return "intelligence";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Proficiency description.
+	 * @type {Proficiency}
+	 */
+	get proficiency() {
+		return new Proficiency(this.parent.actor?.system.attributes?.proficiency ?? 0, 1);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get traits() {
 		const traits = [
 			// TODO: Circle?
@@ -196,6 +217,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 					}`;
 				} else {
 					const type = CONFIG.BlackFlag.rangeTypes[this.units];
+					if ( !type ) return "";
 					let label = game.i18n.localize(type.label);
 					if ( (this.units === "special") && this.special ) {
 						label = `<span data-tooltip="${this.special}">${label}*</span>`;

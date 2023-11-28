@@ -73,7 +73,6 @@ export default class ActivityConfig extends FormApplication {
 
 	getData(options) {
 		const context = foundry.utils.mergeObject(super.getData(options), {
-			CONFIG: CONFIG.BlackFlag,
 			activity: this.activity,
 			system: this.activity.system,
 			source: this.activity.system.toObject(),
@@ -82,6 +81,7 @@ export default class ActivityConfig extends FormApplication {
 				icon: this.activity.constructor.metadata.icon
 			}
 		});
+		context.CONFIG = CONFIG.BlackFlag;
 		return context;
 	}
 

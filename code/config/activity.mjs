@@ -26,6 +26,12 @@ export const _activityTypes = {
 		sheetClasses: {
 			config: applications.AttackConfig
 		}
+	},
+	savingThrow: {
+		documentClass: documents.SavingThrowActivity,
+		sheetClasses: {
+			config: applications.SavingThrowConfig
+		}
 	}
 };
 
