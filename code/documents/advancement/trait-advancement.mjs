@@ -28,7 +28,7 @@ export default class TraitAdvancement extends Advancement {
 	 */
 	prepareData() {
 		const traitConfig = CONFIG.BlackFlag.traits[this.bestGuessTrait()];
-		this.title = this.title || game.i18n.localize(traitConfig?.labels.title) || this.metadata.title;
+		this.title = this.title || game.i18n.localize(traitConfig?.labels.title || this.metadata.title);
 		this.icon = this.icon || traitConfig?.icon || this.metadata.icon;
 		this.identifier = this.identifier || this.title.slugify({strict: true});
 		if ( !this.metadata.multiLevel ) this.level ??= this.minimumLevel;
