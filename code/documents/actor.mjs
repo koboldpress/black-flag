@@ -2,6 +2,7 @@ import SkillConfigurationDialog from "../applications/dice/skill-configuration-d
 import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
+import Proficiency from "./proficiency.mjs";
 
 export default class BlackFlagActor extends DocumentMixin(Actor) {
 
@@ -215,6 +216,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	enqueueAdvancementChange(advancement, functionName, parameters) {
 		this.#advancementQueue.push({ advancement, functionName, parameters });
 		if ( !this.#advancementProcessing ) this.#processAdvancementChanges();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	getRollData({ deterministic=false }={}) {
+		const rollData = { ...super.getRollData() };
+		rollData.prof = new Proficiency(this.system.attributes.proficiency ?? 0, 1);
+		if ( deterministic ) rollData.prof = rollData.prof.flat;
+		return rollData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

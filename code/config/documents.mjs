@@ -11,7 +11,8 @@ export const _documentCategories = {
 		person: {
 			label: "BF.Actor.Category.Person.Label",
 			types: [
-				actorTypes.PCData
+				actorTypes.PCData,
+				actorTypes.NPCData
 			]
 		}
 	},

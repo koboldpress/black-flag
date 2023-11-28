@@ -1,16 +1,21 @@
 import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { filter, getPluralRules, simplifyBonus, Trait } from "../../utils/_module.mjs";
+import { getPluralRules, simplifyBonus, Trait } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import {
 	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
-	ModifierField, ProficiencyField, RollField, TimeField
+	ProficiencyField, RollField, TimeField
 } from "../fields/_module.mjs";
+import ACTemplate from "./templates/ac-template.mjs";
+import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
+import TraitsTemplate from "./templates/traits-template.mjs";
 
-const { ArrayField, BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
-export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
+export default class PCData extends ActorDataModel.mixin(
+	ACTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
+) {
 
 	static metadata = {
 		type: "pc",
@@ -36,23 +41,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
 			}),
 			attributes: new SchemaField({
-				ac: new SchemaField({
-					baseFormulas: new SetField(new StringField(), {
-						initial: ["unarmored", "armored"]
-					}, { label: "BF.ArmorClass.Formula.DefaultLabel[other]" }),
-					formulas: new ArrayField(new SchemaField({
-						label: new StringField(),
-						formula: new FormulaField({deterministic: true}),
-						armored: new BooleanField({nullable: true, initial: null}),
-						shielded: new BooleanField({nullable: true, initial: null})
-					}), { label: "BF.ArmorClass.Formula.Label[other]" }),
-					flat: new NumberField({
-						min: 0, integer: true, label: "BF.ArmorClass.Flat.Label", hint: "BF.ArmorClass.Flat.Hint"
-					}),
-					override: new NumberField({
-						min: 0, integer: true, label: "BF.ArmorClass.Override.Label", hint: "BF.ArmorClass.Override.Hint"
-					})
-				}, {label: "BF.ArmorClass.Label"}),
 				death: new SchemaField({
 					status: new StringField({initial: "alive", blank: false}),
 					success: new NumberField({
@@ -109,7 +97,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 				// Backstory?
 				// Allies & Organizations?
 			}),
-			modifiers: new ModifierField(),
 			proficiencies: new SchemaField({
 				armor: new SchemaField({
 					value: new SetField(new StringField()),
@@ -120,12 +107,12 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 					tags: new SetField(new StringField())
 				}),
 				skills: new MappingField(new SchemaField({
-					proficiency: new ProficiencyField({ rounding: false })
+					proficiency: new ProficiencyField({rounding: false})
 				}), {
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
 				tools: new MappingField(new SchemaField({
-					proficiency: new ProficiencyField({ rounding: false })
+					proficiency: new ProficiencyField({rounding: false})
 					// Default ability
 				}), {label: "BF.Tool.Label[other]"}),
 				weapons: new SchemaField({
@@ -160,49 +147,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 						source: new StringField()
 					}))
 				}, {label: "BF.ExperiencePoints.Label"})
-			}, {label: "BF.Progression.Label"}),
-			traits: new SchemaField({
-				movement: new SchemaField({
-					base: new NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
-					types: new MappingField(new FormulaField({deterministic: true}), {
-						initial: { walk: "@base" }
-					}),
-					tags: new SetField(new StringField())
-					// Units?
-					// Multiplier
-				}, {label: "BF.Speed.Label"}),
-				senses: new SchemaField({
-					types: new MappingField(new FormulaField({deterministic: true})),
-					tags: new SetField(new StringField())
-				}),
-				size: new StringField({label: "BF.Size.Label"}),
-				type: new SchemaField({
-					value: new StringField(),
-					tags: new ArrayField(new StringField())
-				}),
-				condition: new SchemaField({
-					immunities: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField())
-					})
-				}),
-				damage: new SchemaField({
-					resistances: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField()),
-						bypasses: new SetField(new StringField())
-					}),
-					immunities: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField()),
-						bypasses: new SetField(new StringField())
-					}),
-					vulnerabilities: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField())
-					})
-				})
-			}, {label: "BF.Trait.Label[other]"})
+			}, {label: "BF.Progression.Label"})
 		});
 	}
 
@@ -218,39 +163,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 			ability.value = ability.base;
 			if ( !ability.base ) this.progression.abilities.assignmentComplete = false;
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseArmorFormulas() {
-		const ac = this.attributes.ac;
-		for ( const baseFormula of ac.baseFormulas ) {
-			const data = CONFIG.BlackFlag.armorFormulas[baseFormula];
-			if ( data ) ac.formulas.push(foundry.utils.mergeObject(data, {
-				id: baseFormula
-			}, {inplace: false}));
-		}
-		ac.cover = 0;
-		Object.defineProperty(ac, "label", {
-			get() {
-				const label = [];
-				if ( this.currentFormula?.id === "armored" ) label.push(this.equippedArmor.name);
-				else if ( this.currentFormula?.label ) label.push(game.i18n.localize(this.currentFormula.label));
-				if ( this.equippedShield ) label.push(this.equippedShield.name);
-				return game.i18n.getListFormatter({ style: "short", type: "unit" }).format(label);
-			},
-			configurable: true
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseModifiers() {
-		this.modifiers.forEach(modifier => Object.defineProperty(modifier, "source", {
-			value: "manual",
-			enumerable: true,
-			writable: false
-		}));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -392,61 +304,7 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedArmorClass() {
-		const ac = this.attributes.ac;
-
-		// If armor is equipped, prepare clamped abilities
-		ac.clamped = Object.entries(this.abilities).reduce((obj, [k, v]) => {
-			obj[k] = Math.clamped(
-				v.mod,
-				ac.equippedArmor?.system.modifier.min ?? -Infinity,
-				ac.equippedArmor?.system.modifier.max ?? Infinity
-			);
-			return obj;
-		}, {});
-
-		ac.armor = ac.equippedArmor?.system.armor.value ?? 0;
-		ac.flat ??= 10;
-
-		const rollData = this.parent.getRollData({deterministic: true});
-		rollData.attributes.ac = ac;
-		const acData = { type: "armor-class", armored: !!ac.equippedArmor, shielded: !!ac.equippedShield };
-
-		// Filter formulas to only ones that match current armor settings
-		const validFormulas = ac.formulas.filter(formula => {
-			if ( (formula.armored !== null) && (formula.armored !== !!acData.armored) ) return false;
-			if ( (formula.shielded !== null) && (formula.shielded !== !!acData.shielded) ) return false;
-			return true;
-		});
-
-		// Iterate of all armor class formulas, calculating their final values
-		ac.base = -Infinity;
-		for ( const [index, config] of validFormulas.entries() ) {
-			try {
-				const replaced = Roll.replaceFormulaData(config.formula, rollData);
-				const result = Roll.safeEval(replaced);
-				if ( result > ac.base ) {
-					ac.base = result;
-					ac.currentFormula = config;
-				}
-			} catch(error) {
-				this.parent.notifications.set(`ac-formula-error-${index}`, {
-					level: "error", category: "armor-class", section: "main",
-					message: game.i18n.format("BF.ArmorClass.Formula.Error", {formula: config.formula, error: error.message})
-				});
-			}
-		}
-		if ( !Number.isFinite(ac.base) ) {
-			ac.base = ac.flat;
-			ac.currentFormula = null;
-		}
-
-		ac.shield = ac.equippedShield?.system.armor.value ?? 0;
-
-		ac.modifiers = this.getModifiers(acData);
-		ac.bonus = this.buildBonus(ac.modifiers, { deterministic: true, rollData });
-
-		if ( ac.override ) ac.value = ac.override;
-		else ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+		this.computeArmorClass();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -498,47 +356,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		});
 
 		init.mod = (ability?.mod ?? 0) + init.proficiency.flat + init.bonus;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedModifiers() {
-		this.modifiers.forEach((modifier, index) => Object.defineProperty(modifier, "index", {
-			value: index,
-			enumerable: false,
-			writable: false
-		}));
-		// TODO: Attribute each non-manual modifier to a source (e.g. effect or advancement)
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedMovement() {
-		const movement = this.traits.movement;
-		const rollData = this.parent.getRollData({ deterministic: true });
-		rollData.base = movement.base;
-
-		// Calculate each special movement type using base speed
-		for ( const [type, formula] of Object.entries(movement.types) ) {
-			const speed = simplifyBonus(formula, rollData);
-			movement.types[type] = speed;
-		}
-
-		// Prepare movement label to display on sheet
-		const numberFormatter = new Intl.NumberFormat(game.i18n.lang, { style: "unit", unit: "foot" });
-		const labels = Object.entries(movement.types)
-			.filter(([type, speed]) => speed > 0)
-			.sort((lhs, rhs) => rhs[1] - lhs[1])
-			.map(([type, speed]) => {
-				const config = CONFIG.BlackFlag.movementTypes[type];
-				const label = config ? game.i18n.localize(config.label) : type;
-				return `${label} ${numberFormatter.format(speed)}`;
-			});
-		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-		movement.labels ??= {
-			primary: labels.shift(),
-			secondary: listFormatter.format(labels)
-		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -739,39 +556,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Build a bonus formula or value from the provided modifiers.
-	 * @param {object[]} modifiers - Modifiers from which to build the bonus.
-	 * @param {object} [options={}]
-	 * @param {boolean} [options.deterministic=false] - Should only deterministic modifiers be included?
-	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
-	 * @returns {string|number}
-	 */
-	buildBonus(modifiers, { deterministic=false, rollData={} }={}) {
-		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
-		return modifiers.filter(m => m.formula).map(m => m.formula).join(" + ");
-		// TODO: Should formula data be replaced?
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Build a minimum roll value from the provided modifiers.
-	 * @param {object[]} modifiers - Modifiers from which to build the minimum.
-	 * @param {object} [options={}]
-	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
-	 * @returns {number|null}
-	 */
-	buildMinimum(modifiers, { rollData={} }={}) {
-		const minimum = modifiers.reduce((min, mod) => {
-			const value = simplifyBonus(mod.formula, rollData);
-			return value > min ? value : min;
-		}, -Infinity);
-		return Number.isFinite(minimum) ? minimum : null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Set a condition to a level or remove it by setting level to 0.
 	 * @param {string} condition - Identifier for the condition to modify.
 	 * @param {number} [level] - New level to set, or nothing to remove the condition.
@@ -854,62 +638,6 @@ export default class PCData extends ActorDataModel.mixin(SpellcastingTemplate) {
 		}
 
 		return this.parent.update({"system.attributes.luck.value": newValue});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Modifiers              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Add a new modifier.
-	 * @param {object} data
-	 */
-	async addModifier(data) {
-		const modifierCollection = this.toObject().modifiers;
-		modifierCollection.push(data);
-		await this.parent.update({"system.modifiers": modifierCollection});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Delete a modifier.
-	 * @param {number} index
-	 */
-	async deleteModifier(index) {
-		const modifierCollection = this.toObject().modifiers;
-		modifierCollection.splice(index, 1);
-		await this.parent.update({"system.modifiers": modifierCollection});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Get a list of modifiers that match the provided data.
-	 * @param {object|object[]} data - Description of modifiers to find.
-	 * @param {string} [type="bonus"] - Modifier type to find.
-	 * @returns {object[]}
-	 */
-	getModifiers(data, type="bonus") {
-		if ( foundry.utils.getType(data) !== "Array" ) data = [data];
-		return this.modifiers.filter(modifier => {
-			if ( modifier.type !== type ) return false;
-			return data.some(d => filter.performCheck(d, modifier.filter));
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Update a modifier.
-	 * @param {number} index
-	 * @param {object} updates
-	 * @param {DocumentModificationContext} options
-	 */
-	async updateModifier(index, updates, options) {
-		const modifierCollection = this.toObject().modifiers;
-		foundry.utils.mergeObject(modifierCollection[index], updates);
-		await this.parent.update({"system.modifiers": modifierCollection}, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
