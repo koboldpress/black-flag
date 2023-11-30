@@ -4,7 +4,8 @@
 			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
 				form="{{appID}}-main-form" {{disabled (not modes.editing)}}>
 		</h1>
-		<label>
+		<label data-tooltip="{{localize 'BF.ExperiencePoints.LabelSpecific' value=system.xpValue}}"
+			data-tooltip-direction="RIGHT">
 			<span>{{localize "BF.ChallengeRating.Abbreviation"}}</span>
 			<input type="text" name="system.attributes.cr" value="{{system.attributes.cr}}" {{disabled (not modes.editing)}}>
 		</label>

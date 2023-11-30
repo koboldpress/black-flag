@@ -78,6 +78,20 @@ export default class NPCData extends ActorDataModel.mixin(ACTemplate, ModifiersT
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * XP value for this NPC based on its CR.
+	 * @type {number}
+	 */
+	get xpValue() {
+		const index = this.attributes.cr >= 1 ? this.attributes.cr + 3
+			: { 0: 0, 0.125: 1, 0.25: 2, 0.5: 3 }[this.attributes.cr];
+		return CONFIG.BlackFlag.xpForCR[index] ?? 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
