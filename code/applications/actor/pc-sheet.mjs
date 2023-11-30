@@ -104,28 +104,23 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
-		if ( size || this.modes.editing ) {
-			context.traits.push({
-				key: "size",
-				classes: "single",
-				label: "BF.Size.Label",
-				value: size ? game.i18n.localize(size.label) : none
-			});
-		}
+		if ( size || this.modes.editing ) context.traits.push({
+			key: "size",
+			classes: "single",
+			label: "BF.Size.Label",
+			value: size ? game.i18n.localize(size.label) : none,
+			config: "type"
+		});
 
 		// Creature Type
-		// const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
-		// if ( type || this.modes.editing ) {
-		// 	const tagFormatter = game.i18n.getListFormatter({ type: "unit" });
-		// 	context.traits.push({
-		// 		key: "type",
-		// 		classes: "single",
-		// 		label: "BF.CreatureType.Label",
-		// 		value: type ? `${game.i18n.localize(type.label)}${traits.type.tags.size ? ` (${
-		// 			tagFormatter.format(traits.type.tags)
-		// 		})` : ""}` : none
-		// 	});
-		// }
+		const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
+		if ( type || this.modes.editing ) context.traits.push({
+			key: "type",
+			classes: "single",
+			label: "BF.CreatureType.Type.Label",
+			value: traits.type.label,
+			config: "type"
+		});
 
 		// Languages
 		// TODO: Add language tags

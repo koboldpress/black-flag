@@ -2,10 +2,10 @@ import PCSheet from "../../applications/actor/pc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { getPluralRules, simplifyBonus, Trait } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
-import {
-	AdvancementValueField, FormulaField, LocalDocumentField, MappingField,
-	ProficiencyField, RollField, TimeField
-} from "../fields/_module.mjs";
+import CreatureTypeField from "../fields/creature-type-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
+import ProficiencyField from "../fields/proficiency-field.mjs";
+import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, TimeField } from "../fields/_module.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
@@ -147,7 +147,10 @@ export default class PCData extends ActorDataModel.mixin(
 						source: new StringField()
 					}))
 				}, {label: "BF.ExperiencePoints.Label"})
-			}, {label: "BF.Progression.Label"})
+			}, {label: "BF.Progression.Label"}),
+			traits: new SchemaField({
+				type: new CreatureTypeField({swarm: false})
+			})
 		});
 	}
 

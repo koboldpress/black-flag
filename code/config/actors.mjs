@@ -1,4 +1,57 @@
 import { LongRestDialog, ShortRestDialog } from "../applications/actor/_module.mjs";
+import { localizeConfig } from "../utils/_module.mjs";
+
+/**
+ * Possible creature types.
+ * @enum {LabeledConfiguration}
+ */
+export const creatureTypes = {
+	aberration: {
+		localization: "BF.CreatureType.Type.Aberration.Label"
+	},
+	beast: {
+		localization: "BF.CreatureType.Type.Beast.Label"
+	},
+	celestial: {
+		localization: "BF.CreatureType.Type.Celestial.Label"
+	},
+	construct: {
+		localization: "BF.CreatureType.Type.Construct.Label"
+	},
+	dragon: {
+		localization: "BF.CreatureType.Type.Dragon.Label"
+	},
+	elemental: {
+		localization: "BF.CreatureType.Type.Elemental.Label"
+	},
+	fey: {
+		localization: "BF.CreatureType.Type.Fey.Label"
+	},
+	fiend: {
+		localization: "BF.CreatureType.Type.Fiend.Label"
+	},
+	giant: {
+		localization: "BF.CreatureType.Type.Giant.Label"
+	},
+	humanoid: {
+		localization: "BF.CreatureType.Type.Humanoid.Label"
+	},
+	monstrosity: {
+		localization: "BF.CreatureType.Type.Monstrosity.Label"
+	},
+	ooze: {
+		localization: "BF.CreatureType.Type.Ooze.Label"
+	},
+	plant: {
+		localization: "BF.CreatureType.Type.Plant.Label"
+	},
+	undead: {
+		localization: "BF.CreatureType.Type.Undead.Label"
+	}
+};
+localizeConfig(creatureTypes);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration information for death saves.

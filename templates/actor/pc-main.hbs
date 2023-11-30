@@ -209,7 +209,7 @@
 		<legend>{{localize "BF.Luck.Label"}}</legend>
 		<ol class="luck-points">
 			{{#each luckPoints}}
-				<li class="luck-point{{#if this.selected}} selected{{/if}}"></li>
+				<li class="luck-point{{#if selected}} selected{{/if}}"></li>
 			{{/each}}
 		</ol>
 		<a data-action="luck" data-sub-action="add">
@@ -219,9 +219,16 @@
 	<fieldset class="traits">
 		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
 		{{#each traits}}
-			<div class="trait block {{this.key}} {{this.classes}}">
-				<label><span>{{localize this.label}}</span></label>
-				<span>{{this.value}}</span>
+			<div class="trait block {{key}} {{classes}}">
+				<label>
+					<span>{{localize label}}</span>
+					{{#if (and @root.modes.editing config)}}
+						<a data-action="config" data-type="{{config}}">
+							<i class="fa-solid fa-cog"></i>
+						</a>
+					{{/if}}
+				</label>
+				<span>{{value}}</span>
 			</div>
 		{{/each}}
 	</fieldset>

@@ -1,27 +1,22 @@
 <section>
 	<div class="type">
 		{{#if modes.editing}}
-			<select name="system.traits.size">
-				{{selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true}}
-			</select>
-			<select name="system.traits.type.value">
-				
-			</select>
-			(<input type="text">)
-		{{else}}
-			size type (tags)
+			<a data-action="config" data-type="type">
+				<i class="fa-solid fa-cog"></i>
+			</a>
 		{{/if}}
+		<span>{{labels.sizeAndType}}</span>
 	</div>
 
 	<div class="stats">
 		<label>
 			<span>
-				{{localize "BF.ArmorClass.Label"}}
 				{{#if modes.editing}}
 					<a data-action="config" data-type="armor-class">
 						<i class="fa-solid fa-cog"></i>
 					</a>
 				{{/if}}
+				{{localize "BF.ArmorClass.Label"}}
 				{{blackFlag-notificationBadge actor category="armor-class"}}
 			</span>
 			<span>

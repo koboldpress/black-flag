@@ -1,0 +1,32 @@
+<form autocomplete="off">
+	<fieldset>
+		<legend>{{localize "BF.CreatureSizeAndType.Label"}}</legend>
+		<label>
+			<span>{{localize "BF.Size.Label"}}</span>
+			<select name="system.traits.size">
+				{{selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true blank=""}}
+			</select>
+		</label>
+		{{#if showSwarm}}
+			<label>
+				<span>
+					{{localize "BF.CreatureType.Swarm.Label"}}
+					<i class="hintIcon" data-tooltip="BF.CreatureType.Swarm.Hint"></i>
+				</span>
+				<select name="system.traits.type.swarm">
+					{{selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank=""}}
+				</select>
+			</label>
+		{{/if}}
+		<label>
+			<span>{{localize "BF.CreatureType.Label"}}</span>
+			<select name="system.traits.type.value">
+				{{selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank=""}}
+			</select>
+		</label>
+		<label>
+			<span>{{localize "BF.CreatureType.Tag.Label"}}</span>
+			<input type="text" placeholder="TODO">
+		</label>
+	</fieldset>
+</form>

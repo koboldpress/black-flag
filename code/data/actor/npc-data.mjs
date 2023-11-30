@@ -1,7 +1,9 @@
 import NPCSheet from "../../applications/actor/npc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
-import { MappingField, ProficiencyField } from "../fields/_module.mjs";
+import CreatureTypeField from "../fields/creature-type-field.mjs";
+import MappingField from "../fields/mapping-field.mjs";
+import ProficiencyField from "../fields/proficiency-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -68,6 +70,9 @@ export default class NPCData extends ActorDataModel.mixin(ACTemplate, ModifiersT
 				tools: new MappingField(new SchemaField({
 					proficiency: new ProficiencyField({rounding: false})
 				}), {label: "BF.Tool.Label[other]"})
+			}),
+			traits: new SchemaField({
+				type: new CreatureTypeField()
 			})
 		});
 	}

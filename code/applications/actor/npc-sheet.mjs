@@ -22,6 +22,12 @@ export default class NPCSheet extends BaseActorSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
+
+		context.labels = {
+			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
+				context.system.traits.type.label}`
+		};
+
 		return context;
 	}
 
@@ -33,56 +39,22 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async prepareTraits(context) {
-		context.traits = [];
-		const { traits, proficiencies } = context.system;
-		const none = game.i18n.localize("None");
-
-		// Senses
-
-		// Size
-		const size = CONFIG.BlackFlag.sizes[traits.size];
-		if ( size || this.modes.editing ) {
-			context.traits.push({
-				key: "size",
-				classes: "single",
-				label: "BF.Size.Label",
-				value: size ? game.i18n.localize(size.label) : none
-			});
-		}
-
-		// Creature Type
-		// const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
-		// if ( type || this.modes.editing ) {
-		// 	const tagFormatter = game.i18n.getListFormatter({ type: "unit" });
-		// 	context.traits.push({
-		// 		key: "type",
-		// 		classes: "single",
-		// 		label: "BF.CreatureType.Label",
-		// 		value: type ? `${game.i18n.localize(type.label)}${traits.type.tags.size ? ` (${
-		// 			tagFormatter.format(traits.type.tags)
-		// 		})` : ""}` : none
-		// 	});
-		// }
-
-		// Languages
-		// TODO: Add language tags
-		context.traits.push({
-			key: "languages",
-			label: "BF.Language.Label[other]",
-			value: Trait.localizedList(proficiencies.languages.value, [], { style: "short", trait: "languages" }) || none
-		});
-
-		// TODO: Resistances, Immunities, & Vulnerabilities
+	/**
+	 * Remove the title from the app's header bar.
+	 * @param {HTMLElement} element - Element of the app's window.
+	 * @protected
+	 */
+	_removeTitle(element) {
+		const title = element.querySelector(".window-header .window-title");
+		const uuid = title.querySelector("a");
+		title.innerHTML = `<span></span>${uuid?.outerHTML ?? ""}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _renderOuter() {
 		const jQuery = await super._renderOuter();
-		const title = jQuery[0].querySelector(".window-header .window-title");
-		const uuid = title.querySelector("a");
-		title.innerHTML = `<span></span>${uuid?.outerHTML ?? ""}`;
+		this._removeTitle(jQuery[0]);
 		return jQuery;
 	}
 
@@ -90,8 +62,6 @@ export default class NPCSheet extends BaseActorSheet {
 
 	_replaceHTML(element, html) {
 		super._replaceHTML(element, html);
-		const title = element[0].querySelector(".window-header .window-title");
-		const uuid = title.querySelector("a");
-		title.innerHTML = `<span></span>${uuid?.outerHTML ?? ""}`;
+		this._removeTitle(element[0]);
 	}
 }

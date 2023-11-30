@@ -6,6 +6,7 @@ import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
 import SkillConfig from "./config/skill-config.mjs";
+import TypeConfig from "./config/type-config.mjs";
 
 /**
  * Sheet class containing implementation shared across all actor types.
@@ -300,6 +301,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "armor-class": return new ArmorClassConfig(this.actor).render(true);
 					case "initiative": return new InitiativeConfig(this.actor).render(true);
 					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
+					case "type": return new TypeConfig(this.actor).render(true);
 				}
 				break;
 			case "effect":
