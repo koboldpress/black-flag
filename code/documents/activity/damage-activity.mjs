@@ -49,13 +49,13 @@ export default class DamageActivity extends Activity {
 		 * A hook event that fires before a damage is rolled.
 		 * @function blackFlag.preRollDamage
 		 * @memberof hookEvents
-		 * @param {Activity} activity - Activity performing the roll.
 		 * @param {DamageRollConfiguration} config - Configuration data for the pending roll.
 		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRollDamage", this, rollConfigs, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollDamage", rollConfigs, messageConfig, dialogConfig, this) === false ) return;
 
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfigs, messageConfig, dialogConfig);
 		if ( !rolls ) return;
@@ -64,10 +64,10 @@ export default class DamageActivity extends Activity {
 		 * A hook event that fires after a damage has been rolled.
 		 * @function blackFlag.postRollDamage
 		 * @memberof hookEvents
-		 * @param {Activity} activity - Activity for which the roll was performed.
 		 * @param {DamageRoll[]} rolls - The resulting rolls.
+		 * @param {Activity} [activity] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollDamage", this, rolls);
+		Hooks.callAll("blackFlag.postRollDamage", rolls, this);
 
 		return rolls;
 	}
