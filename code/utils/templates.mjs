@@ -153,6 +153,7 @@ export async function registerHandlebarsPartials() {
 		"activities/activity-damage-parts.hbs",
 		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",
+		"actor/npc-main.hbs",
 		"actor/pc-actions.hbs",
 		"actor/pc-biography.hbs",
 		"actor/pc-features.hbs",

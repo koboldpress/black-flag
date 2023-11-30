@@ -1,0 +1,126 @@
+<section>
+	<div class="type">
+		{{#if modes.editing}}
+			<select name="system.traits.size">
+				{{selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true}}
+			</select>
+			<select name="system.traits.type.value">
+				
+			</select>
+			(<input type="text">)
+		{{else}}
+			size type (tags)
+		{{/if}}
+	</div>
+
+	<div class="stats">
+		<label>
+			<span>
+				{{localize "BF.ArmorClass.Label"}}
+				{{#if modes.editing}}
+					<a data-action="config" data-type="armor-class">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
+				{{blackFlag-notificationBadge actor category="armor-class"}}
+			</span>
+			<span>
+				{{system.attributes.ac.value}}
+				{{#with system.attributes.ac.label}}
+					<span class="ac-label">({{this}})</span>
+				{{/with}}
+			</span>
+		</label>
+		<label>
+			<span>{{localize "BF.HitPoint.Label[other]"}}</span>
+			{{#if modes.editing}}
+				<span>{{system.attributes.hp.value}}</span>
+				/
+				<input type="number" name="system.attributes.hp.max" value="{{source.attributes.hp.max}}" step="1" min="0">
+			{{else}}
+				<input type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" step="1" min="0">
+				/
+				<span>{{system.attributes.hp.max}}</span>
+			{{/if}}
+		</label>
+		<label>
+			<span>
+				{{localize "BF.Speed.Label"}}
+			</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.traits.movement.base" value="{{source.traits.movement.base}}">
+				<!-- TODO: Units -->
+			{{else}}
+				<span>xx ft.</span>
+			{{/if}}
+		</label>
+		<label>
+			<span>
+				{{localize "BF.Skill.Perception.Label"}}
+			</span>
+		</label>
+		<label>
+			<span>
+				{{localize "BF.Skill.Stealth.Label"}}
+			</span>
+		</label>
+		<label>
+			<span>immune</span>
+		</label>
+		<label>
+			<span>resistant</span>
+		</label>
+		<label>
+			<span>
+				{{localize "BF.Senses.Label"}}
+			</span>
+		</label>
+		<label>
+			<span>
+				{{localize "BF.Language.Label[other]"}}
+			</span>
+		</label>
+	</div>
+	<!-- TODO: Initiative, proficiency mod -->
+	
+	<div class="abilities">
+		{{#each system.abilities}}
+			<div data-ability="{{@key}}">
+				<label for="{{@root.appID}}-ability-{{@key}}">
+					{{lookup @root.CONFIG.abilities.localizedAbbreviations @key}}</span>
+				</label>
+				{{#if @root.modes.editing}}
+					<input id="{{@root.appID}}-ability-{{@key}}" type="number" name="system.abilities.{{@key}}.mod"
+						value="{{_source.mod}}" step="1">
+				{{else}}
+					<span id="{{@root.appID}}-ability-{{@key}}">{{blackFlag-number mod sign=true}}</span>
+				{{/if}}
+			</div>
+		{{/each}}
+	</div>
+
+	<div class="features passive">
+		passive features
+	</div>
+
+	<div class="features action">
+		<h2>{{localize "BF.Activation.Type.Action[other]"}}</h2>
+		features
+	</div>
+	
+	<div class="features bonus">
+		<h2>{{localize "BF.Activation.Type.BonusAction[other]"}}</h2>
+		features
+	</div>
+	
+	<div class="features reaction">
+		<h2>{{localize "BF.Activation.Type.Reaction[other]"}}</h2>
+		features
+	</div>
+	
+	<div class="features legendary">
+		<h2>{{localize "BF.Activation.Type.Legendary[other]"}}</h2>
+		<p>{{localize "BF.LegendaryAction.Description" type="???" count="?"}}</p>
+		features
+	</div>
+</section>

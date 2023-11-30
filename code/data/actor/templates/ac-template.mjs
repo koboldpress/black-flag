@@ -1,4 +1,3 @@
-import { numberFormat, simplifyBonus } from "../../../utils/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;

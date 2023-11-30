@@ -1,0 +1,55 @@
+<form class="sheet-container" id="{{appID}}-main-form">
+	<header class="sheet-head">
+		<h1>
+			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
+				form="{{appID}}-main-form" {{disabled (not modes.editing)}}>
+		</h1>
+		<label>
+			<span>{{localize "BF.ChallengeRating.Abbreviation"}}</span>
+			<input type="text" name="system.attributes.cr" value="{{system.attributes.cr}}" {{disabled (not modes.editing)}}>
+		</label>
+	</header>
+
+	<nav class="sheet-navigation tabs" data-group="primary">
+		<a data-tab="main">
+			{{localize "BF.Sheet.Tab.Main"}}
+			{{blackFlag-notificationBadge actor section="main"}}
+		</a>
+		<a data-tab="spellcasting">
+			{{localize "BF.Sheet.Tab.Spellcasting"}}
+			{{blackFlag-notificationBadge actor section="spellcasting"}}
+		</a>
+		<a data-tab="features">
+			{{localize "BF.Sheet.Tab.Features"}}
+			{{blackFlag-notificationBadge actor section="features"}}
+		</a>
+		<a data-tab="biography">
+			{{localize "BF.Sheet.Tab.Biography"}}
+			{{blackFlag-notificationBadge actor section="biography"}}
+		</a>
+		<a data-tab="effects">
+			{{localize "BF.Sheet.Tab.Effects"}}
+			{{blackFlag-notificationBadge actor section="effects"}}
+		</a>
+	</nav>
+
+	<main>
+		<div class="tab" data-group="primary" data-tab="main">
+			{{> "blackFlag.npc-main"}}
+		</div>
+		<div class="tab" data-group="primary" data-tab="spellcasting">
+			nope
+		</div>
+		<div class="tab" data-group="primary" data-tab="features">
+			not yet
+		</div>
+		<div class="tab" data-group="primary" data-tab="biography">
+			<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
+			some day
+		</div>
+		<div class="tab" data-group="primary" data-tab="effects">
+			{{> "blackFlag.conditions"}}
+			{{> "blackFlag.active-effects"}}
+		</div>
+	</main>
+</div>

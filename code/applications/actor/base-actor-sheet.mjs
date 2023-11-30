@@ -32,7 +32,7 @@ export default class BaseActorSheet extends ActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
@@ -157,7 +157,7 @@ export default class BaseActorSheet extends ActorSheet {
 	_buildSections() {
 		const sections = {};
 
-		for ( const config of CONFIG.BlackFlag.sheetSections[this.actor.type] ?? {} ) {
+		for ( const config of CONFIG.BlackFlag.sheetSections[this.actor.type] ?? [] ) {
 			const tab = sections[config.tab] ??= {};
 			const toAdd = config.expand ? config.expand(this.actor, config) : [config];
 			toAdd.forEach(c => tab[c.id] = { ...c, items: [] });
@@ -210,6 +210,27 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async _renderOuter() {
+		const jQuery = await super._renderOuter();
+
+		// Adjust header button HTML to allow for more precise styling
+		for ( const button of jQuery[0].querySelectorAll(".header-button") ) {
+			let content = "";
+			for ( const node of button.childNodes ) {
+				if ( node instanceof Text ) {
+					if ( !node.textContent.trim().replaceAll("\n", "") ) content += node.textContent;
+					else content += `<span>${node.textContent}</span>`;
+				}
+				else content += node.outerHTML;
+			}
+			button.innerHTML = content;
+		}
+
+		return jQuery;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	_getHeaderButtons() {
 		let buttons = super._getHeaderButtons();
 		if ( this.options.editable && (game.user.isGM || this.actor.isOwner) ) {
@@ -222,7 +243,7 @@ export default class BaseActorSheet extends ActorSheet {
 				icon: getIcon(),
 				onclick: ev => {
 					this.modes.editing = !this.modes.editing;
-					ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> ${game.i18n.localize(getLabel())}`;
+					ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> <span>${game.i18n.localize(getLabel())}</span>`;
 					this.render();
 				}
 			});
