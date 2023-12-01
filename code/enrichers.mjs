@@ -1,4 +1,4 @@
-import { log } from "./utils/_module.mjs";
+import { log, simplifyBonus } from "./utils/_module.mjs";
 
 /**
  * Set up system-specific enrichers.
@@ -26,6 +26,10 @@ async function enrichString(match, options) {
 	config = parseConfig(config);
 	config.input = match[0];
 	switch ( type.toLowerCase() ) {
+		case "check":
+		case "skill":
+		case "tool": return enrichCheck(config, label, options);
+		case "save": return enrichSave(config, label, options);
 		case "damage": return enrichDamage(config, label, options);
 	}
 	return null;
@@ -54,6 +58,22 @@ function parseConfig(match) {
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                    Element Creation                   */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create a passive skill tag.
+ * @param {string} label - Label to display.
+ * @param {object} dataset - Data that will be added to the tag.
+ * @returns {HTMLElement}
+ */
+function createPassiveTag(label, dataset) {
+	const span = document.createElement("span");
+	span.classList.add("passive-check");
+	_addDataset(span, dataset);
+	span.innerText = label;
+	return span;
+}
+
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
@@ -102,9 +122,211 @@ function handleRollAction(event) {
 	const speaker = ChatMessage.implementation.getSpeaker();
 
 	switch ( action ) {
-		case "damage":
-			return rollDamage(event, speaker);
+		case "check":
+		case "save":
+		case "skill":
+		case "tool": return rollCheckSave(event, speaker);
+		case "damage": return rollDamage(event, speaker);
 	}
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                 Check & Save Enrichers                */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+
+/**
+ * Enrich an ability check link to perform a specific ability or skill check. If an ability is provided
+ * along with a skill, then the skill check will always use the provided ability. Otherwise it will use
+ * the character's default ability for that skill.
+ * @param {string[]} config - Configuration data.
+ * @param {string} [label] - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link if the check could be built, otherwise null.
+ *
+ * @example Create a dexterity check:
+ * ```[[/check ability=dex]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="check" data-ability="dex">
+ *   <i class="fa-solid fa-dice-d20"></i> Dexterity check
+ * </a>
+ * ```
+ *
+ * @example Create an acrobatics check with a DC and default ability:
+ * ```[[/check skill=acrobatics dc=20]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="check" data-ability="dexterity" data-skill="acrobatics" data-dc="20">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity (Acrobatics) check
+ * </a>
+ * ```
+ *
+ * @example Create an acrobatics check using strength:
+ * ```[[/check ability=strength skill=acrobatics]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="check" data-ability="strength" data-skill="acrobatics">
+ *   <i class="fa-solid fa-dice-d20"></i> Strength (Acrobatics) check
+ * </a>
+ * ```
+ *
+ * @example Create a tool check:
+ * ```[[/check tool=thievesTools ability=intelligence]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="check" data-ability="intelligence" data-tool="thievesTools">
+ *   <i class="fa-solid fa-dice-d20"></i> Intelligence (Thieves' Tools) check
+ * </a>
+ * ```
+ *
+ * @example Formulas used for DCs will be resolved using data provided to the description (not the roller):
+ * ```[[/check ability=charisma dc=@abilities.int.dc]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="check" data-ability="charisma" data-dc="15">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 15 Charisma check
+ * </a>
+ * ```
+ */
+async function enrichCheck(config, label, options) {
+	for ( const value of config.values ) {
+		if ( value in CONFIG.BlackFlag.enrichment.lookup.abilities ) config.ability = value;
+		else if ( value in CONFIG.BlackFlag.enrichment.lookup.skills ) config.skill = value;
+		else if ( value in CONFIG.BlackFlag.enrichment.lookup.tools ) config.tool = value;
+		else if ( Number.isNumeric(value) ) config.dc = Number(value);
+		else config[value] = true;
+	}
+
+	let invalid = false;
+
+	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill];
+	if ( config.skill && !skillConfig ) {
+		log(`Skill ${config.skill} not found while enriching ${config.input}.`, { level: "warn" });
+		invalid = true;
+	} else if ( config.skill && !config.ability ) {
+		config.ability = skillConfig.ability;
+	}
+
+	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool];
+	if ( config.tool && !toolConfig ) {
+		log(`Tool ${config.tool} not found while enriching ${config.input}.`, { level: "warn" });
+		invalid = true;
+	}
+
+	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
+	if ( config.ability && !abilityConfig ) {
+		log(`Ability ${config.ability} not found while enriching ${config.input}.`, { level: "warn" });
+		invalid = true;
+	} else if ( !abilityConfig ) {
+		log(`No ability provided while enriching check ${config.input}.`, { level: "warn" });
+		invalid = true;
+	}
+
+	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+
+	if ( invalid ) return null;
+
+	if ( !label ) {
+		const ability = abilityConfig?.label;
+		const skill = skillConfig?.label;
+		const tool = toolConfig?.label;
+		if ( ability && (skill || tool) ) {
+			label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
+		} else {
+			label = ability;
+		}
+		const longSuffix = config.format === "long" ? "Long" : "Short";
+		if ( config.passive ) {
+			label = game.i18n.format(`BF.Enricher.DC.Passive.${longSuffix}`, { dc: config.dc, check: label });
+		} else {
+			if ( config.dc ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+			label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
+		}
+	}
+
+	if ( config.passive ) return createPassiveTag(label, config);
+	const rollAction = config.skill ? "skill" : config.tool ? "tool" : "ability-check";
+	return createRollLink(label, { rollAction, ...config });
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich a saving throw link.
+ * @param {string[]} config - Configuration data.
+ * @param {string} [label] - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
+ *
+ * @example Create a dexterity saving throw:
+ * ```[[/save ability=dexterity]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="save" data-key="dexterity">
+ *   <i class="fa-solid fa-dice-d20"></i> Dexterity
+ * </a>
+ * ```
+ *
+ * @example Add a DC to the save:
+ * ```[[/save ability=dexterity dc=20]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="save" data-key="dexterity" data-dc="20">
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
+ * </a>
+ * ```
+ */
+async function enrichSave(config, label, options) {
+	for ( const value of config.values ) {
+		if ( value in CONFIG.BlackFlag.enrichment.lookup.abilities ) config.ability = value;
+		else if ( Number.isNumeric(value) ) config.dc = Number(value);
+		else config[value] = true;
+	}
+
+	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
+	if ( !abilityConfig ) {
+		log(`Ability ${config.ability} not found while enriching ${config.input}.`, { level: "warn" });
+		return null;
+	}
+
+	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+
+	if ( !label ) {
+		label = abilityConfig.label;
+		if ( config.dc ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+		label = game.i18n.format(`BF.Enricher.DC.Save.${config.format === "long" ? "Long" : "Short"}`, {
+			save: label
+		});
+	}
+
+	return createRollLink(label, { rollAction: "ability-save", ...config });
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Perform a check or save roll.
+ * @param {Event} event - The click event triggering the action.
+ * @param {TokenDocument} speaker - Currently selected token.
+ * @returns {Promise|void}
+ */
+function rollCheckSave(event, speaker) {
+	// Fetch the actor that should perform the roll
+	let actor;
+	if ( speaker.token ) actor = game.actors.tokens[speaker.token];
+	actor ??= game.actors.get(speaker.actor);
+	if ( !actor ) {
+		ui.notifications.warn(game.i18n.localize("BF.Enricher.Warning.NoActor"));
+		return;
+	}
+
+	const target = event.target.closest("[data-roll-action]");
+	const { rollAction, dc, ...data } = target.dataset;
+	const rollConfig = { event, ...data };
+	if ( dc ) rollConfig.options = { target: dc };
+
+	return actor.roll(rollAction, rollConfig);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -122,7 +344,7 @@ function handleRollAction(event) {
  * ```[[/damage 2d6 type=bludgeoning]]``
  * becomes
  * ```html
- * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
+ * <a class="roll-action" data-roll-action="damage" data-formula="2d6" data-type="bludgeoning">
  *   <i class="fa-solid fa-dice-d20"></i> 2d6
  * </a> bludgeoning
  * ````
@@ -131,7 +353,7 @@ function handleRollAction(event) {
  * ```[[/damage 2d6 type=bludgeoning average=true]]``
  * becomes
  * ```html
- * 7 (<a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
+ * 7 (<a class="roll-action" data-roll-action="damage" data-formula="2d6" data-type="bludgeoning">
  *   <i class="fa-solid fa-dice-d20"></i> 2d6
  * </a>) bludgeoning
  * ````
@@ -140,7 +362,7 @@ function handleRollAction(event) {
  * ```[[/damage 8d4dl force average=666]]``
  * becomes
  * ```html
- * 666 (<a class="roll-action" data-type="damage" data-formula="8d4dl" data-damage-type="force">
+ * 666 (<a class="roll-action" data-roll-action="damage" data-formula="8d4dl" data-type="force">
  *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
  * </a> force
  * ````

@@ -1,5 +1,5 @@
 import SkillConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, log, numberFormat } from "../utils/_module.mjs";
+import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -515,7 +515,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise}
 	 */
 	async roll(type, config, message, dialog) {
-		switch (type) {
+		switch ( type ) {
 			case "ability-check":
 				return this.rollAbilityCheck(config, message, dialog);
 			case "ability-save":
@@ -1193,8 +1193,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollTool(config={}, message={}, dialog={}) {
-		const tool = this.system.proficiencies.tools[config.tool];
-		if ( !tool ) return;
+		let tool = this.system.proficiencies.tools[config.tool];
+		if ( !tool ) {
+			const toolConfig = Trait.configForKey(config.tool, { trait: "tools" });
+			if ( !toolConfig ) return;
+			tool = {
+				label: toolConfig.label,
+				proficiency: new Proficiency(this.system.attributes.proficiency, 0)
+			};
+		}
 		const rollData = this.getRollData();
 
 		const prepareToolConfig = (baseConfig={}, formData={}) => {
