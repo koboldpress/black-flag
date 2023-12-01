@@ -8,6 +8,9 @@ export function registerCustomEnrichers() {
 	CONFIG.TextEditor.enrichers.push({
 		pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
 		enricher: enrichString
+	}, {
+		pattern: /&(?<type>Embed)\[(?<config>[^\]]+)\](?:{(?<label>[^}]+)})?/gi,
+		enricher: enrichString
 	});
 
 	document.body.addEventListener("click", handleRollAction);
@@ -31,6 +34,7 @@ async function enrichString(match, options) {
 		case "tool": return enrichCheck(config, label, options);
 		case "save": return enrichSave(config, label, options);
 		case "damage": return enrichDamage(config, label, options);
+		case "embed": return enrichEmbed(config, label, options);
 	}
 	return null;
 }
@@ -437,4 +441,119 @@ async function rollDamage(event, speaker) {
 	if ( Hooks.call("blackFlag.preRollDamage", undefined, rollConfigs, messageConfig, dialogConfig) === false ) return;
 	const rolls = await CONFIG.Dice.DamageRoll.build(rollConfigs, messageConfig, dialogConfig);
 	if ( rolls?.length ) Hooks.callAll("blackFlag.postRollDamage", undefined, rolls);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                    Embed Enrichers                    */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+const MAX_EMBED_DEPTH = 5;
+
+/**
+ * Enrich an embedded document.
+ * @param {string[]} config - Configuration data.
+ * @param {string} [label] - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
+ */
+async function enrichEmbed(config, label, options) {
+	options._embedDepth ??= 0;
+	if ( options._embedDepth > MAX_EMBED_DEPTH ) {
+		log(`Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${
+			config.input} cannot be enriched fully.`, { level: "warn" });
+		return null;
+	}
+
+	for ( const value of config.values ) {
+		if ( config.uuid ) break;
+		try {
+			const parsed = foundry.utils.parseUuid(value);
+			if ( parsed.documentId ) config.uuid = value;
+		} catch(err) {}
+	}
+
+	const document = await fromUuid(config.uuid, { relative: options.relativeTo });
+	if ( !document || !(document instanceof JournalEntryPage) ) return null;
+	return enrichEmbedJournalEntryPage(document, config, label, options);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich an embedded document.
+ * @param {JournalEntryPage} page - The page being embedded.
+ * @param {string[]} config - Configuration data.
+ * @param {string} [label] - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
+ *
+ * @example Create an embedded image from the UUID of an Image Journal Entry Page:
+ * ```@Embed[uuid=.QnH8yGIHy4pmFBHR classes="small right"]```
+ * becomes
+ * ```html
+ * <figure class="small right">
+ *   <img src="assets/image.png">
+ *   <figcaption>A caption for the image
+ *     <cite>
+ *       <a class="content-link" draggable="true"
+ *          data-uuid="JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR"
+ *          data-id="QnH8yGIHy4pmFBHR" data-type="JournalEntryPage" data-tooltip="Image Page">
+ *         <i class="fas fa-file-image"></i> Image Page
+ *       </a>
+ *     </cite>
+ *   </figcaption>
+ * </figure>
+ * ```
+ * @example Embed the content of the Journal Entry Page inline with the given UUID:
+ * ```@Embed[uuid=JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR inline]```
+ * becomes
+ * ```html
+ * <section>
+ *   <p>The contents of the page</p>
+ * </section>
+ * ```
+ */
+async function enrichEmbedJournalEntryPage(page, config, label, options) {
+	const showCitation = config.cite !== false;
+	const createCaption = (figure, captionText) => {
+		const caption = document.createElement("figcaption");
+		if ( captionText ) caption.innerHTML += captionText;
+		if ( showCitation ) caption.innerHTML += `<cite>${page.toAnchor().outerHTML}</cite>`;
+		figure.insertAdjacentElement("beforeend", caption);
+	};
+
+	if ( page.type === "image" ) {
+		const showCaption = config.caption !== false;
+
+		const figure = document.createElement("figure");
+		if ( config.classes ) figure.classList = config.classes;
+		figure.innerHTML = `<img src="${page.src}" alt="${config.alt || label || page.name}">`;
+		if ( showCaption || showCitation ) createCaption(figure, showCaption ? (label || page.image.caption) : null);
+
+		return figure;
+	}
+
+	if ( page.type === "text" ) {
+		config.inline ??= config.values.includes("inline");
+		const enriched = await TextEditor.enrichHTML(page.text.content, {
+			...options, _embedDepth: options._embedDepth + 1
+		});
+
+		if ( config.inline ) {
+			const section = document.createElement("section");
+			section.innerHTML = enriched;
+			return section;
+		}
+
+		const figure = document.createElement("figure");
+		figure.innerHTML = enriched;
+		if ( config.classes ) figure.classList = config.classes;
+		if ( label || showCitation ) createCaption(figure, label);
+
+		return figure;
+	}
+
+	else {
+		return null;
+	}
 }
