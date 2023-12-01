@@ -1,4 +1,5 @@
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import { log } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../pseudo-document.mjs";
 
 /**
@@ -169,6 +170,20 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 */
 	configuredForLevel(levels) {
 		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Embed this advancement within enriched HTML.
+	 * @param {string[]} config - Configuration data.
+	 * @param {string} [label] - Optional label to replace default text.
+	 * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+	 * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
+	 */
+	async embed(config, label, options) {
+		log(`Advancement of the type ${this.metadata.type} cannot be embedded for ${config.input}.`, { level: "warn" });
+		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

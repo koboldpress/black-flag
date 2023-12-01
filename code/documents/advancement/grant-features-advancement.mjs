@@ -37,6 +37,30 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async embed(config, label, options) {
+		const list = config.style === "list";
+		const h = list ? "strong" : config.header ?? "h6";
+
+		const features = await Promise.all(this.configuration.pool.map(async f => {
+			const item = await fromUuid(f.uuid);
+			return [item, await TextEditor.enrichHTML(item.system.description.value, {
+				...options, relativeTo: this, _embedDepth: (options._embedDepth ?? 0) + 1, async: true
+			})];
+		}));
+
+		const container = document.createElement(list ? "ul" : "section");
+		container.classList = config.classes ?? "embedded-features";
+		for ( const [item, description] of features ) {
+			const entry = document.createElement(list ? "li" : "div");
+			const header = config.link ? `<a class="content-link" data-uuid="${item.uuid}">${item.name}</a>` : item.name;
+			entry.innerHTML = `<${h}>${header}</${h}>\n${description}`;
+			container.insertAdjacentElement("beforeend", entry);
+		}
+		return container;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	summaryForLevel(levels, { flow=false }={}) {
 		// Link to compendium items
 		if ( !flow || !this.configuredForLevel(this.relavantLevel(levels)) ) return this.configuration.pool.map(item =>

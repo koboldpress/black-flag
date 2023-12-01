@@ -351,11 +351,11 @@ export default class ClassPageSheet extends JournalPageSheet {
 		for ( const advancement of item.system.advancement.byType("grantFeatures") ) {
 			const level = advancement.level.value;
 			prepared.push(...advancement.configuration.pool.map(async d => {
-				const document = features.get(d.uuid);
+				const doc = features.get(d.uuid);
 				return {
-					level, document, name: document.name,
-					description: await TextEditor.enrichHTML(document.system.description.value, {
-						relativeTo: item, secrets: false, async: true
+					level, document, name: doc.name,
+					description: await TextEditor.enrichHTML(doc.system.description.value, {
+						relativeTo: doc, secrets: false, async: true
 					}),
 					tag: makeTag(level)
 				};

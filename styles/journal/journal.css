@@ -39,6 +39,7 @@
 		text-transform: uppercase;
 	}
 	h6 {
+		margin-block: 1em 0;
 		font-size: var(--font-size-16);
 		font-weight: 400;
 	}
@@ -86,6 +87,10 @@
 		}
 	}
 
+	p:empty {
+		display: none;
+	}
+
 	aside {
 		border-block: 3px solid black;
 		padding-block: 0.5em;
@@ -97,6 +102,23 @@
 			font-family: var(--bf-font-header);
 			font-size: var(--font-size-16);
 			text-transform: uppercase;
+		}
+	}
+
+	section.embedded-features {
+		margin-inline-start: 1em;
+	}
+	ul.embedded-features {
+		li {
+			margin-block-end: 0.5em;
+
+			strong:first-child {
+				font-style: italic;
+				&::after { content: "."; }
+			}
+			strong + p {
+				display: inline;
+			}
 		}
 	}
 }

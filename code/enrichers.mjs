@@ -1,3 +1,4 @@
+import Advancement from "./documents/advancement/advancement.mjs";
 import { log, simplifyBonus } from "./utils/_module.mjs";
 
 /**
@@ -465,6 +466,7 @@ async function enrichEmbed(config, label, options) {
 	}
 
 	for ( const value of config.values ) {
+		if ( value === "features" ) config.features = true;
 		if ( config.uuid ) break;
 		try {
 			const parsed = foundry.utils.parseUuid(value);
@@ -472,15 +474,30 @@ async function enrichEmbed(config, label, options) {
 		} catch(err) {}
 	}
 
-	const document = await fromUuid(config.uuid, { relative: options.relativeTo });
-	if ( !document || !(document instanceof JournalEntryPage) ) return null;
-	return enrichEmbedJournalEntryPage(document, config, label, options);
+	// Find the first GrantFeatures or ChooseFeatures advancement on the item
+	let doc;
+	if ( !config.uuid && config.features ) {
+		const advancementCollection = options.relativeTo?.system?.advancement;
+		doc = advancementCollection?.find(a => ["grantFeatures", "chooseFeatures"].includes(a.metadata.type));
+		if ( !doc ) {
+			log(`No advancement found to use when embedding features for ${config.input}.`, { level: "warn" });
+			return null;
+		}
+	}
+
+	doc ??= await fromUuid(config.uuid, { relative: options.relativeTo });
+	if ( doc instanceof Advancement ) return doc.embed(config, label, options);
+	if ( doc instanceof JournalEntryPage ) return enrichEmbedJournalEntryPage(doc, config, label, options);
+
+	if ( !doc ) log(`No document can be found to embed for ${config.input}.`, { level: "warn" });
+	else log(`Cannot embed a ${doc.constructor.name} document for ${config.input}.`, { level: "warn" });
+	return null;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Enrich an embedded document.
+ * Enrich an embedded journal entry page.
  * @param {JournalEntryPage} page - The page being embedded.
  * @param {string[]} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
