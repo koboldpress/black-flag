@@ -486,8 +486,13 @@ async function enrichEmbed(config, label, options) {
 	}
 
 	doc ??= await fromUuid(config.uuid, { relative: options.relativeTo });
-	if ( doc instanceof Advancement ) return doc.embed(config, label, options);
-	if ( doc instanceof JournalEntryPage ) return enrichEmbedJournalEntryPage(doc, config, label, options);
+	let element;
+	if ( doc instanceof Advancement ) element = await doc.embed(config, label, options);
+	else if ( doc instanceof JournalEntryPage ) element = await enrichEmbedJournalEntryPage(doc, config, label, options);
+	if ( element ) {
+		element.classList.add("embedded-content");
+		return element;
+	}
 
 	if ( !doc ) log(`No document can be found to embed for ${config.input}.`, { level: "warn" });
 	else log(`Cannot embed a ${doc.constructor.name} document for ${config.input}.`, { level: "warn" });

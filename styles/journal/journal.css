@@ -87,10 +87,6 @@
 		}
 	}
 
-	p:empty {
-		display: none;
-	}
-
 	aside {
 		border-block: 3px solid black;
 		padding-block: 0.5em;
@@ -103,6 +99,10 @@
 			font-size: var(--font-size-16);
 			text-transform: uppercase;
 		}
+	}
+
+	p:empty:has(+ .embedded-content), .embedded-content + p:empty {
+		display: none;
 	}
 
 	section.embedded-features {
