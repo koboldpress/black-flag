@@ -43,7 +43,7 @@ export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, 
 			ammunition: new SchemaField({
 				type: new StringField({label: "BF.Ammunition.Type.Label"})
 			}, {label: "BF.Item.Type.Ammunition[one]"}),
-			damage: new DamageField(),
+			damage: new DamageField({bonus: false}),
 			range: new SchemaField({
 				short: new NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
 				long: new NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),

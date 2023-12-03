@@ -1,12 +1,50 @@
 blackFlag-damageList {
-	.item-list {
+	--gap-size: 6px;
+
+	ul {
 		margin: 0;
 		padding: 0;
-	
-		.item-controls {
-			padding-block-start: 1em;
+		list-style: none;
+
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: var(--gap-size);
+			padding-inline: 0;
+
+			&:not(:last-of-type) {
+				border-block-end: 1px solid var(--bf-color-border-gray);
+				padding-block-end: 0.25rem;
+			}
+
+			.field-group {
+				gap: var(--gap-size);
+			}
+
+			.die-count input {
+				text-align: end;
+			}
+			.die-count, .die-denomination {
+				flex: 0 0 5em;
+			}
+			.plus {
+				align-self: center;
+				padding-block-start: 0.9em;
+				font-size: var(--font-size-16);
+			}
+			.bonus {
+				flex: 0 0 8em;
+			}
+			.controls {
+				align-self: center;
+				display: flex;
+				gap: var(--gap-size);
+				padding-block-start: 1em;
+			}
 		}
 		.add-control {
+			justify-content: center;
 			padding-block-start: 0.75em;
 		}
 	}

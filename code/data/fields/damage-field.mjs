@@ -5,14 +5,17 @@ import FormulaField from "./formula-field.mjs";
  */
 export default class DamageField extends foundry.data.fields.SchemaField {
 	constructor(fields={}, options={}) {
-		super({
+		fields = {
 			number: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.Die.Number.Label"}),
 			denomination: new foundry.data.fields.NumberField({min: 1, integer: true, label: "BF.Die.Denomination.Label"}),
 			type: new foundry.data.fields.StringField({label: "BF.Damage.Type.Label"}),
+			bonus: new FormulaField({label: "BF.Damage.Bonus.Label"}),
 			custom: new FormulaField({label: "BF.Formula.Custom.Label"}),
 			...fields
 			// TODO: Add custom critical handling on a per-damage basis
-		}, { label: "BF.Damage.Label", ...options });
+		};
+		Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
+		super(fields, { label: "BF.Damage.Label", ...options });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -23,8 +26,10 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 		Object.defineProperty(obj, "formula", {
 			get() {
 				if ( this.custom ) return this.custom;
-				if ( !this.number || !this.denomination ) return "";
-				return `${this.number}d${this.denomination}`;
+				if ( !this.number || !this.denomination ) return this.bonus ?? "";
+				let formula = `${this.number}d${this.denomination}`;
+				if ( this.bonus ) formula += ` + ${this.bonus}`;
+				return formula;
 			},
 			configurable: true,
 			enumerable: false

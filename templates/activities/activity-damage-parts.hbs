@@ -1,34 +1,39 @@
 <blackFlag-damageList>
-	<ul class="item-list">
+	<ul>
 		{{#each source.damage.parts}}
-			<li class="item" data-index="{{@index}}">
+			<li data-index="{{@index}}">
 				<div class="damage field-group">
 					<label class="die-count">
 						<span>{{localize "BF.Die.Number.Label"}}</span>
-						<input type="number" name="system.damage.parts.{{@index}}.number" step=1 min=1 value="{{this.number}}">
+						<input type="number" name="system.damage.parts.{{@index}}.number" step=1 min=1 value="{{number}}">
 					</label>
 					<label class="die-denomination">
 						<span>{{localize "BF.Die.Denomination.Label"}}</span>
 						<select name="system.damage.parts.{{@index}}.denomination">
-							{{selectOptions @root.CONFIG.dieSteps.labeled selected=this.denomination blank=""}}
+							{{selectOptions @root.CONFIG.dieSteps.labeled selected=denomination blank=""}}
 						</select>
 					</label>
-					<label>
+					<span class="plus">+</span>
+					<label class="bonus">
+						<span>{{localize "BF.Damage.Bonus.Label"}}</span>
+						<input type="text" name="system.damage.parts.{{@index}}.bonus" value="{{bonus}}">
+					</label>
+					<label class="type">
 						<span>{{localize "BF.Damage.Type.Label"}}</span>
 						<select name="system.damage.parts.{{@index}}.type">
-							{{selectOptions @root.CONFIG.damageTypes selected=this.type
+							{{selectOptions @root.CONFIG.damageTypes selected=type
 								labelAttr="label" localize=true sort=true blank=""}}
 						</select>
 					</label>
 				</div>
-				<div class="item-controls">
+				<div class="controls">
 					<a data-action="delete">
 						<i class="fa-solid fa-trash"></i>
 					</a>
 				</div>
 			</li>
 		{{/each}}
-		<li class="item add-control">
+		<li class="add-control">
 			<a data-action="add">
 		 	<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
 			</a>
