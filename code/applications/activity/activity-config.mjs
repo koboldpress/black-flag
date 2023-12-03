@@ -119,15 +119,6 @@ export default class ActivityConfig extends FormApplication {
 	 */
 	_onAction(event) {
 		const { action, subAction } = event.currentTarget.dataset;
-		switch ( action ) {
-			case "damage":
-				const index = event.currentTarget.closest("[data-index]")?.dataset.index;
-				const damageCollection = this.activity.system.toObject().damage?.parts ?? [];
-				if ( subAction === "add" ) damageCollection.push({});
-				else if ( subAction === "delete" ) damageCollection.splice(index, 1);
-				else break;
-				return this.submit({ updateData: { "system.damage.parts": damageCollection }});
-		}
 		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}
 

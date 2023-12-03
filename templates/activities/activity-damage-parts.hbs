@@ -1,35 +1,37 @@
-<ul class="item-list damages-list">
-	{{#each source.damage.parts}}
-		<li class="item" data-index="{{@index}}">
-			<div class="damage field-group">
-				<label class="die-count">
-					<span>{{localize "BF.Die.Number.Label"}}</span>
-					<input type="number" name="system.damage.parts.{{@index}}.number" step=1 min=1 value="{{this.number}}">
-				</label>
-				<label class="die-denomination">
-					<span>{{localize "BF.Die.Denomination.Label"}}</span>
-					<select name="system.damage.parts.{{@index}}.denomination">
-						{{selectOptions @root.CONFIG.dieSteps.labeled selected=this.denomination blank=""}}
-					</select>
-				</label>
-				<label>
-					<span>{{localize "BF.Damage.Type.Label"}}</span>
-					<select name="system.damage.parts.{{@index}}.type">
-						{{selectOptions @root.CONFIG.damageTypes selected=this.type
-							labelAttr="label" localize=true sort=true blank=""}}
-					</select>
-				</label>
-			</div>
-			<div class="item-controls damage-controls">
-				<a data-action="damage" data-sub-action="delete">
-					<i class="fa-solid fa-trash"></i>
-				</a>
-			</div>
+<blackFlag-damageList>
+	<ul class="item-list">
+		{{#each source.damage.parts}}
+			<li class="item" data-index="{{@index}}">
+				<div class="damage field-group">
+					<label class="die-count">
+						<span>{{localize "BF.Die.Number.Label"}}</span>
+						<input type="number" name="system.damage.parts.{{@index}}.number" step=1 min=1 value="{{this.number}}">
+					</label>
+					<label class="die-denomination">
+						<span>{{localize "BF.Die.Denomination.Label"}}</span>
+						<select name="system.damage.parts.{{@index}}.denomination">
+							{{selectOptions @root.CONFIG.dieSteps.labeled selected=this.denomination blank=""}}
+						</select>
+					</label>
+					<label>
+						<span>{{localize "BF.Damage.Type.Label"}}</span>
+						<select name="system.damage.parts.{{@index}}.type">
+							{{selectOptions @root.CONFIG.damageTypes selected=this.type
+								labelAttr="label" localize=true sort=true blank=""}}
+						</select>
+					</label>
+				</div>
+				<div class="item-controls">
+					<a data-action="delete">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				</div>
+			</li>
+		{{/each}}
+		<li class="item add-control">
+			<a data-action="add">
+		 	<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
+			</a>
 		</li>
-	{{/each}}
-	<li class="item add-control">
-		<a data-action="damage" data-sub-action="add">
-		 <i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
-		</a>
-	</li>
-</ul>
+	</ul>
+<blackFlag-damageList>
