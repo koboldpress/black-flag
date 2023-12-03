@@ -82,6 +82,7 @@ export default class ActivityConfig extends FormApplication {
 			}
 		});
 		context.CONFIG = CONFIG.BlackFlag;
+		context.showBaseDamage = Object.hasOwn(this.item.system, "damage");
 		return context;
 	}
 

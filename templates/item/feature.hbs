@@ -10,7 +10,8 @@
 	</header>
 
 	<nav class="sheet-navigation tabs" data-group="primary">
-		<a data-tab="description">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
 		<a data-tab="effects">{{localize "BF.Sheet.Tab.AdvancementEffects"}}</a>
 	</nav>
 
@@ -87,6 +88,9 @@
 					<input type="text" name="system.description.source" value="{{system.description.source}}">
 				</label>
 			</section>
+		</div>
+		<div class="tab" data-group="primary" data-tab="details">
+			{{> "blackFlag.item-activities"}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="effects">
 			{{> "blackFlag.active-effects"}}
