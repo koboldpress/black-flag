@@ -10,10 +10,25 @@
 
 	<main class="sheet-body">
 		<fieldset>
-			<legend>Type</legend>
+			<legend>{{localize "BF.Activity.Section.Details"}}</legend>
+			<label>
+				<span>ability</span>
+				<select name="system.ability">
+					{{#select source.ability}}
+						{{#if labels.defaultAbility}}
+							<option value="">{{labels.defaultAbility}}</option>
+						{{/if}}
+						<hr>
+						<option value="none">{{localize "None"}}</option>
+						<optgroup label="{{localize 'BF.Ability.Label[other]'}}">
+							{{selectOptions CONFIG.abilities.localized blank=labels.defaultAbility}}
+						</optgroup>
+					{{/select}}
+				</select>
+			</label>
 			<div class="field-group">
 				<label>
-					<span>Type</span>
+					<span>{{localize "BF.Weapon.Type.Label"}}</span>
 					<select name="system.type.value">
 						{{selectOptions CONFIG.weaponTypes selected=source.type.value blank=labels.defaultType
 							labelAttr="label" localize=true}}
