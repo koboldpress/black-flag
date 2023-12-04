@@ -1,5 +1,6 @@
 import { slugify } from "../utils/text.mjs";
 import { DocumentMixin } from "./mixin.mjs";
+import NotificationsCollection from "./notifications.mjs";
 
 export default class BlackFlagItem extends DocumentMixin(Item) {
 
@@ -25,6 +26,13 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Collection of notifications that should be displayed on the actor sheet.
+	 */
+	notifications = this.notifications;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get pseudoDocumentHierarchy() {
 		const hierarchy = {};
 		for ( const [fieldName, field] of this.system.schema.entries() ) {
@@ -32,6 +40,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 		Object.defineProperty(this, "pseudoDocumentHierarchy", {value: Object.freeze(hierarchy), writable: false});
 		return this.pseudoDocumentHierarchy;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareData() {
+		this.notifications = new NotificationsCollection();
+		super.prepareData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

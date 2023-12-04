@@ -35,7 +35,7 @@ fieldset {
 
 	> label {
 		> span:first-child {
-			flex: 0 0 10em;
+			flex: 0 0 var(--bf-form-label-width);
 		}
 		input, select {
 			flex: 1 0 20px;
@@ -51,7 +51,7 @@ fieldset {
 	gap: 0.25rem;
 
 	label {
-		flex: 0 0 max(10em, calc(20% - 0.25rem));
+		flex: 0 0 max(var(--bf-form-label-width), calc(20% - 0.25rem));
 		flex-wrap: nowrap;
 		align-items: center;
 		gap: 0rem;
@@ -69,12 +69,13 @@ fieldset {
 	align-items: stretch;
 
 	> span:first-child {
+		width: var(--bf-form-label-width);
 		font-variant: small-caps;
 		font-weight: bold;
 		align-self: center;
 	}
 	> label {
-		flex: 1 1 10%;
+		flex: 1 1;
 		flex-direction: column;
 		align-items: stretch;
 		gap: 2px;

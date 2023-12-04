@@ -47,7 +47,7 @@ export default class DamageListElement extends HTMLElement {
 	 * @type {boolean}
 	 */
 	get isEditable() {
-		return this.document.testUserPermission(game.user, "EDIT");
+		return this.activity.item.testUserPermission(game.user, "EDIT");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -55,7 +55,8 @@ export default class NotificationTooltip extends Application {
 		}
 
 		const keys = notifications.map(n => n.key).join(";");
-		return `<div class="notification-badge" data-uuid="${uuid}" data-notification-level="${level}" data-notification-keys="${keys}">${center}</div>`;
+		return `<div class="notification-badge" data-uuid="${uuid}" data-notification-level="${
+			level}" data-notification-keys="${keys}">${center}</div>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -101,9 +102,12 @@ export default class NotificationTooltip extends Application {
 		const context = await super.getData(options);
 		context.notifications = this.notificationKeys
 			.reduce((arr, k) => {
-				const data = foundry.utils.deepClone(this.document.notifications?.get(k));
+				const split = k.split(".");
+				const doc = split.length > 1 ? this.document.items.get(split[0]) : this.document;
+				k = split[1] ?? split[0];
+				const data = foundry.utils.deepClone(doc?.notifications?.get(k));
 				if ( !data ) return arr;
-				data.badge = this.constructor.generateBadge([data], this.document.uuid, {displayOrder: true});
+				data.badge = this.constructor.generateBadge([data], doc.uuid, {displayOrder: true});
 				arr.push(data);
 				return arr;
 			}, []).sort((lhs, rhs) => lhs.order - rhs.order);

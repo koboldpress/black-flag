@@ -85,38 +85,55 @@ function groupedSelectOptions(choices, options) {
  * @param {object} options
  * @param {object} options.hash
  * @param {string} [options.hash.key] - Display if a notification of this key is set.
- * @param {string} [options.hash.document] - Display if any notifications for this document ID are set.
+ * @param {Document|string} [options.hash.document] - Display if any notifications for this document are set.
  * @param {string} [options.hash.category] - Display if any notifications in this category are set.
  * @param {string} [options.hash.section] - Display if any notifications in this section are set.
  * @param {boolean} [options.hash.displayOrder] - Should a number be displayed for the order?
  * @returns {Handlebars.SafeString|void}
  */
 function notificationBadge(document, options={}) {
-	let { key, document: id, category, section, ...generationOptions } = options.hash;
+	let { key, document: item, category, section, ...generationOptions } = options.hash;
 	if ( !document.notifications ) return;
 	if ( foundry.utils.getType(key) === "Object" ) key = key.string;
-	if ( foundry.utils.getType(id) === "Object" ) id = id.string;
 	if ( foundry.utils.getType(category) === "Object" ) category = category.string;
 	if ( foundry.utils.getType(section) === "Object" ) section = section.string;
 
-	let notifications = [];
-	if ( key ) {
-		if ( key.endsWith("*") ) {
-			notifications = document.notifications.filter(notification =>
-				notification.key.startsWith(key.replace("*", ""))
-			);
-		} else {
-			const notification = document.notifications.get(key);
-			if ( notification ) notifications.push(notification);
+	let id = item;
+	if ( foundry.utils.getType(item) === "Object" ) id = null;
+	else item = null;
+
+	// TODO: If section is set to "auto" and a document ID is provided, determine section using sheet sections
+
+	const getNotifications = (document, key, id, category, section, child=false) => {
+		let notifications = [];
+		if ( key ) {
+			if ( key.endsWith("*") ) {
+				notifications = document.notifications.filter(notification =>
+					notification.key.startsWith(key.replace("*", ""))
+				);
+			} else {
+				const notification = document.notifications.get(key);
+				if ( notification ) notifications.push(notification);
+			}
+		} else if ( id || category || section ) {
+			notifications = document.notifications.filter(notification => {
+				if ( id && (id !== notification.document) ) return false;
+				if ( category && (category !== notification.category) ) return false;
+				if ( section && (section !== notification.section) ) return false;
+				return true;
+			});
+		} else if ( child ) {
+			notifications = document.notifications.contents;
 		}
-	} else if ( id || category || section ) {
-		notifications = document.notifications.filter(notification => {
-			if ( id && (id !== notification.document) ) return false;
-			if ( category && (category !== notification.category) ) return false;
-			if ( section && (section !== notification.section) ) return false;
-			return true;
-		});
-	}
+		if ( child ) {
+			notifications = foundry.utils.deepClone(notifications);
+			notifications.forEach(n => n.key = `${document.id}.${n.key}`);
+		}
+		return notifications;
+	};
+
+	let notifications = getNotifications(document, key, id, category, section);
+	if ( item ) notifications = notifications.concat(getNotifications(item, key, id, category, section, true));
 
 	if ( !notifications.length ) return;
 

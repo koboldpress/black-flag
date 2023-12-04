@@ -12,6 +12,7 @@
 						<li class="item" data-item-id="{{item.id}}">
 							<div class="item-name">
 								{{item.name}}
+								{{blackFlag-notificationBadge actor document=item}}
 							</div>
 							<div class="item-controls">
 								{{#if @root.modes.editing}}

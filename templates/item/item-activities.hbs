@@ -34,3 +34,24 @@
 		</ul>
 	</fieldset>
 </blackFlag-activities>
+
+<blackFlag-uses>
+	<fieldset>
+		<legend>{{localize "BF.Uses.Label"}}</legend>
+		<div class="field-group">
+			<span>{{localize "BF.Uses.Limits.Label"}}</span>
+			<label>
+				<span>{{localize "BF.Uses.Minimum.Label"}}</span>
+				<input type="text" name="system.uses.min" value="{{source.uses.min}}" placeholder="0">
+			</label>
+			<label>
+				<span>{{localize "BF.Uses.Maximum.Label"}}</span>
+				<input type="text" name="system.uses.max" value="{{source.uses.max}}" placeholder="0">
+			</label>
+		</div>
+		<label>
+			<span>{{localize "BF.Uses.Spent.Label"}}</span>
+			<input type="number" name="system.uses.spent" value="{{system.uses.spent}}">
+		</label>
+	</fieldset>
+</blackFlag-uses>
