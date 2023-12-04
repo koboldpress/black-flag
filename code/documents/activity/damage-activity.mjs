@@ -92,7 +92,7 @@ export default class DamageActivity extends Activity {
 			rollConfigs.push(foundry.utils.mergeObject({
 				data,
 				modifierData,
-				parts: damage.custom || [damage.formula, ...(parts ?? [])],
+				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
 				options: {
 					damageType: damage.type,
 					minimum: this.actor?.system.buildMinimum(

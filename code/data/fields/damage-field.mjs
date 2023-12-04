@@ -7,7 +7,7 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 	constructor(fields={}, options={}) {
 		fields = {
 			number: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.Die.Number.Label"}),
-			denomination: new foundry.data.fields.NumberField({min: 1, integer: true, label: "BF.Die.Denomination.Label"}),
+			denomination: new foundry.data.fields.NumberField({min: 0, integer: true, label: "BF.Die.Denomination.Label"}),
 			type: new foundry.data.fields.StringField({label: "BF.Damage.Type.Label"}),
 			bonus: new FormulaField({label: "BF.Damage.Bonus.Label"}),
 			custom: new FormulaField({label: "BF.Formula.Custom.Label"}),

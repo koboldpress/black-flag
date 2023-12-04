@@ -156,7 +156,7 @@ export default class AttackActivity extends DamageActivity {
 			rollConfigs.unshift(foundry.utils.mergeObject({
 				data,
 				modifierData,
-				parts: damage.custom || [damage.formula, ...(parts ?? [])],
+				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
 				options: {
 					// TODO: Get critical settings
 					damageType: damage.type,

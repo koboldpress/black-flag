@@ -18,7 +18,12 @@ blackFlag-damageList {
 				padding-block-end: 0.25rem;
 			}
 
+			.hidden {
+				display: none;
+			}
+
 			.field-group {
+				flex: 1 1 100%;
 				gap: var(--gap-size);
 			}
 
@@ -36,11 +41,18 @@ blackFlag-damageList {
 			.bonus {
 				flex: 0 0 8em;
 			}
+			.custom {
+				flex: 0 0 calc(18em + 2.5px + var(--gap-size) * 4);
+			}
 			.controls {
 				align-self: center;
 				display: flex;
 				gap: var(--gap-size);
 				padding-block-start: 1em;
+
+				.active {
+					text-shadow: 0 0 3px oklch(85% 0.328 142.5deg);
+				}
 			}
 		}
 		.add-control {

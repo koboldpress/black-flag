@@ -18,6 +18,10 @@
 						<span>{{localize "BF.Damage.Bonus.Label"}}</span>
 						<input type="text" name="system.damage.parts.{{@index}}.bonus" value="{{bonus}}">
 					</label>
+					<label class="custom">
+						<span>{{localize "BF.Formula.Custom.Label"}}</span>
+						<input type="text" name="system.damage.parts.{{@index}}.custom" value="{{custom}}">
+					</label>
 					<label class="type">
 						<span>{{localize "BF.Damage.Type.Label"}}</span>
 						<select name="system.damage.parts.{{@index}}.type">
@@ -27,6 +31,9 @@
 					</label>
 				</div>
 				<div class="controls">
+					<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
+						<i class="fa-solid fa-superscript"></i>
+					</a>
 					<a data-action="delete">
 						<i class="fa-solid fa-trash"></i>
 					</a>
