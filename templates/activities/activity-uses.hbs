@@ -1,3 +1,71 @@
+<blackFlag-consumption>
+	<fieldset>
+		<legend>{{localize "BF.Consumption.Label"}}</legend>
+		<ul>
+			{{#each activity.consumption.targets}}
+				<li data-index="{{@index}}">
+					<div class="field-group">
+						<label class="type">
+							<span>{{localize "BF.Consumption.Type.Label"}}</span>
+							<select name="consumption.targets.{{@index}}.type">
+								{{#select type}}
+									{{#each validTypes}}
+										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
+									{{/each}}
+								{{/select}}
+							</select>
+						</label>
+						{{#with validTargets as |targets|}}
+							<label class="target">
+								<span>{{localize "BF.Consumption.Target.Label"}}</span>
+								<select name="consumption.targets.{{@index}}.target">
+									{{selectOptions targets selected=../target nameAttr="key" labelAttr="label"}}
+								</select>
+							</label>
+						{{/with}}
+						<label class="value">
+							<span>{{localize "BF.Consumption.Amount.Label"}}</span>
+							<input type="text" name="consumption.targets.{{@index}}.value" value="{{value}}">
+						</label>
+						{{#if @root.consumption.scale.allowed}}
+							<label class="scale">
+								<span>{{localize "BF.Consumption.Scale.Label"}}</span>
+								<input type="text" name="consumption.targets.{{@index}}.scale" value="{{scale}}">
+							</label>
+						{{/if}}
+					</div>
+					<div class="controls">
+						<a data-action="delete">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					</div>
+				</li>
+			{{/each}}
+			<li class="add-control">
+				<a data-action="add">
+				 <i class="fa-solid fa-plus"></i> {{localize "BF.Consumption.Action.Add"}}
+				</a>
+			</li>
+		</ul>
+		<label>
+			<span>
+				{{localize "BF.Consumption.AllowScaling.Label"}}
+				<i class="hintIcon" data-tooltip="BF.Consumption.AllowScaling.Hint"></i>
+			</span>
+			<input type="checkbox" name="consumption.scale.allowed" {{checked consumption.scale.allowed}}>
+		</label>
+		{{#if consumption.scale.allowed}}
+			<label>
+				<span>
+					{{localize "BF.Consumption.MaxScaling.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Consumption.MaxScaling.Hint"></i>
+				</span>
+				<input type="text" name="consumption.scale.max" value="{{consumption.scale.max}}" placeholder="∞">
+			</label>
+		{{/if}}
+	</fieldset>
+</blackFlag-consumption>
+
 <blackFlag-uses>
 	<fieldset>
 		<legend>{{localize "BF.Uses.Label"}}</legend>

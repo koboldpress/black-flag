@@ -1,4 +1,43 @@
 import { localizeConfig } from "../utils/_module.mjs";
+import { hitDieSizes } from "./advancement.mjs";
+import { spellRings } from "./spellcasting.mjs";
+
+/**
+ * Types of resource consumption that can be used on activities.
+ * @enum {LabeledConfiguration}
+ */
+export const consumptionTypes = {
+	activity: {
+		label: "BF.Consumption.Type.ActivityUses.Label"
+	},
+	item: {
+		label: "BF.Consumption.Type.ItemUses.Label",
+		validTargets: activity => {
+			const otherItems = activity.item.actor?.items
+				.filter(i => (i.system.uses?.min || i.system.uses?.max) && i !== activity.item)
+				.map(i => ({key: i.id, label: i.name}));
+			return [{key: "", label: game.i18n.localize("BF.Consumption.Type.ItemUses.ThisItem")}, ...(otherItems ?? [])];
+		}
+	},
+	hitDice: {
+		label: "BF.Consumption.Type.HitDice.Label",
+		validTargets: activity => [
+			{key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest")},
+			...hitDieSizes.map(d => ({key: d, label: `d${d}`})),
+			{key: "largest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Largest")}
+		]
+	},
+	spellSlots: {
+		label: "BF.Consumption.Type.SpellSlots.Label",
+		validTargets: activity => {
+			const rings = spellRings();
+			delete rings[0];
+			return Object.entries(rings).map(([key, label]) => ({key, label}));
+		}
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for item usage recovery periods.

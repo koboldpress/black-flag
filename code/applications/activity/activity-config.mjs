@@ -72,11 +72,13 @@ export default class ActivityConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getData(options) {
+		const source = this.activity.toObject();
 		const context = foundry.utils.mergeObject(super.getData(options), {
 			activity: this.activity,
 			system: this.activity.system,
-			source: this.activity.system.toObject(),
-			uses: this.activity.toObject().uses,
+			source: source.system,
+			consumption: source.consumption,
+			uses: source.uses,
 			default: {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon
@@ -152,12 +154,20 @@ export default class ActivityConfig extends FormApplication {
 	async _updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 
+		// TODO: Find a way to move this behavior into DamageListElement & ConsumptionElement
 		if ( foundry.utils.hasProperty(updates, "system.damage.parts") ) {
 			updates.system.damage.parts = Object.entries(updates.system.damage.parts).reduce((arr, [k, v]) => {
 				arr[k] = v;
 				return arr;
 			}, []);
 		}
+		if ( foundry.utils.hasProperty(updates, "consumption.targets") ) {
+			updates.consumption.targets = Object.entries(updates.consumption.targets).reduce((arr, [k, v]) => {
+				arr[k] = v;
+				return arr;
+			}, []);
+		}
+
 		await this.activity.update(updates);
 	}
 }
