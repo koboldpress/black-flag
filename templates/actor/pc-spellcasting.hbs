@@ -32,6 +32,9 @@
 						<td class="components">
 							<div class="layout">
 								{{{spell.system.components.label}}}
+								{{#if spell.system.uses.label}}
+									<span class="uses">({{spell.system.uses.label}})</span>
+								{{/if}}
 							</div>
 						</td>
 						<td class="casting">

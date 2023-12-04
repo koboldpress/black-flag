@@ -8,10 +8,11 @@
 				<header class="header">
 					<h3 class="item-name">{{localize section.label}}</h3>
 					<div class="item-details inventory-details">
-						<div class="weight">Weight</div>
-						<div class="quantity">Quantity</div>
+						<div class="uses">{{localize "BF.Uses.Short"}}</div>
+						<div class="weight">{{localize "BF.Weight.Label"}}</div>
+						<div class="quantity">{{localize "BF.Quantity.Label"}}</div>
 						<div class="cost">{{localize "BF.Price.Label"}}</div>
-						<div class="traits">Traits</div>
+						<div class="traits">{{localize "BF.Trait.Label[other]"}}</div>
 					</div>
 					<div class="item-controls">
 						
@@ -29,6 +30,7 @@
 								{{blackFlag-notificationBadge actor document=item}}
 							</div>
 							<div class="item-details inventory-details">
+								<div class="uses">{{item.system.uses.label}}</div>
 								<div class="weight">{{item.system.weight.label}}</div>
 								<div class="quantity">{{blackFlag-number item.system.quantity}}</div>
 								<div class="cost">{{item.system.price.label}}</div>

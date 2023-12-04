@@ -1,4 +1,4 @@
-import { replaceFormulaData, simplifyBonus } from "../../../utils/_module.mjs";
+import { numberFormat, replaceFormulaData, simplifyBonus } from "../../../utils/_module.mjs";
 import { ActivityField } from "../../fields/activity-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
@@ -35,6 +35,16 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
 		}));
 		this.uses.value = Math.clamped(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
+
+		Object.defineProperty(this.uses, "label", {
+			get() {
+				if ( this.min ) return numberFormat(this.value);
+				if ( this.max ) return `${numberFormat(this.value)} / ${numberFormat(this.max)}`;
+				return "";
+			},
+			configurable: true,
+			enumerable: false
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

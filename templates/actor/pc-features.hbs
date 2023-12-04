@@ -5,7 +5,10 @@
 		{{#each sections.features as |section sectionId|}}
 			<li class="item-category" data-section="{{sectionId}}">
 				<header class="header">
-					<h3>{{localize section.label}}</h3>
+					<h3 class="item-name">{{localize section.label}}</h3>
+					<div class="item-details inventory-details">
+						<div class="uses">{{localize "BF.Uses.Short"}}</div>
+					</div>
 				</header>
 				<ol class="item-list">
 					{{#each section.items as |item|}}
@@ -13,6 +16,9 @@
 							<div class="item-name">
 								{{item.name}}
 								{{blackFlag-notificationBadge actor document=item}}
+							</div>
+							<div class="item-details inventory-details">
+								<div class="uses">{{item.system.uses.label}}</div>
 							</div>
 							<div class="item-controls">
 								{{#if @root.modes.editing}}
