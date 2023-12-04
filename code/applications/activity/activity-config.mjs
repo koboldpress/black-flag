@@ -76,6 +76,7 @@ export default class ActivityConfig extends FormApplication {
 			activity: this.activity,
 			system: this.activity.system,
 			source: this.activity.system.toObject(),
+			uses: this.activity.toObject().uses,
 			default: {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon

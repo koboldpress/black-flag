@@ -168,6 +168,7 @@ export async function registerHandlebarsPartials() {
 		"active-effect/active-effects.hbs",
 		"active-effect/active-effect-change.hbs",
 		"activities/activity-damage-parts.hbs",
+		"activities/activity-uses.hbs",
 		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/npc-main.hbs",

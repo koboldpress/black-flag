@@ -13,9 +13,9 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		return {
 			activities: new ActivityField(),
 			uses: new SchemaField({
-				spent: new NumberField({initial: 0, integer: true}),
-				min: new FormulaField({deterministic: true}),
-				max: new FormulaField({deterministic: true})
+				spent: new NumberField({initial: 0, integer: true, label: "BF.Uses.Spent.Label"}),
+				min: new FormulaField({deterministic: true, label: "BF.Uses.Minimum.Label"}),
+				max: new FormulaField({deterministic: true, label: "BF.Uses.Maximum.Label"})
 			}, {label: "BF.Uses.Label"})
 		};
 	}
@@ -31,7 +31,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Minimum.DebugName") }
 		}));
 		this.uses.max = simplifyBonus(replaceFormulaData(this.uses.max ?? "", rollData, {
-			notifications: this.parent.notifications, key: "invalid-min-uses-formula", section: "auto",
+			notifications: this.parent.notifications, key: "invalid-max-uses-formula", section: "auto",
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
 		}));
 		this.uses.value = Math.clamped(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
@@ -45,6 +45,14 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			configurable: true,
 			enumerable: false
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareFinalActivities() {
+		for ( const activity of this.activities ) {
+			activity.prepareFinalData();
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
