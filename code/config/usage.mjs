@@ -3,15 +3,43 @@ import { hitDieSizes } from "./advancement.mjs";
 import { spellRings } from "./spellcasting.mjs";
 
 /**
+ * Configuration information for activity consumption types.
+ *
+ * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
+ * @property {ConsumptionConsumeFunction|string} consume - Function used to calculate updates upon consumption.
+ * @property {ConsumptionValidTargetsFunction} [validTargets] - Function used to build list of targets for this type.
+ */
+
+/**
+ * Function called to calculate consumption changes. Should throw an error if consumption is not possible.
+ *
+ * @callback ConsumptionConsumeFunction
+ * @param {Activity} activity - Activity being activated.
+ * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+ * @param {ConsumptionTargetData} target - Configuration info for this consumption target.
+ * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+ */
+
+/**
+ * Function called to calculate consumption changes.
+ *
+ * @callback ConsumptionValidTargetsFunction
+ * @param {Activity} activity - Activity to which the consumption belongs.
+ * @returns {{key: string, label: string}[]} - Valid targets.
+ */
+
+/**
  * Types of resource consumption that can be used on activities.
- * @enum {LabeledConfiguration}
+ * @enum {ConsumptionTypeConfiguration}
  */
 export const consumptionTypes = {
 	activity: {
-		label: "BF.Consumption.Type.ActivityUses.Label"
+		label: "BF.Consumption.Type.ActivityUses.Label",
+		consume: "consumeActivity"
 	},
 	item: {
 		label: "BF.Consumption.Type.ItemUses.Label",
+		consume: "consumeItem",
 		validTargets: activity => {
 			const otherItems = activity.item.actor?.items
 				.filter(i => (i.system.uses?.min || i.system.uses?.max) && i !== activity.item)
@@ -21,6 +49,7 @@ export const consumptionTypes = {
 	},
 	hitDice: {
 		label: "BF.Consumption.Type.HitDice.Label",
+		consume: "consumeHitDice",
 		validTargets: activity => [
 			{key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest")},
 			...hitDieSizes.map(d => ({key: d, label: `d${d}`})),
@@ -29,6 +58,7 @@ export const consumptionTypes = {
 	},
 	spellSlots: {
 		label: "BF.Consumption.Type.SpellSlots.Label",
+		consume: "consumeSpellSlots",
 		validTargets: activity => {
 			const rings = spellRings();
 			delete rings[0];

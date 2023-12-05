@@ -314,4 +314,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 		stats.total += 1;
 		// TODO: If does damage, add to "damaging"
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_validConsumptionTypes(types) {
+		return types.filter(t => t.key !== "spellSlots");
+	}
 }

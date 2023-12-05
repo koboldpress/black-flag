@@ -72,6 +72,18 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Adjust consumption types allowed in activities on this item.
+	 * @param {{key: string, label: string, disabled: boolean}[]} types - All types available to activities.
+	 * @returns {{key: string, label: string, disabled: boolean}[]}} - Adjusted types.
+	 * @protected
+	 */
+	_validConsumptionTypes(types) {
+		return types;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Create one or more activity documents when this item is created.
 	 * @param {object[]} data - Initial data for activity documents. Must include "type".
 	 * @internal

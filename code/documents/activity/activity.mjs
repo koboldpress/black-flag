@@ -72,8 +72,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Configuration data for an activity's activation.
 	 *
 	 * @typedef {object} ActivityActivationConfiguration
-	 * @property {object} consume - Activation consumption configuration, set to false to prevent all consumption.
-	 * @property {boolean} consume.use - Should the activity consume its associated uses?
+	 * @property {boolean|object} consume - Consumption configuration, set to `false` to prevent all consumption.
+	 * @property {boolean|BlackFlagItem} consume.ammunition - Control whether ammunition is consumed by a weapon or
+	 *                                                        provide an ammunition item to consume.
+	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
+	 *                                                  consumption or provide a list of consumption type keys defined
+	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
 	 */
 
 	/**
@@ -99,19 +103,90 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async activate(config={}, message={}, dialog={}) {
 		// Prepare initial activation configuration
+		const activationConfig = foundry.utils.mergeObject({
+			consume: true
+		}, config);
+
+		const messageConfig = foundry.utils.mergeObject({
+			create: true,
+			data: {
+				"flags.black-flag.activity": {
+					type: this.metadata.type,
+					uuid: this.uuid
+				}
+			}
+		}, message);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			configure: true // TODO: Automatically set based on whether item needs configuration
+		}, dialog);
+
 		// Call preActivate script & hooks
+		// TODO
+
 		// Display configuration window if necessary, wait for result
+		// TODO
+
 		// Call preConsumeUses script & hooks
+		// TODO
+
 		// Calculate what resources should be consumed
+		const updates = this.activationUpdates(activationConfig);
+		// TODO: Handle errors
+
 		// Call consumeUses script & hooks
+		// TODO
+
+		// Merge activity changes into the item updates
+		if ( !foundry.utils.isEmpty(updates.activity) ) {
+			const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
+			const keyPath = `system.activities.${this.id}`;
+			const activityUpdates = foundry.utils.expandObject(updates.activity);
+			if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+			else updates.item[itemIndex][keyPath] = activityUpdates;
+		}
+
 		// Update documents with consumption
+		if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
+		if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+
 		// Call postConsumeUses script & hooks
+		// TODO
 
 		// Display the card in chat
 		await this.createActivationMessage(message);
 
 		// Create measured templates if necessary
+		// TODO
+
 		// Call postActivate script & hooks
+		// TODO
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate changes to actor, items, & this activity based on resource consumption.
+	 * @param {ActivityActivationConfiguration} config - Activation configuration.
+	 * @returns {{activity: object, item: object[], actor: object}}
+	 */
+	activationUpdates(config) {
+		const updates = { activity: {}, item: [], actor: {} };
+		if ( !config.consume ) return updates;
+
+		if ( (config.consume === true) || config.consume.ammunition ) {
+			// TODO: Let `WeaponData` to handle this
+		}
+
+		if ( (config.consume === true) || config.consume.resources ) {
+			for ( const target of this.consumption.targets ) {
+				if ( (foundry.utils.getType(config.consume.resources) === "Array")
+					&& !config.consume.resources.includes(target.type) ) continue;
+				target.prepareConsumptionUpdates(this, config, updates);
+			}
+		}
+
+		return updates;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

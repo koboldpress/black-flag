@@ -1,3 +1,4 @@
+import { numberFormat } from "../../utils/_module.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -38,8 +39,198 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	get validTypes() {
 		const existingTypes = new Set(this.parent.consumption.targets.map(t => t.type));
-		return Object.entries(CONFIG.BlackFlag.consumptionTypes).map(([key, config]) => ({
-			key, label: config.label, disabled: existingTypes.has(key) && (this.type !== key)
+		return this.parent.item.system._validConsumptionTypes(
+			Object.entries(CONFIG.BlackFlag.consumptionTypes).map(([key, config]) => ({
+				key, label: config.label, disabled: existingTypes.has(key) && (this.type !== key)
+			}))
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Methods               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Resolve and scale the cost.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @returns {number}
+	 */
+	scaledCost(config) {
+		// TODO: Calculate total uses to consume based on scaling
+		// TODO: Resolve this formula properly if a dice is present
+		return Number(this.value);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare updates that will be applied upon consumption.
+	 * @param {Activity} activity - Activity being activated.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 */
+	prepareConsumptionUpdates(activity, config, updates) {
+		const typeConfig = CONFIG.BlackFlag.consumptionTypes[this.type];
+		if ( !typeConfig?.consume ) return;
+		if ( foundry.utils.getType(typeConfig.consume) === "string" ) {
+			if ( !this[typeConfig.consume] ) throw new Error("method not found");
+			this[typeConfig.consume](activity, config, updates);
+		} else if ( foundry.utils.getType(typeConfig.consume) === "function" ) {
+			typeConfig.consume(activity, config, this, updates);
+		} else {
+			throw new Error("invalid consume method");
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare updates for activity uses consumption.
+	 * @param {Activity} activity - Activity being activated.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 */
+	consumeActivity(activity, config, updates) {
+		updates.activity["uses.spent"] = this._usesConsumption(
+			config, activity.uses, game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
+				itemName: activity.item.name, activityName: activity.name
+			})
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare updates for item uses consumption.
+	 * @param {Activity} activity - Activity being activated.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 */
+	consumeItem(activity, config, updates) {
+		const item = this.target ? activity.actor.items.get(this.target) : activity.item;
+		if ( !item ) throw new Error("item not found");
+
+		const newSpent = this._usesConsumption(
+			config, item.system.uses, game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name })
+		);
+		if ( newSpent === null ) return;
+
+		const itemIndex = updates.item.findIndex(i => i._id === item.id);
+		if ( itemIndex === -1 ) updates.item.push({ _id: item.id, "system.uses.spent": newSpent });
+		else updates.item[itemIndex]["system.uses.spent"] = newSpent;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate uses updates.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {object} uses - Uses object on an Item or Activity.
+	 * @param {string} type - Type property that will be provided to warning messages.
+	 * @returns {number|null} - New spent uses value, or `null` for no change.
+	 * @internal
+	 */
+	_usesConsumption(config, uses, type) {
+		const cost = this.scaledCost(config);
+		const newValue = uses.value - cost;
+
+		let warningMessage;
+		if ( (cost > 0) && !uses.value ) warningMessage = "BF.Consumption.Warning.None";
+		else if ( newValue < uses.min ) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if ( warningMessage ) throw new Error(game.i18n.format(warningMessage, {
+			type, cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(uses.value, { spelledOut: true })
 		}));
+
+		if ( (cost < 0) && !uses.spent ) return null;
+		return Math.clamped(uses.spent + cost, 0, uses.max - uses.min);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare updates for hit dice consumption.
+	 * @param {Activity} activity - Activity being activated.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 */
+	consumeHitDice(activity, config, updates) {
+		const cost = this.scaledCost(config);
+
+		const actor = activity.actor;
+		const availableDenominations = Object.entries(actor.system.attributes.hd.d);
+		if ( this.target === "smallest" ) availableDenominations.sort((lhs, rhs) => lhs[0] - rhs[0]);
+		else if ( this.target === "largest" ) availableDenominations.sort((lhs, rhs) => rhs[0] - lhs[0]);
+		else {
+			const denom = actor.system.attributes.hd.d[this.target];
+
+			let warningMessage;
+			if ( !denom ) warningMessage = "BF.Consumption.Warning.MissingHitDice";
+			else if ( (denom.available === 0) && (cost > 0) ) warningMessage = "BF.Consumption.Warning.None";
+			else if ( denom.available < cost ) warningMessage = "BF.Consumption.Warning.NotEnough";
+			if ( warningMessage ) {
+				const denomination = `d${this.target}`;
+				throw new Error(game.i18n.format(warningMessage, {
+					type: game.i18n.format("BF.Consumption.Type.HitDice.Warning", { denomination }), denomination,
+					cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(denom?.value, { spelledOut: true })
+				}));
+			}
+
+			if ( (cost < 0) && !denom.spent ) return;
+			updates.actor[`system.attributes.hd.d.${this.target}.spent`] = Math.clamped(denom.spent + cost, 0, denom.max);
+			return;
+		}
+
+		// Loop over available denominations, subtracting or adding cost until it is all spent
+		let remaining = cost;
+		for ( const [d, denom] of availableDenominations ) {
+			const delta = remaining > 0 ? Math.min(remaining, denom.available) : Math.max(remaining, -denom.spent);
+			if ( delta !== 0 ) {
+				updates.actor[`system.attributes.hd.d.${d}.spent`] = denom.spent + delta;
+				remaining -= delta;
+			}
+			if ( remaining === 0 ) return;
+		}
+		if ( remaining > 0 ) {
+			const available = Object.values(actor.system.attributes.hd.d).reduce((sum, d) => sum + d.available, 0);
+			const warningMessage = `BF.Consumption.Warning.${available > 0 ? "NotEnough" : "None"}`;
+			throw new Error(game.i18n.format(warningMessage, {
+				type: game.i18n.localize("BF.HitDie.Label[other]").toLowerCase(),
+				cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(available, { spelledOut: true })
+			}));
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare updates for spell slot consumption.
+	 * @param {Activity} activity - Activity being activated.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 */
+	consumeSpellSlots(activity, config, updates) {
+		// TODO: Resolve this formula properly if a dice is present
+		const cost = Number(this.value);
+		// TODO: Increase ring based on scale value
+		const ringNumber = this.target;
+
+		// Check to see if enough slots available at specified ring
+		const ringData = activity.actor.system.spellcasting?.rings?.[`ring-${ringNumber}`];
+		const newSpent = (ringData?.spent ?? 0) + cost;
+		let warningMessage;
+		if ( !ringData?.max ) warningMessage = "BF.Consumption.Warning.MissingSpellRing";
+		else if ( (cost > 0) && !ringData.value ) warningMessage = "BF.Consumption.Warning.None";
+		else if ( newSpent > ringData.max ) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if ( warningMessage ) {
+			const ring = CONFIG.BlackFlag.spellRings()[ringNumber].toLowerCase();
+			const type = game.i18n.format("BF.Consumption.Type.SpellSlots.Warning", { ring });
+			throw new Error(game.i18n.format(warningMessage, {
+				type, ring, cost: numberFormat(cost, { spelledOut: true }),
+				available: numberFormat(ringData?.value, { spelledOut: true })
+			}));
+		}
+
+		if ( (cost < 0) && !ringData.spent ) return;
+		updates.actor[`system.spellcasting.rings.ring-${ringNumber}.spent`] = Math.clamped(newSpent, 0, ringData.max);
 	}
 }
