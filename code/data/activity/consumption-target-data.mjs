@@ -1,5 +1,6 @@
 import { numberFormat } from "../../utils/_module.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import ConsumptionError from "./consumption-error.mjs";
 
 const { StringField } = foundry.data.fields;
 
@@ -26,9 +27,19 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @type {{key: string, label: string}[]|null}
 	 */
 	get validTargets() {
-		const type = CONFIG.BlackFlag.consumptionTypes[this.type];
-		if ( !type?.validTargets ) return null;
-		return type.validTargets(this.parent);
+		return this.constructor.getValidTargets(this.type, this.parent);
+	}
+
+	/**
+	 * List of valid targets for a specific type.
+	 * @param {string} type - Consumption type.
+	 * @param {Activity} activity - Activity that contains the target.
+	 * @returns {{key: string, label: string}[]|null}
+	 */
+	static getValidTargets(type, activity) {
+		const config = CONFIG.BlackFlag.consumptionTypes[type];
+		if ( !config?.validTargets ) return null;
+		return config.validTargets(activity);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -51,14 +62,26 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Resolve the provided cost formula as a dice roll.
+	 * @param {string} formula - Cost formula to resolve.
+	 * @returns {BaseRoll}
+	 */
+	async resolveCost(formula) {
+		const roll = new Roll(formula, this.parent.item.getRollData());
+		await roll.evaluate();
+		return roll;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Resolve and scale the cost.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
 	 * @returns {number}
 	 */
-	scaledCost(config) {
+	scaleCost(config) {
 		// TODO: Calculate total uses to consume based on scaling
-		// TODO: Resolve this formula properly if a dice is present
-		return Number(this.value);
+		return this.value;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -67,18 +90,20 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Prepare updates that will be applied upon consumption.
 	 * @param {Activity} activity - Activity being activated.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
-	prepareConsumptionUpdates(activity, config, updates) {
+	async prepareConsumptionUpdates(activity, config, updates) {
 		const typeConfig = CONFIG.BlackFlag.consumptionTypes[this.type];
 		if ( !typeConfig?.consume ) return;
 		if ( foundry.utils.getType(typeConfig.consume) === "string" ) {
-			if ( !this[typeConfig.consume] ) throw new Error("method not found");
-			this[typeConfig.consume](activity, config, updates);
+			if ( !this[typeConfig.consume] ) throw new Error(
+				`Consume method "${thisConfig.consume}" defined by ${this.type} not found on on ConsumptionTargetData to call.`
+			);
+			await this[typeConfig.consume](activity, config, updates);
 		} else if ( foundry.utils.getType(typeConfig.consume) === "function" ) {
-			typeConfig.consume(activity, config, this, updates);
+			await typeConfig.consume(activity, config, this, updates);
 		} else {
-			throw new Error("invalid consume method");
+			throw new Error(`Consumption type ${this.type} does not have a consume method defined.`);
 		}
 	}
 
@@ -88,13 +113,13 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Prepare updates for activity uses consumption.
 	 * @param {Activity} activity - Activity being activated.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
-	consumeActivity(activity, config, updates) {
-		updates.activity["uses.spent"] = this._usesConsumption(
+	async consumeActivity(activity, config, updates) {
+		updates.activity["uses.spent"] = await this._usesConsumption(
 			config, activity.uses, game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
 				itemName: activity.item.name, activityName: activity.name
-			})
+			}), updates.rolls
 		);
 	}
 
@@ -104,14 +129,15 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Prepare updates for item uses consumption.
 	 * @param {Activity} activity - Activity being activated.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
-	consumeItem(activity, config, updates) {
+	async consumeItem(activity, config, updates) {
 		const item = this.target ? activity.actor.items.get(this.target) : activity.item;
 		if ( !item ) throw new Error("item not found");
 
-		const newSpent = this._usesConsumption(
-			config, item.system.uses, game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name })
+		const newSpent = await this._usesConsumption(
+			config, item.system.uses, game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name }),
+			updates.rolls
 		);
 		if ( newSpent === null ) return;
 
@@ -127,17 +153,21 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
 	 * @param {object} uses - Uses object on an Item or Activity.
 	 * @param {string} type - Type property that will be provided to warning messages.
+	 * @param {Roll[]} rolls - Rolls performed as part of the activation.
 	 * @returns {number|null} - New spent uses value, or `null` for no change.
 	 * @internal
 	 */
-	_usesConsumption(config, uses, type) {
-		const cost = this.scaledCost(config);
+	async _usesConsumption(config, uses, type, rolls) {
+		const roll = await this.resolveCost(this.scaleCost(config));
+		if ( !roll.isDeterministic ) rolls.push(roll);
+		const cost = roll.total;
+
 		const newValue = uses.value - cost;
 
 		let warningMessage;
 		if ( (cost > 0) && !uses.value ) warningMessage = "BF.Consumption.Warning.None";
 		else if ( newValue < uses.min ) warningMessage = "BF.Consumption.Warning.NotEnough";
-		if ( warningMessage ) throw new Error(game.i18n.format(warningMessage, {
+		if ( warningMessage ) throw new ConsumptionError(game.i18n.format(warningMessage, {
 			type, cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(uses.value, { spelledOut: true })
 		}));
 
@@ -151,10 +181,12 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Prepare updates for hit dice consumption.
 	 * @param {Activity} activity - Activity being activated.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
-	consumeHitDice(activity, config, updates) {
-		const cost = this.scaledCost(config);
+	async consumeHitDice(activity, config, updates) {
+		const roll = await this.resolveCost(this.scaleCost(config));
+		if ( !roll.isDeterministic ) updates.rolls.push(roll);
+		const cost = roll.total;
 
 		const actor = activity.actor;
 		const availableDenominations = Object.entries(actor.system.attributes.hd.d);
@@ -169,7 +201,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			else if ( denom.available < cost ) warningMessage = "BF.Consumption.Warning.NotEnough";
 			if ( warningMessage ) {
 				const denomination = `d${this.target}`;
-				throw new Error(game.i18n.format(warningMessage, {
+				throw new ConsumptionError(game.i18n.format(warningMessage, {
 					type: game.i18n.format("BF.Consumption.Type.HitDice.Warning", { denomination }), denomination,
 					cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(denom?.value, { spelledOut: true })
 				}));
@@ -193,7 +225,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		if ( remaining > 0 ) {
 			const available = Object.values(actor.system.attributes.hd.d).reduce((sum, d) => sum + d.available, 0);
 			const warningMessage = `BF.Consumption.Warning.${available > 0 ? "NotEnough" : "None"}`;
-			throw new Error(game.i18n.format(warningMessage, {
+			throw new ConsumptionError(game.i18n.format(warningMessage, {
 				type: game.i18n.localize("BF.HitDie.Label[other]").toLowerCase(),
 				cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(available, { spelledOut: true })
 			}));
@@ -206,11 +238,12 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Prepare updates for spell slot consumption.
 	 * @param {Activity} activity - Activity being activated.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
-	consumeSpellSlots(activity, config, updates) {
-		// TODO: Resolve this formula properly if a dice is present
-		const cost = Number(this.value);
+	async consumeSpellSlots(activity, config, updates) {
+		const roll = await this.resolveCost(this.value);
+		if ( !roll.isDeterministic ) updates.rolls.push(roll);
+		const cost = roll.total;
 		// TODO: Increase ring based on scale value
 		const ringNumber = this.target;
 
@@ -224,7 +257,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		if ( warningMessage ) {
 			const ring = CONFIG.BlackFlag.spellRings()[ringNumber].toLowerCase();
 			const type = game.i18n.format("BF.Consumption.Type.SpellSlots.Warning", { ring });
-			throw new Error(game.i18n.format(warningMessage, {
+			throw new ConsumptionError(game.i18n.format(warningMessage, {
 				type, ring, cost: numberFormat(cost, { spelledOut: true }),
 				available: numberFormat(ringData?.value, { spelledOut: true })
 			}));

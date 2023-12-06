@@ -1,3 +1,5 @@
+import ConsumptionTargetData from "../../data/activity/consumption-target-data.mjs";
+
 /**
  * Custom element for displaying the list of consumption types on an activity.
  */
@@ -93,7 +95,10 @@ export default class ConsumptionElement extends HTMLElement {
 			case "add":
 				const validTypes = this.validTypes;
 				if ( !validTypes.length ) return;
-				typesCollection.push({type: validTypes[0]});
+				typesCollection.push({
+					type: validTypes[0],
+					target: ConsumptionTargetData.getValidTargets(validTypes[0], this.activity)?.[0]?.key
+				});
 				break;
 			case "delete":
 				typesCollection.splice(index, 1);

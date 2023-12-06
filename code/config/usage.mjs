@@ -17,7 +17,7 @@ import { spellRings } from "./spellcasting.mjs";
  * @param {Activity} activity - Activity being activated.
  * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
  * @param {ConsumptionTargetData} target - Configuration info for this consumption target.
- * @param {{activity: object, item: object[], actor: object}} updates - Updates to be performed.
+ * @param {ActivationUpdates} updates - Updates to be performed.
  */
 
 /**

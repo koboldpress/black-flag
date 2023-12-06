@@ -1,4 +1,5 @@
 import BaseActivity from "../../data/activity/base-activity.mjs";
+import ConsumptionError from "../../data/activity/consumption-error.mjs";
 import PseudoDocumentMixin from "../pseudo-document.mjs";
 
 /**
@@ -109,12 +110,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		const messageConfig = foundry.utils.mergeObject({
 			create: true,
-			data: {
-				"flags.black-flag.activity": {
-					type: this.metadata.type,
-					uuid: this.uuid
-				}
-			}
+			data: {}
 		}, message);
 
 		const dialogConfig = foundry.utils.mergeObject({
@@ -131,8 +127,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// TODO
 
 		// Calculate what resources should be consumed
-		const updates = this.activationUpdates(activationConfig);
-		// TODO: Handle errors
+		const updates = await this.activationUpdates(activationConfig);
+		if ( updates === false ) return;
 
 		// Call consumeUses script & hooks
 		// TODO
@@ -154,7 +150,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// TODO
 
 		// Display the card in chat
-		await this.createActivationMessage(message);
+		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+		await this.createActivationMessage(messageConfig);
 
 		// Create measured templates if necessary
 		// TODO
@@ -166,13 +163,24 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Update data produced by activity activation.
+	 *
+	 * @typedef {object} ActivationUpdates
+	 * @property {object} activity - Updates applied to activity that performed the activation.
+	 * @property {object[]} item - Updates applied to items on the actor that performed the activation.
+	 * @property {object} actor - Updates applied to the actor that performed the activation.
+	 * @property {Roll[]} rolls - Any rolls performed as part of the activation.
+	 */
+
+	/**
 	 * Calculate changes to actor, items, & this activity based on resource consumption.
 	 * @param {ActivityActivationConfiguration} config - Activation configuration.
-	 * @returns {{activity: object, item: object[], actor: object}}
+	 * @returns {ActivationUpdates}
 	 */
-	activationUpdates(config) {
-		const updates = { activity: {}, item: [], actor: {} };
+	async activationUpdates(config) {
+		const updates = { activity: {}, item: [], actor: {}, rolls: [] };
 		if ( !config.consume ) return updates;
+		const errors = [];
 
 		if ( (config.consume === true) || config.consume.ammunition ) {
 			// TODO: Let `WeaponData` to handle this
@@ -182,11 +190,20 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			for ( const target of this.consumption.targets ) {
 				if ( (foundry.utils.getType(config.consume.resources) === "Array")
 					&& !config.consume.resources.includes(target.type) ) continue;
-				target.prepareConsumptionUpdates(this, config, updates);
+				try {
+					await target.prepareConsumptionUpdates(this, config, updates);
+				} catch(err) {
+					if ( err instanceof ConsumptionError ) {
+						errors.push(err);
+						ui.notifications.error(err.message, { console: false });
+					} else {
+						throw err;
+					}
+				}
 			}
 		}
 
-		return updates;
+		return errors.length ? false : updates;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
