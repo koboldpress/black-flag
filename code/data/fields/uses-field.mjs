@@ -27,8 +27,15 @@ export default class UsesField extends SchemaField {
 	initialize(value, model, options={}) {
 		const obj = super.initialize(value, model, options);
 
-		const existingPeriods = new Set(obj.recovery.map(r => r.period));
+		Object.defineProperty(obj, "hasUses", {
+			get() {
+				return !!this.min || !!this.max;
+			},
+			configurable: true,
+			enumerable: false
+		});
 
+		const existingPeriods = new Set(obj.recovery.map(r => r.period));
 		for ( const recovery of obj.recovery ) {
 			Object.defineProperty(recovery, "validPeriods", {
 				get() {
@@ -42,5 +49,34 @@ export default class UsesField extends SchemaField {
 		}
 
 		return obj;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine usage recovery for the provided usage data.
+	 * @param {string[]} periods - Recovery periods to apply. Will execute the first one found in recovery configurations.
+	 * @param {object} data - Usage data from a UsesField.
+	 * @param {object} rollData - Roll data to use when evaluating recovery formulas.
+	 * @returns {{updates: object, rolls: []}|false}
+	 */
+	static async recoverUses(periods, data, rollData) {
+		if ( !data.recovery.length ) return false;
+		const matchingPeriod = periods.find(p => data.recovery.find(r => r.period === p));
+		const recoveryProfile = data.recovery.find(r => r.period === matchingPeriod);
+		if ( !recoveryProfile ) return false;
+
+		const updates = {};
+		const rolls = [];
+		if ( recoveryProfile.type === "recoverAll" ) updates.spent = 0;
+		else if ( recoveryProfile.type === "loseAll" ) updates.spent = data.max ? data.max : -data.min;
+		else if ( recoveryProfile.formula ) {
+			const roll = new CONFIG.Dice.BaseRoll(recoveryProfile.formula, rollData);
+			await roll.evaluate();
+			updates.spent = Math.clamped(data.spent - roll.total, 0, data.max - data.min);
+			if ( !roll.isDeterministic ) rolls.push(roll);
+		}
+
+		return { updates, rolls };
 	}
 }

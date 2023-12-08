@@ -66,6 +66,41 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Perform any item & activity uses recovery for a certain period.
+	 * @param {string[]} periods - Recovery periods to check.
+	 * @param {object} rollData - Roll data to use when evaluating recovery formulas.
+	 * @returns {{updates: object, rolls: BaseRoll[]}}
+	 */
+	async recoverUses(periods, rollData) {
+		const updates = {};
+		const rolls = [];
+
+		if ( this.uses.hasUses ) {
+			const result = await UsesField.recoverUses(periods, this.uses, rollData);
+			if ( result ) {
+				const update = { "system.uses": result.updates };
+				foundry.utils.mergeObject(updates, update);
+				rolls.push(...result.rolls);
+			}
+		}
+
+		for ( const activity of this.activities ) {
+			if ( !activity.uses.hasUses ) continue;
+			const result = await UsesField.recoverUses(periods, activity.uses, rollData);
+			if ( result ) {
+				updates.system ??= {};
+				updates.system.activities ??= {};
+				updates.system.activities[activity.id] = { uses: result.updates };
+				rolls.push(...result.rolls);
+			}
+		}
+
+		return { updates, rolls };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Adjust consumption types allowed in activities on this item.
 	 * @param {{key: string, label: string, disabled: boolean}[]} types - All types available to activities.
 	 * @returns {{key: string, label: string, disabled: boolean}[]}} - Adjusted types.

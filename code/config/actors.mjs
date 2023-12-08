@@ -130,6 +130,8 @@ export const movementTypes = {
  * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
  * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
+ * @property {string[]} [recoverPeriods] - Recovery periods as defined in `CONFIG.BlackFlag.recoveryPeriods` that
+ *                                         should be applied when this rest is taken.
  */
 
 /**
@@ -142,7 +144,8 @@ export const rest = {
 			label: "BF.Rest.Type.Short.Label",
 			hint: "BF.Rest.Type.Short.Hint",
 			resultMessages: "BF.Rest.Result.Short",
-			dialogClass: ShortRestDialog
+			dialogClass: ShortRestDialog,
+			recoverPeriods: ["shortRest"]
 		},
 		long: {
 			label: "BF.Rest.Type.Long.Label",
@@ -150,7 +153,8 @@ export const rest = {
 			resultMessages: "BF.Rest.Result.Long",
 			dialogClass: LongRestDialog,
 			recoverHitPoints: true,
-			recoverHitDice: true
+			recoverHitDice: true,
+			recoverPeriods: ["longRest", "shortRest"]
 		}
 	},
 	hitPointsRecoveryPercentage: 1,

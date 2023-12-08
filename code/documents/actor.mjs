@@ -373,6 +373,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		this._getRestHitDiceRecovery(config, result);
 		this._getRestHitPointRecovery(config, result);
+		await this._getUsesRecovery(config, result);
 
 		/**
 		 * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -458,6 +459,30 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				"system.attributes.hp.temp": 0
 			}
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any item & activity uses recover needed for this rest.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 */
+	async _getUsesRecovery(config={}, result={}) {
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		if ( !restConfig.recoverPeriods?.length ) return;
+		const rollData = this.getRollData();
+		result.itemUpdates = [];
+		result.rolls ??= [];
+		for ( const item of this.items ) {
+			if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+			const { updates, rolls } = await item.system.recoverUses(restConfig.recoverPeriods, rollData);
+			if ( foundry.utils.isEmpty(updates) ) continue;
+			const updateTarget = result.itemUpdates.find(i => i._id === item.id);
+			if ( updateTarget ) foundry.utils.mergeObject(updateTarget, updates);
+			else result.itemUpdates.push({ _id: item.id, ...updates });
+			result.rolls.push(...rolls);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
