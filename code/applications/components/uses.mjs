@@ -25,6 +25,38 @@ export default class UsesElement extends HTMLElement {
 	#app;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Document represented by the app.
+	 * @type {Activity|BlackFlagItem}
+	 */
+	get document() {
+		return this.#app.activity ?? this.#app.document;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Path on the activity of the consumption types collection property.
+	 * @type {string}
+	 */
+	get #keyPath() {
+		return this.attributes.name?.value ?? "system.uses";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine which recovery periods are still available for creation.
+	 * @type {string[]}
+	 */
+	get validPeriods() {
+		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.#keyPath}.recovery`);
+		const existingPeriods = new Set(recoveryCollection?.map(r => r.period));
+		return Object.keys(CONFIG.BlackFlag.recoveryPeriods).filter(p => !existingPeriods.has(p));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -42,10 +74,25 @@ export default class UsesElement extends HTMLElement {
 		});
 		if ( target.dispatchEvent(event) === false ) return;
 
+		const li = target.closest("[data-index]");
+		const index = li?.dataset.index;
+		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.#keyPath}.recovery`) ?? [];
 		if ( (action !== "add") && !index ) return;
 		switch ( action ) {
+			case "add":
+				const validPeriods = this.validPeriods;
+				if ( !validPeriods.length ) return;
+				recoveryCollection.push({
+					period: validPeriods[0]
+				});
+				break;
+			case "delete":
+				recoveryCollection.splice(index, 1);
+				break;
 			default:
 				return;
 		}
+
+		return this.#app.submit({ updateData: { [`${this.#keyPath}.recovery`]: recoveryCollection }});
 	}
 }

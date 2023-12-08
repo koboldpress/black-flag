@@ -1,10 +1,11 @@
 import { numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import TypeField from "../fields/type-field.mjs";
+import UsesField from "../fields/uses-field.mjs";
 import ConsumptionTargetData from "./consumption-target-data.mjs";
 
 const {
-	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, FilePathField, NumberField, SchemaField, StringField
+	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, FilePathField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -60,11 +61,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 					max: new FormulaField() // Maximum number of steps above baseline this can be scaled
 				})
 			}, {label: "BF.Consumption.Label"}),
-			uses: new SchemaField({
-				spent: new NumberField({initial: 0, integer: true, label: "BF.Uses.Spent.Label"}),
-				min: new FormulaField({deterministic: true, label: "BF.Uses.Minimum.Label"}),
-				max: new FormulaField({deterministic: true, label: "BF.Uses.Maximum.Label"})
-			}, {label: "BF.Uses.Label"})
+			uses: new UsesField()
 		};
 	}
 

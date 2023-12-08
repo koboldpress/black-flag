@@ -49,6 +49,7 @@ export function registerCustomElements() {
 	window.customElements.define("blackflag-damagelist", components.DamageListElement);
 	window.customElements.define("blackflag-effects", components.EffectsElement);
 	window.customElements.define("blackflag-pcactions", components.PCActionsElement);
+	window.customElements.define("blackflag-uses", components.UsesElement);
 	window.customElements.define("blackflag-xpbar", components.XPBarElement);
 }
 

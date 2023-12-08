@@ -1,8 +1,6 @@
 import { numberFormat, replaceFormulaData, simplifyBonus } from "../../../utils/_module.mjs";
 import { ActivityField } from "../../fields/activity-field.mjs";
-import FormulaField from "../../fields/formula-field.mjs";
-
-const { NumberField, SchemaField } = foundry.data.fields;
+import UsesField from "../../fields/uses-field.mjs";
 
 /**
  * Data definition template for items with activities.
@@ -12,11 +10,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			activities: new ActivityField(),
-			uses: new SchemaField({
-				spent: new NumberField({initial: 0, integer: true, label: "BF.Uses.Spent.Label"}),
-				min: new FormulaField({deterministic: true, label: "BF.Uses.Minimum.Label"}),
-				max: new FormulaField({deterministic: true, label: "BF.Uses.Maximum.Label"})
-			}, {label: "BF.Uses.Label"})
+			uses: new UsesField()
 		};
 	}
 

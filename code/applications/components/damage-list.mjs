@@ -57,7 +57,7 @@ export default class DamageListElement extends HTMLElement {
 	 * @type {string}
 	 */
 	get #keyPath() {
-		return this.name ?? "system.damage.parts";
+		return this.attributes.name?.value ?? "system.damage.parts";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

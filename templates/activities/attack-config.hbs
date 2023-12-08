@@ -4,7 +4,7 @@
 			<img src="{{activity.img}}" data-edit="img">
 		</figure>
 		<h1>
-			<input type="text" name="name" value="{{activity._source.name}}" placeholder="{{default.title}}">
+			<input type="text" name="name" value="{{source.name}}" placeholder="{{default.title}}">
 		</h1>
 	</header>
 
@@ -14,7 +14,7 @@
 			<label>
 				<span>ability</span>
 				<select name="system.ability">
-					{{#select source.ability}}
+					{{#select source.system.ability}}
 						{{#if labels.defaultAbility}}
 							<option value="">{{labels.defaultAbility}}</option>
 						{{/if}}
@@ -30,14 +30,14 @@
 				<label>
 					<span>{{localize "BF.Weapon.Type.Label"}}</span>
 					<select name="system.type.value">
-						{{selectOptions CONFIG.weaponTypes selected=source.type.value blank=labels.defaultType
+						{{selectOptions CONFIG.weaponTypes selected=source.system.type.value blank=labels.defaultType
 							labelAttr="label" localize=true}}
 					</select>
 				</label>
 				<label>
 					<span>{{localize "BF.Attack.Classification.Label"}}</span>
 					<select name="system.type.classification">
-						{{selectOptions CONFIG.attackTypes selected=source.type.classification blank=labels.defaultClassification
+						{{selectOptions CONFIG.attackTypes selected=source.system.type.classification blank=labels.defaultClassification
 							localize=true}}
 					</select>
 				</label>

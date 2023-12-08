@@ -76,9 +76,7 @@ export default class ActivityConfig extends FormApplication {
 		const context = foundry.utils.mergeObject(super.getData(options), {
 			activity: this.activity,
 			system: this.activity.system,
-			source: source.system,
-			consumption: source.consumption,
-			uses: source.uses,
+			source,
 			default: {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon

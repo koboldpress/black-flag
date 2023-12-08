@@ -1,0 +1,64 @@
+<blackFlag-uses name="{{name}}">
+	<fieldset>
+		<legend>{{localize "BF.Uses.Label"}}</legend>
+		<div class="field-group">
+			<span>{{localize "BF.Uses.Limits.Label"}}</span>
+			<label>
+				<span>{{localize "BF.Uses.Minimum.Label"}}</span>
+				<input type="text" name="{{name}}.min" value="{{source.min}}" placeholder="0">
+			</label>
+			<label>
+				<span>{{localize "BF.Uses.Maximum.Label"}}</span>
+				<input type="text" name="{{name}}.max" value="{{source.max}}" placeholder="0">
+			</label>
+		</div>
+		<label>
+			<span>{{localize "BF.Uses.Spent.Label"}}</span>
+			<input type="number" name="{{name}}.spent" value="{{derived.spent}}">
+		</label>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{localize "BF.Recovery.Label"}}</legend>
+		<ul class="configuration-list">
+			{{#each derived.recovery}}
+				<li data-index="{{@index}}">
+					<div class="field-group">
+						<label class="period">
+							<span>{{localize "BF.Recovery.Period.Label"}}</span>
+							<select name="{{../name}}.recovery.{{@index}}.period">
+								{{#select period}}
+									{{#each validPeriods}}
+										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
+									{{/each}}
+								{{/select}}
+							</select>
+						</label>
+						<label class="type">
+							<span>{{localize "BF.Recovery.Type.Label"}}</span>
+							<select name="{{../name}}.recovery.{{@index}}.type">
+								{{selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true}}
+							</select>
+						</label>
+						{{#if (eq type "formula")}}
+							<label class="formula">
+								<span>{{localize "BF.Recovery.Formula.Label"}}</span>
+								<input type="text" name="{{../name}}.recovery.{{@index}}.formula" value="{{formula}}">
+							</label>
+						{{/if}}
+					</div>
+					<div class="controls">
+						<a data-action="delete">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					</div>
+				</li>
+			{{/each}}
+			<li class="add-control">
+				<a data-action="add">
+				 <i class="fa-solid fa-plus"></i> {{localize "BF.Recovery.Action.Add"}}
+				</a>
+			</li>
+		</ul>
+	</fieldset>
+</blackFlag-uses>

@@ -1,7 +1,7 @@
 <blackFlag-consumption>
 	<fieldset>
 		<legend>{{localize "BF.Consumption.Label"}}</legend>
-		<ul>
+		<ul class="configuration-list">
 			{{#each activity.consumption.targets}}
 				<li data-index="{{@index}}">
 					<div class="field-group">
@@ -66,23 +66,4 @@
 	</fieldset>
 </blackFlag-consumption>
 
-<blackFlag-uses>
-	<fieldset>
-		<legend>{{localize "BF.Uses.Label"}}</legend>
-		<div class="field-group">
-			<span>{{localize "BF.Uses.Limits.Label"}}</span>
-			<label>
-				<span>{{localize "BF.Uses.Minimum.Label"}}</span>
-				<input type="text" name="uses.min" value="{{uses.min}}" placeholder="0">
-			</label>
-			<label>
-				<span>{{localize "BF.Uses.Maximum.Label"}}</span>
-				<input type="text" name="uses.max" value="{{uses.max}}" placeholder="0">
-			</label>
-		</div>
-		<label>
-			<span>{{localize "BF.Uses.Spent.Label"}}</span>
-			<input type="number" name="uses.spent" value="{{uses.spent}}">
-		</label>
-	</fieldset>
-</blackFlag-uses>
+{{> "blackFlag.uses-config" name="uses" source=source.uses derived=activity.uses}}

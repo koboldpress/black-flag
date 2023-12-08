@@ -81,9 +81,17 @@ export const consumptionTypes = {
  * @enum {RecoveryPeriodConfiguration}
  */
 export const recoveryPeriods = {
-	turn: {
-		label: "BF.Recovery.Period.Turn.Label",
-		abbreviation: "BF.Recovery.Period.Turn.Label",
+	longRest: {
+		label: "BF.Rest.Type.Long.Label",
+		abbreviation: "BF.Rest.Type.Long.Abbreviation"
+	},
+	shortRest: {
+		label: "BF.Rest.Type.Short.Label",
+		abbreviation: "BF.Rest.Type.Short.Abbreviation"
+	},
+	encounter: {
+		label: "BF.Recovery.Period.Encounter.Label",
+		abbreviation: "BF.Recovery.Period.Encounter.Label",
 		combatOnly: true
 	},
 	round: {
@@ -91,19 +99,29 @@ export const recoveryPeriods = {
 		abbreviation: "BF.Recovery.Period.Round.Label",
 		combatOnly: true
 	},
-	encounter: {
-		label: "BF.Recovery.Period.Encounter.Label",
-		abbreviation: "BF.Recovery.Period.Encounter.Label",
+	turn: {
+		label: "BF.Recovery.Period.Turn.Label",
+		abbreviation: "BF.Recovery.Period.Turn.Label",
 		combatOnly: true
-	},
-	sr: {
-		label: "BF.Rest.Type.Short.Label",
-		abbreviation: "BF.Rest.Type.Short.Abbreviation"
-	},
-	lr: {
-		label: "BF.Rest.Type.Long.Label",
-		abbreviation: "BF.Rest.Type.Long.Abbreviation"
 	}
 };
 localizeConfig(recoveryPeriods, { labelKeyPath: "label", sort: false });
 localizeConfig(recoveryPeriods, { labelKeyPath: "abbreviation", propertyName: "localizedAbbreviations", sort: false });
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Types of usage recovery.
+ * @enum {LabeledConfiguration}
+ */
+export const recoveryTypes = {
+	recoverAll: {
+		label: "BF.Recovery.Type.RecoverAll"
+	},
+	loseAll: {
+		label: "BF.Recovery.Type.LoseAll"
+	},
+	formula: {
+		label: "BF.Recovery.Type.Formula"
+	}
+};

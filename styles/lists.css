@@ -122,3 +122,44 @@
 		gap: 0.75rem;
 	}
 }
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                  Configuration Lists                  */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+ul.configuration-list {
+	--gap-size: 6px;
+
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--gap-size);
+		padding-inline: 0;
+
+		&:not(:last-of-type) {
+			border-block-end: 1px solid var(--bf-color-border-gray);
+			padding-block-end: 0.25rem;
+		}
+
+		.field-group {
+			flex: 1 1 100%;
+			gap: var(--gap-size);
+		}
+
+		.controls {
+			align-self: center;
+			display: flex;
+			gap: var(--gap-size);
+			padding-block-start: 1em;
+		}
+	}
+	.add-control {
+		justify-content: center;
+		padding-block-start: 0.75em;
+	}
+}

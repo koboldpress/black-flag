@@ -185,7 +185,8 @@ export async function registerHandlebarsPartials() {
 		"item/concept-summary.hbs",
 		"item/item-activities.hbs",
 		"item/item-advancement.hbs",
-		"journal/journal-table.hbs"
+		"journal/journal-table.hbs",
+		"shared/uses-config.hbs"
 	];
 
 	const paths = {};

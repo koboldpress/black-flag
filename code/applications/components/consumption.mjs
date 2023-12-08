@@ -55,7 +55,7 @@ export default class ConsumptionElement extends HTMLElement {
 	 * @type {string}
 	 */
 	get #keyPath() {
-		return this.name ?? "consumption.targets";
+		return this.attributes.name?.value ?? "consumption.targets";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
