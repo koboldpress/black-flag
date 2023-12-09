@@ -306,17 +306,6 @@ export default class BaseActorSheet extends ActorSheet {
 				break;
 			case "effect":
 				return BlackFlagActiveEffect.onEffectAction.bind(this)(event);
-			case "item":
-				const itemId = properties.itemId ?? event.target.closest("[data-item-id]")?.dataset.itemId;
-				const item = this.actor.items.get(itemId);
-				switch (subAction) {
-					case "delete":
-						return item?.deleteDialog();
-					case "edit":
-					case "view":
-						return item?.sheet.render(true);
-				}
-				break;
 			case "rest":
 				return this.actor.rest({type: properties.type});
 			case "roll":
