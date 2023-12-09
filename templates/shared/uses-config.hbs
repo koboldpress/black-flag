@@ -5,16 +5,16 @@
 			<span>{{localize "BF.Uses.Limits.Label"}}</span>
 			<label>
 				<span>{{localize "BF.Uses.Minimum.Label"}}</span>
-				<input type="text" name="{{name}}.min" value="{{source.min}}" placeholder="0">
+				<input type="text" name="min" value="{{source.min}}" placeholder="0">
 			</label>
 			<label>
 				<span>{{localize "BF.Uses.Maximum.Label"}}</span>
-				<input type="text" name="{{name}}.max" value="{{source.max}}" placeholder="0">
+				<input type="text" name="max" value="{{source.max}}" placeholder="0">
 			</label>
 		</div>
 		<label>
 			<span>{{localize "BF.Uses.Spent.Label"}}</span>
-			<input type="number" name="{{name}}.spent" value="{{derived.spent}}">
+			<input type="number" name="spent" value="{{derived.spent}}">
 		</label>
 	</fieldset>
 
@@ -26,7 +26,7 @@
 					<div class="field-group">
 						<label class="period">
 							<span>{{localize "BF.Recovery.Period.Label"}}</span>
-							<select name="{{../name}}.recovery.{{@index}}.period">
+							<select name="recovery.{{@index}}.period">
 								{{#select period}}
 									{{#each validPeriods}}
 										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
@@ -36,14 +36,14 @@
 						</label>
 						<label class="type">
 							<span>{{localize "BF.Recovery.Type.Label"}}</span>
-							<select name="{{../name}}.recovery.{{@index}}.type">
+							<select name="recovery.{{@index}}.type">
 								{{selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true}}
 							</select>
 						</label>
 						{{#if (eq type "formula")}}
 							<label class="formula">
 								<span>{{localize "BF.Recovery.Formula.Label"}}</span>
-								<input type="text" name="{{../name}}.recovery.{{@index}}.formula" value="{{formula}}">
+								<input type="text" name="recovery.{{@index}}.formula" value="{{formula}}">
 							</label>
 						{{/if}}
 					</div>

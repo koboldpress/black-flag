@@ -1,10 +1,12 @@
+import FormAssociatedElement from "./form-associated-element.mjs";
+
 /**
  * Custom element for displaying limited uses & recovery details.
  */
-export default class UsesElement extends HTMLElement {
+export default class UsesElement extends FormAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
@@ -19,29 +21,11 @@ export default class UsesElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Document represented by the app.
 	 * @type {Activity|BlackFlagItem}
 	 */
 	get document() {
-		return this.#app.activity ?? this.#app.document;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Path on the activity of the consumption types collection property.
-	 * @type {string}
-	 */
-	get #keyPath() {
-		return this.attributes.name?.value ?? "system.uses";
+		return this.app.activity ?? this.app.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -51,7 +35,7 @@ export default class UsesElement extends HTMLElement {
 	 * @type {string[]}
 	 */
 	get validPeriods() {
-		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.#keyPath}.recovery`);
+		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.name}.recovery`);
 		const existingPeriods = new Set(recoveryCollection?.map(r => r.period));
 		return Object.keys(CONFIG.BlackFlag.recoveryPeriods).filter(p => !existingPeriods.has(p));
 	}
@@ -76,7 +60,7 @@ export default class UsesElement extends HTMLElement {
 
 		const li = target.closest("[data-index]");
 		const index = li?.dataset.index;
-		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.#keyPath}.recovery`) ?? [];
+		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.name}.recovery`) ?? [];
 		if ( (action !== "add") && !index ) return;
 		switch ( action ) {
 			case "add":
@@ -93,6 +77,6 @@ export default class UsesElement extends HTMLElement {
 				return;
 		}
 
-		return this.#app.submit({ updateData: { [`${this.#keyPath}.recovery`]: recoveryCollection }});
+		return this.app.submit({ updateData: { [`${this.name}.recovery`]: recoveryCollection }});
 	}
 }
