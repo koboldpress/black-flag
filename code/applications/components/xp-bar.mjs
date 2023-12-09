@@ -1,17 +1,19 @@
 import { numberFormat } from "../../utils/_module.mjs";
+import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
  * Custom element for displaying the XP bar on the character sheet.
  */
-export default class XPBarElement extends HTMLElement {
+export default class XPBarElement extends AppAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
+
 		const xp = this.actor?.system.progression?.xp;
 		if ( !xp ) return;
 		this.innerHTML = `
 			<div role="meter"></div>
-			<label id="${this.#app.id}-xp-bar-label">${game.i18n.localize("BF.ExperiencePoints.Label")}</label>
+			<label id="${this.app.id}-xp-bar-label">${game.i18n.localize("BF.ExperiencePoints.Label")}</label>
 			<div class="input">
 				<input type="number" name="xpChange" placeholder="${game.i18n.localize("BF.ExperiencePoints.Action.Add")}">
 				<button type="submit" name="addXP"><i class="fa-solid fa-plus"></i></button>
@@ -57,14 +59,6 @@ export default class XPBarElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * ID of the change listener.
 	 * @type {number}
 	 */
@@ -77,7 +71,7 @@ export default class XPBarElement extends HTMLElement {
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
-		return this.#app.document;
+		return this.app.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

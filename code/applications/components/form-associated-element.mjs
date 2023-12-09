@@ -1,7 +1,9 @@
+import AppAssociatedElement from "./app-associated-element.mjs";
+
 /**
  * Abstract custom element with some form internal architecture and app hookups.
  */
-export default class FormAssociatedElement extends HTMLElement {
+export default class FormAssociatedElement extends AppAssociatedElement {
 
 	static formAssociated = true;
 
@@ -16,7 +18,7 @@ export default class FormAssociatedElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 		if ( this.form ) {
 			this.form.addEventListener("formdata", this.#formDataHandler);
 		}
@@ -32,22 +34,6 @@ export default class FormAssociatedElement extends HTMLElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	get app() {
-		return this.#app;
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
