@@ -1,12 +1,14 @@
+import FormAssociatedElement from "./form-associated-element.mjs";
+
 /**
  * Custom element for displaying the list of damages on an activity.
  */
-export default class DamageListElement extends HTMLElement {
+export default class DamageListElement extends FormAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
-		const damageCollection = foundry.utils.getProperty(this.activity, this.#keyPath);
+		const damageCollection = foundry.utils.getProperty(this.activity, this.name);
 		for ( const li of this.querySelectorAll("[data-index]") ) {
 			const damage = damageCollection?.[li.dataset.index];
 			this.#toggleState(li.dataset.index, !!damage?.custom);
@@ -25,19 +27,11 @@ export default class DamageListElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Activity represented by the app.
 	 * @type {Activity}
 	 */
 	get activity() {
-		return this.#app.activity;
+		return this.app.activity;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -48,16 +42,6 @@ export default class DamageListElement extends HTMLElement {
 	 */
 	get isEditable() {
 		return this.activity.item.testUserPermission(game.user, "EDIT");
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Path on the activity of the damage collection property.
-	 * @type {string}
-	 */
-	get #keyPath() {
-		return this.attributes.name?.value ?? "system.damage.parts";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -80,7 +64,7 @@ export default class DamageListElement extends HTMLElement {
 
 		const li = target.closest("[data-index]");
 		const index = li?.dataset.index;
-		const damageCollection = foundry.utils.getProperty(this.activity.toObject(), this.#keyPath) ?? [];
+		const damageCollection = foundry.utils.getProperty(this.activity.toObject(), this.name) ?? [];
 		if ( (action !== "add") && !index ) return;
 		switch ( action ) {
 			case "add":
@@ -102,7 +86,7 @@ export default class DamageListElement extends HTMLElement {
 				return;
 		}
 
-		return this.#app.submit({ updateData: { [this.#keyPath]: damageCollection }});
+		return this.app.submit({ updateData: { [this.name]: damageCollection }});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -115,7 +99,7 @@ export default class DamageListElement extends HTMLElement {
 	 * @returns {string} - Formula that can be used as the basis of a custom formula.
 	 */
 	#createFormula(index) {
-		const damage = foundry.utils.getProperty(this.activity.toObject(), this.#keyPath)?.[index];
+		const damage = foundry.utils.getProperty(this.activity.toObject(), this.name)?.[index];
 		if ( damage.denomination ) {
 			const dice = `${damage.number || 1}d${damage.denomination}`;
 			return damage.bonus ? `${dice} + ${damage.bonus}` : dice;
