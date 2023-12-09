@@ -1,42 +1,42 @@
-<section class="inventory">
-	{{!-- TODO: Filters by type --}}
-	{{!-- TODO: Currency --}}
-
-	<ol class="items-list">
+<blackFlag-inventory>
+	<table>
+		<thead>
+			{{!-- TODO: Filters by type --}}
+			{{!-- TODO: Currency --}}
+		</thead>
 		{{#each sections.inventory as |section sectionId|}}
-			<li class="item-category" data-section="{{sectionId}}">
-				<header class="header">
-					<h3 class="item-name">{{localize section.label}}</h3>
-					<div class="item-details inventory-details">
-						<div class="uses">{{localize "BF.Uses.Short"}}</div>
-						<div class="weight">{{localize "BF.Weight.Label"}}</div>
-						<div class="quantity">{{localize "BF.Quantity.Label"}}</div>
-						<div class="cost">{{localize "BF.Price.Label"}}</div>
-						<div class="traits">{{localize "BF.Trait.Label[other]"}}</div>
-					</div>
-					<div class="item-controls">
-						
-					</div>
-				</header>
-				<ol class="item-list">
-					{{#each section.items as |item|}}
-						<li class="item" data-item-id="{{item.id}}">
-							<div class="item-equipped">
-								<input type="checkbox" name="item.{{item.id}}.flags.black-flag.relationship.equipped"
-									{{checked item.system.equipped}}>
+			<tbody data-section="{{sectionId}}">
+				<tr>
+					<td class="name">{{localize section.label}}</td>
+					<th class="uses" scope="col">{{localize "BF.Uses.Short"}}</th>
+					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
+					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
+					<th class="cost" scope="col">{{localize "BF.Price.Label"}}</th>
+					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
+					<td class="controls"></td>
+				</tr>
+				{{#each section.items}}
+					<tr data-item-id="{{id}}">
+						<th class="name" scope="row">
+							<div class="layout">
+								<figure>
+									<img src="{{img}}">
+								</figure>
+								<span>{{name}}</span>
+								{{blackFlag-notificationBadge @root.actor document=this}}
 							</div>
-							<div class="item-name">
-								{{item.name}}
-								{{blackFlag-notificationBadge actor document=item}}
-							</div>
-							<div class="item-details inventory-details">
-								<div class="uses">{{item.system.uses.label}}</div>
-								<div class="weight">{{item.system.weight.label}}</div>
-								<div class="quantity">{{blackFlag-number item.system.quantity}}</div>
-								<div class="cost">{{item.system.price.label}}</div>
-								<div class="traits">{{item.system.traits}}</div>
-							</div>
-							<div class="item-controls">
+						</th>
+						<td class="uses">{{system.uses.label}}</td>
+						<td class="weight">{{system.weight.label}}</td>
+						<td class="quantity">{{blackFlag-number system.quantity}}</td>
+						<td class="cost">{{system.price.label}}</td>
+						<td class="traits">{{system.traits}}</td>
+						<td class="equipped">
+							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.equipped"
+								{{checked system.equipped}}>
+						</td>
+						<td class="controls">
+							<div class="layout">
 								{{#if @root.modes.editing}}
 									<a data-action="item" data-sub-action="edit">
 										<i class="fa-solid fa-edit"></i>
@@ -50,10 +50,10 @@
 									</a>
 								{{/if}}
 							</div>
-						</li>
-					{{/each}}
-				</ol>
-			</li>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
 		{{/each}}
-	</ol>
-</section>
+	</table>
+</blackFlag-inventory>
