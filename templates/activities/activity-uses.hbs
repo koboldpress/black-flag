@@ -1,4 +1,4 @@
-<blackFlag-consumption>
+<blackFlag-consumption name="consumption">
 	<fieldset>
 		<legend>{{localize "BF.Consumption.Label"}}</legend>
 		<ul class="configuration-list">
@@ -7,7 +7,7 @@
 					<div class="field-group">
 						<label class="type">
 							<span>{{localize "BF.Consumption.Type.Label"}}</span>
-							<select name="consumption.targets.{{@index}}.type">
+							<select name="targets.{{@index}}.type">
 								{{#select type}}
 									{{#each validTypes}}
 										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
@@ -18,19 +18,19 @@
 						{{#with validTargets as |targets|}}
 							<label class="target">
 								<span>{{localize "BF.Consumption.Target.Label"}}</span>
-								<select name="consumption.targets.{{@index}}.target">
+								<select name="targets.{{@index}}.target">
 									{{selectOptions targets selected=../target nameAttr="key" labelAttr="label"}}
 								</select>
 							</label>
 						{{/with}}
 						<label class="value">
 							<span>{{localize "BF.Consumption.Amount.Label"}}</span>
-							<input type="text" name="consumption.targets.{{@index}}.value" value="{{value}}">
+							<input type="text" name="targets.{{@index}}.value" value="{{value}}">
 						</label>
 						{{#if @root.consumption.scale.allowed}}
 							<label class="scale">
 								<span>{{localize "BF.Consumption.Scale.Label"}}</span>
-								<input type="text" name="consumption.targets.{{@index}}.scale" value="{{scale}}">
+								<input type="text" name="targets.{{@index}}.scale" value="{{scale}}">
 							</label>
 						{{/if}}
 					</div>
@@ -52,15 +52,15 @@
 				{{localize "BF.Consumption.AllowScaling.Label"}}
 				<i class="hintIcon" data-tooltip="BF.Consumption.AllowScaling.Hint"></i>
 			</span>
-			<input type="checkbox" name="consumption.scale.allowed" {{checked consumption.scale.allowed}}>
+			<input type="checkbox" name="scale.allowed" {{checked activity.consumption.scale.allowed}}>
 		</label>
-		{{#if consumption.scale.allowed}}
+		{{#if activity.consumption.scale.allowed}}
 			<label>
 				<span>
 					{{localize "BF.Consumption.MaxScaling.Label"}}
 					<i class="hintIcon" data-tooltip="BF.Consumption.MaxScaling.Hint"></i>
 				</span>
-				<input type="text" name="consumption.scale.max" value="{{consumption.scale.max}}" placeholder="∞">
+				<input type="text" name="scale.max" value="{{activity.consumption.scale.max}}" placeholder="∞">
 			</label>
 		{{/if}}
 	</fieldset>

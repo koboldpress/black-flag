@@ -1,12 +1,13 @@
 import ConsumptionTargetData from "../../data/activity/consumption-target-data.mjs";
+import FormAssociatedElement from "./form-associated-element.mjs";
 
 /**
  * Custom element for displaying the list of consumption types on an activity.
  */
-export default class ConsumptionElement extends HTMLElement {
+export default class ConsumptionElement extends FormAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
 		if ( !this.validTypes.length ) this.querySelector(".add-control").remove();
 
@@ -23,19 +24,11 @@ export default class ConsumptionElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Activity represented by the app.
 	 * @type {Activity}
 	 */
 	get activity() {
-		return this.#app.activity;
+		return this.app.activity;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -51,11 +44,11 @@ export default class ConsumptionElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Path on the activity of the consumption types collection property.
+	 * Path on the activity of the consumption targets collection property.
 	 * @type {string}
 	 */
 	get #keyPath() {
-		return this.attributes.name?.value ?? "consumption.targets";
+		return `${this.name ?? "consumption"}.targets`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -65,7 +58,7 @@ export default class ConsumptionElement extends HTMLElement {
 	 * @type {string[]}
 	 */
 	get validTypes() {
-		const existingTypes = new Set(this.activity.consumption.targets.map(t => t.type));
+		const existingTypes = new Set(foundry.utils.getProperty(this.activity.toObject(), this.#keyPath).map(t => t.type));
 		return Object.keys(CONFIG.BlackFlag.consumptionTypes).filter(t => !existingTypes.has(t));
 	}
 
@@ -107,6 +100,6 @@ export default class ConsumptionElement extends HTMLElement {
 				return;
 		}
 
-		return this.#app.submit({ updateData: { [this.#keyPath]: typesCollection }});
+		return this.app.submit({ updateData: { [this.#keyPath]: typesCollection }});
 	}
 }
