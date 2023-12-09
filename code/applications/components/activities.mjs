@@ -1,13 +1,14 @@
 import { log } from "../../utils/_module.mjs";
 import ActivitySelection from "../activity/activity-selection.mjs";
+import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
  * Custom element for displaying the activities on an item sheet.
  */
-export default class ActivitiesElement extends HTMLElement {
+export default class ActivitiesElement extends AppAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
@@ -25,19 +26,11 @@ export default class ActivitiesElement extends HTMLElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getItemActivityContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.#app, this, "[data-activity-id]", contextOptions);
+		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-activity-id]", contextOptions);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -65,7 +58,7 @@ export default class ActivitiesElement extends HTMLElement {
 	 * @type {BlackFlagItem}
 	 */
 	get item() {
-		return this.#app.document;
+		return this.app.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

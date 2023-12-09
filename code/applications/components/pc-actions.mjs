@@ -1,10 +1,12 @@
+import AppAssociatedElement from "./app-associated-element.mjs";
+
 /**
  * Custom element for displaying the actions on the character sheet.
  */
-export default class PCActionsElement extends HTMLElement {
+export default class PCActionsElement extends AppAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
 		// Attach listeners to buttons
 		for ( const button of this.querySelectorAll('[data-action="activate"]') ) {
@@ -17,19 +19,11 @@ export default class PCActionsElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Actor that originates these actions.
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
-		return this.#app.document;
+		return this.app.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

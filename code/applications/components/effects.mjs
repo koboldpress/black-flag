@@ -1,12 +1,13 @@
 import { log } from "../../utils/_module.mjs";
+import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
  * Custom element for displaying the active effects on actor or item sheets.
  */
-export default class EffectsElement extends HTMLElement {
+export default class EffectsElement extends AppAssociatedElement {
 
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		super.connectedCallback();
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
@@ -24,7 +25,7 @@ export default class EffectsElement extends HTMLElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getActiveEffectContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.#app, this, "[data-effect-id]", contextOptions);
+		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-effect-id]", contextOptions);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -32,19 +33,11 @@ export default class EffectsElement extends HTMLElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	#app;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Document represented by the app.
 	 * @type {BlackFlagActor|BlackFlagItem}
 	 */
 	get document() {
-		return this.#app.document;
+		return this.app.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
