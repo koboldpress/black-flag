@@ -1,43 +1,45 @@
-<section class="features">
-	{{!-- TODO: Filters by action type --}}
-
-	<ol class="items-list">
+<blackFlag-inventory>
+	<table>
+		<thead>
+			{{!-- TODO: Filters by action type --}}
+		</thead>
 		{{#each sections.features as |section sectionId|}}
-			<li class="item-category" data-section="{{sectionId}}">
-				<header class="header">
-					<h3 class="item-name">{{localize section.label}}</h3>
-					<div class="item-details inventory-details">
-						<div class="uses">{{localize "BF.Uses.Short"}}</div>
-					</div>
-				</header>
-				<ol class="item-list">
-					{{#each section.items as |item|}}
-						<li class="item" data-item-id="{{item.id}}">
-							<div class="item-name">
-								{{item.name}}
-								{{blackFlag-notificationBadge actor document=item}}
+			<tbody data-section="{{sectionId}}">
+				<tr>
+					<td class="name">{{localize section.label}}</td>
+					<th class="uses">{{localize "BF.Uses.Short"}}</th>
+				</tr>
+				{{#each section.items}}
+					<tr data-item-id="{{id}}">
+						<th class="name" scope="row">
+							<div class="layout">
+								<figure>
+									<img src="{{img}}">
+								</figure>
+								{{name}}
+								{{blackFlag-notificationBadge @root.actor document=this}}
 							</div>
-							<div class="item-details inventory-details">
-								<div class="uses">{{item.system.uses.label}}</div>
-							</div>
-							<div class="item-controls">
+						</th>
+						<td class="uses">{{system.uses.label}}</td>
+						<td class="controls">
+							<div class="layout">
 								{{#if @root.modes.editing}}
-									<a data-action="item" data-sub-action="edit">
+									<a data-action="edit">
 										<i class="fa-solid fa-edit"></i>
 									</a>
-									<a data-action="item" data-sub-action="delete">
+									<a data-action="delete">
 										<i class="fa-solid fa-trash"></i>
 									</a>
 								{{else}}
-									<a data-action="item" data-sub-action="view">
+									<a data-action="view">
 										<i class="fa-regular fa-eye"></i>
 									</a>
 								{{/if}}
 							</div>
-						</li>
-					{{/each}}
-				</ol>
-			</li>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
 		{{/each}}
-	</ol>
-</section>
+	</table>
+</blackFlag-inventory>
