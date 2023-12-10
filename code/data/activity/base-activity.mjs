@@ -92,5 +92,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			configurable: true,
 			enumerable: false
 		});
+
+		this.system.prepareFinalData?.();
 	}
 }

@@ -1,17 +1,11 @@
 blackFlag-pcActions {
-	h4 {
-		font-family: var(--bf-font-primary);
-		font-weight: 700;
+	tbody {
+		tr:first-child {
+			font-family: var(--bf-font-primary);
+			font-weight: 700;
+		}
 	}
-	ul {
-		list-style: none;
-		padding: 0;
-	}
-	li {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
+
 	button[data-action="activate"] {
 		position: relative;
 		inline-size: unset;
@@ -33,7 +27,7 @@ blackFlag-pcActions {
 			border-radius: calc(var(--bf-button-border-radius) - var(--bf-button-inset));
 		}
 
-		&:hover, &:focus {
+		&:hover, &:focus-visible {
 			box-shadow: 0 0 5px var(--bf-color-border-light-blue);
 		}
 		&:hover {
@@ -43,7 +37,6 @@ blackFlag-pcActions {
 	}
 
 	hgroup {
-		flex: 0 0 10em;
 		h6 {
 			margin: 0;
 			font-size: var(--font-size-10);
@@ -52,7 +45,31 @@ blackFlag-pcActions {
 		}
 		p {
 			margin: 0;
-			font-size: var(--font-size-13);
+			font-size: var(--font-size-12);
+		}
+	}
+
+	.uses, .challenge, .effect {
+		min-inline-size: 4em;
+		padding-inline: 4px;
+		font-size: var(--font-size-12);
+
+		.layout {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.uses {
+		span:has(+ span) { font-size: var(--font-size-10); }
+	}
+	.challenge {
+		.ability {
+			color: var(--bf-text-color-light-label);
+			font-size: var(--font-size-10);
+			font-weight: bold;
+			text-transform: uppercase;
 		}
 	}
 }

@@ -11,7 +11,7 @@ export default class PCSheet extends BaseActorSheet {
 			classes: ["black-flag", "actor", "sheet", "pc"],
 			dragDrop: [{dragSelector: "[data-item-id]"}],
 			width: 820,
-			height: 740,
+			height: 880,
 			tabs: [
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
 			],

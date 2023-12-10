@@ -1,5 +1,6 @@
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../pseudo-document.mjs";
 
 /**
@@ -45,6 +46,45 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Contents of the challenge column in the action table.
+	 * @type {string}
+	 */
+	get challengeColumn() {
+		return "";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the effect column in the action table.
+	 * @type {string}
+	 */
+	get effectColumn() {
+		return "";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the uses column in action table.
+	 * @type {string}
+	 */
+	get usesColumn() {
+		const uses = document.createElement("div");
+		uses.classList.add("layout");
+		if ( this.consumption.targets.find(t => t.type === "item") ) {
+			const itemUses = this.item.system.uses;
+			uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
+		}
+		if ( this.consumption.targets.find(t => t.type === "activity") ) {
+			uses.innerHTML += `<span>${numberFormat(this.uses.value)} / ${numberFormat(this.uses.max)}</span>`;
+		}
+		return uses.outerHTML;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Data used when fetching modifiers associated with this activity.
 	 * @type {object}
 	 */
@@ -56,13 +96,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Prepare data for the Advancement.
-	 */
 	prepareData() {
 		this.name = this.name || game.i18n.localize(this.constructor.metadata.title);
 		this.img = this.img || this.constructor.metadata.icon;
 		this.system.prepareData?.();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.system.prepareFinalData?.();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

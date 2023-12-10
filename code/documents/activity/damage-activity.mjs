@@ -8,6 +8,21 @@ import Activity from "./activity.mjs";
 export default class DamageActivity extends Activity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the effect column in the action table.
+	 * @type {string}
+	 */
+	get effectColumn() {
+		const layout = document.createElement("div");
+		layout.classList.add("layout");
+		layout.innerHTML = "";
+		return layout.outerHTML;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -1,17 +1,38 @@
 <blackFlag-pcActions>
-	{{#each actions}}
-		<h4>{{this.label}}</h4>
-		<ul>
-			{{#each this.activities}}
-				<li data-activity="{{this.uuid}}">
-					<button type="button" data-action="activate">{{localize "BF.Activity.Action.Use"}}</button>
-					<hgroup>
-						<h6>{{this.item.name}}</h6>
-						<p>{{this.name}}</p>
-					</hgroup>
-					<!-- Get specific details from activity -->
-				</li>
-			{{/each}}
-		</ul>
-	{{/each}}	
+	<table>
+		<thead>
+			<!-- Filters here -->
+		</thead>
+		{{#each actions}}
+			<tbody>
+				<tr>
+					<th colspan="5">
+						{{label}}
+					</th>
+				</tr>
+				{{#each activities}}
+					<tr data-activity="{{uuid}}">
+						<td class="control">
+							<button type="button" data-action="activate">{{localize "BF.Activity.Action.Use"}}</button>
+						</td>
+						<td class="name">
+							<hgroup>
+								<h6>{{item.name}}</h6>
+								<p>{{name}}</p>
+							</hgroup>
+						</td>
+						<td class="uses">
+							{{{usesColumn}}}
+						</td>
+						<td class="challenge">
+							{{{challengeColumn}}}
+						</td>
+						<td class="effect">
+							{{{effectColumn}}}
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		{{/each}}
+	</table>
 </blackFlag-pcActions>

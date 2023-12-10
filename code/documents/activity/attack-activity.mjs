@@ -1,5 +1,5 @@
 import { AttackData } from "../../data/activity/attack-data.mjs";
-import { buildRoll } from "../../utils/_module.mjs";
+import { buildRoll, numberFormat } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
 export default class AttackActivity extends DamageActivity {
@@ -24,6 +24,19 @@ export default class AttackActivity extends DamageActivity {
 		if ( this.system.ability === "none" ) return null;
 		if ( this.system.ability ) return this.system.ability;
 		return this.item.system.ability ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the challenge column in the action table.
+	 * @type {string}
+	 */
+	get challengeColumn() {
+		const layout = document.createElement("div");
+		layout.classList.add("layout");
+		layout.innerHTML = numberFormat(this.system.toHit, { sign: true });
+		return layout.outerHTML;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

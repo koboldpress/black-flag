@@ -52,6 +52,17 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareEmbeddedDocuments() {
+		super.prepareEmbeddedDocuments();
+		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
+			for ( const e of this.getEmbeddedCollection(collectionName) ) {
+				e.prepareData();
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Methods               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -76,7 +87,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	getRollData({ deterministic=false }={}) {
-		if ( !this.actor ) return null;
+		if ( !this.actor ) return {};
 		const actorRollData = this.actor.getRollData({ deterministic });
 		const rollData = {
 			...actorRollData,
@@ -89,17 +100,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 
 		return rollData;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareEmbeddedDocuments() {
-		super.prepareEmbeddedDocuments();
-		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
-			for ( const e of this.getEmbeddedCollection(collectionName) ) {
-				e.prepareData();
-			}
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

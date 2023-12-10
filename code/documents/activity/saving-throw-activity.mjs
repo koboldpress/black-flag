@@ -1,5 +1,5 @@
 import { SavingThrowData } from "../../data/activity/saving-throw-data.mjs";
-import { simplifyBonus } from "../../utils/_module.mjs";
+import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
 export default class SavingThrowActivity extends DamageActivity {
@@ -14,6 +14,22 @@ export default class SavingThrowActivity extends DamageActivity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the challenge column in the action table.
+	 * @type {string}
+	 */
+	get challengeColumn() {
+		if ( !this.system.dc.final ) return "";
+		const layout = document.createElement("div");
+		layout.classList.add("layout");
+		layout.innerHTML = `<span class="dc">${numberFormat(this.system.dc.final)}</span>`;
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.savingThrowAbility];
+		layout.innerHTML += `<span class="ability">${ability}</span>`;
+		return layout.outerHTML;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
