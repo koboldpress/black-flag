@@ -1,5 +1,5 @@
-import { DamageField } from "../fields/_module.mjs";
 import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
+import { DamageField } from "../fields/_module.mjs";
 
 const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 

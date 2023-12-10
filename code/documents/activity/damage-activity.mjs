@@ -1,4 +1,4 @@
-import { buildRoll } from "../../utils/_module.mjs";
+import { buildRoll, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
 /**
@@ -18,7 +18,16 @@ export default class DamageActivity extends Activity {
 	get effectColumn() {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
-		layout.innerHTML = "";
+		const damageParts = this.createDamageConfigs({}, this.item.getRollData({ deterministic: true }));
+		for ( const part of damageParts ) {
+			let formula = part.parts.join(" + ");
+			formula = Roll.defaultImplementation.replaceFormulaData(formula, part.data);
+			formula = simplifyFormula(formula);
+			if ( formula ) {
+				const damageType = CONFIG.BlackFlag.damageTypes[part.options.damageType];
+				layout.innerHTML += `<span class="damage">${formula} ${game.i18n.localize(damageType?.label ?? "")}</span>`;
+			}
+		}
 		return layout.outerHTML;
 	}
 
