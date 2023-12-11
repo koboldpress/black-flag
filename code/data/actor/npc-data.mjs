@@ -168,4 +168,16 @@ export default class NPCData extends ActorDataModel.mixin(ACTemplate, ModifiersT
 		hp.damage = Math.clamped(hp.damage, 0, hp.max);
 		hp.value = hp.max - hp.damage;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedTraits() {
+		Object.defineProperty(this.proficiencies.languages, "list", {
+			get() {
+				return Array.from(this.value).join(" ");
+			},
+			configurable: true,
+			enumerable: false
+		});
+	}
 }

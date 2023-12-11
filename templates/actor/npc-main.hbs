@@ -40,40 +40,88 @@
 		</label>
 		<label>
 			<span>
+				{{#if modes.editing}}
+					<a data-action="config" data-type="movement">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
 				{{localize "BF.Speed.Label"}}
 			</span>
 			{{#if modes.editing}}
 				<input type="number" name="system.traits.movement.base" value="{{source.traits.movement.base}}">
-				<!-- TODO: Units -->
 			{{else}}
 				<span>xx ft.</span>
 			{{/if}}
 		</label>
-		<label>
+		<label class="stats__narrow">
 			<span>
 				{{localize "BF.Skill.Perception.Label"}}
 			</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.???" value="{{source.???}}">
+			{{else}}
+				<span>??</span>
+			{{/if}}
 		</label>
-		<label>
+		<label class="stats__narrow">
 			<span>
 				{{localize "BF.Skill.Stealth.Label"}}
 			</span>
-		</label>
-		<label>
-			<span>immune</span>
-		</label>
-		<label>
-			<span>resistant</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.???" value="{{source.???}}">
+			{{else}}
+				<span>??</span>
+			{{/if}}
 		</label>
 		<label>
 			<span>
+				{{#if modes.editing}}
+					<a data-action="config" data-type="immunities">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
+				immune
+			</span>
+		</label>
+		<label>
+			<span>
+				{{#if modes.editing}}
+					<a data-action="config" data-type="resistances">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
+				resistant
+			</span>
+		</label>
+		<label>
+			<span>
+				{{#if modes.editing}}
+					<a data-action="config" data-type="senses">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
 				{{localize "BF.Senses.Label"}}
 			</span>
 		</label>
 		<label>
 			<span>
+				{{#if modes.editing}}
+					<a data-action="config" data-type="languages">
+						<i class="fa-solid fa-cog"></i>
+					</a>
+				{{/if}}
 				{{localize "BF.Language.Label[other]"}}
 			</span>
+			{{#if modes.editing}}
+				<sl-select value="{{system.proficiencies.languages.list}}" name="system.proficiencies.languages.value"
+					multiple clearable size="small">
+					{{#each CONFIG.languages}}
+						<sl-option value="{{@key}}">{{localize label}}</sl-option>
+					{{/each}}
+				</sl-select>
+			{{else}}
+				{{traits.languages}}
+			{{/if}}
 		</label>
 	</div>
 	<!-- TODO: Initiative, proficiency mod -->
@@ -98,21 +146,19 @@
 		passive features
 	</div>
 
-	<div class="features action">
-		<h2>{{localize "BF.Activation.Type.Action[other]"}}</h2>
-		features
-	</div>
-	
-	<div class="features bonus">
-		<h2>{{localize "BF.Activation.Type.BonusAction[other]"}}</h2>
-		features
-	</div>
-	
-	<div class="features reaction">
-		<h2>{{localize "BF.Activation.Type.Reaction[other]"}}</h2>
-		features
-	</div>
-	
+	{{#each actions}}
+		{{#if (or activities.length @root.modes.editing)}}
+			<div class="features {{@key}}">
+				<h2>{{label}}</h2>
+				{{#each activities}}
+					<div class="activity">
+						<strong>{{item.name}}</strong>. ...description
+					</div>
+				{{/each}}
+			</div>
+		{{/if}}
+	{{/each}}
+
 	<div class="features legendary">
 		<h2>{{localize "BF.Activation.Type.Legendary[other]"}}</h2>
 		<p>{{localize "BF.LegendaryAction.Description" type="???" count="?"}}</p>

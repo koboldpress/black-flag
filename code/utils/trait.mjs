@@ -322,7 +322,7 @@ export function choiceLabel(choice, { only=false, final=false, trait }={}) {
  * @param {TraitChoice[]} [choices=[]] - Trait choices.
  * @param {object} [options={}]
  * @param {string} [options.choiceMode="inclusive"] - Choice mode.
- * @param {string} [options.style="long"] - List style type used (see Intl.ListFormatter).
+ * @param {string} [options.style="long"] - List style type used (see Intl.ListFormat).
  * @param {string} [options.trait] - Explicitly set trait type if non-prefixed keys are provided.
  * @returns {string}
  */

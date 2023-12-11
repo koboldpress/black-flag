@@ -259,6 +259,20 @@ export const sheetSections = {
 			tab: "progression",
 			types: [{type: "class"}, {type: "background"}, {type: "heritage"}, {type: "lineage"}]
 		}
+	],
+	npc: [
+		{
+			id: "features",
+			tab: "features",
+			types: [{type: "feature"}, {type: "talent"}],
+			label: "BF.Item.Category.Feature.Label"
+		},
+		{
+			id: "equipment",
+			tab: "features",
+			types: [{type: "ammunition"}, {type: "armor"}, {type: "weapon"}],
+			label: "BF.Item.Category.Equipment.Label"
+		}
 	]
 };
 

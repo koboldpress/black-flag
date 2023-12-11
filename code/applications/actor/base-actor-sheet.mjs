@@ -13,6 +13,14 @@ import TypeConfig from "./config/type-config.mjs";
  */
 export default class BaseActorSheet extends ActorSheet {
 
+	/**
+	 * Fields that will be enriched during data preparation.
+	 * @type {object}
+	 */
+	static enrichedFields = {
+		biography: "system.biography.value"
+	};
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -52,6 +60,15 @@ export default class BaseActorSheet extends ActorSheet {
 		await this.prepareConditions(context);
 		await this.prepareItems(context);
 		await this.prepareTraits(context);
+
+		const enrichmentContext = {
+			secrets: this.actor.isOwner, rollData: this.actor.getRollData(), async: true, relativeTo: this.actor
+		};
+		context.enriched = {};
+		for ( const [key, path] of Object.entries(this.constructor.enrichedFields) ) {
+			context.enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
+		}
+		context.editorSelected = this.editorSelected;
 
 		return context;
 	}

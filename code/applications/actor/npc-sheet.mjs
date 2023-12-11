@@ -10,7 +10,7 @@ export default class NPCSheet extends BaseActorSheet {
 			width: 460,
 			height: "auto",
 			tabs: [
-				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: "main", initial: "main"}
+				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-content", initial: "main"}
 			],
 			scrollY: [".window-content"]
 		});
@@ -39,6 +39,23 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async prepareTraits(context) {
+		context.traits = {};
+		const { proficiencies } = context.system;
+
+		// TODO: Senses
+
+		// Languages
+		context.traits.languages = Trait.localizedList(
+			proficiencies.languages.value, [], { style: "narrow", trait: "languages" }
+		) || "—";
+		// TODO: Add language tags
+
+		// TODO: Resistances, Immunities, & Vulnerabilities
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Remove the title from the app's header bar.
 	 * @param {HTMLElement} element - Element of the app's window.
@@ -63,5 +80,14 @@ export default class NPCSheet extends BaseActorSheet {
 	_replaceHTML(element, html) {
 		super._replaceHTML(element, html);
 		this._removeTitle(element[0]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	activateListeners(html) {
+		super.activateListeners(html);
+		html.on("sl-change", "sl-select", this._onChangeInput.bind(this));
 	}
 }

@@ -1,7 +1,14 @@
 .black-flag.npc.sheet {
-	min-width: 420px;
+	min-block-size: 420px;
+	min-inline-size: 420px;
+
 	container: sheet / inline-size;
 	--end-border-radius: 18px;
+
+	form {
+		display: flex;
+		flex-direction: column;
+	}
 
 	a:is(:hover, :focus) {
 		text-shadow: 0 0 4px var(--bf-color-border-light-blue);
@@ -85,6 +92,14 @@
 		}
 	}
 
+	.sheet-content {
+		flex-grow: 1;
+		.tab {
+			height: 100%;
+			> section { height: 100%; }
+		}
+	}
+
 	[data-tab="main"] {
 		label {
 			display: flex;
@@ -116,12 +131,30 @@
 			text-transform: lowercase;
 		}
 
-		input[name^="system.attributes.hp"] {
-			width: 3em;
-			height: unset;
-		}
-		input[name="system.attributes.hp.value"] {
-			text-align: end;
+		.stats {
+			display: flex;
+			flex-wrap: wrap;
+
+			> label {
+				flex: 1 0 100%;
+			}
+			> label.stats__narrow {
+				flex: 1 1 50%;
+			}
+
+			input {
+				width: 6em;
+				height: unset;
+			}
+			input[name^="system.attributes.hp"] {
+				width: 3em;
+			}
+			input[name="system.attributes.hp.value"] {
+				text-align: end;
+			}
+			sl-select {
+				flex-grow: 1;
+			}
 		}
 
 		.abilities {
@@ -165,6 +198,32 @@
 				color: var(--bf-text-color-blue);
 				font-size: var(--font-size-14);
 				text-transform: uppercase;
+			}
+		}
+	}
+
+	[data-tab="biography"] {
+		section {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+
+			figure {
+				margin: 0;
+
+				.profile {
+					min-inline-size: 32px;
+					inline-size: 100%;
+					min-block-size: 32px;
+					max-block-size: 64px;
+					border: 1px solid transparent;
+					object-fit: contain;
+				}
+			}
+
+			.editor {
+				flex-grow: 1;
+				min-height: 150px;
 			}
 		}
 	}

@@ -16,10 +16,6 @@
 			{{localize "BF.Sheet.Tab.Main"}}
 			{{blackFlag-notificationBadge actor section="main"}}
 		</a>
-		<a data-tab="spellcasting">
-			{{localize "BF.Sheet.Tab.Spellcasting"}}
-			{{blackFlag-notificationBadge actor section="spellcasting"}}
-		</a>
 		<a data-tab="features">
 			{{localize "BF.Sheet.Tab.Features"}}
 			{{blackFlag-notificationBadge actor section="features"}}
@@ -34,19 +30,21 @@
 		</a>
 	</nav>
 
-	<main>
+	<div class="sheet-content">
 		<div class="tab" data-group="primary" data-tab="main">
 			{{> "blackFlag.npc-main"}}
 		</div>
-		<div class="tab" data-group="primary" data-tab="spellcasting">
-			nope
-		</div>
 		<div class="tab" data-group="primary" data-tab="features">
-			not yet
+			{{> "blackFlag.npc-features"}}
 		</div>
 		<div class="tab" data-group="primary" data-tab="biography">
-			<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
-			some day
+			<section>
+				<figure>
+					<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
+				</figure>
+				{{editor enriched.biography target="system.biography.value" button=false editable=modes.editing
+					engine="prosemirror" collaborate=false}}
+			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="effects">
 			{{> "blackFlag.conditions"}}
