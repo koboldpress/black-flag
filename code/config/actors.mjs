@@ -239,6 +239,13 @@ export const sheetSections = {
 			label: "BF.Item.Feature.Category.Heritage[other]"
 		},
 		{
+			id: "features",
+			tab: "features",
+			types: [{type: "feature"}],
+			label: "BF.Item.Category.Feature.Label",
+			options: {autoHide: true}
+		},
+		{
 			id: "progression",
 			tab: "progression",
 			types: [{type: "class"}, {type: "background"}, {type: "heritage"}, {type: "lineage"}]
