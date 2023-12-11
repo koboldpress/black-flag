@@ -50,7 +50,7 @@
 			{{#if modes.editing}}
 				<input type="number" name="system.traits.movement.base" value="{{source.traits.movement.base}}">
 			{{else}}
-				<span>xx ft.</span>
+				<span>{{traits.speed}}</span>
 			{{/if}}
 		</label>
 		<label class="stats__narrow">
@@ -124,7 +124,7 @@
 			{{/if}}
 		</label>
 	</div>
-	<!-- TODO: Initiative, proficiency mod -->
+	<!-- TODO: Initiative -->
 	
 	<div class="abilities">
 		{{#each system.abilities}}

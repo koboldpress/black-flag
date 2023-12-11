@@ -13,8 +13,6 @@ export default class InitiativeConfig extends BaseConfig {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	get type() {
 		return game.i18n.localize("BF.Initiative.Label");
 	}

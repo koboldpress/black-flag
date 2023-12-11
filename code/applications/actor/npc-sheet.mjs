@@ -1,4 +1,4 @@
-import { Trait } from "../../utils/_module.mjs";
+import { numberFormat, Trait } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
@@ -42,6 +42,21 @@ export default class NPCSheet extends BaseActorSheet {
 	async prepareTraits(context) {
 		context.traits = {};
 		const { proficiencies } = context.system;
+
+		// Speed
+		const formatSpeed = (value, label) => {
+			const speed = numberFormat(value, { unit: "foot" });
+			return label ? `${label.toLowerCase()} ${speed}` : speed;
+		};
+		const speeds = [formatSpeed(this.actor.system.traits.movement.types.walk ?? 0)];
+		for ( const [key, value] of Object.entries(this.actor.system.traits.movement.types) ) {
+			if ( !value || (key === "walk") ) continue;
+			speeds.push(formatSpeed(value, game.i18n.localize(CONFIG.BlackFlag.movementTypes[key]?.label ?? "")));
+		}
+		context.traits.speed = game.i18n.getListFormatter({ style: "narrow" }).format(speeds);
+
+		// Always display walk without label
+		// Display all others with label
 
 		// TODO: Senses
 

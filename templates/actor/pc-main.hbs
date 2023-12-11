@@ -199,7 +199,14 @@
 		</div>
 	</fieldset>
 	<fieldset class="movement">
-		<legend>{{localize "BF.Speed.Label"}}</legend>
+		<legend>
+			{{localize "BF.Speed.Label"}}
+			{{#if modes.editing}}
+				<a data-action="config" data-type="movement">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
+		</legend>
 		<span class="primary">{{system.traits.movement.labels.primary}}</span>
 		{{#if system.traits.movement.labels.secondary}}
 			<span class="secondary">{{system.traits.movement.labels.secondary}}</span>

@@ -12,7 +12,9 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		return {
 			traits: new SchemaField({
 				movement: new SchemaField({
-					base: new NumberField({nullable: false, initial: 30, min: 0, step: 0.1}),
+					base: new NumberField({
+						nullable: false, initial: 30, min: 0, step: 0.1, label: "BF.Speed.Base.Label", hint: "BF.Speed.Base.Hint"
+					}),
 					types: new MappingField(new FormulaField({deterministic: true}), {
 						initial: { walk: "@base" }
 					}),
