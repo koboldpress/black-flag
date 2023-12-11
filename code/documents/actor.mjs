@@ -176,7 +176,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const deltaHP = Math.clamped(amount - deltaTemp, -(hp.damage ?? Infinity), hp.value);
 		const updates = {
 			"system.attributes.hp.temp": hp.temp - deltaTemp,
-			"system.attributes.hp.value": hp.value - deltaHP
+			"system.attributes.hp.value": hp.value - deltaHP,
+			"system.attributes.hp.damage": hp.damage + deltaHP
 		};
 		amount = deltaTemp + deltaHP;
 

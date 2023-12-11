@@ -33,7 +33,7 @@
 				/
 				<input type="number" name="system.attributes.hp.max" value="{{source.attributes.hp.max}}" step="1" min="0">
 			{{else}}
-				<input type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" step="1" min="0">
+				<input type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}">
 				/
 				<span>{{system.attributes.hp.max}}</span>
 			{{/if}}
@@ -72,7 +72,7 @@
 			{{else}}
 				<span>??</span>
 			{{/if}}
-		</label>
+		</label><!--
 		<label>
 			<span>
 				{{#if modes.editing}}
@@ -92,7 +92,7 @@
 				{{/if}}
 				resistant
 			</span>
-		</label>
+		</label>-->
 		<label>
 			<span>
 				{{#if modes.editing}}
