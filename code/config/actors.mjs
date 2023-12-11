@@ -217,8 +217,17 @@ export const sheetSections = {
 			id: "class-features",
 			tab: "features",
 			types: [{type: "feature", "system.type.category": "class"}],
-			label: "BF.Item.Feature.Category.Class[other]"
-			// TODO: Create categories for each class when multi-classing is supported
+			label: "BF.Item.Feature.Category.Class[other]",
+			expand: (actor, sectionData) => {
+				if ( actor.system.progression.level === 0 ) return sectionData;
+				return Object.entries(actor.system.progression.classes).map(([identifier, cls]) =>
+					foundry.utils.mergeObject(sectionData, {
+						id: `class-${identifier}`, label: `${cls.document.name} features`,
+						types: [{type: "feature", "system.identifier.associated": identifier}],
+						levels: cls.levels
+					}, {inplace: false})
+				).sort((lhs, rhs) => rhs.levels - lhs.levels);
+			}
 		},
 		{
 			id: "talents",
