@@ -1,4 +1,4 @@
-import { Trait } from "../../utils/_module.mjs";
+import { numberFormat, Trait } from "../../utils/_module.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
@@ -100,8 +100,6 @@ export default class PCSheet extends BaseActorSheet {
 		const { traits, proficiencies } = context.system;
 		const none = game.i18n.localize("None");
 
-		// Senses
-
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
 		if ( size || this.modes.editing ) context.traits.push({
@@ -120,6 +118,20 @@ export default class PCSheet extends BaseActorSheet {
 			label: "BF.CreatureType.Type.Label",
 			value: traits.type.label,
 			config: "type"
+		});
+
+		// Senses
+		const senses = game.i18n.getListFormatter({ style: "narrow" }).format(
+			Object.entries(this.actor.system.traits.senses.types).map(([key, value]) =>
+				value ? `${game.i18n.localize(CONFIG.BlackFlag.senses[key]?.label ?? "")} ${
+					numberFormat(value, { unit: "foot" })}` : null
+			).filter(a => a)
+		);
+		if ( senses || this.modes.editing ) context.traits.push({
+			key: "senses",
+			label: "BF.Senses.Label",
+			value: senses || none,
+			config: "senses"
 		});
 
 		// Languages

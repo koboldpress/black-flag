@@ -43,22 +43,27 @@ export default class NPCSheet extends BaseActorSheet {
 		context.traits = {};
 		const { proficiencies } = context.system;
 
-		// Speed
-		const formatSpeed = (value, label) => {
-			const speed = numberFormat(value, { unit: "foot" });
-			return label ? `${label.toLowerCase()} ${speed}` : speed;
+		const formatEntry = (value, label) => {
+			value = numberFormat(value, { unit: "foot" });
+			return label ? `${label.toLowerCase()} ${value}` : value;
 		};
-		const speeds = [formatSpeed(this.actor.system.traits.movement.types.walk ?? 0)];
+
+		// Speed
+		const speeds = [formatEntry(this.actor.system.traits.movement.types.walk ?? 0)];
 		for ( const [key, value] of Object.entries(this.actor.system.traits.movement.types) ) {
 			if ( !value || (key === "walk") ) continue;
-			speeds.push(formatSpeed(value, game.i18n.localize(CONFIG.BlackFlag.movementTypes[key]?.label ?? "")));
+			speeds.push(formatEntry(value, game.i18n.localize(CONFIG.BlackFlag.movementTypes[key]?.label ?? "")));
 		}
 		context.traits.speed = game.i18n.getListFormatter({ style: "narrow" }).format(speeds);
+		// TODO: Add movement tags
 
-		// Always display walk without label
-		// Display all others with label
-
-		// TODO: Senses
+		// Senses
+		context.traits.senses = game.i18n.getListFormatter({ style: "narrow" }).format(
+			Object.entries(this.actor.system.traits.senses.types).map(([key, value]) =>
+				value ? formatEntry(value, game.i18n.localize(CONFIG.BlackFlag.senses[key]?.label ?? "")) : null
+			).filter(a => a)
+		);
+		// TODO: Add senses tags
 
 		// Languages
 		context.traits.languages = Trait.localizedList(

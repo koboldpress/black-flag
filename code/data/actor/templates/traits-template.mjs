@@ -86,4 +86,17 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			secondary: game.i18n.getListFormatter({ type: "unit" }).format(labels)
 		};
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedSenses() {
+		const senses = this.traits.senses;
+		const rollData = this.parent.getRollData({ deterministic: true });
+
+		// Calculate each special sense type
+		for ( const [type, formula] of Object.entries(senses.types) ) {
+			const speed = simplifyBonus(formula, rollData);
+			senses.types[type] = speed;
+		}
+	}
 }

@@ -164,6 +164,27 @@ export const rest = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Sense types that can be used by actors.
+ * @enum {LabeledConfiguration}
+ */
+export const senses = {
+	darkvision: {
+		label: "BF.Senses.Type.Darkvision"
+	},
+	keensense: {
+		label: "BF.Senses.Type.Keensense"
+	},
+	tremorsense: {
+		label: "BF.Senses.Type.Tremorsense"
+	},
+	truesight: {
+		label: "BF.Senses.Type.Truesight"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for sheet sections.
  *
  * @typedef {object} SheetSectionConfiguration
