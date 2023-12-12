@@ -127,8 +127,8 @@ function handleRollAction(event) {
 	const speaker = ChatMessage.implementation.getSpeaker();
 
 	switch ( action ) {
-		case "check":
-		case "save":
+		case "ability-check":
+		case "ability-save":
 		case "skill":
 		case "tool": return rollCheckSave(event, speaker);
 		case "damage": return rollDamage(event, speaker);

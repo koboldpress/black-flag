@@ -189,6 +189,7 @@
 
 		.features {
 			h2 {
+				margin-block-start: 14px;
 				border: none;
 				border-start-end-radius: var(--end-border-radius);
 				border-end-end-radius: var(--end-border-radius);
@@ -198,6 +199,12 @@
 				color: var(--bf-text-color-blue);
 				font-size: var(--font-size-14);
 				text-transform: uppercase;
+			}
+
+			.feature {
+				strong:first-child + p {
+					display: inline;
+				}
 			}
 		}
 	}

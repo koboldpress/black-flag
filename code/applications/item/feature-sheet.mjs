@@ -35,7 +35,8 @@ export default class FeatureSheet extends BaseItemSheet {
 		if ( this.document.type === "feature" ) {
 			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;
 			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
-			if ( featureCategory ) context.featureTypes = {
+			if ( (featureCategory && ["class", "lineage", "heritage"].includes(context.system.type.category))
+				|| featureCategory?.children) context.featureTypes = {
 				label: game.i18n.format("BF.Item.Feature.Type.LabelSpecific", {
 					type: game.i18n.localize(`${featureCategory.localization}[one]`)
 				}),

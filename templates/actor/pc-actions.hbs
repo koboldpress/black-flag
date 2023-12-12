@@ -11,24 +11,24 @@
 					</th>
 				</tr>
 				{{#each activities}}
-					<tr data-activity="{{uuid}}">
+					<tr data-activity="{{activity.uuid}}">
 						<td class="control">
 							<button type="button" data-action="activate">{{localize "BF.Activity.Action.Use"}}</button>
 						</td>
 						<td class="name">
 							<hgroup>
 								<h6>{{item.name}}</h6>
-								<p>{{name}}</p>
+								<p>{{activity.name}}</p>
 							</hgroup>
 						</td>
 						<td class="uses">
-							{{{usesColumn}}}
+							{{{activity.usesColumn}}}
 						</td>
 						<td class="challenge">
-							{{{challengeColumn}}}
+							{{{activity.challengeColumn}}}
 						</td>
 						<td class="effect">
-							{{{effectColumn}}}
+							{{{activity.effectColumn}}}
 						</td>
 					</tr>
 				{{/each}}

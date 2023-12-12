@@ -30,6 +30,9 @@ export const featureCategories = {
 	},
 	heritage: {
 		localization: "BF.Item.Feature.Category.Heritage"
+	},
+	monsters: {
+		localization: "BF.Item.Feature.Category.Monster"
 	}
 };
 localizeConfig(featureCategories, { sort: false });

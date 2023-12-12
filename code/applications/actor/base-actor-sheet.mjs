@@ -88,9 +88,10 @@ export default class BaseActorSheet extends ActorSheet {
 				return obj;
 			}, {});
 		for ( const item of this.actor.items ) {
-			for ( const action of item.system.actions?.() ?? [] ) {
-				if ( action.actionType in context.actions ) context.actions[action.actionType].activities.push(action);
-				else context.actions.other.activities.push(action);
+			for ( const activity of item.system.actions?.() ?? [] ) {
+				const data = { activity, item: activity.item };
+				if ( activity.actionType in context.actions ) context.actions[activity.actionType].activities.push(data);
+				else context.actions.other.activities.push(data);
 			}
 		}
 		// TODO: Figure out how these should be sorted

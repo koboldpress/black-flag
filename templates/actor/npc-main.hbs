@@ -144,7 +144,11 @@
 	</div>
 
 	<div class="features passive">
-		passive features
+		{{#each passive}}
+			<div class="feature">
+				<strong>{{item.name}}.</strong> {{{description}}}
+			</div>
+		{{/each}}
 	</div>
 
 	{{#each actions}}
@@ -152,17 +156,17 @@
 			<div class="features {{@key}}">
 				<h2>{{label}}</h2>
 				{{#each activities}}
-					<div class="activity">
-						<strong>{{item.name}}</strong>. ...description
+					<div class="feature" data-activity="{{activity.uuid}}">
+						<strong>{{item.name}}.</strong> {{{description}}}
 					</div>
 				{{/each}}
 			</div>
 		{{/if}}
 	{{/each}}
 
-	<div class="features legendary">
+<!--	<div class="features legendary">
 		<h2>{{localize "BF.Activation.Type.Legendary[other]"}}</h2>
 		<p>{{localize "BF.LegendaryAction.Description" type="???" count="?"}}</p>
 		features
-	</div>
+	</div>-->
 </section>
