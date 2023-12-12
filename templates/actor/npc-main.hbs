@@ -52,7 +52,7 @@
 			{{else}}
 				<span>{{traits.speed}}</span>
 			{{/if}}
-		</label>
+		</label><!--
 		<label class="stats__narrow">
 			<span>
 				{{localize "BF.Skill.Perception.Label"}}
@@ -72,7 +72,7 @@
 			{{else}}
 				<span>??</span>
 			{{/if}}
-		</label><!--
+		</label>
 		<label>
 			<span>
 				{{#if modes.editing}}
@@ -106,11 +106,11 @@
 		</label>
 		<label>
 			<span>
-				{{#if modes.editing}}
+				<!--{{#if modes.editing}}
 					<a data-action="config" data-type="languages">
 						<i class="fa-solid fa-cog"></i>
 					</a>
-				{{/if}}
+				{{/if}}-->
 				{{localize "BF.Language.Label[other]"}}
 			</span>
 			{{#if modes.editing}}
@@ -151,18 +151,25 @@
 		{{/each}}
 	</div>
 
+	<blackFlag-actions>
 	{{#each actions}}
 		{{#if (or activities.length @root.modes.editing)}}
 			<div class="features {{@key}}">
 				<h2>{{label}}</h2>
 				{{#each activities}}
 					<div class="feature" data-activity="{{activity.uuid}}">
-						<strong>{{item.name}}.</strong> {{{description}}}
+						{{#if @root.modes.editing}}
+							<a data-action="edit">
+								<i class="fa-solid fa-pen-to-square"></i>
+							</a>
+						{{/if}}
+						<strong><a data-action="activate">{{item.name}}.</a></strong> {{{description}}}
 					</div>
 				{{/each}}
 			</div>
 		{{/if}}
 	{{/each}}
+	</blackFlag-actions>
 
 <!--	<div class="features legendary">
 		<h2>{{localize "BF.Activation.Type.Legendary[other]"}}</h2>

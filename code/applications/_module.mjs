@@ -43,13 +43,13 @@ export function registerSheets(documentType, categories) {
  */
 export function registerCustomElements() {
 	log("Registering custom elements");
+	window.customElements.define("blackflag-actions", components.ActionsElement);
 	window.customElements.define("blackflag-activities", components.ActivitiesElement);
 	window.customElements.define("blackflag-advancement", components.AdvancementElement);
 	window.customElements.define("blackflag-consumption", components.ConsumptionElement);
 	window.customElements.define("blackflag-damagelist", components.DamageListElement);
 	window.customElements.define("blackflag-effects", components.EffectsElement);
 	window.customElements.define("blackflag-inventory", components.InventoryElement);
-	window.customElements.define("blackflag-pcactions", components.PCActionsElement);
 	window.customElements.define("blackflag-uses", components.UsesElement);
 	window.customElements.define("blackflag-xpbar", components.XPBarElement);
 }

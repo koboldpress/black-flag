@@ -1,16 +1,16 @@
 import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
- * Custom element for displaying the actions on the character sheet.
+ * Custom element for displaying the actions on the actor sheets.
  */
-export default class PCActionsElement extends AppAssociatedElement {
+export default class ActionsElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
 
 		// Attach listeners to buttons
-		for ( const button of this.querySelectorAll('[data-action="activate"]') ) {
-			button.addEventListener("click", this.#onActivateAction.bind(this));
+		for ( const button of this.querySelectorAll("[data-action]") ) {
+			button.addEventListener("click", this.#onAction.bind(this));
 		}
 	}
 
@@ -31,13 +31,21 @@ export default class PCActionsElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Handle clicking the use button on an action.
+	 * Handle clicking an action.
 	 * @param {PointerEvent} event - Triggering click event.
+	 * @returns {Promise}
 	 */
-	async #onActivateAction(event) {
+	async #onAction(event) {
 		event.stopImmediatePropagation();
-		const activityUuid = event.target.closest("[data-activity]").dataset.activity;
+		const activityUuid = event.currentTarget.closest("[data-activity]")?.dataset.activity;
 		const activity = await fromUuid(activityUuid);
-		activity?.activate();
+		if ( !activity ) return;
+
+		switch ( event.currentTarget.dataset.action ) {
+			case "activate":
+				return activity.activate();
+			case "edit":
+				return activity.sheet.render(true);
+		}
 	}
 }
