@@ -19,6 +19,7 @@ export default class ActivityConfig extends FormApplication {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "activity-config"],
+			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details"}],
 			template: "systems/black-flag/templates/activities/activity-config.hbs",
 			width: 500,
 			height: "auto",
@@ -71,19 +72,22 @@ export default class ActivityConfig extends FormApplication {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData(options) {
+	async getData(options) {
 		const source = this.activity.toObject();
-		const context = foundry.utils.mergeObject(super.getData(options), {
+		const context = foundry.utils.mergeObject(await super.getData(options), {
 			activity: this.activity,
 			system: this.activity.system,
 			source,
 			default: {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon
-			}
+			},
+			enriched: await TextEditor.enrichHTML(source.description ?? "", {
+				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.item
+			}),
+			showBaseDamage: Object.hasOwn(this.item.system, "damage")
 		});
 		context.CONFIG = CONFIG.BlackFlag;
-		context.showBaseDamage = Object.hasOwn(this.item.system, "damage");
 		return context;
 	}
 

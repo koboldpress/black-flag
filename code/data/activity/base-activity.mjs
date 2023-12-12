@@ -5,7 +5,7 @@ import UsesField from "../fields/uses-field.mjs";
 import ConsumptionTargetData from "./consumption-target-data.mjs";
 
 const {
-	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, FilePathField, SchemaField, StringField
+	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, FilePathField, HTMLField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -51,14 +51,17 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			}),
 			name: new StringField({initial: undefined}),
 			img: new FilePathField({initial: undefined, categories: ["IMAGE"]}),
+			description: new HTMLField({label: "BF.Activity.Core.Description.Label"}),
 			system: new TypeField({
 				modelLookup: type => this.metadata.dataModel ?? null
 			}),
 			consumption: new SchemaField({
 				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
 				scale: new SchemaField({
-					allowed: new BooleanField({label: "BF.Consumption.AllowScaling.Label"}),
-					max: new FormulaField() // Maximum number of steps above baseline this can be scaled
+					allowed: new BooleanField({
+						label: "BF.Consumption.AllowScaling.Label", hint: "BF.Consumption.AllowScaling.Hint"
+					}),
+					max: new FormulaField({label: "BF.Consumption.MaxScaling.Label", hint: "BF.Consumption.MaxScaling.Hint"})
 				})
 			}, {label: "BF.Consumption.Label"}),
 			uses: new UsesField()

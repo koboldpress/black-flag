@@ -7,4 +7,18 @@
 			<input type="text" name="name" value="{{source.name}}" placeholder="{{default.title}}">
 		</h1>
 	</header>
+
+	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+	</nav>
+
+	<div class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="description">
+			{{> "blackFlag.activity-description"}}
+		</div>
+		<div class="tab" data-group="primary" data-tab="details">
+			{{> "blackFlag.activity-uses"}}
+		</div>
+	</div>
 </form>

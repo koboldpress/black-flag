@@ -1,4 +1,7 @@
 .activity-config form {
+	display: flex;
+	flex-direction: column;
+
 	header {
 		display: flex;
 		gap: 1rem;
@@ -25,13 +28,36 @@
 		}
 	}
 
-	fieldset > label {
-		> span:first-child {
-			flex: 0 0 10em;
+	.sheet-body, .sheet-body [data-tab], .sheet-body [data-tab] > section {
+		flex-grow: 1;
+		height: 100%;
+	}
+
+	[data-tab="description"] {
+		.editor {
+			min-height: 150px;
+			overflow-y: visible;
+			height: 100%;
+			.editor-container {
+				overflow-y: auto;
+				scrollbar-width: thin;
+				margin: 0;
+				.editor-content {
+					margin: 0.25rem 0.25rem 1rem 10.5px;
+				}
+			}
 		}
-		input, select {
-			flex: 1 0 20px;
-			width: unset;
+
+		fieldset {
+			height: 100%;
+
+			&:has(.editor.prosemirror) {
+				padding-block: 0;
+				padding-inline: 0;
+				legend {
+					margin-inline: 0.75rem;
+				}
+			}
 		}
 	}
 
