@@ -1,4 +1,5 @@
 import SpellSheet from "../../applications/item/spell-sheet.mjs";
+import Proficiency from "../../documents/proficiency.mjs";
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
@@ -317,6 +318,23 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine if this item matches against an inventory filter.
+	 * @param {string} filter - Filter name.
+	 * @returns {boolean|void} - Boolean if the filter matches or not, or undefined if filter isn't valid for this item.
+	 */
+	evaluateFilter(filter) {
+		switch ( filter ) {
+			case "action": return this.casting.type === "action";
+			case "bonus": return this.casting.type === "bonus";
+			case "reaction": return this.casting.type === "reaction";
+			case "concentration": return this.tags.has("concentration");
+			case "ritual": return this.tags.has("ritual");
+		}
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_validConsumptionTypes(types) {

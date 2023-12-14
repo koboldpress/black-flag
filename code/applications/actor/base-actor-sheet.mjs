@@ -28,6 +28,14 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Filters that can be applied to different item lists.
+	 * @type {{[key: string]: {[key: string]: number}}}
+	 */
+	filters = {};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Sheet modes that can be active.
 	 * @type {{[key: string]: boolean]}}
 	 */
@@ -161,9 +169,10 @@ export default class BaseActorSheet extends ActorSheet {
 			if ( callback ) await callback(item, section);
 		}
 
-		for ( const tab of Object.values(context.sections) ) {
-			for ( const [key, section] of Object.entries(tab) ) {
-				if ( !this.modes.editing && section.options?.autoHide && !section.items.length ) delete tab[key];
+		for ( const [tab, data] of Object.entries(context.sections) ) {
+			for ( const [key, section] of Object.entries(data) ) {
+				section.items = this._filterItems(section.items, this.filters[tab]);
+				if ( !this.modes.editing && section.options?.autoHide && !section.items.length ) delete data[key];
 			}
 		}
 	}
@@ -185,6 +194,27 @@ export default class BaseActorSheet extends ActorSheet {
 		}
 
 		return sections;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Filter items within a section according to a set of filters.
+	 * @param {BlackFlagItem[]} items - List of items to filter.
+	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
+	 * @returns {BlackFlagItem[]} - Filtered items.
+	 */
+	_filterItems(items, filters={}) {
+		if ( foundry.utils.isEmpty(filters) ) return items;
+		return items.filter(item => {
+			for ( const [filter, value] of Object.entries(filters) ) {
+				if ( value === 0 ) continue;
+				const matches = item.system.evaluateFilter?.(filter);
+				if ( ((value === 1) && (matches === false))
+					|| ((value === -1) && (matches === true)) ) return false;
+			}
+			return true;
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -364,6 +394,7 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _updateObject(event, formData) {
+		console.log(foundry.utils.deepClone(formData));
 		const updates = foundry.utils.expandObject(formData);
 
 		// Preserve item updates to send to items

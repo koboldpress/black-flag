@@ -3,6 +3,22 @@ blackFlag-inventory {
 
 	table {
 		border: none;
+		background: none;
+
+		thead {
+			border: none;
+			background: none;
+			color: var(--color-text-dark-1);
+			text-shadow: none;
+
+			tr:has(blackFlag-filters) {
+				th {
+					padding: 0;
+					padding-inline: 4px;
+					padding-block-end: 2px;
+				}
+			}
+		}
 
 		tbody {
 			tr {
