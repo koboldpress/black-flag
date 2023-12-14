@@ -1,4 +1,3 @@
-import { log } from "../../utils/_module.mjs";
 import ActivitySelection from "../activity/activity-selection.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
@@ -107,14 +106,13 @@ export default class ActivitiesElement extends AppAssociatedElement {
 		if ( ["edit", "delete", "duplicate"].includes(action) && !activity ) return;
 		switch ( action ) {
 			case "add": return ActivitySelection.createDialog(this.item);
-			case "edit": return activity.sheet.render(true);
+			case "edit":
+			case "view": return activity.sheet.render(true);
 			case "delete": return activity.deleteDialog();
 			case "duplicate":
 				const data = activity.toObject();
 				delete data._id;
 				return this.item.createEmbeddedDocuments("Activity", [data]);
-			default:
-				return log(`Invalid activity action type clicked ${action}.`, { level: "warn" });
 		}
 	}
 }
