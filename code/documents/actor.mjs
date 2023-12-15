@@ -117,16 +117,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 
 	/**
+	 * Options for damage application.
+	 *
+	 * @typedef {object} DamageApplicationOptions}
+	 * @property {number} [multiplier=1] - Amount by which to multiply all damage (before damage resistance, etc).
+	 * @property {object|boolean} [ignore] - Set to `true` to ignore all damage modifiers. If set to an object, then
+	 *                                       values can either be `true` to indicate that the all modifications of that
+	 *                                       type should be ignored, or a set of specific damage types for which it should
+	 *                                       be ignored.
+	 * @property {boolean|Set<string>} [ignore.immunity] - Should this actor's damage immunity be ignored?
+	 * @property {boolean|Set<string>} [ignore.reduction] - Should this actor's damage reduction be ignored?
+	 * @property {boolean|Set<string>} [ignore.resistance] - Should this actor's damage resistance be ignored?
+	 * @property {boolean|Set<string>} [ignore.vulnerability] - Should this actor's damage vulnerability be ignored?
+	 */
+
+	/**
 	 * Apply damage to the actor.
 	 * @param {DamageDescription[]|number} damage - Damages to apply.
-	 * @param {object} [options={}]
-	 * @param {number} [options.multiplier=1] - Amount by which to multiply all damage (before damage resistance, etc).
-	 * @param {object} [options.ignore]
-	 * @param {boolean} [options.ignore.all=false] - Should all damage modification be ignored?
-	 * @param {boolean} [options.ignore.immunity=false] - Should this actor's damage immunity be ignored?
-	 * @param {boolean} [options.ignore.reduction=false] - Should this actor's damage reduction be ignored?
-	 * @param {boolean} [options.ignore.resistance=false] - Should this actor's damage resistance be ignored?
-	 * @param {boolean} [options.ignore.vulnerability=false] - Should this actor's damage vulnerability be ignored?
+	 * @param {DamageApplicationOptions} [options={}]
 	 * @returns {Promise<BlackFlagActor>} - The actor after the update has been performed.
 	 */
 	async applyDamage(damage, options={}) {
@@ -148,13 +156,30 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			multiplier *= -1;
 		}
 
+		const ignore = (category, type) => {
+			return options.ignore === true
+				|| options.ignore?.[category] === true
+				|| options.ignore?.[category]?.has?.(type);
+		};
+
 		let amount = damage.reduce((total, d) => {
-			// TODO: Ignore damage types with immunity
+			// Ignore damage types with immunity
+			if ( !ignore("immunity", d.type) && this.system.traits?.damage?.immunities?.value.has(d.type) ) return total;
 
-			// Apply damage multiplier
-			let value = d.value * multiplier;
+			let damageMultiplier = multiplier;
 
-			// TODO: Apply type-specific damage resistances & vulnerabilities
+			// Apply type-specific damage resistance
+			if ( !ignore("resistance", d.type) && this.system.traits?.damage?.resistances?.value.has(d.type) ) {
+				damageMultiplier /= 2;
+			}
+
+			// Apply type-specific damage vulnerability
+			if ( !ignore("vulnerability", d.type) && this.system.traits?.damage?.vulnerabilities?.value.has(d.type) ) {
+				damageMultiplier *= 2;
+			}
+
+			// Multiply damage
+			let value = d.value * damageMultiplier;
 
 			// TODO: Apply type-specific damage reduction, ensuring damage reduction doesn't cause healing by accident
 
