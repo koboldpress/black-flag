@@ -1,0 +1,51 @@
+<form autocomplete="off">{{log this}}
+	<fieldset class="damages">
+		<legend>{{localize "BF.Damage.Type.Label"}}</legend>
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">{{localize "BF.Damage.Label"}}</th>
+					<th scope="col">{{localize "BF.Resistance.Abbreviation"}}</th>
+					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
+					<th scope="col">{{localize "BF.Vulnerability.Abbreviation"}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each damageTypes}}
+					<tr>
+						<th scope="row">{{label}}</th>
+						<td><input type="checkbox" name="dr.value.{{@key}}" {{checked resistant}}></td>
+						<td><input type="checkbox" name="di.value.{{@key}}" {{checked immune}}></td>
+						<td><input type="checkbox" name="dv.value.{{@key}}" {{checked vulnerable}}></td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</fieldset>
+	<!--
+	<fieldset class="bypasses">
+		<legend>damage bypasses</legend>
+		<table>
+			
+		</table>
+	</fieldset>-->
+	<fieldset class="conditions">
+		<legend>{{localize "BF.Item.Type.Condition[other]"}}</legend>
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">{{localize "BF.Item.Type.Condition[one]"}}</th>
+					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each conditions}}
+					<tr>
+						<th scope="row">{{label}}</th>
+						<td><input type="checkbox" name="ci.value.{{@key}}" {{checked immune}}></td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</fieldset>
+</form>

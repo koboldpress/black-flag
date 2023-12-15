@@ -35,23 +35,23 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					immunities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())
-					})
+					}, {label: "BF.Immunity.Label"})
 				}),
 				damage: new SchemaField({
 					resistances: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField()),
 						bypasses: new SetField(new StringField())
-					}),
+					}, {label: "BF.Resistance.Label"}),
 					immunities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField()),
 						bypasses: new SetField(new StringField())
-					}),
+					}, {label: "BF.Immunity.Label"}),
 					vulnerabilities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())
-					})
+					}, {label: "BF.Vulnterability.Label"})
 				})
 			}, {label: "BF.Trait.Label[other]"})
 		};

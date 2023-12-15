@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for damage types.
  *
@@ -49,3 +51,4 @@ export const damageTypes = {
 		label: "BF.Damage.Type.Thunder"
 	}
 };
+localizeConfig(damageTypes);

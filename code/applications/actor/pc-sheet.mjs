@@ -156,7 +156,43 @@ export default class PCSheet extends BaseActorSheet {
 			value: Trait.localizedList(proficiencies.weapons.value, [], { style: "short", trait: "weapons" }) || none
 		});
 
-		// TODO: Resistances, Immunities, & Vulnerabilities
+		// Resistances
+		const resistances = traits.damage.resistances.value.map(t =>
+			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+		).filter(t => t);
+		if ( resistances.size || this.modes.editing ) context.traits.push({
+			key: "resistances",
+			label: "resistances",
+			value: game.i18n.getListFormatter({ style: "short" }).format(resistances) || none,
+			config: "resistance"
+		});
+
+		// Immunities
+		const immunities = [
+			...traits.damage.immunities.value.map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			),
+			...traits.condition.immunities.value.map(t =>
+				CONFIG.BlackFlag.registration.get("condition", t)?.name
+			)
+		].filter(t => t);
+		if ( immunities?.length || this.modes.editing ) context.traits.push({
+			key: "immunities",
+			label: "immunities",
+			value: game.i18n.getListFormatter({ style: "short" }).format(immunities) || none,
+			config: "resistance"
+		});
+
+		// Vulnerabilities
+		const vulnerabilities = traits.damage.vulnerabilities.value.map(t =>
+			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+		).filter(t => t);
+		if ( vulnerabilities.size || this.modes.editing ) context.traits.push({
+			key: "vulnerabilities",
+			label: "vulnerabilities",
+			value: game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none,
+			config: "resistance"
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
