@@ -72,27 +72,46 @@
 			{{else}}
 				<span>??</span>
 			{{/if}}
-		</label>
-		<label>
-			<span>
-				{{#if modes.editing}}
-					<a data-action="config" data-type="immunities">
-						<i class="fa-solid fa-cog"></i>
-					</a>
-				{{/if}}
-				immune
-			</span>
-		</label>
-		<label>
-			<span>
-				{{#if modes.editing}}
-					<a data-action="config" data-type="resistances">
-						<i class="fa-solid fa-cog"></i>
-					</a>
-				{{/if}}
-				resistant
-			</span>
 		</label>-->
+		{{#if traits.resist}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<a data-action="config" data-type="resistance">
+							<i class="fa-solid fa-cog"></i>
+						</a>
+					{{/if}}
+					{{localize "BF.Resistance.Short"}}
+				</span>
+				<span>{{traits.resist}}</span>
+			</label>
+		{{/if}}
+		{{#if traits.immune}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<a data-action="config" data-type="resistance">
+							<i class="fa-solid fa-cog"></i>
+						</a>
+					{{/if}}
+					{{localize "BF.Immunity.Short"}}
+				</span>
+				<span>{{traits.immune}}</span>
+			</label>
+		{{/if}}
+		{{#if traits.vulnerable}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<a data-action="config" data-type="resistance">
+							<i class="fa-solid fa-cog"></i>
+						</a>
+					{{/if}}
+					{{localize "BF.Vulnerability.Short"}}
+				</span>
+				<span>{{traits.vulnerable}}</span>
+			</label>
+		{{/if}}
 		<label>
 			<span>
 				{{#if modes.editing}}

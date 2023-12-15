@@ -64,7 +64,8 @@ export default class NPCSheet extends BaseActorSheet {
 
 	async prepareTraits(context) {
 		context.traits = {};
-		const { proficiencies } = context.system;
+		const { proficiencies, traits } = context.system;
+		const none = game.i18n.localize("None");
 
 		const formatEntry = (value, label) => {
 			value = numberFormat(value, { unit: "foot" });
@@ -94,7 +95,34 @@ export default class NPCSheet extends BaseActorSheet {
 		) || "—";
 		// TODO: Add language tags
 
-		// TODO: Resistances, Immunities, & Vulnerabilities
+		// Resistances
+		const resistances = traits.damage.resistances.value.map(t =>
+			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+		).filter(t => t);
+		if ( resistances.size || this.modes.editing ) {
+			context.traits.resist = game.i18n.getListFormatter({ style: "short" }).format(resistances) || none;
+		}
+
+		// Immunities
+		const immunities = [
+			...traits.damage.immunities.value.map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			),
+			...traits.condition.immunities.value.map(t =>
+				CONFIG.BlackFlag.registration.get("condition", t)?.name
+			)
+		].filter(t => t);
+		if ( immunities.length || this.modes.editing ) {
+			context.traits.immune = game.i18n.getListFormatter({ style: "short" }).format(immunities) || none;
+		}
+
+		// Vulnerabilities
+		const vulnerabilities = traits.damage.vulnerabilities.value.map(t =>
+			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+		).filter(t => t);
+		if ( vulnerabilities.size || this.modes.editing ) {
+			context.traits.vulnerable = game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
