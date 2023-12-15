@@ -8,6 +8,7 @@ import InitiativeConfig from "./config/initiative-config.mjs";
 import MovementConfig from "./config/movement-config.mjs";
 import SensesConfig from "./config/senses-config.mjs";
 import SkillConfig from "./config/skill-config.mjs";
+import ToolConfig from "./config/tool-config.mjs";
 import TypeConfig from "./config/type-config.mjs";
 
 /**
@@ -353,6 +354,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "movement": return new MovementConfig(this.actor).render(true);
 					case "senses": return new SensesConfig(this.actor).render(true);
 					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
+					case "tool": return new ToolConfig(properties.key, this.actor).render(true);
 					case "type": return new TypeConfig(this.actor).render(true);
 				}
 				break;

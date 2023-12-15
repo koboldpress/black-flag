@@ -79,6 +79,11 @@
 	<fieldset class="tools">
 		<legend>
 			{{localize "BF.Tool.Label[other]"}}
+			{{#if modes.editing}}
+				<a data-action="config" data-type="tool">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
 			{{blackFlag-notificationBadge actor category="tools"}}
 		</legend>
 		{{#each system.proficiencies.tools as |tool key|}}

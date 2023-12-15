@@ -12,6 +12,7 @@ export {default as InitiativeConfig} from "./config/initiative-config.mjs";
 export {default as MovementConfig} from "./config/movement-config.mjs";
 export {default as SensesConfig} from "./config/senses-config.mjs";
 export {default as SkillConfig} from "./config/skill-config.mjs";
+export {default as ToolConfig} from "./config/tool-config.mjs";
 export {default as TypeConfig} from "./config/type-config.mjs";
 
 export {default as BaseRestDialog} from "./rest/base-rest-dialog.mjs";

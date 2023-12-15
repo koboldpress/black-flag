@@ -1,9 +1,9 @@
 import BaseConfig from "./base-config.mjs";
 
 /**
- * Dialog for configuring an individual skill.
+ * Dialog for configuring skill proficiencies.
  * @param {string} skillId - The skill being modified by this app.
- * @param {BlackFlagActor} actor - The actor to whom the skill belongs.
+ * @param {BlackFlagActor} actor - The actor to modify.
  * @param {object} options - Additional application rendering options.
  */
 export default class SkillConfig extends BaseConfig {
@@ -26,7 +26,7 @@ export default class SkillConfig extends BaseConfig {
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	/**
-	 * The ability being modified by this app.
+	 * The skill being modified by this app.
 	 * @type {string|null}
 	 */
 	skillId;
@@ -34,7 +34,7 @@ export default class SkillConfig extends BaseConfig {
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	get type() {
-		return game.i18n.localize(CONFIG.BlackFlag.abilities[this.abilityId]?.label ?? "BF.Skill.Label[one]");
+		return game.i18n.localize(CONFIG.BlackFlag.skills[this.skillId]?.label ?? "BF.Skill.Label[one]");
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */

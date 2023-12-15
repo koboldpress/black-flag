@@ -9,6 +9,7 @@ export default class BaseConfig extends DocumentSheet {
 			width: 450,
 			height: "auto",
 			submitOnChange: true,
+			submitOnClose: true,
 			closeOnSubmit: false
 		});
 	}

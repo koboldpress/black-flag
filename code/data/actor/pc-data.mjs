@@ -112,7 +112,7 @@ export default class PCData extends ActorDataModel.mixin(
 					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
 				}),
 				tools: new MappingField(new SchemaField({
-					proficiency: new ProficiencyField({rounding: false})
+					proficiency: new ProficiencyField({rounding: false}, {initial: {multiplier: 1}})
 					// Default ability
 				}), {label: "BF.Tool.Label[other]"}),
 				weapons: new SchemaField({
