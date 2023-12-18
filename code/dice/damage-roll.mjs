@@ -19,8 +19,8 @@ import BaseRoll from "./base-roll.mjs";
  * @property {number} [bonusDice=0] - Additional dice added to first term when calculating critical damage.
  * @property {string} [bonusDamage] - Additional, unmodified, damage formula added when calculating a critical.
  * @property {string} [maximizeDamage] - Maximize result of extra dice added by critical, rather than rolling.
- * @property {boolean} [multiplyNumeric=false] - Should numeric terms be multiplied along side dice
- *                                               during criticals?
+ * @property {boolean} [multiplyDice] - Should dice result be multiplied rather than number of dice rolled increased?
+ * @property {boolean} [multiplyNumeric] - Should numeric terms be multiplied along side dice during criticals?
  * @property {string} [type] - Type of damage represented.
  */
 
@@ -67,6 +67,7 @@ export default class DamageRoll extends BaseRoll {
 		config.options ??= {};
 		config.options.critical = !!config.options.critical || keys.critical;
 		config.options.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
+		config.options.multiplyDice ??= game.settings.get("black-flag", "criticalMultiplyDice");
 		config.options.multiplyNumeric ??= game.settings.get("black-flag", "criticalMultiplyNumeric");
 	}
 
@@ -147,7 +148,7 @@ export default class DamageRoll extends BaseRoll {
 	 */
 	configureRoll() {
 		let bonus = 0;
-		console.log(foundry.utils.deepClone(this.options));
+		const multiplier = this.options.multiplier ?? 2;
 
 		for ( const [i, term] of this.terms.entries() ) {
 			// Multiply dice terms
@@ -155,29 +156,42 @@ export default class DamageRoll extends BaseRoll {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if ( this.isCritical ) {
-					let multiplier = this.options.multiplier ?? 2;
+					let termMultiplier = multiplier;
 
 					// Maximize Critical - Maximize one die and reduce to the multiplier by one to account for it.
 					if ( this.options.maximizeDamage ) {
 						bonus += term.number * term.faces;
-						multiplier = Math.max(1, multiplier - 1);
+						termMultiplier = Math.max(1, termMultiplier - 1);
 					}
 
 					const bonusDice = (this.options.bonusDice ?? (i === 0)) ? this.options.bonusDice : 0;
-					term.alter(multiplier, bonusDice);
+					term.alter(this.options.multiplyDice ? null : termMultiplier, bonusDice);
 					term.options.critical = true;
+
+					// Multiply Dice - Add term to multiply dice result (as long as multiply numeric isn't also set)
+					if ( this.options.multiplyDice && !this.options.multiplyNumeric ) this.terms.splice(i + 1, 0,
+						new OperatorTerm({operator: "*"}),
+						new NumericTerm({number: termMultiplier})
+					);
 				}
 			}
 
-			// Multiply numeric terms
-			else if ( this.options.multiplyNumeric && (term instanceof NumericTerm) ) {
+			// Multiply Numeric - Modify numeric terms (as long as multiply dice isn't also set)
+			else if ( (this.options.multiplyNumeric && !this.options.multiplyDice) && (term instanceof NumericTerm) ) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if ( this.isCritical ) {
-					term.number *= (this.options.multiplier ?? 2);
+					term.number *= multiplier;
 					term.options.critical = true;
 				}
 			}
+		}
+
+		// Multiply Dice & Numeric: Wrap whole formula in parenthetical term and multiply
+		if ( this.isCritical && this.options.multiplyDice && this.options.multiplyNumeric && (multiplier > 1) ) {
+			this.terms = [ParentheticalTerm.fromTerms(this.terms)];
+			this.terms.push(new OperatorTerm({operator: "*"}));
+			this.terms.push(new NumericTerm({number: multiplier}));
 		}
 
 		// Add flat bonus back in
