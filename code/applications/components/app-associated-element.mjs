@@ -17,11 +17,5 @@ export default class AppAssociatedElement extends HTMLElement {
 	 */
 	#app;
 
-	/**
-	 * Reference to the application that contains this component.
-	 * @type {Application}
-	 */
-	get app() {
-		return this.#app;
-	}
+	get app() { return this.#app; }
 }

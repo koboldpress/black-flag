@@ -15,5 +15,7 @@ export {default as FilterElement} from "./filter.mjs";
 export {default as FiltersElement} from "./filters.mjs";
 export {default as FormAssociatedElement} from "./form-associated-element.mjs";
 export {default as InventoryElement} from "./inventory.mjs";
+export {default as MessageAssociatedElement} from "./message-associated-element.mjs";
+export {default as MessageLuck} from "./message-luck.mjs";
 export {default as UsesElement} from "./uses.mjs";
 export {default as XPBarElement} from "./xp-bar.mjs";
