@@ -11,44 +11,57 @@ export const weapons = {
 		children: {
 			// Simple Melee
 			club: {
-				label: "BF.Weapon.Base.Club"
+				label: "BF.Weapon.Base.Club",
+				type: "melee"
 			},
 			dagger: {
-				label: "BF.Weapon.Base.Dagger"
+				label: "BF.Weapon.Base.Dagger",
+				type: "melee"
 			},
 			greatclub: {
-				label: "BF.Weapon.Base.Greatclub"
+				label: "BF.Weapon.Base.Greatclub",
+				type: "melee"
 			},
 			handaxe: {
-				label: "BF.Weapon.Base.Handaxe"
+				label: "BF.Weapon.Base.Handaxe",
+				type: "melee"
 			},
 			javelin: {
-				label: "BF.Weapon.Base.Javelin"
+				label: "BF.Weapon.Base.Javelin",
+				type: "melee"
 			},
 			lightHammer: {
-				label: "BF.Weapon.Base.LightHammer"
+				label: "BF.Weapon.Base.LightHammer",
+				type: "melee"
 			},
 			mace: {
-				label: "BF.Weapon.Base.Mace"
+				label: "BF.Weapon.Base.Mace",
+				type: "melee"
 			},
 			quarterstaff: {
-				label: "BF.Weapon.Base.Quarterstaff"
+				label: "BF.Weapon.Base.Quarterstaff",
+				type: "melee"
 			},
 			spear: {
-				label: "BF.Weapon.Base.Spear"
+				label: "BF.Weapon.Base.Spear",
+				type: "melee"
 			},
 			// Simple Ranged
 			lightCrossbow: {
-				label: "BF.Weapon.Base.CrossbowLight"
+				label: "BF.Weapon.Base.CrossbowLight",
+				type: "ranged"
 			},
 			dart: {
-				label: "BF.Weapon.Base.Dart"
+				label: "BF.Weapon.Base.Dart",
+				type: "ranged"
 			},
 			shortbow: {
-				label: "BF.Weapon.Base.Shortbow"
+				label: "BF.Weapon.Base.Shortbow",
+				type: "ranged"
 			},
 			sling: {
-				label: "BF.Weapon.Base.Sling"
+				label: "BF.Weapon.Base.Sling",
+				type: "ranged"
 			}
 		}
 	},
@@ -58,50 +71,65 @@ export const weapons = {
 		children: {
 			// Martial Melee
 			battleaxe: {
-				label: "BF.Weapon.Base.Battleaxe"
+				label: "BF.Weapon.Base.Battleaxe",
+				type: "melee"
 			},
 			flail: {
-				label: "BF.Weapon.Base.Flail"
+				label: "BF.Weapon.Base.Flail",
+				type: "melee"
 			},
 			greataxe: {
-				label: "BF.Weapon.Base.Greataxe"
+				label: "BF.Weapon.Base.Greataxe",
+				type: "melee"
 			},
 			greatsword: {
-				label: "BF.Weapon.Base.Greatsword"
+				label: "BF.Weapon.Base.Greatsword",
+				type: "melee"
 			},
 			halberd: {
-				label: "BF.Weapon.Base.Halberd"
+				label: "BF.Weapon.Base.Halberd",
+				type: "melee"
 			},
 			longsword: {
-				label: "BF.Weapon.Base.Longsword"
+				label: "BF.Weapon.Base.Longsword",
+				type: "melee"
 			},
 			maul: {
-				label: "BF.Weapon.Base.Maul"
+				label: "BF.Weapon.Base.Maul",
+				type: "melee"
 			},
 			morningstar: {
-				label: "BF.Weapon.Base.Morningstar"
+				label: "BF.Weapon.Base.Morningstar",
+				type: "melee"
 			},
 			rapier: {
-				label: "BF.Weapon.Base.Rapier"
+				label: "BF.Weapon.Base.Rapier",
+				type: "melee"
 			},
 			scimitar: {
-				label: "BF.Weapon.Base.Scimitar"
+				label: "BF.Weapon.Base.Scimitar",
+				type: "melee"
 			},
 			shortsword: {
-				label: "BF.Weapon.Base.Shortsword"
+				label: "BF.Weapon.Base.Shortsword",
+				type: "melee"
 			},
 			warhammer: {
-				label: "BF.Weapon.Base.Warhammer"
+				label: "BF.Weapon.Base.Warhammer",
+				type: "melee"
 			},
 			// Martial Ranged
 			handCrossbow: {
-				label: "BF.Weapon.Base.CrossbowHand"
+				label: "BF.Weapon.Base.CrossbowHand",
+				type: "ranged"
 			},
 			heavyCrossbow: {
-				label: "BF.Weapon.Base.CrossbowHeavy"
+				label: "BF.Weapon.Base.CrossbowHeavy",
+				type: "ranged"
 			},
 			longbow: {
-				label: "BF.Weapon.Base.Longbow"
+				label: "BF.Weapon.Base.Longbow",
+				type: "ranged"
 			}
 		}
 	}

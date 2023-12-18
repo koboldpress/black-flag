@@ -1,4 +1,4 @@
-import { filteredKeys } from "../../utils/_module.mjs";
+import { filteredKeys, sortObjectEntries } from "../../utils/_module.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class EquipmentSheet extends BaseItemSheet {
@@ -29,8 +29,15 @@ export default class EquipmentSheet extends BaseItemSheet {
 
 		context.categories = context.system.validCategories?.localized;
 		const category = context.system.validCategories?.[context.system.type.category];
-		context.baseTypes = category?.children?.localized ?? null;
-		// TODO: Sort base types by category if linked item is provided
+		context.baseTypes = category?.children ? sortObjectEntries(Object.entries(category.children)
+			.reduce((obj, [key, config]) => {
+				if ( !foundry.utils.hasProperty(this.item, "system.type.value")
+					|| !config.type || (config.type === this.item.system.type.value) ) {
+					obj[key] = game.i18n.localize(config.label);
+				}
+				return obj;
+			}, {})
+		) : null;
 
 		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
 			obj[k] = { label: game.i18n.localize(o.label), selected: context.system.options.has(k) };

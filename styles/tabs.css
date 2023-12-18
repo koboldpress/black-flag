@@ -5,11 +5,13 @@ nav.tabs.tabs_separate {
 	margin-block-start: 6px;
 	margin-inline: -1rem;
 	padding-inline: 2rem;
+	justify-content: flex-start;
 	gap: var(--tab-gap);
 
 	a {
 		position: relative;
 		flex: 1 0 5em;
+		max-width: 17em;
 		display: block;
 		border: 1px solid transparent;
 		border-block-end-color: var(--bf-color-border-blue);
@@ -40,10 +42,10 @@ nav.tabs.tabs_separate {
 	}
 	a:first-of-type::before {
 		content: "";
-		inset-inline-start: -100px;
+		inset-inline-start: -1000px;
 		inset-inline-end: 100%;
 	}
 	a:last-of-type::after {
-		inset-inline-end: -100px;
+		inset-inline-end: -1000px;
 	}
 }
