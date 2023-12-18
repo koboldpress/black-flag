@@ -16,10 +16,11 @@ import BaseRoll from "./base-roll.mjs";
  * @property {boolean} [allowCritical=true] - Should critical damage be allowed?
  * @property {boolean} [critical] - Does this roll do critical damage?
  * @property {number} [multiplier=2] - Amount by which to multiply critical damage.
- * @property {boolean} [multiplyNumeric=false] - Should numeric terms be multiplied along side dice
- *                                               during criticals?
  * @property {number} [bonusDice=0] - Additional dice added to first term when calculating critical damage.
  * @property {string} [bonusDamage] - Additional, unmodified, damage formula added when calculating a critical.
+ * @property {string} [maximizeDamage] - Maximize result of extra dice added by critical, rather than rolling.
+ * @property {boolean} [multiplyNumeric=false] - Should numeric terms be multiplied along side dice
+ *                                               during criticals?
  * @property {string} [type] - Type of damage represented.
  */
 
@@ -65,6 +66,8 @@ export default class DamageRoll extends BaseRoll {
 		// Determine critical mode
 		config.options ??= {};
 		config.options.critical = !!config.options.critical || keys.critical;
+		config.options.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
+		config.options.multiplyNumeric ??= game.settings.get("black-flag", "criticalMultiplyNumeric");
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -143,14 +146,23 @@ export default class DamageRoll extends BaseRoll {
 	 * Modify the damage to take criticals into account.
 	 */
 	configureRoll() {
+		let bonus = 0;
+		console.log(foundry.utils.deepClone(this.options));
+
 		for ( const [i, term] of this.terms.entries() ) {
 			// Multiply dice terms
 			if ( term instanceof DiceTerm ) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if ( this.isCritical ) {
-					// TODO: Should "Powerful critical" mode be supported?
-					const multiplier = this.options.multiplier ?? 2;
+					let multiplier = this.options.multiplier ?? 2;
+
+					// Maximize Critical - Maximize one die and reduce to the multiplier by one to account for it.
+					if ( this.options.maximizeDamage ) {
+						bonus += term.number * term.faces;
+						multiplier = Math.max(1, multiplier - 1);
+					}
+
 					const bonusDice = (this.options.bonusDice ?? (i === 0)) ? this.options.bonusDice : 0;
 					term.alter(multiplier, bonusDice);
 					term.options.critical = true;
@@ -168,6 +180,13 @@ export default class DamageRoll extends BaseRoll {
 			}
 		}
 
+		// Add flat bonus back in
+		if ( bonus > 0 ) {
+			this.terms.push(new OperatorTerm({operator: "+"}));
+			this.terms.push(new NumericTerm({number: bonus}, {flavor: game.i18n.localize("BF.Damage.Critical.Maximize")}));
+		}
+
+		// Add extra critical damage
 		if ( this.isCritical && this.options.bonusDamage ) {
 			const extra = new Roll(this.options.bonusDamage, this.data);
 			if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));

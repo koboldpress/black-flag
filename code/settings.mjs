@@ -123,6 +123,24 @@ export function registerSettings() {
 		type: Boolean
 	});
 
+	game.settings.register(game.system.id, "criticalMultiplyNumeric", {
+		name: "BF.Settings.CriticalMultiplyNumeric.Label",
+		hint: "BF.Settings.CriticalMultiplyNumeric.Hint",
+		scope: "world",
+		config: true,
+		default: false,
+		type: Boolean
+	});
+
+	game.settings.register(game.system.id, "criticalMaximizeDamage", {
+		name: "BF.Settings.CriticalMaximizeDamage.Label",
+		hint: "BF.Settings.CriticalMaximizeDamage.Hint",
+		scope: "world",
+		config: true,
+		default: false,
+		type: Boolean
+	});
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Hidden Settings           */
 	/* <><><><> <><><><> <><><><> <><><><> */
