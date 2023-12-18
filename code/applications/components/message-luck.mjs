@@ -16,15 +16,15 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.#controller = new AbortController();
 		this.replaceChildren();
 		this.#createLuckInterface();
+		this.#hookID = Hooks.on("updateActor", this.#onUpdateActor.bind(this));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	disconnectedCallback() {
-		this.#controller.abort();
+		Hooks.off("updateActor", this.#hookID);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,8 +68,8 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		// Disable controls that don't have enough luck & add event listeners
 		const bonusButton = this.querySelector('[data-action="luck-bonus"]');
 		const rerollButton = this.querySelector('[data-action="luck-reroll"]');
-		bonusButton.addEventListener("click", e => this._onLuckBonus(e), { signal: this.#controller.signal });
-		rerollButton.addEventListener("click", e => this._onLuckReroll(e), { signal: this.#controller.signal });
+		bonusButton.addEventListener("click", e => this.#onLuckBonus(e));
+		rerollButton.addEventListener("click", e => this.#onLuckReroll(e));
 		if ( luckAvailable < config.costs.bonus ) bonusButton.disabled = true;
 		if ( luckAvailable < config.costs.reroll ) rerollButton.disabled = true;
 	}
@@ -86,10 +86,10 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Abort controller for handling removing listeners.
-	 * @type {AbortController}
+	 * ID of the change listener.
+	 * @type {number}
 	 */
-	#controller;
+	#hookID;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
@@ -132,7 +132,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 	 * @param {ClickEvent} event - Triggering click event.
 	 * @returns {Promise}
 	 */
-	async _onLuckBonus(event) {
+	async #onLuckBonus(event) {
 		const actor = this.actor;
 
 		// Ensure there is enough luck on actor to spend
@@ -171,7 +171,10 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		messageUpdates[`flags.${game.system.id}.luck.bonus`] = previousBonus + 1;
 
 		// Spend luck on actor
-		await actor.update({"system.attributes.luck.value": actor.system.attributes.luck.value - cost});
+		await actor.update(
+			{ "system.attributes.luck.value": actor.system.attributes.luck.value - cost },
+			{ fromLuckCard: this.message.id }
+		);
 
 		// Update initiative if necessary
 		if ( this.message.getFlag("core", "initiativeRoll") ) {
@@ -189,7 +192,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 	 * @param {ClickEvent} event - Triggering click event.
 	 * @returns {Promise}
 	 */
-	async _onLuckReroll(event) {
+	async #onLuckReroll(event) {
 		const actor = this.actor;
 
 		// Ensure there is enough luck on actor to spend
@@ -266,7 +269,10 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		messageUpdates[`flags.${game.system.id}.luck.reroll`] = true;
 
 		// Spend luck on actor
-		await actor.update({"system.attributes.luck.value": actor.system.attributes.luck.value - cost});
+		await actor.update(
+			{ "system.attributes.luck.value": actor.system.attributes.luck.value - cost },
+			{ fromLuckCard: this.message.id }
+		);
 
 		// Update initiative if necessary
 		if ( this.message.getFlag("core", "initiativeRoll") ) {
@@ -275,5 +281,25 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 		// Re-render the chat message
 		await this.message.update(messageUpdates);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Watch for changes to luck on the associated actor.
+	 * @param {BlackFlagActor} actor - Actor that was changed.
+	 * @param {object} changes - Changes applied.
+	 * @param {object} options - Options for the change.
+	 * @param {string} userId - ID of the user who performed the change.
+	 */
+	#onUpdateActor(actor, changes, options, userId) {
+		if ( (actor !== this.actor) || (options.fromLuckCard === this.message.id)
+			|| !foundry.utils.hasProperty(changes, "system.attributes.luck.value") ) return;
+		if ( this.constructor.shouldDisplayLuckInterface(this.message) ) {
+			this.replaceChildren();
+			this.#createLuckInterface();
+		} else {
+			this.remove();
+		}
 	}
 }
