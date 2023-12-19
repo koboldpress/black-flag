@@ -1,6 +1,7 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
 import { log, numberFormat, sortObjectEntries } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
+import InventoryElement from "../components/inventory.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -154,103 +155,10 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 * @abstract
 	 */
-	async prepareItems(context) {}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Sort provided items into sections defined in `CONFIG.BlackFlag.sheetSections` for this actor type.
-	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
-	 * @param {async Function} callback - Method called for each item after it is added to a section.
-	 */
-	async _prepareItemSections(context, callback) {
-		context.sections = this._buildSections();
-
-		for ( const item of Array.from(context.actor.items).sort((a, b) => a.sort - b.sort) ) {
-			const section = this._organizeItem(item, context.sections);
-			if ( callback ) await callback(item, section);
-		}
-
-		for ( const [tab, data] of Object.entries(context.sections) ) {
-			for ( const [key, section] of Object.entries(data) ) {
-				section.items = this._filterItems(section.items, this.filters[tab]);
-				if ( !this.modes.editing && section.options?.autoHide && !section.items.length ) delete data[key];
-			}
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Construct sheet sections based on data in `CONFIG.BlackFlag.sheetSections`.
-	 * @returns {object}
-	 * @internal
-	 */
-	_buildSections() {
-		const sections = {};
-
-		for ( const config of CONFIG.BlackFlag.sheetSections[this.actor.type] ?? [] ) {
-			const tab = sections[config.tab] ??= {};
-			const toAdd = config.expand ? config.expand(this.actor, config) : [config];
-			toAdd.forEach(c => tab[c.id] = { ...c, items: [] });
-		}
-
-		return sections;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Filter items within a section according to a set of filters.
-	 * @param {BlackFlagItem[]} items - List of items to filter.
-	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
-	 * @returns {BlackFlagItem[]} - Filtered items.
-	 */
-	_filterItems(items, filters={}) {
-		if ( foundry.utils.isEmpty(filters) ) return items;
-		return items.filter(item => {
-			for ( const [filter, value] of Object.entries(filters) ) {
-				if ( value === 0 ) continue;
-				const matches = item.system.evaluateFilter?.(filter);
-				if ( ((value === 1) && (matches === false))
-					|| ((value === -1) && (matches === true)) ) return false;
-			}
-			return true;
+	async prepareItems(context) {
+		context.sections = await InventoryElement.organizeItems(this.actor, this.actor.items, {
+			filters: this.filters, hide: !this.modes.editing
 		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Place an item in the appropriate section.
-	 * @param {BlackFlagItem} item - Item to organize.
-	 * @param {object} sections - Sections to populate.
-	 * @returns {object} - Section into which the item was inserted.
-	 * @internal
-	 */
-	_organizeItem(item, sections) {
-		const checkFilter = (item, filter) => Object.entries(filter)
-			.every(([key, value]) => foundry.utils.getProperty(item, key) === value);
-
-		for ( const tab of Object.values(sections) ) {
-			for ( const section of Object.values(tab) ) {
-				for ( const type of section.types ?? [] ) {
-					if ( checkFilter(item, type) ) {
-						section.items.push(item);
-						return section;
-					}
-				}
-			}
-		}
-
-		// No matching section found, add to uncategorized section if editing mode is enabled
-		if ( !this.modes.editing ) return;
-		const firstTab = Object.keys(sections)[0];
-		const section = sections[firstTab].uncategorized ??= {
-			label: game.i18n.localize("BF.Item.Type.Unidentified[other]"), items: []
-		};
-		section.items.push(item);
-		return section;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -54,12 +54,6 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async prepareItems(context) {
-		await this._prepareItemSections(context);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Prepare levels on the progression tab and assign them advancement flows.
 	 * @param {object} context - Context being prepared.

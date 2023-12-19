@@ -56,12 +56,6 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async prepareItems(context) {
-		await this._prepareItemSections(context);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	async prepareTraits(context) {
 		context.traits = {};
 		const { proficiencies, traits } = context.system;

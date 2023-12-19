@@ -66,6 +66,27 @@ export default class FiltersElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Filter items within a section according to a set of filters.
+	 * @param {BlackFlagItem[]} items - List of items to filter.
+	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
+	 * @returns {BlackFlagItem[]} - Filtered items.
+	 */
+	static filterItems(items, filters={}) {
+		if ( foundry.utils.isEmpty(filters) ) return items;
+		return items.filter(item => {
+			for ( const [filter, value] of Object.entries(filters) ) {
+				if ( value === 0 ) continue;
+				const matches = item.system.evaluateFilter?.(filter);
+				if ( ((value === 1) && (matches === false))
+					|| ((value === -1) && (matches === true)) ) return false;
+			}
+			return true;
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Retrieve the current value of the specified filter.
 	 * @param {string} filter - Filtering key.
 	 * @returns {number|undefined} - Valid filter value (-1, 0, or +1).

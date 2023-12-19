@@ -8,6 +8,13 @@
 				<tr>
 					<td class="name">{{localize section.label}}</td>
 					<th class="uses">{{localize "BF.Uses.Short"}}</th>
+					<td class="controls">
+						{{#if @root.modes.editing}}
+							<a data-action="add">
+								<i class="fa-solid fa-plus"></i>
+							</a>
+						{{/if}}
+					</td>
 				</tr>
 				{{#each section.items}}
 					<tr data-item-id="{{id}}">
@@ -41,5 +48,41 @@
 				{{/each}}
 			</tbody>
 		{{/each}}
+		{{#if (and modes.editing sections.uncategorized.length)}}
+			<tbody data-section="uncategorized">
+				<tr>
+					<td class="name" colspan="3">{{localize "BF.Item.Type.Unidentified[other]"}}</td>
+				</tr>
+				{{#each sections.uncategorized}}
+					<tr data-item-id="{{id}}">
+						<th class="name" scope="row" colspan="2">
+							<div class="layout">
+								<figure>
+									<img src="{{img}}">
+								</figure>
+								{{name}}
+								{{blackFlag-notificationBadge @root.actor document=this}}
+							</div>
+						</th>
+						<td class="controls">
+							<div class="layout">
+								{{#if @root.modes.editing}}
+									<a data-action="edit">
+										<i class="fa-solid fa-edit"></i>
+									</a>
+									<a data-action="delete">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								{{else}}
+									<a data-action="view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+								{{/if}}
+							</div>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		{{/if}}
 	</table>
 </blackFlag-inventory>

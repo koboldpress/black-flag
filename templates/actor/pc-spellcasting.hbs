@@ -26,7 +26,13 @@
 					<th class="range" scope="col">{{localize "BF.Range.Label"}}</th>
 					<th class="target" scope="col">{{localize "BF.Target.Label[one]"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
-					<td class="controls"></td>
+					<td class="controls">
+						{{#if @root.modes.editing}}
+							<a data-action="add">
+								<i class="fa-solid fa-plus"></i>
+							</a>
+						{{/if}}
+					</td>
 				</tr>
 				{{#each section.items as |spell|}}
 					<tr data-item-id="{{spell.id}}"><!-- TODO: Data based on type, prepared state -->

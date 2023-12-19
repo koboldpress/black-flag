@@ -13,7 +13,13 @@
 					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
 					<th class="cost" scope="col">{{localize "BF.Price.Label"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
-					<td class="controls"></td>
+					<td class="controls">
+						{{#if @root.modes.editing}}
+							<a data-action="add">
+								<i class="fa-solid fa-plus"></i>
+							</a>
+						{{/if}}
+					</td>
 				</tr>
 				{{#each section.items}}
 					<tr data-item-id="{{id}}">
