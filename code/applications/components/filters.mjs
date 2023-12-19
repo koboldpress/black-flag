@@ -15,7 +15,6 @@ export default class FiltersElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		if ( this.app.filters ) this.app.filters[this.tab] ??= {};
 		this.addEventListener("change", this.#onChangeFilter.bind(this), { signal: this.#controller.signal });
 	}
 
@@ -32,11 +31,21 @@ export default class FiltersElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Document represented by the app.
+	 * @type {BlackFlagActor|BlackFlagItem}
+	 */
+	get document() {
+		return this.app.document;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Set of filters offered by the app.
 	 * @type {{[key: string]: integer}|null}
 	 */
 	get filters() {
-		return this.app.filters?.[this.tab] ?? null;
+		return this.app.document.flags["black-flag"]?.sheet?.filters?.[this.tab] ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -65,9 +74,7 @@ export default class FiltersElement extends AppAssociatedElement {
 	 */
 	#onChangeFilter(event) {
 		event.stopPropagation();
-		if ( !this.filters ) return;
-		this.filters[event.target.filter] = event.target.value;
-		this.app.render();
+		this.document.update({[`flags.black-flag.sheet.filters.${this.tab}.${event.target.filter}`]: event.target.value});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

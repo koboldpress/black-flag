@@ -236,12 +236,10 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @param {BlackFlagItem[]} items - Items to categorize.
 	 * @param {object} [options={}]
 	 * @param {async Function} [options.callback] - Method called for each item after it is added to a section.
-	 * @param {{[key: string]: {[key: string]: number}}} [options.filters] - Any filtering to apply.
-	 * @param {{[key: string]: string}} [options.sorting] - Sorting options per-tab.
 	 * @param {boolean} [options.hide=true] - Should sections marked autoHide by hidden if empty?
 	 * @returns {object} - Object with sections grouped by tabs and all their items.
 	 */
-	static async organizeItems(actor, items, { callback, filters={}, sorting={}, hide=true }={}) {
+	static async organizeItems(actor, items, { callback, hide=true }={}) {
 		const sections = this.buildSections(actor);
 
 		for ( const item of items ) {
@@ -250,6 +248,8 @@ export default class InventoryElement extends AppAssociatedElement {
 			if ( callback ) await callback(item, section);
 		}
 
+		const filters = actor.flags["black-flag"]?.sheet?.filters ?? {};
+		const sorting = actor.flags["black-flag"]?.sheet?.sorting ?? {};
 		for ( const [tab, data] of Object.entries(sections) ) {
 			for ( const [key, section] of Object.entries(data) ) {
 				section.items = FiltersElement.filter(section.items, filters[tab]);

@@ -41,15 +41,21 @@ export default class SortingElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Document represented by the app.
+	 * @type {BlackFlagActor|BlackFlagItem}
+	 */
+	get document() {
+		return this.app.document;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Get the current sorting value for this tab.
 	 * @type {string}
 	 */
 	get sorting() {
-		return this.app.sorting[this.tab] ?? "";
-	}
-
-	set sorting(value) {
-		this.app.sorting[this.tab] = value;
+		return this.app.document.flags["black-flag"]?.sheet?.sorting?.[this.tab] ?? "";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -78,8 +84,7 @@ export default class SortingElement extends AppAssociatedElement {
 	 */
 	#onChangeSorting(event) {
 		event.stopPropagation();
-		this.sorting = event.target.value;
-		this.app.render();
+		this.document.update({[`flags.black-flag.sheet.sorting.${this.tab}`]: event.target.value});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

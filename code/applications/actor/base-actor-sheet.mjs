@@ -167,7 +167,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async prepareItems(context) {
 		context.sections = await InventoryElement.organizeItems(this.actor, this.actor.items, {
-			filters: this.filters, sorting: this.sorting, hide: !this.modes.editing
+			hide: !this.modes.editing
 		});
 	}
 
