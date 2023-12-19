@@ -95,4 +95,17 @@ export default class SavingThrowActivity extends DamageActivity {
 			});
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	createDamageConfigs(config, rollData) {
+		config = foundry.utils.mergeObject({
+			options: {
+				allowCritical: false
+			}
+		}, config);
+		return super.createDamageConfigs(config, rollData);
+	}
 }
