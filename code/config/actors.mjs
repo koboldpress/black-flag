@@ -191,8 +191,9 @@ export const senses = {
  * @property {string} id - ID of the section, should be unique per actor type.
  * @property {string} tab - Name of the tab on which this section will appear. Places the section into an object
  *                          for that tab's name within the sheet rendering context.
- * @property {object[]} types - Set of filters for object types that should appear in this section.
  * @property {string} label - Localizable label for the section.
+ * @property {FilterDescription[]} filters - Set of filters to determine which items should appear in this section.
+ * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
  */
@@ -215,84 +216,126 @@ export const sheetSections = {
 		{
 			id: "ring-*",
 			tab: "spellcasting",
-			types: [{type: "spell"}],
+			filters: [
+				{k: "type", v: "spell"},
+				{k: "flags.black-flag.relationship.preparationMode", o: "in", v: ["standard", "alwaysPrepared", undefined]}
+			],
 			expand: (actor, sectionData) => {
 				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
-					const cantrip = number === "0";
+					number = Number(number);
+					const cantrip = number === 0;
 					const id = cantrip ? "cantrip" : `ring-${number}`;
 					const ring = actor.system.spellcasting.rings[id] ?? {};
-					const types = [{type: "spell", "system.ring.base": Number(number)}];
 					return foundry.utils.mergeObject(sectionData, {
-						id, label, types, options: { autoHide: !ring.max && !cantrip }, ring
+						id, label,
+						filters: [...sectionData.filters, {k: "system.ring.base", v: number}],
+						create: [{
+							type: "spell",
+							"system.ring.base": number,
+							"flags.black-flag.relationship.preparationMode": "standard"
+						}],
+						options: { autoHide: !ring.max && !cantrip }, ring
 					}, {inplace: false});
 				});
 			}
 		},
 		{
+			id: "ritual",
+			tab: "spellcasting",
+			label: "BF.Spell.Preparation.Mode.Ritual",
+			filters: [{k: "type", v: "spell"}, {k: "flags.black-flag.relationship.preparationMode", v: "ritual"}],
+			create: [{type: "spell", "flags.black-flag.relationship.preparationMode": "ritual"}],
+			options: {autoHide: true}
+		},
+		{
+			id: "innate",
+			tab: "spellcasting",
+			label: "BF.Spell.Preparation.Mode.Innate",
+			filters: [{k: "type", v: "spell"}, {k: "flags.black-flag.relationship.preparationMode", v: "innate"}],
+			create: [{type: "spell", "flags.black-flag.relationship.preparationMode": "innate"}],
+			options: {autoHide: true}
+		},
+		{
 			id: "equipment",
 			tab: "inventory",
-			types: [{type: "ammunition"}, {type: "armor"}, {type: "weapon"}],
-			label: "BF.Item.Category.Equipment.Label"
+			label: "BF.Item.Category.Equipment.Label",
+			filters: [{k: "type", o: "in", v: ["armor", "weapon", "ammunition"]}],
+			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
 		},
 		{
 			id: "class-features",
 			tab: "features",
-			types: [{type: "feature", "system.type.category": "class"}],
 			label: "BF.Item.Feature.Category.Class[other]",
+			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "class"}],
 			expand: (actor, sectionData) => {
 				if ( actor.system.progression.level === 0 ) return sectionData;
-				return Object.entries(actor.system.progression.classes).map(([identifier, cls]) =>
-					foundry.utils.mergeObject(sectionData, {
-						id: `class-${identifier}`, label: `${cls.document.name} features`,
-						types: [{type: "feature", "system.identifier.associated": identifier}],
+				return Object.entries(actor.system.progression.classes).map(([identifier, cls]) => {
+					const label = pluralRule => game.i18n.format(
+						`BF.Item.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name }
+					);
+					return foundry.utils.mergeObject(sectionData, {
+						id: `class-${identifier}`, label: label("other"),
+						filters: [...sectionData.filters, {k: "system.identifier.associated", v: identifier}],
+						create: [{
+							label: label("one"),
+							type: "feature",
+							"system.type.category": "class",
+							"system.identifier.associated": identifier
+						}],
 						levels: cls.levels
-					}, {inplace: false})
-				).sort((lhs, rhs) => rhs.levels - lhs.levels);
+					}, {inplace: false});
+				}).sort((lhs, rhs) => rhs.levels - lhs.levels);
 			}
 		},
 		{
 			id: "talents",
 			tab: "features",
-			types: [{type: "talent"}],
-			label: "BF.Item.Type.Talent[other]"
+			label: "BF.Item.Type.Talent[other]",
+			filters: [{k: "type", v: "talent"}],
+			create: [{type: "talent"}]
 		},
 		{
 			id: "lineage-features",
 			tab: "features",
-			types: [{type: "feature", "system.type.category": "lineage"}],
-			label: "BF.Item.Feature.Category.Lineage[other]"
+			label: "BF.Item.Feature.Category.Lineage[other]",
+			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "lineage"}],
+			create: [{label: "BF.Item.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage"}]
 		},
 		{
 			id: "heritage-features",
 			tab: "features",
-			types: [{type: "feature", "system.type.category": "heritage"}],
-			label: "BF.Item.Feature.Category.Heritage[other]"
+			label: "BF.Item.Feature.Category.Heritage[other]",
+			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "heritage"}],
+			create: [{label: "BF.Item.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage"}]
 		},
 		{
 			id: "features",
 			tab: "features",
-			types: [{type: "feature"}],
 			label: "BF.Item.Category.Feature.Label",
+			filters: [{k: "type", v: "feature"}],
+			create: [{type: "feature"}],
 			options: {autoHide: true}
 		},
 		{
 			id: "progression",
 			tab: "progression",
-			types: [{type: "class"}, {type: "background"}, {type: "heritage"}, {type: "lineage"}]
+			filters: [{k: "type", o: "in", v: ["class", "background", "heritage", "lineage"]}]
 		}
 	],
 	npc: [
 		{
 			id: "features",
 			tab: "features",
-			types: [{type: "feature"}, {type: "talent"}],
-			label: "BF.Item.Category.Feature.Label"
+			label: "BF.Item.Category.Feature.Label",
+			filters: [{k: "type", o: "in", v: ["feature", "talent"]}],
+			create: [{type: "feature"}]
 		},
 		{
 			id: "equipment",
 			tab: "features",
-			types: [{type: "ammunition"}, {type: "armor"}, {type: "weapon"}],
-			label: "BF.Item.Category.Equipment.Label"
+			label: "BF.Item.Category.Equipment.Label",
+			filters: [{k: "type", o: "in", v: ["ammunition", "armor", "weapon"]}],
+			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
 		}
 	]
 };

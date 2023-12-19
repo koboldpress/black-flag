@@ -264,15 +264,15 @@ export function iendswith(data, value) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Check that value is contained with a collection of data.
+ * Check that data matches one of the provided values
  * @param {*} data
  * @param {*} value
  * @returns {boolean}
  */
 export function in_(data, value) {
-	switch (foundry.utils.getType(data)) {
-		case "Array": return data.includes(value);
-		case "Set": return data.has(value);
+	switch (foundry.utils.getType(value)) {
+		case "Array": return value.includes(data);
+		case "Set": return value.has(data);
 		default: return false;
 	}
 }

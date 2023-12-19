@@ -1,3 +1,4 @@
+import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
@@ -175,16 +176,16 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onAddItem(target) {
 		// Fetch configuration information for this section
 		const config = this.getSectionConfiguration(target.closest("[data-section]").dataset.section);
-		let createData;
+		const makeLabel = d => d.label ? game.i18n.localize(d.label) : game.i18n.localize(CONFIG.Item.typeLabels[d.type]);
 
 		// If more than one type is present, display a tooltip for selection which should be used
-		createData = config.types[0];
-		if ( config.types.length > 1 ) {
+		let createData = config.create[0];
+		if ( config.create.length > 1 ) {
 			try {
 				createData = await BlackFlagDialog.tooltipWait({ element: target }, {
 					content: game.i18n.localize("BF.Item.Create.Prompt"),
-					buttons: Object.fromEntries(config.types.map((t, i) => [i, {
-						label: game.i18n.localize(CONFIG.Item.typeLabels[t.type]),
+					buttons: Object.fromEntries(config.create.map((t, i) => [i, {
+						label: makeLabel(t),
 						callback: html => t
 					}])),
 					render: true
@@ -196,9 +197,10 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		// Create an item with the first type
 		const itemData = {
-			name: game.i18n.format("BF.New.Specific", { type: game.i18n.localize(CONFIG.Item.typeLabels[createData.type]) }),
+			name: game.i18n.format("BF.New.Specific", { type: makeLabel(createData) }),
 			...createData
 		};
+		delete itemData.label;
 		this.document.createEmbeddedDocuments("Item", [itemData]);
 	}
 
@@ -223,8 +225,6 @@ export default class InventoryElement extends AppAssociatedElement {
 			toAdd.forEach(c => collection[c.id] = { ...c, items: [] });
 		}
 
-		if ( !tab ) sections.uncategorized = [];
-
 		return sections;
 	}
 
@@ -241,10 +241,11 @@ export default class InventoryElement extends AppAssociatedElement {
 	 */
 	static async organizeItems(actor, items, { callback, hide=true }={}) {
 		const sections = this.buildSections(actor);
+		const uncategorized = [];
 
 		for ( const item of items ) {
 			const section = InventoryElement.organizeItem(item, sections);
-			if ( section === false ) sections.uncategorized.push(item);
+			if ( section === false ) uncategorized.push(item);
 			if ( callback ) await callback(item, section);
 		}
 
@@ -257,6 +258,8 @@ export default class InventoryElement extends AppAssociatedElement {
 				if ( hide && section.options?.autoHide && !section.items.length ) delete data[key];
 			}
 		}
+
+		if ( uncategorized.length ) sections.uncategorized = uncategorized;
 
 		return sections;
 	}
@@ -271,16 +274,11 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @internal
 	 */
 	static organizeItem(item, sections) {
-		const checkFilter = (item, filter) => Object.entries(filter)
-			.every(([key, value]) => foundry.utils.getProperty(item, key) === value);
-
 		for ( const tab of Object.values(sections) ) {
 			for ( const section of Object.values(tab) ) {
-				for ( const type of section.types ?? [] ) {
-					if ( checkFilter(item, type) ) {
-						section.items.push(item);
-						return section;
-					}
+				if ( performCheck(item, section.filters) ) {
+					section.items.push(item);
+					return section;
 				}
 			}
 		}

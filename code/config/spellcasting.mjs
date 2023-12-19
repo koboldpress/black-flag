@@ -91,6 +91,29 @@ export const spellComponents = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Spell preparation methods.
+ */
+export const spellPreparationModes = {
+	standard: {
+		label: "BF.Spell.Preparation.Mode.Standard"
+	},
+	alwaysPrepared: {
+		label: "BF.Spell.Preparation.Mode.AlwaysPrepared"
+	},
+	atWill: {
+		label: "BF.Spell.Preparation.Mode.AtWill"
+	},
+	ritual: {
+		label: "BF.Spell.Preparation.Mode.Ritual"
+	},
+	innate: {
+		label: "BF.Spell.Preparation.Mode.Innate"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Number of spell slots per-ring for each spellcasting level. First set of indices correspond to spellcaster level
  * and the second correspond to rings.
  * @type {number[][]}

@@ -61,7 +61,7 @@ export default class ItemDataModel extends BaseDataModel {
 	async _preCreate(data, options, user) {
 		await super._preCreate(data, options, user);
 
-		// Clear "relationship" flags when moved or created
-		this.parent.updateSource({"flags.black-flag.-=relationship": null});
+		// Clear "relationship" flags when moved
+		if ( "_id" in data ) this.parent.updateSource({"flags.black-flag.-=relationship": null});
 	}
 }
