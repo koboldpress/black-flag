@@ -19,6 +19,16 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Is this item currently enabled? Non-enabled items won't display in the actions list.
+	 * @type {boolean}
+	 */
+	get enabled() {
+		return this.flags["black-flag"]?.relationship?.enabled ?? false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get identifier() {
 		if ( this.system.identifier?.value ) return this.system.identifier.value;
 		return slugify(this.name, {strict: true});

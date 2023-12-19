@@ -8,6 +8,7 @@
 				<tr>
 					<td class="name">{{localize section.label}}</td>
 					<th class="uses">{{localize "BF.Uses.Short"}}</th>
+					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
@@ -30,6 +31,9 @@
 							</div>
 						</th>
 						<td class="uses">{{system.uses.label}}</td>
+						<td class="enabled">
+							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
+						</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}

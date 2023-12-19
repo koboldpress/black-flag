@@ -135,16 +135,4 @@ export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, 
 		if ( data._id || foundry.utils.hasProperty(data, "system.activities") ) return;
 		this._createInitialActivities([{ type: "attack" }]);
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Helpers               */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritdoc */
-	*actions() {
-		// TODO: Only return activities if weapon is equipped
-		for ( const action of super.actions() ) {
-			yield action;
-		}
-	}
 }

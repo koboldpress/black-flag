@@ -56,6 +56,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Should this activity be displayed as an action on the character sheet?
+	 * @type {boolean}
+	 */
+	get displayAction() {
+		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Contents of the effect column in the action table.
 	 * @type {string}
 	 */

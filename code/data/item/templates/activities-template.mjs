@@ -15,6 +15,18 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Should this item's actions be displayed on the actor sheet?
+	 * @type {boolean}
+	 */
+	get displayActions() {
+		return this.parent.flags["black-flag"]?.relationship?.enabled === true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

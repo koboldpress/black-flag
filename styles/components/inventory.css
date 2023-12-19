@@ -41,13 +41,6 @@ blackFlag-inventory {
 					border-inline-end: 1px solid var(--bf-color-border-gray);
 					mask-image: linear-gradient(to bottom, transparent, #000 30% 70%, transparent);
 				}
-
-				.controls {
-					width: 1em;
-					.layout {
-						justify-content: center;
-					}
-				} 
 			}
 
 			> tr:first-child {
@@ -96,5 +89,20 @@ blackFlag-inventory {
 				}
 			}
 		}
+
+		.enabled {
+			max-width: max-content;
+			text-align: center;
+			input {
+				width: 12px;
+				height: 12px;
+			}
+		}
+		.controls {
+			width: 1em;
+			.layout {
+				justify-content: center;
+			}
+		} 
 	}
 }

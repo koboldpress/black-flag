@@ -26,6 +26,7 @@
 					<th class="range" scope="col">{{localize "BF.Range.Label"}}</th>
 					<th class="target" scope="col">{{localize "BF.Target.Label[one]"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
+					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
@@ -66,6 +67,9 @@
 						</td>
 						<td class="traits">
 							
+						</td>
+						<td class="enabled">
+							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
 						</td>
 						<td class="controls">
 							<div class="layout">
