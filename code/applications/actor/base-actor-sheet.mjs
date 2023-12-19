@@ -49,6 +49,14 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Sorting mode applied to different item lists.
+	 * @type {{[key: string]: string}}
+	 */
+	sorting = {};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get template() {
 		return `systems/black-flag/templates/actor/${this.actor.type}.hbs`;
 	}
@@ -159,7 +167,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async prepareItems(context) {
 		context.sections = await InventoryElement.organizeItems(this.actor, this.actor.items, {
-			filters: this.filters, hide: !this.modes.editing
+			filters: this.filters, sorting: this.sorting, hide: !this.modes.editing
 		});
 	}
 

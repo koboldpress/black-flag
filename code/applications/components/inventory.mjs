@@ -1,8 +1,17 @@
 import BlackFlagDialog from "../dialog.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
+import SortingElement from "./sorting.mjs";
 
 export default class InventoryElement extends AppAssociatedElement {
+
+	constructor() {
+		super();
+		this.#controller = new AbortController();
+		this.#tab = this.getAttribute("tab");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	connectedCallback() {
 		super.connectedCallback();
@@ -11,7 +20,7 @@ export default class InventoryElement extends AppAssociatedElement {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
-			});
+			}, { signal: this.#controller.signal });
 		}
 
 		const contextOptions = this._getContextMenuOptions();
@@ -27,7 +36,21 @@ export default class InventoryElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	disconnectedCallback() {
+		this.#controller.abort();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -55,6 +78,22 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @type {{[key: string]: SheetSectionConfiguration}}
 	 */
 	#sectionsCache;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Tab that this inventory represents.
+	 * @type {string}
+	 */
+	#tab;
+
+	get tab() {
+		return this.#tab;
+	}
+
+	set tab(value) {
+		this.#tab = value;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
@@ -198,13 +237,14 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @param {object} [options={}]
 	 * @param {async Function} [options.callback] - Method called for each item after it is added to a section.
 	 * @param {{[key: string]: {[key: string]: number}}} [options.filters] - Any filtering to apply.
+	 * @param {{[key: string]: string}} [options.sorting] - Sorting options per-tab.
 	 * @param {boolean} [options.hide=true] - Should sections marked autoHide by hidden if empty?
 	 * @returns {object} - Object with sections grouped by tabs and all their items.
 	 */
-	static async organizeItems(actor, items, { callback, filters={}, hide=true }={}) {
+	static async organizeItems(actor, items, { callback, filters={}, sorting={}, hide=true }={}) {
 		const sections = this.buildSections(actor);
 
-		for ( const item of Array.from(items).sort((a, b) => a.sort - b.sort) ) {
+		for ( const item of items ) {
 			const section = InventoryElement.organizeItem(item, sections);
 			if ( section === false ) sections.uncategorized.push(item);
 			if ( callback ) await callback(item, section);
@@ -212,7 +252,8 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		for ( const [tab, data] of Object.entries(sections) ) {
 			for ( const [key, section] of Object.entries(data) ) {
-				section.items = FiltersElement.filterItems(section.items, filters[tab]);
+				section.items = FiltersElement.filter(section.items, filters[tab]);
+				section.items = SortingElement.sort(section.items, sorting[tab]);
 				if ( hide && section.options?.autoHide && !section.items.length ) delete data[key];
 			}
 		}

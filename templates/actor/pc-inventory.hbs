@@ -1,7 +1,14 @@
 <blackFlag-inventory tab="inventory">
 	<table>
 		<thead>
-			{{!-- TODO: Filters by type --}}
+			<tr class="filters">
+				<th>
+					<blackFlag-sorting>
+						<label>{{localize "BF.Sheet.Sorting.Mode.Alphabetic"}} <input type="radio" value="alpha"></label>
+						<label>{{localize "BF.Sheet.Sorting.Mode.Manual"}} <input type="radio" value=""></label>
+					</blackFlag-sorting>
+				</th>
+			</tr>
 			{{!-- TODO: Currency --}}
 		</thead>
 		{{#each sections.inventory as |section sectionId|}}

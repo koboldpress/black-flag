@@ -7,6 +7,7 @@ export default class FiltersElement extends AppAssociatedElement {
 
 	constructor() {
 		super();
+		this.#controller = new AbortController();
 		this.#tab = this.getAttribute("tab");
 	}
 
@@ -15,11 +16,19 @@ export default class FiltersElement extends AppAssociatedElement {
 	connectedCallback() {
 		super.connectedCallback();
 		if ( this.app.filters ) this.app.filters[this.tab] ??= {};
-		this.addEventListener("change", this.#onChangeFilter.bind(this));
+		this.addEventListener("change", this.#onChangeFilter.bind(this), { signal: this.#controller.signal });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -39,7 +48,7 @@ export default class FiltersElement extends AppAssociatedElement {
 	#tab;
 
 	get tab() {
-		return this.#tab;
+		return this.#tab ?? this.closest("blackFlag-inventory").tab;
 	}
 
 	set tab(value) {
@@ -71,7 +80,7 @@ export default class FiltersElement extends AppAssociatedElement {
 	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
 	 * @returns {BlackFlagItem[]} - Filtered items.
 	 */
-	static filterItems(items, filters={}) {
+	static filter(items, filters={}) {
 		if ( foundry.utils.isEmpty(filters) ) return items;
 		return items.filter(item => {
 			for ( const [filter, value] of Object.entries(filters) ) {

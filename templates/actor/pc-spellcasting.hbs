@@ -2,8 +2,14 @@
 	<table>
 		<thead>
 			<tr class="filters">
+				<th>
+					<blackFlag-sorting>
+						<label>{{localize "BF.Sheet.Sorting.Mode.Alphabetic"}} <input type="radio" value="alpha"></label>
+						<label>{{localize "BF.Sheet.Sorting.Mode.Manual"}} <input type="radio" value=""></label>
+					</blackFlag-sorting>
+				</th>
 				<th colspan="7">
-					<blackFlag-filters tab="spellcasting">
+					<blackFlag-filters>
 						<label>{{localize "BF.Activation.Type.Action[one]"}} <blackFlag-filter filter="action"></label>
 						<label>{{localize "BF.Activation.Type.BonusAction[one]"}} <blackFlag-filter filter="bonus"></label>
 						<label>{{localize "BF.Activation.Type.Reaction[one]"}} <blackFlag-filter filter="reaction"></label>
