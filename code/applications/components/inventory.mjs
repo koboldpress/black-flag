@@ -1,3 +1,4 @@
+import BlackFlagDialog from "../dialog.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
 
@@ -46,6 +47,14 @@ export default class InventoryElement extends AppAssociatedElement {
 	get isEditable() {
 		return this.document.testUserPermission(game.user, "EDIT");
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Cached data on constructed sections.
+	 * @type {{[key: string]: SheetSectionConfiguration}}
+	 */
+	#sectionsCache;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
@@ -107,7 +116,7 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		switch ( action ) {
 			case "add":
-				return console.log("ADD");
+				return this._onAddItem(target);
 			case "delete":
 				return item.deleteDialog();
 			case "duplicate":
@@ -119,25 +128,63 @@ export default class InventoryElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle creating a new item within a certain section.
+	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
+	 */
+	async _onAddItem(target) {
+		// Fetch configuration information for this section
+		const config = this.getSectionConfiguration(target.closest("[data-section]").dataset.section);
+		let createData;
+
+		// If more than one type is present, display a tooltip for selection which should be used
+		createData = config.types[0];
+		if ( config.types.length > 1 ) {
+			try {
+				createData = await BlackFlagDialog.tooltipWait({ element: target }, {
+					content: game.i18n.localize("BF.Item.Create.Prompt"),
+					buttons: Object.fromEntries(config.types.map((t, i) => [i, {
+						label: game.i18n.localize(CONFIG.Item.typeLabels[t.type]),
+						callback: html => t
+					}])),
+					render: true
+				});
+			} catch(err) {
+				return;
+			}
+		}
+
+		// Create an item with the first type
+		const itemData = {
+			name: game.i18n.format("BF.New.Specific", { type: game.i18n.localize(CONFIG.Item.typeLabels[createData.type]) }),
+			...createData
+		};
+		this.document.createEmbeddedDocuments("Item", [itemData]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Construct sheet sections based on data in `CONFIG.BlackFlag.sheetSections`.
 	 * @param {BlackFlagActor} actor - Actor for who the sections should be built.
+	 * @param {string} [tab] - Only build sections for a specific tab.
 	 * @returns {object}
 	 * @internal
 	 */
-	static buildSections(actor) {
+	static buildSections(actor, tab) {
 		const sections = {};
 
 		for ( const config of CONFIG.BlackFlag.sheetSections[actor.type] ?? [] ) {
-			const tab = sections[config.tab] ??= {};
+			if ( tab && config.tab !== tab ) continue;
+			const collection = tab ? sections : (sections[config.tab] ??= {});
 			const toAdd = config.expand ? config.expand(actor, config) : [config];
-			toAdd.forEach(c => tab[c.id] = { ...c, items: [] });
+			toAdd.forEach(c => collection[c.id] = { ...c, items: [] });
 		}
 
-		sections.uncategorized = [];
+		if ( !tab ) sections.uncategorized = [];
 
 		return sections;
 	}
@@ -198,5 +245,20 @@ export default class InventoryElement extends AppAssociatedElement {
 		}
 
 		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Fetch the configuration information for a specific section.
+	 * @param {string} id - ID of the section to fetch.
+	 * @returns {SheetSectionConfiguration}
+	 */
+	getSectionConfiguration(id) {
+		if ( !this.#sectionsCache ) {
+			const sections = this.constructor.buildSections(this.document, this.getAttribute("tab"));
+			this.#sectionsCache = sections;
+		}
+		return this.#sectionsCache[id];
 	}
 }

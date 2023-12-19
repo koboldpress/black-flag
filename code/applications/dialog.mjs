@@ -45,5 +45,7 @@ export default class BlackFlagDialog extends Dialog {
 				game.tooltip.activate(element, { content, locked: true, ...tooltipOptions });
 			});
 		});
+
+		// TODO: Reject properly when tooltip is closed by moving mouse away
 	}
 }

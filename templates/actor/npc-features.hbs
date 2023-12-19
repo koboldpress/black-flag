@@ -1,4 +1,4 @@
-<blackFlag-inventory>
+<blackFlag-inventory tab="features">
 	<table>
 		<thead>
 			{{!-- TODO: Filters by action type --}}
@@ -8,6 +8,15 @@
 				<tr>
 					<td class="name">{{localize section.label}}</td>
 					<th class="uses">{{localize "BF.Uses.Short"}}</th>
+					<td class="controls">
+						<div class="layout">
+							{{#if @root.modes.editing}}
+								<a data-action="add">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+							{{/if}}
+						</div>
+					</td>
 				</tr>
 				{{#each section.items}}
 					<tr data-item-id="{{id}}">

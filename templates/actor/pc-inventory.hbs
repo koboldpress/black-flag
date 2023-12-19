@@ -1,4 +1,4 @@
-<blackFlag-inventory>
+<blackFlag-inventory tab="inventory">
 	<table>
 		<thead>
 			{{!-- TODO: Filters by type --}}
@@ -13,12 +13,14 @@
 					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
 					<th class="cost" scope="col">{{localize "BF.Price.Label"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
-					<td class="controls">
-						{{#if @root.modes.editing}}
-							<a data-action="add">
-								<i class="fa-solid fa-plus"></i>
-							</a>
-						{{/if}}
+					<td class="controls" colspan="2">
+						<div class="layout">
+							{{#if @root.modes.editing}}
+								<a data-action="add">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+							{{/if}}
+						</div>
 					</td>
 				</tr>
 				{{#each section.items}}

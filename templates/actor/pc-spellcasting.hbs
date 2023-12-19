@@ -1,4 +1,4 @@
-<blackFlag-inventory>
+<blackFlag-inventory tab="spellcasting">
 	<table>
 		<thead>
 			<tr class="filters">
@@ -27,11 +27,13 @@
 					<th class="target" scope="col">{{localize "BF.Target.Label[one]"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
 					<td class="controls">
-						{{#if @root.modes.editing}}
-							<a data-action="add">
-								<i class="fa-solid fa-plus"></i>
-							</a>
-						{{/if}}
+						<div class="layout">
+							{{#if @root.modes.editing}}
+								<a data-action="add">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+							{{/if}}
+						</div>
 					</td>
 				</tr>
 				{{#each section.items as |spell|}}
