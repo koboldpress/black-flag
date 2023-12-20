@@ -5,7 +5,8 @@ import UsesField from "../fields/uses-field.mjs";
 import ConsumptionTargetData from "./consumption-target-data.mjs";
 
 const {
-	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, FilePathField, HTMLField, SchemaField, StringField
+	ArrayField, BooleanField, DocumentIdField, EmbeddedDataField,
+	FilePathField, HTMLField, NumberField, SchemaField, StringField
 } = foundry.data.fields;
 
 /**
@@ -55,6 +56,11 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			system: new TypeField({
 				modelLookup: type => this.metadata.dataModel ?? null
 			}),
+			activation: new SchemaField({
+				value: new NumberField({initial: undefined, min: 0, integer: true, label: "BF.Activation.Cost.Label"}),
+				type: new StringField({initial: undefined, label: "BF.Activation.Type.Label"}),
+				condition: new StringField({initial: undefined, label: "BF.Activation.Condition.Label"})
+			}, {label: "BF.Activation.Label"}),
 			consumption: new SchemaField({
 				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
 				scale: new SchemaField({
@@ -95,6 +101,19 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			configurable: true,
 			enumerable: false
 		});
+
+		const item = this.item.system ?? {};
+		const propertiesToSet = [
+			["activation.value", "casting.value"],
+			["activation.type", "casting.type"],
+			["activation.condition", "casting.condition"]
+		];
+		for ( const keyPath of propertiesToSet ) {
+			const activityProperty = foundry.utils.getProperty(this, keyPath[0]);
+			const itemProperty = foundry.utils.getProperty(item, keyPath[1]);
+			if ( !activityProperty && itemProperty ) foundry.utils.setProperty(this, keyPath[0], itemProperty);
+		}
+		this.activation.type ??= "action";
 
 		this.system.prepareFinalData?.();
 	}

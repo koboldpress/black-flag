@@ -167,6 +167,7 @@ export async function registerHandlebarsPartials() {
 	const partials = [
 		"active-effect/active-effects.hbs",
 		"active-effect/active-effect-change.hbs",
+		"activities/activity-activation.hbs",
 		"activities/activity-damage-parts.hbs",
 		"activities/activity-description.hbs",
 		"activities/activity-uses.hbs",

@@ -19,10 +19,12 @@
 		</div>
 
 		<div class="tab" data-group="primary" data-tab="details">
+			{{> "blackFlag.activity-activation"}}
+
 			<fieldset>
 				<legend>{{localize "BF.Activity.Section.Details"}}</legend>
 				<label>
-					<span>ability</span>
+					<span>{{localize "BF.Ability.Label[one]"}}</span>
 					<select name="system.ability">
 						{{#select source.system.ability}}
 							{{#if labels.defaultAbility}}

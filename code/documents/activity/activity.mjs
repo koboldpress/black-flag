@@ -40,7 +40,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {string}
 	 */
 	get actionType() {
-		return "action";
+		return this.activation.type;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -74,6 +74,9 @@ export default class ActivityConfig extends FormApplication {
 
 	async getData(options) {
 		const source = this.activity.toObject();
+		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: source.activation.type });
+		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
+
 		const context = foundry.utils.mergeObject(await super.getData(options), {
 			activity: this.activity,
 			system: this.activity.system,
@@ -85,6 +88,15 @@ export default class ActivityConfig extends FormApplication {
 			enriched: await TextEditor.enrichHTML(source.description ?? "", {
 				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.item
 			}),
+			labels: {
+				defaultActivation: defaultActivation ? game.i18n.format("BF.Default.Specific", {
+					default: defaultActivation.toLowerCase()
+				}) : null
+			},
+			activation: {
+				options: activationOptions,
+				scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
+			},
 			showBaseDamage: Object.hasOwn(this.item.system, "damage")
 		});
 		context.CONFIG = CONFIG.BlackFlag;

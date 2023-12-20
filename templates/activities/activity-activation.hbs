@@ -1,0 +1,30 @@
+<fieldset>
+	<legend>{{localize "BF.Activation.Label"}}</legend>
+	<div class="field-group">{{log this.activity.activation}}
+		<span>{{localize "BF.Activation.Time.Label"}}</span>
+		{{#if activation.scalar}}
+			<label>
+				<span>{{localize "BF.Activation.Cost.Label"}}</span>
+				<input type="number" name="activation.value" value="{{source.activation.value}}"
+					placeholder="{{activity.item.system.casting.value}}" min="0" step="1">
+			</label>
+		{{/if}}
+		<label>
+			<span>{{localize "BF.Activation.Type.Label"}}</span>
+			<select name="activation.type">
+				{{#select source.activation.type}}
+					{{#if labels.defaultActivation}}
+						<option value="">{{labels.defaultActivation}}</option>
+						<hr>
+					{{/if}}
+					{{blackFlag-groupedSelectOptions activation.options}}
+				{{/select}}
+			</select>
+		</label>
+	</div>
+	<label>
+		<span>{{localize "BF.Activation.Condition.Label"}}</span>
+		<input type="text" name="activation.condition" value="{{source.activation.condition}}"
+			placeholder="{{activity.item.system.casting.condition}}">
+	</label>
+</fieldset>
