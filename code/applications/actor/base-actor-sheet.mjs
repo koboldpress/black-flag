@@ -106,7 +106,7 @@ export default class BaseActorSheet extends ActorSheet {
 				obj[key] = { label, activities: [] };
 				return obj;
 			}, {});
-		context.actions.other = { label: "other", activities: [] };
+		context.actions.other = { label: game.i18n.localize("BF.Activation.TYpe.Other"), activities: [] };
 		for ( const item of this.actor.items ) {
 			if ( !item.system.displayActions ) continue;
 			for ( const activity of item.system.actions?.() ?? [] ) {
@@ -115,6 +115,9 @@ export default class BaseActorSheet extends ActorSheet {
 				if ( activity.actionType in context.actions ) context.actions[activity.actionType].activities.push(data);
 				else context.actions.other.activities.push(data);
 			}
+		}
+		for ( const [key, value] of Object.entries(context.actions) ) {
+			if ( !value.activities.length ) delete context.actions[key];
 		}
 		// TODO: Figure out how these should be sorted
 	}

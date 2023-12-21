@@ -32,6 +32,9 @@ export const _activityTypes = {
 		sheetClasses: {
 			config: applications.SavingThrowConfig
 		}
+	},
+	utility: {
+		documentClass: documents.UtilityActivity
 	}
 };
 
