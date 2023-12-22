@@ -70,10 +70,10 @@ export default class DamageActivity extends Activity {
 		});
 
 		/**
-		 * A hook event that fires before a damage is rolled.
+		 * A hook event that fires before damage is rolled.
 		 * @function blackFlag.preRollDamage
 		 * @memberof hookEvents
-		 * @param {DamageRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {DamageRollConfiguration[]} configs - Configuration data for the pending roll.
 		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {Activity} [activity] - Activity performing the roll.
@@ -85,7 +85,7 @@ export default class DamageActivity extends Activity {
 		if ( !rolls ) return;
 
 		/**
-		 * A hook event that fires after a damage has been rolled.
+		 * A hook event that fires after damage has been rolled.
 		 * @function blackFlag.postRollDamage
 		 * @memberof hookEvents
 		 * @param {DamageRoll[]} rolls - The resulting rolls.
