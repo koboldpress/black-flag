@@ -78,7 +78,7 @@ export default class ConsumptionElement extends FormAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( target.dispatchEvent(event) === false ) return;
+		if ( !this.isEditable || (target.dispatchEvent(event) === false) ) return;
 
 		const li = target.closest("[data-index]");
 		const index = li?.dataset.index;

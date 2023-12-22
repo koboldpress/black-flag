@@ -31,19 +31,27 @@
 					</label>
 				</div>
 				<div class="controls">
-					<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
-						<i class="fa-solid fa-superscript"></i>
-					</a>
-					<a data-action="delete">
-						<i class="fa-solid fa-trash"></i>
-					</a>
+					{{#if @root.editable}}
+						<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
+							<i class="fa-solid fa-superscript"></i>
+						</a>
+						<a data-action="delete">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					{{/if}}
 				</div>
 			</li>
+		{{else}}
+			{{#unless editable}}
+				<li class="add-control">{{localize "None"}}</li>
+			{{/unless}}
 		{{/each}}
-		<li class="add-control">
-			<a data-action="add">
-		 	<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
-			</a>
-		</li>
+		{{#if editable}}
+			<li class="add-control">
+				<a data-action="add">
+				<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Damage.Action.Add"}}
+				</a>
+			</li>
+		{{/if}}
 	</ul>
 <blackFlag-damageList>

@@ -1,12 +1,7 @@
 <blackFlag-activities>
 	<fieldset>
-		<legend>
-			{{localize "BF.Activity.Label[other]"}}
-			<a data-action="add">
-				<i class="fa-solid fa-plus"></i>
-			</a>
-		</legend>
-		<ul class="items-list activity-list">
+		<legend>{{localize "BF.Activity.Label[other]"}}</legend>
+		<ul class="items-list activity-list configuration-list">
 			{{#each system.activities}}
 				<li class="item activity-entry" data-activity-id="{{this.id}}">
 					<div class="item-name activity-name">
@@ -30,7 +25,20 @@
 						{{/if}}
 					</div>
 				</li>
+			{{else}}
+				{{#unless editable}}
+					<li class="add-control">
+						None
+					</li>
+				{{/unless}}
 			{{/each}}
+			{{#if editable}}
+				<li class="add-control">
+					<a data-action="add">
+						<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Core.Action.Create"}}
+					</a>
+				</li>
+			{{/if}}
 		</ul>
 	</fieldset>
 </blackFlag-activities>

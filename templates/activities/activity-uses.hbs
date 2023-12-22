@@ -35,17 +35,25 @@
 						{{/if}}
 					</div>
 					<div class="controls">
-						<a data-action="delete">
-							<i class="fa-solid fa-trash"></i>
-						</a>
+						{{#if @root.editable}}
+							<a data-action="delete">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						{{/if}}
 					</div>
 				</li>
+			{{else}}
+				{{#unless editable}}
+					<li class="add-control">{{localize "None"}}</li>
+				{{/unless}}
 			{{/each}}
-			<li class="add-control">
-				<a data-action="add">
-				 <i class="fa-solid fa-plus"></i> {{localize "BF.Consumption.Action.Add"}}
-				</a>
-			</li>
+			{{#if editable}}
+				<li class="add-control">
+					<a data-action="add">
+				 	<i class="fa-solid fa-plus"></i> {{localize "BF.Consumption.Action.Add"}}
+					</a>
+				</li>
+			{{/if}}
 		</ul>
 		<label class="full-checkbox">
 			<span>

@@ -66,9 +66,11 @@
 								</label>
 							</div>
 							<div class="controls">
-								<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
-									<i class="fa-solid fa-superscript"></i>
-								</a>
+								{{#if editable}}
+									<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
+										<i class="fa-solid fa-superscript"></i>
+									</a>
+								{{/if}}
 							</div>
 						</li>
 					</ul>

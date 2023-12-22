@@ -18,4 +18,14 @@ export default class AppAssociatedElement extends HTMLElement {
 	#app;
 
 	get app() { return this.#app; }
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can the contents of the associated app be edited?
+	 * @type {boolean}
+	 */
+	get isEditable() {
+		return this.app.isEditable ?? true;
+	}
 }

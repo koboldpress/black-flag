@@ -75,7 +75,7 @@ export default class DamageListElement extends FormAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( target.dispatchEvent(event) === false ) return;
+		if ( !this.isEditable || (target.dispatchEvent(event) === false) ) return;
 
 		const li = target.closest("li");
 		const index = li?.dataset.index;
