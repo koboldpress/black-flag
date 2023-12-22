@@ -1,20 +1,11 @@
 import { log } from "../../utils/_module.mjs";
+import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
 
 /**
  * Base configuration application for activities that can be extended by other types to implement custom
  * editing interfaces.
- *
- * @param {Activity} activity - The activity item being edited.
- * @param {object} [options={}] - Additional options passed to FormApplication.
  */
-export default class ActivityConfig extends FormApplication {
-	constructor(activity, options={}) {
-		super(activity, options);
-		this.#activityId = activity.id;
-		this.item = activity.item;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
+export default class ActivityConfig extends PseudoDocumentSheet {
 
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -31,34 +22,11 @@ export default class ActivityConfig extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * The ID of the activity being created or edited.
-	 * @type {string}
-	 */
-	#activityId;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * The activity being created or edited.
 	 * @type {Activity}
 	 */
 	get activity() {
-		return this.item.getEmbeddedDocument("Activity", this.#activityId);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Parent item to which this activity belongs.
-	 * @type {BlackFlagItem}
-	 */
-	item;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get title() {
-		const type = game.i18n.localize(this.activity.constructor.metadata.title);
-		return `${game.i18n.format("BF.Activity.Config.Title", { item: this.item.name })}: ${type}`;
+		return this.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -77,7 +45,7 @@ export default class ActivityConfig extends FormApplication {
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: source.activation.type });
 		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
 
-		const context = foundry.utils.mergeObject(await super.getData(options), {
+		const context = foundry.utils.mergeObject(super.getData(options), {
 			activity: this.activity,
 			system: this.activity.system,
 			source,
@@ -98,16 +66,9 @@ export default class ActivityConfig extends FormApplication {
 				scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
 			},
 			showBaseDamage: Object.hasOwn(this.item.system, "damage")
-		});
+		}, {inplace: false});
 		context.CONFIG = CONFIG.BlackFlag;
 		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	render(force=false, options={}) {
-		this.activity.apps[this.appId] = this;
-		return super.render(force, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

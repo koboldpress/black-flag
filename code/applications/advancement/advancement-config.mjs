@@ -1,3 +1,5 @@
+import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
+
 /**
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
@@ -7,36 +9,13 @@
  * @param {string} [options.dropKeyPath=null] - Path within advancement configuration where dropped items are stored.
  *                                              If populated, will enable default drop & delete behavior.
  */
-export default class AdvancementConfig extends FormApplication {
-	constructor(advancement, options={}) {
-		super(advancement, options);
-		this.#advancementId = advancement.id;
-		this.item = advancement.item;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * The ID of the advancement being created or edited.
-	 * @type {string}
-	 */
-	#advancementId;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
+export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/**
 	 * Stored information about the current drag event.
 	 * @type {{ listener: boolean, time: number|null, payload: object|null, valid: boolean }}
 	 */
 	#dragData = { listener: false, time: null, payload: null, valid: null };
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Parent item to which this advancement belongs.
-	 * @type {BlackFlagItem}
-	 */
-	item;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -59,7 +38,7 @@ export default class AdvancementConfig extends FormApplication {
 	 * @type {Advancement}
 	 */
 	get advancement() {
-		return this.item.system.advancement.get(this.#advancementId);
+		return this.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -82,23 +61,15 @@ export default class AdvancementConfig extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	async close(options={}) {
-		await super.close(options);
-		delete this.advancement.apps[this.appId];
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData() {
+	getData(options={}) {
 		const levels = [
 			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
 			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
 		].slice(this.advancement.minimumLevel);
-		const context = {
-			CONFIG: CONFIG.BlackFlag,
+		const context = foundry.utils.mergeObject(super.getData(options), {
 			configuration: this.advancement.configuration,
 			source: this.advancement.toObject(),
 			advancement: this.advancement,
@@ -113,15 +84,9 @@ export default class AdvancementConfig extends FormApplication {
 			showClassRestriction: ["class", "subclass"].includes(this.item.type) || !!this.advancement.level.classIdentifier,
 			showIdentifier: this.advancement.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.metadata.multiLevel
-		};
+		}, {inplace: false});
+		context.CONFIG = CONFIG.BlackFlag;
 		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	render(force=false, options={}) {
-		this.advancement.apps[this.appId] = this;
-		return super.render(force, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
