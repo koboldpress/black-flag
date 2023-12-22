@@ -1,0 +1,115 @@
+{
+  "name": "Aid",
+  "type": "spell",
+  "img": "icons/magic/life/crosses-trio-red.webp",
+  "system": {
+    "activities": {
+      "mieKo8uOTu0B8ZUZ": {
+        "type": "healing",
+        "_id": "mieKo8uOTu0B8ZUZ",
+        "description": "<p>Each target’s hit point maximum and current hit points increase by 5 for the duration.</p>",
+        "system": {
+          "ability": "",
+          "healing": {
+            "number": 1,
+            "denomination": "4",
+            "bonus": "",
+            "custom": "",
+            "type": "normal"
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false,
+            "max": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You bless allies with heightened vitality and newfound determination.</em></p><p>Your spell bolsters your allies with toughness and resolve. Choose up to three creatures within range. Each target’s hit point maximum and current hit points increase by 5 for the duration.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a tiny strip of white cloth",
+        "denomination": "pp"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "8"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "3"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
+    "circle": "divine",
+    "school": "abjuration"
+  },
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.6.007",
+    "coreVersion": "11.315",
+    "createdTime": 1703204831995,
+    "modifiedTime": 1703281393318,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "7zPIiNxqhZtPkQbk",
+  "sort": 300000,
+  "_key": "!items!7zPIiNxqhZtPkQbk"
+}
