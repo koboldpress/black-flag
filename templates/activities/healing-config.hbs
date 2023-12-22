@@ -1,0 +1,81 @@
+<form autocomplete="off">
+	<header class="sheet-header">
+		<figure class="icon">
+			<img src="{{activity.img}}" data-edit="img">
+		</figure>
+		<h1>
+			<input type="text" name="name" value="{{source.name}}" placeholder="{{default.title}}">
+		</h1>
+	</header>
+
+	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
+		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+	</nav>
+
+	<div class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="description">
+			{{> "blackFlag.activity-description"}}
+		</div>
+
+		<div class="tab" data-group="primary" data-tab="details">
+			{{> "blackFlag.activity-activation"}}
+
+			<fieldset>
+				<legend>{{localize "BF.Healing.Label"}}</legend>
+				<label>
+					<span>{{localize "BF.Ability.Label[one]"}}</span>
+					<select name="system.ability">
+						{{#select source.system.ability}}
+							<option value="">{{labels.defaultAbility}}</option>
+							<hr>
+							<optgroup label="{{localize 'BF.Ability.Label[other]'}}">
+								{{selectOptions CONFIG.abilities.localized}}
+							</optgroup>
+						{{/select}}
+					</select>
+				</label>
+				<blackFlag-damageList name="system.healing" single>
+					<ul class="configuration-list">
+						<li>
+							<div class="damage field-group">
+								<label class="die-count">
+									<span>{{localize "BF.Die.Number.Label"}}</span>
+									<input type="number" name="$.number" step=1 min=1 value="{{source.system.healing.number}}">
+								</label>
+								<label class="die-denomination">
+									<span>{{localize "BF.Die.Denomination.Label"}}</span>
+									<select name="$.denomination">
+										{{selectOptions CONFIG.dieSteps.labeled selected=source.system.healing.denomination blank=""}}
+									</select>
+								</label>
+								<span class="plus">+</span>
+								<label class="bonus">
+									<span>{{localize "BF.Damage.Bonus.Label"}}</span>
+									<input type="text" name="$.bonus" value="{{source.system.healing.bonus}}">
+								</label>
+								<label class="custom">
+									<span>{{localize "BF.Formula.Custom.Label"}}</span>
+									<input type="text" name="$.custom" value="{{source.system.healing.custom}}">
+								</label>
+								<label class="type">
+									<span>{{localize "BF.Healing.Type.Label"}}</span>
+									<select name="$.type">
+										{{selectOptions CONFIG.healingTypes.localized selected=source.system.healing.type}}
+									</select>
+								</label>
+							</div>
+							<div class="controls">
+								<a data-action="customize" data-tooltip="BF.Formula.Action.Customize">
+									<i class="fa-solid fa-superscript"></i>
+								</a>
+							</div>
+						</li>
+					</ul>
+				<blackFlag-damageList>
+			</fieldset>
+	
+			{{> "blackFlag.activity-uses"}}
+		</div>
+	</div>
+</form>

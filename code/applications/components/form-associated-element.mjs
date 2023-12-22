@@ -71,39 +71,45 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get value() {
+		return this.#createValue();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Mutate form data upon submission.
+	 * Remove remapped for field upon submission.
 	 * @param {FormDataEvent} event - The FormData event.
 	 * @protected
 	 */
 	#onFormData(event) {
+		for ( const field of this.querySelectorAll('[name^="$"]') ) {
+			event.formData.delete(field.name);
+			delete event.formData.object[field.name];
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	#createValue() {
 		const form = document.createElement("form");
 		Array.from(this.children).forEach(c => form.insertAdjacentElement("beforeend", c));
 		const formData = new FormDataExtended(form);
-		this._mutateFormData(event, formData);
-		for ( const [key, value] of formData.entries() ) {
-			const name = this.name ? `${this.name}.${key}` : key;
-			event.formData.delete(key);
-			delete event.formData.object[key];
-			event.formData.set(name, value);
-		}
-		if ( this.name ) {
-			event.formData.delete(this.name);
-			delete event.formData.object[this.name];
-		}
 		Array.from(form.children).forEach(c => this.insertAdjacentElement("beforeend", c));
+		const object = foundry.utils.expandObject(formData.object).$;
+		this._mutateFormData(object);
+		return object;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Mutate this form's FormData before merging with parent data.
-	 * @param {FormDataEvent} event - The FormData event.
-	 * @param {FormDataExtended} formData - Form data for just this element.
+	 * @param {object} object - Form data for just this element.
 	 * @abstract
 	 */
-	_mutateFormData(event, formData) {}
+	_mutateFormData(object) {}
 }

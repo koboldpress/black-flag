@@ -52,3 +52,22 @@ export const damageTypes = {
 	}
 };
 localizeConfig(damageTypes);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Types of healing.
+ * @enum {DamageTypeConfiguration}
+ */
+export const healingTypes = {
+	normal: {
+		label: "BF.Healing.Type.Normal"
+	},
+	temp: {
+		label: "BF.Healing.Type.Temp"
+	},
+	max: {
+		label: "BF.Healing.Type.Maximum"
+	}
+};
+localizeConfig(healingTypes, { sort: false });

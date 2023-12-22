@@ -9,9 +9,14 @@ export default class DamageListElement extends FormAssociatedElement {
 		super.connectedCallback();
 
 		const damageCollection = foundry.utils.getProperty(this.activity, this.name);
-		for ( const li of this.querySelectorAll("[data-index]") ) {
-			const damage = damageCollection?.[li.dataset.index];
-			this.#toggleState(li.dataset.index, !!damage?.custom);
+
+		if ( this.single ) {
+			this.#toggleState(null, !!damageCollection?.custom);
+		} else {
+			for ( const li of this.querySelectorAll("[data-index]") ) {
+				const damage = damageCollection?.[li.dataset.index];
+				this.#toggleState(li.dataset.index, !!damage?.custom);
+			}
 		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
@@ -45,6 +50,16 @@ export default class DamageListElement extends FormAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Does this represent only a single entry, rather than a list?
+	 * @type {boolean}
+	 */
+	get single() {
+		return this.hasAttribute("single");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -62,10 +77,10 @@ export default class DamageListElement extends FormAssociatedElement {
 		});
 		if ( target.dispatchEvent(event) === false ) return;
 
-		const li = target.closest("[data-index]");
+		const li = target.closest("li");
 		const index = li?.dataset.index;
 		const damageCollection = foundry.utils.getProperty(this.activity.toObject(), this.name) ?? [];
-		if ( (action !== "add") && !index ) return;
+
 		switch ( action ) {
 			case "add":
 				damageCollection.push({});
@@ -73,7 +88,8 @@ export default class DamageListElement extends FormAssociatedElement {
 			case "customize":
 				if ( li.querySelector(".custom input").value ) {
 					li.querySelector(".custom input").value = "";
-					damageCollection[index].custom = "";
+					if ( this.single ) damageCollection.custom = "";
+					else damageCollection[index].custom = "";
 				} else {
 					li.querySelector(".custom input").value = this.#createFormula(index);
 					return this.#toggleState(index, true);
@@ -99,7 +115,8 @@ export default class DamageListElement extends FormAssociatedElement {
 	 * @returns {string} - Formula that can be used as the basis of a custom formula.
 	 */
 	#createFormula(index) {
-		const damage = foundry.utils.getProperty(this.activity.toObject(), this.name)?.[index];
+		let damage = foundry.utils.getProperty(this.activity.toObject(), this.name);
+		if ( !this.single ) damage = damage[index];
 		if ( damage.denomination ) {
 			const dice = `${damage.number || 1}d${damage.denomination}`;
 			return damage.bonus ? `${dice} + ${damage.bonus}` : dice;
@@ -115,7 +132,7 @@ export default class DamageListElement extends FormAssociatedElement {
 	 * @param {boolean} showCustomFormula - Should custom formula or normal controls be displayed?
 	 */
 	#toggleState(index, showCustomFormula) {
-		const li = this.querySelector(`[data-index="${index}"]`);
+		const li = this.querySelector(this.single ? "li" : `[data-index="${index}"]`);
 
 		const normal = ["die-count", "die-denomination", "plus", "bonus"];
 		for ( const cls of normal ) {

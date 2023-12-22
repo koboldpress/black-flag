@@ -182,6 +182,7 @@ export default class ActivityConfig extends FormApplication {
 			}, []);
 		}
 
+		console.log(foundry.utils.deepClone(updates));
 		await this.activity.update(updates);
 	}
 }

@@ -27,6 +27,12 @@ export const _activityTypes = {
 			config: applications.AttackConfig
 		}
 	},
+	healing: {
+		documentClass: documents.HealingActivity,
+		sheetClasses: {
+			config: applications.HealingConfig
+		}
+	},
 	savingThrow: {
 		documentClass: documents.SavingThrowActivity,
 		sheetClasses: {
