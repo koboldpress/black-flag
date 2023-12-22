@@ -1,0 +1,18 @@
+blackFlag-activities {
+	.activity-list.items-list {
+		margin: 0;
+	}
+	.activity-entry {
+		align-items: center;
+	}
+
+	&[data-drop-status="valid"] > fieldset {
+		border-color: var(--bf-color-border-drop-valid);
+	}
+	&[data-drop-status="invalid"] > fieldset {
+		border-color: var(--bf-color-border-drop-invalid);
+	}
+	&[data-drop-status="unknown"] > fieldset {
+		border-color: var(--bf-color-border-drop-unknown);
+	}
+}

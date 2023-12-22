@@ -373,9 +373,8 @@ export default function PseudoDocumentMixin(Base) {
 		 * @returns {object} - An object of drag data.
 		 */
 		toDragData() {
-			const dragData = { type: this.documentName };
+			const dragData = { type: this.documentName, data: this.toObject() };
 			if ( this.id ) dragData.uuid = this.uuid;
-			else dragData.data = this.toObject();
 			return dragData;
 		}
 	};

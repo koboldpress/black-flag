@@ -6,14 +6,33 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  */
 export default class ActivitiesElement extends AppAssociatedElement {
 
+	constructor() {
+		super();
+		this.#controller = new AbortController();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	connectedCallback() {
 		super.connectedCallback();
+		const { signal } = this.#controller;
+
+		this.addEventListener("dragenter", this.#onDragEnter.bind(this), { signal });
+		this.addEventListener("dragover", this.#onDragOver.bind(this), { signal });
+		this.addEventListener("dragleave", this.#onDragLeave.bind(this), { signal });
+		this.addEventListener("drop", this.#onDrop.bind(this), { signal });
+
+		for ( const element of this.querySelectorAll("[data-activity-id]") ) {
+			element.setAttribute("draggable", true);
+			element.ondragstart = this.#onDragStart.bind(this);
+			element.ondragend = this.#onDragEnd.bind(this);
+		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
-			});
+			}, { signal });
 		}
 
 		const contextOptions = this.#getContextMenuOptions();
@@ -29,6 +48,12 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	disconnectedCallback() {
+		this.#controller.abort();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -39,6 +64,14 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	get activities() {
 		return this.item.system.activities;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -59,6 +92,12 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	get item() {
 		return this.app.document;
 	}
+
+	/**
+	 * Stored copy of client rect during drag events.
+	 * @type {DOMRect}
+	 */
+	#rect;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
@@ -114,5 +153,97 @@ export default class ActivitiesElement extends AppAssociatedElement {
 				delete data._id;
 				return this.item.createEmbeddedDocuments("Activity", [data]);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Begin dragging an entry.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	#onDragStart(event) {
+		const activityId = event.currentTarget.dataset.activityId;
+		const activity = this.activities.get(activityId);
+		event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Stop dragging an entry.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	#onDragEnd(event) {
+		delete this.dataset.dropStatus;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry drags into the element.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	#onDragEnter(event) {
+		const data = TextEditor.getDragEventData(event);
+		if ( !data ) this.dataset.dropStatus = "unknown";
+		else this.dataset.dropStatus = this.#validateDrop(data) ? "valid" : "invalid";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry drags over the element.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	#onDragOver(event) {
+		event.preventDefault();
+		this.#rect = this.getBoundingClientRect();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry being dragged over leaves the element.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	#onDragLeave(event) {
+		if ( event.clientY <= this.#rect.top || event.clientY >= this.#rect.bottom
+			|| event.clientX <= this.#rect.left || event.clientX >= this.#rect.right ) {
+			delete this.dataset.dropStatus;
+			this.#rect = null;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry is dropped onto the element.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @returns {Promise}
+	 */
+	async #onDrop(event) {
+		const data = TextEditor.getDragEventData(event);
+		if ( !this.#validateDrop(data) ) return false;
+
+		const activity = (await fromUuid(data.uuid)).toObject() ?? activity.data;
+		if ( !activity ) return false;
+
+		delete activity._id;
+		this.item.createEmbeddedDocuments("Activity", [activity]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can the dragged document be dropped?
+	 * @param {object} data
+	 * @returns {boolean}
+	 */
+	#validateDrop(data) {
+		if ( (data.type !== "Activity") ) return false;
+		if ( !data.uuid ) return true;
+		return !data.uuid.startsWith(this.item.uuid);
 	}
 }
