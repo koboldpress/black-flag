@@ -1,3 +1,4 @@
+import InventoryElement from "../components/inventory.mjs";
 import EquipmentSheet from "./equipment-sheet.mjs";
 
 export default class ContainerSheet extends EquipmentSheet {
@@ -17,6 +18,20 @@ export default class ContainerSheet extends EquipmentSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
+
+		context.items = Array.from(await this.item.system.contents);
+		context.itemContext = {};
+
+		// TODO: Calculate capacity
+
+		for ( const item of context.items ) {
+			const ctx = context.itemContext[item.id] ??= {};
+			ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
+		}
+		context.isContainer = true;
+
+		context.sections = await InventoryElement.organizeItems(this.item, context.items);
+
 		return context;
 	}
 

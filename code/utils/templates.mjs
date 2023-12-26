@@ -178,7 +178,6 @@ export async function registerHandlebarsPartials() {
 		"actor/pc-actions.hbs",
 		"actor/pc-biography.hbs",
 		"actor/pc-features.hbs",
-		"actor/pc-inventory.hbs",
 		"actor/pc-main.hbs",
 		"actor/pc-progression.hbs",
 		"actor/pc-spellcasting.hbs",
@@ -189,6 +188,7 @@ export async function registerHandlebarsPartials() {
 		"item/item-activities.hbs",
 		"item/item-advancement.hbs",
 		"journal/journal-table.hbs",
+		"shared/inventory.hbs",
 		"shared/uses-config.hbs"
 	];
 

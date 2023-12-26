@@ -23,7 +23,7 @@
 					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
-							{{#if @root.modes.editing}}
+							{{#if @root.editable}}
 								<a data-action="add">
 									<i class="fa-solid fa-plus"></i>
 								</a>
@@ -39,7 +39,7 @@
 									<img src="{{img}}">
 								</figure>
 								<span>{{name}}</span>
-								{{blackFlag-notificationBadge @root.actor document=this}}
+								{{blackFlag-notificationBadge @root.document document=this}}
 							</div>
 						</th>
 						<td class="uses">{{system.uses.label}}</td>
@@ -52,7 +52,7 @@
 						</td>
 						<td class="controls">
 							<div class="layout">
-								{{#if @root.modes.editing}}
+								{{#if @root.editable}}
 									<a data-action="edit">
 										<i class="fa-solid fa-edit"></i>
 									</a>

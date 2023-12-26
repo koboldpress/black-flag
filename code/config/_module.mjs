@@ -10,6 +10,7 @@ import * as damage from "./damage.mjs";
 import * as dice from "./dice.mjs";
 import * as documents from "./documents.mjs";
 import * as enrichers from "./enrichers.mjs";
+import * as inventory from "./inventory.mjs";
 import * as items from "./items.mjs";
 import * as modifiers from "./modifiers.mjs";
 import * as notifications from "./notifications.mjs";
@@ -67,6 +68,7 @@ export default {
 	...documents,
 	...enrichers,
 	...items,
+	...inventory,
 	...modifiers,
 	...notifications,
 	registration,

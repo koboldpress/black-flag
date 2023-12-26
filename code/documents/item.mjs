@@ -1,3 +1,4 @@
+import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { slugify } from "../utils/text.mjs";
 import { DocumentMixin } from "./mixin.mjs";
 import NotificationsCollection from "./notifications.mjs";
@@ -15,6 +16,20 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	get accentColor() {
 		if ( this.system.color ) return this.system.color;
 		return this.system.metadata?.accentColor ?? "var(--bf-blue);";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The item that contains this item, if it is in a container. Returns a promise if the item is located
+	 * in a compendium pack.
+	 * @type {BlackFlagItem|Promise<BlackFlagItem>|void}
+	 */
+	get container() {
+		if ( !this.system.container ) return;
+		if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
+		if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
+		return game.items.get(this.system.container);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -129,5 +144,51 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		const collectionName = this.constructor.getCollectionName(embeddedName);
 		const field = this.pseudoDocumentHierarchy[collectionName];
 		return field ? this.system[collectionName] : super.getEmbeddedCollection(embeddedName);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Factory Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare creation data for the provided items and any items contained within them. The data created by this method
+	 * can be passed to `createDocuments` with `keepId` always set to true to maintain links to container contents.
+	 * @param {BlackFlagItem[]} items - Items to create.
+	 * @param {object} [context={}] - Context for the item's creation.
+	 * @param {BlackFlagItem} [context.container] - Container in which to create the item.
+	 * @param {boolean} [context.keepId=false] - Should IDs be maintained?
+	 * @param {Function} [context.transformAll] - Method called on provided items and their contents.
+	 * @param {Function} [context.transformFirst] - Method called only on provided items.
+	 * @returns {Promise<object[]>} - Data for items to be created.
+	 */
+	static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
+		let depth = 0;
+		if ( container ) {
+			depth = 1 + (await container.system.allContainers()).length;
+			if ( depth > PhysicalTemplate.MAX_DEPTH ) {
+				ui.notifications.warn(game.i18n.format("BF.Container.Warning.MaxDepth", { depth: PhysicalTemplate.MAX_DEPTH }));
+				return;
+			}
+		}
+
+		const createItemData = async (item, containerId, depth) => {
+			let newItemData = transformAll ? await transformAll(item) : item;
+			if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
+			if ( !newItemData ) return;
+			if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
+			foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
+			if ( !keepId ) newItemData._id = foundry.utils.randomID();
+
+			created.push(newItemData);
+
+			const contents = await item.system.contents;
+			if ( contents && (depth < PhysicalTemplate.MAX_DEPTH) ) {
+				for ( const doc of contents ) await createItemData(doc, newItemData._id, depth + 1);
+			}
+		};
+
+		const created = [];
+		for ( const item of items ) await createItemData(item, container?.id, depth);
+		return created;
 	}
 }

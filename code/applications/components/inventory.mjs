@@ -56,7 +56,7 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	/**
 	 * Document containing this inventory.
-	 * @type {BlackFlagActor}
+	 * @type {BlackFlagActor|BlackFlagItem}
 	 */
 	get document() {
 		return this.app.document;
@@ -143,7 +143,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @returns {Promise}
 	 */
 	async _onAction(target, action) {
-		const event = new CustomEvent("inventory", {
+		const event = new CustomEvent("bf-inventory", {
 			bubbles: true,
 			cancelable: true,
 			detail: action
@@ -151,7 +151,7 @@ export default class InventoryElement extends AppAssociatedElement {
 		if ( target.dispatchEvent(event) === false ) return;
 
 		const itemId = target.closest("[data-item-id]")?.dataset.itemId;
-		const item = await this.document.items.get(itemId);
+		const item = await this.getItem(itemId);
 		if ( (action !== "add") && !item ) return;
 
 		switch ( action ) {
@@ -177,6 +177,7 @@ export default class InventoryElement extends AppAssociatedElement {
 		// Fetch configuration information for this section
 		const config = this.getSectionConfiguration(target.closest("[data-section]").dataset.section);
 		const makeLabel = d => d.label ? game.i18n.localize(d.label) : game.i18n.localize(CONFIG.Item.typeLabels[d.type]);
+		if ( !config.create ) return;
 
 		// If more than one type is present, display a tooltip for selection which should be used
 		let createData = config.create[0];
@@ -209,19 +210,31 @@ export default class InventoryElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Retrieve an item with the specified ID.
+	 * @param {string} id
+	 * @returns {BlackFlagItem|Promise<BlackFlagItem>}
+	 */
+	getItem(id) {
+		if ( this.document.type === "container" ) return this.document.system.getContainedItem(id);
+		return this.document.items.get(id);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Construct sheet sections based on data in `CONFIG.BlackFlag.sheetSections`.
-	 * @param {BlackFlagActor} actor - Actor for who the sections should be built.
+	 * @param {BlackFlagActor|BlackFlagItem} document - Document for who the sections should be built.
 	 * @param {string} [tab] - Only build sections for a specific tab.
 	 * @returns {object}
 	 * @internal
 	 */
-	static buildSections(actor, tab) {
+	static buildSections(document, tab) {
 		const sections = {};
 
-		for ( const config of CONFIG.BlackFlag.sheetSections[actor.type] ?? [] ) {
+		for ( const config of CONFIG.BlackFlag.sheetSections[document.type] ?? [] ) {
 			if ( tab && config.tab !== tab ) continue;
 			const collection = tab ? sections : (sections[config.tab] ??= {});
-			const toAdd = config.expand ? config.expand(actor, config) : [config];
+			const toAdd = config.expand ? config.expand(document, config) : [config];
 			toAdd.forEach(c => collection[c.id] = { ...c, items: [] });
 		}
 
@@ -231,16 +244,16 @@ export default class InventoryElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Sort provided items into sections defined by the actor's type.
-	 * @param {BlackFlagActor} actor - Actor for who the sections should be created.
+	 * Sort provided items into sections defined by the document's type.
+	 * @param {BlackFlagActor|BlackFlagItem} document - Document for who the sections should be created.
 	 * @param {BlackFlagItem[]} items - Items to categorize.
 	 * @param {object} [options={}]
 	 * @param {async Function} [options.callback] - Method called for each item after it is added to a section.
 	 * @param {boolean} [options.hide=true] - Should sections marked autoHide by hidden if empty?
 	 * @returns {object} - Object with sections grouped by tabs and all their items.
 	 */
-	static async organizeItems(actor, items, { callback, hide=true }={}) {
-		const sections = this.buildSections(actor);
+	static async organizeItems(document, items, { callback, hide=true }={}) {
+		const sections = this.buildSections(document);
 		const uncategorized = [];
 
 		for ( const item of items ) {
@@ -249,8 +262,8 @@ export default class InventoryElement extends AppAssociatedElement {
 			if ( callback ) await callback(item, section);
 		}
 
-		const filters = actor.flags["black-flag"]?.sheet?.filters ?? {};
-		const sorting = actor.flags["black-flag"]?.sheet?.sorting ?? {};
+		const filters = document.flags["black-flag"]?.sheet?.filters ?? {};
+		const sorting = document.flags["black-flag"]?.sheet?.sorting ?? {};
 		for ( const [tab, data] of Object.entries(sections) ) {
 			for ( const [key, section] of Object.entries(data) ) {
 				section.items = FiltersElement.filter(section.items, filters[tab]);
