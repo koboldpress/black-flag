@@ -111,6 +111,33 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async deleteDialog(options={}) {
+		// Display custom delete dialog when deleting a container with contents
+		const count = await this.system.contentsCount;
+		if ( count ) {
+			return Dialog.confirm({
+				title: `${game.i18n.format("DOCUMENT.Delete", {
+					type: game.i18n.localize("BF.Item.Type.Container[one]")
+				})}: ${this.name}`,
+				content: `<h4>${game.i18n.localize("AreYouSure")}</h4>
+					<p>${game.i18n.format("BF.Container.Delete.Message", {count})}</p>
+					<label>
+						<input type="checkbox" name="deleteContents">
+						${game.i18n.localize("BF.Container.Delete.Contents")}
+					</label>`,
+				yes: html => {
+					const deleteContents = html.querySelector('[name="deleteContents"]').checked;
+					this.delete({ deleteContents });
+				},
+				options: { ...options, jQuery: false }
+			});
+		}
+
+		return super.deleteDialog(options);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	getRollData({ deterministic=false }={}) {
 		if ( !this.actor ) return {};
 		const actorRollData = this.actor.getRollData({ deterministic });

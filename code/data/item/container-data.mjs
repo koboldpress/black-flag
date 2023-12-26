@@ -193,4 +193,16 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate)
 			});
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onDeleteContents(options, userId) {
+		if ( (userId !== game.user.id) || !options.deleteContents ) return;
+
+		// Delete a container's contents when it is deleted
+		const contents = await this.allContainedItems;
+		if ( contents?.size ) await Item.deleteDocuments(
+			Array.from(contents.map(i => i.id)), { pack: this.parent.pack, parent: this.parent.parent }
+		);
+	}
 }
