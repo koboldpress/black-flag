@@ -34,7 +34,10 @@ Hooks.once("init", function() {
 	game.blackFlag = globalThis.BlackFlag;
 	CONFIG.BlackFlag = config;
 	CONFIG.ActiveEffect.legacyTransferral = false;
+	CONFIG.Item.collection = data.collection.BlackFlagItems;
+	CONFIG.Item.compendiumIndexFields.push("system.container");
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
+	CONFIG.ui.items = applications.item.BlackFlagItemDirectory;
 	applications.registerCustomElements();
 	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();
@@ -56,10 +59,10 @@ Hooks.once("setup", function() {
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
 	applications.registerSheets(JournalEntryPage);
-});
 
-Hooks.once("i18nInit", function() {
-
+	// Apply custom item compendium
+	game.packs.filter(p => p.metadata.type === "Item")
+		.forEach(p => p.applicationClass = applications.item.BlackFlagItemCompendium);
 });
 
 Hooks.once("ready", function() {

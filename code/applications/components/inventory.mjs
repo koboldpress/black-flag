@@ -256,6 +256,8 @@ export default class InventoryElement extends AppAssociatedElement {
 		const sections = this.buildSections(document);
 		const uncategorized = [];
 
+		if ( document instanceof Actor ) items = items.filter(i => !document.items.has(i.system.container));
+
 		for ( const item of items ) {
 			const section = InventoryElement.organizeItem(item, sections);
 			if ( section === false ) uncategorized.push(item);

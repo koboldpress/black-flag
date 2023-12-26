@@ -77,6 +77,13 @@ export const sheetSections = {
 			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
 		},
 		{
+			id: "containers",
+			tab: "inventory",
+			label: "BF.Item.Type.Container[other]",
+			filters: [{k: "type", v: "container"}],
+			create: [{type: "container"}]
+		},
+		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Item.Feature.Category.Class[other]",
