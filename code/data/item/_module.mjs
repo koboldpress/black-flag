@@ -3,6 +3,7 @@ export {default as ArmorData} from "./armor-data.mjs";
 export {default as BackgroundData} from "./background-data.mjs";
 export {default as ClassData} from "./class-data.mjs";
 export {default as ConditionData} from "./condition-data.mjs";
+export {default as ContainerData} from "./container-data.mjs";
 export {default as FeatureData} from "./feature-data.mjs";
 export {default as HeritageData} from "./heritage-data.mjs";
 export {default as LineageData} from "./lineage-data.mjs";
