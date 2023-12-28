@@ -128,6 +128,14 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 
 	/* -------------------------------------------- */
 
+	async _preUpdate(changed, options, user) {
+		if ( foundry.utils.hasProperty(changed, "system.container") ) {
+			options.formerContainer = (await this.parent.container)?.uuid;
+		}
+	}
+
+	/* -------------------------------------------- */
+
 	_onCreatePhysicalItem(data, options, userId) {
 		this._renderContainers();
 	}

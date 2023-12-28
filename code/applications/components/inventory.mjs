@@ -1,3 +1,4 @@
+import BlackFlagItem from "../../documents/item.mjs";
 import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
@@ -16,12 +17,20 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
+		const { signal } = this.#controller;
+
+		this.addEventListener("drop", this._onDrop.bind(this), { signal });
+
+		for ( const element of this.querySelectorAll("[data-item-id]") ) {
+			element.setAttribute("draggable", true);
+			element.ondragstart = this._onDragStart.bind(this);
+		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
-			}, { signal: this.#controller.signal });
+			}, { signal });
 		}
 
 		const contextOptions = this._getContextMenuOptions();
@@ -44,6 +53,17 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Containing actor for this inventory, either the document or its parent if document is an item.
+	 * @type {BlackFlagActor|null}
+	 */
+	get actor() {
+		if ( this.document instanceof Actor ) return this.document;
+		return this.document.actor ?? null;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -203,6 +223,124 @@ export default class InventoryElement extends AppAssociatedElement {
 		};
 		delete itemData.label;
 		this.document.createEmbeddedDocuments("Item", [itemData]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Begin dragging an entry.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	async _onDragStart(event) {
+		const itemId = event.currentTarget.dataset.itemId;
+		const item = await this.getItem(itemId);
+		if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry is dropped onto the element.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @returns {Promise}
+	 */
+	async _onDrop(event) {
+		event.preventDefault();
+		event.stopImmediatePropagation();
+
+		if ( !this.isEditable ) return false;
+
+		const data = TextEditor.getDragEventData(event);
+		if ( !this._validateDrop(data) ) return false;
+
+		const item = await Item.implementation.fromDropData(data);
+		if ( !item ) return false;
+		const isContainer = this.document.type === "container";
+
+		if ( isContainer ) {
+			const parentContainers = await this.document.system.allContainers();
+			if ( (this.document.uuid === item.uuid) || parentContainers.includes(item) ) {
+				ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
+				return;
+			}
+		}
+
+		// Document already exists in this collection, just perform sorting
+		// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
+		if ( (this.actor?.uuid === item.parent?.uuid) && (this.document.pack === item.pack) ) {
+			// If this inventory is on an actor, clear the container if set
+			if ( (this.document instanceof Actor) && (item.system.container !== null) ) {
+				await item.update({"system.container": null});
+			}
+
+			// If this inventory is on an container, set it to this
+			else if ( (this.document instanceof Item) && (item.system.container !== this.document.id) ) {
+				await item.update({"system.container": this.document.id});
+			}
+
+			// Then perform a sort
+			return this._onSort(event, item);
+		}
+
+		// TODO: Ensure created items can be created in this context
+		// TODO: Perform consumable stacking
+
+		// Create an item
+		const options = {};
+		if ( isContainer ) options.container = this.document;
+		const toCreate = await BlackFlagItem.createWithContents([item], options);
+		if ( isContainer && this.document.folder ) toCreate.forEach(d => d.folder = this.document.folder);
+		return BlackFlagItem.createDocuments(toCreate, {pack: this.document.pack, parent: this.actor, keepId: true});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Sort a dropped item based on where it was dropped.
+	 * @param {DragEvent} event - Triggering drag event.
+	 * @param {BlackFlagItem} item - Item being dragged.
+	 * @returns {Promise}
+	 */
+	async _onSort(event, item) {
+		const dropTarget = event.target.closest("[data-item-id]");
+		if ( !dropTarget ) return;
+		const target = await this.getItem(dropTarget.dataset.itemId);
+
+		// Don't sort on yourself
+		if ( item.id === target.id ) return;
+
+		// Identify sibling items based on adjacent HTML elements
+		const siblings = [];
+		for ( const el of dropTarget.parentElement.children ) {
+			const siblingId = el.dataset.itemId;
+			if ( siblingId && (siblingId !== item.id) ) siblings.push(await this.getItem(siblingId));
+		}
+
+		// Perform the sort
+		const sortUpdates = SortingHelpers.performIntegerSort(item, {target, siblings});
+		const updateData = sortUpdates.map(u => {
+			const update = u.update;
+			update._id = u.target.id;
+			return update;
+		});
+
+		// Perform the update
+		// TODO: Test what happens if you only have permission to some of these objects, perhaps no sorting in sidebar?
+		Item.updateDocuments(updateData, {pack: this.document.pack, parent: this.actor});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can the dragged document be dropped?
+	 * @param {object} data
+	 * @returns {boolean}
+	 */
+	_validateDrop(data) {
+		if ( (data.type !== "Item") ) return false;
+		return true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
