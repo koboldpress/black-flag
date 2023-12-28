@@ -46,6 +46,7 @@ Hooks.once("init", function() {
 	data.registerDataModels(Item);
 	data.registerDataModels(JournalEntryPage);
 	dice.registerDice();
+	documents.BlackFlagActiveEffect.registerHUDListeners();
 	documents.BlackFlagActor.setupHooks();
 	documents.registerDocumentClasses();
 	enrichers.registerCustomEnrichers();

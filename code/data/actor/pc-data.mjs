@@ -7,6 +7,7 @@ import MappingField from "../fields/mapping-field.mjs";
 import ProficiencyField from "../fields/proficiency-field.mjs";
 import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, TimeField } from "../fields/_module.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
+import ExhaustionTemplate from "./templates/exhaustion-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -14,7 +15,7 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class PCData extends ActorDataModel.mixin(
-	ACTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
+	ACTemplate, ExhaustionTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
