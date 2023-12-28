@@ -96,7 +96,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	get traits() {
 		const traits = [
 			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
-			...this.properties.map(p => this.validProperties[p]?.label)
+			...this.properties.map(p => CONFIG.BlackFlag.itemProperties.localized[p])
 		];
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
 		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
