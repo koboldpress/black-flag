@@ -39,6 +39,7 @@ Hooks.once("init", function() {
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	CONFIG.ui.items = applications.item.BlackFlagItemDirectory;
 	applications.registerCustomElements();
+	config._configureStatusEffects();
 	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();
 	data.registerDataModels(Actor);
