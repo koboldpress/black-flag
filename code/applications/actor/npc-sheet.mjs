@@ -10,7 +10,7 @@ export default class NPCSheet extends BaseActorSheet {
 			width: 460,
 			height: "auto",
 			tabs: [
-				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-content", initial: "main"}
+				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main"}
 			],
 			scrollY: [".window-content"]
 		});

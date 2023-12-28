@@ -1,8 +1,8 @@
-@import "pc-main-tab.css";
-@import "features-tab.css";
-@import "inventory-tab.css";
-@import "progression-tab.css";
-@import "spellcasting-tab.css";
+@import "tabs/pc-main-tab.css";
+@import "tabs/features-tab.css";
+@import "tabs/inventory-tab.css";
+@import "tabs/progression-tab.css";
+@import "tabs/spellcasting-tab.css";
 
 .black-flag.pc.sheet {
 	min-block-size: 500px;
@@ -34,5 +34,19 @@
 
 	nav.tabs {
 		margin-block-start: 0;
+	}
+
+	form.front {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.sheet-body {
+		flex-grow: 1;
+		.tab {
+			height: 100%;
+			> section { height: 100%; }
+		}
 	}
 }
