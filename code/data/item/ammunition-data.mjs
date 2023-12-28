@@ -1,13 +1,15 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
+import PropertiesTemplate from "./templates/properties-template.mjs";
 
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Ammunition items.
- * @mixes PhysicalTemplate
+ * @mixes {PhysicalTemplate}
+ * @mixes {PropertiesTemplate}
  */
-export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate) {
+export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate, PropertiesTemplate) {
 
 	static get metadata() {
 		return {
@@ -29,7 +31,6 @@ export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate
 			type: new SchemaField({
 				category: new StringField({label: "BF.Equipment.Category.Label"})
 			})
-			// TODO: Properties (magical?, adamantine?, silvered?)
 			// TODO: Damage bonuses
 		});
 	}

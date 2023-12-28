@@ -16,3 +16,11 @@ export const ammunition = {
 	}
 };
 localizeConfig(ammunition);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Properties that can be applied to ammunition.
+ * @type {string[]}
+ */
+export const ammunitionProperties = ["magical"];

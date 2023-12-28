@@ -6,6 +6,7 @@ import * as advancement from "./advancement.mjs";
 import * as ammunition from "./ammunition.mjs";
 import * as armor from "./armor.mjs";
 import * as conditions from "./conditions.mjs";
+import * as containers from "./containers.mjs";
 import * as damage from "./damage.mjs";
 import * as dice from "./dice.mjs";
 import * as documents from "./documents.mjs";
@@ -63,6 +64,7 @@ export default {
 	...ammunition,
 	...armor,
 	...conditions,
+	...containers,
 	...damage,
 	...dice,
 	...documents,

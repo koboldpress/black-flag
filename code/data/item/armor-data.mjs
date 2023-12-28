@@ -2,15 +2,17 @@ import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
+import PropertiesTemplate from "./templates/properties-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Armor items.
- * @mixes ProficiencyTemplate
- * @mixes PhysicalTemplate
+ * @mixes {ProficiencyTemplate}
+ * @mixes {PhysicalTemplate}
+ * @mixes {PropertiesTemplate}
  */
-export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate) {
+export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate, PropertiesTemplate) {
 
 	static get metadata() {
 		return {
@@ -78,12 +80,6 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 
 	get validCategories() {
 		return CONFIG.BlackFlag.armor;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get validProperties() {
-		return CONFIG.BlackFlag.armorProperties;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

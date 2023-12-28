@@ -1,6 +1,6 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
-import ActivityTemplate from "./templates/activities-template.mjs";
+import ActivitiesTemplate from "./templates/activities-template.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import FeatureTemplate from "./templates/feature-template.mjs";
 
@@ -8,8 +8,11 @@ const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * Data definition for Feature items.
+ * @mixes {ActivitiesTemplate}
+ * @mixes {AdvancementTemplate}
+ * @mixes {FeatureTemplate}
  */
-export default class FeatureData extends ItemDataModel.mixin(ActivityTemplate, AdvancementTemplate, FeatureTemplate) {
+export default class FeatureData extends ItemDataModel.mixin(ActivitiesTemplate, AdvancementTemplate, FeatureTemplate) {
 
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {

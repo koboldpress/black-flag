@@ -9,7 +9,7 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
 
 /**
  * Data definition for Spell items.
- * @mixes ActivitiesTemplate
+ * @mixes {ActivitiesTemplate}
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 

@@ -1,16 +1,22 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
-import { ActivitiesTemplate, ProficiencyTemplate, PhysicalTemplate } from "./templates/_module.mjs";
+import ActivitiesTemplate from "./templates/activities-template.mjs";
+import PhysicalTemplate from "./templates/physical-template.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
+import PropertiesTemplate from "./templates/properties-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Weapon items.
- * @mixes ActivitiesTemplate
- * @mixes ProficiencyTemplate
- * @mixes PhysicalTemplate
+ * @mixes {ActivitiesTemplate}
+ * @mixes {PhysicalTemplate}
+ * @mixes {ProficiencyTemplate}
+ * @mixes {PropertiesTemplate}
  */
-export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, ProficiencyTemplate, PhysicalTemplate) {
+export default class WeaponData extends ItemDataModel.mixin(
+	ActivitiesTemplate, PhysicalTemplate, ProficiencyTemplate, PropertiesTemplate
+) {
 
 	static get metadata() {
 		return {
@@ -108,12 +114,6 @@ export default class WeaponData extends ItemDataModel.mixin(ActivitiesTemplate, 
 
 	get validOptions() {
 		return CONFIG.BlackFlag.weaponOptions;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get validProperties() {
-		return CONFIG.BlackFlag.weaponProperties;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

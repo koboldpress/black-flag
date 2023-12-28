@@ -55,7 +55,46 @@
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
 			<section>
-				
+				<fieldset class="properties checkbox-list">
+					<legend>{{localize "BF.Property.Label[other]"}}</legend>
+					{{#each properties}}
+						<label>
+							<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
+						</label>
+					{{/each}}
+				</fieldset>
+				<fieldset>
+					<legend>{{localize "BF.Container.Capacity.Label"}}</legend>
+					<label>
+						<span>{{localize "BF.Container.Capacity.Number.Label"}}</span>
+						<input type="number" name="system.capacity.count" value="{{system.capacity.count}}" min="0" step="1"
+							placeholder="{{localize 'BF.Container.Capacity.Unlimited'}}">
+					</label>
+					<div class="field-group">
+						<span>{{localize "BF.Container.Capacity.Weight.Label"}}</span>
+						<label>
+							<input type="number" name="system.capacity.weight.value" value="{{system.capacity.weight.value}}"
+								min="0" step="0.1" placeholder="{{localize 'BF.Container.Capacity.Unlimited'}}">
+						</label>
+						<label>
+							<select disabled>
+								<option>{{localize "BF.Weight.Unit.Pound.Label[other]"}}</option>
+							</select>
+						</label>
+					</div>
+					<div class="field-group">
+						<span>{{localize "BF.Container.Capacity.Volume.Label"}}</span>
+						<label>
+							<input type="number" name="system.capacity.volume.value" value="{{system.capacity.volume.value}}"
+								min="0" step="0.1" placeholder="{{localize 'BF.Container.Capacity.Unlimited'}}">
+						</label>
+						<label>
+							<select disabled>
+								<option>{{localize "BF.Weight.Unit.CubitFeet.Label[other]"}}</option>
+							</select>
+						</label>
+					</div>
+				</fieldset>
 			</section>
 		</div>
 	</div>

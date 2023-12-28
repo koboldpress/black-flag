@@ -172,37 +172,12 @@ export const weaponOptions = {
 
 /**
  * Properties that can be applied to weapons.
- * @enum {LabeledConfiguration}
+ * @type {string[]}
  */
-export const weaponProperties = {
-	ammunition: {
-		label: "BF.Weapon.Property.Ammunition.Label"
-	},
-	finesse: {
-		label: "BF.Weapon.Property.Finesse.Label"
-	},
-	heavy: {
-		label: "BF.Weapon.Property.Heavy.Label"
-	},
-	light: {
-		label: "BF.Weapon.Property.Light.Label"
-	},
-	loading: {
-		label: "BF.Weapon.Property.Loading.Label"
-	},
-	reach: {
-		label: "BF.Weapon.Property.Reach.Label"
-	},
-	thrown: {
-		label: "BF.Weapon.Property.Thrown.Label"
-	},
-	twoHanded: {
-		label: "BF.Weapon.Property.TwoHanded.Label"
-	},
-	versatile: {
-		label: "BF.Weapon.Property.Versatile.Label"
-	}
-};
+export const weaponProperties = [
+	"ammunition", "finesse", "heavy", "light", "loading", "magical",
+	"reach", "thrown", "twoHanded", "versatile"
+];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

@@ -1,14 +1,16 @@
 import ContainerSheet from "../../applications/item/container-sheet.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import { PhysicalTemplate } from "./templates/_module.mjs";
+import PhysicalTemplate from "./templates/physical-template.mjs";
+import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
- * @mixes PhysicalTemplate
+ * @mixes {PhysicalTemplate}
+ * @mixes {PropertiesTemplate}
  */
-export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate) {
+export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate, PropertiesTemplate) {
 
 	static get metadata() {
 		return {
@@ -31,25 +33,17 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate)
 				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
-			// type: new SchemaField({
-			// 	value: new StringField({initial: "melee", label: "BF.Weapon.Type.Label"}),
-			// 	category: new StringField({label: "BF.Equipment.Category.Label"}),
-			// 	base: new StringField({label: "BF.Equipment.Base.Label"})
-			// }),
-			properties: new SetField(new StringField(), {
-				label: "BF.Property.Label[other]"
-			}),
 			capacity: new SchemaField({
-				count: new NumberField({min: 0, integer: true}),
+				count: new NumberField({min: 0, integer: true, label: "BF.Container.Capacity.Number.Label"}),
 				volume: new SchemaField({
-					value: new NumberField({min: 0}),
-					units: new StringField({initial: "foot"}) // Represents cubic feet
-				}),
+					value: new NumberField({min: 0, label: "BF.Volume.Label"}),
+					units: new StringField({initial: "foot", label: "BF.Volume.Unit.Label"})
+				}, {label: "BF.Container.Capacity.Volume.Label"}),
 				weight: new SchemaField({
-					value: new NumberField({min: 0}),
-					units: new StringField({initial: "pound"})
-				})
-			})
+					value: new NumberField({min: 0, label: "BF.Weight.Label"}),
+					units: new StringField({initial: "pound", label: "BF.Weight.Unit.Label"})
+				}, {label: "BF.Container.Capacity.Weight.Label"})
+			}, {label: "BF.Container.Capacity.Label"})
 		});
 	}
 

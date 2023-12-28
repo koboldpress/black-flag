@@ -72,10 +72,9 @@
 			<section>
 				<fieldset class="properties checkbox-list">
 					<legend>{{localize "BF.Property.Label[other]"}}</legend>
-					{{#each properties as |property key|}}
+					{{#each properties}}
 						<label>
-							<input type="checkbox" name="system.properties.{{key}}" {{checked property.selected}}>
-							{{property.label}}
+							<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
 						</label>
 					{{/each}}
 				</fieldset>

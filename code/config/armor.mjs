@@ -115,16 +115,8 @@ export const armorFormulas = {
 
 /**
  * Properties that can be applied to armor.
- * @enum {LabeledConfiguration}
+ * @type {string[]}
  */
-export const armorProperties = {
-	cumbersome: {
-		label: "BF.Armor.Property.Cumbersome.Label"
-	},
-	naturalMaterials: {
-		label: "BF.Armor.Property.NaturalMaterials.Label"
-	},
-	noisy: {
-		label: "BF.Armor.Property.Noisy.Label"
-	}
-};
+export const armorProperties = [
+	"cumbersome", "magical", "naturalMaterials", "noisy"
+];

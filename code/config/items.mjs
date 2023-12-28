@@ -42,6 +42,65 @@ localizeConfig(featureCategories.lineage.children);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Properties that can be applied to weapons.
+ * @enum {LabeledConfiguration}
+ */
+export const itemProperties = {
+	// Shared
+	magical: {
+		label: "BF.Item.Property.Magical.Label"
+	},
+
+	// Armor
+	cumbersome: {
+		label: "BF.Armor.Property.Cumbersome.Label"
+	},
+	naturalMaterials: {
+		label: "BF.Armor.Property.NaturalMaterials.Label"
+	},
+	noisy: {
+		label: "BF.Armor.Property.Noisy.Label"
+	},
+
+	// Container
+	weightlessContents: {
+		label: "BF.Container.Property.WeightlessContents.Label"
+	},
+
+	// Weapon
+	ammunition: {
+		label: "BF.Weapon.Property.Ammunition.Label"
+	},
+	finesse: {
+		label: "BF.Weapon.Property.Finesse.Label"
+	},
+	heavy: {
+		label: "BF.Weapon.Property.Heavy.Label"
+	},
+	light: {
+		label: "BF.Weapon.Property.Light.Label"
+	},
+	loading: {
+		label: "BF.Weapon.Property.Loading.Label"
+	},
+	reach: {
+		label: "BF.Weapon.Property.Reach.Label"
+	},
+	thrown: {
+		label: "BF.Weapon.Property.Thrown.Label"
+	},
+	twoHanded: {
+		label: "BF.Weapon.Property.TwoHanded.Label"
+	},
+	versatile: {
+		label: "BF.Weapon.Property.Versatile.Label"
+	}
+};
+localizeConfig(itemProperties);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for talent type categories.
  *
  * @typedef {object} TalentCategoryConfiguration

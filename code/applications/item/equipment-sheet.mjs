@@ -44,8 +44,8 @@ export default class EquipmentSheet extends BaseItemSheet {
 			return obj;
 		}, {});
 
-		context.properties = Object.entries(context.system.validProperties ?? {}).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: context.system.properties.has(k) };
+		context.properties = Object.entries(context.system.validProperties ?? {}).reduce((obj, [k, label]) => {
+			obj[k] = { label, selected: context.system.properties.has(k) };
 			return obj;
 		}, {});
 
