@@ -4,7 +4,7 @@
     <filter id="shadow-1" height="300%" width="300%" x="-100%" y="-100%">
       <feFlood flood-color="rgba(0, 0, 0, 1)" result="flood"/>
       <feComposite in="flood" in2="SourceGraphic" operator="atop" result="composite"/>
-      <feGaussianBlur in="composite" stdDeviation="5" result="blur"/>
+      <feGaussianBlur in="composite" stdDeviation="10" result="blur"/>
       <feOffset dx="0" dy="0" result="offset"/>
       <feComposite in="SourceGraphic" in2="offset" operator="over"/>
     </filter>

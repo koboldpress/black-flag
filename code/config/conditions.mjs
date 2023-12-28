@@ -113,20 +113,22 @@ export const statusEffects = {
 	},
 	burrowing: {
 		name: "EFFECT.BF.Burrowing",
-		icon: "icons/svg/cave.svg"
+		icon: "systems/black-flag/artwork/statuses/burrowing.svg"
 	},
 	concentrating: {
 		name: "EFFECT.BF.Concentrating",
 		icon: "systems/black-flag/artwork/statuses/concentrating.svg"
 	},
-	curse: {},
+	curse: {
+		icon: "systems/black-flag/artwork/statuses/cursed.svg"
+	},
 	dead: {
 		icon: "systems/black-flag/artwork/statuses/dead.svg"
 	},
 	fly: {},
 	hidden: {
 		name: "EFFECT.BF.Hidden",
-		icon: "icons/svg/cowled.svg"
+		icon: "systems/black-flag/artwork/statuses/hidden.svg"
 	},
 	marked: {
 		name: "EFFECT.BF.Marked",
@@ -136,11 +138,12 @@ export const statusEffects = {
 		icon: "systems/black-flag/artwork/statuses/silenced.svg"
 	},
 	sleep: {
-		name: "EFFECT.BF.Sleeping"
+		name: "EFFECT.BF.Sleeping",
+		icon: "systems/black-flag/artwork/statuses/sleeping.svg"
 	},
 	transformed: {
 		name: "EFFECT.BF.Transformed",
-		icon: "icons/svg/pawprint.svg"
+		icon: "systems/black-flag/artwork/statuses/transformed.svg"
 	}
 };
 
