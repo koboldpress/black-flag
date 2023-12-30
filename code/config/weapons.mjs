@@ -193,3 +193,4 @@ export const weaponTypes = {
 		label: "BF.Weapon.Type.Ranged"
 	}
 };
+localizeConfig(weaponTypes, { sort: false });

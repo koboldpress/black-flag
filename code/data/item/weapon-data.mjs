@@ -43,9 +43,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 			options: new SetField(new StringField(), {
 				label: "BF.Weapon.Option.Label[other]"
 			}),
-			properties: new SetField(new StringField(), {
-				label: "BF.Property.Label[other]"
-			}),
 			ammunition: new SchemaField({
 				type: new StringField({label: "BF.Ammunition.Type.Label"})
 			}, {label: "BF.Item.Type.Ammunition[one]"}),

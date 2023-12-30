@@ -17,30 +17,7 @@
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="description">
 			<section>
-				<div class="category">
-					<label>
-						<span>{{localize "BF.Equipment.Category.Label"}}</span>
-						<select name="system.type.category">
-							{{selectOptions categories selected=system.type.category blank=""}}
-						</select>
-					</label>
-					{{#if (eq item.type "weapon")}}
-						<label>
-							<span>{{localize "BF.Weapon.Type.Label"}}</span>
-							<select name="system.type.value">
-								{{selectOptions CONFIG.weaponTypes selected=system.type.value labelAttr="label" localize=true}}
-							</select>
-						</label>
-					{{/if}}
-					{{#if baseTypes}}
-						<label>
-							<span>{{localize "BF.Equipment.Base.Label"}}</span>
-							<select name="system.type.base">
-								{{selectOptions baseTypes selected=system.type.base blank=""}}
-							</select>
-						</label>
-					{{/if}}
-				</div>
+				{{> "blackFlag.equipment-categories"}}
 				<div class="description-area">
 					<div class="sidebar">
 						<label class="quantity">

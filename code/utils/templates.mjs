@@ -185,8 +185,9 @@ export async function registerHandlebarsPartials() {
 		"advancement/advancement-name.hbs",
 		"dice/roll-notes.hbs",
 		"item/concept-summary.hbs",
-		"item/item-activities.hbs",
-		"item/item-advancement.hbs",
+		"item/parts/equipment-categories.hbs",
+		"item/parts/item-activities.hbs",
+		"item/parts/item-advancement.hbs",
 		"journal/journal-table.hbs",
 		"shared/inventory.hbs",
 		"shared/uses-config.hbs"

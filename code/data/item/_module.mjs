@@ -4,6 +4,7 @@ export {default as BackgroundData} from "./background-data.mjs";
 export {default as ClassData} from "./class-data.mjs";
 export {default as ContainerData} from "./container-data.mjs";
 export {default as FeatureData} from "./feature-data.mjs";
+export {default as GearData} from "./gear-data.mjs";
 export {default as HeritageData} from "./heritage-data.mjs";
 export {default as LineageData} from "./lineage-data.mjs";
 export {default as SpellData} from "./spell-data.mjs";

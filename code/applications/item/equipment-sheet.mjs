@@ -1,4 +1,4 @@
-import { filteredKeys, sortObjectEntries } from "../../utils/_module.mjs";
+import { filteredKeys, makeLabel, sortObjectEntries } from "../../utils/_module.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class EquipmentSheet extends BaseItemSheet {
@@ -27,17 +27,29 @@ export default class EquipmentSheet extends BaseItemSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
-		context.categories = context.system.validCategories?.localized;
+		// Category
+		if ( context.system.validCategories?.localized ) context.categories = {
+			options: context.system.validCategories.localized,
+			blank: ""
+		};
+
+		// Type
+		if ( this.item.type === "weapon" ) {
+			context.types = { options: CONFIG.BlackFlag.weaponTypes.localized };
+		}
+
+		// Base
 		const category = context.system.validCategories?.[context.system.type.category];
-		context.baseTypes = category?.children ? sortObjectEntries(Object.entries(category.children)
-			.reduce((obj, [key, config]) => {
-				if ( !foundry.utils.hasProperty(this.item, "system.type.value")
-					|| !config.type || (config.type === this.item.system.type.value) ) {
-					obj[key] = game.i18n.localize(config.label);
-				}
-				return obj;
-			}, {})
-		) : null;
+		if ( category?.children ) context.baseItems = {
+			options: sortObjectEntries(Object.entries(category.children)
+				.reduce((obj, [key, config]) => {
+					if ( !foundry.utils.hasProperty(this.item, "system.type.value")
+						|| !config.type || (config.type === this.item.system.type.value) ) obj[key] = makeLabel(config);
+					return obj;
+				}, {})
+			),
+			blank: ""
+		};
 
 		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
 			obj[k] = { label: game.i18n.localize(o.label), selected: context.system.options.has(k) };

@@ -42,6 +42,58 @@ localizeConfig(featureCategories.lineage.children);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Categories of gear items.
+ * @enum {NestedTypeConfiguration}
+ */
+export const gearCategories = {
+	clothing: {
+		localization: "BF.Item.Gear.Category.Clothing",
+		children: {
+			amulet: {
+				localization: "BF.Item.Clothing.Type.Amulet"
+			},
+			belt: {
+				localization: "BF.Item.Clothing.Type.Belt"
+			},
+			cloak: {
+				localization: "BF.Item.Clothing.Type.Cloak"
+			},
+			helm: {
+				localization: "BF.Item.Clothing.Type.Helm"
+			},
+			ring: {
+				localization: "BF.Item.Clothing.Type.Ring"
+			}
+		}
+	},
+	focus: {
+		localization: "BF.Item.Gear.Category.Focus",
+		children: {
+			arcaneFocus: {
+				localization: "BF.Item.Focus.Type.ArcaneFocus"
+			},
+			holySymbol: {
+				localization: "BF.Item.Focus.Type.HolySymbol"
+			}
+		}
+	},
+	rod: {
+		localization: "BF.Item.Gear.Category.Rod"
+	},
+	wand: {
+		localization: "BF.Item.Gear.Category.Wand"
+	},
+	wondrousItem: {
+		localization: "BF.Item.Gear.Category.WondrousItem"
+	}
+};
+localizeConfig(gearCategories);
+localizeConfig(gearCategories.clothing.children);
+localizeConfig(gearCategories.focus.children);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Properties that can be applied to weapons.
  * @enum {LabeledConfiguration}
  */

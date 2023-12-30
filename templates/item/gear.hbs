@@ -54,14 +54,9 @@
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
-			<fieldset class="properties checkbox-list">
-				<legend>{{localize "BF.Property.Label[other]"}}</legend>
-				{{#each properties}}
-					<label>
-						<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
-					</label>
-				{{/each}}
-			</fieldset>
+			<section>
+				{{> "blackFlag.item-activities"}}
+			</section>
 		</div>
 	</div>
 

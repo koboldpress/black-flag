@@ -16,14 +16,7 @@
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="description">
 			<section>
-				<div class="category">
-					<label>
-						<span>{{localize "BF.Equipment.Category.Label"}}</span>
-						<select name="system.type.category">
-							{{selectOptions categories selected=system.type.category blank=""}}
-						</select>
-					</label>
-				</div>
+				{{> "blackFlag.equipment-categories"}}
 				<div class="description-area">
 					<div class="sidebar">
 						<label class="quantity">
