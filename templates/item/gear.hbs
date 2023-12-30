@@ -18,39 +18,8 @@
 		<div class="tab" data-group="primary" data-tab="description">
 			<section>
 				{{> "blackFlag.equipment-categories"}}
-				<div class="description-area">
-					<div class="sidebar">
-						<label class="quantity">
-							<span>{{localize "BF.Quantity.Label"}}</span>
-							<input type="number" name="system.quantity" min=0 step=1 value="{{source.quantity}}">
-						</label>
-						<label class="price">
-							<span>{{localize "BF.Price.Label"}}</span>
-							<input type="number" name="system.price.value" min=0 step=0.01 value="{{source.price.value}}">
-							<select name="system.price.denomination">
-								{{selectOptions CONFIG.currencies selected=source.price.denomination
-									labelAttr="abbreviation" localize=true}}
-							</select>
-						</label>
-						<label class="weight">
-							<span>{{localize "BF.Weight.Label"}}</span>
-							<input type="number" name="system.weight.value" min=0 step=0.01 value="{{source.weight.value}}">
-							<select name="system.weight.units">
-								{{selectOptions CONFIG.weightUnits selected=source.weight.units
-									labelAttr="abbreviation" localize=true}}
-							</select>
-						</label>
-					</div>
-					{{editor enriched.description target="system.description.value" button=true
-						editable=editable engine="prosemirror" collaborate=false}}
-				</div>
-				<label class="source">
-					<span>
-						{{localize "BF.Item.Source.Label"}}
-						<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
-					</span>
-					<input type="text" name="system.description.source" value="{{system.description.source}}">
-				</label>
+				{{> "blackFlag.equipment-description"}}
+				{{> "blackFlag.equipment-source"}}
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">

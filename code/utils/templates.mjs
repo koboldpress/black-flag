@@ -186,6 +186,8 @@ export async function registerHandlebarsPartials() {
 		"dice/roll-notes.hbs",
 		"item/concept-summary.hbs",
 		"item/parts/equipment-categories.hbs",
+		"item/parts/equipment-description.hbs",
+		"item/parts/equipment-source.hbs",
 		"item/parts/item-activities.hbs",
 		"item/parts/item-advancement.hbs",
 		"journal/journal-table.hbs",
