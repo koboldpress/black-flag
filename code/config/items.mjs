@@ -1,6 +1,25 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Categories of consumable items.
+ * @enum {NestedTypeConfiguration}
+ */
+export const consumableCategories = {
+	food: {
+		localization: "BF.Item.Consumable.Category.Food"
+	},
+	potion: {
+		localization: "BF.Item.Consumable.Category.Potion"
+	},
+	scroll: {
+		localization: "BF.Item.Consumable.Category.Scroll"
+	}
+};
+localizeConfig(consumableCategories);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Classifications of feature items (e.g. Class Feature, Heritage Trait) and any types available within that
  * category (e.g. Channel Divinity, Martial Action).
  * @enum {NestedTypeConfiguration}
