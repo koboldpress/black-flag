@@ -84,6 +84,14 @@ export const sheetSections = {
 			create: [{type: "container"}]
 		},
 		{
+			id: "sundries",
+			tab: "inventory",
+			label: "BF.Item.Type.Sundry[other]",
+			filters: [{k: "type", v: "sundry"}],
+			create: [{type: "sundry"}],
+			options: { autoHide: true }
+		},
+		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Item.Feature.Category.Class[other]",
@@ -157,6 +165,14 @@ export const sheetSections = {
 			label: "BF.Item.Category.Equipment.Label",
 			filters: [{k: "type", o: "in", v: ["ammunition", "armor", "weapon"]}],
 			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
+		},
+		{
+			id: "sundries",
+			tab: "features",
+			label: "BF.Item.Type.Sundry[other]",
+			filters: [{k: "type", v: "sundry"}],
+			create: [{type: "sundry"}],
+			options: {autoHide: true}
 		}
 	],
 	container: [

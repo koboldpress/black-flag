@@ -48,7 +48,8 @@ export const _documentCategories = {
 				itemTypes.WeaponData,
 				itemTypes.AmmunitionData,
 				itemTypes.ArmorData,
-				itemTypes.ContainerData
+				itemTypes.ContainerData,
+				itemTypes.SundryData
 			],
 			sheet: {
 				application: itemSheet.EquipmentSheet,

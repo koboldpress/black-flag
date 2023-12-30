@@ -8,6 +8,7 @@ export {default as HeritageData} from "./heritage-data.mjs";
 export {default as LineageData} from "./lineage-data.mjs";
 export {default as SpellData} from "./spell-data.mjs";
 export {default as SubclassData} from "./subclass-data.mjs";
+export {default as SundryData} from "./sundry-data.mjs";
 export {default as TalentData} from "./talent-data.mjs";
 export {default as WeaponData} from "./weapon-data.mjs";
 

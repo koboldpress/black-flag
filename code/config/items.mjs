@@ -101,15 +101,8 @@ localizeConfig(itemProperties);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Configuration data for talent type categories.
- *
- * @typedef {object} TalentCategoryConfiguration
- * @property {string} localization - Pluralizable label for this category.
- */
-
-/**
  * Categories of talent items.
- * @enum {TalentCategoryConfiguration}
+ * @enum {LocalizedConfiguration}
  */
 export const talentCategories = {
 	magic: {
@@ -124,3 +117,28 @@ export const talentCategories = {
 };
 localizeConfig(talentCategories);
 localizeConfig(talentCategories, { propertyName: "localizedPlural", pluralRule: "other" });
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Categories of sundry items.
+ * @enum {LocalizedConfiguration}
+ */
+export const sundryCategories = {
+	clothing: {
+		localization: "BF.Item.Sundry.Category.Clothing"
+	},
+	component: {
+		localization: "BF.Item.Sundry.Category.Component"
+	},
+	tradeGood: {
+		localization: "BF.Item.Sundry.Category.TradeGood"
+	},
+	treasure: {
+		localization: "BF.Item.Sundry.Category.Treasure"
+	},
+	trinket: {
+		localization: "BF.Item.Sundry.Category.Trinket"
+	}
+};
+localizeConfig(sundryCategories);
