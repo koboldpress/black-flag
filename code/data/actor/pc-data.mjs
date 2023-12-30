@@ -328,6 +328,7 @@ export default class PCData extends ActorDataModel.mixin(
 		const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
 
 		hp.max = base + levelBonus + overallBonus;
+		if ( this.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 	}

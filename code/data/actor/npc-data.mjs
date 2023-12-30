@@ -42,8 +42,8 @@ export default class NPCData extends ActorDataModel.mixin(
 				}),
 				cr: new NumberField({nullable: false, min: 0, initial: 0, label: "BF.ChallengeRating.Label"}),
 				hp: new SchemaField({
+					value: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong"}),
 					max: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong"}),
-					damage: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Damage.Label"}),
 					temp: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong"})
 				}, {label: "BF.HitPoint.Label[other]"}),
 				initiative: new SchemaField({
@@ -168,8 +168,9 @@ export default class NPCData extends ActorDataModel.mixin(
 	prepareDerivedHitPoints() {
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
-		hp.damage = Math.clamped(hp.damage, 0, hp.max);
-		hp.value = hp.max - hp.damage;
+		if ( this.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
+		hp.value = Math.clamped(hp.value, 0, hp.max);
+		hp.damage = hp.max - hp.value;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -182,5 +183,17 @@ export default class NPCData extends ActorDataModel.mixin(
 			configurable: true,
 			enumerable: false
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preUpdateHP(changed, options, user) {
+		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
+		if ( changedMaxHP !== undefined ) {
+			const maxHPDelta = changedMaxHP - this.attributes.hp.max;
+			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
+		}
 	}
 }

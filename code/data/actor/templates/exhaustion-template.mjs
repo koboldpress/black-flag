@@ -13,7 +13,7 @@ export default class ExhaustionTemplate extends foundry.abstract.DataModel {
 				exhaustion: new NumberField({
 					initial: 0, min: 0, max: 6, integer: true, label: "BF.Condition.Exhaustion.Label"
 				})
-			}, {label: ""})
+			})
 		};
 	}
 
@@ -22,7 +22,9 @@ export default class ExhaustionTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedExhaustionLevel() {
-		
+		const exhaustion = this.parent.effects.get(BlackFlagActiveEffect.EXHAUSTION);
+		const level = exhaustion?.getFlag("black-flag", "level");
+		this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

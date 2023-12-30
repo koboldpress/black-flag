@@ -66,10 +66,18 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const rollData = this.parent.getRollData({ deterministic: true });
 		rollData.base = movement.base;
 
+		// Determine how movement should be changed by status effects
+		const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
+			.intersection(this.parent.statuses).size || (this.attributes?.exhaustion >= 5);
+		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
+
 		// Calculate each special movement type using base speed
 		for ( const [type, formula] of Object.entries(movement.types) ) {
-			const speed = simplifyBonus(formula, rollData);
-			movement.types[type] = speed;
+			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) movement.types[type] = 0;
+			else {
+				const speed = simplifyBonus(formula, rollData);
+				movement.types[type] = halfMovement ? speed * 0.5 : speed;
+			}
 		}
 
 		// Prepare movement label to display on sheet
@@ -97,6 +105,16 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		for ( const [type, formula] of Object.entries(senses.types) ) {
 			const speed = simplifyBonus(formula, rollData);
 			senses.types[type] = speed;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedResistImmune() {
+		if ( this.parent.statuses.has("petrified") ) {
+			this.traits.condition.immunities.value.add("poisoned");
+			this.traits.damage.resistances.custom.push("All Damage");
+			this.traits.damage.immunities.value.add("poison");
 		}
 	}
 }
