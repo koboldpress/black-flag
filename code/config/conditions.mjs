@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for system conditions.
  *
@@ -99,6 +101,7 @@ export const conditions = {
 		statuses: ["incapacitated", "prone"]
 	}
 };
+localizeConfig(conditions);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

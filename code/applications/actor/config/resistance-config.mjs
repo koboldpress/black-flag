@@ -35,9 +35,9 @@ export default class ResistanceConfig extends BaseConfig {
 			};
 			return obj;
 		}, {});
-		context.conditions = Object.entries(CONFIG.BlackFlag.registration.all.condition).reduce((obj, [key, config]) => {
+		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).reduce((obj, [key, label]) => {
 			obj[key] = {
-				label: config.name,
+				label,
 				immune: traits.condition.immunities.value.has(key)
 			};
 			return obj;
