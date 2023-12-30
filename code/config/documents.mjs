@@ -45,12 +45,13 @@ export const _documentCategories = {
 		equipment: {
 			label: "BF.Item.Category.Equipment.Label",
 			types: [
-				itemTypes.WeaponData,
 				itemTypes.AmmunitionData,
 				itemTypes.ArmorData,
 				itemTypes.ContainerData,
 				itemTypes.GearData,
-				itemTypes.SundryData
+				itemTypes.SundryData,
+				itemTypes.ToolData,
+				itemTypes.WeaponData
 			],
 			sheet: {
 				application: itemSheet.EquipmentSheet,

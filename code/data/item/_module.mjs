@@ -11,6 +11,7 @@ export {default as SpellData} from "./spell-data.mjs";
 export {default as SubclassData} from "./subclass-data.mjs";
 export {default as SundryData} from "./sundry-data.mjs";
 export {default as TalentData} from "./talent-data.mjs";
+export {default as ToolData} from "./tool-data.mjs";
 export {default as WeaponData} from "./weapon-data.mjs";
 
 export * as template from "./templates/_module.mjs";

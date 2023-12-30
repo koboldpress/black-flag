@@ -5,18 +5,18 @@ import PhysicalTemplate from "./templates/physical-template.mjs";
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Data definition for Gear items.
+ * Data definition for Tool items.
  * @mixes {ActivitiesTemplate}
  * @mixes {PhysicalTemplate}
  */
-export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, PhysicalTemplate) {
+export default class ToolData extends ItemDataModel.mixin(ActivitiesTemplate, PhysicalTemplate) {
 
 	static get metadata() {
 		return {
-			type: "gear",
+			type: "tool",
 			category: "equipment",
-			localization: "BF.Item.Type.Gear",
-			icon: "fa-solid fa-wand-magic"
+			localization: "BF.Item.Type.Tool",
+			icon: "fa-solid fa-screwdriver-wrench"
 		};
 	}
 
@@ -40,6 +40,6 @@ export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, Ph
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get validCategories() {
-		return CONFIG.BlackFlag.gearCategories;
+		return CONFIG.BlackFlag.tools;
 	}
 }
