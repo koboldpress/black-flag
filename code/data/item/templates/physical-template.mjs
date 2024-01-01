@@ -75,18 +75,18 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedLabels() {
-		Object.defineProperty(this.price, "label", {
-			get() {
-				if ( !this.total ) return "—";
-				const denominationConfig = CONFIG.BlackFlag.currencies[this.denomination];
-				return game.i18n.format("BF.Currency.Display", {
-					value: numberFormat(this.total), denomination: game.i18n.localize(denominationConfig.abbreviation)
-				});
-				// TODO: Adjust total displayed to use smallest logical units (so 5 cp x 20 = 100 cp => 1 gp)
-			},
-			configurable: true,
-			enumerable: false
-		});
+		// Object.defineProperty(this.price, "label", {
+		// 	get() {
+		// 		if ( !this.total ) return "—";
+		// 		const denominationConfig = CONFIG.BlackFlag.currencies[this.denomination];
+		// 		return game.i18n.format("BF.Currency.Display", {
+		// 			value: numberFormat(this.total), denomination: game.i18n.localize(denominationConfig.abbreviation)
+		// 		});
+		// 		// TODO: Adjust total displayed to use smallest logical units (so 5 cp x 20 = 100 cp => 1 gp)
+		// 	},
+		// 	configurable: true,
+		// 	enumerable: false
+		// });
 		Object.defineProperty(this.weight, "label", {
 			get() {
 				if ( !this.value ) return "—";

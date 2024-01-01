@@ -60,11 +60,12 @@ export function get(type, identifier) {
  * Fetch the source item registered if it exists.
  * @param {string} type - Item type to get.
  * @param {string} identifier - Identifier to get.
- * @returns {ItemEH|undefined}
+ * @returns {BlackFlagItem|Promise<BlackFlagItem>|undefined}
  */
-export async function getSource(type, identifier) {
+export function getSource(type, identifier) {
 	const registration = get(type, identifier);
-	return registration ? await fromUuid(registration.sources[registration.sources.length - 1]) : undefined;
+	return registration ? registration.cached
+		?? fromUuid(registration.sources[registration.sources.length - 1]) : undefined;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -172,7 +173,7 @@ async function _registerItemType(type, indexes) {
 			const dataModel = CONFIG.Item.dataModels[item.type];
 			if ( dataModel?.metadata.type !== type ) continue;
 			log(`Registering ${item.name} from ${pack}`);
-			registerItem(item, `Compendium.${pack}`);
+			registerItem(item, `Compendium.${pack}.Item`);
 		}
 	}
 	if ( REGISTER_WORLD_ITEMS ) {
@@ -191,7 +192,7 @@ async function _registerItemType(type, indexes) {
 	return {
 		type,
 		shouldCache: config?.cache === true,
-		registrations: sortObjectEntries(registrations, "name")
+		registrations: sortObjectEntries(registrations, { sortKey: "name" })
 	};
 }
 
@@ -228,7 +229,7 @@ function _onCreateItem(item, options, userId) {
 	if ( !source ) source = all[type] = {};
 	_handleCreate(source, item.identifier, item);
 
-	all[type] = sortObjectEntries(source, "name");
+	all[type] = sortObjectEntries(source, { sortKey: "name" });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -286,7 +287,7 @@ function _onUpdateItem(item, changes, options, userId) {
 		Hooks.callAll("blackFlag.registrationUpdated", item.identifier, item);
 	});
 
-	all[type] = sortObjectEntries(source, "name");
+	all[type] = sortObjectEntries(source, { sortKey: "name" });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

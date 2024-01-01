@@ -1,47 +1,108 @@
-import { localizeConfig } from "../utils/_module.mjs";
+import { localizeConfig, sortObjectEntries } from "../utils/_module.mjs";
+
+/**
+ * Configuration for currencies.
+ *
+ * @typedef {object} CurrencyConfiguration
+ * @property {string} label - Localizable name for the currency.
+ * @property {string} abbreviation - Abbreviation of the unit.
+ * @property {number} conversion - Multiplier used to convert between various units.
+ */
+
+/**
+ * Currency denominations that can be used. Will be replaced upon registration load with registered currencies
+ * if any exist.
+ * @enum {UnitConfiguration}
+ */
+export const currencies = {
+	pp: {
+		label: "BF.Currency.Denomination.Platinum.Label",
+		abbreviation: "BF.Currency.Denomination.Platinum.Abbreviation",
+		conversion: 0.1
+	},
+	gp: {
+		label: "BF.Currency.Denomination.Gold.Label",
+		abbreviation: "BF.Currency.Denomination.Gold.Abbreviation",
+		conversion: 1
+	},
+	sp: {
+		label: "BF.Currency.Denomination.Silver.Label",
+		abbreviation: "BF.Currency.Denomination.Silver.Abbreviation",
+		conversion: 10
+	},
+	cp: {
+		label: "BF.Currency.Denomination.Copper.Label",
+		abbreviation: "BF.Currency.Denomination.Copper.Abbreviation",
+		conversion: 100
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Configure currencies once registration is complete.
+ */
+Hooks.once("blackFlag.registrationComplete", function() {
+	const currencies = CONFIG.BlackFlag.registration.list("currency") ?? {};
+	if ( foundry.utils.isEmpty(currencies) ) return;
+	Object.keys(CONFIG.BlackFlag.currencies).forEach(k => delete CONFIG.BlackFlag.currencies[k]);
+	for ( const [abbreviation, { name, cached }] of Object.entries(currencies) ) {
+		CONFIG.BlackFlag.currencies[abbreviation] = {
+			name, abbreviation, conversion: cached.system.conversion.value
+		};
+	}
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+});
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Handle a currency being created.
+ */
+Hooks.on("blackFlag.registrationCreated", function(identifier, item) {
+	if ( item.type !== "currency" ) return;
+	CONFIG.BlackFlag.currencies[identifier] = {
+		label: item.name, abbreviation: identifier, conversion: item.system.conversion.value
+	};
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+});
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Handle a currency being updated.
+ */
+Hooks.on("blackFlag.registrationUpdated", function(identifier, item) {
+	if ( item.type !== "currency" ) return;
+	const currency = CONFIG.BlackFlag.currencies[identifier];
+	if ( currency ) {
+		currency.label = item.name;
+		currency.abbreviation = item.identifier;
+		currency.conversion = item.system.conversion.value;
+	}
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+});
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Handle a currency being deleted.
+ */
+Hooks.on("blackFlag.registrationDeleted", function(identifier, item) {
+	if ( item.type !== "currency" ) return;
+	delete CONFIG.BlackFlag.currencies[identifier];
+});
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration for system various units.
  *
  * @typedef {object} UnitConfiguration
  * @property {string} localization - Pluralizable localization key.
- * @property {string} abbreviation - Abbreviation of the weight.
- * @property {number} conversion - Multiplier used to convert between various weights.
+ * @property {string} abbreviation - Abbreviation of the unit.
+ * @property {number} conversion - Multiplier used to convert between various units.
  */
-
-/**
- * Currency denominations that can be used.
- * @enum {UnitConfiguration}
- */
-export const currencies = {
-	pp: {
-		localization: "BF.Currency.Denomination.Platinum.Label",
-		abbreviation: "BF.Currency.Denomination.Platinum.Abbreviation",
-		conversion: 0.1
-	},
-	gp: {
-		localization: "BF.Currency.Denomination.Gold.Label",
-		abbreviation: "BF.Currency.Denomination.Gold.Abbreviation",
-		conversion: 1
-	},
-	ep: {
-		localization: "BF.Currency.Denomination.Electrum.Label",
-		abbreviation: "BF.Currency.Denomination.Electrum.Abbreviation",
-		conversion: 1
-	},
-	sp: {
-		localization: "BF.Currency.Denomination.Silver.Label",
-		abbreviation: "BF.Currency.Denomination.Silver.Abbreviation",
-		conversion: 10
-	},
-	cp: {
-		localization: "BF.Currency.Denomination.Copper.Label",
-		abbreviation: "BF.Currency.Denomination.Copper.Abbreviation",
-		conversion: 1100
-	}
-};
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Units that can be used for measuring distances.
@@ -120,6 +181,16 @@ export const weightUnits = {
 		localization: "BF.Weight.Unit.Pound.Label",
 		abbreviation: "BF.Weight.Unit.Pound.Abbreviation",
 		conversion: 1
+	},
+	ounce: {
+		localization: "BF.Weight.Unit.Ounce.Label",
+		abbreviation: "BF.Weight.Unit.Ounce.Abbreviation",
+		conversion: 0.0625
+	},
+	ton: {
+		localization: "BF.Weight.Unit.Ton.Label",
+		abbreviation: "BF.Weight.Unit.Ton.Abbreviation",
+		conversion: 2000
 	}
 };
 localizeConfig(weightUnits, { pluralRule: "other" });

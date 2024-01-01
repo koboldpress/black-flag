@@ -50,7 +50,7 @@ export default class ActivitySelection extends Dialog {
 				hint: game.i18n.localize(activity.metadata.hint)
 			};
 		}
-		context.types = BlackFlag.utils.sortObjectEntries(context.types, "label");
+		context.types = BlackFlag.utils.sortObjectEntries(context.types, { sortKey: "label" });
 		context.buttonLabel = game.i18n.localize("BF.Activity.Core.Action.Create");
 		return context;
 	}

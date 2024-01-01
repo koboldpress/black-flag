@@ -160,7 +160,7 @@ export default class BaseActorSheet extends ActorSheet {
 				};
 			}
 		}
-		context.conditions = sortObjectEntries(context.conditions, "label");
+		context.conditions = sortObjectEntries(context.conditions, { sortKey: "label" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -81,7 +81,8 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	static mergeSchema(a, b) {
 		for ( const key of Object.keys(b) ) {
 			if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
-				a[key] = b[key];
+				if ( b[key] === false ) delete a[key];
+				else a[key] = b[key];
 				continue;
 			}
 			const mergedOptions = { ...a[key].options, ...b[key].options };

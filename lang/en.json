@@ -446,21 +446,18 @@
 
 "BF.CreatureSizeAndType.Label": "Creature Size & Type",
 
+"BF.Currency.Abbreviation.Label": "Abbreviation",
+"BF.Currency.Abbreviation.Hint": "Unique abbreviation for this denomination.",
+"BF.Currency.ConversionRatio.Label": "Conversion Ratio",
+"BF.Currency.ConversionRatio.Hint": "Amount that this currency will be multiplied by to convert between currencies (e.g. 10 silvers is equal to 1 gold, so silver's ratio would be 0.1).",
 "BF.Currency.Denomination.Label": "Denomination",
-"BF.Currency.Denomination.Copper.Label[one]": "Copper Piece",
-"BF.Currency.Denomination.Copper.Label[other]": "Copper Pieces",
+"BF.Currency.Denomination.Copper.Label": "Copper",
 "BF.Currency.Denomination.Copper.Abbreviation": "cp",
-"BF.Currency.Denomination.Electrum.Label[one]": "Electrum Piece",
-"BF.Currency.Denomination.Electrum.Label[other]": "Electrum Pieces",
-"BF.Currency.Denomination.Electrum.Abbreviation": "ep",
-"BF.Currency.Denomination.Gold.Label[one]": "Gold Piece",
-"BF.Currency.Denomination.Gold.Label[other]": "Gold Pieces",
+"BF.Currency.Denomination.Gold.Label": "Gold",
 "BF.Currency.Denomination.Gold.Abbreviation": "gp",
-"BF.Currency.Denomination.Platinum.Label[one]": "Platinum Piece",
-"BF.Currency.Denomination.Platinum.Label[other]": "Platinum Pieces",
+"BF.Currency.Denomination.Platinum.Label": "Platinum",
 "BF.Currency.Denomination.Platinum.Abbreviation": "pp",
-"BF.Currency.Denomination.Silver.Label[one]": "Silver Piece",
-"BF.Currency.Denomination.Silver.Label[other]": "Silver Pieces",
+"BF.Currency.Denomination.Silver.Label": "Silver",
 "BF.Currency.Denomination.Silver.Abbreviation": "sp",
 "BF.Currency.Display": "{value} {denomination}",
 
@@ -713,6 +710,8 @@
 "BF.Item.Type.Container[other]": "Containers",
 "BF.Item.Type.Class[one]": "Class",
 "BF.Item.Type.Class[other]": "Classes",
+"BF.Item.Type.Currency[one]": "Currency",
+"BF.Item.Type.Currency[other]": "Currencies",
 "BF.Item.Type.Feature[one]": "Feature",
 "BF.Item.Type.Feature[other]": "Features",
 "BF.Item.Type.Gear[one]": "Gear",
@@ -1314,11 +1313,27 @@
 "BF.Weapon.Type.Melee": "Melee",
 "BF.Weapon.Type.Ranged": "Ranged",
 
-"BF.Weight.Label": "Weight",
-"BF.Weight.Unit.Label": "Weight Units",
-"BF.Weight.Unit.Pound.Label[one]": "Pound",
-"BF.Weight.Unit.Pound.Label[other]": "Pounds",
-"BF.Weight.Unit.Pound.Abbreviation": "lb",
+	"BF.Weight": {
+		"Label": "Weight",
+		"Unit": {
+			"Label": "Weight Units",
+			"Pound": {
+				"Label[one]": "Pound",
+				"Label[other]": "Pounds",
+				"Abbreviation": "lb"
+			},
+			"Ounce": {
+				"Label[one]": "Ounce",
+				"Label[other]": "Ounces",
+				"Abbreviation": "oz"
+			},
+			"Ton": {
+				"Label[one]": "Ton",
+				"Label[other]": "Tons",
+				"Abbreviation": "tn"
+			}
+		}
+	},
 
 	"EFFECT.BF": {
 		"Burrowing": "Burrowing",

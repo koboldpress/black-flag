@@ -53,7 +53,7 @@ export default class AdvancementSelection extends Dialog {
 				disabled: !advancement.availableForItem(this.item)
 			};
 		}
-		context.types = BlackFlag.utils.sortObjectEntries(context.types, "label");
+		context.types = BlackFlag.utils.sortObjectEntries(context.types, { sortKey: "label" });
 		context.buttonLabel = game.i18n.localize("BF.Advancement.Core.Action.Create");
 		return context;
 	}

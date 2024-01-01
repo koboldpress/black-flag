@@ -123,7 +123,7 @@ export default class SelectChoices {
 	 * @returns {SelectOptions}
 	 */
 	sort() {
-		const sorted = new SelectChoices(sortObjectEntries(this, this._sort));
+		const sorted = new SelectChoices(sortObjectEntries(this, { sortKey: this._sort }));
 		for ( const key of Object.keys(this) ) delete this[key];
 		this.merge(sorted);
 		for ( const entry of Object.values(this) ) {
@@ -139,7 +139,7 @@ export default class SelectChoices {
 	 * @returns {SelectOptions}
 	 */
 	sorted() {
-		const sorted = new SelectChoices(sortObjectEntries(this, this._sort));
+		const sorted = new SelectChoices(sortObjectEntries(this, { sortKey: this._sort }));
 		for ( const entry of Object.values(sorted) ) {
 			if ( entry.children ) entry.children = entry.children.sorted();
 		}

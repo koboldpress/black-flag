@@ -55,7 +55,7 @@ export function makeLabels(object, {
 		const label = makeLabel(d, { pluralRule, labelKeyPath, localizationKeyPath });
 		return [k, objectOutput ? { ...d, [labelKeyPath]: label } : label];
 	});
-	if ( sort && objectOutput ) sortObjectEntries(localized, labelKeyPath);
+	if ( sort && objectOutput ) sortObjectEntries(localized, { sortKey: labelKeyPath });
 	else if ( sort ) localized.sort((lhs, rhs) => lhs[1].localeCompare(rhs[1]));
 	return Object.fromEntries(localized);
 }

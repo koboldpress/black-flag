@@ -31,7 +31,7 @@
 	"packs": [
 		{
 			"name": "rules",
-			"label": "Black Flag Reference Document",
+			"label": "Black Flag Rules",
 			"system": "black-flag",
 			"path": "./packs/rules/",
 			"type": "JournalEntry",
@@ -106,6 +106,16 @@
 			"flags": {
 				"types": ["spell"]
 			}
+		},
+		{
+			"name": "currencies",
+			"label": "Currencies",
+			"system": "black-flag",
+			"path": "./packs/currencies/",
+			"type": "Item",
+			"flags": {
+				"types": ["currency"]
+			}
 		}
 	],
 	"packFolders": [
@@ -143,7 +153,7 @@
 					"sorting": "m",
 					"color": "#2d5281",
 					"packs": [
-						"conditions"
+						"currencies"
 					]
 				}
 			]
