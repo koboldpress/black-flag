@@ -10,6 +10,7 @@
  * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
+ * @property {string} [options.sorting] - Force a specific sorting mode on this section.
  */
 
 /**
@@ -20,6 +21,14 @@
  * @param {object} sectionData - Existing data for the section being expanded.
  * @returns {object[]} - Sections that should replace the expanded section.
  */
+
+const currencySection = () => ({
+	id: "currency",
+	tab: "currency",
+	label: "BF.Item.Type.Currency[one]",
+	filters: [{k: "type", v: "currency"}],
+	options: { sorting: "currency" }
+});
 
 /**
  * Sections that will appear on documnet sheets. They are arrays of objects grouped by document type.
@@ -91,12 +100,7 @@ export const sheetSections = {
 			create: [{type: "sundry"}],
 			options: { autoHide: true }
 		},
-		{
-			id: "currency",
-			tab: "currency",
-			label: "BF.Item.Type.Currency[one]",
-			filters: [{k: "type", v: "currency"}]
-		},
+		currencySection(),
 		{
 			id: "class-features",
 			tab: "features",
@@ -180,12 +184,7 @@ export const sheetSections = {
 			create: [{type: "sundry"}],
 			options: {autoHide: true}
 		},
-		{
-			id: "currency",
-			tab: "currency",
-			label: "BF.Item.Type.Currency[one]",
-			filters: [{k: "type", v: "currency"}]
-		}
+		currencySection()
 	],
 	container: [
 		{
@@ -194,11 +193,6 @@ export const sheetSections = {
 			label: "BF.Sheet.Tab.Contents",
 			filters: [{o: "NOT", v: {k: "type", value: "currency"}}]
 		},
-		{
-			id: "currency",
-			tab: "currency",
-			label: "BF.Item.Type.Currency[one]",
-			filters: [{k: "type", v: "currency"}]
-		}
+		currencySection()
 	]
 };

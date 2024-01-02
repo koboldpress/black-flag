@@ -99,8 +99,13 @@ export default class SortingElement extends AppAssociatedElement {
 	 */
 	static sort(items, sortingMode) {
 		switch ( sortingMode ) {
-			case "alpha": return items.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
-			default: return items.sort((lhs, rhs) => lhs.sort - rhs.sort);
+			case "alpha":
+				return items.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+			case "currency":
+				const conv = i => CONFIG.BlackFlag.currencies[i.identifier]?.conversion ?? 1;
+				return items.sort((lhs, rhs) => conv(rhs) - conv(lhs));
+			default:
+				return items.sort((lhs, rhs) => lhs.sort - rhs.sort);
 		}
 	}
 }
