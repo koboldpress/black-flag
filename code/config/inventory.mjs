@@ -36,6 +36,7 @@ const currencySection = () => ({
  */
 export const sheetSections = {
 	pc: [
+		currencySection(),
 		{
 			id: "ring-*",
 			tab: "spellcasting",
@@ -100,7 +101,6 @@ export const sheetSections = {
 			create: [{type: "sundry"}],
 			options: { autoHide: true }
 		},
-		currencySection(),
 		{
 			id: "class-features",
 			tab: "features",
@@ -162,6 +162,7 @@ export const sheetSections = {
 		}
 	],
 	npc: [
+		currencySection(),
 		{
 			id: "features",
 			tab: "features",
@@ -183,16 +184,15 @@ export const sheetSections = {
 			filters: [{k: "type", v: "sundry"}],
 			create: [{type: "sundry"}],
 			options: {autoHide: true}
-		},
-		currencySection()
+		}
 	],
 	container: [
+		currencySection(),
 		{
 			id: "contents",
 			tab: "inventory",
 			label: "BF.Sheet.Tab.Contents",
-			filters: [{o: "NOT", v: {k: "type", value: "currency"}}]
-		},
-		currencySection()
+			filters: []
+		}
 	]
 };

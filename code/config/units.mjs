@@ -7,33 +7,39 @@ import { localizeConfig, sortObjectEntries } from "../utils/_module.mjs";
  * @property {string} label - Localizable name for the currency.
  * @property {string} abbreviation - Abbreviation of the unit.
  * @property {number} conversion - Multiplier used to convert between various units.
+ * @property {boolean} [default] - Standard currency that should be displayed in the add menu on character sheets.
  */
 
 /**
  * Currency denominations that can be used. Will be replaced upon registration load with registered currencies
- * if any exist.
- * @enum {UnitConfiguration}
+ * if any exist. User defined currencies only need to be added to this list if they need to be available in the
+ * "Add Currency" dialog on sheets, otherwise any currency item in a compendium is loaded.
+ * @enum {CurrencyConfiguration}
  */
 export const currencies = {
 	pp: {
 		label: "BF.Currency.Denomination.Platinum.Label",
 		abbreviation: "BF.Currency.Denomination.Platinum.Abbreviation",
-		conversion: 0.1
+		conversion: 0.1,
+		default: true
 	},
 	gp: {
 		label: "BF.Currency.Denomination.Gold.Label",
 		abbreviation: "BF.Currency.Denomination.Gold.Abbreviation",
-		conversion: 1
+		conversion: 1,
+		default: true
 	},
 	sp: {
 		label: "BF.Currency.Denomination.Silver.Label",
 		abbreviation: "BF.Currency.Denomination.Silver.Abbreviation",
-		conversion: 10
+		conversion: 10,
+		default: true
 	},
 	cp: {
 		label: "BF.Currency.Denomination.Copper.Label",
 		abbreviation: "BF.Currency.Denomination.Copper.Abbreviation",
-		conversion: 100
+		conversion: 100,
+		default: true
 	}
 };
 
@@ -45,11 +51,15 @@ export const currencies = {
 Hooks.once("blackFlag.registrationComplete", function() {
 	const currencies = CONFIG.BlackFlag.registration.list("currency") ?? {};
 	if ( foundry.utils.isEmpty(currencies) ) return;
-	Object.keys(CONFIG.BlackFlag.currencies).forEach(k => delete CONFIG.BlackFlag.currencies[k]);
-	for ( const [abbreviation, { name, cached }] of Object.entries(currencies) ) {
-		CONFIG.BlackFlag.currencies[abbreviation] = {
-			name, abbreviation, conversion: cached.system.conversion.value
-		};
+	for ( const [abbreviation, { name: label, cached }] of Object.entries(currencies) ) {
+		CONFIG.BlackFlag.currencies[abbreviation] = foundry.utils.mergeObject(
+			CONFIG.BlackFlag.currencies[abbreviation] ?? {}, {
+				label, abbreviation, conversion: cached.system.conversion.value, uuid: cached.uuid
+			}
+		);
+	}
+	for ( const [key, config] of Object.entries(CONFIG.BlackFlag.currencies) ) {
+		if ( !config.uuid ) delete CONFIG.BlackFlag.currencies[key];
 	}
 	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
 });

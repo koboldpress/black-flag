@@ -433,6 +433,22 @@ export default class InventoryElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Find an item inside the inventory.
+	 * @param {Function} query
+	 * @returns {BlackFlagItem|Promise<BlackFlagItem>}
+	 */
+	findItem(query) {
+		if ( this.document.type === "container" ) {
+			const contents = this.document.system.contents;
+			if ( contents instanceof Promise ) return contents.then(c => c.find(query));
+			else return contents.find(query);
+		}
+		return this.document.items.find(query);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Retrieve an item with the specified ID.
 	 * @param {string} id
 	 * @returns {BlackFlagItem|Promise<BlackFlagItem>}

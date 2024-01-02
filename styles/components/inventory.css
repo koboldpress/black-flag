@@ -130,3 +130,20 @@ blackFlag-inventory, blackFlag-currency {
 		}
 	}
 }
+
+.add-currency.locked-tooltip {
+	form {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 6px;
+	}
+	label {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: subgrid;
+		align-items: center;
+	}
+	input {
+		color: inherit;
+	}
+}
