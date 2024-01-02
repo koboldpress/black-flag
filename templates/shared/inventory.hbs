@@ -9,7 +9,6 @@
 					</blackFlag-sorting>
 				</th>
 			</tr>
-			{{!-- TODO: Currency --}}
 		</thead>
 		{{#each sections.inventory as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
@@ -50,6 +49,60 @@
 						<td class="enabled">
 							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
 						</td>
+						<td class="controls">
+							<div class="layout">
+								{{#if @root.editable}}
+									<a data-action="edit">
+										<i class="fa-solid fa-edit"></i>
+									</a>
+									<a data-action="delete">
+										<i class="fa-solid fa-trash"></i>
+									</a>
+								{{else}}
+									<a data-action="view">
+										<i class="fa-regular fa-eye"></i>
+									</a>
+								{{/if}}
+							</div>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		{{/each}}
+	</table>
+</blackFlag-inventory>
+
+<blackFlag-inventory tab="currency">
+	<table>
+		{{#each sections.currency as |section sectionId|}}
+			<tbody data-section="{{sectionId}}">
+				<tr>
+					<td class="name">{{localize section.label}}</td>
+					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
+					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
+					<td class="controls">
+						<div class="layout">
+							{{#if @root.editable}}
+								<a data-action="add">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+							{{/if}}
+						</div>
+					</td>
+				</tr>
+				{{#each section.items}}
+					<tr data-item-id="{{id}}">
+						<th class="name" scope="row">
+							<div class="layout">
+								<figure>
+									<img src="{{img}}">
+								</figure>
+								<span>{{name}}</span>
+								{{blackFlag-notificationBadge @root.document document=this}}
+							</div>
+						</th>
+						<td class="weight">{{system.weight.label}}</td>
+						<td class="quantity">{{blackFlag-number system.quantity}}</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.editable}}

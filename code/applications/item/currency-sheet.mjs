@@ -7,18 +7,8 @@ export default class CurrencySheet extends BaseItemSheet {
 			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
 			scrollY: ["[data-tab] > section"],
 			template: "systems/black-flag/templates/item/currency.hbs",
-			width: 600,
-			height: 500
+			width: 500,
+			height: 350
 		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	async getData(options) {
-		const context = await super.getData(options);
-
-		return context;
 	}
 }

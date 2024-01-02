@@ -92,6 +92,12 @@ export const sheetSections = {
 			options: { autoHide: true }
 		},
 		{
+			id: "currency",
+			tab: "currency",
+			label: "BF.Item.Type.Currency[one]",
+			filters: [{k: "type", v: "currency"}]
+		},
+		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Item.Feature.Category.Class[other]",
