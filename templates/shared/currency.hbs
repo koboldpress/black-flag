@@ -1,25 +1,11 @@
-<blackFlag-inventory tab="inventory">
+<blackFlag-inventory tab="currency">
 	<table>
-		<thead>
-			<tr class="filters">
-				<th>
-					<blackFlag-sorting>
-						<label>{{localize "BF.Sheet.Sorting.Mode.Alphabetic"}} <input type="radio" value="alpha"></label>
-						<label>{{localize "BF.Sheet.Sorting.Mode.Manual"}} <input type="radio" value=""></label>
-					</blackFlag-sorting>
-				</th>
-			</tr>
-		</thead>
-		{{#each sections.inventory as |section sectionId|}}
+		{{#each sections.currency as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
 				<tr>
 					<td class="name">{{localize section.label}}</td>
-					<th class="uses" scope="col">{{localize "BF.Uses.Short"}}</th>
 					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
 					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
-					<th class="cost" scope="col">{{localize "BF.Price.Label"}}</th>
-					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
-					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.editable}}
@@ -41,14 +27,8 @@
 								{{blackFlag-notificationBadge @root.document document=this}}
 							</div>
 						</th>
-						<td class="uses">{{system.uses.label}}</td>
 						<td class="weight">{{system.weight.label}}</td>
 						<td class="quantity">{{blackFlag-number system.quantity}}</td>
-						<td class="cost">{{system.price.label}}</td>
-						<td class="traits">{{system.traits}}</td>
-						<td class="enabled">
-							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
-						</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.editable}}

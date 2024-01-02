@@ -179,6 +179,12 @@ export const sheetSections = {
 			filters: [{k: "type", v: "sundry"}],
 			create: [{type: "sundry"}],
 			options: {autoHide: true}
+		},
+		{
+			id: "currency",
+			tab: "currency",
+			label: "BF.Item.Type.Currency[one]",
+			filters: [{k: "type", v: "currency"}]
 		}
 	],
 	container: [
@@ -186,7 +192,13 @@ export const sheetSections = {
 			id: "contents",
 			tab: "inventory",
 			label: "BF.Sheet.Tab.Contents",
-			filters: []
+			filters: [{o: "NOT", v: {k: "type", value: "currency"}}]
+		},
+		{
+			id: "currency",
+			tab: "currency",
+			label: "BF.Item.Type.Currency[one]",
+			filters: [{k: "type", v: "currency"}]
 		}
 	]
 };
