@@ -91,7 +91,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		Object.defineProperty(this.weight, "label", {
 			get() {
 				if ( !system.totalWeight ) return "—";
-				return numberFormat(system.totalWeight, { unit: this.units });
+				return numberFormat(system.totalWeight.toNearest(0.1), { unit: this.units });
 				// TODO: Reduce to units in currency system that result in the smallest value
 			},
 			configurable: true,

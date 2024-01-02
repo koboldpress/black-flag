@@ -1,4 +1,4 @@
-blackFlag-inventory {
+blackFlag-inventory, blackFlag-currency {
 	--inventory-image-size: 25px;
 	display: block;
 
@@ -26,6 +26,7 @@ blackFlag-inventory {
 				:is(td, th) {
 					position: relative;
 					padding-inline: 0.25rem;
+					font-size: var(--font-size-12);
 
 					> div.layout {
 						display: flex;
@@ -33,7 +34,7 @@ blackFlag-inventory {
 						gap: 0.5rem;
 					}
 				}
-				:is(td, th):not(:first-child):not(:last-child)::after {
+				:is(td, th):not(:first-child, :last-child)::after {
 					content: "";
 					position: absolute;
 					right: 0;
@@ -90,20 +91,42 @@ blackFlag-inventory {
 				}
 			}
 		}
+	}
 
-		.enabled {
-			max-width: max-content;
-			text-align: center;
-			input {
-				width: 12px;
-				height: 12px;
-			}
+	[data-action="adjustment"]:not(:hover) {
+		opacity: 50%;
+	}
+
+	.weight, .quantity, .cost, .enabled {
+		text-align: center;
+	}
+	.quantity {
+		width: 85px;
+		input {
+			border: none;
+			height: 1.65em;
 		}
-		.controls {
-			width: 1em;
-			.layout {
-				justify-content: center;
-			}
-		} 
+	}
+	.uses, .weight, .cost {
+		width: 60px;
+	}
+	.traits {
+		width: 14rem;
+		td:is(&) {
+			font-size: var(--font-size-11);
+		}
+	}
+	.enabled {
+		width: 20px;
+		input {
+			width: 12px;
+			height: 12px;
+		}
+	}
+	.controls {
+		width: 1em;
+		.layout {
+			justify-content: center;
+		}
 	}
 }

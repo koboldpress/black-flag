@@ -43,7 +43,22 @@
 						</th>
 						<td class="uses">{{system.uses.label}}</td>
 						<td class="weight">{{system.weight.label}}</td>
-						<td class="quantity">{{blackFlag-number system.quantity}}</td>
+						<td class="quantity">
+							<div class="layout">
+								{{#if @root.owner}}
+									<a data-action="adjustment" data-direction="decrease" data-property="system.quantity">
+										<i class="fas fa-minus"></i>
+									</a>
+								{{/if}}
+								<input type="text" data-property="system.quantity" value="{{system.quantity}}" placeholder="0"
+										 	inputmode="numeric" min="0">
+								{{#if @root.owner}}
+									<a data-action="adjustment" data-direction="increase" data-property="system.quantity">
+										<i class="fas fa-plus"></i>
+									</a>
+								{{/if}}
+							</div>
+						</td>
 						<td class="cost">{{system.price.label}}</td>
 						<td class="traits">{{system.traits}}</td>
 						<td class="enabled">

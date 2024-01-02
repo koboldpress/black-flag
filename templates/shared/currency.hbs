@@ -1,11 +1,11 @@
-<blackFlag-inventory tab="currency">
+<blackFlag-currency tab="currency">
 	<table>
 		{{#each sections.currency as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
 				<tr>
 					<td class="name">{{localize section.label}}</td>
-					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
 					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
+					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.editable}}
@@ -27,8 +27,23 @@
 								{{blackFlag-notificationBadge @root.document document=this}}
 							</div>
 						</th>
+						<td class="quantity">
+							<div class="layout">
+								{{#if @root.owner}}
+									<a data-action="adjustment" data-direction="decrease" data-property="system.quantity">
+										<i class="fas fa-minus"></i>
+									</a>
+								{{/if}}
+								<input type="text" data-property="system.quantity" value="{{system.quantity}}" placeholder="0"
+											 inputmode="numeric" min="0">
+								{{#if @root.owner}}
+									<a data-action="adjustment" data-direction="increase" data-property="system.quantity">
+										<i class="fas fa-plus"></i>
+									</a>
+								{{/if}}
+							</div>
+						</td>
 						<td class="weight">{{system.weight.label}}</td>
-						<td class="quantity">{{blackFlag-number system.quantity}}</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.editable}}
@@ -50,4 +65,4 @@
 			</tbody>
 		{{/each}}
 	</table>
-</blackFlag-inventory>
+</blackFlag-currency>

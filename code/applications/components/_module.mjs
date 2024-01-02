@@ -9,6 +9,7 @@ export {default as ActivitiesElement} from "./activities.mjs";
 export {default as AdvancementElement} from "./advancement.mjs";
 export {default as AppAssociatedElement} from "./app-associated-element.mjs";
 export {default as ConsumptionElement} from "./consumption.mjs";
+export {default as CurrencyElement} from "./currency.mjs";
 export {default as DamageListElement} from "./damage-list.mjs";
 export {default as EffectsElement} from "./effects.mjs";
 export {default as FilterElement} from "./filter.mjs";

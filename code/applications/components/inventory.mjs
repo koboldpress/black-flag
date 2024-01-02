@@ -23,7 +23,7 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		for ( const element of this.querySelectorAll("[data-item-id]") ) {
 			element.setAttribute("draggable", true);
-			element.ondragstart = this._onDragStart.bind(this);
+			element.addEventListener("dragstart", this._onDragStart.bind(this));
 		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
@@ -31,6 +31,14 @@ export default class InventoryElement extends AppAssociatedElement {
 				event.stopImmediatePropagation();
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			}, { signal });
+		}
+
+		for ( const input of this.querySelectorAll('input[type="number"]') ) {
+			input.addEventListener("change", this._onChangeInput.bind(this));
+		}
+
+		for ( const input of this.querySelectorAll('input[inputmode="numeric"]') ) {
+			input.addEventListener("change", this._onChangeInputDelta.bind(this));
 		}
 
 		const contextOptions = this._getContextMenuOptions();
@@ -123,6 +131,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	/**
 	 * Get the set of ContextMenu options which should be applied to inventory entries.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
+	 * @protected
 	 */
 	_getContextMenuOptions() {
 		return [
@@ -161,6 +170,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
 	 * @returns {Promise}
+	 * @protected
 	 */
 	async _onAction(target, action) {
 		const event = new CustomEvent("bf-inventory", {
@@ -177,6 +187,8 @@ export default class InventoryElement extends AppAssociatedElement {
 		switch ( action ) {
 			case "add":
 				return this._onAddItem(target);
+			case "adjustment":
+				return this._onAdjustment(item, target);
 			case "delete":
 				return item.deleteDialog();
 			case "duplicate":
@@ -192,6 +204,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	/**
 	 * Handle creating a new item within a certain section.
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
+	 * @protected
 	 */
 	async _onAddItem(target) {
 		// Fetch configuration information for this section
@@ -226,12 +239,81 @@ export default class InventoryElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle clicking one of the adjustment buttons.
+	 * @param {BlackFlagItem} item - Item that needs its data adjusted.
+	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
+	 * @protected
+	 */
+	async _onAdjustment(item, target) {
+		const { direction, property } = target.dataset;
+		const current = foundry.utils.getProperty(item, property) ?? 0;
+		item.update({ [property]: current + (direction === "increase" ? 1 : -1) });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle changing an input field directly in the inventory.
+	 * @param {Event} event - Triggering change event.
+	 * @returns {Promise}
+	 * @protected
+	 */
+	async _onChangeInput(event) {
+		const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
+		const item = await this.getItem(itemId);
+		if ( !item ) return;
+
+		event.stopImmediatePropagation();
+		const { property } = event.target.dataset;
+		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
+		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
+		const value = Math.clamped(event.target.valueAsNumber, min, max);
+		if ( Number.isNaN(value) ) return;
+
+		event.target.value = value;
+		item.update({ [property]: value });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
+	 * @param {Event} event - Triggering change event.
+	 * @protected
+	 */
+	async _onChangeInputDelta(event) {
+		const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
+		const item = await this.getItem(itemId);
+		if ( !item ) return;
+
+		event.stopImmediatePropagation();
+		const { property } = event.target.dataset;
+		let value = event.target.value.trim();
+		if ( ["+", "-"].includes(value[0]) ) {
+			const delta = parseFloat(value);
+			value = Number(foundry.utils.getProperty(item, property)) + delta;
+		} else if ( value[0] === "=" ) {
+			value = Number(value.slice(1));
+		}
+		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
+		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
+		value = Math.clamped(value, min, max);
+		if ( Number.isNaN(value) ) return;
+
+		event.target.value = value;
+		item.update({ [property]: value });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Drag & Drop            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Begin dragging an entry.
 	 * @param {DragEvent} event - Triggering drag event.
+	 * @protected
 	 */
 	async _onDragStart(event) {
 		const itemId = event.currentTarget.dataset.itemId;
@@ -245,6 +327,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * An entry is dropped onto the element.
 	 * @param {DragEvent} event - Triggering drop event.
 	 * @returns {Promise}
+	 * @protected
 	 */
 	async _onDrop(event) {
 		event.preventDefault();
@@ -302,6 +385,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @param {DragEvent} event - Triggering drag event.
 	 * @param {BlackFlagItem} item - Item being dragged.
 	 * @returns {Promise}
+	 * @protected
 	 */
 	async _onSort(event, item) {
 		const dropTarget = event.target.closest("[data-item-id]");
@@ -337,6 +421,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * Can the dragged document be dropped?
 	 * @param {object} data
 	 * @returns {boolean}
+	 * @protected
 	 */
 	_validateDrop(data) {
 		if ( (data.type !== "Item") ) return false;
