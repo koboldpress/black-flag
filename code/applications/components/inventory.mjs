@@ -371,11 +371,47 @@ export default class InventoryElement extends AppAssociatedElement {
 		// TODO: Perform consumable stacking
 
 		// Create an item
-		const options = {};
+		const options = { transformFirst: item => this._transformDroppedItem(event, item) };
 		if ( isContainer ) options.container = this.document;
 		const toCreate = await BlackFlagItem.createWithContents([item], options);
 		if ( isContainer && this.document.folder ) toCreate.forEach(d => d.folder = this.document.folder);
 		return BlackFlagItem.createDocuments(toCreate, {pack: this.document.pack, parent: this.actor, keepId: true});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle any extra parsing or cleanup actions for items dropped on the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagItem|object} itemData - Data for the item being dropped.
+	 * @returns {Promise<object|false>} - Parsed data or `false` to prevent this item from being created.
+	 * @protected
+	 */
+	async _transformDroppedItem(event, itemData) {
+		if ( itemData instanceof Item ) itemData = itemData.toObject();
+
+		// TODO: Ensure no items not allowed on this actor type are dropped
+
+		// TODO: Convert spells to spell scrolls if dropped on the inventory tab
+
+		// TODO: Determine proper spell mode for spells dropped directly into spellcasting section
+
+		// TODO: Stack identical consumables
+
+		// Stack identical currencies
+		if ( itemData.type === "currency" ) {
+			const existingItem = await this.findItem(i =>
+				(i.type === "currency") && (i.identifier === itemData.system.identifier.value)
+			);
+			if ( existingItem ) {
+				await existingItem.update({
+					"system.quantity": existingItem.system.quantity + Math.max(1, itemData.system.quantity)
+				});
+				return false;
+			}
+		}
+
+		return itemData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

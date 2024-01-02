@@ -37,7 +37,7 @@ export default class CurrencyElement extends InventoryElement {
 		for ( let [key, delta] of formData.entries() ) {
 			delta = Number(delta);
 			if ( !delta || !Number.isFinite(delta) ) continue;
-			const existingItem = await this.findItem(i => i.identifier === key);
+			const existingItem = await this.findItem(i => (i.type === "currency") && (i.identifier === key));
 
 			// Update the existing currency item in this inventory
 			if ( existingItem ) {
