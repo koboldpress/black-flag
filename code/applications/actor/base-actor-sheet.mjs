@@ -79,7 +79,6 @@ export default class BaseActorSheet extends ActorSheet {
 		context.effects = EffectsElement.prepareContext(this.document.allApplicableEffects(), { displaySource: true });
 
 		await this.prepareActions(context);
-		await this.prepareConditions(context);
 		await this.prepareItems(context);
 		await this.prepareTraits(context);
 
@@ -121,46 +120,6 @@ export default class BaseActorSheet extends ActorSheet {
 			if ( !value.activities.length ) delete context.actions[key];
 		}
 		// TODO: Figure out how these should be sorted
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare conditions for display.
-	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
-	 */
-	async prepareConditions(context) {
-		context.conditions = {};
-		if ( this.modes.conditionAdd ) {
-			for ( const effect of CONFIG.statusEffects ) {
-				const document = CONFIG.BlackFlag.registration.get("condition", effect.id)?.cached;
-				if ( context.system.conditions[effect.id] || !document ) continue;
-				context.conditions[effect.id] = {
-					label: effect.name,
-					levels: null,
-					document,
-					value: 0
-				};
-			}
-		} else {
-			for ( const [id, value] of Object.entries(context.system.conditions) ) {
-				const document = CONFIG.BlackFlag.registration.get("condition", id)?.cached;
-				if ( !document ) continue;
-				const levels = document.system.levels.length || 1;
-				context.conditions[id] = {
-					label: document.name,
-					levels: Array.fromRange(levels).map(idx => ({
-						number: numberFormat(idx + 1),
-						selected: value > idx,
-						description: document.system.levels[idx]?.effect?.description
-							|| (levels === 1 ? document.system.description.value : "") // TODO: Enrich this!
-					})),
-					document,
-					value
-				};
-			}
-		}
-		context.conditions = sortObjectEntries(context.conditions, { sortKey: "label" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

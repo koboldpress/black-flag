@@ -7,7 +7,7 @@ import MappingField from "../fields/mapping-field.mjs";
 import ProficiencyField from "../fields/proficiency-field.mjs";
 import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, TimeField } from "../fields/_module.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
-import ExhaustionTemplate from "./templates/exhaustion-template.mjs";
+import ConditionsTemplate from "./templates/conditions-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -15,7 +15,7 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class PCData extends ActorDataModel.mixin(
-	ACTemplate, ExhaustionTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
@@ -214,18 +214,6 @@ export default class PCData extends ActorDataModel.mixin(
 			});
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareEmbeddedConditions() {
-		this.conditions = {};
-		for ( const effect of this.parent.effects ) {
-			const identifier = effect.statuses.first();
-			const level = foundry.utils.getProperty(effect, "flags.black-flag.condition.level");
-			if ( !identifier ) continue;
-			this.conditions[identifier] = Math.max(this.conditions[identifier] ?? 0, level ?? 1);
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -5,14 +5,14 @@ import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 import ProficiencyField from "../fields/proficiency-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
-import ExhaustionTemplate from "./templates/exhaustion-template.mjs";
+import ConditionsTemplate from "./templates/conditions-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class NPCData extends ActorDataModel.mixin(
-	ACTemplate, ExhaustionTemplate, ModifiersTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, ModifiersTemplate, TraitsTemplate
 ) {
 
 	static metadata = {

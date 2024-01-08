@@ -352,23 +352,71 @@
 "BF.ConceptSelection.Warning.Duplicate": "A {type} already exists on the actor {name}.",
 "BF.ConceptSelection.Warning.InvalidType": "Documents of the type {type} cannot be set using the setConcept method.",
 
-"BF.Condition.Blinded.Label": "Blinded",
-"BF.Condition.Charmed.Label": "Charmed",
-"BF.Condition.Deafened.Label": "Deafened",
-"BF.Condition.Exhaustion.Label": "Exhaustion",
-"BF.Condition.Exhaustion.Numbered": "Exhaustion {level}",
-"BF.Condition.Frightened.Label": "Frightened",
-"BF.Condition.Grappled.Label": "Grappled",
-"BF.Condition.Incapacitated.Label": "Incapacitated",
-"BF.Condition.Invisible.Label": "Invisible",
-"BF.Condition.Paralyzed.Label": "Paralyzed",
-"BF.Condition.Petrified.Label": "Petrified",
-"BF.Condition.Poisoned.Label": "Poisoned",
-"BF.Condition.Prone.Label": "Prone",
-"BF.Condition.Restrained.Label": "Restrained",
-"BF.Condition.Stunned.Label": "Stunned",
-"BF.Condition.Surprised.Label": "Surprised",
-"BF.Condition.Unconscious.Label": "Unconscious",
+"BF.Condition": {
+	"Blinded": {
+		"Label": "Blinded",
+		"NoteAbilityChecks": "A blinded creature automatically fails any ability check that requires sight.",
+		"NoteAttackRolls": "A blinded creature's attack rolls have disadvantage."
+	},
+	"Charmed": {
+		"Label": "Charmed"
+	},
+	"Deafened": {
+		"Label": "Deafened",
+		"Note": "A deafened creature automatically fails any ability check that requires hearing."
+	},
+	"Exhaustion": {
+		"Label": "Exhaustion",
+		"Numbered": "Exhaustion {level}",
+		"NoteAbilityChecks": "A creature with one level of exhaustion has disadvantage on ability checks.",
+		"NoteAttackRollsSaves": "A creature with three levels of exhaustion has disadvantage on attack rolls and saves."
+	},
+	"Frightened": {
+		"Label": "Frightened",
+		"Note": "A frightened creature has disadvantage on ability checks and atttack rolls while the source of its fear is within line of sight."
+	},
+	"Grappled": {
+		"Label": "Grappled"
+	},
+	"Incapacitated": {
+		"Label": "Incapacitated"
+	},
+	"Invisible": {
+		"Label": "Invisible",
+		"Note": "An invisible creature has advantage on DEX (Stealth) checks made to Hide."
+	},
+	"Paralyzed": {
+		"Label": "Paralyzed",
+		"Note": "A paralyzed creature automatically fails STR and DEX saves."
+	},
+	"Petrified": {
+		"Label": "Petrified",
+		"Note": "A petrified creature automatically fails STR and DEX saves."
+	},
+	"Poisoned": {
+		"Label": "Poisoned",
+		"Note": "A poisoned creature has disadvantage on attack rolls and ability checks."
+	},
+	"Prone": {
+		"Label": "Prone",
+		"Note": "A prone creature has disadvantage on attack rolls."
+	},
+	"Restrained": {
+		"Label": "Restrained",
+		"Note": "A restrained creature has disadvantage on DEX saves and attack rolls."
+	},
+	"Stunned": {
+		"Label": "Stunned",
+		"Note": "A stunned creature automatically fails STR and DEX saves."
+	},
+	"Surprised": {
+		"Label": "Surprised"
+	},
+	"Unconscious": {
+		"Label": "Unconscious",
+		"Note": "An unconscious creature automatically fails STR and DEX saves."
+	}
+},
 
 "BF.Configuration.Title": "{type} Configuration",
 

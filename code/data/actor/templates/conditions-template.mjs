@@ -3,9 +3,9 @@ import BlackFlagActiveEffect from "../../../documents/active-effect.mjs";
 const { NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * Data definition template for exhaustion.
+ * Data definition template for exhaustion & other conditions.
  */
-export default class ExhaustionTemplate extends foundry.abstract.DataModel {
+export default class ConditionsTemplate extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
@@ -25,6 +25,21 @@ export default class ExhaustionTemplate extends foundry.abstract.DataModel {
 		const exhaustion = this.parent.effects.get(BlackFlagActiveEffect.EXHAUSTION);
 		const level = exhaustion?.getFlag("black-flag", "level");
 		this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedConditionRollNotes() {
+		for ( const status of this.parent.statuses ) {
+			const notes = CONFIG.BlackFlag.statusEffectRollNotes[status];
+			if ( !notes?.length ) continue;
+			for ( const note of notes ) {
+				if ( (status === "exhaustion") && note.level && (note.level > this.attributes.exhaustion) ) continue;
+				this.modifiers.push({
+					type: "note", filter: note.filter, note: { rollMode: note.rollMode ?? 0, text: game.i18n.localize(note.text) }
+				});
+			}
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
