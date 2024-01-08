@@ -87,6 +87,13 @@ export const sheetSections = {
 			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
 		},
 		{
+			id: "tools",
+			tab: "inventory",
+			label: "BF.Item.Type.Tool[other]",
+			filters: [{k: "type", v: "tool"}],
+			create: [{type: "tool"}]
+		},
+		{
 			id: "containers",
 			tab: "inventory",
 			label: "BF.Item.Type.Container[other]",

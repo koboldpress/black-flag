@@ -338,122 +338,15 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		const { data } = DragDrop.getDragData(event);
 		if ( !this._validateDrop(data) ) return false;
+		// TODO: Add support for dropping folders
 
 		try {
 			const item = await Item.implementation.fromDropData(data);
 			if ( !item ) return false;
-			const isContainer = this.document.type === "container";
-
-			if ( isContainer ) {
-				const parentContainers = await this.document.system.allContainers();
-				if ( (this.document.uuid === item.uuid) || parentContainers.includes(item) ) {
-					ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
-					return;
-				}
-			}
-
-			// Document already exists in this collection, just perform sorting
-			// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
-			if ( (this.actor?.uuid === item.parent?.uuid) && (this.document.pack === item.pack) ) {
-				// If this inventory is on an actor, clear the container if set
-				if ( (this.document instanceof Actor) && (item.system.container !== null) ) {
-					await item.update({"system.container": null});
-				}
-
-				// If this inventory is on an container, set it to this
-				else if ( (this.document instanceof Item) && (item.system.container !== this.document.id) ) {
-					await item.update({"system.container": this.document.id});
-				}
-
-				// Then perform a sort
-				return this._onSort(event, item);
-			}
-
-			// TODO: Ensure created items can be created in this context
-			// TODO: Perform consumable stacking
-
-			// Create an item
-			const options = { transformFirst: item => this._transformDroppedItem(event, item) };
-			if ( isContainer ) options.container = this.document;
-			const toCreate = await BlackFlagItem.createWithContents([item], options);
-			if ( isContainer && this.document.folder ) toCreate.forEach(d => d.folder = this.document.folder);
-			return BlackFlagItem.createDocuments(toCreate, {pack: this.document.pack, parent: this.actor, keepId: true});
+			return this.constructor.dropItems(event, this.document, [item]);
 		} finally {
 			DragDrop.finishDragEvent(event);
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Handle any extra parsing or cleanup actions for items dropped on the sheet.
-	 * @param {DragEvent} event - Triggering drop event.
-	 * @param {BlackFlagItem|object} itemData - Data for the item being dropped.
-	 * @returns {Promise<object|false>} - Parsed data or `false` to prevent this item from being created.
-	 * @protected
-	 */
-	async _transformDroppedItem(event, itemData) {
-		if ( itemData instanceof Item ) itemData = itemData.toObject();
-
-		// TODO: Ensure no items not allowed on this actor type are dropped
-
-		// TODO: Convert spells to spell scrolls if dropped on the inventory tab
-
-		// TODO: Determine proper spell mode for spells dropped directly into spellcasting section
-
-		// TODO: Stack identical consumables
-
-		// Stack identical currencies
-		if ( itemData.type === "currency" ) {
-			const existingItem = await this.findItem(i =>
-				(i.type === "currency") && (i.identifier === itemData.system.identifier.value)
-			);
-			if ( existingItem ) {
-				await existingItem.update({
-					"system.quantity": existingItem.system.quantity + Math.max(1, itemData.system.quantity)
-				});
-				return false;
-			}
-		}
-
-		return itemData;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Sort a dropped item based on where it was dropped.
-	 * @param {DragEvent} event - Triggering drag event.
-	 * @param {BlackFlagItem} item - Item being dragged.
-	 * @returns {Promise}
-	 * @protected
-	 */
-	async _onSort(event, item) {
-		const dropTarget = event.target.closest("[data-item-id]");
-		if ( !dropTarget ) return;
-		const target = await this.getItem(dropTarget.dataset.itemId);
-
-		// Don't sort on yourself
-		if ( item.id === target.id ) return;
-
-		// Identify sibling items based on adjacent HTML elements
-		const siblings = [];
-		for ( const el of dropTarget.parentElement.children ) {
-			const siblingId = el.dataset.itemId;
-			if ( siblingId && (siblingId !== item.id) ) siblings.push(await this.getItem(siblingId));
-		}
-
-		// Perform the sort
-		const sortUpdates = SortingHelpers.performIntegerSort(item, {target, siblings});
-		const updateData = sortUpdates.map(u => {
-			const update = u.update;
-			update._id = u.target.id;
-			return update;
-		});
-
-		// Perform the update
-		// TODO: Test what happens if you only have permission to some of these objects, perhaps no sorting in sidebar?
-		Item.updateDocuments(updateData, {pack: this.document.pack, parent: this.actor});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -467,6 +360,145 @@ export default class InventoryElement extends AppAssociatedElement {
 	_validateDrop(data) {
 		if ( (data.type !== "Item") ) return false;
 		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle an item dropped onto the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagActor|BlackFlagItem} target - Document to which the items were dropped.
+	 * @param {BlackFlagItem|BlackFlagItem[]} itemData - One or more items dropped.
+	 * @returns {Promise}
+	 */
+	static async dropItems(event, target, itemData) {
+		const isContainer = target.type === "container";
+		const actor = isContainer ? target.parent : target;
+		const item = itemData[0];
+		// TODO: Add support for multiple items
+
+		if ( isContainer ) {
+			const parentContainers = await target.system.allContainers();
+			if ( (target.uuid === item.uuid) || parentContainers.includes(item) ) {
+				ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
+				return;
+			}
+		}
+
+		// Document already exists in this collection, just perform sorting
+		// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
+		if ( (actor?.uuid === item.parent?.uuid) && (target.pack === item.pack) ) {
+			// If this inventory is on an actor, clear the container if set
+			if ( !isContainer && (item.system.container !== null) ) {
+				await item.update({"system.container": null});
+			}
+
+			// If this inventory is on an container, set it to this
+			else if ( isContainer && (item.system.container !== target.id) ) {
+				await item.update({"system.container": target.id});
+			}
+
+			// Then perform a sort
+			return this._sortItems(event, target, [item]);
+		}
+
+		// TODO: Ensure created items can be created in this context
+		// TODO: Perform consumable stacking
+
+		// Create an item
+		const options = { transformFirst: item => this._transformDroppedItem(event, target, item) };
+		if ( isContainer ) options.container = target;
+		const toCreate = await BlackFlagItem.createWithContents([item], options);
+		if ( isContainer && target.folder ) toCreate.forEach(d => d.folder = target.folder);
+		return BlackFlagItem.createDocuments(toCreate, {pack: target.pack, parent: actor, keepId: true});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Sort a dropped item based on where it was dropped.
+	 * @param {DragEvent} event - Triggering drag event.
+	 * @param {BlackFlagActor|BlackFlagItem} target - Document to which the items were dropped.
+	 * @param {BlackFlagItem|object} itemData - Data for the item being dropped.
+	 * @returns {Promise}
+	 * @protected
+	 */
+	static async _sortItems(event, target, itemData) {
+		const dropTarget = event.target.closest("[data-item-id]");
+		if ( !dropTarget ) return;
+		const item = itemData[0];
+		// TODO: Add support for multiple items
+
+		const getItem = async id => {
+			if ( target instanceof Actor ) return target.items.get(id);
+			else return (await target.system.contents).get(id);
+		};
+
+		const sortTarget = await getItem(dropTarget.dataset.itemId);
+
+		// Don't sort on yourself
+		if ( item.id === sortTarget.id ) return;
+
+		// Identify sibling items based on adjacent HTML elements
+		const siblings = [];
+		for ( const el of dropTarget.parentElement.children ) {
+			const siblingId = el.dataset.itemId;
+			if ( siblingId && (siblingId !== item.id) ) siblings.push(await getItem(siblingId));
+		}
+
+		// Perform the sort
+		const sortUpdates = SortingHelpers.performIntegerSort(item, {target: sortTarget, siblings});
+		const updateData = sortUpdates.map(u => {
+			const update = u.update;
+			update._id = u.target.id;
+			return update;
+		});
+
+		// Perform the update
+		// TODO: Test what happens if you only have permission to some of these objects, perhaps no sorting in sidebar?
+		Item.updateDocuments(updateData, {pack: target.pack, parent: target.type === "container" ? target.actor : target});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle any extra parsing or cleanup actions for items dropped on the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagActor|BlackFlagItem} target - Document to which the items were dropped.
+	 * @param {BlackFlagItem|object} itemData - Data for the item being dropped.
+	 * @returns {Promise<object|false>} - Parsed data or `false` to prevent this item from being created.
+	 * @protected
+	 */
+	static async _transformDroppedItem(event, target, itemData) {
+		if ( itemData instanceof Item ) itemData = itemData.toObject();
+
+		const findItem = async query => {
+			if ( target instanceof Actor ) return target.items.find(query);
+			else return (await target.system.contents).find(query);
+		};
+
+		// TODO: Ensure no items not allowed on this actor type are dropped
+
+		// TODO: Convert spells to spell scrolls if dropped on the inventory tab
+
+		// TODO: Determine proper spell mode for spells dropped directly into spellcasting section
+
+		// TODO: Stack identical consumables
+
+		// Stack identical currencies
+		if ( itemData.type === "currency" ) {
+			const existingItem = await findItem(i =>
+				(i.type === "currency") && (i.identifier === itemData.system.identifier.value)
+			);
+			if ( existingItem ) {
+				await existingItem.update({
+					"system.quantity": existingItem.system.quantity + Math.max(1, itemData.system.quantity)
+				});
+				return false;
+			}
+		}
+
+		return itemData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

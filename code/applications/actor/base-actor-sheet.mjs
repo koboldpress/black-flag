@@ -1,7 +1,8 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import { log, numberFormat, sortObjectEntries } from "../../utils/_module.mjs";
+import { log } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
+import DragDrop from "../drag-drop.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -290,5 +291,23 @@ export default class BaseActorSheet extends ActorSheet {
 
 		await super._updateObject(event, foundry.utils.flattenObject(updates));
 		await this.actor.updateEmbeddedDocuments("Item", itemUpdates);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onDrop(event) {
+		const { data } = DragDrop.getDragData(event);
+
+		// Forward dropped items to the inventory element
+		// TODO: Handle folders
+		if ( data.type === "Item" ) {
+			if ( Hooks.call("dropActorSheetData", this.actor, this, data) === false ) return;
+			InventoryElement.dropItems(event, this.actor, [await Item.implementation.fromDropData(data)]);
+			return;
+		}
+
+		super._onDrop(event);
 	}
 }

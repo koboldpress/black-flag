@@ -43,8 +43,9 @@ export default class DragDrop {
 	 * @returns {{data: *, document: Document}}
 	 */
 	static getDragData(event) {
-		if ( this.#currentDrag ) return { data: this.#currentDrag.data, document: this.#currentDrag.document };
 		const data = TextEditor.getDragEventData(event);
-		return foundry.utils.isEmpty(data) ? {} : { data };
+		if ( !foundry.utils.isEmpty(data) ) return { data };
+		if ( this.#currentDrag?.data ) return { data: this.#currentDrag.data, document: this.#currentDrag.document };
+		return {};
 	}
 }
