@@ -1,6 +1,7 @@
 import BlackFlagItem from "../../documents/item.mjs";
 import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagDialog from "../dialog.mjs";
+import DragDrop from "../drag-drop.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
 import SortingElement from "./sorting.mjs";
@@ -318,7 +319,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onDragStart(event) {
 		const itemId = event.currentTarget.dataset.itemId;
 		const item = await this.getItem(itemId);
-		if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+		if ( item ) DragDrop.beginDragEvent(event, item);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -335,47 +336,51 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		if ( !this.isEditable ) return false;
 
-		const data = TextEditor.getDragEventData(event);
+		const { data } = DragDrop.getDragData(event);
 		if ( !this._validateDrop(data) ) return false;
 
-		const item = await Item.implementation.fromDropData(data);
-		if ( !item ) return false;
-		const isContainer = this.document.type === "container";
+		try {
+			const item = await Item.implementation.fromDropData(data);
+			if ( !item ) return false;
+			const isContainer = this.document.type === "container";
 
-		if ( isContainer ) {
-			const parentContainers = await this.document.system.allContainers();
-			if ( (this.document.uuid === item.uuid) || parentContainers.includes(item) ) {
-				ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
-				return;
+			if ( isContainer ) {
+				const parentContainers = await this.document.system.allContainers();
+				if ( (this.document.uuid === item.uuid) || parentContainers.includes(item) ) {
+					ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
+					return;
+				}
 			}
+
+			// Document already exists in this collection, just perform sorting
+			// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
+			if ( (this.actor?.uuid === item.parent?.uuid) && (this.document.pack === item.pack) ) {
+				// If this inventory is on an actor, clear the container if set
+				if ( (this.document instanceof Actor) && (item.system.container !== null) ) {
+					await item.update({"system.container": null});
+				}
+
+				// If this inventory is on an container, set it to this
+				else if ( (this.document instanceof Item) && (item.system.container !== this.document.id) ) {
+					await item.update({"system.container": this.document.id});
+				}
+
+				// Then perform a sort
+				return this._onSort(event, item);
+			}
+
+			// TODO: Ensure created items can be created in this context
+			// TODO: Perform consumable stacking
+
+			// Create an item
+			const options = { transformFirst: item => this._transformDroppedItem(event, item) };
+			if ( isContainer ) options.container = this.document;
+			const toCreate = await BlackFlagItem.createWithContents([item], options);
+			if ( isContainer && this.document.folder ) toCreate.forEach(d => d.folder = this.document.folder);
+			return BlackFlagItem.createDocuments(toCreate, {pack: this.document.pack, parent: this.actor, keepId: true});
+		} finally {
+			DragDrop.finishDragEvent(event);
 		}
-
-		// Document already exists in this collection, just perform sorting
-		// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
-		if ( (this.actor?.uuid === item.parent?.uuid) && (this.document.pack === item.pack) ) {
-			// If this inventory is on an actor, clear the container if set
-			if ( (this.document instanceof Actor) && (item.system.container !== null) ) {
-				await item.update({"system.container": null});
-			}
-
-			// If this inventory is on an container, set it to this
-			else if ( (this.document instanceof Item) && (item.system.container !== this.document.id) ) {
-				await item.update({"system.container": this.document.id});
-			}
-
-			// Then perform a sort
-			return this._onSort(event, item);
-		}
-
-		// TODO: Ensure created items can be created in this context
-		// TODO: Perform consumable stacking
-
-		// Create an item
-		const options = { transformFirst: item => this._transformDroppedItem(event, item) };
-		if ( isContainer ) options.container = this.document;
-		const toCreate = await BlackFlagItem.createWithContents([item], options);
-		if ( isContainer && this.document.folder ) toCreate.forEach(d => d.folder = this.document.folder);
-		return BlackFlagItem.createDocuments(toCreate, {pack: this.document.pack, parent: this.actor, keepId: true});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

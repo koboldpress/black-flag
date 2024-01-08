@@ -1,4 +1,5 @@
 import ActivitySelection from "../activity/activity-selection.mjs";
+import DragDrop from "../drag-drop.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
@@ -17,15 +18,15 @@ export default class ActivitiesElement extends AppAssociatedElement {
 		super.connectedCallback();
 		const { signal } = this.#controller;
 
-		this.addEventListener("dragenter", this.#onDragEnter.bind(this), { signal });
-		this.addEventListener("dragover", this.#onDragOver.bind(this), { signal });
-		this.addEventListener("dragleave", this.#onDragLeave.bind(this), { signal });
-		this.addEventListener("drop", this.#onDrop.bind(this), { signal });
+		this.addEventListener("dragenter", this._onDragEnter.bind(this), { signal });
+		this.addEventListener("dragover", this._onDragOver.bind(this), { signal });
+		this.addEventListener("dragleave", this._onDragLeave.bind(this), { signal });
+		this.addEventListener("drop", this._onDrop.bind(this), { signal });
 
 		for ( const element of this.querySelectorAll("[data-activity-id]") ) {
 			element.setAttribute("draggable", true);
-			element.ondragstart = this.#onDragStart.bind(this);
-			element.ondragend = this.#onDragEnd.bind(this);
+			element.ondragstart = this._onDragStart.bind(this);
+			element.ondragend = this._onDragEnd.bind(this);
 		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
@@ -163,10 +164,10 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * Begin dragging an entry.
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
-	#onDragStart(event) {
+	_onDragStart(event) {
 		const activityId = event.currentTarget.dataset.activityId;
 		const activity = this.activities.get(activityId);
-		event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+		DragDrop.beginDragEvent(event, activity);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -175,7 +176,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * Stop dragging an entry.
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
-	#onDragEnd(event) {
+	_onDragEnd(event) {
 		delete this.dataset.dropStatus;
 	}
 
@@ -185,10 +186,10 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * An entry drags into the element.
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
-	#onDragEnter(event) {
-		const data = TextEditor.getDragEventData(event);
+	_onDragEnter(event) {
+		const { data } = DragDrop.getDragData(event);
 		if ( !data ) this.dataset.dropStatus = "unknown";
-		else this.dataset.dropStatus = this.#validateDrop(data) ? "valid" : "invalid";
+		else this.dataset.dropStatus = this._validateDrop(data) ? "valid" : "invalid";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -197,7 +198,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * An entry drags over the element.
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
-	#onDragOver(event) {
+	_onDragOver(event) {
 		event.preventDefault();
 		this.#rect = this.getBoundingClientRect();
 	}
@@ -208,7 +209,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * An entry being dragged over leaves the element.
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
-	#onDragLeave(event) {
+	_onDragLeave(event) {
 		if ( event.clientY <= this.#rect.top || event.clientY >= this.#rect.bottom
 			|| event.clientX <= this.#rect.left || event.clientX >= this.#rect.right ) {
 			delete this.dataset.dropStatus;
@@ -223,15 +224,19 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @param {DragEvent} event - Triggering drop event.
 	 * @returns {Promise}
 	 */
-	async #onDrop(event) {
-		const data = TextEditor.getDragEventData(event);
-		if ( !this.#validateDrop(data) ) return false;
+	async _onDrop(event) {
+		const { data } = DragDrop.getDragData(event);
+		if ( !this._validateDrop(data) ) return false;
 
-		const activity = (await fromUuid(data.uuid)).toObject() ?? activity.data;
-		if ( !activity ) return false;
+		try {
+			const activity = (await fromUuid(data.uuid)).toObject() ?? activity.data;
+			if ( !activity ) return false;
 
-		delete activity._id;
-		this.item.createEmbeddedDocuments("Activity", [activity]);
+			delete activity._id;
+			this.item.createEmbeddedDocuments("Activity", [activity]);
+		} finally {
+			DragDrop.finishDragEvent(event);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -241,7 +246,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @param {object} data
 	 * @returns {boolean}
 	 */
-	#validateDrop(data) {
+	_validateDrop(data) {
 		if ( (data.type !== "Activity") ) return false;
 		if ( !data.uuid ) return true;
 		return !data.uuid.startsWith(this.item.uuid);
