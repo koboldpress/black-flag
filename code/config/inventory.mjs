@@ -94,6 +94,13 @@ export const sheetSections = {
 			create: [{type: "tool"}]
 		},
 		{
+			id: "consumables",
+			tab: "inventory",
+			label: "BF.Item.Type.Consumable[other]",
+			filters: [{k: "type", v: "consumable"}],
+			create: [{type: "consumable"}] // TODO: Add option to create sub-types directly
+		},
+		{
 			id: "containers",
 			tab: "inventory",
 			label: "BF.Item.Type.Container[other]",

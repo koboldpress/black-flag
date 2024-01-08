@@ -23,7 +23,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	 * @type {boolean}
 	 */
 	get displayActions() {
-		return this.parent.flags["black-flag"]?.relationship?.enabled === true;
+		return (this.parent.flags["black-flag"]?.relationship?.enabled === true) && (this.quantity !== 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
