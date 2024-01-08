@@ -1,4 +1,5 @@
 import ContainerSheet from "../../applications/item/container-sheet.mjs";
+import { convertWeight } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
@@ -50,9 +51,6 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate,
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	// TODO: Temp patch until currency is properly added
-	get currencyWeight() { return 0; }
 
 	/**
 	 * Get all of the items contained in this container. A promise if item is within a compendium.
@@ -141,7 +139,9 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate,
 	 */
 	get contentsWeight() {
 		if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
-		return this.contents.reduce((weight, item) => weight + item.system.totalWeight, this.currencyWeight);
+		return this.contents.reduce((weight, item) =>
+			weight + convertWeight(item.system.totalWeight, item.system.weight.units, this.weight.units)
+		, 0);
 	}
 
 	/**
@@ -150,7 +150,9 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate,
 	 */
 	async #contentsWeight() {
 		const contents = await this.contents;
-		return contents.reduce(async (weight, item) => await weight + await item.system.totalWeight, this.currencyWeight);
+		return contents.reduce(async (weight, item) =>
+			await weight + convertWeight(await item.system.totalWeight, item.system.weight.units, this.weight.units)
+		, 0);
 	}
 
 	/* -------------------------------------------- */

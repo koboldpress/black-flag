@@ -2,6 +2,25 @@ import { getPluralRules } from "./localization.mjs";
 import { isValidUnit } from "./validation.mjs";
 
 /**
+ * Convert the provided weight to another unit.
+ * @param {number} value - The weight value to convert.
+ * @param {string} from - The initial units.
+ * @param {string} to - The final units.
+ * @returns {number}
+ */
+export function convertWeight(value, from, to) {
+	if ( from === to ) return value;
+	const message = unit => `Weight unit ${unit} not defined in CONFIG.BlackFlag.weightUnits`;
+	if ( !CONFIG.BlackFlag.weightUnits[from] ) throw new Error(message(from));
+	if ( !CONFIG.BlackFlag.weightUnits[to] ) throw new Error(message(to));
+	return value
+		* CONFIG.BlackFlag.weightUnits[from].conversion
+		/ CONFIG.BlackFlag.weightUnits[to].conversion;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Cached store of Intl.NumberFormat instances.
  * @type {{[key: string]: Intl.PluralRules}}
  */
