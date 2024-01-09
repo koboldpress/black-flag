@@ -86,12 +86,13 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 				continue;
 			}
 			const mergedOptions = { ...a[key].options, ...b[key].options };
-			switch (b[key].constructor) {
-				case foundry.data.fields.SchemaField:
-					const fields = this.mergeSchema(a[key].fields, b[key].fields);
-					Object.values(fields).forEach(f => f.parent = undefined);
-					a[key] = new foundry.data.fields.SchemaField(fields, mergedOptions);
-					break;
+			if ( b[key] instanceof foundry.data.fields.SchemaField ) {
+				const fields = this.mergeSchema(a[key].fields, b[key].fields);
+				Object.values(fields).forEach(f => f.parent = undefined);
+				a[key] = new b[key].constructor(fields, mergedOptions);
+				continue;
+			}
+			switch ( b[key].constructor ) {
 				case foundry.data.fields.ArrayField:
 				case foundry.data.fields.SetField:
 					const elementOptions = foundry.utils.mergeObject(a[key].element.options, b[key].element.options);

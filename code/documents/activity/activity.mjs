@@ -84,7 +84,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		uses.classList.add("layout");
 		if ( this.consumption.targets.find(t => t.type === "item") ) {
 			const itemUses = this.item.system.uses;
-			uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
+			if ( itemUses.max ) {
+				uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
+			} else if ( itemUses.consumeQuantity && this.item.system.isPhysical ) {
+				uses.innerHTML += `<span>${numberFormat(this.item.system.quantity)}</span>`;
+			}
 		}
 		if ( this.consumption.targets.find(t => t.type === "activity") ) {
 			uses.innerHTML += `<span>${numberFormat(this.uses.value)} / ${numberFormat(this.uses.max)}</span>`;

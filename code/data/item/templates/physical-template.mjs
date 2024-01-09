@@ -53,6 +53,16 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Is this a physical item?
+	 * @type {boolean}
+	 */
+	get isPhysical() {
+		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The price of all of the items in an item stack.
 	 * @type {number}
 	 */

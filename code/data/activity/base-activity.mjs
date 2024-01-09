@@ -70,7 +70,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 					max: new FormulaField({label: "BF.Consumption.MaxScaling.Label", hint: "BF.Consumption.MaxScaling.Hint"})
 				})
 			}, {label: "BF.Consumption.Label"}),
-			uses: new UsesField()
+			uses: new UsesField({consumeQuantity: false})
 		};
 	}
 

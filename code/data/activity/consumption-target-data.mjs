@@ -116,11 +116,14 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
 	async consumeActivity(activity, config, updates) {
-		updates.activity["uses.spent"] = await this._usesConsumption(
-			config, activity.uses, game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
+		const result = await this._usesConsumption(config, {
+			uses: activity.uses,
+			type: game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
 				itemName: activity.item.name, activityName: activity.name
-			}), updates.rolls
-		);
+			}),
+			rolls: updates.rolls
+		}) ?? {};
+		if ( result ) updates.activity["uses.spent"] = result.spent;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -135,15 +138,20 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const item = this.target ? activity.actor.items.get(this.target) : activity.item;
 		if ( !item ) throw new Error("item not found");
 
-		const newSpent = await this._usesConsumption(
-			config, item.system.uses, game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name }),
-			updates.rolls
-		);
-		if ( newSpent === null ) return;
+		const result = await this._usesConsumption(config, {
+			uses: item.system.uses,
+			quantity: item.system.quantity ?? 1,
+			type: game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name }),
+			rolls: updates.rolls
+		});
+		if ( !result ) return;
+
+		const update = { "system.uses.spent": result.spent };
+		if ( item.system.uses.consumeQuantity ) update["system.quantity"] = result.quantity;
 
 		const itemIndex = updates.item.findIndex(i => i._id === item.id);
-		if ( itemIndex === -1 ) updates.item.push({ _id: item.id, "system.uses.spent": newSpent });
-		else updates.item[itemIndex]["system.uses.spent"] = newSpent;
+		if ( itemIndex === -1 ) updates.item.push({ _id: item.id, ...update });
+		else foundry.utils.mergeObject(updates.item[itemIndex]["system.uses.spent"], update);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -151,28 +159,40 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/**
 	 * Calculate uses updates.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {object} uses - Uses object on an Item or Activity.
-	 * @param {string} type - Type property that will be provided to warning messages.
-	 * @param {Roll[]} rolls - Rolls performed as part of the activation.
-	 * @returns {number|null} - New spent uses value, or `null` for no change.
+	 * @param {object} options
+	 * @param {object} options.uses - Uses object on an Item or Activity.
+	 * @param {string} options.type - Type property that will be provided to warning messages.
+	 * @param {Roll[]} options.rolls - Rolls performed as part of the activation.
+	 * @param {number} [options.quantity] - Item quantity, for when `consumeQuantity` is `true`.
+	 * @returns {{spent: number, quantity: number}|null} - New spent uses & quantity values, or `null` for no change.
 	 * @internal
 	 */
-	async _usesConsumption(config, uses, type, rolls) {
+	async _usesConsumption(config, { uses, type, rolls, quantity }) {
 		const roll = await this.resolveCost(this.scaleCost(config));
 		if ( !roll.isDeterministic ) rolls.push(roll);
 		const cost = roll.total;
 
-		const newValue = uses.value - cost;
+		let availableUses = uses.value;
+		const canConsumeQuantity = uses.consumeQuantity && quantity && (cost > 0);
+		if ( canConsumeQuantity ) availableUses += quantity * (uses.max || 1);
 
 		let warningMessage;
-		if ( (cost > 0) && !uses.value ) warningMessage = "BF.Consumption.Warning.None";
-		else if ( newValue < uses.min ) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if ( (cost > 0) && !availableUses ) warningMessage = "BF.Consumption.Warning.None";
+		else if ( cost > availableUses ) warningMessage = "BF.Consumption.Warning.NotEnough";
 		if ( warningMessage ) throw new ConsumptionError(game.i18n.format(warningMessage, {
-			type, cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(uses.value, { spelledOut: true })
+			type, cost: numberFormat(cost, { spelledOut: true }), available: numberFormat(availableUses, { spelledOut: true })
 		}));
 
-		if ( (cost < 0) && !uses.spent ) return null;
-		return Math.clamped(uses.spent + cost, 0, uses.max - uses.min);
+		// No need to adjust quantity
+		if ( !canConsumeQuantity || (cost < uses.value) ) return { spent: uses.spent + cost, quantity };
+
+		let remainingCost = cost - uses.value;
+		let deltaQuantity = 1;
+		while ( remainingCost > uses.max ) {
+			remainingCost -= uses.max;
+			deltaQuantity += 1;
+		}
+		return { spent: remainingCost, quantity: quantity - deltaQuantity };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
