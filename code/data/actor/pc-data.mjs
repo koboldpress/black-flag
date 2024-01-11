@@ -734,6 +734,18 @@ export default class PCData extends ActorDataModel.mixin(
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async _preCreateToken(data, options, user) {
+		const prototypeToken = {};
+		if ( !foundry.utils.hasProperty(data, "prototypeToken.actorLink") ) prototypeToken.actorLink = true;
+		if ( !foundry.utils.hasProperty(data, "prototypeToken.sight.enabled") ) prototypeToken.sight = { enabled: true };
+		if ( !foundry.utils.hasProperty(data, "prototypeToken.disposition") ) {
+			prototypeToken.disposition = CONST.TOKEN_DISPOSITIONS.FRIENDLY;
+		}
+		this.parent.updateSource({ prototypeToken });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async _preUpdateHP(changed, options, user) {
 		const changedHP = foundry.utils.getProperty(changed, "system.attributes.hp.value");
 		if ( changedHP !== undefined ) {
