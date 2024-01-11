@@ -31,14 +31,14 @@
 	</nav>
 
 	<div class="sheet-body">
-		<div class="tab" data-group="primary" data-tab="main">
+		<div class="tab flex-tab" data-group="primary" data-tab="main">
 			{{> "blackFlag.npc-main"}}
 		</div>
-		<div class="tab" data-group="primary" data-tab="features">
+		<div class="tab flex-tab" data-group="primary" data-tab="features">
 			{{> "blackFlag.npc-features"}}
 			{{> "blackFlag.currency"}}
 		</div>
-		<div class="tab" data-group="primary" data-tab="biography">
+		<div class="tab flex-tab" data-group="primary" data-tab="biography">
 			<section>
 				<figure>
 					<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
@@ -47,7 +47,7 @@
 					engine="prosemirror" collaborate=false}}
 			</section>
 		</div>
-		<div class="tab" data-group="primary" data-tab="effects">
+		<div class="tab flex-tab" data-group="primary" data-tab="effects">
 			{{> "blackFlag.conditions"}}
 			{{> "blackFlag.active-effects"}}
 		</div>

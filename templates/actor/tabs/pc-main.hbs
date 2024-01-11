@@ -1,4 +1,6 @@
-<section>
+{{!-- Top Section --}}
+<section class="top">
+
 	<fieldset class="abilities">
 		<legend>
 			{{localize "BF.Ability.Label[other]"}}
@@ -46,6 +48,32 @@
 			</div>
 		{{/each}}
 	</fieldset>
+
+</section>
+
+
+{{!-- Left Column --}}
+<section class="left">
+
+	<fieldset class="armor-class">
+		<legend>
+			{{localize "BF.ArmorClass.Label"}}
+			{{#if modes.editing}}
+				<a data-action="config" data-type="armor-class">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
+			{{blackFlag-notificationBadge actor category="armor-class"}}
+		</legend>
+		<div class="ac-shield">
+			<svg class="frame"><use xlink:href="#blackFlag-armorClass"/></svg>
+			<span class="value">{{system.attributes.ac.value}}</span>
+		</div>
+		<div class="ac-label">
+			{{localize system.attributes.ac.label}}
+		</div>
+	</fieldset>
+
 	<fieldset class="skills">
 		<legend>
 			{{localize "BF.Skill.Label[other]"}}
@@ -76,6 +104,7 @@
 			</div>
 		{{/each}}
 	</fieldset>
+
 	<fieldset class="tools">
 		<legend>
 			{{localize "BF.Tool.Label[other]"}}
@@ -106,6 +135,25 @@
 			</div>
 		{{/each}}
 	</fieldset>
+
+</section>
+
+
+{{!-- Center Column --}}
+<section class="center">
+
+	<fieldset class="luck">
+		<legend>{{localize "BF.Luck.Label"}}</legend>
+		<ol class="luck-points">
+			{{#each luckPoints}}
+				<li class="luck-point{{#if selected}} selected{{/if}}"></li>
+			{{/each}}
+		</ol>
+		<a data-action="luck" data-sub-action="add">
+			<i class="fa-solid fa-plus"></i>
+		</a>
+	</fieldset>
+
 	<fieldset class="hit-points">
 		<legend>{{localize "BF.HitPoint.Label[other]"}}</legend>
 		<div class="main-hit-points">
@@ -140,53 +188,27 @@
 				</label>
 			</div>
 		{{/unless}}
-	</fieldset>
-	<fieldset class="hit-dice">
-		<legend>{{localize "BF.HitDie.Label[other]"}}</legend>
-		{{#each system.attributes.hd.d as |data denomination|}}
-			<div class="denomination">
-				<label class="label">d{{denomination}}</label>
-				{{#if @root.modes.editing}}
-					<input class="value" type="number" name="system.attributes.hd.d.{{denomination}}.available"
-						value="{{data.available}}" step=1 min=0 max={{data.max}}>
-				{{else}}
-					<span class="value">{{blackFlag-number data.available}}</span>
-				{{/if}}
-				<div class="separator"></div>
-				<span class="max">{{blackFlag-number data.max}}</span>
-				<button type="button" data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
-					{{disabled (eq data.available 0)}}>
-					<svg class="die-icon blue"><use xlink:href="#blackFlag-d{{denomination}}"></use></svg>
-				</button>
-			</div>
-		{{/each}}
-	</fieldset>
-	<fieldset class="resting">
-		<legend>{{localize "BF.Rest.Label"}}</legend>
-		{{#each CONFIG.rest.types as |data key|}}
-			<button type="button" data-action="rest" data-type="{{key}}">
-				{{localize data.label}}
-			</button>
-		{{/each}}
-	</fieldset>
-	<fieldset class="armor-class">
-		<legend>
-			{{localize "BF.ArmorClass.Label"}}
-			{{#if modes.editing}}
-				<a data-action="config" data-type="armor-class">
-					<i class="fa-solid fa-cog"></i>
-				</a>
-			{{/if}}
-			{{blackFlag-notificationBadge actor category="armor-class"}}
-		</legend>
-		<div class="ac-shield">
-			<svg class="frame"><use xlink:href="#blackFlag-armorClass"/></svg>
-			<span class="value">{{system.attributes.ac.value}}</span>
-		</div>
-		<div class="ac-label">
-			{{localize system.attributes.ac.label}}
+		<div class="hit-dice">
+			{{#each system.attributes.hd.d as |data denomination|}}
+				<div class="denomination">
+					<label class="label">d{{denomination}}</label>
+					{{#if @root.modes.editing}}
+						<input class="value" type="number" name="system.attributes.hd.d.{{denomination}}.available"
+							value="{{data.available}}" step=1 min=0 max={{data.max}}>
+					{{else}}
+						<span class="value">{{blackFlag-number data.available}}</span>
+					{{/if}}
+					<div class="separator"></div>
+					<span class="max">{{blackFlag-number data.max}}</span>
+					<button type="button" data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
+						{{disabled (eq data.available 0)}}>
+						<svg class="die-icon blue"><use xlink:href="#blackFlag-d{{denomination}}"></use></svg>
+					</button>
+				</div>
+			{{/each}}
 		</div>
 	</fieldset>
+
 	<fieldset class="initiative">
 		<legend>
 			{{localize "BF.Initiative.Label"}}
@@ -203,31 +225,7 @@
 			</button>
 		</div>
 	</fieldset>
-	<fieldset class="movement">
-		<legend>
-			{{localize "BF.Speed.Label"}}
-			{{#if modes.editing}}
-				<a data-action="config" data-type="movement">
-					<i class="fa-solid fa-cog"></i>
-				</a>
-			{{/if}}
-		</legend>
-		<span class="primary">{{system.traits.movement.labels.primary}}</span>
-		{{#if system.traits.movement.labels.secondary}}
-			<span class="secondary">{{system.traits.movement.labels.secondary}}</span>
-		{{/if}}
-	</fieldset>
-	<fieldset class="luck">
-		<legend>{{localize "BF.Luck.Label"}}</legend>
-		<ol class="luck-points">
-			{{#each luckPoints}}
-				<li class="luck-point{{#if selected}} selected{{/if}}"></li>
-			{{/each}}
-		</ol>
-		<a data-action="luck" data-sub-action="add">
-			<i class="fa-solid fa-plus"></i>
-		</a>
-	</fieldset>
+
 	<fieldset class="traits">
 		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
 		{{#each traits}}
@@ -244,8 +242,43 @@
 			</div>
 		{{/each}}
 	</fieldset>
+
+</section>
+
+
+{{!-- Right Column --}}
+<section class="right">
+
 	<fieldset class="actions">
 		<legend>{{localize "BF.Activation.Type.Action[other]"}}</legend>
 		{{> "blackFlag.pc-actions"}}
 	</fieldset>
+
+	<fieldset class="resting">
+		<legend>{{localize "BF.Rest.Label"}}</legend>
+		{{#each CONFIG.rest.types as |data key|}}
+			<button type="button" data-action="rest" data-type="{{key}}">
+				{{localize data.label}}
+			</button>
+		{{/each}}
+	</fieldset>
+
 </section>
+
+
+{{!--
+	<fieldset class="movement">
+		<legend>
+			{{localize "BF.Speed.Label"}}
+			{{#if modes.editing}}
+				<a data-action="config" data-type="movement">
+					<i class="fa-solid fa-cog"></i>
+				</a>
+			{{/if}}
+		</legend>
+		<span class="primary">{{system.traits.movement.labels.primary}}</span>
+		{{#if system.traits.movement.labels.secondary}}
+			<span class="secondary">{{system.traits.movement.labels.secondary}}</span>
+		{{/if}}
+	</fieldset>
+</section>--}}

@@ -9,6 +9,10 @@
 
 	.sheet-container {
 		container: sheet / inline-size;
+
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	.profile {
@@ -28,6 +32,104 @@
 			border-width: 2px;
 			background: none;
 			color: black;
+		}
+	}
+
+	.block {
+		display: flex;
+		background: var(--bf-color-fill);
+		border: 1px solid var(--bf-color-border-gray);
+		border-radius: 6px;
+
+		> * {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding-block: 0.15rem;
+			padding-inline: 0.5rem;
+		}
+
+		button {
+			background: none;
+			border: none;
+			line-height: unset;
+
+			&:disabled {
+				opacity: 0.25;
+			}
+		}
+	}
+
+	.sheet-head {
+		display: flex;
+		gap: 0.5rem;
+
+		.profile {
+			width: 60px;
+			height: 60px;
+		}
+
+		h1 {
+			flex: 1 0 50%;
+			margin: 0;
+			border: none;
+	
+			[name="name"] {
+				height: 100%;
+				text-align: center;
+			}
+		}
+
+		.proficiency-bonus {
+			flex: 0 0 10%;
+			position: relative;
+	
+			> span {
+				position: absolute;
+				inset: 0;
+				inset-block-start: -0.5ex;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding-inline-end: 0.33ex;
+				font-size: var(--font-size-20);
+			}
+		}
+
+		.progression {
+			flex: 1 0 20%;
+			padding: 0;
+
+			> legend {
+				margin-inline: 0.65rem;
+			}
+
+			[data-action] {
+				display: flex;
+				margin-block-start: -1ex;
+				padding-block: 0.25rem;
+				padding-inline: 0.65rem;
+				align-items: center;
+				justify-content: space-evenly;
+				width: 100%;
+				height: calc(100% + 1ex);
+			}
+
+			.text {
+				font-size: var(--font-size-18);
+				font-weight: 100;
+			}
+
+			.icon {
+				opacity: 0.5;
+			}
+			& a:hover .icon {
+				opacity: 1;
+			}
+
+			.active {
+				display: none;
+			}
 		}
 	}
 

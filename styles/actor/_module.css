@@ -15,9 +15,15 @@
 @import "resistance-config.css";
 @import "rest-dialog.css";
 
-.actor .sheet-body .tab[data-tab] {
-	height: 100%;
-	flex-direction: column;
-	&.active { display: flex; }
-	> :last-child { flex-grow: 1; }
+.actor .sheet-body .tab[data-tab] { height: 100%; }
+
+.tab[data-tab] {
+	&.flex-tab {
+		flex-direction: column;
+		&.active { display: flex; }
+		> :last-child { flex-grow: 1; }
+	}
+	&.grid-tab {
+		&.active { display: grid; }
+	}
 }
