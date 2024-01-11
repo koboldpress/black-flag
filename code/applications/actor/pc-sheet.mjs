@@ -113,6 +113,16 @@ export default class PCSheet extends BaseActorSheet {
 			config: "type"
 		});
 
+		// Movement
+		const movement = game.i18n.getListFormatter({ style: "narrow" }).format(traits.movement.labels);
+		if ( movement || this.modes.editing ) context.traits.push({
+			key: "movement",
+			classes: traits.movement.labels.length > 1 ? null : "single",
+			label: "BF.Speed.Label",
+			value: movement,
+			config: "movement"
+		});
+
 		// Senses
 		const senses = game.i18n.getListFormatter({ style: "narrow" }).format(
 			Object.entries(this.actor.system.traits.senses.types).map(([key, value]) =>

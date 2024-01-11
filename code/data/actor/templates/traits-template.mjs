@@ -81,7 +81,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		}
 
 		// Prepare movement label to display on sheet
-		const labels = Object.entries(movement.types)
+		movement.labels = Object.entries(movement.types)
 			.filter(([type, speed]) => speed > 0)
 			.sort((lhs, rhs) => rhs[1] - lhs[1])
 			.map(([type, speed]) => {
@@ -89,10 +89,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 				const label = config ? game.i18n.localize(config.label) : type;
 				return `${label} ${numberFormat(speed, { unit: "foot" })}`;
 			});
-		movement.labels ??= {
-			primary: labels.shift(),
-			secondary: game.i18n.getListFormatter({ type: "unit" }).format(labels)
-		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
