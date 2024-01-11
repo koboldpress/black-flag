@@ -1,4 +1,11 @@
 blackFlag-actions {
+	container: actions / inline-size;
+
+	table {
+		border: none;
+		margin: 0;
+	}
+
 	tbody {
 		tr:first-child {
 			font-family: var(--bf-font-primary);
@@ -10,6 +17,7 @@ blackFlag-actions {
 		position: relative;
 		inline-size: unset;
 		block-size: 2em;
+		margin-inline: 0.5rem;
 		padding-inline: 0.5em;
 		border: 1px solid var(--bf-color-border-blue);
 		border-radius: var(--bf-button-border-radius);
@@ -73,5 +81,9 @@ blackFlag-actions {
 			font-weight: bold;
 			text-transform: uppercase;
 		}
+	}
+
+	@container (width < 300px) {
+		.challenge, .effect { display: none; }
 	}
 }

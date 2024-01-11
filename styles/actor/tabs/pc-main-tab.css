@@ -1,7 +1,7 @@
 .black-flag.pc.sheet .sheet-body [data-tab="main"] {
 	gap: 0.25rem;
 	grid-template-columns:
-		[full-start left-start] 1fr [left-end center-start] 1fr [center-end right-start] 1fr 1fr [right-end full-end];
+		[full-start left-start] 200px [left-end center-start] 200px [center-end right-start] auto [right-end full-end];
 	grid-template-rows: [top-start] max-content [top-end main-start] 1fr [main-end];
 
 	> section {
@@ -167,6 +167,9 @@
 
 	.actions {
 		flex-grow: 1;
+		blackFlag-actions {
+			margin-inline: calc(-0.5rem - 2px);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
