@@ -16,7 +16,8 @@ export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate
 			type: "ammunition",
 			category: "equipment",
 			localization: "BF.Item.Type.Ammunition",
-			icon: "fa-solid fa-lines-leaning"
+			icon: "fa-solid fa-lines-leaning",
+			img: "systems/black-flag/artwork/types/ammunition.svg"
 		};
 	}
 

@@ -16,7 +16,8 @@ export default class ToolData extends ItemDataModel.mixin(ActivitiesTemplate, Ph
 			type: "tool",
 			category: "equipment",
 			localization: "BF.Item.Type.Tool",
-			icon: "fa-solid fa-screwdriver-wrench"
+			icon: "fa-solid fa-screwdriver-wrench",
+			img: "systems/black-flag/artwork/types/tool.svg"
 		};
 	}
 

@@ -14,7 +14,8 @@ export default class SundryData extends ItemDataModel.mixin(PhysicalTemplate) {
 			type: "sundry",
 			category: "equipment",
 			localization: "BF.Item.Type.Sundry",
-			icon: "fa-solid fa-boxes-stacked"
+			icon: "fa-solid fa-boxes-stacked",
+			img: "systems/black-flag/artwork/types/sundry.svg"
 		};
 	}
 

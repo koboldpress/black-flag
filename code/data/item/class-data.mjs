@@ -14,7 +14,8 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 			type: "class",
 			category: "concept",
 			localization: "BF.Item.Type.Class",
-			icon: "fa-solid fa-landmark-dome"
+			icon: "fa-solid fa-landmark-dome",
+			img: "systems/black-flag/artwork/types/class.svg"
 		});
 	}
 

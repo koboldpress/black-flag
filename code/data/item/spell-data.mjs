@@ -19,6 +19,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 			category: "meta",
 			localization: "BF.Item.Type.Spell",
 			icon: "fa-solid fa-wand-sparkles",
+			img: "systems/black-flag/artwork/types/spell.svg",
 			sheet: {
 				application: SpellSheet,
 				label: "BF.Sheet.Default.Spell"

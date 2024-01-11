@@ -17,7 +17,8 @@ export default class ConsumableData extends ItemDataModel.mixin(ActivitiesTempla
 			type: "consumable",
 			category: "equipment",
 			localization: "BF.Item.Type.Consumable",
-			icon: "fa-solid fa-bottle-droplet"
+			icon: "fa-solid fa-bottle-droplet",
+			img: "systems/black-flag/artwork/types/consumable.svg"
 		};
 	}
 

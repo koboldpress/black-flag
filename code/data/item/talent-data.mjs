@@ -13,7 +13,8 @@ export default class TalentData extends ItemDataModel.mixin(ActivityTemplate, Ad
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "talent",
-			localization: "BF.Item.Type.Talent"
+			localization: "BF.Item.Type.Talent",
+			img: "systems/black-flag/artwork/types/talent.svg"
 		});
 	}
 

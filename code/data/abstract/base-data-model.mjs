@@ -11,7 +11,7 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 *                                   accepts plural types (e.g. `BF.Item.Type.Weapon` becomes
 	 *                                   `BF.Item.Type.Weapon[few]` and `BF.Item.Type.Weapon[other]`).
 	 * @property {string} [icon] - Font awesome icon string used for links to this type.
-	 * @property {string} [image] - Default image used when creating a Document of this type.
+	 * @property {string} [img] - Default image used when creating a Document of this type.
 	 */
 
 	/**

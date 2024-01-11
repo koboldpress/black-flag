@@ -12,6 +12,7 @@ export default class LineageData extends ItemDataModel.mixin(AdvancementTemplate
 			category: "concept",
 			localization: "BF.Item.Type.Lineage",
 			icon: "fa-solid fa-globe",
+			img: "systems/black-flag/artwork/types/lineage.svg",
 			accentColor: "#00aa00"
 		});
 	}

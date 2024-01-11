@@ -16,7 +16,8 @@ export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, Ph
 			type: "gear",
 			category: "equipment",
 			localization: "BF.Item.Type.Gear",
-			icon: "fa-solid fa-wand-magic"
+			icon: "fa-solid fa-wand-magic",
+			img: "systems/black-flag/artwork/types/gear.svg"
 		};
 	}
 

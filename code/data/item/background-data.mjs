@@ -12,6 +12,7 @@ export default class BackgroundData extends ItemDataModel.mixin(AdvancementTempl
 			category: "concept",
 			localization: "BF.Item.Type.Background",
 			icon: "fa-solid fa-person-digging",
+			img: "systems/black-flag/artwork/types/background.svg",
 			accentColor: "#0000aa"
 		});
 	}

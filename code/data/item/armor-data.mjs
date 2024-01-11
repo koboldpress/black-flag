@@ -19,7 +19,8 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 			type: "armor",
 			category: "equipment",
 			localization: "BF.Item.Type.Armor",
-			icon: "fa-solid fa-shield-halved"
+			icon: "fa-solid fa-shield-halved",
+			img: "systems/black-flag/artwork/types/armor.svg"
 		};
 	}
 

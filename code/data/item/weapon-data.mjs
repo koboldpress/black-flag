@@ -23,7 +23,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 			type: "weapon",
 			category: "equipment",
 			localization: "BF.Item.Type.Weapon",
-			icon: "fa-solid fa-trowel"
+			icon: "fa-solid fa-trowel",
+			img: "systems/black-flag/artwork/types/weapon.svg"
 		};
 	}
 

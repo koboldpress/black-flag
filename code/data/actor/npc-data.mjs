@@ -19,6 +19,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		type: "npc",
 		category: "person",
 		localization: "BF.Actor.Type.NPC",
+		img: "systems/black-flag/artwork/types/npc.svg",
 		sheet: {
 			application: NPCSheet,
 			label: "BF.Sheet.Default.NPC"

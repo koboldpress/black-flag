@@ -15,7 +15,8 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 			type: "subclass",
 			category: "concept",
 			localization: "BF.Item.Type.Subclass",
-			icon: "fa-solid fa-landmark-flag"
+			icon: "fa-solid fa-landmark-flag",
+			img: "systems/black-flag/artwork/types/subclass.svg"
 		});
 	}
 

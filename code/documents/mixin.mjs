@@ -5,6 +5,12 @@
  */
 export const DocumentMixin = Base => class extends Base {
 
+	static getDefaultArtwork(data={}) {
+		const dataModel = CONFIG[this.metadata.name]?.dataModels[data.type];
+		const { img } = super.getDefaultArtwork(data);
+		return { img: dataModel?.metadata.img ?? img };
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
