@@ -52,6 +52,7 @@ export default function PseudoDocumentMixin(Base) {
 		 * @typedef {object} PseudoDocumentsMetadata
 		 * @property {string} name - Base type name of this PseudoDocument (e.g. "Activity", "Advancement").
 		 * @property {string} collection - Location of the collection of pseudo documents within system data.
+		 * @property {string} label - Localized name for this PseudoDocument type.
 		 */
 
 		/**

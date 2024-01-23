@@ -21,6 +21,7 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 	static metadata = Object.freeze({
 		name: "Advancement",
 		collection: "advancement",
+		label: "BF.Advancement.Label",
 		type: "base"
 	});
 

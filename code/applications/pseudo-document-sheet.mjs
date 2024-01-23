@@ -82,4 +82,42 @@ export default class PseudoDocumentSheet extends FormApplication {
 		this.document.apps[this.appId] = this;
 		return super.render(force, options);
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _renderOuter() {
+		const html = await super._renderOuter();
+		this._createDocumentIdLink(html);
+		return html;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create an ID link button in the document sheet header which displays the document ID and copies to clipboard.
+	 * @param {jQuery} html
+	 * @protected
+	 */
+	_createDocumentIdLink(html) {
+		if ( !this.object.id ) return;
+		const title = html.find(".window-title");
+		const label = game.i18n.localize(this.object.constructor.metadata.label);
+		const idLink = document.createElement("a");
+		idLink.classList.add("document-id-link");
+		idLink.setAttribute("alt", "Copy document id");
+		idLink.dataset.tooltip = `${label}: ${this.object.id}`;
+		idLink.dataset.tooltipDirection = "UP";
+		idLink.innerHTML = '<i class="fa-solid fa-passport"></i>';
+		idLink.addEventListener("click", event => {
+			event.preventDefault();
+			game.clipboard.copyPlainText(this.object.id);
+			ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "id", id: this.object.id}));
+		});
+		idLink.addEventListener("contextmenu", event => {
+			event.preventDefault();
+			game.clipboard.copyPlainText(this.object.uuid);
+			ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: this.object.uuid}));
+		});
+		title.append(idLink);
+	}
 }
