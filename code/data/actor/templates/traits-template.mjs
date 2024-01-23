@@ -26,7 +26,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					types: new MappingField(new FormulaField({deterministic: true})),
 					tags: new SetField(new StringField())
 				}, {label: "BF.Senses.Label"}),
-				size: new StringField({label: "BF.Size.Label"}),
+				size: new StringField({initial: "medium", label: "BF.Size.Label"}),
 				type: new SchemaField({
 					value: new StringField(),
 					tags: new ArrayField(new StringField())
@@ -111,6 +111,32 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			this.traits.condition.immunities.value.add("poisoned");
 			this.traits.damage.resistances.custom.push("All Damage");
 			this.traits.damage.immunities.value.add("poison");
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preCreateSize(data, options, user) {
+		if ( !foundry.utils.hasProperty(data, "prototypeToken.width")
+			&& !foundry.utils.hasProperty(data, "prototypeToken.height")) {
+			const size = CONFIG.BlackFlag.sizes[this.traits.size]?.scale;
+			this.parent.updateSource({ "prototypeToken.width": size, "prototypeToken.height": size });
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _preUpdateSize(changed, options, user) {
+		const newSize = foundry.utils.getProperty(changed, "system.traits.size");
+		if ( !newSize || (newSize === this.traits.size) ) return;
+
+		if ( !foundry.utils.hasProperty(changed, "prototypeToken.width")
+			&& !foundry.utils.hasProperty(changed, "prototypeToken.height") ) {
+			const size = CONFIG.BlackFlag.sizes[newSize]?.scale;
+			foundry.utils.setProperty(changed, "prototypeToken.width", size);
+			foundry.utils.setProperty(changed, "prototypeToken.height", size);
 		}
 	}
 }
