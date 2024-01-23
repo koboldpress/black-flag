@@ -37,9 +37,10 @@ export default class ActionsElement extends AppAssociatedElement {
 	 */
 	async #onAction(event) {
 		event.stopImmediatePropagation();
-		const activityUuid = event.currentTarget.closest("[data-activity]")?.dataset.activity;
+		const dataset = event.currentTarget.closest("tr")?.dataset;
+		const activityUuid = dataset?.activity;
 		const activity = await fromUuid(activityUuid);
-		if ( !activity ) return;
+		if ( !activity ) return this.app._onAction?.(event, dataset);
 
 		switch ( event.currentTarget.dataset.action ) {
 			case "activate":

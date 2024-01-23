@@ -11,24 +11,25 @@
 					</th>
 				</tr>
 				{{#each activities}}
-					<tr data-activity="{{activity.uuid}}">
+					<tr {{#if activity}}data-activity="{{activity.uuid}}"{{/if}}
+						  {{~#if dataset}} {{blackFlag-dataset dataset}}{{/if}}>
 						<td class="control">
-							<button type="button" data-action="activate">{{localize "BF.Activity.Core.Action.Use"}}</button>
+							<button type="button" data-action="activate">{{localize activationText}}</button>
 						</td>
 						<td class="name">
-							<hgroup>
-								<p>{{item.name}}</p>
-								<h6>{{activity.name}}</h6>
-							</hgroup>
+							{{#if name}}<h5>{{localize name}}</h5>{{else}}
+								{{#if item}}<h5>{{item.name}}</h5>{{/if}}
+								{{#if activity}}<h6>{{activity.name}}</h6>{{/if}}
+							{{/if}}
 						</td>
 						<td class="uses">
-							{{{activity.usesColumn}}}
+							{{{usesColumn}}}
 						</td>
 						<td class="challenge">
-							{{{activity.challengeColumn}}}
+							{{{challengeColumn}}}
 						</td>
 						<td class="effect">
-							{{{activity.effectColumn}}}
+							{{{effectColumn}}}
 						</td>
 					</tr>
 				{{/each}}

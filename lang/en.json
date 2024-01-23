@@ -52,24 +52,28 @@
 "BF.Action.Choose.Generic": "Choose",
 "BF.Action.Choose.Specific": "Choose {option}",
 
-"BF.Activation.Label": "Activation",
-"BF.Activation.Category.Standard.Label": "Standard Actions",
-"BF.Activation.Condition.Label": "Activation Condition",
-"BF.Activation.Cost.Label": "Activation Cost",
-"BF.Activation.Scalar.Label": "{number} {type}",
-"BF.Activation.Time.Label": "Activation Time",
-"BF.Activation.Type.Label": "Activation Type",
-"BF.Activation.Type.Action[one]": "Action",
-"BF.Activation.Type.Action[other]": "Actions",
-"BF.Activation.Type.BonusAction[one]": "Bonus Action",
-"BF.Activation.Type.BonusAction[other]": "Bonus Actions",
-"BF.Activation.Type.FreeAction[one]": "Free Action",
-"BF.Activation.Type.FreeAction[other]": "Free Actions",
-"BF.Activation.Type.Legendary[one]": "Legendary Action",
-"BF.Activation.Type.Legendary[other]": "Legendary Actions",
-"BF.Activation.TYpe.Other": "Other",
-"BF.Activation.Type.Reaction[one]": "Reaction",
-"BF.Activation.Type.Reaction[other]": "Reactions",
+"BF.Activation": {
+	"Label": "Activation",
+	"Category.Standard.Label": "Standard Actions",
+	"Condition.Label": "Activation Condition",
+	"Cost.Label": "Activation Cost",
+	"Scalar.Label": "{number} {type}",
+	"Time.Label": "Activation Time",
+	"Type": {
+		"Label": "Activation Type",
+		"Action[one]": "Action",
+		"Action[other]": "Actions",
+		"BonusAction[one]": "Bonus Action",
+		"BonusAction[other]": "Bonus Actions",
+		"FreeAction[one]": "Free Action",
+		"FreeAction[other]": "Free Actions",
+		"Legendary[one]": "Legendary Action",
+		"Legendary[other]": "Legendary Actions",
+		"Other": "Other",
+		"Reaction[one]": "Reaction",
+		"Reaction[other]": "Reactions"
+	}
+},
 
 "BF.Activity.Label[one]": "Activity",
 "BF.Activity.Label[other]": "Activities",
@@ -1004,20 +1008,34 @@
 "BF.Resistance.Abbreviation": "Res",
 "BF.Resistance.Short": "Resistant",
 
-"BF.Rest.Label": "Resting",
-"BF.Rest.Action.Rest.Label": "Rest",
-"BF.Rest.Result.Long.Basic": "{name} takes a long rest.",
-"BF.Rest.Result.Long.Full": "{name} takes a long rest and recovers {hitPoints} {hitPointsLabel} and {hitDice} {hitDiceLabel}.",
-"BF.Rest.Result.Long.HitDice": "{name} takes a long rest and recovers {hitDice} {hitDiceLabel}.",
-"BF.Rest.Result.Long.HitPoints": "{name} takes a long rest and recovers {hitPoints} {hitPointsLabel}.",
-"BF.Rest.Result.Short.Basic": "{name} takes a short rest.",
-"BF.Rest.Result.Short.Full": "{name} takes a short rest and spends {hitDice} {hitDiceLabel} to recover {hitPoints} {hitPointsLabel}.",
-"BF.Rest.Type.Long.Label": "Long Rest",
-"BF.Rest.Type.Long.Abbreviation": "LR",
-"BF.Rest.Type.Long.Hint": "At the end of a long rest, you regain all lost hit points. You also regain spent hit dice, up to half of your maximum (minimum of 1).",
-"BF.Rest.Type.Short.Label": "Short Rest",
-"BF.Rest.Type.Short.Abbreviation": "SR",
-"BF.Rest.Type.Short.Hint": "You can spend one or more hit dice at the end of a short rest, up to your maximum number of hit dice.",
+"BF.Rest": {
+	"Label": "Resting",
+	"Action.Rest.Label": "Rest",
+	"Result": {
+		"Long": {
+			"Basic": "{name} takes a long rest.",
+			"Full": "{name} takes a long rest and recovers {hitPoints} {hitPointsLabel} and {hitDice} {hitDiceLabel}.",
+			"HitDice": "{name} takes a long rest and recovers {hitDice} {hitDiceLabel}.",
+			"HitPoints": "{name} takes a long rest and recovers {hitPoints} {hitPointsLabel}."
+		},
+		"Short": {
+			"Basic": "{name} takes a short rest.",
+			"Full": "{name} takes a short rest and spends {hitDice} {hitDiceLabel} to recover {hitPoints} {hitPointsLabel}."
+		}
+	},
+	"Type": {
+		"Long": {
+			"Label": "Long Rest",
+			"Abbreviation": "LR",
+			"Hint": "At the end of a long rest, you regain all lost hit points. You also regain spent hit dice, up to half of your maximum (minimum of 1)."
+		},
+		"Short": {
+			"Label": "Short Rest",
+			"Abbreviation": "SR",
+			"Hint": "You can spend one or more hit dice at the end of a short rest, up to your maximum number of hit dice."
+		}
+	}
+},
 
 "BF.Roll.Action.Advantage.Label": "Advantage",
 "BF.Roll.Action.Advantage.Abbreviation": "A",

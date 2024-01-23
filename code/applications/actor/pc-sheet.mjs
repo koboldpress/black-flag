@@ -53,6 +53,21 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	async prepareSpecialActions(actions) {
+		actions.other.activities.push({
+			name: "BF.Rest.Type.Short.Label",
+			activationText: "BF.Rest.Action.Rest.Label",
+			dataset: { action: "rest", type: "short" }
+		});
+		actions.other.activities.push({
+			name: "BF.Rest.Type.Long.Label",
+			activationText: "BF.Rest.Action.Rest.Label",
+			dataset: { action: "rest", type: "long" }
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Prepare levels on the progression tab and assign them advancement flows.
 	 * @param {object} context - Context being prepared.
@@ -219,22 +234,17 @@ export default class PCSheet extends BaseActorSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Handle a click on an action link.
-	 * @param {ClickEvent} event - Triggering click event.
-	 * @returns {Promise}
-	 */
-	async _onAction(event) {
-		const { action, subAction, ...properties } = event.currentTarget.dataset;
-		switch (action) {
+	async _onAction(event, dataset) {
+		const { action, subAction, ...properties } = dataset ?? event.currentTarget.dataset;
+		switch ( action ) {
 			case "luck":
-				switch (subAction) {
+				switch ( subAction ) {
 					case "add":
 						return this.actor.system.addLuck();
 				}
 				break;
 			case "progression":
-				switch (subAction) {
+				switch ( subAction ) {
 					case "assign-abilities":
 						return (new AbilityAssignmentDialog(this.actor)).render(true);
 					case "level-down":
@@ -267,7 +277,7 @@ export default class PCSheet extends BaseActorSheet {
 				}
 				break;
 		}
-		return super._onAction(event);
+		return super._onAction(event, dataset);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

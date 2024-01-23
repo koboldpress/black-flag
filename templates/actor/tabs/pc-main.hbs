@@ -251,31 +251,4 @@
 		{{> "blackFlag.pc-actions"}}
 	</fieldset>
 
-	<fieldset class="resting">
-		<legend>{{localize "BF.Rest.Label"}}</legend>
-		{{#each CONFIG.rest.types as |data key|}}
-			<button type="button" data-action="rest" data-type="{{key}}">
-				{{localize data.label}}
-			</button>
-		{{/each}}
-	</fieldset>
-
 </section>
-
-
-{{!--
-	<fieldset class="movement">
-		<legend>
-			{{localize "BF.Speed.Label"}}
-			{{#if modes.editing}}
-				<a data-action="config" data-type="movement">
-					<i class="fa-solid fa-cog"></i>
-				</a>
-			{{/if}}
-		</legend>
-		<span class="primary">{{system.traits.movement.labels.primary}}</span>
-		{{#if system.traits.movement.labels.secondary}}
-			<span class="secondary">{{system.traits.movement.labels.secondary}}</span>
-		{{/if}}
-	</fieldset>
-</section>--}}

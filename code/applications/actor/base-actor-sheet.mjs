@@ -107,21 +107,35 @@ export default class BaseActorSheet extends ActorSheet {
 				obj[key] = { label, activities: [] };
 				return obj;
 			}, {});
-		context.actions.other = { label: game.i18n.localize("BF.Activation.TYpe.Other"), activities: [] };
+		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), activities: [] };
 		for ( const item of this.actor.items ) {
 			if ( !item.system.displayActions ) continue;
 			for ( const activity of item.system.actions?.() ?? [] ) {
 				if ( !activity.displayAction ) continue;
-				const data = { activity, item: activity.item };
+				const data = {
+					activity,
+					item: activity.item,
+					activationText: "BF.Activity.Core.Action.Use",
+					usesColumn: activity.usesColumn,
+					challengeColumn: activity.challengeColumn,
+					effectColumn: activity.effectColumn
+				};
 				if ( activity.actionType in context.actions ) context.actions[activity.actionType].activities.push(data);
 				else context.actions.other.activities.push(data);
 			}
 		}
+		await this.prepareSpecialActions(context.actions);
 		for ( const [key, value] of Object.entries(context.actions) ) {
 			if ( !value.activities.length ) delete context.actions[key];
 		}
 		// TODO: Figure out how these should be sorted
 	}
+
+	/**
+	 * Prepare any additional actions not covered by activities.
+	 * @param {Record<string, {label: string, actions: object[]}>} actions - Action sections already prepared.
+	 */
+	async prepareSpecialActions(actions) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -212,10 +226,11 @@ export default class BaseActorSheet extends ActorSheet {
 	/**
 	 * Handle a click on an action link.
 	 * @param {ClickEvent} event - Triggering click event.
+	 * @param {DOMStringMap} [dataset] - Dataset to use instead of that of the event target.
 	 * @returns {Promise}
 	 */
-	async _onAction(event) {
-		const { action, subAction, ...properties } = event.currentTarget.dataset;
+	async _onAction(event, dataset) {
+		const { action, subAction, ...properties } = dataset ?? event.currentTarget.dataset;
 		switch ( action ) {
 			case "condition":
 				const condition = event.target.closest("[data-condition]")?.dataset.condition;
@@ -248,7 +263,7 @@ export default class BaseActorSheet extends ActorSheet {
 			case "item":
 				const itemId = properties.itemId ?? event.target.closest("[data-item-id]")?.dataset.itemId;
 				const item = this.actor.items.get(itemId);
-				switch (subAction) {
+				switch ( subAction ) {
 					case "delete":
 						return item?.deleteDialog();
 					case "edit":
