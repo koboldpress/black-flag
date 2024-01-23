@@ -1,6 +1,6 @@
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
 import { log } from "../../utils/_module.mjs";
-import PseudoDocumentMixin from "../pseudo-document.mjs";
+import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * @typedef {object} AdvancementLevels

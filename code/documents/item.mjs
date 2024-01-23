@@ -1,6 +1,6 @@
 import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { slugify } from "../utils/text.mjs";
-import { DocumentMixin } from "./mixin.mjs";
+import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 
 export default class BlackFlagItem extends DocumentMixin(Item) {

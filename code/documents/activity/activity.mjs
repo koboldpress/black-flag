@@ -1,7 +1,7 @@
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
 import { numberFormat } from "../../utils/_module.mjs";
-import PseudoDocumentMixin from "../pseudo-document.mjs";
+import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * Abstract base class which various activity types can subclass.
