@@ -1,0 +1,91 @@
+blackFlag-deathSaves {
+	display: grid;
+	grid-template-areas: "controls";
+	isolation: isolate;
+
+	--_failure-color: var(--bf-death-saves-failure-color, red);
+	--_success-color: var(--bf-death-saves-success-color, green);
+	--_neutral-color: var(--bf-death-saves-neutral-color, rgb(200 200 200));
+
+	button[data-action="roll"] {
+		grid-area: controls;
+		place-self: center;
+		block-size: 30px;
+		inline-size: 30px;
+		display: grid;
+		place-content: center;
+		border: 2px solid var(--bf-color-border-black);
+		border-radius: 100%;
+		background: var(--bf-gradiant-blue);
+		cursor: pointer;
+		box-shadow: 0 0 6px rgb(0 0 0 / 45%);
+		z-index: 4;
+
+		&:hover, &:focus-visible {
+			border-color: var(--bf-color-border-gray);
+		}
+		blackFlag-icon {
+			--icon-size: 20px;
+		}
+	}
+
+	.levels {
+		grid-area: controls;
+		display: grid;
+		grid-template-columns:
+			[third-start] 1fr [second-start] 1fr [first-start] 1fr
+			8px [center] 8px
+			1fr [first-end] 1fr [second-end] 1fr [third-end];
+		margin: 3px;
+
+		button {
+			grid-row: 1;
+			border: 1px solid var(--bf-color-border-blue);
+			border-radius: 7px;
+			cursor: pointer;
+			filter: drop-shadow(0 0 3px rgb(0 0 0 / 15%));
+			background: var(--_neutral-color);
+
+			&[data-n="1"] { z-index: 3; }
+			&[data-n="2"] { z-index: 2; }
+			&[data-n="3"] { z-index: 1; }
+			&.failure {
+				border-inline-end: none;
+				border-start-end-radius: 0;
+				border-end-end-radius: 0;
+				&[data-n="1"] { grid-column: first / center; }
+				&[data-n="2"] { grid-column: second / center; }
+				&[data-n="3"] { grid-column: third / center; }
+				&[aria-pressed="true"] {
+					background-color: var(--_failure-color);
+					&:hover, &:focus-visible {
+						background-color: color-mix(in oklab, var(--_failure-color), black 10%);
+					}
+				}
+			}
+			&.success {
+				border-inline-start: none;
+				border-start-start-radius: 0;
+				border-end-start-radius: 0;
+				&[data-n="1"] { grid-column: center / first; }
+				&[data-n="2"] { grid-column: center / second; }
+				&[data-n="3"] { grid-column: center / third; }
+				&[aria-pressed="true"] {
+					background-color: var(--_success-color);
+					&:hover, &:focus-visible {
+						background-color: color-mix(in oklab, var(--_success-color), black 10%);
+					}
+				}
+			}
+
+			&:hover, &:focus {
+				background-color: color-mix(in oklab, var(--_neutral-color), black 10%);
+				box-shadow: none;
+			}
+		}
+	}
+
+	input[type="number"] {
+		display: none;
+	}
+}

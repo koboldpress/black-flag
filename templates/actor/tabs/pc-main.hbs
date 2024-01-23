@@ -176,16 +176,13 @@
 			</div>
 		{{else}}
 			<div class="death-saves">
-				<label>
-					<span>{{localize "BF.Death.Label[other]"}}</span>
-					<a data-action="roll" data-sub-action="death-save">
-						<svg class="death-saves-control"
-							data-success="{{system.attributes.death.success}}"
-							data-failure="{{system.attributes.death.failure}}">
-							<use xlink:href="#blackFlag-deathSaves"></use>
-						</svg>
-					</a>
-				</label>
+				<span>{{localize "BF.Death.Label[other]"}}</span>
+				<blackflag-deathSaves>
+					<input type="number" name="system.attributes.death.success" value="{{system.attributes.death.success}}"
+						     min=0 step=1>
+					<input type="number" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}"
+								 min=0 step=1>
+				</blackflag-deathSaves>
 			</div>
 		{{/unless}}
 		<div class="hit-dice">

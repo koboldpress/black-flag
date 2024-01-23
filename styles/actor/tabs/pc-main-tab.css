@@ -276,48 +276,18 @@
 				}
 			}
 		}
-		.death-saves {
-			label {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 0 0.5rem;
-				color: var(--bf-text-color-light-label);
-				font-size: var(--font-size-11);
-				text-align: center;
+		> div.death-saves {
+			display: grid;
+			gap: 0 0.5rem;
+			background-color: var(--bf-color-fill);
+			color: var(--bf-text-color-light-label);
+			font-size: var(--font-size-11);
+			text-align: center;
+			text-variant: small-caps;
 
-				> span:first-child {
-					grid-column: 1 / -1;
-				}
-			}
-			a {
-				grid-column: 1 / -1;
-				&:hover {
-					filter: drop-shadow(0 0 4px var(--bf-color-border-light-blue));
-				}
-			}
-			.death-saves-control {
-				width: 100%;
-				grid-column: 1 / -1;
-				aspect-ratio: 4 / 1;
-	
-				&:is([data-success="1"], [data-success="2"], [data-success="3"]) {
-					--success-1-fill: url('#blackFlag-deathSaves-gradient-success-1');
-				}
-				&:is([data-failure="1"], [data-failure="2"], [data-failure="3"]) {
-					--failure-1-fill: url('#blackFlag-deathSaves-gradient-failure-1');
-				}
-				&:is([data-success="2"], [data-success="3"]) {
-					--success-2-fill: url('#blackFlag-deathSaves-gradient-success-2');
-				}
-				&:is([data-failure="2"], [data-failure="3"]) {
-					--failure-2-fill: url('#blackFlag-deathSaves-gradient-failure-2');
-				}
-				&:is([data-success="3"]) {
-					--success-3-fill: url('#blackFlag-deathSaves-gradient-success-3');
-				}
-				&:is([data-failure="3"]) {
-					--failure-3-fill: url('#blackFlag-deathSaves-gradient-failure-3');
-				}
+			blackFlag-deathSaves {
+				inline-size: calc(100% - 8px);
+				margin: 4px;
 			}
 		}
 	}

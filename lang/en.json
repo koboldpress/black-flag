@@ -527,39 +527,53 @@
 "BF.Damage.Type.Slashing": "Slashing",
 "BF.Damage.Type.Thunder": "Thunder",
 
-"BF.DifficultyClass.Label": "Difficulty Class",
-"BF.DifficultyClass.Abbreviation": "DC",
-"BF.DifficultyClass.Ability.Label": "DC Ability",
-"BF.DifficultyClass.Formula.Label": "DC Formula",
-"BF.DifficultyClass.Formula.Default": "8 + Ability + Proficiency",
-
-"BF.Death.Label[one]": "Death Save",
-"BF.Death.Label[other]": "Death Saves",
-"BF.Death.Failure.Label": "Death Save Failures",
-"BF.Death.Success.Label": "Death Save Successes",
-"BF.Death.Message.Label[one]": "death saving throw",
-"BF.Death.Message.Label[other]": "death savings throws",
-"BF.Death.Message.Counted": "{count} {label}",
-"BF.Death.Message.CriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
-"BF.Death.Message.Failure": "{name} has died after failing {counted}…",
-"BF.Death.Message.Success": "{name} has succeeded on {counted} and is now stable.",
-"BF.Death.Override.Failure.Label": "Failures Required",
-"BF.Death.Override.Failure.Hint": "Number of failures required before the actor dies.",
-"BF.Death.Override.Success.Label": "Successes Required",
-"BF.Death.Override.Success.Hint": "Number of successes required before the actor stabalizes.",
-"BF.Death.Override.Target.Label": "Target Value",
-"BF.Death.Override.Target.Hint": "Value that must be rolled to be considered a success.",
-"BF.Death.Status.Label": "Status",
-"BF.Death.Status.Alive": "Alive",
-"BF.Death.Status.Dead": "Dead",
-"BF.Death.Status.Dying": "Dying",
-"BF.Death.Status.Stable": "Stable",
+"BF.Death": {
+	"Label[one]": "Death Save",
+	"Label[other]": "Death Saves",
+	"Failure": {
+		"Label": "Death Save Failures",
+		"Count": "{count} Death Save Failure"
+	},
+	"Success": {
+		"Label": "Death Save Successes",
+		"Count": "{count} Death Save Success"
+	},
+	"Message": {
+		"Label[one]": "death saving throw",
+		"Label[other]": "death savings throws",
+		"Counted": "{count} {label}",
+		"CriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
+		"Failure": "{name} has died after failing {counted}…",
+		"Success": "{name} has succeeded on {counted} and is now stable."
+	},
+	"Override": {
+		"Failure.Label": "Failures Required",
+		"Failure.Hint": "Number of failures required before the actor dies.",
+		"Success.Label": "Successes Required",
+		"Success.Hint": "Number of successes required before the actor stabalizes.",
+		"Target.Label": "Target Value",
+		"Target.Hint": "Value that must be rolled to be considered a success."
+	},
+	"Status": {
+		"Label": "Status",
+		"Alive": "Alive",
+		"Dead": "Dead",
+		"Dying": "Dying",
+		"Stable": "Stable"
+	}
+},
 
 "BF.Default.Generic": "Default",
 "BF.Default.Specific": "Default ({default})",
 
 "BF.Die.Denomination.Label": "Denomination",
 "BF.Die.Number.Label": "Die Count",
+
+"BF.DifficultyClass.Label": "Difficulty Class",
+"BF.DifficultyClass.Abbreviation": "DC",
+"BF.DifficultyClass.Ability.Label": "DC Ability",
+"BF.DifficultyClass.Formula.Label": "DC Formula",
+"BF.DifficultyClass.Formula.Default": "8 + Ability + Proficiency",
 
 "BF.Distance.Label": "Distance",
 "BF.Distance.Unit.Label": "Distance Units",

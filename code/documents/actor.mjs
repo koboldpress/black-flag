@@ -867,8 +867,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			else if ( successes >= rollConfig.successThreshold ) {
 				details.updates = {
 					"system.attributes.death.status": "stable",
-					"system.attributes.death.success": 0,
-					"system.attributes.death.failure": 0
+					"system.attributes.death.success": rollConfig.successThreshold
 				};
 				details.chatString = "BF.Death.Message.Success";
 				details.count = rollConfig.successThreshold;
