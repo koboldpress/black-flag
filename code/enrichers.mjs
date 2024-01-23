@@ -10,7 +10,8 @@ export function registerCustomEnrichers() {
 		pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
 		enricher: enrichString
 	}, {
-		pattern: /&(?<type>Embed)\[(?<config>[^\]]+)\](?:{(?<label>[^}]+)})?/gi,
+		// TODO: Remove when v11 support is dropped
+		pattern: /@(?<type>Embed)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
 		enricher: enrichString
 	});
 
@@ -465,8 +466,9 @@ async function enrichEmbed(config, label, options) {
 		return null;
 	}
 
+	config = foundry.utils.mergeObject({ cite: true, caption: true, inline: config.values.includes("inline") }, config);
+
 	for ( const value of config.values ) {
-		if ( value === "features" ) config.features = true;
 		if ( config.uuid ) break;
 		try {
 			const parsed = foundry.utils.parseUuid(value);
@@ -474,108 +476,93 @@ async function enrichEmbed(config, label, options) {
 		} catch(err) {}
 	}
 
-	// Find the first GrantFeatures or ChooseFeatures advancement on the item
-	let doc;
-	if ( !config.uuid && config.features ) {
-		const advancementCollection = options.relativeTo?.system?.advancement;
-		doc = advancementCollection?.find(a => ["grantFeatures", "chooseFeatures"].includes(a.metadata.type));
-		if ( !doc ) {
-			log(`No advancement found to use when embedding features for ${config.input}.`, { level: "warn" });
-			return null;
+	config.doc = await fromUuid(config.uuid, { relative: options.relativeTo });
+	// Special backported handling of journal pages
+	if ( config.doc instanceof JournalEntryPage ) {
+		switch ( config.doc.type ) {
+			case "image": return embedImagePage(config, label, options);
+			case "text": return embedTextPage(config, label, options);
 		}
 	}
 
-	doc ??= await fromUuid(config.uuid, { relative: options.relativeTo });
-	let element;
-	if ( doc instanceof Advancement ) element = await doc.embed(config, label, options);
-	else if ( doc instanceof JournalEntryPage ) element = await enrichEmbedJournalEntryPage(doc, config, label, options);
-	if ( element ) {
-		element.classList.add("embedded-content");
-		return element;
+	// Forward everything else to documents
+	else if ( foundry.utils.getType(config.doc.toEmbed) === "function" ) {
+		const doc = config.doc;
+		delete config.doc;
+		return doc.toEmbed({ ...config, label }, options);
 	}
 
-	if ( !doc ) log(`No document can be found to embed for ${config.input}.`, { level: "warn" });
-	else log(`Cannot embed a ${doc.constructor.name} document for ${config.input}.`, { level: "warn" });
+	else log(`No document can be found to embed for ${config.input}.`, { level: "warn" });
+
 	return null;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Enrich an embedded journal entry page.
- * @param {JournalEntryPage} page - The page being embedded.
- * @param {string[]} config - Configuration data.
+ * Embed an image page.
+ * @param {object} config - Configuration data.
+ * @param {string} [label] - Optional label to replace the default caption.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML figure containing the image, caption from the image page or a custom
+ *                               caption, and a link to the source if it could be built, otherwise null.
+ */
+function embedImagePage(config, label, options) {
+	const showCaption = config.caption !== false;
+	const showCite = config.cite !== false;
+	const caption = label || config.doc.image.caption || config.doc.name;
+
+	const figure = document.createElement("figure");
+	if ( config.classes ) figure.className = config.classes;
+	figure.classList.add("content-embed");
+	figure.innerHTML = `<img src="${config.doc.src}" alt="${config.alt || caption}">`;
+
+	if ( showCaption || showCite ) {
+		const figcaption = document.createElement("figcaption");
+		if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		figure.insertAdjacentElement("beforeend", figcaption);
+	}
+	return figure;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Embed a text page.
+ * @param {object} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
- * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
- *
- * @example Create an embedded image from the UUID of an Image Journal Entry Page:
- * ```@Embed[uuid=.QnH8yGIHy4pmFBHR classes="small right"]```
- * becomes
- * ```html
- * <figure class="small right">
- *   <img src="assets/image.png">
- *   <figcaption>A caption for the image
- *     <cite>
- *       <a class="content-link" draggable="true"
- *          data-uuid="JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR"
- *          data-id="QnH8yGIHy4pmFBHR" data-type="JournalEntryPage" data-tooltip="Image Page">
- *         <i class="fas fa-file-image"></i> Image Page
- *       </a>
- *     </cite>
- *   </figcaption>
- * </figure>
- * ```
- * @example Embed the content of the Journal Entry Page inline with the given UUID:
- * ```@Embed[uuid=JournalEntry.xFNPjbSEDbWjILNj.JournalEntryPage.QnH8yGIHy4pmFBHR inline]```
- * becomes
- * ```html
- * <section>
- *   <p>The contents of the page</p>
- * </section>
- * ```
+ * @returns {HTMLElement|null} - An HTML element containing the content from the given page and a link to the
+ *                               source if it could be built, otherwise null.
  */
-async function enrichEmbedJournalEntryPage(page, config, label, options) {
-	const showCitation = config.cite !== false;
-	const createCaption = (figure, captionText) => {
-		const caption = document.createElement("figcaption");
-		if ( captionText ) caption.innerHTML += captionText;
-		if ( showCitation ) caption.innerHTML += `<cite>${page.toAnchor().outerHTML}</cite>`;
-		figure.insertAdjacentElement("beforeend", caption);
-	};
+async function embedTextPage(config, label, options) {
+	options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
+	config.inline ??= config.values.includes("inline");
 
-	if ( page.type === "image" ) {
-		const showCaption = config.caption !== false;
-
-		const figure = document.createElement("figure");
-		if ( config.classes ) figure.classList = config.classes;
-		figure.innerHTML = `<img src="${page.src}" alt="${config.alt || label || page.name}">`;
-		if ( showCaption || showCitation ) createCaption(figure, showCaption ? (label || page.image.caption) : null);
-
-		return figure;
+	const enrichedPage = await TextEditor.enrichHTML(config.doc.text.content, options);
+	if ( config.inline ) {
+		const section = document.createElement("section");
+		if ( config.classes ) section.className = config.classes;
+		section.classList.add("content-embed");
+		section.innerHTML = enrichedPage;
+		return section;
 	}
 
-	if ( page.type === "text" ) {
-		config.inline ??= config.values.includes("inline");
-		const enriched = await TextEditor.enrichHTML(page.text.content, {
-			...options, _embedDepth: options._embedDepth + 1
-		});
+	const showCaption = config.caption !== false;
+	const showCite = config.cite !== false;
+	const caption = label || config.doc.name;
+	const figure = document.createElement("figure");
+	figure.innerHTML = enrichedPage;
 
-		if ( config.inline ) {
-			const section = document.createElement("section");
-			section.innerHTML = enriched;
-			return section;
-		}
-
-		const figure = document.createElement("figure");
-		figure.innerHTML = enriched;
-		if ( config.classes ) figure.classList = config.classes;
-		if ( label || showCitation ) createCaption(figure, label);
-
-		return figure;
+	if ( config.classes ) figure.className = config.classes;
+	figure.classList.add("content-embed");
+	if ( showCaption || showCite ) {
+		const figcaption = document.createElement("figcaption");
+		if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		figure.insertAdjacentElement("beforeend", figcaption);
 	}
 
-	else {
-		return null;
-	}
+	return figure;
 }

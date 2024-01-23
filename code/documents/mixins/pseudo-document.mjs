@@ -195,6 +195,25 @@ export default Base => class extends BackportedEmbedMixin(Base) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _buildEmbedHTML(config, options={}) {
+		return this.toEmbedContents?.(config, options) ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Convert this Document to some HTML display for embedding purposes.
+	 * @param {DocumentHTMLEmbedConfig} config - Configuration for embedding behavior.
+	 * @param {EnrichmentOptions} [options] - The original enrichment options for cases where the Document embed content
+	 *                                        also contains text that must be enriched.
+	 * @returns {Promise<HTMLElement|HTMLCollection|null>}
+	 */
+	async toEmbedContents(config, options) {
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -373,4 +392,4 @@ export default Base => class extends BackportedEmbedMixin(Base) {
 		if ( this.id ) dragData.uuid = this.uuid;
 		return dragData;
 	}
-}
+};

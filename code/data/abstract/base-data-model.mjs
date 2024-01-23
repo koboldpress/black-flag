@@ -1,4 +1,4 @@
-export default class BaseDataModel extends foundry.abstract.DataModel {
+export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 
 	/**
 	 * Metadata that describes a system data type.
@@ -231,6 +231,21 @@ export default class BaseDataModel extends foundry.abstract.DataModel {
 	 */
 	prepareDerivedData() {
 		this.constructor._getMethods({ startingWith: "prepareDerived", notEndingWith: "Data" }).forEach(k => this[k]());
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Convert this Document to some HTML display for embedding purposes.
+	 * @param {DocumentHTMLEmbedConfig} config - Configuration for embedding behavior.
+	 * @param {EnrichmentOptions} [options] - The original enrichment options for cases where the Document embed content
+	 *                                        also contains text that must be enriched.
+	 * @returns {Promise<HTMLElement|HTMLCollection|null>}
+	 */
+	async toEmbed(config, options={}) {
+		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

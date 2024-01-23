@@ -78,7 +78,7 @@ export default Base => class extends Base {
 		if ( cite || caption ) {
 			const figcaption = document.createElement("figcaption");
 			if ( caption ) figcaption.innerHTML += `<strong class="embed-caption">${label || this.name}</strong>`;
-			if ( cite ) figcaption.innerHTML += `<cite>${this.toAnchor().outerHTML}</cite>`;
+			if ( cite && this.toAnchor ) figcaption.innerHTML += `<cite>${this.toAnchor().outerHTML}</cite>`;
 			figure.append(figcaption);
 		}
 		return figure;

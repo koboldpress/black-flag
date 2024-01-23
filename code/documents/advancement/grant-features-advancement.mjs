@@ -37,7 +37,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async embed(config, label, options) {
+	async toEmbedContents(config, options) {
 		const list = config.style === "list";
 		const h = list ? "strong" : config.header ?? "h6";
 
