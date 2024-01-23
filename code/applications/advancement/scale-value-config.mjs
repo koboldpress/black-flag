@@ -112,7 +112,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[
 			configuration.type ?? this.advancement.configuration.type
 		];
-		const validKeys = Object.keys(new ScaleValueType());
+		const validKeys = Object.keys(ScaleValueType.schema.initial());
 
 		let lastValue = {};
 		const scale = {};

@@ -52,7 +52,7 @@ export default class ScaleTypeDice extends ScaleTypeString {
 	get placeholder() {
 		const placeholder = super.placeholder;
 		placeholder.number ??= "";
-		placeholder.denomination = placeholder.denomination ? `d${placeholder.denomination}` : "d6";
+		placeholder.denomination = placeholder.denomination ? `d${placeholder.denomination}` : "";
 		return placeholder;
 	}
 }

@@ -33,14 +33,14 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get display() {
-		return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per]}`;
+		return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per] ?? ""}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get placeholder() {
 		const placeholder = super.placeholder;
-		placeholder.per = CONFIG.BlackFlag.recoveryPeriods.localized[placeholder.per ?? "sr"];
+		placeholder.per = CONFIG.BlackFlag.recoveryPeriods.localized[placeholder.per ?? "sr"] ?? "";
 		return placeholder;
 	}
 }

@@ -33,7 +33,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	get placeholder() {
 		const placeholder = super.placeholder;
-		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[placeholder.units ?? "foot"];
+		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[placeholder.units] ?? "";
 		return placeholder;
 	}
 }
