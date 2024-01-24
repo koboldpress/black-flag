@@ -8,6 +8,7 @@ import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
 import MovementConfig from "./config/movement-config.mjs";
+import ProficiencyConfig from "./config/proficiency-config.mjs";
 import ResistanceConfig from "./config/resistance-config.mjs";
 import SensesConfig from "./config/senses-config.mjs";
 import SkillConfig from "./config/skill-config.mjs";
@@ -251,6 +252,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "armor-class": return new ArmorClassConfig(this.actor).render(true);
 					case "initiative": return new InitiativeConfig(this.actor).render(true);
 					case "movement": return new MovementConfig(this.actor).render(true);
+					case "proficiency": return new ProficiencyConfig(this.actor).render(true);
 					case "resistance": return new ResistanceConfig(this.actor).render(true);
 					case "senses": return new SensesConfig(this.actor).render(true);
 					case "skill": return new SkillConfig(properties.key, this.actor).render(true);

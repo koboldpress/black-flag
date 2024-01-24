@@ -193,6 +193,7 @@ export async function registerHandlebarsPartials() {
 		"journal/journal-table.hbs",
 		"shared/currency.hbs",
 		"shared/inventory.hbs",
+		"shared/trait-list.hbs",
 		"shared/uses-config.hbs"
 	];
 

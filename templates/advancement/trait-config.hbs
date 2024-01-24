@@ -88,24 +88,7 @@
 				</select>
 			</label>
 
-			{{#*inline ".trait-list"}}
-				<ol class="trait-list">
-					{{#each choices as |choice key|}}
-						<li>
-							<label {{~#if choice.wildcard}} class="wildcard"{{/if}}>
-								<input type="checkbox" name="configuration.checked.{{key}}"
-									{{checked choice.chosen}} {{disabled choice.disabled}}>
-								{{choice.label}}
-							</label>
-							{{#if choice.children}}
-								{{> ".trait-list" choices=choice.children}}
-							{{/if}}
-						</li>
-					{{/each}}
-				</ol>
-			{{/inline}}
-
-			{{> ".trait-list" choices=choiceOptions}}
+			{{> "blackFlag.trait-list" choices=choiceOptions prefix="configuration.checked"}}
 
 		</fieldset>
 	</section>

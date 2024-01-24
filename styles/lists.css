@@ -163,3 +163,28 @@ ul.configuration-list {
 		padding-block-start: 0.75em;
 	}
 }
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                      Trait Lists                      */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+:is(.advancement-config.app .trait-list, .trait-list) {
+	list-style: none;
+	margin: 0;
+	margin-block-start: 0.5rem;
+	padding: 0;
+
+	label {
+		align-items: center;
+
+		&.wildcard {
+			font-style: italic;
+			font-weight: bold;
+		}
+	}
+
+	& .trait-list {
+		margin-block-start: 0;
+		margin-inline-start: 1rem;
+	}
+}
