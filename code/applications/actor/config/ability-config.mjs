@@ -50,6 +50,7 @@ export default class AbilityConfig extends BaseConfig {
 		context.abilityId = this.abilityId;
 		context.ability = this.abilityId ? context.source.abilities[this.abilityId]
 			?? this.document.system.abilities[this.abilityId] ?? {} : null;
+		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
 		context.proficiencyLevels = {
 			0: game.i18n.localize("BF.Proficiency.Level.None"),
 			1: game.i18n.localize("BF.Proficiency.Level.Proficient")

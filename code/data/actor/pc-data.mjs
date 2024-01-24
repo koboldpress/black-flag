@@ -34,7 +34,7 @@ export default class PCData extends ActorDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(new SchemaField({
-				base: new NumberField({min: 0, integer: true}),
+				base: new NumberField({min: 0, integer: true, label: "BF.Ability.Base.Label"}),
 				max: new NumberField({min: 0, initial: 20, integer: true}),
 				save: new SchemaField({
 					proficiency: new ProficiencyField({rounding: false})

@@ -4,10 +4,16 @@
 			{{selectOptions abilities selected=abilityId blank=(localize "BF.Global")}}
 		</select>
 	</h2>
-
+{{log this}}
 	{{#if ability}}
 	  <fieldset>
 			<legend>{{localize "BF.Proficiency.Label[one]"}}</legend>
+			{{#if canSetValue}}
+				<label>
+					<span>{{localize "BF.Ability.Base.Label"}}</span>
+					<input type="number" name="system.abilities.{{abilityId}}.base" value="{{ability.base}}">
+				</label>
+			{{/if}}
 			<label>
 				<span>{{localize "BF.SavingThrow.LabelLong[other]"}}</span>
 				<select name="system.abilities.{{abilityId}}.save.proficiency.multiplier">
