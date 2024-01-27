@@ -156,7 +156,8 @@ export default class PCSheet extends BaseActorSheet {
 		context.traits.push({
 			key: "languages",
 			label: "BF.Language.Label[other]",
-			value: proficiencies.languages.label || none
+			value: proficiencies.languages.label || none,
+			config: "language"
 		});
 
 		// Armor

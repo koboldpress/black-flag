@@ -127,23 +127,14 @@
 		</label>
 		<label>
 			<span>
-				<!--{{#if modes.editing}}
-					<a data-action="config" data-type="languages">
+				{{#if modes.editing}}
+					<a data-action="config" data-type="language">
 						<i class="fa-solid fa-cog"></i>
 					</a>
-				{{/if}}-->
+				{{/if}}
 				{{localize "BF.Language.Label[other]"}}
 			</span>
-			{{#if modes.editing}}
-				<sl-select value="{{system.proficiencies.languages.list}}" name="system.proficiencies.languages.value"
-					multiple clearable size="small">
-					{{#each CONFIG.languages.localized}}
-						<sl-option value="{{@key}}">{{this}}</sl-option>
-					{{/each}}
-				</sl-select>
-			{{else}}
-				{{traits.languages}}
-			{{/if}}
+			<span>{{traits.languages}}</span>
 		</label>
 		<label>
 			<span>{{localize "BF.Initiative.Label"}}</span>

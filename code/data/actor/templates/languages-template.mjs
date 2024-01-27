@@ -27,8 +27,18 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedLanguages() {
-		this.proficiencies.languages.label = Trait.localizedList(
-			this.proficiencies.languages.value, [], { style: "short", trait: "languages" }
-		);
+		const languages = this.proficiencies.languages;
+		const formatters = [];
+		const entries = Array.from(languages.value).map(v => Trait.keyLabel(v, { trait: "languages" }));
+		for ( const tag of languages.tags ) {
+			const config = CONFIG.BlackFlag.languageTags[tag];
+			if ( config?.formatter ) formatters.push(config.formatter);
+			else entries.push(game.i18n.localize(config?.display ?? tag));
+		}
+		languages.label = game.i18n.getListFormatter({ style: "short" }).format(entries);
+
+		for ( const formatter of formatters ) {
+			languages.label = game.i18n.format(formatter, { languages: languages.label });
+		}
 	}
 }

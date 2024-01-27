@@ -1,0 +1,10 @@
+<form autocomplete="off">
+	<fieldset class="languages">
+		<legend>{{localize "BF.Language.Label[other]"}}</legend>
+		{{> "blackFlag.trait-list" choices=languageOptions prefix="languages"}}
+	</fieldset>
+	<fieldset class="tags">
+		<legend>{{localize "BF.Language.Tag.Label"}}</legend>
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
+	</fieldset>
+</form>
