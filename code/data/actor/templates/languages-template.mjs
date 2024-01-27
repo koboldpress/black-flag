@@ -1,7 +1,7 @@
 import { numberFormat, Trait } from "../../../utils/_module.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 
-const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data for an actor's languages.
@@ -9,6 +9,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @typedef {object} LanguagesData
  * @property {Set<string>} value - Language dialects understood by actor.
  * @property {Record<string, CommunicationData>} communication
+ * @property {string[]} custom - Additional custom languages.
  * @property {Set<string>} tags - Additional tags describing actor's language usage.
  */
 
@@ -36,6 +37,7 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 						range: new NumberField({min: 0, label: "BF.Range.Label"}),
 						units: new StringField({initial: "foot", label: "BF.Range.Unit.Label"})
 					}), {label: "BF.Language.Communication.Label"}),
+					custom: new ArrayField(new StringField(), {label: "BF.Language.Custom.Label"}),
 					tags: new SetField(new StringField(), {label: "BF.Language.Tag.Label"})
 				}, {label: "BF.Language.Label[other]"})
 			})
@@ -50,6 +52,7 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 		const languages = this.proficiencies.languages;
 		const formatters = [];
 		const entries = Array.from(languages.value).map(v => Trait.keyLabel(v, { trait: "languages" }));
+		entries.push(...languages.custom);
 		for ( const tag of languages.tags ) {
 			const config = CONFIG.BlackFlag.languageTags[tag];
 			if ( config?.formatter ) formatters.push(config.formatter);

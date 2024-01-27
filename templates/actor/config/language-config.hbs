@@ -7,6 +7,28 @@
 	</div>
 	<div class="right">
 		<fieldset>
+			<legend>{{localize "BF.Language.Custom.Label"}}</legend>
+			<ul class="configuration-list">
+				{{#each custom}}
+					<li>
+						<div class="item-name activity-name">
+							<input type="text" name="custom.{{@index}}" value="{{this}}">
+						</div>
+						<div class="item-controls">
+							<a data-action="delete" data-index="{{@index}}">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</div>
+					</li>
+				{{/each}}
+				<li class="add-control">
+					<a data-action="add">
+						<i class="fa-solid fa-plus"></i> {{localize "BF.Language.Custom.Add"}}
+					</a>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
 			<legend>{{localize "BF.Language.Tag.Label"}}</legend>
 			{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
 		</fieldset>

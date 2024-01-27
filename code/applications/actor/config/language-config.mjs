@@ -34,6 +34,7 @@ export default class LanguageConfig extends BaseConfig {
 			obj[key] = { label: game.i18n.localize(config.label), value: languages.communication[key] ?? {} };
 			return obj;
 		}, {});
+		context.custom = languages.custom;
 		context.tagOptions = Object.entries(CONFIG.BlackFlag.languageTags).reduce((obj, [key, config]) => {
 			obj[key] = { label: game.i18n.localize(config.label), chosen: languages.tags.has(key) };
 			return obj;
@@ -51,6 +52,16 @@ export default class LanguageConfig extends BaseConfig {
 
 		for ( const checkbox of html.querySelectorAll('input[type="checkbox"]:checked') ) {
 			this._onToggleCategory(checkbox);
+		}
+
+		html.querySelector('[data-action="add"]').addEventListener("click", event =>
+			this.submit({ updateData: { newCustom: true } })
+		);
+
+		for ( const control of html.querySelectorAll('[data-action="delete"]') ) {
+			control.addEventListener("click", event =>
+				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
+			);
 		}
 	}
 
@@ -81,14 +92,19 @@ export default class LanguageConfig extends BaseConfig {
 
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
-		const communicationChanges = Object.entries(updates.communication).reduce((obj, [key, value]) => {
-			if ( !value ) obj[`-=${key}`] = null;
-			else obj[`${key}.range`] = value;
-			return obj;
-		}, {});
+
+		const custom = Array.from(Object.values(updates.custom ?? {}));
+		if ( updates.deleteCustom !== undefined ) custom.splice(updates.deleteCustom, 1);
+		if ( updates.newCustom ) custom.push("");
+
 		this.document.update({"system.proficiencies.languages": {
 			value: filteredKeys(updates.dialects ?? {}),
-			communication: communicationChanges,
+			communication: Object.entries(updates.communication).reduce((obj, [key, value]) => {
+				if ( !value ) obj[`-=${key}`] = null;
+				else obj[`${key}.range`] = value;
+				return obj;
+			}, {}),
+			custom,
 			tags: filteredKeys(updates.tags ?? {})
 		}});
 	}
