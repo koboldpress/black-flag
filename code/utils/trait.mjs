@@ -162,6 +162,7 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 			sorting: traitConfig.sortCategories !== false
 		};
 		if ( data.children ) {
+			result[key].selectableCategory = data?.selectableCategory ?? false;
 			const children = result[key].children = {};
 			if ( prefixed && any ) {
 				const anyKey = `${key}:*`;

@@ -139,6 +139,7 @@ export const languages = {
 			primordial: {
 				label: "BF.Language.Dialect.Primordial",
 				localization: "BF.Language.Category.Primordial",
+				selectableCategory: true,
 				children: {
 					aquan: {
 						label: "BF.Language.Dialect.Aquan"

@@ -37,7 +37,10 @@ export default class SelectChoices {
 		const set = new Set();
 		for ( const [key, choice] of Object.entries(this) ) {
 			if ( !choice.children ) set.add(key);
-			else choice.children.set.forEach(k => set.add(k));
+			else {
+				if ( choice.selectableCategory ) set.add(`${key}!`);
+				choice.children.set.forEach(k => set.add(k));
+			}
 		}
 		return set;
 	}
@@ -50,7 +53,6 @@ export default class SelectChoices {
 	 * @returns {object}
 	 */
 	get(key) {
-		// TODO: Might want to change this to a breadth-first search
 		const search = (data, key) => {
 			for ( const [k, v] of Object.entries(data) ) {
 				if ( k === key ) return v;
@@ -160,8 +162,14 @@ export default class SelectChoices {
 			// Simple filter ("languages:common") - Include this entry
 			// Category filter ("tools:artisan") - Include category but not children
 			const wildcardKey = key.replace(/(:|^)([\w]+)$/, "$1*");
+			const forcedCategoryKey = `${key}!`;
 			if ( filter.has(key) && !filter.has(wildcardKey) ) {
-				if ( trait.children ) delete trait.children;
+				if ( trait.children ) {
+					if ( filter.has(forcedCategoryKey) ) {
+						trait.children.filter(filter);
+						if ( foundry.utils.isEmpty(trait.children) ) delete trait.children;
+					} else delete trait.children;
+				}
 			}
 
 			// Check children, remove entry if no children match filter

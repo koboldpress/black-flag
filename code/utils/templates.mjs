@@ -1,5 +1,6 @@
 import NotificationTooltip from "../applications/notification-tooltip.mjs";
 import { linkForUUID } from "./document.mjs";
+import { makeLabel } from "./localization.mjs";
 import { numberFormat } from "./number.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -29,51 +30,61 @@ function dataset(context, options) {
  *
  * @param {SelectChoices} choices - Choices to format.
  * @param {object} options
- * @param {object} options.hash
- * @param {boolean} [options.localize] - Should the label be localized?
  * @param {string} [options.blank] - Name for the empty option, if one should be added.
- * @param {string} [options.labelAttr] - Attribute pointing to label string.
- * @param {string} [options.chosenAttr] - Attribute pointing to chosen boolean.
- * @param {string} [options.childrenAttr] - Attribute pointing to array of children.
  * @returns {Handlebars.SafeString} - Formatted option list.
  */
 function groupedSelectOptions(choices, options) {
-	const localize = options.hash.localize ?? false;
-	const blank = options.hash.blank ?? null;
-	const labelAttr = options.hash.labelAttr ?? "label";
-	const chosenAttr = options.hash.chosenAttr ?? "chosen";
-	const childrenAttr = options.hash.childrenAttr ?? "children";
-
-	const getLabel = value => foundry.utils.getType(value) === "Object"
-		? foundry.utils.getProperty(value, labelAttr) : value;
+	const categories = {};
+	const separateValues = (object, category) => {
+		for ( const [key, value] of Object.entries(object) ) {
+			value.label = makeLabel(value);
+			if ( !value.children || value.selectableCategory ) {
+				const childValue = foundry.utils.deepClone(value);
+				delete childValue.children;
+				if ( category ) {
+					categories[category].children ??= {};
+					categories[category].children[key] = childValue;
+				} else {
+					categories[key] = childValue;
+				}
+			}
+			if ( value.children ) {
+				categories[key] = foundry.utils.deepClone(value);
+				const children = categories[key].children;
+				categories[key].children = {};
+				const parentLabel = categories[category]?.label;
+				if ( parentLabel ) categories[key].label = `${parentLabel} - ${categories[key].label}`;
+				separateValues(children, key);
+			}
+		}
+	};
+	separateValues(foundry.utils.deepClone(choices));
 
 	// Create an option
 	const option = (name, label, chosen) => {
-		if ( localize ) label = game.i18n.localize(label);
 		html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
 	};
 
 	// Create an group
 	const group = category => {
-		let label = getLabel(category);
-		if ( localize ) game.i18n.localize(label);
-		html += `<optgroup label="${label}">`;
-		children(category[childrenAttr]);
+		html += `<optgroup label="${category.label}">`;
+		children(category.children);
 		html += "</optgroup>";
 	};
 
 	// Add children
 	const children = children => {
 		for ( let [name, child] of Object.entries(children) ) {
-			if ( child[childrenAttr] ) group(child);
-			else option(name, getLabel(child), child[chosenAttr] ?? false);
+			if ( child.children ) {
+				if ( !foundry.utils.isEmpty(child.children) ) group(child);
+			} else option(name, child.label, child.chosen ?? false);
 		}
 	};
 
 	// Create the options
 	let html = "";
-	if ( blank !== null ) option("", blank);
-	children(choices);
+	if ( (options.blank ?? null) !== null ) option("", options.blank ?? "");
+	children(categories);
 	return new Handlebars.SafeString(html);
 }
 
@@ -148,7 +159,7 @@ function notificationBadge(document, options={}) {
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		"blackFlag-dataset": dataset,
-		"blackFlag-groupedSelectOptions": groupedSelectOptions,
+		"blackFlag-groupedSelectOptions": (choices, options) => groupedSelectOptions(choices, options.hash),
 		"blackFlag-linkForUUID": linkForUUID,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash)
