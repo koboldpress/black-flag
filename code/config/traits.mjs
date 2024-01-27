@@ -193,3 +193,15 @@ export const languageTags = {
 		display: "BF.Language.Tag.KnownInLife.Display"
 	}
 };
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Communication modes that have an associated distance.
+ * @enum {LabeledConfiguration}
+ */
+export const rangedCommunication = {
+	telepathy: {
+		label: "BF.Language.Communication.Telepathy"
+	}
+};

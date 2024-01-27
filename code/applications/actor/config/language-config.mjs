@@ -29,7 +29,11 @@ export default class LanguageConfig extends BaseConfig {
 	async getData(options) {
 		const context = await super.getData(options);
 		const languages = this.document.system.proficiencies.languages ?? {};
-		context.languageOptions = Trait.choices("languages", { chosen: languages.value });
+		context.dialects = Trait.choices("languages", { chosen: languages.value });
+		context.communication = Object.entries(CONFIG.BlackFlag.rangedCommunication).reduce((obj, [key, config]) => {
+			obj[key] = { label: game.i18n.localize(config.label), value: languages.communication[key] ?? {} };
+			return obj;
+		}, {});
 		context.tagOptions = Object.entries(CONFIG.BlackFlag.languageTags).reduce((obj, [key, config]) => {
 			obj[key] = { label: game.i18n.localize(config.label), chosen: languages.tags.has(key) };
 			return obj;
@@ -77,9 +81,15 @@ export default class LanguageConfig extends BaseConfig {
 
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
-		this.document.update({
-			"system.proficiencies.languages.value": filteredKeys(updates.languages ?? {}),
-			"system.proficiencies.languages.tags": filteredKeys(updates.tags ?? {})
-		});
+		const communicationChanges = Object.entries(updates.communication).reduce((obj, [key, value]) => {
+			if ( !value ) obj[`-=${key}`] = null;
+			else obj[`${key}.range`] = value;
+			return obj;
+		}, {});
+		this.document.update({"system.proficiencies.languages": {
+			value: filteredKeys(updates.dialects ?? {}),
+			communication: communicationChanges,
+			tags: filteredKeys(updates.tags ?? {})
+		}});
 	}
 }

@@ -1,10 +1,23 @@
 <form autocomplete="off">
-	<fieldset class="languages">
+	<div class="left">
+	<fieldset>
 		<legend>{{localize "BF.Language.Label[other]"}}</legend>
-		{{> "blackFlag.trait-list" choices=languageOptions prefix="languages"}}
+		{{> "blackFlag.trait-list" choices=dialects prefix="dialects"}}
 	</fieldset>
-	<fieldset class="tags">
-		<legend>{{localize "BF.Language.Tag.Label"}}</legend>
-		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
-	</fieldset>
+	</div>
+	<div class="right">
+		<fieldset>
+			<legend>{{localize "BF.Language.Tag.Label"}}</legend>
+			{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
+		</fieldset>
+		<fieldset>
+			<legend>{{localize "BF.Language.Communication.Label"}}</legend>
+			{{#each communication}}
+				<label>
+					<span>{{label}}</span>
+					<input type="number" name="communication.{{@key}}" value="{{value.range}}">
+				</label>
+			{{/each}}
+		</fieldset>
+	</div>
 </form>
