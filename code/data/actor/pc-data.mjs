@@ -8,6 +8,7 @@ import ProficiencyField from "../fields/proficiency-field.mjs";
 import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, TimeField } from "../fields/_module.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
+import InitiativeTemplate from "./templates/initiative-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -15,7 +16,7 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class PCData extends ActorDataModel.mixin(
-	ACTemplate, ConditionsTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, InitiativeTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
@@ -325,31 +326,7 @@ export default class PCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedInitiative() {
-		const init = this.attributes.initiative ??= {};
-		init.ability ||= CONFIG.BlackFlag.defaultAbilities.initiative;
-		const ability = this.abilities[init.ability];
-
-		init.proficiency = new Proficiency(
-			this.attributes.proficiency,
-			init.proficiency.multiplier,
-			init.proficiency.rounding
-		);
-
-		const initiativeData = [
-			{ type: "ability-check", ability: init.ability, proficiency: init.proficiency.multiplier },
-			{ type: "initiative", proficiency: init.proficiency.multiplier }
-		];
-		init.modifiers = {
-			_data: initiativeData,
-			bonus: this.getModifiers(initiativeData),
-			min: this.getModifiers(initiativeData, "min"),
-			note: this.getModifiers(initiativeData, "note")
-		};
-		init.bonus = this.buildBonus(init.modifiers.bonus, {
-			deterministic: true, rollData: this.parent.getRollData({deterministic: true})
-		});
-
-		init.mod = (ability?.mod ?? 0) + init.proficiency.flat + init.bonus;
+		this.computeInitiative();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

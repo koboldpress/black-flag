@@ -66,11 +66,16 @@ export default class IconElement extends HTMLElement {
 		if ( !this.constructor.#stylesheet ) {
 			this.constructor.#stylesheet = new CSSStyleSheet();
 			this.constructor.#stylesheet.replaceSync(`
-				:host { display: contents; }
+				:host {
+					display: contents;
+					--_icon-fill: var(--icon-fill, currentcolor);
+					--_icon-width: var(--icon-width, var(--icon-size, 1em));
+					--_icon-height: var(--icon-height, var(--icon-size, 1em));
+				}
 				svg {
-					fill: var(--icon-fill, #000);
-					width: var(--icon-width, var(--icon-size, 1em));
-					height: var(--icon-height, var(--icon-size, 1em));
+					fill: var(--_icon-fill, #000);
+					width: var(--_icon-width, 1em);
+					height: var(--_icon-height, 1em);
 				}
 			`);
 		}

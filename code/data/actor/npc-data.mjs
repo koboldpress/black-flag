@@ -3,16 +3,16 @@ import Proficiency from "../../documents/proficiency.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
-import ProficiencyField from "../fields/proficiency-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
+import InitiativeTemplate from "./templates/initiative-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class NPCData extends ActorDataModel.mixin(
-	ACTemplate, ConditionsTemplate, ModifiersTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, InitiativeTemplate, ModifiersTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
@@ -166,6 +166,12 @@ export default class NPCData extends ActorDataModel.mixin(
 		if ( this.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedInitiative() {
+		this.computeInitiative();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

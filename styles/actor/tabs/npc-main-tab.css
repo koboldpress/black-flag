@@ -1,0 +1,125 @@
+.black-flag.npc.sheet .sheet-body [data-tab="main"] {
+	label {
+		display: flex;
+		gap: 0.25em;
+		align-items: first baseline;
+
+		> span:first-child {
+			color: var(--bf-text-color-blue);
+			font-weight: bold;
+		}
+	}
+	input {
+		background: none;
+	}
+
+	.type {
+		display: flex;
+		align-items: center;
+		gap: 0.25em;
+		margin-block: 2px;
+		font-style: italic;
+
+		&:has(input) {
+			font-style: normal;
+		}
+	}
+
+	.ac-label {
+		text-transform: lowercase;
+	}
+
+	.stats {
+		display: flex;
+		flex-wrap: wrap;
+
+		> label {
+			flex: 1 0 100%;
+		}
+		> label.stats__narrow {
+			flex: 1 1 50%;
+		}
+
+		input {
+			width: 6em;
+			height: unset;
+		}
+		input[name^="system.attributes.hp"] {
+			width: 3em;
+		}
+		input[name="system.attributes.hp.value"] {
+			text-align: end;
+		}
+		sl-select {
+			flex-grow: 1;
+			--sl-input-background-color: transparent;
+		}
+		[data-sub-action="initiative"] {
+			display: inline flow-root;
+			position: relative;
+			inline-size: 2em;
+			top: 2px;
+			left: 4px;
+			text-align: center;
+
+			&:hover, &:focus-visible {
+				--icon-fill: var(--bf-text-color-white);
+				filter:
+					drop-shadow(0 0 1px var(--bf-color-border-light-blue))
+					drop-shadow(0 0 3px var(--bf-color-border-light-blue))
+					drop-shadow(0 0 7px var(--bf-color-border-light-blue));
+			}
+		}
+	}
+
+	.abilities {
+		display: grid;
+		gap: 2px;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: max-content max-content;
+		margin-block: 10px;
+		border-block: 2px solid var(--bf-color-border-blue);
+		padding-block: 3px;
+
+		[data-ability] {
+			grid-row: 1 / -1;
+			display: grid;
+			grid-template-rows: subgrid;
+	
+			> label {
+				grid-row: 1;
+				display: block;
+				color: var(--bf-text-color-blue);
+				font-weight: bold;
+				text-align: center;
+				text-transform: uppercase;
+			}
+			> span, input {
+				grid-row: 2;
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+
+	.features {
+		h2 {
+			margin-block-start: 14px;
+			border: none;
+			border-start-end-radius: var(--end-border-radius);
+			border-end-end-radius: var(--end-border-radius);
+			padding-block-start: 1px;
+			padding-inline-start: 2px;
+			background: var(--bf-background-color-gray);
+			color: var(--bf-text-color-blue);
+			font-size: var(--font-size-14);
+			text-transform: uppercase;
+		}
+
+		.feature {
+			strong:first-child + p {
+				display: inline;
+			}
+		}
+	}
+}

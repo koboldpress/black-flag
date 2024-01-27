@@ -4,12 +4,6 @@
 export function cacheInterfaceSVG() {
 	cacheSVG({
 		armorClass: "systems/black-flag/artwork/interface/armor-class.svg",
-		d4: "systems/black-flag/artwork/interface/dice/d4.svg",
-		d6: "systems/black-flag/artwork/interface/dice/d6.svg",
-		d8: "systems/black-flag/artwork/interface/dice/d8.svg",
-		d10: "systems/black-flag/artwork/interface/dice/d10.svg",
-		d12: "systems/black-flag/artwork/interface/dice/d12.svg",
-		d20: "systems/black-flag/artwork/interface/dice/d20.svg",
 		proficiency: "systems/black-flag/artwork/interface/proficiency.svg"
 	});
 }

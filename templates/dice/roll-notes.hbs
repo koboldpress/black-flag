@@ -4,7 +4,7 @@
 		{{#each rollNotes}}
 			<label>
 				<figure class="advantage-mode" data-advantage-mode="{{this.note.rollMode}}">
-					<svg class="die-icon"><use xlink:href="#blackFlag-d20"></use></svg>
+					<blackFlag-icon class="die-icon" src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
 					<figcaption>{{localize this.advantageAbbreviation}}</figcaption>
 				</figure>
 				<p>{{this.note.text}}</p>

@@ -145,8 +145,16 @@
 				{{traits.languages}}
 			{{/if}}
 		</label>
+		<label>
+			<span>{{localize "BF.Initiative.Label"}}</span>
+			<span>
+				{{blackFlag-number system.attributes.initiative.mod sign=true}}
+				<a data-action="roll" data-sub-action="initiative">
+					<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
+				</a>
+			</span>
+		</label>
 	</div>
-	<!-- TODO: Initiative -->
 	
 	<div class="abilities">
 		{{#each system.abilities}}
@@ -156,7 +164,7 @@
 				</label>
 				{{#if @root.modes.editing}}
 					<input id="{{@root.appID}}-ability-{{@key}}" type="number" name="system.abilities.{{@key}}.mod"
-						value="{{_source.mod}}" step="1">
+						value="{{_source.mod}}" placeholder="0" step="1">
 				{{else}}
 					<span id="{{@root.appID}}-ability-{{@key}}">{{blackFlag-number mod sign=true}}</span>
 				{{/if}}

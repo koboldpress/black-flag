@@ -199,7 +199,8 @@
 					<span class="max">{{blackFlag-number data.max}}</span>
 					<button type="button" data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
 						{{disabled (eq data.available 0)}}>
-						<svg class="die-icon blue"><use xlink:href="#blackFlag-d{{denomination}}"></use></svg>
+						<blackFlag-icon class="die-icon blue"
+							src="systems/black-flag/artwork/interface/dice/d{{denomination}}.svg"></blackFlag-icon>
 					</button>
 				</div>
 			{{/each}}
@@ -218,7 +219,7 @@
 		<div class="block">
 			<span class="value">{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
 			<button type="button" data-action="roll" data-sub-action="initiative">
-				<svg class="die-icon blue"><use xlink:href="#blackFlag-d20"></use></svg>
+				<blackFlag-icon class="die-icon blue" src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
 			</button>
 		</div>
 	</fieldset>

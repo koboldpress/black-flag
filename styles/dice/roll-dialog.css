@@ -81,13 +81,10 @@
 		.advantage-mode {
 			margin: 0;
 			contain: layout;
-			width: 25px;
-			height: 25px;
+			--icon-size: 25px;
+			block-size: var(--icon-size);
+			inline-size: var(--icon-size);
 
-			.die-icon {
-				width: 25px;
-				height: 25px;
-			}
 			figcaption {
 				position: absolute;
 				top: 0;
@@ -102,12 +99,9 @@
 				color: white;
 			}
 
-			&[data-advantage-mode="1"] .die-icon {
-				--die-fill: var(--die-green-color);
-			}
-			&[data-advantage-mode="-1"] .die-icon {
-				--die-fill: var(--die-red-color);
-			}
+			.die-icon { --icon-size: inherit; }
+			&[data-advantage-mode="1"] .die-icon { --icon-fill: var(--die-green-color); }
+			&[data-advantage-mode="-1"] .die-icon { --icon-fill: var(--die-red-color); }
 		}
 	}
 }
