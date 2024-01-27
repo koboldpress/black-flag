@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for traits that apply to actors.
  *
@@ -84,63 +86,97 @@ export const traits = {
 
 /**
  * Standard languages provided by the system.
- * @enum {LabeledConfiguration}
+ * @enum {NestedTypeConfiguration}
  */
 export const languages = {
-	abyssal: {
-		label: "BF.Language.Abyssal"
+	standard: {
+		localization: "BF.Language.Category.Standard",
+		children: {
+			common: {
+				label: "BF.Language.Dialect.Common"
+			},
+			dwarvish: {
+				label: "BF.Language.Dialect.Dwarvish"
+			},
+			elvish: {
+				label: "BF.Language.Dialect.Elvish"
+			},
+			giant: {
+				label: "BF.Language.Dialect.Giant"
+			},
+			gnomish: {
+				label: "BF.Language.Dialect.Gnomish"
+			},
+			goblin: {
+				label: "BF.Language.Dialect.Goblin"
+			},
+			halfling: {
+				label: "BF.Language.Dialect.Halfling"
+			},
+			orcish: {
+				label: "BF.Language.Dialect.Orcish"
+			}
+		}
 	},
-	celestial: {
-		label: "BF.Language.Celestial"
-	},
-	common: {
-		label: "BF.Language.Common"
-	},
-	draconic: {
-		label: "BF.Language.Draconic"
-	},
-	dwarvish: {
-		label: "BF.Language.Dwarvish"
-	},
-	elvish: {
-		label: "BF.Language.Elvish"
-	},
-	giant: {
-		label: "BF.Language.Giant"
-	},
-	gnomish: {
-		label: "BF.Language.Gnomish"
-	},
-	goblin: {
-		label: "BF.Language.Goblin"
-	},
-	halfling: {
-		label: "BF.Language.Halfling"
-	},
-	infernal: {
-		label: "BF.Language.Infernal"
-	},
-	machineSpeech: {
-		label: "BF.Language.MachineSpeech"
-	},
-	orcish: {
-		label: "BF.Language.Orcish"
-	},
-	primordial: {
-		label: "BF.Language.Primordial"
-	},
-	sylvan: {
-		label: "BF.Language.Sylvan"
-	},
-	undercommon: {
-		label: "BF.Language.Undercommon"
-	},
-	voidSpeech: {
-		label: "BF.Language.VoidSpeech"
+	esoteric: {
+		localization: "BF.Language.Category.Esoteric",
+		children: {
+			abyssal: {
+				label: "BF.Language.Dialect.Abyssal"
+			},
+			celestial: {
+				label: "BF.Language.Dialect.Celestial"
+			},
+			draconic: {
+				label: "BF.Language.Dialect.Draconic"
+			},
+			infernal: {
+				label: "BF.Language.Dialect.Infernal"
+			},
+			machineSpeech: {
+				label: "BF.Language.Dialect.MachineSpeech"
+			},
+			primordial: {
+				label: "BF.Language.Dialect.Primordial",
+				localization: "BF.Language.Category.Primordial",
+				children: {
+					aquan: {
+						label: "BF.Language.Dialect.Aquan"
+					},
+					auran: {
+						label: "BF.Language.Dialect.Auran"
+					},
+					ignan: {
+						label: "BF.Language.Dialect.Ignan"
+					},
+					terran: {
+						label: "BF.Language.Dialect.Terran"
+					}
+				}
+			},
+			sylvan: {
+				label: "BF.Language.Dialect.Sylvan"
+			},
+			undercommon: {
+				label: "BF.Language.Dialect.Undercommon"
+			},
+			voidSpeech: {
+				label: "BF.Language.Dialect.VoidSpeech"
+			}
+		}
 	}
 };
+localizeConfig(languages, { flatten: true, keepCategories: c => !!c.label });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Configuration information for language tags.
+ *
+ * @typedef {LabeledConfiguration} LanguageTagConfiguration
+ * @property {string} [display] - Localization key for tags that will be displayed as part of the language list.
+ * @property {string} [formatter] - Localization key for tags that cause the language list to be wrapped.
+ */
 
 /**
  * Tags the describe additional details of a character's communication.
@@ -148,6 +184,11 @@ export const languages = {
  */
 export const languageTags = {
 	cantSpeak: {
-		label: "BF.Language.Tag.CantSpeak"
+		label: "BF.Language.Tag.CantSpeak.Label",
+		formatter: "BF.Language.Tag.CantSpeak.Formatter"
+	},
+	knownInLife: {
+		label: "BF.Language.Tag.KnownInLife.Label",
+		display: "BF.Language.Tag.KnownInLife.Display"
 	}
 };

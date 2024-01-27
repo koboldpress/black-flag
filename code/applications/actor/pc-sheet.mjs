@@ -153,11 +153,10 @@ export default class PCSheet extends BaseActorSheet {
 		});
 
 		// Languages
-		// TODO: Add language tags
 		context.traits.push({
 			key: "languages",
 			label: "BF.Language.Label[other]",
-			value: Trait.localizedList(proficiencies.languages.value, [], { style: "short", trait: "languages" }) || none
+			value: proficiencies.languages.label || none
 		});
 
 		// Armor
@@ -331,7 +330,13 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _onDropItemCreate(event, items) {
+	/**
+	 * Handle a dropped item in place of normal handler in InventoryElement.
+	 * @param {Event} event - Triggering drop event.
+	 * @param {BlackFlagItem[]} items - Dropped items.
+	 * @returns {BlackFlagItem[]|void} - Return any items that should continue through to InventoryElement for handling.
+	 */
+	async _handleDroppedItems(event, items) {
 		if ( !(items instanceof Array) ) items = [items];
 
 		const { classes, concepts, others } = items.reduce((types, item) => {
@@ -361,7 +366,7 @@ export default class PCSheet extends BaseActorSheet {
 
 		// For normal items, create normally
 		if ( others.length ) {
-			await this.actor.createEmbeddedDocuments("Item", others);
+			return others;
 		}
 	}
 }

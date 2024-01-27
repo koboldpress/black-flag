@@ -374,6 +374,10 @@ export default class InventoryElement extends AppAssociatedElement {
 	static async dropItems(event, target, itemData) {
 		const isContainer = target.type === "container";
 		const actor = isContainer ? target.parent : target;
+
+		if ( actor?.sheet._handleDroppedItems ) itemData = await actor.sheet._handleDroppedItems(event, itemData);
+		if ( !itemData?.length ) return;
+
 		const item = itemData[0];
 		// TODO: Add support for multiple items
 

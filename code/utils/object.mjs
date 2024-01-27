@@ -28,6 +28,40 @@ export function filteredKeys(obj, filter) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Flatten a configuration object with children into a single object. Final output will be ordered depth-first.
+ * @param {SelectChoices|NestedTypeConfiguration} object - Nested object to flatten.
+ * @param {object} [options={}]
+ * @param {boolean|Function(object): boolean} [options.keepCategories=false] - Keep category listings in the final
+ *                                                                             object or only entries that don't have
+ *                                                                             children of their own.
+ * @returns {object}
+ */
+export function flattenChildren(object, { keepCategories=false }={}) {
+	const flattened = {};
+
+	const makeFlat = level => {
+		for ( const [key, value] of Object.entries(level) ) {
+			const entry = foundry.utils.deepClone(value);
+			const children = entry.children;
+			delete entry.children;
+
+			let keep;
+			if ( !children ) keep = true;
+			else if ( foundry.utils.getType(keepCategories) === "function" ) keep = keepCategories(entry);
+			else keep = keepCategories;
+			if ( keep ) flattened[key] = entry;
+
+			if ( children ) makeFlat(children);
+		}
+	};
+	makeFlat(object);
+
+	return flattened;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Sort the provided object by its values or by an inner sortKey.
  * @param {object} obj - The object to sort.
  * @param {object} [options={}]

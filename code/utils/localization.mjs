@@ -1,4 +1,4 @@
-import { sortObjectEntries } from "./object.mjs";
+import { flattenChildren, sortObjectEntries } from "./object.mjs";
 
 /**
  * Cached store of Intl.ListFormat instances.
@@ -45,12 +45,16 @@ export function localizeConfig(config, { propertyName="localized", ...options }=
  * @param {string} [options.pluralRule="one"] - Pluralization rule to use with localization value.
  * @param {string} [options.labelKeyPath="label"] - Path to the standard label.
  * @param {string} [options.localizationKeyPath="label"] - Path to the pluralizable label.
+ * @param {boolean} [options.flatten=false] - For nested configs with children, flatten them to one level.
+ * @param {boolean|Function(object): boolean} [options.keepCategories=true] - Passed to `flattenChildren`.
  * @param {boolean} [options.objectOutput=false] - Output values as objects with label property.
  * @returns {object}
  */
 export function makeLabels(object, {
-	sort=true, pluralRule="one", labelKeyPath="label", localizationKeyPath="localization", objectOutput=false
+	sort=true, pluralRule="one", labelKeyPath="label", localizationKeyPath="localization",
+	flatten=false, keepCategories=true, objectOutput=false
 }={}) {
+	if ( flatten ) object = flattenChildren(object, { keepCategories });
 	const localized = Object.entries(object).map(([k, d]) => {
 		const label = makeLabel(d, { pluralRule, labelKeyPath, localizationKeyPath });
 		return [k, objectOutput ? { ...d, [labelKeyPath]: label } : label];

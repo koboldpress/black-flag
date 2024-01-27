@@ -94,10 +94,7 @@ export default class NPCSheet extends BaseActorSheet {
 		// TODO: Add senses tags
 
 		// Languages
-		context.traits.languages = Trait.localizedList(
-			proficiencies.languages.value, [], { style: "narrow", trait: "languages" }
-		) || "—";
-		// TODO: Add language tags
+		context.traits.languages = proficiencies.languages.label || "—";
 
 		// Resistances
 		const resistances = traits.damage.resistances.value.map(t =>

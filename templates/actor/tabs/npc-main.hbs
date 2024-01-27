@@ -137,8 +137,8 @@
 			{{#if modes.editing}}
 				<sl-select value="{{system.proficiencies.languages.list}}" name="system.proficiencies.languages.value"
 					multiple clearable size="small">
-					{{#each CONFIG.languages}}
-						<sl-option value="{{@key}}">{{localize label}}</sl-option>
+					{{#each CONFIG.languages.localized}}
+						<sl-option value="{{@key}}">{{this}}</sl-option>
 					{{/each}}
 				</sl-select>
 			{{else}}

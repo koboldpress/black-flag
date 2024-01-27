@@ -52,7 +52,7 @@ import * as weapons from "./weapons.mjs";
  * @typedef {object} NestedTypeConfiguration
  * @property {string} [label] - Localizable label for this type or category. Either this or localization must be set.
  * @property {string} [localization] - Pluralizable label for this type of category. Either this or label must be set.
- * @property {[key: string]: NestedTypeConfiguration} [children] - Nested children.
+ * @property {Record<string, NestedTypeConfiguration>} [children] - Nested children.
  */
 
 export default {

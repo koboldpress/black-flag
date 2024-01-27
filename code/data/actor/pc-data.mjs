@@ -9,6 +9,7 @@ import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, Tim
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
+import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -16,7 +17,8 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class PCData extends ActorDataModel.mixin(
-	ACTemplate, ConditionsTemplate, InitiativeTemplate, ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, InitiativeTemplate, LanguagesTemplate,
+	ModifiersTemplate, SpellcastingTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
@@ -104,10 +106,6 @@ export default class PCData extends ActorDataModel.mixin(
 				armor: new SchemaField({
 					value: new SetField(new StringField()),
 					custom: new ArrayField(new StringField())
-				}),
-				languages: new SchemaField({
-					value: new SetField(new StringField()),
-					tags: new SetField(new StringField())
 				}),
 				skills: new MappingField(new SchemaField({
 					proficiency: new ProficiencyField({rounding: false})

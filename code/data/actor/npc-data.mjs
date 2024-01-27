@@ -6,13 +6,14 @@ import MappingField from "../fields/mapping-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
+import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class NPCData extends ActorDataModel.mixin(
-	ACTemplate, ConditionsTemplate, InitiativeTemplate, ModifiersTemplate, TraitsTemplate
+	ACTemplate, ConditionsTemplate, InitiativeTemplate, LanguagesTemplate, ModifiersTemplate, TraitsTemplate
 ) {
 
 	static metadata = {
@@ -62,12 +63,6 @@ export default class NPCData extends ActorDataModel.mixin(
 				lair: new HTMLField(),
 				legendary: new HTMLField(),
 				source: new StringField()
-			}),
-			proficiencies: new SchemaField({
-				languages: new SchemaField({
-					value: new SetField(new StringField()),
-					tags: new SetField(new StringField())
-				})
 			}),
 			traits: new SchemaField({
 				type: new CreatureTypeField()
