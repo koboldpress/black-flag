@@ -28,6 +28,16 @@ export default class NPCSheet extends BaseActorSheet {
 				context.system.traits.type.label}`
 		};
 
+		context.placeholders = {
+			perception: 10 + (context.system.abilities.wisdom?.mod ?? 0),
+			stealth: 10 + (context.system.abilities.dexterity?.mod ?? 0)
+		};
+
+		context.skills = {
+			perception: context.system.attributes.perception ?? context.placeholders.perception,
+			stealth: context.system.attributes.stealth ?? context.placeholders.stealth
+		};
+
 		return context;
 	}
 

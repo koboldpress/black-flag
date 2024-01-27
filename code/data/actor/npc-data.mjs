@@ -53,7 +53,9 @@ export default class NPCData extends ActorDataModel.mixin(
 				legendary: new SchemaField({
 					spent: new NumberField({min: 0, initial: 0, integer: true}),
 					max: new NumberField({min: 1, initial: null, integer: true})
-				})
+				}),
+				perception: new NumberField({min: 0, integer: true, label: "BF.Skill.Perception.Label"}),
+				stealth: new NumberField({min: 0, integer: true, label: "BF.Skill.Stealth.Label"})
 			}),
 			biography: new SchemaField({
 				value: new HTMLField(),
@@ -65,15 +67,7 @@ export default class NPCData extends ActorDataModel.mixin(
 				languages: new SchemaField({
 					value: new SetField(new StringField()),
 					tags: new SetField(new StringField())
-				}),
-				skills: new MappingField(new SchemaField({
-					proficiency: new ProficiencyField({rounding: false})
-				}), {
-					initialKeys: CONFIG.BlackFlag.skills, prepareKeys: true, label: "BF.Skill.Label[other]"
-				}),
-				tools: new MappingField(new SchemaField({
-					proficiency: new ProficiencyField({rounding: false})
-				}), {label: "BF.Tool.Label[other]"})
+				})
 			}),
 			traits: new SchemaField({
 				type: new CreatureTypeField()

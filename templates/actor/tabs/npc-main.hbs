@@ -52,15 +52,16 @@
 			{{else}}
 				<span>{{traits.speed}}</span>
 			{{/if}}
-		</label><!--
+		</label>
 		<label class="stats__narrow">
 			<span>
 				{{localize "BF.Skill.Perception.Label"}}
 			</span>
 			{{#if modes.editing}}
-				<input type="number" name="system.???" value="{{source.???}}">
+				<input type="number" name="system.attributes.perception" value="{{source.attributes.perception}}"
+					placeholder="{{placeholders.perception}}">
 			{{else}}
-				<span>??</span>
+				<span>{{blackFlag-number skills.perception}}</span>
 			{{/if}}
 		</label>
 		<label class="stats__narrow">
@@ -68,11 +69,12 @@
 				{{localize "BF.Skill.Stealth.Label"}}
 			</span>
 			{{#if modes.editing}}
-				<input type="number" name="system.???" value="{{source.???}}">
+				<input type="number" name="system.attributes.stealth" value="{{source.attributes.stealth}}"
+					placeholder="{{placeholders.stealth}}">
 			{{else}}
-				<span>??</span>
+				<span>{{blackFlag-number skills.stealth}}</span>
 			{{/if}}
-		</label>-->
+		</label>
 		{{#if traits.resist}}
 			<label>
 				<span>
