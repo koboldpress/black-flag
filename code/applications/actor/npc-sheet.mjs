@@ -1,4 +1,4 @@
-import { numberFormat, Trait } from "../../utils/_module.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
@@ -22,6 +22,8 @@ export default class NPCSheet extends BaseActorSheet {
 
 	async getData(options) {
 		const context = await super.getData(options);
+
+		context.cr = { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[context.system.attributes.cr] ?? context.system.attributes.cr;
 
 		context.labels = {
 			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
@@ -162,5 +164,22 @@ export default class NPCSheet extends BaseActorSheet {
 	activateListeners(html) {
 		super.activateListeners(html);
 		html.on("sl-change", "sl-select", this._onChangeInput.bind(this));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	_getSubmitData(updateData={}) {
+		const data = super._getSubmitData(updateData);
+
+		// TODO: Convert to custom NumberField
+		let cr = data["system.attributes.cr"];
+		cr = {
+			"1/8": 0.125, "⅛": 0.125,
+			"1/4": 0.25, "¼": 0.25,
+			"1/2": 0.5, "½": 0.5
+		}[cr] ?? parseFloat(cr);
+		if ( Number.isNumeric(cr) ) data["system.attributes.cr"] = cr;
+
+		return data;
 	}
 }
