@@ -1,4 +1,3 @@
-import Advancement from "./documents/advancement/advancement.mjs";
 import { log, simplifyBonus } from "./utils/_module.mjs";
 
 /**
@@ -374,12 +373,14 @@ function rollCheckSave(event, speaker) {
  * ````
  */
 async function enrichDamage(config, label, options) {
+	const formulaParts = [];
+	if ( config.formula ) formulaParts.push(config.formula);
 	for ( const value of config.values ) {
 		if ( value in CONFIG.BlackFlag.damageTypes ) config.type = value;
 		else if ( value === "average" ) config.average = true;
-		else config.formula = value;
+		else formulaParts.push(value);
 	}
-	config.formula = Roll.defaultImplementation.replaceFormulaData(config.formula, options.rollData ?? {});
+	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 	if ( !config.formula ) return null;
 	config.rollAction = "damage";
 

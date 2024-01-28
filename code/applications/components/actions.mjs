@@ -37,9 +37,10 @@ export default class ActionsElement extends AppAssociatedElement {
 	 */
 	async #onAction(event) {
 		event.stopImmediatePropagation();
-		const dataset = event.currentTarget.closest("tr")?.dataset;
-		const activityUuid = dataset?.activity;
-		const activity = await fromUuid(activityUuid);
+		const dataset = event.currentTarget.closest("[data-activity], [data-activity-id]")?.dataset ?? {};
+		let activity;
+		if ( dataset.activity ) activity = await fromUuiddataset.activity;
+		else activity = this.actor.items.get(dataset.itemId)?.system.activities?.get(dataset.activityId);
 		if ( !activity ) return this.app._onAction?.(event, dataset);
 
 		switch ( event.currentTarget.dataset.action ) {

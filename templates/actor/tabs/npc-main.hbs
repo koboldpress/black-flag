@@ -165,30 +165,41 @@
 
 	<div class="features passive">
 		{{#each passive}}
-			<div class="feature">
-				<strong>{{item.name}}.</strong> {{{description}}}
+			<div class="feature" data-item-id="{{item.id}}">
+				<span class="controls">
+					{{#if @root.modes.editing}}
+						<a data-action="item" data-sub-action="edit">
+							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+					{{/if}}
+					<a data-action="activate">{{item.name}}.</a>
+				</span>
+				{{{description}}}
 			</div>
 		{{/each}}
 	</div>
 
 	<blackFlag-actions>
-	{{#each actions}}
-		{{#if (or activities.length @root.modes.editing)}}
-			<div class="features {{@key}}">
-				<h2>{{label}}</h2>
-				{{#each activities}}
-					<div class="feature" data-activity="{{activity.uuid}}">
-						{{#if @root.modes.editing}}
-							<a data-action="edit">
-								<i class="fa-solid fa-pen-to-square"></i>
-							</a>
-						{{/if}}
-						<strong><a data-action="activate">{{item.name}}.</a></strong> {{{description}}}
-					</div>
-				{{/each}}
-			</div>
-		{{/if}}
-	{{/each}}
+		{{#each actions}}
+			{{#if (or activities.length @root.modes.editing)}}
+				<div class="features {{@key}}">
+					<h2>{{label}}</h2>
+					{{#each activities}}
+						<div class="feature" data-item-id="{{item.id}}"  data-activity-id="{{activity.id}}">
+							<span class="controls">
+								{{#if @root.modes.editing}}
+									<a data-action="edit">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</a>
+								{{/if}}
+								<a data-action="activate">{{item.name}}.</a>
+							</span>
+							{{{description}}}
+						</div>
+					{{/each}}
+				</div>
+			{{/if}}
+		{{/each}}
 	</blackFlag-actions>
 
 <!--	<div class="features legendary">

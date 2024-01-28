@@ -13,6 +13,9 @@
 		flex-direction: column;
 	}
 
+	a {
+		text-decoration: underline;
+	}
 	a:is(:hover, :focus) {
 		text-shadow: 0 0 4px var(--bf-color-border-light-blue);
 	}
@@ -84,6 +87,7 @@
 			padding-block-end: 2px;
 			padding-inline: 4px;
 			text-align: center;
+			text-decoration: none;
 		}
 		a:hover, a:focus {
 			border-color: var(--bf-color-border-gray);
