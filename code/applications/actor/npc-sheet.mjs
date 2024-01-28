@@ -8,7 +8,7 @@ export default class NPCSheet extends BaseActorSheet {
 			classes: ["black-flag", "actor", "sheet", "npc"],
 			dragDrop: [{dragSelector: "[data-item-id]"}],
 			width: 460,
-			height: "auto",
+			height: null,
 			tabs: [
 				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main"}
 			],
