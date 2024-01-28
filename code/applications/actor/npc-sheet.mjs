@@ -48,6 +48,7 @@ export default class NPCSheet extends BaseActorSheet {
 		const rollData = this.actor.getRollData();
 		context.passive = await Promise.all(this.actor.items.filter(i => {
 			if ( i.type !== "feature" ) return false;
+			if ( i.system.activities?.size ) return false;
 			return true;
 		}).map(async item => ({
 			item, description: await TextEditor.enrichHTML(item.system.description.value, {
@@ -106,11 +107,11 @@ export default class NPCSheet extends BaseActorSheet {
 
 		// Immunities
 		const immunities = [
-			...traits.damage.immunities.value.map(t =>
+			...Array.from(traits.damage.immunities.value).map(t =>
 				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
 			),
-			...traits.condition.immunities.value.map(t =>
-				CONFIG.BlackFlag.registration.get("condition", t)?.name
+			...Array.from(traits.condition.immunities.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
 		if ( immunities.length || this.modes.editing ) {
