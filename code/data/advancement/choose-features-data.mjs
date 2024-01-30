@@ -8,9 +8,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			hint: new StringField({
-				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
-			}),
 			choices: new MappingField(new NumberField({min: 1, integer: true}), {
 				label: "BF.Advancement.ChooseFeatures.Choices.Label", hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
 			}),

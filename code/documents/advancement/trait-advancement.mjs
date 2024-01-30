@@ -71,7 +71,7 @@ export default class TraitAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	summaryForLevel(levels, { flow=false }={}) {
-		if ( this.configuration.hint ) return `<p>${this.configuration.hint}</p>`;
+		if ( this.hint ) return `<p>${this.hint}</p>`;
 		return `<p>${Trait.localizedList(
 			this.configuration.grants, this.configuration.choices, { choiceMode: this.configuration.choiceMode }
 		)}</p>`;

@@ -175,20 +175,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Embed this advancement within enriched HTML.
-	 * @param {string[]} config - Configuration data.
-	 * @param {string} [label] - Optional label to replace default text.
-	 * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
-	 * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
-	 */
-	async embed(config, label, options) {
-		log(`Advancement of the type ${this.metadata.type} cannot be embedded for ${config.input}.`, { level: "warn" });
-		return null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Value used for sorting this advancement at a certain level.
 	 * @param {AdvancementLevels} levels - Level for which this entry is being sorted.
 	 * @returns {string} - String that can be used for sorting.

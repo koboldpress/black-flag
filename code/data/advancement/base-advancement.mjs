@@ -62,6 +62,9 @@ export default class BaseAdvancement extends foundry.abstract.DataModel {
 			}),
 			title: new StringField({label: "BF.Advancement.Core.Title.Label"}),
 			icon: new FilePathField({categories: ["IMAGE"], label: "BF.Advancement.Core.Icon.Label"}),
+			hint: new StringField({
+				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
+			}),
 			flags: new ObjectField()
 		};
 	}

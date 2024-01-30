@@ -6,9 +6,6 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			hint: new StringField({
-				label: "BF.Advancement.Core.Hint.Label", hint: "BF.Advancement.Core.Hint.Hint"
-			}),
 			mode: new StringField({initial: "default"}),
 			grants: new SetField(new StringField(), {
 				label: "BF.Advancement.Trait.Guaranteed.Label", hint: "BF.Advancement.Trait.Guaranteed.Hint"
