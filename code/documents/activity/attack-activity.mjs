@@ -41,6 +41,12 @@ export default class AttackActivity extends DamageActivity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	get hasDamage() {
+		return super.hasDamage || (this.system.damage.includeBaseDamage && !!this.item.system.damage?.formula);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get modifierData() {
 		return { type: "attack", ...super.modifierData };
 	}
@@ -61,11 +67,11 @@ export default class AttackActivity extends DamageActivity {
 			attack: {
 				label: game.i18n.localize("BF.Activity.Attack.Title"),
 				dataset: { action: "roll", method: "rollAttack" }
-			},
-			damage: {
-				label: game.i18n.localize("BF.Damage.Label"),
-				dataset: { action: "roll", method: "rollDamage" }
 			}
+		};
+		if ( this.hasDamage ) context.buttons.damage = {
+			label: game.i18n.localize("BF.Damage.Label"),
+			dataset: { action: "roll", method: "rollDamage" }
 		};
 		return context;
 	}

@@ -32,6 +32,16 @@ export default class DamageActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Are any damage parts actually configured for this activity?
+	 * @type {boolean}
+	 */
+	get hasDamage() {
+		return this.system.damage?.parts?.length > 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

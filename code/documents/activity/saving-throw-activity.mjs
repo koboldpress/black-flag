@@ -56,11 +56,11 @@ export default class SavingThrowActivity extends DamageActivity {
 			savingThrow: {
 				label: game.i18n.localize("BF.Activity.SavingThrow.Title"),
 				dataset: { action: "roll", method: "rollSavingThrow" }
-			},
-			damage: {
-				label: game.i18n.localize("BF.Damage.Label"),
-				dataset: { action: "roll", method: "rollDamage" }
 			}
+		};
+		if ( this.hasDamage ) context.buttons.damage = {
+			label: game.i18n.localize("BF.Damage.Label"),
+			dataset: { action: "roll", method: "rollDamage" }
 		};
 		return context;
 	}
