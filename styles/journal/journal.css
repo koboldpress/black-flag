@@ -104,6 +104,20 @@
 	p:empty:has(+ .content-embed), .content-embed + p:empty {
 		display: none;
 	}
+	.content-embed.caption-top {
+		display: flex;
+		flex-direction: column;
+		margin-block-start: 0;
+
+		figcaption {
+			display: contents;
+			.embed-caption {
+				order: -1;
+				font-weight: normal;
+				text-align: start;
+			}
+		}
+	}
 
 	section.embedded-features {
 		margin-inline-start: 1em;

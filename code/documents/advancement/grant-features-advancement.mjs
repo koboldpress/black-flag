@@ -38,6 +38,8 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async toEmbedContents(config, options) {
+		if ( config.list === false ) return super.toEmbedContents(config, options);
+
 		const list = config.style === "list";
 		const h = list ? "strong" : config.header ?? "h6";
 
@@ -56,6 +58,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 			entry.innerHTML = `<${h}>${header}</${h}>\n${description}`;
 			container.insertAdjacentElement("beforeend", entry);
 		}
+
 		return container;
 	}
 
