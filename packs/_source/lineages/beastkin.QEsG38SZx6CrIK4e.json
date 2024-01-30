@@ -11,9 +11,6 @@
         "configuration": {
           "pool": [
             {
-              "uuid": "Compendium.black-flag.lineages.Item.craNqa9r6GjZSNd4"
-            },
-            {
               "uuid": "Compendium.black-flag.lineages.Item.sZo4dk5NpkJme6et"
             },
             {
@@ -30,7 +27,7 @@
         "type": "size",
         "_id": "gBcXRsYlpRJ7Bbvh",
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
           "value": null
         },
@@ -40,11 +37,39 @@
             "medium"
           ]
         },
-        "flags": {}
+        "flags": {},
+        "hint": "Beastkin are extremely diverse in weight and height, depending on their beast characteristics. Most are between 4 and 8 feet tall and Medium in size, but if your beastkin is shorter than 4 feet, your size is Small. Your weight varies depending on your beast characteristics. For example, a Medium-sized beastkin descended from bears likely weighs upward of 350 pounds, while an avian beastkin of the same size is likely to weigh 100 pounds or less. Use your judgment to find a weight that seems right."
+      },
+      "Mj6ouyWtSpxRrgM5": {
+        "type": "trait",
+        "_id": "Mj6ouyWtSpxRrgM5",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "skills:perception",
+                "skills:survival"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 0
+        },
+        "flags": {},
+        "title": "Heightened Senses",
+        "icon": "",
+        "hint": "You have proficiency in either the Perception or Survival skill.",
+        "selectedIndex": "0",
+        "selectedTrait": "skills"
       }
     },
     "description": {
-      "value": "<p>Your beastkin character has certain hereditary traits dictated by their lineage.</p><p><em><strong>Age.</strong></em> Beastkin mature far more quickly than most humanoids, reaching adulthood within 5 years. Though they may live nearly a century, some beastkin live only 20 or 30 years.</p><p><em><strong>Size.</strong></em> Beastkin are extremely diverse in weight and height, depending on their beast characteristics. Most are between 4 and 8 feet tall and Medium in size, but if your beastkin is shorter than 4 feet, your size is Small. Your weight varies depending on your beast characteristics. For example, a Medium-sized beastkin descended from bears likely weighs upward of 350 pounds, while an avian beastkin of the same size is likely to weigh 100 pounds or less. Use your judgment to find a weight that seems right. Speed. Your base walking speed is 30 feet.</p><p>@Embed[Compendium.black-flag.lineages.Item.craNqa9r6GjZSNd4 inline]{Heightened Senses}</p><p>@Embed[Compendium.black-flag.lineages.Item.sZo4dk5NpkJme6et inline]{Natural Weapons}</p><p>@Embed[Compendium.black-flag.lineages.Item.1OhikzT29y1Ulr47 inline]{Natural Adaptation}</p>",
+      "value": "<p>Your beastkin character has certain hereditary traits dictated by their lineage.</p><p><em><strong>Age.</strong></em> Beastkin mature far more quickly than most humanoids, reaching adulthood within 5 years. Though they may live nearly a century, some beastkin live only 20 or 30 years.</p><p>@Embed[.Advancement.gBcXRsYlpRJ7Bbvh inline]{Size}</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p>@Embed[.Advancement.Mj6ouyWtSpxRrgM5 inline]{Heightened Senses}</p><p>@Embed[Compendium.black-flag.lineages.Item.sZo4dk5NpkJme6et inline]{Natural Weapons}</p><p>@Embed[Compendium.black-flag.lineages.Item.1OhikzT29y1Ulr47 inline]{Natural Adaptation}</p>",
       "source": "Player's Guide",
       "journal": "",
       "short": "Born between civilization and the wilds, beastkin are as varied as the animal kingdom itself."
@@ -61,7 +86,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1694990335579,
-    "modifiedTime": 1706652918464,
+    "modifiedTime": 1706658336003,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "QEsG38SZx6CrIK4e",

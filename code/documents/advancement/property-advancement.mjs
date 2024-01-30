@@ -14,7 +14,8 @@ export default class PropertyAdvancement extends Advancement {
 		order: 2,
 		icon: "systems/black-flag/artwork/advancement/property.svg",
 		title: "BF.Advancement.Property.Title",
-		hint: "BF.Advancement.Property.Hint"
+		hint: "BF.Advancement.Property.Hint",
+		configurableHint: true
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

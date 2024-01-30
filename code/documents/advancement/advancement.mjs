@@ -43,8 +43,9 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @property {string} title - Title to be displayed if no user title is specified.
 	 * @property {string} hint - Description of this type shown in the advancement selection dialog.
 	 * @property {object} identifier
-	 * @property {string} identifier.configurable - Should this identifier be customizable for this advancement type?
+	 * @property {boolean} identifier.configurable - Should this identifier be customizable for this advancement type?
 	 * @property {string} identifier.hint - Hint that is shown with the identifier.
+	 * @property {boolean} configurableHint - Should the advancement hint be configurable?
 	 * @property {boolean} multiLevel - Can this advancement affect more than one level? If this is set to true,
 	 *                                  the level selection control in the configuration window is hidden and the
 	 *                                  advancement should provide its own implementation of `Advancement#levels`
@@ -64,6 +65,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 			configurable: false,
 			hint: ""
 		},
+		configurableHint: false,
 		multiLevel: false
 	}, {inplace: false}));
 

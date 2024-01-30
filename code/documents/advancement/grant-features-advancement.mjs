@@ -16,7 +16,8 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		order: 40,
 		icon: "systems/black-flag/artwork/advancement/grant-features.svg",
 		title: "BF.Advancement.GrantFeatures.Title",
-		hint: "BF.Advancement.GrantFeatures.Hint"
+		hint: "BF.Advancement.GrantFeatures.Hint",
+		configurableHint: true
 	}, {inplace: false}));
 
 	/* <><><><> <><><><> <><><><> <><><><> */

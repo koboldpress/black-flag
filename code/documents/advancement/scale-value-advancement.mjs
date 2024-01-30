@@ -19,6 +19,7 @@ export default class ScaleValueAdvancement extends Advancement {
 			configurable: true,
 			hint: "BF.Advancement.ScaleValue.Identifier.Hint"
 		},
+		configurableHint: true,
 		multiLevel: true
 	}, {inplace: false}));
 

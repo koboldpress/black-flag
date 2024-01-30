@@ -82,6 +82,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 			levels: Object.fromEntries(levels),
 			showClassIdentifier: this.item.system.metadata?.category === "features",
 			showClassRestriction: ["class", "subclass"].includes(this.item.type) || !!this.advancement.level.classIdentifier,
+			showHint: this.advancement.metadata.configurableHint,
 			showIdentifier: this.advancement.metadata.identifier.configurable,
 			showLevelSelector: !this.advancement.metadata.multiLevel
 		}, {inplace: false});
