@@ -25,7 +25,7 @@ export default class HeritageData extends ItemDataModel.mixin(AdvancementTemplat
 		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
 		this._createInitialAdvancement([{
 			type: "trait", title: "Languages",
-			configuration: { grants: ["languages:common"], choices: [{ count: 1, pool: "languages:*" }] }
+			configuration: { grants: ["languages:standard:common"], choices: [{ count: 1, pool: "languages:*" }] }
 		}]);
 	}
 }

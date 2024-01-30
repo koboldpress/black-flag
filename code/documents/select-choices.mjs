@@ -159,7 +159,7 @@ export default class SelectChoices {
 		if ( filter instanceof SelectChoices ) filter = filter.set;
 
 		for ( const [key, trait] of Object.entries(this) ) {
-			// Simple filter ("languages:common") - Include this entry
+			// Simple filter ("languages:standard:common") - Include this entry
 			// Category filter ("tools:artisan") - Include category but not children
 			const wildcardKey = key.replace(/(:|^)([\w]+)$/, "$1*");
 			const forcedCategoryKey = `${key}!`;
