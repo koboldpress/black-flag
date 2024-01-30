@@ -28,11 +28,13 @@
         "_id": "LaRbvQ8c1RgUPIkZ",
         "title": "",
         "icon": "",
+        "hint": "You know Common and one additional language of your choice. Typical fireforge heritage characters choose Dwarvish.",
         "level": {
           "value": 0
         },
         "configuration": {
           "grants": [
+            "languages:esoteric:primordial:ignan",
             "languages:standard:common"
           ],
           "choices": [
@@ -44,17 +46,57 @@
             }
           ],
           "mode": "default",
-          "choiceMode": "inclusive",
-          "hint": "You know Common and one additional language of your choice. Typical fireforge heritage characters choose Dwarvish."
+          "choiceMode": "inclusive"
         },
         "flags": {},
         "selectedIndex": "-1",
         "selectedTrait": "languages"
+      },
+      "VpPCqlaEhJzLWlve": {
+        "type": "trait",
+        "_id": "VpPCqlaEhJzLWlve",
+        "configuration": {
+          "mode": "forcedExpertise",
+          "grants": [
+            "tools:artisan:smith"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 0
+        },
+        "flags": {},
+        "title": "Expert Artisan",
+        "icon": "",
+        "hint": "You gain proficiency with smith’s tools. Your PB is doubled for any ability check you make that uses them.",
+        "selectedIndex": "-1",
+        "selectedTrait": "tools"
+      },
+      "u3qKVwzO5MtE5Rju": {
+        "type": "property",
+        "_id": "u3qKVwzO5MtE5Rju",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "fire"
+            }
+          ]
+        },
+        "level": {
+          "value": 0
+        },
+        "flags": {},
+        "title": "Forgecraft",
+        "icon": ""
       }
     },
     "description": {
       "short": "Fireforge heritage characters were raised with the values and traditions of the fireforge dwarven clans.",
-      "source": "Player's Guide"
+      "source": "Player's Guide",
+      "value": "<p>Fireforge heritage characters were raised with the values and traditions of the fireforge dwarven clans.</p><p>Dwarven legends are united that the best metalcrafting is done in the fires of the earth itself. Long ago, groups of dwarves following this tradition settled near areas of volcanic activity, turning such places into their forges. These dwarves were the founders of the fireforge clans. To this day, these communities toil in the heat of magma, creating weapons, armor, and goods noteworthy even among the finest dwarven crafts. They trade these goods for necessities not found in the harsh environment of their chosen settlements.</p><p>Fireforge communities maintain good relations with elemental creatures, coming to their aid when needed. In return, these elementals assist fireforge clans against giants, dragons, and other volcano-dwelling creatures who often compete for territory.</p><p>@Embed[.Advancement.VpPCqlaEhJzLWlve inline]{Expert Artisan}</p><p>@Embed[.Advancement.u3qKVwzO5MtE5Rju inline]{Forgecraft}</p><p>@Embed[Compendium.black-flag.heritages.Item.DUGqj8nRddAySbxl inline]{Friend to Elementals}</p><p>@Embed[Compendium.black-flag.heritages.Item.7glPCTjcm6iffryd inline]{Reforge}</p><p>@Embed[.Advancement.LaRbvQ8c1RgUPIkZ inline]{Languages}</p>"
     },
     "identifier": {}
   },
@@ -65,10 +107,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1694990514896,
-    "modifiedTime": 1701131159161,
+    "modifiedTime": 1706656218262,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "ZBZlFGLiBtHmGkDM",

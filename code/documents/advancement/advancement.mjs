@@ -1,5 +1,4 @@
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
-import { log } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -194,6 +193,14 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 */
 	titleForLevel(levels, { flow=false }={}) {
 		return this.title;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async toEmbedContents(config, options) {
+		const p = document.createElement("p");
+		p.innerHTML = this.hint ?? "";
+		return p;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
