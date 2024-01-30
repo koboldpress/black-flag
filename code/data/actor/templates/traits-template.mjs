@@ -32,6 +32,10 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					tags: new ArrayField(new StringField())
 				}),
 				condition: new SchemaField({
+					resistances: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField())
+					}, {label: "BF.Resistance.Label"}),
 					immunities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())

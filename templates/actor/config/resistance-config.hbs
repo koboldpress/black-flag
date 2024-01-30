@@ -35,6 +35,7 @@
 			<thead>
 				<tr>
 					<th scope="col">{{localize "BF.Condition.Label[one]"}}</th>
+					<th scope="col">{{localize "BF.Resistance.Abbreviation"}}</th>
 					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
 				</tr>
 			</thead>
@@ -42,6 +43,7 @@
 				{{#each conditions}}
 					<tr>
 						<th scope="row">{{label}}</th>
+						<td><input type="checkbox" name="cr.value.{{@key}}" {{checked resistant}}></td>
 						<td><input type="checkbox" name="ci.value.{{@key}}" {{checked immune}}></td>
 					</tr>
 				{{/each}}

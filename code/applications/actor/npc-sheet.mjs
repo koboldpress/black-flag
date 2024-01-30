@@ -99,9 +99,14 @@ export default class NPCSheet extends BaseActorSheet {
 		context.traits.languages = proficiencies.languages.label || "—";
 
 		// Resistances
-		const resistances = traits.damage.resistances.value.map(t =>
-			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-		).filter(t => t);
+		const resistances = [
+			...Array.from(traits.damage.resistances.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			).filter(t => t),
+			...Array.from(traits.condition.resistances.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
+			)
+		].filter(t => t);
 		if ( resistances.size || this.modes.editing ) {
 			context.traits.resist = game.i18n.getListFormatter({ style: "short" }).format(resistances) || none;
 		}

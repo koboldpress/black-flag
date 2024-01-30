@@ -38,6 +38,7 @@ export default class ResistanceConfig extends BaseConfig {
 		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).reduce((obj, [key, label]) => {
 			obj[key] = {
 				label,
+				resistant: traits.condition.resistances.value.has(key),
 				immune: traits.condition.immunities.value.has(key)
 			};
 			return obj;
@@ -49,10 +50,12 @@ export default class ResistanceConfig extends BaseConfig {
 
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
+		foundry.utils.setProperty(updates, "condition.resistances.value", filteredKeys(updates.cr.value));
 		foundry.utils.setProperty(updates, "condition.immunities.value", filteredKeys(updates.ci.value));
 		foundry.utils.setProperty(updates, "damage.resistances.value", filteredKeys(updates.dr.value));
 		foundry.utils.setProperty(updates, "damage.immunities.value", filteredKeys(updates.di.value));
 		foundry.utils.setProperty(updates, "damage.vulnerabilities.value", filteredKeys(updates.dv.value));
+		delete updates.cr;
 		delete updates.ci;
 		delete updates.dr;
 		delete updates.di;

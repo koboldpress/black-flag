@@ -177,9 +177,14 @@ export default class PCSheet extends BaseActorSheet {
 		});
 
 		// Resistances
-		const resistances = traits.damage.resistances.value.map(t =>
-			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-		).filter(t => t);
+		const resistances = [
+			...Array.from(traits.damage.resistances.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			).filter(t => t),
+			...Array.from(traits.condition.resistances.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
+			)
+		].filter(t => t);
 		if ( resistances.size || this.modes.editing ) context.traits.push({
 			key: "resistances",
 			label: "resistances",
@@ -189,11 +194,11 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Immunities
 		const immunities = [
-			...traits.damage.immunities.value.map(t =>
+			...Array.from(traits.damage.immunities.value).map(t =>
 				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
 			),
-			...traits.condition.immunities.value.map(t =>
-				CONFIG.BlackFlag.registration.get("condition", t)?.name
+			...Array.from(traits.condition.immunities.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
 		if ( immunities?.length || this.modes.editing ) context.traits.push({
