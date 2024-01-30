@@ -55,22 +55,29 @@
 			flex-grow: 1;
 			--sl-input-background-color: transparent;
 		}
-		[data-sub-action="initiative"] {
-			display: inline flow-root;
-			position: relative;
-			inline-size: 2em;
-			top: 2px;
-			left: 4px;
-			text-align: center;
+	}
 
-			&:hover, &:focus-visible {
-				--icon-fill: var(--bf-text-color-white);
+	.modifier-roll {
+		display: inline flex;
+		gap: 4px;
+
+		blackFlag-icon {
+			display: block;
+			margin-block-start: 2px;
+		}
+		&:hover, &:focus-visible {
+			--icon-fill: var(--bf-text-color-white);
+			blackFlag-icon {
 				filter:
 					drop-shadow(0 0 1px var(--bf-color-border-light-blue))
 					drop-shadow(0 0 3px var(--bf-color-border-light-blue))
 					drop-shadow(0 0 7px var(--bf-color-border-light-blue));
 			}
 		}
+	}
+	label span:first-child:has(+ .modifier-roll) {
+		position: relative;
+		top: -2px;
 	}
 
 	.abilities {
@@ -82,11 +89,11 @@
 		border-block: 2px solid var(--bf-color-border-blue);
 		padding-block: 3px;
 
-		[data-ability] {
+		> [data-ability] {
 			grid-row: 1 / -1;
 			display: grid;
 			grid-template-rows: subgrid;
-	
+
 			> label {
 				grid-row: 1;
 				display: block;

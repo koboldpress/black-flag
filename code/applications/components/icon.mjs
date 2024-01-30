@@ -71,6 +71,8 @@ export default class IconElement extends HTMLElement {
 					--_icon-fill: var(--icon-fill, currentcolor);
 					--_icon-width: var(--icon-width, var(--icon-size, 1em));
 					--_icon-height: var(--icon-height, var(--icon-size, 1em));
+					width: var(--_icon-width, 1em);
+					height: var(--_icon-height, 1em);
 				}
 				svg {
 					fill: var(--_icon-fill, #000);

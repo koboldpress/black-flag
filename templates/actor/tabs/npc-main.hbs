@@ -138,12 +138,10 @@
 		</label>
 		<label>
 			<span>{{localize "BF.Initiative.Label"}}</span>
-			<span>
+			<a class="modifier-roll" data-action="roll" data-sub-action="initiative">
+				<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
 				{{blackFlag-number system.attributes.initiative.mod sign=true}}
-				<a data-action="roll" data-sub-action="initiative">
-					<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
-				</a>
-			</span>
+			</a>
 		</label>
 	</div>
 	
@@ -157,7 +155,12 @@
 					<input id="{{@root.appID}}-ability-{{@key}}" type="number" name="system.abilities.{{@key}}.mod"
 						value="{{_source.mod}}" placeholder="0" step="1">
 				{{else}}
-					<span id="{{@root.appID}}-ability-{{@key}}">{{blackFlag-number mod sign=true}}</span>
+					<span id="{{@root.appID}}-ability-{{@key}}">
+						<a class="modifier-roll" data-action="roll" data-sub-action="ability-check" data-ability="{{@key}}">
+							<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
+							{{blackFlag-number mod sign=true}}
+						</a>
+					</span>
 				{{/if}}
 			</div>
 		{{/each}}
