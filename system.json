@@ -8,7 +8,7 @@
 		"verified": "11"
 	},
 	"url": "",
-	"manifest": "",
+	"manifest": "https://github.com/koboldpress/black-flag/releases/latest/download/system.json",
 	"download": "",
 	"license": "LICENSE",
 	"readme": "README.md",
@@ -116,6 +116,24 @@
 			"flags": {
 				"types": ["currency"]
 			}
+		},
+		{
+			"name": "npcs",
+			"label": "Monsters & NPCs",
+			"system": "black-flag",
+			"path": "./packs/npcs/",
+			"type": "Actor",
+			"flags": {
+				"types": ["npc"]
+			}
+		},
+		{
+			"name": "npcfeatures",
+			"label": "NPC Features",
+			"system": "black-flag",
+			"path": "./packs/npcfeatures",
+			"type": "Item",
+			"flags": {}
 		}
 	],
 	"packFolders": [
@@ -145,15 +163,17 @@
 					"color": "#2d5281",
 					"packs": [
 						"items",
-						"spells"
+						"spells",
+						"currencies"
 					]
 				},
 				{
-					"name": "Rules",
+					"name": "Monsters",
 					"sorting": "m",
 					"color": "#2d5281",
 					"packs": [
-						"currencies"
+						"npcs",
+						"npcFeatures"
 					]
 				}
 			]

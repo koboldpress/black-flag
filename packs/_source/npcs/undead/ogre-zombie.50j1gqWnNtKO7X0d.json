@@ -1,0 +1,660 @@
+{
+  "name": "Ogre Zombie",
+  "type": "npc",
+  "_id": "50j1gqWnNtKO7X0d",
+  "img": "systems/black-flag/artwork/types/npc.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": null,
+        "override": 8
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        },
+        "lair": null
+      },
+      "cr": 2,
+      "hp": {
+        "value": 72,
+        "max": 72,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": null,
+      "stealth": null
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": []
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": []
+      },
+      "size": "large",
+      "type": {
+        "value": "undead",
+        "tags": [],
+        "swarm": ""
+      },
+      "condition": {
+        "immunities": {
+          "value": [
+            "exhaustion",
+            "poisoned"
+          ],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "immunities": {
+          "value": [
+            "poison"
+          ],
+          "custom": [],
+          "bypasses": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 4
+      },
+      "dexterity": {
+        "mod": -2
+      },
+      "constitution": {
+        "mod": 4
+      },
+      "intelligence": {
+        "mod": -4
+      },
+      "wisdom": {
+        "mod": -2
+      },
+      "charisma": {
+        "mod": -3
+      }
+    },
+    "biography": {
+      "value": "",
+      "lair": "",
+      "legendary": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Ogre Zombie",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "width": 2,
+    "height": 2,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Undead Fortitude",
+      "type": "feature",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If damage reduces the zombie to 0 HP, it must make a [[/save constitution]]{CON} save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 HP instead.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.tUz9Ll4Sr0zjjlYM"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467755716,
+        "modifiedTime": 1706472978111,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "2rn2vdZqhztHPYoq",
+      "sort": 0,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.2rn2vdZqhztHPYoq"
+    },
+    {
+      "name": "Undead Nature",
+      "type": "feature",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The zombie doesn’t require air, food, drink, or sleep.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.7sxXRJayum4g5Y2A"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467888787,
+        "modifiedTime": 1706472979541,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "smJUy74sgCYo06dv",
+      "sort": 0,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.smJUy74sgCYo06dv"
+    },
+    {
+      "name": "Undead Resilience",
+      "type": "feature",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The zombie is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467905493,
+        "modifiedTime": 1706472981317,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "OCaXT6PELMWIrmTc",
+      "sort": 0,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.OCaXT6PELMWIrmTc"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "MJ5bUc0t8HTiJSCb",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {
+          "MJEQu3J2uCe2u4jF": {
+            "type": "utility",
+            "_id": "MJEQu3J2uCe2u4jF",
+            "description": "<p>The ogre zombie makes two Morningstar attacks.</p>",
+            "system": {},
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473017988,
+        "modifiedTime": 1706473200114,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.MJ5bUc0t8HTiJSCb"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Morningstar",
+      "type": "weapon",
+      "_id": "PAy6y0tDRCoaR40B",
+      "img": "icons/svg/item-bag.svg",
+      "system": {
+        "activities": {
+          "iOxGtWob5v3yHQyK": {
+            "type": "attack",
+            "_id": "iOxGtWob5v3yHQyK",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "ability": "strength"
+            },
+            "description": "<p><em>Melee Weapon Attack:</em> +6 to hit, reach 5 ft., one target. <em>Hit:</em> [[/damage 2d8 + 4 bludgeoning average]] damage.</p>",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "",
+          "source": "Black Flag Reference Document"
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "morningstar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 8,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.zWBmus194O0RLxeU"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1701025004085,
+        "modifiedTime": 1706473115092,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.PAy6y0tDRCoaR40B"
+    },
+    {
+      "name": "Lumbering Charge",
+      "type": "feature",
+      "_id": "R3pWBQpYCwqCtHIA",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {
+          "2dczYCABD9tu3TtH": {
+            "type": "savingThrow",
+            "_id": "2dczYCABD9tu3TtH",
+            "description": "<p>The ogre shoulders its weapon and charges forward, shoving into creatures on its way. It moves up to 20 feet in a straight line and can move through the space of any Medium or smaller creature. The first time it enters a creature’s space during this move, that creature must make a [[/save strength 14]] save. On a failure, a creature takes [[/damage 4d6 bludgeoning average]] damage and is knocked prone. On a success, a creature takes half the damage and isn’t knocked prone.</p>",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "14"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473126059,
+        "modifiedTime": 1706473186841,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.R3pWBQpYCwqCtHIA"
+    }
+  ],
+  "effects": [],
+  "folder": "PEzrECzZcGFeippw",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.7.010",
+    "coreVersion": "11.315",
+    "createdTime": 1706472912255,
+    "modifiedTime": 1706473257979,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!50j1gqWnNtKO7X0d"
+}

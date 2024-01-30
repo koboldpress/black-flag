@@ -1,0 +1,525 @@
+{
+  "folder": "ACk8ILSUrBQafNpa",
+  "name": "Worg",
+  "type": "npc",
+  "_id": "2fm38cdINKCumyVe",
+  "img": "systems/black-flag/artwork/types/npc.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 13,
+        "override": null
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        },
+        "lair": null
+      },
+      "cr": 0.5,
+      "hp": {
+        "value": 25,
+        "max": 25,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 14,
+      "stealth": 13
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "goblin"
+        ],
+        "communication": {},
+        "custom": [
+          "Worg"
+        ],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": []
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": []
+      },
+      "size": "medium",
+      "type": {
+        "value": "monstrosity",
+        "tags": [],
+        "swarm": ""
+      },
+      "condition": {
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [
+            "exhaustion",
+            "frightened"
+          ]
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 3
+      },
+      "dexterity": {
+        "mod": 1
+      },
+      "constitution": {
+        "mod": 1
+      },
+      "intelligence": {
+        "mod": -2
+      },
+      "wisdom": {
+        "mod": null
+      },
+      "charisma": {
+        "mod": -1
+      }
+    },
+    "biography": {
+      "value": "",
+      "lair": "",
+      "legendary": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Worg",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Heightened Hearing and Smell",
+      "type": "feature",
+      "_id": "8iuavnQl7IsTnnwj",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The worg’s Perception is 19 while perceiving by hearing or smell.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473642058,
+        "modifiedTime": 1706473653789,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2fm38cdINKCumyVe.8iuavnQl7IsTnnwj"
+    },
+    {
+      "name": "Monstrosity Resilience",
+      "type": "feature",
+      "_id": "XXNFA4NXhlr8ZunA",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The worg is resistant to exhaustion and to the frightened condition.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473622104,
+        "modifiedTime": 1706473656652,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2fm38cdINKCumyVe.XXNFA4NXhlr8ZunA"
+    },
+    {
+      "name": "Bite",
+      "type": "weapon",
+      "_id": "dU2h8lIzEp5AcEBt",
+      "img": "systems/black-flag/artwork/types/weapon.svg",
+      "system": {
+        "activities": {
+          "bmUYS645by8NF2e5": {
+            "type": "attack",
+            "_id": "bmUYS645by8NF2e5",
+            "description": "<p><em>Melee Weapon Attack:</em> +5 to hit, reach 5 ft., one target. <em>Hit:</em>  [[/damage 2d6 + @mod piercing average]] damage. If the target is a creature, it must succeed on a [[/save strength 13]] save or be knocked prone.</p>",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "spell"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "container": null,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "type": {
+          "value": "melee",
+          "category": ""
+        },
+        "options": [],
+        "ammunition": {},
+        "damage": {
+          "number": 2,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473663838,
+        "modifiedTime": 1706473719094,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2fm38cdINKCumyVe.dU2h8lIzEp5AcEBt"
+    },
+    {
+      "name": "Loathsome Howl",
+      "type": "feature",
+      "_id": "cTEgzaUZkfuIvRek",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {
+          "FpQCZmIyHumpG1fH": {
+            "type": "savingThrow",
+            "_id": "FpQCZmIyHumpG1fH",
+            "description": "<p>The worg unleashes an unnatural howl audible out to a distance of 300 feet. Each creature of the worg’s choice within 30 feet of it must succeed on a [[/save charisma 13]] save or be frightened of it for 1 minute. A frightened creature can repeat the save at the end of each of its turns, ending the effect on itself on a success. Until it finishes a long rest, the worg can sense the direction but not the exact location of each creature that was frightened by Loathsome Howl.</p>",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "activity",
+                  "target": "",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 1,
+              "recovery": {
+                "0": {
+                  "period": "longRest",
+                  "type": "recoverAll"
+                }
+              },
+              "min": "0",
+              "max": "1"
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706473742673,
+        "modifiedTime": 1706473877079,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2fm38cdINKCumyVe.cTEgzaUZkfuIvRek"
+    }
+  ],
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.7.010",
+    "coreVersion": "11.315",
+    "createdTime": 1706473281478,
+    "modifiedTime": 1706473969559,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!2fm38cdINKCumyVe"
+}

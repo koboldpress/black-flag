@@ -1,0 +1,570 @@
+{
+  "name": "Zombie",
+  "type": "npc",
+  "_id": "xV8xaPrWzlA2iSj8",
+  "img": "systems/black-flag/artwork/types/npc.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": null,
+        "override": 8
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        },
+        "lair": null
+      },
+      "cr": 0.25,
+      "hp": {
+        "value": 16,
+        "max": 16,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": null,
+      "stealth": null
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": [
+          "cantSpeak",
+          "knownInLife"
+        ]
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 20,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": []
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": []
+      },
+      "size": "medium",
+      "type": {
+        "value": "undead",
+        "tags": [],
+        "swarm": ""
+      },
+      "condition": {
+        "immunities": {
+          "value": [
+            "exhaustion",
+            "poisoned"
+          ],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "immunities": {
+          "value": [
+            "poison"
+          ],
+          "custom": [],
+          "bypasses": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 2
+      },
+      "dexterity": {
+        "mod": -2
+      },
+      "constitution": {
+        "mod": 3
+      },
+      "intelligence": {
+        "mod": -4
+      },
+      "wisdom": {
+        "mod": null
+      },
+      "charisma": {
+        "mod": -3
+      }
+    },
+    "biography": {
+      "value": "<p>Zombies are the animated corpses of the dead, brought to unlife by necromantic magic, creating tireless, fearless servants that obey without hesitation. Occasionally, zombies are produced by other methods. Victims of wights, for example, often rise as zombies under command of the undead that killed them. Sometimes an enduring source of necromantic magic corrupts an area, causing nearby corpses to spontaneously rise as zombies.</p>",
+      "lair": "",
+      "legendary": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Zombie",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Undead Fortitude",
+      "type": "feature",
+      "_id": "S1M2k90U7L7RxSFC",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If damage reduces the zombie to 0 HP, it must make a [[/save constitution]]{CON} save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 HP instead.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467755716,
+        "modifiedTime": 1706472899577,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.S1M2k90U7L7RxSFC"
+    },
+    {
+      "name": "Undead Nature",
+      "type": "feature",
+      "_id": "tMDA57WLKmCldYjt",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The zombie doesn’t require air, food, drink, or sleep.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467888787,
+        "modifiedTime": 1706472899577,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.tMDA57WLKmCldYjt"
+    },
+    {
+      "name": "Undead Resilience",
+      "type": "feature",
+      "_id": "nYdlHfjCjGPk1ICU",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The zombie is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706467905493,
+        "modifiedTime": 1706472899577,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.nYdlHfjCjGPk1ICU"
+    },
+    {
+      "name": "Slam",
+      "type": "weapon",
+      "_id": "SFmU8A7KItL36i00",
+      "img": "systems/black-flag/artwork/types/weapon.svg",
+      "system": {
+        "activities": {
+          "hxVUcJbaUJsPa8ed": {
+            "type": "attack",
+            "_id": "hxVUcJbaUJsPa8ed",
+            "description": "<p><em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> [[/damage 1d6 + @mod bludgeoning average]] damage. The target is grappled (escape DC 12) if it is a Medium or smaller creature, and the zombie doesn’t already have a creature grappled.</p>",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "container": null,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "type": {
+          "value": "melee",
+          "category": ""
+        },
+        "options": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "bludgeoning"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706468518319,
+        "modifiedTime": 1706470457808,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.SFmU8A7KItL36i00"
+    },
+    {
+      "name": "Rotten Hold",
+      "type": "feature",
+      "_id": "wHtWHprv7MIkXcQ6",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {
+          "WJHolvDp3xXfUZXs": {
+            "type": "savingThrow",
+            "_id": "WJHolvDp3xXfUZXs",
+            "description": "<p>The zombie gnaws idly on the creature grappled by it. The target must succeed on a [[/save constitution dc=12]] save or take [[/damage 1d4 poison]] damage. A Humanoid slain by this bonus action rises 24 hours later as a zombie, unless the Humanoid is restored to life or its body is destroyed.</p>",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "12"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "",
+          "source": ""
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.7.010",
+        "coreVersion": "11.315",
+        "createdTime": 1706468605190,
+        "modifiedTime": 1706472961599,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.wHtWHprv7MIkXcQ6"
+    }
+  ],
+  "effects": [],
+  "folder": "PEzrECzZcGFeippw",
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.7.010",
+    "coreVersion": "11.315",
+    "createdTime": 1706467603863,
+    "modifiedTime": 1706473258873,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!xV8xaPrWzlA2iSj8"
+}
