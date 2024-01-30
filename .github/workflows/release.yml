@@ -96,7 +96,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
-        name: ${{env.VERSION}}
+        name: ${{github.event.release.name}}
         draft: false
         prerelease: ${{github.event.release.prerelease}}
         token: ${{secrets.GITHUB_TOKEN}}
