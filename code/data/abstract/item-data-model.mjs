@@ -55,6 +55,21 @@ export default class ItemDataModel extends BaseDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async toEmbed(config, options={}) {
+		if ( !foundry.utils.hasProperty(this, "description.value") ) return null;
+		const description = foundry.utils.getProperty(this, "description.value");
+		const enriched = await TextEditor.enrichHTML(description, {
+			...options, relativeTo: this.parent
+		});
+		const section = document.createElement("section");
+		section.innerHTML = enriched;
+		return section.children;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

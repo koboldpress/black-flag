@@ -13,4 +13,19 @@ export default class ActorDataModel extends BaseDataModel {
 	prepareEmbeddedData() {
 		this.constructor._getMethods({ startingWith: "prepareEmbedded", notEndingWith: "Data" }).forEach(k => this[k]());
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async toEmbed(config, options={}) {
+		if ( !foundry.utils.hasProperty(this, "biography.value") ) return null;
+		const description = foundry.utils.getProperty(this, "biography.value");
+		const enriched = await TextEditor.enrichHTML(description, {
+			...options, relativeTo: this.parent
+		});
+		const section = document.createElement("section");
+		section.innerHTML = enriched;
+		return section.children;
+	}
 }

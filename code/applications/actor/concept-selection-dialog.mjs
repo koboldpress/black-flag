@@ -82,7 +82,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 		const document = await fromUuid(option.sources[option.sources.length - 1]);
 		const optionContext = { document, system: document.system };
 		optionContext.enriched = {
-			description: await TextEditor.enrichHTML(document.system.description.value, {secrets: false, async: true})
+			description: await TextEditor.enrichHTML(document.system.description.short, {secrets: false, async: true})
 		};
 		return optionContext;
 	}

@@ -6,11 +6,20 @@ export default class ConceptSheet extends BaseItemSheet {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept", "item", "sheet"],
 			dragDrop: [{ dropSelector: ".drop-target" }],
+			tabs: [{
+				group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".tab-area", initial: "advancement"
+			}],
 			template: "systems/black-flag/templates/item/concept.hbs",
 			width: 810,
 			height: 900
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static enrichedFields = foundry.utils.mergeObject(super.enrichedFields, {
+		short: "system.description.short"
+	}, { inplace: false });
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */

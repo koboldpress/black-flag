@@ -8,6 +8,35 @@
 		.summary {
 			width: 400px;
 		}
+		.details {
+			margin-inline-end: 8px;
+
+			> nav {
+				display: flex;
+				justify-content: center;
+				gap: 12px;
+
+				> a {
+					padding-block: 8px;
+					font-family: var(--bf-font-header);
+
+					&.active {
+						text-decoration: underline;
+						text-decoration-thickness: 2px;
+						text-underline-offset: 4px;
+					}
+				}
+			}
+		}
+		.details, .details .tab-area, .details .tab-area [data-tab].active {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+
+			[data-tab] > * {
+				flex-grow: 1;
+			}
+		}
 	}
 
 	.sheet-header {
@@ -32,7 +61,6 @@
 			padding: 0;
 			padding-block-end: 0.5rem;
 
-
 			legend {
 				margin-inline: 0.5rem;
 			}
@@ -55,6 +83,10 @@
 				}
 			}
 		}
+	}
+
+	[data-tab="description"] {
+		
 	}
 }
 

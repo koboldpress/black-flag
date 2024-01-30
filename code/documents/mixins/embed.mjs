@@ -53,10 +53,14 @@ export default Base => class extends Base {
 	 * @returns {Promise<HTMLElement|null>}
 	 * @protected
 	 */
-	async _createInlineEmbed(content, config, options) {
+	async _createInlineEmbed(content, { cite, caption, label }, options) {
 		const section = document.createElement("section");
 		if ( content instanceof HTMLCollection ) section.append(...content);
 		else section.append(content);
+		if ( label && section.children[0] ) {
+			const firstElement = section.children[0];
+			firstElement.innerHTML = `<strong><em>${label}.</em></strong> ${firstElement.innerHTML}`;
+		}
 		return section;
 	}
 

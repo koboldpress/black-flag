@@ -18,7 +18,8 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
+				value: new HTMLField({label: "BF.Item.Description.FullLabel", hint: "BF.Item.Description.FullHint"}),
+				short: new StringField({label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint"}),
 				journal: new StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),

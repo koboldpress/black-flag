@@ -4,6 +4,20 @@
 		{{> "blackFlag.concept-summary" edit=editable}}
 	</section>
 
-	{{> "blackFlag.item-advancement"}}
+	<section class="details">
+		<nav data-group="primary">
+			<a data-tab="advancement">{{localize "BF.Sheet.Tab.Advancement"}}</a>
+			<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		</nav>
+		<div class="tab-area">
+			<div class="tab" data-tab="advancement" data-group="primary">
+				{{> "blackFlag.item-advancement"}}
+			</div>
+			<div class="tab" data-tab="description" data-group="primary">
+				{{editor enriched.description target="system.description.value" button=true
+					editable=editable engine="prosemirror" collaborate=false}}
+			</div>
+		</div>
+	</section>
 
 </form>

@@ -26,10 +26,9 @@
 <div class="info drop-target">
 	<div class="description">
 		{{#if edit}}
-			{{editor enriched.description target="system.description.value" button=false
-				editable=editable engine="prosemirror" collaborate=false}}
+			<textarea name="system.description.short">{{system.description.short}}</textarea>
 		{{else}}
-			{{{enriched.description}}}
+			<p>{{system.description.short}}</p>
 		{{/if}}
 		{{#if showClassSelector}}
 			<label class="class-selector">

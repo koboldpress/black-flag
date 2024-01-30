@@ -486,6 +486,8 @@ async function enrichEmbed(config, label, options) {
 		}
 	}
 
+	else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
+
 	// Forward everything else to documents
 	else if ( foundry.utils.getType(config.doc.toEmbed) === "function" ) {
 		const doc = config.doc;
@@ -565,5 +567,96 @@ async function embedTextPage(config, label, options) {
 		figure.insertAdjacentElement("beforeend", figcaption);
 	}
 
+	return figure;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Embed a roll table.
+ * @param {object} config -  Configuration data.
+ * @param {string} label - Optional label to use as the table caption.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {Promise<HTMLElement|null>}
+ */
+async function embedRollTable(config, label, options) {
+	options = { ...options, _embedDepth: options._embedDepth + 1, relativeTo: config.doc };
+	config.inline ??= config.values.includes("inline");
+	const results = config.doc.results.toObject();
+	results.sort((a, b) => a.range[0] - b.range[0]);
+	const table = document.createElement("table");
+	table.classList.add("roll-table-embed");
+	table.innerHTML = `
+		<thead>
+			<tr>
+				<th>${game.i18n.localize("TABLE.Roll")}</th>
+				<th>${game.i18n.localize("Result")}</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	`;
+
+	const getDocAnchor = (doc, resultData) => {
+		if ( doc ) return doc.toAnchor().outerHTML;
+
+		// No doc found, create a broken anchor.
+		return `<a class="content-link broken"><i class="fas fa-unlink"></i>${
+			resultData.text || game.i18n.localize("Unknown")}</a>`;
+	};
+
+	const tbody = table.querySelector("tbody");
+	for ( const data of results ) {
+		const { range, type, text, documentCollection, documentId } = data;
+		const row = document.createElement("tr");
+		const [lo, hi] = range;
+		row.innerHTML += `<td>${lo === hi ? lo : `${lo}&mdash;${hi}`}</td>`;
+		let result;
+		switch ( type ) {
+			case CONST.TABLE_RESULT_TYPES.TEXT: result = await TextEditor.enrichHTML(text, options); break;
+			case CONST.TABLE_RESULT_TYPES.DOCUMENT: {
+				const doc = CONFIG[documentCollection]?.collection.instance?.get(documentId);
+				result = getDocAnchor(doc, data);
+				break;
+			}
+			case CONST.TABLE_RESULT_TYPES.COMPENDIUM: {
+				const doc = await game.packs.get(documentCollection)?.getDocument(documentId);
+				result = getDocAnchor(doc, data);
+				break;
+			}
+		}
+
+		row.innerHTML += `<td>${result}</td>`;
+		tbody.append(row);
+	}
+
+	if ( config.inline ) {
+		const section = document.createElement("section");
+		if ( config.classes ) section.className = config.classes;
+		section.classList.add("content-embed");
+		section.append(table);
+		return section;
+	}
+
+	const showCaption = config.caption !== false;
+	const showCite = config.cite !== false;
+	const figure = document.createElement("figure");
+	figure.append(table);
+	if ( config.classes ) figure.className = config.classes;
+	figure.classList.add("content-embed");
+	if ( showCaption || showCite ) {
+		const figcaption = document.createElement("figcaption");
+		if ( showCaption ) {
+			if ( label ) figcaption.innerHTML += `<strong class="embed-caption">${label}</strong>`;
+			else {
+				const description = await TextEditor.enrichHTML(config.doc.description, options);
+				const container = document.createElement("div");
+				container.innerHTML = description;
+				container.classList.add("embed-caption");
+				figcaption.append(container);
+			}
+		}
+		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		figure.append(figcaption);
+	}
 	return figure;
 }
