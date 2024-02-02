@@ -11,8 +11,7 @@
 					</th>
 				</tr>
 				{{#each activities}}
-					<tr {{#if activity}}data-activity="{{activity.uuid}}"{{/if}}
-						  {{~#if dataset}} {{blackFlag-dataset dataset}}{{/if}}>
+					<tr data-activity="{{activity.uuid}}" {{~#if dataset}} {{blackFlag-dataset dataset}}{{/if}}>
 						<td class="control">
 							<button type="button" data-action="activate">{{localize activationText}}</button>
 						</td>

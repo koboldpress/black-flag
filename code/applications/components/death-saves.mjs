@@ -79,6 +79,7 @@ export default class DeathSavesElement extends AppAssociatedElement {
 	 * @param {PointerEvent} event - Triggering click event.
 	 */
 	_onRoll(event) {
+		event.stopImmediatePropagation();
 		this.actor.rollDeathSave();
 	}
 
