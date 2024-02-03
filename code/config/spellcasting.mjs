@@ -64,6 +64,12 @@ export const spellCircles = {
 	},
 	divine: {
 		label: "BF.Spell.Circle.Divine.Label"
+	},
+	primordial: {
+		label: "BF.Spell.Circle.Primordial.Label"
+	},
+	wyrd: {
+		label: "BF.Spell.Circle.Wyrd.Label"
 	}
 };
 
