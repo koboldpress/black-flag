@@ -1,0 +1,132 @@
+{
+  "folder": "JZx0iWdyx9l2NCaM",
+  "name": "Dancing Lights",
+  "type": "spell",
+  "_id": "YEjQ3ADloS9QFghm",
+  "img": "icons/magic/light/orbs-firefly-hand-yellow.webp",
+  "system": {
+    "activities": {
+      "bBlfxOiyMKUenQNO": {
+        "type": "utility",
+        "_id": "bBlfxOiyMKUenQNO",
+        "description": "<p>You create up to four torch-sized lights, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.</p>",
+        "system": {},
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Create Lights",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "XkgSY5VgLzZCE5M9": {
+        "type": "utility",
+        "_id": "XkgSY5VgLzZCE5M9",
+        "description": "<p>You move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell’s range.</p>",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Move Lights",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You create a quartet of magical lights under your control.</em></p><p>You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.</p><p>As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell’s range.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 0
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a bit of phosphorus or wychwood, or a glowworm",
+        "denomination": "pp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "special",
+        "special": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "circle": "arcane",
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.011",
+    "coreVersion": "11.315",
+    "createdTime": 1706914899361,
+    "modifiedTime": 1706915051004,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!YEjQ3ADloS9QFghm"
+}

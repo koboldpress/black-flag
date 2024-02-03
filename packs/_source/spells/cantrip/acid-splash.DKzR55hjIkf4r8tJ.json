@@ -1,0 +1,118 @@
+{
+  "name": "Acid Splash",
+  "type": "spell",
+  "_id": "DKzR55hjIkf4r8tJ",
+  "img": "icons/magic/acid/dissolve-drip-droplet-smoke.webp",
+  "system": {
+    "activities": {
+      "UxLzuxLOacq61QXI": {
+        "type": "savingThrow",
+        "_id": "UxLzuxLOacq61QXI",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "acid"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": true
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You conjure a glob of acid to burst over your targets.</em></p><p>Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a DEX save or take 1d6 acid damage.</p><p>This spell’s damage increases by 1d6 when you reach 5th level.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {},
+    "ring": {
+      "value": null,
+      "base": 0
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "2"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "circle": "arcane",
+    "school": "conjuration"
+  },
+  "effects": [],
+  "folder": "JZx0iWdyx9l2NCaM",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.011",
+    "coreVersion": "11.315",
+    "createdTime": 1706914791735,
+    "modifiedTime": 1706914883577,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!DKzR55hjIkf4r8tJ"
+}
