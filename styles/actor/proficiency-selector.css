@@ -5,11 +5,12 @@
 	--bottom-color: var(--blank-color);
 	--side-color: var(--blank-color);
 
-	> svg {
+	> blackFlag-icon {
 		position: relative;
 		top: 2px;
 		width: 12px;
 		height: 12px;
+		--icon-size: 12px;
 	}
 
 	&:is([data-multiplier="1"], [data-multiplier="2"]) {
@@ -39,23 +40,5 @@
 		&.multiplier-1 {
 			background-image: url("artwork/interface/proficiency-1.svg");
 		}
-	}
-}
-
-#blackFlag-proficiency {
-	rect {
-		stroke-linejoin: bevel;
-	}
-	.top {
-		fill: var(--top-color);
-		stroke: var(--top-color);
-	}
-	.bottom {
-		fill: var(--bottom-color);
-		stroke: var(--bottom-color);
-	}
-	.side {
-		fill: var(--side-color);
-		stroke: var(--side-color);
 	}
 }

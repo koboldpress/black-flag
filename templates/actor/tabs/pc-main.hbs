@@ -29,7 +29,7 @@
 				<div class="ability-save">
 					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
 						data-rounding="{{ability.save.proficiency.rounding}}">
-						<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
+						<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
 						<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
 							value="{{ability._source.save.proficiency.multiplier}}">
 					</div>
@@ -66,7 +66,7 @@
 			{{blackFlag-notificationBadge actor category="armor-class"}}
 		</legend>
 		<div class="ac-shield">
-			<svg class="frame"><use xlink:href="#blackFlag-armorClass"/></svg>
+			<blackFlag-icon class="frame" src="systems/black-flag/artwork/interface/armor-class.svg"></blackFlag-icon>
 			<span class="value">{{system.attributes.ac.value}}</span>
 		</div>
 		<div class="ac-label">
@@ -88,7 +88,7 @@
 			<div class="skill block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
 					data-rounding="{{skill.proficiency.rounding}}">
-					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
+					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
 						value="{{skill._source.proficiency.multiplier}}">
 				</div>
@@ -119,7 +119,7 @@
 			<div class="tool block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{tool.proficiency.multiplier}}"
 					data-rounding="{{tool.proficiency.rounding}}">
-					<svg><use xlink:href="#blackFlag-proficiency"></use></svg>
+					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
 					<input type="hidden" name="system.proficiencies.tools.{{key}}.proficiency.multiplier"
 						value="{{tool._source.proficiency.multiplier}}">
 				</div>

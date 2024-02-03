@@ -195,6 +195,7 @@
 				padding-block-end: 0.4rem;
 			}
 			.frame {
+				display: block;
 				position: absolute;
 				top: 0;
 				bottom: 0;
@@ -202,6 +203,7 @@
 				right: 0;
 				width: 100%;
 				height: 100%;
+				--icon-size: 100%;
 			}
 		}
 		.ac-label {
@@ -413,16 +415,21 @@
 			.proficiency-selector {
 				display: block;
 				padding: 0;
+				height: 14px;
+				align-self: center;
 			}
 			button {
 				flex-grow: 1;
 				display: flex;
 				align-items: first baseline;
 				gap: 0.25rem;
-				margin-block: 2px;
-				padding-block: 0;
+				padding-block: 2px;
 				font-size: var(--font-size-11);
 				line-height: var(--font-size-13);
+
+				&:hover, :focus {
+					z-index: 1;
+				}
 			}
 			.ability {
 				font-variant: small-caps;

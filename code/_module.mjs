@@ -52,7 +52,6 @@ Hooks.once("init", function() {
 	enrichers.registerCustomEnrichers();
 	settings.registerKeybindings();
 	settings.registerSettings();
-	utils.cacheInterfaceSVG();
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
 });
