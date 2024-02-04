@@ -5,9 +5,10 @@
 		<legend>
 			{{localize "BF.Ability.Label[other]"}}
 			{{#if modes.editing}}
-				<a data-action="config" data-type="ability">
-					<i class="fa-solid fa-cog"></i>
-				</a>
+				<button type="button" class="link-button" data-action="config" data-type="ability"
+				        aria-label="{{localize 'Configure'}}">
+					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				</button>
 			{{/if}}
 			{{blackFlag-notificationBadge actor category="abilities"}}
 		</legend>
@@ -22,23 +23,31 @@
 					</span>
 				</div>
 				<div class="ability-mod">
-					<a class="value" data-action="roll" data-sub-action="ability-check" data-ability="{{key}}">
+					<button type="button" class="value" data-action="roll" data-sub-action="ability-check"
+					        data-ability="{{key}}" aria-label="{{localize 'BF.Roll.Action.RollSpecific' type=(
+									localize 'BF.Ability.Action.CheckSpecific' ability=(localize ability.labels.full))}}">
 						{{#if ability.valid}}{{blackFlag-number ability.check.mod sign=true}}{{else}}&mdash;{{/if}}
-					</a>
+					</button>
 				</div>
 				<div class="ability-save">
 					<div class="proficiency-selector" data-multiplier="{{ability.save.proficiency.multiplier}}"
-						data-rounding="{{ability.save.proficiency.rounding}}">
-						<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
+						data-rounding="{{ability.save.proficiency.rounding}}" aria-label="{{ability.save.proficiency.label}}">
+						<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"
+						                aria-hidden="true"></blackFlag-icon>
 						<input type="hidden" name="system.abilities.{{key}}.save.proficiency.multiplier"
-							value="{{ability._source.save.proficiency.multiplier}}">
+						       value="{{ability._source.save.proficiency.multiplier}}">
 					</div>
-					<a class="value" data-action="roll" data-sub-action="ability-save" data-ability="{{key}}">
-						<svg class="label" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<button type="button" class="value" data-action="roll" data-sub-action="ability-save"
+					        data-ability="{{key}}" aria-label="{{localize 'BF.Roll.Action.RollSpecific' type=(
+									localize 'BF.Ability.Action.SaveSpecificShort' ability=(localize ability.labels.full))}}">
+						<svg class="label" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg"
+						     xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="{{localize 'BF.SavingThrow.LabelShort[one]'}}">
 							<defs>
 								<path id="path-0" d="M 45.5 27.5 A 18 18 0 0 1 27.5 45.5 A 18 18 0 0 1 9.5 27.5 A 18 18 0 0 1 27.5 9.5 A 18 18 0 0 1 45.5 27.5 Z"/>
 							</defs>
-							<text><textPath xlink:href="#path-0">{{localize "BF.SavingThrow.LabelShort[one]"}}</textPath></text>
+							<text aria-hidden="true">
+								<textPath xlink:href="#path-0">{{localize "BF.SavingThrow.LabelShort[one]"}}</textPath>
+							</text>
 						</svg>
 						<span class="mod">
 							{{#if ability.valid}}{{blackFlag-number ability.save.mod sign=true}}{{else}}&mdash;{{/if}}
@@ -59,14 +68,16 @@
 		<legend>
 			{{localize "BF.ArmorClass.Label"}}
 			{{#if modes.editing}}
-				<a data-action="config" data-type="armor-class">
-					<i class="fa-solid fa-cog"></i>
-				</a>
+				<button type="button" class="link-button" data-action="config" data-type="armor-class"
+				        aria-label="{{localize 'Configure'}}">
+					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				</button>
 			{{/if}}
 			{{blackFlag-notificationBadge actor category="armor-class"}}
 		</legend>
 		<div class="ac-shield">
-			<blackFlag-icon class="frame" src="systems/black-flag/artwork/interface/armor-class.svg"></blackFlag-icon>
+			<blackFlag-icon src="systems/black-flag/artwork/interface/armor-class.svg"
+			                class="frame" aria-hidden="true"></blackFlag-icon>
 			<span class="value">{{system.attributes.ac.value}}</span>
 		</div>
 		<div class="ac-label">
@@ -78,21 +89,23 @@
 		<legend>
 			{{localize "BF.Skill.Label[other]"}}
 			{{#if modes.editing}}
-				<a data-action="config" data-type="skill">
-					<i class="fa-solid fa-cog"></i>
-				</a>
+				<button type="button" class="link-button" data-action="config" data-type="skill"
+				        aria-label="{{localize 'Configure'}}">
+					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				</button>
 			{{/if}}
 			{{blackFlag-notificationBadge actor category="skills"}}
 		</legend>
 		{{#each system.proficiencies.skills as |skill key|}}
 			<div class="skill block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
-					data-rounding="{{skill.proficiency.rounding}}">
-					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
+				     data-rounding="{{skill.proficiency.rounding}}" aria-label="{{skill.proficiency.label}}">
+					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"
+					                aria-hidden="true"></blackFlag-icon>
 					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
-						value="{{skill._source.proficiency.multiplier}}">
+					       value="{{skill._source.proficiency.multiplier}}">
 				</div>
-				<button type="button" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
+				<button type="button" class="unbutton" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
 					<span class="name">
 						{{localize skill.labels.name}}
 					</span>
@@ -109,21 +122,23 @@
 		<legend>
 			{{localize "BF.Tool.Label[other]"}}
 			{{#if modes.editing}}
-				<a data-action="config" data-type="tool">
-					<i class="fa-solid fa-cog"></i>
-				</a>
+				<button type="button" class="link-button" data-action="config" data-type="tool"
+				        aria-label="{{localize 'Configure'}}">
+					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				</button>
 			{{/if}}
 			{{blackFlag-notificationBadge actor category="tools"}}
 		</legend>
 		{{#each system.proficiencies.tools as |tool key|}}
 			<div class="tool block" data-key="{{key}}">
 				<div class="proficiency-selector" data-multiplier="{{tool.proficiency.multiplier}}"
-					data-rounding="{{tool.proficiency.rounding}}">
-					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"></blackFlag-icon>
+				     data-rounding="{{tool.proficiency.rounding}}" aria-label="{{tool.proficiency.label}}">
+					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"
+					                aria-hidden="true"></blackFlag-icon>
 					<input type="hidden" name="system.proficiencies.tools.{{key}}.proficiency.multiplier"
-						value="{{tool._source.proficiency.multiplier}}">
+					       value="{{tool._source.proficiency.multiplier}}">
 				</div>
-				<button type="button" data-action="roll" data-sub-action="tool" data-tool="{{key}}">
+				<button type="button" class="unbutton" data-action="roll" data-sub-action="tool" data-tool="{{key}}">
 					<span class="name">
 						{{localize tool.label}}
 					</span>
@@ -149,9 +164,10 @@
 				<li class="luck-point{{#if selected}} selected{{/if}}"></li>
 			{{/each}}
 		</ol>
-		<a data-action="luck" data-sub-action="add">
-			<i class="fa-solid fa-plus"></i>
-		</a>
+		<button type="button" class="link-button" data-action="luck" data-sub-action="add" tabindex="0"
+		   aria-label="{{localize 'BF.Action.Add.Specific' type=(localize 'BF.Luck.Label')}}">
+			<i class="fa-solid fa-plus"aria-hidden="true"></i>
+		</button>
 	</fieldset>
 
 	<fieldset class="hit-points">
@@ -191,16 +207,18 @@
 					<label class="label">d{{denomination}}</label>
 					{{#if @root.modes.editing}}
 						<input class="value" type="number" name="system.attributes.hd.d.{{denomination}}.available"
-							value="{{data.available}}" step=1 min=0 max={{data.max}}>
+						       value="{{data.available}}" step=1 min=0 max={{data.max}}>
 					{{else}}
 						<span class="value">{{blackFlag-number data.available}}</span>
 					{{/if}}
 					<div class="separator"></div>
 					<span class="max">{{blackFlag-number data.max}}</span>
-					<button type="button" data-action="roll" data-sub-action="hit-die" data-denomination="{{denomination}}"
-						{{disabled (eq data.available 0)}}>
-						<blackFlag-icon class="die-icon blue"
-							src="systems/black-flag/artwork/interface/dice/d{{denomination}}.svg"></blackFlag-icon>
+					<button type="button" class="unbutton" data-action="roll" data-sub-action="hit-die"
+					        data-denomination="{{denomination}}" {{disabled (eq data.available 0)}} aria-label="
+									{{~localize 'BF.Roll.Action.RollSpecific' type=(
+									localize 'BF.HitDie.LabelSpecific' denom=denomination)}}">
+						<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d{{denomination}}.svg"
+						                class="die-icon blue" aria-hidden="true"></blackFlag-icon>
 					</button>
 				</div>
 			{{/each}}
@@ -211,15 +229,18 @@
 		<legend>
 			{{localize "BF.Initiative.Label"}}
 			{{#if modes.editing}}
-				<a data-action="config" data-type="initiative">
-					<i class="fa-solid fa-cog"></i>
-				</a>
+				<button type="button" class="link-button" data-action="config" data-type="initiative" tabindex="0"
+				        aria-label="{{localize 'Configure'}}">
+					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				</button>
 			{{/if}}
 		</legend>
 		<div class="block">
 			<span class="value">{{blackFlag-number system.attributes.initiative.mod sign=true}}</span>
-			<button type="button" data-action="roll" data-sub-action="initiative">
-				<blackFlag-icon class="die-icon blue" src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
+			<button class="unbutton" type="button" data-action="roll" data-sub-action="initiative" aria-label="
+			        {{~localize 'BF.Roll.Action.RollSpecific' type=(localize 'BF.Initiative.Label')}}">
+				<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"
+				                class="die-icon blue" aria-hidden="true"></blackFlag-icon>
 			</button>
 		</div>
 	</fieldset>
@@ -231,9 +252,10 @@
 				<label>
 					<span>{{localize label}}</span>
 					{{#if (and @root.modes.editing config)}}
-						<a data-action="config" data-type="{{config}}">
-							<i class="fa-solid fa-cog"></i>
-						</a>
+						<button type="button" class="link-button" data-action="config" data-type="{{config}}" tabindex="0"
+						        aria-label="{{localize 'Configure'}}">
+							<i class="fa-solid fa-cog" aria-hidden="true"></i>
+						</button>
 					{{/if}}
 				</label>
 				<span>{{value}}</span>

@@ -10,7 +10,7 @@
 			</label>
 			{{#each hd.d as |hd denom|}}
 				<label class="hit-die-roll">
-					<span>d{{denom}} ({{localize "BF.HitDie.Available" number=(blackFlag-number hd.available)}})</span>
+					<span>d{{denom}} ({{localize "BF.HitDie.AvailableCount" number=(blackFlag-number hd.available)}})</span>
 					<button data-action="roll-hit-die" data-denomination="{{denom}}" {{disabled (eq hd.available 0)}}>
 						<blackFlag-icon class="die-icon"
 							src="systems/black-flag/artwork/interface/dice/d{{denom}}.svg"></blackFlag-icon>

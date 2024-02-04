@@ -673,11 +673,16 @@
 "BF.Healing.Type.Normal": "Normal HP",
 "BF.Healing.Type.Temp": "Temp HP",
 
-"BF.HitDie.Label[one]": "Hit Die",
-"BF.HitDie.Label[other]": "Hit Dice",
-"BF.HitDie.Available": "{number} available",
-"BF.HitDie.Warning.NoneAvailableGeneric": "No hit dice available to roll.",
-"BF.HitDie.Warning.NoneAvailableSpecific": "No d{denomination} hit dice available to roll.",
+"BF.HitDie": {
+	"Label[one]": "Hit Die",
+	"Label[other]": "Hit Dice",
+	"LabelSpecific": "D{denom} Hit Die",
+	"AvailableCount": "{number} available",
+	"Warning": {
+		"NoneAvailableGeneric": "No hit dice available to roll.",
+		"NoneAvailableSpecific": "No d{denomination} hit dice available to roll."
+	}
+},
 
 "BF.HitPoint.Label[one]": "Hit Point",
 "BF.HitPoint.Label[other]": "Hit Points",
@@ -942,13 +947,19 @@
 "BF.Level.Overall": "Overall Level",
 "BF.Level.Warning.Max": "Character cannot be leveled up past {max}.",
 
-"BF.Luck.Label": "Luck",
-"BF.Luck.Action.Bonus": "Add 1 to result",
-"BF.Luck.Action.Grant": "Grant Luck",
-"BF.Luck.Action.Reroll": "Re-roll one die",
-"BF.Luck.RerollPrompt": "Which die should be re-rolled?",
-"BF.Luck.Warning.Insufficient": "Insufficient luck points remaining.",
-"BF.Luck.Warning.OnlyOneReroll": "Only a single re-roll is allowed.",
+"BF.Luck": {
+	"Label": "Luck",
+	"Action": {
+		"Bonus": "Add 1 to result",
+		"Grant": "Grant Luck",
+		"Reroll": "Re-roll one die"
+	},
+	"RerollPrompt": "Which die should be re-rolled?",
+	"Warning": {
+		"Insufficient": "Insufficient luck points remaining.",
+		"OnlyOneReroll": "Only a single re-roll is allowed."
+	}
+},
 
 "BF.Minimum.Label[one]": "Minimum",
 "BF.Minimum.Label[other]": "Minimums",

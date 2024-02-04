@@ -13,7 +13,7 @@
 				{{#each activities}}
 					<tr data-activity="{{activity.uuid}}" {{~#if dataset}} {{blackFlag-dataset dataset}}{{/if}}>
 						<td class="control">
-							<button type="button" data-action="activate">{{localize activationText}}</button>
+							<button type="button" class="heavy-button" data-action="activate">{{localize activationText}}</button>
 						</td>
 						<td class="name">
 							{{#if name}}<h5>{{localize name}}</h5>{{else}}

@@ -57,10 +57,13 @@
 				text-align: center;
 			}
 
-			.value[data-action]:hover {
+			.value[data-action]:hover, .value[data-action]:focus {
 				text-shadow: none;
 				border-color: var(--bf-color-border-light-blue);
 				box-shadow: 0 0 2px 0 var(--bf-color-border-light-blue);
+			}
+			.value[data-action]:focus {
+				box-shadow: 0 0 6px 0 var(--bf-color-border-light-blue);
 			}
 
 			.ability-score {
@@ -120,7 +123,7 @@
 					left: -0.7rem;
 					top: 0.5rem;
 				}
-				a {
+				button {
 					width: 100%;
 					height: 100%;
 					padding: 0.25rem;
@@ -427,7 +430,7 @@
 				font-size: var(--font-size-11);
 				line-height: var(--font-size-13);
 
-				&:hover, :focus {
+				&:hover, &:focus {
 					z-index: 1;
 				}
 			}

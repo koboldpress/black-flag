@@ -42,24 +42,4 @@
 		list-style: none;
 		padding: 0;
 	}
-
-	button {
-		position: relative;
-		border: 1px solid var(--bf-color-border-gray);
-		border-radius: var(--card-border-radius);
-		background: var(--bf-color-fill);
-
-		&::after {
-			content: "";
-			position: absolute;
-			inset: var(--card-button-inset);
-			border: 1px solid var(--bf-color-border-blue);
-			border-radius: calc(var(--bf-button-border-radius) - var(--bf-button-inset));
-			z-index: 1;
-		}
-
-		&:hover, &:focus {
-			box-shadow: 0 0 5px var(--bf-color-border-light-blue);
-		}
-	}
 }
