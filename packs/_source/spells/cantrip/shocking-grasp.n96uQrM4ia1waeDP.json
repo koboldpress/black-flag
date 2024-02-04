@@ -5,7 +5,50 @@
   "_id": "n96uQrM4ia1waeDP",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "9VAyI3JmOyAi7Chx": {
+        "type": "attack",
+        "_id": "9VAyI3JmOyAi7Chx",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "lighting"
+              }
+            ]
+          },
+          "ability": "none"
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -48,7 +94,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": ""
+    },
     "circle": "arcane",
     "school": "evocation"
   },
@@ -63,7 +111,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706935480956,
-    "modifiedTime": 1706935495296,
+    "modifiedTime": 1707019607261,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!n96uQrM4ia1waeDP"

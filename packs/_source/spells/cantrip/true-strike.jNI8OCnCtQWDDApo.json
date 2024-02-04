@@ -5,7 +5,25 @@
   "_id": "jNI8OCnCtQWDDApo",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "teAZFKIp6aAcBHFe": {
+        "type": "utility",
+        "_id": "teAZFKIp6aAcBHFe",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +46,9 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -45,10 +65,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "arcane",
     "school": "divination"
   },
@@ -63,7 +87,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706935933567,
-    "modifiedTime": 1706935942909,
+    "modifiedTime": 1707019760011,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!jNI8OCnCtQWDDApo"

@@ -5,7 +5,25 @@
   "_id": "agXA8jkodlH79XGg",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "OKtBV0yMmESEOfYU": {
+        "type": "utility",
+        "_id": "OKtBV0yMmESEOfYU",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +46,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -45,10 +66,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
     "circle": "divine",
     "school": "necromancy"
   },
@@ -63,7 +88,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706935619922,
-    "modifiedTime": 1706935631691,
+    "modifiedTime": 1707019746066,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!agXA8jkodlH79XGg"

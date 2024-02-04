@@ -5,7 +5,50 @@
   "_id": "EZNy8qD2tHXHr2N5",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "67QuN0fHGH25TeoO": {
+        "type": "attack",
+        "_id": "67QuN0fHGH25TeoO",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "10",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": "none"
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -45,10 +91,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": "arcane",
     "school": "evocation"
   },
@@ -63,7 +113,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933477872,
-    "modifiedTime": 1706933490210,
+    "modifiedTime": 1707020226950,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!EZNy8qD2tHXHr2N5"

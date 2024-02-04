@@ -5,7 +5,25 @@
   "_id": "J9zLZYHvTHwzB98C",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "rNt7sRMZNWBMsRrb": {
+        "type": "utility",
+        "_id": "rNt7sRMZNWBMsRrb",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,16 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -48,7 +69,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "divine",
     "school": "transmutation"
   },
@@ -63,7 +87,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706935782645,
-    "modifiedTime": 1706935815281,
+    "modifiedTime": 1707019755288,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!J9zLZYHvTHwzB98C"

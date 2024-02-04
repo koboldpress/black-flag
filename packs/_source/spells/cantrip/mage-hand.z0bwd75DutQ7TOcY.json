@@ -5,7 +5,25 @@
   "_id": "z0bwd75DutQ7TOcY",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "i2GqtsBwRFWw6nNj": {
+        "type": "utility",
+        "_id": "i2GqtsBwRFWw6nNj",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -48,7 +70,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "arcane",
     "school": "conjuration"
   },
@@ -63,7 +88,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934497441,
-    "modifiedTime": 1706934510395,
+    "modifiedTime": 1707020027187,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!z0bwd75DutQ7TOcY"

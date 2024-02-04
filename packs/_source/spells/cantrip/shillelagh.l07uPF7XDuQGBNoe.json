@@ -5,7 +5,25 @@
   "_id": "l07uPF7XDuQGBNoe",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "c8RAK7EmG5yLxlBq": {
+        "type": "utility",
+        "_id": "c8RAK7EmG5yLxlBq",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -24,17 +42,24 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "mistletoe, a shamrock leaf, and a club or quarterstaff",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -45,10 +70,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": "primordial",
     "school": "transmutation"
   },
@@ -63,7 +91,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706997899543,
-    "modifiedTime": 1706997913082,
+    "modifiedTime": 1707019736922,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!l07uPF7XDuQGBNoe"

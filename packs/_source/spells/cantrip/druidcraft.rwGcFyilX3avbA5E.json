@@ -5,7 +5,25 @@
   "_id": "rwGcFyilX3avbA5E",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "hmLNViCN3KEzqokr": {
+        "type": "utility",
+        "_id": "hmLNViCN3KEzqokr",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +46,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -45,10 +66,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "primordial",
     "school": "transmutation"
   },
@@ -63,7 +88,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706997674649,
-    "modifiedTime": 1706997698195,
+    "modifiedTime": 1707020245313,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!rwGcFyilX3avbA5E"

@@ -5,7 +5,25 @@
   "_id": "LGHPueVAi4bMnmFc",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "rztaa7NkiIldvdh8": {
+        "type": "utility",
+        "_id": "rztaa7NkiIldvdh8",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,15 +46,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -45,10 +69,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": "divine",
     "school": "divination"
   },
@@ -63,7 +90,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933995097,
-    "modifiedTime": 1706934006634,
+    "modifiedTime": 1707020100165,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!LGHPueVAi4bMnmFc"

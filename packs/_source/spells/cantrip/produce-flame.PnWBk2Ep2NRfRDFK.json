@@ -5,7 +5,50 @@
   "_id": "PnWBk2Ep2NRfRDFK",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "j70m98geb0c7vALt": {
+        "type": "attack",
+        "_id": "j70m98geb0c7vALt",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": "none"
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -24,17 +67,21 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
     "tags": [],
     "target": {
@@ -45,10 +92,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "primordial",
     "school": "conjuration"
   },
@@ -63,7 +114,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706997864135,
-    "modifiedTime": 1706997880622,
+    "modifiedTime": 1707019243038,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PnWBk2Ep2NRfRDFK"

@@ -5,7 +5,48 @@
   "_id": "DlGDzuYub1O7kkHX",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "a8LHtbKewtlFDIGP": {
+        "type": "savingThrow",
+        "_id": "a8LHtbKewtlFDIGP",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "12",
+                "bonus": "",
+                "custom": "",
+                "type": "poison"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +69,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -45,10 +89,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
     "circle": "arcane",
     "school": "conjuration"
   },
@@ -63,7 +111,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934799186,
-    "modifiedTime": 1706934810344,
+    "modifiedTime": 1707019838577,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DlGDzuYub1O7kkHX"

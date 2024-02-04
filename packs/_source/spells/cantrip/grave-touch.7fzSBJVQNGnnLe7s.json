@@ -5,7 +5,50 @@
   "_id": "7fzSBJVQNGnnLe7s",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "3o5CgPu6WROLMSYI": {
+        "type": "attack",
+        "_id": "3o5CgPu6WROLMSYI",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "necrotic"
+              }
+            ]
+          },
+          "ability": "none"
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +71,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -45,10 +92,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": "arcane",
     "school": "necromancy"
   },
@@ -63,7 +114,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933890640,
-    "modifiedTime": 1706933924956,
+    "modifiedTime": 1707020164314,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!7fzSBJVQNGnnLe7s"

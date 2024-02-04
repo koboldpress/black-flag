@@ -5,7 +5,25 @@
   "_id": "AR6lGdaHEnUy6Em6",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "fVwdI9oPeaMJTkfg": {
+        "type": "utility",
+        "_id": "fVwdI9oPeaMJTkfg",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of fleece",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -48,7 +72,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "arcane",
     "school": "illusion"
   },
@@ -63,7 +90,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934670964,
-    "modifiedTime": 1706934691232,
+    "modifiedTime": 1707019881139,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!AR6lGdaHEnUy6Em6"

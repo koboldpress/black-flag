@@ -5,7 +5,25 @@
   "_id": "TgJgOsNetxkikvZa",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "4wfPfvEyy74K7I2i": {
+        "type": "utility",
+        "_id": "4wfPfvEyy74K7I2i",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -48,7 +70,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
     "circle": "arcane",
     "school": "transmutation"
   },
@@ -63,7 +88,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934966568,
-    "modifiedTime": 1706935000325,
+    "modifiedTime": 1707019803030,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!TgJgOsNetxkikvZa"

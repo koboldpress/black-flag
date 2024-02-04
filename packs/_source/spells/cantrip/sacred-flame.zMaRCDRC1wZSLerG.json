@@ -5,7 +5,48 @@
   "_id": "zMaRCDRC1wZSLerG",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "MzjjDXYrH6Ppchg2": {
+        "type": "savingThrow",
+        "_id": "MzjjDXYrH6Ppchg2",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,7 +69,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -48,7 +92,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": "divine",
     "school": "evocation"
   },
@@ -63,7 +110,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706935262062,
-    "modifiedTime": 1706935272924,
+    "modifiedTime": 1707019662684,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zMaRCDRC1wZSLerG"

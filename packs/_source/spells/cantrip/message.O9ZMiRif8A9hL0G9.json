@@ -5,7 +5,25 @@
   "_id": "O9ZMiRif8A9hL0G9",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "sbtRsCBBJXyGiDPA": {
+        "type": "utility",
+        "_id": "sbtRsCBBJXyGiDPA",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a short piece of copper wire",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -45,10 +70,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": "arcane",
     "school": "transmutation"
   },
@@ -63,7 +92,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934638710,
-    "modifiedTime": 1706934650961,
+    "modifiedTime": 1707019930933,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!O9ZMiRif8A9hL0G9"

@@ -5,7 +5,25 @@
   "_id": "TWVI2s8oV0TiSEKy",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "UOLgsuCw2cAeQumo": {
+        "type": "utility",
+        "_id": "UOLgsuCw2cAeQumo",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +46,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a firefly or phosphorescent moss",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -45,10 +70,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": "",
     "school": "evocation"
   },
@@ -63,7 +91,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934344025,
-    "modifiedTime": 1706934371419,
+    "modifiedTime": 1707020068974,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!TWVI2s8oV0TiSEKy"

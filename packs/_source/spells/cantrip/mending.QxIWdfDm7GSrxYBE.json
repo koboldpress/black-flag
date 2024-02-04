@@ -5,7 +5,25 @@
   "_id": "QxIWdfDm7GSrxYBE",
   "img": "systems/black-flag/artwork/types/spell.svg",
   "system": {
-    "activities": {},
+    "activities": {
+      "oFaaV3YUClp1N9gE": {
+        "type": "utility",
+        "_id": "oFaaV3YUClp1N9gE",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,9 +46,15 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "two lodestones",
+        "denomination": "pp"
       }
     },
     "duration": {
@@ -45,10 +69,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": "",
     "school": "transmutation"
   },
@@ -63,7 +90,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706934622862,
-    "modifiedTime": 1706934633595,
+    "modifiedTime": 1707019973541,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!QxIWdfDm7GSrxYBE"
