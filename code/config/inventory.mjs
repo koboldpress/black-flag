@@ -128,7 +128,10 @@ export const sheetSections = {
 					);
 					return foundry.utils.mergeObject(sectionData, {
 						id: `class-${identifier}`, label: label("other"),
-						filters: [...sectionData.filters, {k: "system.identifier.associated", v: identifier}],
+						filters: [...sectionData.filters, {o: "OR", v: [
+							{k: "system.identifier.associated", v: identifier},
+							{k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith"}
+						]}],
 						create: [{
 							label: label("one"),
 							type: "feature",

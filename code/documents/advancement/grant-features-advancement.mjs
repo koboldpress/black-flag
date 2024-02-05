@@ -107,13 +107,15 @@ export default class GrantFeaturesAdvancement extends Advancement {
 			const source = await fromUuid(uuid);
 			if ( !source ) continue;
 			const id = foundry.utils.randomID();
+			const advancementOrigin = `${this.item.id}.${this.id}`;
 			items.push(source.clone({
 				_id: id,
 				folder: null,
 				sort: null,
 				"flags.black-flag.sourceId": uuid,
-				"flags.black-flag-advancementOrigin": `${this.item.id}.${this.id}`
-			}, {keepId: true}).toObject());
+				"flags.black-flag.advancementOrigin": advancementOrigin,
+				"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin
+			}, { keepId: true }).toObject());
 			added.push({ document: id, uuid });
 		}
 		await this.actor.createEmbeddedDocuments("Item", items, {keepId: true, render});
