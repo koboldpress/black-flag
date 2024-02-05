@@ -57,12 +57,12 @@ export default class PCSheet extends BaseActorSheet {
 	async prepareSpecialActions(actions) {
 		actions.other.activities.push({
 			name: "BF.Rest.Type.Short.Label",
-			activationText: "BF.Rest.Action.Rest.Label",
+			label: "BF.Rest.Action.Rest.Label",
 			dataset: { action: "rest", type: "short" }
 		});
 		actions.other.activities.push({
 			name: "BF.Rest.Type.Long.Label",
-			activationText: "BF.Rest.Action.Rest.Label",
+			label: "BF.Rest.Action.Rest.Label",
 			dataset: { action: "rest", type: "long" }
 		});
 	}

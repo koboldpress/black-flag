@@ -52,15 +52,14 @@ export default class SavingThrowActivity extends DamageActivity {
 	 */
 	async activationChatContext() {
 		const context = await super.activationChatContext();
-		context.buttons = {
-			savingThrow: {
-				label: game.i18n.localize("BF.Activity.SavingThrow.Title"),
-				dataset: { action: "roll", method: "rollSavingThrow" }
-			}
-		};
+		context.buttons = {};
 		if ( this.hasDamage ) context.buttons.damage = {
 			label: game.i18n.localize("BF.Damage.Label"),
 			dataset: { action: "roll", method: "rollDamage" }
+		};
+		context.buttons.savingThrow = {
+			label: game.i18n.localize("BF.Activity.SavingThrow.Title"),
+			dataset: { action: "roll", method: "rollSavingThrow" }
 		};
 		return context;
 	}

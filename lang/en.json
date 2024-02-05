@@ -113,6 +113,10 @@
 	"Cost": {
 		"Label": "Activation Cost"
 	},
+	"Primary": {
+		"Label": "Primary Activation",
+		"Hint": "Is this activity part of the casting of the spell, or a subsequent action that can be taken. Only primary actions will consume a spell slot when used."
+	},
 	"Scalar": {
 		"Label": "{number} {type}"
 	},
@@ -138,6 +142,9 @@
 "BF.Activity": {
 	"Label[one]": "Activity",
 	"Label[other]": "Activities",
+	"Activation": {
+		"Title": "Activation Configuration"
+	},
 	"Attack": {
 		"Title": "Attack",
 		"Hint": "Make an attack and roll damage.",
@@ -155,6 +162,7 @@
 	"Core": {
 		"Action": {
 			"Activate": "Activate",
+			"Cast": "Cast",
 			"Create": "Create Activity",
 			"Delete": "Delete Activity",
 			"Duplicate": "Duplicate Activity",

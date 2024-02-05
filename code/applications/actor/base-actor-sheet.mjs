@@ -119,7 +119,7 @@ export default class BaseActorSheet extends ActorSheet {
 				const data = {
 					activity,
 					item: activity.item,
-					activationText: "BF.Activity.Core.Action.Use",
+					label: activity.activationLabel,
 					usesColumn: activity.usesColumn,
 					challengeColumn: activity.challengeColumn,
 					effectColumn: activity.effectColumn

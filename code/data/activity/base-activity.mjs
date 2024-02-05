@@ -61,7 +61,10 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			activation: new SchemaField({
 				value: new NumberField({initial: undefined, min: 0, integer: true, label: "BF.Activation.Cost.Label"}),
 				type: new StringField({initial: undefined, label: "BF.Activation.Type.Label"}),
-				condition: new StringField({initial: undefined, label: "BF.Activation.Condition.Label"})
+				condition: new StringField({initial: undefined, label: "BF.Activation.Condition.Label"}),
+				primary: new BooleanField({
+					required: false, initial: undefined, label: "BF.Activation.Primary.Label", hint: "BF.Activation.Primary.Hint"
+				})
 			}, {label: "BF.Activation.Label"}),
 			consumption: new SchemaField({
 				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
@@ -116,6 +119,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			if ( !activityProperty && itemProperty ) foundry.utils.setProperty(this, keyPath[0], itemProperty);
 		}
 		this.activation.type ??= "action";
+		this.activation.primary ??= true;
 
 		this.system.prepareFinalData?.();
 	}

@@ -143,6 +143,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Does activating this spell require a spell slot?
+	 * @type {boolean}
+	 */
+	get requiresSpellSlot() {
+		// Cantrips & rituals never consume slots
+		if ( (this.ring.base === 0) || this.tags.has("ritual") ) return false;
+
+		// TODO: At-Will & Innate Casting
+
+		return true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	get traits() {
 		const traits = [

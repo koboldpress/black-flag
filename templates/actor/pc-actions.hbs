@@ -7,14 +7,14 @@
 			<tbody>
 				<tr>
 					<th colspan="5">
-						{{label}}
+						{{ label }}
 					</th>
 				</tr>
 				{{#each activities}}
 					<tr data-activity="{{ activity.uuid }}" data-activity-id="{{ activity.id }}" data-item-id="{{ item.id }}"
 					    {{~#if dataset}} {{ blackFlag-dataset dataset }}{{/if}}>
 						<td class="control">
-							<button type="button" class="heavy-button" data-action="activate">{{ localize activationText }}</button>
+							<button type="button" class="heavy-button" data-action="activate">{{ localize label }}</button>
 						</td>
 						<td class="name">
 							{{#if name}}<h5>{{ localize name }}</h5>{{else}}

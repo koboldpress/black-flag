@@ -1,3 +1,4 @@
+import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
 import { numberFormat } from "../../utils/_module.mjs";
@@ -41,6 +42,28 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	get actionType() {
 		return this.activation.type;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The label used for activation buttons.
+	 * @type {string}
+	 */
+	get activationLabel() {
+		return `BF.Activity.Core.Action.${this.isSpell ? "Cast" : "Use"}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is scaling possible with this activity?
+	 * @type {boolean}
+	 */
+	get canScale() {
+		if ( !this.consumption.scale.allowed ) return false;
+		if ( !this.isSpell ) return true;
+		return this.requiresSpellSlot;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -99,11 +122,33 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Is this activity on a spell item, or something else?
+	 * @type {boolean}
+	 */
+	get isSpell() {
+		// TODO: Potentially allow custom module types to be considered spells
+		return this.item.type === "spell";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Data used when fetching modifiers associated with this activity.
 	 * @type {object}
 	 */
 	get modifierData() {
 		return { activity: this.system, item: this.item.getRollData() };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Does activating this activity consume a spell slot?
+	 * @type {boolean}
+	 */
+	get requiresSpellSlot() {
+		if ( !this.isSpell ) return false;
+		return this.item.system.requiresSpellSlot && this.activation.primary;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -137,6 +182,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
 	 *                                                  consumption or provide a list of consumption type keys defined
 	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
+	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
+	 *                                      is not allowed.
 	 */
 
 	/**
@@ -152,6 +199,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 *
 	 * @typedef {object} ActivityDialogConfiguration
 	 * @property {boolean} [configure=true] - Should the activation configuration dialog be displayed?
+	 * @property {typeof ActivityActivationDialog} - [applicationClass] - Alternate activation dialog to use.
 	 */
 
 	/**
@@ -162,12 +210,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async activate(config={}, dialog={}, message={}) {
 		// Prepare initial activation configuration
-		const activationConfig = foundry.utils.mergeObject({
-			consume: true
-		}, config);
+		const activationConfig = this.prepareActivationConfig(config);
 
 		const dialogConfig = foundry.utils.mergeObject({
-			configure: true // TODO: Automatically set based on whether item needs configuration
+			configure: true,
+			applicationClass: ActivityActivationDialog
 		}, dialog);
 
 		const messageConfig = foundry.utils.mergeObject({
@@ -176,20 +223,64 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}, message);
 
 		// Call preActivate script & hooks
-		// TODO
+		// TODO: preActivate script
+		/**
+		 * A hook event that fires before an activity activation is configured.
+		 * @function blackFlag.preActivateActivity
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
+		 * @param {ActivityDialogConfiguration} dialogConfig - Configuration data for the activity activation dialog.
+		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
+		 */
+		if ( Hooks.call("blackFlag.preActivateActivity", this, activationConfig, messageConfig, dialogConfig) === false ) {
+			return;
+		}
 
 		// Display configuration window if necessary, wait for result
-		// TODO
+		if ( dialogConfig.configure && this.requiresConfigurationDialog(activationConfig) ) {
+			const configuration = await dialogConfig.applicationClass.create(this, activationConfig, dialogConfig.options);
+			if ( !configuration ) return;
+			foundry.utils.mergeObject(activationConfig, configuration);
+		}
 
-		// Call preConsumeUses script & hooks
-		// TODO
+		// TODO: Handle upcasting
+
+		// Call preActivityConsumption script & hooks
+		// TODO: preActivityConsumption script
+		/**
+		 * A hook event that fires before an item's resource consumption is calculated.
+		 * @function @blackFlag.preActivityConsumption
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
+		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
+		 */
+		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false ) {
+			return;
+		}
 
 		// Calculate what resources should be consumed
 		const updates = await this.activationUpdates(activationConfig);
 		if ( updates === false ) return;
 
-		// Call consumeUses script & hooks
-		// TODO
+		// Call activityConsumption script & hooks
+		// TODO: activityConsumption script
+		/**
+		 * A hook event that fires after an item's resource consumption is calculated, but before an updates are performed.
+		 * @function @blackFlag.activityConsumption
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
+		 * @param {ActivationUpdates} updates - Updates that will be applied to the actor and other documents.
+		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
+		 */
+		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false ) {
+			return;
+		}
 
 		// Merge activity changes into the item updates
 		if ( !foundry.utils.isEmpty(updates.activity) ) {
@@ -205,17 +296,83 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
 		// Call postConsumeUses script & hooks
-		// TODO
+		// TODO: postActivityConsumption script
+		/**
+		 * A hook event that fires after an item's resource consumption is calculated and applied.
+		 * @function @blackFlag.postActivityConsumption
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
+		 * @param {ActivationUpdates} updates - Updates that have been applied to the actor and other documents.
+		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
+		 */
+		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false ) {
+			return;
+		}
 
 		// Display the card in chat
 		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-		await this.createActivationMessage(messageConfig);
+		const createdMessage = await this.createActivationMessage(messageConfig);
 
 		// Create measured templates if necessary
 		// TODO
 
 		// Call postActivate script & hooks
-		// TODO
+		// TODO: postActivate script
+		/**
+		 * A hook event that fires when an activity is activated.
+		 * @function blackFlag.postActivateActivity
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {BlackFlagChatMessage|ActivityMessageConfiguration} message - The chat message created for the activation,
+		 *                                                                      or the message data if create was `false`.
+		 * @param {MeasuredTemplateDocument[]|null} templates - Any measured templates that were created.
+		 */
+		Hooks.callAll("blackFlag.postActivateActivity", this, activationConfig, createdMessage, null);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare activation configuration object with the necessary defaults based on the activity and item.
+	 * @param {ActivityActivationConfiguration} [config={}] - Any configuration data provided manually.
+	 * @returns {ActivityActivationConfiguration}
+	 */
+	prepareActivationConfig(config={}) {
+		config = foundry.utils.deepClone(config);
+
+		if ( config.consume !== false ) {
+			config.consume ??= {};
+			// TODO: consume.ammunition
+			config.consume.resources ??= this.consumption.targets.length > 0;
+			config.consume.spellSlot ??= this.requiresSpellSlot;
+		}
+		if ( !this.canScale ) config.scaling = false;
+		else config.scaling ??= 0;
+
+		// If all entries within `config.consume` are `false`, replace object with `false`
+		if ( config.consume !== false ) {
+			const anyConsumption = Object.values(config.consume).some(v => v);
+			if ( !anyConsumption ) config.consume = false;
+		}
+
+		return config;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine if the configuration dialog is required based on the configuration options. Does not guarantee a dialog
+	 * is shown if the dialog is suppressed in the activation dialog configuration.
+	 * @param {ActivityActivationConfiguration} config
+	 * @returns {boolean}
+	 */
+	requiresConfigurationDialog(config) {
+		if ( config.consume !== false ) return true;
+		if ( config.scaling !== false ) return true;
+		return false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

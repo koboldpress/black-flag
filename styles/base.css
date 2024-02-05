@@ -1,6 +1,6 @@
 .link-button, .unbutton, .heavy-button, .light-button {
 	&[disabled] { cursor: default; }
-	&:focus { box-shadow: unset; }
+	&:hover, &:focus, &:focus-visible { box-shadow: unset; }
 }
 
 .link-button {
@@ -15,7 +15,7 @@
 	line-height: inherit;
 
 	&:not([disabled]) {
-		&:hover, &:focus {
+		&:hover, &:focus-visible {
 			box-shadow: unset;
 			text-shadow: 0 0 6px var(--bf-text-shadow-blue);
 		}
