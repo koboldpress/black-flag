@@ -91,6 +91,28 @@ function groupedSelectOptions(choices, options) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * A helper that fetch the appropriate item context from root and adds it to the first block parameter.
+ * @param {object} context - Current evaluation context.
+ * @param {object} options - Handlebars options.
+ * @returns {string}
+ */
+function itemContext(context, options) {
+	if ( arguments.length !== 2 ) throw new Error("#blackFlag-itemContext requires exactly one argument");
+	if ( foundry.utils.getType(context) === "function" ) context = context.call(this);
+
+	const contextObject = options.hash.context ?? options.data.root.itemContext;
+	const ctx = contextObject?.[context.id];
+	if ( !ctx ) {
+		const inverse = options.inverse(this);
+		if ( inverse ) return options.inverse(this);
+	}
+
+	return options.fn(context, { data: options.data, blockParams: [ctx] });
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Display a notification badge if necessary.
  * @param {Document} document - Document from which the notifications should be gathered.
  * @param {object} options
@@ -160,6 +182,7 @@ export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		"blackFlag-dataset": dataset,
 		"blackFlag-groupedSelectOptions": (choices, options) => groupedSelectOptions(choices, options.hash),
+		"blackFlag-itemContext": itemContext,
 		"blackFlag-linkForUUID": linkForUUID,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash)

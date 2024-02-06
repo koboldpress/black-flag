@@ -15,12 +15,13 @@ export default class AttackConfig extends ActivityConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData(options) {
-		const context = super.getData(options);
-		const defaultAbility = CONFIG.BlackFlag.abilities[this.item.system.ability]?.labels.full;
+	async getData(options) {
+		const context = await super.getData(options);
+		const defaultAbility = this.activity.isSpell ? "BF.Spellcasting.Label"
+			: CONFIG.BlackFlag.abilities[this.item.system.ability]?.labels.full;
 		const defaultType = CONFIG.BlackFlag.weaponTypes[this.item.system.type?.value]?.label;
 		const defaultClassification = CONFIG.BlackFlag.attackTypes[this.item.system.type?.classification];
-		foundry.utils.mergeObject(context, {
+		return foundry.utils.mergeObject(context, {
 			labels: {
 				defaultAbility: defaultAbility ? game.i18n.format("BF.Default.Specific", {
 					default: game.i18n.localize(defaultAbility).toLowerCase()
@@ -33,6 +34,5 @@ export default class AttackConfig extends ActivityConfig {
 				}) : null
 			}
 		});
-		return context;
 	}
 }

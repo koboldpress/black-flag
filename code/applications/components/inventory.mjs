@@ -197,6 +197,8 @@ export default class InventoryElement extends AppAssociatedElement {
 			case "edit":
 			case "view":
 				return item.sheet.render(true);
+			case "prepare":
+				return item.setFlag("black-flag", "relationship.prepared", !item.system.prepared);
 		}
 	}
 

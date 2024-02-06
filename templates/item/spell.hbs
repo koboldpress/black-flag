@@ -55,6 +55,12 @@
 				<fieldset class="casting">
 					<legend>{{localize "BF.Spell.Casting.Label"}}</legend>
 					<div class="field-group">
+						<span>{{localize "BF.Spell.Preparation.Label"}}</span>
+						<select name="system.type.value">
+							{{selectOptions CONFIG.spellPreparationModes selected=system.type.value labelAttr="label" localize=true}}
+						</select>
+					</div>
+					<div class="field-group">
 						<span>{{localize "BF.Spell.CastingTime.Label"}}</span>
 						{{#if system.casting.scalar}}
 							<label>

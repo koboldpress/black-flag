@@ -36,7 +36,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
 			}),
 			type: new SchemaField({
-				// Innate, prepared, always prepared, etc.
+				value: new StringField({initial: "standard", label: "BF.Spell.Preparation.Label"})
 			}),
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
 			school: new StringField({label: "BF.Spell.School.Label"}),
@@ -102,6 +102,24 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	get ability() {
 		// TODO: Return specific ability based on character's spellcasting
 		return "intelligence";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get displayActions() {
+		return super.displayActions && this.prepared;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Would this spell be considered to be prepared?
+	 * @type {boolean}
+	 */
+	get prepared() {
+		if ( (this.type.value !== "standard") || (this.ring.base === 0)
+		  || this.tags.has("ritual") || this.parent.actor?.type !== "pc" ) return true;
+		return this.parent.getFlag("black-flag", "relationship.prepared") === true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

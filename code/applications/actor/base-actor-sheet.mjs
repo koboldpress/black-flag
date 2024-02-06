@@ -147,10 +147,22 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @abstract
 	 */
 	async prepareItems(context) {
+		context.itemContext ??= {};
 		context.sections = await InventoryElement.organizeItems(this.actor, this.actor.items, {
-			hide: !this.modes.editing
+			callback: async (item, section) => {
+				const itemContext = context.itemContext[item.id] ??= {};
+				await this.prepareItem(item, itemContext, section);
+			}, hide: !this.modes.editing
 		});
 	}
+
+	/**
+	 * Prepare context data for a specific item.
+	 * @param {BlackFlagItem} item - Item being prepared.
+	 * @param {object} context - Context object for this item.
+	 * @param {object} section - Sheet section within which this item will be displayed.
+	 */
+	async prepareItem(item, context, section) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

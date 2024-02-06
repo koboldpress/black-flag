@@ -32,7 +32,6 @@
 					<th class="range" scope="col">{{localize "BF.Range.Label"}}</th>
 					<th class="target" scope="col">{{localize "BF.Target.Label[one]"}}</th>
 					<th class="traits" scope="col">{{localize "BF.Trait.Label[other]"}}</th>
-					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
@@ -44,7 +43,9 @@
 					</td>
 				</tr>
 				{{#each section.items as |spell|}}
-					<tr data-item-id="{{spell.id}}"><!-- TODO: Data based on type, prepared state -->
+				{{#blackFlag-itemContext spell as |ctx|}}
+					<tr data-item-id="{{spell.id}}" data-spell-type="{{spell.system.type.value}}"
+					    data-spell-prepared="{{spell.system.prepared}}">
 						<th class="name" scope="row">
 							<div class="layout">
 								<figure>
@@ -74,26 +75,34 @@
 						<td class="traits">
 							
 						</td>
-						<td class="enabled">
-							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
-						</td>
 						<td class="controls">
 							<div class="layout">
-								{{#if @root.modes.editing}}
-									<a data-action="edit">
-										<i class="fa-solid fa-edit"></i>
-									</a>
-									<a data-action="delete">
-										<i class="fa-solid fa-trash"></i>
-									</a>
-								{{else}}
-									<a data-action="view">
-										<i class="fa-regular fa-eye"></i>
-									</a>
+								{{#if @root.editable}}
+									<button type="button" class="link-button" data-action="edit"
+									        aria-label="{{localize 'BF.Spell.Action.Edit'}}">
+										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+									        aria-label="{{localize 'BF.Spell.Action.Delete'}}">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									</button>
+								{{else if @root.owner}}
+								{{#with ctx.preparation}}
+									{{#if applicable}}
+										<button type="button" class="link-button {{classes}}" data-action="prepare" data-tooltip="{{title}}"
+									        	aria-label="{{localize title}}" {{disabled disabled}}>
+											<i class="fa-regular fa-sun" aria-hidden="true"></i>
+										</button>
+									{{/if}}
+								{{/with}}
 								{{/if}}
+								<button type="button" class="link-button" data-context-menu aria-label="{{localize ''}}">
+									<i class="fa-solid fa-ellipsis-vertical"></i>
+								</button>
 							</div>
 						</td>
 					</tr>
+				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>
 		{{/each}}

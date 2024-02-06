@@ -1,4 +1,5 @@
 import { numberFormat, Trait } from "../../utils/_module.mjs";
+import InventoryElement from "../components/inventory.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
@@ -64,6 +65,24 @@ export default class PCSheet extends BaseActorSheet {
 			activationText: "BF.Rest.Action.Rest.Label",
 			dataset: { action: "rest", type: "long" }
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async prepareItem(item, context, section) {
+		if ( item.type === "spell" ) {
+			const mode = item.system.type.value;
+			const always = (mode === "always") || item.system.tags.has("ritual");
+			if ( always || mode === "standard" ) {
+				context.preparation = {
+					applicable: true,
+					classes: item.system.prepared ? "prepared" : "unprepared",
+					disabled: !item.isOwner || always,
+					title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
+						: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
+				};
+			} else context.preparation = { applicable: false };
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

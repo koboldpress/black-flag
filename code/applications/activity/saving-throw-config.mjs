@@ -15,8 +15,8 @@ export default class SavingThrowConfig extends ActivityConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData(options) {
-		const context = super.getData(options);
+	async getData(options) {
+		const context = await super.getData(options);
 		return context;
 	}
 }
