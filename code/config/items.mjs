@@ -26,32 +26,32 @@ localizeConfig(consumableCategories);
  */
 export const featureCategories = {
 	class: {
-		localization: "BF.Item.Feature.Category.Class",
+		localization: "BF.Feature.Category.Class",
 		children: {
 			channelDivinity: {
-				localization: "BF.Item.Feature.Type.ChannelDivinity"
+				localization: "BF.Feature.Type.ChannelDivinity"
 			},
 			martialAction: {
-				localization: "BF.Item.Feature.Type.MartialAction"
+				localization: "BF.Feature.Type.MartialAction"
 			},
 			stunt: {
-				localization: "BF.Item.Feature.Type.Stunt"
+				localization: "BF.Feature.Type.Stunt"
 			}
 		}
 	},
 	lineage: {
-		localization: "BF.Item.Feature.Category.Lineage",
+		localization: "BF.Feature.Category.Lineage",
 		children: {
 			naturalAdaptation: {
-				localization: "BF.Item.Feature.Type.NaturalAdaptation"
+				localization: "BF.Feature.Type.NaturalAdaptation"
 			}
 		}
 	},
 	heritage: {
-		localization: "BF.Item.Feature.Category.Heritage"
+		localization: "BF.Feature.Category.Heritage"
 	},
 	monsters: {
-		localization: "BF.Item.Feature.Category.Monster"
+		localization: "BF.Feature.Category.Monster"
 	}
 };
 localizeConfig(featureCategories, { sort: false });
@@ -177,13 +177,13 @@ localizeConfig(itemProperties);
  */
 export const talentCategories = {
 	magic: {
-		localization: "BF.Item.Talent.Category.Magic"
+		localization: "BF.Feature.Talent.Category.Magic"
 	},
 	martial: {
-		localization: "BF.Item.Talent.Category.Martial"
+		localization: "BF.Feature.Talent.Category.Martial"
 	},
 	technical: {
-		localization: "BF.Item.Talent.Category.Technical"
+		localization: "BF.Feature.Talent.Category.Technical"
 	}
 };
 localizeConfig(talentCategories);

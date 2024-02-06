@@ -521,20 +521,42 @@
 
 "BF.CreatureSizeAndType.Label": "Creature Size & Type",
 
-"BF.Currency.Abbreviation.Label": "Abbreviation",
-"BF.Currency.Abbreviation.Hint": "Unique abbreviation for this denomination.",
-"BF.Currency.ConversionRatio.Label": "Conversion Ratio",
-"BF.Currency.ConversionRatio.Hint": "Amount that this currency will be multiplied by to convert between currencies (e.g. 10 silvers is equal to 1 gold, so silver's ratio would be 0.1).",
-"BF.Currency.Denomination.Label": "Denomination",
-"BF.Currency.Denomination.Copper.Label": "Copper",
-"BF.Currency.Denomination.Copper.Abbreviation": "cp",
-"BF.Currency.Denomination.Gold.Label": "Gold",
-"BF.Currency.Denomination.Gold.Abbreviation": "gp",
-"BF.Currency.Denomination.Platinum.Label": "Platinum",
-"BF.Currency.Denomination.Platinum.Abbreviation": "pp",
-"BF.Currency.Denomination.Silver.Label": "Silver",
-"BF.Currency.Denomination.Silver.Abbreviation": "sp",
-"BF.Currency.Display": "{value} {denomination}",
+"BF.Currency": {
+	"Abbreviation": {
+		"Label": "Abbreviation",
+		"Abbreviation.Hint": "Unique abbreviation for this denomination."
+	},
+	"Action": {
+		"Add": "Add Currency",
+		"Edit": "Edit Currency",
+		"Delete": "Delete Currency",
+		"Split": "Split Currency"
+	},
+	"ConversionRatio": {
+		"Label": "Conversion Ratio",
+		"Hint": "Amount that this currency will be multiplied by to convert between currencies (e.g. 10 silvers is equal to 1 gold, so silver's ratio would be 0.1)."
+	},
+	"Denomination": {
+		"Label": "Denomination",
+		"Copper": {
+			"Label": "Copper",
+			"Copper.Abbreviation": "cp"
+		},
+		"Gold": {
+			"Label": "Gold",
+			"Gold.Abbreviation": "gp"
+		},
+		"Platinum": {
+			"Label": "Platinum",
+			"Platinum.Abbreviation": "pp"
+		},
+		"Silver": {
+			"Label": "Silver",
+			"Silver.Abbreviation": "sp"
+		}
+	},
+	"Display": "{value} {denomination}"
+},
 
 "BF.Damage.Label": "Damage",
 "BF.Damage.Bonus.Label": "Bonus",
@@ -662,6 +684,55 @@
 "BF.ExperiencePoints.Current.Label": "Current XP",
 "BF.ExperiencePoints.Required.Label": "Required XP to Next Level",
 
+"BF.Feature": {
+	"Action": {
+		"Add": "Add Feature",
+		"Edit": "Edit Feature",
+		"Enable": "Enable Feature",
+		"Delete": "Delete Feature",
+		"Disable": "Disable Feature"
+	},
+	"Category": {
+		"Label": "Feature Category",
+		"Class[one]": "Class Feature",
+		"Class[other]": "Class Features",
+		"ClassSpecific[one]": "{class} Feature",
+		"ClassSpecific[other]": "{class} Features",
+		"Heritage[one]": "Heritage Trait",
+		"Heritage[other]": "Heritage Traits",
+		"Lineage[one]": "Lineage Trait",
+		"Lineage[other]": "Lineage Traits",
+		"Monster[one]": "Monster Feature",
+		"Monster[other]": "Monster Features"
+	},
+	"Enabled": "Enabled",
+	"Disabled": "Disabled",
+	"Tag": "{level}-Level {owner} {type}",
+	"Talent": {
+		"Category": {
+			"Label": "Talent Category",
+			"Magic[one]": "Magical Talent",
+			"Magic[other]": "Magical Talents",
+			"Martial[one]": "Martial Talent",
+			"Martial[other]": "Martial Talents",
+			"Technical[one]": "Technical Talent",
+			"Technical[other]": "Technical Talents"
+		}
+	},
+	"Type": {
+		"Label": "Feature Type",
+		"LabelSpecific": "{type} Types",
+		"ChannelDivinity[one]": "Channel Divinity Effect",
+		"ChannelDivinity[other]": "Channel Divinity Effects",
+		"MartialAction[one]": "Martial Action",
+		"MartialAction[other]": "Martial Actions",
+		"NaturalAdaptation[one]": "Natural Adaptation",
+		"NaturalAdaptation[other]": "Natural Adaptations",
+		"Stunt[one]": "Stunt",
+		"Stunt[other]": "Stunts"
+	}
+},
+
 "BF.Formula.Label": "Formula",
 "BF.Formula.Action.Customize": "Customize Formula",
 "BF.Formula.Custom.Label": "Custom Formula",
@@ -747,27 +818,6 @@
 		"Equipped": "Equipped",
 		"Unequipped": "Unequipped"
 	},
-	"Feature.Category.Label": "Feature Category",
-	"Feature.Category.Class[one]": "Class Feature",
-	"Feature.Category.Class[other]": "Class Features",
-	"Feature.Category.ClassSpecific[one]": "{class} Feature",
-	"Feature.Category.ClassSpecific[other]": "{class} Features",
-	"Feature.Category.Heritage[one]": "Heritage Trait",
-	"Feature.Category.Heritage[other]": "Heritage Traits",
-	"Feature.Category.Lineage[one]": "Lineage Trait",
-	"Feature.Category.Lineage[other]": "Lineage Traits",
-	"Feature.Category.Monster[one]": "Monster Feature",
-	"Feature.Category.Monster[other]": "Monster Features",
-	"Feature.Type.Label": "Feature Type",
-	"Feature.Type.LabelSpecific": "{type} Types",
-	"Feature.Type.ChannelDivinity[one]": "Channel Divinity Effect",
-	"Feature.Type.ChannelDivinity[other]": "Channel Divinity Effects",
-	"Feature.Type.MartialAction[one]": "Martial Action",
-	"Feature.Type.MartialAction[other]": "Martial Actions",
-	"Feature.Type.NaturalAdaptation[one]": "Natural Adaptation",
-	"Feature.Type.NaturalAdaptation[other]": "Natural Adaptations",
-	"Feature.Type.Stunt[one]": "Stunt",
-	"Feature.Type.Stunt[other]": "Stunts",
 	"Focus.Type.ArcaneFocus[one]": "Arcane Focus",
 	"Focus.Type.ArcaneFocus[other]": "Arcane Foci",
 	"Focus.Type.HolySymbol[one]": "Holy Symbol",
@@ -797,14 +847,6 @@
 	"Sundry.Category.Treasure[other]": "Treasure",
 	"Sundry.Category.Trinket[one]": "Trinket",
 	"Sundry.Category.Trinket[one]": "Trinkets",
-	"Tag": "{level}-Level {owner} {type}",
-	"Talent.Category.Label": "Talent Category",
-	"Talent.Category.Magic[one]": "Magical Talent",
-	"Talent.Category.Magic[other]": "Magical Talents",
-	"Talent.Category.Martial[one]": "Martial Talent",
-	"Talent.Category.Martial[other]": "Martial Talents",
-	"Talent.Category.Technical[one]": "Technical Talent",
-	"Talent.Category.Technical[other]": "Technical Talents",
 	"Type.Ammunition[one]": "Ammunition",
 	"Type.Ammunition[other]": "Ammunition",
 	"Type.Armor[one]": "Armor",

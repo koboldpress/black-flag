@@ -118,13 +118,13 @@ export const sheetSections = {
 		{
 			id: "class-features",
 			tab: "features",
-			label: "BF.Item.Feature.Category.Class[other]",
+			label: "BF.Feature.Category.Class[other]",
 			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "class"}],
 			expand: (document, sectionData) => {
 				if ( document.system.progression.level === 0 ) return [];
 				return Object.entries(document.system.progression.classes).map(([identifier, cls]) => {
 					const label = pluralRule => game.i18n.format(
-						`BF.Item.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name }
+						`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name }
 					);
 					return foundry.utils.mergeObject(sectionData, {
 						id: `class-${identifier}`, label: label("other"),
@@ -153,16 +153,16 @@ export const sheetSections = {
 		{
 			id: "lineage-features",
 			tab: "features",
-			label: "BF.Item.Feature.Category.Lineage[other]",
+			label: "BF.Feature.Category.Lineage[other]",
 			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "lineage"}],
-			create: [{label: "BF.Item.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage"}]
+			create: [{label: "BF.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage"}]
 		},
 		{
 			id: "heritage-features",
 			tab: "features",
-			label: "BF.Item.Feature.Category.Heritage[other]",
+			label: "BF.Feature.Category.Heritage[other]",
 			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "heritage"}],
-			create: [{label: "BF.Item.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage"}]
+			create: [{label: "BF.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage"}]
 		},
 		{
 			id: "features",

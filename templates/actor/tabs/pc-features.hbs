@@ -8,7 +8,6 @@
 				<tr>
 					<td class="name">{{localize section.label}}</td>
 					<th class="uses">{{localize "BF.Uses.Short"}}</th>
-					<th class="enabled" scope="col"></th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
@@ -20,6 +19,7 @@
 					</td>
 				</tr>
 				{{#each section.items}}
+				{{#blackFlag-itemContext this as |ctx|}}
 					<tr data-item-id="{{id}}">
 						<th class="name" scope="row">
 							<div class="layout">
@@ -29,26 +29,33 @@
 							</div>
 						</th>
 						<td class="uses">{{system.uses.label}}</td>
-						<td class="enabled">
-							<input type="checkbox" name="item.{{id}}.flags.black-flag.relationship.enabled" {{checked enabled}}>
-						</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}
-									<a data-action="edit">
-										<i class="fa-solid fa-edit"></i>
-									</a>
-									<a data-action="delete">
-										<i class="fa-solid fa-trash"></i>
-									</a>
+									<button type="button" class="link-button" data-action="edit"
+													aria-label="{{localize 'BF.Feature.Action.Edit'}}">
+										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+													aria-label="{{localize 'BF.Feature.Action.Delete'}}">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									</button>
 								{{else}}
-									<a data-action="view">
-										<i class="fa-regular fa-eye"></i>
-									</a>
+								{{#with ctx.enabled}}
+									<button type="button" class="link-button {{classes}}" data-action="enable" data-tooltip="{{title}}"
+													aria-label="{{localize title}}" {{disabled disabled}}>
+										<i class="{{icon}}" aria-hidden="true"></i>
+									</button>
+								{{/with}}
 								{{/if}}
+								<button type="button" class="link-button" data-context-menu
+												aria-label="{{localize 'BF.AdditionalControls'}}">
+									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								</button>
 							</div>
 						</td>
 					</tr>
+				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>
 		{{/each}}
@@ -58,12 +65,11 @@
 					<td class="name" colspan="3">{{localize "BF.Item.Type.Unidentified[other]"}}</td>
 				</tr>
 				{{#each sections.uncategorized}}
+				{{#blackFlag-itemContext this as |ctx|}}
 					<tr data-item-id="{{id}}">
 						<th class="name" scope="row" colspan="3">
 							<div class="layout">
-								<figure>
-									<img src="{{img}}">
-								</figure>
+								<img src="{{img}}">
 								{{name}}
 								{{blackFlag-notificationBadge @root.actor document=this}}
 							</div>
@@ -71,20 +77,23 @@
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}
-									<a data-action="edit">
-										<i class="fa-solid fa-edit"></i>
-									</a>
-									<a data-action="delete">
-										<i class="fa-solid fa-trash"></i>
-									</a>
-								{{else}}
-									<a data-action="view">
-										<i class="fa-regular fa-eye"></i>
-									</a>
+									<button type="button" class="link-button" data-action="edit"
+													aria-label="{{localize 'BF.Item.Action.Edit'}}">
+										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+									        aria-label="{{localize 'BF.Item.Action.Delete'}}">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									</button>
 								{{/if}}
+								<button type="button" class="link-button" data-context-menu
+												aria-label="{{localize 'BF.AdditionalControls'}}">
+									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								</button>
 							</div>
 						</td>
 					</tr>
+				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>
 		{{/if}}

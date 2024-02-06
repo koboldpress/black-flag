@@ -70,27 +70,25 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async prepareItem(item, context, section) {
+		super.prepareItem(item, context, section);
+
 		if ( item.type === "spell" ) {
 			const mode = item.system.type.value;
 			const always = (mode === "always") || item.system.tags.has("ritual");
-			if ( always || mode === "standard" ) {
-				context.preparation = {
-					applicable: true,
-					classes: `status ${item.system.prepared ? "active" : ""}`,
-					disabled: !item.isOwner || always,
-					title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
-						: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
-				};
-			} else context.preparation = { applicable: false };
-		}
-
-		else if ( item.system.isPhysical ) {
-			context.equipped = {
-				classes: `status ${item.system.equipped ? "active" : ""}`,
-				disabled: !item.isOwner,
-				title: `BF.Item.Equip.${item.system.equipped ? "Equipped" : "Unequipped"}`
+			if ( always || mode === "standard" ) context.preparation = {
+				applicable: true,
+				classes: `status ${item.system.prepared ? "active" : ""}`,
+				disabled: !item.isOwner || always,
+				title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
+					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
 			};
 		}
+
+		else if ( item.system.isPhysical ) context.equipped = {
+			classes: `status ${item.system.equipped ? "active" : ""}`,
+			disabled: !item.isOwner,
+			title: `BF.Item.Equip.${item.system.equipped ? "Equipped" : "Unequipped"}`
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

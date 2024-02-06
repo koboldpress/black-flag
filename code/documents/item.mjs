@@ -39,7 +39,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @type {boolean}
 	 */
 	get enabled() {
-		return this.flags["black-flag"]?.relationship?.enabled ?? false;
+		return this.flags["black-flag"]?.relationship?.enabled !== false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

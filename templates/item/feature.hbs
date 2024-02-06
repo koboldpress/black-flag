@@ -20,14 +20,14 @@
 			<section>
 				<div class="category">
 					<label>
-						<span>{{localize "BF.Item.Feature.Category.Label"}}</span>
+						<span>{{localize "BF.Feature.Category.Label"}}</span>
 						<select name="system.type.category">
 							{{selectOptions featureCategories selected=system.type.category blank=""}}
 						</select>
 					</label>
 					{{#if featureTypes}}
 						<label>
-							<span>{{localize "BF.Item.Feature.Type.Label"}}</span>
+							<span>{{localize "BF.Feature.Type.Label"}}</span>
 							<select name="system.type.value">
 								{{#select featureTypes.selected}}
 									<option value=""></option>

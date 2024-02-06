@@ -162,7 +162,14 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} context - Context object for this item.
 	 * @param {object} section - Sheet section within which this item will be displayed.
 	 */
-	async prepareItem(item, context, section) {}
+	async prepareItem(item, context, section) {
+		if ( item.system.activities?.size ) context.enabled = {
+			classes: "status active",
+			disabled: !item.isOwner,
+			title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
+			icon: item.enabled ? "fa-regular fa-square-check" : "fa-regular fa-square"
+		};
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

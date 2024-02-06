@@ -341,7 +341,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object[]}   Prepared features.
 	 */
 	async _getFeatures(item, { features }) {
-		const makeTag = level => game.i18n.format("BF.Item.Tag", {
+		const makeTag = level => game.i18n.format("BF.Feature.Tag", {
 			level: numberFormat(level, { ordinal: true }),
 			owner: item.name,
 			type: game.i18n.localize("BF.Item.Type.Feature[one]")

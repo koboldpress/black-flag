@@ -22,8 +22,8 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 				uuid: new StringField({blank: false, nullable: false})
 			}), { label: "DOCUMENT.Items" }),
 			restriction: new SchemaField({
-				category: new StringField({label: "BF.Item.Feature.Category.Label"}),
-				type: new StringField({label: "BF.Item.Feature.Type.Label"})
+				category: new StringField({label: "BF.Feature.Category.Label"}),
+				type: new StringField({label: "BF.Feature.Type.Label"})
 			})
 		};
 	}
