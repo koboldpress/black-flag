@@ -83,3 +83,20 @@ export function makeLabel(input, { pluralRule="one", labelKeyPath="label", local
       ?? `${foundry.utils.getProperty(input, localizationKeyPath)}[${pluralRule}]`
 	);
 }
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Produce a human-formatted system version.
+ * @returns {string}
+ */
+export function systemVersion() {
+	const parts = game.system.version.split(".");
+	const build = Number(parts.pop());
+	const version = parts.join(".");
+	const type = `BF.Version.${(game.system.flags.version?.type ?? "stable").capitalize()}`;
+
+	return game.i18n.format("BF.Version.Label", {
+		version, build, type: game.i18n.localize(type)
+	});
+}

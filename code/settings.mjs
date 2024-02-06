@@ -1,3 +1,4 @@
+import { systemVersion } from "./utils/localization.mjs";
 import log from "./utils/logging.mjs";
 
 /**
@@ -166,9 +167,11 @@ export function registerSettings() {
 
 /**
  * Add the Black Flag badge into the sidebar.
+ * @param {HTMLElement} html - Rendered sidebar content.
  */
-export function renderSettingsSidebar() {
-	const details = document.getElementById("game-details");
+export function renderSettingsSidebar(html) {
+	const details = html.querySelector("#game-details");
+	const pip = details.querySelector(".system-info .update");
 	details.querySelector(".system")?.remove();
 
 	const heading = document.createElement("div");
@@ -200,7 +203,8 @@ export function renderSettingsSidebar() {
 	badge.innerHTML = `
 		<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
 		     data-tooltip="${game.system.title}" alt="${game.system.title}">
-		<span class="system-info">${game.system.version}</span>
+		<span class="system-info">${systemVersion()}</span>
 	`;
+	if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
 	heading.insertAdjacentElement("afterend", badge);
 }

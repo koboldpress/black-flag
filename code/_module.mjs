@@ -71,7 +71,7 @@ Hooks.once("ready", function() {
 	config.registration.registerItemTypes();
 });
 
-Hooks.on("renderSettings", settings.renderSettingsSidebar);
+Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));
 
 export {
 	applications,
