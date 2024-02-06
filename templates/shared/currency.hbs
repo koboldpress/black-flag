@@ -20,9 +20,7 @@
 					<tr data-item-id="{{id}}">
 						<th class="name" scope="row">
 							<div class="layout">
-								<figure>
-									<img src="{{img}}">
-								</figure>
+								<img src="{{img}}">
 								<span>{{name}}</span>
 								{{blackFlag-notificationBadge @root.document document=this}}
 							</div>
@@ -30,16 +28,18 @@
 						<td class="quantity">
 							<div class="layout">
 								{{#if @root.owner}}
-									<a data-action="adjustment" data-direction="decrease" data-property="system.quantity">
-										<i class="fas fa-minus"></i>
-									</a>
+									<button type="button" class="link-button" data-action="adjustment" data-direction="decrease"
+													data-property="system.quantity" aria-label="{{localize 'BF.Quantity.Action.Decrease'}}">
+										<i class="fas fa-minus" aria-hidden="true"></i>
+									</button>
 								{{/if}}
 								<input type="text" data-property="system.quantity" value="{{system.quantity}}" placeholder="0"
 											 inputmode="numeric" min="0">
 								{{#if @root.owner}}
-									<a data-action="adjustment" data-direction="increase" data-property="system.quantity">
-										<i class="fas fa-plus"></i>
-									</a>
+									<button type="button" class="link-button" data-action="adjustment" data-direction="increase"
+													data-property="system.quantity" aria-label="{{localize 'BF.Quantity.Action.Increase'}}">
+										<i class="fas fa-plus" aria-hidden="true"></i>
+									</button>
 								{{/if}}
 							</div>
 						</td>
@@ -47,17 +47,19 @@
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.editable}}
-									<a data-action="edit">
-										<i class="fa-solid fa-edit"></i>
-									</a>
-									<a data-action="delete">
-										<i class="fa-solid fa-trash"></i>
-									</a>
-								{{else}}
-									<a data-action="view">
-										<i class="fa-regular fa-eye"></i>
-									</a>
+									<button type="button" class="link-button" data-action="edit"
+													aria-label="{{localize 'BF.Currency.Action.Edit'}}">
+										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+									        aria-label="{{localize 'BF.Currency.Action.Delete'}}">
+										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									</button>
 								{{/if}}
+								<button type="button" class="link-button" data-context-menu
+												aria-label="{{localize 'BF.AdditionalControls'}}">
+									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								</button>
 							</div>
 						</td>
 					</tr>
