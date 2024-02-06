@@ -36,8 +36,9 @@
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
-								<a data-action="add">
-									<i class="fa-solid fa-plus"></i>
+								<button type="button" class="link-button" data-action="add"
+								        aria-label="{{localize 'BF.Spell.Action.Add'}}">
+									<i class="fa-solid fa-plus" aria-hidden="true"></i>
 								</a>
 							{{/if}}
 						</div>
@@ -49,9 +50,7 @@
 					    data-spell-prepared="{{spell.system.prepared}}">
 						<th class="name" scope="row">
 							<div class="layout">
-								<figure>
-									<img src="{{spell.img}}">
-								</figure>
+								<img src="{{spell.img}}">
 								<span>{{spell.name}}</span>
 								{{blackFlag-notificationBadge actor document=spell}}
 							</div>
@@ -87,7 +86,7 @@
 									        aria-label="{{localize 'BF.Spell.Action.Delete'}}">
 										<i class="fa-solid fa-trash" aria-hidden="true"></i>
 									</button>
-								{{else if @root.owner}}
+								{{else}}
 								{{#with ctx.preparation}}
 									{{#if applicable}}
 										<button type="button" class="link-button {{classes}}" data-action="prepare" data-tooltip="{{title}}"
@@ -97,7 +96,8 @@
 									{{/if}}
 								{{/with}}
 								{{/if}}
-								<button type="button" class="link-button" data-context-menu aria-label="{{localize ''}}">
+								<button type="button" class="link-button" data-context-menu
+								        aria-label="{{localize 'BF.AdditionalControls'}}">
 									<i class="fa-solid fa-ellipsis-vertical"></i>
 								</button>
 							</div>

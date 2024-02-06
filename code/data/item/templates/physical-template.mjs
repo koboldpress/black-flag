@@ -52,6 +52,22 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	get displayActions() {
+		return this.equipped;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this item equipped?
+	 * @type {boolean}
+	 */
+	get equipped() {
+		return this.parent.getFlag("black-flag", "relationship.equipped") === true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Is this a physical item?
 	 * @type {boolean}

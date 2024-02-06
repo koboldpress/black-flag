@@ -84,15 +84,11 @@ blackFlag-inventory, blackFlag-currency {
 				}
 
 				.name {
-					figure {
-						margin: 0;
-
-						img {
-							width: var(--inventory-image-size);
-							height: var(--inventory-image-size);
-							border: none;
-							background-color: black;
-						}
+					img {
+						width: var(--inventory-image-size);
+						height: var(--inventory-image-size);
+						border: none;
+						background-color: black;
 					}
 				}
 				.components {
@@ -135,6 +131,9 @@ blackFlag-inventory, blackFlag-currency {
 			width: 12px;
 			height: 12px;
 		}
+	}
+	.status {
+		&:not(.active, :hover, :focus-visible) { opacity: 30%; }
 	}
 	.controls {
 		width: 1em;

@@ -107,7 +107,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get displayActions() {
-		return super.displayActions && this.prepared;
+		return this.prepared;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

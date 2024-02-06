@@ -190,6 +190,8 @@ export default class InventoryElement extends AppAssociatedElement {
 				return this._onAddItem(target);
 			case "adjustment":
 				return this._onAdjustment(item, target);
+			case "attune":
+				return item.setFlag("black-flag", "relationship.attuned", !item.system.attuned);
 			case "delete":
 				return item.deleteDialog();
 			case "duplicate":
@@ -197,6 +199,8 @@ export default class InventoryElement extends AppAssociatedElement {
 			case "edit":
 			case "view":
 				return item.sheet.render(true);
+			case "equip":
+				return item.setFlag("black-flag", "relationship.equipped", !item.system.equipped);
 			case "prepare":
 				return item.setFlag("black-flag", "relationship.prepared", !item.system.prepared);
 		}

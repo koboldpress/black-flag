@@ -76,12 +76,20 @@ export default class PCSheet extends BaseActorSheet {
 			if ( always || mode === "standard" ) {
 				context.preparation = {
 					applicable: true,
-					classes: item.system.prepared ? "prepared" : "unprepared",
+					classes: `status ${item.system.prepared ? "active" : ""}`,
 					disabled: !item.isOwner || always,
 					title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
 						: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
 				};
 			} else context.preparation = { applicable: false };
+		}
+
+		else if ( item.system.isPhysical ) {
+			context.equipped = {
+				classes: `status ${item.system.equipped ? "active" : ""}`,
+				disabled: !item.isOwner,
+				title: `BF.Item.Equip.${item.system.equipped ? "Equipped" : "Unequipped"}`
+			};
 		}
 	}
 
