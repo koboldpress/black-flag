@@ -70,6 +70,19 @@ blackFlag-inventory, blackFlag-currency {
 			}
 
 			> tr:not(:first-child) {
+				--background-gradient-color: transparent;
+				--background-base-color: transparent;
+
+				background: linear-gradient(
+					to right,
+					transparent 33%,
+					color-mix(in oklab, var(--background-gradient-color), transparent 90%)
+				) var(--background-base-color);
+
+				&:nth-of-type(odd) {
+					--background-base-color: rgb(255 255 255 / 0.2);
+				}
+
 				.name {
 					figure {
 						margin: 0;

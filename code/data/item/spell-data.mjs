@@ -351,6 +351,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 			case "reaction": return this.casting.type === "reaction";
 			case "concentration": return this.tags.has("concentration");
 			case "ritual": return this.tags.has("ritual");
+			case "prepared": return this.prepared;
 		}
 	}
 

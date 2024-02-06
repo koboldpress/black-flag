@@ -11,6 +11,7 @@ export default class FilterElement extends AppAssociatedElement {
 
 	constructor() {
 		super();
+		this.#controller = new AbortController();
 		this.#filter = this.getAttribute("filter");
 		this.#internals = this.attachInternals();
 		this.#shadowRoot = this.attachShadow({ mode: "closed" });
@@ -70,11 +71,25 @@ export default class FilterElement extends AppAssociatedElement {
 
 		if ( !this.hasAttribute("name") ) this.setAttribute("name", this.name);
 
-		this.addEventListener("click", this.#onClick.bind(this));
+		this.addEventListener("click", this.#onClick.bind(this), { signal: this.#controller.signal });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	disconnectedCallback() {
+		this.#controller.abort();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

@@ -109,9 +109,6 @@ export const spellPreparationModes = {
 	atWill: {
 		label: "BF.Spell.Preparation.Mode.AtWill"
 	},
-	ritual: {
-		label: "BF.Spell.Preparation.Mode.Ritual"
-	},
 	innate: {
 		label: "BF.Spell.Preparation.Mode.Innate"
 	}

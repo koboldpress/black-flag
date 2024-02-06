@@ -19,6 +19,12 @@ export default class FiltersElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	disconnectedCallback() {
+		this.#controller.abort();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
