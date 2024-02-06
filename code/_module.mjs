@@ -71,6 +71,8 @@ Hooks.once("ready", function() {
 	config.registration.registerItemTypes();
 });
 
+Hooks.on("renderSettings", settings.renderSettingsSidebar);
+
 export {
 	applications,
 	config,

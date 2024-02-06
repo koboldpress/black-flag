@@ -161,3 +161,46 @@ export function registerSettings() {
 		type: Object
 	});
 }
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Add the Black Flag badge into the sidebar.
+ */
+export function renderSettingsSidebar() {
+	const details = document.getElementById("game-details");
+	details.querySelector(".system")?.remove();
+
+	const heading = document.createElement("div");
+	heading.classList.add("black-flag", "sidebar-heading");
+	heading.innerHTML = `
+		<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
+		<ul class="links">
+			<li>
+				<a href="https://github.com/koboldpress/black-flag/releases/latest" target="_blank">
+				  ${game.i18n.localize("BF.Link.Notes")}
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/koboldpress/black-flag/issues" target="_blank">
+					${game.i18n.localize("BF.Link.Issues")}
+				</a>
+			</li>
+			<li>
+				<a href="https://discord.com/channels/170995199584108546/1083522450148577290" target="_blank">
+					${game.i18n.localize("BF.Link.Discord")}
+				</a>
+			</li>
+		</ul>
+	`;
+	details.insertAdjacentElement("afterend", heading);
+
+	const badge = document.createElement("figure");
+	badge.classList.add("black-flag", "sidebar-badge");
+	badge.innerHTML = `
+		<img src="systems/black-flag/artwork/branding/badge.webp" height="64" width="154"
+		     data-tooltip="${game.system.title}" alt="${game.system.title}">
+		<span class="system-info">${game.system.version}</span>
+	`;
+	heading.insertAdjacentElement("afterend", badge);
+}
