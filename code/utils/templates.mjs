@@ -212,6 +212,7 @@ export async function registerHandlebarsPartials() {
 		"actor/tabs/npc-main.hbs",
 		"actor/tabs/pc-biography.hbs",
 		"actor/tabs/pc-features.hbs",
+		"actor/tabs/pc-inventory.hbs",
 		"actor/tabs/pc-main.hbs",
 		"actor/tabs/pc-progression.hbs",
 		"actor/tabs/pc-spellcasting.hbs",

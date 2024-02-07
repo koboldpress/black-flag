@@ -1,0 +1,23 @@
+[data-tab="inventory"] {
+	.attunement {
+		align-self: end;
+		display: flex;
+		align-items: center;
+		padding-inline-start: 8px;
+		margin-block-start: 4px;
+		border: 1px solid var(--bf-color-border-blue);
+		border-radius: 4px;
+		gap: 2px;
+
+		.value, .max {
+			width: 1.25em;
+			padding-block: 4px;
+			padding-inline: 4px;
+		}
+		.value { text-align: end; }
+		.max { width: calc(1.25em + 6px); }
+		input.max {
+			background: rgb(0 0 0 / 0.1);
+		}
+	}
+}

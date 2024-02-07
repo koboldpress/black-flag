@@ -46,6 +46,9 @@ export default class PCData extends ActorDataModel.mixin(
 				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
 			}),
 			attributes: new SchemaField({
+				attunement: new SchemaField({
+					max: new NumberField({initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label"})
+				}, {label: "BF.Attunement.Label"}),
 				death: new SchemaField({
 					status: new StringField({initial: "alive", blank: false}),
 					success: new NumberField({
@@ -297,6 +300,16 @@ export default class PCData extends ActorDataModel.mixin(
 
 	prepareDerivedArmorClass() {
 		this.computeArmorClass();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedAttunement() {
+		this.attributes.attunement.value = this.parent.items.reduce((value, item) => {
+			if ( item.system.attuned ) value += 1;
+			return value;
+		}, 0);
+		// TODO: Add warning if more items are attuned that allowed
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,0 +1,15 @@
+{{#with system.attributes.attunement}}
+	<div class="attunement">
+		<i class="fa-solid fa-sun" data-tooltip="BF.Attunement.Label" aria-label="{{localize 'BF.Attunement.Label'}}"></i>
+		<span class="value">{{numberFormat value}}</span>
+		<span class="separator">&sol;</span>
+		{{#if @root.editable}}
+			{{numberInput max name="system.attributes.attunement.max" class="uninput max" min=0 step=1}}
+		{{else}}
+			<span class="max">{{numberFormat max}}</span>
+		{{/if}}
+	</div>
+{{/with}}
+
+{{> "blackFlag.inventory"}}
+{{> "blackFlag.currency"}}
