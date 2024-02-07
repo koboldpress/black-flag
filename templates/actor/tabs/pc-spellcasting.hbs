@@ -87,12 +87,7 @@
 										<i class="fa-solid fa-trash" aria-hidden="true"></i>
 									</button>
 								{{else}}
-								{{#with ctx.preparation}}
-									<button type="button" class="link-button {{classes}}" data-action="prepare" data-tooltip="{{title}}"
-								        	aria-label="{{localize label}}" aria-pressed="{{pressed}}" {{disabled disabled}}>
-										<i class="fa-regular fa-sun" aria-hidden="true"></i>
-									</button>
-								{{/with}}
+								{{> "blackFlag.inventory-controls" buttons=ctx.buttons}}
 								{{/if}}
 								<button type="button" class="link-button" data-context-menu
 								        aria-label="{{localize 'BF.AdditionalControls'}}">

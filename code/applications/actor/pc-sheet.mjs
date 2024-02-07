@@ -75,24 +75,37 @@ export default class PCSheet extends BaseActorSheet {
 		if ( item.type === "spell" ) {
 			const mode = item.system.type.value;
 			const always = (mode === "always") || item.system.tags.has("ritual");
-			if ( always || item.system.preparable ) context.preparation = {
-				applicable: true,
+			if ( always || item.system.preparable ) context.buttons.push({
+				action: "prepare",
 				classes: "status fade",
 				disabled: !item.isOwner || always,
 				label: "BF.Spell.Preparation.Prepared",
 				pressed: item.system.prepared,
 				title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
-					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
-			};
+					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`,
+				icon: '<i class="fa-regular fa-sun" aria-hidden="true"></i>'
+			});
 		}
 
-		else if ( item.system.equippable ) context.equipped = {
+		if ( item.system.attunable ) context.buttons.push({
+			action: "attune",
+			classes: "status fade",
+			disabled: !item.isOwner,
+			label: "BF.Attunement.Attuned",
+			pressed: item.system.attuned,
+			title: `BF.Attunement.${item.system.attuned ? "Attuned" : "NotAttuned"}`,
+			icon: '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+		});
+
+		if ( item.system.equippable ) context.buttons.push({
+			action: "equip",
 			classes: "status fade",
 			disabled: !item.isOwner,
 			label: "BF.Item.Equipped",
 			pressed: item.system.equipped,
-			title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`
-		};
+			title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`,
+			icon: '<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>'
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

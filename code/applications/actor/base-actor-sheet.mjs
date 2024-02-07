@@ -163,14 +163,16 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} section - Sheet section within which this item will be displayed.
 	 */
 	async prepareItem(item, context, section) {
-		if ( item.system.activities?.size ) context.enabled = {
+		context.buttons ??= [];
+		if ( item.system.activities?.size && (section.tab === "features") ) context.buttons.push({
+			action: "enable",
 			classes: "status",
 			disabled: !item.isOwner,
 			label: "BF.Feature.Enabled",
 			pressed: item.enabled,
 			title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
-			icon: item.enabled ? "fa-regular fa-square-check" : "fa-regular fa-square"
-		};
+			icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"}"></i>`
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
