@@ -120,8 +120,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 		return (this.type.value === "standard") && (this.ring.base !== 0) && !this.tags.has("ritual");
 	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Would this spell be considered to be prepared?
 	 * @type {boolean}

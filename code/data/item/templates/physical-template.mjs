@@ -5,6 +5,8 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
 /**
  * Data definition template for Physical items.
  *
+ * @property {object} attunement
+ * @property {string} attunement.type - Type of attunement (none, required, optional).
  * @property {string} container - Container within which this item resides.
  * @property {object} price
  * @property {number} price.value - Base price for this item.
@@ -17,6 +19,9 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
 export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
+			attunement: new SchemaField({
+				value: new StringField({label: "BF.Attunement.Type.Label"})
+			}, {label: "BF.Attunement.Label"}),
 			container: new ForeignDocumentField(foundry.documents.BaseItem, {
 				idOnly: true, label: "BF.Item.Type.Container[one]"
 			}),
@@ -52,6 +57,25 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Can this item be attuned?
+	 * @type {boolean}
+	 */
+	get attunable() {
+		return !!this.attunement.value;
+	}
+
+	/**
+	 * Is this item attuned?
+	 * @type {boolean}
+	 */
+	get attuned() {
+		if ( !this.attunable || (this.parent.actor?.type !== "pc") ) return true;
+		return this.parent.getFlag("black-flag", "relationship.attuned") === true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	get displayActions() {
 		return this.equipped;
 	}
@@ -65,8 +89,6 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	get equippable() {
 		return true;
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Is this item equipped?

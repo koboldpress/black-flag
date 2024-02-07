@@ -80,11 +80,33 @@ export const sheetSections = {
 			options: {autoHide: true}
 		},
 		{
-			id: "equipment",
+			id: "weapons",
 			tab: "inventory",
-			label: "BF.Item.Category.Equipment.Label",
-			filters: [{k: "type", o: "in", v: ["armor", "weapon", "ammunition"]}],
-			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
+			label: "BF.Item.Type.Weapon[other]",
+			filters: [{k: "type", v: "weapon"}],
+			create: [{type: "weapon"}]
+		},
+		{
+			id: "ammunition",
+			tab: "inventory",
+			label: "BF.Item.Type.Ammunition[other]",
+			filters: [{k: "type", v: "ammunition"}],
+			create: [{type: "ammunition"}],
+			options: { autoHide: true }
+		},
+		{
+			id: "armor",
+			tab: "inventory",
+			label: "BF.Item.Type.Armor[other]",
+			filters: [{k: "type", v: "armor"}],
+			create: [{type: "armor"}]
+		},
+		{
+			id: "gear",
+			tab: "inventory",
+			label: "BF.Item.Type.Gear[other]",
+			filters: [{k: "type", v: "gear"}],
+			create: [{type: "gear"}]
 		},
 		{
 			id: "tools",

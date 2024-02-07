@@ -219,6 +219,7 @@ export async function registerHandlebarsPartials() {
 		"advancement/advancement-name.hbs",
 		"dice/roll-notes.hbs",
 		"item/concept-summary.hbs",
+		"item/parts/equipment-attunement.hbs",
 		"item/parts/equipment-categories.hbs",
 		"item/parts/equipment-description.hbs",
 		"item/parts/equipment-source.hbs",
