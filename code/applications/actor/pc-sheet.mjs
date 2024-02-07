@@ -77,16 +77,20 @@ export default class PCSheet extends BaseActorSheet {
 			const always = (mode === "always") || item.system.tags.has("ritual");
 			if ( always || item.system.preparable ) context.preparation = {
 				applicable: true,
-				classes: `status ${item.system.prepared ? "active" : ""}`,
+				classes: "status fade",
 				disabled: !item.isOwner || always,
+				label: "BF.Spell.Preparation.Prepared",
+				pressed: item.system.prepared,
 				title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
 					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`
 			};
 		}
 
 		else if ( item.system.equippable ) context.equipped = {
-			classes: `status ${item.system.equipped ? "active" : ""}`,
+			classes: "status fade",
 			disabled: !item.isOwner,
+			label: "BF.Item.Equipped",
+			pressed: item.system.equipped,
 			title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`
 		};
 	}

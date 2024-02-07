@@ -164,8 +164,10 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async prepareItem(item, context, section) {
 		if ( item.system.activities?.size ) context.enabled = {
-			classes: "status active",
+			classes: "status",
 			disabled: !item.isOwner,
+			label: "BF.Feature.Enabled",
+			pressed: item.enabled,
 			title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
 			icon: item.enabled ? "fa-regular fa-square-check" : "fa-regular fa-square"
 		};

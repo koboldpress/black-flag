@@ -125,15 +125,8 @@ blackFlag-inventory, blackFlag-currency {
 			font-size: var(--font-size-11);
 		}
 	}
-	.enabled {
-		width: 20px;
-		input {
-			width: 12px;
-			height: 12px;
-		}
-	}
 	.status {
-		&:not(.active, :hover, :focus-visible) { opacity: 30%; }
+		&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }
 	}
 	.controls {
 		width: 1em;
