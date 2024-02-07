@@ -52,4 +52,12 @@ export default class CurrencyData extends ItemDataModel.mixin(PhysicalTemplate) 
 			})
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get equippable() {
+		return false;
+	}
 }

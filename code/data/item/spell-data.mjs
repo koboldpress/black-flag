@@ -113,12 +113,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Can this spell be prepared?
+	 * @type {boolean}
+	 */
+	get preparable() {
+		return (this.type.value === "standard") && (this.ring.base !== 0) && !this.tags.has("ritual");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Would this spell be considered to be prepared?
 	 * @type {boolean}
 	 */
 	get prepared() {
-		if ( (this.type.value !== "standard") || (this.ring.base === 0)
-		  || this.tags.has("ritual") || this.parent.actor?.type !== "pc" ) return true;
+		if ( !this.preparable || this.parent.actor?.type !== "pc" ) return true;
 		return this.parent.getFlag("black-flag", "relationship.prepared") === true;
 	}
 

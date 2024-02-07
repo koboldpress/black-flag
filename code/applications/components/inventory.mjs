@@ -24,7 +24,7 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		for ( const element of this.querySelectorAll("[data-item-id]") ) {
 			element.setAttribute("draggable", true);
-			element.addEventListener("dragstart", this._onDragStart.bind(this));
+			element.addEventListener("dragstart", this._onDragStart.bind(this), { signal });
 		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
@@ -35,23 +35,23 @@ export default class InventoryElement extends AppAssociatedElement {
 		}
 
 		for ( const input of this.querySelectorAll('input[type="number"]') ) {
-			input.addEventListener("change", this._onChangeInput.bind(this));
+			input.addEventListener("change", this._onChangeInput.bind(this), { signal });
 		}
 
 		for ( const input of this.querySelectorAll('input[inputmode="numeric"]') ) {
-			input.addEventListener("change", this._onChangeInputDelta.bind(this));
+			input.addEventListener("change", this._onChangeInputDelta.bind(this), { signal });
 		}
 
-		const contextOptions = this._getContextMenuOptions();
-		/**
-		 * A hook event that fires when the context menu for an inventory list is constructed.
-		 * @function blackFlag.getInventoryContext
-		 * @memberof hookEvents
-		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
-		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
-		 */
-		Hooks.call("blackFlag.getInventoryContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-item-id]", contextOptions);
+		for ( const control of this.querySelectorAll("[data-context-menu]") ) {
+			control.addEventListener("click", event => {
+				event.stopPropagation();
+				event.currentTarget.closest("[data-item-id]").dispatchEvent(new PointerEvent("contextmenu", {
+					view: window, bubbles: true, cancelable: true, clientX: event.clientX, clientY: event.clientY
+				}));
+			}, { signal });
+		}
+
+		new ContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -131,35 +131,59 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	/**
 	 * Get the set of ContextMenu options which should be applied to inventory entries.
+	 * @param {BlackFlagItem} item - The item for which the context menu is being activated.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
 	 * @protected
 	 */
-	_getContextMenuOptions() {
+	_getContextMenuOptions(item) {
+		const type = item.type === "spell" ? "Spell" : item.system.isPhysical ? "Item" : "Feature";
 		return [
 			{
-				name: "BF.Item.Action.View",
+				name: `BF.${type}.Action.View`,
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !this.isEditable,
+				condition: li => !item.isOwner,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
-				name: "BF.Item.Action.Edit",
+				name: `BF.${type}.Action.Edit`,
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => this.isEditable,
+				condition: li => item.isOwner,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
-				name: "BF.Item.Action.Duplicate",
+				name: `BF.${type}.Action.Duplicate`,
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => this.isEditable,
+				condition: li => item.isOwner,
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
-				name: "BF.Item.Action.Delete",
+				name: `BF.${type}.Action.Delete`,
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
-				condition: li => this.isEditable,
+				condition: li => item.isOwner,
 				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
+			},
+			{
+				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
+				icon: '<i class="fa-solid fa-check fa-fw"></i>',
+				condition: () => this.actor && item.isOwner && item.system.activities?.size
+					&& ((this.actor.type === "npc") || (type === "Feature")),
+				callback: li => this._onAction(li[0], "enable"),
+				group: "state"
+			},
+			{
+				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
+				icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
+				condition: () => this.actor && item.isOwner && (type === "Item") && item.system.equippable,
+				callback: li => this._onAction(li[0], "equip"),
+				group: "state"
+			},
+			{
+				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
+				icon: '<i class="fa-solid fa-sun fa-fw"></i>',
+				condition: () => this.actor && item.isOwner && (type === "Spell") && item.system.preparable,
+				callback: li => this._onAction(li[0], "prepare"),
+				group: "state"
 			}
 		];
 	}
@@ -313,6 +337,29 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		event.target.value = value;
 		item.update({ [property]: value });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle opening the context menu.
+	 * @param {HTMLElement} element - The element the context menu was triggered on.
+	 * @protected
+	 */
+	_onContextMenu(element) {
+		const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
+		// Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
+		if ( !item || (item instanceof Promise) ) return;
+		ui.context.menuItems = this._getContextMenuOptions(item);
+		/**
+		 * A hook event that fires when the context menu for an inventory list is constructed.
+		 * @function blackFlag.getInventoryContext
+		 * @memberof hookEvents
+		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
+		 * @param {BlackFlagItem} item - The item for which the context options are being prepared.
+		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
+		 */
+		Hooks.call("blackFlag.getInventoryContext", this, item, ui.context.menuItems);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

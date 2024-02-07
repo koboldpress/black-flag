@@ -75,7 +75,7 @@ export default class PCSheet extends BaseActorSheet {
 		if ( item.type === "spell" ) {
 			const mode = item.system.type.value;
 			const always = (mode === "always") || item.system.tags.has("ritual");
-			if ( always || mode === "standard" ) context.preparation = {
+			if ( always || item.system.preparable ) context.preparation = {
 				applicable: true,
 				classes: `status ${item.system.prepared ? "active" : ""}`,
 				disabled: !item.isOwner || always,
@@ -84,10 +84,10 @@ export default class PCSheet extends BaseActorSheet {
 			};
 		}
 
-		else if ( item.system.isPhysical ) context.equipped = {
+		else if ( item.system.equippable ) context.equipped = {
 			classes: `status ${item.system.equipped ? "active" : ""}`,
 			disabled: !item.isOwner,
-			title: `BF.Item.Equip.${item.system.equipped ? "Equipped" : "Unequipped"}`
+			title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`
 		};
 	}
 
