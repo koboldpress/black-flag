@@ -69,7 +69,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 		});
 		context.sortedRolls = Array.from(progression.rolls.entries())
 			.map(([index, roll]) => ({ index, roll }))
-			.sort((lhs, rhs) => rhs.roll.total - lhs.roll.total);
+			.sort((lhs, rhs) => (rhs.roll?.total ?? Infinity) - (lhs.roll?.total ?? Infinity));
 
 		context.scores = [];
 		let bonusCount = 0;
