@@ -30,15 +30,21 @@ export function actorValues(actor, trait) {
 	const keyPath = actorKeyPath(trait);
 	const data = foundry.utils.getProperty(actor, keyPath);
 	if ( !data ) return {};
+	const traitChoices = choices(trait, { prefixed: true });
 	const values = {};
 
 	const field = actor.system.schema.getField(keyPath.replace("system.", ""));
 	if ( field instanceof MappingField ) {
-		Object.entries(data).forEach(([k, d]) =>
-			values[`${trait}:${k}`] = foundry.utils.getProperty(d, `${trait === "saves" ? "save." : ""}proficiency.multiplier`)
-		);
+		Object.entries(data).forEach(([k, d]) => {
+			const key = traitChoices.find(k)[0];
+			if ( !key ) return;
+			values[key] = foundry.utils.getProperty(d, `${trait === "saves" ? "save." : ""}proficiency.multiplier`);
+		});
 	} else {
-		data.value.forEach(v => values[`${trait}:${v}`] = 1);
+		data.value.forEach(v => {
+			const key = traitChoices.find(v)[0];
+			if ( key ) values[key] = 1;
+		});
 	}
 
 	return values;
