@@ -3,9 +3,27 @@
   "name": "Detect Magic",
   "type": "spell",
   "_id": "jhMAM81keoyqBzsy",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/ring-circle-smoke-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "h33XEMOhLhK4mR5Y": {
+        "type": "utility",
+        "_id": "h33XEMOhLhK4mR5Y",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,15 +46,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -48,7 +72,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": ""
+    },
     "circle": "arcane",
     "school": "divination"
   },
@@ -63,7 +89,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933051230,
-    "modifiedTime": 1706933070729,
+    "modifiedTime": 1707173238305,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!jhMAM81keoyqBzsy"

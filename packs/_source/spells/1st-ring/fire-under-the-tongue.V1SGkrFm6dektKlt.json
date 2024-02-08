@@ -3,9 +3,118 @@
   "name": "Fire Under the Tongue",
   "type": "spell",
   "_id": "V1SGkrFm6dektKlt",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/fire/flame-burning-earth-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "fijhTSp6uu2kAMW9": {
+        "type": "utility",
+        "_id": "fijhTSp6uu2kAMW9",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Consume Fire",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "uqsiHWxA6CAk7liz": {
+        "type": "attack",
+        "_id": "uqsiHWxA6CAk7liz",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Spit Small Fire",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      },
+      "1qAfmPRzuL4KlgGO": {
+        "type": "attack",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "spell"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Spit Tiny Fire",
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "_id": "1qAfmPRzuL4KlgGO"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +137,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "24"
     },
     "tags": [],
     "target": {
@@ -45,10 +158,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "5"
+    },
     "circle": "arcane",
     "school": "transmutation"
   },
@@ -63,7 +180,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933506708,
-    "modifiedTime": 1706933519392,
+    "modifiedTime": 1707174896383,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!V1SGkrFm6dektKlt"

@@ -3,9 +3,34 @@
   "name": "Floating Disk",
   "type": "spell",
   "_id": "hqqtRideiE0k1DV5",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/cog-glowing-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "JimpPanzLTTa09eA": {
+        "type": "utility",
+        "_id": "JimpPanzLTTa09eA",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Create Disk",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -28,13 +53,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a drop of mercury",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -48,7 +80,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": "arcane",
     "school": "conjuration"
   },
@@ -63,7 +98,7 @@
     "systemVersion": "0.8.011",
     "coreVersion": "11.315",
     "createdTime": 1706933690111,
-    "modifiedTime": 1706933712633,
+    "modifiedTime": 1707173740304,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hqqtRideiE0k1DV5"
