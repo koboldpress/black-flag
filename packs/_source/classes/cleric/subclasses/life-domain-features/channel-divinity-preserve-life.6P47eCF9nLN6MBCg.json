@@ -3,7 +3,7 @@
   "name": "Channel Divinity: Preserve Life",
   "type": "feature",
   "_id": "6P47eCF9nLN6MBCg",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/life/heart-cross-strong-flame-green.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -21,11 +21,51 @@
       "value": "channelDivinity"
     },
     "level": {
-      "value": null
+      "value": 3
     },
     "uses": {
       "min": "",
       "max": ""
+    },
+    "activities": {
+      "LVmD7tI88R69XaVR": {
+        "type": "healing",
+        "_id": "LVmD7tI88R69XaVR",
+        "description": "<p>Choose any creatures within 30 feet of you and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. This healing has no effect on creatures of the Undead or Construct creature type.</p>",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "denomination": "",
+            "bonus": "",
+            "custom": "@progression.classes.cleric.levels * 5"
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
     }
   },
   "effects": [],
@@ -36,10 +76,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1700001728874,
-    "modifiedTime": 1706658684106,
+    "modifiedTime": 1707431242725,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6P47eCF9nLN6MBCg"

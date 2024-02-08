@@ -2,7 +2,7 @@
   "folder": "H5qfE7S5caUYRLdk",
   "name": "Wind Up",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/equipment/hand/gauntlet-simple-leather-steel.webp",
   "system": {
     "description": {
       "value": "<p><em>Requires Wielding a Two-Handed Weapon or a Versatile Weapon with Both Hands</em></p><p>As a bonus action, you take the time to increase the effectiveness of your next weapon attack. Select one target you can see within 5 feet of you. If you make a melee weapon attack against that target before the end of your turn, you double your PB for the first attack roll.</p>",
@@ -21,6 +21,36 @@
     "advancement": {},
     "restriction": {
       "filters": []
+    },
+    "activities": {
+      "HkRd7iCvQjOcpD7K": {
+        "type": "utility",
+        "_id": "HkRd7iCvQjOcpD7K",
+        "description": "<p>Select one target you can see within 5 feet of you. If you make a melee weapon attack against that target before the end of your turn, you double your PB for the first attack roll.</p>",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Take Your Time",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -30,10 +60,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1695231471268,
-    "modifiedTime": 1701041350565,
+    "modifiedTime": 1707432058936,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "qacSMqGukDTsfJne",

@@ -3,11 +3,11 @@
   "name": "Channel Divinity: Turn the Profane",
   "type": "feature",
   "_id": "9bmynMc0anpBLi6n",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/unholy/beams-impact-pink.webp",
   "system": {
     "advancement": {},
     "description": {
-      "value": "<p>As an action, you present your holy symbol and speak a prayer censuring unholy creatures. Each Fiend and Undead of your choice that can see or hear you within 30 feet of you must make a WIS save. If the creature fails its save, it is turned for 1 minute or until it takes any damage.</p><p>A turned creature must try to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action. It can’t take any reactions.</p>",
+      "value": "<p>As an action, you present your holy symbol and speak a prayer censuring unholy creatures. Each Fiend and Undead of your choice that can see or hear you within 30 feet of you must make a [[/save wisdom dc=@abilities.wis.dc]]{WIS} save. If the creature fails its save, it is turned for 1 minute or until it takes any damage.</p><p>A turned creature must try to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action. It can’t take any reactions.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {
@@ -22,6 +22,49 @@
     },
     "level": {
       "value": 2
+    },
+    "activities": {
+      "3Tq1nnEX4LGhCbK5": {
+        "type": "savingThrow",
+        "_id": "3Tq1nnEX4LGhCbK5",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -32,10 +75,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1699045325551,
-    "modifiedTime": 1701041286909,
+    "modifiedTime": 1707430874521,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!9bmynMc0anpBLi6n"

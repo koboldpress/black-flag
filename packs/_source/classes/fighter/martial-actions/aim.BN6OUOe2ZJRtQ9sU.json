@@ -2,7 +2,7 @@
   "folder": "H5qfE7S5caUYRLdk",
   "name": "Aim",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/targeting/crosshair-arrowhead-blue.webp",
   "system": {
     "description": {
       "value": "<p><em>Requires Wielding a Ranged Weapon</em></p><p>As a bonus action, you take the time to increase the effectiveness of your next ranged weapon attack. Select one target you can see. If you make a ranged weapon attack against that target before the end of your turn, double your PB for the first attack roll.</p>",
@@ -21,6 +21,36 @@
     "advancement": {},
     "restriction": {
       "filters": []
+    },
+    "activities": {
+      "eU1pHRXaXDLySy9i": {
+        "type": "utility",
+        "_id": "eU1pHRXaXDLySy9i",
+        "description": "<p>Select one target you can see. If you make a ranged weapon attack against that target before the end of your turn, double your PB for the first attack roll.</p>",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Aim",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -30,10 +60,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1695231421958,
-    "modifiedTime": 1701041351741,
+    "modifiedTime": 1707431908863,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "BN6OUOe2ZJRtQ9sU",

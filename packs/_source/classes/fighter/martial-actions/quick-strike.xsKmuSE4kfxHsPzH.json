@@ -2,7 +2,7 @@
   "folder": "H5qfE7S5caUYRLdk",
   "name": "Quick Strike",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/melee/strikes-sword-scimitar.webp",
   "system": {
     "description": {
       "value": "<p><em>Requires Wielding Two Light Weapons</em></p><p>Once per turn, after you take the Attack action and attack with a light melee weapon that you’re holding in one hand, you can use a bonus action to make two attacks with a different light melee weapon that you’re holding in the other hand—instead of the one attack typically granted by two-weapon fighting. Don’t add your ability modifier to the damage of these additional attacks unless the modifier is negative.</p>",
@@ -21,6 +21,36 @@
     "advancement": {},
     "restriction": {
       "filters": []
+    },
+    "activities": {
+      "sEt8mouIK4n9wpTZ": {
+        "type": "utility",
+        "_id": "sEt8mouIK4n9wpTZ",
+        "description": "<p>Make two attacks with a different light melee weapon that you’re holding in the other hand—instead of the one attack typically granted by two-weapon fighting. Don’t add your ability modifier to the damage of these additional attacks unless the modifier is negative.</p>",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Strike",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -30,10 +60,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1695231453247,
-    "modifiedTime": 1701041350969,
+    "modifiedTime": 1707432040086,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "xsKmuSE4kfxHsPzH",

@@ -2,7 +2,7 @@
   "folder": "ljc34ps9wz9LJGuf",
   "name": "Action Surge",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-face-impact-orange.webp",
   "system": {
     "description": {
       "value": "<p>When the need is great, you push your body to its absolute limits. On your turn, you can activate this feature to gain an additional action on top of your regular action and possible bonus action.</p><p>Once you use this feature, you must complete a short or long rest before you can use it again.</p>",
@@ -47,7 +47,44 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "@scale.fighter.action-surge",
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "activities": {
+      "uy89RcOAFnJRINTI": {
+        "type": "utility",
+        "_id": "uy89RcOAFnJRINTI",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -57,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1695229317590,
-    "modifiedTime": 1706648696881,
+    "modifiedTime": 1707431579477,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "uiN72fEnJX0RiDDl",

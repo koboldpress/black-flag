@@ -3,7 +3,7 @@
   "name": "Stunts",
   "type": "feature",
   "_id": "ARqJyLmMnVQDbw0S",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/melee/maneuver-greatsword-yellow.webp",
   "system": {
     "advancement": {
       "hsVhbQnZQ46oIjug": {
@@ -64,7 +64,13 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "@prof + 1",
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ]
     }
   },
   "effects": [],
@@ -75,10 +81,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.010",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1700002545041,
-    "modifiedTime": 1705991225933,
+    "modifiedTime": 1707432232876,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ARqJyLmMnVQDbw0S"

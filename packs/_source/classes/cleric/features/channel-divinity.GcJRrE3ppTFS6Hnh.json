@@ -3,7 +3,7 @@
   "name": "Channel Divinity",
   "type": "feature",
   "_id": "GcJRrE3ppTFS6Hnh",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
   "system": {
     "advancement": {
       "pC5GQiodmMOT1jvZ": {
@@ -65,7 +65,13 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "@scale.cleric.channel-divinity-uses",
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ]
     }
   },
   "effects": [],
@@ -76,10 +82,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.010",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1699045206292,
-    "modifiedTime": 1706046005224,
+    "modifiedTime": 1707430718582,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!GcJRrE3ppTFS6Hnh"

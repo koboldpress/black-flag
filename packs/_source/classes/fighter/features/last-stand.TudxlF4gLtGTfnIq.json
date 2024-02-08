@@ -2,7 +2,7 @@
   "folder": "ljc34ps9wz9LJGuf",
   "name": "Last Stand",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-pain-body-orange.webp",
   "system": {
     "description": {
       "value": "<p>When you take damage that would reduce your hit points to less than half your hit point maximum (rounded down), you can use your reaction to spend 1 or more of your hit dice, up to a number equal to your PB. Immediately roll those hit dice. You regain hit points equal to the sum of all dice rolled + your CON modifier.</p>",
@@ -21,6 +21,51 @@
     },
     "restriction": {
       "filters": []
+    },
+    "activities": {
+      "sPjXDYZKd6phy6Vz": {
+        "type": "healing",
+        "_id": "sPjXDYZKd6phy6Vz",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "denomination": "",
+            "bonus": "@abilities.constitution.mod",
+            "custom": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "reaction",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "hitDice",
+              "target": "largest",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "@prof"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -30,10 +75,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1695229305563,
-    "modifiedTime": 1700006328953,
+    "modifiedTime": 1707431718692,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "TudxlF4gLtGTfnIq",

@@ -3,7 +3,7 @@
   "name": "Channel Divinity: Mark of Thiumph",
   "type": "feature",
   "_id": "WvenH1OyYc2h0Ml3",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/targeting/crosshair-mark-rough-pink.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -26,6 +26,37 @@
     "uses": {
       "min": "",
       "max": ""
+    },
+    "activities": {
+      "DGvD3DVvZ6rW3wVz": {
+        "type": "utility",
+        "_id": "DGvD3DVvZ6rW3wVz",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Mark a Creature",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -36,10 +67,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.012",
     "coreVersion": "11.315",
     "createdTime": 1700001802960,
-    "modifiedTime": 1706658690670,
+    "modifiedTime": 1707431292497,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!WvenH1OyYc2h0Ml3"
