@@ -65,6 +65,9 @@ localizeConfig(featureCategories.lineage.children);
  * @enum {NestedTypeConfiguration}
  */
 export const gearCategories = {
+	adventuringGear: {
+		localization: "BF.Item.Gear.Category.AdventuringGear"
+	},
 	clothing: {
 		localization: "BF.Item.Gear.Category.Clothing",
 		children: {

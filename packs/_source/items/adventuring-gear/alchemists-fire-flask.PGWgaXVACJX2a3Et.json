@@ -1,0 +1,100 @@
+{
+  "folder": "rhfOfTxdUyaktll6",
+  "name": "Alchemist's Fire (flask)",
+  "type": "consumable",
+  "_id": "PGWgaXVACJX2a3Et",
+  "img": "icons/consumables/potions/potion-flask-corked-orange.webp",
+  "system": {
+    "activities": {
+      "DsYXetNIc6rvFbJM": {
+        "type": "attack",
+        "_id": "DsYXetNIc6rvFbJM",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": "weapon"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "4",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": "dexterity"
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Throw",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "attunement": {},
+    "container": null,
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>This sticky, adhesive fluid ignites when exposed to air. As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist’s fire as an improvised weapon. On a hit, the target takes [[/damage 1d4]] fire damage at the start of each of its turns. A creature can end this damage by using its action to make a [[/check dexterity 10]] check to extinguish the flames.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "type": {
+      "category": "potion"
+    },
+    "rarity": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.011",
+    "coreVersion": "11.315",
+    "createdTime": 1707362409917,
+    "modifiedTime": 1707364705354,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!PGWgaXVACJX2a3Et"
+}
