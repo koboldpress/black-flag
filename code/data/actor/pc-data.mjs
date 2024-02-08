@@ -309,7 +309,11 @@ export default class PCData extends ActorDataModel.mixin(
 			if ( item.system.attuned ) value += 1;
 			return value;
 		}, 0);
-		// TODO: Add warning if more items are attuned that allowed
+		if ( this.attributes.attunement.value > this.attributes.attunement.max ) {
+			this.parent.notifications.set("too-much-attunement", {
+				level: "warn", section: "inventory", message: game.i18n.localize("BF.Attunement.Warning")
+			});
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
