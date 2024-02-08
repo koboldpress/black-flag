@@ -12,6 +12,7 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
  * @property {number} price.value - Base price for this item.
  * @property {string} price.denomination - Currency denomination used for the price.
  * @property {number} quantity - Number of this item in a stack.
+ * @property {string} rarity - Rarity level of a magic item, blank for mundane items.
  * @property {object} weight
  * @property {number} weight.value - Item's weight.
  * @property {string} weight.units - Units used to measure item's weight.
@@ -36,6 +37,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 			quantity: new NumberField({
 				nullable: false, initial: 1, min: 0, integer: true, label: "BF.Quantity.Label"
 			}),
+			rarity: new StringField({label: "BF.Rarity.Label"}),
 			weight: new SchemaField({
 				value: new NumberField({
 					nullable: false, initial: 0, min: 0, step: 0.01, label: "BF.Weight.Label"

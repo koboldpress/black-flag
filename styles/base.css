@@ -75,9 +75,12 @@
 	}
 }
 
-.uninput:is([type="text"], [type="number"]) {
+.uninput:is([type="text"], [type="number"], select) {
 	min-width: inherit;
 	background: none;
-	border: none;
+	border: 1px solid transparent;
 	height: inherit;
+
+	&:hover, &:focus { box-shadow: 0 0 4px var(--bf-color-border-light-blue); }
+	&:focus { border-color: var(--bf-blue); }
 }

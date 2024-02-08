@@ -192,6 +192,36 @@ localizeConfig(talentCategories, { propertyName: "localizedPlural", pluralRule: 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Rarities of magic items.
+ * @enum {object}
+ */
+export const rarities = {
+	common: {
+		label: "BF.Rarity.Level.Common"
+	},
+	uncommon: {
+		label: "BF.Rarity.Level.Uncommon"
+	},
+	rare: {
+		label: "BF.Rarity.Level.Rare"
+	},
+	veryRare: {
+		label: "BF.Rarity.Level.VeryRare"
+	},
+	legendary: {
+		label: "BF.Rarity.Level.Legendary"
+	},
+	fabled: {
+		label: "BF.Rarity.Level.Fabled"
+	},
+	artifact: {
+		label: "BF.Rarity.Level.Artifact"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Categories of sundry items.
  * @enum {LocalizedConfiguration}
  */

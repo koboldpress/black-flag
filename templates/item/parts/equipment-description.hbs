@@ -1,14 +1,20 @@
 <div class="description-area">
 	<div class="sidebar">
+		<label class="rarity">
+			<span>{{localize "BF.Rarity.Label"}}</span>
+			<select class="uninput" name="system.rarity">
+				{{selectOptions CONFIG.rarities selected=system.rarity blank="" labelAttr="label" localize="true"}}
+			</select>
+		</label>
 		<label class="quantity">
 			<span>{{localize "BF.Quantity.Label"}}</span>
-			<input type="number" name="system.quantity" min=0 step=1 value="{{source.quantity}}">
+			<input class="uninput" type="number" name="system.quantity" min=0 step=1 value="{{source.quantity}}">
 		</label>
 		{{#unless hidePrice}}
 			<label class="price">
 				<span>{{localize "BF.Price.Label"}}</span>
-				<input type="number" name="system.price.value" min=0 step=0.01 value="{{source.price.value}}">
-				<select name="system.price.denomination">
+				<input class="uninput" type="number" name="system.price.value" min=0 step=0.01 value="{{source.price.value}}">
+				<select class="uninput" name="system.price.denomination">
 					{{selectOptions CONFIG.currencies selected=source.price.denomination
 						labelAttr="abbreviation" localize=true}}
 				</select>
@@ -16,8 +22,8 @@
 		{{/unless}}
 		<label class="weight">
 			<span>{{localize "BF.Weight.Label"}}</span>
-			<input type="number" name="system.weight.value" min=0 step=0.01 value="{{source.weight.value}}">
-			<select name="system.weight.units">
+			<input class="uninput" type="number" name="system.weight.value" min=0 step=0.01 value="{{source.weight.value}}">
+			<select class="uninput" name="system.weight.units">
 				{{selectOptions CONFIG.weightUnits selected=source.weight.units
 					labelAttr="abbreviation" localize=true}}
 			</select>
