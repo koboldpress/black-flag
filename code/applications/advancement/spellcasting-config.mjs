@@ -114,7 +114,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	 */
 	async _createScaleValue(name) {
 		const title = game.i18n.localize(this.constructor.FORMULAS[name].label);
-		const scaleData = { type: "scaleValue", title, identifier: title.slugify(), "configuration.type": "number" };
+		const scaleData = { type: "scaleValue", title, identifier: title.slugify(), configuration: { type: "number" } };
 		const reference = `@scale.ID.${scaleData.identifier}`;
 		const config = this.advancement.configuration[name];
 		const newFormula = config.formula ? `${reference} + ${config.formula}` : reference;
