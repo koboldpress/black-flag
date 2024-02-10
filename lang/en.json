@@ -1364,16 +1364,24 @@
 			"Label": "Wyrd"
 		}
 	},
-	"Component.Label": "Components",
-	"Component.Material.Label": "Material",
-	"Component.Material.Abbreviation": "M",
-	"Component.Material.Consumed.Label": "Consumed?",
-	"Component.Material.Cost.Label": "Cost",
-	"Component.Material.Description.Label": "Description",
-	"Component.Somatic.Label": "Somatic",
-	"Component.Somatic.Abbreviation": "S",
-	"Component.Verbal.Label": "Verbal",
-	"Component.Verbal.Abbreviation": "V",
+	"Component": {
+		"Label": "Components",
+		"Material": {
+			"Label": "Material",
+			"Abbreviation": "M",
+			"Consumed.Label": "Consumed?",
+			"Cost.Label": "Cost",
+			"Description.Label": "Description"
+		},
+		"Somatic": {
+			"Label": "Somatic",
+			"Abbreviation": "S"
+		},
+		"Verbal": {
+			"Label": "Verbal",
+			"Abbreviation": "V"
+		}
+	},
 	"Preparation": {
 		"Label": "Preparation Mode",
 		"Prepared": "Prepared",
@@ -1386,49 +1394,119 @@
 			"Standard": "Standard"
 		}
 	},
-	"Ring.Label": "Spell Ring",
-	"Ring.Base.Label": "Base Ring",
-	"Ring.Cantrip[one]": "Cantrip",
-	"Ring.Cantrip[other]": "Cantrips",
-	"Ring.Effective.Label": "Effective Ring",
-	"Ring.Level": "{number} Ring",
-	"School.Label": "School of Magic",
-	"School.Abjuration.Label": "Abjuration",
-	"School.Conjuration.Label": "Conjuration",
-	"School.Divination.Label": "Divination",
-	"School.Enchantment.Label": "Enchantment",
-	"School.Evocation.Label": "Evocation",
-	"School.Illusion.Label": "Illusion",
-	"School.Necromancy.Label": "Necromancy",
-	"School.Transmutation.Label": "Transmutation",
-	"Tag.Label": "Tags",
-	"Tag.Concentration.Label": "Concentration",
-	"Tag.Concentration.Abbreviation": "C",
-	"Tag.Ritual.Label": "Ritual",
-	"Tag.Ritual.Abbreviation": "R"
+	"Ring": {
+		"Label": "Spell Ring",
+		"Base.Label": "Base Ring",
+		"Cantrip[one]": "Cantrip",
+		"Cantrip[other]": "Cantrips",
+		"Effective.Label": "Effective Ring",
+		"Level": "{number} Ring"
+	},
+	"School": {
+		"Label": "School of Magic",
+		"Abjuration.Label": "Abjuration",
+		"Conjuration.Label": "Conjuration",
+		"Divination.Label": "Divination",
+		"Enchantment.Label": "Enchantment",
+		"Evocation.Label": "Evocation",
+		"Illusion.Label": "Illusion",
+		"Necromancy.Label": "Necromancy",
+		"Transmutation.Label": "Transmutation"
+	},
+	"Tag": {
+		"Label": "Tags",
+		"Concentration.Label": "Concentration",
+		"Concentration.Abbreviation": "C",
+		"Ritual.Label": "Ritual",
+		"Ritual.Abbreviation": "R"
+	}
 },
 
-"BF.Spellcasting.Label": "Spellcasting",
-"BF.Spellcasting.CantripsKnown.Label": "Cantrips Known",
-"BF.Spellcasting.CantripsKnown.Hint": "Number of cantrips known by the caster at any given level.",
-"BF.Spellcasting.Details.Label": "Spellcasting Details",
-"BF.Spellcasting.Preparation.Label": "Prepare Spells?",
-"BF.Spellcasting.Preparation.Hint": "Does this caster need to prepare spells from their available list, or can they cast all their known spells at any given time?",
-"BF.Spellcasting.Preparation.Trait": "Prepared",
-"BF.Spellcasting.Progression.Label": "Spellcasting Progression",
-"BF.Spellcasting.Progression.Hint": "Determines how many spell slots a caster has available at any given level. Generally casters who gain spellcasting at 1st level are full casters, 2nd level are half, and 3rd level are third.",
-"BF.Spellcasting.Progression.Full.Label": "Full",
-"BF.Spellcasting.Progression.Half.Label": "Half",
-"BF.Spellcasting.Progression.Half.Trait": "Half-Caster",
-"BF.Spellcasting.Progression.Third.Label": "Third",
-"BF.Spellcasting.Progression.Third.Trait": "Third-Caster",
-"BF.Spellcasting.RitualsKnown.Label": "Rituals Known",
-"BF.Spellcasting.RitualsKnown.Hint": "Number of ritual spells known by the caster at any given level.",
-"BF.Spellcasting.Trait.Display": "{circle} {prepared} {progression}",
-"BF.Spellcasting.Type.Label": "Spellcasting Type",
-"BF.Spellcsating.Type.Hint": "Method by which a caster casts spells and the limitations on the number of slots available.",
-"BF.Spellcasting.Type.Trait": "Caster",
-"BF.Spellcasting.Type.Leveled.Label": "Leveled Casting",
+"BF.Spellbook": {
+	"FreeSpells": {
+		"Label": "Free Spells",
+		"Hint": "Number of spells that can be scribed into the spellbook for free.",
+		"FirstLevel": "1st Level",
+		"OtherLevels": "Other Levels"
+	}
+},
+
+"BF.Spellcasting": {
+	"Label": "Spellcasting",
+	"CantripsKnown": {
+		"Label": "Cantrips Known",
+		"Hint": "Number of cantrips known by the caster at any given level."
+	},
+	"Details": {
+		"Label": "Spellcasting Details"
+	},
+	"Learning": {
+		"Mode": {
+			"Label": "Learning Mode",
+			"Hint": "In what way does the caster gain spells at various levels?",
+			"All": {
+				"Label": "All Spells",
+				"Hint": "Caster knows all spells in their circle."
+			},
+			"Limited": {
+				"Label": "Limited",
+				"Hint": "Caster can only learn a certain number of spells based on their level."
+			},
+			"Spellbook": {
+				"Label": "Spellbook",
+				"Hint": "Caster must scribe spells into their spellbook at a cost."
+			}
+		},
+		"Replacement": {
+			"Label": "Replacement",
+			"Hint": "Can this caster replace one previously known spell when they level up?"
+		},
+		"Restriction": {
+			"Label": "Restriction",
+			"Hint": "Any additional restrictions applied to which spells can be learned, on top of the circle."
+		}
+	},
+	"Preparation": {
+		"Label": "Prepare Spells?",
+		"Hint": "Does this caster need to prepare spells from their available list, or can they cast all their known spells at any given time?",
+		"Trait": "Prepared"
+	},
+	"Progression": {
+		"Label": "Spellcasting Progression",
+		"Hint": "Determines how many spell slots a caster has available at any given level. Generally casters who gain spellcasting at 1st level are full casters, 2nd level are half, and 3rd level are third.",
+		"Full": {
+			"Label": "Full"
+		},
+		"Half": {
+			"Label": "Half",
+			"Trait": "Half-Caster"
+		},
+		"Third": {
+			"Label": "Third",
+			"Trait": "Third-Caster"
+		}
+	},
+	"RitualsKnown": {
+		"Label": "Rituals Known",
+		"Hint": "Number of ritual spells known by the caster at any given level."
+	},
+	"Source": "Magic Source",
+	"SpellsKnown": {
+		"Label": "Spells Known",
+		"Hint": "Number of regular spells known by the caster at any given level."
+	},
+	"Trait": {
+		"Display": "{circle} {prepared} {progression}"
+	},
+	"Type": {
+		"Label": "Spellcasting Type",
+		"Hint": "Method by which a caster casts spells and the limitations on the number of slots available.",
+		"Trait": "Caster",
+		"Leveled": {
+			"Label": "Leveled Casting"
+		}
+	}
+},
 
 "BF.Subclass.LabelSpecific": "{class} Subclass",
 "BF.Subclass.Warning.ExistingSubclass": "{class} already has the subclass {subclass}. Another cannot be added.",

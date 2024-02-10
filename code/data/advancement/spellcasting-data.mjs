@@ -1,6 +1,7 @@
+import FilterField from "../fields/filter-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
@@ -12,17 +13,33 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			progression: new StringField({
 				label: "BF.Spellcasting.Progression.Label", hint: "BF.Spellcasting.Progression.Hint"
 			}),
-			// TODO: Is there a need to set spellcasting ability different than the class's key ability?
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
 			preparation: new BooleanField({initial: true, label: "BF.Spellcasting.Prepared.Label"}),
+			// TODO: Convert preparation to object to allow for custom formula if necessary
 			focus: new StringField(),
 			cantrips: new SchemaField({
 				formula: new FormulaField({deterministic: true})
 			}, {label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint"}),
 			rituals: new SchemaField({
 				formula: new FormulaField({deterministic: true})
-			}, {label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"})
-			// TODO: Add system for granting spells at level-up
+			}, {label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"}),
+			spells: new SchemaField({
+				formula: new FormulaField({deterministic: true}),
+				mode: new StringField({
+					label: "BF.Spellcasting.Learning.Mode.Label", hint: "BF.Spellcasting.Learning.Mode.Hint"
+				}),
+				replacement: new BooleanField({
+					initial: true, label: "BF.Spellcasting.Learning.Replacement.Label",
+					hint: "BF.Spellcasting.Learning.Replacement.Hint"
+				}),
+				restriction: new FilterField({
+					label: "BF.Spellcasting.Restriction.Label", hint: "BF.Spellcasting.Restriction.Hint"
+				}),
+				spellbook: new SchemaField({
+					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpells.FirstLevel"}),
+					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpells.OtherLevels"})
+				}, {label: "BF.Spellbook.FreeSpells.Label", hint: "BF.Spellbook.FreeSpells.Hint"})
+			}, {label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint"})
 		};
 	}
 
@@ -76,5 +93,6 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 
 		prepareScale(this.cantrips);
 		prepareScale(this.rituals);
+		prepareScale(this.spells);
 	}
 }

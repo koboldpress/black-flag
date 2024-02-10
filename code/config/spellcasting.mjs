@@ -97,7 +97,29 @@ export const spellComponents = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Different ways in which a character can learn spells as they level up.
+ * @type {LabeledConfiguration}
+ */
+export const spellLearningModes = {
+	all: {
+		label: "BF.Spellcasting.Learning.Mode.All.Label",
+		hint: "BF.Spellcasting.Learning.Mode.All.Hint"
+	},
+	limited: {
+		label: "BF.Spellcasting.Learning.Mode.Limited.Label",
+		hint: "BF.Spellcasting.Learning.Mode.Limited.Hint"
+	},
+	spellbook: {
+		label: "BF.Spellcasting.Learning.Mode.Spellbook.Label",
+		hint: "BF.Spellcasting.Learning.Mode.Spellbook.Hint"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Spell preparation methods.
+ * @type {LabeledConfiguration}
  */
 export const spellPreparationModes = {
 	standard: {
@@ -122,12 +144,29 @@ export const spellPreparationModes = {
  * @type {number[][]}
  */
 export const spellSlotTable = [
+	// 1  2  3  4  5
 	[],
-	[, 2],       // Level 1
-	[, 3],       // Level 2
-	[, 4, 2],    // Level 3
-	[, 4, 3],    // Level 4
-	[, 4, 3, 2]  // Level 5
+	[, 2],                         // Level 1
+	[, 3],                         // Level 2
+	[, 4, 2],                      // Level 3
+	[, 4, 3],                      // Level 4
+	[, 4, 3, 2],                   // Level 5
+	[, 4, 3, 3],                   // Level 6
+	[, 4, 3, 3, 1],                // Level 7
+	[, 4, 3, 3, 2],                // Level 8
+	[, 4, 3, 3, 3, 1],             // Level 9
+	[, 4, 3, 3, 3, 2],             // Level 10
+	// 1  2  3  4  5  6  7  8  9
+	[, 4, 3, 3, 3, 2, 1],          // Level 11
+	[, 4, 3, 3, 3, 2, 1],          // Level 12
+	[, 4, 3, 3, 3, 2, 1, 1],       // Level 13
+	[, 4, 3, 3, 3, 2, 1, 1],       // Level 14
+	[, 4, 3, 3, 3, 2, 1, 1, 1],    // Level 15
+	[, 4, 3, 3, 3, 2, 1, 1, 1],    // Level 16
+	[, 4, 3, 3, 3, 2, 1, 1, 1, 1], // Level 17
+	[, 4, 3, 3, 3, 3, 1, 1, 1, 1], // Level 18
+	[, 4, 3, 3, 3, 3, 2, 1, 1, 1], // Level 19
+	[, 4, 3, 3, 3, 3, 2, 1, 1, 1]  // Level 20
 ];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

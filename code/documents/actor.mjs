@@ -169,10 +169,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		let amount = damages.reduce((total, d) => {
 			// Ignore damage types with immunity
 			if ( !ignore("immunity", d.type) && traits.damage?.immunities?.value.has(d.type) ) return total;
+			// TODO: Apply overall damage resistance & vulnerability
 
 			let damageMultiplier = multiplier;
 
 			// TODO: Apply type-specific damage reduction, ensuring damage reduction doesn't cause healing by accident
+			// TODO: Apply overall damage reduction
 
 			// Apply type-specific damage resistance
 			if ( !ignore("resistance", d.type) && traits.damage?.resistances?.value.has(d.type) ) {
@@ -189,10 +191,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 			return total + value;
 		}, 0);
-
-		// TODO: Apply overall damage resistance & vulnerability
-
-		// TODO: Apply overall damage reduction
 
 		// Round damage down
 		amount = Math.floor(amount);

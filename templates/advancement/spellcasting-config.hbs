@@ -6,10 +6,16 @@
 		</fieldset>
 		<fieldset>
 			<legend>{{localize "BF.Spellcasting.Details.Label"}}</legend>
+			<label>
+				<span>{{localize "BF.Spellcasting.Source"}}</span>
+				<select name="configuration.circle">
+					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
+				</select>
+			</label>
 			{{#if displayType}}
 				<label>
 					<span>
-						{{localize "BF.Spellcsating.Type.Label"}}
+						{{localize "BF.Spellcasting.Type.Label"}}
 						<i class="hintIcon" data-tooltip="BF.Spellcsating.Type.Hint"></i>
 					</span>
 					<select name="configuration.type">
@@ -33,16 +39,21 @@
 					{{localize "BF.Spellcasting.Preparation.Label"}}
 					<i class="hintIcon" data-tooltip="BF.Spellcasting.Preparation.Hint"></i>
 				</span>
-				<input type="checkbox" name="configuration.preparation" {{checked configuration.preparation}}
+				<input type="checkbox" name="configuration.preparation" {{checked configuration.preparation}}>
 			</label>
 		</fieldset>
 		<fieldset>
 			<legend>{{localize "BF.Advancement.Spellcasting.GainingSpells"}}</legend>
 			<label>
-				<span>{{localize "BF.Spell.Circle.Label"}}</span>
-				<select name="configuration.circle">
-					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
+				<span>
+					{{localize "BF.Spellcasting.Learning.Mode.Label"}}
+					<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Mode.Hint"></i>
+				</span>
+				<select name="configuration.spells.mode">
+					{{selectOptions CONFIG.spellLearningModes selected=configuration.spells.mode
+					                labelAttr="label" localize=true blank=""}}
 				</select>
+			</label>
 			</label>
 			{{#each formulas as |data name|}}
 				<div class="field-group formula-controls" data-name="{{name}}">
@@ -82,6 +93,33 @@
 					{{/if}}
 				</div>
 			{{/each}}
+			{{#if (eq configuration.spells.mode "limited")}}
+				<label>
+					<span>
+						{{localize "BF.Spellcasting.Learning.Replacement.Label"}}
+						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Replacement.Hint"></i>
+					</span>
+					<input type="checkbox" name="configuration.spells.replacement"
+					       {{checked configuration.spells.replacement}}>
+				</label>
+			{{else if (eq configuration.spells.mode "spellbook")}}
+				<div class="field-group">
+					<span>
+						{{localize "BF.Spellbook.FreeSpells.Label"}}
+						<i class="hintIcon" data-tooltip="BF.Spellbook.FreeSpells.Hint"></i>
+					</span>
+					<label>
+						<span>{{localize "BF.Spellbook.FreeSpells.FirstLevel"}}</span>
+						<input type="number" name="configuration.spells.spellbook.firstLevel"
+						       value="{{configuration.spells.spellbook.firstLevel}}" min=0 step=1>
+					</label>
+					<label>
+						<span>{{localize "BF.Spellbook.FreeSpells.OtherLevels"}}</span>
+						<input type="number" name="configuration.spells.spellbook.otherLevels"
+									 value="{{configuration.spells.spellbook.otherLevels}}" min=0 step=1>
+					</label>
+				</div>
+			{{/if}}
 		</fieldset>
 	</section>
 </form>

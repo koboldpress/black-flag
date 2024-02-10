@@ -19,7 +19,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "spellcasting"],
 			template: "systems/black-flag/templates/advancement/spellcasting-config.hbs",
-			width: 450
+			width: 500
 		});
 	}
 
@@ -27,10 +27,12 @@ export default class SpellcastingConfig extends AdvancementConfig {
 
 	/**
 	 * Formulas that can be configured.
+	 * TODO: Fetch this information from the data model itself
 	 */
 	static FORMULAS = Object.freeze({
 		cantrips: { label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint" },
-		rituals: { label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint" }
+		rituals: { label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint" },
+		spells: { label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint" }
 	});
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -60,6 +62,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
+		if ( context.configuration.spells.mode !== "limited" ) delete context.formulas.spells;
 		context.showClassRestriction = false;
 
 		return context;
