@@ -339,7 +339,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 		const stats = this.parent.actor?.system.spellcasting?.spells;
 		if ( !stats ) return;
 		stats.total += 1;
-		// TODO: If does damage, add to "damaging"
+		for ( const activity of this.activities ) {
+			if ( activity.hasDamage ) {
+				stats.damaging += 1;
+				return;
+			}
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

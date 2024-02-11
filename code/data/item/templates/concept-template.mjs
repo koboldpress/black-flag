@@ -34,12 +34,56 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Spellcasting configuration data if defined for this class or subclass.
+	 * @type {SpellcastingConfigurationData|null}
+	 */
+	get spellcasting() {
+		return this.advancement.byType("spellcasting")[0]?.configuration ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * List of the traits to display on the item sheet.
 	 * @type {object[]}
 	 * @abstract
 	 */
 	get traits() {
 		return [];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contribute details on a spellcasting advancement to parent actor if embedded.
+	 */
+	prepareFinalSpellcastingSource() {
+		const parent = this.parent;
+		const spellcastingStats = parent.actor?.system.spellcasting?.sources;
+		const spellcasting = this.spellcasting;
+		if ( !spellcastingStats || !spellcasting ) return;
+		const stats = spellcastingStats[parent.identifier] ??= {};
+		Object.defineProperty(stats, "document", {
+			get() { return parent; },
+			configurable: true,
+			enumerable: false
+		});
+
+		// Spellcasting Ability
+		stats.ability = spellcasting.ability;
+		const abilityMod = parent.actor.system.abilities[spellcasting.ability]?.mod ?? 0;
+		const proficiency = parent.actor.system.attributes.proficiency ?? 0;
+
+		// Spell Attack Modifier
+		stats.attack = proficiency + abilityMod;
+		// TODO: Add global/spell attack bonuses
+		// TODO: Split into melee & ranged spell attack modifiers?
+
+		// Spell Save DC
+		stats.dc = 8 + proficiency + abilityMod;
+		// TODO: Add global/spell DC bonuses
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

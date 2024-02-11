@@ -35,11 +35,12 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Spellcasting configuration data if defined for this subclass.
-	 * @type {SpellcastingConfigurationData|null}
+	 * Fetch the color from parent class if available.
+	 * @type {string|void}
 	 */
-	get spellcasting() {
-		return this.advancement.byType("spellcasting")[0]?.configuration ?? null;
+	get color() {
+		const parentClass = this.parent.actor?.system.progression?.classes?.[this.identifier.class]?.document;
+		return parentClass?.system.color;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

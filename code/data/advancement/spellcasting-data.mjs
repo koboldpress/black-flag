@@ -46,6 +46,17 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * The ability used for spellcasting.
+	 * @type {string|null}
+	 */
+	get ability() {
+		const keyAbility = this.parent.item?.system.advancement.byType("keyAbility")[0];
+		return keyAbility?.value?.selected ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Summary label for this spellcasting configuration.
 	 * @type {string}
 	 */

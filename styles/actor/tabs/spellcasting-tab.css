@@ -1,3 +1,55 @@
+[data-tab="spellcasting"] .spellcasting-sources {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+	margin-block-start: 6px;
+
+	.source-details {
+		border: 2px solid var(--item-color);
+		border-radius: 4px;
+		background: color-mix(in oklab, var(--bf-color-fill), transparent);
+		box-shadow: 0 0 4px rgb(0 0 0 / 45%);
+
+		h3 {
+			border-block-end: 1px solid var(--item-color);
+			padding-inline: 6px;
+			font-family: var(--bf-font-header);
+			font-size: var(--font-size-16);
+			text-align: center;
+		}
+
+		h4 {
+			margin-block-end: 6px;
+			font-family: var(--bf-font-primary);
+			font-size: var(--font-size-12);
+			font-weight: bold;
+		}
+
+		ul {
+			display: flex;
+			padding: 0;
+			margin: 6px;
+			list-style: none;
+		}
+
+		li {
+			min-width: 60px;
+			padding-inline: 6px;
+			padding-block-end: 4px;
+			text-align: center;
+
+			&:not(:last-of-type) {
+				border-inline-end: 0.5px solid var(--item-color);
+			}
+
+			span {
+				text-transform: uppercase;
+			}
+		}
+	}
+}
+
 [data-tab="spellcasting"] blackFlag-inventory {
 	--inventory-image-size: 30px;
 

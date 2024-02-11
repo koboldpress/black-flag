@@ -182,6 +182,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 	prepareBaseSpellcasting() {
 		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
+		this.spellcasting.sources ??= {};
 		this.spellcasting.spells ??= { total: 0, damaging: 0 };
 	}
 

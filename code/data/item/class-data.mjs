@@ -31,16 +31,6 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Spellcasting configuration data if defined for this class.
-	 * @type {SpellcastingConfigurationData|null}
-	 */
-	get spellcasting() {
-		return this.advancement.byType("spellcasting")[0]?.configuration ?? null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	get traits() {
 		const traits = [];
 		if ( this.hitDie ) traits.push({
