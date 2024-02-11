@@ -172,7 +172,6 @@ export default class TraitAdvancement extends Advancement {
 				}
 			}
 		}
-		console.log(foundry.utils.deepClone(selected));
 
 		return { selected, available };
 	}

@@ -13,17 +13,14 @@
 		text-align: center;
 	}
 
-	tr[data-spell-type="standard"][data-spell-prepared="true"] {
+	tr[data-spell-type="standard"][data-spell-prepared] {
 		--background-gradient-color: #007cff;
 	}
 	tr[data-spell-type="alwaysPrepared"] {
 		--background-gradient-color: #5000ff;
 	}
-	tr[data-spell-type="atWill"] {
+	tr[data-properties~="ritual"] {
 		--background-gradient-color: #0eff00;
-	}
-	tr[data-spell-type="innate"] {
-		--background-gradient-color: #f44444;
 	}
 
 	[data-action="prepare"] {

@@ -1,5 +1,4 @@
 import { numberFormat, Trait } from "../../utils/_module.mjs";
-import InventoryElement from "../components/inventory.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
@@ -74,17 +73,23 @@ export default class PCSheet extends BaseActorSheet {
 
 		if ( item.type === "spell" ) {
 			const mode = item.system.type.value;
-			const always = (mode === "always") || item.system.tags.has("ritual");
+			const ritual = item.system.tags.has("ritual");
+			const always = (mode === "alwaysPrepared") || ritual;
+			const pressed = always || item.system.prepared;
 			if ( always || item.system.preparable ) context.buttons.push({
 				action: "prepare",
 				classes: "status fade",
 				disabled: !item.isOwner || always,
 				label: "BF.Spell.Preparation.Prepared",
-				pressed: item.system.prepared,
+				pressed,
 				title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
 					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`,
-				icon: '<i class="fa-regular fa-sun" aria-hidden="true"></i>'
+				icon: `<i class="fa-${pressed ? "solid" : "regular"} fa-${
+					ritual ? "atom" : always ? "bahai" : "sun"}" inert></i>`
 			});
+			context.dataset.spellType = mode;
+			if ( item.system.prepared && !ritual ) context.dataset.spellPrepared = "";
+			if ( item.system.tags.size ) context.dataset.properties = Array.from(item.system.tags).join(" ");
 		}
 
 		if ( item.system.attunable ) context.buttons.push({

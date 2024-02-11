@@ -46,8 +46,7 @@
 				</tr>
 				{{#each section.items as |spell|}}
 				{{#blackFlag-itemContext spell as |ctx|}}
-					<tr data-item-id="{{spell.id}}" data-spell-type="{{spell.system.type.value}}"
-					    data-spell-prepared="{{spell.system.prepared}}">
+					<tr data-item-id="{{spell.id}}" {{blackFlag-dataset ctx.dataset}}>
 						<th class="name" scope="row">
 							<div class="layout">
 								<img src="{{spell.img}}">

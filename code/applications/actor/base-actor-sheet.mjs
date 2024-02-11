@@ -164,6 +164,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async prepareItem(item, context, section) {
 		context.buttons ??= [];
+		context.dataset ??= {};
 		if ( item.system.activities?.size && (section.tab === "features") ) context.buttons.push({
 			action: "enable",
 			classes: "status",

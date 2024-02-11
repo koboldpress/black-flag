@@ -42,7 +42,7 @@ export const sheetSections = {
 			tab: "spellcasting",
 			filters: [
 				{k: "type", v: "spell"},
-				{k: "flags.black-flag.relationship.preparationMode", o: "in", v: ["standard", "alwaysPrepared", undefined]}
+				{k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined]}
 			],
 			expand: (document, sectionData) => {
 				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
@@ -53,30 +53,26 @@ export const sheetSections = {
 					return foundry.utils.mergeObject(sectionData, {
 						id, label,
 						filters: [...sectionData.filters, {k: "system.ring.base", v: number}],
-						create: [{
-							type: "spell",
-							"system.ring.base": number,
-							"flags.black-flag.relationship.preparationMode": "standard"
-						}],
+						create: [{type: "spell", "system.ring.base": number, "system.type.value": "standard"}],
 						options: { autoHide: !ring.max && !cantrip }, ring
 					}, {inplace: false});
 				});
 			}
 		},
 		{
-			id: "ritual",
+			id: "atWill",
 			tab: "spellcasting",
-			label: "BF.Spell.Preparation.Mode.Ritual",
-			filters: [{k: "type", v: "spell"}, {k: "flags.black-flag.relationship.preparationMode", v: "ritual"}],
-			create: [{type: "spell", "flags.black-flag.relationship.preparationMode": "ritual"}],
+			label: "BF.Spell.Preparation.Mode.AtWill",
+			filters: [{k: "type", v: "spell"}, {k: "system.type.value", v: "atWill"}],
+			create: [{type: "spell", "system.type.value": "atWill"}],
 			options: {autoHide: true}
 		},
 		{
 			id: "innate",
 			tab: "spellcasting",
 			label: "BF.Spell.Preparation.Mode.Innate",
-			filters: [{k: "type", v: "spell"}, {k: "flags.black-flag.relationship.preparationMode", v: "innate"}],
-			create: [{type: "spell", "flags.black-flag.relationship.preparationMode": "innate"}],
+			filters: [{k: "type", v: "spell"}, {k: "system.type.value", v: "innate"}],
+			create: [{type: "spell", "system.type.value": "innate"}],
 			options: {autoHide: true}
 		},
 		{
