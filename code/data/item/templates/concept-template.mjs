@@ -72,8 +72,8 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 		});
 
 		// Spellcasting Ability
-		stats.ability = spellcasting.ability;
-		const abilityMod = parent.actor.system.abilities[spellcasting.ability]?.mod ?? 0;
+		stats.ability = spellcasting.spellcastingAbility;
+		const abilityMod = parent.actor.system.abilities[stats.ability]?.mod ?? 0;
 		const proficiency = parent.actor.system.attributes.proficiency ?? 0;
 
 		// Spell Attack Modifier

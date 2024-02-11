@@ -50,6 +50,9 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	getData(options) {
 		const context = super.getData(options);
 
+		context.defaultAbility = game.i18n.format("BF.Default.Specific", {
+			default: game.i18n.localize("BF.Advancement.KeyAbility.Title").toLowerCase()
+		});
 		context.displayType = Object.keys(CONFIG.BlackFlag.spellcastingTypes).length > 1;
 		context.progressionOptions = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type]?.progression;
 		context.formulas = Object.entries(this.constructor.FORMULAS).reduce((obj, [name, localization]) => {

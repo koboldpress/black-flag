@@ -13,6 +13,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			progression: new StringField({
 				label: "BF.Spellcasting.Progression.Label", hint: "BF.Spellcasting.Progression.Hint"
 			}),
+			ability: new StringField({label: "BF.Spellcasting.Ability.Label"}),
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
 			focus: new StringField(),
 			cantrips: new SchemaField({
@@ -49,8 +50,15 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	 * The ability used for spellcasting.
 	 * @type {string|null}
 	 */
-	get ability() {
-		const keyAbility = this.parent.item?.system.advancement.byType("keyAbility")[0];
+	get spellcastingAbility() {
+		if ( this.ability ) return this.ability;
+
+		let parent = this.parent.item;
+		if ( (parent?.type === "subclass") && parent.isEmbedded ) {
+			parent = parent.actor.system.progression?.classes[parent.system.identifier.class]?.document;
+		}
+
+		const keyAbility = parent?.system.advancement.byType("keyAbility")[0];
 		return keyAbility?.value?.selected ?? null;
 	}
 

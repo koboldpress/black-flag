@@ -12,6 +12,17 @@
 					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
 				</select>
 			</label>
+			<label>
+				<span>{{localize "BF.Spellcasting.Ability.Label"}}</span>
+				<select name="configuration.ability">
+					{{#select configuration.ability}}
+						<option value="">{{defaultAbility}}</option>
+						<optgroup label="{{localize 'BF.Ability.Label[other]'}}">
+							{{selectOptions CONFIG.abilities.localized}}
+						</optgroup>
+					{{/select}}
+				</select>
+			</label>
 			{{#if displayType}}
 				<label>
 					<span>
