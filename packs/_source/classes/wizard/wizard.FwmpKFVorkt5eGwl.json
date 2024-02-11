@@ -79,7 +79,7 @@
         "type": "spellcasting",
         "_id": "q1d3p5zdr2HW1lTo",
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
           "value": 1
         },
@@ -87,12 +87,18 @@
           "progression": "full",
           "circle": "arcane",
           "type": "leveled",
-          "preparation": true,
           "cantrips": {
             "formula": "@scale.ID.cantrips-known"
           },
           "rituals": {
             "formula": "@scale.ID.rituals-known"
+          },
+          "spells": {
+            "mode": "spellbook",
+            "spellbook": {
+              "firstLevel": 6,
+              "otherLevels": 2
+            }
           }
         },
         "flags": {}
@@ -207,10 +213,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.013",
     "coreVersion": "11.315",
     "createdTime": 1694554373817,
-    "modifiedTime": 1700350688396,
+    "modifiedTime": 1707601361594,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "FwmpKFVorkt5eGwl",

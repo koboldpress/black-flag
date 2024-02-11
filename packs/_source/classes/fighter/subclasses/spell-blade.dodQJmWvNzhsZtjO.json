@@ -36,9 +36,13 @@
         "configuration": {
           "progression": "third",
           "circle": "arcane",
-          "preparation": false,
           "cantrips": {
             "formula": "@scale.ID.cantrips-known"
+          },
+          "spells": {
+            "mode": "limited",
+            "formula": "@scale.ID.spells-known",
+            "replacement": true
           }
         }
       },
@@ -67,6 +71,29 @@
           "value": 3
         },
         "flags": {}
+      },
+      "D20I7O78yLPstJrO": {
+        "type": "scaleValue",
+        "title": "Spells Known",
+        "identifier": "spells-known",
+        "_id": "D20I7O78yLPstJrO",
+        "configuration": {
+          "type": "number",
+          "scale": {
+            "3": {
+              "value": 3
+            },
+            "4": {
+              "value": 4
+            }
+          }
+        },
+        "level": {
+          "classRestriction": ""
+        },
+        "flags": {},
+        "icon": "",
+        "hint": ""
       }
     },
     "description": {
@@ -87,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.013",
     "coreVersion": "11.315",
     "createdTime": 1700002057164,
-    "modifiedTime": 1706658742296,
+    "modifiedTime": 1707601896193,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!dodQJmWvNzhsZtjO"

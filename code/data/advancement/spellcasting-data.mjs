@@ -14,8 +14,6 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 				label: "BF.Spellcasting.Progression.Label", hint: "BF.Spellcasting.Progression.Hint"
 			}),
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
-			preparation: new BooleanField({initial: true, label: "BF.Spellcasting.Prepared.Label"}),
-			// TODO: Convert preparation to object to allow for custom formula if necessary
 			focus: new StringField(),
 			cantrips: new SchemaField({
 				formula: new FormulaField({deterministic: true})

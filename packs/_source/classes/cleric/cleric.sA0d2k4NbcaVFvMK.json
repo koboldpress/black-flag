@@ -117,7 +117,7 @@
         "type": "spellcasting",
         "_id": "yETRBAIUgfuLTJny",
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
           "value": 1
         },
@@ -125,12 +125,14 @@
           "progression": "full",
           "circle": "divine",
           "type": "leveled",
-          "preparation": true,
           "cantrips": {
             "formula": "@scale.ID.cantrips-known"
           },
           "rituals": {
             "formula": "@scale.ID.rituals-known"
+          },
+          "spells": {
+            "mode": "all"
           }
         },
         "flags": {}
@@ -247,10 +249,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.013",
     "coreVersion": "11.315",
     "createdTime": 1694467685894,
-    "modifiedTime": 1707172315287,
+    "modifiedTime": 1707601067609,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "sA0d2k4NbcaVFvMK",

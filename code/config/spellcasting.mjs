@@ -97,13 +97,21 @@ export const spellComponents = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Configuration data for ways to learn spells.
+ *
+ * @typedef {LabeledConfiguration} SpellLearningModeConfiguration
+ * @property {boolean} [prepared] - Does this learning mode need to learn spells?
+ */
+
+/**
  * Different ways in which a character can learn spells as they level up.
- * @type {LabeledConfiguration}
+ * @type {SpellLearningModeConfiguration}
  */
 export const spellLearningModes = {
 	all: {
 		label: "BF.Spellcasting.Learning.Mode.All.Label",
-		hint: "BF.Spellcasting.Learning.Mode.All.Hint"
+		hint: "BF.Spellcasting.Learning.Mode.All.Hint",
+		prepared: true
 	},
 	limited: {
 		label: "BF.Spellcasting.Learning.Mode.Limited.Label",
@@ -111,7 +119,8 @@ export const spellLearningModes = {
 	},
 	spellbook: {
 		label: "BF.Spellcasting.Learning.Mode.Spellbook.Label",
-		hint: "BF.Spellcasting.Learning.Mode.Spellbook.Hint"
+		hint: "BF.Spellcasting.Learning.Mode.Spellbook.Hint",
+		prepared: true
 	}
 };
 
