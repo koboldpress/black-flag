@@ -102,13 +102,18 @@ export default class NotificationTooltip extends Application {
 		const context = await super.getData(options);
 		context.notifications = this.notificationKeys
 			.reduce((arr, k) => {
-				const split = k.split(".");
-				const doc = split.length > 1 ? this.document.items.get(split[0]) : this.document;
-				k = split[1] ?? split[0];
-				const data = foundry.utils.deepClone(doc?.notifications?.get(k));
-				if ( !data ) return arr;
-				data.badge = this.constructor.generateBadge([data], doc.uuid, {displayOrder: true});
-				arr.push(data);
+				let doc = this.document;
+				let notification = this.document.notifications.get(k);
+				if ( !notification ) {
+					const split = k.split(".");
+					if ( split.length > 1 ) doc = this.document.items.get(split[0]);
+					k = split[1] ?? split[0];
+					notification = doc?.notifications?.get(k);
+				}
+				if ( !notification ) return arr;
+				notification = foundry.utils.deepClone(notification);
+				notification.badge = this.constructor.generateBadge([notification], doc.uuid, {displayOrder: true});
+				arr.push(notification);
 				return arr;
 			}, []).sort((lhs, rhs) => lhs.order - rhs.order);
 		return context;
