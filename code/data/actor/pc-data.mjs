@@ -520,10 +520,11 @@ export default class PCData extends ActorDataModel.mixin(
 		for ( const [key, data] of Object.entries(this.progression.classes) ) {
 			if ( !data.requiresSubclass ) continue;
 			order++;
+			const message = game.i18n.format("BF.Progression.Notification.ChooseSubclass", { class: data.document.name });
 			this.parent.notifications.set(`no-subclass-${key}`, {
-				level: "warn", category: "class", section: "progression", document: data.document.id, order,
-				message: game.i18n.format("BF.Progression.Notification.ChooseSubclass", { class: data.document.name })
+				level: "warn", section: "progression", document: data.document.id, order, message
 			});
+			data.document.notifications.set("no-subclass", { level: "warn", category: "class", order, message });
 		}
 	}
 
