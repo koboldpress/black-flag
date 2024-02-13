@@ -37,7 +37,7 @@ export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
 		return {
 			added: new MappingField(new ArrayField(new SchemaField({
 				document: new LocalDocumentField(foundry.documents.BaseItem),
-				uuid: new StringField()
+				uuid: new StringField() // TODO: Replace with UUIDField when available
 			})), {required: false, initial: undefined})
 		};
 	}

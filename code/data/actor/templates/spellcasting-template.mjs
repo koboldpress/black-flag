@@ -77,6 +77,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 		const rounding = (count === 1) || prog.roundUp ? Math.ceil : Math.floor;
 		progression.leveled += rounding(levels / (prog.divisor ?? 1));
+		if ( spellcasting?.cantrips.formula ) progression.cantrips = true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -117,13 +118,14 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 */
 	static prepareLeveledSlots(spells, progression, { actor }) {
 		// Prepare cantrips
-		const cantrips = spells.cantrip ??= { spent: 0 };
-		cantrips.max = Infinity;
-		Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
-		Object.defineProperty(cantrips, "label", {
-			value: CONFIG.BlackFlag.spellRings(true)[0] ?? "", enumerable: false
-		});
-		// TODO: Only add cantrips if at least one class can cast them (no need on Paladins)
+		if ( progression.cantrips ) {
+			const cantrips = spells.cantrip ??= { spent: 0 };
+			cantrips.max = Infinity;
+			Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
+			Object.defineProperty(cantrips, "label", {
+				value: CONFIG.BlackFlag.spellRings(true)[0] ?? "", enumerable: false
+			});
+		}
 
 		const levels = Math.clamped(progression.leveled, 0, CONFIG.BlackFlag.maxLevel);
 		const slots = CONFIG.BlackFlag.spellSlotTable[Math.min(levels, CONFIG.BlackFlag.spellSlotTable.length)] ?? [];

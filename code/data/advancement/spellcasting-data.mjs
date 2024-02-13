@@ -1,3 +1,4 @@
+import { simplifyBonus } from "../../utils/_module.mjs";
 import FilterField from "../fields/filter-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
@@ -86,7 +87,8 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 
 	prepareData() {
 		const regex = /@scale\.(?:[a-z0-9_-]+)\.([a-z0-9_-]+)/i;
-		const scaleValues = this.parent.item.system?.advancement.byType("scaleValue") ?? [];
+		const item = this.parent.item;
+		const scaleValues = item.system?.advancement.byType("scaleValue") ?? [];
 
 		const prepareScale = obj => {
 			const matches = (obj.formula ?? "").match(regex) ?? [];
@@ -102,6 +104,15 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 					if ( !obj.formula ) return false;
 					if ( obj.formula.trim() !== matches[0] ) return true;
 					return !this.scaleValue;
+				},
+				configurable: true,
+				enumerable: false
+			});
+			Object.defineProperty(obj, "known", {
+				get() {
+					const rollData = item.getRollData({ deterministic: true });
+					const formula = this.formula?.replace(".ID.", `.${item.identifier}.`);
+					return simplifyBonus(formula, rollData);
 				},
 				configurable: true,
 				enumerable: false

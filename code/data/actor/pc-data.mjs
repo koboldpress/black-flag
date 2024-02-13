@@ -181,9 +181,11 @@ export default class PCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseSpellcasting() {
+		this.spellcasting.maxRing ??= 0;
 		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
 		this.spellcasting.sources ??= {};
-		this.spellcasting.spells ??= { total: 0, damaging: 0 };
+		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
+		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -422,6 +424,7 @@ export default class PCData extends ActorDataModel.mixin(
 				this.spellcasting.slots.value += ring.value;
 				this.spellcasting.slots.spent += ring.spent;
 				this.spellcasting.slots.max += ring.max;
+				if ( (ring.max > 0) && (ring.level > this.spellcasting.maxRing) ) this.spellcasting.maxRing = ring.level;
 			}
 		}
 	}
@@ -680,7 +683,10 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 
 		// Add new progression data
-		await this.parent.update({[`system.progression.levels.${levels.character}.class`]: existingClass});
+		await this.parent.update(
+			{ [`system.progression.levels.${levels.character}.class`]: existingClass },
+			{ levelUp: { maxRing: this.spellcasting.maxRing, ...this.spellcasting.spells.knowable } }
+		);
 
 		// Apply advancements for the new level
 		for ( const advancement of this.parent.advancementForLevel(levels.character) ) {
@@ -722,6 +728,8 @@ export default class PCData extends ActorDataModel.mixin(
 		if ( levels.class <= 1 ) this.parent.enqueueAdvancementChange(
 			this.parent, "deleteEmbeddedDocuments", ["Item", [cls.id], { render: false }]
 		);
+
+		// TODO: Remove any spells that were learned at the previous level
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -751,5 +759,27 @@ export default class PCData extends ActorDataModel.mixin(
 				foundry.utils.setProperty(changed, "system.attributes.death.status", "dying");
 			}
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onUpdateSpellsKnown(changed, options, userId) {
+		if ( !options.levelUp || (game.user.id !== userId) ) return;
+		const stats = { maxRing: this.spellcasting.maxRing, ...this.spellcasting.spells.knowable };
+		const diff = foundry.utils.diffObject(options.levelUp, stats);
+		if ( foundry.utils.isEmpty(diff) ) return;
+
+		// Only set flag on maxRing change if has an "all" spellcasting source
+		if ( "maxRing" in diff ) {
+			delete diff.maxRing;
+			if ( foundry.utils.isEmpty(diff) ) {
+				const allSpells = Object.values(this.spellcasting.sources).some(source => {
+					return source.document.system.advancement.byType("spellcasting")[0].configuration.spells.mode === "all";
+				});
+				if ( !allSpells ) return;
+			}
+		}
+
+		this.parent.enqueueAdvancementChange(this.parent, "setFlag", ["black-flag", "learningSpellsRequired", true]);
 	}
 }
