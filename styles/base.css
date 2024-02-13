@@ -76,10 +76,11 @@
 }
 
 .uninput:is([type="text"], [type="number"], select) {
-	min-width: inherit;
+	height: unset;
+	width: unset;
+	min-width: unset;
 	background: none;
 	border: 1px solid transparent;
-	height: inherit;
 
 	&:hover, &:focus { box-shadow: 0 0 4px var(--bf-color-border-light-blue); }
 	&:focus { border-color: var(--bf-blue); }

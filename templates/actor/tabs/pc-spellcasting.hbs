@@ -42,13 +42,20 @@
 				</th>
 			</tr>
 		</thead>
-		{{#each sections.spellcasting as |section sectionId|}}
-			<tbody data-section="{{sectionId}}">
+		{{#each sections.spellcasting as |section|}}
+			<tbody data-section="{{@key}}">
 				<tr>
 					<td class="name">{{localize section.label}}</td>
 					<td class="slots">
 						<div class="layout">
-							{{blackFlag-number section.ring.value}} / {{blackFlag-number section.ring.max}}
+							<span class="value">{{blackFlag-number section.ring.value}}</span>
+							<span class="separator">/</span>
+							{{#if (and @root.editable section.ring.allowOverride)}}
+								<input type="number" class="max uninput" name="system.spellcasting.rings.{{@key}}.override"
+								       value="{{section.ring.override}}" placeholder="{{section.ring.maxPlaceholder}}">
+							{{else}}
+								<span class="max">{{blackFlag-number section.ring.max}}</span>
+							{{/if}}
 						</div>
 					</td>
 					<th class="casting" scope="col">{{localize "BF.Spell.Casting.Label"}}</th>

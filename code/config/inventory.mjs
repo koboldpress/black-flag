@@ -193,7 +193,7 @@ export const sheetSections = {
 		{
 			id: "progression",
 			tab: "progression",
-			filters: [{k: "type", o: "in", v: ["class", "background", "heritage", "lineage"]}]
+			filters: [{k: "type", o: "in", v: ["class", "subclass", "background", "heritage", "lineage"]}]
 		}
 	],
 	npc: [
