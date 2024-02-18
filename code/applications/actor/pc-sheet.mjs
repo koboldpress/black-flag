@@ -3,6 +3,7 @@ import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 import LevelUpDialog from "./level-up-dialog.mjs";
+import SpellManager from "./spell-manager.mjs";
 
 export default class PCSheet extends BaseActorSheet {
 
@@ -42,6 +43,9 @@ export default class PCSheet extends BaseActorSheet {
 		const context = await super.getData(options);
 
 		if ( this.modes.progression ) this.prepareProgression(context);
+
+		context.displayManageSpells = this.modes.editing
+			|| (this.isEditable && this.actor.getFlag("black-flag", "learningSpellsRequired"));
 
 		context.displayXPBar = game.settings.get(game.system.id, "levelingMode") === "xp";
 		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
@@ -325,6 +329,8 @@ export default class PCSheet extends BaseActorSheet {
 						return (new ConceptSelectionDialog(this.actor, properties.type, { classIdentifier })).render(true);
 				}
 				break;
+			case "manage-spells":
+				return (new SpellManager(this.actor)).render(true);
 		}
 		return super._onAction(event, dataset);
 	}

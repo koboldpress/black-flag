@@ -767,19 +767,31 @@ export default class PCData extends ActorDataModel.mixin(
 		if ( !options.levelUp || (game.user.id !== userId) ) return;
 		const stats = { maxRing: this.spellcasting.maxRing, ...this.spellcasting.spells.knowable };
 		const diff = foundry.utils.diffObject(options.levelUp, stats);
-		if ( foundry.utils.isEmpty(diff) ) return;
+
+		// If last leveled class uses spellbook learning, add free spells to diff
+		const lastLevel = this.progression.levels[this.progression.level];
+		const lastSpellcasting = lastLevel?.class.system.advancement.byType("spellcasting")[0];
+		if ( lastSpellcasting?.configuration.spells.mode === "spellbook" ) {
+			const freeSpells = lastSpellcasting.configuration.spells.spellbook[
+				this.progression.level === 1 ? "firstLevel" : "otherLevels"
+			];
+			if ( freeSpells ) diff.spellbookSpells = freeSpells;
+		}
 
 		// Only set flag on maxRing change if has an "all" spellcasting source
 		if ( "maxRing" in diff ) {
-			delete diff.maxRing;
-			if ( foundry.utils.isEmpty(diff) ) {
-				const allSpells = Object.values(this.spellcasting.sources).some(source => {
-					return source.document.system.advancement.byType("spellcasting")[0].configuration.spells.mode === "all";
-				});
-				if ( !allSpells ) return;
-			}
+			const allSpells = Object.values(this.spellcasting.sources).some(source => {
+				return source.document.system.advancement.byType("spellcasting")[0].configuration.spells.mode === "all";
+			});
+			if ( !allSpells ) delete diff.maxRing;
 		}
 
-		this.parent.enqueueAdvancementChange(this.parent, "setFlag", ["black-flag", "learningSpellsRequired", true]);
+		if ( foundry.utils.isEmpty(diff) ) return;
+		const existingFlag = this.parent.getFlag("black-flag", "learningSpellsRequired") ?? {};
+		if ( diff.freeSpells || existingFlag.freeSpells ) {
+			diff.freeSpells = (diff.freeSpells ?? 0) + (existingFlag.freeSpells ?? 0);
+		}
+		this.parent.enqueueAdvancementChange(this.parent, "setFlag", ["black-flag", "learningSpellsRequired", diff]);
+		console.log(diff);
 	}
 }

@@ -61,29 +61,51 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 	 */
 	prepareFinalSpellcastingSource() {
 		const parent = this.parent;
-		const spellcastingStats = parent.actor?.system.spellcasting?.sources;
 		const spellcasting = this.spellcasting;
-		if ( !spellcastingStats || !spellcasting ) return;
-		const stats = spellcastingStats[parent.identifier] ??= {};
-		Object.defineProperty(stats, "document", {
+		if ( !this.parent.actor || !spellcasting ) return;
+		const spellcastingSources = parent.actor.system.spellcasting.sources ??= {};
+		const source = spellcastingSources[parent.identifier] ??= {};
+
+		Object.defineProperty(source, "document", {
 			get() { return parent; },
+			configurable: true,
+			enumerable: false
+		});
+		Object.defineProperty(source, "spellcasting", {
+			get() { return spellcasting; },
 			configurable: true,
 			enumerable: false
 		});
 
 		// Spellcasting Ability
-		stats.ability = spellcasting.spellcastingAbility;
-		const abilityMod = parent.actor.system.abilities[stats.ability]?.mod ?? 0;
+		source.ability = spellcasting.spellcastingAbility;
+		const abilityMod = parent.actor.system.abilities[source.ability]?.mod ?? 0;
 		const proficiency = parent.actor.system.attributes.proficiency ?? 0;
 
 		// Spell Attack Modifier
-		stats.attack = proficiency + abilityMod;
+		source.attack = proficiency + abilityMod;
 		// TODO: Add global/spell attack bonuses
 		// TODO: Split into melee & ranged spell attack modifiers?
 
 		// Spell Save DC
-		stats.dc = 8 + proficiency + abilityMod;
+		source.dc = 8 + proficiency + abilityMod;
 		// TODO: Add global/spell DC bonuses
+
+		// Knowable cantrips/rituals/spells
+		parent.actor.system.spellcasting.spells ??= {};
+		const stats = parent.actor.system.spellcasting.spells.knowable ??= {};
+		for ( const type of ["cantrips", "rituals", "spells"] ) {
+			source[type] ??= { value: 0 };
+			source[type].max = spellcasting[type].known;
+			stats[type] += spellcasting[type].known;
+		}
+		if ( spellcasting.spells.mode === "spellbook" ) {
+			const identifier = parent.type === "subclass" ? parent.system.identifier.class : parent.identifier;
+			const levels = parent.actor.system.progression.classes[identifier]?.levels ?? 0;
+			source.spellbook ??= { value: 0, max: 0 };
+			source.spellbook.max = spellcasting.spells.spellbook.firstLevel ?? 0;
+			source.spellbook.max += (spellcasting.spells.spellbook.otherLevels ?? 0) * (levels - 1);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

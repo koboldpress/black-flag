@@ -359,15 +359,37 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	 * Contribute to total spell numbers on actor if embedded.
 	 */
 	prepareFinalStats() {
-		const stats = this.parent.actor?.system.spellcasting?.spells;
-		if ( !stats ) return;
-		stats.total += 1;
-		if ( this.ring.base === 0 ) stats.cantrips += 1;
-		else if ( this.tags.has("ritual") ) stats.rituals += 1;
-		for ( const activity of this.activities ) {
-			if ( activity.hasDamage ) {
-				stats.damaging += 1;
-				return;
+		if ( !this.parent.actor?.system.spellcasting ) return;
+		const stats = this.parent.actor.system.spellcasting.spells;
+		if ( stats ) {
+			stats.total += 1;
+			if ( this.ring.base === 0 ) stats.cantrips += 1;
+			else if ( this.tags.has("ritual") ) stats.rituals += 1;
+			for ( const activity of this.activities ) {
+				if ( activity.hasDamage ) {
+					stats.damaging += 1;
+					return;
+				}
+			}
+		}
+
+		const sources = this.parent.actor.system.spellcasting.sources ??= {};
+		const relationship = this.parent.getFlag("black-flag", "relationship") ?? {};
+		for ( const id of relationship.sources ?? [] ) {
+			const source = sources[id] ??= {};
+			if ( this.ring.base === 0 ) {
+				source.cantrips ??= { value: 0 };
+				source.cantrips.value += 1;
+			} else if ( this.tags.has("ritual") ) {
+				source.rituals ??= { value: 0 };
+				source.rituals.value += 1;
+			} else {
+				source.spells ??= { value: 0 };
+				source.spells.value += 1;
+				if ( relationship.spellbookOrigin === "free" ) {
+					source.spellbook ??= { value: 0 };
+					source.spellbook.value += 1;
+				}
 			}
 		}
 	}

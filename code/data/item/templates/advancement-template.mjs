@@ -52,20 +52,4 @@ export default class AdvancementTemplate extends foundry.abstract.DataModel {
 			{ [`system.progression.advancement.-=${this.parent.id}`]: null }, { render: false }
 		]);
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Preparation          */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Contribute to knowable spells on the actor if has spellcasting.
-	 */
-	prepareFinalStats() {
-		const spellcasting = this.advancement.byType("spellcasting")[0];
-		const stats = this.parent.actor?.system.spellcasting?.spells?.knowable;
-		if ( !spellcasting || !stats ) return;
-		stats.cantrips += spellcasting.configuration.cantrips.known;
-		stats.rituals += spellcasting.configuration.rituals.known;
-		stats.spells += spellcasting.configuration.spells.known;
-	}
 }
