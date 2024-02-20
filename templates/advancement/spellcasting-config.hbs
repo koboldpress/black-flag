@@ -109,16 +109,16 @@
 			{{else if (eq configuration.spells.mode "spellbook")}}
 				<div class="field-group">
 					<span>
-						{{localize "BF.Spellbook.FreeSpells.Label"}}
-						<i class="hintIcon" data-tooltip="BF.Spellbook.FreeSpells.Hint"></i>
+						{{localize "BF.Spellbook.FreeSpell.Label[other]"}}
+						<i class="hintIcon" data-tooltip="BF.Spellbook.FreeSpell.Hint"></i>
 					</span>
 					<label>
-						<span>{{localize "BF.Spellbook.FreeSpells.FirstLevel"}}</span>
+						<span>{{localize "BF.Spellbook.FreeSpell.FirstLevel"}}</span>
 						<input type="number" name="configuration.spells.spellbook.firstLevel"
 						       value="{{configuration.spells.spellbook.firstLevel}}" min=0 step=1>
 					</label>
 					<label>
-						<span>{{localize "BF.Spellbook.FreeSpells.OtherLevels"}}</span>
+						<span>{{localize "BF.Spellbook.FreeSpell.OtherLevels"}}</span>
 						<input type="number" name="configuration.spells.spellbook.otherLevels"
 									 value="{{configuration.spells.spellbook.otherLevels}}" min=0 step=1>
 					</label>

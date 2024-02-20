@@ -1,8 +1,21 @@
 <div class="sheet-container">
 	<section class="slots">
-		<ul>
+		<ul class="unlist">
 			{{#each slots}}
-				<li>{{type}}</li>
+				<li>
+					<label>
+						<figure class="icon">
+							{{#if spell.icon}}<img src="{{ spell.icon }}">
+							{{~else}}<div class="placeholder">{{ number }}</div>{{/if}}
+						</figure>
+						<div class="name">
+							{{#if spell.name}}{{ spell.name }}{{else}}{{ localize name }}{{/if}}
+						</div>
+						<div class="control">
+							<input type="radio" name="selected-slot" {{ checked selected }}>
+						</div>
+					</label>
+				</li>
 			{{/each}}
 		</ul>
 	</section>

@@ -34,7 +34,28 @@ export default class SpellManager extends DocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Mapping of slot types to labels.
+	 * @enum {string}
+	 */
+	static TYPE_LABELS = {
+		cantrips: "BF.Spell.Ring.Cantrip[one]",
+		rituals: "BF.Spell.Tag.Ritual.Label",
+		spells: "BF.Item.Type.Spell[one]",
+		spellbook: "BF.Spellbook.FreeSpell.Label[one]"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Index of the currently selected slot.
+	 * @type {number}
+	 */
+	selectedSlot = 0;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -50,7 +71,13 @@ export default class SpellManager extends DocumentSheet {
 	/** @inheritDoc */
 	async getData(options={}) {
 		const context = await super.getData(options);
-		context.slots = this.slots;
+		context.slots = this.slots.map((slot, index) => {
+			slot = foundry.utils.deepClone(slot);
+			slot.name = this.constructor.TYPE_LABELS[slot.type];
+			slot.number = index + 1;
+			slot.selected = index === this.selectedSlot;
+			return slot;
+		});
 		return context;
 	}
 }

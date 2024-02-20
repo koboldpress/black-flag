@@ -1,13 +1,100 @@
 .black-flag.spell-manager {
 	min-block-size: 400px;
-	min-inline-size: 550px;
+	min-inline-size: 800px;
 
 	.window-content {
 		padding: 0;
 
 		.sheet-container {
 			display: grid;
-			grid-template-columns: 150px 3fr 2fr;
+			grid-template-columns: 250px 3fr 2fr;
+		}
+	}
+
+	section.slots {
+		--icon: 32px;
+		--border: 2px;
+		--padding: 8px;
+		--inset: 4px;
+		background: rgb(40 40 40);
+
+		li {
+			min-block-size: calc(var(--icon) + var(--padding) * 2);
+			position: relative;
+			isolation: isolate;
+			display: flex;
+			align-items: stretch;
+			gap: var(--padding);
+			border: var(--border) solid transparent;
+			color: var(--bf-text-color-white);
+			color-scheme: dark;
+			cursor: pointer;
+
+			&::before, &::after {
+				content: "";
+				position: absolute;
+			}
+			&::before {
+				inset: calc(var(--border) * -1);
+				border-block: .5px solid rgb(80 80 80);
+				border-inline: 1px solid rgb(80 80 80);
+				outline: 1px solid rgb(120 120 120 / 20%);
+				outline-offset: -3px;
+				z-index: -2;
+			}
+			&::after {
+				inset: var(--inset);
+				background: rgb(80 80 80 / 20%);
+				border: 1px solid rgb(0 0 0);
+				border-radius: calc(var(--icon) / 2);
+				z-index: -1;
+			}
+			&:has(input[type="radio"]:checked)::after {
+				border-color: var(--bf-color-border-gray);
+			}
+			&:has(label:hover, label:focus-visible)::after {
+				border-color: var(--bf-color-border-blue);
+			}
+		}
+		label {
+			display: contents;
+			cursor: inherit;
+			> * {
+				display: flex;
+				align-items: center;
+				margin-block: var(--inset);
+			}
+		}
+		.icon > :is(img, .placeholder) {
+			inline-size: var(--icon);
+			block-size: var(--icon);
+			border: 1px dashed currentcolor;
+			border-radius: 100%;
+			margin-inline-start: calc(var(--inset) + 1px);
+		}
+		.icon > .placeholder {
+			display: flex;
+			align-items: center;
+			place-content: center;
+			font-family: var(--bf-font-primary);
+			font-size: calc(var(--icon) * .5);
+			opacity: 60%;
+		}
+		.icon > img {
+			border-style: solid;
+		}
+		.name {
+			flex: 1;
+			font-size: var(--font-size-16);
+		}
+		.control {
+			flex: 0 0 var(--icon);
+
+			input[type="radio"] {
+				margin: 0;
+				margin-block-end: 3px;
+				accent-color: var(--bf-blue);
+			}
 		}
 	}
 }

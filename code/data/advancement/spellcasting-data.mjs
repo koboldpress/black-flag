@@ -36,9 +36,9 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 					label: "BF.Spellcasting.Restriction.Label", hint: "BF.Spellcasting.Restriction.Hint"
 				}),
 				spellbook: new SchemaField({
-					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpells.FirstLevel"}),
-					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpells.OtherLevels"})
-				}, {label: "BF.Spellbook.FreeSpells.Label", hint: "BF.Spellbook.FreeSpells.Hint"})
+					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel"}),
+					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels"})
+				}, {label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint"})
 			}, {label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint"})
 		};
 	}
