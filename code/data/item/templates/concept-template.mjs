@@ -100,7 +100,10 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 		for ( const initialData of data ) {
 			const AdvancementClass = CONFIG.Advancement.types[initialData.type].documentClass;
 			if ( !initialData._id ) initialData._id = foundry.utils.randomID();
-			advancement[initialData._id] = new AdvancementClass(initialData, { parent: this.parent }).toObject();
+			const createData = foundry.utils.deepClone(initialData);
+			const newAdvancement = new AdvancementClass(initialData, { parent: this.parent });
+			newAdvancement._preCreate(createData);
+			advancement[initialData._id] = newAdvancement.toObject();
 		}
 		this.parent.updateSource({"system.advancement": advancement});
 	}
