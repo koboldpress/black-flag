@@ -162,7 +162,7 @@ export function NOT(data, filter) {
 export const COMPARISON_FUNCTIONS = {
 	_: exact, exact, iexact, contains, icontains,
 	startswith, istartswith, endswith, iendswith,
-	in: in_, gt, gte, lt, lte
+	has, in: in_, gt, gte, lt, lte
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -264,13 +264,25 @@ export function iendswith(data, value) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Check that data matches one of the provided values
+ * Check that the data collection has the provided value.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function has(data, value) {
+	return in_(value, data);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Check that data matches one of the provided values.
  * @param {*} data
  * @param {*} value
  * @returns {boolean}
  */
 export function in_(data, value) {
-	switch (foundry.utils.getType(value)) {
+	switch ( foundry.utils.getType(value) ) {
 		case "Array": return value.includes(data);
 		case "Set": return value.has(data);
 		default: return false;

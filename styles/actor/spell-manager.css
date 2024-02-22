@@ -1,76 +1,90 @@
 .black-flag.spell-manager {
 	min-block-size: 400px;
-	min-inline-size: 800px;
+	min-inline-size: 600px;
 
 	.window-content {
 		padding: 0;
 
 		.sheet-container {
 			display: grid;
-			grid-template-columns: 250px 3fr 2fr;
+			max-height: 100%;
+			overflow: hidden;
+			grid-template-areas:
+				"slots restrictions"
+				"slots search"
+				"slots spells"
+				"slots controls";
+			grid-template-columns: 250px 1fr;
+			grid-template-rows: max-content max-content 1fr max-content;
+
+			> * {
+				background: rgb(40 40 40);
+				color: var(--bf-text-color-white);
+			}
+			> .slots {
+				grid-area: slots;
+				overflow-y: auto;
+			}
+			> .restrictions { grid-area: restrictions; }
+			> .search { grid-area: search; }
+			> .spells {
+				grid-area: spells;
+				overflow-y: auto;
+			}
+			> .controls { grid-area: controls; }
 		}
 	}
 
-	section.slots {
+	.spell-list {
 		--icon: 32px;
-		--border: 2px;
 		--padding: 8px;
 		--inset: 4px;
-		background: rgb(40 40 40);
 
 		li {
-			min-block-size: calc(var(--icon) + var(--padding) * 2);
 			position: relative;
-			isolation: isolate;
 			display: flex;
-			align-items: stretch;
-			gap: var(--padding);
-			border: var(--border) solid transparent;
-			color: var(--bf-text-color-white);
+			align-items: center;
+			justify-content: stretch;
+			border: .5px solid rgb(80 80 80);
 			color-scheme: dark;
-			cursor: pointer;
 
-			&::before, &::after {
+			&::before {
 				content: "";
 				position: absolute;
-			}
-			&::before {
-				inset: calc(var(--border) * -1);
-				border-block: .5px solid rgb(80 80 80);
-				border-inline: 1px solid rgb(80 80 80);
+				inset: 0;
 				outline: 1px solid rgb(120 120 120 / 20%);
 				outline-offset: -3px;
-				z-index: -2;
-			}
-			&::after {
-				inset: var(--inset);
-				background: rgb(80 80 80 / 20%);
-				border: 1px solid rgb(0 0 0);
-				border-radius: calc(var(--icon) / 2);
-				z-index: -1;
-			}
-			&:has(input[type="radio"]:checked)::after {
-				border-color: var(--bf-color-border-gray);
-			}
-			&:has(label:hover, label:focus-visible)::after {
-				border-color: var(--bf-color-border-blue);
 			}
 		}
 		label {
-			display: contents;
-			cursor: inherit;
+			flex: 1;
+			display: flex;
+			align-items: stretch;
+			gap: var(--padding);
+			margin: calc(var(--inset) + 2px);
+			background: rgb(80 80 80 / 20%);
+			border: 1px solid rgb(0 0 0);
+			border-radius: calc(var(--icon) / 2);
+			cursor: pointer;
+			z-index: 1;
+
+			&:hover, &:focus-visible { border-color: var(--bf-color-border-blue); }
 			> * {
 				display: flex;
 				align-items: center;
-				margin-block: var(--inset);
 			}
 		}
-		.icon > :is(img, .placeholder) {
+		li.selected label, label:has(input:checked) { border-color: var(--bf-color-border-gray); }
+		label:has(input:disabled) {
+			text-decoration: line-through;
+			text-decoration-color: rgb(150 75 75);
+			text-decoration-thickness: 4px;
+		}
+		.icon > :where(img, .placeholder) {
 			inline-size: var(--icon);
 			block-size: var(--icon);
 			border: 1px dashed currentcolor;
 			border-radius: 100%;
-			margin-inline-start: calc(var(--inset) + 1px);
 		}
 		.icon > .placeholder {
 			display: flex;
@@ -81,20 +95,41 @@
 			opacity: 60%;
 		}
 		.icon > img {
-			border-style: solid;
+			background: black;
+			border: 1px solid var(--bf-blue);
+			object-fit: cover;
+			object-position: center;
 		}
 		.name {
 			flex: 1;
 			font-size: var(--font-size-16);
 		}
 		.control {
-			flex: 0 0 var(--icon);
+			flex: 0 0 24px;
 
 			input[type="radio"] {
 				margin: 0;
 				margin-block-end: 3px;
 				accent-color: var(--bf-blue);
 			}
+		}
+	}
+
+	section.spells {
+		container: spells / inline-size;
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			overflow-y: auto;
+		}
+		li { flex: 0 0 100%; }
+
+		@container (width > 450px) {
+			li { flex: 0 1 50%; }
+		}
+		@container (width > 650px) {
+			li { flex: 0 1 33%; }
 		}
 	}
 }

@@ -56,6 +56,9 @@
 	background: var(--bf-button-background-color-regular);
 	color: var(--bf-button-text-color-regular);
 
+	&:disabled {
+		color: color-mix(in oklab, var(--bf-button-text-color-regular), transparent 40%);
+	}
 	&:not([disabled]) {
 		&:hover, &:focus-visible {
 			background: var(--bf-button-background-color-focus);
@@ -68,6 +71,9 @@
 	background: var(--bf-button-background-color-focus);
 	color: var(--bf-button-text-color-focus);
 
+	&:disabled {
+		color: color-mix(in oklab, var(--bf-button-text-color-focus), transparent 40%);
+	}
 	&:not([disabled]) {
 		&:hover, &:focus-visible {
 			background: var(--bf-button-background-color-regular);

@@ -173,6 +173,6 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		if ( expandedTalentList ) filter = {
 			o: "OR", v: [filter, { k: "system.type.category", v: expandedTalentList.configuration.talentList }]
 		};
-		return search.compendiums(Item, "talent", [filter]) ?? [];
+		return search.compendiums(Item, { type: "talent", filters: [filter], index: false }) ?? [];
 	}
 }
