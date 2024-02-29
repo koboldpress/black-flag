@@ -1,6 +1,13 @@
-import DamageConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
+import DamageRollConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils/_module.mjs";
 import BasicRoll from "./basic-roll.mjs";
+
+/**
+ * Configuration data for the process of rolling a damage roll.
+ *
+ * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
+ * @property {DamageRollConfiguration[]} rolls - Configuration data for individual rolls.
+ */
 
 /**
  * Damage roll configuration data.
@@ -42,37 +49,40 @@ export default class DamageRoll extends BasicRoll {
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	/** @inheritDoc */
-	static DefaultConfigurationDialog = DamageConfigurationDialog;
+	static DefaultConfigurationDialog = DamageRollConfigurationDialog;
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	/** @inheritDoc */
 	static CHAT_TEMPLATE = "systems/black-flag/templates/dice/damage-roll.hbs";
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
-	/*  Static Constructor                       */
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Static Construction         */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default critical mode should be.
 	 * @param {DamageRollConfiguration} config - Roll configuration data.
-	 * @param {BasicRollDialogConfiguration} options - Data for the roll configuration dialog.
+	 * @param {BasicRollDialogConfiguration} dialog - Data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation.
 	 */
-	static applyKeybindings(config, options) {
+	static applyKeybindings(config, dialog, message) {
 		const keys = {
 			normal: areKeysPressed(config.event, "damageRollNormal"),
 			critical: areKeysPressed(config.event, "damageRollCritical")
 		};
 
 		// Should the roll configuration dialog be displayed?
-		options.configure ??= !Object.values(keys).some(k => k);
+		dialog.configure ??= !Object.values(keys).some(k => k);
 
 		// Determine critical mode
-		config.options ??= {};
-		config.options.critical = !!config.options.critical || keys.critical;
-		config.options.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
-		config.options.multiplyDice ??= game.settings.get("black-flag", "criticalMultiplyDice");
-		config.options.multiplyNumeric ??= game.settings.get("black-flag", "criticalMultiplyNumeric");
+		for ( const roll of config.rolls ) {
+			roll.options ??= {};
+			roll.options.critical = !!roll.options.critical || keys.critical;
+			roll.options.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
+			roll.options.multiplyDice ??= game.settings.get("black-flag", "criticalMultiplyDice");
+			roll.options.multiplyNumeric ??= game.settings.get("black-flag", "criticalMultiplyNumeric");
+		}
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */

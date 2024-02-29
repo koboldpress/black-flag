@@ -1,6 +1,13 @@
-import ChallengeConfigurationDialog from "../applications/dice/challenge-configuration-dialog.mjs";
+import ChallengeRollConfigurationDialog from "../applications/dice/challenge-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils/_module.mjs";
 import BasicRoll from "./basic-roll.mjs";
+
+/**
+ * Configuration data for the process of rolling a challenge roll.
+ *
+ * @typedef {BasicRollProcessConfiguration} ChallengeRollProcessConfiguration
+ * @property {ChallengeRollConfiguration[]} rolls - Configuration data for individual rolls.
+ */
 
 /**
  * Challenge roll configuration data.
@@ -24,6 +31,8 @@ import BasicRoll from "./basic-roll.mjs";
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Data for the roll configuration dialog.
+ *
  * @typedef {BasicRollDialogConfiguration} ChallengeRollDialogConfiguration
  * @property {ChallengeConfigurationDialogOptions} [options] - Configuration options.
  */
@@ -46,10 +55,10 @@ export default class ChallengeRoll extends BasicRoll {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	static DefaultConfigurationDialog = ChallengeConfigurationDialog;
+	static DefaultConfigurationDialog = ChallengeRollConfigurationDialog;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*          Static Constructor         */
+	/*         Static Construction         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -66,29 +75,29 @@ export default class ChallengeRoll extends BasicRoll {
 
 	/**
 	 * Construct and perform a Challenge Roll through the standard workflow.
-	 * @param {ChallengeRollConfiguration|ChallengeRollConfiguration[]} [configs={}] - Roll configuration data.
+	 * @param {ChallengeRollProcessConfiguration} [config={}] - Roll configuration data.
 	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(configs={}, message={}, dialog={}) {
-		if ( foundry.utils.getType(configs) === "Object" ) configs = [configs];
-		for ( const config of configs ) {
-			config.options ??= {};
-			config.options.criticalSuccess ??= CONFIG.Dice.ChallengeDie.CRITICAL_SUCCESS_TOTAL;
-			config.options.criticalFailure ??= CONFIG.Dice.ChallengeDie.CRITICAL_FAILURE_TOTAL;
+	static async build(config={}, message={}, dialog={}) {
+		for ( const roll of config.rolls ?? [] ) {
+			roll.options ??= {};
+			roll.options.criticalSuccess ??= CONFIG.Dice.ChallengeDie.CRITICAL_SUCCESS_TOTAL;
+			roll.options.criticalFailure ??= CONFIG.Dice.ChallengeDie.CRITICAL_FAILURE_TOTAL;
 		}
-		return super.build(configs, message, dialog);
+		return super.build(config, message, dialog);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default advantage mode should be.
-	 * @param {ChallengeRollConfiguration} config - Roll configuration data.
-	 * @param {BasicRollDialogConfiguration} options - Data for the roll configuration dialog.
+	 * @param {ChallengeRollProcessConfiguration} config - Roll configuration data.
+	 * @param {ChallengeRollDialogConfiguration} dialog - Data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation.
 	 */
-	static applyKeybindings(config, options) {
+	static applyKeybindings(config, dialog, message) {
 		const keys = {
 			normal: areKeysPressed(config.event, "challengeRollNormal"),
 			advantage: areKeysPressed(config.event, "challengeRollAdvantage"),
@@ -96,15 +105,17 @@ export default class ChallengeRoll extends BasicRoll {
 		};
 
 		// Should the roll configuration dialog be displayed?
-		options.configure ??= !Object.values(keys).some(k => k);
+		dialog.configure ??= !Object.values(keys).some(k => k);
 
 		// Determine advantage mode
-		const advantage = config.advantage || keys.advantage;
-		const disadvantage = config.disadvantage || keys.disadvantage;
-		config.options ??= {};
-		if ( advantage && !disadvantage ) config.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
-		else if ( !advantage && disadvantage ) config.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE;
-		else config.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.NORMAL;
+		for ( const roll of config.rolls ) {
+			roll.options ??= {};
+			const advantage = roll.options.advantage || keys.advantage;
+			const disadvantage = roll.options.disadvantage || keys.disadvantage;
+			if ( advantage && !disadvantage ) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
+			else if ( !advantage && disadvantage ) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE;
+			else roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.NORMAL;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,4 +1,4 @@
-import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
+import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
 
 /**
  * @typedef {BasicRollConfigurationDialogOptions} ChallengeRollConfigurationDialogOptions
@@ -11,7 +11,7 @@ import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
  * @param {ChallengeRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
  * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
-export default class ChallengeConfigurationDialog extends BaseConfigurationDialog {
+export default class ChallengeRollConfigurationDialog extends BasicRollConfigurationDialog {
 
 	/** @inheritDoc */
 	static get defaultOptions() {
@@ -25,7 +25,7 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getButtons() {
+	_getButtons() {
 		return {
 			advantage: { label: game.i18n.localize("BF.Roll.Action.Advantage.Label") },
 			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") },
@@ -39,7 +39,7 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 	getData(options={}) {
 		const context = super.getData(options);
 		context.rollNotes.forEach(n => {
-			switch (n.note?.rollMode) {
+			switch ( n.note?.rollMode ) {
 				case CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE:
 					return n.advantageAbbreviation = "BF.Roll.Action.Advantage.Abbreviation";
 				case CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE:
@@ -52,11 +52,11 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	finalizeRolls(action) {
+	_finalizeRolls(action) {
 		const rolls = [];
 		for ( const roll of this.rolls ) {
 			switch ( action ) {

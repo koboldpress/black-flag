@@ -1,4 +1,12 @@
-import BaseConfigurationDialog from "../applications/dice/base-configuration-dialog.mjs";
+import BasicRollConfigurationDialog from "../applications/dice/basic-configuration-dialog.mjs";
+
+/**
+ * Configuration data for the process of rolling a basic roll.
+ *
+ * @typedef {object} BasicRollProcessConfiguration
+ * @property {BasicRollConfiguration[]} rolls - Configuration data for individual rolls.
+ * @property {Event} [event] - Event that triggered the rolling process.
+ */
 
 /**
  * Base roll configuration data.
@@ -6,9 +14,7 @@ import BaseConfigurationDialog from "../applications/dice/base-configuration-dia
  * @typedef {object} BasicRollConfiguration
  * @property {string[]} [parts=[]] - Parts used to construct the roll formula.
  * @property {object} [data={}] - The roll data used to resolve the formula.
- * @property {Event} [event] - Event that triggered the roll.
- * @property {boolean} [extraTerms=true] - Whether extra terms added in the configuration dialog should be
- *                                         added to this roll.
+ * @property {boolean} [situational=true] - Whether a situational bonus can be added to this roll in the roll prompt.
  * @property {BasicRollOptions} [options] - Options passed through to the roll.
  */
 
@@ -56,18 +62,18 @@ import BaseConfigurationDialog from "../applications/dice/base-configuration-dia
  * Custom roll type that allows rolls in chat messages to be revived as the correct roll type.
  * @param {string} formula - The formula used to construct the roll.
  * @param {object} data - The roll data used to resolve the formula.
- * @param {object} options - Additional options that describe the roll.
+ * @param {BasicRollOptions} options - Additional options that describe the roll.
  */
 export default class BasicRoll extends Roll {
 
 	/**
 	 * Default application to use for configuring this roll.
-	 * @type {typeof BaseConfigurationDialog}
+	 * @type {typeof RollConfigurationDialog}
 	 */
-	static DefaultConfigurationDialog = BaseConfigurationDialog;
+	static DefaultConfigurationDialog = BasicRollConfigurationDialog;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*          Static Constructor         */
+	/*         Static Construction         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -84,37 +90,33 @@ export default class BasicRoll extends Roll {
 
 	/**
 	 * Construct and perform a Base Roll through the standard workflow.
-	 * @param {BasicRollConfiguration|BasicRollConfiguration[]} [configs={}] - Roll configuration data.
+	 * @param {BasicRollProcessConfiguration} [config={}] - Roll configuration data.
 	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(configs={}, message={}, dialog={}) {
-		if ( foundry.utils.getType(configs) === "Object" ) configs = [configs];
-
-		configs.forEach(c => this.applyKeybindings(c, dialog));
+	static async build(config={}, message={}, dialog={}) {
+		this.applyKeybindings(config, message, dialog);
 
 		let rolls;
 		if ( dialog.configure !== false ) {
 			let DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
-			try {
-				rolls = await DialogClass.configure(configs, dialog);
-			} catch(err) {
-				if ( !err ) return;
-				throw err;
-			}
+			rolls = await DialogClass.configure(config, dialog, message);
 		} else {
-			rolls = configs.map(config => this.create(config));
+			rolls = config.rolls?.map(config => this.create(config)) ?? [];
 		}
 
 		for ( const roll of rolls ) {
-			await roll.evaluate({async: true});
+			await roll.evaluate({ async: true });
 		}
 
 		if ( rolls?.length && (message.create !== false) ) {
 			if ( foundry.utils.getType(message.preCreate) === "function" ) message.preCreate(rolls, message);
-			await this.toMessage(rolls, message.data, { rollMode: rolls[0].options.rollMode ?? message.rollMode });
+			await this.toMessage(rolls, message.data, {
+				rollMode: message.rollMode ?? rolls.reduce(r => mode ?? r.options.rollMode)
+			});
 		}
+
 		return rolls;
 	}
 
@@ -122,10 +124,11 @@ export default class BasicRoll extends Roll {
 
 	/**
 	 * Determines whether the roll should be fast forwarded.
-	 * @param {BasicRollConfiguration} config - Roll configuration data.
+	 * @param {BasicRollProcessConfiguration} config - Roll configuration data.
 	 * @param {BasicRollDialogConfiguration} dialog - Data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation.
 	 */
-	static applyKeybindings(config, dialog) {
+	static applyKeybindings(config, dialog, message) {
 		dialog.configure ??= true;
 	}
 

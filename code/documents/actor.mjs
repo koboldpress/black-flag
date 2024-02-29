@@ -1,4 +1,4 @@
-import SkillConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
+import SkillRollConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
 import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
 import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
@@ -933,7 +933,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration data for a hit die roll.
 	 *
-	 * @typedef {BasicRollConfiguration} HitDieRollConfiguration
+	 * @typedef {BasicRollProcessConfiguration} HitDieRollProcessConfiguration
 	 * @property {number} [denomination] - Denomination of hit dice to roll.
 	 * @property {boolean} [modifySpentHitDie=true] - Should the actor's spent hit die count be updated?
 	 * @property {boolean} [modifyHitPoints=true] - Should the actor's hit points be updated after the roll?
@@ -964,11 +964,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}));
 		}
 
+		const formula = `max(0, 1d${config.denomination} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`;
 		config.denomination = Number(config.denomination);
-		const rollConfig = foundry.utils.mergeObject({ data: this.getRollData() }, config);
-		rollConfig.parts = [
-			`max(0, 1d${config.denomination} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`
-		].concat(config.parts ?? []);
+		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
 		const type = game.i18n.localize("BF.HitDie.Label[one]");
 		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
@@ -996,7 +995,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @function blackFlag.preRollHitDie
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-		 * @param {HitDieRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {HitDieRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
@@ -1208,7 +1207,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		}, message);
 
 		const dialogConfig = foundry.utils.mergeObject({
-			applicationClass: SkillConfigurationDialog,
+			applicationClass: SkillRollConfigurationDialog,
 			options: {
 				buildConfig: prepareSkillConfig,
 				chooseAbility: true,
@@ -1319,7 +1318,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		}, message);
 
 		const dialogConfig = foundry.utils.mergeObject({
-			applicationClass: SkillConfigurationDialog,
+			applicationClass: SkillRollConfigurationDialog,
 			options: {
 				buildConfig: prepareToolConfig,
 				chooseAbility: true,

@@ -1,9 +1,9 @@
-import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
+import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
 
 /**
  * Roll configuration dialog for Damage Rolls.
  */
-export default class DamageConfigurationDialog extends BaseConfigurationDialog {
+export default class DamageRollConfigurationDialog extends BasicRollConfigurationDialog {
 
 	/** @inheritDoc */
 	static get defaultOptions() {
@@ -18,7 +18,7 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getButtons() {
+	_getButtons() {
 		const buttons = {
 			critical: { label: game.i18n.localize("BF.Roll.Action.Critical.Label") },
 			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") }
@@ -40,11 +40,20 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	finalizeRolls(action) {
+	_buildConfig(config, formData, index) {
+		// TODO: Rework this so each roll can have damage type selection
+		if ( formData.damageType ) config.options.type = formData.damageType;
+		return config;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_finalizeRolls(action) {
 		const rolls = [];
 		for ( const roll of this.rolls ) {
 			roll.options.critical = action === "critical";
@@ -52,13 +61,5 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 			rolls.push(roll);
 		}
 		return rolls;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	buildConfig(config, formData) {
-		if ( formData.damageType ) config.options.type = formData.damageType;
-		return config;
 	}
 }

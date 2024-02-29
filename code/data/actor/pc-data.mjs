@@ -586,7 +586,7 @@ export default class PCData extends ActorDataModel.mixin(
 		const luck = this.attributes.luck;
 		let newValue = luck.value + 1;
 		if ( newValue > CONFIG.BlackFlag.luck.max ) {
-			const rollConfig = { parts: ["1d4"] };
+			const rollConfig = { rolls: [{ parts: ["1d4"] }] };
 			const type = game.i18n.localize("BF.Luck.Label");
 			const flavor = game.i18n.format("BF.Roll.Action.RerollSpecific", { type });
 			const messageConfig = { data: {
@@ -604,7 +604,7 @@ export default class PCData extends ActorDataModel.mixin(
 			 * @function blackFlag.preRollLuck
 			 * @memberof hookEvents
 			 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-			 * @param {BasicRollConfiguration} config - Configuration data for the pending roll.
+			 * @param {BasicRollProcessConfiguration} config - Configuration data for the pending roll.
 			 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 			 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 			 * @returns {boolean} - Explicitly return `false` to prevent the roll.

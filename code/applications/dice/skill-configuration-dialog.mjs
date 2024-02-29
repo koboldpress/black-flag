@@ -1,9 +1,9 @@
-import ChallengeConfigurationDialog from "./challenge-configuration-dialog.mjs";
+import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.mjs";
 
 /**
  * Extended roll configuration dialog that allows selecting abilities.
  */
-export default class SkillConfigurationDialog extends ChallengeConfigurationDialog {
+export default class SkillRollConfigurationDialog extends ChallengeRollConfigurationDialog {
 
 	/** @inheritDoc */
 	static get defaultOptions() {
@@ -32,7 +32,7 @@ export default class SkillConfigurationDialog extends ChallengeConfigurationDial
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	buildConfig(config, formData) {
+	_buildConfig(config, formData, index) {
 		const { rollConfig, rollNotes } = this.options.buildConfig(config, formData);
 		this.options.rollNotes = rollNotes;
 		return rollConfig;
