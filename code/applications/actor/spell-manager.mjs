@@ -39,6 +39,7 @@ export default class SpellManager extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "spell-manager"],
@@ -136,12 +137,12 @@ export default class SpellManager extends DocumentSheet {
 			.filter(this.shouldDisplay.bind(this))
 			.map(spell => ({
 				...spell,
-				disabled: !this.currentSlot.selected.has(spell.uuid) && otherSelected.has(spell.uuid),
-				selected: this.currentSlot.selected.has(spell.uuid)
+				disabled: !this.currentSlot?.selected.has(spell.uuid) && otherSelected.has(spell.uuid),
+				selected: this.currentSlot?.selected.has(spell.uuid)
 			}));
 
 		context.completed = this.slots.every(s => s.selected.size);
-		context.nextDisabled = !this.currentSlot.selected.size;
+		context.nextDisabled = !this.currentSlot?.selected.size;
 
 		return context;
 	}
@@ -156,7 +157,7 @@ export default class SpellManager extends DocumentSheet {
 	shouldDisplay(spell) {
 		if ( this.existingSpells.has(spell.uuid) ) return false;
 		const filters = []; // TODO: Fetch filters from the SpellcastingAdvancement
-		switch ( this.currentSlot.type ) {
+		switch ( this.currentSlot?.type ) {
 			case "cantrips":
 				filters.push({ k: "system.ring.base", v: 0 });
 				break;
@@ -171,6 +172,8 @@ export default class SpellManager extends DocumentSheet {
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
 				break;
+			default:
+				return false;
 		}
 		return filter.performCheck(spell, filters);
 	}
@@ -221,8 +224,38 @@ export default class SpellManager extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Fetch a spell for a certain slot and mutate it with the appropriate data & flags for creation.
+	 * @param {BlackFlagItem} spell - Spell to prepare.
+	 * @param {SpellSlotData} slot - Slot this spell will be associated with.
+	 * @returns {Promise<object>} - Data for document creation on the actor.
+	 */
+	async _prepareSpellData(spell, slot) {
+		const spellData = (await spell).toObject();
+		const remote = spell.parent !== this.document;
+		const source = remote ? foundry.utils.getProperty(spellData, "flags.black-flag.relationship.source") ?? {} : {};
+
+		source.identifiers ??= [];
+		source.identifiers.push(slot.source.identifier);
+		if ( slot.type === "spellbook" ) source.spellbookOrigin = "free";
+
+		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
+		if ( remote ) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
+		return spellData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
-	_updateObject(event, formData) {
-		console.log(event, formData);
+	async _updateObject(event, formData) {
+		let spellData = [];
+		for ( const slot of this.slots ) {
+			for ( const spellUuid of slot.selected ) {
+				// TODO: If spell already exists on sheet, just update its data
+				spellData.push(this._prepareSpellData(fromUuid(spellUuid), slot));
+			}
+		}
+		spellData = await Promise.all(spellData);
+		this.document.createEmbeddedDocuments("Item", spellData, { retainRelationship: true });
 	}
 }
