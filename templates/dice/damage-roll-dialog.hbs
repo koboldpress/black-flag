@@ -4,8 +4,8 @@
 		<ul class="formulas">
 			{{#each rolls}}
 				<li class="formula">
-					<span class="formula-text">{{ this.formula }}</span>
-					{{#with (lookup (lookup @root.CONFIG.damageTypes this.options.type) "label") as |type|}}
+					<span class="formula-text">{{ formula }}</span>
+					{{#with (lookup (lookup @root.CONFIG.damageTypes options.damageType) "label") as |type|}}
 						<span class="damage-type">{{ localize type }}</span>
 					{{/with}}
 				</li>

@@ -23,7 +23,8 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 			critical: { label: game.i18n.localize("BF.Roll.Action.Critical.Label") },
 			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") }
 		};
-		if ( this.rollConfig[0].options.allowCritical === false ) delete buttons.critical;
+		if ( this.config.allowCritical === false
+			|| this.config.rolls?.every(r => r.options.allowCritical === false) ) delete buttons.critical;
 		return buttons;
 	}
 
@@ -35,7 +36,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 			damageTypes: this.options.damageTypes ? Object.fromEntries(Object.entries(CONFIG.BlackFlag.damageTypes)
 				.filteR(([k, v]) => this.options.damageTypes.has(k))
 			) : null,
-			selectedDamageType: this.rolls[0].options.type
+			selectedDamageType: this.rolls[0].options.damageType
 		}, super.getData(options));
 	}
 
@@ -46,7 +47,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	/** @inheritDoc */
 	_buildConfig(config, formData, index) {
 		// TODO: Rework this so each roll can have damage type selection
-		if ( formData.damageType ) config.options.type = formData.damageType;
+		if ( formData.damageType ) config.options.damageType = formData.damageType;
 		return config;
 	}
 

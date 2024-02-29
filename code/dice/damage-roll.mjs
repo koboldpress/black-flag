@@ -62,7 +62,7 @@ export default class DamageRoll extends BasicRoll {
 
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default critical mode should be.
-	 * @param {DamageRollConfiguration} config - Roll configuration data.
+	 * @param {DamageRollProcessConfiguration} config - Roll configuration data.
 	 * @param {BasicRollDialogConfiguration} dialog - Data for the roll configuration dialog.
 	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation.
 	 */
@@ -243,7 +243,7 @@ export default class DamageRoll extends BasicRoll {
 			user: game.user.id,
 			tooltip: isPrivate ? "" : await this.getTooltip(),
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-			damageType: isPrivate ? "???" : this.options.type
+			damageType: isPrivate ? "???" : this.options.damageType
 		};
 		return renderTemplate(template, chatData);
 	}

@@ -18,13 +18,13 @@ export default class DamageActivity extends Activity {
 	get effectColumn() {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
-		const damageParts = this.createDamageConfigs({}, this.item.getRollData({ deterministic: true }));
-		for ( const part of damageParts ) {
-			let formula = part.parts.join(" + ");
-			formula = Roll.defaultImplementation.replaceFormulaData(formula, part.data);
+		const rollConfig = this.createDamageConfigs({}, this.item.getRollData({ deterministic: true }));
+		for ( const roll of rollConfig.rolls ) {
+			let formula = roll.parts.join(" + ");
+			formula = Roll.defaultImplementation.replaceFormulaData(formula, roll.data);
 			formula = simplifyFormula(formula);
 			if ( formula ) {
-				const damageType = CONFIG.BlackFlag.damageTypes[part.options.damageType];
+				const damageType = CONFIG.BlackFlag.damageTypes[roll.options.damageType];
 				layout.innerHTML += `<span class="damage">${formula} ${game.i18n.localize(damageType?.label ?? "")}</span>`;
 			}
 		}
@@ -47,15 +47,15 @@ export default class DamageActivity extends Activity {
 
 	/**
 	 * Roll damage.
-	 * @param {DamageRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {DamageRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollDamage(config={}, message={}, dialog={}) {
 		const rollData = this.item.getRollData();
-		const rollConfigs = this.createDamageConfigs(config, rollData);
-		if ( rollConfigs.length ) rollConfigs[0].parts = rollConfigs[0].parts.concat(config.parts ?? []);
+		const rollConfig = this.createDamageConfigs(config, rollData);
+		rollConfig.origin = this;
 
 		const messageConfig = foundry.utils.mergeObject({
 			data: {
@@ -71,7 +71,7 @@ export default class DamageActivity extends Activity {
 			}
 		}, message);
 
-		const allModifiers = rollConfigs.map(c => c.modifierData);
+		const allModifiers = rollConfig.rolls?.map(c => c.modifierData) ?? [];
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
 				rollNotes: this.actor?.system.getModifiers(allModifiers, "note"),
@@ -83,15 +83,15 @@ export default class DamageActivity extends Activity {
 		 * A hook event that fires before damage is rolled.
 		 * @function blackFlag.preRollDamage
 		 * @memberof hookEvents
-		 * @param {DamageRollConfiguration[]} configs - Configuration data for the pending roll.
+		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRollDamage", rollConfigs, messageConfig, dialogConfig, this) === false ) return;
+		if ( Hooks.call("blackFlag.preRollDamage", rollConfig, messageConfig, dialogConfig, this) === false ) return;
 
-		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfigs, messageConfig, dialogConfig);
+		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, messageConfig, dialogConfig);
 		if ( !rolls ) return;
 
 		/**
@@ -112,18 +112,19 @@ export default class DamageActivity extends Activity {
 
 	/**
 	 * Create damage parts needed for the damage roll.
-	 * @param {DamageRollConfiguration[]} config - Custom config provided when calling rollDamage.
+	 * @param {DamageRollProcessConfiguration} config - Custom config provided when calling rollDamage.
 	 * @param {object} rollData - Item's starting roll data.
-	 * @returns {DamageRollConfiguration[]}
+	 * @returns {DamageRollProcessConfiguration}
 	 */
 	createDamageConfigs(config, rollData) {
-		const rollConfigs = [];
+		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.rolls = [];
 		for ( const damage of this.system.damage?.parts ?? [] ) {
 			const modifierData = { ...this.modifierData, type: "damage", damage };
 			const { parts, data } = buildRoll({
 				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
 			}, rollData);
-			rollConfigs.push(foundry.utils.mergeObject({
+			rollConfig.rolls.push(foundry.utils.mergeObject({
 				data,
 				modifierData,
 				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
@@ -136,6 +137,7 @@ export default class DamageActivity extends Activity {
 				}
 			}, config));
 		}
-		return rollConfigs;
+		rollConfig.rolls.concat(config.rolls ?? []);
+		return rollConfig;
 	}
 }

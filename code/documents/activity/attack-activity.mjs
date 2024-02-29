@@ -4,6 +4,7 @@ import DamageActivity from "./damage-activity.mjs";
 
 export default class AttackActivity extends DamageActivity {
 
+	/** @inheritDoc */
 	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
 		type: "attack",
 		dataModel: AttackData,
@@ -41,12 +42,14 @@ export default class AttackActivity extends DamageActivity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get hasDamage() {
 		return super.hasDamage || (this.system.damage.includeBaseDamage && !!this.item.system.damage?.formula);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get modifierData() {
 		return { type: "attack", ...super.modifierData };
 	}
@@ -162,8 +165,10 @@ export default class AttackActivity extends DamageActivity {
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	createDamageConfigs(config, rollData) {
-		const rollConfigs = super.createDamageConfigs(config, rollData);
+		const rollConfig = super.createDamageConfigs(config, rollData);
+		rollConfig.rolls ??= [];
 		if ( this.system.damage.includeBaseDamage && this.item.system.damage ) {
 			const ability = this.actor?.system.abilities[this.attackAbility];
 			const damage = this.item.system.damage;
@@ -172,7 +177,7 @@ export default class AttackActivity extends DamageActivity {
 				mod: ability?.mod,
 				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
 			}, rollData);
-			rollConfigs.unshift(foundry.utils.mergeObject({
+			rollConfig.rolls.unshift(foundry.utils.mergeObject({
 				data,
 				modifierData,
 				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
@@ -185,6 +190,6 @@ export default class AttackActivity extends DamageActivity {
 				}
 			}, config));
 		}
-		return rollConfigs;
+		return rollConfig;
 	}
 }

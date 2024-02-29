@@ -59,7 +59,7 @@ export default class HealingActivity extends Activity {
 
 	/**
 	 * Roll healing.
-	 * @param {DamageRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {DamageRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<DamageRoll[]|void>}
@@ -93,7 +93,7 @@ export default class HealingActivity extends Activity {
 		 * A hook event that fires before healing is rolled.
 		 * @function blackFlag.preRollHealing
 		 * @memberof hookEvents
-		 * @param {DamageRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {Activity} [activity] - Activity performing the roll.
@@ -101,7 +101,7 @@ export default class HealingActivity extends Activity {
 		 */
 		if ( Hooks.call("blackFlag.preRollHealing", rollConfig, messageConfig, dialogConfig, this) === false ) return;
 
-		const rolls = await CONFIG.Dice.DamageRoll.build([rollConfig], messageConfig, dialogConfig);
+		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, messageConfig, dialogConfig);
 		if ( !rolls ) return;
 
 		/**
@@ -122,9 +122,9 @@ export default class HealingActivity extends Activity {
 
 	/**
 	 * Create parts needed for the healing roll.
-	 * @param {DamageRollConfiguration[]} config - Custom config provided when calling rollHealing.
+	 * @param {DamageRollProcessConfiguration} config - Custom config provided when calling rollHealing.
 	 * @param {object} rollData - Item's starting roll data.
-	 * @returns {DamageRollConfiguration}
+	 * @returns {DamageRollProcessConfiguration}
 	 */
 	createHealingConfig(config, rollData) {
 		const ability = this.actor?.system.abilities[this.system.ability];
@@ -136,19 +136,18 @@ export default class HealingActivity extends Activity {
 			bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
 		}, rollData);
 
-		const rollConfig = foundry.utils.mergeObject({
+		const rollConfig = foundry.utils.mergeObject({ allowCritical: false }, config);
+		rollConfig.rolls = [{
 			data,
 			parts: healing.custom ? [healing.custom] : [healing.formula, ...(parts ?? [])],
 			options: {
-				allowCritical: false,
 				healingType: healing.type,
 				modifierData,
 				minimum: this.actor?.system.buildMinimum(
 					this.actor?.system.getModifiers(this.modifierData, "min", { rollData })
 				)
 			}
-		}, config);
-		rollConfig.parts = rollConfig.parts.concat(config.parts ?? []);
+		}].concat(config.rolls ?? []);
 
 		return rollConfig;
 	}
