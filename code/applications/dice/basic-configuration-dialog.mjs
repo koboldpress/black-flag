@@ -193,7 +193,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 
 		// If one of the buttons was clicked, finalize the roll, resolve the promise, and close
 		if ( event.type === "submit" ) {
-			const rolls = this._finalizeRolls(event.currentTarget.dataset.action);
+			const rolls = this._finalizeRolls(event.submitter?.dataset.action);
 			this.options.resolve?.(rolls);
 			this.close({ submit: false, force: true });
 		}

@@ -71,7 +71,7 @@ export default class SavingThrowActivity extends DamageActivity {
 
 	/**
 	 * Roll a saving throw.
-	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}

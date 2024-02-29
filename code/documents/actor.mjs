@@ -610,13 +610,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration information for an ability roll.
 	 *
-	 * @typedef {ChallengeRollConfiguration} AbilityRollConfiguration
+	 * @typedef {ChallengeRollProcessConfiguration} AbilityRollProcessConfiguration
 	 * @property {string} ability - The ability to be rolled.
 	 */
 
 	/**
 	 * Roll an ability check.
-	 * @param {AbilityRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {AbilityRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -626,19 +626,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if ( !ability ) return;
 		const rollData = this.getRollData();
 
-		const { parts, data } = buildRoll({
-			mod: ability.mod,
-			prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
-			bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
-		}, rollData);
-
-		const rollConfig = foundry.utils.mergeObject({
-			data,
+		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.origin = this;
+		rollConfig.rolls = [{
+			...buildRoll({
+				mod: ability.mod,
+				prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
+				bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
+			}, rollData),
 			options: {
 				minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData })
 			}
-		}, config);
-		rollConfig.parts = parts.concat(config.parts ?? []);
+		}].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.CheckSpecific", {
 			ability: game.i18n.localize(CONFIG.BlackFlag.abilities[config.ability].labels.full)
@@ -667,25 +666,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires before an ability check is rolled.
 		 * @function blackFlag.preRollAbilityCheck
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {AbilityRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAbilityCheck", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollAbilityCheck", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 
 		/**
 		 * A hook event that fires after an ability check has been rolled.
-		 * @function blackFlag.rollAbilityCheck
+		 * @function blackFlag.postRollAbilityCheck
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.rollAbilityCheck", this, rolls, config.ability);
+		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAbilityCheck", this, rolls, config.ability);
 
 		return rolls;
 	}
@@ -694,7 +692,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * Roll an ability saving throw.
-	 * @param {AbilityRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {AbilityRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -704,19 +702,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if ( !ability ) return;
 		const rollData = this.getRollData();
 
-		const { parts, data } = buildRoll({
-			mod: ability.mod,
-			prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
-			bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
-		}, rollData);
-
-		const rollConfig = foundry.utils.mergeObject({
-			data,
+		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.origin = this;
+		rollConfig.rolls = [{
+			...buildRoll({
+				mod: ability.mod,
+				prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
+				bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
+			}, rollData),
 			options: {
 				minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData })
 			}
-		}, config);
-		rollConfig.parts = parts.concat(config.parts ?? []);
+		}].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.SaveSpecificLong", {
 			ability: game.i18n.localize(CONFIG.BlackFlag.abilities[config.ability].labels.full)
@@ -745,25 +742,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires before an save check is rolled.
 		 * @function blackFlag.preRollAbilitySave
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {AbilityRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAbilitySave", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollAbilitySave", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 
 		/**
 		 * A hook event that fires after an ability save has been rolled.
-		 * @function blackFlag.rollAbilitySave
+		 * @function blackFlag.postRollAbilitySave
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.rollAbilitySave", this, rolls, config.ability);
+		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAbilitySave", this, rolls, config.ability);
 
 		return rolls;
 	}
@@ -773,14 +769,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration data for death saving throw rolls.
 	 *
-	 * @typedef {ChallengeRollConfiguration} DeathSaveRollConfiguration
+	 * @typedef {ChallengeRollProcessConfiguration} DeathSaveRollProcessConfiguration
 	 * @property {number} [successThreshold] - Number of successes required to stabilize.
 	 * @property {number} [failureThreshold] - Number of failures required to die.
 	 */
 
 	/**
 	 * Roll a death saving throw.
-	 * @param {DeathSaveRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {DeathSaveRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -791,22 +787,22 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const modifierData = { type: "death-save" };
 		const rollData = this.getRollData();
 
-		const { parts, data } = buildRoll({
-			bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-		}, rollData);
-
 		const rollConfig = foundry.utils.mergeObject({
-			data,
 			successThreshold: death.overrides.success
 				? death.overrides.success : CONFIG.BlackFlag.deathSave.successThreshold,
 			failureThreshold: death.overrides.failure
-				? death.overrides.failure : CONFIG.BlackFlag.deathSave.failureThreshold,
+				? death.overrides.failure : CONFIG.BlackFlag.deathSave.failureThreshold
+		}, config);
+		rollConfig.origin = this;
+		rollConfig.rolls = [{
+			...buildRoll({
+				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+			}, rollData),
 			options: {
 				minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
 				target: death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
 			}
-		}, config);
-		rollConfig.parts = parts.concat(config.parts ?? []);
+		}].concat(config.rolls ?? []);
 
 		const type = game.i18n.localize("BF.Death.Label[one]");
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
@@ -832,13 +828,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires before an death save is rolled for an Actor.
 		 * @function blackFlag.preRollDeathSave
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the death save is being rolled.
-		 * @param {DeathSaveRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {DeathSaveRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent death save from being rolled.
 		 */
-		if ( Hooks.call("blackFlag.preRollDeathSave", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollDeathSave", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 		if ( !rolls?.length ) return;
@@ -924,6 +919,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			ChatMessage.applyRollMode(chatData, roll.options.rollMode);
 			await ChatMessage.create(chatData);
 		}
+
+		/**
+		 * A hook event that fires after a death saving throw has been rolled and the actor has been updated.
+		 * @function blackFlag.postRollDeathSave
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the death saving throw has been rolled.
+		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 */
+		Hooks.callAll("blackFlag.postRollDeathSave", this, rolls);
 
 		return rolls;
 	}
@@ -1035,32 +1039,31 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Construct an initiative roll.
 	 * @param {ChallengeRollOptions} [options] - Options for the roll.
-	 * @returns {ChallengeRollConfiguration}
+	 * @returns {ChallengeRollProcessConfiguration}
 	 */
 	getInitiativeRollConfig(options={}) {
 		const init = this.system.attributes?.initiative ?? {};
 		const abilityKey = init.ability ?? CONFIG.BlackFlag.defaultAbilities.initiative;
 		const ability = this.system.abilities?.[abilityKey] ?? {};
 
-		const { parts, data } = buildRoll({
-			mod: ability.mod,
-			prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
-			bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
-			tiebreaker: (game.settings.get(game.system.id, "initiativeTiebreaker") && ability) ? ability.value / 100 : null
-		}, this.getRollData());
-
-		const rollOptions = foundry.utils.mergeObject({
-			minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
-		}, options);
-
-		const rollConfig = { data, parts, options: rollOptions };
+		const rollConfig = { rolls: [{
+			...buildRoll({
+				mod: ability.mod,
+				prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
+				bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
+				tiebreaker: (game.settings.get(game.system.id, "initiativeTiebreaker") && ability) ? ability.value / 100 : null
+			}, this.getRollData()),
+			options: foundry.utils.mergeObject({
+				minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
+			}, options)
+		}] };
 
 		/**
 		 * A hook event that fires when initiative roll configuration is being prepared.
 		 * @function blackFlag.initiativeConfig
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the initiative is being configured.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {ChallengeRollProcessConfiguration} config - Configuration data for the pending roll.
 		 */
 		Hooks.callAll("blackFlag.initiativeConfig", this, rollConfig);
 
@@ -1071,7 +1074,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * Present the initiative roll configuration dialog and then roll initiative.
-	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation (ignored).
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<Combat|void>}
@@ -1096,7 +1099,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if ( dialogConfig.configure ) {
 			let DialogClass = dialogConfig.applicationClass ?? Roll.DefaultConfigurationDialog;
 			try {
-				rolls = await DialogClass.configure([rollConfig], dialogConfig);
+				rolls = await DialogClass.configure(rollConfig, dialogConfig);
 			} catch(err) {
 				if ( !err ) return;
 				throw err;
@@ -1106,12 +1109,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		}
 
 		this._cachedInitiativeRolls = rolls;
-		await this.rollInitiative({createCombatants: true});
+		await this.rollInitiative({ createCombatants: true });
 		delete this._cachedInitiativeRolls;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async rollInitiative(options={}) {
 		/**
 		 * A hook event that fires before initiative is rolled for an Actor.
@@ -1144,14 +1148,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration information for a skill roll.
 	 *
-	 * @typedef {ChallengeRollConfiguration} SkillRollConfiguration
+	 * @typedef {ChallengeRollProcessConfiguration} SkillRollProcessConfiguration
 	 * @property {string} skill - The skill to roll.
 	 * @property {string} [ability] - The ability to be rolled with the skill.
 	 */
 
 	/**
 	 * Roll a skill check.
-	 * @param {SkillRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {SkillRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -1161,8 +1165,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if ( !skill ) return;
 		const rollData = this.getRollData();
 
-		const prepareSkillConfig = (baseConfig={}, formData={}) => {
-			const abilityId = formData.ability ?? baseConfig.ability ?? skill.ability;
+		const prepareSkillConfig = (baseConfig, rollConfig, formData, index) => {
+			const abilityId = formData?.ability ?? baseConfig.ability ?? skill.ability;
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
@@ -1170,25 +1174,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				{ type: "skill-check", ability: abilityId, skill: config.skill, proficiency: skill.proficiency.multiplier }
 			];
 
-			const { parts, data } = buildRoll({
-				mod: ability?.mod,
-				prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
-				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-			}, rollData);
-			data.abilityId = abilityId;
-
-			const rollConfig = foundry.utils.mergeObject(baseConfig, {
-				data,
+			rollConfig = foundry.utils.mergeObject(rollConfig, {
+				...buildRoll({
+					mod: ability?.mod,
+					prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
+					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+				}, rollData),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
 				}
-			}, { inplace: false });
-			rollConfig.parts = parts.concat(config.parts ?? []);
+			});
+			rollConfig.data.abilityId = abilityId;
 
 			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
 		};
 
-		const { rollConfig, rollNotes } = prepareSkillConfig(config);
+		const rollConfig = foundry.utils.deepClone(config);
+		const { rollConfig: roll, rollNotes } = prepareSkillConfig(rollConfig, {});
+		rollConfig.origin = this;
+		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Skill.Action.CheckSpecific", {
 			skill: game.i18n.localize(CONFIG.BlackFlag.skills[config.skill].label)
@@ -1201,7 +1205,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				speaker: ChatMessage.getSpeaker({ actor: this }),
 				"flags.black-flag.roll": {
 					type: "skill",
-					skill: config.skill
+					skill: rollConfig.skill
 				}
 			}
 		}, message);
@@ -1220,25 +1224,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires before a skill check is rolled.
 		 * @function blackFlag.preRollSkill
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {SkillRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollSkill", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollSkill", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 
 		/**
 		 * A hook event that fires after a skill check has been rolled.
-		 * @function blackFlag.rollSkill
+		 * @function blackFlag.postRollSkill
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.skills`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.rollSkill", this, rolls, config.skill);
+		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollSkill", this, rolls, config.skill);
 
 		return rolls;
 	}
@@ -1248,14 +1251,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration information for a tool roll.
 	 *
-	 * @typedef {ChallengeRollConfiguration} ToolRollConfiguration
+	 * @typedef {ChallengeRollProcessConfiguration} ToolRollProcessConfiguration
 	 * @property {string} tool - The tool to roll.
 	 * @property {string} [ability] - The ability to be rolled with the tool.
 	 */
 
 	/**
 	 * Roll a Tool check.
-	 * @param {ToolRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {ToolRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -1272,8 +1275,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		}
 		const rollData = this.getRollData();
 
-		const prepareToolConfig = (baseConfig={}, formData={}) => {
-			const abilityId = formData.ability ?? baseConfig.ability ?? tool.ability;
+		const prepareToolConfig = (baseConfig, rollConfig, formData, index) => {
+			const abilityId = formData?.ability ?? baseConfig.ability ?? tool.ability ?? "intelligence";
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
@@ -1281,25 +1284,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				{ type: "tool-check", ability: abilityId, tool: config.tool, proficiency: tool.proficiency.multiplier }
 			];
 
-			const { parts, data } = buildRoll({
-				mod: ability?.mod,
-				prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
-				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-			}, rollData);
-			data.abilityId = abilityId;
-
-			const rollConfig = foundry.utils.mergeObject(baseConfig, {
-				data,
+			rollConfig = foundry.utils.mergeObject(rollConfig, {
+				...buildRoll({
+					mod: ability?.mod,
+					prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
+					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+				}, rollData),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
 				}
-			}, { inplace: false });
-			rollConfig.parts = parts.concat(config.parts ?? []);
+			});
+			rollConfig.data.abilityId = abilityId;
 
 			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
 		};
 
-		const { rollConfig, rollNotes } = prepareToolConfig(config);
+		const rollConfig = foundry.utils.deepClone(config);
+		const { rollConfig: roll, rollNotes } = prepareToolConfig(rollConfig, {});
+		rollConfig.origin = this;
+		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
 			tool: game.i18n.localize(tool.label)
@@ -1312,7 +1315,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				speaker: ChatMessage.getSpeaker({ actor: this }),
 				"flags.black-flag.roll": {
 					type: "tool",
-					tool: config.tool
+					tool: rollConfig.tool
 				}
 			}
 		}, message);
@@ -1331,25 +1334,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires before a tool check is rolled.
 		 * @function blackFlag.preRollTool
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {ToolRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollTool", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollTool", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 
 		/**
 		 * A hook event that fires after a tool check has been rolled.
-		 * @function blackFlag.rollTool
+		 * @function blackFlag.postRollTool
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.tools`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.rollTool", this, rolls, config.tool);
+		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollTool", this, rolls, config.tool);
 
 		return rolls;
 	}

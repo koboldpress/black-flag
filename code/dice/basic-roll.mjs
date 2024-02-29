@@ -6,6 +6,7 @@ import BasicRollConfigurationDialog from "../applications/dice/basic-configurati
  * @typedef {object} BasicRollProcessConfiguration
  * @property {BasicRollConfiguration[]} rolls - Configuration data for individual rolls.
  * @property {Event} [event] - Event that triggered the rolling process.
+ * @property {Document|PseudoDocument} [origin] - Source of the roll.
  */
 
 /**

@@ -85,7 +85,7 @@ export default class AttackActivity extends DamageActivity {
 
 	/**
 	 * Roll an attack.
-	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
+	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
@@ -98,22 +98,21 @@ export default class AttackActivity extends DamageActivity {
 
 		const rollData = this.item.getRollData();
 
-		const { parts, data } = buildRoll({
-			mod: ability?.mod,
-			prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
-			bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
-		}, rollData);
-
-		const rollConfig = foundry.utils.mergeObject({
-			data,
+		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.origin = this;
+		rollConfig.rolls = [{
+			...buildRoll({
+				mod: ability?.mod,
+				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+			}, rollData),
 			options: {
 				// TODO: criticalSuccess: this.system.criticalThreshold
 				minimum: this.actor?.system.buildMinimum(
 					this.actor?.system.getModifiers(this.modifierData, "min"), { rollData }
 				)
 			}
-		}, config);
-		rollConfig.parts = parts.concat(config.parts ?? []);
+		}].concat(config.rolls ?? []);
 
 		const messageConfig = foundry.utils.mergeObject({
 			data: {
@@ -138,13 +137,12 @@ export default class AttackActivity extends DamageActivity {
 		 * A hook event that fires before an attack is rolled.
 		 * @function blackFlag.preRollAttack
 		 * @memberof hookEvents
-		 * @param {Activity} activity - Activity performing the attack.
-		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
+		 * @param {ChallengeRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAttack", this, rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollAttack", rollConfig, messageConfig, dialogConfig) === false ) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
 		if ( !rolls?.length ) return;
@@ -156,7 +154,7 @@ export default class AttackActivity extends DamageActivity {
 		 * @param {Activity} activity - Activity performing the attack.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 */
-		Hooks.callAll("blackFlag.rollAttack", this, rolls);
+		Hooks.callAll("blackFlag.postRollAttack", this, rolls);
 
 		return rolls;
 	}

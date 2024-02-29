@@ -33,7 +33,7 @@ export default class SkillRollConfigurationDialog extends ChallengeRollConfigura
 
 	/** @inheritDoc */
 	_buildConfig(config, formData, index) {
-		const { rollConfig, rollNotes } = this.options.buildConfig(config, formData);
+		const { rollConfig, rollNotes } = this.options.buildConfig(this.config, config, formData, index);
 		this.options.rollNotes = rollNotes;
 		return rollConfig;
 	}
