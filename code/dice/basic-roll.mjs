@@ -96,7 +96,7 @@ export default class BasicRoll extends Roll {
 	 * @param {BasicRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(config={}, message={}, dialog={}) {
+	static async build(config={}, dialog={}, message={}) {
 		this.applyKeybindings(config, message, dialog);
 
 		let rolls;

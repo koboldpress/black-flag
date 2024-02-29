@@ -427,6 +427,8 @@ async function rollDamage(event, speaker) {
 		rolls: [{ parts: [formula], type }]
 	};
 
+	const dialogConfig = {};
+
 	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.Damage.Label") });
 	const messageConfig = {
 		data: {
@@ -438,10 +440,8 @@ async function rollDamage(event, speaker) {
 		}
 	};
 
-	const dialogConfig = {};
-
-	if ( Hooks.call("blackFlag.preRollDamage", rollConfig, messageConfig, dialogConfig) === false ) return;
-	const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, messageConfig, dialogConfig);
+	if ( Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig) === false ) return;
+	const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
 	if ( rolls?.length ) Hooks.callAll("blackFlag.postRollDamage", rolls);
 }
 

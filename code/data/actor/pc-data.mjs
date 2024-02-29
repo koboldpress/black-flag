@@ -609,9 +609,9 @@ export default class PCData extends ActorDataModel.mixin(
 			 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 			 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 			 */
-			if ( Hooks.call("blackFlag.preRollLuck", this.parent, rollConfig, messageConfig, dialogConfig) === false ) return;
+			if ( Hooks.call("blackFlag.preRollLuck", this.parent, rollConfig, dialogConfig, messageConfig) === false ) return;
 
-			const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, messageConfig, dialogConfig);
+			const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
 
 			/**
 			 * A hook event that fires after luck has been re-rolled.

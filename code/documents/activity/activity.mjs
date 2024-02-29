@@ -157,23 +157,23 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Activate this activity.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 * @param {object} dialog - Configuration info for the configuration dialog.
+	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
-	async activate(config={}, message={}, dialog={}) {
+	async activate(config={}, dialog={}, message={}) {
 		// Prepare initial activation configuration
 		const activationConfig = foundry.utils.mergeObject({
 			consume: true
 		}, config);
 
+		const dialogConfig = foundry.utils.mergeObject({
+			configure: true // TODO: Automatically set based on whether item needs configuration
+		}, dialog);
+
 		const messageConfig = foundry.utils.mergeObject({
 			create: true,
 			data: {}
 		}, message);
-
-		const dialogConfig = foundry.utils.mergeObject({
-			configure: true // TODO: Automatically set based on whether item needs configuration
-		}, dialog);
 
 		// Call preActivate script & hooks
 		// TODO

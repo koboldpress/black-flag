@@ -60,13 +60,20 @@ export default class HealingActivity extends Activity {
 	/**
 	 * Roll healing.
 	 * @param {DamageRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
-	async rollHealing(config={}, message={}, dialog={}) {
+	async rollHealing(config={}, dialog={}, message={}) {
 		const rollData = this.item.getRollData();
 		const rollConfig = this.createHealingConfig(config, rollData);
+
+		const dialogConfig = foundry.utils.mergeObject({
+			options: {
+				rollNotes: this.actor?.system.getModifiers(rollConfig.modifierData, "note"),
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+			}
+		});
 
 		const messageConfig = foundry.utils.mergeObject({
 			data: {
@@ -82,26 +89,19 @@ export default class HealingActivity extends Activity {
 			}
 		}, message);
 
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.actor?.system.getModifiers(rollConfig.modifierData, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
-			}
-		});
-
 		/**
 		 * A hook event that fires before healing is rolled.
 		 * @function blackFlag.preRollHealing
 		 * @memberof hookEvents
 		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
-		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRollHealing", rollConfig, messageConfig, dialogConfig, this) === false ) return;
+		if ( Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig, this) === false ) return;
 
-		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, messageConfig, dialogConfig);
+		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
 		if ( !rolls ) return;
 
 		/**

@@ -86,11 +86,11 @@ export default class AttackActivity extends DamageActivity {
 	/**
 	 * Roll an attack.
 	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollAttack(config={}, message={}, dialog={}) {
+	async rollAttack(config={}, dialog={}, message={}) {
 		// Determine which ability to use with the attack
 		const ability = this.actor?.system.abilities[this.attackAbility];
 
@@ -114,6 +114,13 @@ export default class AttackActivity extends DamageActivity {
 			}
 		}].concat(config.rolls ?? []);
 
+		const dialogConfig = foundry.utils.mergeObject({
+			options: {
+				rollNotes: this.actor?.system.getModifiers(this.modifierData, "note"),
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+			}
+		});
+
 		const messageConfig = foundry.utils.mergeObject({
 			data: {
 				title: `${this.name}: ${this.item.actor?.name ?? ""}`,
@@ -126,25 +133,18 @@ export default class AttackActivity extends DamageActivity {
 			}
 		}, message);
 
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.actor?.system.getModifiers(this.modifierData, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
-			}
-		});
-
 		/**
 		 * A hook event that fires before an attack is rolled.
 		 * @function blackFlag.preRollAttack
 		 * @memberof hookEvents
 		 * @param {ChallengeRollProcessConfiguration} config - Configuration data for the pending roll.
-		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAttack", rollConfig, messageConfig, dialogConfig) === false ) return;
+		if ( Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false ) return;
 
-		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, messageConfig, dialogConfig);
+		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 		if ( !rolls?.length ) return;
 
 		/**

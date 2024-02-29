@@ -72,11 +72,11 @@ export default class SavingThrowActivity extends DamageActivity {
 	/**
 	 * Roll a saving throw.
 	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollSavingThrow(config={}, message={}, dialog={}) {
+	async rollSavingThrow(config={}, dialog={}, message={}) {
 		// Determine DC based on settings & the actor to whom the activity belongs
 		const rollData = this.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.savingThrowAbility];

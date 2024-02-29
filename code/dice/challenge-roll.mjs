@@ -80,7 +80,7 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @param {ChallengeRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(config={}, message={}, dialog={}) {
+	static async build(config={}, dialog={}, message={}) {
 		for ( const roll of config.rolls ?? [] ) {
 			roll.options ??= {};
 			roll.options.criticalSuccess ??= CONFIG.Dice.ChallengeDie.CRITICAL_SUCCESS_TOTAL;
