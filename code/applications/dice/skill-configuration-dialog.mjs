@@ -5,6 +5,7 @@ import ChallengeConfigurationDialog from "./challenge-configuration-dialog.mjs";
  */
 export default class SkillConfigurationDialog extends ChallengeConfigurationDialog {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/dice/skill-roll-dialog.hbs"
@@ -15,6 +16,7 @@ export default class SkillConfigurationDialog extends ChallengeConfigurationDial
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options={}) {
 		return foundry.utils.mergeObject({
 			abilities: Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, ability]) => {
@@ -29,6 +31,7 @@ export default class SkillConfigurationDialog extends ChallengeConfigurationDial
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	buildConfig(config, formData) {
 		const { rollConfig, rollNotes } = this.options.buildConfig(config, formData);
 		this.options.rollNotes = rollNotes;

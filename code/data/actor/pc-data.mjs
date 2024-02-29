@@ -604,21 +604,21 @@ export default class PCData extends ActorDataModel.mixin(
 			 * @function blackFlag.preRollLuck
 			 * @memberof hookEvents
 			 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
-			 * @param {BaseRollConfiguration} config - Configuration data for the pending roll.
-			 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-			 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+			 * @param {BasicRollConfiguration} config - Configuration data for the pending roll.
+			 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+			 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 			 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 			 */
 			if ( Hooks.call("blackFlag.preRollLuck", this.parent, rollConfig, messageConfig, dialogConfig) === false ) return;
 
-			const rolls = await CONFIG.Dice.BaseRoll.build(rollConfig, messageConfig, dialogConfig);
+			const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, messageConfig, dialogConfig);
 
 			/**
 			 * A hook event that fires after luck has been re-rolled.
 			 * @function blackFlag.rollLuck
 			 * @memberof hookEvents
 			 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
-			 * @param {BaseRoll[]} rolls - The resulting rolls.
+			 * @param {BasicRoll[]} rolls - The resulting rolls.
 			 */
 			if ( rolls?.length ) Hooks.callAll("blackFlag.rollLuck", this.parent, rolls);
 

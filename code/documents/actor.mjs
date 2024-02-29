@@ -330,7 +330,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @property {object} deltas.hitDice - Hit dice spent or recovered during the rest, grouped by size.
 	 * @property {object} actorUpdates - Updates applied to the actor.
 	 * @property {object[]} itemUpdates - Updates applied to the actor's items.
-	 * @property {BaseRoll[]} rolls - Any rolls that occurred during the rest process, not including hit dice.
+	 * @property {BasicRoll[]} rolls - Any rolls that occurred during the rest process, not including hit dice.
 	 */
 
 	/**
@@ -617,8 +617,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll an ability check.
 	 * @param {AbilityRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAbilityCheck(config={}, message={}, dialog={}) {
@@ -669,8 +669,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollAbilityCheck", this, rollConfig, messageConfig, dialogConfig) === false ) return;
@@ -695,8 +695,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll an ability saving throw.
 	 * @param {AbilityRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAbilitySave(config={}, message={}, dialog={}) {
@@ -747,8 +747,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollAbilitySave", this, rollConfig, messageConfig, dialogConfig) === false ) return;
@@ -781,8 +781,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll a death saving throw.
 	 * @param {DeathSaveRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollDeathSave(config={}, message={}, dialog={}) {
@@ -834,8 +834,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the death save is being rolled.
 		 * @param {DeathSaveRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent death save from being rolled.
 		 */
 		if ( Hooks.call("blackFlag.preRollDeathSave", this, rollConfig, messageConfig, dialogConfig) === false ) return;
@@ -933,7 +933,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Configuration data for a hit die roll.
 	 *
-	 * @typedef {BaseRollConfiguration} HitDieRollConfiguration
+	 * @typedef {BasicRollConfiguration} HitDieRollConfiguration
 	 * @property {number} [denomination] - Denomination of hit dice to roll.
 	 * @property {boolean} [modifySpentHitDie=true] - Should the actor's spent hit die count be updated?
 	 * @property {boolean} [modifyHitPoints=true] - Should the actor's hit points be updated after the roll?
@@ -942,9 +942,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll one of the actor's hit die and add its value to their health.
 	 * @param {HitDieRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
-	 * @returns {Promise<BaseRoll[]|void>}
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @returns {Promise<BasicRoll[]|void>}
 	 */
 	async rollHitDie(config={}, message={}, dialog={}) {
 		// If no denomination is chosen, use the highest HD that is available
@@ -997,13 +997,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 		 * @param {HitDieRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollHitDie", this, rollConfig, messageConfig, dialogConfig) === false ) return;
 
-		const rolls = await CONFIG.Dice.BaseRoll.build(rollConfig, messageConfig, dialogConfig);
+		const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, messageConfig, dialogConfig);
 
 		const updates = {};
 		if ( rollConfig.modifySpentHitDie !== false ) {
@@ -1020,7 +1020,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @function blackFlag.rollHitDie
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
-		 * @param {BaseRoll[]} rolls - The resulting rolls.
+		 * @param {BasicRoll[]} rolls - The resulting rolls.
 		 * @param {object} updates - Updates that will be applied to the actor.
 		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
 		 */
@@ -1073,8 +1073,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Present the initiative roll configuration dialog and then roll initiative.
 	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} message - Configuration data that guides roll message creation (ignored).
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} message - Configuration data that guides roll message creation (ignored).
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<Combat|void>}
 	 */
 	async configureInitiativeRoll(config={}, message={}, dialog={}) {
@@ -1153,8 +1153,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll a skill check.
 	 * @param {SkillRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollSkill(config={}, message={}, dialog={}) {
@@ -1223,8 +1223,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollSkill", this, rollConfig, messageConfig, dialogConfig) === false ) return;
@@ -1257,8 +1257,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/**
 	 * Roll a Tool check.
 	 * @param {ToolRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollTool(config={}, message={}, dialog={}) {
@@ -1334,8 +1334,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollTool", this, rollConfig, messageConfig, dialogConfig) === false ) return;

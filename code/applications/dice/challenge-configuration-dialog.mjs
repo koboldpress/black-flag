@@ -1,10 +1,19 @@
 import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
 
 /**
+ * @typedef {BasicRollConfigurationDialogOptions} ChallengeRollConfigurationDialogOptions
+ * @property {boolean} [chooseAbility=false] - Should the ability selector be shown?
+ */
+
+/**
  * Roll configuration dialog for Challenge Rolls.
+ *
+ * @param {ChallengeRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
+ * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class ChallengeConfigurationDialog extends BaseConfigurationDialog {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			rollType: CONFIG.Dice.ChallengeRoll
@@ -12,9 +21,10 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getButtons() {
 		return {
 			advantage: { label: game.i18n.localize("BF.Roll.Action.Advantage.Label") },
@@ -25,6 +35,7 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options={}) {
 		const context = super.getData(options);
 		context.rollNotes.forEach(n => {
@@ -44,10 +55,11 @@ export default class ChallengeConfigurationDialog extends BaseConfigurationDialo
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	finalizeRolls(action) {
 		const rolls = [];
 		for ( const roll of this.rolls ) {
-			switch (action) {
+			switch ( action ) {
 				case "advantage":
 					roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
 					break;

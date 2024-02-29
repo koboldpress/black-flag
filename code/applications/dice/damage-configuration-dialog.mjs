@@ -5,6 +5,7 @@ import BaseConfigurationDialog from "./base-configuration-dialog.mjs";
  */
 export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/dice/damage-roll-dialog.hbs",
@@ -16,6 +17,7 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getButtons() {
 		const buttons = {
 			critical: { label: game.i18n.localize("BF.Roll.Action.Critical.Label") },
@@ -27,6 +29,7 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options={}) {
 		return foundry.utils.mergeObject({
 			damageTypes: this.options.damageTypes ? Object.fromEntries(Object.entries(CONFIG.BlackFlag.damageTypes)
@@ -40,6 +43,7 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	finalizeRolls(action) {
 		const rolls = [];
 		for ( const roll of this.rolls ) {
@@ -52,6 +56,7 @@ export default class DamageConfigurationDialog extends BaseConfigurationDialog {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	buildConfig(config, formData) {
 		if ( formData.damageType ) config.options.type = formData.damageType;
 		return config;

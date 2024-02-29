@@ -1,35 +1,35 @@
 <form class="dialog-content" autocomplete="off">
 	<fieldset class="formulas">
-		<legend>{{localize "BF.Roll.Formula.Label"}}</legend>
+		<legend>{{ localize "BF.Roll.Formula.Label" }}</legend>
 		<ul class="formulas">
 			{{#each rolls}}
 				<li class="formula">
-					<span class="formula-text">{{this.formula}}</span>
+					<span class="formula-text">{{ formula }}</span>
 				</li>
 			{{/each}}
 		</ul>
 		<label>
-			<span>{{localize "BF.Roll.ExtraTerms.Label"}}</span>
-			<input type="text" name="situational" value="{{situational}}" placeholder="">
+			<span>{{ localize "BF.Roll.ExtraTerms.Label" }}</span>
+			<input type="text" name="situational" value="{{ situational }}" placeholder="">
 		</label>
 	</fieldset>
 
 	<fieldset>
-		<legend>{{localize "BF.Roll.Configuration.LabelGeneric"}}</legend>
+		<legend>{{ localize "BF.Roll.Configuration.LabelGeneric" }}</legend>
 		<label>
-			<span>{{localize "BF.Roll.Mode.Label"}}</span>
+			<span>{{ localize "BF.Roll.Mode.Label" }}</span>
 			<select name="rollMode">
-				{{selectOptions rollModes selected=default.rollMode localize=true}}
+				{{ selectOptions rollModes selected=default.rollMode localize=true }}
 			</select>
 		</label>
 	</fieldset>
 
-	{{> "blackFlag.roll-notes"}}
+	{{> "blackFlag.roll-notes" }}
 
 	<nav class="dialog-buttons">
 		<ul>
-			{{#each buttons as |button action|}}
-				<li><button data-action="{{action}}">{{{button.icon}}} {{{button.label}}}</button></li>
+			{{#each buttons}}
+				<li><button data-action="{{ @key }}">{{{ icon }}} {{{ label }}}</button></li>
 			{{/each}}
 		</ul>
 	</nav>

@@ -83,8 +83,8 @@ export default class AttackActivity extends DamageActivity {
 	/**
 	 * Roll an attack.
 	 * @param {ChallengeRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config={}, message={}, dialog={}) {
@@ -137,8 +137,8 @@ export default class AttackActivity extends DamageActivity {
 		 * @memberof hookEvents
 		 * @param {Activity} activity - Activity performing the attack.
 		 * @param {ChallengeRollConfiguration} config - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
 		if ( Hooks.call("blackFlag.preRollAttack", this, rollConfig, messageConfig, dialogConfig) === false ) return;

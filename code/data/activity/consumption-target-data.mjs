@@ -64,7 +64,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/**
 	 * Resolve the provided cost formula as a dice roll.
 	 * @param {string} formula - Cost formula to resolve.
-	 * @returns {BaseRoll}
+	 * @returns {BasicRoll}
 	 */
 	async resolveCost(formula) {
 		const roll = new Roll(formula, this.parent.item.getRollData());

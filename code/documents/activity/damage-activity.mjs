@@ -48,8 +48,8 @@ export default class DamageActivity extends Activity {
 	/**
 	 * Roll damage.
 	 * @param {DamageRollConfiguration} [config] - Configuration information for the roll.
-	 * @param {BaseMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @param {BaseDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollDamage(config={}, message={}, dialog={}) {
@@ -84,8 +84,8 @@ export default class DamageActivity extends Activity {
 		 * @function blackFlag.preRollDamage
 		 * @memberof hookEvents
 		 * @param {DamageRollConfiguration[]} configs - Configuration data for the pending roll.
-		 * @param {BaseMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {BaseDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */

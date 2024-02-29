@@ -76,7 +76,7 @@ export default class UsesField extends SchemaField {
 		if ( recoveryProfile.type === "recoverAll" ) updates.spent = 0;
 		else if ( recoveryProfile.type === "loseAll" ) updates.spent = data.max ? data.max : -data.min;
 		else if ( recoveryProfile.formula ) {
-			const roll = new CONFIG.Dice.BaseRoll(recoveryProfile.formula, rollData);
+			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData);
 			await roll.evaluate();
 			updates.spent = Math.clamped(data.spent - roll.total, 0, data.max - data.min);
 			if ( !roll.isDeterministic ) rolls.push(roll);

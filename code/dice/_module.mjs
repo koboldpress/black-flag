@@ -1,5 +1,5 @@
 import { log } from "../utils/_module.mjs";
-import BaseRoll from "./base-roll.mjs";
+import BasicRoll from "./basic-roll.mjs";
 import ChallengeDie from "./challenge-die.mjs";
 import ChallengeRoll from "./challenge-roll.mjs";
 import DamageRoll from "./damage-roll.mjs";
@@ -10,16 +10,16 @@ import DamageRoll from "./damage-roll.mjs";
 export function registerDice() {
 	log("Registering roll & die types");
 
-	CONFIG.Dice.BaseRoll = BaseRoll;
+	CONFIG.Dice.BasicRoll = BasicRoll;
 	CONFIG.Dice.ChallengeDie = ChallengeDie;
 	CONFIG.Dice.ChallengeRoll = ChallengeRoll;
 	CONFIG.Dice.DamageRoll = DamageRoll;
 	CONFIG.Dice.types.push(ChallengeDie);
-	CONFIG.Dice.rolls = [BaseRoll, ChallengeRoll, DamageRoll];
+	CONFIG.Dice.rolls = [BasicRoll, ChallengeRoll, DamageRoll];
 }
 
 export {
-	BaseRoll,
+	BasicRoll,
 	ChallengeDie,
 	ChallengeRoll,
 	DamageRoll

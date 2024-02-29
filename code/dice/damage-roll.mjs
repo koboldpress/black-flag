@@ -1,18 +1,18 @@
 import DamageConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils/_module.mjs";
-import BaseRoll from "./base-roll.mjs";
+import BasicRoll from "./basic-roll.mjs";
 
 /**
  * Damage roll configuration data.
  *
- * @typedef {BaseRollConfiguration} DamageRollConfiguration
+ * @typedef {BasicRollConfiguration} DamageRollConfiguration
  * @property {DamageRollOptions} [options] - Options passed through to the roll.
  */
 
 /**
  * Options that describe a challenge roll.
  *
- * @typedef {BaseRollOptions} DamageRollOptions
+ * @typedef {BasicRollOptions} DamageRollOptions
  * @property {boolean} [allowCritical=true] - Should critical damage be allowed?
  * @property {boolean} [critical] - Does this roll do critical damage?
  * @property {number} [multiplier=2] - Amount by which to multiply critical damage.
@@ -24,13 +24,15 @@ import BaseRoll from "./base-roll.mjs";
  * @property {string} [type] - Type of damage represented.
  */
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
 /**
  * Roll used for damage with helpers for calculating critical damage.
  * @param {string} formula - The formula used to construct the roll.
  * @param {object} data - The roll data used to resolve the formula.
  * @param {DamageRollOptions} options - Additional options that describe the challenge roll.
  */
-export default class DamageRoll extends BaseRoll {
+export default class DamageRoll extends BasicRoll {
 	constructor(formula, data, options={}) {
 		super(formula, data, options);
 		if ( !this.options.preprocessed ) this.#preprocessFormula();
@@ -39,10 +41,12 @@ export default class DamageRoll extends BaseRoll {
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	static DefaultConfigurationDialog = DamageConfigurationDialog;
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	static CHAT_TEMPLATE = "systems/black-flag/templates/dice/damage-roll.hbs";
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -52,7 +56,7 @@ export default class DamageRoll extends BaseRoll {
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default critical mode should be.
 	 * @param {DamageRollConfiguration} config - Roll configuration data.
-	 * @param {BaseDialogConfiguration} options - Data for the roll configuration dialog.
+	 * @param {BasicRollDialogConfiguration} options - Data for the roll configuration dialog.
 	 */
 	static applyKeybindings(config, options) {
 		const keys = {
@@ -218,6 +222,7 @@ export default class DamageRoll extends BaseRoll {
 	/*  Chat Messages                            */
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	async render({flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={}) {
 		if ( !this._evaluated ) await this.evaluate({async: true});
 

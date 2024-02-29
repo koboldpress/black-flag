@@ -81,7 +81,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	 * Perform any item & activity uses recovery for a certain period.
 	 * @param {string[]} periods - Recovery periods to check.
 	 * @param {object} rollData - Roll data to use when evaluating recovery formulas.
-	 * @returns {{updates: object, rolls: BaseRoll[]}}
+	 * @returns {{updates: object, rolls: BasicRoll[]}}
 	 */
 	async recoverUses(periods, rollData) {
 		const updates = {};

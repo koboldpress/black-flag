@@ -1,11 +1,11 @@
 import ChallengeConfigurationDialog from "../applications/dice/challenge-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils/_module.mjs";
-import BaseRoll from "./base-roll.mjs";
+import BasicRoll from "./basic-roll.mjs";
 
 /**
  * Challenge roll configuration data.
  *
- * @typedef {BaseRollConfiguration} ChallengeRollConfiguration
+ * @typedef {BasicRollConfiguration} ChallengeRollConfiguration
  * @property {string[]} [parts=[]] - Parts used to construct the roll formula, not including the challenge die.
  * @property {ChallengeRollOptions} [options] - Options passed through to the roll.
  */
@@ -13,7 +13,7 @@ import BaseRoll from "./base-roll.mjs";
 /**
  * Options that describe a challenge roll.
  *
- * @typedef {BaseRollOptions} ChallengeRollOptions
+ * @typedef {BasicRollOptions} ChallengeRollOptions
  * @property {boolean} [advantage] - Is the roll granted advantage?
  * @property {boolean} [disadvantage] - Is the roll granted disadvantage?
  * @property {number} [criticalSuccess] - The value of the challenge die to be considered a critical success.
@@ -21,15 +21,14 @@ import BaseRoll from "./base-roll.mjs";
  * @property {number} [minimum] - Minimum number the challenge die can roll.
  */
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
 /**
- * @typedef {BaseDialogConfiguration} ChallengeDialogConfiguration
+ * @typedef {BasicRollDialogConfiguration} ChallengeRollDialogConfiguration
  * @property {ChallengeConfigurationDialogOptions} [options] - Configuration options.
  */
 
-/**
- * @typedef {BaseConfigurationDialogOptions} ChallengeConfigurationDialogOptions
- * @property {boolean} [chooseAbility=false] - Should the ability selector be shown?
- */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Roll used for challenges and contests, usually using a D20, such as attacks, checks, and saves.
@@ -37,7 +36,7 @@ import BaseRoll from "./base-roll.mjs";
  * @param {object} data - The roll data used to resolve the formula.
  * @param {ChallengeRollOptions} options - Additional options that describe the challenge roll.
  */
-export default class ChallengeRoll extends BaseRoll {
+export default class ChallengeRoll extends BasicRoll {
 	constructor(formula, data, options={}) {
 		super(formula, data, options);
 		this.#createChallengeDie();
@@ -46,6 +45,7 @@ export default class ChallengeRoll extends BaseRoll {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static DefaultConfigurationDialog = ChallengeConfigurationDialog;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -67,9 +67,9 @@ export default class ChallengeRoll extends BaseRoll {
 	/**
 	 * Construct and perform a Challenge Roll through the standard workflow.
 	 * @param {ChallengeRollConfiguration|ChallengeRollConfiguration[]} [configs={}] - Roll configuration data.
-	 * @param {BaseMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
-	 * @param {ChallengeDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
-	 * @returns {BaseRoll[]} - Any rolls created.
+	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
+	 * @param {ChallengeRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
+	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
 	static async build(configs={}, message={}, dialog={}) {
 		if ( foundry.utils.getType(configs) === "Object" ) configs = [configs];
@@ -86,7 +86,7 @@ export default class ChallengeRoll extends BaseRoll {
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default advantage mode should be.
 	 * @param {ChallengeRollConfiguration} config - Roll configuration data.
-	 * @param {BaseDialogConfiguration} options - Data for the roll configuration dialog.
+	 * @param {BasicRollDialogConfiguration} options - Data for the roll configuration dialog.
 	 */
 	static applyKeybindings(config, options) {
 		const keys = {

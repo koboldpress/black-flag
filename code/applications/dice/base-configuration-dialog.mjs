@@ -1,8 +1,20 @@
 /**
+ * Dialog rendering options for roll configuration dialogs.
+ *
+ * @typedef {DialogOptions} BasicRollConfigurationDialogOptions
+ * @property {object} default
+ * @property {number} default.rollMode - The roll mode that is selected by default.
+ * @property {typeof BasicRoll} rollType - Roll type to use when constructing final roll.
+ * @property {Modifier[]} rollNotes - Notes to display with the roll.
+ * @property {*} resolve - Method to call when resolving successfully.
+ * @property {*} reject - Method to call when the dialog is closed or process fails.
+ */
+
+/**
  * Roll configuration dialog.
  *
- * @param {BaseRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
- * @param {BaseConfigurationDialogOptions} [options={}] - Dialog rendering options.
+ * @param {BasicRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
+ * @param {BasicRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class BaseConfigurationDialog extends FormApplication {
 	constructor(rollConfig=[], options={}) {
@@ -10,7 +22,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 		/**
 		 * Roll configurations.
-		 * @type {BaseRollConfiguration[]}
+		 * @type {BasicRollConfiguration[]}
 		 */
 		Object.defineProperty(this, "rollConfig", { value: rollConfig, writable: false, enumerable: true });
 
@@ -19,6 +31,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/dice/base-roll-dialog.hbs",
@@ -27,7 +40,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 			submitOnChange: true,
 			closeOnSubmit: false,
 			jQuery: false,
-			rollType: CONFIG.Dice.BaseRoll
+			rollType: CONFIG.Dice.BasicRoll
 		});
 	}
 
@@ -35,7 +48,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/**
 	 * The rolls being configured.
-	 * @type {BaseRoll[]}
+	 * @type {BasicRoll[]}
 	 */
 	get rolls() {
 		return this.object;
@@ -43,6 +56,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return this.options.title || game.i18n.localize("BF.Roll.Configuration.LabelGeneric");
 	}
@@ -53,11 +67,11 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/**
 	 * A helper constructor that displays the roll configuration dialog.
-	 * @param {BaseRollConfiguration[]} [rollConfig] - Initial roll configuration.
-	 * @param {BaseDialogConfiguration} [options] - Configuration information for the dialog.
+	 * @param {BasicRollConfiguration[]} [rollConfig] - Initial roll configuration.
+	 * @param {BasicRollDialogConfiguration} [options] - Configuration information for the dialog.
 	 * @returns {Promise}
 	 */
-	static async configure(rollConfig={}, options={}) {
+	static async configure(rollConfig=[], options={}) {
 		return new Promise((resolve, reject) => {
 			new this(
 				rollConfig,
@@ -67,7 +81,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -85,6 +99,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options={}) {
 		return foundry.utils.mergeObject({
 			CONFIG: CONFIG.BlackFlag,
@@ -101,6 +116,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -111,6 +127,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async close(options={}) {
 		this.options.reject?.();
 		return super.close(options);
@@ -121,7 +138,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 	/**
 	 * Final roll preparation based on the pressed button.
 	 * @param {string} action - That button that was pressed.
-	 * @returns {BaseRoll[]}
+	 * @returns {BasicRoll[]}
 	 */
 	finalizeRolls(action) {
 		return this.rolls;
@@ -129,6 +146,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	submit(button, event) {
 		event?.preventDefault();
 		super.submit(button, event);
@@ -138,9 +156,9 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/**
 	 * Type-specific roll configuration.
-	 * @param {BaseRollConfiguration} config - Roll configuration data.
+	 * @param {BasicRollConfiguration} config - Roll configuration data.
 	 * @param {object} formData - Data provided by the configuration form.
-	 * @returns {BaseRollConfiguration}
+	 * @returns {BasicRollConfiguration}
 	 */
 	buildConfig(config, formData) {
 		return config;
@@ -150,9 +168,9 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/**
 	 * Prepare individual config in order to build rolls.
-	 * @param {BaseRollConfiguration} config - Roll configuration data.
+	 * @param {BasicRollConfiguration} config - Roll configuration data.
 	 * @param {object} formData - Data provided by the configuration form.
-	 * @returns {BaseRollConfiguration}
+	 * @returns {BasicRollConfiguration}
 	 */
 	_prepareConfig(config, formData) {
 		config = foundry.utils.mergeObject({parts: [], data: {}, options: {}}, config);
@@ -174,9 +192,9 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/**
 	 * Build a roll from the provided config.
-	 * @param {BaseRollConfiguration[]} configs - Roll configuration data.
-	 * @param {object} formData - Data provided by the configuration form.
-	 * @returns {BaseRoll[]}
+	 * @param {BasicRollConfiguration[]} configs - Roll configuration data.
+	 * @param {object} [formData={}] - Data provided by the configuration form.
+	 * @returns {BasicRoll[]}
 	 */
 	_buildRolls(configs, formData={}) {
 		const RollType = this.options.rollType ?? Roll;
@@ -197,6 +215,7 @@ export default class BaseConfigurationDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_updateObject(event, formData) {
 		this.object = this._buildRolls(foundry.utils.deepClone(this.rollConfig), formData);
 		this.render();
