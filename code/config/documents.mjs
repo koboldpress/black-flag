@@ -71,7 +71,8 @@ export const _documentCategories = {
 		summaries: {
 			types: [
 				journalTypes.ClassJournalPageData,
-				journalTypes.SubclassJournalPageData
+				journalTypes.SubclassJournalPageData,
+				journalTypes.RuleJournalPageData
 			]
 		}
 	}

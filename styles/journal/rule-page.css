@@ -1,0 +1,23 @@
+.journal-entry-page.rule.sheet {
+	min-block-size: 550px;
+	min-inline-size: 450px;
+
+	.editor:first-of-type { flex: 2; }
+	.separator {
+		flex: 0 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-block-start: 2px dashed var(--bf-color-border-blue);
+		padding-block: 6px;
+		padding-inline: 12px;
+
+		h3 {
+			border: none;
+			margin: 0;
+		}
+		select {
+			min-inline-size: 8em;
+		}
+	}
+}

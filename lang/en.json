@@ -286,29 +286,53 @@
 "BF.Ammunition.Type.SlingBullet[one]": "Sling Bullet",
 "BF.Ammunition.Type.SlingBullet[other]": "Sling Bullets",
 
-"BF.AreaOfEffect.Label": "Area of Effect",
-"BF.AreaOfEffect.Size.Label": "Size",
-"BF.AreaOfEffect.Size.Height.Label": "Height",
-"BF.AreaOfEffect.Size.Length.Label": "Length",
-"BF.AreaOfEffect.Size.Radius.Label": "Radius",
-"BF.AreaOfEffect.Size.Width.Label": "Width",
-"BF.AreaOfEffect.Type.Label": "Area Type",
-"BF.AreaOfEffect.Type.Cone.Label[one]": "Cone",
-"BF.AreaOfEffect.Type.Cone.Label[other]": "Cones",
-"BF.AreaOfEffect.Type.Cube.Label[one]": "Cube",
-"BF.AreaOfEffect.Type.Cube.Label[other]": "Cubes",
-"BF.AreaOfEffect.Type.Cylinder.Label[one]": "Cylinder",
-"BF.AreaOfEffect.Type.Cylinder.Label[other]": "Cylinders",
-"BF.AreaOfEffect.Type.Individual.Label": "Individual",
-"BF.AreaOfEffect.Type.Line.Label[one]": "Line",
-"BF.AreaOfEffect.Type.Line.Label[other]": "Lines",
-"BF.AreaOfEffect.Type.Radius.Label[one]": "Radius",
-"BF.AreaOfEffect.Type.Radius.Label[other]": "Radii",
-"BF.AreaOfEffect.Type.Sphere.Label[one]": "Sphere",
-"BF.AreaOfEffect.Type.Sphere.Label[other]": "Spheres",
-"BF.AreaOfEffect.Type.Square.Label[one]": "Square",
-"BF.AreaOfEffect.Type.Square.Label[other]": "Squares",
-"BF.AreaOfEffect.Units.Label": "Area Units",
+"BF.AreaOfEffect": {
+	"Label": "Area of Effect",
+	"Size": {
+		"Label": "Size",
+		"Height.Label": "Height",
+		"Length.Label": "Length",
+		"Radius.Label": "Radius",
+		"Width.Label": "Width"
+	},
+	"Type": {
+		"Label": "Area Type",
+		"Cone": {
+			"Label[one]": "Cone",
+			"Label[other]": "Cones"
+		},
+		"Cube": {
+			"Label[one]": "Cube",
+			"Label[other]": "Cubes"
+		},
+		"Cylinder": {
+			"Label[one]": "Cylinder",
+			"Label[other]": "Cylinders"
+		},
+		"Individual": {
+			"Label": "Individual"
+		},
+		"Line": {
+			"Label[one]": "Line",
+			"Label[other]": "Lines"
+		},
+		"Radius": {
+			"Label[one]": "Radius",
+			"Label[other]": "Radii"
+		},
+		"Sphere": {
+			"Label[one]": "Sphere",
+			"Label[other]": "Spheres"
+		},
+		"Square": {
+			"Label[one]": "Square",
+			"Label[other]": "Squares"
+		}
+	},
+	"Units": {
+		"Label": "Area Units"
+	}
+},
 
 "BF.Armor.Label[one]": "Armor",
 "BF.Armor.Label[other]": "Armor",
@@ -500,40 +524,76 @@
 "BF.Container.Warning.MaxDepth": "Containers cannot be nested more than {depth} levels deep.",
 "BF.Container.Warning.Recursive": "Containers cannot contain themselves.",
 
-"BF.CreatureType.Label": "Creature Type",
-"BF.CreatureType.Swarm.Label": "Swarm Size",
-"BF.CreatureType.Swarm.Hint": "Size of individual creatures within a swarm.",
-"BF.CreatureType.Swarm.Phrase": "Swarm of {size} {type}",
-"BF.CreatureType.Tag.Label": "Type Tags",
-"BF.CreatureType.Type.Label": "Type",
-"BF.CreatureType.Type.Aberration.Label[one]": "Aberration",
-"BF.CreatureType.Type.Aberration.Label[other]": "Aberrations",
-"BF.CreatureType.Type.Beast.Label[one]": "Beast",
-"BF.CreatureType.Type.Beast.Label[other]": "Beasts",
-"BF.CreatureType.Type.Celestial.Label[one]": "Celestial",
-"BF.CreatureType.Type.Celestial.Label[other]": "Celestials",
-"BF.CreatureType.Type.Construct.Label[one]": "Construct",
-"BF.CreatureType.Type.Construct.Label[other]": "Constructs",
-"BF.CreatureType.Type.Dragon.Label[one]": "Dragon",
-"BF.CreatureType.Type.Dragon.Label[other]": "Dragons",
-"BF.CreatureType.Type.Elemental.Label[one]": "Elemental",
-"BF.CreatureType.Type.Elemental.Label[other]": "Elementals",
-"BF.CreatureType.Type.Fey.Label[one]": "Fey",
-"BF.CreatureType.Type.Fey.Label[other]": "Fey",
-"BF.CreatureType.Type.Fiend.Label[one]": "Fiend",
-"BF.CreatureType.Type.Fiend.Label[other]": "Fiends",
-"BF.CreatureType.Type.Giant.Label[one]": "Giant",
-"BF.CreatureType.Type.Giant.Label[other]": "Giants",
-"BF.CreatureType.Type.Humanoid.Label[one]": "Humanoid",
-"BF.CreatureType.Type.Humanoid.Label[other]": "Humanoids",
-"BF.CreatureType.Type.Monstrosity.Label[one]": "Monstrosity",
-"BF.CreatureType.Type.Monstrosity.Label[other]": "Monstrosities",
-"BF.CreatureType.Type.Ooze.Label[one]": "Ooze",
-"BF.CreatureType.Type.Ooze.Label[other]": "Oozes",
-"BF.CreatureType.Type.Plant.Label[one]": "Plant",
-"BF.CreatureType.Type.Plant.Label[other]": "Plants",
-"BF.CreatureType.Type.Undead.Label[one]": "Undead",
-"BF.CreatureType.Type.Undead.Label[other]": "Undead",
+"BF.CreatureType": {
+	"Label": "Creature Type",
+	"Swarm": {
+		"Label": "Swarm Size",
+		"Hint": "Size of individual creatures within a swarm.",
+		"Phrase": "Swarm of {size} {type}"
+	},
+	"Tag": {
+		"Label": "Type Tags"
+	},
+	"Type": {
+		"Label": "Type",
+		"Aberration": {
+			"Label[one]": "Aberration",
+			"Label[other]": "Aberrations"
+		},
+		"Beast": {
+			"Label[one]": "Beast",
+			"Label[other]": "Beasts"
+		},
+		"Celestial": {
+			"Label[one]": "Celestial",
+			"Label[other]": "Celestials"
+		},
+		"Construct": {
+			"Label[one]": "Construct",
+			"Label[other]": "Constructs"
+		},
+		"Dragon": {
+			"Label[one]": "Dragon",
+			"Label[other]": "Dragons"
+		},
+		"Elemental": {
+			"Label[one]": "Elemental",
+			"Label[other]": "Elementals"
+		},
+		"Fey": {
+			"Label[one]": "Fey",
+			"Label[other]": "Fey"
+		},
+		"Fiend": {
+			"Label[one]": "Fiend",
+			"Label[other]": "Fiends"
+		},
+		"Giant": {
+			"Label[one]": "Giant",
+			"Label[other]": "Giants"
+		},
+		"Humanoid": {
+			"Label[one]": "Humanoid",
+			"Label[other]": "Humanoids"
+		},
+		"Monstrosity": {
+			"Label[one]": "Monstrosity",
+			"Label[other]": "Monstrosities"
+		},
+		"Ooze": {
+			"Label[one]": "Ooze",
+			"Label[other]": "Oozes"
+		},
+		"Plant": {
+			"Label[one]": "Plant",
+			"Label[other]": "Plants"
+		},
+		"Undead": {
+			"Label[one]": "Undead",
+			"Label[other]": "Undead"
+		}
+	}
+},
 
 "BF.CreatureSizeAndType.Label": "Creature Size & Type",
 
@@ -574,23 +634,31 @@
 	"Display": "{value} {denomination}"
 },
 
-"BF.Damage.Label": "Damage",
-"BF.Damage.Bonus.Label": "Bonus",
-"BF.Damage.Critical.Maximize": "Maximized Critical",
-"BF.Damage.Type.Label": "Damage Type",
-"BF.Damage.Type.Acid": "Acid",
-"BF.Damage.Type.Bludgeoning": "Bludgeoning",
-"BF.Damage.Type.Cold": "Cold",
-"BF.Damage.Type.Fire": "Fire",
-"BF.Damage.Type.Force": "Force",
-"BF.Damage.Type.Lightning": "Lightning",
-"BF.Damage.Type.Necrotic": "Necrotic",
-"BF.Damage.Type.Piercing": "Piercing",
-"BF.Damage.Type.Poison": "Poison",
-"BF.Damage.Type.Psychic": "Psychic",
-"BF.Damage.Type.Radiant": "Radiant",
-"BF.Damage.Type.Slashing": "Slashing",
-"BF.Damage.Type.Thunder": "Thunder",
+"BF.Damage": {
+	"Label": "Damage",
+	"Bonus": {
+		"Label": "Bonus"
+	},
+	"Critical": {
+		"Maximize": "Maximized Critical"
+	},
+	"Type": {
+		"Label": "Damage Type",
+		"Acid": "Acid",
+		"Bludgeoning": "Bludgeoning",
+		"Cold": "Cold",
+		"Fire": "Fire",
+		"Force": "Force",
+		"Lightning": "Lightning",
+		"Necrotic": "Necrotic",
+		"Piercing": "Piercing",
+		"Poison": "Poison",
+		"Psychic": "Psychic",
+		"Radiant": "Radiant",
+		"Slashing": "Slashing",
+		"Thunder": "Thunder"
+	}
+},
 
 "BF.Death": {
 	"Label[one]": "Death Save",
@@ -914,40 +982,50 @@
 "BF.Journal.Link.MoreInformation": "More Information",
 "BF.Journal.Table.TOC": "Table: {caption}",
 
-"BF.JournalPage.Edit": "Edit",
-"BF.JournalPage.Class.AdditionalDescriptions.Label": "Additional Descriptions",
-"BF.JournalPage.Class.Equipment.Header": "Starting Equipment",
-"BF.JournalPage.Class.Equipment.Hint": "List of equipment granted by this class if taken at first level.",
-"BF.JournalPage.Class.Features.Header": "Class Features",
-"BF.JournalPage.Class.Features.Description": "As a {lowercaseName}, you have the following class features.",
-"BF.JournalPage.Class.HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
-"BF.JournalPage.Class.HitPoints.Header": "Hit Points",
-"BF.JournalPage.Class.HitPoints.Hint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
-"BF.JournalPage.Class.HitPoints.Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your CON modifier",
-"BF.JournalPage.Class.HitPoints.LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your CON modifier per {class} level after 1st",
-"BF.JournalPage.Class.Introduction.Label": "Introduction",
-"BF.JournalPage.Class.Introduction.Hint": "Primary description of the class that will appear first.",
-"BF.JournalPage.Class.Item.Label": "Selected Class",
-"BF.JournalPage.Class.Item.Hint": "Drop a class here",
-"BF.JournalPage.Class.NoClass": "No valid class selected, press the edit button to add a class.",
-"BF.JournalPage.Class.Subclass.AdvancementDescription.Label": "Advancement Description",
-"BF.JournalPage.Class.Subclass.AdvancementDescription.Hint": "Brief description that appears in the subclass entry within the features list.",
-"BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder": "When you reach 3rd level, choose a subclass from the options presented below.",
-"BF.JournalPage.Class.Subclass.Header": "{class} Subclasses",
-"BF.JournalPage.Class.Subclass.Items": "Subclasses",
-"BF.JournalPage.Class.Subclass.SectionDescription.Label": "Section Description",
-"BF.JournalPage.Class.Subclass.SectionDescription.Hint": "Longer description that appears just before the list of subclass options.",
-"BF.JournalPage.Class.Table.Caption": "{class} Progression",
-"BF.JournalPage.Class.Traits.Hint": "Additional descriptive text displatyed beneeth list of proficiencies granted by this class.",
-"BF.JournalPage.Class.Traits.SavesChoice": "and your choice of {choices}",
-"BF.JournalPage.Subclass.Introduction.Hint": "Primary description of the subclass that will appear first.",
-"BF.JournalPage.Subclass.Item.Label": "Selected Subclass",
-"BF.JournalPage.Subclass.Item.Hint": "Drop a subclass here",
-"BF.JournalPage.Subclass.NoSubclass": "No valid subclass selected, press the edit button to add a subclass.",
-"BF.JournalPage.Type.Class[one]": "Class Summary",
-"BF.JournalPage.Type.Class[other]": "Class Summaries",
-"BF.JournalPage.Type.Subclass[one]": "Subclass Summary",
-"BF.JournalPage.Type.Subclass[other]": "Subclass Summaries",
+"BF.JournalPage": {
+	"Edit": "Edit",
+	"Class": {
+		"AdditionalDescriptions.Label": "Additional Descriptions",
+		"Equipment.Header": "Starting Equipment",
+		"Equipment.Hint": "List of equipment granted by this class if taken at first level.",
+		"Features.Header": "Class Features",
+		"Features.Description": "As a {lowercaseName}, you have the following class features.",
+		"HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
+		"HitPoints.Header": "Hit Points",
+		"HitPoints.Hint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
+		"HitPoints.Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your CON modifier",
+		"HitPoints.LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your CON modifier per {class} level after 1st",
+		"Introduction.Label": "Introduction",
+		"Introduction.Hint": "Primary description of the class that will appear first.",
+		"Item.Label": "Selected Class",
+		"Item.Hint": "Drop a class here",
+		"NoClass": "No valid class selected, press the edit button to add a class.",
+		"Subclass.AdvancementDescription.Label": "Advancement Description",
+		"Subclass.AdvancementDescription.Hint": "Brief description that appears in the subclass entry within the features list.",
+		"Subclass.AdvancementDescription.Placeholder": "When you reach 3rd level, choose a subclass from the options presented below.",
+		"Subclass.Header": "{class} Subclasses",
+		"Subclass.Items": "Subclasses",
+		"Subclass.SectionDescription.Label": "Section Description",
+		"Subclass.SectionDescription.Hint": "Longer description that appears just before the list of subclass options.",
+		"Table.Caption": "{class} Progression",
+		"Traits.Hint": "Additional descriptive text displatyed beneeth list of proficiencies granted by this class.",
+		"Traits.SavesChoice": "and your choice of {choices}"
+	},
+	"Subclass": {
+		"Introduction.Hint": "Primary description of the subclass that will appear first.",
+		"Subclass.Item.Label": "Selected Subclass",
+		"Subclass.Item.Hint": "Drop a subclass here",
+		"Subclass.NoSubclass": "No valid subclass selected, press the edit button to add a subclass."
+	},
+	"Type": {
+		"Class[one]": "Class Summary",
+		"Class[other]": "Class Summaries",
+		"Rule[one]": "Rule",
+		"Rule[other]": "Rules",
+		"Subclass[one]": "Subclass Summary",
+		"Subclass[other]": "Subclass Summaries"
+	}
+},
 
 "BF.Language": {
 	"Label[one]": "Language",
@@ -1237,6 +1315,15 @@
 "BF.Roll.Result.Success": "Success",
 "BF.Roll.Type.Label": "{type} roll",
 
+"BF.Rule": {
+	"Label": "Rule",
+	"Tooltip": "Tooltip",
+	"Type": {
+		"Label": "Rule Type",
+		"Rule": "Rule"
+	}
+},
+
 "BF.SavingThrow.LabelLong[one]": "Saving Throw",
 "BF.SavingThrow.LabelLong[other]": "Saving Throws",
 "BF.SavingThrow.LabelShort[one]": "Save",
@@ -1279,6 +1366,7 @@
 "BF.Sheet.Default.Feature": "Black Flag Feature Sheet",
 "BF.Sheet.Default.NPC": "Black Flag NPC Sheet",
 "BF.Sheet.Default.PC": "Black Flag PC Sheet",
+"BF.Sheet.Default.Rule": "Black Flag Rule Journal Page Sheet",
 "BF.Sheet.Sorting.Mode.Alphabetic": "Alphabetic",
 "BF.Sheet.Sorting.Mode.Manual": "Manual",
 "BF.Sheet.Tab.Activities": "Activities",
@@ -1351,6 +1439,7 @@
 	"CastingTime.Label": "Casting Time",
 	"Circle": {
 		"Label": "Circle of Magic",
+		"RuleLabel": "Spell Circle",
 		"Arcane": {
 			"Label": "Arcane"
 		},
@@ -1366,6 +1455,7 @@
 	},
 	"Component": {
 		"Label": "Components",
+		"RuleLabel": "Spell Component",
 		"Material": {
 			"Label": "Material",
 			"Abbreviation": "M",
@@ -1404,6 +1494,7 @@
 	},
 	"School": {
 		"Label": "School of Magic",
+		"RuleLabel": "Spell School",
 		"Abjuration.Label": "Abjuration",
 		"Conjuration.Label": "Conjuration",
 		"Divination.Label": "Divination",
@@ -1415,10 +1506,15 @@
 	},
 	"Tag": {
 		"Label": "Tags",
-		"Concentration.Label": "Concentration",
-		"Concentration.Abbreviation": "C",
-		"Ritual.Label": "Ritual",
-		"Ritual.Abbreviation": "R"
+		"RuleLabel": "Spell Tag",
+		"Concentration": {
+			"Label": "Concentration",
+			"Abbreviation": "C"
+		},
+		"Ritual": {
+			"Label": "Ritual",
+			"Abbreviation": "R"
+		}
 	}
 },
 

@@ -18,6 +18,7 @@ const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
  */
 export default class ClassJournalPageData extends BaseDataModel {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "class",
@@ -31,6 +32,7 @@ export default class ClassJournalPageData extends BaseDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			item: new StringField({label: "BF.JournalPage.Class.Item"}),

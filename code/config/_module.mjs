@@ -16,6 +16,7 @@ import * as items from "./items.mjs";
 import * as modifiers from "./modifiers.mjs";
 import * as notifications from "./notifications.mjs";
 import * as registration from "./registration.mjs";
+import * as rules from "./rules.mjs";
 import * as skills from "./skills.mjs";
 import * as spellcasting from "./spellcasting.mjs";
 import * as targeting from "./targeting.mjs";
@@ -74,6 +75,7 @@ export default {
 	...modifiers,
 	...notifications,
 	registration,
+	...rules,
 	...skills,
 	...spellcasting,
 	...targeting,

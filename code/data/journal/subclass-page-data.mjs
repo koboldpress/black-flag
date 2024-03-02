@@ -12,6 +12,7 @@ const { HTMLField, SchemaField, StringField } = foundry.data.fields;
  */
 export default class SubclassJournalPageData extends BaseDataModel {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "subclass",
@@ -25,6 +26,7 @@ export default class SubclassJournalPageData extends BaseDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			item: new StringField({label: "BF.JournalPage.Subclass.Item"}),

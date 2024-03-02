@@ -481,7 +481,8 @@ async function enrichEmbed(config, label, options) {
 	if ( config.doc instanceof JournalEntryPage ) {
 		switch ( config.doc.type ) {
 			case "image": return embedImagePage(config, label, options);
-			case "text": return embedTextPage(config, label, options);
+			case "text":
+			case "rule": return embedTextPage(config, label, options);
 		}
 	}
 

@@ -1,0 +1,16 @@
+<form class="flexcol" autocomplete="off">
+	{{> journalEntryPageHeader }}
+	{{ editor editor.content target="text.content" class="journal-page-content" button=false editable=true
+						engine=editor.engine collaborate=editor.collaborate }}
+	<div class="separator">
+		<h3>{{ localize "BF.Rule.Tooltip" }}</h3>
+		<label>
+			{{ localize "BF.Rule.Type.Label" }}
+			<select name="system.type">
+				{{ selectOptions CONFIG.ruleTypes selected=document.system.type labelAttr="label" localize=true }}
+			</select>
+		</label>
+	</div>
+	{{ editor enrichedTooltip target="system.tooltip" class="journal-page-content" button=false editable=true
+						engine=editor.engine collaborate=editor.collaborate }}
+</form>
