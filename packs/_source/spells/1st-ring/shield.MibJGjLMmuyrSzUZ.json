@@ -7,7 +7,9 @@
       "value": "<p><em>You create a ward at the last moment, protecting yourself from all but the stoutest of strikes.</em></p><p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from <em>magic missile</em>.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 1
@@ -32,18 +34,22 @@
     },
     "tags": [],
     "range": {
-      "units": "self",
-      "value": null
+      "units": "self"
     },
-    "circle": "arcane",
+    "circle": [
+      "arcane"
+    ],
     "school": "abjuration",
     "target": {
       "affects": {
         "type": "",
-        "count": ""
+        "count": "",
+        "choice": false
       },
       "template": {
-        "type": ""
+        "type": "",
+        "count": 1,
+        "units": "foot"
       }
     },
     "activities": {
@@ -59,11 +65,11 @@
         "consumption": {
           "targets": [],
           "scale": {
-            "allowed": "false"
+            "allowed": false
           }
         },
         "uses": {
-          "spent": "0",
+          "spent": 0,
           "recovery": [],
           "min": "",
           "max": ""
@@ -74,7 +80,10 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
     }
   },
   "effects": [],
@@ -85,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1699211483460,
-    "modifiedTime": 1706931944852,
+    "modifiedTime": 1709408321733,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "MibJGjLMmuyrSzUZ",

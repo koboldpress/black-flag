@@ -7,7 +7,9 @@
       "value": "<p><em>You launch a missile of acid toward your target.</em></p><p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 2
@@ -36,18 +38,23 @@
     },
     "range": {
       "units": "foot",
-      "value": 90
+      "value": "90"
     },
-    "circle": "arcane",
+    "circle": [
+      "arcane"
+    ],
     "school": "evocation",
     "tags": [],
     "target": {
       "affects": {
         "type": "creatureObject",
-        "count": "1"
+        "count": "1",
+        "choice": false
       },
       "template": {
-        "type": ""
+        "type": "",
+        "count": 1,
+        "units": "foot"
       }
     },
     "activities": {
@@ -64,19 +71,34 @@
             "parts": [
               {
                 "number": 4,
-                "denomination": "4",
+                "denomination": 4,
                 "type": "acid"
               }
             ]
           }
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "description": "",
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
       }
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
     }
   },
   "effects": [],
@@ -87,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1698881084085,
-    "modifiedTime": 1706931946623,
+    "modifiedTime": 1709408323924,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "bzHSWjBAIuT9ujHD",

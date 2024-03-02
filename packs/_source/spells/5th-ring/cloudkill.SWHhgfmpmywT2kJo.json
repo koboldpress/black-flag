@@ -17,7 +17,9 @@
       "value": "<p><em>A toxic cloud poisons creatures caught within it.</em></p><p>You create a 20-foot-radius sphere of poisonous, yellow- green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured.</p><p>When a creature enters the spell’s area for the first time on a turn or starts its turn there, that creature must make a CON save. The creature takes 5d8 poison damage on a failed save, or half as much damage on a successful one.</p><p>Creatures are affected even if they hold their breath or don’t need to breathe.</p><p>The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 5
@@ -48,8 +50,13 @@
         "type": ""
       }
     },
-    "range": {},
-    "circle": "",
+    "range": {
+      "units": ""
+    },
+    "circle": [
+      "arcane",
+      "primordial"
+    ],
     "school": "conjuration"
   },
   "effects": [],
@@ -60,10 +67,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1706997580398,
-    "modifiedTime": 1706997610980,
+    "modifiedTime": 1709408705383,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SWHhgfmpmywT2kJo"

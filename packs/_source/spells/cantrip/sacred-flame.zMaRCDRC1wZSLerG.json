@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 1,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": "radiant"
@@ -58,7 +58,9 @@
       "value": "<p><em>You bathe one target in holy, searing light.</em></p><p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a DEX save or take 1d8 radiant damage. The target gains no benefit from cover for this save.</p><p>The spell’s damage increases by 1d8 when you reach 5th level (2d8).</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 0
@@ -96,7 +98,9 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": "divine",
+    "circle": [
+      "divine"
+    ],
     "school": "evocation"
   },
   "effects": [],
@@ -107,10 +111,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1706935262062,
-    "modifiedTime": 1707019662684,
+    "modifiedTime": 1709408326228,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zMaRCDRC1wZSLerG"

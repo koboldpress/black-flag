@@ -44,7 +44,7 @@
             "parts": [
               {
                 "number": 2,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "fire"
@@ -85,7 +85,7 @@
             "parts": [
               {
                 "number": 1,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "fire"
@@ -126,7 +126,9 @@
       "value": "<p><em>You consume fire and hold it until you spit out the flames.</em></p><p>You can ingest a nonmagical fire up to the size of a Small campfire within range. The fire is stored harmlessly in your mouth and dissipates without effect if it is not expelled before the spell ends.</p><p>Once ingested, you can spit out the stored fire as an action. If you try to hit a particular target with the flames, treat this as a ranged attack with a range of 5 feet. Small campfire-sized flames deal 2d6 fire damage, while Tiny torch-sized flames deal 1d6 fire damage. Once you have spit out the flames, the fire goes out immediately unless it hits flammable material that can keep it fed.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 1
@@ -166,7 +168,9 @@
       "units": "foot",
       "value": "5"
     },
-    "circle": "arcane",
+    "circle": [
+      "arcane"
+    ],
     "school": "transmutation"
   },
   "effects": [],
@@ -177,10 +181,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1706933506708,
-    "modifiedTime": 1707174896383,
+    "modifiedTime": 1709408323008,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!V1SGkrFm6dektKlt"

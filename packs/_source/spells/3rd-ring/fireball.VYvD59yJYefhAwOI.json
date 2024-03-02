@@ -7,7 +7,9 @@
       "value": "<p><em>You hurl a small ball of flame that explodes in a huge conflagration.</em></p><p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot- radius sphere centered on that point must make a DEX save. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 3
@@ -37,7 +39,9 @@
       "value": "60",
       "units": "foot"
     },
-    "circle": "arcane",
+    "circle": [
+      "arcane"
+    ],
     "school": "evocation",
     "target": {
       "template": {
@@ -63,7 +67,7 @@
             "parts": [
               {
                 "number": 8,
-                "denomination": "6",
+                "denomination": 6,
                 "type": "fire"
               }
             ]
@@ -74,12 +78,27 @@
           "ability": "dexterity"
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+        "description": "",
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
       }
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
     }
   },
   "effects": [],
@@ -90,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1699297018533,
-    "modifiedTime": 1706931937616,
+    "modifiedTime": 1709408323234,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "VYvD59yJYefhAwOI",

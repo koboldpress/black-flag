@@ -15,7 +15,7 @@
             "parts": [
               {
                 "number": 1,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "acid"
@@ -57,7 +57,9 @@
       "value": "<p><em>You conjure a glob of acid to burst over your targets.</em></p><p>Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a DEX save or take 1d6 acid damage.</p><p>This spell’s damage increases by 1d6 when you reach 5th level.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 0
@@ -96,7 +98,9 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": "arcane",
+    "circle": [
+      "arcane"
+    ],
     "school": "conjuration"
   },
   "effects": [],
@@ -108,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1706914791735,
-    "modifiedTime": 1706914883577,
+    "modifiedTime": 1709408320621,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DKzR55hjIkf4r8tJ"

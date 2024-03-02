@@ -42,13 +42,16 @@
       "spent": 0,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "",
+      "consumeQuantity": false
     },
     "description": {
       "value": "<p><em>You say a quick prayer that knits small wounds on a nearby target.</em></p><p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 1
@@ -86,7 +89,9 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": "divine",
+    "circle": [
+      "divine"
+    ],
     "school": "evocation"
   },
   "effects": [],
@@ -97,10 +102,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1703204964700,
-    "modifiedTime": 1706931940912,
+    "modifiedTime": 1709408324268,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "fEvZXjqe3vDbFl6f",

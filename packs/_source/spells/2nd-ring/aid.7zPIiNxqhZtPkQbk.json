@@ -12,7 +12,7 @@
           "ability": "",
           "healing": {
             "number": 1,
-            "denomination": "4",
+            "denomination": 4,
             "bonus": "",
             "custom": "",
             "type": "normal"
@@ -43,13 +43,16 @@
       "spent": 0,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "",
+      "consumeQuantity": false
     },
     "description": {
       "value": "<p><em>You bless allies with heightened vitality and newfound determination.</em></p><p>Your spell bolsters your allies with toughness and resolve. Choose up to three creatures within range. Each target’s hit point maximum and current hit points increase by 5 for the duration.</p>",
       "source": "Black Flag Reference Document"
     },
-    "type": {},
+    "type": {
+      "value": "standard"
+    },
     "ring": {
       "value": null,
       "base": 2
@@ -92,7 +95,9 @@
       "units": "foot",
       "value": "30"
     },
-    "circle": "divine",
+    "circle": [
+      "divine"
+    ],
     "school": "abjuration"
   },
   "effects": [],
@@ -103,10 +108,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
+    "systemVersion": "0.8.014",
     "coreVersion": "11.315",
     "createdTime": 1703204831995,
-    "modifiedTime": 1706931942688,
+    "modifiedTime": 1709408319817,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "7zPIiNxqhZtPkQbk",
