@@ -12,7 +12,6 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	constructor() {
 		super();
 		this.#internals = this.attachInternals();
-		this.#name = this.getAttribute("name");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -60,14 +59,12 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	#name;
-
 	get name() {
-		return this.#name;
+		return this.getAttribute("name");
 	}
 
 	set name(value) {
-		this.#name = value;
+		this.setAttribute("name", value);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -99,8 +96,8 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 		Array.from(this.children).forEach(c => form.insertAdjacentElement("beforeend", c));
 		const formData = new FormDataExtended(form);
 		Array.from(form.children).forEach(c => this.insertAdjacentElement("beforeend", c));
-		const object = foundry.utils.expandObject(formData.object).$;
-		this._mutateFormData(object);
+		let object = foundry.utils.expandObject(formData.object).$;
+		object = this._mutateFormData(object) ?? object;
 		return object;
 	}
 
@@ -109,6 +106,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	/**
 	 * Mutate this form's FormData before merging with parent data.
 	 * @param {object} object - Form data for just this element.
+	 * @returns {*}
 	 * @abstract
 	 */
 	_mutateFormData(object) {}

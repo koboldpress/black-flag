@@ -113,6 +113,25 @@ function itemContext(context, options) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * A helper to mark one or more `<option>` elements as selected.
+ * Escape the string as handlebars would, then escape any regexp characters in it.
+ * @param {string[]|Set<string>} selected - The value of the option.
+ * @param {object} options - Handlebars options.
+ * @returns {Handlebars.SafeString}
+ */
+function multiSelect(selected, options) {
+	let html = options.fn(this);
+	for ( const value of selected ) {
+		const escapedValue = RegExp.escape(Handlebars.escapeExpression(value));
+		const rgx = new RegExp(` value=["']${escapedValue}["']`);
+		html = html.replace(rgx, "$& selected");
+	}
+	return html;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Display a notification badge if necessary.
  * @param {Document} document - Document from which the notifications should be gathered.
  * @param {object} options
@@ -184,6 +203,7 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-groupedSelectOptions": (choices, options) => groupedSelectOptions(choices, options.hash),
 		"blackFlag-itemContext": itemContext,
 		"blackFlag-linkForUUID": linkForUUID,
+		"blackFlag-multiSelect": multiSelect,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash)
 	});

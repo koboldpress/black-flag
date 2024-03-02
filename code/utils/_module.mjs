@@ -5,6 +5,7 @@ export * as filter from "./filter.mjs";
 export * from "./formula.mjs";
 export * from "./localization.mjs";
 export {default as log} from "./logging.mjs";
+export * as migration from "./migration.mjs";
 export * from "./number.mjs";
 export * from "./object.mjs";
 export * as search from "./search.mjs";

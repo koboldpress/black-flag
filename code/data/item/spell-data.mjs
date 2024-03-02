@@ -38,7 +38,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 			type: new SchemaField({
 				value: new StringField({initial: "standard", label: "BF.Spell.Preparation.Label"})
 			}),
-			circle: new StringField({label: "BF.Spell.Circle.Label"}),
+			circle: new SetField(new StringField(), {label: "BF.Spell.Circle.Label"}),
 			school: new StringField({label: "BF.Spell.School.Label"}),
 			ring: new SchemaField({
 				value: new NumberField({label: "BF.Spell.Ring.Effective.Label"}),
@@ -156,6 +156,19 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate single spell circle to set of circles.
+	 * @param {object} source - Candidate source data to migrate.
+	 */
+	static migrateCircle(source) {
+		if ( foundry.utils.getType(source.circle) !== "string" ) return;
+		source.circle = [source.circle];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -206,6 +219,15 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 				});
 				if ( this.condition ) label = `<span data-tooltip="${this.condition.capitalize()}">${label}*</span>`;
 				return label;
+			},
+			configurable: true,
+			enumerable: false
+		});
+
+		Object.defineProperty(this.circle, "label", {
+			get() {
+				const circles = Array.from(this).map(c => CONFIG.BlackFlag.spellCircles.localized[c]).filter(c => c);
+				return game.i18n.getListFormatter({ type: "unit" }).format(circles);
 			},
 			configurable: true,
 			enumerable: false

@@ -1,4 +1,4 @@
-import { numberFormat } from "../utils/_module.mjs";
+import { localizeConfig, numberFormat } from "../utils/_module.mjs";
 
 /**
  * Highest ring of spellcasting.
@@ -72,6 +72,7 @@ export const spellCircles = {
 		label: "BF.Spell.Circle.Wyrd.Label"
 	}
 };
+localizeConfig(spellCircles);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

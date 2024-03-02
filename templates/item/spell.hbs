@@ -26,9 +26,13 @@
 					</label>
 					<label>
 						<span>{{localize "BF.Spell.Circle.Label"}}</span>
-						<select name="system.circle">
-							{{selectOptions CONFIG.spellCircles selected=system.circle labelAttr="label" blank="" localize=true}}
-						</select>
+						<blackFlag-multiSelect name="system.circle" label="{{ system.circle.label }}">
+							<datalist>
+								{{#blackFlag-multiSelect system.circle}}
+									{{selectOptions CONFIG.spellCircles.localized}}
+								{{/blackFlag-multiSelect}}
+							</datalist>
+						</blackFlag-multiSelect>
 					</label>
 					<label>
 						<span>{{localize "BF.Spell.School.Label"}}</span>
