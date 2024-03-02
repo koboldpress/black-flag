@@ -33,8 +33,15 @@ export default class SpellManager extends DocumentSheet {
 			return map;
 		}, new Collection()));
 
-		// TODO: Figure out what spells are already on sheet
+		// Figure out what spells are already on sheet
 		this.existingSpells = new Set();
+		for ( const spell of this.document.items ) {
+			if ( spell.type !== "spell" ) continue;
+			if ( !["standard", "alwaysPrepared"].includes(spell.system.type.value) ) continue;
+			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
+			this.existingSpells.add(sourceId);
+		}
+		console.log(this.existingSpells);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -43,8 +50,8 @@ export default class SpellManager extends DocumentSheet {
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "spell-manager"],
-			width: 550,
-			height: 650,
+			width: 775,
+			height: 700,
 			template: "systems/black-flag/templates/actor/spell-manager.hbs",
 			resizable: true,
 			scrollY: ["section.slots", "section.spells"],
@@ -121,6 +128,10 @@ export default class SpellManager extends DocumentSheet {
 	async getData(options={}) {
 		const context = await super.getData(options);
 
+		context.restrictions = {
+			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot?.source.system.spellcasting?.circle]
+		};
+
 		const otherSelected = new Set();
 		context.slots = this.slots.map((slot, index) => {
 			slot.selected.map(s => otherSelected.add(s));
@@ -155,9 +166,13 @@ export default class SpellManager extends DocumentSheet {
 	 * @returns {boolean}
 	 */
 	shouldDisplay(spell) {
-		if ( this.existingSpells.has(spell.uuid) ) return false;
-		const filters = []; // TODO: Fetch filters from the SpellcastingAdvancement
-		switch ( this.currentSlot?.type ) {
+		if ( this.existingSpells.has(spell.uuid) || !this.currentSlot ) return false;
+		const filters = [];
+
+		// Fetch filters from the SpellcastingAdvancement
+		filters.push({ k: "system.circle", o: "has", v: this.currentSlot.source.system.spellcasting?.circle });
+
+		switch ( this.currentSlot.type ) {
 			case "cantrips":
 				filters.push({ k: "system.ring.base", v: 0 });
 				break;
@@ -231,7 +246,8 @@ export default class SpellManager extends DocumentSheet {
 	 * @returns {Promise<object>} - Data for document creation on the actor.
 	 */
 	async _prepareSpellData(spell, slot) {
-		const spellData = (await spell).toObject();
+		spell = await spell;
+		const spellData = spell.toObject();
 		const remote = spell.parent !== this.document;
 		const source = remote ? foundry.utils.getProperty(spellData, "flags.black-flag.relationship.source") ?? {} : {};
 
@@ -241,6 +257,7 @@ export default class SpellManager extends DocumentSheet {
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
 		if ( remote ) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
+		console.log(foundry.utils.deepClone(spellData));
 		return spellData;
 	}
 

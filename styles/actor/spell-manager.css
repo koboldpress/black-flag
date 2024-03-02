@@ -4,6 +4,7 @@
 
 	.window-content {
 		padding: 0;
+		background: rgb(40 40 40);
 
 		.sheet-container {
 			display: grid;
@@ -18,7 +19,6 @@
 			grid-template-rows: max-content max-content 1fr max-content;
 
 			> * {
-				background: rgb(40 40 40);
 				color: var(--bf-text-color-white);
 			}
 			> .slots {
@@ -113,6 +113,10 @@
 				accent-color: var(--bf-blue);
 			}
 		}
+	}
+
+	.restrictions {
+		padding: 8px;
 	}
 
 	section.spells {

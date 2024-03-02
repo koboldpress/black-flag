@@ -20,11 +20,17 @@
 		</ul>
 	</section>
 	<div class="restrictions">
-		restrictions
+		{{#if restrictions.circle}}
+			<div class="restriction">
+				<strong>{{ localize "BF.Spell.Circle.Label" }}</strong>: {{ restrictions.circle }}
+			</div>
+		{{/if}}
 	</div>
+	{{!--
 	<search>
 		search
 	</search>
+	--}}
 	<section class="spells">
 		<ul class="unlist spell-list">
 			{{#each spells}}
