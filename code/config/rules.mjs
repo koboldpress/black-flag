@@ -30,6 +30,9 @@ export const ruleTypes = {
 		label: "BF.Condition.Label[one]",
 		references: "conditionTypes"
 	},
+	creatureTag: {
+		label: "BF.CreatureTag.Label"
+	},
 	creatureType: {
 		label: "BF.CreatureType.Label",
 		references: "creatureTypes"
