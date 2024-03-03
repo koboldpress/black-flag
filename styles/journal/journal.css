@@ -67,7 +67,6 @@
 			text-shadow: none;
 
 			th {
-				padding-inline: 0.5em;
 				font-size: var(--font-size-14);
 				text-align: start;
 				text-transform: uppercase;
@@ -81,8 +80,22 @@
 			tr:nth-child(2n) {
 				background: lch(0% 0% 0deg / 0.05);
 			}
-			td {
-				padding-inline: 0.5em;
+		}
+
+		td, th {
+			padding-inline: 6px;
+		}
+	}
+
+	table.sectioned {
+		tbody {
+			th { text-align: start; }
+			th[colspan] {
+				font-style: italic;
+				font-weight: normal;
+			}
+			tr.indent {
+				> :is(td, th):first-child { padding-inline-start: 18px; }
 			}
 		}
 	}
