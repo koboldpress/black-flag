@@ -47,7 +47,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	async prepareActions(context) {
 		await super.prepareActions(context);
-		context.passive = await Promise.all(this.actor.items.filter(i => {
+		context.passive = (await Promise.all(this.actor.items.filter(i => {
 			if ( i.type !== "feature" ) return false;
 			if ( i.system.activities?.size ) return false;
 			return true;
@@ -55,7 +55,7 @@ export default class NPCSheet extends BaseActorSheet {
 			item, description: await TextEditor.enrichHTML(item.system.description.value, {
 				secrets: false, rollData: item.getRollData(), async: true, relativeTo: item
 			})
-		})));
+		})))).sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
 		await Promise.all(Object.values(context.actions)
 			.flatMap(t => t.activities.map(async a => {
 				a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {

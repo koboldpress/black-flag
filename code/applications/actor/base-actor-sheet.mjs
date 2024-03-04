@@ -129,6 +129,9 @@ export default class BaseActorSheet extends ActorSheet {
 		await this.prepareSpecialActions(context.actions);
 		for ( const [key, value] of Object.entries(context.actions) ) {
 			if ( !value.activities.length ) delete context.actions[key];
+			else context.actions[key].activities.sort((lhs, rhs) =>
+				(lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity)
+			);
 		}
 		// TODO: Figure out how these should be sorted
 	}
