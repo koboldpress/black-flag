@@ -24,7 +24,7 @@ export default class HealingActivity extends Activity {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		const rollConfig = this.createHealingConfig({}, this.item.getRollData({ deterministic: true }));
-		let formula = rollConfig.parts.join(" + ");
+		let formula = rollConfig.rolls.map(r => r.parts.join(" + ")).join(" + ");
 		formula = Roll.defaultImplementation.replaceFormulaData(formula, rollConfig.data);
 		formula = simplifyFormula(formula);
 		if ( formula ) {
