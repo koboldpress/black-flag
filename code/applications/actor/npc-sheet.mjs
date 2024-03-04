@@ -58,7 +58,7 @@ export default class NPCSheet extends BaseActorSheet {
 		})));
 		await Promise.all(Object.values(context.actions)
 			.flatMap(t => t.activities.map(async a => {
-				a.description = await TextEditor.enrichHTML(a.activity.description, {
+				a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {
 					secrets: false, rollData: a.item.getRollData(), async: true, relativeTo: a.item
 				});
 				return a.description;
