@@ -1,0 +1,339 @@
+{
+  "folder": "7q5scxWTyXA37xUj",
+  "name": "Gelatinous Cube",
+  "type": "npc",
+  "_id": "0JZiKg6CAIMLtZH8",
+  "img": "systems/black-flag/artwork/types/npc.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored"
+        ],
+        "formulas": [],
+        "flat": null,
+        "override": 6
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        },
+        "lair": null
+      },
+      "cr": 2,
+      "hp": {
+        "value": 75,
+        "max": 75,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": null,
+      "stealth": null
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 15,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": []
+      },
+      "senses": {
+        "types": {
+          "darkvision": "",
+          "keensense": "60",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [
+          "cantSense"
+        ]
+      },
+      "size": "large",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "immunities": {
+          "value": [
+            "acid",
+            "piercing"
+          ],
+          "custom": [],
+          "bypasses": []
+        },
+        "vulnerabilities": {
+          "value": [
+            "cold"
+          ],
+          "custom": []
+        }
+      },
+      "type": {
+        "value": "ooze",
+        "tags": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 3
+      },
+      "dexterity": {
+        "mod": -3
+      },
+      "constitution": {
+        "mod": 5
+      },
+      "intelligence": {
+        "mod": -5
+      },
+      "wisdom": {
+        "mod": -2
+      },
+      "charisma": {
+        "mod": -5
+      }
+    },
+    "biography": {
+      "value": "",
+      "lair": "",
+      "legendary": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Gelatinous Cube",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "width": 2,
+    "height": 2,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Ooze Resilience",
+      "type": "feature",
+      "_id": "CLXUPxGfkOS1mSbe",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[@name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [
+        {
+          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": 0,
+            "startTurn": 0
+          },
+          "disabled": false,
+          "name": "Ooze Resilience",
+          "_id": "TRIJesrj6nA7uktU",
+          "changes": [
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "grappled",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "restrained",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "blinded",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "deafened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "prone",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!0JZiKg6CAIMLtZH8.CLXUPxGfkOS1mSbe.TRIJesrj6nA7uktU"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1709611470478,
+        "modifiedTime": 1709617304019,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.CLXUPxGfkOS1mSbe"
+    }
+  ],
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709617254212,
+    "modifiedTime": 1709617383109,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!0JZiKg6CAIMLtZH8"
+}

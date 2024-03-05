@@ -1,6 +1,7 @@
 {
-  "name": "Undead Resilience",
+  "name": "Plant Resilience",
   "type": "feature",
+  "_id": "wKYxtPQ0kudDdh4N",
   "img": "systems/black-flag/artwork/types/feature.svg",
   "system": {
     "activities": {},
@@ -13,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[@name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+      "value": "<p>The [[@name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -30,7 +31,7 @@
   "effects": [
     {
       "icon": "systems/black-flag/artwork/types/feature.svg",
-      "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
+      "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -41,23 +42,28 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Undead Resilience",
-      "_id": "eTrciZFtsPDaLR2j",
+      "name": "Plant Resilience",
+      "_id": "4alHXchWfiVtXGAv",
       "changes": [
         {
-          "key": "system.traits.damage.immunities.value",
-          "mode": 2,
-          "value": "poison"
-        },
-        {
-          "key": "system.traits.condition.immunities.value",
+          "key": "system.traits.condition.resistances.value",
           "mode": 2,
           "value": "exhaustion"
         },
         {
-          "key": "system.traits.condition.immunities.value",
+          "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "poisoned"
+          "value": "paralyzed"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "petrified"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "unconscious"
         }
       ],
       "description": "",
@@ -65,29 +71,22 @@
       "statuses": [],
       "flags": {},
       "tint": null,
-      "_key": "!items.effects!2HH89GIIAuYvfRlt.eTrciZFtsPDaLR2j"
+      "_key": "!items.effects!wKYxtPQ0kudDdh4N.4alHXchWfiVtXGAv"
     }
   ],
   "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {
-    "black-flag": {
-      "relationship": {
-        "enabled": true
-      }
-    }
-  },
+  "flags": {},
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1706467905493,
-    "modifiedTime": 1709611900200,
+    "createdTime": 1709615924250,
+    "modifiedTime": 1709616147358,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_id": "2HH89GIIAuYvfRlt",
-  "sort": 0,
-  "_key": "!items!2HH89GIIAuYvfRlt"
+  "_key": "!items!wKYxtPQ0kudDdh4N"
 }

@@ -1,6 +1,7 @@
 {
-  "name": "Undead Resilience",
+  "name": "Ooze Resilience",
   "type": "feature",
+  "_id": "QInPwozfDFprThf1",
   "img": "systems/black-flag/artwork/types/feature.svg",
   "system": {
     "activities": {},
@@ -13,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[@name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+      "value": "<p>The [[@name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -30,7 +31,7 @@
   "effects": [
     {
       "icon": "systems/black-flag/artwork/types/feature.svg",
-      "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
+      "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -41,13 +42,18 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Undead Resilience",
-      "_id": "eTrciZFtsPDaLR2j",
+      "name": "Ooze Resilience",
+      "_id": "TRIJesrj6nA7uktU",
       "changes": [
         {
-          "key": "system.traits.damage.immunities.value",
+          "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "poison"
+          "value": "grappled"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "restrained"
         },
         {
           "key": "system.traits.condition.immunities.value",
@@ -57,7 +63,27 @@
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "poisoned"
+          "value": "blinded"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "deafened"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "frightened"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "prone"
         }
       ],
       "description": "",
@@ -65,29 +91,22 @@
       "statuses": [],
       "flags": {},
       "tint": null,
-      "_key": "!items.effects!2HH89GIIAuYvfRlt.eTrciZFtsPDaLR2j"
+      "_key": "!items.effects!QInPwozfDFprThf1.TRIJesrj6nA7uktU"
     }
   ],
   "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {
-    "black-flag": {
-      "relationship": {
-        "enabled": true
-      }
-    }
-  },
+  "flags": {},
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1706467905493,
-    "modifiedTime": 1709611900200,
+    "createdTime": 1709611470478,
+    "modifiedTime": 1709611838792,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_id": "2HH89GIIAuYvfRlt",
-  "sort": 0,
-  "_key": "!items!2HH89GIIAuYvfRlt"
+  "_key": "!items!QInPwozfDFprThf1"
 }

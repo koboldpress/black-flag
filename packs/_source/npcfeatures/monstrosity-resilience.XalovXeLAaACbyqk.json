@@ -14,8 +14,8 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The worg is resistant to exhaustion and to the frightened condition.</p>",
-      "source": ""
+      "value": "<p>The [[@name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
+      "source": "Black Flag Reference Document"
     },
     "identifier": {},
     "restriction": {
@@ -28,7 +28,42 @@
       "value": null
     }
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "systems/black-flag/artwork/types/feature.svg",
+      "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Monstrosity Resilience",
+      "_id": "jxagd3hzp2UTp7Wl",
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "exhaustion"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "frightened"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!XalovXeLAaACbyqk.jxagd3hzp2UTp7Wl"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -37,10 +72,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.010",
+    "systemVersion": "0.8.015",
     "coreVersion": "11.315",
     "createdTime": 1706473622104,
-    "modifiedTime": 1706473631825,
+    "modifiedTime": 1709611828790,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!XalovXeLAaACbyqk"

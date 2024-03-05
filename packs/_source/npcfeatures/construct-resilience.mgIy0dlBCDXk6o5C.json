@@ -1,6 +1,7 @@
 {
-  "name": "Undead Resilience",
+  "name": "Construct Resilience",
   "type": "feature",
+  "_id": "mgIy0dlBCDXk6o5C",
   "img": "systems/black-flag/artwork/types/feature.svg",
   "system": {
     "activities": {},
@@ -13,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[@name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+      "value": "<p>The [[@name lowercase]] is immune to poison and psychic damage, and it is immune to exhaustion and the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -30,7 +31,7 @@
   "effects": [
     {
       "icon": "systems/black-flag/artwork/types/feature.svg",
-      "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
+      "origin": "Compendium.black-flag.npcfeatures.Item.mgIy0dlBCDXk6o5C",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -41,8 +42,8 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Undead Resilience",
-      "_id": "eTrciZFtsPDaLR2j",
+      "name": "Construct Resilience",
+      "_id": "kaexE9tx9L3fp0QH",
       "changes": [
         {
           "key": "system.traits.damage.immunities.value",
@@ -50,9 +51,34 @@
           "value": "poison"
         },
         {
+          "key": "system.traits.damage.immunities.value",
+          "mode": 2,
+          "value": "psychic"
+        },
+        {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
           "value": "exhaustion"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "frightened"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "paralyzed"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "petrified"
         },
         {
           "key": "system.traits.condition.immunities.value",
@@ -65,29 +91,22 @@
       "statuses": [],
       "flags": {},
       "tint": null,
-      "_key": "!items.effects!2HH89GIIAuYvfRlt.eTrciZFtsPDaLR2j"
+      "_key": "!items.effects!mgIy0dlBCDXk6o5C.kaexE9tx9L3fp0QH"
     }
   ],
   "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {
-    "black-flag": {
-      "relationship": {
-        "enabled": true
-      }
-    }
-  },
+  "flags": {},
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1706467905493,
-    "modifiedTime": 1709611900200,
+    "createdTime": 1709606040616,
+    "modifiedTime": 1709611788186,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_id": "2HH89GIIAuYvfRlt",
-  "sort": 0,
-  "_key": "!items!2HH89GIIAuYvfRlt"
+  "_key": "!items!mgIy0dlBCDXk6o5C"
 }

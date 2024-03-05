@@ -1,6 +1,7 @@
 {
-  "name": "Undead Resilience",
+  "name": "Demonic Resilience",
   "type": "feature",
+  "_id": "30zXkRqsI6WEowjf",
   "img": "systems/black-flag/artwork/types/feature.svg",
   "system": {
     "activities": {},
@@ -13,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[@name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+      "value": "<p>The [[@name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -30,7 +31,7 @@
   "effects": [
     {
       "icon": "systems/black-flag/artwork/types/feature.svg",
-      "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
+      "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -41,18 +42,28 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Undead Resilience",
-      "_id": "eTrciZFtsPDaLR2j",
+      "name": "Demonic Resilience",
+      "_id": "QEROKmLmQGbXQUxg",
       "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "cold"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "fire"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "lightning"
+        },
         {
           "key": "system.traits.damage.immunities.value",
           "mode": 2,
           "value": "poison"
-        },
-        {
-          "key": "system.traits.condition.immunities.value",
-          "mode": 2,
-          "value": "exhaustion"
         },
         {
           "key": "system.traits.condition.immunities.value",
@@ -65,29 +76,22 @@
       "statuses": [],
       "flags": {},
       "tint": null,
-      "_key": "!items.effects!2HH89GIIAuYvfRlt.eTrciZFtsPDaLR2j"
+      "_key": "!items.effects!30zXkRqsI6WEowjf.QEROKmLmQGbXQUxg"
     }
   ],
   "folder": null,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {
-    "black-flag": {
-      "relationship": {
-        "enabled": true
-      }
-    }
-  },
+  "flags": {},
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1706467905493,
-    "modifiedTime": 1709611900200,
+    "createdTime": 1709611708224,
+    "modifiedTime": 1709616398592,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_id": "2HH89GIIAuYvfRlt",
-  "sort": 0,
-  "_key": "!items!2HH89GIIAuYvfRlt"
+  "_key": "!items!30zXkRqsI6WEowjf"
 }
