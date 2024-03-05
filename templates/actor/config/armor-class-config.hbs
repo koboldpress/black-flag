@@ -1,36 +1,41 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{localize "BF.ArmorClass.Label"}}</legend>
+		<legend>{{ localize "BF.ArmorClass.Label" }}</legend>
 		<label>
 			<span>
-				{{localize "BF.ArmorClass.Flat.Label"}}
+				{{ localize "BF.ArmorClass.Flat.Label" }}
 				<i class="hintIcon" data-tooltip="BF.ArmorClass.Flat.Hint"></i>
 			</span>
-			<input type="number" name="system.attributes.ac.flat" value="{{source.attributes.ac.flat}}">
+			<input type="number" name="system.attributes.ac.flat" value="{{ source.attributes.ac.flat }}">
 		</label>
 		<label>
 			<span>
-				{{localize "BF.ArmorClass.Override.Label"}}
+				{{ localize "BF.ArmorClass.Override.Label" }}
 				<i class="hintIcon" data-tooltip="BF.ArmorClass.Override.Hint"></i>
 			</span>
-			<input type="number" name="system.attributes.ac.override" value="{{source.attributes.ac.override}}">
+			<input type="number" name="system.attributes.ac.override" value="{{ source.attributes.ac.override }}">
+		</label>
+		<label>
+			<span>{{ localize "BF.ArmorClass.CustomLabel" }}</span>
+			<input type="text" name="system.attributes.ac.customLabel" value="{{ source.attributes.ac.customLabel }}"
+			       placeholder="{{ system.attributes.ac.defaultLabel }}">
 		</label>
 	</fieldset>
 	
 	<fieldset class="modifier-list">
-		<legend>{{localize "BF.ArmorClass.Formula.DefaultLabel[other]"}}</legend>
+		<legend>{{ localize "BF.ArmorClass.Formula.DefaultLabel[other]" }}</legend>
 		<ul class="modifiers">
 			{{#each armorFormulas}}
 				<li class="modifier">
-					<input type="checkbox" name="formulas.{{this.id}}" {{checked this.checked}}>
-					<input type="text" value="{{localize this.label}}" disabled>
-					<input type="text" value="{{this.formula}}" disabled>
+					<input type="checkbox" name="formulas.{{ this.id }}" {{ checked this.checked }}>
+					<input type="text" value="{{ localize this.label }}" disabled>
+					<input type="text" value="{{ this.formula }}" disabled>
 				</li>
 			{{/each}}
 		</ul>
 	</fieldset>
 
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this}}
+		{{> "blackFlag.modifier-list" section=this }}
 	{{/each}}
 </form>

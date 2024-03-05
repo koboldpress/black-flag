@@ -7,6 +7,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  */
 export default class ACTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			attributes: new SchemaField({
@@ -14,6 +15,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored"]
 					}, { label: "BF.ArmorClass.Formula.DefaultLabel[other]" }),
+					customLabel: new StringField({label: "BF.ArmorClass.CustomLabel"}),
 					formulas: new ArrayField(new SchemaField({
 						label: new StringField(),
 						formula: new FormulaField({deterministic: true}),
@@ -35,6 +37,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareBaseArmorFormulas() {
 		const ac = this.attributes.ac;
 		for ( const baseFormula of ac.baseFormulas ) {
@@ -44,13 +47,19 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 			}, {inplace: false}));
 		}
 		ac.cover = 0;
-		Object.defineProperty(ac, "label", {
+		Object.defineProperty(ac, "defaultLabel", {
 			get() {
 				const label = [];
 				if ( this.currentFormula?.id === "armored" ) label.push(this.equippedArmor.name);
 				else if ( this.currentFormula?.label ) label.push(game.i18n.localize(this.currentFormula.label));
 				if ( this.equippedShield ) label.push(this.equippedShield.name);
 				return game.i18n.getListFormatter({ style: "short", type: "unit" }).format(label);
+			},
+			configurable: true
+		});
+		Object.defineProperty(ac, "label", {
+			get() {
+				return this.customLabel || this.defaultLabel;
 			},
 			configurable: true
 		});

@@ -334,55 +334,76 @@
 	}
 },
 
-"BF.Armor.Label[one]": "Armor",
-"BF.Armor.Label[other]": "Armor",
-"BF.Armor.Category.Heavy[one]": "Heavy Armor",
-"BF.Armor.Category.Heavy[other]": "Heavy Armor",
-"BF.Armor.Category.Light[one]": "Light Armor",
-"BF.Armor.Category.Light[other]": "Light Armor",
-"BF.Armor.Category.Medium[one]": "Medium Armor",
-"BF.Armor.Category.Medium[other]": "Medium Armor",
-"BF.Armor.Category.Shield[one]": "Shield",
-"BF.Armor.Category.Shield[other]": "Shields",
-"BF.Armor.Modifier.Label": "Modifier",
-"BF.Armor.Modifier.Description.Long": "+ {ability} modifier",
-"BF.Armor.Modifier.Description.Max": "{hint} (max {max})",
-"BF.Armor.Modifier.Description.Short": "+ {ability}",
-"BF.Armor.Modifier.Maximum.Label": "Maximum Modifier",
-"BF.Armor.Modifier.Minimum.Label": "Minimum Modifier",
-"BF.Armor.Notification.NotProficient": "Using {type} without proficiency results in disadvantage on STR & DEX ability checks.",
-"BF.Armor.Notification.NotProficientNote": "Wielding {name} while not proficient.",
-"BF.Armor.Notification.TooMany": "More than one {type} equipped.",
-"BF.Armor.Property.Cumbersome.Label": "Cumbersome",
-"BF.Armor.Property.NaturalMaterials.Label": "Natural Materials",
-"BF.Armor.Property.Noisy.Label": "Noisy",
-"BF.Armor.RequiredStrength.Label": "Required Strength",
-"BF.Armor.Type.ChainMail": "Chain Mail",
-"BF.Armor.Type.ChainShirt": "Chain Shirt",
-"BF.Armor.Type.HalfPlate": "Half Plate",
-"BF.Armor.Type.Hide": "Hide",
-"BF.Armor.Type.Leather": "Leather",
-"BF.Armor.Type.Plate": "Plate",
-"BF.Armor.Type.RingMail": "Ring Mail",
-"BF.Armor.Type.ScaleMail": "Scale Mail",
-"BF.Armor.Type.Splint": "Splint",
-"BF.Armor.Type.StuddedLeather": "Studded Leather",
-"BF.Armor.Value.Label": "Armor Value",
+"BF.Armor": {
+	"Label[one]": "Armor",
+	"Label[other]": "Armor",
+	"Category": {
+		"Heavy[one]": "Heavy Armor",
+		"Heavy[other]": "Heavy Armor",
+		"Light[one]": "Light Armor",
+		"Light[other]": "Light Armor",
+		"Medium[one]": "Medium Armor",
+		"Medium[other]": "Medium Armor",
+		"Shield[one]": "Shield",
+		"Shield[other]": "Shields"
+	},
+	"Modifier": {
+		"Label": "Modifier",
+		"Description.Long": "+ {ability} modifier",
+		"Description.Max": "{hint} (max {max})",
+		"Description.Short": "+ {ability}",
+		"Maximum.Label": "Maximum Modifier",
+		"Minimum.Label": "Minimum Modifier"
+	},
+	"Notification": {
+		"NotProficient": "Using {type} without proficiency results in disadvantage on STR & DEX ability checks.",
+		"NotProficientNote": "Wielding {name} while not proficient.",
+		"TooMany": "More than one {type} equipped."
+	},
+	"Property": {
+		"Cumbersome": "Cumbersome",
+		"NaturalMaterials": "Natural Materials",
+		"Noisy": "Noisy"
+	},
+	"RequiredStrength.Label": "Required Strength",
+	"Type": {
+		"ChainMail": "Chain Mail",
+		"ChainShirt": "Chain Shirt",
+		"HalfPlate": "Half Plate",
+		"Hide": "Hide",
+		"Leather": "Leather",
+		"Plate": "Plate",
+		"RingMail": "Ring Mail",
+		"ScaleMail": "Scale Mail",
+		"Splint": "Splint",
+		"StuddedLeather": "Studded Leather"
+	},
+	"Value.Label": "Armor Value"
+},
 
-"BF.ArmorClass.Label": "Armor Class",
-"BF.ArmorClass.Abbreviation": "AC",
-"BF.ArmorClass.Flat.Label": "Flat Value",
-"BF.ArmorClass.Flat.Hint": "Arbitrary that is made available to AC formulas such as Natural Armor.",
-"BF.ArmorClass.Formula.Label[one]": "AC Formula",
-"BF.ArmorClass.Formula.Label[other]": "AC Formulas",
-"BF.ArmorClass.Formula.DefaultLabel[one]": "Default AC Formula",
-"BF.ArmorClass.Formula.DefaultLabel[other]": "Default AC Formulas",
-"BF.ArmorClass.Formula.Armored": "Armored",
-"BF.ArmorClass.Formula.Natural": "Natural Armor",
-"BF.ArmorClass.Formula.Unarmored": "Unarmored",
-"BF.ArmorClass.Formula.Error": "Failed to evaluate AC formula: {formula} ({error})",
-"BF.ArmorClass.Override.Label": "Override",
-"BF.ArmorClass.Override.Hint": "Value that will replace the calculated AC, preventing any other bonuses from applying.",
+"BF.ArmorClass": {
+	"Label": "Armor Class",
+	"Abbreviation": "AC",
+	"CustomLabel": "Custom Label",
+	"Flat": {
+		"Label": "Flat Value",
+		"Hint": "Arbitrary that is made available to AC formulas such as Natural Armor."
+	},
+	"Formula": {
+		"Label[one]": "AC Formula",
+		"Label[other]": "AC Formulas",
+		"DefaultLabel[one]": "Default AC Formula",
+		"DefaultLabel[other]": "Default AC Formulas",
+		"Armored": "Armored",
+		"Natural": "Natural Armor",
+		"Unarmored": "Unarmored",
+		"Error": "Failed to evaluate AC formula: {formula} ({error})"
+	},
+	"Override": {
+		"Label": "Override",
+		"Hint": "Value that will replace the calculated AC, preventing any other bonuses from applying."
+	}
+},
 
 "BF.Attack.Classification.Label": "Classification",
 

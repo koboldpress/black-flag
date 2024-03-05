@@ -127,13 +127,13 @@ export const itemProperties = {
 
 	// Armor
 	cumbersome: {
-		label: "BF.Armor.Property.Cumbersome.Label"
+		label: "BF.Armor.Property.Cumbersome"
 	},
 	naturalMaterials: {
-		label: "BF.Armor.Property.NaturalMaterials.Label"
+		label: "BF.Armor.Property.NaturalMaterials"
 	},
 	noisy: {
-		label: "BF.Armor.Property.Noisy.Label"
+		label: "BF.Armor.Property.Noisy"
 	},
 
 	// Container
