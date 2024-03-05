@@ -137,11 +137,11 @@ export const movementTypes = {
 	climb: {
 		label: "BF.Movement.Type.Climb"
 	},
-	swim: {
-		label: "BF.Movement.Type.Swim"
-	},
 	fly: {
 		label: "BF.Movement.Type.Fly"
+	},
+	swim: {
+		label: "BF.Movement.Type.Swim"
 	},
 	burrow: {
 		label: "BF.Movement.Type.Burrow"

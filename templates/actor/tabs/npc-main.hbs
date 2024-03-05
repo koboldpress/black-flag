@@ -75,6 +75,19 @@
 				<span>{{blackFlag-number skills.stealth}}</span>
 			{{/if}}
 		</label>
+		{{#if traits.vulnerable}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<a data-action="config" data-type="resistance">
+							<i class="fa-solid fa-cog"></i>
+						</a>
+					{{/if}}
+					{{localize "BF.Vulnerability.Short"}}
+				</span>
+				<span>{{traits.vulnerable}}</span>
+			</label>
+		{{/if}}
 		{{#if traits.resist}}
 			<label>
 				<span>
@@ -99,19 +112,6 @@
 					{{localize "BF.Immunity.Short"}}
 				</span>
 				<span>{{traits.immune}}</span>
-			</label>
-		{{/if}}
-		{{#if traits.vulnerable}}
-			<label>
-				<span>
-					{{#if modes.editing}}
-						<a data-action="config" data-type="resistance">
-							<i class="fa-solid fa-cog"></i>
-						</a>
-					{{/if}}
-					{{localize "BF.Vulnerability.Short"}}
-				</span>
-				<span>{{traits.vulnerable}}</span>
 			</label>
 		{{/if}}
 		<label>

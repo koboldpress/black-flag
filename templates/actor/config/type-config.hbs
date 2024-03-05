@@ -3,7 +3,7 @@
 		<legend>{{localize "BF.CreatureSizeAndType.Label"}}</legend>
 		<label>
 			<span>{{localize "BF.Size.Label"}}</span>
-			<select name="system.traits.size">
+			<select name="size">
 				{{selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true blank=""}}
 			</select>
 		</label>
@@ -13,20 +13,20 @@
 					{{localize "BF.CreatureType.Swarm.Label"}}
 					<i class="hintIcon" data-tooltip="BF.CreatureType.Swarm.Hint"></i>
 				</span>
-				<select name="system.traits.type.swarm">
+				<select name="type.swarm">
 					{{selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank=""}}
 				</select>
 			</label>
 		{{/if}}
 		<label>
 			<span>{{localize "BF.CreatureType.Label"}}</span>
-			<select name="system.traits.type.value">
+			<select name="type.value">
 				{{selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank=""}}
 			</select>
 		</label>
 	</fieldset>
 	<fieldset>
 		<legend>{{localize "BF.CreatureType.Tag.Label"}}</legend>
-		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="type.tags"}}
 	</fieldset>
 </form>
