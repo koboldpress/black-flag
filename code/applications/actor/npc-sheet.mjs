@@ -77,49 +77,65 @@ export default class NPCSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async prepareTraits(context) {
 		context.traits = {};
-		const { proficiencies, traits } = context.system;
+		const { proficiencies } = context.system;
 		const none = game.i18n.localize("None");
 
 		context.traits.speed = this.actor.system.traits.movement.label?.toLowerCase() || "—";
 		context.traits.senses = this.actor.system.traits.senses.label?.toLowerCase() || "—";
 		context.traits.languages = proficiencies.languages.label || "—";
 
-		// TODO: For Resistances, Immunities, and Vulnerabilities, find any entries added by active effects
-		// and simply show the name of the item that provided them with a tooltip
-
-		// Resistances
-		const resistances = [
-			...Array.from(traits.damage.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t]?.label ?? t)
-			).filter(t => t),
-			...Array.from(traits.condition.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t]?.label ?? t)
-			)
-		].filter(t => t);
-		if ( resistances.length || this.modes.editing ) {
-			context.traits.resist = game.i18n.getListFormatter({ style: "short" }).format(resistances) || none;
+		// Search through active effects for any that apply to traits
+		const validKeyPaths = new Set([
+			"system.traits.damage.resistances.value", "system.traits.condition.resistances.value",
+			"system.traits.damage.immunities.value", "system.traits.condition.immunities.value",
+			"system.traits.damage.vulnerabilties.value"
+		]);
+		const associatedEffects = [];
+		for ( const effect of this.actor.allApplicableEffects() ) {
+			if ( effect.disabled ) continue;
+			const data = { effect };
+			for ( const change of effect.changes ) {
+				if ( validKeyPaths.has(change.key) ) {
+					data[change.key] ??= [];
+					data[change.key].push(change.value);
+				}
+			}
+			if ( Object.values(data).length > 1 ) associatedEffects.push(data);
 		}
 
-		// Immunities
-		const immunities = [
-			...Array.from(traits.damage.immunities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-			),
-			...Array.from(traits.condition.immunities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
-			)
-		].filter(t => t);
-		if ( immunities.length || this.modes.editing ) {
-			context.traits.immune = game.i18n.getListFormatter({ style: "short" }).format(immunities) || none;
-		}
+		const formatter = game.i18n.getListFormatter({ type: "unit" });
+		const createSection = (data, config) => formatter.format(data.map(d => config[d]).filter(f => f));
+		const createTrait = name => {
+			const sections = [];
+			const damages = foundry.utils.getProperty(context.source, `traits.damage.${name}.value`);
+			if ( damages?.length ) sections.push(
+				createSection(damages, CONFIG.BlackFlag.damageTypes.localized).toLowerCase()
+			);
+			const conditions = foundry.utils.getProperty(context.source, `traits.condition.${name}.value`);
+			if ( conditions?.length ) sections.push(
+				createSection(conditions, CONFIG.BlackFlag.conditions.localized).toLowerCase()
+			);
 
-		// Vulnerabilities
-		const vulnerabilities = traits.damage.vulnerabilities.value.map(t =>
-			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-		).filter(t => t);
-		if ( vulnerabilities.size || this.modes.editing ) {
-			context.traits.vulnerable = game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none;
-		}
+			for ( const effect of associatedEffects ) {
+				const effectSections = [];
+				const damages = effect[`system.traits.damage.${name}.value`];
+				if ( damages?.length ) effectSections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized));
+				const conditions = effect[`system.traits.condition.${name}.value`];
+				if ( conditions?.length ) effectSections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized));
+				if ( effectSections.length ) {
+					sections.push(`<span data-tooltip="${effectSections.join(" | ")}">${effect.effect.name}</span>`);
+				}
+			}
+
+			return sections.join(" | ");
+		};
+
+		const resistances = createTrait("resistances");
+		if ( resistances || this.modes.editing ) context.traits.resist = resistances || none;
+		const immunities = createTrait("immunities");
+		if ( immunities || this.modes.editing ) context.traits.immune = immunities || none;
+		const vulnerabilities = createTrait("vulnerabilities");
+		if ( vulnerabilities || this.modes.editing ) context.traits.vulnerable = vulnerabilities || none;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
