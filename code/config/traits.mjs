@@ -76,7 +76,8 @@ export const traits = {
 			localization: "BF.Language.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/languages.svg",
-		type: "proficiency"
+		type: "proficiency",
+		sortCategories: false
 	}
 };
 
@@ -163,6 +164,17 @@ export const languages = {
 			},
 			voidSpeech: {
 				label: "BF.Language.Dialect.VoidSpeech"
+			}
+		}
+	},
+	secret: {
+		localization: "BF.Language.Category.Secret",
+		children: {
+			druidic: {
+				label: "BF.Language.Dialect.Druidic"
+			},
+			thievesCant: {
+				label: "BF.Language.Dialect.ThievesCant"
 			}
 		}
 	}
