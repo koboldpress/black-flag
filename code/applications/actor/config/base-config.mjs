@@ -4,10 +4,12 @@
  */
 export default class BaseConfig extends DocumentSheet {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			width: 450,
 			height: "auto",
+			sheetConfig: false,
 			submitOnChange: true,
 			submitOnClose: true,
 			closeOnSubmit: false
@@ -18,6 +20,7 @@ export default class BaseConfig extends DocumentSheet {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return `${game.i18n.format("BF.Configuration.Title", { type: this.type })}`;
 	}
@@ -33,9 +36,10 @@ export default class BaseConfig extends DocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		return foundry.utils.mergeObject({
 			CONFIG: CONFIG.BlackFlag,
@@ -87,6 +91,7 @@ export default class BaseConfig extends DocumentSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -130,6 +135,7 @@ export default class BaseConfig extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		const data = foundry.utils.expandObject(formData);
 

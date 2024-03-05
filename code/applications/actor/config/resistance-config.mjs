@@ -3,6 +3,7 @@ import BaseConfig from "./base-config.mjs";
 
 export default class ResistanceConfig extends BaseConfig {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "resistance"],
@@ -15,31 +16,33 @@ export default class ResistanceConfig extends BaseConfig {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get type() {
-		return game.i18n.localize("");
+		return game.i18n.localize("BF.Resistance.Config");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
-		const traits = this.document.system.traits;
+		const traits = context.source.traits ?? {};
 		context.damageTypes = Object.entries(CONFIG.BlackFlag.damageTypes.localized).reduce((obj, [key, label]) => {
 			obj[key] = {
 				label,
-				resistant: traits.damage.resistances.value.has(key),
-				immune: traits.damage.immunities.value.has(key),
-				vulnerable: traits.damage.vulnerabilities.value.has(key)
+				resistant: traits.damage.resistances?.value?.includes(key),
+				immune: traits.damage.immunities?.value?.includes(key),
+				vulnerable: traits.damage.vulnerabilities?.value?.includes(key)
 			};
 			return obj;
 		}, {});
 		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).reduce((obj, [key, label]) => {
 			obj[key] = {
 				label,
-				resistant: traits.condition.resistances.value.has(key),
-				immune: traits.condition.immunities.value.has(key)
+				resistant: traits.condition.resistances?.value?.includes(key),
+				immune: traits.condition.immunities?.value?.includes(key)
 			};
 			return obj;
 		}, {});
@@ -50,6 +53,7 @@ export default class ResistanceConfig extends BaseConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 		foundry.utils.setProperty(updates, "condition.resistances.value", filteredKeys(updates.cr.value));
