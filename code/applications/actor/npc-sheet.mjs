@@ -131,8 +131,9 @@ export default class NPCSheet extends BaseActorSheet {
 	 */
 	_removeTitle(element) {
 		const title = element.querySelector(".window-header .window-title");
-		const uuid = title.querySelector("a");
-		title.innerHTML = `<span></span>${uuid?.outerHTML ?? ""}`;
+		const idLink = title.querySelector(".document-id-link");
+		title.innerHTML = `<span class="title-text">${title.innerText}</span>`;
+		title.appendChild(idLink);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

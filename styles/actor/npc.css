@@ -23,6 +23,10 @@
 		box-shadow: 0 0 4px 1px var(--bf-color-border-light-blue);
 	}
 
+	&:not(.minimized) .window-title .title-text {
+		display: none;
+	}
+
 	@container sheet (width <= 550px) {
 		.window-header .header-button > span {
 			position: absolute;
