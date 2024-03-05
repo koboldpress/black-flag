@@ -1,8 +1,8 @@
 {
-  "name": "Plant Resilience",
+  "name": "Aberrant Resilience",
   "type": "feature",
-  "_id": "wKYxtPQ0kudDdh4N",
-  "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+  "_id": "dHvL2Fik9NneYaUg",
+  "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -14,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+      "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed, frightened, paralyzed, and stunned conditions, and it has advantage on saves against spells or effects that would alter its form.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -22,7 +22,8 @@
       "filters": []
     },
     "type": {
-      "category": "monsters"
+      "category": "monsters",
+      "value": ""
     },
     "level": {
       "value": null
@@ -30,8 +31,8 @@
   },
   "effects": [
     {
-      "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-      "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
+      "icon": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
+      "origin": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -42,13 +43,18 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Plant Resilience",
-      "_id": "4alHXchWfiVtXGAv",
+      "name": "Aberrant Resilience",
+      "_id": "vyiAWYKxFWNBOFa1",
       "changes": [
         {
           "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "exhaustion"
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "frightened"
         },
         {
           "key": "system.traits.condition.resistances.value",
@@ -58,12 +64,7 @@
         {
           "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "petrified"
-        },
-        {
-          "key": "system.traits.condition.resistances.value",
-          "mode": 2,
-          "value": "unconscious"
+          "value": "stunned"
         }
       ],
       "description": "",
@@ -71,7 +72,7 @@
       "statuses": [],
       "flags": {},
       "tint": null,
-      "_key": "!items.effects!wKYxtPQ0kudDdh4N.4alHXchWfiVtXGAv"
+      "_key": "!items.effects!dHvL2Fik9NneYaUg.vyiAWYKxFWNBOFa1"
     }
   ],
   "folder": null,
@@ -84,9 +85,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709615924250,
-    "modifiedTime": 1709666538642,
+    "createdTime": 1709672456179,
+    "modifiedTime": 1709672764138,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!wKYxtPQ0kudDdh4N"
+  "_key": "!items!dHvL2Fik9NneYaUg"
 }

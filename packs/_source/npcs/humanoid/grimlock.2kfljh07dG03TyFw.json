@@ -1,8 +1,8 @@
 {
   "folder": "V0kGTSPAwPozSTUq",
-  "name": "Kobold",
+  "name": "Grimlock",
   "type": "npc",
-  "_id": "Doo3kyUey8pTbY8K",
+  "_id": "2kfljh07dG03TyFw",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -14,7 +14,7 @@
         ],
         "formulas": [],
         "flat": null,
-        "override": 12
+        "override": null
       },
       "exhaustion": 0,
       "initiative": {
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 0.125,
+      "cr": 0.25,
       "hp": {
-        "value": 9,
-        "max": 9,
+        "value": 17,
+        "max": 17,
         "temp": null
       },
       "legendary": {
@@ -35,13 +35,13 @@
         "max": null
       },
       "perception": null,
-      "stealth": null
+      "stealth": 13
     },
     "proficiencies": {
       "languages": {
         "value": [
-          "draconic",
-          "common"
+          "dwarvish",
+          "undercommon"
         ],
         "communication": {},
         "custom": [],
@@ -59,14 +59,16 @@
       },
       "senses": {
         "types": {
-          "darkvision": "60",
-          "keensense": "",
+          "darkvision": "",
+          "keensense": "30",
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": []
+        "tags": [
+          "cantSense"
+        ]
       },
-      "size": "small",
+      "size": "medium",
       "condition": {
         "resistances": {
           "value": [],
@@ -75,6 +77,11 @@
         "immunities": {
           "value": [],
           "custom": []
+        },
+        "vulnerabilities": {
+          "value": [
+            "deafened"
+          ]
         }
       },
       "damage": {
@@ -89,7 +96,9 @@
           "bypasses": []
         },
         "vulnerabilities": {
-          "value": [],
+          "value": [
+            "thunder"
+          ],
           "custom": []
         }
       },
@@ -101,22 +110,22 @@
     },
     "abilities": {
       "strength": {
-        "mod": -2
+        "mod": 3
       },
       "dexterity": {
-        "mod": 4
+        "mod": 1
       },
       "constitution": {
-        "mod": -1
+        "mod": 1
       },
       "intelligence": {
         "mod": -1
       },
       "wisdom": {
-        "mod": -2
+        "mod": 1
       },
       "charisma": {
-        "mod": -1
+        "mod": -2
       }
     },
     "biography": {
@@ -126,7 +135,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Kobold",
+    "name": "Grimlock",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -199,9 +208,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709615698832,
-    "modifiedTime": 1709672265885,
+    "createdTime": 1709671730021,
+    "modifiedTime": 1709671981934,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!Doo3kyUey8pTbY8K"
+  "_key": "!actors!2kfljh07dG03TyFw"
 }

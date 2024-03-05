@@ -1,8 +1,8 @@
 {
-  "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "folder": "V0kGTSPAwPozSTUq",
+  "name": "Orc",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "fp7eFxkfnQqq5GJZ",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,7 +13,7 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
+        "flat": null,
         "override": null
       },
       "exhaustion": 0,
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 0.5,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 25,
+        "max": 25,
         "temp": null
       },
       "legendary": {
@@ -40,25 +40,18 @@
     "proficiencies": {
       "languages": {
         "value": [
-          "sylvan"
+          "common",
+          "orcish"
         ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "communication": {},
+        "custom": [],
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 30,
         "types": {
           "walk": "@base"
         },
@@ -66,14 +59,12 @@
       },
       "senses": {
         "types": {
-          "darkvision": "",
-          "keensense": "120",
+          "darkvision": "60",
+          "keensense": "",
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": [
-          "cantSense"
-        ]
+        "tags": []
       },
       "size": "medium",
       "condition": {
@@ -82,6 +73,10 @@
           "custom": []
         },
         "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -93,9 +88,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -105,9 +98,8 @@
         }
       },
       "type": {
-        "value": "plant",
-        "tags": [],
-        "swarm": ""
+        "value": "humanoid",
+        "tags": []
       }
     },
     "abilities": {
@@ -115,19 +107,19 @@
         "mod": 3
       },
       "dexterity": {
-        "mod": 2
-      },
-      "constitution": {
         "mod": 1
       },
+      "constitution": {
+        "mod": 3
+      },
       "intelligence": {
-        "mod": -1
+        "mod": -2
       },
       "wisdom": {
-        "mod": 4
+        "mod": null
       },
       "charisma": {
-        "mod": -1
+        "mod": null
       }
     },
     "biography": {
@@ -137,7 +129,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Orc",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -201,93 +193,57 @@
   },
   "items": [
     {
-      "name": "Plant Resilience",
-      "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
-      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "folder": "JW7MCVevEcSMmi9e",
+      "name": "Hide",
+      "type": "armor",
+      "_id": "uf1guagNHCTTWxwu",
+      "img": "icons/equipment/chest/vest-leather-tattered-white.webp",
       "system": {
-        "activities": {},
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
+        "overrides": {
+          "proficiency": null
         },
-        "advancement": {},
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 12,
+          "units": "pound"
+        },
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+          "value": "",
           "source": "Black Flag Reference Document"
         },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
         "type": {
-          "category": "monsters"
+          "category": "medium",
+          "base": "hide"
         },
-        "level": {
-          "value": null
-        }
+        "properties": [
+          "naturalMaterials"
+        ],
+        "armor": {
+          "value": 12,
+          "requiredStrength": null
+        },
+        "modifier": {
+          "min": null,
+          "max": null
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
       },
-      "effects": [
-        {
-          "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-          "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
-          "duration": {
-            "rounds": null,
-            "startTime": 0,
-            "seconds": null,
-            "combat": null,
-            "turns": null,
-            "startRound": 0,
-            "startTurn": 0
-          },
-          "disabled": false,
-          "name": "Plant Resilience",
-          "_id": "4alHXchWfiVtXGAv",
-          "changes": [
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
-              "priority": null
-            }
-          ],
-          "description": "",
-          "transfer": true,
-          "statuses": [],
-          "flags": {},
-          "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
-        }
-      ],
-      "folder": null,
+      "effects": [],
       "sort": 0,
       "ownership": {
         "default": 0
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N"
+          "sourceId": "Compendium.black-flag.items.Item.fN3bw7IZzSxbkcYX"
         },
         "black-flag": {
           "relationship": {
@@ -299,11 +255,11 @@
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
-        "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "createdTime": 1701023507554,
+        "modifiedTime": 1709672405922,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!fp7eFxkfnQqq5GJZ.uf1guagNHCTTWxwu"
     }
   ],
   "effects": [],
@@ -316,9 +272,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709672372524,
+    "modifiedTime": 1709672405922,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!fp7eFxkfnQqq5GJZ"
 }

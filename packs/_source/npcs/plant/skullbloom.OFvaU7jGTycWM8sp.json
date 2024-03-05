@@ -1,8 +1,8 @@
 {
   "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "name": "Skullbloom",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "OFvaU7jGTycWM8sp",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,8 +13,9 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
-        "override": null
+        "flat": 11,
+        "override": null,
+        "customLabel": ""
       },
       "exhaustion": 0,
       "initiative": {
@@ -24,41 +25,34 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 0.5,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 23,
+        "max": 23,
         "temp": null
       },
       "legendary": {
         "spent": 0,
         "max": null
       },
-      "perception": null,
-      "stealth": null
+      "perception": 11,
+      "stealth": 12
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
+        "value": [],
+        "communication": {},
+        "custom": [],
         "tags": [
-          "cantSpeak"
+          "cantSpeak",
+          "knownInLife"
         ]
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 30,
         "types": {
           "walk": "@base"
         },
@@ -67,13 +61,11 @@
       "senses": {
         "types": {
           "darkvision": "",
-          "keensense": "120",
+          "keensense": "10",
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": [
-          "cantSense"
-        ]
+        "tags": []
       },
       "size": "medium",
       "condition": {
@@ -82,6 +74,10 @@
           "custom": []
         },
         "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -93,9 +89,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -112,22 +106,22 @@
     },
     "abilities": {
       "strength": {
-        "mod": 3
-      },
-      "dexterity": {
         "mod": 2
       },
+      "dexterity": {
+        "mod": null
+      },
       "constitution": {
-        "mod": 1
+        "mod": 2
       },
       "intelligence": {
-        "mod": -1
+        "mod": -4
       },
       "wisdom": {
-        "mod": 4
+        "mod": -1
       },
       "charisma": {
-        "mod": -1
+        "mod": -3
       }
     },
     "biography": {
@@ -137,7 +131,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Skullbloom",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -203,7 +197,7 @@
     {
       "name": "Plant Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
+      "_id": "VL87o6aeHBCrqLuZ",
       "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
       "system": {
         "activities": {},
@@ -277,7 +271,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!OFvaU7jGTycWM8sp.VL87o6aeHBCrqLuZ.4alHXchWfiVtXGAv"
         }
       ],
       "folder": null,
@@ -300,10 +294,10 @@
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
         "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "modifiedTime": 1709673911203,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.VL87o6aeHBCrqLuZ"
     }
   ],
   "effects": [],
@@ -316,9 +310,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709673876531,
+    "modifiedTime": 1709673911203,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!OFvaU7jGTycWM8sp"
 }

@@ -1,8 +1,8 @@
 {
-  "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "folder": "ACk8ILSUrBQafNpa",
+  "name": "Harpy",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "6iYSh1A8TVKlGH7D",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,7 +13,7 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
+        "flat": null,
         "override": null
       },
       "exhaustion": 0,
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 1,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 38,
+        "max": 38,
         "temp": null
       },
       "legendary": {
@@ -39,49 +39,47 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 20,
         "types": {
-          "walk": "@base"
+          "walk": "@base",
+          "climb": "",
+          "fly": "@base * 2",
+          "swim": "",
+          "burrow": ""
         },
         "tags": []
       },
       "senses": {
         "types": {
-          "darkvision": "",
-          "keensense": "120",
+          "darkvision": "120",
+          "keensense": "",
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": [
-          "cantSense"
-        ]
+        "tags": []
       },
       "size": "medium",
       "condition": {
         "resistances": {
-          "value": [],
+          "value": [
+            "charmed"
+          ],
           "custom": []
         },
         "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -93,9 +91,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -105,29 +101,29 @@
         }
       },
       "type": {
-        "value": "plant",
+        "value": "monstrosity",
         "tags": [],
         "swarm": ""
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 1
       },
       "dexterity": {
-        "mod": 2
+        "mod": 3
       },
       "constitution": {
         "mod": 1
       },
       "intelligence": {
-        "mod": -1
+        "mod": -2
       },
       "wisdom": {
-        "mod": 4
+        "mod": null
       },
       "charisma": {
-        "mod": -1
+        "mod": 1
       }
     },
     "biography": {
@@ -137,7 +133,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Harpy",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -201,10 +197,10 @@
   },
   "items": [
     {
-      "name": "Plant Resilience",
+      "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
-      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "_id": "VUc7Fe7vV6QGPaHY",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -216,7 +212,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
           "source": "Black Flag Reference Document"
         },
         "identifier": {},
@@ -232,8 +228,8 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-          "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
+          "icon": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
           "duration": {
             "rounds": null,
             "startTime": 0,
@@ -244,8 +240,8 @@
             "startTurn": 0
           },
           "disabled": false,
-          "name": "Plant Resilience",
-          "_id": "4alHXchWfiVtXGAv",
+          "name": "Monstrosity Resilience",
+          "_id": "jxagd3hzp2UTp7Wl",
           "changes": [
             {
               "key": "system.traits.condition.resistances.value",
@@ -256,19 +252,7 @@
             {
               "key": "system.traits.condition.resistances.value",
               "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
+              "value": "frightened",
               "priority": null
             }
           ],
@@ -277,7 +261,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!6iYSh1A8TVKlGH7D.VUc7Fe7vV6QGPaHY.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
@@ -287,7 +271,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N"
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk"
         },
         "black-flag": {
           "relationship": {
@@ -299,11 +283,11 @@
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
-        "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "createdTime": 1706473622104,
+        "modifiedTime": 1709672050824,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.VUc7Fe7vV6QGPaHY"
     }
   ],
   "effects": [],
@@ -316,9 +300,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709672004001,
+    "modifiedTime": 1709672050824,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!6iYSh1A8TVKlGH7D"
 }

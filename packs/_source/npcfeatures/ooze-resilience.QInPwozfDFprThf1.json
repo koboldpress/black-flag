@@ -2,7 +2,7 @@
   "name": "Ooze Resilience",
   "type": "feature",
   "_id": "QInPwozfDFprThf1",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -14,7 +14,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[@name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
+      "value": "<p>The [[lookup @name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
       "source": "Black Flag Reference Document"
     },
     "identifier": {},
@@ -30,7 +30,7 @@
   },
   "effects": [
     {
-      "icon": "systems/black-flag/artwork/types/feature.svg",
+      "icon": "icons/creatures/slimes/slime-giant-face-eyes.webp",
       "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
       "duration": {
         "rounds": null,
@@ -48,42 +48,50 @@
         {
           "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "grappled"
+          "value": "grappled",
+          "priority": null
         },
         {
           "key": "system.traits.condition.resistances.value",
           "mode": 2,
-          "value": "restrained"
+          "value": "restrained",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "exhaustion"
+          "value": "exhaustion",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "blinded"
+          "value": "blinded",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "charmed"
+          "value": "charmed",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "deafened"
+          "value": "deafened",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "frightened"
+          "value": "frightened",
+          "priority": null
         },
         {
           "key": "system.traits.condition.immunities.value",
           "mode": 2,
-          "value": "prone"
+          "value": "prone",
+          "priority": null
         }
       ],
       "description": "",
@@ -105,7 +113,7 @@
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
     "createdTime": 1709611470478,
-    "modifiedTime": 1709611838792,
+    "modifiedTime": 1709669552918,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!QInPwozfDFprThf1"

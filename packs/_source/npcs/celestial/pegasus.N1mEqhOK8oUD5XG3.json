@@ -1,8 +1,8 @@
 {
-  "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "folder": "znixScbzurqLkz5j",
+  "name": "Pegasus",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "N1mEqhOK8oUD5XG3",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,7 +13,7 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
+        "flat": null,
         "override": null
       },
       "exhaustion": 0,
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 2,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 57,
+        "max": 57,
         "temp": null
       },
       "legendary": {
@@ -39,49 +39,40 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 60,
         "types": {
-          "walk": "@base"
+          "walk": "@base",
+          "climb": "",
+          "fly": "90",
+          "swim": "",
+          "burrow": ""
         },
         "tags": []
       },
       "senses": {
-        "types": {
-          "darkvision": "",
-          "keensense": "120",
-          "tremorsense": "",
-          "truesight": ""
-        },
-        "tags": [
-          "cantSense"
-        ]
+        "types": {},
+        "tags": []
       },
-      "size": "medium",
+      "size": "large",
       "condition": {
         "resistances": {
           "value": [],
           "custom": []
         },
         "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -93,9 +84,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -105,29 +94,31 @@
         }
       },
       "type": {
-        "value": "plant",
-        "tags": [],
+        "value": "celestial",
+        "tags": [
+          "animal"
+        ],
         "swarm": ""
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 4
       },
       "dexterity": {
         "mod": 2
       },
       "constitution": {
-        "mod": 1
+        "mod": 3
       },
       "intelligence": {
-        "mod": -1
+        "mod": null
       },
       "wisdom": {
-        "mod": 4
+        "mod": 2
       },
       "charisma": {
-        "mod": -1
+        "mod": 1
       }
     },
     "biography": {
@@ -137,7 +128,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Pegasus",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -150,8 +141,8 @@
       "offsetY": 0,
       "rotation": 0
     },
-    "width": 1,
-    "height": 1,
+    "width": 2,
+    "height": 2,
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
@@ -201,10 +192,10 @@
   },
   "items": [
     {
-      "name": "Plant Resilience",
+      "name": "Celestial Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
-      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "_id": "PdiZzwxGqRsWGIgG",
+      "img": "icons/magic/holy/angel-winged-humanoid-blue.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -216,7 +207,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+          "value": "<p>The [[lookup @name lowercase]] is resistant to radiant damage.</p>",
           "source": "Black Flag Reference Document"
         },
         "identifier": {},
@@ -232,8 +223,8 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-          "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
+          "icon": "icons/magic/holy/angel-winged-humanoid-blue.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.CyOvikNLSOB1L2fT",
           "duration": {
             "rounds": null,
             "startTime": 0,
@@ -244,31 +235,13 @@
             "startTurn": 0
           },
           "disabled": false,
-          "name": "Plant Resilience",
-          "_id": "4alHXchWfiVtXGAv",
+          "name": "Celestial Resilience",
+          "_id": "ggk3wSDvlMxXXpMT",
           "changes": [
             {
-              "key": "system.traits.condition.resistances.value",
+              "key": "system.traits.damage.resistances.value",
               "mode": 2,
-              "value": "exhaustion",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
+              "value": "radiant",
               "priority": null
             }
           ],
@@ -277,7 +250,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!N1mEqhOK8oUD5XG3.PdiZzwxGqRsWGIgG.ggk3wSDvlMxXXpMT"
         }
       ],
       "folder": null,
@@ -287,7 +260,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N"
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.CyOvikNLSOB1L2fT"
         },
         "black-flag": {
           "relationship": {
@@ -299,11 +272,11 @@
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
-        "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "createdTime": 1709672696244,
+        "modifiedTime": 1709672813902,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.PdiZzwxGqRsWGIgG"
     }
   ],
   "effects": [],
@@ -316,9 +289,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709672664051,
+    "modifiedTime": 1709672813902,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!N1mEqhOK8oUD5XG3"
 }

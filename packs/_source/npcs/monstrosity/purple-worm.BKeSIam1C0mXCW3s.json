@@ -1,8 +1,8 @@
 {
-  "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "folder": "ACk8ILSUrBQafNpa",
+  "name": "Purple Worm",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "BKeSIam1C0mXCW3s",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,7 +13,7 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
+        "flat": 18,
         "override": null
       },
       "exhaustion": 0,
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 0,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 255,
+        "max": 255,
         "temp": null
       },
       "legendary": {
@@ -39,49 +39,47 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 50,
         "types": {
-          "walk": "@base"
+          "walk": "@base",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": "30"
         },
         "tags": []
       },
       "senses": {
         "types": {
           "darkvision": "",
-          "keensense": "120",
-          "tremorsense": "",
+          "keensense": "60",
+          "tremorsense": "60",
           "truesight": ""
         },
-        "tags": [
-          "cantSense"
-        ]
+        "tags": []
       },
-      "size": "medium",
+      "size": "gargantuan",
       "condition": {
         "resistances": {
           "value": [],
           "custom": []
         },
         "immunities": {
+          "value": [
+            "prone"
+          ],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -93,9 +91,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -105,29 +101,29 @@
         }
       },
       "type": {
-        "value": "plant",
+        "value": "monstrosity",
         "tags": [],
         "swarm": ""
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 9
       },
       "dexterity": {
-        "mod": 2
+        "mod": -2
       },
       "constitution": {
-        "mod": 1
+        "mod": 11
       },
       "intelligence": {
-        "mod": -1
+        "mod": -5
       },
       "wisdom": {
         "mod": 4
       },
       "charisma": {
-        "mod": -1
+        "mod": -3
       }
     },
     "biography": {
@@ -137,7 +133,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Purple Worm",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -150,8 +146,8 @@
       "offsetY": 0,
       "rotation": 0
     },
-    "width": 1,
-    "height": 1,
+    "width": 4,
+    "height": 4,
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
@@ -201,10 +197,10 @@
   },
   "items": [
     {
-      "name": "Plant Resilience",
+      "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
-      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "_id": "WMZkIV4s1UPoAl9D",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -216,7 +212,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
           "source": "Black Flag Reference Document"
         },
         "identifier": {},
@@ -232,8 +228,8 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-          "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
+          "icon": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
           "duration": {
             "rounds": null,
             "startTime": 0,
@@ -244,8 +240,8 @@
             "startTurn": 0
           },
           "disabled": false,
-          "name": "Plant Resilience",
-          "_id": "4alHXchWfiVtXGAv",
+          "name": "Monstrosity Resilience",
+          "_id": "jxagd3hzp2UTp7Wl",
           "changes": [
             {
               "key": "system.traits.condition.resistances.value",
@@ -256,19 +252,7 @@
             {
               "key": "system.traits.condition.resistances.value",
               "mode": 2,
-              "value": "paralyzed",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
+              "value": "frightened",
               "priority": null
             }
           ],
@@ -277,7 +261,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!BKeSIam1C0mXCW3s.WMZkIV4s1UPoAl9D.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
@@ -287,7 +271,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N"
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk"
         },
         "black-flag": {
           "relationship": {
@@ -299,11 +283,11 @@
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
-        "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "createdTime": 1706473622104,
+        "modifiedTime": 1709672879081,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.WMZkIV4s1UPoAl9D"
     }
   ],
   "effects": [],
@@ -316,9 +300,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709672833353,
+    "modifiedTime": 1709672879081,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!BKeSIam1C0mXCW3s"
 }

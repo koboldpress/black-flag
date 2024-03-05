@@ -1,8 +1,8 @@
 {
-  "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "folder": "RuA1hZVgwPDxXhg8",
+  "name": "Otyugh",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "WJQwmBf1BFyGbIbP",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -24,10 +24,10 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 5,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 108,
+        "max": 108,
         "temp": null
       },
       "legendary": {
@@ -39,26 +39,18 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
+        "value": [],
+        "communication": {},
         "custom": [
-          "Druidic"
+          "Otyugh"
         ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 30,
         "types": {
           "walk": "@base"
         },
@@ -66,22 +58,26 @@
       },
       "senses": {
         "types": {
-          "darkvision": "",
-          "keensense": "120",
+          "darkvision": "120",
+          "keensense": "",
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": [
-          "cantSense"
-        ]
+        "tags": []
       },
-      "size": "medium",
+      "size": "large",
       "condition": {
         "resistances": {
           "value": [],
           "custom": []
         },
         "immunities": {
+          "value": [
+            "poisoned"
+          ],
+          "custom": []
+        },
+        "vulnerabilities": {
           "value": [],
           "custom": []
         }
@@ -105,7 +101,7 @@
         }
       },
       "type": {
-        "value": "plant",
+        "value": "aberration",
         "tags": [],
         "swarm": ""
       }
@@ -115,19 +111,19 @@
         "mod": 3
       },
       "dexterity": {
-        "mod": 2
+        "mod": null
       },
       "constitution": {
-        "mod": 1
+        "mod": 7
       },
       "intelligence": {
-        "mod": -1
+        "mod": -2
       },
       "wisdom": {
-        "mod": 4
+        "mod": 1
       },
       "charisma": {
-        "mod": -1
+        "mod": -2
       }
     },
     "biography": {
@@ -137,7 +133,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Otyugh",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -150,8 +146,8 @@
       "offsetY": 0,
       "rotation": 0
     },
-    "width": 1,
-    "height": 1,
+    "width": 2,
+    "height": 2,
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
@@ -201,10 +197,10 @@
   },
   "items": [
     {
-      "name": "Plant Resilience",
+      "name": "Aberrant Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
-      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "_id": "VMOrPFURqBLn70na",
+      "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -216,7 +212,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
+          "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed, frightened, paralyzed, and stunned conditions, and it has advantage on saves against spells or effects that would alter its form.</p>",
           "source": "Black Flag Reference Document"
         },
         "identifier": {},
@@ -224,7 +220,8 @@
           "filters": []
         },
         "type": {
-          "category": "monsters"
+          "category": "monsters",
+          "value": ""
         },
         "level": {
           "value": null
@@ -232,8 +229,8 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/tentacles/tentacle-earth-green.webp",
-          "origin": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N",
+          "icon": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg",
           "duration": {
             "rounds": null,
             "startTime": 0,
@@ -244,13 +241,19 @@
             "startTurn": 0
           },
           "disabled": false,
-          "name": "Plant Resilience",
-          "_id": "4alHXchWfiVtXGAv",
+          "name": "Aberrant Resilience",
+          "_id": "vyiAWYKxFWNBOFa1",
           "changes": [
             {
               "key": "system.traits.condition.resistances.value",
               "mode": 2,
-              "value": "exhaustion",
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "frightened",
               "priority": null
             },
             {
@@ -262,13 +265,7 @@
             {
               "key": "system.traits.condition.resistances.value",
               "mode": 2,
-              "value": "petrified",
-              "priority": null
-            },
-            {
-              "key": "system.traits.condition.resistances.value",
-              "mode": 2,
-              "value": "unconscious",
+              "value": "stunned",
               "priority": null
             }
           ],
@@ -277,7 +274,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!WJQwmBf1BFyGbIbP.VMOrPFURqBLn70na.vyiAWYKxFWNBOFa1"
         }
       ],
       "folder": null,
@@ -287,7 +284,7 @@
       },
       "flags": {
         "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.wKYxtPQ0kudDdh4N"
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg"
         },
         "black-flag": {
           "relationship": {
@@ -299,11 +296,11 @@
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
-        "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "createdTime": 1709672456179,
+        "modifiedTime": 1709672808312,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.VMOrPFURqBLn70na"
     }
   ],
   "effects": [],
@@ -316,9 +313,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709672427875,
+    "modifiedTime": 1709672808312,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!WJQwmBf1BFyGbIbP"
 }

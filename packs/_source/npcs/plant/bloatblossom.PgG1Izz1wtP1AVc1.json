@@ -1,8 +1,8 @@
 {
   "folder": "R0P4phVJmJx1Klt7",
-  "name": "Mycolid Spore Lord",
+  "name": "Bloatblossom",
   "type": "npc",
-  "_id": "HQ2jkq8ZZacZwF03",
+  "_id": "PgG1Izz1wtP1AVc1",
   "img": "systems/black-flag/artwork/types/npc.svg",
   "system": {
     "attributes": {
@@ -13,8 +13,9 @@
           "natural"
         ],
         "formulas": [],
-        "flat": 14,
-        "override": null
+        "flat": 15,
+        "override": null,
+        "customLabel": ""
       },
       "exhaustion": 0,
       "initiative": {
@@ -24,41 +25,31 @@
         },
         "lair": null
       },
-      "cr": 3,
+      "cr": 0,
       "hp": {
-        "value": 72,
-        "max": 72,
+        "value": 60,
+        "max": 60,
         "temp": null
       },
       "legendary": {
         "spent": 0,
         "max": null
       },
-      "perception": null,
-      "stealth": null
+      "perception": 11,
+      "stealth": 12
     },
     "proficiencies": {
       "languages": {
-        "value": [
-          "sylvan"
-        ],
-        "communication": {
-          "telepathy": {
-            "range": 60
-          }
-        },
-        "custom": [
-          "Druidic"
-        ],
-        "tags": [
-          "cantSpeak"
-        ]
+        "value": [],
+        "communication": {},
+        "custom": [],
+        "tags": []
       }
     },
     "modifiers": [],
     "traits": {
       "movement": {
-        "base": 15,
+        "base": 20,
         "types": {
           "walk": "@base"
         },
@@ -67,7 +58,7 @@
       "senses": {
         "types": {
           "darkvision": "",
-          "keensense": "120",
+          "keensense": "60",
           "tremorsense": "",
           "truesight": ""
         },
@@ -84,6 +75,10 @@
         "immunities": {
           "value": [],
           "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
         }
       },
       "damage": {
@@ -93,9 +88,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -115,19 +108,19 @@
         "mod": 3
       },
       "dexterity": {
-        "mod": 2
+        "mod": null
       },
       "constitution": {
-        "mod": 1
+        "mod": 3
       },
       "intelligence": {
-        "mod": -1
+        "mod": -4
       },
       "wisdom": {
-        "mod": 4
+        "mod": -1
       },
       "charisma": {
-        "mod": -1
+        "mod": -3
       }
     },
     "biography": {
@@ -137,7 +130,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Mycolid Spore Lord",
+    "name": "Bloatblossom",
     "displayName": 0,
     "actorLink": false,
     "appendNumber": false,
@@ -203,7 +196,7 @@
     {
       "name": "Plant Resilience",
       "type": "feature",
-      "_id": "PL4etbeNgIdry3A0",
+      "_id": "JXegdE1qfNUhcbuu",
       "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
       "system": {
         "activities": {},
@@ -277,7 +270,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!PgG1Izz1wtP1AVc1.JXegdE1qfNUhcbuu.4alHXchWfiVtXGAv"
         }
       ],
       "folder": null,
@@ -300,10 +293,10 @@
         "systemVersion": "0.8.015",
         "coreVersion": "11.315",
         "createdTime": 1709615924250,
-        "modifiedTime": 1709672344704,
+        "modifiedTime": 1709673966233,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!HQ2jkq8ZZacZwF03.PL4etbeNgIdry3A0"
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.JXegdE1qfNUhcbuu"
     }
   ],
   "effects": [],
@@ -316,9 +309,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.015",
     "coreVersion": "11.315",
-    "createdTime": 1709616033860,
-    "modifiedTime": 1709672344704,
+    "createdTime": 1709673936945,
+    "modifiedTime": 1709673970726,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!actors!HQ2jkq8ZZacZwF03"
+  "_key": "!actors!PgG1Izz1wtP1AVc1"
 }
