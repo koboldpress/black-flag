@@ -26,7 +26,7 @@ export const damageTypes = {
 	force: {
 		label: "BF.Damage.Type.Force"
 	},
-	lighting: {
+	lightning: {
 		label: "BF.Damage.Type.Lightning"
 	},
 	necrotic: {

@@ -1,8 +1,8 @@
-import { numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "actor", "sheet", "npc"],
@@ -20,6 +20,7 @@ export default class NPCSheet extends BaseActorSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -45,6 +46,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async prepareActions(context) {
 		await super.prepareActions(context);
 		context.passive = (await Promise.all(this.actor.items.filter(i => {
@@ -68,6 +70,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async prepareTraits(context) {
 		context.traits = {};
 		const { proficiencies, traits } = context.system;
@@ -83,13 +86,13 @@ export default class NPCSheet extends BaseActorSheet {
 		// Resistances
 		const resistances = [
 			...Array.from(traits.damage.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t]?.label ?? t)
 			).filter(t => t),
 			...Array.from(traits.condition.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t]?.label ?? t)
 			)
 		].filter(t => t);
-		if ( resistances.size || this.modes.editing ) {
+		if ( resistances.length || this.modes.editing ) {
 			context.traits.resist = game.i18n.getListFormatter({ style: "short" }).format(resistances) || none;
 		}
 
@@ -130,6 +133,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _renderOuter() {
 		const jQuery = await super._renderOuter();
 		this._removeTitle(jQuery[0]);
@@ -138,6 +142,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_replaceHTML(element, html) {
 		super._replaceHTML(element, html);
 		this._removeTitle(element[0]);
@@ -147,6 +152,7 @@ export default class NPCSheet extends BaseActorSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(html) {
 		super.activateListeners(html);
 		html.on("sl-change", "sl-select", this._onChangeInput.bind(this));
@@ -154,6 +160,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_getSubmitData(updateData={}) {
 		const data = super._getSubmitData(updateData);
 
