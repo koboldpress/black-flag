@@ -42,7 +42,8 @@ export default class ResistanceConfig extends BaseConfig {
 			obj[key] = {
 				label,
 				resistant: traits.condition.resistances?.value?.includes(key),
-				immune: traits.condition.immunities?.value?.includes(key)
+				immune: traits.condition.immunities?.value?.includes(key),
+				vulnerable: traits.condition.vulnerabilities?.value?.includes(key)
 			};
 			return obj;
 		}, {});
@@ -58,6 +59,7 @@ export default class ResistanceConfig extends BaseConfig {
 		const updates = foundry.utils.expandObject(formData);
 		foundry.utils.setProperty(updates, "condition.resistances.value", filteredKeys(updates.cr.value));
 		foundry.utils.setProperty(updates, "condition.immunities.value", filteredKeys(updates.ci.value));
+		foundry.utils.setProperty(updates, "condition.vulnerabilities.value", filteredKeys(updates.cv.value));
 		foundry.utils.setProperty(updates, "damage.resistances.value", filteredKeys(updates.dr.value));
 		foundry.utils.setProperty(updates, "damage.immunities.value", filteredKeys(updates.di.value));
 		foundry.utils.setProperty(updates, "damage.vulnerabilities.value", filteredKeys(updates.dv.value));

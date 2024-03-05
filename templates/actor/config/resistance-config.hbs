@@ -42,12 +42,14 @@
 				<col class="headers">
 				<col class="res">
 				<col class="imm">
+				<col class="vul">
 			</colgroup>
 			<thead>
 				<tr>
 					<th scope="col">{{localize "BF.Condition.Label[one]"}}</th>
 					<th scope="col">{{localize "BF.Resistance.Abbreviation"}}</th>
 					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
+					<th scope="col">{{localize "BF.Vulnerability.Abbreviation"}}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,6 +58,7 @@
 						<th scope="row">{{label}}</th>
 						<td><input type="checkbox" name="cr.value.{{@key}}" {{checked resistant}}></td>
 						<td><input type="checkbox" name="ci.value.{{@key}}" {{checked immune}}></td>
+						<td><input type="checkbox" name="cv.value.{{@key}}" {{checked vulnerable}}></td>
 					</tr>
 				{{/each}}
 			</tbody>
