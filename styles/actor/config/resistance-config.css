@@ -15,16 +15,18 @@
 		border: none;
 		background: none;
 
-		tr:has(input:is(:hover, :focus-visible)),
-		&:has(input[name^="dr."]:is(:hover, :focus-visible)) td:nth-of-type(1),
-		&:has(input[name^="di."]:is(:hover, :focus-visible)) td:nth-of-type(2),
-		&:has(input[name^="dv."]:is(:hover, :focus-visible)) td:nth-of-type(3),
-		&:has(input[name^="ci."]:is(:hover, :focus-visible)) td:nth-of-type(1) {
+		tr:hover, tr:has(input:focus-visible),
+		&:has(td:nth-child(2):is(:hover, :focus-visible)) col.res,
+		&:has(td:nth-child(3):is(:hover, :focus-visible)) col.imm,
+		&:has(td:nth-child(4):is(:hover, :focus-visible)) col.vul {
 			background: color-mix(in oklab, var(--bf-blue), transparent 80%);
 		}
 		td, th {
 			padding-inline: 3px;
 			text-align: center;
+		}
+		tr, col {
+			transition: background 100ms ease;
 		}
 	}
 }
