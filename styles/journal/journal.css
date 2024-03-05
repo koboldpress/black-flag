@@ -80,6 +80,9 @@
 			tr:nth-child(2n) {
 				background: lch(0% 0% 0deg / 0.05);
 			}
+			th {
+				text-align: start;
+			}
 		}
 
 		td, th {
@@ -130,6 +133,18 @@
 				text-align: start;
 			}
 		}
+	}
+
+	h4.magic-item {
+		border-block: 1px solid currentcolor;
+		background: rgb(0 0 0 / 0.05);
+	}
+	p.magic-item {
+		color: var(--bf-text-color-blue);
+		font-family: var(--bf-font-primary);
+		font-style: italic;
+
+		.price { float: right; }
 	}
 
 	section.embedded-features {
