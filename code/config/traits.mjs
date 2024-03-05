@@ -172,16 +172,8 @@ localizeConfig(languages, { flatten: true, keepCategories: c => !!c.label });
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Configuration information for language tags.
- *
- * @typedef {LabeledConfiguration} LanguageTagConfiguration
- * @property {string} [display] - Localization key for tags that will be displayed as part of the language list.
- * @property {string} [formatter] - Localization key for tags that cause the language list to be wrapped.
- */
-
-/**
  * Tags the describe additional details of a character's communication.
- * @enum {LabeledConfiguration}
+ * @enum {TraitTagConfiguration}
  */
 export const languageTags = {
 	cantSpeak: {

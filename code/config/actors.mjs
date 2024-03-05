@@ -85,6 +85,8 @@ export const luck = {
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                       Movement                        */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Movement types that can be used by actors.
@@ -105,6 +107,20 @@ export const movementTypes = {
 	},
 	burrow: {
 		label: "BF.Movement.Type.Burrow"
+	}
+};
+localizeConfig(movementTypes);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Tags the describe additional details of a character's movement.
+ * @enum {TraitTagConfiguration}
+ */
+export const movementTags = {
+	hover: {
+		label: "BF.Movement.Tag.Hover.Label",
+		display: "BF.Movement.Tag.Hover.Display"
 	}
 };
 
@@ -162,6 +178,8 @@ export const rest = {
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                        Senses                         */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Sense types that can be used by actors.
@@ -179,6 +197,20 @@ export const senses = {
 	},
 	truesight: {
 		label: "BF.Senses.Type.Truesight"
+	}
+};
+localizeConfig(senses);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Tags the describe additional details of a character's senses.
+ * @enum {TraitTagConfiguration}
+ */
+export const senseTags = {
+	cantSense: {
+		label: "BF.Senses.Tag.CantSense.Label",
+		display: "BF.Senses.Tag.CantSense.Display"
 	}
 };
 

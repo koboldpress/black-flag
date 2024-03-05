@@ -1,6 +1,39 @@
 import { flattenChildren, sortObjectEntries } from "./object.mjs";
 
 /**
+ * Create a formatted list including tags like for languages, sense, and movement.
+ * @param {object} config
+ * @param {string[]|Set<string>} [config.entries=[]]
+ * @param {string[]|Set<string>} [config.extras=[]]
+ * @param {string[]|Set<string>} [config.tags=[]]
+ * @param {TraitTagConfiguration} config.tagDefinitions
+ * @param {boolean} [config.inlineTags=false] - Include display tags within entries list.
+ * @param {string} [config.listType="unit"] - Type of list to use for entries.
+ * @returns {string}
+ */
+export function formatTaggedList({
+	entries=[], extras=[], tags=[], tagDefinitions, inlineTags=false, listType="unit"
+}) {
+	entries = Array.from(entries);
+
+	const formatters = [];
+	const appendedTags = [];
+	for ( const tag of tags ) {
+		const config = tagDefinitions[tag];
+		if ( config?.formatter ) formatters.push(config.formatter);
+		else (inlineTags ? entries : appendedTags).push(game.i18n.localize(config?.display ?? tag));
+	}
+
+	let label = game.i18n.getListFormatter({ style: "short", type: listType }).format(entries);
+	if ( appendedTags.length ) label += ` (${game.i18n.getListFormatter({ style: "short" }).format(appendedTags)})`;
+
+	formatters.forEach(f => label = game.i18n.format(f, { entries: label }));
+	return game.i18n.getListFormatter({ type: "unit" }).format([label, ...extras]);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Cached store of Intl.ListFormat instances.
  * @type {{[key: string]: Intl.PluralRules}}
  */

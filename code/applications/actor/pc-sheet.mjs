@@ -186,12 +186,7 @@ export default class PCSheet extends BaseActorSheet {
 		});
 
 		// Senses
-		const senses = game.i18n.getListFormatter({ style: "narrow" }).format(
-			Object.entries(this.actor.system.traits.senses.types).map(([key, value]) =>
-				value ? `${game.i18n.localize(CONFIG.BlackFlag.senses[key]?.label ?? "")} ${
-					numberFormat(value, { unit: "foot" })}` : null
-			).filter(a => a)
-		);
+		const senses = this.actor.system.traits.senses.label;
 		if ( senses || this.modes.editing ) context.traits.push({
 			key: "senses",
 			label: "BF.Senses.Label",

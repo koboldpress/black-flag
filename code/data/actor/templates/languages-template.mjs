@@ -1,4 +1,4 @@
-import { numberFormat, Trait } from "../../../utils/_module.mjs";
+import { formatTaggedList, numberFormat, Trait } from "../../../utils/_module.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -28,6 +28,8 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
  * @property {LanguagesData} proficiencies.languages
  */
 export default class LanguagesTemplate extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			proficiencies: new SchemaField({
@@ -50,26 +52,19 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 
 	prepareDerivedLanguages() {
 		const languages = this.proficiencies.languages;
-		const formatters = [];
 		const entries = Array.from(languages.value).map(v => Trait.keyLabel(v, { trait: "languages" }));
 		entries.push(...languages.custom);
-		for ( const tag of languages.tags ) {
-			const config = CONFIG.BlackFlag.languageTags[tag];
-			if ( config?.formatter ) formatters.push(config.formatter);
-			else entries.push(game.i18n.localize(config?.display ?? tag));
-		}
-		let label = game.i18n.getListFormatter({ style: "short" }).format(entries);
-		formatters.forEach(f => label = game.i18n.format(f, { languages: label }));
-
-		const everything = [];
-		if ( label ) everything.push(label);
-		for ( const [key, data] of Object.entries(languages.communication) ) {
-			const config = CONFIG.BlackFlag.rangedCommunication[key];
-			if ( config && data.range ) everything.push(
-				`${game.i18n.localize(config.label)} ${numberFormat(data.range, { unit: data.units })}`
+		const extras = Object.entries(languages.communication).reduce((arr, [key, data]) => {
+			const label = CONFIG.BlackFlag.rangedCommunication[key]?.label;
+			if ( label && data.range ) arr.push(
+				`${game.i18n.localize(label)} ${numberFormat(data.range, { unit: data.units })}`
 			);
-		}
+			return arr;
+		}, []);
 
-		languages.label = game.i18n.getListFormatter({ type: "unit" }).format(everything);
+		languages.label = formatTaggedList({
+			entries, extras, tags: languages.tags, tagDefinitions: CONFIG.BlackFlag.languageTags,
+			inlineTags: true, listType: "conjunction"
+		});
 	}
 }

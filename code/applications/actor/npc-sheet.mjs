@@ -73,30 +73,12 @@ export default class NPCSheet extends BaseActorSheet {
 		const { proficiencies, traits } = context.system;
 		const none = game.i18n.localize("None");
 
-		const formatEntry = (value, label) => {
-			value = numberFormat(value, { unit: "foot" });
-			return label ? `${label.toLowerCase()} ${value}` : value;
-		};
-
-		// Speed
-		const speeds = [formatEntry(this.actor.system.traits.movement.types.walk ?? 0)];
-		for ( const [key, value] of Object.entries(this.actor.system.traits.movement.types) ) {
-			if ( !value || (key === "walk") ) continue;
-			speeds.push(formatEntry(value, game.i18n.localize(CONFIG.BlackFlag.movementTypes[key]?.label ?? "")));
-		}
-		context.traits.speed = game.i18n.getListFormatter({ style: "narrow" }).format(speeds);
-		// TODO: Add movement tags
-
-		// Senses
-		context.traits.senses = game.i18n.getListFormatter({ style: "narrow" }).format(
-			Object.entries(this.actor.system.traits.senses.types).map(([key, value]) =>
-				value ? formatEntry(value, game.i18n.localize(CONFIG.BlackFlag.senses[key]?.label ?? "")) : null
-			).filter(a => a)
-		);
-		// TODO: Add senses tags
-
-		// Languages
+		context.traits.speed = this.actor.system.traits.movement.label?.toLowerCase() || "—";
+		context.traits.senses = this.actor.system.traits.senses.label?.toLowerCase() || "—";
 		context.traits.languages = proficiencies.languages.label || "—";
+
+		// TODO: For Resistances, Immunities, and Vulnerabilities, find any entries added by active effects
+		// and simply show the name of the item that provided them with a tooltip
 
 		// Resistances
 		const resistances = [

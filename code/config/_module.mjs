@@ -56,6 +56,14 @@ import * as weapons from "./weapons.mjs";
  * @property {Record<string, NestedTypeConfiguration>} [children] - Nested children.
  */
 
+/**
+ * Configuration information for tags.
+ *
+ * @typedef {LabeledConfiguration} TraitTagConfiguration
+ * @property {string} [display] - Localization key for tags that will be displayed as part of the trait list.
+ * @property {string} [formatter] - Localization key for tags that cause the trait list to be wrapped.
+ */
+
 export default {
 	...abilities,
 	...activation,

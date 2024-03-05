@@ -1,12 +1,15 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{localize "BF.Senses.Label"}}</legend>
+		<legend>{{ localize "BF.Senses.Label" }}</legend>
 		{{#each types}}
 			<label>
-				<span>{{label}}</span>
-				<input type="text" name="system.traits.senses.types.{{@key}}" value="{{value}}" placeholder="{{placeholder}}">
+				<span>{{ label }}</span>
+				<input type="text" name="types.{{ @key }}" value="{{ value }}" placeholder="{{ placeholder }}">
 			</label>
 		{{/each}}
-		<!-- TODO: Senses tags (e.g. blind beyond this radius) -->
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.Senses.Tag.Label" }}</legend>
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags" }}
 	</fieldset>
 </form>

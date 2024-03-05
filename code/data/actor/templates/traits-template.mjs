@@ -1,4 +1,4 @@
-import { numberFormat, simplifyBonus } from "../../../utils/_module.mjs";
+import { formatTaggedList, numberFormat, simplifyBonus } from "../../../utils/_module.mjs";
 import { FormulaField, MappingField } from "../../fields/_module.mjs";
 
 const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -65,6 +65,9 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Resolve final movement values and prepare the labels.
+	 */
 	prepareDerivedMovement() {
 		const movement = this.traits.movement;
 		const rollData = this.parent.getRollData({ deterministic: true });
@@ -76,15 +79,21 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
 
 		// Calculate each special movement type using base speed
+		const entries = [];
 		for ( const [type, formula] of Object.entries(movement.types) ) {
-			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) movement.types[type] = 0;
-			else {
-				const speed = simplifyBonus(formula, rollData);
-				movement.types[type] = halfMovement ? speed * 0.5 : speed;
+			let speed;
+			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) speed = 0;
+			else speed = simplifyBonus(formula, rollData) * (halfMovement ? 0.5 : 1);
+			movement.types[type] = speed;
+
+			const label = CONFIG.BlackFlag.movementTypes.localized[type];
+			if ( speed && label ) {
+				if ( type === "walk" ) entries.push(numberFormat(speed, { unit: "foot" }));
+				else entries.push(`${label.toLowerCase()} ${numberFormat(speed, { unit: "foot" })}`);
 			}
 		}
 
-		// Prepare movement label to display on sheet
+		// Prepare movement label to display on character sheet
 		movement.labels = Object.entries(movement.types)
 			.filter(([type, speed]) => speed > 0)
 			.sort((lhs, rhs) => rhs[1] - lhs[1])
@@ -93,19 +102,30 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 				const label = config ? game.i18n.localize(config.label) : type;
 				return `${label} ${numberFormat(speed, { unit: "foot" })}`;
 			});
+
+		// Prepare movement label to display on NPC sheet
+		movement.label = formatTaggedList({ entries, tags: movement.tags, tagDefinitions: CONFIG.BlackFlag.movementTags });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Resolve sense formulas and prepare the combined label.
+	 */
 	prepareDerivedSenses() {
 		const senses = this.traits.senses;
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		// Calculate each special sense type
+		const entries = [];
 		for ( const [type, formula] of Object.entries(senses.types) ) {
-			const speed = simplifyBonus(formula, rollData);
-			senses.types[type] = speed;
+			const range = simplifyBonus(formula, rollData);
+			senses.types[type] = range;
+			const label = CONFIG.BlackFlag.senses.localized[type];
+			if ( range && label ) entries.push(`${label} ${numberFormat(range, { unit: "foot" })}`);
 		}
+
+		senses.label = formatTaggedList({ entries, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

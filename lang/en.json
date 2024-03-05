@@ -1078,7 +1078,7 @@
 		"Label": "Language Tags",
 		"CantSpeak": {
 			"Label": "Can’t Speak",
-			"Formatter": "understands {languages} but can’t speak"
+			"Formatter": "understands {entries} but can’t speak"
 		},
 		"KnownInLife": {
 			"Label": "All Languages Known in Life",
@@ -1133,12 +1133,23 @@
 "BF.Modifier.Specific": "{type} {modifier}",
 "BF.Modifier.Proficiency.Label": "Prof?",
 
-"BF.Movement.Label": "Movement",
-"BF.Movement.Type.Burrow": "Burrow",
-"BF.Movement.Type.Climb": "Climb",
-"BF.Movement.Type.Fly": "Fly",
-"BF.Movement.Type.Swim": "Swim",
-"BF.Movement.Type.Walk": "Walk",
+"BF.Movement": {
+	"Label": "Movement",
+	"Tag": {
+		"Label": "Movement Tags",
+		"Hover": {
+			"Label": "Hover",
+			"Display": "hover"
+		}
+	},
+	"Type": {
+		"Burrow": "Burrow",
+		"Climb": "Climb",
+		"Fly": "Fly",
+		"Swim": "Swim",
+		"Walk": "Walk"
+	}
+},
 
 "BF.New.Specific": "New {type}",
 
@@ -1333,11 +1344,22 @@
 "BF.SavingThrow.LabelShort[one]": "Save",
 "BF.SavingThrow.LabelShort[other]": "Saves",
 
-"BF.Senses.Label": "Senses",
-"BF.Senses.Type.Darkvision": "Darkvision",
-"BF.Senses.Type.Keensense": "Keensense",
-"BF.Senses.Type.Tremorsense": "Tremorsense",
-"BF.Senses.Type.Truesight": "Truesight",
+"BF.Senses": {
+	"Label": "Senses",
+	"Tag": {
+		"Label": "Sense Tags",
+		"CantSense": {
+			"Label": "Can’t Sense Beyond Radius",
+			"Display": "can't sense beyind this radius"
+		}
+	},
+	"Type": {
+		"Darkvision": "Darkvision",
+		"Keensense": "Keensense",
+		"Tremorsense": "Tremorsense",
+		"Truesight": "Truesight"
+	}
+},
 
 "BF.Settings.AbilitySelectionManual.Label": "Allow Manual Ability Assignments",
 "BF.Settings.AbilitySelectionManual.Hint": "Allow players to manually set their ability scores rather than using the standard selection methods.",

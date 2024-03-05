@@ -1,21 +1,23 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{localize "BF.Speed.Label"}}</legend>
+		<legend>{{ localize "BF.Speed.Label" }}</legend>
 		<label>
 			<span>
-				{{localize "BF.Speed.Base.Label"}}
+				{{ localize "BF.Speed.Base.Label" }}
 				<i class="hintIcon" data-tooltip="BF.Movement.Base.Hint"></i>
 			</span>
-			<input type="number" name="system.traits.movement.base" value="{{source.traits.movement.base}}"
+			<input type="number" name="base" value="{{ source.traits.movement.base }}"
 				min="0" step="0.1">
 		</label>
 		{{#each types}}
 			<label>
-				<span>{{label}}</span>
-				<input type="text" name="system.traits.movement.types.{{@key}}"
-					value="{{value}}" placeholder="{{placeholder}}">
+				<span>{{ label }}</span>
+				<input type="text" name="types.{{ @key }}" value="{{ value }}" placeholder="{{ placeholder }}">
 			</label>
 		{{/each}}
-		<!-- TODO: Movement tags (e.g. hover) -->
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.Movement.Tag.Label" }}</legend>
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags" }}
 	</fieldset>
 </form>

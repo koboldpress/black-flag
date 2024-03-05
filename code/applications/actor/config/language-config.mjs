@@ -6,6 +6,7 @@ import BaseConfig from "./base-config.mjs";
  */
 export default class LanguageConfig extends BaseConfig {
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "language"],
@@ -18,6 +19,7 @@ export default class LanguageConfig extends BaseConfig {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get type() {
 		return game.i18n.localize("BF.Language.Label[other]");
 	}
@@ -26,6 +28,7 @@ export default class LanguageConfig extends BaseConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		const languages = this.document.system.proficiencies.languages ?? {};
@@ -46,6 +49,7 @@ export default class LanguageConfig extends BaseConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -67,6 +71,7 @@ export default class LanguageConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onChangeInput(event) {
 		if ( event.target instanceof HTMLInputElement ) this._onToggleCategory(event.target);
 		super._onChangeInput(event);
@@ -90,22 +95,23 @@ export default class LanguageConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_updateObject(event, formData) {
-		const updates = foundry.utils.expandObject(formData);
+	/** @inheritDoc */
+	_getSubmitData(...args) {
+		const data = foundry.utils.expandObject(super._getSubmitData(...args));
 
-		const custom = Array.from(Object.values(updates.custom ?? {}));
-		if ( updates.deleteCustom !== undefined ) custom.splice(updates.deleteCustom, 1);
-		if ( updates.newCustom ) custom.push("");
+		const custom = Array.from(Object.values(data.custom ?? {}));
+		if ( data.deleteCustom !== undefined ) custom.splice(data.deleteCustom, 1);
+		if ( data.newCustom ) custom.push("");
 
-		this.document.update({"system.proficiencies.languages": {
-			value: filteredKeys(updates.dialects ?? {}),
-			communication: Object.entries(updates.communication).reduce((obj, [key, value]) => {
+		return { "system.proficiencies.languages": {
+			value: filteredKeys(data.dialects ?? {}),
+			communication: Object.entries(data.communication).reduce((obj, [key, value]) => {
 				if ( !value ) obj[`-=${key}`] = null;
 				else obj[`${key}.range`] = value;
 				return obj;
 			}, {}),
 			custom,
-			tags: filteredKeys(updates.tags ?? {})
-		}});
+			tags: filteredKeys(data.tags ?? {})
+		} };
 	}
 }
