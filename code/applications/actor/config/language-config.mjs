@@ -25,7 +25,7 @@ export default class LanguageConfig extends BaseConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

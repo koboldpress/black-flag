@@ -21,7 +21,7 @@ export default class MovementConfig extends BaseConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

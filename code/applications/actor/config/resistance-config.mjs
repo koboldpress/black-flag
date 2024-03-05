@@ -20,7 +20,7 @@ export default class ResistanceConfig extends BaseConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
@@ -46,6 +46,8 @@ export default class ResistanceConfig extends BaseConfig {
 		return context;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_updateObject(event, formData) {

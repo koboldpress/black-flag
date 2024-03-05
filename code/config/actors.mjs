@@ -7,49 +7,87 @@ import { localizeConfig } from "../utils/_module.mjs";
  */
 export const creatureTypes = {
 	aberration: {
-		localization: "BF.CreatureType.Type.Aberration.Label"
+		localization: "BF.CreatureType.Type.Aberration"
 	},
 	beast: {
-		localization: "BF.CreatureType.Type.Beast.Label"
+		localization: "BF.CreatureType.Type.Beast"
 	},
 	celestial: {
-		localization: "BF.CreatureType.Type.Celestial.Label"
+		localization: "BF.CreatureType.Type.Celestial"
 	},
 	construct: {
-		localization: "BF.CreatureType.Type.Construct.Label"
+		localization: "BF.CreatureType.Type.Construct"
 	},
 	dragon: {
-		localization: "BF.CreatureType.Type.Dragon.Label"
+		localization: "BF.CreatureType.Type.Dragon"
 	},
 	elemental: {
-		localization: "BF.CreatureType.Type.Elemental.Label"
+		localization: "BF.CreatureType.Type.Elemental"
 	},
 	fey: {
-		localization: "BF.CreatureType.Type.Fey.Label"
+		localization: "BF.CreatureType.Type.Fey"
 	},
 	fiend: {
-		localization: "BF.CreatureType.Type.Fiend.Label"
+		localization: "BF.CreatureType.Type.Fiend"
 	},
 	giant: {
-		localization: "BF.CreatureType.Type.Giant.Label"
+		localization: "BF.CreatureType.Type.Giant"
 	},
 	humanoid: {
-		localization: "BF.CreatureType.Type.Humanoid.Label"
+		localization: "BF.CreatureType.Type.Humanoid"
 	},
 	monstrosity: {
-		localization: "BF.CreatureType.Type.Monstrosity.Label"
+		localization: "BF.CreatureType.Type.Monstrosity"
 	},
 	ooze: {
-		localization: "BF.CreatureType.Type.Ooze.Label"
+		localization: "BF.CreatureType.Type.Ooze"
 	},
 	plant: {
-		localization: "BF.CreatureType.Type.Plant.Label"
+		localization: "BF.CreatureType.Type.Plant"
 	},
 	undead: {
-		localization: "BF.CreatureType.Type.Undead.Label"
+		localization: "BF.CreatureType.Type.Undead"
 	}
 };
 localizeConfig(creatureTypes);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Tags that can be associated with creature types.
+ * @enum {NestedTypeConfiguration}
+ */
+export const creatureTags = {
+	animal: {
+		localization: "BF.CreatureType.Tag.Animal"
+	},
+	golem: {
+		localization: "BF.CreatureType.Tag.Golem"
+	},
+	outsider: {
+		localization: "BF.CreatureType.Tag.Outsider",
+		children: {
+			angel: {
+				localization: "BF.CreatureType.Tag.Angel"
+			},
+			demon: {
+				localization: "BF.CreatureType.Tag.Demon"
+			},
+			devil: {
+				localization: "BF.CreatureType.Tag.Devil"
+			}
+		}
+	},
+	shapechanger: {
+		localization: "BF.CreatureType.Tag.Shapechanger",
+		children: {
+			lycanthrope: {
+				localization: "BF.CreatureType.Tag.Lycanthrope"
+			}
+		}
+	}
+};
+localizeConfig(creatureTags, { flatten: true });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

@@ -8,6 +8,7 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
  */
 export default class TraitsTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			traits: new SchemaField({
@@ -27,10 +28,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					tags: new SetField(new StringField())
 				}, {label: "BF.Senses.Label"}),
 				size: new StringField({initial: "medium", label: "BF.Size.Label"}),
-				type: new SchemaField({
-					value: new StringField(),
-					tags: new ArrayField(new StringField())
-				}),
 				condition: new SchemaField({
 					resistances: new SchemaField({
 						value: new SetField(new StringField()),

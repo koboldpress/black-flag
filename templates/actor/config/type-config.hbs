@@ -24,9 +24,9 @@
 				{{selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank=""}}
 			</select>
 		</label>
-		<label>
-			<span>{{localize "BF.CreatureType.Tag.Label"}}</span>
-			<input type="text" placeholder="TODO">
-		</label>
+	</fieldset>
+	<fieldset>
+		<legend>{{localize "BF.CreatureType.Tag.Label"}}</legend>
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags"}}
 	</fieldset>
 </form>

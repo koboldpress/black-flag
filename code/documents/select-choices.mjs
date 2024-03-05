@@ -1,3 +1,4 @@
+import { makeLabel } from "../utils/localization.mjs";
 import { sortObjectEntries } from "../utils/object.mjs";
 
 /**
@@ -14,15 +15,17 @@ import { sortObjectEntries } from "../utils/object.mjs";
 /**
  * Object with a number of methods for performing actions on a nested set of choices.
  *
- * @param {{[key: string]: SelectChoicesEntry}} [choices={}] - Initial choices for the object.
+ * @param {Record<string, SelectChoicesEntry>} [choices={}] - Initial choices for the object.
+ * @param {Set<string>} [chosen=null] - Keys of entries that should be marked chosen by default.
  */
 export default class SelectChoices {
-	constructor(choices={}) {
+	constructor(choices={}, chosen=null) {
 		const clone = foundry.utils.deepClone(choices);
-		for ( const value of Object.values(clone) ) {
+		for ( const [key, value] of Object.entries(clone) ) {
+			if ( chosen ) value.chosen = chosen.has(key);
 			if ( !value.children || (value.children instanceof SelectChoices) ) continue;
 			value.category = true;
-			value.children = new this.constructor(value.children);
+			value.children = new this.constructor(value.children, chosen);
 		}
 		Object.assign(this, clone);
 	}
@@ -99,6 +102,37 @@ export default class SelectChoices {
 			}
 		}
 		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Localize all the entries using either a localization key or label.
+	 * @param {object} [options={}]
+	 * @param {string} [options.pluralRule="one"] - Pluralization rule to use for all entries.
+	 * @param {string} [options.categoryPluralRule] - Pluralization rule to use for categories, if different than default.
+	 * @param {string} [options.labelKeyPath="label"] - Path to the standard label.
+	 * @param {string} [options.localizationKeyPath="localization"] - Path to the pluralizable label.
+	 * @returns {SelectOptions}
+	 */
+	localize({ pluralRule="one", categoryPluralRule, labelKeyPath="label", localizationKeyPath="localization" }={}) {
+		for ( const v of Object.values(this) ) {
+			const pr = v.category && categoryPluralRule ? categoryPluralRule : pluralRule;
+			v[labelKeyPath] = makeLabel(v, { pluralRule: pr, labelKeyPath, localizationKeyPath });
+			if ( v.children ) v.children.localize({ pluralRule, categoryPluralRule, labelKeyPath, localizationKeyPath });
+		}
+		return this;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Localize all the entries using either a localization key or label, returning a new SelectOptions object.
+	 * @param {object} [options]
+	 * @returns {SelectOptions}
+	 */
+	toLocalized(options) {
+		return this.clone().localize(options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

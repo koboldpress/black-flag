@@ -1,4 +1,4 @@
-const { ArrayField, StringField } = foundry.data.fields;
+const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing proficiency.
@@ -6,8 +6,8 @@ const { ArrayField, StringField } = foundry.data.fields;
 export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 	constructor(fields={}, options={}) {
 		fields = {
-			value: new StringField({initial: "humanoid", label: "BF.CreatureType.Label"}),
-			tags: new ArrayField(new StringField(), {label: "BF.CreatureType.Tag.Label"}),
+			value: new StringField({initial: "humanoid", label: "BF.CreatureType.Type.Label"}),
+			tags: new SetField(new StringField(), {label: "BF.CreatureType.Tag.Label"}),
 			swarm: new StringField({label: "BF.CreatureType.Swarm.Label", hint: "BF.CreatureType.Swarm.Hint"}),
 			...fields
 		};
