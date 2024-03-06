@@ -1,84 +1,84 @@
 <div class="sheet-container">
 	<header class="sheet-head">
-		<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
+		<img class="profile" src="{{ actor.img }}" alt="{{ actor.name }}"{{#if modes.editing}} data-edit="img"{{/if}}>
 		<h1>
-			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
-				aria-label="{{localize 'Name'}}" form="{{appID}}-main-form" {{disabled (not modes.editing)}}>
+			<input name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
+				aria-label="{{ localize 'Name' }}" form="{{ appID }}-main-form" {{ disabled (not modes.editing) }}>
 		</h1>
 		<fieldset class="proficiency-bonus">
-			<legend>{{localize "BF.Proficiency.Abbreviation"}}</legend>
-			<span>{{blackFlag-number system.attributes.proficiency sign=true}}</span>
+			<legend>{{ localize "BF.Proficiency.Abbreviation" }}</legend>
+			<span>{{ blackFlag-number system.attributes.proficiency sign=true }}</span>
 		</fieldset>
 		<fieldset class="progression" data-group="progression">
 			<legend>
-				{{localize "BF.Progression.Label"}}
-				{{blackFlag-notificationBadge actor section="progression"}}
+				{{ localize "BF.Progression.Label" }}
+				{{ blackFlag-notificationBadge actor section="progression" }}
 			</legend>
 			<a data-action="toggle-mode" data-type="progression" tabindex="0">
 				{{#unless modes.progression}}
-					<span class="text">{{localize "BF.Level.Specific" level=system.progression.level}}</span>
-					<span class="icon"><i class="fa-solid fa-arrow-down-up-across-line"></i></span>
+					<span class="text">{{ localize "BF.Level.Specific" level=system.progression.level }}</span>
+					<span class="icon"><i class="fa-solid fa-arrow-down-up-across-line" inert></i></span>
 				{{else}}
-					<span class="text">{{localize "BF.Progression.Action.Return"}}</span>
-					<span class="icon"><i class="fa-solid fa-reply"></i></span>
+					<span class="text">{{ localize "BF.Progression.Action.Return" }}</span>
+					<span class="icon"><i class="fa-solid fa-reply" inert></i></span>
 				{{/unless}}
 			</a>
 		</fieldset>
 	</header>
 
 	{{#unless modes.progression}}
-		<form class="front" id="{{appID}}-main-form">
+		<form class="front" id="{{ appID }}-main-form">
 			<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
 				<a data-tab="main" tabindex="0">
-					{{localize "BF.Sheet.Tab.Main"}}
-					{{blackFlag-notificationBadge actor section="main"}}
+					{{ localize "BF.Sheet.Tab.Main" }}
+					{{ blackFlag-notificationBadge actor section="main" }}
 				</a>
 				<a data-tab="spellcasting" tabindex="0">
-					{{localize "BF.Sheet.Tab.Spellcasting"}}
-					{{blackFlag-notificationBadge actor section="spellcasting"}}
+					{{ localize "BF.Sheet.Tab.Spellcasting"}}
+					{{ blackFlag-notificationBadge actor section="spellcasting" }}
 				</a>
 				<a data-tab="inventory" tabindex="0">
-					{{localize "BF.Sheet.Tab.Inventory"}}
-					{{blackFlag-notificationBadge actor section="inventory"}}
+					{{ localize "BF.Sheet.Tab.Inventory"}}
+					{{ blackFlag-notificationBadge actor section="inventory" }}
 				</a>
 				<a data-tab="features" tabindex="0">
-					{{localize "BF.Sheet.Tab.Features"}}
-					{{blackFlag-notificationBadge actor section="features"}}
+					{{ localize "BF.Sheet.Tab.Features"}}
+					{{ blackFlag-notificationBadge actor section="features" }}
 				</a>
 				<a data-tab="biography" tabindex="0">
-					{{localize "BF.Sheet.Tab.Biography"}}
-					{{blackFlag-notificationBadge actor section="biography"}}
+					{{ localize "BF.Sheet.Tab.Biography"}}
+					{{ blackFlag-notificationBadge actor section="biography" }}
 				</a>
 				<a data-tab="effects" tabindex="0">
-					{{localize "BF.Sheet.Tab.Effects"}}
-					{{blackFlag-notificationBadge actor section="effects"}}
+					{{ localize "BF.Sheet.Tab.Effects"}}
+					{{ blackFlag-notificationBadge actor section="effects" }}
 				</a>
 			</nav>
 
 			<div class="sheet-body">
 				<div class="tab grid-tab" data-group="primary" data-tab="main">
-					{{> "blackFlag.pc-main"}}
+					{{> "blackFlag.pc-main" }}
 				</div>
 				<div class="tab flex-tab" data-group="primary" data-tab="spellcasting">
-					{{> "blackFlag.pc-spellcasting"}}
+					{{> "blackFlag.pc-spellcasting" }}
 				</div>
 				<div class="tab flex-tab" data-group="primary" data-tab="inventory">
-					{{> "blackFlag.pc-inventory"}}
+					{{> "blackFlag.pc-inventory" }}
 				</div>
 				<div class="tab flex-tab" data-group="primary" data-tab="features">
-					{{> "blackFlag.pc-features"}}
+					{{> "blackFlag.pc-features" }}
 				</div>
 				<div class="tab flex-tab" data-group="primary" data-tab="biography">
-					{{> "blackFlag.pc-biography"}}
+					{{> "blackFlag.pc-biography" }}
 				</div>
 				<div class="tab flex-tab" data-group="primary" data-tab="effects">
-					{{> "blackFlag.active-effects"}}
+					{{> "blackFlag.actor-active-effects" }}
 				</div>
 			</div>
 		</form>
 	{{else}}
 		<div class="back">
-			{{> "blackFlag.pc-progression"}}
+			{{> "blackFlag.pc-progression" }}
 		</div>
 	{{/unless}}
 </div>

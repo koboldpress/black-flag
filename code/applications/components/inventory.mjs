@@ -7,7 +7,6 @@ import FiltersElement from "./filters.mjs";
 import SortingElement from "./sorting.mjs";
 
 export default class InventoryElement extends AppAssociatedElement {
-
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -16,6 +15,7 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
 		const { signal } = this.#controller;

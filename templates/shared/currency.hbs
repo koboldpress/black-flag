@@ -2,7 +2,7 @@
 	<table>
 		{{#each sections.currency as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
-				<tr>
+				<tr class="table-header">
 					<td class="name">{{localize section.label}}</td>
 					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
 					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>

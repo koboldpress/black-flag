@@ -1,4 +1,4 @@
-import { numberFormat, Trait } from "../../utils/_module.mjs";
+import { Trait } from "../../utils/_module.mjs";
 import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";

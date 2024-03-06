@@ -5,31 +5,47 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying the active effects on actor or item sheets.
  */
 export default class EffectsElement extends AppAssociatedElement {
+	constructor() {
+		super();
+		this.#controller = new AbortController();
+	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
+		const { signal } = this.#controller;
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
-				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
 
-		const contextOptions = this.#getContextMenuOptions();
-		/**
-		 * A hook event that fires when the context menu for the effects list is constructed.
-		 * @function blackFlag.getActiveEffectContext
-		 * @memberof hookEvents
-		 * @param {ActivitiesElement} html - The HTML element to which the context options are attached.
-		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
-		 */
-		Hooks.call("blackFlag.getActiveEffectContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-effect-id]", contextOptions);
+		for ( const control of this.querySelectorAll("[data-context-menu]") ) {
+			control.addEventListener("click", event => {
+				event.stopPropagation();
+				event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
+					view: window, bubbles: true, cancelable: true, clientX: event.clientX, clientY: event.clientY
+				}));
+			}, { signal });
+		}
+
+		new ContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -38,16 +54,6 @@ export default class EffectsElement extends AppAssociatedElement {
 	 */
 	get document() {
 		return this.app.document;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Active effects collection stored on the item.
-	 * @type {Collection<ActiveEffect>}
-	 */
-	get effects() {
-		return this.document.effects;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -94,9 +100,13 @@ export default class EffectsElement extends AppAssociatedElement {
 		};
 
 		for ( const effect of effects ) {
-			if ( effect.disabled ) context.inactive.effects.push(effect);
-			else if ( effect.isTemporary ) context.temporary.effects.push(effect);
-			else context.passive.effects.push(effect);
+			const data = {
+				...effect, id: effect.id, sourceName: effect.sourceName,
+				parentId: effect.target === effect.parent ? null : effect.parent.id
+			};
+			if ( effect.disabled ) context.inactive.effects.push(data);
+			else if ( effect.isTemporary ) context.temporary.effects.push(data);
+			else context.passive.effects.push(data);
 		}
 
 		return context;
@@ -108,48 +118,43 @@ export default class EffectsElement extends AppAssociatedElement {
 
 	/**
 	 * Get the set of ContextMenu options which should be applied for activity entries.
+	 * @param {BlackFlagActiveEffect} effect - The effect for which the context menu is being activated.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
+	 * @protected
 	 */
-	#getContextMenuOptions() {
+	_getContextMenuOptions(effect) {
 		return [
 			{
-				name: "BF.Effect.Action.Disable",
-				icon: "<i class='fa-solid fa-times fa-fw'></i>",
-				condition: li => {
-					const id = li[0].closest("[data-effect-id]")?.dataset.effectId;
-					const effect = this.effects.get(id);
-					return this.isEditable && !effect?.disabled;
-				},
-				callback: li => this.#onAction(li[0], "toggle")
-			},
-			{
-				name: "BF.Effect.Action.Enable",
-				icon: "<i class='fa-solid fa-check fa-fw'></i>",
-				condition: li => {
-					const id = li[0].closest("[data-effect-id]")?.dataset.effectId;
-					const effect = this.effects.get(id);
-					return this.isEditable && effect?.disabled;
-				},
-				callback: li => this.#onAction(li[0], "toggle")
+				name: "BF.Effect.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => !this.isEditable,
+				callback: li => this._onAction(li[0], "view")
 			},
 			{
 				name: "BF.Effect.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
 				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "edit")
+				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: "BF.Effect.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
 				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "duplicate")
+				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: "BF.Effect.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
 				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "delete"),
+				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
+			},
+			{
+				name: `BF.Effect.Action.${effect.disabled ? "Enable" : "Disable"}`,
+				icon: `<i class='fa-solid fa-${effect.disabled ? "check" : "times"} fa-fw'></i>`,
+				condition: li => this.isEditable,
+				callback: li => this._onAction(li[0], "toggle"),
+				group: "state"
 			}
 		];
 	}
@@ -161,11 +166,19 @@ export default class EffectsElement extends AppAssociatedElement {
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
 	 * @returns {Promise|void}
+	 * @protected
 	 */
-	#onAction(target, action) {
-		const id = target.closest("[data-effect-id]")?.dataset.effectId;
-		const effect = this.effects.get(id);
+	_onAction(target, action) {
+		const event = new CustomEvent("bf-effect", {
+			bubbles: true,
+			cancelable: true,
+			detail: action
+		});
+		if ( target.dispatchEvent(event) === false ) return;
+
+		const effect = this.getEffect(target.closest("[data-effect-id]")?.dataset);
 		if ( (action !== "add") && !effect ) return;
+
 		switch ( action ) {
 			case "add":
 				const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
@@ -192,5 +205,42 @@ export default class EffectsElement extends AppAssociatedElement {
 			default:
 				return log(`Invalid effect action type clicked ${action}.`, { level: "warn" });
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle opening the context menu.
+	 * @param {HTMLElement} element - The element the context menu was triggered on.
+	 * @protected
+	 */
+	_onContextMenu(element) {
+		const effect = this.getEffect(element.closest("[data-effect-id]")?.dataset);
+		ui.context.menuItems = this._getContextMenuOptions(effect);
+		/**
+		 * A hook event that fires when the context menu for an effects list is constructed.
+		 * @function blackFlag.getEffectsContext
+		 * @memberof hookEvents
+		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
+		 * @param {BlackFlagActiveEffect} effect - The effect for which the context options are being prepared.
+		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
+		 */
+		Hooks.call("blackFlag.getEffectsContext", this, effect, ui.context.menuItems);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Retrieve an effect with the specified ID.
+	 * @param {object} [data]
+	 * @param {string} [data.effectId] - ID of the effect to fetch.
+	 * @param {string} [data.parentId] - ID of the parent item that contains this effect, if a grandchild effect.
+	 * @returns {BlackFlagActiveEffect}
+	 */
+	getEffect({ effectId, parentId }={}) {
+		if ( !parentId ) return this.document.effects.get(effectId);
+		return this.document.items.get(parentId).effects.get(effectId);
 	}
 }
