@@ -88,7 +88,7 @@ export default class NPCSheet extends BaseActorSheet {
 		const validKeyPaths = new Set([
 			"system.traits.damage.resistances.value", "system.traits.condition.resistances.value",
 			"system.traits.damage.immunities.value", "system.traits.condition.immunities.value",
-			"system.traits.damage.vulnerabilties.value"
+			"system.traits.damage.vulnerabilties.value", "system.traits.condition.vulnerabilities.value"
 		]);
 		const associatedEffects = [];
 		for ( const effect of this.actor.allApplicableEffects() ) {

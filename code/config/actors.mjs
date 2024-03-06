@@ -85,6 +85,9 @@ export const creatureTags = {
 				localization: "BF.CreatureType.Tag.Lycanthrope"
 			}
 		}
+	},
+	anyLineage: {
+		label: "BF.CreatureType.Tag.AnyLineage"
 	}
 };
 localizeConfig(creatureTags, { flatten: true });
