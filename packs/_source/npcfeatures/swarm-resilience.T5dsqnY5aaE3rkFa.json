@@ -1,0 +1,127 @@
+{
+  "name": "Swarm Resilience",
+  "type": "feature",
+  "_id": "T5dsqnY5aaE3rkFa",
+  "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>The swarm is resistant to bludgeoning, piercing, and slashing damage, and it is immune to the charmed, frightened, grappled, paralyzed, petrified, prone, restrained, and stunned conditions.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/mammals/bats-movement-flying-purple.webp",
+      "origin": "Compendium.black-flag.npcfeatures.Item.T5dsqnY5aaE3rkFa",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Swarm Resilience",
+      "_id": "3ERxb3PXwsGCpkfJ",
+      "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "bludgeoning"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "piercing"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "slashing"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "frightened"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "grappled"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "paralyzed"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "petrified"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "prone"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "restrained"
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "stunned"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!T5dsqnY5aaE3rkFa.3ERxb3PXwsGCpkfJ"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709697997263,
+    "modifiedTime": 1709698137393,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!T5dsqnY5aaE3rkFa"
+}

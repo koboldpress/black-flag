@@ -1,0 +1,82 @@
+{
+  "name": "Fey Resilience",
+  "type": "feature",
+  "_id": "Pvh1Vv9rYGzhycly",
+  "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed and unconscious conditions.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+      "origin": "Compendium.black-flag.npcfeatures.Item.Pvh1Vv9rYGzhycly",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Fey Resilience",
+      "_id": "xsKr4hZ7kVgeQaXM",
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "unconscious"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!Pvh1Vv9rYGzhycly.xsKr4hZ7kVgeQaXM"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709696905232,
+    "modifiedTime": 1709696998162,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Pvh1Vv9rYGzhycly"
+}

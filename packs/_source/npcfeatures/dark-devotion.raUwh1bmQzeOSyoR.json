@@ -1,0 +1,82 @@
+{
+  "name": "Dark Devotion",
+  "type": "feature",
+  "_id": "raUwh1bmQzeOSyoR",
+  "img": "icons/equipment/head/hood-cloth-teal-gold.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed and frightened conditions.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/equipment/head/hood-cloth-teal-gold.webp",
+      "origin": "Compendium.black-flag.npcfeatures.Item.raUwh1bmQzeOSyoR",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Dark Devotion",
+      "_id": "nvvU4SkeDHQdj00v",
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "charmed"
+        },
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "frightened"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!raUwh1bmQzeOSyoR.nvvU4SkeDHQdj00v"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709698638526,
+    "modifiedTime": 1709698693422,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!raUwh1bmQzeOSyoR"
+}

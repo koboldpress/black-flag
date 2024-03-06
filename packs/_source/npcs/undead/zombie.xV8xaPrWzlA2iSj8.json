@@ -8,12 +8,12 @@
       "ac": {
         "baseFormulas": [
           "unarmored",
-          "armored",
-          "natural"
+          "armored"
         ],
         "formulas": [],
         "flat": null,
-        "override": 8
+        "override": 8,
+        "customLabel": ""
       },
       "exhaustion": 0,
       "initiative": {
@@ -73,10 +73,7 @@
       },
       "condition": {
         "immunities": {
-          "value": [
-            "exhaustion",
-            "poisoned"
-          ],
+          "value": [],
           "custom": []
         }
       },
@@ -87,9 +84,7 @@
           "bypasses": []
         },
         "immunities": {
-          "value": [
-            "poison"
-          ],
+          "value": [],
           "custom": [],
           "bypasses": []
         },
@@ -190,165 +185,6 @@
   },
   "items": [
     {
-      "name": "Undead Fortitude",
-      "type": "feature",
-      "_id": "S1M2k90U7L7RxSFC",
-      "img": "systems/black-flag/artwork/types/feature.svg",
-      "system": {
-        "activities": {},
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "advancement": {},
-        "description": {
-          "value": "<p>If damage reduces the zombie to 0 HP, it must make a [[/save constitution]]{CON} save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 HP instead.</p>",
-          "source": ""
-        },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
-        "type": {
-          "category": "monsters"
-        },
-        "level": {
-          "value": null
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 200000,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.7.010",
-        "coreVersion": "11.315",
-        "createdTime": 1706467755716,
-        "modifiedTime": 1706472899577,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!xV8xaPrWzlA2iSj8.S1M2k90U7L7RxSFC"
-    },
-    {
-      "name": "Undead Nature",
-      "type": "feature",
-      "_id": "tMDA57WLKmCldYjt",
-      "img": "systems/black-flag/artwork/types/feature.svg",
-      "system": {
-        "activities": {},
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "advancement": {},
-        "description": {
-          "value": "<p>The zombie doesn’t require air, food, drink, or sleep.</p>",
-          "source": ""
-        },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
-        "type": {
-          "category": "monsters"
-        },
-        "level": {
-          "value": null
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 100000,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.7.010",
-        "coreVersion": "11.315",
-        "createdTime": 1706467888787,
-        "modifiedTime": 1706472899577,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!xV8xaPrWzlA2iSj8.tMDA57WLKmCldYjt"
-    },
-    {
-      "name": "Undead Resilience",
-      "type": "feature",
-      "_id": "nYdlHfjCjGPk1ICU",
-      "img": "systems/black-flag/artwork/types/feature.svg",
-      "system": {
-        "activities": {},
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "advancement": {},
-        "description": {
-          "value": "<p>The zombie is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
-          "source": ""
-        },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
-        "type": {
-          "category": "monsters"
-        },
-        "level": {
-          "value": null
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 300000,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.7.010",
-        "coreVersion": "11.315",
-        "createdTime": 1706467905493,
-        "modifiedTime": 1706472899577,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!xV8xaPrWzlA2iSj8.nYdlHfjCjGPk1ICU"
-    },
-    {
       "name": "Slam",
       "type": "weapon",
       "_id": "SFmU8A7KItL36i00",
@@ -358,7 +194,7 @@
           "hxVUcJbaUJsPa8ed": {
             "type": "attack",
             "_id": "hxVUcJbaUJsPa8ed",
-            "description": "<p><em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> [[/damage 1d6 + @mod bludgeoning average]] damage. The target is grappled (escape DC 12) if it is a Medium or smaller creature, and the zombie doesn’t already have a creature grappled.</p>",
+            "description": "",
             "system": {
               "type": {
                 "value": "melee",
@@ -412,7 +248,7 @@
         },
         "properties": [],
         "description": {
-          "value": "",
+          "value": "<p><em>Melee Weapon Attack:</em> +4 to hit, reach 5 ft., one target. <em>Hit:</em> [[/damage 1d6 + @mod bludgeoning average]] damage. The target is grappled (escape DC 12) if it is a Medium or smaller creature, and the zombie doesn’t already have a creature grappled.</p>",
           "source": ""
         },
         "type": {
@@ -430,6 +266,10 @@
           "short": null,
           "long": null,
           "reach": null
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
         }
       },
       "effects": [],
@@ -447,10 +287,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.7.010",
+        "systemVersion": "0.8.015",
         "coreVersion": "11.315",
         "createdTime": 1706468518319,
-        "modifiedTime": 1706470457808,
+        "modifiedTime": 1709697761860,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!xV8xaPrWzlA2iSj8.SFmU8A7KItL36i00"
@@ -465,7 +305,7 @@
           "WJHolvDp3xXfUZXs": {
             "type": "savingThrow",
             "_id": "WJHolvDp3xXfUZXs",
-            "description": "<p>The zombie gnaws idly on the creature grappled by it. The target must succeed on a [[/save constitution dc=12]] save or take [[/damage 1d4 poison]] damage. A Humanoid slain by this bonus action rises 24 hours later as a zombie, unless the Humanoid is restored to life or its body is destroyed.</p>",
+            "description": "",
             "system": {
               "ability": "constitution",
               "damage": {
@@ -485,7 +325,7 @@
               }
             },
             "activation": {
-              "type": "action",
+              "type": "bonus",
               "condition": ""
             },
             "consumption": {
@@ -513,8 +353,8 @@
         },
         "advancement": {},
         "description": {
-          "value": "",
-          "source": ""
+          "value": "<p>The zombie gnaws idly on the creature grappled by it. The target must succeed on a [[/save constitution dc=12]] save or take [[/damage 1d4 poison]] damage. A Humanoid slain by this bonus action rises 24 hours later as a zombie, unless the Humanoid is restored to life or its body is destroyed.</p>",
+          "source": "Black Flag Reference Document"
         },
         "identifier": {},
         "restriction": {
@@ -542,13 +382,224 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.7.010",
+        "systemVersion": "0.8.015",
         "coreVersion": "11.315",
         "createdTime": 1706468605190,
-        "modifiedTime": 1706472961599,
+        "modifiedTime": 1709697742766,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!xV8xaPrWzlA2iSj8.wHtWHprv7MIkXcQ6"
+    },
+    {
+      "name": "Undead Resilience",
+      "type": "feature",
+      "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [
+        {
+          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "origin": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": 0,
+            "startTurn": 0
+          },
+          "disabled": false,
+          "name": "Undead Resilience",
+          "_id": "eTrciZFtsPDaLR2j",
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!xV8xaPrWzlA2iSj8.F6s8PRbFkjipkoEX.eTrciZFtsPDaLR2j"
+        }
+      ],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2HH89GIIAuYvfRlt"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1706467905493,
+        "modifiedTime": 1709697571845,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "F6s8PRbFkjipkoEX",
+      "sort": 300000,
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.F6s8PRbFkjipkoEX"
+    },
+    {
+      "name": "Undead Nature",
+      "type": "feature",
+      "img": "icons/magic/death/skeleton-eye-skull-glow-orange.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.7sxXRJayum4g5Y2A"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1706467888787,
+        "modifiedTime": 1709697591150,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "Grpelb9FVOf5oZop",
+      "sort": 225000,
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.Grpelb9FVOf5oZop"
+    },
+    {
+      "name": "Undead Fortitude",
+      "type": "feature",
+      "img": "icons/magic/death/hand-dirt-undead-zombie.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If damage reduces the [[lookup @name lowercase]] to 0 HP, it must make a [[/save constitution]]{CON} save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the [[lookup @name lowercase]] drops to 1 HP instead.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.tUz9Ll4Sr0zjjlYM"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1706467755716,
+        "modifiedTime": 1709697589811,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "ugY1fuj3VIrzAxQj",
+      "sort": 150000,
+      "_key": "!actors.items!xV8xaPrWzlA2iSj8.ugY1fuj3VIrzAxQj"
     }
   ],
   "effects": [],
@@ -560,10 +611,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.010",
+    "systemVersion": "0.8.015",
     "coreVersion": "11.315",
     "createdTime": 1706467603863,
-    "modifiedTime": 1706473258873,
+    "modifiedTime": 1709697761860,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!xV8xaPrWzlA2iSj8"

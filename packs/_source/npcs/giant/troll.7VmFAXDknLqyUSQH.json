@@ -1,0 +1,305 @@
+{
+  "folder": "BqIgsmjqLqST0iqd",
+  "name": "Troll",
+  "type": "npc",
+  "_id": "7VmFAXDknLqyUSQH",
+  "img": "systems/black-flag/artwork/types/npc.svg",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 15,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        },
+        "lair": null
+      },
+      "cr": 5,
+      "hp": {
+        "value": 94,
+        "max": 94,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 12,
+      "stealth": 13
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "giant"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": []
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": []
+      },
+      "size": "large",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "bypasses": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "type": {
+        "value": "giant",
+        "tags": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 4
+      },
+      "dexterity": {
+        "mod": 1
+      },
+      "constitution": {
+        "mod": 5
+      },
+      "intelligence": {
+        "mod": -2
+      },
+      "wisdom": {
+        "mod": -1
+      },
+      "charisma": {
+        "mod": -2
+      }
+    },
+    "biography": {
+      "value": "",
+      "lair": "",
+      "legendary": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Troll",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0
+    },
+    "width": 2,
+    "height": 2,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Giant Attributes",
+      "type": "feature",
+      "_id": "88WoXBhocvip43C1",
+      "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to the stunned condition, and it is vulnerable to the prone condition.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [
+        {
+          "icon": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.m72mAsPV1hqNYPSi",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": 0,
+            "startTurn": 0
+          },
+          "disabled": false,
+          "name": "Giant Attributes",
+          "_id": "1F1KR2nud7oEdy85",
+          "changes": [
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "stunned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.vulnerabilities.value",
+              "mode": 2,
+              "value": "prone",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!7VmFAXDknLqyUSQH.88WoXBhocvip43C1.1F1KR2nud7oEdy85"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.m72mAsPV1hqNYPSi"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1709697179450,
+        "modifiedTime": 1709697281289,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!7VmFAXDknLqyUSQH.88WoXBhocvip43C1"
+    }
+  ],
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709697136234,
+    "modifiedTime": 1709697281289,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!7VmFAXDknLqyUSQH"
+}

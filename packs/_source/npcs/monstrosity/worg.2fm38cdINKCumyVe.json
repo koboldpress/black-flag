@@ -67,10 +67,12 @@
         },
         "tags": []
       },
-      "size": "medium",
+      "size": "large",
       "type": {
         "value": "monstrosity",
-        "tags": [],
+        "tags": [
+          "animal"
+        ],
         "swarm": ""
       },
       "condition": {
@@ -79,10 +81,7 @@
           "custom": []
         },
         "resistances": {
-          "value": [
-            "exhaustion",
-            "frightened"
-          ]
+          "value": []
         }
       },
       "damage": {
@@ -142,8 +141,8 @@
       "offsetY": 0,
       "rotation": 0
     },
-    "width": 1,
-    "height": 1,
+    "width": 2,
+    "height": 2,
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
@@ -244,62 +243,6 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!2fm38cdINKCumyVe.8iuavnQl7IsTnnwj"
-    },
-    {
-      "name": "Monstrosity Resilience",
-      "type": "feature",
-      "_id": "XXNFA4NXhlr8ZunA",
-      "img": "systems/black-flag/artwork/types/feature.svg",
-      "system": {
-        "activities": {},
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "advancement": {},
-        "description": {
-          "value": "<p>The worg is resistant to exhaustion and to the frightened condition.</p>",
-          "source": ""
-        },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
-        "type": {
-          "category": "monsters"
-        },
-        "level": {
-          "value": null
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk"
-        },
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.7.010",
-        "coreVersion": "11.315",
-        "createdTime": 1706473622104,
-        "modifiedTime": 1706473656652,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!2fm38cdINKCumyVe.XXNFA4NXhlr8ZunA"
     },
     {
       "name": "Bite",
@@ -505,6 +448,99 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!2fm38cdINKCumyVe.cTEgzaUZkfuIvRek"
+    },
+    {
+      "name": "Monstrosity Resilience",
+      "type": "feature",
+      "_id": "j0kkwNtRF6zdtRl8",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
+          "source": "Black Flag Reference Document"
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [
+        {
+          "icon": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+          "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": 0,
+            "startTurn": 0
+          },
+          "disabled": false,
+          "name": "Monstrosity Resilience",
+          "_id": "jxagd3hzp2UTp7Wl",
+          "changes": [
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": null,
+          "_key": "!actors.items.effects!2fm38cdINKCumyVe.j0kkwNtRF6zdtRl8.jxagd3hzp2UTp7Wl"
+        }
+      ],
+      "folder": null,
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.015",
+        "coreVersion": "11.315",
+        "createdTime": 1706473622104,
+        "modifiedTime": 1709697511757,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2fm38cdINKCumyVe.j0kkwNtRF6zdtRl8"
     }
   ],
   "effects": [],
@@ -515,10 +551,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.010",
+    "systemVersion": "0.8.015",
     "coreVersion": "11.315",
     "createdTime": 1706473281478,
-    "modifiedTime": 1706473969559,
+    "modifiedTime": 1709697536360,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!2fm38cdINKCumyVe"

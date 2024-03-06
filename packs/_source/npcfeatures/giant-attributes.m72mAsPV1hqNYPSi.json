@@ -1,0 +1,82 @@
+{
+  "name": "Giant Attributes",
+  "type": "feature",
+  "_id": "m72mAsPV1hqNYPSi",
+  "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>The [[lookup @name lowercase]] is resistant to the stunned condition, and it is vulnerable to the prone condition.</p>",
+      "source": "Black Flag Reference Document"
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
+      "origin": "Compendium.black-flag.npcfeatures.Item.m72mAsPV1hqNYPSi",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Giant Attributes",
+      "_id": "1F1KR2nud7oEdy85",
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "stunned"
+        },
+        {
+          "key": "system.traits.condition.vulnerabilities.value",
+          "mode": 2,
+          "value": "prone"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!m72mAsPV1hqNYPSi.1F1KR2nud7oEdy85"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.015",
+    "coreVersion": "11.315",
+    "createdTime": 1709697179450,
+    "modifiedTime": 1709697243096,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!m72mAsPV1hqNYPSi"
+}
