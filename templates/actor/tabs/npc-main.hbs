@@ -58,10 +58,10 @@
 				{{localize "BF.Skill.Perception.Label"}}
 			</span>
 			{{#if modes.editing}}
-				<input type="number" name="system.attributes.perception" value="{{source.attributes.perception}}"
-					placeholder="{{placeholders.perception}}">
+				<input type="number" name="system.attributes.perception" value="{{ source.attributes.perception }}"
+					placeholder="{{ placeholders.perception }}">
 			{{else}}
-				<span>{{blackFlag-number skills.perception}}</span>
+				<span>{{ blackFlag-number system.attributes.perception }}</span>
 			{{/if}}
 		</label>
 		<label class="stats__narrow">
@@ -69,10 +69,10 @@
 				{{localize "BF.Skill.Stealth.Label"}}
 			</span>
 			{{#if modes.editing}}
-				<input type="number" name="system.attributes.stealth" value="{{source.attributes.stealth}}"
-					placeholder="{{placeholders.stealth}}">
+				<input type="number" name="system.attributes.stealth" value="{{ source.attributes.stealth }}"
+					placeholder="{{ placeholders.stealth }}">
 			{{else}}
-				<span>{{blackFlag-number skills.stealth}}</span>
+				<span>{{ blackFlag-number system.attributes.stealth }}</span>
 			{{/if}}
 		</label>
 		{{#if traits.vulnerable}}

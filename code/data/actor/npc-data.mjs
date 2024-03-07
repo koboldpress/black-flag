@@ -16,6 +16,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	ACTemplate, ConditionsTemplate, InitiativeTemplate, LanguagesTemplate, ModifiersTemplate, TraitsTemplate
 ) {
 
+	/** @inheritDoc */
 	static metadata = {
 		type: "npc",
 		category: "person",
@@ -29,6 +30,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(new SchemaField({
@@ -161,18 +163,23 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedHitPoints() {
+	/**
+	 * Calculate the final values for various attributes.
+	 */
+	prepareDerivedAttributes() {
+		// Hit Points
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
 		if ( this.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedInitiative() {
+		// Initiative
 		this.computeInitiative();
+
+		// Perception & Stealth
+		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
+		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
