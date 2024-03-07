@@ -5,14 +5,21 @@ import { log, simplifyBonus } from "./utils/_module.mjs";
  */
 export function registerCustomEnrichers() {
 	log("Registering custom enrichers");
-	CONFIG.TextEditor.enrichers.push({
-		pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
-		enricher: enrichString
-	}, {
-		// TODO: Remove when v11 support is dropped
-		pattern: /@(?<type>Embed)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
-		enricher: enrichString
-	});
+	CONFIG.TextEditor.enrichers.push(
+		{
+			pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+			enricher: enrichString
+		},
+		{
+			pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+			enricher: enrichString
+		},
+		{
+			// TODO: Remove when v11 support is dropped
+			pattern: /@(?<type>Embed)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
+			enricher: enrichString
+		}
+	);
 
 	document.body.addEventListener("click", handleRollAction);
 }
@@ -33,6 +40,7 @@ async function enrichString(match, options) {
 		case "check":
 		case "skill":
 		case "tool": return enrichCheck(config, label, options);
+		case "lookup": return enrichLookup(config, label, options);
 		case "save": return enrichSave(config, label, options);
 		case "damage": return enrichDamage(config, label, options);
 		case "embed": return enrichEmbed(config, label, options);
@@ -659,4 +667,52 @@ async function embedRollTable(config, label, options) {
 		figure.append(figcaption);
 	}
 	return figure;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                    Lookup Enricher                    */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich a property lookup.
+ * @param {object} config - Configuration data.
+ * @param {string} [fallback] - Optional fallback if the value couldn't be found.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML element if the lookup could be built, otherwise null.
+ *
+ * @example Include a creature's name in its description:
+ * ```[[lookup @name]]``
+ * becomes
+ * ```html
+ * <span class="lookup-value">Adult Black Dragon</span>
+ * ```
+ */
+function enrichLookup(config, fallback, options) {
+	let keyPath = config.path;
+	let style = config.style;
+	for ( const value of config.values ) {
+		if ( value === "capitalize" ) style ??= "capitalize";
+		else if ( value === "lowercase" ) style ??= "lowercase";
+		else if ( value === "uppercase" ) style ??= "uppercase";
+		else if ( value.startsWith("@") ) keyPath ??= value;
+	}
+
+	if ( !keyPath ) {
+		console.warn(`Lookup path must be defined to enrich ${config._input}.`);
+		return null;
+	}
+
+	const data = options.relativeTo?.getRollData() ?? {};
+	let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
+	if ( value && style ) {
+		if ( style === "capitalize" ) value = value.capitalize();
+		else if ( style === "lowercase" ) value = value.toLowerCase();
+		else if ( style === "uppercase" ) value = value.toUpperCase();
+	}
+
+	const span = document.createElement("span");
+	span.classList.add("lookup-value");
+	if ( !value ) span.classList.add("not-found");
+	span.innerText = value ?? keyPath;
+	return span;
 }

@@ -70,6 +70,23 @@ export default class ItemDataModel extends BaseDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a data object which defines the data schema used by dice roll commands against this Item.
+	 * @param {object} [options]
+	 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could be
+	 *                                            either a die term or a flat term.
+	 * @returns {object}
+	 */
+	getRollData({ deterministic=false }={}) {
+		if ( !this.parent.actor ) return {};
+		const rollData = { ...this.parent.actor.getRollData({ deterministic }), item: { ...this } };
+		return rollData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -44,6 +44,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get identifier() {
 		if ( this.system.identifier?.value ) return this.system.identifier.value;
 		return slugify(this.name, {strict: true});
@@ -58,6 +59,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get pseudoDocumentHierarchy() {
 		const hierarchy = {};
 		for ( const [fieldName, field] of this.system.schema.entries() ) {
@@ -71,6 +73,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareData() {
 		this.notifications = new NotificationsCollection();
 		super.prepareData();
@@ -78,6 +81,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareEmbeddedDocuments() {
 		super.prepareEmbeddedDocuments();
 		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
@@ -111,6 +115,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async deleteDialog(options={}) {
 		// Display custom delete dialog when deleting a container with contents
 		const count = await this.system.contentsCount;
@@ -138,13 +143,19 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getRollData({ deterministic=false }={}) {
-		if ( !this.actor ) return {};
-		const actorRollData = this.actor.getRollData({ deterministic });
-		const rollData = {
-			...actorRollData,
-			item: this.toObject(false).system
-		};
+		let rollData;
+		if ( this.system.getRollData ) rollData = this.system.getRollData({ deterministic });
+		else {
+			if ( !this.actor ) return {};
+			rollData = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
+		}
+
+		if ( rollData.item ) {
+			rollData.item.flags = { ...this.flags };
+			rollData.item.name = this.name;
+		}
 
 		const abilityKey = this.system.ability;
 		if ( abilityKey && ("abilities" in rollData) ) {
@@ -158,6 +169,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/*         Embedded Operations         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static getCollectionName(name) {
 		if ( name === "Activity" ) name = "activities";
 		if ( name === "Advancement" ) name = "advancement";
@@ -167,6 +179,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getEmbeddedCollection(embeddedName) {
 		const collectionName = this.constructor.getCollectionName(embeddedName);
 		const field = this.pseudoDocumentHierarchy[collectionName];

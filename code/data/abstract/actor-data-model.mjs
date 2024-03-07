@@ -1,3 +1,4 @@
+import Proficiency from "../../documents/proficiency.mjs";
 import BaseDataModel from "./base-data-model.mjs";
 
 export default class ActorDataModel extends BaseDataModel {
@@ -27,5 +28,23 @@ export default class ActorDataModel extends BaseDataModel {
 		const section = document.createElement("section");
 		section.innerHTML = enriched;
 		return section.children;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
+	 * @param {object} [options]
+	 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could be
+	 *                                            either a die term or a flat term.
+	 * @returns {object}
+	 */
+	getRollData({ deterministic=false }={}) {
+		const rollData = { ...this };
+		rollData.prof = new Proficiency(this.attributes?.proficiency ?? 0, 1);
+		if ( deterministic ) rollData.prof = rollData.prof.flat;
+		return rollData;
 	}
 }

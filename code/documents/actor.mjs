@@ -265,15 +265,19 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getRollData({ deterministic=false }={}) {
-		const rollData = { ...super.getRollData() };
-		rollData.prof = new Proficiency(this.system.attributes.proficiency ?? 0, 1);
-		if ( deterministic ) rollData.prof = rollData.prof.flat;
+		let rollData;
+		if ( this.system.getRollData ) rollData = this.system.getRollData({ deterministic });
+		else rollData = { ...super.getRollData() };
+		rollData.flags = { ...this.flags };
+		rollData.name = this.name;
 		return rollData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async modifyTokenAttribute(attribute, value, isDelta, isBar) {
 		if ( ["attributes.hp", "attributes.hp.value"].includes(attribute) ) {
 			const hp = this.system.attributes.hp;
