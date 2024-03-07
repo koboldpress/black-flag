@@ -1,77 +1,79 @@
 <blackFlag-consumption name="consumption">
 	<fieldset>
-		<legend>{{localize "BF.Consumption.Label"}}</legend>
+		<legend>{{ localize "BF.Consumption.Label" }}</legend>
 		<ul class="configuration-list">
 			{{#each activity.consumption.targets}}
-				<li data-index="{{@index}}">
+				<li data-index="{{ @index }}">
 					<div class="field-group">
 						<label class="type">
-							<span>{{localize "BF.Consumption.Type.Label"}}</span>
-							<select name="$.targets.{{@index}}.type">
+							<span>{{ localize "BF.Consumption.Type.Label" }}</span>
+							<select name="$.targets.{{ @index }}.type">
 								{{#select type}}
 									{{#each validTypes}}
-										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
+										<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
 									{{/each}}
 								{{/select}}
 							</select>
 						</label>
 						{{#with validTargets as |targets|}}
 							<label class="target">
-								<span>{{localize "BF.Consumption.Target.Label"}}</span>
-								<select name="$.targets.{{@index}}.target">
-									{{selectOptions targets selected=../target nameAttr="key" labelAttr="label"}}
+								<span>{{ localize "BF.Consumption.Target.Label" }}</span>
+								<select name="$.targets.{{ @index }}.target">
+									{{ selectOptions targets selected=../target nameAttr="key" labelAttr="label" }}
 								</select>
 							</label>
 						{{/with}}
 						<label class="value">
-							<span>{{localize "BF.Consumption.Amount.Label"}}</span>
-							<input type="text" name="$.targets.{{@index}}.value" value="{{value}}">
+							<span>{{ localize "BF.Consumption.Amount.Label" }}</span>
+							<input type="text" name="$.targets.{{ @index }}.value" value="{{ value }}">
 						</label>
 						{{#if @root.consumption.scale.allowed}}
 							<label class="scale">
-								<span>{{localize "BF.Consumption.Scale.Label"}}</span>
-								<input type="text" name="$.targets.{{@index}}.scale" value="{{scale}}">
+								<span>{{ localize "BF.Consumption.Scale.Label" }}</span>
+								<input type="text" name="$.targets.{{ @index }}.scale" value="{{ scale }}">
 							</label>
 						{{/if}}
 					</div>
 					<div class="controls">
 						{{#if @root.editable}}
-							<a data-action="delete">
-								<i class="fa-solid fa-trash"></i>
-							</a>
+							<button type="button" class="link-button" data-action="delete"
+							        data-tooltip="BF.Consumption.Action.Delete"
+											aria-label="{{ localize 'BF.Consumption.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
 						{{/if}}
 					</div>
 				</li>
 			{{else}}
 				{{#unless editable}}
-					<li class="add-control">{{localize "None"}}</li>
+					<li class="add-control">{{ localize "None" }}</li>
 				{{/unless}}
 			{{/each}}
 			{{#if editable}}
 				<li class="add-control">
-					<a data-action="add">
-				 	<i class="fa-solid fa-plus"></i> {{localize "BF.Consumption.Action.Add"}}
-					</a>
+					<button type="button" class="link-button" data-action="add">
+				 		<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Consumption.Action.Add" }}
+					</button>
 				</li>
 			{{/if}}
 		</ul>
 		<label class="full-checkbox">
 			<span>
-				{{localize "BF.Consumption.AllowScaling.Label"}}
+				{{ localize "BF.Consumption.AllowScaling.Label" }}
 				<i class="hintIcon" data-tooltip="BF.Consumption.AllowScaling.Hint"></i>
 			</span>
-			<input type="checkbox" name="$.scale.allowed" {{checked activity.consumption.scale.allowed}}>
+			<input type="checkbox" name="$.scale.allowed" {{ checked activity.consumption.scale.allowed }}>
 		</label>
 		{{#if activity.consumption.scale.allowed}}
 			<label>
 				<span>
-					{{localize "BF.Consumption.MaxScaling.Label"}}
+					{{ localize "BF.Consumption.MaxScaling.Label" }}
 					<i class="hintIcon" data-tooltip="BF.Consumption.MaxScaling.Hint"></i>
 				</span>
-				<input type="text" name="$.scale.max" value="{{activity.consumption.scale.max}}" placeholder="∞">
+				<input type="text" name="$.scale.max" value="{{ activity.consumption.scale.max }}" placeholder="∞">
 			</label>
 		{{/if}}
 	</fieldset>
 </blackFlag-consumption>
 
-{{> "blackFlag.uses-config" name="uses" source=source.uses derived=activity.uses}}
+{{> "blackFlag.uses-config" name="uses" source=source.uses derived=activity.uses }}

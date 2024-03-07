@@ -73,11 +73,23 @@
 
 "BF.Activation": {
 	"Label": "Activation",
-	"Category.Standard.Label": "Standard Actions",
-	"Condition.Label": "Activation Condition",
-	"Cost.Label": "Activation Cost",
-	"Scalar.Label": "{number} {type}",
-	"Time.Label": "Activation Time",
+	"Category": {
+		"Standard": {
+			"Label": "Standard Actions"
+		}
+	},
+	"Condition": {
+		"Label": "Activation Condition"
+	},
+	"Cost": {
+		"Label": "Activation Cost"
+	},
+	"Scalar": {
+		"Label": "{number} {type}"
+	},
+	"Time": {
+		"Label": "Activation Time"
+	},
 	"Type": {
 		"Label": "Activation Type",
 		"Action[one]": "Action",
@@ -94,40 +106,63 @@
 	}
 },
 
-"BF.Activity.Label[one]": "Activity",
-"BF.Activity.Label[other]": "Activities",
-
-"BF.Activity.Core.Action.Create": "Create Activity",
-"BF.Activity.Core.Action.Delete": "Delete Activity",
-"BF.Activity.Core.Action.Duplicate": "Duplicate Activity",
-"BF.Activity.Core.Action.Edit": "Edit Activity",
-"BF.Activity.Core.Action.Use": "Use",
-"BF.Activity.Core.Description.Label": "Description",
-"BF.Activity.Core.Warning.NoTargets": "You must have one or more tokens controlled or an assigned character.",
-
-"BF.Activity.Config.Title": "Configure {item} Activity",
-
-"BF.Activity.Damage.Action.Add": "Add Damage Type",
-"BF.Activity.Damage.IncludeBaseDamage.Label": "Include Base Damage",
-"BF.Activity.Damage.IncludeBaseDamage.Hint": "Include the weapon's base damage along with any additional damage parts defined in the activity.",
-
-"BF.Activity.Selection.Title": "Select Activity",
-
-"BF.Activity.Attack.Title": "Attack",
-"BF.Activity.Attack.Hint": "Make an attack and roll damage.",
-"BF.Activity.Section.Details": "Attack Details",
-
-"BF.Activity.Healing.Title": "Healing",
-"BF.Activity.Healing.Hint": "Provide some healing.",
-
-"BF.Activity.SavingThrow.Title": "Saving Throw",
-"BF.Activity.SavingThrow.Hint": "Force a saving throw and roll damage.",
-"BF.Activity.SavingThrow.Challenge": "Challenge",
-"BF.Activity.SavingThrow.OpposedAbility.Label": "Opposed Ability",
-"BF.Activity.SavingThrow.Versus": "vs.",
-
-"BF.Activity.Utility.Title": "Utility",
-"BF.Activity.Utility.Hint": "Perform a generic action.",
+"BF.Activity": {
+	"Label[one]": "Activity",
+	"Label[other]": "Activities",
+	"Core": {
+		"Action": {
+			"Create": "Create Activity",
+			"Delete": "Delete Activity",
+			"Duplicate": "Duplicate Activity",
+			"Edit": "Edit Activity",
+			"Use": "Use"
+		},
+		"Description": {
+			"Label": "Description"
+		},
+		"Warning": {
+			"NoTargets": "You must have one or more tokens controlled or an assigned character."
+		}
+	},
+	"Config": {
+		"Title": "Configure {item} Activity"
+	},
+	"Damage": {
+		"Action": {
+			"Add": "Add Damage Type",
+			"Delete": "Delete Damage Type"
+		},
+		"IncludeBaseDamage": {
+			"Label": "Include Base Damage",
+			"Hint": "Include the weapon's base damage along with any additional damage parts defined in the activity."
+		}
+	},
+	"Selection": {
+		"Title": "Select Activity"
+	},
+	"Attack": {
+		"Title": "Attack",
+		"Hint": "Make an attack and roll damage.",
+		"Section": {
+			"Details": "Attack Details"
+		}
+	},
+	"Healing": {
+		"Title": "Healing",
+		"Hint": "Provide some healing."
+	},
+	"SavingThrow": {
+		"Title": "Saving Throw",
+		"Hint": "Force a saving throw and roll damage.",
+		"Challenge": "Challenge",
+		"OpposedAbility.Label": "Opposed Ability",
+		"Versus": "vs."
+	},
+	"Utility": {
+		"Title": "Utility",
+		"Hint": "Perform a generic action."
+	}
+},
 
 "BF.Actor.Category.Person.Label": "Person",
 "BF.Actor.Type.NPC[one]": "Non-Player Character",
@@ -290,10 +325,18 @@
 	"Label": "Area of Effect",
 	"Size": {
 		"Label": "Size",
-		"Height.Label": "Height",
-		"Length.Label": "Length",
-		"Radius.Label": "Radius",
-		"Width.Label": "Width"
+		"Height": {
+			"Label": "Height"
+		},
+		"Length": {
+			"Label": "Length"
+		},
+		"Radius": {
+			"Label": "Radius"
+		},
+		"Width": {
+			"Label": "Width"
+		}
 	},
 	"Type": {
 		"Label": "Area Type",
@@ -349,11 +392,17 @@
 	},
 	"Modifier": {
 		"Label": "Modifier",
-		"Description.Long": "+ {ability} modifier",
-		"Description.Max": "{hint} (max {max})",
-		"Description.Short": "+ {ability}",
-		"Maximum.Label": "Maximum Modifier",
-		"Minimum.Label": "Minimum Modifier"
+		"Description": {
+			"Long": "+ {ability} modifier",
+			"Max": "{hint} (max {max})",
+			"Short": "+ {ability}"
+		},
+		"Maximum": {
+			"Label": "Maximum Modifier"
+		},
+		"Minimum": {
+			"Label": "Minimum Modifier"
+		}
 	},
 	"Notification": {
 		"NotProficient": "Using {type} without proficiency results in disadvantage on STR & DEX ability checks.",
@@ -378,7 +427,9 @@
 		"Splint": "Splint",
 		"StuddedLeather": "Studded Leather"
 	},
-	"Value.Label": "Armor Value"
+	"Value": {
+		"Label": "Armor Value"
+	}
 },
 
 "BF.ArmorClass": {
@@ -508,31 +559,58 @@
 
 "BF.Configuration.Title": "{type} Configuration",
 
-"BF.Consumption.Label": "Resource Consumption",
-"BF.Consumption.Action.Add": "Add Consumption Target",
-"BF.Consumption.AllowScaling.Label": "Allow Scaling",
-"BF.Consumption.AllowScaling.Hint": "Can additional resources be consumed to scale this activity above its baseline?",
-"BF.Consumption.Amount.Label": "Amount",
-"BF.Consumption.MaxScaling.Label": "Max Scaling",
-"BF.Consumption.MaxScaling.hint": "Number of additional levels this activity can be scale above its baseline.",
-"BF.Consumption.Scale.Label": "Scale",
-"BF.Consumption.Target.Label": "Target",
-"BF.Consumption.Type.Label": "Type",
-"BF.Consumption.Type.ActivityUses.Label": "Activity's Uses",
-"BF.Consumption.Type.ActivityUses.Warning": "uses on {itemName}'s activity {activityName}",
-"BF.Consumption.Type.ItemUses.Label": "Item's Uses",
-"BF.Consumption.Type.ItemUses.ThisItem": "This Item",
-"BF.Consumption.Type.ItemUses.Warning": "uses on {name}",
-"BF.Consumption.Type.HitDice.Label": "Hit Dice",
-"BF.Consumption.Type.HitDice.Largest": "Largest Available",
-"BF.Consumption.Type.HitDice.Smallest": "Smallest Available",
-"BF.Consumption.Type.HitDice.Warning": "{denomination} hit dice",
-"BF.Consumption.Type.SpellSlots.Label": "Spell Slots",
-"BF.Consumption.Type.SpellSlots.Warning": "{ring} slots",
-"BF.Consumption.Warning.MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
-"BF.Consumption.Warning.MissingSpellRing": "No {ring} slots available.",
-"BF.Consumption.Warning.None": "No {type} available to spend, {cost} required.",
-"BF.Consumption.Warning.NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available.",
+"BF.Consumption": {
+	"Label": "Resource Consumption",
+	"Action": {
+		"Add": "Add Consumption Target",
+		"Delete": "Delete Consumption Target"
+	},
+	"AllowScaling": {
+		"Label": "Allow Scaling",
+		"Hint": "Can additional resources be consumed to scale this activity above its baseline?"
+	},
+	"Amount": {
+		"Label": "Amount"
+	},
+	"MaxScaling": {
+		"Label": "Max Scaling",
+		"Hint": "Number of additional levels this activity can be scale above its baseline."
+	},
+	"Scale": {
+		"Label": "Scale"
+	},
+	"Target": {
+		"Label": "Target"
+	},
+	"Type": {
+		"Label": "Type",
+		"ActivityUses": {
+			"Label": "Activity's Uses",
+			"Warning": "uses on {itemName}'s activity {activityName}"
+		},
+		"ItemUses": {
+			"Label": "Item's Uses",
+			"ThisItem": "This Item",
+			"Warning": "uses on {name}"
+		},
+		"HitDice": {
+			"Label": "Hit Dice",
+			"Largest": "Largest Available",
+			"Smallest": "Smallest Available",
+			"Warning": "{denomination} hit dice"
+		},
+		"SpellSlots": {
+			"Label": "Spell Slots",
+			"Warning": "{ring} slots"
+		}
+	},
+	"Warning": {
+		"MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
+		"MissingSpellRing": "No {ring} slots available.",
+		"None": "No {type} available to spend, {cost} required.",
+		"NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
+	}
+},
 
 "BF.Container.Capacity.Label": "Capacity",
 "BF.Container.Capacity.Number.Label": "Number of Items",
@@ -611,7 +689,7 @@
 "BF.Currency": {
 	"Abbreviation": {
 		"Label": "Abbreviation",
-		"Abbreviation.Hint": "Unique abbreviation for this denomination."
+		"Hint": "Unique abbreviation for this denomination."
 	},
 	"Action": {
 		"Add": "Add Currency",
@@ -691,12 +769,18 @@
 		"Success": "{name} has succeeded on {counted} and is now stable."
 	},
 	"Override": {
-		"Failure.Label": "Failures Required",
-		"Failure.Hint": "Number of failures required before the actor dies.",
-		"Success.Label": "Successes Required",
-		"Success.Hint": "Number of successes required before the actor stabalizes.",
-		"Target.Label": "Target Value",
-		"Target.Hint": "Value that must be rolled to be considered a success."
+		"Failure": {
+			"Label": "Failures Required",
+			"Hint": "Number of failures required before the actor dies."
+		},
+		"Success": {
+			"Label": "Successes Required",
+			"Hint": "Number of successes required before the actor stabalizes."
+		},
+		"Target": {
+			"Label": "Target Value",
+			"Hint": "Value that must be rolled to be considered a success."
+		}
 	},
 	"Status": {
 		"Label": "Status",
@@ -837,10 +921,18 @@
 	}
 },
 
-"BF.Formula.Label": "Formula",
-"BF.Formula.Action.Customize": "Customize Formula",
-"BF.Formula.Custom.Label": "Custom Formula",
-"BF.Formula.Warning.MissingReference": "The {property} formula within {name} has references to missing data: {references}",
+"BF.Formula": {
+	"Label": "Formula",
+	"Action": {
+		"Customize": "Customize Formula"
+	},
+	"Custom": {
+		"Label": "Custom Formula"
+	},
+	"Warning": {
+		"MissingReference": "The {property} formula within {name} has references to missing data: {references}"
+	}
+},
 
 "BF.Global": "Global",
 
@@ -883,7 +975,9 @@
 
 "BF.Initiative": {
 	"Label": "Initiative",
-	"Ability.Label": "Initiative Ability"
+	"Ability": {
+		"Label": "Initiative Ability"
+	}
 },
 
 "BF.Item": {
@@ -897,27 +991,47 @@
 		"Unequip": "Unequip Item",
 		"View": "View Item"
 	},
-	"Category.Concept.Label": "Character Creation",
-	"Category.Feature.Label": "Features",
-	"Category.Equipment.Label": "Equipment",
-	"Category.Meta.Label": "Meta",
-	"Clothing.Type.Amulet[one]": "Amulet",
-	"Clothing.Type.Amulet[other]": "Amulets",
-	"Clothing.Type.Belt[one]": "Belt",
-	"Clothing.Type.Belt[other]": "Belts",
-	"Clothing.Type.Cloak[one]": "Cloak",
-	"Clothing.Type.Cloak[other]": "Cloaks",
-	"Clothing.Type.Helm[one]": "Helm",
-	"Clothing.Type.Helm[other]": "Helm",
-	"Clothing.Type.Ring[one]": "Ring",
-	"Clothing.Type.Ring[other]": "Rings",
-	"Consumable.Category.Food[one]": "Food",
-	"Consumable.Category.Food[other]": "Food",
-	"Consumable.Category.Potion[one]": "Potion",
-	"Consumable.Category.Potion[other]": "Potions",
-	"Consumable.Category.Scroll[one]": "Scroll",
-	"Consumable.Category.Scroll[other]": "Scrolls",
-	"Create.Prompt": "Which item type should be created?",
+	"Category": {
+		"Concept": {
+			"Label": "Character Creation"
+		},
+		"Feature": {
+			"Label": "Features"
+		},
+		"Equipment": {
+			"Label": "Equipment"
+		},
+		"Meta": {
+			"Label": "Meta"
+		}
+	},
+	"Clothing": {
+		"Type": {
+			"Amulet[one]": "Amulet",
+			"Amulet[other]": "Amulets",
+			"Belt[one]": "Belt",
+			"Belt[other]": "Belts",
+			"Cloak[one]": "Cloak",
+			"Cloak[other]": "Cloaks",
+			"Helm[one]": "Helm",
+			"Helm[other]": "Helm",
+			"Ring[one]": "Ring",
+			"Ring[other]": "Rings"
+		}
+	},
+	"Consumable": {
+		"Category": {
+			"Food[one]": "Food",
+			"Food[other]": "Food",
+			"Potion[one]": "Potion",
+			"Potion[other]": "Potions",
+			"Scroll[one]": "Scroll",
+			"Scroll[other]": "Scrolls"
+		}
+	},
+	"Create": {
+		"Prompt": "Which item type should be created?"
+	},
 	"Description": {
 		"FullLabel": "Description",
 		"FullHint": "Full description associated with this item.",
@@ -925,10 +1039,14 @@
 		"ShortHint": "Brief description of this item."
 	},
 	"Equipped": "Equipped",
-	"Focus.Type.ArcaneFocus[one]": "Arcane Focus",
-	"Focus.Type.ArcaneFocus[other]": "Arcane Foci",
-	"Focus.Type.HolySymbol[one]": "Holy Symbol",
-	"Focus.Type.HolySymbol[other]": "Holy Symbols",
+	"Focus": {
+		"Type": {
+			"ArcaneFocus[one]": "Arcane Focus",
+			"ArcaneFocus[other]": "Arcane Foci",
+			"HolySymbol[one]": "Holy Symbol",
+			"HolySymbol[other]": "Holy Symbols"
+		}
+	},
 	"Gear": {
 		"Category": {
 			"AdventuringGear[one]": "Adventuring Gear",
@@ -945,57 +1063,71 @@
 			"WondrousItem[other]": "Wondrous Items"
 		}
 	},
-	"Journal.Label": "Journal Entry",
-	"Journal.Hint": "Link to a journal entry with an extended description of this item.",
-	"Property.Magical.Label": "Magical",
-	"Source.Label": "Source",
-	"Source.Hint": "Source book or module where this item originated.",
-	"Sundry.Category.Clothing[one]": "Clothing",
-	"Sundry.Category.Clothing[other]": "Clothing",
-	"Sundry.Category.Component[one]": "Component",
-	"Sundry.Category.Component[other]": "Components",
-	"Sundry.Category.TradeGood[one]": "Trade Good",
-	"Sundry.Category.TradeGood[other]": "Trade Goods",
-	"Sundry.Category.Treasure[one]": "Treasure",
-	"Sundry.Category.Treasure[other]": "Treasure",
-	"Sundry.Category.Trinket[one]": "Trinket",
-	"Sundry.Category.Trinket[one]": "Trinkets",
-	"Type.Ammunition[one]": "Ammunition",
-	"Type.Ammunition[other]": "Ammunition",
-	"Type.Armor[one]": "Armor",
-	"Type.Armor[other]": "Armor",
-	"Type.Background[one]": "Background",
-	"Type.Background[other]": "Backgrounds",
-	"Type.Consumable[one]": "Consumable",
-	"Type.Consumable[other]": "Consumables",
-	"Type.Container[one]": "Container",
-	"Type.Container[other]": "Containers",
-	"Type.Class[one]": "Class",
-	"Type.Class[other]": "Classes",
-	"Type.Currency[one]": "Currency",
-	"Type.Currency[other]": "Currencies",
-	"Type.Feature[one]": "Feature",
-	"Type.Feature[other]": "Features",
-	"Type.Gear[one]": "Gear",
-	"Type.Gear[other]": "Gear",
-	"Type.Heritage[one]": "Heritage",
-	"Type.Heritage[other]": "Heritages",
-	"Type.Lineage[one]": "Lineage",
-	"Type.Lineage[other]": "Lineages",
-	"Type.Spell[one]": "Spell",
-	"Type.Spell[other]": "Spells",
-	"Type.Subclass[one]": "Subclass",
-	"Type.Subclass[other]": "Subclasses",
-	"Type.Sundry[one]": "Sundry",
-	"Type.Sundry[other]": "Sundries",
-	"Type.Talent[one]": "Talent",
-	"Type.Talent[other]": "Talents",
-	"Type.Tool[one]": "Tool",
-	"Type.Tool[other]": "Tools",
-	"Type.Unidentified[one]": "Unidentified Item",
-	"Type.Unidentified[other]": "Unidentified Items",
-	"Type.Weapon[one]": "Weapon",
-	"Type.Weapon[other]": "Weapons",
+	"Journal": {
+		"Label": "Journal Entry",
+		"Journal.Hint": "Link to a journal entry with an extended description of this item."
+	},
+	"Property": {
+		"Magical": {
+			"Label": "Magical"
+		}
+	},
+	"Source": {
+		"Label": "Source",
+		"Hint": "Source book or module where this item originated."
+	},
+	"Sundry": {
+		"Category": {
+			"Clothing[one]": "Clothing",
+			"Clothing[other]": "Clothing",
+			"Component[one]": "Component",
+			"Component[other]": "Components",
+			"TradeGood[one]": "Trade Good",
+			"TradeGood[other]": "Trade Goods",
+			"Treasure[one]": "Treasure",
+			"Treasure[other]": "Treasure",
+			"Trinket[one]": "Trinket",
+			"Trinket[one]": "Trinkets"
+		}
+	},
+	"Type": {
+		"Ammunition[one]": "Ammunition",
+		"Ammunition[other]": "Ammunition",
+		"Armor[one]": "Armor",
+		"Armor[other]": "Armor",
+		"Background[one]": "Background",
+		"Background[other]": "Backgrounds",
+		"Consumable[one]": "Consumable",
+		"Consumable[other]": "Consumables",
+		"Container[one]": "Container",
+		"Container[other]": "Containers",
+		"Class[one]": "Class",
+		"Class[other]": "Classes",
+		"Currency[one]": "Currency",
+		"Currency[other]": "Currencies",
+		"Feature[one]": "Feature",
+		"Feature[other]": "Features",
+		"Gear[one]": "Gear",
+		"Gear[other]": "Gear",
+		"Heritage[one]": "Heritage",
+		"Heritage[other]": "Heritages",
+		"Lineage[one]": "Lineage",
+		"Lineage[other]": "Lineages",
+		"Spell[one]": "Spell",
+		"Spell[other]": "Spells",
+		"Subclass[one]": "Subclass",
+		"Subclass[other]": "Subclasses",
+		"Sundry[one]": "Sundry",
+		"Sundry[other]": "Sundries",
+		"Talent[one]": "Talent",
+		"Talent[other]": "Talents",
+		"Tool[one]": "Tool",
+		"Tool[other]": "Tools",
+		"Unidentified[one]": "Unidentified Item",
+		"Unidentified[other]": "Unidentified Items",
+		"Weapon[one]": "Weapon",
+		"Weapon[other]": "Weapons"
+	},
 	"Unequipped": "Unequipped"
 },
 
@@ -1006,37 +1138,65 @@
 "BF.JournalPage": {
 	"Edit": "Edit",
 	"Class": {
-		"AdditionalDescriptions.Label": "Additional Descriptions",
-		"Equipment.Header": "Starting Equipment",
-		"Equipment.Hint": "List of equipment granted by this class if taken at first level.",
-		"Features.Header": "Class Features",
-		"Features.Description": "As a {lowercaseName}, you have the following class features.",
+		"AdditionalDescriptions": {
+			"Label": "Additional Descriptions"
+		},
+		"Equipment": {
+			"Header": "Starting Equipment",
+			"Hint": "List of equipment granted by this class if taken at first level."
+		},
+		"Features": {
+			"Header": "Class Features",
+			"Description": "As a {lowercaseName}, you have the following class features."
+		},
 		"HitDice": "<strong>Hit Dice:</strong> {dice} per {class} level",
-		"HitPoints.Header": "Hit Points",
-		"HitPoints.Hint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
-		"HitPoints.Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your CON modifier",
-		"HitPoints.LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your CON modifier per {class} level after 1st",
-		"Introduction.Label": "Introduction",
-		"Introduction.Hint": "Primary description of the class that will appear first.",
-		"Item.Label": "Selected Class",
-		"Item.Hint": "Drop a class here",
+		"HitPoints": {
+			"Header": "Hit Points",
+			"Hint": "Additional descriptive text displayed beneath the auto-generated hit points section.",
+			"Level1": "<strong>Hit Points at 1st Level:</strong> {max} + your CON modifier",
+			"LevelX": "<strong>Hit Points at Higher Levels:</strong> {dice} (or {average}) + your CON modifier per {class} level after 1st"
+		},
+		"Introduction": {
+			"Label": "Introduction",
+			"Hint": "Primary description of the class that will appear first."
+		},
+		"Item": {
+			"Label": "Selected Class",
+			"Hint": "Drop a class here"
+		},
 		"NoClass": "No valid class selected, press the edit button to add a class.",
-		"Subclass.AdvancementDescription.Label": "Advancement Description",
-		"Subclass.AdvancementDescription.Hint": "Brief description that appears in the subclass entry within the features list.",
-		"Subclass.AdvancementDescription.Placeholder": "When you reach 3rd level, choose a subclass from the options presented below.",
-		"Subclass.Header": "{class} Subclasses",
-		"Subclass.Items": "Subclasses",
-		"Subclass.SectionDescription.Label": "Section Description",
-		"Subclass.SectionDescription.Hint": "Longer description that appears just before the list of subclass options.",
-		"Table.Caption": "{class} Progression",
-		"Traits.Hint": "Additional descriptive text displatyed beneeth list of proficiencies granted by this class.",
-		"Traits.SavesChoice": "and your choice of {choices}"
+		"Subclass": {
+			"AdvancementDescription": {
+				"Label": "Advancement Description",
+				"Hint": "Brief description that appears in the subclass entry within the features list.",
+				"Placeholder": "When you reach 3rd level, choose a subclass from the options presented below."
+			},
+			"Header": "{class} Subclasses",
+			"Items": "Subclasses",
+			"SectionDescription": {
+				"Label": "Section Description",
+				"Hint": "Longer description that appears just before the list of subclass options."
+			}
+		},
+		"Table": {
+			"Caption": "{class} Progression"
+		},
+		"Traits": {
+			"Hint": "Additional descriptive text displatyed beneeth list of proficiencies granted by this class.",
+			"SavesChoice": "and your choice of {choices}"
+		}
 	},
 	"Subclass": {
-		"Introduction.Hint": "Primary description of the subclass that will appear first.",
-		"Subclass.Item.Label": "Selected Subclass",
-		"Subclass.Item.Hint": "Drop a subclass here",
-		"Subclass.NoSubclass": "No valid subclass selected, press the edit button to add a subclass."
+		"Introduction": {
+			"Hint": "Primary description of the subclass that will appear first."
+		},
+		"Subclass": {
+			"Item": {
+				"Label": "Selected Subclass",
+				"Hint": "Drop a subclass here"
+			},
+			"NoSubclass": "No valid subclass selected, press the edit button to add a subclass."
+		}
 	},
 	"Type": {
 		"Class[one]": "Class Summary",
@@ -1281,19 +1441,38 @@
 	}
 },
 
-"BF.Reach.Label": "Reach",
+"BF.Reach": {
+	"Label": "Reach"
+},
 
-"BF.Recovery.Label": "Uses Recovery",
-"BF.Recovery.Action.Add": "Add Recovery Profile",
-"BF.Recovery.Formula.Label": "Recovery Formula",
-"BF.Recovery.Period.Label": "Period",
-"BF.Recovery.Period.Turn.Label": "Turn",
-"BF.Recovery.Period.Round.Label": "Round",
-"BF.Recovery.Period.Encounter.Label": "Encounter",
-"BF.Recovery.Type.Label": "Recovery Type",
-"BF.Recovery.Type.Formula": "Custom Formula",
-"BF.Recovery.Type.LoseAll": "Lose All Uses",
-"BF.Recovery.Type.RecoverAll": "Recover All Uses",
+"BF.Recovery": {
+	"Label": "Uses Recovery",
+	"Action": {
+		"Add": "Add Recovery Profile",
+		"Delete": "Delete Recovery Profile"
+	},
+	"Formula": {
+		"Label": "Recovery Formula"
+	},
+	"Period": {
+		"Label": "Period",
+		"Turn": {
+			"Label": "Turn"
+		},
+		"Round": {
+			"Label": "Round"
+		},
+		"Encounter": {
+			"Label": "Encounter"
+		}
+	},
+	"Type": {
+		"Label": "Recovery Type",
+		"Formula": "Custom Formula",
+		"LoseAll": "Lose All Uses",
+		"RecoverAll": "Recover All Uses"
+	}
+},
 
 "BF.Resistance": {
 	"Label": "Resistances",
@@ -1304,7 +1483,11 @@
 
 "BF.Rest": {
 	"Label": "Resting",
-	"Action.Rest.Label": "Rest",
+	"Action": {
+		"Rest": {
+			"Label": "Rest"
+		}
+	},
 	"Result": {
 		"Long": {
 			"Basic": "{name} takes a long rest.",
@@ -1453,24 +1636,60 @@
 		"LabelGeneric": "Passive",
 		"LabelSpecific": "Passive {skill}"
 	},
-	"Acrobatics.Label": "Acrobatics",
-	"AnimalHandling.Label": "Animal Handling",
-	"Arcana.Label": "Arcana",
-	"Athletics.Label": "Athletics",
-	"Deception.Label": "Deception",
-	"History.Label": "History",
-	"Insight.Label": "Insight",
-	"Intimidation.Label": "Intimidation",
-	"Investigation.Label": "Investigation",
-	"Medicine.Label": "Medicine",
-	"Nature.Label": "Nature",
-	"Perception.Label": "Perception",
-	"Performance.Label": "Performance",
-	"Persuasion.Label": "Persuasion",
-	"Religion.Label": "Religion",
-	"SleightOfHand.Label": "Sleight of Hand",
-	"Stealth.Label": "Stealth",
-	"Survival.Label": "Survival"
+	"Acrobatics": {
+		"Label": "Acrobatics"
+	},
+	"AnimalHandling": {
+		"Label": "Animal Handling"
+	},
+	"Arcana": {
+		"Label": "Arcana"
+	},
+	"Athletics": {
+		"Label": "Athletics"
+	},
+	"Deception": {
+		"Label": "Deception"
+	},
+	"History": {
+		"Label": "History"
+	},
+	"Insight": {
+		"Label": "Insight"
+	},
+	"Intimidation": {
+		"Label": "Intimidation"
+	},
+	"Investigation": {
+		"Label": "Investigation"
+	},
+	"Medicine": {
+		"Label": "Medicine"
+	},
+	"Nature": {
+		"Label": "Nature"
+	},
+	"Perception": {
+		"Label": "Perception"
+	},
+	"Performance": {
+		"Label": "Performance"
+	},
+	"Persuasion": {
+		"Label": "Persuasion"
+	},
+	"Religion": {
+		"Label": "Religion"
+	},
+	"SleightOfHand": {
+		"Label": "Sleight of Hand"
+	},
+	"Stealth": {
+		"Label": "Stealth"
+	},
+	"Survival": {
+		"Label": "Survival"
+	}
 },
 
 "BF.Speed.Label": "Speed",
@@ -1485,8 +1704,12 @@
 		"Prepare": "Prepare Spell",
 		"Unprepare": "Unprepare Spell"
 	},
-	"Casting.Label": "Casting",
-	"CastingTime.Label": "Casting Time",
+	"Casting": {
+		"Label": "Casting"
+	},
+	"CastingTime": {
+		"Label": "Casting Time"
+	},
 	"Circle": {
 		"Label": "Circle of Magic",
 		"RuleLabel": "Spell Circle",
@@ -1536,23 +1759,43 @@
 	},
 	"Ring": {
 		"Label": "Spell Ring",
-		"Base.Label": "Base Ring",
+		"Base": {
+			"Label": "Base Ring"
+		},
 		"Cantrip[one]": "Cantrip",
 		"Cantrip[other]": "Cantrips",
-		"Effective.Label": "Effective Ring",
+		"Effective": {
+			"Label": "Effective Ring"
+		},
 		"Level": "{number} Ring"
 	},
 	"School": {
 		"Label": "School of Magic",
 		"RuleLabel": "Spell School",
-		"Abjuration.Label": "Abjuration",
-		"Conjuration.Label": "Conjuration",
-		"Divination.Label": "Divination",
-		"Enchantment.Label": "Enchantment",
-		"Evocation.Label": "Evocation",
-		"Illusion.Label": "Illusion",
-		"Necromancy.Label": "Necromancy",
-		"Transmutation.Label": "Transmutation"
+		"Abjuration": {
+			"Label": "Abjuration"
+		},
+		"Conjuration": {
+			"Label": "Conjuration"
+		},
+		"Divination": {
+			"Label": "Divination"
+		},
+		"Enchantment": {
+			"Label": "Enchantment"
+		},
+		"Evocation": {
+			"Label": "Evocation"
+		},
+		"Illusion": {
+			"Label": "Illusion"
+		},
+		"Necromancy": {
+			"Label": "Necromancy"
+		},
+		"Transmutation": {
+			"Label": "Transmutation"
+		}
 	},
 	"Tag": {
 		"Label": "Tags",
@@ -1891,13 +2134,14 @@
 	}
 },
 
-	"EFFECT.BF": {
-		"Burrowing": "Burrowing",
-		"Concentrating": "Concentrating",
-		"Flying": "Flying",
-		"Hidden": "Hidden",
-		"Marked": "Marked",
-		"Sleeping": "Sleeping",
-		"Transformed": "Transformed"
-	}
+"EFFECT.BF": {
+	"Burrowing": "Burrowing",
+	"Concentrating": "Concentrating",
+	"Flying": "Flying",
+	"Hidden": "Hidden",
+	"Marked": "Marked",
+	"Sleeping": "Sleeping",
+	"Transformed": "Transformed"
+}
+
 }

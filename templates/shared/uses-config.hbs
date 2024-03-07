@@ -1,79 +1,81 @@
-<blackFlag-uses name="{{name}}">
+<blackFlag-uses name="{{ name }}">
 	<fieldset>
-		<legend>{{localize "BF.Uses.Label"}}</legend>
+		<legend>{{ localize "BF.Uses.Label" }}</legend>
 		<div class="field-group">
-			<span>{{localize "BF.Uses.Limits.Label"}}</span>
+			<span>{{ localize "BF.Uses.Limits.Label" }}</span>
 			<label>
-				<span>{{localize "BF.Uses.Minimum.Label"}}</span>
-				<input type="text" name="$.min" value="{{source.min}}" placeholder="0">
+				<span>{{ localize "BF.Uses.Minimum.Label" }}</span>
+				<input type="text" name="$.min" value="{{ source.min }}" placeholder="0">
 			</label>
 			<label>
-				<span>{{localize "BF.Uses.Maximum.Label"}}</span>
-				<input type="text" name="$.max" value="{{source.max}}" placeholder="0">
+				<span>{{ localize "BF.Uses.Maximum.Label" }}</span>
+				<input type="text" name="$.max" value="{{ source.max }}" placeholder="0">
 			</label>
 		</div>
 		<label>
-			<span>{{localize "BF.Uses.Spent.Label"}}</span>
-			<input type="number" name="$.spent" value="{{derived.spent}}">
+			<span>{{ localize "BF.Uses.Spent.Label" }}</span>
+			<input type="number" name="$.spent" value="{{ derived.spent }}">
 		</label>
 		{{#if item.system.isPhysical}}
 			<label class="full-checkbox">
 				<span>
-					{{localize "BF.Uses.ConsumeQuantity.Label"}}
+					{{ localize "BF.Uses.ConsumeQuantity.Label" }}
 					<i class="hintIcon" data-tooltip="BF.Uses.ConsumeQuantity.Label"></i>
 				</span>
-				<input type="checkbox" name="$.consumeQuantity" {{checked derived.consumeQuantity}}>
+				<input type="checkbox" name="$.consumeQuantity" {{ checked derived.consumeQuantity }}>
 			</label>
 		{{/if}}
 	</fieldset>
 
 	<fieldset>
-		<legend>{{localize "BF.Recovery.Label"}}</legend>
+		<legend>{{ localize "BF.Recovery.Label" }}</legend>
 		<ul class="configuration-list">
 			{{#each derived.recovery}}
-				<li data-index="{{@index}}">
+				<li data-index="{{ @index }}">
 					<div class="field-group">
 						<label class="period">
-							<span>{{localize "BF.Recovery.Period.Label"}}</span>
-							<select name="$.recovery.{{@index}}.period">
+							<span>{{ localize "BF.Recovery.Period.Label" }}</span>
+							<select name="$.recovery.{{ @index }}.period">
 								{{#select period}}
 									{{#each validPeriods}}
-										<option value="{{key}}" {{disabled disabled}}>{{localize label}}</option>
+										<option value="{{ key }}" {{disabled disabled}}>{{ localize label }}</option>
 									{{/each}}
 								{{/select}}
 							</select>
 						</label>
 						<label class="type">
-							<span>{{localize "BF.Recovery.Type.Label"}}</span>
-							<select name="$.recovery.{{@index}}.type">
-								{{selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true}}
+							<span>{{ localize "BF.Recovery.Type.Label" }}</span>
+							<select name="$.recovery.{{ @index }}.type">
+								{{ selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true }}
 							</select>
 						</label>
 						{{#if (eq type "formula")}}
 							<label class="formula">
-								<span>{{localize "BF.Recovery.Formula.Label"}}</span>
-								<input type="text" name="$.recovery.{{@index}}.formula" value="{{formula}}">
+								<span>{{ localize "BF.Recovery.Formula.Label" }}</span>
+								<input type="text" name="$.recovery.{{ @index }}.formula" value="{{ formula }}">
 							</label>
 						{{/if}}
 					</div>
 					<div class="controls">
 						{{#if @root.editable}}
-							<a data-action="delete">
-								<i class="fa-solid fa-trash"></i>
-							</a>
+							<button type="button" class="link-button" data-action="delete"
+							        data-tooltip="BF.Recovery.Action.Delete"
+											aria-label="{{ localize 'BF.Recovery.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
 						{{/if}}
 					</div>
 				</li>
 			{{else}}
 				{{#unless editable}}
-					<li class="add-control">{{localize "None"}}</li>
+					<li class="add-control">{{ localize "None" }}</li>
 				{{/unless}}
 			{{/each}}
 			{{#if editable}}
 				<li class="add-control">
-					<a data-action="add">
-				 	<i class="fa-solid fa-plus"></i> {{localize "BF.Recovery.Action.Add"}}
-					</a>
+					<button type="button" class="link-button" data-action="add">
+				 		<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Recovery.Action.Add" }}
+					</button>
 				</li>
 			{{/if}}
 		</ul>

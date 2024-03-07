@@ -31,6 +31,14 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	get title() {
+		const type = game.i18n.localize(this.activity.metadata.title);
+		return `${game.i18n.format("BF.Activity.Config.Title", { item: this.item.name })}: ${type}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async close(options={}) {
 		await super.close(options);
 		delete this.activity.apps[this.appId];

@@ -1,9 +1,9 @@
 <div class="black-flag chat-card activity">
 	<header>
-		<img src="{{item.img}}">
+		<img src="{{ item.img }}" alt="{{ item.name }}">
 		<div class="hgroup">
-			<h5>{{item.name}}</h5>
-			<p>{{activity.name}}</p>
+			<h5>{{ item.name }}</h5>
+			<p>{{ activity.name }}</p>
 		</div>
 		<!-- TODO: Description dropdown -->
 	</header>
@@ -11,8 +11,8 @@
 	<ul class="menu">
 		{{#each buttons}}
 			<li>
-				<button type="button" class="light-button" name="{{@key}}"
-			          {{blackFlag-dataset this.dataset}}>{{this.label}}</button>
+				<button type="button" class="light-button" name="{{ @key }}"
+			          {{ blackFlag-dataset this.dataset }}>{{ this.label }}</button>
 			</li>
 		{{/each}}
 	</ul>

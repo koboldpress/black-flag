@@ -1,65 +1,65 @@
 <form autocomplete="off">
 	<header class="sheet-header">
 		<figure class="icon">
-			<img src="{{activity.img}}" data-edit="img">
+			<img src="{{ activity.img }}" alt="{{ default.title }}" data-edit="img">
 		</figure>
 		<h1>
-			<input type="text" name="name" value="{{source.name}}" placeholder="{{default.title}}">
+			<input type="text" name="name" value="{{ source.name }}" placeholder="{{ default.title }}">
 		</h1>
 	</header>
 
 	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
-		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
-		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
+		<a data-tab="details">{{ localize "BF.Sheet.Tab.Details" }}</a>
 	</nav>
 
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="description">
-			{{> "blackFlag.activity-description"}}
+			{{> "blackFlag.activity-description" }}
 		</div>
 
 		<div class="tab" data-group="primary" data-tab="details">
-			{{> "blackFlag.activity-activation"}}
+			{{> "blackFlag.activity-activation" }}
 
 			<fieldset>
-				<legend>{{localize "BF.Activity.SavingThrow.Challenge"}}</legend>
+				<legend>{{ localize "BF.Activity.SavingThrow.Challenge" }}</legend>
 				<div class="field-group">
 					<label>
-						<span>{{localize "BF.Activity.SavingThrow.OpposedAbility.Label"}}</span>
+						<span>{{ localize "BF.Activity.SavingThrow.OpposedAbility.Label" }}</span>
 						<select name="system.ability">
-							{{selectOptions CONFIG.abilities.localized selected=system.ability}}
+							{{ selectOptions CONFIG.abilities.localized selected=system.ability }}
 						</select>
 					</label>
-					<span class="vs">{{localize "BF.Activity.SavingThrow.Versus"}}</span>
+					<span class="vs">{{ localize "BF.Activity.SavingThrow.Versus" }}</span>
 					<label>
-						<span>{{localize "BF.DifficultyClass.Ability.Label"}}</span>
+						<span>{{ localize "BF.DifficultyClass.Ability.Label" }}</span>
 						<select name="system.dc.ability">
 							{{#select system.dc.ability}}
-								<option value="">{{localize "BF.Default.Generic"}}</option>
+								<option value="">{{ localize "BF.Default.Generic" }}</option>
 								<hr>
-								<optgroup label="{{localize 'BF.DifficultyClass.Formula.Default'}}">
-									{{selectOptions CONFIG.abilities.localized}}
+								<optgroup label="{{ localize 'BF.DifficultyClass.Formula.Default' }}">
+									{{ selectOptions CONFIG.abilities.localized }}
 								</optgroup>
 								<hr>
-								<option value="custom">{{localize "BF.Formula.Custom.Label"}}</option>
+								<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
 							{{/select}}
 						</select>
 					</label>
 				</div>
 				{{#if (eq system.dc.ability "custom")}}
 					<label>
-						<span>{{localize "BF.DifficultyClass.Formula.Label"}}</span>
-						<input type="text" name="system.dc.formula" value="{{system.dc.formula}}">
+						<span>{{ localize "BF.DifficultyClass.Formula.Label" }}</span>
+						<input type="text" name="system.dc.formula" value="{{ system.dc.formula }}">
 					</label>
 				{{/if}}
 			</fieldset>
 			
 			<fieldset>
-				<legend>{{localize "BF.Damage.Label"}}</legend>
-				{{> "blackFlag.activity-damage-parts"}}
+				<legend>{{ localize "BF.Damage.Label" }}</legend>
+				{{> "blackFlag.activity-damage-parts" }}
 			</fieldset>
 			
-			{{> "blackFlag.activity-uses"}}
+			{{> "blackFlag.activity-uses" }}
 		</div>
 	</div>
 </form>

@@ -11,18 +11,18 @@ export default class DamageListElement extends FormAssociatedElement {
 		const damageCollection = foundry.utils.getProperty(this.activity, this.name);
 
 		if ( this.single ) {
-			this.#toggleState(null, !!damageCollection?.custom);
+			this._toggleState(null, !!damageCollection?.custom);
 		} else {
 			for ( const li of this.querySelectorAll("[data-index]") ) {
 				const damage = damageCollection?.[li.dataset.index];
-				this.#toggleState(li.dataset.index, !!damage?.custom);
+				this._toggleState(li.dataset.index, !!damage?.custom);
 			}
 		}
 
 		for ( const element of this.querySelectorAll("[data-action]") ) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
-				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
 	}
@@ -68,8 +68,9 @@ export default class DamageListElement extends FormAssociatedElement {
 	 * @param {Element} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
 	 * @returns {Promise|void}
+	 * @protected
 	 */
-	#onAction(target, action) {
+	_onAction(target, action) {
 		const event = new CustomEvent("damage", {
 			bubbles: true,
 			cancelable: true,
@@ -86,13 +87,13 @@ export default class DamageListElement extends FormAssociatedElement {
 				damageCollection.push({});
 				break;
 			case "customize":
-				if ( li.querySelector(".custom input").value ) {
+				if ( li.dataset.customFormula !== undefined ) {
 					li.querySelector(".custom input").value = "";
 					if ( this.single ) damageCollection.custom = "";
 					else damageCollection[index].custom = "";
 				} else {
-					li.querySelector(".custom input").value = this.#createFormula(index);
-					return this.#toggleState(index, true);
+					li.querySelector(".custom input").value = this._createFormula(index);
+					return this._toggleState(index, true);
 				}
 				break;
 			case "delete":
@@ -113,8 +114,9 @@ export default class DamageListElement extends FormAssociatedElement {
 	 * Create a formula based on the values at the given index.
 	 * @param {number} index - Index of the damage entry within the damage collection.
 	 * @returns {string} - Formula that can be used as the basis of a custom formula.
+	 * @internal
 	 */
-	#createFormula(index) {
+	_createFormula(index) {
 		let damage = foundry.utils.getProperty(this.activity.toObject(), this.name);
 		if ( !this.single ) damage = damage[index];
 		if ( damage.denomination ) {
@@ -130,9 +132,12 @@ export default class DamageListElement extends FormAssociatedElement {
 	 * Change between normal editing mode & custom formula mode.
 	 * @param {number} index - Index of the damage entry within the damage collection.
 	 * @param {boolean} showCustomFormula - Should custom formula or normal controls be displayed?
+	 * @internal
 	 */
-	#toggleState(index, showCustomFormula) {
+	_toggleState(index, showCustomFormula) {
 		const li = this.querySelector(this.single ? "li" : `[data-index="${index}"]`);
+		if ( showCustomFormula ) li.dataset.customFormula = "";
+		else delete li.dataset.customFormula;
 
 		const normal = ["die-count", "die-denomination", "plus", "bonus"];
 		for ( const cls of normal ) {
