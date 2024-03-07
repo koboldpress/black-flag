@@ -11,7 +11,7 @@ export function registerCustomEnrichers() {
 			enricher: enrichString
 		},
 		{
-			pattern: /\[\[(?<type>lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+			pattern: /\[\[(?<type>calc|lookup) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
 			enricher: enrichString
 		},
 		{
@@ -35,8 +35,9 @@ export function registerCustomEnrichers() {
 async function enrichString(match, options) {
 	let { type, config, label } = match.groups;
 	config = parseConfig(config);
-	config.input = match[0];
+	config._input = match[0];
 	switch ( type.toLowerCase() ) {
+		case "calc": return enrichCalculation(config, label, options);
 		case "check":
 		case "skill":
 		case "tool": return enrichCheck(config, label, options);
@@ -113,7 +114,7 @@ function createRollLink(label, dataset) {
  */
 function _addDataset(element, dataset) {
 	for ( const [key, value] of Object.entries(dataset) ) {
-		if ( !["input", "values"].includes(key) && value ) element.dataset[key] = value;
+		if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
 	}
 }
 
@@ -141,6 +142,45 @@ function handleRollAction(event) {
 		case "tool": return rollCheckSave(event, speaker);
 		case "damage": return rollDamage(event, speaker);
 	}
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                  Calculation Enricher                 */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich a pre-resolved deterministic calculation
+ * @param {object} config - Configuration data.
+ * @param {string} [fallback] - Optional fallback if the value couldn't be found.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML element if the calculation could be built, otherwise null.
+ *
+ * @example Include a NPC's modified perception value:
+ * ```The creature's perception is [[calc @attributes.perception + 5]] while perceiving with hearing or smell.``
+ * becomes
+ * ```html
+ * The creature's perception is <span class="calculated-value">17</span> while perceiving with hearing or smell.
+ * ```
+ */
+function enrichCalculation(config, fallback, options) {
+	const formulaParts = [];
+	if ( config.formula ) formulaParts.push(config.formula);
+	formulaParts.push(...config.values);
+	const roll = new Roll(formulaParts.join(" "), options.rollData
+		?? options.relativeTo?.getRollData({ deterministic: true }));
+
+	if ( !roll.isDeterministic ) {
+		log(`Non-deterministic formula found while enriching ${config._input}.`, { level: "warn" });
+		return null;
+	}
+
+	// TODO: Use `evaluateSync` on V12
+	roll.evaluate({ async: false });
+
+	const span = document.createElement("span");
+	span.classList.add("calculation-value");
+	span.innerText = roll.total;
+	return span;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -215,7 +255,7 @@ async function enrichCheck(config, label, options) {
 
 	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill];
 	if ( config.skill && !skillConfig ) {
-		log(`Skill ${config.skill} not found while enriching ${config.input}.`, { level: "warn" });
+		log(`Skill ${config.skill} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	} else if ( config.skill && !config.ability ) {
 		config.ability = skillConfig.ability;
@@ -223,16 +263,16 @@ async function enrichCheck(config, label, options) {
 
 	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool];
 	if ( config.tool && !toolConfig ) {
-		log(`Tool ${config.tool} not found while enriching ${config.input}.`, { level: "warn" });
+		log(`Tool ${config.tool} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
 	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
 	if ( config.ability && !abilityConfig ) {
-		log(`Ability ${config.ability} not found while enriching ${config.input}.`, { level: "warn" });
+		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	} else if ( !abilityConfig ) {
-		log(`No ability provided while enriching check ${config.input}.`, { level: "warn" });
+		log(`No ability provided while enriching check ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
@@ -299,7 +339,7 @@ async function enrichSave(config, label, options) {
 
 	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
 	if ( !abilityConfig ) {
-		log(`Ability ${config.ability} not found while enriching ${config.input}.`, { level: "warn" });
+		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
@@ -470,7 +510,7 @@ async function enrichEmbed(config, label, options) {
 	options._embedDepth ??= 0;
 	if ( options._embedDepth > MAX_EMBED_DEPTH ) {
 		log(`Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${
-			config.input} cannot be enriched fully.`, { level: "warn" });
+			config._input} cannot be enriched fully.`, { level: "warn" });
 		return null;
 	}
 
@@ -503,7 +543,7 @@ async function enrichEmbed(config, label, options) {
 		return doc.toEmbed({ ...config, label }, options);
 	}
 
-	else log(`No document can be found to embed for ${config.input}.`, { level: "warn" });
+	else log(`No document can be found to embed for ${config._input}.`, { level: "warn" });
 
 	return null;
 }
