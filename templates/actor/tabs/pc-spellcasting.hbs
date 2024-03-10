@@ -1,12 +1,4 @@
 <section class="spellcasting-sources">
-	{{#if displayManageSpells}}
-		<div class="manage-spells">
-			<button type="button" class="light-button" data-action="manage-spells">
-				<i class="fa-solid fa-book" inert></i>
-				{{localize "BF.Spellbook.Action.LearnSpells"}}
-			</button>
-		</div>
-	{{/if}}
 	{{#each system.spellcasting.sources}}
 		<div class="source-details" style="--item-color: {{document.accentColor}}">
 			<h3>{{document.name}}</h3>
@@ -141,3 +133,10 @@
 		</tfoot>
 	</table>
 </blackFlag-inventory>
+
+<div class="manage-spells">
+	<button type="button" class="light-button" data-action="manage-spells">
+		<i class="fa-solid fa-book" inert></i>
+		{{localize "BF.Spellbook.Action.ManageSpells"}}
+	</button>
+</div>

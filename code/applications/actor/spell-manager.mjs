@@ -1,4 +1,4 @@
-import { filter, search } from "../../utils/_module.mjs";
+import { filter, numberFormat, search } from "../../utils/_module.mjs";
 
 /**
  * Application for learning new spells.
@@ -7,6 +7,7 @@ export default class SpellManager extends DocumentSheet {
 	constructor(...args) {
 		super(...args);
 		this.slots = [];
+		const circles = new Map();
 
 		// Iterate over each spellcasting source, calculating cantrips, rituals, & spells known
 		for ( const source of Object.values(this.document.system.spellcasting.sources) ) {
@@ -20,10 +21,30 @@ export default class SpellManager extends DocumentSheet {
 					selected: new Set()
 				})));
 			}
+			if ( (source.spellcasting.spells.mode === "all") && !circles.has(source.spellcasting.circle) ) {
+				circles.set(source.spellcasting.circle, source);
+			}
 		}
 
-		// Group slots by type
+		// Prepare all learning slots
+		const circleSlots = [];
+		for ( const [circle, label] of Object.entries(CONFIG.BlackFlag.spellCircles.localized) ) {
+			const source = circles.get(circle);
+			if ( !source ) continue;
+			for ( const ring of Array.fromRange(this.document.system.spellcasting.maxRing, 1) ) {
+				circleSlots.push({
+					name: game.i18n.getListFormatter({ type: "unit" }).format([label, numberFormat(ring, { ordinal: true })]),
+					type: "circle",
+					mode: "all",
+					ring,
+					source: source.document
+				});
+			}
+		}
+
+		// Group slots by type and then append typed slots
 		this.slots.sort((lhs, rhs) => lhs.type.localeCompare(rhs.type, "en"));
+		this.slots.push(...circleSlots);
 
 		// Begin fetching spells to display
 		this.allSpells = search.compendiums(Item, {
@@ -41,7 +62,6 @@ export default class SpellManager extends DocumentSheet {
 			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
 			this.existingSpells.add(sourceId);
 		}
-		console.log(this.existingSpells);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -108,10 +128,12 @@ export default class SpellManager extends DocumentSheet {
 	 * Data representing a single spell learning slot.
 	 * @typedef {object} SpellSlotData
 	 *
-	 * @property {cantrips|rituals|spells|spellbook} type - Type of spell that can be added to the slot.
+	 * @property {cantrips|circle|rituals|spells|spellbook} type - Type of spell that can be added to the slot.
 	 * @property {single|all} mode - Whether only one spell or multiple can be selected.
 	 * @property {BlackFlagItem} source - Document with the spellcasting class that granted this slot.
 	 * @property {Set<string>} selected - Set of UUIDs for selected spells, only one allowed in "single" mode.
+	 * @property {string} [name] - Name to display for this slot.
+	 * @property {number} [ring] - Spell ring (only used for "circle" type).
 	 */
 
 	/**
@@ -119,6 +141,12 @@ export default class SpellManager extends DocumentSheet {
 	 * @type {SpellSlotData[]}
 	 */
 	slots;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	get title() {
+		return game.i18n.localize("BF.Spellbook.Title");
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
@@ -134,23 +162,24 @@ export default class SpellManager extends DocumentSheet {
 
 		const otherSelected = new Set();
 		context.slots = this.slots.map((slot, index) => {
-			slot.selected.map(s => otherSelected.add(s));
+			slot.selected?.forEach(s => otherSelected.add(s));
 			return {
 				...slot,
-				name: this.constructor.TYPE_LABELS[slot.type],
+				name: slot.name ?? this.constructor.TYPE_LABELS[slot.type],
 				number: index + 1,
 				selected: index === this.selectedSlot,
 				spell: slot.mode === "single" ? fromUuidSync(slot.selected.first()) : null
 			};
 		});
+		context.mode = this.currentSlot.mode;
 
-		context.spells = (await this.allSpells)
-			.filter(this.shouldDisplay.bind(this))
-			.map(spell => ({
-				...spell,
-				disabled: !this.currentSlot?.selected.has(spell.uuid) && otherSelected.has(spell.uuid),
-				selected: this.currentSlot?.selected.has(spell.uuid)
-			}));
+		context.spells = (await this.allSpells).filter(this.shouldDisplay.bind(this));
+		this.currentSlot.selected ??= new Set(context.spells.map(s => s.uuid));
+		context.spells = context.spells.map(spell => ({
+			...spell,
+			disabled: !this.currentSlot?.selected.has(spell.uuid) && otherSelected.has(spell.uuid),
+			selected: this.currentSlot?.selected.has(spell.uuid)
+		}));
 
 		context.completed = this.slots.every(s => s.selected.size);
 		context.nextDisabled = !this.currentSlot?.selected.size;
@@ -176,6 +205,12 @@ export default class SpellManager extends DocumentSheet {
 			case "cantrips":
 				filters.push({ k: "system.ring.base", v: 0 });
 				break;
+			case "circle":
+				filters.push(
+					{ k: "system.ring.base", v: this.currentSlot.ring },
+					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
+				);
+				break;
 			case "rituals":
 				filters.push({ k: "system.tags", o: "has", v: "ritual" });
 				break;
@@ -190,6 +225,7 @@ export default class SpellManager extends DocumentSheet {
 			default:
 				return false;
 		}
+
 		return filter.performCheck(spell, filters);
 	}
 
@@ -234,6 +270,12 @@ export default class SpellManager extends DocumentSheet {
 			case "selected-spell":
 				this.currentSlot.selected = new Set([event.target.value]);
 				return this.render();
+		}
+		if ( event.target.name.startsWith("selected.") ) {
+			const id = event.target.name.replace("selected.", "");
+			if ( event.target.checked ) this.currentSlot.selected.add(id);
+			else this.currentSlot.selected.delete(id);
+			return this.render();
 		}
 	}
 

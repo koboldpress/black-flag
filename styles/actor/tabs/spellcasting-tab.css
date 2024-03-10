@@ -48,19 +48,11 @@
 			}
 		}
 	}
-
-	.manage-spells {
-		display: flex;
-		align-items: center;
-
-		button {
-			padding-inline: 10px;
-		}
-	}
 }
 
 [data-tab="spellcasting"] blackFlag-inventory {
 	--inventory-image-size: 30px;
+	flex-grow: 1;
 
 	.slots {
 		font-family: var(--bf-font-primary);
@@ -97,5 +89,17 @@
 				drop-shadow(0 0 2px rgb(255 255 255 / .66))
 				drop-shadow(0 0 3px rgb(255 255 255 / .33));
 		}
+	}
+}
+
+[data-tab="spellcasting"] .manage-spells {
+	flex-grow: 0 !important;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	button {
+		flex: 0 0 300px;
+		padding-inline: 10px;
 	}
 }

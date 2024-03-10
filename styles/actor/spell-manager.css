@@ -55,6 +55,11 @@
 				outline: 1px solid rgb(120 120 120 / 20%);
 				outline-offset: -3px;
 			}
+			&.none-available {
+				flex: 1 0 100%;
+				min-height: calc(var(--icon) + (var(--padding) * 2) - 1px);
+				justify-content: center;
+			}
 		}
 		label {
 			flex: 1;
@@ -107,16 +112,30 @@
 		.control {
 			flex: 0 0 24px;
 
-			input[type="radio"] {
+			input {
 				margin: 0;
-				margin-block-end: 3px;
 				accent-color: var(--bf-blue);
+
+				&[type="radio"] { margin-block-end: 3px; }
+				&[type="checkbox"] {
+					flex: unset;
+					width: 15px;
+					height: 15px;
+				}
 			}
 		}
 	}
 
 	.restrictions {
 		padding: 8px;
+	}
+
+	section.slots {
+		h3 {
+			border: none;
+			text-align: center;
+			margin-block: 6px;
+		}
 	}
 
 	section.spells {

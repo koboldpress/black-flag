@@ -1,6 +1,7 @@
 <form class="sheet-container" autocomplete="off">
 	<section class="slots">
-		<ul class="unlist spell-list">
+		<h3>{{ localize "BF.Spellbook.Slots.New" }}</h3>
+		<ul class="unlist spell-list news-slots">
 			{{#each slots}}
 				<li {{~#if selected}} class="selected"{{/if}}>
 					<label>
@@ -39,26 +40,26 @@
 						<figure class="icon"><img src="{{ img }}"></figure>
 						<div class="name">{{ name }}</div>
 						<div class="control">
-							<!-- TODO: Turn into checkbox for "all" learning mode -->
-							<input type="radio" name="selected-spell" value="{{ uuid }}"
-							       {{ checked selected }} {{ disabled disabled }}>
+							{{#if (ne @root.mode "all")}}
+								<input type="radio" name="selected-spell" value="{{ uuid }}"
+										 	{{ checked selected }} {{ disabled disabled }}>
+							{{else}}
+								<input type="checkbox" name="selected.{{ uuid }}" {{ checked selected }}>
+							{{/if}}
 						</div>
 					</label>
+				</li>
+			{{else}}
+				<li class="none-available">
+					{{ localize "BF.Spellbook.NoneAvailable" }}
 				</li>
 			{{/each}}
 		</ul>
 	</section>
 	<div class="controls">
-		{{#if completed}}
-			<button type="submit" class="light-button" data-action="learn">
-				<i class="fa-solid fa-file-pen" inert></i>
-				{{ localize "BF.Spellbook.Action.LearnSpells" }}
-			</button>
-		{{else}}
-			<button type="button" class="heavy-button" data-action="continue" {{ disabled nextDisabled }}>
-				<i class="fa-solid fa-diagram-next" inert></i>
-				{{ localize "BF.Spellbook.Action.NextSlot" }}
-			</button>
-		{{/if}}
+		<button type="submit" class="heavy-button" data-action="learn">
+			<i class="fa-solid fa-file-pen" inert></i>
+			{{ localize "BF.Spellbook.Action.LearnSpells" }}
+		</button>
 	</div>
 </form>
