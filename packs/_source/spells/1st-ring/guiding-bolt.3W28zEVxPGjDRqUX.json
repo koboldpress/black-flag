@@ -3,9 +3,52 @@
   "name": "Guiding Bolt",
   "type": "spell",
   "_id": "3W28zEVxPGjDRqUX",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/projectile-smoke-blue-white.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "6t6lg6a9R3O6Y6Oo": {
+        "type": "attack",
+        "_id": "6t6lg6a9R3O6Y6Oo",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 4,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +73,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,10 +94,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934021876,
-    "modifiedTime": 1709408318902,
+    "modifiedTime": 1710190996648,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!3W28zEVxPGjDRqUX"

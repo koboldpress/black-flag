@@ -3,9 +3,42 @@
   "name": "Grease",
   "type": "spell",
   "_id": "vj70K3TUp67pl6ta",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/commodities/materials/slime-white.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "wLNq1bJOxo2yVp19": {
+        "type": "savingThrow",
+        "_id": "wLNq1bJOxo2yVp19",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,39 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of pork rind or butter",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "square",
+        "size": "10"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933970750,
-    "modifiedTime": 1709408325966,
+    "modifiedTime": 1710190888819,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!vj70K3TUp67pl6ta"

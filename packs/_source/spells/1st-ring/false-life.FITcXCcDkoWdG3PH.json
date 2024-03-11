@@ -3,9 +3,43 @@
   "name": "False Life",
   "type": "spell",
   "_id": "FITcXCcDkoWdG3PH",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/life/cross-embers-glow-yellow-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "lHjeisIEfYdkNJpz": {
+        "type": "healing",
+        "_id": "lHjeisIEfYdkNJpz",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "temp",
+            "denomination": "4",
+            "bonus": "4",
+            "custom": "",
+            "number": 1
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +64,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small amount of alcohol or distilled spirits",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -50,7 +91,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +107,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933369013,
-    "modifiedTime": 1709408320985,
+    "modifiedTime": 1710190409330,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!FITcXCcDkoWdG3PH"

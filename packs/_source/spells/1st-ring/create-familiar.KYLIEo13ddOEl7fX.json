@@ -3,9 +3,27 @@
   "name": "Create Familiar",
   "type": "spell",
   "_id": "KYLIEo13ddOEl7fX",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/birds/corvid-call-sound-glowing.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "1SEzWOFSL7HHIJOP": {
+        "type": "utility",
+        "_id": "1SEzWOFSL7HHIJOP",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,28 @@
       "base": 1
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "hour",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 10,
+        "description": "a life-sized statue, puppet, stuffed animal, or other suitable vessel worth at least 10 gp",
+        "denomination": "gp"
       }
     },
     "duration": {
       "units": "instantaneous"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +73,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "5"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996866555,
-    "modifiedTime": 1709408321518,
+    "modifiedTime": 1710191445159,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!KYLIEo13ddOEl7fX"

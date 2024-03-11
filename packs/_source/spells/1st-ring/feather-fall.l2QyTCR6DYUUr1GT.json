@@ -3,9 +3,27 @@
   "name": "Feather Fall",
   "type": "spell",
   "_id": "l2QyTCR6DYUUr1GT",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/movement/chevrons-down-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "8UbMISAspQyWfnE7": {
+        "type": "utility",
+        "_id": "8UbMISAspQyWfnE7",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,17 +44,23 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
-      "condition": ""
+      "type": "reaction",
+      "condition": "when you or a creature within 60 feet of you falls"
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small feather or piece of down",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "5"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933434555,
-    "modifiedTime": 1709408325316,
+    "modifiedTime": 1710190568373,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!l2QyTCR6DYUUr1GT"

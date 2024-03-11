@@ -3,9 +3,27 @@
   "name": "Sleep",
   "type": "spell",
   "_id": "pais75ndQesCocfq",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "RNGr0V1BWOBppTiV": {
+        "type": "utility",
+        "_id": "RNGr0V1BWOBppTiV",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +48,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of fine sand or a cricket",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "count": "",
+        "special": "5d8 hit points worth of conscious creatures"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "90"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935567278,
-    "modifiedTime": 1709408325700,
+    "modifiedTime": 1710192271943,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!pais75ndQesCocfq"

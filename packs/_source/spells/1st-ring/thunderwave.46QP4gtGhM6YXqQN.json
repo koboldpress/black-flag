@@ -3,9 +3,50 @@
   "name": "Thunderwave",
   "type": "spell",
   "_id": "46QP4gtGhM6YXqQN",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/sonic/explosion-shock-sound-wave.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "oslfuLrpYqjV0BL2": {
+        "type": "savingThrow",
+        "_id": "oslfuLrpYqjV0BL2",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "thunder"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -43,14 +87,18 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "15"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935826513,
-    "modifiedTime": 1709408319054,
+    "modifiedTime": 1710192326565,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!46QP4gtGhM6YXqQN"

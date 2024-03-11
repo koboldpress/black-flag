@@ -3,9 +3,42 @@
   "name": "Command",
   "type": "spell",
   "_id": "lkBDXbx2O78UA8gz",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/control-influence-puppet.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "WS8mWzsF2Xd3NaNC": {
+        "type": "savingThrow",
+        "_id": "WS8mWzsF2Xd3NaNC",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +63,9 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +82,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +103,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932650335,
-    "modifiedTime": 1709408325382,
+    "modifiedTime": 1710189983827,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!lkBDXbx2O78UA8gz"

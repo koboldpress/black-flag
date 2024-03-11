@@ -1,27 +1,19 @@
 {
-  "folder": "JZx0iWdyx9l2NCaM",
-  "name": "Sacred Flame",
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Charm Person",
   "type": "spell",
-  "_id": "zMaRCDRC1wZSLerG",
-  "img": "icons/magic/light/projectile-smoke-yellow.webp",
+  "_id": "pw72u0bgcIKLtSBM",
+  "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
   "system": {
     "activities": {
-      "MzjjDXYrH6Ppchg2": {
+      "AE52hCKYJykBq4Ne": {
         "type": "savingThrow",
-        "_id": "MzjjDXYrH6Ppchg2",
+        "_id": "AE52hCKYJykBq4Ne",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "wisdom",
           "damage": {
-            "parts": [
-              {
-                "number": 1,
-                "denomination": 8,
-                "bonus": "",
-                "custom": "",
-                "type": "radiant"
-              }
-            ]
+            "parts": []
           },
           "dc": {
             "ability": ""
@@ -55,7 +47,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You bathe one target in holy, searing light.</em></p><p>Flame-like radiance descends on a creature that you can see within range. The target must succeed on a DEX save or take 1d8 radiant damage. The target gains no benefit from cover for this save.</p><p>The spell’s damage increases by 1d8 when you reach 5th level (2d8).</p>",
+      "value": "<p><em>Your entrancing words and motions gain your target’s confidence and friendship.</em></p><p>You attempt to charm a Humanoid you can see within range. It must make a WIS save, and does so with advantage if you or your companions are fighting it. If it fails the save, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
       "source": "Black Flag Reference Document"
     },
     "type": {
@@ -63,7 +55,7 @@
     },
     "ring": {
       "value": null,
-      "base": 0
+      "base": 1
     },
     "casting": {
       "value": null,
@@ -80,7 +72,8 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -91,17 +84,18 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "30"
     },
     "circle": [
-      "divine"
+      "arcane"
     ],
-    "school": "evocation"
+    "school": "enchantment"
   },
   "effects": [],
   "sort": 0,
@@ -113,9 +107,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.016",
     "coreVersion": "11.315",
-    "createdTime": 1706935262062,
-    "modifiedTime": 1710189316539,
+    "createdTime": 1706932577177,
+    "modifiedTime": 1710189927862,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zMaRCDRC1wZSLerG"
+  "_key": "!items!pw72u0bgcIKLtSBM"
 }

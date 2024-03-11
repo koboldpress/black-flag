@@ -3,9 +3,27 @@
   "name": "Illusory Script",
   "type": "spell",
   "_id": "68ev3I1T8tFOB3QE",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/sundries/scrolls/scroll-runed-brown-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "XSNDO3ALO3gJzmnA": {
+        "type": "utility",
+        "_id": "XSNDO3ALO3gJzmnA",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,29 @@
       "base": 1
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 10,
+        "description": "a lead-based ink worth at least 10 gp, which the spell consumes",
+        "denomination": "gp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "day",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +74,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997080980,
-    "modifiedTime": 1709408319380,
+    "modifiedTime": 1710191311207,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!68ev3I1T8tFOB3QE"

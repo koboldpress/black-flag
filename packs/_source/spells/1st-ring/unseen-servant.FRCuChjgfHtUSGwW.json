@@ -3,9 +3,60 @@
   "name": "Unseen Servant",
   "type": "spell",
   "_id": "FRCuChjgfHtUSGwW",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/explosion-star-glow-silhouette.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "4hzkesolEf4e6QuR": {
+        "type": "utility",
+        "_id": "4hzkesolEf4e6QuR",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Create Servant",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "a7etV7JTHTS7SmDv": {
+        "type": "utility",
+        "_id": "a7etV7JTHTS7SmDv",
+        "description": "<p>You mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Command Servant",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +76,29 @@
       "base": 1
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a piece of string and a bit of wood",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +110,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +127,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997301813,
-    "modifiedTime": 1709408321034,
+    "modifiedTime": 1710191615806,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!FRCuChjgfHtUSGwW"

@@ -3,9 +3,27 @@
   "name": "Comprehend Languages",
   "type": "spell",
   "_id": "wyKjdoHh1PVEId7q",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/sundries/scrolls/scroll-runed-worn-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "1Xrcd9H5G1E69a0J": {
+        "type": "utility",
+        "_id": "1Xrcd9H5G1E69a0J",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of soot and salt",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -50,7 +75,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932702351,
-    "modifiedTime": 1709408326059,
+    "modifiedTime": 1710190051244,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wyKjdoHh1PVEId7q"

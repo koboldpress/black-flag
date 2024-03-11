@@ -3,9 +3,27 @@
   "name": "Purify Food and Drink",
   "type": "spell",
   "_id": "4q0CXrxEdSaDWkPU",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/consumables/food/cheese-round-glowing-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "dgQg7wBVjXQLAZwo": {
+        "type": "utility",
+        "_id": "dgQg7wBVjXQLAZwo",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +48,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -43,14 +64,20 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "5"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "count": "",
+        "special": "all nonmagical food and drink"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935088577,
-    "modifiedTime": 1709408319155,
+    "modifiedTime": 1710191996776,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!4q0CXrxEdSaDWkPU"

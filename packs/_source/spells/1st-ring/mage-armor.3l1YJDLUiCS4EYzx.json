@@ -3,9 +3,27 @@
   "name": "Mage Armor",
   "type": "spell",
   "_id": "3l1YJDLUiCS4EYzx",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/defensive/shield-barrier-flaming-diamond-magenta.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "Ac5PsZM9ZPjhylvo": {
+        "type": "utility",
+        "_id": "Ac5PsZM9ZPjhylvo",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a piece of cured leather",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "8"
     },
     "tags": [],
     "target": {
@@ -47,10 +72,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934475222,
-    "modifiedTime": 1709408319004,
+    "modifiedTime": 1710191754468,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!3l1YJDLUiCS4EYzx"

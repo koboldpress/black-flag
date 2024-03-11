@@ -3,9 +3,50 @@
   "name": "Burning Hands",
   "type": "spell",
   "_id": "6HSESlJ472aQngrP",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/fire/beam-jet-stream-trails-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "M3OrDtt7hJX3NvrL": {
+        "type": "savingThrow",
+        "_id": "M3OrDtt7hJX3NvrL",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -43,14 +87,18 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cone",
+        "size": "15"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +112,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932494127,
-    "modifiedTime": 1709408319436,
+    "modifiedTime": 1710189867560,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6HSESlJ472aQngrP"

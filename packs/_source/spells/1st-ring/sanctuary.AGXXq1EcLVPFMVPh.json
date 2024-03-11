@@ -3,9 +3,42 @@
   "name": "Sanctuary",
   "type": "spell",
   "_id": "AGXXq1EcLVPFMVPh",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5Kqt31KbXaOUrryU": {
+        "type": "savingThrow",
+        "_id": "5Kqt31KbXaOUrryU",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,17 +59,24 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small silver mirror",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,10 +87,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +108,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935282460,
-    "modifiedTime": 1709408320121,
+    "modifiedTime": 1710192071709,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!AGXXq1EcLVPFMVPh"

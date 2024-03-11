@@ -3,9 +3,27 @@
   "name": "Detect Poison and Disease",
   "type": "spell",
   "_id": "fJRDxf6O1Qd6vSZE",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/acid/orb-bubble-smoke-drip.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "OwtFdRpowhllYHJe": {
+        "type": "utility",
+        "_id": "OwtFdRpowhllYHJe",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,30 @@
       "base": 1
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a yew leaf",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration",
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +78,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996960018,
-    "modifiedTime": 1709408324323,
+    "modifiedTime": 1710191413074,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!fJRDxf6O1Qd6vSZE"

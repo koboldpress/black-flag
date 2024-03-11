@@ -3,9 +3,42 @@
   "name": "Faerie Fire",
   "type": "spell",
   "_id": "6dvUhdyeuOtRySf9",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/explosion-star-small-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "yCMr9809pA2y89mm": {
+        "type": "savingThrow",
+        "_id": "yCMr9809pA2y89mm",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,37 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "wyrd"
     ],
@@ -64,10 +107,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997735611,
-    "modifiedTime": 1709408319586,
+    "modifiedTime": 1710192408326,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6dvUhdyeuOtRySf9"

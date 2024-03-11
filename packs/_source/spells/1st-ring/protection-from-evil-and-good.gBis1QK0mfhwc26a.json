@@ -3,9 +3,27 @@
   "name": "Protection from Evil and Good",
   "type": "spell",
   "_id": "gBis1QK0mfhwc26a",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/cog-shield-white-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "FSwzYsvEFYqMiWm1": {
+        "type": "utility",
+        "_id": "FSwzYsvEFYqMiWm1",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,24 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "holy water or powdered silver and iron, which the spell consumes",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +74,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -67,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935047093,
-    "modifiedTime": 1709408601662,
+    "modifiedTime": 1710191913731,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gBis1QK0mfhwc26a"

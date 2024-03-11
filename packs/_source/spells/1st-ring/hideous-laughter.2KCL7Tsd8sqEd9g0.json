@@ -3,9 +3,42 @@
   "name": "Hideous Laughter",
   "type": "spell",
   "_id": "2KCL7Tsd8sqEd9g0",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/fear-fright-white.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "4CqJva9hDGqfMnW3": {
+        "type": "savingThrow",
+        "_id": "4CqJva9hDGqfMnW3",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +63,24 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "tiny darts and a feather that is waved in the air",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +89,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934112629,
-    "modifiedTime": 1709408318797,
+    "modifiedTime": 1710191115375,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!2KCL7Tsd8sqEd9g0"

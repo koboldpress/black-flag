@@ -53,7 +53,8 @@ export const areaOfEffectTypes = {
 	square: {
 		localization: "BF.AreaOfEffect.Type.Square.Label",
 		icon: "systems/black-flag/artwork/interface/area/square.svg",
-		template: "rect"
+		template: "rect",
+		sizes: ["width"]
 	}
 	// TODO: Consider adding wall w/ thickness
 	// TODO: Consider adding ring w/ thickness

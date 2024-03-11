@@ -3,9 +3,43 @@
   "name": "Cure Wounds",
   "type": "spell",
   "_id": "NQvy34IRCNEJfwip",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/life/cross-flared-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "BwtypG9ia7YQgRd0": {
+        "type": "healing",
+        "_id": "BwtypG9ia7YQgRd0",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "denomination": "8",
+            "bonus": "@mod",
+            "custom": "",
+            "number": 1
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +64,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +84,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +104,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932857027,
-    "modifiedTime": 1709408321786,
+    "modifiedTime": 1710190124086,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!NQvy34IRCNEJfwip"

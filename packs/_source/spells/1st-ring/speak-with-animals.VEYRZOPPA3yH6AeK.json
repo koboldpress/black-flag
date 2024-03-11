@@ -3,9 +3,27 @@
   "name": "Speak with Animals",
   "type": "spell",
   "_id": "VEYRZOPPA3yH6AeK",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "QVfZkqYXD6sVLQ5v": {
+        "type": "utility",
+        "_id": "QVfZkqYXD6sVLQ5v",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,26 @@
       "base": 1
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +74,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "primordial"
     ],
@@ -64,10 +90,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997928541,
-    "modifiedTime": 1709408323171,
+    "modifiedTime": 1710192603145,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!VEYRZOPPA3yH6AeK"

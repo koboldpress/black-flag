@@ -3,9 +3,27 @@
   "name": "Bless",
   "type": "spell",
   "_id": "Gnxh5w9pE08ZGF9S",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/orb-shadow-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "exZwWvYm43oUy05j": {
+        "type": "utility",
+        "_id": "exZwWvYm43oUy05j",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,24 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a sprinkling of holy water",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +74,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "3"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932347742,
-    "modifiedTime": 1709408321088,
+    "modifiedTime": 1710189748206,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Gnxh5w9pE08ZGF9S"

@@ -3,9 +3,42 @@
   "name": "Goodberry",
   "type": "spell",
   "_id": "LWLrPRZuuucTzy0k",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/consumables/fruit/berry-leaf-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "bLbcIB8XJY3MhAL4": {
+        "type": "healing",
+        "_id": "bLbcIB8XJY3MhAL4",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "denomination": "",
+            "bonus": "1",
+            "custom": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +63,15 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a sprig of mistletoe",
+        "denomination": "pp"
       }
     },
     "duration": {
@@ -50,7 +89,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "primordial"
     ],
@@ -64,10 +105,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997794874,
-    "modifiedTime": 1709408321679,
+    "modifiedTime": 1710192523233,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!LWLrPRZuuucTzy0k"

@@ -3,9 +3,27 @@
   "name": "Shield of Faith",
   "type": "spell",
   "_id": "zqls78yW5JLJWzSN",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "PXE9dTCHBk2sfxB5": {
+        "type": "utility",
+        "_id": "PXE9dTCHBk2sfxB5",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,19 +44,28 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small parchment with a bit of holy text written on it",
+        "denomination": "pp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +74,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935460334,
-    "modifiedTime": 1709408326302,
+    "modifiedTime": 1710192125983,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zqls78yW5JLJWzSN"
