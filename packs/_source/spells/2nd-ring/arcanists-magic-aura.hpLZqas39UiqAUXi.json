@@ -3,9 +3,27 @@
   "name": "Arcanist's Magic Aura",
   "type": "spell",
   "_id": "hpLZqas39UiqAUXi",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/explosion-impact-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "GdPy32Ku2AJ7VE5h": {
+        "type": "utility",
+        "_id": "GdPy32Ku2AJ7VE5h",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,18 +43,25 @@
       "base": 2
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 10,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 10,
+        "description": "a small square of silk and burning incense worth at least 10 gp, which the spell consumes",
+        "consumed": true
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "24"
     },
     "tags": [],
     "target": {
@@ -47,10 +72,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996684748,
-    "modifiedTime": 1709408324752,
+    "modifiedTime": 1710449338381,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hpLZqas39UiqAUXi"

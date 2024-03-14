@@ -3,9 +3,98 @@
   "name": "Flaming Sphere",
   "type": "spell",
   "_id": "ZJcpzubvE6PLsS5c",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/fire/orb-lightning-sun.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "IDEO3GESNHoUAon8": {
+        "type": "utility",
+        "_id": "IDEO3GESNHoUAon8",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Summon Sphere",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "03Y3r2zBqjJ04nES": {
+        "type": "savingThrow",
+        "_id": "03Y3r2zBqjJ04nES",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "free",
+          "condition": "A creature ends its turn within 5 feet of the sphere"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      },
+      "fxoDo54Sy7XjCKNN": {
+        "type": "utility",
+        "_id": "fxoDo54Sy7XjCKNN",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Move Sphere",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +119,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of tallow, a pinch of brimstone, and a dusting of powdered iron"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +147,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +164,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933546467,
-    "modifiedTime": 1709408323575,
+    "modifiedTime": 1710447288997,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ZJcpzubvE6PLsS5c"

@@ -3,9 +3,33 @@
   "name": "Gust of Wind",
   "type": "spell",
   "_id": "0u1CqWulRC8QY1X6",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/air/air-wave-gust-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "FRT6YONlKhsSSzA2": {
+        "type": "savingThrow",
+        "_id": "FRT6YONlKhsSSzA2",
+        "description": "",
+        "system": {
+          "ability": "strength",
+          "damage": {
+            "parts": []
+          },
+          "dc": {}
+        },
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +54,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a legume seed"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "line",
+        "size": "60",
+        "width": "10"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": ""
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +101,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934058722,
-    "modifiedTime": 1709408318630,
+    "modifiedTime": 1710447505179,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0u1CqWulRC8QY1X6"

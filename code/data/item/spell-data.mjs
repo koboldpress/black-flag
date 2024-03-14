@@ -53,8 +53,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 				required: new SetField(new StringField()),
 				material: new SchemaField({
 					description: new StringField({label: "BF.Spell.Component.Material.Description.Label"}),
+					consumed: new BooleanField({label: "BF.Spell.Component.Material.Consumed.Label"}),
 					cost: new NumberField({min: 0, integer: true, label: "BF.Spell.Component.Material.Cost.Label"}),
-					denomination: new StringField({label: "BF.Currency.Denomination.Label"})
+					denomination: new StringField({initial: "gp", label: "BF.Currency.Denomination.Label"})
 				}, {label: "BF.Spell.Component.Material.Label"})
 			}, {label: "BF.Spell.Component.Label"}),
 			duration: new SchemaField({

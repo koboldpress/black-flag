@@ -3,9 +3,50 @@
   "name": "Shatter",
   "type": "spell",
   "_id": "QBDBcidEpF1xgxYs",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/earth/explosion-lava-stone-red.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "S6xTLISuVyZOhBy4": {
+        "type": "savingThrow",
+        "_id": "S6xTLISuVyZOhBy4",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "thunder"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +71,14 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a chip of mica"
       }
     },
     "duration": {
@@ -43,14 +89,19 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "10"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935423941,
-    "modifiedTime": 1709408322068,
+    "modifiedTime": 1710448547031,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!QBDBcidEpF1xgxYs"

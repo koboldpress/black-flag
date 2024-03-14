@@ -3,9 +3,27 @@
   "name": "Spike Growth",
   "type": "spell",
   "_id": "881NeWKz2mfAQ4kT",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/nature/trap-spikes-thorns-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EdmLdiMZ0GC02tYl": {
+        "type": "utility",
+        "_id": "EdmLdiMZ0GC02tYl",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +48,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "seven sharp thorns or seven sharpened twigs"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "150"
+    },
     "circle": [
       "primordial"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997972095,
-    "modifiedTime": 1709408319865,
+    "modifiedTime": 1710449686461,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!881NeWKz2mfAQ4kT"

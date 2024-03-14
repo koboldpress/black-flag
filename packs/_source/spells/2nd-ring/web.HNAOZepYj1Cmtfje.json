@@ -3,9 +3,42 @@
   "name": "Web",
   "type": "spell",
   "_id": "HNAOZepYj1Cmtfje",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/invertebrates/spider-web-black.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "E9BBUibtZFVN9cHJ": {
+        "type": "savingThrow",
+        "_id": "E9BBUibtZFVN9cHJ",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of spiderweb"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706936127058,
-    "modifiedTime": 1709408321140,
+    "modifiedTime": 1710449116193,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!HNAOZepYj1Cmtfje"

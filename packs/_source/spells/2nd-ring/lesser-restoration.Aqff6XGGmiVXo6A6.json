@@ -3,9 +3,31 @@
   "name": "Lesser Restoration",
   "type": "spell",
   "_id": "Aqff6XGGmiVXo6A6",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/life/ankh-shadow-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "QOrkXd71TG1IBc3M": {
+        "type": "healing",
+        "_id": "QOrkXd71TG1IBc3M",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal"
+          }
+        },
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +52,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +72,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934302069,
-    "modifiedTime": 1709408320235,
+    "modifiedTime": 1710447741762,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Aqff6XGGmiVXo6A6"

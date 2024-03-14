@@ -3,9 +3,27 @@
   "name": "Gentle Repose",
   "type": "spell",
   "_id": "DoduOTnkai1evUDz",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/death/skeleton-bird-skull-gray.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "C6XQQ0M41Vki7MO4": {
+        "type": "utility",
+        "_id": "C6XQQ0M41Vki7MO4",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of salt and one copper piece placed on each of the corpse’s eyes, which must remain there for the duration"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "day",
+      "value": "10"
     },
     "tags": [],
     "target": {
@@ -47,11 +71,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "corpse or other remains"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -67,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933864119,
-    "modifiedTime": 1709408542612,
+    "modifiedTime": 1710447433011,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DoduOTnkai1evUDz"

@@ -3,9 +3,27 @@
   "name": "Invisibility",
   "type": "spell",
   "_id": "PKj2TSp0iwaPZulb",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/silhouette-hold-change-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "6kTeruRv8McbMAoQ": {
+        "type": "utility",
+        "_id": "6kTeruRv8McbMAoQ",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "an eyelash encased in tree sap"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -50,7 +74,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +90,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934228573,
-    "modifiedTime": 1709408321950,
+    "modifiedTime": 1710447636646,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PKj2TSp0iwaPZulb"

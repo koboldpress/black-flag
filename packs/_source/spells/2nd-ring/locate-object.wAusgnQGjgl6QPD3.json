@@ -3,9 +3,27 @@
   "name": "Locate Object",
   "type": "spell",
   "_id": "wAusgnQGjgl6QPD3",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/skills/targeting/target-strike-gray.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5f0lVAd0wn84A2WZ": {
+        "type": "utility",
+        "_id": "5f0lVAd0wn84A2WZ",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a forked twig"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +73,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "1000"
     },
     "circle": [
       "arcane",
@@ -67,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934417065,
-    "modifiedTime": 1709408574827,
+    "modifiedTime": 1710447906784,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wAusgnQGjgl6QPD3"

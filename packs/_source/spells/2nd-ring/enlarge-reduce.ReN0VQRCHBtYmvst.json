@@ -3,9 +3,74 @@
   "name": "Enlarge/Reduce",
   "type": "spell",
   "_id": "ReN0VQRCHBtYmvst",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "UZO7ed7kqUU8aqhq": {
+        "type": "savingThrow",
+        "_id": "UZO7ed7kqUU8aqhq",
+        "description": "<p>The target’s size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn’t enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on STR checks and STR saves. The target’s weapons also grow to match its new size. While these weapons are enlarged, the target’s attacks with them deal 1d4 extra damage.</p>",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Enlarge",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      },
+      "8wfLCXlquTcOwKyL": {
+        "type": "savingThrow",
+        "description": "<p>The target’s size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on STR checks and STR saves. The target’s weapons also shrink to match its new size. While these weapons are reduced, the target’s attacks with them deal 1d4 less damage (this can’t reduce the damage below 1).</p>",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Reduce",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+        "_id": "8wfLCXlquTcOwKyL"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +95,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of powdered iron"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +120,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +141,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933282379,
-    "modifiedTime": 1709408322455,
+    "modifiedTime": 1710447607911,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ReN0VQRCHBtYmvst"

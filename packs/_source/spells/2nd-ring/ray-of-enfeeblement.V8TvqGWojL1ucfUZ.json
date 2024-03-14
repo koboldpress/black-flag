@@ -3,9 +3,44 @@
   "name": "Ray of Enfeeblement",
   "type": "spell",
   "_id": "V8TvqGWojL1ucfUZ",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/unholy/projectile-bullet-orb-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "7icBvNp1M7j5bSVq": {
+        "type": "attack",
+        "_id": "7icBvNp1M7j5bSVq",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": []
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +65,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +88,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935111836,
-    "modifiedTime": 1709408323119,
+    "modifiedTime": 1710448262268,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!V8TvqGWojL1ucfUZ"

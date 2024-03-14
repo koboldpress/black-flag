@@ -3,9 +3,27 @@
   "name": "Detect Thoughts",
   "type": "spell",
   "_id": "q3ggx5aH69iqrcL3",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/unholy/hands-cloud-light-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "42elw86VCDiqQwMy": {
+        "type": "utility",
+        "_id": "42elw86VCDiqQwMy",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a copper piece"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +76,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933134729,
-    "modifiedTime": 1709408325766,
+    "modifiedTime": 1710446759052,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!q3ggx5aH69iqrcL3"

@@ -3,9 +3,42 @@
   "name": "Zone of Truth",
   "type": "spell",
   "_id": "6PXublV5eymPa56L",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/runes-star-pentagon-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "PPrfkr27RB5cRTti": {
+        "type": "savingThrow",
+        "_id": "PPrfkr27RB5cRTti",
+        "description": "",
+        "system": {
+          "ability": "charisma",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,36 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
     "tags": [],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "15"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +106,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706936214297,
-    "modifiedTime": 1709408319538,
+    "modifiedTime": 1710449183609,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6PXublV5eymPa56L"

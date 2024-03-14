@@ -3,9 +3,27 @@
   "name": "Augury",
   "type": "spell",
   "_id": "CnNNEgO2tpR1uMZ6",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/runes-carved-stone-red.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "dGDcz6q6cIlbyLdl": {
+        "type": "utility",
+        "_id": "dGDcz6q6cIlbyLdl",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,14 +43,19 @@
       "base": 2
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 25,
+        "description": "specially marked sticks, bones, or similar tokens worth at least 25 gp"
       }
     },
     "duration": {
@@ -50,7 +73,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996733296,
-    "modifiedTime": 1709408320515,
+    "modifiedTime": 1710449392383,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!CnNNEgO2tpR1uMZ6"

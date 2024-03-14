@@ -3,9 +3,27 @@
   "name": "Levitate",
   "type": "spell",
   "_id": "0iiu16z9T1sNdNXP",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/movement/trail-streak-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "kFfftAsXUNkCCka5": {
+        "type": "utility",
+        "_id": "kFfftAsXUNkCCka5",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "either a small leather loop or a piece of golden wire bent into a cup shape with a long shank on one end"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +73,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934321542,
-    "modifiedTime": 1709408318533,
+    "modifiedTime": 1710447815547,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0iiu16z9T1sNdNXP"

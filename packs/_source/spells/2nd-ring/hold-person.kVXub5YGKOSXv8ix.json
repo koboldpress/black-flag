@@ -3,9 +3,42 @@
   "name": "Hold Person",
   "type": "spell",
   "_id": "kVXub5YGKOSXv8ix",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "DK1nMKfROcpCTpp3": {
+        "type": "savingThrow",
+        "_id": "DK1nMKfROcpCTpp3",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +63,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small, straight piece of iron"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +88,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60"
     },
     "circle": [
       "arcane",
@@ -67,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934136728,
-    "modifiedTime": 1709408552144,
+    "modifiedTime": 1710447579413,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!kVXub5YGKOSXv8ix"

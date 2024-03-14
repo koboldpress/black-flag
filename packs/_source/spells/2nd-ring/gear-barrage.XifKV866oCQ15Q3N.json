@@ -3,9 +3,50 @@
   "name": "Gear Barrage",
   "type": "spell",
   "_id": "XifKV866oCQ15Q3N",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/commodities/tech/cog-copper.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "AUGdiQxBcb9odS70": {
+        "type": "savingThrow",
+        "_id": "AUGdiQxBcb9odS70",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "slashing"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +71,14 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 5,
+        "description": "a handful of gears worth 5 gp"
       }
     },
     "duration": {
@@ -43,14 +89,18 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cone",
+        "size": "60"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": ""
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933835091,
-    "modifiedTime": 1709408323462,
+    "modifiedTime": 1710447356994,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!XifKV866oCQ15Q3N"

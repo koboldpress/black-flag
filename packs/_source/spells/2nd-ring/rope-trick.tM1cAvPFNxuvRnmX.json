@@ -3,9 +3,27 @@
   "name": "Rope Trick",
   "type": "spell",
   "_id": "tM1cAvPFNxuvRnmX",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/sundries/survival/rope-coiled-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "07o5nHBnQi1GNw5W": {
+        "type": "utility",
+        "_id": "07o5nHBnQi1GNw5W",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a powdered corn extract and a twisted loop of parchment"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935231730,
-    "modifiedTime": 1709408325941,
+    "modifiedTime": 1710448335070,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!tM1cAvPFNxuvRnmX"

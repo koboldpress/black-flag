@@ -3,9 +3,52 @@
   "name": "Scorching Ray",
   "type": "spell",
   "_id": "zcPLl539wJ5MflKO",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/fire/blast-jet-stream-embers-red.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5N7N5fmAtAdZbOMI": {
+        "type": "attack",
+        "_id": "5N7N5fmAtAdZbOMI",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +73,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +93,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "3"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935312093,
-    "modifiedTime": 1709408326259,
+    "modifiedTime": 1710448400211,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zcPLl539wJ5MflKO"

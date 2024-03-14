@@ -3,9 +3,27 @@
   "name": "Warding Bond",
   "type": "spell",
   "_id": "KcUbMYrnTrhoYrCo",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "yTEQ2eKhhQnuYJKM": {
+        "type": "utility",
+        "_id": "yTEQ2eKhhQnuYJKM",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 100,
+        "description": "a pair of platinum rings worth at least 50 gp each, which you and the target must wear for the duration"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706936077595,
-    "modifiedTime": 1709408321572,
+    "modifiedTime": 1710449050331,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!KcUbMYrnTrhoYrCo"

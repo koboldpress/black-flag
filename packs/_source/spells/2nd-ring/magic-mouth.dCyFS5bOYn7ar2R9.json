@@ -3,9 +3,27 @@
   "name": "Magic Mouth",
   "type": "spell",
   "_id": "dCyFS5bOYn7ar2R9",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/abilities/mouth-teeth-tongue-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "7bXWpM30aKYYsPm2": {
+        "type": "utility",
+        "_id": "7bXWpM30aKYYsPm2",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,18 +43,24 @@
       "base": 2
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 10,
+        "description": "a small bit of honeycomb and jade dust worth at least 10 gp, which the spell consumes",
+        "consumed": true
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "dispelled"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "objectNotWorn",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997171914,
-    "modifiedTime": 1709408324045,
+    "modifiedTime": 1710449474355,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!dCyFS5bOYn7ar2R9"

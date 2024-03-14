@@ -3,9 +3,42 @@
   "name": "Calm Emotions",
   "type": "spell",
   "_id": "Ez1IJ81JoObreBGf",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "rlGg4EKrNpMUJkbE": {
+        "type": "savingThrow",
+        "_id": "rlGg4EKrNpMUJkbE",
+        "description": "",
+        "system": {
+          "ability": "charisma",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,38 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +108,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932513288,
-    "modifiedTime": 1709408320934,
+    "modifiedTime": 1710446040227,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Ez1IJ81JoObreBGf"

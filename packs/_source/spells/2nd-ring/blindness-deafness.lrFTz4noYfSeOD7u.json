@@ -3,9 +3,42 @@
   "name": "Blindness/Deafness",
   "type": "spell",
   "_id": "lrFTz4noYfSeOD7u",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "VVpf305xscnHHoKY": {
+        "type": "savingThrow",
+        "_id": "VVpf305xscnHHoKY",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +63,16 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,11 +83,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "30"
     },
     "circle": [
       "arcane",
@@ -67,10 +105,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932396414,
-    "modifiedTime": 1709408478277,
+    "modifiedTime": 1710445886097,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!lrFTz4noYfSeOD7u"

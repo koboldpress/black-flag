@@ -3,9 +3,31 @@
   "name": "Protection from Poison",
   "type": "spell",
   "_id": "oLoG89ESOdDLCEKI",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/consumables/potions/potion-jug-corked-skull-poison-brown-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "yKa4L8MiSm73HGJq": {
+        "type": "healing",
+        "_id": "yKa4L8MiSm73HGJq",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal"
+          }
+        },
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +52,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,11 +73,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "divine"
@@ -66,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935069036,
-    "modifiedTime": 1709408608112,
+    "modifiedTime": 1710448171389,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!oLoG89ESOdDLCEKI"

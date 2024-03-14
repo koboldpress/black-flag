@@ -3,9 +3,27 @@
   "name": "Arcane Lock",
   "type": "spell",
   "_id": "JVimVp4IvmQTO52h",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/sundries/misc/lock-steel-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "FyBrQxb6Bqv5pBPb": {
+        "type": "utility",
+        "_id": "FyBrQxb6Bqv5pBPb",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,18 +43,24 @@
       "base": 2
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 25,
+        "description": "gold dust worth at least 25 gp, which the spell consumes",
+        "consumed": true
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "dispelled"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996604930,
-    "modifiedTime": 1709408321354,
+    "modifiedTime": 1710449261110,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!JVimVp4IvmQTO52h"

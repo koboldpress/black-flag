@@ -3,9 +3,27 @@
   "name": "Silence",
   "type": "spell",
   "_id": "WSBhluYBmP1706xn",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/mouth-smile-deception-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "UifdmLh6GKkQ0CQP": {
+        "type": "utility",
+        "_id": "UifdmLh6GKkQ0CQP",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +48,38 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935509411,
-    "modifiedTime": 1709408323350,
+    "modifiedTime": 1710448677180,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!WSBhluYBmP1706xn"

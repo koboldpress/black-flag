@@ -3,9 +3,27 @@
   "name": "Darkvision",
   "type": "spell",
   "_id": "PFuUMOticnos4frZ",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/perception/eye-slit-red-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "KJ0dTRMpDupUnKWL": {
+        "type": "utility",
+        "_id": "KJ0dTRMpDupUnKWL",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of dried carrot or an agate"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "8"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932990346,
-    "modifiedTime": 1709408321896,
+    "modifiedTime": 1710446643615,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PFuUMOticnos4frZ"

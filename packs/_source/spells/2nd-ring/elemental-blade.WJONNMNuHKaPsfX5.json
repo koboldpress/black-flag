@@ -3,9 +3,76 @@
   "name": "Elemental Blade",
   "type": "spell",
   "_id": "WJONNMNuHKaPsfX5",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "gCarUENctgX35XQ8": {
+        "type": "utility",
+        "_id": "gCarUENctgX35XQ8",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Summon Blade",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "7Ak2JhlLY2BnB4ra": {
+        "type": "attack",
+        "_id": "7Ak2JhlLY2BnB4ra",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": ""
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,19 +93,27 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a leaf of sumac"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +125,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": ""
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +141,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933239660,
-    "modifiedTime": 1709408323292,
+    "modifiedTime": 1710446874601,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!WJONNMNuHKaPsfX5"

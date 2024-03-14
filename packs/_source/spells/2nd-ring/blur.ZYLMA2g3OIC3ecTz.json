@@ -3,9 +3,27 @@
   "name": "Blur",
   "type": "spell",
   "_id": "ZYLMA2g3OIC3ecTz",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/movement/abstract-ribbons-red-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "2ynpUGwC4VAe65RK": {
+        "type": "utility",
+        "_id": "2ynpUGwC4VAe65RK",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,20 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +73,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932469352,
-    "modifiedTime": 1709408323637,
+    "modifiedTime": 1710445931394,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ZYLMA2g3OIC3ecTz"

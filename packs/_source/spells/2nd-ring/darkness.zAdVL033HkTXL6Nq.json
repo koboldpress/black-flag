@@ -3,9 +3,27 @@
   "name": "Darkness",
   "type": "spell",
   "_id": "zAdVL033HkTXL6Nq",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "ba7g8vpybe8STy5j": {
+        "type": "utility",
+        "_id": "ba7g8vpybe8STy5j",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +48,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "bat fur and pitch or piece of coal"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "15"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932883787,
-    "modifiedTime": 1709408326198,
+    "modifiedTime": 1710446578840,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zAdVL033HkTXL6Nq"

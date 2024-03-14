@@ -3,9 +3,27 @@
   "name": "Knock",
   "type": "spell",
   "_id": "KW9pI3ghpmz6J5T1",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/rune-sigil-green-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "vf92FKmiNiyJgHks": {
+        "type": "utility",
+        "_id": "vf92FKmiNiyJgHks",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +48,9 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
@@ -50,7 +70,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +87,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934249031,
-    "modifiedTime": 1709408321464,
+    "modifiedTime": 1710447690378,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!KW9pI3ghpmz6J5T1"

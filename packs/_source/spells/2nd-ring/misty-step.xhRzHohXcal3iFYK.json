@@ -3,9 +3,27 @@
   "name": "Misty Step",
   "type": "spell",
   "_id": "xhRzHohXcal3iFYK",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/energy-stream-link-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "xoY60I3XUdcMgmIm": {
+        "type": "utility",
+        "_id": "xoY60I3XUdcMgmIm",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,11 +44,13 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
@@ -50,7 +70,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +87,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934750637,
-    "modifiedTime": 1709408326089,
+    "modifiedTime": 1710448104780,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!xhRzHohXcal3iFYK"
