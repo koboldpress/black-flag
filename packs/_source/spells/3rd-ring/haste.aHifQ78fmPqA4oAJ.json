@@ -3,9 +3,27 @@
   "name": "Haste",
   "type": "spell",
   "_id": "aHifQ78fmPqA4oAJ",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/movement/trail-streak-zigzag-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "xD6JcH2ENhnN0xzM": {
+        "type": "utility",
+        "_id": "xD6JcH2ENhnN0xzM",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a shaving of licorice root"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +73,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934086221,
-    "modifiedTime": 1709408323747,
+    "modifiedTime": 1710551097476,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!aHifQ78fmPqA4oAJ"

@@ -3,9 +3,27 @@
   "name": "Tiny Hut",
   "type": "spell",
   "_id": "jk91nr3wOuw3kyep",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "eVDHmcEbCOt6hJef": {
+        "type": "utility",
+        "_id": "eVDHmcEbCOt6hJef",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,32 +43,44 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small crystal bead"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "8"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "10"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997256443,
-    "modifiedTime": 1709408325056,
+    "modifiedTime": 1710552938751,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!jk91nr3wOuw3kyep"

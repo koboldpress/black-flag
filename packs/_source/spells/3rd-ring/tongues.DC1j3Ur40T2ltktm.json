@@ -3,9 +3,27 @@
   "name": "Tongues",
   "type": "spell",
   "_id": "DC1j3Ur40T2ltktm",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/abilities/mouth-teeth-human.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "vcc77QAUAMG157nu": {
+        "type": "utility",
+        "_id": "vcc77QAUAMG157nu",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small clay model of a ziggurat"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,11 +71,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -67,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935900181,
-    "modifiedTime": 1709408635762,
+    "modifiedTime": 1710552312149,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DC1j3Ur40T2ltktm"

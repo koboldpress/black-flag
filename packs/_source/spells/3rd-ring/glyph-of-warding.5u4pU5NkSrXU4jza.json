@@ -3,9 +3,76 @@
   "name": "Glyph of Warding",
   "type": "spell",
   "_id": "5u4pU5NkSrXU4jza",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/rune-sigil-red-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "duaYkKC26kSauFj7": {
+        "type": "utility",
+        "_id": "duaYkKC26kSauFj7",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Inscribe Glyph",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "wU60EigVR7h4En5k": {
+        "type": "savingThrow",
+        "_id": "wU60EigVR7h4En5k",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": ""
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Explosive Runes",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +92,27 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "hour",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 200,
+        "description": "incense and powdered diamond worth at least 200 gp, which the spell consumes"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "triggered"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +121,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -67,10 +142,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996986703,
-    "modifiedTime": 1709408665837,
+    "modifiedTime": 1710552964804,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!5u4pU5NkSrXU4jza"

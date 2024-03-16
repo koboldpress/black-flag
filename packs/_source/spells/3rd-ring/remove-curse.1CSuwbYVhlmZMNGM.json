@@ -3,9 +3,27 @@
   "name": "Remove Curse",
   "type": "spell",
   "_id": "1CSuwbYVhlmZMNGM",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/unholy/strike-body-life-soul-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "JxAZ7D5fkDtqhcj6": {
+        "type": "utility",
+        "_id": "JxAZ7D5fkDtqhcj6",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +48,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +68,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +88,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935159474,
-    "modifiedTime": 1709408318680,
+    "modifiedTime": 1710551625617,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!1CSuwbYVhlmZMNGM"

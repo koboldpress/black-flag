@@ -3,9 +3,27 @@
   "name": "Counterspell",
   "type": "spell",
   "_id": "Uxv1vWfoFhwbXMLt",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/runes-star-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "6VoNPGB1bmLdZi8W": {
+        "type": "utility",
+        "_id": "6VoNPGB1bmLdZi8W",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,11 +44,13 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
-      "condition": ""
+      "type": "reaction",
+      "condition": "which you take when you see a creature within 60 feet of you casting a spell"
     },
     "components": {
-      "required": [],
+      "required": [
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -50,7 +70,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +87,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932769990,
-    "modifiedTime": 1709408322953,
+    "modifiedTime": 1710550538067,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Uxv1vWfoFhwbXMLt"

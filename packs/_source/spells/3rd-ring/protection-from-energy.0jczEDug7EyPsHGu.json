@@ -3,9 +3,27 @@
   "name": "Protection from Energy",
   "type": "spell",
   "_id": "0jczEDug7EyPsHGu",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/beam-impact-deflect-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "JQIJNWcHOf4WBobr": {
+        "type": "utility",
+        "_id": "JQIJNWcHOf4WBobr",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +71,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -67,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935015433,
-    "modifiedTime": 1709408607035,
+    "modifiedTime": 1710551576454,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0jczEDug7EyPsHGu"

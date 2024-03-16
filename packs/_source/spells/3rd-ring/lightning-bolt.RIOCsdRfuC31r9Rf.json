@@ -3,9 +3,50 @@
   "name": "Lightning Bolt",
   "type": "spell",
   "_id": "RIOCsdRfuC31r9Rf",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/lightning/bolt-strike-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "aLntI0y6oVZnHYMG": {
+        "type": "savingThrow",
+        "_id": "aLntI0y6oVZnHYMG",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 8,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "lightning"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +71,14 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of fur and a rod of amber, crystal, or glass"
       }
     },
     "duration": {
@@ -43,14 +89,19 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "line",
+        "size": "100",
+        "width": "5"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934380366,
-    "modifiedTime": 1709408322284,
+    "modifiedTime": 1710551280678,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RIOCsdRfuC31r9Rf"

@@ -3,9 +3,50 @@
   "name": "Spirit Guardians",
   "type": "spell",
   "_id": "SiUSPKtQCHfy7Hwi",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/projectile-smoke-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "chKUWgMrWjluWLbX": {
+        "type": "savingThrow",
+        "_id": "chKUWgMrWjluWLbX",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +71,39 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a holy symbol"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "radius",
+        "size": "15"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +117,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935684152,
-    "modifiedTime": 1709408322720,
+    "modifiedTime": 1710552091142,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SiUSPKtQCHfy7Hwi"

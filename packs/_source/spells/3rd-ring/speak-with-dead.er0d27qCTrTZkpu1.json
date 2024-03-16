@@ -3,9 +3,27 @@
   "name": "Speak with Dead",
   "type": "spell",
   "_id": "er0d27qCTrTZkpu1",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/death/skull-pile-glowing-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "J9EWq9bF2BqsECvJ": {
+        "type": "utility",
+        "_id": "J9EWq9bF2BqsECvJ",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "burning incense"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
     "tags": [],
     "target": {
@@ -47,10 +71,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "corpse with mouth that isn't Undead"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935641428,
-    "modifiedTime": 1709408324155,
+    "modifiedTime": 1710551999177,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!er0d27qCTrTZkpu1"

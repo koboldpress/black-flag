@@ -3,9 +3,27 @@
   "name": "Clairvoyance",
   "type": "spell",
   "_id": "0DXCIjbQmk9UFSzp",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/perception/orb-eye-scrying.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "FP0DO2Pm5g2hdfSh": {
+        "type": "utility",
+        "_id": "FP0DO2Pm5g2hdfSh",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,29 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 10,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 100,
+        "description": "a focus worth at least 100 gp, either a jeweled horn for hearing or a glass eye for seeing"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration",
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -51,7 +78,8 @@
       }
     },
     "range": {
-      "units": ""
+      "units": "mile",
+      "value": "1"
     },
     "circle": [
       "arcane",
@@ -67,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996812481,
-    "modifiedTime": 1709408656980,
+    "modifiedTime": 1710552971932,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0DXCIjbQmk9UFSzp"

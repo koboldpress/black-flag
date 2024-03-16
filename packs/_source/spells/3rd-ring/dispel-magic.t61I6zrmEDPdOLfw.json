@@ -3,9 +3,27 @@
   "name": "Dispel Magic",
   "type": "spell",
   "_id": "t61I6zrmEDPdOLfw",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/runes-star-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "AszulGaBMTWmlAuv": {
+        "type": "utility",
+        "_id": "AszulGaBMTWmlAuv",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +48,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +68,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "creature, object, or magical effect"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933206164,
-    "modifiedTime": 1709408325918,
+    "modifiedTime": 1710550724298,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!t61I6zrmEDPdOLfw"

@@ -3,9 +3,42 @@
   "name": "Fear",
   "type": "spell",
   "_id": "moUAyN0JUuMvoY6U",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/skills/wounds/injury-face-impact-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "VqMNkusmXVrkVkjM": {
+        "type": "savingThrow",
+        "_id": "VqMNkusmXVrkVkjM",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,39 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a white feather or the heart of a hen"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cone",
+        "size": "30"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933403897,
-    "modifiedTime": 1709408325506,
+    "modifiedTime": 1710550823775,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!moUAyN0JUuMvoY6U"

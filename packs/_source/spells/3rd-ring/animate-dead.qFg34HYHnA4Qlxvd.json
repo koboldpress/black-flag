@@ -3,9 +3,27 @@
   "name": "Animate Dead",
   "type": "spell",
   "_id": "qFg34HYHnA4Qlxvd",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/death/undead-zombie-grave-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "ui8m0wdJsSF8pu0z": {
+        "type": "utility",
+        "_id": "ui8m0wdJsSF8pu0z",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,27 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 10,
+        "description": "a drop of blood, a piece of flesh, a pinch of bone dust, and a bloodstone worth at least 10 gp"
       }
     },
     "duration": {
       "units": "instantaneous"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,11 +72,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "pile of bones or corpse of Medium or Small Humanoid"
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "10"
     },
     "circle": [
       "arcane",
@@ -67,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706996523489,
-    "modifiedTime": 1709408647848,
+    "modifiedTime": 1710552981445,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!qFg34HYHnA4Qlxvd"

@@ -3,9 +3,27 @@
   "name": "Phantom Steed",
   "type": "spell",
   "_id": "AugUdSLatuwsQ17A",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "TM3GO6FRmOLUCnOk": {
+        "type": "utility",
+        "_id": "TM3GO6FRmOLUCnOk",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,20 +43,26 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +74,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +91,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997207751,
-    "modifiedTime": 1709408320288,
+    "modifiedTime": 1710552953129,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!AugUdSLatuwsQ17A"

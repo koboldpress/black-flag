@@ -3,9 +3,27 @@
   "name": "Magic Circle",
   "type": "spell",
   "_id": "fvS8l7iTDJB6XPaN",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/star-inverted-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "asvj8dfb0B79l1B3": {
+        "type": "utility",
+        "_id": "asvj8dfb0B79l1B3",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -25,33 +43,46 @@
       "base": 3
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 100,
+        "description": "holy water or powdered silver and iron worth at least 100 gp, which the spell consumes",
+        "consumed": true
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "ritual"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cylinder",
+        "size": "10",
+        "height": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "10"
     },
     "circle": [
       "arcane",
@@ -67,10 +98,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997119947,
-    "modifiedTime": 1709408676130,
+    "modifiedTime": 1710552958990,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!fvS8l7iTDJB6XPaN"

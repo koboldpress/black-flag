@@ -3,9 +3,42 @@
   "name": "Stinking Cloud",
   "type": "spell",
   "_id": "Bf0cetCjUrF24nNy",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/air/fog-gas-smoke-dense-brown.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "39x1XDVar0EMYIMt": {
+        "type": "savingThrow",
+        "_id": "39x1XDVar0EMYIMt",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a rotten egg or several skunk cabbage leaves"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "90"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935731989,
-    "modifiedTime": 1709408320415,
+    "modifiedTime": 1710552234428,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Bf0cetCjUrF24nNy"

@@ -3,9 +3,27 @@
   "name": "Fly",
   "type": "spell",
   "_id": "9m3weZVFQcscp85O",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/creatures/birds/dove-pigeon-flying-white.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "8QpTMARs3wYLMcOw": {
+        "type": "utility",
+        "_id": "8QpTMARs3wYLMcOw",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a wing feather from any bird"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +73,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933734625,
-    "modifiedTime": 1709408320024,
+    "modifiedTime": 1710550939641,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!9m3weZVFQcscp85O"

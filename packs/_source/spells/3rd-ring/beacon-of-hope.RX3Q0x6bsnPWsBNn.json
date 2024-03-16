@@ -3,9 +3,27 @@
   "name": "Beacon of Hope",
   "type": "spell",
   "_id": "RX3Q0x6bsnPWsBNn",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/holy/chalice-glowing-gold.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EvcH9DL98NYZn4hr": {
+        "type": "utility",
+        "_id": "EvcH9DL98NYZn4hr",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +48,37 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "radius",
+        "size": "30"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932279124,
-    "modifiedTime": 1709408322391,
+    "modifiedTime": 1710550362101,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RX3Q0x6bsnPWsBNn"

@@ -3,9 +3,31 @@
   "name": "Revivify",
   "type": "spell",
   "_id": "RnAYCG4EsMkSqecn",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/sihouette-hold-beam-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "tJMHcVlZN4bGBeIE": {
+        "type": "healing",
+        "_id": "tJMHcVlZN4bGBeIE",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal"
+          }
+        },
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +52,15 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": 300,
+        "description": "diamonds worth 300 gp, which the spell consumes",
+        "consumed": true
       }
     },
     "duration": {
@@ -47,10 +75,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935204516,
-    "modifiedTime": 1709408322506,
+    "modifiedTime": 1710551689488,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RnAYCG4EsMkSqecn"

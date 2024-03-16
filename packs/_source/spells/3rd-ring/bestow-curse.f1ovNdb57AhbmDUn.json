@@ -3,9 +3,42 @@
   "name": "Bestow Curse",
   "type": "spell",
   "_id": "f1ovNdb57AhbmDUn",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/unholy/strike-beam-blood-large-red-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "svwea43rf5d9PapD": {
+        "type": "savingThrow",
+        "_id": "svwea43rf5d9PapD",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +63,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +86,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +106,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932300677,
-    "modifiedTime": 1709408324212,
+    "modifiedTime": 1710550407254,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!f1ovNdb57AhbmDUn"

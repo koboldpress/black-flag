@@ -3,9 +3,42 @@
   "name": "Slow",
   "type": "spell",
   "_id": "65Sa7kguiOuycPt0",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/time/clock-spinning-gold-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9rNj8nFcUMialmy3": {
+        "type": "savingThrow",
+        "_id": "9rNj8nFcUMialmy3",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,27 +63,40 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a drop of molasses"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "40"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "6"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935589815,
-    "modifiedTime": 1709408319330,
+    "modifiedTime": 1710551892900,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!65Sa7kguiOuycPt0"

@@ -3,9 +3,27 @@
   "name": "Create Food and Water",
   "type": "spell",
   "_id": "zpzCSJEz09jOd49a",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/skills/trades/farming-planet-bulb-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "n40v3ca0jTtIXrrm": {
+        "type": "utility",
+        "_id": "n40v3ca0jTtIXrrm",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +48,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +68,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932830675,
-    "modifiedTime": 1709408326285,
+    "modifiedTime": 1710550612712,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zpzCSJEz09jOd49a"

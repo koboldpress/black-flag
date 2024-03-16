@@ -3,9 +3,27 @@
   "name": "Sending",
   "type": "spell",
   "_id": "7BrcSoBlBhlIh0MN",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/symbols/triangle-glowing-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "bGEVto3d7Gh1mCg0": {
+        "type": "utility",
+        "_id": "bGEVto3d7Gh1mCg0",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a short piece of fine copper wire"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,11 +71,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "any"
     },
     "circle": [
       "arcane",
@@ -67,10 +92,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935382368,
-    "modifiedTime": 1709408620903,
+    "modifiedTime": 1710551815904,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!7BrcSoBlBhlIh0MN"

@@ -3,9 +3,27 @@
   "name": "Major Image",
   "type": "spell",
   "_id": "hDdvHqQgCRbmFltS",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/light/explosion-star-glow-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "hokrOjC6DEhMlyNk": {
+        "type": "utility",
+        "_id": "hokrOjC6DEhMlyNk",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of fleece"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +76,10 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934570487,
-    "modifiedTime": 1709408324634,
+    "modifiedTime": 1710551363093,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hDdvHqQgCRbmFltS"

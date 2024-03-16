@@ -3,9 +3,52 @@
   "name": "Vampiric Touch",
   "type": "spell",
   "_id": "hkDJS4EsH1FOO7dY",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/death/hand-undead-skeleton-fire-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "eizthwJmrtKEPHc5": {
+        "type": "attack",
+        "_id": "eizthwJmrtKEPHc5",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "necrotic"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +73,21 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -50,7 +99,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706935996928,
-    "modifiedTime": 1709408324696,
+    "modifiedTime": 1710552384333,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hkDJS4EsH1FOO7dY"

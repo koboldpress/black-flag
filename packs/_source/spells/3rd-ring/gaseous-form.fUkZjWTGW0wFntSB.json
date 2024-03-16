@@ -3,9 +3,27 @@
   "name": "Gaseous Form",
   "type": "spell",
   "_id": "fUkZjWTGW0wFntSB",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/air/wind-swirl-gray-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "hJ81y0Zmv1PeS8bR": {
+        "type": "utility",
+        "_id": "hJ81y0Zmv1PeS8bR",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,15 +48,23 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a bit of gauze and a wisp of smoke"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
@@ -47,10 +73,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706933785517,
-    "modifiedTime": 1709408324385,
+    "modifiedTime": 1710551008679,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!fUkZjWTGW0wFntSB"

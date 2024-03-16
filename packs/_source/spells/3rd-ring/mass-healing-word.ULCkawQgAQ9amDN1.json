@@ -3,9 +3,43 @@
   "name": "Mass Healing Word",
   "type": "spell",
   "_id": "ULCkawQgAQ9amDN1",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/life/heart-cross-strong-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "RoTe6dX8PBlwP8qr": {
+        "type": "healing",
+        "_id": "RoTe6dX8PBlwP8qr",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "denomination": "4",
+            "bonus": "@mod",
+            "custom": "",
+            "number": 1
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -26,11 +60,13 @@
     },
     "casting": {
       "value": null,
-      "type": "action",
+      "type": "bonus",
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "cost": null
       }
@@ -47,10 +83,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "6"
       }
     },
-    "range": {},
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +104,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706934598512,
-    "modifiedTime": 1709408322896,
+    "modifiedTime": 1710551430011,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ULCkawQgAQ9amDN1"

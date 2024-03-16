@@ -3,9 +3,27 @@
   "name": "Blink",
   "type": "spell",
   "_id": "8kl9U1hQXLd7UQkj",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/control/hypnosis-mesmerism-eye-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "DfHaizX9UfXUJcZl": {
+        "type": "utility",
+        "_id": "DfHaizX9UfXUJcZl",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -50,7 +72,9 @@
         "type": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +88,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706932367143,
-    "modifiedTime": 1709408319970,
+    "modifiedTime": 1710550461643,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!8kl9U1hQXLd7UQkj"
