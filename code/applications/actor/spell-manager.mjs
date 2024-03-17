@@ -18,6 +18,7 @@ export default class SpellManager extends DocumentSheet {
 					type,
 					mode: "single",
 					source: source.document,
+					spellcasting: source.spellcasting,
 					selected: new Set()
 				})));
 			}
@@ -157,7 +158,7 @@ export default class SpellManager extends DocumentSheet {
 		const context = await super.getData(options);
 
 		context.restrictions = {
-			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot?.source.system.spellcasting?.circle]
+			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot.spellcasting.circle]
 		};
 
 		const otherSelected = new Set();
@@ -196,7 +197,7 @@ export default class SpellManager extends DocumentSheet {
 		const filters = [];
 
 		// Fetch filters from the SpellcastingAdvancement
-		filters.push({ k: "system.circle", o: "has", v: this.currentSlot.source.system.spellcasting?.circle });
+		filters.push({ k: "system.circle", o: "has", v: this.currentSlot.spellcasting.circle });
 
 		switch ( this.currentSlot.type ) {
 			case "cantrips":
@@ -296,6 +297,10 @@ export default class SpellManager extends DocumentSheet {
 		source.identifiers ??= [];
 		source.identifiers.push(slot.source.identifier);
 		if ( slot.type === "spellbook" ) source.spellbookOrigin = "free";
+
+		const prepared = foundry.utils.getProperty(spellData, "system.ring.base") > 0
+			? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared : true;
+		foundry.utils.setProperty(spellData, "system.type.value", prepared ? "standard" : "alwaysPrepared");
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
 		if ( remote ) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
