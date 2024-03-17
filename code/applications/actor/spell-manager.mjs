@@ -181,9 +181,6 @@ export default class SpellManager extends DocumentSheet {
 			selected: this.currentSlot?.selected.has(spell.uuid)
 		}));
 
-		context.completed = this.slots.every(s => s.selected.size);
-		context.nextDisabled = !this.currentSlot?.selected.size;
-
 		return context;
 	}
 
@@ -212,7 +209,10 @@ export default class SpellManager extends DocumentSheet {
 				);
 				break;
 			case "rituals":
-				filters.push({ k: "system.tags", o: "has", v: "ritual" });
+				filters.push(
+					{ k: "system.tags", o: "has", v: "ritual" },
+					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing }
+				);
 				break;
 			case "spells":
 			case "spellbook":
@@ -299,7 +299,6 @@ export default class SpellManager extends DocumentSheet {
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
 		if ( remote ) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
-		console.log(foundry.utils.deepClone(spellData));
 		return spellData;
 	}
 
@@ -307,14 +306,9 @@ export default class SpellManager extends DocumentSheet {
 
 	/** @inheritDoc */
 	async _updateObject(event, formData) {
-		let spellData = [];
-		for ( const slot of this.slots ) {
-			for ( const spellUuid of slot.selected ) {
-				// TODO: If spell already exists on sheet, just update its data
-				spellData.push(this._prepareSpellData(fromUuid(spellUuid), slot));
-			}
-		}
-		spellData = await Promise.all(spellData);
-		this.document.createEmbeddedDocuments("Item", spellData, { retainRelationship: true });
+		const spellData = this.slots.flatMap(slot =>
+			Array.from(slot.selected ?? []).map(uuid => this._prepareSpellData(fromUuid(uuid), slot))
+		);
+		this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
 	}
 }

@@ -42,7 +42,8 @@ export const sheetSections = {
 			tab: "spellcasting",
 			filters: [
 				{k: "type", v: "spell"},
-				{k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined]}
+				{k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined]},
+				{o: "NOT", v: {k: "system.tags", o: "has", v: "ritual"}}
 			],
 			expand: (document, sectionData) => {
 				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
@@ -58,6 +59,16 @@ export const sheetSections = {
 					}, {inplace: false});
 				});
 			}
+		},
+		{
+			id: "ritual",
+			tab: "spellcasting",
+			label: "BF.Spell.Preparation.Mode.Rituals",
+			filters: [
+				{k: "type", v: "spell"},
+				{k: "system.tags", o: "has", v: "ritual"}
+			],
+			options: {autoHide: true}
 		},
 		{
 			id: "atWill",

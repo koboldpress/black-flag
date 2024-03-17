@@ -28,7 +28,7 @@ export default class HealingActivity extends Activity {
 		formula = Roll.defaultImplementation.replaceFormulaData(formula, rollConfig.data);
 		formula = simplifyFormula(formula);
 		if ( formula ) {
-			const healingType = CONFIG.BlackFlag.healingTypes[rollConfig.options.healingType];
+			const healingType = CONFIG.BlackFlag.healingTypes[rollConfig.rolls[0].options.healingType];
 			layout.innerHTML += `<span class="healing">${formula} ${game.i18n.localize(healingType?.label ?? "")}</span>`;
 		}
 		return layout.outerHTML;
