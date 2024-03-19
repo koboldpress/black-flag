@@ -42,34 +42,60 @@
 	}
 },
 
-"BF.AbilityAssignment.Label": "Determine Ability Scores",
-"BF.AbilityAssignment.RolledAbilityScore": "Rolled Ability Score",
-"BF.AbilityAssignment.Action.ChooseAnother": "Choose Another Method",
-"BF.AbilityAssignment.Action.Confirm": "Confirm Scoring",
-"BF.AbilityAssignment.Action.Roll": "Roll",
-"BF.AbilityAssignment.ScoringMethods.Label": "Scoring Methods",
-"BF.AbilityAssignment.ScoringMethods.Hint": "There are three methods to determine your starting ability scores. No method is “better” than another, but some people like one way more, so we include them to appeal to different kinds of players.",
-"BF.AbilityAssignment.Method.Manual.Label": "Manual Assignment",
-"BF.AbilityAssignment.Method.Rolling.Label": "Rolling",
-"BF.AbilityAssignment.Method.Rolling.Hint": "This is the classic, providing surprises and maybe a tough choice. It helps make a character you adapt to, instead of you making all the decisions.",
-"BF.AbilityAssignment.Method.Rolling.NoRolls": "No Rolls",
-"BF.AbilityAssignment.Method.PointBuy.Label": "Point-Buy",
-"BF.AbilityAssignment.Method.PointBuy.Hint": "If you don’t want to leave it up to chance, you can assign ability scores with the point-buy method.",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Caption": "Point-Buy Cost",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Cost": "Cost",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Point[one]": "{number} point",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Point[other]": "{number} points",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Remaining": "{remaining} / {max} points",
-"BF.AbilityAssignment.Method.PointBuy.Cost.Score": "Score",
-"BF.AbilityAssignment.Method.StandardArray.Label": "Standard Array",
-"BF.AbilityAssignment.Method.StandardArray.Hint": "To get started faster, use the standard array.",
+"BF.AbilityAssignment": {
+	"Label": "Determine Ability Scores",
+	"RolledAbilityScore": "Rolled Ability Score",
+	"Action": {
+		"ChooseAnother": "Choose Another Method",
+		"Confirm": "Confirm Scoring",
+		"Roll": "Roll"
+	},
+	"ScoringMethods": {
+		"Label": "Scoring Methods",
+		"Hint": "There are three methods to determine your starting ability scores. No method is “better” than another, but some people like one way more, so we include them to appeal to different kinds of players."
+	},
+	"Method": {
+		"Manual": {
+			"Label": "Manual Assignment"
+		},
+		"Rolling": {
+			"Label": "Rolling",
+			"Hint": "This is the classic, providing surprises and maybe a tough choice. It helps make a character you adapt to, instead of you making all the decisions.",
+			"NoRolls": "No Rolls"
+		},
+		"PointBuy": {
+			"Label": "Point-Buy",
+			"Hint": "If you don’t want to leave it up to chance, you can assign ability scores with the point-buy method.",
+			"Cost": {
+				"Caption": "Point-Buy Cost",
+				"Cost": "Cost",
+				"Point[one]": "{number} point",
+				"Point[other]": "{number} points",
+				"Remaining": "{remaining} / {max} points",
+				"Score": "Score"
+			}
+		},
+		"StandardArray": {
+			"Label": "Standard Array",
+			"Hint": "To get started faster, use the standard array."
+		}
+	}
+},
 
-"BF.AccentColor.Label": "Accent Color",
+"BF.AccentColor": {
+	"Label": "Accent Color"
+},
 
-"BF.Action.Add.Generic": "Add",
-"BF.Action.Add.Specific": "Add {type}",
-"BF.Action.Choose.Generic": "Choose",
-"BF.Action.Choose.Specific": "Choose {option}",
+"BF.Action": {
+	"Add": {
+		"Generic": "Add",
+		"Specific": "Add {type}"
+	},
+	"Choose": {
+		"Generic": "Choose",
+		"Specific": "Choose {option}"
+	}
+},
 
 "BF.Activation": {
 	"Label": "Activation",
@@ -164,162 +190,290 @@
 	}
 },
 
-"BF.Actor.Category.Person.Label": "Person",
-"BF.Actor.Type.NPC[one]": "Non-Player Character",
-"BF.Actor.Type.NPC[other]": "Non-Player Characters",
-"BF.Actor.Type.PC[one]": "Player Character",
-"BF.Actor.Type.PC[other]": "Player Characters",
+"BF.Actor": {
+	"Category": {
+		"Person.Label": "Person"
+	},
+	"Type": {
+		"NPC[one]": "Non-Player Character",
+		"NPC[other]": "Non-Player Characters",
+		"PC[one]": "Player Character",
+		"PC[other]": "Player Characters"
+	}
+},
 
 "BF.AdditionalControls": "Additional Controls",
 
-"BF.Advancement.Label": "Advancement",
+"BF.Advancement": {
+	"Label": "Advancement",
 
-"BF.Advancement.Core.Title.Label": "Custom Title",
-"BF.Advancement.Core.Hint.Label": "Hint",
-"BF.Advancement.Core.Hint.Hint": "Additional description of this advancement.",
-"BF.Advancement.Core.Icon.Label": "Custom Icon",
-"BF.Advancement.Core.Action.Create": "Create Advancement",
-"BF.Advancement.Core.Action.Delete": "Delete Advancement",
-"BF.Advancement.Core.Action.Disable": "Disable Configuration",
-"BF.Advancement.Core.Action.Duplicate": "Duplicate Advancement",
-"BF.Advancement.Core.Action.Edit": "Edit Advancement",
-"BF.Advancement.Core.ClassRestriction.Label": "Class Restriction",
-"BF.Advancement.Core.ClassRestriction.Hint": "Should this advancement only be applied for the first class taken on an actor or only when multiclassing into this class?",
-"BF.Advancement.Core.ClassRestriction.Multiclass": "Multiclass Only",
-"BF.Advancement.Core.ClassRestriction.None": "No Restriction",
-"BF.Advancement.Core.ClassRestriction.Original": "Original Class Only",
-"BF.Advancement.Core.Level.Any.Short": "Any",
-"BF.Advancement.Core.Level.Any.Long": "Any Level",
-"BF.Advancement.Core.Level.None": "No Level",
-"BF.Advancement.Core.Level.Reference.Label": "Level Reference",
-"BF.Advancement.Core.Level.Reference.Hint": "Is this advancement based off overall character level, or a specific class's level?",
+	"Core": {
+		"Title": {
+			"Label": "Custom Title"
+		},
+		"Hint": {
+			"Label": "Hint",
+			"Hint": "Additional description of this advancement."
+		},
+		"Icon": {
+			"Label": "Custom Icon"
+		},
+		"Action": {
+			"Create": "Create Advancement",
+			"Delete": "Delete Advancement",
+			"Disable": "Disable Configuration",
+			"Duplicate": "Duplicate Advancement",
+			"Edit": "Edit Advancement"
+		},
+		"ClassRestriction": {
+			"Label": "Class Restriction",
+			"Hint": "Should this advancement only be applied for the first class taken on an actor or only when multiclassing into this class?",
+			"Multiclass": "Multiclass Only",
+			"None": "No Restriction",
+			"Original": "Original Class Only"
+		},
+		"Level": {
+			"Any": {
+				"Short": "Any",
+				"Long": "Any Level"
+			},
+			"None": "No Level",
+			"Reference": {
+				"Label": "Level Reference",
+				"Hint": "Is this advancement based off overall character level, or a specific class's level?"
+			}
+		}
+	},
+	
+	"Config": {
+		"Title": "Configure {item} Advancement",
+		"Details": "Advancement Details",
+		"DropHint": "Drop Items here to add them to this advancement.",
+		"AllowDrops": {
+			"Label": "Allow Drops",
+			"Hint": "Should players be able to drop their own choices into this advancement?"
+		},
+		"Warning": {
+			"Duplicate": "That item already exists on this advancement.",
+			"Invalid": "{type} items cannot be added with this advancement type.",
+			"Recursive": "You cannot grant an item in its own advancement."
+		}
+	},
+	
+	"Selection": {
+		"Title": "Select Advancement Type"
+	},
+	
+	"ChooseFeatures": {
+		"Title": "Choose Features",
+		"Hint": "Present the player with a choice of features or talents that they can choose for their character at one or more levels.",
+		"Action": {
+			"Choose": "Make Choice"
+		},
+		"ChoiceDetails": "Choice Details",
+		"Choices": {
+			"Label": "Choices",
+			"Hint": "Specify how many choices are allowed at each level."
+		},
+		"Choose": "Choose {number}",
+		"Drop": "Drop a {type} here to select it",
+		"Notification[one]": "A {title} choice is needed",
+		"Notification[other]": "{number} {title} choices are needed",
+		"Type": {
+			"Label": "Item Type"
+		},
+		"Warning": {
+			"PreviouslyChosen": "This feature has already been chosen at a previous level.",
+			"Type": "Only {type} can be selected for this choice."
+		}
+	},
+	
+	"ExpandedTalentList": {
+		"Title": "Expanded Talent List",
+		"Hint": "Give players access to a second talent list when choosing talents during improvement.",
+		"JournalDescription": "When your {classLowercase} level grants you an Improvement and you choose to gain a new talent, you can select a talent from the {talentLists} lists."
+	},
+	
+	"GrantFeatures": {
+		"Title": "Features",
+		"Hint": "Grant the character features when they reach a certain level."
+	},
+	
+	"HitPoints": {
+		"Title": "Hit Points",
+		"Hint": "Set an class's hit die size and track a player's hit points as they gain levels.",
+		"Action": {
+			"TakeAverage": "Take Average",
+			"or": "or"
+		},
+		"Average": "Average",
+		"Notification": "Hit points need to be increased",
+		"Starting": "Hit Points at 1st Level"
+	},
+	
+	"Improvement": {
+		"Title": "Improvement",
+		"Hint": "Allow the player to increase one ability score and choose a talent from a specific talent list.",
+		"Action": {
+			"Choose": "Make Talent Choice"
+		},
+		"Notification": {
+			"Ability": "Select ability to improve",
+			"Notification.Talent": "Select talent to gain"
+		},
+		"TalentList": {
+			"Label": "Talent List"
+		},
+		"JournalDescription": "Increase one ability score of your choice by 1 and choose a talent for which you meet the prerequisites from the {talentList} list."
+	},
+	
+	"KeyAbility": {
+		"Title": "Key Ability",
+		"Hint": "Specify the key & secondary abilities on a class, giving the player an option if there is more than one, and granting the actor the appropriate saving throw proficiencies.",
+		"Notification": "Choose a key ability",
+		"Options": {
+			"Label": "Key Ability Options",
+			"Hint": "Player can choose from one of these ability options as their key ability."
+		},
+		"Secondary": {
+			"Label": "Secondary Ability",
+			"Hint": "One secondary ability in which the player will also get a save proficiency."
+		}
+	},
+	
+	"Property": {
+		"Title": "Set Property",
+		"Property": {
+			"Hint": "Change one or more actor properties using a system similar to active effects."
+		}
+	},
+	
+	"ScaleValue": {
+		"Title": "Scale Value",
+		"Hint": "A single value that changes with level that is made available in roll formulas (such as a Monk's martial arts die).",
+		"Identifier": {
+			"Hint": "This scale value for the current level will be available using <strong>@scale.{parentIdentifier}.{identifier}</strong> in a formula."
+		},
+		"Item": {
+			"Label": "Associated Item",
+			"Hint": "This scale value will be displayed inline with this item when displaying in a journal table. If not provided, this scale value will be displayed in its own column."
+		},
+		"Type": {
+			"Label": "Data Type",
+			"CR": {
+				"Label": "Challenge Rating",
+				"Hint": "Use this for representing creature challenge ratings for features like Wild Shape."
+			},
+			"Dice": {
+				"Label": "Dice",
+				"Hint": "Use this for dice values like bardic inspiration or sneak attack."
+			},
+			"Distance": {
+				"Label": "Distance",
+				"Hint": "Use this for numerical values that represent a distance, such as unarmored movement speed or aura of protection radius."
+			},
+			"Number": {
+				"Label": "Number",
+				"Hint": "Use this for purely numerical values like rage damage bonus."
+			},
+			"String": {
+				"Label": "Anything",
+				"Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter."
+			},
+			"Usage": {
+				"Label": "Uses",
+				"Hint": "Use this for an item's uses."
+			}
+		}
+	},
+	
+	"Size": {
+		"Title": "Size",
+		"Hint": "Set a character's size or give them a choice of sizes.",
+		"Notification": "Choose a creature size",
+		"Options": {
+			"Label": "Size Options",
+			"Hint": "Player can choose from any selected size. If only one is selected, then their character will become that size automatically."
+		}
+	},
+	
+	"Spellcasting": {
+		"Title": "Spellcasting",
+		"Hint": "Give a character the ability to learn and cast spells.",
+		"GainingSpells": "Gaining Spells"
+	},
+	
+	"Trait": {
+		"Title": "Traits",
+		"Hint": "Grant a character certain traits of proficiencies or present them a choice.",
+		"Action": {
+			"AddChoiceGroup": "Add Choice Set"
+		},
+		"Choice": {
+			"AnyCounted": "any {count} {type}",
+			"AnyUncounted": "any {type}",
+			"Wrapper": "Choose {choices}",
+			"List": "{count} from {list}",
+			"Other": "{count} other {type}",
+			"Mode": {
+				"Label": "Choice Mode",
+				"Hint": "Method by which the player is able to select from the choice sets.",
+				"Exclusive": {
+					"Label": "Exclusive",
+					"Hint": "Player can make a choice from only one set of choices."
+				},
+				"Inclusive": {
+					"Label": "Inclusive",
+					"Hint": "Player will be able to choose from all available sets of choices."
+				}
+			}
+		},
+		"Choices": {
+			"Label": "Choices",
+			"Hint": "The following traits will be presented as a choice to the player."
+		},
+		"Count": {
+			"Label": "Count"
+		},
+		"Guaranteed": {
+			"Label": "Guaranteed",
+			"Hint": "The following traits will be granted to the character."
+		},
+		"Mode": {
+			"Label": "Mode",
+			"Default": {
+				"Label": "Default",
+				"Hint": "Gain a trait or proficiency."
+			},
+			"Expertise": {
+				"Label": "Expertise",
+				"Hint": "Gain expertise in a trait in which you already have proficiency."
+			},
+			"Force": {
+				"Label": "Forced Expertise",
+				"Hint": "Gain expertise in a trait regardless of your previous proficiency level."
+			},
+			"Upgrade": {
+				"Label": "Upgrade",
+				"Hint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise."
+			}
+		},
+		"Notification": "Select {count} more {type}",
+		"NotificationSimple": "Select some more {type}"
+	}
+},
 
-"BF.Advancement.Config.Title": "Configure {item} Advancement",
-"BF.Advancement.Config.Details": "Advancement Details",
-"BF.Advancement.Config.DropHint": "Drop Items here to add them to this advancement.",
-"BF.Advancement.Config.AllowDrops.Label": "Allow Drops",
-"BF.Advancement.Config.AllowDrops.Hint": "Should players be able to drop their own choices into this advancement?",
-"BF.Advancement.Config.Warning.Duplicate": "That item already exists on this advancement.",
-"BF.Advancement.Config.Warning.Invalid": "{type} items cannot be added with this advancement type.",
-"BF.Advancement.Config.Warning.Recursive": "You cannot grant an item in its own advancement.",
-
-"BF.Advancement.Selection.Title": "Select Advancement Type",
-
-"BF.Advancement.ChooseFeatures.Title": "Choose Features",
-"BF.Advancement.ChooseFeatures.Hint": "Present the player with a choice of features or talents that they can choose for their character at one or more levels.",
-"BF.Advancement.ChooseFeatures.Action.Choose": "Make Choice",
-"BF.Advancement.ChooseFeatures.ChoiceDetails": "Choice Details",
-"BF.Advancement.ChooseFeatures.Choices.Label": "Choices",
-"BF.Advancement.ChooseFeatures.Choices.Hint": "Specify how many choices are allowed at each level.",
-"BF.Advancement.ChooseFeatures.Choose": "Choose {number}",
-"BF.Advancement.ChooseFeatures.Drop": "Drop a {type} here to select it",
-"BF.Advancement.ChooseFeatures.Notification[one]": "A {title} choice is needed",
-"BF.Advancement.ChooseFeatures.Notification[other]": "{number} {title} choices are needed",
-"BF.Advancement.ChooseFeatures.Type.Label": "Item Type",
-"BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen": "This feature has already been chosen at a previous level.",
-"BF.Advancement.ChooseFeatures.Warning.Type": "Only {type} can be selected for this choice.",
-
-"BF.Advancement.ExpandedTalentList.Title": "Expanded Talent List",
-"BF.Advancement.ExpandedTalentList.Hint": "Give players access to a second talent list when choosing talents during improvement.",
-"BF.Advancement.ExpandedTalentList.JournalDescription": "When your {classLowercase} level grants you an Improvement and you choose to gain a new talent, you can select a talent from the {talentLists} lists.",
-
-"BF.Advancement.GrantFeatures.Title": "Features",
-"BF.Advancement.GrantFeatures.Hint": "Grant the character features when they reach a certain level.",
-
-"BF.Advancement.HitPoints.Title": "Hit Points",
-"BF.Advancement.HitPoints.Hint": "Set an class's hit die size and track a player's hit points as they gain levels.",
-"BF.Advancement.HitPoints.Action.TakeAverage": "Take Average",
-"BF.Advancement.HitPoints.Action.or": "or",
-"BF.Advancement.HitPoints.Average": "Average",
-"BF.Advancement.HitPoints.Notification": "Hit points need to be increased",
-"BF.Advancement.HitPoints.Starting": "Hit Points at 1st Level",
-
-"BF.Advancement.Improvement.Title": "Improvement",
-"BF.Advancement.Improvement.Hint": "Allow the player to increase one ability score and choose a talent from a specific talent list.",
-"BF.Advancement.Improvement.Action.Choose": "Make Talent Choice",
-"BF.Advancement.Improvement.Notification.Ability": "Select ability to improve",
-"BF.Advancement.Improvement.Notification.Talent": "Select talent to gain",
-"BF.Advancement.Improvement.TalentList.Label": "Talent List",
-"BF.Advancement.Improvement.JournalDescription": "Increase one ability score of your choice by 1 and choose a talent for which you meet the prerequisites from the {talentList} list.",
-
-"BF.Advancement.KeyAbility.Title": "Key Ability",
-"BF.Advancement.KeyAbility.Hint": "Specify the key & secondary abilities on a class, giving the player an option if there is more than one, and granting the actor the appropriate saving throw proficiencies.",
-"BF.Advancement.KeyAbility.Notification": "Choose a key ability",
-"BF.Advancement.KeyAbility.Options.Label": "Key Ability Options",
-"BF.Advancement.KeyAbility.Options.Hint": "Player can choose from one of these ability options as their key ability.",
-"BF.Advancement.KeyAbility.Secondary.Label": "Secondary Ability",
-"BF.Advancement.KeyAbility.Secondary.Hint": "One secondary ability in which the player will also get a save proficiency.",
-
-"BF.Advancement.Property.Title": "Set Property",
-"BF.Advancement.Property.Hint": "Change one or more actor properties using a system similar to active effects.",
-
-"BF.Advancement.ScaleValue.Title": "Scale Value",
-"BF.Advancement.ScaleValue.Hint": "A single value that changes with level that is made available in roll formulas (such as a Monk's martial arts die).",
-"BF.Advancement.ScaleValue.Identifier.Hint": "This scale value for the current level will be available using <strong>@scale.{parentIdentifier}.{identifier}</strong> in a formula.",
-"BF.Advancement.ScaleValue.Item.Label": "Associated Item",
-"BF.Advancement.ScaleValue.Item.Hint": "This scale value will be displayed inline with this item when displaying in a journal table. If not provided, this scale value will be displayed in its own column.",
-"BF.Advancement.ScaleValue.Type.Label": "Data Type",
-"BF.Advancement.ScaleValue.Type.CR.Label": "Challenge Rating",
-"BF.Advancement.ScaleValue.Type.CR.Hint": "Use this for representing creature challenge ratings for features like Wild Shape.",
-"BF.Advancement.ScaleValue.Type.Dice.Label": "Dice",
-"BF.Advancement.ScaleValue.Type.Dice.Hint": "Use this for dice values like bardic inspiration or sneak attack.",
-"BF.Advancement.ScaleValue.Type.Distance.Label": "Distance",
-"BF.Advancement.ScaleValue.Type.Distance.Hint": "Use this for numerical values that represent a distance, such as unarmored movement speed or aura of protection radius.",
-"BF.Advancement.ScaleValue.Type.Number.Label": "Number",
-"BF.Advancement.ScaleValue.Type.Number.Hint": "Use this for purely numerical values like rage damage bonus.",
-"BF.Advancement.ScaleValue.Type.String.Label": "Anything",
-"BF.Advancement.ScaleValue.Type.String.Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
-"BF.Advancement.ScaleValue.Type.Usage.Label": "Uses",
-"BF.Advancement.ScaleValue.Type.Usage.Hint": "Use this for an item's uses.",
-
-"BF.Advancement.Size.Title": "Size",
-"BF.Advancement.Size.Hint": "Set a character's size or give them a choice of sizes.",
-"BF.Advancement.Size.Notification": "Choose a creature size",
-"BF.Advancement.Size.Options.Label": "Size Options",
-"BF.Advancement.Size.Options.Hint": "Player can choose from any selected size. If only one is selected, then their character will become that size automatically.",
-
-"BF.Advancement.Spellcasting.Title": "Spellcasting",
-"BF.Advancement.Spellcasting.Hint": "Give a character the ability to learn and cast spells.",
-"BF.Advancement.Spellcasting.GainingSpells": "Gaining Spells",
-
-"BF.Advancement.Trait.Title": "Traits",
-"BF.Advancement.Trait.Hint": "Grant a character certain traits of proficiencies or present them a choice.",
-"BF.Advancement.Trait.Action.AddChoiceGroup": "Add Choice Set",
-"BF.Advancement.Trait.Choice.AnyCounted": "any {count} {type}",
-"BF.Advancement.Trait.Choice.AnyUncounted": "any {type}",
-"BF.Advancement.Trait.Choice.Wrapper": "Choose {choices}",
-"BF.Advancement.Trait.Choice.List": "{count} from {list}",
-"BF.Advancement.Trait.Choice.Other": "{count} other {type}",
-"BF.Advancement.Trait.Choice.Mode.Label": "Choice Mode",
-"BF.Advancement.Trait.Choice.Mode.Hint": "Method by which the player is able to select from the choice sets.",
-"BF.Advancement.Trait.Choice.Mode.Exclusive.Label": "Exclusive",
-"BF.Advancement.Trait.Choice.Mode.Exclusive.Hint": "Player can make a choice from only one set of choices.",
-"BF.Advancement.Trait.Choice.Mode.Inclusive.Label": "Inclusive",
-"BF.Advancement.Trait.Choice.Mode.Inclusive.Hint": "Player will be able to choose from all available sets of choices.",
-"BF.Advancement.Trait.Choices.Label": "Choices",
-"BF.Advancement.Trait.Choices.Hint": "The following traits will be presented as a choice to the player.",
-"BF.Advancement.Trait.Count.Label": "Count",
-"BF.Advancement.Trait.Guaranteed.Label": "Guaranteed",
-"BF.Advancement.Trait.Guaranteed.Hint": "The following traits will be granted to the character.",
-"BF.Advancement.Trait.Mode.Label": "Mode",
-"BF.Advancement.Trait.Mode.Default.Label": "Default",
-"BF.Advancement.Trait.Mode.Default.Hint": "Gain a trait or proficiency.",
-"BF.Advancement.Trait.Mode.Expertise.Label": "Expertise",
-"BF.Advancement.Trait.Mode.Expertise.Hint": "Gain expertise in a trait in which you already have proficiency.",
-"BF.Advancement.Trait.Mode.Force.Label": "Forced Expertise",
-"BF.Advancement.Trait.Mode.Force.Hint": "Gain expertise in a trait regardless of your previous proficiency level.",
-"BF.Advancement.Trait.Mode.Upgrade.Label": "Upgrade",
-"BF.Advancement.Trait.Mode.Upgrade.Hint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise.",
-"BF.Advancement.Trait.Notification": "Select {count} more {type}",
-"BF.Advancement.Trait.NotificationSimple": "Select some more {type}",
-
-"BF.Ammunition.Type.Label": "Ammunition Type",
-"BF.Ammunition.Type.Arrow[one]": "Arrow",
-"BF.Ammunition.Type.Arrow[other]": "Arrows",
-"BF.Ammunition.Type.CrossbowBolt[one]": "Crossbow Bolt",
-"BF.Ammunition.Type.CrossbowBolt[other]": "Crossbow Bolts",
-"BF.Ammunition.Type.SlingBullet[one]": "Sling Bullet",
-"BF.Ammunition.Type.SlingBullet[other]": "Sling Bullets",
+"BF.Ammunition": {
+	"Type": {
+		"Label": "Ammunition Type",
+		"Arrow[one]": "Arrow",
+		"Arrow[other]": "Arrows",
+		"CrossbowBolt[one]": "Crossbow Bolt",
+		"CrossbowBolt[other]": "Crossbow Bolts",
+		"SlingBullet[one]": "Sling Bullet",
+		"SlingBullet[other]": "Sling Bullets"
+	}
+},
 
 "BF.AreaOfEffect": {
 	"Label": "Area of Effect",
@@ -456,7 +610,11 @@
 	}
 },
 
-"BF.Attack.Classification.Label": "Classification",
+"BF.Attack": {
+	"Classification": {
+		"Label": "Classification"
+	}
+},
 
 "BF.Attunement": {
 	"Label": "Attunement",
@@ -474,20 +632,30 @@
 	"Warning": "Too many items attuned."
 },
 
-"BF.Bonus.Label[one]": "Bonus",
-"BF.Bonus.Label[other]": "Bonuses",
+"BF.Bonus": {
+	"Label[one]": "Bonus",
+	"Label[other]": "Bonuses"
+},
 
-"BF.Check.Label[one]": "Check",
-"BF.Check.Label[other]": "Checks",
+"BF.Check": {
+	"Label[one]": "Check",
+	"Label[other]": "Checks"
+},
 
-"BF.ChallengeRating.Label": "Challenge Rating",
-"BF.ChallengeRating.Abbreviation": "CR",
-"BF.ChallengeRating.Specific": "CR {value}",
+"BF.ChallengeRating": {
+	"Label": "Challenge Rating",
+	"Abbreviation": "CR",
+	"Specific": "CR {value}"
+},
 
-"BF.ConceptSelection.Title": "Select {type}",
-"BF.ConceptSelection.NoOptions": "No {typePlural} could be found, create a {type} in the world or enabled a compendium containing {typePlural}.",
-"BF.ConceptSelection.Warning.Duplicate": "A {type} already exists on the actor {name}.",
-"BF.ConceptSelection.Warning.InvalidType": "Documents of the type {type} cannot be set using the setConcept method.",
+"BF.ConceptSelection": {
+	"Title": "Select {type}",
+	"NoOptions": "No {typePlural} could be found, create a {type} in the world or enabled a compendium containing {typePlural}.",
+	"Warning": {
+		"Duplicate": "A {type} already exists on the actor {name}.",
+		"InvalidType": "Documents of the type {type} cannot be set using the setConcept method."
+	}
+},
 
 "BF.Condition": {
 	"Label[one]": "Condition",
@@ -557,7 +725,9 @@
 	}
 },
 
-"BF.Configuration.Title": "{type} Configuration",
+"BF.Configuration": {
+	"Title": "{type} Configuration"
+},
 
 "BF.Consumption": {
 	"Label": "Resource Consumption",
@@ -612,16 +782,34 @@
 	}
 },
 
-"BF.Container.Capacity.Label": "Capacity",
-"BF.Container.Capacity.Number.Label": "Number of Items",
-"BF.Container.Capacity.Unlimited": "Unlimited",
-"BF.Container.Capacity.Volume.Label": "Volume of Contents",
-"BF.Container.Capacity.Weight.Label": "Weight of Contents",
-"BF.Container.Delete.Contents": "Also delete all items within the container.",
-"BF.Container.Delete.Message": "This container will be permanently deleted and cannot be recovered and the {count} items contained within will be moved out.",
-"BF.Container.Property.WeightlessContents.Label": "Weightless Contents",
-"BF.Container.Warning.MaxDepth": "Containers cannot be nested more than {depth} levels deep.",
-"BF.Container.Warning.Recursive": "Containers cannot contain themselves.",
+"BF.Container": {
+	"Capacity": {
+		"Label": "Capacity",
+		"Number": {
+			"Label": "Number of Items"
+		},
+		"Unlimited": "Unlimited",
+		"Volume": {
+			"Label": "Volume of Contents"
+		},
+		"Weight": {
+			"Label": "Weight of Contents"
+		}
+	},
+	"Delete": {
+		"Contents": "Also delete all items within the container.",
+		"Message": "This container will be permanently deleted and cannot be recovered and the {count} items contained within will be moved out."
+	},
+	"Property": {
+		"WeightlessContents": {
+			"Label": "Weightless Contents"
+		}
+	},
+	"Warning": {
+		"MaxDepth": "Containers cannot be nested more than {depth} levels deep.",
+		"Recursive": "Containers cannot contain themselves."
+	}
+},
 
 "BF.CreatureType": {
 	"Label": "Creature Type",
@@ -684,7 +872,9 @@
 	}
 },
 
-"BF.CreatureSizeAndType.Label": "Creature Size & Type",
+"BF.CreatureSizeAndType": {
+	"Label": "Creature Size & Type"
+},
 
 "BF.Currency": {
 	"Abbreviation": {
@@ -791,40 +981,74 @@
 	}
 },
 
-"BF.Default.Generic": "Default",
-"BF.Default.Specific": "Default ({default})",
+"BF.Default": {
+	"Generic": "Default",
+	"Specific": "Default ({default})"
+},
 
-"BF.Die.Denomination.Label": "Denomination",
-"BF.Die.Number.Label": "Die Count",
+"BF.Die": {
+	"Denomination": {
+		"Label": "Denomination"
+	},
+	"Number": {
+		"Label": "Die Count"
+	}
+},
 
-"BF.DifficultyClass.Label": "Difficulty Class",
-"BF.DifficultyClass.Abbreviation": "DC",
-"BF.DifficultyClass.Ability.Label": "DC Ability",
-"BF.DifficultyClass.Formula.Label": "DC Formula",
-"BF.DifficultyClass.Formula.Default": "8 + Ability + Proficiency",
+"BF.DifficultyClass": {
+	"Label": "Difficulty Class",
+	"Abbreviation": "DC",
+	"Ability": {
+		"Label": "DC Ability"
+	},
+	"Formula": {
+		"Label": "DC Formula",
+		"Formula.Default": "8 + Ability + Proficiency"
+	}
+},
 
-"BF.Distance.Label": "Distance",
-"BF.Distance.Unit.Label": "Distance Units",
-"BF.Distance.Unit.Foot.Label[one]": "Foot",
-"BF.Distance.Unit.Foot.Label[other]": "Feet",
-"BF.Distance.Unit.Foot.Abbreviation": "ft",
-"BF.Distance.Unit.Mile.Label[one]": "Mile",
-"BF.Distance.Unit.Mile.Label[other]": "Miles",
-"BF.Distance.Unit.Mile.Abbreviation": "mi",
+"BF.Distance": {
+	"Label": "Distance",
+	"Unit": {
+		"Label": "Distance Units",
+		"Foot": {
+			"Label[one]": "Foot",
+			"Label[other]": "Feet",
+			"Abbreviation": "ft"
+		},
+		"Mile": {
+			"Label[one]": "Mile",
+			"Label[other]": "Miles",
+			"Abbreviation": "mi"
+		}
+	}
+},
 
-"BF.Duration.Label": "Duration",
-"BF.Duration.Instantaneous": "Instantaneous",
-"BF.Duration.Permanent": "Permanent",
-"BF.Duration.Special": "Special Duration",
-"BF.Duration.Type.Label": "Duration Type",
-"BF.Duration.Type.Permanent.Label": "Permanent",
-"BF.Duration.Type.Special.Label": "Special",
-"BF.Duration.UntilDispelled": "Until Dispelled",
-"BF.Duration.UntilDispelledTriggered": "Until Dispelled or Triggered",
-"BF.Duration.Value.Label": "Duration Value",
+"BF.Duration": {
+	"Label": "Duration",
+	"Instantaneous": "Instantaneous",
+	"Permanent": "Permanent",
+	"Special": "Special Duration",
+	"Type": {
+		"Label": "Duration Type",
+		"Permanent": {
+			"Label": "Permanent"
+		},
+		"Special": {
+			"Label": "Special"
+		}
+	},
+	"UntilDispelled": "Until Dispelled",
+	"UntilDispelledTriggered": "Until Dispelled or Triggered",
+	"Value": {
+		"Label": "Duration Value"
+	}
+},
 
-"BF.EditingMode.Editable": "Editable",
-"BF.EditingMode.Locked": "Locked",
+"BF.EditingMode": {
+	"Editable": "Editable",
+	"Locked": "Locked"
+},
 
 "BF.Effect": {
 	"Label[one]": "Active Effect",
@@ -848,28 +1072,58 @@
 	"Source": "Source"
 },
 
-"BF.Enricher.Check.Long": "{check} check",
-"BF.Enricher.Check.Short": "{check}",
-"BF.Enricher.Check.Specific": "{ability} ({type})",
-"BF.Enricher.Damage.Long": "{average} ({formula}) {type}",
-"BF.Enricher.Damage.Short": "{formula} {type}",
-"BF.Enricher.DC.Phrase": "DC {dc} {check}",
-"BF.Enricher.DC.Passive.Long": "passive {check} score of {dc} or higher",
-"BF.Enricher.DC.Passive.Short": "DC {dc} passive {check}",
-"BF.Enricher.DC.Save.Long": "{save} saving throw",
-"BF.Enricher.DC.Save.Short": "{save}",
-"BF.Enricher.Warning.NoActor": "No selected or assigned actor could be found to execute this roll.",
+"BF.Enricher": {
+	"Check": {
+		"Long": "{check} check",
+		"Short": "{check}",
+		"Specific": "{ability} ({type})"
+	},
+	"Damage": {
+		"Long": "{average} ({formula}) {type}",
+		"Short": "{formula} {type}"
+	},
+	"DC": {
+		"Phrase": "DC {dc} {check}",
+		"Passive": {
+			"Long": "passive {check} score of {dc} or higher",
+			"Short": "DC {dc} passive {check}"
+		},
+		"Save": {
+			"Long": "{save} saving throw",
+			"Short": "{save}"
+		}
+	},
+	"Warning": {
+		"NoActor": "No selected or assigned actor could be found to execute this roll."
+	}
+},
 
-"BF.Equipment.Base.Label": "Base",
-"BF.Equipment.Category.Label": "Category",
-"BF.Equipment.Type.Label": "Type",
+"BF.Equipment": {
+	"Base": {
+		"Label": "Base"
+	},
+	"Category": {
+		"Label": "Category"
+	},
+	"Type": {
+		"Label": "Type"
+	}
+},
 
-"BF.ExperiencePoints.Label": "Experience Points",
-"BF.ExperiencePoints.LabelSpecific": "{value} XP",
-"BF.ExperiencePoints.Abbreviation": "XP",
-"BF.ExperiencePoints.Action.Add": "XP to Add",
-"BF.ExperiencePoints.Current.Label": "Current XP",
-"BF.ExperiencePoints.Required.Label": "Required XP to Next Level",
+"BF.ExperiencePoints": {
+	"Label": "Experience Points",
+	"LabelSpecific": "{value} XP",
+	"Abbreviation": "XP",
+	"Action": {
+		"Add": "XP to Add"
+	},
+	"Current": {
+		"Label": "Current XP"
+	},
+	"Required": {
+		"Label": "Required XP to Next Level"
+	}
+},
 
 "BF.Feature": {
 	"Action": {
@@ -936,11 +1190,15 @@
 
 "BF.Global": "Global",
 
-"BF.Healing.Label": "Healing",
-"BF.Healing.Type.Label": "Healing Type",
-"BF.Healing.Type.Maximum": "Maximum HP",
-"BF.Healing.Type.Normal": "Normal HP",
-"BF.Healing.Type.Temp": "Temp HP",
+"BF.Healing": {
+	"Label": "Healing",
+	"Type": {
+		"Label": "Healing Type",
+		"Maximum": "Maximum HP",
+		"Normal": "Normal HP",
+		"Temp": "Temp HP"
+	}
+},
 
 "BF.HitDie": {
 	"Label[one]": "Hit Die",
@@ -953,19 +1211,33 @@
 	}
 },
 
-"BF.HitPoint.Label[one]": "Hit Point",
-"BF.HitPoint.Label[other]": "Hit Points",
-"BF.HitPoint.Current.LabelLong": "Current Hit Points",
-"BF.HitPoint.Current.LabelShort": "Current",
-"BF.HitPoint.Damage.Label": "Damage Taken",
-"BF.HitPoint.Max.LabelLong": "Maximum Hit Points",
-"BF.HitPoint.Max.LabelShort": "Max",
-"BF.HitPoint.Temp.LabelLong": "Temporary Hit Points",
-"BF.HitPoint.Temp.LabelShort": "Temp",
+"BF.HitPoint": {
+	"Label[one]": "Hit Point",
+	"Label[other]": "Hit Points",
+	"Current": {
+		"LabelLong": "Current Hit Points",
+		"LabelShort": "Current"
+	},
+	"Damage": {
+		"Label": "Damage Taken"
+	},
+	"Max": {
+		"LabelLong": "Maximum Hit Points",
+		"LabelShort": "Max"
+	},
+	"Temp": {
+		"LabelLong": "Temporary Hit Points",
+		"LabelShort": "Temp"
+	}
+},
 
-"BF.Identifier.Label": "Identifier",
-"BF.Identifier.Hint": "Simplified and non-localized version of name used for internal lookups.",
-"BF.Identifier.Error.Invalid": "Identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_).",
+"BF.Identifier": {
+	"Label": "Identifier",
+	"Hint": "Simplified and non-localized version of name used for internal lookups.",
+	"Error": {
+		"Invalid": "Identifier can only contain letters (a-z), numbers (0-9), dashes (-), and underscores (_)."
+	}
+},
 
 "BF.Immunity": {
 	"Label": "Immunities",
@@ -1131,9 +1403,15 @@
 	"Unequipped": "Unequipped"
 },
 
-"BF.Journal.Link.DropArea": "Drop journal entry here",
-"BF.Journal.Link.MoreInformation": "More Information",
-"BF.Journal.Table.TOC": "Table: {caption}",
+"BF.Journal": {
+	"Link": {
+		"DropArea": "Drop journal entry here",
+		"MoreInformation": "More Information"
+	},
+	"Table": {
+		"TOC": "Table: {caption}"
+	}
+},
 
 "BF.JournalPage": {
 	"Edit": "Edit",
@@ -1269,21 +1547,27 @@
 	"Telepathy": "Telepathy"
 },
 
-"BF.LegendaryAction.Cost[one]": "Costs {count} Action",
-"BF.LegendaryAction.Cost[other]": "Costs {count} Actions",
-"BF.LegendaryAction.Description": "The {type} can take {count} legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains spent legendary actions at the start of its turn.",
-"BF.LegendaryAction.Max.Label": "Legendary Actions per Round",
+"BF.LegendaryAction": {
+	"Cost[one]": "Costs {count} Action",
+	"Cost[other]": "Costs {count} Actions",
+	"Description": "The {type} can take {count} legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains spent legendary actions at the start of its turn.",
+	"Max.Label": "Legendary Actions per Round"
+},
 
-"BF.Level.Label[one]": "Level",
-"BF.Level.Label[other]": "Levels",
-"BF.Level.Specific": "Level {level}",
-"BF.Level.Class": "Class Level",
-"BF.Level.Count[one]": "{number} level",
-"BF.Level.Count[other]": "{number} levels",
-"BF.Level.None": "No Levels",
-"BF.Level.Ordinal": "{number} level",
-"BF.Level.Overall": "Overall Level",
-"BF.Level.Warning.Max": "Character cannot be leveled up past {max}.",
+"BF.Level": {
+	"Label[one]": "Level",
+	"Label[other]": "Levels",
+	"Specific": "Level {level}",
+	"Class": "Class Level",
+	"Count[one]": "{number} level",
+	"Count[other]": "{number} levels",
+	"None": "No Levels",
+	"Ordinal": "{number} level",
+	"Overall": "Overall Level",
+	"Warning": {
+		"Max": "Character cannot be leveled up past {max}."
+	}
+},
 
 "BF.Link": {
 	"Discord": "Discord",
@@ -1305,14 +1589,20 @@
 	}
 },
 
-"BF.Minimum.Label[one]": "Minimum",
-"BF.Minimum.Label[other]": "Minimums",
-"BF.Minimum.LabelGeneric": "Minimum Roll",
-"BF.Minimum.LabelSpecific": "{type} {type}",
+"BF.Minimum": {
+	"Label[one]": "Minimum",
+	"Label[other]": "Minimums",
+	"LabelGeneric": "Minimum Roll",
+	"LabelSpecific": "{type} {type}"
+},
 
-"BF.Modifier.Global": "Global {type}",
-"BF.Modifier.Specific": "{type} {modifier}",
-"BF.Modifier.Proficiency.Label": "Prof?",
+"BF.Modifier": {
+	"Global": "Global {type}",
+	"Specific": "{type} {modifier}",
+	"Proficiency": {
+		"Label": "Prof?"
+	}
+},
 
 "BF.Movement": {
 	"Label": "Movement",
@@ -1332,10 +1622,14 @@
 	}
 },
 
-"BF.New.Specific": "New {type}",
+"BF.New": {
+	"Specific": "New {type}"
+},
 
-"BF.Note.Label[one]": "Note",
-"BF.Note.Label[other]": "Notes",
+"BF.Note": {
+	"Label[one]": "Note",
+	"Label[other]": "Notes"
+},
 
 "BF.Number[1]": "one",
 "BF.Number[2]": "two",
@@ -1347,66 +1641,110 @@
 "BF.Number[8]": "eight",
 "BF.Number[9]": "nine",
 "BF.Number[∞]": "infinity",
-"BF.Number.Maximum": "Maximum",
-"BF.Number.Minimum": "Minimum",
-"BF.Number.Ordinal[one]": "{number}st",
-"BF.Number.Ordinal[two]": "{number}nd",
-"BF.Number.Ordinal[few]": "{number}rd",
-"BF.Number.Ordinal[other]": "{number}th",
+"BF.Number": {
+	"Maximum": "Maximum",
+	"Minimum": "Minimum",
+	"Ordinal[one]": "{number}st",
+	"Ordinal[two]": "{number}nd",
+	"Ordinal[few]": "{number}rd",
+	"Ordinal[other]": "{number}th"
+},
 
-"BF.Override.Label[one]": "Override",
-"BF.Override.Label[other]": "Overrides",
+"BF.Override": {
+	"Label[one]": "Override",
+	"Label[other]": "Overrides"
+},
 
-"BF.Prerequisite.Label": "Prerequisite",
-"BF.Prerequisite.Ability.Label": "{abbreviation} Score of {value} or Higher",
-"BF.Prerequisite.Ability.Title": "Minimum Ability Scores",
-"BF.Prerequisite.Ability.Warning": "must have a {ability} of {value} or higher",
-"BF.Prerequisite.Config.Title": "Prerequisite Configuration",
-"BF.Prerequisite.Spellcasting.Label": "Ability to Cast Spells",
-"BF.Prerequisite.Spellcasting.Warning": "must be able to cast spells",
-"BF.Prerequisite.SpellcastingDamage.Label": "Ability to Cast at Least One Spell that Deals Damage",
-"BF.Prerequisite.SpellcastingDamage.ConfigLabel": "Has Damaging Spells",
-"BF.Prerequisite.SpellcastingDamage.Warning": "must be able to cast at least one spell that deals damage",
-"BF.Prerequisite.Size.Label": "{size} Size",
-"BF.Prerequisite.Size.Warning": "size must be {size}",
-"BF.Prerequisite.Warning.Failure": "{name} {requirements} in order to take this {type}.",
+"BF.Prerequisite": {
+	"Label": "Prerequisite",
+	"Ability": {
+		"Label": "{abbreviation} Score of {value} or Higher",
+		"Title": "Minimum Ability Scores",
+		"Warning": "must have a {ability} of {value} or higher"
+	},
+	"Config": {
+		"Title": "Prerequisite Configuration"
+	},
+	"Spellcasting": {
+		"Label": "Ability to Cast Spells",
+		"Warning": "must be able to cast spells"
+	},
+	"SpellcastingDamage": {
+		"Label": "Ability to Cast at Least One Spell that Deals Damage",
+		"ConfigLabel": "Has Damaging Spells",
+		"Warning": "must be able to cast at least one spell that deals damage"
+	},
+	"Size": {
+		"Label": "{size} Size",
+		"Warning": "size must be {size}"
+	},
+	"Warning": {
+		"Failure": "{name} {requirements} in order to take this {type}."
+	}
+},
 
-"BF.Price.Label": "Price",
+"BF.Price": {
+	"Label": "Price"
+},
 
-"BF.Proficiency.Label[one]": "Proficiency",
-"BF.Proficiency.Label[other]": "Proficiencies",
-"BF.Proficiency.Abbreviation": "Prof",
-"BF.Proficiency.Bonus.Label": "Proficiency Bonus",
-"BF.Proficiency.Bonus.Abbreviation": "PB",
-"BF.Proficiency.Level.Expertise": "Expertise",
-"BF.Proficiency.Level.Half": "Half Proficient",
-"BF.Proficiency.Level.None": "Not Proficient",
-"BF.Proficiency.Level.Proficient": "Proficient",
-"BF.Proficiency.Multiplier": "Proficiency Multiplier",
-"BF.Proficiency.None": "None",
-"BF.Proficiency.Override.Always": "Always Proficient",
-"BF.Proficiency.Override.Auto": "Automatic",
-"BF.Proficiency.Override.Never": "Never Proficient",
-"BF.Proficiency.Rounding": "Proficiency Rounding",
+"BF.Proficiency": {
+	"Label[one]": "Proficiency",
+	"Label[other]": "Proficiencies",
+	"Abbreviation": "Prof",
+	"Bonus": {
+		"Label": "Proficiency Bonus",
+		"Abbreviation": "PB"
+	},
+	"Level": {
+		"Expertise": "Expertise",
+		"Half": "Half Proficient",
+		"None": "Not Proficient",
+		"Proficient": "Proficient"
+	},
+	"Multiplier": "Proficiency Multiplier",
+	"None": "None",
+	"Override": {
+		"Always": "Always Proficient",
+		"Auto": "Automatic",
+		"Never": "Never Proficient"
+	},
+	"Rounding": "Proficiency Rounding"
+},
 
-"BF.Progression.Label": "Progression",
-"BF.Progression.Action.LevelDown.Label": "Level Down",
-"BF.Progression.Action.LevelDown.Title": "Are you sure you would like to level down?",
-"BF.Progression.Action.LevelDown.Message": "Leveling down this character will remove any features granted and choices made during character progression.",
-"BF.Progression.Action.LevelUp.Label": "Level Up",
-"BF.Progression.Action.Multiclass.Label": "Add a New Class",
-"BF.Progression.Action.Return": "Return",
-"BF.Progression.Base": "Base",
-"BF.Progression.Notification.ChooseBackground": "Choose a Background",
-"BF.Progression.Notification.ChooseClass": "Choose a Class",
-"BF.Progression.Notification.ChooseHeritage": "Choose a Heritage",
-"BF.Progression.Notification.ChooseLineage": "Choose a Lineage",
-"BF.Progression.Notification.ChooseSubclass": "Choose a {class} Subclass",
-"BF.Progression.Notification.DetermineAbilityScores": "Determine ability scores",
-"BF.Progression.Warning.NoMulticlassing": "Multiclassing is not currently allowed in this game.",
+"BF.Progression": {
+	"Label": "Progression",
+	"Action": {
+		"LevelDown": {
+			"Label": "Level Down",
+			"Title": "Are you sure you would like to level down?",
+			"Message": "Leveling down this character will remove any features granted and choices made during character progression."
+		},
+		"LevelUp": {
+			"Label": "Level Up"
+		},
+		"Multiclass": {
+			"Label": "Add a New Class"
+		},
+		"Return": "Return"
+	},
+	"Base": "Base",
+	"Notification": {
+		"ChooseBackground": "Choose a Background",
+		"ChooseClass": "Choose a Class",
+		"ChooseHeritage": "Choose a Heritage",
+		"ChooseLineage": "Choose a Lineage",
+		"ChooseSubclass": "Choose a {class} Subclass",
+		"DetermineAbilityScores": "Determine ability scores"
+	},
+	"Warning": {
+		"NoMulticlassing": "Multiclassing is not currently allowed in this game."
+	}
+},
 
-"BF.Property.Label[one]": "Property",
-"BF.Property.Label[other]": "Properties",
+"BF.Property": {
+	"Label[one]": "Property",
+	"Label[other]": "Properties"
+},
 
 "BF.Quantity": {
 	"Label": "Quantity",
@@ -1416,16 +1754,38 @@
 	}
 },
 
-"BF.Range.Label": "Range",
-"BF.Range.Long.Label": "Long",
-"BF.Range.Short.Label": "Short",
-"BF.Range.Special.Label": "Special Range",
-"BF.Range.Type.Any.Label": "Unlimited",
-"BF.Range.Type.Self.Label": "Self",
-"BF.Range.Type.Special.Label": "Special",
-"BF.Range.Type.Touch.Label": "Touch",
-"BF.Range.Unit.Label": "Range Units",
-"BF.Range.Value.Label": "Range Value",
+"BF.Range": {
+	"Label": "Range",
+	"Long": {
+		"Label": "Long"
+	},
+	"Short": {
+		"Label": "Short"
+	},
+	"Special": {
+		"Label": "Special Range"
+	},
+	"Type": {
+		"Any": {
+			"Label": "Unlimited"
+		},
+		"Self": {
+			"Label": "Self"
+		},
+		"Special": {
+			"Label": "Special"
+		},
+		"Touch": {
+			"Label": "Touch"
+		}
+	},
+	"Unit": {
+		"Label": "Range Units"
+	},
+	"Value": {
+		"Label": "Range Value"
+	}
+},
 
 "BF.Rarity": {
 	"Label": "Rarity",
@@ -1514,28 +1874,52 @@
 	}
 },
 
-"BF.Roll.Action.Advantage.Label": "Advantage",
-"BF.Roll.Action.Advantage.Abbreviation": "A",
-"BF.Roll.Action.Critical.Label": "Critical",
-"BF.Roll.Action.Critical.Abbreviation": "C",
-"BF.Roll.Action.Disadvantage.Label": "Disadvantage",
-"BF.Roll.Action.Disadvantage.Abbreviation": "D",
-"BF.Roll.Action.Normal.Label": "Normal",
-"BF.Roll.Action.Normal.Abbreviation": "N",
-"BF.Roll.Action.RollGeneric": "Roll",
-"BF.Roll.Action.RollSpecific": "Roll {type}",
-"BF.Roll.Action.RerollGeneric": "Re-roll",
-"BF.Roll.Action.RerollSpecific": "Re-roll {type}",
-"BF.Roll.Configuration.LabelGeneric": "Roll Configuration",
-"BF.Roll.Configuration.LabelSpecific": "{type} Configuration",
-"BF.Roll.Formula.Label": "Formula",
-"BF.Roll.ExtraTerms.Label": "Extra Terms",
-"BF.Roll.Mode.Label": "Roll Mode",
-"BF.Roll.Result.CriticalFailure": "Critical Failure",
-"BF.Roll.Result.CriticalSuccess": "Critical Success",
-"BF.Roll.Result.Failure": "Failure",
-"BF.Roll.Result.Success": "Success",
-"BF.Roll.Type.Label": "{type} roll",
+"BF.Roll": {
+	"Action": {
+		"Advantage": {
+			"Label": "Advantage",
+			"Abbreviation": "A"
+		},
+		"Critical": {
+			"Label": "Critical",
+			"Abbreviation": "C"
+		},
+		"Disadvantage": {
+			"Label": "Disadvantage",
+			"Abbreviation": "D"
+		},
+		"Normal": {
+			"Label": "Normal",
+			"Abbreviation": "N"
+		},
+		"RollGeneric": "Roll",
+		"RollSpecific": "Roll {type}",
+		"RerollGeneric": "Re-roll",
+		"RerollSpecific": "Re-roll {type}"
+	},
+	"Configuration": {
+		"LabelGeneric": "Roll Configuration",
+		"LabelSpecific": "{type} Configuration"
+	},
+	"Formula": {
+		"Label": "Formula"
+	},
+	"ExtraTerms": {
+		"Label": "Extra Terms"
+	},
+	"Mode": {
+		"Label": "Roll Mode"
+	},
+	"Result": {
+		"CriticalFailure": "Critical Failure",
+		"CriticalSuccess": "Critical Success",
+		"Failure": "Failure",
+		"Success": "Success"
+	},
+	"Type": {
+		"Label": "{type} roll"
+	}
+},
 
 "BF.Rule": {
 	"Label": "Rule",
@@ -1546,10 +1930,12 @@
 	}
 },
 
-"BF.SavingThrow.LabelLong[one]": "Saving Throw",
-"BF.SavingThrow.LabelLong[other]": "Saving Throws",
-"BF.SavingThrow.LabelShort[one]": "Save",
-"BF.SavingThrow.LabelShort[other]": "Saves",
+"BF.SavingThrow": {
+	"LabelLong[one]": "Saving Throw",
+	"LabelLong[other]": "Saving Throws",
+	"LabelShort[one]": "Save",
+	"LabelShort[other]": "Saves"
+},
 
 "BF.Senses": {
 	"Label": "Senses",
@@ -1568,62 +1954,98 @@
 	}
 },
 
-"BF.Settings.AbilitySelectionManual.Label": "Allow Manual Ability Assignments",
-"BF.Settings.AbilitySelectionManual.Hint": "Allow players to manually set their ability scores rather than using the standard selection methods.",
-"BF.Settings.AbilitySelectionReroll.Label": "Allow Re-rolls on Ability Scores",
-"BF.Settings.AbilitySelectionReroll.Hint": "Allow players to re-roll when using the rolling ability score selection method.",
-"BF.Settings.CriticalMaximizeDamage.Label": "Critical: Maximize Bonus Dice",
-"BF.Settings.CriticalMaximizeDamage.Hint": "Maximize the value of bonus dice added by criticals (e.g. 1d6 becomes 1d6 + 6 rather than 2d6).",
-"BF.Settings.CriticalMultiplyDice.Label": "Critical: Multiply Dice Result",
-"BF.Settings.CriticalMultiplyDice.Hint": "Multiply dice terms rather than rolling additional dice (e.g. 1d6 becomes 1d6 * 2 rather than 2d6).",
-"BF.Settings.CriticalMultiplyNumeric.Label": "Critical: Multiply Numeric Terms",
-"BF.Settings.CriticalMultiplyNumeric.Hint": "Multiply numeric terms in addition to dice terms (e.g. 1d6 + 4 becomes 2d6 + 8 rather than 2d6 + 4).",
-"BF.Settings.InitiativeTiebreaker.Label": "Initiative Tiebreaker",
-"BF.Settings.InitiativeTiebreaker.Hint": "Add initiative ability score as decimal to help break ties in initiatives.",
-"BF.Settings.LevelingMode.Label": "Leveling Mode",
-"BF.Settings.LevelingMode.Hint": "Method that should be used to determine when players gain a new level.",
-"BF.Settings.LevelingMode.Milestone": "Milestone",
-"BF.Settings.LevelingMode.XP": "Experience Points",
-"BF.Settings.Multiclassing.Label": "Allow Multiclassing",
-"BF.Settings.Multiclassing.Hint": "Let characters take more than one class when leveling.",
-"BF.Settings.ProficiencyMode.Label": "Proficiency Variant",
-"BF.Settings.ProficiencyMode.Hint": "Configure proficiency modifier to use a fixed bonus or a dice roll.",
-"BF.Settings.ProficiencyMode.Bonus": "Bonus (+2, +3, +4, +5, +6)",
-"BF.Settings.ProficiencyMode.Dice": "Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
+"BF.Settings": {
+	"AbilitySelectionManual": {
+		"Label": "Allow Manual Ability Assignments",
+		"Hint": "Allow players to manually set their ability scores rather than using the standard selection methods."
+	},
+	"AbilitySelectionReroll": {
+		"Label": "Allow Re-rolls on Ability Scores",
+		"Hint": "Allow players to re-roll when using the rolling ability score selection method."
+	},
+	"CriticalMaximizeDamage": {
+		"Label": "Critical: Maximize Bonus Dice",
+		"Hint": "Maximize the value of bonus dice added by criticals (e.g. 1d6 becomes 1d6 + 6 rather than 2d6)."
+	},
+	"CriticalMultiplyDice": {
+		"Label": "Critical: Multiply Dice Result",
+		"Hint": "Multiply dice terms rather than rolling additional dice (e.g. 1d6 becomes 1d6 * 2 rather than 2d6)."
+	},
+	"CriticalMultiplyNumeric": {
+		"Label": "Critical: Multiply Numeric Terms",
+		"Hint": "Multiply numeric terms in addition to dice terms (e.g. 1d6 + 4 becomes 2d6 + 8 rather than 2d6 + 4)."
+	},
+	"InitiativeTiebreaker": {
+		"Label": "Initiative Tiebreaker",
+		"Hint": "Add initiative ability score as decimal to help break ties in initiatives."
+	},
+	"LevelingMode": {
+		"Label": "Leveling Mode",
+		"Hint": "Method that should be used to determine when players gain a new level.",
+		"Milestone": "Milestone",
+		"XP": "Experience Points"
+	},
+	"Multiclassing": {
+		"Label": "Allow Multiclassing",
+		"Hint": "Let characters take more than one class when leveling."
+	},
+	"ProficiencyMode": {
+		"Label": "Proficiency Variant",
+		"Hint": "Configure proficiency modifier to use a fixed bonus or a dice roll.",
+		"Bonus": "Bonus (+2, +3, +4, +5, +6)",
+		"Dice": "Dice (1d4, 1d6, 1d8, 1d10, 1d12)"
+	}
+},
 
-"BF.Sheet.Default.ClassPage": "Black Flag Class Journal Page Sheet",
-"BF.Sheet.Default.Concept": "Black Flag Concept Sheet",
-"BF.Sheet.Default.Condition": "Black Flag Condition Sheet",
-"BF.Sheet.Default.Container": "Black Flag Container Sheet",
-"BF.Sheet.Default.Equipment": "Black Flag Equipment Sheet",
-"BF.Sheet.Default.Feature": "Black Flag Feature Sheet",
-"BF.Sheet.Default.NPC": "Black Flag NPC Sheet",
-"BF.Sheet.Default.PC": "Black Flag PC Sheet",
-"BF.Sheet.Default.Rule": "Black Flag Rule Journal Page Sheet",
-"BF.Sheet.Sorting.Mode.Alphabetic": "Alphabetic",
-"BF.Sheet.Sorting.Mode.Manual": "Manual",
-"BF.Sheet.Tab.Activities": "Activities",
-"BF.Sheet.Tab.Advancement": "Advancement",
-"BF.Sheet.Tab.AdvancementEffects": "Advancement & Effects",
-"BF.Sheet.Tab.Biography": "Biography",
-"BF.Sheet.Tab.Contents": "Contents",
-"BF.Sheet.Tab.Description": "Description",
-"BF.Sheet.Tab.Details": "Details",
-"BF.Sheet.Tab.Effects": "Effects",
-"BF.Sheet.Tab.Features": "Features",
-"BF.Sheet.Tab.Inventory": "Inventory",
-"BF.Sheet.Tab.Main": "Main",
-"BF.Sheet.Tab.Spellcasting": "Spellcasting",
+"BF.Sheet": {
+	"Default": {
+		"ClassPage": "Black Flag Class Journal Page Sheet",
+		"Concept": "Black Flag Concept Sheet",
+		"Condition": "Black Flag Condition Sheet",
+		"Container": "Black Flag Container Sheet",
+		"Equipment": "Black Flag Equipment Sheet",
+		"Feature": "Black Flag Feature Sheet",
+		"NPC": "Black Flag NPC Sheet",
+		"PC": "Black Flag PC Sheet",
+		"Rule": "Black Flag Rule Journal Page Sheet"
+	},
+	"Sorting": {
+		"Mode": {
+			"Alphabetic": "Alphabetic",
+			"Manual": "Manual"
+		}
+	},
+	"Tab": {
+		"Activities": "Activities",
+		"Advancement": "Advancement",
+		"AdvancementEffects": "Advancement & Effects",
+		"Biography": "Biography",
+		"Contents": "Contents",
+		"Description": "Description",
+		"Details": "Details",
+		"Effects": "Effects",
+		"Features": "Features",
+		"Inventory": "Inventory",
+		"Main": "Main",
+		"Spellcasting": "Spellcasting"
+	}
+},
 
-"BF.Shield.Bonus.Label": "Shield Bonus",
+"BF.Shield": {
+	"Bonus": {
+		"Label": "Shield Bonus"
+	}
+},
 
-"BF.Size.Label": "Size",
-"BF.Size.Gargantuan": "Gargantuan",
-"BF.Size.Huge": "Huge",
-"BF.Size.Large": "Large",
-"BF.Size.Medium": "Medium",
-"BF.Size.Small": "Small",
-"BF.Size.Tiny": "Tiny",
+"BF.Size": {
+	"Label": "Size",
+	"Gargantuan": "Gargantuan",
+	"Huge": "Huge",
+	"Large": "Large",
+	"Medium": "Medium",
+	"Small": "Small",
+	"Tiny": "Tiny"
+},
 
 "BF.Skill": {
 	"Label[one]": "Skill",
@@ -1692,9 +2114,13 @@
 	}
 },
 
-"BF.Speed.Label": "Speed",
-"BF.Speed.Base.Label": "Base Speed",
-"BF.Speed.Base.Hint": "Base movement speed that can be used in formulas for deriving other speeds using the @base property.",
+"BF.Speed": {
+	"Label": "Speed",
+	"Base": {
+		"Label": "Base Speed",
+		"Hint": "Base movement speed that can be used in formulas for deriving other speeds using the @base property."
+	}
+},	
 
 "BF.Spell": {
 	"Action": {
@@ -1918,34 +2344,66 @@
 	}
 },
 
-"BF.Subclass.LabelSpecific": "{class} Subclass",
-"BF.Subclass.Warning.ExistingSubclass": "{class} already has the subclass {subclass}. Another cannot be added.",
-"BF.Subclass.Warning.MissingClass": "Character does not have any levels of {class} to take this subclass.",
+"BF.Subclass": {
+	"LabelSpecific": "{class} Subclass",
+	"Warning": {
+		"ExistingSubclass": "{class} already has the subclass {subclass}. Another cannot be added.",
+		"MissingClass": "Character does not have any levels of {class} to take this subclass."
+	}
+},
 
-"BF.Talent.AllowMultipleTimes.Label": "Allow Multiple Times",
-"BF.Talent.AllowMultipleTimes.Hint": "Can a player take this talent more than once?",
+"BF.Talent": {
+	"AllowMultipleTimes": {
+		"Label": "Allow Multiple Times",
+		"Hint": "Can a player take this talent more than once?"
+	}
+},
 
-"BF.Target.Label[one]": "Target",
-"BF.Target.Label[other]": "Targets",
-"BF.Target.Count.Label": "Target Count",
-"BF.Target.Count.Every": "Every",
-"BF.Target.Special.Label": "Special Target",
-"BF.Target.Type.Label": "Target Type",
-"BF.Target.Type.Ally.Label[one]": "Ally",
-"BF.Target.Type.Ally.Label[other]": "Allies",
-"BF.Target.Type.Creature.Label[one]": "Creature",
-"BF.Target.Type.Creature.Label[other]": "Creatures",
-"BF.Target.Type.CreatureObject.Label[one]": "Creature or Object",
-"BF.Target.Type.CreatureObject.Label[other]": "Creatures or Objects",
-"BF.Target.Type.Enemy.Label[one]": "Enemy",
-"BF.Target.Type.Enemy.Label[other]": "Enemies",
-"BF.Target.Type.Object.Label[one]": "Object",
-"BF.Target.Type.Object.Label[other]": "Objects",
-"BF.Target.Type.ObjectNotWorn.Label[one]": "Object not being Worn or Carried",
-"BF.Target.Type.ObjectNotWorn.Label[other]": "Objects not being Worn or Carried",
-"BF.Target.Type.Special.Label": "Special",
-"BF.Target.Type.WillingCreature.Label[one]": "Willing Creature",
-"BF.Target.Type.WillingCreature.Label[other]": "Willing Creatures",
+"BF.Target": {
+	"Label[one]": "Target",
+	"Label[other]": "Targets",
+	"Count": {
+		"Label": "Target Count",
+		"Every": "Every"
+	},
+	"Special": {
+		"Label": "Special Target"
+	},
+	"Type": {
+		"Label": "Target Type",
+		"Ally": {
+			"Label[one]": "Ally",
+			"Label[other]": "Allies"
+		},
+		"Creature": {
+			"Label[one]": "Creature",
+			"Label[other]": "Creatures"
+		},
+		"CreatureObject": {
+			"Label[one]": "Creature or Object",
+			"Label[other]": "Creatures or Objects"
+		},
+		"Enemy": {
+			"Label[one]": "Enemy",
+			"Label[other]": "Enemies"
+		},
+		"Object": {
+			"Label[one]": "Object",
+			"Label[other]": "Objects"
+		},
+		"ObjectNotWorn": {
+			"Label[one]": "Object not being Worn or Carried",
+			"Label[other]": "Objects not being Worn or Carried"
+		},
+		"Special": {
+			"Label": "Special"
+		},
+		"WillingCreature": {
+			"Label[one]": "Willing Creature",
+			"Label[other]": "Willing Creatures"
+		}
+	}
+},
 
 "BF.Targeting.Label": "Targeting",
 

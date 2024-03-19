@@ -106,6 +106,12 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 			source.spellbook.max = spellcasting.spells.spellbook.firstLevel ?? 0;
 			source.spellbook.max += (spellcasting.spells.spellbook.otherLevels ?? 0) * (levels - 1);
 		}
+		const canPrepare = CONFIG.BlackFlag.spellLearningModes[spellcasting.spells.mode]?.prepared;
+		if ( canPrepare ) {
+			source.prepared ??= { value: 0 };
+			const abilityMod = parent.actor?.system.abilities[spellcasting.spellcastingAbility]?.mod;
+			source.prepared.max = (this.levels ?? 0) + (abilityMod ?? 0);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -341,7 +341,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 			configurable: true,
 			enumerable: false
 		});
-		// TODO: If target is self, then range is also self
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -389,6 +388,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 				if ( relationship.spellbookOrigin === "free" ) {
 					source.spellbook ??= { value: 0 };
 					source.spellbook.value += 1;
+				}
+				if ( this.preparable && this.prepared ) {
+					source.prepared ??= { value: 0 };
+					source.prepared.value += 1;
 				}
 			}
 		}

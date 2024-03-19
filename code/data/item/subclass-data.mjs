@@ -10,6 +10,7 @@ const { SchemaField } = foundry.data.fields;
  */
 export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "subclass",
@@ -22,6 +23,7 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			identifier: new SchemaField({
@@ -45,6 +47,17 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Number of levels of the class associated with this subclass a character has.
+	 * @type {number}
+	 */
+	get levels() {
+		return this.parent.actor?.system.progression?.classes[this.identifier.class]?.levels ?? 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	get traits() {
 		const traits = [];
 		if ( this.spellcasting ) traits.push({

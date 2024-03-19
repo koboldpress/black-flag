@@ -9,6 +9,7 @@ const { ColorField } = foundry.data.fields;
  */
 export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "class",
@@ -21,6 +22,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			color: new ColorField()
@@ -31,6 +33,17 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Number of levels of this class a character has.
+	 * @type {number}
+	 */
+	get levels() {
+		return this.parent.actor?.system.progression?.classes[this.parent.identifier]?.levels ?? 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	get traits() {
 		const traits = [];
 		if ( this.hitDie ) traits.push({

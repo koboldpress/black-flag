@@ -1,20 +1,26 @@
 <section class="spellcasting-sources">
 	{{#each system.spellcasting.sources}}
-		<div class="source-details" style="--item-color: {{document.accentColor}}">
-			<h3>{{document.name}}</h3>
+		<div class="source-details" style="--item-color: {{ document.accentColor }}">
+			<h3>{{ document.name }}</h3>
 			<ul>
 				<li>
-					<h4>{{localize "BF.Ability.Label[one]"}}</h4>
-					<span>{{lookup @root.CONFIG.abilities.localizedAbbreviations ability}}</span>
+					<h4>{{ localize "BF.Ability.Label[one]" }}</h4>
+					<span>{{lookup @root.CONFIG.abilities.localizedAbbreviations ability }}</span>
 				</li>
 				<li>
-					<h4>{{localize "BF.Spellcasting.Attack.Abbreviation"}}</h4>
-					<span>{{blackFlag-number attack sign=true}}</span>
+					<h4>{{ localize "BF.Spellcasting.Attack.Abbreviation" }}</h4>
+					<span>{{ blackFlag-number attack sign=true }}</span>
 				</li>
 				<li>
-					<h4>{{localize "BF.Spellcasting.DC.Abbreviation"}}</h4>
-					<span>{{blackFlag-number dc}}</span>
+					<h4>{{ localize "BF.Spellcasting.DC.Abbreviation" }}</h4>
+					<span>{{ blackFlag-number dc }}</span>
 				</li>
+				{{#if prepared.max}}
+					<li>
+						<h4>{{ localize "BF.Spell.Preparation.Prepared" }}</h4>
+						<span>{{ blackFlag-number prepared.value }} / {{ blackFlag-number prepared.max }}</span>
+					</li>
+				{{/if}}
 			</ul>
 		</div>
 	{{/each}}
