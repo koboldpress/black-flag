@@ -92,12 +92,12 @@ export default class BasicRoll extends Roll {
 	/**
 	 * Construct and perform a Base Roll through the standard workflow.
 	 * @param {BasicRollProcessConfiguration} [config={}] - Roll configuration data.
-	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @param {BasicRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
 	static async build(config={}, dialog={}, message={}) {
-		this.applyKeybindings(config, message, dialog);
+		this.applyKeybindings(config, dialog, message);
 
 		let rolls;
 		if ( dialog.configure !== false ) {

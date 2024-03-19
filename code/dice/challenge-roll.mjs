@@ -76,8 +76,8 @@ export default class ChallengeRoll extends BasicRoll {
 	/**
 	 * Construct and perform a Challenge Roll through the standard workflow.
 	 * @param {ChallengeRollProcessConfiguration} [config={}] - Roll configuration data.
-	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @param {ChallengeRollDialogConfiguration} [dialog={}] - Data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
 	static async build(config={}, dialog={}, message={}) {
@@ -86,7 +86,7 @@ export default class ChallengeRoll extends BasicRoll {
 			roll.options.criticalSuccess ??= CONFIG.Dice.ChallengeDie.CRITICAL_SUCCESS_TOTAL;
 			roll.options.criticalFailure ??= CONFIG.Dice.ChallengeDie.CRITICAL_FAILURE_TOTAL;
 		}
-		return super.build(config, message, dialog);
+		return super.build(config, dialog, message);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
