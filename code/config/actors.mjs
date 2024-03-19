@@ -161,7 +161,9 @@ localizeConfig(movementTypes);
 export const movementTags = {
 	hover: {
 		label: "BF.Movement.Tag.Hover.Label",
-		display: "BF.Movement.Tag.Hover.Display"
+		display: "BF.Movement.Tag.Hover.Display",
+		type: "associated",
+		association: "fly"
 	}
 };
 
@@ -251,7 +253,9 @@ localizeConfig(senses);
 export const senseTags = {
 	cantSense: {
 		label: "BF.Senses.Tag.CantSense.Label",
-		display: "BF.Senses.Tag.CantSense.Display"
+		display: "BF.Senses.Tag.CantSense.Display",
+		type: "associated",
+		association: "keensense"
 	}
 };
 

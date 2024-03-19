@@ -143,31 +143,31 @@ export const itemProperties = {
 
 	// Weapon
 	ammunition: {
-		label: "BF.Weapon.Property.Ammunition.Label"
+		label: "BF.Weapon.Property.Ammunition"
 	},
 	finesse: {
-		label: "BF.Weapon.Property.Finesse.Label"
+		label: "BF.Weapon.Property.Finesse"
 	},
 	heavy: {
-		label: "BF.Weapon.Property.Heavy.Label"
+		label: "BF.Weapon.Property.Heavy"
 	},
 	light: {
-		label: "BF.Weapon.Property.Light.Label"
+		label: "BF.Weapon.Property.Light"
 	},
 	loading: {
-		label: "BF.Weapon.Property.Loading.Label"
+		label: "BF.Weapon.Property.Loading"
 	},
 	reach: {
-		label: "BF.Weapon.Property.Reach.Label"
+		label: "BF.Weapon.Property.Reach"
 	},
 	thrown: {
-		label: "BF.Weapon.Property.Thrown.Label"
+		label: "BF.Weapon.Property.Thrown"
 	},
 	twoHanded: {
-		label: "BF.Weapon.Property.TwoHanded.Label"
+		label: "BF.Weapon.Property.TwoHanded"
 	},
 	versatile: {
-		label: "BF.Weapon.Property.Versatile.Label"
+		label: "BF.Weapon.Property.Versatile"
 	}
 };
 localizeConfig(itemProperties);

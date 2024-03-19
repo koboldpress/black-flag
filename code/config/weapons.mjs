@@ -6,7 +6,7 @@ import { localizeConfig } from "../utils/_module.mjs";
  */
 export const weapons = {
 	simple: {
-		label: "BF.Weapon.Category.Simple.Label",
+		label: "BF.Weapon.Category.Simple",
 		localization: "BF.Weapon.Category.Simple",
 		children: {
 			// Simple Melee
@@ -66,7 +66,7 @@ export const weapons = {
 		}
 	},
 	martial: {
-		label: "BF.Weapon.Category.Martial.Label",
+		label: "BF.Weapon.Category.Martial",
 		localization: "BF.Weapon.Category.Martial",
 		children: {
 			// Martial Melee
@@ -146,25 +146,25 @@ localizeConfig(weapons.martial.children);
  */
 export const weaponOptions = {
 	bash: {
-		label: "BF.Weapon.Option.Bash.Label"
+		label: "BF.Weapon.Option.Bash"
 	},
 	disarm: {
-		label: "BF.Weapon.Option.Disarm.Label"
+		label: "BF.Weapon.Option.Disarm"
 	},
 	hamstring: {
-		label: "BF.Weapon.Option.Hamstring.Label"
+		label: "BF.Weapon.Option.Hamstring"
 	},
 	pinningShot: {
-		label: "BF.Weapon.Option.PinningShot.Label"
+		label: "BF.Weapon.Option.PinningShot"
 	},
 	pull: {
-		label: "BF.Weapon.Option.Pull.Label"
+		label: "BF.Weapon.Option.Pull"
 	},
 	ricochetShot: {
-		label: "BF.Weapon.Option.RicochetShot.Label"
+		label: "BF.Weapon.Option.RicochetShot"
 	},
 	trip: {
-		label: "BF.Weapon.Option.Trip.Label"
+		label: "BF.Weapon.Option.Trip"
 	}
 };
 

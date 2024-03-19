@@ -52,8 +52,8 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 
 	prepareDerivedLanguages() {
 		const languages = this.proficiencies.languages;
-		const entries = Array.from(languages.value).map(v => Trait.keyLabel(v, { trait: "languages" }));
-		entries.push(...languages.custom);
+		const entries = new Map(Array.from(languages.value).map(v => [v, Trait.keyLabel(v, { trait: "languages" })]));
+		languages.custom.forEach(c => entries.set(c, c));
 		const extras = Object.entries(languages.communication).reduce((arr, [key, data]) => {
 			const label = CONFIG.BlackFlag.rangedCommunication[key]?.label;
 			if ( label && data.range ) arr.push(

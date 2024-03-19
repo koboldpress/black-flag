@@ -190,11 +190,13 @@ localizeConfig(languages, { flatten: true, keepCategories: c => !!c.label });
 export const languageTags = {
 	cantSpeak: {
 		label: "BF.Language.Tag.CantSpeak.Label",
-		formatter: "BF.Language.Tag.CantSpeak.Formatter"
+		display: "BF.Language.Tag.CantSpeak.Formatter",
+		type: "formatter"
 	},
 	knownInLife: {
 		label: "BF.Language.Tag.KnownInLife.Label",
-		display: "BF.Language.Tag.KnownInLife.Display"
+		display: "BF.Language.Tag.KnownInLife.Display",
+		type: "inline"
 	}
 };
 

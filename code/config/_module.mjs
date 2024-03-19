@@ -60,8 +60,12 @@ import * as weapons from "./weapons.mjs";
  * Configuration information for tags.
  *
  * @typedef {LabeledConfiguration} TraitTagConfiguration
- * @property {string} [display] - Localization key for tags that will be displayed as part of the trait list.
- * @property {string} [formatter] - Localization key for tags that cause the trait list to be wrapped.
+ * @property {string} display - Localization key used for displaying in list using whatever mode is defined.
+ * @property {"appended"|associated"|"formatter"|"inline"} type - How the trait is displayed in list. Appended will be
+ *                              added to a parenthetical after the list, associated type will display grouped with
+ *                              a trait entry in a parenthetical, formatter will wrap the trait list in a string,
+ *                              and inline will display in the trait list after the normal entries.
+ * @property {string} [association] - Key of a trait that this tag will be associated with for the "association" type.
  */
 
 export default {

@@ -3,26 +3,49 @@ import { flattenChildren, sortObjectEntries } from "./object.mjs";
 /**
  * Create a formatted list including tags like for languages, sense, and movement.
  * @param {object} config
- * @param {string[]|Set<string>} [config.entries=[]]
- * @param {string[]|Set<string>} [config.extras=[]]
- * @param {string[]|Set<string>} [config.tags=[]]
- * @param {TraitTagConfiguration} config.tagDefinitions
- * @param {boolean} [config.inlineTags=false] - Include display tags within entries list.
+ * @param {Map<string, string>} [config.entries] - Mapping of keys & localized entries that make up the main list.
+ * @param {string[]|Set<string>} [config.extras=[]] - Additional pre-localized values that will be added to the end.
+ * @param {string[]|Set<string>} [config.tags=[]] - Tags that modify the list.
+ * @param {TraitTagConfiguration} config.tagDefinitions - Configuration information for provided tags.
  * @param {string} [config.listType="unit"] - Type of list to use for entries.
  * @returns {string}
  */
-export function formatTaggedList({
-	entries=[], extras=[], tags=[], tagDefinitions, inlineTags=false, listType="unit"
-}) {
-	entries = Array.from(entries);
+export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDefinitions, listType="unit" }) {
+	console.log(entries, extras, tags);
 
 	const formatters = [];
 	const appendedTags = [];
+	const associatedTags = {};
+	const inlineTags = [];
 	for ( const tag of tags ) {
 		const config = tagDefinitions[tag];
-		if ( config?.formatter ) formatters.push(config.formatter);
-		else (inlineTags ? entries : appendedTags).push(game.i18n.localize(config?.display ?? tag));
+		const localized = game.i18n.localize(config?.display ?? tag);
+		switch ( config.type ) {
+			case "appendedTags":
+				appendedTags.push(localized);
+			case "associated":
+				if ( entries.has(config.association) ) {
+					associatedTags[config.association] ??= [];
+					associatedTags[config.association].push(localized);
+				} else {
+					appendedTags.push(localized);
+				}
+				break;
+			case "formatter":
+				formatters.push(config.display ?? tag);
+				break;
+			case "inline":
+			default:
+				inlineTags.push(localized);
+		}
 	}
+
+	// Iterate over values in entries, added associated tags as necessary
+	entries = Array.from(entries.entries()).map(([key, value]) => {
+		if ( !associatedTags[key] ) return value;
+		return `${value} (${game.i18n.getListFormatter({ style: "short" }).format(associatedTags[key])})`;
+	});
+	entries.push(...inlineTags);
 
 	let label = game.i18n.getListFormatter({ style: "short", type: listType }).format(entries);
 	if ( appendedTags.length ) label += ` (${game.i18n.getListFormatter({ style: "short" }).format(appendedTags)})`;

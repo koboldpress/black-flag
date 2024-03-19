@@ -80,7 +80,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
 
 		// Calculate each special movement type using base speed
-		const entries = [];
+		const entries = new Map();
 		for ( const [type, formula] of Object.entries(movement.types) ) {
 			let speed;
 			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) speed = 0;
@@ -89,8 +89,8 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 
 			const label = CONFIG.BlackFlag.movementTypes.localized[type];
 			if ( speed && label ) {
-				if ( type === "walk" ) entries.push(numberFormat(speed, { unit: "foot" }));
-				else entries.push(`${label.toLowerCase()} ${numberFormat(speed, { unit: "foot" })}`);
+				if ( type === "walk" ) entries.set(type, numberFormat(speed, { unit: "foot" }));
+				else entries.set(type, `${label.toLowerCase()} ${numberFormat(speed, { unit: "foot" })}`);
 			}
 		}
 
@@ -118,12 +118,12 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		// Calculate each special sense type
-		const entries = [];
+		const entries = new Map();
 		for ( const [type, formula] of Object.entries(senses.types) ) {
 			const range = simplifyBonus(formula, rollData);
 			senses.types[type] = range;
 			const label = CONFIG.BlackFlag.senses.localized[type];
-			if ( range && label ) entries.push(`${label} ${numberFormat(range, { unit: "foot" })}`);
+			if ( range && label ) entries.set(type, `${label} ${numberFormat(range, { unit: "foot" })}`);
 		}
 
 		senses.label = formatTaggedList({ entries, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags });
