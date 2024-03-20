@@ -3,9 +3,50 @@
   "name": "Cone of Cold",
   "type": "spell",
   "_id": "HqhvoepCCJSfLoOr",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/water/projectile-bolts-salvo-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9YKfkRMqEnkk1Suz": {
+        "type": "savingThrow",
+        "_id": "9YKfkRMqEnkk1Suz",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 8,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "cold"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +71,14 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a small crystal or glass cone"
       }
     },
     "duration": {
@@ -43,14 +89,18 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cone",
+        "size": "60"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
-    "range": {},
+    "range": {
+      "units": "self"
+    },
     "circle": [
       "arcane"
     ],
@@ -64,10 +114,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997622421,
-    "modifiedTime": 1709408321248,
+    "modifiedTime": 1710907201961,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!HqhvoepCCJSfLoOr"

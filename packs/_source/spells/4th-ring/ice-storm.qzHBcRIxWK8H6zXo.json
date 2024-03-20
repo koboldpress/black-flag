@@ -3,9 +3,57 @@
   "name": "Ice Storm",
   "type": "spell",
   "_id": "qzHBcRIxWK8H6zXo",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/water/projectile-icecicles-salvo.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "s0a79ATAyNhVjJ45": {
+        "type": "savingThrow",
+        "_id": "s0a79ATAyNhVjJ45",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "bludgeoning"
+              },
+              {
+                "number": 4,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "cold"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,9 +78,13 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a pinch of dust and a few drops of water"
       }
     },
     "duration": {
@@ -43,15 +95,19 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "cylinder",
+        "size": "20",
+        "height": "40"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "300"
     },
     "circle": [
       "arcane",
@@ -67,10 +123,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997830635,
-    "modifiedTime": 1709408731734,
+    "modifiedTime": 1710907024878,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!qzHBcRIxWK8H6zXo"

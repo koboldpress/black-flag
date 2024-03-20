@@ -3,9 +3,27 @@
   "name": "Death Ward",
   "type": "spell",
   "_id": "4e5kuXZgzEHtxSMj",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/death/undead-skeleton-worn-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "bdVQbrlr0RcDbWGH": {
+        "type": "utility",
+        "_id": "bdVQbrlr0RcDbWGH",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,17 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "8"
     },
     "tags": [],
     "target": {
@@ -47,10 +69,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
-    "range": {},
+    "range": {
+      "units": "touch"
+    },
     "circle": [
       "divine"
     ],
@@ -64,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997646694,
-    "modifiedTime": 1709408319108,
+    "modifiedTime": 1710906906579,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!4e5kuXZgzEHtxSMj"

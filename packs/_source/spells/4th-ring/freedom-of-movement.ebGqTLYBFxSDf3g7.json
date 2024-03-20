@@ -3,9 +3,27 @@
   "name": "Freedom of Movement",
   "type": "spell",
   "_id": "ebGqTLYBFxSDf3g7",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/movement/pinwheel-turning-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "Jn9mQWTFPXHiW3iD": {
+        "type": "utility",
+        "_id": "Jn9mQWTFPXHiW3iD",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,13 +48,19 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "cost": null
+        "cost": null,
+        "description": "a leather strap, bound around the arm or a similar appendage"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "target": {
@@ -47,11 +71,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "touch"
     },
     "circle": [
       "arcane",
@@ -68,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997764100,
-    "modifiedTime": 1709408721771,
+    "modifiedTime": 1710906945677,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ebGqTLYBFxSDf3g7"

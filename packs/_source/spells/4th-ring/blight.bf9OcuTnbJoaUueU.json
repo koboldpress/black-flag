@@ -3,9 +3,50 @@
   "name": "Blight",
   "type": "spell",
   "_id": "bf9OcuTnbJoaUueU",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/nature/root-vine-thorned-fire-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "xc307O9TScMkFRRj": {
+        "type": "savingThrow",
+        "_id": "xc307O9TScMkFRRj",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 8,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "necrotic"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
@@ -47,11 +91,13 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1"
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "30"
     },
     "circle": [
       "divine",
@@ -67,10 +113,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997553781,
-    "modifiedTime": 1709408697443,
+    "modifiedTime": 1710906827609,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!bf9OcuTnbJoaUueU"

@@ -3,9 +3,50 @@
   "name": "Cloudkill",
   "type": "spell",
   "_id": "SWHhgfmpmywT2kJo",
-  "img": "systems/black-flag/artwork/types/spell.svg",
+  "img": "icons/magic/air/fog-gas-smoke-swirling-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "E6sxmNFcd2lGFlNu": {
+        "type": "savingThrow",
+        "_id": "E6sxmNFcd2lGFlNu",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "type": "poison"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -30,28 +71,37 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "cost": null
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": ""
       }
     },
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120"
     },
     "circle": [
       "arcane",
@@ -67,10 +117,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.8.016",
     "coreVersion": "11.315",
     "createdTime": 1706997580398,
-    "modifiedTime": 1709408705383,
+    "modifiedTime": 1710907134371,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SWHhgfmpmywT2kJo"
