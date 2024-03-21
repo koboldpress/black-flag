@@ -471,7 +471,47 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedCharacterCreationWarnings() {
+	/** @inheritDoc */
+	prepareNotifications() {
+		this.prepareCharacterCreationWarnings();
+
+		// Advancement warnings
+		const anyLevel = { levels: { character: 0, class: 0 } };
+		for ( const data of [anyLevel, ...Object.values(this.progression.levels)] ) {
+			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
+				advancement.prepareWarnings(data.levels, this.parent.notifications);
+			}
+		}
+
+		// Notification for spells to learn
+		const learnedFlag = this.parent.getFlag("black-flag", "spellsLearned");
+		if ( !learnedFlag?.learned ) {
+			let needsToLearn = false;
+			top: for ( const source of Object.values(this.spellcasting.sources) ) {
+				if ( (source.spellcasting.spells.mode === "all") && (learnedFlag?.maxRing < this.spellcasting.maxRing) ) {
+					needsToLearn = true;
+					break;
+				}
+				for ( const type of ["cantrips", "rituals", "spells"] ) {
+					if ( source[type]?.max && (source[type].value < source[type].max) ) {
+						needsToLearn = true;
+						break top;
+					}
+				}
+			}
+			if ( needsToLearn ) this.parent.notifications.set("spells-to-learn", {
+				level: "info", section: "spellcasting",
+				message: game.i18n.localize("BF.Spellbook.Notification.LearningAvailable")
+			});
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare warnings associated with incomplete character creation.
+	 */
+	prepareCharacterCreationWarnings() {
 		let order = 0;
 
 		// 1. Choose Class
@@ -528,17 +568,6 @@ export default class PCData extends ActorDataModel.mixin(
 				level: "warn", section: "progression", document: data.document.id, order, message
 			});
 			data.document.notifications.set("no-subclass", { level: "warn", category: "class", order, message });
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedAdvancementWarnings() {
-		const anyLevel = { levels: { character: 0, class: 0 } };
-		for ( const data of [anyLevel, ...Object.values(this.progression.levels)] ) {
-			for ( const advancement of this.parent.advancementForLevel(data.levels.character) ) {
-				advancement.prepareWarnings(data.levels, this.parent.notifications);
-			}
 		}
 	}
 
@@ -685,7 +714,7 @@ export default class PCData extends ActorDataModel.mixin(
 		// Add new progression data
 		await this.parent.update(
 			{ [`system.progression.levels.${levels.character}.class`]: existingClass },
-			{ levelUp: { maxRing: this.spellcasting.maxRing, ...this.spellcasting.spells.knowable } }
+			{ blackFlag: { levelUp: true } }
 		);
 
 		// Apply advancements for the new level
@@ -721,7 +750,8 @@ export default class PCData extends ActorDataModel.mixin(
 
 		// Remove progression data for level
 		this.parent.enqueueAdvancementChange(this.parent, "update", [
-			{[`system.progression.levels.-=${this.progression.level}`]: null}, { render: false }
+			{[`system.progression.levels.-=${this.progression.level}`]: null},
+			{ render: false, blackFlag: { levelDown: true } }
 		]);
 
 		// If class has no more levels, remove it from the actor
@@ -759,5 +789,12 @@ export default class PCData extends ActorDataModel.mixin(
 				foundry.utils.setProperty(changed, "system.attributes.death.status", "dying");
 			}
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async _onUpdateSpellsLearned(changed, options, userId) {
+		if ( !options.blackFlag?.levelUp || (game.user.id !== userId) ) return;
+		this.parent.setFlag("black-flag", "spellsLearned.learned", false);
 	}
 }

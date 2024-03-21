@@ -16,6 +16,13 @@ export default class ActorDataModel extends BaseDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare any final notifications. Called at the very end of the data preparation process.
+	 */
+	prepareNotifications() {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

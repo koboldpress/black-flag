@@ -134,9 +134,6 @@
 				{{/each}}
 			</tbody>
 		{{/each}}
-		<tfoot>
-			<!-- TODO: Preparation details and whatnot in footer -->
-		</tfoot>
 	</table>
 </blackFlag-inventory>
 
@@ -144,5 +141,6 @@
 	<button type="button" class="light-button" data-action="manage-spells">
 		<i class="fa-solid fa-book" inert></i>
 		{{localize "BF.Spellbook.Action.ManageSpells"}}
+		{{ blackFlag-notificationBadge actor key="spells-to-learn" }}
 	</button>
 </div>

@@ -314,6 +314,9 @@ export default class SpellManager extends DocumentSheet {
 		const spellData = this.slots.flatMap(slot =>
 			Array.from(slot.selected ?? []).map(uuid => this._prepareSpellData(fromUuid(uuid), slot))
 		);
-		this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
+		await this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
+		await this.document.setFlag("black-flag", "spellsLearned", {
+			learned: true, maxRing: this.document.system.spellcasting.maxRing
+		});
 	}
 }

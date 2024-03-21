@@ -43,10 +43,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareData() {
 		this.notifications = new NotificationsCollection();
 		super.prepareData();
 		this.items.forEach(i => i.system.prepareFinalData?.());
+		this.system.prepareNotifications?.();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
