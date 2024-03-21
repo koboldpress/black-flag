@@ -38,7 +38,8 @@ export default class SpellManager extends DocumentSheet {
 					type: "circle",
 					mode: "all",
 					ring,
-					source: source.document
+					source: source.document,
+					spellcasting: source.spellcasting
 				});
 			}
 		}
