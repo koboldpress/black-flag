@@ -14,6 +14,7 @@ const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.d
  */
 export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate, PropertiesTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "armor",
@@ -26,6 +27,7 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			description: new SchemaField({
@@ -60,17 +62,19 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static proficiencyCategory = "armor";
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get traits() {
 		const traits = [
 			this.type.category === "shield"
 				? `+${numberFormat(this.armor.value)}`
 				: `${game.i18n.localize("BF.ArmorClass.Abbreviation")}: ${
 					numberFormat(this.armor.value)} ${this.modifierHint(false)}`,
-			...this.properties.map(p => this.validProperties[p]?.label)
+			...Array.from(this.properties).map(p => this.validProperties[p]?.label)
 		];
 		// TODO: Display required strength with cumbersome property
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
@@ -79,6 +83,7 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.armor;
 	}
@@ -129,8 +134,10 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareFinalProficiencyWarnings() {
-		if ( this.equipped && (this.proficient === false) ) {
+		if ( !this.equipped ) return;
+		if ( this.proficient === false ) {
 			const message = game.i18n.format("BF.Armor.Notification.NotProficient", { type: game.i18n.localize(
 				`BF.Armor.${this.type.category === "shield" ? "Category.Shield" : "Label"}[one]`
 			).toLowerCase() });
@@ -143,6 +150,15 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 				}], note: {
 					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
 					text: game.i18n.format("BF.Armor.Notification.NotProficientNote", { name: this.parent.name })
+				}
+			});
+		}
+		if ( this.properties.has("noisy") ) {
+			this.parent.actor.system.modifiers.push({
+				type: "note", filter: [{ k: "type", v: "skill-check" }, { k: "skill", v: "stealth" }],
+				note: {
+					rollMode: CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE,
+					text: game.i18n.localize("BF.Armor.Notification.Noisy")
 				}
 			});
 		}
