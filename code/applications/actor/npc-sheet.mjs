@@ -30,10 +30,6 @@ export default class NPCSheet extends BaseActorSheet {
 			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
 				context.system.traits.type.label}`
 		};
-		if ( context.system.traits.type.tags.size ) context.labels.sizeAndType += ` (${
-			game.i18n.getListFormatter({ style: "short" }).format(Array.from(context.system.traits.type.tags)
-				.map(t => CONFIG.BlackFlag.creatureTags.localized[t]?.toLowerCase()).filter(f => f))
-		})`;
 
 		context.placeholders = {
 			perception: 10 + (context.system.abilities.wisdom?.mod ?? 0),

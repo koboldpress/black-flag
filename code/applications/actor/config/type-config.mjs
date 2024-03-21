@@ -29,6 +29,7 @@ export default class TypeConfig extends BaseConfig {
 	async getData(options) {
 		const context = await super.getData(options);
 		const type = context.source.traits.type ?? {};
+		context.custom = type.custom;
 		context.showSwarm = Object.hasOwn(this.document.system.traits.type, "swarm");
 		context.tagOptions = new SelectChoices(CONFIG.BlackFlag.creatureTags, new Set(type.tags)).localize().sort();
 		return context;
@@ -39,10 +40,40 @@ export default class TypeConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
+
+		html.querySelector('[data-action="add"]').addEventListener("click", event =>
+			this.submit({ updateData: { newCustom: true } })
+		);
+
+		for ( const control of html.querySelectorAll('[data-action="delete"]') ) {
+			control.addEventListener("click", event =>
+				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
+			);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	_getSubmitData(...args) {
 		const data = foundry.utils.expandObject(super._getSubmitData(...args));
+		console.log(foundry.utils.deepClone(data));
 		data.type ??= {};
 		data.type.tags = filteredKeys(data.type?.tags ?? {});
-		return { "system.traits": data };
+
+		const custom = Array.from(Object.values(data.custom ?? {}));
+		if ( data.deleteCustom !== undefined ) custom.splice(data.deleteCustom, 1);
+		if ( data.newCustom ) custom.push("");
+
+		return { "system.traits": {
+			size: data.size,
+			type: {
+				...data.type,
+				custom
+			}
+		} };
 	}
 }

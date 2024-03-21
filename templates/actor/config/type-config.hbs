@@ -1,32 +1,56 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{localize "BF.CreatureSizeAndType.Label"}}</legend>
+		<legend>{{ localize "BF.CreatureSizeAndType.Label" }}</legend>
 		<label>
-			<span>{{localize "BF.Size.Label"}}</span>
+			<span>{{ localize "BF.Size.Label" }}</span>
 			<select name="size">
-				{{selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true blank=""}}
+				{{ selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true blank="" }}
 			</select>
 		</label>
 		{{#if showSwarm}}
 			<label>
 				<span>
-					{{localize "BF.CreatureType.Swarm.Label"}}
+					{{ localize "BF.CreatureType.Swarm.Label" }}
 					<i class="hintIcon" data-tooltip="BF.CreatureType.Swarm.Hint"></i>
 				</span>
 				<select name="type.swarm">
-					{{selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank=""}}
+					{{ selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank="" }}
 				</select>
 			</label>
 		{{/if}}
 		<label>
-			<span>{{localize "BF.CreatureType.Label"}}</span>
+			<span>{{ localize "BF.CreatureType.Label" }}</span>
 			<select name="type.value">
-				{{selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank=""}}
+				{{ selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank="" }}
 			</select>
 		</label>
 	</fieldset>
 	<fieldset>
-		<legend>{{localize "BF.CreatureType.Tag.Label"}}</legend>
-		{{> "blackFlag.trait-list" choices=tagOptions prefix="type.tags"}}
+		<legend>{{ localize "BF.CreatureType.Tag.Label" }}</legend>
+		{{> "blackFlag.trait-list" choices=tagOptions prefix="type.tags" }}
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.CreatureType.Custom.Label" }}</legend>
+		<ul class="configuration-list">
+			{{#each custom}}
+				<li>
+					<div class="item-name activity-name">
+						<input type="text" name="custom.{{ @index }}" value="{{ this }}">
+					</div>
+					<div class="item-controls">
+						<button class="link-button" type="button" data-action="delete" data-index="{{ @index }}"
+						        data-tooltip="BF.CreatureType.Custom.Delete"
+										aria-label="{{ localize 'BF.CreatureType.Custom.Delete' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</div>
+				</li>
+			{{/each}}
+			<li class="add-control">
+				<button class="link-button" type="button" data-action="add">
+					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.CreatureType.Custom.Add" }}
+				</button>
+			</li>
+		</ul>
 	</fieldset>
 </form>

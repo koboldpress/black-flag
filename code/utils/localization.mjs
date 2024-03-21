@@ -11,8 +11,6 @@ import { flattenChildren, sortObjectEntries } from "./object.mjs";
  * @returns {string}
  */
 export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDefinitions, listType="unit" }) {
-	console.log(entries, extras, tags);
-
 	const formatters = [];
 	const appendedTags = [];
 	const associatedTags = {};
