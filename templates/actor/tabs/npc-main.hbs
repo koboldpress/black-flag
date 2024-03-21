@@ -72,7 +72,7 @@
 				<input type="number" name="system.attributes.stealth" value="{{ source.attributes.stealth }}"
 					placeholder="{{ placeholders.stealth }}">
 			{{else}}
-				<span>{{ blackFlag-number system.attributes.stealth }}</span>
+				<span>{{ stealthLabel }}</span>
 			{{/if}}
 		</label>
 		{{#if traits.vulnerable}}

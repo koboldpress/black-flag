@@ -157,16 +157,13 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedArmorClass() {
-		this.computeArmorClass();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Calculate the final values for various attributes.
 	 */
 	prepareDerivedAttributes() {
+		// Armor Class
+		this.computeArmorClass();
+
 		// Hit Points
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
@@ -180,6 +177,10 @@ export default class NPCData extends ActorDataModel.mixin(
 		// Perception & Stealth
 		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
 		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);
+		if ( this.attributes.ac.equippedArmor?.system.properties.has("noisy") ) {
+			this.attributes.baseStealth = this.attributes.stealth;
+			this.attributes.stealth -= 5;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

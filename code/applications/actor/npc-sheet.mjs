@@ -1,3 +1,4 @@
+import { numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
@@ -35,6 +36,11 @@ export default class NPCSheet extends BaseActorSheet {
 			perception: 10 + (context.system.abilities.wisdom?.mod ?? 0),
 			stealth: 10 + (context.system.abilities.dexterity?.mod ?? 0)
 		};
+
+		context.stealthLabel = numberFormat(context.system.attributes.stealth);
+		if ( context.system.attributes.baseStealth ) context.stealthLabel = game.i18n.format("BF.Armor.StealthReduction", {
+			reduced: context.stealthLabel, full: numberFormat(context.system.attributes.baseStealth)
+		});
 
 		return context;
 	}
