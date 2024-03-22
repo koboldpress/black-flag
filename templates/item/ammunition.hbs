@@ -2,32 +2,32 @@
 
 	<header class="sheet-header">
 		<figure class="icon">
-			<img src="{{document.img}}" data-edit="img">
+			<img src="{{ document.img }}" data-edit="img">
 		</figure>
 		<h1>
-			<input type="text" name="name" value="{{document.name}}">
+			<input type="text" name="name" value="{{ document.name }}">
 		</h1>
 	</header>
 
 	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
-		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
-		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
+		<a data-tab="details">{{ localize "BF.Sheet.Tab.Details" }}</a>
 	</nav>
 
 	<div class="sheet-body">
 		<div class="tab" data-group="primary" data-tab="description">
 			<section>
-				{{> "blackFlag.equipment-categories"}}
-				{{> "blackFlag.equipment-description"}}
-				{{> "blackFlag.equipment-source"}}
+				{{> "blackFlag.equipment-categories" }}
+				{{> "blackFlag.equipment-description" }}
+				{{> "blackFlag.equipment-source" }}
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
 			<fieldset class="properties checkbox-list">
-				<legend>{{localize "BF.Property.Label[other]"}}</legend>
+				<legend>{{ localize "BF.Property.Label[other]" }}</legend>
 				{{#each properties}}
 					<label>
-						<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
+						<input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
 					</label>
 				{{/each}}
 			</fieldset>

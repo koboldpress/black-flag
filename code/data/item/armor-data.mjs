@@ -1,18 +1,22 @@
 import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Armor items.
+ * @mixes {DescriptionTemplate}
  * @mixes {ProficiencyTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  */
-export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, PhysicalTemplate, PropertiesTemplate) {
+export default class ArmorData extends ItemDataModel.mixin(
+	DescriptionTemplate, ProficiencyTemplate, PhysicalTemplate, PropertiesTemplate
+) {
 
 	/** @inheritDoc */
 	static get metadata() {
@@ -30,10 +34,6 @@ export default class ArmorData extends ItemDataModel.mixin(ProficiencyTemplate, 
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			type: new SchemaField({
 				category: new StringField({label: "BF.Equipment.Category.Label"}),
 				base: new StringField({label: "BF.Equipment.Base.Label"})

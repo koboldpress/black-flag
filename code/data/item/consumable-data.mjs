@@ -1,17 +1,22 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import UsesField from "../fields/uses-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
-const { BooleanField, HTMLField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Consumable items.
  * @mixes {ActivitiesTemplate}
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  */
-export default class ConsumableData extends ItemDataModel.mixin(ActivitiesTemplate, PhysicalTemplate) {
+export default class ConsumableData extends ItemDataModel.mixin(
+	ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate
+) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "consumable",
@@ -24,12 +29,9 @@ export default class ConsumableData extends ItemDataModel.mixin(ActivitiesTempla
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			type: new SchemaField({
 				category: new StringField({label: "BF.Equipment.Category.Label"})
 			}),
@@ -43,6 +45,7 @@ export default class ConsumableData extends ItemDataModel.mixin(ActivitiesTempla
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.consumableCategories;
 	}

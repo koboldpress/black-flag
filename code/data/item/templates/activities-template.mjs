@@ -7,6 +7,7 @@ import UsesField from "../../fields/uses-field.mjs";
  */
 export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			activities: new ActivityField(),

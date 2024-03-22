@@ -1,16 +1,21 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Ammunition items.
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  */
-export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate, PropertiesTemplate) {
+export default class AmmunitionData extends ItemDataModel.mixin(
+	DescriptionTemplate, PhysicalTemplate, PropertiesTemplate
+) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "ammunition",
@@ -23,12 +28,9 @@ export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			type: new SchemaField({
 				category: new StringField({label: "BF.Equipment.Category.Label"})
 			})
@@ -40,6 +42,7 @@ export default class AmmunitionData extends ItemDataModel.mixin(PhysicalTemplate
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.ammunition;
 	}

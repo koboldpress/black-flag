@@ -1,11 +1,12 @@
 import log from "../../../utils/logging.mjs";
-import { AdvancementField } from "../../fields/_module.mjs";
+import { AdvancementField } from "../../fields/advancement-field.mjs";
 
 /**
  * Data definition template for items with advancement.
  */
 export default class AdvancementTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			advancement: new AdvancementField()

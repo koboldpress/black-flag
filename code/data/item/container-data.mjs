@@ -1,18 +1,23 @@
 import ContainerSheet from "../../applications/item/container-sheet.mjs";
 import { convertWeight } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Container items.
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  */
-export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate, PropertiesTemplate) {
+export default class ContainerData extends ItemDataModel.mixin(
+	DescriptionTemplate, PhysicalTemplate, PropertiesTemplate
+) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "container",
@@ -29,12 +34,9 @@ export default class ContainerData extends ItemDataModel.mixin(PhysicalTemplate,
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			capacity: new SchemaField({
 				count: new NumberField({min: 0, integer: true, label: "BF.Container.Capacity.Number.Label"}),
 				volume: new SchemaField({

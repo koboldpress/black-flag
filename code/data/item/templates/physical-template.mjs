@@ -18,6 +18,8 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
  * @property {string} weight.units - Units used to measure item's weight.
  */
 export default class PhysicalTemplate extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			attunement: new SchemaField({

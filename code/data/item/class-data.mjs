@@ -1,13 +1,17 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 
 const { ColorField } = foundry.data.fields;
 
 /**
  * Data definition for Class items.
+ * @mixes {AdvancementTemplate}
+ * @mixes {ConceptTemplate}
+ * @mixes {DescriptionTemplate}
  */
-export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
+export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate, DescriptionTemplate) {
 
 	/** @inheritDoc */
 	static get metadata() {

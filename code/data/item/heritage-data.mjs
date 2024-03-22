@@ -1,11 +1,19 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 
 /**
  * Data definition for Background items.
+ * @mixes {AdvancementTemplate}
+ * @mixes {ConceptTemplate}
+ * @mixes {DescriptionTemplate}
  */
-export default class HeritageData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
+export default class HeritageData extends ItemDataModel.mixin(
+	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+) {
+
+	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
 			type: "heritage",

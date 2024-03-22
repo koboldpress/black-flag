@@ -2,13 +2,19 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import { IdentifierField } from "../fields/_module.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import ConceptTemplate from "./templates/concept-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 
 const { SchemaField } = foundry.data.fields;
 
 /**
  * Data definition for Subclass items.
+ * @mixes {AdvancementTemplate}
+ * @mixes {ConceptTemplate}
+ * @mixes {DescriptionTemplate}
  */
-export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate) {
+export default class SubclassData extends ItemDataModel.mixin(
+	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+) {
 
 	/** @inheritDoc */
 	static get metadata() {

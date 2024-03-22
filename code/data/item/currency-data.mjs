@@ -1,16 +1,19 @@
 import CurrencySheet from "../../applications/item/currency-sheet.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Currency items.
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  */
-export default class CurrencyData extends ItemDataModel.mixin(PhysicalTemplate) {
+export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "currency",
@@ -30,12 +33,9 @@ export default class CurrencyData extends ItemDataModel.mixin(PhysicalTemplate) 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			price: false,
 			weight: new SchemaField({
 				value: new NumberField({initial: 0.32}),
@@ -57,6 +57,7 @@ export default class CurrencyData extends ItemDataModel.mixin(PhysicalTemplate) 
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get equippable() {
 		return false;
 	}

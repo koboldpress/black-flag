@@ -1,24 +1,24 @@
 <figure class="poster">
-	<img src="{{item.img}}"{{#if edit}} data-edit="img"{{/if}}>
+	<img src="{{ item.img }}"{{#if edit}} data-edit="img"{{/if}}>
 	<h1 class="name">
 		{{#if edit}}
-			<input type="text" name="name" value="{{item.name}}" placeholder="{{localize 'Name'}}">
+			<input type="text" name="name" value="{{ item.name }}" placeholder="{{ localize 'Name' }}">
 		{{else}}
-			{{item.name}}
+			{{ item.name }}
 		{{/if}}
 	</h1>
 	{{#if (and edit (eq item.type "class"))}}
 		<div class="color">
-			<input name="system.color" type="color" value="{{system.color}}"
-				title="{{localize 'BF.AccentColor.Label'}}" aria-label="{{localize 'BF.AccentColor.Label'}}">
+			<input name="system.color" type="color" value="{{ system.color }}"
+			       title="{{ localize 'BF.AccentColor.Label' }}" aria-label="{{ localize 'BF.AccentColor.Label' }}">
 		</div>
 	{{/if}}
 	<div class="source">
 		{{#if edit}}
-			<input type="text" name="system.description.source" value="{{system.description.source}}"
-				placeholder="{{localize 'BF.Item.Source.Label'}}" aria-label="{{localize 'BF.Item.Source.Label'}}">
+			<input type="text" name="system.description.source.fallback" value="{{ system.description.source.fallback }}"
+			       placeholder="{{ localize 'BF.Item.Source.Label' }}" aria-label="{{ localize 'BF.Item.Source.Label' }}">
 		{{else}}
-			{{system.description.source}}
+			{{ system.description.source }}
 		{{/if}}
 	</div>
 	<div class="banner-mask" inert></div>
@@ -26,40 +26,41 @@
 <div class="info drop-target">
 	<div class="description">
 		{{#if edit}}
-			<textarea name="system.description.short">{{system.description.short}}</textarea>
+			<textarea name="system.description.short">{{ system.description.short }}</textarea>
 		{{else}}
-			<p>{{system.description.short}}</p>
+			<p>{{ system.description.short }}</p>
 		{{/if}}
 		{{#if showClassSelector}}
 			<label class="class-selector">
-				<span>{{localize "BF.Item.Type.Class[one]"}}</span>
+				<span>{{ localize "BF.Item.Type.Class[one]" }}</span>
 				<select name="system.identifier.class">
-					{{selectOptions CONFIG.registration.all.class selected=system.identifier.class labelAttr="name" blank=""}}
+					{{ selectOptions CONFIG.registration.all.class selected=system.identifier.class labelAttr="name" blank="" }}
 				</select>
 			</label>
 		{{/if}}
 		<div class="drop-area journal-link">
 			{{#if system.description.journal}}
 				<p>
-					<a class="content-link" data-uuid="{{system.description.journal}}">
-						<i class="fa-solid fa-book-open"></i>
-						{{localize "BF.Journal.Link.MoreInformation"}}
+					<a class="content-link" data-uuid="{{ system.description.journal }}">
+						<i class="fa-solid fa-book-open" inert></i>
+						{{ localize "BF.Journal.Link.MoreInformation" }}
 					</a>
 					{{#if edit}}
-						<a data-action="journal-link" data-sub-action="delete">
-							<i class="fa-solid fa-trash"></i>
-						</a>
+						<button class="link-button" type="button" data-action="journal-link" data-sub-action="delete"
+						        data-tooltip="BF.Item.Journal.Unlink" aria-label="{{ localize 'BF.Item.Journal.Unlink' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
 					{{/if}}
 				</p>
 			{{else if edit}}
-				<p class="hint">{{localize "BF.Journal.Link.DropArea"}}</p>
+				<p class="hint">{{ localize "BF.Journal.Link.DropArea" }}</p>
 			{{/if}}
 		</div>
 	</div>
 	<ul class="traits">
 		{{#each system.traits as |trait|}}
 			<li class="trait">
-				{{localize trait.label}}: {{trait.value}}
+				{{ localize trait.label }}: {{ trait.value }}
 			</li>
 		{{/each}}
 	</ul>

@@ -1,13 +1,15 @@
 import { filter, numberFormat } from "../../../utils/_module.mjs";
-import { FilterField, IdentifierField } from "../../fields/_module.mjs";
+import FilterField from "../../fields/filter-field.mjs";
+import IdentifierField from "../../fields/identifier-field.mjs";
 
-const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Feature and Talent items.
  */
 export default class FeatureTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			category: "features"
@@ -16,12 +18,9 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			identifier: new SchemaField({
 				value: new IdentifierField()
 			}),

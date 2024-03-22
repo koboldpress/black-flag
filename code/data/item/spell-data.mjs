@@ -3,16 +3,19 @@ import Proficiency from "../../documents/proficiency.mjs";
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
-import { ActivitiesTemplate } from "./templates/_module.mjs";
+import ActivitiesTemplate from "./templates/activities-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 
-const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Spell items.
  * @mixes {ActivitiesTemplate}
+ * @mixes {DescriptionTemplate}
  */
-export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
+export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "spell",
@@ -29,12 +32,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			type: new SchemaField({
 				value: new StringField({initial: "standard", label: "BF.Spell.Preparation.Label"})
 			}),
@@ -107,6 +107,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get displayActions() {
 		return this.prepared;
 	}
@@ -142,6 +143,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get traits() {
 		const traits = [
 			// TODO: Circle?
@@ -419,6 +421,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_validConsumptionTypes(types) {
 		return types.filter(t => t.key !== "spellSlots");
 	}

@@ -1,5 +1,6 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
 const { HTMLField, SchemaField, StringField } = foundry.data.fields;
@@ -7,10 +8,12 @@ const { HTMLField, SchemaField, StringField } = foundry.data.fields;
 /**
  * Data definition for Gear items.
  * @mixes {ActivitiesTemplate}
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  */
-export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, PhysicalTemplate) {
+export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "gear",
@@ -23,6 +26,7 @@ export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, Ph
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			description: new SchemaField({
@@ -40,6 +44,7 @@ export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, Ph
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.gearCategories;
 	}

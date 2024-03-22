@@ -7,6 +7,8 @@ const { BooleanField, SchemaField } = foundry.data.fields;
  * Data definition template for items with proficiency.
  */
 export default class ProficiencyTemplate extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			overrides: new SchemaField({

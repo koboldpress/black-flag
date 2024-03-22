@@ -1,12 +1,13 @@
-import { IdentifierField } from "../../fields/_module.mjs";
+import IdentifierField from "../../fields/identifier-field.mjs";
 
-const { HTMLField, SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Concept items (class, background, lineage, heritage).
  */
 export default class ConceptTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			register: true
@@ -15,13 +16,12 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.FullLabel", hint: "BF.Item.Description.FullHint"}),
 				short: new StringField({label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint"}),
-				journal: new StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+				journal: new StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"})
 			}),
 			identifier: new SchemaField({
 				value: new IdentifierField()

@@ -1,23 +1,26 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
+import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Weapon items.
  * @mixes {ActivitiesTemplate}
+ * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {ProficiencyTemplate}
  * @mixes {PropertiesTemplate}
  */
 export default class WeaponData extends ItemDataModel.mixin(
-	ActivitiesTemplate, PhysicalTemplate, ProficiencyTemplate, PropertiesTemplate
+	ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate, ProficiencyTemplate, PropertiesTemplate
 ) {
 
+	/** @inheritDoc */
 	static get metadata() {
 		return {
 			type: "weapon",
@@ -30,12 +33,9 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
-			}),
 			type: new SchemaField({
 				value: new StringField({initial: "melee", label: "BF.Weapon.Type.Label"}),
 				category: new StringField({label: "BF.Equipment.Category.Label"}),
@@ -69,6 +69,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static proficiencyCategory = "weapons";
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -91,6 +92,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get traits() {
 		const traits = [
 			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
@@ -104,12 +106,14 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.weapons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get validOptions() {
 		return CONFIG.BlackFlag.weaponOptions;
 	}

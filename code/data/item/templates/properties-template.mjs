@@ -6,6 +6,8 @@ const { SetField, StringField } = foundry.data.fields;
  * @property {Set<string>} properties  List of applied properties.
  */
 export default class PropertiesTemplate extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			properties: new SetField(new StringField(), {label: "BF.Property.Label[other]"})
