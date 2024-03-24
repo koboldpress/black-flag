@@ -26,6 +26,21 @@
 				<strong>{{ localize "BF.Spell.Circle.Label" }}</strong>: {{ restrictions.circle }}
 			</div>
 		{{/if}}
+		{{#if restrictions.ring}}
+			<div class="restriction">
+				<strong>{{ localize "BF.Spell.Ring.Label" }}</strong>: {{ restrictions.ring }}
+			</div>
+		{{/if}}
+		{{#if restrictions.maxRing}}
+			<div class="restriction">
+				<strong>{{ localize "BF.Spell.Ring.Maximum" }}</strong>: {{ restrictions.maxRing }}
+			</div>
+		{{/if}}
+		{{#if restrictions.schools}}
+			<div class="restriction">
+				<strong>{{ localize "BF.Spell.School.Label" }}</strong>: {{ restrictions.schools }}
+			</div>
+		{{/if}}
 	</div>
 	{{!--
 	<search>

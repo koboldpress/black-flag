@@ -146,6 +146,7 @@ export default class SpellManager extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return game.i18n.localize("BF.Spellbook.Title");
 	}
@@ -157,9 +158,19 @@ export default class SpellManager extends DocumentSheet {
 	/** @inheritDoc */
 	async getData(options={}) {
 		const context = await super.getData(options);
+		if ( !this.currentSlot ) return context;
 
+		const rings = CONFIG.BlackFlag.spellRings();
+		const maxRingRestriction = (this.currentSlot.type !== "cantrips") && (this.currentSlot.mode !== "all");
 		context.restrictions = {
-			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot.spellcasting.circle]
+			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot.spellcasting.circle],
+			ring: this.currentSlot.mode === "all" ? rings[this.currentSlot.ring] : null,
+			maxRing: maxRingRestriction ? rings[this.document.system.spellcasting.maxRing] : null,
+			schools: this.currentSlot.type === "spells" ? game.i18n.getListFormatter({ type: "disjunction" }).format(
+				Array.from(this.currentSlot.spellcasting.spells.schools)
+					.map(s => CONFIG.BlackFlag.spellSchools.localized[s])
+					.filter(s => s)
+			) : null
 		};
 
 		const otherSelected = new Set();
@@ -217,6 +228,9 @@ export default class SpellManager extends DocumentSheet {
 				);
 				break;
 			case "spells":
+				if ( this.currentSlot.spellcasting.spells.schools?.size ) filters.push(
+					{ k: "system.school", o: "in", v: this.currentSlot.spellcasting.spells.schools }
+				);
 			case "spellbook":
 				filters.push(
 					{ k: "system.ring.base", o: "gte", v: 1 },
