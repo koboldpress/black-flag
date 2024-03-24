@@ -14,12 +14,18 @@
  */
 export default class TypeField extends foundry.data.fields.ObjectField {
 
+	/** @inheritDoc */
 	static get _defaults() {
 		return foundry.utils.mergeObject(super._defaults, {
 			determineType: null,
 			modelLookup: null
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static recursive = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -37,16 +43,19 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_cleanType(value, options) {
-		if ( !(typeof value === "object") ) value = {};
-
-		const cls = this.getModel(value);
-		if ( cls ) return cls.cleanData(value, options);
-		return value;
-	}
+	/** @inheritDoc */
+// 	_cleanType(value, options) {
+// 		console.log("_cleanType", options);
+// 		if ( !(typeof value === "object") ) value = {};
+// 
+// 		const cls = this.getModel(value);
+// 		if ( cls ) return cls.cleanData(value, options);
+// 		return value;
+// 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	initialize(value, model, options={}) {
 		const cls = this.getModel(value, model);
 		if ( cls ) return new cls(value, {parent: model, ...options});

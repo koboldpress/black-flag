@@ -1,24 +1,24 @@
 <form autocomplete="off">
 	<section>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 		</fieldset>
 		<fieldset>
-			<legend>{{localize "BF.Spellcasting.Details.Label"}}</legend>
+			<legend>{{ localize "BF.Spellcasting.Details.Label" }}</legend>
 			<label>
-				<span>{{localize "BF.Spellcasting.Source"}}</span>
+				<span>{{ localize "BF.Spellcasting.Source" }}</span>
 				<select name="configuration.circle">
-					{{selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank=""}}
+					{{ selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank="" }}
 				</select>
 			</label>
 			<label>
-				<span>{{localize "BF.Spellcasting.Ability.Label"}}</span>
+				<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
 				<select name="configuration.ability">
 					{{#select configuration.ability}}
-						<option value="">{{defaultAbility}}</option>
-						<optgroup label="{{localize 'BF.Ability.Label[other]'}}">
-							{{selectOptions CONFIG.abilities.localized}}
+						<option value="">{{ defaultAbility }}</option>
+						<optgroup label="{{ localize 'BF.Ability.Label[other]' }}">
+							{{ selectOptions CONFIG.abilities.localized }}
 						</optgroup>
 					{{/select}}
 				</select>
@@ -26,73 +26,56 @@
 			{{#if displayType}}
 				<label>
 					<span>
-						{{localize "BF.Spellcasting.Type.Label"}}
-						<i class="hintIcon" data-tooltip="BF.Spellcsating.Type.Hint"></i>
+						{{ localize "BF.Spellcasting.Type.Label" }}
+						<i class="hintIcon" data-tooltip="BF.Spellcasting.Type.Hint"></i>
 					</span>
 					<select name="configuration.type">
-						{{selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true}}
+						{{ selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true }}
 					</select>
 				</label>
 			{{/if}}
 			{{#if progressionOptions}}
 				<label>
 					<span>
-						{{localize "BF.Spellcasting.Progression.Label"}}
+						{{ localize "BF.Spellcasting.Progression.Label" }}
 						<i class="hintIcon" data-tooltip="BF.Spellcasting.Progression.Hint"></i>
 					</span>
 					<select name="configuration.progression">
-						{{selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true}}
+						{{ selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true }}
 					</select>
 				</label>
 			{{/if}}
 		</fieldset>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Spellcasting.GainingSpells"}}</legend>
+			<legend>{{ localize "BF.Advancement.Spellcasting.GainingSpells" }}</legend>
 			<label>
 				<span>
-					{{localize "BF.Spellcasting.Learning.Mode.Label"}}
+					{{ localize "BF.Spellcasting.Learning.Mode.Label" }}
 					<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Mode.Hint"></i>
 				</span>
 				<select name="configuration.spells.mode">
-					{{selectOptions CONFIG.spellLearningModes selected=configuration.spells.mode
-					                labelAttr="label" localize=true blank=""}}
+					{{ selectOptions CONFIG.spellLearningModes selected=configuration.spells.mode
+					                 labelAttr="label" localize=true blank="" }}
 				</select>
 			</label>
 			</label>
-			{{#each formulas as |data name|}}
-				<div class="field-group formula-controls" data-name="{{name}}">
+			{{#each known as |data name|}}
+				<div class="field-group known-controls" data-name="{{ name }}">
 					<span>
-						{{localize data.label}}
-						<i class="hintIcon" data-tooltip="{{data.hint}}"></i>
+						{{ localize data.label }}
+						<i class="hintIcon" data-tooltip="{{ data.hint }}"></i>
 					</span>
-					{{#if data.displayFormula}}
-						<input type="text" name="configuration.{{name}}.formula" value="{{data.formula}}">
-						{{#if data.scaleValue}}
-							<button type="button" data-action="formula" data-sub-action="view-scale-value">
-								<i class="fa-solid fa-edit"></i> <i class="fa-solid fa-scale-unbalanced"></i>
-							</button>
-						{{else}}
-							<button type="button" data-action="formula" data-sub-action="use-scale-value">
-								<i class="fa-solid fa-plus"></i> <i class="fa-solid fa-scale-unbalanced"></i>
-							</button>
-						{{/if}}
-					{{else if data.scaleValue}}
-						<button type="button" data-action="formula" data-sub-action="view-scale-value">
-							<i class="fa-solid fa-edit"></i>
-							{{localize "BF.Advancement.ScaleValue.Title"}}
-						</button>
-						<button type="button" data-action="formula" data-sub-action="customize">
-							<i class="fa-solid fa-edit"></i>
-							{{localize "BF.Formula.Label"}}
+					{{#if data.scaleValue}}
+						{{{ data.anchor }}}
+						<button class="link-button" type="button" data-action="known" data-sub-action="delete"
+						        data-tooltip="BF.Advancement.Core.Action.Delete"
+										aria-label="{{ localize 'BF.Advancement.Core.Action.Delete' }}">
+							<i class="fa-solid fa-trash" inert></i>
 						</button>
 					{{else}}
-						<button type="button" data-action="formula" data-sub-action="use-scale-value">
-							<i class="fa-solid fa-plus"></i>
+						<button class="link-button" type="button" data-action="known" data-sub-action="create">
+							<i class="fa-solid fa-plus" inert></i>
 							{{localize "BF.Advancement.ScaleValue.Title"}}
-						</button>
-						<button type="button" data-action="formula" data-sub-action="use-formula">
-							<i class="fa-solid fa-plus"></i>
-							{{localize "BF.Formula.Label"}}
 						</button>
 					{{/if}}
 				</div>
@@ -100,27 +83,27 @@
 			{{#if (eq configuration.spells.mode "limited")}}
 				<label>
 					<span>
-						{{localize "BF.Spellcasting.Learning.Replacement.Label"}}
+						{{ localize "BF.Spellcasting.Learning.Replacement.Label" }}
 						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Replacement.Hint"></i>
 					</span>
 					<input type="checkbox" name="configuration.spells.replacement"
-					       {{checked configuration.spells.replacement}}>
+					       {{ checked configuration.spells.replacement }}>
 				</label>
 			{{else if (eq configuration.spells.mode "spellbook")}}
 				<div class="field-group">
 					<span>
-						{{localize "BF.Spellbook.FreeSpell.Label[other]"}}
+						{{ localize "BF.Spellbook.FreeSpell.Label[other]" }}
 						<i class="hintIcon" data-tooltip="BF.Spellbook.FreeSpell.Hint"></i>
 					</span>
 					<label>
-						<span>{{localize "BF.Spellbook.FreeSpell.FirstLevel"}}</span>
+						<span>{{ localize "BF.Spellbook.FreeSpell.FirstLevel" }}</span>
 						<input type="number" name="configuration.spells.spellbook.firstLevel"
-						       value="{{configuration.spells.spellbook.firstLevel}}" min=0 step=1>
+						       value="{{ configuration.spells.spellbook.firstLevel }}" min=0 step=1>
 					</label>
 					<label>
-						<span>{{localize "BF.Spellbook.FreeSpell.OtherLevels"}}</span>
+						<span>{{ localize "BF.Spellbook.FreeSpell.OtherLevels" }}</span>
 						<input type="number" name="configuration.spells.spellbook.otherLevels"
-									 value="{{configuration.spells.spellbook.otherLevels}}" min=0 step=1>
+									 value="{{ configuration.spells.spellbook.otherLevels }}" min=0 step=1>
 					</label>
 				</div>
 			{{/if}}

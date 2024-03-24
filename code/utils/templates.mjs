@@ -202,7 +202,7 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-dataset": dataset,
 		"blackFlag-groupedSelectOptions": (choices, options) => groupedSelectOptions(choices, options.hash),
 		"blackFlag-itemContext": itemContext,
-		"blackFlag-linkForUUID": linkForUUID,
+		"blackFlag-linkForUUID": (uuid, options) => linkForUUID(uuid, options.hash),
 		"blackFlag-multiSelect": multiSelect,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash)

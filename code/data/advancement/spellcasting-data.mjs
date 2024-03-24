@@ -1,11 +1,26 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
-import FilterField from "../fields/filter-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
+ *
+ * @property {string} type - General spellcasting type (e.g. "leveled", "pact").
+ * @property {string} progression - Specific progression within selected type (e.g. "full", "half", "third").
+ * @property {string} ability - Spellcasting ability if not class's key ability.
+ * @property {string} circle - Circle of magic used by spellcasting (e.g. "arcane", "divine").
+ * @property {object} cantrips
+ * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
+ * @property {object} rituals
+ * @property {string} rituals.scale - ID of scale value that represents number of rituals known.
+ * @property {object} spells
+ * @property {string} spells.scale - ID of scale value that represents number of spells known.
+ * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
+ * @property {boolean} spells.replacement - Can caster replace spell choice from previous level when leveling up?
+ * @property {object} spells.spellbook
+ * @property {number} spells.spellbook.firstLevel - Number of free spells written in spellbook at level one.
+ * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
  */
 export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
@@ -16,24 +31,20 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			}),
 			ability: new StringField({label: "BF.Spellcasting.Ability.Label"}),
 			circle: new StringField({label: "BF.Spell.Circle.Label"}),
-			focus: new StringField(),
 			cantrips: new SchemaField({
-				formula: new FormulaField({deterministic: true})
+				scale: new StringField()
 			}, {label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint"}),
 			rituals: new SchemaField({
-				formula: new FormulaField({deterministic: true})
+				scale: new StringField()
 			}, {label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"}),
 			spells: new SchemaField({
-				formula: new FormulaField({deterministic: true}),
+				scale: new StringField(),
 				mode: new StringField({
 					label: "BF.Spellcasting.Learning.Mode.Label", hint: "BF.Spellcasting.Learning.Mode.Hint"
 				}),
 				replacement: new BooleanField({
 					initial: true, label: "BF.Spellcasting.Learning.Replacement.Label",
 					hint: "BF.Spellcasting.Learning.Replacement.Hint"
-				}),
-				restriction: new FilterField({
-					label: "BF.Spellcasting.Restriction.Label", hint: "BF.Spellcasting.Restriction.Hint"
 				}),
 				spellbook: new SchemaField({
 					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel"}),
@@ -85,42 +96,35 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareData() {
-		const regex = /@scale\.(?:[a-z0-9_-]+)\.([a-z0-9_-]+)/i;
 		const item = this.parent.item;
 		const scaleValues = item.system?.advancement.byType("scaleValue") ?? [];
 
-		const prepareScale = obj => {
-			const matches = (obj.formula ?? "").match(regex) ?? [];
+		const prepareScale = (obj, identifier) => {
 			Object.defineProperty(obj, "scaleValue", {
 				get() {
-					return scaleValues?.find(s => s.identifier === matches[1]);
-				},
-				configurable: true,
-				enumerable: false
-			});
-			Object.defineProperty(obj, "displayFormula", {
-				get() {
-					if ( !obj.formula ) return false;
-					if ( obj.formula.trim() !== matches[0] ) return true;
-					return !this.scaleValue;
+					return item.system?.advancement.get(obj.scale) ?? scaleValues?.find(s => s.identifier === identifier);
 				},
 				configurable: true,
 				enumerable: false
 			});
 			Object.defineProperty(obj, "known", {
 				get() {
-					const rollData = item.getRollData({ deterministic: true });
-					const formula = this.formula?.replace(".ID.", `.${item.identifier}.`);
-					return simplifyBonus(formula, rollData);
+					const scaleValue = obj.scaleValue;
+					if ( !scaleValue ) return 0;
+					return simplifyBonus(
+						`@scale.${scaleValue.parentIdentifier}.${scaleValue.identifier}`,
+						item.getRollData({ deterministic: true })
+					);
 				},
 				configurable: true,
 				enumerable: false
 			});
 		};
 
-		prepareScale(this.cantrips);
-		prepareScale(this.rituals);
-		prepareScale(this.spells);
+		prepareScale(this.cantrips, "cantrips-known");
+		prepareScale(this.rituals, "rituals-known");
+		prepareScale(this.spells, "spells-known");
 	}
 }

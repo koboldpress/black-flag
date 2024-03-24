@@ -392,4 +392,66 @@ export default Base => class extends BackportedEmbedMixin(Base) {
 		if ( this.id ) dragData.uuid = this.uuid;
 		return dragData;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*       Importing and Exporting       */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a content link for this PseudoDocument.
+	 * @param {object} [options] - Additional options to configure how the link is constructed.
+	 * @param {Record<string>} [options.attrs] -  Attributes to set on the link.
+	 * @param {Record<string>} [options.dataset] - Custom data- attributes to set on the link.
+	 * @param {string[]} [options.classes] - Additional classes to add to the link. The `content-link` class is added
+	 *                                       by default.
+	 * @param {string} [options.name] - A name to use for the Document, if different from the Document's name.
+	 * @param {string} [options.icon] - A font-awesome icon class to use as the icon, if different to the
+	 *                                  Document's configured sidebarIcon.
+	 * @returns {HTMLAnchorElement}
+	 */
+	toAnchor({attrs={}, dataset={}, classes=[], name, icon}={}) {
+
+		// Build dataset
+		const documentConfig = CONFIG[this.documentName];
+		const documentName = game.i18n.localize(`DOCUMENT.BF.${this.documentName}`);
+		let anchorIcon = icon ?? documentConfig.sidebarIcon ?? "fas fa-suitcase";
+		dataset = foundry.utils.mergeObject({
+			uuid: this.uuid,
+			id: this.id,
+			type: this.documentName,
+			pack: this.pack,
+			tooltip: documentName
+		}, dataset);
+
+		// If this is a typed document, add the type to the dataset
+		if ( this.type ) {
+			const typeLabel = documentConfig.typeLabels?.[this.type];
+			const typeName = game.i18n.has(typeLabel) ? `${game.i18n.localize(typeLabel)}` : "";
+			dataset.tooltip = typeName ? game.i18n.format("DOCUMENT.TypePageFormat", {type: typeName, page: documentName})
+				: documentName;
+			anchorIcon = icon ?? documentConfig.typeIcons?.[this.type] ?? documentConfig.sidebarIcon ?? anchorIcon;
+		}
+
+		// Construct Link
+		const a = document.createElement("a");
+		a.classList.add("content-link", ...classes);
+		Object.entries(attrs).forEach(([k, v]) => a.setAttribute(k, v));
+		for ( const [k, v] of Object.entries(dataset) ) {
+			if ( v !== null ) a.dataset[k] = v;
+		}
+		a.innerHTML = `<i class="${anchorIcon}"></i>${name ?? this.name ?? this.title}`;
+		return a;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle clicking on a content link for this document.
+	 * @param {MouseEvent} event - The triggering click event.
+	 * @returns {any}
+	 * @protected
+	 */
+	_onClickDocumentLink(event) {
+		return this.sheet.render(true);
+	}
 };

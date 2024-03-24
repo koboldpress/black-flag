@@ -38,6 +38,7 @@ export default class ScaleValueAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get levels() {
 		return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
 	}
@@ -46,6 +47,7 @@ export default class ScaleValueAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	titleForLevel(levels, { flow=false }={}) {
 		const value = this.valueForLevel(this.relavantLevel(levels))?.display;
 		if ( !value ) return this.title;
