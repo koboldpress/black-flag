@@ -1,7 +1,6 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
-import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
@@ -18,11 +17,14 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {string} spells.scale - ID of scale value that represents number of spells known.
  * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
  * @property {boolean} spells.replacement - Can caster replace spell choice from previous level when leveling up?
+ * @property {Set<string} spells.schools - Schools from which chosen spells must be selected.
  * @property {object} spells.spellbook
  * @property {number} spells.spellbook.firstLevel - Number of free spells written in spellbook at level one.
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
  */
 export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			type: new StringField({initial: "leveled", label: "BF.Spellcasting.Type.Label"}),
@@ -46,6 +48,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 					initial: true, label: "BF.Spellcasting.Learning.Replacement.Label",
 					hint: "BF.Spellcasting.Learning.Replacement.Hint"
 				}),
+				schools: new SetField(new StringField()),
 				spellbook: new SchemaField({
 					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel"}),
 					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels"})

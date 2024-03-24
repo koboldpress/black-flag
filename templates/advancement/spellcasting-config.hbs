@@ -60,7 +60,7 @@
 			</label>
 			</label>
 			{{#each known as |data name|}}
-				<div class="field-group known-controls" data-name="{{ name }}">
+				<label data-name="{{ name }}">
 					<span>
 						{{ localize data.label }}
 						<i class="hintIcon" data-tooltip="{{ data.hint }}"></i>
@@ -78,7 +78,7 @@
 							{{localize "BF.Advancement.ScaleValue.Title"}}
 						</button>
 					{{/if}}
-				</div>
+				</label>
 			{{/each}}
 			{{#if (eq configuration.spells.mode "limited")}}
 				<label>
@@ -88,6 +88,19 @@
 					</span>
 					<input type="checkbox" name="configuration.spells.replacement"
 					       {{ checked configuration.spells.replacement }}>
+				</label>
+				<label>
+					<span>
+						{{ localize "BF.Spellcasting.Learning.Schools.Label" }}
+						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Schools.Hint"></i>
+					</span>
+					<blackFlag-multiSelect name="configuration.spells.schools" label="{{ schoolLabel }}">
+						<datalist>
+							{{#blackFlag-multiSelect configuration.spells.schools}}
+								{{selectOptions CONFIG.spellSchools.localized}}
+							{{/blackFlag-multiSelect}}
+						</datalist>
+					</blackFlag-multiSelect>
 				</label>
 			{{else if (eq configuration.spells.mode "spellbook")}}
 				<div class="field-group">

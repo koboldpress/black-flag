@@ -59,6 +59,12 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		if ( context.configuration.spells.mode !== "limited" ) delete context.known.spells;
 		context.showClassRestriction = false;
 
+		const schools = this.advancement.configuration.spells.schools;
+		if ( schools.size ) context.schoolLabel = game.i18n.getListFormatter({ type: "unit" }).format(
+			Array.from(schools).map(s => CONFIG.BlackFlag.spellSchools.localized[s]).filter(s => s)
+		);
+		else context.schoolLabel = game.i18n.localize("BF.Spellcasting.Learning.Schools.NoRestriction");
+
 		return context;
 	}
 

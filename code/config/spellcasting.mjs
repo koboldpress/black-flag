@@ -228,6 +228,7 @@ export const spellSchools = {
 		label: "BF.Spell.School.Transmutation.Label"
 	}
 };
+localizeConfig(spellSchools);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
