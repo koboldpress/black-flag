@@ -18,6 +18,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
  * @property {boolean} spells.replacement - Can caster replace spell choice from previous level when leveling up?
  * @property {Set<string} spells.schools - Schools from which chosen spells must be selected.
+ * @property {boolean} spells.special - Does one of the first level learned spells ignore normal restrictions?
  * @property {object} spells.spellbook
  * @property {number} spells.spellbook.firstLevel - Number of free spells written in spellbook at level one.
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
@@ -48,7 +49,12 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 					initial: true, label: "BF.Spellcasting.Learning.Replacement.Label",
 					hint: "BF.Spellcasting.Learning.Replacement.Hint"
 				}),
-				schools: new SetField(new StringField()),
+				schools: new SetField(new StringField(), {
+					label: "BF.Spellcasting.Learning.Schools.Label", hint: "BF.Spellcasting.Learning.Schools.Hint"
+				}),
+				special: new BooleanField({
+					label: "BF.Spellcasting.Learning.Special.Label", hint: "BF.Spellcasting.Learning.Special.Hint"
+				}),
 				spellbook: new SchemaField({
 					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel"}),
 					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels"})

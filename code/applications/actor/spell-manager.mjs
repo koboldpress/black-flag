@@ -6,18 +6,34 @@ import { filter, numberFormat, search } from "../../utils/_module.mjs";
 export default class SpellManager extends DocumentSheet {
 	constructor(...args) {
 		super(...args);
+
+		// Figure out what spells are already on sheet
+		this.existingSpells = new Set();
+		const specialChosenSources = new Set();
+		for ( const spell of this.document.items ) {
+			if ( spell.type !== "spell" ) continue;
+			if ( !["standard", "alwaysPrepared"].includes(spell.system.type.value) ) continue;
+			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
+			this.existingSpells.add(sourceId);
+			const source = spell.getFlag("black-flag", "relationship.source");
+			if ( source.special ) source.identifiers?.forEach(i => specialChosenSources.add(i));
+		}
+
 		this.slots = [];
 		const circles = new Map();
 
 		// Iterate over each spellcasting source, calculating cantrips, rituals, & spells known
-		for ( const source of Object.values(this.document.system.spellcasting.sources) ) {
+		for ( const [identifier, source] of Object.entries(this.document.system.spellcasting.sources) ) {
 			for ( const type of ["cantrips", "rituals", "spells", "spellbook"] ) {
 				if ( !source[type] ) continue;
 				const diff = Math.max(source[type].max - source[type].value, 0);
-				this.slots.push(...Array.fromRange(diff).map(s => ({
+				const needsSpecial = (type === "spells") && source.spellcasting.spells.special
+					&& !specialChosenSources.has(identifier);
+				this.slots.push(...Array.fromRange(diff).map((s, i) => ({
 					type,
 					mode: "single",
 					source: source.document,
+					special: (i === 0) && needsSpecial,
 					spellcasting: source.spellcasting,
 					selected: new Set()
 				})));
@@ -55,15 +71,6 @@ export default class SpellManager extends DocumentSheet {
 			map.set(spell.uuid, spell);
 			return map;
 		}, new Collection()));
-
-		// Figure out what spells are already on sheet
-		this.existingSpells = new Set();
-		for ( const spell of this.document.items ) {
-			if ( spell.type !== "spell" ) continue;
-			if ( !["standard", "alwaysPrepared"].includes(spell.system.type.value) ) continue;
-			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
-			this.existingSpells.add(sourceId);
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -159,19 +166,8 @@ export default class SpellManager extends DocumentSheet {
 	async getData(options={}) {
 		const context = await super.getData(options);
 		if ( !this.currentSlot ) return context;
-
-		const rings = CONFIG.BlackFlag.spellRings();
-		const maxRingRestriction = (this.currentSlot.type !== "cantrips") && (this.currentSlot.mode !== "all");
-		context.restrictions = {
-			circle: CONFIG.BlackFlag.spellCircles.localized[this.currentSlot.spellcasting.circle],
-			ring: this.currentSlot.mode === "all" ? rings[this.currentSlot.ring] : null,
-			maxRing: maxRingRestriction ? rings[this.document.system.spellcasting.maxRing] : null,
-			schools: this.currentSlot.type === "spells" ? game.i18n.getListFormatter({ type: "disjunction" }).format(
-				Array.from(this.currentSlot.spellcasting.spells.schools)
-					.map(s => CONFIG.BlackFlag.spellSchools.localized[s])
-					.filter(s => s)
-			) : null
-		};
+		const filters = this.prepareFilters();
+		context.restrictions = this.prepareRestrictions(filters);
 
 		const otherSelected = new Set();
 		context.slots = this.slots.map((slot, index) => {
@@ -186,7 +182,9 @@ export default class SpellManager extends DocumentSheet {
 		});
 		context.mode = this.currentSlot.mode;
 
-		context.spells = (await this.allSpells).filter(this.shouldDisplay.bind(this));
+		context.spells = (await this.allSpells).filter(s =>
+			!this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters)
+		);
 		this.currentSlot.selected ??= new Set(context.spells.map(s => s.uuid));
 		context.spells = context.spells.map(spell => ({
 			...spell,
@@ -200,49 +198,83 @@ export default class SpellManager extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Determine if the provided spell should be displayed for the current slot.
-	 * @param {object} spell - Index containing the spell's data.
-	 * @returns {boolean}
+	 * Prepare the filters for spells in the current slot.
+	 * @returns {FilterDescription[]|void}
 	 */
-	shouldDisplay(spell) {
-		if ( this.existingSpells.has(spell.uuid) || !this.currentSlot ) return false;
+	prepareFilters() {
 		const filters = [];
+		const schools = this.currentSlot.spellcasting.spells.schools;
 
-		// Fetch filters from the SpellcastingAdvancement
-		filters.push({ k: "system.circle", o: "has", v: this.currentSlot.spellcasting.circle });
+		// Always restrict by circle unless current slot is special and there are no schools set
+		if ( !this.currentSlot.special || schools.size ) {
+			filters.push({ k: "system.circle", o: "has", v: this.currentSlot.spellcasting.circle });
+		}
 
 		switch ( this.currentSlot.type ) {
 			case "cantrips":
+				// Cantrips are always ring 0
 				filters.push({ k: "system.ring.base", v: 0 });
 				break;
 			case "circle":
 				filters.push(
+					// Circle are always from a single ring
 					{ k: "system.ring.base", v: this.currentSlot.ring },
+					// No ritual spells
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
 				break;
 			case "rituals":
 				filters.push(
-					{ k: "system.tags", o: "has", v: "ritual" },
-					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing }
+					// Ring must be less than maximum
+					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing },
+					// Must be a ritual spell
+					{ k: "system.tags", o: "has", v: "ritual" }
 				);
 				break;
 			case "spells":
-				if ( this.currentSlot.spellcasting.spells.schools?.size ) filters.push(
-					{ k: "system.school", o: "in", v: this.currentSlot.spellcasting.spells.schools }
-				);
+				// Add restriction on school if they are set and current slot isn't special
+				if ( schools.size && !this.currentSlot.special ) filters.push({ k: "system.school", o: "in", v: schools });
 			case "spellbook":
 				filters.push(
+					// No cantrips
 					{ k: "system.ring.base", o: "gte", v: 1 },
+					// Ring must be less than maximum
 					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing },
+					// No ritual spells
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
 				break;
 			default:
-				return false;
+				return;
 		}
 
-		return filter.performCheck(spell, filters);
+		return filters;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare displayed restrictions based on provided filters.
+	 * @param {FilterDescription[]} filters
+	 * @returns {object}
+	 */
+	prepareRestrictions(filters) {
+		const restrictions = {};
+
+		const circle = filters.find(f => f.k === "system.circle");
+		if ( circle ) restrictions.circle = CONFIG.BlackFlag.spellCircles.localized[circle.v];
+
+		const schools = filters.find(f => f.k === "system.school");
+		if ( schools ) restrictions.schools = game.i18n.getListFormatter({ type: "disjunction" }).format(
+			Array.from(schools.v).map(s => CONFIG.BlackFlag.spellSchools.localized[s]).filter(s => s)
+		);
+
+		const ring = filters.find(f => (f.k === "system.ring.base") && !f.o);
+		const maxRing = filters.find(f => (f.k === "system.ring.base") && (f.o === "lte"));
+		if ( ring?.v ) restrictions.ring = CONFIG.BlackFlag.spellRings()[ring.v];
+		else if ( maxRing ) restrictions.maxRing = CONFIG.BlackFlag.spellRings()[maxRing.v];
+
+		return restrictions;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -312,6 +344,7 @@ export default class SpellManager extends DocumentSheet {
 		source.identifiers ??= [];
 		source.identifiers.push(slot.source.identifier);
 		if ( slot.type === "spellbook" ) source.spellbookOrigin = "free";
+		if ( slot.special ) source.special = true;
 
 		const prepared = foundry.utils.getProperty(spellData, "system.ring.base") > 0
 			? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared : true;

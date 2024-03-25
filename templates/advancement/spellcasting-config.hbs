@@ -86,8 +86,7 @@
 						{{ localize "BF.Spellcasting.Learning.Replacement.Label" }}
 						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Replacement.Hint"></i>
 					</span>
-					<input type="checkbox" name="configuration.spells.replacement"
-					       {{ checked configuration.spells.replacement }}>
+					<input type="checkbox" name="configuration.spells.replacement" {{ checked configuration.spells.replacement }}>
 				</label>
 				<label>
 					<span>
@@ -97,10 +96,17 @@
 					<blackFlag-multiSelect name="configuration.spells.schools" label="{{ schoolLabel }}">
 						<datalist>
 							{{#blackFlag-multiSelect configuration.spells.schools}}
-								{{selectOptions CONFIG.spellSchools.localized}}
+								{{ selectOptions CONFIG.spellSchools.localized }}
 							{{/blackFlag-multiSelect}}
 						</datalist>
 					</blackFlag-multiSelect>
+				</label>
+				<label>
+					<span>
+						{{ localize "BF.Spellcasting.Learning.Special.Label" }}
+						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Special.Hint"></i>
+					</span>
+					<input type="checkbox" name="configuration.spells.special" {{ checked configuration.spells.special }}>
 				</label>
 			{{else if (eq configuration.spells.mode "spellbook")}}
 				<div class="field-group">
