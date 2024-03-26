@@ -49,6 +49,11 @@
 		margin-block-end: 0;
 	}
 
+	.roll-link {
+		&:hover, &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
+	}
+	.unlink:hover .roll-link { text-shadow: 0 0 8px var(--color-shadow-primary); }
+
 	table {
 		margin-block-start: 1rem;
 		border-block: 2px solid var(--bf-color-border-blue);

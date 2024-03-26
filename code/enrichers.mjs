@@ -34,7 +34,7 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
 	let { type, config, label } = match.groups;
-	config = parseConfig(config);
+	config = parseConfig(config, { multiple: type === "damage" });
 	config._input = match[0];
 	switch ( type.toLowerCase() ) {
 		case "attack": return enrichAttack(config, label, options);
@@ -55,9 +55,13 @@ async function enrichString(match, options) {
 /**
  * Parse a string into a configuration object.
  * @param {string} match - Matched configuration string.
- * @returns {object}
+ * @param {object} [options={}]
+ * @param {boolean} [options.multiple=false] - Support splitting the configuration by "&". If `true` then an array of
+ *                                             configs will be returned rather than a single object.
+ * @returns {object|object[]}
  */
-function parseConfig(match="") {
+function parseConfig(match="", { multiple=false }={}) {
+	if ( multiple ) return match.split("&").map(s => parseConfig(s));
 	const config = { values: [] };
 	for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
 		if ( !part ) continue;
@@ -95,10 +99,12 @@ function createPassiveTag(label, dataset) {
  * Create a rollable link.
  * @param {string} label - Label to display.
  * @param {object} dataset - Data that will be added to the link for the rolling method.
+ * @param {object} [options={}]
+ * @param {string} [options.tag="a"] - Tag to use for the link.
  * @returns {HTMLElement}
  */
-function createRollLink(label, dataset) {
-	const link = document.createElement("a");
+function createRollLink(label, dataset, { tag="a" }={}) {
+	const link = document.createElement(tag);
 	link.classList.add("roll-link");
 	_addDataset(link, dataset);
 	link.innerHTML = `<i class="fa-solid fa-dice-d20" inert></i> ${label}`;
@@ -115,7 +121,9 @@ function createRollLink(label, dataset) {
  */
 function _addDataset(element, dataset) {
 	for ( const [key, value] of Object.entries(dataset) ) {
-		if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
+		if ( key.startsWith("_") || (key === "values") || !value ) continue;
+		if ( ["Array", "Object"].includes(foundry.utils.getType(value)) ) element.dataset[key] = JSON.stringify(value);
+		else element.dataset[key] = value;
 	}
 }
 
@@ -149,7 +157,7 @@ function handleRollAction(event) {
 
 /**
  * Enrich an attack link, using a pre-set to hit value or determining it from the enriching item or activity.
- * @param {string[]} config - Configuration data.
+ * @param {object} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
  * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.}
@@ -282,7 +290,7 @@ function enrichCalculation(config, fallback, options) {
  * Enrich an ability check link to perform a specific ability or skill check. If an ability is provided
  * along with a skill, then the skill check will always use the provided ability. Otherwise it will use
  * the character's default ability for that skill.
- * @param {string[]} config - Configuration data.
+ * @param {object} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
  * @returns {HTMLElement|null} - An HTML link if the check could be built, otherwise null.
@@ -397,7 +405,7 @@ async function enrichCheck(config, label, options) {
 
 /**
  * Enrich a saving throw link.
- * @param {string[]} config - Configuration data.
+ * @param {object} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
  * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
@@ -481,7 +489,7 @@ async function rollCheckSave(event, speaker) {
 
 /**
  * Enrich a damage link.
- * @param {string[]} config - Configuration data.
+ * @param {object[]} configs - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
  * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
@@ -490,8 +498,8 @@ async function rollCheckSave(event, speaker) {
  * ```[[/damage 2d6 type=bludgeoning]]``
  * becomes
  * ```html
- * <a class="roll-action" data-roll-action="damage" data-formula="2d6" data-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * <a class="roll-action" data-roll-action="damage" data-formulas="["2d6"]" data-types="["bludgeoning"]">
+ *   <i class="fa-solid fa-dice-d20" inert></i> 2d6
  * </a> bludgeoning
  * ````
  *
@@ -499,8 +507,8 @@ async function rollCheckSave(event, speaker) {
  * ```[[/damage 2d6 type=bludgeoning average=true]]``
  * becomes
  * ```html
- * 7 (<a class="roll-action" data-roll-action="damage" data-formula="2d6" data-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * 7 (<a class="roll-action" data-roll-action="damage" data-formulas="["2d6"]" data-types="["bludgeoning"]">
+ *   <i class="fa-solid fa-dice-d20" inert></i> 2d6
  * </a>) bludgeoning
  * ````
  *
@@ -508,47 +516,79 @@ async function rollCheckSave(event, speaker) {
  * ```[[/damage 8d4dl force average=666]]``
  * becomes
  * ```html
- * 666 (<a class="roll-action" data-roll-action="damage" data-formula="8d4dl" data-type="force">
- *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
+ * 666 (<a class="roll-action" data-roll-action="damage" data-formulas="["8d4dl"]" data-types="["force"]">
+ *   <i class="fa-solid fa-dice-d20" inert></i> 8d4dl
  * </a> force
  * ````
+ *
+ * @example Use two different damage types:
+ * ```[[/damage 1d6 + 5 slashing & 2d6 fire average]]```
+ * becomes
+ * ```html
+ * <a class="unlink" data-roll-action="damage" data-formulas="["1d6","2d6"]" data-types="["bludgeoning","fire"]"
+ *    data-average="true">
+ *   3 (<span class="roll-link"><i class="fa-solid fa-dice-d20" inert></i> 1d6 + 5</span>) bludgeoning plus
+ *   7 (<span class="roll-link"><i class="fa-solid fa-dice-d20" inert></i> 2d6</span>) fire
+ * </a>
+ * ```
  */
-async function enrichDamage(config, label, options) {
-	const formulaParts = [];
-	if ( config.formula ) formulaParts.push(config.formula);
-	for ( const value of config.values ) {
-		if ( value in CONFIG.BlackFlag.damageTypes ) config.type = value;
-		else if ( value === "average" ) config.average = true;
-		else formulaParts.push(value);
-	}
-	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-	if ( !config.formula ) return null;
-	config.rollAction = "damage";
-
-	if ( label ) return createRollLink(label, config);
-
-	const localizationData = {
-		formula: createRollLink(config.formula, config).outerHTML,
-		type: game.i18n.localize(CONFIG.BlackFlag.damageTypes[config.type]?.label ?? "").toLowerCase()
-	};
-
-	let localizationType = "Short";
-	if ( config.average ) {
-		localizationType = "Long";
-		if ( config.average === true ) {
-			const minRoll = Roll.create(config.formula).evaluate({ minimize: true, async: true });
-			const maxRoll = Roll.create(config.formula).evaluate({ maximize: true, async: true });
-			localizationData.average = Math.floor((await minRoll.total + await maxRoll.total) / 2);
-		} else if ( Number.isNumeric(config.average) ) {
-			localizationData.average = config.average;
-		} else {
-			localizationType = "Short";
+async function enrichDamage(configs, label, options) {
+	const config = { rollAction: "damage", formulas: [], types: [] };
+	for ( const c of configs ) {
+		const formulaParts = [];
+		if ( c.average ) config.average = c.average;
+		if ( c.formula ) formulaParts.push(c.formula);
+		for ( const value of c.values ) {
+			if ( value in CONFIG.BlackFlag.damageTypes ) c.type = value;
+			else if ( value in CONFIG.BlackFlag.healingTypes ) c.type = value;
+			else if ( value === "average" ) config.average = true;
+			else formulaParts.push(value);
+		}
+		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+		if ( c.formula ) {
+			config.formulas.push(c.formula);
+			config.types.push(c.type);
 		}
 	}
 
-	const span = document.createElement("span");
-	span.innerHTML = game.i18n.format(`BF.Enricher.Damage.${localizationType}`, localizationData);
-	return span;
+	if ( !config.formulas.length ) return null;
+	if ( label ) return createRollLink(label, config);
+
+	const parts = [];
+	for ( const [idx, formula] of config.formulas.entries() ) {
+		const type = config.types[idx];
+		const typeConfig = CONFIG.BlackFlag.damageTypes[type] ?? CONFIG.BlackFlag.healingTypes[type];
+		const localizationData = {
+			formula: createRollLink(formula, {}, { tag: "span" }).outerHTML,
+			type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
+		};
+
+		let localizationType = "Short";
+		if ( config.average ) {
+			localizationType = "Long";
+			if ( config.average === true ) {
+				const minRoll = Roll.create(formula).evaluate({ minimize: true, async: true });
+				const maxRoll = Roll.create(formula).evaluate({ maximize: true, async: true });
+				localizationData.average = Math.floor((await minRoll.total + await maxRoll.total) / 2);
+			} else if ( Number.isNumeric(config.average) ) {
+				localizationData.average = config.average;
+			} else {
+				localizationType = "Short";
+			}
+		}
+
+		parts.push(game.i18n.format(`BF.Enricher.Damage.${localizationType}`, localizationData));
+	}
+
+	const link = document.createElement("a");
+	link.className = "unlink";
+	_addDataset(link, config);
+	if ( config.average && (parts.length === 2) ) {
+		link.innerHTML = game.i18n.format("BF.Enricher.Damage.Double", { first: parts[0], second: parts[1] });
+	} else {
+		link.innerHTML = game.i18n.getListFormatter().format(parts);
+	}
+	return link;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -559,12 +599,14 @@ async function enrichDamage(config, label, options) {
  * @returns {Promise|void}
  */
 async function rollDamage(event) {
-	const target = event.target.closest(".roll-link");
-	const { formula, type } = target.dataset;
+	const target = event.target.closest("[data-roll-action]");
+	let { formulas, types } = target.dataset;
+	formulas = JSON.parse(formulas);
+	types = JSON.parse(types);
 
 	const rollConfig = {
 		event,
-		rolls: [{ parts: [formula], type }]
+		rolls: formulas.map((formula, idx) => ({ parts: [formula], type: types[idx] }))
 	};
 
 	const dialogConfig = {};
@@ -592,7 +634,7 @@ const MAX_EMBED_DEPTH = 5;
 
 /**
  * Enrich an embedded document.
- * @param {string[]} config - Configuration data.
+ * @param {object} config - Configuration data.
  * @param {string} [label] - Optional label to replace default text.
  * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
  * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.
