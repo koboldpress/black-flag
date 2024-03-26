@@ -30,6 +30,23 @@ export default class AttackActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Attack details for this activity.
+	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
+	 */
+	get attackDetails() {
+		const ability = this.actor?.system.abilities[this.attackAbility];
+		const rollData = this.item.getRollData();
+		const { parts, data } = buildRoll({
+			mod: ability?.mod,
+			prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+			bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+		}, rollData);
+		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Contents of the challenge column in the action table.
 	 * @type {string}
 	 */
@@ -91,25 +108,19 @@ export default class AttackActivity extends DamageActivity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config={}, dialog={}, message={}) {
-		// Determine which ability to use with the attack
-		const ability = this.actor?.system.abilities[this.attackAbility];
-
 		// TODO: Associate ammunition with the attack
 
-		const rollData = this.item.getRollData();
+		const { parts, data } = this.attackDetails;
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
 		rollConfig.rolls = [{
-			...buildRoll({
-				mod: ability?.mod,
-				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
-				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
-			}, rollData),
+			parts,
+			data,
 			options: {
 				// TODO: criticalSuccess: this.system.criticalThreshold
 				minimum: this.actor?.system.buildMinimum(
-					this.actor?.system.getModifiers(this.modifierData, "min"), { rollData }
+					this.actor?.system.getModifiers(this.modifierData, "min"), { rollData: data }
 				)
 			}
 		}].concat(config.rolls ?? []);

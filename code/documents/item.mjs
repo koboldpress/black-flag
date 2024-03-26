@@ -21,6 +21,20 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Attack formula and activity for the default attack this item might have.
+	 * @returns {{formula: string, activity: Activity}|null}
+	 */
+	get attackDetails() {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.attackDetails;
+			if ( details ) return details;
+		}
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The item that contains this item, if it is in a container. Returns a promise if the item is located
 	 * in a compendium pack.
 	 * @type {BlackFlagItem|Promise<BlackFlagItem>|void}

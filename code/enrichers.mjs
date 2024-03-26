@@ -7,7 +7,7 @@ export function registerCustomEnrichers() {
 	log("Registering custom enrichers");
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern: /\[\[\/(?<type>check|damage|save|skill|tool) (?<config>[^\]]+)]](?:{(?<label>[^}]+)})?/gi,
+			pattern: /\[\[\/(?<type>attack|check|damage|save|skill|tool)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
 			enricher: enrichString
 		},
 		{
@@ -37,6 +37,7 @@ async function enrichString(match, options) {
 	config = parseConfig(config);
 	config._input = match[0];
 	switch ( type.toLowerCase() ) {
+		case "attack": return enrichAttack(config, label, options);
 		case "calc": return enrichCalculation(config, label, options);
 		case "check":
 		case "skill":
@@ -56,9 +57,9 @@ async function enrichString(match, options) {
  * @param {string} match - Matched configuration string.
  * @returns {object}
  */
-function parseConfig(match) {
+function parseConfig(match="") {
 	const config = { values: [] };
-	for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ) {
+	for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
 		if ( !part ) continue;
 		const [key, value] = part.split("=");
 		const valueLower = value?.toLowerCase();
@@ -140,8 +141,101 @@ function handleRollAction(event) {
 		case "ability-save":
 		case "skill":
 		case "tool": return rollCheckSave(event, speaker);
+		case "attack": return rollAttack(event, speaker);
 		case "damage": return rollDamage(event, speaker);
 	}
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                    Attack Enricher                    */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich an attack link, using a pre-set to hit value or determining it from the enriching item or activity.
+ * @param {string[]} config - Configuration data.
+ * @param {string} [label] - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link if the save could be built, otherwise null.}
+ *
+ * @example Create an attack link using a fixed to hit:
+ * ```[[/attack +5]]``` or ```[[/attack formula=5]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="attack" data-formula="+5">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +5
+ * </a> to hit
+ * ```
+ *
+ * @example Create an attack link using the attack from the item:
+ * ```[[/attack]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="attack">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +8
+ * </a> to hit
+ * ```
+ */
+async function enrichAttack(config, label, options) {
+	const formulaParts = [];
+	if ( config.formula ) formulaParts.push(config.formula);
+	for ( const value of config.values ) formulaParts.push(value);
+	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+	if ( !config.formula ) {
+		const { formula, activity } = options.relativeTo?.attackDetails ?? {};
+		config.formula = formula ?? "+0";
+		if ( activity ) config.activity = activity.uuid;
+	}
+	// TODO: Simplify formula as must as possible for display
+	// TODO: Improve this logic
+	if ( !config.formula.startsWith("+") && !config.formula.startsWith("-") ) config.formula = `+${config.formula}`;
+	config.rollAction = "attack";
+
+	if ( label ) return createRollLink(label, config);
+
+	const span = document.createElement("span");
+	span.innerHTML = game.i18n.format("BF.Enricher.Attack.Long", {
+		formula: createRollLink(config.formula, config).outerHTML
+	});
+	return span;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Perform an attack roll.
+ * @param {Event} event - The click event triggering the action.
+ * @param {TokenDocument} [speaker] - Current selected token, if one exists.
+ * @returns {Promise|void}
+ */
+async function rollAttack(event, speaker) {
+	const target = event.target.closest(".roll-link");
+	const { formula, activity: activityId } = target.dataset;
+
+	if ( activityId ) {
+		const activity = await fromUuid(activityId);
+		if ( activity ) return activity.rollAttack();
+	}
+
+	const rollConfig = {
+		event,
+		rolls: [{ parts: [formula.replace(/^\s*\+\s*/, "")] }]
+	};
+
+	const dialogConfig = {};
+
+	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.Attack.Label") });
+	const messageConfig = {
+		data: {
+			flavor: title,
+			title,
+			speaker,
+			"flags.black-flag.roll.type": "attack"
+		}
+	};
+
+	if ( Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false ) return;
+	const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
+	if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAttack", this, rolls);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -481,7 +575,6 @@ async function rollDamage(event, speaker) {
 	const messageConfig = {
 		data: {
 			flavor: title,
-			event,
 			title,
 			speaker,
 			"flags.black-flag.roll.type": "damage"
