@@ -1,4 +1,4 @@
-import { log, simplifyBonus } from "./utils/_module.mjs";
+import { getSelectedTokens, log, simplifyBonus } from "./utils/_module.mjs";
 
 /**
  * Set up system-specific enrichers.
@@ -101,7 +101,7 @@ function createRollLink(label, dataset) {
 	const link = document.createElement("a");
 	link.classList.add("roll-link");
 	_addDataset(link, dataset);
-	link.innerHTML = `<i class="fa-solid fa-dice-d20"></i> ${label}`;
+	link.innerHTML = `<i class="fa-solid fa-dice-d20" inert></i> ${label}`;
 	return link;
 }
 
@@ -115,7 +115,7 @@ function createRollLink(label, dataset) {
  */
 function _addDataset(element, dataset) {
 	for ( const [key, value] of Object.entries(dataset) ) {
-		if ( !["_config", "_input", "values"].includes(key) && value ) element.dataset[key] = value;
+		if ( !key.startsWith("_") && (key !== "values") && value ) element.dataset[key] = value;
 	}
 }
 
@@ -133,16 +133,13 @@ function handleRollAction(event) {
 	if ( !target ) return;
 	event.stopPropagation();
 
-	const action = target.dataset.rollAction;
-	const speaker = ChatMessage.implementation.getSpeaker();
-
-	switch ( action ) {
+	switch ( target.dataset.rollAction ) {
 		case "ability-check":
 		case "ability-save":
 		case "skill":
-		case "tool": return rollCheckSave(event, speaker);
-		case "attack": return rollAttack(event, speaker);
-		case "damage": return rollDamage(event, speaker);
+		case "tool": return rollCheckSave(event);
+		case "attack": return rollAttack(event);
+		case "damage": return rollDamage(event);
 	}
 }
 
@@ -204,10 +201,9 @@ async function enrichAttack(config, label, options) {
 /**
  * Perform an attack roll.
  * @param {Event} event - The click event triggering the action.
- * @param {TokenDocument} [speaker] - Current selected token, if one exists.
  * @returns {Promise|void}
  */
-async function rollAttack(event, speaker) {
+async function rollAttack(event) {
 	const target = event.target.closest(".roll-link");
 	const { formula, activity: activityId } = target.dataset;
 
@@ -228,7 +224,7 @@ async function rollAttack(event, speaker) {
 		data: {
 			flavor: title,
 			title,
-			speaker,
+			speaker: ChatMessage.implementation.getSpeaker(),
 			"flags.black-flag.roll.type": "attack"
 		}
 	};
@@ -458,22 +454,25 @@ async function enrichSave(config, label, options) {
  * @param {TokenDocument} speaker - Currently selected token.
  * @returns {Promise|void}
  */
-function rollCheckSave(event, speaker) {
-	// Fetch the actor that should perform the roll
-	let actor;
-	if ( speaker.token ) actor = game.actors.tokens[speaker.token];
-	actor ??= game.actors.get(speaker.actor);
-	if ( !actor ) {
-		ui.notifications.warn(game.i18n.localize("BF.Enricher.Warning.NoActor"));
-		return;
-	}
-
+async function rollCheckSave(event, speaker) {
 	const target = event.target.closest("[data-roll-action]");
-	const { rollAction, dc, ...data } = target.dataset;
-	const rollConfig = { event, ...data };
-	if ( dc ) rollConfig.options = { target: dc };
+	target.disabled = true;
+	try {
+		const actors = new Set(getSelectedTokens().map(t => t.actor));
+		if ( !actors.size ) {
+			ui.notifications.warn(game.i18n.localize("BF.Enricher.Warning.NoActor"));
+			return;
+		}
 
-	return actor.roll(rollAction, rollConfig);
+		for ( const actor of actors ) {
+			const { rollAction, dc, ...data } = target.dataset;
+			const rollConfig = { event, ...data };
+			if ( dc ) rollConfig.options = { target: dc };
+			await actor.roll(rollAction, rollConfig);
+		}
+	} finally {
+		target.disabled = false;
+	}
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -557,10 +556,9 @@ async function enrichDamage(config, label, options) {
 /**
  * Perform a damage roll.
  * @param {Event} event - The click event triggering the action.
- * @param {TokenDocument} [speaker] - Currently selected token, if one exists.
  * @returns {Promise|void}
  */
-async function rollDamage(event, speaker) {
+async function rollDamage(event) {
 	const target = event.target.closest(".roll-link");
 	const { formula, type } = target.dataset;
 
@@ -576,7 +574,7 @@ async function rollDamage(event, speaker) {
 		data: {
 			flavor: title,
 			title,
-			speaker,
+			speaker: ChatMessage.implementation.getSpeaker(),
 			"flags.black-flag.roll.type": "damage"
 		}
 	};
