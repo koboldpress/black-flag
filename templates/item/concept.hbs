@@ -1,21 +1,21 @@
-<form autocomplete="off"{{#if system.color}} style="--bf-item-color: {{system.color}};"{{/if}}>
+<form autocomplete="off"{{#if system.color}} style="--bf-item-color: {{ system.color }};"{{/if}}>
 
 	<section class="summary">
-		{{> "blackFlag.concept-summary" edit=editable}}
+		{{> "blackFlag.concept-summary" edit=editable }}
 	</section>
 
 	<section class="details">
 		<nav data-group="primary">
-			<a data-tab="advancement">{{localize "BF.Sheet.Tab.Advancement"}}</a>
-			<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+			<a data-tab="advancement">{{ localize "BF.Sheet.Tab.Advancement" }}</a>
+			<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
 		</nav>
 		<div class="tab-area">
 			<div class="tab" data-tab="advancement" data-group="primary">
-				{{> "blackFlag.item-advancement"}}
+				{{> "blackFlag.item-advancement" }}
 			</div>
 			<div class="tab" data-tab="description" data-group="primary">
-				{{editor enriched.description target="system.description.value" button=true
-					editable=editable engine="prosemirror" collaborate=false}}
+				{{ editor enriched.description target="system.description.value" button=true
+				          editable=editable engine="prosemirror" collaborate=false }}
 			</div>
 		</div>
 	</section>

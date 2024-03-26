@@ -1,23 +1,23 @@
 <form autocomplete="off">
 	{{#each choices}}
-		<section class="option" data-uuid="{{this.document.uuid}}">
+		<section class="option" data-uuid="{{ this.document.uuid }}">
 			<figure class="poster">
-				<img src="{{this.document.img}}">
-				<button class="choose">{{localize "BF.Action.Choose.Generic"}}</button>
+				<img src="{{ document.img }}">
+				<button class="choose">{{ localize "BF.Action.Choose.Generic" }}</button>
 				<div class="window-mask" inert></div>
 			</figure>
 			<div class="info">
 				<header>
-					<h1 class="name">{{this.document.name}}</h1>
-					<div class="source">{{this.system.description.source}}</div>
+					<h1 class="name">{{ document.name }}</h1>
+					<div class="source">{{ system.description.source.label }}</div>
 				</header>
 				<div class="description">
-					{{{this.enriched.description}}}
+					{{{ enriched.description }}}
 					{{#if this.system.description.journal}}
 						<p>
-							<a class="content-link" data-uuid="{{this.system.description.journal}}">
-								<i class="fa-solid fa-book-open"></i>
-								{{localize "BF.Journal.Link.MoreInformation"}}
+							<a class="content-link" data-uuid="{{ system.description.journal }}">
+								<i class="fa-solid fa-book-open" inert></i>
+								{{ localize "BF.Journal.Link.MoreInformation" }}
 							</a>
 						</p>
 					{{/if}}
@@ -26,7 +26,7 @@
 		</section>
 	{{else}}
 		<section class="empty">
-			<p>{{localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural}}</p>
+			<p>{{ localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural }}</p>
 		</section>
 	{{/each}}
 </form>

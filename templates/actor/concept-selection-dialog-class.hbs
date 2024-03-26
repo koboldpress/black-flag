@@ -1,13 +1,13 @@
 <form autocomplete="off">
 	{{#each choices}}
-		<section class="option" data-uuid="{{this.document.uuid}}"
-			{{~#if this.document.system.color}} style="--bf-item-color: {{this.document.system.color}};"{{/if}}>
-			{{> "blackFlag.concept-summary" item=this.document system=this.document.system enriched=this.enriched}}
-			<button class="choose">{{localize "BF.Action.Choose.Specific" option=this.document.name}}</button>
+		<section class="option" data-uuid="{{ this.document.uuid }}"
+			{{~#if this.document.system.color}} style="--bf-item-color: {{ this.document.system.color }};"{{/if}}>
+			{{> "blackFlag.concept-summary" item=this.document system=this.document.system enriched=this.enriched }}
+			<button class="choose">{{ localize "BF.Action.Choose.Specific" option=this.document.name }}</button>
 		</section>
 	{{else}}
 		<section class="empty">
-			<p>{{localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural}}</p>
+			<p>{{ localize "BF.ConceptSelection.NoOptions" type=typeName typePlural=typeNamePlural }}</p>
 		</section>
 	{{/each}}
 </form>

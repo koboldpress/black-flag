@@ -2,16 +2,16 @@
 
 	<header class="sheet-header">
 		<figure class="icon">
-			<img src="{{document.img}}" data-edit="img">
+			<img src="{{ document.img }}" data-edit="img">
 		</figure>
 		<h1>
-			<input type="text" name="name" value="{{document.name}}">
+			<input type="text" name="name" value="{{ document.name }}">
 		</h1>
 	</header>
 
 	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
-		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
-		<a data-tab="details">{{localize "BF.Sheet.Tab.Details"}}</a>
+		<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
+		<a data-tab="details">{{ localize "BF.Sheet.Tab.Details" }}</a>
 	</nav>
 
 	<div class="sheet-body">
@@ -19,39 +19,33 @@
 			<section>
 				<div class="category">
 					<label>
-						<span>{{localize "BF.Spell.Ring.Label"}}</span>
+						<span>{{ localize "BF.Spell.Ring.Label" }}</span>
 						<select name="system.ring.base">
-							{{selectOptions spellRings selected=source.ring.base}}
+							{{ selectOptions spellRings selected=source.ring.base }}
 						</select>
 					</label>
 					<label>
-						<span>{{localize "BF.Spell.Circle.Label"}}</span>
+						<span>{{ localize "BF.Spell.Circle.Label" }}</span>
 						<blackFlag-multiSelect name="system.circle" label="{{ system.circle.label }}">
 							<datalist>
 								{{#blackFlag-multiSelect system.circle}}
-									{{selectOptions CONFIG.spellCircles.localized}}
+									{{ selectOptions CONFIG.spellCircles.localized }}
 								{{/blackFlag-multiSelect}}
 							</datalist>
 						</blackFlag-multiSelect>
 					</label>
 					<label>
-						<span>{{localize "BF.Spell.School.Label"}}</span>
+						<span>{{ localize "BF.Spell.School.Label" }}</span>
 						<select name="system.school">
-							{{selectOptions CONFIG.spellSchools selected=system.school labelAttr="label" blank="" localize=true}}
+							{{ selectOptions CONFIG.spellSchools selected=system.school labelAttr="label" blank="" localize=true }}
 						</select>
 					</label>
 				</div>
 				<div class="description-area">
-					{{editor enriched.description target="system.description.value" button=true
-						editable=editable engine="prosemirror" collaborate=false}}
+					{{ editor enriched.description target="system.description.value" button=true
+					          editable=editable engine="prosemirror" collaborate=false }}
 				</div>
-				<label class="source">
-					<span>
-						{{localize "BF.Item.Source.Label"}}
-						<i class="fa-solid fa-circle-question hintIcon" data-tooltip="BF.Item.Source.Hint"></i>
-					</span>
-					<input type="text" name="system.description.source" value="{{system.description.source}}">
-				</label>
+				{{> "blackFlag.item-source" }}
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">

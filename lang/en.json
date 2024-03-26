@@ -192,7 +192,9 @@
 
 "BF.Actor": {
 	"Category": {
-		"Person.Label": "Person"
+		"Person": {
+			"Label": "Person"
+		}
 	},
 	"Type": {
 		"NPC[one]": "Non-Player Character",
@@ -1012,7 +1014,7 @@
 	},
 	"Formula": {
 		"Label": "DC Formula",
-		"Formula.Default": "8 + Ability + Proficiency"
+		"Default": "8 + Ability + Proficiency"
 	}
 },
 
@@ -1558,7 +1560,9 @@
 	"Cost[one]": "Costs {count} Action",
 	"Cost[other]": "Costs {count} Actions",
 	"Description": "The {type} can take {count} legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains spent legendary actions at the start of its turn.",
-	"Max.Label": "Legendary Actions per Round"
+	"Max": {
+		"Label": "Legendary Actions per Round"
+	}
 },
 
 "BF.Level": {
@@ -2165,9 +2169,15 @@
 		"Material": {
 			"Label": "Material",
 			"Abbreviation": "M",
-			"Consumed.Label": "Consumed?",
-			"Cost.Label": "Cost",
-			"Description.Label": "Description"
+			"Consumed": {
+				"Label": "Consumed?"
+			},
+			"Cost": {
+				"Label": "Cost"
+			},
+			"Description": {
+				"Label": "Description"
+			}
 		},
 		"Somatic": {
 			"Label": "Somatic",

@@ -2,15 +2,15 @@
 
 	<header class="sheet-header">
 		<figure class="icon">
-			<img src="{{document.img}}" data-edit="img">
+			<img src="{{ document.img }}" data-edit="img">
 		</figure>
 		<h1>
-			<input type="text" name="name" value="{{document.name}}">
+			<input type="text" name="name" value="{{ document.name }}">
 		</h1>
 	</header>
 
 	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
-		<a data-tab="description">{{localize "BF.Sheet.Tab.Description"}}</a>
+		<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
 	</nav>
 
 	<div class="sheet-body">
@@ -20,24 +20,24 @@
 					<div class="category">
 						<label>
 							<span>
-								{{localize "BF.Currency.Abbreviation.Label"}}
+								{{ localize "BF.Currency.Abbreviation.Label" }}
 								<i class="hintIcon" data-tooltip="BF.Currency.Abbreviation.Hint"></i>
 							</span>
-							<input type="text" name="system.identifier.value" value="{{system.identifier.value}}"
-								placeholder="{{item.identifier}}">
+							<input type="text" name="system.identifier.value" value="{{ system.identifier.value }}"
+							       placeholder="{{ item.identifier }}">
 						</label>
 						<label>
 							<span>
-								{{localize "BF.Currency.ConversionRatio.Label"}}
+								{{ localize "BF.Currency.ConversionRatio.Label" }}
 								<i class="hintIcon" data-tooltip="BF.Currency.ConversionRatio.Hint"></i>
 							</span>
-							<input type="number" name="system.conversion.value" value="{{system.conversion.value}}"
-								min="0.01" step="0.01">
+							<input type="number" name="system.conversion.value" value="{{ system.conversion.value }}"
+							       min="0.01" step="0.01">
 						</label>
 					</div>
 				{{/unless}}
-				{{> "blackFlag.equipment-description" hidePrice=true}}
-				{{> "blackFlag.equipment-source"}}
+				{{> "blackFlag.equipment-description" hidePrice=true }}
+				{{> "blackFlag.item-source" }}
 			</section>
 		</div>
 	</div>

@@ -1,33 +1,33 @@
 <form autocomplete="off" class="drop-target">
 	{{#if advancement.hint}}
-		<p>{{advancement.hint}}</p>
+		<p>{{ advancement.hint }}</p>
 	{{/if}}
 	{{#each choices}}
-		<section class="option" data-uuid="{{this.document.uuid}}">
+		<section class="option" data-uuid="{{ document.uuid }}">
 			<div class="info">
 				<header>
-					<h1 class="name">{{this.document.name}}</h1>
-					<div class="source">{{this.system.description.source}}</div>
+					<h1 class="name">{{ document.name }}</h1>
+					<div class="source">{{ system.description.source.label }}</div>
 				</header>
 				<div class="description">
 					{{#if this.prerequisite}}
 						<p class="prerequisite">
-							{{localize "BF.Prerequisite.Label"}}: {{{this.prerequisite}}}
+							{{ localize "BF.Prerequisite.Label" }}: {{{ prerequisite }}}
 						</p>
 					{{/if}}
-					{{{this.enriched.description}}}
+					{{{ enriched.description }}}
 				</div>
 			</div>
 			<div class="choose">
-				<button type="button" class="choose" {{disabled this.invalid}}>
-					{{localize "BF.Action.Choose.Generic"}}
+				<button type="button" class="choose" {{ disabled invalid }}>
+					{{ localize "BF.Action.Choose.Generic" }}
 				</button>
 			</div>
 		</section>
 	{{/each}}
 	{{#if allowDrops}}
 		<section class="drop-area">
-			<p class="hint">{{dropLabel}}</p>
+			<p class="hint">{{ dropLabel }}</p>
 		</section>
 	{{/if}}
 </form>
