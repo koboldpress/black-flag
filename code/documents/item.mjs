@@ -22,7 +22,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/**
 	 * Attack formula and activity for the default attack this item might have.
-	 * @returns {{formula: string, activity: Activity}|null}
+	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
 	get attackDetails() {
 		for ( const activity of this.system.activities ?? [] ) {
@@ -44,6 +44,20 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
 		if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
 		return game.items.get(this.system.container);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Damage formulas and activity for the default attack this item might have.
+	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
+	 */
+	get damageDetails() {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.damageDetails;
+			if ( details ) return details;
+		}
+		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

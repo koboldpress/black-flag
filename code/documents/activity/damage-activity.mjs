@@ -12,6 +12,16 @@ export default class DamageActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Damage formulas and activity for the default attack this item might have.
+	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
+	 */
+	get damageDetails() {
+		return { rolls: this.createDamageConfigs().rolls, activity: this };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Contents of the effect column in the action table.
 	 * @type {string}
 	 */
@@ -112,11 +122,14 @@ export default class DamageActivity extends Activity {
 
 	/**
 	 * Create damage parts needed for the damage roll.
-	 * @param {DamageRollProcessConfiguration} config - Custom config provided when calling rollDamage.
-	 * @param {object} rollData - Item's starting roll data.
+	 * @param {DamageRollProcessConfiguration} [config] - Custom config provided when calling rollDamage.
+	 * @param {object} [rollData] - Item's starting roll data.
 	 * @returns {DamageRollProcessConfiguration}
 	 */
 	createDamageConfigs(config, rollData) {
+		config ??= {};
+		rollData = this.item.getRollData();
+
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.rolls = [];
 		for ( const damage of this.system.damage?.parts ?? [] ) {

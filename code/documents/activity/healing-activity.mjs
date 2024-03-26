@@ -17,6 +17,16 @@ export default class HealingActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Healing formula and activity for the default attack this item might have.
+	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
+	 */
+	get damageDetails() {
+		return { rolls: this.createDamageConfigs().rolls, activity: this };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Contents of the effect column in the action table.
 	 * @type {string}
 	 */

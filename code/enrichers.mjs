@@ -212,11 +212,11 @@ async function enrichAttack(config, label, options) {
  * @returns {Promise|void}
  */
 async function rollAttack(event) {
-	const target = event.target.closest(".roll-link");
-	const { formula, activity: activityId } = target.dataset;
+	const target = event.target.closest("[data-roll-action]");
+	const { formula, activity: activityUuid } = target.dataset;
 
-	if ( activityId ) {
-		const activity = await fromUuid(activityId);
+	if ( activityUuid ) {
+		const activity = await fromUuid(activityUuid);
 		if ( activity ) return activity.rollAttack();
 	}
 
@@ -551,7 +551,19 @@ async function enrichDamage(configs, label, options) {
 		}
 	}
 
-	if ( !config.formulas.length ) return null;
+	if ( !config.formulas.length ) {
+		const damageDetails = options.relativeTo?.damageDetails;
+		if ( !damageDetails?.rolls.length ) return null;
+		for ( const roll of damageDetails.rolls ) {
+			// TODO: Simplify formula as must as possible for display
+			config.formulas.push(
+				Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data, { missing: "0" })
+			);
+			config.types.push(roll.options.damageType);
+		}
+		config.activity = damageDetails.activity?.uuid;
+	}
+
 	if ( label ) return createRollLink(label, config);
 
 	const parts = [];
@@ -600,13 +612,18 @@ async function enrichDamage(configs, label, options) {
  */
 async function rollDamage(event) {
 	const target = event.target.closest("[data-roll-action]");
-	let { formulas, types } = target.dataset;
+	let { formulas, types, activity: activityUuid } = target.dataset;
 	formulas = JSON.parse(formulas);
 	types = JSON.parse(types);
 
+	if ( activityUuid ) {
+		const activity = await fromUuid(activityUuid);
+		if ( activity ) return activity.rollDamage();
+	}
+
 	const rollConfig = {
 		event,
-		rolls: formulas.map((formula, idx) => ({ parts: [formula], type: types[idx] }))
+		rolls: formulas.map((formula, idx) => ({ parts: [formula], options: { damageType: types[idx] } }))
 	};
 
 	const dialogConfig = {};
