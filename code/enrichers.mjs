@@ -187,7 +187,7 @@ async function enrichAttack(config, label, options) {
 	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 	if ( !config.formula ) {
 		const { formula, activity } = options.relativeTo?.attackDetails ?? {};
-		config.formula = formula ?? "+0";
+		config.formula = formula || "+0";
 		if ( activity ) config.activity = activity.uuid;
 	}
 	// TODO: Simplify formula as must as possible for display

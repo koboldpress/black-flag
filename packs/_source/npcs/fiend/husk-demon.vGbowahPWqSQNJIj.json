@@ -134,7 +134,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The formless pile of desiccated hide and broken scales slowly twists and writhes across the ground like a sheet of canvas in the wind. As it draws closer, a guttural syllabic echo drones in a psychic reverberation.</em></p><p>Life on abyssal planes isn’t easy, even for the demons native to it. Without regular trips to other planes, some lesser demons eventually wear away as the reality-bending chaos consumes them. What remains is known as a husk demon.</p><p><strong>Expunged.</strong> Drained by the chaos and endless fury, little remains of what these demons once were, save for rage and hunger. Husk demons seek to consume the souls of sentient creatures from other planes, a whisper of their demonic form promising relief in the pits of the Abyss, if only they can consume enough souls. These demons slurp at the bodies and souls of creatures, steadily leeching the vitality and thirst for life from victims. After a kill, many husk demons burn and mutilate their victim with a mark of their patron demon. Whether the husk demon recalls the meaning of the mark remains uncertain.</p><p><strong>Tied to the Past.</strong> Husk demons inhabit the ruins of demonic strongholds, ancient demonic prisons, or temples on the Material Plane dedicated to dead gods or infernal exiles. Such sites often contain lost relics and artifacts to which the demons shared a distant connection in life. Experienced scavengers and looters tend to avoid areas said to be inhabited by husk demons, believing the demons to be long-dead guardians pressed into service by the powerful objects themselves. Unfortunate explorers or travelers seeking shelter from the weather may accidentally wander into such places on the Material Plane and find themselves surrounded by these starving fiends.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -204,10 +204,10 @@
   },
   "items": [
     {
-      "name": "Demonic Resilience",
+      "name": "Amorphous",
       "type": "feature",
-      "_id": "Ppmh7G2ki3EYLpgb",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "6drN0HvEq92Dvno7",
+      "img": "icons/creatures/slimes/slime-movement-dripping-purple.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -219,8 +219,68 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[@name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The [[lookup @name lowercase]] can move through a space as narrow as 1 inch wide without squeezing.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.uS8axwG1NAgmQaLi"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1709775043609,
+        "modifiedTime": 1711423617770,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vGbowahPWqSQNJIj.6drN0HvEq92Dvno7"
+    },
+    {
+      "name": "Demonic Resilience",
+      "type": "feature",
+      "_id": "qUYU6lyl8QWlQzTQ",
+      "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -235,7 +295,7 @@
       },
       "effects": [
         {
-          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "icon": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
           "duration": {
             "rounds": null,
@@ -286,7 +346,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!vGbowahPWqSQNJIj.Ppmh7G2ki3EYLpgb.QEROKmLmQGbXQUxg"
+          "_key": "!actors.items.effects!vGbowahPWqSQNJIj.qUYU6lyl8QWlQzTQ.QEROKmLmQGbXQUxg"
         }
       ],
       "folder": null,
@@ -306,13 +366,351 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.018",
         "coreVersion": "11.315",
         "createdTime": 1709611708224,
-        "modifiedTime": 1709616412511,
+        "modifiedTime": 1711423626598,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!vGbowahPWqSQNJIj.Ppmh7G2ki3EYLpgb"
+      "_key": "!actors.items!vGbowahPWqSQNJIj.qUYU6lyl8QWlQzTQ"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "vD0W3bpoZgyMSVta",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.jS7wIZVCAi6I2VMe"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1709773734467,
+        "modifiedTime": 1711423631302,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vGbowahPWqSQNJIj.vD0W3bpoZgyMSVta"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "w0mYqCEirHKKvCxN",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "<p>The husk demon makes two Life Drain attacks.</p>",
+            "system": {},
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711423641737,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vGbowahPWqSQNJIj.w0mYqCEirHKKvCxN"
+    },
+    {
+      "name": "Life Drain",
+      "type": "feature",
+      "_id": "5OSQ5kt80NDgmGGO",
+      "img": "icons/magic/death/hand-undead-skeleton-fire-green.webp",
+      "system": {
+        "activities": {
+          "4ymd0CE3i8jft69S": {
+            "type": "attack",
+            "_id": "4ymd0CE3i8jft69S",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "slashing"
+                  },
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "necrotic"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. Hit: [[/damage average]] damage, and the [[lookup @name lowercase]] regain HP equal to half the necrotic damage dealt. The target must succeed on a [[/save constitution 15]] save or its HP maximum is reduced by an amount equal to the necrotic damage taken. This reduction lasts until the creatures finishes a long rest. The target dies if this effect reduces its HP maximum to 0.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.NKh3nW3uDwfXaCvG"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711423663858,
+        "modifiedTime": 1711497926250,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vGbowahPWqSQNJIj.5OSQ5kt80NDgmGGO"
+    },
+    {
+      "name": "Soul Feed",
+      "type": "feature",
+      "_id": "6UzOYqhSMxBkiOtX",
+      "img": "icons/magic/death/projectile-skull-flaming-yellow.webp",
+      "system": {
+        "activities": {
+          "teybSAwOr8bHt76k": {
+            "type": "savingThrow",
+            "_id": "teybSAwOr8bHt76k",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The husk demon feasts on the light in the soul of up to two creatures it can see within 20 feet of it, causing one of the following effects. Each target must succeed on a [[/save charisma 15]] save or suffer the chosen effect. A creature that fails the save against Soul Feed two rounds in a row suffers one level of exhaustion.</p><ul><li><p><strong>Happiness Feast.</strong> The husk demon feasts on the target’s happiness, causing the target to become crestfallen. The target has disadvantage on attack rolls until the end of its next turn.</p></li><li><p><strong>Hope Feast.</strong> The husk demon feasts on the target’s hope, causing the target to become despondent. The target has disadvantage on saves until the end of its next turn.</p></li><li><p><strong>Motivation Feast.</strong> The husk demon feasts on the target’s motivation, causing the target to lose its ambitions and become apathetic. The target’s speed is halved until the end of its next turn.</p></li></ul>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711423913797,
+        "modifiedTime": 1711423993639,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vGbowahPWqSQNJIj.6UzOYqhSMxBkiOtX"
     }
   ],
   "effects": [],
@@ -323,10 +721,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.018",
     "coreVersion": "11.315",
     "createdTime": 1709611922952,
-    "modifiedTime": 1709616412511,
+    "modifiedTime": 1711497926250,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!vGbowahPWqSQNJIj"

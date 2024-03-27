@@ -123,7 +123,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The emptiness within the suit of plate mail’s visor demonstrates that no creature controls the armor from inside it. An iron sword floats in midair at rest—then suddenly swings and flourishes as though wielded by a trained swordfighter.</em></p><p>Animated objects are nonmagical objects given life by a spellcaster. Though little more than their mundane counterparts, animated objects can be given basic instructions to follow indefinitely or until given new instructions by their creators. The most common animated objects are decorative or seemingly innocuous armor and weapons instructed to protect their creators’ homes, laboratories, treasuries, or other locations important to their creators.</p><p><strong>Animated Armor.</strong> Crafted to look like field armor with dents and scratches showing signs of its use in battle, or ornately decorated for those who want something more aesthetically pleasing, animated armor moves as quickly as those who might wear it. It pummels foes with its gauntlets but can kick or otherwise ram opponents in the absence of its gauntlets.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -193,10 +193,10 @@
   },
   "items": [
     {
-      "name": "Construct Resilience",
+      "name": "Antimagic Susceptibility",
       "type": "feature",
-      "_id": "AsBeG9qwK9QL2RHZ",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "7vDv6MbUjGTHVTgA",
+      "img": "icons/magic/defensive/armor-shield-barrier-steel.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -208,8 +208,126 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The armor is immune to poison and psychic damage, and it is immune to exhaustion and the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The [[lookup @name lowercase]] is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the [[lookup @name lowercase]] must succeed on a [[/save constitution]] save against the caster’s spell save DC or fall unconscious for 1 minute.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ISiRmo3wc4v8hRmf"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421197052,
+        "modifiedTime": 1711421334373,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.7vDv6MbUjGTHVTgA"
+    },
+    {
+      "name": "Construct Nature",
+      "type": "feature",
+      "_id": "ywYUm4fXuphIzGdI",
+      "img": "icons/commodities/tech/furnace-modern.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.qfmee9GxY6dNoGxg"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1709775093376,
+        "modifiedTime": 1711421345062,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.ywYUm4fXuphIzGdI"
+    },
+    {
+      "name": "Construct Resilience",
+      "type": "feature",
+      "_id": "qi3WnDnXp4lTwWll",
+      "img": "icons/commodities/tech/glass-electrode.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is immune to poison and psychic damage, and it is immune to exhaustion and the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -224,7 +342,7 @@
       },
       "effects": [
         {
-          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "icon": "icons/commodities/tech/glass-electrode.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.mgIy0dlBCDXk6o5C",
           "duration": {
             "rounds": null,
@@ -293,7 +411,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!F5iAJEkQmX1oCW8z.AsBeG9qwK9QL2RHZ.kaexE9tx9L3fp0QH"
+          "_key": "!actors.items.effects!F5iAJEkQmX1oCW8z.qi3WnDnXp4lTwWll.kaexE9tx9L3fp0QH"
         }
       ],
       "folder": null,
@@ -313,13 +431,345 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.018",
         "coreVersion": "11.315",
         "createdTime": 1709606040616,
-        "modifiedTime": 1709606201110,
+        "modifiedTime": 1711421688015,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!F5iAJEkQmX1oCW8z.AsBeG9qwK9QL2RHZ"
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.qi3WnDnXp4lTwWll"
+    },
+    {
+      "name": "False Appearance",
+      "type": "feature",
+      "_id": "0AmfuDYe8joCERf9",
+      "img": "icons/commodities/treasure/statue-carved-figurehead.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While the [[lookup @name lowercase]] remains motionless, it is indistinguishable from a normal suit of armor.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.E2PyU7EAiv162L6t"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421375455,
+        "modifiedTime": 1711421433495,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.0AmfuDYe8joCERf9"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "INFhAzbohjkaOxzo",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The animated armor makes two Slam attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711421451929,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.INFhAzbohjkaOxzo"
+    },
+    {
+      "name": "Slam",
+      "type": "feature",
+      "_id": "eEjpPikFO7YS54SY",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "system": {
+        "activities": {
+          "149J8Tnc5Lw1oX7W": {
+            "type": "attack",
+            "_id": "149J8Tnc5Lw1oX7W",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.OmsfJIeLWWS4jnTd"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421009581,
+        "modifiedTime": 1711497600142,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.eEjpPikFO7YS54SY"
+    },
+    {
+      "name": "Helmet Bash (19 HP or Fewer)",
+      "type": "feature",
+      "_id": "KOWaEiJHAMz7bpLg",
+      "img": "icons/equipment/head/greathelm-slotted-steel.webp",
+      "system": {
+        "activities": {
+          "ZJ7HINymOF3rfsaq": {
+            "type": "savingThrow",
+            "_id": "ZJ7HINymOF3rfsaq",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The animated armor slams its helmet into a creature it can sense within 5 feet of it. The target must succeed on a [[/save strength 13]] save or take [[/damage 1d4 + 2 bludgeoning average]] damage and be knocked prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421477237,
+        "modifiedTime": 1711421576187,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!F5iAJEkQmX1oCW8z.KOWaEiJHAMz7bpLg"
     }
   ],
   "effects": [],
@@ -330,10 +780,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.018",
     "coreVersion": "11.315",
-    "createdTime": 1709605982567,
-    "modifiedTime": 1709611182673,
+    "createdTime": 1709606040616,
+    "modifiedTime": 1711497600142,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!F5iAJEkQmX1oCW8z"

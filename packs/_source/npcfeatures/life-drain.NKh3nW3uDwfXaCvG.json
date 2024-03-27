@@ -1,0 +1,99 @@
+{
+  "name": "Life Drain",
+  "type": "feature",
+  "_id": "NKh3nW3uDwfXaCvG",
+  "img": "icons/magic/death/hand-undead-skeleton-fire-green.webp",
+  "system": {
+    "activities": {
+      "4ymd0CE3i8jft69S": {
+        "type": "attack",
+        "_id": "4ymd0CE3i8jft69S",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "8",
+                "bonus": "@mod",
+                "custom": "",
+                "type": "slashing"
+              },
+              {
+                "number": 2,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "necrotic"
+              }
+            ]
+          },
+          "ability": "constitution"
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. Hit: [[/damage average]] damage, and the [[lookup @name lowercase]] regain HP equal to half the necrotic damage dealt. The target must succeed on a [[/save constitution 15]] save or its HP maximum is reduced by an amount equal to the necrotic damage taken. This reduction lasts until the creatures finishes a long rest. The target dies if this effect reduces its HP maximum to 0.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.018",
+    "coreVersion": "11.315",
+    "createdTime": 1711423663858,
+    "modifiedTime": 1711423907446,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!NKh3nW3uDwfXaCvG"
+}

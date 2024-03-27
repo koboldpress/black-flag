@@ -131,7 +131,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The emptiness within the suit of plate mail’s visor demonstrates that no creature controls the armor from inside it. An iron sword floats in midair at rest—then suddenly swings and flourishes as though wielded by a trained swordfighter.</em></p><p>Animated objects are nonmagical objects given life by a spellcaster. Though little more than their mundane counterparts, animated objects can be given basic instructions to follow indefinitely or until given new instructions by their creators. The most common animated objects are decorative or seemingly innocuous armor and weapons instructed to protect their creators’ homes, laboratories, treasuries, or other locations important to their creators.</p><p><strong>Flying Sword.</strong> Often paired with animated armor, a flying sword appears equally as battle-worn or ornate as the accompanying armor. The sword may also sit alone, innocuous among a rack of weapons, ready to fly out at intruders. Though more maneuverable than most animated objects, its fragility makes it easier to destroy.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -201,10 +201,10 @@
   },
   "items": [
     {
-      "name": "Construct Resilience",
+      "name": "Antimagic Susceptibility",
       "type": "feature",
-      "_id": "S17HbJgLegx9FBO3",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "0rnE6H0HieAZOb6l",
+      "img": "icons/magic/defensive/armor-shield-barrier-steel.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -216,8 +216,126 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The sword is immune to poison and psychic damage, and it is immune to exhaustion and the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The [[lookup @name lowercase]] is incapacitated while in the area of an <em>antimagic field</em>. If targeted by <em>dispel magic</em>, the [[lookup @name lowercase]] must succeed on a [[/save constitution]] save against the caster’s spell save DC or fall unconscious for 1 minute.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ISiRmo3wc4v8hRmf"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421197052,
+        "modifiedTime": 1711423373591,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.0rnE6H0HieAZOb6l"
+    },
+    {
+      "name": "Construct Nature",
+      "type": "feature",
+      "_id": "GWfyGFB1cjbYmXj2",
+      "img": "icons/commodities/tech/furnace-modern.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.qfmee9GxY6dNoGxg"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1709775093376,
+        "modifiedTime": 1711423384137,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.GWfyGFB1cjbYmXj2"
+    },
+    {
+      "name": "Construct Resilience",
+      "type": "feature",
+      "_id": "xvsssnE7I2CwvCM4",
+      "img": "icons/commodities/tech/glass-electrode.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is immune to poison and psychic damage, and it is immune to exhaustion and the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -301,7 +419,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!WdBjJZWKexQ9yWKE.S17HbJgLegx9FBO3.kaexE9tx9L3fp0QH"
+          "_key": "!actors.items.effects!WdBjJZWKexQ9yWKE.xvsssnE7I2CwvCM4.kaexE9tx9L3fp0QH"
         }
       ],
       "folder": null,
@@ -321,13 +439,252 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.018",
         "coreVersion": "11.315",
         "createdTime": 1709606040616,
-        "modifiedTime": 1709606322550,
+        "modifiedTime": 1711423386485,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!WdBjJZWKexQ9yWKE.S17HbJgLegx9FBO3"
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.xvsssnE7I2CwvCM4"
+    },
+    {
+      "name": "False Appearance",
+      "type": "feature",
+      "_id": "VvyeUCmeRQ0Uhlnd",
+      "img": "icons/commodities/treasure/statue-carved-figurehead.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While the [[lookup @name lowercase]] remains motionless, it is indistinguishable from a normal sword.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.E2PyU7EAiv162L6t"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421375455,
+        "modifiedTime": 1711423397755,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.VvyeUCmeRQ0Uhlnd"
+    },
+    {
+      "name": "Slash",
+      "type": "feature",
+      "_id": "rHFXNJdmkNvJJS1K",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "activities": {
+          "SRPpzKL399HG8wAY": {
+            "type": "attack",
+            "_id": "SRPpzKL399HG8wAY",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "1",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ElVb4hPQIAKlDmN4"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711423473508,
+        "modifiedTime": 1711497699279,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.rHFXNJdmkNvJJS1K"
+    },
+    {
+      "name": "Whirling Blade (6 HP or Fewer)",
+      "type": "feature",
+      "_id": "9oTyPW4XTvpnRkPX",
+      "img": "icons/skills/melee/swords-triple-orange.webp",
+      "system": {
+        "activities": {
+          "rd9ANC8RqLeNSjj6": {
+            "type": "utility",
+            "_id": "rd9ANC8RqLeNSjj6",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The flying sword makes a Slash attack against a target it can sense within 5 feet of it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711423526045,
+        "modifiedTime": 1711423561958,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WdBjJZWKexQ9yWKE.9oTyPW4XTvpnRkPX"
     }
   ],
   "effects": [],
@@ -338,10 +695,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.018",
     "coreVersion": "11.315",
     "createdTime": 1709606236479,
-    "modifiedTime": 1709671404344,
+    "modifiedTime": 1711497699279,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!WdBjJZWKexQ9yWKE"

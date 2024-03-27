@@ -95,6 +95,13 @@
 
 .unlink {
 	&:hover, &:focus { text-shadow: none; }
+	&:hover, &:focus-visible {
+		.roll-link { text-shadow: 0 0 4px var(--bf-color-border-light-blue); }
+	}
+}
+.roll-link {
+	text-decoration: underline;
+	&:hover, &:focus-visible { text-shadow: 0 0 4px var(--bf-color-border-light-blue); }
 }
 
 .unlist {
