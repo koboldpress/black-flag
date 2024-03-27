@@ -122,7 +122,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>This miniature fiend has horns jutting from its head, and its oversized bat ears almost rival the horns in length. It gazes with expressionless, black eyes.</em></p><p>Quasits take to mortal worlds to escape bullying from most other demons and to spread Abyssal destruction there by making themselves available as familiars to spellcasters. While serving as familiars, quasits goad their masters into vile acts. These acts often start small and simple, slowly escalating until the master has been fully corrupted by the quasit’s influence.</p><p><strong>Cowardly Shapechangers.</strong> Quasits rarely show their true forms, preferring instead to assume a shape suited for its current environment. The cowardly creatures also rely on their invisibility to escape destruction.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -194,8 +194,8 @@
     {
       "name": "Demonic Resilience",
       "type": "feature",
-      "_id": "ZMTYWHtLOGQr9lXn",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "l8IazwGyGtwQomzN",
+      "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -207,8 +207,10 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[@name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The [[lookup @name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -223,7 +225,7 @@
       },
       "effects": [
         {
-          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "icon": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
           "duration": {
             "rounds": null,
@@ -274,7 +276,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!vyegR5HG5tDlmfxn.ZMTYWHtLOGQr9lXn.QEROKmLmQGbXQUxg"
+          "_key": "!actors.items.effects!vyegR5HG5tDlmfxn.l8IazwGyGtwQomzN.QEROKmLmQGbXQUxg"
         }
       ],
       "folder": null,
@@ -294,13 +296,521 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.018",
         "coreVersion": "11.315",
         "createdTime": 1709611708224,
-        "modifiedTime": 1709616400804,
+        "modifiedTime": 1711503155886,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!vyegR5HG5tDlmfxn.ZMTYWHtLOGQr9lXn"
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.l8IazwGyGtwQomzN"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "olOgAmiHotUvSEUx",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.jS7wIZVCAi6I2VMe"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1709773734467,
+        "modifiedTime": 1711503163024,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.olOgAmiHotUvSEUx"
+    },
+    {
+      "name": "Claws (True Form Only)",
+      "type": "feature",
+      "_id": "MnL9v7YnIeGmEtx2",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage, and the target must succeed on a [[/save constitution 13]] save or take [[/damage 2d4 poison average]] damage and become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711504697331,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.MnL9v7YnIeGmEtx2"
+    },
+    {
+      "name": "Slam (Beast Form Only)",
+      "type": "feature",
+      "_id": "qReweXyURxBiOCUq",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "system": {
+        "activities": {
+          "149J8Tnc5Lw1oX7W": {
+            "type": "attack",
+            "_id": "149J8Tnc5Lw1oX7W",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage]] damage (based on the type of damage dealt by the Beast form’s primary attack, such as Bite).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.OmsfJIeLWWS4jnTd"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711421009581,
+        "modifiedTime": 1711504707261,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.qReweXyURxBiOCUq"
+    },
+    {
+      "name": "Invisibility (True Form Only)",
+      "type": "feature",
+      "_id": "2CDNiLFJxARmzpzJ",
+      "img": "icons/creatures/magical/spirit-fear-energy-pink.webp",
+      "system": {
+        "activities": {
+          "nwNhUHGQlOCPrFCi": {
+            "type": "utility",
+            "_id": "nwNhUHGQlOCPrFCi",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically turns invisible until it attacks, uses Scare, or uses Change Shape, or until its concentration ends (as if concentrating on a spell). Any equipment the [[lookup @name lowercase]] wears or carries is invisible with it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.1IHhl4zwr49sgVQS"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711503394460,
+        "modifiedTime": 1711504476679,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.2CDNiLFJxARmzpzJ"
+    },
+    {
+      "name": "Change Shape",
+      "type": "feature",
+      "_id": "f23Ymu7MveTJFRMe",
+      "img": "icons/creatures/magical/construct-stone-earth-gray.webp",
+      "system": {
+        "activities": {
+          "O0mN7LJgbaFFLn3b": {
+            "type": "utility",
+            "_id": "O0mN7LJgbaFFLn3b",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically transforms into a Medium or smaller Beast that has a CR no higher than its own or back into its true form, which is a [[lookup @traits.type.config.label]]. Its statistics, other than its size and speed, are the same in each form. Any equipment it is wearing or carrying transforms with it. It reverts to its true form if it dies.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.Yrb50WtUeyxgXygZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711503490478,
+        "modifiedTime": 1711504026923,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.f23Ymu7MveTJFRMe"
+    },
+    {
+      "name": "Scare",
+      "type": "feature",
+      "_id": "pjr5hk5SCS8FJSD3",
+      "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
+      "system": {
+        "activities": {
+          "QvM2f71FRrlqMzVu": {
+            "type": "savingThrow",
+            "_id": "QvM2f71FRrlqMzVu",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>One creature of the quasit’s choice within 20 feet of it must succeed on a [[/save wisdom 13]] save or be frightened for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711504009898,
+        "modifiedTime": 1711504133619,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!vyegR5HG5tDlmfxn.pjr5hk5SCS8FJSD3"
     }
   ],
   "effects": [],
@@ -311,10 +821,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.018",
     "coreVersion": "11.315",
     "createdTime": 1709616282254,
-    "modifiedTime": 1709616400804,
+    "modifiedTime": 1711504707261,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!vyegR5HG5tDlmfxn"

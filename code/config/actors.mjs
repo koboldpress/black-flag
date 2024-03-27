@@ -50,6 +50,7 @@ export const creatureTypes = {
 	}
 };
 localizeConfig(creatureTypes);
+localizeConfig(creatureTypes, { propertyName: "localizedPlural", pluralRule: "other" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

@@ -41,6 +41,14 @@ export default class CreatureTypeField extends foundry.data.fields.SchemaField {
 			},
 			enumerable: false
 		});
+		Object.defineProperty(obj, "config", {
+			get() {
+				return {
+					label: CONFIG.BlackFlag.creatureTypes.localized[obj.value],
+					plural: CONFIG.BlackFlag.creatureTypes.localizedPlural[obj.value]
+				};
+			}
+		});
 
 		return obj;
 	}

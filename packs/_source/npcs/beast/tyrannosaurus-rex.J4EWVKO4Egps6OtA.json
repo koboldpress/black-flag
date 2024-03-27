@@ -180,7 +180,383 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "5ry7UNIkh13AN7cC",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The tyrannosaurus makes one Bite attack and one Tail attack. It can’t make both attacks against the same target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711504869112,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!J4EWVKO4Egps6OtA.5ry7UNIkh13AN7cC"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "8lqfSXYCAb1ztLXt",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": "12",
+                    "bonus": "5",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage]] damage. If the target is a Larger or smaller creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the [[lookup @name lowercase]] can’t Bite another target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711504925820,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!J4EWVKO4Egps6OtA.8lqfSXYCAb1ztLXt"
+    },
+    {
+      "name": "Tail",
+      "type": "feature",
+      "_id": "ostZZz5ZQMzxfUWH",
+      "img": "icons/creatures/abilities/tail-swipe-green.webp",
+      "system": {
+        "activities": {
+          "nK9DHZRtdth4i7Kf": {
+            "type": "attack",
+            "_id": "nK9DHZRtdth4i7Kf",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": "8",
+                    "bonus": "5",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one creature. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.b8zfKznhQRxpJ1ru"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711504620199,
+        "modifiedTime": 1711504939742,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!J4EWVKO4Egps6OtA.ostZZz5ZQMzxfUWH"
+    },
+    {
+      "name": "Rending Strike",
+      "type": "feature",
+      "_id": "mVyJnuZKvedO80Ba",
+      "img": "icons/creatures/abilities/mouth-teeth-rows-red.webp",
+      "system": {
+        "activities": {
+          "vcJUXMKF2xdBym2e": {
+            "type": "savingThrow",
+            "_id": "vcJUXMKF2xdBym2e",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "12",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "16"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While grappling a creature, the tyrannosaurus shakes its head, tearing at the creature. The grappled creature must succeed on a [[/save strength 16]] save or take [[/damage 1d12 slashing average]] damage and be thrown up to 20 feet in a random direction and knocked prone. If the thrown target strikes a solid surface, the target takes [[/damage 1d6 bludgeoning average]] damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a [[/save dexterity 16]] save or take the same damage and be knocked prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.018",
+        "coreVersion": "11.315",
+        "createdTime": 1711504774992,
+        "modifiedTime": 1711504959913,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!J4EWVKO4Egps6OtA.mVyJnuZKvedO80Ba"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -189,10 +565,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.018",
     "coreVersion": "11.315",
     "createdTime": 1709616436609,
-    "modifiedTime": 1709616481371,
+    "modifiedTime": 1711504959913,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!J4EWVKO4Egps6OtA"
