@@ -61,6 +61,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 				title: game.i18n.localize(this.activity.constructor.metadata.title),
 				icon: this.activity.constructor.metadata.icon
 			},
+			description: source.description,
 			enriched: await TextEditor.enrichHTML(source.description ?? "", {
 				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.item
 			}),
