@@ -112,32 +112,27 @@
 					</div>
 				</fieldset>
 				<fieldset class="targeting">
-					<legend>{{localize "BF.Targeting.Label"}}</legend>
+					<legend>{{ localize "BF.Targeting.Label" }}</legend>
 					<div class="field-group">
-						<span>{{localize "BF.Target.Label[one]"}}</span>
+						<span>{{ localize "BF.Target.Label[one]" }}</span>
 						{{#if system.target.affects.scalar}}
 							<label>
-								<span>{{localize "BF.Target.Count.Label"}}</span>
-								<input type="text" name="system.target.affects.count" value="{{source.target.affects.count}}"
-									placeholder="{{system.target.affects.placeholder}}">
+								<span>{{ localize "BF.Target.Count.Label" }}</span>
+								<input type="text" name="system.target.affects.count" value="{{ source.target.affects.count }}"
+								       placeholder="{{ system.target.affects.placeholder }}">
 							</label>
 						{{/if}}
 						<label>
-							<span>{{localize "BF.Target.Type.Label"}}</span>
+							<span>{{ localize "BF.Target.Type.Label" }}</span>
 							<select name="system.target.affects.type">
-								{{#select system.target.affects.type}}
-									{{#unless system.target.template.type}}
-										<option value="">{{localize "BF.Range.Type.Self.Label"}}</option>
-									{{/unless}}
-									{{selectOptions CONFIG.targetTypes.localized}}
-								{{/select}}
+								{{ selectOptions CONFIG.targetTypes.localized blank="" }}
 							</select>
 						</label>
 					</div>
 					{{#if (eq system.target.affects.type "special")}}
 						<label>
-							<span>{{localize "BF.Target.Special.Label"}}</span>
-							<input type="text" name="system.target.affects.special" value="{{system.target.affects.special}}">
+							<span>{{ localize "BF.Target.Special.Label" }}</span>
+							<input type="text" name="system.target.affects.special" value="{{ system.target.affects.special }}">
 						</label>
 					{{/if}}
 					<!-- TODO: If area of effect, does it only affect targets of your choice -->
