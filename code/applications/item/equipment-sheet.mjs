@@ -1,7 +1,10 @@
 import { filteredKeys, makeLabel, sortObjectEntries } from "../../utils/_module.mjs";
+import EffectsElement from "../components/effects.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class EquipmentSheet extends BaseItemSheet {
+
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "equipment", "item", "sheet"],
@@ -16,6 +19,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get template() {
 		return `systems/black-flag/templates/item/${this.document.type}.hbs`;
 	}
@@ -24,8 +28,11 @@ export default class EquipmentSheet extends BaseItemSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
+
+		context.effects = EffectsElement.prepareContext(this.item.effects);
 
 		// Category
 		if ( context.system.validCategories?.localized ) context.categories = {
@@ -71,6 +78,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_getSubmitData(updateData={}) {
 		const data = foundry.utils.expandObject(super._getSubmitData(updateData));
 

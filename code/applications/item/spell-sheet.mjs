@@ -1,7 +1,10 @@
 import { filteredKeys } from "../../utils/_module.mjs";
+import EffectsElement from "../components/effects.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class SpellSheet extends BaseItemSheet {
+
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "spell", "item", "sheet"],
@@ -17,8 +20,11 @@ export default class SpellSheet extends BaseItemSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
+
+		context.effects = EffectsElement.prepareContext(this.item.effects);
 
 		context.components = Object.entries(CONFIG.BlackFlag.spellComponents).reduce((obj, [k, p]) => {
 			obj[k] = { label: game.i18n.localize(p.label), selected: context.system.components.required.has(k) };
@@ -53,6 +59,7 @@ export default class SpellSheet extends BaseItemSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_getSubmitData(updateData={}) {
 		const data = foundry.utils.expandObject(super._getSubmitData(updateData));
 
