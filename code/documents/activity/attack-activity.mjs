@@ -36,11 +36,14 @@ export default class AttackActivity extends DamageActivity {
 	get attackDetails() {
 		const ability = this.actor?.system.abilities[this.attackAbility];
 		const rollData = this.item.getRollData();
-		const { parts, data } = buildRoll({
-			mod: ability?.mod,
-			prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
-			bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
-		}, rollData);
+		const { parts, data } = buildRoll(
+			this.system.attack.flat ? { toHit: this.system.attack.bonus } : {
+				mod: ability?.mod,
+				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+				bonus: this.system.attack.bonus,
+				actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+			}, rollData
+		);
 		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
 	}
 

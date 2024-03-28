@@ -1,5 +1,6 @@
 import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
-import { DamageField } from "../fields/_module.mjs";
+import DamageField from "../fields/damage-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 
@@ -7,6 +8,8 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * Configuration data for the attack activity.
  */
 export class AttackData extends foundry.abstract.DataModel {
+
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			type: new SchemaField({
@@ -14,6 +17,10 @@ export class AttackData extends foundry.abstract.DataModel {
 				classification: new StringField({label: "BF.Attack.Classification.Label"})
 			}),
 			ability: new StringField(),
+			attack: new SchemaField({
+				bonus: new FormulaField({label: "BF.Activity.Attack.Bonus.Label"}),
+				flat: new BooleanField({label: "BF.Activity.Attack.Flat.Label", hint: "BF.Activity.Attack.Flat.Hint"})
+			}),
 			damage: new SchemaField({
 				includeBaseDamage: new BooleanField({
 					initial: true, label: "BF.Activity.Attack.IncludeBaseDamage.Label",
@@ -29,6 +36,7 @@ export class AttackData extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareData() {
 		const item = this.parent.item.system ?? {};
 		const propertiesToSet = ["type.value", "type.classification"];
@@ -41,6 +49,7 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareFinalData() {
 		const ability = this.parent.actor?.system.abilities[this.parent.attackAbility];
 		const rollData = this.parent.item.getRollData({ deterministic: true });
