@@ -125,7 +125,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>This gaunt, gray humanoid wears rags and smells strongly of rotting flesh. It flicks a long tongue out of its mouth, sensing for its next warm meal.</em></p><p>Ghouls amass in nightmarish packs to scour the world for the flesh of the dead. Though capable hunters, most ghoul packs raid cemeteries and ancient crypts to feast on putrefied flesh. Forever starving for their next meal, ghouls never decay nor age and may prowl the long-forgotten mausoleums of dead civilizations for thousands of years, searching for their next morsel of flesh.</p><p><strong>Abyssal Creator.</strong> A demon lord with dominion over undead laid waste to a mortal army and saw fit to experiment on the abundance of corpses. Thus were made the first ghouls. The demon lord crafted these ghouls to be undead shock troops smart enough to follow orders but not enough to question them.</p><p><strong>Bestial Nature.</strong> Contributing to their mental diminishment, ghouls have a never-ending desire to eat flesh. They carry none of their concerns from their former lives, so their clothes are reduced to rags. The animalistic ghouls hunt in packs, sniffing the air for prey and running on their forelimbs and legs when chasing down their victims. They also proudly embrace the nauseating stench they emanate after they consume and revel in their kills.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -195,9 +195,10 @@
   },
   "items": [
     {
-      "name": "Undead Resilience",
+      "name": "Ghoul Hunger",
       "type": "feature",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "iqLThMdvlE1Bo7fB",
+      "img": "icons/magic/death/skull-energy-light-white.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -209,8 +210,177 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[@name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>A disease spread by ghouls, <em>ghoul hunger</em> instills a despicable hunger for Humanoid flesh in the creature suffering it. Until the disease is cured, the infected creature is poisoned. This effect can be suppressed for 1 hour if the infected creature consumes any amount of Humanoid flesh. Every 12 hours that elapse, the infected creature must succeed on a [[/save constitution 13]] save or its HP maximum is reduced by 7 ([[/r 2d6]]). The creature has disadvantage on this save if it consumed any amount of Humanoid flesh while diseased. This reduction lasts until the creature finishes a long rest after the disease is cured. The creature dies if this effect reduces its HP maximum to 0. If the infected creature fails two of these saves or dies while infected, it becomes a ghoul, or a ghast if its PB is +4 or higher, in a flesh-rending transformation. Only a wish spell or similarly powerful magic can reverse the transformation. A creature that succeeds on two saves recovers from the disease.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711743612510,
+        "modifiedTime": 1711743742212,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.iqLThMdvlE1Bo7fB"
+    },
+    {
+      "name": "Hungry Dead Nature",
+      "type": "feature",
+      "_id": "9VeCTQXzXGdqAzVm",
+      "img": "icons/magic/death/skull-energy-light-purple.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The ghoul doesn’t require air or sleep. In addition, it must consume at least 2 pounds of raw meat every 24 hours, or it loses its immunity to exhaustion and risks starvation until it does so. While it has any levels of exhaustion from starvation, the ghoul can’t remove levels of exhaustion until it consumes at least 4 pounds of raw meat.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711743750244,
+        "modifiedTime": 1711743777644,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.9VeCTQXzXGdqAzVm"
+    },
+    {
+      "name": "Spider Climb",
+      "type": "feature",
+      "_id": "FYklTh7Wv7HsWkuB",
+      "img": "icons/creatures/invertebrates/spider-web-red.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.OzFKQOuwMXIPVAOv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709773683319,
+        "modifiedTime": 1711743784446,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.FYklTh7Wv7HsWkuB"
+    },
+    {
+      "name": "Undead Resilience",
+      "type": "feature",
+      "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -264,7 +434,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!ZbOSkmu1Vo1l6UyP.sFqrQxc7xprAI6Xv.eTrciZFtsPDaLR2j"
+          "_key": "!actors.items.effects!ZbOSkmu1Vo1l6UyP.wU0iSGGxsig4Lp1I.eTrciZFtsPDaLR2j"
         }
       ],
       "folder": null,
@@ -283,15 +453,301 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1706467905493,
-        "modifiedTime": 1709617465257,
+        "modifiedTime": 1711743787612,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "sFqrQxc7xprAI6Xv",
+      "_id": "wU0iSGGxsig4Lp1I",
       "sort": 0,
-      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.sFqrQxc7xprAI6Xv"
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.wU0iSGGxsig4Lp1I"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "oiRf6oFld57dZtSF",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The ghoul makes one Bite attack and one Claws attack. If both attacks hit a Humanoid target, the target must succeed on a [[/save constitution 13]] save or contract Ghoul Hunger (see the Ghoul Hunger trait).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711743825710,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.oiRf6oFld57dZtSF"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "XRUVxwNl8P9UJWWS",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "flat": true,
+                "bonus": "3"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711743915014,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.XRUVxwNl8P9UJWWS"
+    },
+    {
+      "name": "Claws",
+      "type": "feature",
+      "_id": "CK2hEboPhOmYXiQE",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage. If the target is a creature other than an elf, Construct, or Undead, it must succeed on a [[/save constitution 13]] save or be paralyzed for 1 minute. The target can repeat the save at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711743921404,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ZbOSkmu1Vo1l6UyP.CK2hEboPhOmYXiQE"
     }
   ],
   "effects": [],
@@ -302,10 +758,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709617414070,
-    "modifiedTime": 1711586481391,
+    "modifiedTime": 1711743921404,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ZbOSkmu1Vo1l6UyP"

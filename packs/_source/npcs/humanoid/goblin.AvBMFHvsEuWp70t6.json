@@ -120,7 +120,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Stepping out of the shadows, this small yellowish-green humanoid has long, pointed ears and peculiar nose slits. It grins slyly as a dozen more step into view behind it.</em></p><p>Though often considered the lowest of sneaks and thieves, goblins largely ignore what others think of them, stubbornly prospering in areas disregarded by civilization and completing tasks that others disdain. Fortunately, a goblin can find joy almost anywhere.</p><p><strong>Cunning Over Strength.</strong> Goblin leaders are chosen for their intelligence and deviousness rather than strength at arms. Similarly, goblins value numbers over an individual’s strength, relying on each other to overwhelm powerful foes.</p><p><strong>Natural Spies.</strong> Many goblins parley their natural stealth into careers. In urban environments, they excel in spycraft, information gathering, and thievery. In the wilderness, goblins are skillful scouts, trappers, and bandits.</p><p><strong>Delight in Thievery.</strong> Goblin culture considers stealing a delightful challenge. A goblin who can’t guard a possession doesn’t deserve it. Every goblin appreciates a good robbery, even if they are the victim. However, this peculiarity often leads to friction between goblins and other peoples.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -326,6 +326,422 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!AvBMFHvsEuWp70t6.OkavdvhjNCnzHpzT"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Scimitar",
+      "type": "weapon",
+      "_id": "aKDQCOAxPGlV55SD",
+      "img": "icons/weapons/swords/scimitar-worn-blue.webp",
+      "system": {
+        "activities": {
+          "gL32bKLiV4SNKBpk": {
+            "type": "attack",
+            "_id": "gL32bKLiV4SNKBpk",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "scimitar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "slashing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.MwYjehTr9oJlHb1Z"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701025022972,
+        "modifiedTime": 1711745237144,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!AvBMFHvsEuWp70t6.aKDQCOAxPGlV55SD"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Shortbow",
+      "type": "weapon",
+      "_id": "OscLGjvOwDGRfGad",
+      "img": "icons/weapons/bows/shortbow-arrows-black.webp",
+      "system": {
+        "activities": {
+          "D0FYdeEdtvBoLM3B": {
+            "type": "attack",
+            "_id": "D0FYdeEdtvBoLM3B",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range 80/320 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "simple",
+          "base": "shortbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 80,
+          "long": 320,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.jqDqlfsNkDCUIYHZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024643661,
+        "modifiedTime": 1711745241669,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!AvBMFHvsEuWp70t6.OscLGjvOwDGRfGad"
+    },
+    {
+      "name": "Gang Up (1/Day)",
+      "type": "feature",
+      "_id": "oRCcOV0aOmocYndZ",
+      "img": "icons/creatures/magical/humanoid-silhouette-aliens-green.webp",
+      "system": {
+        "activities": {
+          "SQGKD8ZjYWoajBk0": {
+            "type": "savingThrow",
+            "_id": "SQGKD8ZjYWoajBk0",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "12"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The goblin moves up to half its speed toward a creature it can see. Each friendly goblin within 30 feet of the goblin can use its reaction to join the gang up and move up to half its speed toward the same target. This movement doesn’t provoke opportunity attacks. If the initiating goblin is within 5 feet of the target, the target must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one. For each goblin after the first that participated in the gang up and that is within 10 feet of the target, the damage increases by 1 as arrows, knives, sharp pocket scraps, and similar “weapons” fly at the target from all angles. Afterwards, each goblin after the first that participated in the gang up can’t use Gang Up until it finishes a short or long rest.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711745890383,
+        "modifiedTime": 1711746171468,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!AvBMFHvsEuWp70t6.oRCcOV0aOmocYndZ"
+    },
+    {
+      "name": "Nimble Escape",
+      "type": "feature",
+      "_id": "CjbcRJa2O9miwmrf",
+      "img": "icons/creatures/magical/humanoid-silhouette-dashing-blue.webp",
+      "system": {
+        "activities": {
+          "0hff12hzdGvuh812": {
+            "type": "utility",
+            "_id": "0hff12hzdGvuh812",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] takes the Disengage or Hide action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.FBD7mm1TgD77aaIv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711746069449,
+        "modifiedTime": 1711746101307,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!AvBMFHvsEuWp70t6.CjbcRJa2O9miwmrf"
     }
   ],
   "effects": [],
@@ -336,10 +752,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709618017022,
-    "modifiedTime": 1711586113264,
+    "modifiedTime": 1711746171468,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!AvBMFHvsEuWp70t6"

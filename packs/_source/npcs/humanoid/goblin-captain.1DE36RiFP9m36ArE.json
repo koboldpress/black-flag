@@ -120,7 +120,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Stepping out of the shadows, this small yellowish-green humanoid has long, pointed ears and peculiar nose slits. It grins slyly as a dozen more step into view behind it.</em></p><p>Though often considered the lowest of sneaks and thieves, goblins largely ignore what others think of them, stubbornly prospering in areas disregarded by civilization and completing tasks that others disdain. Fortunately, a goblin can find joy almost anywhere.</p><p><strong>Cunning Over Strength.</strong> Goblin leaders are chosen for their intelligence and deviousness rather than strength at arms. Similarly, goblins value numbers over an individual’s strength, relying on each other to overwhelm powerful foes.</p><p><strong>Natural Spies.</strong> Many goblins parley their natural stealth into careers. In urban environments, they excel in spycraft, information gathering, and thievery. In the wilderness, goblins are skillful scouts, trappers, and bandits.</p><p><strong>Delight in Thievery.</strong> Goblin culture considers stealing a delightful challenge. A goblin who can’t guard a possession doesn’t deserve it. Every goblin appreciates a good robbery, even if they are the victim. However, this peculiarity often leads to friction between goblins and other peoples.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -321,6 +321,556 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!1DE36RiFP9m36ArE.BB03B5uNLkhUFa4j"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "pfVUS2b321dcIUEE",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The goblin captain makes two Scimitar or Shortbow attacks. If both attacks hit one target, the goblin captain can make one extra Scimitar or Shortbow attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711746312165,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.pfVUS2b321dcIUEE"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Scimitar",
+      "type": "weapon",
+      "_id": "QkjzAK2Md0twem7B",
+      "img": "icons/weapons/swords/scimitar-worn-blue.webp",
+      "system": {
+        "activities": {
+          "gL32bKLiV4SNKBpk": {
+            "type": "attack",
+            "_id": "gL32bKLiV4SNKBpk",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "scimitar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "slashing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.MwYjehTr9oJlHb1Z"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701025022972,
+        "modifiedTime": 1711746199894,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.QkjzAK2Md0twem7B"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Shortbow",
+      "type": "weapon",
+      "_id": "Mst6qSEZqQPZ5VhW",
+      "img": "icons/weapons/bows/shortbow-arrows-black.webp",
+      "system": {
+        "activities": {
+          "D0FYdeEdtvBoLM3B": {
+            "type": "attack",
+            "_id": "D0FYdeEdtvBoLM3B",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range 80/320 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "simple",
+          "base": "shortbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 80,
+          "long": 320,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.jqDqlfsNkDCUIYHZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024643661,
+        "modifiedTime": 1711746204146,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.Mst6qSEZqQPZ5VhW"
+    },
+    {
+      "name": "Get That One!",
+      "type": "feature",
+      "_id": "9rCJkYeLCwksZXew",
+      "img": "icons/skills/melee/hand-grip-sword-strike-orange.webp",
+      "system": {
+        "activities": {
+          "D9aJ3q22TopwlGRm": {
+            "type": "utility",
+            "_id": "D9aJ3q22TopwlGRm",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The goblin captain points at a target and calls out to a friendly goblin it can see within 30 feet of it. The chosen goblin can use its reaction to move up to half its speed and make one melee attack against the target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711746210183,
+        "modifiedTime": 1711746256997,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.9rCJkYeLCwksZXew"
+    },
+    {
+      "name": "Nimble Escape",
+      "type": "feature",
+      "_id": "bjqU2UCc2kOCKm1W",
+      "img": "icons/creatures/magical/humanoid-silhouette-dashing-blue.webp",
+      "system": {
+        "activities": {
+          "0hff12hzdGvuh812": {
+            "type": "utility",
+            "_id": "0hff12hzdGvuh812",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] takes the Disengage or Hide action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.FBD7mm1TgD77aaIv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711746069449,
+        "modifiedTime": 1711746262316,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.bjqU2UCc2kOCKm1W"
+    },
+    {
+      "name": "Protect Me!",
+      "type": "feature",
+      "_id": "SzV5Dc26u5QwPD3z",
+      "img": "icons/skills/melee/shield-damaged-broken-brown.webp",
+      "system": {
+        "activities": {
+          "hEHZvvWTduPozkO8": {
+            "type": "utility",
+            "_id": "hEHZvvWTduPozkO8",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": "When a creature the goblin captain can see targets it with an attack"
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the goblin captain can see targets it with an attack, the captain can sidestep behind an ally within 5 feet of it, moving to an unoccupied space within 5 feet of the ally. The chosen ally becomes the target of the attack instead.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711746264727,
+        "modifiedTime": 1711746296737,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!1DE36RiFP9m36ArE.SzV5Dc26u5QwPD3z"
     }
   ],
   "effects": [],
@@ -331,10 +881,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709618145219,
-    "modifiedTime": 1711586083310,
+    "modifiedTime": 1711746312165,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!1DE36RiFP9m36ArE"

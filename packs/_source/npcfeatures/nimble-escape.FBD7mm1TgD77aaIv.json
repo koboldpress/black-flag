@@ -1,39 +1,17 @@
 {
-  "name": "Tail",
+  "name": "Nimble Escape",
   "type": "feature",
-  "_id": "b8zfKznhQRxpJ1ru",
-  "img": "icons/creatures/abilities/tail-swipe-green.webp",
+  "_id": "FBD7mm1TgD77aaIv",
+  "img": "icons/creatures/magical/humanoid-silhouette-dashing-blue.webp",
   "system": {
     "activities": {
-      "nK9DHZRtdth4i7Kf": {
-        "type": "attack",
-        "_id": "nK9DHZRtdth4i7Kf",
+      "0hff12hzdGvuh812": {
+        "type": "utility",
+        "_id": "0hff12hzdGvuh812",
         "description": "",
-        "system": {
-          "type": {
-            "value": "melee",
-            "classification": "weapon"
-          },
-          "damage": {
-            "includeBaseDamage": true,
-            "parts": [
-              {
-                "number": 1,
-                "denomination": "8",
-                "bonus": "",
-                "custom": "",
-                "type": "bludgeoning"
-              }
-            ]
-          },
-          "ability": "none",
-          "attack": {
-            "bonus": "",
-            "flat": true
-          }
-        },
+        "system": {},
         "activation": {
-          "type": "action",
+          "type": "bonus",
           "condition": ""
         },
         "consumption": {
@@ -49,7 +27,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/utility.svg"
       }
     },
     "uses": {
@@ -61,7 +39,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one creature. Hit: [[/damage average]] damage.</p>",
+      "value": "<p>The [[lookup @name lowercase]] takes the Disengage or Hide action.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -88,9 +66,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711504620199,
-    "modifiedTime": 1711743950480,
+    "createdTime": 1711746069449,
+    "modifiedTime": 1711746098517,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!b8zfKznhQRxpJ1ru"
+  "_key": "!items!FBD7mm1TgD77aaIv"
 }

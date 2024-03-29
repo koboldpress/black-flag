@@ -122,7 +122,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A hirsute, brown-furred humanoid with dark eyes and elongated ears wields a massive, heavily spiked club.</em></p><p>Named for their unique appearance, bugbears embraced the terror-inducing term. The consummate carnivores enjoy the crunch of bones beneath their bloody clubs.</p><p><strong>Bullies.</strong> While bugbears prefer to hunt and battle alone, they sometimes find themselves in leadership positions over smaller goblins. Their command is marked by bouts of terror, where they randomly inflict pain or humiliation on their subordinates. They don’t expect pushback from lesser goblins, but they back down from the rare, coordinated response. This attitude persists when bugbears fight other creatures. If assured of an easy win, they brutalize and taunt their foes. However, they flee when their opponents demonstrate superiority on the battlefield, unless an even more powerful leader threatens their lives.</p><p><strong>Sneaky Combatants.</strong> Owing to their cowardice, bugbears try to attack with the element of surprise and are deadly against surprised enemies. They wait for cover of darkness or choose locations where they can hide. If the conditions aren’t right, they coerce their subordinates to create a distraction for them.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -320,6 +320,586 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ioptmAxgvplXdxMJ.WgJY1eS6d5WolXsr"
+    },
+    {
+      "name": "Brutal",
+      "type": "feature",
+      "_id": "KXjoSxVS6qf7a1b2",
+      "img": "icons/skills/melee/strike-axe-blood-red.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>A melee weapon deals one extra die of its damage when the [[lookup @name lowercase]] hits with it (included in the attack).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.GwEfQ9adrzpzAjze"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774777178,
+        "modifiedTime": 1711744423164,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.KXjoSxVS6qf7a1b2"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "ju6HyC5yUQFHto7X",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The bugbear champion makes two Morningstar attacks and one Shield Smash attack, or it makes three Javelin attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711744585488,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.ju6HyC5yUQFHto7X"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Morningstar",
+      "type": "weapon",
+      "_id": "xa9sR4fSMXvYuOn5",
+      "img": "icons/weapons/maces/mace-round-spiked-grey.webp",
+      "system": {
+        "activities": {
+          "iOxGtWob5v3yHQyK": {
+            "type": "attack",
+            "_id": "iOxGtWob5v3yHQyK",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": false,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "morningstar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 8,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.zWBmus194O0RLxeU"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701025004085,
+        "modifiedTime": 1711744851279,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.xa9sR4fSMXvYuOn5"
+    },
+    {
+      "name": "Shield Smash",
+      "type": "feature",
+      "_id": "A7BRAz1PcE8bai2T",
+      "img": "icons/skills/melee/shield-block-bash-yellow.webp",
+      "system": {
+        "activities": {
+          "xPwsYqyoLIwEwNCW": {
+            "type": "attack",
+            "_id": "xPwsYqyoLIwEwNCW",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage 2d4 + 4 bludgeoning average]] damage. If the target is a creature, it must succeed on a [[/save strength 14]] save or be knocked prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711744488262,
+        "modifiedTime": 1711744643607,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.A7BRAz1PcE8bai2T"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Javelin",
+      "type": "weapon",
+      "_id": "2BzQldZZ6pMSu7wO",
+      "img": "icons/weapons/polearms/spear-flared-worn-grey.webp",
+      "system": {
+        "activities": {
+          "OIx8lRe6xYOh75WM": {
+            "type": "attack",
+            "_id": "OIx8lRe6xYOh75WM",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": false,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach 5 ft. or range 30/120 ft., one target. Hit: [[/damage 2d6 + 2 piercing average]] damage in melee or [[/damage 1d6 + 2 piercing average]] damage at range.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "javelin"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 30,
+          "long": 120,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.8wAd9MmtaW1tizSN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024052999,
+        "modifiedTime": 1711744886278,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.2BzQldZZ6pMSu7wO"
+    },
+    {
+      "name": "Stubborn Attacker (Recharge 5–6)",
+      "type": "feature",
+      "_id": "FBr7E7U9T6D9Xa4j",
+      "img": "icons/skills/melee/strike-sword-dagger-runes-red.webp",
+      "system": {
+        "activities": {
+          "1OXGzAPbR61Shvpc": {
+            "type": "utility",
+            "_id": "1OXGzAPbR61Shvpc",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": "When the champion misses with an attack"
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When the champion misses with an attack, it can change that miss to a hit.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711744521243,
+        "modifiedTime": 1711744571487,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ioptmAxgvplXdxMJ.FBr7E7U9T6D9Xa4j"
     }
   ],
   "effects": [],
@@ -330,10 +910,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709617606926,
-    "modifiedTime": 1709617869786,
+    "modifiedTime": 1711744886278,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ioptmAxgvplXdxMJ"
