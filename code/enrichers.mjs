@@ -415,7 +415,7 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="save" data-key="dexterity">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity
+ *   <i class="fa-solid fa-dice-d20"></i> DEX
  * </a>
  * ```
  *
@@ -424,7 +424,7 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="save" data-key="dexterity" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
+ *   <i class="fa-solid fa-dice-d20"></i> DC 20 DEX
  * </a>
  * ```
  */
@@ -444,7 +444,7 @@ async function enrichSave(config, label, options) {
 	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
 	if ( !label ) {
-		label = abilityConfig.label;
+		label = game.i18n.localize(abilityConfig.labels.abbreviation).toUpperCase();
 		if ( config.dc ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 		label = game.i18n.format(`BF.Enricher.DC.Save.${config.format === "long" ? "Long" : "Short"}`, {
 			save: label

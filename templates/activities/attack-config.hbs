@@ -39,6 +39,20 @@
 					</select>
 				</label>
 				<div class="field-group">
+					<span>{{ localize "BF.Activity.Attack.Bonus.Label" }}</span>
+					<label>
+						<span>{{ localize "BF.Formula.Label" }}</span>
+						<input type="text" name="system.attack.bonus" value="{{ source.system.attack.bonus }}">
+					</label>
+					<label>
+						<span>
+							{{ localize "BF.Activity.Attack.Flat.Label" }}
+							<i class="hintIcon" data-tooltip="BF.Activity.Attack.Flat.Hint"></i>
+						</span>
+						<input type="checkbox" name="system.attack.flat" {{ checked source.system.attack.flat }}>
+					</label>
+				</div>
+				<div class="field-group">
 					<label>
 						<span>{{ localize "BF.Weapon.Type.Label" }}</span>
 						<select name="system.type.value">
