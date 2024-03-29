@@ -3,7 +3,7 @@
   "name": "Hobgoblin Commander",
   "type": "npc",
   "_id": "Rstx00Mw1KHQ0Uau",
-  "img": "systems/black-flag/artwork/types/npc.svg",
+  "img": "systems/black-flag/artwork/tokens/hobgoblin-commander.webp",
   "system": {
     "attributes": {
       "ac": {
@@ -122,7 +122,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The military bearing of this humanoid is evident in its stance and in its readied weapon. The warrior’s yellow eyes seem to watch everything.</em></p><p>Hobgoblins stand about as tall as a human, though they are more powerfully built. As a society, most hobgoblin enclaves are highly organized military communities, called cohorts, where members are ranked according to their skills and accomplishments.</p><p><strong>Rule Bound.</strong> The militant hobgoblins live their lives according to the Decrees, a complicated set of rules, laws, and customs. Tenets of the Decrees are so ingrained that even hobgoblins who leave the community to become adventurers continue to model their reactions and decisions on its lessons.</p><p><strong>The Goblin Oath.</strong> All hobgoblins are sworn to serve their cohorts from birth, raised to honor the Decrees and their superiors in equal measure. The cohort combines military virtues with family loyalty to create a potent whole. To swear by the cohort is the most binding promise a hobgoblin can give.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -259,6 +259,507 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!Rstx00Mw1KHQ0Uau.WuSrnFK7GUGxdUeq"
+    },
+    {
+      "name": "Unshakable Command",
+      "type": "feature",
+      "_id": "8mwQLNM0Sb1qt47B",
+      "img": "icons/skills/social/intimidation-impressing.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Each friendly creature within 30 feet of the hobgoblin commander can’t be charmed or frightened while the commander isn’t incapacitated.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711750597007,
+        "modifiedTime": 1711750627994,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Rstx00Mw1KHQ0Uau.8mwQLNM0Sb1qt47B"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "5OtzBhkTSQIiyZHI",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hobgoblin commander makes three Greatsword or Longbow attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711750731185,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Rstx00Mw1KHQ0Uau.5OtzBhkTSQIiyZHI"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Greatsword",
+      "type": "weapon",
+      "_id": "qVSEi5siXwCpzhI0",
+      "img": "icons/weapons/swords/greatsword-crossguard-barbed.webp",
+      "system": {
+        "activities": {
+          "TUtt6WZgu28Jb0VO": {
+            "type": "attack",
+            "_id": "TUtt6WZgu28Jb0VO",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 6,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "greatsword"
+        },
+        "options": [
+          "disarm",
+          "hamstring"
+        ],
+        "properties": [
+          "heavy",
+          "twoHanded"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 2,
+          "denomination": 6,
+          "type": "slashing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.LG9czlXCwzBSmWR4"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024964053,
+        "modifiedTime": 1711750705341,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Rstx00Mw1KHQ0Uau.qVSEi5siXwCpzhI0"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Longbow",
+      "type": "weapon",
+      "_id": "VCcVAbSVQCwrwcnt",
+      "img": "icons/weapons/bows/longbow-recurve-leather-red.webp",
+      "system": {
+        "activities": {
+          "tXPhBhx5J0ZqMA3X": {
+            "type": "attack",
+            "_id": "tXPhBhx5J0ZqMA3X",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range 150/600 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "martial",
+          "base": "longbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "heavy",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 8,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 150,
+          "long": 600,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.IpWwpPrnKuwHQpVw"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024656713,
+        "modifiedTime": 1711750716112,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Rstx00Mw1KHQ0Uau.VCcVAbSVQCwrwcnt"
+    },
+    {
+      "name": "Martial Tactics",
+      "type": "feature",
+      "_id": "mYef0aGCeY2oqmTg",
+      "img": "icons/sundries/documents/blueprint-helmet.webp",
+      "system": {
+        "activities": {
+          "6aejTOrUuETVpGnH": {
+            "type": "healing",
+            "_id": "6aejTOrUuETVpGnH",
+            "description": "<p>One friendly creature within 30 feet of the hobgoblin commander that it can see gains [[/healing 2d6 temp average]] until the start of the commander’s next turn.</p>",
+            "system": {
+              "healing": {
+                "type": "temp",
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "number": 2
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Emboldening Shout",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          },
+          "d1iO8dR7sRKi0vb7": {
+            "type": "utility",
+            "_id": "d1iO8dR7sRKi0vb7",
+            "description": "<p>The commander moves up to half its speed and commands one friendly creature it can see within 30 feet of it to also move. The target can use its reaction to move up to half its speed in the direction of the commander’s choosing. This movement for both creatures is unaffected by difficult terrain and doesn’t provoke opportunity attacks.</p>",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Pressing Advance",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hobgoblin commander employs one of the following tactics:</p><ul><li><p><strong>Emboldening Shout.</strong> One friendly creature within 30 feet of the hobgoblin commander that it can see gains [[/healing 2d6 temp average]] until the start of the commander’s next turn.</p></li><li><p><strong>Pressing Advance.</strong> The commander moves up to half its speed and commands one friendly creature it can see within 30 feet of it to also move. The target can use its reaction to move up to half its speed in the direction of the commander’s choosing. This movement for both creatures is unaffected by difficult terrain and doesn’t provoke opportunity attacks.</p></li></ul>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711750734869,
+        "modifiedTime": 1711750962404,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Rstx00Mw1KHQ0Uau.mYef0aGCeY2oqmTg"
     }
   ],
   "effects": [],
@@ -269,10 +770,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709618391372,
-    "modifiedTime": 1709618451341,
+    "modifiedTime": 1711750962404,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!Rstx00Mw1KHQ0Uau"

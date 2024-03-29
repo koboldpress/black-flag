@@ -119,7 +119,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The military bearing of this humanoid is evident in its stance and in its readied weapon. The warrior’s yellow eyes seem to watch everything.</em></p><p>Hobgoblins stand about as tall as a human, though they are more powerfully built. As a society, most hobgoblin enclaves are highly organized military communities, called cohorts, where members are ranked according to their skills and accomplishments.</p><p><strong>Rule Bound.</strong> The militant hobgoblins live their lives according to the Decrees, a complicated set of rules, laws, and customs. Tenets of the Decrees are so ingrained that even hobgoblins who leave the community to become adventurers continue to model their reactions and decisions on its lessons.</p><p><strong>The Goblin Oath.</strong> All hobgoblins are sworn to serve their cohorts from birth, raised to honor the Decrees and their superiors in equal measure. The cohort combines military virtues with family loyalty to create a potent whole. To swear by the cohort is the most binding promise a hobgoblin can give.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -323,6 +323,418 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!j02ykQqDOZVgN8MV.95MsA2vsSUPTQ4JM"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "F6xzF3eKtgqCoZTx",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hobgoblin makes two Longsword or Longbow attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711750458150,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!j02ykQqDOZVgN8MV.F6xzF3eKtgqCoZTx"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Longsword",
+      "type": "weapon",
+      "_id": "AVAaQsd80jGVWpQD",
+      "img": "icons/weapons/swords/sword-guard-engraved.webp",
+      "system": {
+        "activities": {
+          "gN3E8nFP8vb9DUz0": {
+            "type": "attack",
+            "_id": "gN3E8nFP8vb9DUz0",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "3"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage, or [[/damage versatile average]] damage if used with two hands.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "longsword"
+        },
+        "options": [
+          "disarm",
+          "hamstring"
+        ],
+        "properties": [
+          "versatile"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 8,
+          "type": "slashing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.ym1owWiMSNOcZNdO"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024984406,
+        "modifiedTime": 1711750476429,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!j02ykQqDOZVgN8MV.AVAaQsd80jGVWpQD"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Longbow",
+      "type": "weapon",
+      "_id": "3vSAUOsUujOLPyLp",
+      "img": "icons/weapons/bows/longbow-recurve-leather-red.webp",
+      "system": {
+        "activities": {
+          "tXPhBhx5J0ZqMA3X": {
+            "type": "attack",
+            "_id": "tXPhBhx5J0ZqMA3X",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "3"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range 150/600 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "martial",
+          "base": "longbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "heavy",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 8,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 150,
+          "long": 600,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.IpWwpPrnKuwHQpVw"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024656713,
+        "modifiedTime": 1711750474456,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!j02ykQqDOZVgN8MV.3vSAUOsUujOLPyLp"
+    },
+    {
+      "name": "Tactical Analysis",
+      "type": "feature",
+      "_id": "aCjTjraOgsXHDJnS",
+      "img": "icons/skills/targeting/crosshair-pointed-orange.webp",
+      "system": {
+        "activities": {
+          "OiQsIgIwWHi9xqrt": {
+            "type": "utility",
+            "_id": "OiQsIgIwWHi9xqrt",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hobgoblin briefly studies one creature it can see within 30 feet of it. It has advantage on the next attack roll it makes against that creature before the start of the its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711750402982,
+        "modifiedTime": 1711750448370,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!j02ykQqDOZVgN8MV.aCjTjraOgsXHDJnS"
     }
   ],
   "effects": [],
@@ -333,10 +745,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709618234988,
-    "modifiedTime": 1711586147819,
+    "modifiedTime": 1711750495333,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!j02ykQqDOZVgN8MV"

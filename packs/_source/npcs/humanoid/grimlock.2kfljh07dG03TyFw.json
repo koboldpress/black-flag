@@ -129,7 +129,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Uttering a repetitive clicking sound, a rugged, human-like creature shuffles forward, cocking its head to one side as if listening intently. It has gray skin, stringy hair, and large, sightless red eyes.</em></p><p>Grimlocks descend from the human population of a vast empire long ago lost to the underground in some forgotten calamity. Over generations, they adapted to the world below ground, gradually losing their sight and evolving new senses.</p><p><strong>Blind Stewards.</strong> Xenophobic hunter-gatherers, grimlocks retain some slight vestige of their ancestors’ mighty empire in the form of complicated techno-arcane devices. Grimlock shamans use complicated oral traditions to pass down knowledge of how to maintain these machines, though few grimlocks know how to construct them. This doesn’t stop grimlocks from pocketing baubles cast off from these devices, and many grimlocks have found the baubles to be effective at repelling or disorienting intruders.</p><p><strong>Echosense.</strong> Grimlocks speak and understand the language of the subterranean world, though they prefer to speak their own dialect of Dwarvish. The clicking sounds that form most of their words also serve as a form of echolocation.</p><p><strong>Sensitive Hearing.</strong> Relying on hearing and scent, grimlocks thrive in dark environments. However, their sensitive ears are particularly vulnerable to loud sounds.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -197,7 +197,467 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Blind Senses",
+      "type": "feature",
+      "_id": "w7h4gzV7zelQqrht",
+      "img": "icons/creatures/eyes/humanoid-single-blind.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can’t use its keensense while deafened and unable to smell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.gcicaNkQDUzA5Bgg"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711751036478,
+        "modifiedTime": 1711751083792,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2kfljh07dG03TyFw.w7h4gzV7zelQqrht"
+    },
+    {
+      "name": "Heightened Hearing and Smell",
+      "type": "feature",
+      "_id": "yENihFDJERcjyWXp",
+      "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] while perceiving by hearing or smell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.vlGTuDphxCZw4xYF"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709773397125,
+        "modifiedTime": 1711751089557,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2kfljh07dG03TyFw.yENihFDJERcjyWXp"
+    },
+    {
+      "name": "Rock Camouflage",
+      "type": "feature",
+      "_id": "DBj2jELaIiSx6FaI",
+      "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The grimlock’s Stealth is [[calc @attributes.stealth + 5]] while in rocky terrain.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711751097167,
+        "modifiedTime": 1711751141486,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2kfljh07dG03TyFw.DBj2jELaIiSx6FaI"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Spiked Club",
+      "type": "weapon",
+      "_id": "6Iuif9cHlO5dO4CA",
+      "img": "icons/weapons/clubs/club-heavy-barbed-grey.webp",
+      "system": {
+        "activities": {
+          "CqyY9szZGnb8vhqc": {
+            "type": "attack",
+            "_id": "CqyY9szZGnb8vhqc",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 10,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "greatclub"
+        },
+        "options": [
+          "bash"
+        ],
+        "properties": [
+          "twoHanded"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "bludgeoning"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "rarity": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.QAPscsGRbv5l778n"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024046840,
+        "modifiedTime": 1711751242531,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2kfljh07dG03TyFw.6Iuif9cHlO5dO4CA"
+    },
+    {
+      "name": "Strange Bauble",
+      "type": "feature",
+      "_id": "RTuxsdnPqZRSPh6g",
+      "img": "icons/commodities/stone/ore-chunk-yellow-brown.webp",
+      "system": {
+        "activities": {
+          "BsyCzhi56hOAGIEV": {
+            "type": "savingThrow",
+            "_id": "BsyCzhi56hOAGIEV",
+            "description": "<p>The grimlock throws a scintillating rock at the target that bursts with a myriad of colors. The target must succeed on a [[/save]] save or be blinded until the end of its next turn.</p>",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Flashing Rock",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          },
+          "wjxdzYxGoipfAHH4": {
+            "type": "savingThrow",
+            "_id": "wjxdzYxGoipfAHH4",
+            "description": "<p>The grimlock throws a small disk that emits a blurry, fractured illusion of a graceful, humanoid dancer. The target must succeed on a [[/save]] save or be incapacitated until the end of its next turn as it is mesmerized by the dance.</p>",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Illusory Dancer",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          },
+          "KbybjA6C3jEx4oIk": {
+            "type": "savingThrow",
+            "_id": "KbybjA6C3jEx4oIk",
+            "description": "<p>The grimlock throws a small, bladed gear that grows larger and larger as it travels toward the target, threatening to slice the target into pieces. The target must succeed on a [[/save]] save or be frightened until the end of its next turn. On a success, the target realizes the gear’s growth was a magical, illusory effect and that the gear never increased in size.</p>",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Whirling Death",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The grimlock reaches into a pocket, pulls out a small object, and throws it at a creature the grimlock can sense within 30 feet. The grimlock chooses one of the following objects:</p><ul><li><p><strong>Flashing Rock.</strong> The grimlock throws a scintillating rock at the target that bursts with a myriad of colors. The target must succeed on a [[/save dexterity 11]] save or be blinded until the end of its next turn.</p></li><li><p>I<strong>llusory Dancer.</strong> The grimlock throws a small disk that emits a blurry, fractured illusion of a graceful, humanoid dancer. The target must succeed on a [[/save charisma 11]] save or be incapacitated until the end of its next turn as it is mesmerized by the dance.</p></li><li><p><strong>Whirling Death.</strong> The grimlock throws a small, bladed gear that grows larger and larger as it travels toward the target, threatening to slice the target into pieces. The target must succeed on a [[/save wisdom 11]] save or be frightened until the end of its next turn. On a success, the target realizes the gear’s growth was a magical, illusory effect and that the gear never increased in size.</p></li></ul>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711751260625,
+        "modifiedTime": 1711751502872,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!2kfljh07dG03TyFw.RTuxsdnPqZRSPh6g"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -206,10 +666,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709671730021,
-    "modifiedTime": 1711586128588,
+    "modifiedTime": 1711751502872,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!2kfljh07dG03TyFw"
