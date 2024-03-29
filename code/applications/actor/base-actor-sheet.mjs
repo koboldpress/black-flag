@@ -224,9 +224,10 @@ export default class BaseActorSheet extends ActorSheet {
 				label: getLabel(),
 				class: "toggle-editing-mode",
 				icon: getIcon(),
-				onclick: ev => {
+				onclick: async ev => {
 					this.modes.editing = !this.modes.editing;
 					ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> <span>${game.i18n.localize(getLabel())}</span>`;
+					await this.submit();
 					this.render();
 				}
 			});
