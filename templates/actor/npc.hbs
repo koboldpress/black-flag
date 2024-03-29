@@ -1,50 +1,51 @@
-<form class="sheet-container" id="{{appID}}-main-form">
+<form class="sheet-container" id="{{ appID }}-main-form">
 	<header class="sheet-head">
 		<h1>
-			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}"
-				form="{{appID}}-main-form" {{disabled (not modes.editing)}}>
+			<input name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
+			       form="{{ appID }}-main-form" {{ disabled (not modes.editing) }}>
 		</h1>
-		<label data-tooltip="{{localize 'BF.ExperiencePoints.LabelSpecific' value=system.xpValue}}"
-			data-tooltip-direction="RIGHT">
-			<span>{{localize "BF.ChallengeRating.Abbreviation"}}</span>
-			<input type="text" name="system.attributes.cr" value="{{cr}}" {{disabled (not modes.editing)}}>
+		<label data-tooltip="{{ localize 'BF.ExperiencePoints.LabelSpecific' value=system.xpValue }}"
+		       data-tooltip-direction="RIGHT">
+			<span>{{ localize "BF.ChallengeRating.Abbreviation" }}</span>
+			<input type="text" name="system.attributes.cr" value="{{ cr }}" {{disabled (not modes.editing)}}>
 		</label>
 	</header>
 
 	<nav class="sheet-navigation tabs" data-group="primary">
 		<a data-tab="main">
-			{{localize "BF.Sheet.Tab.Main"}}
-			{{blackFlag-notificationBadge actor section="main"}}
+			{{ localize "BF.Sheet.Tab.Main" }}
+			{{ blackFlag-notificationBadge actor section="main" }}
 		</a>
 		<a data-tab="features">
-			{{localize "BF.Sheet.Tab.Features"}}
-			{{blackFlag-notificationBadge actor section="features"}}
+			{{ localize "BF.Sheet.Tab.Features" }}
+			{{ blackFlag-notificationBadge actor section="features" }}
 		</a>
 		<a data-tab="biography">
-			{{localize "BF.Sheet.Tab.Biography"}}
-			{{blackFlag-notificationBadge actor section="biography"}}
+			{{ localize "BF.Sheet.Tab.Biography" }}
+			{{ blackFlag-notificationBadge actor section="biography" }}
 		</a>
 		<a data-tab="effects">
-			{{localize "BF.Sheet.Tab.Effects"}}
-			{{blackFlag-notificationBadge actor section="effects"}}
+			{{ localize "BF.Sheet.Tab.Effects" }}
+			{{ blackFlag-notificationBadge actor section="effects" }}
 		</a>
 	</nav>
 
 	<div class="sheet-body">
 		<div class="tab flex-tab" data-group="primary" data-tab="main">
-			{{> "blackFlag.npc-main"}}
+			{{> "blackFlag.npc-main" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="features">
-			{{> "blackFlag.npc-features"}}
-			{{> "blackFlag.currency"}}
+			{{> "blackFlag.npc-features" }}
+			{{> "blackFlag.currency" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="biography">
 			<section>
 				<figure>
-					<img class="profile" src="{{actor.img}}" title="{{actor.name}}"{{#if modes.editing}} data-edit="img"{{/if}}>
+					<img class="profile" src="{{ actor.img }}" title="{{ actor.name }}"
+					     {{~#if modes.editing}} data-edit="img"{{/if}}>
 				</figure>
-				{{editor enriched.biography target="system.biography.value" button=false editable=modes.editing
-					engine="prosemirror" collaborate=false}}
+				{{ editor enriched.biography target="system.biography.value" button=false editable=modes.editing
+				          engine="prosemirror" collaborate=false }}
 			</section>
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="effects">

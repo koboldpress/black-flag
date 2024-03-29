@@ -1,4 +1,4 @@
-import { numberFormat } from "../../utils/_module.mjs";
+import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
@@ -67,6 +67,17 @@ export default class NPCSheet extends BaseActorSheet {
 				return a.description;
 			}))
 		);
+		if ( context.actions.legendary ) {
+			const leg = context.system.attributes.legendary;
+			context.actions.legendary.count = {
+				prefix: "system.attributes.legendary", value: leg.value,
+				max: context.editable ? leg.max : context.source.attributes.legendary.max
+			};
+			context.actions.legendary.description = game.i18n.format(
+				`BF.LegendaryAction.Description[${getPluralRules().select(context.system.attributes.legendary.max)}]`,
+				{ type: context.actor.name.toLowerCase(), count: context.system.attributes.legendary.max }
+			);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

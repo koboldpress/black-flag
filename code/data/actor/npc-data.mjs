@@ -174,6 +174,12 @@ export default class NPCData extends ActorDataModel.mixin(
 		// Initiative
 		this.computeInitiative();
 
+		// Legendary Actions
+		this.attributes.legendary.max ??= 0;
+		this.attributes.legendary.value = Math.clamped(
+			this.attributes.legendary.max - this.attributes.legendary.spent, 0, this.attributes.legendary.max
+		);
+
 		// Perception & Stealth
 		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
 		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);

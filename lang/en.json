@@ -100,6 +100,9 @@
 "BF.Activation": {
 	"Label": "Activation",
 	"Category": {
+		"Monster": {
+			"Label": "Monster Actions"
+		},
 		"Standard": {
 			"Label": "Standard Actions"
 		}
@@ -602,6 +605,9 @@
 "BF.ArmorClass": {
 	"Label": "Armor Class",
 	"Abbreviation": "AC",
+	"Action": {
+		"Configure": "Configure Armor Class"
+	},
 	"CustomLabel": "Custom Label",
 	"Flat": {
 		"Label": "Flat Value",
@@ -1510,6 +1516,9 @@
 "BF.Language": {
 	"Label[one]": "Language",
 	"Label[other]": "Languages",
+	"Action": {
+		"Configure": "Configure Languages"
+	},
 	"Category": {
 		"Esoteric[one]": "Esoteric Language",
 		"Esoteric[other]": "Esoteric Languages",
@@ -1572,7 +1581,8 @@
 "BF.LegendaryAction": {
 	"Cost[one]": "Costs {count} Action",
 	"Cost[other]": "Costs {count} Actions",
-	"Description": "The {type} can take {count} legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains spent legendary actions at the start of its turn.",
+	"Description[one]": "The {type} can take 1 legendary action, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains its spent legendary action at the start of its turn.",
+	"Description[other]": "The {type} can take {count} legendary actions, choosing from the options below. Only one legendary action can be used at a time and only at the end of another creature’s turn. The {type} regains spent legendary actions at the start of its turn.",
 	"Max": {
 		"Label": "Legendary Actions per Round"
 	}
@@ -1860,6 +1870,9 @@
 
 "BF.Resistance": {
 	"Label": "Resistances",
+	"Action": {
+		"Configure": "Configure Resistances, Immunities, and Vulnerabilities"
+	},
 	"Config": "Resist, Immune, & Vulnerable",
 	"Abbreviation": "Res",
 	"Short": "Resistant"
@@ -1963,6 +1976,9 @@
 
 "BF.Senses": {
 	"Label": "Senses",
+	"Action": {
+		"Configure": "Configure Senses"
+	},
 	"Tag": {
 		"Label": "Sense Tags",
 		"CantSense": {
@@ -2063,6 +2079,9 @@
 
 "BF.Size": {
 	"Label": "Size",
+	"Action": {
+		"Configure": "Configure Type & Size"
+	},
 	"Gargantuan": "Gargantuan",
 	"Huge": "Huge",
 	"Large": "Large",
@@ -2140,6 +2159,9 @@
 
 "BF.Speed": {
 	"Label": "Speed",
+	"Action": {
+		"Configure": "Configure Speed"
+	},
 	"Base": {
 		"Label": "Base Speed",
 		"Hint": "Base movement speed that can be used in formulas for deriving other speeds using the @base property."

@@ -112,6 +112,8 @@
 
 	.features {
 		h2 {
+			display: flex;
+			align-items: center;
 			margin-block-start: 14px;
 			border: none;
 			border-start-end-radius: var(--end-border-radius);
@@ -122,6 +124,23 @@
 			color: var(--bf-text-color-blue);
 			font-size: var(--font-size-14);
 			text-transform: uppercase;
+
+			.action-count {
+				margin-inline: auto 12px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 4px;
+				font-size: var(--font-size-12);
+
+				input, span {
+					flex: 0 0 24px;
+					height: unset;
+					line-height: unset;
+					&:first-child { text-align: end; }
+				}
+				input { border: 1px solid rgb(0 0 0 / 0.2); }
+			}
 		}
 
 		.feature {

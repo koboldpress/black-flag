@@ -1,76 +1,82 @@
 <section>
 	<div class="type">
 		{{#if modes.editing}}
-			<a data-action="config" data-type="type">
-				<i class="fa-solid fa-cog"></i>
-			</a>
+			<button type="button" class="link-button" data-action="config" data-type="type"
+			        data-tooltip="BF.Size.Action.Configure"
+			        aria-label="{{ localize 'BF.Size.Action.Configure' }}">
+				<i class="fa-solid fa-cog" inert></i>
+			</button>
 		{{/if}}
-		<span>{{labels.sizeAndType}}</span>
+		<span>{{ labels.sizeAndType }}</span>
 	</div>
 
 	<div class="stats">
 		<label>
 			<span>
 				{{#if modes.editing}}
-					<a data-action="config" data-type="armor-class">
-						<i class="fa-solid fa-cog"></i>
-					</a>
+					<button type="button" class="link-button" data-action="config" data-type="armor-class"
+					        data-tooltip="BF.ArmorClass.Action.Configure"
+					        aria-label="{{ localize 'BF.ArmorClass.Action.Configure' }}">
+						<i class="fa-solid fa-cog" inert></i>
+					</button>
 				{{/if}}
-				{{localize "BF.ArmorClass.Label"}}
-				{{blackFlag-notificationBadge actor category="armor-class"}}
+				{{ localize "BF.ArmorClass.Label" }}
+				{{ blackFlag-notificationBadge actor category="armor-class" }}
 			</span>
 			<span>
-				{{system.attributes.ac.value}}
+				{{ system.attributes.ac.value }}
 				{{#with system.attributes.ac.label}}
-					<span class="ac-label">({{this}})</span>
+					<span class="ac-label">({{ this }})</span>
 				{{/with}}
 			</span>
 		</label>
 		<label>
-			<span>{{localize "BF.HitPoint.Label[other]"}}</span>
+			<span>{{ localize "BF.HitPoint.Label[other]" }}</span>
 			{{#if modes.editing}}
-				<span>{{system.attributes.hp.value}}</span>
+				<span>{{ system.attributes.hp.value }}</span>
 				/
-				<input type="number" name="system.attributes.hp.max" value="{{source.attributes.hp.max}}" step="1" min="0">
+				<input type="number" name="system.attributes.hp.max" value="{{ source.attributes.hp.max }}" step="1" min="0">
 			{{else}}
-				<input type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}">
+				<input type="text" name="system.attributes.hp.value" value="{{ system.attributes.hp.value }}">
 				/
-				<span>{{system.attributes.hp.max}}</span>
+				<span>{{ system.attributes.hp.max }}</span>
 			{{/if}}
 		</label>
 		<label>
 			<span>
 				{{#if modes.editing}}
-					<a data-action="config" data-type="movement">
-						<i class="fa-solid fa-cog"></i>
-					</a>
+					<button type="button" class="link-button" data-action="config" data-type="movement"
+					        data-tooltip="BF.Speed.Action.Configure"
+					        aria-label="{{ localize 'BF.Speed.Action.Configure' }}">
+						<i class="fa-solid fa-cog" inert></i>
+					</button>
 				{{/if}}
-				{{localize "BF.Speed.Label"}}
+				{{ localize "BF.Speed.Label" }}
 			</span>
 			{{#if modes.editing}}
-				<input type="number" name="system.traits.movement.base" value="{{source.traits.movement.base}}">
+				<input type="number" name="system.traits.movement.base" value="{{ source.traits.movement.base }}">
 			{{else}}
-				<span>{{traits.speed}}</span>
+				<span>{{ traits.speed }}</span>
 			{{/if}}
 		</label>
 		<label class="stats__narrow">
 			<span>
-				{{localize "BF.Skill.Perception.Label"}}
+				{{ localize "BF.Skill.Perception.Label" }}
 			</span>
 			{{#if modes.editing}}
 				<input type="number" name="system.attributes.perception" value="{{ source.attributes.perception }}"
-					placeholder="{{ placeholders.perception }}">
+				       placeholder="{{ placeholders.perception }}">
 			{{else}}
 				<span>{{ blackFlag-number system.attributes.perception }}</span>
 			{{/if}}
 		</label>
 		<label class="stats__narrow">
 			<span>
-				{{localize "BF.Skill.Stealth.Label"}}
+				{{ localize "BF.Skill.Stealth.Label" }}
 			</span>
 			{{#if modes.editing}}
 				<input type="number" name="system.attributes.stealth" value="{{ source.attributes.stealth }}"
-					placeholder="{{ placeholders.stealth }}">
+				       placeholder="{{ placeholders.stealth }}">
 			{{else}}
 				<span>{{ stealthLabel }}</span>
 			{{/if}}
@@ -79,7 +85,9 @@
 			<label>
 				<span>
 					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance">
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+						        data-tooltip="BF.Resistance.Action.Configure"
+						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
 							<i class="fa-solid fa-cog" inert></i>
 						</button>
 					{{/if}}
@@ -92,7 +100,9 @@
 			<label>
 				<span>
 					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance">
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+						        data-tooltip="BF.Resistance.Action.Configure"
+						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
 							<i class="fa-solid fa-cog" inert></i>
 						</button>
 					{{/if}}
@@ -105,7 +115,9 @@
 			<label>
 				<span>
 					{{#if modes.editing}}
-						<button type="button" class="link-button" data-action="config" data-type="resistance">
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+						        data-tooltip="BF.Resistance.Action.Configure"
+						        aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
 							<i class="fa-solid fa-cog" inert></i>
 						</button>
 					{{/if}}
@@ -117,49 +129,54 @@
 		<label>
 			<span>
 				{{#if modes.editing}}
-					<a data-action="config" data-type="senses">
-						<i class="fa-solid fa-cog"></i>
-					</a>
+					<button type="button" class="link-button" data-action="config" data-type="senses"
+					        data-tooltip="BF.Senses.Action.Configure"
+					        aria-label="{{ localize 'BF.Senses.Action.Configure' }}">
+						<i class="fa-solid fa-cog" inert></i>
+					</button>
 				{{/if}}
-				{{localize "BF.Senses.Label"}}
+				{{ localize "BF.Senses.Label" }}
 			</span>
-			<span>{{traits.senses}}</span>
+			<span>{{ traits.senses }}</span>
 		</label>
 		<label>
 			<span>
 				{{#if modes.editing}}
-					<a data-action="config" data-type="language">
-						<i class="fa-solid fa-cog"></i>
-					</a>
+					<button type="button" class="link-button" data-action="config" data-type="language"
+					        data-tooltip="BF.Language.Action.Configure"
+					        aria-label="{{ localize 'BF.Language.Action.Configure' }}">
+						<i class="fa-solid fa-cog" inert></i>
+					</button>
 				{{/if}}
-				{{localize "BF.Language.Label[other]"}}
+				{{ localize "BF.Language.Label[other]" }}
 			</span>
-			<span>{{traits.languages}}</span>
+			<span>{{ traits.languages }}</span>
 		</label>
 		<label>
-			<span>{{localize "BF.Initiative.Label"}}</span>
-			<a class="modifier-roll" data-action="roll" data-sub-action="initiative">
-				<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
-				{{blackFlag-number system.attributes.initiative.mod sign=true}}
-			</a>
+			<span>{{ localize "BF.Initiative.Label" }}</span>
+			<button type="button" class="link-button modifier-roll" data-action="roll" data-sub-action="initiative">
+				<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
+				{{ blackFlag-number system.attributes.initiative.mod sign=true }}
+			</button>
 		</label>
 	</div>
 	
 	<div class="abilities">
 		{{#each system.abilities}}
-			<div data-ability="{{@key}}">
-				<label for="{{@root.appID}}-ability-{{@key}}">
-					{{lookup @root.CONFIG.abilities.localizedAbbreviations @key}}</span>
+			<div data-ability="{{ @key }}">
+				<label for="{{ @root.appID }}-ability-{{ @key }}">
+					{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
 				</label>
 				{{#if @root.modes.editing}}
-					<input id="{{@root.appID}}-ability-{{@key}}" type="number" name="system.abilities.{{@key}}.mod"
+					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
 						value="{{_source.mod}}" placeholder="0" step="1">
 				{{else}}
-					<span id="{{@root.appID}}-ability-{{@key}}">
-						<a class="modifier-roll" data-action="roll" data-sub-action="ability-check" data-ability="{{@key}}">
-							<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
-							{{blackFlag-number mod sign=true}}
-						</a>
+					<span id="{{ @root.appID }}-ability-{{ @key }}">
+						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"
+						        data-ability="{{ @key }}">
+							<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
+							{{ blackFlag-number mod sign=true }}
+						</button>
 					</span>
 				{{/if}}
 			</div>
@@ -168,34 +185,56 @@
 
 	<div class="features passive">
 		{{#each passive}}
-			<div class="feature" data-item-id="{{item.id}}">
+			<div class="feature" data-item-id="{{ item.id }}">
 				<span class="controls">
-					{{#if @root.modes.editing}}
-						<a data-action="item" data-sub-action="edit">
-							<i class="fa-solid fa-pen-to-square"></i>
-						</a>
+					{{#if @root.editable}}
+						<button type="button" class="link-button" data-action="edit"
+										data-tooltip="BF.Activity.Core.Action.Edit"
+										aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+							<i class="fa-solid fa-pen-to-square" inert></i>
+						</button>
 					{{/if}}
-					<a data-action="activate">{{item.name}}.</a>
+					<a data-action="activate">{{ item.name }}.</a>
 				</span>
-				{{{description}}}
+				{{{ description }}}
 			</div>
 		{{/each}}
 	</div>
 
 	<blackFlag-actions>
 		{{#each actions}}
-			{{#if (or activities.length @root.modes.editing)}}
-				<div class="features {{@key}}">
-					<h2>{{label}}</h2>
-					{{#each activities}}
-						<div class="feature" data-item-id="{{item.id}}"  data-activity-id="{{activity.id}}">
-							<span class="controls">
-								{{#if @root.modes.editing}}
-									<a data-action="edit">
-										<i class="fa-solid fa-pen-to-square"></i>
-									</a>
+			{{#if (or activities.length @root.editable)}}
+				<div class="features {{ @key }}">
+					<h2>
+						{{ label }}
+						{{#if count}}
+							<div class="action-count">
+								{{#if @root.editable}}
+									<span>{{ count.value }}</span>
+									/
+									<input type="number" name="{{ count.prefix }}.max" value="{{ count.max }}" step="1" min="0">
+								{{else}}
+									<input type="text" name="{{ count.prefix }}.value" value="{{ count.value }}">
+									/
+									<span>{{ count.max }}</span>
 								{{/if}}
-								<a data-action="activate">{{item.name}}.</a>
+							</div>
+						{{/if}}
+					</h2>
+					{{#if description}}
+						<p>{{ description }}</p>
+					{{/if}}
+					{{#each activities}}
+						<div class="feature" data-item-id="{{ item.id }}"  data-activity-id="{{ activity.id }}">
+							<span class="controls">
+								{{#if @root.editable}}
+									<button type="button" class="link-button" data-action="edit"
+									        data-tooltip="BF.Activity.Core.Action.Edit"
+													aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+										<i class="fa-solid fa-pen-to-square" inert></i>
+									</button>
+								{{/if}}
+								<a data-action="activate">{{ item.name }}.</a>
 							</span>
 							{{{description}}}
 						</div>
@@ -204,10 +243,4 @@
 			{{/if}}
 		{{/each}}
 	</blackFlag-actions>
-
-<!--	<div class="features legendary">
-		<h2>{{localize "BF.Activation.Type.Legendary[other]"}}</h2>
-		<p>{{localize "BF.LegendaryAction.Description" type="???" count="?"}}</p>
-		features
-	</div>-->
 </section>

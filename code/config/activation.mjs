@@ -23,10 +23,19 @@ export const actionTypes = {
 				localization: "BF.Activation.Type.FreeAction"
 			}
 		}
+	},
+	monster: {
+		label: "BF.Activation.Category.Monster.Label",
+		children: {
+			legendary: {
+				localization: "BF.Activation.Type.Legendary"
+			}
+		}
 	}
 };
+localizeConfig(actionTypes, { flatten: true, keepCategories: false, pluralRule: "other", sort: false });
 localizeConfig(actionTypes.standard.children);
-localizeConfig(actionTypes.standard.children, { propertyName: "localizedPlural", pluralRule: "other" });
+localizeConfig(actionTypes.monster.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

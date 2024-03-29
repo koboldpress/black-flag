@@ -60,6 +60,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get template() {
 		return `systems/black-flag/templates/actor/${this.actor.type}.hbs`;
 	}
@@ -68,6 +69,7 @@ export default class BaseActorSheet extends ActorSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -104,7 +106,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 */
 	async prepareActions(context) {
-		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.standard.children.localizedPlural)
+		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.localized)
 			.reduce((obj, [key, label]) => {
 				obj[key] = { label, activities: [] };
 				return obj;
