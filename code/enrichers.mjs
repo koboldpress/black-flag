@@ -575,16 +575,18 @@ async function enrichDamage(configs, label, options) {
 
 	if ( !config.formulas.length ) {
 		const damageDetails = options.relativeTo?.damageDetails;
-		if ( !damageDetails?.rolls.length ) return null;
-		for ( const roll of damageDetails.rolls ) {
+		for ( const r of damageDetails?.rolls ?? [] ) {
 			// TODO: Simplify formula as must as possible for display
-			config.formulas.push(
-				Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data, { missing: "0" })
-			);
-			config.types.push(roll.options.damageType);
+			const formula = Roll.defaultImplementation.replaceFormulaData(r.parts.join(" + "), r.data, { missing: "0" });
+			if ( formula ) {
+				config.formulas.push(formula);
+				config.types.push(r.options.damageType);
+			}
 		}
 		config.activity = damageDetails.activity?.uuid;
 	}
+
+	if ( !config.formulas.length ) return null;
 
 	if ( label ) return createRollLink(label, config);
 
