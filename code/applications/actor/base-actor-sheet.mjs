@@ -191,6 +191,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _renderOuter() {
 		const jQuery = await super._renderOuter();
 
@@ -212,6 +213,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_getHeaderButtons() {
 		let buttons = super._getHeaderButtons();
 		if ( this.options.editable && (game.user.isGM || this.actor.isOwner) ) {
@@ -236,6 +238,7 @@ export default class BaseActorSheet extends ActorSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -339,6 +342,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 
@@ -356,6 +360,7 @@ export default class BaseActorSheet extends ActorSheet {
 	/*              Drag & Drop            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onDrop(event) {
 		const { data } = DragDrop.getDragData(event);
 

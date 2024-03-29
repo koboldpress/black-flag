@@ -50,15 +50,6 @@ export default class NPCSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async prepareActions(context) {
 		await super.prepareActions(context);
-		context.passive = (await Promise.all(this.actor.items.filter(i => {
-			if ( i.type !== "feature" ) return false;
-			if ( i.system.activities?.size ) return false;
-			return true;
-		}).map(async item => ({
-			item, description: await TextEditor.enrichHTML(item.system.description.value, {
-				secrets: false, rollData: item.getRollData(), async: true, relativeTo: item
-			})
-		})))).sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
 		await Promise.all(Object.values(context.actions)
 			.flatMap(t => t.activities.map(async a => {
 				a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {
@@ -67,6 +58,22 @@ export default class NPCSheet extends BaseActorSheet {
 				return a.description;
 			}))
 		);
+
+		// Passive & Free Actions
+		context.passive = (await Promise.all(this.actor.items.filter(i => {
+			if ( i.type !== "feature" ) return false;
+			if ( i.system.activities?.size ) return false;
+			return true;
+		}).map(async item => ({
+			item, description: await TextEditor.enrichHTML(item.system.description.value, {
+				secrets: false, rollData: item.getRollData(), async: true, relativeTo: item
+			})
+		}))))
+			.concat(context.actions.free?.activities ?? [])
+			.sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
+		delete context.actions.free;
+
+		// Legendary Actions
 		if ( context.actions.legendary ) {
 			const leg = context.system.attributes.legendary;
 			context.actions.legendary.count = {

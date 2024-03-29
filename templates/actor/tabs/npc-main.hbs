@@ -169,7 +169,7 @@
 				</label>
 				{{#if @root.modes.editing}}
 					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
-						value="{{_source.mod}}" placeholder="0" step="1">
+					       value="{{_source.mod}}" placeholder="0" step="1">
 				{{else}}
 					<span id="{{ @root.appID }}-ability-{{ @key }}">
 						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"
@@ -183,25 +183,25 @@
 		{{/each}}
 	</div>
 
-	<div class="features passive">
-		{{#each passive}}
-			<div class="feature" data-item-id="{{ item.id }}">
-				<span class="controls">
-					{{#if @root.editable}}
-						<button type="button" class="link-button" data-action="edit"
-										data-tooltip="BF.Activity.Core.Action.Edit"
-										aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
-							<i class="fa-solid fa-pen-to-square" inert></i>
-						</button>
-					{{/if}}
-					<a data-action="activate">{{ item.name }}.</a>
-				</span>
-				{{{ description }}}
-			</div>
-		{{/each}}
-	</div>
-
 	<blackFlag-actions>
+		<div class="features passive">
+			{{#each passive}}
+				<div class="feature" data-item-id="{{ item.id }}" {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
+					<span class="controls">
+						{{#if @root.editable}}
+							<button type="button" class="link-button" data-action="edit"
+											data-tooltip="BF.Activity.Core.Action.Edit"
+											aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+								<i class="fa-solid fa-pen-to-square" inert></i>
+							</button>
+						{{/if}}
+						<a data-action="activate">{{ item.name }}.</a>
+					</span>
+					{{{ description }}}
+				</div>
+			{{/each}}
+		</div>
+
 		{{#each actions}}
 			{{#if (or activities.length @root.editable)}}
 				<div class="features {{ @key }}">
@@ -225,7 +225,7 @@
 						<p>{{ description }}</p>
 					{{/if}}
 					{{#each activities}}
-						<div class="feature" data-item-id="{{ item.id }}"  data-activity-id="{{ activity.id }}">
+						<div class="feature" data-item-id="{{ item.id }}" data-activity-id="{{ activity.id }}">
 							<span class="controls">
 								{{#if @root.editable}}
 									<button type="button" class="link-button" data-action="edit"
@@ -236,7 +236,7 @@
 								{{/if}}
 								<a data-action="activate">{{ item.name }}.</a>
 							</span>
-							{{{description}}}
+							{{{ description }}}
 						</div>
 					{{/each}}
 				</div>
