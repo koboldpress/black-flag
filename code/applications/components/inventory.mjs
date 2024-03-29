@@ -15,7 +15,6 @@ export default class InventoryElement extends AppAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
 		const { signal } = this.#controller;
