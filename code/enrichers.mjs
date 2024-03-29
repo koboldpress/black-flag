@@ -379,9 +379,9 @@ async function enrichCheck(config, label, options) {
 	if ( invalid ) return null;
 
 	if ( !label ) {
-		const ability = abilityConfig?.label;
 		const skill = skillConfig?.label;
 		const tool = toolConfig?.label;
+		const ability = skill ? abilityConfig?.label : game.i18n.localize(abilityConfig.labels.abbreviation).toUpperCase();
 		if ( ability && (skill || tool) ) {
 			label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
 		} else {

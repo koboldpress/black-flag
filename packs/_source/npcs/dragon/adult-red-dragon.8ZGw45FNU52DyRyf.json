@@ -32,7 +32,7 @@
       },
       "legendary": {
         "spent": 0,
-        "max": null
+        "max": 3
       },
       "perception": 23,
       "stealth": null
@@ -443,21 +443,25 @@
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": 10,
+                    "denomination": "10",
                     "bonus": "8",
                     "custom": "",
                     "type": "piercing"
                   },
                   {
                     "number": 2,
-                    "denomination": 6,
+                    "denomination": "6",
                     "bonus": "",
                     "custom": "",
                     "type": "fire"
                   }
                 ]
               },
-              "ability": "strength"
+              "ability": "strength",
+              "attack": {
+                "bonus": "14",
+                "flat": true
+              }
             },
             "activation": {
               "type": "action",
@@ -525,7 +529,7 @@
         "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1711504525397,
-        "modifiedTime": 1711668411123,
+        "modifiedTime": 1711682261903,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!8ZGw45FNU52DyRyf.PAt0xPSK39nVAfnD"
@@ -558,7 +562,11 @@
                   }
                 ]
               },
-              "ability": "strength"
+              "ability": "strength",
+              "attack": {
+                "bonus": "14",
+                "flat": true
+              }
             },
             "activation": {
               "type": "action",
@@ -626,7 +634,7 @@
         "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1711503209924,
-        "modifiedTime": 1711668433803,
+        "modifiedTime": 1711682265393,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!8ZGw45FNU52DyRyf.g8NwMrDHwtX1wxtL"
@@ -923,6 +931,368 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!8ZGw45FNU52DyRyf.mgz7tsAKtfiza0Hm"
+    },
+    {
+      "name": "Detect",
+      "type": "feature",
+      "_id": "8U6OVVicq1rgOpub",
+      "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
+      "system": {
+        "activities": {
+          "LbimYNyRpokzxB6T": {
+            "type": "utility",
+            "_id": "LbimYNyRpokzxB6T",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "legendary",
+              "condition": "",
+              "value": 1
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] automatically detects every creature and trap within 30 feet of it, pinpointing the current location of each.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.KD9TOijvhZXlxjOc"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711682312413,
+        "modifiedTime": 1711682899098,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!8ZGw45FNU52DyRyf.8U6OVVicq1rgOpub"
+    },
+    {
+      "name": "Tail Attack",
+      "type": "feature",
+      "_id": "59CKIAdQrcJAw6pJ",
+      "img": "icons/creatures/abilities/tail-swipe-green.webp",
+      "system": {
+        "activities": {
+          "NIxSHjXg1z8ZLZYC": {
+            "type": "utility",
+            "_id": "NIxSHjXg1z8ZLZYC",
+            "description": "",
+            "system": {},
+            "activation": {
+              "value": 1,
+              "type": "legendary",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] makes a Tail attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.Z5ji684AfGNgLEWj"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711682798316,
+        "modifiedTime": 1711682902300,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!8ZGw45FNU52DyRyf.59CKIAdQrcJAw6pJ"
+    },
+    {
+      "name": "Elemental Roar",
+      "type": "feature",
+      "_id": "DogrQAiZf4nOke5q",
+      "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
+      "system": {
+        "activities": {
+          "GwjZFe6SshmK8K5Z": {
+            "type": "savingThrow",
+            "_id": "GwjZFe6SshmK8K5Z",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "19"
+              }
+            },
+            "activation": {
+              "value": 2,
+              "type": "legendary",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] roars at up to two creatures of its choice within 120 feet of it. Each target must succeed on a [[/save]] save or be vulnerable to fire damage until the end of its next turn. A target resistant to fire damage isn’t resistant to it for the duration. A target immune to fire damage is still immune to it, even if the target fails the save.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.8R4XXpbwLn8tic0m"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711682938328,
+        "modifiedTime": 1711683000564,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!8ZGw45FNU52DyRyf.DogrQAiZf4nOke5q"
+    },
+    {
+      "name": "Wing Attack",
+      "type": "feature",
+      "_id": "7R7o3QK2uOUbwojP",
+      "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
+      "system": {
+        "activities": {
+          "8g8yw6SVinCWjSZc": {
+            "type": "savingThrow",
+            "_id": "8g8yw6SVinCWjSZc",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "22"
+              }
+            },
+            "activation": {
+              "value": 2,
+              "type": "legendary",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] beats its wings. Each creature within 10 feet of the [[lookup @name lowercase]] must succeed on a [[/save]] save or take [[/damage average]] damage and be knocked prone. The [[lookup @name lowercase]] can then fly up to half its flying speed without provoking opportunity attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.EhzKBSBAraL7ifUf"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711682683827,
+        "modifiedTime": 1711683004110,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!8ZGw45FNU52DyRyf.7R7o3QK2uOUbwojP"
     }
   ],
   "effects": [],
@@ -936,7 +1306,7 @@
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709616912548,
-    "modifiedTime": 1711668510947,
+    "modifiedTime": 1711683036700,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!8ZGw45FNU52DyRyf"

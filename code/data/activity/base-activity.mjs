@@ -44,6 +44,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			_id: new DocumentIdField({initial: () => foundry.utils.randomID()}),

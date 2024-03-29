@@ -1,27 +1,36 @@
 {
-  "name": "Pounce",
+  "name": "Wing Attack",
   "type": "feature",
-  "_id": "djXN1fhpcqEP7Daf",
-  "img": "icons/creatures/abilities/paw-glowing-yellow.webp",
+  "_id": "EhzKBSBAraL7ifUf",
+  "img": "icons/creatures/abilities/wing-batlike-white-blue.webp",
   "system": {
     "activities": {
-      "MCGyfHVyUWQ8ik8v": {
+      "8g8yw6SVinCWjSZc": {
         "type": "savingThrow",
-        "_id": "MCGyfHVyUWQ8ik8v",
+        "_id": "8g8yw6SVinCWjSZc",
         "description": "",
         "system": {
-          "ability": "strength",
+          "ability": "dexterity",
           "damage": {
-            "parts": []
+            "parts": [
+              {
+                "number": 2,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "bludgeoning"
+              }
+            ]
           },
           "dc": {
             "ability": "custom",
-            "formula": "10"
+            "formula": "22"
           }
         },
         "activation": {
-          "type": "free",
-          "condition": ""
+          "type": "legendary",
+          "condition": "",
+          "value": 2
         },
         "consumption": {
           "targets": [],
@@ -48,7 +57,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>If the [[lookup @name lowercase]] moves at least 15 feet straight toward a creature and then hits it with a Claw attack on the same turn, that target must succeed on a [[/save]] save or be knocked prone. If the target is prone, the [[lookup @name lowercase]] can make one Claw attack against it as a bonus action.</p>",
+      "value": "<p>The [[lookup @name lowercase]] beats its wings. Each creature within 10 feet of the [[lookup @name lowercase]] must succeed on a [[/save]] save or take [[/damage average]] damage and be knocked prone. The [[lookup @name lowercase]] can then fly up to half its flying speed without provoking opportunity attacks.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -75,9 +84,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711666865509,
-    "modifiedTime": 1711681675305,
+    "createdTime": 1711682683827,
+    "modifiedTime": 1711682767793,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!djXN1fhpcqEP7Daf"
+  "_key": "!items!EhzKBSBAraL7ifUf"
 }

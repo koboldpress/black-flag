@@ -1,26 +1,39 @@
 {
-  "name": "Pounce",
+  "name": "Pseudopod",
   "type": "feature",
-  "_id": "djXN1fhpcqEP7Daf",
-  "img": "icons/creatures/abilities/paw-glowing-yellow.webp",
+  "_id": "BM0wnwrOQkmV3utI",
+  "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
   "system": {
     "activities": {
-      "MCGyfHVyUWQ8ik8v": {
-        "type": "savingThrow",
-        "_id": "MCGyfHVyUWQ8ik8v",
+      "KCmYvkow6vryfUXv": {
+        "type": "attack",
+        "_id": "KCmYvkow6vryfUXv",
         "description": "",
         "system": {
-          "ability": "strength",
-          "damage": {
-            "parts": []
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
           },
-          "dc": {
-            "ability": "custom",
-            "formula": "10"
-          }
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 3,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "acid"
+              }
+            ]
+          },
+          "ability": "none"
         },
         "activation": {
-          "type": "free",
+          "type": "action",
           "condition": ""
         },
         "consumption": {
@@ -36,7 +49,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg"
       }
     },
     "uses": {
@@ -48,7 +61,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>If the [[lookup @name lowercase]] moves at least 15 feet straight toward a creature and then hits it with a Claw attack on the same turn, that target must succeed on a [[/save]] save or be knocked prone. If the target is prone, the [[lookup @name lowercase]] can make one Claw attack against it as a bonus action.</p>",
+      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. Hit: [[/damage average]] damage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -75,9 +88,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711666865509,
-    "modifiedTime": 1711681675305,
+    "createdTime": 1711683722952,
+    "modifiedTime": 1711683765355,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!djXN1fhpcqEP7Daf"
+  "_key": "!items!BM0wnwrOQkmV3utI"
 }

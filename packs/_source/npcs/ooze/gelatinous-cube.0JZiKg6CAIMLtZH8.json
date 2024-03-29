@@ -122,7 +122,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A floating skeleton surrounded by a wreath of coins moves towards you. As it approaches your light, you realize it is suspended within a quivering, transparent cube of goo.</em></p><p>With cubical forms adapted to dungeon corridors, gelatinous cubes can feed on anything found on the floors, walls, or even ceilings. They can digest softer organic materials, such as cloth, flesh, leather, and even wood, over time. Harder materials, such as bone and metals, are eventually passed out of the cube. Gelatinous cubes are practically invisible unless they have fed recently and still carry non-digestible items within them.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -192,10 +192,10 @@
   },
   "items": [
     {
-      "name": "Ooze Resilience",
+      "name": "Ooze Cube",
       "type": "feature",
-      "_id": "CLXUPxGfkOS1mSbe",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "6n3SRtHVFfWdy9ZW",
+      "img": "icons/creatures/slimes/slime-movement-splashing-yellow.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -207,8 +207,123 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[@name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The cube takes up its entire space. Other creatures can enter the space, but a creature that does so is subjected to the cube’s Engulf and has disadvantage on the save. Creatures inside the cube can be seen but have total cover.</p><p>A creature within 5 feet of the cube can take an action to pull a creature or object out of the cube. Doing so requires a successful [[/check strength 12]] check, and the creature making the attempt takes [[/damage 3d6 acid]] damage.</p><p>The cube can hold only one Large creature or up to four Medium or smaller creatures inside it at a time.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683501085,
+        "modifiedTime": 1711683565911,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.6n3SRtHVFfWdy9ZW"
+    },
+    {
+      "name": "Ooze Nature",
+      "type": "feature",
+      "_id": "8Bw71UR4pclV1d1V",
+      "img": "icons/creatures/slimes/slime-blob-pseudopods-green.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.q6Fcwt1u5j4YntFm"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774827111,
+        "modifiedTime": 1711683654755,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.8Bw71UR4pclV1d1V"
+    },
+    {
+      "name": "Ooze Resilience",
+      "type": "feature",
+      "_id": "flRbY80QEXWIgogu",
+      "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to the grappled and restrained conditions, and it is immune to exhaustion and to the blinded, charmed, deafened, frightened, and prone conditions.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -223,7 +338,7 @@
       },
       "effects": [
         {
-          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "icon": "icons/creatures/slimes/slime-giant-face-eyes.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
           "duration": {
             "rounds": null,
@@ -292,7 +407,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!0JZiKg6CAIMLtZH8.CLXUPxGfkOS1mSbe.TRIJesrj6nA7uktU"
+          "_key": "!actors.items.effects!0JZiKg6CAIMLtZH8.flRbY80QEXWIgogu.TRIJesrj6nA7uktU"
         }
       ],
       "folder": null,
@@ -312,13 +427,350 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1709611470478,
-        "modifiedTime": 1709617304019,
+        "modifiedTime": 1711683656953,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!0JZiKg6CAIMLtZH8.CLXUPxGfkOS1mSbe"
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.flRbY80QEXWIgogu"
+    },
+    {
+      "name": "Transparent",
+      "type": "feature",
+      "_id": "40uetyaCtfHKNG8l",
+      "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While motionless, the cube’s Stealth is 15, even when the cube is in plain sight.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683679657,
+        "modifiedTime": 1711683714665,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.40uetyaCtfHKNG8l"
+    },
+    {
+      "name": "Pseudopod",
+      "type": "feature",
+      "_id": "9HO6aVYr2bReAp65",
+      "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
+      "system": {
+        "activities": {
+          "KCmYvkow6vryfUXv": {
+            "type": "attack",
+            "_id": "KCmYvkow6vryfUXv",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "acid"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.BM0wnwrOQkmV3utI"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683722952,
+        "modifiedTime": 1711683830291,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.9HO6aVYr2bReAp65"
+    },
+    {
+      "name": "Engulf",
+      "type": "feature",
+      "_id": "joTLsUdIjs6iVmSA",
+      "img": "icons/creatures/slimes/slime-face-skull-green.webp",
+      "system": {
+        "activities": {
+          "c0SRMRfF6sNU2iu7": {
+            "type": "savingThrow",
+            "_id": "c0SRMRfF6sNU2iu7",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "acid"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The cube moves up to its speed. While doing so, it can enter a Large or smaller creature’s space. When the cube enters a creature’s space, the creature must make a [[/save]] save. On a success, the creature can choose to be pushed 5 feet back or to the side of the cube. A creature that chooses not to be pushed suffers the consequences of a failed save.</p><p>On a failed save, the cube enters the creature’s space, the creature takes [[/damage average]] damage, and is engulfed. The engulfed creature can’t breathe, is restrained, and takes [[/damage 6d6 acid average]] damage at the start of each of the cube’s turns. When the cube moves, the engulfed creature moves with it.</p><p>An engulfed creature can try to escape by taking an action to make a [[/check strength 13]] check. On a success, the creature escapes and enters a space of its choice within 5 feet of the cube.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683836514,
+        "modifiedTime": 1711683909676,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.joTLsUdIjs6iVmSA"
+    },
+    {
+      "name": "Skewer Prey",
+      "type": "feature",
+      "_id": "HvnIMns26fVKIjyS",
+      "img": "icons/skills/melee/blade-tip-smoke-green.webp",
+      "system": {
+        "activities": {
+          "VrfBPPwcyhCc3rQz": {
+            "type": "utility",
+            "_id": "VrfBPPwcyhCc3rQz",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When the gelatinous cube is subjected to piercing damage, it can move a random creature engulfed by it to intercept the attack. The creature takes the piercing damage as if it were the target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683934344,
+        "modifiedTime": 1711684001985,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!0JZiKg6CAIMLtZH8.HvnIMns26fVKIjyS"
     }
   ],
   "effects": [],
@@ -329,10 +781,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709617254212,
-    "modifiedTime": 1711586317963,
+    "modifiedTime": 1711684001985,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!0JZiKg6CAIMLtZH8"

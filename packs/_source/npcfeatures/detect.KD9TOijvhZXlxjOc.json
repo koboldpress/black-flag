@@ -1,27 +1,19 @@
 {
-  "name": "Pounce",
+  "name": "Detect",
   "type": "feature",
-  "_id": "djXN1fhpcqEP7Daf",
-  "img": "icons/creatures/abilities/paw-glowing-yellow.webp",
+  "_id": "KD9TOijvhZXlxjOc",
+  "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
   "system": {
     "activities": {
-      "MCGyfHVyUWQ8ik8v": {
-        "type": "savingThrow",
-        "_id": "MCGyfHVyUWQ8ik8v",
+      "LbimYNyRpokzxB6T": {
+        "type": "utility",
+        "_id": "LbimYNyRpokzxB6T",
         "description": "",
-        "system": {
-          "ability": "strength",
-          "damage": {
-            "parts": []
-          },
-          "dc": {
-            "ability": "custom",
-            "formula": "10"
-          }
-        },
+        "system": {},
         "activation": {
-          "type": "free",
-          "condition": ""
+          "type": "legendary",
+          "condition": "",
+          "value": 1
         },
         "consumption": {
           "targets": [],
@@ -36,7 +28,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/utility.svg"
       }
     },
     "uses": {
@@ -48,7 +40,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>If the [[lookup @name lowercase]] moves at least 15 feet straight toward a creature and then hits it with a Claw attack on the same turn, that target must succeed on a [[/save]] save or be knocked prone. If the target is prone, the [[lookup @name lowercase]] can make one Claw attack against it as a bonus action.</p>",
+      "value": "<p>The [[lookup @name lowercase]] automatically detects every creature and trap within 30 feet of it, pinpointing the current location of each.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -75,9 +67,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711666865509,
-    "modifiedTime": 1711681675305,
+    "createdTime": 1711682312413,
+    "modifiedTime": 1711682654516,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!djXN1fhpcqEP7Daf"
+  "_key": "!items!KD9TOijvhZXlxjOc"
 }

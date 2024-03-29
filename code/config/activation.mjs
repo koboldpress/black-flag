@@ -28,7 +28,8 @@ export const actionTypes = {
 		label: "BF.Activation.Category.Monster.Label",
 		children: {
 			legendary: {
-				localization: "BF.Activation.Type.Legendary"
+				localization: "BF.Activation.Type.Legendary",
+				scalar: true
 			}
 		}
 	}
@@ -118,7 +119,7 @@ function _createOptions(categories, { chosen, pluralRule }) {
 		category.scalar = key in timeUnits;
 		for ( const [k, v] of Object.entries(category.children) ) {
 			v.label = makeLabel(v, { pluralRule });
-			v.scalar ??= category.scalar;
+			v.scalar ??= category.scalar || v.scalar;
 			v.chosen = k === chosen;
 		}
 	}

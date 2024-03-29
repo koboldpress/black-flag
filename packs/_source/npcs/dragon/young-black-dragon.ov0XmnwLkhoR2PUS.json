@@ -412,7 +412,11 @@
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "dexterity",
+              "attack": {
+                "bonus": "7",
+                "flat": true
+              }
             },
             "activation": {
               "type": "action",
@@ -443,7 +447,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one target. Hit: [[/damage average]] damage.</p>",
           "source": {
             "fallback": "Black Flag Reference Document"
           }
@@ -480,7 +484,7 @@
         "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1711504525397,
-        "modifiedTime": 1711667511282,
+        "modifiedTime": 1711682122351,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ov0XmnwLkhoR2PUS.q4tfXoTZJzwDEX7O"
@@ -513,7 +517,11 @@
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "dexterity",
+              "attack": {
+                "bonus": "7",
+                "flat": true
+              }
             },
             "activation": {
               "type": "action",
@@ -581,7 +589,7 @@
         "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1711503209924,
-        "modifiedTime": 1711667526621,
+        "modifiedTime": 1711682108679,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ov0XmnwLkhoR2PUS.x3s6fBRarPUpjtLF"
@@ -602,8 +610,8 @@
               "damage": {
                 "parts": [
                   {
-                    "number": 5,
-                    "denomination": 8,
+                    "number": 11,
+                    "denomination": "8",
                     "bonus": "",
                     "custom": "",
                     "type": "acid"
@@ -612,7 +620,7 @@
               },
               "dc": {
                 "ability": "custom",
-                "formula": "11"
+                "formula": "15"
               }
             },
             "activation": {
@@ -644,7 +652,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "value": "<p>The [[lookup @name lowercase]] exhales acid in a 30-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
           "source": {
             "fallback": "Black Flag Reference Document"
           }
@@ -681,7 +689,7 @@
         "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1711666996605,
-        "modifiedTime": 1711667422504,
+        "modifiedTime": 1711682156407,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ov0XmnwLkhoR2PUS.mW75rQzjan4sqCkm"
@@ -698,7 +706,7 @@
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709616692021,
-    "modifiedTime": 1711667526621,
+    "modifiedTime": 1711682156407,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ov0XmnwLkhoR2PUS"

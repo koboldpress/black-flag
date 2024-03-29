@@ -1,27 +1,28 @@
 {
-  "name": "Pounce",
+  "name": "Elemental Roar",
   "type": "feature",
-  "_id": "djXN1fhpcqEP7Daf",
-  "img": "icons/creatures/abilities/paw-glowing-yellow.webp",
+  "_id": "8R4XXpbwLn8tic0m",
+  "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
   "system": {
     "activities": {
-      "MCGyfHVyUWQ8ik8v": {
+      "GwjZFe6SshmK8K5Z": {
         "type": "savingThrow",
-        "_id": "MCGyfHVyUWQ8ik8v",
+        "_id": "GwjZFe6SshmK8K5Z",
         "description": "",
         "system": {
-          "ability": "strength",
+          "ability": "charisma",
           "damage": {
             "parts": []
           },
           "dc": {
             "ability": "custom",
-            "formula": "10"
+            "formula": "19"
           }
         },
         "activation": {
-          "type": "free",
-          "condition": ""
+          "type": "legendary",
+          "condition": "",
+          "value": 2
         },
         "consumption": {
           "targets": [],
@@ -48,7 +49,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>If the [[lookup @name lowercase]] moves at least 15 feet straight toward a creature and then hits it with a Claw attack on the same turn, that target must succeed on a [[/save]] save or be knocked prone. If the target is prone, the [[lookup @name lowercase]] can make one Claw attack against it as a bonus action.</p>",
+      "value": "<p>The [[lookup @name lowercase]] roars at up to two creatures of its choice within 120 feet of it. Each target must succeed on a [[/save]] save or be vulnerable to fire damage until the end of its next turn. A target resistant to fire damage isn’t resistant to it for the duration. A target immune to fire damage is still immune to it, even if the target fails the save.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -75,9 +76,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711666865509,
-    "modifiedTime": 1711681675305,
+    "createdTime": 1711682938328,
+    "modifiedTime": 1711682992049,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!djXN1fhpcqEP7Daf"
+  "_key": "!items!8R4XXpbwLn8tic0m"
 }
