@@ -641,7 +641,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
 			}, rollData),
 			options: {
-				minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData })
+				minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData }),
+				target: config.target
 			}
 		}].concat(config.rolls ?? []);
 
@@ -717,7 +718,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
 			}, rollData),
 			options: {
-				minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData })
+				minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData }),
+				target: config.target
 			}
 		}].concat(config.rolls ?? []);
 
@@ -806,7 +808,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}, rollData),
 			options: {
 				minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
-				target: death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
+				target: config.target ?? death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
 			}
 		}].concat(config.rolls ?? []);
 
@@ -1186,7 +1188,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
 				}, rollData),
 				options: {
-					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
+					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					target: rollConfig.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;
@@ -1296,7 +1299,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
 				}, rollData),
 				options: {
-					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData })
+					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					target: rollConfig.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;

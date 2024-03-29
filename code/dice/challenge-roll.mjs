@@ -7,6 +7,7 @@ import BasicRoll from "./basic-roll.mjs";
  *
  * @typedef {BasicRollProcessConfiguration} ChallengeRollProcessConfiguration
  * @property {ChallengeRollConfiguration[]} rolls - Configuration data for individual rolls.
+ * @property {number} target - Default target value for all rolls if none are set individually.
  */
 
 /**

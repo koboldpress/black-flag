@@ -25,7 +25,7 @@ export default class SavingThrowActivity extends DamageActivity {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		layout.innerHTML = `<span class="dc">${numberFormat(this.system.dc.final)}</span>`;
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.savingThrowAbility];
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.dcAbility];
 		layout.innerHTML += `<span class="ability">${ability}</span>`;
 		return layout.outerHTML;
 	}
@@ -36,10 +36,24 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * Ability used to determine the DC of this ability.
 	 * @type {string|null}
 	 */
-	get savingThrowAbility() {
+	get dcAbility() {
 		if ( this.system.dc.ability === "custom" ) return null;
 		if ( this.system.dc.ability ) return this.system.dc.ability;
 		return this.item.system.ability ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Save ability, dc, and activity for the default save this item might have.
+	 * @returns {{ability: string, dc: string, activity: Activity}|null}
+	 */
+	get saveDetails() {
+		const rollData = this.item.getRollData({ deterministic: true });
+		const ability = rollData.abilities?.[this.dcAbility];
+		if ( ability ) rollData.mod = ability.mod;
+		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
+		return { ability: this.system.ability, dc, activity: this };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -79,7 +93,7 @@ export default class SavingThrowActivity extends DamageActivity {
 	async rollSavingThrow(config={}, dialog={}, message={}) {
 		// Determine DC based on settings & the actor to whom the activity belongs
 		const rollData = this.item.getRollData({ deterministic: true });
-		const ability = rollData.abilities?.[this.savingThrowAbility];
+		const ability = rollData.abilities?.[this.dcAbility];
 		if ( ability ) rollData.mod = ability.mod;
 		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
 
@@ -89,7 +103,7 @@ export default class SavingThrowActivity extends DamageActivity {
 			await target.actor.rollAbilitySave({
 				ability: this.system.ability,
 				event,
-				options: { target: dc }
+				target: dc
 			}, {
 				data: { speaker }
 			});

@@ -42,7 +42,7 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 
 	prepareFinalData() {
 		const rollData = this.parent.item.getRollData({ deterministic: true });
-		const ability = rollData.abilities?.[this.parent.savingThrowAbility];
+		const ability = rollData.abilities?.[this.parent.dcAbility];
 		if ( ability ) {
 			rollData.mod = ability.mod;
 			Object.defineProperty(this.dc, "final", {

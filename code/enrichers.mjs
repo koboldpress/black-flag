@@ -175,7 +175,7 @@ function handleRollAction(event) {
  * ```[[/attack]]```
  * becomes
  * ```html
- * <a class="roll-action" data-roll-action="attack">
+ * <a class="roll-action" data-roll-action="attack" data-activity="...uuid...">
  *   <i class="fa-solid fa-dice-d20" inert></i> +8
  * </a> to hit
  * ```
@@ -300,7 +300,7 @@ function enrichCalculation(config, fallback, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity check
  * </a>
  * ```
  *
@@ -309,7 +309,7 @@ function enrichCalculation(config, fallback, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="dexterity" data-skill="acrobatics" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity (Acrobatics) check
  * </a>
  * ```
  *
@@ -318,7 +318,7 @@ function enrichCalculation(config, fallback, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="strength" data-skill="acrobatics">
- *   <i class="fa-solid fa-dice-d20"></i> Strength (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Strength (Acrobatics) check
  * </a>
  * ```
  *
@@ -327,7 +327,7 @@ function enrichCalculation(config, fallback, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="intelligence" data-tool="thievesTools">
- *   <i class="fa-solid fa-dice-d20"></i> Intelligence (Thieves' Tools) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Intelligence (Thieves' Tools) check
  * </a>
  * ```
  *
@@ -336,7 +336,7 @@ function enrichCalculation(config, fallback, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="check" data-ability="charisma" data-dc="15">
- *   <i class="fa-solid fa-dice-d20"></i> DC 15 Charisma check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 Charisma check
  * </a>
  * ```
  */
@@ -415,7 +415,7 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="save" data-key="dexterity">
- *   <i class="fa-solid fa-dice-d20"></i> DEX
+ *   <i class="fa-solid fa-dice-d20" inert></i> DEX
  * </a>
  * ```
  *
@@ -424,7 +424,16 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-roll-action="save" data-key="dexterity" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 DEX
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 DEX
+ * </a>
+ * ```
+ *
+ * @example Empty enricher fetches details from item or activity.
+ * ```[[/save]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="save" data-key="dexterity" data-dc="20" data-activity="...uuid...">
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 DEX
  * </a>
  * ```
  */
@@ -433,6 +442,12 @@ async function enrichSave(config, label, options) {
 		if ( value in CONFIG.BlackFlag.enrichment.lookup.abilities ) config.ability = value;
 		else if ( Number.isNumeric(value) ) config.dc = Number(value);
 		else config[value] = true;
+	}
+	if ( !config.ability ) {
+		const { ability, dc, activity } = options.relativeTo?.saveDetails ?? {};
+		config.ability = ability;
+		config.dc ??= dc;
+		if ( activity ) config.activity = activity.uuid;
 	}
 
 	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
@@ -464,6 +479,13 @@ async function enrichSave(config, label, options) {
  */
 async function rollCheckSave(event, speaker) {
 	const target = event.target.closest("[data-roll-action]");
+	const { activity: activityUuid } = target.dataset;
+
+	if ( activityUuid ) {
+		const activity = await fromUuid(activityUuid);
+		if ( activity ) return activity.rollSavingThrow();
+	}
+
 	target.disabled = true;
 	try {
 		const actors = new Set(getSelectedTokens().map(t => t.actor));

@@ -98,6 +98,20 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Save ability, dc, and activity for the default save this item might have.
+	 * @returns {{ability: string, dc: string, activity: Activity}|null}
+	 */
+	get saveDetails() {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.saveDetails;
+			if ( details ) return details;
+		}
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
