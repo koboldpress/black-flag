@@ -101,7 +101,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseProficiency() {
-		this.attributes.proficiency = Proficiency.calculateMod(Math.max(this.attributes.cr, 1));
+		this.attributes.proficiency = 0;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

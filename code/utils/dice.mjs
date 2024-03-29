@@ -22,10 +22,10 @@ export function areKeysPressed(event, action) {
 /**
  * Construct roll parts and populate its data object.
  * @param {object} parts - Information on the parts to be constructed.
- * @param {object} data - Roll data to use and populate while constructing the parts.
+ * @param {object} [data] - Roll data to use and populate while constructing the parts.
  * @returns {{ parts: string[], data: object }}
  */
-export function buildRoll(parts, data) {
+export function buildRoll(parts, data={}) {
 	const finalParts = [];
 	for ( let [key, value] of Object.entries(parts) ) {
 		if ( !value && (value !== 0) ) continue;
