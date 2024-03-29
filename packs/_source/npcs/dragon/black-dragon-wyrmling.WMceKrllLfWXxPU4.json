@@ -125,7 +125,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>This dragon has glossy black scales pitted gray and white with acid stains. Its crocodilian maw continually dribbles acid that hisses when it strikes something.</em></p><p>Black dragons are consummate bullies and aggressively defend their lairs against lesser creatures, often making examples of those they see as a threat. This also applies to their mates and their own young, which flee the most powerful specimen when they can. If a dragon learns about a settlement encroaching on its swampy domain, it first sends its allies to drive the interlopers away, and then it makes a personal visit to destroy any remaining resistance.</p><p><strong>Cowardly.</strong> As bullies, black dragons quail in the face of superior beings, often in the form of larger black dragons resettling from other swampy lairs or their own young who have amassed enough wealth, power, and age to challenge their sire. When necessary, black dragons engage in ambushes, short raids, and night attacks to undermine stronger foes.</p><p><strong>Gem Hoarders.</strong> Conditions force black dragons to carefully select their treasures. Metal corrodes from exposure to the dragons’ acid and the damp air. Paper soaks through and disintegrates. Wood bloats and warps. Enchanted items last longer, but they too ultimately succumb to corrosion. However, gems persist in the unfavorable environment, so black dragons collect as many as possible. Each dragon has a favorite type of gem they covet, ranging from sapphires and rubies through less common stones like tourmalines and garnets. While the dragons don’t have deep caverns for their hoards, the shallow waters of the swamps make it relatively simple to dredge for stored gems.</p><p><strong>Local Despots.</strong> Compared to most chromatic dragons, black dragons content themselves with their own domain and rarely see the need to fly somewhere distant, devastate an area, and plunder from the fallen. They are satisfied with waylaying hapless travelers in their territory and retrieving treasure from those claimed by the swamp without their intervention.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -193,7 +193,502 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Amphibious",
+      "type": "feature",
+      "_id": "FrswJDv9TbskLqBw",
+      "img": "icons/creatures/amphibians/treefrog-underneath-teal.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can breathe air and water.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.QiNgsqMB7nB63tk5"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774936943,
+        "modifiedTime": 1711666840843,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.FrswJDv9TbskLqBw"
+    },
+    {
+      "name": "Pounce",
+      "type": "feature",
+      "_id": "p2Q3d5Q3YFaoYV2M",
+      "img": "icons/creatures/abilities/paw-glowing-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If the [[lookup @name lowercase]] moves at least 15 feet straight toward a creature and then hits it with a Claw attack on the same turn, that target must succeed on a [[/save strength 13]] save or be knocked prone. If the target is prone, the [[lookup @name lowercase]] can make one Claw attack against it as a bonus action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.djXN1fhpcqEP7Daf"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711666865509,
+        "modifiedTime": 1711666954422,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.p2Q3d5Q3YFaoYV2M"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "E6W7Q0ohZp3OP4Ex",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The dragon makes one Bite attack and one Claw attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711667333245,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.E6W7Q0ohZp3OP4Ex"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "vjS0YrRM6AOAfPRp",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "10",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711667321381,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.vjS0YrRM6AOAfPRp"
+    },
+    {
+      "name": "Claw",
+      "type": "feature",
+      "_id": "BHW1yUgCMUtmaj86",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711667294266,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.BHW1yUgCMUtmaj86"
+    },
+    {
+      "name": "Acid Breath (Recharge 5–6)",
+      "type": "feature",
+      "_id": "NckYPAKxQtbUY0Tw",
+      "img": "icons/magic/acid/dissolve-bone-white.webp",
+      "system": {
+        "activities": {
+          "mascwCPz5vFvzwRV": {
+            "type": "savingThrow",
+            "_id": "mascwCPz5vFvzwRV",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 5,
+                    "denomination": 8,
+                    "bonus": "",
+                    "custom": "",
+                    "type": "acid"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.VmRFntUfoz4espeq"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711666996605,
+        "modifiedTime": 1711667472110,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WMceKrllLfWXxPU4.NckYPAKxQtbUY0Tw"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -202,10 +697,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709616562122,
-    "modifiedTime": 1709616617291,
+    "modifiedTime": 1711667472110,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!WMceKrllLfWXxPU4"

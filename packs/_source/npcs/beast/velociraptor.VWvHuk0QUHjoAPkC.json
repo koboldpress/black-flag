@@ -111,7 +111,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A small, wispy-feathered creature with a sweeping tail, vicious needle-like teeth, and hooked claws on its powerful back legs tilts its head from side to side before it darts forward.</em></p><p>An effective pack hunter, the velociraptor rarely travels alone. These dinosaurs spread out from one another and surround their prey, attacking ferociously from blind spots, ripping and tearing their targets with savage claws on their hind legs. Hard to train and forever plagued by instincts to kill, only the most foolish and determined humanoids attempt to tame velociraptors. Career caretakers display missing fingers and ghoulish scars as badges of honor.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -179,7 +179,441 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Pack Tactics",
+      "type": "feature",
+      "_id": "fc5wBxZWyhCjQrtk",
+      "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on attack rolls against a creature if at least one of its allies is within 5 feet of the target and the ally isn’t incapacitated.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ivOwfLQnIrKPW3bv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774072494,
+        "modifiedTime": 1711666535195,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!VWvHuk0QUHjoAPkC.fc5wBxZWyhCjQrtk"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "7ALdpB5qy47rj7hM",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The velociraptor makes one Bite attack and one Claws attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711666770792,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!VWvHuk0QUHjoAPkC.7ALdpB5qy47rj7hM"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "cgbQ8oNFUNV1zwaE",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage. If the target is a Medium or smaller creature, it is grappled (escape DC 12). Until this grapple ends, the target is restrained, and the [[lookup @name lowercase]] can’t Bite another target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711666750183,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!VWvHuk0QUHjoAPkC.cgbQ8oNFUNV1zwaE"
+    },
+    {
+      "name": "Claws",
+      "type": "feature",
+      "_id": "QXBmlZqw47HKpL6l",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711666717971,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!VWvHuk0QUHjoAPkC.QXBmlZqw47HKpL6l"
+    },
+    {
+      "name": "Maul",
+      "type": "feature",
+      "_id": "QG6npgCSEVyiEaIu",
+      "img": "icons/creatures/abilities/cougar-roar-rush-orange.webp",
+      "system": {
+        "activities": {
+          "Fr5a9v7frLaylFez": {
+            "type": "savingThrow",
+            "_id": "Fr5a9v7frLaylFez",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "12"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The velociraptor uses its claws to rip into one creature it is grappling. The target must make a [[/save strength 12]] save, taking [[/damage 4d4 slashing]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711666568073,
+        "modifiedTime": 1711666695235,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!VWvHuk0QUHjoAPkC.QG6npgCSEVyiEaIu"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -188,10 +622,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.015",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709616473209,
-    "modifiedTime": 1709616540535,
+    "modifiedTime": 1711666770792,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!VWvHuk0QUHjoAPkC"

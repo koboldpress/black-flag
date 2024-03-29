@@ -1,0 +1,84 @@
+{
+  "name": "Legendary Resistance (3/Day)",
+  "type": "feature",
+  "_id": "iql59XFWY8f42JPi",
+  "img": "icons/magic/defensive/shield-barrier-blades-teal.webp",
+  "system": {
+    "activities": {
+      "vQo9lDmsSAr4mXuB": {
+        "type": "utility",
+        "_id": "vQo9lDmsSAr4mXuB",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "3"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>If the [[lookup @name lowercase]] fails a save, it can choose to succeed instead.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "identifier": {},
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "monsters"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.8.019",
+    "coreVersion": "11.315",
+    "createdTime": 1711668131577,
+    "modifiedTime": 1711668217377,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!iql59XFWY8f42JPi"
+}

@@ -1,32 +1,31 @@
 {
-  "name": "Bite",
+  "name": "Acid Breath (Recharge 5–6)",
   "type": "feature",
-  "_id": "0Tp5zlCaSyrSMoYN",
-  "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+  "_id": "VmRFntUfoz4espeq",
+  "img": "icons/magic/acid/dissolve-bone-white.webp",
   "system": {
     "activities": {
-      "sO4yBxIaNViWhQt2": {
-        "type": "attack",
-        "_id": "sO4yBxIaNViWhQt2",
+      "mascwCPz5vFvzwRV": {
+        "type": "savingThrow",
+        "_id": "mascwCPz5vFvzwRV",
         "description": "",
         "system": {
-          "type": {
-            "value": "melee",
-            "classification": "weapon"
-          },
+          "ability": "dexterity",
           "damage": {
-            "includeBaseDamage": true,
             "parts": [
               {
-                "number": 1,
-                "denomination": "6",
+                "number": 5,
+                "denomination": "8",
                 "bonus": "",
                 "custom": "",
-                "type": "piercing"
+                "type": "acid"
               }
             ]
           },
-          "ability": "strength"
+          "dc": {
+            "ability": "custom",
+            "formula": "11"
+          }
         },
         "activation": {
           "type": "action",
@@ -45,7 +44,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -57,7 +56,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+      "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -84,9 +83,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711504525397,
-    "modifiedTime": 1711667773750,
+    "createdTime": 1711666996605,
+    "modifiedTime": 1711667455208,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!0Tp5zlCaSyrSMoYN"
+  "_key": "!items!VmRFntUfoz4espeq"
 }
