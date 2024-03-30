@@ -7,7 +7,8 @@ export function registerCustomEnrichers() {
 	log("Registering custom enrichers");
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern: /\[\[\/(?<type>attack|check|damage|save|skill|tool)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
+			pattern:
+				/\[\[\/(?<type>attack|check|damage|healing|save|skill|tool)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
 			enricher: enrichString
 		},
 		{
@@ -34,7 +35,7 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
 	let { type, config, label } = match.groups;
-	config = parseConfig(config, { multiple: type === "damage" });
+	config = parseConfig(config, { multiple: ["damage", "healing"].includes(type) });
 	config._input = match[0];
 	switch ( type.toLowerCase() ) {
 		case "attack": return enrichAttack(config, label, options);
@@ -44,6 +45,7 @@ async function enrichString(match, options) {
 		case "tool": return enrichCheck(config, label, options);
 		case "lookup": return enrichLookup(config, label, options);
 		case "save": return enrichSave(config, label, options);
+		case "healing": config._isHealing = true;
 		case "damage": return enrichDamage(config, label, options);
 		case "embed": return enrichEmbed(config, label, options);
 	}
@@ -553,6 +555,15 @@ async function rollCheckSave(event, speaker) {
  *   7 (<span class="roll-link"><i class="fa-solid fa-dice-d20" inert></i> 2d6</span>) fire
  * </a>
  * ```
+ *
+ * @example Create a healing link:
+ * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * becomes
+ * ```html
+ * <a class="unlink" data-roll-action="damage" data-formulas="["2d6"]" data-types="["healing"]">
+ *   <i class="fa-solid fa-dice-d20" inert></i> 2d6
+ * </a> healing
+ * ```
  */
 async function enrichDamage(configs, label, options) {
 	const config = { rollAction: "damage", formulas: [], types: [] };
@@ -567,6 +578,7 @@ async function enrichDamage(configs, label, options) {
 			else formulaParts.push(value);
 		}
 		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+		c.type = c.type ?? (configs._isHealing ? "healing" : null);
 		if ( c.formula ) {
 			config.formulas.push(c.formula);
 			config.types.push(c.type);

@@ -60,7 +60,7 @@ localizeConfig(damageTypes);
  * @enum {DamageTypeConfiguration}
  */
 export const healingTypes = {
-	normal: {
+	healing: {
 		label: "BF.Healing.Type.Normal"
 	},
 	temp: {
