@@ -188,7 +188,7 @@ async function enrichAttack(config, label, options) {
 	for ( const value of config.values ) formulaParts.push(value);
 	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 	if ( !config.formula ) {
-		const { formula, activity } = options.relativeTo?.attackDetails ?? {};
+		const { formula, activity } = options.relativeTo?.getAttackDetails?.(config) ?? {};
 		config.formula = formula || "+0";
 		if ( activity ) config.activity = activity.uuid;
 	}
@@ -446,7 +446,7 @@ async function enrichSave(config, label, options) {
 		else config[value] = true;
 	}
 	if ( !config.ability ) {
-		const { ability, dc, activity } = options.relativeTo?.saveDetails ?? {};
+		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
 		config.ability = ability;
 		config.dc ??= dc;
 		if ( activity ) config.activity = activity.uuid;
@@ -586,7 +586,7 @@ async function enrichDamage(configs, label, options) {
 	}
 
 	if ( !config.formulas.length ) {
-		const damageDetails = options.relativeTo?.damageDetails;
+		const damageDetails = options.relativeTo?.getDamageDetails?.(config);
 		for ( const r of damageDetails?.rolls ?? [] ) {
 			// TODO: Simplify formula as must as possible for display
 			const formula = Roll.defaultImplementation.replaceFormulaData(r.parts.join(" + "), r.data, { missing: "0" });

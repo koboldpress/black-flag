@@ -30,26 +30,6 @@ export default class AttackActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Attack details for this activity.
-	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
-	 */
-	get attackDetails() {
-		const ability = this.actor?.system.abilities[this.attackAbility];
-		const rollData = this.item.getRollData();
-		const { parts, data } = buildRoll(
-			this.system.attack.flat ? { toHit: this.system.attack.bonus } : {
-				mod: ability?.mod,
-				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
-				bonus: this.system.attack.bonus,
-				actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
-			}, rollData
-		);
-		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Contents of the challenge column in the action table.
 	 * @type {string}
 	 */
@@ -113,7 +93,7 @@ export default class AttackActivity extends DamageActivity {
 	async rollAttack(config={}, dialog={}, message={}) {
 		// TODO: Associate ammunition with the attack
 
-		const { parts, data } = this.attackDetails;
+		const { parts, data } = this.getAttackDetails();
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
@@ -203,5 +183,26 @@ export default class AttackActivity extends DamageActivity {
 			}, config));
 		}
 		return rollConfig;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Attack details for this activity.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
+	 */
+	getAttackDetails(options={}) {
+		const ability = this.actor?.system.abilities[this.attackAbility];
+		const rollData = this.item.getRollData();
+		const { parts, data } = buildRoll(
+			this.system.attack.flat ? { toHit: this.system.attack.bonus } : {
+				mod: ability?.mod,
+				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+				bonus: this.system.attack.bonus,
+				actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+			}, rollData
+		);
+		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
 	}
 }

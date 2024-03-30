@@ -43,20 +43,6 @@ export default class SavingThrowActivity extends DamageActivity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Save ability, dc, and activity for the default save this item might have.
-	 * @returns {{ability: string, dc: string, activity: Activity}|null}
-	 */
-	get saveDetails() {
-		const rollData = this.item.getRollData({ deterministic: true });
-		const ability = rollData.abilities?.[this.dcAbility];
-		if ( ability ) rollData.mod = ability.mod;
-		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
-		return { ability: this.system.ability, dc, activity: this };
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -121,5 +107,20 @@ export default class SavingThrowActivity extends DamageActivity {
 			}
 		}, config);
 		return super.createDamageConfigs(config, rollData);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Save ability, dc, and activity for the default save this item might have.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{ability: string, dc: string, activity: Activity}|null}
+	 */
+	getSaveDetails(options={}) {
+		const rollData = this.item.getRollData({ deterministic: true });
+		const ability = rollData.abilities?.[this.dcAbility];
+		if ( ability ) rollData.mod = ability.mod;
+		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
+		return { ability: this.system.ability, dc, activity: this };
 	}
 }

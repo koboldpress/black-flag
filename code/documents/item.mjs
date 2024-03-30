@@ -21,20 +21,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Attack formula and activity for the default attack this item might have.
-	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
-	 */
-	get attackDetails() {
-		for ( const activity of this.system.activities ?? [] ) {
-			const details = activity.attackDetails;
-			if ( details ) return details;
-		}
-		return null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * The item that contains this item, if it is in a container. Returns a promise if the item is located
 	 * in a compendium pack.
 	 * @type {BlackFlagItem|Promise<BlackFlagItem>|void}
@@ -44,20 +30,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
 		if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
 		return game.items.get(this.system.container);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Damage formulas and activity for the default attack this item might have.
-	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
-	 */
-	get damageDetails() {
-		for ( const activity of this.system.activities ?? [] ) {
-			const details = activity.damageDetails;
-			if ( details ) return details;
-		}
-		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -95,20 +67,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 		Object.defineProperty(this, "pseudoDocumentHierarchy", {value: Object.freeze(hierarchy), writable: false});
 		return this.pseudoDocumentHierarchy;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Save ability, dc, and activity for the default save this item might have.
-	 * @returns {{ability: string, dc: string, activity: Activity}|null}
-	 */
-	get saveDetails() {
-		for ( const activity of this.system.activities ?? [] ) {
-			const details = activity.saveDetails;
-			if ( details ) return details;
-		}
-		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -185,6 +143,36 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Attack formula and activity for the default attack this item might have.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
+	 */
+	getAttackDetails(options={}) {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.getAttackDetails?.(options);
+			if ( details ) return details;
+		}
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Damage formulas and activity for the default attack this item might have.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
+	 */
+	getDamageDetails(options={}) {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.getDamageDetails?.(options);
+			if ( details ) return details;
+		}
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	getRollData({ deterministic=false }={}) {
 		let rollData;
@@ -205,6 +193,21 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 
 		return rollData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Save ability, dc, and activity for the default save this item might have.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{ability: string, dc: string, activity: Activity}|null}
+	 */
+	getSaveDetails(options={}) {
+		for ( const activity of this.system.activities ?? [] ) {
+			const details = activity.getSaveDetails?.(options);
+			if ( details ) return details;
+		}
+		return null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
