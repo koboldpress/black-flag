@@ -1,8 +1,8 @@
 <form autocomplete="off">
 	{{#each currencies}}
 		<label>
-			<span>{{localize label}}</span>
-			<input type="number" name="{{@key}}" step="0.1">
+			<span>{{ localize label }}</span>
+			<input type="number" name="{{ @key }}" step="0.1">
 		</label>
 	{{/each}}
 </form>

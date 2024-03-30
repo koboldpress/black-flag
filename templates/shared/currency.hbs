@@ -3,62 +3,67 @@
 		{{#each sections.currency as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
 				<tr class="table-header">
-					<td class="name">{{localize section.label}}</td>
-					<th class="quantity" scope="col">{{localize "BF.Quantity.Label"}}</th>
-					<th class="weight" scope="col">{{localize "BF.Weight.Label"}}</th>
+					<td class="name">{{ localize section.label }}</td>
+					<th class="quantity" scope="col">{{ localize "BF.Quantity.Label" }}</th>
+					<th class="weight" scope="col">{{ localize "BF.Weight.Label" }}</th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.editable}}
-								<a data-action="add">
-									<i class="fa-solid fa-plus"></i>
-								</a>
+								<button type="button" class="link-button" data-action="add"
+								        data-tooltip="BF.Currency.Action.Add"
+								        aria-label="{{ localize 'BF.Currency.Action.Add' }}">
+									<i class="fa-solid fa-plus" inert></i>
+								</button>
 							{{/if}}
 						</div>
 					</td>
 				</tr>
 				{{#each section.items}}
-					<tr data-item-id="{{id}}">
+					<tr data-item-id="{{ id }}">
 						<th class="name" scope="row">
 							<div class="layout">
-								<img src="{{img}}">
-								<span>{{name}}</span>
-								{{blackFlag-notificationBadge @root.document document=this}}
+								<img src="{{ img }}">
+								<span>{{ name }}</span>
+								{{ blackFlag-notificationBadge @root.document document=this }}
 							</div>
 						</th>
 						<td class="quantity">
 							<div class="layout">
 								{{#if @root.owner}}
 									<button type="button" class="link-button" data-action="adjustment" data-direction="decrease"
-													data-property="system.quantity" aria-label="{{localize 'BF.Quantity.Action.Decrease'}}">
-										<i class="fas fa-minus" aria-hidden="true"></i>
+													data-property="system.quantity" aria-label="{{ localize 'BF.Quantity.Action.Decrease' }}">
+										<i class="fa-solid fa-minus" inert></i>
 									</button>
 								{{/if}}
 								<input type="text" data-property="system.quantity" value="{{system.quantity}}" placeholder="0"
 											 inputmode="numeric" min="0">
 								{{#if @root.owner}}
 									<button type="button" class="link-button" data-action="adjustment" data-direction="increase"
-													data-property="system.quantity" aria-label="{{localize 'BF.Quantity.Action.Increase'}}">
-										<i class="fas fa-plus" aria-hidden="true"></i>
+													data-property="system.quantity" aria-label="{{ localize 'BF.Quantity.Action.Increase' }}">
+										<i class="fa-solid fa-plus" inert></i>
 									</button>
 								{{/if}}
 							</div>
 						</td>
-						<td class="weight">{{system.weight.label}}</td>
+						<td class="weight">{{ system.weight.label }}</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.editable}}
 									<button type="button" class="link-button" data-action="edit"
-													aria-label="{{localize 'BF.Currency.Action.Edit'}}">
-										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									        data-tooltip="BF.Currency.Action.Edit"
+													aria-label="{{ localize 'BF.Currency.Action.Edit' }}">
+										<i class="fa-solid fa-edit" inert></i>
 									</button>
 									<button type="button" class="link-button" data-action="delete"
-									        aria-label="{{localize 'BF.Currency.Action.Delete'}}">
-										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									        data-tooltip="BF.Currency.Action.Delete"
+									        aria-label="{{ localize 'BF.Currency.Action.Delete' }}">
+										<i class="fa-solid fa-trash" inert></i>
 									</button>
 								{{/if}}
 								<button type="button" class="link-button" data-context-menu
-												aria-label="{{localize 'BF.AdditionalControls'}}">
-									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								        data-tooltip="BF.AdditionalControls"
+												aria-label="{{ localize 'BF.AdditionalControls' }}">
+									<i class="fa-solid fa-ellipsis-vertical" inert></i>
 								</button>
 							</div>
 						</td>

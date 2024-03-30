@@ -1,32 +1,32 @@
 <form autocomplete="off">
 	<fieldset class="ability-restrictions">
-		<legend>{{localize "BF.Prerequisite.Ability.Title"}}</legend>
-		{{#each abilities as |ability key|}}
+		<legend>{{ localize "BF.Prerequisite.Ability.Title" }}</legend>
+		{{#each abilities}}
 			<label>
-				<span>{{localize ability.label}}</span>
-				<input type="number" name="abilities.{{key}}" value="{{ability.value}}">
+				<span>{{ localize label }}</span>
+				<input type="number" name="abilities.{{ @key }}" value="{{ value }}">
 			</label>
 		{{/each}}
 	</fieldset>
 	<fieldset class="spellcasting">
-		<legend>{{localize "BF.Spellcasting.Label"}}</legend>
+		<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
 		<label>
-			<span>{{localize "BF.Prerequisite.Spellcasting.Label"}}</span>
-			<input type="checkbox" name="spellcasting.present" {{checked spellcasting.present}}>
+			<span>{{ localize "BF.Prerequisite.Spellcasting.Label" }}</span>
+			<input type="checkbox" name="spellcasting.present" {{ checked spellcasting.present }}>
 		</label>
 		{{#if spellcasting.present}}
 			<label>
-				<span>{{localize "BF.Prerequisite.SpellcastingDamage.ConfigLabel"}}</span>
-				<input type="checkbox" name="spellcasting.damage" {{checked spellcasting.damage}}>
+				<span>{{ localize "BF.Prerequisite.SpellcastingDamage.ConfigLabel" }}</span>
+				<input type="checkbox" name="spellcasting.damage" {{ checked spellcasting.damage }}>
 			</label>
 		{{/if}}
 	</fieldset>
 	<fieldset class="traits">
-		<legend>{{localize "BF.Trait.Label[other]"}}</legend>
+		<legend>{{ localize "BF.Trait.Label[other]" }}</legend>
 		<label>
-			<span>{{localize "BF.Size.Label"}}</span>
+			<span>{{ localize "BF.Size.Label" }}</span>
 			<select name="traits.size">
-				{{selectOptions CONFIG.sizes selected=traits.size labelAttr="label" localize=true blank=""}}
+				{{ selectOptions CONFIG.sizes selected=traits.size labelAttr="label" localize=true blank="" }}
 			</select>
 		</label>
 	</fieldset>

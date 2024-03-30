@@ -63,7 +63,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 			},
 			description: source.description,
 			enriched: await TextEditor.enrichHTML(source.description ?? "", {
-				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.item
+				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.activity
 			}),
 			labels: {
 				defaultActivation: defaultActivation ? game.i18n.format("BF.Default.Specific", {

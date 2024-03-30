@@ -1,56 +1,62 @@
 <blackFlag-advancement>
 	<header>
-		<h2>{{localize "BF.Advancement.Label"}}</h2>
+		<h2>{{ localize "BF.Advancement.Label" }}</h2>
 		{{#if editable}}
 			<div class="controls">
-				<a data-action="add">
-					<i class="fa-solid fa-plus"></i>
-				</a>
+				<button type="button" class="link-button" data-action="add"
+				        data-tooltip="BF.Advancement.Core.Action.Create"
+				        aria-label="{{ localize 'BF.Advancement.Core.Action.Create' }}">
+					<i class="fa-solid fa-plus" inert></i>
+				</button>
 			</div>
 		{{/if}}
 	</header>
 	<ol class="level-list">
 		{{#each advancement as |data level|}}
-			<li class="advancement-level" data-level="{{level}}">
+			<li class="advancement-level" data-level="{{ level }}">
 				<div class="header">
 					<h3>
 						{{#if (eq level "unconfigured")}}
-							{{localize "BF.Advancement.Core.Level.None"}}
+							{{ localize "BF.Advancement.Core.Level.None" }}
 						{{else if (eq level "0")}}
-							{{localize "BF.Advancement.Core.Level.Any.Long"}}
+							{{ localize "BF.Advancement.Core.Level.Any.Long" }}
 						{{else}}
-							{{localize "BF.Level.Specific" level=level}}
+							{{ localize "BF.Level.Specific" level=level }}
 						{{/if}}
 					</h3>
 				</div>
 				<ol class="advancement-list">
 					{{#each data.items}}
-						<li class="advancement-entry" data-advancement-id="{{this.id}}">
+						<li class="advancement-entry" data-advancement-id="{{ this.id }}">
 							<div class="advancement-name">
 								<figure class="icon">
-									<img src="{{this.icon}}">
+									<img src="{{ this.icon }}">
 								</figure>
-								<h4>{{{this.title}}}</h4>
+								<h4>{{{ this.title }}}</h4>
 							</div>
 							<div class="class-restriction">
 								{{#if (eq this.classRestriction "original")}}
-									{{localize "BF.Advancement.Core.ClassRestriction.Multiclass"}}
+									{{ localize "BF.Advancement.Core.ClassRestriction.Multiclass" }}
 								{{else if (eq this.classRestriction "multiclass")}}
-									{{localize "BF.Advancement.Core.ClassRestriction.Original"}}
+									{{ localize "BF.Advancement.Core.ClassRestriction.Original" }}
 								{{/if}}
 							</div>
 							{{#if @root.editable}}
 								<div class="advancement-controls">
-									<a data-action="edit" data-tooltip="BF.Advancement.Core.Action.Edit">
-										<i class="fas fa-edit"></i>
-									</a>
-									<a data-action="delete" data-tooltip="BF.Advancement.Core.Action.Delete">
-										<i class="fas fa-trash"></i>
-									</a>
+									<button type="button" class="link-button" data-action="edit"
+									        data-tooltip="BF.Advancement.Core.Action.Edit"
+									        aria-label="{{ localize 'BF.Advancement.Core.Action.Edit' }}">
+										<i class="fas fa-edit" inert></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+									        data-tooltip="BF.Advancement.Core.Action.Delete"
+									        aria-label="{{ localize 'BF.Advancement.Core.Action.Delete' }}">
+										<i class="fas fa-trash" inert></i>
+									</button>
 								</div>
 							{{/if}}
 							{{#if this.summary}}
-								<div class="advancement-summary">{{{this.summary}}}</div>
+								<div class="advancement-summary">{{{ this.summary }}}</div>
 							{{/if}}
 						</li>
 					{{/each}}

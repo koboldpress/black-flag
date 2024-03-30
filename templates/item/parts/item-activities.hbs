@@ -1,46 +1,52 @@
 <blackFlag-activities>
 	<fieldset>
-		<legend>{{localize "BF.Activity.Label[other]"}}</legend>
+		<legend>{{ localize "BF.Activity.Label[other]" }}</legend>
 		<ul class="items-list activity-list configuration-list">
 			{{#each system.activities}}
-				<li class="item activity-entry" data-activity-id="{{this.id}}">
+				<li class="item activity-entry" data-activity-id="{{ this.id }}">
 					<div class="item-name activity-name">
 						<figure class="icon">
-							<img src="{{this.img}}">
+							<img src="{{ this.img }}">
 						</figure>
-						<h4>{{this.name}}</h4>
+						<h4>{{ this.name }}</h4>
 					</div>
 					<div class="item-controls activity-controls">
 						{{#if @root.editable}}
-							<a data-action="edit">
-								<i class="fa-solid fa-edit"></i>
-							</a>
-							<a data-action="delete">
-								<i class="fa-solid fa-trash"></i>
-							</a>
+							<button type="button" class="link-button" data-action="edit"
+							        data-tooltip="BF.Activity.Core.Action.Edit"
+											aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+								<i class="fa-solid fa-edit" inert></i>
+							</button>
+							<button type="button" class="link-button" data-action="delete"
+							        data-tooltip="BF.Activity.Core.Action.Delete"
+							        aria-label="{{ localize 'BF.Activity.Core.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
 						{{else}}
-							<a data-action="view">
-								<i class="fa-solid fa-eye"></i>
-							</a>
+							<button type="button" class="link-button" data-action="view"
+							        data-tooltip="BF.Activity.Core.Action.View"
+							        aria-label="{{ localize 'BF.Activity.Core.Action.View' }}">
+								<i class="fa-solid fa-eye" inert></i>
+							</button>
 						{{/if}}
 					</div>
 				</li>
 			{{else}}
 				{{#unless editable}}
 					<li class="add-control">
-						None
+						{{ localize "None" }}
 					</li>
 				{{/unless}}
 			{{/each}}
 			{{#if editable}}
 				<li class="add-control">
-					<a data-action="add">
-						<i class="fa-solid fa-plus"></i> {{localize "BF.Activity.Core.Action.Create"}}
-					</a>
+					<button type="button" class="link-button" data-action="add">
+						<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Activity.Core.Action.Create" }}
+					</button>
 				</li>
 			{{/if}}
 		</ul>
 	</fieldset>
 </blackFlag-activities>
 
-{{> "blackFlag.uses-config" name="system.uses" source=source.uses derived=system.uses}}
+{{> "blackFlag.uses-config" name="system.uses" source=source.uses derived=system.uses }}
