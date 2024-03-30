@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration data for skills.
  *
@@ -102,3 +104,4 @@ export const skills = {
 		label: "BF.Skill.Survival.Label"
 	}
 };
+localizeConfig(skills);

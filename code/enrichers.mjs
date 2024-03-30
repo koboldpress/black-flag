@@ -98,16 +98,45 @@ function createPassiveTag(label, dataset) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Create a rollable link with a request section for GMs.
+ * @param {string} label - Label to display
+ * @param {object} dataset - Data that will be added to the link for the rolling method.
+ * @returns {HTMLElement}
+ */
+function createRequestLink(label, dataset) {
+	const span = document.createElement("span");
+	span.classList.add("roll-link-group");
+	_addDataset(span, dataset);
+	span.insertAdjacentElement("afterbegin", createRollLink(label));
+
+	// Add chat request link for GMs
+	if ( game.user.isGM ) {
+		const gmLink = document.createElement("a");
+		gmLink.classList.add("extra-link");
+		gmLink.dataset.action = "request";
+		gmLink.dataset.tooltip = "BF.Enricher.Request.Action";
+		gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
+		gmLink.innerHTML = '<i class="fa-solid fa-comment-dots" inert></i>';
+		span.insertAdjacentElement("beforeend", gmLink);
+	}
+
+	return span;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Create a rollable link.
  * @param {string} label - Label to display.
- * @param {object} dataset - Data that will be added to the link for the rolling method.
+ * @param {object} [dataset={}] - Data that will be added to the link for the rolling method.
  * @param {object} [options={}]
+ * @param {string} [options.classes="roll-link"] - Class to add to the link.
  * @param {string} [options.tag="a"] - Tag to use for the link.
  * @returns {HTMLElement}
  */
-function createRollLink(label, dataset, { tag="a" }={}) {
+function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) {
 	const link = document.createElement(tag);
-	link.classList.add("roll-link");
+	link.className = classes;
 	_addDataset(link, dataset);
 	link.innerHTML = `<i class="fa-solid fa-dice-d20" inert></i> ${label}`;
 	return link;
@@ -142,6 +171,8 @@ function handleRollAction(event) {
 	const target = event.target.closest("[data-roll-action]");
 	if ( !target ) return;
 	event.stopPropagation();
+
+	if ( event.target.closest('[data-action="request"]') ) return requestCheckSave(event);
 
 	switch ( target.dataset.rollAction ) {
 		case "ability-check":
@@ -287,6 +318,50 @@ function enrichCalculation(config, fallback, options) {
 /*                 Check & Save Enrichers                */
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
+/**
+ * Create a roll label for a check or save.
+ * @param {object} config - Enricher configuration data.
+ * @returns {string}
+ */
+function createRollLabel(config) {
+	const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[config.ability]?.toUpperCase();
+	const skill = CONFIG.BlackFlag.skills.localized[config.skill];
+	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool]?.label;
+	const longSuffix = config.format === "long" ? "Long" : "Short";
+	const showDC = config.dc && !config.hideDC;
+
+	let label;
+	switch ( config.rollAction ) {
+		case "ability-check":
+		case "skill":
+		case "tool":
+			if ( ability && (skill || tool) ) {
+				label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
+			} else {
+				label = ability;
+			}
+			if ( config.passive ) {
+				label = game.i18n.format(`BF.Enricher.DC.Passive.${longSuffix}`, { dc: config.dc, check: label });
+			} else {
+				if ( showDC ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+				label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
+			}
+			break;
+		case "ability-save":
+			label = (ability ?? config.ability).toUpperCase();
+			if ( showDC ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+			label = game.i18n.format(`BF.Enricher.Save.${longSuffix}`, { save: label });
+			break;
+		default:
+			return "";
+	}
+
+	// TODO: Icon
+
+	return label;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Enrich an ability check link to perform a specific ability or skill check. If an ability is provided
@@ -380,27 +455,10 @@ async function enrichCheck(config, label, options) {
 
 	if ( invalid ) return null;
 
-	if ( !label ) {
-		const skill = skillConfig?.label;
-		const tool = toolConfig?.label;
-		const ability = skill ? abilityConfig?.label : game.i18n.localize(abilityConfig.labels.abbreviation).toUpperCase();
-		if ( ability && (skill || tool) ) {
-			label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
-		} else {
-			label = ability;
-		}
-		const longSuffix = config.format === "long" ? "Long" : "Short";
-		if ( config.passive ) {
-			label = game.i18n.format(`BF.Enricher.DC.Passive.${longSuffix}`, { dc: config.dc, check: label });
-		} else {
-			if ( config.dc ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
-			label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
-		}
-	}
-
+	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : "ability-check";
+	label ??= createRollLabel(config);
 	if ( config.passive ) return createPassiveTag(label, config);
-	const rollAction = config.skill ? "skill" : config.tool ? "tool" : "ability-check";
-	return createRollLink(label, { rollAction, ...config });
+	return createRequestLink(label, config);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -460,15 +518,33 @@ async function enrichSave(config, label, options) {
 
 	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
-	if ( !label ) {
-		label = game.i18n.localize(abilityConfig.labels.abbreviation).toUpperCase();
-		if ( config.dc ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
-		label = game.i18n.format(`BF.Enricher.DC.Save.${config.format === "long" ? "Long" : "Short"}`, {
-			save: label
-		});
-	}
+	config.rollAction = "ability-save";
+	return createRequestLink(label || createRollLabel(config), config);
+}
 
-	return createRollLink(label, { rollAction: "ability-save", ...config });
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create a roll request chat message for a check or save roll.
+ * @param {Event} event - The click event triggering the action.
+ * @returns {Promise|void}
+ */
+async function requestCheckSave(event) {
+	const target = event.target.closest("[data-roll-action]");
+	const MessageClass = getDocumentClass("ChatMessage");
+	const chatData = {
+		user: game.user.id,
+		content: await renderTemplate("systems/black-flag/templates/chat/request-card.hbs", {
+			buttonLabel: createRollLabel({ ...target.dataset, format: "long", icon: true }),
+			hiddenLabel: createRollLabel({ ...target.dataset, format: "long", icon: true, hideDC: true }),
+			dataset: { ...target.dataset, action: "rollRequest" }
+		}),
+		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
+		speaker: MessageClass.getSpeaker({user: game.user})
+	};
+	// TODO: Remove when v11 support is dropped
+	if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
+	return MessageClass.create(chatData);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -476,10 +552,9 @@ async function enrichSave(config, label, options) {
 /**
  * Perform a check or save roll.
  * @param {Event} event - The click event triggering the action.
- * @param {TokenDocument} speaker - Currently selected token.
  * @returns {Promise|void}
  */
-async function rollCheckSave(event, speaker) {
+async function rollCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
 	const { activity: activityUuid } = target.dataset;
 
@@ -499,7 +574,7 @@ async function rollCheckSave(event, speaker) {
 		for ( const actor of actors ) {
 			const { rollAction, dc, ...data } = target.dataset;
 			const rollConfig = { event, ...data };
-			if ( dc ) rollConfig.options = { target: dc };
+			if ( dc ) rollConfig.target = Number(dc);
 			await actor.roll(rollAction, rollConfig);
 		}
 	} finally {

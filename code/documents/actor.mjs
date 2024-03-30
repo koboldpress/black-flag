@@ -1189,7 +1189,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				}, rollData),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
-					target: rollConfig.target
+					target: rollConfig.target ?? config.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;
@@ -1300,7 +1300,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				}, rollData),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
-					target: rollConfig.target
+					target: rollConfig.target ?? config.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;
@@ -1313,6 +1313,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.origin = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
+		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
+			tool: game.i18n.localize(tool.label)
+		});
 		const dialogConfig = foundry.utils.mergeObject({
 			applicationClass: SkillRollConfigurationDialog,
 			options: {
@@ -1323,9 +1326,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}
 		}, dialog);
 
-		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
-			tool: game.i18n.localize(tool.label)
-		});
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
 		const messageConfig = foundry.utils.mergeObject({
 			data: {

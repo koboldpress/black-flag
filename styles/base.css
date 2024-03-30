@@ -100,9 +100,25 @@
 		.roll-link { text-shadow: 0 0 4px var(--bf-color-border-light-blue); }
 	}
 }
-.roll-link {
+.roll-link, .roll-link-group a {
 	text-decoration: underline;
 	&:hover, &:focus-visible { text-shadow: 0 0 4px var(--bf-color-border-light-blue); }
+}
+.roll-link-group {
+	.extra-link {
+		padding-inline-start: 10px;
+		text-decoration: none;
+		opacity: 60%;
+		&:hover, &:focus-visible { opacity: 100%; }
+		&::before {
+			content: "\f105";
+			font-family: var(--font-awesome);
+			font-weight: bold;
+			margin: 0 4px 0 -6px;
+			font-size: var(--font-size-10);
+			opacity: 60%;
+		}
+	}
 }
 
 .unlist {
