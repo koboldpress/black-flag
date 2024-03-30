@@ -1,3 +1,4 @@
+import { stepDenomination } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
@@ -116,6 +117,16 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	get validOptions() {
 		return CONFIG.BlackFlag.weaponOptions;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get versatileDamage() {
+		if ( !this.properties.has("versatile") || !this.damage.denomination ) return this.damage;
+		const data = foundry.utils.deepClone(this.damage);
+		data.denomination = stepDenomination(data.denomination);
+		return this.constructor.schema.fields.damage.initialize(data, this);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -163,7 +163,7 @@ export default class AttackActivity extends DamageActivity {
 		rollConfig.rolls ??= [];
 		if ( this.system.damage.includeBaseDamage && this.item.system.damage ) {
 			const ability = this.actor?.system.abilities[this.attackAbility];
-			const damage = this.item.system.damage;
+			const damage = (rollConfig.versatile ? this.item.system.versatileDamage : null) ?? this.item.system.damage;
 			const modifierData = { ...this.modifierData, type: "damage", damage, baseDamage: true };
 			const { parts, data } = buildRoll({
 				mod: ability?.mod,

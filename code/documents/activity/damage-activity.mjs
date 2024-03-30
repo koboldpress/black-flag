@@ -152,6 +152,6 @@ export default class DamageActivity extends Activity {
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
 	getDamageDetails(options={}) {
-		return { rolls: this.createDamageConfigs().rolls, activity: this };
+		return { rolls: this.createDamageConfigs({ versatile: options.versatile }).rolls, activity: this };
 	}
 }

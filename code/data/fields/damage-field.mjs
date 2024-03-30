@@ -20,6 +20,7 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	initialize(value, model, options={}) {
 		const obj = super.initialize(value, model, options);
 

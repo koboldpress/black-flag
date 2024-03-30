@@ -575,6 +575,7 @@ async function enrichDamage(configs, label, options) {
 			if ( value in CONFIG.BlackFlag.damageTypes ) c.type = value;
 			else if ( value in CONFIG.BlackFlag.healingTypes ) c.type = value;
 			else if ( value === "average" ) config.average = true;
+			else if ( value === "versatile" ) config.versatile = true;
 			else formulaParts.push(value);
 		}
 		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});

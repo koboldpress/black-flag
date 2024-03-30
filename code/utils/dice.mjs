@@ -35,3 +35,19 @@ export function buildRoll(parts, data={}) {
 	}
 	return { parts: finalParts, data };
 }
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Step a dice denomination up or down by a certain number of steps, never going beyond the bounds of the allowed dice.
+ * If decrease below minimum denomination it will return `null` indicating no dice should be rolled.
+ * @param {number} denomination - Starting denomination.
+ * @param {number} [step=1] - Number of steps to increase or decrease the denomination.
+ * @returns {number|null}
+ */
+export function stepDenomination(denomination, step=1) {
+	return CONFIG.BlackFlag.dieSteps[Math.min(
+		CONFIG.BlackFlag.dieSteps.indexOf(denomination) + step,
+		CONFIG.BlackFlag.dieSteps.length - 1
+	)] ?? null;
+}

@@ -7,6 +7,7 @@ import BasicRoll from "./basic-roll.mjs";
  *
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls - Configuration data for individual rolls.
+ * @property {boolean} [versatile] - For weapon damage, prepare the versatile damage if available.
  */
 
 /**
