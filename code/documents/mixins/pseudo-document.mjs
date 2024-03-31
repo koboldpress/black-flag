@@ -163,6 +163,19 @@ export default Base => class extends BackportedEmbedMixin(Base) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
+	 * @param {object} [options]
+	 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could be
+	 *                                            either a die term or a flat term.
+	 * @returns {object}
+	 */
+	getRollData(options) {
+		return this.item.getRollData(options);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

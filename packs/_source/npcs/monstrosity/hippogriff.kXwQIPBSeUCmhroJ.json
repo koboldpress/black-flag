@@ -118,7 +118,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Flashing down from the sky, this creature has the body and rear legs of a horse, but the head, wings, and forelegs of a mighty eagle. With a raptor’s scream, it dives to strike.</em></p><p>The swift hippogriffs hunt the mountain steppes, plains, and wild places of the world. They are omnivorous but prefer meat. A single hippogriff considers an extremely wide swath as its hunting territory and remains in an area until the food supply is exhausted.</p><p><strong>Eternal Mates.</strong> Hippogriffs mate for life, raising one to two young at a time. They lay eggs, taking turns watching over them (or hatchlings) while the other mate hunts for food. When a hippogriff dies, its mate often starves itself to death.</p><p><strong>Loyal Steeds.</strong> Hippogriff eggs are prized treasures and valuable to everyone from elven lords to powerful human generals. A single egg is valued at 2,000 gp. Of all the monstrous mounts, hippogriffs are the easiest to train. However, the death of a hippogriff ’s rider sends the mount into a frenzy.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -188,10 +188,10 @@
   },
   "items": [
     {
-      "name": "Monstrosity Resilience",
+      "name": "Heightened Sight",
       "type": "feature",
-      "_id": "r7A8mSToevhH5uRo",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "_id": "8HJ0hIv6n2eurIw9",
+      "img": "icons/creatures/eyes/humanoid-single-red-brown.webp",
       "system": {
         "activities": {},
         "uses": {
@@ -203,8 +203,68 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The [[@name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] when perceiving by sight.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ACkiwCy8KS5GVC9K"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774609989,
+        "modifiedTime": 1711909239542,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.8HJ0hIv6n2eurIw9"
+    },
+    {
+      "name": "Monstrosity Resilience",
+      "type": "feature",
+      "_id": "4KMEKZ4EPLVcpaot",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -219,7 +279,7 @@
       },
       "effects": [
         {
-          "icon": "systems/black-flag/artwork/types/feature.svg",
+          "icon": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
           "duration": {
             "rounds": null,
@@ -252,7 +312,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!kXwQIPBSeUCmhroJ.r7A8mSToevhH5uRo.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!kXwQIPBSeUCmhroJ.4KMEKZ4EPLVcpaot.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
@@ -272,13 +332,393 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709615678738,
+        "modifiedTime": 1711909241964,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!kXwQIPBSeUCmhroJ.r7A8mSToevhH5uRo"
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.4KMEKZ4EPLVcpaot"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "yD6NhdGaaBCWFFEA",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hippogriff makes one Beak attack and one Claws attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711909343888,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.yD6NhdGaaBCWFFEA"
+    },
+    {
+      "name": "Beak",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "KkaJYek8RJh3uMsp": {
+            "type": "attack",
+            "_id": "KkaJYek8RJh3uMsp",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "10",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "Y1soxbTyDbcoDeAf",
+      "img": "icons/creatures/birds/corvid-call-sound-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711909255476,
+        "modifiedTime": 1711909332424,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.Y1soxbTyDbcoDeAf"
+    },
+    {
+      "name": "Claws",
+      "type": "feature",
+      "_id": "4l9vRAPxIRGGo6Hy",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711909368763,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.4l9vRAPxIRGGo6Hy"
+    },
+    {
+      "name": "Dive (Recharge 5–6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "phUB991fm45auUG2": {
+            "type": "savingThrow",
+            "_id": "phUB991fm45auUG2",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While flying, the hippogriff dives onto a creature below it. The hippogriff moves at least 20 feet in a straight line toward a creature it can see. The target must succeed on a [[/save]] save or take [[/damage average]] damage and be knocked prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "X4fndAVwSKcMinI5",
+      "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711909378785,
+        "modifiedTime": 1711909422277,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!kXwQIPBSeUCmhroJ.X4fndAVwSKcMinI5"
     }
   ],
   "effects": [],
@@ -292,7 +732,7 @@
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709615530482,
-    "modifiedTime": 1711749730325,
+    "modifiedTime": 1711909422277,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!kXwQIPBSeUCmhroJ"

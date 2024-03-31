@@ -120,7 +120,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>They skulk out of the shadows: short, draconic humanoids covered with scales ranging in hue from rust to inky black. They have red eyes and reptilian tails, and though only the size of gnomes, they hold their weapons with easy familiarity.</em></p><p>Kobolds are diligent, hardworking creatures who view life through a practical lens. They instinctively conform to the wishes of anyone stronger than themselves rather than risk confrontation. Kobolds can be found in dark forests, deep underground, and in the heart of urban centers.</p><p><strong>Clever Miners.</strong> Skilled miners and inordinately clever with mechanical devices, kobolds routinely surround their warrens with traps, deadfalls, and camouflage.</p><p><strong>Collective Community.</strong> Kobolds share a strong communal instinct, knowing that only by acting together can they hope to defeat threats against them. When kobolds travel with other lineages, they extend this spirit to their companions.</p><p><strong>Talented Witches and Alchemists.</strong> Kobolds collect items thrown away by dwarves, humans, and others and use them in strange brews and potions.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -300,6 +300,316 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!Doo3kyUey8pTbY8K.XzbLNQ9dmnR7rOfh"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Dagger",
+      "type": "weapon",
+      "_id": "PkJ3YYAUNaLsk6nX",
+      "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024042732,
+        "modifiedTime": 1711909497055,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Doo3kyUey8pTbY8K.PkJ3YYAUNaLsk6nX"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Sling",
+      "type": "weapon",
+      "_id": "5LDlxk83xnPSN1re",
+      "img": "icons/weapons/slings/slingshot-wood.webp",
+      "system": {
+        "activities": {
+          "9QsRNwbor00owRNx": {
+            "type": "attack",
+            "_id": "9QsRNwbor00owRNx",
+            "system": {
+              "type": {},
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": false
+              }
+            },
+            "description": "",
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 1,
+          "denomination": "sp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "simple",
+          "base": "sling"
+        },
+        "options": [
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition"
+        ],
+        "ammunition": {
+          "type": "slingBullet"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "bludgeoning"
+        },
+        "range": {
+          "short": 30,
+          "long": 120,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.QoMwONkjb7knNonO"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1701024646635,
+        "modifiedTime": 1711909505678,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Doo3kyUey8pTbY8K.5LDlxk83xnPSN1re"
+    },
+    {
+      "name": "Scurry",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "hcOjUmEc1x350CD9": {
+            "type": "utility",
+            "_id": "hcOjUmEc1x350CD9",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The kobold moves up to 15 feet without provoking opportunity attacks. If the kobold is aware of traps in the area, the kobold can choose if this movement triggers any of them.</p>",
+          "source": {
+            "fallback": ""
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "iQ3iQGa34zRAzDXc",
+      "img": "icons/creatures/unholy/demon-fire-horned-clawed.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711909564640,
+        "modifiedTime": 1711909594024,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!Doo3kyUey8pTbY8K.iQ3iQGa34zRAzDXc"
     }
   ],
   "effects": [],
@@ -310,10 +620,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709615698832,
-    "modifiedTime": 1711586163358,
+    "modifiedTime": 1711909594024,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!Doo3kyUey8pTbY8K"

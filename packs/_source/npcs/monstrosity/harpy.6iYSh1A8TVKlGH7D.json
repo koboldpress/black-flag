@@ -39,7 +39,9 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [],
+        "value": [
+          "common"
+        ],
         "communication": {},
         "custom": [],
         "tags": []
@@ -127,7 +129,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>With the body of a woman and the wings and talons of a swift raptor, this monstrosity slashes the air as she dives at prey. Often, a harpy strikes with a deadly song on her lips.</em></p><p>Harpies dwell in dark forests and along coastlines, building their eyries in high places to protect their young. Dangerous hunters with a taste for human and giant flesh, they lure prey to its doom using their magical voices or descend upon it with talon and claw.</p><p><strong>Agents of the Divine.</strong> Though loathed now, harpies were once the favored messengers of the gods until some now-forgotten transgression exiled them from the divine realms. Harpies claim they have no stories or legends of that time.</p><p><strong>Clamor Eyries.</strong> Harpies live in large flocks of six to ten mated pairs and their children. A typical clamor is led by the strongest hunters or most powerful singers.</p><p><strong>Urban Harpies.</strong> A few harpies have found acceptance in large urban centers. They trade their aerial speed or magical songs for coins.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -199,7 +201,7 @@
     {
       "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "VUc7Fe7vV6QGPaHY",
+      "_id": "ABZwqp5nucX5uMTD",
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
@@ -213,7 +215,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -261,7 +265,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!6iYSh1A8TVKlGH7D.VUc7Fe7vV6QGPaHY.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!6iYSh1A8TVKlGH7D.ABZwqp5nucX5uMTD.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
@@ -281,13 +285,385 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709672050824,
+        "modifiedTime": 1711908451908,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!6iYSh1A8TVKlGH7D.VUc7Fe7vV6QGPaHY"
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.ABZwqp5nucX5uMTD"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "6YPKWUnx1rAhUokX",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The harpy makes two Claw or Screech attacks. If both Screech attacks hit one Giant or Humanoid, the target has disadvantage on the next save it makes against the harpy’s Luring Song before the start of the harpy’s next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711908655765,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.6YPKWUnx1rAhUokX"
+    },
+    {
+      "name": "Claw",
+      "type": "feature",
+      "_id": "3OstrSMbKPDS8Y5J",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1711908678336,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.3OstrSMbKPDS8Y5J"
+    },
+    {
+      "name": "Screech",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "tOJohwcb5fNtQ958": {
+            "type": "attack",
+            "_id": "tOJohwcb5fNtQ958",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "1",
+                    "custom": "",
+                    "type": "thunder"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack:</em> [[/attack]], range 30/120 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "CiJULtYIbifjUp7E",
+      "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711908467159,
+        "modifiedTime": 1711908634401,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.CiJULtYIbifjUp7E"
+    },
+    {
+      "name": "Luring Song",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "XuD4l3LOtCfpmcau": {
+            "type": "savingThrow",
+            "_id": "XuD4l3LOtCfpmcau",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The harpy sings a magical melody. Every Humanoid and Giant within 300 feet of the harpy that can hear the song must succeed on a [[/save]] save or be charmed until the song ends. The harpy must use a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated.</p><p>While charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn’t avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, the target can repeat the save. A charmed target can also repeat the save at the end of each of its turns. If the save is successful, the effect ends on it. A target that successfully saves is immune to this harpy’s song for the next 24 hours.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "pWvQ6YIxnNrizlmg",
+      "img": "icons/skills/trades/music-notes-sound-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711908695588,
+        "modifiedTime": 1711908751636,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!6iYSh1A8TVKlGH7D.pWvQ6YIxnNrizlmg"
     }
   ],
   "effects": [],
@@ -298,10 +674,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709672004001,
-    "modifiedTime": 1711586261263,
+    "modifiedTime": 1711908785484,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!6iYSh1A8TVKlGH7D"

@@ -128,13 +128,11 @@ export default class ActionsElement extends AppAssociatedElement {
 				break;
 			case "delete":
 				if ( activity ) return activity.deleteDialog();
-				break;
 			case "deleteItem":
 				if ( item ) return item.deleteDialog();
 				break;
 			case "edit":
 				if ( activity ) return activity.sheet.render(true);
-				break;
 			case "editItem":
 				if ( item ) return item.sheet.render(true);
 				break;

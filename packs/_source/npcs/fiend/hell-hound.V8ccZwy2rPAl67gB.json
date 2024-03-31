@@ -132,7 +132,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Brimstone permeates the air around this hulking canine. The beast’s claws are curved daggers, its eyes shine with a burning radiance, and flames curl out of its fanged mouth.</em></p><p>Hellhounds are fiends punished by their kin and forcibly transformed into the shape of a beast. They roam the infernal realms in cruel packs or serve whatever masters they hope will restore them to original forms.</p><p><strong>Infernal Guardians.</strong> Hellhounds are often encountered near sites important to evil creatures or demonic incursions. Greater demons give mortal supplicants the service of hellhounds as a reward, though it also helps the demon to watch over them.</p><p><strong>No Mere Beast.</strong> Despite their shape and other bestial instincts, hellhounds are still fiends, and they retain most of their intellect and cruel cunning. Opponents who expect them to act like hounds seldom discover their error before they are consumed. They prefer to fight in great numbers, and when they begin a hunt, very little dissuades them.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -200,7 +200,409 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Pack Tactics",
+      "type": "feature",
+      "_id": "lbnxXjJzInLDI2jK",
+      "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on attack rolls against a creature if at least one of its allies is within 5 feet of the target and the ally isn’t incapacitated.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ivOwfLQnIrKPW3bv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1709774072494,
+        "modifiedTime": 1711908834144,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!V8ccZwy2rPAl67gB.lbnxXjJzInLDI2jK"
+    },
+    {
+      "name": "Prey Sense",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hound can pinpoint, by scent, the location of Medium and smaller creatures within 30 feet of it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "6CpaJfK9l8q0JX5m",
+      "img": "icons/creatures/mammals/spirit-deer-herd-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711908836731,
+        "modifiedTime": 1711908876849,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!V8ccZwy2rPAl67gB.6CpaJfK9l8q0JX5m"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "qRYPIvpLOyyNr0QV",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The hell hound makes two Bite attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711908891374,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!V8ccZwy2rPAl67gB.qRYPIvpLOyyNr0QV"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "ncSyQRPTsxWRb10h",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "piercing"
+                  },
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711908917500,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!V8ccZwy2rPAl67gB.ncSyQRPTsxWRb10h"
+    },
+    {
+      "name": "Fire Breath (Recharge 5–6)",
+      "type": "feature",
+      "_id": "GB4XG4izYBcjCxHM",
+      "img": "icons/magic/fire/blast-jet-stream-embers-yellow.webp",
+      "system": {
+        "activities": {
+          "BuyeZ8VFzGNVrqs3": {
+            "type": "savingThrow",
+            "_id": "BuyeZ8VFzGNVrqs3",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 6,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] exhales fire in a 15-foot cone. Each creature in that area must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.fjq5Rf5e1ALoN5xc"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711667664884,
+        "modifiedTime": 1711908934514,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!V8ccZwy2rPAl67gB.GB4XG4izYBcjCxHM"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -209,10 +611,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709672148299,
-    "modifiedTime": 1711585799277,
+    "modifiedTime": 1711908934514,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!V8ccZwy2rPAl67gB"
