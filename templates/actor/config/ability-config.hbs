@@ -1,23 +1,23 @@
 <form autocomplete="off">
 	<h2>
 		<select name="abilityId">
-			{{selectOptions abilities selected=abilityId blank=(localize "BF.Global")}}
+			{{ selectOptions abilities selected=abilityId blank=(localize "BF.Global") }}
 		</select>
 	</h2>
 
 	{{#if ability}}
 	  <fieldset>
-			<legend>{{localize "BF.Proficiency.Label[one]"}}</legend>
+			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			{{#if canSetValue}}
 				<label>
-					<span>{{localize "BF.Ability.Base.Label"}}</span>
-					<input type="number" name="system.abilities.{{abilityId}}.base" value="{{ability.base}}">
+					<span>{{ localize "BF.Ability.Base.Label" }}</span>
+					<input type="number" name="system.abilities.{{ abilityId }}.base" value="{{ ability.base }}">
 				</label>
 			{{/if}}
 			<label>
-				<span>{{localize "BF.SavingThrow.LabelLong[other]"}}</span>
-				<select name="system.abilities.{{abilityId}}.save.proficiency.multiplier">
-					{{selectOptions proficiencyLevels selected=ability.save.proficiency.multiplier}}
+				<span>{{ localize "BF.SavingThrow.LabelLong[other]" }}</span>
+				<select name="system.abilities.{{ abilityId }}.save.proficiency.multiplier">
+					{{ selectOptions proficiencyLevels selected=ability.save.proficiency.multiplier }}
 				</select>
 			</label>
 		</fieldset>
@@ -27,6 +27,6 @@
 	{{/if}}
 	
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this}}
+		{{> "blackFlag.modifier-list" section=this }}
 	{{/each}}
 </form>

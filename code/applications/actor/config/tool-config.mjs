@@ -44,6 +44,7 @@ export default class ToolConfig extends BaseConfig {
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	get type() {
 		return game.i18n.localize(CONFIG.BlackFlag.abilities[this.abilityId]?.label ?? "BF.Tool.Label[one]");
 	}
@@ -52,13 +53,16 @@ export default class ToolConfig extends BaseConfig {
 	/*  Context Preparation                      */
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		const tools = context.source.proficiencies.tools ?? this.document.system.proficiencies.tools ?? {};
 		context.toolId = this.toolId;
 		context.tool = this.toolId ? tools[this.toolId] : null;
-		context.toolOptions = Object.fromEntries(Array.from(Trait.choices("tools").set)
-			.map(key => [key, Trait.keyLabel(key, { trait: "tools" })]));
+		context.toolOptions = Array.from(Trait.choices("tools").set).reduce((obj, k) => {
+			obj[k] = { label: Trait.keyLabel(k, { trait: "tools" }), selected: k in tools };
+			return obj;
+		}, {});
 		context.tools = Object.keys(tools).reduce((obj, key) => {
 			obj[key] = context.toolOptions[key];
 			return obj;
@@ -75,6 +79,7 @@ export default class ToolConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareModifiers() {
 		let checkModifiers;
 		let global;
@@ -106,19 +111,20 @@ export default class ToolConfig extends BaseConfig {
 	/*  Action Handlers                          */
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		const select = html.querySelector("sl-select");
+		const select = html.querySelector('[name="listed-tools"]');
 		if ( select ) {
-			select.addEventListener("sl-change", this._onChangeTools.bind(this));
-			select.addEventListener("sl-hide", this._onChangeTools.bind(this));
+			select.addEventListener("change", this._onChangeTools.bind(this));
 		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_onChangeInput(event) {
 		super._onChangeInput(event);
 		if ( event.target.name === "toolId" ) {
@@ -147,6 +153,7 @@ export default class ToolConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `tool-${category}` }] };
 		if ( this.toolId ) data.filter.push({ k: "tool", v: this.toolId });

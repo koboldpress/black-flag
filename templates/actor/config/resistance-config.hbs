@@ -1,6 +1,6 @@
 <form autocomplete="off">
 	<fieldset class="damages">
-		<legend>{{localize "BF.Damage.Type.Label"}}</legend>
+		<legend>{{ localize "BF.Damage.Type.Label" }}</legend>
 		<table>
 			<colgroup>
 				<col class="headers">
@@ -10,19 +10,19 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">{{localize "BF.Damage.Label"}}</th>
-					<th scope="col">{{localize "BF.Resistance.Abbreviation"}}</th>
-					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
-					<th scope="col">{{localize "BF.Vulnerability.Abbreviation"}}</th>
+					<th scope="col">{{ localize "BF.Damage.Label" }}</th>
+					<th scope="col">{{ localize "BF.Resistance.Abbreviation" }}</th>
+					<th scope="col">{{ localize "BF.Immunity.Abbreviation" }}</th>
+					<th scope="col">{{ localize "BF.Vulnerability.Abbreviation" }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{{#each damageTypes}}
 					<tr>
-						<th scope="row">{{label}}</th>
-						<td><input type="checkbox" name="dr.value.{{@key}}" {{checked resistant}}></td>
-						<td><input type="checkbox" name="di.value.{{@key}}" {{checked immune}}></td>
-						<td><input type="checkbox" name="dv.value.{{@key}}" {{checked vulnerable}}></td>
+						<th scope="row">{{ label }}</th>
+						<td><input type="checkbox" name="dr.value.{{ @key }}" {{ checked resistant }}></td>
+						<td><input type="checkbox" name="di.value.{{ @key }}" {{ checked immune }}></td>
+						<td><input type="checkbox" name="dv.value.{{ @key }}" {{ checked vulnerable }}></td>
 					</tr>
 				{{/each}}
 			</tbody>
@@ -36,7 +36,7 @@
 		</table>
 	</fieldset>-->
 	<fieldset class="conditions">
-		<legend>{{localize "BF.Condition.Label[other]"}}</legend>
+		<legend>{{ localize "BF.Condition.Label[other]" }}</legend>
 		<table>
 			<colgroup>
 				<col class="headers">
@@ -46,19 +46,19 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">{{localize "BF.Condition.Label[one]"}}</th>
-					<th scope="col">{{localize "BF.Resistance.Abbreviation"}}</th>
-					<th scope="col">{{localize "BF.Immunity.Abbreviation"}}</th>
-					<th scope="col">{{localize "BF.Vulnerability.Abbreviation"}}</th>
+					<th scope="col">{{ localize "BF.Condition.Label[one]" }}</th>
+					<th scope="col">{{ localize "BF.Resistance.Abbreviation" }}</th>
+					<th scope="col">{{ localize "BF.Immunity.Abbreviation" }}</th>
+					<th scope="col">{{ localize "BF.Vulnerability.Abbreviation" }}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{{#each conditions}}
 					<tr>
-						<th scope="row">{{label}}</th>
-						<td><input type="checkbox" name="cr.value.{{@key}}" {{checked resistant}}></td>
-						<td><input type="checkbox" name="ci.value.{{@key}}" {{checked immune}}></td>
-						<td><input type="checkbox" name="cv.value.{{@key}}" {{checked vulnerable}}></td>
+						<th scope="row">{{ label }}</th>
+						<td><input type="checkbox" name="cr.value.{{ @key }}" {{ checked resistant }}></td>
+						<td><input type="checkbox" name="ci.value.{{ @key }}" {{ checked immune }}></td>
+						<td><input type="checkbox" name="cv.value.{{ @key }}" {{ checked vulnerable }}></td>
 					</tr>
 				{{/each}}
 			</tbody>

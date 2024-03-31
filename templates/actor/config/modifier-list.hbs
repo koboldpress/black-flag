@@ -1,40 +1,41 @@
-<fieldset class="modifier-list" data-modifier-category="{{section.category}}" data-modifier-type="{{section.type}}">
+<fieldset class="modifier-list" data-modifier-category="{{ section.category }}" data-modifier-type="{{ section.type }}">
 {{#with (lookup (lookup @root.CONFIG.modifierTypes section.type) "localization") as |localization|}}
 	<legend>
 	{{#with (localize "BF.Modifier.Specific" type=(localize ../section.label)
-		modifier=(localize (concat localization "[other]"))) as |label|}}
+	        modifier=(localize (concat localization "[other]"))) as |label|}}
 		{{#if ../../section.global}}
-			{{localize "BF.Modifier.Global" type=label}}
+			{{ localize "BF.Modifier.Global" type=label }}
 		{{else}}
-			{{label}}
+			{{ label }}
 		{{/if}}
 	{{/with}}
 	</legend>
 	{{#if ../section.modifiers.length}}
 		<ul class="modifiers">
 			{{#each ../section.modifiers}}
-				<li class="modifier" data-index="{{this.index}}">
+				<li class="modifier" data-index="{{ index }}">
 					{{#if (eq this.type "note")}}
-						<select class="roll-mode" name="modifier.{{this.index}}.note.rollMode">
-							{{selectOptions @root.CONFIG.challengeRollModes selected=this.note.rollMode nameAttr="value"
-								labelAttr="label" localize=true}}
+						<select class="roll-mode" name="modifier.{{ index }}.note.rollMode">
+							{{selectOptions @root.CONFIG.challengeRollModes selected=note.rollMode nameAttr="value"
+							                labelAttr="label" localize=true}}
 						</select>
-						<input type="text" name="modifier.{{this.index}}.note.text" value="{{this.note.text}}"
-							placeholder="{{localize 'BF.Note.Label[one]'}}" {{disabled (ne this.source "manual")}}>
+						<input type="text" name="modifier.{{ index }}.note.text" value="{{ note.text }}"
+							placeholder="{{ localize 'BF.Note.Label[one]' }}" {{ disabled (ne source "manual") }}>
 					{{else}}
 						{{#if ../../section.showProficiency}}
 							<label class="proficiency">
-								<span>{{localize "BF.Modifier.Proficiency.Label"}}</span>
-								<input type="checkbox" name="modifier.{{this.index}}.requireProficiency" {{checked this.requireProficiency}}>
+								<span>{{ localize "BF.Modifier.Proficiency.Label" }}</span>
+								<input type="checkbox" name="modifier.{{ index }}.requireProficiency" {{ checked requireProficiency }}>
 							</label>
 						{{/if}}
-						<input type="text" name="modifier.{{this.index}}.formula" value="{{this.formula}}"
-							placeholder="{{localize 'BF.Roll.Formula.Label'}}" {{disabled (ne this.source "manual")}}>
+						<input type="text" name="modifier.{{ index }}.formula" value="{{ formula }}"
+						       placeholder="{{ localize 'BF.Roll.Formula.Label' }}" {{ disabled (ne source "manual") }}>
 					{{/if}}
 					<div class="modifier-controls">
-						{{#if (eq this.source "manual")}}
-							<a data-action="modifier" data-sub-action="delete">
-								<i class="fa-solid fa-trash"></i>
+						{{#if (eq source "manual")}}
+							<button type="button" class="link-button" data-action="modifier" data-sub-action="delete"
+							        data-tooltip="BF.Modifier.Action.Delete" aria-label="{{ localize 'BF.Modifier.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
 							</a>
 						{{/if}}
 						{{!-- TODO: Display source --}}
@@ -43,9 +44,9 @@
 			{{/each}}
 		</ul>
 	{{/if}}
-	<a data-action="modifier" data-sub-action="add">
-		<i class="fa-solid fa-plus"></i>
-		{{localize "BF.Action.Add.Specific" type=(localize (concat localization "[one]"))}}
-	</a>
+	<button type="button" class="link-button" data-action="modifier" data-sub-action="add">
+		<i class="fa-solid fa-plus" inert></i>
+		{{ localize "BF.Action.Add.Specific" type=(localize (concat localization "[one]")) }}
+	</button>
 {{/with}}
 </fieldset>

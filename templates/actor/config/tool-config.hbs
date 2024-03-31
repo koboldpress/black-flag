@@ -1,33 +1,33 @@
 <form autocomplete="off">
 	<h2>
 		<select name="toolId">
-			{{selectOptions tools selected=toolId blank=(localize "BF.Global")}}
+			{{ selectOptions tools selected=toolId labelAttr="label" blank=(localize "BF.Global") }}
 		</select>
 	</h2>
 
 	{{#if tool}}
 	  <fieldset>
-			<legend>{{localize "BF.Proficiency.Label[one]"}}</legend>
+			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			<label>
-				<span>{{localize "BF.Check.Label[other]"}}</span>
+				<span>{{ localize "BF.Check.Label[other]" }}</span>
 				<select name="system.proficiencies.tools.{{toolId}}.proficiency.multiplier">
-					{{selectOptions proficiencyLevels selected=tool.proficiency.multiplier}}
+					{{ selectOptions proficiencyLevels selected=tool.proficiency.multiplier }}
 				</select>
 			</label>
 		</fieldset>
 	{{else}}
 		<fieldset>
-			<legend>available tools</legend>
-			<sl-select name="tools" value="{{toolValues}}" multiple max-options-visible="0">
+			<legend>{{ localize "BF.Tool.Listed" }}</legend>
+			<multi-select name="listed-tools">
 				{{#each toolOptions}}
-					<sl-option value="{{@key}}">{{this}}</sl-option>
+					<option value="{{ @key }}" {{~ifThen selected " selected" ""}}>{{ label }}</option>
 				{{/each}}
-			</sl-select>
+			</multi-select>
 		</fieldseT>
 	  <!-- TODO: Global base tool proficiency -->
 	{{/if}}
 
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this}}
+		{{> "blackFlag.modifier-list" section=this }}
 	{{/each}}
 </form>

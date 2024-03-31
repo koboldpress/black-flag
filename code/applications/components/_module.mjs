@@ -1,9 +1,3 @@
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/icon/icon.js";
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/icon-button/icon-button.js";
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/option/option.js";
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/popup/popup.js";
-import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/select/select.js";
-
 export {default as ActionsElement} from "./actions.mjs";
 export {default as ActivitiesElement} from "./activities.mjs";
 export {default as AdvancementElement} from "./advancement.mjs";

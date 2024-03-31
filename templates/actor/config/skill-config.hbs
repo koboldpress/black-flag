@@ -1,17 +1,17 @@
 <form autocomplete="off">
 	<h2>
 		<select name="skillId">
-			{{selectOptions CONFIG.skills selected=skillId labelAttr="label" localize=true blank=(localize "BF.Global")}}
+			{{ selectOptions CONFIG.skills selected=skillId labelAttr="label" localize=true blank=(localize "BF.Global") }}
 		</select>
 	</h2>
 
 	{{#if skill}}
 	  <fieldset>
-			<legend>{{localize "BF.Proficiency.Label[one]"}}</legend>
+			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			<label>
-				<span>{{localize "BF.Check.Label[other]"}}</span>
-				<select name="system.proficiencies.skills.{{skillId}}.proficiency.multiplier">
-					{{selectOptions proficiencyLevels selected=skill.proficiency.multiplier}}
+				<span>{{ localize "BF.Check.Label[other]" }}</span>
+				<select name="system.proficiencies.skills.{{ skillId }}.proficiency.multiplier">
+					{{ selectOptions proficiencyLevels selected=skill.proficiency.multiplier }}
 				</select>
 			</label>
 		</fieldset>
@@ -20,6 +20,6 @@
 	{{/if}}
 
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this}}
+		{{> "blackFlag.modifier-list" section=this }}
 	{{/each}}
 </form>

@@ -1,24 +1,24 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{localize "BF.Initiative.Label"}}</legend>
+		<legend>{{ localize "BF.Initiative.Label" }}</legend>
 		<label>
-			<span>{{localize "BF.Initiative.Ability.Label"}}</span>
+			<span>{{ ocalize "BF.Initiative.Ability.Label" }}</span>
 			<select name="system.attributes.initiative.ability">
-				{{selectOptions CONFIG.abilities.localized selected=source.attributes.initiative.ability
-					blank=(localize "BF.Default.Specific"
-					default=(lookup CONFIG.abilities.localized CONFIG.defaultAbilities.initiative))}}
+				{{ selectOptions CONFIG.abilities.localized selected=source.attributes.initiative.ability
+				                 blank=(localize "BF.Default.Specific"
+				                 default=(lookup CONFIG.abilities.localized CONFIG.defaultAbilities.initiative)) }}
 			</select>
 		</label>
 		<label>
-			<span>{{localize "BF.Proficiency.Label[one]"}}</span>
+			<span>{{ localize "BF.Proficiency.Label[one]" }}</span>
 			<select name="system.attributes.initiative.proficiency.multiplier">
-				{{selectOptions proficiencyLevels selected=source.attributes.initiative.proficiency.multiplier
-					localize=true}}
+				{{ selectOptions proficiencyLevels selected=source.attributes.initiative.proficiency.multiplier
+				                 localize=true }}
 			</select>
 		</label>
 	</fieldset>
 	
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this}}
+		{{> "blackFlag.modifier-list" section=this }}
 	{{/each}}
 </form>
