@@ -211,4 +211,18 @@ export default class NPCSheet extends BaseActorSheet {
 
 		return data;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onAction(event, dataset) {
+		const { action } = dataset ?? event.currentTarget.dataset;
+		switch ( action ) {
+			case "add-feature":
+				const features = this.element[0].querySelector('blackflag-inventory[tab="features"]');
+				const section = features?.querySelector('[data-section="features"]');
+				return features?._onAddItem(section);
+		}
+		return super._onAction(event, dataset);
+	}
 }

@@ -116,7 +116,7 @@ export default class ActionsElement extends AppAssociatedElement {
 		});
 		if ( target.dispatchEvent(event) === false ) return;
 
-		const dataset = target.closest("[data-activity], [data-activity-id], [data-item-id]")?.dataset ?? {};
+		const dataset = (target.closest("[data-activity], [data-activity-id], [data-item-id]") || target).dataset;
 		let activity;
 		const item = this.actor.items.get(dataset.itemId);
 		if ( dataset.activity ) activity = await fromUuid(dataset.activity);

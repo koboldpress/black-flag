@@ -184,6 +184,12 @@
 	</div>
 
 	<blackFlag-actions>
+		{{#if editable}}
+			<button type="button" class="light-button" data-action="add-feature">
+				<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Feature.Action.Add" }}
+			</button>
+		{{/if}}
+
 		<div class="features passive">
 			{{#each passive}}
 				<div class="feature" data-item-id="{{ item.id }}" {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>

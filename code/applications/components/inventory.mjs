@@ -204,9 +204,9 @@ export default class InventoryElement extends AppAssociatedElement {
 		});
 		if ( target.dispatchEvent(event) === false ) return;
 
-		const itemId = target.closest("[data-item-id]")?.dataset.itemId;
-		const item = await this.getItem(itemId);
-		if ( (action !== "add") && !item ) return;
+		const dataset = (target.closest("[data-item-id]") || target)?.dataset ?? {};
+		const item = await this.getItem(dataset.itemId);
+		if ( (action !== "add") && !item ) return this.app._onAction?.(event, dataset);
 
 		switch ( action ) {
 			case "add":
@@ -229,6 +229,8 @@ export default class InventoryElement extends AppAssociatedElement {
 			case "prepare":
 				return item.setFlag("black-flag", "relationship.prepared", !item.system.prepared);
 		}
+
+		return this.app._onAction?.(event, dataset);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
