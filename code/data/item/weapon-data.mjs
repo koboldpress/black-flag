@@ -1,4 +1,4 @@
-import { stepDenomination } from "../../utils/_module.mjs";
+import { getPluralRules, numberFormat, stepDenomination } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
@@ -93,6 +93,40 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Label for the range with units.
+	 * @type {string}
+	 */
+	get rangeLabel() {
+		if ( this.type.value !== "ranged" && !this.properties.has("thrown") ) return "";
+
+		const values = [];
+		if ( this.range.short ) values.push(this.range.short);
+		if ( this.range.long && (this.range.long !== this.range.short) ) values.push(this.range.long);
+		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
+		if ( !values.length || !unit ) return "";
+
+		const lengths = values.map(v => numberFormat(v)).join("/");
+		return `${lengths} ${game.i18n.localize(unit.abbreviation)}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Label for the reach with units.
+	 * @type {string}
+	 */
+	get reachLabel() {
+		if ( this.type.value !== "melee" ) return "";
+
+		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
+		// TODO: Define starting reach for imperial/metric
+		const reach = this.properties.has("reach") ? (this.range.reach || 5) : 0;
+		return numberFormat(5 + reach, { unit: unit?.formattingUnit });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	get traits() {
 		const traits = [
@@ -138,6 +172,19 @@ export default class WeaponData extends ItemDataModel.mixin(
 			value: "weapon",
 			writable: false
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	getRollData(...args) {
+		const rollData = super.getRollData(...args);
+		rollData.labels ??= {};
+		rollData.labels.range = this.rangeLabel;
+		rollData.labels.reach = this.reachLabel;
+		return rollData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
