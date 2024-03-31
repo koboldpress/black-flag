@@ -113,7 +113,7 @@ function createRequestLink(label, dataset) {
 	if ( game.user.isGM ) {
 		const gmLink = document.createElement("a");
 		gmLink.classList.add("extra-link");
-		gmLink.dataset.action = "request";
+		gmLink.dataset.request = true;
 		gmLink.dataset.tooltip = "BF.Enricher.Request.Action";
 		gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
 		gmLink.innerHTML = '<i class="fa-solid fa-comment-dots" inert></i>';
@@ -172,7 +172,7 @@ function handleRollAction(event) {
 	if ( !target ) return;
 	event.stopPropagation();
 
-	if ( event.target.closest('[data-action="request"]') ) return requestCheckSave(event);
+	if ( event.target.closest('[data-request="true"]') ) return requestCheckSave(event);
 
 	switch ( target.dataset.rollAction ) {
 		case "ability-check":
