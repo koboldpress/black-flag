@@ -58,6 +58,19 @@ export default class HealingActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Roll damage.
+	 * @param {DamageRollProcessConfiguration} [config] - Configuration information for the roll.
+	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @returns {Promise<DamageRoll[]|void>}
+	 */
+	async rollDamage(config={}, dialog={}, message={}) {
+		return this.rollHealing(config, dialog, message);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Roll healing.
 	 * @param {DamageRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
@@ -122,11 +135,14 @@ export default class HealingActivity extends Activity {
 
 	/**
 	 * Create parts needed for the healing roll.
-	 * @param {DamageRollProcessConfiguration} config - Custom config provided when calling rollHealing.
-	 * @param {object} rollData - Item's starting roll data.
+	 * @param {DamageRollProcessConfiguration} [config] - Custom config provided when calling rollHealing.
+	 * @param {object} [rollData] - Item's starting roll data.
 	 * @returns {DamageRollProcessConfiguration}
 	 */
 	createHealingConfig(config, rollData) {
+		config ??= {};
+		rollData = this.item.getRollData();
+
 		const ability = this.actor?.system.abilities[this.system.ability];
 		// TODO: Automatically select spellcasting ability if on a spell
 		const healing = this.system.healing;
@@ -141,7 +157,7 @@ export default class HealingActivity extends Activity {
 			data,
 			parts: healing.custom ? [healing.custom] : [healing.formula, ...(parts ?? [])],
 			options: {
-				healingType: healing.type,
+				damageType: healing.type,
 				modifierData,
 				minimum: this.actor?.system.buildMinimum(
 					this.actor?.system.getModifiers(this.modifierData, "min", { rollData })
@@ -160,6 +176,6 @@ export default class HealingActivity extends Activity {
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
 	getDamageDetails(options={}) {
-		return { rolls: this.createDamageConfigs().rolls, activity: this };
+		return { rolls: this.createHealingConfig().rolls, activity: this };
 	}
 }

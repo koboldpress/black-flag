@@ -34,7 +34,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	getData(options={}) {
 		return foundry.utils.mergeObject({
 			damageTypes: this.options.damageTypes ? Object.fromEntries(Object.entries(CONFIG.BlackFlag.damageTypes)
-				.filteR(([k, v]) => this.options.damageTypes.has(k))
+				.filter(([k, v]) => this.options.damageTypes.has(k))
 			) : null,
 			selectedDamageType: this.rolls[0].options.damageType
 		}, super.getData(options));

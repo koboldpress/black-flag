@@ -671,7 +671,7 @@ async function enrichDamage(configs, label, options) {
 				config.types.push(r.options.damageType);
 			}
 		}
-		config.activity = damageDetails.activity?.uuid;
+		config.activity = damageDetails?.activity?.uuid;
 	}
 
 	if ( !config.formulas.length ) return null;
