@@ -1,5 +1,5 @@
 #context-menu {
-	[data-group-id]:has(ol li) {
+	[data-group-id]:has(ol li):not(:first-child) {
 		position: relative;
 		margin-block-start: 0.5rem;
 		&::before {
@@ -10,7 +10,7 @@
 			border-block-start: 1px solid white;
 		}
 	}
-	[data-group-id="destructive"] i {
+	[data-group-id="destructive"] i, i.destructive {
 		color: var(--bf-context-option-color-destructive);
 	}
 }

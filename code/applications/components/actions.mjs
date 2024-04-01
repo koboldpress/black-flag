@@ -67,35 +67,38 @@ export default class ActionsElement extends AppAssociatedElement {
 		return [
 			{
 				name: "BF.Activity.Core.Action.Activate",
-				icon: "<i class='fa-solid fa-power-off fa-fw' inert></i>",
+				icon: '<i class="fa-solid fa-power-off fa-fw" inert></i>',
 				condition: li => activity && item.isOwner,
-				callback: li => this._onAction(li[0], "activate")
+				callback: li => this._onAction(li[0], "activate"),
+				group: "activity"
 			},
 			{
 				name: "BF.Activity.Core.Action.Edit",
-				icon: "<i class='fa-solid fa-edit fa-fw' inert></i>",
+				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
 				condition: li => activity && item.isOwner,
-				callback: li => this._onAction(li[0], "edit")
-			},
-			{
-				name: "BF.Item.Action.Edit",
-				icon: "<i class='fa-solid fa-edit fa-fw' inert></i>",
-				condition: li => item.isOwner,
-				callback: li => this._onAction(li[0], "editItem")
+				callback: li => this._onAction(li[0], "edit"),
+				group: "activity"
 			},
 			{
 				name: "BF.Activity.Core.Action.Delete",
-				icon: "<i class='fa-solid fa-trash fa-fw' inert></i>",
+				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
 				condition: li => activity && item.isOwner,
 				callback: li => this._onAction(li[0], "delete"),
-				group: "destructive"
+				group: "activity"
+			},
+			{
+				name: "BF.Item.Action.Edit",
+				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
+				condition: li => item.isOwner,
+				callback: li => this._onAction(li[0], "editItem"),
+				group: "item"
 			},
 			{
 				name: "BF.Item.Action.Delete",
-				icon: "<i class='fa-solid fa-trash fa-fw' inert></i>",
+				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
 				condition: li => item.isOwner,
 				callback: li => this._onAction(li[0], "deleteItem"),
-				group: "destructive"
+				group: "item"
 			}
 		];
 	}

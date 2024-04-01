@@ -157,10 +157,9 @@ export default class InventoryElement extends AppAssociatedElement {
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
-				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
+				icon: "<i class='fa-solid fa-trash fa-fw destructive'></i>",
 				condition: li => item.isOwner,
-				callback: li => this._onAction(li[0], "delete"),
-				group: "destructive"
+				callback: li => this._onAction(li[0], "delete")
 			},
 			{
 				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
