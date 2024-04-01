@@ -1,39 +1,34 @@
 {
-  "name": "Claws",
+  "name": "Fungal Toxicity",
   "type": "feature",
-  "_id": "2hYUlglK9czNmHNx",
-  "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+  "_id": "NRN4uNF5u1HhHRJb",
+  "img": "icons/magic/nature/mushroom-glow-red.webp",
   "system": {
     "activities": {
-      "7KCgObvuVi38DMgx": {
-        "type": "attack",
-        "_id": "7KCgObvuVi38DMgx",
+      "QamjerE7YjsOEvAs": {
+        "type": "savingThrow",
+        "_id": "QamjerE7YjsOEvAs",
         "description": "",
         "system": {
-          "type": {
-            "value": "melee",
-            "classification": "weapon"
-          },
+          "ability": "constitution",
           "damage": {
-            "includeBaseDamage": true,
             "parts": [
               {
-                "number": 1,
+                "number": 2,
                 "denomination": "4",
-                "bonus": "@mod",
+                "bonus": "",
                 "custom": "",
-                "type": "slashing"
+                "type": "poison"
               }
             ]
           },
-          "ability": "none",
-          "attack": {
-            "bonus": "",
-            "flat": true
+          "dc": {
+            "ability": "custom",
+            "formula": "13"
           }
         },
         "activation": {
-          "type": "action",
+          "type": "free",
           "condition": ""
         },
         "consumption": {
@@ -49,7 +44,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -61,7 +56,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+      "value": "<p>A creature that hits the [[lookup @name lowercase]] with a melee attack while within 5 feet of it must succeed on a [[/save]] save or become poisoned for 1 hour. If the poison isn’t neutralized before 1 hour has passed, the creature must succeed on a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -88,9 +83,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
-    "createdTime": 1711503209924,
-    "modifiedTime": 1711914994323,
+    "createdTime": 1711915094669,
+    "modifiedTime": 1711915300800,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!2hYUlglK9czNmHNx"
+  "_key": "!items!NRN4uNF5u1HhHRJb"
 }

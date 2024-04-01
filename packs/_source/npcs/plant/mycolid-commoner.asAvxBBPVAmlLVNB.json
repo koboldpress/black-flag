@@ -129,7 +129,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>This small living fungus has the white fibrous stalk and soft, spongy head of a mushroom. Beneath its wide, bell-shaped cap, humanoid arms clutch ramshackle gardening instruments and crude weapons, while flat leg-stalks move the plant-creature toward any potential threats.</em></p><p>Mycolids sprout in areas infused with unnatural magical energy, such as the fetid bog of a black dragon, the cavernous ruins of the underworld, or the shady glade blessed by an archfey or druid. Regardless of region or climate, commoner myconids spend most of their lives cultivating a huge variety of mushrooms into a single unbroken chain of interconnected growth.</p><p><strong>Community First.</strong> They thrive in harsh environments without thought for shelter, culture, art, or history, and instead pour every moment of their relatively short lives into expanding the colony. Few creatures attack the peaceful fungal folk, but those that do find their woody bodies, soft, springy heads, and immunity to pain difficult to overcome. When a colony is threatened, every commoner mycolid fights to the death to protect the collective.</p><p><strong>Highly Toxic.</strong> Though commoner mycolids are safe to handle, creatures foolish enough to eat one may succumb to their potent toxins. In extreme situations, mycolids may let themselves be eaten to kill massive or dangerous creatures and add fertilizer to the colony. Mycolids spores are a powerful defense mechanism as well, and older mycolids have more powerful spores. Even newborn commoner mycolid spores can addle the mind of most beasts.</p><p><strong>Shared Memory.</strong> Each mycolid is a clone of a single progenitor called a spore lord. A family of like mycolids, the spawn of an individual spore lord, is called a “ring,” and each ring shares a collective pool of memories and consciousness connected to a mycelial network. As such, mycolids remember their own births as though they tended to their younger selves personally and can recall every birth and death since the ring began. Though all members of a ring look identical, no two rings are exactly alike. Separate rings cannot share thoughts or memories, but all mycolids can communicate telepathically over short distances.</p><p><strong>Spore Lord.</strong> When a safe area of rich, damp fertilizer can be secured, a commoner mycolid may undergo a rapid change into a more powerful form capable of using its spores to create a near-endless supply of identical offspring. This form, called a spore lord, does not rule over other mycolids. But while commoners tend to the health of mushrooms and mycolid sprouts, spore lords protect the colony from threats and supply it with a stream of clones. A single spore lord might create dozens or hundreds of clones of itself in its lifetime, and a dozen spore lords from different colonies may amass in a single fertile location without conflict.</p><p><strong>Magic Channelers.</strong> Upon transformation, a spore lord is made larger, stronger, and smarter by the primal magic that spawned it. Spore lords instinctively know how to manipulate the environment through cultivation and magic.</p><p><strong>Communal Knowledge.</strong> All members of a spore lord’s ring share its memories, but commoners lack the capacity to understand how and why the spore lord is different, though they recognize it. Only when separated from the colony can a commoner reach such an understanding, usually moments before it changes into a spore lord itself.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -199,9 +199,167 @@
   },
   "items": [
     {
+      "name": "Fungal Toxicity",
+      "type": "feature",
+      "_id": "jOz32JZxHW26nriJ",
+      "img": "icons/magic/nature/mushroom-glow-red.webp",
+      "system": {
+        "activities": {
+          "QamjerE7YjsOEvAs": {
+            "type": "savingThrow",
+            "_id": "QamjerE7YjsOEvAs",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 4,
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "free",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>A creature that hits the [[lookup @name lowercase]] with a melee attack while within 5 feet of it must succeed on a [[/save]] save or become poisoned for 1 hour. If the poison isn’t neutralized before 1 hour has passed, the creature must succeed on a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.NRN4uNF5u1HhHRJb"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711915094669,
+        "modifiedTime": 1711915311022,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.jOz32JZxHW26nriJ"
+    },
+    {
+      "name": "Mycolid Connection",
+      "type": "feature",
+      "_id": "tI45upljDNaAIYNz",
+      "img": "icons/magic/nature/mushrooms-fire-glow-blue.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mycolid can pinpoint the location of each friendly mycolid within 120 feet of it. In addition, its telepathy range increases to 120 feet when communicating with other mycolids.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.CavD0AEViuoPKtXG"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711915241887,
+        "modifiedTime": 1711915317664,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.tI45upljDNaAIYNz"
+    },
+    {
       "name": "Plant Resilience",
       "type": "feature",
-      "_id": "imvYmHwi2YsTHmmR",
+      "_id": "ekyAkX3sv6Oys8Bh",
       "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
       "system": {
         "activities": {},
@@ -215,7 +373,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -275,7 +435,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!asAvxBBPVAmlLVNB.imvYmHwi2YsTHmmR.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!asAvxBBPVAmlLVNB.ekyAkX3sv6Oys8Bh.4alHXchWfiVtXGAv"
         }
       ],
       "folder": null,
@@ -295,13 +455,327 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1709615924250,
-        "modifiedTime": 1709672316855,
+        "modifiedTime": 1711915360577,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!asAvxBBPVAmlLVNB.imvYmHwi2YsTHmmR"
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.ekyAkX3sv6Oys8Bh"
+    },
+    {
+      "name": "Gardening Pick",
+      "type": "weapon",
+      "_id": "gCpbPNCnhyP4n10m",
+      "img": "icons/weapons/axes/pickaxe-gray.webp",
+      "system": {
+        "activities": {
+          "dU6DBDbfse3qh7bY": {
+            "type": "attack",
+            "_id": "dU6DBDbfse3qh7bY",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "dexterity"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [
+          "light"
+        ],
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": ""
+        },
+        "options": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "poison"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "rarity": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711915372112,
+        "modifiedTime": 1711915511359,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.gCpbPNCnhyP4n10m"
+    },
+    {
+      "name": "Slowing Spores (Recharge 5–6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "rrVZwy5GqnXDRv9c": {
+            "type": "savingThrow",
+            "_id": "rrVZwy5GqnXDRv9c",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mycolid ejects slowing spores from its body. Each creature that isn’t a mycolid within 5 feet of the mycolid must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is slowed until the end of its next turn. On a success, a creature takes half the damage and isn’t slowed. A slowed creature’s speed is halved, and it can’t take reactions.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "0r7DZnS0nlJ9eBhx",
+      "img": "icons/magic/acid/dissolve-pool-bubbles.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711915515139,
+        "modifiedTime": 1711915565694,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.0r7DZnS0nlJ9eBhx"
+    },
+    {
+      "name": "Fetid Feast",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "WEyQjNipoubk7HgH": {
+            "type": "healing",
+            "_id": "WEyQjNipoubk7HgH",
+            "description": "",
+            "system": {
+              "healing": {
+                "type": "healing",
+                "denomination": "4",
+                "bonus": "",
+                "custom": "",
+                "number": 2
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mycolid draws sustenance from a Medium or larger pile of carrion or rotting vegetation within 5 feet of it. It regains [[/healing average]]. The mycolid can’t use Fetid Feast on a pile of carrion or vegetation if it or another mycolid has already used Fetid Feast on that pile.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "EqIe1Wj2G8RFjg0L",
+      "img": "icons/magic/nature/plant-undersea-orb-purple.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711915577854,
+        "modifiedTime": 1711915771120,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!asAvxBBPVAmlLVNB.EqIe1Wj2G8RFjg0L"
     }
   ],
   "effects": [],
@@ -315,7 +789,7 @@
     "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709615838691,
-    "modifiedTime": 1711749768778,
+    "modifiedTime": 1711915771120,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!asAvxBBPVAmlLVNB"

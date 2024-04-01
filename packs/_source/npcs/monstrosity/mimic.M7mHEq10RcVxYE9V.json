@@ -24,7 +24,7 @@
         },
         "lair": null
       },
-      "cr": 0,
+      "cr": 2,
       "hp": {
         "value": 58,
         "max": 58,
@@ -131,7 +131,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A hateful crimson eye opens on the surface of the otherwise innocuous barrel. Then another eye opens, and another still. With startling speed, the barrel becomes a pseudopod-wielding horror, its toothy maw opening wide.</em></p><p>The dungeon delver’s bane, a mimic is a stealthy predator that transforms itself into an inanimate object, perfectly copying the appearance of wood or stone. It typically poses as furniture, doors, stairs, and the like. In its natural form, it resembles an amorphous blob with flesh-like protrusions resembling objects it previously copied.</p><p><strong>Deceptive Hunters.</strong> While not terribly intelligent, mimics are uncanny predators. They lurk in well trafficked areas of dungeons, wildernesses, or urban environments, assuming shapes intended to lure prey. They then use their sticky adhesive skin to trap their next meal.</p><p><strong>Taste Focused.</strong> Mimics are supremely patient, but they are obsessed with consuming prey to relish the taste, not necessarily to sate hunger. The taste buds of a mimic’s tongue are extremely sensitive, and they gather a great deal of information with every bite.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -201,9 +201,180 @@
   },
   "items": [
     {
+      "name": "Adhesive (Object Form Only)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>he mimic adheres to anything that touches it. A Huge or smaller creature adhered to the mimic is also grappled by it (escape DC 13). Ability checks made to escape this grapple have disadvantage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "lVAp3SasqrUzvlNc",
+      "img": "icons/commodities/materials/material-webbing.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711914555629,
+        "modifiedTime": 1711914608385,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.lVAp3SasqrUzvlNc"
+    },
+    {
+      "name": "False Appearance (Object Form Only)",
+      "type": "feature",
+      "_id": "qXu1gLvvtMWTHhTS",
+      "img": "icons/commodities/treasure/statue-carved-figurehead.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While the [[lookup @name lowercase]] remains motionless, it is indistinguishable from a normal object.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.E2PyU7EAiv162L6t"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711421375455,
+        "modifiedTime": 1711914626446,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.qXu1gLvvtMWTHhTS"
+    },
+    {
+      "name": "Grappler",
+      "type": "feature",
+      "_id": "5PexmnBv36Xbbrlu",
+      "img": "icons/creatures/reptiles/serpent-horned-green.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on attack rolls against any creature grappled by it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.DvLGN5tSzfXoxF6V"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711914636175,
+        "modifiedTime": 1711914707751,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.5PexmnBv36Xbbrlu"
+    },
+    {
       "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "zpbWD0mzq84uPDVY",
+      "_id": "xYNBfkYjWp6Eqy1x",
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
@@ -217,7 +388,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -265,7 +438,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!M7mHEq10RcVxYE9V.zpbWD0mzq84uPDVY.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!M7mHEq10RcVxYE9V.xYNBfkYjWp6Eqy1x.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
@@ -285,13 +458,469 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.019",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709672299416,
+        "modifiedTime": 1711914711554,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!M7mHEq10RcVxYE9V.zpbWD0mzq84uPDVY"
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.xYNBfkYjWp6Eqy1x"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "20euzkgHx8MjPu6Y",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mimic makes two Pseudopod attacks. If it is grappling a creature, it can replace one attack with a Bite attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1711914839517,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.20euzkgHx8MjPu6Y"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "de6hS1ggXOyPGCtR",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  },
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "acid"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one grappled creature. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1711914878643,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.de6hS1ggXOyPGCtR"
+    },
+    {
+      "name": "Pseudopod",
+      "type": "feature",
+      "_id": "1evcaqM47BIQWvNM",
+      "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
+      "system": {
+        "activities": {
+          "KCmYvkow6vryfUXv": {
+            "type": "attack",
+            "_id": "KCmYvkow6vryfUXv",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "acid"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. Hit: [[/damage average]] damage. If the mimic is in object form, the target is subjected to its Adhesive trait.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.BM0wnwrOQkmV3utI"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711683722952,
+        "modifiedTime": 1711914903065,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.1evcaqM47BIQWvNM"
+    },
+    {
+      "name": "Change Shape",
+      "type": "feature",
+      "_id": "nXQEzWaAbHYHekt5",
+      "img": "icons/creatures/magical/construct-stone-earth-gray.webp",
+      "system": {
+        "activities": {
+          "O0mN7LJgbaFFLn3b": {
+            "type": "utility",
+            "_id": "O0mN7LJgbaFFLn3b",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically transforms into a Large or smaller object or back into its true, amorphous form, which is a [[lookup @traits.type.config.label]]. Its statistics are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true form if it dies.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.Yrb50WtUeyxgXygZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711503490478,
+        "modifiedTime": 1711914826039,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.nXQEzWaAbHYHekt5"
+    },
+    {
+      "name": "Prey Shield",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "yKPAeqmDv6JiRTTw": {
+            "type": "utility",
+            "_id": "yKPAeqmDv6JiRTTw",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the mimic can see hits it with an attack while it is grappling a creature, the mimic can roll the grappled creature in front of the blow, forcing the grappled creature to take the damage instead.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "IP4VpYsjlqRCAprF",
+      "img": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.019",
+        "coreVersion": "11.315",
+        "createdTime": 1711914728651,
+        "modifiedTime": 1711914769350,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!M7mHEq10RcVxYE9V.IP4VpYsjlqRCAprF"
     }
   ],
   "effects": [],
@@ -302,10 +931,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.019",
     "coreVersion": "11.315",
     "createdTime": 1709615746262,
-    "modifiedTime": 1711586267695,
+    "modifiedTime": 1711914903065,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!M7mHEq10RcVxYE9V"
