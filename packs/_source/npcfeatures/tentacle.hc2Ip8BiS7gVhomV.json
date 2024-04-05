@@ -1,31 +1,43 @@
 {
-  "name": "Acid Breath (Recharge 5–6)",
+  "name": "Tentacle",
   "type": "feature",
-  "_id": "VmRFntUfoz4espeq",
-  "img": "icons/magic/acid/dissolve-bone-white.webp",
+  "_id": "hc2Ip8BiS7gVhomV",
+  "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
   "system": {
     "activities": {
-      "mascwCPz5vFvzwRV": {
-        "type": "savingThrow",
-        "_id": "mascwCPz5vFvzwRV",
+      "iOENQ0u7z0vx84jF": {
+        "type": "attack",
+        "_id": "iOENQ0u7z0vx84jF",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "attack": {
+            "flat": true,
+            "bonus": ""
+          },
           "damage": {
+            "includeBaseDamage": true,
             "parts": [
               {
-                "number": 5,
+                "number": 1,
+                "denomination": "6",
+                "bonus": "@mod",
+                "custom": "",
+                "type": "bludgeoning"
+              },
+              {
+                "number": 2,
                 "denomination": "8",
                 "bonus": "",
                 "custom": "",
-                "type": "acid"
+                "type": "piercing"
               }
             ]
           },
-          "dc": {
-            "ability": "custom",
-            "formula": "11"
-          }
+          "ability": "none"
         },
         "activation": {
           "type": "action",
@@ -44,7 +56,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg"
       }
     },
     "uses": {
@@ -56,7 +68,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one target. Hit: [[/damage average]] damage. If the target is Medium or smaller, it is grappled (escape DC 13). The [[lookup @name lowercase]] has two tentacles, each of which can grapple one target.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -74,7 +86,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 3500000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
@@ -83,9 +95,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711666996605,
-    "modifiedTime": 1712091654936,
+    "createdTime": 1712091705582,
+    "modifiedTime": 1712091789496,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!VmRFntUfoz4espeq"
+  "_key": "!items!hc2Ip8BiS7gVhomV"
 }

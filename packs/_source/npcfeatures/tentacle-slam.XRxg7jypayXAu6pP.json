@@ -1,32 +1,31 @@
 {
-  "name": "Claw",
+  "name": "Tentacle Slam",
   "type": "feature",
-  "_id": "2hYUlglK9czNmHNx",
-  "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+  "_id": "XRxg7jypayXAu6pP",
+  "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
   "system": {
     "activities": {
-      "7KCgObvuVi38DMgx": {
-        "type": "attack",
-        "_id": "7KCgObvuVi38DMgx",
+      "xuRUVa4wYGZhLL27": {
+        "type": "savingThrow",
+        "_id": "xuRUVa4wYGZhLL27",
         "description": "",
         "system": {
-          "type": {
-            "value": "melee",
-            "classification": "weapon"
-          },
+          "ability": "strength",
           "damage": {
-            "includeBaseDamage": true,
             "parts": [
               {
-                "number": 1,
-                "denomination": "4",
+                "number": 4,
+                "denomination": "6",
                 "bonus": "",
                 "custom": "",
-                "type": "slashing"
+                "type": "bludgeoning"
               }
             ]
           },
-          "ability": "strength"
+          "dc": {
+            "ability": "custom",
+            "formula": "15"
+          }
         },
         "activation": {
           "type": "action",
@@ -45,7 +44,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -57,7 +56,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage.</p>",
+      "value": "<p>The [[lookup @name lowercase]] slams creatures grappled by it into each other or into a solid surface. Each creature must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is stunned until the end of its next turn. On a success, a creature takes half the damage and isn’t stunned.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -82,11 +81,11 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711503209924,
-    "modifiedTime": 1711668443906,
+    "createdTime": 1712091807626,
+    "modifiedTime": 1712091857773,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!2hYUlglK9czNmHNx"
+  "_key": "!items!XRxg7jypayXAu6pP"
 }

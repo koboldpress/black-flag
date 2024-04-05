@@ -1,31 +1,36 @@
 {
-  "name": "Acid Breath (Recharge 5–6)",
+  "name": "Beak",
   "type": "feature",
-  "_id": "VmRFntUfoz4espeq",
-  "img": "icons/magic/acid/dissolve-bone-white.webp",
+  "_id": "Oy9y16lIF2KikQwD",
+  "img": "icons/creatures/birds/corvid-call-sound-blue.webp",
   "system": {
     "activities": {
-      "mascwCPz5vFvzwRV": {
-        "type": "savingThrow",
-        "_id": "mascwCPz5vFvzwRV",
+      "2R0pp9F44evzbtoT": {
+        "type": "attack",
+        "_id": "2R0pp9F44evzbtoT",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "attack": {
+            "flat": true,
+            "bonus": ""
+          },
           "damage": {
+            "includeBaseDamage": true,
             "parts": [
               {
-                "number": 5,
-                "denomination": "8",
+                "number": 1,
+                "denomination": "10",
                 "bonus": "",
                 "custom": "",
-                "type": "acid"
+                "type": "piercing"
               }
             ]
           },
-          "dc": {
-            "ability": "custom",
-            "formula": "11"
-          }
+          "ability": "none"
         },
         "activation": {
           "type": "action",
@@ -44,7 +49,7 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg"
       }
     },
     "uses": {
@@ -56,7 +61,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+      "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. <em>Hit:</em> [[/damage average]] damage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -74,7 +79,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 3500000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
@@ -83,9 +88,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711666996605,
-    "modifiedTime": 1712091654936,
+    "createdTime": 1712092146231,
+    "modifiedTime": 1712092190399,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!VmRFntUfoz4espeq"
+  "_key": "!items!Oy9y16lIF2KikQwD"
 }

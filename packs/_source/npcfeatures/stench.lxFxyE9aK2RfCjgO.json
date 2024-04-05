@@ -1,34 +1,27 @@
 {
-  "name": "Acid Breath (Recharge 5–6)",
+  "name": "Stench",
   "type": "feature",
-  "_id": "VmRFntUfoz4espeq",
-  "img": "icons/magic/acid/dissolve-bone-white.webp",
   "system": {
+    "type": {
+      "category": "monsters"
+    },
     "activities": {
-      "mascwCPz5vFvzwRV": {
+      "qJQxUlnGZg1ds04x": {
         "type": "savingThrow",
-        "_id": "mascwCPz5vFvzwRV",
+        "_id": "qJQxUlnGZg1ds04x",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "constitution",
           "damage": {
-            "parts": [
-              {
-                "number": 5,
-                "denomination": "8",
-                "bonus": "",
-                "custom": "",
-                "type": "acid"
-              }
-            ]
+            "parts": []
           },
           "dc": {
             "ability": "custom",
-            "formula": "11"
+            "formula": "15"
           }
         },
         "activation": {
-          "type": "action",
+          "type": "free",
           "condition": ""
         },
         "consumption": {
@@ -56,7 +49,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+      "value": "<p>Each creature that starts its turn within 10 feet of the [[lookup @name lowercase]] must succeed on a [[/save]] save or be poisoned until the start of its next turn.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -65,27 +58,32 @@
     "restriction": {
       "filters": []
     },
-    "type": {
-      "category": "monsters"
-    },
     "level": {
       "value": null
     }
   },
+  "img": "icons/magic/acid/dissolve-vomit-green-brown.webp",
   "effects": [],
   "folder": null,
-  "sort": 3500000,
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "black-flag": {
+      "relationship": {
+        "enabled": true
+      }
+    }
+  },
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711666996605,
+    "createdTime": 1712091565466,
     "modifiedTime": 1712091654936,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!VmRFntUfoz4espeq"
+  "_id": "lxFxyE9aK2RfCjgO",
+  "sort": 2800000,
+  "_key": "!items!lxFxyE9aK2RfCjgO"
 }

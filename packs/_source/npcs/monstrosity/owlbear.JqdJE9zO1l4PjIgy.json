@@ -123,7 +123,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Bursting from the forest undergrowth, a massive creature—equal parts bear and raptor—gives a roaring screech as it charges.</em></p><p>Vicious carnivores, owlbears devour vast amounts of deer, boar, and other creatures in the forests they inhabit—and vomit up distinctive bezoars of undigested bone, hide, and feathers. An owlbear has the shape and mass of a grizzly bear, with a thick coat of fur intermixed with feathers.</p><p>The massive body is topped with a great, owl-like head, complete with large, round eyes and a curved, hooked beak that can grip and tear its prey. Though incapable of flight, the owlbear’s limbs are covered with enough feathers for gliding when it leaps from sufficiently high cliffs and hills.</p><p><strong>Territorial.</strong> Territorial and testy, owlbears are quick to challenge interlopers in their domain. An owlbear faces larger or more numerous opponents with undaunted savagery that often scares off larger and even more powerful foes.</p><p><strong>Nesting.</strong> Normally solitary, owlbears remain together only to rear their hatchlings until they are old enough to fend for themselves. Mated pairs sometimes build an enormous stick-nest in a cavern or on a rocky spire. An angry owlbear defending its eggs or young is especially dangerous.</p><p><strong>Tribal Guardians.</strong> Despite their hostility, humanoid tribes sometimes capture owlbear hatchlings or eggs, raising them as fearsome guardians or mounts. Dwarves have also been known to keep owlbears as guards.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -193,9 +193,122 @@
   },
   "items": [
     {
+      "name": "Glide",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The owlbear has long, sturdy feathers along its forelimbs and sides that expand while falling to slow its rate of descent to 60 feet per round, landing on its feet and taking no falling damage. It can move up to 5 feet horizontally for every 1 foot it falls. The owlbear can’t gain height with its gliding feathers alone. If subjected to a strong wind or lift of any kind, it can use the updraft to glide farther.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "e7kPpijEk7z9l61t",
+      "img": "icons/creatures/birds/dove-pigeon-flying-white.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712092094257,
+        "modifiedTime": 1712092117747,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.e7kPpijEk7z9l61t"
+    },
+    {
+      "name": "Heightened Sight and Smell",
+      "type": "feature",
+      "_id": "SWn3Rp4Z41cII31I",
+      "img": "icons/creatures/mammals/beast-horned-scaled-glowing-orange.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] when perceiving by sight or smell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 1800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.wsJp7eBAXNBKcYoV"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773845416,
+        "modifiedTime": 1712092325532,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.SWn3Rp4Z41cII31I"
+    },
+    {
       "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "4n9qq3WeP8UmLg0M",
+      "_id": "pB180fAiicEz8ea5",
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
@@ -209,7 +322,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -257,11 +372,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!JqdJE9zO1l4PjIgy.4n9qq3WeP8UmLg0M.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!JqdJE9zO1l4PjIgy.pB180fAiicEz8ea5.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 3600000,
       "ownership": {
         "default": 0
       },
@@ -277,13 +392,493 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709672636485,
+        "modifiedTime": 1712092131850,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!JqdJE9zO1l4PjIgy.4n9qq3WeP8UmLg0M"
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.pB180fAiicEz8ea5"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "9WAkHRQe7UIVIy01",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The owlbear makes one Beak attack and one Claw attack. If both attacks hit a Medium or smaller target, the target is grappled (escape DC 15).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712092334413,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.9WAkHRQe7UIVIy01"
+    },
+    {
+      "name": "Beak",
+      "type": "feature",
+      "_id": "tGd8TJoOjUzb5sMg",
+      "img": "icons/creatures/birds/corvid-call-sound-blue.webp",
+      "system": {
+        "activities": {
+          "2R0pp9F44evzbtoT": {
+            "type": "attack",
+            "_id": "2R0pp9F44evzbtoT",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "7"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "10",
+                    "bonus": "5",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one creature. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.Oy9y16lIF2KikQwD"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712092146231,
+        "modifiedTime": 1712092344302,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.tGd8TJoOjUzb5sMg"
+    },
+    {
+      "name": "Claws",
+      "type": "feature",
+      "_id": "6R0jzzaaX8KLZIbf",
+      "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+      "system": {
+        "activities": {
+          "7KCgObvuVi38DMgx": {
+            "type": "attack",
+            "_id": "7KCgObvuVi38DMgx",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "5",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "7",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5700000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711503209924,
+        "modifiedTime": 1712092355701,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.6R0jzzaaX8KLZIbf"
+    },
+    {
+      "name": "Vicious Bound (44 HP or Fewer)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "6UwjC5KSaMa32BM2": {
+            "type": "savingThrow",
+            "_id": "6UwjC5KSaMa32BM2",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The owlbear roars and barrels through creatures. It moves up to 20 feet in a straight line and can move through the space of any Medium or smaller creature. The first time it enters a creature’s space during this move, that creature must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is knocked prone. On a success, a creature takes half the damage and isn’t knocked prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "9avk08RC0gIcopU8",
+      "img": "icons/creatures/abilities/bear-roar-bite-brown-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 5800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712092202520,
+        "modifiedTime": 1712092268652,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.9avk08RC0gIcopU8"
+    },
+    {
+      "name": "Rend",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "7Mp0WiVXrIgCSFo1": {
+            "type": "savingThrow",
+            "_id": "7Mp0WiVXrIgCSFo1",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "slashing"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The owlbear violently wrenches a Medium or smaller creature it is currently grappling. The target must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "NHCAa8barCXYjn6T",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 5900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712092272718,
+        "modifiedTime": 1712092370831,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!JqdJE9zO1l4PjIgy.NHCAa8barCXYjn6T"
     }
   ],
   "effects": [],
@@ -294,10 +889,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672599790,
-    "modifiedTime": 1711586273804,
+    "modifiedTime": 1712092370831,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!JqdJE9zO1l4PjIgy"

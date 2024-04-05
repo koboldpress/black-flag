@@ -123,7 +123,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A gray-skinned humanoid glares with red-rimmed eyes. He brandishes his axe and growls, his tusked mouth twisting into a toothy snarl as he advances.</em></p><p>Orcs are broad and muscular, with coarse features, prominent tusks on their lower jaws, and deeply set eyes. They commonly have a dusky gray skin color, though this can vary by region or tribe, with tones ranging from pale white to sandy or even mottled white and black, with a few sporting greenish or orange tinges.</p><p><strong>Rule of Might.</strong> Aggressive, opportunistic warriors, orcs follow the rule of might. In orcish culture, you are entitled to whatever you can take, for however long you are strong enough to hold it. Tribes choose homes based on the other creatures that live nearby and what they have worth taking, even if those others are another orc tribe.</p><p><strong>Great War Banners.</strong> Occasionally, tribes band together under the banner of a leader of exceptional might, a Great Chief, to take some great prize. Such hordes rarely last beyond the initial raid, with each tribe seizing its share and returning home to celebrate victory.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -260,6 +260,438 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!fp7eFxkfnQqq5GJZ.uf1guagNHCTTWxwu"
+    },
+    {
+      "name": "Relentless (Recharges after a Short or Long Rest)",
+      "type": "feature",
+      "_id": "amcRBWbK3C5vMYKE",
+      "img": "icons/skills/wounds/injury-eyes-blood-red-pink.webp",
+      "system": {
+        "activities": {
+          "wPKrhYZdRswvgtA9": {
+            "type": "healing",
+            "_id": "wPKrhYZdRswvgtA9",
+            "description": "",
+            "system": {
+              "healing": {
+                "type": "healing",
+                "number": null,
+                "denomination": 0,
+                "bonus": "",
+                "custom": ""
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "free",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "shortRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If the [[lookup @name lowercase]] takes 10 damage or less that would reduce it to 0 HP, it is reduced to 1 HP instead.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.PZhW08bzmVOGWrvu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091254474,
+        "modifiedTime": 1712091337049,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!fp7eFxkfnQqq5GJZ.amcRBWbK3C5vMYKE"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Greataxe",
+      "type": "weapon",
+      "_id": "qqrcmFJqVilTF8r2",
+      "img": "icons/weapons/axes/axe-battle-engraved-purple.webp",
+      "system": {
+        "activities": {
+          "LFlraVLmaYafsy9F": {
+            "type": "attack",
+            "_id": "LFlraVLmaYafsy9F",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 30,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 7,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "greataxe"
+        },
+        "options": [
+          "disarm",
+          "hamstring"
+        ],
+        "properties": [
+          "heavy",
+          "twoHanded"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 12,
+          "type": "slashing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.9EAkaGqWPK0qFoDq"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024952520,
+        "modifiedTime": 1712091365756,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!fp7eFxkfnQqq5GJZ.qqrcmFJqVilTF8r2"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Javelin",
+      "type": "weapon",
+      "_id": "hI9UAWbBkNkH6ni1",
+      "img": "icons/weapons/polearms/spear-flared-worn-grey.webp",
+      "system": {
+        "activities": {
+          "OIx8lRe6xYOh75WM": {
+            "type": "attack",
+            "_id": "OIx8lRe6xYOh75WM",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 5,
+          "denomination": "sp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "javelin"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 30,
+          "long": 120,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.8wAd9MmtaW1tizSN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024052999,
+        "modifiedTime": 1712091371802,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!fp7eFxkfnQqq5GJZ.hI9UAWbBkNkH6ni1"
+    },
+    {
+      "name": "Aggressive",
+      "type": "feature",
+      "_id": "3MdRkksDah1QQM15",
+      "img": "icons/skills/movement/feet-bladed-boots-fire.webp",
+      "system": {
+        "activities": {
+          "vsc2eltPWPUBMb4q": {
+            "type": "utility",
+            "_id": "vsc2eltPWPUBMb4q",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can move up to its speed toward a hostile creature that it can see.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.JY1Mt1AUuJ0TZkcN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091386990,
+        "modifiedTime": 1712091424563,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!fp7eFxkfnQqq5GJZ.3MdRkksDah1QQM15"
     }
   ],
   "effects": [],
@@ -270,10 +702,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672372524,
-    "modifiedTime": 1711586179295,
+    "modifiedTime": 1712091424563,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!fp7eFxkfnQqq5GJZ"

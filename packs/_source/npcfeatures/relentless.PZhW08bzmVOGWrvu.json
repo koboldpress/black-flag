@@ -1,34 +1,25 @@
 {
-  "name": "Acid Breath (Recharge 5–6)",
+  "name": "Relentless",
   "type": "feature",
-  "_id": "VmRFntUfoz4espeq",
-  "img": "icons/magic/acid/dissolve-bone-white.webp",
+  "_id": "PZhW08bzmVOGWrvu",
+  "img": "icons/skills/wounds/injury-eyes-blood-red-pink.webp",
   "system": {
     "activities": {
-      "mascwCPz5vFvzwRV": {
-        "type": "savingThrow",
-        "_id": "mascwCPz5vFvzwRV",
+      "wPKrhYZdRswvgtA9": {
+        "type": "healing",
+        "_id": "wPKrhYZdRswvgtA9",
         "description": "",
         "system": {
-          "ability": "dexterity",
-          "damage": {
-            "parts": [
-              {
-                "number": 5,
-                "denomination": "8",
-                "bonus": "",
-                "custom": "",
-                "type": "acid"
-              }
-            ]
+          "healing": {
+            "type": "healing",
+            "denomination": "",
+            "bonus": "",
+            "custom": ""
           },
-          "dc": {
-            "ability": "custom",
-            "formula": "11"
-          }
+          "ability": ""
         },
         "activation": {
-          "type": "action",
+          "type": "free",
           "condition": ""
         },
         "consumption": {
@@ -44,19 +35,24 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/healing.svg"
       }
     },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] exhales acid in a 15-foot line that is 5 feet wide. Each creature in that line must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+      "value": "<p>If the [[lookup @name lowercase]] takes 10 damage or less that would reduce it to 0 HP, it is reduced to 1 HP instead.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -74,7 +70,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 3500000,
+  "sort": 6200000,
   "ownership": {
     "default": 0
   },
@@ -83,9 +79,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711666996605,
+    "createdTime": 1712091254474,
     "modifiedTime": 1712091654936,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!VmRFntUfoz4espeq"
+  "_key": "!items!PZhW08bzmVOGWrvu"
 }

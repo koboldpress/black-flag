@@ -127,7 +127,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>An enormous mound rises from the muck, grasping with its tentacles as a massive, toothy maw opens on its front.</em></p><p>This bizarre creature’s body is a shapeless mass of flesh atop three thick fins. Three tentacles sprout from the body, two longer ones ending in spiky, grasping pads, and a third, shorter limb bearing the otyugh’s eyes and nostrils. Much of the creature’s front side is taken up by a cavernous mouth filled with sharp teeth.</p><p><strong>Adaptable Appetites.</strong> Otyughs are omnivorous, eating anything organic and delighting in rot, waste, and carrion. Their constant hunger extends to living creatures as well. They hide while submerged in water or bury themselves in mud or filth, lashing out at potential prey as they pass.</p><p><strong>Damp Dwellers.</strong> Otyughs prefer wet environs, lairing in swamps, rainforests, partially flooded caves, or other wilderness areas prone to damp and decay. They can also be found in populated areas. City sewers, village middens, or boneyards contain what these sewer horrors view as abundant sources of food.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -199,7 +199,7 @@
     {
       "name": "Aberrant Resilience",
       "type": "feature",
-      "_id": "VMOrPFURqBLn70na",
+      "_id": "bISgGm2GXQNCum2Y",
       "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
       "system": {
         "activities": {},
@@ -213,7 +213,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed, frightened, paralyzed, and stunned conditions, and it has advantage on saves against spells or effects that would alter its form.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -274,7 +276,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!WJQwmBf1BFyGbIbP.VMOrPFURqBLn70na.vyiAWYKxFWNBOFa1"
+          "_key": "!actors.items.effects!WJQwmBf1BFyGbIbP.bISgGm2GXQNCum2Y.vyiAWYKxFWNBOFa1"
         }
       ],
       "folder": null,
@@ -294,13 +296,553 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709672456179,
-        "modifiedTime": 1709672808312,
+        "modifiedTime": 1712091485933,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!WJQwmBf1BFyGbIbP.VMOrPFURqBLn70na"
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.bISgGm2GXQNCum2Y"
+    },
+    {
+      "name": "Limited Telepathy",
+      "type": "feature",
+      "_id": "gV4nH8Ca9H2Deg5D",
+      "img": "icons/magic/control/energy-stream-link-white.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can magically transmit simple messages and images to any creature within 120 feet of it that can understand a language. This form of telepathy doesn’t allow the receiving creature to telepathically respond.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.BvfrlUcapqDH9EMI"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091494087,
+        "modifiedTime": 1712091556138,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.gV4nH8Ca9H2Deg5D"
+    },
+    {
+      "name": "Stench",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "qJQxUlnGZg1ds04x": {
+            "type": "savingThrow",
+            "_id": "qJQxUlnGZg1ds04x",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "type": "free",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Each creature that starts its turn within 10 feet of the [[lookup @name lowercase]] must succeed on a [[/save]] save or be poisoned until the start of its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "69vkaBjrXeDlcauA",
+      "img": "icons/magic/acid/dissolve-vomit-green-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091565466,
+        "modifiedTime": 1712091644173,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.69vkaBjrXeDlcauA"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "tMP6cDX4JHMQRxzU",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The otyugh makes one Bite attack and two Tentacle attacks. It can replace both Tentacle attacks with a use of Tentacle Slam.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 50000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712091877140,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.tMP6cDX4JHMQRxzU"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "y2shCUBGNJLLKMGQ",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "6",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage. If the target is a creature, it must succeed on a [[/save constitution 15]] save or become infected with a disease. Until the disease is cured, the target is poisoned. Every 24 hours that elapse, the infected creature must repeat the save, reducing its HP maximum by 5 ([[/healing -1d10 max]]{1d10}) no a failure. The disease is cured on a success. The creature dies if the disease reduces its HP maximum to 0. This reduction to the creature’s HP maximum lasts until it finishes a long rest after the disease is cured.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712091995039,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.y2shCUBGNJLLKMGQ"
+    },
+    {
+      "name": "Tentacle",
+      "type": "feature",
+      "_id": "VPmpPaBIAPsY5Wgk",
+      "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
+      "system": {
+        "activities": {
+          "iOENQ0u7z0vx84jF": {
+            "type": "attack",
+            "_id": "iOENQ0u7z0vx84jF",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  },
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one target. Hit: [[/damage average]] damage. If the target is Medium or smaller, it is grappled (escape DC 13). The [[lookup @name lowercase]] has two tentacles, each of which can grapple one target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.hc2Ip8BiS7gVhomV"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091705582,
+        "modifiedTime": 1712092020630,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.VPmpPaBIAPsY5Wgk"
+    },
+    {
+      "name": "Tentacle Slam",
+      "type": "feature",
+      "_id": "F4Xu62mxDABAMuPz",
+      "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
+      "system": {
+        "activities": {
+          "xuRUVa4wYGZhLL27": {
+            "type": "savingThrow",
+            "_id": "xuRUVa4wYGZhLL27",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 4,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] slams creatures grappled by it into each other or into a solid surface. Each creature must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is stunned until the end of its next turn. On a success, a creature takes half the damage and isn’t stunned.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5700000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.XRxg7jypayXAu6pP"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712091807626,
+        "modifiedTime": 1712091867673,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!WJQwmBf1BFyGbIbP.F4Xu62mxDABAMuPz"
     }
   ],
   "effects": [],
@@ -311,10 +853,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672427875,
-    "modifiedTime": 1711585532894,
+    "modifiedTime": 1712092020630,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!WJQwmBf1BFyGbIbP"
