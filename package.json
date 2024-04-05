@@ -7,18 +7,33 @@
 		"build:json": "node ./utils/cli.mjs package unpack",
 		"lint": "eslint --ext .mjs ./code",
 		"lint:fix": "eslint --ext .mjs ./code --fix",
-		"watch": "rollup --config --watch"
+		"prettier": "npx prettier . --check",
+		"prettier:fix": "npx prettier . --write",
+		"watch": "rollup --config --watch",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@foundryvtt/foundryvtt-cli": "^1.0.0-rc.4",
 		"eslint": "^8.48.0",
 		"eslint-plugin-jsdoc": "^46.5.1",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
 		"postcss": "^8.4.29",
 		"postcss-cli": "^10.1.0",
 		"postcss-import": "^15.1.0",
 		"postcss-preset-env": "^9.1.3",
+		"prettier": "3.2.5",
 		"rollup": "^3.29.0",
 		"rollup-plugin-postcss": "^4.0.2",
 		"yargs": "^17.7.2"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	},
+	"prettier": {
+		"arrowParens": "avoid",
+		"printWidth": 120,
+		"trailingComma": "none",
+		"useTabs": true
 	}
 }
