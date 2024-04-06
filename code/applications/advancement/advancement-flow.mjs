@@ -8,7 +8,7 @@
  * @param {object} [options={}] - Application rendering options.
  */
 export default class AdvancementFlow extends FormApplication {
-	constructor(actor, advancement, levels, options={}) {
+	constructor(actor, advancement, levels, options = {}) {
 		super({}, options);
 		this.#advancementId = advancement.id;
 		this.actor = actor;
@@ -74,7 +74,7 @@ export default class AdvancementFlow extends FormApplication {
 
 	get element() {
 		// Fix an issue with jQuery not being able to fetch element properly
-		if ( this._element ) return this._element;
+		if (this._element) return this._element;
 		return $(document.getElementById(this.id));
 	}
 

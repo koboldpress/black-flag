@@ -2,7 +2,6 @@
  * Configuration dialog for feature & talent prerequisites.
  */
 export default class PrerequisiteConfig extends DocumentSheet {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "prerequisite"],
@@ -38,14 +37,17 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async getData(options) {
-		const context = foundry.utils.mergeObject({
-			CONFIG: CONFIG.BlackFlag,
-			source: this.document.toObject().system,
-			system: this.document.system,
-			abilities: this.prepareAbilities(),
-			spellcasting: this.prepareSpellcasting(),
-			traits: this.prepareTraits()
-		}, await super.getData(options));
+		const context = foundry.utils.mergeObject(
+			{
+				CONFIG: CONFIG.BlackFlag,
+				source: this.document.toObject().system,
+				system: this.document.system,
+				abilities: this.prepareAbilities(),
+				spellcasting: this.prepareSpellcasting(),
+				traits: this.prepareTraits()
+			},
+			await super.getData(options)
+		);
 		return context;
 	}
 
@@ -57,7 +59,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 */
 	prepareAbilities() {
 		const abilities = {};
-		for ( const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities) ) {
+		for (const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities)) {
 			const filter = this.filters.find(f => f.k === `system.abilities.${key}.value`);
 			abilities[key] = {
 				label: ability.labels.abbreviation,
@@ -102,20 +104,26 @@ export default class PrerequisiteConfig extends DocumentSheet {
 
 		const updateFilter = (k, v, o) => {
 			const existingIdx = filters.findIndex(f => f.k === k);
-			if ( v ) {
-				if ( existingIdx !== -1 ) filters[existingIdx].v = v;
-				else filters.push({k, v, o});
-			} else if ( existingIdx !== -1 ) filters.splice(existingIdx, 1);
+			if (v) {
+				if (existingIdx !== -1) filters[existingIdx].v = v;
+				else filters.push({ k, v, o });
+			} else if (existingIdx !== -1) filters.splice(existingIdx, 1);
 		};
 
 		Object.entries(data.abilities).forEach(([k, v]) => updateFilter(`system.abilities.${k}.value`, v, "gte"));
-		updateFilter("system.spellcasting.present", data.spellcasting?.present ? [
-			{k: "system.spellcasting.spells.total", v: 1, o: "gte"},
-			{k: "system.spellcasting.slots.max", v: 1, o: "gte"}
-		] : 0, "OR");
+		updateFilter(
+			"system.spellcasting.present",
+			data.spellcasting?.present
+				? [
+						{ k: "system.spellcasting.spells.total", v: 1, o: "gte" },
+						{ k: "system.spellcasting.slots.max", v: 1, o: "gte" }
+					]
+				: 0,
+			"OR"
+		);
 		updateFilter("system.spellcasting.spells.damaging", data.spellcasting?.damage ? 1 : 0, "gte");
 		updateFilter("system.traits.size", data.traits?.size);
 
-		super._updateObject(event, {"system.restriction.filters": filters});
+		super._updateObject(event, { "system.restriction.filters": filters });
 	}
 }

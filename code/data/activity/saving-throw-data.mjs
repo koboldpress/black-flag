@@ -13,14 +13,20 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 				initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0],
 				label: "BF.Activity.SavingThrow.OpposedAbility.Label"
 			}),
-			damage: new SchemaField({
-				parts: new ArrayField(new DamageField())
-			}, {label: "BF.Damage.Label"}),
+			damage: new SchemaField(
+				{
+					parts: new ArrayField(new DamageField())
+				},
+				{ label: "BF.Damage.Label" }
+			),
 			// TODO: Add conditions that can be imposed
-			dc: new SchemaField({
-				ability: new StringField({label: "BF.DifficultyClass.Ability.Label"}),
-				formula: new FormulaField({deterministic: true, label: "BF.DifficultyClass.Formula.Label"})
-			}, {label: "BF.DifficultyClass.Label"})
+			dc: new SchemaField(
+				{
+					ability: new StringField({ label: "BF.DifficultyClass.Ability.Label" }),
+					formula: new FormulaField({ deterministic: true, label: "BF.DifficultyClass.Formula.Label" })
+				},
+				{ label: "BF.DifficultyClass.Label" }
+			)
 		};
 	}
 
@@ -31,10 +37,10 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 	prepareData() {
 		const item = this.parent.item.system ?? {};
 		const propertiesToSet = ["type.classification"];
-		for ( const keyPath of propertiesToSet ) {
+		for (const keyPath of propertiesToSet) {
 			const activityProperty = foundry.utils.getProperty(this, keyPath);
 			const itemProperty = foundry.utils.getProperty(item, keyPath);
-			if ( !activityProperty && itemProperty ) foundry.utils.setProperty(this, keyPath, itemProperty);
+			if (!activityProperty && itemProperty) foundry.utils.setProperty(this, keyPath, itemProperty);
 		}
 	}
 
@@ -43,7 +49,7 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 	prepareFinalData() {
 		const rollData = this.parent.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.parent.dcAbility];
-		if ( ability ) {
+		if (ability) {
 			rollData.mod = ability.mod;
 			Object.defineProperty(this.dc, "final", {
 				value: this.dc.ability === "custom" ? simplifyBonus(this.dc.formula, rollData) : ability?.dc,

@@ -4,7 +4,6 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for property advancement.
  */
 export default class PropertyConfig extends AdvancementConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "property"],
@@ -29,7 +28,7 @@ export default class PropertyConfig extends AdvancementConfig {
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
-		for ( const element of html.querySelectorAll(".effect-control") ) {
+		for (const element of html.querySelectorAll(".effect-control")) {
 			element.addEventListener("click", this._onEffectControl.bind(this));
 		}
 	}
@@ -44,10 +43,10 @@ export default class PropertyConfig extends AdvancementConfig {
 	_onEffectControl(event) {
 		event.preventDefault();
 		const action = event.currentTarget.dataset.action;
-		switch ( action ) {
+		switch (action) {
 			case "add":
 				const idx = this.advancement.configuration.changes.length;
-				return this.submit({updateData: { [`configuration.changes.${idx}`]: {} }});
+				return this.submit({ updateData: { [`configuration.changes.${idx}`]: {} } });
 			case "delete":
 				event.target.closest(".effect-change").remove();
 				return this.submit();

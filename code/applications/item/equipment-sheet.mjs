@@ -3,12 +3,11 @@ import EffectsElement from "../components/effects.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class EquipmentSheet extends BaseItemSheet {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "equipment", "item", "sheet"],
-			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description" }],
 			scrollY: ["[data-tab] > section"],
 			width: 600,
 			height: 500
@@ -35,28 +34,34 @@ export default class EquipmentSheet extends BaseItemSheet {
 		context.effects = EffectsElement.prepareContext(this.item.effects);
 
 		// Category
-		if ( context.system.validCategories?.localized ) context.categories = {
-			options: context.system.validCategories.localized,
-			blank: ""
-		};
+		if (context.system.validCategories?.localized)
+			context.categories = {
+				options: context.system.validCategories.localized,
+				blank: ""
+			};
 
 		// Type
-		if ( this.item.type === "weapon" ) {
+		if (this.item.type === "weapon") {
 			context.types = { options: CONFIG.BlackFlag.weaponTypes.localized };
 		}
 
 		// Base
 		const category = context.system.validCategories?.[context.system.type.category];
-		if ( category?.children ) context.baseItems = {
-			options: sortObjectEntries(Object.entries(category.children)
-				.reduce((obj, [key, config]) => {
-					if ( !foundry.utils.hasProperty(this.item, "system.type.value")
-						|| !config.type || (config.type === this.item.system.type.value) ) obj[key] = makeLabel(config);
-					return obj;
-				}, {})
-			),
-			blank: ""
-		};
+		if (category?.children)
+			context.baseItems = {
+				options: sortObjectEntries(
+					Object.entries(category.children).reduce((obj, [key, config]) => {
+						if (
+							!foundry.utils.hasProperty(this.item, "system.type.value") ||
+							!config.type ||
+							config.type === this.item.system.type.value
+						)
+							obj[key] = makeLabel(config);
+						return obj;
+					}, {})
+				),
+				blank: ""
+			};
 
 		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
 			obj[k] = { label: game.i18n.localize(o.label), selected: context.system.options.has(k) };
@@ -79,19 +84,19 @@ export default class EquipmentSheet extends BaseItemSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_getSubmitData(updateData={}) {
+	_getSubmitData(updateData = {}) {
 		const data = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-		if ( foundry.utils.hasProperty(data, "system.options") ) {
+		if (foundry.utils.hasProperty(data, "system.options")) {
 			data.system.options = filteredKeys(data.system.options);
 		}
 
-		if ( foundry.utils.hasProperty(data, "system.properties") ) {
+		if (foundry.utils.hasProperty(data, "system.properties")) {
 			data.system.properties = filteredKeys(data.system.properties);
 		}
 
-		if ( foundry.utils.hasProperty(data, "system.overrides.proficiency") ) {
-			if ( data.system.overrides.proficiency === "null" ) data.system.overrides.proficiency = null;
+		if (foundry.utils.hasProperty(data, "system.overrides.proficiency")) {
+			if (data.system.overrides.proficiency === "null") data.system.overrides.proficiency = null;
 		}
 
 		return foundry.utils.flattenObject(data);

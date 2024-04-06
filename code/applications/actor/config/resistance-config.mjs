@@ -2,7 +2,6 @@ import { filteredKeys } from "../../../utils/_module.mjs";
 import BaseConfig from "./base-config.mjs";
 
 export default class ResistanceConfig extends BaseConfig {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {

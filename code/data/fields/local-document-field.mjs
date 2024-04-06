@@ -5,8 +5,8 @@
  * @param {StringFieldOptions} options - Options which configure the behavior of the field.
  */
 export default class LocalDocumentField extends foundry.data.fields.DocumentIdField {
-	constructor(model, options={}) {
-		if ( !foundry.utils.isSubclass(model, foundry.abstract.DataModel) ) {
+	constructor(model, options = {}) {
+		if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
 			throw new Error("A ForeignDocumentField must specify a DataModel subclass as its type");
 		}
 
@@ -35,8 +35,8 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_cast(value) {
-		if ( typeof value === "string" ) return value;
-		if ( (value instanceof this.model) ) return value._id;
+		if (typeof value === "string") return value;
+		if (value instanceof this.model) return value._id;
 		throw new Error(`The value provided to a LocalDocumentField must be a ${this.model.name} instance.`);
 	}
 
@@ -49,14 +49,14 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 	 * @returns {EmbeddedCollection|void}
 	 */
 	_findCollection(model, collection) {
-		if ( !model.parent ) return;
+		if (!model.parent) return;
 		return model.parent[collection] ?? this._findCollection(model.parent, collection);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	initialize(value, model, options={}) {
-		if ( this.idOnly ) return value;
+	initialize(value, model, options = {}) {
+		if (this.idOnly) return value;
 		const collection = this._findCollection(model, this.model.metadata.collection);
 		return () => collection?.get(value) ?? null;
 	}

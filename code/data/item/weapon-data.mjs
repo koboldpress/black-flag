@@ -18,9 +18,12 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {PropertiesTemplate}
  */
 export default class WeaponData extends ItemDataModel.mixin(
-	ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate, ProficiencyTemplate, PropertiesTemplate
+	ActivitiesTemplate,
+	DescriptionTemplate,
+	PhysicalTemplate,
+	ProficiencyTemplate,
+	PropertiesTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -38,23 +41,29 @@ export default class WeaponData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				value: new StringField({initial: "melee", label: "BF.Weapon.Type.Label"}),
-				category: new StringField({label: "BF.Equipment.Category.Label"}),
-				base: new StringField({label: "BF.Equipment.Base.Label"})
+				value: new StringField({ initial: "melee", label: "BF.Weapon.Type.Label" }),
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			}),
 			options: new SetField(new StringField(), {
 				label: "BF.Weapon.Option.Label[other]"
 			}),
-			ammunition: new SchemaField({
-				type: new StringField({label: "BF.Ammunition.Type.Label"})
-			}, {label: "BF.Item.Type.Ammunition[one]"}),
-			damage: new DamageField({bonus: false}),
-			range: new SchemaField({
-				short: new NumberField({min: 0, step: 0.1, label: "BF.Range.Short.Label"}),
-				long: new NumberField({min: 0, step: 0.1, label: "BF.Range.Long.Label"}),
-				reach: new NumberField({min: 0, step: 0.1, label: "BF.Reach.Label"}),
-				units: new StringField()
-			}, {label: "BF.Range.Label"})
+			ammunition: new SchemaField(
+				{
+					type: new StringField({ label: "BF.Ammunition.Type.Label" })
+				},
+				{ label: "BF.Item.Type.Ammunition[one]" }
+			),
+			damage: new DamageField({ bonus: false }),
+			range: new SchemaField(
+				{
+					short: new NumberField({ min: 0, step: 0.1, label: "BF.Range.Short.Label" }),
+					long: new NumberField({ min: 0, step: 0.1, label: "BF.Range.Long.Label" }),
+					reach: new NumberField({ min: 0, step: 0.1, label: "BF.Reach.Label" }),
+					units: new StringField()
+				},
+				{ label: "BF.Range.Label" }
+			)
 
 			// Attack ability override
 			// Damage ability override
@@ -83,9 +92,9 @@ export default class WeaponData extends ItemDataModel.mixin(
 		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
 		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
 
-		if ( this.properties.has("finesse") ) {
+		if (this.properties.has("finesse")) {
 			const abilities = this.parent.actor?.system.abilities;
-			if ( abilities ) return abilities[ranged]?.mod > abilities[melee]?.mod ? ranged : melee;
+			if (abilities) return abilities[ranged]?.mod > abilities[melee]?.mod ? ranged : melee;
 		}
 
 		return this.type.value === "ranged" ? ranged : melee;
@@ -98,13 +107,13 @@ export default class WeaponData extends ItemDataModel.mixin(
 	 * @type {string}
 	 */
 	get rangeLabel() {
-		if ( this.type.value !== "ranged" && !this.properties.has("thrown") ) return "";
+		if (this.type.value !== "ranged" && !this.properties.has("thrown")) return "";
 
 		const values = [];
-		if ( this.range.short ) values.push(this.range.short);
-		if ( this.range.long && (this.range.long !== this.range.short) ) values.push(this.range.long);
+		if (this.range.short) values.push(this.range.short);
+		if (this.range.long && this.range.long !== this.range.short) values.push(this.range.long);
 		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
-		if ( !values.length || !unit ) return "";
+		if (!values.length || !unit) return "";
 
 		const lengths = values.map(v => numberFormat(v)).join("/");
 		return `${lengths} ${game.i18n.localize(unit.abbreviation)}`;
@@ -117,11 +126,11 @@ export default class WeaponData extends ItemDataModel.mixin(
 	 * @type {string}
 	 */
 	get reachLabel() {
-		if ( this.type.value !== "melee" ) return "";
+		if (this.type.value !== "melee") return "";
 
 		const unit = CONFIG.BlackFlag.distanceUnits[this.range.units] ?? Object.values(CONFIG.BlackFlag.distanceUnits)[0];
 		// TODO: Define starting reach for imperial/metric
-		const reach = this.properties.has("reach") ? (this.range.reach || 5) : 0;
+		const reach = this.properties.has("reach") ? this.range.reach || 5 : 0;
 		return numberFormat(5 + reach, { unit: unit?.formattingUnit });
 	}
 
@@ -157,7 +166,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	get versatileDamage() {
-		if ( !this.properties.has("versatile") || !this.damage.denomination ) return this.damage;
+		if (!this.properties.has("versatile") || !this.damage.denomination) return this.damage;
 		const data = foundry.utils.deepClone(this.damage);
 		data.denomination = stepDenomination(data.denomination);
 		return this.constructor.schema.fields.damage.initialize(data, this);
@@ -192,7 +201,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateActivities(data, options, user) {
-		if ( data._id || foundry.utils.hasProperty(data, "system.activities") ) return;
+		if (data._id || foundry.utils.hasProperty(data, "system.activities")) return;
 		this._createInitialActivities([{ type: "attack" }]);
 	}
 }

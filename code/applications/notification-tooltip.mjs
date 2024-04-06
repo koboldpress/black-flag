@@ -1,5 +1,5 @@
 export default class NotificationTooltip extends Application {
-	constructor(document, notificationKeys, options={}) {
+	constructor(document, notificationKeys, options = {}) {
 		super(options);
 		this.document = document;
 		this.notificationKeys = notificationKeys;
@@ -19,11 +19,15 @@ export default class NotificationTooltip extends Application {
 	 * Activate global tooltip listeners on the page.
 	 */
 	static activateListeners() {
-		document.body.addEventListener("pointerenter", event => {
-			const element = event.target;
-			if ( !element.classList.contains("notification-badge") ) return;
-			this.renderTooltip(element);
-		}, true);
+		document.body.addEventListener(
+			"pointerenter",
+			event => {
+				const element = event.target;
+				if (!element.classList.contains("notification-badge")) return;
+				this.renderTooltip(element);
+			},
+			true
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,27 +40,26 @@ export default class NotificationTooltip extends Application {
 	 * @param {boolean} [options.displayOrder=false] - Should a number be displayed for the order?
 	 * @returns {string}
 	 */
-	static generateBadge(notifications, uuid, { displayOrder=false }={}) {
+	static generateBadge(notifications, uuid, { displayOrder = false } = {}) {
 		let level = "info";
 		let order = Infinity;
-		for ( const notification of notifications ) {
-			if ( notification.level && notification.level !== level ) {
-				if ( notification.level === "error" ) level = "error";
-				else if ( (notification.level === "warn") && (level !== "error") ) level = "warn";
+		for (const notification of notifications) {
+			if (notification.level && notification.level !== level) {
+				if (notification.level === "error") level = "error";
+				else if (notification.level === "warn" && level !== "error") level = "warn";
 			}
-			if ( notification.order && (notification.order < order) ) order = notification.order;
+			if (notification.order && notification.order < order) order = notification.order;
 		}
 
 		let center;
-		if ( Number.isFinite(order) && displayOrder ) {
+		if (Number.isFinite(order) && displayOrder) {
 			center = `<span class="order">${order}</span>`;
 		} else {
 			center = `<i class="${CONFIG.BlackFlag.notificationLevels[level]?.symbol ?? ""}"></i>`;
 		}
 
 		const keys = notifications.map(n => n.key).join(";");
-		return `<div class="notification-badge" data-uuid="${uuid}" data-notification-level="${
-			level}" data-notification-keys="${keys}">${center}</div>`;
+		return `<div class="notification-badge" data-uuid="${uuid}" data-notification-level="${level}" data-notification-keys="${keys}">${center}</div>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,7 +71,7 @@ export default class NotificationTooltip extends Application {
 	static async renderTooltip(element) {
 		const keys = element.dataset.notificationKeys.split(";");
 		const uuid = element.dataset.uuid;
-		if ( !keys || !uuid ) return;
+		if (!keys || !uuid) return;
 		const document = await fromUuid(uuid);
 		const tooltip = new NotificationTooltip(document, keys);
 		const context = await tooltip.getData(this.options);
@@ -104,18 +107,19 @@ export default class NotificationTooltip extends Application {
 			.reduce((arr, k) => {
 				let doc = this.document;
 				let notification = this.document.notifications.get(k);
-				if ( !notification ) {
+				if (!notification) {
 					const split = k.split(".");
-					if ( split.length > 1 ) doc = this.document.items.get(split[0]);
+					if (split.length > 1) doc = this.document.items.get(split[0]);
 					k = split[1] ?? split[0];
 					notification = doc?.notifications?.get(k);
 				}
-				if ( !notification ) return arr;
+				if (!notification) return arr;
 				notification = foundry.utils.deepClone(notification);
-				notification.badge = this.constructor.generateBadge([notification], doc.uuid, {displayOrder: true});
+				notification.badge = this.constructor.generateBadge([notification], doc.uuid, { displayOrder: true });
 				arr.push(notification);
 				return arr;
-			}, []).sort((lhs, rhs) => lhs.order - rhs.order);
+			}, [])
+			.sort((lhs, rhs) => lhs.order - rhs.order);
 		return context;
 	}
 }

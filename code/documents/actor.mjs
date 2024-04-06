@@ -5,7 +5,6 @@ import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
 
 export default class BlackFlagActor extends DocumentMixin(Actor) {
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -70,16 +69,19 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const overrides = {};
 
 		const levels = [
-			{ character: 0, class: 0 }, ...Object.values(this.system.progression?.levels ?? {}).map(l => l.levels)
+			{ character: 0, class: 0 },
+			...Object.values(this.system.progression?.levels ?? {}).map(l => l.levels)
 		];
-		for ( const level of levels ) {
-			for ( const advancement of this.advancementForLevel(level.character) ) {
-				advancement.changes(level)?.map(change => {
-					const c = foundry.utils.deepClone(change);
-					c.advancement = advancement;
-					c.priority ??= c.mode * 10;
-					return c;
-				})
+		for (const level of levels) {
+			for (const advancement of this.advancementForLevel(level.character)) {
+				advancement
+					.changes(level)
+					?.map(change => {
+						const c = foundry.utils.deepClone(change);
+						c.advancement = advancement;
+						c.priority ??= c.mode * 10;
+						return c;
+					})
 					.sort((lhs, rhs) => lhs.priority - rhs.priority)
 					.forEach(c => Object.assign(overrides, applier.apply(this, c)));
 			}
@@ -97,11 +99,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {number} level - Character level for which to get the advancement.
 	 * @yields {Advancement}
 	 */
-	*advancementForLevel(level=0) {
+	*advancementForLevel(level = 0) {
 		const levels = level > 0 ? this.system.progression.levels[level]?.levels : { character: 0, class: 0 };
-		if ( !levels ) return;
-		for ( const item of this.items ) {
-			for ( const advancement of item.advancementForLevel(levels) ) {
+		if (!levels) return;
+		for (const item of this.items) {
+			for (const advancement of item.advancementForLevel(levels)) {
 				yield advancement;
 			}
 		}
@@ -139,12 +141,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {DamageApplicationOptions} [options={}]
 	 * @returns {Promise<BlackFlagActor>} - The actor after the update has been performed.
 	 */
-	async applyDamage(damages, options={}) {
+	async applyDamage(damages, options = {}) {
 		const hp = this.system.attributes.hp;
 		const traits = this.system.traits ?? {};
-		if ( !hp ) return;
+		if (!hp) return;
 
-		if ( Number.isNumeric(damages) ) {
+		if (Number.isNumeric(damages)) {
 			damages = [{ value: damages }];
 			options.ignore ??= true;
 		}
@@ -160,17 +162,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @function blackFlag.preCalculateDamage
 		 * @memberof hookEvents
 		 */
-		if ( Hooks.call("blackFlag.preCalculateDamage", this, damages, options) === false ) return this;
+		if (Hooks.call("blackFlag.preCalculateDamage", this, damages, options) === false) return this;
 
 		const ignore = (category, type) => {
-			return options.ignore === true
-				|| options.ignore?.[category] === true
-				|| options.ignore?.[category]?.has?.(type);
+			return options.ignore === true || options.ignore?.[category] === true || options.ignore?.[category]?.has?.(type);
 		};
 
 		let amount = damages.reduce((total, d) => {
 			// Ignore damage types with immunity
-			if ( !ignore("immunity", d.type) && traits.damage?.immunities?.value.has(d.type) ) return total;
+			if (!ignore("immunity", d.type) && traits.damage?.immunities?.value.has(d.type)) return total;
 			// TODO: Apply overall damage resistance & vulnerability
 
 			let damageMultiplier = multiplier;
@@ -179,12 +179,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			// TODO: Apply overall damage reduction
 
 			// Apply type-specific damage resistance
-			if ( !ignore("resistance", d.type) && traits.damage?.resistances?.value.has(d.type) ) {
+			if (!ignore("resistance", d.type) && traits.damage?.resistances?.value.has(d.type)) {
 				damageMultiplier /= 2;
 			}
 
 			// Apply type-specific damage vulnerability
-			if ( !ignore("vulnerability", d.type) && traits.damage?.vulnerabilities?.value.has(d.type) ) {
+			if (!ignore("vulnerability", d.type) && traits.damage?.vulnerabilities?.value.has(d.type)) {
 				damageMultiplier *= 2;
 			}
 
@@ -216,14 +216,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @function blackFlag.preApplyDamage
 		 * @memberof hookEvents
 		 */
-		if ( Hooks.call("blackFlag.preApplyDamage", this, amount, updates, options) === false ) return this;
+		if (Hooks.call("blackFlag.preApplyDamage", this, amount, updates, options) === false) return this;
 
 		// Call core's hook so anything watching token bar changes can respond
-		if ( Hooks.call("modifyTokenAttribute", {
-			attribute: "attributes.hp", value: amount, isDelta: false, isBar: true
-		}, updates) === false ) return false;
+		if (
+			Hooks.call(
+				"modifyTokenAttribute",
+				{
+					attribute: "attributes.hp",
+					value: amount,
+					isDelta: false,
+					isBar: true
+				},
+				updates
+			) === false
+		)
+			return false;
 
-		await this.update(updates, {deltaHP: -amount});
+		await this.update(updates, { deltaHP: -amount });
 
 		/**
 		 * A hook event that fires after damage has been applied to an actor.
@@ -245,10 +255,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {number} amount - Amount of temp HP to apply.
 	 * @returns {Promise<BlackFlagActor>} - The actor after the update has been performed.
 	 */
-	async applyTempHP(amount=0) {
+	async applyTempHP(amount = 0) {
 		const hp = this.system.attributes.hp;
-		if ( !hp ) return;
-		return amount > hp.temp ? this.update({"system.attributes.hp.temp": amount}) : this;
+		if (!hp) return;
+		return amount > hp.temp ? this.update({ "system.attributes.hp.temp": amount }) : this;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -262,15 +272,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	enqueueAdvancementChange(advancement, functionName, parameters) {
 		this.#advancementQueue.push({ advancement, functionName, parameters });
-		if ( !this.#advancementProcessing ) this.#processAdvancementChanges();
+		if (!this.#advancementProcessing) this.#processAdvancementChanges();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getRollData({ deterministic=false }={}) {
+	getRollData({ deterministic = false } = {}) {
 		let rollData;
-		if ( this.system.getRollData ) rollData = this.system.getRollData({ deterministic });
+		if (this.system.getRollData) rollData = this.system.getRollData({ deterministic });
 		else rollData = { ...super.getRollData() };
 		rollData.flags = { ...this.flags };
 		rollData.name = this.name;
@@ -281,9 +291,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/** @inheritDoc */
 	async modifyTokenAttribute(attribute, value, isDelta, isBar) {
-		if ( ["attributes.hp", "attributes.hp.value"].includes(attribute) ) {
+		if (["attributes.hp", "attributes.hp.value"].includes(attribute)) {
 			const hp = this.system.attributes.hp;
-			const delta = isDelta ? (-1 * value) : (hp.value + hp.temp) - value;
+			const delta = isDelta ? -1 * value : hp.value + hp.temp - value;
 			return this.applyDamage(delta);
 		}
 		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
@@ -295,14 +305,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * Begin stepping through the advancement queue.
 	 */
 	async #processAdvancementChanges() {
-		if ( this.#advancementProcessing ) throw new Error("Advancement processing already in progress.");
-		if ( !this.#advancementQueue.length ) return;
+		if (this.#advancementProcessing) throw new Error("Advancement processing already in progress.");
+		if (!this.#advancementQueue.length) return;
 		this.#advancementProcessing = true;
 
 		do {
 			const op = this.#advancementQueue.shift();
 			await op.advancement[op.functionName].bind(op.advancement)(...op.parameters);
-		} while ( this.#advancementQueue.length );
+		} while (this.#advancementQueue.length);
 
 		this.#advancementProcessing = false;
 		this.render();
@@ -344,7 +354,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestConfiguration} [config={}] - Configuration options for a short rest.
 	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
 	 */
-	async shortRest(config={}) {
+	async shortRest(config = {}) {
 		return this.rest(foundry.utils.mergeObject({ type: "short" }, config));
 	}
 
@@ -355,7 +365,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestConfiguration} [config={}] - Configuration options for a long rest.
 	 * @returns {Promise<RestResult|void>} - Final result of the rest operation.
 	 */
-	async longRest(config={}) {
+	async longRest(config = {}) {
 		return this.rest(foundry.utils.mergeObject({ type: "long" }, config));
 	}
 
@@ -367,9 +377,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {object} [deltas={}] - Any changes that have been made earlier in the process.
 	 * @returns {Promise<RestResult>} - Final result of the rest operation.
 	 */
-	async rest(config={}, deltas={}) {
+	async rest(config = {}, deltas = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if ( !restConfig ) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
+		if (!restConfig) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
 		config = foundry.utils.mergeObject({ dialog: true, chat: true }, config);
 
 		const initialHitDice = Object.entries(this.system.attributes.hd.d).reduce((obj, [d, v]) => {
@@ -386,7 +396,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {RestConfiguration} config - Configuration options for the rest.
 		 * @returns {boolean} - Explicitly return `false` to prevent the rest from being started.
 		 */
-		if ( Hooks.call("blackFlag.preRestConfiguration", this, config) === false ) return;
+		if (Hooks.call("blackFlag.preRestConfiguration", this, config) === false) return;
 
 		const result = {
 			type: config.type,
@@ -396,9 +406,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			rolls: []
 		};
 		const RestDialog = config.dialog ? restConfig.dialogClass : null;
-		if ( RestDialog ) {
-			try { foundry.utils.mergeObject(result, await RestDialog.rest(this, config)); }
-			catch(err) { return; }
+		if (RestDialog) {
+			try {
+				foundry.utils.mergeObject(result, await RestDialog.rest(this, config));
+			} catch (err) {
+				return;
+			}
 		}
 
 		/**
@@ -410,7 +423,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {RestResult} result - Details on the rest to be completed.
 		 * @returns {boolean} - Explicitly return `false` to prevent the rest from being continued.
 		 */
-		if ( Hooks.call("blackFlag.restConfiguration", this, config, result) === false ) return;
+		if (Hooks.call("blackFlag.restConfiguration", this, config, result) === false) return;
 
 		let totalHD = 0;
 		const hd = this.system.attributes.hd;
@@ -436,12 +449,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {RestResult} result - Details on the rest to be completed.
 		 * @returns {boolean} - Explicitly return `false` to prevent the rest updates from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRestCompleted", this, result) === false ) return result;
+		if (Hooks.call("blackFlag.preRestCompleted", this, result) === false) return result;
 
 		await this.update(result.actorUpdates);
 		await this.updateEmbeddedDocuments("Item", result.itemUpdates);
 
-		if ( chat ) await this._displayRestResultMessage(result);
+		if (chat) await this._displayRestResultMessage(result);
 
 		/**
 		 * A hook event that fires when the rest process is completed for an actor.
@@ -463,9 +476,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestResult} [result={}] - Rest result being constructed.
 	 * @internal
 	 */
-	_getRestHitDiceRecovery(config={}, result={}) {
+	_getRestHitDiceRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if ( !restConfig.recoverHitDice ) return;
+		if (!restConfig.recoverHitDice) return;
 		const hd = this.system.attributes.hd;
 
 		// Determine maximum number of hit dice to recover
@@ -473,10 +486,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const deltas = {};
 		const updates = {};
-		for ( const denomination of Object.keys(hd.d).map(d => Number(d)).sort((lhs, rhs) => rhs - lhs) ) {
+		for (const denomination of Object.keys(hd.d)
+			.map(d => Number(d))
+			.sort((lhs, rhs) => rhs - lhs)) {
 			const spent = hd.d[denomination].spent;
 			const delta = Math.min(spent, hitDiceToRecover);
-			if ( delta > 0 ) {
+			if (delta > 0) {
 				hitDiceToRecover -= delta;
 				deltas[denomination] = (result.deltas?.hitDice[denomination] ?? 0) + delta;
 				updates[`d.${denomination}.spent`] = spent - delta;
@@ -497,9 +512,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestResult} [result={}] - Rest result being constructed.
 	 * @internal
 	 */
-	_getRestHitPointRecovery(config={}, result={}) {
+	_getRestHitPointRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if ( !restConfig.recoverHitPoints ) return;
+		if (!restConfig.recoverHitPoints) return;
 		const hp = this.system.attributes.hp;
 		const percentage = CONFIG.BlackFlag.rest.hitPointsRecoveryPercentage;
 		const final = Math.clamped(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
@@ -522,8 +537,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestResult} [result={}] - Rest result being constructed.
 	 * @internal
 	 */
-	_getRestSpellSlotRecovery(config={}, result={}) {
-		for ( const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes) ) {
+	_getRestSpellSlotRecovery(config = {}, result = {}) {
+		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
 			this.system.getRestSpellcastingRecovery?.(type, config, result);
 		}
 	}
@@ -535,18 +550,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
 	 * @param {RestResult} [result={}] - Rest result being constructed.
 	 */
-	async _getUsesRecovery(config={}, result={}) {
+	async _getUsesRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if ( !restConfig.recoverPeriods?.length ) return;
+		if (!restConfig.recoverPeriods?.length) return;
 		const rollData = this.getRollData();
 		result.itemUpdates = [];
 		result.rolls ??= [];
-		for ( const item of this.items ) {
-			if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+		for (const item of this.items) {
+			if (foundry.utils.getType(item.system.recoverUses) !== "function") continue;
 			const { updates, rolls } = await item.system.recoverUses(restConfig.recoverPeriods, rollData);
-			if ( foundry.utils.isEmpty(updates) ) continue;
+			if (foundry.utils.isEmpty(updates)) continue;
 			const updateTarget = result.itemUpdates.find(i => i._id === item.id);
-			if ( updateTarget ) foundry.utils.mergeObject(updateTarget, updates);
+			if (updateTarget) foundry.utils.mergeObject(updateTarget, updates);
 			else result.itemUpdates.push({ _id: item.id, ...updates });
 			result.rolls.push(...rolls);
 		}
@@ -567,9 +582,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		// Determine what localization string should be used for the message content
 		let resultType = "Basic";
-		if ( result.deltas.hitPoints && totalHD ) resultType = "Full";
-		else if ( (result.type === "long") && result.deltas.hitPoints ) resultType = "HitPoints";
-		else if ( (result.type === "long") && totalHD ) resultType = "HitDice";
+		if (result.deltas.hitPoints && totalHD) resultType = "Full";
+		else if (result.type === "long" && result.deltas.hitPoints) resultType = "HitPoints";
+		else if (result.type === "long" && totalHD) resultType = "HitDice";
 		const localizationString = `${restConfig.resultMessages}.${resultType}`;
 
 		// Prepare localization data
@@ -579,13 +594,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			hitDice: numberFormat(result.type === "long" ? totalHD : -totalHD),
 			hitDiceLabel: game.i18n.localize(`BF.HitDie.Label[${pluralRules.select(totalHD)}]`).toLowerCase(),
 			hitPoints: numberFormat(result.deltas.hitPoints),
-			hitPointsLabel: game.i18n.localize(`BF.HitPoint.Label[${pluralRules.select(result.deltas.hitPoints)}]`)
+			hitPointsLabel: game.i18n
+				.localize(`BF.HitPoint.Label[${pluralRules.select(result.deltas.hitPoints)}]`)
 				.toLowerCase()
 		};
 
 		const chatData = {
 			user: game.user.id,
-			speaker: {actor: this, alias: this.name},
+			speaker: { actor: this, alias: this.name },
 			flavor: game.i18n.localize(restConfig.label),
 			rolls: result.rolls,
 			content: game.i18n.format(localizationString, localizationData)
@@ -607,7 +623,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise}
 	 */
 	async roll(type, config, message, dialog) {
-		switch ( type ) {
+		switch (type) {
 			case "ability-check":
 				return this.rollAbilityCheck(config, message, dialog);
 			case "ability-save":
@@ -643,47 +659,58 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollAbilityCheck(config={}, dialog={}, message={}) {
+	async rollAbilityCheck(config = {}, dialog = {}, message = {}) {
 		const ability = this.system.abilities[config.ability];
-		if ( !ability ) return;
+		if (!ability) return;
 		const rollData = this.getRollData();
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
-		rollConfig.rolls = [{
-			...buildRoll({
-				mod: ability.mod,
-				prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
-				bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
-			}, rollData),
-			options: {
-				minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData }),
-				target: config.target
+		rollConfig.rolls = [
+			{
+				...buildRoll(
+					{
+						mod: ability.mod,
+						prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
+						bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
+					},
+					rollData
+				),
+				options: {
+					minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData }),
+					target: config.target
+				}
 			}
-		}].concat(config.rolls ?? []);
+		].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.CheckSpecific", {
 			ability: game.i18n.localize(CONFIG.BlackFlag.abilities[config.ability].labels.full)
 		});
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.system.getModifiers(ability.check.modifiers._data, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				options: {
+					rollNotes: this.system.getModifiers(ability.check.modifiers._data, "note"),
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
 
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor: type,
-				speaker: ChatMessage.getSpeaker({ actor: this }),
-				"flags.black-flag.roll": {
-					type: "ability-check",
-					ability: config.ability
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: type,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "ability-check",
+						ability: config.ability
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before an ability check is rolled.
@@ -694,7 +721,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAbilityCheck", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollAbilityCheck", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 
@@ -706,7 +733,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAbilityCheck", this, rolls, config.ability);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollAbilityCheck", this, rolls, config.ability);
 
 		return rolls;
 	}
@@ -720,47 +747,58 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollAbilitySave(config={}, dialog={}, message={}) {
+	async rollAbilitySave(config = {}, dialog = {}, message = {}) {
 		const ability = this.system.abilities[config.ability];
-		if ( !ability ) return;
+		if (!ability) return;
 		const rollData = this.getRollData();
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
-		rollConfig.rolls = [{
-			...buildRoll({
-				mod: ability.mod,
-				prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
-				bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
-			}, rollData),
-			options: {
-				minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData }),
-				target: config.target
+		rollConfig.rolls = [
+			{
+				...buildRoll(
+					{
+						mod: ability.mod,
+						prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
+						bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
+					},
+					rollData
+				),
+				options: {
+					minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData }),
+					target: config.target
+				}
 			}
-		}].concat(config.rolls ?? []);
+		].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Ability.Action.SaveSpecificLong", {
 			ability: game.i18n.localize(CONFIG.BlackFlag.abilities[config.ability].labels.full)
 		});
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.system.getModifiers(ability.save.modifiers._data, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				options: {
+					rollNotes: this.system.getModifiers(ability.save.modifiers._data, "note"),
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
 
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor: type,
-				speaker: ChatMessage.getSpeaker({ actor: this }),
-				"flags.black-flag.roll": {
-					type: "ability-save",
-					ability: config.ability
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: type,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "ability-save",
+						ability: config.ability
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before an save check is rolled.
@@ -771,7 +809,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAbilitySave", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollAbilitySave", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 
@@ -783,7 +821,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAbilitySave", this, rolls, config.ability);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollAbilitySave", this, rolls, config.ability);
 
 		return rolls;
 	}
@@ -805,48 +843,64 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollDeathSave(config={}, dialog={}, message={}) {
+	async rollDeathSave(config = {}, dialog = {}, message = {}) {
 		const death = this.system.attributes.death;
 
 		const modifierData = { type: "death-save" };
 		const rollData = this.getRollData();
 
-		const rollConfig = foundry.utils.mergeObject({
-			successThreshold: death.overrides.success
-				? death.overrides.success : CONFIG.BlackFlag.deathSave.successThreshold,
-			failureThreshold: death.overrides.failure
-				? death.overrides.failure : CONFIG.BlackFlag.deathSave.failureThreshold
-		}, config);
+		const rollConfig = foundry.utils.mergeObject(
+			{
+				successThreshold: death.overrides.success
+					? death.overrides.success
+					: CONFIG.BlackFlag.deathSave.successThreshold,
+				failureThreshold: death.overrides.failure
+					? death.overrides.failure
+					: CONFIG.BlackFlag.deathSave.failureThreshold
+			},
+			config
+		);
 		rollConfig.origin = this;
-		rollConfig.rolls = [{
-			...buildRoll({
-				bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-			}, rollData),
-			options: {
-				minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
-				target: config.target ?? death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
-			}
-		}].concat(config.rolls ?? []);
-
-		const type = game.i18n.localize("BF.Death.Label[one]");
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.system.getModifiers(modifierData, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
-
-		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor,
-				speaker: ChatMessage.getSpeaker({actor: this}),
-				"flags.black-flag.roll": {
-					type: "death-save"
+		rollConfig.rolls = [
+			{
+				...buildRoll(
+					{
+						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+					},
+					rollData
+				),
+				options: {
+					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					target: config.target ?? death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
 				}
 			}
-		}, message);
+		].concat(config.rolls ?? []);
+
+		const type = game.i18n.localize("BF.Death.Label[one]");
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				options: {
+					rollNotes: this.system.getModifiers(modifierData, "note"),
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
+
+		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "death-save"
+					}
+				}
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before an death save is rolled for an Actor.
@@ -857,20 +911,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent death save from being rolled.
 		 */
-		if ( Hooks.call("blackFlag.preRollDeathSave", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollDeathSave", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
-		if ( !rolls?.length ) return;
+		if (!rolls?.length) return;
 		const roll = rolls[0];
 
 		const details = {};
 
 		// Save success
-		if ( roll.total >= (roll.options.target ?? CONFIG.BlackFlag.deathSave.target) ) {
+		if (roll.total >= (roll.options.target ?? CONFIG.BlackFlag.deathSave.target)) {
 			let successes = (death.success || 0) + 1;
 
 			// Critical success, you're back up!
-			if ( roll.isCriticalSuccess ) {
+			if (roll.isCriticalSuccess) {
 				details.updates = {
 					"system.attributes.death.status": "alive",
 					"system.attributes.death.success": 0,
@@ -881,7 +935,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}
 
 			// Three successes, you're stabilized
-			else if ( successes >= rollConfig.successThreshold ) {
+			else if (successes >= rollConfig.successThreshold) {
 				details.updates = {
 					"system.attributes.death.status": "stable",
 					"system.attributes.death.success": rollConfig.successThreshold
@@ -891,9 +945,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			}
 
 			// Increment successes
-			else details.updates = {
-				"system.attributes.death.success": Math.clamped(successes, 0, rollConfig.successThreshold)
-			};
+			else
+				details.updates = {
+					"system.attributes.death.success": Math.clamped(successes, 0, rollConfig.successThreshold)
+				};
 		}
 
 		// Save failure
@@ -903,7 +958,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				"system.attributes.death.failure": Math.clamped(failures, 0, rollConfig.failureThreshold)
 			};
 			// Three failures, you're dead
-			if ( failures >= rollConfig.failureThreshold ) {
+			if (failures >= rollConfig.failureThreshold) {
 				details.updates["system.attributes.death.status"] = "dead";
 				details.chatString = "BF.Death.Message.Failure";
 				details.count = rollConfig.failureThreshold;
@@ -924,20 +979,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {number} details.count - Number of rolls succeeded or failed to result in this message.
 		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
 		 */
-		if ( Hooks.call("blackFlag.rollDeathSave", this, rolls, details) === false ) return roll;
+		if (Hooks.call("blackFlag.rollDeathSave", this, rolls, details) === false) return roll;
 
-		if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
+		if (!foundry.utils.isEmpty(details.updates)) await this.update(details.updates);
 
 		// Display success/failure chat message
-		if ( details.chatString ) {
-			const pluralRule = (new Intl.PluralRules(game.i18n.lang)).select(details.count);
+		if (details.chatString) {
+			const pluralRule = new Intl.PluralRules(game.i18n.lang).select(details.count);
 			const numberFormatter = new Intl.NumberFormat(game.i18n.lang);
 			const counted = game.i18n.format("BF.Death.Message.Counted", {
 				count: numberFormatter.format(details.count),
 				label: game.i18n.localize(`BF.Death.Message.Label[${pluralRule}]`)
 			});
 			let chatData = {
-				content: game.i18n.format(details.chatString, {name: this.name, counted}),
+				content: game.i18n.format(details.chatString, { name: this.name, counted }),
 				speaker: messageConfig.data.speaker
 			};
 			ChatMessage.applyRollMode(chatData, roll.options.rollMode);
@@ -974,22 +1029,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<BasicRoll[]|void>}
 	 */
-	async rollHitDie(config={}, dialog={}, message={}) {
+	async rollHitDie(config = {}, dialog = {}, message = {}) {
 		// If no denomination is chosen, use the highest HD that is available
-		if ( !config.denomination ) {
+		if (!config.denomination) {
 			config.denomination = Object.entries(this.system.attributes.hd.d)
 				.filter(([k, v]) => v.available > 0)
 				.sort((lhs, rhs) => rhs[1].available - lhs[1].available)[0]?.[0];
-			if ( !config.denomination ) {
+			if (!config.denomination) {
 				return ui.notifications.warn("BF.HitDie.Warning.NoneAvailableGeneric", { localize: true });
 			}
 		}
 
 		// Ensure there is a hit die to spend
-		else if ( !this.system.attributes.hd.d[config.denomination]?.available ) {
-			return ui.notifications.warn(game.i18n.format("BF.HitDie.Warning.NoneAvailableSpecific", {
-				denomination: config.denomination
-			}));
+		else if (!this.system.attributes.hd.d[config.denomination]?.available) {
+			return ui.notifications.warn(
+				game.i18n.format("BF.HitDie.Warning.NoneAvailableSpecific", {
+					denomination: config.denomination
+				})
+			);
 		}
 
 		const formula = `max(0, 1d${config.denomination} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`;
@@ -998,25 +1055,31 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
 		const type = game.i18n.localize("BF.HitDie.Label[one]");
-		const dialogConfig = foundry.utils.mergeObject({
-			configure: false,
-			options: {
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				configure: false,
+				options: {
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
 
 		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor: flavor,
-				speaker: ChatMessage.getSpeaker({ actor: this }),
-				"flags.everyday-heroes.roll": {
-					type: "hit-die",
-					denomination: config.denomination
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: flavor,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.everyday-heroes.roll": {
+						type: "hit-die",
+						denomination: config.denomination
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before a hit die is rolled.
@@ -1028,16 +1091,16 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollHitDie", this, rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollHitDie", this, rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
 
 		const updates = {};
-		if ( rollConfig.modifySpentHitDie !== false ) {
+		if (rollConfig.modifySpentHitDie !== false) {
 			const hd = this.system.attributes.hd.d[config.denomination];
 			updates[`system.attributes.hd.d.${config.denomination}.spent`] = hd.spent + 1;
 		}
-		if ( rollConfig.modifyHitPoints !== false ) {
+		if (rollConfig.modifyHitPoints !== false) {
 			const hp = this.system.attributes.hp;
 			updates["system.attributes.hp.value"] = Math.min(hp.max, hp.value + (rolls[0]?.total ?? 0));
 		}
@@ -1051,9 +1114,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {object} updates - Updates that will be applied to the actor.
 		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
 		 */
-		if ( Hooks.call("blackFlag.rollHitDie", this, rolls, updates) === false ) return rolls;
+		if (Hooks.call("blackFlag.rollHitDie", this, rolls, updates) === false) return rolls;
 
-		if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
+		if (!foundry.utils.isEmpty(updates)) await this.update(updates);
 
 		return rolls;
 	}
@@ -1065,22 +1128,33 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {ChallengeRollOptions} [options] - Options for the roll.
 	 * @returns {ChallengeRollProcessConfiguration}
 	 */
-	getInitiativeRollConfig(options={}) {
+	getInitiativeRollConfig(options = {}) {
 		const init = this.system.attributes?.initiative ?? {};
 		const abilityKey = init.ability ?? CONFIG.BlackFlag.defaultAbilities.initiative;
 		const ability = this.system.abilities?.[abilityKey] ?? {};
 
-		const rollConfig = { rolls: [{
-			...buildRoll({
-				mod: ability.mod,
-				prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
-				bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
-				tiebreaker: (game.settings.get(game.system.id, "initiativeTiebreaker") && ability) ? ability.value / 100 : null
-			}, this.getRollData()),
-			options: foundry.utils.mergeObject({
-				minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
-			}, options)
-		}] };
+		const rollConfig = {
+			rolls: [
+				{
+					...buildRoll(
+						{
+							mod: ability.mod,
+							prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
+							bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
+							tiebreaker:
+								game.settings.get(game.system.id, "initiativeTiebreaker") && ability ? ability.value / 100 : null
+						},
+						this.getRollData()
+					),
+					options: foundry.utils.mergeObject(
+						{
+							minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
+						},
+						options
+					)
+				}
+			]
+		};
 
 		/**
 		 * A hook event that fires when initiative roll configuration is being prepared.
@@ -1102,29 +1176,32 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<Combat|void>}
 	 */
-	async configureInitiativeRoll(config={}, dialog={}) {
+	async configureInitiativeRoll(config = {}, dialog = {}) {
 		const init = this.system.attributes?.initiative ?? {};
 		const rollConfig = foundry.utils.mergeObject(this.getInitiativeRollConfig(config.options), config);
 
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.system.getModifiers(init.modifiers?._data, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", {
-					type: game.i18n.localize("BF.Initiative.Label")
-				})
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				options: {
+					rollNotes: this.system.getModifiers(init.modifiers?._data, "note"),
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", {
+						type: game.i18n.localize("BF.Initiative.Label")
+					})
+				}
+			},
+			dialog
+		);
 
 		const Roll = CONFIG.Dice.ChallengeRoll;
 		Roll.applyKeybindings(rollConfig, dialogConfig);
 
 		let rolls;
-		if ( dialogConfig.configure ) {
+		if (dialogConfig.configure) {
 			let DialogClass = dialogConfig.applicationClass ?? Roll.DefaultConfigurationDialog;
 			try {
 				rolls = await DialogClass.configure(rollConfig, dialogConfig);
-			} catch(err) {
-				if ( !err ) return;
+			} catch (err) {
+				if (!err) return;
 				throw err;
 			}
 		} else {
@@ -1139,7 +1216,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async rollInitiative(options={}) {
+	async rollInitiative(options = {}) {
 		/**
 		 * A hook event that fires before initiative is rolled for an Actor.
 		 * @function blackFlag.preRollInitiative
@@ -1148,11 +1225,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {ChallengeRoll[]} roll - The initiative rolls.
 		 * @returns {boolean} - Explicitly return `false` to prevent initiative from being rolled.
 		 */
-		if ( Hooks.call("blackFlag.preRollInitiative", this, this._cachedInitiativeRolls) === false ) return;
+		if (Hooks.call("blackFlag.preRollInitiative", this, this._cachedInitiativeRolls) === false) return;
 
 		const combat = await super.rollInitiative(options);
-		const combatants = this.isToken ? this.getActiveTokens(false, true)
-			.filter(t => game.combat.getCombatantByToken(t.id)) : [game.combat.getCombatantByActor(this.id)];
+		const combatants = this.isToken
+			? this.getActiveTokens(false, true).filter(t => game.combat.getCombatantByToken(t.id))
+			: [game.combat.getCombatantByActor(this.id)];
 
 		/**
 		 * A hook event that fires after an Actor has rolled for initiative.
@@ -1183,9 +1261,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollSkill(config={}, dialog={}, message={}) {
+	async rollSkill(config = {}, dialog = {}, message = {}) {
 		const skill = this.system.proficiencies.skills[config.skill];
-		if ( !skill ) return;
+		if (!skill) return;
 		const rollData = this.getRollData();
 
 		const prepareSkillConfig = (baseConfig, rollConfig, formData, index) => {
@@ -1198,11 +1276,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			];
 
 			rollConfig = foundry.utils.mergeObject(rollConfig, {
-				...buildRoll({
-					mod: ability?.mod,
-					prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
-					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-				}, rollData),
+				...buildRoll(
+					{
+						mod: ability?.mod,
+						prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
+						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+					},
+					rollData
+				),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
@@ -1221,28 +1302,34 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const type = game.i18n.format("BF.Skill.Action.CheckSpecific", {
 			skill: game.i18n.localize(CONFIG.BlackFlag.skills[config.skill].label)
 		});
-		const dialogConfig = foundry.utils.mergeObject({
-			applicationClass: SkillRollConfigurationDialog,
-			options: {
-				buildConfig: prepareSkillConfig,
-				chooseAbility: true,
-				rollNotes,
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				applicationClass: SkillRollConfigurationDialog,
+				options: {
+					buildConfig: prepareSkillConfig,
+					chooseAbility: true,
+					rollNotes,
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
 
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor: type,
-				speaker: ChatMessage.getSpeaker({ actor: this }),
-				"flags.black-flag.roll": {
-					type: "skill",
-					skill: rollConfig.skill
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: type,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "skill",
+						skill: rollConfig.skill
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before a skill check is rolled.
@@ -1253,7 +1340,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollSkill", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollSkill", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 
@@ -1265,7 +1352,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.skills`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollSkill", this, rolls, config.skill);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollSkill", this, rolls, config.skill);
 
 		return rolls;
 	}
@@ -1287,11 +1374,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollTool(config={}, dialog={}, message={}) {
+	async rollTool(config = {}, dialog = {}, message = {}) {
 		let tool = this.system.proficiencies.tools[config.tool];
-		if ( !tool ) {
+		if (!tool) {
 			const toolConfig = Trait.configForKey(config.tool, { trait: "tools" });
-			if ( !toolConfig ) return;
+			if (!toolConfig) return;
 			tool = {
 				label: toolConfig.label,
 				proficiency: new Proficiency(this.system.attributes.proficiency, 0)
@@ -1309,11 +1396,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			];
 
 			rollConfig = foundry.utils.mergeObject(rollConfig, {
-				...buildRoll({
-					mod: ability?.mod,
-					prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
-					bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
-				}, rollData),
+				...buildRoll(
+					{
+						mod: ability?.mod,
+						prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
+						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+					},
+					rollData
+				),
 				options: {
 					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
@@ -1332,28 +1422,34 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
 			tool: game.i18n.localize(tool.label)
 		});
-		const dialogConfig = foundry.utils.mergeObject({
-			applicationClass: SkillRollConfigurationDialog,
-			options: {
-				buildConfig: prepareToolConfig,
-				chooseAbility: true,
-				rollNotes,
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
-			}
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				applicationClass: SkillRollConfigurationDialog,
+				options: {
+					buildConfig: prepareToolConfig,
+					chooseAbility: true,
+					rollNotes,
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
 
 		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${flavor}: ${this.name}`,
-				flavor: type,
-				speaker: ChatMessage.getSpeaker({ actor: this }),
-				"flags.black-flag.roll": {
-					type: "tool",
-					tool: rollConfig.tool
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: type,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "tool",
+						tool: rollConfig.tool
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before a tool check is rolled.
@@ -1364,7 +1460,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollTool", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollTool", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 
@@ -1376,7 +1472,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.tools`.
 		 */
-		if ( rolls?.length ) Hooks.callAll("blackFlag.postRollTool", this, rolls, config.tool);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollTool", this, rolls, config.tool);
 
 		return rolls;
 	}
@@ -1392,7 +1488,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		Hooks.on("getActorDirectoryEntryContext", this.getActorDirectoryEntryContext);
 		Hooks.on("getUserContextOptions", this.getUserContextOptions);
 		game.socket.on(`system.${game.system.id}`, data => {
-			if ( data?.operation === "advancementChangesComplete" ) game.actors.get(data.actorId)?.render();
+			if (data?.operation === "advancementChangesComplete") game.actors.get(data.actorId)?.render();
 		});
 	}
 
@@ -1409,7 +1505,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			name: "BF.Luck.Action.Grant",
 			icon: '<i class="fa-solid fa-clover"></i>',
 			condition: li => {
-				if ( !game.user.isGM ) return false;
+				if (!game.user.isGM) return false;
 				const actor = game.actors.get(li[0].dataset.documentId);
 				return actor?.type === "pc";
 			},
@@ -1433,7 +1529,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			name: "BF.Luck.Action.Grant",
 			icon: '<i class="fa-solid fa-clover"></i>',
 			condition: li => {
-				if ( !game.user.isGM ) return false;
+				if (!game.user.isGM) return false;
 				const user = game.users.get(li[0].dataset.userId);
 				return user.character?.type === "pc";
 			},
@@ -1449,7 +1545,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-		if ( (userId === game.userId) && (collection === "items") ) {
+		if (userId === game.userId && collection === "items") {
 			const updates = documents.map(d => ({ _id: d.id, "flags.black-flag.relationship.enabled": true }));
 			await this.updateEmbeddedDocuments("Item", updates);
 		}

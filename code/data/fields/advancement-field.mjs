@@ -7,10 +7,13 @@ import TypeField from "./type-field.mjs";
  */
 export class AdvancementField extends MappingField {
 	constructor(options) {
-		super(new TypeField({
-			determineType: value => value.type,
-			modelLookup: type => CONFIG.Advancement.types[type]?.documentClass ?? null
-		}), options);
+		super(
+			new TypeField({
+				determineType: value => value.type,
+				modelLookup: type => CONFIG.Advancement.types[type]?.documentClass ?? null
+			}),
+			options
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,8 +39,8 @@ export class AdvancementCollection extends Collection {
 	constructor(model, entries) {
 		super();
 		this.#model = model;
-		for ( const [id, entry] of Object.entries(entries) ) {
-			if ( !(entry instanceof BaseAdvancement) ) continue;
+		for (const [id, entry] of Object.entries(entries)) {
+			if (!(entry instanceof BaseAdvancement)) continue;
 			this.set(id, entry);
 			this.#types[entry.type] ??= [];
 			this.#types[entry.type].push(entry);
@@ -77,18 +80,21 @@ export class AdvancementCollection extends Collection {
 	 * @private
 	 */
 	get #levels() {
-		if ( !this.#_levels ) {
+		if (!this.#_levels) {
 			const levels = {};
-			for ( const advancement of this ) {
-				for ( const level of advancement.levels ) {
+			for (const advancement of this) {
+				for (const level of advancement.levels) {
 					levels[level] ??= [];
 					levels[level].push(advancement);
 				}
 			}
-			Object.entries(levels).forEach(([lvl, data]) => data.sort((a, b) =>
-				a.sortingValueForLevel({character: Number(lvl), class: Number(lvl)})
-					.localeCompare(b.sortingValueForLevel({character: Number(lvl), class: Number(lvl)}))
-			));
+			Object.entries(levels).forEach(([lvl, data]) =>
+				data.sort((a, b) =>
+					a
+						.sortingValueForLevel({ character: Number(lvl), class: Number(lvl) })
+						.localeCompare(b.sortingValueForLevel({ character: Number(lvl), class: Number(lvl) }))
+				)
+			);
 			this.#_levels = levels;
 		}
 		return this.#_levels;
@@ -133,7 +139,7 @@ export class AdvancementCollection extends Collection {
 	 * @param {boolean} [source=true] - Draw data for contained Documents from the underlying data source?
 	 * @returns {object[]} - The extracted array of primitive objects.
 	 */
-	toObject(source=true) {
+	toObject(source = true) {
 		return this.map(doc => doc.toObject(source));
 	}
 }

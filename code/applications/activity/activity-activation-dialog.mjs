@@ -2,7 +2,7 @@
  * Application to handled configuring the activation of an activity.
  */
 export default class ActivityActivationDialog extends Dialog {
-	constructor(activity, config={}, data={}, options={}) {
+	constructor(activity, config = {}, data = {}, options = {}) {
 		super(data, options);
 		this.options.classes.push("black-flag", "activity-activation");
 		this.activity = activity;
@@ -49,27 +49,32 @@ export default class ActivityActivationDialog extends Dialog {
 	 * @throws error if activity couldn't be activated.
 	 */
 	static async create(activity, config) {
-		if ( !activity.item.isOwned ) throw new Error("Cannot activate an activity that is not owned.");
+		if (!activity.item.isOwned) throw new Error("Cannot activate an activity that is not owned.");
 
 		return new Promise((resolve, reject) => {
-			const dialog = new this(activity, config, {
-				title: `${activity.item.name}: ${game.i18n.localize("BF.Activity.Activation.Title")}`,
-				content: null,
-				buttons: {
-					use: {
-						icon: `<i class="fa-solid fa-${activity.isSpell ? "magic" : "fist-raised"}"></i>`,
-						label: game.i18n.localize(activity.activationLabel),
-						callback: html => {
-							const formData = new FormDataExtended(html.querySelector("form"));
-							foundry.utils.mergeObject(config, formData.object);
-							resolve(formData.object);
+			const dialog = new this(
+				activity,
+				config,
+				{
+					title: `${activity.item.name}: ${game.i18n.localize("BF.Activity.Activation.Title")}`,
+					content: null,
+					buttons: {
+						use: {
+							icon: `<i class="fa-solid fa-${activity.isSpell ? "magic" : "fist-raised"}"></i>`,
+							label: game.i18n.localize(activity.activationLabel),
+							callback: html => {
+								const formData = new FormDataExtended(html.querySelector("form"));
+								foundry.utils.mergeObject(config, formData.object);
+								resolve(formData.object);
+							}
 						}
-					}
-					// TODO: Support custom buttons?
+						// TODO: Support custom buttons?
+					},
+					close: () => reject(null),
+					default: "use"
 				},
-				close: () => reject(null),
-				default: "use"
-			}, { jQuery: false });
+				{ jQuery: false }
+			);
 			dialog.render(true);
 		});
 	}
@@ -77,7 +82,7 @@ export default class ActivityActivationDialog extends Dialog {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options={}) {
+	async getData(options = {}) {
 		const context = await super.getData(options);
 
 		// TODO: Determine what scaling is allowed based on whether it is a spell and what the max scale is set to
@@ -88,15 +93,20 @@ export default class ActivityActivationDialog extends Dialog {
 
 		// TODO: Calculate resource consumption based on initial configuration
 
-		const data = foundry.utils.mergeObject(foundry.utils.deepClone(this.config), {
-			activity: this.activity,
-			spell: {
-				rings: this._prepareSpellSlotOptions()
-			}
-		}, { inplace: false });
+		const data = foundry.utils.mergeObject(
+			foundry.utils.deepClone(this.config),
+			{
+				activity: this.activity,
+				spell: {
+					rings: this._prepareSpellSlotOptions()
+				}
+			},
+			{ inplace: false }
+		);
 
 		context.content = await renderTemplate(
-			"systems/black-flag/templates/activities/activity-activation-dialog.hbs", data
+			"systems/black-flag/templates/activities/activity-activation-dialog.hbs",
+			data
 		);
 
 		return context;
@@ -114,7 +124,7 @@ export default class ActivityActivationDialog extends Dialog {
 		const spellcasting = this.activity.actor.system.spellcasting;
 		const options = Object.entries(CONFIG.BlackFlag.spellRings()).reduce((obj, [level, label]) => {
 			level = Number(level);
-			if ( (level < minimumRing) || (level > spellcasting.maxRing) ) return obj;
+			if (level < minimumRing || level > spellcasting.maxRing) return obj;
 			// TODO: Allow this to work with other spellcasting type
 			const data = spellcasting.rings[`ring-${level}`] ?? { max: 0 };
 			obj[level] = {
@@ -134,7 +144,7 @@ export default class ActivityActivationDialog extends Dialog {
 		super.activateListeners(jQuery);
 		const [html] = jQuery;
 
-		for ( const field of html.querySelectorAll("input, select, textarea") ) {
+		for (const field of html.querySelectorAll("input, select, textarea")) {
 			field.addEventListener("change", this._onChangeInput.bind(this));
 		}
 	}

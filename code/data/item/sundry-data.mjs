@@ -10,7 +10,6 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  */
 export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -28,7 +27,7 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				category: new StringField({label: "BF.Equipment.Category.Label"})
+				category: new StringField({ label: "BF.Equipment.Category.Label" })
 			})
 		});
 	}

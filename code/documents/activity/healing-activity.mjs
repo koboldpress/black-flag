@@ -3,14 +3,19 @@ import { buildRoll, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
 export default class HealingActivity extends Activity {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "healing",
-		dataModel: HealingData,
-		icon: "systems/black-flag/artwork/activities/healing.svg",
-		title: "BF.Activity.Healing.Title",
-		hint: "BF.Activity.Healing.Hint"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "healing",
+				dataModel: HealingData,
+				icon: "systems/black-flag/artwork/activities/healing.svg",
+				title: "BF.Activity.Healing.Title",
+				hint: "BF.Activity.Healing.Hint"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -27,7 +32,7 @@ export default class HealingActivity extends Activity {
 		let formula = rollConfig.rolls.map(r => r.parts.join(" + ")).join(" + ");
 		formula = Roll.defaultImplementation.replaceFormulaData(formula, rollConfig.data);
 		formula = simplifyFormula(formula);
-		if ( formula ) {
+		if (formula) {
 			const healingType = CONFIG.BlackFlag.healingTypes[rollConfig.rolls[0].options.healingType];
 			layout.innerHTML += `<span class="healing">${formula} ${game.i18n.localize(healingType?.label ?? "")}</span>`;
 		}
@@ -44,12 +49,13 @@ export default class HealingActivity extends Activity {
 	 */
 	async activationChatContext() {
 		const context = await super.activationChatContext();
-		if ( this.system.healing.formula ) context.buttons = {
-			damage: {
-				label: game.i18n.localize("BF.Healing.Label"),
-				dataset: { action: "roll", method: "rollHealing" }
-			}
-		};
+		if (this.system.healing.formula)
+			context.buttons = {
+				damage: {
+					label: game.i18n.localize("BF.Healing.Label"),
+					dataset: { action: "roll", method: "rollHealing" }
+				}
+			};
 		return context;
 	}
 
@@ -64,7 +70,7 @@ export default class HealingActivity extends Activity {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
-	async rollDamage(config={}, dialog={}, message={}) {
+	async rollDamage(config = {}, dialog = {}, message = {}) {
 		return this.rollHealing(config, dialog, message);
 	}
 
@@ -77,7 +83,7 @@ export default class HealingActivity extends Activity {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
-	async rollHealing(config={}, dialog={}, message={}) {
+	async rollHealing(config = {}, dialog = {}, message = {}) {
 		const rollData = this.item.getRollData();
 		const rollConfig = this.createHealingConfig(config, rollData);
 
@@ -88,19 +94,22 @@ export default class HealingActivity extends Activity {
 			}
 		});
 
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${this.name}: ${this.item.actor?.name ?? ""}`,
-				flavor: this.name,
-				speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-				flags: {
-					"black-flag": {
-						type: "healing",
-						activity: this.uuid
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${this.name}: ${this.item.actor?.name ?? ""}`,
+					flavor: this.name,
+					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
+					flags: {
+						"black-flag": {
+							type: "healing",
+							activity: this.uuid
+						}
 					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before healing is rolled.
@@ -112,10 +121,10 @@ export default class HealingActivity extends Activity {
 		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig, this) === false ) return;
+		if (Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig, this) === false) return;
 
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
-		if ( !rolls ) return;
+		if (!rolls) return;
 
 		/**
 		 * A hook event that fires after healing has been rolled.
@@ -147,23 +156,28 @@ export default class HealingActivity extends Activity {
 		// TODO: Automatically select spellcasting ability if on a spell
 		const healing = this.system.healing;
 		const modifierData = { ...this.modifierData, type: "healing", healing };
-		const { parts, data } = buildRoll({
-			mod: ability?.mod,
-			bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
-		}, rollData);
+		const { parts, data } = buildRoll(
+			{
+				mod: ability?.mod,
+				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+			},
+			rollData
+		);
 
 		const rollConfig = foundry.utils.mergeObject({ allowCritical: false }, config);
-		rollConfig.rolls = [{
-			data,
-			parts: healing.custom ? [healing.custom] : [healing.formula, ...(parts ?? [])],
-			options: {
-				damageType: healing.type,
-				modifierData,
-				minimum: this.actor?.system.buildMinimum(
-					this.actor?.system.getModifiers(this.modifierData, "min", { rollData })
-				)
+		rollConfig.rolls = [
+			{
+				data,
+				parts: healing.custom ? [healing.custom] : [healing.formula, ...(parts ?? [])],
+				options: {
+					damageType: healing.type,
+					modifierData,
+					minimum: this.actor?.system.buildMinimum(
+						this.actor?.system.getModifiers(this.modifierData, "min", { rollData })
+					)
+				}
 			}
-		}].concat(config.rolls ?? []);
+		].concat(config.rolls ?? []);
 
 		return rollConfig;
 	}
@@ -175,7 +189,7 @@ export default class HealingActivity extends Activity {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
-	getDamageDetails(options={}) {
+	getDamageDetails(options = {}) {
 		return { rolls: this.createHealingConfig().rolls, activity: this };
 	}
 }

@@ -1,7 +1,6 @@
 import BaseDataModel from "./base-data-model.mjs";
 
 export default class ItemDataModel extends BaseDataModel {
-
 	/**
 	 * @typedef {object} ItemRegistrationConfiguration
 	 * @property {boolean} cached - Should a cached version of this item type be made ready?
@@ -42,7 +41,7 @@ export default class ItemDataModel extends BaseDataModel {
 	 */
 	prepareDerivedData() {
 		super.prepareDerivedData();
-		if ( this.shouldPrepareFinalData ) this.prepareFinalData();
+		if (this.shouldPrepareFinalData) this.prepareFinalData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -58,11 +57,12 @@ export default class ItemDataModel extends BaseDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async toEmbed(config, options={}) {
-		if ( !foundry.utils.hasProperty(this, "description.value") ) return null;
+	async toEmbed(config, options = {}) {
+		if (!foundry.utils.hasProperty(this, "description.value")) return null;
 		const description = foundry.utils.getProperty(this, "description.value");
 		const enriched = await TextEditor.enrichHTML(description, {
-			...options, relativeTo: this.parent
+			...options,
+			relativeTo: this.parent
 		});
 		const section = document.createElement("section");
 		section.innerHTML = enriched;
@@ -80,8 +80,8 @@ export default class ItemDataModel extends BaseDataModel {
 	 *                                            either a die term or a flat term.
 	 * @returns {object}
 	 */
-	getRollData({ deterministic=false }={}) {
-		if ( !this.parent.actor ) return {};
+	getRollData({ deterministic = false } = {}) {
+		if (!this.parent.actor) return {};
 		const rollData = { ...this.parent.actor.getRollData({ deterministic }), item: { ...this } };
 		return rollData;
 	}
@@ -94,8 +94,8 @@ export default class ItemDataModel extends BaseDataModel {
 		await super._preCreate(data, options, user);
 
 		// Clear "relationship" flags when moved
-		if ( ("_id" in data) && !options.retainRelationship ) {
-			this.parent.updateSource({"flags.black-flag.-=relationship": null});
+		if ("_id" in data && !options.retainRelationship) {
+			this.parent.updateSource({ "flags.black-flag.-=relationship": null });
 		}
 	}
 }

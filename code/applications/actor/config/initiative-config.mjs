@@ -1,7 +1,6 @@
 import BaseConfig from "./base-config.mjs";
 
 export default class InitiativeConfig extends BaseConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "initiative"],
@@ -35,18 +34,24 @@ export default class InitiativeConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareModifiers() {
-		const modifiers = this.getModifiers([{k: "type", v: "initiative"}]);
+		const modifiers = this.getModifiers([{ k: "type", v: "initiative" }]);
 		return [
 			{
-				category: "initiative", type: "bonus", label: "BF.Initiative.Label",
+				category: "initiative",
+				type: "bonus",
+				label: "BF.Initiative.Label",
 				modifiers: modifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "initiative", type: "min", label: "BF.Initiative.Label",
+				category: "initiative",
+				type: "min",
+				label: "BF.Initiative.Label",
 				modifiers: modifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "initiative", type: "note", label: "BF.Initiative.Label",
+				category: "initiative",
+				type: "note",
+				label: "BF.Initiative.Label",
 				modifiers: modifiers.filter(m => m.type === "note")
 			}
 		];

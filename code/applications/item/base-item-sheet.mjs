@@ -1,7 +1,6 @@
 import { log } from "../../utils/_module.mjs";
 
 export default class BaseItemSheet extends ItemSheet {
-
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -22,7 +21,10 @@ export default class BaseItemSheet extends ItemSheet {
 		context.source = this.document.toObject().system;
 
 		const enrichmentContext = {
-			secrets: this.item.isOwner, rollData: this.item.getRollData(), async: true, relativeTo: this.item
+			secrets: this.item.isOwner,
+			rollData: this.item.getRollData(),
+			async: true,
+			relativeTo: this.item
 		};
 		context.enriched = await Object.entries(this.constructor.enrichedFields).reduce(async (enriched, [key, path]) => {
 			enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
@@ -40,7 +42,7 @@ export default class BaseItemSheet extends ItemSheet {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
 	}

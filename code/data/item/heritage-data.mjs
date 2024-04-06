@@ -10,9 +10,10 @@ import DescriptionTemplate from "./templates/description-template.mjs";
  * @mixes {DescriptionTemplate}
  */
 export default class HeritageData extends ItemDataModel.mixin(
-	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+	AdvancementTemplate,
+	ConceptTemplate,
+	DescriptionTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -30,10 +31,13 @@ export default class HeritageData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateAdvancement(data, options, user) {
-		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
-		this._createInitialAdvancement([{
-			type: "trait", title: "Languages",
-			configuration: { grants: ["languages:standard:common"], choices: [{ count: 1, pool: "languages:*" }] }
-		}]);
+		if (data._id || foundry.utils.hasProperty(data, "system.advancement")) return;
+		this._createInitialAdvancement([
+			{
+				type: "trait",
+				title: "Languages",
+				configuration: { grants: ["languages:standard:common"], choices: [{ count: 1, pool: "languages:*" }] }
+			}
+		]);
 	}
 }

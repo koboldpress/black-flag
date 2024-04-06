@@ -1,5 +1,4 @@
 export default class BaseDataModel extends foundry.abstract.TypeDataModel {
-
 	/**
 	 * Metadata that describes a system data type.
 	 *
@@ -64,7 +63,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 
 	static defineSchema() {
 		const schema = {};
-		for ( const template of this._schemaTemplates ) {
+		for (const template of this._schemaTemplates) {
 			this.mergeSchema(schema, this[`${template.name}_defineSchema`]?.() ?? {});
 		}
 		return schema;
@@ -79,20 +78,20 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @returns {DataSchema} - Fully merged schema.
 	 */
 	static mergeSchema(a, b) {
-		for ( const key of Object.keys(b) ) {
-			if ( !(key in a) || (a[key].constructor !== b[key].constructor) ) {
-				if ( b[key] === false ) delete a[key];
+		for (const key of Object.keys(b)) {
+			if (!(key in a) || a[key].constructor !== b[key].constructor) {
+				if (b[key] === false) delete a[key];
 				else a[key] = b[key];
 				continue;
 			}
 			const mergedOptions = { ...a[key].options, ...b[key].options };
-			if ( b[key] instanceof foundry.data.fields.SchemaField ) {
+			if (b[key] instanceof foundry.data.fields.SchemaField) {
 				const fields = this.mergeSchema(a[key].fields, b[key].fields);
-				Object.values(fields).forEach(f => f.parent = undefined);
+				Object.values(fields).forEach(f => (f.parent = undefined));
 				a[key] = new b[key].constructor(fields, mergedOptions);
 				continue;
 			}
-			switch ( b[key].constructor ) {
+			switch (b[key].constructor) {
 				case foundry.data.fields.ArrayField:
 				case foundry.data.fields.SetField:
 					const elementOptions = foundry.utils.mergeObject(a[key].element.options, b[key].element.options);
@@ -101,7 +100,8 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 					break;
 				case BlackFlag.data.fields.MappingField:
 					mergedOptions.extraFields = this.mergeSchema(
-						a[key].options.extraFields ?? {}, b[key].options.extraFields ?? {}
+						a[key].options.extraFields ?? {},
+						b[key].options.extraFields ?? {}
 					);
 					const modelOptions = foundry.utils.mergeObject(a[key].model.options, b[key].model.options);
 					const ModelType = (b[key].model || a[key].model).constructor;
@@ -129,24 +129,24 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 			configurable: false
 		});
 
-		for ( const template of templates ) {
+		for (const template of templates) {
 			let defineSchema;
 
 			// Take all static methods and fields from template and mix in to base class
-			for ( const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template)) ) {
-				if ( key === "defineSchema" ) defineSchema = descriptor;
-				if ( this._immiscible.has(key) ) continue;
+			for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template))) {
+				if (key === "defineSchema") defineSchema = descriptor;
+				if (this._immiscible.has(key)) continue;
 				Object.defineProperty(Base, key, { ...descriptor, enumerable: true });
 			}
 
 			// Take all instance methods and fields from template and mix in to base class
-			for ( const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template.prototype)) ) {
-				if ( ["constructor"].includes(key) ) continue;
+			for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(template.prototype))) {
+				if (["constructor"].includes(key)) continue;
 				Object.defineProperty(Base.prototype, key, { ...descriptor, enumerable: true });
 			}
 
 			// Copy over defineSchema with a custom name
-			if ( defineSchema ) {
+			if (defineSchema) {
 				Object.defineProperty(Base, `${template.name}_defineSchema`, defineSchema);
 			}
 		}
@@ -162,7 +162,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @returns {boolean}
 	 */
 	static mixes(template) {
-		if ( foundry.utils.getType(template) === "string" ) {
+		if (foundry.utils.getType(template) === "string") {
 			return this._schemaTemplates.find(t => t.name === template) !== undefined;
 		} else {
 			return this._schemaTemplates.includes(template);
@@ -181,16 +181,18 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @param {boolean} [options.prototype=true] - Whether the prototype should be checked or the class.
 	 * @returns {string[]} - Array of method keys.
 	 */
-	static _getMethods({ startingWith, notEndingWith, prototype=true }) {
+	static _getMethods({ startingWith, notEndingWith, prototype = true }) {
 		let keys = [];
-		for ( const key in (prototype ? this.prototype : this) ) { keys.push(key); }
-		for ( let cls of [this, ...foundry.utils.getParentClasses(this)].reverse() ) {
-			if ( ["Base", "BaseDataModel", "DataModel"].includes(cls.name) ) continue;
-			if ( prototype ) cls = cls.prototype;
+		for (const key in prototype ? this.prototype : this) {
+			keys.push(key);
+		}
+		for (let cls of [this, ...foundry.utils.getParentClasses(this)].reverse()) {
+			if (["Base", "BaseDataModel", "DataModel"].includes(cls.name)) continue;
+			if (prototype) cls = cls.prototype;
 			keys.push(...Object.getOwnPropertyNames(cls));
 		}
-		if ( startingWith ) keys = keys.filter(key => key.startsWith(startingWith) && key !== startingWith);
-		if ( notEndingWith ) keys = keys.filter(key => !key.endsWith(notEndingWith));
+		if (startingWith) keys = keys.filter(key => key.startsWith(startingWith) && key !== startingWith);
+		if (notEndingWith) keys = keys.filter(key => !key.endsWith(notEndingWith));
 		return keys;
 	}
 
@@ -199,7 +201,9 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static migrateData(source) {
-		this._getMethods({ startingWith: "migrate", notEndingWith: "Data", prototype: false }).forEach(k => this[k](source));
+		this._getMethods({ startingWith: "migrate", notEndingWith: "Data", prototype: false }).forEach(k =>
+			this[k](source)
+		);
 		return super.migrateData(source);
 	}
 
@@ -244,7 +248,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 *                                        also contains text that must be enriched.
 	 * @returns {Promise<HTMLElement|HTMLCollection|null>}
 	 */
-	async toEmbed(config, options={}) {
+	async toEmbed(config, options = {}) {
 		return null;
 	}
 
@@ -261,8 +265,8 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @protected
 	 */
 	async _preCreate(data, options, user) {
-		for ( const name of this.constructor._getMethods({ startingWith: "_preCreate" }) ) {
-			if ( await this[name](data, options, user) === false ) return false;
+		for (const name of this.constructor._getMethods({ startingWith: "_preCreate" })) {
+			if ((await this[name](data, options, user)) === false) return false;
 		}
 	}
 
@@ -277,8 +281,8 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @protected
 	 */
 	async _preUpdate(changed, options, user) {
-		for ( const name of this.constructor._getMethods({ startingWith: "_preUpdate" }) ) {
-			if ( await this[name](changed, options, user) === false ) return false;
+		for (const name of this.constructor._getMethods({ startingWith: "_preUpdate" })) {
+			if ((await this[name](changed, options, user)) === false) return false;
 		}
 	}
 
@@ -292,8 +296,8 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	 * @protected
 	 */
 	async _preDelete(options, user) {
-		for ( const name of this.constructor._getMethods({ startingWith: "_preDelete" }) ) {
-			if ( await this[name](options, user) === false ) return false;
+		for (const name of this.constructor._getMethods({ startingWith: "_preDelete" })) {
+			if ((await this[name](options, user)) === false) return false;
 		}
 	}
 

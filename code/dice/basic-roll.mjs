@@ -66,7 +66,6 @@ import BasicRollConfigurationDialog from "../applications/dice/basic-configurati
  * @param {BasicRollOptions} options - Additional options that describe the roll.
  */
 export default class BasicRoll extends Roll {
-
 	/**
 	 * Default application to use for configuring this roll.
 	 * @type {typeof RollConfigurationDialog}
@@ -96,23 +95,23 @@ export default class BasicRoll extends Roll {
 	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(config={}, dialog={}, message={}) {
+	static async build(config = {}, dialog = {}, message = {}) {
 		this.applyKeybindings(config, dialog, message);
 
 		let rolls;
-		if ( dialog.configure !== false ) {
+		if (dialog.configure !== false) {
 			let DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
 			rolls = await DialogClass.configure(config, dialog, message);
 		} else {
 			rolls = config.rolls?.map(config => this.create(config)) ?? [];
 		}
 
-		for ( const roll of rolls ) {
+		for (const roll of rolls) {
 			await roll.evaluate({ async: true });
 		}
 
-		if ( rolls?.length && (message.create !== false) ) {
-			if ( foundry.utils.getType(message.preCreate) === "function" ) message.preCreate(rolls, message);
+		if (rolls?.length && message.create !== false) {
+			if (foundry.utils.getType(message.preCreate) === "function") message.preCreate(rolls, message);
 			await this.toMessage(rolls, message.data, {
 				rollMode: message.rollMode ?? rolls.reduce(r => mode ?? r.options.rollMode)
 			});
@@ -142,8 +141,8 @@ export default class BasicRoll extends Roll {
 	 * @type {boolean|void}
 	 */
 	get isFailure() {
-		if ( !this._evaluated ) return undefined;
-		if ( !Number.isNumeric(this.options.target) ) return false;
+		if (!this._evaluated) return undefined;
+		if (!Number.isNumeric(this.options.target)) return false;
 		return this.total < this.options.target;
 	}
 
@@ -154,8 +153,8 @@ export default class BasicRoll extends Roll {
 	 * @type {boolean|void}
 	 */
 	get isSuccess() {
-		if ( !this._evaluated ) return undefined;
-		if ( !Number.isNumeric(this.options.target) ) return false;
+		if (!this._evaluated) return undefined;
+		if (!Number.isNumeric(this.options.target)) return false;
 		return this.total >= this.options.target;
 	}
 
@@ -176,17 +175,20 @@ export default class BasicRoll extends Roll {
 	 * @returns {Promise<ChatMessage|object>} - A promise which resolves to the created ChatMessage document if create is
 	 *                                         true, or the Object of prepared chatData otherwise.
 	 */
-	static async toMessage(rolls, messageData={}, {rollMode, create=true}={}) {
-		for ( const roll of rolls ) {
-			if ( !roll._evaluated ) await roll.evaluate({async: true});
+	static async toMessage(rolls, messageData = {}, { rollMode, create = true } = {}) {
+		for (const roll of rolls) {
+			if (!roll._evaluated) await roll.evaluate({ async: true });
 		}
 
 		// Prepare chat data
-		messageData = foundry.utils.mergeObject({
-			user: game.user.id,
-			type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-			sound: CONFIG.sounds.dice
-		}, messageData);
+		messageData = foundry.utils.mergeObject(
+			{
+				user: game.user.id,
+				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+				sound: CONFIG.sounds.dice
+			},
+			messageData
+		);
 		messageData.rolls = rolls;
 
 		// Either create the message or just return the chat data
@@ -194,9 +196,9 @@ export default class BasicRoll extends Roll {
 		const msg = new cls(messageData);
 
 		// Either create or return the data
-		if ( create ) return cls.create(msg.toObject(), { rollMode });
+		if (create) return cls.create(msg.toObject(), { rollMode });
 		else {
-			if ( rollMode ) msg.applyRollMode(rollMode);
+			if (rollMode) msg.applyRollMode(rollMode);
 			return msg.toObject();
 		}
 	}

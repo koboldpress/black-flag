@@ -14,24 +14,24 @@ export function registerDataModels(documentType, models) {
 	config.categories = CONFIG.BlackFlag._documentCategories[documentType.name];
 	config.typeLabelsPlural ??= {};
 
-	if ( !models ) {
-		if ( !config.categories ) return log(
-			`No models provided to register for ${documentType.name}`, { level: "error" }
-		);
+	if (!models) {
+		if (!config.categories) return log(`No models provided to register for ${documentType.name}`, { level: "error" });
 		models = Object.fromEntries(
-			Object.values(config.categories).flatMap(v => v.types ?? []).map(m => [m.fullType, m])
+			Object.values(config.categories)
+				.flatMap(v => v.types ?? [])
+				.map(m => [m.fullType, m])
 		);
 	}
 
-	for ( let [type, model] of Object.entries(models) ) {
-		if ( model.metadata.module ) type = model.fullType;
+	for (let [type, model] of Object.entries(models)) {
+		if (model.metadata.module) type = model.fullType;
 		config.dataModels[type] = model;
 		config.typeLabels[type] = `${model.metadata.localization}[one]`;
 		config.typeLabelsPlural[type] = `${model.metadata.localization}[other]`;
-		if ( model.metadata.icon ) config.typeIcons[type] = model.metadata.icon;
-		if ( config.categories?.[model.metadata.category] ) {
+		if (model.metadata.icon) config.typeIcons[type] = model.metadata.icon;
+		if (config.categories?.[model.metadata.category]) {
 			const types = config.categories[model.metadata.category].types;
-			if ( !types.includes(model) ) insertBetween(types, model, model.metadata.categoryPosition);
+			if (!types.includes(model)) insertBetween(types, model, model.metadata.categoryPosition);
 		}
 	}
 }

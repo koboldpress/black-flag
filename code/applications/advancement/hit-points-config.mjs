@@ -4,7 +4,6 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for hit points.
  */
 export default class HitPointsConfig extends AdvancementConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "hit-points"],

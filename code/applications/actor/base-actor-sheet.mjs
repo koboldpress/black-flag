@@ -20,7 +20,6 @@ import TypeConfig from "./config/type-config.mjs";
  * Sheet class containing implementation shared across all actor types.
  */
 export default class BaseActorSheet extends ActorSheet {
-
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -88,10 +87,13 @@ export default class BaseActorSheet extends ActorSheet {
 		await this.prepareTraits(context);
 
 		const enrichmentContext = {
-			secrets: this.actor.isOwner, rollData: this.actor.getRollData(), async: true, relativeTo: this.actor
+			secrets: this.actor.isOwner,
+			rollData: this.actor.getRollData(),
+			async: true,
+			relativeTo: this.actor
 		};
 		context.enriched = {};
-		for ( const [key, path] of Object.entries(this.constructor.enrichedFields) ) {
+		for (const [key, path] of Object.entries(this.constructor.enrichedFields)) {
 			context.enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);
 		}
 		context.editorSelected = this.editorSelected;
@@ -106,16 +108,15 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 */
 	async prepareActions(context) {
-		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.localized)
-			.reduce((obj, [key, label]) => {
-				obj[key] = { label, activities: [] };
-				return obj;
-			}, {});
+		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.localized).reduce((obj, [key, label]) => {
+			obj[key] = { label, activities: [] };
+			return obj;
+		}, {});
 		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), activities: [] };
-		for ( const item of this.actor.items ) {
-			if ( !item.system.displayActions ) continue;
-			for ( const activity of item.system.actions?.() ?? [] ) {
-				if ( !activity.displayAction ) continue;
+		for (const item of this.actor.items) {
+			if (!item.system.displayActions) continue;
+			for (const activity of item.system.actions?.() ?? []) {
+				if (!activity.displayAction) continue;
 				const data = {
 					activity,
 					item: activity.item,
@@ -124,16 +125,15 @@ export default class BaseActorSheet extends ActorSheet {
 					challengeColumn: activity.challengeColumn,
 					effectColumn: activity.effectColumn
 				};
-				if ( activity.actionType in context.actions ) context.actions[activity.actionType].activities.push(data);
+				if (activity.actionType in context.actions) context.actions[activity.actionType].activities.push(data);
 				else context.actions.other.activities.push(data);
 			}
 		}
 		await this.prepareSpecialActions(context.actions);
-		for ( const [key, value] of Object.entries(context.actions) ) {
-			if ( !value.activities.length ) delete context.actions[key];
-			else context.actions[key].activities.sort((lhs, rhs) =>
-				(lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity)
-			);
+		for (const [key, value] of Object.entries(context.actions)) {
+			if (!value.activities.length) delete context.actions[key];
+			else
+				context.actions[key].activities.sort((lhs, rhs) => (lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity));
 		}
 		// TODO: Figure out how these should be sorted
 	}
@@ -155,9 +155,10 @@ export default class BaseActorSheet extends ActorSheet {
 		context.itemContext ??= {};
 		context.sections = await InventoryElement.organizeItems(this.actor, this.actor.items, {
 			callback: async (item, section) => {
-				const itemContext = context.itemContext[item.id] ??= {};
+				const itemContext = (context.itemContext[item.id] ??= {});
 				await this.prepareItem(item, itemContext, section);
-			}, hide: !this.modes.editing
+			},
+			hide: !this.modes.editing
 		});
 	}
 
@@ -170,15 +171,16 @@ export default class BaseActorSheet extends ActorSheet {
 	async prepareItem(item, context, section) {
 		context.buttons ??= [];
 		context.dataset ??= {};
-		if ( item.system.activities?.size && (section.tab === "features") ) context.buttons.push({
-			action: "enable",
-			classes: "status",
-			disabled: !item.isOwner,
-			label: "BF.Feature.Enabled",
-			pressed: item.enabled,
-			title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
-			icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"}"></i>`
-		});
+		if (item.system.activities?.size && section.tab === "features")
+			context.buttons.push({
+				action: "enable",
+				classes: "status",
+				disabled: !item.isOwner,
+				label: "BF.Feature.Enabled",
+				pressed: item.enabled,
+				title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
+				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"}"></i>`
+			});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -196,14 +198,13 @@ export default class BaseActorSheet extends ActorSheet {
 		const jQuery = await super._renderOuter();
 
 		// Adjust header button HTML to allow for more precise styling
-		for ( const button of jQuery[0].querySelectorAll(".header-button") ) {
+		for (const button of jQuery[0].querySelectorAll(".header-button")) {
 			let content = "";
-			for ( const node of button.childNodes ) {
-				if ( node instanceof Text ) {
-					if ( !node.textContent.trim().replaceAll("\n", "") ) content += node.textContent;
+			for (const node of button.childNodes) {
+				if (node instanceof Text) {
+					if (!node.textContent.trim().replaceAll("\n", "")) content += node.textContent;
 					else content += `<span>${node.textContent}</span>`;
-				}
-				else content += node.outerHTML;
+				} else content += node.outerHTML;
 			}
 			button.innerHTML = content;
 		}
@@ -216,9 +217,9 @@ export default class BaseActorSheet extends ActorSheet {
 	/** @inheritDoc */
 	_getHeaderButtons() {
 		let buttons = super._getHeaderButtons();
-		if ( this.options.editable && (game.user.isGM || this.actor.isOwner) ) {
+		if (this.options.editable && (game.user.isGM || this.actor.isOwner)) {
 			const closeIndex = buttons.findIndex(btn => btn.label === "Sheet");
-			const getLabel = () => this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked";
+			const getLabel = () => (this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked");
 			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""}`;
 			buttons.splice(closeIndex, 0, {
 				label: getLabel(),
@@ -246,12 +247,12 @@ export default class BaseActorSheet extends ActorSheet {
 
 		NotificationTooltip.activateListeners(this.actor, html);
 
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
 
 		// Hit Points
-		for ( const element of html.querySelectorAll('[name$=".hp.value"]') ) {
+		for (const element of html.querySelectorAll('[name$=".hp.value"]')) {
 			element.addEventListener("change", this._onChangeHP.bind(this));
 		}
 	}
@@ -266,10 +267,10 @@ export default class BaseActorSheet extends ActorSheet {
 	 */
 	async _onAction(event, dataset) {
 		const { action, subAction, ...properties } = dataset ?? event.currentTarget.dataset;
-		switch ( action ) {
+		switch (action) {
 			case "condition":
 				const condition = event.target.closest("[data-condition]")?.dataset.condition;
-				switch ( subAction ) {
+				switch (subAction) {
 					case "add":
 						this.modes.conditionAdd = !this.modes.conditionAdd;
 						return this.render();
@@ -281,18 +282,29 @@ export default class BaseActorSheet extends ActorSheet {
 				}
 				break;
 			case "config":
-				switch ( properties.type ) {
-					case "ability": return new AbilityConfig(properties.key, this.actor).render(true);
-					case "armor-class": return new ArmorClassConfig(this.actor).render(true);
-					case "initiative": return new InitiativeConfig(this.actor).render(true);
-					case "language": return new LanguageConfig(this.actor).render(true);
-					case "movement": return new MovementConfig(this.actor).render(true);
-					case "proficiency": return new ProficiencyConfig(this.actor).render(true);
-					case "resistance": return new ResistanceConfig(this.actor).render(true);
-					case "senses": return new SensesConfig(this.actor).render(true);
-					case "skill": return new SkillConfig(properties.key, this.actor).render(true);
-					case "tool": return new ToolConfig(properties.key, this.actor).render(true);
-					case "type": return new TypeConfig(this.actor).render(true);
+				switch (properties.type) {
+					case "ability":
+						return new AbilityConfig(properties.key, this.actor).render(true);
+					case "armor-class":
+						return new ArmorClassConfig(this.actor).render(true);
+					case "initiative":
+						return new InitiativeConfig(this.actor).render(true);
+					case "language":
+						return new LanguageConfig(this.actor).render(true);
+					case "movement":
+						return new MovementConfig(this.actor).render(true);
+					case "proficiency":
+						return new ProficiencyConfig(this.actor).render(true);
+					case "resistance":
+						return new ResistanceConfig(this.actor).render(true);
+					case "senses":
+						return new SensesConfig(this.actor).render(true);
+					case "skill":
+						return new SkillConfig(properties.key, this.actor).render(true);
+					case "tool":
+						return new ToolConfig(properties.key, this.actor).render(true);
+					case "type":
+						return new TypeConfig(this.actor).render(true);
 				}
 				break;
 			case "effect":
@@ -300,7 +312,7 @@ export default class BaseActorSheet extends ActorSheet {
 			case "item":
 				const itemId = properties.itemId ?? event.target.closest("[data-item-id]")?.dataset.itemId;
 				const item = this.actor.items.get(itemId);
-				switch ( subAction ) {
+				switch (subAction) {
 					case "delete":
 						return item?.deleteDialog();
 					case "edit":
@@ -309,7 +321,7 @@ export default class BaseActorSheet extends ActorSheet {
 				}
 				break;
 			case "rest":
-				return this.actor.rest({type: properties.type});
+				return this.actor.rest({ type: properties.type });
 			case "roll":
 				properties.event = event;
 				return this.actor.roll(subAction, properties);
@@ -331,14 +343,14 @@ export default class BaseActorSheet extends ActorSheet {
 		event.stopPropagation();
 		let value = event.target.value.trim();
 		let delta;
-		if ( value.startsWith("+") || value.startsWith("-") ) delta = parseInt(value);
+		if (value.startsWith("+") || value.startsWith("-")) delta = parseInt(value);
 		else {
-			if ( value.startsWith("=") ) value = value.slice(1);
+			if (value.startsWith("=")) value = value.slice(1);
 			delta = parseInt(value) - foundry.utils.getProperty(this.actor, event.target.name);
 		}
 
 		const changed = await this.actor.applyDamage(delta, { multiplier: -1 });
-		if ( !changed ) event.target.value = foundry.utils.getProperty(this.actor, event.target.name);
+		if (!changed) event.target.value = foundry.utils.getProperty(this.actor, event.target.name);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -367,8 +379,8 @@ export default class BaseActorSheet extends ActorSheet {
 
 		// Forward dropped items to the inventory element
 		// TODO: Handle folders
-		if ( data.type === "Item" ) {
-			if ( Hooks.call("dropActorSheetData", this.actor, this, data) === false ) return;
+		if (data.type === "Item") {
+			if (Hooks.call("dropActorSheetData", this.actor, this, data) === false) return;
 			InventoryElement.dropItems(event, this.actor, [await Item.implementation.fromDropData(data)]);
 			return;
 		}

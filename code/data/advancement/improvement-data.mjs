@@ -31,11 +31,14 @@ export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 export class ImprovementValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			ability: new StringField({required: false, initial: undefined}),
-			talent: new SchemaField({
-				document: new LocalDocumentField(foundry.documents.BaseItem),
-				uuid: new StringField() // TODO: Replace with UUIDField when available
-			}, {required: false, initial: undefined})
+			ability: new StringField({ required: false, initial: undefined }),
+			talent: new SchemaField(
+				{
+					document: new LocalDocumentField(foundry.documents.BaseItem),
+					uuid: new StringField() // TODO: Replace with UUIDField when available
+				},
+				{ required: false, initial: undefined }
+			)
 		};
 	}
 }

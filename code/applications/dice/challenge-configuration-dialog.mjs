@@ -12,7 +12,6 @@ import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
  * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class ChallengeRollConfigurationDialog extends BasicRollConfigurationDialog {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -36,16 +35,16 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options={}) {
+	getData(options = {}) {
 		const context = super.getData(options);
 		context.rollNotes.forEach(n => {
-			switch ( n.note?.rollMode ) {
+			switch (n.note?.rollMode) {
 				case CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE:
-					return n.advantageAbbreviation = "BF.Roll.Action.Advantage.Abbreviation";
+					return (n.advantageAbbreviation = "BF.Roll.Action.Advantage.Abbreviation");
 				case CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE:
-					return n.advantageAbbreviation = "BF.Roll.Action.Disadvantage.Abbreviation";
+					return (n.advantageAbbreviation = "BF.Roll.Action.Disadvantage.Abbreviation");
 				case CONFIG.Dice.ChallengeDie.MODES.NORMAL:
-					return n.advantageAbbreviation = "BF.Roll.Action.Normal.Abbreviation";
+					return (n.advantageAbbreviation = "BF.Roll.Action.Normal.Abbreviation");
 			}
 		});
 		return context;
@@ -58,8 +57,8 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 	/** @inheritDoc */
 	_finalizeRolls(action) {
 		const rolls = [];
-		for ( const roll of this.rolls ) {
-			switch ( action ) {
+		for (const roll of this.rolls) {
+			switch (action) {
 				case "advantage":
 					roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
 					break;

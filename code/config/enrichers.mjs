@@ -7,7 +7,7 @@ export const enrichment = {};
 let _enrichmentLookup;
 Object.defineProperty(enrichment, "lookup", {
 	get() {
-		if ( !_enrichmentLookup ) {
+		if (!_enrichmentLookup) {
 			_enrichmentLookup = {
 				abilities: foundry.utils.deepClone(abilities),
 				skills: foundry.utils.deepClone(skills),
@@ -36,7 +36,7 @@ Object.defineProperty(enrichment, "lookup", {
 function flattenTools() {
 	const choices = Trait.choices("tools");
 	const tools = {};
-	for ( const key of choices.set ) {
+	for (const key of choices.set) {
 		const config = choices.get(key);
 		tools[key] = { key, label: config.label };
 	}

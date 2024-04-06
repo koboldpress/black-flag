@@ -8,11 +8,11 @@ export default class BlackFlagDialog extends Dialog {
 	 * @param {object} [renderOptions] - Options passed to the Dialog render call.
 	 * @returns {Promise} - A Promise that resolves to the chosen result.
 	 */
-	static async tooltipWait({ element, ...tooltipOptions }, data={}, options={}, renderOptions={}) {
+	static async tooltipWait({ element, ...tooltipOptions }, data = {}, options = {}, renderOptions = {}) {
 		return new Promise((resolve, reject) => {
 			// Wrap buttons with Promise resolution.
 			const buttons = foundry.utils.deepClone(data.buttons);
-			for ( const [id, button] of Object.entries(buttons) ) {
+			for (const [id, button] of Object.entries(buttons)) {
 				const cb = button.callback;
 				button.callback = (html, event) => {
 					const result = cb instanceof Function ? cb.call(this, html, event) : undefined;
@@ -25,9 +25,9 @@ export default class BlackFlagDialog extends Dialog {
 			const close = element => {
 				const result = originalClose instanceof Function ? originalClose() : undefined;
 				const tooltip = element.closest(".locked-tooltip");
-				if ( tooltip ) game.tooltip.dismissLockedTooltip(tooltip);
+				if (tooltip) game.tooltip.dismissLockedTooltip(tooltip);
 				else game.tooltip.deactivate();
-				if ( result !== undefined ) resolve(result);
+				if (result !== undefined) resolve(result);
 				else reject(new Error("The Dialog was closed without a choice being made."));
 			};
 
@@ -36,7 +36,7 @@ export default class BlackFlagDialog extends Dialog {
 			dialog._element = $(document.createElement("section"));
 			dialog._render(true).then(() => {
 				let content = dialog.element;
-				if ( !(content instanceof HTMLElement) ) {
+				if (!(content instanceof HTMLElement)) {
 					content = $(document.createElement("div"));
 					content.append(dialog.element);
 					content = content[0];

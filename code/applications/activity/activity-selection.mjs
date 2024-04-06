@@ -6,7 +6,7 @@
  * @param {object} [options={}] - Dialog rendering options.
  */
 export default class ActivitySelection extends Dialog {
-	constructor(item, dialogData={}, options={}) {
+	constructor(item, dialogData = {}, options = {}) {
 		super(dialogData, options);
 		this.item = item;
 	}
@@ -41,8 +41,8 @@ export default class ActivitySelection extends Dialog {
 
 	getData() {
 		const context = { types: {} };
-		for ( const [name, config] of Object.entries(CONFIG.Activity.types) ) {
-			if ( name === CONST.BASE_DOCUMENT_TYPE ) continue;
+		for (const [name, config] of Object.entries(CONFIG.Activity.types)) {
+			if (name === CONST.BASE_DOCUMENT_TYPE) continue;
 			const activity = config.documentClass;
 			context.types[name] = {
 				label: game.i18n.localize(activity.metadata.title),
@@ -80,24 +80,28 @@ export default class ActivitySelection extends Dialog {
 	 * @param {object} [config.options={}] - Additional rendering options passed to the Dialog.
 	 * @returns {Promise<ActivityConfig|null>}
 	 */
-	static async createDialog(item, { rejectClose=false, options={} }={}) {
+	static async createDialog(item, { rejectClose = false, options = {} } = {}) {
 		return new Promise((resolve, reject) => {
-			const dialog = new this(item, {
-				title: `${game.i18n.localize("BF.Activity.Selection.Title")}: ${item.name}`,
-				buttons: {
-					submit: {
-						callback: html => {
-							const formData = new FormDataExtended(html.querySelector("form"));
-							const type = formData.get("type");
-							resolve(item.createEmbeddedDocuments("Activity", [{ type }], { renderSheet: true }));
+			const dialog = new this(
+				item,
+				{
+					title: `${game.i18n.localize("BF.Activity.Selection.Title")}: ${item.name}`,
+					buttons: {
+						submit: {
+							callback: html => {
+								const formData = new FormDataExtended(html.querySelector("form"));
+								const type = formData.get("type");
+								resolve(item.createEmbeddedDocuments("Activity", [{ type }], { renderSheet: true }));
+							}
 						}
+					},
+					close: () => {
+						if (rejectClose) reject("No activity type was selected");
+						else resolve(null);
 					}
 				},
-				close: () => {
-					if ( rejectClose ) reject("No activity type was selected");
-					else resolve(null);
-				}
-			}, foundry.utils.mergeObject(options, { jQuery: false }));
+				foundry.utils.mergeObject(options, { jQuery: false })
+			);
 			dialog.render(true);
 		});
 	}

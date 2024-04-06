@@ -10,7 +10,6 @@ import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
  *                                              If populated, will enable default drop & delete behavior.
  */
 export default class AdvancementConfig extends PseudoDocumentSheet {
-
 	/**
 	 * Stored information about the current drag event.
 	 * @type {{ listener: boolean, time: number|null, payload: object|null, valid: boolean }}
@@ -48,7 +47,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	 * @type {boolean|null}
 	 */
 	get multiDrop() {
-		if ( !this.options.dropKeyPath ) return null;
+		if (!this.options.dropKeyPath) return null;
 		const field = this.advancement.metadata.dataModels?.configuration?.schema.getField(this.options.dropKeyPath);
 		return field instanceof foundry.data.fields.ArrayField;
 	}
@@ -64,28 +63,32 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData(options={}) {
+	getData(options = {}) {
 		const levels = [
 			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
 			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
 		].slice(this.advancement.minimumLevel);
-		const context = foundry.utils.mergeObject(super.getData(options), {
-			configuration: this.advancement.configuration,
-			source: this.advancement.toObject(),
-			advancement: this.advancement,
-			default: {
-				title: game.i18n.localize(this.advancement.metadata.title),
-				icon: this.advancement.metadata.icon,
-				identifier: this.advancement.title.slugify({ strict: true }),
-				identifierHint: this.advancement.metadata.identifier.hint
+		const context = foundry.utils.mergeObject(
+			super.getData(options),
+			{
+				configuration: this.advancement.configuration,
+				source: this.advancement.toObject(),
+				advancement: this.advancement,
+				default: {
+					title: game.i18n.localize(this.advancement.metadata.title),
+					icon: this.advancement.metadata.icon,
+					identifier: this.advancement.title.slugify({ strict: true }),
+					identifierHint: this.advancement.metadata.identifier.hint
+				},
+				levels: Object.fromEntries(levels),
+				showClassIdentifier: this.item.system.metadata?.category === "features",
+				showClassRestriction: this.item.type === "class" || !!this.advancement.level.classIdentifier,
+				showHint: this.advancement.metadata.configurableHint,
+				showIdentifier: this.advancement.metadata.identifier.configurable,
+				showLevelSelector: !this.advancement.metadata.multiLevel
 			},
-			levels: Object.fromEntries(levels),
-			showClassIdentifier: this.item.system.metadata?.category === "features",
-			showClassRestriction: (this.item.type === "class") || !!this.advancement.level.classIdentifier,
-			showHint: this.advancement.metadata.configurableHint,
-			showIdentifier: this.advancement.metadata.identifier.configurable,
-			showLevelSelector: !this.advancement.metadata.multiLevel
-		}, {inplace: false});
+			{ inplace: false }
+		);
 		context.CONFIG = CONFIG.BlackFlag;
 		return context;
 	}
@@ -99,8 +102,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		const html = jQuery[0];
 
 		// Remove an item from the list
-		if ( this.options.dropKeyPath ) {
-			for ( const element of html.querySelectorAll('[data-action="delete"]') ) {
+		if (this.options.dropKeyPath) {
+			for (const element of html.querySelectorAll('[data-action="delete"]')) {
 				element.addEventListener("click", this._onItemDelete.bind(this));
 			}
 		}
@@ -110,10 +113,10 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	async _updateObject(event, formData) {
 		let updates = foundry.utils.expandObject(formData);
-		if ( updates.configuration ) {
+		if (updates.configuration) {
 			updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
 		}
-		if ( updates.level?.classIdentifier && (updates.level?.value === 0) ) {
+		if (updates.level?.classIdentifier && updates.level?.value === 0) {
 			updates.level.value = 1;
 		}
 		await this.advancement.update(updates);
@@ -143,15 +146,17 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	async _onItemDelete(event) {
 		event.preventDefault();
 		const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-		if ( !uuidToDelete ) return;
+		if (!uuidToDelete) return;
 		let updates;
-		if ( this.multiDrop ) {
+		if (this.multiDrop) {
 			const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-			updates = { configuration: await this.prepareConfigurationUpdate({
-				[this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
-			}) };
+			updates = {
+				configuration: await this.prepareConfigurationUpdate({
+					[this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
+				})
+			};
 		} else {
-			updates = {[`configuration.${this.options.dropKeyPath}`]: null};
+			updates = { [`configuration.${this.options.dropKeyPath}`]: null };
 		}
 		await this.advancement.update(updates);
 	}
@@ -168,26 +173,28 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		// TODO: Convert to _onDragEnter listener
 
 		const dropTarget = event.target.closest(".drop-area");
-		if ( !dropTarget ) return;
+		if (!dropTarget) return;
 
 		const diff = Date.now() - this.#dragData.time;
 		this.#dragData.time = Date.now();
 
-		if ( !this.#dragData.listener ) {
+		if (!this.#dragData.listener) {
 			dropTarget.addEventListener("dragleave", this._onDragLeave.bind(this), { once: true });
 			this.#dragData.listener = true;
 		}
 
 		const data = TextEditor.getDragEventData(event);
-		if ( !this.#dragData.payload
-			|| !foundry.utils.isEmpty(foundry.utils.diffObject(data, this.#dragData.payload))
-			|| diff > 10000 ) {
+		if (
+			!this.#dragData.payload ||
+			!foundry.utils.isEmpty(foundry.utils.diffObject(data, this.#dragData.payload)) ||
+			diff > 10000
+		) {
 			try {
 				const item = await Item.implementation.fromDropData(data);
 				this._validateDroppedItem(event, item);
 				this.#dragData.payload = data;
 				this.#dragData.valid = true;
-			} catch(err) {
+			} catch (err) {
 				this.#dragData.valid = false;
 			}
 		}
@@ -204,7 +211,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	async _onDragLeave(event) {
 		this.#dragData.listener = false;
 		const dropTarget = event.target?.closest(".drop-area");
-		if ( !dropTarget ) return;
+		if (!dropTarget) return;
 		dropTarget.classList.remove("valid");
 		dropTarget.classList.remove("invalid");
 	}
@@ -214,35 +221,36 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	async _onDrop(event) {
 		this._onDragLeave(event);
 
-		if ( !this.options.dropKeyPath ) throw new Error(
-			"AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
-			+ " drag and drop on advancement config items."
-		);
+		if (!this.options.dropKeyPath)
+			throw new Error(
+				"AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support" +
+					" drag and drop on advancement config items."
+			);
 
 		// Try to extract the data
 		const data = TextEditor.getDragEventData(event);
 
-		if ( data?.type !== "Item" ) return false;
+		if (data?.type !== "Item") return false;
 		const item = await Item.implementation.fromDropData(data);
 
 		try {
 			this._validateDroppedItem(event, item);
-		} catch(err) {
+		} catch (err) {
 			return ui.notifications.error(err.message);
 		}
 
 		let existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-		if ( !this.multiDrop ) existingItems = [{uuid: existingItems}];
+		if (!this.multiDrop) existingItems = [{ uuid: existingItems }];
 
 		// Abort if this uuid exists already
-		if ( existingItems.find(i => i.uuid === item.uuid) ) {
-			ui.notifications.warn("BF.Advancement.Config.Warning.Duplicate", {localize: true});
+		if (existingItems.find(i => i.uuid === item.uuid)) {
+			ui.notifications.warn("BF.Advancement.Config.Warning.Duplicate", { localize: true });
 			return null;
 		}
 		// TODO: Allow dragging to re-order entries
 
 		const newValue = this.multiDrop ? [...existingItems, { uuid: item.uuid }] : item.uuid;
-		await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: newValue});
+		await this.advancement.update({ [`configuration.${this.options.dropKeyPath}`]: newValue });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -257,7 +265,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	 */
 	_validateDroppedItem(event, item) {
 		// Abort if this uuid is the parent item
-		if ( item.uuid === this.item.uuid ) {
+		if (item.uuid === this.item.uuid) {
 			throw new Error(game.i18n.localize("BF.Advancement.Config.Warning.Recursive"));
 		}
 	}

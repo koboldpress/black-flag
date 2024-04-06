@@ -10,45 +10,47 @@ export default class SpellManager extends DocumentSheet {
 		// Figure out what spells are already on sheet
 		this.existingSpells = new Set();
 		const specialChosenSources = new Set();
-		for ( const spell of this.document.items ) {
-			if ( spell.type !== "spell" ) continue;
-			if ( !["standard", "alwaysPrepared"].includes(spell.system.type.value) ) continue;
+		for (const spell of this.document.items) {
+			if (spell.type !== "spell") continue;
+			if (!["standard", "alwaysPrepared"].includes(spell.system.type.value)) continue;
 			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
 			this.existingSpells.add(sourceId);
 			const source = spell.getFlag("black-flag", "relationship.source");
-			if ( source.special ) source.identifiers?.forEach(i => specialChosenSources.add(i));
+			if (source.special) source.identifiers?.forEach(i => specialChosenSources.add(i));
 		}
 
 		this.slots = [];
 		const circles = new Map();
 
 		// Iterate over each spellcasting source, calculating cantrips, rituals, & spells known
-		for ( const [identifier, source] of Object.entries(this.document.system.spellcasting.sources) ) {
-			for ( const type of ["cantrips", "rituals", "spells", "spellbook"] ) {
-				if ( !source[type] ) continue;
+		for (const [identifier, source] of Object.entries(this.document.system.spellcasting.sources)) {
+			for (const type of ["cantrips", "rituals", "spells", "spellbook"]) {
+				if (!source[type]) continue;
 				const diff = Math.max(source[type].max - source[type].value, 0);
-				const needsSpecial = (type === "spells") && source.spellcasting.spells.special
-					&& !specialChosenSources.has(identifier);
-				this.slots.push(...Array.fromRange(diff).map((s, i) => ({
-					type,
-					mode: "single",
-					source: source.document,
-					special: (i === 0) && needsSpecial,
-					spellcasting: source.spellcasting,
-					selected: new Set()
-				})));
+				const needsSpecial =
+					type === "spells" && source.spellcasting.spells.special && !specialChosenSources.has(identifier);
+				this.slots.push(
+					...Array.fromRange(diff).map((s, i) => ({
+						type,
+						mode: "single",
+						source: source.document,
+						special: i === 0 && needsSpecial,
+						spellcasting: source.spellcasting,
+						selected: new Set()
+					}))
+				);
 			}
-			if ( (source.spellcasting.spells.mode === "all") && !circles.has(source.spellcasting.circle) ) {
+			if (source.spellcasting.spells.mode === "all" && !circles.has(source.spellcasting.circle)) {
 				circles.set(source.spellcasting.circle, source);
 			}
 		}
 
 		// Prepare all learning slots
 		const circleSlots = [];
-		for ( const [circle, label] of Object.entries(CONFIG.BlackFlag.spellCircles.localized) ) {
+		for (const [circle, label] of Object.entries(CONFIG.BlackFlag.spellCircles.localized)) {
 			const source = circles.get(circle);
-			if ( !source ) continue;
-			for ( const ring of Array.fromRange(this.document.system.spellcasting.maxRing, 1) ) {
+			if (!source) continue;
+			for (const ring of Array.fromRange(this.document.system.spellcasting.maxRing, 1)) {
 				circleSlots.push({
 					name: game.i18n.getListFormatter({ type: "unit" }).format([label, numberFormat(ring, { ordinal: true })]),
 					type: "circle",
@@ -65,12 +67,17 @@ export default class SpellManager extends DocumentSheet {
 		this.slots.push(...circleSlots);
 
 		// Begin fetching spells to display
-		this.allSpells = search.compendiums(Item, {
-			type: "spell", indexFields: new Set(["system.circle", "system.school", "system.ring.base", "system.tags"])
-		}).then(spells => spells.reduce((map, spell) => {
-			map.set(spell.uuid, spell);
-			return map;
-		}, new Collection()));
+		this.allSpells = search
+			.compendiums(Item, {
+				type: "spell",
+				indexFields: new Set(["system.circle", "system.school", "system.ring.base", "system.tags"])
+			})
+			.then(spells =>
+				spells.reduce((map, spell) => {
+					map.set(spell.uuid, spell);
+					return map;
+				}, new Collection())
+			);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -163,9 +170,9 @@ export default class SpellManager extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options={}) {
+	async getData(options = {}) {
 		const context = await super.getData(options);
-		if ( !this.currentSlot ) return context;
+		if (!this.currentSlot) return context;
 		const filters = this.prepareFilters();
 		context.restrictions = this.prepareRestrictions(filters);
 
@@ -182,8 +189,8 @@ export default class SpellManager extends DocumentSheet {
 		});
 		context.mode = this.currentSlot.mode;
 
-		context.spells = (await this.allSpells).filter(s =>
-			!this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters)
+		context.spells = (await this.allSpells).filter(
+			s => !this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters)
 		);
 		this.currentSlot.selected ??= new Set(context.spells.map(s => s.uuid));
 		context.spells = context.spells.map(spell => ({
@@ -206,11 +213,11 @@ export default class SpellManager extends DocumentSheet {
 		const schools = this.currentSlot.spellcasting.spells.schools;
 
 		// Always restrict by circle unless current slot is special and there are no schools set
-		if ( !this.currentSlot.special || schools.size ) {
+		if (!this.currentSlot.special || schools.size) {
 			filters.push({ k: "system.circle", o: "has", v: this.currentSlot.spellcasting.circle });
 		}
 
-		switch ( this.currentSlot.type ) {
+		switch (this.currentSlot.type) {
 			case "cantrips":
 				// Cantrips are always ring 0
 				filters.push({ k: "system.ring.base", v: 0 });
@@ -233,7 +240,7 @@ export default class SpellManager extends DocumentSheet {
 				break;
 			case "spells":
 				// Add restriction on school if they are set and current slot isn't special
-				if ( schools.size && !this.currentSlot.special ) filters.push({ k: "system.school", o: "in", v: schools });
+				if (schools.size && !this.currentSlot.special) filters.push({ k: "system.school", o: "in", v: schools });
 			case "spellbook":
 				filters.push(
 					// No cantrips
@@ -262,17 +269,20 @@ export default class SpellManager extends DocumentSheet {
 		const restrictions = {};
 
 		const circle = filters.find(f => f.k === "system.circle");
-		if ( circle ) restrictions.circle = CONFIG.BlackFlag.spellCircles.localized[circle.v];
+		if (circle) restrictions.circle = CONFIG.BlackFlag.spellCircles.localized[circle.v];
 
 		const schools = filters.find(f => f.k === "system.school");
-		if ( schools ) restrictions.schools = game.i18n.getListFormatter({ type: "disjunction" }).format(
-			Array.from(schools.v).map(s => CONFIG.BlackFlag.spellSchools.localized[s]).filter(s => s)
-		);
+		if (schools)
+			restrictions.schools = game.i18n.getListFormatter({ type: "disjunction" }).format(
+				Array.from(schools.v)
+					.map(s => CONFIG.BlackFlag.spellSchools.localized[s])
+					.filter(s => s)
+			);
 
-		const ring = filters.find(f => (f.k === "system.ring.base") && !f.o);
-		const maxRing = filters.find(f => (f.k === "system.ring.base") && (f.o === "lte"));
-		if ( ring?.v ) restrictions.ring = CONFIG.BlackFlag.spellRings()[ring.v];
-		else if ( maxRing ) restrictions.maxRing = CONFIG.BlackFlag.spellRings()[maxRing.v];
+		const ring = filters.find(f => f.k === "system.ring.base" && !f.o);
+		const maxRing = filters.find(f => f.k === "system.ring.base" && f.o === "lte");
+		if (ring?.v) restrictions.ring = CONFIG.BlackFlag.spellRings()[ring.v];
+		else if (maxRing) restrictions.maxRing = CONFIG.BlackFlag.spellRings()[maxRing.v];
 
 		return restrictions;
 	}
@@ -299,8 +309,8 @@ export default class SpellManager extends DocumentSheet {
 		let nextIndex = this.selectedSlot;
 		do {
 			nextIndex += 1;
-			if ( nextIndex > this.slots.length - 1 ) nextIndex = 0;
-		} while ( this.slots[nextIndex]?.selected.size && (nextIndex !== this.selectedSlot) );
+			if (nextIndex > this.slots.length - 1) nextIndex = 0;
+		} while (this.slots[nextIndex]?.selected.size && nextIndex !== this.selectedSlot);
 		this.selectedSlot = nextIndex;
 		this.render();
 	}
@@ -311,7 +321,7 @@ export default class SpellManager extends DocumentSheet {
 	_onChangeInput(event) {
 		super._onChangeInput(event);
 
-		switch ( event.target.name ) {
+		switch (event.target.name) {
 			case "selected-slot":
 				this.selectedSlot = Number(event.target.value);
 				return this.render();
@@ -319,9 +329,9 @@ export default class SpellManager extends DocumentSheet {
 				this.currentSlot.selected = new Set([event.target.value]);
 				return this.render();
 		}
-		if ( event.target.name.startsWith("selected.") ) {
+		if (event.target.name.startsWith("selected.")) {
 			const id = event.target.name.replace("selected.", "");
-			if ( event.target.checked ) this.currentSlot.selected.add(id);
+			if (event.target.checked) this.currentSlot.selected.add(id);
 			else this.currentSlot.selected.delete(id);
 			return this.render();
 		}
@@ -343,15 +353,17 @@ export default class SpellManager extends DocumentSheet {
 
 		source.identifiers ??= [];
 		source.identifiers.push(slot.source.identifier);
-		if ( slot.type === "spellbook" ) source.spellbookOrigin = "free";
-		if ( slot.special ) source.special = true;
+		if (slot.type === "spellbook") source.spellbookOrigin = "free";
+		if (slot.special) source.special = true;
 
-		const prepared = foundry.utils.getProperty(spellData, "system.ring.base") > 0
-			? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared : true;
+		const prepared =
+			foundry.utils.getProperty(spellData, "system.ring.base") > 0
+				? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared
+				: true;
 		foundry.utils.setProperty(spellData, "system.type.value", prepared ? "standard" : "alwaysPrepared");
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
-		if ( remote ) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
+		if (remote) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
 		return spellData;
 	}
 
@@ -364,7 +376,8 @@ export default class SpellManager extends DocumentSheet {
 		);
 		await this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
 		await this.document.setFlag("black-flag", "spellsLearned", {
-			learned: true, maxRing: this.document.system.spellcasting.maxRing
+			learned: true,
+			maxRing: this.document.system.spellcasting.maxRing
 		});
 	}
 }

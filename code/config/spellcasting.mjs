@@ -156,27 +156,27 @@ export const spellPreparationModes = {
 export const spellSlotTable = [
 	// 1  2  3  4  5
 	[],
-	[, 2],                         // Level 1
-	[, 3],                         // Level 2
-	[, 4, 2],                      // Level 3
-	[, 4, 3],                      // Level 4
-	[, 4, 3, 2],                   // Level 5
-	[, 4, 3, 3],                   // Level 6
-	[, 4, 3, 3, 1],                // Level 7
-	[, 4, 3, 3, 2],                // Level 8
-	[, 4, 3, 3, 3, 1],             // Level 9
-	[, 4, 3, 3, 3, 2],             // Level 10
+	[, 2], // Level 1
+	[, 3], // Level 2
+	[, 4, 2], // Level 3
+	[, 4, 3], // Level 4
+	[, 4, 3, 2], // Level 5
+	[, 4, 3, 3], // Level 6
+	[, 4, 3, 3, 1], // Level 7
+	[, 4, 3, 3, 2], // Level 8
+	[, 4, 3, 3, 3, 1], // Level 9
+	[, 4, 3, 3, 3, 2], // Level 10
 	// 1  2  3  4  5  6  7  8  9
-	[, 4, 3, 3, 3, 2, 1],          // Level 11
-	[, 4, 3, 3, 3, 2, 1],          // Level 12
-	[, 4, 3, 3, 3, 2, 1, 1],       // Level 13
-	[, 4, 3, 3, 3, 2, 1, 1],       // Level 14
-	[, 4, 3, 3, 3, 2, 1, 1, 1],    // Level 15
-	[, 4, 3, 3, 3, 2, 1, 1, 1],    // Level 16
+	[, 4, 3, 3, 3, 2, 1], // Level 11
+	[, 4, 3, 3, 3, 2, 1], // Level 12
+	[, 4, 3, 3, 3, 2, 1, 1], // Level 13
+	[, 4, 3, 3, 3, 2, 1, 1], // Level 14
+	[, 4, 3, 3, 3, 2, 1, 1, 1], // Level 15
+	[, 4, 3, 3, 3, 2, 1, 1, 1], // Level 16
 	[, 4, 3, 3, 3, 2, 1, 1, 1, 1], // Level 17
 	[, 4, 3, 3, 3, 3, 1, 1, 1, 1], // Level 18
 	[, 4, 3, 3, 3, 3, 2, 1, 1, 1], // Level 19
-	[, 4, 3, 3, 3, 3, 2, 1, 1, 1]  // Level 20
+	[, 4, 3, 3, 3, 3, 2, 1, 1, 1] // Level 20
 ];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -186,12 +186,13 @@ export const spellSlotTable = [
  * @param {boolean} [plural=false] - Return the plural names where relevant.
  * @returns {[key: number]: string]}
  */
-export function spellRings(plural=false) {
+export function spellRings(plural = false) {
 	return Array.fromRange(maxSpellRing + 1).reduce((obj, l) => {
-		if ( l === 0 ) obj[l] = game.i18n.localize(`BF.Spell.Ring.Cantrip[${plural ? "other" : "one"}]`);
-		else obj[l] = game.i18n.format("BF.Spell.Ring.Level", {
-			number: numberFormat(l, { ordinal: true })
-		});
+		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Ring.Cantrip[${plural ? "other" : "one"}]`);
+		else
+			obj[l] = game.i18n.format("BF.Spell.Ring.Level", {
+				number: numberFormat(l, { ordinal: true })
+			});
 		return obj;
 	}, {});
 }

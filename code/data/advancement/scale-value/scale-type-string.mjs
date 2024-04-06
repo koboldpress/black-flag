@@ -6,7 +6,7 @@ const { StringField } = foundry.data.fields;
  * Base scale value data type that stores generic string values.
  */
 export default class ScaleTypeString extends foundry.abstract.DataModel {
-	constructor(data={}, options={}) {
+	constructor(data = {}, options = {}) {
 		const explicitKeys = filteredKeys(data);
 		super(data, options);
 		Object.defineProperty(this, "_explicitKeys", {
@@ -20,7 +20,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 
 	static defineSchema() {
 		return {
-			value: new StringField({blank: false})
+			value: new StringField({ blank: false })
 		};
 	}
 
@@ -55,7 +55,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 * @returns {ScaleValueType|null}
 	 */
 	static convertFrom(original, options) {
-		return new this({value: original.formula}, options);
+		return new this({ value: original.formula }, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -67,7 +67,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 * @returns {ScaleTypeString}
 	 */
 	static merge(value, lastValue) {
-		Object.keys(lastValue ?? {}).forEach(k => value[k] ??= lastValue[k]);
+		Object.keys(lastValue ?? {}).forEach(k => (value[k] ??= lastValue[k]));
 		return value;
 	}
 
@@ -109,7 +109,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 	 */
 	get placeholder() {
 		const placeholder = {};
-		this._explicitKeys.forEach(k => placeholder[k] = this[k]);
+		this._explicitKeys.forEach(k => (placeholder[k] = this[k]));
 		placeholder.value ??= "";
 		return placeholder;
 	}

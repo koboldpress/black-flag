@@ -6,11 +6,10 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying the advancement on an item sheet.
  */
 export default class AdvancementElement extends AppAssociatedElement {
-
 	connectedCallback() {
 		super.connectedCallback();
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
+		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
@@ -26,7 +25,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getItemAdvancementContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-advancement-id]", contextOptions);
+		if (contextOptions) ContextMenu.create(this.app, this, "[data-advancement-id]", contextOptions);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -74,7 +73,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 		const context = {};
 
 		const needingConfiguration = advancement.filter(a => !a.levels.length);
-		if ( needingConfiguration.length ) {
+		if (needingConfiguration.length) {
 			context.unconfigured = {
 				items: needingConfiguration.map(a => ({
 					id: a.id,
@@ -86,7 +85,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 			};
 		}
 
-		for ( const level of advancement.levels ) {
+		for (const level of advancement.levels) {
 			const levels = { character: level, class: level };
 			const items = advancement.byLevel(level).map(a => ({
 				id: a.id,
@@ -96,7 +95,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 				classRestriction: a.level.classRestriction,
 				summary: a.summaryForLevel(levels)
 			}));
-			if ( !items.length ) continue;
+			if (!items.length) continue;
 			context[level] = { items: items.sort((a, b) => a.order.localeCompare(b.order)) };
 		}
 
@@ -150,11 +149,14 @@ export default class AdvancementElement extends AppAssociatedElement {
 	#onAction(target, action) {
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.advancement.get(id);
-		if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
-		switch ( action ) {
-			case "add": return AdvancementSelection.createDialog(this.item);
-			case "edit": return advancement.sheet.render(true);
-			case "delete": return advancement.deleteDialog();
+		if (["edit", "delete", "duplicate"].includes(action) && !advancement) return;
+		switch (action) {
+			case "add":
+				return AdvancementSelection.createDialog(this.item);
+			case "edit":
+				return advancement.sheet.render(true);
+			case "delete":
+				return advancement.deleteDialog();
 			case "duplicate":
 				const data = advancement.toObject();
 				delete data._id;

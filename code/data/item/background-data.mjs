@@ -10,9 +10,10 @@ import DescriptionTemplate from "./templates/description-template.mjs";
  * @mixes {DescriptionTemplate}
  */
 export default class BackgroundData extends ItemDataModel.mixin(
-	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+	AdvancementTemplate,
+	ConceptTemplate,
+	DescriptionTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -30,13 +31,19 @@ export default class BackgroundData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateAdvancement(data, options, user) {
-		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+		if (data._id || foundry.utils.hasProperty(data, "system.advancement")) return;
 		this._createInitialAdvancement([
 			{ type: "trait", title: "Skill Proficiencies", configuration: { choices: [{ count: 2, pool: "skills:*" }] } },
 			{ type: "trait", title: "Additional Proficiencies" },
-			{ type: "chooseFeatures", title: "Talent", configuration: {
-				choices: { 0: 1 }, allowDrops: false, type: "talent"
-			} }
+			{
+				type: "chooseFeatures",
+				title: "Talent",
+				configuration: {
+					choices: { 0: 1 },
+					allowDrops: false,
+					type: "talent"
+				}
+			}
 		]);
 	}
 }

@@ -26,7 +26,7 @@
  */
 export default class MappingField extends foundry.data.fields.ObjectField {
 	constructor(model, options) {
-		if ( !(model instanceof foundry.data.fields.DataField) ) {
+		if (!(model instanceof foundry.data.fields.DataField)) {
 			throw new Error("MappingField must have a DataField as its contained element");
 		}
 		super(options);
@@ -51,7 +51,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_cleanType(value, options) {
-		Object.entries(value).forEach(([k, v]) => value[k] = this.model.clean(v, options));
+		Object.entries(value).forEach(([k, v]) => (value[k] = this.model.clean(v, options)));
 		return value;
 	}
 
@@ -63,10 +63,13 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	 */
 	_getInitialKeys() {
 		const keys = this.initialKeys;
-		switch ( foundry.utils.getType(keys) ) {
-			case "Array": return keys;
-			case "Object": return Object.keys(keys);
-			case "Set": return Array.from(keys);
+		switch (foundry.utils.getType(keys)) {
+			case "Array":
+				return keys;
+			case "Object":
+				return Object.keys(keys);
+			case "Set":
+				return Array.from(keys);
 		}
 	}
 
@@ -75,8 +78,8 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	getInitialValue(data) {
 		const keys = this._getInitialKeys();
 		const initial = super.getInitialValue(data);
-		if ( !keys || !foundry.utils.isEmpty(initial) ) return initial;
-		for ( const key of keys ) initial[key] = this._getInitialValueForKey(key);
+		if (!keys || !foundry.utils.isEmpty(initial)) return initial;
+		for (const key of keys) initial[key] = this._getInitialValueForKey(key);
 		return initial;
 	}
 
@@ -95,10 +98,10 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_validateType(value, options={}) {
-		if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
+	_validateType(value, options = {}) {
+		if (foundry.utils.getType(value) !== "Object") throw new Error("must be an Object");
 		const errors = this._validateValues(value, options);
-		if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.validation.DataModelValidationError(errors);
+		if (!foundry.utils.isEmpty(errors)) throw new foundry.data.validation.DataModelValidationError(errors);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -111,21 +114,21 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	 */
 	_validateValues(value, options) {
 		const errors = {};
-		for ( const [k, v] of Object.entries(value) ) {
+		for (const [k, v] of Object.entries(value)) {
 			const error = this.model.validate(v, options);
-			if ( error ) errors[k] = error;
+			if (error) errors[k] = error;
 		}
 		return errors;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	initialize(value, model, options={}) {
-		if ( !value ) return value;
+	initialize(value, model, options = {}) {
+		if (!value) return value;
 		const obj = {};
 		const initialKeys = this._getInitialKeys() ?? [];
 		const keys = this.prepareKeys ? initialKeys : Object.keys(value);
-		for ( const key of keys ) {
+		for (const key of keys) {
 			const data = value[key] ?? this._getInitialValueForKey(key, value);
 			obj[key] = this.model.initialize(data, model, options);
 		}
@@ -135,8 +138,8 @@ export default class MappingField extends foundry.data.fields.ObjectField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_getField(path) {
-		if ( path.length === 0 ) return this;
-		else if ( path.length === 1 ) return this.model;
+		if (path.length === 0) return this;
+		else if (path.length === 1) return this.model;
 		path.shift();
 		return this.model._getField(path);
 	}

@@ -1,5 +1,4 @@
 export default class DragDrop {
-
 	/**
 	 * Data about the ongoing drag event.
 	 * @type {{event: DragEvent, data: *, document: Document}|null}
@@ -15,7 +14,7 @@ export default class DragDrop {
 	 */
 	static beginDragEvent(event, data) {
 		let doc;
-		if ( foundry.utils.getType(data?.toDragData) === "function" ) {
+		if (foundry.utils.getType(data?.toDragData) === "function") {
 			doc = data;
 			data = doc.toDragData();
 		} else {
@@ -44,8 +43,8 @@ export default class DragDrop {
 	 */
 	static getDragData(event) {
 		const data = TextEditor.getDragEventData(event);
-		if ( !foundry.utils.isEmpty(data) ) return { data };
-		if ( this.#currentDrag?.data ) return { data: this.#currentDrag.data, document: this.#currentDrag.document };
+		if (!foundry.utils.isEmpty(data)) return { data };
+		if (this.#currentDrag?.data) return { data: this.#currentDrag.data, document: this.#currentDrag.document };
 		return {};
 	}
 }

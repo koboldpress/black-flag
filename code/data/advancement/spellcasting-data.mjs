@@ -24,42 +24,58 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
  */
 export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
-
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			type: new StringField({initial: "leveled", label: "BF.Spellcasting.Type.Label"}),
+			type: new StringField({ initial: "leveled", label: "BF.Spellcasting.Type.Label" }),
 			progression: new StringField({
-				label: "BF.Spellcasting.Progression.Label", hint: "BF.Spellcasting.Progression.Hint"
+				label: "BF.Spellcasting.Progression.Label",
+				hint: "BF.Spellcasting.Progression.Hint"
 			}),
-			ability: new StringField({label: "BF.Spellcasting.Ability.Label"}),
-			circle: new StringField({label: "BF.Spell.Circle.Label"}),
-			cantrips: new SchemaField({
-				scale: new StringField()
-			}, {label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint"}),
-			rituals: new SchemaField({
-				scale: new StringField()
-			}, {label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint"}),
-			spells: new SchemaField({
-				scale: new StringField(),
-				mode: new StringField({
-					label: "BF.Spellcasting.Learning.Mode.Label", hint: "BF.Spellcasting.Learning.Mode.Hint"
-				}),
-				replacement: new BooleanField({
-					initial: true, label: "BF.Spellcasting.Learning.Replacement.Label",
-					hint: "BF.Spellcasting.Learning.Replacement.Hint"
-				}),
-				schools: new SetField(new StringField(), {
-					label: "BF.Spellcasting.Learning.Schools.Label", hint: "BF.Spellcasting.Learning.Schools.Hint"
-				}),
-				special: new BooleanField({
-					label: "BF.Spellcasting.Learning.Special.Label", hint: "BF.Spellcasting.Learning.Special.Hint"
-				}),
-				spellbook: new SchemaField({
-					firstLevel: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel"}),
-					otherLevels: new NumberField({integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels"})
-				}, {label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint"})
-			}, {label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint"})
+			ability: new StringField({ label: "BF.Spellcasting.Ability.Label" }),
+			circle: new StringField({ label: "BF.Spell.Circle.Label" }),
+			cantrips: new SchemaField(
+				{
+					scale: new StringField()
+				},
+				{ label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint" }
+			),
+			rituals: new SchemaField(
+				{
+					scale: new StringField()
+				},
+				{ label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint" }
+			),
+			spells: new SchemaField(
+				{
+					scale: new StringField(),
+					mode: new StringField({
+						label: "BF.Spellcasting.Learning.Mode.Label",
+						hint: "BF.Spellcasting.Learning.Mode.Hint"
+					}),
+					replacement: new BooleanField({
+						initial: true,
+						label: "BF.Spellcasting.Learning.Replacement.Label",
+						hint: "BF.Spellcasting.Learning.Replacement.Hint"
+					}),
+					schools: new SetField(new StringField(), {
+						label: "BF.Spellcasting.Learning.Schools.Label",
+						hint: "BF.Spellcasting.Learning.Schools.Hint"
+					}),
+					special: new BooleanField({
+						label: "BF.Spellcasting.Learning.Special.Label",
+						hint: "BF.Spellcasting.Learning.Special.Hint"
+					}),
+					spellbook: new SchemaField(
+						{
+							firstLevel: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel" }),
+							otherLevels: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels" })
+						},
+						{ label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint" }
+					)
+				},
+				{ label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint" }
+			)
 		};
 	}
 
@@ -72,10 +88,10 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	 * @type {string|null}
 	 */
 	get spellcastingAbility() {
-		if ( this.ability ) return this.ability;
+		if (this.ability) return this.ability;
 
 		let parent = this.parent.item;
-		if ( (parent?.type === "subclass") && parent.isEmbedded ) {
+		if (parent?.type === "subclass" && parent.isEmbedded) {
 			parent = parent.actor.system.progression?.classes[parent.system.identifier.class]?.document;
 		}
 
@@ -94,11 +110,13 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 		const prepared = this.preparation ? "BF.Spellcasting.Preparation.Trait" : null;
 		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.type];
 		const progression = typeConfig?.progression?.[this.progression]?.trait ?? typeConfig?.trait;
-		return game.i18n.format("BF.Spellcasting.Trait.Display", {
-			circle: circle ? game.i18n.localize(circle) : "",
-			prepared: prepared ? game.i18n.localize(prepared) : "",
-			progression: progression ? game.i18n.localize(progression) : ""
-		}).trim();
+		return game.i18n
+			.format("BF.Spellcasting.Trait.Display", {
+				circle: circle ? game.i18n.localize(circle) : "",
+				prepared: prepared ? game.i18n.localize(prepared) : "",
+				progression: progression ? game.i18n.localize(progression) : ""
+			})
+			.trim();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -121,7 +139,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			Object.defineProperty(obj, "known", {
 				get() {
 					const scaleValue = obj.scaleValue;
-					if ( !scaleValue ) return 0;
+					if (!scaleValue) return 0;
 					return simplifyBonus(
 						`@scale.${scaleValue.parentIdentifier}.${scaleValue.identifier}`,
 						item.getRollData({ deterministic: true })

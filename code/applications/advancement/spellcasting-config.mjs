@@ -4,7 +4,6 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for spellcasting.
  */
 export default class SpellcastingConfig extends AdvancementConfig {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -56,13 +55,16 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			};
 			return obj;
 		}, {});
-		if ( context.configuration.spells.mode !== "limited" ) delete context.known.spells;
+		if (context.configuration.spells.mode !== "limited") delete context.known.spells;
 		context.showClassRestriction = false;
 
 		const schools = this.advancement.configuration.spells.schools;
-		if ( schools.size ) context.schoolLabel = game.i18n.getListFormatter({ type: "unit" }).format(
-			Array.from(schools).map(s => CONFIG.BlackFlag.spellSchools.localized[s]).filter(s => s)
-		);
+		if (schools.size)
+			context.schoolLabel = game.i18n.getListFormatter({ type: "unit" }).format(
+				Array.from(schools)
+					.map(s => CONFIG.BlackFlag.spellSchools.localized[s])
+					.filter(s => s)
+			);
 		else context.schoolLabel = game.i18n.localize("BF.Spellcasting.Learning.Schools.NoRestriction");
 
 		return context;
@@ -78,7 +80,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		const html = jQuery[0];
 
 		// Activate formula buttons
-		for ( const element of html.querySelectorAll('[data-action="known"]') ) {
+		for (const element of html.querySelectorAll('[data-action="known"]')) {
 			element.addEventListener("click", this._onKnownAction.bind(this));
 		}
 	}
@@ -92,13 +94,13 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	async _onKnownAction(event) {
 		const { subAction } = event.currentTarget.dataset;
 		const name = event.target.closest("[data-name]").dataset.name;
-		switch ( subAction ) {
+		switch (subAction) {
 			case "create":
-				if ( this.advancement.configuration[name].scaleValue ) return;
+				if (this.advancement.configuration[name].scaleValue) return;
 				const title = game.i18n.localize(this.constructor.KNOWN[name].label);
 				const scaleData = { type: "scaleValue", title, identifier: `${name}-known`, configuration: { type: "number" } };
 				const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData], { renderSheet: true });
-				await this.advancement.update({[`configuration.${name}.scale`]: scale.id});
+				await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
 				break;
 			case "delete":
 				await this.advancement.configuration[name].scaleValue?.deleteDialog();

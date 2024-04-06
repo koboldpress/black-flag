@@ -11,7 +11,6 @@ const { HTMLField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} description.introduction - Introductory description for the subclass.
  */
 export default class SubclassJournalPageData extends BaseDataModel {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -29,11 +28,12 @@ export default class SubclassJournalPageData extends BaseDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			item: new StringField({label: "BF.JournalPage.Subclass.Item"}),
+			item: new StringField({ label: "BF.JournalPage.Subclass.Item" }),
 			// TODO: Replace with UUIDField when possible
 			description: new SchemaField({
 				introduction: new HTMLField({
-					label: "BF.JournalPage.Class.Introduction.Label", hint: "BF.JournalPage.Subclass.Introduction.Hint"
+					label: "BF.JournalPage.Class.Introduction.Label",
+					hint: "BF.JournalPage.Subclass.Introduction.Hint"
 				})
 			})
 		};

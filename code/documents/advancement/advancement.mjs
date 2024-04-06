@@ -26,7 +26,6 @@ class AdvancementError extends Error {
  * @abstract
  */
 export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
-
 	static ERROR = AdvancementError;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -56,18 +55,24 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * Configuration information for this advancement type.
 	 * @type {AdvancementMetadata}
 	 */
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		order: 100,
-		icon: "icons/svg/upgrade.svg",
-		title: "BF.Advancement.Core.Title",
-		hint: "",
-		identifier: {
-			configurable: false,
-			hint: ""
-		},
-		configurableHint: false,
-		multiLevel: false
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				order: 100,
+				icon: "icons/svg/upgrade.svg",
+				title: "BF.Advancement.Core.Title",
+				hint: "",
+				identifier: {
+					configurable: false,
+					hint: ""
+				},
+				configurableHint: false,
+				multiLevel: false
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -89,10 +94,13 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @type {number}
 	 */
 	get minimumLevel() {
-		switch ( this.item.type ) {
-			case "class": return 1;
-			case "subclass": return 3;
-			default: return this.level.classIdentifier ? 1 : 0;
+		switch (this.item.type) {
+			case "class":
+				return 1;
+			case "subclass":
+				return 3;
+			default:
+				return this.level.classIdentifier ? 1 : 0;
 		}
 	}
 
@@ -105,7 +113,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	get value() {
 		const value = foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
 		const DataModel = this.metadata.dataModels?.value;
-		if ( !DataModel || value instanceof DataModel ) return value;
+		if (!DataModel || value instanceof DataModel) return value;
 		return new DataModel(value, { parent: this });
 	}
 
@@ -126,17 +134,17 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	prepareData() {
 		this.title = this.title || game.i18n.localize(this.metadata.title);
 		this.icon = this.icon || this.metadata.icon;
-		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.metadata.multiLevel ) this.level.value ??= this.minimumLevel;
-		if ( foundry.utils.getType(this.configuration?.prepareData) === "function" ) this.configuration.prepareData();
-		if ( foundry.utils.getType(this.value?.prepareData) === "function" ) this.value.prepareData();
+		this.identifier = this.identifier || this.title.slugify({ strict: true });
+		if (!this.metadata.multiLevel) this.level.value ??= this.minimumLevel;
+		if (foundry.utils.getType(this.configuration?.prepareData) === "function") this.configuration.prepareData();
+		if (foundry.utils.getType(this.value?.prepareData) === "function") this.value.prepareData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreate(data) {
-		if ( foundry.utils.hasProperty(data, "level") || this.metadata.multiLevel ) return;
-		this.updateSource({"level.value": this.minimumLevel});
+		if (foundry.utils.hasProperty(data, "level") || this.metadata.multiLevel) return;
+		this.updateSource({ "level.value": this.minimumLevel });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -193,7 +201,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {object} [options.flow=false] - Is this title being used in an advancement flow?
 	 * @returns {string} - HTML title with any level-specific information.
 	 */
-	titleForLevel(levels, { flow=false }={}) {
+	titleForLevel(levels, { flow = false } = {}) {
 		return this.title;
 	}
 
@@ -214,7 +222,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {object} [options.flow=false] - Is this summary being used in an advancement flow?
 	 * @returns {string} - HTML content of the summary.
 	 */
-	summaryForLevel(levels, { flow=false }={}) {
+	summaryForLevel(levels, { flow = false } = {}) {
 		return "";
 	}
 
@@ -224,7 +232,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
 	static _validateDocumentCreation(data, context) {
 		const c = CONFIG.Advancement.types[data.type];
-		if ( !c?.validItemTypes.has(context.parent.type) || !c?.documentClass.availableForItem(context.parent) ) {
+		if (!c?.validItemTypes.has(context.parent.type) || !c?.documentClass.availableForItem(context.parent)) {
 			throw new Error(`${data.type} advancement cannot be added to ${context.parent.name}`);
 		}
 	}
@@ -237,9 +245,9 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {DocumentModificationContext} [context={}] - Additional context which customizes the update workflow.
 	 * @returns {Promise<Advancement>} - Updated advancement instance.
 	 */
-	async updateValue(updates={}, context={}) {
-		if ( !this.parent.isEmbedded ) throw new Error("Cannot update values for an advancement not stored on an actor.");
-		await this.parent.actor.update({[`system.progression.advancement.${this.valueID}`]: updates}, context);
+	async updateValue(updates = {}, context = {}) {
+		if (!this.parent.isEmbedded) throw new Error("Cannot update values for an advancement not stored on an actor.");
+		await this.parent.actor.update({ [`system.progression.advancement.${this.valueID}`]: updates }, context);
 		return this;
 	}
 
@@ -266,8 +274,9 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @returns {AdvancementFlow}
 	 */
 	flow(actor, levels, options) {
-		const FlowClass = CONFIG.Advancement.types[this.type]?.sheetClasses?.flow
-			?? CONFIG.Advancement.types[CONST.BASE_DOCUMENT_TYPE].sheetClasses.flow;
+		const FlowClass =
+			CONFIG.Advancement.types[this.type]?.sheetClasses?.flow ??
+			CONFIG.Advancement.types[CONST.BASE_DOCUMENT_TYPE].sheetClasses.flow;
 		return new FlowClass(actor, this, levels, options);
 	}
 
@@ -282,7 +291,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @returns {EffectChangeData[]}
 	 * @abstract
 	 */
-	changes(levels) { }
+	changes(levels) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -295,7 +304,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {boolean} [options.render=true] - Should the update re-render the actor?
 	 * @abstract
 	 */
-	async apply(levels, data, { initial=false, render=true }={}) { }
+	async apply(levels, data, { initial = false, render = true } = {}) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -307,7 +316,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {boolean} [options.render=true] - Should the update re-render the actor?
 	 * @abstract
 	 */
-	async reverse(levels, data, { render=true }={}) { }
+	async reverse(levels, data, { render = true } = {}) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Helper Methods            */
@@ -319,22 +328,20 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @returns {number|null}
 	 */
 	relavantLevel(levels) {
-		if ( (levels.character === 0) || (levels.class === 0) ) return 0;
+		if (levels.character === 0 || levels.class === 0) return 0;
 		let identifier;
 
 		// Classes & subclasses are always based on class level, as long as identifiers match
-		if ( this.item.type === "class" ) identifier = this.item.identifier;
-		else if ( this.item.type === "subclass" ) identifier = this.item.system.identifier.class;
-
+		if (this.item.type === "class") identifier = this.item.identifier;
+		else if (this.item.type === "subclass") identifier = this.item.system.identifier.class;
 		// Class level if explicit class identifier is set and it matches provided identifier
-		else if ( this.level.classIdentifier ) identifier = this.level.classIdentifier;
-
+		else if (this.level.classIdentifier) identifier = this.level.classIdentifier;
 		// Otherwise revert to character level
 		else return levels.character;
 
-		if ( this.level.classRestriction ) {
+		if (this.level.classRestriction) {
 			const isOriginalClass = this.item.actor?.system.progression.classes[identifier]?.originalClass;
-			if ( (this.level.classRestriction === "original") !== isOriginalClass ) return null;
+			if ((this.level.classRestriction === "original") !== isOriginalClass) return null;
 		}
 
 		return identifier === levels.identifier ? levels.class : !levels.identifier ? levels.character : null;

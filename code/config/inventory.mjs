@@ -26,7 +26,7 @@ const currencySection = () => ({
 	id: "currency",
 	tab: "currency",
 	label: "BF.Item.Type.Currency[one]",
-	filters: [{k: "type", v: "currency"}],
+	filters: [{ k: "type", v: "currency" }],
 	options: { sorting: "currency" }
 });
 
@@ -41,9 +41,9 @@ export const sheetSections = {
 			id: "ring-*",
 			tab: "spellcasting",
 			filters: [
-				{k: "type", v: "spell"},
-				{k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined]},
-				{o: "NOT", v: {k: "system.tags", o: "has", v: "ritual"}}
+				{ k: "type", v: "spell" },
+				{ k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined] },
+				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {
 				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
@@ -51,12 +51,18 @@ export const sheetSections = {
 					const cantrip = number === 0;
 					const id = cantrip ? "cantrip" : `ring-${number}`;
 					const ring = document.system.spellcasting.rings[id] ?? {};
-					return foundry.utils.mergeObject(sectionData, {
-						id, label,
-						filters: [...sectionData.filters, {k: "system.ring.base", v: number}],
-						create: [{type: "spell", "system.ring.base": number, "system.type.value": "standard"}],
-						options: { autoHide: !ring.max && !cantrip }, ring
-					}, {inplace: false});
+					return foundry.utils.mergeObject(
+						sectionData,
+						{
+							id,
+							label,
+							filters: [...sectionData.filters, { k: "system.ring.base", v: number }],
+							create: [{ type: "spell", "system.ring.base": number, "system.type.value": "standard" }],
+							options: { autoHide: !ring.max && !cantrip },
+							ring
+						},
+						{ inplace: false }
+					);
 				});
 			}
 		},
@@ -65,146 +71,175 @@ export const sheetSections = {
 			tab: "spellcasting",
 			label: "BF.Spell.Preparation.Mode.Rituals",
 			filters: [
-				{k: "type", v: "spell"},
-				{k: "system.tags", o: "has", v: "ritual"}
+				{ k: "type", v: "spell" },
+				{ k: "system.tags", o: "has", v: "ritual" }
 			],
-			options: {autoHide: true}
+			options: { autoHide: true }
 		},
 		{
 			id: "atWill",
 			tab: "spellcasting",
 			label: "BF.Spell.Preparation.Mode.AtWill",
-			filters: [{k: "type", v: "spell"}, {k: "system.type.value", v: "atWill"}],
-			create: [{type: "spell", "system.type.value": "atWill"}],
-			options: {autoHide: true}
+			filters: [
+				{ k: "type", v: "spell" },
+				{ k: "system.type.value", v: "atWill" }
+			],
+			create: [{ type: "spell", "system.type.value": "atWill" }],
+			options: { autoHide: true }
 		},
 		{
 			id: "innate",
 			tab: "spellcasting",
 			label: "BF.Spell.Preparation.Mode.Innate",
-			filters: [{k: "type", v: "spell"}, {k: "system.type.value", v: "innate"}],
-			create: [{type: "spell", "system.type.value": "innate"}],
-			options: {autoHide: true}
+			filters: [
+				{ k: "type", v: "spell" },
+				{ k: "system.type.value", v: "innate" }
+			],
+			create: [{ type: "spell", "system.type.value": "innate" }],
+			options: { autoHide: true }
 		},
 		{
 			id: "weapons",
 			tab: "inventory",
 			label: "BF.Item.Type.Weapon[other]",
-			filters: [{k: "type", v: "weapon"}],
-			create: [{type: "weapon"}]
+			filters: [{ k: "type", v: "weapon" }],
+			create: [{ type: "weapon" }]
 		},
 		{
 			id: "ammunition",
 			tab: "inventory",
 			label: "BF.Item.Type.Ammunition[other]",
-			filters: [{k: "type", v: "ammunition"}],
-			create: [{type: "ammunition"}],
+			filters: [{ k: "type", v: "ammunition" }],
+			create: [{ type: "ammunition" }],
 			options: { autoHide: true }
 		},
 		{
 			id: "armor",
 			tab: "inventory",
 			label: "BF.Item.Type.Armor[other]",
-			filters: [{k: "type", v: "armor"}],
-			create: [{type: "armor"}]
+			filters: [{ k: "type", v: "armor" }],
+			create: [{ type: "armor" }]
 		},
 		{
 			id: "gear",
 			tab: "inventory",
 			label: "BF.Item.Type.Gear[other]",
-			filters: [{k: "type", v: "gear"}],
-			create: [{type: "gear"}]
+			filters: [{ k: "type", v: "gear" }],
+			create: [{ type: "gear" }]
 		},
 		{
 			id: "tools",
 			tab: "inventory",
 			label: "BF.Item.Type.Tool[other]",
-			filters: [{k: "type", v: "tool"}],
-			create: [{type: "tool"}]
+			filters: [{ k: "type", v: "tool" }],
+			create: [{ type: "tool" }]
 		},
 		{
 			id: "consumables",
 			tab: "inventory",
 			label: "BF.Item.Type.Consumable[other]",
-			filters: [{k: "type", v: "consumable"}],
-			create: [{type: "consumable"}] // TODO: Add option to create sub-types directly
+			filters: [{ k: "type", v: "consumable" }],
+			create: [{ type: "consumable" }] // TODO: Add option to create sub-types directly
 		},
 		{
 			id: "containers",
 			tab: "inventory",
 			label: "BF.Item.Type.Container[other]",
-			filters: [{k: "type", v: "container"}],
-			create: [{type: "container"}]
+			filters: [{ k: "type", v: "container" }],
+			create: [{ type: "container" }]
 		},
 		{
 			id: "sundries",
 			tab: "inventory",
 			label: "BF.Item.Type.Sundry[other]",
-			filters: [{k: "type", v: "sundry"}],
-			create: [{type: "sundry"}],
+			filters: [{ k: "type", v: "sundry" }],
+			create: [{ type: "sundry" }],
 			options: { autoHide: true }
 		},
 		{
 			id: "class-features",
 			tab: "features",
 			label: "BF.Feature.Category.Class[other]",
-			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "class"}],
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.category", v: "class" }
+			],
 			expand: (document, sectionData) => {
-				if ( document.system.progression.level === 0 ) return [];
-				return Object.entries(document.system.progression.classes).map(([identifier, cls]) => {
-					const label = pluralRule => game.i18n.format(
-						`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name }
-					);
-					return foundry.utils.mergeObject(sectionData, {
-						id: `class-${identifier}`, label: label("other"),
-						filters: [...sectionData.filters, {o: "OR", v: [
-							{k: "system.identifier.associated", v: identifier},
-							{k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith"}
-						]}],
-						create: [{
-							label: label("one"),
-							type: "feature",
-							"system.type.category": "class",
-							"system.identifier.associated": identifier
-						}],
-						levels: cls.levels
-					}, {inplace: false});
-				}).sort((lhs, rhs) => rhs.levels - lhs.levels);
+				if (document.system.progression.level === 0) return [];
+				return Object.entries(document.system.progression.classes)
+					.map(([identifier, cls]) => {
+						const label = pluralRule =>
+							game.i18n.format(`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name });
+						return foundry.utils.mergeObject(
+							sectionData,
+							{
+								id: `class-${identifier}`,
+								label: label("other"),
+								filters: [
+									...sectionData.filters,
+									{
+										o: "OR",
+										v: [
+											{ k: "system.identifier.associated", v: identifier },
+											{ k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith" }
+										]
+									}
+								],
+								create: [
+									{
+										label: label("one"),
+										type: "feature",
+										"system.type.category": "class",
+										"system.identifier.associated": identifier
+									}
+								],
+								levels: cls.levels
+							},
+							{ inplace: false }
+						);
+					})
+					.sort((lhs, rhs) => rhs.levels - lhs.levels);
 			}
 		},
 		{
 			id: "talents",
 			tab: "features",
 			label: "BF.Item.Type.Talent[other]",
-			filters: [{k: "type", v: "talent"}],
-			create: [{type: "talent"}]
+			filters: [{ k: "type", v: "talent" }],
+			create: [{ type: "talent" }]
 		},
 		{
 			id: "lineage-features",
 			tab: "features",
 			label: "BF.Feature.Category.Lineage[other]",
-			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "lineage"}],
-			create: [{label: "BF.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage"}]
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.category", v: "lineage" }
+			],
+			create: [{ label: "BF.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage" }]
 		},
 		{
 			id: "heritage-features",
 			tab: "features",
 			label: "BF.Feature.Category.Heritage[other]",
-			filters: [{k: "type", v: "feature"}, {k: "system.type.category", v: "heritage"}],
-			create: [{label: "BF.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage"}]
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.category", v: "heritage" }
+			],
+			create: [{ label: "BF.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage" }]
 		},
 		{
 			id: "features",
 			tab: "features",
 			label: "BF.Item.Category.Feature.Label",
-			filters: [{k: "type", v: "feature"}],
-			create: [{type: "feature"}],
-			options: {autoHide: true}
+			filters: [{ k: "type", v: "feature" }],
+			create: [{ type: "feature" }],
+			options: { autoHide: true }
 		},
 		{
 			id: "progression",
 			tab: "progression",
-			filters: [{k: "type", o: "in", v: ["class", "subclass", "background", "heritage", "lineage"]}]
+			filters: [{ k: "type", o: "in", v: ["class", "subclass", "background", "heritage", "lineage"] }]
 		}
 	],
 	npc: [
@@ -213,23 +248,23 @@ export const sheetSections = {
 			id: "features",
 			tab: "features",
 			label: "BF.Item.Category.Feature.Label",
-			filters: [{k: "type", o: "in", v: ["feature", "talent"]}],
-			create: [{type: "feature", "system.type.category": "monsters"}]
+			filters: [{ k: "type", o: "in", v: ["feature", "talent"] }],
+			create: [{ type: "feature", "system.type.category": "monsters" }]
 		},
 		{
 			id: "equipment",
 			tab: "features",
 			label: "BF.Item.Category.Equipment.Label",
-			filters: [{k: "type", o: "in", v: ["ammunition", "armor", "weapon"]}],
-			create: [{type: "armor"}, {type: "weapon"}, {type: "ammunition"}]
+			filters: [{ k: "type", o: "in", v: ["ammunition", "armor", "weapon"] }],
+			create: [{ type: "armor" }, { type: "weapon" }, { type: "ammunition" }]
 		},
 		{
 			id: "sundries",
 			tab: "features",
 			label: "BF.Item.Type.Sundry[other]",
-			filters: [{k: "type", v: "sundry"}],
-			create: [{type: "sundry"}],
-			options: {autoHide: true}
+			filters: [{ k: "type", v: "sundry" }],
+			create: [{ type: "sundry" }],
+			options: { autoHide: true }
 		}
 	],
 	container: [

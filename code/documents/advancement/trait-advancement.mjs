@@ -6,19 +6,24 @@ import * as Trait from "../../utils/trait.mjs";
 import Advancement from "./advancement.mjs";
 
 export default class TraitAdvancement extends Advancement {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "trait",
-		dataModels: {
-			configuration: TraitConfigurationData,
-			value: TraitValueData
-		},
-		order: 30,
-		icon: "systems/black-flag/artwork/advancement/trait.svg",
-		title: "BF.Advancement.Trait.Title",
-		hint: "BF.Advancement.Trait.Hint",
-		configurableHint: true
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "trait",
+				dataModels: {
+					configuration: TraitConfigurationData,
+					value: TraitValueData
+				},
+				order: 30,
+				icon: "systems/black-flag/artwork/advancement/trait.svg",
+				title: "BF.Advancement.Trait.Title",
+				hint: "BF.Advancement.Trait.Hint",
+				configurableHint: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
@@ -31,8 +36,8 @@ export default class TraitAdvancement extends Advancement {
 		const traitConfig = CONFIG.BlackFlag.traits[this.bestGuessTrait()];
 		this.title = this.title || game.i18n.localize(traitConfig?.labels.title || this.metadata.title);
 		this.icon = this.icon || traitConfig?.icon || this.metadata.icon;
-		this.identifier = this.identifier || this.title.slugify({strict: true});
-		if ( !this.metadata.multiLevel ) this.level ??= this.minimumLevel;
+		this.identifier = this.identifier || this.title.slugify({ strict: true });
+		if (!this.metadata.multiLevel) this.level ??= this.minimumLevel;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -44,11 +49,14 @@ export default class TraitAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareWarnings(levels, notifications) {
-		if ( this.configuredForLevel(levels) ) return;
+		if (this.configuredForLevel(levels)) return;
 		const { label } = this.availableChoices() ?? {};
-		if ( !label ) return;
+		if (!label) return;
 		notifications.set(this.warningKey(levels), {
-			category: `level-${levels.character}`, section: "progression", level: "warn", message: label
+			category: `level-${levels.character}`,
+			section: "progression",
+			level: "warn",
+			message: label
 		});
 	}
 
@@ -65,17 +73,17 @@ export default class TraitAdvancement extends Advancement {
 	sortingValueForLevel(levels) {
 		const traitOrder = Object.keys(CONFIG.BlackFlag.traits).findIndex(k => k === this.bestGuessTrait());
 		const modeOrder = Object.keys(CONFIG.BlackFlag.traitModes).findIndex(k => k === this.configuration.mode);
-		const order = traitOrder + (modeOrder * 100);
+		const order = traitOrder + modeOrder * 100;
 		return `${this.metadata.order.paddedString(4)} ${order.paddedString(4)} ${this.titleForLevel(levels)}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	summaryForLevel(levels, { flow=false }={}) {
-		if ( this.hint ) return `<p>${this.hint}</p>`;
-		return `<p>${Trait.localizedList(
-			this.configuration.grants, this.configuration.choices, { choiceMode: this.configuration.choiceMode }
-		)}</p>`;
+	summaryForLevel(levels, { flow = false } = {}) {
+		if (this.hint) return `<p>${this.hint}</p>`;
+		return `<p>${Trait.localizedList(this.configuration.grants, this.configuration.choices, {
+			choiceMode: this.configuration.choiceMode
+		})}</p>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,23 +91,25 @@ export default class TraitAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	changes(levels) {
-		if ( !this.value.selected ) return;
+		if (!this.value.selected) return;
 		const changes = [];
-		for ( const key of this.value.selected ) {
+		for (const key of this.value.selected) {
 			const keyPath = Trait.changeKeyPath(key);
 			const existingValue = foundry.utils.getProperty(this.actor, keyPath);
-			if ( foundry.utils.getType(existingValue) === "Set" ) {
+			if (foundry.utils.getType(existingValue) === "Set") {
 				changes.push({
 					key: keyPath,
 					mode: CONST.ACTIVE_EFFECT_MODES.ADD,
 					value: key.split(":").pop()
 				});
-			} else if ( this.configuration.mode !== "expertise" || existingValue !== 0 ) {
+			} else if (this.configuration.mode !== "expertise" || existingValue !== 0) {
 				changes.push({
 					key: keyPath,
 					mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-					value: (this.configuration.mode === "default")
-						|| ((this.configuration.mode === "upgrade") && (existingValue === 0)) ? 1 : 2
+					value:
+						this.configuration.mode === "default" || (this.configuration.mode === "upgrade" && existingValue === 0)
+							? 1
+							: 2
 				});
 			}
 		}
@@ -108,35 +118,35 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false, render=true }={}) {
-		if ( initial ) {
+	async apply(levels, data, { initial = false, render = true } = {}) {
+		if (initial) {
 			data = new Set();
 
 			// Any grants will be included automatically
 			// this.configuration.grants.forEach(k => data.add(k));
 
 			const { available } = this.unfulfilledChoices();
-			for ( const { set } of available ) {
-				if ( set.size !== 1 ) continue;
+			for (const { set } of available) {
+				if (set.size !== 1) continue;
 				data.add(set.first());
 			}
 		}
-		if ( !data?.size ) return;
+		if (!data?.size) return;
 
 		const selectedCollection = this.value.selected ?? new Set();
 		data.forEach(d => selectedCollection.add(d));
-		return await this.actor.update({[`${this.valueKeyPath}.selected`]: Array.from(selectedCollection)});
+		return await this.actor.update({ [`${this.valueKeyPath}.selected`]: Array.from(selectedCollection) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels, data, { render=true }={}) {
-		if ( !this.value.selected ) return;
-		if ( !data ) return await this.actor.update({[`${this.valueKeyPath}.-=selected`]: null});
+	async reverse(levels, data, { render = true } = {}) {
+		if (!this.value.selected) return;
+		if (!data) return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null });
 
 		const selectedCollection = this.value.selected;
 		selectedCollection.delete(data);
-		return await this.actor.update({[`${this.valueKeyPath}.selected`]: Array.from(selectedCollection)});
+		return await this.actor.update({ [`${this.valueKeyPath}.selected`]: Array.from(selectedCollection) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -154,21 +164,23 @@ export default class TraitAdvancement extends Advancement {
 
 		// If "default" mode is selected, return all traits
 		// If any other mode is selected, only return traits that support expertise
-		const traitTypes = this.configuration.mode === "default" ? Object.keys(CONFIG.BlackFlag.traits)
-			: filteredKeys(CONFIG.BlackFlag.traits, t => t.expertise);
+		const traitTypes =
+			this.configuration.mode === "default"
+				? Object.keys(CONFIG.BlackFlag.traits)
+				: filteredKeys(CONFIG.BlackFlag.traits, t => t.expertise);
 
-		for ( const trait of traitTypes ) {
+		for (const trait of traitTypes) {
 			const actorValues = Trait.actorValues(this.actor, trait);
 			const choices = Trait.choices(trait, { prefixed: true });
-			for ( const key of choices.set ) {
+			for (const key of choices.set) {
 				const value = actorValues[key];
-				if ( this.configuration.mode === "default" ) {
-					if ( value >= 1 ) selected.add(key);
+				if (this.configuration.mode === "default") {
+					if (value >= 1) selected.add(key);
 					else available.add(key);
 				} else {
-					if ( value === 2 ) selected.add(key);
-					if ( (this.configuration.mode === "expertise") && (value === 1) ) available.add(key);
-					else if ( (this.configuration.mode !== "expertise") && (value < 2) ) available.add(key);
+					if (value === 2) selected.add(key);
+					if (this.configuration.mode === "expertise" && value === 1) available.add(key);
+					else if (this.configuration.mode !== "expertise" && value < 2) available.add(key);
 				}
 			}
 		}
@@ -186,11 +198,11 @@ export default class TraitAdvancement extends Advancement {
 	bestGuessTrait(pools) {
 		let trait;
 		pools ??= [this.configuration.grants, ...this.configuration.choices.map(c => c.pool)];
-		for ( const pool of pools ) {
-			for ( const key of pool ) {
+		for (const pool of pools) {
+			for (const key of pool) {
 				const type = key.split(":").shift();
-				if ( !trait ) trait = type;
-				if ( trait !== type ) return;
+				if (!trait) trait = type;
+				if (trait !== type) return;
 			}
 		}
 		return trait;
@@ -206,13 +218,14 @@ export default class TraitAdvancement extends Advancement {
 		let { available, choices } = this.unfulfilledChoices();
 
 		// If all traits of this type are already assigned, then nothing new can be selected
-		if ( foundry.utils.isEmpty(choices) ) return {
-			choices,
-			label: game.i18n.format("BF.Advancement.Trait.Notification", {
-				count: numberFormat(available.length, { spelledOut: true }),
-				type: Trait.traitLabel(this.bestGuessTrait(), available.length)
-			})
-		};
+		if (foundry.utils.isEmpty(choices))
+			return {
+				choices,
+				label: game.i18n.format("BF.Advancement.Trait.Notification", {
+					count: numberFormat(available.length, { spelledOut: true }),
+					type: Trait.traitLabel(this.bestGuessTrait(), available.length)
+				})
+			};
 
 		// Remove any grants that have no choices remaining
 		available = available.filter(a => a.set.size > 0);
@@ -221,8 +234,8 @@ export default class TraitAdvancement extends Advancement {
 		choices.filter(remainingSet);
 
 		// Simplify label if exclusive mode and more than one set of choices still available
-		const simplifyNotification = this.configuration.choiceMode === "exclusive"
-			&& (new Set(available.map(a => a._index))).size > 1;
+		const simplifyNotification =
+			this.configuration.choiceMode === "exclusive" && new Set(available.map(a => a._index)).size > 1;
 
 		return {
 			choices,
@@ -251,7 +264,7 @@ export default class TraitAdvancement extends Advancement {
 			const set = new Set(choice.pool);
 			set._index = index;
 			let count = choice.count;
-			while ( count > 0 ) {
+			while (count > 0) {
 				arr.push(set);
 				count -= 1;
 			}
@@ -259,7 +272,7 @@ export default class TraitAdvancement extends Advancement {
 		}, []);
 
 		// If everything has already been selected, no need to go further
-		if ( (this.configuration.grants.size + choices.length) <= selected.item.size ) {
+		if (this.configuration.grants.size + choices.length <= selected.item.size) {
 			return { available: [], choices: new SelectChoices() };
 		}
 
@@ -267,24 +280,26 @@ export default class TraitAdvancement extends Advancement {
 			...this.configuration.grants.map(g => Trait.mixedChoices(new Set([g]))),
 			...choices.map(c => {
 				const choices = Trait.mixedChoices(c);
-				if ( c._index !== undefined ) Object.defineProperty(choices, "_index", { value: c._index, enumerable: false });
+				if (c._index !== undefined) Object.defineProperty(choices, "_index", { value: c._index, enumerable: false });
 				return choices;
 			})
 		];
 		available.sort((lhs, rhs) => lhs.set.size - rhs.set.size);
 
 		// Remove any fulfilled grants
-		if ( this.configuration.choiceMode === "inclusive" ) this.removeFullfilledInclusive(available, selected);
+		if (this.configuration.choiceMode === "inclusive") this.removeFullfilledInclusive(available, selected);
 		else this.removeFullfilledExclusive(available, selected);
 
 		// Merge all possible choices into a single SelectChoices
 		const allChoices = Trait.mixedChoices(actorData.available);
 		allChoices.exclude(new Set([...(selected.actor ?? []), ...selected.item]));
-		available = available.map(a => {
-			const filtered = allChoices.filtered(a);
-			if ( a._index !== undefined ) Object.defineProperty(filtered, "_index", { value: a._index, enumerable: false });
-			return filtered;
-		}).filter(a => !foundry.utils.isEmpty(a));
+		available = available
+			.map(a => {
+				const filtered = allChoices.filtered(a);
+				if (a._index !== undefined) Object.defineProperty(filtered, "_index", { value: a._index, enumerable: false });
+				return filtered;
+			})
+			.filter(a => !foundry.utils.isEmpty(a));
 
 		return { available, choices: allChoices };
 	}
@@ -297,7 +312,7 @@ export default class TraitAdvancement extends Advancement {
 	 * @param {Set<string>} selected - Currently selected trait keys.
 	 */
 	removeFullfilledInclusive(available, selected) {
-		for ( const key of selected.item ) available.findSplice(grant => grant.set.has(key));
+		for (const key of selected.item) available.findSplice(grant => grant.set.has(key));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -309,20 +324,20 @@ export default class TraitAdvancement extends Advancement {
 	 */
 	removeFullfilledExclusive(available, selected) {
 		const indices = new Set(available.map(a => a._index));
-		for ( const key of selected.item ) {
+		for (const key of selected.item) {
 			// Remove first selected grant
 			const index = available.findIndex(grant => grant.set.has(key));
 			const firstMatch = available[index];
 			available.splice(index, 1);
 
-			if ( firstMatch?._index !== undefined ) {
-				for ( const index of indices ) {
-					if ( index === firstMatch._index ) continue;
+			if (firstMatch?._index !== undefined) {
+				for (const index of indices) {
+					if (index === firstMatch._index) continue;
 					// If it has an index, remove any other choices by index that don't have this choice
 					const anyMatch = available.filter(a => a._index === index).some(grant => grant.set.has(key));
-					if ( !anyMatch ) {
+					if (!anyMatch) {
 						let removeIndex = available.findIndex(a => a._index === index);
-						while ( removeIndex !== -1 ) {
+						while (removeIndex !== -1) {
 							available.splice(removeIndex, 1);
 							removeIndex = available.findIndex(a => a._index === index);
 						}

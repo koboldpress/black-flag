@@ -12,7 +12,6 @@ const { ColorField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  */
 export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate, DescriptionTemplate) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -50,18 +49,21 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/** @inheritDoc */
 	get traits() {
 		const traits = [];
-		if ( this.hitDie ) traits.push({
-			label: "BF.HitDie.Label[one]",
-			value: this.hitDie
-		});
-		if ( this.keyAbility ) traits.push({
-			label: "BF.Advancement.KeyAbility.Title",
-			value: this.keyAbility
-		});
-		if ( this.spellcasting ) traits.push({
-			label: "BF.Spellcasting.Label",
-			value: this.spellcasting.label
-		});
+		if (this.hitDie)
+			traits.push({
+				label: "BF.HitDie.Label[one]",
+				value: this.hitDie
+			});
+		if (this.keyAbility)
+			traits.push({
+				label: "BF.Advancement.KeyAbility.Title",
+				value: this.keyAbility
+			});
+		if (this.spellcasting)
+			traits.push({
+				label: "BF.Spellcasting.Label",
+				value: this.spellcasting.label
+			});
 		return traits;
 	}
 
@@ -76,7 +78,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 
 		// Key Ability
 		const keyAbilityAdvancement = this.advancement.byType("keyAbility")[0];
-		if ( keyAbilityAdvancement ) {
+		if (keyAbilityAdvancement) {
 			const keyAbilityOptions = keyAbilityAdvancement.configuration.options.map(o => {
 				const label = CONFIG.BlackFlag.abilities[o]?.labels.full;
 				return label ? game.i18n.localize(label) : o;
@@ -91,9 +93,10 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateAdvancement(data, options, user) {
-		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+		if (data._id || foundry.utils.hasProperty(data, "system.advancement")) return;
 		this._createInitialAdvancement([
-			{ type: "hitPoints" }, { type: "keyAbility" },
+			{ type: "hitPoints" },
+			{ type: "keyAbility" },
 			{ type: "trait", configuration: { choices: [{ count: 2, pool: ["skills:*"] }] } }
 		]);
 	}

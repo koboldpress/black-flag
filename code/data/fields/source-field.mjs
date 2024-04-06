@@ -11,21 +11,21 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @param {object} [options={}] - Additional options in addition to the default label.
  */
 export default class SourceField extends SchemaField {
-	constructor(fields={}, options={}) {
+	constructor(fields = {}, options = {}) {
 		fields = {
-			book: new StringField({label: "BF.Source.Book"}),
-			fallback: new StringField({label: "BF.Source.Fallback"}),
-			page: new StringField({label: "BF.Source.Page"}),
+			book: new StringField({ label: "BF.Source.Book" }),
+			fallback: new StringField({ label: "BF.Source.Fallback" }),
+			page: new StringField({ label: "BF.Source.Page" }),
 			...fields
 		};
-		Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
+		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
 		super(fields, { label: "BF.Source.Label", ...options });
 	}
 
 	/* -------------------------------------------- */
 
 	/** @inheritDoc */
-	initialize(value, model, options={}) {
+	initialize(value, model, options = {}) {
 		const obj = super.initialize(value, model, options);
 
 		Object.defineProperty(obj, "label", {

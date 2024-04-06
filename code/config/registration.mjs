@@ -64,8 +64,9 @@ export function get(type, identifier) {
  */
 export function getSource(type, identifier) {
 	const registration = get(type, identifier);
-	return registration ? registration.cached
-		?? fromUuid(registration.sources[registration.sources.length - 1]) : undefined;
+	return registration
+		? registration.cached ?? fromUuid(registration.sources[registration.sources.length - 1])
+		: undefined;
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -85,12 +86,12 @@ export function getSource(type, identifier) {
  */
 export async function filter(type, callbackFn) {
 	let obj = list(type);
-	if ( !obj ) return;
+	if (!obj) return;
 	obj = foundry.utils.deepClone(obj);
-	for ( const [identifier, data] of Object.entries(obj) ) {
+	for (const [identifier, data] of Object.entries(obj)) {
 		const element = await fromUuid(data.sources[data.sources.length - 1]);
-		if ( !element ) return obj;
-		if ( callbackFn && !callbackFn(element, identifier) ) delete obj[identifier];
+		if (!element) return obj;
+		if (callbackFn && !callbackFn(element, identifier)) delete obj[identifier];
 	}
 	return obj;
 }
@@ -118,15 +119,15 @@ export function registerItemTypes() {
 	const indexes = _indexCompendiums();
 	log("Preparing central item registrations");
 	const registrations = [];
-	for ( const type of Item.TYPES ) {
+	for (const type of Item.TYPES) {
 		const dataModel = CONFIG.Item.dataModels[type];
-		if ( !dataModel?.metadata?.register ) continue;
+		if (!dataModel?.metadata?.register) continue;
 		registrations.push(_registerItemType(dataModel.metadata.type, indexes));
 	}
 
 	// When all settled, populate registration, set to ready, and emit registration complete hook
 	Promise.all(registrations).then(registrations => {
-		registrations.forEach(r => all[r.type] = r.registrations);
+		registrations.forEach(r => (all[r.type] = r.registrations));
 		ready = true;
 		log("Central item registration setup complete");
 
@@ -166,28 +167,27 @@ async function _registerItemType(type, indexes) {
 		registrations[identifier].sources.push(`${uuidPrefix}.${item._id}`);
 	};
 
-	log(`Registering ${type} items`, {level: "groupCollapsed"});
+	log(`Registering ${type} items`, { level: "groupCollapsed" });
 	const registrations = {};
-	for ( const [pack, index] of Object.entries(indexes) ) {
-		for ( const item of index ) {
+	for (const [pack, index] of Object.entries(indexes)) {
+		for (const item of index) {
 			const dataModel = CONFIG.Item.dataModels[item.type];
-			if ( dataModel?.metadata.type !== type ) continue;
+			if (dataModel?.metadata.type !== type) continue;
 			log(`Registering ${item.name} from ${pack}`);
 			registerItem(item, `Compendium.${pack}.Item`);
 		}
 	}
-	if ( REGISTER_WORLD_ITEMS ) {
-		for ( const item of game.items.values() ) {
-			if ( item.system.metadata?.type !== type ) continue;
+	if (REGISTER_WORLD_ITEMS) {
+		for (const item of game.items.values()) {
+			if (item.system.metadata?.type !== type) continue;
 			log(`Registering ${item.name} in world`);
 			registerItem(item, "Item");
 		}
 	}
 	console.groupEnd();
 
-	if ( config?.cache === true ) await Promise.all(
-		Object.values(registrations).map(async r => r.cached = await fromUuid(r.sources[0]))
-	);
+	if (config?.cache === true)
+		await Promise.all(Object.values(registrations).map(async r => (r.cached = await fromUuid(r.sources[0]))));
 
 	return {
 		type,
@@ -210,7 +210,8 @@ export function setupHooks() {
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
-const message = operation => `Attempted to ${operation} item before registration was completed which may lead to invalid registration data. Wait until the "blackFlag.registrationComplete" hook has fired or "CONFIG.BlackFlag.registration.ready" is true before performing any automatic item management.`;
+const message = operation =>
+	`Attempted to ${operation} item before registration was completed which may lead to invalid registration data. Wait until the "blackFlag.registrationComplete" hook has fired or "CONFIG.BlackFlag.registration.ready" is true before performing any automatic item management.`;
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -221,12 +222,12 @@ const message = operation => `Attempted to ${operation} item before registration
  * @param {string} userId - ID of the user that created the item.
  */
 function _onCreateItem(item, options, userId) {
-	if ( item.isEmbedded || !item.system.metadata.register ) return;
-	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
-	if ( !ready ) log(message("create"), { level: "warn" });
+	if (item.isEmbedded || !item.system.metadata.register) return;
+	if (!REGISTER_WORLD_ITEMS && !item.pack) return;
+	if (!ready) log(message("create"), { level: "warn" });
 	const type = item.system.metadata.type;
-	let source = all[type] ??= {};
-	if ( !source ) source = all[type] = {};
+	let source = (all[type] ??= {});
+	if (!source) source = all[type] = {};
 	_handleCreate(source, item.identifier, item);
 
 	all[type] = sortObjectEntries(source, { sortKey: "name" });
@@ -256,23 +257,23 @@ function _preUpdateItem(item, changes, options, userId) {
  * @param {string} userId - ID of the user that update the item.
  */
 function _onUpdateItem(item, changes, options, userId) {
-	if ( item.isEmbedded || !item.system.metadata.register ) return;
-	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
-	if ( !ready ) log(message("update"), { level: "warn" });
+	if (item.isEmbedded || !item.system.metadata.register) return;
+	if (!REGISTER_WORLD_ITEMS && !item.pack) return;
+	if (!ready) log(message("update"), { level: "warn" });
 	const type = item.system.metadata.type;
-	const source = all[type] ??= {};
+	const source = (all[type] ??= {});
 
 	// Identifier has changed, move this to the new location
 	const oldIdentifier = foundry.utils.getProperty(options, `blackFlag.identifier.${item.id}`);
-	if ( item.identifier !== oldIdentifier ) {
-		if ( !source[item.identifier] ) _handleCreate(source, item.identifier, item);
+	if (item.identifier !== oldIdentifier) {
+		if (!source[item.identifier]) _handleCreate(source, item.identifier, item);
 		else source[item.identifier].sources.push(item.uuid);
 		_handleDelete(source, oldIdentifier, item);
-	} else if ( !source[item.identifier] ) _handleCreate(source, item.identifier, item);
+	} else if (!source[item.identifier]) _handleCreate(source, item.identifier, item);
 
 	// Cached values should only be updated if this is the last item in the sources list
 	const idx = source[item.identifier].sources.findIndex(i => i === item.uuid);
-	if ( idx !== source[item.identifier].sources.length - 1 ) return;
+	if (idx !== source[item.identifier].sources.length - 1) return;
 	source[item.identifier].name = item.name;
 	source[item.identifier].img = item.img;
 
@@ -299,12 +300,12 @@ function _onUpdateItem(item, changes, options, userId) {
  * @param {string} userId - ID of the user that deleted the item.
  */
 function _onDeleteItem(item, options, userId) {
-	if ( item.isEmbedded || !item.system.metadata.register ) return;
-	if ( !REGISTER_WORLD_ITEMS && !item.pack ) return;
-	if ( !ready ) log(message("delete"), { level: "warn" });
+	if (item.isEmbedded || !item.system.metadata.register) return;
+	if (!REGISTER_WORLD_ITEMS && !item.pack) return;
+	if (!ready) log(message("delete"), { level: "warn" });
 	const type = item.system.metadata.type;
-	const source = all[type] ??= {};
-	if ( !source?.[item.identifier] ) return;
+	const source = (all[type] ??= {});
+	if (!source?.[item.identifier]) return;
 	_handleDelete(source, item.identifier, item);
 }
 
@@ -319,8 +320,8 @@ function _onDeleteItem(item, options, userId) {
  * @param {ItemEH|string} item - Item to be cached or UUID of item.
  */
 async function _handleCache(source, identifier, item) {
-	if ( foundry.utils.getType(item) === "string" ) item = await fromUuid(item);
-	if ( !CONFIG.Item.dataModels[item.type].metadata.register?.cache ) return;
+	if (foundry.utils.getType(item) === "string") item = await fromUuid(item);
+	if (!CONFIG.Item.dataModels[item.type].metadata.register?.cache) return;
 	source[identifier].cache = item;
 }
 
@@ -340,7 +341,7 @@ function _handleCreate(source, identifier, item) {
 	source[identifier].img = item.img;
 	source[identifier].sources.push(item.uuid);
 
-	if ( created ) {
+	if (created) {
 		_handleCache(source, identifier, item).then(() => {
 			/**
 			 * A hook event that fires when an entry is added to registration.
@@ -364,7 +365,7 @@ function _handleCreate(source, identifier, item) {
  */
 function _handleDelete(source, identifier, item) {
 	source[identifier].sources.findSplice(i => i === item.uuid);
-	if ( source[identifier].sources.length === 0 ) {
+	if (source[identifier].sources.length === 0) {
 		delete source[identifier];
 
 		/**
@@ -395,8 +396,11 @@ function _handleDelete(source, identifier, item) {
  * @private
  */
 async function _indexCompendiums() {
-	return Object.fromEntries(await Promise.all(Array.from(game.packs.entries())
-		.filter(p => p[1].metadata.type === "Item")
-		.map(async p => [p[0], await p[1].getIndex({ fields: ["system.identifier.value"] })])
-	));
+	return Object.fromEntries(
+		await Promise.all(
+			Array.from(game.packs.entries())
+				.filter(p => p[1].metadata.type === "Item")
+				.map(async p => [p[0], await p[1].getIndex({ fields: ["system.identifier.value"] })])
+		)
+	);
 }

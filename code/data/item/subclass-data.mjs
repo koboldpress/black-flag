@@ -13,9 +13,10 @@ const { SchemaField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  */
 export default class SubclassData extends ItemDataModel.mixin(
-	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+	AdvancementTemplate,
+	ConceptTemplate,
+	DescriptionTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -33,7 +34,7 @@ export default class SubclassData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			identifier: new SchemaField({
-				class: new IdentifierField({label: "BF.Item.Type.Class[one]"})
+				class: new IdentifierField({ label: "BF.Item.Type.Class[one]" })
 			})
 		});
 	}
@@ -66,10 +67,11 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	get traits() {
 		const traits = [];
-		if ( this.spellcasting ) traits.push({
-			label: "BF.Spellcasting.Label",
-			value: this.spellcasting.label
-		});
+		if (this.spellcasting)
+			traits.push({
+				label: "BF.Spellcasting.Label",
+				value: this.spellcasting.label
+			});
 		return traits;
 	}
 
@@ -78,21 +80,23 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateSubclass(data, options, user) {
-		if ( !this.parent.actor ) return;
+		if (!this.parent.actor) return;
 
 		const matchingClass = this.parent.actor.system.progression?.classes?.[this.identifier.class];
-		if ( !matchingClass ) {
-			ui.notifications.error(game.i18n.format("BF.Subclass.Warning.MissingClass", {
-				class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class
-			}));
+		if (!matchingClass) {
+			ui.notifications.error(
+				game.i18n.format("BF.Subclass.Warning.MissingClass", {
+					class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class
+				})
+			);
 			return false;
-		}
-
-		else if ( matchingClass.subclass ) {
-			ui.notifications.error(game.i18n.format("BF.Subclass.Warning.ExistingSubclass", {
-				class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class,
-				subclass: matchingClass.subclass.name
-			}));
+		} else if (matchingClass.subclass) {
+			ui.notifications.error(
+				game.i18n.format("BF.Subclass.Warning.ExistingSubclass", {
+					class: CONFIG.BlackFlag.registration.all.class[this.identifier.class]?.name ?? this.identifier.class,
+					subclass: matchingClass.subclass.name
+				})
+			);
 			return false;
 		}
 	}

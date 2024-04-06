@@ -28,7 +28,7 @@ globalThis.BlackFlag = {
 	utils
 };
 
-Hooks.once("init", function() {
+Hooks.once("init", function () {
 	utils.log(`Initiatlizing the Black Flag Roleplaying system - Version ${game.system.version}`);
 
 	game.blackFlag = globalThis.BlackFlag;
@@ -56,28 +56,22 @@ Hooks.once("init", function() {
 	utils.registerHandlebarsPartials();
 });
 
-Hooks.once("setup", function() {
+Hooks.once("setup", function () {
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
 	applications.registerSheets(JournalEntryPage);
 
 	// Apply custom item compendium
-	game.packs.filter(p => p.metadata.type === "Item")
-		.forEach(p => p.applicationClass = applications.item.BlackFlagItemCompendium);
+	game.packs
+		.filter(p => p.metadata.type === "Item")
+		.forEach(p => (p.applicationClass = applications.item.BlackFlagItemCompendium));
 });
 
-Hooks.once("ready", function() {
+Hooks.once("ready", function () {
 	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();
 });
 
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));
 
-export {
-	applications,
-	config,
-	data,
-	documents,
-	settings,
-	utils
-};
+export { applications, config, data, documents, settings, utils };

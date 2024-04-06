@@ -10,7 +10,8 @@ export default class ScaleValueConfigurationData extends foundry.abstract.DataMo
 	static defineSchema() {
 		return {
 			type: new StringField({
-				initial: "string", label: "BF.Advancement.ScaleValue.Type.Label"
+				initial: "string",
+				label: "BF.Advancement.ScaleValue.Type.Label"
 			}),
 			scale: new ObjectField()
 		};

@@ -43,17 +43,17 @@ export const consumptionTypes = {
 		validTargets: activity => {
 			const otherItems = activity.item.actor?.items
 				.filter(i => (i.system.uses?.min || i.system.uses?.max) && i !== activity.item)
-				.map(i => ({key: i.id, label: i.name}));
-			return [{key: "", label: game.i18n.localize("BF.Consumption.Type.ItemUses.ThisItem")}, ...(otherItems ?? [])];
+				.map(i => ({ key: i.id, label: i.name }));
+			return [{ key: "", label: game.i18n.localize("BF.Consumption.Type.ItemUses.ThisItem") }, ...(otherItems ?? [])];
 		}
 	},
 	hitDice: {
 		label: "BF.Consumption.Type.HitDice.Label",
 		consume: "consumeHitDice",
 		validTargets: activity => [
-			{key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest")},
-			...hitDieSizes.map(d => ({key: d, label: `d${d}`})),
-			{key: "largest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Largest")}
+			{ key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest") },
+			...hitDieSizes.map(d => ({ key: d, label: `d${d}` })),
+			{ key: "largest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Largest") }
 		]
 	},
 	spellSlots: {
@@ -62,7 +62,7 @@ export const consumptionTypes = {
 		validTargets: activity => {
 			const rings = spellRings();
 			delete rings[0];
-			return Object.entries(rings).map(([key, label]) => ({key, label}));
+			return Object.entries(rings).map(([key, label]) => ({ key, label }));
 		}
 	}
 };

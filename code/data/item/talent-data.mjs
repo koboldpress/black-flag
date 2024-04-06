@@ -10,9 +10,11 @@ const { BooleanField, SchemaField } = foundry.data.fields;
  * Data definition for Talent items.
  */
 export default class TalentData extends ItemDataModel.mixin(
-	ActivityTemplate, AdvancementTemplate, DescriptionTemplate, FeatureTemplate
+	ActivityTemplate,
+	AdvancementTemplate,
+	DescriptionTemplate,
+	FeatureTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -29,7 +31,8 @@ export default class TalentData extends ItemDataModel.mixin(
 		return this.mergeSchema(super.defineSchema(), {
 			restriction: new SchemaField({
 				allowMultipleTimes: new BooleanField({
-					label: "BF.Talent.AllowMultipleTimes.Label", hint: "BF.Talent.AllowMultipleTimes.Hint"
+					label: "BF.Talent.AllowMultipleTimes.Label",
+					hint: "BF.Talent.AllowMultipleTimes.Hint"
 				})
 			})
 		});

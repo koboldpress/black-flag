@@ -17,7 +17,6 @@ const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {Set<string>} subclasses - UUIDs of subclasses to display on the class page.
  */
 export default class ClassJournalPageData extends BaseDataModel {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -35,31 +34,35 @@ export default class ClassJournalPageData extends BaseDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			item: new StringField({label: "BF.JournalPage.Class.Item"}),
+			item: new StringField({ label: "BF.JournalPage.Class.Item" }),
 			// TODO: Replace with UUIDField when possible
 			description: new SchemaField({
 				introduction: new HTMLField({
-					label: "BF.JournalPage.Class.Introduction.Label", hint: "BF.JournalPage.Class.Introduction.Hint"
+					label: "BF.JournalPage.Class.Introduction.Label",
+					hint: "BF.JournalPage.Class.Introduction.Hint"
 				}),
 				additionalHitPoints: new HTMLField({
-					label: "BF.HitPoint.Label[other]", hint: "BF.JournalPage.Class.HitPoints.Hint"
+					label: "BF.HitPoint.Label[other]",
+					hint: "BF.JournalPage.Class.HitPoints.Hint"
 				}),
 				additionalTraits: new HTMLField({
-					label: "BF.Proficiency.Label[other]", hint: "BF.JournalPage.Class.Traits.Hint"
+					label: "BF.Proficiency.Label[other]",
+					hint: "BF.JournalPage.Class.Traits.Hint"
 				}),
 				additionalEquipment: new HTMLField({
-					label: "BF.JournalPage.Class.Equipment.Header", hint: "BF.JournalPage.Class.Equipment.Hint"
+					label: "BF.JournalPage.Class.Equipment.Header",
+					hint: "BF.JournalPage.Class.Equipment.Hint"
 				}),
 				subclassAdvancement: new HTMLField({
 					label: "BF.JournalPage.Class.Subclass.AdvancementDescription.Label",
-					 hint: "BF.JournalPage.Class.Subclass.AdvancementDescription.Hint"
+					hint: "BF.JournalPage.Class.Subclass.AdvancementDescription.Hint"
 				}),
 				subclassSection: new HTMLField({
 					label: "BF.JournalPage.Class.Subclass.SectionDescription.Label",
-					 hint: "BF.JournalPage.Class.Subclass.SectionDescription.Hint"
+					hint: "BF.JournalPage.Class.Subclass.SectionDescription.Hint"
 				})
 			}),
-			subclasses: new SetField(new StringField(), {label: "BF.JournalPage.Class.Subclass.Items"})
+			subclasses: new SetField(new StringField(), { label: "BF.JournalPage.Class.Subclass.Items" })
 			// TODO: Replace with UUIDField when possible
 		};
 	}

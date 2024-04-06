@@ -8,25 +8,31 @@ const { NumberField } = foundry.data.fields;
 export default class ScaleTypeDice extends ScaleTypeString {
 	static defineSchema() {
 		return {
-			number: new NumberField({nullable: true, initial: null, integer: true, positive: true}),
-			denomination: new NumberField({required: true, initial: 6, integer: true, positive: true})
+			number: new NumberField({ nullable: true, initial: null, integer: true, positive: true }),
+			denomination: new NumberField({ required: true, initial: 6, integer: true, positive: true })
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		label: "BF.Advancement.ScaleValue.Type.Dice.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Dice.Hint",
-		input: "dice"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				label: "BF.Advancement.ScaleValue.Type.Dice.Label",
+				hint: "BF.Advancement.ScaleValue.Type.Dice.Hint",
+				input: "dice"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static convertFrom(original, options) {
 		const [number, denomination] = (original.formula ?? "").split("d");
-		if ( !denomination || !Number.isNumeric(number) || !Number.isNumeric(denomination) ) return null;
-		return new this({number: Number(number) || null, denomination: Number(denomination)}, options);
+		if (!denomination || !Number.isNumeric(number) || !Number.isNumeric(denomination)) return null;
+		return new this({ number: Number(number) || null, denomination: Number(denomination) }, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,14 +42,14 @@ export default class ScaleTypeDice extends ScaleTypeString {
 	 * @type {string}
 	 */
 	get die() {
-		if ( !this.denomination ) return "";
+		if (!this.denomination) return "";
 		return `d${this.denomination}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get formula() {
-		if ( !this.denomination ) return null;
+		if (!this.denomination) return null;
 		return `${this.number ?? ""}${this.die}`;
 	}
 

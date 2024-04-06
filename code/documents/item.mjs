@@ -4,7 +4,6 @@ import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 
 export default class BlackFlagItem extends DocumentMixin(Item) {
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -14,7 +13,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @type {string}
 	 */
 	get accentColor() {
-		if ( this.system.color ) return this.system.color;
+		if (this.system.color) return this.system.color;
 		return this.system.metadata?.accentColor ?? "var(--bf-blue);";
 	}
 
@@ -26,9 +25,9 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @type {BlackFlagItem|Promise<BlackFlagItem>|void}
 	 */
 	get container() {
-		if ( !this.system.container ) return;
-		if ( this.isEmbedded ) return this.actor.items.get(this.system.container);
-		if ( this.pack ) return game.packs.get(this.pack).getDocument(this.system.container);
+		if (!this.system.container) return;
+		if (this.isEmbedded) return this.actor.items.get(this.system.container);
+		if (this.pack) return game.packs.get(this.pack).getDocument(this.system.container);
 		return game.items.get(this.system.container);
 	}
 
@@ -46,8 +45,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/** @inheritDoc */
 	get identifier() {
-		if ( this.system.identifier?.value ) return this.system.identifier.value;
-		return slugify(this.name, {strict: true});
+		if (this.system.identifier?.value) return this.system.identifier.value;
+		return slugify(this.name, { strict: true });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -62,10 +61,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/** @inheritDoc */
 	get pseudoDocumentHierarchy() {
 		const hierarchy = {};
-		for ( const [fieldName, field] of this.system.schema.entries() ) {
-			if ( field.constructor.hierarchical ) hierarchy[fieldName] = field;
+		for (const [fieldName, field] of this.system.schema.entries()) {
+			if (field.constructor.hierarchical) hierarchy[fieldName] = field;
 		}
-		Object.defineProperty(this, "pseudoDocumentHierarchy", {value: Object.freeze(hierarchy), writable: false});
+		Object.defineProperty(this, "pseudoDocumentHierarchy", { value: Object.freeze(hierarchy), writable: false });
 		return this.pseudoDocumentHierarchy;
 	}
 
@@ -84,8 +83,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/** @inheritDoc */
 	prepareEmbeddedDocuments() {
 		super.prepareEmbeddedDocuments();
-		for ( const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {}) ) {
-			for ( const e of this.getEmbeddedCollection(collectionName) ) {
+		for (const collectionName of Object.keys(this.pseudoDocumentHierarchy ?? {})) {
+			for (const e of this.getEmbeddedCollection(collectionName)) {
 				e.prepareData();
 			}
 		}
@@ -100,15 +99,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @param {number|AdvancementLevels} levels - Level for which to get the advancement.
 	 * @yields {Advancement}
 	 */
-	*advancementForLevel(levels=0) {
-		if ( foundry.utils.getType(levels) === "number" ) {
-			for ( const advancement of this.system.advancement?.byLevel(levels) ?? [] ) {
+	*advancementForLevel(levels = 0) {
+		if (foundry.utils.getType(levels) === "number") {
+			for (const advancement of this.system.advancement?.byLevel(levels) ?? []) {
 				yield advancement;
 			}
 		} else {
-			for ( const advancement of this.system.advancement ?? [] ) {
+			for (const advancement of this.system.advancement ?? []) {
 				const level = advancement.relavantLevel(levels);
-				if ( advancement.levels.includes(level) ) yield advancement;
+				if (advancement.levels.includes(level)) yield advancement;
 			}
 		}
 	}
@@ -116,16 +115,16 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async deleteDialog(options={}) {
+	async deleteDialog(options = {}) {
 		// Display custom delete dialog when deleting a container with contents
 		const count = await this.system.contentsCount;
-		if ( count ) {
+		if (count) {
 			return Dialog.confirm({
 				title: `${game.i18n.format("DOCUMENT.Delete", {
 					type: game.i18n.localize("BF.Item.Type.Container[one]")
 				})}: ${this.name}`,
 				content: `<h4>${game.i18n.localize("AreYouSure")}</h4>
-					<p>${game.i18n.format("BF.Container.Delete.Message", {count})}</p>
+					<p>${game.i18n.format("BF.Container.Delete.Message", { count })}</p>
 					<label>
 						<input type="checkbox" name="deleteContents">
 						${game.i18n.localize("BF.Container.Delete.Contents")}
@@ -148,10 +147,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
-	getAttackDetails(options={}) {
-		for ( const activity of this.system.activities ?? [] ) {
+	getAttackDetails(options = {}) {
+		for (const activity of this.system.activities ?? []) {
 			const details = activity.getAttackDetails?.(options);
-			if ( details ) return details;
+			if (details) return details;
 		}
 		return null;
 	}
@@ -163,10 +162,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
-	getDamageDetails(options={}) {
-		for ( const activity of this.system.activities ?? [] ) {
+	getDamageDetails(options = {}) {
+		for (const activity of this.system.activities ?? []) {
 			const details = activity.getDamageDetails?.(options);
-			if ( details ) return details;
+			if (details) return details;
 		}
 		return null;
 	}
@@ -174,21 +173,21 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getRollData({ deterministic=false }={}) {
+	getRollData({ deterministic = false } = {}) {
 		let rollData;
-		if ( this.system.getRollData ) rollData = this.system.getRollData({ deterministic });
+		if (this.system.getRollData) rollData = this.system.getRollData({ deterministic });
 		else {
-			if ( !this.actor ) return {};
+			if (!this.actor) return {};
 			rollData = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
 		}
 
-		if ( rollData.item ) {
+		if (rollData.item) {
 			rollData.item.flags = { ...this.flags };
 			rollData.item.name = this.name;
 		}
 
 		const abilityKey = this.system.ability;
-		if ( abilityKey && ("abilities" in rollData) ) {
+		if (abilityKey && "abilities" in rollData) {
 			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
 		}
 
@@ -202,10 +201,10 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{ability: string, dc: string, activity: Activity}|null}
 	 */
-	getSaveDetails(options={}) {
-		for ( const activity of this.system.activities ?? [] ) {
+	getSaveDetails(options = {}) {
+		for (const activity of this.system.activities ?? []) {
 			const details = activity.getSaveDetails?.(options);
-			if ( details ) return details;
+			if (details) return details;
 		}
 		return null;
 	}
@@ -216,9 +215,9 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/** @inheritDoc */
 	static getCollectionName(name) {
-		if ( name === "Activity" ) name = "activities";
-		if ( name === "Advancement" ) name = "advancement";
-		if ( ["activities", "advancement"].includes(name) ) return name;
+		if (name === "Activity") name = "activities";
+		if (name === "Advancement") name = "advancement";
+		if (["activities", "advancement"].includes(name)) return name;
 		return super.getCollectionName(name);
 	}
 
@@ -246,11 +245,11 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 * @param {Function} [context.transformFirst] - Method called only on provided items.
 	 * @returns {Promise<object[]>} - Data for items to be created.
 	 */
-	static async createWithContents(items, { container, keepId=false, transformAll, transformFirst }={}) {
+	static async createWithContents(items, { container, keepId = false, transformAll, transformFirst } = {}) {
 		let depth = 0;
-		if ( container ) {
+		if (container) {
 			depth = 1 + (await container.system.allContainers()).length;
-			if ( depth > PhysicalTemplate.MAX_DEPTH ) {
+			if (depth > PhysicalTemplate.MAX_DEPTH) {
 				ui.notifications.warn(game.i18n.format("BF.Container.Warning.MaxDepth", { depth: PhysicalTemplate.MAX_DEPTH }));
 				return;
 			}
@@ -258,22 +257,22 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 		const createItemData = async (item, containerId, depth) => {
 			let newItemData = transformAll ? await transformAll(item) : item;
-			if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData);
-			if ( !newItemData ) return;
-			if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
-			foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
-			if ( !keepId ) newItemData._id = foundry.utils.randomID();
+			if (transformFirst && depth === 0) newItemData = await transformFirst(newItemData);
+			if (!newItemData) return;
+			if (newItemData instanceof Item) newItemData = newItemData.toObject();
+			foundry.utils.mergeObject(newItemData, { "system.container": containerId });
+			if (!keepId) newItemData._id = foundry.utils.randomID();
 
 			created.push(newItemData);
 
 			const contents = await item.system.contents;
-			if ( contents && (depth < PhysicalTemplate.MAX_DEPTH) ) {
-				for ( const doc of contents ) await createItemData(doc, newItemData._id, depth + 1);
+			if (contents && depth < PhysicalTemplate.MAX_DEPTH) {
+				for (const doc of contents) await createItemData(doc, newItemData._id, depth + 1);
 			}
 		};
 
 		const created = [];
-		for ( const item of items ) await createItemData(item, container?.id, depth);
+		for (const item of items) await createItemData(item, container?.id, depth);
 		return created;
 	}
 }

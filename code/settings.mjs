@@ -9,28 +9,17 @@ export function registerKeybindings() {
 
 	game.keybindings.register(game.system.id, "challengeRollNormal", {
 		name: "BF.Keybinding.ChallengeRoll.Normal.Label",
-		editable: [
-			{ key: "ShiftLeft" },
-			{ key: "ShiftRight" }
-		]
+		editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }]
 	});
 
 	game.keybindings.register(game.system.id, "challengeRollAdvantage", {
 		name: "BF.Keybinding.ChallengeRoll.Advantage.Label",
-		editable: [
-			{ key: "AltLeft" },
-			{ key: "AltRight" }
-		]
+		editable: [{ key: "AltLeft" }, { key: "AltRight" }]
 	});
 
 	game.keybindings.register(game.system.id, "challengeRollDisadvantage", {
 		name: "BF.Keybinding.ChallengeRoll.Disadvantage.Label",
-		editable: [
-			{ key: "CtrlLeft" },
-			{ key: "CtrlRight" },
-			{ key: "OSLeft" },
-			{ key: "OSRight" }
-		]
+		editable: [{ key: "CtrlLeft" }, { key: "CtrlRight" }, { key: "OSLeft" }, { key: "OSRight" }]
 	});
 
 	game.keybindings.register(game.system.id, "damageRollNormal", {
@@ -47,10 +36,7 @@ export function registerKeybindings() {
 
 	game.keybindings.register(game.system.id, "damageRollCritical", {
 		name: "BF.Keybinding.DamageRoll.Critical.Label",
-		editable: [
-			{ key: "AltLeft" },
-			{ key: "AltRight" }
-		]
+		editable: [{ key: "AltLeft" }, { key: "AltRight" }]
 	});
 }
 
@@ -205,6 +191,6 @@ export function renderSettingsSidebar(html) {
 		     data-tooltip="${game.system.title}" alt="${game.system.title}">
 		<span class="system-info">${systemVersion()}</span>
 	`;
-	if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
+	if (pip) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
 	heading.insertAdjacentElement("afterend", badge);
 }

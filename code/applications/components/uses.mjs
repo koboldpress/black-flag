@@ -4,11 +4,10 @@ import FormAssociatedElement from "./form-associated-element.mjs";
  * Custom element for displaying limited uses & recovery details.
  */
 export default class UsesElement extends FormAssociatedElement {
-
 	connectedCallback() {
 		super.connectedCallback();
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
+		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
@@ -56,16 +55,16 @@ export default class UsesElement extends FormAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( !this.isEditable || (target.dispatchEvent(event) === false) ) return;
+		if (!this.isEditable || target.dispatchEvent(event) === false) return;
 
 		const li = target.closest("[data-index]");
 		const index = li?.dataset.index;
 		const recoveryCollection = foundry.utils.getProperty(this.document.toObject(), `${this.name}.recovery`) ?? [];
-		if ( (action !== "add") && !index ) return;
-		switch ( action ) {
+		if (action !== "add" && !index) return;
+		switch (action) {
 			case "add":
 				const validPeriods = this.validPeriods;
-				if ( !validPeriods.length ) return;
+				if (!validPeriods.length) return;
 				recoveryCollection.push({
 					period: validPeriods[0]
 				});
@@ -77,6 +76,6 @@ export default class UsesElement extends FormAssociatedElement {
 				return;
 		}
 
-		return this.app.submit({ updateData: { [`${this.name}.recovery`]: recoveryCollection }});
+		return this.app.submit({ updateData: { [`${this.name}.recovery`]: recoveryCollection } });
 	}
 }

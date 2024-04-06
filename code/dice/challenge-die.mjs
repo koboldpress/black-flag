@@ -2,8 +2,8 @@
  * Primary die used when performing a challenge roll.
  */
 export default class ChallengeDie extends Die {
-	constructor({number=1, faces=20, ...args}={}) {
-		super({number, faces, ...args});
+	constructor({ number = 1, faces = 20, ...args } = {}) {
+		super({ number, faces, ...args });
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -41,8 +41,8 @@ export default class ChallengeDie extends Die {
 	 * @type {boolean|void}
 	 */
 	get isCriticalSuccess() {
-		if ( !this.isValid || !this._evaluated ) return undefined;
-		if ( !Number.isNumeric(this.options.criticalSuccess) ) return false;
+		if (!this.isValid || !this._evaluated) return undefined;
+		if (!Number.isNumeric(this.options.criticalSuccess)) return false;
 		return this.total >= this.options.criticalSuccess;
 	}
 
@@ -53,8 +53,8 @@ export default class ChallengeDie extends Die {
 	 * @type {boolean|void}
 	 */
 	get isCriticalFailure() {
-		if ( !this.isValid || !this._evaluated ) return undefined;
-		if ( !Number.isNumeric(this.options.criticalFailure) ) return false;
+		if (!this.isValid || !this._evaluated) return undefined;
+		if (!Number.isNumeric(this.options.criticalFailure)) return false;
 		return this.total <= this.options.criticalFailure;
 	}
 
@@ -76,7 +76,7 @@ export default class ChallengeDie extends Die {
 	 */
 	applyAdvantage(advantageMode) {
 		this.options.advantageMode = advantageMode;
-		if ( advantageMode !== this.constructor.MODES.NORMAL ) {
+		if (advantageMode !== this.constructor.MODES.NORMAL) {
 			this.number = 2;
 			this.modifiers.push(advantageMode === this.constructor.MODES.ADVANTAGE ? "kh" : "kl");
 		} else {
@@ -93,6 +93,6 @@ export default class ChallengeDie extends Die {
 	applyMinimum(minimum) {
 		this.options.minimum = minimum;
 		this.modifiers.findSplice(m => m.startsWith("min"));
-		if ( minimum ) this.modifiers.push(`min${minimum}`);
+		if (minimum) this.modifiers.push(`min${minimum}`);
 	}
 }

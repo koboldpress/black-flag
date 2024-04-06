@@ -4,7 +4,6 @@ import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
  * Dialog that gives the open of increasing a current class or multi-classing into a new one.
  */
 export default class LevelUpDialog extends FormApplication {
-
 	/**
 	 * Actor to which the level up will be applied.
 	 * @type {BlackFlagActor}
@@ -51,7 +50,7 @@ export default class LevelUpDialog extends FormApplication {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll("button") ) {
+		for (const element of html.querySelectorAll("button")) {
 			element.addEventListener("click", this._onChoose.bind(this));
 		}
 	}
@@ -66,14 +65,14 @@ export default class LevelUpDialog extends FormApplication {
 		event.preventDefault();
 		const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
 		const cls = this.actor.system.progression.classes[classIdentifier]?.document;
-		if ( cls ) {
+		if (cls) {
 			try {
 				this.actor.system.levelUp(cls);
-			} catch(err) {
+			} catch (err) {
 				ui.notifications.warn(err.message);
 			}
 		} else {
-			(new ConceptSelectionDialog(this.actor, "class")).render(true);
+			new ConceptSelectionDialog(this.actor, "class").render(true);
 		}
 		this.close();
 	}

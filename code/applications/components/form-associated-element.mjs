@@ -4,7 +4,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Abstract custom element with some form internal architecture and app hookups.
  */
 export default class FormAssociatedElement extends AppAssociatedElement {
-
 	static formAssociated = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -18,7 +17,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		if ( this.form ) {
+		if (this.form) {
 			this.form.addEventListener("formdata", this.#formDataHandler);
 		}
 	}
@@ -26,7 +25,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	disconnectedCallback() {
-		if ( this.form ) {
+		if (this.form) {
 			this.form.removeEventListener("formdata", this.#formDataHandler);
 		}
 	}
@@ -83,7 +82,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	 * @protected
 	 */
 	#onFormData(event) {
-		for ( const field of this.querySelectorAll('[name^="$"]') ) {
+		for (const field of this.querySelectorAll('[name^="$"]')) {
 			event.formData.delete(field.name);
 			delete event.formData.object[field.name];
 		}

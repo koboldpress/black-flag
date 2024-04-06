@@ -4,22 +4,21 @@ import FormAssociatedElement from "./form-associated-element.mjs";
  * Custom element for displaying the list of damages on an activity.
  */
 export default class DamageListElement extends FormAssociatedElement {
-
 	connectedCallback() {
 		super.connectedCallback();
 
 		const damageCollection = foundry.utils.getProperty(this.activity, this.name);
 
-		if ( this.single ) {
+		if (this.single) {
 			this._toggleState(null, !!damageCollection?.custom);
 		} else {
-			for ( const li of this.querySelectorAll("[data-index]") ) {
+			for (const li of this.querySelectorAll("[data-index]")) {
 				const damage = damageCollection?.[li.dataset.index];
 				this._toggleState(li.dataset.index, !!damage?.custom);
 			}
 		}
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
+		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
@@ -76,20 +75,20 @@ export default class DamageListElement extends FormAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( !this.isEditable || (target.dispatchEvent(event) === false) ) return;
+		if (!this.isEditable || target.dispatchEvent(event) === false) return;
 
 		const li = target.closest("li");
 		const index = li?.dataset.index;
 		const damageCollection = foundry.utils.getProperty(this.activity.toObject(), this.name) ?? [];
 
-		switch ( action ) {
+		switch (action) {
 			case "add":
 				damageCollection.push({});
 				break;
 			case "customize":
-				if ( li.dataset.customFormula !== undefined ) {
+				if (li.dataset.customFormula !== undefined) {
 					li.querySelector(".custom input").value = "";
-					if ( this.single ) damageCollection.custom = "";
+					if (this.single) damageCollection.custom = "";
 					else damageCollection[index].custom = "";
 				} else {
 					li.querySelector(".custom input").value = this._createFormula(index);
@@ -103,7 +102,7 @@ export default class DamageListElement extends FormAssociatedElement {
 				return;
 		}
 
-		return this.app.submit({ updateData: { [this.name]: damageCollection }});
+		return this.app.submit({ updateData: { [this.name]: damageCollection } });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -118,8 +117,8 @@ export default class DamageListElement extends FormAssociatedElement {
 	 */
 	_createFormula(index) {
 		let damage = foundry.utils.getProperty(this.activity.toObject(), this.name);
-		if ( !this.single ) damage = damage[index];
-		if ( damage.denomination ) {
+		if (!this.single) damage = damage[index];
+		if (damage.denomination) {
 			const dice = `${damage.number || 1}d${damage.denomination}`;
 			return damage.bonus ? `${dice} + ${damage.bonus}` : dice;
 		}
@@ -136,22 +135,22 @@ export default class DamageListElement extends FormAssociatedElement {
 	 */
 	_toggleState(index, showCustomFormula) {
 		const li = this.querySelector(this.single ? "li" : `[data-index="${index}"]`);
-		if ( showCustomFormula ) li.dataset.customFormula = "";
+		if (showCustomFormula) li.dataset.customFormula = "";
 		else delete li.dataset.customFormula;
 
 		const normal = ["die-count", "die-denomination", "plus", "bonus"];
-		for ( const cls of normal ) {
+		for (const cls of normal) {
 			const element = li.querySelector(`.${cls}`);
-			if ( showCustomFormula ) element?.classList.add("hidden");
+			if (showCustomFormula) element?.classList.add("hidden");
 			else element?.classList.remove("hidden");
 		}
 
 		const formulaElement = li.querySelector(".custom");
-		if ( showCustomFormula ) formulaElement?.classList.remove("hidden");
+		if (showCustomFormula) formulaElement?.classList.remove("hidden");
 		else formulaElement?.classList.add("hidden");
 
 		const control = li.querySelector('[data-action="customize"]');
-		if ( showCustomFormula ) control?.classList.add("active");
+		if (showCustomFormula) control?.classList.add("active");
 		else control?.classList.remove("active");
 	}
 }

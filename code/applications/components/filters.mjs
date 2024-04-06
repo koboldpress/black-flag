@@ -4,7 +4,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying a grouped set of inventory filters.
  */
 export default class FiltersElement extends AppAssociatedElement {
-
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -80,7 +79,7 @@ export default class FiltersElement extends AppAssociatedElement {
 	 */
 	#onChangeFilter(event) {
 		event.stopPropagation();
-		this.document.update({[`flags.black-flag.sheet.filters.${this.tab}.${event.target.filter}`]: event.target.value});
+		this.document.update({ [`flags.black-flag.sheet.filters.${this.tab}.${event.target.filter}`]: event.target.value });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -93,14 +92,13 @@ export default class FiltersElement extends AppAssociatedElement {
 	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
 	 * @returns {BlackFlagItem[]} - Filtered items.
 	 */
-	static filter(items, filters={}) {
-		if ( foundry.utils.isEmpty(filters) ) return items;
+	static filter(items, filters = {}) {
+		if (foundry.utils.isEmpty(filters)) return items;
 		return items.filter(item => {
-			for ( const [filter, value] of Object.entries(filters) ) {
-				if ( value === 0 ) continue;
+			for (const [filter, value] of Object.entries(filters)) {
+				if (value === 0) continue;
 				const matches = item.system.evaluateFilter?.(filter);
-				if ( ((value === 1) && (matches === false))
-					|| ((value === -1) && (matches === true)) ) return false;
+				if ((value === 1 && matches === false) || (value === -1 && matches === true)) return false;
 			}
 			return true;
 		});

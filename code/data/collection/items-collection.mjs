@@ -10,15 +10,17 @@ export default class BlackFlagItems extends Items {
 
 	/* -------------------------------------------- */
 
-	async importFromCompendium(pack, id, updateData={}, options={}) {
+	async importFromCompendium(pack, id, updateData = {}, options = {}) {
 		const created = await super.importFromCompendium(pack, id, updateData, options);
 
 		const item = await pack.getDocument(id);
 		const contents = await item.system.contents;
-		if ( contents ) {
+		if (contents) {
 			const fromOptions = foundry.utils.mergeObject({ clearSort: false }, options);
 			const toCreate = await BlackFlagItem.createWithContents(contents, {
-				container: created, keepId: options.keepId, transformAll: item => this.fromCompendium(item, fromOptions)
+				container: created,
+				keepId: options.keepId,
+				transformAll: item => this.fromCompendium(item, fromOptions)
 			});
 			await BlackFlagItem.createDocuments(toCreate, { fromCompendium: true, keepId: true });
 		}

@@ -2,7 +2,7 @@
  * Extension of FormApplication to incorporate certain PseudoDocument-specific logic.
  */
 export default class PseudoDocumentSheet extends FormApplication {
-	constructor(pseudoDocument, options={}) {
+	constructor(pseudoDocument, options = {}) {
 		super(pseudoDocument, options);
 		this.#pseudoDocumentId = pseudoDocument.id;
 		this.#pseudoDocumentType = pseudoDocument.metadata.name;
@@ -37,9 +37,9 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	get isEditable() {
 		let editable = this.options.editable && this.item.isOwner;
-		if ( this.item.pack ) {
+		if (this.item.pack) {
 			const pack = game.packs.get(this.item.pack);
-			if ( pack.locked ) editable = false;
+			if (pack.locked) editable = false;
 		}
 		return editable;
 	}
@@ -60,7 +60,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 	/*               Methods               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async close(options={}) {
+	async close(options = {}) {
 		await super.close(options);
 		delete this.document.apps[this.appId];
 	}
@@ -78,7 +78,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	render(force=false, options={}) {
+	render(force = false, options = {}) {
 		this.document.apps[this.appId] = this;
 		return super.render(force, options);
 	}
@@ -99,7 +99,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 	 * @protected
 	 */
 	_createDocumentIdLink(html) {
-		if ( !this.object.id ) return;
+		if (!this.object.id) return;
 		const title = html.find(".window-title");
 		const label = game.i18n.localize(this.object.constructor.metadata.label);
 		const idLink = document.createElement("a");
@@ -111,12 +111,14 @@ export default class PseudoDocumentSheet extends FormApplication {
 		idLink.addEventListener("click", event => {
 			event.preventDefault();
 			game.clipboard.copyPlainText(this.object.id);
-			ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "id", id: this.object.id}));
+			ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type: "id", id: this.object.id }));
 		});
 		idLink.addEventListener("contextmenu", event => {
 			event.preventDefault();
 			game.clipboard.copyPlainText(this.object.uuid);
-			ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: this.object.uuid}));
+			ui.notifications.info(
+				game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type: "uuid", id: this.object.uuid })
+			);
 		});
 		title.append(idLink);
 	}

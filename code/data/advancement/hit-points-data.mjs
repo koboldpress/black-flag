@@ -10,7 +10,7 @@ const { JSONField, NumberField } = foundry.data.fields;
 export class HitPointsConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			denomination: new NumberField({initial: 4, label: "BF.HitDice.Label[one]"})
+			denomination: new NumberField({ initial: 4, label: "BF.HitDice.Label[one]" })
 		};
 	}
 }
@@ -27,7 +27,7 @@ export class HitPointsConfigurationData extends foundry.abstract.DataModel {
 export class HitPointsValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			granted: new MappingField(new JSONField(), {required: false, initial: undefined})
+			granted: new MappingField(new JSONField(), { required: false, initial: undefined })
 		};
 	}
 }

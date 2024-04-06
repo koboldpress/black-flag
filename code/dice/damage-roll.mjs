@@ -41,10 +41,10 @@ import BasicRoll from "./basic-roll.mjs";
  * @param {DamageRollOptions} options - Additional options that describe the challenge roll.
  */
 export default class DamageRoll extends BasicRoll {
-	constructor(formula, data, options={}) {
+	constructor(formula, data, options = {}) {
 		super(formula, data, options);
-		if ( !this.options.preprocessed ) this.#preprocessFormula();
-		if ( !this.options.configured ) this.configureRoll();
+		if (!this.options.preprocessed) this.#preprocessFormula();
+		if (!this.options.configured) this.configureRoll();
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -77,7 +77,7 @@ export default class DamageRoll extends BasicRoll {
 		dialog.configure ??= !Object.values(keys).some(k => k);
 
 		// Determine critical mode
-		for ( const roll of config.rolls ) {
+		for (const roll of config.rolls) {
 			roll.options ??= {};
 			roll.options.critical = !!roll.options.critical || keys.critical;
 			roll.options.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
@@ -106,12 +106,12 @@ export default class DamageRoll extends BasicRoll {
 	 * Perform any term-merging required to ensure that criticals can be calculated successfully.
 	 */
 	#preprocessFormula() {
-		for ( let [i, term] of this.terms.entries() ) {
+		for (let [i, term] of this.terms.entries()) {
 			const nextTerm = this.terms[i + 1];
 			const prevTerm = this.terms[i - 1];
 
 			// Convert shorthand dX terms to 1dX preemptively to allow them to be appropriately doubled for criticals
-			if ( (term instanceof StringTerm) && /^d\d+/.test(term.term) && !(prevTerm instanceof ParentheticalTerm) ) {
+			if (term instanceof StringTerm && /^d\d+/.test(term.term) && !(prevTerm instanceof ParentheticalTerm)) {
 				const formula = `1${term.term}`;
 				const newTerm = new Roll(formula).terms[0];
 				this.terms.splice(i, 1, newTerm);
@@ -119,30 +119,36 @@ export default class DamageRoll extends BasicRoll {
 			}
 
 			// Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
-			else if ( (term instanceof ParentheticalTerm) && (prevTerm instanceof StringTerm)
-				&& prevTerm.term.match(/^[0-9]*d$/)) {
-				if ( term.isDeterministic ) {
+			else if (
+				term instanceof ParentheticalTerm &&
+				prevTerm instanceof StringTerm &&
+				prevTerm.term.match(/^[0-9]*d$/)
+			) {
+				if (term.isDeterministic) {
 					let newFormula = `${prevTerm.term}${term.evaluate().total}`;
 					let deleteCount = 2;
 
 					// Merge in any roll modifiers
-					if ( nextTerm instanceof StringTerm ) {
+					if (nextTerm instanceof StringTerm) {
 						newFormula += nextTerm.term;
 						deleteCount += 1;
 					}
 
-					const newTerm = (new Roll(newFormula)).terms[0];
+					const newTerm = new Roll(newFormula).terms[0];
 					this.terms.splice(i - 1, deleteCount, newTerm);
 					term = newTerm;
 				}
 			}
 
 			// Merge any parenthetical terms followed by string terms
-			else if ( (term instanceof ParentheticalTerm || term instanceof MathTerm) && (nextTerm instanceof StringTerm)
-				&& nextTerm.term.match(/^d[0-9]*$/)) {
-				if ( term.isDeterministic ) {
+			else if (
+				(term instanceof ParentheticalTerm || term instanceof MathTerm) &&
+				nextTerm instanceof StringTerm &&
+				nextTerm.term.match(/^d[0-9]*$/)
+			) {
+				if (term.isDeterministic) {
 					const newFormula = `${term.evaluate().total}${nextTerm.term}`;
-					const newTerm = (new Roll(newFormula)).terms[0];
+					const newTerm = new Roll(newFormula).terms[0];
 					this.terms.splice(i, 2, newTerm);
 					term = newTerm;
 				}
@@ -165,37 +171,40 @@ export default class DamageRoll extends BasicRoll {
 		let bonus = 0;
 		const multiplier = this.options.multiplier ?? 2;
 
-		for ( const [i, term] of this.terms.entries() ) {
+		for (const [i, term] of this.terms.entries()) {
 			// Multiply dice terms
-			if ( term instanceof DiceTerm ) {
+			if (term instanceof DiceTerm) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
-				if ( this.isCritical ) {
+				if (this.isCritical) {
 					let termMultiplier = multiplier;
 
 					// Maximize Critical - Maximize one die and reduce to the multiplier by one to account for it.
-					if ( this.options.maximizeDamage ) {
+					if (this.options.maximizeDamage) {
 						bonus += term.number * term.faces;
 						termMultiplier = Math.max(1, termMultiplier - 1);
 					}
 
-					const bonusDice = (this.options.bonusDice ?? (i === 0)) ? this.options.bonusDice : 0;
+					const bonusDice = this.options.bonusDice ?? i === 0 ? this.options.bonusDice : 0;
 					term.alter(this.options.multiplyDice ? null : termMultiplier, bonusDice);
 					term.options.critical = true;
 
 					// Multiply Dice - Add term to multiply dice result (as long as multiply numeric isn't also set)
-					if ( this.options.multiplyDice && !this.options.multiplyNumeric ) this.terms.splice(i + 1, 0,
-						new OperatorTerm({operator: "*"}),
-						new NumericTerm({number: termMultiplier})
-					);
+					if (this.options.multiplyDice && !this.options.multiplyNumeric)
+						this.terms.splice(
+							i + 1,
+							0,
+							new OperatorTerm({ operator: "*" }),
+							new NumericTerm({ number: termMultiplier })
+						);
 				}
 			}
 
 			// Multiply Numeric - Modify numeric terms (as long as multiply dice isn't also set)
-			else if ( (this.options.multiplyNumeric && !this.options.multiplyDice) && (term instanceof NumericTerm) ) {
+			else if (this.options.multiplyNumeric && !this.options.multiplyDice && term instanceof NumericTerm) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
-				if ( this.isCritical ) {
+				if (this.isCritical) {
 					term.number *= multiplier;
 					term.options.critical = true;
 				}
@@ -203,22 +212,24 @@ export default class DamageRoll extends BasicRoll {
 		}
 
 		// Multiply Dice & Numeric: Wrap whole formula in parenthetical term and multiply
-		if ( this.isCritical && this.options.multiplyDice && this.options.multiplyNumeric && (multiplier > 1) ) {
+		if (this.isCritical && this.options.multiplyDice && this.options.multiplyNumeric && multiplier > 1) {
 			this.terms = [ParentheticalTerm.fromTerms(this.terms)];
-			this.terms.push(new OperatorTerm({operator: "*"}));
-			this.terms.push(new NumericTerm({number: multiplier}));
+			this.terms.push(new OperatorTerm({ operator: "*" }));
+			this.terms.push(new NumericTerm({ number: multiplier }));
 		}
 
 		// Add flat bonus back in
-		if ( bonus > 0 ) {
-			this.terms.push(new OperatorTerm({operator: "+"}));
-			this.terms.push(new NumericTerm({number: bonus}, {flavor: game.i18n.localize("BF.Damage.Critical.Maximize")}));
+		if (bonus > 0) {
+			this.terms.push(new OperatorTerm({ operator: "+" }));
+			this.terms.push(
+				new NumericTerm({ number: bonus }, { flavor: game.i18n.localize("BF.Damage.Critical.Maximize") })
+			);
 		}
 
 		// Add extra critical damage
-		if ( this.isCritical && this.options.bonusDamage ) {
+		if (this.isCritical && this.options.bonusDamage) {
 			const extra = new Roll(this.options.bonusDamage, this.data);
-			if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
+			if (!(extra.terms[0] instanceof OperatorTerm)) this.terms.push(new OperatorTerm({ operator: "+" }));
 			this.terms.push(...extra.terms);
 		}
 
@@ -234,8 +245,8 @@ export default class DamageRoll extends BasicRoll {
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	/** @inheritDoc */
-	async render({flavor, template=this.constructor.CHAT_TEMPLATE, isPrivate=false}={}) {
-		if ( !this._evaluated ) await this.evaluate({async: true});
+	async render({ flavor, template = this.constructor.CHAT_TEMPLATE, isPrivate = false } = {}) {
+		if (!this._evaluated) await this.evaluate({ async: true });
 
 		const chatData = {
 			CONFIG: CONFIG.BlackFlag,

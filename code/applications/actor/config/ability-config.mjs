@@ -48,8 +48,9 @@ export default class AbilityConfig extends BaseConfig {
 			return obj;
 		}, {});
 		context.abilityId = this.abilityId;
-		context.ability = this.abilityId ? context.source.abilities[this.abilityId]
-			?? this.document.system.abilities[this.abilityId] ?? {} : null;
+		context.ability = this.abilityId
+			? context.source.abilities[this.abilityId] ?? this.document.system.abilities[this.abilityId] ?? {}
+			: null;
 		context.canSetValue = !!game.settings.get("black-flag", "abilitySelectionManual");
 		context.proficiencyLevels = {
 			0: game.i18n.localize("BF.Proficiency.Level.None"),
@@ -64,39 +65,62 @@ export default class AbilityConfig extends BaseConfig {
 		let checkModifiers;
 		let saveModifiers;
 		let global;
-		if ( this.abilityId ) {
-			checkModifiers = this.getModifiers([{k: "type", v: "ability-check"}, {k: "ability", v: this.abilityId}]);
-			saveModifiers = this.getModifiers([{k: "type", v: "ability-save"}, {k: "ability", v: this.abilityId}]);
+		if (this.abilityId) {
+			checkModifiers = this.getModifiers([
+				{ k: "type", v: "ability-check" },
+				{ k: "ability", v: this.abilityId }
+			]);
+			saveModifiers = this.getModifiers([
+				{ k: "type", v: "ability-save" },
+				{ k: "ability", v: this.abilityId }
+			]);
 			global = false;
 		} else {
 			const filter = modifier => !modifier.filter.some(f => f.k === "ability");
-			checkModifiers = this.getModifiers([{k: "type", v: "ability-check"}], [], filter);
-			saveModifiers = this.getModifiers([{k: "type", v: "ability-save"}], [], filter);
+			checkModifiers = this.getModifiers([{ k: "type", v: "ability-check" }], [], filter);
+			saveModifiers = this.getModifiers([{ k: "type", v: "ability-save" }], [], filter);
 			global = true;
 		}
 		return [
 			{
-				category: "check", type: "bonus", label: "BF.Check.Label[one]", global, showProficiency: true,
+				category: "check",
+				type: "bonus",
+				label: "BF.Check.Label[one]",
+				global,
+				showProficiency: true,
 				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "check", type: "min", label: "BF.Check.Label[one]", showProficiency: true,
+				category: "check",
+				type: "min",
+				label: "BF.Check.Label[one]",
+				showProficiency: true,
 				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "check", type: "note", label: "BF.Check.Label[one]",
+				category: "check",
+				type: "note",
+				label: "BF.Check.Label[one]",
 				modifiers: checkModifiers.filter(m => m.type === "note")
 			},
 			{
-				category: "save", type: "bonus", label: "BF.SavingThrow.LabelShort[one]", showProficiency: true,
+				category: "save",
+				type: "bonus",
+				label: "BF.SavingThrow.LabelShort[one]",
+				showProficiency: true,
 				modifiers: saveModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "save", type: "min", label: "BF.SavingThrow.LabelShort[one]", showProficiency: true,
+				category: "save",
+				type: "min",
+				label: "BF.SavingThrow.LabelShort[one]",
+				showProficiency: true,
 				modifiers: saveModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "save", type: "note", label: "BF.SavingThrow.LabelShort[one]",
+				category: "save",
+				type: "note",
+				label: "BF.SavingThrow.LabelShort[one]",
 				modifiers: saveModifiers.filter(m => m.type === "note")
 			}
 		];
@@ -108,7 +132,7 @@ export default class AbilityConfig extends BaseConfig {
 
 	_onChangeInput(event) {
 		super._onChangeInput(event);
-		if ( event.target.name === "abilityId" ) {
+		if (event.target.name === "abilityId") {
 			this.abilityId = event.target.value;
 			this.render();
 		}
@@ -118,7 +142,7 @@ export default class AbilityConfig extends BaseConfig {
 
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `ability-${category}` }] };
-		if ( this.abilityId ) data.filter.push({ k: "ability", v: this.abilityId });
+		if (this.abilityId) data.filter.push({ k: "ability", v: this.abilityId });
 		return data;
 	}
 }

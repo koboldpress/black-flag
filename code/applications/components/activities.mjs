@@ -6,7 +6,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying the activities on an item sheet.
  */
 export default class ActivitiesElement extends AppAssociatedElement {
-
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -23,17 +22,21 @@ export default class ActivitiesElement extends AppAssociatedElement {
 		this.addEventListener("dragleave", this._onDragLeave.bind(this), { signal });
 		this.addEventListener("drop", this._onDrop.bind(this), { signal });
 
-		for ( const element of this.querySelectorAll("[data-activity-id]") ) {
+		for (const element of this.querySelectorAll("[data-activity-id]")) {
 			element.setAttribute("draggable", true);
 			element.ondragstart = this._onDragStart.bind(this);
 			element.ondragend = this._onDragEnd.bind(this);
 		}
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
-			element.addEventListener("click", event => {
-				event.stopImmediatePropagation();
-				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
-			}, { signal });
+		for (const element of this.querySelectorAll("[data-action]")) {
+			element.addEventListener(
+				"click",
+				event => {
+					event.stopImmediatePropagation();
+					this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+				},
+				{ signal }
+			);
 		}
 
 		const contextOptions = this.#getContextMenuOptions();
@@ -45,7 +48,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getItemActivityContext", this, contextOptions);
-		if ( contextOptions ) ContextMenu.create(this.app, this, "[data-activity-id]", contextOptions);
+		if (contextOptions) ContextMenu.create(this.app, this, "[data-activity-id]", contextOptions);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -143,12 +146,15 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	#onAction(target, action) {
 		const id = target.closest("[data-activity-id]")?.dataset.activityId;
 		const activity = this.activities.get(id);
-		if ( ["edit", "delete", "duplicate"].includes(action) && !activity ) return;
-		switch ( action ) {
-			case "add": return ActivitySelection.createDialog(this.item);
+		if (["edit", "delete", "duplicate"].includes(action) && !activity) return;
+		switch (action) {
+			case "add":
+				return ActivitySelection.createDialog(this.item);
 			case "edit":
-			case "view": return activity.sheet.render(true);
-			case "delete": return activity.deleteDialog();
+			case "view":
+				return activity.sheet.render(true);
+			case "delete":
+				return activity.deleteDialog();
 			case "duplicate":
 				const data = activity.toObject();
 				delete data._id;
@@ -188,7 +194,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 */
 	_onDragEnter(event) {
 		const { data } = DragDrop.getDragData(event);
-		if ( !data ) this.dataset.dropStatus = "unknown";
+		if (!data) this.dataset.dropStatus = "unknown";
 		else this.dataset.dropStatus = this._validateDrop(data) ? "valid" : "invalid";
 	}
 
@@ -210,8 +216,12 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @param {DragEvent} event - Triggering drag event.
 	 */
 	_onDragLeave(event) {
-		if ( event.clientY <= this.#rect.top || event.clientY >= this.#rect.bottom
-			|| event.clientX <= this.#rect.left || event.clientX >= this.#rect.right ) {
+		if (
+			event.clientY <= this.#rect.top ||
+			event.clientY >= this.#rect.bottom ||
+			event.clientX <= this.#rect.left ||
+			event.clientX >= this.#rect.right
+		) {
 			delete this.dataset.dropStatus;
 			this.#rect = null;
 		}
@@ -226,11 +236,11 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 */
 	async _onDrop(event) {
 		const { data } = DragDrop.getDragData(event);
-		if ( !this._validateDrop(data) ) return false;
+		if (!this._validateDrop(data)) return false;
 
 		try {
 			const activity = (await fromUuid(data.uuid)).toObject() ?? activity.data;
-			if ( !activity ) return false;
+			if (!activity) return false;
 
 			delete activity._id;
 			this.item.createEmbeddedDocuments("Activity", [activity]);
@@ -247,8 +257,8 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @returns {boolean}
 	 */
 	_validateDrop(data) {
-		if ( (data.type !== "Activity") ) return false;
-		if ( !data.uuid ) return true;
+		if (data.type !== "Activity") return false;
+		if (!data.uuid) return true;
 		return !data.uuid.startsWith(this.item.uuid);
 	}
 }

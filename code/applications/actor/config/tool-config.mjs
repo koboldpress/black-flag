@@ -83,25 +83,37 @@ export default class ToolConfig extends BaseConfig {
 	prepareModifiers() {
 		let checkModifiers;
 		let global;
-		if ( this.toolId ) {
-			checkModifiers = this.getModifiers([{k: "type", v: "tool-check"}, {k: "tool", v: this.toolId}]);
+		if (this.toolId) {
+			checkModifiers = this.getModifiers([
+				{ k: "type", v: "tool-check" },
+				{ k: "tool", v: this.toolId }
+			]);
 			global = false;
 		} else {
 			const filter = modifier => !modifier.filter.some(f => f.k === "tool");
-			checkModifiers = this.getModifiers([{k: "type", v: "tool-check"}], [], filter);
+			checkModifiers = this.getModifiers([{ k: "type", v: "tool-check" }], [], filter);
 			global = true;
 		}
 		return [
 			{
-				category: "check", type: "bonus", label: "BF.Check.Label[one]", global,
+				category: "check",
+				type: "bonus",
+				label: "BF.Check.Label[one]",
+				global,
 				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "check", type: "min", label: "BF.Check.Label[one]", global,
+				category: "check",
+				type: "min",
+				label: "BF.Check.Label[one]",
+				global,
 				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "check", type: "note", label: "BF.Check.Label[one]", global,
+				category: "check",
+				type: "note",
+				label: "BF.Check.Label[one]",
+				global,
 				modifiers: checkModifiers.filter(m => m.type === "note")
 			}
 		];
@@ -117,7 +129,7 @@ export default class ToolConfig extends BaseConfig {
 		const html = jQuery[0];
 
 		const select = html.querySelector('[name="listed-tools"]');
-		if ( select ) {
+		if (select) {
 			select.addEventListener("change", this._onChangeTools.bind(this));
 		}
 	}
@@ -127,7 +139,7 @@ export default class ToolConfig extends BaseConfig {
 	/** @inheritDoc */
 	_onChangeInput(event) {
 		super._onChangeInput(event);
-		if ( event.target.name === "toolId" ) {
+		if (event.target.name === "toolId") {
 			this.toolId = event.target.value;
 			this.render();
 		}
@@ -140,14 +152,14 @@ export default class ToolConfig extends BaseConfig {
 	 * @param {Event} event - Triggering event.
 	 */
 	_onChangeTools(event) {
-		if ( event.target.open ) return;
+		if (event.target.open) return;
 		const removeKeys = new Set(Object.keys(this.document.system.proficiencies.tools));
 		const updates = {};
-		for ( const key of event.target.value ) {
-			if ( key in this.document.system.proficiencies.tools ) removeKeys.delete(key);
+		for (const key of event.target.value) {
+			if (key in this.document.system.proficiencies.tools) removeKeys.delete(key);
 			else updates[`system.proficiencies.tools.${key}`] = {};
 		}
-		removeKeys.forEach(key => updates[`system.proficiencies.tools.-=${key}`] = null);
+		removeKeys.forEach(key => (updates[`system.proficiencies.tools.-=${key}`] = null));
 		this.document.update(updates);
 	}
 
@@ -156,7 +168,7 @@ export default class ToolConfig extends BaseConfig {
 	/** @inheritDoc */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `tool-${category}` }] };
-		if ( this.toolId ) data.filter.push({ k: "tool", v: this.toolId });
+		if (this.toolId) data.filter.push({ k: "tool", v: this.toolId });
 		return data;
 	}
 }

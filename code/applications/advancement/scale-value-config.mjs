@@ -4,7 +4,6 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for scale values.
  */
 export default class ScaleValueConfig extends AdvancementConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "scale-value", "two-column"],
@@ -42,9 +41,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 				})
 			},
 			type: type.metadata,
-			types: Object.fromEntries(
-				Object.entries(types).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])
-			),
+			types: Object.fromEntries(Object.entries(types).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])),
 			faces: Object.fromEntries(CONFIG.BlackFlag.scaleDiceSizes.map(die => [die, `d${die}`])),
 			levels: this.levelRange.reduce((obj, level) => {
 				obj[level] = {
@@ -76,14 +73,14 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	 */
 	_onIdentifierHintCopy(event) {
 		game.clipboard.copyPlainText(`@scale.${this.item.identifier}.${this.advancement.identifier}`);
-		game.tooltip.activate(event.target, {text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP"});
+		game.tooltip.activate(event.target, { text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
-		if ( !("configuration.type" in formData) || (updates.configuration.type === this.advancement.configuration.type) ) {
+		if (!("configuration.type" in formData) || updates.configuration.type === this.advancement.configuration.type) {
 			return super._updateObject(event, foundry.utils.flattenObject(updates));
 		}
 
@@ -94,9 +91,9 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
 		// Transform values into new type
 		const NewType = CONFIG.Advancement.types.scaleValue.dataTypes[type];
-		for ( const level of this.levelRange ) {
+		for (const level of this.levelRange) {
 			const value = this.advancement.valueForLevel(level);
-			if ( value ) updates.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
+			if (value) updates.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
 			else updates.configuration.scale[`-=${level}`] = null;
 		}
 		updates.configuration.type = type;
@@ -109,32 +106,30 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
 	prepareConfigurationUpdate(configuration) {
 		// Determine keys that should be present
-		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[
-			configuration.type ?? this.advancement.configuration.type
-		];
+		const ScaleValueType =
+			CONFIG.Advancement.types.scaleValue.dataTypes[configuration.type ?? this.advancement.configuration.type];
 		const validKeys = Object.keys(ScaleValueType.schema.initial());
 
 		let lastValue = {};
 		const scale = {};
-		for ( const level of this.levelRange ) {
+		for (const level of this.levelRange) {
 			const value = configuration.scale[level] ?? {};
 			scale[level] ??= {};
-			for ( const key of validKeys ) {
+			for (const key of validKeys) {
 				// No value or same as previous value, don't store it
-				if ( !value[key] || (value[key] === lastValue[key]) ) scale[level][`-=${key}`] = null;
-
+				if (!value[key] || value[key] === lastValue[key]) scale[level][`-=${key}`] = null;
 				// Value is new, store it and update lastValue
 				else lastValue[key] = scale[level][key] = value[key];
 				// TODO: Run value through validator on DataField
 			}
 
 			// Strip out any unrecognized keys
-			for ( const key of Object.keys(this.advancement.configuration.scale[level] ?? {}) ) {
-				if ( !validKeys.includes(key) ) scale[level][`-=${key}`] = null;
+			for (const key of Object.keys(this.advancement.configuration.scale[level] ?? {})) {
+				if (!validKeys.includes(key)) scale[level][`-=${key}`] = null;
 			}
 
 			// If all updates are removals, just remove the level
-			if ( Object.keys(scale[level]).every(k => k.startsWith("-=")) ) {
+			if (Object.keys(scale[level]).every(k => k.startsWith("-="))) {
 				delete scale[level];
 				scale[`-=${level}`] = null;
 			}

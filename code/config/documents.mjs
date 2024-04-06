@@ -10,10 +10,7 @@ export const _documentCategories = {
 	Actor: {
 		person: {
 			label: "BF.Actor.Category.Person.Label",
-			types: [
-				actorTypes.PCData,
-				actorTypes.NPCData
-			]
+			types: [actorTypes.PCData, actorTypes.NPCData]
 		}
 	},
 	Item: {
@@ -33,10 +30,7 @@ export const _documentCategories = {
 		},
 		feature: {
 			label: "BF.Item.Category.Feature.Label",
-			types: [
-				itemTypes.FeatureData,
-				itemTypes.TalentData
-			],
+			types: [itemTypes.FeatureData, itemTypes.TalentData],
 			sheet: {
 				application: itemSheet.FeatureSheet,
 				label: "BF.Sheet.Default.Feature"
@@ -61,19 +55,12 @@ export const _documentCategories = {
 		},
 		meta: {
 			label: "BF.Item.Category.Meta.Label",
-			types: [
-				itemTypes.CurrencyData,
-				itemTypes.SpellData
-			]
+			types: [itemTypes.CurrencyData, itemTypes.SpellData]
 		}
 	},
 	JournalEntryPage: {
 		summaries: {
-			types: [
-				journalTypes.ClassJournalPageData,
-				journalTypes.SubclassJournalPageData,
-				journalTypes.RuleJournalPageData
-			]
+			types: [journalTypes.ClassJournalPageData, journalTypes.SubclassJournalPageData, journalTypes.RuleJournalPageData]
 		}
 	}
 };

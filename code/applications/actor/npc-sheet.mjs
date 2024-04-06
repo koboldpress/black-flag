@@ -2,16 +2,15 @@ import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "actor", "sheet", "npc"],
-			dragDrop: [{dragSelector: "[data-item-id]"}],
+			dragDrop: [{ dragSelector: "[data-item-id]" }],
 			width: 460,
 			height: null,
 			tabs: [
-				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main"}
+				{ group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main" }
 			],
 			scrollY: [".window-content"]
 		});
@@ -29,7 +28,8 @@ export default class NPCSheet extends BaseActorSheet {
 
 		context.labels = {
 			sizeAndType: `${game.i18n.localize(CONFIG.BlackFlag.sizes[context.system.traits.size]?.label ?? "")} ${
-				context.system.traits.type.label}`
+				context.system.traits.type.label
+			}`
 		};
 
 		context.placeholders = {
@@ -38,9 +38,11 @@ export default class NPCSheet extends BaseActorSheet {
 		};
 
 		context.stealthLabel = numberFormat(context.system.attributes.stealth);
-		if ( context.system.attributes.baseStealth ) context.stealthLabel = game.i18n.format("BF.Armor.StealthReduction", {
-			reduced: context.stealthLabel, full: numberFormat(context.system.attributes.baseStealth)
-		});
+		if (context.system.attributes.baseStealth)
+			context.stealthLabel = game.i18n.format("BF.Armor.StealthReduction", {
+				reduced: context.stealthLabel,
+				full: numberFormat(context.system.attributes.baseStealth)
+			});
 
 		return context;
 	}
@@ -50,34 +52,50 @@ export default class NPCSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async prepareActions(context) {
 		await super.prepareActions(context);
-		await Promise.all(Object.values(context.actions)
-			.flatMap(t => t.activities.map(async a => {
-				a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {
-					secrets: false, rollData: a.item.getRollData(), async: true, relativeTo: a.activity
-				});
-				return a.description;
-			}))
+		await Promise.all(
+			Object.values(context.actions).flatMap(t =>
+				t.activities.map(async a => {
+					a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {
+						secrets: false,
+						rollData: a.item.getRollData(),
+						async: true,
+						relativeTo: a.activity
+					});
+					return a.description;
+				})
+			)
 		);
 
 		// Passive & Free Actions
-		context.passive = (await Promise.all(this.actor.items.filter(i => {
-			if ( i.type !== "feature" ) return false;
-			if ( i.system.activities?.size ) return false;
-			return true;
-		}).map(async item => ({
-			item, description: await TextEditor.enrichHTML(item.system.description.value, {
-				secrets: false, rollData: item.getRollData(), async: true, relativeTo: item
-			})
-		}))))
+		context.passive = (
+			await Promise.all(
+				this.actor.items
+					.filter(i => {
+						if (i.type !== "feature") return false;
+						if (i.system.activities?.size) return false;
+						return true;
+					})
+					.map(async item => ({
+						item,
+						description: await TextEditor.enrichHTML(item.system.description.value, {
+							secrets: false,
+							rollData: item.getRollData(),
+							async: true,
+							relativeTo: item
+						})
+					}))
+			)
+		)
 			.concat(context.actions.free?.activities ?? [])
 			.sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
 		delete context.actions.free;
 
 		// Legendary Actions
-		if ( context.actions.legendary ) {
+		if (context.actions.legendary) {
 			const leg = context.system.attributes.legendary;
 			context.actions.legendary.count = {
-				prefix: "system.attributes.legendary", value: leg.value,
+				prefix: "system.attributes.legendary",
+				value: leg.value,
 				max: context.editable ? leg.max : context.source.attributes.legendary.max
 			};
 			context.actions.legendary.description = game.i18n.format(
@@ -101,21 +119,24 @@ export default class NPCSheet extends BaseActorSheet {
 
 		// Search through active effects for any that apply to traits
 		const validKeyPaths = new Set([
-			"system.traits.damage.resistances.value", "system.traits.condition.resistances.value",
-			"system.traits.damage.immunities.value", "system.traits.condition.immunities.value",
-			"system.traits.damage.vulnerabilties.value", "system.traits.condition.vulnerabilities.value"
+			"system.traits.damage.resistances.value",
+			"system.traits.condition.resistances.value",
+			"system.traits.damage.immunities.value",
+			"system.traits.condition.immunities.value",
+			"system.traits.damage.vulnerabilties.value",
+			"system.traits.condition.vulnerabilities.value"
 		]);
 		const associatedEffects = [];
-		for ( const effect of this.actor.allApplicableEffects() ) {
-			if ( effect.disabled ) continue;
+		for (const effect of this.actor.allApplicableEffects()) {
+			if (effect.disabled) continue;
 			const data = { effect };
-			for ( const change of effect.changes ) {
-				if ( validKeyPaths.has(change.key) ) {
+			for (const change of effect.changes) {
+				if (validKeyPaths.has(change.key)) {
 					data[change.key] ??= [];
 					data[change.key].push(change.value);
 				}
 			}
-			if ( Object.values(data).length > 1 ) associatedEffects.push(data);
+			if (Object.values(data).length > 1) associatedEffects.push(data);
 		}
 
 		const formatter = game.i18n.getListFormatter({ type: "unit" });
@@ -123,21 +144,18 @@ export default class NPCSheet extends BaseActorSheet {
 		const createTrait = name => {
 			const sections = [];
 			const damages = foundry.utils.getProperty(context.source, `traits.damage.${name}.value`);
-			if ( damages?.length ) sections.push(
-				createSection(damages, CONFIG.BlackFlag.damageTypes.localized).toLowerCase()
-			);
+			if (damages?.length) sections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized).toLowerCase());
 			const conditions = foundry.utils.getProperty(context.source, `traits.condition.${name}.value`);
-			if ( conditions?.length ) sections.push(
-				createSection(conditions, CONFIG.BlackFlag.conditions.localized).toLowerCase()
-			);
+			if (conditions?.length)
+				sections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized).toLowerCase());
 
-			for ( const effect of associatedEffects ) {
+			for (const effect of associatedEffects) {
 				const effectSections = [];
 				const damages = effect[`system.traits.damage.${name}.value`];
-				if ( damages?.length ) effectSections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized));
+				if (damages?.length) effectSections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized));
 				const conditions = effect[`system.traits.condition.${name}.value`];
-				if ( conditions?.length ) effectSections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized));
-				if ( effectSections.length ) {
+				if (conditions?.length) effectSections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized));
+				if (effectSections.length) {
 					sections.push(`<span data-tooltip="${effectSections.join(" | ")}">${effect.effect.name}</span>`);
 				}
 			}
@@ -146,11 +164,11 @@ export default class NPCSheet extends BaseActorSheet {
 		};
 
 		const resistances = createTrait("resistances");
-		if ( resistances || this.modes.editing ) context.traits.resist = resistances || none;
+		if (resistances || this.modes.editing) context.traits.resist = resistances || none;
 		const immunities = createTrait("immunities");
-		if ( immunities || this.modes.editing ) context.traits.immune = immunities || none;
+		if (immunities || this.modes.editing) context.traits.immune = immunities || none;
 		const vulnerabilities = createTrait("vulnerabilities");
-		if ( vulnerabilities || this.modes.editing ) context.traits.vulnerable = vulnerabilities || none;
+		if (vulnerabilities || this.modes.editing) context.traits.vulnerable = vulnerabilities || none;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -197,17 +215,21 @@ export default class NPCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_getSubmitData(updateData={}) {
+	_getSubmitData(updateData = {}) {
 		const data = super._getSubmitData(updateData);
 
 		// TODO: Convert to custom NumberField
 		let cr = data["system.attributes.cr"];
-		cr = {
-			"1/8": 0.125, "⅛": 0.125,
-			"1/4": 0.25, "¼": 0.25,
-			"1/2": 0.5, "½": 0.5
-		}[cr] ?? parseFloat(cr);
-		if ( Number.isNumeric(cr) ) data["system.attributes.cr"] = cr;
+		cr =
+			{
+				"1/8": 0.125,
+				"⅛": 0.125,
+				"1/4": 0.25,
+				"¼": 0.25,
+				"1/2": 0.5,
+				"½": 0.5
+			}[cr] ?? parseFloat(cr);
+		if (Number.isNumeric(cr)) data["system.attributes.cr"] = cr;
 
 		return data;
 	}
@@ -217,7 +239,7 @@ export default class NPCSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	async _onAction(event, dataset) {
 		const { action } = dataset ?? event.currentTarget.dataset;
-		switch ( action ) {
+		switch (action) {
 			case "add-feature":
 				const features = this.element[0].querySelector('blackflag-inventory[tab="features"]');
 				const section = features?.querySelector('[data-section="features"]');

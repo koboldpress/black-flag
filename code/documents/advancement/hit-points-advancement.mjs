@@ -7,19 +7,24 @@ import Advancement from "./advancement.mjs";
  * class can only have one.**
  */
 export default class HitPointsAdvancement extends Advancement {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "hitPoints",
-		dataModels: {
-			configuration: HitPointsConfigurationData,
-			value: HitPointsValueData
-		},
-		order: 10,
-		icon: "systems/black-flag/artwork/advancement/hit-points.svg",
-		title: "BF.Advancement.HitPoints.Title",
-		hint: "BF.Advancement.HitPoints.Hint",
-		multiLevel: true
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "hitPoints",
+				dataModels: {
+					configuration: HitPointsConfigurationData,
+					value: HitPointsValueData
+				},
+				order: 10,
+				icon: "systems/black-flag/artwork/advancement/hit-points.svg",
+				title: "BF.Advancement.HitPoints.Title",
+				hint: "BF.Advancement.HitPoints.Hint",
+				multiLevel: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -30,7 +35,7 @@ export default class HitPointsAdvancement extends Advancement {
 	 * @type {number}
 	 */
 	get average() {
-		return (this.configuration.denomination / 2) + 1;
+		return this.configuration.denomination / 2 + 1;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -60,9 +65,11 @@ export default class HitPointsAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareWarnings(levels, notifications) {
-		if ( this.configuredForLevel(levels) ) return;
+		if (this.configuredForLevel(levels)) return;
 		notifications.set(this.warningKey(levels), {
-			category: `level-${levels.character}`, section: "progression", level: "warn",
+			category: `level-${levels.character}`,
+			section: "progression",
+			level: "warn",
 			message: game.i18n.localize("BF.Advancement.HitPoints.Notification")
 		});
 	}
@@ -77,9 +84,9 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	titleForLevel(levels, { flow=false }={}) {
+	titleForLevel(levels, { flow = false } = {}) {
 		const hp = this.valueForLevel(this.relavantLevel(levels));
-		if ( !hp || !flow ) return this.title;
+		if (!hp || !flow) return this.title;
 		return `${this.title}: <strong>${hp}</strong>`;
 	}
 
@@ -105,10 +112,10 @@ export default class HitPointsAdvancement extends Advancement {
 	 */
 	static valueForLevel(data, denomination, level) {
 		const value = data[level];
-		if ( value === "max" ) return denomination;
-		if ( value === "avg" ) return (denomination / 2) + 1;
-		if ( value?.total ) return value.total;
-		if ( Number.isNumeric(value) ) return Number(value);
+		if (value === "max") return denomination;
+		if (value === "avg") return denomination / 2 + 1;
+		if (value?.total) return value.total;
+		if (Number.isNumeric(value)) return Number(value);
 		return null;
 	}
 
@@ -153,42 +160,46 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async apply(levels, data, { initial=false, render=true }={}) {
+	async apply(levels, data, { initial = false, render = true } = {}) {
 		const level = this.relavantLevel(levels);
-		if ( initial ) {
+		if (initial) {
 			data ??= this.value.granted ?? {};
 			const previousLevel = this.actor.system.progression.levels[levels.character - 1];
 			const previous = previousLevel?.class?.system.advancement.byType("hitPoints")[0];
 
 			// If 1st character level, always use max HP
-			if ( levels.character === 1 ) data[level] = "max";
-
+			if (levels.character === 1) data[level] = "max";
 			// If previously level used average, use that again
-			else if ( previous?.value.granted?.[previousLevel?.levels.class] === "avg" ) data[level] = "avg";
-
+			else if (previous?.value.granted?.[previousLevel?.levels.class] === "avg") data[level] = "avg";
 			// Otherwise user intervention is required
 			else return;
 		}
 
 		let value = this.constructor.valueForLevel(data, this.configuration.denomination, level);
-		if ( value === undefined ) return;
+		if (value === undefined) return;
 
-		return await this.actor.update({
-			"system.attributes.hp.value": (this.actor.system.attributes.hp.value ?? 0) + this._getApplicableValue(value),
-			[`${this.valueKeyPath}.granted`]: data
-		}, { render });
+		return await this.actor.update(
+			{
+				"system.attributes.hp.value": (this.actor.system.attributes.hp.value ?? 0) + this._getApplicableValue(value),
+				[`${this.valueKeyPath}.granted`]: data
+			},
+			{ render }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async reverse(levels, data, { render=true }={}) {
+	async reverse(levels, data, { render = true } = {}) {
 		const level = this.relavantLevel(levels);
 		let value = this.valueForLevel(level);
-		if ( value === undefined ) return;
+		if (value === undefined) return;
 
-		return await this.actor.update({
-			"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
-			[`${this.valueKeyPath}.granted.-=${level}`]: null
-		}, { render });
+		return await this.actor.update(
+			{
+				"system.attributes.hp.value": this.actor.system.attributes.hp.value - this._getApplicableValue(value),
+				[`${this.valueKeyPath}.granted.-=${level}`]: null
+			},
+			{ render }
+		);
 	}
 }

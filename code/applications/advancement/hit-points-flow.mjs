@@ -4,7 +4,6 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents hit points selection upon level up.
  */
 export default class HitPointsFlow extends AdvancementFlow {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/hit-points-flow.hbs"
@@ -27,9 +26,9 @@ export default class HitPointsFlow extends AdvancementFlow {
 		const level = this.advancement.relavantLevel(this.levels);
 
 		// Take the average value
-		if ( action === "take-average" ) {
+		if (action === "take-average") {
 			return this.advancement.apply(this.levels, { [level]: "avg" });
-		} else if ( action === "roll" ) {
+		} else if (action === "roll") {
 			const roll = new Roll(`1d${this.advancement.configuration.denomination}`);
 			await roll.evaluate();
 
@@ -41,7 +40,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 			const messageData = {
 				flavor,
 				title: `${flavor}: ${this.advancement.actor.name}`,
-				speaker: cls.getSpeaker({actor: this.advancement.actor}),
+				speaker: cls.getSpeaker({ actor: this.advancement.actor }),
 				user: game.user.id,
 				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
 				content: "",
@@ -56,4 +55,3 @@ export default class HitPointsFlow extends AdvancementFlow {
 		}
 	}
 }
-

@@ -16,14 +16,20 @@ import FormulaField from "./formula-field.mjs";
  */
 export default class ModifierField extends foundry.data.fields.ArrayField {
 	constructor(options) {
-		super(new foundry.data.fields.SchemaField({
-			type: new foundry.data.fields.StringField(),
-			filter: new FilterField(),
-			formula: new FormulaField({required: false, initial: undefined}),
-			note: new foundry.data.fields.SchemaField({
-				rollMode: new foundry.data.fields.NumberField(),
-				text: new foundry.data.fields.HTMLField()
-			}, {required: false, initial: undefined})
-		}), options);
+		super(
+			new foundry.data.fields.SchemaField({
+				type: new foundry.data.fields.StringField(),
+				filter: new FilterField(),
+				formula: new FormulaField({ required: false, initial: undefined }),
+				note: new foundry.data.fields.SchemaField(
+					{
+						rollMode: new foundry.data.fields.NumberField(),
+						text: new foundry.data.fields.HTMLField()
+					},
+					{ required: false, initial: undefined }
+				)
+			}),
+			options
+		);
 	}
 }

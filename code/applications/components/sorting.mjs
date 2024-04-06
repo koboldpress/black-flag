@@ -4,7 +4,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying sorting options on inventories.
  */
 export default class SortingElement extends AppAssociatedElement {
-
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -15,9 +14,9 @@ export default class SortingElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		for ( const input of this.querySelectorAll('input[type="radio"]') ) {
+		for (const input of this.querySelectorAll('input[type="radio"]')) {
 			input.name ??= `${this.tab}-sort`;
-			if ( input.value === this.sorting ) input.checked = true;
+			if (input.value === this.sorting) input.checked = true;
 		}
 		this.addEventListener("change", this.#onChangeSorting.bind(this), { signal: this.#controller.signal });
 	}
@@ -84,7 +83,7 @@ export default class SortingElement extends AppAssociatedElement {
 	 */
 	#onChangeSorting(event) {
 		event.stopPropagation();
-		this.document.update({[`flags.black-flag.sheet.sorting.${this.tab}`]: event.target.value});
+		this.document.update({ [`flags.black-flag.sheet.sorting.${this.tab}`]: event.target.value });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -98,7 +97,7 @@ export default class SortingElement extends AppAssociatedElement {
 	 * @returns {BlackFlagItem[]} - Sorted items.
 	 */
 	static sort(items, sortingMode) {
-		switch ( sortingMode ) {
+		switch (sortingMode) {
 			case "alpha":
 				return items.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
 			case "currency":

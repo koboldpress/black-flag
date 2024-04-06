@@ -8,7 +8,7 @@ import AdvancementConfig from "./advancement-config.mjs";
 export default class TraitConfig extends AdvancementConfig {
 	constructor(...args) {
 		super(...args);
-		this.selected = (this.config.choices.length && !this.config.grants.size) ? 0 : -1;
+		this.selected = this.config.choices.length && !this.config.grants.size ? 0 : -1;
 		this.trait = this.types.first() ?? "skills";
 	}
 
@@ -79,20 +79,20 @@ export default class TraitConfig extends AdvancementConfig {
 			data: choice,
 			selected: this.selected === index
 		}));
-		const chosen = (this.selected === -1) ? context.grants.data : context.choices[this.selected].data.pool;
+		const chosen = this.selected === -1 ? context.grants.data : context.choices[this.selected].data.pool;
 		context.count = context.choices[this.selected]?.data.count;
 		context.selectedIndex = this.selected;
 
 		// Build list of valid options based on current mode
 		context.validTraitTypes = Object.entries(CONFIG.BlackFlag.traits).reduce((obj, [key, config]) => {
-			if ( this.config.mode === "default"
-				|| ((config.type === "proficiency") && config.expertise) ) obj[key] = config.labels.title;
+			if (this.config.mode === "default" || (config.type === "proficiency" && config.expertise))
+				obj[key] = config.labels.title;
 			return obj;
 		}, {});
 
 		// Get information on currently selected trait and build choices list
 		const traitConfig = CONFIG.BlackFlag.traits[this.advancement.bestGuessTrait()];
-		if ( traitConfig ) {
+		if (traitConfig) {
 			context.default.title = game.i18n.localize(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
@@ -100,9 +100,9 @@ export default class TraitConfig extends AdvancementConfig {
 		context.selectedTraitHeader = `${CONFIG.BlackFlag.traits[this.trait].labels.localization}[other]`;
 		context.selectedTrait = this.trait;
 
-		context.hintPlaceholder = Trait.localizedList(
-			this.config.grants, this.config.choices, { choiceMode: this.config.choiceMode }
-		);
+		context.hintPlaceholder = Trait.localizedList(this.config.grants, this.config.choices, {
+			choiceMode: this.config.choiceMode
+		});
 
 		return context;
 	}
@@ -115,16 +115,16 @@ export default class TraitConfig extends AdvancementConfig {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
 
 		// Handle selecting & disabling category children when a category is selected
-		for ( const checkbox of html.querySelectorAll(".trait-options input:checked") ) {
+		for (const checkbox of html.querySelectorAll(".trait-options input:checked")) {
 			const toCheck = checkbox.name.endsWith("*")
 				? checkbox.closest("ol").querySelectorAll(`input:not([name="${checkbox.name}"])`)
 				: checkbox.closest("li").querySelector("ol")?.querySelectorAll("input");
-			toCheck?.forEach(i => i.checked = i.disabled = true);
+			toCheck?.forEach(i => (i.checked = i.disabled = true));
 		}
 	}
 
@@ -146,7 +146,7 @@ export default class TraitConfig extends AdvancementConfig {
 				const input = event.currentTarget.closest("li").querySelector("[name='selectedIndex']");
 				const selectedIndex = Number(input.value);
 				this.config.choices.splice(selectedIndex, 1);
-				if ( selectedIndex <= this.selected ) this.selected -= 1;
+				if (selectedIndex <= this.selected) this.selected -= 1;
 				break;
 
 			default:
@@ -157,36 +157,38 @@ export default class TraitConfig extends AdvancementConfig {
 		// TOOD: Remove this when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
 		this.config.grants = Array.from(this.advancement.configuration.grants);
 		this.config.choices.forEach(c => {
-			if ( !c.pool ) return;
+			if (!c.pool) return;
 			c.pool = Array.from(c.pool);
 		});
 
-		await this.advancement.update({configuration: this.config});
+		await this.advancement.update({ configuration: this.config });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onChangeInput(event) {
 		// Display new set of trait choices
-		if ( event.target.name === "selectedTrait" ) {
+		if (event.target.name === "selectedTrait") {
 			this.trait = event.target.value;
 			return this.render();
 		}
 
 		// Change selected configuration set
-		if ( event.target.name === "selectedIndex" ) {
+		if (event.target.name === "selectedIndex") {
 			this.selected = Number(event.target.value ?? -1);
 			const types = this.types;
-			if ( types.size && !types.has(this.trait) ) this.trait = types.first();
+			if (types.size && !types.has(this.trait)) this.trait = types.first();
 			return this.render();
 		}
 
 		// If mode is changed from default to one of the others change selected type if current type is not valid
-		if ( (event.target.name === "configuration.mode")
-			&& (event.target.value !== "default")
-			&& (this.config.mode === "default") ) {
+		if (
+			event.target.name === "configuration.mode" &&
+			event.target.value !== "default" &&
+			this.config.mode === "default"
+		) {
 			const validTraitTypes = filteredKeys(CONFIG.BlackFlag.traits, c => c.type === "proficiency" && c.expertise);
-			if ( !validTraitTypes.includes(this.trait) ) this.trait = validTraitTypes[0];
+			if (!validTraitTypes.includes(this.trait)) this.trait = validTraitTypes[0];
 		}
 
 		super._onChangeInput(event);
@@ -197,12 +199,12 @@ export default class TraitConfig extends AdvancementConfig {
 	async prepareConfigurationUpdate(configuration) {
 		const choicesCollection = foundry.utils.deepClone(this.config.choices);
 
-		if ( configuration.checked ) {
+		if (configuration.checked) {
 			const prefix = `${this.trait}:`;
 			const filteredSelected = filteredKeys(configuration.checked);
 
 			// Update grants
-			if ( this.selected === -1 ) {
+			if (this.selected === -1) {
 				const filteredPrevious = this.config.grants.filter(k => !k.startsWith(prefix));
 				configuration.grants = [...filteredPrevious, ...filteredSelected];
 			}
@@ -216,24 +218,24 @@ export default class TraitConfig extends AdvancementConfig {
 			delete configuration.checked;
 		}
 
-		if ( configuration.count ) {
+		if (configuration.count) {
 			choicesCollection[this.selected].count = configuration.count;
 			delete configuration.count;
 		}
 
 		// TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
 		choicesCollection.forEach(c => {
-			if ( !c.pool ) return;
+			if (!c.pool) return;
 			c.pool = Array.from(c.pool);
 		});
 		configuration.choices = choicesCollection;
 		configuration.grants ??= Array.from(this.config.grants);
 
 		// If one of the expertise modes is selected, filter out any traits that are not of a valid type
-		if ( (configuration.mode ?? this.config.mode) !== "default" ) {
+		if ((configuration.mode ?? this.config.mode) !== "default") {
 			const validTraitTypes = filteredKeys(CONFIG.BlackFlag.traits, c => c.type === "proficiency" && c.expertise);
 			configuration.grants = configuration.grants.filter(k => validTraitTypes.some(t => k.startsWith(t)));
-			configuration.choices.forEach(c => c.pool = c.pool.filter(k => validTraitTypes.some(t => k.startsWith(t))));
+			configuration.choices.forEach(c => (c.pool = c.pool.filter(k => validTraitTypes.some(t => k.startsWith(t)))));
 		}
 
 		return configuration;

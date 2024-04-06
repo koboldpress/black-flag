@@ -7,7 +7,7 @@
  * @param {object} [options={}] - Dialog rendering options.
  */
 export default class AdvancementSelection extends Dialog {
-	constructor(item, dialogData={}, options={}) {
+	constructor(item, dialogData = {}, options = {}) {
 		super(dialogData, options);
 		this.item = item;
 	}
@@ -42,10 +42,13 @@ export default class AdvancementSelection extends Dialog {
 
 	getData() {
 		const context = { types: {} };
-		for ( const [name, config] of Object.entries(CONFIG.Advancement.types) ) {
+		for (const [name, config] of Object.entries(CONFIG.Advancement.types)) {
 			const advancement = config.documentClass;
-			if ( !(advancement.prototype instanceof BlackFlag.documents.advancement.Advancement)
-				|| !config.validItemTypes.has(this.item.type) ) continue;
+			if (
+				!(advancement.prototype instanceof BlackFlag.documents.advancement.Advancement) ||
+				!config.validItemTypes.has(this.item.type)
+			)
+				continue;
 			context.types[name] = {
 				label: game.i18n.localize(advancement.metadata.title),
 				icon: advancement.metadata.icon,
@@ -90,24 +93,28 @@ export default class AdvancementSelection extends Dialog {
 	 * @param {object} [config.options={}] - Additional rendering options passed to the Dialog.
 	 * @returns {Promise<AdvancementConfig|null>} - Result of `BlackFlagItem#createAdvancement`.
 	 */
-	static async createDialog(item, { rejectClose=false, options={} }={}) {
+	static async createDialog(item, { rejectClose = false, options = {} } = {}) {
 		return new Promise((resolve, reject) => {
-			const dialog = new this(item, {
-				title: `${game.i18n.localize("BF.Advancement.Selection.Title")}: ${item.name}`,
-				buttons: {
-					submit: {
-						callback: html => {
-							const formData = new FormDataExtended(html.querySelector("form"));
-							const type = formData.get("type");
-							resolve(item.createEmbeddedDocuments("Advancement", [{ type }], { renderSheet: true }));
+			const dialog = new this(
+				item,
+				{
+					title: `${game.i18n.localize("BF.Advancement.Selection.Title")}: ${item.name}`,
+					buttons: {
+						submit: {
+							callback: html => {
+								const formData = new FormDataExtended(html.querySelector("form"));
+								const type = formData.get("type");
+								resolve(item.createEmbeddedDocuments("Advancement", [{ type }], { renderSheet: true }));
+							}
 						}
+					},
+					close: () => {
+						if (rejectClose) reject("No advancement type was selected");
+						else resolve(null);
 					}
 				},
-				close: () => {
-					if ( rejectClose ) reject("No advancement type was selected");
-					else resolve(null);
-				}
-			}, foundry.utils.mergeObject(options, { jQuery: false }));
+				foundry.utils.mergeObject(options, { jQuery: false })
+			);
 			dialog.render(true);
 		});
 	}

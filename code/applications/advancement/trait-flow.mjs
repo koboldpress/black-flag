@@ -5,7 +5,6 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents a trait choice.
  */
 export default class TraitFlow extends AdvancementFlow {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/trait-flow.hbs",
@@ -21,7 +20,8 @@ export default class TraitFlow extends AdvancementFlow {
 		context.availableChoices = choices ?? {};
 		context.blankLabel = label;
 		context.chosen = this.advancement.value.selected?.map(key => ({
-			key, label: Trait.keyLabel(key)
+			key,
+			label: Trait.keyLabel(key)
 		}));
 		return context;
 	}
@@ -32,7 +32,7 @@ export default class TraitFlow extends AdvancementFlow {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll('[data-action="remove-choice"]') ) {
+		for (const element of html.querySelectorAll('[data-action="remove-choice"]')) {
 			element.addEventListener("click", e => {
 				const key = e.target.closest("[data-key]").dataset.key;
 				this.advancement.reverse(this.levels, key);
@@ -43,6 +43,6 @@ export default class TraitFlow extends AdvancementFlow {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _updateObject(event, formData) {
-		if ( formData.added ) this.advancement.apply(this.levels, new Set([formData.added]));
+		if (formData.added) this.advancement.apply(this.levels, new Set([formData.added]));
 	}
 }

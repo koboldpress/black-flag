@@ -7,10 +7,13 @@ import TypeField from "./type-field.mjs";
  */
 export class ActivityField extends MappingField {
 	constructor(options) {
-		super(new TypeField({
-			determineType: value => value.type,
-			modelLookup: type => CONFIG.Activity.types[type]?.documentClass ?? null
-		}), options);
+		super(
+			new TypeField({
+				determineType: value => value.type,
+				modelLookup: type => CONFIG.Activity.types[type]?.documentClass ?? null
+			}),
+			options
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,8 +39,8 @@ export class ActivityCollection extends Collection {
 	constructor(model, entries) {
 		super();
 		this.#model = model;
-		for ( const [id, entry] of Object.entries(entries) ) {
-			if ( !(entry instanceof BaseActivity) ) continue;
+		for (const [id, entry] of Object.entries(entries)) {
+			if (!(entry instanceof BaseActivity)) continue;
 			this.set(id, entry);
 			this.#types[entry.type] ??= [];
 			this.#types[entry.type].push(entry);
@@ -80,7 +83,7 @@ export class ActivityCollection extends Collection {
 	 * @param {boolean} [source=true] - Draw data for contained Documents from the underlying data source?
 	 * @returns {object[]} - The extracted array of primitive objects.
 	 */
-	toObject(source=true) {
+	toObject(source = true) {
 		return this.map(doc => doc.toObject(source));
 	}
 }

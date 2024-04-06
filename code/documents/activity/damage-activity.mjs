@@ -6,7 +6,6 @@ import Activity from "./activity.mjs";
  * @abstract
  */
 export default class DamageActivity extends Activity {
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -19,11 +18,11 @@ export default class DamageActivity extends Activity {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		const rollConfig = this.createDamageConfigs({}, this.item.getRollData({ deterministic: true }));
-		for ( const roll of rollConfig.rolls ) {
+		for (const roll of rollConfig.rolls) {
 			let formula = roll.parts.join(" + ");
 			formula = Roll.defaultImplementation.replaceFormulaData(formula, roll.data);
 			formula = simplifyFormula(formula);
-			if ( formula ) {
+			if (formula) {
 				const damageType = CONFIG.BlackFlag.damageTypes[roll.options.damageType];
 				layout.innerHTML += `<span class="damage">${formula} ${game.i18n.localize(damageType?.label ?? "")}</span>`;
 			}
@@ -52,7 +51,7 @@ export default class DamageActivity extends Activity {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
-	async rollDamage(config={}, dialog={}, message={}) {
+	async rollDamage(config = {}, dialog = {}, message = {}) {
 		const rollData = this.item.getRollData();
 		const rollConfig = this.createDamageConfigs(config, rollData);
 		rollConfig.origin = this;
@@ -65,19 +64,22 @@ export default class DamageActivity extends Activity {
 			}
 		});
 
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${this.name}: ${this.item.actor?.name ?? ""}`,
-				flavor: this.name,
-				speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-				flags: {
-					"black-flag": {
-						type: "damage",
-						activity: this.uuid
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${this.name}: ${this.item.actor?.name ?? ""}`,
+					flavor: this.name,
+					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
+					flags: {
+						"black-flag": {
+							type: "damage",
+							activity: this.uuid
+						}
 					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before damage is rolled.
@@ -89,10 +91,10 @@ export default class DamageActivity extends Activity {
 		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if ( Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig, this) === false ) return;
+		if (Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig, this) === false) return;
 
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
-		if ( !rolls ) return;
+		if (!rolls) return;
 
 		/**
 		 * A hook event that fires after damage has been rolled.
@@ -122,23 +124,31 @@ export default class DamageActivity extends Activity {
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.rolls = [];
-		for ( const damage of this.system.damage?.parts ?? [] ) {
+		for (const damage of this.system.damage?.parts ?? []) {
 			const modifierData = { ...this.modifierData, type: "damage", damage };
-			const { parts, data } = buildRoll({
-				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
-			}, rollData);
-			rollConfig.rolls.push(foundry.utils.mergeObject({
-				data,
-				modifierData,
-				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
-				options: {
-					damageType: damage.type,
-					minimum: this.actor?.system.buildMinimum(
-						this.actor?.system.getModifiers(modifierData, "min"), { rollData: rollData }
-					)
-					// TODO: Get critical settings
-				}
-			}, config));
+			const { parts, data } = buildRoll(
+				{
+					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+				},
+				rollData
+			);
+			rollConfig.rolls.push(
+				foundry.utils.mergeObject(
+					{
+						data,
+						modifierData,
+						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
+						options: {
+							damageType: damage.type,
+							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
+								rollData: rollData
+							})
+							// TODO: Get critical settings
+						}
+					},
+					config
+				)
+			);
 		}
 		rollConfig.rolls.concat(config.rolls ?? []);
 		return rollConfig;
@@ -151,7 +161,7 @@ export default class DamageActivity extends Activity {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
-	getDamageDetails(options={}) {
+	getDamageDetails(options = {}) {
 		return { rolls: this.createDamageConfigs({ versatile: options.versatile }).rolls, activity: this };
 	}
 }

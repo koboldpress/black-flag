@@ -6,9 +6,14 @@ export default class ConceptSheet extends BaseItemSheet {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept", "item", "sheet"],
 			dragDrop: [{ dropSelector: ".drop-target" }],
-			tabs: [{
-				group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".tab-area", initial: "advancement"
-			}],
+			tabs: [
+				{
+					group: "primary",
+					navSelector: 'nav[data-group="primary"]',
+					contentSelector: ".tab-area",
+					initial: "advancement"
+				}
+			],
 			template: "systems/black-flag/templates/item/concept.hbs",
 			width: 810,
 			height: 900
@@ -17,9 +22,13 @@ export default class ConceptSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static enrichedFields = foundry.utils.mergeObject(super.enrichedFields, {
-		short: "system.description.short"
-	}, { inplace: false });
+	static enrichedFields = foundry.utils.mergeObject(
+		super.enrichedFields,
+		{
+			short: "system.description.short"
+		},
+		{ inplace: false }
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
@@ -40,7 +49,7 @@ export default class ConceptSheet extends BaseItemSheet {
 		const { action } = event.currentTarget.dataset;
 		switch (action) {
 			case "journal-link":
-				return await this.document.update({"system.description.journal": ""});
+				return await this.document.update({ "system.description.journal": "" });
 		}
 		return super._onAction(event);
 	}
@@ -52,8 +61,8 @@ export default class ConceptSheet extends BaseItemSheet {
 	async _onDrop(event) {
 		event.preventDefault();
 		const data = TextEditor.getDragEventData(event);
-		if ( !["JournalEntry", "JournalEntryPage"].includes(data.type) || !data.uuid ) return super._onDrop(event);
+		if (!["JournalEntry", "JournalEntryPage"].includes(data.type) || !data.uuid) return super._onDrop(event);
 
-		await this.document.update({"system.description.journal": data.uuid});
+		await this.document.update({ "system.description.journal": data.uuid });
 	}
 }

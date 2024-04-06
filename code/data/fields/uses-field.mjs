@@ -7,23 +7,35 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * Field for storing uses data.
  */
 export default class UsesField extends SchemaField {
-	constructor(fields={}, options={}) {
-		super(BaseDataModel.mergeSchema({
-			spent: new NumberField({initial: 0, integer: true, label: "BF.Uses.Spent.Label"}),
-			min: new FormulaField({deterministic: true, label: "BF.Uses.Minimum.Label"}),
-			max: new FormulaField({deterministic: true, label: "BF.Uses.Maximum.Label"}),
-			consumeQuantity: new BooleanField({label: "BF.Uses.ConsumeQuantity.Label", hint: "BF.Uses.ConsumeQuantity.Hint"}),
-			recovery: new ArrayField(new SchemaField({
-				period: new StringField({initial: "longRest", label: "BF.Recovery.Period.Label"}),
-				type: new StringField({initial: "recoverAll", label: "BF.Recovery.Type.Label"}),
-				formula: new FormulaField({label: "BF.Recovery.Formula.Label"})
-			}), {label: "BF.Recovery.Label"})
-		}, fields), { label: "BF.Uses.Label", ...options });
+	constructor(fields = {}, options = {}) {
+		super(
+			BaseDataModel.mergeSchema(
+				{
+					spent: new NumberField({ initial: 0, integer: true, label: "BF.Uses.Spent.Label" }),
+					min: new FormulaField({ deterministic: true, label: "BF.Uses.Minimum.Label" }),
+					max: new FormulaField({ deterministic: true, label: "BF.Uses.Maximum.Label" }),
+					consumeQuantity: new BooleanField({
+						label: "BF.Uses.ConsumeQuantity.Label",
+						hint: "BF.Uses.ConsumeQuantity.Hint"
+					}),
+					recovery: new ArrayField(
+						new SchemaField({
+							period: new StringField({ initial: "longRest", label: "BF.Recovery.Period.Label" }),
+							type: new StringField({ initial: "recoverAll", label: "BF.Recovery.Type.Label" }),
+							formula: new FormulaField({ label: "BF.Recovery.Formula.Label" })
+						}),
+						{ label: "BF.Recovery.Label" }
+					)
+				},
+				fields
+			),
+			{ label: "BF.Uses.Label", ...options }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	initialize(value, model, options={}) {
+	initialize(value, model, options = {}) {
 		const obj = super.initialize(value, model, options);
 
 		Object.defineProperty(obj, "hasUses", {
@@ -41,11 +53,13 @@ export default class UsesField extends SchemaField {
 		});
 
 		const existingPeriods = new Set(obj.recovery.map(r => r.period));
-		for ( const recovery of obj.recovery ) {
+		for (const recovery of obj.recovery) {
 			Object.defineProperty(recovery, "validPeriods", {
 				get() {
 					return Object.entries(CONFIG.BlackFlag.recoveryPeriods).map(([key, config]) => ({
-						key, label: config.label, disabled: existingPeriods.has(key) && (this.period !== key)
+						key,
+						label: config.label,
+						disabled: existingPeriods.has(key) && this.period !== key
 					}));
 				},
 				configurable: true,
@@ -66,20 +80,20 @@ export default class UsesField extends SchemaField {
 	 * @returns {{updates: object, rolls: []}|false}
 	 */
 	static async recoverUses(periods, data, rollData) {
-		if ( !data.recovery.length ) return false;
+		if (!data.recovery.length) return false;
 		const matchingPeriod = periods.find(p => data.recovery.find(r => r.period === p));
 		const recoveryProfile = data.recovery.find(r => r.period === matchingPeriod);
-		if ( !recoveryProfile ) return false;
+		if (!recoveryProfile) return false;
 
 		const updates = {};
 		const rolls = [];
-		if ( recoveryProfile.type === "recoverAll" ) updates.spent = 0;
-		else if ( recoveryProfile.type === "loseAll" ) updates.spent = data.max ? data.max : -data.min;
-		else if ( recoveryProfile.formula ) {
+		if (recoveryProfile.type === "recoverAll") updates.spent = 0;
+		else if (recoveryProfile.type === "loseAll") updates.spent = data.max ? data.max : -data.min;
+		else if (recoveryProfile.formula) {
 			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData);
 			await roll.evaluate();
 			updates.spent = Math.clamped(data.spent - roll.total, 0, data.max - data.min);
-			if ( !roll.isDeterministic ) rolls.push(roll);
+			if (!roll.isDeterministic) rolls.push(roll);
 		}
 
 		return { updates, rolls };

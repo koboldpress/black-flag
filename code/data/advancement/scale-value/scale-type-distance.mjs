@@ -10,17 +10,23 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
-			units: new StringField({initial: "foot", label: "BF.Distance.Unit.Label"})
+			units: new StringField({ initial: "foot", label: "BF.Distance.Unit.Label" })
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		label: "BF.Advancement.ScaleValue.Type.Distance.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Distance.Hint",
-		input: "distance"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				label: "BF.Advancement.ScaleValue.Type.Distance.Label",
+				hint: "BF.Advancement.ScaleValue.Type.Distance.Hint",
+				input: "distance"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

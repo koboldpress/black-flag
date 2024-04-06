@@ -80,7 +80,7 @@ export default class BaseRestDialog extends Dialog {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async getData(options={}) {
+	async getData(options = {}) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
 		context.config = this.data.config;

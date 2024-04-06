@@ -5,12 +5,11 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying the XP bar on the character sheet.
  */
 export default class XPBarElement extends AppAssociatedElement {
-
 	connectedCallback() {
 		super.connectedCallback();
 
 		const xp = this.actor?.system.progression?.xp;
-		if ( !xp ) return;
+		if (!xp) return;
 		this.innerHTML = `
 			<div role="meter"></div>
 			<label id="${this.app.id}-xp-bar-label">${game.i18n.localize("BF.ExperiencePoints.Label")}</label>
@@ -46,7 +45,7 @@ export default class XPBarElement extends AppAssociatedElement {
 		const bar = this.querySelector('[role="meter"]');
 		bar.style = `--bar-percentage: ${xp.percentage}%;`;
 		bar.setAttribute("aria-valuenow", xp.percentage);
-		bar.setAttribute("aria-valuetext", game.i18n.format("BF.ExperiencePoints.LabelSpecific", {value: xp.value}));
+		bar.setAttribute("aria-valuetext", game.i18n.format("BF.ExperiencePoints.LabelSpecific", { value: xp.value }));
 		bar.setAttribute("aria-valuemin", xp.min);
 		bar.setAttribute("aria-valuemax", xp.max);
 		this.querySelector('[name="xpChange"]').value = "";
@@ -85,13 +84,13 @@ export default class XPBarElement extends AppAssociatedElement {
 	async #onSubmit(event) {
 		event.preventDefault();
 		const input = this.querySelector('[name="xpChange"]');
-		if ( Number.isNumeric(input.valueAsNumber) ) {
+		if (Number.isNumeric(input.valueAsNumber)) {
 			const value = Math.round(input.valueAsNumber);
 			const update = {
 				value: this.actor.system.progression.xp.value + value,
 				log: this.actor.system.progression.xp.log.concat([{ amount: value, source: "manual" }])
 			};
-			await this.actor.update({"system.progression.xp": update}, {render: false});
+			await this.actor.update({ "system.progression.xp": update }, { render: false });
 		}
 	}
 
@@ -105,7 +104,7 @@ export default class XPBarElement extends AppAssociatedElement {
 	 * @param {string} userId - ID of the user who performed the change.
 	 */
 	#onUpdateActor(actor, changes, options, userId) {
-		if ( (actor !== this.actor) || !foundry.utils.hasProperty(changes, "system.progression.xp.value") ) return;
+		if (actor !== this.actor || !foundry.utils.hasProperty(changes, "system.progression.xp.value")) return;
 		this.#setValues();
 	}
 }

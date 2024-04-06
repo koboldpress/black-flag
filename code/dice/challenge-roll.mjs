@@ -47,10 +47,10 @@ import BasicRoll from "./basic-roll.mjs";
  * @param {ChallengeRollOptions} options - Additional options that describe the challenge roll.
  */
 export default class ChallengeRoll extends BasicRoll {
-	constructor(formula, data, options={}) {
+	constructor(formula, data, options = {}) {
 		super(formula, data, options);
 		this.#createChallengeDie();
-		if ( !this.options.configured ) this.configureRoll();
+		if (!this.options.configured) this.configureRoll();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -68,7 +68,7 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @returns {ChallengeRoll[]}
 	 */
 	static create(config) {
-		const formula = [(new CONFIG.Dice.ChallengeDie()).formula].concat(config.parts ?? []).join(" + ");
+		const formula = [new CONFIG.Dice.ChallengeDie().formula].concat(config.parts ?? []).join(" + ");
 		return new this(formula, config.data, config.options);
 	}
 
@@ -81,8 +81,8 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @param {BasicRollMessageConfiguration} [message={}] - Configuration data that guides roll message creation.
 	 * @returns {BasicRoll[]} - Any rolls created.
 	 */
-	static async build(config={}, dialog={}, message={}) {
-		for ( const roll of config.rolls ?? [] ) {
+	static async build(config = {}, dialog = {}, message = {}) {
+		for (const roll of config.rolls ?? []) {
 			roll.options ??= {};
 			roll.options.criticalSuccess ??= CONFIG.Dice.ChallengeDie.CRITICAL_SUCCESS_TOTAL;
 			roll.options.criticalFailure ??= CONFIG.Dice.ChallengeDie.CRITICAL_FAILURE_TOTAL;
@@ -109,12 +109,12 @@ export default class ChallengeRoll extends BasicRoll {
 		dialog.configure ??= !Object.values(keys).some(k => k);
 
 		// Determine advantage mode
-		for ( const roll of config.rolls ) {
+		for (const roll of config.rolls) {
 			roll.options ??= {};
 			const advantage = roll.options.advantage || keys.advantage;
 			const disadvantage = roll.options.disadvantage || keys.disadvantage;
-			if ( advantage && !disadvantage ) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
-			else if ( !advantage && disadvantage ) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE;
+			if (advantage && !disadvantage) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE;
+			else if (!advantage && disadvantage) roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.DISADVANTAGE;
 			else roll.options.advantageMode = CONFIG.Dice.ChallengeDie.MODES.NORMAL;
 		}
 	}
@@ -128,7 +128,7 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @type {ChallengeDie|void}
 	 */
 	get challengeDie() {
-		if ( !(this.terms[0] instanceof Die) ) return undefined;
+		if (!(this.terms[0] instanceof Die)) return undefined;
 		return this.terms[0];
 	}
 
@@ -138,10 +138,11 @@ export default class ChallengeRoll extends BasicRoll {
 	 * Set the challenge die for this roll.
 	 */
 	set challengeDie(die) {
-		if ( !(die instanceof CONFIG.Dice.ChallengeDie) ) throw new Error(
-			`Challenge die must be an instance of ${CONFIG.Dice.ChallengeDie.name}, `
-			+ `instead a ${die.constructor.name} was provided.`
-		);
+		if (!(die instanceof CONFIG.Dice.ChallengeDie))
+			throw new Error(
+				`Challenge die must be an instance of ${CONFIG.Dice.ChallengeDie.name}, ` +
+					`instead a ${die.constructor.name} was provided.`
+			);
 		this.terms[0] = die;
 	}
 
@@ -194,7 +195,7 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @type {boolean}
 	 */
 	get isValidRoll() {
-		return (this.challengeDie instanceof CONFIG.Dice.ChallengeDie) && this.challengeDie.isValid;
+		return this.challengeDie instanceof CONFIG.Dice.ChallengeDie && this.challengeDie.isValid;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -210,9 +211,9 @@ export default class ChallengeRoll extends BasicRoll {
 		this.challengeDie.applyMinimum(this.options.minimum ?? 0);
 
 		// Critical thresholds & target value
-		if ( this.options.criticalSuccess ) this.challengeDie.options.criticalSuccess = this.options.criticalSuccess;
-		if ( this.options.criticalFailure ) this.challengeDie.options.criticalFailure = this.options.criticalFailure;
-		if ( this.options.target ) this.challengeDie.options.target = this.options.target;
+		if (this.options.criticalSuccess) this.challengeDie.options.criticalSuccess = this.options.criticalSuccess;
+		if (this.options.criticalFailure) this.challengeDie.options.criticalFailure = this.options.criticalFailure;
+		if (this.options.target) this.challengeDie.options.target = this.options.target;
 
 		// Re-compile the underlying formula
 		this.resetFormula();
@@ -227,8 +228,8 @@ export default class ChallengeRoll extends BasicRoll {
 	 * Ensure the challenge die for this roll is a proper ChallengeDie, not a regular Die.
 	 */
 	#createChallengeDie() {
-		if ( this.challengeDie instanceof CONFIG.Dice.ChallengeDie ) return;
-		if ( !(this.challengeDie instanceof Die) ) return;
-		this.challengeDie = new CONFIG.Dice.ChallengeDie({...this.challengeDie});
+		if (this.challengeDie instanceof CONFIG.Dice.ChallengeDie) return;
+		if (!(this.challengeDie instanceof Die)) return;
+		this.challengeDie = new CONFIG.Dice.ChallengeDie({ ...this.challengeDie });
 	}
 }

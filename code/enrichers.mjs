@@ -37,17 +37,25 @@ async function enrichString(match, options) {
 	let { type, config, label } = match.groups;
 	config = parseConfig(config, { multiple: ["damage", "healing"].includes(type) });
 	config._input = match[0];
-	switch ( type.toLowerCase() ) {
-		case "attack": return enrichAttack(config, label, options);
-		case "calc": return enrichCalculation(config, label, options);
+	switch (type.toLowerCase()) {
+		case "attack":
+			return enrichAttack(config, label, options);
+		case "calc":
+			return enrichCalculation(config, label, options);
 		case "check":
 		case "skill":
-		case "tool": return enrichCheck(config, label, options);
-		case "lookup": return enrichLookup(config, label, options);
-		case "save": return enrichSave(config, label, options);
-		case "healing": config._isHealing = true;
-		case "damage": return enrichDamage(config, label, options);
-		case "embed": return enrichEmbed(config, label, options);
+		case "tool":
+			return enrichCheck(config, label, options);
+		case "lookup":
+			return enrichLookup(config, label, options);
+		case "save":
+			return enrichSave(config, label, options);
+		case "healing":
+			config._isHealing = true;
+		case "damage":
+			return enrichDamage(config, label, options);
+		case "embed":
+			return enrichEmbed(config, label, options);
 	}
 	return null;
 }
@@ -62,16 +70,16 @@ async function enrichString(match, options) {
  *                                             configs will be returned rather than a single object.
  * @returns {object|object[]}
  */
-function parseConfig(match="", { multiple=false }={}) {
-	if ( multiple ) return match.split("&").map(s => parseConfig(s));
+function parseConfig(match = "", { multiple = false } = {}) {
+	if (multiple) return match.split("&").map(s => parseConfig(s));
 	const config = { values: [] };
-	for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
-		if ( !part ) continue;
+	for (const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? []) {
+		if (!part) continue;
 		const [key, value] = part.split("=");
 		const valueLower = value?.toLowerCase();
-		if ( value === undefined ) config.values.push(key.replace(/(^"|"$)/g, ""));
-		else if ( ["true", "false"].includes(valueLower) ) config[key] = valueLower === "true";
-		else if ( Number.isNumeric(value) ) config[key] = Number(value);
+		if (value === undefined) config.values.push(key.replace(/(^"|"$)/g, ""));
+		else if (["true", "false"].includes(valueLower)) config[key] = valueLower === "true";
+		else if (Number.isNumeric(value)) config[key] = Number(value);
 		else config[key] = value.replace(/(^"|"$)/g, "");
 	}
 	return config;
@@ -110,7 +118,7 @@ function createRequestLink(label, dataset) {
 	span.insertAdjacentElement("afterbegin", createRollLink(label));
 
 	// Add chat request link for GMs
-	if ( game.user.isGM ) {
+	if (game.user.isGM) {
 		const gmLink = document.createElement("a");
 		gmLink.classList.add("extra-link");
 		gmLink.dataset.request = true;
@@ -134,7 +142,7 @@ function createRequestLink(label, dataset) {
  * @param {string} [options.tag="a"] - Tag to use for the link.
  * @returns {HTMLElement}
  */
-function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) {
+function createRollLink(label, dataset = {}, { classes = "roll-link", tag = "a" } = {}) {
 	const link = document.createElement(tag);
 	link.className = classes;
 	_addDataset(link, dataset);
@@ -151,9 +159,9 @@ function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) 
  * @private
  */
 function _addDataset(element, dataset) {
-	for ( const [key, value] of Object.entries(dataset) ) {
-		if ( key.startsWith("_") || (key === "values") || !value ) continue;
-		if ( ["Array", "Object"].includes(foundry.utils.getType(value)) ) element.dataset[key] = JSON.stringify(value);
+	for (const [key, value] of Object.entries(dataset)) {
+		if (key.startsWith("_") || key === "values" || !value) continue;
+		if (["Array", "Object"].includes(foundry.utils.getType(value))) element.dataset[key] = JSON.stringify(value);
 		else element.dataset[key] = value;
 	}
 }
@@ -169,18 +177,21 @@ function _addDataset(element, dataset) {
  */
 function handleRollAction(event) {
 	const target = event.target.closest("[data-roll-action]");
-	if ( !target ) return;
+	if (!target) return;
 	event.stopPropagation();
 
-	if ( event.target.closest('[data-request="true"]') ) return requestCheckSave(event);
+	if (event.target.closest('[data-request="true"]')) return requestCheckSave(event);
 
-	switch ( target.dataset.rollAction ) {
+	switch (target.dataset.rollAction) {
 		case "ability-check":
 		case "ability-save":
 		case "skill":
-		case "tool": return rollCheckSave(event);
-		case "attack": return rollAttack(event);
-		case "damage": return rollDamage(event);
+		case "tool":
+			return rollCheckSave(event);
+		case "attack":
+			return rollAttack(event);
+		case "damage":
+			return rollDamage(event);
 	}
 }
 
@@ -215,20 +226,20 @@ function handleRollAction(event) {
  */
 async function enrichAttack(config, label, options) {
 	const formulaParts = [];
-	if ( config.formula ) formulaParts.push(config.formula);
-	for ( const value of config.values ) formulaParts.push(value);
+	if (config.formula) formulaParts.push(config.formula);
+	for (const value of config.values) formulaParts.push(value);
 	config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-	if ( !config.formula ) {
+	if (!config.formula) {
 		const { formula, activity } = options.relativeTo?.getAttackDetails?.(config) ?? {};
 		config.formula = formula || "+0";
-		if ( activity ) config.activity = activity.uuid;
+		if (activity) config.activity = activity.uuid;
 	}
 	// TODO: Simplify formula as must as possible for display
 	// TODO: Improve this logic
-	if ( !config.formula.startsWith("+") && !config.formula.startsWith("-") ) config.formula = `+${config.formula}`;
+	if (!config.formula.startsWith("+") && !config.formula.startsWith("-")) config.formula = `+${config.formula}`;
 	config.rollAction = "attack";
 
-	if ( label ) return createRollLink(label, config);
+	if (label) return createRollLink(label, config);
 
 	const span = document.createElement("span");
 	span.innerHTML = game.i18n.format("BF.Enricher.Attack.Long", {
@@ -248,9 +259,9 @@ async function rollAttack(event) {
 	const target = event.target.closest("[data-roll-action]");
 	const { formula, activity: activityUuid } = target.dataset;
 
-	if ( activityUuid ) {
+	if (activityUuid) {
 		const activity = await fromUuid(activityUuid);
-		if ( activity ) return activity.rollAttack();
+		if (activity) return activity.rollAttack();
 	}
 
 	const rollConfig = {
@@ -270,9 +281,9 @@ async function rollAttack(event) {
 		}
 	};
 
-	if ( Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false ) return;
+	if (Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false) return;
 	const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
-	if ( rolls?.length ) Hooks.callAll("blackFlag.postRollAttack", this, rolls);
+	if (rolls?.length) Hooks.callAll("blackFlag.postRollAttack", this, rolls);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -295,12 +306,14 @@ async function rollAttack(event) {
  */
 function enrichCalculation(config, fallback, options) {
 	const formulaParts = [];
-	if ( config.formula ) formulaParts.push(config.formula);
+	if (config.formula) formulaParts.push(config.formula);
 	formulaParts.push(...config.values);
-	const roll = new Roll(formulaParts.join(" "), options.rollData
-		?? options.relativeTo?.getRollData({ deterministic: true }));
+	const roll = new Roll(
+		formulaParts.join(" "),
+		options.rollData ?? options.relativeTo?.getRollData({ deterministic: true })
+	);
 
-	if ( !roll.isDeterministic ) {
+	if (!roll.isDeterministic) {
 		log(`Non-deterministic formula found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
@@ -331,25 +344,25 @@ function createRollLabel(config) {
 	const showDC = config.dc && !config.hideDC;
 
 	let label;
-	switch ( config.rollAction ) {
+	switch (config.rollAction) {
 		case "ability-check":
 		case "skill":
 		case "tool":
-			if ( ability && (skill || tool) ) {
+			if (ability && (skill || tool)) {
 				label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
 			} else {
 				label = ability;
 			}
-			if ( config.passive ) {
+			if (config.passive) {
 				label = game.i18n.format(`BF.Enricher.DC.Passive.${longSuffix}`, { dc: config.dc, check: label });
 			} else {
-				if ( showDC ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+				if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 				label = game.i18n.format(`BF.Enricher.Check.${longSuffix}`, { check: label });
 			}
 			break;
 		case "ability-save":
 			label = (ability ?? config.ability).toUpperCase();
-			if ( showDC ) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+			if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 			label = game.i18n.format(`BF.Enricher.Save.${longSuffix}`, { save: label });
 			break;
 		default:
@@ -418,46 +431,46 @@ function createRollLabel(config) {
  * ```
  */
 async function enrichCheck(config, label, options) {
-	for ( const value of config.values ) {
-		if ( value in CONFIG.BlackFlag.enrichment.lookup.abilities ) config.ability = value;
-		else if ( value in CONFIG.BlackFlag.enrichment.lookup.skills ) config.skill = value;
-		else if ( value in CONFIG.BlackFlag.enrichment.lookup.tools ) config.tool = value;
-		else if ( Number.isNumeric(value) ) config.dc = Number(value);
+	for (const value of config.values) {
+		if (value in CONFIG.BlackFlag.enrichment.lookup.abilities) config.ability = value;
+		else if (value in CONFIG.BlackFlag.enrichment.lookup.skills) config.skill = value;
+		else if (value in CONFIG.BlackFlag.enrichment.lookup.tools) config.tool = value;
+		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
 
 	let invalid = false;
 
 	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill];
-	if ( config.skill && !skillConfig ) {
+	if (config.skill && !skillConfig) {
 		log(`Skill ${config.skill} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
-	} else if ( config.skill && !config.ability ) {
+	} else if (config.skill && !config.ability) {
 		config.ability = skillConfig.ability;
 	}
 
 	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool];
-	if ( config.tool && !toolConfig ) {
+	if (config.tool && !toolConfig) {
 		log(`Tool ${config.tool} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
 	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
-	if ( config.ability && !abilityConfig ) {
+	if (config.ability && !abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
-	} else if ( !abilityConfig ) {
+	} else if (!abilityConfig) {
 		log(`No ability provided while enriching check ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
-	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
-	if ( invalid ) return null;
+	if (invalid) return null;
 
 	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : "ability-check";
 	label ??= createRollLabel(config);
-	if ( config.passive ) return createPassiveTag(label, config);
+	if (config.passive) return createPassiveTag(label, config);
 	return createRequestLink(label, config);
 }
 
@@ -498,25 +511,25 @@ async function enrichCheck(config, label, options) {
  * ```
  */
 async function enrichSave(config, label, options) {
-	for ( const value of config.values ) {
-		if ( value in CONFIG.BlackFlag.enrichment.lookup.abilities ) config.ability = value;
-		else if ( Number.isNumeric(value) ) config.dc = Number(value);
+	for (const value of config.values) {
+		if (value in CONFIG.BlackFlag.enrichment.lookup.abilities) config.ability = value;
+		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
-	if ( !config.ability ) {
+	if (!config.ability) {
 		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
 		config.ability = ability;
 		config.dc ??= dc;
-		if ( activity ) config.activity = activity.uuid;
+		if (activity) config.activity = activity.uuid;
 	}
 
 	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
-	if ( !abilityConfig ) {
+	if (!abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		return null;
 	}
 
-	if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
+	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
 	config.rollAction = "ability-save";
 	return createRequestLink(label || createRollLabel(config), config);
@@ -540,10 +553,10 @@ async function requestCheckSave(event) {
 			dataset: { ...target.dataset, action: "rollRequest" }
 		}),
 		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
-		speaker: MessageClass.getSpeaker({user: game.user})
+		speaker: MessageClass.getSpeaker({ user: game.user })
 	};
 	// TODO: Remove when v11 support is dropped
-	if ( game.release.generation < 12 ) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
+	if (game.release.generation < 12) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 	return MessageClass.create(chatData);
 }
 
@@ -558,23 +571,23 @@ async function rollCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
 	const { activity: activityUuid } = target.dataset;
 
-	if ( activityUuid ) {
+	if (activityUuid) {
 		const activity = await fromUuid(activityUuid);
-		if ( activity ) return activity.rollSavingThrow();
+		if (activity) return activity.rollSavingThrow();
 	}
 
 	target.disabled = true;
 	try {
 		const actors = new Set(getSelectedTokens().map(t => t.actor));
-		if ( !actors.size ) {
+		if (!actors.size) {
 			ui.notifications.warn(game.i18n.localize("BF.Enricher.Warning.NoActor"));
 			return;
 		}
 
-		for ( const actor of actors ) {
+		for (const actor of actors) {
 			const { rollAction, dc, ...data } = target.dataset;
 			const rollConfig = { event, ...data };
-			if ( dc ) rollConfig.target = Number(dc);
+			if (dc) rollConfig.target = Number(dc);
 			await actor.roll(rollAction, rollConfig);
 		}
 	} finally {
@@ -642,31 +655,31 @@ async function rollCheckSave(event) {
  */
 async function enrichDamage(configs, label, options) {
 	const config = { rollAction: "damage", formulas: [], types: [] };
-	for ( const c of configs ) {
+	for (const c of configs) {
 		const formulaParts = [];
-		if ( c.average ) config.average = c.average;
-		if ( c.formula ) formulaParts.push(c.formula);
-		for ( const value of c.values ) {
-			if ( value in CONFIG.BlackFlag.damageTypes ) c.type = value;
-			else if ( value in CONFIG.BlackFlag.healingTypes ) c.type = value;
-			else if ( value === "average" ) config.average = true;
-			else if ( value === "versatile" ) config.versatile = true;
+		if (c.average) config.average = c.average;
+		if (c.formula) formulaParts.push(c.formula);
+		for (const value of c.values) {
+			if (value in CONFIG.BlackFlag.damageTypes) c.type = value;
+			else if (value in CONFIG.BlackFlag.healingTypes) c.type = value;
+			else if (value === "average") config.average = true;
+			else if (value === "versatile") config.versatile = true;
 			else formulaParts.push(value);
 		}
 		c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 		c.type = c.type ?? (configs._isHealing ? "healing" : null);
-		if ( c.formula ) {
+		if (c.formula) {
 			config.formulas.push(c.formula);
 			config.types.push(c.type);
 		}
 	}
 
-	if ( !config.formulas.length ) {
+	if (!config.formulas.length) {
 		const damageDetails = options.relativeTo?.getDamageDetails?.(config);
-		for ( const r of damageDetails?.rolls ?? [] ) {
+		for (const r of damageDetails?.rolls ?? []) {
 			// TODO: Simplify formula as must as possible for display
 			const formula = Roll.defaultImplementation.replaceFormulaData(r.parts.join(" + "), r.data, { missing: "0" });
-			if ( formula ) {
+			if (formula) {
 				config.formulas.push(formula);
 				config.types.push(r.options.damageType);
 			}
@@ -674,12 +687,12 @@ async function enrichDamage(configs, label, options) {
 		config.activity = damageDetails?.activity?.uuid;
 	}
 
-	if ( !config.formulas.length ) return null;
+	if (!config.formulas.length) return null;
 
-	if ( label ) return createRollLink(label, config);
+	if (label) return createRollLink(label, config);
 
 	const parts = [];
-	for ( const [idx, formula] of config.formulas.entries() ) {
+	for (const [idx, formula] of config.formulas.entries()) {
 		const type = config.types[idx];
 		const typeConfig = CONFIG.BlackFlag.damageTypes[type] ?? CONFIG.BlackFlag.healingTypes[type];
 		const localizationData = {
@@ -688,13 +701,13 @@ async function enrichDamage(configs, label, options) {
 		};
 
 		let localizationType = "Short";
-		if ( config.average ) {
+		if (config.average) {
 			localizationType = "Long";
-			if ( config.average === true ) {
+			if (config.average === true) {
 				const minRoll = Roll.create(formula).evaluate({ minimize: true, async: true });
 				const maxRoll = Roll.create(formula).evaluate({ maximize: true, async: true });
-				localizationData.average = Math.floor((await minRoll.total + await maxRoll.total) / 2);
-			} else if ( Number.isNumeric(config.average) ) {
+				localizationData.average = Math.floor(((await minRoll.total) + (await maxRoll.total)) / 2);
+			} else if (Number.isNumeric(config.average)) {
 				localizationData.average = config.average;
 			} else {
 				localizationType = "Short";
@@ -707,7 +720,7 @@ async function enrichDamage(configs, label, options) {
 	const link = document.createElement("a");
 	link.className = "unlink";
 	_addDataset(link, config);
-	if ( config.average && (parts.length === 2) ) {
+	if (config.average && parts.length === 2) {
 		link.innerHTML = game.i18n.format("BF.Enricher.Damage.Double", { first: parts[0], second: parts[1] });
 	} else {
 		link.innerHTML = game.i18n.getListFormatter().format(parts);
@@ -728,9 +741,9 @@ async function rollDamage(event) {
 	formulas = JSON.parse(formulas);
 	types = JSON.parse(types);
 
-	if ( activityUuid ) {
+	if (activityUuid) {
 		const activity = await fromUuid(activityUuid);
-		if ( activity ) return activity.rollDamage();
+		if (activity) return activity.rollDamage();
 	}
 
 	const rollConfig = {
@@ -750,9 +763,9 @@ async function rollDamage(event) {
 		}
 	};
 
-	if ( Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig) === false ) return;
+	if (Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig) === false) return;
 	const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
-	if ( rolls?.length ) Hooks.callAll("blackFlag.postRollDamage", rolls);
+	if (rolls?.length) Hooks.callAll("blackFlag.postRollDamage", rolls);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -770,42 +783,41 @@ const MAX_EMBED_DEPTH = 5;
  */
 async function enrichEmbed(config, label, options) {
 	options._embedDepth ??= 0;
-	if ( options._embedDepth > MAX_EMBED_DEPTH ) {
-		log(`Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${
-			config._input} cannot be enriched fully.`, { level: "warn" });
+	if (options._embedDepth > MAX_EMBED_DEPTH) {
+		log(
+			`Embed enrichers are restricted to ${MAX_EMBED_DEPTH} levels deep. ${config._input} cannot be enriched fully.`,
+			{ level: "warn" }
+		);
 		return null;
 	}
 
 	config = foundry.utils.mergeObject({ cite: true, caption: true, inline: config.values.includes("inline") }, config);
 
-	for ( const value of config.values ) {
-		if ( config.uuid ) break;
+	for (const value of config.values) {
+		if (config.uuid) break;
 		try {
 			const parsed = foundry.utils.parseUuid(value);
-			if ( parsed.documentId ) config.uuid = value;
-		} catch(err) {}
+			if (parsed.documentId) config.uuid = value;
+		} catch (err) {}
 	}
 
 	config.doc = await fromUuid(config.uuid, { relative: options.relativeTo });
 	// Special backported handling of journal pages
-	if ( config.doc instanceof JournalEntryPage ) {
-		switch ( config.doc.type ) {
-			case "image": return embedImagePage(config, label, options);
+	if (config.doc instanceof JournalEntryPage) {
+		switch (config.doc.type) {
+			case "image":
+				return embedImagePage(config, label, options);
 			case "text":
-			case "rule": return embedTextPage(config, label, options);
+			case "rule":
+				return embedTextPage(config, label, options);
 		}
-	}
-
-	else if ( config.doc instanceof RollTable ) return embedRollTable(config, label, options);
-
+	} else if (config.doc instanceof RollTable) return embedRollTable(config, label, options);
 	// Forward everything else to documents
-	else if ( foundry.utils.getType(config.doc.toEmbed) === "function" ) {
+	else if (foundry.utils.getType(config.doc.toEmbed) === "function") {
 		const doc = config.doc;
 		delete config.doc;
 		return doc.toEmbed({ ...config, label }, options);
-	}
-
-	else log(`No document can be found to embed for ${config._input}.`, { level: "warn" });
+	} else log(`No document can be found to embed for ${config._input}.`, { level: "warn" });
 
 	return null;
 }
@@ -826,14 +838,14 @@ function embedImagePage(config, label, options) {
 	const caption = label || config.doc.image.caption || config.doc.name;
 
 	const figure = document.createElement("figure");
-	if ( config.classes ) figure.className = config.classes;
+	if (config.classes) figure.className = config.classes;
 	figure.classList.add("content-embed");
 	figure.innerHTML = `<img src="${config.doc.src}" alt="${config.alt || caption}">`;
 
-	if ( showCaption || showCite ) {
+	if (showCaption || showCite) {
 		const figcaption = document.createElement("figcaption");
-		if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
-		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		if (showCaption) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+		if (showCite) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
 		figure.insertAdjacentElement("beforeend", figcaption);
 	}
 	return figure;
@@ -854,9 +866,9 @@ async function embedTextPage(config, label, options) {
 	config.inline ??= config.values.includes("inline");
 
 	const enrichedPage = await TextEditor.enrichHTML(config.doc.text.content, options);
-	if ( config.inline ) {
+	if (config.inline) {
 		const section = document.createElement("section");
-		if ( config.classes ) section.className = config.classes;
+		if (config.classes) section.className = config.classes;
 		section.classList.add("content-embed");
 		section.innerHTML = enrichedPage;
 		return section;
@@ -868,12 +880,12 @@ async function embedTextPage(config, label, options) {
 	const figure = document.createElement("figure");
 	figure.innerHTML = enrichedPage;
 
-	if ( config.classes ) figure.className = config.classes;
+	if (config.classes) figure.className = config.classes;
 	figure.classList.add("content-embed");
-	if ( showCaption || showCite ) {
+	if (showCaption || showCite) {
 		const figcaption = document.createElement("figcaption");
-		if ( showCaption ) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
-		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		if (showCaption) figcaption.innerHTML += `<strong class="embed-caption">${caption}</strong>`;
+		if (showCite) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
 		figure.insertAdjacentElement("beforeend", figcaption);
 	}
 
@@ -907,22 +919,25 @@ async function embedRollTable(config, label, options) {
 	`;
 
 	const getDocAnchor = (doc, resultData) => {
-		if ( doc ) return doc.toAnchor().outerHTML;
+		if (doc) return doc.toAnchor().outerHTML;
 
 		// No doc found, create a broken anchor.
 		return `<a class="content-link broken"><i class="fas fa-unlink"></i>${
-			resultData.text || game.i18n.localize("Unknown")}</a>`;
+			resultData.text || game.i18n.localize("Unknown")
+		}</a>`;
 	};
 
 	const tbody = table.querySelector("tbody");
-	for ( const data of results ) {
+	for (const data of results) {
 		const { range, type, text, documentCollection, documentId } = data;
 		const row = document.createElement("tr");
 		const [lo, hi] = range;
 		row.innerHTML += `<td>${lo === hi ? lo : `${lo}&mdash;${hi}`}</td>`;
 		let result;
-		switch ( type ) {
-			case CONST.TABLE_RESULT_TYPES.TEXT: result = await TextEditor.enrichHTML(text, options); break;
+		switch (type) {
+			case CONST.TABLE_RESULT_TYPES.TEXT:
+				result = await TextEditor.enrichHTML(text, options);
+				break;
 			case CONST.TABLE_RESULT_TYPES.DOCUMENT: {
 				const doc = CONFIG[documentCollection]?.collection.instance?.get(documentId);
 				result = getDocAnchor(doc, data);
@@ -939,9 +954,9 @@ async function embedRollTable(config, label, options) {
 		tbody.append(row);
 	}
 
-	if ( config.inline ) {
+	if (config.inline) {
 		const section = document.createElement("section");
-		if ( config.classes ) section.className = config.classes;
+		if (config.classes) section.className = config.classes;
 		section.classList.add("content-embed");
 		section.append(table);
 		return section;
@@ -951,12 +966,12 @@ async function embedRollTable(config, label, options) {
 	const showCite = config.cite !== false;
 	const figure = document.createElement("figure");
 	figure.append(table);
-	if ( config.classes ) figure.className = config.classes;
+	if (config.classes) figure.className = config.classes;
 	figure.classList.add("content-embed");
-	if ( showCaption || showCite ) {
+	if (showCaption || showCite) {
 		const figcaption = document.createElement("figcaption");
-		if ( showCaption ) {
-			if ( label ) figcaption.innerHTML += `<strong class="embed-caption">${label}</strong>`;
+		if (showCaption) {
+			if (label) figcaption.innerHTML += `<strong class="embed-caption">${label}</strong>`;
 			else {
 				const description = await TextEditor.enrichHTML(config.doc.description, options);
 				const container = document.createElement("div");
@@ -965,7 +980,7 @@ async function embedRollTable(config, label, options) {
 				figcaption.append(container);
 			}
 		}
-		if ( showCite ) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
+		if (showCite) figcaption.innerHTML += `<cite>${config.doc.toAnchor().outerHTML}</cite>`;
 		figure.append(figcaption);
 	}
 	return figure;
@@ -992,29 +1007,29 @@ async function embedRollTable(config, label, options) {
 function enrichLookup(config, fallback, options) {
 	let keyPath = config.path;
 	let style = config.style;
-	for ( const value of config.values ) {
-		if ( value === "capitalize" ) style ??= "capitalize";
-		else if ( value === "lowercase" ) style ??= "lowercase";
-		else if ( value === "uppercase" ) style ??= "uppercase";
-		else if ( value.startsWith("@") ) keyPath ??= value;
+	for (const value of config.values) {
+		if (value === "capitalize") style ??= "capitalize";
+		else if (value === "lowercase") style ??= "lowercase";
+		else if (value === "uppercase") style ??= "uppercase";
+		else if (value.startsWith("@")) keyPath ??= value;
 	}
 
-	if ( !keyPath ) {
+	if (!keyPath) {
 		console.warn(`Lookup path must be defined to enrich ${config._input}.`);
 		return null;
 	}
 
 	const data = options.relativeTo?.getRollData() ?? {};
 	let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
-	if ( value && style ) {
-		if ( style === "capitalize" ) value = value.capitalize();
-		else if ( style === "lowercase" ) value = value.toLowerCase();
-		else if ( style === "uppercase" ) value = value.toUpperCase();
+	if (value && style) {
+		if (style === "capitalize") value = value.capitalize();
+		else if (style === "lowercase") value = value.toLowerCase();
+		else if (style === "uppercase") value = value.toUpperCase();
 	}
 
 	const span = document.createElement("span");
 	span.classList.add("lookup-value");
-	if ( !value ) span.classList.add("not-found");
+	if (!value) span.classList.add("not-found");
 	span.innerText = value ?? keyPath;
 	return span;
 }

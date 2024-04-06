@@ -8,9 +8,12 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			pool: new ArrayField(new SchemaField({
-				uuid: new StringField({blank: false, nullable: false}) // TODO: Replace with UUIDField when available
-			}), { label: "DOCUMENT.Items" })
+			pool: new ArrayField(
+				new SchemaField({
+					uuid: new StringField({ blank: false, nullable: false }) // TODO: Replace with UUIDField when available
+				}),
+				{ label: "DOCUMENT.Items" }
+			)
 		};
 	}
 }
@@ -21,10 +24,13 @@ export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
 export class GrantFeaturesValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			added: new ArrayField(new SchemaField({
-				document: new LocalDocumentField(foundry.documents.BaseItem),
-				uuid: new StringField() // TODO: Replace with UUIDField when available
-			}), {required: false, initial: undefined})
+			added: new ArrayField(
+				new SchemaField({
+					document: new LocalDocumentField(foundry.documents.BaseItem),
+					uuid: new StringField() // TODO: Replace with UUIDField when available
+				}),
+				{ required: false, initial: undefined }
+			)
 		};
 	}
 }

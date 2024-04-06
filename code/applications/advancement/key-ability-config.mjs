@@ -5,7 +5,6 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for key ability.
  */
 export default class KeyAbilityConfig extends AdvancementConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "key-ability"],

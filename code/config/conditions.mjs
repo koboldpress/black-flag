@@ -158,14 +158,14 @@ export const statusEffects = {
 export function _configureStatusEffects() {
 	const addEffect = (effects, data) => {
 		effects.push(data);
-		if ( "special" in data ) CONFIG.specialStatusEffects[data.special] = data.id;
+		if ("special" in data) CONFIG.specialStatusEffects[data.special] = data.id;
 	};
 	CONFIG.statusEffects = Object.entries(statusEffects).reduce((arr, [id, data]) => {
 		const original = CONFIG.statusEffects.find(s => s.id === id);
 		addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
 		return arr;
 	}, []);
-	for ( const [id, {label: name, ...data}] of Object.entries(conditions) ) {
+	for (const [id, { label: name, ...data }] of Object.entries(conditions)) {
 		addEffect(CONFIG.statusEffects, { id, name, ...data });
 	}
 }
@@ -174,7 +174,7 @@ export function _configureStatusEffects() {
 
 Hooks.on("i18nInit", () => {
 	// Localize & sort status effects
-	CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+	CONFIG.statusEffects.forEach(s => (s.name = game.i18n.localize(s.name)));
 	CONFIG.statusEffects.sort((lhs, rhs) =>
 		lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name)
 	);

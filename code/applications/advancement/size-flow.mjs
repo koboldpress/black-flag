@@ -4,7 +4,6 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents a size choice.
  */
 export default class SizeFlow extends AdvancementFlow {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/size-flow.hbs",
@@ -29,4 +28,3 @@ export default class SizeFlow extends AdvancementFlow {
 		this.advancement.apply(this.levels, formData.size);
 	}
 }
-

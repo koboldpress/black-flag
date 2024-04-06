@@ -19,11 +19,11 @@ import { sortObjectEntries } from "../utils/object.mjs";
  * @param {Set<string>} [chosen=null] - Keys of entries that should be marked chosen by default.
  */
 export default class SelectChoices {
-	constructor(choices={}, chosen=null) {
+	constructor(choices = {}, chosen = null) {
 		const clone = foundry.utils.deepClone(choices);
-		for ( const [key, value] of Object.entries(clone) ) {
-			if ( chosen ) value.chosen = chosen.has(key);
-			if ( !value.children || (value.children instanceof SelectChoices) ) continue;
+		for (const [key, value] of Object.entries(clone)) {
+			if (chosen) value.chosen = chosen.has(key);
+			if (!value.children || value.children instanceof SelectChoices) continue;
 			value.category = true;
 			value.children = new this.constructor(value.children, chosen);
 		}
@@ -38,10 +38,10 @@ export default class SelectChoices {
 	 */
 	get set() {
 		const set = new Set();
-		for ( const [key, choice] of Object.entries(this) ) {
-			if ( !choice.children ) set.add(key);
+		for (const [key, choice] of Object.entries(this)) {
+			if (!choice.children) set.add(key);
 			else {
-				if ( choice.selectableCategory ) set.add(`${key}!`);
+				if (choice.selectableCategory) set.add(`${key}!`);
 				choice.children.set.forEach(k => set.add(k));
 			}
 		}
@@ -57,11 +57,11 @@ export default class SelectChoices {
 	 */
 	get(key) {
 		const search = (data, key) => {
-			for ( const [k, v] of Object.entries(data) ) {
-				if ( k === key ) return v;
-				if ( v.children ) {
+			for (const [k, v] of Object.entries(data)) {
+				if (k === key) return v;
+				if (v.children) {
 					const result = search(v.children, key);
-					if ( result ) return result;
+					if (result) return result;
 				}
 			}
 		};
@@ -76,9 +76,9 @@ export default class SelectChoices {
 	 */
 	clone() {
 		const newData = {};
-		for ( const [key, value] of Object.entries(this) ) {
+		for (const [key, value] of Object.entries(this)) {
 			newData[key] = foundry.utils.deepClone(value);
-			if ( value.children ) newData[key].children = value.children.clone();
+			if (value.children) newData[key].children = value.children.clone();
 		}
 		const clone = new this.constructor(newData);
 		return clone;
@@ -93,12 +93,12 @@ export default class SelectChoices {
 	 *                                                and the second being the value.
 	 */
 	find(key) {
-		for ( const [k, v] of Object.entries(this) ) {
-			if ( (k === key) || k.endsWith(`:${key}`) ) {
+		for (const [k, v] of Object.entries(this)) {
+			if (k === key || k.endsWith(`:${key}`)) {
 				return [k, v];
-			} else if ( v.children ) {
+			} else if (v.children) {
 				const result = v.children.find(key);
-				if ( result ) return result;
+				if (result) return result;
 			}
 		}
 		return null;
@@ -115,11 +115,16 @@ export default class SelectChoices {
 	 * @param {string} [options.localizationKeyPath="localization"] - Path to the pluralizable label.
 	 * @returns {SelectOptions}
 	 */
-	localize({ pluralRule="one", categoryPluralRule, labelKeyPath="label", localizationKeyPath="localization" }={}) {
-		for ( const v of Object.values(this) ) {
+	localize({
+		pluralRule = "one",
+		categoryPluralRule,
+		labelKeyPath = "label",
+		localizationKeyPath = "localization"
+	} = {}) {
+		for (const v of Object.values(this)) {
 			const pr = v.category && categoryPluralRule ? categoryPluralRule : pluralRule;
 			v[labelKeyPath] = makeLabel(v, { pluralRule: pr, labelKeyPath, localizationKeyPath });
-			if ( v.children ) v.children.localize({ pluralRule, categoryPluralRule, labelKeyPath, localizationKeyPath });
+			if (v.children) v.children.localize({ pluralRule, categoryPluralRule, labelKeyPath, localizationKeyPath });
 		}
 		return this;
 	}
@@ -166,9 +171,9 @@ export default class SelectChoices {
 	 * @returns {number}
 	 */
 	_sort(lhs, rhs) {
-		if ( lhs.sorting === false && rhs.sorting === false ) return 0;
-		if ( lhs.sorting === false ) return -1;
-		if ( rhs.sorting === false ) return 1;
+		if (lhs.sorting === false && rhs.sorting === false) return 0;
+		if (lhs.sorting === false) return -1;
+		if (rhs.sorting === false) return 1;
 		return lhs.label.localeCompare(rhs.label);
 	}
 
@@ -180,10 +185,10 @@ export default class SelectChoices {
 	 */
 	sort() {
 		const sorted = new SelectChoices(sortObjectEntries(this, { sortKey: this._sort }));
-		for ( const key of Object.keys(this) ) delete this[key];
+		for (const key of Object.keys(this)) delete this[key];
 		this.merge(sorted);
-		for ( const entry of Object.values(this) ) {
-			if ( entry.children ) entry.children.sort();
+		for (const entry of Object.values(this)) {
+			if (entry.children) entry.children.sort();
 		}
 		return this;
 	}
@@ -196,8 +201,8 @@ export default class SelectChoices {
 	 */
 	sorted() {
 		const sorted = new SelectChoices(sortObjectEntries(this, { sortKey: this._sort }));
-		for ( const entry of Object.values(sorted) ) {
-			if ( entry.children ) entry.children = entry.children.sorted();
+		for (const entry of Object.values(sorted)) {
+			if (entry.children) entry.children = entry.children.sorted();
 		}
 		return sorted;
 	}
@@ -210,26 +215,26 @@ export default class SelectChoices {
 	 * @returns {SelectChoices} - This SelectChoices with filter applied.
 	 */
 	filter(filter) {
-		if ( filter instanceof SelectChoices ) filter = filter.set;
+		if (filter instanceof SelectChoices) filter = filter.set;
 
-		for ( const [key, trait] of Object.entries(this) ) {
+		for (const [key, trait] of Object.entries(this)) {
 			// Simple filter ("languages:standard:common") - Include this entry
 			// Category filter ("tools:artisan") - Include category but not children
 			const wildcardKey = key.replace(/(:|^)([\w]+)$/, "$1*");
 			const forcedCategoryKey = `${key}!`;
-			if ( filter.has(key) && !filter.has(wildcardKey) ) {
-				if ( trait.children ) {
-					if ( filter.has(forcedCategoryKey) ) {
+			if (filter.has(key) && !filter.has(wildcardKey)) {
+				if (trait.children) {
+					if (filter.has(forcedCategoryKey)) {
 						trait.children.filter(filter);
-						if ( foundry.utils.isEmpty(trait.children) ) delete trait.children;
+						if (foundry.utils.isEmpty(trait.children)) delete trait.children;
 					} else delete trait.children;
 				}
 			}
 
 			// Check children, remove entry if no children match filter
-			else if ( !filter.has(wildcardKey) && !filter.has(`${key}:*`) ) {
-				if ( trait.children ) trait.children.filter(filter);
-				if ( foundry.utils.isEmpty(trait.children ?? {}) ) delete this[key];
+			else if (!filter.has(wildcardKey) && !filter.has(`${key}:*`)) {
+				if (trait.children) trait.children.filter(filter);
+				if (foundry.utils.isEmpty(trait.children ?? {})) delete this[key];
 			}
 
 			// Top-level wildcard ("languages:*") - Include all entries & children
@@ -258,10 +263,10 @@ export default class SelectChoices {
 	 * @returns {SelectChoices} - This SelectChoices with excluded keys removed.
 	 */
 	exclude(keys) {
-		for ( const [key, trait] of Object.entries(this) ) {
+		for (const [key, trait] of Object.entries(this)) {
 			// TODO: Handle wildcard keys
-			if ( keys.has(key) ) delete this[key];
-			else if ( trait.children ) trait.children = trait.children.exclude(keys);
+			if (keys.has(key)) delete this[key];
+			else if (trait.children) trait.children = trait.children.exclude(keys);
 		}
 		return this;
 	}

@@ -6,11 +6,10 @@ import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
  * editing interfaces.
  */
 export default class ActivityConfig extends PseudoDocumentSheet {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "activity-config"],
-			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details"}],
+			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details" }],
 			template: "systems/black-flag/templates/activities/activity-config.hbs",
 			width: 500,
 			height: "auto",
@@ -39,7 +38,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async close(options={}) {
+	async close(options = {}) {
 		await super.close(options);
 		delete this.activity.apps[this.appId];
 	}
@@ -53,29 +52,38 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: source.activation.type });
 		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
 
-		const context = foundry.utils.mergeObject(super.getData(options), {
-			activity: this.activity,
-			system: this.activity.system,
-			source,
-			default: {
-				title: game.i18n.localize(this.activity.constructor.metadata.title),
-				icon: this.activity.constructor.metadata.icon
+		const context = foundry.utils.mergeObject(
+			super.getData(options),
+			{
+				activity: this.activity,
+				system: this.activity.system,
+				source,
+				default: {
+					title: game.i18n.localize(this.activity.constructor.metadata.title),
+					icon: this.activity.constructor.metadata.icon
+				},
+				description: source.description,
+				enriched: await TextEditor.enrichHTML(source.description ?? "", {
+					secrets: true,
+					rollData: this.item.getRollData(),
+					async: true,
+					relativeTo: this.activity
+				}),
+				labels: {
+					defaultActivation: defaultActivation
+						? game.i18n.format("BF.Default.Specific", {
+								default: defaultActivation.toLowerCase()
+							})
+						: null
+				},
+				activation: {
+					options: activationOptions,
+					scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
+				},
+				showBaseDamage: Object.hasOwn(this.item.system, "damage")
 			},
-			description: source.description,
-			enriched: await TextEditor.enrichHTML(source.description ?? "", {
-				secrets: true, rollData: this.item.getRollData(), async: true, relativeTo: this.activity
-			}),
-			labels: {
-				defaultActivation: defaultActivation ? game.i18n.format("BF.Default.Specific", {
-					default: defaultActivation.toLowerCase()
-				}) : null
-			},
-			activation: {
-				options: activationOptions,
-				scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
-			},
-			showBaseDamage: Object.hasOwn(this.item.system, "damage")
-		}, {inplace: false});
+			{ inplace: false }
+		);
 		context.CONFIG = CONFIG.BlackFlag;
 		return context;
 	}
@@ -88,11 +96,11 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
 
-		for ( const element of html.querySelectorAll("img[data-edit]") ) {
+		for (const element of html.querySelectorAll("img[data-edit]")) {
 			element.addEventListener("click", this._onEditIcon.bind(this));
 		}
 	}
@@ -125,7 +133,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 			redirectToRoot: [this.activity.constructor.metadata.icon],
 			callback: path => {
 				event.currentTarget.src = path;
-				if ( this.options.submitOnChange ) return this._onSubmit(event);
+				if (this.options.submitOnChange) return this._onSubmit(event);
 			},
 			top: this.position.top + 40,
 			left: this.position.left + 10
@@ -139,13 +147,13 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 		const updates = foundry.utils.expandObject(formData);
 
 		// TODO: Find a way to move this behavior into DamageListElement & ConsumptionElement
-		if ( foundry.utils.hasProperty(updates, "system.damage.parts") ) {
+		if (foundry.utils.hasProperty(updates, "system.damage.parts")) {
 			updates.system.damage.parts = Object.entries(updates.system.damage.parts).reduce((arr, [k, v]) => {
 				arr[k] = v;
 				return arr;
 			}, []);
 		}
-		if ( foundry.utils.hasProperty(updates, "consumption.targets") ) {
+		if (foundry.utils.hasProperty(updates, "consumption.targets")) {
 			updates.consumption.targets = Object.entries(updates.consumption.targets).reduce((arr, [k, v]) => {
 				arr[k] = v;
 				return arr;

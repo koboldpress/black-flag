@@ -175,8 +175,16 @@ export const weaponOptions = {
  * @type {string[]}
  */
 export const weaponProperties = [
-	"ammunition", "finesse", "heavy", "light", "loading", "magical",
-	"reach", "thrown", "twoHanded", "versatile"
+	"ammunition",
+	"finesse",
+	"heavy",
+	"light",
+	"loading",
+	"magical",
+	"reach",
+	"thrown",
+	"twoHanded",
+	"versatile"
 ];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

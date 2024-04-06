@@ -4,7 +4,6 @@ import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.m
  * Extended roll configuration dialog that allows selecting abilities.
  */
 export default class SkillRollConfigurationDialog extends ChallengeRollConfigurationDialog {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -17,14 +16,17 @@ export default class SkillRollConfigurationDialog extends ChallengeRollConfigura
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options={}) {
-		return foundry.utils.mergeObject({
-			abilities: Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, ability]) => {
-				obj[key] = ability.labels.full;
-				return obj;
-			}, {}),
-			selectedAbility: this.rolls[0].data.abilityId
-		}, super.getData(options));
+	getData(options = {}) {
+		return foundry.utils.mergeObject(
+			{
+				abilities: Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, ability]) => {
+					obj[key] = ability.labels.full;
+					return obj;
+				}, {}),
+				selectedAbility: this.rolls[0].data.abilityId
+			},
+			super.getData(options)
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

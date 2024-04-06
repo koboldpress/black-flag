@@ -5,23 +5,28 @@ import Advancement from "./advancement.mjs";
  * Advancement that represents a value that scales with class level.
  */
 export default class ScaleValueAdvancement extends Advancement {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "scaleValue",
-		dataModels: {
-			configuration: ScaleValueConfigurationData
-		},
-		order: 60,
-		icon: "systems/black-flag/artwork/advancement/scale-value.svg",
-		title: "BF.Advancement.ScaleValue.Title",
-		hint: "BF.Advancement.ScaleValue.Hint",
-		identifier: {
-			configurable: true,
-			hint: "BF.Advancement.ScaleValue.Identifier.Hint"
-		},
-		configurableHint: true,
-		multiLevel: true
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "scaleValue",
+				dataModels: {
+					configuration: ScaleValueConfigurationData
+				},
+				order: 60,
+				icon: "systems/black-flag/artwork/advancement/scale-value.svg",
+				title: "BF.Advancement.ScaleValue.Title",
+				hint: "BF.Advancement.ScaleValue.Hint",
+				identifier: {
+					configurable: true,
+					hint: "BF.Advancement.ScaleValue.Identifier.Hint"
+				},
+				configurableHint: true,
+				multiLevel: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -48,9 +53,9 @@ export default class ScaleValueAdvancement extends Advancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	titleForLevel(levels, { flow=false }={}) {
+	titleForLevel(levels, { flow = false } = {}) {
 		const value = this.valueForLevel(this.relavantLevel(levels))?.display;
-		if ( !value ) return this.title;
+		if (!value) return this.title;
 		return `${this.title}: <strong>${value}</strong>`;
 	}
 
@@ -65,9 +70,9 @@ export default class ScaleValueAdvancement extends Advancement {
 		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.configuration.type];
 		const validKeys = Object.keys(new ScaleValueType());
 		const data = {};
-		for ( const [key, value] of Object.entries(this.configuration.scale).reverse() ) {
-			if ( Number(key) > level ) continue;
-			validKeys.forEach(k => data[k] ??= value[k]);
+		for (const [key, value] of Object.entries(this.configuration.scale).reverse()) {
+			if (Number(key) > level) continue;
+			validKeys.forEach(k => (data[k] ??= value[k]));
 		}
 		return foundry.utils.isEmpty(data) ? null : new ScaleValueType(data);
 	}
@@ -78,10 +83,14 @@ export default class ScaleValueAdvancement extends Advancement {
 
 	changes(levels) {
 		const value = this.valueForLevel(this.relavantLevel(levels));
-		return value ? [{
-			key: `system.scale.${this.parentIdentifier}.${this.identifier}`,
-			mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-			value
-		}] : null;
+		return value
+			? [
+					{
+						key: `system.scale.${this.parentIdentifier}.${this.identifier}`,
+						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+						value
+					}
+				]
+			: null;
 	}
 }

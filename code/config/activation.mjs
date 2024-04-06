@@ -48,10 +48,10 @@ localizeConfig(actionTypes.monster.children);
  * @param {string[]} [options.pluralRule] - Pluralization rule to use with localization value.
  * @returns {SelectChoices}
  */
-export function activationOptions({ categories, chosen, pluralRule }={}) {
+export function activationOptions({ categories, chosen, pluralRule } = {}) {
 	const selectChoices = _createOptions([actionTypes, timeUnits], { chosen, pluralRule });
 	selectChoices.exclude(new Set(["combat"]));
-	if ( categories ) selectChoices.exclude(new Set(categories));
+	if (categories) selectChoices.exclude(new Set(categories));
 	return selectChoices;
 }
 
@@ -95,9 +95,9 @@ export const durations = {
  * @param {string[]} [options.pluralRule] - Pluralization rule to use with localization value.
  * @returns {SelectChoices}
  */
-export function durationOptions({ categories, chosen, pluralRule }={}) {
+export function durationOptions({ categories, chosen, pluralRule } = {}) {
 	const selectChoices = _createOptions([timeUnits, durations], { chosen, pluralRule });
-	if ( categories ) selectChoices.exclude(new Set(categories));
+	if (categories) selectChoices.exclude(new Set(categories));
 	return selectChoices;
 }
 
@@ -114,10 +114,10 @@ export function durationOptions({ categories, chosen, pluralRule }={}) {
 function _createOptions(categories, { chosen, pluralRule }) {
 	const selectChoices = new SelectChoices();
 	categories.forEach(c => selectChoices.merge(new SelectChoices(c)));
-	for ( const [key, category] of Object.entries(selectChoices) ) {
+	for (const [key, category] of Object.entries(selectChoices)) {
 		category.label = makeLabel(category, { pluralRule });
 		category.scalar = key in timeUnits;
-		for ( const [k, v] of Object.entries(category.children) ) {
+		for (const [k, v] of Object.entries(category.children)) {
 			v.label = makeLabel(v, { pluralRule });
 			v.scalar ??= category.scalar || v.scalar;
 			v.chosen = k === chosen;

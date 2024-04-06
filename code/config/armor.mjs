@@ -117,6 +117,4 @@ export const armorFormulas = {
  * Properties that can be applied to armor.
  * @type {string[]}
  */
-export const armorProperties = [
-	"cumbersome", "magical", "naturalMaterials", "noisy"
-];
+export const armorProperties = ["cumbersome", "magical", "naturalMaterials", "noisy"];

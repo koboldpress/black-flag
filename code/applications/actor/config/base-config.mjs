@@ -3,7 +3,6 @@
  * @abstract
  */
 export default class BaseConfig extends DocumentSheet {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -41,12 +40,15 @@ export default class BaseConfig extends DocumentSheet {
 
 	/** @inheritDoc */
 	async getData(options) {
-		return foundry.utils.mergeObject({
-			CONFIG: CONFIG.BlackFlag,
-			source: this.document.toObject().system,
-			system: this.document.system,
-			modifierSections: this.prepareModifiers() ?? {}
-		}, await super.getData(options));
+		return foundry.utils.mergeObject(
+			{
+				CONFIG: CONFIG.BlackFlag,
+				source: this.document.toObject().system,
+				system: this.document.system,
+				modifierSections: this.prepareModifiers() ?? {}
+			},
+			await super.getData(options)
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -58,17 +60,17 @@ export default class BaseConfig extends DocumentSheet {
 	 * @param {Function} [filter] - Additional filtering function to apply.
 	 * @returns {Modifier[]}
 	 */
-	getModifiers(include=[], exclude=[], filter=null) {
+	getModifiers(include = [], exclude = [], filter = null) {
 		let modifiers = [];
-		for ( let modifier of this.document.system.modifiers ) {
+		for (let modifier of this.document.system.modifiers) {
 			let valid = true;
-			for ( const i of include ) {
-				if ( !modifier.filter.some(f => foundry.utils.objectsEqual(i, f)) ) valid = false;
+			for (const i of include) {
+				if (!modifier.filter.some(f => foundry.utils.objectsEqual(i, f))) valid = false;
 			}
-			for ( const e of exclude ) {
-				if ( modifier.filter.some(f => foundry.utils.objectsEqual(e, f)) ) valid = false;
+			for (const e of exclude) {
+				if (modifier.filter.some(f => foundry.utils.objectsEqual(e, f))) valid = false;
 			}
-			if ( !valid ) continue;
+			if (!valid) continue;
 
 			const mod = foundry.utils.deepClone(modifier);
 			mod.index = modifier.index;
@@ -96,7 +98,7 @@ export default class BaseConfig extends DocumentSheet {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll('[data-action="modifier"]') ) {
+		for (const element of html.querySelectorAll('[data-action="modifier"]')) {
 			element.addEventListener("click", this._onModifierAction.bind(this));
 		}
 	}
@@ -140,11 +142,11 @@ export default class BaseConfig extends DocumentSheet {
 		const data = foundry.utils.expandObject(formData);
 
 		// Intercept changes to modifiers
-		if ( data.modifier ) {
-			for ( const [index, updates] of Object.entries(data.modifier) ) {
-				if ( foundry.utils.hasProperty(updates, "requireProficiency") ) {
+		if (data.modifier) {
+			for (const [index, updates] of Object.entries(data.modifier)) {
+				if (foundry.utils.hasProperty(updates, "requireProficiency")) {
 					updates.filter = this.document.system.modifiers[Number(index)].filter;
-					if ( updates.requireProficiency ) updates.filter.push({k: "proficiency", v: 1, o: "gte"});
+					if (updates.requireProficiency) updates.filter.push({ k: "proficiency", v: 1, o: "gte" });
 					else updates.filter.findSplice(f => f.k === "proficiency");
 				}
 				await this.document.system.updateModifier(Number(index), updates, { render: false });

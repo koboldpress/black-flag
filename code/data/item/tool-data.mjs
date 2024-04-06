@@ -12,7 +12,6 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  */
 export default class ToolData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -30,8 +29,8 @@ export default class ToolData extends ItemDataModel.mixin(ActivitiesTemplate, De
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				category: new StringField({label: "BF.Equipment.Category.Label"}),
-				base: new StringField({label: "BF.Equipment.Base.Label"})
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
 		});
 	}

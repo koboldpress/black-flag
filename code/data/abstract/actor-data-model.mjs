@@ -2,7 +2,6 @@ import Proficiency from "../../documents/proficiency.mjs";
 import BaseDataModel from "./base-data-model.mjs";
 
 export default class ActorDataModel extends BaseDataModel {
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -26,11 +25,12 @@ export default class ActorDataModel extends BaseDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async toEmbed(config, options={}) {
-		if ( !foundry.utils.hasProperty(this, "biography.value") ) return null;
+	async toEmbed(config, options = {}) {
+		if (!foundry.utils.hasProperty(this, "biography.value")) return null;
 		const description = foundry.utils.getProperty(this, "biography.value");
 		const enriched = await TextEditor.enrichHTML(description, {
-			...options, relativeTo: this.parent
+			...options,
+			relativeTo: this.parent
 		});
 		const section = document.createElement("section");
 		section.innerHTML = enriched;
@@ -48,10 +48,10 @@ export default class ActorDataModel extends BaseDataModel {
 	 *                                            either a die term or a flat term.
 	 * @returns {object}
 	 */
-	getRollData({ deterministic=false }={}) {
+	getRollData({ deterministic = false } = {}) {
 		const rollData = { ...this };
 		rollData.prof = new Proficiency(this.attributes?.proficiency ?? 0, 1);
-		if ( deterministic ) rollData.prof = rollData.prof.flat;
+		if (deterministic) rollData.prof = rollData.prof.flat;
 		return rollData;
 	}
 }

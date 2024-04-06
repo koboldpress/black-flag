@@ -13,9 +13,13 @@ import TraitsTemplate from "./templates/traits-template.mjs";
 const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class NPCData extends ActorDataModel.mixin(
-	ACTemplate, ConditionsTemplate, InitiativeTemplate, LanguagesTemplate, ModifiersTemplate, TraitsTemplate
+	ACTemplate,
+	ConditionsTemplate,
+	InitiativeTemplate,
+	LanguagesTemplate,
+	ModifiersTemplate,
+	TraitsTemplate
 ) {
-
 	/** @inheritDoc */
 	static metadata = {
 		type: "npc",
@@ -33,32 +37,40 @@ export default class NPCData extends ActorDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			abilities: new MappingField(new SchemaField({
-				mod: new NumberField({integer: true})
-			}), {
-				initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true, label: "BF.Ability.Label[other]"
-			}),
+			abilities: new MappingField(
+				new SchemaField({
+					mod: new NumberField({ integer: true })
+				}),
+				{
+					initialKeys: CONFIG.BlackFlag.abilities,
+					prepareKeys: true,
+					label: "BF.Ability.Label[other]"
+				}
+			),
 			attributes: new SchemaField({
 				ac: new SchemaField({
 					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored", "natural"]
 					})
 				}),
-				cr: new NumberField({nullable: false, min: 0, initial: 0, label: "BF.ChallengeRating.Label"}),
-				hp: new SchemaField({
-					value: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong"}),
-					max: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong"}),
-					temp: new NumberField({min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong"})
-				}, {label: "BF.HitPoint.Label[other]"}),
+				cr: new NumberField({ nullable: false, min: 0, initial: 0, label: "BF.ChallengeRating.Label" }),
+				hp: new SchemaField(
+					{
+						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
+						max: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
+						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" })
+					},
+					{ label: "BF.HitPoint.Label[other]" }
+				),
 				initiative: new SchemaField({
-					lair: new NumberField({integer: true})
+					lair: new NumberField({ integer: true })
 				}),
 				legendary: new SchemaField({
-					spent: new NumberField({min: 0, initial: 0, integer: true}),
-					max: new NumberField({min: 1, initial: null, integer: true})
+					spent: new NumberField({ min: 0, initial: 0, integer: true }),
+					max: new NumberField({ min: 1, initial: null, integer: true })
 				}),
-				perception: new NumberField({min: 0, integer: true, label: "BF.Skill.Perception.Label"}),
-				stealth: new NumberField({min: 0, integer: true, label: "BF.Skill.Stealth.Label"})
+				perception: new NumberField({ min: 0, integer: true, label: "BF.Skill.Perception.Label" }),
+				stealth: new NumberField({ min: 0, integer: true, label: "BF.Skill.Stealth.Label" })
 			}),
 			biography: new SchemaField({
 				value: new HTMLField(),
@@ -81,8 +93,8 @@ export default class NPCData extends ActorDataModel.mixin(
 	 * @type {number}
 	 */
 	get xpValue() {
-		const index = this.attributes.cr >= 1 ? this.attributes.cr + 3
-			: { 0: 0, 0.125: 1, 0.25: 2, 0.5: 3 }[this.attributes.cr];
+		const index =
+			this.attributes.cr >= 1 ? this.attributes.cr + 3 : { 0: 0, 0.125: 1, 0.25: 2, 0.5: 3 }[this.attributes.cr];
 		return CONFIG.BlackFlag.xpForCR[index] ?? 0;
 	}
 
@@ -91,7 +103,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseAbilities() {
-		for ( const [key, ability] of Object.entries(this.abilities) ) {
+		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability._source = this._source.abilities?.[key] ?? {};
 			ability.check ??= {};
 			ability.save ??= {};
@@ -109,10 +121,10 @@ export default class NPCData extends ActorDataModel.mixin(
 	prepareEmbeddedConditions() {
 		// TODO: Refactor this out into mixin
 		this.conditions = {};
-		for ( const effect of this.parent.effects ) {
+		for (const effect of this.parent.effects) {
 			const identifier = effect.statuses.first();
 			const level = foundry.utils.getProperty(effect, "flags.black-flag.condition.level");
-			if ( !identifier ) continue;
+			if (!identifier) continue;
 			this.conditions[identifier] = Math.max(this.conditions[identifier] ?? 0, level ?? 1);
 		}
 	}
@@ -121,16 +133,12 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	prepareDerivedAbilities() {
 		const rollData = this.parent.getRollData({ deterministic: true });
-		for ( const [key, ability] of Object.entries(this.abilities) ) {
+		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability.valid = ability.mod !== null;
 			ability.mod ??= 0;
 
-			ability.check.proficiency = new Proficiency(
-				this.attributes.proficiency, 0, "down"
-			);
-			ability.save.proficiency = new Proficiency(
-				this.attributes.proficiency, 0, "down"
-			);
+			ability.check.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
+			ability.save.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
 
 			const checkData = { type: "ability-check", ability: key, proficiency: ability.check.proficiency.multiplier };
 			ability.check.modifiers = {
@@ -167,7 +175,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		// Hit Points
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
-		if ( this.attributes.exhaustion >= 4 ) hp.max = Math.floor(hp.max * 0.5);
+		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamped(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 
@@ -177,13 +185,15 @@ export default class NPCData extends ActorDataModel.mixin(
 		// Legendary Actions
 		this.attributes.legendary.max ??= 0;
 		this.attributes.legendary.value = Math.clamped(
-			this.attributes.legendary.max - this.attributes.legendary.spent, 0, this.attributes.legendary.max
+			this.attributes.legendary.max - this.attributes.legendary.spent,
+			0,
+			this.attributes.legendary.max
 		);
 
 		// Perception & Stealth
 		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
 		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);
-		if ( this.attributes.ac.equippedArmor?.system.properties.has("noisy") ) {
+		if (this.attributes.ac.equippedArmor?.system.properties.has("noisy")) {
 			this.attributes.baseStealth = this.attributes.stealth;
 			this.attributes.stealth -= 5;
 		}
@@ -207,7 +217,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	async _preUpdateHP(changed, options, user) {
 		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
-		if ( changedMaxHP !== undefined ) {
+		if (changedMaxHP !== undefined) {
 			const maxHPDelta = changedMaxHP - this.attributes.hp.max;
 			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
 		}

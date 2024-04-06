@@ -48,20 +48,27 @@ export const currencies = {
 /**
  * Configure currencies once registration is complete.
  */
-Hooks.once("blackFlag.registrationComplete", function() {
+Hooks.once("blackFlag.registrationComplete", function () {
 	const currencies = CONFIG.BlackFlag.registration.list("currency") ?? {};
-	if ( foundry.utils.isEmpty(currencies) ) return;
-	for ( const [abbreviation, { name: label, cached }] of Object.entries(currencies) ) {
+	if (foundry.utils.isEmpty(currencies)) return;
+	for (const [abbreviation, { name: label, cached }] of Object.entries(currencies)) {
 		CONFIG.BlackFlag.currencies[abbreviation] = foundry.utils.mergeObject(
-			CONFIG.BlackFlag.currencies[abbreviation] ?? {}, {
-				label, abbreviation, conversion: cached.system.conversion.value, uuid: cached.uuid
+			CONFIG.BlackFlag.currencies[abbreviation] ?? {},
+			{
+				label,
+				abbreviation,
+				conversion: cached.system.conversion.value,
+				uuid: cached.uuid
 			}
 		);
 	}
-	for ( const [key, config] of Object.entries(CONFIG.BlackFlag.currencies) ) {
-		if ( !config.uuid ) delete CONFIG.BlackFlag.currencies[key];
+	for (const [key, config] of Object.entries(CONFIG.BlackFlag.currencies)) {
+		if (!config.uuid) delete CONFIG.BlackFlag.currencies[key];
 	}
-	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, {
+		sortKey: "conversion",
+		reverse: true
+	});
 });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -69,12 +76,17 @@ Hooks.once("blackFlag.registrationComplete", function() {
 /**
  * Handle a currency being created.
  */
-Hooks.on("blackFlag.registrationCreated", function(identifier, item) {
-	if ( item.type !== "currency" ) return;
+Hooks.on("blackFlag.registrationCreated", function (identifier, item) {
+	if (item.type !== "currency") return;
 	CONFIG.BlackFlag.currencies[identifier] = {
-		label: item.name, abbreviation: identifier, conversion: item.system.conversion.value
+		label: item.name,
+		abbreviation: identifier,
+		conversion: item.system.conversion.value
 	};
-	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, {
+		sortKey: "conversion",
+		reverse: true
+	});
 });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -82,15 +94,18 @@ Hooks.on("blackFlag.registrationCreated", function(identifier, item) {
 /**
  * Handle a currency being updated.
  */
-Hooks.on("blackFlag.registrationUpdated", function(identifier, item) {
-	if ( item.type !== "currency" ) return;
+Hooks.on("blackFlag.registrationUpdated", function (identifier, item) {
+	if (item.type !== "currency") return;
 	const currency = CONFIG.BlackFlag.currencies[identifier];
-	if ( currency ) {
+	if (currency) {
 		currency.label = item.name;
 		currency.abbreviation = item.identifier;
 		currency.conversion = item.system.conversion.value;
 	}
-	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, { sortKey: "conversion", reverse: true});
+	CONFIG.BlackFlag.currencies = sortObjectEntries(CONFIG.BlackFlag.currencies, {
+		sortKey: "conversion",
+		reverse: true
+	});
 });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -98,8 +113,8 @@ Hooks.on("blackFlag.registrationUpdated", function(identifier, item) {
 /**
  * Handle a currency being deleted.
  */
-Hooks.on("blackFlag.registrationDeleted", function(identifier, item) {
-	if ( item.type !== "currency" ) return;
+Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
+	if (item.type !== "currency") return;
 	delete CONFIG.BlackFlag.currencies[identifier];
 });
 

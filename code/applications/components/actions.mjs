@@ -16,11 +16,15 @@ export default class ActionsElement extends AppAssociatedElement {
 		const { signal } = this.#controller;
 
 		// Attach listeners to buttons
-		for ( const button of this.querySelectorAll("[data-action]") ) {
-			button.addEventListener("click", event => {
-				event.stopImmediatePropagation();
-				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
-			}, { signal });
+		for (const button of this.querySelectorAll("[data-action]")) {
+			button.addEventListener(
+				"click",
+				event => {
+					event.stopImmediatePropagation();
+					this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+				},
+				{ signal }
+			);
 		}
 
 		new ContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
@@ -117,27 +121,27 @@ export default class ActionsElement extends AppAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( target.dispatchEvent(event) === false ) return;
+		if (target.dispatchEvent(event) === false) return;
 
 		const dataset = (target.closest("[data-activity], [data-activity-id], [data-item-id]") || target).dataset;
 		let activity;
 		const item = this.actor.items.get(dataset.itemId);
-		if ( dataset.activity ) activity = await fromUuid(dataset.activity);
+		if (dataset.activity) activity = await fromUuid(dataset.activity);
 		else activity = item?.system.activities?.get(dataset.activityId);
 
-		switch ( action ) {
+		switch (action) {
 			case "activate":
-				if ( activity ) return activity.activate();
+				if (activity) return activity.activate();
 				break;
 			case "delete":
-				if ( activity ) return activity.deleteDialog();
+				if (activity) return activity.deleteDialog();
 			case "deleteItem":
-				if ( item ) return item.deleteDialog();
+				if (item) return item.deleteDialog();
 				break;
 			case "edit":
-				if ( activity ) return activity.sheet.render(true);
+				if (activity) return activity.sheet.render(true);
 			case "editItem":
-				if ( item ) return item.sheet.render(true);
+				if (item) return item.sheet.render(true);
 				break;
 		}
 
@@ -154,7 +158,7 @@ export default class ActionsElement extends AppAssociatedElement {
 	_onContextMenu(element) {
 		const dataset = element.closest("[data-item-id]")?.dataset ?? {};
 		const item = this.actor.items.get(dataset?.itemId);
-		if ( !item ) {
+		if (!item) {
 			ui.context.menuItems = [];
 			return;
 		}

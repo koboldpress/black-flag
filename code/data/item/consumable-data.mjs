@@ -13,9 +13,10 @@ const { BooleanField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  */
 export default class ConsumableData extends ItemDataModel.mixin(
-	ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate
+	ActivitiesTemplate,
+	DescriptionTemplate,
+	PhysicalTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -33,10 +34,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				category: new StringField({label: "BF.Equipment.Category.Label"})
+				category: new StringField({ label: "BF.Equipment.Category.Label" })
 			}),
 			uses: new UsesField({
-				consumeQuantity: new BooleanField({initial: true})
+				consumeQuantity: new BooleanField({ initial: true })
 			})
 		});
 	}

@@ -44,8 +44,11 @@ export default class SkillConfig extends BaseConfig {
 	async getData(options) {
 		const context = await super.getData(options);
 		context.skillId = this.skillId;
-		context.skill = this.skillId ? context.source.proficiencies.skills[this.skillId]
-			?? this.document.system.proficiencies.skills[this.skillId] ?? {} : null;
+		context.skill = this.skillId
+			? context.source.proficiencies.skills[this.skillId] ??
+				this.document.system.proficiencies.skills[this.skillId] ??
+				{}
+			: null;
 		context.proficiencyLevels = {
 			0: game.i18n.localize("BF.Proficiency.Level.None"),
 			0.5: game.i18n.localize("BF.Proficiency.Level.Half"),
@@ -61,31 +64,52 @@ export default class SkillConfig extends BaseConfig {
 		let checkModifiers;
 		let passiveModifiers;
 		let global;
-		if ( this.skillId ) {
-			checkModifiers = this.getModifiers([{k: "type", v: "skill-check"}, {k: "skill", v: this.skillId}]);
-			passiveModifiers = this.getModifiers([{k: "type", v: "skill-passive"}, {k: "skill", v: this.skillId}]);
+		if (this.skillId) {
+			checkModifiers = this.getModifiers([
+				{ k: "type", v: "skill-check" },
+				{ k: "skill", v: this.skillId }
+			]);
+			passiveModifiers = this.getModifiers([
+				{ k: "type", v: "skill-passive" },
+				{ k: "skill", v: this.skillId }
+			]);
 			global = false;
 		} else {
 			const filter = modifier => !modifier.filter.some(f => f.k === "skill");
-			checkModifiers = this.getModifiers([{k: "type", v: "skill-check"}], [], filter);
-			passiveModifiers = this.getModifiers([{k: "type", v: "skill-passive"}], [], filter);
+			checkModifiers = this.getModifiers([{ k: "type", v: "skill-check" }], [], filter);
+			passiveModifiers = this.getModifiers([{ k: "type", v: "skill-passive" }], [], filter);
 			global = true;
 		}
 		return [
 			{
-				category: "check", type: "bonus", label: "BF.Check.Label[one]", global, showProficiency: global,
+				category: "check",
+				type: "bonus",
+				label: "BF.Check.Label[one]",
+				global,
+				showProficiency: global,
 				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
-				category: "passive", type: "bonus", label: "BF.Skill.Passive.LabelGeneric", global, showProficiency: global,
+				category: "passive",
+				type: "bonus",
+				label: "BF.Skill.Passive.LabelGeneric",
+				global,
+				showProficiency: global,
 				modifiers: passiveModifiers
 			},
 			{
-				category: "check", type: "min", label: "BF.Check.Label[one]", global, showProficiency: global,
+				category: "check",
+				type: "min",
+				label: "BF.Check.Label[one]",
+				global,
+				showProficiency: global,
 				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
-				category: "check", type: "note", label: "BF.Check.Label[one]", global,
+				category: "check",
+				type: "note",
+				label: "BF.Check.Label[one]",
+				global,
 				modifiers: checkModifiers.filter(m => m.type === "note")
 			}
 		];
@@ -97,7 +121,7 @@ export default class SkillConfig extends BaseConfig {
 
 	_onChangeInput(event) {
 		super._onChangeInput(event);
-		if ( event.target.name === "skillId" ) {
+		if (event.target.name === "skillId") {
 			this.skillId = event.target.value;
 			this.render();
 		}
@@ -107,7 +131,7 @@ export default class SkillConfig extends BaseConfig {
 
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: `skill-${category}` }] };
-		if ( this.skillId ) data.filter.push({ k: "skill", v: this.skillId });
+		if (this.skillId) data.filter.push({ k: "skill", v: this.skillId });
 		return data;
 	}
 }

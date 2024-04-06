@@ -5,7 +5,6 @@ import BaseConfig from "./base-config.mjs";
  * Class for configuring language proficiencies.
  */
 export default class LanguageConfig extends BaseConfig {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -54,15 +53,15 @@ export default class LanguageConfig extends BaseConfig {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const checkbox of html.querySelectorAll('input[type="checkbox"]:checked') ) {
+		for (const checkbox of html.querySelectorAll('input[type="checkbox"]:checked')) {
 			this._onToggleCategory(checkbox);
 		}
 
-		html.querySelector('[data-action="add"]').addEventListener("click", event =>
-			this.submit({ updateData: { newCustom: true } })
-		);
+		html
+			.querySelector('[data-action="add"]')
+			.addEventListener("click", event => this.submit({ updateData: { newCustom: true } }));
 
-		for ( const control of html.querySelectorAll('[data-action="delete"]') ) {
+		for (const control of html.querySelectorAll('[data-action="delete"]')) {
 			control.addEventListener("click", event =>
 				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
 			);
@@ -73,7 +72,7 @@ export default class LanguageConfig extends BaseConfig {
 
 	/** @inheritDoc */
 	async _onChangeInput(event) {
-		if ( event.target instanceof HTMLInputElement ) this._onToggleCategory(event.target);
+		if (event.target instanceof HTMLInputElement) this._onToggleCategory(event.target);
 		super._onChangeInput(event);
 	}
 
@@ -86,9 +85,9 @@ export default class LanguageConfig extends BaseConfig {
 	 */
 	_onToggleCategory(checkbox) {
 		const children = checkbox.closest("li")?.querySelector("ol");
-		if ( !children ) return;
+		if (!children) return;
 
-		for ( const child of children.querySelectorAll('input[type="checkbox"]') ) {
+		for (const child of children.querySelectorAll('input[type="checkbox"]')) {
 			child.checked = child.disabled = checkbox.checked;
 		}
 	}
@@ -100,18 +99,20 @@ export default class LanguageConfig extends BaseConfig {
 		const data = foundry.utils.expandObject(super._getSubmitData(...args));
 
 		const custom = Array.from(Object.values(data.custom ?? {}));
-		if ( data.deleteCustom !== undefined ) custom.splice(data.deleteCustom, 1);
-		if ( data.newCustom ) custom.push("");
+		if (data.deleteCustom !== undefined) custom.splice(data.deleteCustom, 1);
+		if (data.newCustom) custom.push("");
 
-		return { "system.proficiencies.languages": {
-			value: filteredKeys(data.dialects ?? {}),
-			communication: Object.entries(data.communication).reduce((obj, [key, value]) => {
-				if ( !value ) obj[`-=${key}`] = null;
-				else obj[`${key}.range`] = value;
-				return obj;
-			}, {}),
-			custom,
-			tags: filteredKeys(data.tags ?? {})
-		} };
+		return {
+			"system.proficiencies.languages": {
+				value: filteredKeys(data.dialects ?? {}),
+				communication: Object.entries(data.communication).reduce((obj, [key, value]) => {
+					if (!value) obj[`-=${key}`] = null;
+					else obj[`${key}.range`] = value;
+					return obj;
+				}, {}),
+				custom,
+				tags: filteredKeys(data.tags ?? {})
+			}
+		};
 	}
 }

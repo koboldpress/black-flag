@@ -5,7 +5,6 @@ import BaseConfig from "./base-config.mjs";
  * Class for configuring armor & weapon proficiencies.
  */
 export default class ProficiencyConfig extends BaseConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "proficiency"],
@@ -19,10 +18,9 @@ export default class ProficiencyConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	get type() {
-		return game.i18n.getListFormatter().format([
-			game.i18n.localize("BF.Armor.Label[one]"),
-			game.i18n.localize("BF.Weapon.Label[one]")
-		]);
+		return game.i18n
+			.getListFormatter()
+			.format([game.i18n.localize("BF.Armor.Label[one]"), game.i18n.localize("BF.Weapon.Label[one]")]);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -45,7 +43,7 @@ export default class ProficiencyConfig extends BaseConfig {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const checkbox of html.querySelectorAll('input[type="checkbox"]:checked') ) {
+		for (const checkbox of html.querySelectorAll('input[type="checkbox"]:checked')) {
 			this._onToggleCategory(checkbox);
 		}
 	}
@@ -53,7 +51,7 @@ export default class ProficiencyConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onChangeInput(event) {
-		if ( event.target instanceof HTMLInputElement ) this._onToggleCategory(event.target);
+		if (event.target instanceof HTMLInputElement) this._onToggleCategory(event.target);
 		super._onChangeInput(event);
 	}
 
@@ -66,9 +64,9 @@ export default class ProficiencyConfig extends BaseConfig {
 	 */
 	_onToggleCategory(checkbox) {
 		const children = checkbox.closest("li")?.querySelector("ol");
-		if ( !children ) return;
+		if (!children) return;
 
-		for ( const child of children.querySelectorAll('input[type="checkbox"]') ) {
+		for (const child of children.querySelectorAll('input[type="checkbox"]')) {
 			child.checked = child.disabled = checkbox.checked;
 		}
 	}

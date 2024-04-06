@@ -18,7 +18,7 @@
  * @param {BasicRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class BasicRollConfigurationDialog extends FormApplication {
-	constructor(config=[], message={}, options={}) {
+	constructor(config = [], message = {}, options = {}) {
 		super(null, options);
 
 		/**
@@ -91,17 +91,20 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options={}) {
-		return foundry.utils.mergeObject({
-			CONFIG: CONFIG.BlackFlag,
-			default: this.options.default ?? {},
-			rolls: this.rolls,
-			rollMode: this.message.rollMode ?? this.options.default?.rollMode,
-			rollModes: CONFIG.Dice.rollModes,
-			rollNotes: foundry.utils.deepClone(this.options.rollNotes ?? []),
-			situational: this.rolls[0].data.situational,
-			buttons: this._getButtons()
-		}, super.getData(options));
+	getData(options = {}) {
+		return foundry.utils.mergeObject(
+			{
+				CONFIG: CONFIG.BlackFlag,
+				default: this.options.default ?? {},
+				rolls: this.rolls,
+				rollMode: this.message.rollMode ?? this.options.default?.rollMode,
+				rollModes: CONFIG.Dice.rollModes,
+				rollNotes: foundry.utils.deepClone(this.options.rollNotes ?? []),
+				situational: this.rolls[0].data.situational,
+				buttons: this._getButtons()
+			},
+			super.getData(options)
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -115,7 +118,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	 * @returns {BasicRoll[]}
 	 * @internal
 	 */
-	_buildRolls(config, formData={}) {
+	_buildRolls(config, formData = {}) {
 		const RollType = this.options.rollType ?? CONFIG.Dice.BasicRoll;
 		return config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
 	}
@@ -131,7 +134,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	 * @protected
 	 */
 	_buildConfig(config, formData, index) {
-		config = foundry.utils.mergeObject({parts: [], data: {}, options: {}}, config);
+		config = foundry.utils.mergeObject({ parts: [], data: {}, options: {} }, config);
 
 		/**
 		 * A hook event that fires when a roll config is build within the roll prompt.
@@ -144,7 +147,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 		 */
 		Hooks.callAll("blackFlag.buildRollConfig", this, config, formData, index);
 
-		if ( formData.situational && (config.situational !== false) ) {
+		if (formData.situational && config.situational !== false) {
 			config.parts.push("@situational");
 			config.data.situational = formData.situational;
 		}
@@ -169,7 +172,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async close(options={}) {
+	async close(options = {}) {
 		this.options.resolve?.([]);
 		return super.close(options);
 	}
@@ -182,17 +185,17 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	_onButtonAction(event) {
 		const rolls = this.finalizeRolls(event.currentTarget.dataset.action);
 		this.options.resolve?.(rolls);
-		this.close({submit: false, force: true});
+		this.close({ submit: false, force: true });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_updateObject(event, formData) {
-		if ( formData.rollMode ) this.message.rollMode = formData.rollMode;
+		if (formData.rollMode) this.message.rollMode = formData.rollMode;
 
 		// If one of the buttons was clicked, finalize the roll, resolve the promise, and close
-		if ( event.type === "submit" ) {
+		if (event.type === "submit") {
 			const rolls = this._finalizeRolls(event.submitter?.dataset.action);
 			this.options.resolve?.(rolls);
 			this.close({ submit: false, force: true });
@@ -216,7 +219,7 @@ export default class BasicRollConfigurationDialog extends FormApplication {
 	 * @param {BasicRollMessageConfiguration} [message] - Message configuration.
 	 * @returns {Promise}
 	 */
-	static async configure(config={}, dialog={}, message={}) {
+	static async configure(config = {}, dialog = {}, message = {}) {
 		return new Promise((resolve, reject) => {
 			new this(config, message, { ...(dialog.options ?? {}), resolve, reject }).render(true);
 		});

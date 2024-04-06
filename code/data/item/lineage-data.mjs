@@ -10,9 +10,10 @@ import DescriptionTemplate from "./templates/description-template.mjs";
  * @mixes {DescriptionTemplate}
  */
 export default class LineageData extends ItemDataModel.mixin(
-	AdvancementTemplate, ConceptTemplate, DescriptionTemplate
+	AdvancementTemplate,
+	ConceptTemplate,
+	DescriptionTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -30,7 +31,7 @@ export default class LineageData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_preCreateAdvancement(data, options, user) {
-		if ( data._id || foundry.utils.hasProperty(data, "system.advancement") ) return;
+		if (data._id || foundry.utils.hasProperty(data, "system.advancement")) return;
 		this._createInitialAdvancement([{ type: "size" }]);
 	}
 }

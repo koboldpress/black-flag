@@ -5,13 +5,12 @@ import FormAssociatedElement from "./form-associated-element.mjs";
  * Custom element for displaying the list of consumption types on an activity.
  */
 export default class ConsumptionElement extends FormAssociatedElement {
-
 	connectedCallback() {
 		super.connectedCallback();
 
-		if ( !this.validTypes.length ) this.querySelector(".add-control").remove();
+		if (!this.validTypes.length) this.querySelector(".add-control").remove();
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
+		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
@@ -78,16 +77,16 @@ export default class ConsumptionElement extends FormAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( !this.isEditable || (target.dispatchEvent(event) === false) ) return;
+		if (!this.isEditable || target.dispatchEvent(event) === false) return;
 
 		const li = target.closest("[data-index]");
 		const index = li?.dataset.index;
 		const typesCollection = foundry.utils.getProperty(this.activity.toObject(), this.#keyPath) ?? [];
-		if ( (action !== "add") && !index ) return;
-		switch ( action ) {
+		if (action !== "add" && !index) return;
+		switch (action) {
 			case "add":
 				const validTypes = this.validTypes;
-				if ( !validTypes.length ) return;
+				if (!validTypes.length) return;
 				typesCollection.push({
 					type: validTypes[0],
 					target: ConsumptionTargetData.getValidTargets(validTypes[0], this.activity)?.[0]?.key
@@ -100,6 +99,6 @@ export default class ConsumptionElement extends FormAssociatedElement {
 				return;
 		}
 
-		return this.app.submit({ updateData: { [this.#keyPath]: typesCollection }});
+		return this.app.submit({ updateData: { [this.#keyPath]: typesCollection } });
 	}
 }

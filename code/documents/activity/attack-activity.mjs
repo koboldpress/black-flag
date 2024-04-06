@@ -3,15 +3,20 @@ import { buildRoll, numberFormat } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
 export default class AttackActivity extends DamageActivity {
-
 	/** @inheritDoc */
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "attack",
-		dataModel: AttackData,
-		icon: "systems/black-flag/artwork/activities/attack.svg",
-		title: "BF.Activity.Attack.Title",
-		hint: "BF.Activity.Attack.Hint"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "attack",
+				dataModel: AttackData,
+				icon: "systems/black-flag/artwork/activities/attack.svg",
+				title: "BF.Activity.Attack.Title",
+				hint: "BF.Activity.Attack.Hint"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -22,8 +27,8 @@ export default class AttackActivity extends DamageActivity {
 	 * @type {string|null}
 	 */
 	get attackAbility() {
-		if ( this.system.ability === "none" ) return null;
-		if ( this.system.ability ) return this.system.ability;
+		if (this.system.ability === "none") return null;
+		if (this.system.ability) return this.system.ability;
 		return this.item.system.ability ?? null;
 	}
 
@@ -72,10 +77,11 @@ export default class AttackActivity extends DamageActivity {
 				dataset: { action: "roll", method: "rollAttack" }
 			}
 		};
-		if ( this.hasDamage ) context.buttons.damage = {
-			label: game.i18n.localize("BF.Damage.Label"),
-			dataset: { action: "roll", method: "rollDamage" }
-		};
+		if (this.hasDamage)
+			context.buttons.damage = {
+				label: game.i18n.localize("BF.Damage.Label"),
+				dataset: { action: "roll", method: "rollDamage" }
+			};
 		return context;
 	}
 
@@ -90,23 +96,25 @@ export default class AttackActivity extends DamageActivity {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollAttack(config={}, dialog={}, message={}) {
+	async rollAttack(config = {}, dialog = {}, message = {}) {
 		// TODO: Associate ammunition with the attack
 
 		const { parts, data } = this.getAttackDetails();
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
-		rollConfig.rolls = [{
-			parts,
-			data,
-			options: {
-				// TODO: criticalSuccess: this.system.criticalThreshold
-				minimum: this.actor?.system.buildMinimum(
-					this.actor?.system.getModifiers(this.modifierData, "min"), { rollData: data }
-				)
+		rollConfig.rolls = [
+			{
+				parts,
+				data,
+				options: {
+					// TODO: criticalSuccess: this.system.criticalThreshold
+					minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(this.modifierData, "min"), {
+						rollData: data
+					})
+				}
 			}
-		}].concat(config.rolls ?? []);
+		].concat(config.rolls ?? []);
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
@@ -115,17 +123,20 @@ export default class AttackActivity extends DamageActivity {
 			}
 		});
 
-		const messageConfig = foundry.utils.mergeObject({
-			data: {
-				title: `${this.name}: ${this.item.actor?.name ?? ""}`,
-				flavor: this.name,
-				speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-				"flags.black-flag.roll": {
-					type: "attack",
-					origin: this.uuid
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${this.name}: ${this.item.actor?.name ?? ""}`,
+					flavor: this.name,
+					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
+					"flags.black-flag.roll": {
+						type: "attack",
+						origin: this.uuid
+					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		/**
 		 * A hook event that fires before an attack is rolled.
@@ -136,10 +147,10 @@ export default class AttackActivity extends DamageActivity {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
-		if ( Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false ) return;
+		if (Hooks.call("blackFlag.preRollAttack", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
-		if ( !rolls?.length ) return;
+		if (!rolls?.length) return;
 
 		/**
 		 * A hook event that fires after an attack has been rolled.
@@ -161,26 +172,34 @@ export default class AttackActivity extends DamageActivity {
 	createDamageConfigs(config, rollData) {
 		const rollConfig = super.createDamageConfigs(config, rollData);
 		rollConfig.rolls ??= [];
-		if ( this.system.damage.includeBaseDamage && this.item.system.damage ) {
+		if (this.system.damage.includeBaseDamage && this.item.system.damage) {
 			const ability = this.actor?.system.abilities[this.attackAbility];
 			const damage = (rollConfig.versatile ? this.item.system.versatileDamage : null) ?? this.item.system.damage;
 			const modifierData = { ...this.modifierData, type: "damage", damage, baseDamage: true };
-			const { parts, data } = buildRoll({
-				mod: ability?.mod,
-				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
-			}, rollData);
-			rollConfig.rolls.unshift(foundry.utils.mergeObject({
-				data,
-				modifierData,
-				parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
-				options: {
-					// TODO: Get critical settings
-					damageType: damage.type,
-					minimum: this.actor?.system.buildMinimum(
-						this.actor?.system.getModifiers(modifierData, "min"), { rollData: rollData }
-					)
-				}
-			}, config));
+			const { parts, data } = buildRoll(
+				{
+					mod: ability?.mod,
+					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+				},
+				rollData
+			);
+			rollConfig.rolls.unshift(
+				foundry.utils.mergeObject(
+					{
+						data,
+						modifierData,
+						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
+						options: {
+							// TODO: Get critical settings
+							damageType: damage.type,
+							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
+								rollData: rollData
+							})
+						}
+					},
+					config
+				)
+			);
 		}
 		return rollConfig;
 	}
@@ -192,16 +211,19 @@ export default class AttackActivity extends DamageActivity {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
-	getAttackDetails(options={}) {
+	getAttackDetails(options = {}) {
 		const ability = this.actor?.system.abilities[this.attackAbility];
 		const rollData = this.item.getRollData();
 		const { parts, data } = buildRoll(
-			this.system.attack.flat ? { toHit: this.system.attack.bonus } : {
-				mod: ability?.mod,
-				prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
-				bonus: this.system.attack.bonus,
-				actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
-			}, rollData
+			this.system.attack.flat
+				? { toHit: this.system.attack.bonus }
+				: {
+						mod: ability?.mod,
+						prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+						bonus: this.system.attack.bonus,
+						actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+					},
+			rollData
 		);
 		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
 	}

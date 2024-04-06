@@ -8,26 +8,32 @@ const { NumberField, StringField } = foundry.data.fields;
 export default class ScaleTypeUsage extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
-			value: new NumberField({nullable: true, integer: true, min: 0}),
-			per: new StringField({blank: false, initial: "sr"})
+			value: new NumberField({ nullable: true, integer: true, min: 0 }),
+			per: new StringField({ blank: false, initial: "sr" })
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		label: "BF.Advancement.ScaleValue.Type.Usage.Label",
-		hint: "BF.Advancement.ScaleValue.Type.Usage.Hint",
-		input: "usage"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				label: "BF.Advancement.ScaleValue.Type.Usage.Label",
+				hint: "BF.Advancement.ScaleValue.Type.Usage.Hint",
+				input: "usage"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	static convertFrom(original, options) {
 		let value = parseInt(original.formula);
-		if ( Number.isNaN(value) ) return null;
-		if ( value < 1 ) value = 1;
-		return new this({value}, options);
+		if (Number.isNaN(value)) return null;
+		if (value < 1) value = 1;
+		return new this({ value }, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

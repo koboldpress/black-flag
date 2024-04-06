@@ -10,7 +10,6 @@
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */
 export default class FormulaField extends foundry.data.fields.StringField {
-
 	static get _defaults() {
 		return foundry.utils.mergeObject(super._defaults, {
 			deterministic: false
@@ -20,12 +19,11 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_validateType(value) {
-		if ( this.options.deterministic ) {
+		if (this.options.deterministic) {
 			const roll = new Roll(value);
-			if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
+			if (!roll.isDeterministic) throw new Error("must not contain dice terms");
 			Roll.safeEval(roll.formula);
-		}
-		else Roll.validate(value);
+		} else Roll.validate(value);
 		super._validateType(value);
 	}
 
@@ -40,14 +38,14 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_bfApplyAdd(actor, change, current, delta, changes) {
-		if ( !current ) {
+		if (!current) {
 			changes[change.key] = delta;
 			return;
 		}
 		let operator = "+";
-		if ( delta.startsWith("+") ) {
+		if (delta.startsWith("+")) {
 			delta = delta.replace("+", "").trim();
-		} else if ( delta.startsWith("-") ) {
+		} else if (delta.startsWith("-")) {
 			delta = delta.replace("-", "").trim();
 			operator = "-";
 		}
@@ -57,24 +55,24 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_bfApplyMultiply(actor, change, current, delta, changes) {
-		if ( !current ) {
+		if (!current) {
 			changes[change.key] = delta;
 			return;
 		}
-		const terms = (new Roll(current)).terms;
-		if ( terms.length > 1 ) changes[change.key] = `(${current}) * ${delta}`;
+		const terms = new Roll(current).terms;
+		if (terms.length > 1) changes[change.key] = `(${current}) * ${delta}`;
 		else changes[change.key] = `${current} * ${delta}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_bfApplyUpgrade(actor, change, current, delta, changes) {
-		if ( !current ) {
+		if (!current) {
 			changes[change.key] = delta;
 			return;
 		}
-		const terms = (new Roll(current)).terms;
-		if ( (terms.length === 1) && (terms[0].fn === "max") ) {
+		const terms = new Roll(current).terms;
+		if (terms.length === 1 && terms[0].fn === "max") {
 			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
 		} else changes[change.key] = `max(${current}, ${delta})`;
 	}
@@ -82,12 +80,12 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	_bfApplyDowngrade(actor, change, current, delta, changes) {
-		if ( !current ) {
+		if (!current) {
 			changes[change.key] = delta;
 			return;
 		}
-		const terms = (new Roll(current)).terms;
-		if ( (terms.length === 1) && (terms[0].fn === "min") ) {
+		const terms = new Roll(current).terms;
+		if (terms.length === 1 && terms[0].fn === "min") {
 			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
 		} else changes[change.key] = `min(${current}, ${delta})`;
 	}

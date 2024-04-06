@@ -18,9 +18,4 @@ export function registerDice() {
 	CONFIG.Dice.rolls = [BasicRoll, ChallengeRoll, DamageRoll];
 }
 
-export {
-	BasicRoll,
-	ChallengeDie,
-	ChallengeRoll,
-	DamageRoll
-};
+export { BasicRoll, ChallengeDie, ChallengeRoll, DamageRoll };

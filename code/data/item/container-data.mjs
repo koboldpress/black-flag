@@ -14,9 +14,10 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PropertiesTemplate}
  */
 export default class ContainerData extends ItemDataModel.mixin(
-	DescriptionTemplate, PhysicalTemplate, PropertiesTemplate
+	DescriptionTemplate,
+	PhysicalTemplate,
+	PropertiesTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -37,17 +38,26 @@ export default class ContainerData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			capacity: new SchemaField({
-				count: new NumberField({min: 0, integer: true, label: "BF.Container.Capacity.Number.Label"}),
-				volume: new SchemaField({
-					value: new NumberField({min: 0, label: "BF.Volume.Label"}),
-					units: new StringField({initial: "foot", label: "BF.Volume.Unit.Label"})
-				}, {label: "BF.Container.Capacity.Volume.Label"}),
-				weight: new SchemaField({
-					value: new NumberField({min: 0, label: "BF.Weight.Label"}),
-					units: new StringField({initial: "pound", label: "BF.Weight.Unit.Label"})
-				}, {label: "BF.Container.Capacity.Weight.Label"})
-			}, {label: "BF.Container.Capacity.Label"})
+			capacity: new SchemaField(
+				{
+					count: new NumberField({ min: 0, integer: true, label: "BF.Container.Capacity.Number.Label" }),
+					volume: new SchemaField(
+						{
+							value: new NumberField({ min: 0, label: "BF.Volume.Label" }),
+							units: new StringField({ initial: "foot", label: "BF.Volume.Unit.Label" })
+						},
+						{ label: "BF.Container.Capacity.Volume.Label" }
+					),
+					weight: new SchemaField(
+						{
+							value: new NumberField({ min: 0, label: "BF.Weight.Label" }),
+							units: new StringField({ initial: "pound", label: "BF.Weight.Unit.Label" })
+						},
+						{ label: "BF.Container.Capacity.Weight.Label" }
+					)
+				},
+				{ label: "BF.Container.Capacity.Label" }
+			)
 		});
 	}
 
@@ -60,19 +70,19 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 * @type {Collection<BlackFlagItem>|Promise<Collection<BlackFlagItem>>}
 	 */
 	get contents() {
-		if ( !this.parent ) return new foundry.utils.Collection();
+		if (!this.parent) return new foundry.utils.Collection();
 
 		// If in a compendium, fetch using getDocuments and return a promise
-		if ( this.parent.pack && !this.parent.isEmbedded ) {
+		if (this.parent.pack && !this.parent.isEmbedded) {
 			const pack = game.packs.get(this.parent.pack);
-			return pack.getDocuments({system: { container: this.parent.id }}).then(d =>
-				new foundry.utils.Collection(d.map(d => [d.id, d]))
-			);
+			return pack
+				.getDocuments({ system: { container: this.parent.id } })
+				.then(d => new foundry.utils.Collection(d.map(d => [d.id, d])));
 		}
 
 		// Otherwise use local document collection
 		return (this.parent.isEmbedded ? this.parent.actor.items : game.items).reduce((collection, item) => {
-			if ( item.system.container === this.parent.id ) collection.set(item.id, item);
+			if (item.system.container === this.parent.id) collection.set(item.id, item);
 			return collection;
 		}, new foundry.utils.Collection());
 	}
@@ -84,12 +94,12 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 * @type {Collection<BlackFlagItem>|Promise<Collection<BlackFlagItem>>}
 	 */
 	get allContainedItems() {
-		if ( !this.parent ) return new foundry.utils.Collection();
-		if ( this.parent.pack ) return this.#allContainedItems();
+		if (!this.parent) return new foundry.utils.Collection();
+		if (this.parent.pack) return this.#allContainedItems();
 
 		return this.contents.reduce((collection, item) => {
 			collection.set(item.id, item);
-			if ( item.type === "container" ) item.system.allContainedItems.forEach(i => collection.set(i.id, i));
+			if (item.type === "container") item.system.allContainedItems.forEach(i => collection.set(i.id, i));
 			return collection;
 		}, new foundry.utils.Collection());
 	}
@@ -102,7 +112,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 		return (await this.contents).reduce(async (promise, item) => {
 			const collection = await promise;
 			collection.set(item.id, item);
-			if ( item.type === "container" ) (await item.system.allContainedItems).forEach(i => collection.set(i.id, i));
+			if (item.type === "container") (await item.system.allContainedItems).forEach(i => collection.set(i.id, i));
 			return collection;
 		}, new foundry.utils.Collection());
 	}
@@ -115,8 +125,8 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 * @returns {BlackFlagItem|Promise<BlackFlagItem>} - Item if found.
 	 */
 	getContainedItem(id) {
-		if ( this.parent?.isEmbedded ) return this.parent.actor.items.get(id);
-		if ( this.parent?.pack ) return game.packs.get(this.parent.pack)?.getDocument(id);
+		if (this.parent?.isEmbedded) return this.parent.actor.items.get(id);
+		if (this.parent?.pack) return game.packs.get(this.parent.pack)?.getDocument(id);
 		return game.items.get(id);
 	}
 
@@ -130,7 +140,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 	get contentsCount() {
 		const reducer = (count, item) => count + item.system.quantity;
 		const items = this.allContainedItems;
-		if ( items instanceof Promise ) return items.then(items => items.reduce(reducer, 0));
+		if (items instanceof Promise) return items.then(items => items.reduce(reducer, 0));
 		return items.reduce(reducer, 0);
 	}
 
@@ -141,10 +151,11 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 * @type {number|Promise<number>}
 	 */
 	get contentsWeight() {
-		if ( this.parent?.pack && !this.parent?.isEmbedded ) return this.#contentsWeight();
-		return this.contents.reduce((weight, item) =>
-			weight + convertWeight(item.system.totalWeight, item.system.weight.units, this.weight.units)
-		, 0);
+		if (this.parent?.pack && !this.parent?.isEmbedded) return this.#contentsWeight();
+		return this.contents.reduce(
+			(weight, item) => weight + convertWeight(item.system.totalWeight, item.system.weight.units, this.weight.units),
+			0
+		);
 	}
 
 	/**
@@ -153,9 +164,11 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 */
 	async #contentsWeight() {
 		const contents = await this.contents;
-		return contents.reduce(async (weight, item) =>
-			await weight + convertWeight(await item.system.totalWeight, item.system.weight.units, this.weight.units)
-		, 0);
+		return contents.reduce(
+			async (weight, item) =>
+				(await weight) + convertWeight(await item.system.totalWeight, item.system.weight.units, this.weight.units),
+			0
+		);
 	}
 
 	/* -------------------------------------------- */
@@ -165,9 +178,9 @@ export default class ContainerData extends ItemDataModel.mixin(
 	 * @type {number|Promise<number>}
 	 */
 	get totalWeight() {
-		if ( this.properties.has("weightlessContents") ) return this.weight.value;
+		if (this.properties.has("weightlessContents")) return this.weight.value;
 		const containedWeight = this.contentsWeight;
-		if ( containedWeight instanceof Promise ) return containedWeight.then(c => this.weight.value + c);
+		if (containedWeight instanceof Promise) return containedWeight.then(c => this.weight.value + c);
 		return this.weight.value + containedWeight;
 	}
 
@@ -185,23 +198,31 @@ export default class ContainerData extends ItemDataModel.mixin(
 
 	async _onUpdateFolder(changed, options, userId) {
 		// Keep contents folder synchronized with container
-		if ( (game.user.id === userId) && foundry.utils.hasProperty(changed, "folder") ) {
+		if (game.user.id === userId && foundry.utils.hasProperty(changed, "folder")) {
 			const contents = await this.contents;
-			await Item.updateDocuments(contents.map(c => ({ _id: c.id, folder: changed.folder })), {
-				parent: this.parent.parent, pack: this.parent.pack, ...options, render: false
-			});
+			await Item.updateDocuments(
+				contents.map(c => ({ _id: c.id, folder: changed.folder })),
+				{
+					parent: this.parent.parent,
+					pack: this.parent.pack,
+					...options,
+					render: false
+				}
+			);
 		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onDeleteContents(options, userId) {
-		if ( (userId !== game.user.id) || !options.deleteContents ) return;
+		if (userId !== game.user.id || !options.deleteContents) return;
 
 		// Delete a container's contents when it is deleted
 		const contents = await this.allContainedItems;
-		if ( contents?.size ) await Item.deleteDocuments(
-			Array.from(contents.map(i => i.id)), { pack: this.parent.pack, parent: this.parent.parent }
-		);
+		if (contents?.size)
+			await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
+				pack: this.parent.pack,
+				parent: this.parent.parent
+			});
 	}
 }

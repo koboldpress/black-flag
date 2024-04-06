@@ -17,20 +17,30 @@ export default class EffectsElement extends AppAssociatedElement {
 		super.connectedCallback();
 		const { signal } = this.#controller;
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
+		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
 
-		for ( const control of this.querySelectorAll("[data-context-menu]") ) {
-			control.addEventListener("click", event => {
-				event.stopPropagation();
-				event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
-					view: window, bubbles: true, cancelable: true, clientX: event.clientX, clientY: event.clientY
-				}));
-			}, { signal });
+		for (const control of this.querySelectorAll("[data-context-menu]")) {
+			control.addEventListener(
+				"click",
+				event => {
+					event.stopPropagation();
+					event.currentTarget.closest("[data-effect-id]").dispatchEvent(
+						new PointerEvent("contextmenu", {
+							view: window,
+							bubbles: true,
+							cancelable: true,
+							clientX: event.clientX,
+							clientY: event.clientY
+						})
+					);
+				},
+				{ signal }
+			);
 		}
 
 		new ContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
@@ -77,7 +87,7 @@ export default class EffectsElement extends AppAssociatedElement {
 	 * @param {boolean} [options.displaySource=false] - Should the source column be displayed?
 	 * @returns {object}
 	 */
-	static prepareContext(effects, { displaySource=false }={}) {
+	static prepareContext(effects, { displaySource = false } = {}) {
 		const context = {
 			temporary: {
 				label: "BF.Effect.Category.Temporary",
@@ -99,13 +109,15 @@ export default class EffectsElement extends AppAssociatedElement {
 			}
 		};
 
-		for ( const effect of effects ) {
+		for (const effect of effects) {
 			const data = {
-				...effect, id: effect.id, sourceName: effect.sourceName,
+				...effect,
+				id: effect.id,
+				sourceName: effect.sourceName,
 				parentId: effect.target === effect.parent ? null : effect.parent.id
 			};
-			if ( effect.disabled ) context.inactive.effects.push(data);
-			else if ( effect.isTemporary ) context.temporary.effects.push(data);
+			if (effect.disabled) context.inactive.effects.push(data);
+			else if (effect.isTemporary) context.temporary.effects.push(data);
 			else context.passive.effects.push(data);
 		}
 
@@ -174,23 +186,25 @@ export default class EffectsElement extends AppAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( target.dispatchEvent(event) === false ) return;
+		if (target.dispatchEvent(event) === false) return;
 
 		const effect = this.getEffect(target.closest("[data-effect-id]")?.dataset);
-		if ( (action !== "add") && !effect ) return;
+		if (action !== "add" && !effect) return;
 
-		switch ( action ) {
+		switch (action) {
 			case "add":
 				const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
-				return this.document.createEmbeddedDocuments("ActiveEffect", [{
-					label: game.i18n.localize("BF.Effect.New"),
-					icon: (this.document instanceof Item) ? this.document.img : "icons/svg/aura.svg",
-					origin: this.document.uuid,
-					duration: {
-						rounds: section === "temporary" ? 1 : undefined
-					},
-					disabled: section === "inactive"
-				}]);
+				return this.document.createEmbeddedDocuments("ActiveEffect", [
+					{
+						label: game.i18n.localize("BF.Effect.New"),
+						icon: this.document instanceof Item ? this.document.img : "icons/svg/aura.svg",
+						origin: this.document.uuid,
+						duration: {
+							rounds: section === "temporary" ? 1 : undefined
+						},
+						disabled: section === "inactive"
+					}
+				]);
 			case "edit":
 			case "view":
 				return effect.sheet.render(true);
@@ -239,8 +253,8 @@ export default class EffectsElement extends AppAssociatedElement {
 	 * @param {string} [data.parentId] - ID of the parent item that contains this effect, if a grandchild effect.
 	 * @returns {BlackFlagActiveEffect}
 	 */
-	getEffect({ effectId, parentId }={}) {
-		if ( !parentId ) return this.document.effects.get(effectId);
+	getEffect({ effectId, parentId } = {}) {
+		if (!parentId) return this.document.effects.get(effectId);
 		return this.document.items.get(parentId).effects.get(effectId);
 	}
 }

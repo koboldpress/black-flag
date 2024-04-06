@@ -3,12 +3,11 @@ import EffectsElement from "../components/effects.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class SpellSheet extends BaseItemSheet {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "spell", "item", "sheet"],
-			tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"}],
+			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description" }],
 			scrollY: ["[data-tab] > section"],
 			template: "systems/black-flag/templates/item/spell.hbs",
 			width: 600,
@@ -41,15 +40,15 @@ export default class SpellSheet extends BaseItemSheet {
 		context.spellRings = CONFIG.BlackFlag.spellRings();
 
 		const sizes = CONFIG.BlackFlag.areaOfEffectTypes[context.system.target.template.type]?.sizes;
-		if ( sizes ) {
+		if (sizes) {
 			context.aoeSizes = {
 				size: "BF.AreaOfEffect.Size.Label",
 				width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
 				height: sizes.includes("height")
 			};
-			if ( sizes.includes("radius") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Radius.Label";
-			else if ( sizes.includes("length") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Length.Label";
-			else if ( sizes.includes("width") ) context.aoeSizes.size = "BF.AreaOfEffect.Size.Width.Label";
+			if (sizes.includes("radius")) context.aoeSizes.size = "BF.AreaOfEffect.Size.Radius.Label";
+			else if (sizes.includes("length")) context.aoeSizes.size = "BF.AreaOfEffect.Size.Length.Label";
+			else if (sizes.includes("width")) context.aoeSizes.size = "BF.AreaOfEffect.Size.Width.Label";
 		}
 
 		return context;
@@ -60,14 +59,14 @@ export default class SpellSheet extends BaseItemSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_getSubmitData(updateData={}) {
+	_getSubmitData(updateData = {}) {
 		const data = foundry.utils.expandObject(super._getSubmitData(updateData));
 
-		if ( foundry.utils.hasProperty(data, "system.components.required") ) {
+		if (foundry.utils.hasProperty(data, "system.components.required")) {
 			data.system.components.required = filteredKeys(data.system.components.required);
 		}
 
-		if ( foundry.utils.hasProperty(data, "system.tags") ) {
+		if (foundry.utils.hasProperty(data, "system.tags")) {
 			data.system.tags = filteredKeys(data.system.tags);
 		}
 

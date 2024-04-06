@@ -2,7 +2,6 @@ import { filteredKeys } from "../../../utils/_module.mjs";
 import BaseConfig from "./base-config.mjs";
 
 export default class ArmorClassConfig extends BaseConfig {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "armor-class"],
@@ -27,7 +26,9 @@ export default class ArmorClassConfig extends BaseConfig {
 	async getData(options) {
 		const context = await super.getData(options);
 		context.armorFormulas = Object.entries(CONFIG.BlackFlag.armorFormulas).map(([id, config]) => ({
-			id, ...config, checked: this.document.system.attributes.ac.baseFormulas.has(id)
+			id,
+			...config,
+			checked: this.document.system.attributes.ac.baseFormulas.has(id)
 		}));
 		return context;
 	}
@@ -37,8 +38,10 @@ export default class ArmorClassConfig extends BaseConfig {
 	prepareModifiers() {
 		return [
 			{
-				category: "armor-class", type: "bonus", label: "BF.ArmorClass.Label",
-				modifiers: this.getModifiers([{k: "type", v: "armor-class"}], [], f => f.type === "bonus")
+				category: "armor-class",
+				type: "bonus",
+				label: "BF.ArmorClass.Label",
+				modifiers: this.getModifiers([{ k: "type", v: "armor-class" }], [], f => f.type === "bonus")
 			}
 		];
 	}
@@ -57,7 +60,7 @@ export default class ArmorClassConfig extends BaseConfig {
 	async _updateObject(event, formData) {
 		const data = foundry.utils.expandObject(formData);
 
-		if ( data.formulas ) {
+		if (data.formulas) {
 			data["system.attributes.ac.baseFormulas"] = filteredKeys(data.formulas);
 			delete data.formulas;
 			formData = foundry.utils.flattenObject(data);

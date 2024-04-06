@@ -2,7 +2,6 @@ import { filteredKeys } from "../../../utils/_module.mjs";
 import BaseConfig from "./base-config.mjs";
 
 export default class SensesConfig extends BaseConfig {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -33,9 +32,10 @@ export default class SensesConfig extends BaseConfig {
 			obj[key] = {
 				label: game.i18n.localize(config.label),
 				value: senses.types?.[key] ?? "",
-				placeholder: foundry.utils.getProperty(this.document.overrides, keyPath)
-					?? foundry.utils.getProperty(this.document.advancementOverrides, keyPath)
-					?? ""
+				placeholder:
+					foundry.utils.getProperty(this.document.overrides, keyPath) ??
+					foundry.utils.getProperty(this.document.advancementOverrides, keyPath) ??
+					""
 			};
 			return obj;
 		}, {});

@@ -3,14 +3,19 @@ import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
 export default class SavingThrowActivity extends DamageActivity {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "savingThrow",
-		dataModel: SavingThrowData,
-		icon: "systems/black-flag/artwork/activities/saving-throw.svg",
-		title: "BF.Activity.SavingThrow.Title",
-		hint: "BF.Activity.SavingThrow.Hint"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "savingThrow",
+				dataModel: SavingThrowData,
+				icon: "systems/black-flag/artwork/activities/saving-throw.svg",
+				title: "BF.Activity.SavingThrow.Title",
+				hint: "BF.Activity.SavingThrow.Hint"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -21,7 +26,7 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * @type {string}
 	 */
 	get challengeColumn() {
-		if ( !this.system.dc.final ) return "";
+		if (!this.system.dc.final) return "";
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		layout.innerHTML = `<span class="dc">${numberFormat(this.system.dc.final)}</span>`;
@@ -37,8 +42,8 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * @type {string|null}
 	 */
 	get dcAbility() {
-		if ( this.system.dc.ability === "custom" ) return null;
-		if ( this.system.dc.ability ) return this.system.dc.ability;
+		if (this.system.dc.ability === "custom") return null;
+		if (this.system.dc.ability) return this.system.dc.ability;
 		return this.item.system.ability ?? null;
 	}
 
@@ -53,10 +58,11 @@ export default class SavingThrowActivity extends DamageActivity {
 	async activationChatContext() {
 		const context = await super.activationChatContext();
 		context.buttons = {};
-		if ( this.hasDamage ) context.buttons.damage = {
-			label: game.i18n.localize("BF.Damage.Label"),
-			dataset: { action: "roll", method: "rollDamage" }
-		};
+		if (this.hasDamage)
+			context.buttons.damage = {
+				label: game.i18n.localize("BF.Damage.Label"),
+				dataset: { action: "roll", method: "rollDamage" }
+			};
 		context.buttons.savingThrow = {
 			label: game.i18n.localize("BF.Activity.SavingThrow.Title"),
 			dataset: { action: "roll", method: "rollSavingThrow" }
@@ -75,23 +81,26 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
-	async rollSavingThrow(config={}, dialog={}, message={}) {
+	async rollSavingThrow(config = {}, dialog = {}, message = {}) {
 		// Determine DC based on settings & the actor to whom the activity belongs
 		const rollData = this.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.dcAbility];
-		if ( ability ) rollData.mod = ability.mod;
+		if (ability) rollData.mod = ability.mod;
 		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
 
 		// Pass on DC and rolling ability to `rollAbilitySave` on any selected actors/tokens
-		for ( const target of this.getActionTargets() ) {
-			const speaker = ChatMessage.getSpeaker({scene: canvas.scene, token: target.document});
-			await target.actor.rollAbilitySave({
-				ability: this.system.ability,
-				event,
-				target: dc
-			}, {
-				data: { speaker }
-			});
+		for (const target of this.getActionTargets()) {
+			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: target.document });
+			await target.actor.rollAbilitySave(
+				{
+					ability: this.system.ability,
+					event,
+					target: dc
+				},
+				{
+					data: { speaker }
+				}
+			);
 		}
 	}
 
@@ -100,11 +109,14 @@ export default class SavingThrowActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	createDamageConfigs(config, rollData) {
-		config = foundry.utils.mergeObject({
-			options: {
-				allowCritical: false
-			}
-		}, config);
+		config = foundry.utils.mergeObject(
+			{
+				options: {
+					allowCritical: false
+				}
+			},
+			config
+		);
 		return super.createDamageConfigs(config, rollData);
 	}
 
@@ -115,10 +127,10 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{ability: string, dc: string, activity: Activity}|null}
 	 */
-	getSaveDetails(options={}) {
+	getSaveDetails(options = {}) {
 		const rollData = this.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.dcAbility];
-		if ( ability ) rollData.mod = ability.mod;
+		if (ability) rollData.mod = ability.mod;
 		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
 		return { ability: this.system.ability, dc, activity: this };
 	}

@@ -5,7 +5,6 @@ import FormAssociatedElement from "./form-associated-element.mjs";
  * Custom element for allowing multiple selections.
  */
 export default class MultiSelectElement extends FormAssociatedElement {
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Methods                 */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -13,7 +12,7 @@ export default class MultiSelectElement extends FormAssociatedElement {
 	/** @inheritDoc */
 	connectedCallback() {
 		let dropdown = this.querySelector(".dropdown");
-		if ( dropdown ) {
+		if (dropdown) {
 			dropdown.replaceChildren();
 		} else {
 			dropdown = document.createElement("div");
@@ -35,7 +34,7 @@ export default class MultiSelectElement extends FormAssociatedElement {
 		dropdown.appendChild(list);
 
 		const options = this.querySelectorAll("datalist option");
-		for ( const option of options ) {
+		for (const option of options) {
 			const item = document.createElement("li");
 			item.classList.add("select-entry");
 			item.innerHTML = `

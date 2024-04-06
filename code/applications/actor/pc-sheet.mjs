@@ -6,14 +6,13 @@ import LevelUpDialog from "./level-up-dialog.mjs";
 import SpellManager from "./spell-manager.mjs";
 
 export default class PCSheet extends BaseActorSheet {
-
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "actor", "sheet", "pc"],
 			width: 820,
 			height: 880,
 			tabs: [
-				{group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main"}
+				{ group: "primary", navSelector: 'nav[data-group="primary"]', contentSelector: ".sheet-body", initial: "main" }
 			],
 			scrollY: [".window-content"]
 		});
@@ -42,7 +41,7 @@ export default class PCSheet extends BaseActorSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
-		if ( this.modes.progression ) this.prepareProgression(context);
+		if (this.modes.progression) this.prepareProgression(context);
 
 		context.displayXPBar = game.settings.get(game.system.id, "levelingMode") === "xp";
 		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
@@ -72,46 +71,51 @@ export default class PCSheet extends BaseActorSheet {
 	async prepareItem(item, context, section) {
 		super.prepareItem(item, context, section);
 
-		if ( item.type === "spell" ) {
+		if (item.type === "spell") {
 			const mode = item.system.type.value;
 			const ritual = item.system.tags.has("ritual");
-			const always = (mode === "alwaysPrepared") || ritual;
+			const always = mode === "alwaysPrepared" || ritual;
 			const pressed = always || item.system.prepared;
-			if ( always || item.system.preparable ) context.buttons.push({
-				action: "prepare",
-				classes: "status fade",
-				disabled: !item.isOwner || always,
-				label: "BF.Spell.Preparation.Prepared",
-				pressed,
-				title: always ? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
-					: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`,
-				icon: `<i class="fa-${pressed ? "solid" : "regular"} fa-${
-					ritual ? "atom" : always ? "bahai" : "sun"}" inert></i>`
-			});
+			if (always || item.system.preparable)
+				context.buttons.push({
+					action: "prepare",
+					classes: "status fade",
+					disabled: !item.isOwner || always,
+					label: "BF.Spell.Preparation.Prepared",
+					pressed,
+					title: always
+						? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
+						: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`,
+					icon: `<i class="fa-${pressed ? "solid" : "regular"} fa-${
+						ritual ? "atom" : always ? "bahai" : "sun"
+					}" inert></i>`
+				});
 			context.dataset.spellType = mode;
-			if ( item.system.prepared && !ritual ) context.dataset.spellPrepared = "";
-			if ( item.system.tags.size ) context.dataset.properties = Array.from(item.system.tags).join(" ");
+			if (item.system.prepared && !ritual) context.dataset.spellPrepared = "";
+			if (item.system.tags.size) context.dataset.properties = Array.from(item.system.tags).join(" ");
 		}
 
-		if ( item.system.attunable ) context.buttons.push({
-			action: "attune",
-			classes: "status fade",
-			disabled: !item.isOwner,
-			label: "BF.Attunement.Attuned",
-			pressed: item.system.attuned,
-			title: `BF.Attunement.${item.system.attuned ? "Attuned" : "NotAttuned"}`,
-			icon: '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
-		});
+		if (item.system.attunable)
+			context.buttons.push({
+				action: "attune",
+				classes: "status fade",
+				disabled: !item.isOwner,
+				label: "BF.Attunement.Attuned",
+				pressed: item.system.attuned,
+				title: `BF.Attunement.${item.system.attuned ? "Attuned" : "NotAttuned"}`,
+				icon: '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+			});
 
-		if ( item.system.equippable ) context.buttons.push({
-			action: "equip",
-			classes: "status fade",
-			disabled: !item.isOwner,
-			label: "BF.Item.Equipped",
-			pressed: item.system.equipped,
-			title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`,
-			icon: '<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>'
-		});
+		if (item.system.equippable)
+			context.buttons.push({
+				action: "equip",
+				classes: "status fade",
+				disabled: !item.isOwner,
+				label: "BF.Item.Equipped",
+				pressed: item.system.equipped,
+				title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`,
+				icon: '<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>'
+			});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -124,20 +128,20 @@ export default class PCSheet extends BaseActorSheet {
 		context.progressionLevels = [];
 		const flowIds = new Set(Object.keys(this.advancementFlows));
 
-		const levels = [{ levels: { character: 0, class: 0 }}, ...Object.values(context.system.progression.levels)];
-		for ( let data of levels.reverse() ) {
+		const levels = [{ levels: { character: 0, class: 0 } }, ...Object.values(context.system.progression.levels)];
+		for (let data of levels.reverse()) {
 			const level = data.levels.character;
 			const levelData = {
 				number: level,
 				...data,
 				class: data.class,
 				flows: [],
-				highestLevel: (level !== 0) && (level === context.system.progression.level)
+				highestLevel: level !== 0 && level === context.system.progression.level
 			};
 
-			for ( const advancement of this.actor.advancementForLevel(level) ) {
+			for (const advancement of this.actor.advancementForLevel(level)) {
 				const id = `${advancement.item.id}.${advancement.id}#${level}`;
-				const flow = this.advancementFlows[id] ??= advancement.flow(this.actor, data.levels);
+				const flow = (this.advancementFlows[id] ??= advancement.flow(this.actor, data.levels));
 				flowIds.delete(id);
 				levelData.flows.push(flow);
 			}
@@ -158,42 +162,46 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Size
 		const size = CONFIG.BlackFlag.sizes[traits.size];
-		if ( size || this.modes.editing ) context.traits.push({
-			key: "size",
-			classes: "single",
-			label: "BF.Size.Label",
-			value: size ? game.i18n.localize(size.label) : none,
-			config: "type"
-		});
+		if (size || this.modes.editing)
+			context.traits.push({
+				key: "size",
+				classes: "single",
+				label: "BF.Size.Label",
+				value: size ? game.i18n.localize(size.label) : none,
+				config: "type"
+			});
 
 		// Creature Type
 		const type = CONFIG.BlackFlag.creatureTypes[traits.type.value];
-		if ( type || this.modes.editing ) context.traits.push({
-			key: "type",
-			classes: "single",
-			label: "BF.CreatureType.Type.Label",
-			value: traits.type.label,
-			config: "type"
-		});
+		if (type || this.modes.editing)
+			context.traits.push({
+				key: "type",
+				classes: "single",
+				label: "BF.CreatureType.Type.Label",
+				value: traits.type.label,
+				config: "type"
+			});
 
 		// Movement
 		const movement = game.i18n.getListFormatter({ style: "narrow" }).format(traits.movement.labels);
-		if ( movement || this.modes.editing ) context.traits.push({
-			key: "movement",
-			classes: traits.movement.labels.length > 1 ? null : "single",
-			label: "BF.Speed.Label",
-			value: movement,
-			config: "movement"
-		});
+		if (movement || this.modes.editing)
+			context.traits.push({
+				key: "movement",
+				classes: traits.movement.labels.length > 1 ? null : "single",
+				label: "BF.Speed.Label",
+				value: movement,
+				config: "movement"
+			});
 
 		// Senses
 		const senses = this.actor.system.traits.senses.label;
-		if ( senses || this.modes.editing ) context.traits.push({
-			key: "senses",
-			label: "BF.Senses.Label",
-			value: senses || none,
-			config: "senses"
-		});
+		if (senses || this.modes.editing)
+			context.traits.push({
+				key: "senses",
+				label: "BF.Senses.Label",
+				value: senses || none,
+				config: "senses"
+			});
 
 		// Languages
 		context.traits.push({
@@ -221,63 +229,64 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Resistances
 		const resistances = [
-			...Array.from(traits.damage.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-			).filter(t => t),
+			...Array.from(traits.damage.resistances.value)
+				.map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label))
+				.filter(t => t),
 			...Array.from(traits.condition.resistances.value).map(t =>
 				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
-		if ( resistances.size || this.modes.editing ) context.traits.push({
-			key: "resistances",
-			label: "resistances",
-			value: game.i18n.getListFormatter({ style: "short" }).format(resistances) || none,
-			config: "resistance"
-		});
+		if (resistances.size || this.modes.editing)
+			context.traits.push({
+				key: "resistances",
+				label: "resistances",
+				value: game.i18n.getListFormatter({ style: "short" }).format(resistances) || none,
+				config: "resistance"
+			});
 
 		// Immunities
 		const immunities = [
-			...Array.from(traits.damage.immunities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-			),
+			...Array.from(traits.damage.immunities.value).map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)),
 			...Array.from(traits.condition.immunities.value).map(t =>
 				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
-		if ( immunities?.length || this.modes.editing ) context.traits.push({
-			key: "immunities",
-			label: "immunities",
-			value: game.i18n.getListFormatter({ style: "short" }).format(immunities) || none,
-			config: "resistance"
-		});
+		if (immunities?.length || this.modes.editing)
+			context.traits.push({
+				key: "immunities",
+				label: "immunities",
+				value: game.i18n.getListFormatter({ style: "short" }).format(immunities) || none,
+				config: "resistance"
+			});
 
 		// Vulnerabilities
-		const vulnerabilities = traits.damage.vulnerabilities.value.map(t =>
-			game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-		).filter(t => t);
-		if ( vulnerabilities.size || this.modes.editing ) context.traits.push({
-			key: "vulnerabilities",
-			label: "vulnerabilities",
-			value: game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none,
-			config: "resistance"
-		});
+		const vulnerabilities = traits.damage.vulnerabilities.value
+			.map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label))
+			.filter(t => t);
+		if (vulnerabilities.size || this.modes.editing)
+			context.traits.push({
+				key: "vulnerabilities",
+				label: "vulnerabilities",
+				value: game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none,
+				config: "resistance"
+			});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _render(force, options) {
 		await super._render(force, options);
-		if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.modes.progression ) return;
+		if (this._state !== Application.RENDER_STATES.RENDERED || !this.modes.progression) return;
 
 		// Render advancement steps
-		for ( const flow of Object.values(this.advancementFlows) ) {
+		for (const flow of Object.values(this.advancementFlows)) {
 			flow._element = null;
 			// TODO: Some sort of race condition here when advancement is being applied
 			await flow._render(true, options);
 		}
 
 		this.setPosition();
-		if ( this.options.scrollY ) this._restoreScrollPositions(this.element);
+		if (this.options.scrollY) this._restoreScrollPositions(this.element);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -286,48 +295,48 @@ export default class PCSheet extends BaseActorSheet {
 
 	async _onAction(event, dataset) {
 		const { action, subAction, ...properties } = dataset ?? event.currentTarget.dataset;
-		switch ( action ) {
+		switch (action) {
 			case "luck":
-				switch ( subAction ) {
+				switch (subAction) {
 					case "add":
 						return this.actor.system.addLuck();
 				}
 				break;
 			case "progression":
-				switch ( subAction ) {
+				switch (subAction) {
 					case "assign-abilities":
-						return (new AbilityAssignmentDialog(this.actor)).render(true);
+						return new AbilityAssignmentDialog(this.actor).render(true);
 					case "level-down":
 						return Dialog.confirm({
 							title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`,
-							content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${
-								game.i18n.localize("BF.Progression.Action.LevelDown.Message")
-							}</p>`,
+							content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.localize(
+								"BF.Progression.Action.LevelDown.Message"
+							)}</p>`,
 							yes: () => this.actor.system.levelDown()
 						});
 					case "level-up":
 						const allowMulticlassing = game.settings.get(game.system.id, "allowMulticlassing");
 						const cls = this.actor.system.progression.levels[1]?.class;
-						if ( cls ) {
-							if ( allowMulticlassing ) {
-								return (new LevelUpDialog(this.actor)).render(true);
+						if (cls) {
+							if (allowMulticlassing) {
+								return new LevelUpDialog(this.actor).render(true);
 							} else {
 								try {
 									return await this.actor.system.levelUp(cls);
-								} catch(err) {
+								} catch (err) {
 									return ui.notifications.warn(err.message);
 								}
 							}
 						}
 						properties.type = "class";
 					case "select":
-						if ( !properties.type ) return;
+						if (!properties.type) return;
 						const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
-						return (new ConceptSelectionDialog(this.actor, properties.type, { classIdentifier })).render(true);
+						return new ConceptSelectionDialog(this.actor, properties.type, { classIdentifier }).render(true);
 				}
 				break;
 			case "manage-spells":
-				return (new SpellManager(this.actor)).render(true);
+				return new SpellManager(this.actor).render(true);
 		}
 		return super._onAction(event, dataset);
 	}
@@ -339,9 +348,9 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Intercept updates to available hit dice
 		const hdUpdates = foundry.utils.getProperty(updates, "system.attributes.hd.d");
-		if ( hdUpdates ) {
+		if (hdUpdates) {
 			const hd = this.actor.system.attributes.hd;
-			for ( const [denomination, update] of Object.entries(hdUpdates) ) {
+			for (const [denomination, update] of Object.entries(hdUpdates)) {
 				const d = hd.d[denomination];
 				updates.system.attributes.hd.d[denomination].spent = Math.clamped(d.max - update.available, 0, d.max);
 			}
@@ -355,12 +364,12 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onDropItem(event, data) {
-		if ( !this.actor.isOwner ) return false;
+		if (!this.actor.isOwner) return false;
 		const item = await Item.implementation.fromDropData(data);
 		const itemData = item.toObject();
 
 		// Handle item sorting within the same Actor
-		if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
+		if (this.actor.uuid === item.parent?.uuid) return this._onSortItem(event, itemData);
 
 		// Create the owned item
 		return this._onDropItemCreate(event, item);
@@ -369,13 +378,15 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async _onDropFolder(event, data) {
-		if ( !this.actor.isOwner ) return [];
+		if (!this.actor.isOwner) return [];
 		const folder = await Folder.implementation.fromDropData(data);
-		if ( folder.type !== "Item" ) return [];
-		const droppedItems = await Promise.all(folder.contents.map(async item => {
-			if ( !(document instanceof Item) ) item = await fromUuid(item.uuid);
-			return item;
-		}));
+		if (folder.type !== "Item") return [];
+		const droppedItems = await Promise.all(
+			folder.contents.map(async item => {
+				if (!(document instanceof Item)) item = await fromUuid(item.uuid);
+				return item;
+			})
+		);
 		return this._onDropItemCreate(event, droppedItems);
 	}
 
@@ -388,35 +399,38 @@ export default class PCSheet extends BaseActorSheet {
 	 * @returns {BlackFlagItem[]|void} - Return any items that should continue through to InventoryElement for handling.
 	 */
 	async _handleDroppedItems(event, items) {
-		if ( !(items instanceof Array) ) items = [items];
+		if (!(items instanceof Array)) items = [items];
 
-		const { classes, concepts, others } = items.reduce((types, item) => {
-			if ( item.type === "class" ) types.classes.push(item);
-			else if ( ["background", "heritage", "lineage"].includes(item.type) ) types.concepts.push(item);
-			else types.others.push(item);
-			return types;
-		}, { classes: [], concepts: [], others: [] });
+		const { classes, concepts, others } = items.reduce(
+			(types, item) => {
+				if (item.type === "class") types.classes.push(item);
+				else if (["background", "heritage", "lineage"].includes(item.type)) types.concepts.push(item);
+				else types.others.push(item);
+				return types;
+			},
+			{ classes: [], concepts: [], others: [] }
+		);
 
 		// For classes, call level up method
-		for ( const cls of classes ) {
+		for (const cls of classes) {
 			try {
 				await this.actor.system.levelUp(cls);
-			} catch(err) {
+			} catch (err) {
 				ui.notifications.warn(err.message);
 			}
 		}
 
 		// For concepts, use the set concept method
-		for ( const concept of concepts ) {
+		for (const concept of concepts) {
 			try {
 				await this.actor.system.setConcept(concept);
-			} catch(err) {
+			} catch (err) {
 				ui.notifications.warn(err.message);
 			}
 		}
 
 		// For normal items, create normally
-		if ( others.length ) {
+		if (others.length) {
 			return others;
 		}
 	}

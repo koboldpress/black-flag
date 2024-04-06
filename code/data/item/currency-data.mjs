@@ -12,7 +12,6 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  */
 export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -37,16 +36,21 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			price: false,
-			weight: new SchemaField({
-				value: new NumberField({initial: 0.32}),
-				units: new StringField({initial: "ounce"})
-			}, {label: "BF.Weight.Label"}),
+			weight: new SchemaField(
+				{
+					value: new NumberField({ initial: 0.32 }),
+					units: new StringField({ initial: "ounce" })
+				},
+				{ label: "BF.Weight.Label" }
+			),
 			identifier: new SchemaField({
 				value: new IdentifierField()
 			}),
 			conversion: new SchemaField({
 				value: new NumberField({
-					initial: 1, positive: true, label: "BF.Currency.ConversionRatio.Label",
+					initial: 1,
+					positive: true,
+					label: "BF.Currency.ConversionRatio.Label",
 					hint: "BF.Currency.ConversionRatio.Hint"
 				})
 			})

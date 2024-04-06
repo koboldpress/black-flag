@@ -11,7 +11,6 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @abstract
  */
 export default class Activity extends PseudoDocumentMixin(BaseActivity) {
-
 	/**
 	 * Information on how an advancement type is configured.
 	 *
@@ -26,11 +25,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Configuration information for this activity type.
 	 * @type {ActivityMetadata}
 	 */
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		icon: "",
-		title: "BF.Activity.Label[one]",
-		hint: ""
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				icon: "",
+				title: "BF.Activity.Label[one]",
+				hint: ""
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -61,8 +66,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get canScale() {
-		if ( !this.consumption.scale.allowed ) return false;
-		if ( !this.isSpell ) return true;
+		if (!this.consumption.scale.allowed) return false;
+		if (!this.isSpell) return true;
 		return this.requiresSpellSlot;
 	}
 
@@ -105,15 +110,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	get usesColumn() {
 		const uses = document.createElement("div");
 		uses.classList.add("layout");
-		if ( this.consumption.targets.find(t => t.type === "item") ) {
+		if (this.consumption.targets.find(t => t.type === "item")) {
 			const itemUses = this.item.system.uses;
-			if ( itemUses.max ) {
+			if (itemUses.max) {
 				uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
-			} else if ( itemUses.consumeQuantity && this.item.system.isPhysical ) {
+			} else if (itemUses.consumeQuantity && this.item.system.isPhysical) {
 				uses.innerHTML += `<span>${numberFormat(this.item.system.quantity)}</span>`;
 			}
 		}
-		if ( this.consumption.targets.find(t => t.type === "activity") ) {
+		if (this.consumption.targets.find(t => t.type === "activity")) {
 			uses.innerHTML += `<span>${numberFormat(this.uses.value)} / ${numberFormat(this.uses.max)}</span>`;
 		}
 		return uses.outerHTML;
@@ -147,7 +152,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get requiresSpellSlot() {
-		if ( !this.isSpell ) return false;
+		if (!this.isSpell) return false;
 		return this.item.system.requiresSpellSlot && this.activation.primary;
 	}
 
@@ -211,19 +216,25 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {object} dialog - Configuration info for the configuration dialog.
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
-	async activate(config={}, dialog={}, message={}) {
+	async activate(config = {}, dialog = {}, message = {}) {
 		// Prepare initial activation configuration
 		const activationConfig = this.prepareActivationConfig(config);
 
-		const dialogConfig = foundry.utils.mergeObject({
-			configure: true,
-			applicationClass: ActivityActivationDialog
-		}, dialog);
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				configure: true,
+				applicationClass: ActivityActivationDialog
+			},
+			dialog
+		);
 
-		const messageConfig = foundry.utils.mergeObject({
-			create: true,
-			data: {}
-		}, message);
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				create: true,
+				data: {}
+			},
+			message
+		);
 
 		// Call preActivate script & hooks
 		// TODO: preActivate script
@@ -237,15 +248,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityDialogConfiguration} dialogConfig - Configuration data for the activity activation dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if ( Hooks.call("blackFlag.preActivateActivity", this, activationConfig, messageConfig, dialogConfig) === false ) {
+		if (Hooks.call("blackFlag.preActivateActivity", this, activationConfig, messageConfig, dialogConfig) === false) {
 			return;
 		}
 
 		// Display configuration window if necessary, wait for result
-		if ( dialogConfig.configure && this.requiresConfigurationDialog(activationConfig) ) {
+		if (dialogConfig.configure && this.requiresConfigurationDialog(activationConfig)) {
 			try {
 				await dialogConfig.applicationClass.create(this, activationConfig, dialogConfig.options);
-			} catch(err) {
+			} catch (err) {
 				return;
 			}
 		}
@@ -263,13 +274,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false ) {
+		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false) {
 			return;
 		}
 
 		// Calculate what resources should be consumed
 		const updates = await this.activationUpdates(activationConfig);
-		if ( updates === false ) return;
+		if (updates === false) return;
 
 		// Call activityConsumption script & hooks
 		// TODO: activityConsumption script
@@ -283,22 +294,22 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that will be applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false ) {
+		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false) {
 			return;
 		}
 
 		// Merge activity changes into the item updates
-		if ( !foundry.utils.isEmpty(updates.activity) ) {
+		if (!foundry.utils.isEmpty(updates.activity)) {
 			const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
 			const keyPath = `system.activities.${this.id}`;
 			const activityUpdates = foundry.utils.expandObject(updates.activity);
-			if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+			if (itemIndex === -1) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
 			else updates.item[itemIndex][keyPath] = activityUpdates;
 		}
 
 		// Update documents with consumption
-		if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-		if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+		if (!foundry.utils.isEmpty(updates.actor)) await this.actor.update(updates.actor);
+		if (!foundry.utils.isEmpty(updates.item)) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
 		// Call postConsumeUses script & hooks
 		// TODO: postActivityConsumption script
@@ -312,7 +323,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that have been applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if ( Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false ) {
+		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false) {
 			return;
 		}
 
@@ -345,22 +356,22 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityActivationConfiguration} [config={}] - Any configuration data provided manually.
 	 * @returns {ActivityActivationConfiguration}
 	 */
-	prepareActivationConfig(config={}) {
+	prepareActivationConfig(config = {}) {
 		config = foundry.utils.deepClone(config);
 
-		if ( config.consume !== false ) {
+		if (config.consume !== false) {
 			config.consume ??= {};
 			// TODO: consume.ammunition
 			config.consume.resources ??= this.consumption.targets.length > 0;
 			config.consume.spellSlot ??= this.requiresSpellSlot;
 		}
-		if ( !this.canScale ) config.scaling = false;
+		if (!this.canScale) config.scaling = false;
 		else config.scaling ??= 0;
 
 		// If all entries within `config.consume` are `false`, replace object with `false`
-		if ( config.consume !== false ) {
+		if (config.consume !== false) {
 			const anyConsumption = Object.values(config.consume).some(v => v);
-			if ( !anyConsumption ) config.consume = false;
+			if (!anyConsumption) config.consume = false;
 		}
 
 		return config;
@@ -375,8 +386,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {boolean}
 	 */
 	requiresConfigurationDialog(config) {
-		if ( config.consume !== false ) return true;
-		if ( config.scaling !== false ) return true;
+		if (config.consume !== false) return true;
+		if (config.scaling !== false) return true;
 		return false;
 	}
 
@@ -399,21 +410,24 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async activationUpdates(config) {
 		const updates = { activity: {}, item: [], actor: {}, rolls: [] };
-		if ( !config.consume ) return updates;
+		if (!config.consume) return updates;
 		const errors = [];
 
-		if ( (config.consume === true) || config.consume.ammunition ) {
+		if (config.consume === true || config.consume.ammunition) {
 			// TODO: Let `WeaponData` to handle this
 		}
 
-		if ( (config.consume === true) || config.consume.resources ) {
-			for ( const target of this.consumption.targets ) {
-				if ( (foundry.utils.getType(config.consume.resources) === "Array")
-					&& !config.consume.resources.includes(target.type) ) continue;
+		if (config.consume === true || config.consume.resources) {
+			for (const target of this.consumption.targets) {
+				if (
+					foundry.utils.getType(config.consume.resources) === "Array" &&
+					!config.consume.resources.includes(target.type)
+				)
+					continue;
 				try {
 					await target.prepareConsumptionUpdates(this, config, updates);
-				} catch(err) {
-					if ( err instanceof ConsumptionError ) {
+				} catch (err) {
+					if (err instanceof ConsumptionError) {
 						errors.push(err);
 						ui.notifications.error(err.message, { console: false });
 					} else {
@@ -423,16 +437,18 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
-		if ( ((config.consume === true) || config.consume.spellSlot) && this.isSpell ) {
+		if ((config.consume === true || config.consume.spellSlot) && this.isSpell) {
 			const ring = config.spell?.ring ?? this.item.system.ring?.value ?? this.item.system.ring?.base;
 			// TODO: Support other spellcasting types
 			const ringData = this.actor.system.spellcasting?.rings[`ring-${ring}`];
-			if ( ringData?.value ) {
+			if (ringData?.value) {
 				updates.actor[`system.spellcasting.rings.ring-${ring}.spent`] = ringData.spent + 1;
 			} else {
-				const err = new ConsumptionError(game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
-					ring: CONFIG.BlackFlag.spellRings()[ring]
-				}));
+				const err = new ConsumptionError(
+					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
+						ring: CONFIG.BlackFlag.spellRings()[ring]
+					})
+				);
 				errors.push(err);
 				ui.notifications.error(err.message, { console: false });
 			}
@@ -468,25 +484,28 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
 	 * @returns {Promise<ChatMessage|ActivityMessageConfiguration>}
 	 */
-	async createActivationMessage(message={}) {
+	async createActivationMessage(message = {}) {
 		const context = await this.activationChatContext();
-		const messageConfig = foundry.utils.mergeObject({
-			rollMode: game.settings.get("core", "rollMode"),
-			data: {
-				title: "chat message",
-				type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-				content: await renderTemplate("systems/black-flag/templates/activities/chat/activation-card.hbs", context),
-				speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-				flags: {
-					core: { canPopout: true },
-					"black-flag": {
-						type: "activity",
-						step: "activation",
-						uuid: this.uuid
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				rollMode: game.settings.get("core", "rollMode"),
+				data: {
+					title: "chat message",
+					type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+					content: await renderTemplate("systems/black-flag/templates/activities/chat/activation-card.hbs", context),
+					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
+					flags: {
+						core: { canPopout: true },
+						"black-flag": {
+							type: "activity",
+							step: "activation",
+							uuid: this.uuid
+						}
 					}
 				}
-			}
-		}, message);
+			},
+			message
+		);
 
 		// TODO: Call preCreateActivationMessage script & hooks
 
@@ -509,7 +528,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {HTMLElement} html - Element in the chat log.
 	 */
 	activateChatListeners(message, html) {
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => this._onChatAction(event, message));
 		}
 	}
@@ -524,10 +543,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async _onChatAction(event, message) {
 		const { action, ...properties } = event.target.dataset;
-		switch ( action ) {
+		switch (action) {
 			case "roll":
 				const method = properties.method;
-				if ( foundry.utils.getType(this[method]) !== "function" ) return;
+				if (foundry.utils.getType(this[method]) !== "function") return;
 				return this[method]();
 		}
 	}
@@ -542,8 +561,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	getActionTargets() {
 		let targets = canvas.tokens.controlled.filter(t => t.actor);
-		if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
-		if ( !targets.length ) ui.notifications.warn("BF.Activity.Core.Warning.NoTargets", {localize: true});
+		if (!targets.length && game.user.character) targets = game.user.character.getActiveTokens();
+		if (!targets.length) ui.notifications.warn("BF.Activity.Core.Warning.NoTargets", { localize: true });
 		// TODO: Alternatively fetch targeted tokens
 		return targets;
 	}

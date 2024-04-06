@@ -21,33 +21,47 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		this.addEventListener("drop", this._onDrop.bind(this), { signal });
 
-		for ( const element of this.querySelectorAll("[data-item-id]") ) {
+		for (const element of this.querySelectorAll("[data-item-id]")) {
 			element.setAttribute("draggable", true);
 			element.addEventListener("dragstart", this._onDragStart.bind(this), { signal });
 		}
 
-		for ( const element of this.querySelectorAll("[data-action]") ) {
-			element.addEventListener("click", event => {
-				event.stopImmediatePropagation();
-				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
-			}, { signal });
+		for (const element of this.querySelectorAll("[data-action]")) {
+			element.addEventListener(
+				"click",
+				event => {
+					event.stopImmediatePropagation();
+					this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+				},
+				{ signal }
+			);
 		}
 
-		for ( const input of this.querySelectorAll('input[type="number"]') ) {
+		for (const input of this.querySelectorAll('input[type="number"]')) {
 			input.addEventListener("change", this._onChangeInput.bind(this), { signal });
 		}
 
-		for ( const input of this.querySelectorAll('input[inputmode="numeric"]') ) {
+		for (const input of this.querySelectorAll('input[inputmode="numeric"]')) {
 			input.addEventListener("change", this._onChangeInputDelta.bind(this), { signal });
 		}
 
-		for ( const control of this.querySelectorAll("[data-context-menu]") ) {
-			control.addEventListener("click", event => {
-				event.stopPropagation();
-				event.currentTarget.closest("[data-item-id]").dispatchEvent(new PointerEvent("contextmenu", {
-					view: window, bubbles: true, cancelable: true, clientX: event.clientX, clientY: event.clientY
-				}));
-			}, { signal });
+		for (const control of this.querySelectorAll("[data-context-menu]")) {
+			control.addEventListener(
+				"click",
+				event => {
+					event.stopPropagation();
+					event.currentTarget.closest("[data-item-id]").dispatchEvent(
+						new PointerEvent("contextmenu", {
+							view: window,
+							bubbles: true,
+							cancelable: true,
+							clientX: event.clientX,
+							clientY: event.clientY
+						})
+					);
+				},
+				{ signal }
+			);
 		}
 
 		new ContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
@@ -68,7 +82,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @type {BlackFlagActor|null}
 	 */
 	get actor() {
-		if ( this.document instanceof Actor ) return this.document;
+		if (this.document instanceof Actor) return this.document;
 		return this.document.actor ?? null;
 	}
 
@@ -164,22 +178,25 @@ export default class InventoryElement extends AppAssociatedElement {
 			{
 				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
 				icon: '<i class="fa-solid fa-check fa-fw"></i>',
-				condition: () => this.actor && item.isOwner && item.system.activities?.size
-					&& ((this.actor.type === "npc") || (type === "Feature")),
+				condition: () =>
+					this.actor &&
+					item.isOwner &&
+					item.system.activities?.size &&
+					(this.actor.type === "npc" || type === "Feature"),
 				callback: li => this._onAction(li[0], "enable"),
 				group: "state"
 			},
 			{
 				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
 				icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
-				condition: () => this.actor && item.isOwner && (type === "Item") && item.system.equippable,
+				condition: () => this.actor && item.isOwner && type === "Item" && item.system.equippable,
 				callback: li => this._onAction(li[0], "equip"),
 				group: "state"
 			},
 			{
 				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
 				icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-				condition: () => this.actor && item.isOwner && (type === "Spell") && item.system.preparable,
+				condition: () => this.actor && item.isOwner && type === "Spell" && item.system.preparable,
 				callback: li => this._onAction(li[0], "prepare"),
 				group: "state"
 			}
@@ -201,13 +218,13 @@ export default class InventoryElement extends AppAssociatedElement {
 			cancelable: true,
 			detail: action
 		});
-		if ( target.dispatchEvent(event) === false ) return;
+		if (target.dispatchEvent(event) === false) return;
 
 		const dataset = (target.closest("[data-item-id]") || target)?.dataset ?? {};
 		const item = await this.getItem(dataset.itemId);
-		if ( (action !== "add") && !item ) return this.app._onAction?.(event, dataset);
+		if (action !== "add" && !item) return this.app._onAction?.(event, dataset);
 
-		switch ( action ) {
+		switch (action) {
 			case "add":
 				return this._onAddItem(target);
 			case "adjustment":
@@ -217,7 +234,7 @@ export default class InventoryElement extends AppAssociatedElement {
 			case "delete":
 				return item.deleteDialog();
 			case "duplicate":
-				return item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name}) }, { save: true });
+				return item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name }) }, { save: true });
 			case "edit":
 			case "view":
 				return item.sheet.render(true);
@@ -242,22 +259,30 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onAddItem(target) {
 		// Fetch configuration information for this section
 		const config = this.getSectionConfiguration(target.closest("[data-section]").dataset.section);
-		const makeLabel = d => d.label ? game.i18n.localize(d.label) : game.i18n.localize(CONFIG.Item.typeLabels[d.type]);
-		if ( !config.create ) return;
+		const makeLabel = d => (d.label ? game.i18n.localize(d.label) : game.i18n.localize(CONFIG.Item.typeLabels[d.type]));
+		if (!config.create) return;
 
 		// If more than one type is present, display a tooltip for selection which should be used
 		let createData = config.create[0];
-		if ( config.create.length > 1 ) {
+		if (config.create.length > 1) {
 			try {
-				createData = await BlackFlagDialog.tooltipWait({ element: target }, {
-					content: game.i18n.localize("BF.Item.Create.Prompt"),
-					buttons: Object.fromEntries(config.create.map((t, i) => [i, {
-						label: makeLabel(t),
-						callback: html => t
-					}])),
-					render: true
-				});
-			} catch(err) {
+				createData = await BlackFlagDialog.tooltipWait(
+					{ element: target },
+					{
+						content: game.i18n.localize("BF.Item.Create.Prompt"),
+						buttons: Object.fromEntries(
+							config.create.map((t, i) => [
+								i,
+								{
+									label: makeLabel(t),
+									callback: html => t
+								}
+							])
+						),
+						render: true
+					}
+				);
+			} catch (err) {
 				return;
 			}
 		}
@@ -296,14 +321,14 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onChangeInput(event) {
 		const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
 		const item = await this.getItem(itemId);
-		if ( !item ) return;
+		if (!item) return;
 
 		event.stopImmediatePropagation();
 		const { property } = event.target.dataset;
 		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
 		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
 		const value = Math.clamped(event.target.valueAsNumber, min, max);
-		if ( Number.isNaN(value) ) return;
+		if (Number.isNaN(value)) return;
 
 		event.target.value = value;
 		item.update({ [property]: value });
@@ -319,21 +344,21 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onChangeInputDelta(event) {
 		const itemId = event.target.closest("[data-item-id]")?.dataset.itemId;
 		const item = await this.getItem(itemId);
-		if ( !item ) return;
+		if (!item) return;
 
 		event.stopImmediatePropagation();
 		const { property } = event.target.dataset;
 		let value = event.target.value.trim();
-		if ( ["+", "-"].includes(value[0]) ) {
+		if (["+", "-"].includes(value[0])) {
 			const delta = parseFloat(value);
 			value = Number(foundry.utils.getProperty(item, property)) + delta;
-		} else if ( value[0] === "=" ) {
+		} else if (value[0] === "=") {
 			value = Number(value.slice(1));
 		}
 		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
 		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
 		value = Math.clamped(value, min, max);
-		if ( Number.isNaN(value) ) return;
+		if (Number.isNaN(value)) return;
 
 		event.target.value = value;
 		item.update({ [property]: value });
@@ -349,7 +374,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	_onContextMenu(element) {
 		const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
 		// Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
-		if ( !item || (item instanceof Promise) ) return;
+		if (!item || item instanceof Promise) return;
 		ui.context.menuItems = this._getContextMenuOptions(item);
 		/**
 		 * A hook event that fires when the context menu for an inventory list is constructed.
@@ -374,7 +399,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	async _onDragStart(event) {
 		const itemId = event.currentTarget.dataset.itemId;
 		const item = await this.getItem(itemId);
-		if ( item ) DragDrop.beginDragEvent(event, item);
+		if (item) DragDrop.beginDragEvent(event, item);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -389,15 +414,15 @@ export default class InventoryElement extends AppAssociatedElement {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 
-		if ( !this.isEditable ) return false;
+		if (!this.isEditable) return false;
 
 		const { data } = DragDrop.getDragData(event);
-		if ( !this._validateDrop(data) ) return false;
+		if (!this._validateDrop(data)) return false;
 		// TODO: Add support for dropping folders
 
 		try {
 			const item = await Item.implementation.fromDropData(data);
-			if ( !item ) return false;
+			if (!item) return false;
 			return this.constructor.dropItems(event, this.document, [item]);
 		} finally {
 			DragDrop.finishDragEvent(event);
@@ -413,7 +438,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @protected
 	 */
 	_validateDrop(data) {
-		if ( (data.type !== "Item") ) return false;
+		if (data.type !== "Item") return false;
 		return true;
 	}
 
@@ -430,15 +455,15 @@ export default class InventoryElement extends AppAssociatedElement {
 		const isContainer = target.type === "container";
 		const actor = isContainer ? target.parent : target;
 
-		if ( actor?.sheet._handleDroppedItems ) itemData = await actor.sheet._handleDroppedItems(event, itemData);
-		if ( !itemData?.length ) return;
+		if (actor?.sheet._handleDroppedItems) itemData = await actor.sheet._handleDroppedItems(event, itemData);
+		if (!itemData?.length) return;
 
 		const item = itemData[0];
 		// TODO: Add support for multiple items
 
-		if ( isContainer ) {
+		if (isContainer) {
 			const parentContainers = await target.system.allContainers();
-			if ( (target.uuid === item.uuid) || parentContainers.includes(item) ) {
+			if (target.uuid === item.uuid || parentContainers.includes(item)) {
 				ui.notifications.error("BF.Container.Warning.Recursive", { localize: true });
 				return;
 			}
@@ -446,15 +471,15 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		// Document already exists in this collection, just perform sorting
 		// TODO: Support using modifier key to change to copy rather than move operation in certain contexts
-		if ( (actor?.uuid === item.parent?.uuid) && (target.pack === item.pack) ) {
+		if (actor?.uuid === item.parent?.uuid && target.pack === item.pack) {
 			// If this inventory is on an actor, clear the container if set
-			if ( !isContainer && (item.system.container !== null) ) {
-				await item.update({"system.container": null});
+			if (!isContainer && item.system.container !== null) {
+				await item.update({ "system.container": null });
 			}
 
 			// If this inventory is on an container, set it to this
-			else if ( isContainer && (item.system.container !== target.id) ) {
-				await item.update({"system.container": target.id});
+			else if (isContainer && item.system.container !== target.id) {
+				await item.update({ "system.container": target.id });
 			}
 
 			// Then perform a sort
@@ -466,10 +491,10 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		// Create an item
 		const options = { transformFirst: item => this._transformDroppedItem(event, target, item) };
-		if ( isContainer ) options.container = target;
+		if (isContainer) options.container = target;
 		const toCreate = await BlackFlagItem.createWithContents([item], options);
-		if ( isContainer && target.folder ) toCreate.forEach(d => d.folder = target.folder);
-		return BlackFlagItem.createDocuments(toCreate, {pack: target.pack, parent: actor, keepId: true});
+		if (isContainer && target.folder) toCreate.forEach(d => (d.folder = target.folder));
+		return BlackFlagItem.createDocuments(toCreate, { pack: target.pack, parent: actor, keepId: true });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -484,29 +509,29 @@ export default class InventoryElement extends AppAssociatedElement {
 	 */
 	static async _sortItems(event, target, itemData) {
 		const dropTarget = event.target.closest("[data-item-id]");
-		if ( !dropTarget ) return;
+		if (!dropTarget) return;
 		const item = itemData[0];
 		// TODO: Add support for multiple items
 
 		const getItem = async id => {
-			if ( target instanceof Actor ) return target.items.get(id);
+			if (target instanceof Actor) return target.items.get(id);
 			else return (await target.system.contents).get(id);
 		};
 
 		const sortTarget = await getItem(dropTarget.dataset.itemId);
 
 		// Don't sort on yourself
-		if ( item.id === sortTarget.id ) return;
+		if (item.id === sortTarget.id) return;
 
 		// Identify sibling items based on adjacent HTML elements
 		const siblings = [];
-		for ( const el of dropTarget.parentElement.children ) {
+		for (const el of dropTarget.parentElement.children) {
 			const siblingId = el.dataset.itemId;
-			if ( siblingId && (siblingId !== item.id) ) siblings.push(await getItem(siblingId));
+			if (siblingId && siblingId !== item.id) siblings.push(await getItem(siblingId));
 		}
 
 		// Perform the sort
-		const sortUpdates = SortingHelpers.performIntegerSort(item, {target: sortTarget, siblings});
+		const sortUpdates = SortingHelpers.performIntegerSort(item, { target: sortTarget, siblings });
 		const updateData = sortUpdates.map(u => {
 			const update = u.update;
 			update._id = u.target.id;
@@ -515,7 +540,10 @@ export default class InventoryElement extends AppAssociatedElement {
 
 		// Perform the update
 		// TODO: Test what happens if you only have permission to some of these objects, perhaps no sorting in sidebar?
-		Item.updateDocuments(updateData, {pack: target.pack, parent: target.type === "container" ? target.actor : target});
+		Item.updateDocuments(updateData, {
+			pack: target.pack,
+			parent: target.type === "container" ? target.actor : target
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -529,10 +557,10 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @protected
 	 */
 	static async _transformDroppedItem(event, target, itemData) {
-		if ( itemData instanceof Item ) itemData = itemData.toObject();
+		if (itemData instanceof Item) itemData = itemData.toObject();
 
 		const findItem = async query => {
-			if ( target instanceof Actor ) return target.items.find(query);
+			if (target instanceof Actor) return target.items.find(query);
 			else return (await target.system.contents).find(query);
 		};
 
@@ -545,11 +573,11 @@ export default class InventoryElement extends AppAssociatedElement {
 		// TODO: Stack identical consumables
 
 		// Stack identical currencies
-		if ( itemData.type === "currency" ) {
-			const existingItem = await findItem(i =>
-				(i.type === "currency") && (i.identifier === itemData.system.identifier.value)
+		if (itemData.type === "currency") {
+			const existingItem = await findItem(
+				i => i.type === "currency" && i.identifier === itemData.system.identifier.value
 			);
-			if ( existingItem ) {
+			if (existingItem) {
 				await existingItem.update({
 					"system.quantity": existingItem.system.quantity + Math.max(1, itemData.system.quantity)
 				});
@@ -570,9 +598,9 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @returns {BlackFlagItem|Promise<BlackFlagItem>}
 	 */
 	findItem(query) {
-		if ( this.document.type === "container" ) {
+		if (this.document.type === "container") {
 			const contents = this.document.system.contents;
-			if ( contents instanceof Promise ) return contents.then(c => c.find(query));
+			if (contents instanceof Promise) return contents.then(c => c.find(query));
 			else return contents.find(query);
 		}
 		return this.document.items.find(query);
@@ -586,7 +614,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @returns {BlackFlagItem|Promise<BlackFlagItem>}
 	 */
 	getItem(id) {
-		if ( this.document.type === "container" ) return this.document.system.getContainedItem(id);
+		if (this.document.type === "container") return this.document.system.getContainedItem(id);
 		return this.document.items.get(id);
 	}
 
@@ -602,11 +630,11 @@ export default class InventoryElement extends AppAssociatedElement {
 	static buildSections(document, tab) {
 		const sections = {};
 
-		for ( const config of CONFIG.BlackFlag.sheetSections[document.type] ?? [] ) {
-			if ( tab && config.tab !== tab ) continue;
+		for (const config of CONFIG.BlackFlag.sheetSections[document.type] ?? []) {
+			if (tab && config.tab !== tab) continue;
 			const collection = tab ? sections : (sections[config.tab] ??= {});
 			const toAdd = config.expand ? config.expand(document, config) : [config];
-			toAdd.forEach(c => collection[c.id] = { ...c, items: [] });
+			toAdd.forEach(c => (collection[c.id] = { ...c, items: [] }));
 		}
 
 		return sections;
@@ -623,29 +651,29 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @param {boolean} [options.hide=true] - Should sections marked autoHide by hidden if empty?
 	 * @returns {object} - Object with sections grouped by tabs and all their items.
 	 */
-	static async organizeItems(document, items, { callback, hide=true }={}) {
+	static async organizeItems(document, items, { callback, hide = true } = {}) {
 		const sections = this.buildSections(document);
 		const uncategorized = [];
 
-		if ( document instanceof Actor ) items = items.filter(i => !document.items.has(i.system.container));
+		if (document instanceof Actor) items = items.filter(i => !document.items.has(i.system.container));
 
-		for ( const item of items ) {
+		for (const item of items) {
 			const section = InventoryElement.organizeItem(item, sections);
-			if ( section === false ) uncategorized.push(item);
-			if ( callback ) await callback(item, section);
+			if (section === false) uncategorized.push(item);
+			if (callback) await callback(item, section);
 		}
 
 		const filters = document.flags["black-flag"]?.sheet?.filters ?? {};
 		const sorting = document.flags["black-flag"]?.sheet?.sorting ?? {};
-		for ( const [tab, data] of Object.entries(sections) ) {
-			for ( const [key, section] of Object.entries(data) ) {
+		for (const [tab, data] of Object.entries(sections)) {
+			for (const [key, section] of Object.entries(data)) {
 				section.items = FiltersElement.filter(section.items, filters[tab]);
 				section.items = SortingElement.sort(section.items, section.options?.sorting ?? sorting[tab]);
-				if ( hide && section.options?.autoHide && !section.items.length ) delete data[key];
+				if (hide && section.options?.autoHide && !section.items.length) delete data[key];
 			}
 		}
 
-		if ( uncategorized.length ) sections.uncategorized = uncategorized;
+		if (uncategorized.length) sections.uncategorized = uncategorized;
 
 		return sections;
 	}
@@ -660,9 +688,9 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @internal
 	 */
 	static organizeItem(item, sections) {
-		for ( const tab of Object.values(sections) ) {
-			for ( const section of Object.values(tab) ) {
-				if ( performCheck(item, section.filters) ) {
+		for (const tab of Object.values(sections)) {
+			for (const section of Object.values(tab)) {
+				if (performCheck(item, section.filters)) {
 					section.items.push(item);
 					return section;
 				}
@@ -680,7 +708,7 @@ export default class InventoryElement extends AppAssociatedElement {
 	 * @returns {SheetSectionConfiguration}
 	 */
 	getSectionConfiguration(id) {
-		if ( !this.#sectionsCache ) {
+		if (!this.#sectionsCache) {
 			const sections = this.constructor.buildSections(this.document, this.getAttribute("tab"));
 			this.#sectionsCache = sections;
 		}

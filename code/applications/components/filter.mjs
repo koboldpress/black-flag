@@ -4,7 +4,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
  * Custom element for displaying a single inventory filter.
  */
 export default class FilterElement extends AppAssociatedElement {
-
 	static formAssociated = true;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -15,7 +14,7 @@ export default class FilterElement extends AppAssociatedElement {
 		this.#filter = this.getAttribute("filter");
 		this.#internals = this.attachInternals();
 		this.#shadowRoot = this.attachShadow({ mode: "closed" });
-		if ( this.hasAttribute("value") ) this.#value = this.getAttribute("value");
+		if (this.hasAttribute("value")) this.#value = this.getAttribute("value");
 
 		const style = document.createElement("style");
 		style.innerText = `
@@ -69,7 +68,7 @@ export default class FilterElement extends AppAssociatedElement {
 		this.#value = this.#filters?.getValueOf(this.#filter);
 		this.#matchInternalState();
 
-		if ( !this.hasAttribute("name") ) this.setAttribute("name", this.name);
+		if (!this.hasAttribute("name")) this.setAttribute("name", this.name);
 
 		this.addEventListener("click", this.#onClick.bind(this), { signal: this.#controller.signal });
 	}
@@ -164,7 +163,7 @@ export default class FilterElement extends AppAssociatedElement {
 
 	set value(value) {
 		value = parseInt(value);
-		if ( ![-1, 0, 1].includes(value) ) throw new Error("Filter value must be -1, 0, or +1.");
+		if (![-1, 0, 1].includes(value)) throw new Error("Filter value must be -1, 0, or +1.");
 		this.#value = value;
 		this.#matchInternalState();
 	}
@@ -190,7 +189,7 @@ export default class FilterElement extends AppAssociatedElement {
 	 * @param {PointerEvent} event - The triggering click event.
 	 */
 	#onClick(event) {
-		if ( this.value === 1 ) this.value = -1;
+		if (this.value === 1) this.value = -1;
 		else this.value = (this.value ?? 0) + 1;
 		this.dispatchEvent(new Event("change", { bubbles: true }));
 	}

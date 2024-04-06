@@ -13,7 +13,6 @@
  * @property {TypeFieldModelGetter|object} [modelLookup] - Function or object that loads the model based on type.
  */
 export default class TypeField extends foundry.data.fields.ObjectField {
-
 	/** @inheritDoc */
 	static get _defaults() {
 		return foundry.utils.mergeObject(super._defaults, {
@@ -37,7 +36,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	 */
 	getModel(value, parent) {
 		const type = this.determineType?.(value, parent) ?? null;
-		if ( foundry.utils.getType(this.modelLookup) === "function" ) return this.modelLookup(type) ?? null;
+		if (foundry.utils.getType(this.modelLookup) === "function") return this.modelLookup(type) ?? null;
 		return this.modelLookup?.[type] ?? null;
 	}
 
@@ -45,19 +44,19 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/** @inheritDoc */
 	_cleanType(value, options) {
-		if ( !(typeof value === "object") ) value = {};
+		if (!(typeof value === "object")) value = {};
 
 		const cls = this.getModel(value);
-		if ( cls ) return cls.cleanData(value, options);
+		if (cls) return cls.cleanData(value, options);
 		return value;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	initialize(value, model, options={}) {
+	initialize(value, model, options = {}) {
 		const cls = this.getModel(value, model);
-		if ( cls ) return new cls(value, {parent: model, ...options});
+		if (cls) return new cls(value, { parent: model, ...options });
 		return foundry.utils.deepClone(value);
 	}
 
@@ -70,6 +69,6 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 	 */
 	migrateSource(sourceData, fieldData) {
 		const cls = this.getModel(fieldData, sourceData);
-		if ( cls ) cls.migrateDataSafe(fieldData);
+		if (cls) cls.migrateDataSafe(fieldData);
 	}
 }

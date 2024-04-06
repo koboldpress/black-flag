@@ -2,10 +2,9 @@
  * Extended version of Combat with support for uses recovery.
  */
 export default class BlackFlagCombat extends Combat {
-
 	async startCombat() {
 		await super.startCombat();
-		this._recoverUses({encounter: true});
+		this._recoverUses({ encounter: true });
 		return this;
 	}
 
@@ -13,7 +12,7 @@ export default class BlackFlagCombat extends Combat {
 
 	async nextTurn() {
 		await super.nextTurn();
-		this._recoverUses({round: this.combatant, turn: true});
+		this._recoverUses({ round: this.combatant, turn: true });
 		return this;
 	}
 
@@ -27,13 +26,13 @@ export default class BlackFlagCombat extends Combat {
 	 * @param {boolean|BlackFlagCombatant} [types.round=false]
 	 * @param {boolean|BlackFlagCombatant} [types.turn=false]
 	 */
-	async _recoverUses({encounter=false, round=false, turn=false}) {
-		for ( const combatant of this.combatants ) {
+	async _recoverUses({ encounter = false, round = false, turn = false }) {
+		for (const combatant of this.combatants) {
 			const periods = [];
-			if ( (encounter === true) || (encounter === combatant) ) periods.push("encounter");
-			if ( (round === true) || (round === combatant) ) periods.push("round");
-			if ( (turn === true) || (turn === combatant) ) periods.push("turn");
-			if ( periods.length ) await combatant.recoverCombatUses(periods);
+			if (encounter === true || encounter === combatant) periods.push("encounter");
+			if (round === true || round === combatant) periods.push("round");
+			if (turn === true || turn === combatant) periods.push("turn");
+			if (periods.length) await combatant.recoverCombatUses(periods);
 		}
 	}
 }

@@ -6,17 +6,22 @@ import Advancement from "./advancement.mjs";
  * **Can only be added to subclasses and each subclass can only have one.**
  */
 export default class ExpandedTalentListAdvancement extends Advancement {
-
-	static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-		type: "expandedTalentList",
-		dataModels: {
-			configuration: ImprovementConfigurationData
-		},
-		order: 45,
-		icon: "systems/black-flag/artwork/advancement/improvement.svg",
-		title: "BF.Advancement.ExpandedTalentList.Title",
-		hint: "BF.Advancement.ExpandedTalentList.Hint"
-	}, {inplace: false}));
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "expandedTalentList",
+				dataModels: {
+					configuration: ImprovementConfigurationData
+				},
+				order: 45,
+				icon: "systems/black-flag/artwork/advancement/improvement.svg",
+				title: "BF.Advancement.ExpandedTalentList.Title",
+				hint: "BF.Advancement.ExpandedTalentList.Hint"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
@@ -30,9 +35,10 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	summaryForLevel(levels, { flow=false }={}) {
+	summaryForLevel(levels, { flow = false } = {}) {
 		return `<span class="choice-entry"><span class="choice-name">${
-			CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]}</span></span>`;
+			CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
+		}</span></span>`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -43,7 +49,7 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	 */
 	async journalSummary() {
 		const classDocument = await CONFIG.BlackFlag.registration.getSource("class", this.item.system.identifier.class);
-		if ( !classDocument ) return "";
+		if (!classDocument) return "";
 
 		const classImprovement = classDocument.system.advancement.byType("improvement")[0];
 		const lists = [classImprovement?.configuration.talentList, this.configuration.talentList]

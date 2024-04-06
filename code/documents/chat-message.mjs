@@ -6,11 +6,11 @@ import MessageLuckElement from "../applications/components/message-luck.mjs";
 export default class BlackFlagChatMessage extends ChatMessage {
 	async getHTML() {
 		const jQuery = await super.getHTML();
-		if ( !this.isContentVisible ) return jQuery;
+		if (!this.isContentVisible) return jQuery;
 		const html = jQuery[0];
 
 		await this._activateActivityListeners(html);
-		if ( this.isRoll ) {
+		if (this.isRoll) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
 			this._renderDamageUI(html);
@@ -27,13 +27,13 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 */
 	_highlightRollResults(html) {
 		const rollResults = html.querySelectorAll(".dice-roll");
-		for ( const [index, roll] of this.rolls.entries() ) {
+		for (const [index, roll] of this.rolls.entries()) {
 			const result = rollResults[index];
-			if ( !result ) return;
-			if ( roll.isCriticalSuccess ) result.classList.add("critical-success");
-			else if ( roll.isCriticalFailure ) result.classList.add("critical-failure");
-			if ( roll.isSuccess ) result.classList.add("success");
-			else if ( roll.isFailure ) result.classList.add("failure");
+			if (!result) return;
+			if (roll.isCriticalSuccess) result.classList.add("critical-success");
+			else if (roll.isCriticalFailure) result.classList.add("critical-failure");
+			if (roll.isSuccess) result.classList.add("success");
+			else if (roll.isFailure) result.classList.add("failure");
 		}
 	}
 
@@ -47,7 +47,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 */
 	async _activateActivityListeners(html) {
 		const uuid = this.getFlag(game.system.id, "uuid");
-		if ( (this.getFlag(game.system.id, "type") !== "activity") || !uuid ) return;
+		if (this.getFlag(game.system.id, "type") !== "activity" || !uuid) return;
 
 		const activity = await fromUuid(uuid);
 		activity?.activateChatListeners(this, html);
@@ -62,16 +62,19 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_renderDamageUI(html) {
-		if ( !this.rolls.every(r => r instanceof CONFIG.Dice.DamageRoll) ) return;
-		if ( this.rolls.length > 1 ) {
+		if (!this.rolls.every(r => r instanceof CONFIG.Dice.DamageRoll)) return;
+		if (this.rolls.length > 1) {
 			const total = this.rolls.reduce((t, r) => t + r.total, 0);
-			html.querySelector(".message-content")?.insertAdjacentHTML("beforeend", `
+			html.querySelector(".message-content")?.insertAdjacentHTML(
+				"beforeend",
+				`
 				<div class="damage dice-roll">
 				  <div class="dice-result">
 					  <h4 class="dice-total damage-total">${game.i18n.localize("Total")}: ${total}</h4>
 				  </div>
 				</div>
-			`);
+			`
+			);
 		}
 	}
 
@@ -85,7 +88,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @returns {Combatant|void}
 	 */
 	getCombatant(initiative) {
-		if ( !initiative ) {
+		if (!initiative) {
 			const rollIndex = this.rolls.findIndex(r => r instanceof CONFIG.Dice.ChallengeRoll);
 			initiative = this.rolls[rollIndex]?.total;
 		}
@@ -93,12 +96,12 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		const { exactMatch, tokenMatch, actorMatch } = Array.from(game.combats.map(c => Array.from(c.combatants)))
 			.flat()
 			.reduce((obj, combatant) => {
-				if ( obj.exactMatch ) return obj;
-				if ( combatant.sceneId === this.speaker.scene ) {
-					if ( combatant.tokenId === this.speaker.token ) {
+				if (obj.exactMatch) return obj;
+				if (combatant.sceneId === this.speaker.scene) {
+					if (combatant.tokenId === this.speaker.token) {
 						obj.tokenMatch = combatant;
-						if ( combatant.initiative === initiative ) obj.exactMatch = combatant;
-					} else if ( combatant.actorId === this.speaker.actor ) obj.actorMatch = combatant;
+						if (combatant.initiative === initiative) obj.exactMatch = combatant;
+					} else if (combatant.actorId === this.speaker.actor) obj.actorMatch = combatant;
 				}
 				return obj;
 			}, {});
@@ -112,7 +115,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_renderLuckInterface(html) {
-		if ( !MessageLuckElement.shouldDisplayLuckInterface(this) ) return;
+		if (!MessageLuckElement.shouldDisplayLuckInterface(this)) return;
 		const content = html.querySelector(".message-content");
 		content.insertAdjacentHTML("beforeend", "<blackFlag-messageLuck></blackFlag-messageLuck>");
 	}

@@ -12,9 +12,10 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {PropertiesTemplate}
  */
 export default class AmmunitionData extends ItemDataModel.mixin(
-	DescriptionTemplate, PhysicalTemplate, PropertiesTemplate
+	DescriptionTemplate,
+	PhysicalTemplate,
+	PropertiesTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -32,7 +33,7 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				category: new StringField({label: "BF.Equipment.Category.Label"})
+				category: new StringField({ label: "BF.Equipment.Category.Label" })
 			})
 			// TODO: Damage bonuses
 		});

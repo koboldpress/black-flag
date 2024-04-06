@@ -2,7 +2,6 @@
  * Abstract custom element that connects with a Foundry application.
  */
 export default class AppAssociatedElement extends HTMLElement {
-
 	connectedCallback() {
 		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
 	}
@@ -17,7 +16,9 @@ export default class AppAssociatedElement extends HTMLElement {
 	 */
 	#app;
 
-	get app() { return this.#app; }
+	get app() {
+		return this.#app;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

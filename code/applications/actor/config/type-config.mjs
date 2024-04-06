@@ -3,7 +3,6 @@ import { filteredKeys } from "../../../utils/_module.mjs";
 import BaseConfig from "./base-config.mjs";
 
 export default class TypeConfig extends BaseConfig {
-
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -44,11 +43,11 @@ export default class TypeConfig extends BaseConfig {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		html.querySelector('[data-action="add"]').addEventListener("click", event =>
-			this.submit({ updateData: { newCustom: true } })
-		);
+		html
+			.querySelector('[data-action="add"]')
+			.addEventListener("click", event => this.submit({ updateData: { newCustom: true } }));
 
-		for ( const control of html.querySelectorAll('[data-action="delete"]') ) {
+		for (const control of html.querySelectorAll('[data-action="delete"]')) {
 			control.addEventListener("click", event =>
 				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
 			);
@@ -65,15 +64,17 @@ export default class TypeConfig extends BaseConfig {
 		data.type.tags = filteredKeys(data.type?.tags ?? {});
 
 		const custom = Array.from(Object.values(data.custom ?? {}));
-		if ( data.deleteCustom !== undefined ) custom.splice(data.deleteCustom, 1);
-		if ( data.newCustom ) custom.push("");
+		if (data.deleteCustom !== undefined) custom.splice(data.deleteCustom, 1);
+		if (data.newCustom) custom.push("");
 
-		return { "system.traits": {
-			size: data.size,
-			type: {
-				...data.type,
-				custom
+		return {
+			"system.traits": {
+				size: data.size,
+				type: {
+					...data.type,
+					custom
+				}
 			}
-		} };
+		};
 	}
 }

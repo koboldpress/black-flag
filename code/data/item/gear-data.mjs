@@ -12,7 +12,6 @@ const { HTMLField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  */
 export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -30,12 +29,12 @@ export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, De
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			description: new SchemaField({
-				value: new HTMLField({label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint"}),
-				source: new StringField({label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint"})
+				value: new HTMLField({ label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint" }),
+				source: new StringField({ label: "BF.Item.Source.Label", hint: "BF.Item.Source.Hint" })
 			}),
 			type: new SchemaField({
-				category: new StringField({label: "BF.Equipment.Category.Label"}),
-				base: new StringField({label: "BF.Equipment.Base.Label"})
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
 		});
 	}

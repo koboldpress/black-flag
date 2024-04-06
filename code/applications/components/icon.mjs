@@ -63,7 +63,7 @@ export default class IconElement extends HTMLElement {
 
 	connectedCallback() {
 		// Create icon styles or fetch the shared stylesheet
-		if ( !this.constructor.#stylesheet ) {
+		if (!this.constructor.#stylesheet) {
 			this.constructor.#stylesheet = new CSSStyleSheet();
 			this.constructor.#stylesheet.replaceSync(`
 				:host {
@@ -84,14 +84,14 @@ export default class IconElement extends HTMLElement {
 		this.#shadowRoot.adoptedStyleSheets = [this.constructor.#stylesheet];
 
 		const insertElement = element => {
-			if ( !element ) return;
+			if (!element) return;
 			const clone = element.cloneNode(true);
 			this.#shadowRoot.replaceChildren(clone);
 		};
 
 		// Insert element immediately if already available, otherwise wait for fetch
 		const element = this.constructor.fetch(this.src);
-		if ( element instanceof Promise ) element.then(insertElement);
+		if (element instanceof Promise) element.then(insertElement);
 		else insertElement(element);
 	}
 
@@ -103,15 +103,19 @@ export default class IconElement extends HTMLElement {
 	 * @returns {SVGElement|Promise<SVGElement>} - Promise if the element is not cached, otherwise the element directly.
 	 */
 	static fetch(src) {
-		if ( !this.#svgCache.has(src) ) this.#svgCache.set(src, fetch(src)
-			.then(b => b.text())
-			.then(t => {
-				const temp = document.createElement("div");
-				temp.innerHTML = t;
-				const svg = temp.querySelector("svg");
-				this.#svgCache.set(src, svg);
-				return svg;
-			}));
+		if (!this.#svgCache.has(src))
+			this.#svgCache.set(
+				src,
+				fetch(src)
+					.then(b => b.text())
+					.then(t => {
+						const temp = document.createElement("div");
+						temp.innerHTML = t;
+						const svg = temp.querySelector("svg");
+						this.#svgCache.set(src, svg);
+						return svg;
+					})
+			);
 		return this.#svgCache.get(src);
 	}
 }

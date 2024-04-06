@@ -7,10 +7,12 @@ export class KeyAbilityConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			options: new SetField(new StringField(), {
-				label: "BF.Advancement.KeyAbility.Options.Label", hint: "BF.Advancement.KeyAbility.Options.Hint"
+				label: "BF.Advancement.KeyAbility.Options.Label",
+				hint: "BF.Advancement.KeyAbility.Options.Hint"
 			}),
 			secondary: new StringField({
-				label: "BF.Advancement.KeyAbility.Secondary.Label", hint: "BF.Advancement.KeyAbility.Secondary.Hint"
+				label: "BF.Advancement.KeyAbility.Secondary.Label",
+				hint: "BF.Advancement.KeyAbility.Secondary.Hint"
 			})
 		};
 	}
@@ -26,7 +28,7 @@ export class KeyAbilityConfigurationData extends foundry.abstract.DataModel {
 export class KeyAbilityValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			selected: new StringField({label: "BF.Advancement.KeyAbility.Label"})
+			selected: new StringField({ label: "BF.Advancement.KeyAbility.Label" })
 		};
 	}
 }

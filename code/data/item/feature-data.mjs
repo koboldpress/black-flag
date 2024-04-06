@@ -15,9 +15,11 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @mixes {FeatureTemplate}
  */
 export default class FeatureData extends ItemDataModel.mixin(
-	ActivitiesTemplate, AdvancementTemplate, DescriptionTemplate, FeatureTemplate
+	ActivitiesTemplate,
+	AdvancementTemplate,
+	DescriptionTemplate,
+	FeatureTemplate
 ) {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return foundry.utils.mergeObject(super.metadata, {
@@ -36,7 +38,7 @@ export default class FeatureData extends ItemDataModel.mixin(
 				associated: new IdentifierField()
 			}),
 			level: new SchemaField({
-				value: new NumberField({min: 0, integer: true})
+				value: new NumberField({ min: 0, integer: true })
 			})
 		});
 	}

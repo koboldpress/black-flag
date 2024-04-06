@@ -10,7 +10,6 @@ const { HTMLField, StringField } = foundry.data.fields;
  * @property {string} type - Type of rule represented. Should match an entry defined in `CONFIG.BlackFlag.ruleTypes`.
  */
 export default class RuleJournalPageData extends BaseDataModel {
-
 	/** @inheritDoc */
 	static get metadata() {
 		return {
@@ -28,8 +27,8 @@ export default class RuleJournalPageData extends BaseDataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			tooltip: new HTMLField({label: "BF.Rule.Tooltip"}),
-			type: new StringField({blank: false, initial: "rule", label: "BF.Rule.Type.Label"})
+			tooltip: new HTMLField({ label: "BF.Rule.Tooltip" }),
+			type: new StringField({ blank: false, initial: "rule", label: "BF.Rule.Type.Label" })
 		};
 	}
 }

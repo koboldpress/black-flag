@@ -7,10 +7,9 @@ import JournalEditor from "./journal-editor.mjs";
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
 export default class ClassPageSheet extends JournalPageSheet {
-
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {
-			dragDrop: [{dropSelector: ".drop-target"}],
+			dragDrop: [{ dropSelector: ".drop-target" }],
 			height: "auto",
 			width: 500,
 			submitOnChange: true
@@ -45,19 +44,17 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async getData(options={}) {
+	async getData(options = {}) {
 		const context = await super.getData(options);
 		context.system = context.document.system;
 
-		context.title = Object.fromEntries(
-			Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1])
-		);
+		context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
 
 		const linked = await fromUuid(this.document.system.item);
-		const subclasses = this.type === "class" ? await Promise.all(this.document.system.subclasses.map(s => fromUuid(s)))
-			: [];
+		const subclasses =
+			this.type === "class" ? await Promise.all(this.document.system.subclasses.map(s => fromUuid(s))) : [];
 
-		if ( !linked ) return context;
+		if (!linked) return context;
 		context.linked = {
 			document: linked,
 			name: linked.name,
@@ -70,8 +67,10 @@ export default class ClassPageSheet extends JournalPageSheet {
 		context.enriched = await this._getDescriptions(context.document);
 		context.table = await this._getTable(linked, { features });
 		context.features = await this._getFeatures(linked, { features });
-		if ( subclasses.length ) context.subclasses = (await this._getSubclasses(subclasses, { features }))
-			.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+		if (subclasses.length)
+			context.subclasses = (await this._getSubclasses(subclasses, { features })).sort((lhs, rhs) =>
+				lhs.name.localeCompare(rhs.name)
+			);
 
 		return context;
 	}
@@ -85,21 +84,19 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {Collection<string, BlackFlagItem>} - Mapping of UUIDs to feature items.
 	 * @internal
 	 */
-	async _prefetchFeatures(items, subfeatures=true) {
-		const uuidsToFetch = items.map(i => {
-			const advancements = i.system.advancement?.byType("grantFeatures")
-				.concat(i.system.advancement?.byType("chooseFeatures"));
-			return advancements.flatMap(a => a.configuration.pool.map(p => p.uuid));
-		}).flat();
+	async _prefetchFeatures(items, subfeatures = true) {
+		const uuidsToFetch = items
+			.map(i => {
+				const advancements = i.system.advancement
+					?.byType("grantFeatures")
+					.concat(i.system.advancement?.byType("chooseFeatures"));
+				return advancements.flatMap(a => a.configuration.pool.map(p => p.uuid));
+			})
+			.flat();
 
-		const fetched = new Collection(
-			await Promise.all(
-				uuidsToFetch.map(async uuid => [uuid, await fromUuid(uuid)])
-			)
-		);
+		const fetched = new Collection(await Promise.all(uuidsToFetch.map(async uuid => [uuid, await fromUuid(uuid)])));
 
-		if ( subfeatures ) (await this._prefetchFeatures(fetched, false))
-			.forEach(f => fetched.set(f.uuid, f));
+		if (subfeatures) (await this._prefetchFeatures(fetched, false)).forEach(f => fetched.set(f.uuid, f));
 
 		return fetched;
 	}
@@ -116,7 +113,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const advancement = {};
 
 		const hp = item.system.advancement.byType("hitPoints")[0];
-		if ( hp ) {
+		if (hp) {
 			advancement.hp = {
 				hitDice: `1d${hp.configuration.denomination}`,
 				max: hp.configuration.denomination,
@@ -129,12 +126,10 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const makeTrait = type => {
 			const advancement = traits.find(a => a.bestGuessTrait() === type);
 			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "multiclass"`
-			if ( !advancement ) return game.i18n.localize("BF.Proficiency.None");
-			return Trait.localizedList(
-				advancement.configuration.grants,
-				advancement.configuration.choices,
-				{ choiceMode: advancement.configuration.choiceMode }
-			);
+			if (!advancement) return game.i18n.localize("BF.Proficiency.None");
+			return Trait.localizedList(advancement.configuration.grants, advancement.configuration.choices, {
+				choiceMode: advancement.configuration.choiceMode
+			});
 		};
 		advancement.traits = {
 			armor: makeTrait("armor"),
@@ -156,16 +151,18 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @internal
 	 */
 	async _getDescriptions(page) {
-		return Object.fromEntries(await Promise.all(Object.entries(page.system.description ?? {})
-			.map(async ([id, text]) => {
-				const enriched = await TextEditor.enrichHTML(text, {
-					relativeTo: this.object,
-					secrets: this.object.isOwner,
-					async: true
-				});
-				return [id, enriched];
-			})
-		));
+		return Object.fromEntries(
+			await Promise.all(
+				Object.entries(page.system.description ?? {}).map(async ([id, text]) => {
+					const enriched = await TextEditor.enrichHTML(text, {
+						relativeTo: this.object,
+						secrets: this.object.isOwner,
+						async: true
+					});
+					return [id, enriched];
+				})
+			)
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -179,18 +176,18 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object} - Prepared table data.
 	 * @internal
 	 */
-	async _getTable(item, { features, initialLevel=1 }) {
+	async _getTable(item, { features, initialLevel = 1 }) {
 		const hasFeatures = !!item.system.advancement.byType("grantFeatures");
 		const scaleValues = this._getScaleValues(item, { features });
 		const spellProgression = await this._getSpellProgression(item);
 
-		const headers = [[{content: game.i18n.localize("BF.Level.Label[one]")}]];
-		if ( item.type === "class" ) headers[0].push({content: game.i18n.localize("BF.Proficiency.Bonus.Abbreviation")});
-		if ( hasFeatures ) headers[0].push({content: game.i18n.localize("BF.Item.Type.Feature[other]")});
-		headers[0].push(...scaleValues.column.map(a => ({content: a.title})));
-		if ( spellProgression ) {
-			if ( spellProgression.headers.length > 1 ) {
-				headers[0].forEach(h => h.rowSpan = 2);
+		const headers = [[{ content: game.i18n.localize("BF.Level.Label[one]") }]];
+		if (item.type === "class") headers[0].push({ content: game.i18n.localize("BF.Proficiency.Bonus.Abbreviation") });
+		if (hasFeatures) headers[0].push({ content: game.i18n.localize("BF.Item.Type.Feature[other]") });
+		headers[0].push(...scaleValues.column.map(a => ({ content: a.title })));
+		if (spellProgression) {
+			if (spellProgression.headers.length > 1) {
+				headers[0].forEach(h => (h.rowSpan = 2));
 				headers[0].push(...spellProgression.headers[0]);
 				headers[1] = spellProgression.headers[1];
 			} else {
@@ -199,24 +196,24 @@ export default class ClassPageSheet extends JournalPageSheet {
 		}
 
 		const cols = [{ class: "level", span: 1 }];
-		if ( item.type === "class" ) cols.push({class: "prof", span: 1});
-		if ( hasFeatures ) cols.push({class: "features", span: 1});
-		if ( scaleValues.column.length ) cols.push({class: "scale", span: scaleValues.column.length});
-		if ( spellProgression ) cols.push(...spellProgression.cols);
+		if (item.type === "class") cols.push({ class: "prof", span: 1 });
+		if (hasFeatures) cols.push({ class: "features", span: 1 });
+		if (scaleValues.column.length) cols.push({ class: "scale", span: scaleValues.column.length });
+		if (spellProgression) cols.push(...spellProgression.cols);
 
 		const featuresInTable = new Set();
 
 		const rows = [];
-		for ( const level of Array.fromRange((CONFIG.BlackFlag.maxLevel - initialLevel + 1), initialLevel) ) {
+		for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel - initialLevel + 1, initialLevel)) {
 			const features = {};
-			if ( (item.type === "class") && (level === CONFIG.BlackFlag.subclassLevel) ) {
+			if (item.type === "class" && level === CONFIG.BlackFlag.subclassLevel) {
 				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
 			}
 
-			for ( const advancement of item.system.advancement.byLevel(level) ) {
-				switch ( advancement.constructor.typeName ) {
+			for (const advancement of item.system.advancement.byLevel(level)) {
+				switch (advancement.constructor.typeName) {
 					case "grantFeatures":
-						advancement.configuration.pool.forEach(d => features[d.uuid] = linkForUUID(d.uuid, { element: true }));
+						advancement.configuration.pool.forEach(d => (features[d.uuid] = linkForUUID(d.uuid, { element: true })));
 						break;
 					case "expandedTalentList":
 					case "improvement":
@@ -226,28 +223,30 @@ export default class ClassPageSheet extends JournalPageSheet {
 			}
 			Object.keys(features).forEach(uuid => featuresInTable.add(uuid));
 
-			for ( const uuid of featuresInTable ) {
+			for (const uuid of featuresInTable) {
 				const scales = scaleValues.grouped.get(uuid)?.filter(s => s.configuration.scale[level]);
-				if ( !scales?.length ) continue;
+				if (!scales?.length) continue;
 				const values = scales.map(s => s.valueForLevel(level).display);
 				features[uuid] ??= linkForUUID(uuid, { element: true });
 				features[uuid].innerHTML += ` (${game.i18n.getListFormatter({ type: "unit" }).format(values)})`;
 			}
 
 			// Level & proficiency bonus
-			const cells = [{class: "level", content: level.ordinalString()}]; // TODO: Use proper ordinal localization
-			if ( item.type === "class" ) cells.push({class: "prof", content: `+${Proficiency.calculateMod(level)}`});
-			if ( hasFeatures ) cells.push({
-				class: "features", content: Object.values(features).map(f =>
-					foundry.utils.getType(f) === "string" ? f : f.outerHTML
-				).join(", ")
-			});
-			scaleValues.column.forEach(s => cells.push({class: "scale", content: s.valueForLevel(level)?.display}));
+			const cells = [{ class: "level", content: level.ordinalString() }]; // TODO: Use proper ordinal localization
+			if (item.type === "class") cells.push({ class: "prof", content: `+${Proficiency.calculateMod(level)}` });
+			if (hasFeatures)
+				cells.push({
+					class: "features",
+					content: Object.values(features)
+						.map(f => (foundry.utils.getType(f) === "string" ? f : f.outerHTML))
+						.join(", ")
+				});
+			scaleValues.column.forEach(s => cells.push({ class: "scale", content: s.valueForLevel(level)?.display }));
 			const spellCells = spellProgression?.rows[level - 1];
-			if ( spellCells ) cells.push(...spellCells);
+			if (spellCells) cells.push(...spellCells);
 
 			// Skip empty rows on subclasses
-			if ( (item.type !== "subclass") || !foundry.utils.isEmpty(features) || scaleValues.length || spellCells ) {
+			if (item.type !== "subclass" || !foundry.utils.isEmpty(features) || scaleValues.length || spellCells) {
 				rows.push(cells);
 			}
 		}
@@ -283,37 +282,39 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _getSpellProgression(item) {
 		const spellcasting = item.system.spellcasting;
-		if ( !spellcasting ) return null;
+		if (!spellcasting) return null;
 
 		const table = { rows: [] };
 
-		if ( spellcasting.type === "leveled" ) {
+		if (spellcasting.type === "leveled") {
 			const spells = {};
-			Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1).forEach(l => spells[`ring-${l}`] = {});
+			Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1).forEach(l => (spells[`ring-${l}`] = {}));
 
 			let largestSlot;
-			for ( const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse() ) {
+			for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse()) {
 				const progression = { leveled: 0 };
 				SpellcastingTemplate.computeClassProgression(progression, item, { levels: level, spellcasting });
 				SpellcastingTemplate.prepareSpellcastingSlots(spells, "leveled", progression);
 
-				if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, data) =>
-					data.max && (data.level > slot) ? data.level : slot
-				, -1);
+				if (!largestSlot)
+					largestSlot = Object.values(spells).reduce(
+						(slot, data) => (data.max && data.level > slot ? data.level : slot),
+						-1
+					);
 
-				table.rows.push(Array.fromRange(largestSlot, 1).map(ring => {
-					return {class: "spell-slots", content: spells[`ring-${ring}`]?.max || "&mdash;"};
-				}));
+				table.rows.push(
+					Array.fromRange(largestSlot, 1).map(ring => {
+						return { class: "spell-slots", content: spells[`ring-${ring}`]?.max || "&mdash;" };
+					})
+				);
 			}
 
 			// Prepare headers & columns
 			const rings = CONFIG.BlackFlag.spellRings();
-			table.headers = [Array.fromRange(largestSlot, 1).map(ring => ({content: rings[ring]}))];
-			table.cols = [{class: "spellcasting", span: largestSlot}];
+			table.headers = [Array.fromRange(largestSlot, 1).map(ring => ({ content: rings[ring] }))];
+			table.cols = [{ class: "spellcasting", span: largestSlot }];
 			table.rows.reverse();
-		}
-
-		else {
+		} else {
 			/**
 			 * A hook event that fires to generate the table for custom spellcasting types.
 			 * The actual hook names include the spellcasting type (e.g. `blackFlag.buildPsionicSpellcastingTable`).
@@ -323,9 +324,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 			 * @function blackFlag.buildSpellcastingTable
 			 * @memberof hookEvents
 			 */
-			Hooks.callAll(
-				`blackFlag.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting
-			);
+			Hooks.callAll(`blackFlag.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting);
 		}
 
 		return table;
@@ -341,28 +340,35 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object[]}   Prepared features.
 	 */
 	async _getFeatures(item, { features }) {
-		const makeTag = level => game.i18n.format("BF.Feature.Tag", {
-			level: numberFormat(level, { ordinal: true }),
-			owner: item.name,
-			type: game.i18n.localize("BF.Item.Type.Feature[one]")
-		});
+		const makeTag = level =>
+			game.i18n.format("BF.Feature.Tag", {
+				level: numberFormat(level, { ordinal: true }),
+				owner: item.name,
+				type: game.i18n.localize("BF.Item.Type.Feature[one]")
+			});
 
 		let prepared = [];
-		for ( const advancement of item.system.advancement.byType("grantFeatures") ) {
+		for (const advancement of item.system.advancement.byType("grantFeatures")) {
 			const level = advancement.level.value;
-			prepared.push(...advancement.configuration.pool.map(async d => {
-				const doc = features.get(d.uuid);
-				return {
-					level, document, name: doc.name,
-					description: await TextEditor.enrichHTML(doc.system.description.value, {
-						relativeTo: doc, secrets: false, async: true
-					}),
-					tag: makeTag(level)
-				};
-			}));
+			prepared.push(
+				...advancement.configuration.pool.map(async d => {
+					const doc = features.get(d.uuid);
+					return {
+						level,
+						document,
+						name: doc.name,
+						description: await TextEditor.enrichHTML(doc.system.description.value, {
+							relativeTo: doc,
+							secrets: false,
+							async: true
+						}),
+						tag: makeTag(level)
+					};
+				})
+			);
 		}
 
-		for ( const advancement of item.system.advancement.byType("improvement") ) {
+		for (const advancement of item.system.advancement.byType("improvement")) {
 			prepared.push({
 				level: advancement.level.value,
 				name: advancement.titleForLevel(),
@@ -372,25 +378,30 @@ export default class ClassPageSheet extends JournalPageSheet {
 			});
 		}
 
-		if ( item.type === "class" ) prepared.push({
-			level: CONFIG.BlackFlag.subclassLevel,
-			name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
-			description: this.document.system.description.subclassAdvancement ? await TextEditor.enrichHTML(
-				this.document.system.description.subclassAdvancement, {
-					relativeTo: item, secrets: false, async: true
-				}) : game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
-			tag: makeTag(CONFIG.BlackFlag.subclassLevel)
-		});
-
-		if ( item.type === "subclass" ) {
-			const advancement = item.system.advancement.byType("expandedTalentList")[0];
-			if ( advancement ) prepared.push({
+		if (item.type === "class")
+			prepared.push({
 				level: CONFIG.BlackFlag.subclassLevel,
-				name: advancement.titleForLevel(),
-				document: advancement,
-				description: await advancement.journalSummary(),
+				name: game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name }),
+				description: this.document.system.description.subclassAdvancement
+					? await TextEditor.enrichHTML(this.document.system.description.subclassAdvancement, {
+							relativeTo: item,
+							secrets: false,
+							async: true
+						})
+					: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
 				tag: makeTag(CONFIG.BlackFlag.subclassLevel)
 			});
+
+		if (item.type === "subclass") {
+			const advancement = item.system.advancement.byType("expandedTalentList")[0];
+			if (advancement)
+				prepared.push({
+					level: CONFIG.BlackFlag.subclassLevel,
+					name: advancement.titleForLevel(),
+					document: advancement,
+					description: await advancement.journalSummary(),
+					tag: makeTag(CONFIG.BlackFlag.subclassLevel)
+				});
 		}
 
 		return (await Promise.all(prepared)).sort((lhs, rhs) => lhs.level - rhs.level);
@@ -406,17 +417,21 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object[]} - Prepared subclasses.
 	 */
 	async _getSubclasses(subclasses, { features }) {
-		return await Promise.all(subclasses.map(async document => {
-			return {
-				document,
-				name: document.name,
-				description: await TextEditor.enrichHTML(document.system.description.value, {
-					relativeTo: document, secrets: false, async: true
-				}),
-				features: await this._getFeatures(document, { features }),
-				table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
-			};
-		}));
+		return await Promise.all(
+			subclasses.map(async document => {
+				return {
+					document,
+					name: document.name,
+					description: await TextEditor.enrichHTML(document.system.description.value, {
+						relativeTo: document,
+						secrets: false,
+						async: true
+					}),
+					features: await this._getFeatures(document, { features }),
+					table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
+				};
+			})
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -435,7 +450,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
 
-		for ( const element of html.querySelectorAll("[data-action]") ) {
+		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
 	}
@@ -449,26 +464,27 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _onAction(event) {
 		const { action, ...properties } = event.currentTarget.dataset;
-		switch ( action ) {
+		switch (action) {
 			case "delete":
 				const container = event.currentTarget.closest("[data-item-uuid]");
 				const uuidToDelete = container?.dataset.itemUuid;
-				if ( !uuidToDelete ) return;
-				switch ( container.dataset.itemType ) {
+				if (!uuidToDelete) return;
+				switch (container.dataset.itemType) {
 					case "linked":
-						await this.document.update({"system.item": ""});
+						await this.document.update({ "system.item": "" });
 						return this.render();
 					case "subclass":
 						const subclassCollection = this.document.system.subclasses;
 						subclassCollection.delete(uuidToDelete);
-						await this.document.update({"system.subclasses": Array.from(subclassCollection)});
+						await this.document.update({ "system.subclasses": Array.from(subclassCollection) });
 						return this.render();
 				}
 				break;
 			case "launch-text-editor":
 				const label = event.target.closest("label");
 				return new JournalEditor(this.document, {
-					textKeyPath: properties.target, title: label?.innerText
+					textKeyPath: properties.target,
+					title: label?.innerText
 				}).render(true);
 			default:
 				return log(`Unrecognized action: ${action}`, { level: "warn" });
@@ -482,17 +498,17 @@ export default class ClassPageSheet extends JournalPageSheet {
 	async _onDrop(event) {
 		const data = TextEditor.getDragEventData(event);
 
-		if ( data?.type !== "Item" ) return false;
+		if (data?.type !== "Item") return false;
 		const item = await Item.implementation.fromDropData(data);
 		const type = this.type === item.type ? "linked" : item.type;
-		switch ( type ) {
+		switch (type) {
 			case "linked":
-				await this.document.update({"system.item": item.uuid});
+				await this.document.update({ "system.item": item.uuid });
 				return this.render();
 			case "subclass":
 				const subclassCollection = this.document.system.subclasses;
 				subclassCollection.add(item.uuid);
-				await this.document.update({"system.subclasses": Array.from(subclassCollection)});
+				await this.document.update({ "system.subclasses": Array.from(subclassCollection) });
 				return this.render();
 			default:
 				return false;
