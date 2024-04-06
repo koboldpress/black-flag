@@ -424,7 +424,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		this._getRestHitDiceRecovery(config, result);
 		this._getRestHitPointRecovery(config, result);
+		this._getRestSpellSlotRecovery(config, result);
 		await this._getUsesRecovery(config, result);
+		console.log(foundry.utils.deepClone(result));
 
 		/**
 		 * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -510,6 +512,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				"system.attributes.hp.temp": 0
 			}
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any spell slot recovery needed for this rest.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 * @internal
+	 */
+	_getRestSpellSlotRecovery(config={}, result={}) {
+		for ( const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes) ) {
+			this.system.getRestSpellcastingRecovery?.(type, config, result);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

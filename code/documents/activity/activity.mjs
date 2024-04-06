@@ -182,8 +182,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
 	 *                                                  consumption or provide a list of consumption type keys defined
 	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
+	 * @property {boolean} consume.spellSlot - Should this spell consume a spell slot?
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
 	 *                                      is not allowed.
+	 * @property {object} spell
+	 * @property {number} spell.ring - Spell ring to consume. Will take priority over `scaling` on property for spells.
 	 */
 
 	/**
@@ -240,9 +243,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// Display configuration window if necessary, wait for result
 		if ( dialogConfig.configure && this.requiresConfigurationDialog(activationConfig) ) {
-			const configuration = await dialogConfig.applicationClass.create(this, activationConfig, dialogConfig.options);
-			if ( !configuration ) return;
-			foundry.utils.mergeObject(activationConfig, configuration);
+			try {
+				await dialogConfig.applicationClass.create(this, activationConfig, dialogConfig.options);
+			} catch(err) {
+				return;
+			}
 		}
 
 		// TODO: Handle upcasting
@@ -415,6 +420,21 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						throw err;
 					}
 				}
+			}
+		}
+
+		if ( ((config.consume === true) || config.consume.spellSlot) && this.isSpell ) {
+			const ring = config.spell?.ring ?? this.item.system.ring?.value ?? this.item.system.ring?.base;
+			// TODO: Support other spellcasting types
+			const ringData = this.actor.system.spellcasting?.rings[`ring-${ring}`];
+			if ( ringData?.value ) {
+				updates.actor[`system.spellcasting.rings.ring-${ring}.spent`] = ringData.spent + 1;
+			} else {
+				const err = new ConsumptionError(game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
+					ring: CONFIG.BlackFlag.spellRings()[ring]
+				}));
+				errors.push(err);
+				ui.notifications.error(err.message, { console: false });
 			}
 		}
 

@@ -140,4 +140,53 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			});
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Resting               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any spell slot recovery needed for this rest.
+	 * @param {string} type - Type of spellcasting slots being recovered.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 */
+	getRestSpellcastingRecovery(type, config={}, result={}) {
+		/**
+		 * Perform any spell slot recovery needed for this rest.
+		 * The actual hook names include the spellcasting type (e.g. `blackFlag.getRestLeveledRecovery`).
+		 * @param {object} config
+		 * @param {BlackFlagActor} config.actor - Actor being rested.
+		 * @param {string} config.type - Type of spellcasting slots being recovered.
+		 * @param {RestConfiguration} config.config - Configuration options for the rest.
+		 * @param {RestResult} config.result - Rest result being constructed.
+		 * @returns {boolean} - Explicitly return false to prevent default rest recovery from being performed.
+		 * @function blackFlag.getRestRecovery
+		 * @memberof hookEvents
+		 */
+		const allowed = Hooks.call(`blackFlag.getRest${type.capitalize()}Recovery`, {
+			actor: this.parent, type, config, result
+		});
+
+		if ( allowed && (type === "leveled") ) {
+			this.getRestLeveledRecovery(config, result);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any recovery of leveled spell slots for this rest.
+	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
+	 * @param {RestResult} [result={}] - Rest result being constructed.
+	 */
+	getRestLeveledRecovery(config={}, result={}) {
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		if ( !restConfig.recoverLeveledSpellSlots ) return;
+		const actorUpdates = {};
+		for ( const level of Array.fromRange(this.spellcasting.maxRing, 1) ) {
+			actorUpdates[`system.spellcasting.rings.ring-${level}.spent`] = 0;
+		}
+		foundry.utils.mergeObject(result, { actorUpdates });
+	}
 }

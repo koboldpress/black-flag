@@ -1,3 +1,21 @@
 <form>
-	Blah
+
+	{{#if spell.rings}}
+		<div class="form-group">
+			<label>{{ localize "BF.Spell.Ring.Label" }}</label>
+			<div class="form-fields">
+				<select name="spell.ring" data-dtype="Number">
+					{{ selectOptions spell.rings selected=spell.ring labelAttr="label"}}
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="checkbox">
+				<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>
+				{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}
+			</label>
+		</div>
+	{{/if}}
+
 </form>

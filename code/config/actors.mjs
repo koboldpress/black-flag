@@ -190,6 +190,7 @@ export const movementTags = {
  * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
  * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
+ * @property {boolean} [recoverLeveledSpellSlots=false] - Should regular spell slots be recovered?
  * @property {string[]} [recoverPeriods] - Recovery periods as defined in `CONFIG.BlackFlag.recoveryPeriods` that
  *                                         should be applied when this rest is taken.
  */
@@ -214,6 +215,7 @@ export const rest = {
 			dialogClass: LongRestDialog,
 			recoverHitPoints: true,
 			recoverHitDice: true,
+			recoverLeveledSpellSlots: true,
 			recoverPeriods: ["longRest", "shortRest"]
 		}
 	},
