@@ -35,10 +35,12 @@ import { spellRings } from "./spellcasting.mjs";
 export const consumptionTypes = {
 	activity: {
 		label: "BF.Consumption.Type.ActivityUses.Label",
+		prompt: "BF.Consumption.Type.ActivityUses.Prompt",
 		consume: "consumeActivity"
 	},
 	item: {
 		label: "BF.Consumption.Type.ItemUses.Label",
+		prompt: "BF.Consumption.Type.ItemUses.Prompt",
 		consume: "consumeItem",
 		validTargets: activity => {
 			const otherItems = activity.item.actor?.items
@@ -49,6 +51,7 @@ export const consumptionTypes = {
 	},
 	hitDice: {
 		label: "BF.Consumption.Type.HitDice.Label",
+		prompt: "BF.Consumption.Type.HitDice.Prompt",
 		consume: "consumeHitDice",
 		validTargets: activity => [
 			{ key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest") },
@@ -58,6 +61,7 @@ export const consumptionTypes = {
 	},
 	spellSlots: {
 		label: "BF.Consumption.Type.SpellSlots.Label",
+		prompt: "BF.Consumption.Type.SpellSlots.Prompt",
 		consume: "consumeSpellSlots",
 		validTargets: activity => {
 			const rings = spellRings();

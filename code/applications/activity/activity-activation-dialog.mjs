@@ -97,12 +97,18 @@ export default class ActivityActivationDialog extends Dialog {
 			foundry.utils.deepClone(this.config),
 			{
 				activity: this.activity,
+				resources: this._prepareResourceOptions(),
 				spell: {
 					rings: this._prepareSpellSlotOptions()
 				}
 			},
 			{ inplace: false }
 		);
+		data.show = {
+			spellConsumption: this.activity.isSpell, // TODO: Make sure spell actually consumes a slot
+			spellRingSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.rings),
+			resourceConsumption: !foundry.utils.isEmpty(data.resources)
+		};
 
 		context.content = await renderTemplate(
 			"systems/black-flag/templates/activities/activity-activation-dialog.hbs",
@@ -110,6 +116,26 @@ export default class ActivityActivationDialog extends Dialog {
 		);
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create possible resources that will be consumed by this item.
+	 * @returns {object}
+	 */
+	_prepareResourceOptions() {
+		const types = {};
+		for (const target of this.activity.consumption.targets) {
+			const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
+			types[target.type] = {
+				label: game.i18n.localize(CONFIG.BlackFlag.consumptionTypes[target.type]?.prompt ?? target.type),
+				selected:
+					(isArray && this.config.consume.resources.includes(target.type)) ||
+					(!isArray && this.config.consume?.resources !== false && this.config.consume !== false)
+			};
+		}
+		return types;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -144,7 +170,7 @@ export default class ActivityActivationDialog extends Dialog {
 		super.activateListeners(jQuery);
 		const [html] = jQuery;
 
-		for (const field of html.querySelectorAll("input, select, textarea")) {
+		for (const field of html.querySelectorAll("input, select, textarea, multi-select, multi-checkbox")) {
 			field.addEventListener("change", this._onChangeInput.bind(this));
 		}
 	}
@@ -158,8 +184,9 @@ export default class ActivityActivationDialog extends Dialog {
 	 */
 	async _onChangeInput(event) {
 		const form = event.target.form ?? event.target.closest("form");
-		const formData = new FormDataExtended(form);
-		foundry.utils.mergeObject(this.config, formData.object);
+		const formData = new FormDataExtended(form).object;
+		formData["consume.resources"] ??= false;
+		foundry.utils.mergeObject(this.config, formData);
 		this.render();
 	}
 }
