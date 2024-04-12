@@ -137,7 +137,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A tiny, pulsing mote weaves through the night. As it approaches, its phosphorescent glow slowly dims into blackness. Seconds later, the thing erupts with a blinding flash.</em></p><p>Star crows are tiny, formless alien beings that lack sentience or emotion. These glowing creatures are drawn to sentient beings, feeding ravenously on the beings’ thoughts. They have also been known to carry and transfer memories of one sentient creature to another. Star crows transmit these thoughts as a powerful illusory experience, a pastiche of raw emotion, color, images, and sounds. Some star crows bear the wisdom of primordial beings, while others deliver incomprehensible knowledge.</p><p><strong>Immortal.</strong> Star crows have an infinite lifespan. They do not age and do not require food, water, air, or rest. The memories each star crow carries degrade, combine, or interlace with the eons of visions a single star crow may possess. A star crow reproduces by splitting, making a perfect copy of itself, when it acquires too many memories to handle without corruption. A newly spawned star crow assumes about a fourth of the information, lessening the burden of its parent.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -154,7 +154,8 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "tint": null
     },
     "width": 0.5,
     "height": 0.5,
@@ -172,9 +173,9 @@
     "light": {
       "alpha": 0.5,
       "angle": 360,
-      "bright": 0,
+      "bright": 30,
       "coloration": 1,
-      "dim": 0,
+      "dim": 60,
       "attenuation": 0.5,
       "luminosity": 0.5,
       "saturation": 0,
@@ -189,7 +190,8 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -199,7 +201,8 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
@@ -209,7 +212,7 @@
     {
       "name": "Aberrant Resilience",
       "type": "feature",
-      "_id": "bi3re7WbP1RJykoa",
+      "_id": "7YPxEiw14vmWgHZ8",
       "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
       "system": {
         "activities": {},
@@ -223,7 +226,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed, frightened, paralyzed, and stunned conditions, and it has advantage on saves against spells or effects that would alter its form.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -284,11 +289,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!GCLXU9huKDU164WF.bi3re7WbP1RJykoa.vyiAWYKxFWNBOFa1"
+          "_key": "!actors.items.effects!GCLXU9huKDU164WF.7YPxEiw14vmWgHZ8.vyiAWYKxFWNBOFa1"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 500000,
       "ownership": {
         "default": 0
       },
@@ -304,13 +309,359 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709672456179,
-        "modifiedTime": 1709697090844,
+        "modifiedTime": 1712945758786,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!GCLXU9huKDU164WF.bi3re7WbP1RJykoa"
+      "_key": "!actors.items!GCLXU9huKDU164WF.7YPxEiw14vmWgHZ8"
+    },
+    {
+      "name": "Illumination",
+      "type": "feature",
+      "_id": "QGpVCcTGmdCw3CtE",
+      "img": "icons/magic/light/explosion-star-glow-orange.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] sheds bright light in a 30-foot radius and dim light for an additional 30 feet.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.7hFDJ5ZQs8kK4Uyx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711683171451,
+        "modifiedTime": 1712945757145,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!GCLXU9huKDU164WF.QGpVCcTGmdCw3CtE"
+    },
+    {
+      "name": "Radiant Touch",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "xD1ALFUsNaKJwYhi": {
+            "type": "attack",
+            "_id": "xD1ALFUsNaKJwYhi",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "radiant"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage, and the star crow attaches to the target. While attached, the star crow can use only the Thought Share action and Blinding Burst bonus action, and it moves with the target whenever the target moves, requiring none of the star crow’s movement. The star crow can detach itself by spending 5 feet of its movement. A creature, including the target, can take its action to detach the star crow by succeeding on a [[/check strength 13]] check.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "Hrs8tekfmPa76OD0",
+      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945771995,
+        "modifiedTime": 1712945893789,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!GCLXU9huKDU164WF.Hrs8tekfmPa76OD0"
+    },
+    {
+      "name": "Thought Share",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "O9R0mvfZCgiqYTAC": {
+            "type": "savingThrow",
+            "_id": "O9R0mvfZCgiqYTAC",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "psychic"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The star crow learns some of the attached target’s memories, and the attached target experiences a rapid sequence of memories from other creatures the star crow has encountered. The target takes [[/damage average]] damage and must succeed on a [[/save]] save or be stunned until the end of its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "i7ORuNrwvzm8a6tH",
+      "img": "icons/magic/control/energy-stream-link-large-white.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945775022,
+        "modifiedTime": 1712945945638,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!GCLXU9huKDU164WF.i7ORuNrwvzm8a6tH"
+    },
+    {
+      "name": "Blinding Burst (Rechard 5–6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "9k4nK8qJTwNyTEuC": {
+            "type": "savingThrow",
+            "_id": "9k4nK8qJTwNyTEuC",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The star crow dims then suddenly bursts with blinding light. Each creature within 30 feet of the star crow must succeed on a [[/save]] save or be blinded until the end of its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "wmk3E9CgZKHdxXLM",
+      "img": "icons/magic/light/explosion-star-large-blue-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945775183,
+        "modifiedTime": 1712946000603,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!GCLXU9huKDU164WF.wmk3E9CgZKHdxXLM"
     }
   ],
   "effects": [],
@@ -321,10 +672,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709697032861,
-    "modifiedTime": 1711749277201,
+    "modifiedTime": 1712946013752,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!GCLXU9huKDU164WF"

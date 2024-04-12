@@ -24,7 +24,7 @@
         },
         "lair": null
       },
-      "cr": 0,
+      "cr": 0.25,
       "hp": {
         "value": 14,
         "max": 14,
@@ -191,9 +191,125 @@
   },
   "items": [
     {
+      "name": "Heightened Smell",
+      "type": "feature",
+      "_id": "HCtVWEcqYC1djRnW",
+      "img": "icons/creatures/mammals/rodent-rat-diseaed-gray.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] when perceiving by smell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.uzeXFvQwCNVxZZMS"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773463778,
+        "modifiedTime": 1712947453149,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!42AgwMUryk85tzJH.HCtVWEcqYC1djRnW"
+    },
+    {
+      "name": "Swarm",
+      "type": "feature",
+      "_id": "ThDWlnxHn0hdj66C",
+      "img": "icons/creatures/mammals/bats-movement-flying-black.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The swarm can occupy another creature’s space and vice versa, and the swarm can move through any opening large enough for a Tiny creature. The swarm can’t regain HP or gain temporary HP.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.kC9TKtWUoD2DTVDp"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712947411258,
+        "modifiedTime": 1712947451905,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!42AgwMUryk85tzJH.ThDWlnxHn0hdj66C"
+    },
+    {
       "name": "Swarm Resilience",
       "type": "feature",
-      "_id": "4nEv21tG2rP90BhW",
+      "_id": "dG7hBNUJ05WKqgPL",
       "img": "icons/creatures/mammals/bats-movement-flying-purple.webp",
       "system": {
         "activities": {},
@@ -207,7 +323,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The swarm is resistant to bludgeoning, piercing, and slashing damage, and it is immune to the charmed, frightened, grappled, paralyzed, petrified, prone, restrained, and stunned conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -309,11 +427,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!42AgwMUryk85tzJH.4nEv21tG2rP90BhW.3ERxb3PXwsGCpkfJ"
+          "_key": "!actors.items.effects!42AgwMUryk85tzJH.dG7hBNUJ05WKqgPL.3ERxb3PXwsGCpkfJ"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 3300000,
       "ownership": {
         "default": 0
       },
@@ -329,13 +447,176 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709697997263,
-        "modifiedTime": 1709698146419,
+        "modifiedTime": 1712947454414,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!42AgwMUryk85tzJH.4nEv21tG2rP90BhW"
+      "_key": "!actors.items!42AgwMUryk85tzJH.dG7hBNUJ05WKqgPL"
+    },
+    {
+      "name": "Bites",
+      "type": "feature",
+      "_id": "aXzupVXOIUaY0YZ8",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "2",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 0 ft., one target. <em>Hit:</em> [[/damage average]] damage, or [[/damage 1d6 piercing average]] damage if the swarm has half of its HP or fewer. If the target is a creature, it must make a [[/save constitution 9]] save. On a failure, the target contracts the <em>rat plague</em> disease or is poisoned until the end of its next turn (the GM’s choice).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 3400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712947567475,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!42AgwMUryk85tzJH.aXzupVXOIUaY0YZ8"
+    },
+    {
+      "name": "Rat Plague",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Many rats, especially those found in urban environments and swamps, carry the following unique disease that spreads through their bites. At the GM’s discretion, a rat might not spread this disease, poisoning the target instead.</p><p><strong>Rat Plague.</strong> This disease is passed through the bites of infected rats, but rats are immune to the disease’s effects. Until the disease is cured, the creature is poisoned and can’t regain HP except by magical means. Every 24 hours that elapse, the infected creature must repeat the save (using the DC of the infecting rat’s Bite), reducing its HP maximum by 3 ([[/damage 1d6 max average]]{1d6}) on a failure. The disease is cured on a success. This reduction lasts until the creature finishes a long rest after the disease is cured. The creature dies if the disease reduces its HP maximum to 0.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "EW51IzeYlLDxRz0L",
+      "img": "icons/creatures/mammals/rodent-rat-diseaed-gray.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 3350000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcs.Actor.XfSCmCndblO973ag.Item.EH0Q2BgcQKLUA3eJ"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712947260439,
+        "modifiedTime": 1712947539970,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!42AgwMUryk85tzJH.EW51IzeYlLDxRz0L"
     }
   ],
   "effects": [],
@@ -346,10 +627,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709697966348,
-    "modifiedTime": 1711585667566,
+    "modifiedTime": 1712947567475,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!42AgwMUryk85tzJH"

@@ -124,7 +124,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>The sound of buzzing wings whines nearby. A tiny humanoid, held aloft on dragonfly wings, appears as though from thin air.</em></p><p>Sprites are diminutive fey that protect the deepest forests and the holiest glades. Attentive and well trained in guerrilla tactics, sprites are among the most aggressive and loyal fey. They may appear to travelers and parlay, uncovering interlopers’ intentions with their Heart Sight and acting against those whose intentions are suspect.</p><p><strong>Unseen Warriors.</strong> Sprites travel through the forest in bands of six to one hundred. They mask their numbers using their diminutive size and natural ability to turn invisible. Though sprites have been known to turn would-be trespassers away from their forest homes with traps, noises, or theatrical distractions, they are armed with arrows that can put creatures into a deep sleep. While their quarry sleeps, they may fetch a far more dangerous threat, retreat, or signal for reinforcements to dissuade further hostility.</p><p><strong>Stern Protectors.</strong> Unlike many fey, sprites are serious, even-tempered, and intent on doing as little harm as possible. Those they judge worthy might find themselves protected within the sprites’ territory, while those found wanting could walk headlong into ambushes, traps, and enraged beasts. Sprites refrain from tricks and mischief but suffer no evil within their domains.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -265,7 +265,7 @@
     {
       "name": "Fey Resilience",
       "type": "feature",
-      "_id": "Hd5mv6m0rPhcVTrC",
+      "_id": "Tl7U1kNMGhoKarVo",
       "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
       "system": {
         "activities": {},
@@ -279,7 +279,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to the charmed and unconscious conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -327,11 +329,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!MF5NbhwjTV9b2dLB.Hd5mv6m0rPhcVTrC.xsKr4hZ7kVgeQaXM"
+          "_key": "!actors.items.effects!MF5NbhwjTV9b2dLB.Tl7U1kNMGhoKarVo.xsKr4hZ7kVgeQaXM"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": -100000,
       "ownership": {
         "default": 0
       },
@@ -347,13 +349,571 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709696905232,
-        "modifiedTime": 1709697001365,
+        "modifiedTime": 1712945478083,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!MF5NbhwjTV9b2dLB.Hd5mv6m0rPhcVTrC"
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.Tl7U1kNMGhoKarVo"
+    },
+    {
+      "name": "Speak with Beasts and Plants",
+      "type": "feature",
+      "_id": "GDDG6941N3gPa7So",
+      "img": "icons/magic/nature/elemental-plant-humanoid.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can communicate with Beasts and Plants as if they shared a language.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.4UQaovocUe3K1Ali"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945439296,
+        "modifiedTime": 1712945476116,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.GDDG6941N3gPa7So"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Shortsword",
+      "type": "weapon",
+      "_id": "dvKPRtlfJT65QTLi",
+      "img": "icons/weapons/swords/shortsword-guard-brass.webp",
+      "system": {
+        "activities": {
+          "zdvnhG3M5w0njnjn": {
+            "type": "attack",
+            "_id": "zdvnhG3M5w0njnjn",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "shortsword"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701025035557,
+        "modifiedTime": 1712945493116,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.dvKPRtlfJT65QTLi"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Shortbow",
+      "type": "weapon",
+      "_id": "0ulZgnmV5Y2d1rKu",
+      "img": "icons/weapons/bows/shortbow-arrows-black.webp",
+      "system": {
+        "activities": {
+          "D0FYdeEdtvBoLM3B": {
+            "type": "attack",
+            "_id": "D0FYdeEdtvBoLM3B",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage, and the target must succeed on a [[/save constitution 13]] save or become poisoned for 1 minute. If the save fails by 5 or more, the poisoned target falls unconscious for the same duration, or until it takes damage or another creature takes an action to shake it awake.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "simple",
+          "base": "shortbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 80,
+          "long": 320,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.jqDqlfsNkDCUIYHZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024643661,
+        "modifiedTime": 1712945538527,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.0ulZgnmV5Y2d1rKu"
+    },
+    {
+      "name": "Invisibility",
+      "type": "feature",
+      "_id": "u4HB5MNMd67nPOe3",
+      "img": "icons/creatures/magical/spirit-fear-energy-pink.webp",
+      "system": {
+        "activities": {
+          "nwNhUHGQlOCPrFCi": {
+            "type": "utility",
+            "_id": "nwNhUHGQlOCPrFCi",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically turns invisible until it attacks or until its concentration ends (as if concentrating on a spell). Any equipment the [[lookup @name lowercase]] wears or carries is invisible with it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.1IHhl4zwr49sgVQS"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711503394460,
+        "modifiedTime": 1712945578902,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.u4HB5MNMd67nPOe3"
+    },
+    {
+      "name": "Heart Sight",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "tTIr2Gg5SicY2Ou7": {
+            "type": "savingThrow",
+            "_id": "tTIr2Gg5SicY2Ou7",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The sprite touches a creature and magically knows the creature’s current emotional state. If the target fails a [[/save]] save, the sprite also knows if the creature has malign intentions or intends to commit malevolent acts within the next hour. Celestials, Fiends, and Undead automatically fail the save.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "cB3TeOyN6azoKmEz",
+      "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945589386,
+        "modifiedTime": 1712945667977,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.cB3TeOyN6azoKmEz"
+    },
+    {
+      "name": "Swift Flight",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "muyx5qisamTrPiz0": {
+            "type": "utility",
+            "_id": "muyx5qisamTrPiz0",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The sprite moves up to half its speed without provoking opportunity attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "wNhzbdQaFR4VMVyf",
+      "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945674736,
+        "modifiedTime": 1712945707758,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!MF5NbhwjTV9b2dLB.wNhzbdQaFR4VMVyf"
     }
   ],
   "effects": [],
@@ -364,10 +924,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709696846797,
-    "modifiedTime": 1711585769201,
+    "modifiedTime": 1712945707758,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!MF5NbhwjTV9b2dLB"

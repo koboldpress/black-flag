@@ -129,7 +129,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Half hidden in darkness, skeletal bones clad in rusted armor and rotten clothing lurch toward you. The thing’s bony hands grip a sword with malign intent.</em></p><p>Skeletons are fleshless undead that have been reconstructed and animated by fell magic. Soulless, emotionless, and driven by the whims of their master, the skeleton is an unshakable guardian. Skeletons can be found in desecrated temples, graveyards, and cemeteries where they can watch, completely motionless, for eons. New and masterful necromancers use skeletons as stalwart guards and servants, though they understand such creatures have no loyalty beyond the magic that controls them.</p><p><strong>Dark Intelligence.</strong> While lacking humanoid intelligence, skeletons possess a cleverness that extends beyond a mere beast or construct. Their malicious minds remember how to wield weapons and armor, and they collect and use weapons or shields taken from the recent dead. Skeletons look upon the living with eyeless sockets and unsettling patience as their instincts judge distances, tactics, and methods to separate a potential target’s flesh from their bones.</p><p><strong>Moldering Bodies.</strong> Though dried strands of tendon or wisps of stubborn hair may cling to a skeleton, magic alone is responsible for its movement. Piercing weapons and arrows may skip from the skeleton’s hardened bone, but heavy blows shatter them.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -202,6 +202,122 @@
   },
   "items": [
     {
+      "name": "False Appearance",
+      "type": "feature",
+      "_id": "q6pN9JVlxJiWVRhj",
+      "img": "icons/commodities/treasure/statue-carved-figurehead.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While the [[lookup @name lowercase]] remains motionless and prone, it is indistinguishable from an inanimate Humanoid skeleton.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.E2PyU7EAiv162L6t"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711421375455,
+        "modifiedTime": 1712944583261,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.q6pN9JVlxJiWVRhj"
+    },
+    {
+      "name": "Undead Nature",
+      "type": "feature",
+      "img": "icons/magic/death/skeleton-eye-skull-glow-orange.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.7sxXRJayum4g5Y2A"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706467888787,
+        "modifiedTime": 1712944562657,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "210mXizpusAgKRxG",
+      "sort": -50000,
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.210mXizpusAgKRxG"
+    },
+    {
       "name": "Undead Resilience",
       "type": "feature",
       "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
@@ -217,7 +333,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -271,7 +389,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!IN6xQ0eaTEGbzbjC.KXucbgJeMHZE5UtP.eTrciZFtsPDaLR2j"
+          "_key": "!actors.items.effects!IN6xQ0eaTEGbzbjC.gKsx7UYjorGizhyG.eTrciZFtsPDaLR2j"
         }
       ],
       "folder": null,
@@ -290,15 +408,350 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706467905493,
-        "modifiedTime": 1709673786022,
+        "modifiedTime": 1712944563713,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "KXucbgJeMHZE5UtP",
+      "_id": "gKsx7UYjorGizhyG",
+      "sort": -25000,
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.gKsx7UYjorGizhyG"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Shortsword",
+      "type": "weapon",
+      "_id": "s3GSGLCRIY98uCYD",
+      "img": "icons/weapons/swords/shortsword-guard-brass.webp",
+      "system": {
+        "activities": {
+          "zdvnhG3M5w0njnjn": {
+            "type": "attack",
+            "_id": "zdvnhG3M5w0njnjn",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "shortsword"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
       "sort": 0,
-      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.KXucbgJeMHZE5UtP"
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701025035557,
+        "modifiedTime": 1712944548431,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.s3GSGLCRIY98uCYD"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Shortbow",
+      "type": "weapon",
+      "_id": "f8sNX8s1YE0l3Lvv",
+      "img": "icons/weapons/bows/shortbow-arrows-black.webp",
+      "system": {
+        "activities": {
+          "D0FYdeEdtvBoLM3B": {
+            "type": "attack",
+            "_id": "D0FYdeEdtvBoLM3B",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "simple",
+          "base": "shortbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 80,
+          "long": 320,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.jqDqlfsNkDCUIYHZ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024643661,
+        "modifiedTime": 1712944553256,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.f8sNX8s1YE0l3Lvv"
+    },
+    {
+      "name": "Counterattack (Recharge 6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "BCOejY5sB99LoUc6": {
+            "type": "utility",
+            "_id": "BCOejY5sB99LoUc6",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the skeleton can see hits it with an attack, the skeleton can make one Shortsword or Shortbow attack against the attacker.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "H9hTa9rIqamcBWjG",
+      "img": "icons/skills/melee/swords-parry-block-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944504150,
+        "modifiedTime": 1712944538624,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!IN6xQ0eaTEGbzbjC.H9hTa9rIqamcBWjG"
     }
   ],
   "effects": [],
@@ -309,10 +762,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672944112,
-    "modifiedTime": 1711586428619,
+    "modifiedTime": 1712944583261,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!IN6xQ0eaTEGbzbjC"

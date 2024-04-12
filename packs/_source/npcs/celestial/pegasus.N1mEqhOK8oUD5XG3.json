@@ -39,10 +39,17 @@
     },
     "proficiencies": {
       "languages": {
-        "value": [],
+        "value": [
+          "common",
+          "elvish",
+          "celestial",
+          "sylvan"
+        ],
         "communication": {},
         "custom": [],
-        "tags": []
+        "tags": [
+          "cantSpeak"
+        ]
       }
     },
     "modifiers": [],
@@ -69,7 +76,9 @@
           "custom": []
         },
         "immunities": {
-          "value": [],
+          "value": [
+            "charmed"
+          ],
           "custom": []
         },
         "vulnerabilities": {
@@ -122,7 +131,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A noble flying horse, its coat shining like newly fallen snow, soars overhead on majestic, feathered wings, mane and tail streaming behind it.</em></p><p>Free-spirited creatures, pegasi soar the skies with wild dignity. Ranging far from civilization, pegasi are comfortable only in the presence of their own kind.</p><p>Intruders cause them to take wing quickly to find more secluded surroundings. Their diet is similar to mundane horses, feeding on grass and flowers in alpine meadows and taking water from mountain streams and high lakes.</p><p><strong>Mountain Nests.</strong> Fiercely protective of their young, pegasi build nests in rocky hills, atop spires and peaks inaccessible to most creatures without the power of flight. When the young are ready to leave the nest, the entire herd watches over and protects them until they reach adulthood.</p><p><strong>Heroic Servitors.</strong> Pegasi are intelligent, autonomous, and untamable. However, a being of pure heart and good intent can sometimes convince a pegasus to become its companion, especially if the being is in desperate need or faces some monumental task, such as thwarting those with evil motives.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -194,7 +203,7 @@
     {
       "name": "Celestial Resilience",
       "type": "feature",
-      "_id": "PdiZzwxGqRsWGIgG",
+      "_id": "OhEj2rmBVMASzsbJ",
       "img": "icons/magic/holy/angel-winged-humanoid-blue.webp",
       "system": {
         "activities": {},
@@ -208,7 +217,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to radiant damage.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -250,11 +261,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!N1mEqhOK8oUD5XG3.PdiZzwxGqRsWGIgG.ggk3wSDvlMxXXpMT"
+          "_key": "!actors.items.effects!N1mEqhOK8oUD5XG3.OhEj2rmBVMASzsbJ.ggk3wSDvlMxXXpMT"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": -100000,
       "ownership": {
         "default": 0
       },
@@ -270,13 +281,479 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709672696244,
-        "modifiedTime": 1709672813902,
+        "modifiedTime": 1712943207695,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!N1mEqhOK8oUD5XG3.PdiZzwxGqRsWGIgG"
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.OhEj2rmBVMASzsbJ"
+    },
+    {
+      "name": "Diving Pounce",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "Bsht1OLq6ILP1pcx": {
+            "type": "savingThrow",
+            "_id": "Bsht1OLq6ILP1pcx",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "14"
+              }
+            },
+            "activation": {
+              "type": "free",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If the pegasus is flying and moves at least 20 feet straight toward a creature and then hits it with a Hooves attack on the same turn, that target must succeed on a [[/save strength 14]] save or be knocked prone. If the target is prone, the pegasus can make one Hooves attack against it as a bonus action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "VfO1umAUvHMhhA43",
+      "img": "icons/creatures/mammals/unicorn-horned-white.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943122766,
+        "modifiedTime": 1712943189864,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.VfO1umAUvHMhhA43"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "pDsyFppAVaVCl1UN",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 4800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.jS7wIZVCAi6I2VMe"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773734467,
+        "modifiedTime": 1712943219170,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.pDsyFppAVaVCl1UN"
+    },
+    {
+      "name": "Magic Weapons",
+      "type": "feature",
+      "_id": "ASMrvmtl315ooizu",
+      "img": "icons/magic/unholy/hand-claw-fire-blue.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s weapon attacks are magical.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 4900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.d8IaVs2urx4Anq3K"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773738433,
+        "modifiedTime": 1712943222316,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.ASMrvmtl315ooizu"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "0d11hvbYkKyj1ZiC",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The pegasus makes two Hooves attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712943376773,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.0d11hvbYkKyj1ZiC"
+    },
+    {
+      "name": "Hooves",
+      "type": "feature",
+      "_id": "bV47xmPQmVHo6qKx",
+      "img": "icons/commodities/bones/hooves-cloven-brown.webp",
+      "system": {
+        "activities": {
+          "bv8nMpJx5Zffy81U": {
+            "type": "attack",
+            "_id": "bv8nMpJx5Zffy81U",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 5600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.5ndxvSRcubJLDMsW"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943243304,
+        "modifiedTime": 1712943388630,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.bV47xmPQmVHo6qKx"
+    },
+    {
+      "name": "Catch Rider",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "NAnHXBSKfB1rWhKw": {
+            "type": "utility",
+            "_id": "NAnHXBSKfB1rWhKw",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": "If the pegasus’s rider fails a check or save to remain in the saddle or is subjected to an effect that would dismount it"
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If the pegasus’s rider fails a check or save to remain in the saddle or is subjected to an effect that would dismount it, the pegasus can shift to catch the falling rider, preventing the rider from being dismounted.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "tQqTthZGq5stxBKY",
+      "img": "icons/sundries/survival/leather-strap-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 5700000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943395248,
+        "modifiedTime": 1712943486762,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!N1mEqhOK8oUD5XG3.tQqTthZGq5stxBKY"
     }
   ],
   "effects": [],
@@ -287,10 +764,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672664051,
-    "modifiedTime": 1711585639148,
+    "modifiedTime": 1712943486762,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!N1mEqhOK8oUD5XG3"

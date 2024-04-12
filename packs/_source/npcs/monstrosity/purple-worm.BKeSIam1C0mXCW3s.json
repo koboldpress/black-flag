@@ -127,7 +127,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>An enormous worm, its body armored in plates of bluish-purple chitin, bursts from the cavern floor. Its vast, toothy maw is large enough to swallow a horse whole.</em></p><p>Truly the rulers of their domains, purple worms claim the Underworld as their hunting grounds. These tremendous monsters can bore through solid rock, creating new tunnels and passageways as they travel. Any creature a purple worm encounters besides another of its kind is prey.</p><p><strong>Follow Prey by Sound.</strong> Purple worms are attracted by sound and vibration, leading most subterranean humanoids to travel as quietly as possible and ensure that battles are short and decisive. Major settlements in the Underworld have contingencies in place for a purple worm attack.</p><p><strong>Gemstones and Ore.</strong> A purple worm digests the earth and rock it ingests while tunneling, excreting it along the tunnels it creates and in the caverns where it rests. In mineral-rich areas, brave souls may find undigested gems and unrefined ores among a purple worm’s waste, or even inside its body if they are mighty enough to defeat it.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -199,7 +199,7 @@
     {
       "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "WMZkIV4s1UPoAl9D",
+      "_id": "7brdWF3Ia4fzJ8xD",
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
@@ -213,7 +213,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -261,11 +263,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!BKeSIam1C0mXCW3s.WMZkIV4s1UPoAl9D.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!BKeSIam1C0mXCW3s.7brdWF3Ia4fzJ8xD.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -281,13 +283,579 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709672879081,
+        "modifiedTime": 1712943949592,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!BKeSIam1C0mXCW3s.WMZkIV4s1UPoAl9D"
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.7brdWF3Ia4fzJ8xD"
+    },
+    {
+      "name": "Tunneler",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>A purple worm can burrow through solid rock at half its burrow speed. Doing so creates a 10-foot-diameter tunnel behind it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "kdc2mPQ1NJx12ykG",
+      "img": "icons/environment/creatures/bug-worm-spiked.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943552657,
+        "modifiedTime": 1712943949592,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.kdc2mPQ1NJx12ykG"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "pqhxc8HVUHpRoHZE",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The worm makes one Bite attack and one Tail Stinger attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712943949592,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.pqhxc8HVUHpRoHZE"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "3Yv1Sul7yjuDhLvY",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "8",
+                    "bonus": "9",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "14",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one target. Hit: [[/damage average]] damage. If the target is a Large or smaller creature, it must make a [[/save dexterity 19]] or be swallowed by the purple worm. A swallowed creature is blinded and restrained, it has total cover against attacks and other effects outside of the worm, and it takes [[/damage 6d6 acid average]] damage at the start of each of the worm’s turns.</p><p>If the worm takes 30 damage or more on a single turn from a creature inside it, the worm must succeed on a [[/save constitution 21]] save at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the worm. If the worm dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 20 feet of movement, exiting prone.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 350000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712944046542,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.3Yv1Sul7yjuDhLvY"
+    },
+    {
+      "name": "Tail Stinger",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "JAZDNrHjsbcoAWEB": {
+            "type": "attack",
+            "_id": "JAZDNrHjsbcoAWEB",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "14"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "9",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          },
+          "hM9A9CfnOVrMonJC": {
+            "type": "savingThrow",
+            "_id": "hM9A9CfnOVrMonJC",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 12,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "19"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one creature. Hit: [[/damage average]] damage, and the target must make a [[/save constitution 19]] save, taking [[/damage 12d6 poison average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "2HeIgmv8Ubl3BD3I",
+      "img": "icons/commodities/biological/stinger-insect-grey.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943632121,
+        "modifiedTime": 1712943949592,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.2HeIgmv8Ubl3BD3I"
+    },
+    {
+      "name": "Thrash (Recharge 5–6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "P4PNGk6PlVuU88jN": {
+            "type": "savingThrow",
+            "_id": "P4PNGk6PlVuU88jN",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 12,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "19"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The purple worm convulses its large body, smashing everything around it. Each creature within 20 feet of the worm must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is stunned until the end of its next turn. On a success, a creature takes half the damage and isn’t stunned.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "aKBlK0HjsG04v9ld",
+      "img": "icons/commodities/biological/tentacle-purple-white.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943644577,
+        "modifiedTime": 1712943949592,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.aKBlK0HjsG04v9ld"
+    },
+    {
+      "name": "Rapid Digestion",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "2t5TTTxSR5QI5PDx": {
+            "type": "healing",
+            "_id": "2t5TTTxSR5QI5PDx",
+            "description": "",
+            "system": {
+              "healing": {
+                "type": "healing",
+                "denomination": "8",
+                "bonus": "",
+                "custom": "",
+                "number": 2
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": true,
+                "max": "9"
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The purple worm’s digestive system absorbs some of the already digested material from creatures it has swallowed. If the purple worm has at least one swallowed creature inside it, the purple worm regains [[/healing]]. This healing increases by [[/healing 1d8]] for each creature currently inside the purple worm, to a maximum of [[/healing 10d8]].</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "vu6z1xP0NOj3b6Iv",
+      "img": "icons/commodities/biological/organ-stomach.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943659300,
+        "modifiedTime": 1712943949592,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!BKeSIam1C0mXCW3s.vu6z1xP0NOj3b6Iv"
     }
   ],
   "effects": [],
@@ -298,10 +866,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672833353,
-    "modifiedTime": 1711586280322,
+    "modifiedTime": 1712944046542,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!BKeSIam1C0mXCW3s"

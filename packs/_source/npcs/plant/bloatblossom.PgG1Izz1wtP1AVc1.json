@@ -25,7 +25,7 @@
         },
         "lair": null
       },
-      "cr": 0,
+      "cr": 2,
       "hp": {
         "value": 60,
         "max": 60,
@@ -124,7 +124,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A low hiss emerges from the shambling form crowned with fleshy fungal growth.</em></p><p>The sporeborn are humanoid creatures transformed by an infectious fungus, which takes control of victims and uses them as a vehicle to spread its spores into other hosts. The apocalyptic fungus has no real intelligence, only a drive to reproduce. Humanoids can be infected by the fungus through contaminated food or water, breathing the spore clouds, or the bite of an infected host.</p><p>Stages of Infection. Creatures infected by the apocalyptic fungus go through different stages of infection before they ultimately expire. Most die before reaching the final stage, though the fungus in their bodies continues to grow, dissolving the host’s remains. If the host body sustains serious damage or can no longer move easily, the fungus attempts to move into a dark, sheltered area so that, as the body decays, the fungus fruits and releases its spores. Sunlight kills the fungus and its spores.</p><p><strong>Bloatblossoms.</strong> Skullblooms eventually grow into bloatblossoms. A riot of fungal growth makes the body of these sporeborn broad and ungainly, with layers of tough, fibrous growth that protect it from damage. Bloatblossoms have better echolocation than the younger skullblooms, as well as nodules filled with mycotoxins that they can tear from their bodies and hurl at targets.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -194,9 +194,67 @@
   },
   "items": [
     {
+      "name": "Heightened Hearing",
+      "type": "feature",
+      "_id": "7vTU880R6bxz1BRy",
+      "img": "icons/creatures/mammals/bat-movement-flying-purple.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] while perceiving by hearing.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.HLqV7Bq9XPh7KTaB"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773583652,
+        "modifiedTime": 1712944993532,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.7vTU880R6bxz1BRy"
+    },
+    {
       "name": "Plant Resilience",
       "type": "feature",
-      "_id": "JXegdE1qfNUhcbuu",
+      "_id": "ii2YSy0xpBIOI1LT",
       "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
       "system": {
         "activities": {},
@@ -210,7 +268,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -270,11 +330,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!PgG1Izz1wtP1AVc1.JXegdE1qfNUhcbuu.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!PgG1Izz1wtP1AVc1.ii2YSy0xpBIOI1LT.4alHXchWfiVtXGAv"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": -50000,
       "ownership": {
         "default": 0
       },
@@ -290,13 +350,553 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709615924250,
-        "modifiedTime": 1709673966233,
+        "modifiedTime": 1712944995067,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!PgG1Izz1wtP1AVc1.JXegdE1qfNUhcbuu"
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.ii2YSy0xpBIOI1LT"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "Ok00YUpsub3hu6B8",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The bloatblossom makes one Bite attack and one Slam attack, or it makes two Toxic Nodule attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -25000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712945017015,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.Ok00YUpsub3hu6B8"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "WDXSESCs5WQvhtUG",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "piercing"
+                  },
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage. If the target is a Humanoid, it must succeed on a [[/save constitution 13]] save or become infected with apocalyptic fungus.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -12500,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712945349200,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.WDXSESCs5WQvhtUG"
+    },
+    {
+      "name": "Slam",
+      "type": "feature",
+      "_id": "gJuqS5Wdl6jbmwmA",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "system": {
+        "activities": {
+          "149J8Tnc5Lw1oX7W": {
+            "type": "attack",
+            "_id": "149J8Tnc5Lw1oX7W",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  },
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "5",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage. If the target is Medium or smaller, it is grappled (escape DC 13).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -6250,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.OmsfJIeLWWS4jnTd"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711421009581,
+        "modifiedTime": 1712945166271,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.gJuqS5Wdl6jbmwmA"
+    },
+    {
+      "name": "Toxic Nodule",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "xUNqxDvteLKbMOXE": {
+            "type": "attack",
+            "_id": "xUNqxDvteLKbMOXE",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "ranged",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range 30/60 ft., one target. <em>Hit:</em> [[/damage average]] damage, and the target must succeed on a [[/save constitution 13]] save or be poisoned until the end of its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "JKvEDxrW7JqxDrpO",
+      "img": "icons/magic/acid/orb-bubble-smoke-drip.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944955723,
+        "modifiedTime": 1712945082203,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.JKvEDxrW7JqxDrpO"
+    },
+    {
+      "name": "Instincy to Pursue",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "S0pbJxpITloCa0kZ": {
+            "type": "utility",
+            "_id": "S0pbJxpITloCa0kZ",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The bloatblossom takes the Dash action toward an uninfected Humanoid it can see or sense.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "z2UDGTNzzYOu5thK",
+      "img": "icons/commodities/flowers/dandelion-pod-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcs.Actor.OFvaU7jGTycWM8sp.Item.4aCRbq4jRg7nLApQ"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944732596,
+        "modifiedTime": 1712945098711,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.z2UDGTNzzYOu5thK"
+    },
+    {
+      "name": "Apocalyptic Fungus",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Disease</em></p><p>An infectious disease transmitted via fungal spores. Infected creatures become irritable and sensitive to noise. In the final stages, fibrous fungal growths sprout from the skin—particularly around the cranium. If left untreated, infected creatures turn into <strong>sporeborn skullblooms</strong>.</p><p><strong>Trigger:</strong> A humanoid that ingests food or water contaminated with the spores of the apocalyptic fungus, breathes in the spores, or is bitten by an infected creature must make a [[/save constitution 12]] save or become infected.</p><p><strong>Effects:</strong> An infected target can’t regain hit points and when it finishes a long rest must make a [[/save constitution 15]] save or gain two levels of exhaustion. When the infected target reaches the sixth level of exhaustion, it does not die but instead becomes a <strong>@UUID[Compendium.black-flag.npcs.Actor.OFvaU7jGTycWM8sp]{skullbloom}</strong>, at which point no mundane or magical healing can return the creature to its former state. If a humanoid infected with apocalyptic fungal spores is killed, it rises an hour later as a <strong>skullbloom</strong>.</p><p><strong>Resolution:</strong> Pre-transformation, the fungal infection can only be cured by the lesser restoration spell or similar magic.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "cHuOkSdaiIkW3l0M",
+      "img": "icons/magic/nature/mushroom-glow-red.webp",
+      "effects": [],
+      "folder": null,
+      "sort": -37500,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945185187,
+        "modifiedTime": 1712945363098,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!PgG1Izz1wtP1AVc1.cHuOkSdaiIkW3l0M"
     }
   ],
   "effects": [],
@@ -307,10 +907,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709673936945,
-    "modifiedTime": 1711749844429,
+    "modifiedTime": 1712945363098,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!PgG1Izz1wtP1AVc1"

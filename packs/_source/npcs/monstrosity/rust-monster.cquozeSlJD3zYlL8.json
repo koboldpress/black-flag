@@ -120,7 +120,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A strange, insectile creature skitters forward on four legs. It waves two large, feathery antennae about in a questing manner.</em></p><p>As its name implies, this odd creature can rust ferrous metals, allowing it to eat the oxidized results. The rust monster roams caves and tunnels seeking out such metals. When it finds it, the creature aggressively rushes to devour the meal. Because rust monsters have a basic, animalistic intelligence, an adventurer can save their sword or shield by distracting the creature with another source of metal.</p><p><strong>Armored Shell.</strong> A rust monster is about the size of a large dog. It has an insectile appearance, with armored plates like an exoskeleton. It has segmented legs but, unlike an insect, only four of them. It has a thin, whip-like tail that thrashes when the creature is agitated or catches the scent of metals.</p><p><strong>Color Matches Diet.</strong> The coloration of its hide varies depending on its diet. A rust monster whose diet includes large amounts of mithral would have a silvery sheen to its hide, for example.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -190,9 +190,64 @@
   },
   "items": [
     {
+      "name": "Iron Scent",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The rust monster can pinpoint, by scent, the location of ferrous metal within 30 feet of it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "T2Kir0MkIHCdKSj4",
+      "img": "icons/commodities/metal/ingot-stamped-steel.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944124668,
+        "modifiedTime": 1712944368274,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!cquozeSlJD3zYlL8.T2Kir0MkIHCdKSj4"
+    },
+    {
       "name": "Monstrosity Resilience",
       "type": "feature",
-      "_id": "SKKou3cIZdrO2ckI",
+      "_id": "X389G2H2esqEvJV0",
       "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
       "system": {
         "activities": {},
@@ -206,7 +261,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -254,11 +311,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!cquozeSlJD3zYlL8.SKKou3cIZdrO2ckI.jxagd3hzp2UTp7Wl"
+          "_key": "!actors.items.effects!cquozeSlJD3zYlL8.X389G2H2esqEvJV0.jxagd3hzp2UTp7Wl"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 200000,
       "ownership": {
         "default": 0
       },
@@ -274,13 +331,320 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706473622104,
-        "modifiedTime": 1709672927126,
+        "modifiedTime": 1712944368274,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!cquozeSlJD3zYlL8.SKKou3cIZdrO2ckI"
+      "_key": "!actors.items!cquozeSlJD3zYlL8.X389G2H2esqEvJV0"
+    },
+    {
+      "name": "Rust Metal",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Any nonmagical weapon made of metal that hits the rust monster corrodes. After dealing damage, the weapon takes a permanent and cumulative −1 penalty to damage rolls. If its penalty drops to −5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the rust monster is destroyed after dealing damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "IxtjfmRahvwGNK6p",
+      "img": "icons/commodities/metal/barstock-broken-steel.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944193067,
+        "modifiedTime": 1712944368274,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!cquozeSlJD3zYlL8.IxtjfmRahvwGNK6p"
+    },
+    {
+      "name": "Spider Climb",
+      "type": "feature",
+      "_id": "1XCOIofgLX3p8LVU",
+      "img": "icons/creatures/invertebrates/spider-web-red.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 350000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.OzFKQOuwMXIPVAOv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773683319,
+        "modifiedTime": 1712944373068,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!cquozeSlJD3zYlL8.1XCOIofgLX3p8LVU"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "57kYcl5RxLhYvnbf",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "1",
+                    "custom": "",
+                    "type": "piercing"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "3",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 375000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712944402853,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!cquozeSlJD3zYlL8.57kYcl5RxLhYvnbf"
+    },
+    {
+      "name": "Antennae",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "3olstcKeDbUlToLC": {
+            "type": "savingThrow",
+            "_id": "3olstcKeDbUlToLC",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "11"
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The rust monster corrodes a nonmagical ferrous metal object it can see within 5 feet of it. If the object isn’t being worn or carried, the touch destroys a 1-foot cube of it. If the object is being worn or carried by a creature, the creature can make a [[/save dexterity 11]] save to avoid the rust monster’s touch.</p><p>If the object touched is either metal armor or a metal shield being worn or carried, it takes a permanent and cumulative −1 penalty to the AC it offers. Armor reduced to an AC of 10 or a shield that drops to a +0 bonus is destroyed. If the object touched is a held metal weapon, it rusts as described in the Rust Metal trait.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "FmMagbDCQybAd3uN",
+      "img": "icons/commodities/biological/legs-insect-brown.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944242293,
+        "modifiedTime": 1712944368274,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!cquozeSlJD3zYlL8.FmMagbDCQybAd3uN"
     }
   ],
   "effects": [],
@@ -291,10 +655,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672898796,
-    "modifiedTime": 1711586286220,
+    "modifiedTime": 1712944402853,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!cquozeSlJD3zYlL8"

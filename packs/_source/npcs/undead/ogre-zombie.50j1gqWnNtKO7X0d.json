@@ -117,7 +117,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A rotting corpse shambles forward, arms outstretched and flailing.</em></p><p>Zombies are the animated corpses of the dead, brought to unlife by necromantic magic, creating tireless, fearless servants that obey without hesitation. Occasionally, zombies are produced by other methods. Victims of wights, for example, often rise as zombies under command of the undead that killed them. Sometimes an enduring source of necromantic magic corrupts an area, causing nearby corpses to spontaneously rise as zombies.</p><p><strong>Decayed Corpses.</strong> The appearance of zombies varies widely, depending upon the condition of the corpse prior to animation. A corpse dead from natural causes and stolen from an undertaker may be well-preserved, if obviously not alive, while a zombie animated from a drowning victim is bloated and sagging. Some necromancers use whatever is at hand. Others may choose the most disgusting corpses to add an additional fear factor for those that must face the zombies in combat.</p><p><strong>Dim Intellect.</strong> Zombies have no personality and little intellect, following only the most basic commands. They can wield weapons if armed but simply batter an opponent with its limbs if not. They do not have the intellect to avoid even obvious hazards, shambling into open pits if they exist between them and a target or walking heedlessly through a fire to attack, unless commanded otherwise in that moment. When not under specific orders, a zombie simply stands awaiting commands, though if a living creature comes close enough for it to detect, it attacks, as the dark magics animating a zombie make it malicious toward the living.</p><p><strong>Non-Human Zombies.</strong> Zombies are most commonly animated human remains, but the flesh of any living thing can be animated as a zombie. Zombie giants, for example, would be stronger and harder to kill than a human zombie. They would attack like other zombies, though they could throw rocks like a living giant if commanded to do so. Non- humanoid zombies typically attack as they did when living. A zombie dragon, for example, would attack with claws and teeth, and it could still fly if its wings were intact.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -187,205 +187,10 @@
   },
   "items": [
     {
-      "name": "Multiattack",
-      "type": "feature",
-      "_id": "MJ5bUc0t8HTiJSCb",
-      "img": "systems/black-flag/artwork/types/feature.svg",
-      "system": {
-        "activities": {
-          "MJEQu3J2uCe2u4jF": {
-            "type": "utility",
-            "_id": "MJEQu3J2uCe2u4jF",
-            "description": "",
-            "system": {},
-            "activation": {
-              "type": "action",
-              "condition": ""
-            },
-            "consumption": {
-              "targets": [],
-              "scale": {
-                "allowed": false
-              }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": [],
-              "min": "",
-              "max": ""
-            },
-            "name": "",
-            "img": "systems/black-flag/artwork/activities/utility.svg"
-          }
-        },
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "advancement": {},
-        "description": {
-          "value": "<p>The ogre zombie makes two Morningstar attacks.</p>",
-          "source": ""
-        },
-        "identifier": {},
-        "restriction": {
-          "filters": []
-        },
-        "type": {
-          "category": "monsters"
-        },
-        "level": {
-          "value": null
-        }
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 237500,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
-        "createdTime": 1706473017988,
-        "modifiedTime": 1709697790183,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!50j1gqWnNtKO7X0d.MJ5bUc0t8HTiJSCb"
-    },
-    {
-      "folder": "tVD5DakH2RhE9Ig5",
-      "name": "Morningstar",
-      "type": "weapon",
-      "_id": "PAy6y0tDRCoaR40B",
-      "img": "icons/svg/item-bag.svg",
-      "system": {
-        "activities": {
-          "iOxGtWob5v3yHQyK": {
-            "type": "attack",
-            "_id": "iOxGtWob5v3yHQyK",
-            "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
-              "damage": {
-                "includeBaseDamage": true,
-                "parts": []
-              },
-              "ability": "strength"
-            },
-            "description": "",
-            "activation": {
-              "type": "action",
-              "condition": ""
-            },
-            "consumption": {
-              "targets": [],
-              "scale": {
-                "allowed": false
-              }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": [],
-              "min": "",
-              "max": ""
-            },
-            "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
-          }
-        },
-        "overrides": {
-          "proficiency": null
-        },
-        "price": {
-          "value": 15,
-          "denomination": "gp"
-        },
-        "quantity": 1,
-        "weight": {
-          "value": 4,
-          "units": "pound"
-        },
-        "description": {
-          "value": "<p><em>Melee Weapon Attack:</em> +6 to hit, reach 5 ft., one target. <em>Hit:</em> [[/damage 2d8 + 4 bludgeoning average]] damage.</p>",
-          "source": "Black Flag Reference Document"
-        },
-        "type": {
-          "value": "melee",
-          "category": "martial",
-          "base": "morningstar"
-        },
-        "options": [
-          "disarm"
-        ],
-        "properties": [],
-        "ammunition": {},
-        "damage": {
-          "number": 1,
-          "denomination": 8,
-          "type": "piercing"
-        },
-        "range": {
-          "short": null,
-          "long": null,
-          "reach": null
-        },
-        "uses": {
-          "spent": 0,
-          "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "container": null,
-        "rarity": "",
-        "attunement": {
-          "value": ""
-        }
-      },
-      "effects": [],
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.black-flag.items.Item.zWBmus194O0RLxeU"
-        },
-        "black-flag": {
-          "relationship": {
-            "enabled": true
-          }
-        }
-      },
-      "_stats": {
-        "systemId": "black-flag",
-        "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
-        "createdTime": 1701025004085,
-        "modifiedTime": 1709697813572,
-        "lastModifiedBy": "blackflag0000000"
-      },
-      "_key": "!actors.items!50j1gqWnNtKO7X0d.PAy6y0tDRCoaR40B"
-    },
-    {
-      "name": "Lumbering Charge",
+      "name": "Lumbering Charge (Recharge 5–6)",
       "type": "feature",
       "_id": "R3pWBQpYCwqCtHIA",
-      "img": "systems/black-flag/artwork/types/feature.svg",
+      "img": "icons/creatures/claws/claw-straight-brown.webp",
       "system": {
         "activities": {
           "2dczYCABD9tu3TtH": {
@@ -439,7 +244,7 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>The ogre shoulders its weapon and charges forward, shoving into creatures on its way. It moves up to 20 feet in a straight line and can move through the space of any Medium or smaller creature. The first time it enters a creature’s space during this move, that creature must make a [[/save strength 14]] save. On a failure, a creature takes [[/damage 4d6 bludgeoning average]] damage and is knocked prone. On a success, a creature takes half the damage and isn’t knocked prone.</p>",
+          "value": "<p>The ogre shoulders its weapon and charges forward, shoving into creatures on its way. It moves up to 20 feet in a straight line and can move through the space of any Medium or smaller creature. The first time it enters a creature’s space during this move, that creature must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is knocked prone. On a success, a creature takes half the damage and isn’t knocked prone.</p>",
           "source": ""
         },
         "identifier": {},
@@ -468,10 +273,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706473126059,
-        "modifiedTime": 1709697799493,
+        "modifiedTime": 1712946914675,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!50j1gqWnNtKO7X0d.R3pWBQpYCwqCtHIA"
@@ -491,8 +296,10 @@
         },
         "advancement": {},
         "description": {
-          "value": "<p>If damage reduces the [[lookup @name lowercase]] to 0 HP, it must make a [[/save constitution]]{CON} save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the [[lookup @name lowercase]] drops to 1 HP instead.</p>",
-          "source": "Black Flag Reference Document"
+          "value": "<p>If damage reduces the [[lookup @name lowercase]] to 0 HP, it must make a [[/save constitution]] save with a DC equal to 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the [[lookup @name lowercase]] drops to 1 HP instead.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -522,15 +329,15 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706467755716,
-        "modifiedTime": 1709697651077,
+        "modifiedTime": 1712946794786,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "j27rsuCvjzkYax3e",
-      "sort": 100000,
-      "_key": "!actors.items!50j1gqWnNtKO7X0d.j27rsuCvjzkYax3e"
+      "_id": "SV3zejY18mCtdIBY",
+      "sort": 5600000,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.SV3zejY18mCtdIBY"
     },
     {
       "name": "Undead Nature",
@@ -548,7 +355,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -578,15 +387,15 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706467888787,
-        "modifiedTime": 1709697652119,
+        "modifiedTime": 1712946796347,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "dC65efyJj9LXVh6u",
-      "sort": 150000,
-      "_key": "!actors.items!50j1gqWnNtKO7X0d.dC65efyJj9LXVh6u"
+      "_id": "ea7kHart03OXgPCM",
+      "sort": 700000,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.ea7kHart03OXgPCM"
     },
     {
       "name": "Undead Resilience",
@@ -604,7 +413,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -658,7 +469,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!50j1gqWnNtKO7X0d.WOWdT5waNyPfqliu.eTrciZFtsPDaLR2j"
+          "_key": "!actors.items.effects!50j1gqWnNtKO7X0d.RLsMb3fddlYiCW89.eTrciZFtsPDaLR2j"
         }
       ],
       "folder": null,
@@ -677,15 +488,214 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706467905493,
-        "modifiedTime": 1709697653191,
+        "modifiedTime": 1712946797244,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "WOWdT5waNyPfqliu",
-      "sort": 175000,
-      "_key": "!actors.items!50j1gqWnNtKO7X0d.WOWdT5waNyPfqliu"
+      "_id": "RLsMb3fddlYiCW89",
+      "sort": 300000,
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.RLsMb3fddlYiCW89"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "b1Br8ujTY9XiVVv7",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The ogre zombie makes two Morningstar attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1712946815409,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.b1Br8ujTY9XiVVv7"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Morningstar",
+      "type": "weapon",
+      "_id": "imXwQVmlIg3SxJpf",
+      "img": "icons/weapons/maces/mace-round-spiked-grey.webp",
+      "system": {
+        "activities": {
+          "iOxGtWob5v3yHQyK": {
+            "type": "attack",
+            "_id": "iOxGtWob5v3yHQyK",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "morningstar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "number": 2,
+          "denomination": 8,
+          "type": "piercing"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.zWBmus194O0RLxeU"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701025004085,
+        "modifiedTime": 1712946843952,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!50j1gqWnNtKO7X0d.imXwQVmlIg3SxJpf"
     }
   ],
   "effects": [],
@@ -697,10 +707,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1706472912255,
-    "modifiedTime": 1711586473310,
+    "modifiedTime": 1712946940790,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!50j1gqWnNtKO7X0d"

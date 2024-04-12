@@ -125,7 +125,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>A low hiss emerges from the shambling form crowned with fleshy fungal growth.</em></p><p>The sporeborn are humanoid creatures transformed by an infectious fungus, which takes control of victims and uses them as a vehicle to spread its spores into other hosts. The apocalyptic fungus has no real intelligence, only a drive to reproduce. Humanoids can be infected by the fungus through contaminated food or water, breathing the spore clouds, or the bite of an infected host.</p><p>Stages of Infection. Creatures infected by the apocalyptic fungus go through different stages of infection before they ultimately expire. Most die before reaching the final stage, though the fungus in their bodies continues to grow, dissolving the host’s remains. If the host body sustains serious damage or can no longer move easily, the fungus attempts to move into a dark, sheltered area so that, as the body decays, the fungus fruits and releases its spores. Sunlight kills the fungus and its spores.</p><p><strong>Skullblooms.</strong> Infected humanoids that succumb to the fungus become sporeborn skullblooms. Skullblooms show physical signs of their transformation, as the spores inside the host’s brain sprout into spongy stalks that break through the skull to crown the head, while patches of fungus break through the cheeks and around the eye sockets and random areas of the body. Skullblooms stalk or ambush victims and use cooperative tactics, such as herding potential victims toward other skullblooms lying in wait. Sometimes skullblooms enter periods of inertia, lying down or leaning up against a wall or tree and allowing the fungus to spread over them, only to burst out and attack when a potential target passes by.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -195,9 +195,67 @@
   },
   "items": [
     {
+      "name": "Heightened Hearing",
+      "type": "feature",
+      "_id": "aRqFWubt7ad1LAGb",
+      "img": "icons/creatures/mammals/bat-movement-flying-purple.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s Perception is [[calc @attributes.perception + 5]] while perceiving by hearing.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 1900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.HLqV7Bq9XPh7KTaB"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773583652,
+        "modifiedTime": 1712944721320,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.aRqFWubt7ad1LAGb"
+    },
+    {
       "name": "Plant Resilience",
       "type": "feature",
-      "_id": "VL87o6aeHBCrqLuZ",
+      "_id": "8WP8EEwbuRwAnVsU",
       "img": "icons/creatures/tentacles/tentacle-earth-green.webp",
       "system": {
         "activities": {},
@@ -211,7 +269,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the paralyzed, petrified, and unconscious conditions.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -271,11 +331,11 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!OFvaU7jGTycWM8sp.VL87o6aeHBCrqLuZ.4alHXchWfiVtXGAv"
+          "_key": "!actors.items.effects!OFvaU7jGTycWM8sp.8WP8EEwbuRwAnVsU.4alHXchWfiVtXGAv"
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": 6000000,
       "ownership": {
         "default": 0
       },
@@ -291,13 +351,263 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709615924250,
-        "modifiedTime": 1709673911203,
+        "modifiedTime": 1712944723789,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!actors.items!OFvaU7jGTycWM8sp.VL87o6aeHBCrqLuZ"
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.8WP8EEwbuRwAnVsU"
+    },
+    {
+      "name": "Bite",
+      "type": "feature",
+      "_id": "G0j2mzs4KhjR8g4Y",
+      "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
+      "system": {
+        "activities": {
+          "sO4yBxIaNViWhQt2": {
+            "type": "attack",
+            "_id": "sO4yBxIaNViWhQt2",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "2",
+                    "custom": "",
+                    "type": "piercing"
+                  },
+                  {
+                    "number": 1,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "none",
+              "attack": {
+                "bonus": "4",
+                "flat": true
+              }
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage. If the target is a Humanoid, it must succeed on a [[/save constitution 12]] save or become infected with apocalyptic fungus.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 6050000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.0Tp5zlCaSyrSMoYN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711504525397,
+        "modifiedTime": 1712945374415,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.G0j2mzs4KhjR8g4Y"
+    },
+    {
+      "name": "Instincy to Pursue",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "S0pbJxpITloCa0kZ": {
+            "type": "utility",
+            "_id": "S0pbJxpITloCa0kZ",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The skullboom takes the Dash action toward an uninfected Humanoid it can see or sense.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "4aCRbq4jRg7nLApQ",
+      "img": "icons/commodities/flowers/dandelion-pod-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 6100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944732596,
+        "modifiedTime": 1712944984182,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.4aCRbq4jRg7nLApQ"
+    },
+    {
+      "name": "Apocalyptic Fungus",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Disease</em></p><p>An infectious disease transmitted via fungal spores. Infected creatures become irritable and sensitive to noise. In the final stages, fibrous fungal growths sprout from the skin—particularly around the cranium. If left untreated, infected creatures turn into <strong>sporeborn skullblooms</strong>.</p><p><strong>Trigger:</strong> A humanoid that ingests food or water contaminated with the spores of the apocalyptic fungus, breathes in the spores, or is bitten by an infected creature must make a [[/save constitution 12]] save or become infected.</p><p><strong>Effects:</strong> An infected target can’t regain hit points and when it finishes a long rest must make a [[/save constitution 15]] save or gain two levels of exhaustion. When the infected target reaches the sixth level of exhaustion, it does not die but instead becomes a <strong>@UUID[Compendium.black-flag.npcs.Actor.OFvaU7jGTycWM8sp]{skullbloom}</strong>, at which point no mundane or magical healing can return the creature to its former state. If a humanoid infected with apocalyptic fungal spores is killed, it rises an hour later as a <strong>skullbloom</strong>.</p><p><strong>Resolution:</strong> Pre-transformation, the fungal infection can only be cured by the lesser restoration spell or similar magic.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "8JWFVUOD3yM0CItN",
+      "img": "icons/magic/nature/mushroom-glow-red.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 6025000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcs.Actor.PgG1Izz1wtP1AVc1.Item.cHuOkSdaiIkW3l0M"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712945185187,
+        "modifiedTime": 1712945366054,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!OFvaU7jGTycWM8sp.8JWFVUOD3yM0CItN"
     }
   ],
   "effects": [],
@@ -308,10 +618,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709673876531,
-    "modifiedTime": 1711749850689,
+    "modifiedTime": 1712945374415,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!OFvaU7jGTycWM8sp"

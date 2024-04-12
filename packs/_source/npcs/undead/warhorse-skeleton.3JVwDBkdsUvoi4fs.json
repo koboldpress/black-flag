@@ -126,7 +126,7 @@
       }
     },
     "biography": {
-      "value": "",
+      "value": "<p><em>Half hidden in darkness, skeletal bones clad in rusted armor and rotten clothing lurch toward you. The thing’s bony hands grip a sword with malign intent.</em></p><p>Skeletons are fleshless undead that have been reconstructed and animated by fell magic. Soulless, emotionless, and driven by the whims of their master, the skeleton is an unshakable guardian. Skeletons can be found in desecrated temples, graveyards, and cemeteries where they can watch, completely motionless, for eons. New and masterful necromancers use skeletons as stalwart guards and servants, though they understand such creatures have no loyalty beyond the magic that controls them.</p><p><strong>Dark Intelligence.</strong> While lacking humanoid intelligence, skeletons possess a cleverness that extends beyond a mere beast or construct. Their malicious minds remember how to wield weapons and armor, and they collect and use weapons or shields taken from the recent dead. Skeletons look upon the living with eyeless sockets and unsettling patience as their instincts judge distances, tactics, and methods to separate a potential target’s flesh from their bones.</p><p><strong>Moldering Bodies.</strong> Though dried strands of tendon or wisps of stubborn hair may cling to a skeleton, magic alone is responsible for its movement. Piercing weapons and arrows may skip from the skeleton’s hardened bone, but heavy blows shatter them.</p>",
       "lair": "",
       "legendary": ""
     }
@@ -196,6 +196,122 @@
   },
   "items": [
     {
+      "name": "False Appearance",
+      "type": "feature",
+      "_id": "JZdux1DziHl2hqpf",
+      "img": "icons/commodities/treasure/statue-carved-figurehead.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While the [[lookup @name lowercase]] remains motionless and prone, it is indistinguishable from an inanimate warhorse skeleton.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.E2PyU7EAiv162L6t"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711421375455,
+        "modifiedTime": 1712944676488,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!3JVwDBkdsUvoi4fs.JZdux1DziHl2hqpf"
+    },
+    {
+      "name": "Undead Nature",
+      "type": "feature",
+      "img": "icons/magic/death/skeleton-eye-skull-glow-orange.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.7sxXRJayum4g5Y2A"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706467888787,
+        "modifiedTime": 1712944622729,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "4MGOHtZqihIV3iYP",
+      "sort": 250000,
+      "_key": "!actors.items!3JVwDBkdsUvoi4fs.4MGOHtZqihIV3iYP"
+    },
+    {
       "name": "Undead Resilience",
       "type": "feature",
       "img": "icons/magic/death/skeleton-skull-soul-blue.webp",
@@ -211,7 +327,9 @@
         "advancement": {},
         "description": {
           "value": "<p>The [[lookup @name lowercase]] is immune to poison damage, to exhaustion, and to the poisoned condition.</p>",
-          "source": "Black Flag Reference Document"
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
         },
         "identifier": {},
         "restriction": {
@@ -265,7 +383,7 @@
           "statuses": [],
           "flags": {},
           "tint": null,
-          "_key": "!actors.items.effects!3JVwDBkdsUvoi4fs.MT2iKxd7zqKqBS7Z.eTrciZFtsPDaLR2j"
+          "_key": "!actors.items.effects!3JVwDBkdsUvoi4fs.QmnvQoDETMJ4ACz1.eTrciZFtsPDaLR2j"
         }
       ],
       "folder": null,
@@ -284,15 +402,203 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1706467905493,
-        "modifiedTime": 1709673848855,
+        "modifiedTime": 1712944618030,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_id": "MT2iKxd7zqKqBS7Z",
-      "sort": 0,
-      "_key": "!actors.items!3JVwDBkdsUvoi4fs.MT2iKxd7zqKqBS7Z"
+      "_id": "QmnvQoDETMJ4ACz1",
+      "sort": 300000,
+      "_key": "!actors.items!3JVwDBkdsUvoi4fs.QmnvQoDETMJ4ACz1"
+    },
+    {
+      "name": "Hooves",
+      "type": "feature",
+      "_id": "ekaJInuOJdwQWYSJ",
+      "img": "icons/commodities/bones/hooves-cloven-brown.webp",
+      "system": {
+        "activities": {
+          "bv8nMpJx5Zffy81U": {
+            "type": "attack",
+            "_id": "bv8nMpJx5Zffy81U",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "bludgeoning"
+                  }
+                ]
+              },
+              "ability": "strength"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.5ndxvSRcubJLDMsW"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712943243304,
+        "modifiedTime": 1712944663762,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!3JVwDBkdsUvoi4fs.ekaJInuOJdwQWYSJ"
+    },
+    {
+      "name": "Counterattack (Recharge 6)",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "BCOejY5sB99LoUc6": {
+            "type": "utility",
+            "_id": "BCOejY5sB99LoUc6",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the warhorse skeleton can see hits it with a melee attack while within 5 feet of it, the skeleton can make one Hooves attack against the attacker.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "9k7QWVQxo6iHksTP",
+      "img": "icons/skills/melee/swords-parry-block-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        },
+        "core": {
+          "sourceId": "Compendium.black-flag.npcs.Actor.IN6xQ0eaTEGbzbjC.Item.H9hTa9rIqamcBWjG"
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1712944504150,
+        "modifiedTime": 1712944650986,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!3JVwDBkdsUvoi4fs.9k7QWVQxo6iHksTP"
     }
   ],
   "effects": [],
@@ -303,10 +609,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709673806888,
-    "modifiedTime": 1711586447942,
+    "modifiedTime": 1712944676488,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!3JVwDBkdsUvoi4fs"
