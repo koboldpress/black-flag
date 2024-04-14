@@ -70,6 +70,7 @@ export default class NPCSheet extends BaseActorSheet {
 
 		if (uses.max) {
 			let label;
+			let recharge;
 
 			// If max is set and min is zero, display as "1 of 3"
 			if (uses.min === 0) {
@@ -82,17 +83,27 @@ export default class NPCSheet extends BaseActorSheet {
 			// If min isn't zero, display just current value "1"
 			else label = numberFormat(uses.value);
 
+			// If only a single recovery formula that is Recharge
+			if (uses.recovery.length === 1 && uses.recovery[0].period === "recharge") {
+				if (uses.spent === 0 && uses.max === 1) label = game.i18n.localize("BF.Recovery.Recharge.Charged");
+				else if (uses.max === 1) label = null;
+				if (uses.spent > 0) {
+					if (uses.recovery[0].formula === "6") recharge = game.i18n.localize("BF.Recovery.Recharge.Single");
+					else recharge = game.i18n.format("BF.Recovery.Recharge.Range", { min: uses.recovery[0].formula });
+				}
+			}
+
 			// If only a single recovery formula that recovers all uses is set, display "/SR" or "/Day"
-			if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
+			else if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
 				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0].period];
-				const abbreviation = game.i18n.localize(config.npcLabel ?? config.abbreviation);
+				const abbreviation = game.i18n.localize(config?.npcLabel ?? config?.abbreviation);
 				if (abbreviation) label = game.i18n.format("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
 			}
 
-			parts.push(label);
+			parts.push(label, recharge);
 		}
 
-		return game.i18n.getListFormatter({ type: "unit" }).format(parts);
+		return game.i18n.getListFormatter({ type: "unit" }).format(parts.filter(p => p));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

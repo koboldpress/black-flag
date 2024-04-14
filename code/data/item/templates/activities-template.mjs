@@ -32,6 +32,8 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareFinalUses() {
+		this.uses.prepareData();
+
 		const rollData = this.parent.getRollData();
 		this.uses.min = simplifyBonus(replaceFormulaData(this.uses.min ?? "", rollData, {
 			notifications: this.parent.notifications, key: "invalid-min-uses-formula", section: "auto",
@@ -89,7 +91,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		const rolls = [];
 
 		if ( this.uses.hasUses ) {
-			const result = await UsesField.recoverUses(periods, this.uses, rollData);
+			const result = await this.uses.recoverUses(periods, rollData);
 			if ( result ) {
 				const update = { "system.uses": result.updates };
 				foundry.utils.mergeObject(updates, update);
@@ -99,7 +101,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 
 		for ( const activity of this.activities ) {
 			if ( !activity.uses.hasUses ) continue;
-			const result = await UsesField.recoverUses(periods, activity.uses, rollData);
+			const result = await activity.uses.recoverUses(periods, rollData);
 			if ( result ) {
 				updates.system ??= {};
 				updates.system.activities ??= {};

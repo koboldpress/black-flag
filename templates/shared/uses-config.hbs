@@ -38,22 +38,35 @@
 							<select name="$.recovery.{{ @index }}.period">
 								{{#select period}}
 									{{#each validPeriods}}
-										<option value="{{ key }}" {{disabled disabled}}>{{ localize label }}</option>
+										<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
 									{{/each}}
+									<hr>
+									<option value="recharge" {{ disabled recharge.disabled }}>
+										{{ localize "BF.Recovery.Recharge.Label" }}
+									</option>
 								{{/select}}
 							</select>
 						</label>
-						<label class="type">
-							<span>{{ localize "BF.Recovery.Type.Label" }}</span>
-							<select name="$.recovery.{{ @index }}.type">
-								{{ selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true }}
-							</select>
-						</label>
-						{{#if (eq type "formula")}}
-							<label class="formula">
-								<span>{{ localize "BF.Recovery.Formula.Label" }}</span>
-								<input type="text" name="$.recovery.{{ @index }}.formula" value="{{ formula }}">
+						{{#if (eq period "recharge")}}
+							<label class="recharge">
+								<span>{{ localize "BF.Recovery.Recharge.Trigger" }}</span>
+								<select name="$.recovery.{{ @index }}.formula">
+									{{ selectOptions recharge.options selected=formula nameAttr="key" labelAttr="label" }}
+								</select>
 							</label>
+						{{else}}
+							<label class="type">
+								<span>{{ localize "BF.Recovery.Type.Label" }}</span>
+								<select name="$.recovery.{{ @index }}.type">
+									{{ selectOptions @root.CONFIG.recoveryTypes selected=type labelAttr="label" localize=true }}
+								</select>
+							</label>
+							{{#if (eq type "formula")}}
+								<label class="formula">
+									<span>{{ localize "BF.Recovery.Formula.Label" }}</span>
+									<input type="text" name="$.recovery.{{ @index }}.formula" value="{{ formula }}">
+								</label>
+							{{/if}}
 						{{/if}}
 					</div>
 					<div class="controls">
