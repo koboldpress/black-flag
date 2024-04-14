@@ -20,6 +20,15 @@
 		</div>
 	{{/if}}
 
+	{{#if show.actionConsumption}}
+		<div class="form-group">
+			<label class="checkbox">
+				<input type="checkbox" name="consume.action" {{ checked consume.action }}>
+				{{ localize "BF.Consumption.Type.PromptGeneric" type=activity.activation.label }}
+			</label>
+		</div>
+	{{/if}}
+
 	{{#if show.resourceConsumption}}
 		<multi-checkbox name="consume.resources">
 			{{#each resources}}

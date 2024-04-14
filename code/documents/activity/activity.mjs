@@ -182,12 +182,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 *
 	 * @typedef {object} ActivityActivationConfiguration
 	 * @property {boolean|object} consume - Consumption configuration, set to `false` to prevent all consumption.
+	 * @property {boolean} consume.action - Control whether a part of the action economy is used during activation.
 	 * @property {boolean|BlackFlagItem} consume.ammunition - Control whether ammunition is consumed by a weapon or
 	 *                                                        provide an ammunition item to consume.
 	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
 	 *                                                  consumption or provide a list of consumption type keys defined
 	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
-	 * @property {boolean} consume.spellSlot - Should this spell consume a spell slot?
+	 * @property {boolean} consume.spellSlot - Control whether spell consumes a spell slot.
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
 	 *                                      is not allowed.
 	 * @property {object} spell
@@ -361,6 +362,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		if (config.consume !== false) {
 			config.consume ??= {};
+			config.consume.action ??= this.activation.type === "legendary";
 			// TODO: consume.ammunition
 			config.consume.resources ??= this.consumption.targets.length > 0;
 			config.consume.spellSlot ??= this.requiresSpellSlot;
@@ -412,6 +414,29 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const updates = { activity: {}, item: [], actor: {}, rolls: [] };
 		if (!config.consume) return updates;
 		const errors = [];
+
+		if ((config.consume === true || config.consume.action) && this.activation.type === "legendary") {
+			const count = this.activation.value ?? 1;
+			const legendary = this.actor.system.attributes?.legendary;
+			if (legendary) {
+				let errMessage;
+				if (legendary.value === 0) errMessage = "BF.Activation.Warning.NoActions";
+				else if (count > legendary.value) errMessage = "BF.Activation.Warning.NotEnoughActions";
+				if (!errMessage) {
+					updates.actor["system.attributes.legendary.spent"] = legendary.spent + count;
+				} else {
+					const err = new ConsumptionError(
+						game.i18n.format(errMessage, {
+							type: CONFIG.BlackFlag.actionTypes.localized[this.activation.type],
+							required: numberFormat(count),
+							available: numberFormat(legendary.value)
+						})
+					);
+					errors.push(err);
+					ui.notifications.error(err.message, { console: false });
+				}
+			}
+		}
 
 		if (config.consume === true || config.consume.ammunition) {
 			// TODO: Let `WeaponData` to handle this

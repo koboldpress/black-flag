@@ -105,6 +105,7 @@ export default class ActivityActivationDialog extends Dialog {
 			{ inplace: false }
 		);
 		data.show = {
+			actionConsumption: this.activity.activation.type === "legendary", // TODO: Allow more than legendary actions here
 			spellConsumption: this.activity.isSpell, // TODO: Make sure spell actually consumes a slot
 			spellRingSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.rings),
 			resourceConsumption: !foundry.utils.isEmpty(data.resources)
@@ -145,9 +146,10 @@ export default class ActivityActivationDialog extends Dialog {
 	 * @returns {object[]}
 	 */
 	_prepareSpellSlotOptions() {
+		const spellcasting = this.activity.actor.system.spellcasting;
+		if (!spellcasting) return [];
 		// TODO: Adjust this when slots can also be consumed as resources
 		const minimumRing = this.activity?.item?.system.ring?.base ?? 1;
-		const spellcasting = this.activity.actor.system.spellcasting;
 		const options = Object.entries(CONFIG.BlackFlag.spellRings()).reduce((obj, [level, label]) => {
 			level = Number(level);
 			if (level < minimumRing || level > spellcasting.maxRing) return obj;

@@ -231,6 +231,10 @@ export default class NPCSheet extends BaseActorSheet {
 			}[cr] ?? parseFloat(cr);
 		if (Number.isNumeric(cr)) data["system.attributes.cr"] = cr;
 
+		if ("system.attributes.legendary.value" in data)
+			data["system.attributes.legendary.spent"] =
+				this.actor.system.attributes.legendary.max - parseInt(data["system.attributes.legendary.value"]);
+
 		return data;
 	}
 
