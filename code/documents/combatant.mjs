@@ -18,6 +18,8 @@ export default class BlackFlagCombatant extends Combatant {
 	 * @returns {Promise<Combatant>}
 	 */
 	async recoverCombatUses(periods) {
+		await this.actor?.system.recoverCombatUses?.(periods);
+
 		const updates = [];
 		const rolls = [];
 		const rollData = this.actor?.getRollData();

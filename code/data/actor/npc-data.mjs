@@ -222,4 +222,18 @@ export default class NPCData extends ActorDataModel.mixin(
 			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Reset combat-related uses.
+	 * @param {string[]} periods - Which recovery periods should be considered.
+	 * @returns {Promise<Combatant>}
+	 */
+	async recoverCombatUses(periods) {
+		// Recover legendary actions
+		if (this.attributes.legendary.max && periods.includes("roundEnd")) {
+			await this.parent.update({ "system.attributes.legendary.spent": 0 });
+		}
+	}
 }
