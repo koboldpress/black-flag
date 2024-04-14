@@ -44,7 +44,7 @@ export class UsesData extends foundry.abstract.DataModel {
 	 * @type {boolean}
 	 */
 	get hasUses() {
-		return !!this.min || !this.max;
+		return !!this.min || !!this.max;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -67,6 +67,7 @@ export class UsesData extends foundry.abstract.DataModel {
 	prepareData() {
 		const existingPeriods = new Set(this.recovery.map(r => r.period));
 		for (const recovery of this.recovery) {
+			if (recovery.period === "recharge") recovery.type = "recoverAll";
 			Object.defineProperty(recovery, "validPeriods", {
 				get() {
 					return Object.entries(CONFIG.BlackFlag.recoveryPeriods).map(([key, config]) => ({
@@ -109,12 +110,21 @@ export class UsesData extends foundry.abstract.DataModel {
 	 */
 	async recoverUses(periods, rollData) {
 		if (!this.recovery.length) return false;
+		if (periods.includes("round")) periods.unshift("recharge");
 		const matchingPeriod = periods.find(p => this.recovery.find(r => r.period === p));
 		const recoveryProfile = this.recovery.find(r => r.period === matchingPeriod);
 		if (!recoveryProfile) return false;
 
 		const updates = {};
 		const rolls = [];
+
+		// If recharge period, then roll to see if it actually recovers
+		if (matchingPeriod === "recharge") {
+			if (this.spent === 0) return false;
+			rolls.push(await this.rollRecharge(Number(recoveryProfile.formula)));
+			if (!rolls[0]) return false;
+		}
+
 		if (recoveryProfile.type === "recoverAll") updates.spent = 0;
 		else if (recoveryProfile.type === "loseAll") updates.spent = this.max ? this.max : -this.min;
 		else if (recoveryProfile.formula) {
@@ -125,5 +135,64 @@ export class UsesData extends foundry.abstract.DataModel {
 		}
 
 		return { updates, rolls };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Make a recharge roll to see if uses are recovered.
+	 * @param {number} target - Target value necessary to success.
+	 * @returns {BasicRoll|false}
+	 */
+	async rollRecharge(target) {
+		const rollConfig = {
+			rolls: [{ parts: ["1d6"], options: { target } }],
+			origin: this.parent
+		};
+
+		const type = game.i18n.localize("BF.Recovery.Recharge.Label");
+		const dialogConfig = {
+			configure: false,
+			options: {
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+			}
+		};
+
+		const flavor = game.i18n.format("BF.Roll.Type.Label", { type });
+		const messageConfig = {
+			data: {
+				flavor,
+				"flags.black-flag.roll": {
+					type: "recharge"
+				}
+			}
+		};
+
+		/**
+		 * A hook event that fires before recharge is rolled.
+		 * @function blackFlag.preRollRecharge
+		 * @memberof hookEvents
+		 * @param {BlackFlagItem|Activity} source - Item or activity for which uses are being recovered.
+		 * @param {HitDieRollProcessConfiguration} config - Configuration data for the pending roll.
+		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
+		 */
+		if (Hooks.call("blackFlag.preRollRecharge", this.parent, rollConfig, dialogConfig, messageConfig) === false) {
+			return false;
+		}
+
+		const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+
+		/**
+		 * A hook event that fires after a recharge roll has been performed.
+		 * @function blackFlag.rollRecharge
+		 * @memberof hookEvents
+		 * @param {BlackFlagItem|Activity} source - Item or activity for which uses are being recovered.
+		 * @param {BasicRoll[]} rolls - The resulting rolls.
+		 */
+		Hooks.callAll("blackFlag.rollRecharge", this.parent, rolls);
+
+		return rolls[0]?.isSuccess ? rolls[0] : false;
 	}
 }

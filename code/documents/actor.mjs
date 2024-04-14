@@ -1072,7 +1072,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: flavor,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.everyday-heroes.roll": {
+					"flags.black-flag.roll": {
 						type: "hit-die",
 						denomination: config.denomination
 					}

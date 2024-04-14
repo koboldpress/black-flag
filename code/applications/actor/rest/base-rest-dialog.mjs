@@ -31,9 +31,10 @@ export default class BaseRestDialog extends Dialog {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["everyday-heroes", "dialog", "rest"],
+			classes: ["black-flag", "dialog", "rest"],
 			width: 350
 		});
 	}
