@@ -10,6 +10,9 @@
 			{{#with (lookup (lookup CONFIG.damageTypes damageType) "label") as |damage|}}
 				<span class="damage-type">{{ localize damage }}</span>
 			{{/with}}
+			{{#with (lookup (lookup CONFIG.healingTypes damageType) "label") as |damage|}}
+				<span class="damage-type">{{ localize damage }}</span>
+			{{/with}}
 		</h4>
 	</div>
 </div>
