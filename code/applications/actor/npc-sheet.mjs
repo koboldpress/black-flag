@@ -49,6 +49,43 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Prepare the uses for an item for display on the main tab.
+	 * @param {BlackFlagItem} item - Item being displayed.
+	 * @param {Activity} [activity] - Activity being highlighted.
+	 * @returns {string}
+	 */
+	prepareUsesDisplay(item, activity) {
+		const uses = item.system.uses;
+		let label = "";
+
+		if (!uses.max) return label;
+
+		// If max is set and min is zero, display as "1 of 3"
+		if (uses.min === 0) {
+			label = game.i18n.format("BF.Uses.Display.Of", {
+				value: numberFormat(uses.value),
+				max: numberFormat(uses.max)
+			});
+		}
+
+		// If min isn't zero, display just current value "1"
+		else {
+			label = numberFormat(uses.value);
+		}
+
+		// If only a single recovery formula that recovers all uses is set, display "/SR" or "/Day"
+		if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
+			const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0].period];
+			const abbreviation = game.i18n.localize(config.npcLabel ?? config.abbreviation);
+			if (abbreviation) label = game.i18n.format("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
+		}
+
+		return label;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	async prepareActions(context) {
 		await super.prepareActions(context);
@@ -61,6 +98,7 @@ export default class NPCSheet extends BaseActorSheet {
 						async: true,
 						relativeTo: a.activity
 					});
+					a.uses = this.prepareUsesDisplay(a.item, a);
 					return a.description;
 				})
 			)
@@ -82,7 +120,8 @@ export default class NPCSheet extends BaseActorSheet {
 							rollData: item.getRollData(),
 							async: true,
 							relativeTo: item
-						})
+						}),
+						uses: this.prepareUsesDisplay(item)
 					}))
 			)
 		)

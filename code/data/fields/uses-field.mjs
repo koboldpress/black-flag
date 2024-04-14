@@ -35,6 +35,7 @@ export default class UsesField extends SchemaField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	initialize(value, model, options = {}) {
 		const obj = super.initialize(value, model, options);
 

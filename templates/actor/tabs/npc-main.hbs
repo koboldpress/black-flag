@@ -193,7 +193,7 @@
 		<div class="features passive">
 			{{#each passive}}
 				<div class="feature" data-item-id="{{ item.id }}" {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
-					<span class="controls">
+					<span class="controls">{{log uses}}
 						{{#if @root.editable}}
 							<button type="button" class="link-button" data-action="edit"
 											data-tooltip="BF.Activity.Core.Action.Edit"
@@ -201,7 +201,7 @@
 								<i class="fa-solid fa-pen-to-square" inert></i>
 							</button>
 						{{/if}}
-						<a data-action="activate">{{ item.name }}.</a>
+						<a data-action="activate">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</a>
 					</span>
 					{{{ description }}}
 				</div>
@@ -240,7 +240,7 @@
 										<i class="fa-solid fa-pen-to-square" inert></i>
 									</button>
 								{{/if}}
-								<a data-action="activate">{{ item.name }}.</a>
+								<a data-action="activate">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</a>
 							</span>
 							{{{ description }}}
 						</div>

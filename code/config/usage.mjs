@@ -77,6 +77,7 @@ export const consumptionTypes = {
  * Configuration data for item usage recovery periods.
  *
  * @typedef {AbbreviatedConfiguration} RecoveryPeriodConfiguration
+ * @property {string} [npcLabel] - Optional alternative label used to display recovery period on NPC sheets.
  * @property {boolean} [combatOnly=false] - Is this period only consumed during a combat encounter?
  */
 
@@ -87,6 +88,7 @@ export const consumptionTypes = {
 export const recoveryPeriods = {
 	longRest: {
 		label: "BF.Rest.Type.Long.Label",
+		npcLabel: "BF.Time.Unit.Day.Label[one]",
 		abbreviation: "BF.Rest.Type.Long.Abbreviation"
 	},
 	shortRest: {
