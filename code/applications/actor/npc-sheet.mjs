@@ -57,31 +57,42 @@ export default class NPCSheet extends BaseActorSheet {
 	 */
 	prepareUsesDisplay(item, activity) {
 		const uses = item.system.uses;
-		let label = "";
+		const parts = [];
 
-		if (!uses.max) return label;
-
-		// If max is set and min is zero, display as "1 of 3"
-		if (uses.min === 0) {
-			label = game.i18n.format("BF.Uses.Display.Of", {
-				value: numberFormat(uses.value),
-				max: numberFormat(uses.max)
-			});
+		if (activity?.activation.type === "legendary" && activity.activation.value > 1) {
+			const pluralRule = getPluralRules().select(activity.activation.value);
+			parts.push(
+				game.i18n.format(`BF.LegendaryAction.Cost[${pluralRule}]`, {
+					count: numberFormat(activity.activation.value)
+				})
+			);
 		}
 
-		// If min isn't zero, display just current value "1"
-		else {
-			label = numberFormat(uses.value);
+		if (uses.max) {
+			let label;
+
+			// If max is set and min is zero, display as "1 of 3"
+			if (uses.min === 0) {
+				label = game.i18n.format("BF.Uses.Display.Of", {
+					value: numberFormat(uses.value),
+					max: numberFormat(uses.max)
+				});
+			}
+
+			// If min isn't zero, display just current value "1"
+			else label = numberFormat(uses.value);
+
+			// If only a single recovery formula that recovers all uses is set, display "/SR" or "/Day"
+			if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
+				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0].period];
+				const abbreviation = game.i18n.localize(config.npcLabel ?? config.abbreviation);
+				if (abbreviation) label = game.i18n.format("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
+			}
+
+			parts.push(label);
 		}
 
-		// If only a single recovery formula that recovers all uses is set, display "/SR" or "/Day"
-		if (uses.recovery.length === 1 && uses.recovery[0].type === "recoverAll") {
-			const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0].period];
-			const abbreviation = game.i18n.localize(config.npcLabel ?? config.abbreviation);
-			if (abbreviation) label = game.i18n.format("BF.Uses.Display.Recovery", { value: label, period: abbreviation });
-		}
-
-		return label;
+		return game.i18n.getListFormatter({ type: "unit" }).format(parts);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -98,7 +109,7 @@ export default class NPCSheet extends BaseActorSheet {
 						async: true,
 						relativeTo: a.activity
 					});
-					a.uses = this.prepareUsesDisplay(a.item, a);
+					a.uses = this.prepareUsesDisplay(a.item, a.activity);
 					return a.description;
 				})
 			)
