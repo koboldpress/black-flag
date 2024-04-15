@@ -2,6 +2,7 @@
  * Configuration dialog for feature & talent prerequisites.
  */
 export default class PrerequisiteConfig extends DocumentSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "prerequisite"],
@@ -18,6 +19,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return game.i18n.localize("BF.Prerequisite.Config.Title");
 	}
@@ -36,6 +38,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = foundry.utils.mergeObject(
 			{
@@ -98,6 +101,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		const data = foundry.utils.expandObject(formData);
 		const filters = this.filters;

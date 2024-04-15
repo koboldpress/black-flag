@@ -1,5 +1,8 @@
-import { log } from "../../utils/_module.mjs";
+import IdentityConfig from "./config/identity-config.mjs";
 
+/**
+ * Sheet upon which all other item sheets are based.
+ */
 export default class BaseItemSheet extends ItemSheet {
 	/**
 	 * Fields that will be enriched during data preparation.
@@ -13,6 +16,7 @@ export default class BaseItemSheet extends ItemSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -35,9 +39,25 @@ export default class BaseItemSheet extends ItemSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_getHeaderButtons() {
+		let buttons = super._getHeaderButtons();
+		if (this.options.editable && (game.user.isGM || this.item.isOwner))
+			buttons.unshift({
+				label: game.i18n.localize("BF.Identity.Label"),
+				class: "identity-config",
+				icon: "fa-solid fa-id-card",
+				onclick: async ev => new IdentityConfig(this.item).render(true)
+			});
+		return buttons;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -54,8 +74,5 @@ export default class BaseItemSheet extends ItemSheet {
 	 * @param {ClickEvent} event - Triggering click event.
 	 * @returns {Promise}
 	 */
-	async _onAction(event) {
-		const { action, subAction } = event.currentTarget.dataset;
-		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
-	}
+	async _onAction(event) {}
 }
