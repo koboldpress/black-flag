@@ -822,7 +822,7 @@
       "_key": "!actors.items!ioptmAxgvplXdxMJ.2BzQldZZ6pMSu7wO"
     },
     {
-      "name": "Stubborn Attacker (Recharge 5–6)",
+      "name": "Stubborn Attacker",
       "type": "feature",
       "_id": "FBr7E7U9T6D9Xa4j",
       "img": "icons/skills/melee/strike-sword-dagger-runes-red.webp",
@@ -838,7 +838,12 @@
               "condition": "When the champion misses with an attack"
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -856,9 +861,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -893,10 +903,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711744521243,
-        "modifiedTime": 1711744571487,
+        "modifiedTime": 1713147687161,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ioptmAxgvplXdxMJ.FBr7E7U9T6D9Xa4j"
@@ -910,10 +920,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709617606926,
-    "modifiedTime": 1711749592000,
+    "modifiedTime": 1713147687161,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ioptmAxgvplXdxMJ"

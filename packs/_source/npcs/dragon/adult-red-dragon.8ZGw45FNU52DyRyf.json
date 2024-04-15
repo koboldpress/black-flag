@@ -254,7 +254,7 @@
       "_key": "!actors.items!8ZGw45FNU52DyRyf.OFn68XTcPeylB5ND"
     },
     {
-      "name": "Legendary Resistance (3/Day)",
+      "name": "Legendary Resistance",
       "type": "feature",
       "_id": "UkPQTUdfyOCv454Y",
       "img": "icons/magic/defensive/shield-barrier-blades-teal.webp",
@@ -338,10 +338,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711668131577,
-        "modifiedTime": 1711668221186,
+        "modifiedTime": 1713147630182,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!8ZGw45FNU52DyRyf.UkPQTUdfyOCv454Y"
@@ -833,7 +833,7 @@
       "_key": "!actors.items!8ZGw45FNU52DyRyf.T7XsItYiCPR22LZM"
     },
     {
-      "name": "Fire Breath (Recharge 5–6)",
+      "name": "Fire Breath",
       "type": "feature",
       "_id": "mgz7tsAKtfiza0Hm",
       "img": "icons/magic/fire/blast-jet-stream-embers-yellow.webp",
@@ -866,7 +866,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -884,9 +889,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -924,10 +934,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711667664884,
-        "modifiedTime": 1711668510947,
+        "modifiedTime": 1713147644501,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!8ZGw45FNU52DyRyf.mgz7tsAKtfiza0Hm"
@@ -1303,10 +1313,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709616912548,
-    "modifiedTime": 1711749458847,
+    "modifiedTime": 1713147644501,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!8ZGw45FNU52DyRyf"

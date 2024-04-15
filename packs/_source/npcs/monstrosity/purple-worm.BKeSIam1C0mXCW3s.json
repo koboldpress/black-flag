@@ -671,7 +671,7 @@
       "_key": "!actors.items!BKeSIam1C0mXCW3s.2HeIgmv8Ubl3BD3I"
     },
     {
-      "name": "Thrash (Recharge 5–6)",
+      "name": "Thrash",
       "type": "feature",
       "system": {
         "type": {
@@ -705,7 +705,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -723,9 +728,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -762,7 +772,7 @@
         "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1712943644577,
-        "modifiedTime": 1712943949592,
+        "modifiedTime": 1713147891258,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!BKeSIam1C0mXCW3s.aKBlK0HjsG04v9ld"
@@ -869,7 +879,7 @@
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672833353,
-    "modifiedTime": 1712944046542,
+    "modifiedTime": 1713147891258,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!BKeSIam1C0mXCW3s"

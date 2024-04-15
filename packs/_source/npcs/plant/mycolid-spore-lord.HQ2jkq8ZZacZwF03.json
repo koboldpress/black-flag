@@ -753,7 +753,7 @@
       "_key": "!actors.items!HQ2jkq8ZZacZwF03.WNojEeXC3HjLnY2V"
     },
     {
-      "name": "Mushroom Ring (Recharge 5–6)",
+      "name": "Mushroom Ring",
       "type": "feature",
       "system": {
         "type": {
@@ -787,7 +787,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -805,9 +810,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -841,16 +851,16 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711915836214,
-        "modifiedTime": 1711916181976,
+        "modifiedTime": 1713147839530,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!HQ2jkq8ZZacZwF03.TZcfTb9gy0fTa9CF"
     },
     {
-      "name": "Slumber Spores (Recharge 5–6)",
+      "name": "Slumber Spores",
       "type": "feature",
       "system": {
         "type": {
@@ -884,7 +894,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -902,9 +917,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -938,10 +958,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711915836382,
-        "modifiedTime": 1711916244813,
+        "modifiedTime": 1713147851496,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!HQ2jkq8ZZacZwF03.4QmPsVTqD0JNrVVF"
@@ -1047,10 +1067,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709616033860,
-    "modifiedTime": 1711916244813,
+    "modifiedTime": 1713147851496,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!HQ2jkq8ZZacZwF03"

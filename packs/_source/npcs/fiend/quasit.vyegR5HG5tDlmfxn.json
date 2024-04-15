@@ -724,7 +724,7 @@
       "_key": "!actors.items!vyegR5HG5tDlmfxn.f23Ymu7MveTJFRMe"
     },
     {
-      "name": "Scare",
+      "name": "Scare (True Form Only)",
       "type": "feature",
       "_id": "pjr5hk5SCS8FJSD3",
       "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
@@ -749,7 +749,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -767,9 +772,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -804,10 +814,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.018",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711504009898,
-        "modifiedTime": 1711504133619,
+        "modifiedTime": 1713147507940,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.pjr5hk5SCS8FJSD3"
@@ -821,10 +831,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709616282254,
-    "modifiedTime": 1711749536542,
+    "modifiedTime": 1713147507940,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!vyegR5HG5tDlmfxn"

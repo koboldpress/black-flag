@@ -503,7 +503,7 @@
       "_key": "!actors.items!V8ccZwy2rPAl67gB.ncSyQRPTsxWRb10h"
     },
     {
-      "name": "Fire Breath (Recharge 5–6)",
+      "name": "Fire Breath",
       "type": "feature",
       "_id": "GB4XG4izYBcjCxHM",
       "img": "icons/magic/fire/blast-jet-stream-embers-yellow.webp",
@@ -536,7 +536,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -554,9 +559,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -594,10 +604,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711667664884,
-        "modifiedTime": 1711908934514,
+        "modifiedTime": 1713147760805,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!V8ccZwy2rPAl67gB.GB4XG4izYBcjCxHM"
@@ -611,10 +621,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709672148299,
-    "modifiedTime": 1711908934514,
+    "modifiedTime": 1713147760805,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!V8ccZwy2rPAl67gB"

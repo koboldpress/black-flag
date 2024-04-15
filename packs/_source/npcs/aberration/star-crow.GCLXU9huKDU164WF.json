@@ -575,7 +575,7 @@
       "_key": "!actors.items!GCLXU9huKDU164WF.i7ORuNrwvzm8a6tH"
     },
     {
-      "name": "Blinding Burst (Rechard 5–6)",
+      "name": "Blinding Burst",
       "type": "feature",
       "system": {
         "type": {
@@ -601,7 +601,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -619,9 +624,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -658,7 +668,7 @@
         "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1712945775183,
-        "modifiedTime": 1712946000603,
+        "modifiedTime": 1713147981469,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!GCLXU9huKDU164WF.wmk3E9CgZKHdxXLM"
@@ -675,7 +685,7 @@
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709697032861,
-    "modifiedTime": 1712946013752,
+    "modifiedTime": 1713147981469,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!GCLXU9huKDU164WF"

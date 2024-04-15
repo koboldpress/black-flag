@@ -597,7 +597,7 @@
       "_key": "!actors.items!WMceKrllLfWXxPU4.BHW1yUgCMUtmaj86"
     },
     {
-      "name": "Acid Breath (Recharge 5–6)",
+      "name": "Acid Breath",
       "type": "feature",
       "_id": "NckYPAKxQtbUY0Tw",
       "img": "icons/magic/acid/dissolve-bone-white.webp",
@@ -613,7 +613,7 @@
                 "parts": [
                   {
                     "number": 5,
-                    "denomination": 8,
+                    "denomination": "8",
                     "bonus": "",
                     "custom": "",
                     "type": "acid"
@@ -630,7 +630,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -648,9 +653,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -688,10 +698,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711666996605,
-        "modifiedTime": 1711667472110,
+        "modifiedTime": 1713147596318,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!WMceKrllLfWXxPU4.NckYPAKxQtbUY0Tw"
@@ -705,10 +715,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709616562122,
-    "modifiedTime": 1711749394637,
+    "modifiedTime": 1713147596318,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!WMceKrllLfWXxPU4"

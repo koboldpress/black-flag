@@ -624,7 +624,7 @@
       "_key": "!actors.items!kXwQIPBSeUCmhroJ.4l9vRAPxIRGGo6Hy"
     },
     {
-      "name": "Dive (Recharge 5–6)",
+      "name": "Dive",
       "type": "feature",
       "system": {
         "type": {
@@ -658,7 +658,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -676,9 +681,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -712,10 +722,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711909378785,
-        "modifiedTime": 1711909422277,
+        "modifiedTime": 1713147781828,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!kXwQIPBSeUCmhroJ.X4fndAVwSKcMinI5"
@@ -729,10 +739,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709615530482,
-    "modifiedTime": 1711909422277,
+    "modifiedTime": 1713147781828,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!kXwQIPBSeUCmhroJ"

@@ -595,7 +595,7 @@
       "_key": "!actors.items!ov0XmnwLkhoR2PUS.x3s6fBRarPUpjtLF"
     },
     {
-      "name": "Acid Breath (Recharge 5–6)",
+      "name": "Acid Breath",
       "type": "feature",
       "_id": "mW75rQzjan4sqCkm",
       "img": "icons/magic/acid/dissolve-bone-white.webp",
@@ -628,7 +628,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -646,9 +651,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -686,10 +696,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1711666996605,
-        "modifiedTime": 1711682156407,
+        "modifiedTime": 1713147541947,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ov0XmnwLkhoR2PUS.mW75rQzjan4sqCkm"
@@ -703,10 +713,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709616692021,
-    "modifiedTime": 1711749403446,
+    "modifiedTime": 1713147541947,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ov0XmnwLkhoR2PUS"

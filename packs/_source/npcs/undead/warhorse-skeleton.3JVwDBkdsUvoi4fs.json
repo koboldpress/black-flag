@@ -518,7 +518,7 @@
       "_key": "!actors.items!3JVwDBkdsUvoi4fs.ekaJInuOJdwQWYSJ"
     },
     {
-      "name": "Counterattack (Recharge 6)",
+      "name": "Counterattack",
       "type": "feature",
       "system": {
         "type": {
@@ -535,7 +535,12 @@
               "condition": ""
             },
             "consumption": {
-              "targets": [],
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
               "scale": {
                 "allowed": false
               }
@@ -553,9 +558,14 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "6"
+            }
+          ],
           "min": "",
-          "max": ""
+          "max": "1"
         },
         "advancement": {},
         "description": {
@@ -595,7 +605,7 @@
         "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1712944504150,
-        "modifiedTime": 1712944650986,
+        "modifiedTime": 1713147949174,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!3JVwDBkdsUvoi4fs.9k7QWVQxo6iHksTP"
@@ -612,7 +622,7 @@
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709673806888,
-    "modifiedTime": 1712944676488,
+    "modifiedTime": 1713147949174,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!3JVwDBkdsUvoi4fs"
