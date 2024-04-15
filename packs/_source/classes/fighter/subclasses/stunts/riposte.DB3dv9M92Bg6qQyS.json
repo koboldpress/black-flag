@@ -3,7 +3,7 @@
   "name": "Riposte",
   "type": "feature",
   "_id": "DB3dv9M92Bg6qQyS",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/melee/strike-spear-red.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -22,6 +22,37 @@
     },
     "level": {
       "value": null
+    },
+    "activities": {
+      "wSiHxjqBsuQglUIQ": {
+        "type": "utility",
+        "_id": "wSiHxjqBsuQglUIQ",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "reaction",
+          "condition": "When a creature you can see within 5 feet of you misses you with a weapon attack"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -32,10 +63,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1700002705098,
-    "modifiedTime": 1701041364181,
+    "modifiedTime": 1713204539688,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DB3dv9M92Bg6qQyS"

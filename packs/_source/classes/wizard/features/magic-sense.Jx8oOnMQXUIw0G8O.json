@@ -3,7 +3,7 @@
   "name": "Magic Sense",
   "type": "feature",
   "_id": "Jx8oOnMQXUIw0G8O",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -22,6 +22,48 @@
     },
     "level": {
       "value": 2
+    },
+    "activities": {
+      "Ra8DD2psngPcF68e": {
+        "type": "utility",
+        "_id": "Ra8DD2psngPcF68e",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": "@prof + 1",
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ]
     }
   },
   "effects": [],
@@ -32,10 +74,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1699045926413,
-    "modifiedTime": 1700345873375,
+    "modifiedTime": 1713205123092,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Jx8oOnMQXUIw0G8O"

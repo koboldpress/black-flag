@@ -3,7 +3,7 @@
   "name": "Arcane Recovery",
   "type": "feature",
   "_id": "iUtVqw2qaoa6oFYa",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/sundries/books/book-open-turquoise.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -22,6 +22,49 @@
     },
     "level": {
       "value": 1
+    },
+    "uses": {
+      "min": "",
+      "max": "1",
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "activities": {
+      "YIZbI8PM0EMX6y8B": {
+        "type": "utility",
+        "_id": "YIZbI8PM0EMX6y8B",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "hour",
+          "condition": "When you finish a short rest",
+          "value": 1
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -32,10 +75,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1699045911860,
-    "modifiedTime": 1700345857902,
+    "modifiedTime": 1713205072740,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!iUtVqw2qaoa6oFYa"

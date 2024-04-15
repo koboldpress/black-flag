@@ -3,7 +3,7 @@
   "name": "Tactical Caster",
   "type": "feature",
   "_id": "zOUQ7p0izLL8mKzB",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/fire/explosion-flame-blue.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -22,6 +22,48 @@
     },
     "level": {
       "value": 3
+    },
+    "activities": {
+      "EVrGA5Zq4N23AycE": {
+        "type": "utility",
+        "_id": "EVrGA5Zq4N23AycE",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you cast a spell that causes damage"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": "@prof",
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ]
     }
   },
   "effects": [],
@@ -32,10 +74,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1700002864339,
-    "modifiedTime": 1700006449141,
+    "modifiedTime": 1713205771728,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!zOUQ7p0izLL8mKzB"

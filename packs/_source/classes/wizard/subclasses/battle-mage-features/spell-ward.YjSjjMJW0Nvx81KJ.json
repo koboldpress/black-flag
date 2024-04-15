@@ -3,7 +3,7 @@
   "name": "Spell Ward",
   "type": "feature",
   "_id": "YjSjjMJW0Nvx81KJ",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
   "system": {
     "advancement": {},
     "description": {
@@ -22,9 +22,96 @@
     },
     "level": {
       "value": 3
+    },
+    "uses": {
+      "min": "",
+      "max": "@prof",
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "activities": {
+      "zHMmg9G38Fic4PXp": {
+        "type": "utility",
+        "_id": "zHMmg9G38Fic4PXp",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you cast an arcane spell of 1st ring or higher"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
+      "origin": "Compendium.black-flag.classes.Item.YjSjjMJW0Nvx81KJ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": 60,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "name": "Spell Ward",
+      "_id": "dqha31WGdiIZsYOy",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{\"type\": \"bonus\", \"filter\": [{\"k\": \"type\", \"v\": \"armor-class\"}], \"formula\": \"@prof\" }"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "bludgeoning"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "piercing"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "slashing"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!YjSjjMJW0Nvx81KJ.dqha31WGdiIZsYOy"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -32,10 +119,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1700002851822,
-    "modifiedTime": 1700006451170,
+    "modifiedTime": 1713205720722,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YjSjjMJW0Nvx81KJ"
