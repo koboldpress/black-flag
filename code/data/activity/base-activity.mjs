@@ -102,7 +102,10 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareFinalData() {
+		this.uses.prepareData();
+
 		const rollData = this.item.getRollData();
 		const keyPrefix = `activity-${this.id}-invalid`;
 		const name = `${this.item.name} (${this.name})`;
