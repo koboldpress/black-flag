@@ -231,6 +231,20 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritdoc */
+	async _preCreate(data, options, user) {
+		if ((await super._preCreate(data, options, user)) === false) return false;
+
+		// Create class identifier based on name
+		if (Object.hasOwn(this.system.identifier ?? {}, "value") && !this.system.identifier.value) {
+			await this.updateSource({ "system.identifier.value": slugify(data.name, { strict: true }) });
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Factory Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

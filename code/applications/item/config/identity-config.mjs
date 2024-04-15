@@ -35,7 +35,7 @@ export default class IdentifyConfig extends DocumentSheet {
 	async getData(options = {}) {
 		const context = await super.getData(options);
 		context.displayIdentifier = Object.hasOwn(context.document.system.identifier ?? {}, "value");
-		context.identifierPlaceholder = slugify(context.document.name);
+		context.identifierPlaceholder = slugify(context.document.name, { strict: true });
 		return context;
 	}
 
