@@ -229,14 +229,14 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Resistances
 		const resistances = [
-			...Array.from(traits.damage.resistances.value)
-				.map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label))
-				.filter(t => t),
+			...Array.from(traits.damage.resistances.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			),
 			...Array.from(traits.condition.resistances.value).map(t =>
 				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
-		if (resistances.size || this.modes.editing)
+		if (resistances.length || this.modes.editing)
 			context.traits.push({
 				key: "resistances",
 				label: "resistances",
@@ -251,7 +251,7 @@ export default class PCSheet extends BaseActorSheet {
 				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
 			)
 		].filter(t => t);
-		if (immunities?.length || this.modes.editing)
+		if (immunities.length || this.modes.editing)
 			context.traits.push({
 				key: "immunities",
 				label: "immunities",
@@ -260,10 +260,15 @@ export default class PCSheet extends BaseActorSheet {
 			});
 
 		// Vulnerabilities
-		const vulnerabilities = traits.damage.vulnerabilities.value
-			.map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label))
-			.filter(t => t);
-		if (vulnerabilities.size || this.modes.editing)
+		const vulnerabilities = [
+			...Array.from(traits.damage.vulnerabilities.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
+			),
+			...Array.from(traits.condition.vulnerabilities.value).map(t =>
+				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
+			)
+		].filter(t => t);
+		if (vulnerabilities.length || this.modes.editing)
 			context.traits.push({
 				key: "vulnerabilities",
 				label: "vulnerabilities",
