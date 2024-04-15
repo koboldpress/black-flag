@@ -21,9 +21,6 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			identifier: new SchemaField({
-				value: new IdentifierField()
-			}),
 			restriction: new SchemaField({
 				filters: new FilterField()
 			}),
