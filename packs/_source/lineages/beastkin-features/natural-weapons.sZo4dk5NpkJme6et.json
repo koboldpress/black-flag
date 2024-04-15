@@ -2,7 +2,7 @@
   "folder": "qn9aEdgelNiRQN8Y",
   "name": "Natural Weapons",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
   "system": {
     "description": {
       "value": "<p>You have claws, horns, hooves, fangs, spines, or a similar adaptation that serves as a natural weapon. Work with your GM to determine what type of natural weapon you possess and decide whether it does bludgeoning, piercing, or slashing damage. You can use your natural weapon to make unarmed strikes. When you hit with it, the strike deals 1d6 + your STR or DEX modifier damage (chosen at character creation) of your chosen type, instead of the bludgeoning damage normal for an unarmed strike.</p>",
@@ -19,6 +19,59 @@
     "advancement": {},
     "restriction": {
       "filters": []
+    },
+    "uses": {
+      "min": "",
+      "max": ""
+    },
+    "activities": {
+      "mw1bfMuUJBmN2o9U": {
+        "type": "attack",
+        "_id": "mw1bfMuUJBmN2o9U",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "6",
+                "bonus": "@mod",
+                "custom": "",
+                "type": "bludgeoning"
+              }
+            ]
+          },
+          "ability": "strength"
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Unarmed Strike",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
     }
   },
   "effects": [],
@@ -28,10 +81,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695490865976,
-    "modifiedTime": 1701131509531,
+    "modifiedTime": 1713212959545,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "sZo4dk5NpkJme6et",

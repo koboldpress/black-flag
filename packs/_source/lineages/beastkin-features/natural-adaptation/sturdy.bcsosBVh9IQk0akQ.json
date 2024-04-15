@@ -2,13 +2,15 @@
   "folder": "GJ1cQ2GIkSHlWqqL",
   "name": "Sturdy",
   "type": "feature",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/creatures/mammals/beast-horned-scaled-glowing-orange.webp",
   "system": {
     "description": {
       "value": "<p>Powerful limbs, fat reserves, and thick hides are clear features of your origin. When you aren’t wearing armor, you have a natural AC of 13 + your DEX modifier. Additionally, you count as one size larger when determining your carrying capacity and the weight you can push or drag.</p>",
       "source": "Player's Guide"
     },
-    "identifier": {},
+    "identifier": {
+      "associated": ""
+    },
     "level": {
       "value": null
     },
@@ -16,9 +18,35 @@
       "category": "lineage",
       "value": "naturalAdaptation"
     },
-    "advancement": {},
+    "advancement": {
+      "9ZYrrWVjxLrJ4ISf": {
+        "type": "property",
+        "_id": "9ZYrrWVjxLrJ4ISf",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.ac.formulas",
+              "mode": 2,
+              "value": "{\"label\":\"Natural Armor\", \"formula\": \"13 + @abilities.dexterity.mod\", \"armored\": false}"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Natural Armor",
+        "icon": "",
+        "hint": ""
+      }
+    },
     "restriction": {
       "filters": []
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -28,10 +56,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695490996647,
-    "modifiedTime": 1701131440635,
+    "modifiedTime": 1713213277455,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "bcsosBVh9IQk0akQ",

@@ -92,8 +92,8 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 
 		// Filter formulas to only ones that match current armor settings
 		const validFormulas = ac.formulas.filter(formula => {
-			if ( (formula.armored !== null) && (formula.armored !== !!acData.armored) ) return false;
-			if ( (formula.shielded !== null) && (formula.shielded !== !!acData.shielded) ) return false;
+			if ( (typeof formula.armored === "boolean") && (formula.armored !== !!acData.armored) ) return false;
+			if ( (typeof formula.shielded === "boolean") && (formula.shielded !== !!acData.shielded) ) return false;
 			return true;
 		});
 

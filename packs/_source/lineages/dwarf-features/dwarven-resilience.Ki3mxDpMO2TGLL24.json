@@ -3,9 +3,31 @@
   "name": "Dwarven Resilience",
   "type": "feature",
   "_id": "Ki3mxDpMO2TGLL24",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/magic/acid/dissolve-drip-droplet-smoke.webp",
   "system": {
-    "advancement": {},
+    "advancement": {
+      "9rwIQ5enrlIQq1IV": {
+        "type": "property",
+        "_id": "9rwIQ5enrlIQq1IV",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "poison"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Poison Resistance",
+        "icon": "",
+        "hint": ""
+      }
+    },
     "description": {
       "value": "<p>You have advantage on saves against becoming poisoned, and you are resistant to poison damage.</p>",
       "source": "Black Flag Reference Document"
@@ -22,6 +44,10 @@
     },
     "level": {
       "value": null
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -32,10 +58,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.5.005",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1701131531924,
-    "modifiedTime": 1701131569228,
+    "modifiedTime": 1713213608798,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Ki3mxDpMO2TGLL24"
