@@ -7,6 +7,10 @@
 
 		.summary {
 			width: 400px;
+
+			textarea[name="system.description.short"] {
+				min-height: calc(6em + 12px);
+			}
 		}
 		.details {
 			margin-inline-end: 8px;
@@ -96,7 +100,7 @@
 		width: 400px;
 		height: 512px;
 		contain: layout;
-	
+
 		img {
 			width: 390px;
 			height: 390px;
@@ -104,7 +108,7 @@
 			margin-block-start: 10px;
 			border: none;
 		}
-	
+
 		.name {
 			position: absolute;
 			top: 410px;
@@ -167,7 +171,7 @@
 				margin-inline: -0.5em;
 				border: none;
 				background: none;
-				
+
 				&::placeholder {
 					color: rgba(255, 255, 255, 0.5);
 				}
@@ -184,7 +188,7 @@
 			z-index: 0;
 		}
 	}
-	
+
 	.info {
 		flex-grow: 1;
 		margin-inline: 1rem;
@@ -195,7 +199,7 @@
 				max-width: unset;
 				margin-inline: -0.5rem;
 				border-radius: 10px;
-			
+
 				.editor-menu {
 					border-radius: 0;
 				}
@@ -204,7 +208,7 @@
 					margin: 0;
 					background-color: rgba(255, 255, 255, 0.5);
 					border-bottom-radius: 5px;
-			
+
 					.editor-content {
 						padding: 0.5rem 1rem;
 					}
@@ -246,7 +250,7 @@
 			gap: 0.35rem;
 			padding: 0;
 			list-style: none;
-	
+
 			> li {
 				border: 2px groove white;
 				border-radius: 1em 0;
