@@ -255,6 +255,215 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!naDs3W5YhTHbr1ej.C01MlLAPQV7QtGiH"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Spear",
+      "type": "weapon",
+      "_id": "7PI70ftLatfjDSbV",
+      "img": "icons/weapons/polearms/spear-simple-engraved.webp",
+      "system": {
+        "activities": {
+          "TjDtj5w8nZlmCBg0": {
+            "type": "attack",
+            "_id": "TjDtj5w8nZlmCBg0",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": []
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "3"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage, or [[/damage versatile average]] damage if used with two hands.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "spear"
+        },
+        "options": [
+          "pull",
+          "trip"
+        ],
+        "properties": [
+          "thrown",
+          "versatile"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.eG0Vk1Kr8peAAYhW"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024069642,
+        "modifiedTime": 1713154337229,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!naDs3W5YhTHbr1ej.7PI70ftLatfjDSbV"
+    },
+    {
+      "name": "Protector's Parry",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "pzOv4LUGjXPdW87m": {
+            "type": "utility",
+            "_id": "pzOv4LUGjXPdW87m",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": "When a friendly creature the guard can see within 5 feet of it is the target of an attack"
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a friendly creature the guard can see within 5 feet of it is the target of an attack, the guard can interpose its weapon between the creature and the attacker. The friendly creature adds 2 to its AC against that attack. To use this reaction, the guard must be able to see the attacker and be wielding a melee weapon.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "B5UdILr8Z3rPv8cG",
+      "img": "icons/skills/melee/swords-parry-block-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713154360263,
+        "modifiedTime": 1713154396083,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!naDs3W5YhTHbr1ej.B5UdILr8Z3rPv8cG"
     }
   ],
   "effects": [],
@@ -265,10 +474,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698848376,
-    "modifiedTime": 1711586140497,
+    "modifiedTime": 1713154396083,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!naDs3W5YhTHbr1ej"

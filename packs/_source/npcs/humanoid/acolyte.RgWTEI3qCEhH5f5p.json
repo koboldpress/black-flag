@@ -188,7 +188,1006 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Divine Providence",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Each friendly creature within 20 feet of the acolyte that isn’t a Construct or Undead has advantage on death saves.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "XqkkyPrLZu4oCOak",
+      "img": "icons/magic/holy/prayer-hands-glowing-yellow-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148168337,
+        "modifiedTime": 1713148210623,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.XqkkyPrLZu4oCOak"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Mace",
+      "type": "weapon",
+      "_id": "TE2z50cHjPpger89",
+      "img": "icons/weapons/maces/mace-flanged-steel.webp",
+      "system": {
+        "activities": {
+          "hMAOkEB5pPj7cktP": {
+            "type": "attack",
+            "_id": "hMAOkEB5pPj7cktP",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": ""
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "ability": "wisdom"
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "mace"
+        },
+        "options": [
+          "bash"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "bludgeoning"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.XOrCLbriQXUoLCTL"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024061626,
+        "modifiedTime": 1713148348368,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.TE2z50cHjPpger89"
+    },
+    {
+      "name": "Radiant Bolt",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "LD4WlNnK9FOEwbAt": {
+            "type": "attack",
+            "_id": "LD4WlNnK9FOEwbAt",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "spell"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "6"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": "4",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "radiant"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack:</em> [[/attack]], range 60 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "KRLa8ajSO0KlXG3e",
+      "img": "icons/magic/light/projectile-halo-teal.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148179238,
+        "modifiedTime": 1713148285715,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.KRLa8ajSO0KlXG3e"
+    },
+    {
+      "name": "Spellcasting",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The acolyte casts one of the following spells using WIS as the spellcasting ability (spell save DC 13).</p><p>At will: light, thaumaturgy</p><p>3/day each: bless, cure wounds, sanctuary</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "lkPDedGsLNoV4JF8",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148368122,
+        "modifiedTime": 1713148425854,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.lkPDedGsLNoV4JF8"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Light",
+      "type": "spell",
+      "_id": "iCPIdm5wM6C441y4",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {
+          "UOLgsuCw2cAeQumo": {
+            "type": "utility",
+            "_id": "UOLgsuCw2cAeQumo",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You cause bright light to spring forth from whatever you touch.</em></p><p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a DEX save to avoid the spell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a firefly or phosphorescent moss",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "arcane",
+          "divine"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.TWVI2s8oV0TiSEKy"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934344025,
+        "modifiedTime": 1713152053257,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.iCPIdm5wM6C441y4"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Thaumaturgy",
+      "type": "spell",
+      "_id": "lqV6YNVGgYiBv644",
+      "img": "icons/magic/lightning/barrier-wall-shield-gray.webp",
+      "system": {
+        "activities": {
+          "rNt7sRMZNWBMsRrb": {
+            "type": "utility",
+            "_id": "rNt7sRMZNWBMsRrb",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You display divine power through a bevy of parlor tricks and small miracles.</em></p><p>You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:</p><ul><li><p>Your voice booms up to three times as loud as normal for 1 minute.</p></li><li><p>You cause flames to flicker, brighten, dim, or change color for 1 minute.</p></li><li><p>You cause harmless tremors in the ground for 1 minute.</p></li><li><p>You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.</p></li><li><p>You instantaneously cause an unlocked door or window to fly open or slam shut.</p></li><li><p>You alter the appearance of your eyes for 1 minute.</p></li></ul><p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.J9zLZYHvTHwzB98C"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706935782645,
+        "modifiedTime": 1713148485801,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.lqV6YNVGgYiBv644"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Bless",
+      "type": "spell",
+      "_id": "eV5zAYGvxaav5VjV",
+      "img": "icons/magic/light/orb-shadow-blue.webp",
+      "system": {
+        "activities": {
+          "exZwWvYm43oUy05j": {
+            "type": "utility",
+            "_id": "exZwWvYm43oUy05j",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You bless a group of creatures with affirmation and good fortune.</em></p><p>You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a save before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or save.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a sprinkling of holy water",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "3"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "enchantment"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706932347742,
+        "modifiedTime": 1713152066405,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.eV5zAYGvxaav5VjV"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Cure Wounds",
+      "type": "spell",
+      "_id": "G66uBpUMfeO1CZBQ",
+      "img": "icons/magic/life/cross-flared-green.webp",
+      "system": {
+        "activities": {
+          "BwtypG9ia7YQgRd0": {
+            "type": "healing",
+            "_id": "BwtypG9ia7YQgRd0",
+            "description": "",
+            "system": {
+              "healing": {
+                "type": "healing",
+                "denomination": "8",
+                "bonus": "@mod",
+                "custom": "",
+                "number": 1
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You touch a wounded creature and heal them.</em></p><p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.</p><p>This spell has no effect on Undead or Constructs.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706932857027,
+        "modifiedTime": 1713152078115,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.G66uBpUMfeO1CZBQ"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Sanctuary",
+      "type": "spell",
+      "_id": "GjHWjsNYBCrSlhBw",
+      "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
+      "system": {
+        "activities": {
+          "5Kqt31KbXaOUrryU": {
+            "type": "savingThrow",
+            "_id": "5Kqt31KbXaOUrryU",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>Your prayers offer a refuge for yourself or another.</em></p><p>You ward a creature within range against attack. Until the spell ends, any creature who targets the warded creature with an attack or a harmful spell must first make a WIS save. On a failed save, the creature must choose a new target or lose the attack or spell. This spell doesn’t protect the warded creature from area effects, such as the explosion of a fireball.</p><p>If the warded creature makes an attack or casts a spell that affects an enemy creature, this spell ends.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a small silver mirror",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "abjuration"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.AGXXq1EcLVPFMVPh"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706935282460,
+        "modifiedTime": 1713152091798,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!RgWTEI3qCEhH5f5p.GjHWjsNYBCrSlhBw"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -197,10 +1196,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698303979,
-    "modifiedTime": 1711585999938,
+    "modifiedTime": 1713152091798,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!RgWTEI3qCEhH5f5p"

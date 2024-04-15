@@ -189,7 +189,1931 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Arcane Weapons",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mage’s weapon attacks are magical. When the mage hits with any weapon, the weapon deals an extra 3d6 force damage (included in the attack).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "iydkzy2kc1yl7QbL",
+      "img": "icons/weapons/swords/sword-flanged-lightning.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713154674106,
+        "modifiedTime": 1713154735541,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.iydkzy2kc1yl7QbL"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "am5zXJmd84KgRhKI",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.jS7wIZVCAi6I2VMe"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1709773734467,
+        "modifiedTime": 1713154844881,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.am5zXJmd84KgRhKI"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "bhFwcxBiQrvyraS2",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mage makes three Dagger or Fire Bolt attacks. It can replace one attack with a use of Spellcasting.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.bhFwcxBiQrvyraS2"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Dagger",
+      "type": "weapon",
+      "_id": "YuY9xLoVb3zO2Esl",
+      "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "force"
+                  }
+                ]
+              },
+              "attack": {
+                "flat": false,
+                "bonus": ""
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024042732,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.YuY9xLoVb3zO2Esl"
+    },
+    {
+      "name": "Fire Bolt",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "gOV6dNcdce4Ra4pF": {
+            "type": "attack",
+            "_id": "gOV6dNcdce4Ra4pF",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "spell"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "7"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "4",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack:</em> [[/attack]], range 120 ft., one target. Hit: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "4K56K7tIEwoF0ETE",
+      "img": "icons/magic/fire/explosion-flame-lightning-strike.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713154771419,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.4K56K7tIEwoF0ETE"
+    },
+    {
+      "name": "Spellcasting",
+      "type": "feature",
+      "_id": "ueLWGcFtELkL7PVg",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The mage casts one of the following spells, using INT as the spellcasting ability (spell save DC 15).</p><p>At will: <em>detect magic</em>, <em>light</em>, <em>mage hand</em>, <em>prestidigitation</em></p><p>3/day each: <em>fly</em>, <em>mage armor</em>, <em>mirror image</em></p><p>2/day each: <em>fireball</em>, <em>haste</em>, <em>slow</em></p><p>1/day each: <em>cone of cold</em>, <em>greater invisibility</em></p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 1000000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.P2EcGeqNIDMvi3gc"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148438512,
+        "modifiedTime": 1713154874703,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.ueLWGcFtELkL7PVg"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Detect Magic",
+      "type": "spell",
+      "_id": "iAUb3UbD6RCpFCfI",
+      "img": "icons/magic/symbols/ring-circle-smoke-blue.webp",
+      "system": {
+        "activities": {
+          "h33XEMOhLhK4mR5Y": {
+            "type": "utility",
+            "_id": "h33XEMOhLhK4mR5Y",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You sense the presence of nearby magic.</em></p><p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "divination"
+      },
+      "effects": [],
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.jhMAM81keoyqBzsy"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706933051230,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.iAUb3UbD6RCpFCfI"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Light",
+      "type": "spell",
+      "_id": "1myFkGcv0TGZ1IB4",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {
+          "UOLgsuCw2cAeQumo": {
+            "type": "utility",
+            "_id": "UOLgsuCw2cAeQumo",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You cause bright light to spring forth from whatever you touch.</em></p><p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a DEX save to avoid the spell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a firefly or phosphorescent moss",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "object",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "arcane",
+          "divine"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.TWVI2s8oV0TiSEKy"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934344025,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.1myFkGcv0TGZ1IB4"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Mage Hand",
+      "type": "spell",
+      "_id": "D02EUavE2lK2FRsi",
+      "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
+      "system": {
+        "activities": {
+          "i2GqtsBwRFWw6nNj": {
+            "type": "utility",
+            "_id": "i2GqtsBwRFWw6nNj",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You conjure a ghostly hand which you control as an extension of your reach.</em></p><p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can’t attack, activate magic items, or carry more than 10 pounds.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "conjuration"
+      },
+      "effects": [],
+      "sort": 600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.z0bwd75DutQ7TOcY"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934497441,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.D02EUavE2lK2FRsi"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Prestidigitation",
+      "type": "spell",
+      "_id": "4AG2Nm6sHFf5qOdE",
+      "img": "icons/magic/symbols/runes-triangle-orange-purple.webp",
+      "system": {
+        "activities": {
+          "4wfPfvEyy74K7I2i": {
+            "type": "utility",
+            "_id": "4wfPfvEyy74K7I2i",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You tap rudimentary magic to create a variety of helpful or irksome effects around you.</em></p><p>This spell is a minor trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p><ul><li><p>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</p></li><li><p>You instantaneously light or snuff out a candle, a torch, or a small campfire.</p></li><li><p>You instantaneously clean or soil an object no larger than 1 cubic foot.</p></li><li><p>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</p></li><li><p>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</p></li><li><p>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</p></li></ul><p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "10"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 700000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.TgJgOsNetxkikvZa"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934966568,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.4AG2Nm6sHFf5qOdE"
+    },
+    {
+      "folder": "V6ryz9MMBJLcGrft",
+      "name": "Fly",
+      "type": "spell",
+      "_id": "fuIVWbrv4rCSYVVu",
+      "img": "icons/creatures/birds/dove-pigeon-flying-white.webp",
+      "system": {
+        "activities": {
+          "8QpTMARs3wYLMcOw": {
+            "type": "utility",
+            "_id": "8QpTMARs3wYLMcOw",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>With an arcane phrase and a touch, you grant the power of flight.</em></p><p>You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 3
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a wing feather from any bird",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.9m3weZVFQcscp85O"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706933734625,
+        "modifiedTime": 1713155088465,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.fuIVWbrv4rCSYVVu"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Mage Armor",
+      "type": "spell",
+      "_id": "rgNLnppfF3qOXXMh",
+      "img": "icons/magic/defensive/shield-barrier-flaming-diamond-magenta.webp",
+      "system": {
+        "activities": {
+          "Ac5PsZM9ZPjhylvo": {
+            "type": "utility",
+            "_id": "Ac5PsZM9ZPjhylvo",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>At a touch, you weave invisible defenses around your target.</em></p><p>You touch a willing creature who isn’t wearing armor, and a protective magical force surrounds it until the spell ends. The target’s base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a piece of cured leather",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "8"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "abjuration"
+      },
+      "effects": [],
+      "sort": 900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.3l1YJDLUiCS4EYzx"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934475222,
+        "modifiedTime": 1713155058629,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.rgNLnppfF3qOXXMh"
+    },
+    {
+      "folder": "iJIjiGFvx6IqTXvu",
+      "name": "Mirror Image",
+      "type": "spell",
+      "_id": "z9DiRqmjBH8mAjJZ",
+      "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
+      "system": {
+        "activities": {
+          "1A9Ss33O082vrVKj": {
+            "type": "utility",
+            "_id": "1A9Ss33O082vrVKj",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You conjure three images of yourself that constantly shift to obscure your true position.</em></p><p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it’s impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p><p>Each time a creature targets you with an attack during the spell’s duration, roll a d20 to determine whether the attack instead targets one of your duplicates.</p><p>If you have three duplicates, you must roll a 6 or higher to change the attack’s target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p><p>A duplicate’s AC equals 10 + your DEX modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that targets it. A duplicate ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p><p>A creature is unaffected by this spell if it can’t see, if it relies on senses other than sight, such as keensense, or if it can perceive illusions as false, as with truesight.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 2
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "self"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "illusion"
+      },
+      "effects": [],
+      "sort": 1000000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.29lF0OpdddD1nOn2"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934717991,
+        "modifiedTime": 1713155048846,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.z9DiRqmjBH8mAjJZ"
+    },
+    {
+      "name": "Fireball",
+      "type": "spell",
+      "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><em>You hurl a small ball of flame that explodes in a huge conflagration.</em></p><p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot- radius sphere centered on that point must make a DEX save. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 3
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a tiny ball of bat guano and sulfur",
+            "denomination": "gp",
+            "consumed": false
+          }
+        },
+        "tags": [],
+        "range": {
+          "value": "60",
+          "units": "foot"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "evocation",
+        "target": {
+          "template": {
+            "type": "sphere",
+            "size": "20",
+            "width": "",
+            "height": "",
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "type": "",
+            "count": "",
+            "choice": false
+          }
+        },
+        "activities": {
+          "QW8NIPm6S3PFZ1is": {
+            "type": "savingThrow",
+            "_id": "QW8NIPm6S3PFZ1is",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 8,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": ""
+              },
+              "ability": "dexterity"
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "description": "",
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            }
+          }
+        },
+        "uses": {
+          "min": "",
+          "max": "2",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ]
+        }
+      },
+      "effects": [],
+      "folder": "V6ryz9MMBJLcGrft",
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.VYvD59yJYefhAwOI"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1699297018533,
+        "modifiedTime": 1713154989871,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "KLa0TzE2Af5p19cR",
+      "sort": 1100000,
+      "_key": "!actors.items!90gAvpMg83KhqRdh.KLa0TzE2Af5p19cR"
+    },
+    {
+      "folder": "V6ryz9MMBJLcGrft",
+      "name": "Haste",
+      "type": "spell",
+      "_id": "mmlyP09p18Fzjq6o",
+      "img": "icons/magic/movement/trail-streak-zigzag-teal.webp",
+      "system": {
+        "activities": {
+          "xD6JcH2ENhnN0xzM": {
+            "type": "utility",
+            "_id": "xD6JcH2ENhnN0xzM",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "2"
+        },
+        "description": {
+          "value": "<p><em>You imbue your target with swiftness, making them hard to hit and faster to hit back.</em></p><p>Choose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on DEX saves, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 3
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a shaving of licorice root",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 1200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.aHifQ78fmPqA4oAJ"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934086221,
+        "modifiedTime": 1713155000561,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.mmlyP09p18Fzjq6o"
+    },
+    {
+      "folder": "V6ryz9MMBJLcGrft",
+      "name": "Slow",
+      "type": "spell",
+      "_id": "1lCnR8J2Pnn9noi1",
+      "img": "icons/magic/time/clock-spinning-gold-pink.webp",
+      "system": {
+        "activities": {
+          "9rNj8nFcUMialmy3": {
+            "type": "savingThrow",
+            "_id": "9rNj8nFcUMialmy3",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "2"
+        },
+        "description": {
+          "value": "<p><em>You magically lengthen time around your targets, reducing their reaction time.</em></p><p>You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a WIS save or be affected by this spell for the duration.</p><p>An affected target’s speed is halved, it takes a −2 penalty to AC and DEX saves, and it can’t use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.</p><p>If the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell. If it can’t, the spell is wasted.</p><p>A creature affected by this spell makes another WIS save at the end of its turn. On a successful save, the effect ends for it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 3
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a drop of molasses",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "cube",
+            "size": "40"
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "6"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "120"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 1300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.65Sa7kguiOuycPt0"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706935589815,
+        "modifiedTime": 1713155016612,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.1lCnR8J2Pnn9noi1"
+    },
+    {
+      "folder": "rRg9we6fU3e9Hvu7",
+      "name": "Cone of Cold",
+      "type": "spell",
+      "_id": "WyDoR4xLUV5FJ9k4",
+      "img": "icons/magic/water/projectile-bolts-salvo-blue.webp",
+      "system": {
+        "activities": {
+          "9YKfkRMqEnkk1Suz": {
+            "type": "savingThrow",
+            "_id": "9YKfkRMqEnkk1Suz",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 8,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "cold"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "description": {
+          "value": "<p><em>A cone of biting cold air deals significant cold damage to everyone in it.</em></p><p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a CON save. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 5
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a small crystal or glass cone",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "cone",
+            "size": "60"
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": ""
+          }
+        },
+        "range": {
+          "units": "self"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 1400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.HqhvoepCCJSfLoOr"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997622421,
+        "modifiedTime": 1713155027258,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!90gAvpMg83KhqRdh.WyDoR4xLUV5FJ9k4"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -198,10 +2122,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698992433,
-    "modifiedTime": 1711586170998,
+    "modifiedTime": 1713155088465,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!90gAvpMg83KhqRdh"

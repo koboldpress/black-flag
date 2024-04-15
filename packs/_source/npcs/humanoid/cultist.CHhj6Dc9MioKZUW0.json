@@ -348,6 +348,223 @@
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!CHhj6Dc9MioKZUW0.JcpBCydAofQzuyGg"
+    },
+    {
+      "folder": null,
+      "name": "Sacrificial Dagger",
+      "type": "weapon",
+      "img": "icons/weapons/daggers/dagger-crooked-black.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": ""
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "3"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage. If the target is paralyzed, prone, stunned, or unconscious, it takes an extra [[/damage 1d4 slashing average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.dXe427mkeCAOtVof"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024042732,
+        "modifiedTime": 1713149365738,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "DNiJJ4Y5tLV7sdIZ",
+      "sort": 800000,
+      "_key": "!actors.items!CHhj6Dc9MioKZUW0.DNiJJ4Y5tLV7sdIZ"
+    },
+    {
+      "name": "For the Cause!",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "2oUFAHAbKfC0P0ME": {
+            "type": "utility",
+            "_id": "2oUFAHAbKfC0P0ME",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "reaction",
+              "condition": "When a friendly creature the cultist can see within 5 feet of it is hit by an attack that would reduce that creature to 0 HP"
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a friendly creature the cultist can see within 5 feet of it is hit by an attack that would reduce that creature to 0 HP, the cultist can leap in front of the attack, taking the damage instead.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "yWbVXAIlS36QIBom",
+      "img": "icons/environment/people/cleric-orange.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713149373984,
+        "modifiedTime": 1713149401933,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!CHhj6Dc9MioKZUW0.yWbVXAIlS36QIBom"
     }
   ],
   "effects": [],
@@ -358,10 +575,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698590909,
-    "modifiedTime": 1711586045386,
+    "modifiedTime": 1713149401933,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!CHhj6Dc9MioKZUW0"

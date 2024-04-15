@@ -191,7 +191,1387 @@
     "flags": {},
     "randomImg": false
   },
-  "items": [],
+  "items": [
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "MGowWdPXtonu5Xck",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The druid makes two Flowering Quarterstaff or Poison Bolt attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1713152214358,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.MGowWdPXtonu5Xck"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Flowering Quarterstaff",
+      "type": "weapon",
+      "_id": "tKIPQwmGSYezJ22o",
+      "img": "icons/weapons/staves/staff-vines-green.webp",
+      "system": {
+        "activities": {
+          "V7hf5rFYTsnR1xrQ": {
+            "type": "attack",
+            "_id": "V7hf5rFYTsnR1xrQ",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "4",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "ability": "wisdom"
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "sp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "quarterstaff"
+        },
+        "options": [
+          "bash"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 6,
+          "type": "bludgeoning"
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.items.Item.B5J4heAlwqhvzXKW"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024066522,
+        "modifiedTime": 1713152284146,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.tKIPQwmGSYezJ22o"
+    },
+    {
+      "name": "Poison Bolt",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "mv5HyG5glvFAZQMf": {
+            "type": "attack",
+            "_id": "mv5HyG5glvFAZQMf",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "spell"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "4",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": "poison"
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack:</em> [[/attack]], range 60 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "a6omwQ7cNDU4oWoy",
+      "img": "icons/magic/nature/beam-hand-leaves-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713152292012,
+        "modifiedTime": 1713152366124,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.a6omwQ7cNDU4oWoy"
+    },
+    {
+      "name": "Spellcasting",
+      "type": "feature",
+      "_id": "kwVRwhbzmxExMKpd",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The druid casts one of the following spells, using WIS as the spellcasting ability (spell save DC 13):</p><p>At will: <em>druidcraft</em>, <em>speak with animals</em></p><p>3/day each: <em>entangle</em>, <em>cure wounds</em>, <em>thunderwave</em></p><p>2/day each: <em>barkskin</em>, <em>spike growth</em></p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 1000000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.P2EcGeqNIDMvi3gc"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148438512,
+        "modifiedTime": 1713152395165,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.kwVRwhbzmxExMKpd"
+    },
+    {
+      "name": "Change Shape",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "BfKAuyc9THZaXOKs": {
+            "type": "utility",
+            "_id": "BfKAuyc9THZaXOKs",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The druid magically transforms into a Medium or smaller Beast that has a challenge rating no higher than its own, or back into its true form, which is Humanoid. Any equipment it is wearing or carrying transforms with it. It reverts to its true form if it dies. In a new form, the druid retains its HP, HD, ability to speak, proficiencies, and INT, WIS, and CHA scores, as well as this bonus action. Its statistics and capabilities are otherwise replaced by those of the new form, except any class features or legendary actions of that form.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "Gs8NVEFI2uCDA1mO",
+      "img": "icons/magic/nature/wolf-paw-glow-large-teal-blue.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713152400751,
+        "modifiedTime": 1713152441763,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.Gs8NVEFI2uCDA1mO"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Druidcraft",
+      "type": "spell",
+      "_id": "evcV3cR7nxGhTMFI",
+      "img": "icons/consumables/plants/kelp-fern-glowing-green.webp",
+      "system": {
+        "activities": {
+          "hmLNViCN3KEzqokr": {
+            "type": "utility",
+            "_id": "hmLNViCN3KEzqokr",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You command the forces of nature to create a variety of harmless, evocative effects.</em></p><p>Whispering to the spirits of nature, you create one of the following effects within range:</p><ul><li><p>You create a tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.</p></li><li><p>You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.</p></li><li><p>You create an instantaneous, harmless sensory effect, such as falling leaves, a puff of wind, the sound of a small animal, or the faint odor of skunk. The effect must fit in a 5-foot cube.</p></li><li><p>You instantly light or snuff out a candle, torch, or small campfire.</p></li></ul>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "special",
+            "special": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "primordial"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.rwGcFyilX3avbA5E"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997674649,
+        "modifiedTime": 1713152448332,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.evcV3cR7nxGhTMFI"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Speak with Animals",
+      "type": "spell",
+      "_id": "3Auw6wAVwbygtfCt",
+      "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
+      "system": {
+        "activities": {
+          "QVfZkqYXD6sVLQ5v": {
+            "type": "utility",
+            "_id": "QVfZkqYXD6sVLQ5v",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You talk to and understand speech of animals.</em></p><p>You gain the ability to verbally communicate with Beasts and creatures with the Animal tag for the duration. The knowledge and awareness of many Beasts is limited by their INT, but at minimum, Beasts can give you information about nearby locations and monsters, including whatever they can perceive or have perceived within the past day. You might be able to persuade a Beast to perform a small favor for you, at the GM’s discretion.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": 1,
+          "type": "minute",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [
+          "ritual"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "self"
+        },
+        "circle": [
+          "primordial"
+        ],
+        "school": "divination"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.VEYRZOPPA3yH6AeK"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997928541,
+        "modifiedTime": 1713152451977,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.3Auw6wAVwbygtfCt"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Entangle",
+      "type": "spell",
+      "_id": "VCyWwD2wmnBZPKlR",
+      "img": "icons/magic/nature/root-vine-entwined-thorns.webp",
+      "system": {
+        "activities": {
+          "Y15JJtNm4vWdKUD4": {
+            "type": "savingThrow",
+            "_id": "Y15JJtNm4vWdKUD4",
+            "description": "",
+            "system": {
+              "ability": "strength",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You conjure a wide knot of weeds and vines that trip up and bind creatures caught within them.</em></p><p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the duration, these plants turn the ground in the area into difficult terrain. A creature in the area when you cast the spell must succeed on a STR save or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a STR check against your spell save DC. On a success, it frees itself. When the spell ends, the conjured plants wilt away.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "square",
+            "size": "20"
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "90"
+        },
+        "circle": [
+          "primordial"
+        ],
+        "school": "conjuration"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.CM2MI0J59OeCL7I4"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997707977,
+        "modifiedTime": 1713154200648,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.VCyWwD2wmnBZPKlR"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Cure Wounds",
+      "type": "spell",
+      "_id": "oI3N1773UfqIC5OH",
+      "img": "icons/magic/life/cross-flared-green.webp",
+      "system": {
+        "activities": {
+          "BwtypG9ia7YQgRd0": {
+            "type": "healing",
+            "_id": "BwtypG9ia7YQgRd0",
+            "description": "",
+            "system": {
+              "healing": {
+                "type": "healing",
+                "denomination": "8",
+                "bonus": "@mod",
+                "custom": "",
+                "number": 1
+              },
+              "ability": ""
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/healing.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You touch a wounded creature and heal them.</em></p><p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.</p><p>This spell has no effect on Undead or Constructs.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706932857027,
+        "modifiedTime": 1713154214100,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.oI3N1773UfqIC5OH"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Thunderwave",
+      "type": "spell",
+      "_id": "C774gUIp54yttbIu",
+      "img": "icons/magic/sonic/explosion-shock-sound-wave.webp",
+      "system": {
+        "activities": {
+          "oslfuLrpYqjV0BL2": {
+            "type": "savingThrow",
+            "_id": "oslfuLrpYqjV0BL2",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "8",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "thunder"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You create a forceful burst of sound that knocks back anything that fails to withstand it.</em></p><p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a CON save. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn’t pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell’s effect, and the spell emits a thunderous boom audible out to 300 feet.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "cube",
+            "size": "15"
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": ""
+          }
+        },
+        "range": {
+          "units": "self"
+        },
+        "circle": [
+          "arcane"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.46QP4gtGhM6YXqQN"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706935826513,
+        "modifiedTime": 1713154227557,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.C774gUIp54yttbIu"
+    },
+    {
+      "folder": "iJIjiGFvx6IqTXvu",
+      "name": "Barkskin",
+      "type": "spell",
+      "_id": "qpAQRgItTGpFxMZ8",
+      "img": "icons/magic/defensive/armor-stone-skin.webp",
+      "system": {
+        "activities": {
+          "az4kmqcxdsQWro48": {
+            "type": "utility",
+            "_id": "az4kmqcxdsQWro48",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "2"
+        },
+        "description": {
+          "value": "<p><em>You cause a target’s skin to grow craggy and resilient, like tree bark.</em></p><p>You touch a willing creature. Until the spell ends, the creature’s skin has a rough, bark-like appearance, and its AC can’t be less than 16, regardless of the armor it wears.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 2
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a handful of oak bark",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "primordial"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.SdIMnQDBbxLsMocU"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997517394,
+        "modifiedTime": 1713154246449,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.qpAQRgItTGpFxMZ8"
+    },
+    {
+      "folder": "iJIjiGFvx6IqTXvu",
+      "name": "Spike Growth",
+      "type": "spell",
+      "_id": "LA1Wye3BjYB2ey2R",
+      "img": "icons/magic/nature/trap-spikes-thorns-green.webp",
+      "system": {
+        "activities": {
+          "EdmLdiMZ0GC02tYl": {
+            "type": "utility",
+            "_id": "EdmLdiMZ0GC02tYl",
+            "description": "",
+            "system": {},
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "2"
+        },
+        "description": {
+          "value": "<p><em>A patch of ground sprouts piercing thorns and difficult terrain that looks natural.</em></p><p>The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.</p><p>The transformation of the ground is camouflaged to look natural. Any creature that can’t see the area at the time the spell is cast must make a WIS (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 2
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "seven sharp thorns or seven sharpened twigs",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "sphere",
+            "size": "20"
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "150"
+        },
+        "circle": [
+          "primordial"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.881NeWKz2mfAQ4kT"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706997972095,
+        "modifiedTime": 1713154258359,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!9MiXuSE9adOdqXSh.LA1Wye3BjYB2ey2R"
+    }
+  ],
   "effects": [],
   "sort": 0,
   "ownership": {
@@ -200,10 +1580,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.019",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698781887,
-    "modifiedTime": 1711750047794,
+    "modifiedTime": 1713154258359,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!9MiXuSE9adOdqXSh"

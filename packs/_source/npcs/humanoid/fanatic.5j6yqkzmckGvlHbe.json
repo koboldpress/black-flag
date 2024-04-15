@@ -258,7 +258,7 @@
         }
       ],
       "folder": null,
-      "sort": 0,
+      "sort": -200000,
       "ownership": {
         "default": 0
       },
@@ -274,10 +274,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1709698638526,
-        "modifiedTime": 1709698748395,
+        "modifiedTime": 1713152174846,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!5j6yqkzmckGvlHbe.2NUJ8RZNng45VUQp"
@@ -325,7 +325,7 @@
         "rarity": ""
       },
       "effects": [],
-      "sort": 200000,
+      "sort": -150000,
       "ownership": {
         "default": 0
       },
@@ -341,13 +341,1151 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.015",
+        "systemVersion": "0.8.020",
         "coreVersion": "11.315",
         "createdTime": 1701023469035,
-        "modifiedTime": 1709698754565,
+        "modifiedTime": 1713152179513,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!5j6yqkzmckGvlHbe.Y92IeghOawe0HqNc"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "i3CdDbhmyurqmEBQ",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The fanatic makes two Sacrificial Dagger or Dark Bolt attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.stHC4ZVHK2UO1QMu"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1711420922343,
+        "modifiedTime": 1713152156568,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.i3CdDbhmyurqmEBQ"
+    },
+    {
+      "folder": null,
+      "name": "Sacrificial Dagger",
+      "type": "weapon",
+      "img": "icons/weapons/daggers/dagger-crooked-black.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "type": {
+                "value": "",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": ""
+                  }
+                ]
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "4"
+              },
+              "ability": ""
+            },
+            "description": "",
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage. If the target is paralyzed, prone, stunned, or unconscious, it takes an extra [[/damage 1d4 slashing average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "number": 1,
+          "denomination": 4,
+          "type": "piercing"
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.dXe427mkeCAOtVof"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1701024042732,
+        "modifiedTime": 1713152159130,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "RQ77NMxb7HGlR7lj",
+      "sort": -50000,
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.RQ77NMxb7HGlR7lj"
+    },
+    {
+      "name": "Unholy Bolt",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "Ab9eFCXuCLV3sXqG": {
+            "type": "attack",
+            "_id": "Ab9eFCXuCLV3sXqG",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": "spell"
+              },
+              "attack": {
+                "flat": true,
+                "bonus": "5"
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "3",
+                    "custom": "",
+                    "type": ""
+                  }
+                ]
+              },
+              "ability": "none"
+            },
+            "activation": {
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack:</em> [[/attack]], range 60 ft., one target. Hit: [[/damage average]] damage (the fanatic’s choice).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "mJdl6olsbDWgN4aQ",
+      "img": "icons/magic/unholy/projectile-bullet-orb-pink.webp",
+      "effects": [],
+      "folder": null,
+      "sort": -25000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713149482727,
+        "modifiedTime": 1713152161810,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.mJdl6olsbDWgN4aQ"
+    },
+    {
+      "name": "Unholy Brand",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters"
+        },
+        "activities": {
+          "5s5AslKQAW9L95Q3": {
+            "type": "savingThrow",
+            "_id": "5s5AslKQAW9L95Q3",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "13"
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "target": "",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>One creature the fanatic can see within 30 feet of it must succeed on a [[/save]] save or be marked with an unholy brand until the start of the fanatic’s next turn. While the creature is branded, Fiends and cultists have advantage on attack rolls against it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "A5wL2nPVo9Zf3ElD",
+      "img": "icons/magic/symbols/runes-carved-stone-purple.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 1100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713149485343,
+        "modifiedTime": 1713149656068,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.A5wL2nPVo9Zf3ElD"
+    },
+    {
+      "name": "Spellcasting",
+      "type": "feature",
+      "_id": "gfMVxTadB9zfyqlT",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The fanatic casts one of the following spells, using WIS as the spellcasting ability (spell save DC 13):</p><p>At will: light, thaumaturgy</p><p>3/day each: command, inflict wounds</p><p>2/day: hold person</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {},
+        "restriction": {
+          "filters": []
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": -150000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.P2EcGeqNIDMvi3gc"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1713148438512,
+        "modifiedTime": 1713152175746,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.gfMVxTadB9zfyqlT"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Light",
+      "type": "spell",
+      "_id": "Hc29GpR0Mg2xWjWM",
+      "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+      "system": {
+        "activities": {
+          "UOLgsuCw2cAeQumo": {
+            "type": "utility",
+            "_id": "UOLgsuCw2cAeQumo",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You cause bright light to spring forth from whatever you touch.</em></p><p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a DEX save to avoid the spell.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a firefly or phosphorescent moss",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "object",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "arcane",
+          "divine"
+        ],
+        "school": "evocation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.TWVI2s8oV0TiSEKy"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934344025,
+        "modifiedTime": 1713149702162,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.Hc29GpR0Mg2xWjWM"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Thaumaturgy",
+      "type": "spell",
+      "_id": "h3yndHk3YkLhnhRq",
+      "img": "icons/magic/lightning/barrier-wall-shield-gray.webp",
+      "system": {
+        "activities": {
+          "rNt7sRMZNWBMsRrb": {
+            "type": "utility",
+            "_id": "rNt7sRMZNWBMsRrb",
+            "description": "",
+            "system": {},
+            "activation": {},
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You display divine power through a bevy of parlor tricks and small miracles.</em></p><p>You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:</p><ul><li><p>Your voice booms up to three times as loud as normal for 1 minute.</p></li><li><p>You cause flames to flicker, brighten, dim, or change color for 1 minute.</p></li><li><p>You cause harmless tremors in the ground for 1 minute.</p></li><li><p>You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.</p></li><li><p>You instantaneously cause an unlocked door or window to fly open or slam shut.</p></li><li><p>You alter the appearance of your eyes for 1 minute.</p></li></ul><p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "transmutation"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.J9zLZYHvTHwzB98C"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706935782645,
+        "modifiedTime": 1713149706283,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.h3yndHk3YkLhnhRq"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Command",
+      "type": "spell",
+      "_id": "NL1dnqJtlTy4sPAU",
+      "img": "icons/magic/control/control-influence-puppet.webp",
+      "system": {
+        "activities": {
+          "WS8mWzsF2Xd3NaNC": {
+            "type": "savingThrow",
+            "_id": "WS8mWzsF2Xd3NaNC",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You empower your spoken word with divine authority that few can resist.</em></p><p>You speak a one-word command to a creature you can see within range. The target must succeed on a WIS save or follow the command on its next turn. The spell has no effect if the target is Undead, if it doesn’t understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the GM determines how the target behaves. If the target can’t follow your command, the spell ends.</p><p><em><strong>Approach.</strong></em> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><em><strong>Drop.</strong></em> The target drops whatever it is holding and then ends its turn.</p><p><em><strong>Flee.</strong></em> The target spends its turn moving away from you by the fastest available means.</p><p><em><strong>Grovel.</strong></em> The target falls prone and then ends its turn.</p><p><em><strong>Halt.</strong></em> The target doesn’t move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "enchantment"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.lkBDXbx2O78UA8gz"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706932650335,
+        "modifiedTime": 1713152135164,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.NL1dnqJtlTy4sPAU"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Inflict Wounds",
+      "type": "spell",
+      "_id": "i70PxfUTtz6mYm7T",
+      "img": "icons/magic/unholy/hand-fire-skeleton-pink.webp",
+      "system": {
+        "activities": {
+          "MxF5SXNWeicQLVph": {
+            "type": "attack",
+            "_id": "MxF5SXNWeicQLVph",
+            "description": "",
+            "system": {
+              "type": {
+                "value": "melee",
+                "classification": ""
+              },
+              "damage": {
+                "includeBaseDamage": true,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "10",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "necrotic"
+                  }
+                ]
+              },
+              "ability": "",
+              "attack": {
+                "flat": false,
+                "bonus": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>Your pale, sickly hand threatens grievous harm upon whomever you touch.</em></p><p>Make a melee spell attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "touch"
+        },
+        "circle": [
+          "divine"
+        ],
+        "school": "necromancy"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.8WxYpeoDwKFLim3D"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934204227,
+        "modifiedTime": 1713152134497,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.i70PxfUTtz6mYm7T"
+    },
+    {
+      "folder": "iJIjiGFvx6IqTXvu",
+      "name": "Hold Person",
+      "type": "spell",
+      "_id": "1a8GzXfuAiXO8Axh",
+      "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+      "system": {
+        "activities": {
+          "DK1nMKfROcpCTpp3": {
+            "type": "savingThrow",
+            "_id": "DK1nMKfROcpCTpp3",
+            "description": "",
+            "system": {
+              "ability": "wisdom",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": ""
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "primary": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1"
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "2"
+        },
+        "description": {
+          "value": "<p><em>You paralyze your target where they stand.</em></p><p>Choose a Humanoid that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, the target can make another WIS save. On a success, the spell ends on the target.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "standard"
+        },
+        "ring": {
+          "value": null,
+          "base": 2
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a small, straight piece of iron",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "circle": [
+          "arcane",
+          "divine"
+        ],
+        "school": "enchantment"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.8.020",
+        "coreVersion": "11.315",
+        "createdTime": 1706934136728,
+        "modifiedTime": 1713152149100,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!5j6yqkzmckGvlHbe.1a8GzXfuAiXO8Axh"
     }
   ],
   "effects": [],
@@ -358,10 +1496,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.018",
+    "systemVersion": "0.8.020",
     "coreVersion": "11.315",
     "createdTime": 1709698728390,
-    "modifiedTime": 1711586052959,
+    "modifiedTime": 1713152179513,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!5j6yqkzmckGvlHbe"

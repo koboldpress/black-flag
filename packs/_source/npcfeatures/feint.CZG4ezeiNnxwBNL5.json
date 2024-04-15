@@ -1,26 +1,18 @@
 {
-  "name": "Fire Breath",
+  "name": "Feint",
   "type": "feature",
-  "_id": "fjq5Rf5e1ALoN5xc",
-  "img": "icons/magic/fire/blast-jet-stream-embers-yellow.webp",
+  "_id": "CZG4ezeiNnxwBNL5",
+  "img": "icons/skills/melee/maneuver-daggers-paired-orange.webp",
   "system": {
     "activities": {
-      "BuyeZ8VFzGNVrqs3": {
+      "7voApNlpyVpp4WcY": {
         "type": "savingThrow",
-        "_id": "BuyeZ8VFzGNVrqs3",
+        "_id": "7voApNlpyVpp4WcY",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "wisdom",
           "damage": {
-            "parts": [
-              {
-                "number": 8,
-                "denomination": "6",
-                "bonus": "",
-                "custom": "",
-                "type": "fire"
-              }
-            ]
+            "parts": []
           },
           "dc": {
             "ability": "custom",
@@ -28,13 +20,14 @@
           }
         },
         "activation": {
-          "type": "action",
+          "type": "bonus",
           "condition": ""
         },
         "consumption": {
           "targets": [
             {
               "type": "item",
+              "target": "",
               "value": "1"
             }
           ],
@@ -44,6 +37,7 @@
         },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
           "min": "",
           "max": ""
@@ -58,7 +52,7 @@
       "recovery": [
         {
           "period": "recharge",
-          "formula": "5"
+          "formula": "4"
         }
       ],
       "min": "",
@@ -66,7 +60,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] exhales fire in a 15-foot cone. Each creature in that area must make a [[/save]] save, taking [[/damage average]] damage on a failed save, or half as much damage on a successful one.</p>",
+      "value": "<p>The [[lookup @name lowercase]] makes a feint at one creature within 5 feet of it, pretending to go in for an attack in one direction only to change it up at the last moment. The target must succeed on a [[/save]] save or the [[lookup @name lowercase]] has advantage on the next attack roll it makes against the target.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -84,7 +78,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 5500000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
@@ -93,9 +87,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711667664884,
-    "modifiedTime": 1713149287714,
+    "createdTime": 1713155293765,
+    "modifiedTime": 1713155405776,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!fjq5Rf5e1ALoN5xc"
+  "_key": "!items!CZG4ezeiNnxwBNL5"
 }

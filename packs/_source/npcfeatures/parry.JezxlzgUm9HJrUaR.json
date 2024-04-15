@@ -1,17 +1,17 @@
 {
-  "name": "Nimble Escape",
+  "name": "Parry",
   "type": "feature",
-  "_id": "FBD7mm1TgD77aaIv",
-  "img": "icons/creatures/magical/humanoid-silhouette-dashing-blue.webp",
+  "_id": "JezxlzgUm9HJrUaR",
+  "img": "icons/skills/melee/swords-parry-block-blue.webp",
   "system": {
     "activities": {
-      "0hff12hzdGvuh812": {
+      "CfWxC5GuvGjE81vn": {
         "type": "utility",
-        "_id": "0hff12hzdGvuh812",
+        "_id": "CfWxC5GuvGjE81vn",
         "description": "",
         "system": {},
         "activation": {
-          "type": "bonus",
+          "type": "reaction",
           "condition": ""
         },
         "consumption": {
@@ -22,6 +22,7 @@
         },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
           "min": "",
           "max": ""
@@ -39,7 +40,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "<p>The [[lookup @name lowercase]] takes the Disengage or Hide action.</p>",
+      "value": "<p>The [[lookup @name lowercase]] adds 2 to its AC against one melee attack that would hit it. To do so, the [[lookup @name lowercase]] must see the attacker and be wielding a melee weapon.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -57,7 +58,7 @@
   },
   "effects": [],
   "folder": null,
-  "sort": 2900000,
+  "sort": 1200000,
   "ownership": {
     "default": 0
   },
@@ -66,9 +67,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.8.020",
     "coreVersion": "11.315",
-    "createdTime": 1711746069449,
+    "createdTime": 1713148948591,
     "modifiedTime": 1713149287714,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!FBD7mm1TgD77aaIv"
+  "_key": "!items!JezxlzgUm9HJrUaR"
 }
