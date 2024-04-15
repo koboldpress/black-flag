@@ -162,7 +162,7 @@ export const hitDieSizes = [4, 6, 8, 10, 12];
  * Maximum character level.
  * @type {number}
  */
-export const maxLevel = 5;
+export const maxLevel = 20;
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
