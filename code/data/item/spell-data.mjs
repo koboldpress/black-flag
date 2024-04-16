@@ -419,25 +419,23 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 		const sources = (this.parent.actor.system.spellcasting.sources ??= {});
 		const relationship = this.parent.getFlag("black-flag", "relationship.source") ?? {};
-		for (const id of relationship.identifiers ?? []) {
-			const source = (sources[id] ??= {});
-			if (this.ring.base === 0) {
-				source.cantrips ??= { value: 0 };
-				source.cantrips.value += 1;
-			} else if (this.tags.has("ritual")) {
-				source.rituals ??= { value: 0 };
-				source.rituals.value += 1;
-			} else {
-				source.spells ??= { value: 0 };
-				source.spells.value += 1;
-				if (relationship.spellbookOrigin === "free") {
-					source.spellbook ??= { value: 0 };
-					source.spellbook.value += 1;
-				}
-				if (this.preparable && this.prepared) {
-					source.prepared ??= { value: 0 };
-					source.prepared.value += 1;
-				}
+		const source = (sources[relationship.identifier] ??= {});
+		if (this.ring.base === 0) {
+			source.cantrips ??= { value: 0 };
+			source.cantrips.value += 1;
+		} else if (this.tags.has("ritual")) {
+			source.rituals ??= { value: 0 };
+			source.rituals.value += 1;
+		} else {
+			source.spells ??= { value: 0 };
+			source.spells.value += 1;
+			if (relationship.spellbookOrigin === "free") {
+				source.spellbook ??= { value: 0 };
+				source.spellbook.value += 1;
+			}
+			if (this.preparable && this.prepared) {
+				source.prepared ??= { value: 0 };
+				source.prepared.value += 1;
 			}
 		}
 	}

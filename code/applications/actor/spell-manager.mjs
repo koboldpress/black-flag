@@ -16,7 +16,7 @@ export default class SpellManager extends DocumentSheet {
 			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
 			this.existingSpells.add(sourceId);
 			const source = spell.getFlag("black-flag", "relationship.source");
-			if (source.special) source.identifiers?.forEach(i => specialChosenSources.add(i));
+			if (source.special && source.identifier) specialChosenSources.add(source.identifier);
 		}
 
 		this.slots = [];
@@ -351,8 +351,7 @@ export default class SpellManager extends DocumentSheet {
 		const remote = spell.parent !== this.document;
 		const source = remote ? foundry.utils.getProperty(spellData, "flags.black-flag.relationship.source") ?? {} : {};
 
-		source.identifiers ??= [];
-		source.identifiers.push(slot.source.identifier);
+		source.identifier = slot.source.identifier;
 		if (slot.type === "spellbook") source.spellbookOrigin = "free";
 		if (slot.special) source.special = true;
 
