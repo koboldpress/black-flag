@@ -1,6 +1,7 @@
 blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 	--inventory-image-size: 25px;
 	display: block;
+	container: inventory / inline-size;
 
 	table {
 		border: none;
@@ -133,6 +134,13 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 		.layout {
 			justify-content: center;
 		}
+	}
+
+	@container inventory (inline-size < 700px) {
+		.traits { display: none; }
+	}
+	@container inventory (inline-size < 500px) {
+		.uses { display: none; }
 	}
 }
 

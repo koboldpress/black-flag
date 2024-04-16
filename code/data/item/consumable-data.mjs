@@ -1,10 +1,9 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import UsesField from "../fields/uses-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 
-const { BooleanField, SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Consumable items.
@@ -35,9 +34,6 @@ export default class ConsumableData extends ItemDataModel.mixin(
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
 				category: new StringField({ label: "BF.Equipment.Category.Label" })
-			}),
-			uses: new UsesField({
-				consumeQuantity: new BooleanField({ initial: true })
 			})
 		});
 	}
