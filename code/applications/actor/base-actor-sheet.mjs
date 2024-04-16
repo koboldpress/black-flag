@@ -1,5 +1,5 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import { log } from "../../utils/_module.mjs";
+import { log, numberFormat } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
@@ -181,6 +181,9 @@ export default class BaseActorSheet extends ActorSheet {
 				title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
 				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"}"></i>`
 			});
+
+		const totalWeight = await item.system.totalWeight;
+		context.weight = totalWeight ? numberFormat(totalWeight.toNearest(0.1), { unit: item.system.weight.units }) : "—";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

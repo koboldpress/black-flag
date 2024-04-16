@@ -153,9 +153,10 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		});
 		Object.defineProperty(this.weight, "label", {
 			get() {
-				if ( !system.totalWeight ) return "—";
+				const totalWeight = system.totalWeight;
+				if ( totalWeight instanceof Promise || !totalWeight ) return "—";
 				return numberFormat(system.totalWeight.toNearest(0.1), { unit: this.units });
-				// TODO: Reduce to units in currency system that result in the smallest value
+				// TODO: Reduce to units in current system that result in the smallest value
 			},
 			configurable: true,
 			enumerable: false

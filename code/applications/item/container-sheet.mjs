@@ -1,3 +1,4 @@
+import { numberFormat } from "../../utils/_module.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
 import EquipmentSheet from "./equipment-sheet.mjs";
@@ -32,9 +33,29 @@ export default class ContainerSheet extends EquipmentSheet {
 		}
 		context.isContainer = true;
 
-		context.sections = await InventoryElement.organizeItems(this.item, context.items);
+		await this.prepareItems(context);
 
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the items for display on the sheet.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 * @abstract
+	 */
+	async prepareItems(context) {
+		context.itemContext ??= {};
+		context.sections = await InventoryElement.organizeItems(this.item, context.items, {
+			callback: async (item, section) => {
+				const itemContext = (context.itemContext[item.id] ??= {});
+				const totalWeight = await item.system.totalWeight;
+				itemContext.weight = totalWeight
+					? numberFormat(totalWeight.toNearest(0.1), { unit: item.system.weight.units })
+					: "—";
+			}
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
