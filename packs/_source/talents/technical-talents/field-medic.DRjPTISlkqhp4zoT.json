@@ -6,7 +6,9 @@
   "system": {
     "description": {
       "value": "<p>You have studied first aid and can provide emergency medical assistance. When you select this talent, you gain the following benefits:</p><ul><li><p>When you stabilize a dying creature using first aid, that creature regains 1 HP.</p></li><li><p>As an action, you can tend to the wounds of a creature you can see and touch. When you do, the creature recovers a number of hit points equal to twice their CON modifier. A creature healed in this way can’t receive the benefits of this feature again until it completes a short or long rest.</p></li></ul>",
-      "source": "Player's Guide"
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
     },
     "identifier": {},
     "type": {
@@ -16,6 +18,45 @@
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
+    },
+    "uses": {
+      "min": "",
+      "max": ""
+    },
+    "activities": {
+      "MpM2Ar6tNGRwtDZK": {
+        "type": "healing",
+        "_id": "MpM2Ar6tNGRwtDZK",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": "",
+            "bonus": "",
+            "custom": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Tend Wounds",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
     }
   },
   "effects": [],
@@ -25,10 +66,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.3.003",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695925595753,
-    "modifiedTime": 1699730741904,
+    "modifiedTime": 1713225352276,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "DRjPTISlkqhp4zoT",

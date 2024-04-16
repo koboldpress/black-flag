@@ -6,16 +6,44 @@
   "system": {
     "description": {
       "value": "<p>You have endured extensive training to withstand the rigors of combat, making you harder to cut down.</p><ul><li><p>Your hit point maximum increases by 2 for each level you had previous to gaining this talent (if applicable). Each time you gain a new level, your hit point maximum increases by 2 (including for the level that allowed you to take this talent, if applicable).</p></li><li><p>When you roll hit dice to recover hit points, you can ignore die rolls lower than your PB and instead treat those dice as if you rolled a number equal to your PB.</p></li></ul>",
-      "source": "Player's Guide"
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
     },
     "identifier": {},
     "type": {
       "category": "martial"
     },
-    "advancement": {},
+    "advancement": {
+      "rYdu1lj98vSZeSbX": {
+        "type": "property",
+        "_id": "rYdu1lj98vSZeSbX",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.hp.bonuses.level",
+              "mode": 2,
+              "value": "2"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Combat Conditioning",
+        "icon": "",
+        "hint": ""
+      }
+    },
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -25,10 +53,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.3.003",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695925542377,
-    "modifiedTime": 1699730667375,
+    "modifiedTime": 1713224910462,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "bh77YhJPYJorKvXA",

@@ -6,16 +6,44 @@
   "system": {
     "description": {
       "value": "<p>You have exceptional situational awareness. When you select this talent, you gain the following benefits:</p><ul><li><p>When you roll for initiative, you can treat any d20 roll of 9 or lower as if you rolled a 10.</p></li><li><p>As long as you are conscious, you can’t be affected by the surprised condition.</p></li><li><p>Hidden targets don’t have advantage on attack rolls made against you.</p></li></ul>",
-      "source": "Player's Guide"
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
     },
     "identifier": {},
     "type": {
       "category": "technical"
     },
-    "advancement": {},
+    "advancement": {
+      "9JbFDpDk43RvPE1f": {
+        "type": "property",
+        "_id": "9JbFDpDk43RvPE1f",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{\"type\": \"min\", \"filter\": [{\"k\": \"type\", \"v\": \"initiative\"}], \"formula\": \"10\"}"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Aware",
+        "icon": "",
+        "hint": ""
+      }
+    },
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
+    },
+    "uses": {
+      "min": "",
+      "max": ""
     }
   },
   "effects": [],
@@ -25,10 +53,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.3.003",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695925583264,
-    "modifiedTime": 1699730935661,
+    "modifiedTime": 1713225282478,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "KLyH1PNGPj8p9sM5",

@@ -6,7 +6,9 @@
   "system": {
     "description": {
       "value": "<p>Through rigorous mental exercise, you have fortified yourself against mind-altering effects. You gain the following benefits:</p><ul><li><p>Once per long rest when you fail an INT, WIS, or CHA save, you can choose to reroll the save and take the new result.</p></li><li><p>If an ongoing effect causes you to be charmed, frightened, or stunned due to failing a save, you can repeat the save at the end of each of your turns, ending the condition on a success—even if the effect would not typically allow you to do so.</p></li></ul>",
-      "source": "Player's Guide"
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
     },
     "identifier": {},
     "type": {
@@ -16,6 +18,47 @@
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
+    },
+    "uses": {
+      "min": "",
+      "max": ""
+    },
+    "activities": {
+      "8CuV3C7iBDTJEuCM": {
+        "type": "utility",
+        "_id": "8CuV3C7iBDTJEuCM",
+        "description": "<p>When you fail an INT, WIS, or CHA save, you can choose to reroll the save and take the new result.</p>",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you fail an INT, WIS, or CHA save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": {
+            "0": {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          },
+          "min": "",
+          "max": "1"
+        },
+        "name": "Reroll Save",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -25,10 +68,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.3.003",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695925380223,
-    "modifiedTime": 1699730421764,
+    "modifiedTime": 1713224314406,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "3zFHMbUlVoYARCtM",

@@ -6,7 +6,9 @@
   "system": {
     "description": {
       "value": "<p>You have studied language extensively, allowing you to communicate in multiple languages and puzzle out critical information from languages you don’t know. When you select this talent, you gain the following benefits:</p><ul><li><p>Learn three languages of your choice.</p></li><li><p>When you converse with a creature in a language that you both know (other than Common) you gain advantage on a single CHA ability check made to influence or interact with that creature. Once you use this feature, you can’t do so again until you complete a long rest.</p></li><li><p>When you make an ability check related to understanding the meaning of a verbal or written language you don’t know, you can add your PB to the roll. If you have proficiency in a relevant skill or tool, double your PB for the roll.</p></li></ul>",
-      "source": "Player's Guide"
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
     },
     "identifier": {},
     "type": {
@@ -48,6 +50,43 @@
     "uses": {
       "min": "",
       "max": ""
+    },
+    "activities": {
+      "FLhQ3t6AztGZP6QX": {
+        "type": "utility",
+        "_id": "FLhQ3t6AztGZP6QX",
+        "description": "<p>When you converse with a creature in a language that you both know (other than Common) you gain advantage on a single CHA ability check made to influence or interact with that creature.</p>",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": {
+            "0": {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          },
+          "min": "",
+          "max": "1"
+        },
+        "name": "Shared Language",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -57,10 +96,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.7.009",
+    "systemVersion": "0.8.021",
     "coreVersion": "11.315",
     "createdTime": 1695925601404,
-    "modifiedTime": 1705006518245,
+    "modifiedTime": 1713225410623,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "6khzLigcWfJj93jG",
