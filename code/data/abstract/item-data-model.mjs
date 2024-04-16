@@ -29,16 +29,25 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @type {boolean}
 	 */
 	get shouldPrepareFinalData() {
-		return !this.parent?.isEmbedded;
+		return !this.parent.isEmbedded;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Apply transformations or derivations to the values of the source data object.
-	 */
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+		if (this.parent.isEmbedded) {
+			const sourceId = this.parent.flags["black-flag"]?.sourceId ?? this.parent.flags.core?.sourceId;
+			if (sourceId) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
 		if (this.shouldPrepareFinalData) this.prepareFinalData();

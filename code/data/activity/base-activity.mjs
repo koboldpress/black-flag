@@ -137,6 +137,16 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			enumerable: false
 		});
 
+		// Re-link UUIDs in consumption fields to explicit items
+		if (this.item.isEmbedded) {
+			for (const target of this.consumption.targets) {
+				if (target.type === "item" && target.target?.includes(".")) {
+					const item = this.item.actor.sourcedItems?.get(target.target);
+					if (item) target.target = item.id;
+				}
+			}
+		}
+
 		const item = this.item.system ?? {};
 		const propertiesToSet = [
 			["activation.value", "casting.value"],

@@ -38,6 +38,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async close(options = {}) {
 		await super.close(options);
 		delete this.activity.apps[this.appId];
@@ -47,6 +48,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const source = this.activity.toObject();
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: source.activation.type });
@@ -92,6 +94,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -110,12 +113,8 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 	/**
 	 * Handle a sheet action.
 	 * @param {ClickEvent} event - The click event.
-	 * @returns {Promise}
 	 */
-	_onAction(event) {
-		const { action, subAction } = event.currentTarget.dataset;
-		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
-	}
+	_onAction(event) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -143,6 +142,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 

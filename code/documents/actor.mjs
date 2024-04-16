@@ -39,6 +39,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	notifications = this.notifications;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Mapping of item source UUIDs to the items.
+	 * @type {Map<string, BlackFlagItem>}
+	 */
+	sourcedItems = this.sourcedItems;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -52,6 +60,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	prepareEmbeddedDocuments() {
+		this.sourcedItems = new Map();
+		super.prepareEmbeddedDocuments();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	applyActiveEffects() {
 		this.system.prepareEmbeddedData?.();
 		this.applyAdvancementEffects();
