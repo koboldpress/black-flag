@@ -1,3 +1,30 @@
 <section>
-	<p>Biography to be implemented&hellip;</p>
+	<div class="characteristics">
+		<ul class="unlist">
+			{{#*inline "characteristic"}}
+				<li>
+					<label>{{ localize label }}</label>
+					<input type="text" name="system.biography.{{ name }}" value="{{ value }}" {{ disabled (not editable) }}>
+				</li>
+			{{/inline}}
+			{{~> "characteristic" label=(localize "BF.Biography.Age") name="age" value=system.biography.age}}
+			{{~> "characteristic" label=(localize "BF.Biography.Height") name="height" value=system.biography.height}}
+			{{~> "characteristic" label=(localize "BF.Biography.Weight") name="weight" value=system.biography.weight}}
+			{{~> "characteristic" label=(localize "BF.Biography.Eyes") name="eyes" value=system.biography.eyes}}
+			{{~> "characteristic" label=(localize "BF.Biography.Skin") name="skin" value=system.biography.skin}}
+			{{~> "characteristic" label=(localize "BF.Biography.Hair") name="hair" value=system.biography.hair}}
+		</ul>
+	</div>
+	<div class="biography">
+		{{#*inline "biography"}}
+			<div class="biography-block">
+				<h3>{{ label }}</h3>
+				{{ editor enriched target=(concat "system.biography." name) button=false editable=editable
+				   engine="prosemirror" collaborate=false }}
+			</div>
+		{{/inline}}
+		{{~> "biography" label=(localize "BF.Biography.Backstory") name="backstory" enriched=enriched.backstory}}
+		{{~> "biography" label=(localize "BF.Biography.Motivation") name="motivation" enriched=enriched.motivation}}
+		{{~> "biography" label=(localize "BF.Biography.AlliesOrganizations") name="allies" enriched=enriched.allies}}
+	</div>
 </section>

@@ -17,6 +17,13 @@ export default class NPCSheet extends BaseActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static enrichedFields = {
+		biography: "system.biography.value"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

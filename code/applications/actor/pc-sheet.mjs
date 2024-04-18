@@ -20,6 +20,15 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	static enrichedFields = {
+		backstory: "system.biography.backstory",
+		motivation: "system.biography.motivation",
+		allies: "system.biography.allies"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Advancement flows currently displayed on the sheet.
 	 * @type {[key: string]: AdvancementFlow}

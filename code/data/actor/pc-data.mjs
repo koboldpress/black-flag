@@ -131,16 +131,15 @@ export default class PCData extends ActorDataModel.mixin(
 				)
 			}),
 			biography: new SchemaField({
-				value: new HTMLField(),
 				age: new StringField(),
 				height: new StringField(),
 				weight: new StringField(),
 				eyes: new StringField(),
 				skin: new StringField(),
-				hair: new StringField()
-				// Motivation?
-				// Backstory?
-				// Allies & Organizations?
+				hair: new StringField(),
+				backstory: new HTMLField(),
+				motivation: new HTMLField(),
+				allies: new HTMLField()
 			}),
 			proficiencies: new SchemaField({
 				armor: new SchemaField({

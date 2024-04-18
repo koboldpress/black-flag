@@ -24,9 +24,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
 	 */
-	static enrichedFields = {
-		biography: "system.biography.value"
-	};
+	static enrichedFields = {};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */

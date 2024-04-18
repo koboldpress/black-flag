@@ -456,7 +456,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		this._getRestHitPointRecovery(config, result);
 		this._getRestSpellSlotRecovery(config, result);
 		await this._getUsesRecovery(config, result);
-		console.log(foundry.utils.deepClone(result));
 
 		/**
 		 * A hook event that fires after rest result is calculated, but before any updates are performed.
