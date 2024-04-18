@@ -11,9 +11,11 @@
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
-								<a data-action="add">
-									<i class="fa-solid fa-plus"></i>
-								</a>
+								<button type="button" class="link-button" data-action="add"
+												data-tooltip="BF.Item.Action.Add"
+												aria-label="{{ localize 'BF.Item.Action.Add' }}">
+									<i class="fa-solid fa-plus" inert></i>
+								</button>
 							{{/if}}
 						</div>
 					</td>
@@ -22,26 +24,40 @@
 					<tr data-item-id="{{id}}">
 						<th class="name" scope="row">
 							<div class="layout">
-								{{name}}
-								{{blackFlag-notificationBadge @root.actor document=this}}
+								<button type="button" class="link-button" data-action="expand">
+									{{ name }}
+									<i class="fa-solid fa-caret-down" inert></i>
+								</button>
+								{{ blackFlag-notificationBadge @root.actor document=this }}
 							</div>
 						</th>
-						<td class="uses">{{system.uses.label}}</td>
+						<td class="uses">{{ system.uses.label }}</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}
-									<a data-action="edit">
-										<i class="fa-solid fa-edit"></i>
-									</a>
-									<a data-action="delete">
-										<i class="fa-solid fa-trash"></i>
-									</a>
+									<button type="button" class="link-button" data-action="edit"
+													data-tooltip="BF.Item.Action.Edit"
+													aria-label="{{ localize 'BF.Item.Action.Edit' }}">
+										<i class="fa-solid fa-edit" inert></i>
+									</button>
+									<button type="button" class="link-button" data-action="delete"
+													data-tooltip="BF.Item.Action.Delete"
+													aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+										<i class="fa-solid fa-trash" inert></i>
+									</button>
 								{{else}}
-									<a data-action="view">
-										<i class="fa-regular fa-eye"></i>
-									</a>
+									<button type="button" class="link-button" data-action="view"
+													data-tooltip="BF.Item.Action.View"
+													aria-label="{{ localize 'BF.Item.Action.View' }}">
+										<i class="fa-regular fa-eye" inert></i>
+									</button>
 								{{/if}}
 							</div>
+						</td>
+					</tr>
+					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
+						<td colspan="3">
+							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
 						</td>
 					</tr>
 				{{/each}}

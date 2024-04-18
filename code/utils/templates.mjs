@@ -252,7 +252,8 @@ export async function registerHandlebarsPartials() {
 		"shared/inventory.hbs",
 		"shared/trait-list.hbs",
 		"shared/uses-config.hbs",
-		"shared/parts/inventory-controls.hbs"
+		"shared/parts/inventory-controls.hbs",
+		"shared/parts/inventory-summary.hbs"
 	];
 
 	const paths = {};

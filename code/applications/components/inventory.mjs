@@ -243,6 +243,8 @@ export default class InventoryElement extends AppAssociatedElement {
 				return item.setFlag("black-flag", "relationship.enabled", !item.enabled);
 			case "equip":
 				return item.setFlag("black-flag", "relationship.equipped", !item.system.equipped);
+			case "expand":
+				return this._onExpand(item, target);
 			case "prepare":
 				return item.setFlag("black-flag", "relationship.prepared", !item.system.prepared);
 		}
@@ -386,6 +388,40 @@ export default class InventoryElement extends AppAssociatedElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getInventoryContext", this, item, ui.context.menuItems);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle expanding or collapsing an item's summary.
+	 * @param {BlackFlagItem} item - Item that should be expanded.
+	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
+	 * @protected
+	 */
+	async _onExpand(item, target) {
+		const row = target.closest("[data-item-id]");
+		let expanded = row?.nextElementSibling?.dataset.expandFor === item.id ? row.nextElementSibling : null;
+		if (!this.app.expanded || !expanded) return;
+
+		// Collapsed if already expanded
+		if (this.app.expanded.has(item.id)) {
+			this.app.expanded.delete(item.id);
+			expanded.classList.add("collapsed");
+		} else {
+			// If no summary section exists yet, render and insert one
+			if (!expanded.querySelector(".item-summary")) {
+				const summary = await renderTemplate(
+					"systems/black-flag/templates/shared/parts/inventory-summary.hbs",
+					await item.getSummaryContext({ sections: this.document.isOwner })
+				);
+				expanded.querySelector("td").innerHTML = summary;
+			}
+			this.app.expanded.add(item.id);
+			requestAnimationFrame(() => {
+				expanded.querySelector(".item-summary")?.getBoundingClientRect();
+				expanded.classList.remove("collapsed");
+			});
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

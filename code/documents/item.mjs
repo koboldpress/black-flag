@@ -210,6 +210,29 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the data used to present an expanded summary for this item.
+	 * @param {object} [enrichmentOptions={}] - Options passed to `TextEditor.enrichHTML`.
+	 * @returns {object} - Context passed to the template for rendering the summary.
+	 */
+	async getSummaryContext(enrichmentOptions = {}) {
+		const context = {
+			enriched: {
+				description: await TextEditor.enrichHTML(this.system.description.value, {
+					async: true,
+					relativeTo: this,
+					rollData: this.getRollData(),
+					...enrichmentOptions
+				})
+			},
+			item: this,
+			system: this.system
+		};
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Embedded Operations         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

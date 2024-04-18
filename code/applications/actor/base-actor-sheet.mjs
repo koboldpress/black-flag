@@ -31,8 +31,16 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * IDs for items on the sheet that have their descriptions expanded in-line.
+	 * @type {Set<string>}
+	 */
+	expanded = new Set();
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Filters that can be applied to different item lists.
-	 * @type {{[key: string]: {[key: string]: number}}}
+	 * @type {Record<string, Record<string, number>>}
 	 */
 	filters = {};
 
@@ -40,7 +48,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/**
 	 * Sheet modes that can be active.
-	 * @type {{[key: string]: boolean]}}
+	 * @type {Record<string, boolean>}
 	 */
 	modes = {
 		conditionAdd: false,
@@ -51,7 +59,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/**
 	 * Sorting mode applied to different item lists.
-	 * @type {{[key: string]: string}}
+	 * @type {Record<string, string>}
 	 */
 	sorting = {};
 
@@ -179,6 +187,8 @@ export default class BaseActorSheet extends ActorSheet {
 				title: `BF.Feature.${item.enabled ? "Enabled" : "Disabled"}`,
 				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"}"></i>`
 			});
+
+		if (this.expanded.has(item.id)) context.expanded = await item.getSummaryContext({ secrets: this.actor.isOwner });
 
 		const totalWeight = await item.system.totalWeight;
 		context.weight = totalWeight ? numberFormat(totalWeight.toNearest(0.1), { unit: item.system.weight.units }) : "—";

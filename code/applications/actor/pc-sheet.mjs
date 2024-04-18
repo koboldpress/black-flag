@@ -78,7 +78,7 @@ export default class PCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async prepareItem(item, context, section) {
-		super.prepareItem(item, context, section);
+		await super.prepareItem(item, context, section);
 
 		if (item.type === "spell") {
 			const mode = item.system.type.value;

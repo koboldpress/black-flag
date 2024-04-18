@@ -6,48 +6,61 @@
 		{{#each sections.features as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
 				<tr class="table-header">
-					<td class="name">{{localize section.label}}</td>
-					<th class="uses">{{localize "BF.Uses.Short"}}</th>
+					<td class="name">{{ localize section.label }}</td>
+					<th class="uses">{{ localize "BF.Uses.Short" }}</th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.modes.editing}}
-								<a data-action="add">
-									<i class="fa-solid fa-plus"></i>
-								</a>
+								<button type="button" class="link-button" data-action="add"
+												data-tooltip="BF.Feature.Action.Add"
+												aria-label="{{ localize 'BF.Feature.Action.Add' }}">
+									<i class="fa-solid fa-plus" inert></i>
+								</button>
 							{{/if}}
 						</div>
 					</td>
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
-					<tr data-item-id="{{id}}" {{blackFlag-dataset ctx.dataset}}>
+					<tr data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
 						<th class="name" scope="row">
 							<div class="layout">
 								<img src="{{img}}">
-								{{name}}
-								{{blackFlag-notificationBadge @root.actor document=this}}
+								<button type="button" class="link-button" data-action="expand">
+									{{ name }}
+									<i class="fa-solid fa-caret-down" inert></i>
+								</button>
+								{{ blackFlag-notificationBadge @root.actor document=this }}
 							</div>
 						</th>
-						<td class="uses">{{system.uses.label}}</td>
+						<td class="uses">{{ system.uses.label }}</td>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}
 									<button type="button" class="link-button" data-action="edit"
-													aria-label="{{localize 'BF.Feature.Action.Edit'}}">
-										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									        data-tooltip="BF.Feature.Action.Edit"
+													aria-label="{{ localize 'BF.Feature.Action.Edit' }}">
+										<i class="fa-solid fa-edit" inert></i>
 									</button>
 									<button type="button" class="link-button" data-action="delete"
-													aria-label="{{localize 'BF.Feature.Action.Delete'}}">
-										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									        data-tooltip="BF.Feature.Action.Delete"
+													aria-label="{{ localize 'BF.Feature.Action.Delete' }}">
+										<i class="fa-solid fa-trash" inert></i>
 									</button>
 								{{else}}
-								{{> "blackFlag.inventory-controls" buttons=ctx.buttons}}
+								{{> "blackFlag.inventory-controls" buttons=ctx.buttons }}
 								{{/if}}
 								<button type="button" class="link-button" data-context-menu
-												aria-label="{{localize 'BF.AdditionalControls'}}">
-									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								        data-tooltip="BF.AdditionalControls"
+												aria-label="{{ localize 'BF.AdditionalControls' }}">
+									<i class="fa-solid fa-ellipsis-vertical" inert></i>
 								</button>
 							</div>
+						</td>
+					</tr>
+					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
+						<td colspan="3">
+							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
 						</td>
 					</tr>
 				{{/blackFlag-itemContext}}
@@ -57,35 +70,46 @@
 		{{#if (and modes.editing sections.uncategorized.length)}}
 			<tbody data-section="uncategorized">
 				<tr>
-					<td class="name" colspan="3">{{localize "BF.Item.Type.Unidentified[other]"}}</td>
+					<td class="name" colspan="3">{{ localize "BF.Item.Type.Unidentified[other]" }}</td>
 				</tr>
 				{{#each sections.uncategorized}}
 				{{#blackFlag-itemContext this as |ctx|}}
 					<tr data-item-id="{{id}}">
 						<th class="name" scope="row" colspan="2">
 							<div class="layout">
-								<img src="{{img}}">
-								{{name}}
-								{{blackFlag-notificationBadge @root.actor document=this}}
+								<img src="{{ img }}">
+								<button type="button" class="link-button" data-action="expand">
+									{{ name }}
+									<i class="fa-solid fa-caret-down" inert></i>
+								</button>
+								{{ blackFlag-notificationBadge @root.actor document=this }}
 							</div>
 						</th>
 						<td class="controls">
 							<div class="layout">
 								{{#if @root.modes.editing}}
 									<button type="button" class="link-button" data-action="edit"
-													aria-label="{{localize 'BF.Item.Action.Edit'}}">
-										<i class="fa-solid fa-edit" aria-hidden="true"></i>
+									        data-tooltip="BF.Item.Action.Edit"
+													aria-label="{{ localize 'BF.Item.Action.Edit' }}">
+										<i class="fa-solid fa-edit" inert></i>
 									</button>
 									<button type="button" class="link-button" data-action="delete"
-									        aria-label="{{localize 'BF.Item.Action.Delete'}}">
-										<i class="fa-solid fa-trash" aria-hidden="true"></i>
+									        data-tooltip="BF.Item.Action.Delete"
+									        aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+										<i class="fa-solid fa-trash" inert></i>
 									</button>
 								{{/if}}
 								<button type="button" class="link-button" data-context-menu
-												aria-label="{{localize 'BF.AdditionalControls'}}">
-									<i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i>
+								        data-tooltip="BF.AdditionalControls"
+												aria-label="{{ localize 'BF.AdditionalControls' }}">
+									<i class="fa-solid fa-ellipsis-vertical" inert></i>
 								</button>
 							</div>
+						</td>
+					</tr>
+					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
+						<td colspan="2">
+							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
 						</td>
 					</tr>
 				{{/blackFlag-itemContext}}

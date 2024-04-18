@@ -552,7 +552,7 @@ export default class PCData extends ActorDataModel.mixin(
 		if (!learnedFlag?.learned) {
 			let needsToLearn = false;
 			top: for (const source of Object.values(this.spellcasting.sources)) {
-				if (source.spellcasting.spells.mode === "all" && learnedFlag?.maxRing < this.spellcasting.maxRing) {
+				if (source.spellcasting?.spells.mode === "all" && learnedFlag?.maxRing < this.spellcasting.maxRing) {
 					needsToLearn = true;
 					break;
 				}

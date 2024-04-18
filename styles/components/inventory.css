@@ -80,8 +80,8 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 					color-mix(in oklab, var(--background-gradient-color), transparent 90%)
 				) var(--background-base-color);
 
-				&:nth-of-type(odd) {
-					--background-base-color: rgb(255 255 255 / 0.2);
+				&:nth-child(odd of [data-item-id]) {
+					--background-base-color: rgb(255 255 255 / .2);
 				}
 
 				.name {
@@ -97,6 +97,36 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 
 					> .layout {
 						justify-content: flex-end;
+					}
+				}
+
+				[data-action="expand"] .fa-caret-down { opacity: .7; }
+				&:has(+ [data-expand-for]) [data-action="expand"] .fa-caret-down { transition: transform 250ms ease; }
+				&:has(+ [data-expand-for].collapsed) [data-action="expand"] .fa-caret-down { transform: rotate(-90deg); }
+
+				&[data-expand-for] {
+					td { padding: 0; }
+					.item-summary {
+						position: relative;
+						margin-block-end: 8px;
+						margin-inline: 6px;
+						border: 1px solid var(--bf-color-border-blue);
+						border-block-start-width: 0;
+						border-end-start-radius: 8px;
+						border-end-end-radius: 8px;
+						padding-block: 2px;
+						padding-inline: 8px;
+						background: rgb(255 255 255 / 0.5);
+						box-shadow: 0 2px 3px rgb(0 0 0 / .2);
+
+						&::before {
+							content: "";
+							position: absolute;
+							inset-inline: -6px;
+							inset-block-start: -10px;
+							height: 10px;
+							box-shadow: 0 3px 3px rgb(0 0 0 / .2);
+						}
 					}
 				}
 			}
