@@ -1,4 +1,5 @@
 import { log } from "../../utils/_module.mjs";
+import BlackFlagContextMenu from "../context-menu.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
@@ -43,7 +44,7 @@ export default class EffectsElement extends AppAssociatedElement {
 			);
 		}
 
-		new ContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

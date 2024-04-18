@@ -6,6 +6,7 @@ import Advancement from "./advancement.mjs";
  * Advancement that automatically gives the player a set of features.
  */
 export default class GrantFeaturesAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -37,12 +38,14 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return !foundry.utils.isEmpty(this.value.added);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async toEmbedContents(config, options) {
 		if (config.list === false) return super.toEmbedContents(config, options);
 
@@ -78,6 +81,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		// Link to compendium items
 		if (!flow || !this.configuredForLevel(this.relavantLevel(levels)))
@@ -148,6 +152,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		const added = await this.createItems(Object.values(this.configuration.pool).map(d => d.uuid));
 		return await this.actor.update(
@@ -160,6 +165,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);

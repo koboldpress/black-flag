@@ -5,6 +5,7 @@ import Advancement from "./advancement.mjs";
  * Advancement that applies arbitrary changes to the actor using an ActiveEffect-like system.
  */
 export default class PropertyAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -27,6 +28,7 @@ export default class PropertyAdvancement extends Advancement {
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		return this.configuration.changes;
 	}

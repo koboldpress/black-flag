@@ -1,5 +1,6 @@
 import BlackFlagItem from "../../documents/item.mjs";
 import { performCheck } from "../../utils/filter.mjs";
+import BlackFlagContextMenu from "../context-menu.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 import DragDrop from "../drag-drop.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
@@ -64,7 +65,7 @@ export default class InventoryElement extends AppAssociatedElement {
 			);
 		}
 
-		new ContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -177,7 +178,7 @@ export default class InventoryElement extends AppAssociatedElement {
 			},
 			{
 				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
-				icon: '<i class="fa-solid fa-check fa-fw"></i>',
+				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw"></i>`,
 				condition: () =>
 					this.actor &&
 					item.isOwner &&

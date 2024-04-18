@@ -10,6 +10,7 @@ import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
  * items were selected at which levels.
  */
 export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -31,12 +32,14 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static VALID_TYPES = new Set(["feature", "talent"]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get levels() {
 		return Object.keys(this.configuration.choices).map(k => Number(k));
 	}
@@ -45,12 +48,14 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.choice-required`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		const choicesNeeded = this.choicesRequired(this.relavantLevel(levels));
 		if (choicesNeeded <= 0) return;
@@ -81,12 +86,14 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return this.choicesRequired(this.relavantLevel(levels)) <= 0;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
 		const choiceCount = this.configuration.choices[this.relavantLevel(levels)];
 		if (!choiceCount) return this.title;
@@ -101,6 +108,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		const items = this.value.added?.[this.relavantLevel(levels)];
 		if (!items || !flow) return "";
@@ -111,12 +119,14 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	storagePath(level) {
 		return `added.${level}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial || !data?.length) return;
 		const level = this.relavantLevel(levels);
@@ -127,6 +137,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async reverse(levels, data, { render = true } = {}) {
 		if (!data) return super.reverse(levels);
 		const keyPath = this.storagePath(this.relavantLevel(levels));

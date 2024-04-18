@@ -131,6 +131,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareData() {
 		this.title = this.title || game.i18n.localize(this.metadata.title);
 		this.icon = this.icon || this.metadata.icon;
@@ -142,6 +143,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	_preCreate(data) {
 		if (foundry.utils.hasProperty(data, "level") || this.metadata.multiLevel) return;
 		this.updateSource({ "level.value": this.minimumLevel });
@@ -207,6 +209,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async toEmbedContents(config, options) {
 		const p = document.createElement("p");
 		p.innerHTML = this.hint ?? "";
@@ -230,6 +233,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static _validateDocumentCreation(data, context) {
 		const c = CONFIG.Advancement.types[data.type];
 		if (!c?.validItemTypes.has(context.parent.type) || !c?.documentClass.availableForItem(context.parent)) {

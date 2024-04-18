@@ -7,6 +7,7 @@ import Advancement from "./advancement.mjs";
  * class can only have one.**
  */
 export default class HitPointsAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -40,6 +41,7 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get levels() {
 		return Array.fromRange(CONFIG.BlackFlag.maxLevel, 1);
 	}
@@ -58,12 +60,14 @@ export default class HitPointsAdvancement extends Advancement {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${levels.class}.hit-points-not-configured`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		if (this.configuredForLevel(levels)) return;
 		notifications.set(this.warningKey(levels), {
@@ -78,12 +82,14 @@ export default class HitPointsAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return this.valueForLevel(this.relavantLevel(levels)) !== null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
 		const hp = this.valueForLevel(this.relavantLevel(levels));
 		if (!hp || !flow) return this.title;
@@ -123,8 +129,9 @@ export default class HitPointsAdvancement extends Advancement {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.name).length;
+		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -160,6 +167,7 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		const level = this.relavantLevel(levels);
 		if (initial) {
@@ -189,6 +197,7 @@ export default class HitPointsAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		const level = this.relavantLevel(levels);
 		let value = this.valueForLevel(level);

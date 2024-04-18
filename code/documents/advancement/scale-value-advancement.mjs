@@ -5,6 +5,7 @@ import Advancement from "./advancement.mjs";
  * Advancement that represents a value that scales with class level.
  */
 export default class ScaleValueAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -43,7 +44,7 @@ export default class ScaleValueAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get levels() {
 		return Array.from(Object.keys(this.configuration.scale).map(l => Number(l)));
 	}
@@ -52,7 +53,7 @@ export default class ScaleValueAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
 		const value = this.valueForLevel(this.relavantLevel(levels))?.display;
 		if (!value) return this.title;
@@ -81,6 +82,7 @@ export default class ScaleValueAdvancement extends Advancement {
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		const value = this.valueForLevel(this.relavantLevel(levels));
 		return value

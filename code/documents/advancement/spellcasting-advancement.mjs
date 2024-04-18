@@ -2,6 +2,7 @@ import { SpellcastingConfigurationData } from "../../data/advancement/spellcasti
 import Advancement from "./advancement.mjs";
 
 export default class SpellcastingAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -23,6 +24,7 @@ export default class SpellcastingAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		return flow ? "" : this.configuration.label;
 	}

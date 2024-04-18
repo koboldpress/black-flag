@@ -1,5 +1,6 @@
 import { log } from "../../utils/_module.mjs";
 import AdvancementSelection from "../advancement/advancement-selection.mjs";
+import BlackFlagContextMenu from "../context-menu.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
@@ -12,20 +13,11 @@ export default class AdvancementElement extends AppAssociatedElement {
 		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
-				this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
 
-		const contextOptions = this.#getContextMenuOptions();
-		/**
-		 * A hook event that fires when the context menu for the advancements list is constructed.
-		 * @function blackFlag.getItemAdvancementContext
-		 * @memberof hookEvents
-		 * @param {AdvancementElement} html - The HTML element to which the context options are attached.
-		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
-		 */
-		Hooks.call("blackFlag.getItemAdvancementContext", this, contextOptions);
-		if (contextOptions) ContextMenu.create(this.app, this, "[data-advancement-id]", contextOptions);
+		new BlackFlagContextMenu(this, "[data-advancement-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -108,31 +100,28 @@ export default class AdvancementElement extends AppAssociatedElement {
 
 	/**
 	 * Get the set of ContextMenu options which should be applied for advancement entries.
+	 * @param {Advancement} advancement - The advancement for which the context menu is being activated.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
 	 */
-	#getContextMenuOptions() {
+	_getContextMenuOptions(advancement) {
 		return [
 			{
 				name: "BF.Advancement.Core.Action.Edit",
-				icon: "<i class='fas fa-edit fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "edit")
+				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
+				condition: li => advancement && this.isEditable,
+				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: "BF.Advancement.Core.Action.Duplicate",
-				icon: "<i class='fas fa-copy fa-fw'></i>",
-				condition: li => {
-					const id = li[0].closest("[data-advancement-id]")?.dataset.advancementId;
-					const advancement = this.advancement.get(id);
-					return this.isEditable && advancement?.constructor.availableForItem(this.item);
-				},
-				callback: li => this.#onAction(li[0], "duplicate")
+				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
+				condition: li => this.isEditable && advancement?.constructor.availableForItem(this.item),
+				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: "BF.Advancement.Core.Action.Delete",
-				icon: "<i class='fas fa-trash fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "delete"),
+				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
+				condition: li => advancement && this.isEditable,
+				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
 			}
 		];
@@ -146,7 +135,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 	 * @param {string} action - Action being triggered.
 	 * @returns {Promise|void}
 	 */
-	#onAction(target, action) {
+	_onAction(target, action) {
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.advancement.get(id);
 		if (["edit", "delete", "duplicate"].includes(action) && !advancement) return;
@@ -164,5 +153,26 @@ export default class AdvancementElement extends AppAssociatedElement {
 			default:
 				return log(`Invalid advancement action type clicked ${action}.`, { level: "warn" });
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle opening the context menu.
+	 * @param {HTMLElement} element - The element the context menu was triggered on.
+	 * @protected
+	 */
+	_onContextMenu(element) {
+		const advancement = this.advancement.get(element.closest("[data-advancement-id]")?.dataset.advancementId);
+		ui.context.menuItems = this._getContextMenuOptions(advancement);
+		/**
+		 * A hook event that fires when the context menu for an activities list is constructed.
+		 * @function blackFlag.getItemAdvancementContext
+		 * @memberof hookEvents
+		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
+		 * @param {Advancement} advancement - The advancement for which the context options are being prepared.
+		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
+		 */
+		Hooks.call("blackFlag.getItemAdvancementContext", this, advancement, ui.context.menuItems);
 	}
 }

@@ -2,6 +2,7 @@ import { SizeConfigurationData, SizeValueData } from "../../data/advancement/siz
 import Advancement from "./advancement.mjs";
 
 export default class SizeAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -25,6 +26,7 @@ export default class SizeAdvancement extends Advancement {
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get levels() {
 		return [0];
 	}
@@ -33,12 +35,14 @@ export default class SizeAdvancement extends Advancement {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.select-size`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		if (this.configuredForLevel(levels)) return;
 		notifications.set(this.warningKey(levels), {
@@ -53,12 +57,14 @@ export default class SizeAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return !!this.value.selected;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
 		let sizes;
 		if (flow && this.value.selected) {
@@ -75,14 +81,16 @@ export default class SizeAdvancement extends Advancement {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static availableForItem(item) {
-		return !item.system.advancement.byType("size").length;
+		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		if (!this.value.selected) return;
 		return [
@@ -96,6 +104,7 @@ export default class SizeAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial) {
 			if (this.configuration.options.size !== 1) return;
@@ -108,6 +117,7 @@ export default class SizeAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null }, { render });
 	}

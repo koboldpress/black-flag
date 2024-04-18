@@ -6,6 +6,7 @@ import Advancement from "./advancement.mjs";
  * if the class is the character's original. **Can only be added to classes and each class can only have one.**
  */
 export default class KeyAbilityAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -28,6 +29,7 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get levels() {
 		return [1];
 	}
@@ -36,12 +38,14 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${levels.class}.no-key-ability`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		if (this.configuredForLevel(levels)) return;
 		notifications.set(this.warningKey(levels), {
@@ -56,12 +60,14 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return !!this.value.selected;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
 		if (flow && !this.configuredForLevel(levels)) return this.title;
 
@@ -116,14 +122,16 @@ export default class KeyAbilityAdvancement extends Advancement {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.name).length;
+		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		const isOriginalClass = this.item.actor.system.progression.classes[this.item.identifier].originalClass;
 		if (!this.configuredForLevel(levels) || !isOriginalClass) return;
@@ -143,6 +151,7 @@ export default class KeyAbilityAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial) {
 			if (this.configuration.options.size !== 1) return;
@@ -155,6 +164,7 @@ export default class KeyAbilityAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null }, { render });
 	}

@@ -7,6 +7,7 @@ import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
  * **Can only be added to classes and each class can only have one.**
  */
 export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -27,18 +28,21 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static VALID_TYPES = new Set(["talent"]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${levels.class}.no-improvement-*`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		const baseKey = this.warningKey(levels).replace("-*", "");
 		if (!this.value.ability)
@@ -59,6 +63,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	_preCreate(data) {
 		if (foundry.utils.hasProperty(data, "level")) return;
 		this.updateSource({ "level.value": 4 });
@@ -68,12 +73,14 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return this.value.ability && !foundry.utils.isEmpty(this.value.talent);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		const p1 = numberFormat(1, { sign: true });
 
@@ -122,20 +129,23 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.name).length;
+		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	storagePath(level) {
 		return "talent";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		if (!this.value.ability) return;
 		return [
@@ -149,6 +159,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial) return;
 
@@ -163,6 +174,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		const valueUpdates = {};
 

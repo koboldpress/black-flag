@@ -6,6 +6,7 @@ import Advancement from "./advancement.mjs";
  * **Can only be added to subclasses and each subclass can only have one.**
  */
 export default class ExpandedTalentListAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -27,6 +28,7 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get levels() {
 		return [3];
 	}
@@ -35,6 +37,7 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		return `<span class="choice-entry"><span class="choice-name">${
 			CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
@@ -67,7 +70,8 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 	/*           Editing Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.name).length;
+		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 }

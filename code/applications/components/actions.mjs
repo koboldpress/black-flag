@@ -1,3 +1,4 @@
+import BlackFlagContextMenu from "../context-menu.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
 /**
@@ -27,7 +28,7 @@ export default class ActionsElement extends AppAssociatedElement {
 			);
 		}
 
-		new ContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,4 +1,5 @@
 import ActivitySelection from "../activity/activity-selection.mjs";
+import BlackFlagContextMenu from "../context-menu.mjs";
 import DragDrop from "../drag-drop.mjs";
 import AppAssociatedElement from "./app-associated-element.mjs";
 
@@ -33,22 +34,13 @@ export default class ActivitiesElement extends AppAssociatedElement {
 				"click",
 				event => {
 					event.stopImmediatePropagation();
-					this.#onAction(event.currentTarget, event.currentTarget.dataset.action);
+					this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 				},
 				{ signal }
 			);
 		}
 
-		const contextOptions = this.#getContextMenuOptions();
-		/**
-		 * A hook event that fires when the context menu for the activities list is constructed.
-		 * @function blackFlag.getItemActivityContext
-		 * @memberof hookEvents
-		 * @param {ActivitiesElement} html - The HTML element to which the context options are attached.
-		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
-		 */
-		Hooks.call("blackFlag.getItemActivityContext", this, contextOptions);
-		if (contextOptions) ContextMenu.create(this.app, this, "[data-activity-id]", contextOptions);
+		new BlackFlagContextMenu(this, "[data-activity-id]", [], { onOpen: this._onContextMenu.bind(this) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -109,27 +101,28 @@ export default class ActivitiesElement extends AppAssociatedElement {
 
 	/**
 	 * Get the set of ContextMenu options which should be applied for activity entries.
+	 * @param {Activity} activity - The activity for which the context menu is being activated.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
 	 */
-	#getContextMenuOptions() {
+	_getContextMenuOptions(activity) {
 		return [
 			{
 				name: "BF.Activity.Core.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "edit")
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: "BF.Activity.Core.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "duplicate")
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: "BF.Activity.Core.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
-				condition: li => this.isEditable,
-				callback: li => this.#onAction(li[0], "delete"),
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
 			}
 		];
@@ -143,7 +136,7 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @param {string} action - Action being triggered.
 	 * @returns {Promise|void}
 	 */
-	#onAction(target, action) {
+	_onAction(target, action) {
 		const id = target.closest("[data-activity-id]")?.dataset.activityId;
 		const activity = this.activities.get(id);
 		if (["edit", "delete", "duplicate"].includes(action) && !activity) return;
@@ -160,6 +153,27 @@ export default class ActivitiesElement extends AppAssociatedElement {
 				delete data._id;
 				return this.item.createEmbeddedDocuments("Activity", [data]);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle opening the context menu.
+	 * @param {HTMLElement} element - The element the context menu was triggered on.
+	 * @protected
+	 */
+	_onContextMenu(element) {
+		const activity = this.activities.get(element.closest("[data-activity-id]")?.dataset.activityId);
+		ui.context.menuItems = this._getContextMenuOptions(activity);
+		/**
+		 * A hook event that fires when the context menu for an activities list is constructed.
+		 * @function blackFlag.getItemActivityContext
+		 * @memberof hookEvents
+		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
+		 * @param {Activity} activity - The activity for which the context options are being prepared.
+		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
+		 */
+		Hooks.call("blackFlag.getItemActivityContext", this, activity, ui.context.menuItems);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

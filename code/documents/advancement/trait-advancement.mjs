@@ -6,6 +6,7 @@ import * as Trait from "../../utils/trait.mjs";
 import Advancement from "./advancement.mjs";
 
 export default class TraitAdvancement extends Advancement {
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -42,12 +43,14 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	warningKey(levels) {
 		return `${this.relativeID}.${this.relavantLevel(levels)}.select-${this.title.slugify()}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareWarnings(levels, notifications) {
 		if (this.configuredForLevel(levels)) return;
 		const { label } = this.availableChoices() ?? {};
@@ -64,12 +67,14 @@ export default class TraitAdvancement extends Advancement {
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	configuredForLevel(levels) {
 		return this.unfulfilledChoices().available.length === 0;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	sortingValueForLevel(levels) {
 		const traitOrder = Object.keys(CONFIG.BlackFlag.traits).findIndex(k => k === this.bestGuessTrait());
 		const modeOrder = Object.keys(CONFIG.BlackFlag.traitModes).findIndex(k => k === this.configuration.mode);
@@ -79,6 +84,7 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		if (this.hint) return `<p>${this.hint}</p>`;
 		return `<p>${Trait.localizedList(this.configuration.grants, this.configuration.choices, {
@@ -90,6 +96,7 @@ export default class TraitAdvancement extends Advancement {
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	changes(levels) {
 		if (!this.value.selected) return;
 		const changes = [];
@@ -118,6 +125,7 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial) {
 			data = new Set();
@@ -140,6 +148,7 @@ export default class TraitAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		if (!this.value.selected) return;
 		if (!data) return await this.actor.update({ [`${this.valueKeyPath}.-=selected`]: null });
