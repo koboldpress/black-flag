@@ -130,7 +130,7 @@ export class UsesData extends foundry.abstract.DataModel {
 		else if (recoveryProfile.formula) {
 			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData);
 			await roll.evaluate();
-			updates.spent = Math.clamped(this.spent - roll.total, 0, this.max - this.min);
+			updates.spent = Math.clamp(this.spent - roll.total, 0, this.max - this.min);
 			if (!roll.isDeterministic) rolls.push(roll);
 		}
 

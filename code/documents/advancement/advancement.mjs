@@ -111,7 +111,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @type {DataModel|object}
 	 */
 	get value() {
-		const value = foundry.utils.getProperty(this.actor, this.valueKeyPath) ?? {};
+		const value = foundry.utils.getProperty(this.actor ?? {}, this.valueKeyPath) ?? {};
 		const DataModel = this.metadata.dataModels?.value;
 		if (!DataModel || value instanceof DataModel) return value;
 		return new DataModel(value, { parent: this });

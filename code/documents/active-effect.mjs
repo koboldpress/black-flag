@@ -157,7 +157,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		event.stopPropagation();
 		if (event.button === 0) level++;
 		else level--;
-		actor.update({ "system.attributes.exhaustion": Math.clamped(level, 0, 6) });
+		actor.update({ "system.attributes.exhaustion": Math.clamp(level, 0, 6) });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

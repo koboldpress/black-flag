@@ -127,7 +127,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			});
 		}
 
-		const levels = Math.clamped(progression.leveled, 0, CONFIG.BlackFlag.maxLevel);
+		const levels = Math.clamp(progression.leveled, 0, CONFIG.BlackFlag.maxLevel);
 		const slots = CONFIG.BlackFlag.spellSlotTable[Math.min(levels, CONFIG.BlackFlag.spellSlotTable.length)] ?? [];
 		for ( const level of Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1) ) {
 			const slot = spells[`ring-${level}`] ??= { spent: 0 };

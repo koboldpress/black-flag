@@ -241,7 +241,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			}
 
 			if (cost < 0 && !denom.spent) return;
-			updates.actor[`system.attributes.hd.d.${this.target}.spent`] = Math.clamped(denom.spent + cost, 0, denom.max);
+			updates.actor[`system.attributes.hd.d.${this.target}.spent`] = Math.clamp(denom.spent + cost, 0, denom.max);
 			return;
 		}
 
@@ -304,6 +304,6 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		}
 
 		if (cost < 0 && !ringData.spent) return;
-		updates.actor[`system.spellcasting.rings.ring-${ringNumber}.spent`] = Math.clamped(newSpent, 0, ringData.max);
+		updates.actor[`system.spellcasting.rings.ring-${ringNumber}.spent`] = Math.clamp(newSpent, 0, ringData.max);
 	}
 }

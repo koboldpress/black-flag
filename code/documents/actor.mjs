@@ -533,7 +533,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (!restConfig.recoverHitPoints) return;
 		const hp = this.system.attributes.hp;
 		const percentage = CONFIG.BlackFlag.rest.hitPointsRecoveryPercentage;
-		const final = Math.clamped(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
+		const final = Math.clamp(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
 		foundry.utils.mergeObject(result, {
 			deltas: {
 				hitPoints: (result.deltas?.hitPoints ?? 0) + final - hp.value
@@ -963,7 +963,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			// Increment successes
 			else
 				details.updates = {
-					"system.attributes.death.success": Math.clamped(successes, 0, rollConfig.successThreshold)
+					"system.attributes.death.success": Math.clamp(successes, 0, rollConfig.successThreshold)
 				};
 		}
 
@@ -971,7 +971,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		else {
 			let failures = (death.failure || 0) + (roll.isCriticalFailure ? 2 : 1);
 			details.updates = {
-				"system.attributes.death.failure": Math.clamped(failures, 0, rollConfig.failureThreshold)
+				"system.attributes.death.failure": Math.clamp(failures, 0, rollConfig.failureThreshold)
 			};
 			// Three failures, you're dead
 			if (failures >= rollConfig.failureThreshold) {

@@ -229,6 +229,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			item: this,
 			system: this.system
 		};
+		await this.system.getSummaryContext?.(context, enrichmentOptions);
 		return context;
 	}
 

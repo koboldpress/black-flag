@@ -106,6 +106,10 @@ export default class DamageRoll extends BasicRoll {
 	 * Perform any term-merging required to ensure that criticals can be calculated successfully.
 	 */
 	#preprocessFormula() {
+		const FunctionTerm = game.release.generation < 12 ? MathTerm : foundry.dice.terms.FunctionTerm;
+		const ParentheticalTerm = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
+		const StringTerm = game.release.generation < 12 ? StringTerm : foundry.dice.terms.StringTerm;
+
 		for (let [i, term] of this.terms.entries()) {
 			const nextTerm = this.terms[i + 1];
 			const prevTerm = this.terms[i - 1];
@@ -142,7 +146,7 @@ export default class DamageRoll extends BasicRoll {
 
 			// Merge any parenthetical terms followed by string terms
 			else if (
-				(term instanceof ParentheticalTerm || term instanceof MathTerm) &&
+				(term instanceof ParentheticalTerm || term instanceof FunctionTerm) &&
 				nextTerm instanceof StringTerm &&
 				nextTerm.term.match(/^d[0-9]*$/)
 			) {
@@ -168,6 +172,11 @@ export default class DamageRoll extends BasicRoll {
 	 * Modify the damage to take criticals into account.
 	 */
 	configureRoll() {
+		const DiceTerm = game.release.generation < 12 ? DiceTerm : foundry.dice.terms.DiceTerm;
+		const NumericTerm = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
+		const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+		const ParentheticalTerm = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
+
 		let bonus = 0;
 		const multiplier = this.options.multiplier ?? 2;
 

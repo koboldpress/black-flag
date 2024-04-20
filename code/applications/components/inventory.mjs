@@ -330,7 +330,7 @@ export default class InventoryElement extends AppAssociatedElement {
 		const { property } = event.target.dataset;
 		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
 		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
-		const value = Math.clamped(event.target.valueAsNumber, min, max);
+		const value = Math.clamp(event.target.valueAsNumber, min, max);
 		if (Number.isNaN(value)) return;
 
 		event.target.value = value;
@@ -360,7 +360,7 @@ export default class InventoryElement extends AppAssociatedElement {
 		}
 		const min = event.target.min !== "" ? Number(event.target.min) : -Infinity;
 		const max = event.target.max !== "" ? Number(event.target.max) : Infinity;
-		value = Math.clamped(value, min, max);
+		value = Math.clamp(value, min, max);
 		if (Number.isNaN(value)) return;
 
 		event.target.value = value;

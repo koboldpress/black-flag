@@ -291,12 +291,12 @@ export default class PCData extends ActorDataModel.mixin(
 	prepareEmbeddedExperiencePoints() {
 		const xp = this.progression.xp;
 		const getXP = level =>
-			CONFIG.BlackFlag.experiencePoints[Math.clamped(level, 1, CONFIG.BlackFlag.experiencePoints.length)];
+			CONFIG.BlackFlag.experiencePoints[Math.clamp(level, 1, CONFIG.BlackFlag.experiencePoints.length)];
 		xp.max = getXP(this.progression.level + 1);
 		xp.min = getXP(this.progression.level);
 		Object.defineProperty(xp, "percentage", {
 			get() {
-				const result = Math.clamped(Math.round(((this.value - this.min) * 100) / (this.max - this.min)), 0, 100);
+				const result = Math.clamp(Math.round(((this.value - this.min) * 100) / (this.max - this.min)), 0, 100);
 				return Number.isNaN(result) ? 100 : result;
 			},
 			enumerable: false
@@ -403,7 +403,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 		hp.max = base + levelBonus + overallBonus;
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
-		hp.value = Math.clamped(hp.value, 0, hp.max);
+		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 	}
 
@@ -485,7 +485,7 @@ export default class PCData extends ActorDataModel.mixin(
 			this.constructor.prepareSpellcastingSlots(this.spellcasting.rings, type, progression, { actor: this });
 
 		for (const ring of Object.values(this.spellcasting.rings)) {
-			ring.value = Math.clamped(ring.max - ring.spent, 0, ring.max);
+			ring.value = Math.clamp(ring.max - ring.spent, 0, ring.max);
 			if (Number.isFinite(ring.max)) {
 				this.spellcasting.slots.value += ring.value;
 				this.spellcasting.slots.spent += ring.spent;

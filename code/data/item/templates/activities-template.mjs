@@ -43,7 +43,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			notifications: this.parent.notifications, key: "invalid-max-uses-formula", section: "auto",
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
 		}));
-		this.uses.value = Math.clamped(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
+		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
 
 		Object.defineProperty(this.uses, "label", {
 			get() {

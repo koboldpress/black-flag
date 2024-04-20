@@ -107,7 +107,7 @@ export default class BasicRoll extends Roll {
 		}
 
 		for (const roll of rolls) {
-			await roll.evaluate({ async: true });
+			await roll.evaluate();
 		}
 
 		if (rolls?.length && message.create !== false) {
@@ -184,7 +184,7 @@ export default class BasicRoll extends Roll {
 		messageData = foundry.utils.mergeObject(
 			{
 				user: game.user.id,
-				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+				type: game.release.generation < 12 ? CONST.CHAT_MESSAGE_TYPES.ROLL : undefined,
 				sound: CONFIG.sounds.dice
 			},
 			messageData

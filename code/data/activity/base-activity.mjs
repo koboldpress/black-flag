@@ -125,7 +125,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				messageData: { name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
 			})
 		);
-		this.uses.value = Math.clamped(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
+		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
 
 		Object.defineProperty(this.uses, "label", {
 			get() {

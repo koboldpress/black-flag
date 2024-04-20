@@ -108,7 +108,8 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		if (!message.rolls?.length) return false;
 
 		// Only user who performed the roll should see the UI
-		if (message.user !== game.user) return false;
+		const author = game.release.generation < 12 ? message.user : message.author;
+		if (author !== game.user) return false;
 
 		// Only PCs can spend luck
 		if (actor?.type !== "pc") return false;

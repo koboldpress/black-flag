@@ -75,7 +75,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 
 		// If armor is equipped, prepare clamped abilities
 		ac.clamped = Object.entries(this.abilities).reduce((obj, [k, v]) => {
-			obj[k] = Math.clamped(
+			obj[k] = Math.clamp(
 				v.mod,
 				ac.equippedArmor?.system.modifier.min ?? -Infinity,
 				ac.equippedArmor?.system.modifier.max ?? Infinity

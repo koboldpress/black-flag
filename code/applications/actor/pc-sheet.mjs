@@ -366,7 +366,7 @@ export default class PCSheet extends BaseActorSheet {
 			const hd = this.actor.system.attributes.hd;
 			for (const [denomination, update] of Object.entries(hdUpdates)) {
 				const d = hd.d[denomination];
-				updates.system.attributes.hd.d[denomination].spent = Math.clamped(d.max - update.available, 0, d.max);
+				updates.system.attributes.hd.d[denomination].spent = Math.clamp(d.max - update.available, 0, d.max);
 			}
 		}
 

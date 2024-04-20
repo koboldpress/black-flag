@@ -1,3 +1,4 @@
+
 /**
  * Replace referenced data attributes in the roll formula with values from the provided data.
  * If the attribute is not found in the provided data, adds a warning to the provided messages array.
@@ -66,6 +67,8 @@ export function simplifyBonus(bonus, data={}) {
  * @returns {string}
  */
 export function simplifyFormula(formula, { preserveFlavor=false }={}) {
+	const RollTerm = game.release.generation < 12 ? RollTerm : foundry.dice.terms.RollTerm;
+
 	// Create a new roll and verify that the formula is valid before attempting simplification.
 	let roll;
 	try { roll = new Roll(formula); }
@@ -109,6 +112,8 @@ export function simplifyFormula(formula, { preserveFlavor=false }={}) {
  * @returns {RollTerm[]} - A new array of roll terms with redundant operators removed.
  */
 function _simplifyOperatorTerms(terms) {
+	const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+
 	return terms.reduce((acc, term) => {
 		const prior = acc[acc.length - 1];
 		const ops = new Set([prior?.operator, term.operator]);
@@ -137,6 +142,9 @@ function _simplifyOperatorTerms(terms) {
  * @returns {object[]} - A new array of terms with unannotated numeric terms combined into one.
  */
 function _simplifyNumericTerms(terms) {
+	const NumericTerm = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
+	const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+
 	const simplified = [];
 	const { annotated, unannotated } = _separateAnnotatedTerms(terms);
 
@@ -160,6 +168,10 @@ function _simplifyNumericTerms(terms) {
  * @returns {object[]} - A new array of simplified dice terms.
  */
 function _simplifyDiceTerms(terms) {
+	const Coin = game.release.generation < 12 ? Coin : foundry.dice.terms.Coin;
+	const Die = game.release.generation < 12 ? Die : foundry.dice.terms.Die;
+	const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+
 	const { annotated, unannotated } = _separateAnnotatedTerms(terms);
 
 	// Split the unannotated terms into different die sizes and signs
@@ -189,6 +201,9 @@ function _simplifyDiceTerms(terms) {
  * @returns {object[]} - A new array of terms with no parenthetical terms.
  */
 function _expandParentheticalTerms(terms) {
+	const NumericTerm = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
+	const ParentheticalTerm = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
+
 	terms = terms.reduce((acc, term) => {
 		if ( term instanceof ParentheticalTerm ) {
 			if ( term.isDeterministic ) term = new NumericTerm({ number: Roll.safeEval(term.term) });
@@ -212,13 +227,18 @@ function _expandParentheticalTerms(terms) {
  * @returns {object} - An object mapping term types to arrays containing roll terms of that type.
  */
 function _groupTermsByType(terms) {
+	const DiceTerm = game.release.generation < 12 ? DiceTerm : foundry.dice.terms.DiceTerm;
+	const FunctionTerm = game.release.generation < 12 ? MathTerm : foundry.dice.terms.FunctionTerm;
+	const NumericTerm = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
+	const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+
 	// Add an initial operator so that terms can be rearranged arbitrarily.
 	if ( !(terms[0] instanceof OperatorTerm) ) terms.unshift(new OperatorTerm({ operator: "+" }));
 
 	return terms.reduce((obj, term, i) => {
 		let type;
 		if ( term instanceof DiceTerm ) type = DiceTerm;
-		else if ( (term instanceof MathTerm) && (term.isDeterministic) ) type = NumericTerm;
+		else if ( (term instanceof FunctionTerm) && (term.isDeterministic) ) type = NumericTerm;
 		else type = term.constructor;
 		const key = `${type.name.charAt(0).toLowerCase()}${type.name.substring(1)}s`;
 
@@ -236,6 +256,8 @@ function _groupTermsByType(terms) {
  * @returns {Array | Array[]} - A pair of term arrays, one containing annotated terms.
  */
 function _separateAnnotatedTerms(terms) {
+	const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+
 	return terms.reduce((obj, curr, i) => {
 		if ( curr instanceof OperatorTerm ) return obj;
 		obj[curr.flavor ? "annotated" : "unannotated"].push(terms[i - 1], curr);

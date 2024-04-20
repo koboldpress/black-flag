@@ -176,7 +176,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
-		hp.value = Math.clamped(hp.value, 0, hp.max);
+		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 
 		// Initiative
@@ -184,7 +184,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 		// Legendary Actions
 		this.attributes.legendary.max ??= 0;
-		this.attributes.legendary.value = Math.clamped(
+		this.attributes.legendary.value = Math.clamp(
 			this.attributes.legendary.max - this.attributes.legendary.spent,
 			0,
 			this.attributes.legendary.max
