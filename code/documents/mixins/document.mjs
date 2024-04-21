@@ -19,7 +19,8 @@ export default Base =>
 
 		async _preCreate(data, options, user) {
 			let allowed = await super._preCreate(data, options, user);
-			if (allowed !== false) allowed = await this.system._preCreate?.(data, options, user);
+			if (allowed !== false && game.release.generation < 12)
+				allowed = await this.system._preCreate?.(data, options, user);
 			return allowed;
 		}
 
@@ -27,7 +28,8 @@ export default Base =>
 
 		async _preUpdate(changed, options, user) {
 			let allowed = await super._preUpdate(changed, options, user);
-			if (allowed !== false) allowed = await this.system._preUpdate?.(changed, options, user);
+			if (allowed !== false && game.release.generation < 12)
+				allowed = await this.system._preUpdate?.(changed, options, user);
 			return allowed;
 		}
 
@@ -35,7 +37,7 @@ export default Base =>
 
 		async _preDelete(options, user) {
 			let allowed = await super._preDelete(options, user);
-			if (allowed !== false) allowed = await this.system._preDelete?.(options, user);
+			if (allowed !== false && game.release.generation < 12) allowed = await this.system._preDelete?.(options, user);
 			return allowed;
 		}
 
@@ -43,21 +45,21 @@ export default Base =>
 
 		_onCreate(data, options, userId) {
 			super._onCreate(data, options, userId);
-			this.system._onCreate?.(data, options, userId);
+			if (game.release.generation < 12) this.system._onCreate?.(data, options, userId);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		_onUpdate(changed, options, userId) {
 			super._onUpdate(changed, options, userId);
-			this.system._onUpdate?.(changed, options, userId);
+			if (game.release.generation < 12) this.system._onUpdate?.(changed, options, userId);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		_onDelete(options, userId) {
 			super._onDelete(options, userId);
-			this.system._onDelete?.(options, userId);
+			if (game.release.generation < 12) this.system._onDelete?.(options, userId);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
