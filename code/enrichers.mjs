@@ -796,7 +796,7 @@ async function enrichEmbed(config, label, options) {
 	for (const value of config.values) {
 		if (config.uuid) break;
 		try {
-			const parsed = foundry.utils.parseUuid(value);
+			const parsed = foundry.utils.parseUuid(value, { relative: options.relativeTo });
 			if (parsed.documentId) config.uuid = value;
 		} catch (err) {}
 	}
