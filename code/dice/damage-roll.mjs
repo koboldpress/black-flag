@@ -106,16 +106,16 @@ export default class DamageRoll extends BasicRoll {
 	 * Perform any term-merging required to ensure that criticals can be calculated successfully.
 	 */
 	#preprocessFormula() {
-		const FunctionTerm = game.release.generation < 12 ? MathTerm : foundry.dice.terms.FunctionTerm;
-		const ParentheticalTerm = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
-		const StringTerm = game.release.generation < 12 ? StringTerm : foundry.dice.terms.StringTerm;
+		const FunctionTerm_ = game.release.generation < 12 ? MathTerm : foundry.dice.terms.FunctionTerm;
+		const ParentheticalTerm_ = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
+		const StringTerm_ = game.release.generation < 12 ? StringTerm : foundry.dice.terms.StringTerm;
 
 		for (let [i, term] of this.terms.entries()) {
 			const nextTerm = this.terms[i + 1];
 			const prevTerm = this.terms[i - 1];
 
 			// Convert shorthand dX terms to 1dX preemptively to allow them to be appropriately doubled for criticals
-			if (term instanceof StringTerm && /^d\d+/.test(term.term) && !(prevTerm instanceof ParentheticalTerm)) {
+			if (term instanceof StringTerm_ && /^d\d+/.test(term.term) && !(prevTerm instanceof ParentheticalTerm_)) {
 				const formula = `1${term.term}`;
 				const newTerm = new Roll(formula).terms[0];
 				this.terms.splice(i, 1, newTerm);
@@ -124,8 +124,8 @@ export default class DamageRoll extends BasicRoll {
 
 			// Merge parenthetical terms that follow string terms to build a dice term (to allow criticals)
 			else if (
-				term instanceof ParentheticalTerm &&
-				prevTerm instanceof StringTerm &&
+				term instanceof ParentheticalTerm_ &&
+				prevTerm instanceof StringTerm_ &&
 				prevTerm.term.match(/^[0-9]*d$/)
 			) {
 				if (term.isDeterministic) {
@@ -133,7 +133,7 @@ export default class DamageRoll extends BasicRoll {
 					let deleteCount = 2;
 
 					// Merge in any roll modifiers
-					if (nextTerm instanceof StringTerm) {
+					if (nextTerm instanceof StringTerm_) {
 						newFormula += nextTerm.term;
 						deleteCount += 1;
 					}
@@ -146,8 +146,8 @@ export default class DamageRoll extends BasicRoll {
 
 			// Merge any parenthetical terms followed by string terms
 			else if (
-				(term instanceof ParentheticalTerm || term instanceof FunctionTerm) &&
-				nextTerm instanceof StringTerm &&
+				(term instanceof ParentheticalTerm_ || term instanceof FunctionTerm_) &&
+				nextTerm instanceof StringTerm_ &&
 				nextTerm.term.match(/^d[0-9]*$/)
 			) {
 				if (term.isDeterministic) {
@@ -172,17 +172,17 @@ export default class DamageRoll extends BasicRoll {
 	 * Modify the damage to take criticals into account.
 	 */
 	configureRoll() {
-		const DiceTerm = game.release.generation < 12 ? DiceTerm : foundry.dice.terms.DiceTerm;
-		const NumericTerm = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
-		const OperatorTerm = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
-		const ParentheticalTerm = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
+		const DiceTerm_ = game.release.generation < 12 ? DiceTerm : foundry.dice.terms.DiceTerm;
+		const NumericTerm_ = game.release.generation < 12 ? NumericTerm : foundry.dice.terms.NumericTerm;
+		const OperatorTerm_ = game.release.generation < 12 ? OperatorTerm : foundry.dice.terms.OperatorTerm;
+		const ParentheticalTerm_ = game.release.generation < 12 ? ParentheticalTerm : foundry.dice.terms.ParentheticalTerm;
 
 		let bonus = 0;
 		const multiplier = this.options.multiplier ?? 2;
 
 		for (const [i, term] of this.terms.entries()) {
 			// Multiply dice terms
-			if (term instanceof DiceTerm) {
+			if (term instanceof DiceTerm_) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if (this.isCritical) {
@@ -203,14 +203,14 @@ export default class DamageRoll extends BasicRoll {
 						this.terms.splice(
 							i + 1,
 							0,
-							new OperatorTerm({ operator: "*" }),
-							new NumericTerm({ number: termMultiplier })
+							new OperatorTerm_({ operator: "*" }),
+							new NumericTerm_({ number: termMultiplier })
 						);
 				}
 			}
 
 			// Multiply Numeric - Modify numeric terms (as long as multiply dice isn't also set)
-			else if (this.options.multiplyNumeric && !this.options.multiplyDice && term instanceof NumericTerm) {
+			else if (this.options.multiplyNumeric && !this.options.multiplyDice && term instanceof NumericTerm_) {
 				// Reset to base value & store that value for later if it isn't already set
 				term.number = term.options.baseNumber ??= term.number;
 				if (this.isCritical) {
@@ -222,23 +222,23 @@ export default class DamageRoll extends BasicRoll {
 
 		// Multiply Dice & Numeric: Wrap whole formula in parenthetical term and multiply
 		if (this.isCritical && this.options.multiplyDice && this.options.multiplyNumeric && multiplier > 1) {
-			this.terms = [ParentheticalTerm.fromTerms(this.terms)];
-			this.terms.push(new OperatorTerm({ operator: "*" }));
-			this.terms.push(new NumericTerm({ number: multiplier }));
+			this.terms = [ParentheticalTerm_.fromTerms(this.terms)];
+			this.terms.push(new OperatorTerm_({ operator: "*" }));
+			this.terms.push(new NumericTerm_({ number: multiplier }));
 		}
 
 		// Add flat bonus back in
 		if (bonus > 0) {
-			this.terms.push(new OperatorTerm({ operator: "+" }));
+			this.terms.push(new OperatorTerm_({ operator: "+" }));
 			this.terms.push(
-				new NumericTerm({ number: bonus }, { flavor: game.i18n.localize("BF.Damage.Critical.Maximize") })
+				new NumericTerm_({ number: bonus }, { flavor: game.i18n.localize("BF.Damage.Critical.Maximize") })
 			);
 		}
 
 		// Add extra critical damage
 		if (this.isCritical && this.options.bonusDamage) {
 			const extra = new Roll(this.options.bonusDamage, this.data);
-			if (!(extra.terms[0] instanceof OperatorTerm)) this.terms.push(new OperatorTerm({ operator: "+" }));
+			if (!(extra.terms[0] instanceof OperatorTerm_)) this.terms.push(new OperatorTerm_({ operator: "+" }));
 			this.terms.push(...extra.terms);
 		}
 

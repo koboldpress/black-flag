@@ -266,6 +266,9 @@ export default class BaseActorSheet extends ActorSheet {
 		for (const element of html.querySelectorAll('[name$=".hp.value"]')) {
 			element.addEventListener("change", this._onChangeHP.bind(this));
 		}
+
+		if (!this.modes.editing) {
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -362,6 +365,16 @@ export default class BaseActorSheet extends ActorSheet {
 
 		const changed = await this.actor.applyDamage(delta, { multiplier: -1 });
 		if (!changed) event.target.value = foundry.utils.getProperty(this.actor, event.target.name);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle showing the actor's portrait or token artwork.
+	 * @param {PointerEvent} event - Triggering click event.
+	 */
+	_onShowArtwork(event) {
+		console.log(event);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

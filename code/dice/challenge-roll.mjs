@@ -128,9 +128,9 @@ export default class ChallengeRoll extends BasicRoll {
 	 * @type {ChallengeDie|void}
 	 */
 	get challengeDie() {
-		const Die = game.release.generation < 12 ? Die : foundry.dice.terms.Die;
+		const Die_ = game.release.generation < 12 ? Die : foundry.dice.terms.Die;
 
-		if (!(this.terms[0] instanceof Die)) return undefined;
+		if (!(this.terms[0] instanceof Die_)) return undefined;
 		return this.terms[0];
 	}
 
@@ -230,10 +230,10 @@ export default class ChallengeRoll extends BasicRoll {
 	 * Ensure the challenge die for this roll is a proper ChallengeDie, not a regular Die.
 	 */
 	#createChallengeDie() {
-		const Die = game.release.generation < 12 ? Die : foundry.dice.terms.Die;
+		const Die_ = game.release.generation < 12 ? Die : foundry.dice.terms.Die;
 
 		if (this.challengeDie instanceof CONFIG.Dice.ChallengeDie) return;
-		if (!(this.challengeDie instanceof Die)) return;
+		if (!(this.challengeDie instanceof Die_)) return;
 		this.challengeDie = new CONFIG.Dice.ChallengeDie({ ...this.challengeDie });
 	}
 }
