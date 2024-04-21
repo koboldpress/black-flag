@@ -115,16 +115,28 @@
 			flex-direction: column;
 			gap: 8px;
 
-			figure {
-				margin: 0;
+			.artwork {
+				display: flex;
+				justify-content: space-evenly;
 
+				figure {
+					display: flex;
+					flex-direction: column;
+					gap: 4px;
+					margin: 0;
+				}
+				figcaption {
+					font-family: var(--bf-font-primary);
+					font-size: var(--font-size-12);
+				}
 				.profile {
+					margin: 0;
 					min-inline-size: 32px;
-					inline-size: 100%;
 					min-block-size: 32px;
 					max-block-size: 64px;
 					border: 1px solid transparent;
 					object-fit: contain;
+					cursor: pointer;
 				}
 			}
 

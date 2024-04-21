@@ -44,6 +44,9 @@ export default class NPCSheet extends BaseActorSheet {
 			stealth: 10 + (context.system.abilities.dexterity?.mod ?? 0)
 		};
 
+		const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+		context.showTokenArtwork = this.modes.editing || this.actor.img !== token.texture.src;
+
 		context.stealthLabel = numberFormat(context.system.attributes.stealth);
 		if (context.system.attributes.baseStealth)
 			context.stealthLabel = game.i18n.format("BF.Armor.StealthReduction", {

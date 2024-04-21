@@ -268,6 +268,9 @@ export default class BaseActorSheet extends ActorSheet {
 		}
 
 		if (!this.modes.editing) {
+			for (const element of html.querySelectorAll(".profile")) {
+				element.addEventListener("click", this._onShowArtwork.bind(this));
+			}
 		}
 	}
 
@@ -374,7 +377,8 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {PointerEvent} event - Triggering click event.
 	 */
 	_onShowArtwork(event) {
-		console.log(event);
+		const path = event.target.src;
+		new ImagePopout(path, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
