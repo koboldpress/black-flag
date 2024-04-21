@@ -30,7 +30,7 @@ export default class HealingActivity extends Activity {
 		layout.classList.add("layout");
 		const rollConfig = this.createHealingConfig({}, this.item.getRollData({ deterministic: true }));
 		let formula = rollConfig.rolls.map(r => r.parts.join(" + ")).join(" + ");
-		formula = Roll.defaultImplementation.replaceFormulaData(formula, rollConfig.data);
+		formula = Roll.defaultImplementation.replaceFormulaData(formula, rollConfig.rolls[0]?.data ?? {});
 		formula = simplifyFormula(formula);
 		if (formula) {
 			const healingType = CONFIG.BlackFlag.healingTypes[rollConfig.rolls[0].options.healingType];

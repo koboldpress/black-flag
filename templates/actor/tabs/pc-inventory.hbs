@@ -1,16 +1,16 @@
 {{#with system.attributes.attunement}}
 	<div class="attunement">
-		<i class="fa-solid fa-sun" data-tooltip="BF.Attunement.Label" aria-label="{{localize 'BF.Attunement.Label'}}"></i>
-		<span class="value">{{numberFormat value}}</span>
+		<i class="fa-solid fa-sun" data-tooltip="BF.Attunement.Label" aria-label="{{ localize 'BF.Attunement.Label' }}"></i>
+		<span class="value">{{ numberFormat value }}</span>
 		<span class="separator">&sol;</span>
 		{{#if @root.editable}}
-			{{numberInput max name="system.attributes.attunement.max" class="uninput max" min=0 step=1}}
+			<input type="number" name="system.attributes.attunement.max" class="uninput max" value="{{ max }}" min=0 step=1>
 		{{else}}
-			<span class="max">{{numberFormat max}}</span>
+			<span class="max">{{ numberFormat max }}</span>
 		{{/if}}
-		{{blackFlag-notificationBadge @root.actor key="too-much-attunement"}}
+		{{ blackFlag-notificationBadge @root.actor key="too-much-attunement" }}
 	</div>
 {{/with}}
 
-{{> "blackFlag.inventory"}}
-{{> "blackFlag.currency"}}
+{{> "blackFlag.inventory" }}
+{{> "blackFlag.currency" }}
