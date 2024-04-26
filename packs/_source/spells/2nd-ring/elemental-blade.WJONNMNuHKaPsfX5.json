@@ -25,7 +25,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Summon Blade",
         "img": "systems/black-flag/artwork/activities/utility.svg"
@@ -44,14 +45,17 @@
             "parts": [
               {
                 "number": 3,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": ""
               }
             ]
           },
-          "ability": ""
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
         },
         "activation": {
           "type": "action",
@@ -67,7 +71,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/attack.svg"
@@ -106,7 +111,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a leaf of sumac"
+        "description": "a leaf of sumac",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -130,10 +137,10 @@
     "range": {
       "units": ""
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "arcane"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -143,10 +150,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933239660,
-    "modifiedTime": 1710446874601,
+    "modifiedTime": 1714155255521,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!WJONNMNuHKaPsfX5"

@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 3,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "fire"
@@ -41,7 +41,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -78,7 +79,9 @@
         "somatic"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -101,10 +104,10 @@
     "range": {
       "units": "self"
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "arcane"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -114,10 +117,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706932494127,
-    "modifiedTime": 1710189867560,
+    "modifiedTime": 1714155253386,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6HSESlJ472aQngrP"

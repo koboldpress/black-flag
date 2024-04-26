@@ -26,7 +26,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Inscribe Glyph",
         "img": "systems/black-flag/artwork/activities/utility.svg"
@@ -41,7 +42,7 @@
             "parts": [
               {
                 "number": 5,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": ""
@@ -67,7 +68,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Explosive Runes",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -106,7 +108,9 @@
       ],
       "material": {
         "cost": 200,
-        "description": "incense and powdered diamond worth at least 200 gp, which the spell consumes"
+        "description": "incense and powdered diamond worth at least 200 gp, which the spell consumes",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -130,11 +134,11 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "abjuration",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "abjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -144,10 +148,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996986703,
-    "modifiedTime": 1710552964804,
+    "modifiedTime": 1714155253297,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!5u4pU5NkSrXU4jza"

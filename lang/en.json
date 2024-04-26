@@ -2237,22 +2237,6 @@
 	"CastingTime": {
 		"Label": "Casting Time"
 	},
-	"Circle": {
-		"Label": "Circle of Magic",
-		"RuleLabel": "Spell Circle",
-		"Arcane": {
-			"Label": "Arcane"
-		},
-		"Divine": {
-			"Label": "Divine"
-		},
-		"Primordial": {
-			"Label": "Primordial"
-		},
-		"Wyrd": {
-			"Label": "Wyrd"
-		}
-	},
 	"Component": {
 		"Label": "Components",
 		"RuleLabel": "Spell Component",
@@ -2331,6 +2315,22 @@
 			"Label": "Transmutation"
 		}
 	},
+	"Source": {
+		"Label": "Source of Magic",
+		"RuleLabel": "Spell Source",
+		"Arcane": {
+			"Label": "Arcane"
+		},
+		"Divine": {
+			"Label": "Divine"
+		},
+		"Primordial": {
+			"Label": "Primordial"
+		},
+		"Wyrd": {
+			"Label": "Wyrd"
+		}
+	},
 	"Tag": {
 		"Label": "Tags",
 		"RuleLabel": "Spell Tag",
@@ -2393,7 +2393,7 @@
 			"Hint": "In what way does the caster gain spells at various levels?",
 			"All": {
 				"Label": "All Spells",
-				"Hint": "Caster knows all spells in their circle."
+				"Hint": "Caster knows all spells from their Source of Magic."
 			},
 			"Limited": {
 				"Label": "Limited",
@@ -2415,7 +2415,7 @@
 		},
 		"Special": {
 			"Label": "Special Slot",
-			"Hint": "One of the initial spells chosen can bypass normal circle or school restriction."
+			"Hint": "One of the initial spells chosen can bypass normal source or school restriction."
 		}
 	},
 	"Preparation": {
@@ -2448,7 +2448,7 @@
 		"Hint": "Number of regular spells known by the caster at any given level."
 	},
 	"Trait": {
-		"Display": "{circle} {prepared} {progression}"
+		"Display": "{source} {prepared} {progression}"
 	},
 	"Type": {
 		"Label": "Spellcasting Type",

@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -58,7 +59,8 @@
       "material": {
         "cost": 10,
         "description": "a small square of silk and burning incense worth at least 10 gp, which the spell consumes",
-        "consumed": true
+        "consumed": true,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -81,10 +83,10 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "illusion",
+    "source": [
       "arcane"
-    ],
-    "school": "illusion"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -94,10 +96,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996684748,
-    "modifiedTime": 1710449338381,
+    "modifiedTime": 1714155256285,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hpLZqas39UiqAUXi"

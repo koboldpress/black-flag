@@ -63,54 +63,54 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 		const parent = this.parent;
 		const spellcasting = this.spellcasting;
 		if ( !this.parent.actor || !spellcasting ) return;
-		const spellcastingSources = parent.actor.system.spellcasting.sources ??= {};
-		const source = spellcastingSources[parent.identifier] ??= {};
+		const spellcastingOrigins = parent.actor.system.spellcasting.origins ??= {};
+		const origin = spellcastingOrigins[parent.identifier] ??= {};
 
-		Object.defineProperty(source, "document", {
+		Object.defineProperty(origin, "document", {
 			get() { return parent; },
 			configurable: true,
 			enumerable: false
 		});
-		Object.defineProperty(source, "spellcasting", {
+		Object.defineProperty(origin, "spellcasting", {
 			get() { return spellcasting; },
 			configurable: true,
 			enumerable: false
 		});
 
 		// Spellcasting Ability
-		source.ability = spellcasting.spellcastingAbility;
-		const abilityMod = parent.actor.system.abilities[source.ability]?.mod ?? 0;
+		origin.ability = spellcasting.spellcastingAbility;
+		const abilityMod = parent.actor.system.abilities[origin.ability]?.mod ?? 0;
 		const proficiency = parent.actor.system.attributes.proficiency ?? 0;
 
 		// Spell Attack Modifier
-		source.attack = proficiency + abilityMod;
+		origin.attack = proficiency + abilityMod;
 		// TODO: Add global/spell attack bonuses
 		// TODO: Split into melee & ranged spell attack modifiers?
 
 		// Spell Save DC
-		source.dc = 8 + proficiency + abilityMod;
+		origin.dc = 8 + proficiency + abilityMod;
 		// TODO: Add global/spell DC bonuses
 
 		// Knowable cantrips/rituals/spells
 		parent.actor.system.spellcasting.spells ??= {};
 		const stats = parent.actor.system.spellcasting.spells.knowable ??= {};
 		for ( const type of ["cantrips", "rituals", "spells"] ) {
-			source[type] ??= { value: 0 };
-			source[type].max = spellcasting[type].known;
+			origin[type] ??= { value: 0 };
+			origin[type].max = spellcasting[type].known;
 			stats[type] += spellcasting[type].known;
 		}
 		if ( spellcasting.spells.mode === "spellbook" ) {
 			const identifier = parent.type === "subclass" ? parent.system.identifier.class : parent.identifier;
 			const levels = parent.actor.system.progression.classes[identifier]?.levels ?? 0;
-			source.spellbook ??= { value: 0, max: 0 };
-			source.spellbook.max = spellcasting.spells.spellbook.firstLevel ?? 0;
-			source.spellbook.max += (spellcasting.spells.spellbook.otherLevels ?? 0) * (levels - 1);
+			origin.spellbook ??= { value: 0, max: 0 };
+			origin.spellbook.max = spellcasting.spells.spellbook.firstLevel ?? 0;
+			origin.spellbook.max += (spellcasting.spells.spellbook.otherLevels ?? 0) * (levels - 1);
 		}
 		const canPrepare = CONFIG.BlackFlag.spellLearningModes[spellcasting.spells.mode]?.prepared;
 		if ( canPrepare ) {
-			source.prepared ??= { value: 0 };
+			origin.prepared ??= { value: 0 };
 			const abilityMod = parent.actor?.system.abilities[spellcasting.spellcastingAbility]?.mod;
-			source.prepared.max = (this.levels ?? 0) + (abilityMod ?? 0);
+			origin.prepared.max = (this.levels ?? 0) + (abilityMod ?? 0);
 		}
 	}
 

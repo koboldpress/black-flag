@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a pinch of salt and one copper piece placed on each of the corpse’s eyes, which must remain there for the duration"
+        "description": "a pinch of salt and one copper piece placed on each of the corpse’s eyes, which must remain there for the duration",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -80,11 +83,11 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "necromancy",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "necromancy"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -94,10 +97,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933864119,
-    "modifiedTime": 1710447433011,
+    "modifiedTime": 1714155254091,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DoduOTnkai1evUDz"

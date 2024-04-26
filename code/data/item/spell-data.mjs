@@ -37,7 +37,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			type: new SchemaField({
 				value: new StringField({ initial: "standard", label: "BF.Spell.Preparation.Label" })
 			}),
-			circle: new SetField(new StringField(), { label: "BF.Spell.Circle.Label" }),
+			source: new SetField(new StringField(), { label: "BF.Spell.Source.Label" }),
 			school: new StringField({ label: "BF.Spell.School.Label" }),
 			ring: new SchemaField(
 				{
@@ -187,7 +187,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	get traits() {
 		const traits = [
-			// TODO: Circle?
+			// TODO: Source?
 			// TODO: School?
 			// TODO: Duration
 			// TODO: Components
@@ -204,12 +204,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Migrate single spell circle to set of circles.
+	 * Migrate spell circle to source and migrate single spell source to set of sources.
 	 * @param {object} source - Candidate source data to migrate.
 	 */
-	static migrateCircle(source) {
-		if (foundry.utils.getType(source.circle) !== "string") return;
-		source.circle = [source.circle];
+	static migrateSource(source) {
+		if ("circle" in source) source.source = source.circle;
+		if (foundry.utils.getType(source.source) !== "string") return;
+		source.source = [source.source];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -269,12 +270,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			enumerable: false
 		});
 
-		Object.defineProperty(this.circle, "label", {
+		Object.defineProperty(this.source, "label", {
 			get() {
-				const circles = Array.from(this)
-					.map(c => CONFIG.BlackFlag.spellCircles.localized[c])
+				const sources = Array.from(this)
+					.map(c => CONFIG.BlackFlag.spellSources.localized[c])
 					.filter(c => c);
-				return game.i18n.getListFormatter({ type: "unit" }).format(circles);
+				return game.i18n.getListFormatter({ type: "unit" }).format(sources);
 			},
 			configurable: true,
 			enumerable: false
@@ -417,25 +418,25 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			}
 		}
 
-		const sources = (this.parent.actor.system.spellcasting.sources ??= {});
-		const relationship = this.parent.getFlag("black-flag", "relationship.source") ?? {};
-		const source = (sources[relationship.identifier] ??= {});
+		const origins = (this.parent.actor.system.spellcasting.origins ??= {});
+		const relationship = this.parent.getFlag("black-flag", "relationship.origin") ?? {};
+		const origin = (origins[relationship.identifier] ??= {});
 		if (this.ring.base === 0) {
-			source.cantrips ??= { value: 0 };
-			source.cantrips.value += 1;
+			origin.cantrips ??= { value: 0 };
+			origin.cantrips.value += 1;
 		} else if (this.tags.has("ritual")) {
-			source.rituals ??= { value: 0 };
-			source.rituals.value += 1;
+			origin.rituals ??= { value: 0 };
+			origin.rituals.value += 1;
 		} else {
-			source.spells ??= { value: 0 };
-			source.spells.value += 1;
+			origin.spells ??= { value: 0 };
+			origin.spells.value += 1;
 			if (relationship.spellbookOrigin === "free") {
-				source.spellbook ??= { value: 0 };
-				source.spellbook.value += 1;
+				origin.spellbook ??= { value: 0 };
+				origin.spellbook.value += 1;
 			}
 			if (this.preparable && this.prepared) {
-				source.prepared ??= { value: 0 };
-				source.prepared.value += 1;
+				origin.prepared ??= { value: 0 };
+				origin.prepared.value += 1;
 			}
 		}
 	}

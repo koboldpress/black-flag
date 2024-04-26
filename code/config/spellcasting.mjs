@@ -55,28 +55,6 @@ export const spellcastingTypes = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Types of circles to which a spell can belong.
- * @enum {LabeledConfiguration}
- */
-export const spellCircles = {
-	arcane: {
-		label: "BF.Spell.Circle.Arcane.Label"
-	},
-	divine: {
-		label: "BF.Spell.Circle.Divine.Label"
-	},
-	primordial: {
-		label: "BF.Spell.Circle.Primordial.Label"
-	},
-	wyrd: {
-		label: "BF.Spell.Circle.Wyrd.Label"
-	}
-};
-localizeConfig(spellCircles);
-
-/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
-
-/**
  * Components that can be required by spells.
  * @enum {AbbreviatedConfiguration}
  */
@@ -230,6 +208,28 @@ export const spellSchools = {
 	}
 };
 localizeConfig(spellSchools);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Spellcasting sources to which a spell can belong.
+ * @enum {LabeledConfiguration}
+ */
+export const spellSources = {
+	arcane: {
+		label: "BF.Spell.Source.Arcane.Label"
+	},
+	divine: {
+		label: "BF.Spell.Source.Divine.Label"
+	},
+	primordial: {
+		label: "BF.Spell.Source.Primordial.Label"
+	},
+	wyrd: {
+		label: "BF.Spell.Source.Wyrd.Label"
+	}
+};
+localizeConfig(spellSources);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

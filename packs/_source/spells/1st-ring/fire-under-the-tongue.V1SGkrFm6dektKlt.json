@@ -25,7 +25,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Consume Fire",
         "img": "systems/black-flag/artwork/activities/utility.svg"
@@ -51,7 +52,10 @@
               }
             ]
           },
-          "ability": ""
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
         },
         "activation": {
           "type": "",
@@ -67,7 +71,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Spit Small Fire",
         "img": "systems/black-flag/artwork/activities/attack.svg"
@@ -92,7 +97,10 @@
               }
             ]
           },
-          "ability": ""
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
         },
         "activation": {
           "type": "",
@@ -108,7 +116,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Spit Tiny Fire",
         "img": "systems/black-flag/artwork/activities/attack.svg",
@@ -146,7 +155,9 @@
         "somatic"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -170,10 +181,10 @@
       "units": "foot",
       "value": "5"
     },
-    "circle": [
+    "school": "transmutation",
+    "source": [
       "arcane"
-    ],
-    "school": "transmutation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -183,10 +194,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933506708,
-    "modifiedTime": 1709408323008,
+    "modifiedTime": 1714155255351,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!V1SGkrFm6dektKlt"

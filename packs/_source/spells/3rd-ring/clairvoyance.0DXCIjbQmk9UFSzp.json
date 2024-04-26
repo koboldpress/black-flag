@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": 100,
-        "description": "a focus worth at least 100 gp, either a jeweled horn for hearing or a glass eye for seeing"
+        "description": "a focus worth at least 100 gp, either a jeweled horn for hearing or a glass eye for seeing",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -83,11 +86,11 @@
       "units": "mile",
       "value": "1"
     },
-    "circle": [
+    "school": "divination",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "divination"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -97,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996812481,
-    "modifiedTime": 1710552971932,
+    "modifiedTime": 1714155252867,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0DXCIjbQmk9UFSzp"

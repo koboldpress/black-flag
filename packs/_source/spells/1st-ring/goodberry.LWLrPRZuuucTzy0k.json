@@ -13,9 +13,10 @@
         "system": {
           "healing": {
             "type": "healing",
-            "denomination": "",
+            "denomination": 0,
             "bonus": "1",
-            "custom": ""
+            "custom": "",
+            "number": null
           },
           "ability": ""
         },
@@ -33,7 +34,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/healing.svg"
@@ -73,7 +75,8 @@
       "material": {
         "cost": null,
         "description": "a sprig of mistletoe",
-        "denomination": "pp"
+        "denomination": "pp",
+        "consumed": false
       }
     },
     "duration": {
@@ -94,10 +97,10 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "transmutation",
+    "source": [
       "primordial"
-    ],
-    "school": "transmutation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -107,10 +110,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997794874,
-    "modifiedTime": 1710192523233,
+    "modifiedTime": 1714155254638,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!LWLrPRZuuucTzy0k"

@@ -9,68 +9,68 @@ export default class SpellManager extends DocumentSheet {
 
 		// Figure out what spells are already on sheet
 		this.existingSpells = new Set();
-		const specialChosenSources = new Set();
+		const specialChosenOrigins = new Set();
 		for (const spell of this.document.items) {
 			if (spell.type !== "spell") continue;
 			if (!["standard", "alwaysPrepared"].includes(spell.system.type.value)) continue;
 			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
 			this.existingSpells.add(sourceId);
-			const source = spell.getFlag("black-flag", "relationship.source");
-			if (source.special && source.identifier) specialChosenSources.add(source.identifier);
+			const origin = spell.getFlag("black-flag", "relationship.origin");
+			if (origin.special && origin.identifier) specialChosenOrigins.add(origin.identifier);
 		}
 
 		this.slots = [];
-		const circles = new Map();
+		const sources = new Map();
 
 		// Iterate over each spellcasting source, calculating cantrips, rituals, & spells known
-		for (const [identifier, source] of Object.entries(this.document.system.spellcasting.sources)) {
+		for (const [identifier, origin] of Object.entries(this.document.system.spellcasting.origins)) {
 			for (const type of ["cantrips", "rituals", "spells", "spellbook"]) {
-				if (!source[type]) continue;
-				const diff = Math.max(source[type].max - source[type].value, 0);
+				if (!origin[type]) continue;
+				const diff = Math.max(origin[type].max - origin[type].value, 0);
 				const needsSpecial =
-					type === "spells" && source.spellcasting.spells.special && !specialChosenSources.has(identifier);
+					type === "spells" && origin.spellcasting.spells.special && !specialChosenOrigins.has(identifier);
 				this.slots.push(
 					...Array.fromRange(diff).map((s, i) => ({
 						type,
 						mode: "single",
-						source: source.document,
+						source: origin.document,
 						special: i === 0 && needsSpecial,
-						spellcasting: source.spellcasting,
+						spellcasting: origin.spellcasting,
 						selected: new Set()
 					}))
 				);
 			}
-			if (source.spellcasting.spells.mode === "all" && !circles.has(source.spellcasting.circle)) {
-				circles.set(source.spellcasting.circle, source);
+			if (origin.spellcasting.spells.mode === "all" && !sources.has(origin.spellcasting.source)) {
+				sources.set(origin.spellcasting.source, origin);
 			}
 		}
 
 		// Prepare all learning slots
-		const circleSlots = [];
-		for (const [circle, label] of Object.entries(CONFIG.BlackFlag.spellCircles.localized)) {
-			const source = circles.get(circle);
-			if (!source) continue;
+		const sourceSlots = [];
+		for (const [source, label] of Object.entries(CONFIG.BlackFlag.spellSources.localized)) {
+			const origin = sources.get(source);
+			if (!origin) continue;
 			for (const ring of Array.fromRange(this.document.system.spellcasting.maxRing, 1)) {
-				circleSlots.push({
+				sourceSlots.push({
 					name: game.i18n.getListFormatter({ type: "unit" }).format([label, numberFormat(ring, { ordinal: true })]),
-					type: "circle",
+					type: "source",
 					mode: "all",
 					ring,
-					source: source.document,
-					spellcasting: source.spellcasting
+					source: origin.document,
+					spellcasting: origin.spellcasting
 				});
 			}
 		}
 
 		// Group slots by type and then append typed slots
 		this.slots.sort((lhs, rhs) => lhs.type.localeCompare(rhs.type, "en"));
-		this.slots.push(...circleSlots);
+		this.slots.push(...sourceSlots);
 
 		// Begin fetching spells to display
 		this.allSpells = search
 			.compendiums(Item, {
 				type: "spell",
-				indexFields: new Set(["system.circle", "system.school", "system.ring.base", "system.tags"])
+				indexFields: new Set(["system.source", "system.school", "system.ring.base", "system.tags"])
 			})
 			.then(spells =>
 				spells.reduce((map, spell) => {
@@ -144,12 +144,12 @@ export default class SpellManager extends DocumentSheet {
 	 * Data representing a single spell learning slot.
 	 * @typedef {object} SpellSlotData
 	 *
-	 * @property {cantrips|circle|rituals|spells|spellbook} type - Type of spell that can be added to the slot.
+	 * @property {cantrips|rituals|spells|spellbook|source} type - Type of spell that can be added to the slot.
 	 * @property {single|all} mode - Whether only one spell or multiple can be selected.
-	 * @property {BlackFlagItem} source - Document with the spellcasting class that granted this slot.
+	 * @property {BlackFlagItem} origin - Document with the spellcasting class that granted this slot.
 	 * @property {Set<string>} selected - Set of UUIDs for selected spells, only one allowed in "single" mode.
 	 * @property {string} [name] - Name to display for this slot.
-	 * @property {number} [ring] - Spell ring (only used for "circle" type).
+	 * @property {number} [ring] - Spell ring (only used for "source" type).
 	 */
 
 	/**
@@ -212,23 +212,15 @@ export default class SpellManager extends DocumentSheet {
 		const filters = [];
 		const schools = this.currentSlot.spellcasting.spells.schools;
 
-		// Always restrict by circle unless current slot is special and there are no schools set
+		// Always restrict by source unless current slot is special and there are no schools set
 		if (!this.currentSlot.special || schools.size) {
-			filters.push({ k: "system.circle", o: "has", v: this.currentSlot.spellcasting.circle });
+			filters.push({ k: "system.source", o: "has", v: this.currentSlot.spellcasting.source });
 		}
 
 		switch (this.currentSlot.type) {
 			case "cantrips":
 				// Cantrips are always ring 0
 				filters.push({ k: "system.ring.base", v: 0 });
-				break;
-			case "circle":
-				filters.push(
-					// Circle are always from a single ring
-					{ k: "system.ring.base", v: this.currentSlot.ring },
-					// No ritual spells
-					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
-				);
 				break;
 			case "rituals":
 				filters.push(
@@ -251,6 +243,14 @@ export default class SpellManager extends DocumentSheet {
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
 				break;
+			case "source":
+				filters.push(
+					// Source are always from a single ring
+					{ k: "system.ring.base", v: this.currentSlot.ring },
+					// No ritual spells
+					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
+				);
+				break;
 			default:
 				return;
 		}
@@ -268,8 +268,8 @@ export default class SpellManager extends DocumentSheet {
 	prepareRestrictions(filters) {
 		const restrictions = {};
 
-		const circle = filters.find(f => f.k === "system.circle");
-		if (circle) restrictions.circle = CONFIG.BlackFlag.spellCircles.localized[circle.v];
+		const source = filters.find(f => f.k === "system.source");
+		if (source) restrictions.source = CONFIG.BlackFlag.spellSources.localized[source.v];
 
 		const schools = filters.find(f => f.k === "system.school");
 		if (schools)
@@ -349,11 +349,11 @@ export default class SpellManager extends DocumentSheet {
 		spell = await spell;
 		const spellData = spell.toObject();
 		const remote = spell.parent !== this.document;
-		const source = remote ? foundry.utils.getProperty(spellData, "flags.black-flag.relationship.source") ?? {} : {};
+		const origin = remote ? foundry.utils.getProperty(spellData, "flags.black-flag.relationship.origin") ?? {} : {};
 
-		source.identifier = slot.source.identifier;
-		if (slot.type === "spellbook") source.spellbookOrigin = "free";
-		if (slot.special) source.special = true;
+		origin.identifier = slot.origin.identifier;
+		if (slot.type === "spellbook") origin.spellbookOrigin = "free";
+		if (slot.special) origin.special = true;
 
 		const prepared =
 			foundry.utils.getProperty(spellData, "system.ring.base") > 0
@@ -361,7 +361,7 @@ export default class SpellManager extends DocumentSheet {
 				: true;
 		foundry.utils.setProperty(spellData, "system.type.value", prepared ? "standard" : "alwaysPrepared");
 
-		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.source", source);
+		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.origin", origin);
 		if (remote) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
 		return spellData;
 	}

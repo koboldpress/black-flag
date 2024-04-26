@@ -33,7 +33,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Enlarge",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -64,7 +65,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Reduce",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg",
@@ -104,7 +106,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a pinch of powdered iron"
+        "description": "a pinch of powdered iron",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -130,10 +134,10 @@
       "units": "foot",
       "value": "30"
     },
-    "circle": [
+    "school": "transmutation",
+    "source": [
       "arcane"
-    ],
-    "school": "transmutation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -143,10 +147,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933282379,
-    "modifiedTime": 1710447607911,
+    "modifiedTime": 1714155255048,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ReN0VQRCHBtYmvst"

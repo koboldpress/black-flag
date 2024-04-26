@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a forked twig"
+        "description": "a forked twig",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -83,11 +86,11 @@
       "units": "foot",
       "value": "1000"
     },
-    "circle": [
+    "school": "divination",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "divination"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -97,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706934417065,
-    "modifiedTime": 1710447906784,
+    "modifiedTime": 1714155256990,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wAusgnQGjgl6QPD3"

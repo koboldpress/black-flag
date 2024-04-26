@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a leather strap, bound around the arm or a similar appendage"
+        "description": "a leather strap, bound around the arm or a similar appendage",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -80,12 +83,12 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "abjuration",
+    "source": [
       "arcane",
       "divine",
       "primordial"
-    ],
-    "school": "abjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -95,10 +98,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997764100,
-    "modifiedTime": 1710906945677,
+    "modifiedTime": 1714155255954,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ebGqTLYBFxSDf3g7"

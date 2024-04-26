@@ -8,7 +8,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {string} type - General spellcasting type (e.g. "leveled", "pact").
  * @property {string} progression - Specific progression within selected type (e.g. "full", "half", "third").
  * @property {string} ability - Spellcasting ability if not class's key ability.
- * @property {string} circle - Circle of magic used by spellcasting (e.g. "arcane", "divine").
+ * @property {string} source - Source of magic used by spellcasting (e.g. "arcane", "divine").
  * @property {object} cantrips
  * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
  * @property {object} rituals
@@ -33,7 +33,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 				hint: "BF.Spellcasting.Progression.Hint"
 			}),
 			ability: new StringField({ label: "BF.Spellcasting.Ability.Label" }),
-			circle: new StringField({ label: "BF.Spell.Circle.Label" }),
+			source: new StringField({ label: "BF.Spell.Source.Label" }),
 			cantrips: new SchemaField(
 				{
 					scale: new StringField()
@@ -106,17 +106,29 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	 * @type {string}
 	 */
 	get label() {
-		const circle = CONFIG.BlackFlag.spellCircles[this.circle]?.label;
+		const source = CONFIG.BlackFlag.spellSources[this.source]?.label;
 		const prepared = this.preparation ? "BF.Spellcasting.Preparation.Trait" : null;
 		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[this.type];
 		const progression = typeConfig?.progression?.[this.progression]?.trait ?? typeConfig?.trait;
 		return game.i18n
 			.format("BF.Spellcasting.Trait.Display", {
-				circle: circle ? game.i18n.localize(circle) : "",
+				source: source ? game.i18n.localize(source) : "",
 				prepared: prepared ? game.i18n.localize(prepared) : "",
 				progression: progression ? game.i18n.localize(progression) : ""
 			})
 			.trim();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate spell circle to source.
+	 * @param {object} source - Candidate source data to migrate.
+	 */
+	static migrateData(source) {
+		if ("circle" in source) source.source = source.circle;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

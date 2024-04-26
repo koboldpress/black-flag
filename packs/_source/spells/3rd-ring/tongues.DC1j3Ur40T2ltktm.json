@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a small clay model of a ziggurat"
+        "description": "a small clay model of a ziggurat",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -80,11 +83,11 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "divination",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "divination"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -94,10 +97,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706935900181,
-    "modifiedTime": 1710552312149,
+    "modifiedTime": 1714155253995,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DC1j3Ur40T2ltktm"

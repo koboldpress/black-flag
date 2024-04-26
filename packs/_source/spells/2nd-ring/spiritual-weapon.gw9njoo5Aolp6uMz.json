@@ -20,14 +20,17 @@
             "parts": [
               {
                 "number": 1,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "@mod",
                 "custom": "",
                 "type": "force"
               }
             ]
           },
-          "ability": ""
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
         },
         "activation": {
           "type": "",
@@ -43,7 +46,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/attack.svg"
@@ -80,7 +84,9 @@
         "somatic"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -103,10 +109,10 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "divine"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -116,10 +122,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706935708646,
-    "modifiedTime": 1710448892789,
+    "modifiedTime": 1714155256193,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gw9njoo5Aolp6uMz"

@@ -242,7 +242,7 @@ export default class PCData extends ActorDataModel.mixin(
 	prepareBaseSpellcasting() {
 		this.spellcasting.maxRing ??= 0;
 		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
-		this.spellcasting.sources ??= {};
+		this.spellcasting.origins ??= {};
 		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
 		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
 	}
@@ -551,13 +551,13 @@ export default class PCData extends ActorDataModel.mixin(
 		const learnedFlag = this.parent.getFlag("black-flag", "spellsLearned");
 		if (!learnedFlag?.learned) {
 			let needsToLearn = false;
-			top: for (const source of Object.values(this.spellcasting.sources)) {
-				if (source.spellcasting?.spells.mode === "all" && learnedFlag?.maxRing < this.spellcasting.maxRing) {
+			top: for (const origin of Object.values(this.spellcasting.origins)) {
+				if (origin.spellcasting?.spells.mode === "all" && learnedFlag?.maxRing < this.spellcasting.maxRing) {
 					needsToLearn = true;
 					break;
 				}
 				for (const type of ["cantrips", "rituals", "spells"]) {
-					if (source[type]?.max && source[type].value < source[type].max) {
+					if (origin[type]?.max && origin[type].value < origin[type].max) {
 						needsToLearn = true;
 						break top;
 					}

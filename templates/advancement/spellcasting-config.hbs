@@ -8,8 +8,8 @@
 			<legend>{{ localize "BF.Spellcasting.Details.Label" }}</legend>
 			<label>
 				<span>{{ localize "BF.Spellcasting.Source" }}</span>
-				<select name="configuration.circle">
-					{{ selectOptions CONFIG.spellCircles selected=configuration.circle labelAttr="label" localize=true blank="" }}
+				<select name="configuration.source">
+					{{ selectOptions CONFIG.spellSources selected=configuration.source labelAttr="label" localize=true blank="" }}
 				</select>
 			</label>
 			<label>

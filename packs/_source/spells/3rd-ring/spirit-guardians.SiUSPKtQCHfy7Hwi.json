@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 3,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": "radiant"
@@ -41,7 +41,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -80,7 +81,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a holy symbol"
+        "description": "a holy symbol",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -106,10 +109,10 @@
     "range": {
       "units": "self"
     },
-    "circle": [
+    "school": "conjuration",
+    "source": [
       "divine"
-    ],
-    "school": "conjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -119,10 +122,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706935684152,
-    "modifiedTime": 1710552091142,
+    "modifiedTime": 1714155255190,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SiUSPKtQCHfy7Hwi"

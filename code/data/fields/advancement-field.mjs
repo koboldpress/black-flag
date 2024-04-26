@@ -18,13 +18,24 @@ export class AdvancementField extends MappingField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static hierarchical = true;
 	// TODO: Rework this to be more like EmbeddedCollection
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	initialize(value, model, options) {
 		return new AdvancementCollection(model, super.initialize(value, model, options));
+	}
+
+	/* -------------------------------------------- */
+
+	/** @override */
+	migrateSource(sourceData, fieldData) {
+		for (const value of Object.values(fieldData ?? {})) {
+			this.model.migrateSource(sourceData, value);
+		}
 	}
 }
 

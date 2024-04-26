@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": 25,
-        "description": "specially marked sticks, bones, or similar tokens worth at least 25 gp"
+        "description": "specially marked sticks, bones, or similar tokens worth at least 25 gp",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -78,10 +81,10 @@
     "range": {
       "units": "self"
     },
-    "circle": [
+    "school": "divination",
+    "source": [
       "divine"
-    ],
-    "school": "divination"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -91,10 +94,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996733296,
-    "modifiedTime": 1710449392383,
+    "modifiedTime": 1714155253953,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!CnNNEgO2tpR1uMZ6"

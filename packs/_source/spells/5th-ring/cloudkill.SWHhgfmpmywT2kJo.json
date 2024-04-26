@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 5,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": "poison"
@@ -41,7 +41,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -78,7 +79,9 @@
         "somatic"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -105,11 +108,11 @@
       "units": "foot",
       "value": "120"
     },
-    "circle": [
+    "school": "conjuration",
+    "source": [
       "arcane",
       "primordial"
-    ],
-    "school": "conjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -119,10 +122,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997580398,
-    "modifiedTime": 1710907134371,
+    "modifiedTime": 1714155255104,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SWHhgfmpmywT2kJo"

@@ -33,7 +33,8 @@
       "material": {
         "cost": null,
         "description": "a tiny ball of bat guano and sulfur",
-        "denomination": "gp"
+        "denomination": "gp",
+        "consumed": false
       }
     },
     "tags": [],
@@ -41,9 +42,6 @@
       "value": "60",
       "units": "foot"
     },
-    "circle": [
-      "arcane"
-    ],
     "school": "evocation",
     "target": {
       "template": {
@@ -91,7 +89,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -101,7 +100,10 @@
       "spent": 0,
       "consumeQuantity": false,
       "recovery": []
-    }
+    },
+    "source": [
+      "arcane"
+    ]
   },
   "effects": [],
   "folder": "V6ryz9MMBJLcGrft",
@@ -111,10 +113,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1699297018533,
-    "modifiedTime": 1710550856223,
+    "modifiedTime": 1714155255487,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "VYvD59yJYefhAwOI",

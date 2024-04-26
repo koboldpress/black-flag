@@ -34,7 +34,8 @@
       "material": {
         "cost": 10,
         "description": "a silver hand bell worth 10 gp",
-        "denomination": "gp"
+        "denomination": "gp",
+        "consumed": false
       }
     },
     "tags": [
@@ -44,9 +45,6 @@
       "units": "foot",
       "value": "30"
     },
-    "circle": [
-      "arcane"
-    ],
     "school": "abjuration",
     "target": {
       "affects": {
@@ -81,7 +79,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Set Alarm",
         "img": "systems/black-flag/artwork/activities/utility.svg",
@@ -94,7 +93,10 @@
       "spent": 0,
       "consumeQuantity": false,
       "recovery": []
-    }
+    },
+    "source": [
+      "arcane"
+    ]
   },
   "effects": [],
   "folder": "nRrXxMSYGyY4qKs3",
@@ -104,10 +106,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1699211110623,
-    "modifiedTime": 1709408322120,
+    "modifiedTime": 1714155254874,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "QwpAynYICG3vjDSL",

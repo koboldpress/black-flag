@@ -13,7 +13,7 @@
         "system": {
           "healing": {
             "type": "healing",
-            "denomination": "8",
+            "denomination": 8,
             "bonus": "@mod",
             "custom": "",
             "number": 2
@@ -40,7 +40,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/healing.svg"
@@ -81,7 +82,9 @@
         "verbal"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -104,10 +107,10 @@
       "units": "foot",
       "value": "30"
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "divine"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -117,10 +120,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997232407,
-    "modifiedTime": 1710449558467,
+    "modifiedTime": 1714155254196,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!EnwWlw6HgPLyogdd"

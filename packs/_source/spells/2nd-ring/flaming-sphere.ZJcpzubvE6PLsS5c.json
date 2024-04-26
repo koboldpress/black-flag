@@ -25,7 +25,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Summon Sphere",
         "img": "systems/black-flag/artwork/activities/utility.svg"
@@ -40,7 +41,7 @@
             "parts": [
               {
                 "number": 2,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "fire"
@@ -65,7 +66,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -89,7 +91,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "Move Sphere",
         "img": "systems/black-flag/artwork/activities/utility.svg"
@@ -128,7 +131,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a bit of tallow, a pinch of brimstone, and a dusting of powdered iron"
+        "description": "a bit of tallow, a pinch of brimstone, and a dusting of powdered iron",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -153,10 +158,10 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": [
+    "school": "conjuration",
+    "source": [
       "arcane"
-    ],
-    "school": "conjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -166,10 +171,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933546467,
-    "modifiedTime": 1710447288997,
+    "modifiedTime": 1714155255689,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ZJcpzubvE6PLsS5c"

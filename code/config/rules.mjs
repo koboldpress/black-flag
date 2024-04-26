@@ -41,14 +41,14 @@ export const ruleTypes = {
 		label: "BF.Damage.Type.Label",
 		references: "damageTypes"
 	},
-	spellCircle: {
-		label: "BF.Spell.Circle.RuleLabel"
-	},
 	spellComponent: {
 		label: "BF.Spell.Component.RuleLabel"
 	},
 	spellSchool: {
 		label: "BF.Spell.School.RuleLabel"
+	},
+	spellSource: {
+		label: "BF.Spell.Source.RuleLabel"
 	},
 	spellTag: {
 		label: "BF.Spell.Tag.RuleLabel"

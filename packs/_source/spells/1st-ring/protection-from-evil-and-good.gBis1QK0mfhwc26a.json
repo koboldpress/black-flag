@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -58,7 +59,8 @@
       "material": {
         "cost": null,
         "description": "holy water or powdered silver and iron, which the spell consumes",
-        "denomination": "pp"
+        "denomination": "pp",
+        "consumed": false
       }
     },
     "duration": {
@@ -83,11 +85,11 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "abjuration",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "abjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -97,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706935047093,
-    "modifiedTime": 1710191913731,
+    "modifiedTime": 1714155256166,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gBis1QK0mfhwc26a"

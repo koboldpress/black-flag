@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 8,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "lightning"
@@ -41,7 +41,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -80,7 +81,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a bit of fur and a rod of amber, crystal, or glass"
+        "description": "a bit of fur and a rod of amber, crystal, or glass",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -104,10 +107,10 @@
     "range": {
       "units": "self"
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "arcane"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -117,10 +120,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706934380366,
-    "modifiedTime": 1710551280678,
+    "modifiedTime": 1714155254953,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RIOCsdRfuC31r9Rf"

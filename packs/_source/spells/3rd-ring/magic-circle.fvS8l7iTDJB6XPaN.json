@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -58,7 +59,8 @@
       "material": {
         "cost": 100,
         "description": "holy water or powdered silver and iron worth at least 100 gp, which the spell consumes",
-        "consumed": true
+        "consumed": true,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -86,11 +88,11 @@
       "units": "foot",
       "value": "10"
     },
-    "circle": [
+    "school": "abjuration",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "abjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -100,10 +102,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997119947,
-    "modifiedTime": 1710552958990,
+    "modifiedTime": 1714155256131,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!fvS8l7iTDJB6XPaN"

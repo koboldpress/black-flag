@@ -59,7 +59,6 @@ export default class TypeConfig extends BaseConfig {
 	/** @inheritDoc */
 	_getSubmitData(...args) {
 		const data = foundry.utils.expandObject(super._getSubmitData(...args));
-		console.log(foundry.utils.deepClone(data));
 		data.type ??= {};
 		data.type.tags = filteredKeys(data.type?.tags ?? {});
 

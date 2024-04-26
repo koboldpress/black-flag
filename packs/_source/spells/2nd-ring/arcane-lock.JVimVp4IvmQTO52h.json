@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -58,7 +59,8 @@
       "material": {
         "cost": 25,
         "description": "gold dust worth at least 25 gp, which the spell consumes",
-        "consumed": true
+        "consumed": true,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -80,10 +82,10 @@
     "range": {
       "units": "touch"
     },
-    "circle": [
+    "school": "abjuration",
+    "source": [
       "arcane"
-    ],
-    "school": "abjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -93,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996604930,
-    "modifiedTime": 1710449261110,
+    "modifiedTime": 1714155254467,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!JVimVp4IvmQTO52h"

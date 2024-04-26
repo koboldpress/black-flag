@@ -16,7 +16,7 @@
             "parts": [
               {
                 "number": 3,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": "slashing"
@@ -41,7 +41,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -80,7 +81,9 @@
       ],
       "material": {
         "cost": 5,
-        "description": "a handful of gears worth 5 gp"
+        "description": "a handful of gears worth 5 gp",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -103,10 +106,10 @@
     "range": {
       "units": ""
     },
-    "circle": [
+    "school": "conjuration",
+    "source": [
       "arcane"
-    ],
-    "school": "conjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -116,10 +119,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706933835091,
-    "modifiedTime": 1710447356994,
+    "modifiedTime": 1714155255625,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!XifKV866oCQ15Q3N"

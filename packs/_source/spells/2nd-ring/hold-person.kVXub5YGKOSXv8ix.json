@@ -33,7 +33,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -72,7 +73,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a small, straight piece of iron"
+        "description": "a small, straight piece of iron",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -98,11 +101,11 @@
       "units": "foot",
       "value": "60"
     },
-    "circle": [
+    "school": "enchantment",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "enchantment"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -112,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706934136728,
-    "modifiedTime": 1710447579413,
+    "modifiedTime": 1714155256459,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!kVXub5YGKOSXv8ix"

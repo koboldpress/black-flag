@@ -20,7 +20,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -57,7 +58,9 @@
       ],
       "material": {
         "cost": 10,
-        "description": "a drop of blood, a piece of flesh, a pinch of bone dust, and a bloodstone worth at least 10 gp"
+        "description": "a drop of blood, a piece of flesh, a pinch of bone dust, and a bloodstone worth at least 10 gp",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -82,11 +85,11 @@
       "units": "foot",
       "value": "10"
     },
-    "circle": [
+    "school": "necromancy",
+    "source": [
       "arcane",
       "divine"
-    ],
-    "school": "necromancy"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -96,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706996523489,
-    "modifiedTime": 1710552981445,
+    "modifiedTime": 1714155256811,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!qFg34HYHnA4Qlxvd"

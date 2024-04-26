@@ -27,7 +27,10 @@
               }
             ]
           },
-          "ability": "none"
+          "ability": "none",
+          "attack": {
+            "flat": false
+          }
         },
         "activation": {
           "type": "action",
@@ -43,7 +46,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/attack.svg"
@@ -80,7 +84,9 @@
         "somatic"
       ],
       "material": {
-        "cost": null
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -104,10 +110,10 @@
       "units": "foot",
       "value": "30"
     },
-    "circle": [
+    "school": "conjuration",
+    "source": [
       "primordial"
-    ],
-    "school": "conjuration"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -117,10 +123,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997864135,
-    "modifiedTime": 1710189164062,
+    "modifiedTime": 1714155254815,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PnWBk2Ep2NRfRDFK"

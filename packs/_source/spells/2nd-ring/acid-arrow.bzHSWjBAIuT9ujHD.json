@@ -35,16 +35,14 @@
       "material": {
         "cost": 5,
         "description": "powdered rhubarb leaf and an adder’s stomach",
-        "denomination": "gp"
+        "denomination": "gp",
+        "consumed": false
       }
     },
     "range": {
       "units": "foot",
       "value": "90"
     },
-    "circle": [
-      "arcane"
-    ],
     "school": "evocation",
     "tags": [],
     "target": {
@@ -77,6 +75,9 @@
                 "type": "acid"
               }
             ]
+          },
+          "attack": {
+            "flat": false
           }
         },
         "name": "",
@@ -91,7 +92,8 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "consumeQuantity": false
         }
       }
     },
@@ -101,7 +103,10 @@
       "spent": 0,
       "consumeQuantity": false,
       "recovery": []
-    }
+    },
+    "source": [
+      "arcane"
+    ]
   },
   "effects": [],
   "folder": "iJIjiGFvx6IqTXvu",
@@ -111,10 +116,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.014",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1698881084085,
-    "modifiedTime": 1709408323924,
+    "modifiedTime": 1714155255868,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "bzHSWjBAIuT9ujHD",

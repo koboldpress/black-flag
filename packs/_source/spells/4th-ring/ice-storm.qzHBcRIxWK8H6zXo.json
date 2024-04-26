@@ -16,14 +16,14 @@
             "parts": [
               {
                 "number": 2,
-                "denomination": "8",
+                "denomination": 8,
                 "bonus": "",
                 "custom": "",
                 "type": "bludgeoning"
               },
               {
                 "number": 4,
-                "denomination": "6",
+                "denomination": 6,
                 "bonus": "",
                 "custom": "",
                 "type": "cold"
@@ -48,7 +48,8 @@
           "spent": 0,
           "recovery": [],
           "min": "",
-          "max": ""
+          "max": "",
+          "consumeQuantity": false
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -86,7 +87,9 @@
       ],
       "material": {
         "cost": null,
-        "description": "a pinch of dust and a few drops of water"
+        "description": "a pinch of dust and a few drops of water",
+        "consumed": false,
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -111,11 +114,11 @@
       "units": "foot",
       "value": "300"
     },
-    "circle": [
+    "school": "evocation",
+    "source": [
       "arcane",
       "primordial"
-    ],
-    "school": "evocation"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -125,10 +128,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.016",
+    "systemVersion": "0.9.023",
     "coreVersion": "11.315",
     "createdTime": 1706997830635,
-    "modifiedTime": 1710907024878,
+    "modifiedTime": 1714155256832,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!qzHBcRIxWK8H6zXo"
