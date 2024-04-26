@@ -7,7 +7,7 @@
 export default class LocalDocumentField extends foundry.data.fields.DocumentIdField {
 	constructor(model, options = {}) {
 		if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
-			throw new Error("A ForeignDocumentField must specify a DataModel subclass as its type");
+			throw new Error("A LocalDocumentField must specify a DataModel subclass as its type");
 		}
 
 		super(options);
@@ -24,6 +24,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get _defaults() {
 		return foundry.utils.mergeObject(super._defaults, {
 			nullable: true,
@@ -34,6 +35,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	_cast(value) {
 		if (typeof value === "string") return value;
 		if (value instanceof this.model) return value._id;
@@ -55,6 +57,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	initialize(value, model, options = {}) {
 		if (this.idOnly) return value;
 		const collection = this._findCollection(model, this.model.metadata.collection);
@@ -63,6 +66,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	toObject(value) {
 		return value?._id ?? value;
 	}

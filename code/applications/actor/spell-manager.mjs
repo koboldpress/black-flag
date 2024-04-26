@@ -1,4 +1,4 @@
-import { filter, numberFormat, search } from "../../utils/_module.mjs";
+import { filter, numberFormat, Search } from "../../utils/_module.mjs";
 
 /**
  * Application for learning new spells.
@@ -70,17 +70,15 @@ export default class SpellManager extends DocumentSheet {
 		this.slots.push(...sourceSlots);
 
 		// Begin fetching spells to display
-		this.allSpells = search
-			.compendiums(Item, {
-				type: "spell",
-				indexFields: new Set(["system.source", "system.school", "system.circle.base", "system.tags"])
-			})
-			.then(spells =>
-				spells.reduce((map, spell) => {
-					map.set(spell.uuid, spell);
-					return map;
-				}, new Collection())
-			);
+		this.allSpells = Search.compendiums(Item, {
+			type: "spell",
+			indexFields: new Set(["system.source", "system.school", "system.circle.base", "system.tags"])
+		}).then(spells =>
+			spells.reduce((map, spell) => {
+				map.set(spell.uuid, spell);
+				return map;
+			}, new Collection())
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,6 +1,6 @@
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
-import { GrantFeaturesConfigurationData, GrantFeaturesValueData } from "./grant-features-data.mjs";
+import { GrantFeaturesConfigurationData } from "./grant-features-data.mjs";
 
 const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, SetField, StringField } = foundry.data.fields;
 

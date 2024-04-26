@@ -1,5 +1,5 @@
 import { ImprovementConfigurationData, ImprovementValueData } from "../../data/advancement/improvement-data.mjs";
-import { getPluralRules, linkForUUID, numberFormat, search } from "../../utils/_module.mjs";
+import { getPluralRules, linkForUUID, numberFormat, Search } from "../../utils/_module.mjs";
 import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 
 /**
@@ -236,7 +236,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 			o: "in",
 			v: new Set([...this.configuration.talentList, ...(expandedTalentList?.configuration.talentList ?? [])])
 		};
-		return ((await search.compendiums(Item, { type: "talent", filters: [filter], index: false })) ?? []).filter(
+		return ((await Search.compendiums(Item, { type: "talent", filters: [filter], index: false })) ?? []).filter(
 			i => i.system.restriction?.allowMultipleTimes || !this.actor?.sourcedItems.get(i.uuid)?.size
 		);
 	}

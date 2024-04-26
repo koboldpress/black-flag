@@ -48,6 +48,15 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Value data for replaced features.
+ *
+ * @typedef {object} ReplacedFeatureData
+ * @property {number} level - Level that feature that was replaced was originally added.
+ * @property {string} original - ID of the original feature to be replaced.
+ * @property {string} replacement - ID of the replacing feature.
+ */
+
+/**
  * Value data for the Choose Features advancement.
  *
  * @property {Record<number, GrantedFeatureData[]>} added - Features chosen at each level.
