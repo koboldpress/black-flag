@@ -6,6 +6,7 @@ import LevelUpDialog from "./level-up-dialog.mjs";
 import SpellManager from "./spell-manager.mjs";
 
 export default class PCSheet extends BaseActorSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "actor", "sheet", "pc"],
@@ -37,6 +38,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	modes = {
 		conditionAdd: false,
 		editing: false,
@@ -47,6 +49,7 @@ export default class PCSheet extends BaseActorSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -62,6 +65,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async prepareSpecialActions(actions) {
 		actions.other.activities.push({
 			name: "BF.Rest.Type.Short.Label",
@@ -77,11 +81,12 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async prepareItem(item, context, section) {
 		await super.prepareItem(item, context, section);
 
 		if (item.type === "spell") {
-			const mode = item.system.type.value;
+			const mode = item.getFlag("black-flag", "relationship.mode");
 			const ritual = item.system.tags.has("ritual");
 			const always = mode === "alwaysPrepared" || ritual;
 			const pressed = always || item.system.prepared;

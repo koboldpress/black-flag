@@ -21,6 +21,7 @@ export default class BaseItemSheet extends ItemSheet {
 		const context = await super.getData(options);
 
 		context.CONFIG = CONFIG.BlackFlag;
+		context.flags = this.document.flags;
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
 

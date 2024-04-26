@@ -145,7 +145,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 * @type {boolean}
 	 */
 	get preparable() {
-		return this.type.value === "standard" && this.circle.base !== 0 && !this.tags.has("ritual");
+		const mode = this.parent.getFlag("black-flag", "relationship.mode");
+		return mode === "standard" && this.circle.base !== 0 && !this.tags.has("ritual");
 	}
 
 	/**

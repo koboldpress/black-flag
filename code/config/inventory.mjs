@@ -31,7 +31,7 @@ const currencySection = () => ({
 });
 
 /**
- * Sections that will appear on documnet sheets. They are arrays of objects grouped by document type.
+ * Sections that will appear on document sheets. They are arrays of objects grouped by document type.
  * @enum {SheetSectionConfiguration[]}
  */
 export const sheetSections = {
@@ -42,7 +42,7 @@ export const sheetSections = {
 			tab: "spellcasting",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "system.type.value", o: "in", v: ["standard", "alwaysPrepared", undefined] },
+				{ k: "flags.black-flag.relationship.mode", o: "in", v: ["standard", "alwaysPrepared", undefined] },
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {
@@ -57,7 +57,13 @@ export const sheetSections = {
 							id,
 							label,
 							filters: [...sectionData.filters, { k: "system.circle.base", v: number }],
-							create: [{ type: "spell", "system.circle.base": number, "system.type.value": "standard" }],
+							create: [
+								{
+									type: "spell",
+									"system.circle.base": number,
+									"flags.black-flag.relationship.mode": "standard"
+								}
+							],
 							options: { autoHide: !circle.max && !cantrip },
 							circle
 						},
@@ -82,9 +88,9 @@ export const sheetSections = {
 			label: "BF.Spell.Preparation.Mode.AtWill",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "system.type.value", v: "atWill" }
+				{ k: "flags.black-flag.relationship.mode", v: "atWill" }
 			],
-			create: [{ type: "spell", "system.type.value": "atWill" }],
+			create: [{ type: "spell", "flags.black-flag.relationship.mode": "atWill" }],
 			options: { autoHide: true }
 		},
 		{
@@ -93,9 +99,9 @@ export const sheetSections = {
 			label: "BF.Spell.Preparation.Mode.Innate",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "system.type.value", v: "innate" }
+				{ k: "flags.black-flag.relationship.mode", v: "innate" }
 			],
-			create: [{ type: "spell", "system.type.value": "innate" }],
+			create: [{ type: "spell", "flags.black-flag.relationship.mode": "innate" }],
 			options: { autoHide: true }
 		},
 		{

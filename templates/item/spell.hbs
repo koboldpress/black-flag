@@ -51,16 +51,22 @@
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
 			<section>
+				{{#if item.isEmbedded}}
+					<fieldset>
+						<legend>prep</legend>
+						<div class="field-group">
+							<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
+							<select name="flags.black-flag.relationship.mode">
+								{{ selectOptions CONFIG.spellPreparationModes selected=flags.black-flag.relationship.mode
+																 labelAttr="label" localize=true }}
+							</select>
+						</div>
+					</fieldset>
+				{{/if}}
 				<fieldset class="casting">
-					<legend>{{localize "BF.Spell.Casting.Label"}}</legend>
+					<legend>{{ localize "BF.Spell.Casting.Label" }}</legend>
 					<div class="field-group">
-						<span>{{localize "BF.Spell.Preparation.Label"}}</span>
-						<select name="system.type.value">
-							{{selectOptions CONFIG.spellPreparationModes selected=system.type.value labelAttr="label" localize=true}}
-						</select>
-					</div>
-					<div class="field-group">
-						<span>{{localize "BF.Spell.CastingTime.Label"}}</span>
+						<span>{{ localize "BF.Spell.CastingTime.Label" }}</span>
 						{{#if system.casting.scalar}}
 							<label>
 								<span>{{localize "BF.Activation.Cost.Label"}}</span>

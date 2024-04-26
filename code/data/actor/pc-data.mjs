@@ -490,7 +490,7 @@ export default class PCData extends ActorDataModel.mixin(
 				this.spellcasting.slots.value += circle.value;
 				this.spellcasting.slots.spent += circle.spent;
 				this.spellcasting.slots.max += circle.max;
-				if (circle.max > 0 && circle.level > this.spellcasting.maxcircle) this.spellcasting.maxCircle = circle.level;
+				if (circle.max > 0 && circle.level > this.spellcasting.maxCircle) this.spellcasting.maxCircle = circle.level;
 			}
 		}
 	}
