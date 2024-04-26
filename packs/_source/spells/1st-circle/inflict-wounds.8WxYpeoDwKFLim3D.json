@@ -1,0 +1,131 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Inflict Wounds",
+  "type": "spell",
+  "_id": "8WxYpeoDwKFLim3D",
+  "img": "icons/magic/unholy/hand-fire-skeleton-pink.webp",
+  "system": {
+    "activities": {
+      "MxF5SXNWeicQLVph": {
+        "type": "attack",
+        "_id": "MxF5SXNWeicQLVph",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 10,
+                "bonus": "",
+                "custom": "",
+                "type": "necrotic"
+              }
+            ]
+          },
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>Your pale, sickly hand threatens grievous harm upon whomever you touch.</em></p><p>Make a melee spell attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "touch"
+    },
+    "school": "necromancy",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706934204227,
+    "modifiedTime": 1714163319290,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!8WxYpeoDwKFLim3D"
+}

@@ -1,0 +1,125 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Hold Person",
+  "type": "spell",
+  "_id": "kVXub5YGKOSXv8ix",
+  "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+  "system": {
+    "activities": {
+      "DK1nMKfROcpCTpp3": {
+        "type": "savingThrow",
+        "_id": "DK1nMKfROcpCTpp3",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You paralyze your target where they stand.</em></p><p>Choose a Humanoid that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, the target can make another WIS save. On a success, the spell ends on the target.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a small, straight piece of iron",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "enchantment",
+    "source": [
+      "arcane",
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706934136728,
+    "modifiedTime": 1714163321683,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!kVXub5YGKOSXv8ix"
+}

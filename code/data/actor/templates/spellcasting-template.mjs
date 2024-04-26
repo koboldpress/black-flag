@@ -10,12 +10,27 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			spellcasting: new SchemaField({
-				rings: new MappingField(new SchemaField({
+				circles: new MappingField(new SchemaField({
 					spent: new NumberField({nullable: false, min: 0, initial: 0, integer: true}),
 					override: new NumberField({integer: true, min: 0})
 				}))
 			})
 		};
+	}
+	
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate spell rings to circles.
+	 * Added in 0.9.023
+	 * @param {object} source - Candidate source data to migrate.
+	 */
+	static migrateCircles(source) {
+		if ( "spellcasting" in source && "rings" in source.spellcasting ) {
+			source.spellcasting.circles = source.spellcasting.rings;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -84,7 +99,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare actor's spell slots using progression data.
-	 * @param {object} spells - The `system.spellcasting.rings` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
 	 * @param {string} type - Type of spellcasting slots being prepared.
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} [config]
@@ -111,7 +126,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare leveled spell slots using progression data.
-	 * @param {object} spells - The `system.spellcasting.rings` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} config
 	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.
@@ -123,20 +138,20 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			cantrips.max = Infinity;
 			Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
 			Object.defineProperty(cantrips, "label", {
-				value: CONFIG.BlackFlag.spellRings(true)[0] ?? "", enumerable: false
+				value: CONFIG.BlackFlag.spellCircles(true)[0] ?? "", enumerable: false
 			});
 		}
 
 		const levels = Math.clamp(progression.leveled, 0, CONFIG.BlackFlag.maxLevel);
 		const slots = CONFIG.BlackFlag.spellSlotTable[Math.min(levels, CONFIG.BlackFlag.spellSlotTable.length)] ?? [];
-		for ( const level of Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1) ) {
-			const slot = spells[`ring-${level}`] ??= { spent: 0 };
+		for ( const level of Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1) ) {
+			const slot = spells[`circle-${level}`] ??= { spent: 0 };
 			slot.allowOverride = true;
 			slot.maxPlaceholder = slots[level] ?? 0;
 			slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slot.maxPlaceholder;
 			Object.defineProperty(slot, "level", { value: level, enumerable: false, writable: false });
 			Object.defineProperty(slot, "label", {
-				value: CONFIG.BlackFlag.spellRings(true)[level] ?? "", enumerable: false
+				value: CONFIG.BlackFlag.spellCircles(true)[level] ?? "", enumerable: false
 			});
 		}
 	}
@@ -184,8 +199,8 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
 		if ( !restConfig.recoverLeveledSpellSlots ) return;
 		const actorUpdates = {};
-		for ( const level of Array.fromRange(this.spellcasting.maxRing, 1) ) {
-			actorUpdates[`system.spellcasting.rings.ring-${level}.spent`] = 0;
+		for ( const level of Array.fromRange(this.spellcasting.maxCircle, 1) ) {
+			actorUpdates[`system.spellcasting.circles.circle-${level}.spent`] = 0;
 		}
 		foundry.utils.mergeObject(result, { actorUpdates });
 	}

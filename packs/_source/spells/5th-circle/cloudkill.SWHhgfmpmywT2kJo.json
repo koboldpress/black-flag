@@ -1,0 +1,132 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Cloudkill",
+  "type": "spell",
+  "_id": "SWHhgfmpmywT2kJo",
+  "img": "icons/magic/air/fog-gas-smoke-swirling-yellow.webp",
+  "system": {
+    "activities": {
+      "E6sxmNFcd2lGFlNu": {
+        "type": "savingThrow",
+        "_id": "E6sxmNFcd2lGFlNu",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": 8,
+                "bonus": "",
+                "custom": "",
+                "type": "poison"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>A toxic cloud poisons creatures caught within it.</em></p><p>You create a 20-foot-radius sphere of poisonous, yellow- green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured.</p><p>When a creature enters the spell’s area for the first time on a turn or starts its turn there, that creature must make a CON save. The creature takes 5d8 poison damage on a failed save, or half as much damage on a successful one.</p><p>Creatures are affected even if they hold their breath or don’t need to breathe.</p><p>The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "10"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "sphere",
+        "size": "20"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "school": "conjuration",
+    "source": [
+      "arcane",
+      "primordial"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706997580398,
+    "modifiedTime": 1714163320506,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SWHhgfmpmywT2kJo"
+}

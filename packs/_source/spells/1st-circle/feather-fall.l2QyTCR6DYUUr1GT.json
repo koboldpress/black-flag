@@ -1,0 +1,106 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Feather Fall",
+  "type": "spell",
+  "_id": "l2QyTCR6DYUUr1GT",
+  "img": "icons/magic/movement/chevrons-down-yellow.webp",
+  "system": {
+    "activities": {
+      "8UbMISAspQyWfnE7": {
+        "type": "utility",
+        "_id": "8UbMISAspQyWfnE7",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You quickly turn a hard fall into a gentle descent.</em></p><p>Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "reaction",
+      "condition": "when you or a creature within 60 feet of you falls"
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a small feather or piece of down",
+        "denomination": "pp",
+        "consumed": false
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "5"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "transmutation",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706933434555,
+    "modifiedTime": 1714163321748,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!l2QyTCR6DYUUr1GT"
+}

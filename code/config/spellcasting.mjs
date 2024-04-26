@@ -1,10 +1,10 @@
 import { localizeConfig, numberFormat } from "../utils/_module.mjs";
 
 /**
- * Highest ring of spellcasting.
+ * Highest circle of spellcasting.
  * @type {number}
  */
-export const maxSpellRing = 9;
+export const maxSpellCircle = 9;
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -127,8 +127,8 @@ export const spellPreparationModes = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Number of spell slots per-ring for each spellcasting level. First set of indices correspond to spellcaster level
- * and the second correspond to rings.
+ * Number of spell slots per-circle for each spellcasting level. First set of indices correspond to spellcaster level
+ * and the second correspond to circles.
  * @type {number[][]}
  */
 export const spellSlotTable = [
@@ -160,15 +160,15 @@ export const spellSlotTable = [
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * List of spell rings with localized names.
+ * List of spell circles with localized names.
  * @param {boolean} [plural=false] - Return the plural names where relevant.
  * @returns {[key: number]: string]}
  */
-export function spellRings(plural = false) {
-	return Array.fromRange(maxSpellRing + 1).reduce((obj, l) => {
-		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Ring.Cantrip[${plural ? "other" : "one"}]`);
+export function spellCircles(plural = false) {
+	return Array.fromRange(maxSpellCircle + 1).reduce((obj, l) => {
+		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Circle.Cantrip[${plural ? "other" : "one"}]`);
 		else
-			obj[l] = game.i18n.format("BF.Spell.Ring.Level", {
+			obj[l] = game.i18n.format("BF.Spell.Circle.Level", {
 				number: numberFormat(l, { ordinal: true })
 			});
 		return obj;

@@ -1,0 +1,133 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Guiding Bolt",
+  "type": "spell",
+  "_id": "3W28zEVxPGjDRqUX",
+  "img": "icons/magic/light/projectile-smoke-blue-white.webp",
+  "system": {
+    "activities": {
+      "6t6lg6a9R3O6Y6Oo": {
+        "type": "attack",
+        "_id": "6t6lg6a9R3O6Y6Oo",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 6,
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>A radiant energy bolt flies to your target. The next attack against them could hardly miss.</em></p><p>A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target.</p><p>On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "round",
+      "value": "1"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "school": "evocation",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706934021876,
+    "modifiedTime": 1714163318788,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!3W28zEVxPGjDRqUX"
+}

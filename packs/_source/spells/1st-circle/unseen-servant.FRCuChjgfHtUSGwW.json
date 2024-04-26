@@ -1,0 +1,142 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Unseen Servant",
+  "type": "spell",
+  "_id": "FRCuChjgfHtUSGwW",
+  "img": "icons/magic/light/explosion-star-glow-silhouette.webp",
+  "system": {
+    "activities": {
+      "4hzkesolEf4e6QuR": {
+        "type": "utility",
+        "_id": "4hzkesolEf4e6QuR",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "Create Servant",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "a7etV7JTHTS7SmDv": {
+        "type": "utility",
+        "_id": "a7etV7JTHTS7SmDv",
+        "description": "<p>You mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "Command Servant",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>An invisible servant of meager resources carries out a variety of low-skill tasks at your command.</em></p><p>This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, a STR modifier of −4, and it can’t attack. If it drops to 0 hit points, the spell ends.</p><p>Once on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends. If you cast this spell again while a servant created by the first casting is still active, the servant created from the first casting is immediately destroyed.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a piece of string and a bit of wood",
+        "denomination": "pp",
+        "consumed": false
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "conjuration",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706997301813,
+    "modifiedTime": 1714163319864,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!FRCuChjgfHtUSGwW"
+}

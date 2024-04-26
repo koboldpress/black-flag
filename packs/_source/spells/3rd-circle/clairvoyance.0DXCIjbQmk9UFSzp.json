@@ -1,0 +1,110 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Clairvoyance",
+  "type": "spell",
+  "_id": "0DXCIjbQmk9UFSzp",
+  "img": "icons/magic/perception/orb-eye-scrying.webp",
+  "system": {
+    "activities": {
+      "FP0DO2Pm5g2hdfSh": {
+        "type": "utility",
+        "_id": "FP0DO2Pm5g2hdfSh",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You conjure a small sphere through which you can spy and sense nearby locations.</em></p><p>You create an invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The sensor remains in place for the duration, and it can’t be attacked or otherwise interacted with.</p><p>When you cast the spell, you choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As your action, you can switch between seeing and hearing.</p><p>A creature that can see the sensor (such as a creature benefiting from @UUID[Compendium.black-flag.spells.Item.3MMJmBI63gipqU9b]{see invisibility} or truesight) sees a luminous, intangible orb about the size of your fist.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": 10,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 100,
+        "description": "a focus worth at least 100 gp, either a jeweled horn for hearing or a glass eye for seeing",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "10"
+    },
+    "tags": [
+      "concentration",
+      "ritual"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "range": {
+      "units": "mile",
+      "value": "1"
+    },
+    "school": "divination",
+    "source": [
+      "arcane",
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706996812481,
+    "modifiedTime": 1714163318575,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!0DXCIjbQmk9UFSzp"
+}

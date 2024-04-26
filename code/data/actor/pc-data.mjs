@@ -240,7 +240,7 @@ export default class PCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseSpellcasting() {
-		this.spellcasting.maxRing ??= 0;
+		this.spellcasting.maxCircle ??= 0;
 		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
 		this.spellcasting.origins ??= {};
 		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
@@ -482,15 +482,15 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 
 		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes))
-			this.constructor.prepareSpellcastingSlots(this.spellcasting.rings, type, progression, { actor: this });
+			this.constructor.prepareSpellcastingSlots(this.spellcasting.circles, type, progression, { actor: this });
 
-		for (const ring of Object.values(this.spellcasting.rings)) {
-			ring.value = Math.clamp(ring.max - ring.spent, 0, ring.max);
-			if (Number.isFinite(ring.max)) {
-				this.spellcasting.slots.value += ring.value;
-				this.spellcasting.slots.spent += ring.spent;
-				this.spellcasting.slots.max += ring.max;
-				if (ring.max > 0 && ring.level > this.spellcasting.maxRing) this.spellcasting.maxRing = ring.level;
+		for (const circle of Object.values(this.spellcasting.circles)) {
+			circle.value = Math.clamp(circle.max - circle.spent, 0, circle.max);
+			if (Number.isFinite(circle.max)) {
+				this.spellcasting.slots.value += circle.value;
+				this.spellcasting.slots.spent += circle.spent;
+				this.spellcasting.slots.max += circle.max;
+				if (circle.max > 0 && circle.level > this.spellcasting.maxcircle) this.spellcasting.maxCircle = circle.level;
 			}
 		}
 	}
@@ -552,7 +552,7 @@ export default class PCData extends ActorDataModel.mixin(
 		if (!learnedFlag?.learned) {
 			let needsToLearn = false;
 			top: for (const origin of Object.values(this.spellcasting.origins)) {
-				if (origin.spellcasting?.spells.mode === "all" && learnedFlag?.maxRing < this.spellcasting.maxRing) {
+				if (origin.spellcasting?.spells.mode === "all" && learnedFlag?.maxCircle < this.spellcasting.maxCircle) {
 					needsToLearn = true;
 					break;
 				}

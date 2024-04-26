@@ -1,0 +1,105 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Arcane Lock",
+  "type": "spell",
+  "_id": "JVimVp4IvmQTO52h",
+  "img": "icons/sundries/misc/lock-steel-blue.webp",
+  "system": {
+    "activities": {
+      "FyBrQxb6Bqv5pBPb": {
+        "type": "utility",
+        "_id": "FyBrQxb6Bqv5pBPb",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You lock a targeted object, making it difficult to bypass.</em></p><p>You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken or the spell is dispelled or suppressed. Casting knock on the object suppresses arcane lock for 10 minutes.</p><p>While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 25,
+        "description": "gold dust worth at least 25 gp, which the spell consumes",
+        "consumed": true,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "dispelled"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "object",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "touch"
+    },
+    "school": "abjuration",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706996604930,
+    "modifiedTime": 1714163319994,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!JVimVp4IvmQTO52h"
+}

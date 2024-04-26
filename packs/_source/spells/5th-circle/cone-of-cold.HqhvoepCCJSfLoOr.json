@@ -1,0 +1,129 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Cone of Cold",
+  "type": "spell",
+  "_id": "HqhvoepCCJSfLoOr",
+  "img": "icons/magic/water/projectile-bolts-salvo-blue.webp",
+  "system": {
+    "activities": {
+      "9YKfkRMqEnkk1Suz": {
+        "type": "savingThrow",
+        "_id": "9YKfkRMqEnkk1Suz",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 8,
+                "denomination": 8,
+                "bonus": "",
+                "custom": "",
+                "type": "cold"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>A cone of biting cold air deals significant cold damage to everyone in it.</em></p><p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a CON save. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a small crystal or glass cone",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "cone",
+        "size": "60"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "self"
+    },
+    "school": "evocation",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706997622421,
+    "modifiedTime": 1714163319952,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!HqhvoepCCJSfLoOr"
+}

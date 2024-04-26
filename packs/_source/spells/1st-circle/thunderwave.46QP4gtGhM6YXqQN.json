@@ -1,0 +1,127 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Thunderwave",
+  "type": "spell",
+  "_id": "46QP4gtGhM6YXqQN",
+  "img": "icons/magic/sonic/explosion-shock-sound-wave.webp",
+  "system": {
+    "activities": {
+      "oslfuLrpYqjV0BL2": {
+        "type": "savingThrow",
+        "_id": "oslfuLrpYqjV0BL2",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 8,
+                "bonus": "",
+                "custom": "",
+                "type": "thunder"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You create a forceful burst of sound that knocks back anything that fails to withstand it.</em></p><p>A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a CON save. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn’t pushed.</p><p>In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell’s effect, and the spell emits a thunderous boom audible out to 300 feet.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "cube",
+        "size": "15"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "self"
+    },
+    "school": "evocation",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706935826513,
+    "modifiedTime": 1714163318879,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!46QP4gtGhM6YXqQN"
+}

@@ -1,0 +1,130 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Lightning Bolt",
+  "type": "spell",
+  "_id": "RIOCsdRfuC31r9Rf",
+  "img": "icons/magic/lightning/bolt-strike-blue.webp",
+  "system": {
+    "activities": {
+      "aLntI0y6oVZnHYMG": {
+        "type": "savingThrow",
+        "_id": "aLntI0y6oVZnHYMG",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 8,
+                "denomination": 6,
+                "bonus": "",
+                "custom": "",
+                "type": "lightning"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You send a streaking bolt of electricity lancing out from your person.</em></p><p>A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a DEX save. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one.</p><p>The lightning ignites flammable objects in the area that aren’t being worn or carried.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a bit of fur and a rod of amber, crystal, or glass",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "line",
+        "size": "100",
+        "width": "5"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creatureObject",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "self"
+    },
+    "school": "evocation",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706934380366,
+    "modifiedTime": 1714163320365,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!RIOCsdRfuC31r9Rf"
+}

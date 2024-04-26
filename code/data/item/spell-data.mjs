@@ -39,12 +39,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			}),
 			source: new SetField(new StringField(), { label: "BF.Spell.Source.Label" }),
 			school: new StringField({ label: "BF.Spell.School.Label" }),
-			ring: new SchemaField(
+			circle: new SchemaField(
 				{
-					value: new NumberField({ label: "BF.Spell.Ring.Effective.Label" }),
-					base: new NumberField({ label: "BF.Spell.Ring.Base.Label" })
+					value: new NumberField({ label: "BF.Spell.Circle.Effective.Label" }),
+					base: new NumberField({ label: "BF.Spell.Circle.Base.Label" })
 				},
-				{ label: "BF.Spell.Ring.Label" }
+				{ label: "BF.Spell.Circle.Label" }
 			),
 			casting: new SchemaField(
 				{
@@ -145,7 +145,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 * @type {boolean}
 	 */
 	get preparable() {
-		return this.type.value === "standard" && this.ring.base !== 0 && !this.tags.has("ritual");
+		return this.type.value === "standard" && this.circle.base !== 0 && !this.tags.has("ritual");
 	}
 
 	/**
@@ -175,7 +175,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 */
 	get requiresSpellSlot() {
 		// Cantrips & rituals never consume slots
-		if (this.ring.base === 0 || this.tags.has("ritual")) return false;
+		if (this.circle.base === 0 || this.tags.has("ritual")) return false;
 
 		// TODO: At-Will & Innate Casting
 
@@ -204,11 +204,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Migrate spell circle to source and migrate single spell source to set of sources.
+	 * Migrate spell circle to source, ring to circle, and migrate single spell source to set of sources.
+	 * Added in 0.9.023
 	 * @param {object} source - Candidate source data to migrate.
 	 */
-	static migrateSource(source) {
-		if ("circle" in source) source.source = source.circle;
+	static migrateSourceCircle(source) {
+		if ("circle" in source && !("source" in source)) source.source = source.circle;
+		if ("ring" in source) source.circle = source.ring;
 		if (foundry.utils.getType(source.source) !== "string") return;
 		source.source = [source.source];
 	}
@@ -408,7 +410,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		const stats = this.parent.actor.system.spellcasting.spells;
 		if (stats) {
 			stats.total += 1;
-			if (this.ring.base === 0) stats.cantrips += 1;
+			if (this.circle.base === 0) stats.cantrips += 1;
 			else if (this.tags.has("ritual")) stats.rituals += 1;
 			for (const activity of this.activities) {
 				if (activity.hasDamage) {
@@ -421,7 +423,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		const origins = (this.parent.actor.system.spellcasting.origins ??= {});
 		const relationship = this.parent.getFlag("black-flag", "relationship.origin") ?? {};
 		const origin = (origins[relationship.identifier] ??= {});
-		if (this.ring.base === 0) {
+		if (this.circle.base === 0) {
 			origin.cantrips ??= { value: 0 };
 			origin.cantrips.value += 1;
 		} else if (this.tags.has("ritual")) {

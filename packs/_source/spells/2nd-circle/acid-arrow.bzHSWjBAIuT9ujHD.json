@@ -1,0 +1,128 @@
+{
+  "name": "Acid Arrow",
+  "type": "spell",
+  "img": "icons/magic/acid/projectile-needles-salvo-green.webp",
+  "system": {
+    "description": {
+      "value": "<p><em>You launch a missile of acid toward your target.</em></p><p>A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "duration": {
+      "value": "",
+      "units": "minute",
+      "special": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 5,
+        "description": "powdered rhubarb leaf and an adder’s stomach",
+        "denomination": "gp",
+        "consumed": false
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "90"
+    },
+    "school": "evocation",
+    "tags": [],
+    "target": {
+      "affects": {
+        "type": "creatureObject",
+        "count": "1",
+        "choice": false
+      },
+      "template": {
+        "type": "",
+        "count": 1,
+        "units": "foot"
+      }
+    },
+    "activities": {
+      "jw2u7ndSuUNgzS49": {
+        "type": "attack",
+        "_id": "jw2u7ndSuUNgzS49",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 4,
+                "type": "acid"
+              }
+            ]
+          },
+          "attack": {
+            "flat": false
+          }
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "description": "",
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "min": "",
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
+    },
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "folder": "iJIjiGFvx6IqTXvu",
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1698881084085,
+    "modifiedTime": 1714163321129,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "bzHSWjBAIuT9ujHD",
+  "sort": 200000,
+  "_key": "!items!bzHSWjBAIuT9ujHD"
+}

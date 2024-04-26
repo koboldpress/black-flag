@@ -1,0 +1,125 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Stinking Cloud",
+  "type": "spell",
+  "_id": "Bf0cetCjUrF24nNy",
+  "img": "icons/magic/air/fog-gas-smoke-dense-brown.webp",
+  "system": {
+    "activities": {
+      "39x1XDVar0EMYIMt": {
+        "type": "savingThrow",
+        "_id": "39x1XDVar0EMYIMt",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You create a heavy cloud that sickens whomever is caught within it.</em></p><p>You create a 20-foot-radius sphere of yellow, nauseating gas centered on a point within range. The cloud spreads around corners, and its area is heavily obscured. The cloud lingers in the air for the duration.</p><p>Each creature that is completely within the cloud at the start of its turn must make a CON save against poison. On a failed save, the creature spends its action that turn retching and reeling. Creatures that don’t need to breathe or are immune to poison automatically succeed on this save.</p><p>A moderate wind (at least 10 miles per hour) disperses the cloud after 4 rounds. A strong wind (at least 20 miles per hour) disperses it after 1 round.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a rotten egg or several skunk cabbage leaves",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "sphere",
+        "size": "20"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "90"
+    },
+    "school": "conjuration",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706935731989,
+    "modifiedTime": 1714163319526,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Bf0cetCjUrF24nNy"
+}

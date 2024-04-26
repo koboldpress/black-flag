@@ -1,0 +1,108 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Fog Cloud",
+  "type": "spell",
+  "_id": "cvyXEJ2dVH7aG5Px",
+  "img": "icons/magic/air/fog-gas-smoke-swirling-white.webp",
+  "system": {
+    "activities": {
+      "Cs8DSsP5jSJahV42": {
+        "type": "utility",
+        "_id": "Cs8DSsP5jSJahV42",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You conjure a thick mist that hangs in the air, obscuring sightlines.</em></p><p>You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "sphere",
+        "size": "20"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "school": "conjuration",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706933751305,
+    "modifiedTime": 1714163321152,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!cvyXEJ2dVH7aG5Px"
+}

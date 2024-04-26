@@ -192,7 +192,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
 	 *                                      is not allowed.
 	 * @property {object} spell
-	 * @property {number} spell.ring - Spell ring to consume. Will take priority over `scaling` on property for spells.
+	 * @property {number} spell.circle - Spell circle to consume. Replaces `scaling` on property for spells.
 	 */
 
 	/**
@@ -463,15 +463,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		if ((config.consume === true || config.consume.spellSlot) && this.isSpell) {
-			const ring = config.spell?.ring ?? this.item.system.ring?.value ?? this.item.system.ring?.base;
+			const circle = config.spell?.circle ?? this.item.system.circle?.value ?? this.item.system.circle?.base;
 			// TODO: Support other spellcasting types
-			const ringData = this.actor.system.spellcasting?.rings[`ring-${ring}`];
-			if (ringData?.value) {
-				updates.actor[`system.spellcasting.rings.ring-${ring}.spent`] = ringData.spent + 1;
+			const circleData = this.actor.system.spellcasting?.circles[`circle-${circle}`];
+			if (circleData?.value) {
+				updates.actor[`system.spellcasting.circles.circle-${circle}.spent`] = circleData.spent + 1;
 			} else {
 				const err = new ConsumptionError(
 					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
-						ring: CONFIG.BlackFlag.spellRings()[ring]
+						circle: CONFIG.BlackFlag.spellCircles()[circle]
 					})
 				);
 				errors.push(err);

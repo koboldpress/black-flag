@@ -1,0 +1,132 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Scorching Ray",
+  "type": "spell",
+  "_id": "zcPLl539wJ5MflKO",
+  "img": "icons/magic/fire/blast-jet-stream-embers-red.webp",
+  "system": {
+    "activities": {
+      "5N7N5fmAtAdZbOMI": {
+        "type": "attack",
+        "_id": "5N7N5fmAtAdZbOMI",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "ranged",
+            "classification": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              }
+            ]
+          },
+          "ability": "",
+          "attack": {
+            "flat": false
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>A series of superheated rays lance toward your chosen targets.</em></p><p>You create three rays of fire and hurl them at targets within range. You can hurl them at one target or several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 fire damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creatureObject",
+        "count": "3"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "school": "evocation",
+    "source": [
+      "arcane"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706935312093,
+    "modifiedTime": 1714163322488,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!zcPLl539wJ5MflKO"
+}

@@ -1,0 +1,112 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Magic Circle",
+  "type": "spell",
+  "_id": "fvS8l7iTDJB6XPaN",
+  "img": "icons/magic/symbols/star-inverted-yellow.webp",
+  "system": {
+    "activities": {
+      "asvj8dfb0B79l1B3": {
+        "type": "utility",
+        "_id": "asvj8dfb0B79l1B3",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You ring a small location with warding magic and arcane runes, barring access for certain types of foes.</em></p><p>You create a 10-foot-radius, 20-foot-tall cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the cylinder intersects with the floor or other surface.</p><p>Choose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:</p><ul><li><p>The creature can’t willingly enter the cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a CHA save.</p></li><li><p>The creature has disadvantage on attack rolls against targets within the cylinder.</p></li><li><p>Targets within the cylinder can’t be charmed, frightened, or possessed by the creature.</p></li></ul><p>When you cast this spell, you can elect to cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the cylinder and protecting targets outside it.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 100,
+        "description": "holy water or powdered silver and iron worth at least 100 gp, which the spell consumes",
+        "consumed": true,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "cylinder",
+        "size": "10",
+        "height": "20"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
+    "school": "abjuration",
+    "source": [
+      "arcane",
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706997119947,
+    "modifiedTime": 1714163321376,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!fvS8l7iTDJB6XPaN"
+}

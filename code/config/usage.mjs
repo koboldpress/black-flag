@@ -1,6 +1,6 @@
 import { localizeConfig } from "../utils/_module.mjs";
 import { hitDieSizes } from "./advancement.mjs";
-import { spellRings } from "./spellcasting.mjs";
+import { spellCircles } from "./spellcasting.mjs";
 
 /**
  * Configuration information for activity consumption types.
@@ -64,9 +64,9 @@ export const consumptionTypes = {
 		prompt: "BF.Consumption.Type.SpellSlots.Prompt",
 		consume: "consumeSpellSlots",
 		validTargets: activity => {
-			const rings = spellRings();
-			delete rings[0];
-			return Object.entries(rings).map(([key, label]) => ({ key, label }));
+			const circles = spellCircles();
+			delete circles[0];
+			return Object.entries(circles).map(([key, label]) => ({ key, label }));
 		}
 	}
 };

@@ -1,0 +1,109 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Animate Dead",
+  "type": "spell",
+  "_id": "qFg34HYHnA4Qlxvd",
+  "img": "icons/magic/death/undead-zombie-grave-green.webp",
+  "system": {
+    "activities": {
+      "ui8m0wdJsSF8pu0z": {
+        "type": "utility",
+        "_id": "ui8m0wdJsSF8pu0z",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You give the remains of the dead new unlife, crafting a servant out of bones, flesh, and your will.</em></p><p>This spell creates an Undead servant. Choose a pile of bones or a corpse of a Medium or Small Humanoid within range. Your spell imbues the target with a foul mimicry of life, raising it as an Undead creature. The target becomes</p><p>a skeleton if you chose bones or a zombie if you chose a corpse (the GM has the creature’s game statistics).</p><p>On each of your turns, you can use a bonus action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide</p><p>what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor.</p><p>If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you’ve given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell, rather than animating a new one.</p><p>If you attempt to cast this spell again while servants created by the first casting are still active, the servants created from the first casting are immediately destroyed.</p><p>As you unlock higher rings, this ritual grows in potency. Once you have access to 4th ring spell slots or higher, you animate or reassert control over two additional Undead creatures for each slot level above 3rd. Each of the creatures must come from a different corpse or pile of bones.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 10,
+        "description": "a drop of blood, a piece of flesh, a pinch of bone dust, and a bloodstone worth at least 10 gp",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "special",
+        "special": "pile of bones or corpse of Medium or Small Humanoid"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "10"
+    },
+    "school": "necromancy",
+    "source": [
+      "arcane",
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706996523489,
+    "modifiedTime": 1714163322099,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!qFg34HYHnA4Qlxvd"
+}

@@ -1,11 +1,11 @@
 <form>
 
-	{{#if show.spellRingSelection}}
+	{{#if show.spellCircleSelection}}
 		<div class="form-group">
-			<label>{{ localize "BF.Spell.Ring.Label" }}</label>
+			<label>{{ localize "BF.Spell.Circle.Label" }}</label>
 			<div class="form-fields">
-				<select name="spell.ring" data-dtype="Number">
-					{{ selectOptions spell.rings selected=spell.ring labelAttr="label"}}
+				<select name="spell.circle" data-dtype="Number">
+					{{ selectOptions spell.circles selected=spell.circle labelAttr="label"}}
 				</select>
 			</div>
 		</div>

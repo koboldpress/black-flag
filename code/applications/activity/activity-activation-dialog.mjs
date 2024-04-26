@@ -86,10 +86,10 @@ export default class ActivityActivationDialog extends Dialog {
 		const context = await super.getData(options);
 
 		// TODO: Determine what scaling is allowed based on whether it is a spell and what the max scale is set to
-		// If spell, use (base ring + max scaling) or (max spell ring), whichever is lower
+		// If spell, use (base circle + max scaling) or (max spell circle), whichever is lower
 		// Otherwise, simply use the max scaling value
 		//
-		// For spells, prepare a list of what rings are available for casting and how many slots they have
+		// For spells, prepare a list of what circles are available for casting and how many slots they have
 
 		// TODO: Calculate resource consumption based on initial configuration
 
@@ -99,7 +99,7 @@ export default class ActivityActivationDialog extends Dialog {
 				activity: this.activity,
 				resources: this._prepareResourceOptions(),
 				spell: {
-					rings: this._prepareSpellSlotOptions()
+					circles: this._prepareSpellSlotOptions()
 				}
 			},
 			{ inplace: false }
@@ -107,7 +107,7 @@ export default class ActivityActivationDialog extends Dialog {
 		data.show = {
 			actionConsumption: this.activity.activation.type === "legendary", // TODO: Allow more than legendary actions here
 			spellConsumption: this.activity.isSpell, // TODO: Make sure spell actually consumes a slot
-			spellRingSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.rings),
+			spellCircleSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.circles),
 			resourceConsumption: !foundry.utils.isEmpty(data.resources)
 		};
 
@@ -149,12 +149,12 @@ export default class ActivityActivationDialog extends Dialog {
 		const spellcasting = this.activity.actor.system.spellcasting;
 		if (!spellcasting) return [];
 		// TODO: Adjust this when slots can also be consumed as resources
-		const minimumRing = this.activity?.item?.system.ring?.base ?? 1;
-		const options = Object.entries(CONFIG.BlackFlag.spellRings()).reduce((obj, [level, label]) => {
+		const minimumRing = this.activity?.item?.system.circle?.base ?? 1;
+		const options = Object.entries(CONFIG.BlackFlag.spellCircles()).reduce((obj, [level, label]) => {
 			level = Number(level);
 			if (level < minimumRing || level > spellcasting.maxRing) return obj;
 			// TODO: Allow this to work with other spellcasting type
-			const data = spellcasting.rings[`ring-${level}`] ?? { max: 0 };
+			const data = spellcasting.circles[`circle-${level}`] ?? { max: 0 };
 			obj[level] = {
 				label // TODO: Format with slots available out of total
 			};

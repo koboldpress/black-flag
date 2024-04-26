@@ -7,6 +7,7 @@ import JournalEditor from "./journal-editor.mjs";
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
 export default class ClassPageSheet extends JournalPageSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {
 			dragDrop: [{ dropSelector: ".drop-target" }],
@@ -22,6 +23,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get template() {
 		return `systems/black-flag/templates/journal/${this.type}-page-${this.isEditable ? "edit" : "view"}.hbs`;
 	}
@@ -38,12 +40,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	toc = {};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options = {}) {
 		const context = await super.getData(options);
 		context.system = context.document.system;
@@ -288,7 +292,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 		if (spellcasting.type === "leveled") {
 			const spells = {};
-			Array.fromRange(CONFIG.BlackFlag.maxSpellRing, 1).forEach(l => (spells[`ring-${l}`] = {}));
+			Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).forEach(l => (spells[`circle-${l}`] = {}));
 
 			let largestSlot;
 			for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse()) {
@@ -303,15 +307,15 @@ export default class ClassPageSheet extends JournalPageSheet {
 					);
 
 				table.rows.push(
-					Array.fromRange(largestSlot, 1).map(ring => {
-						return { class: "spell-slots", content: spells[`ring-${ring}`]?.max || "&mdash;" };
+					Array.fromRange(largestSlot, 1).map(circle => {
+						return { class: "spell-slots", content: spells[`circle-${circle}`]?.max || "&mdash;" };
 					})
 				);
 			}
 
 			// Prepare headers & columns
-			const rings = CONFIG.BlackFlag.spellRings();
-			table.headers = [Array.fromRange(largestSlot, 1).map(ring => ({ content: rings[ring] }))];
+			const circles = CONFIG.BlackFlag.spellCircles();
+			table.headers = [Array.fromRange(largestSlot, 1).map(circle => ({ content: circles[circle] }))];
 			table.cols = [{ class: "spellcasting", span: largestSlot }];
 			table.rows.reverse();
 		} else {

@@ -50,12 +50,12 @@ export default class SpellManager extends DocumentSheet {
 		for (const [source, label] of Object.entries(CONFIG.BlackFlag.spellSources.localized)) {
 			const origin = sources.get(source);
 			if (!origin) continue;
-			for (const ring of Array.fromRange(this.document.system.spellcasting.maxRing, 1)) {
+			for (const circle of Array.fromRange(this.document.system.spellcasting.maxCircle, 1)) {
 				sourceSlots.push({
-					name: game.i18n.getListFormatter({ type: "unit" }).format([label, numberFormat(ring, { ordinal: true })]),
+					name: game.i18n.getListFormatter({ type: "unit" }).format([label, numberFormat(circle, { ordinal: true })]),
 					type: "source",
 					mode: "all",
-					ring,
+					circle,
 					source: origin.document,
 					spellcasting: origin.spellcasting
 				});
@@ -70,7 +70,7 @@ export default class SpellManager extends DocumentSheet {
 		this.allSpells = search
 			.compendiums(Item, {
 				type: "spell",
-				indexFields: new Set(["system.source", "system.school", "system.ring.base", "system.tags"])
+				indexFields: new Set(["system.source", "system.school", "system.circle.base", "system.tags"])
 			})
 			.then(spells =>
 				spells.reduce((map, spell) => {
@@ -102,7 +102,7 @@ export default class SpellManager extends DocumentSheet {
 	 * @enum {string}
 	 */
 	static TYPE_LABELS = {
-		cantrips: "BF.Spell.Ring.Cantrip[one]",
+		cantrips: "BF.Spell.Circle.Cantrip[one]",
 		rituals: "BF.Spell.Tag.Ritual.Label",
 		spells: "BF.Item.Type.Spell[one]",
 		spellbook: "BF.Spellbook.FreeSpell.Label[one]"
@@ -149,7 +149,7 @@ export default class SpellManager extends DocumentSheet {
 	 * @property {BlackFlagItem} origin - Document with the spellcasting class that granted this slot.
 	 * @property {Set<string>} selected - Set of UUIDs for selected spells, only one allowed in "single" mode.
 	 * @property {string} [name] - Name to display for this slot.
-	 * @property {number} [ring] - Spell ring (only used for "source" type).
+	 * @property {number} [circle] - Spell circle (only used for "source" type).
 	 */
 
 	/**
@@ -219,13 +219,13 @@ export default class SpellManager extends DocumentSheet {
 
 		switch (this.currentSlot.type) {
 			case "cantrips":
-				// Cantrips are always ring 0
-				filters.push({ k: "system.ring.base", v: 0 });
+				// Cantrips are always circle 0
+				filters.push({ k: "system.circle.base", v: 0 });
 				break;
 			case "rituals":
 				filters.push(
-					// Ring must be less than maximum
-					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing },
+					// Circle must be less than maximum
+					{ k: "system.circle.base", o: "lte", v: this.document.system.spellcasting.maxCircle },
 					// Must be a ritual spell
 					{ k: "system.tags", o: "has", v: "ritual" }
 				);
@@ -236,17 +236,17 @@ export default class SpellManager extends DocumentSheet {
 			case "spellbook":
 				filters.push(
 					// No cantrips
-					{ k: "system.ring.base", o: "gte", v: 1 },
-					// Ring must be less than maximum
-					{ k: "system.ring.base", o: "lte", v: this.document.system.spellcasting.maxRing },
+					{ k: "system.circle.base", o: "gte", v: 1 },
+					// Circle must be less than maximum
+					{ k: "system.circle.base", o: "lte", v: this.document.system.spellcasting.maxCircle },
 					// No ritual spells
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
 				break;
 			case "source":
 				filters.push(
-					// Source are always from a single ring
-					{ k: "system.ring.base", v: this.currentSlot.ring },
+					// Source are always from a single circle
+					{ k: "system.circle.base", v: this.currentSlot.circle },
 					// No ritual spells
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				);
@@ -279,10 +279,10 @@ export default class SpellManager extends DocumentSheet {
 					.filter(s => s)
 			);
 
-		const ring = filters.find(f => f.k === "system.ring.base" && !f.o);
-		const maxRing = filters.find(f => f.k === "system.ring.base" && f.o === "lte");
-		if (ring?.v) restrictions.ring = CONFIG.BlackFlag.spellRings()[ring.v];
-		else if (maxRing) restrictions.maxRing = CONFIG.BlackFlag.spellRings()[maxRing.v];
+		const circle = filters.find(f => f.k === "system.circle.base" && !f.o);
+		const maxCircle = filters.find(f => f.k === "system.circle.base" && f.o === "lte");
+		if (circle?.v) restrictions.circle = CONFIG.BlackFlag.spellCircles()[circle.v];
+		else if (maxCircle) restrictions.maxCircle = CONFIG.BlackFlag.spellCircles()[maxCircle.v];
 
 		return restrictions;
 	}
@@ -356,7 +356,7 @@ export default class SpellManager extends DocumentSheet {
 		if (slot.special) origin.special = true;
 
 		const prepared =
-			foundry.utils.getProperty(spellData, "system.ring.base") > 0
+			foundry.utils.getProperty(spellData, "system.circle.base") > 0
 				? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared
 				: true;
 		foundry.utils.setProperty(spellData, "system.type.value", prepared ? "standard" : "alwaysPrepared");
@@ -376,7 +376,7 @@ export default class SpellManager extends DocumentSheet {
 		await this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
 		await this.document.setFlag("black-flag", "spellsLearned", {
 			learned: true,
-			maxRing: this.document.system.spellcasting.maxRing
+			maxCircle: this.document.system.spellcasting.maxCircle
 		});
 	}
 }

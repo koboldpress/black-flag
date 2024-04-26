@@ -1,0 +1,124 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Bane",
+  "type": "spell",
+  "_id": "HorNiol8kDK0QGIo",
+  "img": "icons/magic/unholy/projectiles-binary-pink.webp",
+  "system": {
+    "activities": {
+      "NJnS4Hs7yKNEanaj": {
+        "type": "savingThrow",
+        "_id": "NJnS4Hs7yKNEanaj",
+        "description": "",
+        "system": {
+          "ability": "charisma",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You curse several targets within range with bad luck and ill will in their impending struggles.</em></p><p>Up to three creatures of your choice that you can see within range must make CHA saves.</p><p>Whenever a target that fails this save makes an attack roll or a save before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or save.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a drop of blood",
+        "denomination": "pp",
+        "consumed": false
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "3"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
+    "school": "enchantment",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706932052775,
+    "modifiedTime": 1714163319920,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!HorNiol8kDK0QGIo"
+}

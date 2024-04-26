@@ -280,30 +280,30 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const roll = await this.resolveCost(this.value);
 		if (!roll.isDeterministic) updates.rolls.push(roll);
 		const cost = roll.total;
-		// TODO: Increase ring based on scale value
-		const ringNumber = this.target;
+		// TODO: Increase circle based on scale value
+		const circleNumber = this.target;
 
-		// Check to see if enough slots available at specified ring
-		const ringData = activity.actor.system.spellcasting?.rings?.[`ring-${ringNumber}`];
-		const newSpent = (ringData?.spent ?? 0) + cost;
+		// Check to see if enough slots available at specified circle
+		const circleData = activity.actor.system.spellcasting?.circles?.[`circle-${circleNumber}`];
+		const newSpent = (circleData?.spent ?? 0) + cost;
 		let warningMessage;
-		if (!ringData?.max) warningMessage = "BF.Consumption.Warning.MissingSpellRing";
-		else if (cost > 0 && !ringData.value) warningMessage = "BF.Consumption.Warning.None";
-		else if (newSpent > ringData.max) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if (!circleData?.max) warningMessage = "BF.Consumption.Warning.MissingSpellCircle";
+		else if (cost > 0 && !circleData.value) warningMessage = "BF.Consumption.Warning.None";
+		else if (newSpent > circleData.max) warningMessage = "BF.Consumption.Warning.NotEnough";
 		if (warningMessage) {
-			const ring = CONFIG.BlackFlag.spellRings()[ringNumber].toLowerCase();
-			const type = game.i18n.format("BF.Consumption.Type.SpellSlots.Warning", { ring });
+			const circle = CONFIG.BlackFlag.spellCircles()[circleNumber].toLowerCase();
+			const type = game.i18n.format("BF.Consumption.Type.SpellSlots.Warning", { circle });
 			throw new ConsumptionError(
 				game.i18n.format(warningMessage, {
 					type,
-					ring,
+					circle,
 					cost: numberFormat(cost, { spelledOut: true }),
-					available: numberFormat(ringData?.value, { spelledOut: true })
+					available: numberFormat(circleData?.value, { spelledOut: true })
 				})
 			);
 		}
 
-		if (cost < 0 && !ringData.spent) return;
-		updates.actor[`system.spellcasting.rings.ring-${ringNumber}.spent`] = Math.clamp(newSpent, 0, ringData.max);
+		if (cost < 0 && !circleData.spent) return;
+		updates.actor[`system.spellcasting.circles.circle-${circleNumber}.spent`] = Math.clamp(newSpent, 0, circleData.max);
 	}
 }

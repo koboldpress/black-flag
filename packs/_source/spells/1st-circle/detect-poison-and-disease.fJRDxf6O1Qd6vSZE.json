@@ -1,0 +1,110 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Detect Poison and Disease",
+  "type": "spell",
+  "_id": "fJRDxf6O1Qd6vSZE",
+  "img": "icons/magic/acid/orb-bubble-smoke-drip.webp",
+  "system": {
+    "activities": {
+      "OwtFdRpowhllYHJe": {
+        "type": "utility",
+        "_id": "OwtFdRpowhllYHJe",
+        "description": "",
+        "system": {},
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You sense nearby toxic creatures and substances.</em></p><p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a yew leaf",
+        "denomination": "pp",
+        "consumed": false
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "10"
+    },
+    "tags": [
+      "concentration",
+      "ritual"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "radius",
+        "size": "30"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "self"
+    },
+    "school": "abjuration",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706996960018,
+    "modifiedTime": 1714163321318,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!fJRDxf6O1Qd6vSZE"
+}

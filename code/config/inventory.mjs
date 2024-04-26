@@ -38,7 +38,7 @@ export const sheetSections = {
 	pc: [
 		currencySection(),
 		{
-			id: "ring-*",
+			id: "circle-*",
 			tab: "spellcasting",
 			filters: [
 				{ k: "type", v: "spell" },
@@ -46,20 +46,20 @@ export const sheetSections = {
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {
-				return Object.entries(CONFIG.BlackFlag.spellRings(true)).map(([number, label]) => {
+				return Object.entries(CONFIG.BlackFlag.spellCircles(true)).map(([number, label]) => {
 					number = Number(number);
 					const cantrip = number === 0;
-					const id = cantrip ? "cantrip" : `ring-${number}`;
-					const ring = document.system.spellcasting.rings[id] ?? {};
+					const id = cantrip ? "cantrip" : `circle-${number}`;
+					const circle = document.system.spellcasting.circles[id] ?? {};
 					return foundry.utils.mergeObject(
 						sectionData,
 						{
 							id,
 							label,
-							filters: [...sectionData.filters, { k: "system.ring.base", v: number }],
-							create: [{ type: "spell", "system.ring.base": number, "system.type.value": "standard" }],
-							options: { autoHide: !ring.max && !cantrip },
-							ring
+							filters: [...sectionData.filters, { k: "system.circle.base", v: number }],
+							create: [{ type: "spell", "system.circle.base": number, "system.type.value": "standard" }],
+							options: { autoHide: !circle.max && !cantrip },
+							circle
 						},
 						{ inplace: false }
 					);

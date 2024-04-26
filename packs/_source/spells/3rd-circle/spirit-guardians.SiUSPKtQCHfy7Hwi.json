@@ -1,0 +1,132 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Spirit Guardians",
+  "type": "spell",
+  "_id": "SiUSPKtQCHfy7Hwi",
+  "img": "icons/magic/light/projectile-smoke-pink.webp",
+  "system": {
+    "activities": {
+      "chKUWgMrWjluWLbX": {
+        "type": "savingThrow",
+        "_id": "chKUWgMrWjluWLbX",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 8,
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You summon spirits to swarm around and guard you, while harrying nearby foes.</em></p><p>You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration.</p><p>When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature’s speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a WIS save. On a failed save, the creature takes 3d8 radiant damage or 3d8 necrotic damage. On a successful save, the creature takes half as much damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": null,
+        "description": "a holy symbol",
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "10"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "radius",
+        "size": "15"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "self"
+    },
+    "school": "conjuration",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706935684152,
+    "modifiedTime": 1714163320598,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SiUSPKtQCHfy7Hwi"
+}

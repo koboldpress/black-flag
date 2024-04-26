@@ -20,9 +20,9 @@
 			<section>
 				<div class="category">
 					<label>
-						<span>{{ localize "BF.Spell.Ring.Label" }}</span>
-						<select name="system.ring.base">
-							{{ selectOptions spellRings selected=source.ring.base }}
+						<span>{{ localize "BF.Spell.Circle.Label" }}</span>
+						<select name="system.circle.base">
+							{{ selectOptions spellCircles selected=source.circle.base }}
 						</select>
 					</label>
 					<label>
@@ -126,7 +126,7 @@
 						<label>
 							<span>{{ localize "BF.Target.Type.Label" }}</span>
 							<select name="system.target.affects.type">
-								{{ selectOptions CONFIG.targetTypes.localized blank="" }}
+								{{ selectOptions CONFIG.targetTypes.localized selected=system.target.affects.type blank="" }}
 							</select>
 						</label>
 					</div>

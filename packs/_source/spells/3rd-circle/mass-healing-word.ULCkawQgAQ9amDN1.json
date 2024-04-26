@@ -1,0 +1,119 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Mass Healing Word",
+  "type": "spell",
+  "_id": "ULCkawQgAQ9amDN1",
+  "img": "icons/magic/life/heart-cross-strong-blue.webp",
+  "system": {
+    "activities": {
+      "RoTe6dX8PBlwP8qr": {
+        "type": "healing",
+        "_id": "RoTe6dX8PBlwP8qr",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": 4,
+            "bonus": "@mod",
+            "custom": "",
+            "number": 1
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "min": "",
+          "max": "",
+          "consumeQuantity": false
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You utter a compassionate word of power that swiftly heals the nearby wounded.</em></p><p>As you call out words of restoration, up to six creatures of your choice that you can see within range regain hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "bonus",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal"
+      ],
+      "material": {
+        "cost": null,
+        "consumed": false,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "6"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "evocation",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706934598512,
+    "modifiedTime": 1714163320669,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ULCkawQgAQ9amDN1"
+}

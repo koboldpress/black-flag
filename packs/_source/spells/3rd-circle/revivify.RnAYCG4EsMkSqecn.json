@@ -1,0 +1,111 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Revivify",
+  "type": "spell",
+  "_id": "RnAYCG4EsMkSqecn",
+  "img": "icons/magic/control/sihouette-hold-beam-green.webp",
+  "system": {
+    "activities": {
+      "tJMHcVlZN4bGBeIE": {
+        "type": "healing",
+        "_id": "tJMHcVlZN4bGBeIE",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "number": null,
+            "denomination": null
+          }
+        },
+        "activation": {},
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "consumeQuantity": false
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p><em>You restore a recently slain creature from death to life.</em></p><p>You touch a creature that has died within the last minute. That creature returns to life with 1 hit point. This spell can’t return to life a creature that has died of old age, nor can it restore any missing body parts.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "standard"
+    },
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "cost": 300,
+        "description": "diamonds worth 300 gp, which the spell consumes",
+        "consumed": true,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "touch"
+    },
+    "school": "necromancy",
+    "source": [
+      "divine"
+    ]
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.023",
+    "coreVersion": "11.315",
+    "createdTime": 1706935204516,
+    "modifiedTime": 1714163320483,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!RnAYCG4EsMkSqecn"
+}

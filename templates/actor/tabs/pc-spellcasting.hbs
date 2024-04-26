@@ -56,13 +56,13 @@
 					<td class="name">{{ localize section.label }}</td>
 					<td class="slots">
 						<div class="layout">
-							<span class="value">{{ blackFlag-number section.ring.value }}</span>
+							<span class="value">{{ blackFlag-number section.circle.value }}</span>
 							<span class="separator">/</span>
-							{{#if (and @root.editable section.ring.allowOverride)}}
-								<input type="number" class="max uninput" name="system.spellcasting.rings.{{ @key }}.override"
-								       value="{{ section.ring.override }}" placeholder="{{ section.ring.maxPlaceholder }}">
+							{{#if (and @root.editable section.circle.allowOverride)}}
+								<input type="number" class="max uninput" name="system.spellcasting.circles.{{ @key }}.override"
+								       value="{{ section.circle.override }}" placeholder="{{ section.circle.maxPlaceholder }}">
 							{{else}}
-								<span class="max">{{ blackFlag-number section.ring.max }}</span>
+								<span class="max">{{ blackFlag-number section.circle.max }}</span>
 							{{/if}}
 						</div>
 					</td>
