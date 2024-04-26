@@ -53,14 +53,21 @@
 			<section>
 				{{#if item.isEmbedded}}
 					<fieldset>
-						<legend>prep</legend>
-						<div class="field-group">
+						<legend>{{ localize "BF.Spell.Configuration" }}</legend>
+						<label>
 							<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
 							<select name="flags.black-flag.relationship.mode">
 								{{ selectOptions CONFIG.spellPreparationModes selected=flags.black-flag.relationship.mode
 																 labelAttr="label" localize=true }}
 							</select>
-						</div>
+						</label>
+						{{#if item.system.alwaysPreparable}}
+							<label class="full-checkbox">
+								<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
+								<input type="checkbox" name="flags.black-flag.relationship.alwaysPrepared"
+							         {{ checked flags.black-flag.relationship.alwaysPrepared }}>
+							</label>
+						{{/if}}
 					</fieldset>
 				{{/if}}
 				<fieldset class="casting">

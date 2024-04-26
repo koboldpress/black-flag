@@ -86,9 +86,9 @@ export default class PCSheet extends BaseActorSheet {
 		await super.prepareItem(item, context, section);
 
 		if (item.type === "spell") {
-			const mode = item.getFlag("black-flag", "relationship.mode");
+			const { alwaysPrepared, mode } = item.getFlag("black-flag", "relationship") ?? {};
 			const ritual = item.system.tags.has("ritual");
-			const always = mode === "alwaysPrepared" || ritual;
+			const always = (alwaysPrepared && item.system.alwaysPreparable) || ritual;
 			const pressed = always || item.system.prepared;
 			if (always || item.system.preparable)
 				context.buttons.push({
@@ -97,15 +97,14 @@ export default class PCSheet extends BaseActorSheet {
 					disabled: !item.isOwner || always,
 					label: "BF.Spell.Preparation.Prepared",
 					pressed,
-					title: always
-						? CONFIG.BlackFlag.spellPreparationModes.alwaysPrepared.label
-						: `BF.Spell.Preparation.${item.system.prepared ? "Prepared" : "NotPrepared"}`,
+					title: `BF.Spell.Preparation.${always ? "Always" : !item.system.prepared ? "Not" : ""}Prepared`,
 					icon: `<i class="fa-${pressed ? "solid" : "regular"} fa-${
 						ritual ? "atom" : always ? "bahai" : "sun"
 					}" inert></i>`
 				});
 			context.dataset.spellType = mode;
 			if (item.system.prepared && !ritual) context.dataset.spellPrepared = "";
+			if (alwaysPrepared) context.dataset.spellAlwaysPrepared = "";
 			if (item.system.tags.size) context.dataset.properties = Array.from(item.system.tags).join(" ");
 		}
 

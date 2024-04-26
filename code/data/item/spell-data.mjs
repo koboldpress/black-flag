@@ -141,12 +141,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Is the "Always Prepared" option valid for this item?
+	 * @type {boolean}
+	 */
+	get alwaysPreparable() {
+		const config = CONFIG.BlackFlag.spellPreparationModes[this.parent.getFlag("black-flag", "relationship.mode")];
+		return config?.preparable && this.circle.base !== 0 && !this.tags.has("ritual");
+	}
+
+	/**
 	 * Can this spell be prepared?
 	 * @type {boolean}
 	 */
 	get preparable() {
-		const mode = this.parent.getFlag("black-flag", "relationship.mode");
-		return mode === "standard" && this.circle.base !== 0 && !this.tags.has("ritual");
+		const alwaysPrepared = this.parent.getFlag("black-flag", "relationship.alwaysPrepared");
+		return this.alwaysPreparable && !alwaysPrepared;
 	}
 
 	/**

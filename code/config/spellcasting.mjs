@@ -106,15 +106,20 @@ export const spellLearningModes = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Spell preparation methods.
- * @type {LabeledConfiguration}
+ * Configuration data for spell preparation modes.
+ *
+ * @typedef {LabeledConfiguration} SpellPreparationConfiguration
+ * @property {boolean} [preparable] - Can this spell be prepared?
+ */
+
+/**
+ * Spell preparation modes.
+ * @type {SpellPreparationConfiguration}
  */
 export const spellPreparationModes = {
 	standard: {
-		label: "BF.Spell.Preparation.Mode.Standard"
-	},
-	alwaysPrepared: {
-		label: "BF.Spell.Preparation.Mode.AlwaysPrepared"
+		label: "BF.Spell.Preparation.Mode.Standard",
+		preparable: true
 	},
 	atWill: {
 		label: "BF.Spell.Preparation.Mode.AtWill"

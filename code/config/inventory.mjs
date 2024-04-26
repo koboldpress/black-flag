@@ -42,7 +42,7 @@ export const sheetSections = {
 			tab: "spellcasting",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "flags.black-flag.relationship.mode", o: "in", v: ["standard", "alwaysPrepared", undefined] },
+				{ k: "flags.black-flag.relationship.mode", o: "in", v: ["standard", undefined] },
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {

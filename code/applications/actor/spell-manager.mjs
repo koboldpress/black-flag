@@ -13,7 +13,7 @@ export default class SpellManager extends DocumentSheet {
 		for (const spell of this.document.items) {
 			if (spell.type !== "spell") continue;
 			const { mode, origin } = spell.getFlag("black-flag", "relationship") ?? {};
-			if (!["standard", "alwaysPrepared"].includes(mode)) continue;
+			if (!["standard", undefined].includes(mode)) continue;
 			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
 			this.existingSpells.add(sourceId);
 			if (origin.special && origin.identifier) specialChosenOrigins.add(origin.identifier);
@@ -355,15 +355,12 @@ export default class SpellManager extends DocumentSheet {
 		if (slot.type === "spellbook") origin.spellbookOrigin = "free";
 		if (slot.special) origin.special = true;
 
+		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.mode", "standard");
 		const prepared =
 			foundry.utils.getProperty(spellData, "system.circle.base") > 0
 				? CONFIG.BlackFlag.spellLearningModes[slot.spellcasting.spells.mode]?.prepared
 				: true;
-		foundry.utils.setProperty(
-			spellData,
-			"flags.black-flag.relationship.mode",
-			prepared ? "standard" : "alwaysPrepared"
-		);
+		if (!prepared) foundry.utils.setProperty(spellData, "flags.black-flag.relationship.alwaysPrepared", true);
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.origin", origin);
 		if (remote) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
