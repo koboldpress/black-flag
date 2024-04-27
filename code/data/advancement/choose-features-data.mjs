@@ -4,8 +4,17 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 
 /**
  * Configuration data for the Choose Features advancement.
+ *
+ * @property {Record<number, number>} choices - Choices presented at each level.
+ * @property {boolean} allowDrops - Allow player to drop items not in the pool.
+ * @property {string} type - General item type to support (e.g. feature or talent).
+ * @property {FeatureGrantConfiguration[]} pool - Items to present as choices.
+ * @property {object} restriction
+ * @property {string} restriction.category - Category of allowed items (e.g. class or race).
+ * @property {string} restriction.type - Subtype of allowed items (e.g. martialTalent or channelDivinity).
  */
 export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
@@ -36,10 +45,15 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 	}
 }
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
 /**
  * Value data for the Choose Features advancement.
+ *
+ * @property {Record<number, GrantedFeatureData[]>} added - Features chosen at each level.
  */
 export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			added: new MappingField(

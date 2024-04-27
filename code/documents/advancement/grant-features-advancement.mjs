@@ -113,48 +113,13 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Create items on the actor with the proper flags.
-	 * @param {string[]} uuids - UUIDs of items to create.
-	 * @param {object[]} [existing] - Existing granted items.
-	 * @param {object} [options={}]
-	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
-	 * @returns {object[]} - Array of data for storing in value.
-	 */
-	async createItems(uuids, existing, { render = false } = {}) {
-		const items = [];
-		const added = existing ?? [];
-		for (const uuid of uuids) {
-			const source = await fromUuid(uuid);
-			if (!source) continue;
-			const id = foundry.utils.randomID();
-			const advancementOrigin = `${this.item.id}.${this.id}`;
-			items.push(
-				source
-					.clone(
-						{
-							_id: id,
-							folder: null,
-							sort: null,
-							"flags.black-flag.sourceId": uuid,
-							"flags.black-flag.advancementOrigin": advancementOrigin,
-							"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin
-						},
-						{ keepId: true }
-					)
-					.toObject()
-			);
-			added.push({ document: id, uuid });
-		}
-		await this.actor.createEmbeddedDocuments("Item", items, { keepId: true, render });
-		return added;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
-		const added = await this.createItems(Object.values(this.configuration.pool).map(d => d.uuid));
+		const added = await this.createItems(
+			Object.values(this.configuration.pool).map(d => d.uuid),
+			null,
+			{ data }
+		);
 		return await this.actor.update(
 			{
 				[`${this.valueKeyPath}.${this.storagePath(this.relavantLevel(levels))}`]: added
@@ -176,6 +141,30 @@ export default class GrantFeaturesAdvancement extends Advancement {
 			},
 			{ render }
 		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create items on the actor with the proper flags.
+	 * @param {string[]} uuids - UUIDs of items to create.
+	 * @param {object[]} [existing] - Existing granted items.
+	 * @param {object} [options={}]
+	 * @param {object} [options.data] - Data from the advancement process.
+	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
+	 * @returns {object[]} - Array of data for storing in value.
+	 */
+	async createItems(uuids, existing, { data, render = false } = {}) {
+		const items = [];
+		const added = existing ?? [];
+		for (const uuid of uuids) {
+			const itemData = await this.createItemData(uuid, { data });
+			if (!itemData) continue;
+			items.push(itemData);
+			added.push({ document: itemData._id, uuid });
+		}
+		await this.actor.createEmbeddedDocuments("Item", items, { keepId: true, keepRelationship: true, render });
+		return added;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

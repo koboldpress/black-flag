@@ -9,7 +9,7 @@ export class AdvancementField extends MappingField {
 	constructor(options) {
 		super(
 			new TypeField({
-				determineType: value => value.type,
+				determineType: value => value?.type,
 				modelLookup: type => CONFIG.Advancement.types[type]?.documentClass ?? null
 			}),
 			options

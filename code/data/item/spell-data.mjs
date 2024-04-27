@@ -432,6 +432,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 		const origins = (this.parent.actor.system.spellcasting.origins ??= {});
 		const relationship = this.parent.getFlag("black-flag", "relationship.origin") ?? {};
+		if (!relationship.identifier) return;
 		const origin = (origins[relationship.identifier] ??= {});
 		if (this.circle.base === 0) {
 			origin.cantrips ??= { value: 0 };

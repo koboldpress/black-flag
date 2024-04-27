@@ -128,6 +128,7 @@ export const spellPreparationModes = {
 		label: "BF.Spell.Preparation.Mode.Innate"
 	}
 };
+localizeConfig(spellPreparationModes, { sort: false });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

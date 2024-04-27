@@ -14,9 +14,11 @@ export default class SpellManager extends DocumentSheet {
 			if (spell.type !== "spell") continue;
 			const { mode, origin } = spell.getFlag("black-flag", "relationship") ?? {};
 			if (!["standard", undefined].includes(mode)) continue;
-			const sourceId = foundry.utils.getProperty(spell, "flags.core.sourceId");
+			const sourceId =
+				foundry.utils.getProperty(spell, "flags.core.sourceId") ??
+				foundry.utils.getProperty(spell, "flags.black-flag.sourceId");
 			this.existingSpells.add(sourceId);
-			if (origin.special && origin.identifier) specialChosenOrigins.add(origin.identifier);
+			if (origin?.special && origin?.identifier) specialChosenOrigins.add(origin.identifier);
 		}
 
 		this.slots = [];
@@ -374,7 +376,7 @@ export default class SpellManager extends DocumentSheet {
 		const spellData = this.slots.flatMap(slot =>
 			Array.from(slot.selected ?? []).map(uuid => this._prepareSpellData(fromUuid(uuid), slot))
 		);
-		await this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { retainRelationship: true });
+		await this.document.createEmbeddedDocuments("Item", await Promise.all(spellData), { keepRelationship: true });
 		await this.document.setFlag("black-flag", "spellsLearned", {
 			learned: true,
 			maxCircle: this.document.system.spellcasting.maxCircle

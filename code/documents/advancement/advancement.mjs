@@ -323,6 +323,41 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	async reverse(levels, data, { render = true } = {}) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Fetch and item and create a clone with the proper flags.
+	 * @param {string} uuid - UUID of the item to fetch.
+	 * @param {object} [options={}]
+	 * @param {object} [options.changes={}] - Additional changes to apply when creating the clone.
+	 * @param {object} [options.data] - Data from the advancement process.
+	 * @param {string} [options.id] - Optional ID to use instead of a random one.
+	 * @returns {object|null}
+	 */
+	async createItemData(uuid, { changes = {}, data, id } = {}) {
+		const source = await fromUuid(uuid);
+		if (!source) return null;
+		id ??= foundry.utils.randomID();
+		const advancementOrigin = `${this.item.id}.${this.id}`;
+		return source
+			.clone(
+				foundry.utils.mergeObject(
+					{
+						_id: id,
+						folder: null,
+						sort: null,
+						// TODO: Set proper sort order rather than just removing it
+						"flags.black-flag.sourceId": uuid,
+						"flags.black-flag.advancementOrigin": advancementOrigin,
+						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin
+					},
+					changes
+				),
+				{ keepId: true }
+			)
+			.toObject();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Helper Methods            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

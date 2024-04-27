@@ -1,0 +1,51 @@
+<form autocomplete="off" class="drop-target">
+	<section>
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
+		</fieldset>
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.GrantSpells.SpellSettings" }}</legend>
+			<label>
+				<span>
+					{{ localize "BF.Spell.Source.Label" }}
+					<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Source.Hint"></i>
+				</span>
+				<select name="configuration.spell.source">
+					{{ selectOptions CONFIG.spellSources.localized selected=configuration.spell.source blank="" }}
+				</select>
+			</label>
+			<label>
+				<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
+				<select name="configuration.spell.mode">
+					{{ selectOptions CONFIG.spellPreparationModes.localized selected=configuration.spell.mode }}
+				</select>
+			</label>
+			{{#if alwaysPreparable}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
+					<input type="checkbox" name="configuration.spell.alwaysPrepared"
+					       {{ checked configuration.spell.alwaysPrepared }}>
+				</label>
+			{{/if}}
+		</fieldset>
+		<fieldset class="items drop-area">
+			<legend>{{ localize "BF.Item.Type.Spell[other]" }}</legend>
+			<ol>
+				{{#each configuration.pool}}
+					<li data-item-uuid="{{ uuid }}">
+						<span class="name">{{{ blackFlag-linkForUUID uuid }}}</span>
+						<span class="controls">
+							<button type="button" class="link-button" data-action="delete"
+											data-tooltip="BF.Spell.Action.Delete"
+											aria-label="{{ localize 'BF.Spell.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
+						</span>
+					</li>
+				{{/each}}
+			</ol>
+			<p class="hint">{{ localize "BF.Advancement.Config.DropHint" }}</p>
+		</fieldset>
+	</section>
+</form>

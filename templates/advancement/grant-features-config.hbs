@@ -1,22 +1,26 @@
-<form autocomplete="off">
+<form autocomplete="off" class="drop-target">
 	<section>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 		</fieldset>
-		<fieldset class="items drop-area drop-target">
-			<legend>{{localize "DOCUMENT.Items"}}</legend>
+		<fieldset class="items drop-area">
+			<legend>{{ localize "BF.Item.Type.Feature[other]" }}</legend>
 			<ol>
 				{{#each configuration.pool}}
-					<li data-item-uuid="{{this.uuid}}">
-						<span class="name">{{{blackFlag-linkForUUID this.uuid}}}</span>
+					<li data-item-uuid="{{ uuid }}">
+						<span class="name">{{{ blackFlag-linkForUUID uuid }}}</span>
 						<span class="controls">
-							<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+							<button type="button" class="link-button" data-action="delete"
+							        data-tooltip="BF.Item.Action.Delete"
+											aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
 						</span>
 					</li>
 				{{/each}}
 			</ol>
-			<p class="hint">{{localize "BF.Advancement.Config.DropHint"}}</p>
+			<p class="hint">{{ localize "BF.Advancement.Config.DropHint" }}</p>
 		</fieldset>
 	</section>
 </form>

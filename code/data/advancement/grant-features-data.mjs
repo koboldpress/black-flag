@@ -3,9 +3,19 @@ import { LocalDocumentField } from "../fields/_module.mjs";
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * Configuration data for an individual item entry in grant features.
+ *
+ * @typedef {object} FeatureGrantConfiguration
+ * @property {string} uuid - UUID of the item to grant.
+ */
+
+/**
  * Configuration data for the Grant Features advancement.
+ *
+ * @property {FeatureGrantConfiguration[]} pool - Items to grant.
  */
 export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			pool: new ArrayField(
@@ -18,10 +28,23 @@ export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
 	}
 }
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Value data for granted features.
+ *
+ * @typedef {object} GrantedFeatureData
+ * @property {string} document - Linked document on the actor.
+ * @property {string} uuid - Source UUID for the original document.
+ */
+
 /**
  * Value data for the Grant Features advancement.
+ *
+ * @property {GrantedFeatureData[]} added - Features added.
  */
 export class GrantFeaturesValueData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			added: new ArrayField(

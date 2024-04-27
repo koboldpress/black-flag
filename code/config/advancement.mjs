@@ -47,6 +47,13 @@ export const _advancementTypes = {
 			config: sheets.GrantFeaturesConfig
 		}
 	},
+	grantSpells: {
+		documentClass: advancement.GrantSpellsAdvancement,
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.GrantSpellsConfig
+		}
+	},
 	hitPoints: {
 		documentClass: advancement.HitPointsAdvancement,
 		validItemTypes: new Set(["class"]),

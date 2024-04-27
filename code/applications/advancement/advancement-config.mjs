@@ -60,9 +60,10 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options = {}) {
 		const levels = [
 			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
