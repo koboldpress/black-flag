@@ -55,22 +55,7 @@ Hooks.once("init", function () {
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
 
-	if (game.release.generation < 12) {
-		Math.clamp = Math.clamped;
-	} else {
-		// TODO: Temporary fix for bug in V12 Dev 2
-		Roll.replaceFormulaData = function (formula, data, { missing, warn = false } = {}) {
-			let dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-			return formula.replace(dataRgx, (match, term) => {
-				let value = foundry.utils.getProperty(data, term);
-				if (value == null) {
-					if (warn && ui.notifications) ui.notifications.warn(game.i18n.format("DICE.WarnMissingData", { match }));
-					return missing !== undefined ? String(missing) : match;
-				}
-				return String(value).trim();
-			});
-		};
-	}
+	if (game.release.generation < 12) Math.clamp = Math.clamped;
 });
 
 Hooks.once("setup", function () {

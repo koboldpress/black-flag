@@ -7,6 +7,8 @@
  *                          for that tab's name within the sheet rendering context.
  * @property {string} label - Localizable label for the section.
  * @property {FilterDescription[]} filters - Set of filters to determine which items should appear in this section.
+ * @property {ExpandSheetSectionCallback} expand - Callback used to expand a single section into multiple based on data
+ *                                                 in the document instance.
  * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
