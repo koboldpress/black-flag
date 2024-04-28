@@ -30,32 +30,6 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 	static VALID_TYPES = new Set(["spell"]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Display Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	configuredForLevel(levels) {
-		return super.configuredForLevel(levels) || !foundry.utils.isEmpty(this.value.updated);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	summaryForLevel(levels, { flow = false } = {}) {
-		const result = super.summaryForLevel(levels, { flow });
-		if (!flow || !this.configuredForLevel(this.relavantLevel(levels))) return result;
-
-		// Link to items on the actor
-		return [
-			result,
-			...this.value.updated.map(
-				data =>
-					`<span class="choice-entry">${data.document?.toAnchor({ classes: ["content-link"] }).outerHTML ?? " "}</span>`
-			)
-		].join(" ");
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -69,36 +43,27 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 			if (existing?.getFlag("black-flag", "relationship.mode") === mode) updateUuids.add(uuid);
 			else addUuids.add(uuid);
 		}
-		const added = await this.createItems(addUuids, null, { data });
-		const updated = await this.updateItems(updateUuids, { data });
-		return await this.actor.update(
-			{
-				[`${this.valueKeyPath}.added`]: added,
-				[`${this.valueKeyPath}.updated`]: updated
-			},
-			{ render }
-		);
+		const added = [...(await this.createItems(addUuids, { data })), ...(await this.updateItems(updateUuids, { data }))];
+		return await this.actor.update({ [`${this.valueKeyPath}.added`]: added }, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
-		const keyPath = this.storagePath(this.relavantLevel(levels));
-		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);
+		const deleteIds = [];
+		const updates = [];
+		for (const added of this.value.added ?? []) {
+			if (added.modified)
+				updates.push({
+					_id: added.document.id,
+					...this.configuration.spell.getReverseChanges(added.document, data)
+				});
+			else deleteIds.push(added.document.id);
+		}
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
-		const updates = (this.value?.updated ?? []).map(d => ({
-			_id: d.document.id,
-			...this.configuration.spell.getReverseChanges(d.document, data)
-		}));
 		await this.actor.updateEmbeddedDocuments("Item", updates, { render: false });
-		return await this.actor.update(
-			{
-				[`${this.valueKeyPath}.-=added`]: null,
-				[`${this.valueKeyPath}.-=updated`]: null
-			},
-			{ render }
-		);
+		return await this.actor.update({ [`${this.valueKeyPath}.-=added`]: null }, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -129,7 +94,7 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 			const itemID = this.actor.sourcedItems.get(uuid)?.id;
 			if (!itemID) continue;
 			items.push({ _id: itemID, ...this.configuration.spell.getApplyChanges(data) });
-			updated.push({ document: itemID, uuid });
+			updated.push({ document: itemID, modified: true, uuid });
 		}
 		await this.actor.updateEmbeddedDocuments("Item", items, { render });
 		return updated;

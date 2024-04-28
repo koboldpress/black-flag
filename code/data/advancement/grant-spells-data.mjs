@@ -21,18 +21,26 @@ export class GrantSpellsConfigurationData extends GrantFeaturesConfigurationData
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Value data for granted spells.
+ *
+ * @typedef {GrantedFeatureData} GrantedSpellData
+ * @property {boolean} modified - Was an existing item on the actor modified rather than a new one created?
+ */
+
+/**
  * Value data for the Grant Spells advancement.
  *
- * @property {GrantedFeatureData[]} updated - Spells updated.
+ * @property {GrantedSpellData[]} updated - Spells updated.
  */
 export class GrantSpellsValueData extends GrantFeaturesValueData {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
-			updated: new ArrayField(
+			added: new ArrayField(
 				new SchemaField({
 					document: new LocalDocumentField(foundry.documents.BaseItem),
+					modified: new BooleanField(),
 					uuid: new StringField() // TODO: Replace with UUIDField when available
 				}),
 				{ required: false, initial: undefined }

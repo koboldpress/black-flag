@@ -117,7 +117,6 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		const added = await this.createItems(
 			Object.values(this.configuration.pool).map(d => d.uuid),
-			null,
 			{ data }
 		);
 		return await this.actor.update(
@@ -148,15 +147,14 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/**
 	 * Create items on the actor with the proper flags.
 	 * @param {string[]} uuids - UUIDs of items to create.
-	 * @param {object[]} [existing] - Existing granted items.
 	 * @param {object} [options={}]
+	 * @param {object[]} [options.added=[]] - Existing granted items.
 	 * @param {object} [options.data] - Data from the advancement process.
 	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
 	 * @returns {object[]} - Array of data for storing in value.
 	 */
-	async createItems(uuids, existing, { data, render = false } = {}) {
+	async createItems(uuids, { data, added = [], render = false } = {}) {
 		const items = [];
-		const added = existing ?? [];
 		for (const uuid of uuids) {
 			const itemData = await this.createItemData(uuid, { data });
 			if (!itemData) continue;
