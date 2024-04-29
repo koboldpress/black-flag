@@ -17,6 +17,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "choose-features-dialog"],
@@ -41,6 +42,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get title() {
 		const configType = this.options.type ?? this.advancement.configuration.type;
 		const config = this.advancement.configuration;
@@ -60,6 +62,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
@@ -85,8 +88,10 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		optionContext.enriched = {
 			description: await TextEditor.enrichHTML(document.system.description.value, { secrets: false, async: true })
 		};
-		optionContext.prerequisite = document.system.createPrerequisiteLabel(this.advancement.actor);
-		optionContext.invalid = document.system.validatePrerequisites(this.advancement.actor) !== true;
+		if (document.system.restriction) {
+			optionContext.prerequisite = document.system.createPrerequisiteLabel(this.advancement.actor);
+			optionContext.invalid = document.system.validatePrerequisites(this.advancement.actor) !== true;
+		}
 		return optionContext;
 	}
 
@@ -94,6 +99,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -108,6 +114,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async close(options = {}) {
 		await super.close(options);
 		if (options.choosen) this.responses.resolve(options.choosen);
@@ -118,6 +125,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _onDrop(event) {
 		const data = TextEditor.getDragEventData(event);
 		if (data?.type !== "Item") return false;

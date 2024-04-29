@@ -6,28 +6,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>{{ localize "BF.Advancement.GrantSpells.SpellSettings" }}</legend>
-			<label>
-				<span>
-					{{ localize "BF.Spell.Source.Label" }}
-					<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Source.Hint"></i>
-				</span>
-				<select name="configuration.spell.source">
-					{{ selectOptions CONFIG.spellSources.localized selected=configuration.spell.source blank="" }}
-				</select>
-			</label>
-			<label>
-				<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
-				<select name="configuration.spell.mode">
-					{{ selectOptions CONFIG.spellPreparationModes.localized selected=configuration.spell.mode }}
-				</select>
-			</label>
-			{{#if alwaysPreparable}}
-				<label class="full-checkbox">
-					<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
-					<input type="checkbox" name="configuration.spell.alwaysPrepared"
-					       {{ checked configuration.spell.alwaysPrepared }}>
-				</label>
-			{{/if}}
+			{{> "blackFlag.advancement-spell-configuration" }}
 		</fieldset>
 		<fieldset class="items drop-area">
 			<legend>{{ localize "BF.Item.Type.Spell[other]" }}</legend>

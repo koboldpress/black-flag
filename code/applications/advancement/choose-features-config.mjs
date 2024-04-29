@@ -5,6 +5,7 @@ import GrantFeaturesConfig from "./grant-features-config.mjs";
  * Configuration application for feature choices.
  */
 export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "choose-features", "two-column"],
@@ -17,6 +18,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options = {}) {
 		const context = {
 			...super.getData(options),
@@ -50,6 +52,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async prepareConfigurationUpdate(configuration) {
 		if (configuration.choices) configuration.choices = cleanedObjectUpdate(configuration.choices);
 

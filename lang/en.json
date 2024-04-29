@@ -308,12 +308,29 @@
 		"Drop": "Drop a {type} here to select it",
 		"Notification[one]": "A {title} choice is needed",
 		"Notification[other]": "{number} {title} choices are needed",
+		"Restrictions": "Choice Restrictions",
 		"Type": {
 			"Label": "Item Type"
 		},
 		"Warning": {
 			"PreviouslyChosen": "This feature has already been chosen at a previous level.",
 			"Type": "Only {type} can be selected for this choice."
+		}
+	},
+	
+	"ChooseSpells": {
+		"Title": "Choose Spells",
+		"Hint": "Present the player with a choice of spells that they may choose at one or more levels.",
+		"AllowCantrips": "Allow Cantrips",
+		"AllowRituals": "Allow Rituals",
+		"AvailableCircle": "Any Available Circle",
+		"Warning": {
+			"NoCantrips": "No cantrips can be selected for this choice.",
+			"NoRituals": "No rituals can be selected for this choice.",
+			"OnlyCantrips": "Only cantrips can be selected for this choice.",
+			"Source": "Only {source} spells can be selected for this choice.",
+			"CircleAvailable": "Only {circle} or lower spells can be selected for this choice.",
+			"CircleSpecific": "Only {circle} spells can be selected for this choice."
 		}
 	},
 
@@ -331,6 +348,10 @@
 	"GrantSpells": {
 		"Title": "Spells",
 		"Hint": "Grant the character specific spells and assign them the proper details.",
+		"Origin": {
+			"Label": "Origin",
+			"Hint": "Class or subclass with which these spells will be associated. If the specified origin learns a limited number of spells, then these spells will count against that number."
+		},
 		"SpellSettings": "Spell Settings",
 		"Source": {
 			"Hint": "Will treat added spells as belonging to this source of magic, regardless of their original source."

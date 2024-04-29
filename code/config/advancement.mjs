@@ -33,6 +33,14 @@ export const _advancementTypes = {
 			flow: sheets.ChooseFeaturesFlow
 		}
 	},
+	chooseSpells: {
+		documentClass: advancement.ChooseSpellsAdvancement,
+		validItemTypes: new Set(_ALL_ITEM_TYPES),
+		sheetClasses: {
+			config: sheets.ChooseSpellsConfig,
+			flow: sheets.ChooseFeaturesFlow
+		}
+	},
 	expandedTalentList: {
 		documentClass: advancement.ExpandedTalentListAdvancement,
 		validItemTypes: new Set(["subclass"]),

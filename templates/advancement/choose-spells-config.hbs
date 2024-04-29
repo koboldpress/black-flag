@@ -1,0 +1,88 @@
+<form autocomplete="off">
+	<section class="left-column">
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
+		</fieldset>
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.ChooseFeatures.Restrictions" }}</legend>
+			<label>
+				<span>{{ localize "BF.Spell.Circle.Label" }}</span>
+				<select name="configuration.restriction.circle">
+					<option value="-1">{{ localize "BF.Advancement.ChooseSpells.AvailableCircle" }}</option>
+					<hr>
+					{{ selectOptions spellCircles selected=configuration.restriction.circle }}
+				</select>
+			</label>
+			{{#if (eq configuration.restriction.circle -1)}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Advancement.ChooseSpells.AllowCantrips" }}</span>
+					<input type="checkbox" name="configuration.restriction.allowCantrips"
+								 {{ checked configuration.restriction.allowCantrips }}>
+				</label>
+			{{/if}}
+			{{#unless (eq configuration.restriction.circle 1)}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Advancement.ChooseSpells.AllowRituals" }}</span>
+					<input type="checkbox" name="configuration.restriction.allowRituals"
+					       {{ checked configuration.restriction.allowRituals }}>
+				</label>
+			{{/unless}}
+			<label>
+				<span>{{ localize "BF.Spell.Source.Label" }}</span>
+				<select name="configuration.restriction.source">
+					{{ selectOptions CONFIG.spellSources.localized selected=configuration.restriction.source blank="—"}}
+				</select>
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.GrantSpells.SpellSettings" }}</legend>
+			{{> "blackFlag.advancement-spell-configuration" }}
+		</fieldset>
+		<fieldset class="items drop-area drop-target">
+			<legend>{{ localize "BF.Item.Type.Spell[other]" }}</legend>
+			<label class="full-checkbox">
+				<span>
+					{{ localize "BF.Advancement.Config.AllowDrops.Label" }}
+					<i class="hintIcon" data-tooltip="BF.Advancement.Config.AllowDrops.Hint"></i>
+				</span>
+				<input type="checkbox" name="configuration.allowDrops" {{ checked configuration.allowDrops }}>
+			</label>
+			<ol>
+				{{#each configuration.pool}}
+					<li data-item-uuid="{{ uuid }}">
+						<span class="name">{{{ blackFlag-linkForUUID uuid }}}</span>
+						<span class="controls">
+							<button type="button" class="link-button" data-action="delete"
+											data-tooltip="BF.Item.Action.Delete"
+											aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
+						</span>
+					</li>
+				{{/each}}
+			</ol>
+			<p class="hint">{{ localize "BF.Advancement.Config.DropHint" }}</p>
+		</fieldset>
+	</section>
+
+	<section class="right-column">
+		<fieldset>
+			<legend>
+				{{ localize "BF.Advancement.ChooseFeatures.Choices.Label" }}
+				<i class="hintIcon" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint"></i>
+			</legend>
+			<ol class="level-list">
+				{{#each levels as |label level|}}
+					<li class="level">
+						<label>
+							<span>{{ label }}</span>
+							{{ numberInput (lookup ../configuration.choices level) placeholder="0"
+														 name=(concat "configuration.choices." level) min=1 step=1 }}
+						</label>
+					</li>
+				{{/each}}
+			</ol>
+		</fieldset>
+	</section>
+</form>

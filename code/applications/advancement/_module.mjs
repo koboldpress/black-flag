@@ -4,6 +4,7 @@ export { default as AdvancementSelection } from "./advancement-selection.mjs";
 export { default as ChooseFeaturesConfig } from "./choose-features-config.mjs";
 export { default as ChooseFeaturesDialog } from "./choose-features-dialog.mjs";
 export { default as ChooseFeaturesFlow } from "./choose-features-flow.mjs";
+export { default as ChooseSpellsConfig } from "./choose-spells-config.mjs";
 export { default as GrantFeaturesConfig } from "./grant-features-config.mjs";
 export { default as GrantSpellsConfig } from "./grant-spells-config.mjs";
 export { default as HitPointsConfig } from "./hit-points-config.mjs";

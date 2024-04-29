@@ -51,9 +51,10 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
+		const keyPath = this.storagePath(this.relavantLevel(levels));
 		const deleteIds = [];
 		const updates = [];
-		for (const added of this.value.added ?? []) {
+		for (const added of foundry.utils.getProperty(this.value, keyPath) ?? []) {
 			if (added.modified)
 				updates.push({
 					_id: added.document.id,
@@ -63,7 +64,12 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 		}
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
 		await this.actor.updateEmbeddedDocuments("Item", updates, { render: false });
-		return await this.actor.update({ [`${this.valueKeyPath}.-=added`]: null }, { render });
+		return await this.actor.update(
+			{
+				[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null
+			},
+			{ render }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

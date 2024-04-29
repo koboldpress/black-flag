@@ -5,6 +5,7 @@ import ChooseFeaturesDialog from "./choose-features-dialog.mjs";
  * Inline application that presents a list of feature choices.
  */
 export default class ChooseFeaturesFlow extends AdvancementFlow {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/choose-features-flow.hbs"
@@ -13,6 +14,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData() {
 		const context = super.getData();
 		const level = this.advancement.relavantLevel(this.levels);
@@ -22,6 +24,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -36,6 +39,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _updateObject(event, formData) {
 		if (event.submitter?.dataset.action === "select-choice") {
 			let choice;
