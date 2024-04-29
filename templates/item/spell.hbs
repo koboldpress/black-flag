@@ -70,6 +70,13 @@
 						{{/if}}
 					</fieldset>
 				{{/if}}
+				<fieldset>
+					<legend>{{ localize "BF.Item.Description.FullLabel" }}</legend>
+					<label>
+						<span>{{ localize "BF.Item.Description.ShortLabel" }}</span>
+						<input type="text" name="system.description.short" value="{{ system.description.short }}">
+					</label>
+				</fieldset>
 				<fieldset class="casting">
 					<legend>{{ localize "BF.Spell.Casting.Label" }}</legend>
 					<div class="field-group">

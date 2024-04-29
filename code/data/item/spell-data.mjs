@@ -34,6 +34,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
+			description: new SchemaField({
+				short: new StringField({ label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint" })
+			}),
 			type: new SchemaField({
 				value: new StringField({ initial: "standard", label: "BF.Spell.Preparation.Label" })
 			}),
