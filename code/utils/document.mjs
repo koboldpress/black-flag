@@ -16,6 +16,7 @@ export function linkForUUID(uuid, { element=false }={}) {
 		if ( !CONST.PRIMARY_DOCUMENT_TYPES.includes(documentName) ) id = documentName;
 		const data = {
 			classes: ["content-link"],
+			dataset: {},
 			attrs: { draggable: "true" }
 		};
 		TextEditor._createLegacyContentLink("Compendium", [scope, pack, id].join("."), "", data);
