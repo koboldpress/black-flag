@@ -1,3 +1,4 @@
+import { numberFormat } from "../../utils/_module.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 
 /**
@@ -14,6 +15,7 @@ export default class LevelUpDialog extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "level-up-dialog"],
@@ -27,6 +29,7 @@ export default class LevelUpDialog extends FormApplication {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return `${game.i18n.localize("BF.Progression.Action.LevelUp.Label")} ${this.actor.name}`;
 	}
@@ -35,10 +38,22 @@ export default class LevelUpDialog extends FormApplication {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
 		context.system = this.actor.system;
+
+		const primaryClass = this.actor.system.progression.levels[1].class;
+		const abilityValue = this.actor.system.abilities[primaryClass.system.keyAbility]?.value ?? 0;
+		if (abilityValue < CONFIG.BlackFlag.multiclassingAbilityThreshold) {
+			context.multiclassMessage = game.i18n.format("BF.Progression.Warning.InsufficientPrimaryScore", {
+				ability: CONFIG.BlackFlag.abilities.localized[primaryClass.system.keyAbility],
+				threshold: numberFormat(CONFIG.BlackFlag.multiclassingAbilityThreshold),
+				value: numberFormat(abilityValue)
+			});
+		}
+
 		return context;
 	}
 
@@ -46,6 +61,7 @@ export default class LevelUpDialog extends FormApplication {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];

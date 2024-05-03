@@ -37,6 +37,17 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Key ability selected for this class.
+	 * @type {string|null}
+	 */
+	get keyAbility() {
+		const keyAbility = this.advancement.byType("keyAbility")[0];
+		return keyAbility?.value?.selected ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Number of levels of this class a character has.
 	 * @type {number}
 	 */
@@ -49,15 +60,15 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/** @inheritDoc */
 	get traits() {
 		const traits = [];
-		if (this.hitDie)
+		if (this.labels.hitDie)
 			traits.push({
 				label: "BF.HitDie.Label[one]",
-				value: this.hitDie
+				value: this.labels.hitDie
 			});
-		if (this.keyAbility)
+		if (this.labels.keyAbility)
 			traits.push({
 				label: "BF.Advancement.KeyAbility.Title",
-				value: this.keyAbility
+				value: this.labels.keyAbility
 			});
 		if (this.spellcasting)
 			traits.push({
@@ -72,9 +83,11 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedDetails() {
+		this.labels ??= {};
+
 		// Hit Die
 		const hpAdvancement = this.advancement.byType("hitPoints")[0];
-		this.hitDie = hpAdvancement ? `d${hpAdvancement.configuration.denomination}` : "";
+		this.labels.hitDie = hpAdvancement ? `d${hpAdvancement.configuration.denomination}` : "";
 
 		// Key Ability
 		const keyAbilityAdvancement = this.advancement.byType("keyAbility")[0];
@@ -84,7 +97,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 				return label ? game.i18n.localize(label) : o;
 			});
 			const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "disjunction" });
-			this.keyAbility = listFormatter.format(keyAbilityOptions);
+			this.labels.keyAbility = listFormatter.format(keyAbilityOptions);
 		}
 	}
 

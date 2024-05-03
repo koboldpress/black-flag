@@ -182,6 +182,14 @@ export const maxLevel = 20;
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Ability score threshold required to multiclass.
+ * @type {number}
+ */
+export const multiclassingAbilityThreshold = 13;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * List of die faces that can be chosen within a dice Scale Value.
  * @type {number[]}
  */

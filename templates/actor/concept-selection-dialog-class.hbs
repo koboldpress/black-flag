@@ -1,9 +1,12 @@
 <form autocomplete="off">
 	{{#each choices}}
-		<section class="option" data-uuid="{{ this.document.uuid }}"
-			{{~#if this.document.system.color}} style="--bf-item-color: {{ this.document.system.color }};"{{/if}}>
-			{{> "blackFlag.concept-summary" item=this.document system=this.document.system enriched=this.enriched }}
-			<button class="choose">{{ localize "BF.Action.Choose.Specific" option=this.document.name }}</button>
+		<section class="option" data-uuid="{{ document.uuid }}"
+			{{~#if document.system.color}} style="--bf-item-color: {{ document.system.color }};"{{/if}}>
+			{{> "blackFlag.concept-summary" item=document system=document.system enriched=enriched }}
+			<button class="choose heavy-button" {{ disabled multiclassMessage }}
+			        {{#if multiclassMessage}}data-tooltip="{{ multiclassMessage }}"{{/if}}>
+				{{ localize "BF.Action.Choose.Specific" option=document.name }}
+			</button>
 		</section>
 	{{else}}
 		<section class="empty">

@@ -55,6 +55,16 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Key ability selected for this subclass.
+	 * @type {string|null}
+	 */
+	get keyAbility() {
+		return this.parent?.actor?.system.progression?.classes?.[this.identifier.class]?.system.keyAbility ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Number of levels of the class associated with this subclass a character has.
 	 * @type {number}
 	 */

@@ -797,7 +797,7 @@ async function enrichEmbed(config, label, options) {
 		if (config.uuid) break;
 		try {
 			const parsed = foundry.utils.parseUuid(value, { relative: options.relativeTo });
-			if (parsed.documentId) config.uuid = value;
+			if ((game.release.generation < 12 && parsed.embedded?.length) || parsed.documentId) config.uuid = value;
 		} catch (err) {}
 	}
 
@@ -813,7 +813,7 @@ async function enrichEmbed(config, label, options) {
 		}
 	} else if (config.doc instanceof RollTable) return embedRollTable(config, label, options);
 	// Forward everything else to documents
-	else if (foundry.utils.getType(config.doc.toEmbed) === "function") {
+	else if (foundry.utils.getType(config.doc?.toEmbed) === "function") {
 		const doc = config.doc;
 		delete config.doc;
 		return doc.toEmbed({ ...config, label }, options);
