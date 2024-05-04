@@ -35,6 +35,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get isEditable() {
 		let editable = this.options.editable && this.item.isOwner;
 		if (this.item.pack) {
@@ -60,6 +61,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 	/*               Methods               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async close(options = {}) {
 		await super.close(options);
 		delete this.document.apps[this.appId];
@@ -67,6 +69,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options) {
 		const context = super.getData(options);
 		context.document = this.document;
@@ -78,6 +81,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	render(force = false, options = {}) {
 		this.document.apps[this.appId] = this;
 		return super.render(force, options);
@@ -85,6 +89,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _renderOuter() {
 		const html = await super._renderOuter();
 		this._createDocumentIdLink(html);
