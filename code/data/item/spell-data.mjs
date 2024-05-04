@@ -130,8 +130,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	 * @type {string|null}
 	 */
 	get ability() {
-		// TODO: Return specific ability based on character's spellcasting
-		return "intelligence";
+		return (
+			this.parent.actor?.system.spellcasting?.origins[
+				this.parent.getFlag("black-flag", "relationship.origin.identifier")
+			]?.ability ?? "intelligence"
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
