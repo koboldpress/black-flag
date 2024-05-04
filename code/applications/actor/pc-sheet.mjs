@@ -363,6 +363,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
+		updates.img ??= this.element[0].querySelector('[data-edit="img"]')?.src;
 
 		// Intercept updates to available hit dice
 		const hdUpdates = foundry.utils.getProperty(updates, "system.attributes.hd.d");
