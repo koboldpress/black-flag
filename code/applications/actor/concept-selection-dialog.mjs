@@ -100,7 +100,7 @@ export default class ConceptSelectionDialog extends FormApplication {
 			system: doc.system
 		};
 
-		if (this.type === "class") {
+		if (this.type === "class" && this.options.multiclass) {
 			const abilities = this.actor.system.abilities;
 			const keyAbilityOptions = doc.system.advancement.byType("keyAbility")[0]?.configuration.options;
 			const validAbilities = Array.from(keyAbilityOptions).some(

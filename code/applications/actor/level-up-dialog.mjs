@@ -88,7 +88,7 @@ export default class LevelUpDialog extends FormApplication {
 				ui.notifications.warn(err.message);
 			}
 		} else {
-			new ConceptSelectionDialog(this.actor, "class").render(true);
+			new ConceptSelectionDialog(this.actor, "class", { multiclass: true }).render(true);
 		}
 		this.close();
 	}
