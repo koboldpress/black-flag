@@ -387,6 +387,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseProperties() {
+		this.type ??= {};
 		Object.defineProperty(this.type, "classification", {
 			value: "spell",
 			writable: false
