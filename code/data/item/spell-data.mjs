@@ -37,9 +37,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			description: new SchemaField({
 				short: new StringField({ label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint" })
 			}),
-			type: new SchemaField({
-				value: new StringField({ initial: "standard", label: "BF.Spell.Preparation.Label" })
-			}),
 			source: new SetField(new StringField(), { label: "BF.Spell.Source.Label" }),
 			school: new StringField({ label: "BF.Spell.School.Label" }),
 			circle: new SchemaField(
