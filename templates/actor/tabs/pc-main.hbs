@@ -159,15 +159,23 @@
 
 	<fieldset class="luck">
 		<legend>{{localize "BF.Luck.Label"}}</legend>
+		{{#if editable}}
+			<button type="button" class="link-button" data-action="luck" data-sub-action="remove" tabindex="0"
+			        data-tooltip="BF.Luck.Action.Remove" aria-label="{{ localize 'BF.Luck.Action.Remove' }}">
+				<i class="fa-solid fa-minus" inert></i>
+			</button>
+		{{/if}}
 		<ol class="luck-points">
 			{{#each luckPoints}}
 				<li class="luck-point{{#if selected}} selected{{/if}}"></li>
 			{{/each}}
 		</ol>
-		<button type="button" class="link-button" data-action="luck" data-sub-action="add" tabindex="0"
-		   aria-label="{{localize 'BF.Action.Add.Specific' type=(localize 'BF.Luck.Label')}}">
-			<i class="fa-solid fa-plus"aria-hidden="true"></i>
-		</button>
+		{{#unless editable}}
+			<button type="button" class="link-button" data-action="luck" data-sub-action="add" tabindex="0"
+		        	data-tooltip="BF.Luck.Action.Add" aria-label="{{ localize 'BF.Luck.Action.Add' }}">
+				<i class="fa-solid fa-plus" inert></i>
+			</button>
+		{{/unless}}
 	</fieldset>
 
 	<fieldset class="hit-points">

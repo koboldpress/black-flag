@@ -318,6 +318,8 @@ export default class PCSheet extends BaseActorSheet {
 				switch (subAction) {
 					case "add":
 						return this.actor.system.addLuck();
+					case "remove":
+						return this.actor.update({ "system.attributes.luck.value": this.actor.system.attributes.luck.value - 1 });
 				}
 				break;
 			case "progression":
