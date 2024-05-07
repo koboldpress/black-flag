@@ -1,0 +1,18 @@
+<form autocomplete="off">
+	<fieldset>
+		<legend>{{ localize "BF.Luck.Label" }}</legend>
+		<label>
+			<span>{{ localize "BF.Luck.Current" }}</span>
+			<input type="number" name="system.attributes.luck.value" value="{{ system.attributes.luck.value }}"
+			       min="0" max="5" step="1">
+		</label>
+		<label>
+			<span>
+				{{ localize "BF.Luck.Formula.Label" }}
+				<i class="hintIcon" data-tooltip="BF.Luck.Formula.Hint"></i>
+			</span>
+			<input type="text" name="system.attributes.luck.formula" value="{{ system.attributes.luck.formula }}"
+						 placeholder="1d4" {{ disabled formulaDisabled }}>
+		</label>
+	</fieldset>
+</form>

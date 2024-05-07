@@ -8,6 +8,7 @@ import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
 import LanguageConfig from "./config/language-config.mjs";
+import LuckConfig from "./config/luck-config.mjs";
 import MovementConfig from "./config/movement-config.mjs";
 import ProficiencyConfig from "./config/proficiency-config.mjs";
 import ResistanceConfig from "./config/resistance-config.mjs";
@@ -321,6 +322,8 @@ export default class BaseActorSheet extends ActorSheet {
 						return new InitiativeConfig(this.actor).render(true);
 					case "language":
 						return new LanguageConfig(this.actor).render(true);
+					case "luck":
+						return new LuckConfig(this.actor).render(true);
 					case "movement":
 						return new MovementConfig(this.actor).render(true);
 					case "proficiency":

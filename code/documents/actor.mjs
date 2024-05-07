@@ -1528,7 +1528,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			callback: li => {
 				const actor = game.actors.get(li[0].dataset.documentId);
 				actor.system.addLuck();
-			}
+			},
+			group: "system"
 		});
 	}
 

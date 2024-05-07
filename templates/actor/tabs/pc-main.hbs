@@ -158,7 +158,15 @@
 <section class="center">
 
 	<fieldset class="luck">
-		<legend>{{localize "BF.Luck.Label"}}</legend>
+		<legend>
+			{{ localize "BF.Luck.Label" }}
+			{{#if editable}}
+				<button type="button" class="link-button" data-action="config" data-type="luck" tabindex="0"
+								aria-label="{{ localize 'Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+		</legend>
 		{{#if editable}}
 			<button type="button" class="link-button" data-action="luck" data-sub-action="remove" tabindex="0"
 			        data-tooltip="BF.Luck.Action.Remove" aria-label="{{ localize 'BF.Luck.Action.Remove' }}">
@@ -236,7 +244,7 @@
 	<fieldset class="initiative">
 		<legend>
 			{{localize "BF.Initiative.Label"}}
-			{{#if modes.editing}}
+			{{#if editable}}
 				<button type="button" class="link-button" data-action="config" data-type="initiative" tabindex="0"
 				        aria-label="{{localize 'Configure'}}">
 					<i class="fa-solid fa-cog" aria-hidden="true"></i>

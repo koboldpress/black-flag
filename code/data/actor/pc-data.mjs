@@ -125,7 +125,8 @@ export default class PCData extends ActorDataModel.mixin(
 				),
 				luck: new SchemaField(
 					{
-						value: new NumberField({ min: 0, max: 5, integer: true })
+						value: new NumberField({ min: 0, max: 5, integer: true }),
+						formula: new FormulaField({ label: "BF.Luck.Formula" })
 					},
 					{ label: "BF.Luck.Label" }
 				)
@@ -705,9 +706,10 @@ export default class PCData extends ActorDataModel.mixin(
 		const luck = this.attributes.luck;
 		let newValue = luck.value + 1;
 		if (newValue > CONFIG.BlackFlag.luck.max) {
-			const rollConfig = { rolls: [{ parts: ["1d4"] }] };
+			const rollConfig = { rolls: [{ parts: [luck.formula || "1d4"] }] };
 			const type = game.i18n.localize("BF.Luck.Label");
 			const flavor = game.i18n.format("BF.Roll.Action.RerollSpecific", { type });
+			const dialogConfig = { configure: false };
 			const messageConfig = {
 				data: {
 					title: `${flavor}: ${this.name}`,
@@ -718,7 +720,6 @@ export default class PCData extends ActorDataModel.mixin(
 					}
 				}
 			};
-			const dialogConfig = { configure: false };
 
 			/**
 			 * A hook event that fires before luck is re-rolled.
@@ -726,8 +727,8 @@ export default class PCData extends ActorDataModel.mixin(
 			 * @memberof hookEvents
 			 * @param {BlackFlagActor} actor - Actor for which the roll is being performed.
 			 * @param {BasicRollProcessConfiguration} config - Configuration data for the pending roll.
-			 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 			 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+			 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 			 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 			 */
 			if (Hooks.call("blackFlag.preRollLuck", this.parent, rollConfig, dialogConfig, messageConfig) === false) return;

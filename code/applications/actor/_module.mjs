@@ -11,6 +11,7 @@ export { default as ArmorClassConfig } from "./config/armor-class-config.mjs";
 export { default as BaseConfig } from "./config/base-config.mjs";
 export { default as InitiativeConfig } from "./config/initiative-config.mjs";
 export { default as LanguageConfig } from "./config/language-config.mjs";
+export { default as LuckConfig } from "./config/luck-config.mjs";
 export { default as MovementConfig } from "./config/movement-config.mjs";
 export { default as ProficiencyConfig } from "./config/proficiency-config.mjs";
 export { default as SensesConfig } from "./config/senses-config.mjs";
