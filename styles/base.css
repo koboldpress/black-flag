@@ -141,7 +141,12 @@
 	list-style: none;
 }
 
-figure.icon {
+img.icon, figure.icon img {
+	object-fit: cover;
+	object-position: top center;
+}
+
+img.icon, figure.icon {
 	margin: 0;
 
 	&.circular {

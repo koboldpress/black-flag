@@ -41,13 +41,13 @@
 		<div class="tab flex-tab" data-group="primary" data-tab="biography">
 			<section>
 				<div class="artwork">
-					<figure>
+					<figure class="icon">
 						<figcaption>{{ localize "BF.Actor.Artwork.Portrait" }}</figcaption>
 						<img class="profile" src="{{ actor.img }}" title="{{ actor.name }}"
 								 {{~#if modes.editing}} data-edit="img"{{/if}}>
 					</figure>
 					{{#if showTokenArtwork}}
-						<figure>
+						<figure class="icon">
 							<figcaption>{{ localize "BF.Actor.Artwork.Token" }}</figcaption>
 							{{#if actor.isToken}}
 								<img class="profile" src="{{ actor.token.texture.src }}" title="{{ actor.name }}"
