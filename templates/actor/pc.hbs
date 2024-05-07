@@ -1,6 +1,6 @@
 <div class="sheet-container">
 	<header class="sheet-head">
-		<img class="profile icon" src="{{ actor.img }}" alt="{{ actor.name }}"{{#if modes.editing}} data-edit="img"{{/if}}>
+		<img class="profile icon" src="{{ actor.img }}" alt="{{ actor.name }}">
 		<h1>
 			<input name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
 			       aria-label="{{ localize 'Name' }}" form="{{ appID }}-main-form" {{ disabled (not modes.editing) }}>

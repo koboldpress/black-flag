@@ -104,6 +104,9 @@ export default class BaseActorSheet extends ActorSheet {
 		}
 		context.editorSelected = this.editorSelected;
 
+		const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
+		context.showTokenArtwork = this.modes.editing || this.actor.img !== token.texture.src;
+
 		return context;
 	}
 

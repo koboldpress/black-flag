@@ -17,6 +17,16 @@
 		gap: 0.5rem;
 	}
 
+	.profile {
+		border: 1px solid transparent;
+		border-radius: 0;
+		cursor: pointer;
+
+		&[data-edit] {
+			border-color: var(--bf-color-border-blue);
+		}
+	}
+
 	input[name="name"] {
 		border: 1px solid var(--bf-color-border-blue);
 		border-radius: 0;
@@ -60,13 +70,6 @@
 		.profile {
 			block-size: 60px;
 			inline-size: 60px;
-			border: 1px solid transparent;
-			border-radius: 0;
-			cursor: pointer;
-
-			&[data-edit] {
-				border-color: var(--bf-color-border-blue);
-			}
 		}
 
 		h1 {

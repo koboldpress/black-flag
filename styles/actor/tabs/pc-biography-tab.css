@@ -1,4 +1,20 @@
 .black-flag.pc.sheet .sheet-body [data-tab="biography"] {
+	> section {
+		display: grid;
+		gap: 12px;
+		grid-template-areas:
+			"artwork characteristics"
+			"artwork biography";
+		> .artwork { grid-area: artwork; }
+		> .biography { grid-area: biography; }
+		> .characteristics { grid-area: characteristics; }
+	}
+
+	.artwork {
+		.icon {
+			width: 160px;
+		}
+	}
 	.characteristics {
 		padding-block: 8px;
 
