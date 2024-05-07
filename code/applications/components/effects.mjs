@@ -1,11 +1,11 @@
 import { log } from "../../utils/_module.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import AppAssociatedElement from "./app-associated-element.mjs";
+import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
  * Custom element for displaying the active effects on actor or item sheets.
  */
-export default class EffectsElement extends AppAssociatedElement {
+export default class EffectsElement extends DocumentSheetAssociatedElement {
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -56,26 +56,6 @@ export default class EffectsElement extends AppAssociatedElement {
 	 * @type {AbortController}
 	 */
 	#controller;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Document represented by the app.
-	 * @type {BlackFlagActor|BlackFlagItem}
-	 */
-	get document() {
-		return this.app.document;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Does the user have permission to edit the document?
-	 * @type {boolean}
-	 */
-	get isEditable() {
-		return this.document.testUserPermission(game.user, "EDIT");
-	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */

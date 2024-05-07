@@ -282,7 +282,7 @@ export default class BaseActorSheet extends ActorSheet {
 	/** @inheritDoc */
 	_disableFields(form) {
 		super._disableFields(form);
-		for (const button of form.querySelectorAll('[data-action="view"]')) {
+		for (const button of form.querySelectorAll('[data-action="expand"], [data-action="view"]')) {
 			button.disabled = false;
 		}
 	}

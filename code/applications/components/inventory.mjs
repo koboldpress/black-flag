@@ -3,11 +3,11 @@ import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 import DragDrop from "../drag-drop.mjs";
-import AppAssociatedElement from "./app-associated-element.mjs";
+import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
 import SortingElement from "./sorting.mjs";
 
-export default class InventoryElement extends AppAssociatedElement {
+export default class InventoryElement extends DocumentSheetAssociatedElement {
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -98,26 +98,6 @@ export default class InventoryElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Document containing this inventory.
-	 * @type {BlackFlagActor|BlackFlagItem}
-	 */
-	get document() {
-		return this.app.document;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Does the user have permission to edit the document?
-	 * @type {boolean}
-	 */
-	get isEditable() {
-		return this.document.testUserPermission(game.user, "EDIT");
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Cached data on constructed sections.
 	 * @type {{[key: string]: SheetSectionConfiguration}}
 	 */
@@ -155,25 +135,25 @@ export default class InventoryElement extends AppAssociatedElement {
 			{
 				name: `BF.${type}.Action.View`,
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !item.isOwner,
+				condition: li => !item.isEditable,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
 				name: `BF.${type}.Action.Edit`,
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => item.isOwner,
+				condition: li => item.isEditable,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: `BF.${type}.Action.Duplicate`,
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => item.isOwner,
+				condition: li => item.isEditable,
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
 				icon: "<i class='fa-solid fa-trash fa-fw destructive'></i>",
-				condition: li => item.isOwner,
+				condition: li => item.isEditable,
 				callback: li => this._onAction(li[0], "delete")
 			},
 			{
@@ -181,7 +161,7 @@ export default class InventoryElement extends AppAssociatedElement {
 				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw"></i>`,
 				condition: () =>
 					this.actor &&
-					item.isOwner &&
+					item.isEditable &&
 					item.system.activities?.size &&
 					(this.actor.type === "npc" || type === "Feature"),
 				callback: li => this._onAction(li[0], "enable"),
@@ -190,14 +170,14 @@ export default class InventoryElement extends AppAssociatedElement {
 			{
 				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
 				icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
-				condition: () => this.actor && item.isOwner && type === "Item" && item.system.equippable,
+				condition: () => this.actor && item.isEditable && type === "Item" && item.system.equippable,
 				callback: li => this._onAction(li[0], "equip"),
 				group: "state"
 			},
 			{
 				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
 				icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-				condition: () => this.actor && item.isOwner && type === "Spell" && item.system.preparable,
+				condition: () => this.actor && item.isEditable && type === "Spell" && item.system.preparable,
 				callback: li => this._onAction(li[0], "prepare"),
 				group: "state"
 			}

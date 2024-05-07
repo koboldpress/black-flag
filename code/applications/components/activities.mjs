@@ -1,12 +1,12 @@
 import ActivitySelection from "../activity/activity-selection.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
 import DragDrop from "../drag-drop.mjs";
-import AppAssociatedElement from "./app-associated-element.mjs";
+import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
  * Custom element for displaying the activities on an item sheet.
  */
-export default class ActivitiesElement extends AppAssociatedElement {
+export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -72,26 +72,14 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Does the user have permission to edit the item?
-	 * @type {boolean}
-	 */
-	get isEditable() {
-		if (this.item.pack) {
-			const pack = game.packs.get(this.item.pack);
-			if (pack.locked) return false;
-		}
-		return this.item.testUserPermission(game.user, "EDIT");
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Item represented by the app.
 	 * @type {BlackFlagItem}
 	 */
 	get item() {
-		return this.app.document;
+		return this.document;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Stored copy of client rect during drag events.

@@ -1,10 +1,10 @@
 import BlackFlagContextMenu from "../context-menu.mjs";
-import AppAssociatedElement from "./app-associated-element.mjs";
+import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
  * Custom element for displaying the actions on the actor sheets.
  */
-export default class ActionsElement extends AppAssociatedElement {
+export default class ActionsElement extends DocumentSheetAssociatedElement {
 	constructor() {
 		super();
 		this.#controller = new AbortController();
@@ -46,7 +46,7 @@ export default class ActionsElement extends AppAssociatedElement {
 	 * @type {BlackFlagActor}
 	 */
 	get actor() {
-		return this.app.document;
+		return this.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -71,37 +71,51 @@ export default class ActionsElement extends AppAssociatedElement {
 	_getContextMenuOptions(item, activity) {
 		return [
 			{
+				name: "BF.Activity.Core.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => activity && !item.isEditable,
+				callback: li => this._onAction(li[0], "view"),
+				group: "activity"
+			},
+			{
 				name: "BF.Activity.Core.Action.Activate",
 				icon: '<i class="fa-solid fa-power-off fa-fw" inert></i>',
-				condition: li => activity && item.isOwner,
+				condition: li => activity && item.isEditable,
 				callback: li => this._onAction(li[0], "activate"),
 				group: "activity"
 			},
 			{
 				name: "BF.Activity.Core.Action.Edit",
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => activity && item.isOwner,
+				condition: li => activity && item.isEditable,
 				callback: li => this._onAction(li[0], "edit"),
 				group: "activity"
 			},
 			{
 				name: "BF.Activity.Core.Action.Delete",
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => activity && item.isOwner,
+				condition: li => activity && item.isEditable,
 				callback: li => this._onAction(li[0], "delete"),
 				group: "activity"
 			},
 			{
+				name: "BF.Item.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => !item.isEditable,
+				callback: li => this._onAction(li[0], "viewItem"),
+				group: "item"
+			},
+			{
 				name: "BF.Item.Action.Edit",
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
-				condition: li => item.isOwner,
+				condition: li => item.isEditable,
 				callback: li => this._onAction(li[0], "editItem"),
 				group: "item"
 			},
 			{
 				name: "BF.Item.Action.Delete",
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => item.isOwner,
+				condition: li => item.isEditable,
 				callback: li => this._onAction(li[0], "deleteItem"),
 				group: "item"
 			}
@@ -140,8 +154,10 @@ export default class ActionsElement extends AppAssociatedElement {
 				if (item) return item.deleteDialog();
 				break;
 			case "edit":
+			case "view":
 				if (activity) return activity.sheet.render(true);
 			case "editItem":
+			case "viewItem":
 				if (item) return item.sheet.render(true);
 				break;
 		}

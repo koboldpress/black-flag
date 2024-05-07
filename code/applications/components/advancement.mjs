@@ -1,12 +1,12 @@
 import { log } from "../../utils/_module.mjs";
 import AdvancementSelection from "../advancement/advancement-selection.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import AppAssociatedElement from "./app-associated-element.mjs";
+import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
  * Custom element for displaying the advancement on an item sheet.
  */
-export default class AdvancementElement extends AppAssociatedElement {
+export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	connectedCallback() {
 		super.connectedCallback();
 
@@ -35,21 +35,11 @@ export default class AdvancementElement extends AppAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Does the user have permission to edit the item?
-	 * @type {boolean}
-	 */
-	get isEditable() {
-		return this.item.testUserPermission(game.user, "EDIT");
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Item represented by the app.
 	 * @type {BlackFlagItem}
 	 */
 	get item() {
-		return this.app.document;
+		return this.document;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -106,6 +96,12 @@ export default class AdvancementElement extends AppAssociatedElement {
 	_getContextMenuOptions(advancement) {
 		return [
 			{
+				name: "BF.Advancement.Core.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => advancement && !this.isEditable,
+				callback: li => this._onAction(li[0], "view")
+			},
+			{
 				name: "BF.Advancement.Core.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
 				condition: li => advancement && this.isEditable,
@@ -143,6 +139,7 @@ export default class AdvancementElement extends AppAssociatedElement {
 			case "add":
 				return AdvancementSelection.createDialog(this.item);
 			case "edit":
+			case "view":
 				return advancement.sheet.render(true);
 			case "delete":
 				return advancement.deleteDialog();
