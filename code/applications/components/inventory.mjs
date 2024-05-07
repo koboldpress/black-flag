@@ -454,8 +454,11 @@ export default class InventoryElement extends AppAssociatedElement {
 		if (!this.isEditable) return false;
 
 		const { data } = DragDrop.getDragData(event);
-		if (!this._validateDrop(data)) return false;
+		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 		// TODO: Add support for dropping folders
+
+		const hookName = `drop${this.document.constructor.metadata.name}SheetData`;
+		if (Hooks.call(hookName, this.document, this.app, data) === false) return;
 
 		try {
 			const item = await Item.implementation.fromDropData(data);
