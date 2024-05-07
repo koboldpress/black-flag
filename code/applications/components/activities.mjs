@@ -76,6 +76,10 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 * @type {boolean}
 	 */
 	get isEditable() {
+		if (this.item.pack) {
+			const pack = game.packs.get(this.item.pack);
+			if (pack.locked) return false;
+		}
 		return this.item.testUserPermission(game.user, "EDIT");
 	}
 
@@ -106,6 +110,12 @@ export default class ActivitiesElement extends AppAssociatedElement {
 	 */
 	_getContextMenuOptions(activity) {
 		return [
+			{
+				name: "BF.Activity.Core.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => activity && !this.isEditable,
+				callback: li => this._onAction(li[0], "view")
+			},
 			{
 				name: "BF.Activity.Core.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",

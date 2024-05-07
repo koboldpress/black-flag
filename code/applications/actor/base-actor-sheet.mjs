@@ -279,6 +279,16 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	_disableFields(form) {
+		super._disableFields(form);
+		for (const button of form.querySelectorAll('[data-action="view"]')) {
+			button.disabled = false;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Handle a click on an action link.
 	 * @param {ClickEvent} event - Triggering click event.
