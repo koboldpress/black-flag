@@ -1,0 +1,89 @@
+{
+  "folder": "ljc34ps9wz9LJGuf",
+  "name": "Unstoppable",
+  "type": "feature",
+  "_id": "16hfWycloHRfDDas",
+  "img": "icons/skills/wounds/injury-eyes-blood-red-pink.webp",
+  "system": {
+    "activities": {
+      "cfjr8fYe6AweAJWh": {
+        "type": "utility",
+        "_id": "cfjr8fYe6AweAJWh",
+        "description": "<p>You can end one of the following conditions affecting you: blinded, charmed, frightened, incapacitated, paralyzed, or stunned. </p>",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you start your turn"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "End Condition",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you start your turn, you can choose to end one of the following conditions affecting you: blinded, charmed, frightened, incapacitated, paralyzed, or stunned. You can use this feature a number of times equal to your PB, and you regain all expended uses when you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": "heroicBoon"
+    },
+    "identifier": {
+      "associated": "fighter"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715715705658,
+    "modifiedTime": 1715718478482,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!16hfWycloHRfDDas"
+}

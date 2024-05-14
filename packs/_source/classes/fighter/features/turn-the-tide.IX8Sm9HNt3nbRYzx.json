@@ -1,0 +1,88 @@
+{
+  "folder": "ljc34ps9wz9LJGuf",
+  "name": "Turn the Tide",
+  "type": "feature",
+  "_id": "IX8Sm9HNt3nbRYzx",
+  "img": "icons/skills/wounds/bone-broken-knee-beam.webp",
+  "system": {
+    "activities": {
+      "NOrilr8qkexrsuXn": {
+        "type": "utility",
+        "_id": "NOrilr8qkexrsuXn",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you hit a creature or object with a weapon attack on your turn"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Extra Damage",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "round",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Once on each of your turns, when you hit a creature or object with a weapon attack on your turn, you can cause the attack to deal additional damage (of the same damage type as the weapon) equal to your STR or DEX score (your choice). The attack’s damage ignores resistance and immunity, and it can’t be reduced or avoided by any means.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": "epicBoon"
+    },
+    "identifier": {
+      "associated": "fighter"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715715720907,
+    "modifiedTime": 1715718550592,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!IX8Sm9HNt3nbRYzx"
+}

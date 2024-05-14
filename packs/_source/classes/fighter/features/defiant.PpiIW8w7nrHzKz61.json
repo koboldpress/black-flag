@@ -1,0 +1,117 @@
+{
+  "folder": "ljc34ps9wz9LJGuf",
+  "name": "Defiant",
+  "type": "feature",
+  "_id": "PpiIW8w7nrHzKz61",
+  "img": "icons/skills/wounds/blood-cells-vessel-red-orange.webp",
+  "system": {
+    "activities": {
+      "RsNCmSO2trapy2AP": {
+        "type": "utility",
+        "_id": "RsNCmSO2trapy2AP",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you fail a save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@scale.defiant.uses"
+    },
+    "advancement": {
+      "mnT1h9eTuNYReQbG": {
+        "type": "scaleValue",
+        "_id": "mnT1h9eTuNYReQbG",
+        "configuration": {
+          "type": "usage",
+          "scale": {
+            "10": {
+              "value": 1,
+              "per": "longRest"
+            },
+            "13": {
+              "value": 2
+            },
+            "17": {
+              "value": 3
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "fighter",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Defiant Uses",
+        "icon": "",
+        "hint": "",
+        "identifier": "uses"
+      }
+    },
+    "description": {
+      "value": "<p>When you fail a save, you can instead choose to succeed on the save. You can use this feature once and regain the use of it when you finish a long rest. You can use it twice before a long rest at 13th level, and three times at 17th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": "heroicBoon"
+    },
+    "identifier": {
+      "associated": "fighter"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715715686523,
+    "modifiedTime": 1715718490772,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!PpiIW8w7nrHzKz61"
+}

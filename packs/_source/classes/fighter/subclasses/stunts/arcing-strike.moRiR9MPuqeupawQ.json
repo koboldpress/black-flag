@@ -7,7 +7,7 @@
   "system": {
     "advancement": {},
     "description": {
-      "value": "<p><em>Requires a Two-Handed Weapon that Deals Slashing Damage</em></p><p>When you successfully deal damage with a weapon attack, you deal half that damage to a different target you can see within 5 feet of you.</p>",
+      "value": "<p><em>Requires a Heavy Melee Weapon</em></p><p>When you deal damage with a heavy weapon wielded in both hands, you can also deal half the damage you dealt to a different target within reach that you can see. If the second target is an object, it takes the full damage instead. You can decide to use this after you know your damage roll.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -23,11 +23,44 @@
       "value": "stunt"
     },
     "level": {
-      "value": null
+      "value": 3
     },
     "uses": {
       "min": "",
       "max": ""
+    },
+    "activities": {
+      "xHIpz4tpcYx20dtk": {
+        "type": "utility",
+        "_id": "xHIpz4tpcYx20dtk",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you deal damage with a heavy weapon wielded in both hands"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.ARqJyLmMnVQDbw0S",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -38,10 +71,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.026",
     "coreVersion": "11.315",
     "createdTime": 1700002664738,
-    "modifiedTime": 1713204329711,
+    "modifiedTime": 1715717057776,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!moRiR9MPuqeupawQ"

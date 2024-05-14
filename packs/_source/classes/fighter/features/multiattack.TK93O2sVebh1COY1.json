@@ -5,7 +5,7 @@
   "img": "icons/skills/melee/spear-tips-three-purple.webp",
   "system": {
     "description": {
-      "value": "<p>Your physical prowess has grown. On your turn, you can make two attacks when you take the Attack action.</p>",
+      "value": "<p>Your physical prowess has grown. On your turn, you can make two attacks when you take the Attack action.</p><p>Starting at 9th level, you can make three attacks when you take the Attack action. At 17th level, you can make four.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -26,17 +26,25 @@
           "scale": {
             "5": {
               "value": 2
+            },
+            "9": {
+              "value": 3
+            },
+            "17": {
+              "value": 4
             }
           },
           "item": {}
         },
         "level": {
-          "classIdentifier": "fighter"
+          "classIdentifier": "fighter",
+          "classRestriction": ""
         },
         "flags": {},
         "title": "Multiattack",
         "icon": "",
-        "identifier": "multiattack"
+        "identifier": "multiattack",
+        "hint": ""
       }
     },
     "identifier": {
@@ -57,13 +65,13 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.012",
+    "systemVersion": "0.9.026",
     "coreVersion": "11.315",
     "createdTime": 1695229322540,
-    "modifiedTime": 1707431778269,
+    "modifiedTime": 1715718180924,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "TK93O2sVebh1COY1",
-  "sort": 0,
+  "sort": 500000,
   "_key": "!items!TK93O2sVebh1COY1"
 }

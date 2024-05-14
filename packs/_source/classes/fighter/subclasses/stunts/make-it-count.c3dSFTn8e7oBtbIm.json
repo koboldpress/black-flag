@@ -7,7 +7,7 @@
   "system": {
     "advancement": {},
     "description": {
-      "value": "<p>When you take the Attack action, you can make a single attack with a +10 to the attack roll. You can’t make additional attacks as part of that Attack action, even if a feature like Multiattack would normally allow you to do so.</p>",
+      "value": "<p>When you take the Attack action, you can make a single weapon attack with a +10 to the attack roll. On a hit, the attack deals additional damage equal to your fighter level. You can’t make additional attacks as part of that Attack action, even if a feature like Multiattack would normally allow you to do so.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -23,11 +23,44 @@
       "value": "stunt"
     },
     "level": {
-      "value": null
+      "value": 3
     },
     "uses": {
       "min": "",
       "max": ""
+    },
+    "activities": {
+      "dwA4s1q9Xumbks9T": {
+        "type": "utility",
+        "_id": "dwA4s1q9Xumbks9T",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you take the Attack action"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.ARqJyLmMnVQDbw0S",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -38,10 +71,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.026",
     "coreVersion": "11.315",
     "createdTime": 1700002684090,
-    "modifiedTime": 1713204414640,
+    "modifiedTime": 1715717002238,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!c3dSFTn8e7oBtbIm"

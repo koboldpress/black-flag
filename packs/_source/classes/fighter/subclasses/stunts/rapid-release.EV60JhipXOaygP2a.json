@@ -1,39 +1,19 @@
 {
   "folder": "yF4n6L4nZDOTaVMr",
-  "name": "Riposte",
+  "name": "Rapid Release",
   "type": "feature",
-  "_id": "DB3dv9M92Bg6qQyS",
-  "img": "icons/skills/melee/strike-spear-red.webp",
+  "_id": "EV60JhipXOaygP2a",
+  "img": "icons/skills/ranged/shuriken-thrown-sawblade-gray.webp",
   "system": {
-    "advancement": {},
-    "description": {
-      "value": "<p><em>Requires a Melee Weapon</em></p><p>When a creature you can see within range misses you with a weapon attack, you can use your reaction to immediately make a melee weapon attack against that creature.</p>",
-      "source": {
-        "fallback": "Black Flag Reference Document"
-      }
-    },
-    "identifier": {
-      "associated": ""
-    },
-    "restriction": {
-      "filters": []
-    },
-    "type": {
-      "category": "class",
-      "value": "stunt"
-    },
-    "level": {
-      "value": 3
-    },
     "activities": {
-      "wSiHxjqBsuQglUIQ": {
+      "uwDmqV9n5eAD1Y7F": {
         "type": "utility",
-        "_id": "wSiHxjqBsuQglUIQ",
+        "_id": "uwDmqV9n5eAD1Y7F",
         "description": "",
         "system": {},
         "activation": {
-          "type": "reaction",
-          "condition": "When a creature you can see within range misses you with a weapon attack"
+          "type": "bonus",
+          "condition": "After you take the Attack action"
         },
         "consumption": {
           "targets": [
@@ -59,8 +39,31 @@
       }
     },
     "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
       "min": "",
       "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p><em>Requires a Ranged or Thrown Weapon</em></p><p>After you take the Attack action, you can use a bonus action to make an additional attack with a ranged or thrown weapon. You can draw a thrown weapon as part of the attack.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": "stunt"
+    },
+    "identifier": {
+      "associated": ""
+    },
+    "level": {
+      "value": 11
     }
   },
   "effects": [],
@@ -73,9 +76,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.026",
     "coreVersion": "11.315",
-    "createdTime": 1700002705098,
-    "modifiedTime": 1715716931859,
+    "createdTime": 1715715877089,
+    "modifiedTime": 1715716738490,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!DB3dv9M92Bg6qQyS"
+  "_key": "!items!EV60JhipXOaygP2a"
 }

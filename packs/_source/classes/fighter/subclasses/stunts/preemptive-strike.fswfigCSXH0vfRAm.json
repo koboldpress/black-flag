@@ -1,39 +1,19 @@
 {
   "folder": "yF4n6L4nZDOTaVMr",
-  "name": "Riposte",
+  "name": "Preemptive Strike",
   "type": "feature",
-  "_id": "DB3dv9M92Bg6qQyS",
-  "img": "icons/skills/melee/strike-spear-red.webp",
+  "_id": "fswfigCSXH0vfRAm",
+  "img": "icons/skills/melee/strike-sword-dagger-runes-gold.webp",
   "system": {
-    "advancement": {},
-    "description": {
-      "value": "<p><em>Requires a Melee Weapon</em></p><p>When a creature you can see within range misses you with a weapon attack, you can use your reaction to immediately make a melee weapon attack against that creature.</p>",
-      "source": {
-        "fallback": "Black Flag Reference Document"
-      }
-    },
-    "identifier": {
-      "associated": ""
-    },
-    "restriction": {
-      "filters": []
-    },
-    "type": {
-      "category": "class",
-      "value": "stunt"
-    },
-    "level": {
-      "value": 3
-    },
     "activities": {
-      "wSiHxjqBsuQglUIQ": {
+      "umw6Efq9b7JXwjdP": {
         "type": "utility",
-        "_id": "wSiHxjqBsuQglUIQ",
+        "_id": "umw6Efq9b7JXwjdP",
         "description": "",
         "system": {},
         "activation": {
           "type": "reaction",
-          "condition": "When a creature you can see within range misses you with a weapon attack"
+          "condition": "When a creature comes within reach of your weapon"
         },
         "consumption": {
           "targets": [
@@ -59,8 +39,31 @@
       }
     },
     "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
       "min": "",
       "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p><em>Requires a Melee Weapon</em></p><p>When a creature comes within reach of your weapon, you can use your reaction to make a single attack against it. On a hit, the target’s speed is reduced by 15 feet until the start of your next turn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": "stunt"
+    },
+    "identifier": {
+      "associated": ""
+    },
+    "level": {
+      "value": 11
     }
   },
   "effects": [],
@@ -73,9 +76,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.026",
     "coreVersion": "11.315",
-    "createdTime": 1700002705098,
-    "modifiedTime": 1715716931859,
+    "createdTime": 1715715837615,
+    "modifiedTime": 1715716730512,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!DB3dv9M92Bg6qQyS"
+  "_key": "!items!fswfigCSXH0vfRAm"
 }
