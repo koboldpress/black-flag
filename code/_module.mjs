@@ -62,6 +62,10 @@ Hooks.once("setup", function () {
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
 	applications.registerSheets(JournalEntryPage);
+	DocumentSheetConfig.registerSheet(JournalEntry, "black-flag", applications.journal.BlackFlagJournalSheet, {
+		makeDefault: true,
+		label: "BF.Sheet.Default.Journal"
+	});
 
 	// Apply custom item compendium
 	game.packs
@@ -75,5 +79,6 @@ Hooks.once("ready", function () {
 });
 
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));
+Hooks.on("renderJournalPageSheet", applications.journal.BlackFlagJournalSheet.onRenderJournalPageSheet);
 
 export { applications, config, data, documents, settings, utils };
