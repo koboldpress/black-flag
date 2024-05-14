@@ -360,6 +360,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 			prepared.push(
 				...advancement.configuration.pool.map(async d => {
 					const doc = features.get(d.uuid);
+					if (!doc) return;
+					const levels = doc.system.advancement?.byType("scaleValue")[0]?.levels ?? [];
+					if (!levels.includes(level)) levels.unshift(level);
 					return {
 						level,
 						document,
@@ -369,7 +372,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 							secrets: false,
 							async: true
 						}),
-						tag: makeTag(level)
+						tag: makeTag(levels)
 					};
 				})
 			);
