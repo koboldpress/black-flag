@@ -5,10 +5,10 @@
 	</span>
 	<select name="configuration.spell.origin">
 		<option value=""></option>
-		<optgroup label="clsss">
+		<optgroup label="{{ localize 'BF.Item.Type.Class[other]' }}">
 			{{ selectOptions CONFIG.registration.all.class selected=configuration.spell.origin labelAttr="name" }}
 		</optgroup>
-		<optgroup label="sbclsss">
+		<optgroup label="{{ localize 'BF.Item.Type.Subclass[other]' }}">
 			{{ selectOptions CONFIG.registration.all.subclass selected=configuration.spell.origin labelAttr="name" }}
 		</optgroup>
 	</select>
