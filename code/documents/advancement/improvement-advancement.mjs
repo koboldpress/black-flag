@@ -126,15 +126,6 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Editing Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.type).length;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
