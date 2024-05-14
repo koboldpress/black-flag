@@ -2,6 +2,7 @@
  * Dialog for choosing ability assignment mode and performing the assignment.
  */
 export default class AbilityAssignmentDialog extends DocumentSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "ability-assignment-dialog"],
@@ -18,6 +19,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		return game.i18n.localize("BF.AbilityAssignment.Label");
 	}
@@ -26,6 +28,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
@@ -44,8 +47,8 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 				this.getStandardArrayManualData(context);
 				break;
 		}
-		context.allowManualAssignment = game.settings.get(game.system.id, "abilitySelectionManual");
-		context.allowRerolls = game.settings.get(game.system.id, "abilitySelectionReroll");
+		context.allowManualAssignment = game.settings.get(game.system.id, "abilitySelectionManual") || game.user.isGM;
+		context.allowRerolls = game.settings.get(game.system.id, "abilitySelectionReroll") || game.user.isGM;
 		return context;
 	}
 
@@ -172,6 +175,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -333,6 +337,7 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		await this.document.update(formData);
 	}

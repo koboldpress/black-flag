@@ -2,43 +2,52 @@
 	<form>
 		<section class="leveling">
 			<fieldset>
-				<legend>{{localize "BF.Progression.Label"}}</legend>
+				<legend>{{ localize "BF.Progression.Label" }}</legend>
 				<div class="wrapper">
 					<span class="current-level">
 						{{#if system.progression.level}}
-							{{localize "BF.Level.Specific" level=(blackFlag-number system.progression.level)}}
+							{{ localize "BF.Level.Specific" level=(blackFlag-number system.progression.level) }}
 						{{else}}
-							{{localize "BF.Level.None"}}
+							{{ localize "BF.Level.None" }}
 						{{/if}}
 					</span>
 					{{#unless (eq system.progression.level CONFIG.maxLevel)}}
 						<a data-action="progression" data-sub-action="level-up">
-							<i class="fa-solid fa-arrow-up-wide-short"></i>
-							{{localize "BF.Progression.Action.LevelUp.Label"}}
+							<i class="fa-solid fa-arrow-up-wide-short" inert></i>
+							{{ localize "BF.Progression.Action.LevelUp.Label" }}
 						</a>
 					{{/unless}}
-					{{#if displayXPBar}}<blackFlag-xpBar>{{/if}}
+					{{#if displayXPBar}}<blackFlag-xpBar></blackFlag-xpBar>{{/if}}
 				</div>
 			</fieldset>
 		</section>
 		<section class="details">
 			<fieldset class="ability-selection">
 				<legend>
-					{{localize "BF.Ability.Label[other]"}}
-					{{blackFlag-notificationBadge actor key="no-abilities" displayOrder=true}}
+					{{ localize "BF.Ability.Label[other]" }}
+					{{ blackFlag-notificationBadge actor key="no-abilities" displayOrder=true }}
 				</legend>
 				{{#if system.progression.abilities.assignmentComplete}}
 					{{#with (lookup CONFIG.abilityAssignment.methods system.progression.abilities.method) as |method|}}
 						<figure class="icon">
-							<img src="{{method.icon}}">
+							<img src="{{ method.icon }}">
 						</figure>
 						<span>
-							{{localize (lookup method "label")}}
+							{{ localize (lookup method "label") }}
 						</span>
 					{{/with}}
+					{{#if canResetAbilityAssignment}}
+						<button type="button" class="link-button" data-action="progression" data-sub-action="reset-abilities"
+						        data-tooltip="BF.AbilityAssignment.Action.Reset"
+										aria-label="{{ localize 'BF.AbilityAssignment.Action.Reset' }}">
+							<i class="fa-solid fa-clock-rotate-left" inert></i>
+						</button>
+					{{/if}}
 				{{else}}
 					<span>
-						<a data-action="progression" data-sub-action="assign-abilities">Assign</a>
+						<button type="button" class="link-button" data-action="progression" data-sub-action="assign-abilities">
+							{{ localize "BF.AbilityAssignment.Action.Assign" }}
+						</button>
 					</span>
 				{{/if}}
 			</fieldset>

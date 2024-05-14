@@ -25,6 +25,7 @@ export default class PCData extends ActorDataModel.mixin(
 	SpellcastingTemplate,
 	TraitsTemplate
 ) {
+	/** @override */
 	static metadata = {
 		type: "pc",
 		category: "person",
@@ -38,6 +39,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(
@@ -855,6 +857,19 @@ export default class PCData extends ActorDataModel.mixin(
 			]);
 
 		// TODO: Remove any spells that were learned at the previous level
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Remove any progression data from ability scores.
+	 */
+	async resetAbilities() {
+		const updates = Object.keys(CONFIG.BlackFlag.abilities).reduce((obj, key) => {
+			obj[`system.abilities.${key}.base`] = null;
+			return obj;
+		}, {});
+		await this.parent.update(updates);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

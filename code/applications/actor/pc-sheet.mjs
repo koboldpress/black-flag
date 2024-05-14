@@ -40,7 +40,6 @@ export default class PCSheet extends BaseActorSheet {
 
 	/** @override */
 	modes = {
-		conditionAdd: false,
 		editing: false,
 		progression: false
 	};
@@ -55,6 +54,8 @@ export default class PCSheet extends BaseActorSheet {
 
 		if (this.modes.progression) this.prepareProgression(context);
 
+		context.canResetAbilityAssignment =
+			context.editable && (game.settings.get("black-flag", "abilitySelectionManual") || game.user.isGM);
 		context.displayXPBar = game.settings.get(game.system.id, "levelingMode") === "xp";
 		context.luckPoints = Array.fromRange(CONFIG.BlackFlag.luck.max, 1).map(l => ({
 			selected: context.system.attributes.luck.value >= l
@@ -168,6 +169,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async prepareTraits(context) {
 		context.traits = [];
 		const { traits, proficiencies } = context.system;
@@ -292,6 +294,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _render(force, options) {
 		await super._render(force, options);
 		if (this._state !== Application.RENDER_STATES.RENDERED || !this.modes.progression) return;
@@ -311,6 +314,7 @@ export default class PCSheet extends BaseActorSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onAction(event, dataset) {
 		const { action, subAction, ...properties } = dataset ?? event.currentTarget.dataset;
 		switch (action) {
@@ -349,6 +353,9 @@ export default class PCSheet extends BaseActorSheet {
 							}
 						}
 						properties.type = "class";
+					case "reset-abilities":
+						await this.actor.system.resetAbilities();
+						return new AbilityAssignmentDialog(this.actor).render(true);
 					case "select":
 						if (!properties.type) return;
 						const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
@@ -363,6 +370,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 		updates.img ??= this.element[0].querySelector('[data-edit="img"]')?.src;
@@ -384,6 +392,7 @@ export default class PCSheet extends BaseActorSheet {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _onDropItem(event, data) {
 		if (!this.actor.isOwner) return false;
 		const item = await Item.implementation.fromDropData(data);
@@ -398,6 +407,7 @@ export default class PCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _onDropFolder(event, data) {
 		if (!this.actor.isOwner) return [];
 		const folder = await Folder.implementation.fromDropData(data);
