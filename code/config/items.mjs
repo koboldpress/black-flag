@@ -68,6 +68,7 @@ export const featureCategories = {
 	},
 	lineage: {
 		localization: "BF.Feature.Category.Lineage",
+		sources: ["lineage"],
 		children: {
 			naturalAdaptation: {
 				localization: "BF.Feature.Type.NaturalAdaptation"
@@ -75,7 +76,8 @@ export const featureCategories = {
 		}
 	},
 	heritage: {
-		localization: "BF.Feature.Category.Heritage"
+		localization: "BF.Feature.Category.Heritage",
+		sources: ["heritage"]
 	},
 	monsters: {
 		localization: "BF.Feature.Category.Monster"
