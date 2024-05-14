@@ -28,6 +28,13 @@ export const consumableProperties = ["magical"];
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * @typedef {NestedTypeConfiguration} FeatureCategoryConfiguration
+ * @property {number} [level] - Fixed level at which this feature will be gained.
+ * @property {string[]} [sources] - If set, source identifier from these categories will be listed.
+ * @property {Record<string, FeatureCategoryConfiguration>} [children] - Nested children.
+ */
+
+/**
  * Classifications of feature items (e.g. Class Feature, Heritage Trait) and any types available within that
  * category (e.g. Channel Divinity, Martial Action).
  * @enum {NestedTypeConfiguration}
@@ -35,15 +42,21 @@ export const consumableProperties = ["magical"];
 export const featureCategories = {
 	class: {
 		localization: "BF.Feature.Category.Class",
+		sources: ["class", "subclass"],
 		children: {
 			channelDivinity: {
-				localization: "BF.Feature.Type.ChannelDivinity"
+				localization: "BF.Feature.Type.ChannelDivinity",
+				sources: ["class", "subclass"]
 			},
 			epicBoon: {
-				localization: "BF.Feature.Type.EpicBoon"
+				localization: "BF.Feature.Type.EpicBoon",
+				level: 20,
+				sources: ["class"]
 			},
 			heroicBoon: {
-				localization: "BF.Feature.Type.HeroicBoon"
+				localization: "BF.Feature.Type.HeroicBoon",
+				level: 10,
+				sources: ["class"]
 			},
 			martialAction: {
 				localization: "BF.Feature.Type.MartialAction"

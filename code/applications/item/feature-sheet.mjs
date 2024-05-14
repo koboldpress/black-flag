@@ -31,21 +31,36 @@ export default class FeatureSheet extends BaseItemSheet {
 
 		context.advancement = AdvancementElement.prepareContext(this.item.system.advancement);
 		context.effects = EffectsElement.prepareContext(this.item.effects);
+		context.type = {};
 
 		if (this.document.type === "feature") {
-			context.featureCategories = CONFIG.BlackFlag.featureCategories.localized;
+			context.type.categories = CONFIG.BlackFlag.featureCategories.localized;
+
 			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
+			const id = new Set([context.system.identifier.associated]);
+			if (featureCategory?.sources)
+				context.type.categorySources = CONFIG.BlackFlag.registration.groupedOptions(featureCategory.sources, id);
+			const featureType = featureCategory?.children?.[context.system.type.value];
+			if (featureType?.sources)
+				context.type.typeSources = CONFIG.BlackFlag.registration.groupedOptions(featureType.sources, id);
+
 			if (
 				(featureCategory && ["class", "lineage", "heritage"].includes(context.system.type.category)) ||
 				featureCategory?.children
-			)
-				context.featureTypes = {
+			) {
+				context.type.types = {
 					label: game.i18n.format("BF.Feature.Type.LabelSpecific", {
 						type: game.i18n.localize(`${featureCategory.localization}[one]`)
 					}),
 					options: featureCategory?.children?.localized ?? null,
 					selected: context.system.type.value || context.system.identifier.associated
 				};
+			}
+
+			if (context.system.type.category === "class") {
+				context.type.displayLevel = true;
+				context.type.fixedLevel = featureType?.level;
+			}
 		} else if (this.document.type === "talent") {
 			context.talentCategories = CONFIG.BlackFlag.talentCategories.localized;
 		}
@@ -86,16 +101,27 @@ export default class FeatureSheet extends BaseItemSheet {
 		const update = foundry.utils.expandObject(formData);
 
 		// Figure out where to save the value of Feature Type
-		const type = foundry.utils.getProperty(update, "system.type.value");
-		if (type && this.document.type === "feature") {
-			const category = foundry.utils.getProperty(update, "system.type.category") ?? this.document.system.type.category;
-			const featureTypes = CONFIG.BlackFlag.featureCategories[category]?.children ?? {};
-			if (!(type in featureTypes)) {
-				foundry.utils.setProperty(update, "system.identifier.associated", type);
+		if (this.document.type === "feature") {
+			const category = foundry.utils.getProperty(update, "system.type.category");
+			const type = foundry.utils.getProperty(update, "system.type.value");
+			let identifier = foundry.utils.getProperty(update, "system.identifier.associated");
+			const categoryConfig = CONFIG.BlackFlag.featureCategories[category];
+			const typeConfig = categoryConfig?.children?.[type];
+
+			// If no type config, set type to blank
+			if (!typeConfig) {
+				identifier ??= type;
 				foundry.utils.setProperty(update, "system.type.value", "");
-			} else {
-				foundry.utils.setProperty(update, "system.identifier.associated", "");
 			}
+
+			const validSources = CONFIG.BlackFlag.registration.groupedOptions(
+				new Set([...(categoryConfig?.sources ?? []), ...(typeConfig?.sources ?? [])])
+			);
+			foundry.utils.setProperty(
+				update,
+				"system.identifier.associated",
+				validSources.set.has(identifier) ? identifier : ""
+			);
 		}
 
 		super._updateObject(event, foundry.utils.flattenObject(update));

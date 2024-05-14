@@ -1,3 +1,4 @@
+import SelectChoices from "../documents/select-choices.mjs";
 import { sortObjectEntries } from "../utils/object.mjs";
 import log from "../utils/logging.mjs";
 import { slugify } from "../utils/text.mjs";
@@ -67,6 +68,30 @@ export function getSource(type, identifier) {
 	return registration
 		? registration.cached ?? fromUuid(registration.sources[registration.sources.length - 1])
 		: undefined;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Create a nested list of options for one or more types of registered items.
+ * @param {string[]|Set<string>} types - Item types to represent.
+ * @param {Set<string>} [chosen] - Item to be marked as chosen.
+ * @returns {SelectChoices}
+ */
+export function groupedOptions(types, chosen) {
+	return new SelectChoices(
+		types.reduce((obj, type) => {
+			obj[type] = {
+				label: CONFIG.Item.typeLabelsPlural[type],
+				children: Object.entries(list(type)).reduce((o, [k, v]) => {
+					o[k] = { label: v.name };
+					return o;
+				}, {})
+			};
+			return obj;
+		}, {}),
+		chosen
+	);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

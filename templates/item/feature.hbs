@@ -22,44 +22,38 @@
 					<label>
 						<span>{{ localize "BF.Feature.Category.Label" }}</span>
 						<select name="system.type.category">
-							{{ selectOptions featureCategories selected=system.type.category blank="" }}
+							{{ selectOptions type.categories selected=system.type.category blank="" }}
 						</select>
 					</label>
-					{{#if featureTypes}}
+					{{#if type.types}}
 						<label>
 							<span>{{ localize "BF.Feature.Type.Label" }}</span>
 							<select name="system.type.value">
-								{{#select featureTypes.selected}}
-									<option value=""></option>
-									{{#if (eq system.type.category "class")}}
-										<optgroup label="{{ localize 'BF.Item.Type.Class[other]' }}">
-											{{ selectOptions CONFIG.registration.all.class labelAttr="name" }}
-										</optgroup>
-										<optgroup label="{{ localize 'BF.Item.Type.Subclass[other]' }}">
-											{{ selectOptions CONFIG.registration.all.subclass labelAttr="name" }}
-										</optgroup>
-									{{else if (eq system.type.category "lineage")}}
-										<optgroup label="{{ localize 'BF.Item.Type.Lineage[other]' }}">
-											{{ selectOptions CONFIG.registration.all.lineage labelAttr="name" }}
-										</optgroup>
-									{{else if (eq system.type.category "heritage")}}
-										<optgroup label="{{ localize 'BF.Item.Type.Heritage[other]' }}">
-											{{ selectOptions CONFIG.registration.all.heritage labelAttr="name" }}
-										</optgroup>
-									{{/if}}
-									{{#if featureTypes.options}}
-										<optgroup label="{{ featureTypes.label }}">
-											{{ selectOptions featureTypes.options }}
-										</optgroup>
-									{{/if}}
-								{{/select}}
+								<option value=""></option>
+								{{#if type.categorySources}}
+								  {{ blackFlag-groupedSelectOptions type.categorySources }}
+								{{/if}}
+								{{#if type.types.options}}
+									<optgroup label="{{ type.types.label }}">
+										{{ selectOptions type.types.options selected=system.type.value }}
+									</optgroup>
+								{{/if}}
 							</select>
 						</label>
 					{{/if}}
-					{{#if (eq system.type.category "class")}}
+					{{#if type.typeSources}}
+						<label>
+							<span>{{ localize "BF.Feature.Source" }}</span>
+							<select name="system.identifier.associated">
+								{{ blackFlag-groupedSelectOptions type.typeSources blank="" }}
+							</select>
+						</label>
+					{{/if}}
+					{{#if type.displayLevel}}
 						<label>
 							<span>{{ localize "BF.Level.Label[one]" }}</span>
-							<input type="number" name="system.level.value" value="{{ system.level.value }}">
+							<input type="number" name="system.level.value" {{#if type.fixedLevel}}value="
+							       {{~ type.fixedLevel }}" disabled {{~else~}} value="{{ system.level.value }}"{{/if}}>
 						</label>
 					{{/if}}
 				</div>
