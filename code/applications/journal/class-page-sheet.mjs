@@ -90,6 +90,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _prefetchFeatures(items, subfeatures = true) {
 		const uuidsToFetch = items
+			.filter(i => i)
 			.map(i => {
 				const advancements = i.system.advancement
 					?.byType("grantFeatures")
@@ -344,12 +345,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {object[]}   Prepared features.
 	 */
 	async _getFeatures(item, { features }) {
-		const makeTag = level =>
-			game.i18n.format("BF.Feature.Tag", {
-				level: numberFormat(level, { ordinal: true }),
+		const makeTag = levels => {
+			if (foundry.utils.getType(levels) !== "Array") levels = [levels];
+			return game.i18n.format("BF.Feature.Tag", {
+				level: game.i18n.getListFormatter({ type: "unit" }).format(levels.map(l => numberFormat(l, { ordinal: true }))),
 				owner: item.name,
 				type: game.i18n.localize("BF.Item.Type.Feature[one]")
 			});
+		};
 
 		let prepared = [];
 		for (const advancement of item.system.advancement.byType("grantFeatures")) {
@@ -372,13 +375,15 @@ export default class ClassPageSheet extends JournalPageSheet {
 			);
 		}
 
-		for (const advancement of item.system.advancement.byType("improvement")) {
+		if (item.system.advancement.byType("improvement").length) {
+			const levels = item.system.advancement.byType("improvement").map(a => a.level.value);
+			const first = item.system.advancement.byType("improvement")[0];
 			prepared.push({
-				level: advancement.level.value,
-				name: advancement.titleForLevel(),
-				document: advancement,
-				description: advancement.journalSummary(),
-				tag: makeTag(advancement.level.value)
+				level: first.level.value,
+				name: first.titleForLevel(),
+				document: first,
+				description: first.journalSummary(),
+				tag: makeTag(levels)
 			});
 		}
 
@@ -422,19 +427,21 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 */
 	async _getSubclasses(subclasses, { features }) {
 		return await Promise.all(
-			subclasses.map(async document => {
-				return {
-					document,
-					name: document.name,
-					description: await TextEditor.enrichHTML(document.system.description.value, {
-						relativeTo: document,
-						secrets: false,
-						async: true
-					}),
-					features: await this._getFeatures(document, { features }),
-					table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
-				};
-			})
+			subclasses
+				.filter(s => s)
+				.map(async document => {
+					return {
+						document,
+						name: document.name,
+						description: await TextEditor.enrichHTML(document.system.description.value, {
+							relativeTo: document,
+							secrets: false,
+							async: true
+						}),
+						features: await this._getFeatures(document, { features }),
+						table: await this._getTable(document, { features, initialLevel: CONFIG.BlackFlag.subclassLevel })
+					};
+				})
 		);
 	}
 
