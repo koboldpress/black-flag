@@ -1,0 +1,88 @@
+{
+  "folder": "Qp6iGMULneOQXi2M",
+  "name": "Holy Strike",
+  "type": "feature",
+  "_id": "UYss9JXHVrnUX9ol",
+  "img": "icons/skills/targeting/crosshair-triple-strike-orange.webp",
+  "system": {
+    "activities": {
+      "CO1Zu3tyKNjJD960": {
+        "type": "utility",
+        "_id": "CO1Zu3tyKNjJD960",
+        "description": "",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you successfully hit a creature with a weapon or spell attack made with a Divine spell"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "turn",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Once per turn, when you successfully hit a creature with a weapon or spell attack made with a Divine spell, you can treat the attack as if you rolled a critical hit.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "identifier": {
+      "associated": "war-domain"
+    },
+    "level": {
+      "value": 15
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715662257811,
+    "modifiedTime": 1715662441173,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!UYss9JXHVrnUX9ol"
+}

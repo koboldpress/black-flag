@@ -12,10 +12,16 @@
         "configuration": {
           "mode": "default",
           "grants": [
-            "armor:heavy",
-            "weapons:martial"
+            "armor:heavy"
           ],
-          "choices": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "weapons:martial:*"
+              ]
+            }
+          ],
           "choiceMode": "inclusive"
         },
         "level": {
@@ -25,13 +31,13 @@
         "flags": {},
         "title": "Manifest Might",
         "icon": "",
-        "hint": "You gain proficiency with heavy armor and martial weapons.",
-        "selectedIndex": "-1",
+        "hint": "You gain proficiency with heavy armor and one type of martial weapon of your choice.",
+        "selectedIndex": "0",
         "selectedTrait": "weapons"
       }
     },
     "description": {
-      "value": "<p>You gain proficiency with heavy armor and martial weapons. Additionally, you gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal additional radiant or necrotic damage (your choice) equal to your PB.</p>",
+      "value": "<p>You gain proficiency with heavy armor and one type of martial weapon of your choice. In addition, you gain the ability to infuse your weapon strikes with divine energy: once per turn, when you hit a creature with a weapon attack, you can deal additional radiant or necrotic damage (your choice) equal to your PB.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -51,7 +57,46 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "1",
+      "recovery": [
+        {
+          "period": "turn",
+          "type": "recoverAll"
+        }
+      ]
+    },
+    "activities": {
+      "SAUAl6ZvOK31DodS": {
+        "type": "utility",
+        "_id": "SAUAl6ZvOK31DodS",
+        "description": "<p>When you hit a creature with a weapon attack, you can deal additional [[/damage @prof radiant]] or [[/damage @prof necrotic]] damage (your choice).</p>",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": "When you hit a creature with a weapon attack"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -62,10 +107,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.012",
+    "systemVersion": "0.9.026",
     "coreVersion": "11.315",
     "createdTime": 1700006010811,
-    "modifiedTime": 1707431064043,
+    "modifiedTime": 1715659987994,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!E8rMSrbtxoIHhY8a"

@@ -1,0 +1,89 @@
+{
+  "folder": "6kQTbZ8pyM8HRWZg",
+  "name": "Divine Intervention",
+  "type": "feature",
+  "_id": "xEcxPGGFVlyq4e6G",
+  "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
+  "system": {
+    "activities": {
+      "j4qEHCuBQRmwUK7l": {
+        "type": "utility",
+        "_id": "j4qEHCuBQRmwUK7l",
+        "description": "<p>You request aid from your deity by rolling [[/roll 1d20 + @prof target=20]]. If the result is 19 or lower, your request fails, and your deity doesn't intervene. If the result is 20 or higher, your deity intervenes on your behalf, imbuing you with a fraction of their power.</p>",
+        "system": {},
+        "activation": {
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You can call on your deity to intervene on your behalf when your need is great. At the start of your turn, you can request aid from your deity by rolling a d20 and adding your PB. If the result is 19 or lower, your request fails, and your deity doesn't intervene. If the result is 20 or higher, your deity intervenes on your behalf, imbuing you with a fraction of their power.</p><p>If your deity intervenes, you can immediately use your action to cast any spell with a casting time of 1 action from the Divine spell list or your domain spell list, regardless of preparation rules. Casting a spell in this way doesn't expend a spell slot and doesn’t require material components. If the spell is of a higher circle than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC for this check equals 10 + the spell’s circle. On a failed check, the spell fails, your deity’s power fades, and your action is lost.</p><p>Alternatively, on a successful intervention, your GM can propose the form of the intervention. Anything that replicates the effects of a Divine spell is appropriate. In this instance, you still use your action but don’t cast a spell. You have final say on allowing the GM to pursue this option or choosing your own spell.</p><p>If your deity intervenes, you can’t use this feature again for 1 week. Otherwise, you can use it again after you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "identifier": {
+      "associated": "cleric"
+    },
+    "level": {
+      "value": 9
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715659557155,
+    "modifiedTime": 1715660462122,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!xEcxPGGFVlyq4e6G"
+}

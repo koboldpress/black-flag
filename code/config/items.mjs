@@ -39,6 +39,12 @@ export const featureCategories = {
 			channelDivinity: {
 				localization: "BF.Feature.Type.ChannelDivinity"
 			},
+			epicBoon: {
+				localization: "BF.Feature.Type.EpicBoon"
+			},
+			heroicBoon: {
+				localization: "BF.Feature.Type.HeroicBoon"
+			},
 			martialAction: {
 				localization: "BF.Feature.Type.MartialAction"
 			},

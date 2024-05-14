@@ -1,0 +1,121 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Mass Cure Wounds",
+  "type": "spell",
+  "_id": "qGHh25GoYwwQ13NO",
+  "img": "icons/magic/life/cross-beam-green.webp",
+  "system": {
+    "activities": {
+      "dx4HigaA6d2wa3oJ": {
+        "type": "healing",
+        "_id": "dx4HigaA6d2wa3oJ",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": "8",
+            "bonus": "@mod",
+            "custom": "",
+            "number": 3
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A wave of healing energy washes out from a point of your choice within range. Choose up to six creatures in a 30-foot-radius sphere centered on that point. Each target regains hit points equal to [[/healing]]{3d8 + your spellcasting ability modifier}. This spell has no effect on Constructs or Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the healing increases by 1d8 for each slot above 5th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "sphere",
+        "size": "30"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "6"
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "necromancy"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715663481733,
+    "modifiedTime": 1715663604146,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!qGHh25GoYwwQ13NO"
+}

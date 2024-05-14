@@ -1,0 +1,120 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Greater Restoration",
+  "type": "spell",
+  "_id": "ZTVg00JolCuPkOOX",
+  "img": "icons/magic/life/ankh-gold-blue.webp",
+  "system": {
+    "activities": {
+      "B6qi8WjoZyRHqLy6": {
+        "type": "healing",
+        "_id": "B6qi8WjoZyRHqLy6",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": "",
+            "bonus": "",
+            "custom": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You imbue a creature you touch with positive energy to undo a debilitating effect. You can reduce the target’s exhaustion level by one or end one of the following effects on the target:</p><ul><li><p>One effect that charmed or petrified the target</p></li><li><p>One curse, including the target’s attunement to a cursed magic item</p></li><li><p>Any reduction to one of the target’s ability scores</p></li><li><p>One effect reducing the target’s hit point maximum</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 100,
+        "denomination": "gp",
+        "description": "diamond dust worth at least 100 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "range": {
+      "units": "touch"
+    },
+    "school": "abjuration"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715663158366,
+    "modifiedTime": 1715663340277,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ZTVg00JolCuPkOOX"
+}

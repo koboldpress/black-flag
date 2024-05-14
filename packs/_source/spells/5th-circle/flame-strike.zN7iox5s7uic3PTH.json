@@ -1,0 +1,137 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Flame Strike",
+  "type": "spell",
+  "_id": "zN7iox5s7uic3PTH",
+  "img": "icons/magic/fire/beam-jet-stream-yellow.webp",
+  "system": {
+    "activities": {
+      "vA1Fvg0oFBHhiW3F": {
+        "type": "savingThrow",
+        "_id": "vA1Fvg0oFBHhiW3F",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 4,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "fire"
+              },
+              {
+                "number": 4,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "radiant"
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a [[/save]] save. A creature takes [[/damage]]{4d6 fire damage and 4d6 radiant} damage on a failed save, or half as much damage on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot above 5th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a pinch of sulfur"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "cylinder",
+        "size": "10",
+        "height": "40"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.026",
+    "coreVersion": "11.315",
+    "createdTime": 1715663328122,
+    "modifiedTime": 1715663643706,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!zN7iox5s7uic3PTH"
+}
