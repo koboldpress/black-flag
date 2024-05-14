@@ -203,6 +203,12 @@ export const scaleDiceSizes = [2, 3, 4, 6, 8, 10, 12, 20, 100];
  */
 export const subclassLevel = 3;
 
+/**
+ * Levels at which subclasses grant features by default.
+ * @type {number[]}
+ */
+export const subclassFeatureLevels = [3, 7, 11, 15];
+
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**

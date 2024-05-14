@@ -211,9 +211,6 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const rows = [];
 		for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel - initialLevel + 1, initialLevel)) {
 			const features = {};
-			if (item.type === "class" && level === CONFIG.BlackFlag.subclassLevel) {
-				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
-			}
 
 			for (const advancement of item.system.advancement.byLevel(level)) {
 				switch (advancement.constructor.typeName) {
@@ -236,8 +233,14 @@ export default class ClassPageSheet extends JournalPageSheet {
 				features[uuid].innerHTML += ` (${game.i18n.getListFormatter({ type: "unit" }).format(values)})`;
 			}
 
+			if (item.type === "class" && level === CONFIG.BlackFlag.subclassLevel) {
+				features.subclass = game.i18n.format("BF.Subclass.LabelSpecific", { class: item.name });
+			} else if (item.type === "class" && CONFIG.BlackFlag.subclassFeatureLevels.includes(level)) {
+				features.subclass = game.i18n.localize("BF.Feature.Category.Subclass[one]");
+			}
+
 			// Level & proficiency bonus
-			const cells = [{ class: "level", content: level.ordinalString() }]; // TODO: Use proper ordinal localization
+			const cells = [{ class: "level", content: numberFormat(level, { ordinal: true }) }];
 			if (item.type === "class") cells.push({ class: "prof", content: `+${Proficiency.calculateMod(level)}` });
 			if (hasFeatures)
 				cells.push({
@@ -348,7 +351,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const makeTag = levels => {
 			if (foundry.utils.getType(levels) !== "Array") levels = [levels];
 			return game.i18n.format("BF.Feature.Tag", {
-				level: game.i18n.getListFormatter({ type: "unit" }).format(levels.map(l => numberFormat(l, { ordinal: true }))),
+				level: game.i18n.getListFormatter().format(levels.map(l => numberFormat(l, { ordinal: true }))),
 				owner: item.name,
 				type: game.i18n.localize("BF.Item.Type.Feature[one]")
 			});
@@ -401,7 +404,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 							async: true
 						})
 					: game.i18n.localize("BF.JournalPage.Class.Subclass.AdvancementDescription.Placeholder"),
-				tag: makeTag(CONFIG.BlackFlag.subclassLevel)
+				tag: makeTag(CONFIG.BlackFlag.subclassFeatureLevels)
 			});
 
 		if (item.type === "subclass") {
