@@ -2,6 +2,7 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
+import PropertiesTemplate from "./templates/properties-template.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 
@@ -10,8 +11,14 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {ActivitiesTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
+ * @mixes {PropertiesTemplate}
  */
-export default class GearData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate, PhysicalTemplate) {
+export default class GearData extends ItemDataModel.mixin(
+	ActivitiesTemplate,
+	DescriptionTemplate,
+	PhysicalTemplate,
+	PropertiesTemplate
+) {
 	/** @inheritDoc */
 	static get metadata() {
 		return {

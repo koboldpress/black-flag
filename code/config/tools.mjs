@@ -112,3 +112,11 @@ localizeConfig(tools.artisan.children);
 localizeConfig(tools.gaming.children);
 localizeConfig(tools.musicalInstrument.children);
 localizeConfig(tools.vehicle.children);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Properties that can be applied to tools.
+ * @type {string[]}
+ */
+export const toolProperties = ["magical"];

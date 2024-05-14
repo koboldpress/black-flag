@@ -1,4 +1,4 @@
-import { getPluralRules, numberFormat, stepDenomination } from "../../utils/_module.mjs";
+import { numberFormat, stepDenomination } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";

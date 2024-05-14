@@ -8,6 +8,10 @@ const { BooleanField, SchemaField } = foundry.data.fields;
 
 /**
  * Data definition for Talent items.
+ * @mixes {ActivityTemplate}
+ * @mixes {AdvancementTemplate}
+ * @mixes {DescriptionTemplate}
+ * @mixes {FeatureTemplate}
  */
 export default class TalentData extends ItemDataModel.mixin(
 	ActivityTemplate,

@@ -1,6 +1,5 @@
 import { filter, numberFormat } from "../../../utils/_module.mjs";
 import FilterField from "../../fields/filter-field.mjs";
-import IdentifierField from "../../fields/identifier-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 

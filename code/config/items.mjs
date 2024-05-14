@@ -20,6 +20,14 @@ localizeConfig(consumableCategories);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Properties that can be applied to consumables.
+ * @type {string[]}
+ */
+export const consumableProperties = ["magical"];
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Classifications of feature items (e.g. Class Feature, Heritage Trait) and any types available within that
  * category (e.g. Channel Divinity, Martial Action).
  * @enum {NestedTypeConfiguration}
@@ -112,6 +120,14 @@ export const gearCategories = {
 localizeConfig(gearCategories);
 localizeConfig(gearCategories.clothing.children);
 localizeConfig(gearCategories.focus.children);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Properties that can be applied to gear.
+ * @type {string[]}
+ */
+export const gearProperties = ["magical"];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
