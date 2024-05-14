@@ -21,7 +21,7 @@
 								 {{ checked configuration.restriction.allowCantrips }}>
 				</label>
 			{{/if}}
-			{{#unless (eq configuration.restriction.circle 1)}}
+			{{#unless (eq configuration.restriction.circle 0)}}
 				<label class="full-checkbox">
 					<span>{{ localize "BF.Advancement.ChooseSpells.AllowRituals" }}</span>
 					<input type="checkbox" name="configuration.restriction.allowRituals"
