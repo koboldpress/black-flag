@@ -12,6 +12,10 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Tool category as defined in `CONFIG.BlackFlag.tools`.
+ * @property {string} type.base - Specific tool type defined as a child of its category.
  */
 export default class ToolData extends ItemDataModel.mixin(
 	ActivitiesTemplate,

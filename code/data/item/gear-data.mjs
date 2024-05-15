@@ -12,6 +12,10 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Gear category as defined in `CONFIG.BlackFlag.gearCategories`.
+ * @property {string} type.base - Specific gear type defined as a child of its category.
  */
 export default class GearData extends ItemDataModel.mixin(
 	ActivitiesTemplate,

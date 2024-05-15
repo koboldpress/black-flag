@@ -16,6 +16,20 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  * @mixes {ProficiencyTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.value - Is this a melee or a ranged weapon?
+ * @property {string} type.category - Weapon category as defined in `CONFIG.BlackFlag.weapons`.
+ * @property {string} type.base - Specific weapon type defined as a child of its category.
+ * @property {Set<string>} options - Weapon options that can be used with this weapon.
+ * @property {object} ammunition
+ * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
+ * @property {DamageField} damage - Base weapon damage.
+ * @property {object} range
+ * @property {number} range.short - Short range of the weapon.
+ * @property {number} range.long - Long range of the weapon.
+ * @property {number} range.reach - Additional reach of the weapon beyond the wielder's normal reach.
+ * @property {string} range.units - Units used to measure range and reach.
  */
 export default class WeaponData extends ItemDataModel.mixin(
 	ActivitiesTemplate,

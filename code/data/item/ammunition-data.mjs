@@ -10,6 +10,9 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Ammunition category as defined in `CONFIG.BlackFlag.ammunition`.
  */
 export default class AmmunitionData extends ItemDataModel.mixin(
 	DescriptionTemplate,

@@ -8,6 +8,9 @@ const { SchemaField, StringField } = foundry.data.fields;
  * Data definition for Sundry items.
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Sundry category as defined in `CONFIG.BlackFlag.sundryCategories`.
  */
 export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 	/** @inheritDoc */

@@ -5,7 +5,7 @@ import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Armor items.
@@ -13,6 +13,16 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {ProficiencyTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Armor category as defined in `CONFIG.BlackFlag.armor`.
+ * @property {string} type.base - Specific armor type defined as a child of its category.
+ * @property {object} armor
+ * @property {number} armor.value - Base armor class offered by this item.
+ * @property {number} armor.requiredStrength - Strength score required to wear this armor.
+ * @property {object} modifier
+ * @property {number} modifier.min - Minimum amount of modifier ability (usually DEX) that is contributed to AC.
+ * @property {number} modifier.max - Maximum amount of modifier ability (usually DEX) that is contributed to AC.
  */
 export default class ArmorData extends ItemDataModel.mixin(
 	DescriptionTemplate,
@@ -39,9 +49,6 @@ export default class ArmorData extends ItemDataModel.mixin(
 			type: new SchemaField({
 				category: new StringField({ label: "BF.Equipment.Category.Label" }),
 				base: new StringField({ label: "BF.Equipment.Base.Label" })
-			}),
-			properties: new SetField(new StringField(), {
-				label: "BF.Property.Label[other]"
 			}),
 			armor: new SchemaField({
 				value: new NumberField({ min: 0, integer: true, label: "BF.Armor.Value.Label" }),

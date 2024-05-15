@@ -12,6 +12,9 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} type
+ * @property {string} type.category - Consumable category as defined in `CONFIG.BlackFlag.consumableCategories`.
  */
 export default class ConsumableData extends ItemDataModel.mixin(
 	ActivitiesTemplate,

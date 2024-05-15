@@ -12,6 +12,15 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
+ *
+ * @property {object} capacity
+ * @property {number} capacity.count - Number if items that can be stored within.
+ * @property {object} capacity.volume
+ * @property {number} capacity.volume.value - Limit on the internal volume of the container.
+ * @property {string} capacity.volume.units - Units used to measure the volume.
+ * @property {object} capacity.weight
+ * @property {number} capacity.weight.value - Limit on the weight of the contained items.
+ * @property {string} capacity.weight.units - Units used to measure the weight.
  */
 export default class ContainerData extends ItemDataModel.mixin(
 	DescriptionTemplate,
