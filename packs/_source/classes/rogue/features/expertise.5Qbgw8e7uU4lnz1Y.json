@@ -12,7 +12,7 @@
         "configuration": {
           "choices": [
             {
-              "count": 1,
+              "count": 2,
               "pool": [
                 "skills:*",
                 "tools:thievesTools"
@@ -26,14 +26,45 @@
         "icon": "",
         "level": {
           "value": 1,
-          "classIdentifier": "rogue"
+          "classIdentifier": "rogue",
+          "classRestriction": ""
         },
+        "selectedIndex": "0",
+        "selectedTrait": "tools",
+        "hint": ""
+      },
+      "kvxICqpbp4cnuEnT": {
+        "type": "trait",
+        "configuration": {
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:*",
+                "tools:thievesTools"
+              ]
+            }
+          ],
+          "mode": "expertise",
+          "grants": [],
+          "choiceMode": "inclusive"
+        },
+        "title": "Expertise",
+        "icon": "",
+        "level": {
+          "value": 6,
+          "classIdentifier": "rogue",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "_id": "kvxICqpbp4cnuEnT",
+        "hint": "",
         "selectedIndex": "0",
         "selectedTrait": "tools"
       }
     },
     "description": {
-      "value": "<p>At 1st level, choose two of your skill proficiencies, or one of your skill proficiencies and your proficiency with thieves’ tools. Your PB is doubled for any ability check you make that uses either of the chosen proficiencies. Note that thieves’ tools are useful for disarming traps and required for opening locks.</p>",
+      "value": "<p>Choose two of your skill proficiencies, or one skill proficiency and one tool proficiency. Double your PB for any ability check you make that uses either of the chosen proficiencies.</p><p>At 6th level, choose two more of your proficiencies (any combination of skills or tools) to gain this benefit.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -57,17 +88,17 @@
     }
   },
   "effects": [],
-  "sort": 0,
+  "sort": 100000,
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.026",
     "coreVersion": "11.315",
     "createdTime": 1699045630380,
-    "modifiedTime": 1713204842227,
+    "modifiedTime": 1715740209199,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!5Qbgw8e7uU4lnz1Y"
