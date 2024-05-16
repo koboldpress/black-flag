@@ -12,7 +12,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @param {object} [fields={}] - Additional fields to add or, if value is `false`, default fields to remove.
  * @param {object} [options={}] - Additional options in addition to the default label.
  */
-export default class TargetField extends SchemaField {
+export default class DurationField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
 			value: new FormulaField({ deterministic: true, label: "BF.Duration.Value.Label" }),
