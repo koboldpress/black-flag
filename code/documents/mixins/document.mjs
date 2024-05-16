@@ -7,6 +7,7 @@ import BackportedEmbedMixin from "./embed.mjs";
  */
 export default Base =>
 	class extends BackportedEmbedMixin(Base) {
+		/** @inheritDoc */
 		static getDefaultArtwork(data = {}) {
 			const dataModel = CONFIG[this.metadata.name]?.dataModels[data.type];
 			const { img } = super.getDefaultArtwork(data);
@@ -17,6 +18,7 @@ export default Base =>
 		/*        Socket Event Handlers        */
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		async _preCreate(data, options, user) {
 			let allowed = await super._preCreate(data, options, user);
 			if (allowed !== false && game.release.generation < 12)
@@ -26,6 +28,7 @@ export default Base =>
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		async _preUpdate(changed, options, user) {
 			let allowed = await super._preUpdate(changed, options, user);
 			if (allowed !== false && game.release.generation < 12)
@@ -35,6 +38,7 @@ export default Base =>
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		async _preDelete(options, user) {
 			let allowed = await super._preDelete(options, user);
 			if (allowed !== false && game.release.generation < 12) allowed = await this.system._preDelete?.(options, user);
@@ -43,6 +47,7 @@ export default Base =>
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		_onCreate(data, options, userId) {
 			super._onCreate(data, options, userId);
 			if (game.release.generation < 12) this.system._onCreate?.(data, options, userId);
@@ -50,6 +55,7 @@ export default Base =>
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		_onUpdate(changed, options, userId) {
 			super._onUpdate(changed, options, userId);
 			if (game.release.generation < 12) this.system._onUpdate?.(changed, options, userId);
@@ -57,6 +63,7 @@ export default Base =>
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @inheritDoc */
 		_onDelete(options, userId) {
 			super._onDelete(options, userId);
 			if (game.release.generation < 12) this.system._onDelete?.(options, userId);
@@ -66,6 +73,7 @@ export default Base =>
 		/*       Importing and Exporting       */
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/** @override */
 		static async createDialog(data = {}, { parent = null, pack = null, ...options } = {}) {
 			const documentName = this.metadata.name;
 			const types = foundry.utils.deepClone(

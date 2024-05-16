@@ -64,7 +64,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 	/** @inheritDoc */
 	async close(options = {}) {
 		await super.close(options);
-		delete this.document.apps[this.appId];
+		this.document.constructor._unregisterApp(this.document, this);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,7 +83,7 @@ export default class PseudoDocumentSheet extends FormApplication {
 
 	/** @inheritDoc */
 	render(force = false, options = {}) {
-		this.document.apps[this.appId] = this;
+		this.document.constructor._registerApp(this.document, this);
 		return super.render(force, options);
 	}
 

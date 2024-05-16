@@ -11,27 +11,28 @@ export default Base =>
 		constructor(data, { parent = null, ...options } = {}) {
 			if (parent instanceof Item) parent = parent.system;
 			super(data, { parent, ...options });
-
-			/**
-			 * A collection of Application instances which should be re-rendered whenever this PseudoDocument is updated.
-			 * The keys of this object are the application ids and the values are Application instances. Each
-			 * Application in this object will have its render method called by {@link PseudoDocument#render}.
-			 * @type {[key: string]: Application}
-			 */
-			Object.defineProperty(this, "apps", {
-				value: {},
-				writable: false,
-				enumerable: false
-			});
-
-			/**
-			 * A cached reference to the FormApplication instance used to configure this PseudoDocument.
-			 */
-			Object.defineProperty(this, "_sheet", { value: null, writable: true, enumerable: false });
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/**
+		 * Mapping of PseudoDocument UUID to the apps they should re-render.
+		 * @type {Map<string, Set<string>>}
+		 * @internal
+		 */
+		static _apps = new Map();
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Existing sheets of a specific type for a specific document.
+		 * @type {Map<[PseudoDocument, typeof Application], Application>}
+		 */
+		static _sheets = new Map();
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
 		_initialize(options) {
 			super._initialize(options);
 			if (!game._documentsReady) return;
@@ -154,13 +155,14 @@ export default Base =>
 		 * @type {FormApplication|null}
 		 */
 		get sheet() {
-			if (!this._sheet) {
-				const cfg = CONFIG[this.documentName].types;
-				const cls = cfg[this.type]?.sheetClasses?.config ?? cfg[CONST.BASE_DOCUMENT_TYPE].sheetClasses.config;
-				if (!cls) return null;
-				this._sheet = new cls(this, { editable: this.item.isOwner });
+			const cfg = CONFIG[this.documentName].types;
+			const cls = cfg[this.type]?.sheetClasses?.config ?? cfg[CONST.BASE_DOCUMENT_TYPE].sheetClasses.config;
+			if (!cls) return null;
+			const def = `${this.uuid}!${cls.name}`;
+			if (!this.constructor._sheets.has(def)) {
+				this.constructor._sheets.set(def, new cls(this, { editable: this.item.isOwner }));
 			}
-			return this._sheet;
+			return this.constructor._sheets.get(def);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
@@ -168,8 +170,8 @@ export default Base =>
 		/**
 		 * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
 		 * @param {object} [options]
-		 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could be
-		 *                                            either a die term or a flat term.
+		 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could
+		 *                                            be either a die term or a flat term.
 		 * @returns {object}
 		 */
 		getRollData(options) {
@@ -205,11 +207,34 @@ export default Base =>
 		 * @param {object} [context={}] - Optional context
 		 */
 		render(force = false, context = {}) {
-			for (const app of Object.values(this.apps)) app.render(force, context);
+			for (const app of this.constructor._apps.get(this.uuid) ?? []) app.render(force, context);
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
 
+		/**
+		 * Register an application to respond to updates to a certain document.
+		 * @param {PseudoDocument} doc - Pseudo document to watch.
+		 * @param {Application} app - Application to update.
+		 * @internal
+		 */
+		static _registerApp(doc, app) {
+			if (!this._apps.has(doc.uuid)) this._apps.set(doc.uuid, new Set());
+			this._apps.get(doc.uuid).add(app);
+		}
+
+		/**
+		 * Remove an application from the render registry.
+		 * @param {PseudoDocument} doc - Pseudo document being watched.
+		 * @param {Application} app - Application to stop watching.
+		 */
+		static _unregisterApp(doc, app) {
+			this._apps.get(doc?.uuid)?.delete(app);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
 		async _buildEmbedHTML(config, options = {}) {
 			return this.toEmbedContents?.(config, options) ?? null;
 		}
