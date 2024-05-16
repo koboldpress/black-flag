@@ -1,4 +1,5 @@
 import { getPluralRules, makeLabel, numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
+import DurationField from "../fields/duration-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
@@ -96,8 +97,13 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				},
 				{ label: "BF.Consumption.Label" }
 			),
+			duration: new DurationField({
+				override: new BooleanField({ label: "BF.Duration.Override.Label" })
+			}),
 			range: new RangeField(),
-			target: new TargetField({ override: new BooleanField({ label: "BF.Target.Override.Label" }) }),
+			target: new TargetField({
+				override: new BooleanField({ label: "BF.Target.Override.Label" })
+			}),
 			uses: new UsesField({ consumeQuantity: false })
 		};
 	}
@@ -156,6 +162,17 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		this.setProperty("activation.condition", "system.casting.condition");
 		this.activation.type ??= "action";
 		this.activation.primary ??= true;
+
+		Object.defineProperty(this.duration, "canOverride", {
+			value: !!this.item.system.duration,
+			configurable: true,
+			enumerable: false
+		});
+		if (this.duration.canOverride && !this.duration.override) {
+			for (const [key, value] of Object.entries(this.item.system.duration)) {
+				foundry.utils.setProperty(this, `duration.${key}`, value);
+			}
+		}
 
 		Object.defineProperty(this.target, "canOverride", {
 			value: !!this.item.system.range && !!this.item.system.target,

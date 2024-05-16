@@ -1,0 +1,30 @@
+<fieldset class="duration">
+	<legend>{{ localize "BF.Duration.Label" }}</legend>
+	{{#if activity.duration.canOverride}}
+		<label class="full-checkbox">
+			<span>{{ localize "BF.Duration.Override.Label" }}</span>
+			<input type="checkbox" name="duration.override" {{ checked activity.duration.override }}>
+		</label>
+	{{/if}}
+	<div class="field-group">
+		<span>{{ localize "BF.Duration.Label" }}</span>
+		{{#if activity.duration.scalar}}
+			<label>
+				<span>{{ localize "BF.Duration.Value.Label" }}</span>
+				<input type="text" name="duration.value" value="{{ activity.duration.value }}">
+			</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.Duration.Type.Label" }}</span>
+			<select name="duration.units">
+				{{ blackFlag-groupedSelectOptions durationOptions }}
+			</select>
+		</label>
+	</div>
+	{{#if (eq activity.duration.units "special")}}
+		<label>
+			<span>{{ localize "BF.Duration.Special" }}</span>
+			<input type="text" name="duration.special" value="{{ activity.duration.special }}">
+		</label>
+	{{/if}}
+</fieldset>

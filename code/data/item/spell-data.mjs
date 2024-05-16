@@ -2,7 +2,7 @@ import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
-import FormulaField from "../fields/formula-field.mjs";
+import DurationField from "../fields/duration-field.mjs";
 import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
@@ -71,14 +71,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 				},
 				{ label: "BF.Spell.Component.Label" }
 			),
-			duration: new SchemaField(
-				{
-					value: new FormulaField({ deterministic: true, label: "BF.Duration.Value.Label" }),
-					units: new StringField({ initial: "instantaneous", label: "BF.Duration.Type.Label" }),
-					special: new StringField({ label: "BF.Duration.Special" })
-				},
-				{ label: "BF.Time.Duration.Label" }
-			),
+			duration: new DurationField(),
 			tags: new SetField(new StringField(), { label: "BF.Spell.Tag.Label" }),
 			range: new RangeField(),
 			target: new TargetField()
@@ -204,14 +197,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		Object.defineProperty(this.casting, "scalar", {
 			get() {
 				return this.type ? CONFIG.BlackFlag.activationOptions().get(this.type).scalar : false;
-			},
-			configurable: true,
-			enumerable: false
-		});
-
-		Object.defineProperty(this.duration, "scalar", {
-			get() {
-				return this.units ? CONFIG.BlackFlag.durationOptions().get(this.units).scalar : false;
 			},
 			configurable: true,
 			enumerable: false

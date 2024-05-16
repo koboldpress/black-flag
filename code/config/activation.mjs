@@ -4,7 +4,7 @@ import { timeUnits } from "./units.mjs";
 
 /**
  * Types of actions that can be used to activate features.
- * @enum {LabeledConfiguration}
+ * @enum {NestedTypeConfiguration}
  */
 export const actionTypes = {
 	standard: {
@@ -57,15 +57,21 @@ export function activationOptions({ categories, chosen, pluralRule } = {}) {
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
+/**
+ * Non-scalar durations that can be used.
+ * @enum {NestedTypeConfiguration}
+ */
 export const durations = {
 	perm: {
 		label: "BF.Duration.Type.Permanent.Label",
 		children: {
 			dispelled: {
-				label: "BF.Duration.UntilDispelled"
+				label: "BF.Duration.UntilDispelled",
+				spellOnly: true
 			},
 			triggered: {
-				label: "BF.Duration.UntilDispelledTriggered"
+				label: "BF.Duration.UntilDispelledTriggered",
+				spellOnly: true
 			},
 			permanent: {
 				label: "BF.Duration.Permanent"
@@ -93,10 +99,11 @@ export const durations = {
  * @param {string[]} [options.categories] - Categories to include, or blank for all categories.
  * @param {string} [options.chosen] - Currently selected option.
  * @param {string[]} [options.pluralRule] - Pluralization rule to use with localization value.
+ * @param {boolean} [options.isSpell] - Should spell-only durations be displayed?
  * @returns {SelectChoices}
  */
-export function durationOptions({ categories, chosen, pluralRule } = {}) {
-	const selectChoices = _createOptions([timeUnits, durations], { chosen, pluralRule });
+export function durationOptions({ categories, chosen, pluralRule, isSpell } = {}) {
+	const selectChoices = _createOptions([timeUnits, durations], { chosen, pluralRule, isSpell });
 	if (categories) selectChoices.exclude(new Set(categories));
 	return selectChoices;
 }
@@ -109,9 +116,10 @@ export function durationOptions({ categories, chosen, pluralRule } = {}) {
  * @param {object} options
  * @param {string} [options.chosen] - Currently selected option.
  * @param {string[]} [options.pluralRule] - Pluralization rule to use with localization value.
+ * @param {boolean} [options.isSpell] - Should spell-only durations be displayed?
  * @returns {SelectChoices}
  */
-function _createOptions(categories, { chosen, pluralRule }) {
+function _createOptions(categories, { chosen, pluralRule, isSpell }) {
 	const selectChoices = new SelectChoices();
 	categories.forEach(c => selectChoices.merge(new SelectChoices(c)));
 	for (const [key, category] of Object.entries(selectChoices)) {
@@ -121,6 +129,7 @@ function _createOptions(categories, { chosen, pluralRule }) {
 			v.label = makeLabel(v, { pluralRule });
 			v.scalar ??= category.scalar || v.scalar;
 			v.chosen = k === chosen;
+			if (v.spellOnly && !isSpell) delete category.children[k];
 		}
 	}
 	return selectChoices;

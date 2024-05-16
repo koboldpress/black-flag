@@ -5,6 +5,7 @@ import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
  * editing interfaces.
  */
 export default class ActivityConfig extends PseudoDocumentSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "activity-config"],
@@ -73,6 +74,10 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 					options: activationOptions,
 					scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
 				},
+				durationOptions: CONFIG.BlackFlag.durationOptions({
+					chosen: this.activity.duration.units,
+					isSpell: this.activity.isSpell
+				}),
 				showBaseDamage: Object.hasOwn(this.item.system, "damage")
 			},
 			{ inplace: false }
@@ -96,6 +101,13 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 		for (const element of html.querySelectorAll("img[data-edit]")) {
 			element.addEventListener("click", this._onEditIcon.bind(this));
+		}
+
+		if (this.activity.duration.canOverride && !this.activity.duration.override) {
+			for (const element of html.querySelectorAll(".duration :is(input, select)")) {
+				if (element.name === "duration.override") continue;
+				element.disabled = true;
+			}
 		}
 
 		if (this.activity.target.canOverride && !this.activity.target.override) {

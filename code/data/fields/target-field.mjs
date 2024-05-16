@@ -4,7 +4,7 @@ import FormulaField from "./formula-field.mjs";
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Field for storing information about an actor or item's source book.
+ * Field for storing information about an item or activity's targeting.
  *
  * @property {object} template
  * @property {number} template.count - Number of templates to create.

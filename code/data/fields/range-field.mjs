@@ -4,7 +4,7 @@ import FormulaField from "./formula-field.mjs";
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Field for storing information about an actor or item's source book.
+ * Field for storing information about an item or activity's range.
  *
  * @property {string} value - Standard range.
  * @property {string} units - Units used to measure the range.

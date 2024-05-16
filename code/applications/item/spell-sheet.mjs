@@ -36,7 +36,10 @@ export default class SpellSheet extends BaseItemSheet {
 		}, {});
 
 		context.activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.system.casting.type });
-		context.durationOptions = CONFIG.BlackFlag.durationOptions({ chosen: context.system.duration.units });
+		context.durationOptions = CONFIG.BlackFlag.durationOptions({
+			chosen: context.system.duration.units,
+			isSpell: true
+		});
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 
 		return context;
