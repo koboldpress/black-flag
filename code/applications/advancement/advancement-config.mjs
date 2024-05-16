@@ -18,6 +18,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config"],
@@ -54,6 +55,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get title() {
 		const type = game.i18n.localize(this.advancement.metadata.title);
 		return `${game.i18n.format("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
@@ -112,11 +114,11 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		let updates = foundry.utils.expandObject(formData);
-		if (updates.configuration) {
-			updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
-		}
+		updates.configuration ??= {};
+		updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
 		if (updates.level?.classIdentifier && updates.level?.value === 0) {
 			updates.level.value = 1;
 		}
@@ -164,12 +166,14 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_canDragDrop() {
 		return this.isEditable;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onDragOver(event) {
 		// TODO: Convert to _onDragEnter listener
 
@@ -219,6 +223,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onDrop(event) {
 		this._onDragLeave(event);
 

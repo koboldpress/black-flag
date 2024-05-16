@@ -4,6 +4,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for property advancement.
  */
 export default class PropertyConfig extends AdvancementConfig {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "property"],
@@ -14,6 +15,7 @@ export default class PropertyConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options) {
 		const context = super.getData(options);
 		context.modes = Object.entries(CONST.ACTIVE_EFFECT_MODES).reduce((obj, e) => {
@@ -25,6 +27,7 @@ export default class PropertyConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -55,8 +58,9 @@ export default class PropertyConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async prepareConfigurationUpdate(configuration) {
-		configuration.changes = Object.values(configuration.changes ?? {});
+		configuration.changes = Object.values(configuration.changes ?? []);
 		return configuration;
 	}
 }
