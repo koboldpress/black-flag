@@ -224,6 +224,7 @@ export async function registerHandlebarsPartials() {
 		"activities/parts/activity-activation.hbs",
 		"activities/parts/activity-damage-parts.hbs",
 		"activities/parts/activity-description.hbs",
+		"activities/parts/activity-targeting.hbs",
 		"activities/parts/activity-uses.hbs",
 		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",

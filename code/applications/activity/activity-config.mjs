@@ -10,7 +10,7 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 			classes: ["black-flag", "activity-config"],
 			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details" }],
 			template: "systems/black-flag/templates/activities/activity-config.hbs",
-			width: 500,
+			width: 540,
 			height: "auto",
 			submitOnChange: true,
 			closeOnSubmit: false
@@ -96,6 +96,13 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 		for (const element of html.querySelectorAll("img[data-edit]")) {
 			element.addEventListener("click", this._onEditIcon.bind(this));
+		}
+
+		if (this.activity.target.canOverride && !this.activity.target.override) {
+			for (const element of html.querySelectorAll(".targeting :is(input, select)")) {
+				if (element.name === "target.override") continue;
+				element.disabled = true;
+			}
 		}
 	}
 

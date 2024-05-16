@@ -1,5 +1,7 @@
 import { getPluralRules, makeLabel, numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import RangeField from "../fields/range-field.mjs";
+import TargetField from "../fields/target-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 import UsesField from "../fields/uses-field.mjs";
 import ConsumptionTargetData from "./consumption-target-data.mjs";
@@ -94,6 +96,8 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				},
 				{ label: "BF.Consumption.Label" }
 			),
+			range: new RangeField(),
+			target: new TargetField({ override: new BooleanField({ label: "BF.Target.Override.Label" }) }),
 			uses: new UsesField({ consumeQuantity: false })
 		};
 	}
@@ -147,19 +151,27 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			}
 		}
 
-		const item = this.item.system ?? {};
-		const propertiesToSet = [
-			["activation.value", "casting.value"],
-			["activation.type", "casting.type"],
-			["activation.condition", "casting.condition"]
-		];
-		for (const keyPath of propertiesToSet) {
-			const activityProperty = foundry.utils.getProperty(this, keyPath[0]);
-			const itemProperty = foundry.utils.getProperty(item, keyPath[1]);
-			if (!activityProperty && itemProperty) foundry.utils.setProperty(this, keyPath[0], itemProperty);
-		}
+		this.setProperty("activation.value", "system.casting.value");
+		this.setProperty("activation.type", "system.casting.type");
+		this.setProperty("activation.condition", "system.casting.condition");
 		this.activation.type ??= "action";
 		this.activation.primary ??= true;
+
+		Object.defineProperty(this.target, "canOverride", {
+			value: !!this.item.system.range && !!this.item.system.target,
+			configurable: true,
+			enumerable: false
+		});
+		if (this.target.canOverride && !this.target.override) {
+			for (const keyPath of ["range", "target.template", "target.affects"]) {
+				const obj = foundry.utils.getProperty(this.item.system, keyPath) ?? {};
+				for (const [key, value] of Object.entries(obj)) {
+					foundry.utils.setProperty(this, `${keyPath}.${key}`, value);
+				}
+			}
+		}
+		this.range.units ??= "foot"; // TODO: Get default unit based on measurement system
+		this.target.template.units ??= "foot"; // TODO: Get default unit based on measurement system
 
 		let activationConfig;
 		if (this.activation.type in CONFIG.BlackFlag.actionTypes.standard.children) {
@@ -187,5 +199,19 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		});
 
 		this.system.prepareFinalData?.();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Set a property on the activity with a value from the item so long as it is currently blank and the item's
+	 * property isn't blank.
+	 * @param {string} activityKeyPath - Path of the property to set on the activity.
+	 * @param {string} itemKeyPath - Path of the property to get from the item.
+	 */
+	setProperty(activityKeyPath, itemKeyPath) {
+		const activityProperty = foundry.utils.getProperty(this, activityKeyPath);
+		const itemProperty = foundry.utils.getProperty(this.item, itemKeyPath);
+		if (!activityProperty && itemProperty) foundry.utils.setProperty(this, activityKeyPath, itemProperty);
 	}
 }

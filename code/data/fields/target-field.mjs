@@ -1,0 +1,132 @@
+import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
+import FormulaField from "./formula-field.mjs";
+
+const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * Field for storing information about an actor or item's source book.
+ *
+ * @property {object} template
+ * @property {number} template.count - Number of templates to create.
+ * @property {string} template.size - Primary template size.
+ * @property {string} template.type - Type of template (e.g. sphere, cone, line)
+ * @property {string} template.width - Width of the template if relevant.
+ * @property {string} template.height - Height of the template if relevant.
+ * @property {string} template.units - Units used to measure the template.
+ * @property {object} affects
+ * @property {string} affects.formula - Number of targets affected.
+ * @property {string} affects.type - Type of targets affected (e.g. creatures, objects, allies, enemies)
+ * @property {boolean} affects.choice - Can the caster select which targets are affected?
+ * @property {string} affects.special - Description of the targets if type is `special`.
+ *
+ * @param {object} [fields={}] - Additional fields to add or, if value is `false`, default fields to remove.
+ * @param {object} [options={}] - Additional options in addition to the default label.
+ */
+export default class TargetField extends SchemaField {
+	constructor(fields = {}, options = {}) {
+		fields = {
+			template: new SchemaField(
+				{
+					count: new NumberField({ initial: 1, positive: true, integer: true }),
+					size: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Label" }),
+					type: new StringField({ label: "BF.AreaOfEffect.Type.Label" }),
+					width: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Width.Label" }),
+					height: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Height.Label" }),
+					units: new StringField({ initial: "foot", label: "BF.AreaOfEffect.Units.Label" })
+				},
+				{ label: "BF.AreaOfEffect.Label" }
+			),
+			affects: new SchemaField(
+				{
+					count: new FormulaField({ deterministic: true, label: "BF.Target.Count.Label" }),
+					type: new StringField({ label: "BF.Target.Type.Label" }),
+					choice: new BooleanField(),
+					special: new StringField({ label: "BF.Target.Special.Label" })
+				},
+				{ label: "BF.Target.Label[one]" }
+			),
+			...fields
+		};
+		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
+		super(fields, { label: "BF.Targeting.Label", ...options });
+	}
+
+	/* -------------------------------------------- */
+
+	/** @inheritDoc */
+	initialize(value, model, options = {}) {
+		const obj = super.initialize(value, model, options);
+
+		Object.defineProperty(obj, "aoeSizes", {
+			get() {
+				const sizes = CONFIG.BlackFlag.areaOfEffectTypes[this.template.type]?.sizes;
+				if (!sizes) return null;
+				const aoeSizes = {
+					size: "BF.AreaOfEffect.Size.Label",
+					width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
+					height: sizes.includes("height")
+				};
+				if (sizes.includes("radius")) aoeSizes.size = "BF.AreaOfEffect.Size.Radius.Label";
+				else if (sizes.includes("length")) aoeSizes.size = "BF.AreaOfEffect.Size.Length.Label";
+				else if (sizes.includes("width")) aoeSizes.size = "BF.AreaOfEffect.Size.Width.Label";
+				return aoeSizes;
+			},
+			enumerable: false
+		});
+
+		Object.defineProperty(obj.affects, "scalar", {
+			get() {
+				return this.type && this.type !== "special";
+			},
+			enumerable: false
+		});
+
+		Object.defineProperty(obj, "label", {
+			get() {
+				return this.template.label || this.affects.label || "";
+			},
+			enumerable: false
+		});
+
+		Object.defineProperty(obj.affects, "label", {
+			get() {
+				const type = CONFIG.BlackFlag.targetTypes[this.type];
+				if (!type) return game.i18n.localize("BF.Range.Type.Self.Label");
+				if (this.type === "special") {
+					let label = game.i18n.localize(type.label);
+					if (this.special) label = `<span data-tooltip="${this.special.capitalize()}">${label}*</span>`;
+					return label;
+				}
+				const shortKey = `BF.Target.Label[${getPluralRules().select(this.count ?? 1)}]`;
+				const longKey = type.label ?? `${type.localization}[${getPluralRules().select(this.count ?? 1)}]`;
+				const number = numberFormat(this.count ?? 1);
+				return `<span data-tooltip="${`${number} ${game.i18n.localize(longKey)}`}">${number} ${game.i18n.localize(shortKey)}*</span>`;
+			},
+			enumerable: false
+		});
+
+		Object.defineProperty(obj.template, "label", {
+			get() {
+				if (!this.type) return "";
+				const unit = CONFIG.BlackFlag.distanceUnits[this.units];
+				let label = `<span class="number">${numberFormat(this.size, { unit, unitDisplay: "narrow" })}</span>`;
+				let tooltip = `${numberFormat(this.size)} ${game.i18n.localize(`${unit.localization}[one]`)}`;
+				const areaConfig = CONFIG.BlackFlag.areaOfEffectTypes[this.type];
+				if (areaConfig?.icon) label += ` <img class="area-icon" src="${areaConfig.icon}">`;
+				if (areaConfig?.localization) tooltip += ` ${game.i18n.localize(`${areaConfig.localization}[one]`)}`;
+				else if (areaConfig?.label) tooltip += ` ${game.i18n.localize(areaConfig.label)}`;
+				return `<span class="area-label" data-tooltip="${tooltip}">${label}</span>`;
+			},
+			enumerable: false
+		});
+
+		Object.defineProperty(obj.affects, "placeholder", {
+			get() {
+				return obj.template.type ? game.i18n.localize("BF.Target.Count.Every") : 1;
+			},
+			enumerable: false
+		});
+
+		return obj;
+	}
+}

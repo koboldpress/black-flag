@@ -69,13 +69,7 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareData() {
-		const item = this.parent.item.system ?? {};
-		const propertiesToSet = ["type.value", "type.classification"];
-		for (const keyPath of propertiesToSet) {
-			const activityProperty = foundry.utils.getProperty(this, keyPath);
-			const itemProperty = foundry.utils.getProperty(item, keyPath);
-			if (!activityProperty && itemProperty) foundry.utils.setProperty(this, keyPath, itemProperty);
-		}
+		this.parent.setProperty("system.type.value", "system.type.classification");
 		this.type.value ??= "melee";
 		this.type.classification ??= "weapon";
 	}
