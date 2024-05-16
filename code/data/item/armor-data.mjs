@@ -1,5 +1,6 @@
 import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
@@ -9,6 +10,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Armor items.
+ * @mixes {ActivitiesTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {ProficiencyTemplate}
  * @mixes {PhysicalTemplate}
@@ -25,6 +27,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @property {number} modifier.max - Maximum amount of modifier ability (usually DEX) that is contributed to AC.
  */
 export default class ArmorData extends ItemDataModel.mixin(
+	ActivitiesTemplate,
 	DescriptionTemplate,
 	ProficiencyTemplate,
 	PhysicalTemplate,
