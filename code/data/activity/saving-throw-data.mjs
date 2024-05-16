@@ -7,6 +7,7 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
  * Configuration data for the saving throw activity.
  */
 export class SavingThrowData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			ability: new StringField({
@@ -31,21 +32,30 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Return a string describing the result if the default ability is selected for this activity.
+	 * @type {string|null}
+	 */
+	get defaultAbility() {
+		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareData() {
-		const item = this.parent.item.system ?? {};
-		const propertiesToSet = ["type.classification"];
-		for (const keyPath of propertiesToSet) {
-			const activityProperty = foundry.utils.getProperty(this, keyPath);
-			const itemProperty = foundry.utils.getProperty(item, keyPath);
-			if (!activityProperty && itemProperty) foundry.utils.setProperty(this, keyPath, itemProperty);
-		}
+		if (!this.parent.isSpell && !this.dc.ability) this.dc.ability = "custom";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareFinalData() {
 		const rollData = this.parent.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.parent.dcAbility];

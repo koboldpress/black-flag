@@ -35,13 +35,14 @@
 						<span>{{ localize "BF.DifficultyClass.Ability.Label" }}</span>
 						<select name="system.dc.ability">
 							{{#select system.dc.ability}}
-								<option value="">{{ localize "BF.Default.Generic" }}</option>
-								<hr>
+								{{#if labels.defaultAbility}}
+									<option value="">{{ labels.defaultAbility }}</option>
+									<hr>
+								{{/if}}
+								<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
 								<optgroup label="{{ localize 'BF.DifficultyClass.Formula.Default' }}">
 									{{ selectOptions CONFIG.abilities.localized }}
 								</optgroup>
-								<hr>
-								<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
 							{{/select}}
 						</select>
 					</label>

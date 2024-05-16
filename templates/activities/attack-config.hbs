@@ -29,8 +29,8 @@
 						{{#select source.system.ability}}
 							{{#if labels.defaultAbility}}
 								<option value="">{{ labels.defaultAbility }}</option>
+								<hr>
 							{{/if}}
-							<hr>
 							<option value="none">{{ localize "None" }}</option>
 							<optgroup label="{{ localize 'BF.Ability.Label[other]' }}">
 								{{ selectOptions CONFIG.abilities.localized }}

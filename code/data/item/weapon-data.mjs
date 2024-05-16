@@ -103,15 +103,26 @@ export default class WeaponData extends ItemDataModel.mixin(
 	 * @type {string|null}
 	 */
 	get ability() {
+		const availableAbilities = this.availableAbilities;
+		const abilities = this.parent.actor?.system.abilities ?? {};
+		return availableAbilities.reduce(
+			(largest, ability) =>
+				(abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
+			availableAbilities.first()
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Abilities that could potentially be used with this weapon.
+	 * @type {Set<string>}
+	 */
+	get availableAbilities() {
 		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
 		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
-
-		if (this.properties.has("finesse")) {
-			const abilities = this.parent.actor?.system.abilities;
-			if (abilities) return abilities[ranged]?.mod > abilities[melee]?.mod ? ranged : melee;
-		}
-
-		return this.type.value === "ranged" ? ranged : melee;
+		if (this.properties.has("finesse")) return new Set([melee, ranged]);
+		return new Set([this.type.value === "ranged" ? ranged : melee]);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -4,6 +4,7 @@ import ActivityConfig from "./activity-config.mjs";
  * Application for configuring Attack activities.
  */
 export default class AttackConfig extends ActivityConfig {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/activities/attack-config.hbs"
@@ -14,11 +15,10 @@ export default class AttackConfig extends ActivityConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
-		const defaultAbility = this.activity.isSpell
-			? "BF.Spellcasting.Label"
-			: CONFIG.BlackFlag.abilities[this.item.system.ability]?.labels.full;
+		const defaultAbility = this.activity.system.defaultAbility;
 		const defaultType = CONFIG.BlackFlag.weaponTypes[this.item.system.type?.value]?.label;
 		const defaultClassification = CONFIG.BlackFlag.attackTypes[this.item.system.type?.classification];
 		return foundry.utils.mergeObject(context, {

@@ -1,4 +1,3 @@
-// import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
 import { DamageField } from "../fields/_module.mjs";
 
 const { StringField } = foundry.data.fields;
@@ -9,6 +8,7 @@ const { StringField } = foundry.data.fields;
  * @property {object} healing - Healing value.
  */
 export class HealingData extends foundry.abstract.DataModel {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			ability: new StringField(),
@@ -17,23 +17,15 @@ export class HealingData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Preparation          */
+	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareFinalData() {
-		// const ability = this.parent.actor?.system.abilities[this.parent.attackAbility];
-		// const rollData = this.parent.item.getRollData({ deterministic: true });
-		// const { parts, data } = buildRoll({
-		// 	mod: ability?.mod,
-		// 	prof: this.parent.item.system.proficiency?.flat,
-		// 	bonus: this.parent.actor?.system.buildBonus(this.parent.actor?.system.getModifiers(this.parent.modifierData), {
-		// 		rollData
-		// 	})
-		// }, rollData);
-		// Object.defineProperty(this, "toHit", {
-		// 	value: simplifyBonus(parts.join(" + "), data),
-		// 	configurable: true,
-		// 	enumerable: false
-		// });
+	/**
+	 * Return a string describing the result if the default ability is selected for this activity.
+	 * @type {string|null}
+	 */
+	get defaultAbility() {
+		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
+		return null;
 	}
 }

@@ -40,6 +40,17 @@ export default class HealingActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Ability that can be added to healing using `@mod`.
+	 * @type {string|null}
+	 */
+	get healingAbility() {
+		if (this.system.ability) return this.system.ability;
+		return this.item.system.ability ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -152,8 +163,7 @@ export default class HealingActivity extends Activity {
 		config ??= {};
 		rollData = this.item.getRollData();
 
-		const ability = this.actor?.system.abilities[this.system.ability];
-		// TODO: Automatically select spellcasting ability if on a spell
+		const ability = this.actor?.system.abilities[this.healingAbility];
 		const healing = this.system.healing;
 		const modifierData = { ...this.modifierData, type: "healing", healing };
 		const { parts, data } = buildRoll(

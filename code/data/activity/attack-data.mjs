@@ -36,6 +36,34 @@ export class AttackData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Return a string describing the result if the default ability is selected for this activity.
+	 * @type {string|null}
+	 */
+	get defaultAbility() {
+		if (this.type.classification === "spell") return game.i18n.localize("BF.Spellcasting.Label");
+
+		const item = this.parent.item.system;
+		const labels = CONFIG.BlackFlag.abilities.localized;
+		const itemType = ["melee", "ranged"].includes(item.type?.value);
+		if (this.type.classification === "weapon" && (this._source.type.value || !itemType)) {
+			if (this.type.value === "melee") return labels[CONFIG.BlackFlag.defaultAbilities.meleeAttack];
+			if (this.type.value === "ranged") return labels[CONFIG.BlackFlag.defaultAbilities.rangedAttack];
+		}
+
+		const available = item.availableAbilities;
+		if (available?.size)
+			return Array.from(available)
+				.map(a => labels[a])
+				.join("/");
+
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -48,6 +76,8 @@ export class AttackData extends foundry.abstract.DataModel {
 			const itemProperty = foundry.utils.getProperty(item, keyPath);
 			if (!activityProperty && itemProperty) foundry.utils.setProperty(this, keyPath, itemProperty);
 		}
+		this.type.value ??= "melee";
+		this.type.classification ??= "weapon";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
