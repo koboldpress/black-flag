@@ -65,6 +65,7 @@ export function registerCustomElements() {
 	window.customElements.define("blackflag-messageluck", components.MessageLuckElement);
 	window.customElements.define("blackflag-multiselect", components.MultiSelectElement);
 	window.customElements.define("blackflag-sorting", components.SortingElement);
+	window.customElements.define("blackflag-tray", components.ChatTrayElement);
 	window.customElements.define("blackflag-uses", components.UsesElement);
 	window.customElements.define("blackflag-xpbar", components.XPBarElement);
 }

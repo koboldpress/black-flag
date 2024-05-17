@@ -85,15 +85,37 @@
 
 .collapsible {
 	&.collapsed {
-		.fa-caret-down { transform: rotate(-90deg); }
+		.fa-caret-down, .fa-chevron-down { transform: rotate(-90deg); }
 		.collapsible-content { grid-template-rows: 0fr; }
 	}
-	.fa-caret-down { transition: transform 250ms ease; }
+	.fa-caret-down, .fa-chevron-down { transition: transform var(--bf-tray-transition) ease; }
 	.collapsible-content {
 		display: grid;
 		grid-template-rows: 1fr;
-		transition: grid-template-rows 250ms ease;
+		transition: grid-template-rows var(--bf-tray-transition) ease;
 		> .wrapper { overflow: hidden; }
+	}
+	.dropdown-block {
+		position: relative;
+		margin-block-end: 8px;
+		margin-inline: 6px;
+		border: 1px solid var(--bf-color-border-blue);
+		border-block-start-width: 0;
+		border-end-start-radius: 8px;
+		border-end-end-radius: 8px;
+		padding-block: 2px;
+		padding-inline: 8px;
+		background: var(--bf-background-color-half-white);
+		box-shadow: 0 2px 3px rgb(0 0 0 / .2);
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset-inline: -6px;
+			inset-block-start: -10px;
+			height: 10px;
+			box-shadow: 0 3px 3px rgb(0 0 0 / .2);
+		}
 	}
 }
 

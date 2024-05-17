@@ -1,12 +1,21 @@
 <div class="black-flag chat-card activity">
-	<header>
-		<img src="{{ item.img }}" alt="{{ item.name }}">
-		<div class="hgroup">
-			<h5>{{ item.name }}</h5>
-			<p>{{ activity.name }}</p>
+	<section class="card-header collapsible collapsed">
+		<header>
+			<img src="{{ item.img }}" alt="{{ item.name }}">
+			<div class="name">
+				<h5>{{ item.name }}</h5>
+				<p>{{ activity.name }}</p>
+			</div>
+			<i class="fa-solid fa-chevron-down fa-fw" inert></i>
+		</header>
+		<div class="details collapsible-content">
+			<div class="wrapper">
+				<div class="dropdown-block">
+					{{{ description }}}
+				</div>
+			</div>
 		</div>
-		<!-- TODO: Description dropdown -->
-	</header>
+	</section>
 
 	<ul class="menu">
 		{{#each buttons}}

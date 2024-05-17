@@ -495,7 +495,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			actor: this.item.actor,
 			token: this.item.actor?.token,
 			buttons: {},
-			tags: []
+			tags: [],
+			description: await TextEditor.enrichHTML(this.description || this.item.system.description.value, {
+				relativeTo: this.description ? this : this.item,
+				secrets: false,
+				async: true
+			})
 		};
 		// TODO: Add activity description
 		// TODO: Prepare tags

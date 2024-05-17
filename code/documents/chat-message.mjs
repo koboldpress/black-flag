@@ -4,11 +4,16 @@ import MessageLuckElement from "../applications/components/message-luck.mjs";
  * Extended version of ChatMessage to highlight critical damage, support luck modifications, and other system features.
  */
 export default class BlackFlagChatMessage extends ChatMessage {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	async getHTML() {
 		const jQuery = await super.getHTML();
 		if (!this.isContentVisible) return jQuery;
 		const html = jQuery[0];
 
+		this._renderHeader(html);
 		await this._activateActivityListeners(html);
 		if (this.isRoll) {
 			this._highlightRollResults(html);
@@ -38,24 +43,6 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*          Activity Actions           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Add event listeners to an activity card or remove the controls if activity could not be found.
-	 * @param {HTMLElement} html - Chat message HTML.
-	 */
-	async _activateActivityListeners(html) {
-		const uuid = this.getFlag(game.system.id, "uuid");
-		if (this.getFlag(game.system.id, "type") !== "activity" || !uuid) return;
-
-		const activity = await fromUuid(uuid);
-		activity?.activateChatListeners(this, html);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*             Damage Rolls            */
-	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Display total damage and apply damage controls.
@@ -79,7 +66,50 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*                 Luck                */
+
+	/**
+	 * Swap the header element with a collapsible chat tray.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_renderHeader(html) {
+		const header = html.querySelector(".card-header.collapsible");
+		if (!header) return;
+		const tray = document.createElement("blackflag-tray");
+		tray.classList.add("card-header");
+		header.replaceWith(tray);
+		tray.append(header);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the luck controls on the chat card if necessary.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_renderLuckInterface(html) {
+		if (!MessageLuckElement.shouldDisplayLuckInterface(this)) return;
+		const content = html.querySelector(".message-content");
+		content.insertAdjacentHTML("beforeend", "<blackFlag-messageLuck></blackFlag-messageLuck>");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add event listeners to an activity card or remove the controls if activity could not be found.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	async _activateActivityListeners(html) {
+		const uuid = this.getFlag(game.system.id, "uuid");
+		if (this.getFlag(game.system.id, "type") !== "activity" || !uuid) return;
+
+		const activity = await fromUuid(uuid);
+		activity?.activateChatListeners(this, html);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -106,17 +136,5 @@ export default class BlackFlagChatMessage extends ChatMessage {
 				return obj;
 			}, {});
 		return exactMatch ?? tokenMatch ?? actorMatch;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Display the luck controls on the chat card if necessary.
-	 * @param {HTMLElement} html - Chat message HTML.
-	 */
-	_renderLuckInterface(html) {
-		if (!MessageLuckElement.shouldDisplayLuckInterface(this)) return;
-		const content = html.querySelector(".message-content");
-		content.insertAdjacentHTML("beforeend", "<blackFlag-messageLuck></blackFlag-messageLuck>");
 	}
 }

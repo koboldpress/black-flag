@@ -106,28 +106,6 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 
 				&[data-expand-for] {
 					td { padding: 0; }
-					.item-summary {
-						position: relative;
-						margin-block-end: 8px;
-						margin-inline: 6px;
-						border: 1px solid var(--bf-color-border-blue);
-						border-block-start-width: 0;
-						border-end-start-radius: 8px;
-						border-end-end-radius: 8px;
-						padding-block: 2px;
-						padding-inline: 8px;
-						background: rgb(255 255 255 / 0.5);
-						box-shadow: 0 2px 3px rgb(0 0 0 / .2);
-
-						&::before {
-							content: "";
-							position: absolute;
-							inset-inline: -6px;
-							inset-block-start: -10px;
-							height: 10px;
-							box-shadow: 0 3px 3px rgb(0 0 0 / .2);
-						}
-					}
 				}
 			}
 		}
@@ -137,40 +115,42 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 		opacity: 50%;
 	}
 
-	.weight, .quantity, .cost, .enabled {
-		text-align: center;
-	}
-	.quantity {
-		width: 85px;
-		input {
-			border: none;
-			height: 1.65em;
+	td {
+		&.weight, &.quantity, &.cost, &.enabled {
+			text-align: center;
 		}
-	}
-	.uses, .weight, .cost {
-		width: 60px;
-	}
-	.traits {
-		width: 14rem;
-		td:is(&) {
-			font-size: var(--font-size-11);
+		&.quantity {
+			width: 85px;
+			input {
+				border: none;
+				height: 1.65em;
+			}
 		}
-	}
-	.status {
-		&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }
-	}
-	.controls {
-		width: 1em;
-		.layout {
-			justify-content: center;
+		&.uses, &.weight, &.cost {
+			width: 60px;
 		}
-	}
+		&.traits {
+			width: 14rem;
+			td:is(&) {
+				font-size: var(--font-size-11);
+			}
+		}
+		&.status {
+			&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }
+		}
+		&.controls {
+			width: 1em;
+			.layout {
+				justify-content: center;
+			}
+		}
 
-	@container inventory (inline-size < 700px) {
-		.traits { display: none; }
-	}
-	@container inventory (inline-size < 500px) {
-		.uses { display: none; }
+		@container inventory (inline-size < 700px) {
+			&.traits { display: none; }
+		}
+		@container inventory (inline-size < 500px) {
+			&.uses { display: none; }
+		}
 	}
 }
 
