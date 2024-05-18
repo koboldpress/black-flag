@@ -135,14 +135,14 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 				font-size: var(--font-size-11);
 			}
 		}
-		&.status {
-			&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }
-		}
 		&.controls {
 			width: 1em;
 			.layout {
 				justify-content: center;
 			}
+		}
+		.status {
+			&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }
 		}
 
 		@container inventory (inline-size < 700px) {

@@ -117,7 +117,7 @@ export default class PCSheet extends BaseActorSheet {
 				label: "BF.Attunement.Attuned",
 				pressed: item.system.attuned,
 				title: `BF.Attunement.${item.system.attuned ? "Attuned" : "NotAttuned"}`,
-				icon: '<i class="fa-solid fa-sun" aria-hidden="true"></i>'
+				icon: '<i class="fa-solid fa-sun" inert></i>'
 			});
 
 		if (item.system.equippable)
@@ -128,7 +128,7 @@ export default class PCSheet extends BaseActorSheet {
 				label: "BF.Item.Equipped",
 				pressed: item.system.equipped,
 				title: `BF.Item.${item.system.equipped ? "Equipped" : "Unequipped"}`,
-				icon: '<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>'
+				icon: '<i class="fa-solid fa-shield-halved" inert></i>'
 			});
 	}
 
