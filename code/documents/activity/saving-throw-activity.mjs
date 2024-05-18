@@ -70,7 +70,7 @@ export default class SavingThrowActivity extends DamageActivity {
 				<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
 				<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
 			`,
-			dataset: { action: "roll", method: "rollSavingThrow" }
+			dataset: { action: "roll", allUsers: "", method: "rollSavingThrow" }
 		};
 		return context;
 	}

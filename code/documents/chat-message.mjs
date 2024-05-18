@@ -14,6 +14,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		const html = jQuery[0];
 
 		this._renderHeader(html);
+		this._renderButtons(html);
 		await this._activateActivityListeners(html);
 		if (this.isRoll) {
 			this._highlightRollResults(html);
@@ -39,6 +40,23 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			else if (roll.isCriticalFailure) result.classList.add("critical-failure");
 			if (roll.isSuccess) result.classList.add("success");
 			else if (roll.isFailure) result.classList.add("failure");
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Control visibility of chat buttons based on current user.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_renderButtons(html) {
+		const actor = game.actors.get(this.speaker.actor);
+		if (game.user.isGM || actor?.isOwner || this.user.id === game.user.id) {
+			// TODO: Optionally hide any controls
+		} else {
+			for (const button of html.querySelectorAll(".menu button:not([data-all-users]")) {
+				button.hidden = true;
+			}
 		}
 	}
 
