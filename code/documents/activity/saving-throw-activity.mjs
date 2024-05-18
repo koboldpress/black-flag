@@ -30,7 +30,7 @@ export default class SavingThrowActivity extends DamageActivity {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		layout.innerHTML = `<span class="dc">${numberFormat(this.system.dc.final)}</span>`;
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.dcAbility];
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability];
 		layout.innerHTML += `<span class="ability">${ability}</span>`;
 		return layout.outerHTML;
 	}
@@ -63,11 +63,37 @@ export default class SavingThrowActivity extends DamageActivity {
 				label: game.i18n.localize("BF.Damage.Label"),
 				dataset: { action: "roll", method: "rollDamage" }
 			};
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability] ?? "";
+		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.dc.final, check: ability });
 		context.buttons.savingThrow = {
-			label: game.i18n.localize("BF.Activity.SavingThrow.Title"),
+			label: `
+				<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
+				<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
+			`,
 			dataset: { action: "roll", method: "rollSavingThrow" }
 		};
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display an activation chat message for this activity.
+	 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
+	 * @returns {Promise<ChatMessage|ActivityMessageConfiguration>}
+	 */
+	async createActivationMessage(message = {}) {
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				"data.flags.black-flag.save": {
+					ability: this.system.ability,
+					dc: this.system.dc.final
+				}
+			},
+			message
+		);
+
+		return super.createActivationMessage(messageConfig);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -82,12 +108,6 @@ export default class SavingThrowActivity extends DamageActivity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollSavingThrow(config = {}, dialog = {}, message = {}) {
-		// Determine DC based on settings & the actor to whom the activity belongs
-		const rollData = this.item.getRollData({ deterministic: true });
-		const ability = rollData.abilities?.[this.dcAbility];
-		if (ability) rollData.mod = ability.mod;
-		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
-
 		// Pass on DC and rolling ability to `rollAbilitySave` on any selected actors/tokens
 		for (const target of this.getActionTargets()) {
 			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: target.document });
@@ -95,7 +115,7 @@ export default class SavingThrowActivity extends DamageActivity {
 				{
 					ability: this.system.ability,
 					event,
-					target: dc
+					target: this.system.dc.final
 				},
 				{
 					data: { speaker }
@@ -108,6 +128,7 @@ export default class SavingThrowActivity extends DamageActivity {
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	createDamageConfigs(config, rollData) {
 		config = foundry.utils.mergeObject(
 			{
