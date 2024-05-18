@@ -48,6 +48,20 @@ export function registerKeybindings() {
 export function registerSettings() {
 	log("Registering system settings");
 
+	game.settings.register(game.system.id, "challengeVisibility", {
+		name: "BF.Settings.ChallengeVisibility.Label",
+		hint: "BF.Settings.ChallengeVisibility.Hint",
+		scope: "world",
+		config: true,
+		default: "player",
+		type: String,
+		choices: {
+			all: "BF.Settings.ChallengeVisibility.All",
+			player: "BF.Settings.ChallengeVisibility.Player",
+			none: "BF.Settings.ChallengeVisibility.None"
+		}
+	});
+
 	game.settings.register(game.system.id, "levelingMode", {
 		name: "BF.Settings.LevelingMode.Label",
 		hint: "BF.Settings.LevelingMode.Hint",

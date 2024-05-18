@@ -61,8 +61,6 @@
 		flex-direction: column;
 		list-style: none;
 		padding: 0;
-
-		.hidden-dc { display: none; }
 	}
 
 	.tags {
@@ -81,4 +79,11 @@
 			gap: 2px;
 		}
 	}
+}
+
+.hidden-dc { display: contents; }
+.visible-dc { display: none; }
+[data-display-challenge] {
+	.hidden-dc { display: none; }
+	.visible-dc { display: contents; }
 }

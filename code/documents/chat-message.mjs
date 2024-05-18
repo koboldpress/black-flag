@@ -5,6 +5,26 @@ import MessageLuckElement from "../applications/components/message-luck.mjs";
  */
 export default class BlackFlagChatMessage extends ChatMessage {
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Should roll DCs and other challenge details be displayed on this card?
+	 * @type {boolean}
+	 */
+	get shouldDisplayChallenge() {
+		if (game.user.isGM || this.user === game.user) return true;
+		switch (game.settings.get(game.system.id, "challengeVisibility")) {
+			case "all":
+				return true;
+			case "player":
+				return !this.user.isGM;
+			default:
+				return false;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -32,14 +52,17 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_highlightRollResults(html) {
+		if (!this.isContentVisible) return;
+		const originatingMessage = game.messages.get(this.getFlag(game.system.id, "originatingMessage")) ?? this;
+		const displayChallenge = originatingMessage.shouldDisplayChallenge;
 		const rollResults = html.querySelectorAll(".dice-roll");
 		for (const [index, roll] of this.rolls.entries()) {
 			const result = rollResults[index];
 			if (!result) return;
 			if (roll.isCriticalSuccess) result.classList.add("critical-success");
 			else if (roll.isCriticalFailure) result.classList.add("critical-failure");
-			if (roll.isSuccess) result.classList.add("success");
-			else if (roll.isFailure) result.classList.add("failure");
+			if (roll.isSuccess && displayChallenge) result.classList.add("success");
+			else if (roll.isFailure && displayChallenge) result.classList.add("failure");
 		}
 	}
 
@@ -50,6 +73,8 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_renderButtons(html) {
+		if (this.shouldDisplayChallenge) html.dataset.displayChallenge = "";
+
 		const actor = game.actors.get(this.speaker.actor);
 		if (game.user.isGM || actor?.isOwner || this.user.id === game.user.id) {
 			// TODO: Optionally hide any controls
