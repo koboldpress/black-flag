@@ -97,10 +97,18 @@ export default class TargetField extends SchemaField {
 					if (this.special) label = `<span data-tooltip="${this.special.capitalize()}">${label}*</span>`;
 					return label;
 				}
-				const shortKey = `BF.Target.Label[${getPluralRules().select(this.count ?? 1)}]`;
-				const longKey = type.label ?? `${type.localization}[${getPluralRules().select(this.count ?? 1)}]`;
-				const number = numberFormat(this.count ?? 1);
-				return `<span data-tooltip="${`${number} ${game.i18n.localize(longKey)}`}">${number} ${game.i18n.localize(shortKey)}*</span>`;
+				if (obj.template.type in CONFIG.BlackFlag.areaOfEffectTypes && !this.count) {
+					return `<span>${game.i18n.format("BF.Target.Count.EverySpecific", {
+						type: game.i18n.localize(`${type.localization}[one]`)
+					})}</span>`;
+				} else {
+					const shortKey = `BF.Target.Label[${getPluralRules().select(this.count ?? 1)}]`;
+					const longKey = type.label ?? `${type.localization}[${getPluralRules().select(this.count ?? 1)}]`;
+					const number = numberFormat(this.count ?? 1);
+					return `<span data-tooltip="${`${number} ${game.i18n.localize(longKey)}`}">${number} ${game.i18n.localize(
+						shortKey
+					)}*</span>`;
+				}
 			},
 			enumerable: false
 		});
@@ -122,7 +130,7 @@ export default class TargetField extends SchemaField {
 
 		Object.defineProperty(obj.affects, "placeholder", {
 			get() {
-				return obj.template.type ? game.i18n.localize("BF.Target.Count.Every") : 1;
+				return obj.template.type ? game.i18n.localize("BF.Target.Count.EveryGeneric") : 1;
 			},
 			enumerable: false
 		});

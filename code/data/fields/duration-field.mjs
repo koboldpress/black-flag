@@ -1,3 +1,4 @@
+import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import FormulaField from "./formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -32,7 +33,22 @@ export default class DurationField extends SchemaField {
 
 		Object.defineProperty(obj, "scalar", {
 			get() {
-				return this.units ? CONFIG.BlackFlag.durationOptions().get(this.units).scalar : false;
+				return this.units ? !!CONFIG.BlackFlag.durationOptions().get(this.units).scalar : false;
+			},
+			configurable: true,
+			enumerable: false
+		});
+
+		Object.defineProperty(obj, "label", {
+			get() {
+				const unit = CONFIG.BlackFlag.durationOptions({
+					pluralRule: getPluralRules().select(this.value)
+				}).get(this.units);
+				if (unit.scalar) {
+					if (!this.value) return null;
+					return numberFormat(this.value, { unit });
+				}
+				return unit.label;
 			},
 			configurable: true,
 			enumerable: false

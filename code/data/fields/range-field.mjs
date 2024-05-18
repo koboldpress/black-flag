@@ -41,6 +41,7 @@ export default class RangeField extends SchemaField {
 		Object.defineProperty(obj, "label", {
 			get() {
 				if (this.scalar) {
+					if (!this.value) return null;
 					const unit = CONFIG.BlackFlag.distanceUnits[this.units];
 					return `${numberFormat(this.value)} ${game.i18n.localize(
 						`${unit.localization}[${getPluralRules().select(this.value)}]`

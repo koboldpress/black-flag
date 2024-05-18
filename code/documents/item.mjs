@@ -20,6 +20,42 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Base Map used to ensure tags are always displayed in order.
+	 * @type {Map<string, string>}
+	 */
+	static get baseTags() {
+		return new Map(
+			[
+				"type",
+				"details",
+				"activity",
+				"activation",
+				"range",
+				"affects",
+				"template",
+				"duration",
+				"equipped",
+				"attuned",
+				"proficient"
+			].map(l => [l, null])
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Tags that should be displayed in chat.
+	 * @type {Map<string, string>}
+	 */
+	get chatTags() {
+		const tags = this.constructor.baseTags;
+		tags.set("type", game.i18n.localize(CONFIG.Item.typeLabels[this.type]));
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The item that contains this item, if it is in a container. Returns a promise if the item is located
 	 * in a compendium pack.
 	 * @type {BlackFlagItem|Promise<BlackFlagItem>|void}

@@ -2,6 +2,7 @@ import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
 import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
@@ -48,14 +49,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 				},
 				{ label: "BF.Spell.Circle.Label" }
 			),
-			casting: new SchemaField(
-				{
-					value: new NumberField({ min: 0, integer: true, label: "BF.Activation.Cost.Label" }),
-					type: new StringField({ initial: "action", label: "BF.Activation.Type.Label" }),
-					condition: new StringField({ label: "BF.Activation.Condition.Label" })
-				},
-				{ label: "BF.Spell.CastingTime.Label" }
-			),
+			casting: new ActivationField({}, { label: "BF.Spell.CastingTime.Label" }),
 			components: new SchemaField(
 				{
 					required: new SetField(new StringField()),
@@ -93,6 +87,16 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 				this.parent.getFlag("black-flag", "relationship.origin.identifier")
 			]?.ability ?? "intelligence"
 		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		// TODO: Add spell school to type
+		tags.set("details", this.components.label);
+		return tags;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -206,22 +210,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseLabels() {
-		Object.defineProperty(this.casting, "label", {
-			get() {
-				const type = CONFIG.BlackFlag.activationOptions({
-					pluralRule: getPluralRules().select(this.value)
-				}).get(this.type);
-				let label = game.i18n.format("BF.Activation.Scalar.Label", {
-					number: numberFormat(this.value ?? 1),
-					type: type.label
-				});
-				if (this.condition) label = `<span data-tooltip="${this.condition.capitalize()}">${label}*</span>`;
-				return label;
-			},
-			configurable: true,
-			enumerable: false
-		});
-
 		Object.defineProperty(this.source, "label", {
 			get() {
 				const sources = Array.from(this)

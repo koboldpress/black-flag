@@ -62,4 +62,21 @@
 		list-style: none;
 		padding: 0;
 	}
+
+	.tags {
+		font-size: var(--font-size-10);
+		display: flex;
+		gap: 4px;
+		.tag {
+			border: 1px solid var(--bf-color-border-gray);
+			border-radius: 3px;
+			padding-inline: 4px;
+			background: var(--bf-background-color-half-white);
+			box-shadow: 0 1px 1px rgb(0 0 0 / 15%);
+		}
+		.tag:has(.component) {
+			display: flex;
+			gap: 2px;
+		}
+	}
 }

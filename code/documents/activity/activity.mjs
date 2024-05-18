@@ -84,6 +84,22 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Tags that should be displayed in chat.
+	 * @type {Map<string, string>}
+	 */
+	get chatTags() {
+		const tags = this.item.system.chatTags ?? this.item.chatTags;
+		tags.set("activation", this.activation.label);
+		tags.set("duration", this.duration.label);
+		if (this.range.units) tags.set("range", this.range.label);
+		if (this.target.affects.units) tags.set("affects", this.target.affects.label);
+		if (this.target.template.units) tags.set("template", this.target.template.label);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should this activity be displayed as an action on the character sheet?
 	 * @type {boolean}
 	 */
@@ -489,22 +505,21 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {object}
 	 */
 	async activationChatContext() {
-		const context = {
+		return {
 			activity: this,
 			item: this.item,
 			actor: this.item.actor,
 			token: this.item.actor?.token,
 			buttons: {},
-			tags: [],
+			tags: Array.from(this.chatTags.entries())
+				.map(([key, label]) => ({ key, label }))
+				.filter(t => t.label),
 			description: await TextEditor.enrichHTML(this.description || this.item.system.description.value, {
 				relativeTo: this.description ? this : this.item,
 				secrets: false,
 				async: true
 			})
 		};
-		// TODO: Add activity description
-		// TODO: Prepare tags
-		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

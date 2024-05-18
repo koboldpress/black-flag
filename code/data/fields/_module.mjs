@@ -1,5 +1,6 @@
 export * from "./activity-field.mjs";
 export * from "./advancement-field.mjs";
+export { default as ActivationField } from "./activation-field.mjs";
 export { default as AdvancementValueField } from "./advancement-value-field.mjs";
 export { default as CreatureTypeField } from "./creature-type-field.mjs";
 export { default as DamageField } from "./damage-field.mjs";

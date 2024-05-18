@@ -25,6 +25,16 @@ export default class ItemDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Tags that should be displayed in chat.
+	 * @type {Map<string, string>}
+	 */
+	get chatTags() {
+		return this.parent.chatTags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should this Document run final data preparation on its own, or wait for another Document to call those methods?
 	 * @type {boolean}
 	 */

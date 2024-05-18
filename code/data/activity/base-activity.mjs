@@ -1,4 +1,5 @@
 import { getPluralRules, makeLabel, numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
+import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import RangeField from "../fields/range-field.mjs";
@@ -14,7 +15,6 @@ const {
 	EmbeddedDataField,
 	FilePathField,
 	HTMLField,
-	NumberField,
 	SchemaField,
 	StringField
 } = foundry.data.fields;
@@ -70,20 +70,14 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			system: new TypeField({
 				modelLookup: type => this.metadata.dataModel ?? null
 			}),
-			activation: new SchemaField(
-				{
-					value: new NumberField({ initial: undefined, min: 0, integer: true, label: "BF.Activation.Cost.Label" }),
-					type: new StringField({ initial: undefined, label: "BF.Activation.Type.Label" }),
-					condition: new StringField({ initial: undefined, label: "BF.Activation.Condition.Label" }),
-					primary: new BooleanField({
-						required: false,
-						initial: undefined,
-						label: "BF.Activation.Primary.Label",
-						hint: "BF.Activation.Primary.Hint"
-					})
-				},
-				{ label: "BF.Activation.Label" }
-			),
+			activation: new ActivationField({
+				primary: new BooleanField({
+					required: false,
+					initial: undefined,
+					label: "BF.Activation.Primary.Label",
+					hint: "BF.Activation.Primary.Hint"
+				})
+			}),
 			consumption: new SchemaField(
 				{
 					targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
@@ -187,33 +181,6 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				}
 			}
 		}
-		this.range.units ??= "foot"; // TODO: Get default unit based on measurement system
-		this.target.template.units ??= "foot"; // TODO: Get default unit based on measurement system
-
-		let activationConfig;
-		if (this.activation.type in CONFIG.BlackFlag.actionTypes.standard.children) {
-			this.activation.category = "standard";
-			activationConfig = CONFIG.BlackFlag.actionTypes.standard.children[this.activation.type];
-		} else if (this.activation.type in CONFIG.BlackFlag.actionTypes.monster.children) {
-			this.activation.category = "monster";
-			activationConfig = CONFIG.BlackFlag.actionTypes.monster.children[this.activation.type];
-		} else if (this.activation.type in CONFIG.BlackFlag.timeUnits.time.children) {
-			this.activation.category = "time";
-			activationConfig = CONFIG.BlackFlag.timeUnits.time.children[this.activation.type];
-		}
-		Object.defineProperty(this.activation, "label", {
-			get() {
-				if (!activationConfig) return "";
-				const pluralRule = getPluralRules().select(this.value ?? 1);
-				let label = makeLabel(activationConfig, { pluralRule });
-				if (this.category === "time" || activationConfig.scalar) {
-					label = `${numberFormat(this.value ?? 1)} ${label}`;
-				}
-				return label;
-			},
-			configurable: true,
-			enumerable: false
-		});
 
 		this.system.prepareFinalData?.();
 	}

@@ -127,6 +127,16 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		if (this.rangeLabel) tags.set("range", this.rangeLabel);
+		else if (this.reachLabel) tags.set("range", this.reachLabel);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Label for the range with units.
 	 * @type {string}
