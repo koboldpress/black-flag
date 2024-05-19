@@ -19,13 +19,16 @@
           ]
         },
         "flags": {},
-        "hint": "Elves range from under 5 feet to over 6 feet tall and tend toward slender builds, averaging around 110 pounds. Your size is Medium."
+        "hint": "Your size is Medium. Elves range from under 5 feet to over 6 feet tall and tend toward slender builds, averaging around 110 pounds."
       },
       "YThw3aoTv44Bd16p": {
         "type": "grantFeatures",
         "_id": "YThw3aoTv44Bd16p",
         "configuration": {
           "pool": [
+            {
+              "uuid": "Compendium.black-flag.lineages.Item.cVnYCq9cu59IFkuJ"
+            },
             {
               "uuid": "Compendium.black-flag.lineages.Item.vbtLke61QI5NPFLO"
             },
@@ -38,34 +41,15 @@
           "value": 0
         },
         "flags": {}
-      },
-      "nAV5CNJSxNrNbCva": {
-        "type": "trait",
-        "_id": "nAV5CNJSxNrNbCva",
-        "configuration": {
-          "mode": "default",
-          "grants": [
-            "skills:perception"
-          ],
-          "choices": [],
-          "choiceMode": "inclusive"
-        },
-        "level": {
-          "value": 0
-        },
-        "flags": {},
-        "title": "Heightened Senses",
-        "icon": "",
-        "hint": "You have proficiency in the Perception skill.",
-        "selectedIndex": "-1",
-        "selectedTrait": "skills"
       }
     },
     "description": {
-      "value": "<p>Your elf character has certain hereditary traits dictated by their lineage.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity around age 20, mental and emotional faculties reach full maturity around the age of 100. Elves can live to be 750 years old.</p><p>@Embed[.Advancement.o6VRoFXrjVpeUUTc inline]{Size}</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p>@Embed[.Advancement.nAV5CNJSxNrNbCva inline]{Heightened Senses}</p><p>@Embed[Compendium.black-flag.lineages.Item.vbtLke61QI5NPFLO inline]{Magic Ancestry}</p><p>@Embed[Compendium.black-flag.lineages.Item.831o9gvKiBO70RpI inline]{Trance}</p>",
-      "source": "Player's Guide",
+      "value": "<p>Your elf character has the following hereditary traits.</p><p><em><strong>Age.</strong></em> Although elves reach physical maturity around age 20, mental and emotional faculties reach full maturity around the age of 100. Elves can live to be 750 years old.</p><p>@Embed[.Advancement.o6VRoFXrjVpeUUTc inline]{Size}</p><p><em><strong>Speed.</strong></em> Your base walking speed is 30 feet.</p><p>@Embed[Compendium.black-flag.lineages.Item.cVnYCq9cu59IFkuJ inline]{Heightened Senses}</p><p>@Embed[Compendium.black-flag.lineages.Item.vbtLke61QI5NPFLO inline]{Magic Ancestry}</p><p>@Embed[Compendium.black-flag.lineages.Item.831o9gvKiBO70RpI inline]{Trance}</p>",
+      "source": {
+				"fallback": "Black Flag Reference Document"
+			},
       "journal": "",
-      "short": "Elves are an ancient people, with ancestral ties to magic realms populated by immortal creatures."
+      "short": ""
     },
     "identifier": {
       "value": "elf"
@@ -78,10 +62,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.027",
     "coreVersion": "11.315",
     "createdTime": 1694990395855,
-    "modifiedTime": 1713224046457,
+    "modifiedTime": 1716091248558,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "MM7zjzxCO28oFVlv",

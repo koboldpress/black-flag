@@ -1,0 +1,110 @@
+{
+  "folder": "4YOTCKl2AYTMhWlk",
+  "name": "Grounded",
+  "type": "feature",
+  "_id": "VKCrrfVz1eRp0q9a",
+  "img": "icons/skills/movement/arrows-up-trio-red.webp",
+  "system": {
+    "activities": {
+      "up5jyQegmU9c8GGB": {
+        "type": "utility",
+        "_id": "up5jyQegmU9c8GGB",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "When you fail a save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Re-roll Save",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Once per day, when you fail a save, you can reroll the die and use the new roll. Regardless of whether the new roll is a success or failure, you generate 1 Luck.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": []
+    },
+    "type": {
+      "category": "lineage",
+      "value": ""
+    },
+    "identifier": {
+      "value": "grounded",
+      "associated": "smallfolk"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.028",
+    "coreVersion": "11.315",
+    "createdTime": 1716093581904,
+    "modifiedTime": 1716094124613,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!VKCrrfVz1eRp0q9a"
+}

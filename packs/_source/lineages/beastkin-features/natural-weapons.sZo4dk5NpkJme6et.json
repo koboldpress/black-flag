@@ -5,10 +5,12 @@
   "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
   "system": {
     "description": {
-      "value": "<p>You have claws, horns, hooves, fangs, spines, or a similar adaptation that serves as a natural weapon. Work with your GM to determine what type of natural weapon you possess and decide whether it does bludgeoning, piercing, or slashing damage. You can use your natural weapon to make unarmed strikes. When you hit with it, the strike deals 1d6 + your STR or DEX modifier damage (chosen at character creation) of your chosen type, instead of the bludgeoning damage normal for an unarmed strike.</p>",
+      "value": "<p>You have claws, horns, hooves, fangs, spines, or a similar adaptation that serves as a natural weapon. Work with your GM to determine what type of natural weapon you possess and decide whether it does bludgeoning, piercing, or slashing damage. You can use your natural weapon to make unarmed strikes. When you hit with it, the strike deals 1d6 + your STR or DEX modifier damage (choose which during character creation) of your chosen type, instead of the bludgeoning damage normal for an unarmed strike.</p>",
       "source": "Player's Guide"
     },
-    "identifier": {},
+    "identifier": {
+      "associated": ""
+    },
     "level": {
       "value": null
     },
@@ -70,7 +72,19 @@
           "max": ""
         },
         "name": "Unarmed Strike",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "target": {
+          "affects": {
+            "type": "",
+            "count": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        }
       }
     }
   },
@@ -81,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.027",
     "coreVersion": "11.315",
     "createdTime": 1695490865976,
-    "modifiedTime": 1713212959545,
+    "modifiedTime": 1716090764409,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "sZo4dk5NpkJme6et",

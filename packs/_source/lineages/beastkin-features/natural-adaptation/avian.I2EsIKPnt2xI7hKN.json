@@ -5,7 +5,7 @@
   "img": "icons/creatures/birds/dove-pigeon-flying-white.webp",
   "system": {
     "description": {
-      "value": "<p>Leathery, feathery, or gossamer wings sprout from your back or connect to your outstretched arms. You have a fly speed equal to your walking speed. You can’t fly while wearing medium or heavy armor. Carrying a heavy load or a creature of your size or larger while flying reduces your speed by half.</p>",
+      "value": "<p>Leathery, feathery, or gossamer wings sprout from your back or connect to your outstretched arms. You have a flying speed equal to your walking speed. You can’t fly while wearing medium or heavy armor. Carrying a heavy load or a creature of your size or larger while flying reduces your speed by half.</p>",
       "source": "Player's Guide"
     },
     "identifier": {
@@ -25,19 +25,20 @@
         "title": "Fly Speed",
         "icon": "systems/black-flag/artwork/advancement/speed.svg",
         "level": {
-          "value": null
+          "value": 0,
+          "classIdentifier": ""
         },
         "configuration": {
           "changes": [
             {
               "key": "system.traits.movement.types.fly",
               "mode": 5,
-              "value": "@base",
-              "priority": null
+              "value": "@base"
             }
           ]
         },
-        "flags": {}
+        "flags": {},
+        "hint": "You have a flying speed equal to your walking speed."
       }
     },
     "restriction": {
@@ -55,10 +56,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.027",
     "coreVersion": "11.315",
     "createdTime": 1695490952383,
-    "modifiedTime": 1713213122808,
+    "modifiedTime": 1716090815613,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "I2EsIKPnt2xI7hKN",
