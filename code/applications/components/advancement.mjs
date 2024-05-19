@@ -1,14 +1,31 @@
 import { log } from "../../utils/_module.mjs";
 import AdvancementSelection from "../advancement/advancement-selection.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
+import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
  * Custom element for displaying the advancement on an item sheet.
  */
 export default class AdvancementElement extends DocumentSheetAssociatedElement {
+	constructor() {
+		super();
+		this.#controller = new AbortController();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
+		const { signal } = this.#controller;
+
+		this.addEventListener("drop", this._onDrop.bind(this), { signal });
+
+		for (const element of this.querySelectorAll("[data-advancement-id]")) {
+			element.setAttribute("draggable", true);
+			element.ondragstart = this._onDragStart.bind(this);
+		}
 
 		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
@@ -18,6 +35,13 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		}
 
 		new BlackFlagContextMenu(this, "[data-advancement-id]", [], { onOpen: this._onContextMenu.bind(this) });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	disconnectedCallback() {
+		this.#controller.abort();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -31,6 +55,14 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	get advancement() {
 		return this.item.system.advancement;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Controller for handling removal of event listeners.
+	 * @type {AbortController}
+	 */
+	#controller;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -171,5 +203,69 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getItemAdvancementContext", this, advancement, ui.context.menuItems);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Begin dragging an entry.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	_onDragStart(event) {
+		const advancementId = event.currentTarget.dataset.advancementId;
+		const advancement = this.advancement.get(advancementId);
+		DragDrop.beginDragEvent(event, advancement);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry is dropped onto the element.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @returns {Promise}
+	 */
+	async _onDrop(event) {
+		event.preventDefault();
+		event.stopImmediatePropagation();
+
+		if (!this.isEditable) return false;
+
+		const { data } = DragDrop.getDragData(event);
+		if (!this._validateDrop(data)) return false;
+
+		try {
+			const advancement = (await fromUuid(data.uuid)).toObject() ?? data.data;
+			const AdvancementClass = CONFIG.Advancement.types[advancement.type]?.documentClass;
+			if (!advancement || !AdvancementClass) return false;
+
+			if (
+				!CONFIG.Advancement.types[advancement.type].validItemTypes?.has(this.item.type) ||
+				!AdvancementClass.availableForItem(this.item)
+			) {
+				ui.notifications.error("BF.Advancement.Core.Warning.CantBeAdded", { localize: true });
+				return false;
+			}
+
+			delete advancement._id;
+			this.item.createEmbeddedDocuments("Advancement", [advancement]);
+			// TODO: If item is on an actor, apply initial advancement
+		} finally {
+			DragDrop.finishDragEvent(event);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can the dragged document be dropped?
+	 * @param {object} data
+	 * @returns {boolean}
+	 */
+	_validateDrop(data) {
+		if (data.type !== "Advancement") return false;
+		if (!data.uuid) return true;
+		return !data.uuid.startsWith(this.item.uuid);
 	}
 }

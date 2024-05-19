@@ -14,6 +14,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
 		const { signal } = this.#controller;
@@ -45,6 +46,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	disconnectedCallback() {
 		this.#controller.abort();
 	}
@@ -251,7 +253,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		if (!this._validateDrop(data)) return false;
 
 		try {
-			const activity = (await fromUuid(data.uuid)).toObject() ?? activity.data;
+			const activity = (await fromUuid(data.uuid)).toObject() ?? data.data;
 			if (!activity) return false;
 
 			delete activity._id;

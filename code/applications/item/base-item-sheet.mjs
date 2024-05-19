@@ -1,9 +1,19 @@
+import DragDrop from "../drag-drop.mjs";
 import IdentityConfig from "./config/identity-config.mjs";
 
 /**
  * Sheet upon which all other item sheets are based.
  */
 export default class BaseItemSheet extends ItemSheet {
+	/** @inheritDoc */
+	static get defaultOptions() {
+		return foundry.utils.mergeObject(super.defaultOptions, {
+			dragDrop: [{ dropSelector: "form" }]
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -86,4 +96,22 @@ export default class BaseItemSheet extends ItemSheet {
 	 * @returns {Promise}
 	 */
 	async _onAction(event) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onDrop(event) {
+		const { data } = DragDrop.getDragData(event);
+
+		// Forward dropped items to the advancement element
+		// TODO: Handle folders
+		if (data.type === "Advancement") {
+			const advancementElement = this.element[0].querySelector("blackFlag-advancement");
+			return advancementElement?._onDrop(event);
+		}
+
+		super._onDrop(event);
+	}
 }
