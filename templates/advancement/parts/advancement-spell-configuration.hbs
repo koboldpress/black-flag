@@ -1,4 +1,17 @@
 <label>
+	<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
+	<select name="configuration.spell.mode">
+		{{ selectOptions CONFIG.spellPreparationModes.localized selected=configuration.spell.mode }}
+	</select>
+</label>
+{{#if alwaysPreparable}}
+	<label class="full-checkbox">
+		<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
+		<input type="checkbox" name="configuration.spell.alwaysPrepared"
+					 {{ checked configuration.spell.alwaysPrepared }}>
+	</label>
+{{/if}}
+<label>
 	<span>
 		{{ localize "BF.Advancement.GrantSpells.Origin.Label" }}
 		<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Origin.Hint"></i>
@@ -14,6 +27,14 @@
 	</select>
 </label>
 <label>
+	<span>{{ localize "BF.Ability.Label[one]" }}</span>
+	<multi-select name="configuration.spell.ability">
+		{{#each abilities}}
+			<option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+		{{/each}}
+	</multi-select>
+</label>
+<label>
 	<span>
 		{{ localize "BF.Spell.Source.Label" }}
 		<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Source.Hint"></i>
@@ -22,16 +43,3 @@
 		{{ selectOptions CONFIG.spellSources.localized selected=configuration.spell.source blank="" }}
 	</select>
 </label>
-<label>
-	<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
-	<select name="configuration.spell.mode">
-		{{ selectOptions CONFIG.spellPreparationModes.localized selected=configuration.spell.mode }}
-	</select>
-</label>
-{{#if alwaysPreparable}}
-	<label class="full-checkbox">
-		<span>{{ localize "BF.Spell.Preparation.AlwaysPrepared" }}</span>
-		<input type="checkbox" name="configuration.spell.alwaysPrepared"
-					 {{ checked configuration.spell.alwaysPrepared }}>
-	</label>
-{{/if}}

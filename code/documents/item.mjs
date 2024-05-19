@@ -14,7 +14,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	 */
 	get accentColor() {
 		if (this.system.color) return this.system.color;
-		return this.system.metadata?.accentColor ?? "var(--bf-blue);";
+		return this.system.metadata?.accentColor ?? "var(--bf-blue)";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

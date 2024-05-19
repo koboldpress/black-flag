@@ -83,19 +83,19 @@ export default class GrantFeaturesAdvancement extends Advancement {
 
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
-		// Link to compendium items
-		if (!flow || !this.configuredForLevel(this.relavantLevel(levels)))
-			return this.configuration.pool
-				.map(item => `<span class="choice-entry">${linkForUUID(item.uuid)}</span>`)
-				.join(" ");
-
 		// Link to items on the actor
-		return this.value.added
-			.map(
-				data =>
-					`<span class="choice-entry">${data.document?.toAnchor({ classes: ["content-link"] }).outerHTML ?? " "}</span>`
-			)
-			.join(" ");
+		if (flow)
+			return (
+				this.value.added
+					?.map(
+						data =>
+							`<span class="choice-entry">${data.document?.toAnchor({ classes: ["content-link"] }).outerHTML ?? " "}</span>`
+					)
+					.join(" ") ?? ""
+			);
+
+		// Link to compendium items
+		return this.configuration.pool.map(item => `<span class="choice-entry">${linkForUUID(item.uuid)}</span>`).join(" ");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -2,7 +2,7 @@ import LocalDocumentField from "../fields/local-document-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import { GrantFeaturesConfigurationData, GrantFeaturesValueData } from "./grant-features-data.mjs";
 
-const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Grant Spells advancement.
@@ -31,13 +31,14 @@ export class GrantSpellsConfigurationData extends GrantFeaturesConfigurationData
 /**
  * Value data for the Grant Spells advancement.
  *
- * @property {GrantedSpellData[]} updated - Spells updated.
+ * @property {string} ability - Ability to assign if applicable.
+ * @property {GrantedSpellData[]} added - Spells added or updated.
  */
-export class GrantSpellsValueData extends GrantFeaturesValueData {
+export class GrantSpellsValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			...super.defineSchema(),
+			ability: new StringField(),
 			added: new ArrayField(
 				new SchemaField({
 					document: new LocalDocumentField(foundry.documents.BaseItem),
@@ -55,6 +56,7 @@ export class GrantSpellsValueData extends GrantFeaturesValueData {
 /**
  * Configuration data for spells that can be granted.
  *
+ * @property {Set<string>} ability - One or more abilities that will be used for the provided spell.
  * @property {string} origin - Identifier of a class or subclass to associated with these spells.
  * @property {string} source - Source the granted spell will be treated as, regardless of original source.
  * @property {string} mode - Spell preparation mode to set.
@@ -64,6 +66,7 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
+			ability: new SetField(new StringField()),
 			origin: new IdentifierField({
 				label: "BF.Advancement.GrantSpells.Origin.Label",
 				hint: "BF.Advancement.GrantSpells.Origin.Hint"
@@ -88,6 +91,10 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 			"flags.black-flag.relationship.mode": this.mode,
 			"flags.black-flag.relationship.alwaysPrepared": this.alwaysPrepared
 		};
+		if (this.ability.size)
+			updates["flags.black-flag.relationship.origin.ability"] = this.ability.has(data.ability)
+				? data.ability
+				: this.ability.first();
 		if (this.origin) updates["flags.black-flag.relationship.origin.identifier"] = this.origin;
 		if (this.source) updates["flags.black-flag.relationship.source"] = this.source;
 		return updates;
@@ -104,6 +111,7 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 	getReverseChanges(spell, data = {}) {
 		const updates = {};
 		if (this.alwaysPrepared) updates["flags.black-flag.relationship.alwaysPrepared"] = false;
+		if (this.ability.size) updates["flags.black-flag.relationship.origin.-=ability"] = null;
 		if (this.origin) updates["flags.black-flag.relationship.origin.-=identifier"] = null;
 		if (this.source) updates["flags.black-flag.relationship.-=source"] = null;
 		return updates;

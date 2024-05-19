@@ -1,0 +1,27 @@
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+  autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
+	<header>
+		{{> "blackFlag.advancement-name" }}
+		{{#if abilitySelection}}
+			{{#if needsConfiguration}}
+				<div class="advancement-actions">
+					<select name="ability">
+						{{ selectOptions abilities blank=(localize "BF.Advancement.GrantSpells.Notification.Ability") }}
+					</select>
+				</div>
+			{{else if modes.editing}}
+				<div class="advancement-controls">
+					<button type="button" class="link-button" data-action="reverse"
+				        	data-tooltip="BF.Advancement.GrantSpells.Action.Reselect"
+									aria-label="{{ localize 'BF.Advancement.GrantSpells.Action.Reselect' }}">
+						<i class="fa-solid fa-clock-rotate-left" inert></i>
+					</button>
+				</div>
+			{{/if}}
+		{{/if}}
+	</header>
+
+	{{#if summary}}
+		<div class="advancement-summary">{{{ summary }}}</div>
+	{{/if}}
+</form>

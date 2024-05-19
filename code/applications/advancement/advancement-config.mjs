@@ -111,6 +111,10 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 				element.addEventListener("click", this._onItemDelete.bind(this));
 			}
 		}
+
+		for (const element of html.querySelectorAll("multi-select")) {
+			element.addEventListener("change", this._onChangeInput.bind(this));
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

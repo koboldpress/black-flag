@@ -1,10 +1,10 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+  autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
 		{{> "blackFlag.advancement-name"}}
 	</header>
 
 	{{#if summary}}
-		<div class="advancement-summary">{{{summary}}}</div>
+		<div class="advancement-summary">{{{ summary }}}</div>
 	{{/if}}
 </form>

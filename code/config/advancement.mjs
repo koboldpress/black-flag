@@ -59,7 +59,8 @@ export const _advancementTypes = {
 		documentClass: advancement.GrantSpellsAdvancement,
 		validItemTypes: new Set(_ALL_ITEM_TYPES),
 		sheetClasses: {
-			config: sheets.GrantSpellsConfig
+			config: sheets.GrantSpellsConfig,
+			flow: sheets.GrantSpellsFlow
 		}
 	},
 	hitPoints: {

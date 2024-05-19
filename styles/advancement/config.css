@@ -10,10 +10,16 @@
 			margin-block-start: 0.5rem;
 		}
 
-		> input:not([type="checkbox"]), select {
+		> input:not([type="checkbox"]), > select, > multi-select {
 			width: 10em;
 			flex-grow: 1;
 			align-self: center;
+		}
+
+		> multi-select {
+			select {
+				flex: 1 0 calc(var(--form-field-height) + 1px);
+			}
 		}
 
 		&.file {

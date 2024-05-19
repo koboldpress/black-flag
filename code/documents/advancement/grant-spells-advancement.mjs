@@ -30,11 +30,44 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 	static VALID_TYPES = new Set(["spell"]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Preparation Methods         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	warningKey(levels) {
+		return `${this.relativeID}.${levels.class}.no-spellcasting-ability`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	prepareWarnings(levels, notifications) {
+		if (this.configuredForLevel(levels)) return;
+		notifications.set(this.warningKey(levels), {
+			category: `level-${levels.character}`,
+			section: "progression",
+			level: "warn",
+			message: game.i18n.localize("BF.Advancement.GrantSpells.Notification.Ability")
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Display Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	configuredForLevel(levels) {
+		return this.configuration.spell.ability.size <= 1 || this.value.ability;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
+		if (initial && this.configuration.spell.ability.size > 1 && !data?.ability) return;
+		data.ability ??= this.configuration.spell.ability.first();
 		const addUuids = new Set();
 		const updateUuids = new Set();
 		const mode = this.configuration.spell.mode;
@@ -44,7 +77,15 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 			else addUuids.add(uuid);
 		}
 		const added = [...(await this.createItems(addUuids, { data })), ...(await this.updateItems(updateUuids, { data }))];
-		return await this.actor.update({ [`${this.valueKeyPath}.added`]: added }, { render });
+		return await this.actor.update(
+			{
+				[this.valueKeyPath]: {
+					ability: data.ability,
+					[this.storagePath(this.relavantLevel(levels))]: added
+				}
+			},
+			{ render }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -66,7 +107,10 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 		await this.actor.updateEmbeddedDocuments("Item", updates, { render: false });
 		return await this.actor.update(
 			{
-				[`${this.valueKeyPath}.${keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")}`]: null
+				[this.valueKeyPath]: {
+					ability: null,
+					[keyPath.replace(/(\.|^)([\w\d]+)$/, "$1-=$2")]: null
+				}
 			},
 			{ render }
 		);
