@@ -25,6 +25,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} ammunition
  * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
  * @property {DamageField} damage - Base weapon damage.
+ * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {object} range
  * @property {number} range.short - Short range of the weapon.
  * @property {number} range.long - Long range of the weapon.
@@ -69,6 +70,11 @@ export default class WeaponData extends ItemDataModel.mixin(
 				{ label: "BF.Item.Type.Ammunition[one]" }
 			),
 			damage: new DamageField({ bonus: false }),
+			magicalBonus: new NumberField({
+				integer: true,
+				label: "BF.Weapon.MagicalBonus.Label",
+				hint: "BF.Weapon.MagicalBonus.Hint"
+			}),
 			range: new SchemaField(
 				{
 					short: new NumberField({ min: 0, step: 0.1, label: "BF.Range.Short.Label" }),
@@ -115,6 +121,16 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Magical bonus to attacks.
+	 * @returns {number|null}
+	 */
+	get attackMagicalBonus() {
+		return this.magicAvailable ? this.magicalBonus : null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Abilities that could potentially be used with this weapon.
 	 * @type {Set<string>}
 	 */
@@ -133,6 +149,16 @@ export default class WeaponData extends ItemDataModel.mixin(
 		if (this.rangeLabel) tags.set("range", this.rangeLabel);
 		else if (this.reachLabel) tags.set("range", this.reachLabel);
 		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Magical bonus to damage.
+	 * @returns {number|null}
+	 */
+	get damageMagicalBonus() {
+		return this.magicAvailable ? this.magicalBonus : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

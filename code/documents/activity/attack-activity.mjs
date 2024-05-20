@@ -179,7 +179,8 @@ export default class AttackActivity extends DamageActivity {
 			const { parts, data } = buildRoll(
 				{
 					mod: ability?.mod,
-					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData }),
+					magic: this.item.system.damageMagicalBonus
 				},
 				rollData
 			);
@@ -221,6 +222,7 @@ export default class AttackActivity extends DamageActivity {
 						mod: ability?.mod,
 						prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
 						bonus: this.system.attack.bonus,
+						magic: this.item.system.attackMagicalBonus,
 						actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
 					},
 			rollData

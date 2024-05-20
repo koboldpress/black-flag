@@ -86,7 +86,8 @@ export class AttackData extends foundry.abstract.DataModel {
 				prof: this.parent.item.system.proficiency?.flat,
 				bonus: this.parent.actor?.system.buildBonus(this.parent.actor?.system.getModifiers(this.parent.modifierData), {
 					rollData
-				})
+				}),
+				magic: this.parent.item.system.attackMagicalBonus
 			},
 			rollData
 		);

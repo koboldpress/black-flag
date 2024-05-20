@@ -22,6 +22,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @property {object} armor
  * @property {number} armor.value - Base armor class offered by this item.
  * @property {number} armor.requiredStrength - Strength score required to wear this armor.
+ * @property {number} magicalBonus - Magical bonus added to armor class.
  * @property {object} modifier
  * @property {number} modifier.min - Minimum amount of modifier ability (usually DEX) that is contributed to AC.
  * @property {number} modifier.max - Maximum amount of modifier ability (usually DEX) that is contributed to AC.
@@ -61,6 +62,11 @@ export default class ArmorData extends ItemDataModel.mixin(
 					label: "BF.Armor.RequiredStrength.Label"
 				})
 			}),
+			magicalBonus: new NumberField({
+				integer: true,
+				label: "BF.Armor.MagicalBonus.Label",
+				hint: "BF.Armor.MagicalBonus.Hint"
+			}),
 			modifier: new SchemaField({
 				min: new NumberField({
 					required: false,
@@ -82,6 +88,23 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Label for the final AC value.
+	 * @type {string}
+	 */
+	get acLabel() {
+		let label;
+		if (this.type.category === "shield") label = numberFormat(this._source.armor.value || 2, { sign: true });
+		else
+			label = `${game.i18n.localize("BF.ArmorClass.Abbreviation")}: ${numberFormat(
+				this._source.armor.value || 0
+			)} ${this.modifierHint(false)}`;
+		if (this.magicAvailable && this.magicalBonus) label += ` + ${numberFormat(this.magicalBonus)}`;
+		return label;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static proficiencyCategory = "armor";
 
@@ -89,14 +112,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	get traits() {
-		const traits = [
-			this.type.category === "shield"
-				? `+${numberFormat(this.armor.value)}`
-				: `${game.i18n.localize("BF.ArmorClass.Abbreviation")}: ${numberFormat(
-						this.armor.value
-					)} ${this.modifierHint(false)}`,
-			...Array.from(this.properties).map(p => this.validProperties[p]?.label)
-		];
+		const traits = [this.acLabel, ...Array.from(this.properties).map(p => this.validProperties[p]?.label)];
 		// TODO: Display required strength with cumbersome property
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
 		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
@@ -113,10 +129,15 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareBaseArmorValue() {
+		this.armor.value = this._source.armor.value;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	prepareDerivedArmorValue() {
-		if (!this.armor.value && this.type.category === "shield") {
-			this.armor.value = 2;
-		}
+		if (!this.armor.value && this.type.category === "shield") this.armor.value = 2;
+		if (this.magicAvailable && this.magicalBonus) this.armor.value += this.magicalBonus;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

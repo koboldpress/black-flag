@@ -35,7 +35,7 @@
 					{{/each}}
 				</fieldset>
 				<fieldset>
-					<legend>Armor Details</legend>
+					<legend>{{ localize "BF.Armor.Details" }}</legend>
 					<label class="armor-value">
 						{{#if (eq system.type.category "shield")}}
 							<span>{{localize "BF.Shield.Bonus.Label"}}</span>
@@ -47,6 +47,15 @@
 							<span>{{modifierHint}}</span>
 						{{/if}}
 					</label>
+					{{#if properties.magical.selected}}
+						<label>
+							<span>
+								{{ localize "BF.Armor.MagicalBonus.Label" }}
+								<i class="hintIcon" data-tooltip="BF.Armor.MagicalBonus.Hint"></i>
+							</span>
+							<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
+						</label>
+					{{/if}}
 					{{#if properties.cumbersome.selected}}
 						<label class="strength-required">
 							<span>{{localize "BF.Armor.RequiredStrength.Label"}}</span>

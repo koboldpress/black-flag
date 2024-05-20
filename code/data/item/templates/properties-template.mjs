@@ -20,7 +20,7 @@ export default class PropertiesTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Properties that can be applied to this object.
-	 * @type {number}
+	 * @type {object}
 	 */
 	get validProperties() {
 		const validProperties = CONFIG.BlackFlag[`${this.parent.type}Properties`];

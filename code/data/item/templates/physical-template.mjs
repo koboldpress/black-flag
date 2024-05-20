@@ -116,6 +116,19 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Are the magical properties of this item currently available?
+	 * @type {boolean}
+	 */
+	get magicAvailable() {
+		const attunement = this.attunement.value !== "required" || this.parent.actor?.type !== "pc"
+			|| this.parent.getFlag("black-flag", "relationship.attuned") === true;
+		const property = !this.properties || ("magical" in this.validProperties && this.properties.has("magical"));
+		return attunement && property;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The price of all of the items in an item stack.
 	 * @type {number}
 	 */

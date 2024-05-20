@@ -27,84 +27,94 @@
 			<section>
 				{{> "blackFlag.equipment-attunement" }}
 				<fieldset class="properties checkbox-list">
-					<legend>{{localize "BF.Property.Label[other]"}}</legend>
+					<legend>{{ localize "BF.Property.Label[other]" }}</legend>
 					{{#each properties}}
 						<label>
-							<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
+							<input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
 						</label>
 					{{/each}}
 				</fieldset>
 				<fieldset>
-					<legend>Weapon Details</legend>
+					<legend>{{ localize "BF.Weapon.Details" }}</legend>
+					{{#if properties.magical.selected}}
+						<label>
+							<span>
+								{{ localize "BF.Weapon.MagicalBonus.Label" }}
+								<i class="hintIcon" data-tooltip="BF.Weapon.MagicalBonus.Hint"></i>
+							</span>
+							<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
+						</label>
+					{{/if}}
 					<div class="damage field-group">
-						<span>{{localize "BF.Damage.Label"}}</span>
+						<span>{{ localize "BF.Damage.Label" }}</span>
 						<label class="die-count">
-							<span>{{localize "BF.Die.Number.Label"}}</span>
-							<input type="number" name="system.damage.number" step=1 min=1 value="{{source.damage.number}}">
+							<span>{{ localize "BF.Die.Number.Label" }}</span>
+							<input type="number" name="system.damage.number" step=1 min=1 value="{{ source.damage.number }}">
 						</label>
 						<label class="die-denomination">
-							<span>{{localize "BF.Die.Denomination.Label"}}</span>
+							<span>{{ localize "BF.Die.Denomination.Label" }}</span>
 							<select name="system.damage.denomination">
-								{{selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination blank=""}}
+								{{ selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination blank="" }}
 							</select>
 						</label>
 						<label>
-							<span>{{localize "BF.Damage.Type.Label"}}</span>
+							<span>{{ localize "BF.Damage.Type.Label" }}</span>
 							<select name="system.damage.type">
-								{{selectOptions CONFIG.damageTypes selected=source.damage.type
-									labelAttr="label" localize=true sort=true blank=""}}
+								{{ selectOptions CONFIG.damageTypes selected=source.damage.type
+								                 labelAttr="label" localize=true sort=true blank="" }}
 							</select>
 						</label>
 					</div>
 					{{#if properties.ammunition.selected}}
 						<label class="ammunition-type">
-							<span>{{localize "BF.Ammunition.Type.Label"}}</span>
+							<span>{{ localize "BF.Ammunition.Type.Label" }}</span>
 							<select name="system.ammunition.type">
-								{{selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank=""}}
+								{{ selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank="" }}
 							</select>
 						</label>
 					{{/if}}
 					{{#if (or (eq source.type.value "ranged") properties.thrown.selected)}}
 						<div class="range field-group">
-							<span>{{localize "BF.Range.Label"}}</span>
+							<span>{{ localize "BF.Range.Label" }}</span>
 							<label>
-								<span>{{localize "BF.Range.Short.Label"}}</span>
-								<input type="number" name="system.range.short" step=0.1 min=0 value="{{source.range.short}}">
+								<span>{{ localize "BF.Range.Short.Label" }}</span>
+								<input type="number" name="system.range.short" step=0.1 min=0 value="{{ source.range.short }}">
 							</label>
 							<label>
-								<span>{{localize "BF.Range.Long.Label"}}</span>
-								<input type="number" name="system.range.long" step=0.1 min=0 value="{{source.range.long}}">
+								<span>{{ localize "BF.Range.Long.Label" }}</span>
+								<input type="number" name="system.range.long" step=0.1 min=0 value="{{ source.range.long }}">
 							</label>
 							{{!-- TODO: Range units, only if reach isn't also displayed --}}
 						</div>
 					{{/if}}
 					{{#if properties.reach.selected}}
 						<label class="reach">
-							<span>{{localize "BF.Reach.Label"}}</span>
-							<input type="number" name="system.range.reach" step="0.1" min="0" value="{{source.range.reach}}" placeholder="+5">
+							<span>{{ localize "BF.Reach.Label" }}</span>
+							<input type="number" name="system.range.reach" step="0.1" min="0" value="{{ source.range.reach }}"
+							       placeholder="+5">
 							{{!-- TODO: Reach units --}}
 						</label>
 					{{/if}}
 				</fieldset>
 				<fieldset class="options checkbox-list">
-					<legend>{{localize "BF.Weapon.Option.Label[other]"}}</legend>
-					{{#each options as |option key|}}
+					<legend>{{ localize "BF.Weapon.Option.Label[other]" }}</legend>
+					{{#each options}}
 						<label>
-							<input type="checkbox" name="system.options.{{key}}" {{checked option.selected}}>
-							{{option.label}}
+							<input type="checkbox" name="system.options.{{ @key }}" {{ checked selected }}>
+							{{ label }}
 						</label>
 					{{/each}}
 				</fieldset>
-				{{> "blackFlag.item-activities"}}
+				{{> "blackFlag.item-activities" }}
 				<fieldset>
-					<legend>{{localize "BF.Override.Label[other]"}}</legend>
+					<legend>{{ localize "BF.Override.Label[other]" }}</legend>
 					<label>
-						<span>{{localize "BF.Proficiency.Label[one]"}}</span>
+						<span>{{ localize "BF.Proficiency.Label[one]" }}</span>
 						<select name="system.overrides.proficiency">
 							{{#select source.overrides.proficiency}}
-								<option value="null">{{localize "BF.Proficiency.Override.Auto"}}</option>
-								<option value="true">{{localize "BF.Proficiency.Override.Always"}}</option>
-								<option value="false">{{localize "BF.Proficiency.Override.Never"}}</option>
+								<option value="null">{{ localize "BF.Proficiency.Override.Auto" }}</option>
+								<option value="true">{{ localize "BF.Proficiency.Override.Always" }}</option>
+								<option value="false">{{ localize "BF.Proficiency.Override.Never" }}</option>
 							{{/select}}
 						</select>
 					</label>
