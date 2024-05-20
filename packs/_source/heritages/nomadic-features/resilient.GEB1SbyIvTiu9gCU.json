@@ -7,7 +7,7 @@
   "system": {
     "advancement": {},
     "description": {
-      "value": "<p>You have advantage on checks or saves made to resist debilitating weather effects, such as those caused by extreme heat or cold. Additionally, when you complete a short rest, you can reduce your exhaustion level by one. Once used, you cannot reduce your exhaustion level in this way again until you complete a long rest.</p>",
+      "value": "<p>You have advantage on checks or saves made to resist debilitating weather effects, such as those caused by extreme heat or cold. In addition, when you complete a short rest, you can reduce your exhaustion level by one. Once used, you can't reduce your exhaustion level in this way again until you complete a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -27,7 +27,64 @@
     },
     "uses": {
       "min": "",
-      "max": ""
+      "max": "",
+      "recovery": []
+    },
+    "activities": {
+      "n8smNKTVquLj6Wyb": {
+        "type": "utility",
+        "_id": "n8smNKTVquLj6Wyb",
+        "description": "<p>When you complete a short rest, you can reduce your exhaustion level by one.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you complete a short rest"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Reduce Exhaustion",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
     }
   },
   "effects": [],
@@ -38,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.028",
     "coreVersion": "11.315",
     "createdTime": 1701130923468,
-    "modifiedTime": 1713214347224,
+    "modifiedTime": 1716231391239,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!GEB1SbyIvTiu9gCU"

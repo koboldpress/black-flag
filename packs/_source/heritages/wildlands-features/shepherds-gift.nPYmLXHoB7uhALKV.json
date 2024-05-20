@@ -30,17 +30,20 @@
       }
     },
     "description": {
-      "value": "<p>You have proficiency in the Animal Handling skill. Any nonmagical Beast whose CR is equal to or less than your PB that targets you with an attack must first make a WIS check contested by your WIS (Animal Handling). If you succeed, the beast must choose a new target or lose the attack. If you fail, it attacks normally. If you attack or deal damage to a creature, or cast a spell that affects a hostile creature, this effect ends for all Beasts that can see or hear you.</p>",
+      "value": "<p>You have proficiency in the Animal Handling skill. Any Beast or creature with the Animal tag whose CR is equal to or less than your PB that targets you with an attack must first make a [[/check wisdom]] check contested by your [[/skill wisdom animalHandling]]. If you succeed, the creature must choose a new target or lose the attack.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
     },
-    "identifier": {},
+    "identifier": {
+      "associated": "wildlands"
+    },
     "restriction": {
       "filters": []
     },
     "type": {
-      "category": ""
+      "category": "heritage",
+      "value": ""
     },
     "level": {
       "value": null
@@ -58,10 +61,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.028",
     "coreVersion": "11.315",
     "createdTime": 1701131043751,
-    "modifiedTime": 1713214530190,
+    "modifiedTime": 1716231068571,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!nPYmLXHoB7uhALKV"

@@ -33,28 +33,6 @@
         "selectedIndex": "-1",
         "selectedTrait": "languages"
       },
-      "b7AUmJBf4nFUlsAe": {
-        "type": "trait",
-        "_id": "b7AUmJBf4nFUlsAe",
-        "title": "Traveler",
-        "icon": "",
-        "level": {
-          "value": 0
-        },
-        "configuration": {
-          "grants": [
-            "skills:survival"
-          ],
-          "mode": "default",
-          "choices": [],
-          "choiceMode": "inclusive",
-          "hint": "You have proficiency in the Survival skill."
-        },
-        "flags": {},
-        "selectedIndex": "-1",
-        "selectedTrait": "skills",
-        "hint": "You have proficiency in the Survival skill."
-      },
       "FxbSEDtu8Y3T1pKu": {
         "type": "grantFeatures",
         "_id": "FxbSEDtu8Y3T1pKu",
@@ -62,6 +40,9 @@
           "pool": [
             {
               "uuid": "Compendium.black-flag.heritages.Item.GEB1SbyIvTiu9gCU"
+            },
+            {
+              "uuid": "Compendium.black-flag.heritages.Item.YcFIqAdJ28v7FKHe"
             }
           ]
         },
@@ -72,9 +53,11 @@
       }
     },
     "description": {
-      "short": "Nomadic heritage characters hail from a tight-knit community that regularly moves to and from different areas.",
-      "source": "Player's Guide",
-      "value": "<p>Nomadic heritage characters hail from a tight-knit community that regularly moves to and from different areas. Your people might flow with seasonally available plants and game, follow established trade routes, or roam for a more unique reason. People of nomadic heritage are suited to the rigors of travel and often understand environmental cycles and the hazards or benefits that come with them.</p><p>@Embed[Compendium.black-flag.heritages.Item.GEB1SbyIvTiu9gCU inline]{Resilient}</p><p>@Embed[.Advancement.b7AUmJBf4nFUlsAe inline]{Traveler}</p><p>@Embed[.Advancement.Otvbikum0s7Bz1e8 inline]{Languages}</p>"
+      "short": "",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "value": "<p>@Embed[Compendium.black-flag.heritages.Item.GEB1SbyIvTiu9gCU inline]{Resilient}</p><p>@Embed[Compendium.black-flag.heritages.Item.YcFIqAdJ28v7FKHe inline]{Traveler}</p><p>@Embed[.Advancement.Otvbikum0s7Bz1e8 inline]{Languages}</p>"
     },
     "identifier": {
       "value": "nomadic"
@@ -87,10 +70,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.028",
     "coreVersion": "11.315",
     "createdTime": 1694990531309,
-    "modifiedTime": 1713224015320,
+    "modifiedTime": 1716230887806,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "GVvyWSemb9GD22fW",

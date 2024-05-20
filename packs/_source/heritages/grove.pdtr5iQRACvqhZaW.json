@@ -20,7 +20,7 @@
           ],
           "choices": [
             {
-              "count": 2,
+              "count": 1,
               "pool": [
                 "languages:*"
               ]
@@ -30,33 +30,8 @@
           "choiceMode": "inclusive"
         },
         "flags": {},
-        "selectedIndex": "-1",
+        "selectedIndex": "0",
         "selectedTrait": "languages"
-      },
-      "XWSXDWvnud8lh7Cc": {
-        "type": "trait",
-        "_id": "XWSXDWvnud8lh7Cc",
-        "title": "Elf Weapon Training",
-        "icon": "",
-        "level": {
-          "value": 0
-        },
-        "configuration": {
-          "grants": [
-            "weapons:simple:shortbow",
-            "weapons:martial:longsword",
-            "weapons:martial:shortsword",
-            "weapons:martial:longbow"
-          ],
-          "mode": "default",
-          "choices": [],
-          "choiceMode": "inclusive",
-          "hint": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
-        },
-        "flags": {},
-        "selectedIndex": "-1",
-        "selectedTrait": "weapons",
-        "hint": "You have proficiency with the longsword, shortsword, shortbow, and longbow."
       },
       "BMZ2d1Cre3p4uNm9": {
         "type": "grantFeatures",
@@ -65,6 +40,9 @@
           "pool": [
             {
               "uuid": "Compendium.black-flag.heritages.Item.dY7HGWQ3eTZwCoJW"
+            },
+            {
+              "uuid": "Compendium.black-flag.heritages.Item.PgizKCeRI9qz8mGW"
             }
           ]
         },
@@ -75,9 +53,11 @@
       }
     },
     "description": {
-      "short": "Grove heritage characters were raised with the values and traditions of the grove elf communities.",
-      "source": "Player's Guide",
-      "value": "<p>Grove heritage characters were raised with the values and traditions of the grove elf communities.</p><p>When elves first walked the world, many chose to settle in the bounteous forests. These were the first grove elves, who established communities that intertwined with the natural world rather than seeking dominion over it. These communities preserve the forests they call home, communing with nature in sacred groves and taking up arms against those who dare to claim ownership of the land.</p><p>As natural spaces are threatened by growing populations, all manner of creatures have come to share the values of the grove elves. All whose hearts are open to the beasts and plants of the wild are welcome to settle among them.</p><p>@Embed[Compendium.black-flag.heritages.Item.dY7HGWQ3eTZwCoJW inline]{Canopy Walker}</p><p>@Embed[.Advancement.XWSXDWvnud8lh7Cc inline]{Elf Weapon Training}</p><p>@Embed[.Advancement.5T1mnPI3SisIsc7h inline]{Languages}</p>"
+      "short": "",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "value": "<p>@Embed[Compendium.black-flag.heritages.Item.dY7HGWQ3eTZwCoJW inline]{Canopy Walker}</p><p>@Embed[Compendium.black-flag.heritages.Item.PgizKCeRI9qz8mGW inline]{Nature's Camouflage}</p><p>@Embed[.Advancement.5T1mnPI3SisIsc7h inline]{Languages}</p>"
     },
     "identifier": {
       "value": "grove"
@@ -90,10 +70,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.028",
     "coreVersion": "11.315",
     "createdTime": 1694990521071,
-    "modifiedTime": 1713224011379,
+    "modifiedTime": 1716230891133,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "pdtr5iQRACvqhZaW",
