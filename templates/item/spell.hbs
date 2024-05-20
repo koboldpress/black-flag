@@ -57,8 +57,7 @@
 						<label>
 							<span>{{ localize "BF.Spell.Preparation.Label" }}</span>
 							<select name="flags.black-flag.relationship.mode">
-								{{ selectOptions CONFIG.spellPreparationModes selected=flags.black-flag.relationship.mode
-																 labelAttr="label" localize=true }}
+								{{ selectOptions CONFIG.spellPreparationModes.localized selected=flags.black-flag.relationship.mode }}
 							</select>
 						</label>
 						{{#if item.system.alwaysPreparable}}
@@ -68,6 +67,13 @@
 							         {{ checked flags.black-flag.relationship.alwaysPrepared }}>
 							</label>
 						{{/if}}
+						<label>
+							<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
+							<select name="flags.black-flag.relationship.origin.ability">
+								{{ selectOptions CONFIG.abilities.localized selected=flags.black-flag.relationship.origin.ability
+						  	                 blank=(localize "BF.Default.Specific" default=system.defaultAbility) }}
+							</select>
+						</label>
 					</fieldset>
 				{{/if}}
 				<fieldset>

@@ -79,14 +79,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/**
 	 * Ability used for attacks, save DCs, and damage with this spell.
-	 * @type {string|null}
+	 * @type {string}
 	 */
 	get ability() {
-		return (
-			this.parent.actor?.system.spellcasting?.origins[
-				this.parent.getFlag("black-flag", "relationship.origin.identifier")
-			]?.ability ?? "intelligence"
-		);
+		return this.parent.getFlag(game.system.id, "relationship.origin.ability") || this.defaultAbility;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -97,6 +93,20 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		// TODO: Add spell school to type
 		tags.set("details", this.components.label);
 		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Default spellcasting ability based on this spell's origin.
+	 * @type {string}
+	 */
+	get defaultAbility() {
+		return (
+			this.parent.actor?.system.spellcasting?.origins[
+				this.parent.getFlag("black-flag", "relationship.origin.identifier")
+			]?.ability ?? "intelligence"
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
