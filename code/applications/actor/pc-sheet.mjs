@@ -330,6 +330,9 @@ export default class PCSheet extends BaseActorSheet {
 				switch (subAction) {
 					case "assign-abilities":
 						return new AbilityAssignmentDialog(this.actor).render(true);
+					case "reset-abilities":
+						await this.actor.system.resetAbilities();
+						return new AbilityAssignmentDialog(this.actor).render(true);
 					case "level-down":
 						return Dialog.confirm({
 							title: `${game.i18n.localize("BF.Progression.Action.LevelDown.Label")}: ${this.actor.name}`,
@@ -353,9 +356,6 @@ export default class PCSheet extends BaseActorSheet {
 							}
 						}
 						properties.type = "class";
-					case "reset-abilities":
-						await this.actor.system.resetAbilities();
-						return new AbilityAssignmentDialog(this.actor).render(true);
 					case "select":
 						if (!properties.type) return;
 						const classIdentifier = event.target.closest("[data-class]")?.dataset.class;
