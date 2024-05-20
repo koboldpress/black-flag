@@ -1,0 +1,43 @@
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
+	<header>
+		{{> "blackFlag.advancement-name" }}
+		{{#if needsConfiguration}}
+			<div class="advancement-actions">
+				{{#if needsAbilitySelection}}
+					<select name="ability">
+						{{ selectOptions abilities blank=(localize "BF.Advancement.GrantSpells.Notification.Ability") }}
+					</select>
+				{{else}}
+					<button type="submit" class="light-button" data-action="select-choice">
+						{{ localize "BF.Advancement.ChooseFeatures.Action.Choose" }}
+					</button>
+				{{/if}}
+			</div>
+		{{/if}}
+		{{#if showReselectAbility}}
+			<div class="advancement-controls">
+				<button type="button" class="link-button" data-action="reverse"
+								data-tooltip="BF.Advancement.ChooseFeatures.Action.Revert"
+								aria-label="{{ localize 'BF.Advancement.ChooseFeatures.Action.Revert' }}">
+					<i class="fa-solid fa-clock-rotate-left" inert></i>
+				</button>
+			</div>
+		{{/if}}
+	</header>
+
+	<div class="advancement-summary">
+		{{#each chosen}}
+			<span class="choice-entry">
+				{{{ blackFlag-linkForUUID uuid }}}
+				{{#if (or @root.modes.editing @root.needsConfiguration)}}
+					<button type="button" class="link-button" data-action="remove-choice" data-id="{{ id }}"
+					        data-tooltip="BF.Advancement.ChooseFeatures.Action.Revert"
+									aria-label="{{ localize 'BF.Advancement.ChooseFeatures.Action.Revert' }}">
+						<i class="fa-solid fa-trash" inert></i>
+					</button>
+				{{/if}}
+			</span>
+		{{/each}}
+	</div>
+</form>

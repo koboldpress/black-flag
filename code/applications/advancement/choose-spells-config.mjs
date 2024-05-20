@@ -18,9 +18,24 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 	/** @inheritDoc */
 	getData(options = {}) {
 		const context = super.getData(options);
+		context.abilities = Object.entries(CONFIG.BlackFlag.abilities.localized).reduce((obj, [key, label]) => {
+			obj[key] = { label, selected: context.configuration.spell.ability.has(key) ? "selected" : "" };
+			return obj;
+		}, {});
 		context.alwaysPreparable =
 			CONFIG.BlackFlag.spellPreparationModes[context.configuration.spell.mode]?.preparable ?? false;
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async prepareConfigurationUpdate(configuration) {
+		configuration.spell.ability ??= [];
+		configuration = super.prepareConfigurationUpdate(configuration);
+		return configuration;
 	}
 }

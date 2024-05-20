@@ -128,10 +128,10 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
-		if (initial || !data?.length) return;
+		if (initial || !data?.choices?.length) return;
 		const level = this.relavantLevel(levels);
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
-		const added = await this.createItems(data, { added: existing });
+		const added = await this.createItems(data.choices, { added: existing });
 		return await this.actor.update({ [`${this.valueKeyPath}.${this.storagePath(level)}`]: added }, { render });
 	}
 

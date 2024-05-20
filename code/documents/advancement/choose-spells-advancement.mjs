@@ -33,19 +33,40 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 	static VALID_TYPES = new Set(["spell"]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Display Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	configuredForLevel(levels) {
+		return (this.configuration.spell.ability.size <= 1 || this.value.ability) && super.configuredForLevel(levels);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Application Methods         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
-		if (initial || !data?.length) return;
+		if (initial) {
+			if (this.configuration.spell.ability.size === 1) {
+				await this.actor.update({ [this.valueKeyPath]: { ability: this.configuration.spell.ability.first() } });
+			}
+			return;
+		}
+
+		data.ability ??= this.value.ability;
+		if (!data.ability) {
+			if (this.configuration.spell.ability.size > 1) return;
+			data.ability = this.configuration.spell.ability.first();
+		}
+
 		const level = this.relavantLevel(levels);
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
 
 		const addUuids = new Set();
 		const updateUuids = new Set();
 		const mode = this.configuration.spell.mode;
-		for (const uuid of data) {
+		for (const uuid of data.choices ?? []) {
 			const existing = this.actor.sourcedItems.get(uuid);
 			if (existing?.getFlag("black-flag", "relationship.mode") === mode) updateUuids.add(uuid);
 			else addUuids.add(uuid);
@@ -54,7 +75,15 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 			...(await this.createItems(addUuids, { added: existing, data })),
 			...(await GrantSpellsAdvancement.prototype.updateItems.call(this, updateUuids, { data }))
 		];
-		return await this.actor.update({ [`${this.valueKeyPath}.${this.storagePath(level)}`]: added }, { render });
+		return await this.actor.update(
+			{
+				[this.valueKeyPath]: {
+					ability: data.ability,
+					[this.storagePath(level)]: added
+				}
+			},
+			{ render }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -103,7 +132,7 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 
 		// Check circle restriction
 		const circles = CONFIG.BlackFlag.spellCircles();
-		if (restriction.circle === -1) {
+		if (restriction.circle === -1 && this.actor) {
 			if (item.system.circle.base > this.actor.system.spellcasting.maxCircle) {
 				if (strict)
 					throw new Error(
@@ -116,7 +145,7 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 				if (strict) throw new Error(game.i18n.localize("BF.Advancement.ChooseSpells.Warning.NoCantrips"));
 				return false;
 			}
-		} else if (item.system.circle.base !== restriction.circle) {
+		} else if (restriction.circle !== -1 && item.system.circle.base !== restriction.circle) {
 			if (strict)
 				throw new Error(
 					game.i18n.format(

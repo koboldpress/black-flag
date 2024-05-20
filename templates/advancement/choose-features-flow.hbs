@@ -1,24 +1,26 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+       autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
-		{{> "blackFlag.advancement-name"}}
+		{{> "blackFlag.advancement-name" }}
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">
-				<button type="submit" data-action="select-choice">
-					{{localize "BF.Advancement.ChooseFeatures.Action.Choose"}}
+				<button type="submit" class="light-button" data-action="select-choice">
+					{{ localize "BF.Advancement.ChooseFeatures.Action.Choose" }}
 				</button>
 			</div>
 		{{/if}}
 	</header>
 
 	<div class="advancement-summary">
-		{{#each choosen}}
+		{{#each chosen}}
 			<span class="choice-entry">
-				{{{blackFlag-linkForUUID this.uuid}}}
+				{{{ blackFlag-linkForUUID uuid }}}
 				{{#if (or @root.modes.editing @root.needsConfiguration)}}
-					<a data-action="remove-choice" data-id="{{this.id}}">
-						<i class="fa-solid fa-trash"></i>
-					</a>
+					<button type="button" class="link-button" data-action="remove-choice" data-id="{{ id }}"
+					        data-tooltip="BF.Advancement.ChooseFeatures.Action.Revert"
+					        aria-label="{{ localize 'BF.Advancement.ChooseFeatures.Action.Revert' }}">
+					<i class="fa-solid fa-trash" inert></i>
+				</button>
 				{{/if}}
 			</span>
 		{{/each}}

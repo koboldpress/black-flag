@@ -62,12 +62,14 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 /**
  * Value data for the Choose Spells advancement.
  *
+ * @property {string} ability - Ability to assign if applicable.
  * @property {Record<number, GrantedSpellData[]>} added - Spells chosen at each level.
  */
 export class ChooseSpellsValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
+			ability: new StringField(),
 			added: new MappingField(
 				new ArrayField(
 					new SchemaField({

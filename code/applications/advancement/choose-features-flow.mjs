@@ -18,7 +18,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 	getData() {
 		const context = super.getData();
 		const level = this.advancement.relavantLevel(this.levels);
-		context.choosen = (this.advancement.value.added?.[level] ?? []).map(a => a.document);
+		context.chosen = (this.advancement.value.added?.[level] ?? []).map(a => a.document);
 		return context;
 	}
 
@@ -51,7 +51,7 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 			} catch (err) {
 				return;
 			}
-			return this.advancement.apply(this.levels, [choice]);
+			return this.advancement.apply(this.levels, { choices: [choice] });
 		}
 	}
 }
