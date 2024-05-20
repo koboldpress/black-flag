@@ -31,6 +31,18 @@
 					</label>
 				{{/each}}
 			</fieldset>
+			{{#if properties.magical.selected}}
+				<fieldset>
+					<legend>{{ localize "BF.Ammunition.Details" }}</legend>
+					<label>
+						<span>
+							{{ localize "BF.Ammunition.MagicalBonus.Label" }}
+							<i class="hintIcon" data-tooltip="BF.Ammunition.MagicalBonus.Hint"></i>
+						</span>
+						<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
+					</label>
+				</fieldset>
+			{{/if}}
 		</div>
 	</div>
 
