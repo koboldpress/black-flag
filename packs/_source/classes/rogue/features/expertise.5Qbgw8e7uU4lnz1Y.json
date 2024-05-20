@@ -12,10 +12,16 @@
         "configuration": {
           "choices": [
             {
-              "count": 2,
+              "count": 1,
+              "pool": [
+                "skills:*"
+              ]
+            },
+            {
+              "count": 1,
               "pool": [
                 "skills:*",
-                "tools:thievesTools"
+                "tools:*"
               ]
             }
           ],
@@ -30,8 +36,8 @@
           "classRestriction": ""
         },
         "selectedIndex": "0",
-        "selectedTrait": "tools",
-        "hint": ""
+        "selectedTrait": "skills",
+        "hint": "Choose two of your skill proficiencies, or one skill proficiency and one tool proficiency."
       },
       "kvxICqpbp4cnuEnT": {
         "type": "trait",
@@ -41,7 +47,7 @@
               "count": 2,
               "pool": [
                 "skills:*",
-                "tools:thievesTools"
+                "tools:*"
               ]
             }
           ],
@@ -58,7 +64,7 @@
         },
         "flags": {},
         "_id": "kvxICqpbp4cnuEnT",
-        "hint": "",
+        "hint": "Choose two more of your proficiencies (any combination of skills or tools).",
         "selectedIndex": "0",
         "selectedTrait": "tools"
       }
@@ -95,10 +101,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.026",
+    "systemVersion": "0.9.028",
     "coreVersion": "11.315",
     "createdTime": 1699045630380,
-    "modifiedTime": 1715740209199,
+    "modifiedTime": 1716239963202,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!5Qbgw8e7uU4lnz1Y"

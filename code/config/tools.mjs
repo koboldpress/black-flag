@@ -5,52 +5,20 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @enum {NestedTypeConfiguration}
  */
 export const tools = {
-	artisan: {
-		localization: "BF.Tool.Category.Artisan",
-		children: {
-			alchemist: {
-				label: "BF.Tool.Type.AlchemistsSupplies"
-			},
-			brewer: {
-				label: "BF.Tool.Type.BrewersSupplies"
-			},
-			calligrapher: {
-				label: "BF.Tool.Type.CalligraphersSupplies"
-			},
-			carpenter: {
-				label: "BF.Tool.Type.CarpentersTools"
-			},
-			cook: {
-				label: "BF.Tool.Type.CooksUtensils"
-			},
-			leatherworker: {
-				label: "BF.Tool.Type.LeatherworkersTools"
-			},
-			mason: {
-				label: "BF.Tool.Type.MasonsTools"
-			},
-			painter: {
-				label: "BF.Tool.Type.PaintersSupplies"
-			},
-			potter: {
-				label: "BF.Tool.Type.PottersTools"
-			},
-			smith: {
-				label: "BF.Tool.Type.SmithsTools"
-			},
-			tinker: {
-				label: "BF.Tool.Type.TinkersTools"
-			},
-			weaver: {
-				label: "BF.Tool.Type.WeaversTools"
-			},
-			woodcarver: {
-				label: "BF.Tool.Type.WoodcarversTools"
-			}
-		}
+	alchemist: {
+		label: "BF.Tool.Type.AlchemistsTools"
 	},
-	disguiseKit: {
-		label: "BF.Tool.Type.DisguiseKit"
+	artist: {
+		label: "BF.Tool.Type.ArtistTools"
+	},
+	charlatan: {
+		label: "BF.Tool.Type.CharlatanTools"
+	},
+	clothier: {
+		label: "BF.Tool.Type.ClothierTools"
+	},
+	construction: {
+		label: "BF.Tool.Type.ConstructionTools"
 	},
 	gaming: {
 		localization: "BF.Tool.Category.GamingSet",
@@ -58,13 +26,16 @@ export const tools = {
 			dice: {
 				label: "BF.Tool.Type.DiceSet"
 			},
-			playingCard: {
-				label: "BF.Tool.Type.PlayingCardSet"
+			card: {
+				label: "BF.Tool.Type.CardSet"
 			}
 		}
 	},
-	herbalism: {
-		label: "BF.Tool.Type.HerbalismKit"
+	smithing: {
+		label: "BF.Tool.Type.SmithingTools"
+	},
+	herbalist: {
+		label: "BF.Tool.Type.HerbalistTools"
 	},
 	musicalInstrument: {
 		localization: "BF.Tool.Category.MusicalInstrument",
@@ -89,29 +60,25 @@ export const tools = {
 			}
 		}
 	},
-	poisonersKit: {
-		label: "BF.Tool.Type.PoisonersKit"
+	navigator: {
+		label: "BF.Tool.Type.NavigatorTools"
 	},
-	thievesTools: {
+	provisioner: {
+		label: "BF.Tool.Type.ProvisionerTools"
+	},
+	trapper: {
+		label: "BF.Tool.Type.TrapperTools"
+	},
+	thieves: {
 		label: "BF.Tool.Type.ThievesTools"
 	},
-	vehicle: {
-		localization: "BF.Tool.Category.Vehicle",
-		children: {
-			land: {
-				localization: "BF.Vehicle.Type.Land"
-			},
-			water: {
-				localization: "BF.Vehicle.Type.Water"
-			}
-		}
+	tinker: {
+		label: "BF.Tool.Type.TinkerTools"
 	}
 };
 localizeConfig(tools, { pluralRule: "other" });
-localizeConfig(tools.artisan.children);
 localizeConfig(tools.gaming.children);
 localizeConfig(tools.musicalInstrument.children);
-localizeConfig(tools.vehicle.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
