@@ -36,13 +36,13 @@ export function actorValues(actor, trait) {
 	const field = actor.system.schema.getField(keyPath.replace("system.", ""));
 	if ( field instanceof MappingField ) {
 		Object.entries(data).forEach(([k, d]) => {
-			const key = traitChoices.find(k)[0];
+			const key = traitChoices.find(k)?.[0];
 			if ( !key ) return;
 			values[key] = foundry.utils.getProperty(d, `${trait === "saves" ? "save." : ""}proficiency.multiplier`);
 		});
 	} else {
 		data.value.forEach(v => {
-			const key = traitChoices.find(v)[0];
+			const key = traitChoices.find(v)?.[0];
 			if ( key ) values[key] = 1;
 		});
 	}
