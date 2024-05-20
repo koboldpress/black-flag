@@ -17,11 +17,17 @@ export const armor = {
 	light: {
 		localization: "BF.Armor.Category.Light",
 		children: {
+			padded: {
+				label: "BF.Armor.Type.Padded"
+			},
 			leather: {
 				label: "BF.Armor.Type.Leather"
 			},
 			studdedLeather: {
 				label: "BF.Armor.Type.StuddedLeather"
+			},
+			brigandine: {
+				label: "BF.Armor.Type.Brigandine"
 			}
 		}
 	},
@@ -36,6 +42,9 @@ export const armor = {
 			},
 			scaleMail: {
 				label: "BF.Armor.Type.ScaleMail"
+			},
+			breastplate: {
+				label: "BF.Armor.Type.Breastplate"
 			},
 			halfPlate: {
 				label: "BF.Armor.Type.HalfPlate"

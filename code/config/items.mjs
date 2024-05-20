@@ -161,6 +161,9 @@ export const itemProperties = {
 	magical: {
 		label: "BF.Item.Property.Magical.Label"
 	},
+	special: {
+		label: "BF.Item.Property.Special.Label"
+	},
 
 	// Armor
 	cumbersome: {

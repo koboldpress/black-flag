@@ -42,6 +42,10 @@ export const weapons = {
 				label: "BF.Weapon.Base.Quarterstaff",
 				type: "melee"
 			},
+			sickle: {
+				label: "BF.Weapon.Base.Sickle",
+				type: "melee"
+			},
 			spear: {
 				label: "BF.Weapon.Base.Spear",
 				type: "melee"
@@ -78,6 +82,10 @@ export const weapons = {
 				label: "BF.Weapon.Base.Flail",
 				type: "melee"
 			},
+			glaive: {
+				label: "BF.Weapon.Base.Glaive",
+				type: "melee"
+			},
 			greataxe: {
 				label: "BF.Weapon.Base.Greataxe",
 				type: "melee"
@@ -88,6 +96,10 @@ export const weapons = {
 			},
 			halberd: {
 				label: "BF.Weapon.Base.Halberd",
+				type: "melee"
+			},
+			lance: {
+				label: "BF.Weapon.Base.Lance",
 				type: "melee"
 			},
 			longsword: {
@@ -102,6 +114,10 @@ export const weapons = {
 				label: "BF.Weapon.Base.Morningstar",
 				type: "melee"
 			},
+			pike: {
+				label: "BF.Weapon.Base.Pike",
+				type: "melee"
+			},
 			rapier: {
 				label: "BF.Weapon.Base.Rapier",
 				type: "melee"
@@ -110,15 +126,35 @@ export const weapons = {
 				label: "BF.Weapon.Base.Scimitar",
 				type: "melee"
 			},
+			scythe: {
+				label: "BF.Weapon.Base.Scythe",
+				type: "melee"
+			},
 			shortsword: {
 				label: "BF.Weapon.Base.Shortsword",
+				type: "melee"
+			},
+			trident: {
+				label: "BF.Weapon.Base.Trident",
+				type: "melee"
+			},
+			warPick: {
+				label: "BF.Weapon.Base.WarPick",
 				type: "melee"
 			},
 			warhammer: {
 				label: "BF.Weapon.Base.Warhammer",
 				type: "melee"
 			},
+			whip: {
+				label: "BF.Weapon.Base.Whip",
+				type: "melee"
+			},
 			// Martial Ranged
+			blowgun: {
+				label: "BF.Weapon.Base.Blowgun",
+				type: "ranged"
+			},
 			handCrossbow: {
 				label: "BF.Weapon.Base.CrossbowHand",
 				type: "ranged"
@@ -181,6 +217,7 @@ export const weaponProperties = [
 	"light",
 	"loading",
 	"magical",
+	"special",
 	"reach",
 	"thrown",
 	"twoHanded",

@@ -8,6 +8,9 @@ export const ammunition = {
 	arrow: {
 		localization: "BF.Ammunition.Type.Arrow"
 	},
+	blowgunNeedle: {
+		localization: "BF.Ammunition.Type.BlowgunNeedle"
+	},
 	crossbowBolt: {
 		localization: "BF.Ammunition.Type.CrossbowBolt"
 	},
