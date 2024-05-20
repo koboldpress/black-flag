@@ -187,6 +187,13 @@
 				font-weight: normal;
 			}
 		}
+		.inline-caption {
+			font-weight: bold;
+			font-style: italic;
+			&::after {
+				content: ". ";
+			}
+		}
 	}
 
 	h4.magic-item {

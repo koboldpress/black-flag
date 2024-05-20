@@ -58,8 +58,10 @@ export default Base =>
 			if (content instanceof HTMLCollection) section.append(...content);
 			else section.append(content);
 			if (label && section.children[0]) {
-				const firstElement = section.children[0];
-				firstElement.innerHTML = `<strong><em>${label}.</em></strong> ${firstElement.innerHTML}`;
+				const inlineCaption = document.createElement("strong");
+				inlineCaption.classList.add("inline-caption");
+				inlineCaption.innerText = label;
+				section.children[0].insertAdjacentElement("afterbegin", inlineCaption);
 			}
 			return section;
 		}

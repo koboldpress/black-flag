@@ -871,6 +871,12 @@ async function embedTextPage(config, label, options) {
 		if (config.classes) section.className = config.classes;
 		section.classList.add("content-embed");
 		section.innerHTML = enrichedPage;
+		if (label && section.children[0]) {
+			const inlineCaption = document.createElement("strong");
+			inlineCaption.classList.add("inline-caption");
+			inlineCaption.innerText = label;
+			section.children[0].insertAdjacentElement("afterbegin", inlineCaption);
+		}
 		return section;
 	}
 
