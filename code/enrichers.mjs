@@ -431,13 +431,15 @@ function createRollLabel(config) {
  * ```
  */
 async function enrichCheck(config, label, options) {
+	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
-		if (value in CONFIG.BlackFlag.enrichment.lookup.abilities) config.ability = value;
-		else if (value in CONFIG.BlackFlag.enrichment.lookup.skills) config.skill = value;
-		else if (value in CONFIG.BlackFlag.enrichment.lookup.tools) config.tool = value;
+		if (value in LOOKUP.abilities) config.ability = LOOKUP.abilities[value].key;
+		else if (value in LOOKUP.skills) config.skill = LOOKUP.skills[value].key;
+		else if (value in LOOKUP.tools) config.tool = value;
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
+	console.log(foundry.utils.deepClone(config));
 
 	let invalid = false;
 
