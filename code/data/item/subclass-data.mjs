@@ -89,6 +89,15 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	_preCreateAdvancement(data, options, user) {
+		if (data._id || foundry.utils.hasProperty(data, "system.advancement")) return;
+		this._createInitialAdvancement(
+			CONFIG.BlackFlag.subclassFeatureLevels.map(level => ({ type: "grantFeatures", level: { value: level } }))
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	_preCreateSubclass(data, options, user) {
 		if (!this.parent.actor) return;
 
