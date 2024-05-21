@@ -16,6 +16,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
 		const { signal } = this.#controller;
@@ -70,6 +71,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	disconnectedCallback() {
 		this.#controller.abort();
 	}
@@ -135,25 +137,25 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			{
 				name: `BF.${type}.Action.View`,
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
-				condition: li => !item.isEditable,
+				condition: li => !this.isEditable,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
 				name: `BF.${type}.Action.Edit`,
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
-				condition: li => item.isEditable,
+				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: `BF.${type}.Action.Duplicate`,
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
-				condition: li => item.isEditable,
+				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
 				icon: "<i class='fa-solid fa-trash fa-fw destructive'></i>",
-				condition: li => item.isEditable,
+				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "delete")
 			},
 			{
@@ -161,7 +163,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw"></i>`,
 				condition: () =>
 					this.actor &&
-					item.isEditable &&
+					this.isEditable &&
 					item.system.activities?.size &&
 					(this.actor.type === "npc" || type === "Feature"),
 				callback: li => this._onAction(li[0], "enable"),
@@ -170,14 +172,14 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			{
 				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
 				icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
-				condition: () => this.actor && item.isEditable && type === "Item" && item.system.equippable,
+				condition: () => this.actor && this.isEditable && type === "Item" && item.system.equippable,
 				callback: li => this._onAction(li[0], "equip"),
 				group: "state"
 			},
 			{
 				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
 				icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-				condition: () => this.actor && item.isEditable && type === "Spell" && item.system.preparable,
+				condition: () => this.actor && this.isEditable && type === "Spell" && item.system.preparable,
 				callback: li => this._onAction(li[0], "prepare"),
 				group: "state"
 			}
