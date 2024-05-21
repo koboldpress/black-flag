@@ -1,31 +1,31 @@
 <label>
-	<span>{{localize "BF.Advancement.Core.Title.Label"}}</span>
-	<input type="text" name="title" value="{{source.title}}" placeholder="{{default.title}}">
+	<span>{{ localize "BF.Advancement.Core.Title.Label" }}</span>
+	<input type="text" name="title" value="{{ source.title }}" placeholder="{{ default.title }}">
 </label>
 
 <label class="file">
-	<span>{{localize "BF.Advancement.Core.Icon.Label"}}</span>
-	{{filePicker type="image" target="icon"}}
-	<input type="text" name="icon" value="{{source.icon}}" placeholder="{{default.icon}}">
+	<span>{{ localize "BF.Advancement.Core.Icon.Label" }}</span>
+	{{ filePicker type="image" target="icon" }}
+	<input type="text" name="icon" value="{{ source.icon }}" placeholder="{{ default.icon }}">
 </label>
 
 {{#if showHint}}
 	<label>
 		<span>
-			{{localize "BF.Advancement.Core.Hint.Label"}}
+			{{ localize "BF.Advancement.Core.Hint.Label" }}
 			<i class="hintIcon" data-tooltip="BF.Advancement.Core.Hint.Hint"></i>
 		</span>
-		<textarea name="hint" placeholder="{{hintPlaceholder}}">{{advancement.hint}}</textarea>
+		<textarea name="hint" placeholder="{{ hintPlaceholder }}">{{ advancement.hint }}</textarea>
 	</label>
 {{/if}}
 
 {{#if showIdentifier}}
 	<label>
-		<span>{{localize "BF.Identifier.Label"}}</span>
-		<input type="text" name="identifier" value="{{source.identifier}}" placeholder="{{default.identifier}}">
+		<span>{{ localize "BF.Identifier.Label" }}</span>
+		<input type="text" name="identifier" value="{{ source.identifier }}" placeholder="{{ default.identifier }}">
 		{{#if default.identifierHint}}
 			<p class="hint">
-				{{{localize default.identifierHint identifier=identifier}}}
+				{{{ localize default.identifierHint identifier=identifier }}}
 				<!-- <a class="identifier-hint-copy" data-tooltip="BF.Identifier.Action.Copy"><i class="far fa-clipboard"></i></a> -->
 			</p>
 		{{/if}}
@@ -34,9 +34,9 @@
 
 {{#if showLevelSelector}}
 	<label>
-		<span>{{localize "BF.Level.Label[one]"}}</span>
+		<span>{{ localize "BF.Level.Label[one]" }}</span>
 		<select name="level.value" data-dtype="Number">
-			{{selectOptions levels selected=advancement.level.value}}
+			{{ selectOptions levels selected=advancement.level.value }}
 		</select>
 	</label>
 {{/if}}
@@ -44,14 +44,14 @@
 {{#if showClassIdentifier}}
 	<label>
 		<span>
-			{{localize "BF.Advancement.Core.Level.Reference.Label"}}
+			{{ localize "BF.Advancement.Core.Level.Reference.Label" }}
 			<i class="hintIcon" data-tooltip="BF.Advancement.Core.Level.Reference.Hint"></i>
 		</span>
 		<select name="level.classIdentifier">
 			{{#select advancement.level.classIdentifier}}
-				<option value="">{{localize "BF.Level.Overall"}}</option>
-				<optgroup label="{{localize 'BF.Level.Class'}}">
-					{{selectOptions CONFIG.registration.all.class labelAttr="name"}}
+				<option value="">{{ localize "BF.Level.Overall" }}</option>
+				<optgroup label="{{ localize 'BF.Level.Class' }}">
+					{{ selectOptions CONFIG.registration.all.class labelAttr="name" }}
 				</optgroup>
 			{{/select}}
 		</select>

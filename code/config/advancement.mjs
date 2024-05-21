@@ -8,6 +8,8 @@ import * as advancement from "../documents/advancement/_module.mjs";
  * @typedef {object} AdvancementTypeConfig
  * @property {typeof Advancement} type - Advancement type represented.
  * @property {Set<string>} validItemTypes - Types to which this advancement can be added.
+ * @property {boolean} [hidden] - Should this advancement be hidden in the selection dialog? Hidden advancement types
+ *                                can be created programmatically but not manually by users.
  */
 
 const _ALL_ITEM_TYPES = ["background", "class", "feature", "heritage", "lineage", "subclass", "talent"];
@@ -123,6 +125,14 @@ export const _advancementTypes = {
 		sheetClasses: {
 			config: sheets.SpellcastingConfig
 		}
+	},
+	spellcastingValue: {
+		documentClass: advancement.SpellcastingValueAdvancement,
+		validItemTypes: new Set(["class", "subclass"]),
+		sheetClasses: {
+			config: sheets.SpellcastingValueConfig
+		},
+		hidden: true
 	},
 	trait: {
 		documentClass: advancement.TraitAdvancement,

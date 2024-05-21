@@ -98,7 +98,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			case "create":
 				if (this.advancement.configuration[name].scaleValue) return;
 				const title = game.i18n.localize(this.constructor.KNOWN[name].label);
-				const scaleData = { type: "scaleValue", title, identifier: `${name}-known`, configuration: { type: "number" } };
+				const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
 				const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
 				await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
 				scale.sheet.render(true);

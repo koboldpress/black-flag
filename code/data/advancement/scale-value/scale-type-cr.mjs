@@ -6,6 +6,7 @@ const { NumberField } = foundry.data.fields;
  * Scale value data type that stores challenge ratings.
  */
 export default class ScaleTypeCR extends ScaleTypeNumber {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			value: new NumberField({ required: true, min: 0 })
@@ -16,6 +17,7 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -29,6 +31,7 @@ export default class ScaleTypeCR extends ScaleTypeNumber {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get display() {
 		let value = super.display;
 		switch (this.value) {

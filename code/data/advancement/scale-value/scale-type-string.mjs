@@ -18,6 +18,7 @@ export default class ScaleTypeString extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			value: new StringField({ blank: false })

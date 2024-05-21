@@ -7,6 +7,7 @@ const { StringField } = foundry.data.fields;
  * Scale value data type that stores distance values.
  */
 export default class ScaleValueTypeDistance extends ScaleTypeNumber {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
@@ -16,6 +17,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -30,6 +32,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get display() {
 		const unit = CONFIG.BlackFlag.distanceUnits[this.units ?? "foot"];
 		return numberFormat(this.value, { unit });
@@ -37,6 +40,7 @@ export default class ScaleValueTypeDistance extends ScaleTypeNumber {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get placeholder() {
 		const placeholder = super.placeholder;
 		placeholder.units = CONFIG.BlackFlag.distanceUnits.localized[placeholder.units] ?? "";

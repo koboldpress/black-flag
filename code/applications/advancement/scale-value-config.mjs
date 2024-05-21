@@ -4,6 +4,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for scale values.
  */
 export default class ScaleValueConfig extends AdvancementConfig {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "scale-value", "two-column"],
@@ -27,6 +28,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData() {
 		const config = this.advancement.configuration;
 		const types = CONFIG.Advancement.types.scaleValue.dataTypes;
@@ -57,6 +59,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -78,6 +81,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _updateObject(event, formData) {
 		const updates = foundry.utils.expandObject(formData);
 		if (!("configuration.type" in formData) || updates.configuration.type === this.advancement.configuration.type) {
@@ -104,6 +108,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareConfigurationUpdate(configuration) {
 		// Determine keys that should be present
 		const ScaleValueType =

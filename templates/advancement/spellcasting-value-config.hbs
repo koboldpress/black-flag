@@ -1,0 +1,33 @@
+<form autocomplete="off">
+	<section>
+		<fieldset>
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
+			{{#if types}}
+				<label>
+					<span>{{ localize "BF.Advancement.ScaleValue.Type.Label" }}</span>
+					<select name="configuration.type">
+						{{ selectOptions types selected=configuration.type }}
+					</select>
+					<p class="hint type-hint">
+						{{ localize type.hint }}
+					</p>
+				</label>
+			{{/if}}
+		</fieldset>
+		<fieldset>
+			<legend>{{ localize "BF.Level.Label[other]" }}</legend>
+			<ol class="level-list">
+				{{#each levels}}
+					<li class="level {{ @root.configuration.type }}" data-level="{{ @key }}">
+						<label>
+							<span>{{ @key }}</span>
+							<input type="number" name="configuration.scale.{{ @key }}.value" step="1"
+							       value="{{ value.value }}" placeholder="{{ placeholder.value }}">
+						</label>
+					</li>
+				{{/each}}
+			</ol>
+		</fieldset>
+	</section>
+</form>

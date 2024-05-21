@@ -6,6 +6,7 @@ const { NumberField } = foundry.data.fields;
  * Scale value data type that stores numeric values.
  */
 export default class ScaleTypeNumber extends ScaleTypeString {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			value: new NumberField({ required: true })
@@ -14,6 +15,7 @@ export default class ScaleTypeNumber extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -28,6 +30,7 @@ export default class ScaleTypeNumber extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static convertFrom(original, options) {
 		const value = Number(original.formula);
 		if (Number.isNaN(value)) return null;

@@ -1,21 +1,30 @@
-const { ObjectField, StringField } = foundry.data.fields;
+import ScaleValueConfigurationData from "./scale-value/scale-value-data.mjs";
+
+const { ObjectField } = foundry.data.fields;
 
 /**
  * Data model for the Scale Value advancement type.
  *
- * @property {string} type - Type of data represented by this scale value.
  * @property {object} scale - Sparse scale value data for each level.
  */
-export default class ScaleValueConfigurationData extends foundry.abstract.DataModel {
+export class SpellcastingValueConfigurationData extends ScaleValueConfigurationData {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			type: new StringField({
-				initial: "string",
-				label: "BF.Advancement.ScaleValue.Type.Label"
-			}),
 			scale: new ObjectField()
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Type of data represented by this scale value.
+	 * @type {string}
+	 */
+	get type() {
+		return "number";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

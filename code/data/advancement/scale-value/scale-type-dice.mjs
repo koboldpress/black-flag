@@ -6,6 +6,7 @@ const { NumberField } = foundry.data.fields;
  * Scale value data type that stores dice values.
  */
 export default class ScaleTypeDice extends ScaleTypeString {
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			number: new NumberField({ nullable: true, initial: null, integer: true, positive: true }),
@@ -15,6 +16,7 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -29,6 +31,7 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static convertFrom(original, options) {
 		const [number, denomination] = (original.formula ?? "").split("d");
 		if (!denomination || !Number.isNumeric(number) || !Number.isNumeric(denomination)) return null;
@@ -48,6 +51,7 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get formula() {
 		if (!this.denomination) return null;
 		return `${this.number ?? ""}${this.die}`;
@@ -55,6 +59,7 @@ export default class ScaleTypeDice extends ScaleTypeString {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get placeholder() {
 		const placeholder = super.placeholder;
 		placeholder.number ??= "";

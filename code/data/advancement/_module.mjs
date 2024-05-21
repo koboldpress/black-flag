@@ -10,4 +10,5 @@ export * from "./property-data.mjs";
 export * as scaleValue from "./scale-value/_module.mjs";
 export * from "./size-data.mjs";
 export * from "./spellcasting-data.mjs";
+export * from "./spellcasting-value-data.mjs";
 export * from "./trait-data.mjs";
