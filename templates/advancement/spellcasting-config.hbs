@@ -67,11 +67,13 @@
 					</span>
 					{{#if data.scaleValue}}
 						{{{ data.anchor }}}
-						<button class="link-button" type="button" data-action="known" data-sub-action="delete"
-						        data-tooltip="BF.Advancement.Core.Action.Delete"
-										aria-label="{{ localize 'BF.Advancement.Core.Action.Delete' }}">
-							<i class="fa-solid fa-trash" inert></i>
-						</button>
+						{{#if @root.editable}}
+							<button class="link-button" type="button" data-action="known" data-sub-action="delete"
+						          data-tooltip="BF.Advancement.Core.Action.Delete"
+										  aria-label="{{ localize 'BF.Advancement.Core.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
+						{{/if}}
 					{{else}}
 						<button class="link-button" type="button" data-action="known" data-sub-action="create">
 							<i class="fa-solid fa-plus" inert></i>

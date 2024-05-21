@@ -139,11 +139,16 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	prepareData() {
 		const item = this.parent.item;
 		const scaleValues = item.system?.advancement.byType("scaleValue") ?? [];
+		const spellcastingValues = item.system?.advancement.byType("spellcastingValue") ?? [];
 
 		const prepareScale = (obj, identifier) => {
 			Object.defineProperty(obj, "scaleValue", {
 				get() {
-					return item.system?.advancement.get(obj.scale) ?? scaleValues?.find(s => s.identifier === identifier);
+					return (
+						item.system?.advancement.get(obj.scale) ??
+						scaleValues?.find(s => s.identifier === identifier) ??
+						spellcastingValues?.find(s => s.identifier === identifier)
+					);
 				},
 				configurable: true,
 				enumerable: false
