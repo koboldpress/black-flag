@@ -41,7 +41,8 @@
 		<div class="drop-area journal-link">
 			{{#if system.description.journal}}
 				<p>
-					<a class="content-link" data-uuid="{{ system.description.journal }}">
+					<a class="content-link" data-link="{{ system.description.journal }}"
+					   data-uuid="{{ system.description.journal }}">
 						<i class="fa-solid fa-book-open" inert></i>
 						{{ localize "BF.Journal.Link.MoreInformation" }}
 					</a>
