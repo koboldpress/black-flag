@@ -25,7 +25,7 @@ export default class ScaleValueConfigurationData extends foundry.abstract.DataMo
 	/** @inheritDoc */
 	static migrateData(source) {
 		Object.values(source.scale ?? {}).forEach(v =>
-			CONFIG.Advancement.types.scaleValue.dataTypes[source.type].migrateData(v)
+			CONFIG.Advancement.types.scaleValue.dataTypes[source.type]?.migrateData(v)
 		);
 	}
 }

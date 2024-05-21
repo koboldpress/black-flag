@@ -1,22 +1,22 @@
 <form autocomplete="off">
 	<section>
 		<ol>
-			{{#each types as |config name|}}
+			{{#each types}}
 				<li>
 					<label>
-						<figure><img src="{{#if config.icon}}{{config.icon}}{{else}}{{config.img}}{{/if}}"></figure>
-						<h3>{{config.label}}</h3>
-						<input name="type" type="radio" value="{{name}}" {{disabled config.disabled}}>
-						<p class="hint">{{config.hint}}</p>
+						<figure><img src="{{#if icon}}{{ icon }}{{else}}{{ img }}{{/if}}"></figure>
+						<h3>{{ label }}</h3>
+						<input name="type" type="radio" value="{{ @key }}" {{ disabled disabled }}>
+						<p class="hint">{{ hint }}</p>
 					</label>
 				</li>
 			{{/each}}
 		</ol>
 	</section>
 
-	<nav class="dialog-buttons">
-		<button type="button" class="dialog-button" data-button="submit" disabled>
-			<i class="far fa-save"></i> {{buttonLabel}}
+	<nav class="buttons">
+		<button type="button" class="heavy-button" data-button="submit">
+			<i class="fa-regular fa-save" inert></i> {{ buttonLabel }}
 		</button>
 	</nav>
 </form>
