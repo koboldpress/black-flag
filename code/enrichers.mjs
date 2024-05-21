@@ -439,7 +439,6 @@ async function enrichCheck(config, label, options) {
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
-	console.log(foundry.utils.deepClone(config));
 
 	let invalid = false;
 
