@@ -413,7 +413,7 @@ export default Base =>
 		async deleteDialog(options = {}) {
 			const type = game.i18n.localize(this.metadata.title);
 			return Dialog.confirm({
-				title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`,
+				title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`,
 				content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {
 					type
 				})}</p>`,
