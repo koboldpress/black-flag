@@ -39,9 +39,11 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
-		return `<span class="choice-entry"><span class="choice-name">${
-			CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
-		}</span></span>`;
+		const entries = Array.from(this.configuration.talentList).map(
+			e =>
+				`<span class="choice-entry"><span class="choice-name">${CONFIG.BlackFlag.talentCategories.localizedPlural[e]}</span></span>`
+		);
+		return entries.join("\n");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -55,8 +57,10 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 		if (!classDocument) return "";
 
 		const classImprovement = classDocument.system.advancement.byType("improvement")[0];
-		const lists = [classImprovement?.configuration.talentList, this.configuration.talentList]
-			.map(t => CONFIG.BlackFlag.talentCategories.localized[t])
+		const lists = Array.from(
+			new Set([...(classImprovement?.configuration.talentList ?? []), ...this.configuration.talentList])
+		)
+			.map(t => CONFIG.BlackFlag.talentCategories.localizedDescription[t])
 			.filter(t => t);
 
 		return `<p>${game.i18n.format("BF.Advancement.ExpandedTalentList.JournalDescription", {

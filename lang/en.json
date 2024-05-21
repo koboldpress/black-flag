@@ -348,7 +348,7 @@
 	"ExpandedTalentList": {
 		"Title": "Expanded Talent List",
 		"Hint": "Give players access to a second talent list when choosing talents during improvement.",
-		"JournalDescription": "When your {classLowercase} level grants you an Improvement and you choose to gain a new talent, you can select a talent from the {talentLists} lists."
+		"JournalDescription": "When you gain a new talent, you can select that talent from either {talentLists} talents list."
 	},
 
 	"GrantFeatures": {
@@ -400,7 +400,11 @@
 		"TalentList": {
 			"Label": "Talent List"
 		},
-		"JournalDescription": "Increase one ability score of your choice by 1 and choose a talent for which you meet the prerequisites from the {talentList} list."
+		"Journal": {
+			"Description": "<p>Choose one of the following improvements (ability scores can’t be raised above 20 with this feature):</p><ul><li>Increase a single ability score by 2.</li><li>Increase two different ability scores by 1 each.</li><li>{talentList}</li></ul>",
+			"TalentList[one]": "Increase one ability score by 1 and select a talent from {lists} talents list.",
+			"TalentList[other]": "Increase one ability score by 1 and select a talent from either {lists} talents list."
+		}
 	},
 
 	"KeyAbility": {
@@ -1290,10 +1294,13 @@
 			"Label": "Talent Category",
 			"Magic[one]": "Magical Talent",
 			"Magic[other]": "Magical Talents",
+			"MagicDescription": "the magical",
 			"Martial[one]": "Martial Talent",
 			"Martial[other]": "Martial Talents",
+			"MartialDescription": "the martial",
 			"Technical[one]": "Technical Talent",
-			"Technical[other]": "Technical Talents"
+			"Technical[other]": "Technical Talents",
+			"TechnicalDescription": "the technical"
 		}
 	},
 	"Type": {
@@ -1595,7 +1602,7 @@
 			"AdvancementDescription": {
 				"Label": "Advancement Description",
 				"Hint": "Brief description that appears in the subclass entry within the features list.",
-				"Placeholder": "When you reach 3rd level, choose a subclass from the options presented below."
+				"Placeholder": "<p>When you reach 3rd level, choose a subclass from the options presented below.</p>"
 			},
 			"Header": "{class} Subclasses",
 			"Items": "Subclasses",

@@ -1,20 +1,30 @@
 import { LocalDocumentField } from "../fields/_module.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Improvement advancement.
  *
- * @property {string} talentList - Talent list from which the player can choose.
+ * @property {Set<string>} talentList - One or more talent list from which the player can choose.
  */
 export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			talentList: new StringField({
-				initial: () => Object.keys(CONFIG.BlackFlag.talentCategories)[0],
+			talentList: new SetField(new StringField(), {
 				label: "BF.Advancement.Improvement.TalentList.Label"
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		if (foundry.utils.getType(source.talentList) === "string") {
+			source.talentList = [source.talentList];
+		}
 	}
 }
 

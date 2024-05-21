@@ -220,17 +220,21 @@ localizeConfig(itemProperties);
  */
 export const talentCategories = {
 	magic: {
-		localization: "BF.Feature.Talent.Category.Magic"
+		localization: "BF.Feature.Talent.Category.Magic",
+		description: "BF.Feature.Talent.Category.MagicDescription"
 	},
 	martial: {
-		localization: "BF.Feature.Talent.Category.Martial"
+		localization: "BF.Feature.Talent.Category.Martial",
+		description: "BF.Feature.Talent.Category.MartialDescription"
 	},
 	technical: {
-		localization: "BF.Feature.Talent.Category.Technical"
+		localization: "BF.Feature.Talent.Category.Technical",
+		description: "BF.Feature.Talent.Category.TechnicalDescription"
 	}
 };
 localizeConfig(talentCategories);
 localizeConfig(talentCategories, { propertyName: "localizedPlural", pluralRule: "other" });
+localizeConfig(talentCategories, { labelKeyPath: "description", propertyName: "localizedDescription" });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

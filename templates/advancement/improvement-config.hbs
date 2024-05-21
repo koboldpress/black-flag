@@ -5,9 +5,11 @@
 			{{> "blackFlag.advancement-controls"}}
 			<label>
 				<span>{{localize "BF.Advancement.Improvement.TalentList.Label"}}</span>
-				<select name="configuration.talentList">
-					{{selectOptions CONFIG.talentCategories.localizedPlural selected=configuration.talentList}}
-				</select>
+				<multi-select name="configuration.talentList">
+					{{#each talentCategories}}
+						<option value="{{ @key }}" {{ selected }}>{{ label }}</option>
+					{{/each}}
+				</multi-select>
 			</label>
 		</fieldset>
 	</section>

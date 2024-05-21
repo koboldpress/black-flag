@@ -1,5 +1,5 @@
 import { ImprovementConfigurationData, ImprovementValueData } from "../../data/advancement/improvement-data.mjs";
-import { linkForUUID, numberFormat, search } from "../../utils/_module.mjs";
+import { getPluralRules, linkForUUID, numberFormat, search } from "../../utils/_module.mjs";
 import GrantFeaturesAdvancement from "./grant-features-advancement.mjs";
 
 /**
@@ -106,7 +106,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		} else {
 			const choices = [
 				`${game.i18n.localize("BF.Ability.Label[one]")} ${p1}`,
-				CONFIG.BlackFlag.talentCategories.localized[this.configuration.talentList]
+				...Array.from(this.configuration.talentList).map(e => CONFIG.BlackFlag.talentCategories.localizedPlural[e])
 			];
 			return choices.map(c => `<span class="choice-entry"><span class="choice-name">${c}</span></span>`).join(" ");
 		}
@@ -119,10 +119,17 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	 * @returns {string}
 	 */
 	journalSummary() {
-		return `<p>${game.i18n.format("BF.Advancement.Improvement.JournalDescription", {
-			talentList: CONFIG.BlackFlag.talentCategories.localized[this.configuration.talentList],
-			talentListPlural: CONFIG.BlackFlag.talentCategories.localizedPlural[this.configuration.talentList]
-		})}</p>`;
+		let lists = Array.from(this.configuration.talentList).map(
+			t => CONFIG.BlackFlag.talentCategories.localizedDescription[t]
+		);
+		return game.i18n.format("BF.Advancement.Improvement.Journal.Description", {
+			talentList: game.i18n.format(
+				`BF.Advancement.Improvement.Journal.TalentList[${getPluralRules().select(lists.length)}]`,
+				{
+					lists: game.i18n.getListFormatter({ type: "disjunction" }).format(lists)
+				}
+			)
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -187,14 +194,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	 * @returns {BlackFlagItem[]}
 	 */
 	async choices() {
-		let filter = { k: "system.type.category", v: this.configuration.talentList };
 		const subclass = this.actor.system.progression.classes[this.item.identifier].subclass;
 		const expandedTalentList = subclass?.system.advancement.byType("expandedTalentList")[0];
-		if (expandedTalentList)
-			filter = {
-				o: "OR",
-				v: [filter, { k: "system.type.category", v: expandedTalentList.configuration.talentList }]
-			};
+		const filter = {
+			k: "system.type.category",
+			o: "in",
+			v: new Set([...this.configuration.talentList, ...(expandedTalentList?.configuration.talentList ?? [])])
+		};
 		return search.compendiums(Item, { type: "talent", filters: [filter], index: false }) ?? [];
 	}
 }
