@@ -33,7 +33,9 @@ export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 /**
  * Value data for the Improvement advancement.
  *
- * @property {string} ability - Which ability score was improved?
+ * @property {object} ability - Which ability scores were improved?
+ * @property {string} ability.one
+ * @property {string} ability.two
  * @property {object} talent
  * @property {BlackFlagItem} talent.document - Local document added.
  * @property {string} talent.uuid - Origin UUID of the added document.
@@ -41,7 +43,10 @@ export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 export class ImprovementValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			ability: new StringField({ required: false, initial: undefined }),
+			ability: new SchemaField({
+				one: new StringField({ required: false, initial: undefined }),
+				two: new StringField({ required: false, initial: undefined })
+			}),
 			talent: new SchemaField(
 				{
 					document: new LocalDocumentField(foundry.documents.BaseItem),
@@ -50,5 +55,16 @@ export class ImprovementValueData extends foundry.abstract.DataModel {
 				{ required: false, initial: undefined }
 			)
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		if (foundry.utils.getType(source.ability) === "string") {
+			source.ability = { one: source.ability };
+		}
 	}
 }

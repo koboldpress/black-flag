@@ -1,17 +1,17 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
-		{{> "blackFlag.advancement-name"}}
+		{{> "blackFlag.advancement-name" }}
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">
 				{{#if selectAbility}}
 					<select name="ability">
-						{{selectOptions abilities blank=(localize "BF.Advancement.Improvement.Notification.Ability") localize=true}}
+						{{ selectOptions abilities blank=(localize "BF.Advancement.Improvement.Notification.Ability") }}
 					</select>
 				{{/if}}
 				{{#if selectTalent}}
-					<button type="submit" data-action="select-choice">
-						{{localize "BF.Advancement.Improvement.Action.Choose"}}
+					<button type="submit" class="light-button" data-action="select-choice">
+						{{ localize "BF.Advancement.Improvement.Action.Choose" }}
 					</button>
 				{{/if}}
 			</div>
@@ -19,6 +19,6 @@
 	</header>
 
 	{{#if summary}}
-		<div class="advancement-summary">{{{summary}}}</div>
+		<div class="advancement-summary">{{{ summary }}}</div>
 	{{/if}}
 </form>

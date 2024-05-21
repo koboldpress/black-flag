@@ -75,7 +75,10 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/** @override */
 	configuredForLevel(levels) {
-		return this.value.ability && !foundry.utils.isEmpty(this.value.talent);
+		return (
+			(this.value.ability.one && this.value.ability.two) ||
+			((this.value.ability.one || this.value.ability.two) && !foundry.utils.isEmpty(this.value.talent))
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,14 +86,23 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		const p1 = numberFormat(1, { sign: true });
+		const p2 = numberFormat(2, { sign: true });
 
 		if (flow) {
 			const choices = [];
-			if (this.value.ability)
+			const pushAbility = (value, number, key = "ability") =>
 				choices.push([
-					`<span class="choice-name">${CONFIG.BlackFlag.abilities.localized[this.value.ability]} ${p1}</span>`,
-					"ability"
+					`<span class="choice-name">${CONFIG.BlackFlag.abilities.localized[value]} ${number}</span>`,
+					key
 				]);
+			if (this.value.ability.one && this.value.ability.one === this.value.ability.two) {
+				pushAbility(this.value.ability.one, p2);
+			} else {
+				if (this.value.ability.one)
+					pushAbility(this.value.ability.one, p1, this.value.ability.two ? "ability.one" : undefined);
+				if (this.value.ability.two)
+					pushAbility(this.value.ability.two, p1, this.value.ability.one ? "ability.two" : undefined);
+			}
 			if (this.value.talent?.document) choices.push([linkForUUID(this.value.talent.document.uuid), "talent"]);
 			const displayDelete = this.actor.sheet.modes.editing || !this.configuredForLevel(levels);
 			return choices
@@ -98,7 +110,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 					([label, key]) =>
 						`<span class="choice-entry">${label}${
 							displayDelete
-								? ` <a data-action="remove-choice" data-key="${key}"><i class="fa-solid fa-trash"></i></a>`
+								? `
+								<button type="button" class="link-button" data-action="remove-choice" data-key="${key}"
+								        data-tooltip="BF.Advancement.Improvement.Action.Revert"
+												aria-label="${game.i18n.localize("BF.Advancement.Improvement.Action.Revert")}">
+									<i class="fa-solid fa-trash" inert></i>
+								</button>
+								`
 								: ""
 						}</span>`
 				)
@@ -145,14 +163,20 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 
 	/** @override */
 	changes(levels) {
-		if (!this.value.ability) return;
-		return [
-			{
-				key: `system.abilities.${this.value.ability}.value`,
+		const changes = [];
+		if (this.value.ability.one)
+			changes.push({
+				key: `system.abilities.${this.value.ability.one}.value`,
 				mode: CONST.ACTIVE_EFFECT_MODES.ADD,
 				value: 1
-			}
-		];
+			});
+		if (this.value.ability.two)
+			changes.push({
+				key: `system.abilities.${this.value.ability.two}.value`,
+				mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+				value: 1
+			});
+		if (changes.length) return changes;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -160,6 +184,13 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial) return;
+
+		if (data.ability) {
+			const ability = data.ability;
+			data.ability = {};
+			if (!this.value.ability?.one) data.ability.one = ability;
+			else if (!this.value.ability?.two) data.ability.two = ability;
+		}
 
 		if (data.talent) {
 			const added = await this.createItems([data.talent]);
@@ -177,6 +208,9 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 		const valueUpdates = {};
 
 		if (!data?.key || data?.key === "ability") valueUpdates["-=ability"] = null;
+		else if (data?.key === "ability.one") valueUpdates["ability.-=one"] = null;
+		else if (data?.key === "ability.two") valueUpdates["ability.-=two"] = null;
+
 		if (!data?.key || data?.key === "talent") {
 			await this.value.talent?.document?.delete();
 			valueUpdates["-=talent"] = null;
