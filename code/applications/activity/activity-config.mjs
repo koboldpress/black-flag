@@ -158,13 +158,13 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 
 		// TODO: Find a way to move this behavior into DamageListElement & ConsumptionElement
 		if (foundry.utils.hasProperty(updates, "system.damage.parts")) {
-			updates.system.damage.parts = Object.entries(updates.system.damage.parts).reduce((arr, [k, v]) => {
+			updates.system.damage.parts = Object.entries(updates.system.damage.parts ?? {}).reduce((arr, [k, v]) => {
 				arr[k] = v;
 				return arr;
 			}, []);
 		}
 		if (foundry.utils.hasProperty(updates, "consumption.targets")) {
-			updates.consumption.targets = Object.entries(updates.consumption.targets).reduce((arr, [k, v]) => {
+			updates.consumption.targets = Object.entries(updates.consumption.targets ?? {}).reduce((arr, [k, v]) => {
 				arr[k] = v;
 				return arr;
 			}, []);
