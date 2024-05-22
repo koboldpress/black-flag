@@ -5,7 +5,7 @@
   "img": "icons/skills/wounds/injury-pain-body-orange.webp",
   "system": {
     "description": {
-      "value": "<p>Through rigorous conditioning, you have fortified yourself against physically debilitating effects. You gain the following benefits:</p><ul><li><p>Once per long rest when you fail a STR or CON save you can reroll the save and take the new result.</p></li><li><p>If an ongoing effect causes you to be blinded, deafened, paralyzed, or poisoned due to failing a save, you can repeat the save at the end of each of your turns, ending the condition on a success—even if the effect would not typically allow you to do so.</p></li></ul>",
+      "value": "<p>You’ve fortified yourself against physically debilitating effects. You gain these benefits:</p><ul><li><p>Once per turn, when you fail a STR or CON save, you can expend one of your hit dice to reroll the save. You must take the new result.</p></li><li><p>When you start your turn blinded, deafened, restrained, or poisoned, you gain 1 Luck.</p></li><li><p>You have advantage on checks and saves to avoid being knocked prone, pulled, or pushed.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -38,6 +38,11 @@
             {
               "type": "activity",
               "value": "1"
+            },
+            {
+              "type": "hitDice",
+              "target": "",
+              "value": "1"
             }
           ],
           "scale": {
@@ -49,7 +54,7 @@
           "consumeQuantity": false,
           "recovery": {
             "0": {
-              "period": "longRest",
+              "period": "turn",
               "type": "recoverAll"
             }
           },
@@ -57,7 +62,18 @@
           "max": "1"
         },
         "name": "Reroll Save",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": "systems/black-flag/artwork/activities/utility.svg",
+        "target": {
+          "affects": {
+            "type": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        }
       }
     }
   },
@@ -68,10 +84,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1695925556334,
-    "modifiedTime": 1713225088053,
+    "modifiedTime": 1717177878041,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "KrnY2wslIf2m1M0l",

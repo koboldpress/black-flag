@@ -81,6 +81,9 @@ export const featureCategories = {
 	},
 	monsters: {
 		localization: "BF.Feature.Category.Monster"
+	},
+	talent: {
+		localization: "BF.Feature.Category.Talent"
 	}
 };
 localizeConfig(featureCategories, { sort: false });

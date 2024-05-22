@@ -1,0 +1,122 @@
+{
+  "folder": "R1awenmjaG5qtAQT",
+  "name": "Quick",
+  "type": "talent",
+  "_id": "Zn8D6SyJXfeNI79E",
+  "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+  "system": {
+    "activities": {
+      "sPDmkeQajZvmrLNv": {
+        "type": "utility",
+        "_id": "sPDmkeQajZvmrLNv",
+        "description": "<p>You can move up to 5 feet without provoking an opportunity attack or expending movement.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Quick Step",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You are uncommonly agile. While not wearing medium or heavy armor, you gain these benefits:</p><ul><li><p>Your speed increases by 10 feet.</p></li><li><p>When you take the Dash action, you can move along vertical surfaces during your movement.</p></li><li><p>If you fall, as a reaction you can ignore a number of feet equal to 5 times your PB, lessening any fall damage you take. If this allows you to ignore the entire distance of a fall, you can land on your feet.</p></li><li><p>As a bonus action you can move up to 5 feet without provoking an opportunity attack or expending movement.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "technical"
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+      "origin": "Compendium.black-flag.talents.Item.Zn8D6SyJXfeNI79E",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "name": "Quick",
+      "_id": "lxR4OtTTFdYK9kIT",
+      "changes": [
+        {
+          "key": "system.traits.movement.base",
+          "mode": 2,
+          "value": "10"
+        }
+      ],
+      "description": "<p>While not wearing medium or heavy armor your speed increases by 10 feet.</p>",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!Zn8D6SyJXfeNI79E.lxR4OtTTFdYK9kIT"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.029",
+    "coreVersion": "11.315",
+    "createdTime": 1716347807771,
+    "modifiedTime": 1716348411095,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Zn8D6SyJXfeNI79E"
+}

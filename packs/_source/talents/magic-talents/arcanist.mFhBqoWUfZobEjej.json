@@ -1,0 +1,52 @@
+{
+  "folder": "Y7Db5YMWkaspCbJA",
+  "name": "Arcanist",
+  "type": "talent",
+  "_id": "mFhBqoWUfZobEjej",
+  "img": "icons/magic/symbols/cross-circle-blue.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Your focus on magical studies yielded incredible results, granting these benefits:</p><ul><li><p>Double your PB for any ability check you make that uses the Arcana skill.</p></li><li><p>You can replace one cantrip or spell that you know (not a spell in a spellbook) with a different cantrip or spell of the same circle from your Spellcasting feature’s source list. The spell must be of a circle you can cast.</p></li><li><p>You learn one additional cantrip from your Spellcasting feature’s source list.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "spellcastingFeature",
+          "k": "system.spellcasting.hasSpellcastingAdvancement",
+          "v": true
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "magic"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347575446,
+    "modifiedTime": 1717175952799,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!mFhBqoWUfZobEjej"
+}

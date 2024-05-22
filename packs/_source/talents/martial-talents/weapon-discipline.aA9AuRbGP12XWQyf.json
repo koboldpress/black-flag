@@ -1,0 +1,55 @@
+{
+  "folder": "V2c8l088EDq2uWyR",
+  "name": "Weapon Discipline",
+  "type": "talent",
+  "_id": "aA9AuRbGP12XWQyf",
+  "img": "icons/weapons/swords/sword-gold-holy.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You seek perfection with a single weapon. Choose a simple or martial weapon (such as spear, heavy crossbow, or greataxe) you are proficient with. While wielding that weapon, you gain these benefits:</p><ul><li><p>You gain a +1 bonus to attack and damage rolls made with your chosen weapon.</p></li><li><p>When you score a critical hit with your chosen weapon, you can roll one additional weapon damage die for damage.</p></li><li><p>When you reduce a creature to 0 HP with your chosen weapon, you gain temporary hit points equal to your PB. These temporary hit points last for 1 minute or until expended.</p></li></ul><p>You can select this talent multiple times, selecting a different weapon each time.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "weaponsCategories",
+          "k": "system.proficiencies.weapons.categories",
+          "v": [
+            "martial"
+          ],
+          "o": "hasAny"
+        }
+      ],
+      "allowMultipleTimes": true
+    },
+    "type": {
+      "category": "martial"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347725766,
+    "modifiedTime": 1717178177682,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!aA9AuRbGP12XWQyf"
+}

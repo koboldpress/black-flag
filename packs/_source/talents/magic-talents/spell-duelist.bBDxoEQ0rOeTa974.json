@@ -1,0 +1,109 @@
+{
+  "folder": "Y7Db5YMWkaspCbJA",
+  "name": "Spell Duelist",
+  "type": "talent",
+  "_id": "bBDxoEQ0rOeTa974",
+  "img": "icons/magic/light/projectile-smoke-pink.webp",
+  "system": {
+    "activities": {
+      "08jwb2ER4YBhWvmj": {
+        "type": "utility",
+        "_id": "08jwb2ER4YBhWvmj",
+        "description": "<p>When a creature you can see damages you with a spell, you can use your reaction to cast a cantrip targeting that creature.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a creature you can see damages you with a spell"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Duelist Response",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When a creature you can see damages you with a spell, you can use your reaction to cast a cantrip targeting that creature. In addition, when you cast a spell that requires an attack roll, you gain these benefits:</p><ul><li><p>Double the range of the spell. If the spell’s range is touch, its range increases to 15 feet.</p></li><li><p>The spell ignores any AC bonus granted by cover.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "hasCantrips",
+          "v": [
+            {
+              "k": "system.spellcasting.spells.cantrips",
+              "v": 1,
+              "o": "gte"
+            },
+            {
+              "k": "system.spellcasting.spells.knowable.cantrips",
+              "v": 1,
+              "o": "gte"
+            }
+          ],
+          "o": "OR"
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "magic"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347605952,
+    "modifiedTime": 1717177124985,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!bBDxoEQ0rOeTa974"
+}

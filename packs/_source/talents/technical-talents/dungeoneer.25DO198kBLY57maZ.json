@@ -5,7 +5,7 @@
   "img": "icons/environment/traps/steel.webp",
   "system": {
     "description": {
-      "value": "<p>You’ve studied—or survived—your share of hazards and learned a thing or two about sniffing out secrets. When you select this talent, you gain the following benefits:</p><ul><li><p>You have advantage on ability checks made to actively search for secret doors or traps.</p></li><li><p>Traveling at a fast pace doesn’t impose the standard −5 penalty to your passive Perception score.</p></li><li><p>You have advantage on saves made to avoid or resist traps and hazards.</p></li></ul>",
+      "value": "<p>You’ve studied—or at least survived—your share of hazards and learned a thing or two about sniffing out secrets. You gain these benefits:</p><ul><li><p>You can add your PB to checks made to disarm traps and open doors, even if you aren't proficient with the tools to do so. The first time you fail an ability check while disarming a trap, opening a door, or passing a hazard, the failure doesn't trigger the trap, block the door, or force you into the hazard’s area—no consequence befalls you from the failure.</p></li><li><p>You have advantage on Perception and Investigation checks made to search for secret doors, find traps, and see through illusions.</p></li><li><p>You have advantage on saves made to avoid or resist traps or hazards. You are resistant to damage from traps and hazards.</p></li><li><p>When combat begins, you and allies within 5 feet of you can attempt a DEX (Stealth) check for the purpose of determining who is surprised.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -14,7 +14,29 @@
     "type": {
       "category": "technical"
     },
-    "advancement": {},
+    "advancement": {
+      "hoDuIxcrREmjCBYX": {
+        "type": "property",
+        "_id": "hoDuIxcrREmjCBYX",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{\"type\": \"note\", \"filter\": [{\"k\": \"type\", \"v\": \"skill-check\"}, {\"k\": \"skill\", \"o\": \"in\", \"v\": [\"perception\", \"investigation\"]}], \"note\": {\"rollMode\": 1, \"text\": \"You have advantage on Perception and Investigation checks made to search for secret doors, find traps, and see through illusions.\"}}"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Dungeoneer",
+        "icon": "",
+        "hint": "You have advantage on Perception and Investigation checks made to search for secret doors, find traps, and see through illusions. "
+      }
+    },
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
@@ -31,10 +53,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.029",
     "coreVersion": "11.315",
     "createdTime": 1695925588162,
-    "modifiedTime": 1713225158018,
+    "modifiedTime": 1716349636524,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "25DO198kBLY57maZ",

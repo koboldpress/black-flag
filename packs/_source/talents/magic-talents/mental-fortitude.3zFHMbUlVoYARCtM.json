@@ -5,7 +5,7 @@
   "img": "icons/magic/control/silhouette-aura-energy.webp",
   "system": {
     "description": {
-      "value": "<p>Through rigorous mental exercise, you have fortified yourself against mind-altering effects. You gain the following benefits:</p><ul><li><p>Once per long rest when you fail an INT, WIS, or CHA save, you can choose to reroll the save and take the new result.</p></li><li><p>If an ongoing effect causes you to be charmed, frightened, or stunned due to failing a save, you can repeat the save at the end of each of your turns, ending the condition on a success—even if the effect would not typically allow you to do so.</p></li></ul>",
+      "value": "<p>Through rigid mental exercise, you have fortified yourself against mind-altering effects. You gain these benefits:</p><ul><li><p>Once per short rest, when you fail an INT, WIS, or CHA save, you can choose to reroll the save and take the new result.</p></li><li><p>When you start your turn charmed, frightened, paralyzed, or stunned, you gain 1 Luck.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -16,7 +16,14 @@
     },
     "advancement": {},
     "restriction": {
-      "filters": [],
+      "filters": [
+        {
+          "_id": "spellCircle",
+          "k": "system.spellcasting.maxCircle",
+          "v": 2,
+          "o": "gte"
+        }
+      ],
       "allowMultipleTimes": false
     },
     "uses": {
@@ -49,7 +56,7 @@
           "consumeQuantity": false,
           "recovery": {
             "0": {
-              "period": "longRest",
+              "period": "shortRest",
               "type": "recoverAll"
             }
           },
@@ -57,7 +64,18 @@
           "max": "1"
         },
         "name": "Reroll Save",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": "systems/black-flag/artwork/activities/utility.svg",
+        "target": {
+          "affects": {
+            "type": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        }
       }
     }
   },
@@ -68,10 +86,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1695925380223,
-    "modifiedTime": 1713224314406,
+    "modifiedTime": 1717176112598,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "3zFHMbUlVoYARCtM",

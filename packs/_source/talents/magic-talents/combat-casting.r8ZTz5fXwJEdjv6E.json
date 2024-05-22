@@ -5,7 +5,7 @@
   "img": "icons/equipment/shield/heater-steel-segmented-purple.webp",
   "system": {
     "description": {
-      "value": "<p>Experience on the battlefield has given you superior focus to cast your spells. You gain the following benefits:</p><ul><li><p>You automatically succeed on CON saves to maintain your concentration on a spell if the DC is equal to or lower than a number equal to 8 + your PB (minimum DC 10).</p></li><li><p>When a hostile creature provokes an opportunity attack from you, you can use your reaction to cast a cantrip instead of making a melee attack.</p></li><li><p>You can use a shield or weapon you are holding as a spellcasting focus—as normal, you can use the same hand or hands holding this focus to perform somatic spell components.</p></li></ul>",
+      "value": "<p>Experience on the battlefield has given you superior focus to cast your spells. You gain these benefits:</p><ul><li><p>When you make a CON save to maintain concentration on a spell, treat any d20 roll of 7 or less as though you rolled an 8.</p></li><li><p>When a creature provokes an opportunity attack from you, you can use your reaction to cast a cantrip instead of making a melee attack.</p></li><li><p>You can use a shield or weapon you wield as a spellcasting focus. As normal, you can use the same hand or hands holding this focus to perform somatic spell components.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -16,24 +16,7 @@
     },
     "advancement": {},
     "restriction": {
-      "filters": [
-        {
-          "k": "system.spellcasting.present",
-          "v": [
-            {
-              "k": "system.spellcasting.spells.total",
-              "v": 1,
-              "o": "gte"
-            },
-            {
-              "k": "system.spellcasting.slots.max",
-              "v": 1,
-              "o": "gte"
-            }
-          ],
-          "o": "OR"
-        }
-      ],
+      "filters": [],
       "allowMultipleTimes": false
     },
     "uses": {
@@ -48,10 +31,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1695925153294,
-    "modifiedTime": 1713224180997,
+    "modifiedTime": 1717175992029,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "r8ZTz5fXwJEdjv6E",

@@ -1,0 +1,56 @@
+{
+  "folder": "V2c8l088EDq2uWyR",
+  "name": "Armor Training",
+  "type": "talent",
+  "_id": "ieEOvLswOxJWoE1Z",
+  "img": "icons/equipment/chest/breastplate-banded-blue.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You’ve trained to improve your use of armor. You gain these benefits:</p><ul><li><p>If you are proficient with light armor, you gain proficiency with medium armor. If you are proficient with medium armor, you gain proficiency with heavy armor and shields.</p></li><li><p>If you are wearing armor that would normally impose disadvantage on DEX (Stealth) checks, you instead roll normally and can’t have advantage or disadvantage on the check.</p></li><li><p>You can add up to +3 (instead of +2) to your AC based on your DEX while wearing medium armor.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "armorProficiency",
+          "k": "system.proficiencies.armor.value",
+          "v": [
+            "light",
+            "medium"
+          ],
+          "o": "hasAny"
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "martial"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347652254,
+    "modifiedTime": 1717177389854,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ieEOvLswOxJWoE1Z"
+}

@@ -5,7 +5,7 @@
   "img": "icons/magic/life/cross-beam-green.webp",
   "system": {
     "description": {
-      "value": "<p>You have studied first aid and can provide emergency medical assistance. When you select this talent, you gain the following benefits:</p><ul><li><p>When you stabilize a dying creature using first aid, that creature regains 1 HP.</p></li><li><p>As an action, you can tend to the wounds of a creature you can see and touch. When you do, the creature recovers a number of hit points equal to twice their CON modifier. A creature healed in this way can’t receive the benefits of this feature again until it completes a short or long rest.</p></li></ul>",
+      "value": "<p>You trained to provide emergency medical assistance. When you select this talent, you gain these benefits:</p><ul><li><p>When you make a WIS (Medicine) check, treat any d20 roll of 9 or lower as though you rolled a 10.</p></li><li><p>As an action, you can tend to the wounds of a creature you can see and touch. When you do, the creature regains a number of hit points equal to your PB + their CON modifier. A creature healed in this way can’t receive the benefits of this feature again until it finishes a short or long rest.</p></li><li><p>When you spend hit dice to regain hit points during a short rest, you can reroll a number of dice equal to your PB and must take the new result.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -14,7 +14,29 @@
     "type": {
       "category": "technical"
     },
-    "advancement": {},
+    "advancement": {
+      "6Mf1ZP13lhGFlj7g": {
+        "type": "property",
+        "_id": "6Mf1ZP13lhGFlj7g",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{\"type\": \"min\", \"filter\": [{\"k\": \"type\", \"v\": \"skill-check\"}, {\"k\": \"skill\", \"v\": \"medicine\"}], \"formula\": \"10\"}"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "When you make a WIS (Medicine) check, treat any d20 roll of 9 or lower as though you rolled a 10."
+      }
+    },
     "restriction": {
       "filters": [],
       "allowMultipleTimes": false
@@ -66,10 +88,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.029",
     "coreVersion": "11.315",
     "createdTime": 1695925595753,
-    "modifiedTime": 1713225352276,
+    "modifiedTime": 1716349294161,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "DRjPTISlkqhp4zoT",

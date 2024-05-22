@@ -1,0 +1,98 @@
+{
+  "folder": "V2c8l088EDq2uWyR",
+  "name": "Heavy Weapon Mastery",
+  "type": "talent",
+  "_id": "v9zFwJvB40TqZfzb",
+  "img": "icons/skills/melee/strike-hammer-destructive-orange.webp",
+  "system": {
+    "activities": {
+      "8BPqxrJOiHbCBwj5": {
+        "type": "utility",
+        "_id": "8BPqxrJOiHbCBwj5",
+        "description": "<p>You can give yourself one of the following benefits:</p><ul><li>The next melee attack you make with a Heavy weapon ignores resistance to your weapon’s damage.</li><li>Your next melee attack with a Heavy weapon has a −5 penalty to the attack roll. If the attack hits, it deals extra damage equal to half your STR score.</li></ul>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Heavy Strike",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You have great skill with two-handed weapons. While wielding a melee weapon with the Heavy property in two hands, you gain these benefits:</p><ul><li>When you score a critical hit, you can make one additional melee weapon attack as part of that Attack action.</li></ul><p>In addition, your attacks become overpowering. As a bonus action on each of your turns, you can give yourself one of the following benefits:</p><ul><li>The next melee attack you make with a Heavy weapon ignores resistance to your weapon’s damage.</li><li>Your next melee attack with a Heavy weapon has a −5 penalty to the attack roll. If the attack hits, it deals extra damage equal to half your STR score.</li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "characterLevel",
+          "k": "system.progression.level",
+          "v": 4
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "martial"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347689743,
+    "modifiedTime": 1717177765965,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!v9zFwJvB40TqZfzb"
+}

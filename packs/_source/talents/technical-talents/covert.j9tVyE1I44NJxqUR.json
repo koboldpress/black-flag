@@ -1,0 +1,87 @@
+{
+  "folder": "R1awenmjaG5qtAQT",
+  "name": "Covert",
+  "type": "talent",
+  "_id": "j9tVyE1I44NJxqUR",
+  "img": "icons/equipment/head/hood-red.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "15O7uxxL8n3047mh": {
+        "type": "property",
+        "_id": "15O7uxxL8n3047mh",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{\"type\": \"note\", \"filter\": [{\"o\": \"OR\", \"v\": [{\"o\": \"AND\", \"v\": [{\"k\": \"type\", \"v\": \"skill-check\"}, {\"k\": \"skill\", \"v\": \"perception\"}, {\"k\": \"ability\", \"v\": \"wisdom\"}]}, {\"k\": \"type\", \"v\": \"attack\"}]}], \"note\": {\"rollMode\": 0, \"text\": \"You don’t have disadvantage on attack rolls and WIS (Perception) checks against targets in dim light.\"}}"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Covert",
+        "icon": "",
+        "hint": "You don’t have disadvantage on attack rolls and WIS (Perception) checks against targets in dim light."
+      }
+    },
+    "description": {
+      "value": "<p>You trained in the art of espionage. You gain these benefits:</p><ul><li><p>You can attempt to hide while in three-quarters cover or while lightly obscured.</p></li><li><p>Creatures that rely on darkvision can’t see you while you remain motionless in dim light or darkness. This effect ends if you move, take an action or bonus action, or use a reaction while in the creature’s line of sight.</p></li><li><p>You don’t have disadvantage on attack rolls and WIS (Perception) checks against targets in dim light.</p></li><li><p>If you make a ranged attack against a creature or if a creature spots you while you are hidden, you can use your reaction to make a DEX (Stealth) check at disadvantage opposed by the creature’s Perception. On a success, you remain hidden and the creature is unaware of your position. Once used on a creature, the target can’t be affected by this feature again for 24 hours.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "skillsProficiency",
+          "v": [
+            {
+              "k": "system.proficiencies.skills.stealth.proficiency.multiplier",
+              "o": "gte",
+              "v": 1,
+              "_key": "stealth"
+            }
+          ],
+          "o": "OR"
+        },
+        {
+          "_id": "ability-dexterity",
+          "k": "system.abilities.dexterity.value",
+          "v": 13,
+          "o": "gte"
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "technical"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347776957,
+    "modifiedTime": 1717175739488,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!j9tVyE1I44NJxqUR"
+}

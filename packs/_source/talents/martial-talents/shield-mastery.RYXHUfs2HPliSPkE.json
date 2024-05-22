@@ -1,0 +1,143 @@
+{
+  "folder": "V2c8l088EDq2uWyR",
+  "name": "Shield Mastery",
+  "type": "talent",
+  "_id": "RYXHUfs2HPliSPkE",
+  "img": "icons/skills/melee/shield-block-fire-orange.webp",
+  "system": {
+    "activities": {
+      "Ggo5I6y5peWP6poZ": {
+        "type": "utility",
+        "_id": "Ggo5I6y5peWP6poZ",
+        "description": "<p>You attempt to shove a creature within 5 feet of you with your shield. If you move 10 feet or more directly toward a creature before using this bonus action, you have advantage on the check.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Shield Shove",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "nZHCa2CV0khSUXQv": {
+        "type": "utility",
+        "_id": "nZHCa2CV0khSUXQv",
+        "description": "<p>You use your reaction to halve any damage taken by taking shelter behind your shield.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When you make a DEX save to avoid taking damage"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Shield Shelter",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You can wield a shield as an extension of your own body. While wielding a shield, you gain these benefits:</p><ul><li><p>As a bonus action, you can attempt to shove a creature within 5 feet of you with your shield. If you move 10 feet or more directly toward a creature before using this bonus action, you have advantage on the check.</p></li><li><p>When you use your action to Dodge, your AC increases by an amount equal to the armor bonus of your shield.</p></li><li><p>When you make a DEX save to avoid taking damage, you can use your reaction to halve any damage taken by taking shelter behind your shield.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [
+        {
+          "_id": "characterLevel",
+          "k": "system.progression.level",
+          "v": 4
+        }
+      ],
+      "allowMultipleTimes": false
+    },
+    "type": {
+      "category": "martial"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1716347718649,
+    "modifiedTime": 1717178018061,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!RYXHUfs2HPliSPkE"
+}
