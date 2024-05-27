@@ -6,6 +6,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
 	static get defaultOptions() {
 		const options = super.defaultOptions;
 		options.classes.push("rule");
+		options.includeTOC = false;
 		return options;
 	}
 

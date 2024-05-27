@@ -19,6 +19,14 @@ export function registerCustomEnrichers() {
 			// TODO: Remove when v11 support is dropped
 			pattern: /@(?<type>Embed)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
 			enricher: enrichString
+		},
+		{
+			pattern: /~def\[([^\]]+)]/gi,
+			enricher: (match, options) => {
+				const dnf = document.createElement("dfn");
+				dnf.innerText = match[1];
+				return dnf;
+			}
 		}
 	);
 
