@@ -50,7 +50,10 @@ export default class ItemDataModel extends BaseDataModel {
 	prepareBaseData() {
 		super.prepareBaseData();
 		if (this.parent.isEmbedded) {
-			const sourceId = this.parent.flags["black-flag"]?.sourceId ?? this.parent.flags.core?.sourceId;
+			const sourceId =
+				this.parent.flags["black-flag"]?.sourceId ??
+				this.parent._stats.compendiumSource ??
+				this.parent.flags.core?.sourceId;
 			if (sourceId) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
 		}
 	}

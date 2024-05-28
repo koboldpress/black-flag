@@ -6,7 +6,10 @@
  */
 export function cleanPackEntry(data, { clearSourceId=true }={}) {
 	if ( data.ownership ) data.ownership = { default: 0 };
-	if ( clearSourceId ) delete data.flags?.core?.sourceId;
+	if ( clearSourceId ) {
+		delete data._stats?.compendiumSource;
+		delete data.flags?.core?.sourceId;
+	}
 	delete data.flags?.importSource;
 	delete data.flags?.exportSource;
 	if ( data._stats?.lastModifiedBy ) data._stats.lastModifiedBy = "blackflag0000000";

@@ -15,6 +15,7 @@ export default class SpellManager extends DocumentSheet {
 			const { mode, origin } = spell.getFlag("black-flag", "relationship") ?? {};
 			if (!["standard", undefined].includes(mode)) continue;
 			const sourceId =
+				foundry.utils.getProperty(spell, "_stats.compendiumSource") ??
 				foundry.utils.getProperty(spell, "flags.core.sourceId") ??
 				foundry.utils.getProperty(spell, "flags.black-flag.sourceId");
 			this.existingSpells.add(sourceId);
@@ -365,7 +366,10 @@ export default class SpellManager extends DocumentSheet {
 		if (!prepared) foundry.utils.setProperty(spellData, "flags.black-flag.relationship.alwaysPrepared", true);
 
 		foundry.utils.setProperty(spellData, "flags.black-flag.relationship.origin", origin);
-		if (remote) foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
+		if (remote) {
+			foundry.utils.setProperty(spellData, "_stats.compendiumSource", spell.uuid);
+			foundry.utils.setProperty(spellData, "flags.core.sourceId", spell.uuid);
+		}
 		return spellData;
 	}
 
