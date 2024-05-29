@@ -78,6 +78,10 @@ export default class NPCData extends ActorDataModel.mixin(
 				legendary: new HTMLField(),
 				source: new StringField()
 			}),
+			spellcasting: new SchemaField({
+				ability: new StringField({ initial: "intelligence" }),
+				dc: new NumberField({ integer: true, min: 0 })
+			}),
 			traits: new SchemaField({
 				type: new CreatureTypeField()
 			})
@@ -197,6 +201,14 @@ export default class NPCData extends ActorDataModel.mixin(
 			this.attributes.baseStealth = this.attributes.stealth;
 			this.attributes.stealth -= 5;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	prepareDerivedSpellcasting() {
+		const ability = this.abilities[this.spellcasting.ability];
+		this.spellcasting.autoDC = 8 + (ability?.mod ?? 0) + this.attributes.proficiency;
+		this.spellcasting.dc ??= this.spellcasting.autoDC;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

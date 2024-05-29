@@ -245,6 +245,14 @@
 							{{{ description }}}
 						</div>
 					{{/each}}
+					{{#if (and (eq @key "action") @root.spellcasting)}}
+					{{#with @root.spellcasting}}
+						<div class="spellcasting feature">
+							<span class="controls">{{ localize "BF.Spellcasting.Label" }}.</span>
+							{{{ description }}}
+						</div>
+					{{/with}}
+					{{/if}}
 				</div>
 			{{/if}}
 		{{/each}}

@@ -168,7 +168,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get requiresSpellSlot() {
-		if (!this.isSpell) return false;
+		if (!this.isSpell || !this.parent.actor?.system.spellcasting?.circles) return false;
 		return this.item.system.requiresSpellSlot && this.activation.primary;
 	}
 

@@ -267,6 +267,14 @@ export const sheetSections = {
 			create: [{ type: "armor" }, { type: "weapon" }, { type: "ammunition" }]
 		},
 		{
+			id: "spells",
+			tab: "features",
+			label: "BF.Item.Type.Spell[other]",
+			filters: [{ k: "type", v: "spell" }],
+			create: [{ type: "spell" }],
+			options: { autoHide: true }
+		},
+		{
 			id: "sundries",
 			tab: "features",
 			label: "BF.Item.Type.Sundry[other]",

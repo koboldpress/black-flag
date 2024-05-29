@@ -44,6 +44,8 @@
 		input {
 			width: 6em;
 			height: unset;
+			border: 1px solid var(--bf-color-border-blue);
+			background: rgb(255 255 255 / 0.05);
 		}
 		input[name^="system.attributes.hp"] {
 			width: 3em;
@@ -150,6 +152,10 @@
 		.feature {
 			padding-inline-start: 12px;
 
+			&:not(:last-of-type) {
+				padding-block-end: 6px;
+			}
+
 			.controls {
 				margin-inline-start: -12px;
 				font-style: italic;
@@ -157,6 +163,32 @@
 			}
 			.controls + p {
 				display: inline;
+			}
+		}
+
+		.spellcasting.feature {
+			p { margin-block: 3px; }
+			.description {
+				select, input {
+					width: unset;
+					height: calc(1em + 4px);
+					border: none;
+					outline: 1px solid var(--bf-color-border-blue);
+					background: rgb(255 255 255 / 0.05);
+				}
+				[name="system.spellcasting.dc"] {
+					width: 30px;
+				}
+			}
+			.spell {
+				font-style: italic;
+				.remaining {
+					font-style: normal;
+					font-size: var(--font-size-11);
+					&::before {
+						content: " • ";
+					}
+				}
 			}
 		}
 	}

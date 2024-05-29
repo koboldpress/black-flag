@@ -115,48 +115,61 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	async prepareActions(context) {
-		await super.prepareActions(context);
-		await Promise.all(
-			Object.values(context.actions).flatMap(t =>
-				t.activities.map(async a => {
-					a.description = await TextEditor.enrichHTML(a.activity.description || a.item.system.description.value, {
-						secrets: false,
-						rollData: a.item.getRollData(),
-						async: true,
-						relativeTo: a.activity
-					});
-					a.uses = this.prepareUsesDisplay(a.item, a.activity);
-					return a.description;
-				})
-			)
-		);
-
-		// Passive & Free Actions
-		context.passive = (
-			await Promise.all(
-				this.actor.items
-					.filter(i => {
-						if (i.type !== "feature") return false;
-						if (i.system.activities?.size) return false;
-						return true;
-					})
-					.map(async item => ({
+		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.localized).reduce((obj, [key, label]) => {
+			obj[key] = { label, activities: [] };
+			return obj;
+		}, {});
+		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), activities: [] };
+		context.passive = [];
+		context.spellcasting = { uses: {} };
+		for (const item of this.actor.items) {
+			if (item.type === "spell") {
+				const uses = item.system.uses;
+				const key = `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
+				context.spellcasting.uses[key] ??= { spells: [] };
+				context.spellcasting.uses[key].spells.push(item);
+			} else if (item.system.activities?.size) {
+				for (const activity of item.system.actions?.() ?? []) {
+					const data = {
+						activity,
 						item,
-						description: await TextEditor.enrichHTML(item.system.description.value, {
+						description: await TextEditor.enrichHTML(activity.description || item.system.description.value, {
 							secrets: false,
 							rollData: item.getRollData(),
 							async: true,
-							relativeTo: item
+							relativeTo: activity
 						}),
-						uses: this.prepareUsesDisplay(item)
-					}))
-			)
-		)
-			.concat(context.actions.free?.activities ?? [])
-			.sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
-		delete context.actions.free;
+						uses: this.prepareUsesDisplay(item, activity)
+					};
+					if (activity.actionType === "free") context.passive.push(data);
+					else if (activity.actionType in context.actions) context.actions[activity.actionType].activities.push(data);
+					else context.actions.other.activities.push(data);
+				}
+			} else if (item.type === "feature") {
+				context.passive.push({
+					item,
+					description: await TextEditor.enrichHTML(item.system.description.value, {
+						secrets: false,
+						rollData: item.getRollData(),
+						async: true,
+						relativeTo: item
+					}),
+					uses: this.prepareUsesDisplay(item)
+				});
+			}
+		}
+
+		await this.prepareSpellcasting(context);
+
+		// Sorting & Clearing
+		context.passive.sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
+		for (const [key, value] of Object.entries(context.actions)) {
+			if (!value.activities.length && (key !== "action" || !context.spellcasting)) delete context.actions[key];
+			else
+				context.actions[key].activities.sort((lhs, rhs) => (lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity));
+		}
 
 		// Legendary Actions
 		if (context.actions.legendary) {
@@ -171,6 +184,66 @@ export default class NPCSheet extends BaseActorSheet {
 				{ type: context.actor.name.toLowerCase(), count: context.system.attributes.legendary.max }
 			);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the spellcasting section of the sheet.
+	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
+	 */
+	async prepareSpellcasting(context) {
+		if (foundry.utils.isEmpty(context.spellcasting.uses)) return;
+
+		const spellcasting = context.system.spellcasting;
+		let ability;
+		let dc;
+		if (context.editable) {
+			ability = `<select name="system.spellcasting.ability">${HandlebarsHelpers.selectOptions(
+				CONFIG.BlackFlag.abilities.localized,
+				{ hash: { selected: spellcasting.ability } }
+			)}</select>`;
+			dc = `<input type="number" name="system.spellcasting.dc" value="${context.source.spellcasting.dc}"
+			       placeholder="${spellcasting.autoDC}" step="1" min="0">`;
+		} else {
+			ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[spellcasting.ability];
+			dc = spellcasting.dc;
+		}
+		context.spellcasting.label = game.i18n.format("BF.Spellcasting.NPC.Description", {
+			ability,
+			dc,
+			name: this.actor.name.toLowerCase()
+		});
+
+		const sections = [];
+		for (const [, value] of Object.entries(context.spellcasting.uses).sort((a, b) => a[0].localeCompare(b[0]))) {
+			const uses = value.spells[0].system.uses;
+			if (uses.max) {
+				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0]?.period];
+				const abbreviation = game.i18n.localize(config?.npcLabel ?? config?.abbreviation);
+				if (abbreviation)
+					value.label = game.i18n.format("BF.Uses.Display.Recovery", {
+						value: numberFormat(uses.max),
+						period: abbreviation
+					});
+				else value.label = numberFormat(uses.max);
+			} else {
+				value.label = game.i18n.localize("BF.Spell.Preparation.Mode.AtWill");
+			}
+			const spells = [];
+			for (const spell of value.spells.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang))) {
+				const activity = spell.system.activities.find(a => a.activation.primary) ?? spell.system.activities.contents[0];
+				const usesRemaining = uses.max
+					? ` <span class="remaining">${numberFormat(spell.system.uses.value)}</span>`
+					: "";
+				spells.push(
+					`<span class="spell"><a data-action="activate" data-item-id="${spell.id}" data-activity-id="${activity.id}">${spell.name.toLowerCase()}</a>${usesRemaining}</span>`
+				);
+			}
+			sections.push(`<p>${value.label}: ${spells.join(", ")}`);
+		}
+
+		context.spellcasting.description = `<p class="description">${context.spellcasting.label}</p>${sections.join("\n")}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

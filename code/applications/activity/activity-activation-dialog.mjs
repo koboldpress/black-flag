@@ -106,7 +106,7 @@ export default class ActivityActivationDialog extends Dialog {
 		);
 		data.show = {
 			actionConsumption: this.activity.activation.type === "legendary", // TODO: Allow more than legendary actions here
-			spellConsumption: this.activity.isSpell, // TODO: Make sure spell actually consumes a slot
+			spellConsumption: this.activity.requiresSpellSlot,
 			spellCircleSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.circles),
 			resourceConsumption: !foundry.utils.isEmpty(data.resources)
 		};
@@ -147,12 +147,12 @@ export default class ActivityActivationDialog extends Dialog {
 	 */
 	_prepareSpellSlotOptions() {
 		const spellcasting = this.activity.actor.system.spellcasting;
-		if (!spellcasting) return [];
+		if (!spellcasting?.circles) return [];
 		// TODO: Adjust this when slots can also be consumed as resources
-		const minimumRing = this.activity?.item?.system.circle?.base ?? 1;
+		const minimumCircle = this.activity?.item?.system.circle?.base ?? 1;
 		const options = Object.entries(CONFIG.BlackFlag.spellCircles()).reduce((obj, [level, label]) => {
 			level = Number(level);
-			if (level < minimumRing || level > spellcasting.maxRing) return obj;
+			if (level < minimumCircle || level > spellcasting.maxCircle) return obj;
 			// TODO: Allow this to work with other spellcasting type
 			const data = spellcasting.circles[`circle-${level}`] ?? { max: 0 };
 			obj[level] = {
