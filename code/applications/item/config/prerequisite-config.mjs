@@ -47,6 +47,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 				system: this.document.system,
 				abilities: this.prepareAbilities(),
 				spellcasting: this.prepareSpellcasting(),
+				spellCircles: CONFIG.BlackFlag.spellCircles(undefined, false),
 				traits: this.prepareTraits()
 			},
 			await super.getData(options)
@@ -81,6 +82,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	prepareSpellcasting() {
 		const spellcasting = {};
 		spellcasting.cantrip = this.filters.find(f => f._id === "hasCantrips")?.v;
+		spellcasting.circle = this.filters.find(f => f._id === "spellCircle")?.v;
 		spellcasting.damage = this.filters.find(f => f._id === "hasDamagingSpells")?.v;
 		spellcasting.feature = this.filters.find(f => f._id === "spellcastingFeature")?.v;
 		return spellcasting;
@@ -118,9 +120,20 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		Object.entries(data.abilities).forEach(([k, v]) =>
 			updateFilter(`ability-${k}`, `system.abilities.${k}.value`, v, "gte")
 		);
-		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
-		updateFilter("hasCantrips", "system.spellcasting.spells.cantrips", Number(data.spellcasting?.cantrip), "gte");
+		updateFilter(
+			"hasCantrips",
+			undefined,
+			data.spellcasting?.cantrip
+				? [
+						{ k: "system.spellcasting.spells.cantrips", v: 1, o: "gte" },
+						{ k: "system.spellcasting.spells.knowable.cantrips", v: 1, o: "gte" }
+					]
+				: false,
+			"OR"
+		);
+		updateFilter("spellCircle", "system.spellcasting.maxCircle", data.spellcasting?.circle, "gte");
 		updateFilter("hasDamagingSpells", "system.spellcasting.spells.damaging", Number(data.spellcasting?.damage), "gte");
+		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
 		super._updateObject(event, { "system.restriction.filters": filters });

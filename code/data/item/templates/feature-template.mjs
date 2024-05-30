@@ -100,6 +100,12 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		if ( spellcastingFeatureFilter ) prerequisites.push(validate(
 			spellcastingFeatureFilter, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
 		));
+		const spellCircleFilter = this.restriction.filters.find(f => f._id === "spellCircle" );
+		if ( spellCircleFilter ) prerequisites.push(validate(
+			spellCircleFilter, game.i18n.format("BF.Prerequisite.SpellcastingCircle.Label", {
+				circle: CONFIG.BlackFlag.spellCircles()[spellCircleFilter.v]
+			})
+		));
 		const cantripSpellsFilter = this.restriction.filters.find(f => f._id === "hasCantrips" );
 		if ( cantripSpellsFilter ) prerequisites.push(validate(
 			cantripSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Label")
@@ -147,22 +153,27 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			}
 
 			// Spellcasting
-			else if ( invalidFilter._id === "hasCantrips" ) {
-				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning"));
-			}
-			else if ( invalidFilter._id === "hasDamagingSpells" ) {
-				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning"));
-			}
-			else if ( invalidFilter._id === "spellcastingFeature" ) {
-				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning"));
-			}
+			else if ( invalidFilter._id === "hasCantrips" ) messages.push(
+				game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning")
+			);
+			else if ( invalidFilter._id === "spellCircle" ) messages.push(
+				game.i18n.format("BF.Prerequisite.SpellcastingCircle.Warning", {
+					circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
+				})
+			);
+			else if ( invalidFilter._id === "hasDamagingSpells" ) messages.push(
+				game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning")
+			);
+			else if ( invalidFilter._id === "spellcastingFeature" ) messages.push(
+				game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning")
+			);
 
 			// Sizes
-			else if ( invalidFilter._id === "creatureSize" ) {
-				messages.push(game.i18n.format("BF.Prerequisite.Size.Warning", {
+			else if ( invalidFilter._id === "creatureSize" ) messages.push(
+				game.i18n.format("BF.Prerequisite.Size.Warning", {
 					size: game.i18n.localize(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
-				}));
-			}
+				})
+			);
 
 			else {
 				// TODO: Send out hook for custom filter handling

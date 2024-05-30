@@ -14,6 +14,12 @@
 			<span>{{ localize "BF.Prerequisite.SpellcastingFeature.ConfigLabel" }}</span>
 			<input type="checkbox" name="spellcasting.feature" {{ checked spellcasting.feature }}>
 		</label>
+		<label>
+			<span>{{ localize "BF.Prerequisite.SpellcastingCircle.ConfigLabel" }}</span>
+			<select name="spellcasting.circle" data-dtype="Number">
+				{{ selectOptions spellCircles selected=spellcasting.circle blank="" }}
+			</select>
+		</label>
 		<label class="full-checkbox">
 			<span>{{ localize "BF.Prerequisite.SpellcastingCantrip.ConfigLabel" }}</span>
 			<input type="checkbox" name="spellcasting.cantrip" {{ checked spellcasting.cantrip }}>
