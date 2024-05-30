@@ -1,5 +1,6 @@
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
+import NPCSpellcastingConfig from "./config/npc-spellcasting-config.mjs";
 
 export default class NPCSheet extends BaseActorSheet {
 	/** @inheritDoc */
@@ -383,12 +384,17 @@ export default class NPCSheet extends BaseActorSheet {
 
 	/** @inheritDoc */
 	async _onAction(event, dataset) {
-		const { action } = dataset ?? event.currentTarget.dataset;
+		const { action, ...properties } = dataset ?? event.currentTarget.dataset;
 		switch (action) {
 			case "add-feature":
 				const features = this.element[0].querySelector('blackflag-inventory[tab="features"]');
 				const section = features?.querySelector('[data-section="features"]');
 				return features?._onAddItem(section);
+			case "config":
+				switch (properties.type) {
+					case "spellcasting":
+						return new NPCSpellcastingConfig(this.actor).render(true);
+				}
 		}
 		return super._onAction(event, dataset);
 	}

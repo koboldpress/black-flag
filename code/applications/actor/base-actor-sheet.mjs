@@ -362,7 +362,6 @@ export default class BaseActorSheet extends ActorSheet {
 				this.modes[properties.type] = !this.modes[properties.type];
 				return this.render();
 		}
-		return log(`Unrecognized action: ${action}/${subAction}`, { level: "warn" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

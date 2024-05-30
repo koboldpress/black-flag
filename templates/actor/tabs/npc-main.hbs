@@ -248,7 +248,16 @@
 					{{#if (and (eq @key "action") @root.spellcasting)}}
 					{{#with @root.spellcasting}}
 						<div class="spellcasting feature">
-							<span class="controls">{{ localize "BF.Spellcasting.Label" }}.</span>
+							<span class="controls">
+								{{#if @root.editable}}
+									<button type="button" class="link-button" data-action="config" data-type="spellcasting"
+													data-tooltip="BF.Spellcasting.Action.Configure"
+													aria-label="{{ localize 'BF.Spellcasting.Action.Configure' }}">
+										<i class="fa-solid fa-cog" inert></i>
+									</button>
+								{{/if}}
+								{{ localize "BF.Spellcasting.Label" }}.
+							</span>
 							{{{ description }}}
 						</div>
 					{{/with}}

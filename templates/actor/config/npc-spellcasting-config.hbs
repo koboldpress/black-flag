@@ -1,0 +1,44 @@
+<form autocomplete="off">
+	<fieldset>
+		<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
+		<label>
+			<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
+			<select name="system.spellcasting.ability">
+				{{ selectOptions CONFIG.abilities.localized selected=system.spellcasting.ability }}
+			</select>
+		</label>
+		<label>
+			<span>{{ localize "BF.Spellcasting.DC.Label" }}</span>
+			<input type="number" name="system.spellcasting.dc" value="{{ source.spellcasting.dc }}"
+			       placeholder="{{ system.spellcasting.autoDC }}">
+		</label>
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.Item.Type.Spell[other]" }}</legend>
+		<table class="untable">
+			<thead>
+				<tr>
+					<th scope="col" class="name">{{ localize "BF.Item.Type.Spell[one]" }}</th>
+					<th scope="col" class="uses">{{ localize "BF.Uses.Maximum.DebugName" }}</th>
+					<th scope="col" class="period">{{ localize "BF.Recovery.Label" }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each spells}}
+					<tr>
+						<th scope="row">{{ name }}</th>
+						<td>
+							<input type="text" name="spell.{{ id }}.uses" value="{{ uses }}" {{ disabled (not period) }}>
+						</td>
+						<td>
+							<select name="spell.{{ id }}.period">
+								{{ selectOptions @root.periods selected=period blank=(localize "BF.Spell.Preparation.Mode.AtWill")
+								   localize=true }}
+							</select>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</fieldset>
+</form>

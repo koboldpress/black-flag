@@ -176,3 +176,11 @@ img.icon, figure.icon {
 		aspect-ratio: 1;
 	}
 }
+
+.untable {
+	&, thead, tbody, tr, tr:nth-child(2n), th, td { all: revert; }
+	th {
+		font-weight: normal;
+		text-align: start;
+	}
+}
