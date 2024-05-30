@@ -109,8 +109,11 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			filters.weaponProficiency.v.map(p => Trait.keyLabel(p, { trait: "weapons", priority: "localization" }))
 		)));
 		if ( filters.toolProficiency ) proficiencies.push(validate(filters.toolProficiency, formatter.format(
-				filters.toolProficiency.v.map(p => Trait.keyLabel(p, { trait: "tools", priority: "localization" }))
-			)));
+			filters.toolProficiency.v.map(p => Trait.keyLabel(p._key, { trait: "tools", priority: "localization" }))
+		)));
+		if ( filters.skillProficiency ) proficiencies.push(validate(filters.skillProficiency, formatter.format(
+			filters.skillProficiency.v.map(p => Trait.keyLabel(p._key, { trait: "skills" }))
+		)));
 		if ( proficiencies.length ) prerequisites.push(game.i18n.format("BF.Prerequisite.Proficiency.Label", {
 			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
 		}));
@@ -172,8 +175,13 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 			switch ( invalidFilter._id ) {
 				case "armorProficiency":
+				case "toolProficiency":
+				case "skillProficiency":
+				case "weaponProficiency":
+					const trait = invalidFilter._id === "armorProficiency" ? "armor"
+						: invalidFilter._id.replace("Proficiency", "s");
 					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
-						Trait.keyLabel(p, { trait: "armor", priority: "localization" })
+						Trait.keyLabel(p?._key ?? p, { trait, priority: "localization" })
 					)));
 					break;
 				case "characterLevel":
@@ -199,16 +207,6 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 					messages.push(game.i18n.format("BF.Prerequisite.SpellcastingCircle.Warning", {
 						circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
 					}));
-					break;
-				case "toolProficiency":
-					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
-						Trait.keyLabel(p, { trait: "tools", priority: "localization" })
-					)));
-					break;
-				case "weaponProficiency":
-					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
-						Trait.keyLabel(p, { trait: "weapons", priority: "localization" })
-					)));
 					break;
 				default:
 					// TODO: Send out hook for custom filter handling

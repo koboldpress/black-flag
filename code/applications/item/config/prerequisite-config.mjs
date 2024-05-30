@@ -93,7 +93,11 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		return {
 			armor: Trait.choices("armor", { chosen: new Set(filters.armorProficiency?.v ?? []), ...opts }),
 			weapons: Trait.choices("weapons", { chosen: new Set(filters.weaponProficiency?.v ?? []), ...opts }),
-			tools: Trait.choices("tools", { chosen: new Set(filters.toolProficiency?.v ?? []), ...opts })
+			tools: Trait.choices("tools", { chosen: new Set(filters.toolProficiency?.v?.map?.(s => s._key) ?? []), ...opts }),
+			skills: Trait.choices("skills", {
+				chosen: new Set(filters.skillProficiency?.v?.map?.(s => s._key) ?? []),
+				...opts
+			})
 		};
 	}
 
@@ -164,7 +168,28 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		// Proficiencies
 		updateFilter("armorProficiency", "system.proficiencies.armor.value", data.proficiencies?.armor, "hasAny");
 		updateFilter("weaponProficiency", "system.proficiencies.weapons.value", data.proficiencies?.weapons, "hasAny");
-		updateFilter("toolProficiency", "system.proficiencies.tools.value", data.proficiencies?.tools, "hasAny");
+		updateFilter(
+			"toolProficiency",
+			undefined,
+			data.proficiencies?.tools?.map(k => ({
+				k: `system.proficiencies.tools.${k}.proficiency.multiplier`,
+				o: "gte",
+				v: 1,
+				_key: k
+			})),
+			"OR"
+		);
+		updateFilter(
+			"skillProficiency",
+			undefined,
+			data.proficiencies?.skills?.map(k => ({
+				k: `system.proficiencies.skills.${k}.proficiency.multiplier`,
+				o: "gte",
+				v: 1,
+				_key: k
+			})),
+			"OR"
+		);
 
 		// Spellcasting
 		updateFilter(
