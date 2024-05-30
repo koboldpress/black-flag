@@ -85,41 +85,43 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			return `${label} <i class="filter ${filter.performCheck(actor, [f]) ? "" : "in"}valid"></i>`;
 		};
 
+		const filters = this.restriction.filters.reduce((obj, f) => {
+			obj[f._id] = f;
+			return obj;
+		}, {});
+
 		// Abilities
 		for ( const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities) ) {
-			const abilityFilter = this.restriction.filters.find(f => f._id === `ability-${key}`);
-			if ( !abilityFilter ) continue;
-			prerequisites.push(validate(abilityFilter, game.i18n.format("BF.Prerequisite.Ability.Label", {
+			if ( !filters[`ability-${key}`] ) continue;
+			prerequisites.push(validate(filters[`ability-${key}`], game.i18n.format("BF.Prerequisite.Ability.Label", {
 				abbreviation: game.i18n.localize(ability.labels.abbreviation).toUpperCase(),
-				value: numberFormat(abilityFilter.v)
+				value: numberFormat(filters[`ability-${key}`].v)
 			})));
 		}
 
 		// Spellcasting
-		const spellcastingFeatureFilter = this.restriction.filters.find(f => f._id === "spellcastingFeature" );
-		if ( spellcastingFeatureFilter ) prerequisites.push(validate(
-			spellcastingFeatureFilter, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
+		if ( filters.spellcastingFeature ) prerequisites.push(validate(
+			filters.spellcastingFeature, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
 		));
-		const spellCircleFilter = this.restriction.filters.find(f => f._id === "spellCircle" );
-		if ( spellCircleFilter ) prerequisites.push(validate(
-			spellCircleFilter, game.i18n.format("BF.Prerequisite.SpellcastingCircle.Label", {
-				circle: CONFIG.BlackFlag.spellCircles()[spellCircleFilter.v]
+		if ( filters.spellCircle ) prerequisites.push(validate(
+			filters.spellCircle, game.i18n.format("BF.Prerequisite.SpellcastingCircle.Label", {
+				circle: CONFIG.BlackFlag.spellCircles()[filters.spellCircle.v]
 			})
 		));
-		const cantripSpellsFilter = this.restriction.filters.find(f => f._id === "hasCantrips" );
-		if ( cantripSpellsFilter ) prerequisites.push(validate(
-			cantripSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Label")
+		if ( filters.hasCantrips ) prerequisites.push(validate(
+			filters.hasCantrips, game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Label")
 		));
-		const damageSpellsFilter = this.restriction.filters.find(f => f._id === "hasDamagingSpells");
-		if ( damageSpellsFilter ) prerequisites.push(validate(
-			damageSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")
+		if ( filters.hasDamagingSpells ) prerequisites.push(validate(
+			filters.hasDamagingSpells, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")
 		));
 
 		// Traits
-		const sizeFilter = this.restriction.filters.find(f => f._id === "creatureSize");
-		if ( sizeFilter ) prerequisites.push(validate(sizeFilter, game.i18n.format("BF.Prerequisite.Size.Label", {
-			size: game.i18n.localize(CONFIG.BlackFlag.sizes[sizeFilter.v]?.label)
-		})));
+		if ( filters.characterLevel ) prerequisites.push(validate(filters.characterLevel, game.i18n.format(
+			"BF.Prerequisite.LevelCharacter.Label", { level: numberFormat(filters.characterLevel.v, { ordinal: true }) }
+		)));
+		if ( filters.creatureSize ) prerequisites.push(validate(filters.creatureSize, game.i18n.format(
+			"BF.Prerequisite.Size.Label", { size: game.i18n.localize(CONFIG.BlackFlag.sizes[filters.creatureSize.v]?.label) }
+		)));
 
 		// TODO: Send out hook for custom filter handling
 
@@ -141,42 +143,43 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 		const messages = [];
 		for ( const invalidFilter of invalidFilters ) {
-			if ( !invalidFilter._id ) continue;
-
-			// Ability score minimum
-			if ( invalidFilter._id.startsWith("ability-") ) {
+			if ( invalidFilter._id?.startsWith("ability-") ) {
 				const abilityKey = invalidFilter._id.replace("ability-", "");
 				messages.push(game.i18n.format("BF.Prerequisite.Ability.Warning", {
 					ability: game.i18n.localize(CONFIG.BlackFlag.abilities[abilityKey].labels.full).toLowerCase(),
 					value: numberFormat(invalidFilter.v)
 				}));
+				continue;
 			}
 
-			// Spellcasting
-			else if ( invalidFilter._id === "hasCantrips" ) messages.push(
-				game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning")
-			);
-			else if ( invalidFilter._id === "spellCircle" ) messages.push(
-				game.i18n.format("BF.Prerequisite.SpellcastingCircle.Warning", {
-					circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
-				})
-			);
-			else if ( invalidFilter._id === "hasDamagingSpells" ) messages.push(
-				game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning")
-			);
-			else if ( invalidFilter._id === "spellcastingFeature" ) messages.push(
-				game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning")
-			);
-
-			// Sizes
-			else if ( invalidFilter._id === "creatureSize" ) messages.push(
-				game.i18n.format("BF.Prerequisite.Size.Warning", {
-					size: game.i18n.localize(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
-				})
-			);
-
-			else {
-				// TODO: Send out hook for custom filter handling
+			switch ( invalidFilter._id ) {
+				case "characterLevel":
+					messages.push(game.i18n.format("BF.Prerequisite.LevelCharacter.Warning", {
+						level: numberFormat(invalidFilter.v, { ordinal: true })
+					}));
+					break;
+				case "creatureSize":
+					messages.push(game.i18n.format("BF.Prerequisite.Size.Warning", {
+						size: game.i18n.localize(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
+					}));
+					break;
+				case "hasCantrips":
+					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning"));
+					break;
+				case "hasDamagingSpells":
+					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning"));
+					break;
+				case "spellcastingFeature":
+					messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning"));
+					break;
+				case "spellCircle":
+					messages.push(game.i18n.format("BF.Prerequisite.SpellcastingCircle.Warning", {
+						circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
+					}));
+					break;
+				default:
+					// TODO: Send out hook for custom filter handling
+					break;
 			}
 		}
 		return messages;

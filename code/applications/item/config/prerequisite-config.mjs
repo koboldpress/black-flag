@@ -46,6 +46,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 				source: this.document.toObject().system,
 				system: this.document.system,
 				abilities: this.prepareAbilities(),
+				levels: CONFIG.BlackFlag.levels(),
 				spellcasting: this.prepareSpellcasting(),
 				spellCircles: CONFIG.BlackFlag.spellCircles(undefined, false),
 				traits: this.prepareTraits()
@@ -96,6 +97,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 */
 	prepareTraits() {
 		const traits = {};
+		traits.level = this.filters.find(f => f._id === "characterLevel")?.v;
 		traits.size = this.filters.find(f => f._id === "creatureSize")?.v;
 		return traits;
 	}
@@ -134,6 +136,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		updateFilter("spellCircle", "system.spellcasting.maxCircle", data.spellcasting?.circle, "gte");
 		updateFilter("hasDamagingSpells", "system.spellcasting.spells.damaging", Number(data.spellcasting?.damage), "gte");
 		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
+		updateFilter("characterLevel", "system.progression.level", data.traits?.level);
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
 		super._updateObject(event, { "system.restriction.filters": filters });

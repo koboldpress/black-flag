@@ -32,6 +32,12 @@
 	<fieldset class="traits">
 		<legend>{{ localize "BF.Trait.Label[other]" }}</legend>
 		<label>
+			<span>{{ localize "BF.Prerequisite.LevelCharacter.ConfigLabel" }}</span>
+			<select name="traits.level" data-dtype="Number">
+				{{ selectOptions levels selected=traits.level blank="" }}
+			</select>
+		</label>
+		<label>
 			<span>{{ localize "BF.Size.Label" }}</span>
 			<select name="traits.size">
 				{{ selectOptions CONFIG.sizes selected=traits.size labelAttr="label" localize=true blank="" }}
