@@ -3,14 +3,14 @@
 .black-flag.npc.sheet {
 	min-block-size: 420px;
 	min-inline-size: 420px;
+	max-block-size: 90vh;
 
 	container: sheet / inline-size;
 	--end-border-radius: 18px;
 	--icon-fill: var(--bf-blue);
 
 	form {
-		display: flex;
-		flex-direction: column;
+		column-width: 420px;
 	}
 
 	input:is(:hover:not(:disabled), :focus) {
