@@ -10,16 +10,18 @@
 	</fieldset>
 	<fieldset class="spellcasting">
 		<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
-		<label>
-			<span>{{ localize "BF.Prerequisite.Spellcasting.Label" }}</span>
-			<input type="checkbox" name="spellcasting.present" {{ checked spellcasting.present }}>
+		<label class="full-checkbox">
+			<span>{{ localize "BF.Prerequisite.SpellcastingFeature.ConfigLabel" }}</span>
+			<input type="checkbox" name="spellcasting.feature" {{ checked spellcasting.feature }}>
 		</label>
-		{{#if spellcasting.present}}
-			<label>
-				<span>{{ localize "BF.Prerequisite.SpellcastingDamage.ConfigLabel" }}</span>
-				<input type="checkbox" name="spellcasting.damage" {{ checked spellcasting.damage }}>
-			</label>
-		{{/if}}
+		<label class="full-checkbox">
+			<span>{{ localize "BF.Prerequisite.SpellcastingCantrip.ConfigLabel" }}</span>
+			<input type="checkbox" name="spellcasting.cantrip" {{ checked spellcasting.cantrip }}>
+		</label>
+		<label class="full-checkbox">
+			<span>{{ localize "BF.Prerequisite.SpellcastingDamage.ConfigLabel" }}</span>
+			<input type="checkbox" name="spellcasting.damage" {{ checked spellcasting.damage }}>
+		</label>
 	</fieldset>
 	<fieldset class="traits">
 		<legend>{{ localize "BF.Trait.Label[other]" }}</legend>

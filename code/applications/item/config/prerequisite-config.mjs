@@ -63,7 +63,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	prepareAbilities() {
 		const abilities = {};
 		for (const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities)) {
-			const filter = this.filters.find(f => f.k === `system.abilities.${key}.value`);
+			const filter = this.filters.find(f => f._id === `ability-${key}`);
 			abilities[key] = {
 				label: ability.labels.abbreviation,
 				value: filter?.v ?? ""
@@ -80,8 +80,9 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 */
 	prepareSpellcasting() {
 		const spellcasting = {};
-		spellcasting.present = this.filters.find(f => f.k === "system.spellcasting.present")?.v;
-		spellcasting.damage = this.filters.find(f => f.k === "system.spellcasting.spells.damaging")?.v;
+		spellcasting.cantrip = this.filters.find(f => f._id === "hasCantrips")?.v;
+		spellcasting.damage = this.filters.find(f => f._id === "hasDamagingSpells")?.v;
+		spellcasting.feature = this.filters.find(f => f._id === "spellcastingFeature")?.v;
 		return spellcasting;
 	}
 
@@ -93,7 +94,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 */
 	prepareTraits() {
 		const traits = {};
-		traits.size = this.filters.find(f => f.k === "system.traits.size")?.v;
+		traits.size = this.filters.find(f => f._id === "creatureSize")?.v;
 		return traits;
 	}
 
@@ -106,27 +107,21 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		const data = foundry.utils.expandObject(formData);
 		const filters = this.filters;
 
-		const updateFilter = (k, v, o) => {
-			const existingIdx = filters.findIndex(f => f.k === k);
+		const updateFilter = (_id, k, v, o) => {
+			const existingIdx = filters.findIndex(f => f._id === _id);
 			if (v) {
 				if (existingIdx !== -1) filters[existingIdx].v = v;
-				else filters.push({ k, v, o });
+				else filters.push({ _id, k, v, o });
 			} else if (existingIdx !== -1) filters.splice(existingIdx, 1);
 		};
 
-		Object.entries(data.abilities).forEach(([k, v]) => updateFilter(`system.abilities.${k}.value`, v, "gte"));
-		updateFilter(
-			"system.spellcasting.present",
-			data.spellcasting?.present
-				? [
-						{ k: "system.spellcasting.spells.total", v: 1, o: "gte" },
-						{ k: "system.spellcasting.slots.max", v: 1, o: "gte" }
-					]
-				: 0,
-			"OR"
+		Object.entries(data.abilities).forEach(([k, v]) =>
+			updateFilter(`ability-${k}`, `system.abilities.${k}.value`, v, "gte")
 		);
-		updateFilter("system.spellcasting.spells.damaging", data.spellcasting?.damage ? 1 : 0, "gte");
-		updateFilter("system.traits.size", data.traits?.size);
+		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
+		updateFilter("hasCantrips", "system.spellcasting.spells.cantrips", Number(data.spellcasting?.cantrip), "gte");
+		updateFilter("hasDamagingSpells", "system.spellcasting.spells.damaging", Number(data.spellcasting?.damage), "gte");
+		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
 		super._updateObject(event, { "system.restriction.filters": filters });
 	}

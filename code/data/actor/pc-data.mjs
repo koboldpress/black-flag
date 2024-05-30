@@ -455,6 +455,7 @@ export default class PCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedSpellcasting() {
+		this.spellcasting.hasSpellcastingAdvancement = false;
 		// TODO: Calculate spellcasting DC per-class
 
 		// Combine class spellcasting data to total progression
@@ -470,6 +471,7 @@ export default class PCData extends ActorDataModel.mixin(
 			if (!spellcasting?.type) return false;
 			types[spellcasting.type] ??= 0;
 			types[spellcasting.type] += 1;
+			this.spellcasting.hasSpellcastingAdvancement = true;
 			return true;
 		});
 
@@ -484,8 +486,9 @@ export default class PCData extends ActorDataModel.mixin(
 			});
 		}
 
-		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes))
+		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
 			this.constructor.prepareSpellcastingSlots(this.spellcasting.circles, type, progression, { actor: this });
+		}
 
 		for (const circle of Object.values(this.spellcasting.circles)) {
 			circle.value = Math.clamp(circle.max - circle.spent, 0, circle.max);

@@ -29,6 +29,35 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			})
 		};
 	}
+	
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	static migrateFilterIds(source) {
+		for ( const filter of source.restriction?.filters ?? [] ) {
+			if ( filter._id ) continue;
+			switch ( filter.k ) {
+				case "system.spellcasting.present":
+					filter._id = "spellcastingFeature";
+					filter.k = "system.spellcasting.hasSpellcastingAdvancement";
+					filter.v = true;
+					delete filter.o;
+					break;
+				case "system.spellcasting.spells.damaging":
+					filter._id = "hasDamagingSpells";
+					break;
+				case "system.traits.size":
+					filter._id = "creatureSize";
+					break;
+				default:
+					if ( filter.k?.startsWith("system.abilities.") ) {
+						const ability = filter.k.replace("system.abilities.", "").replace(".value", "");
+						filter._id = `ability-${ability}`;
+					}
+			}
+		}
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
@@ -58,7 +87,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 		// Abilities
 		for ( const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities) ) {
-			const abilityFilter = this.restriction.filters.find(f => f.k === `system.abilities.${key}.value`);
+			const abilityFilter = this.restriction.filters.find(f => f._id === `ability-${key}`);
 			if ( !abilityFilter ) continue;
 			prerequisites.push(validate(abilityFilter, game.i18n.format("BF.Prerequisite.Ability.Label", {
 				abbreviation: game.i18n.localize(ability.labels.abbreviation).toUpperCase(),
@@ -67,21 +96,26 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		}
 
 		// Spellcasting
-		const damageSpellsFilter = this.restriction.filters.find(f => f.k === "system.spellcasting.spells.damaging");
-		if ( damageSpellsFilter ) {
-			prerequisites.push(validate(damageSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")));
-		} else {
-			const spellcastingFilter = this.restriction.filters.find(f => f.k === "system.spellcasting.present");
-			if ( spellcastingFilter ) prerequisites.push(validate(
-				spellcastingFilter, game.i18n.localize("BF.Prerequisite.Spellcasting.Label")
-			));
-		}
+		const spellcastingFeatureFilter = this.restriction.filters.find(f => f._id === "spellcastingFeature" );
+		if ( spellcastingFeatureFilter ) prerequisites.push(validate(
+			spellcastingFeatureFilter, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
+		));
+		const cantripSpellsFilter = this.restriction.filters.find(f => f._id === "hasCantrips" );
+		if ( cantripSpellsFilter ) prerequisites.push(validate(
+			cantripSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Label")
+		));
+		const damageSpellsFilter = this.restriction.filters.find(f => f._id === "hasDamagingSpells");
+		if ( damageSpellsFilter ) prerequisites.push(validate(
+			damageSpellsFilter, game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Label")
+		));
 
 		// Traits
-		const sizeFilter = this.restriction.filters.find(f => f.k === "system.traits.size");
+		const sizeFilter = this.restriction.filters.find(f => f._id === "creatureSize");
 		if ( sizeFilter ) prerequisites.push(validate(sizeFilter, game.i18n.format("BF.Prerequisite.Size.Label", {
 			size: game.i18n.localize(CONFIG.BlackFlag.sizes[sizeFilter.v]?.label)
 		})));
+
+		// TODO: Send out hook for custom filter handling
 
 		if ( !prerequisites.length ) return "";
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit", style: "short" });
@@ -91,7 +125,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Validate item prerequisites against actor data
+	 * Validate item prerequisites against actor data.
 	 * @param {BlackFlagActor} actor - Actor that needs to be validated.
 	 * @returns {true|string[]} - True if the item is valid, or a list of invalid descriptions if not.
 	 */
@@ -101,9 +135,11 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 		const messages = [];
 		for ( const invalidFilter of invalidFilters ) {
+			if ( !invalidFilter._id ) continue;
+
 			// Ability score minimum
-			if ( invalidFilter.k.startsWith("system.abilities.") ) {
-				const abilityKey = invalidFilter.k.replace("system.abilities.", "").replace(".value", "");
+			if ( invalidFilter._id.startsWith("ability-") ) {
+				const abilityKey = invalidFilter._id.replace("ability-", "");
 				messages.push(game.i18n.format("BF.Prerequisite.Ability.Warning", {
 					ability: game.i18n.localize(CONFIG.BlackFlag.abilities[abilityKey].labels.full).toLowerCase(),
 					value: numberFormat(invalidFilter.v)
@@ -111,18 +147,25 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			}
 
 			// Spellcasting
-			else if ( invalidFilter.k === "system.spellcasting.spells.damaging" ) {
+			else if ( invalidFilter._id === "hasCantrips" ) {
+				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingCantrip.Warning"));
+			}
+			else if ( invalidFilter._id === "hasDamagingSpells" ) {
 				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingDamage.Warning"));
 			}
-			else if ( invalidFilter.k === "system.spellcasting.present" ) {
-				messages.push(game.i18n.localize("BF.Prerequisite.Spellcasting.Warning"));
+			else if ( invalidFilter._id === "spellcastingFeature" ) {
+				messages.push(game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Warning"));
 			}
 
 			// Sizes
-			else if ( invalidFilter.k === "system.traits.size" ) {
+			else if ( invalidFilter._id === "creatureSize" ) {
 				messages.push(game.i18n.format("BF.Prerequisite.Size.Warning", {
 					size: game.i18n.localize(CONFIG.BlackFlag.sizes[invalidFilter.v].label)
 				}));
+			}
+
+			else {
+				// TODO: Send out hook for custom filter handling
 			}
 		}
 		return messages;

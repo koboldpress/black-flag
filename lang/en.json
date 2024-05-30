@@ -1837,21 +1837,27 @@
 "BF.Prerequisite": {
 	"Label": "Prerequisite",
 	"Ability": {
-		"Label": "{abbreviation} Score of {value} or Higher",
+		"Label": "{abbreviation} {value} or Higher",
 		"Title": "Minimum Ability Scores",
-		"Warning": "must have a {ability} of {value} or higher"
+		"Warning": "must have {ability} of {value} or higher"
 	},
 	"Config": {
 		"Title": "Prerequisite Configuration"
 	},
-	"Spellcasting": {
-		"Label": "Ability to Cast Spells",
-		"Warning": "must be able to cast spells"
+	"SpellcastingCantrip": {
+		"Label": "Ability to Cast One or More Cantrips",
+		"ConfigLabel": "Has Cantrips",
+		"Warning": "must be able cast one or more cantrips"
 	},
 	"SpellcastingDamage": {
 		"Label": "Ability to Cast at Least One Spell that Deals Damage",
 		"ConfigLabel": "Has Damaging Spells",
 		"Warning": "must be able to cast at least one spell that deals damage"
+	},
+	"SpellcastingFeature": {
+		"Label": "Spellcasting Class Feature",
+		"ConfigLabel": "Spellcasting Feature",
+		"Warning": "must have the spellcasting class feature"
 	},
 	"Size": {
 		"Label": "{size} Size",
