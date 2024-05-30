@@ -57,15 +57,22 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		const rollData = this.parent.item.getRollData({ deterministic: true });
-		const ability = rollData.abilities?.[this.parent.dcAbility];
-		if (ability) {
-			rollData.mod = ability.mod;
+		let dc;
+		if (this.parent.actor?.system.spellcasting?.dc && !this.dc.ability) {
+			dc = this.parent.actor.system.spellcasting.dc;
+		} else {
+			const rollData = this.parent.item.getRollData({ deterministic: true });
+			const ability = rollData.abilities?.[this.parent.dcAbility];
+			if (ability) {
+				rollData.mod = ability.mod;
+				dc = this.dc.ability === "custom" ? simplifyBonus(this.dc.formula, rollData) : ability?.dc;
+			}
+		}
+		if (dc)
 			Object.defineProperty(this.dc, "final", {
-				value: this.dc.ability === "custom" ? simplifyBonus(this.dc.formula, rollData) : ability?.dc,
+				value: dc,
 				configurable: true,
 				enumerable: false
 			});
-		}
 	}
 }

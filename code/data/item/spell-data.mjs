@@ -105,7 +105,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		return (
 			this.parent.actor?.system.spellcasting?.origins?.[
 				this.parent.getFlag(game.system.id, "relationship.origin.identifier")
-			]?.ability ?? "intelligence"
+			]?.ability ??
+			this.parent.actor?.system.spellcasting?.ability ??
+			"intelligence"
 		);
 	}
 
