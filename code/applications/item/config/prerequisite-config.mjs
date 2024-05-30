@@ -1,3 +1,5 @@
+import { Trait } from "../../../utils/_module.mjs";
+
 /**
  * Configuration dialog for feature & talent prerequisites.
  */
@@ -40,16 +42,21 @@ export default class PrerequisiteConfig extends DocumentSheet {
 
 	/** @inheritDoc */
 	async getData(options) {
+		const filters = this.filters.reduce((obj, f) => {
+			obj[f._id] = f;
+			return obj;
+		}, {});
 		const context = foundry.utils.mergeObject(
 			{
 				CONFIG: CONFIG.BlackFlag,
 				source: this.document.toObject().system,
 				system: this.document.system,
-				abilities: this.prepareAbilities(),
+				abilities: this.prepareAbilities(filters),
 				levels: CONFIG.BlackFlag.levels(),
-				spellcasting: this.prepareSpellcasting(),
+				proficiencies: this.prepareProficiencies(filters),
+				spellcasting: this.prepareSpellcasting(filters),
 				spellCircles: CONFIG.BlackFlag.spellCircles(undefined, false),
-				traits: this.prepareTraits()
+				traits: this.prepareTraits(filters)
 			},
 			await super.getData(options)
 		);
@@ -60,15 +67,15 @@ export default class PrerequisiteConfig extends DocumentSheet {
 
 	/**
 	 * Prepare minimum abilities.
+	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
 	 * @returns {object}
 	 */
-	prepareAbilities() {
+	prepareAbilities(filters) {
 		const abilities = {};
 		for (const [key, ability] of Object.entries(CONFIG.BlackFlag.abilities)) {
-			const filter = this.filters.find(f => f._id === `ability-${key}`);
 			abilities[key] = {
 				label: ability.labels.abbreviation,
-				value: filter?.v ?? ""
+				value: filters[`ability-${key}`]?.v ?? ""
 			};
 		}
 		return abilities;
@@ -77,33 +84,63 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare spellcasting restrictions.
+	 * Prepare proficiency restrictions.
+	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
 	 * @returns {object}
 	 */
-	prepareSpellcasting() {
-		const spellcasting = {};
-		spellcasting.cantrip = this.filters.find(f => f._id === "hasCantrips")?.v;
-		spellcasting.circle = this.filters.find(f => f._id === "spellCircle")?.v;
-		spellcasting.damage = this.filters.find(f => f._id === "hasDamagingSpells")?.v;
-		spellcasting.feature = this.filters.find(f => f._id === "spellcastingFeature")?.v;
-		return spellcasting;
+	prepareProficiencies(filters) {
+		const opts = { category: true, priority: "localization" };
+		return {
+			armor: Trait.choices("armor", { chosen: new Set(filters.armorProficiency?.v ?? []), ...opts }),
+			weapons: Trait.choices("weapons", { chosen: new Set(filters.weaponProficiency?.v ?? []), ...opts }),
+			tools: Trait.choices("tools", { chosen: new Set(filters.toolProficiency?.v ?? []), ...opts })
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare spellcasting restrictions.
+	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
+	 * @returns {object}
+	 */
+	prepareSpellcasting(filters) {
+		return {
+			cantrip: filters.hasCantrips?.v,
+			circle: filters.spellCircle?.v,
+			damage: filters.hasDamagingSpells?.v,
+			feature: filters.spellcastingFeature?.v
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Prepare trait restrictions.
+	 * @param {Record<string, FilterData>} filters - Prerequisites to consider.
 	 * @returns {object}
 	 */
-	prepareTraits() {
-		const traits = {};
-		traits.level = this.filters.find(f => f._id === "characterLevel")?.v;
-		traits.size = this.filters.find(f => f._id === "creatureSize")?.v;
-		return traits;
+	prepareTraits(filters) {
+		return {
+			level: filters.characterLevel?.v,
+			size: filters.creatureSize?.v
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	activateListeners(jQuery) {
+		super.activateListeners(jQuery);
+		const html = jQuery[0];
+
+		for (const element of html.querySelectorAll("multi-select")) {
+			element.addEventListener("change", this._onChangeInput.bind(this));
+		}
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -119,9 +156,17 @@ export default class PrerequisiteConfig extends DocumentSheet {
 			} else if (existingIdx !== -1) filters.splice(existingIdx, 1);
 		};
 
+		// Abilities
 		Object.entries(data.abilities).forEach(([k, v]) =>
 			updateFilter(`ability-${k}`, `system.abilities.${k}.value`, v, "gte")
 		);
+
+		// Proficiencies
+		updateFilter("armorProficiency", "system.proficiencies.armor.value", data.proficiencies?.armor, "hasAny");
+		updateFilter("weaponProficiency", "system.proficiencies.weapons.value", data.proficiencies?.weapons, "hasAny");
+		updateFilter("toolProficiency", "system.proficiencies.tools.value", data.proficiencies?.tools, "hasAny");
+
+		// Spellcasting
 		updateFilter(
 			"hasCantrips",
 			undefined,
@@ -136,6 +181,8 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		updateFilter("spellCircle", "system.spellcasting.maxCircle", data.spellcasting?.circle, "gte");
 		updateFilter("hasDamagingSpells", "system.spellcasting.spells.damaging", Number(data.spellcasting?.damage), "gte");
 		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
+
+		// Traits
 		updateFilter("characterLevel", "system.progression.level", data.traits?.level);
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 

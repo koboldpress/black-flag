@@ -140,9 +140,10 @@ export function categories(trait) {
  * @param {Set<string>} [options.chosen=[]] - Optional list of keys to be marked as chosen.
  * @param {boolean} [options.prefixed=false] - Prefix keys with the trait type.
  * @param {boolean} [options.any=false] - Should an "Any" option be added to each category?
+ * @param {boolean} [options.category=false] - Should the category be selectable in addition to its children?
  * @returns {SelectChoices} - Object mapping proficiency ids to choice objects.
  */
-export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={}) {
+export function choices(trait, { chosen=new Set(), prefixed=false, any=false, category=false }={}) {
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	if ( !traitConfig ) return new SelectChoices();
 	if ( foundry.utils.getType(chosen) === "Array" ) chosen = new Set(chosen);
@@ -170,6 +171,9 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false }={
 		if ( data.children ) {
 			result[key].selectableCategory = data?.selectableCategory ?? false;
 			const children = result[key].children = {};
+			if ( category && data?.selectableCategory !== false ) {
+				children[key] = { label: result[key].label, chosen: chosen.has(key), sorting: false };
+			}
 			if ( prefixed && any ) {
 				const anyKey = `${key}:*`;
 				children[anyKey] = {
@@ -234,17 +238,22 @@ export function traitLabel(trait, count) {
  * @param {number} [config.count] - Number to display, only if a wildcard is used as final part of key.
  * @param {string} [config.trait] - Trait as defined in `CONFIG.BlackFlag.traits` if not using a prefixed key.
  * @param {boolean} [config.final] - Is this the final in a list?
+ * @param {"label"|"localization"} [config.priority] - If both a label and a localization string are found, which one
+ *                                                     should be preferred?
  * @returns {string}
  */
-export function keyLabel(key, { count, trait, final }={}) {
+export function keyLabel(key, { count, trait, final, priority }={}) {
 	let parts = key.split(":");
 	const localizedCount = count ? numberFormat(count, { spelledOut: true }) : null;
 	const pluralRules = new Intl.PluralRules(game.i18n.lang);
+	priority ??= count ? "localization" : "label";
 
 	if ( !trait ) trait = parts.shift();
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	if ( !traitConfig ) return key;
-	const type = game.i18n.localize(`${traitConfig.labels.localization}[${pluralRules.select(count ?? 1)}]`).toLowerCase();
+	const type = game.i18n.localize(
+		`${traitConfig.labels.localization}[${pluralRules.select(count ?? 1)}]`
+	).toLowerCase();
 
 	const searchTrait = (parts, traits, type) => {
 		const firstKey = parts.shift();
@@ -257,9 +266,11 @@ export function keyLabel(key, { count, trait, final }={}) {
 		let category = traits[firstKey];
 		if ( !category && !parts.length ) category = configForKey(firstKey, { trait });
 		if ( !category ) return key;
+		let label = foundry.utils.getProperty(category, traitConfig.labelKeyPath ?? "label");
 		const localization = foundry.utils.getProperty(category, "localization");
-		let label = foundry.utils.getType(category) !== "Object" ? category
-			: foundry.utils.getProperty(category, traitConfig.labelKeyPath ?? "label") ?? `${localization}[other]`;
+		if ( foundry.utils.getType(category) !== "Object" ) label = category;
+		else if ( priority === "label" ) label ??= `${localization}[other]`;
+		else if ( localization ) label = `${localization}[other]`;
 
 		if ( !parts.length ) {
 			if ( !label ) return key;

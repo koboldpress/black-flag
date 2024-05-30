@@ -29,6 +29,27 @@
 			<input type="checkbox" name="spellcasting.damage" {{ checked spellcasting.damage }}>
 		</label>
 	</fieldset>
+	<fieldset class="proficiencies">
+		<legend>{{ localize "BF.Proficiency.Label[other]" }}</legend>
+		<label>
+			<span>{{ localize "BF.Item.Type.Armor[one]" }}</span>
+			<multi-select name="proficiencies.armor">
+				{{ blackFlag-groupedSelectOptions proficiencies.armor }}
+			</multi-select>
+		</label>
+		<label>
+			<span>{{ localize "BF.Item.Type.Weapon[one]" }}</span>
+			<multi-select name="proficiencies.weapons">
+				{{ blackFlag-groupedSelectOptions proficiencies.weapons }}
+			</multi-select>
+		</label>
+		<label>
+			<span>{{ localize "BF.Item.Type.Tool[one]" }}</span>
+			<multi-select name="proficiencies.tools">
+				{{ blackFlag-groupedSelectOptions proficiencies.tools }}
+			</multi-select>
+		</label>
+	</fieldset>
 	<fieldset class="traits">
 		<legend>{{ localize "BF.Trait.Label[other]" }}</legend>
 		<label>

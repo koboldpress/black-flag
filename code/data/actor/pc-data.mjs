@@ -179,8 +179,6 @@ export default class PCData extends ActorDataModel.mixin(
 						assignments: new MappingField(new NumberField({ min: 0, integer: true })),
 						bonuses: new MappingField(new NumberField({ integer: true }))
 					}),
-					// TODO: Currently falls back to being a plain object. This logic will need to be improved to ensure
-					// advancement value type data is properly loaded once advancements can be loaded.
 					advancement: new AdvancementValueField(),
 					background: new LocalDocumentField(foundry.documents.BaseItem),
 					heritage: new LocalDocumentField(foundry.documents.BaseItem),

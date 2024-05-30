@@ -162,7 +162,7 @@ export function NOT(data, filter) {
 export const COMPARISON_FUNCTIONS = {
 	_: exact, exact, iexact, contains, icontains,
 	startswith, istartswith, endswith, iendswith,
-	has, in: in_, gt, gte, lt, lte
+	has, hasAny, hasAll, in: in_, gt, gte, lt, lte
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -271,6 +271,30 @@ export function iendswith(data, value) {
  */
 export function has(data, value) {
 	return in_(value, data);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Check that the data collection has any of the provided values.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function hasAny(data, value) {
+	return Array.from(value).some(v => has(data, v));
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Check that the data collection has all of the provided values.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function hasAll(data, value) {
+	return Array.from(value).every(v => has(data, v));
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

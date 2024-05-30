@@ -1,4 +1,4 @@
-import { filter, numberFormat } from "../../../utils/_module.mjs";
+import { filter, numberFormat, Trait } from "../../../utils/_module.mjs";
 import FilterField from "../../fields/filter-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -99,6 +99,22 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			})));
 		}
 
+		// Proficiencies
+		const proficiencies = [];
+		const formatter = game.i18n.getListFormatter({ type: "disjunction", style: "short" });
+		if ( filters.armorProficiency ) proficiencies.push(validate(filters.armorProficiency, formatter.format(
+			filters.armorProficiency.v.map(p => Trait.keyLabel(p, { trait: "armor", priority: "localization" }))
+		)));
+		if ( filters.weaponProficiency ) proficiencies.push(validate(filters.weaponProficiency, formatter.format(
+			filters.weaponProficiency.v.map(p => Trait.keyLabel(p, { trait: "weapons", priority: "localization" }))
+		)));
+		if ( filters.toolProficiency ) proficiencies.push(validate(filters.toolProficiency, formatter.format(
+				filters.toolProficiency.v.map(p => Trait.keyLabel(p, { trait: "tools", priority: "localization" }))
+			)));
+		if ( proficiencies.length ) prerequisites.push(game.i18n.format("BF.Prerequisite.Proficiency.Label", {
+			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
+		}));
+
 		// Spellcasting
 		if ( filters.spellcastingFeature ) prerequisites.push(validate(
 			filters.spellcastingFeature, game.i18n.localize("BF.Prerequisite.SpellcastingFeature.Label")
@@ -142,6 +158,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		if ( !invalidFilters.length ) return true;
 
 		const messages = [];
+		const proficiencies = [];
+		const formatter = game.i18n.getListFormatter({ type: "disjunction", style: "short" });
 		for ( const invalidFilter of invalidFilters ) {
 			if ( invalidFilter._id?.startsWith("ability-") ) {
 				const abilityKey = invalidFilter._id.replace("ability-", "");
@@ -153,6 +171,11 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			}
 
 			switch ( invalidFilter._id ) {
+				case "armorProficiency":
+					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
+						Trait.keyLabel(p, { trait: "armor", priority: "localization" })
+					)));
+					break;
 				case "characterLevel":
 					messages.push(game.i18n.format("BF.Prerequisite.LevelCharacter.Warning", {
 						level: numberFormat(invalidFilter.v, { ordinal: true })
@@ -177,11 +200,26 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 						circle: CONFIG.BlackFlag.spellCircles()[invalidFilter.v]
 					}));
 					break;
+				case "toolProficiency":
+					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
+						Trait.keyLabel(p, { trait: "tools", priority: "localization" })
+					)));
+					break;
+				case "weaponProficiency":
+					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
+						Trait.keyLabel(p, { trait: "weapons", priority: "localization" })
+					)));
+					break;
 				default:
 					// TODO: Send out hook for custom filter handling
 					break;
 			}
 		}
+
+		if ( proficiencies.length ) messages.push(game.i18n.format("BF.Prerequisite.Proficiency.Warning", {
+			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
+		}));
+
 		return messages;
 	}
 }
