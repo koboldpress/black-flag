@@ -128,7 +128,7 @@ export default class NPCSheet extends BaseActorSheet {
 		for (const item of this.actor.items) {
 			if (item.type === "spell") {
 				const uses = item.system.uses;
-				const key = `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
+				const key = !uses.max ? "atwill" : `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
 				context.spellcasting.uses[key] ??= { spells: [] };
 				context.spellcasting.uses[key].spells.push(item);
 			} else if (item.system.activities?.size) {
@@ -194,7 +194,10 @@ export default class NPCSheet extends BaseActorSheet {
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 */
 	async prepareSpellcasting(context) {
-		if (foundry.utils.isEmpty(context.spellcasting.uses)) return;
+		if (foundry.utils.isEmpty(context.spellcasting.uses)) {
+			delete context.spellcasting;
+			return;
+		}
 
 		const spellcasting = context.system.spellcasting;
 		let ability;
@@ -217,7 +220,7 @@ export default class NPCSheet extends BaseActorSheet {
 		});
 
 		const sections = [];
-		for (const [, value] of Object.entries(context.spellcasting.uses).sort((a, b) => a[0].localeCompare(b[0]))) {
+		for (const [, value] of Object.entries(context.spellcasting.uses).sort((a, b) => b[0].localeCompare(a[0]))) {
 			const uses = value.spells[0].system.uses;
 			if (uses.max) {
 				const config = CONFIG.BlackFlag.recoveryPeriods[uses.recovery[0]?.period];
@@ -225,7 +228,7 @@ export default class NPCSheet extends BaseActorSheet {
 				if (abbreviation)
 					value.label = game.i18n.format("BF.Uses.Display.Recovery", {
 						value: numberFormat(uses.max),
-						period: abbreviation
+						period: abbreviation.toLowerCase()
 					});
 				else value.label = numberFormat(uses.max);
 			} else {
