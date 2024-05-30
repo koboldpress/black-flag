@@ -399,11 +399,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (!restConfig) return ui.notifications.error(`Rest type ${config.type} was not defined in configuration.`);
 		config = foundry.utils.mergeObject({ dialog: true, chat: true }, config);
 
-		const initialHitDice = Object.entries(this.system.attributes.hd.d).reduce((obj, [d, v]) => {
+		const initialHitDice = Object.entries(this.system.attributes?.hd?.d ?? {}).reduce((obj, [d, v]) => {
 			obj[d] = v.spent;
 			return obj;
 		}, {});
-		const initialHitPoints = this.system.attributes.hp.value;
+		const initialHitPoints = this.system.attributes?.hp?.value ?? 0;
 
 		/**
 		 * A hook event that fires before the rest dialog is shown.
@@ -442,15 +442,19 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 */
 		if (Hooks.call("blackFlag.restConfiguration", this, config, result) === false) return;
 
-		let totalHD = 0;
-		const hd = this.system.attributes.hd;
-		result.deltas.hitDice = Object.keys(hd.d).reduce((obj, d) => {
-			obj[d] = (result.deltas.hitDice?.[d] ?? 0) + initialHitDice[d] - hd.d[d].spent;
-			totalHD += obj[d];
-			return obj;
-		}, {});
-		result.deltas.hitDice.total = totalHD;
-		result.deltas.hitPoints = (result.deltas.hitPoints ?? 0) + this.system.attributes.hp.value - initialHitPoints;
+		if (this.system.attributes?.hd) {
+			let totalHD = 0;
+			const hd = this.system.attributes.hd;
+			result.deltas.hitDice = Object.keys(hd.d).reduce((obj, d) => {
+				obj[d] = (result.deltas.hitDice?.[d] ?? 0) + initialHitDice[d] - hd.d[d].spent;
+				totalHD += obj[d];
+				return obj;
+			}, {});
+			result.deltas.hitDice.total = totalHD;
+		}
+		if (this.system.attributes?.hp) {
+			result.deltas.hitPoints = (result.deltas.hitPoints ?? 0) + this.system.attributes.hp.value - initialHitPoints;
+		}
 
 		this._getRestHitDiceRecovery(config, result);
 		this._getRestHitPointRecovery(config, result);
@@ -494,7 +498,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	_getRestHitDiceRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if (!restConfig.recoverHitDice) return;
+		if (!this.system.attributes?.hd || !restConfig.recoverHitDice) return;
 		const hd = this.system.attributes.hd;
 
 		// Determine maximum number of hit dice to recover
@@ -530,7 +534,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	_getRestHitPointRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if (!restConfig.recoverHitPoints) return;
+		if (!this.system.attributes?.hp || !restConfig.recoverHitPoints) return;
 		const hp = this.system.attributes.hp;
 		const percentage = CONFIG.BlackFlag.rest.hitPointsRecoveryPercentage;
 		const final = Math.clamp(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);
@@ -554,9 +558,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @internal
 	 */
 	_getRestSpellSlotRecovery(config = {}, result = {}) {
-		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
-			this.system.getRestSpellcastingRecovery?.(type, config, result);
-		}
+		if (!this.system.spellcasting?.circles)
+			for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
+				this.system.getRestSpellcastingRecovery?.(type, config, result);
+			}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -594,7 +599,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async _displayRestResultMessage(result) {
 		const restConfig = CONFIG.BlackFlag.rest.types[result.type];
 
-		const totalHD = Object.keys(this.system.attributes.hd.d).reduce((t, d) => t + result.deltas.hitDice[d], 0);
+		const totalHD = Object.keys(this.system.attributes?.hd?.d ?? {}).reduce((t, d) => t + result.deltas.hitDice[d], 0);
 
 		// Determine what localization string should be used for the message content
 		let resultType = "Basic";

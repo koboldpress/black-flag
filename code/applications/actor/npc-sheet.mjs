@@ -322,8 +322,9 @@ export default class NPCSheet extends BaseActorSheet {
 	 */
 	_removeTitle(element) {
 		const title = element.querySelector(".window-header .window-title");
+		const textSource = title.querySelector(".title-text") ?? title;
 		const idLink = title.querySelector(".document-id-link");
-		title.innerHTML = `<span class="title-text">${title.innerText}</span>`;
+		title.innerHTML = `<span class="title-text">${textSource.innerText}</span>`;
 		title.appendChild(idLink);
 	}
 
@@ -334,6 +335,32 @@ export default class NPCSheet extends BaseActorSheet {
 		const jQuery = await super._renderOuter();
 		this._removeTitle(jQuery[0]);
 		return jQuery;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_getHeaderButtons() {
+		const buttons = super._getHeaderButtons();
+		if (this.actor.isOwner && !game.packs.get(this.actor.pack)?.locked) {
+			buttons.splice(
+				buttons.findIndex(b => b.class === "toggle-editing-mode") + 1,
+				0,
+				{
+					label: "BF.Rest.Type.Short.Label",
+					class: "short-rest",
+					icon: "fa-solid fa-utensils",
+					onclick: () => this.actor.shortRest()
+				},
+				{
+					label: "BF.Rest.Type.Long.Label",
+					class: "long-rest",
+					icon: "fa-solid fa-campground",
+					onclick: () => this.actor.longRest()
+				}
+			);
+		}
+		return buttons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,12 +1,12 @@
 <form class="dialog-content long-rest" autocomplete="off">
 	<section class="main-form">
-		<p>{{content}}</p>
+		<p>{{ content }}</p>
 	</section>
 
 	<nav class="dialog-buttons">
 		<ul>
-			{{#each buttons as |button id|}}
-				<li><button class="dialog-button" data-button="{{id}}">{{{button.icon}}} {{{button.label}}}</button></li>
+			{{#each buttons}}
+				<li><button class="dialog-button" data-button="{{ @key }}">{{{ icon }}} {{{ label }}}</button></li>
 			{{/each}}
 		</ul>
 	</nav>

@@ -1,6 +1,7 @@
 import BaseRestDialog from "./base-rest-dialog.mjs";
 
 export default class ShortRestDialog extends BaseRestDialog {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/actor/rest/short-rest.hbs"
@@ -11,6 +12,7 @@ export default class ShortRestDialog extends BaseRestDialog {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];

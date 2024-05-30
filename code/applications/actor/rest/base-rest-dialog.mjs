@@ -81,13 +81,14 @@ export default class BaseRestDialog extends Dialog {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options = {}) {
 		const context = await super.getData(options);
 		context.CONFIG = CONFIG.BlackFlag;
 		context.config = this.data.config;
 		context.result = this.result;
-		context.hd = this.actor.system.attributes.hd;
-		context.hp = this.actor.system.attributes.hp;
+		context.hd = this.actor.system.attributes?.hd;
+		context.hp = this.actor.system.attributes?.hp;
 		return context;
 	}
 
@@ -95,6 +96,7 @@ export default class BaseRestDialog extends Dialog {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	submit(button, event) {
 		event.preventDefault();
 		super.submit(button, event);

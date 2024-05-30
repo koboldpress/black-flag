@@ -218,7 +218,11 @@ export default class BaseActorSheet extends ActorSheet {
 			for (const node of button.childNodes) {
 				if (node instanceof Text) {
 					if (!node.textContent.trim().replaceAll("\n", "")) content += node.textContent;
-					else content += `<span>${node.textContent}</span>`;
+					else {
+						content += `<span>${node.textContent}</span>`;
+						button.dataset.tooltip = node.textContent.trim();
+						button.setAttribute("aria-label", node.textContent.trim());
+					}
 				} else content += node.outerHTML;
 			}
 			button.innerHTML = content;
@@ -235,7 +239,7 @@ export default class BaseActorSheet extends ActorSheet {
 		if (this.options.editable && (game.user.isGM || this.actor.isOwner)) {
 			const closeIndex = buttons.findIndex(btn => btn.label === "Sheet");
 			const getLabel = () => (this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked");
-			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""}`;
+			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""} fa-fw`;
 			buttons.splice(closeIndex, 0, {
 				label: getLabel(),
 				class: "toggle-editing-mode",
