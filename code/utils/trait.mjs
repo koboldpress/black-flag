@@ -1,5 +1,6 @@
 import MappingField from "../data/fields/mapping-field.mjs";
 import SelectChoices from "../documents/select-choices.mjs";
+import { getPluralRules } from "./localization.mjs";
 import { numberFormat } from "./number.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -174,10 +175,10 @@ export function choices(trait, { chosen=new Set(), prefixed=false, any=false, ca
 			if ( category && data?.selectableCategory !== false ) {
 				children[key] = { label: result[key].label, chosen: chosen.has(key), sorting: false };
 			}
-			if ( prefixed && any ) {
+			if ( any ) {
 				const anyKey = `${key}:*`;
 				children[anyKey] = {
-					label: keyLabel(anyKey).titleCase(), chosen: chosen.has(anyKey), sorting: false, wildcard: true
+					label: keyLabel(anyKey, { trait }).titleCase(), chosen: chosen.has(anyKey), sorting: false, wildcard: true
 				};
 			}
 			Object.entries(data.children).forEach(([k, v]) => prepareCategory(k, v, children, key));
@@ -245,15 +246,13 @@ export function traitLabel(trait, count) {
 export function keyLabel(key, { count, trait, final, priority }={}) {
 	let parts = key.split(":");
 	const localizedCount = count ? numberFormat(count, { spelledOut: true }) : null;
-	const pluralRules = new Intl.PluralRules(game.i18n.lang);
 	priority ??= count ? "localization" : "label";
 
 	if ( !trait ) trait = parts.shift();
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	if ( !traitConfig ) return key;
-	const type = game.i18n.localize(
-		`${traitConfig.labels.localization}[${pluralRules.select(count ?? 1)}]`
-	).toLowerCase();
+	const pluralRule = getPluralRules().select(count ?? 1);
+	const type = game.i18n.localize(`${traitConfig.labels.localization}[${pluralRule}]`).toLowerCase();
 
 	const searchTrait = (parts, traits, type) => {
 		const firstKey = parts.shift();
@@ -268,9 +267,10 @@ export function keyLabel(key, { count, trait, final, priority }={}) {
 		if ( !category ) return key;
 		let label = foundry.utils.getProperty(category, traitConfig.labelKeyPath ?? "label");
 		const localization = foundry.utils.getProperty(category, "localization");
+		const categoryPluralRule = count ? pluralRule : "other";
 		if ( foundry.utils.getType(category) !== "Object" ) label = category;
-		else if ( priority === "label" ) label ??= `${localization}[other]`;
-		else if ( localization ) label = `${localization}[other]`;
+		else if ( priority === "label" ) label ??= `${localization}[${categoryPluralRule}]`;
+		else if ( localization ) label = `${localization}[${categoryPluralRule}]`;
 
 		if ( !parts.length ) {
 			if ( !label ) return key;
@@ -279,7 +279,7 @@ export function keyLabel(key, { count, trait, final, priority }={}) {
 
 		if ( !category.children ) return key;
 
-		if ( localization ) type = game.i18n.localize(`${localization}[${pluralRules.select(count ?? 1)}]`);
+		if ( localization ) type = game.i18n.localize(`${localization}[${getPluralRules().select(count ?? 1)}]`);
 		else type = label;
 
 		return searchTrait(parts, category.children, type);

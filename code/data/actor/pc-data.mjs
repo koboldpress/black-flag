@@ -539,6 +539,38 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	prepareDerivedProficiencies() {
+		// Determine which categories a player has a least one proficiency within
+		for (const type of ["armor", "weapons", "tools"]) {
+			Object.defineProperty(this.proficiencies[type], "categories", {
+				value: new Set(),
+				enumerable: false
+			});
+
+			let proficient;
+			if (type === "tools") {
+				proficient = new Set(
+					Object.entries(this.proficiencies.tools)
+						.filter(([k, v]) => v.proficiency.multiplier >= 1)
+						.map(([k, v]) => k)
+				);
+			} else proficient = this.proficiencies[type].value;
+
+			for (const [key, data] of Object.entries(CONFIG.BlackFlag[type])) {
+				if (proficient.has(key)) {
+					this.proficiencies[type].categories.add(key);
+				} else if (data.children) {
+					const childrenSet = new Set(Object.keys(data.children));
+					if (childrenSet.intersection(proficient)?.size) {
+						this.proficiencies[type].categories.add(key);
+					}
+				}
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	prepareNotifications() {
 		this.prepareCharacterCreationWarnings();

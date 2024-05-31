@@ -89,15 +89,20 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 * @returns {object}
 	 */
 	prepareProficiencies(filters) {
-		const opts = { category: true, priority: "localization" };
-		return {
-			armor: Trait.choices("armor", { chosen: new Set(filters.armorProficiency?.v ?? []), ...opts }),
-			weapons: Trait.choices("weapons", { chosen: new Set(filters.weaponProficiency?.v ?? []), ...opts }),
-			tools: Trait.choices("tools", { chosen: new Set(filters.toolProficiency?.v?.map?.(s => s._key) ?? []), ...opts }),
-			skills: Trait.choices("skills", {
-				chosen: new Set(filters.skillProficiency?.v?.map?.(s => s._key) ?? []),
+		const opts = { any: true, category: true, priority: "localization" };
+		const prepareProficiency = trait =>
+			Trait.choices(trait, {
+				chosen: new Set([
+					...(filters[`${trait}Proficiency`]?.v ?? []).map(s => s._key ?? s),
+					...(filters[`${trait}Categories`]?.v ?? []).map(s => `${s}:*`)
+				]),
 				...opts
-			})
+			});
+		return {
+			armor: prepareProficiency("armor"),
+			weapons: prepareProficiency("weapons"),
+			tools: prepareProficiency("tools"),
+			skills: prepareProficiency("skills")
 		};
 	}
 
@@ -166,30 +171,41 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		);
 
 		// Proficiencies
-		updateFilter("armorProficiency", "system.proficiencies.armor.value", data.proficiencies?.armor, "hasAny");
-		updateFilter("weaponProficiency", "system.proficiencies.weapons.value", data.proficiencies?.weapons, "hasAny");
-		updateFilter(
-			"toolProficiency",
-			undefined,
-			data.proficiencies?.tools?.map(k => ({
-				k: `system.proficiencies.tools.${k}.proficiency.multiplier`,
-				o: "gte",
-				v: 1,
-				_key: k
-			})),
-			"OR"
-		);
-		updateFilter(
-			"skillProficiency",
-			undefined,
-			data.proficiencies?.skills?.map(k => ({
-				k: `system.proficiencies.skills.${k}.proficiency.multiplier`,
-				o: "gte",
-				v: 1,
-				_key: k
-			})),
-			"OR"
-		);
+		const updateProficiency = (trait, extended) => {
+			const [proficiencies, categories] = (data.proficiencies?.[trait] ?? []).reduce(
+				(arr, k) => {
+					if (k.endsWith(":*")) arr[1].push(k.replace(":*", ""));
+					else arr[0].push(k);
+					return arr;
+				},
+				[[], []]
+			);
+			updateFilter(
+				`${trait}Proficiency`,
+				extended ? undefined : `system.proficiencies.${trait}.value`,
+				proficiencies.length
+					? extended
+						? proficiencies.map(_key => ({
+								k: `system.proficiencies.${trait}.${_key}.proficiency.multiplier`,
+								o: "gte",
+								v: 1,
+								_key
+							}))
+						: proficiencies
+					: false,
+				extended ? "OR" : "hasAny"
+			);
+			updateFilter(
+				`${trait}Categories`,
+				`system.proficiencies.${trait}.categories`,
+				categories.length ? categories : false,
+				"hasAny"
+			);
+		};
+		updateProficiency("armor");
+		updateProficiency("weapons");
+		updateProficiency("tools", true);
+		updateProficiency("skills", true);
 
 		// Spellcasting
 		updateFilter(

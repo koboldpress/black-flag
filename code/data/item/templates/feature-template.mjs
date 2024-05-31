@@ -102,18 +102,22 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		// Proficiencies
 		const proficiencies = [];
 		const formatter = game.i18n.getListFormatter({ type: "disjunction", style: "short" });
-		if ( filters.armorProficiency ) proficiencies.push(validate(filters.armorProficiency, formatter.format(
-			filters.armorProficiency.v.map(p => Trait.keyLabel(p, { trait: "armor", priority: "localization" }))
-		)));
-		if ( filters.weaponProficiency ) proficiencies.push(validate(filters.weaponProficiency, formatter.format(
-			filters.weaponProficiency.v.map(p => Trait.keyLabel(p, { trait: "weapons", priority: "localization" }))
-		)));
-		if ( filters.toolProficiency ) proficiencies.push(validate(filters.toolProficiency, formatter.format(
-			filters.toolProficiency.v.map(p => Trait.keyLabel(p._key, { trait: "tools", priority: "localization" }))
-		)));
-		if ( filters.skillProficiency ) proficiencies.push(validate(filters.skillProficiency, formatter.format(
-			filters.skillProficiency.v.map(p => Trait.keyLabel(p._key, { trait: "skills" }))
-		)));
+		const prepareProficiency = trait => {
+			if ( filters[`${trait}Proficiency`] ) proficiencies.push(validate(filters[`${trait}Proficiency`],
+				formatter.format(
+					filters[`${trait}Proficiency`].v.map(p => Trait.keyLabel(p._key ?? p, { trait, priority: "localization" }))
+				)
+			));
+			if ( filters[`${trait}Categories`] ) proficiencies.push(validate(filters[`${trait}Categories`],
+				game.i18n.format("BF.Prerequisite.Proficiency.AtLeastOne", { category: formatter.format(
+					filters[`${trait}Categories`].v.map(p => Trait.keyLabel(p, { trait, count: 1, priority: "localization" }))
+				) })
+			));
+		};
+		prepareProficiency("armor");
+		prepareProficiency("weapons");
+		prepareProficiency("tools");
+		prepareProficiency("skills");
 		if ( proficiencies.length ) prerequisites.push(game.i18n.format("BF.Prerequisite.Proficiency.Label", {
 			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
 		}));
@@ -174,15 +178,23 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			}
 
 			switch ( invalidFilter._id ) {
+				case "armorCategories":
+				case "toolsCategories":
+				case "skillsCategories":
+				case "weaponsCategories":
+					proficiencies.push(game.i18n.format("BF.Prerequisite.Proficiency.AtLeastOne", {
+						category: formatter.format(invalidFilter.v.map(p => Trait.keyLabel(
+							p?._key ?? p, { trait: invalidFilter._id.replace("Categories", ""), count: 1, priority: "localization" }
+						)))
+					}).toLowerCase());
+					break;
 				case "armorProficiency":
-				case "toolProficiency":
-				case "skillProficiency":
-				case "weaponProficiency":
-					const trait = invalidFilter._id === "armorProficiency" ? "armor"
-						: invalidFilter._id.replace("Proficiency", "s");
-					proficiencies.push(formatter.format(invalidFilter.v.map(p =>
-						Trait.keyLabel(p?._key ?? p, { trait, priority: "localization" })
-					)));
+				case "toolsProficiency":
+				case "skillsProficiency":
+				case "weaponsProficiency":
+					proficiencies.push(formatter.format(invalidFilter.v.map(p => Trait.keyLabel(
+						p?._key ?? p, { trait: invalidFilter._id.replace("Proficiency", ""), priority: "localization" }
+					))));
 					break;
 				case "characterLevel":
 					messages.push(game.i18n.format("BF.Prerequisite.LevelCharacter.Warning", {
