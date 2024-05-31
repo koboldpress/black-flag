@@ -15,19 +15,19 @@
 								{{/select}}
 							</select>
 						</label>
-						{{#with validTargets as |targets|}}
+						{{#if showTargets}}
 							<label class="target">
 								<span>{{ localize "BF.Consumption.Target.Label" }}</span>
-								{{#if @root.activity.item.isEmbedded}}
+								{{#with validTargets as |targets|}}
 									<select name="$.targets.{{ @index }}.target">
 										{{ selectOptions targets selected=../target nameAttr="key" labelAttr="label" }}
 									</select>
 								{{else}}
-									<input type="text" name="$.targets.{{ @index }}.target" value="{{ ../target }}"
+									<input type="text" name="$.targets.{{ @index }}.target" value="{{ target }}"
 									       placeholder="{{ localize 'BF.Consumption.Type.ItemUses.ThisItem' }}">
-								{{/if}}
+								{{/with}}
 							</label>
-						{{/with}}
+						{{/if}}
 						<label class="value">
 							<span>{{ localize "BF.Consumption.Amount.Label" }}</span>
 							<input type="text" name="$.targets.{{ @index }}.value" value="{{ value }}">

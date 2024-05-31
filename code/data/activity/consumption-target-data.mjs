@@ -22,6 +22,14 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Should the target section be shown?
+	 * @type {boolean}
+	 */
+	get showTargets() {
+		return "validTargets" in CONFIG.BlackFlag.consumptionTypes[this.type];
+	}
+
+	/**
 	 * List of valid targets within the current context.
 	 * @type {{key: string, label: string}[]|null}
 	 */
@@ -37,7 +45,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static getValidTargets(type, activity) {
 		const config = CONFIG.BlackFlag.consumptionTypes[type];
-		if (!config?.validTargets) return null;
+		if (!config?.validTargets || (!activity.item?.isEmbedded && config.targetRequiresEmbedded === true)) return null;
 		return config.validTargets(activity);
 	}
 

@@ -7,6 +7,7 @@ import { spellCircles } from "./spellcasting.mjs";
  *
  * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
  * @property {ConsumptionConsumeFunction|string} consume - Function used to calculate updates upon consumption.
+ * @property {boolean} [targetRequiresEmbedded] - Display text input rather than limited options when not embedded.
  * @property {ConsumptionValidTargetsFunction} [validTargets] - Function used to build list of targets for this type.
  */
 
@@ -42,6 +43,7 @@ export const consumptionTypes = {
 		label: "BF.Consumption.Type.ItemUses.Label",
 		prompt: "BF.Consumption.Type.ItemUses.Prompt",
 		consume: "consumeItem",
+		targetRequiresEmbedded: true,
 		validTargets: activity => {
 			const otherItems = activity.item.actor?.items
 				.filter(i => (i.system.uses?.min || i.system.uses?.max) && i !== activity.item)
