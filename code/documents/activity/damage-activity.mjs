@@ -27,9 +27,7 @@ export default class DamageActivity extends Activity {
 	get damageModifier() {
 		const ability = this.actor?.system.abilities?.[this.damageAbility];
 		if (!ability) return 0;
-		let mod = ability?.mod;
-		if (ability.proficient === true) mod -= this.actor.system.attributes.proficiency ?? 0;
-		return mod;
+		return ability?.adjustedMod ?? ability?.mod;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

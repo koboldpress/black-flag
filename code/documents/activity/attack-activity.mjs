@@ -34,9 +34,13 @@ export default class AttackActivity extends DamageActivity {
 		const abilities = this.actor?.system.abilities ?? {};
 		return availableAbilities.reduce(
 			(largest, ability) =>
-				(abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
+				(abilities[ability]?.adjustedMod ?? abilities[ability]?.mod ?? -Infinity) >
+				(abilities[largest]?.adjustedMod ?? abilities[largest]?.mod ?? -Infinity)
+					? ability
+					: largest,
 			availableAbilities.first()
 		);
+		// TODO: Compare adjusted mod on NPCs
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

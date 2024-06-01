@@ -191,6 +191,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability.valid = ability.mod !== null;
 			ability.mod ??= 0;
+			ability.adjustedMod = ability.mod - (ability.proficient ? this.attributes.proficiency : 0);
 
 			ability.check.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
 			ability.save.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
