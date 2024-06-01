@@ -164,12 +164,16 @@
 	<div class="abilities">
 		{{#each system.abilities}}
 			<div data-ability="{{ @key }}">
-				<label for="{{ @root.appID }}-ability-{{ @key }}">
+				<label class="name" for="{{ @root.appID }}-ability-{{ @key }}">
 					{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
 				</label>
 				{{#if @root.modes.editing}}
 					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
-					       value="{{_source.mod}}" placeholder="0" step="1">
+					       value="{{ _source.mod }}" placeholder="0" step="1">
+					<label class="proficient">
+						<span>{{ localize "BF.Modifier.Proficiency.Label" }}</span>
+						<input type="checkbox" name="system.abilities.{{ @key }}.proficient" {{ checked proficient }}>
+					</label>
 				{{else}}
 					<span id="{{ @root.appID }}-ability-{{ @key }}">
 						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"

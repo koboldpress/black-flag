@@ -47,6 +47,13 @@ export default class AttackActivity extends DamageActivity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	get damageAbility() {
+		return this.attackAbility;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	get hasDamage() {
 		return super.hasDamage || (this.system.damage.includeBaseDamage && !!this.item.system.damage?.formula);
@@ -173,12 +180,11 @@ export default class AttackActivity extends DamageActivity {
 		const rollConfig = super.createDamageConfigs(config, rollData);
 		rollConfig.rolls ??= [];
 		if (this.system.damage.includeBaseDamage && this.item.system.damage) {
-			const ability = this.actor?.system.abilities[this.attackAbility];
 			const damage = (rollConfig.versatile ? this.item.system.versatileDamage : null) ?? this.item.system.damage;
 			const modifierData = { ...this.modifierData, type: "damage", damage, baseDamage: true };
 			const { parts, data } = buildRoll(
 				{
-					mod: ability?.mod,
+					mod: this.damageModifier,
 					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData }),
 					magic: this.item.system.damageMagicalBonus
 				},
@@ -220,7 +226,7 @@ export default class AttackActivity extends DamageActivity {
 				? { toHit: this.system.attack.bonus }
 				: {
 						mod: ability?.mod,
-						prof: this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency.term : null,
+						prof: this.system.attackProficiency?.term,
 						bonus: this.system.attack.bonus,
 						magic: this.item.system.attackMagicalBonus,
 						actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })

@@ -1,4 +1,4 @@
-import { getPluralRules, makeLabel, numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
+import { numberFormat, replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
@@ -53,7 +53,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	static defineSchema() {
 		return {
 			_id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
@@ -106,7 +106,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	prepareFinalData() {
 		this.uses.prepareData();
 

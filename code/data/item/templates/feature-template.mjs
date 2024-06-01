@@ -29,11 +29,16 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			})
 		};
 	}
-	
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Migrate source data to an object.
+	 * Added in 0.9.031
+	 * @param {object} source - The candidate source data from which the model will be constructed.
+	 */
 	static migrateFilterIds(source) {
 		for ( const filter of source.restriction?.filters ?? [] ) {
 			if ( filter._id ) continue;

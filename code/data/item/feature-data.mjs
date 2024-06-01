@@ -4,6 +4,7 @@ import ActivitiesTemplate from "./templates/activities-template.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import FeatureTemplate from "./templates/feature-template.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 
 const { NumberField, SchemaField } = foundry.data.fields;
 
@@ -13,6 +14,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @mixes {AdvancementTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {FeatureTemplate}
+ * @mixes {ProficiencyTemplate}
  *
  * @property {object} identifier
  * @property {string} identifier.value - Identifier for this item.
@@ -24,7 +26,8 @@ export default class FeatureData extends ItemDataModel.mixin(
 	ActivitiesTemplate,
 	AdvancementTemplate,
 	DescriptionTemplate,
-	FeatureTemplate
+	FeatureTemplate,
+	ProficiencyTemplate
 ) {
 	/** @inheritDoc */
 	static get metadata() {

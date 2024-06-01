@@ -102,9 +102,9 @@ export default class ItemDataModel extends BaseDataModel {
 	 *                                            either a die term or a flat term.
 	 * @returns {object}
 	 */
-	getRollData({ deterministic = false } = {}) {
+	getRollData(options = {}) {
 		if (!this.parent.actor) return {};
-		const rollData = { ...this.parent.actor.getRollData({ deterministic }), item: { ...this } };
+		const rollData = { ...this.parent.actor.getRollData(options), item: { ...this } };
 		return rollData;
 	}
 

@@ -14,6 +14,7 @@ import { numberFormat } from "./number.mjs";
  */
 export function actorKeyPath(trait) {
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
+	if ( !traitConfig ) return "";
 	if ( traitConfig.actorKeyPath ) return traitConfig.actorKeyPath;
 	const prefix = traitConfig.type === "proficiency" ? "proficiencies" : "traits";
 	return `system.${prefix}.${trait}`;

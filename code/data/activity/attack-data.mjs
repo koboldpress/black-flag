@@ -40,6 +40,18 @@ export class AttackData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Proficiency to include with the attack roll.
+	 * @type {Proficiency|null}
+	 */
+	get attackProficiency() {
+		const ability = this.parent.actor?.system.abilities?.[this.parent.attackAbility];
+		if (ability?.proficient === true) return null;
+		return this.parent.item.system.proficiency?.hasProficiency ? this.parent.item.system.proficiency ?? null : null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Return a string describing the result if the default ability is selected for this activity.
 	 * @type {string|null}
 	 */
@@ -83,7 +95,7 @@ export class AttackData extends foundry.abstract.DataModel {
 		const { parts, data } = buildRoll(
 			{
 				mod: ability?.mod,
-				prof: this.parent.item.system.proficiency?.flat,
+				prof: this.attackProficiency?.flat,
 				bonus: this.parent.actor?.system.buildBonus(this.parent.actor?.system.getModifiers(this.parent.modifierData), {
 					rollData
 				}),

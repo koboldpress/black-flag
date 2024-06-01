@@ -2,6 +2,7 @@ import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -11,6 +12,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @mixes {ActivitiesTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
+ * @mixes {ProficiencyTemplate}
  * @mixes {PropertiesTemplate}
  *
  * @property {object} type
@@ -21,6 +23,7 @@ export default class ToolData extends ItemDataModel.mixin(
 	ActivitiesTemplate,
 	DescriptionTemplate,
 	PhysicalTemplate,
+	ProficiencyTemplate,
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
@@ -50,7 +53,12 @@ export default class ToolData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
+	static proficiencyCategory = "tools";
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	get validCategories() {
 		return CONFIG.BlackFlag.tools;
 	}

@@ -86,7 +86,7 @@
 		display: grid;
 		gap: 2px;
 		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: max-content max-content;
+		grid-template-rows: max-content max-content max-content;
 		margin-block: 10px;
 		border-block: 2px solid var(--bf-color-border-blue);
 		padding-block: 3px;
@@ -96,7 +96,7 @@
 			display: grid;
 			grid-template-rows: subgrid;
 
-			> label {
+			> .name {
 				grid-row: 1;
 				display: block;
 				color: var(--bf-text-color-blue);
@@ -104,10 +104,27 @@
 				text-align: center;
 				text-transform: uppercase;
 			}
-			> span, input {
+			> span, > input {
 				grid-row: 2;
 				width: 100%;
 				text-align: center;
+			}
+			> .proficient {
+				grid-row: 3;
+				display: flex;
+				justify-content: center;
+				gap: 4px;
+				> span {
+					font-size: var(--font-size-10);
+					font-variant: small-caps;
+					align-self: center;
+				}
+				> input {
+					flex: 0 0 12px;
+					width: 12px;
+					height: 12px;
+					margin: 0;
+				}
 			}
 		}
 	}

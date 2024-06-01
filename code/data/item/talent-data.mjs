@@ -3,6 +3,7 @@ import ActivityTemplate from "./templates/activities-template.mjs";
 import AdvancementTemplate from "./templates/advancement-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import FeatureTemplate from "./templates/feature-template.mjs";
+import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 
 const { BooleanField, SchemaField } = foundry.data.fields;
 
@@ -12,12 +13,17 @@ const { BooleanField, SchemaField } = foundry.data.fields;
  * @mixes {AdvancementTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {FeatureTemplate}
+ * @mixes {ProficiencyTemplate}
+ *
+ * @property {object} restriction
+ * @property {boolean} restriction.allowMultipleTimes - Can this talent be taken more than once?
  */
 export default class TalentData extends ItemDataModel.mixin(
 	ActivityTemplate,
 	AdvancementTemplate,
 	DescriptionTemplate,
-	FeatureTemplate
+	FeatureTemplate,
+	ProficiencyTemplate
 ) {
 	/** @inheritDoc */
 	static get metadata() {

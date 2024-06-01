@@ -209,12 +209,12 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getRollData({ deterministic = false } = {}) {
+	getRollData(options = {}) {
 		let rollData;
-		if (this.system.getRollData) rollData = this.system.getRollData({ deterministic });
+		if (this.system.getRollData) rollData = this.system.getRollData(options);
 		else {
 			if (!this.actor) return {};
-			rollData = { ...this.actor.getRollData({ deterministic }), item: { ...this.system } };
+			rollData = { ...this.actor.getRollData(options), item: { ...this.system } };
 		}
 
 		if (rollData.item) {

@@ -99,7 +99,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	static proficiencyCategory = "weapons";
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -197,7 +197,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get traits() {
 		const traits = [
 			CONFIG.BlackFlag.weaponTypes[this.type.value]?.label,
@@ -211,21 +211,21 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get validCategories() {
 		return CONFIG.BlackFlag.weapons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get validOptions() {
 		return CONFIG.BlackFlag.weaponOptions;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get versatileDamage() {
 		if (!this.properties.has("versatile") || !this.damage.denomination) return this.damage;
 		const data = foundry.utils.deepClone(this.damage);

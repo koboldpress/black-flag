@@ -3,6 +3,7 @@ import Proficiency from "../../documents/proficiency.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
+import SourceField from "../fields/source-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
@@ -10,8 +11,46 @@ import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
-const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
+/**
+ * Data for NPC abilities.
+ *
+ * @typedef {object} NPCAbilityData
+ * @property {number} mod - Ability modifier with proficiency included.
+ * @property {boolean} proficient - Is the NPC proficient in this ability?
+ */
+
+/**
+ * Data model for NPC actors.
+ * @mixes {ACTemplate}
+ * @mixes {ConditionsTemplate}
+ * @mixes {InitiativeTemplate}
+ * @mixes {LanguagesTemplate}
+ * @mixes {ModifiersTemplate}
+ * @mixes {TraitsTemplate}
+ *
+ * @property {Record<string, NPCAbilityData} abilities - NPC's ability modifiers.
+ * @property {object} attributes
+ * @property {number} attributes.cr - Challenge rating.
+ * @property {object} attributes.hp
+ * @property {number} attributes.hp.value - Current hit points.
+ * @property {number} attributes.hp.max - Maximum hit points.
+ * @property {number} attributes.hp.temp - Temporary hit points.
+ * @property {number} attributes.legendary.spent - Number of spent legendary actions this round.
+ * @property {number} attributes.legendary.max - Number of available legendary actions per round.
+ * @property {number} attributes.perception - Creature's perception score.
+ * @property {number} attributes.stealth - Creature's stealth score.
+ * @property {object} biography
+ * @property {string} biography.value - Biography on the creature.
+ * @property {string} biography.legendary - Override of the legendary actions description.
+ * @property {SourceField} biography.source - Source of the creature's stat block.
+ * @property {object} spellcasting
+ * @property {string} spellcasting.ability - Ability used for spellcasting.
+ * @property {number} spellcasting.dc - Spell save DC if not auto-calculated.
+ * @property {object} traits
+ * @property {CreatureTypeField} traits.type - Creature type information.
+ */
 export default class NPCData extends ActorDataModel.mixin(
 	ACTemplate,
 	ConditionsTemplate,
@@ -39,7 +78,8 @@ export default class NPCData extends ActorDataModel.mixin(
 		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(
 				new SchemaField({
-					mod: new NumberField({ integer: true })
+					mod: new NumberField({ integer: true }),
+					proficient: new BooleanField()
 				}),
 				{
 					initialKeys: CONFIG.BlackFlag.abilities,
@@ -62,9 +102,6 @@ export default class NPCData extends ActorDataModel.mixin(
 					},
 					{ label: "BF.HitPoint.Label[other]" }
 				),
-				initiative: new SchemaField({
-					lair: new NumberField({ integer: true })
-				}),
 				legendary: new SchemaField({
 					spent: new NumberField({ min: 0, initial: 0, integer: true }),
 					max: new NumberField({ min: 1, initial: null, integer: true })
@@ -74,9 +111,8 @@ export default class NPCData extends ActorDataModel.mixin(
 			}),
 			biography: new SchemaField({
 				value: new HTMLField(),
-				lair: new HTMLField(),
 				legendary: new HTMLField(),
-				source: new StringField()
+				source: new SourceField()
 			}),
 			spellcasting: new SchemaField({
 				ability: new StringField({ initial: "intelligence" }),
@@ -103,6 +139,21 @@ export default class NPCData extends ActorDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate source data to an object.
+	 * Added in 0.9.031
+	 * @param {object} source - The candidate source data from which the model will be constructed.
+	 */
+	static migrateSource(source) {
+		if (foundry.utils.getType(source.biography?.source) === "string") {
+			source.biography.source = { fallback: source.biography.source };
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -117,7 +168,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareBaseProficiency() {
-		this.attributes.proficiency = 0;
+		this.attributes.proficiency = Proficiency.calculateMod(Math.max(this.attributes.cr ?? 1, 1));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

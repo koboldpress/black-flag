@@ -295,9 +295,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getRollData({ deterministic = false } = {}) {
+	getRollData(options = {}) {
 		let rollData;
-		if (this.system.getRollData) rollData = this.system.getRollData({ deterministic });
+		if (this.system.getRollData) rollData = this.system.getRollData(options);
 		else rollData = { ...super.getRollData() };
 		rollData.flags = { ...this.flags };
 		rollData.name = this.name;
