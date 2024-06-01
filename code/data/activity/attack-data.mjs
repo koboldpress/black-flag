@@ -57,7 +57,14 @@ export class AttackData extends foundry.abstract.DataModel {
 	 */
 	get availableAbilities() {
 		if (this.parent.item.system.availableAbilities) return this.parent.item.system.availableAbilities;
-		if (this.type.classification === "spell") return new Set();
+		if (this.type.classification === "spell")
+			return new Set(
+				[
+					this.parent.actor?.system.spellcasting?.ability,
+					...Object.values(this.parent.actor?.system.spellcasting?.origins ?? {}).map(o => o.ability)
+				].filter(a => a)
+			);
+
 		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
 		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
 		if (this.parent.actor?.type === "npc") return new Set([melee, ranged]);
