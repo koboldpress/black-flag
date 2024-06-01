@@ -52,21 +52,29 @@ export class AttackData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Abilities that could potentially be used with this attack.
+	 * @type {Set<string>}
+	 */
+	get availableAbilities() {
+		if (this.parent.item.system.availableAbilities) return this.parent.item.system.availableAbilities;
+		if (this.type.classification === "spell") return new Set();
+		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
+		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
+		if (this.parent.actor?.type === "npc") return new Set([melee, ranged]);
+		return new Set([this.type.value === "ranged" ? ranged : melee]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Return a string describing the result if the default ability is selected for this activity.
 	 * @type {string|null}
 	 */
 	get defaultAbility() {
 		if (this.type.classification === "spell") return game.i18n.localize("BF.Spellcasting.Label");
 
-		const item = this.parent.item.system;
 		const labels = CONFIG.BlackFlag.abilities.localized;
-		const itemType = ["melee", "ranged"].includes(item.type?.value);
-		if (this.type.classification === "weapon" && (this._source.type.value || !itemType)) {
-			if (this.type.value === "melee") return labels[CONFIG.BlackFlag.defaultAbilities.meleeAttack];
-			if (this.type.value === "ranged") return labels[CONFIG.BlackFlag.defaultAbilities.rangedAttack];
-		}
-
-		const available = item.availableAbilities;
+		const available = this.availableAbilities;
 		if (available?.size)
 			return Array.from(available)
 				.map(a => labels[a])

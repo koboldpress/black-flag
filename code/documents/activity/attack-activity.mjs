@@ -29,7 +29,14 @@ export default class AttackActivity extends DamageActivity {
 	get attackAbility() {
 		if (this.system.ability === "none") return null;
 		if (this.system.ability) return this.system.ability;
-		return this.item.system.ability ?? null;
+		if (this.item.system.ability) return this.item.system.ability;
+		const availableAbilities = this.system.availableAbilities;
+		const abilities = this.actor?.system.abilities ?? {};
+		return availableAbilities.reduce(
+			(largest, ability) =>
+				(abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
+			availableAbilities.first()
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

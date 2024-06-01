@@ -105,22 +105,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Ability used for attacks and damage with this weapon.
-	 * @type {string|null}
-	 */
-	get ability() {
-		const availableAbilities = this.availableAbilities;
-		const abilities = this.parent.actor?.system.abilities ?? {};
-		return availableAbilities.reduce(
-			(largest, ability) =>
-				(abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
-			availableAbilities.first()
-		);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Magical bonus to attacks.
 	 * @returns {number|null}
 	 */
