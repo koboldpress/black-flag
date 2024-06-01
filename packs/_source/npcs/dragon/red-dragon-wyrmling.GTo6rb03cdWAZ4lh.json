@@ -112,7 +112,8 @@
         "mod": 2
       },
       "constitution": {
-        "mod": 5
+        "mod": 5,
+        "proficient": true
       },
       "intelligence": {
         "mod": 1
@@ -121,7 +122,8 @@
         "mod": 2
       },
       "charisma": {
-        "mod": 4
+        "mod": 4,
+        "proficient": true
       }
     },
     "biography": {
@@ -350,7 +352,7 @@
                   {
                     "number": 1,
                     "denomination": "10",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   },
@@ -363,10 +365,10 @@
                   }
                 ]
               },
-              "ability": "strength",
+              "ability": "",
               "attack": {
-                "bonus": "6",
-                "flat": true
+                "bonus": "",
+                "flat": false
               }
             },
             "activation": {
@@ -386,7 +388,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -432,10 +445,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711504525397,
-        "modifiedTime": 1711682197542,
+        "modifiedTime": 1717264193516,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!GTo6rb03cdWAZ4lh.KKAdkDQfFvPqxUWo"
@@ -462,16 +475,16 @@
                   {
                     "number": 1,
                     "denomination": "6",
-                    "bonus": "",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "slashing"
                   }
                 ]
               },
-              "ability": "strength",
+              "ability": "",
               "attack": {
-                "bonus": "6",
-                "flat": true
+                "bonus": "",
+                "flat": false
               }
             },
             "activation": {
@@ -491,7 +504,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -537,10 +561,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711503209924,
-        "modifiedTime": 1711682200813,
+        "modifiedTime": 1717264205725,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!GTo6rb03cdWAZ4lh.HvFiRqCRoiKYnz0N"
@@ -664,10 +688,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709616783624,
-    "modifiedTime": 1713740909646,
+    "modifiedTime": 1717264245097,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!GTo6rb03cdWAZ4lh"

@@ -101,7 +101,8 @@
     },
     "abilities": {
       "strength": {
-        "mod": 5
+        "mod": 5,
+        "proficient": true
       },
       "dexterity": {
         "mod": 2
@@ -339,8 +340,8 @@
                 "parts": []
               },
               "attack": {
-                "flat": true,
-                "bonus": "5"
+                "flat": false,
+                "bonus": ""
               },
               "ability": ""
             },
@@ -362,7 +363,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "overrides": {
@@ -378,7 +390,7 @@
           "units": "pound"
         },
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage 2d8 + 3 piercing average]] damage. A surprised target takes an extra [[/damage 1d8 piercing average]] damage and must succeed on a [[/save constitution 13]] save or be stunned until the end of its next turn.</p>",
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. Hit: [[/damage average]] damage. A surprised target takes an extra [[/damage 1d8 piercing average]] damage and must succeed on a [[/save constitution 13]] save or be stunned until the end of its next turn.</p>",
           "source": {
             "fallback": "Black Flag Reference Document"
           }
@@ -435,10 +447,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1701024046840,
-        "modifiedTime": 1711751179758,
+        "modifiedTime": 1717278934543,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.RVEzk8my0DOYZUhm"
@@ -464,8 +476,8 @@
                 "parts": []
               },
               "attack": {
-                "flat": true,
-                "bonus": "5"
+                "flat": false,
+                "bonus": ""
               },
               "ability": ""
             },
@@ -487,7 +499,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "overrides": {
@@ -503,7 +526,7 @@
           "units": "pound"
         },
         "description": {
-          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach 5 ft. or range 30/120 ft., one target. Hit: [[/damage 2d6 + 2 piercing average]] damage in melee or [[/damage 1d6 + 2 piercing average]] damage at range.</p>",
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach 5 ft. or range 30/120 ft., one target. Hit: [[/damage average]] damage in melee or [[/damage 1d6 + 2 piercing average]] damage at range.</p>",
           "source": {
             "fallback": "Black Flag Reference Document"
           }
@@ -521,7 +544,7 @@
         ],
         "ammunition": {},
         "damage": {
-          "number": 1,
+          "number": 2,
           "denomination": 6,
           "type": "piercing"
         },
@@ -560,10 +583,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1701024052999,
-        "modifiedTime": 1711744374713,
+        "modifiedTime": 1717278990909,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.F4gpnzTYepOOEfPV"
@@ -577,10 +600,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709617491232,
-    "modifiedTime": 1713740910011,
+    "modifiedTime": 1717278990909,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!Yu69oqsjr4GnVygA"

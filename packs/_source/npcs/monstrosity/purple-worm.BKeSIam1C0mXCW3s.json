@@ -24,7 +24,7 @@
         },
         "lair": null
       },
-      "cr": 0,
+      "cr": 15,
       "hp": {
         "value": 255,
         "max": 255,
@@ -108,13 +108,15 @@
     },
     "abilities": {
       "strength": {
-        "mod": 9
+        "mod": 9,
+        "proficient": false
       },
       "dexterity": {
         "mod": -2
       },
       "constitution": {
-        "mod": 11
+        "mod": 11,
+        "proficient": true
       },
       "intelligence": {
         "mod": -5
@@ -444,16 +446,16 @@
                   {
                     "number": 3,
                     "denomination": "8",
-                    "bonus": "9",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
-              "ability": "none",
+              "ability": "",
               "attack": {
-                "bonus": "14",
-                "flat": true
+                "bonus": "",
+                "flat": false
               }
             },
             "activation": {
@@ -473,7 +475,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -519,10 +532,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.020",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711504525397,
-        "modifiedTime": 1712944046542,
+        "modifiedTime": 1717280592121,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!BKeSIam1C0mXCW3s.3Yv1Sul7yjuDhLvY"
@@ -532,7 +545,8 @@
       "type": "feature",
       "system": {
         "type": {
-          "category": "monsters"
+          "category": "monsters",
+          "value": ""
         },
         "activities": {
           "JAZDNrHjsbcoAWEB": {
@@ -545,8 +559,8 @@
                 "classification": "weapon"
               },
               "attack": {
-                "flat": true,
-                "bonus": "14"
+                "flat": false,
+                "bonus": ""
               },
               "damage": {
                 "includeBaseDamage": true,
@@ -554,13 +568,13 @@
                   {
                     "number": 3,
                     "denomination": "6",
-                    "bonus": "9",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
-              "ability": "none"
+              "ability": ""
             },
             "activation": {
               "type": "action",
@@ -579,48 +593,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
-          },
-          "hM9A9CfnOVrMonJC": {
-            "type": "savingThrow",
-            "_id": "hM9A9CfnOVrMonJC",
-            "description": "",
-            "system": {
-              "ability": "constitution",
-              "damage": {
-                "parts": [
-                  {
-                    "number": 12,
-                    "denomination": "6",
-                    "bonus": "",
-                    "custom": "",
-                    "type": "poison"
-                  }
-                ]
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "19"
+              "template": {
+                "type": ""
               }
             },
-            "activation": {
-              "type": "action",
-              "condition": ""
-            },
-            "consumption": {
-              "targets": [],
-              "scale": {
-                "allowed": false
-              }
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": [],
-              "min": "",
-              "max": ""
-            },
-            "name": "",
-            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -637,7 +621,9 @@
             "fallback": "Black Flag Reference Document"
           }
         },
-        "identifier": {},
+        "identifier": {
+          "associated": ""
+        },
         "restriction": {
           "filters": []
         },
@@ -662,10 +648,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.020",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1712943632121,
-        "modifiedTime": 1712943949592,
+        "modifiedTime": 1717280640330,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!BKeSIam1C0mXCW3s.2HeIgmv8Ubl3BD3I"
@@ -876,10 +862,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709672833353,
-    "modifiedTime": 1713740909574,
+    "modifiedTime": 1717280640330,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!BKeSIam1C0mXCW3s"

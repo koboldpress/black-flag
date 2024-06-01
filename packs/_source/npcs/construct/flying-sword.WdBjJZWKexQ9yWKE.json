@@ -115,7 +115,8 @@
         "mod": 1
       },
       "dexterity": {
-        "mod": 3
+        "mod": 3,
+        "proficient": true
       },
       "constitution": {
         "mod": null
@@ -527,13 +528,16 @@
                   {
                     "number": 1,
                     "denomination": "8",
-                    "bonus": "1",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "slashing"
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "",
+              "attack": {
+                "bonus": ""
+              }
             },
             "activation": {
               "type": "action",
@@ -552,7 +556,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -569,12 +584,15 @@
             "fallback": "Black Flag Reference Document"
           }
         },
-        "identifier": {},
+        "identifier": {
+          "associated": ""
+        },
         "restriction": {
           "filters": []
         },
         "type": {
-          "category": "monsters"
+          "category": "monsters",
+          "value": ""
         },
         "level": {
           "value": null
@@ -598,10 +616,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.018",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711423473508,
-        "modifiedTime": 1711497699279,
+        "modifiedTime": 1717263256273,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!WdBjJZWKexQ9yWKE.rHFXNJdmkNvJJS1K"
@@ -695,10 +713,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709606236479,
-    "modifiedTime": 1713740909976,
+    "modifiedTime": 1717263256273,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!WdBjJZWKexQ9yWKE"

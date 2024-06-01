@@ -429,8 +429,8 @@
                 "classification": "weapon"
               },
               "attack": {
-                "flat": true,
-                "bonus": "6"
+                "flat": false,
+                "bonus": ""
               },
               "damage": {
                 "includeBaseDamage": true,
@@ -438,13 +438,13 @@
                   {
                     "number": 2,
                     "denomination": "6",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "bludgeoning"
                   }
                 ]
               },
-              "ability": "strength"
+              "ability": ""
             },
             "activation": {
               "type": "action",
@@ -463,7 +463,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -509,10 +520,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.020",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1712943243304,
-        "modifiedTime": 1712944663762,
+        "modifiedTime": 1717280706138,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!3JVwDBkdsUvoi4fs.ekaJInuOJdwQWYSJ"
@@ -619,10 +630,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709673806888,
-    "modifiedTime": 1713740909394,
+    "modifiedTime": 1717280706138,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!3JVwDBkdsUvoi4fs"

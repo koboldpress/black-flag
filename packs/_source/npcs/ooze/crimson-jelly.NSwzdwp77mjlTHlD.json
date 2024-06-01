@@ -111,7 +111,8 @@
         "mod": -4
       },
       "dexterity": {
-        "mod": 4
+        "mod": 4,
+        "proficient": true
       },
       "constitution": {
         "mod": null
@@ -633,13 +634,16 @@
                   {
                     "number": 1,
                     "denomination": "6",
-                    "bonus": "2",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "necrotic"
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "",
+              "attack": {
+                "bonus": ""
+              }
             },
             "activation": {
               "type": "action",
@@ -658,7 +662,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -701,10 +716,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.018",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711421909215,
-        "modifiedTime": 1711422107375,
+        "modifiedTime": 1717263849658,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!NSwzdwp77mjlTHlD.0sC89GeN59AEG5vb"
@@ -798,10 +813,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709611234324,
-    "modifiedTime": 1713740909809,
+    "modifiedTime": 1717263849658,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!NSwzdwp77mjlTHlD"

@@ -103,7 +103,8 @@
     },
     "abilities": {
       "strength": {
-        "mod": 6
+        "mod": 6,
+        "proficient": true
       },
       "dexterity": {
         "mod": 2
@@ -481,15 +482,15 @@
                   {
                     "number": 2,
                     "denomination": "8",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
               "attack": {
-                "flat": true,
-                "bonus": "6"
+                "flat": false,
+                "bonus": ""
               },
               "ability": ""
             },
@@ -511,7 +512,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "overrides": {
@@ -582,10 +594,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1701025004085,
-        "modifiedTime": 1711744851279,
+        "modifiedTime": 1717279014074,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ioptmAxgvplXdxMJ.xa9sR4fSMXvYuOn5"
@@ -607,8 +619,8 @@
                 "classification": "weapon"
               },
               "attack": {
-                "flat": true,
-                "bonus": "6"
+                "flat": false,
+                "bonus": ""
               },
               "damage": {
                 "includeBaseDamage": true,
@@ -616,13 +628,13 @@
                   {
                     "number": 2,
                     "denomination": "4",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "bludgeoning"
                   }
                 ]
               },
-              "ability": "none"
+              "ability": ""
             },
             "activation": {
               "type": "action",
@@ -641,7 +653,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -684,10 +707,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711744488262,
-        "modifiedTime": 1711744643607,
+        "modifiedTime": 1717279024831,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ioptmAxgvplXdxMJ.A7BRAz1PcE8bai2T"
@@ -714,15 +737,15 @@
                   {
                     "number": 2,
                     "denomination": "6",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
               "attack": {
-                "flat": true,
-                "bonus": "6"
+                "flat": false,
+                "bonus": ""
               },
               "ability": ""
             },
@@ -744,7 +767,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "overrides": {
@@ -760,7 +794,7 @@
           "units": "pound"
         },
         "description": {
-          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach 5 ft. or range 30/120 ft., one target. Hit: [[/damage 2d6 + 2 piercing average]] damage in melee or [[/damage 1d6 + 2 piercing average]] damage at range.</p>",
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach 5 ft. or range 30/120 ft., one target. Hit: [[/damage average]] damage in melee or [[/damage 1d6 + 4 piercing average]] damage at range.</p>",
           "source": {
             "fallback": "Black Flag Reference Document"
           }
@@ -817,10 +851,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1701024052999,
-        "modifiedTime": 1711744886278,
+        "modifiedTime": 1717279057585,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!ioptmAxgvplXdxMJ.2BzQldZZ6pMSu7wO"
@@ -924,10 +958,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709617606926,
-    "modifiedTime": 1713740910148,
+    "modifiedTime": 1717279057585,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!ioptmAxgvplXdxMJ"

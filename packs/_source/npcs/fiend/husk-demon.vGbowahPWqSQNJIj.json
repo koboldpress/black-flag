@@ -118,7 +118,8 @@
         "mod": 1
       },
       "dexterity": {
-        "mod": 5
+        "mod": 5,
+        "proficient": true
       },
       "constitution": {
         "mod": 3
@@ -537,7 +538,7 @@
                   {
                     "number": 1,
                     "denomination": "8",
-                    "bonus": "3",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "slashing"
                   },
@@ -550,7 +551,10 @@
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "",
+              "attack": {
+                "bonus": ""
+              }
             },
             "activation": {
               "type": "action",
@@ -569,7 +573,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -615,10 +630,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711423663858,
-        "modifiedTime": 1711681876648,
+        "modifiedTime": 1717263881057,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!vGbowahPWqSQNJIj.5OSQ5kt80NDgmGGO"
@@ -645,7 +660,7 @@
               }
             },
             "activation": {
-              "type": "action",
+              "type": "bonus",
               "condition": ""
             },
             "consumption": {
@@ -661,7 +676,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -704,10 +730,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.018",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711423913797,
-        "modifiedTime": 1711423993639,
+        "modifiedTime": 1717263895948,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!vGbowahPWqSQNJIj.6UzOYqhSMxBkiOtX"
@@ -721,10 +747,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709611922952,
-    "modifiedTime": 1713740910346,
+    "modifiedTime": 1717263895948,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!vGbowahPWqSQNJIj"

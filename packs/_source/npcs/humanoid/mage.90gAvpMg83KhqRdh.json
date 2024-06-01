@@ -111,7 +111,8 @@
         "mod": null
       },
       "intelligence": {
-        "mod": 7
+        "mod": 7,
+        "proficient": true
       },
       "wisdom": {
         "mod": 1
@@ -534,8 +535,8 @@
                 "classification": "spell"
               },
               "attack": {
-                "flat": true,
-                "bonus": "7"
+                "flat": false,
+                "bonus": ""
               },
               "damage": {
                 "includeBaseDamage": true,
@@ -543,13 +544,13 @@
                   {
                     "number": 3,
                     "denomination": "6",
-                    "bonus": "4",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "fire"
                   }
                 ]
               },
-              "ability": "none"
+              "ability": ""
             },
             "activation": {
               "type": "action",
@@ -569,7 +570,20 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": "creatureObject",
+                "count": "1"
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": "foot",
+              "value": "120"
+            }
           }
         },
         "uses": {
@@ -611,10 +625,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.020",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1713154771419,
-        "modifiedTime": 1713154989871,
+        "modifiedTime": 1717281790589,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!90gAvpMg83KhqRdh.4K56K7tIEwoF0ETE"
@@ -2064,10 +2078,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.030",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709698992433,
-    "modifiedTime": 1717088403510,
+    "modifiedTime": 1717281790589,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!90gAvpMg83KhqRdh"

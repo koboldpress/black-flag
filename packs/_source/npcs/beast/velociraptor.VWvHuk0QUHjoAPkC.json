@@ -95,7 +95,8 @@
         "mod": -2
       },
       "dexterity": {
-        "mod": 4
+        "mod": 4,
+        "proficient": true
       },
       "constitution": {
         "mod": 1
@@ -336,13 +337,16 @@
                   {
                     "number": 1,
                     "denomination": "6",
-                    "bonus": "2",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "",
+              "attack": {
+                "bonus": ""
+              }
             },
             "activation": {
               "type": "action",
@@ -361,7 +365,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -407,10 +422,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711504525397,
-        "modifiedTime": 1711666750183,
+        "modifiedTime": 1717263988439,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!VWvHuk0QUHjoAPkC.cgbQ8oNFUNV1zwaE"
@@ -437,13 +452,16 @@
                   {
                     "number": 1,
                     "denomination": "4",
-                    "bonus": "2",
+                    "bonus": "@mod",
                     "custom": "",
                     "type": "piercing"
                   }
                 ]
               },
-              "ability": "dexterity"
+              "ability": "",
+              "attack": {
+                "bonus": ""
+              }
             },
             "activation": {
               "type": "action",
@@ -462,7 +480,18 @@
               "max": ""
             },
             "name": "",
-            "img": "systems/black-flag/artwork/activities/attack.svg"
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": ""
+              },
+              "template": {
+                "type": ""
+              }
+            },
+            "range": {
+              "units": ""
+            }
           }
         },
         "uses": {
@@ -508,10 +537,10 @@
       },
       "_stats": {
         "systemId": "black-flag",
-        "systemVersion": "0.8.019",
+        "systemVersion": "0.9.031",
         "coreVersion": "11.315",
         "createdTime": 1711503209924,
-        "modifiedTime": 1711666717971,
+        "modifiedTime": 1717263994023,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!actors.items!VWvHuk0QUHjoAPkC.QXBmlZqw47HKpL6l"
@@ -622,10 +651,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.022",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1709616473209,
-    "modifiedTime": 1713740909915,
+    "modifiedTime": 1717263994023,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!actors!VWvHuk0QUHjoAPkC"
