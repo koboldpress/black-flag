@@ -33,7 +33,6 @@ export default function packageCommand() {
 		handler: async argv => {
 			const { action, pack, entry, config: configPath, ...options } = argv;
 			const config = await loadConfig(configPath);
-			console.log(config);
 			switch ( action ) {
 				case "pack":
 					return await packDB(pack, options, config);
