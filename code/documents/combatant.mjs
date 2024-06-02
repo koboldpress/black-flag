@@ -5,7 +5,7 @@ export default class BlackFlagCombatant extends Combatant {
 	getInitiativeRoll(formula) {
 		if (formula) return super.getInitiativeRoll(formula);
 		return (
-			this.actor?._cachedInitiativeRolls?.[0].clone() ??
+			this.actor?._cachedInitiativeRolls?.[0]?.clone() ??
 			CONFIG.Dice.ChallengeRoll.create(this.actor?.getInitiativeRollConfig() ?? {})
 		);
 	}

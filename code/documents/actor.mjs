@@ -1229,6 +1229,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			rolls = Roll.create(rollConfig);
 		}
 
+		if (!rolls?.length) return;
 		this._cachedInitiativeRolls = rolls;
 		await this.rollInitiative({ createCombatants: true });
 		delete this._cachedInitiativeRolls;
