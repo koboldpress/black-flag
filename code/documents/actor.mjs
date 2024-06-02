@@ -1070,10 +1070,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			);
 		}
 
-		const formula = `max(0, 1d${config.denomination} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`;
+		const rollData = this.getRollData();
+		const modifierData = { type: "hit-die", denomination: config.denomination };
+		const minimum = this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData });
+
+		let die = `1d${config.denomination}`;
+		if (minimum) die = `${die}min${minimum}`;
 		config.denomination = Number(config.denomination);
 		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+		rollConfig.rolls = [
+			{
+				...buildRoll(
+					{
+						base: `max(0, ${die} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`,
+						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+					},
+					rollData
+				)
+			}
+		].concat(config.rolls ?? []);
 
 		const type = game.i18n.localize("BF.HitDie.Label[one]");
 		const dialogConfig = foundry.utils.mergeObject(
