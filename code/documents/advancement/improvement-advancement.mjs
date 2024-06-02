@@ -235,6 +235,8 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 			o: "in",
 			v: new Set([...this.configuration.talentList, ...(expandedTalentList?.configuration.talentList ?? [])])
 		};
-		return search.compendiums(Item, { type: "talent", filters: [filter], index: false }) ?? [];
+		return ((await search.compendiums(Item, { type: "talent", filters: [filter], index: false })) ?? []).filter(
+			i => i.system.restriction?.allowMultipleTimes || !this.actor?.sourcedItems.get(i.uuid)?.size
+		);
 	}
 }

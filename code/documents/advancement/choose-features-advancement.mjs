@@ -220,10 +220,12 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	async choices() {
 		const choices = [];
 		for (const c of Object.values(this.configuration.pool)) {
-			if (this.itemChosen(c.uuid)) continue;
-			const document = await fromUuid(c.uuid);
-			if (document) choices.push(document);
-			else log(`Choice document could not be found: ${uuid}`, { level: "warn" });
+			const item = await fromUuid(c.uuid);
+			if (!item) {
+				log(`Choice document could not be found: ${uuid}`, { level: "warn" });
+				continue;
+			}
+			if (!this.selectionLimitReached(item)) choices.push(item);
 		}
 		return choices;
 	}
@@ -231,14 +233,12 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Determine whether this item has been chosen at any level.
-	 * @param {string} uuid - UUID of item to check.
+	 * Has the actor reached the limit of this item? Based on whether other items from the same source ID are already
+	 * on the actor and whether the item has the `allowMultipleTimes` restriction.
+	 * @param {BlackFlagItem} item - Item to check.
 	 * @returns {boolean}
 	 */
-	itemChosen(uuid) {
-		for (const level of Object.values(this.value.added ?? {})) {
-			if (level.some(a => a.uuid === uuid)) return true;
-		}
-		return false;
+	selectionLimitReached(item) {
+		return !item.system.restriction?.allowMultipleTimes && !!this.actor?.sourcedItems.get(item.uuid)?.size;
 	}
 }
