@@ -47,6 +47,14 @@
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
+			<fieldset>
+				<legend>{{ localize "BF.Talent.Details" }}</legend>
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Talent.AllowMultipleTimes.Label" }}</span>
+					<input type="checkbox" name="system.restriction.allowMultipleTimes"
+					       {{ checked system.restriction.allowMultipleTimes }}>
+				</label>
+			</fieldset>
 			{{> "blackFlag.item-activities" }}
 		</div>
 		<div class="tab" data-group="primary" data-tab="effects">

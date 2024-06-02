@@ -42,7 +42,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * Mapping of item source UUIDs to the items.
-	 * @type {Map<string, BlackFlagItem>}
+	 * @type {Map<string, Set<BlackFlagItem>>}
 	 */
 	sourcedItems = this.sourcedItems;
 

@@ -145,7 +145,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		if (this.item.isEmbedded) {
 			for (const target of this.consumption.targets) {
 				if (target.type === "item" && target.target?.includes(".")) {
-					const item = this.item.actor.sourcedItems?.get(target.target);
+					const item = this.item.actor.sourcedItems?.get(target.target)?.first();
 					if (item) target.target = item.id;
 				}
 			}

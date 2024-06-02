@@ -54,7 +54,12 @@ export default class ItemDataModel extends BaseDataModel {
 				this.parent.flags["black-flag"]?.sourceId ??
 				this.parent._stats.compendiumSource ??
 				this.parent.flags.core?.sourceId;
-			if (sourceId) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
+			if (sourceId) {
+				if (!this.parent.actor.sourcedItems?.has(sourceId)) {
+					this.parent.actor.sourcedItems?.set(sourceId, new Set());
+				}
+				this.parent.actor.sourcedItems?.get(sourceId).add(this.parent);
+			}
 		}
 	}
 

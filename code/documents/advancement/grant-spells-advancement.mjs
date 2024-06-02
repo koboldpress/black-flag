@@ -65,18 +65,19 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async apply(levels, data, { initial = false, render = true } = {}) {
+	async apply(levels, data = {}, { initial = false, render = true } = {}) {
 		if (initial && this.configuration.spell.ability.size > 1 && !data?.ability) return;
 		data.ability ??= this.configuration.spell.ability.first();
 		const addUuids = new Set();
-		const updateUuids = new Set();
+		const updateIds = new Set();
 		const mode = this.configuration.spell.mode;
 		for (const { uuid } of Object.values(this.configuration.pool)) {
 			const existing = this.actor.sourcedItems.get(uuid);
-			if (existing?.getFlag("black-flag", "relationship.mode") === mode) updateUuids.add(uuid);
+			const match = existing?.find(e => e.getFlag("black-flag", "relationship.mode") === mode);
+			if (match) updateIds.add(match.id);
 			else addUuids.add(uuid);
 		}
-		const added = [...(await this.createItems(addUuids, { data })), ...(await this.updateItems(updateUuids, { data }))];
+		const added = [...(await this.createItems(addUuids, { data })), ...(await this.updateItems(updateIds, { data }))];
 		return await this.actor.update(
 			{
 				[this.valueKeyPath]: {
@@ -131,20 +132,20 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 
 	/**
 	 * Update existing spells on the actor with the proper flags.
-	 * @param {string[]} uuids - Source UUIDs for items to update.
+	 * @param {string[]} ids - IDs of items to update.
 	 * @param {object} [options={}]
 	 * @param {object} [options.data] - Data from the advancement process.
 	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
 	 * @returns {object[]} - Array of data for storing in value.
 	 */
-	async updateItems(uuids, { data, render = false } = {}) {
+	async updateItems(ids, { data, render = false } = {}) {
 		const items = [];
 		const updated = [];
-		for (const uuid of uuids) {
-			const itemID = this.actor.sourcedItems.get(uuid)?.id;
-			if (!itemID) continue;
-			items.push({ _id: itemID, ...this.configuration.spell.getApplyChanges(data) });
-			updated.push({ document: itemID, modified: true, uuid });
+		for (const id of ids) {
+			const item = this.actor.items.get(id);
+			const sourceId = item.flags["black-flag"]?.sourceId ?? item._stats.compendiumSource ?? item.flags.core?.sourceId;
+			items.push({ _id: id, ...this.configuration.spell.getApplyChanges(data) });
+			updated.push({ document: id, modified: true, uuid: sourceId });
 		}
 		await this.actor.updateEmbeddedDocuments("Item", items, { render });
 		return updated;

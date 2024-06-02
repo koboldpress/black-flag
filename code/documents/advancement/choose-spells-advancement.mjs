@@ -46,7 +46,7 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async apply(levels, data, { initial = false, render = true } = {}) {
+	async apply(levels, data = {}, { initial = false, render = true } = {}) {
 		if (initial) {
 			if (this.configuration.spell.ability.size === 1) {
 				await this.actor.update({ [this.valueKeyPath]: { ability: this.configuration.spell.ability.first() } });
@@ -64,16 +64,17 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
 
 		const addUuids = new Set();
-		const updateUuids = new Set();
+		const updateIds = new Set();
 		const mode = this.configuration.spell.mode;
 		for (const uuid of data.choices ?? []) {
 			const existing = this.actor.sourcedItems.get(uuid);
-			if (existing?.getFlag("black-flag", "relationship.mode") === mode) updateUuids.add(uuid);
+			const match = existing?.find(e => e.getFlag("black-flag", "relationship.mode") === mode);
+			if (match) updateIds.add(match.id);
 			else addUuids.add(uuid);
 		}
 		const added = [
 			...(await this.createItems(addUuids, { added: existing, data })),
-			...(await GrantSpellsAdvancement.prototype.updateItems.call(this, updateUuids, { data }))
+			...(await GrantSpellsAdvancement.prototype.updateItems.call(this, updateIds, { data }))
 		];
 		return await this.actor.update(
 			{
