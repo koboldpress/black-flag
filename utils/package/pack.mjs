@@ -8,11 +8,12 @@ import { cleanPackEntry } from "./clean.mjs";
  * Compile the source JSON files into compendium packs.
  * @param {string} [packName] - Name of pack to compile. If none provided, all packs will be packed.
  * @param {object} [options={}]
+ * @param {object} [config={}]
  *
  * - `npm run build:db` - Compile all JSON files into their NEDB files.
  * - `npm run build:db -- classes` - Only compile the specified pack.
  */
-export default async function packDB(packName, options={}) {
+export default async function packDB(packName, options={}, config={}) {
 	// Determine which source folders to process
 	let folders;
 	try {
@@ -27,6 +28,10 @@ export default async function packDB(packName, options={}) {
 	for ( const folder of folders ) {
 		const src = Path.join(PACK_SRC, folder.name);
 		const dest = Path.join(PACK_DEST, folder.name);
-		await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry });
+		await compilePack(src, dest, {
+			recursive: true,
+			log: true,
+			transformEntry: data => cleanPackEntry(data, { userId: config.project?.userId })
+		});
 	}
 }

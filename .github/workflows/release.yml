@@ -1,5 +1,8 @@
 name: Release Creation
 
+env:
+  node_version: 18
+
 on:
   release:
     types: [published]
@@ -12,23 +15,30 @@ jobs:
     - uses: actions/checkout@v3
 
 
+    - name: Load build config
+      id: buildconfig
+      uses: ActionsTools/read-json-action@main
+      with:
+        file_path: "./build-config.json"
+
+
     - name: Load system manifest
       id: manifest
       uses: ActionsTools/read-json-action@main
       with:
-        file_path: "./system.json"
+        file_path: "./{{ steps.buildconfig.outputs.package.type }}.json"
 
 
     - name: Set up variables
       id: vars
       run: |
         VERSION=${GITHUB_REF/refs\/tags\//}
-        SYSTEM_ID=${{steps.manifest.outputs.id}}
+        SYSTEM_ID=${{ steps.manifest.outputs.id }}
         echo "VERSION=$VERSION" >> $GITHUB_ENV
-        echo "SYSTEM_ID=$SYSTEM_ID" >> $GITHUB_ENV
-        echo "ZIP_NAME=$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
-        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/$SYSTEM_ID-$VERSION.zip" >> $GITHUB_ENV
-        echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/system.json" >> $GITHUB_ENV
+        echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
+        echo "ZIP_NAME=$PACKAGE_ID-$VERSION.zip" >> $GITHUB_ENV
+        echo "RELEASE_DOWNLOAD_URL=https://github.com/${{ github.repository }}/releases/download/$VERSION/$PACKAGE_ID-$VERSION.zip" >> $GITHUB_ENV
+        echo "RELEASE_INSTALL_URL=https://github.com/${{github.repository}}/releases/download/$VERSION/{{ steps.buildconfig.outputs.package.type }}.json" >> $GITHUB_ENV
 
 
     - name: Adjust manifest
@@ -36,15 +46,15 @@ jobs:
       with:
         files: "system.json"
       env:
-        download: ${{env.RELEASE_DOWNLOAD_URL}}
-        version: ${{env.VERSION}}
+        download: ${{ env.RELEASE_DOWNLOAD_URL }}
+        version: ${{ env.VERSION }}
         flags.hotReload: false
 
 
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18.x'
+        node-version: ${{ env.node_version }}
         cache: 'npm'
 
 
@@ -60,17 +70,17 @@ jobs:
       id: includes
       uses: actions/github-script@v6
       env:
-        ESMODULES: ${{steps.manifest.outputs.esmodules}}
-        FLAGS: ${{steps.manifest.outputs.flags}}
-        LANGUAGES: ${{steps.manifest.outputs.languages}}
-        PACKS: ${{steps.manifest.outputs.packs}}
-        STYLES: ${{steps.manifest.outputs.styles}}
+        ESMODULES: ${{ steps.manifest.outputs.esmodules }}
+        INCLUDES: ${{ steps.buildconfig.outputs.includes }}
+        LANGUAGES: ${{ steps.manifest.outputs.languages }}
+        PACKS: ${{ steps.manifest.outputs.packs }}
+        STYLES: ${{ steps.manifest.outputs.styles }}
       with:
         result-encoding: string
         script: |
           const manifest = {
             esmodules: JSON.parse(process.env.ESMODULES),
-            flags: JSON.parse(process.env.FLAGS),
+            includes: JSON.parse(process.env.INCLUDES),
             languages: JSON.parse(process.env.LANGUAGES),
             packs: JSON.parse(process.env.PACKS),
             styles: JSON.parse(process.env.STYLES)
@@ -83,25 +93,25 @@ jobs:
             ...(manifest.styles ?? []),
             ...(manifest.packs?.map(p => p.path) ?? []),
             ...(manifest.languages?.map(l => l.path) ?? []),
-            ...(manifest.flags?.build?.includes ?? [])
+            ...(manifest.includes ?? [])
           ];
           return includes.join(" ");
 
 
     - name: Zip Contents
-      run: zip ${{env.ZIP_NAME}} -r ${{steps.includes.outputs.result}}
+      run: zip ${{ env.ZIP_NAME }} -r ${{ steps.includes.outputs.result }}
 
 
     - name: Update Release with Files
       uses: ncipollo/release-action@v1
       with:
         allowUpdates: true
-        name: ${{github.event.release.name}}
-        draft: false
-        prerelease: ${{github.event.release.prerelease}}
-        token: ${{secrets.GITHUB_TOKEN}}
-        artifacts: './system.json, ./${{env.ZIP_NAME}}'
-        tag: ${{env.VERSION}}
+        name: ${{ github.event.release.name }}
+        draft: ${{ github.event.release.unpublished }}
+        prerelease: ${{ github.event.release.prerelease }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: './{{ steps.buildconfig.outputs.package.type }}.json, ./${{ env.ZIP_NAME }}'
+        tag: ${{ env.VERSION }}
         body: |
-          ${{github.event.release.body}}
+          ${{ github.event.release.body }}
           **Installation:** To manually install this release, please use the following manifest URL: ${{env.RELEASE_INSTALL_URL}}

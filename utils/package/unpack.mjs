@@ -9,16 +9,17 @@ import { cleanPackEntry } from "./clean.mjs";
  * @param {string} [packName] - Name of pack to extract. If none provided, all packs will be unpacked.
  * @param {string} [entryName] - Name of a specific entry to extract.
  * @param {object} [options={}]
+ * @param {object} [config={}]
  *
  * - `npm build:json - Extract all compendium NEDB files into JSON files.
  * - `npm build:json -- classes` - Only extract the contents of the specified compendium.
  * - `npm build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
  */
-export default async function unpackDB(packName, entryName, options) {
+export default async function unpackDB(packName, entryName, options={}, config={}) {
 	entryName = entryName?.toLowerCase();
 
 	// Load system.json.
-	const system = JSON.parse(await readFile("./system.json", { encoding: "utf8" }));
+	const system = JSON.parse(await readFile(`./${config.project?.type ?? "module"}.json`, { encoding: "utf8" }));
 
 	// Determine which source packs to process.
 	const packs = system.packs.filter(p => !packName || p.name === packName);
@@ -56,7 +57,7 @@ export default async function unpackDB(packName, entryName, options) {
 		await extractPack(packInfo.path, dest, {
 			log: true, documentType: packInfo.type, transformEntry: entry => {
 				if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
-				cleanPackEntry(entry);
+				cleanPackEntry(entry, { userId: config.project?.userId });
 			}, transformName: entry => {
 				if ( entry._id in folders ) return Path.join(folders[entry._id].path, "_folder.json");
 				if ( entry._id in containers ) return Path.join(containers[entry._id].path, "_container.json");
