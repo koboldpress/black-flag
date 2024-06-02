@@ -59,7 +59,7 @@ export default class PseudoDocumentSelection extends Dialog {
 			const dialog = new this(
 				item,
 				{
-					title: `${this.defaultOptions.title}: ${item.name}`,
+					title: `${game.i18n.localize(this.defaultOptions.title)}: ${item.name}`,
 					buttons: {
 						submit: {
 							callback: html => {
