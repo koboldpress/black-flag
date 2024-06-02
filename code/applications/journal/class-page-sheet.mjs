@@ -364,7 +364,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 				...advancement.configuration.pool.map(async d => {
 					const doc = features.get(d.uuid);
 					if (!doc) return;
-					const levels = doc.system.advancement?.byType("scaleValue")[0]?.levels ?? [];
+					const levels = doc.system.advancement?.levels ?? [];
 					if (!levels.includes(level)) levels.unshift(level);
 					return {
 						level,
