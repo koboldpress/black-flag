@@ -8,6 +8,23 @@ export const consumableCategories = {
 	food: {
 		localization: "BF.Item.Consumable.Category.Food"
 	},
+	poison: {
+		localization: "BF.Item.Consumable.Category.Poison",
+		children: {
+			contact: {
+				localization: "BF.Item.Poison.Type.Contact"
+			},
+			ingested: {
+				localization: "BF.Item.Poison.Type.Ingested"
+			},
+			inhaled: {
+				localization: "BF.Item.Poison.Type.Inhaled"
+			},
+			injury: {
+				localization: "BF.Item.Poison.Type.Injury"
+			}
+		}
+	},
 	potion: {
 		localization: "BF.Item.Consumable.Category.Potion"
 	},

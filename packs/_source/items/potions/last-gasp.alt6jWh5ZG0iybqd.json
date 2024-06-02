@@ -1,0 +1,118 @@
+{
+  "folder": "NJ7MOfSV86dZsbEi",
+  "name": "Last Gasp",
+  "type": "consumable",
+  "_id": "alt6jWh5ZG0iybqd",
+  "img": "icons/consumables/potions/conical-mushroom-poison-red.webp",
+  "system": {
+    "activities": {
+      "nycXV45d5wJ2uZCT": {
+        "type": "savingThrow",
+        "_id": "nycXV45d5wJ2uZCT",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "13"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false,
+            "max": ""
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A creature subjected to this poison must succeed on a [[/save]] save or be poisoned for 1 minute. The poisoned creature is paralyzed. The creature can repeat the save at the end of each of its turns, ending both effects on a success.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "attunement": {},
+    "container": null,
+    "price": {
+      "value": 200,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [],
+    "type": {
+      "category": "poison",
+      "base": "contact"
+    },
+    "rarity": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717299000938,
+    "modifiedTime": 1717299386105,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!alt6jWh5ZG0iybqd"
+}

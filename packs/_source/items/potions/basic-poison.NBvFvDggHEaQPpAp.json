@@ -1,0 +1,121 @@
+{
+  "folder": "NJ7MOfSV86dZsbEi",
+  "name": "Basic Poison",
+  "type": "consumable",
+  "_id": "NBvFvDggHEaQPpAp",
+  "img": "icons/consumables/potions/potion-jar-corked-labeled-poison-skull-green.webp",
+  "system": {
+    "activities": {
+      "xtBbCp1xweEbSxW7": {
+        "type": "savingThrow",
+        "_id": "xtBbCp1xweEbSxW7",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "4",
+                "bonus": "",
+                "custom": "",
+                "type": "poison"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "10"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "special",
+            "count": "1",
+            "special": "One weapon or up to three pieces of ammunition that deal piercing or slashing damag"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You can use the poison in this vial to coat one weapon or up to three pieces of ammunition that deal piercing or slashing damage. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must succeed on a [[/save]] save or take [[/damage]] damage (in addition to the weapon’s normal damage). Once applied, the poison retains potency for 1 minute before drying.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "attunement": {},
+    "container": null,
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [],
+    "type": {
+      "category": "poison",
+      "base": "injury"
+    },
+    "rarity": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717298989723,
+    "modifiedTime": 1717299532914,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!NBvFvDggHEaQPpAp"
+}

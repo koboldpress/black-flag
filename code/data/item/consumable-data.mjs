@@ -15,6 +15,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  *
  * @property {object} type
  * @property {string} type.category - Consumable category as defined in `CONFIG.BlackFlag.consumableCategories`.
+ * @property {string} type.base - Specific consumable type defined as a child of its category.
  */
 export default class ConsumableData extends ItemDataModel.mixin(
 	ActivitiesTemplate,
@@ -39,7 +40,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			type: new SchemaField({
-				category: new StringField({ label: "BF.Equipment.Category.Label" })
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
 		});
 	}

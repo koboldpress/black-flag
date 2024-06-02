@@ -1,0 +1,126 @@
+{
+  "folder": "NJ7MOfSV86dZsbEi",
+  "name": "Midnight Tears",
+  "type": "consumable",
+  "_id": "DvsSQIi1X8I5P1ph",
+  "img": "icons/consumables/potions/flask-ornate-skull-green.webp",
+  "system": {
+    "activities": {
+      "6DNvOUsMXnQP4bYl": {
+        "type": "savingThrow",
+        "_id": "6DNvOUsMXnQP4bYl",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 9,
+                "denomination": "6",
+                "bonus": "",
+                "custom": "",
+                "type": "poison"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "17"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "special",
+          "override": false,
+          "special": "Until midnight"
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A creature who ingests this poison suffers no effect until the stroke of midnight. If the poison has not been neutralized before then, the creature must succeed on a [[/save]] save, taking [[/damage average]] damage on a failure or half as much damage on a success.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "attunement": {},
+    "container": null,
+    "price": {
+      "value": 1500,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [],
+    "type": {
+      "category": "poison",
+      "base": "ingested"
+    },
+    "rarity": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717299004806,
+    "modifiedTime": 1717299456245,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!DvsSQIi1X8I5P1ph"
+}
