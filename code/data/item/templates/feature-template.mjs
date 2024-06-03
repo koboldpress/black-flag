@@ -1,10 +1,17 @@
 import { filter, numberFormat, Trait } from "../../../utils/_module.mjs";
 import FilterField from "../../fields/filter-field.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Feature and Talent items.
+ *
+ * @property {object} restriction
+ * @property {FilterField} restriction.filters - Filters limiting when this item can be selected.
+ * @property {boolean} restriction.requireAll - Do all filters need to be satisfied to take this feature, or only one.
+ * @property {object} type
+ * @property {string} type.category - Feature or talent category for this item.
+ * @property {string} type.value - Specific feature type.
  */
 export default class FeatureTemplate extends foundry.abstract.DataModel {
 
@@ -21,7 +28,12 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			restriction: new SchemaField({
-				filters: new FilterField()
+				filters: new FilterField(),
+				requireAll: new BooleanField({
+					initial: true,
+					label: "BF.Prerequisite.RequireAll.Label",
+					hint: "BF.Prerequisite.RequireAll.Hint"
+				})
 			}),
 			type: new SchemaField({
 				category: new StringField(),
@@ -154,7 +166,9 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		// TODO: Send out hook for custom filter handling
 
 		if ( !prerequisites.length ) return "";
-		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit", style: "short" });
+		const listFormatter = game.i18n.getListFormatter({
+			type: this.restriction.requireAll ? "unit" : "disjunction", style: "short"
+		});
 		return listFormatter.format(prerequisites);
 	}
 
@@ -166,8 +180,14 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 * @returns {true|string[]} - True if the item is valid, or a list of invalid descriptions if not.
 	 */
 	validatePrerequisites(actor) {
-		const invalidFilters = this.restriction.filters.filter(f => !filter.performCheck(actor, [f]));
-		if ( !invalidFilters.length ) return true;
+		let invalidFilters;
+		if ( this.restriction.requireAll ) {
+			invalidFilters = this.restriction.filters.filter(f => !filter.performCheck(actor, [f]));
+			if ( !invalidFilters.length ) return true;
+		} else {
+			if ( this.restriction.filters.some(f => filter.performCheck(actor, [f])) ) return true;
+			invalidFilters = this.restriction.filters;
+		}
 
 		const messages = [];
 		const proficiencies = [];

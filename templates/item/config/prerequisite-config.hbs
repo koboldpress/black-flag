@@ -1,4 +1,14 @@
 <form autocomplete="off">
+	<fieldset>
+		<legend>{{ localize "BF.Prerequisite.Config.Details" }}</legend>
+		<label class="full-checkbox">
+			<span>
+				{{ localize "BF.Prerequisite.RequireAll.Label" }}
+				<i class="hintIcon" data-tooltip="BF.Prerequisite.RequireAll.Hint"></i>
+			</span>
+			<input type="checkbox" name="system.restriction.requireAll" {{ checked system.restriction.requireAll }}>
+		</label>
+	</fieldset>
 	<fieldset class="ability-restrictions">
 		<legend>{{ localize "BF.Prerequisite.Ability.Title" }}</legend>
 		{{#each abilities}}

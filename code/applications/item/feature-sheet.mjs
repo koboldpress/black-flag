@@ -5,6 +5,7 @@ import BaseItemSheet from "./base-item-sheet.mjs";
 import PrerequisiteConfig from "./config/prerequisite-config.mjs";
 
 export default class FeatureSheet extends BaseItemSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "feature", "item", "sheet"],
@@ -18,6 +19,7 @@ export default class FeatureSheet extends BaseItemSheet {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	get template() {
 		return `systems/black-flag/templates/item/${this.document.type}.hbs`;
 	}
@@ -26,6 +28,7 @@ export default class FeatureSheet extends BaseItemSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -72,6 +75,7 @@ export default class FeatureSheet extends BaseItemSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -83,6 +87,7 @@ export default class FeatureSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_onAction(event) {
 		const { action, ...properties } = event.currentTarget.dataset;
 		switch (action) {
@@ -97,6 +102,7 @@ export default class FeatureSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_updateObject(event, formData) {
 		const update = foundry.utils.expandObject(formData);
 

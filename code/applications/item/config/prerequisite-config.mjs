@@ -227,6 +227,6 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		updateFilter("characterLevel", "system.progression.level", data.traits?.level);
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
-		super._updateObject(event, { "system.restriction.filters": filters });
+		super._updateObject(event, { ...formData, "system.restriction.filters": filters });
 	}
 }
