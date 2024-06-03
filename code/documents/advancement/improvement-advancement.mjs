@@ -45,6 +45,7 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/** @override */
 	prepareWarnings(levels, notifications) {
 		const baseKey = this.warningKey(levels).replace("-*", "");
+		if (this.configuredForLevel(levels)) return;
 		if (!this.value.ability)
 			notifications.set(`${baseKey}-ability`, {
 				category: `level-${levels.character}`,
