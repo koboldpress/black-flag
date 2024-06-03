@@ -48,9 +48,7 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	 * @returns {string|number}
 	 */
 	buildBonus(modifiers, { deterministic=false, rollData={} }={}) {
-		if ( deterministic ) return modifiers.reduce((t, m) => t + simplifyBonus(m.formula, rollData), 0);
-		return modifiers.filter(m => m.formula).map(m => m.formula).join(" + ");
-		// TODO: Should formula data be replaced?
+		return this.mergeModifiers(modifiers, { deterministic, rollData });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -63,11 +61,32 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	 * @returns {number|null}
 	 */
 	buildMinimum(modifiers, { rollData={} }={}) {
-		const minimum = modifiers.reduce((min, mod) => {
-			const value = simplifyBonus(mod.formula, rollData);
-			return value > min ? value : min;
-		}, -Infinity);
-		return Number.isFinite(minimum) ? minimum : null;
+		return this.mergeModifiers(modifiers, { mode: "largest", rollData });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Merge multiple modifiers into one.
+	 * @param {object[]} modifiers - Modifiers which to merge.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.deterministic=false] - Should only deterministic modifiers be included? Only use in
+	 *                                                  additive mode.
+	 * @param {"additive"|"smallest"|"largest"} [options.mode="additive"] - Mode used to arrive at the final value.
+	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
+	 * @returns {string|number|null}
+	 */
+	mergeModifiers(modifiers, { deterministic=true, mode="additive", rollData={} }={}) {
+		if ( mode !== "additive" || deterministic ) modifiers = modifiers.map(m => simplifyBonus(m.formula, rollData));
+		if ( mode === "additive" ) {
+			if ( deterministic ) return modifiers.reduce((t, m) => t + m, 0);
+			return modifiers.filter(m => m.formula).map(m => m.formula).join(" + ");
+		}
+		const pick = modifiers.reduce((extreme, m) => {
+			if ( mode === "largest" ) return m > extreme ? m : extreme;
+			else return m < extreme ? m : extreme;
+		}, mode === "largest" ? -Infinity : Infinity);
+		return Number.isFinite(pick) ? pick : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

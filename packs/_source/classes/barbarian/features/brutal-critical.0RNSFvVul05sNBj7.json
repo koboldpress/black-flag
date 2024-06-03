@@ -40,6 +40,33 @@
         "icon": "",
         "hint": "",
         "identifier": "dice"
+      },
+      "srgpKBzeEh6MFnmu": {
+        "type": "property",
+        "_id": "srgpKBzeEh6MFnmu",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"critical-threshold\", \"filter\": [{ \"k\": \"activity.type.value\", \"v\": \"melee\" }, { \"k\": \"activity.type.classification\", \"v\": \"weapon\" }], \"formula\": \"19\" }"
+            },
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"critical-dice\", \"filter\": [{ \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.dice\" }"
+            }
+          ]
+        },
+        "level": {
+          "value": 9,
+          "classIdentifier": "barbarian",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Brutal Critical",
+        "icon": "",
+        "hint": ""
       }
     },
     "description": {
@@ -78,7 +105,7 @@
     "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1717383218630,
-    "modifiedTime": 1717385864365,
+    "modifiedTime": 1717434317901,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0RNSFvVul05sNBj7"

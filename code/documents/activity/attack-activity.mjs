@@ -40,7 +40,6 @@ export default class AttackActivity extends DamageActivity {
 					: largest,
 			availableAbilities.first()
 		);
-		// TODO: Compare adjusted mod on NPCs
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -130,7 +129,10 @@ export default class AttackActivity extends DamageActivity {
 				parts,
 				data,
 				options: {
-					// TODO: criticalSuccess: this.system.criticalThreshold
+					criticalSuccess: this.actor?.system.mergeModifiers(
+						this.actor?.system.getModifiers(this.modifierData, "critical-threshold"),
+						{ mode: "smallest", rollData: data }
+					),
 					minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(this.modifierData, "min"), {
 						rollData: data
 					})
@@ -212,7 +214,12 @@ export default class AttackActivity extends DamageActivity {
 						modifierData,
 						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
 						options: {
-							// TODO: Get critical settings
+							critical: {
+								bonusDice: this.actor?.system.mergeModifiers(
+									this.actor?.system.getModifiers(modifierData, "critical-dice"),
+									{ deterministic: true, rollData }
+								)
+							},
 							damageType: damage.type,
 							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
 								rollData: rollData

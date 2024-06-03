@@ -3,7 +3,7 @@ import FormulaField from "./formula-field.mjs";
 
 /**
  * @typedef {object} Modifier
- * @property {string} type - Type of modifier (e.g. "bonus", "min", "note").
+ * @property {string} type - Type of modifier (e.g. "bonus", "min", "critical-dice", "critical-threshold", "note").
  * @property {FilterDescription[]} filter - Filter used to limit when this modifier is used.
  * @property {string} [formula] - If relevant, a formula.
  * @property {object} [note]

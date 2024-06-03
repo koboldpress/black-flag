@@ -22,8 +22,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 			critical: { label: game.i18n.localize("BF.Roll.Action.Critical.Label") },
 			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") }
 		};
-		if (this.config.allowCritical === false || this.config.rolls?.every(r => r.options.allowCritical === false))
-			delete buttons.critical;
+		if (this.config.allowCritical === false) delete buttons.critical;
 		return buttons;
 	}
 
@@ -61,8 +60,8 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	_finalizeRolls(action) {
 		const rolls = [];
 		for (const roll of this.rolls) {
-			roll.options.critical = action === "critical";
-			roll.configureRoll();
+			roll.options.isCritical = action === "critical";
+			roll.configureRoll({ critical: this.object.critical });
 			rolls.push(roll);
 		}
 		return rolls;

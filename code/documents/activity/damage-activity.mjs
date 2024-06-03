@@ -164,9 +164,8 @@ export default class DamageActivity extends Activity {
 						options: {
 							damageType: damage.type,
 							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
-								rollData: rollData
+								rollData
 							})
-							// TODO: Get critical settings
 						}
 					},
 					config
