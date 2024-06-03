@@ -1,0 +1,123 @@
+{
+  "folder": "PEMLuhC7aYMz4s84",
+  "name": "Relentless Rage",
+  "type": "feature",
+  "_id": "IxEBc6O95t04pcEp",
+  "img": "icons/magic/death/skull-fire-white-yellow.webp",
+  "system": {
+    "activities": {
+      "LyHU54F86ibDcus0": {
+        "type": "savingThrow",
+        "_id": "LyHU54F86ibDcus0",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "10 + @item.uses.value * 5"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "If you are reduced to 0 hit points while raging"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "-1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "10"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Your rage lets you shrug off even lethal wounds. While raging, if you are reduced to 0 hit points, you can make a [[/save]] save. On a success, you don't fall unconscious until your current rage ends. You still make death saves and can be killed outright if you take damage from a single source equal to your hit point maximum. Even if you fail three death saves during your rage, you only die if you end your turn with 0 hit points.</p><p>Each time you use this feature after the first, the DC increases by 5. When you finish a short or long rest, the DC resets to 10.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "relentless-rage",
+      "associated": "barbarian"
+    },
+    "level": {
+      "value": 14
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717383291382,
+    "modifiedTime": 1717386241003,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!IxEBc6O95t04pcEp"
+}

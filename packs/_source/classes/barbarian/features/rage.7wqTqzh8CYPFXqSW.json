@@ -1,0 +1,165 @@
+{
+  "folder": "PEMLuhC7aYMz4s84",
+  "name": "Rage",
+  "type": "feature",
+  "_id": "7wqTqzh8CYPFXqSW",
+  "img": "icons/skills/wounds/injury-face-impact-orange.webp",
+  "system": {
+    "activities": {
+      "hfcWGOvJneGdddIi": {
+        "type": "utility",
+        "_id": "hfcWGOvJneGdddIi",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Begin Raging",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@scale.barbarian.rages"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>In battle, you fight with primal ferocity. On your turn, you can rage as a bonus action.</p><p>While raging, you gain the following benefits if you aren’t wearing heavy armor:</p><ul><li><p>You have advantage on STR ability checks and saves.</p></li><li><p>When you make a melee weapon attack using STR, you gain a bonus to the damage roll, which increases as you gain levels as a barbarian (as shown in the Rage Damage column of the <strong>Barbarian Progression</strong> table). The damage type of this extra damage matches that of the weapon used to deal it.</p></li><li><p>You have resistance to bludgeoning, piercing, and slashing damage.</p></li></ul><p>If you can cast spells, you can’t cast them or concentrate on them while raging.</p><p>Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature or taken damage from a hostile creature since the start of your last turn. You can also end your rage early with a bonus action on your turn.</p><p>You can rage a number of times equal to the number listed in the <strong>Barbarian Progression</strong> table. You regain all expended uses of Rage when you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "rage",
+      "associated": "barbarian"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/skills/wounds/injury-face-impact-orange.webp",
+      "origin": "Compendium.black-flag.classes.Item.7wqTqzh8CYPFXqSW",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Rage",
+      "_id": "LkVwlaV9hQ35ooLr",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{\"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"type\", \"v\": \"ability-save\" }]}, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR ability checks and saves while raging.\" } }"
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "bludgeoning"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "piercing"
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "slashing"
+        }
+      ],
+      "description": "",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!7wqTqzh8CYPFXqSW.LkVwlaV9hQ35ooLr"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717383139458,
+    "modifiedTime": 1717385001916,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!7wqTqzh8CYPFXqSW"
+}

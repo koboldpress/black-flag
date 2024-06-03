@@ -1,0 +1,80 @@
+{
+  "folder": "PEMLuhC7aYMz4s84",
+  "name": "Unarmored Defense",
+  "type": "feature",
+  "_id": "nBBXe8AplujmpsUp",
+  "img": "icons/skills/wounds/anatomy-bone-joint.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "NpoDYYtgnQrBwllO": {
+        "type": "property",
+        "_id": "NpoDYYtgnQrBwllO",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.ac.formulas",
+              "mode": 2,
+              "value": "{ \"label\": \"Unarmored Defense\", \"formula\": \"13 + @abilities.constitution.mod\", \"armored\": false }"
+            }
+          ]
+        },
+        "level": {
+          "value": 1,
+          "classIdentifier": "barbarian",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Unarmored Defense",
+        "icon": "",
+        "hint": ""
+      }
+    },
+    "description": {
+      "value": "<p>While you aren't wearing any armor, your AC equals 13 + your CON modifier. (DEX doesn't factor into your AC for this class feature.) You can use a shield and still gain this benefit.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "unarmored-defense",
+      "associated": "barbarian"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.031",
+    "coreVersion": "11.315",
+    "createdTime": 1717383157324,
+    "modifiedTime": 1717385173694,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!nBBXe8AplujmpsUp"
+}
