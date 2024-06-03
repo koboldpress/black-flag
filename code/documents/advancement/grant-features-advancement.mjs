@@ -132,7 +132,7 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
 		const keyPath = this.storagePath(this.relavantLevel(levels));
-		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document.id);
+		const deleteIds = (foundry.utils.getProperty(this.value, keyPath) ?? []).map(d => d.document?.id).filter(i => i);
 		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
 		return await this.actor.update(
 			{

@@ -97,6 +97,7 @@ export default class GrantSpellsAdvancement extends GrantFeaturesAdvancement {
 		const deleteIds = [];
 		const updates = [];
 		for (const added of foundry.utils.getProperty(this.value, keyPath) ?? []) {
+			if (!added.document) continue;
 			if (added.modified)
 				updates.push({
 					_id: added.document.id,

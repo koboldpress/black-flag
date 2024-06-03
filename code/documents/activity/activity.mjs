@@ -158,7 +158,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {object}
 	 */
 	get modifierData() {
-		return { activity: this.system, item: this.item.getRollData() };
+		return {
+			activity: this.system,
+			actor: this.actor.getRollData(),
+			item: this.item.getRollData()?.item
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

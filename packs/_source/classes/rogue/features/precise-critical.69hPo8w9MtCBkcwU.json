@@ -29,13 +29,39 @@
           }
         },
         "level": {
-          "classIdentifier": ""
+          "classIdentifier": "rogue"
         },
         "flags": {},
         "title": "Precise Critical",
         "icon": "",
         "hint": "",
-        "identifier": ""
+        "identifier": "critical"
+      },
+      "t7J7wjNyweLnamh9": {
+        "type": "property",
+        "_id": "t7J7wjNyweLnamh9",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"critical-threshold\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"k\": \"activity.type.value\", \"v\": \"ranged\" }, { \"k\": \"item.properties\", \"o\": \"has\", \"v\": \"finesse\" }] }, { \"k\": \"activity.type.classification\", \"v\": \"weapon\" }], \"formula\": \"19\" }"
+            },
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"critical-dice\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"k\": \"activity.type.value\", \"v\": \"ranged\" }, { \"k\": \"item.properties\", \"o\": \"has\", \"v\": \"finesse\" }] }, { \"k\": \"activity.type.classification\", \"v\": \"weapon\" }], \"formula\": \"@scale.rogue.critical\" }"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Precise Critical",
+        "icon": "",
+        "hint": ""
       }
     },
     "description": {
@@ -67,10 +93,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.026",
+    "systemVersion": "0.9.031",
     "coreVersion": "11.315",
     "createdTime": 1715739846053,
-    "modifiedTime": 1715740209199,
+    "modifiedTime": 1717438125685,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!69hPo8w9MtCBkcwU"
