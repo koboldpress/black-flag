@@ -5,12 +5,14 @@ import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
 import * as ammunition from "./ammunition.mjs";
 import * as armor from "./armor.mjs";
+import * as canvas from "./canvas.mjs";
 import * as conditions from "./conditions.mjs";
 import * as containers from "./containers.mjs";
 import * as damage from "./damage.mjs";
 import * as dice from "./dice.mjs";
 import * as documents from "./documents.mjs";
 import * as enrichers from "./enrichers.mjs";
+import * as fonts from "./fonts.mjs";
 import * as inventory from "./inventory.mjs";
 import * as items from "./items.mjs";
 import * as modifiers from "./modifiers.mjs";
@@ -76,12 +78,14 @@ export default {
 	...advancement,
 	...ammunition,
 	...armor,
+	...canvas,
 	...conditions,
 	...containers,
 	...damage,
 	...dice,
 	...documents,
 	...enrichers,
+	...fonts,
 	...items,
 	...inventory,
 	...modifiers,

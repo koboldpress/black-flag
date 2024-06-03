@@ -8,6 +8,7 @@
 import "../styles/_module.css";
 
 import * as applications from "./applications/_module.mjs";
+import * as canvas from "./canvas/_module.mjs";
 import config from "./config/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
@@ -39,9 +40,11 @@ Hooks.once("init", function () {
 	CONFIG.ActiveEffect.legacyTransferral = false;
 	CONFIG.Item.collection = data.collection.BlackFlagItems;
 	CONFIG.Item.compendiumIndexFields.push("system.container");
+	CONFIG.Note.objectClass = canvas.BlackFlagNote;
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	CONFIG.ui.items = applications.item.BlackFlagItemDirectory;
 	applications.registerCustomElements();
+	config._configureFonts();
 	config._configureStatusEffects();
 	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();

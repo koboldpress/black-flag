@@ -41,4 +41,21 @@ export default class MapLocationJournalPageData extends BaseDataModel {
 		if (!this.code) return;
 		return { number: this.code, adjustment: -1 };
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a control icon for rendering this page on a scene.
+	 * @param {object} options - Options passed through to ControlIcon construction.
+	 * @returns {PIXI.Container|void}
+	 */
+	getControlIcon(options) {
+		if (!this.code) return;
+		const { icon: IconClass, ...style } = foundry.utils.mergeObject(
+			CONFIG.BlackFlag.mapLocationMarkerStyle.default,
+			CONFIG.BlackFlag.mapLocationMarkerStyle[this.parent.getFlag("black-flag", "mapMarkerStyle")] ?? {},
+			{ inplace: false }
+		);
+		return new IconClass({ code: this.code, ...options, ...style });
+	}
 }
