@@ -74,7 +74,11 @@ export default class AttackActivity extends DamageActivity {
 
 	/** @inheritDoc */
 	get modifierData() {
-		return { type: "attack", ...super.modifierData };
+		return {
+			type: "attack",
+			ability: this.attackAbility,
+			...super.modifierData
+		};
 	}
 
 	// TODO: Prepare proper title like "Melee Weapon Attack"

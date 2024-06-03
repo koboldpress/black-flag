@@ -96,7 +96,8 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareData() {
-		this.parent.setProperty("system.type.value", "system.type.classification");
+		this.parent.setProperty("system.type.value", "system.type.value");
+		this.parent.setProperty("system.type.classification", "system.type.classification");
 		this.type.value ??= "melee";
 		this.type.classification ??= "weapon";
 	}
