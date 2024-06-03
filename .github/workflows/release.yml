@@ -143,7 +143,7 @@ jobs:
         draft: ${{ github.event.release.unpublished }}
         prerelease: ${{ github.event.release.prerelease }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './{{ steps.buildconfig.outputs.package.type }}.json, ./${{ env.ZIP_NAME }}'
+        artifacts: './${{ steps.type.outputs.value }}.json, ./${{ env.ZIP_NAME }}'
         tag: ${{ env.VERSION }}
         body: |
           ${{ github.event.release.body }}
