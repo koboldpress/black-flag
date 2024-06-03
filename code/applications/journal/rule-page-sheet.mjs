@@ -10,7 +10,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
 		return options;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritdoc */
 	get template() {
@@ -19,7 +19,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
 			: "templates/journal/page-text-view.html";
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritdoc */
 	async getData(options) {

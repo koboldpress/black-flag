@@ -6,6 +6,7 @@
  * @param {string} options.textKeyPath - The path to the specific HTML field being edited.
  */
 export default class JournalEditor extends DocumentSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["journal-editor"],
@@ -20,6 +21,7 @@ export default class JournalEditor extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	get title() {
 		if (this.options.title) return `${this.document.name}: ${this.options.title}`;
 		else return this.document.name;
@@ -27,6 +29,7 @@ export default class JournalEditor extends DocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options = {}) {
 		return foundry.utils.mergeObject(await super.getData(options), {
 			enriched: await TextEditor.enrichHTML(foundry.utils.getProperty(this.document, this.options.textKeyPath) ?? "", {

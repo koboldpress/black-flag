@@ -60,7 +60,12 @@ export const _documentCategories = {
 	},
 	JournalEntryPage: {
 		summaries: {
-			types: [journalTypes.ClassJournalPageData, journalTypes.SubclassJournalPageData, journalTypes.RuleJournalPageData]
+			types: [
+				journalTypes.ClassJournalPageData,
+				journalTypes.SubclassJournalPageData,
+				journalTypes.MapLocationJournalPageData,
+				journalTypes.RuleJournalPageData
+			]
 		}
 	}
 };
