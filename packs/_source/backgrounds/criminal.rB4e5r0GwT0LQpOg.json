@@ -1,0 +1,129 @@
+{
+  "name": "Criminal",
+  "type": "background",
+  "_id": "rB4e5r0GwT0LQpOg",
+  "img": "icons/commodities/currency/coin-inset-skull-copper.webp",
+  "system": {
+    "advancement": {
+      "S0mJoNomg3fwsPh9": {
+        "type": "trait",
+        "title": "Skill Proficiencies",
+        "configuration": {
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:deception",
+                "skills:insight",
+                "skills:investigation",
+                "skills:stealth"
+              ]
+            }
+          ],
+          "mode": "default",
+          "grants": [],
+          "choiceMode": "inclusive"
+        },
+        "_id": "S0mJoNomg3fwsPh9",
+        "level": {
+          "value": 0
+        },
+        "flags": {},
+        "icon": "",
+        "hint": "Choose two from Stealth, Investigation, Insight, or Deception.",
+        "selectedIndex": "0",
+        "selectedTrait": "skills"
+      },
+      "uhDnJGd03n5tf8QI": {
+        "type": "trait",
+        "title": "Additional Proficiencies",
+        "_id": "uhDnJGd03n5tf8QI",
+        "configuration": {
+          "mode": "default",
+          "grants": [
+            "languages:secret:thievesCant"
+          ],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "languages:*"
+              ]
+            },
+            {
+              "count": 1,
+              "pool": [
+                "tools:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 0
+        },
+        "flags": {},
+        "icon": "",
+        "hint": "You know Thieves’ Cant. If you already know this language, you learn a different language of your choice. Gain proficiency with a tool and a vehicle.",
+        "selectedIndex": "1",
+        "selectedTrait": "tools"
+      },
+      "f5eehJFY4H9AkMBJ": {
+        "type": "chooseFeatures",
+        "title": "Talent",
+        "configuration": {
+          "choices": {
+            "0": 1
+          },
+          "allowDrops": false,
+          "type": "talent",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.talents.Item.j9tVyE1I44NJxqUR"
+            },
+            {
+              "uuid": "Compendium.black-flag.talents.Item.R7ePJd2INo50LAx8"
+            },
+            {
+              "uuid": "Compendium.black-flag.talents.Item.a89OU77hOUv438yn"
+            }
+          ],
+          "restriction": {
+            "category": ""
+          }
+        },
+        "_id": "f5eehJFY4H9AkMBJ",
+        "level": {},
+        "flags": {},
+        "icon": "",
+        "hint": "You have eked out a living on the fringes of lawful society. Choose a talent from this list to represent your experience: Covert, Scrutinous, or Touch of Luck."
+      }
+    },
+    "description": {
+      "value": "<p>@Embed[.Advancement.S0mJoNomg3fwsPh9 inline]{Skill Proficiencies}</p><p>@Embed[.Advancement.uhDnJGd03n5tf8QI inline]{Additional Proficiencies}</p><p><em><strong>Equipment:</strong></em> Five pieces of chalk, a grappling hook, a set of dark traveler’s clothes or a costume, and a pouch containing 10 gp.</p><h5>Talent</h5><p>@Embed[.Advancement.f5eehJFY4H9AkMBJ inline list=false]</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "identifier": {
+      "value": "criminal"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717530571047,
+    "modifiedTime": 1717530946053,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!rB4e5r0GwT0LQpOg"
+}

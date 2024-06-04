@@ -54,8 +54,7 @@
             {
               "count": 1,
               "pool": [
-                "tools:artisan:*",
-                "tools:vehicle:*"
+                "tools:*"
               ]
             }
           ],
@@ -65,16 +64,16 @@
           "hint": ""
         },
         "flags": {},
-        "selectedIndex": "0",
-        "selectedTrait": "languages",
-        "hint": "Learn two additional languages of your choice or gain proficiency with one type of tool or vehicle relevant to your field of study."
+        "selectedIndex": "1",
+        "selectedTrait": "tools",
+        "hint": "Learn two additional languages of your choice or gain proficiency with a tool or vehicle relevant to your field of study."
       },
       "8jc0KWnsuX1WvfdT": {
         "type": "chooseFeatures",
         "_id": "8jc0KWnsuX1WvfdT",
         "title": "Talent",
-        "icon": null,
-        "hint": "As a scholar, you have spent time researching particular academic subjects at an institute of learning or under a knowledgeable teacher. Choose a talent from the following list to represent this experience.",
+        "icon": "",
+        "hint": "You have spent time researching particular academic subjects at an institute of learning or under a knowledgeable teacher. Choose a talent from this list to represent your experience: Polyglot, Ritualist, or School Specialization.",
         "configuration": {
           "restriction": {
             "category": ""
@@ -89,10 +88,10 @@
               "uuid": "Compendium.black-flag.talents.Item.6khzLigcWfJj93jG"
             },
             {
-              "uuid": "Compendium.black-flag.talents.Item.nYc9jTRZrMMw8NoX"
+              "uuid": "Compendium.black-flag.talents.Item.XgPmZKWdA0WJ9BVl"
             },
             {
-              "uuid": "Compendium.black-flag.talents.Item.ObjD4NtWZolqK6hY"
+              "uuid": "Compendium.black-flag.talents.Item.nYc9jTRZrMMw8NoX"
             }
           ]
         },
@@ -101,9 +100,11 @@
       }
     },
     "description": {
-      "short": "Whether enrolled in an institution of learning or apprenticed to a distinguished sage, you spent years researching a branch of study.",
-      "source": "Player's Guide",
-      "value": "<p>Whether enrolled in an institution of learning or apprenticed to a distinguished sage, you spent years researching a branch of study. Time spent in academic pursuits has honed your mind, allowing you to view the world through an intellectual lens afforded to few.</p><p>Perhaps you are a new graduate eager to learn more of the world, a retired teacher ready for new adventures, or a discredited researcher driven to prove your theories. Regardless, your way has always been lit by your keen mind and driven by an unquenchable thirst for knowledge.</p><p>@Embed[.Advancement.pEYskJJdpwVHJhJi inline]{Skill Proficiencies}</p><p>@Embed[.Advancement.3Qnb0oAVdHBgsK8t inline]{Additional Proficiencies}</p><p><em><strong>Equipment:</strong></em> A bottle of ink, a quill, a small knife, a reference book on a highly specific subject of your choice, a set of common clothes, and a pouch containing 10 gp.</p><h5>Talent</h5><p>@Embed[.Advancement.8jc0KWnsuX1WvfdT inline list=false]</p><h5>Adventuring Motivation</h5><p>@Embed[Compendium.black-flag.tables.RollTable.pcMiAKdOHUmBYH1b classes=\"caption-top\"]</p>",
+      "short": "",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "value": "<p>@Embed[.Advancement.pEYskJJdpwVHJhJi inline]{Skill Proficiencies}</p><p>@Embed[.Advancement.3Qnb0oAVdHBgsK8t inline]{Additional Proficiencies}</p><p><em><strong>Equipment:</strong></em> A bottle of ink, a quill, a small knife, a reference book on a highly specific subject, a set of common clothes, and a pouch containing 10 gp.</p><h5>Talent</h5><p>@Embed[.Advancement.8jc0KWnsuX1WvfdT inline list=false]</p>",
       "journal": "Compendium.black-flag.rules.JournalEntry.ShYcUWLaDqWKdRJb.JournalEntryPage.4xUMOEEWiF7XtEJT"
     },
     "identifier": {
@@ -117,10 +118,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.030",
+    "systemVersion": "0.9.032",
     "coreVersion": "11.315",
     "createdTime": 1694990673091,
-    "modifiedTime": 1716927308078,
+    "modifiedTime": 1717531151829,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "9dRikRUkl51QM1pw",
