@@ -1,0 +1,669 @@
+{
+  "folder": "7PmjslpAX7mMmrcv",
+  "name": "Red Dragon’s Lair",
+  "type": "lair",
+  "_id": "XZLnelxGPTG9ndG7",
+  "img": "icons/magic/earth/lava-explosion-orange.webp",
+  "system": {
+    "description": {
+      "value": "",
+      "lairActions": "<p>On initiative count [[lookup @initiative]] (losing initiative ties), the dragon can take a lair action to cause one of the following effects; the dragon can’t use the same effect two rounds in a row:</p>",
+      "regionalEffects": "<p>The region containing a red dragon’s lair is suffused with fiery chaos, which creates one or more of the following effects:</p>",
+      "conclusion": "<p>If the dragon dies, these effects fade in [[/r 1d10]] days.</p>",
+      "source": {
+				"fallback": "Black Flag Reference Document"
+			}
+    },
+    "initiative": 20
+  },
+  "prototypeToken": {
+    "name": "Red Dragon’s Lair",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "texture": {
+      "src": "icons/magic/earth/lava-explosion-orange.webp",
+      "scaleX": 1,
+      "scaleY": 1,
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "tint": null
+    },
+    "width": 1,
+    "height": 1,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      },
+      "color": null
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0,
+      "color": null
+    },
+    "detectionModes": [],
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Collapse",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "lairAction"
+        },
+        "activities": {
+          "OSzNJ2OIlVkmt2dl": {
+            "type": "savingThrow",
+            "_id": "OSzNJ2OIlVkmt2dl",
+            "description": "",
+            "system": {
+              "ability": "dexterity",
+              "damage": {
+                "parts": []
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "lair",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "120"
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "units": "foot",
+                "type": "square",
+                "size": "20"
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature"
+              },
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The ceiling on a point the dragon can see within 120 feet of it collapses, covering a 20-foot square area on the ground directly below that point. Each creature in that area must succeed on a [[/save]] save or be knocked prone and buried under the rubble. A buried creature is restrained and unable to breathe or stand up. A creature, including the buried creature, can take its action to free the buried creature by succeeding on a [[/check strength 15]] check while within reach of the buried creature.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "collapse",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "SEIBLeAk6TutvxFK",
+      "img": "icons/magic/earth/explosion-lava-stone-orange.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526484784,
+        "modifiedTime": 1717526830477,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.SEIBLeAk6TutvxFK"
+    },
+    {
+      "name": "Swirling Ash",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "lairAction"
+        },
+        "activities": {
+          "EDYsUeX9MeKOGS6c": {
+            "type": "savingThrow",
+            "_id": "EDYsUeX9MeKOGS6c",
+            "description": "",
+            "system": {
+              "ability": "constitution",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "lair",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "120"
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "units": "foot",
+                "type": "sphere",
+                "size": "30"
+              },
+              "affects": {
+                "choice": false,
+                "type": "creatureObject",
+                "count": ""
+              },
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Searing ash blasts a point the dragon can see within 120 feet of it. Each creature within 30 feet of that point must make a [[/save]] save. On a failure, a creature takes [[/damage average]] damage and is blinded until the end of its next turn. On a success, a creature takes half the damage and isn’t blinded. The ash ignites flammable objects within 30 feet of that point that aren’t being worn or carried.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "swirling-ash",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "C5sQ5Ab6jk24FEPd",
+      "img": "icons/magic/fire/flame-burning-embers-orange.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526486010,
+        "modifiedTime": 1717526755861,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.C5sQ5Ab6jk24FEPd"
+    },
+    {
+      "name": "Conflagrate",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "lairAction"
+        },
+        "activities": {
+          "f5TzNixT5WbqRySj": {
+            "type": "savingThrow",
+            "_id": "f5TzNixT5WbqRySj",
+            "description": "",
+            "system": {
+              "ability": "charisma",
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": "6",
+                    "bonus": "",
+                    "custom": "",
+                    "type": "fire"
+                  }
+                ]
+              },
+              "dc": {
+                "ability": "custom",
+                "formula": "15"
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "lair",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "minute",
+              "override": false,
+              "value": "1"
+            },
+            "range": {
+              "units": "foot",
+              "value": "120"
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1"
+              },
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>One creature the dragon can see within 120 feet of it becomes tethered to the Elemental Plane of Fire. The target must succeed on a [[/save]] save or be burned for 1 minute. While burned, the target takes [[/damage average]] damage at the start of each of its turns. The effect ends early if the target takes cold damage, is submerged in water, or the burn is removed with a greater restoration spell or similar magic.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "conflagrate",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "bNMIQ6dCNZ1Ablil",
+      "img": "icons/magic/fire/beam-jet-stream-spiral-yellow.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526486521,
+        "modifiedTime": 1717526677311,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.bNMIQ6dCNZ1Ablil"
+    },
+    {
+      "name": "Acid Rain",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "regionalEffect"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Within 10 miles of the red dragon’s lair, precipitation is oily and stinks of sulfur. Snow in the area may be gray or black as it falls, appearing like ash, though its temperature is unchanged.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "acid-rain",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "NmbLDBwUhTXKeaaS",
+      "img": "icons/magic/acid/dissolve-pool-bubbles.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526487002,
+        "modifiedTime": 1717526603063,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.NmbLDBwUhTXKeaaS"
+    },
+    {
+      "name": "Incited Rage",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "regionalEffect"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Creatures within 3 miles of the red dragon’s lair are quick to anger and slow to forgive. Such creatures have disadvantage on CHA checks, except CHA (Intimidation), and Beasts in the area that aren’t domesticated are more aggressive than normal.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "incited-rage",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "CGtnMGwtS4i94MKZ",
+      "img": "icons/creatures/abilities/cougar-roar-rush-orange.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526487489,
+        "modifiedTime": 1717526581093,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.CGtnMGwtS4i94MKZ"
+    },
+    {
+      "name": "Unnatural Heat",
+      "type": "feature",
+      "system": {
+        "type": {
+          "category": "monsters",
+          "value": "regionalEffect"
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Within 1 mile of the red dragon’s lair, temperatures are unnaturally high. Vegetation in the area withers and eventually crumbles to dust. Creatures in the area require twice as much water as normal each day to survive, and each creature in the area must succeed on a [[/save constitution 10]] save every hour it remains in the area or suffer one level of exhaustion. Creatures that are resistant or immune to fire damage are unaffected by this regional effect.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "filters": [],
+          "requireAll": true
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "unnatural-heat",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "nPoOUGh0ZtHbZkth",
+      "img": "icons/magic/fire/flame-burning-tree-bush.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "systemId": "black-flag",
+        "systemVersion": "0.9.032",
+        "coreVersion": "11.315",
+        "createdTime": 1717526488631,
+        "modifiedTime": 1717526562480,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!XZLnelxGPTG9ndG7.nPoOUGh0ZtHbZkth"
+    }
+  ],
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717526427358,
+    "modifiedTime": 1717526837725,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!XZLnelxGPTG9ndG7"
+}
