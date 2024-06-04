@@ -48,6 +48,7 @@ export default class LairData extends ActorDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async toEmbed(config, options = {}) {
 		const context = await this.parent.sheet.getData();
 		context.headerLevel = 4;

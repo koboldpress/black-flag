@@ -31,7 +31,7 @@
 		.editor {
 			&:has(> .editor-edit) {
 				min-block-size: 40px;
-				.editor-content > p:first-child {
+				&:not(.prosemirror) .editor-content > p:first-child {
 					text-indent: 20px;
 					> * { text-indent: 0; }
 				}

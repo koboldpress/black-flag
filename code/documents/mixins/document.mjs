@@ -10,8 +10,13 @@ export default Base =>
 		/** @inheritDoc */
 		static getDefaultArtwork(data = {}) {
 			const dataModel = CONFIG[this.metadata.name]?.dataModels[data.type];
-			const { img } = super.getDefaultArtwork(data);
-			return { img: dataModel?.metadata.img ?? img };
+			const { img, texture } = super.getDefaultArtwork(data);
+			return {
+				img: dataModel?.metadata.img ?? img,
+				texture: {
+					src: dataModel?.metadata.img ?? texture?.src ?? img
+				}
+			};
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
