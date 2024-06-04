@@ -1,0 +1,27 @@
+{{#*inline "itemList"}}
+		<ul class="lair-items {{ type }}">
+			{{#each items}}
+			{{#blackFlag-itemContext this as |ctx|}}
+				<li>
+					<span class="list-item-name">{{ name }}</span>
+					{{{ ctx.description }}}
+				</li>
+			{{/blackFlag-itemContext}}
+			{{/each}}
+		</ul>
+{{/inline}}
+
+{{{ enriched.description }}}
+
+{{#if (or enriched.lairActions sections.features.lairActions.items.length)}}
+	<h{{headerLevel}}>{{ localize "BF.Feature.Type.LairAction[other]" }}</h{{headerLevel}}>
+	{{{ enriched.lairActions }}}
+	{{> "itemList" items=sections.features.lairActions.items }}
+{{/if}}
+
+{{#if (or enriched.regionalEffects sections.features.regionalEffects.items.length)}}
+	<h{{headerLevel}}>{{ localize "BF.Feature.Type.RegionalEffect[other]" }}</h{{headerLevel}}>
+	{{{ enriched.regionalEffects }}}
+	{{> "itemList" items=sections.features.regionalEffects.items }}
+	{{{ enriched.conclusion }}}
+{{/if}}

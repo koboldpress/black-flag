@@ -25,6 +25,7 @@ export default class ActorDataModel extends BaseDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async toEmbed(config, options = {}) {
 		if (!foundry.utils.hasProperty(this, "biography.value")) return null;
 		const description = foundry.utils.getProperty(this, "biography.value");

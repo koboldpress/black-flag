@@ -45,6 +45,18 @@ export default class LairData extends ActorDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	async toEmbed(config, options = {}) {
+		const context = await this.parent.sheet.getData();
+		context.headerLevel = 4;
+		const section = document.createElement("section");
+		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/lair-embed.hbs", context);
+		return section.children;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

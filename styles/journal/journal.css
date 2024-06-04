@@ -225,6 +225,14 @@
 			}
 		}
 	}
+
+	ul li {
+		.list-item-name {
+			font-weight: bold;
+			&::after { content: ". "; }
+			& + p { display: inline; }
+		}
+	}
 }
 
 dfn {

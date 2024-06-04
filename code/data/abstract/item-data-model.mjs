@@ -84,6 +84,7 @@ export default class ItemDataModel extends BaseDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async toEmbed(config, options = {}) {
 		if (!foundry.utils.hasProperty(this, "description.value")) return null;
 		const description = foundry.utils.getProperty(this, "description.value");
