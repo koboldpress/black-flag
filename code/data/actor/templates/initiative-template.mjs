@@ -1,13 +1,20 @@
 import Proficiency from "../../../documents/proficiency.mjs";
+import { buildRoll } from "../../../utils/_module.mjs";
 import ProficiencyField from "../../fields/proficiency-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for initiative.
+ *
+ * @property {object} attributes
+ * @property {object} attributes.initiative
+ * @property {string} attributes.initiative.ability - Ability to add to the initiative roll.
+ * @property {Proficiency} attributes.initiative.proficiency - Proficiency in initiative.
  */
 export default class InitiativeTemplate extends foundry.abstract.DataModel {
 
+	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			attributes: new SchemaField({
@@ -23,6 +30,9 @@ export default class InitiativeTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Calculate the derived data on initiative.
+	 */
 	computeInitiative() {
 		const init = this.attributes.initiative ??= {};
 		init.ability ||= CONFIG.BlackFlag.defaultAbilities.initiative;
@@ -49,5 +59,41 @@ export default class InitiativeTemplate extends foundry.abstract.DataModel {
 		});
 
 		init.mod = (ability?.mod ?? 0) + init.proficiency.flat + init.bonus;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	getInitiativeRollConfig(options = {}) {
+		const init = this.attributes?.initiative ?? {};
+		const abilityKey = init.ability ?? CONFIG.BlackFlag.defaultAbilities.initiative;
+		const ability = this.abilities?.[abilityKey] ?? {};
+
+		const rollConfig = {
+			rolls: [
+				{
+					...buildRoll(
+						{
+							mod: ability.mod,
+							prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
+							bonus: this.buildBonus?.(this.getModifiers?.(init.modifiers?._data)),
+							tiebreaker:
+								game.settings.get(game.system.id, "initiativeTiebreaker") && ability ? ability.value / 100 : null
+						},
+						this.getRollData()
+					),
+					options: foundry.utils.mergeObject(
+						{
+							minimum: this.buildMinimum?.(this.getModifiers?.(init.modifiers?._data, "min"))
+						},
+						options
+					)
+				}
+			]
+		};
+
+		return rollConfig;
 	}
 }

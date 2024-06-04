@@ -44,6 +44,15 @@
 	</header>
 
 	<div class="sheet-body">
+		{{#if editable}}
+			<fieldset>
+				<legend>{{ localize "BF.Lair.Details" }}</legend>
+				<label>
+					<span>{{ localize "BF.Initiative.Label" }}</span>
+					<input type="number" name="system.initiative" value="{{ source.initiative }}">
+				</label>
+			</fieldset>
+		{{/if}}
 		{{ editor enriched.description target="system.description.value" button=true editable=editable
 		          engine="prosemirror" collaborate=false }}
 

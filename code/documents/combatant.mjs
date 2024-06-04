@@ -2,12 +2,13 @@
  * Extended version of `Combatant` class to support initiative rolls.
  */
 export default class BlackFlagCombatant extends Combatant {
+	/** @inheritDoc */
 	getInitiativeRoll(formula) {
 		if (formula) return super.getInitiativeRoll(formula);
-		return (
-			this.actor?._cachedInitiativeRolls?.[0]?.clone() ??
-			CONFIG.Dice.ChallengeRoll.create(this.actor?.getInitiativeRollConfig() ?? {})
-		);
+		if (this.actor?._cachedInitiativeRolls?.[0]) return this.actor._cachedInitiativeRolls[0].clone();
+		const config = this.actor?.getInitiativeRollConfig() ?? {};
+		if (config.fixed) return new CONFIG.Dice.BasicRoll(`${config.fixed}`);
+		return CONFIG.Dice.ChallengeRoll.create(config);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -42,6 +42,17 @@ export default class ActorDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Construct an initiative roll.
+	 * @param {ChallengeRollOptions} [options] - Options for the roll.
+	 * @returns {InitiativeRollProcessConfiguration}
+	 */
+	getInitiativeRollConfig(options = {}) {
+		return {};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare a data object which defines the data schema used by dice roll commands against this Actor.
 	 * @param {object} [options]
 	 * @param {boolean} [options.deterministic] - Whether to force deterministic values for data properties that could be

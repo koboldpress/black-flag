@@ -13,6 +13,7 @@ const { HTMLField, NumberField, SchemaField } = foundry.data.fields;
  * @property {string} description.regionalEffects - Introduction to the regional effects section.
  * @property {string} description.conclusion - Conclusion of the regional effects section.
  * @property {SourceField} description.source - Source of the lair's stat block.
+ * @property {number} initiative - Fixed initiative value where lair actions can be triggered.
  */
 export default class LairData extends ActorDataModel {
 	/** @inheritDoc */
@@ -44,12 +45,13 @@ export default class LairData extends ActorDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Properties             */
+	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Preparation          */
-	/* <><><><> <><><><> <><><><> <><><><> */
+	/** @override */
+	getInitiativeRollConfig(options = {}) {
+		return { fixed: this.initiative };
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

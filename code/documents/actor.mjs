@@ -1160,44 +1160,26 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Configuration data for initiative rolls.
+	 *
+	 * @typedef {ChallengeRollProcessConfiguration} InitiativeRollProcessConfiguration
+	 * @property {number} [fixed] - Fixed initiative value, will bypass any rolling.
+	 */
+
+	/**
 	 * Construct an initiative roll.
 	 * @param {ChallengeRollOptions} [options] - Options for the roll.
-	 * @returns {ChallengeRollProcessConfiguration}
+	 * @returns {InitiativeRollProcessConfiguration}
 	 */
 	getInitiativeRollConfig(options = {}) {
-		const init = this.system.attributes?.initiative ?? {};
-		const abilityKey = init.ability ?? CONFIG.BlackFlag.defaultAbilities.initiative;
-		const ability = this.system.abilities?.[abilityKey] ?? {};
-
-		const rollConfig = {
-			rolls: [
-				{
-					...buildRoll(
-						{
-							mod: ability.mod,
-							prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
-							bonus: this.system.buildBonus?.(this.system.getModifiers?.(init.modifiers?._data)),
-							tiebreaker:
-								game.settings.get(game.system.id, "initiativeTiebreaker") && ability ? ability.value / 100 : null
-						},
-						this.getRollData()
-					),
-					options: foundry.utils.mergeObject(
-						{
-							minimum: this.system.buildMinimum?.(this.system.getModifiers?.(init.modifiers?._data, "min"))
-						},
-						options
-					)
-				}
-			]
-		};
+		const rollConfig = this.system.getInitiativeRollConfig?.(options) ?? {};
 
 		/**
 		 * A hook event that fires when initiative roll configuration is being prepared.
 		 * @function blackFlag.initiativeConfig
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the initiative is being configured.
-		 * @param {ChallengeRollProcessConfiguration} config - Configuration data for the pending roll.
+		 * @param {InitiativeRollProcessConfiguration} config - Configuration data for the pending roll.
 		 */
 		Hooks.callAll("blackFlag.initiativeConfig", this, rollConfig);
 
@@ -1208,13 +1190,20 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/**
 	 * Present the initiative roll configuration dialog and then roll initiative.
-	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
+	 * @param {InitiativeRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @returns {Promise<Combat|void>}
 	 */
 	async configureInitiativeRoll(config = {}, dialog = {}) {
 		const init = this.system.attributes?.initiative ?? {};
 		const rollConfig = foundry.utils.mergeObject(this.getInitiativeRollConfig(config.options), config);
+
+		if (rollConfig.fixed) {
+			return await this.rollInitiative({
+				createCombatants: true,
+				initiativeOptions: { formula: `${rollConfig.fixed}` }
+			});
+		}
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{

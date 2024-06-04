@@ -47,6 +47,22 @@ export default class NPCSheet extends BaseActorSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_getHeaderButtons() {
+		const buttons = super._getHeaderButtons();
+		if (this.actor.isOwner && !this.actor.pack) {
+			buttons.splice(buttons.findIndex(b => b.class === "toggle-editing-mode") + 1, 0, {
+				label: "BF.Initiative.Action.Enter",
+				class: "initiative",
+				icon: "fa-solid fa-bolt",
+				onclick: () => this.actor.configureInitiativeRoll()
+			});
+		}
+		return buttons;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

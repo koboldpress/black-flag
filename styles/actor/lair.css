@@ -1,4 +1,21 @@
 .black-flag.lair.sheet {
+	min-block-size: 200px;
+	min-inline-size: 366px;
+	max-block-size: 90vh;
+
+	container: sheet / inline-size;
+
+	@container sheet (width <= 550px) {
+		.window-header .header-button > span {
+			position: absolute;
+			left: -1000px;
+			opacity: 0%;
+			inline-size: 1px;
+			block-size: 1px;
+			overflow: hidden;
+		}
+	}
+
 	.sheet-head {
 		display: flex;
 		gap: 12px;
