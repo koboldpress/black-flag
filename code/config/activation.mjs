@@ -27,6 +27,9 @@ export const actionTypes = {
 	monster: {
 		label: "BF.Activation.Category.Monster.Label",
 		children: {
+			lair: {
+				localization: "BF.Activation.Type.Lair"
+			},
 			legendary: {
 				localization: "BF.Activation.Type.Legendary",
 				scalar: true

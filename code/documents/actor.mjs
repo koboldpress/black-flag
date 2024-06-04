@@ -693,12 +693,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability.mod,
 						prof: ability.check.proficiency.hasProficiency ? ability.check.proficiency.term : null,
-						bonus: this.system.buildBonus(ability.check.modifiers.bonus, { rollData })
+						bonus: this.system.buildBonus?.(ability.check.modifiers.bonus, { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum(ability.check.modifiers.minimum, { rollData }),
+					minimum: this.system.buildMinimum?.(ability.check.modifiers.minimum, { rollData }),
 					target: config.target
 				}
 			}
@@ -710,7 +710,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
-					rollNotes: this.system.getModifiers(ability.check.modifiers._data, "note"),
+					rollNotes: this.system.getModifiers?.(ability.check.modifiers._data, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
@@ -781,12 +781,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability.mod,
 						prof: ability.save.proficiency.hasProficiency ? ability.save.proficiency.term : null,
-						bonus: this.system.buildBonus(ability.save.modifiers.bonus, { rollData })
+						bonus: this.system.buildBonus?.(ability.save.modifiers.bonus, { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum(ability.save.modifiers.minimum, { rollData }),
+					minimum: this.system.buildMinimum?.(ability.save.modifiers.minimum, { rollData }),
 					target: config.target
 				}
 			}
@@ -798,7 +798,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
-					rollNotes: this.system.getModifiers(ability.save.modifiers._data, "note"),
+					rollNotes: this.system.getModifiers?.(ability.save.modifiers._data, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
@@ -886,12 +886,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			{
 				...buildRoll(
 					{
-						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: config.target ?? death.overrides.target ? death.overrides.target : CONFIG.BlackFlag.deathSave.target
 				}
 			}
@@ -901,7 +901,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
-					rollNotes: this.system.getModifiers(modifierData, "note"),
+					rollNotes: this.system.getModifiers?.(modifierData, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
 				}
 			},
@@ -1072,7 +1072,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const rollData = this.getRollData();
 		const modifierData = { type: "hit-die", denomination: config.denomination };
-		const minimum = this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData });
+		const minimum = this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData });
 
 		let die = `1d${config.denomination}`;
 		if (minimum) die = `${die}min${minimum}`;
@@ -1083,7 +1083,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				...buildRoll(
 					{
 						base: `max(0, ${die} + @abilities.${CONFIG.BlackFlag.defaultAbilities.hitPoints}.mod)`,
-						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
 					},
 					rollData
 				)
@@ -1176,7 +1176,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 						{
 							mod: ability.mod,
 							prof: init.proficiency?.hasProficiency ? init.proficiency.term : null,
-							bonus: this.system.buildBonus(this.system.getModifiers(init.modifiers?._data)),
+							bonus: this.system.buildBonus?.(this.system.getModifiers?.(init.modifiers?._data)),
 							tiebreaker:
 								game.settings.get(game.system.id, "initiativeTiebreaker") && ability ? ability.value / 100 : null
 						},
@@ -1184,7 +1184,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					),
 					options: foundry.utils.mergeObject(
 						{
-							minimum: this.system.buildMinimum(this.system.getModifiers(init.modifiers?._data, "min"))
+							minimum: this.system.buildMinimum?.(this.system.getModifiers?.(init.modifiers?._data, "min"))
 						},
 						options
 					)
@@ -1219,7 +1219,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				options: {
-					rollNotes: this.system.getModifiers(init.modifiers?._data, "note"),
+					rollNotes: this.system.getModifiers?.(init.modifiers?._data, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", {
 						type: game.i18n.localize("BF.Initiative.Label")
 					})
@@ -1317,18 +1317,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability?.mod,
 						prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
-						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;
 
-			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
+			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
 
 		const rollConfig = foundry.utils.deepClone(config);
@@ -1437,18 +1437,18 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability?.mod,
 						prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
-						bonus: this.system.buildBonus(this.system.getModifiers(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
 					},
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum(this.system.getModifiers(modifierData, "min"), { rollData }),
+					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
 					target: rollConfig.target ?? config.target
 				}
 			});
 			rollConfig.data.abilityId = abilityId;
 
-			return { rollConfig, rollNotes: this.system.getModifiers(modifierData, "note") };
+			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
 
 		const rollConfig = foundry.utils.deepClone(config);

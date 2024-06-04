@@ -3,6 +3,8 @@
 @import "luck.css";
 @import "proficiency-selector.css";
 
+@import "base.css";
+@import "lair.css";
 @import "npc.css";
 @import "pc.css";
 
@@ -19,16 +21,3 @@
 @import "level-up-dialog.css";
 @import "rest-dialog.css";
 @import "spell-manager.css";
-
-.actor .sheet-body .tab[data-tab] { height: 100%; }
-
-.tab[data-tab] {
-	&.flex-tab {
-		flex-direction: column;
-		&.active { display: flex; }
-		> :last-child { flex-grow: 1; }
-	}
-	&.grid-tab {
-		&.active { display: grid; }
-	}
-}

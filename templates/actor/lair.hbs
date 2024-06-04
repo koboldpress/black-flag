@@ -1,0 +1,69 @@
+{{#*inline "itemList"}}
+	<blackFlag-actions>
+		<ul class="items {{ type }}">
+			{{#each items}}
+			{{#blackFlag-itemContext this as |ctx|}}
+				<li data-item-id="{{ id }}" data-activity-id="{{ ctx.activity.id }}">
+					{{#if @root.editable}}
+					<div class="controls">
+						<button type="button" class="mini-button" data-action="edit"
+						        data-tooltip="{{ localize 'BF.Lair.Action.Edit' type=(localize ../localization) }}"
+										aria-label="{{ localize 'BF.Lair.Action.Edit' type=(localize ../localization) }}">
+							<i class="fa-solid fa-pen-to-square" inert></i>
+						</button>
+						<button type="button" class="mini-button" data-action="delete"
+						        data-tooltip="{{ localize 'BF.Lair.Action.Delete' type=(localize ../localization) }}"
+						        aria-label="{{ localize 'BF.Lair.Action.Delete' type=(localize ../localization) }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</div>
+					{{/if}}
+					<button type="button" class="link-button" data-action="activate">{{ name }}</button>
+					{{{ ctx.description }}}
+				</li>
+			{{/blackFlag-itemContext}}
+			{{/each}}
+		</ul>
+	</blackFlag-actions>
+	{{#if (and editable (ne showAdd false))}}
+		<button type="button" class="light-button" data-action="add" data-type="{{ type }}">
+			<i class="fa-solid fa-plus" inert></i>
+			{{ localize "BF.Lair.Action.Add" type=(localize localization) }}
+		</button>
+	{{/if}}
+{{/inline}}
+
+<form class="sheet-container" id="{{ appID }}-main-form">
+	<header class="sheet-head">
+		<img class="profile icon" src="{{ actor.img }}" alt="{{ actor.name }}"
+				 {{~#if editable}} data-edit="img"{{/if}}>
+		<h1>
+			<input type="text" class="uninput" name="name" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
+						 form="{{ appID }}-main-form" {{ disabled (not editable) }}>
+		</h1>
+	</header>
+
+	<div class="sheet-body">
+		{{ editor enriched.description target="system.description.value" button=true editable=editable
+		          engine="prosemirror" collaborate=false }}
+
+		<h2>{{ localize "BF.Feature.Type.LairAction[other]" }}</h2>
+		{{ editor enriched.lairActions target="system.description.lairActions" button=true editable=editable
+							engine="prosemirror" collaborate=false }}
+		{{> "itemList" type="lairAction" items=sections.features.lairActions.items
+		    localization="BF.Feature.Type.LairAction[one]" }}
+
+		<h2>{{ localize "BF.Feature.Type.RegionalEffect[other]" }}</h2>
+		{{ editor enriched.regionalEffects target="system.description.regionalEffects" button=true editable=editable
+							engine="prosemirror" collaborate=false }}
+		{{> "itemList" type="regionalEffect" items=sections.features.regionalEffects.items
+		    localization="BF.Feature.Type.RegionalEffect[one]" }}
+		{{ editor enriched.conclusion target="system.description.conclusion" button=true editable=editable
+							engine="prosemirror" collaborate=false }}
+
+		{{#if sections.uncategorized}}
+			<h2>{{ localize "BF.Item.Type.Unidentified[other]" }}</h2>
+			{{> "itemList" type="uncategorized" items=sections.uncategorized showAdd=false }}
+		{{/if}}
+	</div>
+</div>

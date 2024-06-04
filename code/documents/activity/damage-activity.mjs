@@ -81,7 +81,7 @@ export default class DamageActivity extends Activity {
 		const allModifiers = rollConfig.rolls?.map(c => c.modifierData) ?? [];
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
-				rollNotes: this.actor?.system.getModifiers(allModifiers, "note"),
+				rollNotes: this.actor?.system.getModifiers?.(allModifiers, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 			}
 		});
@@ -151,7 +151,7 @@ export default class DamageActivity extends Activity {
 			const modifierData = { ...this.modifierData, type: "damage", damage };
 			const { parts, data } = buildRoll(
 				{
-					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+					bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData })
 				},
 				rollData
 			);
@@ -163,7 +163,7 @@ export default class DamageActivity extends Activity {
 						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
 						options: {
 							damageType: damage.type,
-							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
+							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 								rollData
 							})
 						}

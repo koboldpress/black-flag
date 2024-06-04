@@ -97,7 +97,15 @@ export const featureCategories = {
 		sources: ["heritage"]
 	},
 	monsters: {
-		localization: "BF.Feature.Category.Monster"
+		localization: "BF.Feature.Category.Monster",
+		children: {
+			lairAction: {
+				localization: "BF.Feature.Type.LairAction"
+			},
+			regionalEffect: {
+				localization: "BF.Feature.Type.RegionalEffect"
+			}
+		}
 	},
 	talent: {
 		localization: "BF.Feature.Category.Talent"
@@ -106,6 +114,7 @@ export const featureCategories = {
 localizeConfig(featureCategories, { sort: false });
 localizeConfig(featureCategories.class.children);
 localizeConfig(featureCategories.lineage.children);
+localizeConfig(featureCategories.monsters.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

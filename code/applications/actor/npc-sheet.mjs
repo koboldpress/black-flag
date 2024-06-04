@@ -379,14 +379,6 @@ export default class NPCSheet extends BaseActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(html) {
-		super.activateListeners(html);
-		html.on("sl-change", "sl-select", this._onChangeInput.bind(this));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
 	_getSubmitData(updateData = {}) {
 		const data = super._getSubmitData(updateData);
 

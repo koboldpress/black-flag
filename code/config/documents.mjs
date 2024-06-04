@@ -11,6 +11,10 @@ export const _documentCategories = {
 		person: {
 			label: "BF.Actor.Category.Person.Label",
 			types: [actorTypes.PCData, actorTypes.NPCData]
+		},
+		place: {
+			label: "BF.Actor.Category.Place.Label",
+			types: [actorTypes.LairData]
 		}
 	},
 	Item: {

@@ -17,7 +17,7 @@ export default class RuleJournalPageData extends BaseDataModel {
 			localization: "BF.JournalPage.Type.Rule",
 			sheet: {
 				application: RulePageSheet,
-				label: "BF.Sheet.Default.RulePage"
+				label: "BF.Sheet.Default.Rule"
 			}
 		};
 	}

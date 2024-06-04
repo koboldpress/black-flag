@@ -1,3 +1,4 @@
+export { default as LairData } from "./lair-data.mjs";
 export { default as NPCData } from "./npc-data.mjs";
 export { default as PCData } from "./pc-data.mjs";
 

@@ -129,11 +129,11 @@ export default class AttackActivity extends DamageActivity {
 				parts,
 				data,
 				options: {
-					criticalSuccess: this.actor?.system.mergeModifiers(
-						this.actor?.system.getModifiers(this.modifierData, "critical-threshold"),
+					criticalSuccess: this.actor?.system.mergeModifiers?.(
+						this.actor?.system.getModifiers?.(this.modifierData, "critical-threshold"),
 						{ mode: "smallest", rollData: data }
 					),
-					minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(this.modifierData, "min"), {
+					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(this.modifierData, "min"), {
 						rollData: data
 					})
 				}
@@ -142,7 +142,7 @@ export default class AttackActivity extends DamageActivity {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
-				rollNotes: this.actor?.system.getModifiers(this.modifierData, "note"),
+				rollNotes: this.actor?.system.getModifiers?.(this.modifierData, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 			}
 		});
@@ -202,7 +202,7 @@ export default class AttackActivity extends DamageActivity {
 			const { parts, data } = buildRoll(
 				{
 					mod: this.damageModifier,
-					bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData }),
+					bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData }),
 					magic: this.item.system.damageMagicalBonus
 				},
 				rollData
@@ -215,13 +215,13 @@ export default class AttackActivity extends DamageActivity {
 						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
 						options: {
 							critical: {
-								bonusDice: this.actor?.system.mergeModifiers(
-									this.actor?.system.getModifiers(modifierData, "critical-dice"),
+								bonusDice: this.actor?.system.mergeModifiers?.(
+									this.actor?.system.getModifiers?.(modifierData, "critical-dice"),
 									{ deterministic: true, rollData }
 								)
 							},
 							damageType: damage.type,
-							minimum: this.actor?.system.buildMinimum(this.actor?.system.getModifiers(modifierData, "min"), {
+							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 								rollData: rollData
 							})
 						}
@@ -251,7 +251,9 @@ export default class AttackActivity extends DamageActivity {
 						prof: this.system.attackProficiency?.term,
 						bonus: this.system.attack.bonus,
 						magic: this.item.system.attackMagicalBonus,
-						actorBonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(this.modifierData), { rollData })
+						actorBonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(this.modifierData), {
+							rollData
+						})
 					},
 			rollData
 		);

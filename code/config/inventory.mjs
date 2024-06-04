@@ -283,6 +283,24 @@ export const sheetSections = {
 			options: { autoHide: true }
 		}
 	],
+	lair: [
+		{
+			id: "lairActions",
+			tab: "features",
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.value", v: "lairAction" }
+			]
+		},
+		{
+			id: "regionalEffects",
+			tab: "features",
+			filters: [
+				{ k: "type", v: "feature" },
+				{ k: "system.type.value", v: "regionalEffect" }
+			]
+		}
+	],
 	container: [
 		currencySection(),
 		{

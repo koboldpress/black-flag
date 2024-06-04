@@ -83,6 +83,21 @@
 	}
 }
 
+.mini-button {
+	all: unset;
+	border: .5px solid var(--bf-color-border-blue);
+	border-radius: 4px;
+	padding-inline-start: 2px;
+	padding-block: 1px;
+	background: var(--bf-color-fill);
+	box-shadow: 0 0 1px var(--color-shadow-dark);
+	color: var(--bf-blue);
+	font-size: var(--font-size-12);
+	cursor: pointer;
+	&:hover, &:focus { box-shadow: none; }
+	&:hover, &:focus-visible { text-shadow: 0 0 8px var(--bf-text-shadow-blue); }
+}
+
 .collapsible {
 	&.collapsed {
 		.fa-caret-down, .fa-chevron-down { transform: rotate(-90deg); }

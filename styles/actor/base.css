@@ -1,0 +1,27 @@
+.actor.sheet {
+	scrollbar-width: thin;
+	scrollbar-color: var(--bf-blue) transparent;
+
+	.profile {
+		border: 1px solid transparent;
+		border-radius: 0;
+		cursor: pointer;
+
+		&[data-edit] {
+			border-color: var(--bf-color-border-blue);
+		}
+	}
+}
+
+.actor .sheet-body .tab[data-tab] { height: 100%; }
+
+.tab[data-tab] {
+	&.flex-tab {
+		flex-direction: column;
+		&.active { display: flex; }
+		> :last-child { flex-grow: 1; }
+	}
+	&.grid-tab {
+		&.active { display: grid; }
+	}
+}

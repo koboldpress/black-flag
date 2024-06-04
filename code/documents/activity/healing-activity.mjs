@@ -100,7 +100,7 @@ export default class HealingActivity extends Activity {
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
-				rollNotes: this.actor?.system.getModifiers(rollConfig.modifierData, "note"),
+				rollNotes: this.actor?.system.getModifiers?.(rollConfig.modifierData, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 			}
 		});
@@ -169,7 +169,7 @@ export default class HealingActivity extends Activity {
 		const { parts, data } = buildRoll(
 			{
 				mod: ability?.mod,
-				bonus: this.actor?.system.buildBonus(this.actor?.system.getModifiers(modifierData), { rollData })
+				bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData })
 			},
 			rollData
 		);
@@ -182,8 +182,8 @@ export default class HealingActivity extends Activity {
 				options: {
 					damageType: healing.type,
 					modifierData,
-					minimum: this.actor?.system.buildMinimum(
-						this.actor?.system.getModifiers(this.modifierData, "min", { rollData })
+					minimum: this.actor?.system.buildMinimum?.(
+						this.actor?.system.getModifiers?.(this.modifierData, "min", { rollData })
 					)
 				}
 			}

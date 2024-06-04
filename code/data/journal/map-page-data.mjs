@@ -16,7 +16,7 @@ export default class MapLocationJournalPageData extends BaseDataModel {
 			localization: "BF.JournalPage.Type.Map",
 			sheet: {
 				application: MapLocationPageSheet,
-				label: "BF.Sheet.Default.RulePage"
+				label: "BF.Sheet.Default.Map"
 			}
 		};
 	}
