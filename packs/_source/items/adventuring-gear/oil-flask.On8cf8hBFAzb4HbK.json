@@ -27,7 +27,10 @@
               }
             ]
           },
-          "ability": "dexterity"
+          "ability": "",
+          "attack": {
+            "bonus": ""
+          }
         },
         "activation": {
           "type": "action",
@@ -52,7 +55,20 @@
           "max": ""
         },
         "name": "Throw",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "target": {
+          "affects": {
+            "type": "creatureObject",
+            "count": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "20"
+        }
       }
     },
     "uses": {
@@ -74,7 +90,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.</p>",
+      "value": "<p>Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash oil onto a creature within 5 feet of you or throw the flask up to 20 feet, shattering on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -92,10 +108,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.021",
+    "systemVersion": "0.9.032",
     "coreVersion": "11.315",
     "createdTime": 1707363488573,
-    "modifiedTime": 1713284338035,
+    "modifiedTime": 1717532913938,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!On8cf8hBFAzb4HbK"

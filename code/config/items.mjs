@@ -154,6 +154,12 @@ export const gearCategories = {
 			},
 			holySymbol: {
 				localization: "BF.Item.Focus.Type.HolySymbol"
+			},
+			primordialFocus: {
+				localization: "BF.Item.Focus.Type.PrimordialFocus"
+			},
+			wyrdFocus: {
+				localization: "BF.Item.Focus.Type.WyrdFocus"
 			}
 		}
 	},

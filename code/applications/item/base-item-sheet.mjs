@@ -69,6 +69,21 @@ export default class BaseItemSheet extends ItemSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	async activateEditor(name, options = {}, initialContent = "") {
+		options.relativeLinks = true;
+		options.plugins = {
+			menu: ProseMirror.ProseMirrorMenu.build(ProseMirror.defaultSchema, {
+				compact: true,
+				destroyOnSave: true,
+				onSave: () => this.saveEditor(name, { remove: true })
+			})
+		};
+		return super.activateEditor(name, options, initialContent);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];

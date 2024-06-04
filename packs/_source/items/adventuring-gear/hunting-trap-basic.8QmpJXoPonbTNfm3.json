@@ -1,0 +1,165 @@
+{
+  "name": "Hunting Trap (basic)",
+  "type": "gear",
+  "_id": "8QmpJXoPonbTNfm3",
+  "img": "icons/environment/traps/trap-jaw-green.webp",
+  "system": {
+    "activities": {
+      "4KunbuokirNnSsob": {
+        "type": "utility",
+        "_id": "4KunbuokirNnSsob",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Set Trap",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "sGhrx4gi7ctwk9H1": {
+        "type": "savingThrow",
+        "_id": "sGhrx4gi7ctwk9H1",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": "4",
+                "bonus": "",
+                "custom": "",
+                "type": "piercing"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "13"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When a Large or smaller creature that enters the trap’s space"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Trigger Trap",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>As an action, you can set a trap in an unoccupied space within 5 feet of you. When set, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. A Large or smaller creature that enters the trap’s space must succeed on a [[/save dexterity 13]] save or take [[/damage 1d4 piercing]] damage and become grappled until freed. A creature can use its action to make a [[/check strength athletics 13]] check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "price": {
+      "value": 5,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 25,
+      "units": "pound"
+    },
+    "properties": [],
+    "type": {
+      "category": "adventuringGear"
+    },
+    "rarity": ""
+  },
+  "effects": [],
+  "folder": "rhfOfTxdUyaktll6",
+  "sort": 101563,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717532017747,
+    "modifiedTime": 1717533634317,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!8QmpJXoPonbTNfm3"
+}
