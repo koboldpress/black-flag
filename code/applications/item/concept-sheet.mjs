@@ -2,10 +2,11 @@ import AdvancementElement from "../components/advancement.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class ConceptSheet extends BaseItemSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "concept", "item", "sheet"],
-			dragDrop: [{ dropSelector: ".drop-target" }],
+			dragDrop: [{ dropSelector: "form" }],
 			tabs: [
 				{
 					group: "primary",
@@ -22,6 +23,7 @@ export default class ConceptSheet extends BaseItemSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static enrichedFields = foundry.utils.mergeObject(
 		super.enrichedFields,
 		{
@@ -34,6 +36,7 @@ export default class ConceptSheet extends BaseItemSheet {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		context.advancement = AdvancementElement.prepareContext(this.item.system.advancement);
@@ -45,6 +48,7 @@ export default class ConceptSheet extends BaseItemSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onAction(event) {
 		const { action } = event.currentTarget.dataset;
 		switch (action) {
@@ -58,11 +62,23 @@ export default class ConceptSheet extends BaseItemSheet {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onDrop(event) {
 		event.preventDefault();
 		const data = TextEditor.getDragEventData(event);
-		if (!["JournalEntry", "JournalEntryPage"].includes(data.type) || !data.uuid) return super._onDrop(event);
 
-		await this.document.update({ "system.description.journal": data.uuid });
+		switch (data.type) {
+			case "Advancement":
+				const advancement = (await fromUuid(data.uuid)).toObject() ?? data.data;
+				return AdvancementElement.dropAdvancement(event, this.item, [advancement]);
+			case "Item":
+				const item = await Item.implementation.fromDropData(data);
+				return AdvancementElement.dropItems(event, this.item, [item]);
+			case "JournalEntry":
+			case "JournalEntryPage":
+				if (data.uuid) return await this.document.update({ "system.description.journal": data.uuid });
+		}
+
+		return super._onDrop(event);
 	}
 }

@@ -129,25 +129,25 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		return [
 			{
 				name: "BF.Advancement.Core.Action.View",
-				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				icon: "<i class='fa-solid fa-eye fa-fw' inert></i>",
 				condition: li => advancement && !this.isEditable,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
 				name: "BF.Advancement.Core.Action.Edit",
-				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
+				icon: "<i class='fa-solid fa-edit fa-fw' inert></i>",
 				condition: li => advancement && this.isEditable,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: "BF.Advancement.Core.Action.Duplicate",
-				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
+				icon: "<i class='fa-solid fa-copy fa-fw' inert></i>",
 				condition: li => this.isEditable && advancement?.constructor.availableForItem(this.item),
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: "BF.Advancement.Core.Action.Delete",
-				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
+				icon: "<i class='fa-solid fa-trash fa-fw' inert></i>",
 				condition: li => advancement && this.isEditable,
 				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
@@ -233,24 +233,12 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		if (!this.isEditable) return false;
 
 		const { data } = DragDrop.getDragData(event);
-		if (!this._validateDrop(data)) return false;
+		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 
 		try {
 			const advancement = (await fromUuid(data.uuid)).toObject() ?? data.data;
-			const AdvancementClass = CONFIG.Advancement.types[advancement.type]?.documentClass;
-			if (!advancement || !AdvancementClass) return false;
-
-			if (
-				!CONFIG.Advancement.types[advancement.type].validItemTypes?.has(this.item.type) ||
-				!AdvancementClass.availableForItem(this.item)
-			) {
-				ui.notifications.error("BF.Advancement.Core.Warning.CantBeAdded", { localize: true });
-				return false;
-			}
-
-			delete advancement._id;
-			this.item.createEmbeddedDocuments("Advancement", [advancement]);
-			// TODO: If item is on an actor, apply initial advancement
+			if (!advancement) return false;
+			return this.constructor.dropAdvancement(event, this.document, [advancement]);
 		} finally {
 			DragDrop.finishDragEvent(event);
 		}
@@ -267,5 +255,84 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		if (data.type !== "Advancement") return false;
 		if (!data.uuid) return true;
 		return !data.uuid.startsWith(this.item.uuid);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle an advancement dropped onto the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagItem} target - Document to which the advancement was dropped.
+	 * @param {BlackFlagAdvancement[]} advancementData - One or more advancements dropped.
+	 * @returns {Promise}
+	 */
+	static async dropAdvancement(event, target, advancementData) {
+		const advancement = [];
+		for (const data of advancementData) {
+			const AdvancementClass = CONFIG.Advancement.types[advancement.type]?.documentClass;
+			if (!AdvancementClass) continue;
+			if (
+				!CONFIG.Advancement.types[data.type].validItemTypes?.has(this.item.type) ||
+				!AdvancementClass.availableForItem(this.item)
+			) {
+				ui.notifications.error("BF.Advancement.Core.Warning.CantBeAdded", { localize: true });
+				return false;
+			}
+
+			delete data._id;
+			advancement.push(data);
+		}
+		this.item.createEmbeddedDocuments("Advancement", advancement);
+		// TODO: If item is on an actor, apply initial advancement
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle an item dropped onto the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagItem} target - Document to which the items were dropped.
+	 * @param {BlackFlagAdvancement[]} itemData - One or more items dropped.
+	 */
+	static async dropItems(event, target, itemData) {
+		const itemsByLevel = itemData.reduce((map, item) => {
+			if (item.uuid && item.system.level?.value) {
+				if (!map.has(item.system.level.value)) {
+					map.set(item.system.level.value, []);
+				}
+				map.get(item.system.level.value).push(item.uuid);
+			}
+			return map;
+		}, new Map());
+
+		const advancementToCreate = [];
+		const advancementUpdates = [];
+		for (const [level, uuids] of itemsByLevel.entries()) {
+			const advancement = target.system.advancement.byLevel(level).find(a => a.type === "grantFeatures");
+			if (advancement) {
+				const pool = advancement.toObject().configuration.pool;
+				pool.push(...uuids.map(uuid => ({ uuid })));
+				advancementUpdates.push({ _id: advancement.id, "configuration.pool": pool });
+			} else {
+				advancementToCreate.push({
+					type: "grantFeatures",
+					level: {
+						value: level,
+						classIdentifier:
+							target.type === "class"
+								? target.identifier
+								: CONFIG.BlackFlag.registration.get("class", target.system.identifier?.associated)
+									? target.system.identifier.associated
+									: undefined
+					},
+					configuration: {
+						pool: uuids.map(uuid => ({ uuid }))
+					}
+				});
+			}
+		}
+
+		await target.createEmbeddedDocuments("Advancement", advancementToCreate);
+		await target.updateEmbeddedDocuments("Advancement", advancementUpdates);
 	}
 }
