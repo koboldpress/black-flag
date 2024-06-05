@@ -54,6 +54,7 @@ export default class TraitConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "two-column", "trait"],
@@ -66,6 +67,7 @@ export default class TraitConfig extends AdvancementConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -111,6 +113,7 @@ export default class TraitConfig extends AdvancementConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -166,6 +169,7 @@ export default class TraitConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onChangeInput(event) {
 		// Display new set of trait choices
 		if (event.target.name === "selectedTrait") {
@@ -196,6 +200,7 @@ export default class TraitConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async prepareConfigurationUpdate(configuration) {
 		const choicesCollection = foundry.utils.deepClone(this.config.choices);
 

@@ -330,7 +330,11 @@ export default Base =>
 			if (!context.parent) throw new Error("Cannot update pseudo documents without a parent.");
 			updates = updates.reduce((updates, data) => {
 				if (!data._id) throw new Error("ID must be provided when updating an pseudo document");
-				updates[data._id] = data;
+				const c =
+					CONFIG[this.documentName].types[
+						data.type ?? context.parent.getEmbeddedDocument(this.documentName, data._id)?.type
+					];
+				updates[data._id] = c?.documentClass.cleanData(data) ?? data;
 				return updates;
 			}, {});
 			await context.parent.update(
