@@ -70,17 +70,7 @@
 					<th class="range" scope="col">{{ localize "BF.Range.Label" }}</th>
 					<th class="target" scope="col">{{ localize "BF.Target.Label[one]" }}</th>
 					<th class="traits" scope="col">{{ localize "BF.Trait.Label[other]" }}</th>
-					<td class="controls">
-						<div class="layout">
-							{{#if @root.modes.editing}}
-								<button type="button" class="link-button" data-action="add"
-								        data-tooltip="BF.Spell.Action.Add"
-								        aria-label="{{ localize 'BF.Spell.Action.Add' }}">
-									<i class="fa-solid fa-plus" inert></i>
-								</button>
-							{{/if}}
-						</div>
-					</td>
+					<td class="controls"></td>
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
@@ -149,12 +139,18 @@
 			</tbody>
 		{{/each}}
 	</table>
-</blackFlag-inventory>
 
-<div class="manage-spells">
-	<button type="button" class="light-button" data-action="manage-spells">
-		<i class="fa-solid fa-book" inert></i>
-		{{ localize "BF.Spellbook.Action.ManageSpells" }}
-		{{ blackFlag-notificationBadge actor key="spells-to-learn" }}
-	</button>
-</div>
+	<div class="main-add-button">
+		<button type="button" class="light-button" data-action="manage-spells">
+			<i class="fa-solid fa-book" inert></i>
+			{{ localize "BF.Spellbook.Action.ManageSpells" }}
+			{{ blackFlag-notificationBadge actor key="spells-to-learn" }}
+		</button>
+		{{#if @root.editable}}
+			<button type="button" class="light-button main-add-button" data-action="add">
+				<i class="fa-solid fa-plus inert"></i>
+				{{ localize "BF.Spell.Action.Add" }}
+			</button>
+		{{/if}}
+	</div>
+</blackFlag-inventory>

@@ -19,17 +19,7 @@
 					<th class="quantity" scope="col">{{ localize "BF.Quantity.Label" }}</th>
 					<th class="cost" scope="col">{{ localize "BF.Price.Label" }}</th>
 					<th class="traits" scope="col">{{ localize "BF.Trait.Label[other]" }}</th>
-					<td class="controls">
-						<div class="layout">
-							{{#if @root.editable}}
-								<button type="button" class="link-button" data-action="add"
-								        data-tooltip="BF.Item.Action.Add"
-								        aria-label="{{ localize 'BF.Item.Action.Add' }}">
-									<i class="fa-solid fa-plus" inert></i>
-								</button>
-							{{/if}}
-						</div>
-					</td>
+					<td class="controls"></td>
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
@@ -100,4 +90,13 @@
 			</tbody>
 		{{/each}}
 	</table>
+
+	{{#if @root.editable}}
+		<div class="main-add-button">
+			<button type="button" class="light-button main-add-button" data-action="add">
+				<i class="fa-solid fa-plus inert"></i>
+				{{ localize 'BF.Item.Action.Add' }}
+			</button>
+		</div>
+	{{/if}}
 </blackFlag-inventory>

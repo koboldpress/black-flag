@@ -8,24 +8,14 @@
 				<tr class="table-header">
 					<td class="name">{{ localize section.label }}</td>
 					<th class="uses">{{ localize "BF.Uses.Short" }}</th>
-					<td class="controls">
-						<div class="layout">
-							{{#if @root.modes.editing}}
-								<button type="button" class="link-button" data-action="add"
-												data-tooltip="BF.Feature.Action.Add"
-												aria-label="{{ localize 'BF.Feature.Action.Add' }}">
-									<i class="fa-solid fa-plus" inert></i>
-								</button>
-							{{/if}}
-						</div>
-					</td>
+					<td class="controls"></td>
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
 					<tr data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
 						<th class="name" scope="row">
 							<div class="layout">
-								<img src="{{img}}">
+								<img src="{{ img }}">
 								<button type="button" class="link-button" data-action="expand">
 									{{ name }}
 									<i class="fa-solid fa-caret-down" inert></i>
@@ -117,4 +107,13 @@
 			</tbody>
 		{{/if}}
 	</table>
+
+	{{#if @root.editable}}
+		<div class="main-add-button">
+			<button type="button" class="light-button main-add-button" data-action="add">
+				<i class="fa-solid fa-plus inert"></i>
+				{{ localize 'BF.Feature.Action.Add' }}
+			</button>
+		</div>
+	{{/if}}
 </blackFlag-inventory>

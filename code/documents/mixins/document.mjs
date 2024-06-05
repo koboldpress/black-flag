@@ -79,43 +79,46 @@ export default Base =>
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/** @override */
-		static async createDialog(data = {}, { parent = null, pack = null, ...options } = {}) {
+		static async createDialog(data = {}, { parent = null, pack = null, types = null, ...options } = {}) {
 			const documentName = this.metadata.name;
-			const types = foundry.utils.deepClone(
-				game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE)
-			);
+			types ??= foundry.utils.deepClone(game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE));
+			const extraTypes = new Set(types);
+			if (!types.length) return null;
 			const collection = parent ? null : pack ? game.packs.get(pack) : game.collections.get(this.documentName);
 			const folders = collection?._formatFolderSelectOptions() ?? [];
 			const label = game.i18n.localize(this.metadata.label);
 			const title = game.i18n.format("DOCUMENT.Create", { type: label });
 
-			const lastCreated = game.settings.get(game.system.id, "lastCreatedTypes");
+			const lastCreated = game.user.getFlag(game.system.id, "lastCreatedTypes") ?? {};
 			const selectedType = data.type ?? lastCreated[documentName] ?? CONFIG[documentName]?.defaultType ?? types[0];
 
 			let categories;
 			if (!foundry.utils.isEmpty(CONFIG[documentName]?.categories)) {
 				categories = {};
 				for (const [key, value] of Object.entries(CONFIG[documentName]?.categories)) {
-					categories[key] = { label: game.i18n.localize(value.label), children: {} };
+					const category = { label: game.i18n.localize(value.label), children: {} };
 					for (const type of value.types) {
+						if (!types.includes(type.metadata?.type)) continue;
+						extraTypes.delete(type.metadata?.type);
 						const name = type.fullType;
-						categories[key].children[name] = {
+						category.children[name] = {
 							label: game.i18n.localize(CONFIG[documentName]?.typeLabels?.[name] ?? name),
 							chosen: name === selectedType
 						};
 					}
+					if (!foundry.utils.isEmpty(category.children)) categories[key] = category;
 				}
 			}
 
 			// Render the document creation form
-			const html = await renderTemplate("systems/black-flag/templates/item/item-create.hbs", {
+			const html = await renderTemplate("systems/black-flag/templates/shared/document-create.hbs", {
 				folders,
 				name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
 				folder: data.folder,
 				hasFolders: folders.length >= 1,
 				type: selectedType,
 				categories,
-				types: types.reduce((obj, t) => {
+				types: extraTypes.reduce((obj, t) => {
 					const label = CONFIG[documentName]?.typeLabels?.[t] ?? t;
 					obj[t] = game.i18n.localize(label);
 					return obj;
@@ -127,7 +130,7 @@ export default Base =>
 				title: title,
 				content: html,
 				label: title,
-				callback: html => {
+				callback: async html => {
 					const form = html[0].querySelector("form");
 					const fd = new FormDataExtended(form);
 					foundry.utils.mergeObject(data, fd.object, { inplace: true });
@@ -135,7 +138,7 @@ export default Base =>
 					if (types.length === 1) data.type = types[0];
 					if (!data.name?.trim()) data.name = this.defaultName();
 					lastCreated[documentName] = data.type;
-					game.settings.set(game.system.id, "lastCreatedTypes", lastCreated);
+					await game.user.setFlag(game.system.id, "lastCreatedTypes", lastCreated);
 					return this.create(data, { parent, pack, renderSheet: true });
 				},
 				rejectClose: false,

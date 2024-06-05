@@ -6,22 +6,12 @@
 		{{#each sections.features as |section sectionId|}}
 			<tbody data-section="{{sectionId}}">
 				<tr class="table-header">
-					<td class="name">{{localize section.label}}</td>
-					<th class="uses">{{localize "BF.Uses.Short"}}</th>
-					<td class="controls">
-						<div class="layout">
-							{{#if @root.modes.editing}}
-								<button type="button" class="link-button" data-action="add"
-												data-tooltip="BF.Item.Action.Add"
-												aria-label="{{ localize 'BF.Item.Action.Add' }}">
-									<i class="fa-solid fa-plus" inert></i>
-								</button>
-							{{/if}}
-						</div>
-					</td>
+					<td class="name">{{ localize section.label }}</td>
+					<th class="uses">{{ localize "BF.Uses.Short" }}</th>
+					<td class="controls"></td>
 				</tr>
 				{{#each section.items}}
-					<tr data-item-id="{{id}}">
+					<tr data-item-id="{{ id }}">
 						<th class="name" scope="row">
 							<div class="layout">
 								<button type="button" class="link-button" data-action="expand">
@@ -64,4 +54,13 @@
 			</tbody>
 		{{/each}}
 	</table>
+
+	{{#if @root.editable}}
+		<div class="main-add-button">
+			<button type="button" class="light-button main-add-button" data-action="add">
+				<i class="fa-solid fa-plus inert"></i>
+				{{ localize 'BF.Feature.Action.Add' }}
+			</button>
+		</div>
+	{{/if}}
 </blackFlag-inventory>

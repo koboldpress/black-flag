@@ -59,13 +59,6 @@ export const sheetSections = {
 							id,
 							label,
 							filters: [...sectionData.filters, { k: "system.circle.base", v: number }],
-							create: [
-								{
-									type: "spell",
-									"system.circle.base": number,
-									"flags.black-flag.relationship.mode": "standard"
-								}
-							],
 							options: { autoHide: !circle.max && !cantrip },
 							circle
 						},
@@ -92,7 +85,6 @@ export const sheetSections = {
 				{ k: "type", v: "spell" },
 				{ k: "flags.black-flag.relationship.mode", v: "atWill" }
 			],
-			create: [{ type: "spell", "flags.black-flag.relationship.mode": "atWill" }],
 			options: { autoHide: true }
 		},
 		{
@@ -103,65 +95,56 @@ export const sheetSections = {
 				{ k: "type", v: "spell" },
 				{ k: "flags.black-flag.relationship.mode", v: "innate" }
 			],
-			create: [{ type: "spell", "flags.black-flag.relationship.mode": "innate" }],
 			options: { autoHide: true }
 		},
 		{
 			id: "weapons",
 			tab: "inventory",
 			label: "BF.Item.Type.Weapon[other]",
-			filters: [{ k: "type", v: "weapon" }],
-			create: [{ type: "weapon" }]
+			filters: [{ k: "type", v: "weapon" }]
 		},
 		{
 			id: "ammunition",
 			tab: "inventory",
 			label: "BF.Item.Type.Ammunition[other]",
 			filters: [{ k: "type", v: "ammunition" }],
-			create: [{ type: "ammunition" }],
 			options: { autoHide: true }
 		},
 		{
 			id: "armor",
 			tab: "inventory",
 			label: "BF.Item.Type.Armor[other]",
-			filters: [{ k: "type", v: "armor" }],
-			create: [{ type: "armor" }]
+			filters: [{ k: "type", v: "armor" }]
 		},
 		{
 			id: "gear",
 			tab: "inventory",
 			label: "BF.Item.Type.Gear[other]",
-			filters: [{ k: "type", v: "gear" }],
-			create: [{ type: "gear" }]
+			filters: [{ k: "type", v: "gear" }]
 		},
 		{
 			id: "tools",
 			tab: "inventory",
 			label: "BF.Item.Type.Tool[other]",
-			filters: [{ k: "type", v: "tool" }],
-			create: [{ type: "tool" }]
+			filters: [{ k: "type", v: "tool" }]
 		},
 		{
 			id: "consumables",
 			tab: "inventory",
 			label: "BF.Item.Type.Consumable[other]",
-			filters: [{ k: "type", v: "consumable" }],
-			create: [{ type: "consumable" }] // TODO: Add option to create sub-types directly
+			filters: [{ k: "type", v: "consumable" }]
 		},
 		{
 			id: "containers",
 			tab: "inventory",
 			label: "BF.Item.Type.Container[other]",
-			filters: [{ k: "type", v: "container" }],
-			create: [{ type: "container" }]
+			filters: [{ k: "type", v: "container" }]
 		},
 		{
 			id: "sundries",
 			tab: "inventory",
 			label: "BF.Item.Type.Sundry[other]",
 			filters: [{ k: "type", v: "sundry" }],
-			create: [{ type: "sundry" }],
 			options: { autoHide: true }
 		},
 		{
@@ -193,14 +176,6 @@ export const sheetSections = {
 										]
 									}
 								],
-								create: [
-									{
-										label: label("one"),
-										type: "feature",
-										"system.type.category": "class",
-										"system.identifier.associated": identifier
-									}
-								],
 								levels: cls.levels
 							},
 							{ inplace: false }
@@ -213,8 +188,7 @@ export const sheetSections = {
 			id: "talents",
 			tab: "features",
 			label: "BF.Item.Type.Talent[other]",
-			filters: [{ k: "type", v: "talent" }],
-			create: [{ type: "talent" }]
+			filters: [{ k: "type", v: "talent" }]
 		},
 		{
 			id: "lineage-features",
@@ -223,8 +197,7 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "lineage" }
-			],
-			create: [{ label: "BF.Feature.Category.Lineage[one]", type: "feature", "system.type.category": "lineage" }]
+			]
 		},
 		{
 			id: "heritage-features",
@@ -233,15 +206,13 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "feature" },
 				{ k: "system.type.category", v: "heritage" }
-			],
-			create: [{ label: "BF.Feature.Category.Heritage[one]", type: "feature", "system.type.category": "heritage" }]
+			]
 		},
 		{
 			id: "features",
 			tab: "features",
 			label: "BF.Item.Category.Feature.Label",
 			filters: [{ k: "type", v: "feature" }],
-			create: [{ type: "feature" }],
 			options: { autoHide: true }
 		},
 		{
@@ -256,22 +227,19 @@ export const sheetSections = {
 			id: "features",
 			tab: "features",
 			label: "BF.Item.Category.Feature.Label",
-			filters: [{ k: "type", o: "in", v: ["feature", "talent"] }],
-			create: [{ type: "feature", "system.type.category": "monsters" }]
+			filters: [{ k: "type", o: "in", v: ["feature", "talent"] }]
 		},
 		{
 			id: "equipment",
 			tab: "features",
 			label: "BF.Item.Category.Equipment.Label",
-			filters: [{ k: "type", o: "in", v: ["ammunition", "armor", "weapon"] }],
-			create: [{ type: "armor" }, { type: "weapon" }, { type: "ammunition" }]
+			filters: [{ k: "type", o: "in", v: ["ammunition", "armor", "weapon"] }]
 		},
 		{
 			id: "spells",
 			tab: "features",
 			label: "BF.Item.Type.Spell[other]",
 			filters: [{ k: "type", v: "spell" }],
-			create: [{ type: "spell" }],
 			options: { autoHide: true }
 		},
 		{
@@ -279,7 +247,6 @@ export const sheetSections = {
 			tab: "features",
 			label: "BF.Item.Type.Sundry[other]",
 			filters: [{ k: "type", v: "sundry" }],
-			create: [{ type: "sundry" }],
 			options: { autoHide: true }
 		}
 	],
@@ -307,7 +274,13 @@ export const sheetSections = {
 			id: "contents",
 			tab: "inventory",
 			label: "BF.Sheet.Tab.Contents",
-			filters: []
+			filters: [
+				{
+					k: "type",
+					o: "in",
+					v: ["ammunition", "armor", "consumable", "container", "gear", "tool", "sundry", "weapon"]
+				}
+			]
 		}
 	]
 };

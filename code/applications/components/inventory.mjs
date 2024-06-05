@@ -1,7 +1,6 @@
 import BlackFlagItem from "../../documents/item.mjs";
 import { performCheck } from "../../utils/filter.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
-import BlackFlagDialog from "../dialog.mjs";
 import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 import FiltersElement from "./filters.mjs";
@@ -242,43 +241,22 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	 * @protected
 	 */
 	async _onAddItem(target) {
-		// Fetch configuration information for this section
-		const config = this.getSectionConfiguration(target.closest("[data-section]").dataset.section);
-		const makeLabel = d => (d.label ? game.i18n.localize(d.label) : game.i18n.localize(CONFIG.Item.typeLabels[d.type]));
-		if (!config.create) return;
-
-		// If more than one type is present, display a tooltip for selection which should be used
-		let createData = config.create[0];
-		if (config.create.length > 1) {
-			try {
-				createData = await BlackFlagDialog.tooltipWait(
-					{ element: target },
-					{
-						content: game.i18n.localize("BF.Item.Create.Prompt"),
-						buttons: Object.fromEntries(
-							config.create.map((t, i) => [
-								i,
-								{
-									label: makeLabel(t),
-									callback: html => t
-								}
-							])
-						),
-						render: true
-					}
-				);
-			} catch (err) {
-				return;
-			}
-		}
-
-		// Create an item with the first type
-		const itemData = {
-			name: game.i18n.format("BF.New.Specific", { type: makeLabel(createData) }),
-			...createData
-		};
-		delete itemData.label;
-		this.document.createEmbeddedDocuments("Item", [itemData]);
+		const sections = CONFIG.BlackFlag.sheetSections[this.document.type]?.filter(s => s.tab === this.tab) ?? [];
+		const types = Array.from(
+			new Set(
+				sections?.flatMap(s => {
+					const filter = s.filters.find(f => f.k === "type");
+					return foundry.utils.getType(filter?.v) === "string" ? [filter.v] : filter.v;
+				})
+			)
+		).filter(t => t);
+		Item.implementation.createDialog(
+			{
+				folder: this.document.folder,
+				"system.container": this.document.type === "container" ? this.document.id : undefined
+			},
+			{ parent: this.actor, pack: this.document.pack, types: types.length ? types : null }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
