@@ -5,7 +5,7 @@
   "system": {
     "description": {
       "value": "",
-      "short": "Hardy adventurers who excel in combat and weapon-use",
+      "short": "Hardy adventurers who excel in combat and weapon-use.",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -126,19 +126,24 @@
           "choiceMode": "inclusive"
         },
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
-          "value": 1
+          "value": 1,
+          "classRestriction": "original"
         },
-        "flags": {}
+        "flags": {},
+        "hint": "",
+        "selectedIndex": "0",
+        "selectedTrait": "skills"
       },
       "uDCRhWX5KR6xn8Cg": {
         "type": "trait",
         "_id": "uDCRhWX5KR6xn8Cg",
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
-          "value": 1
+          "value": 1,
+          "classRestriction": "original"
         },
         "configuration": {
           "grants": [
@@ -151,7 +156,10 @@
           "choices": [],
           "choiceMode": "inclusive"
         },
-        "flags": {}
+        "flags": {},
+        "hint": "",
+        "selectedIndex": "-1",
+        "selectedTrait": "armor"
       },
       "1ZSbyWQ93kTLV3ef": {
         "type": "trait",
@@ -306,6 +314,30 @@
         "title": "",
         "icon": "",
         "hint": ""
+      },
+      "iyyJD90GHlcM2Hya": {
+        "type": "trait",
+        "title": "",
+        "icon": "",
+        "level": {
+          "value": 1,
+          "classRestriction": "multiclass"
+        },
+        "configuration": {
+          "grants": [
+            "armor:light",
+            "armor:medium",
+            "armor:shield"
+          ],
+          "mode": "default",
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "flags": {},
+        "_id": "iyyJD90GHlcM2Hya",
+        "hint": "",
+        "selectedIndex": "-1",
+        "selectedTrait": "armor"
       }
     },
     "color": "#a33329"
@@ -318,10 +350,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
+    "systemVersion": "0.9.032",
     "coreVersion": "11.315",
     "createdTime": 1694368941451,
-    "modifiedTime": 1717382885246,
+    "modifiedTime": 1717619306869,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "AzyAdtcDGuRqm83E",

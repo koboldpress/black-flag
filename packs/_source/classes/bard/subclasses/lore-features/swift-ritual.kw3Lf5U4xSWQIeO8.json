@@ -1,0 +1,114 @@
+{
+  "folder": "qMTJQup73eOQq8Qf",
+  "name": "Swift Ritual",
+  "type": "feature",
+  "_id": "kw3Lf5U4xSWQIeO8",
+  "img": "icons/magic/symbols/runes-carved-stone-purple.webp",
+  "system": {
+    "activities": {
+      "7gztU2lrSwx79YOp": {
+        "type": "utility",
+        "_id": "7gztU2lrSwx79YOp",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Cast Ritual",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You can cast an Arcane ritual you know as an action, instead of using the ritual’s listed casting time. You must still provide all other components necessary for the casting. Once used, you can't use this feature again until you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "swift-ritual",
+      "associated": "lore"
+    },
+    "level": {
+      "value": 7
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717618013570,
+    "modifiedTime": 1717618533411,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!kw3Lf5U4xSWQIeO8"
+}

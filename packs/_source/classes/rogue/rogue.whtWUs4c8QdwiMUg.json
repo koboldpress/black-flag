@@ -5,7 +5,7 @@
   "system": {
     "description": {
       "value": "",
-      "short": "Cunning adventurers who rely on agility and trickery",
+      "short": "Cunning adventurers who rely on agility and trickery.",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -76,11 +76,15 @@
           "choiceMode": "inclusive"
         },
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
-          "value": 1
+          "value": 1,
+          "classRestriction": "original"
         },
-        "flags": {}
+        "flags": {},
+        "hint": "",
+        "selectedIndex": "0",
+        "selectedTrait": "skills"
       },
       "iYPDaCRorAJDpvPV": {
         "type": "trait",
@@ -104,9 +108,10 @@
         "type": "trait",
         "_id": "Pmeh37CwiLkHkRg0",
         "title": "",
-        "icon": null,
+        "icon": "",
         "level": {
-          "value": 1
+          "value": 1,
+          "classRestriction": "original"
         },
         "configuration": {
           "grants": [
@@ -119,7 +124,10 @@
           "choices": [],
           "choiceMode": "inclusive"
         },
-        "flags": {}
+        "flags": {},
+        "hint": "",
+        "selectedIndex": "-1",
+        "selectedTrait": "weapons"
       },
       "3eedlDQBZm15FPrM": {
         "type": "grantFeatures",
@@ -435,13 +443,40 @@
         },
         "level": {
           "value": 1,
-          "classRestriction": ""
+          "classRestriction": "original"
         },
         "flags": {},
         "title": "",
         "icon": "",
         "hint": "",
         "selectedIndex": "-1",
+        "selectedTrait": "tools"
+      },
+      "8C7unIlueM8XyYrR": {
+        "type": "trait",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "tools:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1,
+          "classRestriction": "multiclass"
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "",
+        "_id": "8C7unIlueM8XyYrR",
+        "selectedIndex": "0",
         "selectedTrait": "tools"
       }
     },
@@ -455,10 +490,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.028",
+    "systemVersion": "0.9.032",
     "coreVersion": "11.315",
     "createdTime": 1694554327177,
-    "modifiedTime": 1716239811215,
+    "modifiedTime": 1717619309846,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "whtWUs4c8QdwiMUg",

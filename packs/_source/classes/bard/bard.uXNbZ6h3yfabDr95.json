@@ -10,28 +10,35 @@
         "type": "hitPoints",
         "_id": "LpXAlQs39L9fOQEA",
         "configuration": {
-          "denomination": 4
+          "denomination": "8"
         },
         "level": {},
-        "flags": {}
+        "flags": {},
+        "title": "",
+        "icon": ""
       },
       "UZDZMXflVPkohADH": {
         "type": "keyAbility",
         "_id": "UZDZMXflVPkohADH",
         "configuration": {
-          "options": []
+          "options": [
+            "charisma"
+          ],
+          "secondary": "dexterity"
         },
         "level": {
           "value": 1
         },
-        "flags": {}
+        "flags": {},
+        "title": "",
+        "icon": ""
       },
       "YrLjJy0STpSrxBuM": {
         "type": "trait",
         "configuration": {
           "choices": [
             {
-              "count": 2,
+              "count": 3,
               "pool": [
                 "skills:*"
               ]
@@ -43,9 +50,15 @@
         },
         "_id": "YrLjJy0STpSrxBuM",
         "level": {
-          "value": 1
+          "value": 1,
+          "classRestriction": "original"
         },
-        "flags": {}
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "",
+        "selectedIndex": "0",
+        "selectedTrait": "skills"
       },
       "9ic1RgocdpdX8ILv": {
         "type": "grantFeatures",
@@ -400,6 +413,114 @@
         "level": {},
         "flags": {},
         "icon": ""
+      },
+      "FkZH247FBdR5Cakd": {
+        "type": "trait",
+        "_id": "FkZH247FBdR5Cakd",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "tools:musicalInstrument:*"
+              ]
+            },
+            {
+              "count": 2,
+              "pool": [
+                "tools:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1,
+          "classRestriction": "original"
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "",
+        "selectedIndex": "1",
+        "selectedTrait": "tools"
+      },
+      "KwkZrI9dHOt8xtgc": {
+        "type": "trait",
+        "_id": "KwkZrI9dHOt8xtgc",
+        "configuration": {
+          "mode": "default",
+          "grants": [
+            "weapons:simple",
+            "weapons:martial:rapier",
+            "weapons:martial:scimitar",
+            "weapons:martial:shortsword",
+            "weapons:martial:whip"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1,
+          "classRestriction": "original"
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "Simple weapons, martial weapons with the Finesse property",
+        "selectedIndex": "-1",
+        "selectedTrait": "weapons"
+      },
+      "KlMg0TYAonh9lcH3": {
+        "type": "trait",
+        "_id": "KlMg0TYAonh9lcH3",
+        "configuration": {
+          "mode": "default",
+          "grants": [
+            "armor:light"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1,
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "",
+        "selectedIndex": "-1",
+        "selectedTrait": "armor"
+      },
+      "W8WRTwvqjM8ixXdY": {
+        "type": "trait",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "tools:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1,
+          "classRestriction": "multiclass"
+        },
+        "flags": {},
+        "title": "",
+        "icon": "",
+        "hint": "",
+        "_id": "W8WRTwvqjM8ixXdY",
+        "selectedIndex": "0",
+        "selectedTrait": "tools"
       }
     },
     "description": {
@@ -407,7 +528,7 @@
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "",
+      "short": "Skilled performers who inspire allies and wield Arcane magic.",
       "journal": "Compendium.black-flag.rules.JournalEntry.v66RykFxGIYeGh29.JournalEntryPage.AlSAcEW7ExbDVSxL"
     },
     "identifier": {
@@ -426,7 +547,7 @@
     "systemVersion": "0.9.032",
     "coreVersion": "11.315",
     "createdTime": 1717558498918,
-    "modifiedTime": 1717562012835,
+    "modifiedTime": 1717619298315,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!uXNbZ6h3yfabDr95"
