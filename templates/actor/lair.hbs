@@ -51,6 +51,7 @@
 					<span>{{ localize "BF.Initiative.Label" }}</span>
 					<input type="number" name="system.initiative" value="{{ source.initiative }}">
 				</label>
+				{{> "blackFlag.document-source" }}
 			</fieldset>
 		{{/if}}
 		{{ editor enriched.description target="system.description.value" button=true editable=editable

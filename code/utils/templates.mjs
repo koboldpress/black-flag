@@ -231,6 +231,7 @@ export async function registerHandlebarsPartials() {
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",
 		"actor/tabs/actor-active-effects.hbs",
+		"actor/tabs/npc-biography.hbs",
 		"actor/tabs/npc-features.hbs",
 		"actor/tabs/npc-main.hbs",
 		"actor/tabs/pc-biography.hbs",
@@ -249,12 +250,12 @@ export async function registerHandlebarsPartials() {
 		"item/parts/equipment-description.hbs",
 		"item/parts/item-activities.hbs",
 		"item/parts/item-advancement.hbs",
-		"item/parts/item-source.hbs",
 		"journal/journal-table.hbs",
 		"shared/currency.hbs",
 		"shared/inventory.hbs",
 		"shared/trait-list.hbs",
 		"shared/uses-config.hbs",
+		"shared/parts/document-source.hbs",
 		"shared/parts/inventory-controls.hbs",
 		"shared/parts/inventory-summary.hbs"
 	];

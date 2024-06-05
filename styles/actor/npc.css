@@ -11,6 +11,8 @@
 
 	form {
 		column-width: 420px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	input:is(:hover:not(:disabled), :focus) {
@@ -105,10 +107,6 @@
 		}
 	}
 
-	[data-tab="main"] {
-
-	}
-
 	[data-tab="biography"] {
 		section {
 			display: flex;
@@ -143,6 +141,16 @@
 			.editor {
 				flex-grow: 1;
 				min-height: 150px;
+			}
+
+			.source {
+				display: flex;
+				gap: 8px;
+				align-items: center;
+
+				> span:first-child {
+					min-width: max-content;
+				}
 			}
 		}
 	}

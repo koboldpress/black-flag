@@ -88,7 +88,7 @@ export default class NPCSheet extends BaseActorSheet {
 			case "add":
 				Item.implementation.createDialog(
 					{ "system.type.category": "monsters", "system.type.value": type },
-					{ parent: this.actor, pack: this.document.pack, types: ["feature"] }
+					{ parent: this.actor, pack: this.actor.pack, types: ["feature"] }
 				);
 				return;
 		}

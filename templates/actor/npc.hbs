@@ -40,29 +40,7 @@
 			{{> "blackFlag.currency" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="biography">
-			<section>
-				<div class="artwork">
-					<figure class="icon">
-						<figcaption>{{ localize "BF.Actor.Artwork.Portrait" }}</figcaption>
-						<img class="profile" src="{{ actor.img }}" title="{{ actor.name }}"
-								 {{~#if modes.editing}} data-edit="img"{{/if}}>
-					</figure>
-					{{#if showTokenArtwork}}
-						<figure class="icon">
-							<figcaption>{{ localize "BF.Actor.Artwork.Token" }}</figcaption>
-							{{#if actor.isToken}}
-								<img class="profile" src="{{ actor.token.texture.src }}" title="{{ actor.name }}"
-								 		{{~#if modes.editing}} data-edit="token.texture.src"{{/if}}>
-							{{else}}
-								<img class="profile" src="{{ actor.prototypeToken.texture.src }}" title="{{ actor.name }}"
-								 		{{~#if modes.editing}} data-edit="prototypeToken.texture.src"{{/if}}>
-							{{/if}}
-						</figure>
-					{{/if}}
-				</div>
-				{{ editor enriched.biography target="system.biography.value" button=false editable=modes.editing
-				          engine="prosemirror" collaborate=false }}
-			</section>
+			{{> "blackFlag.npc-biography" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="effects">
 			{{> "blackFlag.actor-active-effects" }}

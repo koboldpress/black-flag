@@ -1,0 +1,30 @@
+<section>
+	<div class="artwork">
+		<figure class="icon">
+			<figcaption>{{ localize "BF.Actor.Artwork.Portrait" }}</figcaption>
+			<img class="profile" src="{{ actor.img }}" title="{{ actor.name }}"
+					 {{~#if modes.editing}} data-edit="img"{{/if}}>
+		</figure>
+		{{#if showTokenArtwork}}
+			<figure class="icon">
+				<figcaption>{{ localize "BF.Actor.Artwork.Token" }}</figcaption>
+				{{#if actor.isToken}}
+					<img class="profile" src="{{ actor.token.texture.src }}" title="{{ actor.name }}"
+							 {{~#if modes.editing}} data-edit="token.texture.src"{{/if}}>
+				{{else}}
+					<img class="profile" src="{{ actor.prototypeToken.texture.src }}" title="{{ actor.name }}"
+							 {{~#if modes.editing}} data-edit="prototypeToken.texture.src"{{/if}}>
+				{{/if}}
+			</figure>
+		{{/if}}
+	</div>
+
+	{{ editor enriched.biography target="system.biography.value" button=false editable=modes.editing
+						engine="prosemirror" collaborate=false }}
+
+	<label class="source">
+		<span>{{ localize "BF.Source.Label" }}</span>
+		<input type="text" name="system.biography.source.fallback" value="{{ system.biography.source.fallback }}"
+		       {{ disabled (not editable) }}>
+	</label>
+</section>
