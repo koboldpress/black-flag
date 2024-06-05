@@ -249,7 +249,7 @@ export function keyLabel(key, { count, trait, final, priority }={}) {
 	const localizedCount = count ? numberFormat(count, { spelledOut: true }) : null;
 	priority ??= count ? "localization" : "label";
 
-	if ( !trait ) trait = parts.shift();
+	if ( !trait || trait === parts[0] ) trait = parts.shift();
 	const traitConfig = CONFIG.BlackFlag.traits[trait];
 	if ( !traitConfig ) return key;
 	const pluralRule = getPluralRules().select(count ?? 1);
