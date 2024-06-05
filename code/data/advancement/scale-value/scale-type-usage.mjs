@@ -43,7 +43,8 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 
 	/** @inheritDoc */
 	get display() {
-		return `${this.value}/${CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per] ?? ""}`;
+		const abbr = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per];
+		return [this.value, abbr].filter(v => v).join("/");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
