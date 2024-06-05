@@ -86,19 +86,10 @@ export default class NPCSheet extends BaseActorSheet {
 		const { action, type } = dataset ?? event.currentTarget.dataset;
 		switch (action) {
 			case "add":
-				const itemData = {
-					name: game.i18n.format("BF.New.Specific", {
-						type: CONFIG.BlackFlag.featureCategories.monsters.children.localized[type]
-					}),
-					type: "feature",
-					system: {
-						type: {
-							category: "monsters",
-							value: type
-						}
-					}
-				};
-				this.actor.createEmbeddedDocuments("Item", [itemData]);
+				Item.implementation.createDialog(
+					{ "system.type.category": "monsters", "system.type.value": type },
+					{ parent: this.actor, pack: this.document.pack, types: ["feature"] }
+				);
 				return;
 		}
 		return super._onAction(event, dataset);
