@@ -36,9 +36,9 @@
 							</div>
 							<div class="class-restriction">
 								{{#if (eq this.classRestriction "original")}}
-									{{ localize "BF.Advancement.Core.ClassRestriction.Multiclass" }}
-								{{else if (eq this.classRestriction "multiclass")}}
 									{{ localize "BF.Advancement.Core.ClassRestriction.Original" }}
+								{{else if (eq this.classRestriction "multiclass")}}
+									{{ localize "BF.Advancement.Core.ClassRestriction.Multiclass" }}
 								{{/if}}
 							</div>
 							{{#if @root.editable}}
