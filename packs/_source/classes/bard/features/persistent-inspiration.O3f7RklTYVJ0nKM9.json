@@ -1,0 +1,109 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Persistent Inspiration",
+  "type": "feature",
+  "_id": "O3f7RklTYVJ0nKM9",
+  "img": "icons/magic/light/explosion-impact-purple.webp",
+  "system": {
+    "activities": {
+      "SP8xZLm1e1shRhdt": {
+        "type": "utility",
+        "_id": "SP8xZLm1e1shRhdt",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When a creature adds a Bardic Inspiration dice to a roll and still fails"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.PaExQNCDUXEyfH9F",
+              "value": "-1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Recover Inspiration",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When a creature adds one of your Bardic Inspiration dice to an ability check, attack roll, or save, and the roll still fails, the die isn’t lost and can be used again.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "heroicBoon"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "persistent-inspiration",
+      "associated": "bard"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 1100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558871278,
+    "modifiedTime": 1717563867636,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!O3f7RklTYVJ0nKM9"
+}

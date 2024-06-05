@@ -61,6 +61,10 @@ export const featureCategories = {
 		localization: "BF.Feature.Category.Class",
 		sources: ["class", "subclass"],
 		children: {
+			bardicPerformance: {
+				localization: "BF.Feature.Type.BardicPerformance",
+				sources: ["class", "subclass"]
+			},
 			channelDivinity: {
 				localization: "BF.Feature.Type.ChannelDivinity",
 				sources: ["class", "subclass"]

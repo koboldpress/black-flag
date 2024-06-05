@@ -1,0 +1,118 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Curtain Call",
+  "type": "feature",
+  "_id": "NksyxvutwtlwReVY",
+  "img": "icons/tools/instruments/drum-hand-tan.webp",
+  "system": {
+    "activities": {
+      "U88VRy7C4qlzUnvy": {
+        "type": "utility",
+        "_id": "U88VRy7C4qlzUnvy",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            },
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.PaExQNCDUXEyfH9F",
+              "value": "-max(1, @abilities.cha.mod)"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": {
+            "0": {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          },
+          "min": "",
+          "max": "1"
+        },
+        "name": "Recover Inspiration",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>If you start your turn with no uses of your Bardic Inspiration feature remaining, you can use your bonus action to recover a number of uses equal to your CHA modifier (minimum of 1). This bonus action can be taken as part of the bonus action required to maintain your Bardic Performance feature. Once you use this feature, you can’t do so again until you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "epicBoon"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "curtain-call",
+      "associated": "bard"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 1400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558923174,
+    "modifiedTime": 1717564099673,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!NksyxvutwtlwReVY"
+}

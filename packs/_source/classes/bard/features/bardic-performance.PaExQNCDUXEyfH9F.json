@@ -1,0 +1,219 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Bardic Performance",
+  "type": "feature",
+  "_id": "PaExQNCDUXEyfH9F",
+  "img": "icons/tools/instruments/rattle-gourd-glowing-teal.webp",
+  "system": {
+    "activities": {
+      "6MYEQpUBvHKWgkGh": {
+        "type": "utility",
+        "_id": "6MYEQpUBvHKWgkGh",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "radius",
+            "size": "@scale.bard.range"
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Begin Performance",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "mbbwrMdbTTeDJ6wv": {
+        "type": "utility",
+        "_id": "mbbwrMdbTTeDJ6wv",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Maintain Performance",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "YoJVolYkhUYzzrJU": {
+        "type": "grantFeatures",
+        "_id": "YoJVolYkhUYzzrJU",
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.Tc4ZlX44M6BSokpi"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.SSU6zfzPzE05HiFv"
+            }
+          ]
+        },
+        "level": {
+          "value": 2,
+          "classIdentifier": "bard",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Bardic Performance",
+        "icon": "",
+        "hint": ""
+      },
+      "1Rjg1ceHo1W27Zfu": {
+        "type": "grantFeatures",
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.dy8rqpccweD1BuFX"
+            }
+          ]
+        },
+        "level": {
+          "value": 6,
+          "classIdentifier": "bard",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Bardic Performance",
+        "icon": "",
+        "hint": "",
+        "_id": "1Rjg1ceHo1W27Zfu"
+      },
+      "sd1BC56FUcnCT5Qp": {
+        "type": "scaleValue",
+        "_id": "sd1BC56FUcnCT5Qp",
+        "configuration": {
+          "type": "distance",
+          "scale": {
+            "2": {
+              "value": 30,
+              "units": "foot"
+            },
+            "17": {
+              "value": 60
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "bard",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Bardic Performance Range",
+        "icon": "",
+        "hint": "",
+        "identifier": "range"
+      }
+    },
+    "description": {
+      "value": "<p>You weave magic into ongoing performances to produce effects beyond spells. You start with two effects: Celebrate Life and Cutting Words. You gain a new effect at 6th level, and some bard subclasses grant additional effects. Unless stated otherwise, targets must be within 30 feet of you and be able to hear or see you (depending on the type of performance) to be affected.</p><p>As an action, you can use your Bardic Performance feature, choosing which performance effect you create when you do so. Once active, you can continue the performance for up to 1 minute, as long as you spend a bonus action at the start of each of your subsequent turns to maintain it. You can also choose to use your Bardic Inspiration feature as part of the same bonus action required to maintain this performance.</p><p>Your performance ends early if you become incapacitated, silenced, use an action to begin a new performance, or choose to end the effect (no action required by you to do so).</p><p>You can use your Bardic Performance feature to start a new performance a number of times equal to your PB, regaining all expended uses when you finish a long rest.</p><h6>Bardic Performance: Celebrate Life</h6><p>@Embed[Compendium.black-flag.classes.Item.Tc4ZlX44M6BSokpi inline]</p><h6>Bardic Performance: Cutting Words</h6><p>@Embed[Compendium.black-flag.classes.Item.SSU6zfzPzE05HiFv inline]</p><h6>Bardic Performance: Clarity of Thought</h6><p>@Embed[Compendium.black-flag.classes.Item.dy8rqpccweD1BuFX inline]</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "bardic-performance",
+      "associated": "bard"
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558649922,
+    "modifiedTime": 1717563995093,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!PaExQNCDUXEyfH9F"
+}

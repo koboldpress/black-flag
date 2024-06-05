@@ -1,0 +1,111 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Font of Inspiration",
+  "type": "feature",
+  "_id": "aPJMqEqOk3KPcs6q",
+  "img": "icons/magic/light/explosion-star-glow-blue.webp",
+  "system": {
+    "activities": {
+      "5t1z5r2DJnUUpqpP": {
+        "type": "utility",
+        "_id": "5t1z5r2DJnUUpqpP",
+        "description": "<p>When a creature within 60 feet of you that you can hear or see you fails an ability check, attack roll, or save, you can use your reaction to expend a use of your Bardic Inspiration feature. When you do, roll [[/r @scale.bard.inspiration]] and add the number rolled to the target’s check total—potentially turning a failure into a success.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a creature within 60 feet of you that you can hear or see you fails an ability check, attack roll, or save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.PaExQNCDUXEyfH9F",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You now regain all expended uses of your Bardic Inspiration feature when you finish a short or long rest.</p><p>In addition, you can now use your Bardic Inspiration dice in a new way. When a creature within 60 feet of you that you can hear or see you fails an ability check, attack roll, or save, you can use your reaction to expend a use of your Bardic Inspiration feature. When you do, roll the Bardic Inspiration die and add the number rolled to the target’s check total—potentially turning a failure into a success.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "font-of-inspiration",
+      "associated": "bard"
+    },
+    "level": {
+      "value": 5
+    }
+  },
+  "effects": [],
+  "sort": 900000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558847014,
+    "modifiedTime": 1717563588155,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!aPJMqEqOk3KPcs6q"
+}

@@ -1,0 +1,166 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Bardic Inspiration",
+  "type": "feature",
+  "_id": "PlRqmMB6VVPXaSGi",
+  "img": "icons/magic/light/explosion-star-glow-purple.webp",
+  "system": {
+    "activities": {
+      "PJUxGBkmzzWebRfV": {
+        "type": "utility",
+        "_id": "PJUxGBkmzzWebRfV",
+        "description": "<p>Once within the next 10 minutes, the creature can roll [[/r @scale.bard.inspiration]] and add the number rolled to one ability check, attack roll, or save that it makes. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "10"
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Grant Inspiration",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@abilities.charisma.mod"
+    },
+    "advancement": {
+      "TsRzYJ3W7k9KpSVR": {
+        "type": "scaleValue",
+        "_id": "TsRzYJ3W7k9KpSVR",
+        "configuration": {
+          "type": "dice",
+          "scale": {
+            "1": {
+              "denomination": 6
+            },
+            "5": {
+              "denomination": 8
+            },
+            "9": {
+              "denomination": 10
+            },
+            "14": {
+              "denomination": 12
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "bard",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Bardic Inspiration",
+        "icon": "",
+        "hint": "",
+        "identifier": "inspiration"
+      },
+      "JNNVJlh9pwxMueCQ": {
+        "type": "scaleValue",
+        "_id": "JNNVJlh9pwxMueCQ",
+        "configuration": {
+          "type": "usage",
+          "scale": {
+            "1": {
+              "per": "longRest"
+            },
+            "5": {
+              "per": "shortRest"
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "bard",
+          "classRestriction": ""
+        },
+        "flags": {},
+        "title": "Inspiration Recovery",
+        "icon": "",
+        "hint": "",
+        "identifier": "recovery"
+      }
+    },
+    "description": {
+      "value": "<p>You can inspire others through stirring words, music, or other kinds of performance. As a bonus action on your turn, you can choose a creature within 60 feet of you, other than yourself, who can hear or see you. That creature gains one Bardic Inspiration die, a d6.</p><p>Once within the next 10 minutes, the creature can roll that die and add the number rolled to one ability check, attack roll, or save that it makes. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.</p><p>You can use this feature a number of times equal to your CHA modifier. You regain any expended uses when you finish a long rest.</p><p>Your Bardic Inspiration die changes when you reach certain levels in this class. The die becomes a d8 at 5th level, d10 at 10th, and d12 at 14th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "bardic-inspiration",
+      "associated": "bard"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558627916,
+    "modifiedTime": 1717564254839,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!PlRqmMB6VVPXaSGi"
+}

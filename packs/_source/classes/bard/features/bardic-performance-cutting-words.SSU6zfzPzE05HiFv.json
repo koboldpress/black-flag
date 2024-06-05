@@ -1,0 +1,111 @@
+{
+  "folder": "CrO0VCbKVNtbzu0C",
+  "name": "Bardic Performance: Cutting Words",
+  "type": "feature",
+  "_id": "SSU6zfzPzE05HiFv",
+  "img": "icons/magic/unholy/projectile-bolts-salvo-pink.webp",
+  "system": {
+    "activities": {
+      "9KPrxpWDjBiUvuy7": {
+        "type": "utility",
+        "_id": "9KPrxpWDjBiUvuy7",
+        "description": "<p>When a creature within range that you can see makes an ability check, attack roll, or damage roll, you can use your reaction to expend a use of your Bardic Inspiration feature, rolling [[/r @scale.bard.inspiration]] and subtracting the number rolled from the creature’s roll.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a creature within range that you can see makes an ability check, attack roll, or damage roll while this Bardic Performance is active"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.PaExQNCDUXEyfH9F",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "@scale.bard.range"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>At 2nd level you gain a special reaction while your Bardic Performance feature is active. When a creature within range that you can see makes an ability check, attack roll, or damage roll, you can use your reaction to expend a use of your Bardic Inspiration feature, rolling the die and subtracting the number rolled from the creature’s roll.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "bardicPerformance"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "cutting-words",
+      "associated": "bard"
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 500000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.032",
+    "coreVersion": "11.315",
+    "createdTime": 1717558776163,
+    "modifiedTime": 1717564008884,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SSU6zfzPzE05HiFv"
+}
