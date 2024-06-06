@@ -26,6 +26,7 @@ import * as tools from "./tools.mjs";
 import * as traits from "./traits.mjs";
 import * as units from "./units.mjs";
 import * as usage from "./usage.mjs";
+import * as vehicles from "./vehicles.mjs";
 import * as weapons from "./weapons.mjs";
 
 /**
@@ -99,5 +100,6 @@ export default {
 	...traits,
 	...units,
 	...usage,
+	...vehicles,
 	...weapons
 };

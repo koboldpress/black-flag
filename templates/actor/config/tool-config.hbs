@@ -10,14 +10,14 @@
 			<legend>{{ localize "BF.Proficiency.Label[one]" }}</legend>
 			<label>
 				<span>{{ localize "BF.Check.Label[other]" }}</span>
-				<select name="system.proficiencies.tools.{{toolId}}.proficiency.multiplier">
+				<select name="system.proficiencies.{{ trait }}.{{ toolId }}.proficiency.multiplier">
 					{{ selectOptions proficiencyLevels selected=tool.proficiency.multiplier }}
 				</select>
 			</label>
 		</fieldset>
 	{{else}}
 		<fieldset>
-			<legend>{{ localize "BF.Tool.Listed" }}</legend>
+			<legend>{{ localize (ifThen (eq trait "vehicles") "BF.Vehicle.Listed" "BF.Tool.Listed") }}</legend>
 			<multi-select name="listed-tools">
 				{{#each toolOptions}}
 					<option value="{{ @key }}" {{~ifThen selected " selected" ""}}>{{ label }}</option>

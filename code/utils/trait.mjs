@@ -71,7 +71,7 @@ export function changeKeyPath(key, trait) {
 
 	if ( trait === "saves" ) {
 		return `${keyPath}.${split.pop()}.save.proficiency.multiplier`;
-	} else if ( ["skills", "tools"].includes(trait) ) {
+	} else if ( traitConfig.format === "complex" ) {
 		return `${keyPath}.${split.pop()}.proficiency.multiplier`;
 	} else {
 		return `${keyPath}.value`;

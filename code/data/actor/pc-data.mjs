@@ -166,6 +166,12 @@ export default class PCData extends ActorDataModel.mixin(
 					}),
 					{ label: "BF.Tool.Label[other]" }
 				),
+				vehicles: new MappingField(
+					new SchemaField({
+						proficiency: new ProficiencyField({ rounding: false }, { initial: { multiplier: 1 } })
+					}),
+					{ label: "BF.Vehicle.Label[other]" }
+				),
 				weapons: new SchemaField({
 					value: new SetField(new StringField()),
 					custom: new ArrayField(new StringField())
@@ -419,7 +425,7 @@ export default class PCData extends ActorDataModel.mixin(
 	prepareDerivedSkills() {
 		const rollData = this.parent.getRollData({ deterministic: true });
 		for (const [key, skill] of Object.entries(this.proficiencies.skills)) {
-			skill._source = this._source.skills?.[key] ?? {};
+			skill._source = this._source.proficiencies?.skills?.[key] ?? {};
 			const config = CONFIG.BlackFlag.skills[key];
 
 			skill.ability = config.ability;
@@ -501,39 +507,41 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedTools() {
+	prepareDerivedToolsVehicles() {
 		const rollData = this.parent.getRollData({ deterministic: true });
-		for (const [key, tool] of Object.entries(this.proficiencies.tools)) {
-			tool._source = this._source.tools?.[key] ?? {};
-			const config = Trait.configForKey(key, { trait: "tools" });
+		for (const trait of ["tools", "vehicles"]) {
+			for (const [key, tool] of Object.entries(this.proficiencies[trait])) {
+				tool._source = this._source.proficiencies?.[trait]?.[key] ?? {};
+				const config = Trait.configForKey(key, { trait });
 
-			tool.ability = config?.ability;
+				tool.ability = config?.ability;
 
-			tool.proficiency = new Proficiency(this.attributes.proficiency, tool.proficiency.multiplier, "down");
+				tool.proficiency = new Proficiency(this.attributes.proficiency, tool.proficiency.multiplier, "down");
 
-			const checkData = [
-				{ type: "ability-check", ability: tool.ability, proficiency: tool.proficiency.multiplier },
-				{ type: "tool-check", tool: key, proficiency: tool.proficiency.multiplier }
-			];
-			tool.modifiers = {
-				_data: checkData,
-				check: this.getModifiers(checkData),
-				minimum: this.getModifiers(checkData, "min"),
-				notes: this.getModifiers(checkData, "note")
-			};
-			tool.bonus = this.buildBonus(tool.modifiers.check, { deterministic: true, rollData });
+				const checkData = [
+					{ type: "ability-check", ability: tool.ability, proficiency: tool.proficiency.multiplier },
+					{ type: `${trait.replace("s", "")}-check`, [trait]: key, proficiency: tool.proficiency.multiplier }
+				];
+				tool.modifiers = {
+					_data: checkData,
+					check: this.getModifiers(checkData),
+					minimum: this.getModifiers(checkData, "min"),
+					notes: this.getModifiers(checkData, "note")
+				};
+				tool.bonus = this.buildBonus(tool.modifiers.check, { deterministic: true, rollData });
 
-			const ability = this.abilities[tool.ability];
-			tool.valid = ability?.valid ?? false;
-			tool.mod = (ability?.mod ?? 0) + tool.bonus + tool.proficiency.flat;
+				const ability = this.abilities[tool.ability];
+				tool.valid = ability?.valid ?? false;
+				tool.mod = (ability?.mod ?? 0) + tool.bonus + tool.proficiency.flat;
 
-			Object.defineProperty(tool, "label", {
-				get() {
-					if (!config) return "";
-					return config.label ?? `${config.localization}[other]`;
-				},
-				enumerable: false
-			});
+				Object.defineProperty(tool, "label", {
+					get() {
+						if (!config) return "";
+						return config.label ?? `${config.localization}[other]`;
+					},
+					enumerable: false
+				});
+			}
 		}
 	}
 

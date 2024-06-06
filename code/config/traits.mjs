@@ -10,6 +10,8 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @property {string} icon - Path to the icon used to represent this trait.
  * @property {string} type - If this a proficiency or trait.
  * @property {boolean} [expertise=false] - Does this proficiency support expertise?
+ * @property {string} [format] - Is the proficiency data stored in a "simple" format (set of string, like weapons)
+ *                               or "complex" format (object with proficiency, like skills or tools).
  * @property {string} [labelKeyPath="label"] - If config is an enum of objects, where can the label be found?
  * @property {string} [actorKeyPath] - Key path to this trait on the actor, if it isn't `traits.{name}` for traits
  *                                     or `proficiencies.{name}` for proficiencies.
@@ -47,7 +49,18 @@ export const traits = {
 		},
 		icon: "systems/black-flag/artwork/traits/tools.svg",
 		type: "proficiency",
-		expertise: true
+		expertise: true,
+		format: "complex"
+	},
+	vehicles: {
+		labels: {
+			title: "BF.Vehicle.Label[other]",
+			localization: "BF.Vehicle.Label"
+		},
+		icon: "systems/black-flag/artwork/traits/vehicles.svg",
+		type: "proficiency",
+		expertise: true,
+		format: "complex"
 	},
 	saves: {
 		labels: {
@@ -57,6 +70,7 @@ export const traits = {
 		localization: "BF.SavingThrow.LabelLong",
 		icon: "systems/black-flag/artwork/traits/saves.svg",
 		type: "proficiency",
+		format: "complex",
 		labelKeyPath: "labels.full",
 		actorKeyPath: "system.abilities",
 		configKey: "abilities"
@@ -68,7 +82,8 @@ export const traits = {
 		},
 		icon: "systems/black-flag/artwork/traits/skills.svg",
 		type: "proficiency",
-		expertise: true
+		expertise: true,
+		format: "complex"
 	},
 	languages: {
 		labels: {

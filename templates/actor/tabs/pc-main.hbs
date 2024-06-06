@@ -85,9 +85,26 @@
 		</div>
 	</fieldset>
 
+	{{#*inline ".proficiencySection"}}
+		<div class="{{ type }} block" data-key="{{ @key }}">
+			<div class="proficiency-selector" data-multiplier="{{ proficiency.multiplier }}"
+				 	data-rounding="{{ proficiency.rounding }}" aria-label="{{ proficiency.label }}">
+				<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg" inert></blackFlag-icon>
+				<input type="hidden" name="system.proficiencies.{{ category }}.{{ @key }}.proficiency.multiplier"
+						 	value="{{ _source.proficiency.multiplier }}">
+			</div>
+			<button type="button" class="unbutton" data-action="roll" data-sub-action="{{ type }}"
+			        data-{{ type }}="{{ @key }}">
+				<span class="name">{{ localize label }}</span>
+				<span class="ability">{{ lookup @root.CONFIG.abilities.localizedAbbreviations ability }}</span>
+				<span class="mod">{{#if valid}}{{ blackFlag-number mod }}{{/if}}</span>
+			</button>
+		</div>
+	{{/inline}}
+
 	<fieldset class="skills">
 		<legend>
-			{{localize "BF.Skill.Label[other]"}}
+			{{ localize "BF.Skill.Label[other]" }}
 			{{#if modes.editing}}
 				<button type="button" class="link-button" data-action="config" data-type="skill"
 				        aria-label="{{localize 'Configure'}}">
@@ -96,58 +113,40 @@
 			{{/if}}
 			{{blackFlag-notificationBadge actor category="skills"}}
 		</legend>
-		{{#each system.proficiencies.skills as |skill key|}}
-			<div class="skill block" data-key="{{key}}">
-				<div class="proficiency-selector" data-multiplier="{{skill.proficiency.multiplier}}"
-				     data-rounding="{{skill.proficiency.rounding}}" aria-label="{{skill.proficiency.label}}">
-					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"
-					                aria-hidden="true"></blackFlag-icon>
-					<input type="hidden" name="system.proficiencies.skills.{{key}}.proficiency.multiplier"
-					       value="{{skill._source.proficiency.multiplier}}">
-				</div>
-				<button type="button" class="unbutton" data-action="roll" data-sub-action="skill" data-skill="{{key}}">
-					<span class="name">
-						{{localize skill.labels.name}}
-					</span>
-					<span class="ability">
-						{{lookup @root.CONFIG.abilities.localizedAbbreviations skill.ability}}
-					</span>
-					<span class="mod">{{#if skill.valid}}{{blackFlag-number skill.mod}}{{else}}&mdash;{{/if}}</span>
-				</button>
-			</div>
+		{{#each system.proficiencies.skills}}
+			{{~> ".proficiencySection" type="skill" category="skills" label=labels.name }}
 		{{/each}}
 	</fieldset>
 
 	<fieldset class="tools">
 		<legend>
-			{{localize "BF.Tool.Label[other]"}}
-			{{#if modes.editing}}
+			{{ localize "BF.Tool.Label[other]" }}
+			{{#if editable}}
 				<button type="button" class="link-button" data-action="config" data-type="tool"
-				        aria-label="{{localize 'Configure'}}">
-					<i class="fa-solid fa-cog" aria-hidden="true"></i>
+				        aria-label="{{ localize 'Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
 				</button>
 			{{/if}}
-			{{blackFlag-notificationBadge actor category="tools"}}
+			{{ blackFlag-notificationBadge actor category="tools" }}
 		</legend>
-		{{#each system.proficiencies.tools as |tool key|}}
-			<div class="tool block" data-key="{{key}}">
-				<div class="proficiency-selector" data-multiplier="{{tool.proficiency.multiplier}}"
-				     data-rounding="{{tool.proficiency.rounding}}" aria-label="{{tool.proficiency.label}}">
-					<blackFlag-icon src="systems/black-flag/artwork/interface/proficiency.svg"
-					                aria-hidden="true"></blackFlag-icon>
-					<input type="hidden" name="system.proficiencies.tools.{{key}}.proficiency.multiplier"
-					       value="{{tool._source.proficiency.multiplier}}">
-				</div>
-				<button type="button" class="unbutton" data-action="roll" data-sub-action="tool" data-tool="{{key}}">
-					<span class="name">
-						{{localize tool.label}}
-					</span>
-					<span class="ability">
-						{{lookup @root.CONFIG.abilities.localizedAbbreviations tool.ability}}
-					</span>
-					<span class="mod">{{#if tool.valid}}{{blackFlag-number tool.mod}}{{/if}}</span>
+		{{#each system.proficiencies.tools}}
+			{{~> ".proficiencySection" type="tool" category="tools" label=label }}
+		{{/each}}
+	</fieldset>
+
+	<fieldset class="vehicles">
+		<legend>
+			{{ localize "BF.Vehicle.Label[other]" }}
+			{{#if editable}}
+				<button type="button" class="link-button" data-action="config" data-type="vehicle"
+								aria-label="{{ localize 'Configure' }}">
+					<i class="fa-solid fa-cog" inert></i>
 				</button>
-			</div>
+			{{/if}}
+			{{ blackFlag-notificationBadge actor category="vehicles" }}
+		</legend>
+		{{#each system.proficiencies.vehicles}}
+			{{~> ".proficiencySection" type="vehicle" category="vehicles" label=label }}
 		{{/each}}
 	</fieldset>
 

@@ -1,5 +1,5 @@
 import BlackFlagActiveEffect from "../../documents/active-effect.mjs";
-import { log, numberFormat } from "../../utils/_module.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
@@ -342,6 +342,8 @@ export default class BaseActorSheet extends ActorSheet {
 						return new ToolConfig(properties.key, this.actor).render(true);
 					case "type":
 						return new TypeConfig(this.actor).render(true);
+					case "vehicle":
+						return new ToolConfig(properties.key, this.actor, { trait: "vehicles" }).render(true);
 				}
 				break;
 			case "effect":

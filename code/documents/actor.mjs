@@ -659,8 +659,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				return this.rollSkill(config, message, dialog);
 			case "tool":
 				return this.rollTool(config, message, dialog);
-			default:
-				return log(`Unknown roll type clicked ${type}`, { level: "warn" });
+			case "vehicle":
+				return this.rollVehicle(config, message, dialog);
 		}
 	}
 
@@ -1499,9 +1499,134 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @memberof hookEvents
 		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.tools`.
+		 * @param {string} tool - ID of the tool that was rolled as defined in `CONFIG.BlackFlag.tools`.
 		 */
 		if (rolls?.length) Hooks.callAll("blackFlag.postRollTool", this, rolls, config.tool);
+
+		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration information for a vehicle roll.
+	 *
+	 * @typedef {ChallengeRollProcessConfiguration} VehicleRollProcessConfiguration
+	 * @property {string} vehicle - The vehicle type to roll.
+	 * @property {string} [ability] - The ability to be rolled with the vehicle.
+	 */
+
+	/**
+	 * Roll a Vehicle check.
+	 * @param {VehicleRollProcessConfiguration} [config] - Configuration information for the roll.
+	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @returns {Promise<ChallengeRoll[]|void>}
+	 */
+	async rollVehicle(config = {}, dialog = {}, message = {}) {
+		let vehicle = this.system.proficiencies?.vehicles?.[config.vehicle];
+		if (!vehicle) {
+			const vehicleConfig = Trait.configForKey(config.vehicle, { trait: "vehicles" });
+			if (!vehicleConfig) return;
+			vehicle = {
+				label: vehicleConfig.label,
+				proficiency: new Proficiency(this.system.attributes.proficiency, 0)
+			};
+		}
+		const rollData = this.getRollData();
+
+		const prepareVehicleConfig = (baseConfig, rollConfig, formData, index) => {
+			const abilityId = formData?.ability ?? baseConfig.ability ?? vehicle.ability ?? "dexterity";
+			const ability = this.system.abilities[abilityId];
+
+			const modifierData = [
+				{ type: "ability-check", ability: abilityId, proficiency: vehicle.proficiency.multiplier },
+				{
+					type: "vehicle-check",
+					ability: abilityId,
+					vehicle: config.vehicle,
+					proficiency: vehicle.proficiency.multiplier
+				}
+			];
+
+			rollConfig = foundry.utils.mergeObject(rollConfig, {
+				...buildRoll(
+					{
+						mod: ability?.mod,
+						prof: vehicle.proficiency.hasProficiency ? vehicle.proficiency.term : null,
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
+					},
+					rollData
+				),
+				options: {
+					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
+					target: rollConfig.target ?? config.target
+				}
+			});
+			rollConfig.data.abilityId = abilityId;
+
+			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
+		};
+
+		const rollConfig = foundry.utils.deepClone(config);
+		const { rollConfig: roll, rollNotes } = prepareVehicleConfig(rollConfig, {});
+		rollConfig.origin = this;
+		rollConfig.rolls = [roll].concat(config.rolls ?? []);
+
+		const type = game.i18n.format("BF.Vehicle.Action.CheckSpecific", {
+			vehicle: game.i18n.localize(vehicle.label)
+		});
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				applicationClass: SkillRollConfigurationDialog,
+				options: {
+					buildConfig: prepareVehicleConfig,
+					chooseAbility: true,
+					rollNotes,
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type })
+				}
+			},
+			dialog
+		);
+
+		const flavor = game.i18n.format("BF.Roll.Action.RollSpecific", { type });
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					title: `${flavor}: ${this.name}`,
+					flavor: type,
+					speaker: ChatMessage.getSpeaker({ actor: this }),
+					"flags.black-flag.roll": {
+						type: "vehicle",
+						vehicle: rollConfig.vehicle
+					}
+				}
+			},
+			message
+		);
+
+		/**
+		 * A hook event that fires before a vehicle check is rolled.
+		 * @function blackFlag.preRollVehicle
+		 * @memberof hookEvents
+		 * @param {VehicleRollProcessConfiguration} config - Configuration data for the pending roll.
+		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
+		 */
+		if (Hooks.call("blackFlag.preRollVehicle", rollConfig, dialogConfig, messageConfig) === false) return;
+
+		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
+
+		/**
+		 * A hook event that fires after a vehicle check has been rolled.
+		 * @function blackFlag.postRollVehicle
+		 * @memberof hookEvents
+		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
+		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {string} vehicle - ID of the vehicle category that was rolled as defined in `CONFIG.BlackFlag.vehicles`.
+		 */
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollVehicle", this, rolls, config.vehicle);
 
 		return rolls;
 	}

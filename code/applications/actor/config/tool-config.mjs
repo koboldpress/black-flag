@@ -2,7 +2,7 @@ import { Trait } from "../../../utils/_module.mjs";
 import BaseConfig from "./base-config.mjs";
 
 /**
- * Dialog for configuring tool proficiencies
+ * Dialog for configuring tool & vehicle proficiencies
  * @param {string} toolId - The tool being modified by this app.
  * @param {BlackFlagActor} actor - The actor to modify.
  * @param {object} options - Additional application rendering options.
@@ -15,10 +15,12 @@ export default class ToolConfig extends BaseConfig {
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "config", "tool"],
-			template: "systems/black-flag/templates/actor/config/tool-config.hbs"
+			template: "systems/black-flag/templates/actor/config/tool-config.hbs",
+			trait: "tools"
 		});
 	}
 
@@ -39,14 +41,14 @@ export default class ToolConfig extends BaseConfig {
 	 * @type {object|null}
 	 */
 	get toolConfig() {
-		return this.toolId ? Trait.configForKey(this.toolId, { trait: "tools" }) : null;
+		return this.toolId ? Trait.configForKey(this.toolId, { trait: this.options.trait }) : null;
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
 
 	/** @inheritDoc */
 	get type() {
-		return game.i18n.localize(CONFIG.BlackFlag.abilities[this.abilityId]?.label ?? "BF.Tool.Label[one]");
+		return Trait.traitLabel(this.options.trait, 1);
 	}
 
 	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
@@ -56,15 +58,18 @@ export default class ToolConfig extends BaseConfig {
 	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
-		const tools = context.source.proficiencies.tools ?? this.document.system.proficiencies.tools ?? {};
+		const tools =
+			context.source.proficiencies[this.options.trait] ?? this.document.system.proficiencies[this.options.trait] ?? {};
 		context.toolId = this.toolId;
 		context.tool = this.toolId ? tools[this.toolId] : null;
-		context.toolOptions = Array.from(Trait.choices("tools").set).reduce((obj, k) => {
-			obj[k] = { label: Trait.keyLabel(k, { trait: "tools" }), selected: k in tools };
+		context.toolOptions = Array.from(Trait.choices(this.options.trait).set).reduce((obj, k) => {
+			obj[k] = { label: Trait.keyLabel(k, { trait: this.options.trait }), selected: k in tools };
 			return obj;
 		}, {});
 		context.tools = Object.keys(tools).reduce((obj, key) => {
-			obj[key] = context.toolOptions[key];
+			if (key in context.toolOptions) {
+				obj[key] = context.toolOptions[key];
+			}
 			return obj;
 		}, {});
 		context.toolValues = Object.keys(context.tools).join(" ");
@@ -74,6 +79,7 @@ export default class ToolConfig extends BaseConfig {
 			1: game.i18n.localize("BF.Proficiency.Level.Proficient"),
 			2: game.i18n.localize("BF.Proficiency.Level.Expertise")
 		};
+		context.trait = this.options.trait;
 		return context;
 	}
 
@@ -83,15 +89,16 @@ export default class ToolConfig extends BaseConfig {
 	prepareModifiers() {
 		let checkModifiers;
 		let global;
+		const shortTrait = this.options.trait.replace("s", "");
 		if (this.toolId) {
 			checkModifiers = this.getModifiers([
-				{ k: "type", v: "tool-check" },
-				{ k: "tool", v: this.toolId }
+				{ k: "type", v: `${shortTrait}-check` },
+				{ k: shortTrait, v: this.toolId }
 			]);
 			global = false;
 		} else {
-			const filter = modifier => !modifier.filter.some(f => f.k === "tool");
-			checkModifiers = this.getModifiers([{ k: "type", v: "tool-check" }], [], filter);
+			const filter = modifier => !modifier.filter.some(f => f.k === shortTrait);
+			checkModifiers = this.getModifiers([{ k: "type", v: `${shortTrait}-check` }], [], filter);
 			global = true;
 		}
 		return [
@@ -153,13 +160,13 @@ export default class ToolConfig extends BaseConfig {
 	 */
 	_onChangeTools(event) {
 		if (event.target.open) return;
-		const removeKeys = new Set(Object.keys(this.document.system.proficiencies.tools));
+		const removeKeys = new Set(Object.keys(this.document.system.proficiencies[this.options.trait]));
 		const updates = {};
 		for (const key of event.target.value) {
-			if (key in this.document.system.proficiencies.tools) removeKeys.delete(key);
-			else updates[`system.proficiencies.tools.${key}`] = {};
+			if (key in this.document.system.proficiencies[this.options.trait]) removeKeys.delete(key);
+			else updates[`system.proficiencies.${this.options.trait}.${key}`] = {};
 		}
-		removeKeys.forEach(key => (updates[`system.proficiencies.tools.-=${key}`] = null));
+		removeKeys.forEach(key => (updates[`system.proficiencies.${this.options.trait}.-=${key}`] = null));
 		this.document.update(updates);
 	}
 
@@ -167,8 +174,9 @@ export default class ToolConfig extends BaseConfig {
 
 	/** @inheritDoc */
 	_getModifierData(category, type) {
-		const data = { type, filter: [{ k: "type", v: `tool-${category}` }] };
-		if (this.toolId) data.filter.push({ k: "tool", v: this.toolId });
+		const shortTrait = this.options.trait.replace("s", "");
+		const data = { type, filter: [{ k: "type", v: `${shortTrait}-${category}` }] };
+		if (this.toolId) data.filter.push({ k: shortTrait, v: this.toolId });
 		return data;
 	}
 }

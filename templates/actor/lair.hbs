@@ -1,4 +1,4 @@
-{{#*inline "itemList"}}
+{{#*inline ".itemList"}}
 	<blackFlag-actions>
 		<ul class="items {{ type }}">
 			{{#each items}}
@@ -60,20 +60,20 @@
 		<h2>{{ localize "BF.Feature.Type.LairAction[other]" }}</h2>
 		{{ editor enriched.lairActions target="system.description.lairActions" button=true editable=editable
 							engine="prosemirror" collaborate=false }}
-		{{> "itemList" type="lairAction" items=sections.features.lairActions.items
+		{{> ".itemList" type="lairAction" items=sections.features.lairActions.items
 		    localization="BF.Feature.Type.LairAction[one]" }}
 
 		<h2>{{ localize "BF.Feature.Type.RegionalEffect[other]" }}</h2>
 		{{ editor enriched.regionalEffects target="system.description.regionalEffects" button=true editable=editable
 							engine="prosemirror" collaborate=false }}
-		{{> "itemList" type="regionalEffect" items=sections.features.regionalEffects.items
+		{{> ".itemList" type="regionalEffect" items=sections.features.regionalEffects.items
 		    localization="BF.Feature.Type.RegionalEffect[one]" }}
 		{{ editor enriched.conclusion target="system.description.conclusion" button=true editable=editable
 							engine="prosemirror" collaborate=false }}
 
 		{{#if sections.uncategorized}}
 			<h2>{{ localize "BF.Item.Type.Unidentified[other]" }}</h2>
-			{{> "itemList" type="uncategorized" items=sections.uncategorized showAdd=false }}
+			{{> ".itemList" type="uncategorized" items=sections.uncategorized showAdd=false }}
 		{{/if}}
 	</div>
 </div>
