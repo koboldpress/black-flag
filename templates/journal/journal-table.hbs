@@ -1,13 +1,13 @@
-<table {{~#if level}} data-toc-level="{{level}}"{{/if}} {{~#if class}} class="{{class}}"{{/if}}>
+<table {{~#if level}} data-toc-level="{{ level }}"{{/if}} {{~#if class}} class="{{ class }}"{{/if}}>
 	{{#if caption}}
-		<caption>{{caption}}</caption>
+		<caption>{{ caption }}</caption>
 	{{/if}}
 	{{#if table.cols}}
 		<colgroup>
 			{{#each table.cols}}
 				<col
-					{{~#if (gt this.span 1)}} span="{{this.span}}"{{/if}}
-					{{~#if this.class}} class="{{this.class}}"{{/if}}>
+					{{~#if (gt span 1)}} span="{{ span }}"{{/if}}
+					{{~#if class}} class="{{ class }}"{{/if}}>
 			{{/each}}
 		</colgroup>
 	{{/if}}
@@ -16,8 +16,8 @@
 			<tr>
 				{{#each this}}
 					<th scope="col"
-						{{~#if this.rowSpan}} rowspan="{{this.rowSpan}}"{{/if}}
-						{{~#if this.colSpan}} colspan="{{this.colSpan}}"{{/if}}>{{this.content}}</th>
+						{{~#if rowSpan}} rowspan="{{ rowSpan }}"{{/if}}
+						{{~#if colSpan}} colspan="{{ colSpan }}"{{/if}}>{{ content }}</th>
 				{{/each}}
 			</tr>
 		{{/each}}
@@ -26,7 +26,7 @@
 		{{#each table.rows}}
 			<tr>
 				{{#each this}}
-					<td{{#if this.class}} class="{{this.class}}"{{/if}}>{{{this.content}}}</td>
+					<td{{#if class}} class="{{ class }}"{{/if}}>{{{ content }}}</td>
 				{{/each}}
 			</tr>
 		{{/each}}

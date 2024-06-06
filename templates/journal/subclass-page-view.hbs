@@ -1,26 +1,26 @@
 {{#if data.title.show}}
 	<header>
-		<h{{title.level1}}>{{data.name}}</h{{title.level1}}>
+		<h{{ title.level1 }}>{{ data.name }}</h{{ title.level1 }}>
 	</header>
 {{/if}}
 
 {{#if linked.document}}
 
 	<section>
-		{{{enriched.introduction}}}
+		{{{ enriched.introduction }}}
 
 		{{> "blackFlag.journal-table" table=table level=title.level3 class="progression"
-			caption=(localize "BF.JournalPage.Class.Table.Caption" class=linked.name)}}
+		    caption=(localize "BF.JournalPage.Class.Table.Caption" class=linked.name) }}
 
 		{{#each features}}
-			<h{{@root.title.level3}}>{{this.name}}</h{{@root.title.level3}}>
-			{{#if this.tag}}<em>{{this.tag}}</em>{{/if}}
-			{{{this.description}}}
+			<h{{ @root.title.level3 }}>{{ name }}</h{{ @root.title.level3 }}>
+			{{#if this.tag}}<em>{{ tag }}</em>{{/if}}
+			{{{ description }}}
 		{{/each}}
 	</section>
 
 {{else}}
 	<section>
-		{{localize "BF.JournalPage.Subclass.NoSubclass"}}
+		{{ localize "BF.JournalPage.Subclass.NoSubclass" }}
 	</section>
 {{/if}}
