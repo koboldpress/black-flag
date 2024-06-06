@@ -85,6 +85,22 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add the prerequisite label to the embedded content.
+	 * @param {HTMLCollection} embed - Existing embed collection.
+	 * @returns {HTMLCollection}
+	 */
+	async embedPrerequisite(embed) {
+		if ( this.restriction.label ) embed[0]?.insertAdjacentHTML("beforebegin", `<p><em>${
+			game.i18n.format("BF.Prerequisite.Listing", { prerequisite: this.restriction.label })
+		}</em></p>`);
+		return embed;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

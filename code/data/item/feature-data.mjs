@@ -52,4 +52,13 @@ export default class FeatureData extends ItemDataModel.mixin(
 			})
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(...args) {
+		return this.embedPrerequisite(await super.toEmbed(...args));
+	}
 }

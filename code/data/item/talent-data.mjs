@@ -47,4 +47,13 @@ export default class TalentData extends ItemDataModel.mixin(
 			})
 		});
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(...args) {
+		return this.embedPrerequisite(await super.toEmbed(...args));
+	}
 }
