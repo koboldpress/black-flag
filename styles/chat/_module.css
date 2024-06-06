@@ -66,6 +66,9 @@
 		list-style: none;
 		margin-block: 2px;
 		padding: 0;
+		&:not(:has(> li)) {
+			display: none;
+		}
 	}
 
 	.tags {

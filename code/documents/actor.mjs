@@ -681,7 +681,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAbilityCheck(config = {}, dialog = {}, message = {}) {
-		const ability = this.system.abilities[config.ability];
+		const ability = this.system.abilities?.[config.ability];
 		if (!ability) return;
 		const rollData = this.getRollData();
 
@@ -769,7 +769,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAbilitySave(config = {}, dialog = {}, message = {}) {
-		const ability = this.system.abilities[config.ability];
+		const ability = this.system.abilities?.[config.ability];
 		if (!ability) return;
 		const rollData = this.getRollData();
 
@@ -866,6 +866,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async rollDeathSave(config = {}, dialog = {}, message = {}) {
 		const death = this.system.attributes.death;
+		if (!death) return;
 
 		const modifierData = { type: "death-save" };
 		const rollData = this.getRollData();
@@ -1051,6 +1052,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<BasicRoll[]|void>}
 	 */
 	async rollHitDie(config = {}, dialog = {}, message = {}) {
+		if (!this.system.attributes?.hd) return;
+
 		// If no denomination is chosen, use the highest HD that is available
 		if (!config.denomination) {
 			config.denomination = Object.entries(this.system.attributes.hd.d)
@@ -1288,7 +1291,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollSkill(config = {}, dialog = {}, message = {}) {
-		const skill = this.system.proficiencies.skills[config.skill];
+		const skill = this.system.proficiencies?.skills?.[config.skill];
 		if (!skill) return;
 		const rollData = this.getRollData();
 
@@ -1401,7 +1404,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollTool(config = {}, dialog = {}, message = {}) {
-		let tool = this.system.proficiencies.tools[config.tool];
+		let tool = this.system.proficiencies?.tools?.[config.tool];
 		if (!tool) {
 			const toolConfig = Trait.configForKey(config.tool, { trait: "tools" });
 			if (!toolConfig) return;
