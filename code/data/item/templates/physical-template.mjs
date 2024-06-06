@@ -99,6 +99,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	 * @type {boolean}
 	 */
 	get equipped() {
+		if ( !this.parent.actor ) return false;
 		if ( !this.equippable || this.parent.actor?.type !== "pc" ) return true;
 		return this.parent.getFlag("black-flag", "relationship.equipped") === true;
 	}

@@ -197,7 +197,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	prepareFinalProficiencyWarnings() {
-		if (!this.equipped || !this.parent.actor) return;
+		if (!this.equipped) return;
 		if (this.proficient === false) {
 			const message = game.i18n.format("BF.Armor.Notification.NotProficient", {
 				type: game.i18n
