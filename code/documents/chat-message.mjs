@@ -28,6 +28,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getHTML() {
 		const jQuery = await super.getHTML();
 		if (!this.isContentVisible) return jQuery;

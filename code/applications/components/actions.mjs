@@ -99,6 +99,12 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 				group: "activity"
 			},
 			{
+				name: "BF.Item.Action.Post",
+				icon: '<i class="fa-solid fa-envelope fa-fw" inert></i>',
+				callback: li => this._onAction(li[0], "post"),
+				group: "item"
+			},
+			{
 				name: "BF.Item.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
 				condition: li => !this.isEditable,
@@ -159,6 +165,9 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 			case "editItem":
 			case "viewItem":
 				if (item) return item.sheet.render(true);
+				break;
+			case "post":
+				if (item) return item.postToChat();
 				break;
 		}
 

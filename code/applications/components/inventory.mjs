@@ -134,32 +134,37 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		const type = item.type === "spell" ? "Spell" : item.system.isPhysical ? "Item" : "Feature";
 		return [
 			{
+				name: "BF.Item.Action.Post",
+				icon: '<i class="fa-solid fa-envelope fa-fw" inert></i>',
+				callback: li => this._onAction(li[0], "post")
+			},
+			{
 				name: `BF.${type}.Action.View`,
-				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				icon: '<i class="fa-solid fa-eye fa-fw" inert></i>',
 				condition: li => !this.isEditable,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
 				name: `BF.${type}.Action.Edit`,
-				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
+				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
 				name: `BF.${type}.Action.Duplicate`,
-				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
+				icon: '<i class="fa-solid fa-copy fa-fw" inert></i>',
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
-				icon: "<i class='fa-solid fa-trash fa-fw destructive'></i>",
+				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "delete")
 			},
 			{
 				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
-				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw"></i>`,
+				icon: `<i class="fa-regular ${item.enabled ? "fa-square-check" : "fa-square"} fa-fw" inert></i>`,
 				condition: () =>
 					this.actor &&
 					this.isEditable &&
@@ -170,14 +175,14 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			},
 			{
 				name: `BF.Item.Action.${item.system.equipped ? "Unequip" : "Equip"}`,
-				icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
+				icon: '<i class="fa-solid fa-shield-alt fa-fw" inert></i>',
 				condition: () => this.actor && this.isEditable && type === "Item" && item.system.equippable,
 				callback: li => this._onAction(li[0], "equip"),
 				group: "state"
 			},
 			{
 				name: `BF.Spell.Action.${item.system.prepared ? "Unprepare" : "Prepare"}`,
-				icon: '<i class="fa-solid fa-sun fa-fw"></i>',
+				icon: '<i class="fa-solid fa-sun fa-fw" inert></i>',
 				condition: () => this.actor && this.isEditable && type === "Spell" && item.system.preparable,
 				callback: li => this._onAction(li[0], "prepare"),
 				group: "state"
@@ -226,6 +231,8 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				return item.setFlag("black-flag", "relationship.equipped", !item.system.equipped);
 			case "expand":
 				return this._onExpand(item, target);
+			case "post":
+				return item.postToChat();
 			case "prepare":
 				return item.setFlag("black-flag", "relationship.prepared", !item.system.prepared);
 		}

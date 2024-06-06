@@ -1,0 +1,38 @@
+<div class="black-flag chat-card item">
+	<section class="card-header collapsible collapsed">
+		<header>
+			<img src="{{ item.img }}" alt="{{ item.name }}">
+			<div class="name">
+				<h5>{{ item.name }}</h5>
+			</div>
+			<i class="fa-solid fa-chevron-down fa-fw" inert></i>
+		</header>
+		<div class="details collapsible-content">
+			<div class="wrapper">
+				<div class="dropdown-block">
+					{{{ description }}}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{{#if buttons.length}}
+		<ul class="menu">
+			{{#each buttons}}
+				<li>
+					<button type="button" class="light-button" name="{{ @key }}" {{ blackFlag-dataset dataset }}>
+						{{{ label }}}
+					</button>
+				</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+
+	{{#if tags.length}}
+		<ul class="tags unlist">
+			{{#each tags}}
+				<li class="tag {{ key }}">{{{ label }}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+</div>

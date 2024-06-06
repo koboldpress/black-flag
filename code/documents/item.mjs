@@ -270,6 +270,61 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Post this item's description to chat.
+	 * @param {object} message - Configuration info for the created message.
+	 * @returns {Promise<ChatMessage>}
+	 */
+	async postToChat(message = {}) {
+		const baseContext = {
+			item: this,
+			actor: this.actor,
+			token: this.actor?.token,
+			buttons: {},
+			tags: Array.from((this.system.chatTags ?? this.chatTags).entries())
+				.map(([key, label]) => ({ key, label }))
+				.filter(t => t.label),
+			description: await TextEditor.enrichHTML(this.system.description?.value ?? "", {
+				relativeTo: this,
+				secrets: false,
+				async: true
+			})
+		};
+		const context = this.system.prepareChatContext?.(baseContext) ?? baseContext;
+
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				rollMode: game.settings.get("core", "rollMode"),
+				data: {
+					type: game.release.generation < 12 ? CONST.CHAT_MESSAGE_TYPES.ORDER : undefined,
+					style: game.release.generation < 12 ? undefined : CONST.CHAT_MESSAGE_STYLES.OTHER,
+					content: await renderTemplate("systems/black-flag/templates/chat/item-card.hbs", context),
+					speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+					flags: {
+						core: { canPopout: true },
+						"black-flag": {
+							type: "item",
+							uuid: this.uuid
+						}
+					}
+				}
+			},
+			message
+		);
+
+		ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+
+		// TODO: Call preCreateItemMessage hook
+
+		const card = await ChatMessage.create(messageConfig.data);
+
+		// TODO: Call postCreateItemMessage hook
+
+		return card;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Embedded Operations         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
