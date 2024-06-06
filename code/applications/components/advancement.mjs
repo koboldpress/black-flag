@@ -146,6 +146,21 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
+				name: "BF.JournalPage.Class.DisplayAdvancement",
+				icon: `<i class="fa-regular fa-square${
+					advancement?.getFlag(game.system.id, "hideOnClassTable") ? "" : "-check"
+				} fa-fw"></i>`,
+				condition: li => advancement && this.isEditable,
+				callback: li => {
+					if (advancement.getFlag(game.system.id, "hideOnClassTable") === true) {
+						advancement.unsetFlag(game.system.id, "hideOnClassTable");
+					} else {
+						advancement.setFlag(game.system.id, "hideOnClassTable", true);
+					}
+				},
+				group: "state"
+			},
+			{
 				name: "BF.Advancement.Core.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw' inert></i>",
 				condition: li => advancement && this.isEditable,
@@ -269,11 +284,11 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	static async dropAdvancement(event, target, advancementData) {
 		const advancement = [];
 		for (const data of advancementData) {
-			const AdvancementClass = CONFIG.Advancement.types[advancement.type]?.documentClass;
+			const AdvancementClass = CONFIG.Advancement.types[data.type]?.documentClass;
 			if (!AdvancementClass) continue;
 			if (
-				!CONFIG.Advancement.types[data.type].validItemTypes?.has(this.item.type) ||
-				!AdvancementClass.availableForItem(this.item)
+				!CONFIG.Advancement.types[data.type].validItemTypes?.has(target.type) ||
+				!AdvancementClass.availableForItem(target)
 			) {
 				ui.notifications.error("BF.Advancement.Core.Warning.CantBeAdded", { localize: true });
 				return false;
@@ -282,7 +297,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 			delete data._id;
 			advancement.push(data);
 		}
-		this.item.createEmbeddedDocuments("Advancement", advancement);
+		target.createEmbeddedDocuments("Advancement", advancement);
 		// TODO: If item is on an actor, apply initial advancement
 	}
 

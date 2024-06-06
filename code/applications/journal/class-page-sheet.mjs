@@ -94,7 +94,8 @@ export default class ClassPageSheet extends JournalPageSheet {
 			.map(i => {
 				const advancements = i.system.advancement
 					?.byType("grantFeatures")
-					.concat(i.system.advancement?.byType("chooseFeatures"));
+					.concat(i.system.advancement?.byType("chooseFeatures"))
+					.filter(a => !a.getFlag(game.system.id, "hideOnClassTable"));
 				return advancements.flatMap(a => a.configuration.pool.map(p => p.uuid));
 			})
 			.flat();
@@ -213,6 +214,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 			const features = {};
 
 			for (const advancement of item.system.advancement.byLevel(level)) {
+				if (advancement.getFlag(game.system.id, "hideOnClassTable")) continue;
 				switch (advancement.constructor.typeName) {
 					case "grantFeatures":
 						advancement.configuration.pool.forEach(d => (features[d.uuid] = linkForUUID(d.uuid, { element: true })));
@@ -272,10 +274,11 @@ export default class ClassPageSheet extends JournalPageSheet {
 	 * @returns {{column: ScaleValueAdvancement[], grouped: Collection<ScaleValueAdvancement[]>}}
 	 */
 	_getScaleValues(item, { features }) {
+		const filter = a => a.filter(a => !a.getFlag(game.system.id, "hideOnClassTable"));
 		return {
-			column: item.system.advancement.byType("scaleValue"),
+			column: filter(item.system.advancement.byType("scaleValue")),
 			grouped: features.reduce((collection, feature) => {
-				collection.set(feature.uuid, feature.system.advancement.byType("scaleValue"));
+				collection.set(feature.uuid, filter(feature.system.advancement.byType("scaleValue")));
 				return collection;
 			}, new Collection())
 		};

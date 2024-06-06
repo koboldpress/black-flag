@@ -334,7 +334,14 @@ export default Base =>
 					CONFIG[this.documentName].types[
 						data.type ?? context.parent.getEmbeddedDocument(this.documentName, data._id)?.type
 					];
-				updates[data._id] = c?.documentClass.cleanData(data) ?? data;
+				const removals = Object.entries(foundry.utils.flattenObject(data)).reduce((obj, [k, v]) => {
+					if (k.includes("-=")) obj[k] = v;
+					return obj;
+				}, {});
+				updates[data._id] = foundry.utils.mergeObject(
+					c?.documentClass.cleanData(data, { partial: true }) ?? data,
+					removals
+				);
 				return updates;
 			}, {});
 			await context.parent.update(
@@ -436,6 +443,53 @@ export default Base =>
 			const dragData = { type: this.documentName, data: this.toObject() };
 			if (this.id) dragData.uuid = this.uuid;
 			return dragData;
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*           Flag Operations           */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Get the value of a flag for this PseudoDocument.
+		 * @param {string} scope - The flag scope which namespaces the key.
+		 * @param {string} key - The flag key.
+		 * @returns {*} - The flag value.
+		 */
+		getFlag(scope, key) {
+			const scopes = Item.database.getFlagScopes();
+			if (!scopes.includes(scope)) throw new Error(`Flag scope "${scope}" is not valid or not currently active.`);
+			return foundry.utils.getProperty(this.flags?.[scope], key);
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Assign a flag to this PseudoDocument.
+		 * @param {string} scope - The flag scope which namespaces the key.
+		 * @param {string} key - The flag key.
+		 * @param {*} value - The flag value.
+		 * @returns {Promise<PseudoDocument>} - A Promise resolving to the updated PseudoDocument.
+		 */
+		async setFlag(scope, key, value) {
+			const scopes = Item.database.getFlagScopes();
+			if (!scopes.includes(scope)) throw new Error(`Flag scope "${scope}" is not valid or not currently active.`);
+			return this.update({ flags: { [scope]: { [key]: value } } });
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Remove a flag assigned to the PseudoDocument.
+		 * @param {string} scope - The flag scope which namespaces the key.
+		 * @param {string} key - The flag key.
+		 * @returns {Promise<Document>} - The updated document instance.
+		 */
+		async unsetFlag(scope, key) {
+			const scopes = Item.database.getFlagScopes();
+			if (!scopes.includes(scope)) throw new Error(`Flag scope "${scope}" is not valid or not currently active.`);
+			const head = key.split(".");
+			const tail = `-=${head.pop()}`;
+			return this.update({ [["flags", scope, ...head, tail].join(".")]: null });
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
