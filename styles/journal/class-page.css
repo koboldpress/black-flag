@@ -19,15 +19,16 @@
 	}
 	fieldset {
 		margin-inline: 1rem;
+		--bf-form-label-width: 15em;
 
-		label button {
+		label [data-action="launch-text-editor"] {
 			margin-inline-start: auto;
 			margin-block: 0.25rem;
 			width: unset;
 			min-width: 10em;
 		}
 
-		.drop.hint {
+		.drop-area.hint {
 			flex: 1 1 50%;
 		}
 		.item {

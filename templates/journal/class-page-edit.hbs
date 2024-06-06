@@ -1,59 +1,67 @@
-<form class="{{cssClass}} drop-target" autocomplete="off">
-	{{> journalEntryPageHeader}}
+<form class="{{ cssClass }} drop-target" autocomplete="off">
+	{{> journalEntryPageHeader }}
 
 	<fieldset class="drop-area">
-		<legend>{{localize "BF.Item.Type.Class[one]"}}</legend>
+		<legend>{{ localize "BF.Item.Type.Class[one]" }}</legend>
 		<label>
-			<span>{{localize "BF.JournalPage.Class.Item.Label"}}</span>
+			<span>{{ localize "BF.JournalPage.Class.Item.Label" }}</span>
 			{{#if document.system.item}}
-				<div class="item" data-item-uuid="{{document.system.item}}" data-item-type="class">
-					{{{blackFlag-linkForUUID document.system.item}}}
-					<a data-action="delete"><i class="fa-solid fa-trash"></i></a>
+				<div class="item" data-item-uuid="{{ document.system.item }}" data-item-type="linked">
+					{{{ blackFlag-linkForUUID document.system.item }}}
+					<button type="button" class="link-button" data-action="delete"
+					        data-tooltip="BF.JournalPage.Class.Action.Remove"
+					        aria-label="{{ localize 'BF.JournalPage.Class.Action.Remove' }}">
+						<i class="fa-solid fa-trash" inert></i>
+					</button>
 				</div>
 			{{else}}
-				<p class="drop hint">
-					{{localize "BF.JournalPage.Class.Item.Hint"}}
+				<p class="drop-area hint">
+					{{ localize "BF.JournalPage.Class.Item.Hint" }}
 				</p>
 			{{/if}}
 		</label>
 		<label>
 			<span>
-				{{localize "BF.JournalPage.Class.Introduction.Label"}}
+				{{ localize "BF.JournalPage.Class.Introduction.Label" }}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.Introduction.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.introduction">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.introduction">
+				<i class="fa-solid fa-edit"></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 	</fieldset>
 
 	<fieldset>
-		<legend>{{localize "BF.JournalPage.Class.AdditionalDescriptions.Label"}}</legend>
+		<legend>{{ localize "BF.JournalPage.Class.AdditionalDescriptions.Label" }}</legend>
 		<label>
 			<span>
-				{{localize "BF.HitPoint.Label[other]"}}
+				{{ localize "BF.HitPoint.Label[other]" }}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.HitPoints.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.additionalHitPoints">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.additionalHitPoints">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 		<label>
 			<span>
-				{{localize "BF.Proficiency.Label[other]"}}
+				{{ localize "BF.Proficiency.Label[other]" }}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.Traits.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.additionalTraits">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.additionalTraits">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 		<label>
 			<span>
-				{{localize "BF.JournalPage.Class.Equipment.Header"}}
+				{{ localize "BF.JournalPage.Class.Equipment.Header" }}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.Equipment.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.additionalEquipment">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.additionalEquipment">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 	</fieldset>
@@ -65,26 +73,37 @@
 				{{localize "BF.JournalPage.Class.Subclass.AdvancementDescription.Label"}}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.Subclass.AdvancementDescription.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.subclassAdvancement">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.subclassAdvancement">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 		<label>
 			<span>
-				{{localize "BF.JournalPage.Class.Subclass.SectionDescription.Label"}}
+				{{ localize "BF.JournalPage.Class.Subclass.SectionDescription.Label" }}
 				<i class="hintIcon" data-tooltip="BF.JournalPage.Class.Subclass.SectionDescription.Hint"></i>
 			</span>
-			<button type="button" data-action="launch-text-editor" data-target="system.description.subclassSection">
-				<i class="fa-solid fa-edit"></i> {{localize "BF.JournalPage.Edit"}}
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+			        data-target="system.description.subclassSection">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
 		<ol class="items-list">
 			{{#each system.subclasses}}
-				<li class="item" data-item-uuid="{{this}}" data-item-type="subclass">
-					<div class="item-name">{{{blackFlag-linkForUUID this}}}</div>
-					<div class="item-controls"><a data-action="delete"><i class="fa-solid fa-trash"></i></a></div>
+				<li class="item" data-item-uuid="{{ this }}" data-item-type="subclass">
+					<div class="item-name">{{{ blackFlag-linkForUUID this }}}</div>
+					<div class="item-controls">
+						<button type="button" class="link-button" data-action="delete"
+						        data-tooltip="BF.JournalPage.Subclass.Action.Remove"
+						        aria-label="{{ localize 'BF.JournalPage.Subclass.Action.Remove' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</div>
 				</li>
 			{{/each}}
 		</ol>
+		<p class="drop-area hint">
+			{{ localize "BF.JournalPage.Subclass.Item.Hint" }}
+		</p>
 	</fieldset>
 </form>

@@ -456,6 +456,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _renderInner(...args) {
 		const html = await super._renderInner(...args);
 		this.toc = JournalEntryPage.buildTOC(html.get());
@@ -466,6 +467,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	activateListeners(jQuery) {
 		super.activateListeners(jQuery);
 		const html = jQuery[0];
@@ -515,6 +517,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _onDrop(event) {
 		const data = TextEditor.getDragEventData(event);
 
