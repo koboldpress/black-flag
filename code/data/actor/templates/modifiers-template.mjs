@@ -27,6 +27,7 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	prepareDerivedModifiers() {
+		this.modifiers = this.modifiers.filter(m => !foundry.utils.isEmpty(m));
 		this.modifiers.forEach((modifier, index) => Object.defineProperty(modifier, "index", {
 			value: index,
 			enumerable: false,
