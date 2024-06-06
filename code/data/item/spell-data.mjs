@@ -1,6 +1,5 @@
 import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
-import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
@@ -90,8 +89,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	get chatTags() {
 		const tags = this.parent.chatTags;
-		// TODO: Add spell school to type
+		if (this.school) tags.set("type", CONFIG.BlackFlag.spellSchools.localized[this.school]);
 		tags.set("details", this.components.label);
+		tags.set("activation", this.casting.label);
+		tags.set("duration", this.duration.label);
+		if (this.range.units) tags.set("range", this.range.label);
+		if (this.target.affects.type) tags.set("affects", this.target.affects.label);
+		if (this.target.template.units) tags.set("template", this.target.template.label);
+		tags.set("attuned", this.preparationLabel);
 		return tags;
 	}
 
@@ -145,6 +150,25 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	get prepared() {
 		if (!this.preparable || this.parent.actor?.type !== "pc") return true;
 		return this.parent.getFlag("black-flag", "relationship.prepared") === true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Label for displaying preparation status in chat.
+	 * @type {string|null}
+	 */
+	get preparationLabel() {
+		const preparationMode = this.parent.getFlag("black-flag", "relationship.mode");
+		if (!preparationMode || preparationMode === "standard") {
+			if (this.parent.getFlag("black-flag", "relationship.alwaysPrepared")) {
+				return game.i18n.localize("BF.Spell.Preparation.AlwaysPrepared");
+			} else if (this.alwaysPreparable) {
+				return game.i18n.localize(`BF.Spell.Preparation.${this.prepared ? "" : "Not"}Prepared`);
+			}
+			return null;
+		}
+		return CONFIG.BlackFlag.spellPreparationModes.localized[preparationMode] ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

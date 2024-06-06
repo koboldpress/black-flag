@@ -52,6 +52,15 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		this.setPhysicalChatTags(tags);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.ammunition;
 	}

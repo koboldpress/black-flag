@@ -5,15 +5,19 @@
 			<div class="name">
 				<h5>{{ item.name }}</h5>
 			</div>
-			<i class="fa-solid fa-chevron-down fa-fw" inert></i>
+			{{#if description}}
+				<i class="fa-solid fa-chevron-down fa-fw" inert></i>
+			{{/if}}
 		</header>
-		<div class="details collapsible-content">
-			<div class="wrapper">
-				<div class="dropdown-block">
-					{{{ description }}}
+		{{#if description }}
+			<div class="details collapsible-content">
+				<div class="wrapper">
+					<div class="dropdown-block">
+						{{{ description }}}
+					</div>
 				</div>
 			</div>
-		</div>
+		{{/if}}
 	</section>
 
 	{{#if buttons.length}}

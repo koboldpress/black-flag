@@ -17,20 +17,23 @@
 		</div>
 	</section>
 
-	<ul class="menu">
-		{{#each buttons}}
-			<li>
-				<button type="button" class="light-button" name="{{ @key }}"
-			          {{ blackFlag-dataset dataset }}>{{{ label }}}</button>
-			</li>
-		{{/each}}
-	</ul>
+	{{#if buttons.length}}
+		<ul class="menu">
+			{{#each buttons}}
+				<li>
+					<button type="button" class="light-button" name="{{ @key }}" {{ blackFlag-dataset dataset }}>
+						{{{ label }}}
+					</button>
+				</li>
+			{{/each}}
+		</ul>
+	{{/if}}
 
-	<ul class="tags unlist">
-		{{#each tags}}
-			<li class="tag {{ key }}">
-				{{{ label }}}
-			</li>
-		{{/each}}
-	</ul>
+	{{#if tags.length}}
+		<ul class="tags unlist">
+			{{#each tags}}
+				<li class="tag {{ key }}">{{{ label }}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
 </div>

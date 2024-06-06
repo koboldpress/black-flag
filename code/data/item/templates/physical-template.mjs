@@ -251,4 +251,18 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 		}
 		return containers;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Set the equipped and attuned chat tags.
+	 * @param {Map<string, string>} tags - Tags map to set.
+	 */
+	setPhysicalChatTags(tags) {
+		if ( this.attuned ) tags.set("attuned", game.i18n.localize("BF.Attunement.Attuned"));
+		else if ( this.attunement.value === "required" ) {
+			tags.set("attuned", game.i18n.localize("BF.Attunement.Type.Required"));
+		}
+		if ( this.equipped ) tags.set("equipped", game.i18n.localize("BF.Item.Equipped"));
+	}
 }

@@ -130,8 +130,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	get chatTags() {
 		const tags = this.parent.chatTags;
+		tags.set("type", this.typeLabel);
 		if (this.rangeLabel) tags.set("range", this.rangeLabel);
 		else if (this.reachLabel) tags.set("range", this.reachLabel);
+		this.setPhysicalChatTags(tags);
 		return tags;
 	}
 
@@ -191,6 +193,22 @@ export default class WeaponData extends ItemDataModel.mixin(
 		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
 		// Ranged
 		// Reach (total)
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Combined label for the weapon's type (e.g. "Simple Melee Weapon").
+	 * @type {string}
+	 */
+	get typeLabel() {
+		return game.i18n
+			.format("BF.Weapon.Type.CombinedLabel", {
+				category: CONFIG.BlackFlag.weapons.localized[this.type.category] ?? "",
+				type: CONFIG.BlackFlag.weaponTypes.localized[this.type.value] ?? ""
+			})
+			.replace("  ", " ")
+			.trim();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

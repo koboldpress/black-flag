@@ -42,6 +42,15 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		this.setPhysicalChatTags(tags);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	get validCategories() {
 		return CONFIG.BlackFlag.sundryCategories;
 	}

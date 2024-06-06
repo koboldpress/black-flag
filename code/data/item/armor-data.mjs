@@ -100,7 +100,18 @@ export default class ArmorData extends ItemDataModel.mixin(
 				this._source.armor.value || 0
 			)} ${this.modifierHint(false)}`;
 		if (this.magicAvailable && this.magicalBonus) label += ` + ${numberFormat(this.magicalBonus)}`;
-		return label;
+		return label.trim();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		if (this.type.category) tags.set("type", CONFIG.BlackFlag.armor.localized[this.type.category]);
+		tags.set("details", this.acLabel);
+		this.setPhysicalChatTags(tags);
+		return tags;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -112,7 +123,10 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	get traits() {
-		const traits = [this.acLabel, ...Array.from(this.properties).map(p => this.validProperties[p]?.label)];
+		const traits = [
+			this.acLabel,
+			...Array.from(this.properties).map(p => CONFIG.BlackFlag.itemProperties.localized[p])
+		];
 		// TODO: Display required strength with cumbersome property
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
 		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
@@ -183,7 +197,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/** @inheritDoc */
 	prepareFinalProficiencyWarnings() {
-		if (!this.equipped) return;
+		if (!this.equipped || !this.parent.actor) return;
 		if (this.proficient === false) {
 			const message = game.i18n.format("BF.Armor.Notification.NotProficient", {
 				type: game.i18n

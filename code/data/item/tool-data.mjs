@@ -53,6 +53,15 @@ export default class ToolData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		this.setPhysicalChatTags(tags);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static proficiencyCategory = "tools";
 

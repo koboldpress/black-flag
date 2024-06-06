@@ -74,6 +74,15 @@ export default class ContainerData extends ItemDataModel.mixin(
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		this.setPhysicalChatTags(tags);
+		return tags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Get all of the items contained in this container. A promise if item is within a compendium.
 	 * @type {Collection<BlackFlagItem>|Promise<Collection<BlackFlagItem>>}

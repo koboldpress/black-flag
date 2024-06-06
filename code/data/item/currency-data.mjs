@@ -1,4 +1,5 @@
 import CurrencySheet from "../../applications/item/currency-sheet.mjs";
+import { numberFormat } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
@@ -59,6 +60,26 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The abbreviated name for this currency.
+	 * @type {string}
+	 */
+	get abbreviation() {
+		return CONFIG.BlackFlag.currencies[this.parent.identifier]?.abbreviation ?? this.parent.identifier;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get chatTags() {
+		const tags = this.parent.chatTags;
+		tags.set("details", `${numberFormat(this.quantity)} ${this.abbreviation}`);
+		this.setPhysicalChatTags(tags);
+		return tags;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
