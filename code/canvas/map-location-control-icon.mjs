@@ -9,7 +9,17 @@ export default class MapLocationControlIcon extends PIXI.Container {
 		this.size = size;
 		this.style = style;
 
-		this.radius = size / 2;
+		this.renderMarker();
+		this.refresh();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform the actual rendering of the marker.
+	 */
+	renderMarker() {
+		this.radius = this.size / 2;
 		this.circle = [this.radius, this.radius, this.radius + 8];
 		this.backgroundColor = this.style.backgroundColor;
 		this.borderColor = this.style.borderHoverColor;
@@ -55,11 +65,9 @@ export default class MapLocationControlIcon extends PIXI.Container {
 		// Border
 		this.border = this.addChild(new PIXI.Graphics());
 		this.border.visible = false;
-
-		this.refresh();
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Code text to be rendered.
@@ -67,7 +75,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
 	 */
 	code;
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	refresh({ visible, iconColor, borderColor, borderVisible } = {}) {
@@ -82,7 +90,7 @@ export default class MapLocationControlIcon extends PIXI.Container {
 		return this;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Define PIXI TestStyle object for rendering the map location code.
