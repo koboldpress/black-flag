@@ -7,6 +7,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
  */
 export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
+	/** @override */
 	static defineSchema() {
 		return {
 			spellcasting: new SchemaField({

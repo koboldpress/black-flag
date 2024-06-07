@@ -8,7 +8,7 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
  */
 export default class TraitsTemplate extends foundry.abstract.DataModel {
 
-	/** @inheritDoc */
+	/** @override */
 	static defineSchema() {
 		return {
 			traits: new SchemaField({

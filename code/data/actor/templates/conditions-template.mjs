@@ -7,6 +7,7 @@ const { NumberField, SchemaField } = foundry.data.fields;
  */
 export default class ConditionsTemplate extends foundry.abstract.DataModel {
 
+	/** @override */
 	static defineSchema() {
 		return {
 			attributes: new SchemaField({

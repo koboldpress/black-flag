@@ -43,8 +43,17 @@ export default class SavingThrowActivity extends DamageActivity {
 	 */
 	get dcAbility() {
 		if (this.system.dc.ability === "custom") return null;
-		if (this.system.dc.ability) return this.system.dc.ability;
-		return this.item.system.ability ?? null;
+		if (this.system.dc.ability && this.system.dc.ability !== "spellcasting") return this.system.dc.ability;
+
+		let ability = this.item.system.ability;
+		if (!ability && this.actor && (this.isSpell || this.system.dc.ability === "spellcasting")) {
+			const abilities = Object.values(this.actor.system.spellcasting?.origins ?? {}).reduce((set, o) => {
+				set.add(o.ability);
+				return set;
+			}, new Set());
+			ability = this.actor.system.selectBestAbility?.(abilities);
+		}
+		return ability ?? (this.isSpell ? "intelligence" : null);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

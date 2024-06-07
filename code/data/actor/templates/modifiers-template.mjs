@@ -6,6 +6,7 @@ import ModifierField from "../../fields/modifier-field.mjs";
  */
 export default class ModifiersTemplate extends foundry.abstract.DataModel {
 
+	/** @override */
 	static defineSchema() {
 		return {
 			modifiers: new ModifierField()

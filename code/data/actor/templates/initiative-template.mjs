@@ -14,7 +14,7 @@ const { SchemaField, StringField } = foundry.data.fields;
  */
 export default class InitiativeTemplate extends foundry.abstract.DataModel {
 
-	/** @inheritDoc */
+	/** @override */
 	static defineSchema() {
 		return {
 			attributes: new SchemaField({

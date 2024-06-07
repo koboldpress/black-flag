@@ -7,7 +7,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  */
 export default class ACTemplate extends foundry.abstract.DataModel {
 
-	/** @inheritDoc */
+	/** @override */
 	static defineSchema() {
 		return {
 			attributes: new SchemaField({

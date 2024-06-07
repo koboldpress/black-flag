@@ -8,6 +8,7 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @property {object} labels
  * @property {string} labels.full - Localization key for the ability's full name.
  * @property {string} labels.abbreviation - Localization key for the ability's abbreviation.
+ * @property {string} [type] - Type of ability (usually "physical" or "mental").
  */
 
 /**
@@ -20,42 +21,48 @@ export const abilities = {
 		labels: {
 			full: "BF.Ability.Strength.Label",
 			abbreviation: "BF.Ability.Strength.Abbreviation"
-		}
+		},
+		type: "physical"
 	},
 	dexterity: {
 		abbreviation: "dex",
 		labels: {
 			full: "BF.Ability.Dexterity.Label",
 			abbreviation: "BF.Ability.Dexterity.Abbreviation"
-		}
+		},
+		type: "physical"
 	},
 	constitution: {
 		abbreviation: "con",
 		labels: {
 			full: "BF.Ability.Constitution.Label",
 			abbreviation: "BF.Ability.Constitution.Abbreviation"
-		}
+		},
+		type: "physical"
 	},
 	intelligence: {
 		abbreviation: "int",
 		labels: {
 			full: "BF.Ability.Intelligence.Label",
 			abbreviation: "BF.Ability.Intelligence.Abbreviation"
-		}
+		},
+		type: "mental"
 	},
 	wisdom: {
 		abbreviation: "wis",
 		labels: {
 			full: "BF.Ability.Wisdom.Label",
 			abbreviation: "BF.Ability.Wisdom.Abbreviation"
-		}
+		},
+		type: "mental"
 	},
 	charisma: {
 		abbreviation: "cha",
 		labels: {
 			full: "BF.Ability.Charisma.Label",
 			abbreviation: "BF.Ability.Charisma.Abbreviation"
-		}
+		},
+		type: "mental"
 	}
 };
 localizeConfig(abilities, { labelKeyPath: "labels.full", sort: false });

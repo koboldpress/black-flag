@@ -43,6 +43,20 @@ export default class ActorDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Determine the ability with the highest modifier from the provided list, or from all abilities.
+	 * @param {string[]|Set<string>} [from] - Set of abilities to select from.
+	 * @returns {string} - Ability with the highest modifier.
+	 */
+	selectBestAbility(from) {
+		from ??= new Set(Object.keys(CONFIG.BlackFlag.abilities));
+		return from.reduce((highest, key) =>
+			(this.abilities?.[key]?.mod ?? -Infinity) > (this.abilities?.[highest]?.mod ?? -Infinity) ? key : highest
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Construct an initiative roll.
 	 * @param {ChallengeRollOptions} [options] - Options for the roll.
 	 * @returns {InitiativeRollProcessConfiguration}

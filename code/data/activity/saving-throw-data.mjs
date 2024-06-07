@@ -62,10 +62,7 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 		if (this.dc.ability === "custom") dc = simplifyBonus(this.dc.formula, rollData);
 		else if (this.parent.actor?.system.spellcasting?.dc && !this.dc.ability) {
 			dc = this.parent.actor.system.spellcasting.dc;
-		} else {
-			const ability = rollData.abilities?.[this.parent.dcAbility];
-			dc = ability?.dc;
-		}
+		} else dc = rollData.abilities?.[this.parent.dcAbility]?.dc;
 		if (dc)
 			Object.defineProperty(this.dc, "final", {
 				value: dc,

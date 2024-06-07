@@ -29,7 +29,7 @@ const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.
  */
 export default class LanguagesTemplate extends foundry.abstract.DataModel {
 
-	/** @inheritDoc */
+	/** @override */
 	static defineSchema() {
 		return {
 			proficiencies: new SchemaField({
