@@ -331,20 +331,29 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @param {object} [options.changes={}] - Additional changes to apply when creating the clone.
 	 * @param {object} [options.data] - Data from the advancement process.
 	 * @param {string} [options.id] - Optional ID to use instead of a random one.
+	 * @param {number} [options.index=0] - If advancement grants more than one item, position of this particular item.
+	 *                                     Helps determine proper sorting order.
 	 * @returns {object|null}
 	 */
-	async createItemData(uuid, { changes = {}, data, id } = {}) {
+	async createItemData(uuid, { changes = {}, data, id, index = 0 } = {}) {
 		const source = await fromUuid(uuid);
 		if (!source) return null;
 		id ??= foundry.utils.randomID();
 		const advancementOrigin = `${this.item.id}.${this.id}`;
+		const ultimateOrigin = this.item.getFlag("black-flag", "ultimateOrigin");
+		const updates = SortingHelpers.performIntegerSort(source, {
+			target: ultimateOrigin && ultimateOrigin !== advancementOrigin ? this.item : undefined,
+			siblings: this.item.actor.items
+		});
+		let sort = updates.find(u => u.target._id === source.id)?.update?.sort ?? null;
+		if (sort !== null) sort += (index * CONST.SORT_INTEGER_DENSITY) / 100;
 		return source
 			.clone(
 				foundry.utils.mergeObject(
 					{
 						_id: id,
 						folder: null,
-						sort: null,
+						sort,
 						// TODO: Set proper sort order rather than just removing it
 						"flags.black-flag.sourceId": uuid,
 						"flags.black-flag.advancementOrigin": advancementOrigin,

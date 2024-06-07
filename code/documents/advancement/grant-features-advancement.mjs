@@ -155,8 +155,8 @@ export default class GrantFeaturesAdvancement extends Advancement {
 	 */
 	async createItems(uuids, { data, added = [], render = false } = {}) {
 		const items = [];
-		for (const uuid of uuids) {
-			const itemData = await this.createItemData(uuid, { data });
+		for (const [index, uuid] of uuids.entries()) {
+			const itemData = await this.createItemData(uuid, { data, index });
 			if (!itemData) continue;
 			items.push(itemData);
 			added.push({ document: itemData._id, uuid });
