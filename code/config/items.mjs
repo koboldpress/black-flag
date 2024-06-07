@@ -69,6 +69,9 @@ export const featureCategories = {
 				localization: "BF.Feature.Type.ChannelDivinity",
 				sources: ["class", "subclass"]
 			},
+			elementalInfusion: {
+				localization: "BF.Feature.Type.ElementalInfusion"
+			},
 			epicBoon: {
 				localization: "BF.Feature.Type.EpicBoon",
 				level: 20,

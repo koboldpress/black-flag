@@ -1,0 +1,112 @@
+{
+  "folder": "osKeSJsGYcRGVwM0",
+  "name": "Earth",
+  "type": "feature",
+  "_id": "jGPZ62M4TvLUKSL8",
+  "img": "icons/magic/earth/construct-stone.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You gain a 30-foot burrowing speed and can burrow through nonmagical, unworked earth and stone without disturbing the material you move through. You gain tremorsense to a range of 60 feet and are resistant to bludgeoning, piercing, and slashing damage. Melee attacks you make deal double damage to objects and structures.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "elementalInfusion"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "earth",
+      "associated": ""
+    },
+    "level": {
+      "value": 11
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/magic/earth/construct-stone.webp",
+      "origin": "Compendium.black-flag.classes.Item.jGPZ62M4TvLUKSL8",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Earth Infusion",
+      "_id": "zaKGBBFVY1aXrekO",
+      "changes": [
+        {
+          "key": "system.traits.movement.types.burrow",
+          "mode": 2,
+          "value": "30",
+          "priority": null
+        },
+        {
+          "key": "system.traits.senses.types.tremorsense",
+          "mode": 2,
+          "value": "60",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "bludgeoning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "piercing",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "slashing",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!jGPZ62M4TvLUKSL8.zaKGBBFVY1aXrekO"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717791110108,
+    "modifiedTime": 1717793051550,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!jGPZ62M4TvLUKSL8"
+}

@@ -1,0 +1,127 @@
+{
+  "folder": "osKeSJsGYcRGVwM0",
+  "name": "Beast’s Fury",
+  "type": "feature",
+  "_id": "4a9Bt4ORnQgQ3ERA",
+  "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
+  "system": {
+    "activities": {
+      "xZ3UyyMm5iyHrxmQ": {
+        "type": "attack",
+        "_id": "xZ3UyyMm5iyHrxmQ",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 6,
+                "bonus": "@prof",
+                "custom": "",
+                "type": ""
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": "After you take the Attack action on your turn while in beast form"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Immediately after you take the Attack action on your turn while in beast form, you can use your bonus action to make a single unarmed strike with your claws, hooves, fangs, or whatever natural weapon suits your chosen form. This attack deals 1d6 + your PB damage, and you are considered proficient with it. You decide if this attack deals bludgeoning, piercing, or slashing damage when you first assume your beast form.</p><p>In addition, all damage you deal with melee weapon attacks while in beast form now counts as magical damage for the purposes of overcoming resistance or immunity to nonmagical damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "beasts-fury",
+      "associated": "shifter"
+    },
+    "level": {
+      "value": 7
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717790984532,
+    "modifiedTime": 1717791778581,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!4a9Bt4ORnQgQ3ERA"
+}

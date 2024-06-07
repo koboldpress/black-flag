@@ -1,0 +1,182 @@
+{
+  "folder": "osKeSJsGYcRGVwM0",
+  "name": "Air",
+  "type": "feature",
+  "_id": "92TSptohPYcCiCEk",
+  "img": "icons/creatures/magical/spirit-mischief-fire-ice-blue.webp",
+  "system": {
+    "activities": {
+      "EuXuVitUcgx3lLLU": {
+        "type": "savingThrow",
+        "_id": "EuXuVitUcgx3lLLU",
+        "description": "<p>Each Large or smaller creature within 5 feet of you must make a [[/save]]. On a failure, a target takes [[/damage]] damage and is flung up to 20 feet away from you in a random direction and knocked prone. If a thrown target strikes a solid surface, it takes [[/damage 1d6 bludgeoning average]] damage for every 10 feet it was thrown. If the target lands in the same space as another creature, that creature must succeed on a [[/save dexterity 13]] save or take the same damage and be knocked prone. The target is then prone in an adjacent unoccupied space. If the target’s STR save is successful, a target takes half damage and isn’t flung or knocked prone.</p>",
+        "system": {
+          "ability": "strength",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 8,
+                "bonus": "@prof",
+                "custom": "",
+                "type": "bludgeoning"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "10 + @prof"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "radius",
+            "size": "5"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "4"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You gain a 90-foot flying (hover) speed and are resistant to lightning and thunder damage. You gain the following action:</p><ul><li><p><strong>Whirl (Recharge 4–6).</strong> Each Large or smaller creature within 5 feet of you must make a STR save (DC 10 + your PB). On a failure, a target takes 3d8 + your PB bludgeoning damage and is flung up to 20 feet away from you in a random direction and knocked prone. If a thrown target strikes a solid surface, it takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target lands in the same space as another creature, that creature must succeed on a DC 13 DEX save or take the same damage and be knocked prone. The target is then prone in an adjacent unoccupied space. If the target’s STR save is successful, a target takes half damage and isn’t flung or knocked prone.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "elementalInfusion"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "air",
+      "associated": ""
+    },
+    "level": {
+      "value": 11
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/magical/spirit-mischief-fire-ice-blue.webp",
+      "origin": "Compendium.black-flag.classes.Item.92TSptohPYcCiCEk",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Air Infusion",
+      "_id": "o7uCCTEMCXXsalsd",
+      "changes": [
+        {
+          "key": "system.traits.movement.types.fly",
+          "mode": 2,
+          "value": "90",
+          "priority": null
+        },
+        {
+          "key": "system.traits.movement.tags",
+          "mode": 2,
+          "value": "hover",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "lightning",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "thunder",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!92TSptohPYcCiCEk.o7uCCTEMCXXsalsd"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717791108175,
+    "modifiedTime": 1717793049683,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!92TSptohPYcCiCEk"
+}

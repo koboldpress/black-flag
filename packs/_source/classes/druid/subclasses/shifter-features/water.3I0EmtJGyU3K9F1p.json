@@ -1,0 +1,173 @@
+{
+  "folder": "osKeSJsGYcRGVwM0",
+  "name": "Water",
+  "type": "feature",
+  "_id": "3I0EmtJGyU3K9F1p",
+  "img": "icons/creatures/fish/jellyfish-swarm-eyed-teal.webp",
+  "system": {
+    "activities": {
+      "fd7a9ybyDbzJGl4e": {
+        "type": "savingThrow",
+        "_id": "fd7a9ybyDbzJGl4e",
+        "description": "<p>Each creature within 5 feet of you must make a [[/save]]. On a failure, a target takes [[/damage]] damage. If a target is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe in water. On a successful STR save, a creature takes half damage and isn’t grappled. At the start of each of your turns, each target grappled by you takes [[/damage]] damage. A creature within 5 feet of a grappled target can pull it out of the grapple if it expends an action to attempt a [[/check strength athletics 14]] check—freeing the target on a success.</p>",
+        "system": {
+          "ability": "strength",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 8,
+                "bonus": "@prof",
+                "custom": "",
+                "type": "bludgeoning"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "10 + @prof"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "4"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Wave",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You gain a 90-foot swimming speed and can breathe underwater. You are resistant to cold and poison damage. You gain the following action:</p><ul><li><p><strong>Wave (Recharge 4–6).</strong> Each creature within 5 feet of you must make a STR save (DC 10 + your PB). On a failure, a target takes 2d8 + your PB bludgeoning damage. If a target is Large or smaller, it is also grappled (escape DC 14). Until this grapple ends, the target is restrained and unable to breathe unless it can breathe in water. On a successful STR save, a creature takes half damage and isn’t grappled. At the start of each of your turns, each target grappled by you takes 2d8 + your PB bludgeoning damage. A creature within 5 feet of a grappled target can pull it out of the grapple if it expends an action to attempt a DC 14 STR (Athletics) check—freeing the target on a success.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "elementalInfusion"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "water",
+      "associated": ""
+    },
+    "level": {
+      "value": 11
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/fish/jellyfish-swarm-eyed-teal.webp",
+      "origin": "Compendium.black-flag.classes.Item.3I0EmtJGyU3K9F1p",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Water Infusion",
+      "_id": "kIo6pIl8bZXlPHoX",
+      "changes": [
+        {
+          "key": "system.traits.movement.types.swim",
+          "mode": 2,
+          "value": "90",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "cold",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!3I0EmtJGyU3K9F1p.kIo6pIl8bZXlPHoX"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717791114554,
+    "modifiedTime": 1717793056759,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!3I0EmtJGyU3K9F1p"
+}

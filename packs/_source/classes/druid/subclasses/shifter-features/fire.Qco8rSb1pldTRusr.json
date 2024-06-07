@@ -1,0 +1,88 @@
+{
+  "folder": "osKeSJsGYcRGVwM0",
+  "name": "Fire",
+  "type": "feature",
+  "_id": "Qco8rSb1pldTRusr",
+  "img": "icons/creatures/magical/spirit-fire-yellow.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You shed bright light in a 30-foot-radius and dim light for an additional 30 feet. You are immune to fire damage. Melee attacks you make deal an additional [[/damage 1d8 fire]] damage. When you deal fire damage to a flammable creature or object, you can choose whether it ignites—an ignited target takes [[/damage 1d10 fire average]] damage at the start of each of its turns until a creature uses an action to douse it. Your GM determines what constitutes a flammable creature or object.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "elementalInfusion"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "fire",
+      "associated": ""
+    },
+    "level": {
+      "value": 11
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/magical/spirit-fire-yellow.webp",
+      "origin": "Compendium.black-flag.classes.Item.Qco8rSb1pldTRusr",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Fire Infusion",
+      "_id": "uHQNoPjP7H6Pujjr",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"1d8[fire]\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!Qco8rSb1pldTRusr.uHQNoPjP7H6Pujjr"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717791112663,
+    "modifiedTime": 1717793053497,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Qco8rSb1pldTRusr"
+}
