@@ -2,7 +2,7 @@
 
 # Black Flag Roleplaying
 
-The game system implements the rules of **Black Flag Roleplaying**, the 5E-compatible game system powering Kobold Press's **[Tale of the Valiant](https://www.talesofthevaliant.com)** roleplaying game.
+The game system implements the rules of **Black Flag Roleplaying**, the 5E-compatible game system powering Kobold Press's **[Tales of the Valiant](https://www.talesofthevaliant.com)** roleplaying game.
 
 This system provides sheets for characters, NPCs, and items, as well as all of the mechanical implementation necessary to play a game within the Black Flag system. It also includes the content of the [BFR Reference Doc](https://www.koboldpress.com/bfr-reference-doc/) pre-created to make it easy to start a game.
 
