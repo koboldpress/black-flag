@@ -108,9 +108,9 @@ export default class NotificationTooltip extends Application {
 				let doc = this.document;
 				let notification = this.document.notifications.get(k);
 				if (!notification) {
-					const split = k.split(".");
-					if (split.length > 1) doc = this.document.items.get(split[0]);
-					k = split[1] ?? split[0];
+					const [first, ...rest] = k.split(".");
+					if (rest?.length) doc = this.document.items.get(first);
+					k = rest.join(".") ?? split[0];
 					notification = doc?.notifications?.get(k);
 				}
 				if (!notification) return arr;

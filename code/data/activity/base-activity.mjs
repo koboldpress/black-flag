@@ -144,9 +144,17 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		// Re-link UUIDs in consumption fields to explicit items
 		if (this.item.isEmbedded) {
 			for (const target of this.consumption.targets) {
-				if (target.type === "item" && target.target?.includes(".")) {
-					const item = this.item.actor.sourcedItems?.get(target.target)?.first();
-					if (item) target.target = item.id;
+				if (target.target && target.type === "item") {
+					if (target.target?.includes(".")) {
+						const item = this.item.actor.sourcedItems?.get(target.target)?.first();
+						if (item) target.target = item.id;
+					}
+					if (!this.item.actor.items.get(target.target))
+						this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
+							level: "error",
+							section: "auto",
+							message: game.i18n.format("BF.Consumption.Warning.MissingItem", { activity: this.name })
+						});
 				}
 			}
 		}
