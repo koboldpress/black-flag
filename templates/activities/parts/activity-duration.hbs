@@ -11,7 +11,7 @@
 		{{#if activity.duration.scalar}}
 			<label>
 				<span>{{ localize "BF.Duration.Value.Label" }}</span>
-				<input type="text" name="duration.value" value="{{ activity.duration.value }}">
+				<input type="text" name="duration.value" value="{{ source.duration.value }}">
 			</label>
 		{{/if}}
 		<label>
@@ -24,7 +24,7 @@
 	{{#if (eq activity.duration.units "special")}}
 		<label>
 			<span>{{ localize "BF.Duration.Special" }}</span>
-			<input type="text" name="duration.special" value="{{ activity.duration.special }}">
+			<input type="text" name="duration.special" value="{{ source.duration.special }}">
 		</label>
 	{{/if}}
 </fieldset>

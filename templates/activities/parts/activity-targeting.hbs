@@ -11,21 +11,21 @@
 		{{#if activity.target.affects.scalar}}
 			<label>
 				<span>{{ localize "BF.Target.Count.Label" }}</span>
-				<input type="text" name="target.affects.count" value="{{ activity.target.affects.count }}"
+				<input type="text" name="target.affects.count" value="{{ source.target.affects.count }}"
 							 placeholder="{{ activity.target.affects.placeholder }}">
 			</label>
 		{{/if}}
 		<label>
 			<span>{{ localize "BF.Target.Type.Label" }}</span>
 			<select name="target.affects.type">
-				{{ selectOptions CONFIG.targetTypes.localized selected=activity.target.affects.type blank="" }}
+				{{ selectOptions CONFIG.targetTypes.localized selected=source.target.affects.type blank="" }}
 			</select>
 		</label>
 	</div>
 	{{#if (eq activity.target.affects.type "special")}}
 		<label>
 			<span>{{ localize "BF.Target.Special.Label" }}</span>
-			<input type="text" name="target.affects.special" value="{{ activity.target.affects.special }}">
+			<input type="text" name="target.affects.special" value="{{ source.target.affects.special }}">
 		</label>
 	{{/if}}
 	<!-- TODO: If area of effect, does it only affect targets of your choice -->
@@ -34,13 +34,13 @@
 		{{#if activity.range.scalar}}
 			<label>
 				<span>{{ localize "BF.Range.Value.Label" }}</span>
-				<input type="text" name="range.value" value="{{ activity.range.value }}">
+				<input type="text" name="range.value" value="{{ source.range.value }}">
 			</label>
 		{{/if}}
 		<label>
 			<span>{{ localize "BF.Range.Unit.Label" }}</span>
 			<select name="range.units">
-				{{#select activity.range.units}}
+				{{#select source.range.units}}
 					<option value=""></option>
 					<hr>
 					{{ selectOptions CONFIG.rangeTypes labelAttr="label" localize=true }}
@@ -53,14 +53,14 @@
 		{{#if (eq activity.range.units "special")}}
 			<label>
 				<span>{{ localize "BF.Range.Special.Label" }}</span>
-				<input type="text" name="range.special" value="{{ activity.range.special }}">
+				<input type="text" name="range.special" value="{{ source.range.special }}">
 			</label>
 		{{/if}}
 	</div>
 	<label>
 		<span>{{ localize "BF.AreaOfEffect.Type.Label" }}</span>
 		<select name="target.template.type">
-			{{ selectOptions CONFIG.areaOfEffectTypes.localized selected=activity.target.template.type blank="" }}
+			{{ selectOptions CONFIG.areaOfEffectTypes.localized selected=source.target.template.type blank="" }}
 		</select>
 		<!-- TODO: Add template count -->
 	</label>
@@ -69,24 +69,24 @@
 			<span>{{ localize "BF.AreaOfEffect.Size.Label" }}</span>
 			<label>
 				<span>{{ localize aoeSizes.size }}</span>
-				<input type="text" name="target.template.size" value="{{ ../activity.target.template.size }}">
+				<input type="text" name="target.template.size" value="{{ ../source.target.template.size }}">
 			</label>
 			{{#if aoeSizes.width}}
 				<label>
 					<span>{{ localize "BF.AreaOfEffect.Size.Width.Label" }}</span>
-					<input type="text" name="target.template.width" value="{{ ../activity.target.template.width }}">
+					<input type="text" name="target.template.width" value="{{ ../source.target.template.width }}">
 				</label>
 			{{/if}}
 			{{#if aoeSizes.height}}
 				<label>
 					<span>{{ localize "BF.AreaOfEffect.Size.Height.Label" }}</span>
-					<input type="text" name="target.template.height" value="{{ ../activity.target.template.height }}">
+					<input type="text" name="target.template.height" value="{{ ../source.target.template.height }}">
 				</label>
 			{{/if}}
 			<label>
 				<span>{{ localize "BF.AreaOfEffect.Units.Label" }}</span>
 				<select name="target.template.units">
-					{{ selectOptions ../CONFIG.distanceUnits.localized selected=../activity.target.template.units }}
+					{{ selectOptions ../CONFIG.distanceUnits.localized selected=../source.target.template.units }}
 				</select>
 			</label>
 		</div>

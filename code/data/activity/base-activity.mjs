@@ -111,24 +111,25 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		this.uses.prepareData();
 
 		const rollData = this.item.getRollData();
-		const keyPrefix = `activity-${this.id}-invalid`;
-		const name = `${this.item.name} (${this.name})`;
-		this.uses.min = simplifyBonus(
-			replaceFormulaData(this.uses.min ?? "", rollData, {
-				notifications: this.item.notifications,
-				key: `${keyPrefix}-min-uses-formula`,
-				section: "auto",
-				messageData: { name, property: game.i18n.localize("BF.Uses.Minimum.DebugName") }
-			})
-		);
-		this.uses.max = simplifyBonus(
-			replaceFormulaData(this.uses.max ?? "", rollData, {
-				notifications: this.item.notifications,
-				key: `${keyPrefix}-max-uses-formula`,
-				section: "auto",
-				messageData: { name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
-			})
-		);
+		const prepareFinalValue = (keyPath, label) =>
+			foundry.utils.setProperty(
+				this,
+				keyPath,
+				simplifyBonus(
+					replaceFormulaData(foundry.utils.getProperty(this, keyPath) ?? "", rollData, {
+						notifications: this.item.notifications,
+						key: `activity-${this.id}-invalid-target-${keyPath.replaceAll(".", "-")}`,
+						section: "auto",
+						messageData: {
+							name: `${this.item.name} (${this.name})`,
+							property: game.i18n.localize(label)
+						}
+					})
+				)
+			);
+
+		prepareFinalValue("uses.min", "BF.Uses.Mininum.DebugName");
+		prepareFinalValue("uses.max", "BF.Uses.Maximum.DebugName");
 		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
 
 		Object.defineProperty(this.uses, "label", {
@@ -175,6 +176,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				foundry.utils.setProperty(this, `duration.${key}`, value);
 			}
 		}
+		prepareFinalValue("duration.value", "BF.Duration.Label");
 
 		Object.defineProperty(this.target, "canOverride", {
 			value: !!this.item.system.range && !!this.item.system.target,
@@ -189,6 +191,10 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				}
 			}
 		}
+		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
+		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
+		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width.Label");
+		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height.Label");
 
 		this.system.prepareFinalData?.();
 	}
