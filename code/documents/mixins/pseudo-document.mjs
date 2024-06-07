@@ -339,7 +339,7 @@ export default Base =>
 					return obj;
 				}, {});
 				updates[data._id] = foundry.utils.mergeObject(
-					c?.documentClass.cleanData(data, { partial: true }) ?? data,
+					c?.documentClass.cleanData(foundry.utils.expandObject(data), { partial: true }) ?? data,
 					removals
 				);
 				return updates;

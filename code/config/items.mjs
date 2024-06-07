@@ -84,6 +84,10 @@ export const featureCategories = {
 			},
 			stunt: {
 				localization: "BF.Feature.Type.Stunt"
+			},
+			wildShape: {
+				localization: "BF.Feature.Type.WildShape",
+				sources: ["class", "subclass"]
 			}
 		}
 	},

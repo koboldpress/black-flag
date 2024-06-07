@@ -1,0 +1,122 @@
+{
+  "folder": "6P0Rxao2AROWasas",
+  "name": "Nature's Gift",
+  "type": "feature",
+  "_id": "pTpcg49T8TmfgUj3",
+  "img": "icons/magic/nature/beam-hand-leaves-green.webp",
+  "system": {
+    "activities": {
+      "I9RoL2OB22JJE9aT": {
+        "type": "healing",
+        "_id": "I9RoL2OB22JJE9aT",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": 4,
+            "bonus": "",
+            "custom": "(max(2, @prof))d4"
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You have learned to harness the ambient energy of nature and can redirect that energy to encourage growth and healing. As a bonus action, choose one creature within 5 feet of you (this can be you). When you do so, roll a number of d4s equal to your PB (minimum of 2d4). That creature regains hit points equal to the total rolled. This feature has no effect on Constructs or Undead.</p><p>You can use this feature a number of times per day equal to your PB. You recover expended uses when you complete a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "natures-gift",
+      "associated": "druid"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 600000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717736825330,
+    "modifiedTime": 1717738597101,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!pTpcg49T8TmfgUj3"
+}

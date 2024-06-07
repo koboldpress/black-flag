@@ -1,0 +1,118 @@
+{
+  "folder": "6P0Rxao2AROWasas",
+  "name": "Rite of the Shaper",
+  "type": "feature",
+  "_id": "lf8yyHiRiaTjHSmD",
+  "img": "icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp",
+  "system": {
+    "activities": {
+      "PkiBbwDkGDyAdaHk": {
+        "type": "utility",
+        "_id": "PkiBbwDkGDyAdaHk",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you roll initiative and have no remaining uses of Wild Shape"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            },
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.VuxDilIi1aKvSiOB",
+              "value": "-1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Recover Wild Shape",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you roll initiative and have no remaining uses of Wild Shape, you regain one use. Once you use this feature, you can’t do so again until you complete a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "heroicBoon"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "rite-of-the-shaper",
+      "associated": "druid"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 1000000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.033",
+    "coreVersion": "11.315",
+    "createdTime": 1717737124509,
+    "modifiedTime": 1717737802725,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!lf8yyHiRiaTjHSmD"
+}
