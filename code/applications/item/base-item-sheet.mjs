@@ -36,10 +36,10 @@ export default class BaseItemSheet extends ItemSheet {
 		context.source = this.document.toObject().system;
 
 		const enrichmentContext = {
-			secrets: this.item.isOwner,
+			relativeTo: this.item,
 			rollData: this.item.getRollData(),
-			async: true,
-			relativeTo: this.item
+			secrets: this.item.isOwner,
+			async: true
 		};
 		context.enriched = await Object.entries(this.constructor.enrichedFields).reduce(async (enriched, [key, path]) => {
 			enriched[key] = await TextEditor.enrichHTML(foundry.utils.getProperty(context, path), enrichmentContext);

@@ -520,6 +520,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				.filter(t => t.label),
 			description: await TextEditor.enrichHTML(this.description || this.item.system.description.value, {
 				relativeTo: this.description ? this : this.item,
+				rollData: this.item.getRollData(),
 				secrets: false,
 				async: true
 			})

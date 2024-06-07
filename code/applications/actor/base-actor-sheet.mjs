@@ -94,10 +94,10 @@ export default class BaseActorSheet extends ActorSheet {
 		await this.prepareTraits(context);
 
 		const enrichmentContext = {
-			secrets: this.actor.isOwner,
+			relativeTo: this.actor,
 			rollData: this.actor.getRollData(),
-			async: true,
-			relativeTo: this.actor
+			secrets: this.actor.isOwner,
+			async: true
 		};
 		context.enriched = {};
 		for (const [key, path] of Object.entries(this.constructor.enrichedFields)) {

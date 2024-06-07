@@ -49,9 +49,11 @@ export default class ChatTrayElement extends MessageAssociatedElement {
 	 * @param {PointerEvent} event - Triggering click event.
 	 */
 	_handleClickToggle(event) {
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		if (!event.target.closest(".collapsible-content")) this.toggleAttribute("open");
+		if (!event.target.closest(".collapsible-content")) {
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			this.toggleAttribute("open");
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

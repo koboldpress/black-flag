@@ -287,6 +287,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				.filter(t => t.label),
 			description: await TextEditor.enrichHTML(this.system.description?.value ?? "", {
 				relativeTo: this,
+				rollData: this.getRollData(),
 				secrets: false,
 				async: true
 			})

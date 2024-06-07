@@ -58,10 +58,10 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 				},
 				description: source.description,
 				enriched: await TextEditor.enrichHTML(source.description ?? "", {
-					secrets: true,
+					relativeTo: this.activity,
 					rollData: this.item.getRollData(),
-					async: true,
-					relativeTo: this.activity
+					secrets: true,
+					async: true
 				}),
 				labels: {
 					defaultActivation: defaultActivation

@@ -39,10 +39,10 @@ export default class NPCSheet extends BaseActorSheet {
 		await super.prepareItem(item, context, section);
 		context.activity = item.system.activities.find(a => a.activation.primary) ?? item.system.activities.contents[0];
 		context.description = await TextEditor.enrichHTML(item.system.description.value, {
-			secrets: false,
+			relativeTo: item,
 			rollData: item.getRollData(),
-			async: true,
-			relativeTo: item
+			secrets: false,
+			async: true
 		});
 	}
 
