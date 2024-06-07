@@ -1,6 +1,6 @@
 import { LocalDocumentField } from "../fields/_module.mjs";
 
-const { ArrayField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for an individual item entry in grant features.
@@ -12,12 +12,14 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 /**
  * Configuration data for the Grant Features advancement.
  *
+ * @property {boolean} enabled - Should the features be enabled by default when added?
  * @property {FeatureGrantConfiguration[]} pool - Items to grant.
  */
 export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
+			enabled: new BooleanField({ initial: true }),
 			pool: new ArrayField(
 				new SchemaField({
 					uuid: new StringField({ blank: false, nullable: false }) // TODO: Replace with UUIDField when available

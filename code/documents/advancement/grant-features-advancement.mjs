@@ -157,6 +157,9 @@ export default class GrantFeaturesAdvancement extends Advancement {
 		const items = [];
 		for (const [index, uuid] of uuids.entries()) {
 			const itemData = await this.createItemData(uuid, { data, index });
+			if (this.configuration.enabled === false) {
+				foundry.utils.setProperty(itemData, "flags.black-flag.relationship.enabled", false);
+			}
 			if (!itemData) continue;
 			items.push(itemData);
 			added.push({ document: itemData._id, uuid });

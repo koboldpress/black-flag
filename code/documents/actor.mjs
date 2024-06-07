@@ -1699,8 +1699,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-		if (userId === game.userId && collection === "items") {
+		if (userId === game.userId && collection === "items" && !options.keepRelationship) {
 			const updates = documents.map(d => ({ _id: d.id, "flags.black-flag.relationship.enabled": true }));
 			await this.updateEmbeddedDocuments("Item", updates);
 		}

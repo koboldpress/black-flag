@@ -10,7 +10,8 @@ export default class GrantFeaturesConfig extends AdvancementConfig {
 			classes: ["black-flag", "advancement-config", "grant-features"],
 			dragDrop: [{ dropSelector: ".drop-target" }],
 			dropKeyPath: "pool",
-			template: "systems/black-flag/templates/advancement/grant-features-config.hbs"
+			template: "systems/black-flag/templates/advancement/grant-features-config.hbs",
+			width: 420
 		});
 	}
 
