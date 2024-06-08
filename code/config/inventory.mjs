@@ -161,6 +161,15 @@ export const sheetSections = {
 					.map(([identifier, cls]) => {
 						const label = pluralRule =>
 							game.i18n.format(`BF.Feature.Category.ClassSpecific[${pluralRule}]`, { class: cls.document.name });
+						const filters = [
+							{ k: "system.identifier.associated", v: identifier },
+							{ k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith" }
+						];
+						if (cls.subclass)
+							filters.push(
+								{ k: "system.identifier.associated", v: cls.subclass.identifier },
+								{ k: "flags.black-flag.ultimateOrigin", v: `${cls.subclass.id}.`, o: "startswith" }
+							);
 						return foundry.utils.mergeObject(
 							sectionData,
 							{
@@ -170,10 +179,7 @@ export const sheetSections = {
 									...sectionData.filters,
 									{
 										o: "OR",
-										v: [
-											{ k: "system.identifier.associated", v: identifier },
-											{ k: "flags.black-flag.ultimateOrigin", v: `${cls.document.id}.`, o: "startswith" }
-										]
+										v: filters
 									}
 								],
 								levels: cls.levels
