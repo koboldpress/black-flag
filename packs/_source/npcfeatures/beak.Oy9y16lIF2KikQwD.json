@@ -15,7 +15,7 @@
             "classification": "weapon"
           },
           "attack": {
-            "flat": true,
+            "flat": false,
             "bonus": ""
           },
           "damage": {
@@ -23,14 +23,14 @@
             "parts": [
               {
                 "number": 1,
-                "denomination": "10",
-                "bonus": "",
+                "denomination": 10,
+                "bonus": "@mod",
                 "custom": "",
                 "type": "piercing"
               }
             ]
           },
-          "ability": "none"
+          "ability": ""
         },
         "activation": {
           "type": "action",
@@ -49,7 +49,20 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": "systems/black-flag/artwork/activities/attack.svg",
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "1"
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "5"
+        }
       }
     },
     "uses": {
@@ -66,12 +79,15 @@
         "fallback": "Black Flag Reference Document"
       }
     },
-    "identifier": {},
+    "identifier": {
+      "associated": ""
+    },
     "restriction": {
       "filters": []
     },
     "type": {
-      "category": "monsters"
+      "category": "monsters",
+      "value": ""
     },
     "level": {
       "value": null
@@ -86,10 +102,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.020",
+    "systemVersion": "0.9.033",
     "coreVersion": "11.315",
     "createdTime": 1712092146231,
-    "modifiedTime": 1713149287714,
+    "modifiedTime": 1717868273169,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Oy9y16lIF2KikQwD"

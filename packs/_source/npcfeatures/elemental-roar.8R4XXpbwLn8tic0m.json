@@ -37,7 +37,20 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+        "target": {
+          "affects": {
+            "type": "creature",
+            "count": "2"
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "120"
+        }
       }
     },
     "uses": {
@@ -54,12 +67,15 @@
         "fallback": "Black Flag Reference Document"
       }
     },
-    "identifier": {},
+    "identifier": {
+      "associated": ""
+    },
     "restriction": {
       "filters": []
     },
     "type": {
-      "category": "monsters"
+      "category": "monsters",
+      "value": ""
     },
     "level": {
       "value": null
@@ -74,10 +90,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.020",
+    "systemVersion": "0.9.033",
     "coreVersion": "11.315",
     "createdTime": 1711682938328,
-    "modifiedTime": 1713149287714,
+    "modifiedTime": 1717868330488,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!8R4XXpbwLn8tic0m"
