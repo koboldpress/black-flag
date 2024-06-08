@@ -3,11 +3,11 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 	display: block;
 	container: inventory / inline-size;
 
-	table {
+	> table {
 		border: none;
 		background: none;
 
-		thead {
+		> thead {
 			border: none;
 			background: none;
 			color: var(--color-text-dark-1);
@@ -22,7 +22,7 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 			}
 		}
 
-		tbody {
+		> tbody {
 			tr {
 				:is(td, th) {
 					position: relative;
