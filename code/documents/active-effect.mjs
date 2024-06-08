@@ -4,11 +4,44 @@ import { numberFormat, staticID } from "../utils/_module.mjs";
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class BlackFlagActiveEffect extends ActiveEffect {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Status effect for the exhaustion condition.
 	 * @type {string}
 	 */
 	static EXHAUSTION = staticID("bfexhaustion");
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get isSuppressed() {
+		if (!this.parent?.isEmbedded) return false;
+		return this.suppressionReasons.length > 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * One or more reasons why this effect is suppressed.
+	 * @type {string[]}
+	 */
+	get suppressionReasons() {
+		const reasons = [];
+		if (!this.parent) return reasons;
+		if (this.parent.getFlag(game.system.id, "relationship.enabled") === false) {
+			reasons.push("BF.Effect.SuppressionReason.Disabled");
+		}
+		if (this.parent.system.equippable && !this.parent.system.equipped) {
+			reasons.push("BF.Effect.SuppressionReason.NotEquipped");
+		}
+		if (this.parent.system.attunement?.value === "required" && !this.parent.system.attuned) {
+			reasons.push("BF.Effect.SuppressionReason.NotAttuned");
+		}
+		return reasons;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Methods               */

@@ -85,7 +85,12 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			inactive: {
 				label: "BF.Effect.Category.Inactive",
 				effects: [],
-				crate: [],
+				create: [],
+				displaySource
+			},
+			suppressed: {
+				label: "BF.Effect.Category.Suppressed",
+				effects: [],
 				displaySource
 			}
 		};
@@ -97,10 +102,19 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				sourceName: effect.sourceName,
 				parentId: effect.target === effect.parent ? null : effect.parent.id
 			};
-			if (effect.disabled) context.inactive.effects.push(data);
+			if (effect.isSuppressed) {
+				data.suppressionReason = game.i18n.format("BF.Effect.SuppressionReason.Description", {
+					item: effect.parent.name,
+					reasons: game.i18n
+						.getListFormatter({ style: "short" })
+						.format(effect.suppressionReasons.map(r => game.i18n.localize(r)))
+				});
+				context.suppressed.effects.push(data);
+			} else if (effect.disabled) context.inactive.effects.push(data);
 			else if (effect.isTemporary) context.temporary.effects.push(data);
 			else context.passive.effects.push(data);
 		}
+		if (!context.suppressed.effects.length) delete context.suppressed;
 
 		return context;
 	}

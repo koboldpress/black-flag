@@ -28,7 +28,13 @@
 							</div>
 						</th>
 						{{#if ../displaySource}}
-							<td class="source">{{ sourceName }}</td>
+							<td class="source">
+								{{ sourceName }}
+								{{#if suppressionReason}}
+									<div class="notification-badge" data-tooltip="{{ suppressionReason }}"
+									     data-notification-level="info"><i class="fa-solid fa-info" inert></i></div>
+								{{/if}}
+							</td>
 						{{/if}}
 						<td class="duration">{{ duration.label }}</td>
 						<td class="controls">

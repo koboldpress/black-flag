@@ -69,7 +69,7 @@ export default class NotificationTooltip extends Application {
 	 * @param {HTMLElement} element - The element to which the tooltip should be attached.
 	 */
 	static async renderTooltip(element) {
-		const keys = element.dataset.notificationKeys.split(";");
+		const keys = element.dataset.notificationKeys?.split(";");
 		const uuid = element.dataset.uuid;
 		if (!keys || !uuid) return;
 		const document = await fromUuid(uuid);
@@ -101,6 +101,7 @@ export default class NotificationTooltip extends Application {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 		context.notifications = this.notificationKeys
