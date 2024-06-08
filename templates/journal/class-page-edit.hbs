@@ -30,6 +30,13 @@
 				<i class="fa-solid fa-edit"></i> {{ localize "BF.JournalPage.Edit" }}
 			</button>
 		</label>
+		<label>
+			<span>{{ localize "BF.JournalPage.Class.HeadingLevel.Label" }}</span>
+			<select name="system.headingLevel">
+				{{ selectOptions internalHeadingLevels selected=system.headingLevel
+				                 blank=(localize "BF.JournalPage.Class.HeadingLevel.Inherit") }}
+			</select>
+		</label>
 	</fieldset>
 
 	<fieldset>

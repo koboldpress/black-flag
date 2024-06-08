@@ -9,11 +9,11 @@
 	<section>
 		{{{ enriched.introduction }}}
 
-		{{> "blackFlag.journal-table" table=table level=title.level3 class="progression"
+		{{> "blackFlag.journal-table" table=table level=title.level2 class="progression"
 		    caption=(localize "BF.JournalPage.Class.Table.Caption" class=linked.name) }}
 
 		{{#each features}}
-			<h{{ @root.title.level3 }}>{{ name }}</h{{ @root.title.level3 }}>
+			<h{{ @root.title.level2 }}>{{ name }}</h{{ @root.title.level2 }}>
 			{{#if this.tag}}<em>{{ tag }}</em>{{/if}}
 			{{{ description }}}
 		{{/each}}

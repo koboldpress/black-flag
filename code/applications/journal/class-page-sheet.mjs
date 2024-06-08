@@ -52,7 +52,17 @@ export default class ClassPageSheet extends JournalPageSheet {
 		const context = await super.getData(options);
 		context.system = context.document.system;
 
-		context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
+		context.title = Object.fromEntries(
+			Array.fromRange(4, 1).map(n => [
+				`level${n}`,
+				(context.data.system.headingLevel || context.data.title.level) + n - 1
+			])
+		);
+
+		context.internalHeadingLevels = {
+			...context.headingLevels,
+			4: game.i18n.format("JOURNALENTRYPAGE.Level", { level: 4 })
+		};
 
 		const linked = await fromUuid(this.document.system.item);
 		const subclasses =

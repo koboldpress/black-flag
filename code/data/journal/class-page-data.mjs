@@ -1,12 +1,13 @@
 import ClassPageSheet from "../../applications/journal/class-page-sheet.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 
-const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Class Summary journal entry pages.
  *
  * @property {string} item - UUID of the referenced class item.
+ * @property {number} headingLevel - Override the level of included headers.
  * @property {object} description
  * @property {string} description.introduction - Introductory description for the class.
  * @property {string} description.additionalHitPoints - Additional text displayed beneath the hit points section.
@@ -36,6 +37,7 @@ export default class ClassJournalPageData extends BaseDataModel {
 		return {
 			item: new StringField({ label: "BF.JournalPage.Class.Item" }),
 			// TODO: Replace with UUIDField when possible
+			headingLevel: new NumberField({ initial: 3 }),
 			description: new SchemaField({
 				introduction: new HTMLField({
 					label: "BF.JournalPage.Class.Introduction.Label",
