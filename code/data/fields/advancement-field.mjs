@@ -53,8 +53,8 @@ export class AdvancementCollection extends Collection {
 		for (const [id, entry] of Object.entries(entries)) {
 			if (!(entry instanceof BaseAdvancement)) continue;
 			this.set(id, entry);
-			this.#types[entry.type] ??= [];
-			this.#types[entry.type].push(entry);
+			if (!this.#types.has(entry.type)) this.#types.set(entry.type, []);
+			this.#types.get(entry.type).push(entry);
 		}
 	}
 
@@ -71,42 +71,38 @@ export class AdvancementCollection extends Collection {
 
 	/**
 	 * Pre-filtered arrays of advancements per-type.
-	 * @type {object}
+	 * @type {Map<string, Advancement[]>}
 	 * @private
 	 */
-	#types = {};
+	#types = new Map();
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Cached store of advancements by level.
-	 * @type {object}
+	 * @type {Map<string, Advancement[]>}
 	 * @private
 	 */
 	#_levels;
 
 	/**
 	 * Pre-filtered and -sorted arrays of advancements per-level.
-	 * @type {object}
+	 * @type {Map<string, Advancement[]>}
 	 * @private
 	 */
 	get #levels() {
 		if (!this.#_levels) {
-			const levels = {};
+			this.#_levels = new Map();
 			for (const advancement of this) {
 				for (const level of advancement.levels) {
-					levels[level] ??= [];
-					levels[level].push(advancement);
+					if (!this.#_levels.has(level)) this.#_levels.set(level, []);
+					this.#_levels.get(level).push(advancement);
 				}
 			}
-			Object.entries(levels).forEach(([lvl, data]) =>
-				data.sort((a, b) =>
-					a
-						.sortingValueForLevel({ character: Number(lvl), class: Number(lvl) })
-						.localeCompare(b.sortingValueForLevel({ character: Number(lvl), class: Number(lvl) }))
-				)
-			);
-			this.#_levels = levels;
+			for (let [level, data] of this.#_levels.entries()) {
+				const levelData = { character: Number(level), class: Number(level) };
+				data.sort((a, b) => a.sortingValueForLevel(levelData).localeCompare(b.sortingValueForLevel(levelData)));
+			}
 		}
 		return this.#_levels;
 	}
@@ -118,7 +114,35 @@ export class AdvancementCollection extends Collection {
 	 * @type {number[]}
 	 */
 	get levels() {
-		return Object.keys(this.#levels).map(l => Number(l));
+		return Array.from(this.#levels.keys()).map(l => Number(l));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Cached store of like advancement types.
+	 * @type {Map<string, string[]>}
+	 * @private
+	 */
+	static #_like;
+
+	/**
+	 * Relationship between base types and types like them.
+	 * @type {Map<string, string[]>}
+	 * @private
+	 */
+	static get #like() {
+		if (!this.#_like) {
+			this.#_like = new Map();
+			for (const [type, config] of Object.entries(CONFIG.Advancement.types)) {
+				const like = config.documentClass?.metadata?.like;
+				if (like) {
+					if (!this.#_like.has(like)) this.#_like.set(like, []);
+					this.#_like.get(like).push(type);
+				}
+			}
+		}
+		return this.#_like;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -129,7 +153,10 @@ export class AdvancementCollection extends Collection {
 	 * @returns {Advancement[]}
 	 */
 	byType(type) {
-		return this.#types[type] ?? [];
+		return [
+			...(this.#types.get(type) ?? []),
+			...(this.constructor.#like.get(type) ?? []).flatMap(t => this.#types.get(t) ?? [])
+		];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -140,7 +167,7 @@ export class AdvancementCollection extends Collection {
 	 * @returns {Advancement[]}
 	 */
 	byLevel(level) {
-		return this.#levels[level] ?? [];
+		return this.#levels.get(level) ?? [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

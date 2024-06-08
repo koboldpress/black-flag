@@ -11,6 +11,7 @@ export default class SpellcastingValueAdvancement extends ScaleValueAdvancement 
 			super.metadata,
 			{
 				type: "spellcastingValue",
+				like: "scaleValue",
 				dataModels: {
 					configuration: SpellcastingValueConfigurationData
 				},

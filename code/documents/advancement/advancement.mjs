@@ -34,6 +34,9 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * Information on how an advancement type is configured.
 	 *
 	 * @typedef {BaseAdvancementMetadata} AdvancementMetadata
+	 * @property {string} [like] - Similar advancement type. Advancement of this type will be grouped with others
+	 *                             of their "like" type when fetching from the item. Like types should generally have
+	 *                             shared inheritance and similar APIs to avoid issues.
 	 * @property {object} [dataModels]
 	 * @property {DataModel} [dataModels.configuration] - Data model used for validating configuration data.
 	 * @property {DataModel} [dataModels.value] - Data model used for validating value data.
