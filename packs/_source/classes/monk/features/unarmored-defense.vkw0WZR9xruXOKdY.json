@@ -1,0 +1,79 @@
+{
+  "folder": "OaCjDUZkIAsMjT7k",
+  "name": "Unarmored Defense",
+  "type": "feature",
+  "_id": "vkw0WZR9xruXOKdY",
+  "img": "icons/equipment/chest/shirt-collared-green.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "hlE0xxRrj0oMSCgz": {
+        "type": "property",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.ac.formulas",
+              "mode": 2,
+              "value": "{ \"label\": \"Unarmored Defense\", \"formula\": \"10 + @abilities.dexterity.mod + @abilities.wisdom.mod\", \"armored\": false }"
+            }
+          ]
+        },
+        "level": {
+          "value": 1,
+          "classIdentifier": "barbarian"
+        },
+        "flags": {},
+        "title": "Unarmored Defense",
+        "icon": null,
+        "hint": "",
+        "_id": "hlE0xxRrj0oMSCgz"
+      }
+    },
+    "description": {
+      "value": "<p>While you are wearing no armor and not wielding a shield, your AC equals 10 + your DEX modifier + your WIS modifier.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "unarmored-defense",
+      "associated": "monk"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1717968689552,
+    "modifiedTime": 1717970961203,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!vkw0WZR9xruXOKdY"
+}

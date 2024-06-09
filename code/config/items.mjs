@@ -88,6 +88,9 @@ export const featureCategories = {
 			stunt: {
 				localization: "BF.Feature.Type.Stunt"
 			},
+			technique: {
+				localization: "BF.Feature.Type.Technique"
+			},
 			wildShape: {
 				localization: "BF.Feature.Type.WildShape",
 				sources: ["class", "subclass"]
