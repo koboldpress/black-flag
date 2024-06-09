@@ -74,10 +74,19 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 					options: activationOptions,
 					scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
 				},
-				durationOptions: CONFIG.BlackFlag.durationOptions({
-					chosen: this.activity.duration.units,
-					isSpell: this.activity.isSpell
-				}),
+				duration: {
+					data: this.activity.duration.override ? source.duration : this.activity._inferredSource.duration,
+					options: CONFIG.BlackFlag.durationOptions({
+						chosen: this.activity.duration.units,
+						isSpell: this.activity.isSpell
+					})
+				},
+				range: {
+					data: this.activity.target.override ? source.range : this.activity._inferredSource.range
+				},
+				target: {
+					data: this.activity.target.override ? source.target : this.activity._inferredSource.target
+				},
 				showBaseDamage: Object.hasOwn(this.item.system, "damage")
 			},
 			{ inplace: false }

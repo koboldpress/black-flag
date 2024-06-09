@@ -128,10 +128,54 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				)
 			);
 
+		this.setProperty("activation.value", "system.casting.value");
+		this.setProperty("activation.type", "system.casting.type");
+		this.setProperty("activation.condition", "system.casting.condition");
+
+		Object.defineProperty(this.duration, "canOverride", {
+			value: !!this.item.system.duration,
+			configurable: true,
+			enumerable: false
+		});
+		if (this.duration.canOverride && !this.duration.override) {
+			for (const [key, value] of Object.entries(this.item.system.duration)) {
+				foundry.utils.setProperty(this, `duration.${key}`, value);
+			}
+		}
+
+		Object.defineProperty(this.target, "canOverride", {
+			value: !!this.item.system.range && !!this.item.system.target,
+			configurable: true,
+			enumerable: false
+		});
+		if (this.target.canOverride && !this.target.override) {
+			for (const keyPath of ["range", "target.template", "target.affects"]) {
+				const obj = foundry.utils.getProperty(this.item.system, keyPath) ?? {};
+				for (const [key, value] of Object.entries(obj)) {
+					foundry.utils.setProperty(this, `${keyPath}.${key}`, value);
+				}
+			}
+		}
+
+		Object.defineProperty(this, "_inferredSource", {
+			value: this.toObject(false),
+			configurable: false,
+			enumerable: false,
+			writable: false
+		});
+
+		prepareFinalValue("duration.value", "BF.Duration.Label");
+		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
+		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
+		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width.Label");
+		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height.Label");
 		prepareFinalValue("uses.min", "BF.Uses.Mininum.DebugName");
 		prepareFinalValue("uses.max", "BF.Uses.Maximum.DebugName");
-		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
 
+		this.activation.type ??= "action";
+		this.activation.primary ??= true;
+
+		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
 		Object.defineProperty(this.uses, "label", {
 			get() {
 				if (this.min) return numberFormat(this.value);
@@ -159,42 +203,6 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				}
 			}
 		}
-
-		this.setProperty("activation.value", "system.casting.value");
-		this.setProperty("activation.type", "system.casting.type");
-		this.setProperty("activation.condition", "system.casting.condition");
-		this.activation.type ??= "action";
-		this.activation.primary ??= true;
-
-		Object.defineProperty(this.duration, "canOverride", {
-			value: !!this.item.system.duration,
-			configurable: true,
-			enumerable: false
-		});
-		if (this.duration.canOverride && !this.duration.override) {
-			for (const [key, value] of Object.entries(this.item.system.duration)) {
-				foundry.utils.setProperty(this, `duration.${key}`, value);
-			}
-		}
-		prepareFinalValue("duration.value", "BF.Duration.Label");
-
-		Object.defineProperty(this.target, "canOverride", {
-			value: !!this.item.system.range && !!this.item.system.target,
-			configurable: true,
-			enumerable: false
-		});
-		if (this.target.canOverride && !this.target.override) {
-			for (const keyPath of ["range", "target.template", "target.affects"]) {
-				const obj = foundry.utils.getProperty(this.item.system, keyPath) ?? {};
-				for (const [key, value] of Object.entries(obj)) {
-					foundry.utils.setProperty(this, `${keyPath}.${key}`, value);
-				}
-			}
-		}
-		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
-		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
-		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width.Label");
-		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height.Label");
 
 		this.system.prepareFinalData?.();
 	}
