@@ -38,7 +38,7 @@
 		}
 	}
 
-	.block {
+	.block, .stat-block {
 		display: flex;
 		background: var(--bf-color-fill);
 		border: 1px solid var(--bf-color-border-gray);
@@ -50,6 +50,14 @@
 			justify-content: center;
 			padding-block: 0.15rem;
 			padding-inline: 0.5rem;
+		}
+
+		.label {
+			font-size: var(--font-size-13);
+			text-align: center;
+
+			@media (resolution: 2x) { font-size: var(--font-size-12); }
+			&.light { color: var(--bf-text-color-light-label); }
 		}
 
 		button {

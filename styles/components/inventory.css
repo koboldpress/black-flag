@@ -27,7 +27,7 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 				:is(td, th) {
 					position: relative;
 					padding-inline: 0.25rem;
-					font-size: var(--font-size-12);
+					font-size: var(--font-size-13);
 
 					> div.layout {
 						display: flex;
@@ -49,6 +49,7 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 			> tr:first-child {
 				position: relative;
 				border: 2px inset color-mix(in oklab, var(--bf-color-border-blue), white 40%);
+				background-color: var(--bf-background-color-half-white);
 				font-family: var(--bf-font-header);
 				font-weight: 600;
 
@@ -59,6 +60,14 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 					border: 1px solid var(--bf-color-border-gray);
 					box-shadow: 0px 0px 3px rgb(0 0 0 / 0.25);
 					z-index: 0;
+				}
+
+				> tr, > td {
+					font-size: var(--font-size-14);
+
+					@media (resolution: 2x) {
+						font-size: var(--font-size-13);
+					}
 				}
 
 				> * {
@@ -131,15 +140,11 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 		}
 		&.traits {
 			width: 14rem;
-			td:is(&) {
-				font-size: var(--font-size-11);
-			}
+			td:is(&) { font-size: var(--font-size-11); }
 		}
 		&.controls {
 			width: 1em;
-			.layout {
-				justify-content: center;
-			}
+			.layout { justify-content: center; }
 		}
 		.status {
 			&.fade:not([aria-pressed="true"], :hover, :focus-visible) { opacity: 30%; }

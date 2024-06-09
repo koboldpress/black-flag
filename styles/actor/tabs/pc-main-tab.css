@@ -223,10 +223,7 @@
 		padding-block-end: 0.25rem;
 
 		> div:not(.hit-dice) {
-			display: flex;
 			margin-inline: calc(-0.25rem - 3px);
-			border: 1px solid var(--bf-color-border-gray);
-			border-radius: 6px;
 
 			> * {
 				flex: 1 1 40%;
@@ -248,14 +245,11 @@
 			label {
 				contain: layout;
 				background-color: var(--bf-color-fill);
-			
+
 				.label {
 					position: absolute;
 					inset-block-start: 0;
 					inset-inline: 0;
-					color: var(--bf-text-color-light-label);
-					font-size: var(--font-size-11);
-					text-align: center;
 				}
 				.value {
 					flex-grow: 1;
@@ -268,17 +262,16 @@
 				}
 			}
 
-			.main-hit-points {
+			&.main-hit-points {
+				> * { padding: 0; }
 				.value {
 					font-size: var(--font-size-20);
-					padding-block-start: 1rem;
-					padding-block-end: 0.5rem;
+					padding-block-start: 16px;
+					padding-block-end: 4px;
 				}
 			}
-			.other-hit-points {
-				.value {
-					font-size: var(--font-size-16);
-				}
+			&.other-hit-points {
+				.value { font-size: var(--font-size-16); }
 			}
 		}
 		> div.death-saves {
@@ -301,21 +294,16 @@
 		padding-block-end: 0.25rem;
 
 		.denomination {
-			display: flex;
 			margin-inline: calc(-0.25rem - 3px);
-			background: var(--bf-color-fill);
-			border: 1px solid var(--bf-color-border-gray);
 
-			&:first-of-type {
-				border-top-left-radius: 6px;
-				border-top-right-radius: 6px;
-			}
-			&:last-of-type {
-				border-bottom-left-radius: 6px;
-				border-bottom-right-radius: 6px;
+			&:not(:first-of-type) {
+				border-start-start-radius: 0;
+				border-start-end-radius: 0;
 			}
 			&:not(:last-of-type) {
 				border-block-end: none;
+				border-end-start-radius: 0;
+				border-end-end-radius: 0;
 			}
 
 			> * {
@@ -367,7 +355,7 @@
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	.initiative {
-		.block {
+		.stat-block {
 			> * { flex: 1 1 50%; }
 			.value { font-size: var(--font-size-16); }
 		}
@@ -408,8 +396,7 @@
 		gap: 0;
 		padding: 0.35rem;
 
-		> .block {
-			display: flex;
+		> .stat-block {
 			align-items: first baseline;
 			justify-content: space-between;
 			gap: 4px;
@@ -427,12 +414,10 @@
 				align-items: first baseline;
 				gap: 0.25rem;
 				padding-block: 2px;
-				font-size: var(--font-size-11);
-				line-height: var(--font-size-13);
+				font-size: var(--font-size-12);
+				line-height: var(--font-size-14);
 
-				&:hover, &:focus {
-					z-index: 1;
-				}
+				&:hover, &:focus-visible { z-index: 1; }
 			}
 			.ability {
 				font-variant: small-caps;
@@ -446,12 +431,12 @@
 
 			&:not(:first-of-type) {
 				border-block-start: 0;
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
+				border-start-start-radius: 0;
+				border-start-end-radius: 0;
 			}
 			&:not(:last-of-type) {
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0;
+				border-end-start-radius: 0;
+				border-end-end-radius: 0;
 			}
 		}
 	}
@@ -464,13 +449,8 @@
 		gap: 3px;
 
 		.trait {
-			> * {
-				font-size: var(--font-size-12);
-			}
-			> label {
-				color: var(--bf-text-color-light-label);
-				flex-wrap: nowrap;
-			}
+			> * { font-size: var(--font-size-13); }
+			> label { flex-wrap: nowrap; }
 
 			&.single {
 				> label { flex: 0 0 33%; }
@@ -478,18 +458,16 @@
 			}
 			&:not(.single) {
 				flex-wrap: wrap;
-				> label {
-					flex: 0 0 100%;
-				}
+				> label { flex: 0 0 100%; }
 			}
 
 			&:not(:first-of-type) {
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
+				border-start-start-radius: 0;
+				border-start-end-radius: 0;
 			}
 			&:not(:last-of-type) {
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0;
+				border-end-start-radius: 0;
+				border-end-end-radius: 0;
 			}
 		}
 	}
