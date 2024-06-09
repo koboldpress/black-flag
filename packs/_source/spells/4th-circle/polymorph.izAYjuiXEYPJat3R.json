@@ -1,0 +1,140 @@
+{
+  "name": "Polymorph",
+  "type": "spell",
+  "_id": "izAYjuiXEYPJat3R",
+  "img": "icons/magic/control/silhouette-hold-beam-blue.webp",
+  "system": {
+    "activities": {
+      "P6U0XrR6gc3Wy0ul": {
+        "type": "savingThrow",
+        "_id": "P6U0XrR6gc3Wy0ul",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>This spell transforms a creature that you can see within range into a new form. The new form can be any Beast whose challenge rating is equal to or less than the target’s challenge rating (or the target’s level, if it doesn’t have a challenge rating). The target’s game statistics, including INT, WIS, and CHA, are replaced by those of the chosen Beast. It retains its personality.</p><p>An unwilling creature must make a WIS save to avoid the effect. The spell has no effect on a creature with the Shapechanger tag or a creature with 0 HP. The transformation lasts for the duration, until the target drops to 0 HP, or until it dies.</p><p>The target has the maximum hit points of its new form. When it reverts to its normal form, the creature returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 HP, any excess damage carries over to its normal form. As long as the excess damage doesn’t reduce the creature’s normal form to 0 HP, it isn’t knocked unconscious.</p><p>The creature is limited by the nature of its new form. It can’t speak, cast spells, or take any action that requires hands or speech. The target’s gear melds into the new form. The creature can’t activate, use, wield, or otherwise benefit from any of its equipment.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "arcane",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a caterpillar cocoon"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "folder": "tCxdqzClsLOnTgfE",
+  "sort": 150000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1717965631955,
+    "modifiedTime": 1717966509977,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!izAYjuiXEYPJat3R"
+}

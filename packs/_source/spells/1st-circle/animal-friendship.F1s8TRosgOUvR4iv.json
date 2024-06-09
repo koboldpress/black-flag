@@ -1,40 +1,25 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Flame Strike",
+  "name": "Animal Friendship",
   "type": "spell",
-  "_id": "zN7iox5s7uic3PTH",
-  "img": "icons/magic/fire/beam-jet-stream-yellow.webp",
+  "_id": "F1s8TRosgOUvR4iv",
+  "img": "icons/creatures/reptiles/chameleon-camouflage-green-brown.webp",
   "system": {
     "activities": {
-      "vA1Fvg0oFBHhiW3F": {
+      "TcldVSdTjJXqKlyz": {
         "type": "savingThrow",
-        "_id": "vA1Fvg0oFBHhiW3F",
+        "_id": "TcldVSdTjJXqKlyz",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "wisdom",
           "damage": {
-            "parts": [
-              {
-                "number": 4,
-                "denomination": "6",
-                "bonus": "",
-                "custom": "",
-                "type": "fire"
-              },
-              {
-                "number": 4,
-                "denomination": "6",
-                "bonus": "",
-                "custom": "",
-                "type": "radiant"
-              }
-            ]
+            "parts": []
           },
           "dc": {
             "ability": ""
           }
         },
         "activation": {
+          "value": null,
           "type": "",
           "condition": "",
           "primary": true
@@ -44,6 +29,21 @@
           "scale": {
             "allowed": false
           }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
         },
         "uses": {
           "spent": 0,
@@ -64,18 +64,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a [[/save]] save. A creature takes [[/damage]]{4d6 fire damage and 4d6 radiant} damage on a failed save, or half as much damage on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot above 5th.</p>",
+      "value": "<p>This spell lets you convince an animal that you mean it no harm. Choose a Beast or creature with the Animal tag that you can see within range. It must see and hear you. If the creature’s INT is 4 (−3) or higher, the spell fails. Otherwise, the creature must succeed on a WIS save or be charmed by you for the spell’s duration. If you or one of your companions harms the target, the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can affect one additional creature for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
       "short": ""
     },
     "source": [
-      "divine"
+      "primordial"
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 1
     },
     "casting": {
       "value": null,
@@ -92,35 +92,35 @@
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "a pinch of sulfur"
+        "description": "a morsel of food"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "24"
     },
     "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": "cylinder",
-        "size": "10",
-        "height": "40"
+        "type": ""
       },
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "@item.level"
       }
     },
-    "range": {
-      "units": "foot",
-      "value": "60"
-    },
-    "school": "evocation"
+    "school": "enchantment"
   },
   "effects": [],
-  "sort": 700000,
+  "folder": "nRrXxMSYGyY4qKs3",
+  "sort": 100000,
   "ownership": {
     "default": 0
   },
@@ -129,9 +129,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
-    "createdTime": 1715663328122,
-    "modifiedTime": 1717966788809,
+    "createdTime": 1717965618340,
+    "modifiedTime": 1717966149772,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zN7iox5s7uic3PTH"
+  "_key": "!items!F1s8TRosgOUvR4iv"
 }

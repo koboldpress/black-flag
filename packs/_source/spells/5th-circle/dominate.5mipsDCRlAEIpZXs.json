@@ -1,0 +1,138 @@
+{
+  "name": "Dominate",
+  "type": "spell",
+  "_id": "5mipsDCRlAEIpZXs",
+  "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+  "system": {
+    "activities": {
+      "QUlS2ZTBhRaPkCrc": {
+        "type": "savingThrow",
+        "_id": "QUlS2ZTBhRaPkCrc",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Choose a Medium or smaller creature that you can see within range. This spell has no effect on creatures immune to the charmed condition. The target must succeed on a WIS save or be charmed by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the save.</p><p>While the creature is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as <q>attack that creature,</q> <q>run over there,</q> or <q>fetch that object.</q> If the creature completes the order and doesn’t receive further direction from you, it defends and preserves itself to the best of its ability.</p><p>You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose and doesn’t do anything that you don’t allow it to do.</p><p>During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.</p><p>Each time the target takes damage, it makes a new WIS save against the spell, ending the spell on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a 6th‑circle spell slot, the duration is concentration, up to 10 minutes. When you use a 7th-circle spell slot, the duration is concentration, up to 1 hour. When you use a spell slot of 8th circle or higher, the duration is concentration, up to 8 hours.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "arcane",
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1"
+      }
+    },
+    "school": "enchantment"
+  },
+  "effects": [],
+  "folder": "rRg9we6fU3e9Hvu7",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1717965633630,
+    "modifiedTime": 1717966788809,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!5mipsDCRlAEIpZXs"
+}

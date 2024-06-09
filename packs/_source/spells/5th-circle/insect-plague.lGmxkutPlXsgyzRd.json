@@ -1,32 +1,24 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Flame Strike",
+  "name": "Insect Plague",
   "type": "spell",
-  "_id": "zN7iox5s7uic3PTH",
-  "img": "icons/magic/fire/beam-jet-stream-yellow.webp",
+  "_id": "lGmxkutPlXsgyzRd",
+  "img": "icons/creatures/invertebrates/wasp-swarm-tan.webp",
   "system": {
     "activities": {
-      "vA1Fvg0oFBHhiW3F": {
+      "41nB3Q6vcgk2G0HR": {
         "type": "savingThrow",
-        "_id": "vA1Fvg0oFBHhiW3F",
+        "_id": "41nB3Q6vcgk2G0HR",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "constitution",
           "damage": {
             "parts": [
               {
                 "number": 4,
-                "denomination": "6",
+                "denomination": 10,
                 "bonus": "",
                 "custom": "",
-                "type": "fire"
-              },
-              {
-                "number": 4,
-                "denomination": "6",
-                "bonus": "",
-                "custom": "",
-                "type": "radiant"
+                "type": "piercing"
               }
             ]
           },
@@ -35,6 +27,7 @@
           }
         },
         "activation": {
+          "value": null,
           "type": "",
           "condition": "",
           "primary": true
@@ -44,6 +37,25 @@
           "scale": {
             "allowed": false
           }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
         },
         "uses": {
           "spent": 0,
@@ -64,14 +76,14 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a [[/save]] save. A creature takes [[/damage]]{4d6 fire damage and 4d6 radiant} damage on a failed save, or half as much damage on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot above 5th.</p>",
+      "value": "<p>Swarming, biting locusts fill a 20-foot-radius sphere centered on a point you choose within range. The sphere spreads around corners. The sphere remains for the duration, and its area is lightly obscured. The sphere’s area is difficult terrain.</p><p>When the area appears, each creature in it must make a CON save. A creature takes 4d10 piercing damage on a failed save, or half as much damage on a successful one. A creature must also make this save when it enters the spell’s area for the first time on a turn or ends its turn there.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the damage increases by 1d10 for each slot above 5th.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
       "short": ""
     },
     "source": [
-      "divine"
+      "primordial"
     ],
     "circle": {
       "value": null,
@@ -92,20 +104,26 @@
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "a pinch of sulfur"
+        "description": "a few grains of sugar, some kernels of grain, and a smear of fat"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "300"
+    },
     "target": {
       "template": {
         "count": 1,
         "units": "foot",
-        "type": "cylinder",
-        "size": "10",
-        "height": "40"
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
@@ -113,14 +131,11 @@
         "count": ""
       }
     },
-    "range": {
-      "units": "foot",
-      "value": "60"
-    },
-    "school": "evocation"
+    "school": "conjuration"
   },
   "effects": [],
-  "sort": 700000,
+  "folder": "rRg9we6fU3e9Hvu7",
+  "sort": 150000,
   "ownership": {
     "default": 0
   },
@@ -129,9 +144,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
-    "createdTime": 1715663328122,
-    "modifiedTime": 1717966788809,
+    "createdTime": 1717965636758,
+    "modifiedTime": 1717966908109,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zN7iox5s7uic3PTH"
+  "_key": "!items!lGmxkutPlXsgyzRd"
 }

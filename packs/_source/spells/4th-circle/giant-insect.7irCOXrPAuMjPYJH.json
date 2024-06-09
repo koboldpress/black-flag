@@ -1,0 +1,123 @@
+{
+  "name": "Giant Insect",
+  "type": "spell",
+  "_id": "7irCOXrPAuMjPYJH",
+  "img": "icons/creatures/invertebrates/centipede-brown.webp",
+  "system": {
+    "activities": {
+      "MiseuOtgBmjbGtuO": {
+        "type": "utility",
+        "_id": "MiseuOtgBmjbGtuO",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You transform up to ten centipedes, three spiders, five wasps, or one scorpion within range into giant versions of their natural forms for the duration. A centipede becomes a <strong>giant centipede</strong>, a spider becomes a <strong>giant spider</strong>, a wasp becomes a <strong>giant wasp</strong>, and a scorpion becomes a <strong>giant scorpion</strong>.</p><p>Each creature obeys your verbal commands, and in combat, they act on your turn each round. The GM has the statistics for these creatures and resolves their actions and movement.</p><p>A creature remains in its giant size for the duration, until it drops to 0 HP, or until you use an action to dismiss the effect on it.</p><p>The GM might allow you to choose different targets. For example, if you transform a bee, its giant version might have the same statistics as a giant wasp.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "10"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "special",
+        "count": "",
+        "special": "Up to 10 centipedes, 3 spiders, 5 wasps, or 1 scorpion"
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "folder": "tCxdqzClsLOnTgfE",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1717965627607,
+    "modifiedTime": 1717966382721,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!7irCOXrPAuMjPYJH"
+}
