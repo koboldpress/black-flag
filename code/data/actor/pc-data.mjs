@@ -252,7 +252,11 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareEmbeddedClasses() {
+	/** @inheritDoc */
+	prepareEmbeddedData() {
+		super.prepareEmbeddedData();
+
+		// Classes & Progression
 		this.progression.classes = {};
 		const subclasses = this.parent.items
 			.filter(i => i.type === "subclass")
@@ -288,11 +292,8 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
 		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareEmbeddedExperiencePoints() {
+		// Experience Points
 		const xp = this.progression.xp;
 		const getXP = level =>
 			CONFIG.BlackFlag.experiencePoints[Math.clamp(level, 1, CONFIG.BlackFlag.experiencePoints.length)];
@@ -305,11 +306,8 @@ export default class PCData extends ActorDataModel.mixin(
 			},
 			enumerable: false
 		});
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareEmbeddedHitDice() {
+		// Hit Dice
 		const hd = this.attributes.hd;
 		for (const data of Object.values(this.progression.levels)) {
 			const cls = data.class;

@@ -175,7 +175,11 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareEmbeddedConditions() {
+	/** @inheritDoc */
+	prepareEmbeddedData() {
+		super.prepareEmbeddedData();
+
+		// Conditions
 		// TODO: Refactor this out into mixin
 		this.conditions = {};
 		for (const effect of this.parent.effects) {
