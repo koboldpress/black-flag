@@ -30,6 +30,9 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Clear out invalid modifiers & add static index for updates.
+	 */
 	prepareDerivedModifiers() {
 		this.modifiers = this.modifiers.filter(m => !foundry.utils.isEmpty(m));
 		this.modifiers.forEach((modifier, index) => Object.defineProperty(modifier, "index", {

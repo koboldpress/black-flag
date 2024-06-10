@@ -192,8 +192,69 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedAbilities() {
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
 		const rollData = this.parent.getRollData({ deterministic: true });
+
+		this.prepareConditions();
+		this.prepareLanguages();
+		this.prepareDerivedModifiers();
+		this.prepareDerivedTraits(rollData);
+
+		this.prepareDerivedAbilities(rollData);
+
+		// Hit Points
+		const hp = this.attributes.hp;
+		hp.max ??= 0;
+		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
+		hp.value = Math.clamp(hp.value, 0, hp.max);
+		hp.damage = hp.max - hp.value;
+
+		// Initiative
+		this.computeInitiative();
+
+		// Languages
+		Object.defineProperty(this.proficiencies.languages, "list", {
+			get() {
+				return Array.from(this.value).join(" ");
+			},
+			configurable: true,
+			enumerable: false
+		});
+
+		// Legendary Actions
+		this.attributes.legendary.max ??= 0;
+		this.attributes.legendary.value = Math.clamp(
+			this.attributes.legendary.max - this.attributes.legendary.spent,
+			0,
+			this.attributes.legendary.max
+		);
+
+		// Perception & Stealth
+		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
+		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);
+		if (this.attributes.ac.equippedArmor?.system.properties.has("noisy")) {
+			this.attributes.baseStealth = this.attributes.stealth;
+			this.attributes.stealth -= 5;
+		}
+
+		// Spellcasting
+		const ability = this.abilities[this.spellcasting.ability];
+		this.spellcasting.autoDC = 8 + (ability?.mod ?? 0) + this.attributes.proficiency;
+		this.spellcasting.dc ??= this.spellcasting.autoDC;
+
+		this.computeArmorClass();
+		this.computeInitiative();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare abilities.
+	 * @param {object} rollData
+	 */
+	prepareDerivedAbilities(rollData) {
 		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability.valid = ability.mod !== null;
 			ability.mod ??= 0;
@@ -223,62 +284,6 @@ export default class NPCData extends ActorDataModel.mixin(
 			ability.save.mod = ability.mod + ability.save.proficiency.flat + ability.save.bonus;
 			ability.dc = 8 + ability.mod + this.attributes.proficiency;
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Calculate the final values for various attributes.
-	 */
-	prepareDerivedAttributes() {
-		// Armor Class
-		this.computeArmorClass();
-
-		// Hit Points
-		const hp = this.attributes.hp;
-		hp.max ??= 0;
-		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
-		hp.value = Math.clamp(hp.value, 0, hp.max);
-		hp.damage = hp.max - hp.value;
-
-		// Initiative
-		this.computeInitiative();
-
-		// Legendary Actions
-		this.attributes.legendary.max ??= 0;
-		this.attributes.legendary.value = Math.clamp(
-			this.attributes.legendary.max - this.attributes.legendary.spent,
-			0,
-			this.attributes.legendary.max
-		);
-
-		// Perception & Stealth
-		this.attributes.perception ??= 10 + (this.abilities.wisdom?.mod ?? 0);
-		this.attributes.stealth ??= 10 + (this.abilities.dexterity?.mod ?? 0);
-		if (this.attributes.ac.equippedArmor?.system.properties.has("noisy")) {
-			this.attributes.baseStealth = this.attributes.stealth;
-			this.attributes.stealth -= 5;
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedSpellcasting() {
-		const ability = this.abilities[this.spellcasting.ability];
-		this.spellcasting.autoDC = 8 + (ability?.mod ?? 0) + this.attributes.proficiency;
-		this.spellcasting.dc ??= this.spellcasting.autoDC;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedTraits() {
-		Object.defineProperty(this.proficiencies.languages, "list", {
-			get() {
-				return Array.from(this.value).join(" ");
-			},
-			configurable: true,
-			enumerable: false
-		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

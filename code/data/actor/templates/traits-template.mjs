@@ -67,11 +67,11 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Resolve final movement values and prepare the labels.
+	 * Resolve final movement, senses, and resistances/immunities.
+	 * @param {object} rollData
 	 */
-	prepareDerivedMovement() {
+	prepareDerivedTraits(rollData) {
 		const movement = this.traits.movement;
-		const rollData = this.parent.getRollData({ deterministic: true });
 		rollData.base = movement.base;
 
 		// Determine how movement should be changed by status effects
@@ -94,7 +94,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			}
 		}
 
-		// Prepare movement label to display on character sheet
+		// Prepare movement labels
 		movement.labels = Object.entries(movement.types)
 			.filter(([type, speed]) => speed > 0)
 			.sort((lhs, rhs) => rhs[1] - lhs[1])
@@ -103,36 +103,24 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 				const label = config ? game.i18n.localize(config.label) : type;
 				return `${label} ${numberFormat(speed, { unit: "foot" })}`;
 			});
-
-		// Prepare movement label to display on NPC sheet
 		movement.label = formatTaggedList({ entries, tags: movement.tags, tagDefinitions: CONFIG.BlackFlag.movementTags });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Resolve sense formulas and prepare the combined label.
-	 */
-	prepareDerivedSenses() {
-		const senses = this.traits.senses;
-		const rollData = this.parent.getRollData({ deterministic: true });
 
 		// Calculate each special sense type
-		const entries = new Map();
+		const senses = this.traits.senses;
+		const senseEntries = new Map();
 		for ( const [type, formula] of Object.entries(senses.types) ) {
 			const range = simplifyBonus(formula, rollData);
 			senses.types[type] = range;
 			const label = CONFIG.BlackFlag.senses.localized[type];
-			if ( range && label ) entries.set(type, `${label} ${numberFormat(range, { unit: "foot" })}`);
+			if ( range && label ) senseEntries.set(type, `${label} ${numberFormat(range, { unit: "foot" })}`);
 		}
+		senses.label = formatTaggedList({
+			entries: senseEntries, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags
+		});
 
-		senses.label = formatTaggedList({ entries, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedResistImmune() {
+		// Adjust resistances && immunities based on status effects
 		if ( this.parent.statuses.has("petrified") ) {
+			// TODO: Add option to control whether these are applied
 			this.traits.condition.immunities.value.add("poisoned");
 			this.traits.damage.resistances.custom.push("All Damage");
 			this.traits.damage.immunities.value.add("poison");

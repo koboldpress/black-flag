@@ -22,15 +22,14 @@ export default class ConditionsTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedExhaustionLevel() {
+	/**
+	 * Prepare exhaustion level and condition roll notes.
+	 */
+	prepareConditions() {
 		const exhaustion = this.parent.effects.get(BlackFlagActiveEffect.EXHAUSTION);
 		const level = exhaustion?.getFlag("black-flag", "level");
 		this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedConditionRollNotes() {
 		for ( const status of this.parent.statuses ) {
 			const notes = CONFIG.BlackFlag.statusEffectRollNotes[status];
 			if ( !notes?.length ) continue;

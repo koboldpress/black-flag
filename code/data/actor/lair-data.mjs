@@ -65,17 +65,4 @@ export default class LairData extends ActorDataModel {
 	getInitiativeRollConfig(options = {}) {
 		return { fixed: this.initiative };
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*        Socket Event Handlers        */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Reset combat-related uses.
-	 * @param {string[]} periods - Which recovery periods should be considered.
-	 * @returns {Promise<Combatant>}
-	 */
-	async recoverCombatUses(periods) {
-		// TODO: Ensure individual Lair Actions cannot be used twice in a row
-	}
 }

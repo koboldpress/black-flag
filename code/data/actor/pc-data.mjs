@@ -325,8 +325,47 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedAbilities() {
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
 		const rollData = this.parent.getRollData({ deterministic: true });
+
+		this.prepareConditions();
+		this.prepareLanguages();
+		this.prepareDerivedModifiers();
+		this.prepareDerivedTraits(rollData);
+
+		this.prepareDerivedAbilities(rollData);
+		this.prepareDerivedSkills(rollData);
+		this.prepareDerivedToolsVehicles(rollData);
+		this.prepareDerivedHitPoints();
+		this.prepareDerivedSpellcasting();
+		this.prepareDerivedProficiencies();
+
+		// Attunement
+		this.attributes.attunement.value = this.parent.items.reduce((value, item) => {
+			if (item.system.attuned) value += 1;
+			return value;
+		}, 0);
+		if (this.attributes.attunement.value > this.attributes.attunement.max) {
+			this.parent.notifications.set("too-much-attunement", {
+				level: "warn",
+				section: "inventory",
+				message: game.i18n.localize("BF.Attunement.Warning")
+			});
+		}
+
+		this.computeArmorClass();
+		this.computeInitiative();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare abilities.
+	 * @param {object} rollData
+	 */
+	prepareDerivedAbilities(rollData) {
 		for (const [key, ability] of Object.entries(this.abilities)) {
 			const config = CONFIG.BlackFlag.abilities[key];
 			ability.valid = !!ability.value;
@@ -366,28 +405,9 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedArmorClass() {
-		this.computeArmorClass();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedAttunement() {
-		this.attributes.attunement.value = this.parent.items.reduce((value, item) => {
-			if (item.system.attuned) value += 1;
-			return value;
-		}, 0);
-		if (this.attributes.attunement.value > this.attributes.attunement.max) {
-			this.parent.notifications.set("too-much-attunement", {
-				level: "warn",
-				section: "inventory",
-				message: game.i18n.localize("BF.Attunement.Warning")
-			});
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
+	/**
+	 * Prepare final hit points values.
+	 */
 	prepareDerivedHitPoints() {
 		const hpAdvancements = Object.values(this.progression.classes)
 			.map(c => c.document?.system.advancement.byType("hitPoints")[0])
@@ -411,14 +431,11 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedInitiative() {
-		this.computeInitiative();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedSkills() {
-		const rollData = this.parent.getRollData({ deterministic: true });
+	/**
+	 * Prepare skills.
+	 * @param {object} rollData
+	 */
+	prepareDerivedSkills(rollData) {
 		for (const [key, skill] of Object.entries(this.proficiencies.skills)) {
 			skill._source = this._source.proficiencies?.skills?.[key] ?? {};
 			const config = CONFIG.BlackFlag.skills[key];
@@ -453,6 +470,9 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Prepare final spellcasting.
+	 */
 	prepareDerivedSpellcasting() {
 		this.spellcasting.hasSpellcastingAdvancement = false;
 		// TODO: Calculate spellcasting DC per-class
@@ -502,8 +522,11 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedToolsVehicles() {
-		const rollData = this.parent.getRollData({ deterministic: true });
+	/**
+	 * Prepare tools & vehicles.
+	 * @param {object} rollData
+	 */
+	prepareDerivedToolsVehicles(rollData) {
 		for (const trait of ["tools", "vehicles"]) {
 			for (const [key, tool] of Object.entries(this.proficiencies[trait])) {
 				tool._source = this._source.proficiencies?.[trait]?.[key] ?? {};
@@ -542,6 +565,9 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Final proficiencies information.
+	 */
 	prepareDerivedProficiencies() {
 		// Determine which categories a player has a least one proficiency within
 		for (const type of ["armor", "weapons", "tools"]) {
@@ -576,6 +602,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/** @inheritDoc */
 	prepareNotifications() {
+		super.prepareNotifications();
 		this.prepareCharacterCreationWarnings();
 
 		// Advancement warnings

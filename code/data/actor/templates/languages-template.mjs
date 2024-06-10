@@ -50,7 +50,10 @@ export default class LanguagesTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedLanguages() {
+	/**
+	 * Prepare final language labels.
+	 */
+	prepareLanguages() {
 		const languages = this.proficiencies.languages;
 		const entries = new Map(Array.from(languages.value).map(v => [v, Trait.keyLabel(v, { trait: "languages" })]));
 		languages.custom.forEach(c => entries.set(c, c));
