@@ -1,0 +1,116 @@
+{
+  "folder": "NM2cIQ9aafWAC0yl",
+  "name": "Focus Intent",
+  "type": "feature",
+  "_id": "nJpoWnpUj4ge0CPg",
+  "img": "icons/magic/nature/beam-hand-leaves-green.webp",
+  "system": {
+    "activities": {
+      "jK56u7nSQewFLl7o": {
+        "type": "utility",
+        "_id": "jK56u7nSQewFLl7o",
+        "description": "<p>When you or a creature within 5 feet of you makes an ability check or attack roll, you can use your reaction to roll [[/r @scale.monk.die]]. The target gains a bonus or a penalty (your choice) to its roll equal to the number you rolled.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When you or a creature within 5 feet of you makes an ability check or attack roll"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Roll Bonus/Penalty",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@abilities.wisdom.mod"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you or a creature within 5 feet of you makes an ability check or attack roll, you can use your reaction to roll your martial arts die. The target gains a bonus or a penalty (your choice) to its roll equal to the number you rolled.</p><p>You can use this feature a number of times equal to your WIS modifier. You regain all expended uses when you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "focus-intent",
+      "associated": "open-hand"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718042328902,
+    "modifiedTime": 1718042626835,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!nJpoWnpUj4ge0CPg"
+}

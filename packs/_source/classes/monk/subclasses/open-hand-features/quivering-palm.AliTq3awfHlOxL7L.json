@@ -1,0 +1,252 @@
+{
+  "folder": "NM2cIQ9aafWAC0yl",
+  "name": "Quivering Palm",
+  "type": "feature",
+  "_id": "AliTq3awfHlOxL7L",
+  "img": "icons/magic/unholy/hands-circle-light-green.webp",
+  "system": {
+    "activities": {
+      "fizHnB7qtmmRX39I": {
+        "type": "attack",
+        "_id": "fizHnB7qtmmRX39I",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "weapon"
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": null,
+                "denomination": 0,
+                "bonus": "",
+                "custom": "@scale.monk.die + @mod",
+                "type": "bludgeoning"
+              }
+            ]
+          },
+          "ability": "dexterity"
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Unarmed Strike",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      },
+      "M5eoxdiky4Vejn0X": {
+        "type": "utility",
+        "_id": "M5eoxdiky4Vejn0X",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When hit by Quivering Palm unarmed strike"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.xFWfBjQ8Oq6HftOo",
+              "value": "4 + (@activity.uses.value * -2)"
+            },
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch",
+          "value": "5"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "10",
+          "max": ""
+        },
+        "name": "Fill with Vibrations",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "70dp8NCjLVH2qB3i": {
+        "type": "savingThrow",
+        "_id": "70dp8NCjLVH2qB3i",
+        "description": "<p>The target must make a CON save. On a failure, the target takes force damage equal to 5 × your monk level and is paralyzed until the end of your next turn. On a success, the target is stunned for 1 minute, and at the end of each of their turns, and each time they take damage, the target can repeat the save, ending the effect on a success. A target that fails the save by 5 or more instantly dies.</p>",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": null,
+                "denomination": 0,
+                "bonus": "",
+                "custom": "5 * @progression.classes.monk.levels",
+                "type": "force"
+              }
+            ]
+          },
+          "dc": {
+            "ability": "wisdom",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "any",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "End Vibrations",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As an action, you can make a single unarmed strike against a creature. On a hit, you can spend 4 technique points to fill that creature with potentially lethal vibrations that last for a number of days equal to your monk level.</p><p>For the duration, so long as you and the target are on the same plane, you can use an action to end the vibrations, ripping the creature apart. When you do, the target must make a CON save. On a failure, the target takes force damage equal to 5 × your monk level and is paralyzed until the end of your next turn. On a success, the target is stunned for 1 minute, and at the end of each of their turns, and each time they take damage, the target can repeat the save, ending the effect on a success. A target that fails the save by 5 or more instantly dies.</p><p>Each time you use this feature after the first, the technique cost to use it increases by 2. When you finish a long rest, the cost resets. This feature can affect only one target at a time.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "quivering-palm",
+      "associated": "open-hand"
+    },
+    "level": {
+      "value": 15
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718042377634,
+    "modifiedTime": 1718043512484,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!AliTq3awfHlOxL7L"
+}

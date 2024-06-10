@@ -1,0 +1,213 @@
+{
+  "folder": "NM2cIQ9aafWAC0yl",
+  "name": "Open Hand Technique",
+  "type": "feature",
+  "_id": "QYel2lT0bdrafvBg",
+  "img": "icons/magic/unholy/hand-claw-fog-green.webp",
+  "system": {
+    "activities": {
+      "8LhbjhZ6js3IoZUW": {
+        "type": "utility",
+        "_id": "8LhbjhZ6js3IoZUW",
+        "description": "<p>The target can’t take reactions until the end of your next turn.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with one of the attacks granted by your Flurry of Blows technique"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Prevent Reactions",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "sLYVWbxBk8ElwdHT": {
+        "type": "savingThrow",
+        "_id": "sLYVWbxBk8ElwdHT",
+        "description": "<p>The target must succeed on a DEX save or be knocked prone.</p>",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "wisdom",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with one of the attacks granted by your Flurry of Blows technique"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Knock Prone",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      },
+      "cxUUug5LYR0AwkjL": {
+        "type": "savingThrow",
+        "_id": "cxUUug5LYR0AwkjL",
+        "description": "<p>The target must succeed on a STR save or be pushed up to 15 feet away from you.</p>",
+        "system": {
+          "ability": "strength",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "wisdom",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with one of the attacks granted by your Flurry of Blows technique"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Push Away",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You can manipulate your enemy’s energy with your own. When you hit a creature with one of the attacks granted by your Flurry of Blows technique, you can impose one of the following effects on that target:</p><ul><li><p>It can’t take reactions until the end of your next turn.</p></li><li><p>It must succeed on a DEX save or be knocked prone.</p></li><li><p>It must succeed on a STR save or be pushed up to 15 feet away from you.</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "open-hand-technique",
+      "associated": "open-hand"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718042343201,
+    "modifiedTime": 1718042809627,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!QYel2lT0bdrafvBg"
+}

@@ -1,0 +1,111 @@
+{
+  "folder": "NM2cIQ9aafWAC0yl",
+  "name": "Wholeness of Body",
+  "type": "feature",
+  "_id": "rdOiOoc6MqgOwEhA",
+  "img": "icons/magic/life/cross-beam-green.webp",
+  "system": {
+    "activities": {
+      "BNEpCHjEZDrH1cYY": {
+        "type": "healing",
+        "_id": "BNEpCHjEZDrH1cYY",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": 0,
+            "bonus": "",
+            "custom": "@abilities.constitution.mod + @progression.classes.monk.levels"
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you roll initiative and have at least 1 hit point"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you roll initiative and have at least 1 hit point, you regain a number of hit points equal to your CON modifier + your monk level.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "wholeness-of-body",
+      "associated": "open-hand"
+    },
+    "level": {
+      "value": 7
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718042355268,
+    "modifiedTime": 1718042881428,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!rdOiOoc6MqgOwEhA"
+}
