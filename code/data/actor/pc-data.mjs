@@ -336,8 +336,7 @@ export default class PCData extends ActorDataModel.mixin(
 		this.prepareDerivedTraits(rollData);
 
 		this.prepareDerivedAbilities(rollData);
-		this.prepareDerivedSkills(rollData);
-		this.prepareDerivedToolsVehicles(rollData);
+		this.prepareComplexProficiencies(rollData);
 		this.prepareDerivedHitPoints();
 		this.prepareDerivedSpellcasting();
 		this.prepareDerivedProficiencies();
@@ -406,6 +405,61 @@ export default class PCData extends ActorDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Prepare tools & vehicles.
+	 * @param {object} rollData
+	 */
+	prepareComplexProficiencies(rollData) {
+		for (const trait of ["skills", "tools", "vehicles"]) {
+			const shortTrait = trait.slice(0, -1);
+
+			for (const [key, data] of Object.entries(this.proficiencies[trait])) {
+				data._source = this._source.proficiencies?.[trait]?.[key] ?? {};
+				const config = Trait.configForKey(key, { trait });
+
+				data.ability = config?.ability;
+
+				data.proficiency = new Proficiency(this.attributes.proficiency, data.proficiency.multiplier, "down");
+
+				const checkData = [
+					{ type: "ability-check", ability: data.ability, proficiency: data.proficiency.multiplier },
+					{ type: `${shortTrait}-check`, [shortTrait]: key, proficiency: data.proficiency.multiplier }
+				];
+				if (trait === "skills") checkData[1].ability = data.ability;
+				data.modifiers = {
+					_data: checkData,
+					check: this.getModifiers(checkData),
+					minimum: this.getModifiers(checkData, "min"),
+					notes: this.getModifiers(checkData, "note")
+				};
+				data.bonus = this.buildBonus(data.modifiers.check, { deterministic: true, rollData });
+
+				const ability = this.abilities[data.ability];
+				data.valid = ability?.valid ?? false;
+				data.mod = (ability?.mod ?? 0) + data.bonus + data.proficiency.flat;
+
+				if (trait === "skills") {
+					data.modifiers.passive = this.getModifiers({ type: "skill-passive", ability: data.ability, skill: key });
+					data.passive = 10 + data.mod + this.buildBonus(data.modifiers.passive, { deterministic: true, rollData });
+					Object.defineProperty(data, "labels", {
+						value: {
+							name: config.label,
+							ability: ability?.labels.abbreviation
+						},
+						enumerable: false
+					});
+				} else {
+					Object.defineProperty(data, "label", {
+						value: !config ? "" : config.label ?? `${config.localization}[other]`,
+						enumerable: false
+					});
+				}
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare final hit points values.
 	 */
 	prepareDerivedHitPoints() {
@@ -427,45 +481,6 @@ export default class PCData extends ActorDataModel.mixin(
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare skills.
-	 * @param {object} rollData
-	 */
-	prepareDerivedSkills(rollData) {
-		for (const [key, skill] of Object.entries(this.proficiencies.skills)) {
-			skill._source = this._source.proficiencies?.skills?.[key] ?? {};
-			const config = CONFIG.BlackFlag.skills[key];
-
-			skill.ability = config.ability;
-
-			skill.proficiency = new Proficiency(this.attributes.proficiency, skill.proficiency.multiplier, "down");
-
-			const checkData = [
-				{ type: "ability-check", ability: skill.ability, proficiency: skill.proficiency.multiplier },
-				{ type: "skill-check", ability: skill.ability, skill: key, proficiency: skill.proficiency.multiplier }
-			];
-			skill.modifiers = {
-				check: this.getModifiers(checkData),
-				passive: this.getModifiers({ type: "skill-passive", ability: skill.ability, skill: key }),
-				minimum: this.getModifiers(checkData, "min"),
-				notes: this.getModifiers(checkData, "note")
-			};
-			skill.bonus = this.buildBonus(skill.modifiers.check, { deterministic: true, rollData });
-
-			const ability = this.abilities[skill.ability];
-			skill.valid = ability?.valid;
-			skill.mod = (ability?.mod ?? 0) + skill.bonus + skill.proficiency.flat;
-			skill.passive = 10 + skill.mod + this.buildBonus(skill.modifiers.passive, { deterministic: true, rollData });
-
-			skill.labels = {
-				name: config.label,
-				ability: ability?.labels.abbreviation
-			};
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -516,49 +531,6 @@ export default class PCData extends ActorDataModel.mixin(
 				this.spellcasting.slots.spent += circle.spent;
 				this.spellcasting.slots.max += circle.max;
 				if (circle.max > 0 && circle.level > this.spellcasting.maxCircle) this.spellcasting.maxCircle = circle.level;
-			}
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare tools & vehicles.
-	 * @param {object} rollData
-	 */
-	prepareDerivedToolsVehicles(rollData) {
-		for (const trait of ["tools", "vehicles"]) {
-			for (const [key, tool] of Object.entries(this.proficiencies[trait])) {
-				tool._source = this._source.proficiencies?.[trait]?.[key] ?? {};
-				const config = Trait.configForKey(key, { trait });
-
-				tool.ability = config?.ability;
-
-				tool.proficiency = new Proficiency(this.attributes.proficiency, tool.proficiency.multiplier, "down");
-
-				const checkData = [
-					{ type: "ability-check", ability: tool.ability, proficiency: tool.proficiency.multiplier },
-					{ type: `${trait.replace("s", "")}-check`, [trait]: key, proficiency: tool.proficiency.multiplier }
-				];
-				tool.modifiers = {
-					_data: checkData,
-					check: this.getModifiers(checkData),
-					minimum: this.getModifiers(checkData, "min"),
-					notes: this.getModifiers(checkData, "note")
-				};
-				tool.bonus = this.buildBonus(tool.modifiers.check, { deterministic: true, rollData });
-
-				const ability = this.abilities[tool.ability];
-				tool.valid = ability?.valid ?? false;
-				tool.mod = (ability?.mod ?? 0) + tool.bonus + tool.proficiency.flat;
-
-				Object.defineProperty(tool, "label", {
-					get() {
-						if (!config) return "";
-						return config.label ?? `${config.localization}[other]`;
-					},
-					enumerable: false
-				});
 			}
 		}
 	}
