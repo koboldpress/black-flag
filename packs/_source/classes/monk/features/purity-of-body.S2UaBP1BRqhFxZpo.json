@@ -3,19 +3,84 @@
   "name": "Purity of Body",
   "type": "feature",
   "_id": "S2UaBP1BRqhFxZpo",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "70jupEPr8MvC79nz": {
+        "type": "healing",
+        "_id": "70jupEPr8MvC79nz",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "denomination": 0,
+            "bonus": "",
+            "custom": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you are reduced to 0 HP but not killed outright"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": "0"
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>Your mastery of the energy flowing through your body makes you immune to disease, poison damage, and the poisoned condition. In addition, when you are reduced to 0 HP but not killed outright, you can instantly reset your hit point total to your current number of technique points. You can’t recover hit points in this way again until you finish a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +115,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970281006,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718041338408,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!S2UaBP1BRqhFxZpo"

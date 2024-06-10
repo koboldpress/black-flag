@@ -3,9 +3,55 @@
   "name": "Perfect Motion",
   "type": "feature",
   "_id": "JDqkYb4iYJbgNX9o",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/movement/chevrons-down-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9fToJ7f2oPFWQN4E": {
+        "type": "utility",
+        "_id": "9fToJ7f2oPFWQN4E",
+        "description": "<p>You reduce any falling damage you take by [[calc 5 * @progression.classes.monk.levels]]{an amount equal to 5 × your monk level}.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When you fall and aren’t wearing armor or wielding a shield"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Slow Fall",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +61,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>While you aren’t wearing armor or wielding a shield, you gain the following benefits:</p><ul><li><p>When you fall, you can use your reaction to reduce any falling damage you would take by an amount equal to 5 × your monk level.</p></li><li><p>You can move along vertical surfaces and across liquids on your turn without falling during the move. If you end your movement or if your movement is interrupted while you are standing on a vertical surface or on liquid, you fall as normal.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +96,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970266973,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718041186196,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!JDqkYb4iYJbgNX9o"

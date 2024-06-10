@@ -3,9 +3,112 @@
   "name": "Boundless Technique",
   "type": "feature",
   "_id": "Tj8IdESP95ySchMA",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/environment/wilderness/terrain-river-road-gray.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "TdY1M5R2iCWtiATW": {
+        "type": "utility",
+        "_id": "TdY1M5R2iCWtiATW",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you roll for initiative"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.xFWfBjQ8Oq6HftOo",
+              "value": "-4"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Recover Initiative Points",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "IaHWAQeIgCDYKFzp": {
+        "type": "utility",
+        "_id": "IaHWAQeIgCDYKFzp",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you start a turn with no technique points remaining"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.xFWfBjQ8Oq6HftOo",
+              "value": "-2"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Recover Turn Points",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +118,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>When you roll for initiative, you regain up to 4 expended technique points. If you start your turn with no technique points remaining, you regain 2 technique points.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +153,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970348493,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718041999285,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Tj8IdESP95ySchMA"

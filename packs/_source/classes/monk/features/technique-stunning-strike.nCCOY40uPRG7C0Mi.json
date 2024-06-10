@@ -3,9 +3,80 @@
   "name": "Technique: Stunning Strike",
   "type": "feature",
   "_id": "nCCOY40uPRG7C0Mi",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/unholy/beam-impact-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "dTMOmFdzDOVazOMK": {
+        "type": "savingThrow",
+        "_id": "dTMOmFdzDOVazOMK",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "wisdom",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit with an unarmed strike or monk weapon"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            },
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.xFWfBjQ8Oq6HftOo",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "round",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "turn",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +86,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You can interfere with the flow of energy in an opponent’s body. Once per turn, when you successfully hit another creature with an unarmed strike or monk weapon, you can spend 1 technique point to attempt to stun your foe. When you do so, the target takes damage from your attack as normal and then it must succeed on a CON save or be stunned until the end of your next turn. Each time a stunned target takes damage, it can repeat the save, ending the stunned effect on a success.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -32,7 +103,7 @@
       "proficiency": null
     },
     "identifier": {
-      "value": "technique-stunning-strike",
+      "value": "stunning-strike",
       "associated": ""
     },
     "level": {
@@ -50,7 +121,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970226257,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718042088646,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!nCCOY40uPRG7C0Mi"

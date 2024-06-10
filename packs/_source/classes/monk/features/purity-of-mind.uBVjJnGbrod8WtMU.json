@@ -3,9 +3,55 @@
   "name": "Purity of Mind",
   "type": "feature",
   "_id": "uBVjJnGbrod8WtMU",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "WuCD0BMr50SGzrm9": {
+        "type": "utility",
+        "_id": "WuCD0BMr50SGzrm9",
+        "description": "<p>You can end one effect on yourself that is causing you to be charmed or frightened.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "End Charmed or Frightened",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -13,9 +59,31 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "OLO4wheptsMaJQtA": {
+        "type": "property",
+        "_id": "OLO4wheptsMaJQtA",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }], \"note\": { \"rollMode\": 1, \"text\": \"The clearness of your mind gives you advantage on Wisdom saves.\" } }"
+            }
+          ]
+        },
+        "level": {
+          "value": 10,
+          "classIdentifier": "monk"
+        },
+        "flags": {},
+        "title": "Purity of Mind",
+        "icon": null,
+        "hint": "The clearness of your mind gives you advantage on Wisdom saves."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>The clearness of your mind gives you advantage on Wisdom saves. As a bonus action, you can end one effect on yourself that is causing you to be charmed or frightened.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +118,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970290809,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718041482084,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!uBVjJnGbrod8WtMU"

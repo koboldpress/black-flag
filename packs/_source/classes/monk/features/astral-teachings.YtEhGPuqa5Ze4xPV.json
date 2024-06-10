@@ -3,9 +3,61 @@
   "name": "Astral Teachings",
   "type": "feature",
   "_id": "YtEhGPuqa5Ze4xPV",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/perception/orb-eye-scrying.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "2jQ9k4gxIrTeqvt7": {
+        "type": "utility",
+        "_id": "2jQ9k4gxIrTeqvt7",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.xFWfBjQ8Oq6HftOo",
+              "value": "2"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Learn",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +67,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>As an action, you can expend 2 technique points to become proficient in one language, skill, tool, or weapon of your choice until you are incapacitated or use this feature again.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +102,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970304024,
-    "modifiedTime": 1717970358220,
+    "modifiedTime": 1718042065055,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YtEhGPuqa5Ze4xPV"
