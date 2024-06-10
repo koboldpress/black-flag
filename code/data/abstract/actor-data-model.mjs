@@ -6,6 +6,11 @@ export default class ActorDataModel extends BaseDataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	prepareBaseData() {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Prepare data that needs to be prepared after embedded documents have been prepared,
 	 * but before active effects are applied.

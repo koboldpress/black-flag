@@ -17,6 +17,9 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Add a note to initial modifiers that they are manual rather than added by advancement or effects.
+	 */
 	prepareBaseModifiers() {
 		this.modifiers.forEach(modifier => Object.defineProperty(modifier, "source", {
 			value: "manual",

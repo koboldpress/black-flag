@@ -37,7 +37,9 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/**
+	 * Add default armor formulas with their labels.
+	 */
 	prepareBaseArmorFormulas() {
 		const ac = this.attributes.ac;
 		for ( const baseFormula of ac.baseFormulas ) {

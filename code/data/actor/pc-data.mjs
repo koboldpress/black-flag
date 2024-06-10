@@ -228,7 +228,10 @@ export default class PCData extends ActorDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseAbilities() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		this.progression.abilities.assignmentComplete = true;
 		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability._source = this._source.abilities?.[key] ?? {};
@@ -236,22 +239,15 @@ export default class PCData extends ActorDataModel.mixin(
 			ability.value = ability.base;
 			if (!ability.base) this.progression.abilities.assignmentComplete = false;
 		}
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseProficiency() {
-		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseSpellcasting() {
 		this.spellcasting.maxCircle ??= 0;
 		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
 		this.spellcasting.origins ??= {};
 		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
 		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
+
+		this.prepareBaseArmorFormulas();
+		this.prepareBaseModifiers();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -291,6 +287,7 @@ export default class PCData extends ActorDataModel.mixin(
 			});
 		}
 		this.progression.level = Object.keys(this.progression.levels).length;
+		this.attributes.proficiency = Proficiency.calculateMod(this.progression.level ?? 1);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

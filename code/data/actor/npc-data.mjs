@@ -157,18 +157,20 @@ export default class NPCData extends ActorDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseAbilities() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		for (const [key, ability] of Object.entries(this.abilities)) {
 			ability._source = this._source.abilities?.[key] ?? {};
 			ability.check ??= {};
 			ability.save ??= {};
 		}
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseProficiency() {
 		this.attributes.proficiency = Proficiency.calculateMod(Math.max(this.attributes.cr ?? 1, 1));
+
+		this.prepareBaseArmorFormulas();
+		this.prepareBaseModifiers();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
