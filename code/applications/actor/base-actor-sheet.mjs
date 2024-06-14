@@ -131,6 +131,7 @@ export default class BaseActorSheet extends ActorSheet {
 					activity,
 					item: activity.item,
 					label: activity.activationLabel,
+					activationTooltip: activity.activation.condition,
 					usesColumn: activity.usesColumn,
 					challengeColumn: activity.challengeColumn,
 					effectColumn: activity.effectColumn
