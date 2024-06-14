@@ -143,7 +143,10 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseArmorValue() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		this.armor.value = this._source.armor.value;
 	}
 

@@ -239,7 +239,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseProperties() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		Object.defineProperty(this.type, "classification", {
 			value: "weapon",
 			writable: false

@@ -233,25 +233,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseDuration() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		Object.defineProperty(this.casting, "scalar", {
 			get() {
 				return this.type ? CONFIG.BlackFlag.activationOptions().get(this.type).scalar : false;
-			},
-			configurable: true,
-			enumerable: false
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareBaseLabels() {
-		Object.defineProperty(this.source, "label", {
-			get() {
-				const sources = Array.from(this)
-					.map(c => CONFIG.BlackFlag.spellSources.localized[c])
-					.filter(c => c);
-				return game.i18n.getListFormatter({ type: "unit" }).format(sources);
 			},
 			configurable: true,
 			enumerable: false
@@ -280,11 +268,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			configurable: true,
 			enumerable: false
 		});
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
+		Object.defineProperty(this.source, "label", {
+			get() {
+				const sources = Array.from(this)
+					.map(c => CONFIG.BlackFlag.spellSources.localized[c])
+					.filter(c => c);
+				return game.i18n.getListFormatter({ type: "unit" }).format(sources);
+			},
+			configurable: true,
+			enumerable: false
+		});
 
-	prepareBaseProperties() {
 		this.type ??= {};
 		Object.defineProperty(this.type, "classification", {
 			value: "spell",

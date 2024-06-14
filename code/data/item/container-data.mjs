@@ -206,7 +206,10 @@ export default class ContainerData extends ItemDataModel.mixin(
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareBaseQuantity() {
+	/** @inheritDoc */
+	prepareBaseData() {
+		super.prepareBaseData();
+
 		this.quantity = 1;
 	}
 
