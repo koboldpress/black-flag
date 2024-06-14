@@ -1,0 +1,118 @@
+{
+  "folder": "YNoCBhlNjhhSplJh",
+  "name": "Divine Smite",
+  "type": "feature",
+  "_id": "SeuoxWu8xciW7CRm",
+  "img": "icons/skills/melee/strike-sword-blood-red.webp",
+  "system": {
+    "activities": {
+      "7RvPGxNj3yKmt0UL": {
+        "type": "utility",
+        "_id": "7RvPGxNj3yKmt0UL",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with a weapon attack"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            },
+            {
+              "type": "spellSlots",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "turn",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Once per turn, when you hit a creature with a weapon attack, you can expend one Divine spell slot to deal extra radiant damage to the target, in addition to the weapon’s normal damage. The extra damage is 2d8 for a 1st-circle spell slot, plus 1d8 for each circle higher than 1st, to a maximum of 5d8. The damage increases by 1d8 if the target is a Fiend or Undead.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "divine-smite",
+      "associated": "paladin"
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718399649369,
+    "modifiedTime": 1718402379320,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SeuoxWu8xciW7CRm"
+}

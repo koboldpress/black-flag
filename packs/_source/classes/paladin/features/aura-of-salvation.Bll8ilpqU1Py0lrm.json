@@ -1,0 +1,116 @@
+{
+  "folder": "YNoCBhlNjhhSplJh",
+  "name": "Aura of Salvation",
+  "type": "feature",
+  "_id": "Bll8ilpqU1Py0lrm",
+  "img": "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
+  "system": {
+    "activities": {
+      "AtOiY2xScCbtNFb8": {
+        "type": "utility",
+        "_id": "AtOiY2xScCbtNFb8",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "radius",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "type": "ally",
+            "count": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As an action, you can exude a calming reassurance for 1 hour. While the aura is active, you and friendly creatures within 30 feet of you have resistance to nonmagical damage and automatically succeed on death saving throws. A creature with at least 1 HP that starts its turn in the aura regains hit points equal to your CHA modifier. This effect ends early if you are incapacitated or die. Once used, you can't use it again until you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "epicBoon"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "aura-of-salvation",
+      "associated": "paladin"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718399860629,
+    "modifiedTime": 1718403085503,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Bll8ilpqU1Py0lrm"
+}

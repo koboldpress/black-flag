@@ -1,0 +1,118 @@
+{
+  "folder": "YNoCBhlNjhhSplJh",
+  "name": "Divine Sense",
+  "type": "feature",
+  "_id": "6XGXBhaYjYm2KmUb",
+  "img": "icons/magic/light/beam-explosion-orange.webp",
+  "system": {
+    "activities": {
+      "gGWdq3D64m3zzBim": {
+        "type": "utility",
+        "_id": "gGWdq3D64m3zzBim",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "radius",
+            "size": "60"
+          },
+          "affects": {
+            "choice": false,
+            "type": "special",
+            "count": "",
+            "special": "Celestials, Fiends, or Undead or place or object affected by the hallow spell"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Open Awareness",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof + 1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>During your turn, you can open your awareness to detect the presence of supernatural forces (no action required). For 1 minute, you know the location of any Celestial, Fiend, or Undead within 60 feet of you that isn’t behind total cover. You know the creature type of any being whose presence you sense, but you don’t know which specific creature it is. Within the same radius, you also detect the presence of any place or object that has been consecrated or desecrated with the <em>hallow</em> spell.</p><p>You can use this feature a number of times equal to your PB + 1. When you finish a long rest, you regain all uses.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "divine-sense",
+      "associated": "paladin"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718399623296,
+    "modifiedTime": 1718401809458,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!6XGXBhaYjYm2KmUb"
+}

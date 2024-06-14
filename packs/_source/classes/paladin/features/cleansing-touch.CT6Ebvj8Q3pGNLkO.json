@@ -1,0 +1,114 @@
+{
+  "folder": "YNoCBhlNjhhSplJh",
+  "name": "Cleansing Touch",
+  "type": "feature",
+  "_id": "CT6Ebvj8Q3pGNLkO",
+  "img": "icons/magic/symbols/star-rising-purple.webp",
+  "system": {
+    "activities": {
+      "sbkvcS8mYMHrGART": {
+        "type": "utility",
+        "_id": "sbkvcS8mYMHrGART",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "End Spell",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "max(1, @abilities.charisma.mod)"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You can use your action to end one spell on yourself or on one willing creature you touch.</p><p>You can use this feature a number of times equal to your CHA modifier (minimum of one). You regain expended uses when you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "cleansing-touch",
+      "associated": "paladin"
+    },
+    "level": {
+      "value": 14
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718399840820,
+    "modifiedTime": 1718403276975,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!CT6Ebvj8Q3pGNLkO"
+}

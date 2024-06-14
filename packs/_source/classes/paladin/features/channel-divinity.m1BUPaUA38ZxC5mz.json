@@ -1,0 +1,90 @@
+{
+  "folder": "YNoCBhlNjhhSplJh",
+  "name": "Channel Divinity",
+  "type": "feature",
+  "_id": "m1BUPaUA38ZxC5mz",
+  "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@scale.paladin.uses"
+    },
+    "advancement": {
+      "RI1coHNYB6qyX8Tm": {
+        "type": "scaleValue",
+        "_id": "RI1coHNYB6qyX8Tm",
+        "configuration": {
+          "type": "usage",
+          "scale": {
+            "3": {
+              "value": 1,
+              "per": "longRest"
+            },
+            "13": {
+              "value": 2
+            },
+            "18": {
+              "value": 3
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "paladin"
+        },
+        "flags": {},
+        "title": "Channel Divinity Uses",
+        "icon": null,
+        "hint": "",
+        "identifier": "uses"
+      }
+    },
+    "description": {
+      "value": "<p>Each paladin subclass gives you one or more ways to channel divine energy into magical effects, and each subclass explains how they work.</p><p>When you use your Channel Divinity feature, choose which effect you want. Some of these effects require a save, and in those cases, the DC is equal to your spell save DC.</p><p>Beginning at 13th level, you can use your Channel Divinity feature twice between rests, then three times at 18th level. When you finish a short or long rest, you regain any expended uses.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "channel-divinity",
+      "associated": "paladin"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718402669978,
+    "modifiedTime": 1718402853919,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!m1BUPaUA38ZxC5mz"
+}
