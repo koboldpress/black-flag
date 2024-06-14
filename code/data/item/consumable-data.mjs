@@ -63,4 +63,22 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	get validCategories() {
 		return CONFIG.BlackFlag.consumableCategories;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.prepareFinalActivities();
+	}
 }

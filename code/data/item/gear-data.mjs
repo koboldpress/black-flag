@@ -73,4 +73,12 @@ export default class GearData extends ItemDataModel.mixin(
 		super.prepareDerivedData();
 		this.preparePhysicalLabels();
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.prepareFinalActivities();
+	}
 }

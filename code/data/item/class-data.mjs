@@ -105,6 +105,14 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.prepareSpellcastingSource();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

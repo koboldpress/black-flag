@@ -146,7 +146,6 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareBaseData() {
 		super.prepareBaseData();
-
 		this.armor.value = this._source.armor.value;
 	}
 
@@ -205,7 +204,11 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	prepareFinalProficiencyWarnings() {
+	prepareFinalData() {
+		super.prepareFinalData();
+
+		this.prepareFinalActivities();
+
 		if (!this.equipped) return;
 		if (this.proficient === false) {
 			const message = game.i18n.format("BF.Armor.Notification.NotProficient", {

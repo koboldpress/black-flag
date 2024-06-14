@@ -31,7 +31,11 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareFinalUses() {
+	/**
+	 * Prepare activities & uses formulas.
+	 * Should be called during the `prepareFinalData` stage.
+	 */
+	prepareFinalActivities() {
 		this.uses.prepareData();
 
 		const rollData = this.parent.getRollData();
@@ -54,11 +58,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 			configurable: true,
 			enumerable: false
 		});
-	}
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareFinalActivities() {
 		for ( const activity of this.activities ) {
 			activity.prepareFinalData();
 		}

@@ -58,8 +58,9 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Contribute details on a spellcasting advancement to parent actor if embedded.
+	 * Should be called during the `prepareFinalData` stage.
 	 */
-	prepareFinalSpellcastingSource() {
+	prepareSpellcastingSource() {
 		const parent = this.parent;
 		const spellcasting = this.spellcasting;
 		if ( !this.parent.actor || !spellcasting ) return;

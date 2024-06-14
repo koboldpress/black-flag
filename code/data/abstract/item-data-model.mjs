@@ -76,9 +76,7 @@ export default class ItemDataModel extends BaseDataModel {
 	/**
 	 * Final data preparation steps performed on Items after parent actor has been fully prepared.
 	 */
-	prepareFinalData() {
-		this.constructor._getMethods({ startingWith: "prepareFinal", notEndingWith: "Data" }).forEach(k => this[k]());
-	}
+	prepareFinalData() {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Embeds                */

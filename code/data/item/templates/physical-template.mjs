@@ -153,6 +153,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare labels for physical items.
+	 * Should be called during the `prepareDerivedData` stage.
 	 */
 	preparePhysicalLabels() {
 		const system = this;

@@ -81,4 +81,12 @@ export default class ToolData extends ItemDataModel.mixin(
 		super.prepareDerivedData();
 		this.preparePhysicalLabels();
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.prepareFinalActivities();
+	}
 }

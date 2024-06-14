@@ -297,10 +297,19 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		this.prepareFinalActivities();
+		this.prepareSpellStats();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Contribute to total spell numbers on actor if embedded.
 	 */
-	prepareFinalStats() {
+	prepareSpellStats() {
 		if (!this.parent.actor?.system.spellcasting) return;
 		const stats = this.parent.actor.system.spellcasting.spells;
 		if (stats) {
