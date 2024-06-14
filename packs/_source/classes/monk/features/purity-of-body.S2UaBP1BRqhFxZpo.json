@@ -9,7 +9,7 @@
       "70jupEPr8MvC79nz": {
         "type": "healing",
         "_id": "70jupEPr8MvC79nz",
-        "description": "",
+        "description": "<p>When you are reduced to 0 HP but not killed outright, you can instantly reset your hit point total to your current number of technique points. You can’t recover hit points in this way again until you finish a long rest.</p>",
         "system": {
           "healing": {
             "type": "healing",
@@ -78,7 +78,34 @@
       "min": "",
       "max": "1"
     },
-    "advancement": {},
+    "advancement": {
+      "vE0ZU8VB7wGr6LFI": {
+        "type": "property",
+        "_id": "vE0ZU8VB7wGr6LFI",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison"
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      }
+    },
     "description": {
       "value": "<p>Your mastery of the energy flowing through your body makes you immune to disease, poison damage, and the poisoned condition. In addition, when you are reduced to 0 HP but not killed outright, you can instantly reset your hit point total to your current number of technique points. You can’t recover hit points in this way again until you finish a long rest.</p>",
       "source": {
@@ -115,7 +142,7 @@
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
     "createdTime": 1717970281006,
-    "modifiedTime": 1718041338408,
+    "modifiedTime": 1718323658155,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!S2UaBP1BRqhFxZpo"
