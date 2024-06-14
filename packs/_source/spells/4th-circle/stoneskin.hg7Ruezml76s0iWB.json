@@ -1,0 +1,87 @@
+{
+  "name": "Stoneskin",
+  "type": "spell",
+  "_id": "hg7Ruezml76s0iWB",
+  "img": "icons/magic/defensive/armor-stone-skin.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>This spell turns the flesh of a willing creature you touch as hard as stone. Until the spell ends, the target has resistance to nonmagical bludgeoning, piercing, and slashing damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 100,
+        "denomination": "gp",
+        "description": "diamond dust worth 100 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "touch"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "willing",
+        "count": "1"
+      }
+    },
+    "school": "abjuration"
+  },
+  "effects": [],
+  "folder": "tCxdqzClsLOnTgfE",
+  "sort": 125000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718405578567,
+    "modifiedTime": 1718405649283,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!hg7Ruezml76s0iWB"
+}
