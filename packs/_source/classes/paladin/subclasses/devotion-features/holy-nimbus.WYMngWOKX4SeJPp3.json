@@ -1,0 +1,114 @@
+{
+  "folder": "9wrQihX3sKyH5w7E",
+  "name": "Holy Nimbus",
+  "type": "feature",
+  "_id": "WYMngWOKX4SeJPp3",
+  "img": "icons/magic/light/explosion-star-large-teal.webp",
+  "system": {
+    "activities": {
+      "bJbkFqg13hk8YOEh": {
+        "type": "utility",
+        "_id": "bJbkFqg13hk8YOEh",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Emanate Light",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As an action, you can emanate a nimbus of sunlight. For 1 minute, bright light shines from you in a 30-foot radius, and dim light shines 30 feet beyond that. This light counts as true sunlight, such as when interacting with Sunlight Hypersensitivity, and it banishes areas of magical darkness created by the <em>darkness</em> spell or similar magic.</p><p>When an enemy creature starts its turn in the bright light, it takes radiant damage equal to your paladin level. In addition, for the duration, you have advantage on saves.</p><p>Once you use this feature, you can’t use it again until you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "holy-nimbus",
+      "associated": "devotion"
+    },
+    "level": {
+      "value": 15
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718403921405,
+    "modifiedTime": 1718404567800,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!WYMngWOKX4SeJPp3"
+}

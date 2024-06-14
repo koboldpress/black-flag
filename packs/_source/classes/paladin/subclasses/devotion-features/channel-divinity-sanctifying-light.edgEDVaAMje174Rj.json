@@ -1,0 +1,121 @@
+{
+  "folder": "9wrQihX3sKyH5w7E",
+  "name": "Channel Divinity: Sanctifying Light",
+  "type": "feature",
+  "_id": "edgEDVaAMje174Rj",
+  "img": "icons/magic/light/explosion-star-teal.webp",
+  "system": {
+    "activities": {
+      "sHIAPcfNoo4wlWvR": {
+        "type": "savingThrow",
+        "_id": "sHIAPcfNoo4wlWvR",
+        "description": "",
+        "system": {
+          "ability": "charisma",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "charisma",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.m1BUPaUA38ZxC5mz",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "radius",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As an action, you present your holy symbol and speak a prayer to bathe yourself in a flash of holy light. Each Aberration, Fey, Fiend, and Undead of your choice within 30 feet of you that can see you must make a CHA save. If the creature fails its save, it is blinded for 1 minute. At the end of each of its turns, a target can make a CON save, ending the effect for itself on a success.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "channelDivinity"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "channel-divinity-sanctifying-light",
+      "associated": "devotion"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718403718863,
+    "modifiedTime": 1718404371738,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!edgEDVaAMje174Rj"
+}
