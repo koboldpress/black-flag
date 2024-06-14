@@ -71,4 +71,14 @@ export default class ToolData extends ItemDataModel.mixin(
 	get validCategories() {
 		return CONFIG.BlackFlag.tools;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
 }

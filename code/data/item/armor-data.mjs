@@ -152,14 +152,29 @@ export default class ArmorData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedArmorValue() {
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+
+		this.prepareEquippedArmor();
+		this.preparePhysicalLabels();
+
 		if (!this.armor.value && this.type.category === "shield") this.armor.value = 2;
 		if (this.magicAvailable && this.magicalBonus) this.armor.value += this.magicalBonus;
+
+		const armorConfig = CONFIG.BlackFlag.armor[this.type.category]?.modifier;
+		if (armorConfig) {
+			this.modifier.min ??= armorConfig.min;
+			this.modifier.max ??= armorConfig.max;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedEquipArmor() {
+	/**
+	 * Prepare equipped armor and add error if too many armor or shields are equipped.
+	 */
+	prepareEquippedArmor() {
 		const ac = this.parent.actor?.system.attributes?.ac;
 		if (!ac || !this.equipped) return;
 
@@ -185,15 +200,6 @@ export default class ArmorData extends ItemDataModel.mixin(
 			configurable: true,
 			enumerable: false
 		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	prepareDerivedModifiers() {
-		const armorConfig = CONFIG.BlackFlag.armor[this.type.category]?.modifier;
-		if (!armorConfig) return;
-		this.modifier.min ??= armorConfig.min;
-		this.modifier.max ??= armorConfig.max;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

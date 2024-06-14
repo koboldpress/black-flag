@@ -64,4 +64,14 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	get validCategories() {
 		return CONFIG.BlackFlag.ammunition;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
 }

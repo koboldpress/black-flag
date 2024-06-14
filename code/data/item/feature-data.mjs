@@ -54,6 +54,16 @@ export default class FeatureData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.prepareDerivedPrerequisiteLabel();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

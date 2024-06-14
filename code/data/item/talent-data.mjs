@@ -49,6 +49,16 @@ export default class TalentData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.prepareDerivedPrerequisiteLabel();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -289,17 +289,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedTarget() {
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
 		if (this.target.template.type) this.target.affects.type ||= "creature";
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Resolve range, duration, and target formulas.
-	 */
-	prepareFinalFormulas() {
-		// TODO: Resolve range & duration formulas
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

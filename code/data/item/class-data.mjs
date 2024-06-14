@@ -82,7 +82,10 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	prepareDerivedDetails() {
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+
 		this.labels ??= {};
 
 		// Hit Die

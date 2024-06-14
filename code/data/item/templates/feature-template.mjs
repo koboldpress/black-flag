@@ -80,6 +80,9 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Prepare this feature's pre-requisites label.
+	 */
 	prepareDerivedPrerequisiteLabel() {
 		this.restriction.label = this.createPrerequisiteLabel();
 	}

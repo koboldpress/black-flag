@@ -54,4 +54,14 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 	get validCategories() {
 		return CONFIG.BlackFlag.sundryCategories;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
 }

@@ -63,4 +63,14 @@ export default class GearData extends ItemDataModel.mixin(
 	get validCategories() {
 		return CONFIG.BlackFlag.gearCategories;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
 }

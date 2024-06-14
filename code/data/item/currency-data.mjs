@@ -86,4 +86,14 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 	get equippable() {
 		return false;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.preparePhysicalLabels();
+	}
 }
