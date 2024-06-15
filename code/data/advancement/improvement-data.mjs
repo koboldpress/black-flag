@@ -20,7 +20,7 @@ export class ImprovementConfigurationData extends foundry.abstract.DataModel {
 	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	static migrateData(source) {
 		if (foundry.utils.getType(source.talentList) === "string") {
 			source.talentList = [source.talentList];
@@ -61,7 +61,7 @@ export class ImprovementValueData extends foundry.abstract.DataModel {
 	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	static migrateData(source) {
 		if (foundry.utils.getType(source.ability) === "string") {
 			source.ability = { one: source.ability };

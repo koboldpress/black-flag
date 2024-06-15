@@ -200,6 +200,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	/*             Migrations              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static migrateData(source) {
 		this._getMethods({ startingWith: "migrate", notEndingWith: "Data", prototype: false }).forEach(k =>
 			this[k](source)

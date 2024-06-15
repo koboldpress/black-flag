@@ -9,7 +9,7 @@ export class ActivityField extends MappingField {
 	constructor(options) {
 		super(
 			new TypeField({
-				determineType: value => value.type,
+				determineType: value => value?.type,
 				modelLookup: type => CONFIG.Activity.types[type]?.documentClass ?? null
 			}),
 			options
@@ -18,13 +18,24 @@ export class ActivityField extends MappingField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static hierarchical = true;
 	// TODO: Rework this to be more like EmbeddedCollection
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	initialize(value, model, options) {
 		return new ActivityCollection(model, super.initialize(value, model, options));
+	}
+
+	/* -------------------------------------------- */
+
+	/** @override */
+	migrateSource(sourceData, fieldData) {
+		for (const value of Object.values(fieldData ?? {})) {
+			this.model.migrateSource(sourceData, value);
+		}
 	}
 }
 

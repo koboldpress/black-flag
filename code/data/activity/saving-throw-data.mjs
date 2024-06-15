@@ -1,5 +1,6 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
 import { DamageField, FormulaField } from "../fields/_module.mjs";
+import BaseActivity from "./base-activity.mjs";
 
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
@@ -42,6 +43,17 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 	get defaultAbility() {
 		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
 		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		if (foundry.utils.getType(source.damage?.parts) === "Array") {
+			source.damage.parts.forEach(p => BaseActivity._migrateCustomDamageFormula(p));
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,6 +1,7 @@
 import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
 import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import BaseActivity from "./base-activity.mjs";
 
 const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 
@@ -88,6 +89,17 @@ export class AttackData extends foundry.abstract.DataModel {
 				.join("/");
 
 		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		if (foundry.utils.getType(source.damage?.parts) === "Array") {
+			source.damage.parts.forEach(p => BaseActivity._migrateCustomDamageFormula(p));
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,4 +1,5 @@
 import { DamageField } from "../fields/_module.mjs";
+import BaseActivity from "./base-activity.mjs";
 
 const { StringField } = foundry.data.fields;
 
@@ -27,5 +28,14 @@ export class HealingData extends foundry.abstract.DataModel {
 	get defaultAbility() {
 		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
 		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		if ("healing" in source) BaseActivity._migrateCustomDamageFormula(source.healing);
 	}
 }

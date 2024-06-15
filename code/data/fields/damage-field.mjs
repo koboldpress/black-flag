@@ -1,16 +1,25 @@
 import FormulaField from "./formula-field.mjs";
 
+const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
 /**
  * Field for storing damage data.
  */
 export default class DamageField extends foundry.data.fields.SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
-			number: new foundry.data.fields.NumberField({ min: 0, integer: true, label: "BF.Die.Number.Label" }),
-			denomination: new foundry.data.fields.NumberField({ min: 0, integer: true, label: "BF.Die.Denomination.Label" }),
-			type: new foundry.data.fields.StringField({ label: "BF.Damage.Type.Label" }),
+			number: new NumberField({ min: 0, integer: true, label: "BF.Die.Number.Label" }),
+			denomination: new NumberField({ min: 0, integer: true, label: "BF.Die.Denomination.Label" }),
+			type: new StringField({ label: "BF.Damage.Type.Label" }),
 			bonus: new FormulaField({ label: "BF.Damage.Bonus.Label" }),
-			custom: new FormulaField({ label: "BF.Formula.Custom.Label" }),
+			custom: new SchemaField(
+				{
+					enabled: new BooleanField(),
+					formula: new FormulaField({ label: "BF.Formula.Custom.Label" })
+				},
+				{ required: false }
+				// TODO: Figure out why "required: false" is needed here to avoid issues with HealingActivity
+			),
 			...fields
 			// TODO: Add custom critical handling on a per-damage basis
 		};
@@ -26,7 +35,7 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 
 		Object.defineProperty(obj, "formula", {
 			get() {
-				if (this.custom) return this.custom;
+				if (this.custom?.enabled) return this.custom?.formula;
 				if (!this.number || !this.denomination) return this.bonus ?? "";
 				let formula = `${this.number}d${this.denomination}`;
 				if (this.bonus) formula += ` + ${this.bonus}`;

@@ -123,10 +123,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Migrate spell circle to source.
-	 * @param {object} source - Candidate source data to migrate.
-	 */
+	/** @override */
 	static migrateData(source) {
 		if ("circle" in source) source.source = source.circle;
 	}

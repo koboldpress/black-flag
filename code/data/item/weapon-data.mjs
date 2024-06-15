@@ -69,7 +69,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 				},
 				{ label: "BF.Item.Type.Ammunition[one]" }
 			),
-			damage: new DamageField({ bonus: false }),
+			damage: new DamageField({ bonus: false, custom: false, scaling: false }),
 			magicalBonus: new NumberField({
 				integer: true,
 				label: "BF.Weapon.MagicalBonus.Label",

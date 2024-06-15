@@ -10,11 +10,11 @@ export default class DamageListElement extends FormAssociatedElement {
 		const damageCollection = foundry.utils.getProperty(this.activity, this.name);
 
 		if (this.single) {
-			this._toggleState(null, !!damageCollection?.custom);
+			this._toggleState(null, !!damageCollection?.custom?.enabled);
 		} else {
 			for (const li of this.querySelectorAll("[data-index]")) {
 				const damage = damageCollection?.[li.dataset.index];
-				this._toggleState(li.dataset.index, !!damage?.custom);
+				this._toggleState(li.dataset.index, !!damage?.custom?.enabled);
 			}
 		}
 
@@ -86,15 +86,16 @@ export default class DamageListElement extends FormAssociatedElement {
 				damageCollection.push({});
 				break;
 			case "customize":
-				if (li.dataset.customFormula !== undefined) {
-					li.querySelector(".custom input").value = "";
-					if (this.single) damageCollection.custom = "";
-					else damageCollection[index].custom = "";
+				const enabled = li.querySelector('input[name$=".custom.enabled"]');
+				const formula = li.querySelector('input[name$=".custom.formula"]');
+				if (!enabled) return;
+				if (enabled.value === "true") {
+					enabled.value = "false";
 				} else {
-					li.querySelector(".custom input").value = this._createFormula(index);
-					return this._toggleState(index, true);
+					enabled.value = "true";
+					if (!formula.value) formula.value = this._createFormula(index);
 				}
-				break;
+				return this.app.submit();
 			case "delete":
 				damageCollection.splice(index, 1);
 				break;

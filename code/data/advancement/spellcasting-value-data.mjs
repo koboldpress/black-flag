@@ -31,7 +31,7 @@ export class SpellcastingValueConfigurationData extends ScaleValueConfigurationD
 	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	static migrateData(source) {
 		Object.values(source.scale ?? {}).forEach(v => CONFIG.Advancement.types.scaleValue.dataTypes.number.migrateData(v));
 	}

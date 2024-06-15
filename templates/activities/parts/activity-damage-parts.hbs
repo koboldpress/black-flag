@@ -20,7 +20,7 @@
 					</label>
 					<label class="custom">
 						<span>{{ localize "BF.Formula.Custom.Label" }}</span>
-						<input type="text" name="$.{{ @index }}.custom" value="{{ custom }}">
+						<input type="text" name="$.{{ @index }}.custom.formula" value="{{ custom.formula }}">
 					</label>
 					<label class="type">
 						<span>{{ localize "BF.Damage.Type.Label" }}</span>
@@ -44,6 +44,7 @@
 						</a>
 					{{/if}}
 				</div>
+				<input type="hidden" name="$.{{ @index }}.custom.enabled" value="{{ custom.enabled }}" data-dtype="Boolean">
 			</li>
 		{{else}}
 			{{#unless editable}}

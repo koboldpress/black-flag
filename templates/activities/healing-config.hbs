@@ -57,7 +57,7 @@
 								</label>
 								<label class="custom">
 									<span>{{ localize "BF.Formula.Custom.Label" }}</span>
-									<input type="text" name="$.custom" value="{{ source.system.healing.custom }}">
+									<input type="text" name="$.custom.formula" value="{{ source.system.healing.custom.formula }}">
 								</label>
 								<label class="type">
 									<span>{{ localize "BF.Healing.Type.Label" }}</span>
@@ -75,6 +75,8 @@
 									</button>
 								{{/if}}
 							</div>
+							<input type="hidden" name="$.custom.enabled" value="{{ source.system.healing.custom.enabled }}"
+							       data-dtype="Boolean">
 						</li>
 					</ul>
 				<blackFlag-damageList>

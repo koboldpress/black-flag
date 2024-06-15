@@ -103,6 +103,21 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate custom damage formulas to object.
+	 * Added in 0.9.035
+	 * @param {DamageField} source - Candidate source data for a damage entry to migrate.
+	 */
+	static _migrateCustomDamageFormula(source) {
+		if (foundry.utils.getType(source.custom) === "string") {
+			source.custom = { enabled: source.custom !== "", formula: source.custom };
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
