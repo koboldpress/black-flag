@@ -1,14 +1,14 @@
 {
-  "folder": "iJIjiGFvx6IqTXvu",
-  "name": "Hold Person",
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Greater Hold",
   "type": "spell",
-  "_id": "kVXub5YGKOSXv8ix",
-  "img": "icons/magic/control/debuff-chains-shackle-movement-red.webp",
+  "_id": "09Sensm5KJcvLdhx",
+  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
   "system": {
     "activities": {
-      "DK1nMKfROcpCTpp3": {
+      "JhD3cjoHhcKtZgdH": {
         "type": "savingThrow",
-        "_id": "DK1nMKfROcpCTpp3",
+        "_id": "JhD3cjoHhcKtZgdH",
         "description": "",
         "system": {
           "ability": "wisdom",
@@ -20,8 +20,10 @@
           }
         },
         "activation": {
+          "value": null,
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -29,12 +31,27 @@
             "allowed": false
           }
         },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
           "min": "",
-          "max": "",
-          "consumeQuantity": false
+          "max": ""
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
@@ -48,18 +65,20 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You paralyze your target where they stand.</em></p><p>Choose a Humanoid that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, the target can make another WIS save. On a success, the spell ends on the target.</p>",
+      "value": "<p>Choose any creature that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, an affected target can repeat the WIS save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Paralyze a Medium creature."
+      "short": ""
     },
-    "type": {
-      "value": "standard"
-    },
+    "source": [
+      "arcane",
+      "divine",
+      "wyrd"
+    ],
     "circle": {
       "value": null,
-      "base": 2
+      "base": 5
     },
     "casting": {
       "value": null,
@@ -73,10 +92,10 @@
         "material"
       ],
       "material": {
-        "cost": null,
-        "description": "a small, straight piece of iron",
         "consumed": false,
-        "denomination": "gp"
+        "cost": null,
+        "denomination": "gp",
+        "description": "a small, straight piece of iron"
       }
     },
     "duration": {
@@ -86,6 +105,10 @@
     "tags": [
       "concentration"
     ],
+    "range": {
+      "units": "foot",
+      "value": "90"
+    },
     "target": {
       "template": {
         "count": 1,
@@ -95,18 +118,10 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "@item.circle.value - 4"
       }
     },
-    "range": {
-      "units": "foot",
-      "value": "60"
-    },
-    "school": "enchantment",
-    "source": [
-      "arcane",
-      "divine"
-    ]
+    "school": "enchantment"
   },
   "effects": [],
   "sort": 0,
@@ -118,9 +133,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.034",
     "coreVersion": "11.315",
-    "createdTime": 1706934136728,
-    "modifiedTime": 1718423967291,
+    "createdTime": 1718423902080,
+    "modifiedTime": 1718424036223,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!kVXub5YGKOSXv8ix"
+  "_key": "!items!09Sensm5KJcvLdhx"
 }
