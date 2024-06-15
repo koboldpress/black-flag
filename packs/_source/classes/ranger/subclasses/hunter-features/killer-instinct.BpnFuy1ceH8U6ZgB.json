@@ -1,0 +1,116 @@
+{
+  "folder": "LMtPAhFY28bApEKC",
+  "name": "Killer Instinct",
+  "type": "feature",
+  "_id": "BpnFuy1ceH8U6ZgB",
+  "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
+  "system": {
+    "activities": {
+      "kqPG3fXGOQb8KJp5": {
+        "type": "utility",
+        "_id": "kqPG3fXGOQb8KJp5",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As a bonus action, choose a creature within 60 feet of you that you can see. You immediately learn the creature’s immunities, resistances, and vulnerabilities, or you learn if it has none. This feature doesn’t function if the target is magically concealed by a <em>nondetection</em> spell or similar effect that counters divination magic.</p><p>You can use this feature a number of times equal to your PB and regain all uses of it when you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "killer-instinct",
+      "associated": "hunter"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718422318176,
+    "modifiedTime": 1718422901367,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!BpnFuy1ceH8U6ZgB"
+}

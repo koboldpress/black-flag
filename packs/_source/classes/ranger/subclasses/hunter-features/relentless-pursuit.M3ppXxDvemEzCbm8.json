@@ -1,0 +1,114 @@
+{
+  "folder": "LMtPAhFY28bApEKC",
+  "name": "Relentless Pursuit",
+  "type": "feature",
+  "_id": "M3ppXxDvemEzCbm8",
+  "img": "icons/creatures/abilities/paw-print-pair-purple.webp",
+  "system": {
+    "activities": {
+      "PwDtXJSESaLPUtem": {
+        "type": "utility",
+        "_id": "PwDtXJSESaLPUtem",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with a weapon attack"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Extra Damage",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "turn",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>Your tenacity wears down even potent foes. When you hit a creature with a weapon attack, you deal extra damage if the target is below its hit point maximum. The extra damage is equal to the amount your Mystic Mark feature deals at your level and is of the same damage type as the weapon. You can deal this extra damage only once per turn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "relentless-pursuit",
+      "associated": "hunter"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718422338043,
+    "modifiedTime": 1718423022889,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!M3ppXxDvemEzCbm8"
+}

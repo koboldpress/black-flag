@@ -1,0 +1,114 @@
+{
+  "folder": "LMtPAhFY28bApEKC",
+  "name": "Predator’s Shield",
+  "type": "feature",
+  "_id": "Ba0wF6dc76mDMZri",
+  "img": "icons/magic/defensive/shield-barrier-blades-teal.webp",
+  "system": {
+    "activities": {
+      "qh5b0JXiNH28QgBa": {
+        "type": "utility",
+        "_id": "qh5b0JXiNH28QgBa",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When you take damage from a creature you can see"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Resist Damage",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you take damage from a creature you can see, you can use your reaction to supernaturally ward yourself against that creature for a short time. You have resistance to all damage dealt by the target for 1 minute, including resistance to the damage dealt by the triggering attack. This effect ends early if you become incapacitated.</p><p>Once used, this feature can’t be used again until you finish a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "predators-shield",
+      "associated": "hunter"
+    },
+    "level": {
+      "value": 15
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718422394503,
+    "modifiedTime": 1718423319207,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Ba0wF6dc76mDMZri"
+}
