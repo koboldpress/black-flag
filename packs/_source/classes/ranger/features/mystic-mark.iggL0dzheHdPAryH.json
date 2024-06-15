@@ -1,0 +1,145 @@
+{
+  "folder": "JjE8PredgikSEDdj",
+  "name": "Mystic Mark",
+  "type": "feature",
+  "_id": "iggL0dzheHdPAryH",
+  "img": "icons/magic/symbols/arrowhead-green.webp",
+  "system": {
+    "activities": {
+      "kW3F1nBfN58AQpIJ": {
+        "type": "utility",
+        "_id": "kW3F1nBfN58AQpIJ",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with an attack roll"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof"
+    },
+    "advancement": {
+      "yihEuY8QD9gh7MqI": {
+        "type": "scaleValue",
+        "_id": "yihEuY8QD9gh7MqI",
+        "configuration": {
+          "type": "dice",
+          "scale": {
+            "1": {
+              "denomination": 4
+            },
+            "6": {
+              "denomination": 6
+            },
+            "13": {
+              "denomination": 8
+            },
+            "17": {
+              "denomination": 10
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "ranger"
+        },
+        "flags": {},
+        "title": "Mystic Mark Die",
+        "icon": null,
+        "hint": "",
+        "identifier": "mark"
+      }
+    },
+    "description": {
+      "value": "<p>When you hit a creature with an attack roll, you can mystically mark it as your favored quarry. The creature remains marked for 1 minute, until you use this feature to mark a different creature, or until you become incapacitated.</p><p>While a creature is marked (including for the attack that triggered the mark), you deal an extra 1d4 damage to it (of the same damage type as the weapon) each time you successfully hit it with a weapon attack.</p><p>You can use this feature a number of times equal to your PB. You regain all uses when you finish a long rest.</p><p>This extra damage increases as you gain ranger levels, becoming 1d6 at 6th level, 1d8 at 13th, and 1d10 at 17th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "mystic-mark",
+      "associated": "ranger"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718407889285,
+    "modifiedTime": 1718408597689,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!iggL0dzheHdPAryH"
+}

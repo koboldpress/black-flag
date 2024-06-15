@@ -1,0 +1,479 @@
+{
+  "folder": "I6baatUqrVRmDat7",
+  "name": "Ranger",
+  "type": "class",
+  "_id": "4WKi2UZOowzzK8G5",
+  "img": "icons/environment/wilderness/cave-entrance.webp",
+  "system": {
+    "advancement": {
+      "M479dLxvJm7JOt7q": {
+        "type": "hitPoints",
+        "_id": "M479dLxvJm7JOt7q",
+        "configuration": {
+          "denomination": 10
+        },
+        "level": {},
+        "flags": {},
+        "title": "",
+        "icon": null
+      },
+      "NoDOn6Lhb4JdCyn2": {
+        "type": "keyAbility",
+        "_id": "NoDOn6Lhb4JdCyn2",
+        "configuration": {
+          "options": [
+            "wisdom"
+          ],
+          "secondary": "dexterity"
+        },
+        "level": {
+          "value": 1
+        },
+        "flags": {},
+        "title": "",
+        "icon": null
+      },
+      "JAwcZd2a4T4d8TP6": {
+        "type": "trait",
+        "configuration": {
+          "choices": [
+            {
+              "count": 3,
+              "pool": [
+                "skills:animalHandling",
+                "skills:athletics",
+                "skills:insight",
+                "skills:investigation",
+                "skills:nature",
+                "skills:perception",
+                "skills:stealth",
+                "skills:survival"
+              ]
+            }
+          ],
+          "mode": "default",
+          "grants": [],
+          "choiceMode": "inclusive"
+        },
+        "_id": "JAwcZd2a4T4d8TP6",
+        "level": {
+          "value": 1
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      },
+      "10MvYkCxEY20vf4y": {
+        "type": "trait",
+        "_id": "10MvYkCxEY20vf4y",
+        "configuration": {
+          "mode": "default",
+          "grants": [
+            "armor:light",
+            "armor:medium",
+            "armor:shield"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      },
+      "RBTuW11kjArrGcvb": {
+        "type": "trait",
+        "_id": "RBTuW11kjArrGcvb",
+        "configuration": {
+          "mode": "default",
+          "grants": [
+            "weapons:simple",
+            "weapons:martial"
+          ],
+          "choices": [],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      },
+      "u9mXLUXOczYYy7AC": {
+        "type": "trait",
+        "_id": "u9mXLUXOczYYy7AC",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 1,
+              "pool": [
+                "tools:herbalist",
+                "tools:navigator",
+                "tools:trapper"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 1
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      },
+      "B3XUq1oJWpDQeGAH": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 1,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.2EYsLjpJ3Db49RVK"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.iggL0dzheHdPAryH"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "B3XUq1oJWpDQeGAH",
+        "flags": {}
+      },
+      "8mTgi5HEUlqS93ro": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 2,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.RL7zM5jiNbsocEYe"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.mHAcVEb8HdClWCxf"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "8mTgi5HEUlqS93ro",
+        "flags": {}
+      },
+      "52iINU0YzD5hx6fQ": {
+        "type": "spellcasting",
+        "_id": "52iINU0YzD5hx6fQ",
+        "configuration": {
+          "type": "leveled",
+          "cantrips": {},
+          "rituals": {},
+          "spells": {
+            "replacement": true,
+            "schools": [],
+            "special": false,
+            "spellbook": {
+              "firstLevel": null,
+              "otherLevels": null
+            },
+            "mode": "limited",
+            "scale": "mHZrCsZHAMK3lQYK"
+          },
+          "source": "primordial",
+          "ability": "",
+          "progression": "half"
+        },
+        "level": {
+          "value": 2
+        },
+        "flags": {},
+        "title": "",
+        "icon": null
+      },
+      "mHZrCsZHAMK3lQYK": {
+        "type": "spellcastingValue",
+        "title": "Spells Known",
+        "identifier": "spells-known",
+        "_id": "mHZrCsZHAMK3lQYK",
+        "configuration": {
+          "scale": {
+            "2": {
+              "value": 2
+            },
+            "3": {
+              "value": 3
+            },
+            "5": {
+              "value": 4
+            },
+            "7": {
+              "value": 5
+            },
+            "9": {
+              "value": 6
+            },
+            "11": {
+              "value": 7
+            },
+            "13": {
+              "value": 8
+            },
+            "15": {
+              "value": 9
+            },
+            "17": {
+              "value": 10
+            },
+            "19": {
+              "value": 11
+            }
+          }
+        },
+        "level": {},
+        "flags": {},
+        "icon": null
+      },
+      "fS8XnNyhNt96fCyj": {
+        "type": "improvement",
+        "_id": "fS8XnNyhNt96fCyj",
+        "configuration": {
+          "talentList": [
+            "martial",
+            "technical"
+          ]
+        },
+        "level": {
+          "value": 4
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": ""
+      },
+      "MTDkjLR5Mj5MCGGn": {
+        "type": "improvement",
+        "configuration": {
+          "talentList": [
+            "martial",
+            "technical"
+          ]
+        },
+        "level": {
+          "value": 8
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": "",
+        "_id": "MTDkjLR5Mj5MCGGn"
+      },
+      "ZY9QDhgppEA4n3Dj": {
+        "type": "improvement",
+        "configuration": {
+          "talentList": [
+            "martial",
+            "technical"
+          ]
+        },
+        "level": {
+          "value": 12
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": "",
+        "_id": "ZY9QDhgppEA4n3Dj"
+      },
+      "OcRpRqcjswTTvRbR": {
+        "type": "improvement",
+        "configuration": {
+          "talentList": [
+            "martial",
+            "technical"
+          ]
+        },
+        "level": {
+          "value": 16
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": "",
+        "_id": "OcRpRqcjswTTvRbR"
+      },
+      "FdkZ5SQfHZTIepWa": {
+        "type": "improvement",
+        "configuration": {
+          "talentList": [
+            "martial",
+            "technical"
+          ]
+        },
+        "level": {
+          "value": 19
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": "",
+        "_id": "FdkZ5SQfHZTIepWa"
+      },
+      "TCcGs2j6zBBb639n": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 5,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.JS1OeXoOYImwdtu8"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "TCcGs2j6zBBb639n",
+        "flags": {}
+      },
+      "Ix8oq6UYAD9YOaEs": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 6,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.3mHXyyNNGP0fdDo0"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "Ix8oq6UYAD9YOaEs",
+        "flags": {}
+      },
+      "D2xUYNko6nrbJ8dD": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 9,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.ru1kVgO08qE2Qn4S"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "D2xUYNko6nrbJ8dD",
+        "flags": {}
+      },
+      "AqejhHf6pH0UEWbl": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 10,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.Y1KVBV2SLWBUczyo"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "AqejhHf6pH0UEWbl",
+        "flags": {}
+      },
+      "4XfDVhaG7AkKhb41": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 14,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.xtoebXoxtG9S4Ei6"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "4XfDVhaG7AkKhb41",
+        "flags": {}
+      },
+      "jz2FjjDqqF1I8CiA": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 18,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.R9fcD18SuCrErfJt"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "jz2FjjDqqF1I8CiA",
+        "flags": {}
+      },
+      "pszj0MqygYPAGR8H": {
+        "type": "grantFeatures",
+        "level": {
+          "value": 20,
+          "classIdentifier": "ranger"
+        },
+        "configuration": {
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.1jCxRloNKWR8Gq1U"
+            }
+          ],
+          "enabled": true
+        },
+        "_id": "pszj0MqygYPAGR8H",
+        "flags": {}
+      }
+    },
+    "description": {
+      "value": "",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Resourceful survivalists with a mystic connection to nature.",
+      "journal": "Compendium.black-flag.rules.JournalEntry.v66RykFxGIYeGh29.JournalEntryPage.UBAPJtcA6uoYLcfZ"
+    },
+    "identifier": {
+      "value": "ranger"
+    },
+    "color": "#4b693a"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718407324671,
+    "modifiedTime": 1718408367889,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!4WKi2UZOowzzK8G5"
+}

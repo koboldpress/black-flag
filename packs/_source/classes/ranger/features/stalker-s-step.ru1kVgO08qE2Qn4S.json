@@ -1,0 +1,113 @@
+{
+  "folder": "JjE8PredgikSEDdj",
+  "name": "Stalker’s Step",
+  "type": "feature",
+  "_id": "ru1kVgO08qE2Qn4S",
+  "img": "icons/magic/nature/stealth-hide-beast-eyes-green.webp",
+  "system": {
+    "activities": {
+      "EbCxfi0J3QzFHQXP": {
+        "type": "utility",
+        "_id": "EbCxfi0J3QzFHQXP",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Become Invisible",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@prof"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>While you are in dim light, darkness, or are lightly obscured or heavily obscured by foliage, mist, or some other natural phenomenon, you can use a bonus action to magically become invisible, along with any equipment you are wearing or carrying, until the start of your next turn. This invisibility ends early if you attack or cast a spell.</p><p>You can use this feature a number of times equal to your PB and regain all uses when you complete a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "stalkers-step",
+      "associated": "ranger"
+    },
+    "level": {
+      "value": 9
+    }
+  },
+  "effects": [],
+  "sort": 800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.034",
+    "coreVersion": "11.315",
+    "createdTime": 1718408232886,
+    "modifiedTime": 1718409029857,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ru1kVgO08qE2Qn4S"
+}
