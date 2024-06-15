@@ -2,49 +2,8 @@
 	<ul class="configuration-list">
 		{{#each source.system.damage.parts}}
 			<li data-index="{{ @index }}">
-				<div class="damage field-group">
-					<label class="die-count">
-						<span>{{ localize "BF.Die.Number.Label" }}</span>
-						<input type="number" name="$.{{ @index }}.number" step=1 min=1 value="{{ number }}">
-					</label>
-					<label class="die-denomination">
-						<span>{{ localize "BF.Die.Denomination.Label" }}</span>
-						<select name="$.{{ @index }}.denomination">
-							{{ selectOptions @root.CONFIG.dieSteps.labeled selected=denomination blank="" }}
-						</select>
-					</label>
-					<span class="plus">+</span>
-					<label class="bonus">
-						<span>{{ localize "BF.Damage.Bonus.Label" }}</span>
-						<input type="text" name="$.{{ @index }}.bonus" value="{{ bonus }}">
-					</label>
-					<label class="custom">
-						<span>{{ localize "BF.Formula.Custom.Label" }}</span>
-						<input type="text" name="$.{{ @index }}.custom.formula" value="{{ custom.formula }}">
-					</label>
-					<label class="type">
-						<span>{{ localize "BF.Damage.Type.Label" }}</span>
-						<select name="$.{{ @index }}.type">
-							{{ selectOptions @root.CONFIG.damageTypes selected=type labelAttr="label"
-							                 localize=true sort=true blank="" }}
-						</select>
-					</label>
-				</div>
-				<div class="controls">
-					{{#if @root.editable}}
-						<button type="button" class="link-button" data-action="customize"
-						        data-tooltip="BF.Formula.Action.Customize"
-										aria-label="{{ localize 'BF.Formula.Action.Customize' }}">
-							<i class="fa-solid fa-superscript" inert></i>
-						</button>
-						<button type="button" class="link-button" data-action="delete"
-						        data-tooltip="BF.Activity.Damage.Action.Delete"
-										aria-label="{{ localize 'BF.Activity.Damage.Action.Delete' }}">
-							<i class="fa-solid fa-trash" inert></i>
-						</a>
-					{{/if}}
-				</div>
-				<input type="hidden" name="$.{{ @index }}.custom.enabled" value="{{ custom.enabled }}" data-dtype="Boolean">
+				{{> "blackFlag.activity-damage-part" damage=this prefix=(concat "$." @index ".")
+				    types=@root.CONFIG.damageTypes.localized }}
 			</li>
 		{{else}}
 			{{#unless editable}}

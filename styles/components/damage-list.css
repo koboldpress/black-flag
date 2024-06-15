@@ -1,6 +1,12 @@
 blackFlag-damageList {
-	ul {
+	ul.configuration-list {
 		li {
+			flex-wrap: wrap;
+
+			> .damage {
+				flex: 1 1 90%;
+			}
+
 			.hidden {
 				display: none;
 			}

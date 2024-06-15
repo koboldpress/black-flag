@@ -20,6 +20,11 @@ export default class DamageField extends foundry.data.fields.SchemaField {
 				{ required: false }
 				// TODO: Figure out why "required: false" is needed here to avoid issues with HealingActivity
 			),
+			scaling: new SchemaField({
+				mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
+				number: new NumberField({ initial: 1, min: 0, integer: true, label: "BF.Damage.Scaling.Dice.Label" }),
+				formula: new FormulaField()
+			}),
 			...fields
 			// TODO: Add custom critical handling on a per-damage basis
 		};

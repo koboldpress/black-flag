@@ -1,6 +1,21 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Different ways damage can be scaled.
+ * @enum {LabeledConfiguration}
+ */
+export const damageScalingModes = {
+	whole: {
+		label: "BF.Damage.Scaling.Mode.Whole"
+	},
+	half: {
+		label: "BF.Damage.Scaling.Mode.Half"
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for damage types.
  *
  * @typedef {LabeledConfiguration} DamageTypeConfiguration

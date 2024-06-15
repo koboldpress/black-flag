@@ -11,6 +11,16 @@ export default class DamageActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
+	 * @type {boolean}
+	 */
+	get allowDamageScaling() {
+		return this.isSpell || this.consumption.scale.allowed;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Ability used to calculate damage.
 	 * @type {string|null}
 	 */

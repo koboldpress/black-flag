@@ -222,6 +222,7 @@ export async function registerHandlebarsPartials() {
 		"active-effect/active-effects.hbs",
 		"active-effect/active-effect-change.hbs",
 		"activities/parts/activity-activation.hbs",
+		"activities/parts/activity-damage-part.hbs",
 		"activities/parts/activity-damage-parts.hbs",
 		"activities/parts/activity-description.hbs",
 		"activities/parts/activity-duration.hbs",

@@ -24,6 +24,8 @@ export default class DamageListElement extends FormAssociatedElement {
 				this._onAction(event.currentTarget, event.currentTarget.dataset.action);
 			});
 		}
+
+		if (this.single) this.querySelectorAll('[data-action="delete"]').forEach(e => e.remove());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

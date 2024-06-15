@@ -39,44 +39,8 @@
 				<blackFlag-damageList name="system.healing" single>
 					<ul class="configuration-list">
 						<li>
-							<div class="damage field-group">
-								<label class="die-count">
-									<span>{{ localize "BF.Die.Number.Label" }}</span>
-									<input type="number" name="$.number" step=1 min=1 value="{{ source.system.healing.number }}">
-								</label>
-								<label class="die-denomination">
-									<span>{{ localize "BF.Die.Denomination.Label" }}</span>
-									<select name="$.denomination">
-										{{ selectOptions CONFIG.dieSteps.labeled selected=source.system.healing.denomination blank="" }}
-									</select>
-								</label>
-								<span class="plus">+</span>
-								<label class="bonus">
-									<span>{{ localize "BF.Damage.Bonus.Label" }}</span>
-									<input type="text" name="$.bonus" value="{{ source.system.healing.bonus }}">
-								</label>
-								<label class="custom">
-									<span>{{ localize "BF.Formula.Custom.Label" }}</span>
-									<input type="text" name="$.custom.formula" value="{{ source.system.healing.custom.formula }}">
-								</label>
-								<label class="type">
-									<span>{{ localize "BF.Healing.Type.Label" }}</span>
-									<select name="$.type">
-										{{ selectOptions CONFIG.healingTypes.localized selected=source.system.healing.type }}
-									</select>
-								</label>
-							</div>
-							<div class="controls">
-								{{#if editable}}
-									<button type="button" class="link-button" data-action="customize"
-									        data-tooltip="BF.Formula.Action.Customize"
-													aria-label="{{ localize 'BF.Formula.Action.Customize' }}">
-										<i class="fa-solid fa-superscript" inert></i>
-									</button>
-								{{/if}}
-							</div>
-							<input type="hidden" name="$.custom.enabled" value="{{ source.system.healing.custom.enabled }}"
-							       data-dtype="Boolean">
+							{{> "blackFlag.activity-damage-part" damage=source.system.healing prefix="$."
+							    types=CONFIG.healingTypes.localized }}
 						</li>
 					</ul>
 				<blackFlag-damageList>
