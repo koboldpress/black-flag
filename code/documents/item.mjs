@@ -213,8 +213,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		let rollData;
 		if (this.system.getRollData) rollData = this.system.getRollData(options);
 		else {
-			if (!this.actor) return {};
-			rollData = { ...this.actor.getRollData(options), item: { ...this.system } };
+			rollData = { ...(this.actor.getRollData(options) ?? {}), item: { ...this.system } };
 		}
 
 		if (rollData.item) {
@@ -226,6 +225,13 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		if (abilityKey && "abilities" in rollData) {
 			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
 		}
+
+		const scaling = this.getFlag(game.system.id, "scaling");
+		rollData.scale = foundry.utils.deepClone(scaling ?? { value: 1, increase: 0 });
+		Object.defineProperty(rollData.scale, "toString", {
+			value: () => rollData.scale.value,
+			enumerable: false
+		});
 
 		return rollData;
 	}

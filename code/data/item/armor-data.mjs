@@ -207,7 +207,8 @@ export default class ArmorData extends ItemDataModel.mixin(
 	prepareFinalData() {
 		super.prepareFinalData();
 
-		this.prepareFinalActivities();
+		const rollData = this.parent.getRollData({ deterministic: true });
+		this.prepareFinalActivities(rollData);
 
 		if (!this.equipped) return;
 		if (this.proficient === false) {

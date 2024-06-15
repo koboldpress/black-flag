@@ -92,7 +92,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		tags.set("activation", this.activation.label);
 		tags.set("duration", this.duration.label);
 		if (this.range.units) tags.set("range", this.range.label);
-		if (this.target.affects.units) tags.set("affects", this.target.affects.label);
+		if (this.target.affects.type) tags.set("affects", this.target.affects.label);
 		if (this.target.template.units) tags.set("template", this.target.template.label);
 		return tags;
 	}
@@ -172,7 +172,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get requiresSpellSlot() {
-		if (!this.isSpell || !this.parent.actor?.system.spellcasting?.circles) return false;
+		if (!this.isSpell || !this.actor?.system.spellcasting?.circles) return false;
 		return this.item.system.requiresSpellSlot && this.activation.primary;
 	}
 
@@ -238,8 +238,14 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
+		console.log("activate initial", this.target.affects.count);
+		let item = this.item.clone({}, { keepId: true });
+		item.prepareData();
+		item.system.prepareFinalData?.();
+		let activity = item.system.activities.get(this.id);
+
 		// Prepare initial activation configuration
-		const activationConfig = this.prepareActivationConfig(config);
+		const activationConfig = activity.prepareActivationConfig(config);
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{
@@ -252,7 +258,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				create: true,
-				data: {}
+				data: {
+					flags: {
+						[game.system.id]: {
+							activation: {
+								type: this.type,
+								activityUuid: this.uuid
+							}
+						}
+					}
+				}
 			},
 			message
 		);
@@ -269,20 +284,39 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityDialogConfiguration} dialogConfig - Configuration data for the activity activation dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivateActivity", this, activationConfig, messageConfig, dialogConfig) === false) {
+		if (
+			Hooks.call("blackFlag.preActivateActivity", activity, activationConfig, messageConfig, dialogConfig) === false
+		) {
 			return;
 		}
 
 		// Display configuration window if necessary, wait for result
-		if (dialogConfig.configure && this.requiresConfigurationDialog(activationConfig)) {
+		if (dialogConfig.configure && activity.requiresConfigurationDialog(activationConfig)) {
 			try {
-				await dialogConfig.applicationClass.create(this, activationConfig, dialogConfig.options);
+				await dialogConfig.applicationClass.create(activity, activationConfig, dialogConfig.options);
 			} catch (err) {
 				return;
 			}
 		}
 
-		// TODO: Handle upcasting
+		// Handle scaling
+		const scaleUpdate = {};
+		if (item.type === "spell") {
+			const circle = activationConfig.spell?.circle;
+			if (circle && circle !== item.system.circle.base) {
+				scaleUpdate["system.circle.value"] = circle;
+				config.scaling = circle - item.system.circle.base;
+			}
+		}
+		if (config.scaling) {
+			const scaleData = { value: config.scaling + 1, increase: config.scaling };
+			scaleUpdate[`flags.${game.system.id}.scaling`] = scaleData;
+			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, scaleData);
+			item.updateSource(scaleUpdate);
+			item.prepareData();
+			item.system.prepareFinalData?.();
+			activity = item.system.activities.get(this.id);
+		}
 
 		// Call preActivityConsumption script & hooks
 		// TODO: preActivityConsumption script
@@ -295,12 +329,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false) {
+		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig) === false) {
 			return;
 		}
 
 		// Calculate what resources should be consumed
-		const updates = await this.activationUpdates(activationConfig);
+		const updates = await activity.activationUpdates(activationConfig);
 		if (updates === false) return;
 
 		// Call activityConsumption script & hooks
@@ -315,7 +349,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that will be applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false) {
+		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig, updates) === false) {
 			return;
 		}
 
@@ -344,13 +378,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that have been applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig, updates) === false) {
+		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig, updates) === false) {
 			return;
 		}
 
 		// Display the card in chat
 		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-		const createdMessage = await this.createActivationMessage(messageConfig);
+		const createdMessage = await activity.createActivationMessage(messageConfig);
 
 		// Create measured templates if necessary
 		// TODO
@@ -367,7 +401,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 *                                                                      or the message data if create was `false`.
 		 * @param {MeasuredTemplateDocument[]|null} templates - Any measured templates that were created.
 		 */
-		Hooks.callAll("blackFlag.postActivateActivity", this, activationConfig, createdMessage, null);
+		Hooks.callAll("blackFlag.postActivateActivity", activity, activationConfig, createdMessage, null);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -34,11 +34,11 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	/**
 	 * Prepare activities & uses formulas.
 	 * Should be called during the `prepareFinalData` stage.
+	 * @param {object} rollData
 	 */
-	prepareFinalActivities() {
+	prepareFinalActivities(rollData) {
 		this.uses.prepareData();
 
-		const rollData = this.parent.getRollData();
 		this.uses.min = simplifyBonus(replaceFormulaData(this.uses.min ?? "", rollData, {
 			notifications: this.parent.notifications, key: "invalid-min-uses-formula", section: "auto",
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Minimum.DebugName") }

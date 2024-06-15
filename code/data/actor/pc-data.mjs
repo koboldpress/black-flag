@@ -337,7 +337,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 		this.prepareDerivedAbilities(rollData);
 		this.prepareComplexProficiencies(rollData);
-		this.prepareDerivedHitPoints();
+		this.prepareDerivedHitPoints(rollData);
 		this.prepareDerivedSpellcasting();
 		this.prepareDerivedProficiencies();
 
@@ -461,15 +461,15 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/**
 	 * Prepare final hit points values.
+	 * @param {object} rollData
 	 */
-	prepareDerivedHitPoints() {
+	prepareDerivedHitPoints(rollData) {
 		const hpAdvancements = Object.values(this.progression.classes)
 			.map(c => c.document?.system.advancement.byType("hitPoints")[0])
 			.filter(a => a);
 		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
 		if (!hpAdvancement) return;
 
-		const rollData = this.parent.getRollData({ deterministic: true });
 		const hp = this.attributes.hp;
 		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
 

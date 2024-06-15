@@ -63,7 +63,8 @@ export default class TalentData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareFinalData() {
 		super.prepareFinalData();
-		this.prepareFinalActivities();
+		const rollData = this.parent.getRollData({ deterministic: true });
+		this.prepareFinalActivities(rollData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

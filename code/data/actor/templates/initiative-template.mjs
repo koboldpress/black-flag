@@ -82,7 +82,7 @@ export default class InitiativeTemplate extends foundry.abstract.DataModel {
 							tiebreaker:
 								game.settings.get(game.system.id, "initiativeTiebreaker") && ability ? ability.value / 100 : null
 						},
-						this.getRollData()
+						this.parent.getRollData()
 					),
 					options: foundry.utils.mergeObject(
 						{
