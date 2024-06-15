@@ -6,13 +6,13 @@ export function _configureFonts() {
 		"Open Sans": {
 			editor: true,
 			fonts: [
-				{ urls: ["systems/black-flag/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf"] },
-				{ urls: ["systems/black-flag/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf"], style: "italic" }
+				{ urls: ["systems/black-flag/fonts/Open_Sans/Open_Sans.woff2"] },
+				{ urls: ["systems/black-flag/fonts/Open_Sans/Open_Sans_i.woff2"], style: "italic" }
 			]
 		},
 		Oswald: {
 			editor: true,
-			fonts: [{ urls: ["systems/black-flag/fonts/Oswald/Oswald-VariableFont_wght.ttf"] }]
+			fonts: [{ urls: ["systems/black-flag/fonts/Oswald/Oswald.woff2"] }]
 		}
 	});
 }
