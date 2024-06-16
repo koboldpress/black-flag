@@ -533,6 +533,8 @@ export default class PCData extends ActorDataModel.mixin(
 				if (circle.max > 0 && circle.level > this.spellcasting.maxCircle) this.spellcasting.maxCircle = circle.level;
 			}
 		}
+
+		this.spellcasting.cantripScale = SpellcastingTemplate.calculateCantripScale(this.progression.level);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

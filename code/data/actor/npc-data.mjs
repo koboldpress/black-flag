@@ -9,6 +9,7 @@ import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
+import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -242,6 +243,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		// Spellcasting
 		const ability = this.abilities[this.spellcasting.ability];
 		this.spellcasting.autoDC = 8 + (ability?.mod ?? 0) + this.attributes.proficiency;
+		this.spellcasting.cantripScale = SpellcastingTemplate.calculateCantripScale(Math.max(this.attributes.cr ?? 1, 1));
 		this.spellcasting.dc ??= this.spellcasting.autoDC;
 
 		this.computeArmorClass();

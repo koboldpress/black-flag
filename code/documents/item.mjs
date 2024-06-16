@@ -105,6 +105,16 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Scaling increase for this item based on flag or item-type specific details.
+	 * @type {number}
+	 */
+	get scaling() {
+		return this.system?.scaling ?? this.getFlag(game.system.id, "scaling") ?? 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -226,7 +236,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
 		}
 
-		const scaling = this.getFlag(game.system.id, "scaling") ?? 0;
+		const scaling = this.scaling;
 		rollData.scale = { value: scaling + 1, increase: scaling };
 		Object.defineProperty(rollData.scale, "toString", {
 			value: () => rollData.scale.value,

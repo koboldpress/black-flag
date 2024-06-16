@@ -205,4 +205,17 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		}
 		foundry.utils.mergeObject(result, { actorUpdates });
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate the cantrip scaling for a given level.
+	 * @param {number} level - Player level or NPC challenge rating.
+	 * @returns {number}
+	 */
+	static calculateCantripScale(level) {
+		return Math.floor((level + 1) / 6);
+	}
 }

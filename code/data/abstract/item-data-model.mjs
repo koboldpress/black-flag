@@ -35,6 +35,16 @@ export default class ItemDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Item type specific scaling increase.
+	 * @type {number|null}
+	 */
+	get scaling() {
+		return this.parent.getFlag(game.system.id, "scaling") ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should this Document run final data preparation on its own, or wait for another Document to call those methods?
 	 * @type {boolean}
 	 */

@@ -198,6 +198,20 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	get scaling() {
+		return (
+			super.scaling ??
+			(this.circle.base === 0
+				? this.parent.actor?.system.spellcasting?.cantripScale
+				: this.circle.value
+					? this.circle.value - this.circle.base
+					: null)
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	get traits() {
 		const traits = [
