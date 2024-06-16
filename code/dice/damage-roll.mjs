@@ -9,6 +9,7 @@ import BasicRoll from "./basic-roll.mjs";
  * @property {DamageRollConfiguration[]} rolls - Configuration data for individual rolls.
  * @property {boolean} [allowCritical=true] - Should critical damage be allowed?
  * @property {CriticalDamageConfiguration} [critical] - Critical configuration for all rolls.
+ * @property {number} [scaling=0] - Scale increase above base damage.
  */
 
 /**

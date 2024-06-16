@@ -22,6 +22,16 @@ export default class HealingActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Can healing be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
+	 * @type {boolean}
+	 */
+	get allowDamageScaling() {
+		return this.isSpell || this.consumption.scale.allowed;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Contents of the effect column in the action table.
 	 * @type {string}
 	 */
@@ -163,22 +173,21 @@ export default class HealingActivity extends Activity {
 		config ??= {};
 		rollData = this.item.getRollData();
 
-		const ability = this.actor?.system.abilities[this.healingAbility];
 		const healing = this.system.healing;
 		const modifierData = { ...this.modifierData, type: "healing", healing };
 		const { parts, data } = buildRoll(
 			{
-				mod: ability?.mod,
 				bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData })
 			},
 			rollData
 		);
 
 		const rollConfig = foundry.utils.mergeObject({ allowCritical: false }, config);
+		rollConfig.scaling = rollData.scale?.increase ?? 0;
 		rollConfig.rolls = [
 			{
 				data,
-				parts: healing.custom ? [healing.custom] : [healing.formula, ...(parts ?? [])],
+				parts: [healing.scaledFormula(rollConfig.scaling ?? 0), ...(parts ?? [])],
 				options: {
 					damageType: healing.type,
 					modifierData,

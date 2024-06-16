@@ -25,7 +25,7 @@ export default class RangeField extends SchemaField {
 		super(fields, { label: "BF.Range.Label", ...options });
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {

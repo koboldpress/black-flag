@@ -124,7 +124,6 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/** @override */
 	prepareFinalData() {
 		this.uses.prepareData();
-		console.log("BaseActivity#prepareFinalData");
 
 		const rollData = this.item.getRollData();
 		const prepareFinalValue = (keyPath, label) =>

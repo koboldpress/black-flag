@@ -226,8 +226,8 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
 		}
 
-		const scaling = this.getFlag(game.system.id, "scaling");
-		rollData.scale = foundry.utils.deepClone(scaling ?? { value: 1, increase: 0 });
+		const scaling = this.getFlag(game.system.id, "scaling") ?? 0;
+		rollData.scale = { value: scaling + 1, increase: scaling };
 		Object.defineProperty(rollData.scale, "toString", {
 			value: () => rollData.scale.value,
 			enumerable: false

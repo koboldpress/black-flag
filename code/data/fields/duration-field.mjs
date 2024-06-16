@@ -25,7 +25,7 @@ export default class DurationField extends SchemaField {
 		super(fields, { label: "BF.Duration.Label", ...options });
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {

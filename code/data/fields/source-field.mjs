@@ -22,7 +22,7 @@ export default class SourceField extends SchemaField {
 		super(fields, { label: "BF.Source.Label", ...options });
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {

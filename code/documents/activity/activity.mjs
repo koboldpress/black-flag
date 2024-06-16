@@ -238,7 +238,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
-		console.log("activate initial", this.target.affects.count);
 		let item = this.item.clone({}, { keepId: true });
 		item.prepareData();
 		item.system.prepareFinalData?.();
@@ -255,22 +254,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			dialog
 		);
 
-		const messageConfig = foundry.utils.mergeObject(
-			{
-				create: true,
-				data: {
-					flags: {
-						[game.system.id]: {
-							activation: {
-								type: this.type,
-								activityUuid: this.uuid
-							}
-						}
-					}
-				}
-			},
-			message
-		);
+		const messageConfig = foundry.utils.mergeObject({ create: true, data: {} }, message);
 
 		// Call preActivate script & hooks
 		// TODO: preActivate script
@@ -309,9 +293,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 		if (config.scaling) {
-			const scaleData = { value: config.scaling + 1, increase: config.scaling };
-			scaleUpdate[`flags.${game.system.id}.scaling`] = scaleData;
-			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, scaleData);
+			scaleUpdate[`flags.${game.system.id}.scaling`] = config.scaling;
+			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, config.scaling);
 			item.updateSource(scaleUpdate);
 			item.prepareData();
 			item.system.prepareFinalData?.();
@@ -584,7 +567,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						"black-flag": {
 							type: "activity",
 							step: "activation",
-							uuid: this.uuid
+							activityType: this.type,
+							activityUuid: this.uuid
 						}
 					}
 				}
@@ -627,12 +611,23 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {Promise}
 	 */
 	async _onChatAction(event, message) {
+		const scaling = message.getFlag(game.system.id, "scaling") ?? 0;
+		let item = this.item;
+		if (scaling) {
+			const updates = { [`flags.${game.system.id}.scaling`]: scaling };
+			if (item.type === "spell") {
+				updates["system.circle.value"] = (item.system.circle.value ?? item.system.circle.base) + scaling;
+			}
+			item = item.clone(updates, { keepId: true });
+		}
+		const activity = item.system.activities.get(this.id);
+
 		const { action, ...properties } = event.target.dataset;
 		switch (action) {
 			case "roll":
 				const method = properties.method;
-				if (foundry.utils.getType(this[method]) !== "function") return;
-				return this[method]();
+				if (foundry.utils.getType(activity[method]) !== "function") return;
+				return activity[method]();
 		}
 	}
 

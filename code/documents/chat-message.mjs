@@ -36,7 +36,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 		this._renderHeader(html);
 		this._renderButtons(html);
-		await this._activateActivityListeners(html);
+		this._activateActivityListeners(html);
 		if (this.isRoll) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
@@ -144,16 +144,62 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * Add event listeners to an activity card or remove the controls if activity could not be found.
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
-	async _activateActivityListeners(html) {
-		const uuid = this.getFlag(game.system.id, "uuid");
-		if (this.getFlag(game.system.id, "type") !== "activity" || !uuid) return;
-
-		const activity = await fromUuid(uuid);
-		activity?.activateChatListeners(this, html);
+	_activateActivityListeners(html) {
+		if (this.getFlag(game.system.id, "type") === "activity") {
+			const activity = this.getAssociatedActivity();
+			activity?.activateChatListeners(this, html);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the activity associated with this chat card.
+	 * @returns {Activity|void}
+	 */
+	getAssociatedActivity() {
+		return fromUuidSync(this.getFlag(game.system.id, "activityUuid"));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the Actor which is the author of a chat card.
+	 * @returns {BlackFlagActor|void}
+	 */
+	getAssociatedActor() {
+		if (this.speaker.scene && this.speaker.token) {
+			const scene = game.scenes.get(this.speaker.scene);
+			const token = scene?.tokens.get(this.speaker.token);
+			if (token) return token.actor;
+		}
+		return game.actors.get(this.speaker.actor);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get the item associated with this chat card.
+	 * @returns {BlackFlagItem|void}
+	 */
+	getAssociatedItem() {
+		const item = fromUuidSync(this.getFlag(game.system.id, "itemUuid"));
+		if (item) return item;
+
+		const activity = fromUuidSync(this.getFlag(game.system.id, "activityUuid"));
+		if (activity) return activity.item;
+
+		const actor = this.getAssociatedActor();
+		if (!actor) return;
+
+		const storedData = this.getFlag(game.system.id, "itemData");
+		return storedData
+			? new Item.implementation(storedData, { parent: actor })
+			: actor.items.get(this.getFlag(game.system.id, "itemId"));
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

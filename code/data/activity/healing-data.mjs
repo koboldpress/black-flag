@@ -13,7 +13,7 @@ export class HealingData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			ability: new StringField(),
-			healing: new DamageField({}, { initial: { type: "normal" }, label: "BF.Healing.Label" })
+			healing: new DamageField({ initial: { type: "normal" }, label: "BF.Healing.Label" })
 		};
 	}
 

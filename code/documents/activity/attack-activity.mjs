@@ -212,7 +212,7 @@ export default class AttackActivity extends DamageActivity {
 					{
 						data,
 						modifierData,
-						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
+						parts: [damage.formula, ...(parts ?? [])],
 						options: {
 							critical: {
 								bonusDice: this.actor?.system.mergeModifiers?.(

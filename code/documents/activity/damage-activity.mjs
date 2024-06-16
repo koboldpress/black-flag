@@ -156,7 +156,9 @@ export default class DamageActivity extends Activity {
 		rollData.mod = this.damageModifier;
 
 		const rollConfig = foundry.utils.deepClone(config);
+		rollConfig.scaling = rollData.scale?.increase ?? 0;
 		rollConfig.rolls = [];
+
 		for (const damage of this.system.damage?.parts ?? []) {
 			const modifierData = { ...this.modifierData, type: "damage", damage };
 			const { parts, data } = buildRoll(
@@ -170,7 +172,7 @@ export default class DamageActivity extends Activity {
 					{
 						data,
 						modifierData,
-						parts: damage.custom ? [damage.custom] : [damage.formula, ...(parts ?? [])],
+						parts: [damage.scaledFormula(rollConfig.scaling ?? 0), ...(parts ?? [])],
 						options: {
 							damageType: damage.type,
 							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {

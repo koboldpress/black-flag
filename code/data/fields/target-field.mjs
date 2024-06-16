@@ -51,7 +51,7 @@ export default class TargetField extends SchemaField {
 		super(fields, { label: "BF.Targeting.Label", ...options });
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {
