@@ -30,7 +30,9 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 */
 	static migrateCircles(source) {
 		if ( "spellcasting" in source && "rings" in source.spellcasting ) {
-			source.spellcasting.circles = source.spellcasting.rings;
+			source.spellcasting.circles = foundry.utils.mergeObject(
+				source.spellcasting.circles ?? {}, source.spellcasting.rings
+			);
 		}
 	}
 
