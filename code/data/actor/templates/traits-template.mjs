@@ -27,7 +27,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					types: new MappingField(new FormulaField({deterministic: true})),
 					tags: new SetField(new StringField())
 				}, {label: "BF.Senses.Label"}),
-				size: new StringField({initial: "medium", label: "BF.Size.Label"}),
+				size: new StringField({ label: "BF.Size.Label" }),
 				condition: new SchemaField({
 					resistances: new SchemaField({
 						value: new SetField(new StringField()),

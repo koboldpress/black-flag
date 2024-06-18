@@ -120,7 +120,8 @@ export default class NPCData extends ActorDataModel.mixin(
 				dc: new NumberField({ integer: true, min: 0 })
 			}),
 			traits: new SchemaField({
-				type: new CreatureTypeField()
+				type: new CreatureTypeField(),
+				size: new StringField({ initial: "medium" })
 			})
 		});
 	}
