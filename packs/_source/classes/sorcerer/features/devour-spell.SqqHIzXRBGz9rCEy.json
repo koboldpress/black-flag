@@ -17,7 +17,12 @@
           "condition": "When a creature you can see targets you with a spell"
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
           "scale": {
             "allowed": false
           }
@@ -55,9 +60,14 @@
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
@@ -96,7 +106,7 @@
     "systemVersion": "0.9.036",
     "coreVersion": "11.315",
     "createdTime": 1718682139574,
-    "modifiedTime": 1718685081997,
+    "modifiedTime": 1718735238983,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SqqHIzXRBGz9rCEy"
