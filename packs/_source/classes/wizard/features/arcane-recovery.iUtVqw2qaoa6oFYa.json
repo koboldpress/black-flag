@@ -42,14 +42,15 @@
         "description": "",
         "system": {},
         "activation": {
-          "type": "hour",
-          "condition": "When you finish a short rest",
-          "value": 1
+          "type": "short",
+          "condition": "",
+          "value": null
         },
         "consumption": {
           "targets": [
             {
               "type": "item",
+              "target": "",
               "value": "1"
             }
           ],
@@ -65,7 +66,18 @@
           "max": ""
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": "systems/black-flag/artwork/activities/utility.svg",
+        "target": {
+          "affects": {
+            "type": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        }
       }
     }
   },
@@ -77,10 +89,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.026",
+    "systemVersion": "0.9.036",
     "coreVersion": "11.315",
     "createdTime": 1699045911860,
-    "modifiedTime": 1715742497769,
+    "modifiedTime": 1718728616952,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!iUtVqw2qaoa6oFYa"
