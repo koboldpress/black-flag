@@ -1,0 +1,155 @@
+{
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Wall of Fire",
+  "type": "spell",
+  "_id": "xOthSJ1mF0Qpe9DM",
+  "img": "icons/magic/fire/beam-jet-stream-spiral-yellow.webp",
+  "system": {
+    "activities": {
+      "TqkmqijyZVd3rbxl": {
+        "type": "savingThrow",
+        "_id": "TqkmqijyZVd3rbxl",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You create a wall of fire on a solid surface within range. You can make the wall in a line up to 60 feet long, 20 feet high, and 1 foot thick or in a circle up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.</p><p>When the wall appears, each creature within its area must make a DEX save. A creature takes 5d8 fire damage on a failed save, or half as much damage on a successful one.</p><p>One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, the damage increases by 1d8 for each slot above 4th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "arcane",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a small piece of phosphorus"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "120"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718732811709,
+    "modifiedTime": 1718732924236,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!xOthSJ1mF0Qpe9DM"
+}

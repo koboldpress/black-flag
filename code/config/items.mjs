@@ -46,7 +46,7 @@ export const consumableProperties = ["magical"];
 
 /**
  * @typedef {NestedTypeConfiguration} FeatureCategoryConfiguration
- * @property {number} [level] - Fixed level at which this feature will be gained.
+ * @property {number|false} [level] - Fixed level at which this feature will be gained.
  * @property {string[]} [sources] - If set, source identifier from these categories will be listed.
  * @property {Record<string, FeatureCategoryConfiguration>} [children] - Nested children.
  */
@@ -68,6 +68,10 @@ export const featureCategories = {
 			channelDivinity: {
 				localization: "BF.Feature.Type.ChannelDivinity",
 				sources: ["class", "subclass"]
+			},
+			dragonAncestor: {
+				localization: "BF.Feature.Type.DragonAncestor",
+				level: false
 			},
 			elementalInfusion: {
 				localization: "BF.Feature.Type.ElementalInfusion"

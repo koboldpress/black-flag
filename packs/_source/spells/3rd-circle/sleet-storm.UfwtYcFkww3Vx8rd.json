@@ -1,0 +1,141 @@
+{
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Sleet Storm",
+  "type": "spell",
+  "_id": "UfwtYcFkww3Vx8rd",
+  "img": "icons/magic/water/projectile-icecicles-salvo.webp",
+  "system": {
+    "activities": {
+      "gp63YRcjMcJkeAZY": {
+        "type": "savingThrow",
+        "_id": "gp63YRcjMcJkeAZY",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames are doused.</p><p>The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell’s area for the first time on a turn or starts its turn there, it must make a DEX save. On a failed save, it falls prone.</p><p>If a creature is concentrating in the spell’s area, the creature must make a successful CON save against your spell save DC or lose concentration.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 3
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a pinch of dust and a few drops of water"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "150"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": "cylinder",
+        "size": "40",
+        "height": "20"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": ""
+      }
+    },
+    "school": "conjuration"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718732235366,
+    "modifiedTime": 1718732327918,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!UfwtYcFkww3Vx8rd"
+}

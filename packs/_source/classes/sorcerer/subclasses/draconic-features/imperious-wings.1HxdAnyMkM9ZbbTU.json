@@ -1,0 +1,133 @@
+{
+  "folder": "uuCYTbZqqprCza3f",
+  "name": "Imperious Wings",
+  "type": "feature",
+  "_id": "1HxdAnyMkM9ZbbTU",
+  "img": "icons/creatures/abilities/wing-batlike-purple-blue.webp",
+  "system": {
+    "activities": {
+      "jQA7qME61ggBjEGu": {
+        "type": "utility",
+        "_id": "jQA7qME61ggBjEGu",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Summon Wings",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You gain the ability to sprout a pair of dragon wings from your back, gaining a fly speed equal to your walking speed. You can create these wings as a bonus action on your turn, and they last until you dismiss them (also as a bonus action on your turn). While the wings are manifested, creatures that can see you have disadvantage on checks and saves to avoid being frightened or intimidated by you.</p><p>You can’t manifest your wings while wearing armor.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "imperious-wings",
+      "associated": "draconic"
+    },
+    "level": {
+      "value": 11
+    }
+  },
+  "effects": [
+    {
+      "icon": "icons/creatures/abilities/wing-batlike-purple-blue.webp",
+      "origin": "Compendium.black-flag.classes.Item.1HxdAnyMkM9ZbbTU",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "name": "Imperious Wings",
+      "_id": "UjakTNgWuRl915rN",
+      "changes": [
+        {
+          "key": "system.traits.movement.types.fly",
+          "mode": 4,
+          "value": "@base"
+        }
+      ],
+      "description": "",
+      "transfer": true,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!1HxdAnyMkM9ZbbTU.UjakTNgWuRl915rN"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718729435383,
+    "modifiedTime": 1718729737388,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!1HxdAnyMkM9ZbbTU"
+}

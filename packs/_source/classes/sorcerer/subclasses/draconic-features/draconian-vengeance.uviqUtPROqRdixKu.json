@@ -1,0 +1,125 @@
+{
+  "folder": "uuCYTbZqqprCza3f",
+  "name": "Draconian Vengeance",
+  "type": "feature",
+  "_id": "uviqUtPROqRdixKu",
+  "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
+  "system": {
+    "activities": {
+      "ewqP2ySTpw2ID8JZ": {
+        "type": "savingThrow",
+        "_id": "ewqP2ySTpw2ID8JZ",
+        "description": "",
+        "system": {
+          "ability": "charisma",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": "spellcasting",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "round",
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Brand",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>As an action, you can target one creature within 60 feet of you that you can see to brand it with your draconic element. The target must succeed on a CHA save against your spell save DC or become vulnerable to the damage type associated with your draconic ancestry until the end of your next turn. A target resistant to that damage type loses that resistance for the duration, but a target immune to the damage type is still immune to it, even if the target fails the save.</p><p>Once used, you can't use this feature again until you finish a long rest, unless you spend 4 sorcery points to do so.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "draconian-vengeance",
+      "associated": "draconic"
+    },
+    "level": {
+      "value": 15
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718729452915,
+    "modifiedTime": 1718731781108,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!uviqUtPROqRdixKu"
+}

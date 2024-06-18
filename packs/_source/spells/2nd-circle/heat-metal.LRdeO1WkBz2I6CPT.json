@@ -1,0 +1,222 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Heat Metal",
+  "type": "spell",
+  "_id": "LRdeO1WkBz2I6CPT",
+  "img": "icons/magic/fire/flame-burning-chain.webp",
+  "system": {
+    "activities": {
+      "BDAx4ovEXYuk9pG2": {
+        "type": "savingThrow",
+        "_id": "BDAx4ovEXYuk9pG2",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Heat Object",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      },
+      "P0I6WlKf5Ew0jxzz": {
+        "type": "savingThrow",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Continue Heating",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+        "_id": "P0I6WlKf5Ew0jxzz"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Choose a manufactured metal object (not a creature), such as a metal weapon or a suit of armor that lacks the Natural Materials property, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p><p>If a creature is holding or wearing the object and takes damage from it, the creature must succeed on a CON save or drop the object if it can. If it doesn’t drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the damage increases by 1d8 for each slot above 2nd.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "arcane",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a piece of iron and a flame"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "60"
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "object",
+        "count": "1"
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718732630768,
+    "modifiedTime": 1718732785313,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!LRdeO1WkBz2I6CPT"
+}

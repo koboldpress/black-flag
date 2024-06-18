@@ -32,15 +32,6 @@
 	</label>
 {{/if}}
 
-{{#if showLevelSelector}}
-	<label>
-		<span>{{ localize "BF.Level.Label[one]" }}</span>
-		<select name="level.value" data-dtype="Number">
-			{{ selectOptions levels selected=advancement.level.value }}
-		</select>
-	</label>
-{{/if}}
-
 {{#if showClassIdentifier}}
 	<label>
 		<span>
@@ -54,6 +45,15 @@
 					{{ selectOptions CONFIG.registration.all.class labelAttr="name" }}
 				</optgroup>
 			{{/select}}
+		</select>
+	</label>
+{{/if}}
+
+{{#if showLevelSelector}}
+	<label>
+		<span>{{ localize "BF.Level.Label[one]" }}</span>
+		<select name="level.value" data-dtype="Number">
+			{{ selectOptions levels selected=advancement.level.value }}
 		</select>
 	</label>
 {{/if}}

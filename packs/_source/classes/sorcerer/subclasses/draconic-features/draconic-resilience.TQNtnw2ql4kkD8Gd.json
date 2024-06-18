@@ -1,0 +1,84 @@
+{
+  "folder": "uuCYTbZqqprCza3f",
+  "name": "Draconic Resilience",
+  "type": "feature",
+  "_id": "TQNtnw2ql4kkD8Gd",
+  "img": "icons/commodities/leather/scales-blue.webp",
+  "system": {
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "l3XVHIbe5rWr0AhK": {
+        "type": "property",
+        "_id": "l3XVHIbe5rWr0AhK",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.ac.formulas",
+              "mode": 2,
+              "value": "{ \"label\": \"Draconic Resilience\", \"formula\": \"13 + @abilities.dexterity.mod\", \"armored\": false }"
+            },
+            {
+              "key": "system.attributes.hp.bonuses.level",
+              "mode": 2,
+              "value": "1"
+            }
+          ]
+        },
+        "level": {
+          "value": 3,
+          "classIdentifier": "sorcerer"
+        },
+        "flags": {},
+        "title": "Draconic Resilience",
+        "icon": null,
+        "hint": ""
+      }
+    },
+    "description": {
+      "value": "<p>As magic flows through your body, it causes physical traits of your dragon ancestors to emerge. Your hit point maximum increases immediately by 1 and by an additional 1 when you gain a level of sorcerer.</p><p>In addition, parts of your skin are covered by a thin sheen of dragon-like scales. When you aren’t wearing armor, your AC equals 13 + your DEX modifier.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "draconic-resilience",
+      "associated": "draconic"
+    },
+    "level": {
+      "value": 3
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718729379710,
+    "modifiedTime": 1718730150994,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!TQNtnw2ql4kkD8Gd"
+}
