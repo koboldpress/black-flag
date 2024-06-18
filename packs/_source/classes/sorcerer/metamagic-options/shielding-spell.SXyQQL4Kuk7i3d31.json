@@ -1,0 +1,124 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Shielding Spell",
+  "type": "feature",
+  "_id": "SXyQQL4Kuk7i3d31",
+  "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-magenta.webp",
+  "system": {
+    "activities": {
+      "MkY7dH7LdYr9EH5A": {
+        "type": "healing",
+        "_id": "MkY7dH7LdYr9EH5A",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "temp",
+            "number": null,
+            "denomination": 0,
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "2"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell, you can spend 2 sorcery points to gain a number of temporary hit points equal to 3 × the spell’s circle. These temporary hit points last for 1 hour.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "shielding-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682939237,
+    "modifiedTime": 1718686339986,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SXyQQL4Kuk7i3d31"
+}

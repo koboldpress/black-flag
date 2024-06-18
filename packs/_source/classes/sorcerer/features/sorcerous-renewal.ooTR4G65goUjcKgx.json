@@ -1,0 +1,140 @@
+{
+  "folder": "7uCzGtcOYYcRFLda",
+  "name": "Sorcerous Renewal",
+  "type": "feature",
+  "_id": "ooTR4G65goUjcKgx",
+  "img": "icons/magic/control/debuff-chains-purple.webp",
+  "system": {
+    "activities": {
+      "LjLcFDXnlN2QkeSU": {
+        "type": "utility",
+        "_id": "LjLcFDXnlN2QkeSU",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "short",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "-@scale.sorcerer.renewal - 1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Recover Sorcery Points",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {
+      "SzXX7g6t7B439SRd": {
+        "type": "scaleValue",
+        "_id": "SzXX7g6t7B439SRd",
+        "configuration": {
+          "type": "dice",
+          "scale": {
+            "5": {
+              "number": 1,
+              "denomination": 4
+            },
+            "9": {
+              "number": 2
+            },
+            "13": {
+              "number": 3
+            },
+            "17": {
+              "number": 4
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "sorcerer"
+        },
+        "flags": {},
+        "title": "Renewal Dice",
+        "icon": null,
+        "hint": "",
+        "identifier": "renewal"
+      }
+    },
+    "description": {
+      "value": "<p>When you finish a short rest, roll 1d4 + 1 and regain that many sorcery points.</p><p>At higher levels, your Sorcerous Renewal feature improves: you roll 2d4 + 1 at 9th level, 3d4 + 1 at 13th, and 4d4 + 1 at 17th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "sorcerous-renewal",
+      "associated": "sorcerer"
+    },
+    "level": {
+      "value": 5
+    }
+  },
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682081037,
+    "modifiedTime": 1718684789176,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ooTR4G65goUjcKgx"
+}

@@ -1,0 +1,176 @@
+{
+  "folder": "7uCzGtcOYYcRFLda",
+  "name": "Font of Magic",
+  "type": "feature",
+  "_id": "U7TtFFdzkbVMNQ2D",
+  "img": "icons/magic/light/beam-rays-magenta-large.webp",
+  "system": {
+    "activities": {
+      "8lb7bx66g0J0RWGS": {
+        "type": "utility",
+        "_id": "8lb7bx66g0J0RWGS",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "spellSlots",
+              "target": "1",
+              "value": "1"
+            },
+            {
+              "type": "item",
+              "target": "",
+              "value": "-1"
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "5"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Convert a Spell Slot to Sorcery Points",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "bStRZ9aHyE6yAHag": {
+        "type": "utility",
+        "_id": "bStRZ9aHyE6yAHag",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1 + @scale + floor(@scale / 3)"
+            },
+            {
+              "type": "spellSlots",
+              "target": "1",
+              "value": "-1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Create Spell Slot",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "@scaling.sorcerer.points"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>You begin to draw from an internal wellspring of magic. This wellspring is represented by sorcery points, which allow you to create a variety of magical effects.</p><h6>Sorcery Points</h6><p>You start with 2 sorcery points at 1st level, and you gain more as you reach higher levels, as shown in the Sorcery Points column of the <strong>Sorcerer Progression</strong> table. You can never have more sorcery points than shown in the table for your level. You regain all spent sorcery points when you finish a long rest.</p><h6>Flexible Casting</h6><p>You can sacrifice spell slots to gain additional sorcery points or use your sorcery points to gain additional spell slots. You learn other ways to use your sorcery points as you reach higher levels.</p><p><strong>Converting a Spell Slot to Sorcery Points.</strong> As a bonus action, you can expend one Arcane spell slot and gain a number of sorcery points equal to the spell slot’s circle.</p><p><strong>Creating Spell Slots.</strong> You can spend sorcery points to gain one Arcane spell slot as a bonus action on your turn. The <strong>Creating Spell Slots</strong> table shows the cost of creating a spell slot of a given circle. You can create spell slots no higher than 5th circle with this feature, and the spell slots you create vanish when you finish a long rest.</p><table><caption>Creating Spell Slots</caption><thead><tr><th scope=\"col\">Spell Slot Circle</th><th scope=\"col\">Sorcery Point Cost</th></tr></thead><tbody><tr><th scope=\"-\">1st</th><td>2</td></tr><tr><th scope=\"-\">2nd</th><td>3</td></tr><tr><th scope=\"-\">3rd</th><td>5</td></tr><tr><th scope=\"-\">4th</th><td>6</td></tr><tr><th scope=\"-\">5th</th><td>7</td></tr></tbody></table>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "font-of-magic",
+      "associated": "sorcerer"
+    },
+    "level": {
+      "value": 1
+    }
+  },
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682038996,
+    "modifiedTime": 1718684765100,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!U7TtFFdzkbVMNQ2D"
+}

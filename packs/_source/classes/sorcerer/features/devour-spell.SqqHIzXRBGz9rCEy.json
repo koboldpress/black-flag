@@ -1,0 +1,103 @@
+{
+  "folder": "7uCzGtcOYYcRFLda",
+  "name": "Devour Spell",
+  "type": "feature",
+  "_id": "SqqHIzXRBGz9rCEy",
+  "img": "icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp",
+  "system": {
+    "activities": {
+      "GREvD95tcdmFnxpQ": {
+        "type": "utility",
+        "_id": "GREvD95tcdmFnxpQ",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a creature you can see targets you with a spell"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Resist Spell",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When a creature you can see targets you with a spell, you can use your reaction to attempt to immediately draw the spell’s power into yourself. Make a CHA check with a DC equal to 10 + the spell’s circle. On a success, you and every other target of the spell have advantage on saves against it and take only half as much damage from it. You also gain a number of sorcery points equal to the spell’s circle.</p><p>Alternatively, you can target a magical effect within 30 feet of you that was created by a spell, such as <em>fog cloud</em> or <em>wall of fire</em>. On a successful CHA check, the spell ends.</p><p>Once you successfully devour a spell, you can't use this feature again until you finish a long rest, unless you spend 4 sorcery points to do so.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": ""
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "devour-spell",
+      "associated": "sorcerer"
+    },
+    "level": {
+      "value": 14
+    }
+  },
+  "effects": [],
+  "sort": 800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682139574,
+    "modifiedTime": 1718685081997,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!SqqHIzXRBGz9rCEy"
+}

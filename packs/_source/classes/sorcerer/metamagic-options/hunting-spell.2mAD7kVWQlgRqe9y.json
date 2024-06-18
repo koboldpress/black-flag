@@ -1,0 +1,109 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Hunting Spell",
+  "type": "feature",
+  "_id": "2mAD7kVWQlgRqe9y",
+  "img": "icons/magic/unholy/beam-ringed-impact-purple.webp",
+  "system": {
+    "activities": {
+      "LZltXncHN1VhGTNV": {
+        "type": "utility",
+        "_id": "LZltXncHN1VhGTNV",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell that requires a target to make a save or take damage"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "2"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell that requires a target to make a save or take damage, you can spend 2 sorcery points to cause the spell to deal half damage even if a target succeeds on its save. This damage still affects targets who could normally avoid taking all damage on a successful save (via Evasion or similar features).</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "hunting-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682919024,
+    "modifiedTime": 1718685921386,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!2mAD7kVWQlgRqe9y"
+}

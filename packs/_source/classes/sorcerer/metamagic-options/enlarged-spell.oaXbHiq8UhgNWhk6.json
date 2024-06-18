@@ -1,0 +1,109 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Enlarged Spell",
+  "type": "feature",
+  "_id": "oaXbHiq8UhgNWhk6",
+  "img": "icons/magic/unholy/orb-beam-pink.webp",
+  "system": {
+    "activities": {
+      "cJKQoP8b8K5iKHTb": {
+        "type": "utility",
+        "_id": "cJKQoP8b8K5iKHTb",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell with a range of self that affects an area (not a specific target)"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "3"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell with a range of self that affects an area (not a specific target), you can spend 3 sorcery points to increase the size of the spell’s area of effect in one of the following ways (depending on the shape of the spell effect):</p><ul><li><p><strong>Circle, Cylinder, or Sphere.</strong> The radius of circle, sphere, or circular base of the cylinder increases by 5 feet. For example, the <em>darkness</em> spell could be altered to affect a 20-foot-radius sphere (instead of a 15-foot-radius sphere).</p></li><li><p><strong>Cone.</strong> The cone’s size increases by 15 feet. For example, the <em>burning hands</em> spell could be altered to affect a 30-foot cone (instead of a 15-foot cone).</p></li><li><p><strong>Cube.</strong> The length of each cube face increases by 5 feet. For example, the <em>thunderwave</em> spell could be altered to affect a 20-foot cube (instead of a 15-foot cube).</p></li><li><p><strong>Line.</strong> The length of the line increases by 15 feet. For example, the <em>lightning bolt</em> spell could be altered to affect a 115-foot line (instead of a 100-foot line).</p></li></ul>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "enlarged-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682902804,
+    "modifiedTime": 1718685692023,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!oaXbHiq8UhgNWhk6"
+}

@@ -1,0 +1,114 @@
+{
+  "folder": "7uCzGtcOYYcRFLda",
+  "name": "Arcane Conjunction",
+  "type": "feature",
+  "_id": "dTJZLxvSSziA8CZw",
+  "img": "icons/magic/unholy/orb-glowing-purple.webp",
+  "system": {
+    "activities": {
+      "C4iA3lXbCk20UHNH": {
+        "type": "utility",
+        "_id": "C4iA3lXbCk20UHNH",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a spell or magical effect affects you"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "120"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When a spell or magical effect affects you, you can use your reaction to target one creature you can see within 120 feet of you. That creature is affected as though it were also the target. Once used, you can't use this feature again until you finish a short or long rest, unless you spend 10 sorcery points to do so.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "epicBoon"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "arcane-conjunction",
+      "associated": "sorcerer"
+    },
+    "level": {
+      "value": null
+    }
+  },
+  "effects": [],
+  "sort": 900000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682153239,
+    "modifiedTime": 1718685324276,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!dTJZLxvSSziA8CZw"
+}

@@ -1,0 +1,109 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Lucky Spell",
+  "type": "feature",
+  "_id": "Vs3KuiRxXk18APjm",
+  "img": "icons/magic/unholy/orb-stone-pink.webp",
+  "system": {
+    "activities": {
+      "k8Tc0VHB5FVLc2Nw": {
+        "type": "utility",
+        "_id": "k8Tc0VHB5FVLc2Nw",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell that requires an attack roll and miss"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "2"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell that requires an attack roll and miss, you can spend 2 sorcery points to add the total number of Luck that you currently have to the attack roll, potentially turning a failure into a success. Luck isn’t expended by this Metamagic option and can subsequently be spent on the attack roll normally.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "lucky-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682923972,
+    "modifiedTime": 1718685999518,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Vs3KuiRxXk18APjm"
+}

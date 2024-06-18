@@ -1,0 +1,109 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Careful Spell",
+  "type": "feature",
+  "_id": "7PkJp1gLUndpd3Vu",
+  "img": "icons/magic/unholy/barrier-fire-pink.webp",
+  "system": {
+    "activities": {
+      "ugnZWcBakgCcuVKv": {
+        "type": "utility",
+        "_id": "ugnZWcBakgCcuVKv",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell that forces creatures to make a save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell that forces creatures to make a save, you can spend 1 sorcery point to exclude some of them from the effect. When you do, choose a number of those creatures up to half your sorcerer level (rounded up). A chosen creature automatically succeeds on its save and takes no damage from the spell.</p><p>You can use the Careful Spell option even if you have already used a different Metamagic option during the casting of the spell.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "careful-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682866851,
+    "modifiedTime": 1718685486810,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!7PkJp1gLUndpd3Vu"
+}

@@ -1,0 +1,110 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Twinned Spell",
+  "type": "feature",
+  "_id": "niDaChKwgsDmjt4D",
+  "img": "icons/magic/unholy/energy-smoke-pink.webp",
+  "system": {
+    "activities": {
+      "zyYq0n7boNrUngu6": {
+        "type": "utility",
+        "_id": "zyYq0n7boNrUngu6",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell that targets only one creature and doesn’t have a range of self"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "1 + @scale"
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "8"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell that targets only one creature and doesn’t have a range of self, you can spend a number of sorcery points equal to 1 + the spell’s circle to target a second creature in range with the same spell. (Cantrips cost only 1 sorcery point.)</p><p>To be eligible, a spell must be incapable of targeting more than one creature at the spell’s current circle. For example, <em>magic missile</em> and <em>scorching ray</em> aren’t eligible but <em>acid arrow</em> and <em>ray of enfeeblement</em> are.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "twinned-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682948579,
+    "modifiedTime": 1718686488582,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!niDaChKwgsDmjt4D"
+}

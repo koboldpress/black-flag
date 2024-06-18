@@ -85,6 +85,9 @@ export const featureCategories = {
 			martialAction: {
 				localization: "BF.Feature.Type.MartialAction"
 			},
+			metamagicOption: {
+				localization: "BF.Feature.Type.MetamagicOption"
+			},
 			stunt: {
 				localization: "BF.Feature.Type.Stunt"
 			},

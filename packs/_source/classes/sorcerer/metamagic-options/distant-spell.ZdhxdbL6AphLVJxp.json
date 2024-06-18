@@ -1,0 +1,109 @@
+{
+  "folder": "1TP7FLNgMIFG1ows",
+  "name": "Distant Spell",
+  "type": "feature",
+  "_id": "ZdhxdbL6AphLVJxp",
+  "img": "icons/magic/unholy/projectile-bullet-orb-pink.webp",
+  "system": {
+    "activities": {
+      "IsaMMfuJfi8FNDHd": {
+        "type": "utility",
+        "_id": "IsaMMfuJfi8FNDHd",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you cast a spell that has a range of 5 feet or greater"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "advancement": {},
+    "description": {
+      "value": "<p>When you cast a spell that has a range of 5 feet or greater, you can spend 1 sorcery point to increase its range by 100 feet. Spells with a range of touch instead have their range increased to 30 feet.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "restriction": {
+      "filters": [],
+      "requireAll": true
+    },
+    "type": {
+      "category": "class",
+      "value": "metamagicOption"
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "identifier": {
+      "value": "distant-spell",
+      "associated": ""
+    },
+    "level": {
+      "value": 2
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.036",
+    "coreVersion": "11.315",
+    "createdTime": 1718682884818,
+    "modifiedTime": 1718685518756,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ZdhxdbL6AphLVJxp"
+}

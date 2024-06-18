@@ -35,11 +35,23 @@ export const actionTypes = {
 				scalar: true
 			}
 		}
+	},
+	rest: {
+		label: "BF.Activation.Category.Rest.Label",
+		children: {
+			short: {
+				label: "BF.Activation.Type.ShortRest"
+			},
+			long: {
+				label: "BF.Activation.Type.LongRest"
+			}
+		}
 	}
 };
 localizeConfig(actionTypes, { flatten: true, keepCategories: false, pluralRule: "other", sort: false });
 localizeConfig(actionTypes.standard.children);
 localizeConfig(actionTypes.monster.children);
+localizeConfig(actionTypes.rest.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

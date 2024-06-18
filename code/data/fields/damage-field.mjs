@@ -58,11 +58,14 @@ export class ExtendedDamageData extends SimpleDamageData {
 				{ required: false }
 				// TODO: Figure out why "required: false" is needed here to avoid issues with HealingActivity
 			),
-			scaling: new SchemaField({
-				mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
-				number: new NumberField({ initial: 1, min: 0, integer: true, label: "BF.Damage.Scaling.Dice.Label" }),
-				formula: new FormulaField()
-			})
+			scaling: new SchemaField(
+				{
+					mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
+					number: new NumberField({ initial: 1, min: 0, integer: true, label: "BF.Damage.Scaling.Dice.Label" }),
+					formula: new FormulaField()
+				},
+				{ required: false }
+			)
 		};
 	}
 
@@ -88,7 +91,7 @@ export class ExtendedDamageData extends SimpleDamageData {
 	 */
 	scaledFormula(increase) {
 		let formula = this.formula;
-		switch (this.scaling.mode) {
+		switch (this.scaling?.mode) {
 			case "whole":
 				break;
 			case "half":
@@ -99,12 +102,12 @@ export class ExtendedDamageData extends SimpleDamageData {
 		if (!increase) return formula;
 
 		// If dice count scaling, increase the count on the first die rolled
-		if (this.scaling.number) {
+		if (this.scaling?.number) {
 			formula = formula.replace(/^(\d)+d/, (match, number) => `${Number(number) + this.scaling.number * increase}d`);
 		}
 
 		// If custom scaling included, modify to match increase and append for formula
-		if (this.scaling.formula) {
+		if (this.scaling?.formula) {
 			let roll = new Roll(this.scaling.formula);
 			roll = roll.alter(increase, 0, { multiplyNumeric: true });
 			formula = formula ? `${formula} + ${roll.formula}` : roll.formula;
