@@ -237,9 +237,9 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 		}
 
 		const scaling = this.scaling;
-		rollData.scale = { value: scaling + 1, increase: scaling };
-		Object.defineProperty(rollData.scale, "toString", {
-			value: () => rollData.scale.value,
+		rollData.scaling = { value: scaling + 1, increase: scaling };
+		Object.defineProperty(rollData.scaling, "toString", {
+			value: () => rollData.scaling.value,
 			enumerable: false
 		});
 
