@@ -5,6 +5,7 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for key ability.
  */
 export default class KeyAbilityConfig extends AdvancementConfig {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "advancement-config", "key-ability"],
@@ -14,13 +15,13 @@ export default class KeyAbilityConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData(options) {
 		const context = super.getData(options);
 		context.abilities = Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, config]) => {
 			obj[key] = {
 				label: config.labels.full,
-				keySelected: this.advancement.configuration.options.has(key),
-				secondarySelected: this.advancement.configuration.secondary === key
+				keySelected: this.advancement.configuration.options.has(key)
 			};
 			return obj;
 		}, {});
@@ -31,6 +32,7 @@ export default class KeyAbilityConfig extends AdvancementConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async prepareConfigurationUpdate(configuration) {
 		configuration.options = filteredKeys(configuration.options);
 		return configuration;

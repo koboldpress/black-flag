@@ -138,7 +138,6 @@ export default class ClassPageSheet extends JournalPageSheet {
 		}
 
 		const traits = item.system.advancement.byType("trait");
-		const keyAbility = item.system.advancement.byType("keyAbility")[0];
 		const makeTrait = type => {
 			const advancement = traits.find(a => a.bestGuessTrait() === type);
 			// TODO: Probably need to filter this by `level = 1` && `classRestriction !== "multiclass"`
@@ -151,7 +150,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 			armor: makeTrait("armor"),
 			weapons: makeTrait("weapons"),
 			tools: makeTrait("tools"),
-			saves: keyAbility?.journalSummary() ?? game.i18n.localize("BF.Proficiency.None"),
+			saves: makeTrait("saves"),
 			skills: makeTrait("skills")
 		};
 

@@ -1,38 +1,17 @@
 <form autocomplete="off">
 	<section>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 		</fieldset>
 		<fieldset>
-			<legend>
-				{{localize "BF.Advancement.KeyAbility.Options.Label"}}
-				<i class="hintIcon" data-tooltip="BF.Advancement.KeyAbility.Options.Hint"></i>
-			</legend>
+			<legend>{{ localize "BF.Advancement.KeyAbility.Options.Label" }}</legend>
 			<ol class="option-list">
-				{{#each abilities as |ability key|}}
+				{{#each abilities}}
 					<li>
 						<label>
-							{{localize ability.label}}
-							<input type="checkbox" name="configuration.options.{{key}}" {{checked ability.keySelected}}
-								{{disabled ability.secondarySelected}}>
-						</label>
-					</li>
-				{{/each}}
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>
-				{{localize "BF.Advancement.KeyAbility.Secondary.Label"}}
-				<i class="hintIcon" data-tooltip="BF.Advancement.KeyAbility.Secondary.Hint"></i>
-			</legend>
-			<ol class="option-list">
-				{{#each abilities as |ability key|}}
-					<li>
-						<label>
-							{{localize ability.label}}
-							<input type="radio" name="configuration.secondary" value="{{key}}" {{checked ability.secondarySelected}}
-								{{disabled ability.keySelected}}>
+							{{ localize label }}
+							<input type="checkbox" name="configuration.options.{{ @key }}" {{ checked keySelected }}>
 						</label>
 					</li>
 				{{/each}}

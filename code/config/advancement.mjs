@@ -86,8 +86,7 @@ export const _advancementTypes = {
 		documentClass: advancement.KeyAbilityAdvancement,
 		validItemTypes: new Set(["class"]),
 		sheetClasses: {
-			config: sheets.KeyAbilityConfig,
-			flow: sheets.KeyAbilityFlow
+			config: sheets.KeyAbilityConfig
 		}
 	},
 	property: {
