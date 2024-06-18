@@ -95,11 +95,10 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 		// Key Ability
 		const keyAbilityAdvancement = this.advancement.byType("keyAbility")[0];
 		if (keyAbilityAdvancement) {
-			const keyAbilityOptions = keyAbilityAdvancement.configuration.options.map(o => {
-				const label = CONFIG.BlackFlag.abilities[o]?.labels.full;
-				return label ? game.i18n.localize(label) : o;
-			});
-			const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "disjunction" });
+			const keyAbilityOptions = keyAbilityAdvancement.configuration.options.map(
+				o => game.i18n.localize(CONFIG.BlackFlag.abilities.localized[o]) ?? o
+			);
+			const listFormatter = game.i18n.getListFormatter({ style: "short", type: "conjunction" });
 			this.labels.keyAbility = listFormatter.format(keyAbilityOptions);
 		}
 	}
