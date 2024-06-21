@@ -3,11 +3,11 @@
 		<legend>{{ localize "BF.Note.Label[other]" }}</legend>
 		{{#each rollNotes}}
 			<label>
-				<figure class="advantage-mode" data-advantage-mode="{{this.note.rollMode}}">
+				<figure class="advantage-mode" data-advantage-mode="{{ note.rollMode }}">
 					<blackFlag-icon class="die-icon" src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>
-					<figcaption>{{ localize this.advantageAbbreviation }}</figcaption>
+					<figcaption>{{ localize advantageAbbreviation }}</figcaption>
 				</figure>
-				<p>{{ this.note.text }}</p>
+				<p>{{ note.text }}</p>
 			</label>
 		{{/each}}
 	</fieldset>

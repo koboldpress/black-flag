@@ -1,10 +1,10 @@
 <form autocomplete="off">
 	<section>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 			<label>
-				<span>{{localize "BF.Advancement.Improvement.TalentList.Label"}}</span>
+				<span>{{ localize "BF.Advancement.Improvement.TalentList.Label" }}</span>
 				<multi-select name="configuration.talentList">
 					{{#each talentCategories}}
 						<option value="{{ @key }}" {{ selected }}>{{ label }}</option>

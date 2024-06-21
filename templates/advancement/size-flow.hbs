@@ -1,11 +1,11 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
-		{{> "blackFlag.advancement-name"}}
+		{{> "blackFlag.advancement-name" }}
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">
 				<select name="size">
-					{{selectOptions sizes blank=(localize "BF.Advancement.Size.Notification") localize=true}}
+					{{ selectOptions sizes blank=(localize "BF.Advancement.Size.Notification") localize=true }}
 				</select>
 			</div>
 		{{/if}}

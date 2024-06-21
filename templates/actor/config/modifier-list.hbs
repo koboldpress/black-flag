@@ -16,8 +16,8 @@
 				<li class="modifier" data-index="{{ index }}">
 					{{#if (eq this.type "note")}}
 						<select class="roll-mode" name="modifier.{{ index }}.note.rollMode">
-							{{selectOptions @root.CONFIG.challengeRollModes selected=note.rollMode nameAttr="value"
-							                labelAttr="label" localize=true}}
+							{{ selectOptions @root.CONFIG.challengeRollModes selected=note.rollMode nameAttr="value"
+							                 labelAttr="label" localize=true }}
 						</select>
 						<input type="text" name="modifier.{{ index }}.note.text" value="{{ note.text }}"
 							placeholder="{{ localize 'BF.Note.Label[one]' }}" {{ disabled (ne source "manual") }}>

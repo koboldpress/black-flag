@@ -1,24 +1,24 @@
 <form autocomplete="off">
 	<section>
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 		</fieldset>
 		<fieldset>
-			<legend>{{localize "BF.HitDie.Label[one]"}}</legend>
+			<legend>{{ localize "BF.HitDie.Label[one]" }}</legend>
 			<label>
-				<span>{{localize "BF.Die.Denomination.Label"}}</span>
+				<span>{{ localize "BF.Die.Denomination.Label" }}</span>
 				<select name="configuration.denomination">
-					{{selectOptions hitDieSizes selected=configuration.denomination}}
+					{{ selectOptions hitDieSizes selected=configuration.denomination }}
 				</select>
 			</label>
 			<label>
-				<span>{{localize "BF.Advancement.HitPoints.Starting"}}</span>
-				<span>{{configuration.denomination}}</span>
+				<span>{{ localize "BF.Advancement.HitPoints.Starting" }}</span>
+				<span>{{ configuration.denomination }}</span>
 			</label>
 			<label>
-				<span>{{localize "BF.Advancement.HitPoints.Average"}}</span>
-				<span>{{advancement.average}}</span>
+				<span>{{ localize "BF.Advancement.HitPoints.Average" }}</span>
+				<span>{{ advancement.average }}</span>
 			</label>
 		</fieldset>
 	</section>

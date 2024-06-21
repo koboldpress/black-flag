@@ -1,50 +1,50 @@
 <form autocomplete="off">
 	<section class="left-column">
 		<fieldset>
-			<legend>{{localize "BF.Advancement.Config.Details"}}</legend>
-			{{> "blackFlag.advancement-controls"}}
+			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+			{{> "blackFlag.advancement-controls" }}
 			<label>
-				<span>{{localize "BF.Advancement.Trait.Mode.Label"}}</span>
+				<span>{{ localize "BF.Advancement.Trait.Mode.Label" }}</span>
 				<select name="configuration.mode">
-					{{selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label" localize=true}}
+					{{ selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label" localize=true }}
 				</select>
 				<p class="hint">
-					{{localize (lookup (lookup CONFIG.traitModes configuration.mode) "hint")}}
+					{{ localize (lookup (lookup CONFIG.traitModes configuration.mode) "hint") }}
 				</p>
 			</label>
 		</fieldset>
 		<fieldset>
 			<legend>
-				{{localize "BF.Advancement.Trait.Guaranteed.Label"}}
+				{{ localize "BF.Advancement.Trait.Guaranteed.Label" }}
 				<i class="hintIcon" data-tooltip="BF.Advancement.Trait.Guaranteed.Hint"></i>
 			</legend>
 			<ul class="selected-index-list">
 				<li>
 					<label>
-						<input type="radio" name="selectedIndex" value="-1" {{checked (eq selectedIndex -1)}}>
-						<span>{{grants.label}}</span>
+						<input type="radio" name="selectedIndex" value="-1" {{ checked (eq selectedIndex -1) }}>
+						<span>{{ grants.label }}</span>
 					</label>
 				</li>
 			</ul>
 		</fieldset>
 		<fieldset>
 			<legend>
-				{{localize "BF.Advancement.Trait.Choices.Label"}}
+				{{ localize "BF.Advancement.Trait.Choices.Label" }}
 				<i class="hintIcon" data-tooltip="BF.Advancement.Trait.Choices.Hint"></i>
 			</legend>
 			<label>
-				<span>{{localize "BF.Advancement.Trait.Choice.Mode.Label"}}</span>
+				<span>{{ localize "BF.Advancement.Trait.Choice.Mode.Label" }}</span>
 				<select name="configuration.choiceMode">
 					{{#select configuration.choiceMode}}
-						<option value="inclusive">{{localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Label"}}</option>
-						<option value="exclusive">{{localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Label"}}</option>
+						<option value="inclusive">{{ localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Label" }}</option>
+						<option value="exclusive">{{ localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Label" }}</option>
 					{{/select}}
 				</select>
 				<p class="hint">
 					{{#if (eq configuration.choiceMode "inclusive")}}
-						{{localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Hint"}}
+						{{ localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Hint" }}
 					{{else}}
-						{{localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Hint"}}
+						{{ localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Hint" }}
 					{{/if}}
 				</p>
 			</label>
@@ -52,20 +52,25 @@
 				{{#each choices}}
 					<li>
 						<label>
-							<input type="radio" name="selectedIndex" value="{{@index}}" {{checked (eq ../selectedIndex @index)}}>
-							<span>{{this.label}}</span>
+							<input type="radio" name="selectedIndex" value="{{ @index }}" {{ checked (eq ../selectedIndex @index) }}>
+							<span>{{ label }}</span>
 						</label>
-						<a data-action="remove-choice"><i class="fa-solid fa-trash"></i></a>
+						<button type="button" class="link-button" data-action="remove-choice"
+						        data-tooltip="BF.Advancement.Trait.Action.RemoveChoiceGroup"
+						        aria-tooltip="{{ localize 'BF.Advancement.Trait.Action.RemoveChoiceGroup' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
 					</li>
 				{{/each}}
 			</ul>
-			<a data-action="add-choice">
-				<i class="fas fa-plus"></i> {{localize "BF.Advancement.Trait.Action.AddChoiceGroup"}}
-			</a>
+			<button type="button" class="link-button" data-action="add-choice">
+				<i class="fa-solid fa-plus" inert></i>
+				{{ localize "BF.Advancement.Trait.Action.AddChoiceGroup" }}
+			</button>
 			{{#if (ne selectedIndex -1)}}
 				<label>
-					<span>{{localize "BF.Advancement.Trait.Count.Label"}}</span>
-					<input type="number" name="configuration.count" min="1" step="1" value="{{count}}">
+					<span>{{ localize "BF.Advancement.Trait.Count.Label" }}</span>
+					<input type="number" name="configuration.count" min="1" step="1" value="{{ count }}">
 				</legend>
 			{{/if}}
 		</fieldset>
@@ -73,15 +78,15 @@
 
 	<section class="right-column trait-options">
 		<fieldset>
-			<legend>{{localize selectedTraitHeader}}</legend>
+			<legend>{{ localize selectedTraitHeader }}</legend>
 			<label>
-				<span>{{localize "BF.Trait.Type"}}</span>
+				<span>{{ localize "BF.Trait.Type" }}</span>
 				<select name="selectedTrait">
-					{{selectOptions validTraitTypes selected=selectedTrait localize=true}}
+					{{ selectOptions validTraitTypes selected=selectedTrait localize=true }}
 				</select>
 			</label>
 
-			{{> "blackFlag.trait-list" choices=choiceOptions prefix="configuration.checked"}}
+			{{> "blackFlag.trait-list" choices=choiceOptions prefix="configuration.checked" }}
 
 		</fieldset>
 	</section>

@@ -1,24 +1,26 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
-		{{> "blackFlag.advancement-name"}}
+		{{> "blackFlag.advancement-name" }}
 	</header>
 
 	<div class="advancement-summary">
-		{{#if needsConfiguration}}{{{summary}}}{{/if}}
+		{{#if needsConfiguration}}{{{ summary }}}{{/if}}
 		{{#each chosen as |choice|}}
 			<span class="choice-entry">
-				<span class="choice-name">{{this.label}}</span>
+				<span class="choice-name">{{ this.label }}</span>
 				{{~#if (or @root.modes.editing @root.needsConfiguration)}}
-					<a data-action="remove-choice" data-key="{{this.key}}">
-						<i class="fa-solid fa-trash"></i>
+					<button type="button" class="link-button" data-action="remove-choice" data-key="{{ this.key }}"
+					        data-tooltip="BF.Advancement.Trait.Action.RemoveChoice"
+					        aria-label="{{ localize 'BF.Advancement.Trait.Action.RevertChoice' }}">
+						<i class="fa-solid fa-trash" inert></i>
 					</a>
 				{{/if}}
 			</span>
 		{{/each}}
 		{{#if needsConfiguration}}
 			<select name="added">
-				{{blackFlag-groupedSelectOptions availableChoices blank=blankLabel}}
+				{{ blackFlag-groupedSelectOptions availableChoices blank=blankLabel }}
 			</select>
 		{{/if}}
 	</div>

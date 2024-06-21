@@ -1,26 +1,28 @@
-<form id="{{appId}}" class="advancement-entry" data-id="{{advancement.id}}" data-type="{{type}}" autocomplete="off"
-	{{~#if accentColor}} style="--bf-item-color: {{accentColor}};"{{/if}}>
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+      autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
-		{{> "blackFlag.advancement-name"}}
+		{{> "blackFlag.advancement-name" }}
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">
-				<button data-action="take-average">
-					{{localize "BF.Advancement.HitPoints.Action.TakeAverage"}}:
-					<strong>{{blackFlag-number advancement.average sign=true}}</strong>
+				<button type="button" class="light-button" data-action="take-average">
+					{{ localize "BF.Advancement.HitPoints.Action.TakeAverage" }}:
+					<strong>{{ blackFlag-number advancement.average sign=true }}</strong>
 				</button>
 				<span class="or">
-					{{localize "BF.Advancement.HitPoints.Action.or"}}
+					{{ localize "BF.Advancement.HitPoints.Action.or" }}
 				</span>
-				<button data-action="roll">
-					{{localize "BF.Roll.Action.RollSpecific" type=(localize "BF.HitDie.Label[one]")}}:
-					<strong>d{{denomination}}</strong>
+				<button type="button" class="light-button" data-action="roll">
+					{{ localize "BF.Roll.Action.RollSpecific" type=(localize "BF.HitDie.Label[one]") }}:
+					<strong>d{{ denomination }}</strong>
 				</button>
 			</div>
 		{{else if (and modes.editing (not isFirstLevel))}}
 			<div class="advancement-controls">
-				<a data-action="reverse">
-					<i class="fa-solid fa-clock-rotate-left"></i>
-				</a>
+				<button type="button" class="link-button" data-action="reverse"
+				        data-tooltip="BF.Advancement.Core.Action.Revert"
+								aria-label="{{ localize 'BF.Advancement.Core.Action.Revert' }}">
+					<i class="fa-solid fa-clock-rotate-left" inert></i>
+				</button>
 			</div>
 		{{/if}}
 	</header>

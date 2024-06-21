@@ -4,7 +4,7 @@
 	{{/if}}
 	<div class="dice-result">
 		<div class="dice-formula">{{ formula }}</div>
-		{{{tooltip}}}
+		{{{ tooltip }}}
 		<h4 class="dice-total">
 			<span class="total">{{ total }}</span>
 			{{#with (lookup (lookup CONFIG.damageTypes damageType) "label") as |damage|}}

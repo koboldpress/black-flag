@@ -157,21 +157,6 @@ export default class AbilityAssignmentDialog extends DocumentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Helpers               */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * How many points are required to achieve a certain score.
-	 * @param {number} score
-	 * @returns {number}
-	 */
-	pointCostForScore(score) {
-		return Object.entries(CONFIG.BlackFlag.abilityAssignment.pointBuy.costs)
-			.filter(([k, v]) => k <= score)
-			.reduce((t, [, v]) => t + v, 0);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

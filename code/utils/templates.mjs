@@ -228,7 +228,6 @@ export async function registerHandlebarsPartials() {
 		"activities/parts/activity-duration.hbs",
 		"activities/parts/activity-targeting.hbs",
 		"activities/parts/activity-uses.hbs",
-		"actor/conditions.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",
 		"actor/tabs/actor-active-effects.hbs",
