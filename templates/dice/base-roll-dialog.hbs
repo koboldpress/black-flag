@@ -29,7 +29,12 @@
 	<nav class="dialog-buttons">
 		<ul>
 			{{#each buttons}}
-				<li><button type="submit" data-action="{{ @key }}">{{{ icon }}} {{{ label }}}</button></li>
+				<li>
+					<button type="submit" class="light-button" data-action="{{ @key }}">
+						{{{ icon }}}
+						{{{ label }}}
+					</button>
+				</li>
 			{{/each}}
 		</ul>
 	</nav>

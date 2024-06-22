@@ -6,7 +6,12 @@
 	<nav class="dialog-buttons">
 		<ul>
 			{{#each buttons}}
-				<li><button class="dialog-button" data-button="{{ @key }}">{{{ icon }}} {{{ label }}}</button></li>
+				<li>
+					<button type="button" class="dialog-button light-button" data-button="{{ @key }}">
+						{{{ icon }}}
+						{{{ label }}}
+					</button>
+				</li>
 			{{/each}}
 		</ul>
 	</nav>

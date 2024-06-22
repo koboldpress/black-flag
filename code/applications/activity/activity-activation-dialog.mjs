@@ -1,7 +1,10 @@
+import { numberFormat } from "../../utils/_module.mjs";
+import BlackFlagDialog from "../dialog.mjs";
+
 /**
  * Application to handled configuring the activation of an activity.
  */
-export default class ActivityActivationDialog extends Dialog {
+export default class ActivityActivationDialog extends BlackFlagDialog {
 	constructor(activity, config = {}, data = {}, options = {}) {
 		super(data, options);
 		this.options.classes.push("black-flag", "activity-activation");
@@ -60,6 +63,7 @@ export default class ActivityActivationDialog extends Dialog {
 					content: null,
 					buttons: {
 						use: {
+							cssClass: "light-button",
 							icon: `<i class="fa-solid fa-${activity.isSpell ? "magic" : "fist-raised"}"></i>`,
 							label: game.i18n.localize(activity.activationLabel),
 							callback: html => {
@@ -156,7 +160,10 @@ export default class ActivityActivationDialog extends Dialog {
 			// TODO: Allow this to work with other spellcasting type
 			const data = spellcasting.circles[`circle-${level}`] ?? { max: 0 };
 			obj[level] = {
-				label // TODO: Format with slots available out of total
+				label: game.i18n.format("BF.Consumption.Type.SpellSlots.Available", {
+					slot: label,
+					available: numberFormat(data.value)
+				})
 			};
 			return obj;
 		}, {});

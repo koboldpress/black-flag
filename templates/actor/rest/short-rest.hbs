@@ -12,7 +12,8 @@
 				{{#each hd.d}}
 					<label class="hit-die-roll">
 						<span>d{{ @key }} ({{ localize "BF.HitDie.AvailableCount" number=(blackFlag-number available) }})</span>
-						<button data-action="roll-hit-die" data-denomination="{{ @key }}" {{ disabled (eq available 0) }}>
+						<button type="button" class="light-button" data-action="roll-hit-die" data-denomination="{{ @key }}"
+						        {{ disabled (eq available 0) }}>
 							<blackFlag-icon class="die-icon"
 							                src="systems/black-flag/artwork/interface/dice/d{{ @key }}.svg"></blackFlag-icon>
 							{{ localize "BF.Roll.Action.RollSpecific" type=(concat "d" @key) }}
@@ -26,7 +27,12 @@
 	<nav class="dialog-buttons">
 		<ul>
 			{{#each buttons}}
-				<li><button class="dialog-button" data-button="{{ @key }}">{{{ icon }}} {{{ label }}}</button></li>
+				<li>
+					<button type="button" class="dialog-button light-button" data-button="{{ @key }}">
+						{{{ icon }}}
+						{{{ label }}}
+					</button>
+				</li>
 			{{/each}}
 		</ul>
 	</nav>

@@ -1,4 +1,22 @@
 export default class BlackFlagDialog extends Dialog {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	getData(options = {}) {
+		const context = super.getData(options);
+		for (const button of Object.values(context.buttons)) {
+			if (button.cssClass.includes("default")) button.cssClass += " heavy-button";
+			else button.cssClass += " light-button";
+		}
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Factory Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Wrap the Dialog with an enclosing Promise which resolves or rejects when the client makes a choice.
 	 * @param {object} tooltip
