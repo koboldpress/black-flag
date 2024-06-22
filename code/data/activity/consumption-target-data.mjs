@@ -2,7 +2,7 @@ import { numberFormat } from "../../utils/_module.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ConsumptionError from "./consumption-error.mjs";
 
-const { StringField } = foundry.data.fields;
+const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model for consumption targets.
@@ -13,12 +13,29 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			type: new StringField({ label: "BF.Consumption.Type.Label" }),
 			target: new StringField({ label: "BF.Consumption.Target.Label" }),
 			value: new FormulaField({ initial: "1", label: "BF.Consumption.Amount.Label" }),
-			scale: new FormulaField({ label: "BF.Consumption.Scale.Label" })
+			scaling: new SchemaField({
+				mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
+				formula: new FormulaField()
+			})
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Method of scaling this consumption.
+	 * @type {Record<string, string>|null}
+	 */
+	get scalingModes() {
+		if (!CONFIG.BlackFlag.consumptionTypes[this.type]?.scalingModes) return null;
+		return Object.entries(CONFIG.BlackFlag.consumptionTypes[this.type].scalingModes).reduce((obj, [k, { label }]) => {
+			obj[k] = label;
+			return obj;
+		}, {});
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

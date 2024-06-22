@@ -1,6 +1,11 @@
 blackFlag-consumption {
-	ul {
+	ul.configuration-list {
 		li {
+			flex-wrap: wrap;
+
+			> .consumption {
+				flex: 1 1 90%;
+			}
 			.target {
 				flex: 0 0 12em;
 				select { width: 12em; }

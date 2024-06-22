@@ -134,6 +134,11 @@ ul.configuration-list {
 	padding: 0;
 	list-style: none;
 
+	&:not(:last-child) {
+		border-block-end: 2px dotted var(--bf-color-border-blue);
+		padding-block-end: 8px;
+	}
+
 	> li {
 		display: flex;
 		align-items: center;
@@ -141,9 +146,12 @@ ul.configuration-list {
 		gap: var(--gap-size);
 		padding-inline: 0;
 
+		&:not(:first-of-type) {
+			padding-block-start: 8px;
+		}
 		&:not(:last-of-type) {
-			border-block-end: 1px solid var(--bf-color-border-gray);
-			padding-block-end: 0.25rem;
+			border-block-end: 2px dotted var(--bf-color-border-blue);
+			padding-block-end: 8px;
 		}
 
 		.field-group {

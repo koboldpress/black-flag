@@ -116,7 +116,7 @@ fieldset {
 }
 
 .hintIcon {
-	display: var(--fa-display,inline-block);
+	display: var(--fa-display, inline-block);
 	color: var(--bf-color-border-blue);
 	font-family: "Font Awesome 6 Pro";
 	font-size: var(--font-size-11);
@@ -128,6 +128,24 @@ fieldset {
 
 	&::before {
 		content: "\f059";
+	}
+}
+.hinted-label {
+	text-decoration: underline;
+	text-decoration-color: var(--bf-color-border-blue);
+	text-decoration-style: dashed;
+	text-decoration-thickness: 1px;
+	cursor: help;
+
+	&::after {
+		content: "\f059";
+		display: var(--fa-display, inline-block);
+		color: var(--bf-color-border-blue);
+		font-family: var(--font-awesome);
+		font-size: var(--font-size-11);
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
 	}
 }
 

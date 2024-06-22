@@ -1,0 +1,57 @@
+<div class="consumption field-group">
+	<label class="type">
+		<span>{{ localize "BF.Consumption.Type.Label" }}</span>
+		<select name="{{ prefix }}type">
+			{{#select consumption.type}}
+				{{#each consumption.validTypes}}
+					<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
+				{{/each}}
+			{{/select}}
+		</select>
+	</label>
+	{{#if consumption.showTargets}}
+		<label class="target">
+			<span>{{ localize "BF.Consumption.Target.Label" }}</span>
+			{{#with consumption.validTargets as |targets|}}
+				<select name="{{ ../prefix }}target">
+					{{ selectOptions targets selected=../consumption.target nameAttr="key" labelAttr="label" }}
+				</select>
+			{{else}}
+				<input type="text" name="{{ prefix }}target" value="{{ consumption.target }}"
+							 placeholder="{{ localize 'BF.Consumption.Type.ItemUses.ThisItem' }}">
+			{{/with}}
+		</label>
+	{{/if}}
+	<label class="value">
+		<span>{{ localize "BF.Consumption.Amount.Label" }}</span>
+		<input type="text" name="{{ prefix }}value" value="{{ consumption.value }}">
+	</label>
+</div>
+
+<div class="controls">
+	{{#if @root.editable}}
+		<button type="button" class="link-button" data-action="delete"
+						data-tooltip="BF.Consumption.Action.Delete"
+						aria-label="{{ localize 'BF.Consumption.Action.Delete' }}">
+			<i class="fa-solid fa-trash" inert></i>
+		</button>
+	{{/if}}
+</div>
+
+{{#if (and scalingAllowed consumption.scalingModes)}}
+	<div class="consumption-scaling field-group">
+		<label>
+			<span>{{ localize "BF.Consumption.Scaling.Mode.Label" }}</span>
+			<select name="{{ prefix }}scaling.mode">
+				{{ selectOptions consumption.scalingModes selected=consumption.scaling.mode localize=true
+												 blank=(localize "BF.Consumption.Scaling.Mode.None") }}
+			</select>
+		</label>
+		{{#if consumption.scaling.mode}}
+			<label class="scaling-formula">
+				<span>{{ localize "BF.Consumption.Scaling.Formula.Label" }}</span>
+				<input type="text" name="{{ prefix }}scaling.formula" value="{{ consumption.scaling.formula }}">
+			</label>
+		{{/if}}
+	</div>
+{{/if}}

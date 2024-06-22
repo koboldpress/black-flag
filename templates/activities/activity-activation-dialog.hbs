@@ -20,21 +20,28 @@
 	{{/if}}
 
 	{{#if show.spellCircleSelection}}
-		<div class="form-group">
-			<label>{{ localize "BF.Spell.Circle.Label" }}</label>
-			<div class="form-fields">
+		<fieldset>
+			<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
+			<label>
+				<span>{{ localize "BF.Spell.Circle.Label" }}</span>
 				<select name="spell.circle" data-dtype="Number">
 					{{ selectOptions spell.circles selected=spell.circle labelAttr="label"}}
 				</select>
-			</div>
-		</div>
+			</label>
+			{{#if show.spellConsumption}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}</span>
+					<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>
+				</label>
+			{{/if}}
+		</fieldset>
 	{{/if}}
 
 	{{#if show.anyConsumption}}
 		<fieldset class="consumption">
 			<legend>{{ localize "BF.Consumption.Label" }}</legend>
 
-			{{#if show.spellConsumption}}
+			{{#if (and show.spellConsumption (not show.spellCircleSelection))}}
 				<label class="full-checkbox">
 					<span>{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}</span>
 					<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>

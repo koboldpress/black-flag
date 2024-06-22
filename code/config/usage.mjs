@@ -7,6 +7,7 @@ import { spellCircles } from "./spellcasting.mjs";
  *
  * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
  * @property {ConsumptionConsumeFunction|string} consume - Function used to calculate updates upon consumption.
+ * @property {LabeledConfiguration} [scalingModes] - Consumption parts that can be scaled.
  * @property {boolean} [targetRequiresEmbedded] - Display text input rather than limited options when not embedded.
  * @property {ConsumptionValidTargetsFunction} [validTargets] - Function used to build list of targets for this type.
  */
@@ -37,12 +38,22 @@ export const consumptionTypes = {
 	activity: {
 		label: "BF.Consumption.Type.ActivityUses.Label",
 		prompt: "BF.Consumption.Type.ActivityUses.Prompt",
-		consume: "consumeActivity"
+		consume: "consumeActivity",
+		scalingModes: {
+			amount: {
+				label: "BF.Consumption.Scaling.Mode.Amount"
+			}
+		}
 	},
 	item: {
 		label: "BF.Consumption.Type.ItemUses.Label",
 		prompt: "BF.Consumption.Type.ItemUses.Prompt",
 		consume: "consumeItem",
+		scalingModes: {
+			amount: {
+				label: "BF.Consumption.Scaling.Mode.Amount"
+			}
+		},
 		targetRequiresEmbedded: true,
 		validTargets: activity => {
 			const otherItems = activity.item.actor?.items
@@ -55,6 +66,11 @@ export const consumptionTypes = {
 		label: "BF.Consumption.Type.HitDice.Label",
 		prompt: "BF.Consumption.Type.HitDice.Prompt",
 		consume: "consumeHitDice",
+		scalingModes: {
+			amount: {
+				label: "BF.Consumption.Scaling.Mode.Amount"
+			}
+		},
 		validTargets: activity => [
 			{ key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest") },
 			...hitDieSizes.map(d => ({ key: d, label: `d${d}` })),
@@ -65,6 +81,14 @@ export const consumptionTypes = {
 		label: "BF.Consumption.Type.SpellSlots.Label",
 		prompt: "BF.Consumption.Type.SpellSlots.Prompt",
 		consume: "consumeSpellSlots",
+		scalingModes: {
+			amount: {
+				label: "BF.Consumption.Scaling.Mode.Amount"
+			},
+			circle: {
+				label: "BF.Consumption.Scaling.Mode.Circle"
+			}
+		},
 		validTargets: activity => {
 			const circles = spellCircles();
 			delete circles[0];
