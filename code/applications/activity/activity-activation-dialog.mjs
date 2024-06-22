@@ -1,4 +1,4 @@
-import { numberFormat } from "../../utils/_module.mjs";
+import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 
 /**
@@ -89,12 +89,6 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 	async getData(options = {}) {
 		const context = await super.getData(options);
 
-		// TODO: Determine what scaling is allowed based on whether it is a spell and what the max scale is set to
-		// If spell, use (base circle + max scaling) or (max spell circle), whichever is lower
-		// Otherwise, simply use the max scaling value
-		//
-		// For spells, prepare a list of what circles are available for casting and how many slots they have
-
 		// TODO: Calculate resource consumption based on initial configuration
 
 		const data = foundry.utils.mergeObject(
@@ -108,12 +102,19 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			},
 			{ inplace: false }
 		);
+		this._prepareScaling(data);
 		data.show = {
-			actionConsumption: this.activity.activation.type === "legendary", // TODO: Allow more than legendary actions here
+			actionConsumption: this.activity.activation.type === "legendary",
+			scaling: data.scalingData.max,
+			scalingRange: data.scalingData.max <= 20,
 			spellConsumption: this.activity.requiresSpellSlot,
 			spellCircleSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.circles),
 			resourceConsumption: !foundry.utils.isEmpty(data.resources)
 		};
+		data.show.anyConsumption =
+			data.show.actionConsumption ||
+			(data.show.spellConsumption && !data.show.spellCircleSelection) ||
+			data.show.resourceConsumption;
 
 		context.content = await renderTemplate(
 			"systems/black-flag/templates/activities/activity-activation-dialog.hbs",
@@ -141,6 +142,23 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			};
 		}
 		return types;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create scaling range and value.
+	 * @param {object} context - Context data being prepared.
+	 */
+	_prepareScaling(context) {
+		context.scalingData ??= {};
+		const scale = this.activity.consumption.scale;
+		if (context.scaling !== false && scale.allowed && !this.activity.isSpell) {
+			context.scalingData.max = scale.max
+				? simplifyBonus(scale.max, this.activity.item.getRollData({ deterministic: true }))
+				: Infinity;
+			context.scalingData.value = Math.clamp(context.scaling ?? 0, 0, context.scalingData.max);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -183,7 +183,7 @@ export default class HealingActivity extends Activity {
 		);
 
 		const rollConfig = foundry.utils.mergeObject({ allowCritical: false }, config);
-		rollConfig.scaling = rollData.scale?.increase ?? 0;
+		rollConfig.scaling = rollData.scaling?.increase ?? 0;
 		rollConfig.rolls = [
 			{
 				data,

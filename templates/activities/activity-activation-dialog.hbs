@@ -1,7 +1,23 @@
 <form>
 
-	<!-- For smaller values, display slider -->
-	<!-- For larger values (> 20) or infinite, show input box -->
+	{{#if show.scaling}}
+		<fieldset>
+			<legend>{{ localize "BF.Consumption.Scaling.Label" }}</legend>
+			{{#if show.scalingRange}}
+				<input type="range" class="scaling-slider" name="scaling" min="0" max="{{ scalingData.max }}" step="1"
+				       value="{{ scalingData.value }}">
+			{{/if}}
+			<label>
+				<span>{{ localize "BF.Consumption.Scaling.Increase" }}</span>
+				<input type="number" value="{{ scalingData.value }}" min="0" max="{{ scalingData.max }}"
+				       step="1" {{~#if show.scalingRange}} readonly{{else}} name="scaling"{{/if}}>
+			</label>
+			<label>
+				<span>{{ localize "BF.Consumption.MaxScaling.Label" }}</span>
+				<span>{{ scalingData.max }}</span>
+			</label>
+		</fieldset>
+	{{/if}}
 
 	{{#if show.spellCircleSelection}}
 		<div class="form-group">
@@ -13,31 +29,34 @@
 			</div>
 		</div>
 	{{/if}}
-	
-	{{#if show.spellConsumption}}
-		<div class="form-group">
-			<label class="checkbox">
-				<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>
-				{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}
-			</label>
-		</div>
-	{{/if}}
 
-	{{#if show.actionConsumption}}
-		<div class="form-group">
-			<label class="checkbox">
-				<input type="checkbox" name="consume.action" {{ checked consume.action }}>
-				{{ localize "BF.Consumption.Type.PromptGeneric" type=activity.activation.label }}
-			</label>
-		</div>
-	{{/if}}
+	{{#if show.anyConsumption}}
+		<fieldset class="consumption">
+			<legend>{{ localize "BF.Consumption.Label" }}</legend>
 
-	{{#if show.resourceConsumption}}
-		<multi-checkbox name="consume.resources">
-			{{#each resources}}
-				<option value="{{ @key }}" {{ifThen selected "selected" ""}}>{{ label }}</option>
-			{{/each}}
-		</multi-checkbox>
+			{{#if show.spellConsumption}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}</span>
+					<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>
+				</label>
+			{{/if}}
+
+			{{#if show.actionConsumption}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Consumption.Type.PromptGeneric" type=activity.activation.label }}</span>
+					<input type="checkbox" name="consume.action" {{ checked consume.action }}>
+				</label>
+			{{/if}}
+
+			{{#if show.resourceConsumption}}
+				<multi-checkbox name="consume.resources">
+					{{#each resources}}
+						<option value="{{ @key }}" {{ifThen selected "selected" ""}}>{{ label }}</option>
+					{{/each}}
+				</multi-checkbox>
+			{{/if}}
+
+		</fieldset>
 	{{/if}}
 
 </form>

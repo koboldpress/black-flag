@@ -289,12 +289,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			const circle = activationConfig.spell?.circle;
 			if (circle && circle !== item.system.circle.base) {
 				scaleUpdate["system.circle.value"] = circle;
-				config.scaling = circle - item.system.circle.base;
+				activationConfig.scaling = circle - item.system.circle.base;
 			}
 		}
-		if (config.scaling) {
-			scaleUpdate[`flags.${game.system.id}.scaling`] = config.scaling;
-			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, config.scaling);
+		if (activationConfig.scaling) {
+			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
+			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
 			item.updateSource(scaleUpdate);
 			item.prepareData();
 			item.system.prepareFinalData?.();

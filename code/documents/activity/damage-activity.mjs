@@ -156,7 +156,7 @@ export default class DamageActivity extends Activity {
 		rollData.mod = this.damageModifier;
 
 		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.scaling = rollData.scale?.increase ?? 0;
+		rollConfig.scaling = rollData.scaling?.increase ?? 0;
 		rollConfig.rolls = [];
 
 		for (const damage of this.system.damage?.parts ?? []) {
