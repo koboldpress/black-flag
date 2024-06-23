@@ -21,12 +21,19 @@
             {
               "type": "spellSlots",
               "target": "1",
-              "value": "1"
+              "value": "1",
+              "scaling": {
+                "mode": "circle",
+                "formula": ""
+              }
             },
             {
               "type": "item",
               "target": "",
-              "value": "-1"
+              "value": "-1",
+              "scaling": {
+                "mode": "amount"
+              }
             }
           ],
           "scale": {
@@ -78,16 +85,23 @@
             {
               "type": "item",
               "target": "",
-              "value": "1 + @scaling + floor(@scaling / 3)"
+              "value": "1 + @scaling + floor(@scaling / 3)",
+              "scaling": {
+                "mode": ""
+              }
             },
             {
               "type": "spellSlots",
               "target": "1",
-              "value": "-1"
+              "value": "-1",
+              "scaling": {
+                "mode": "circle"
+              }
             }
           ],
           "scale": {
-            "allowed": false
+            "allowed": true,
+            "max": "5"
           }
         },
         "duration": {
@@ -169,7 +183,7 @@
     "systemVersion": "0.9.036",
     "coreVersion": "11.315",
     "createdTime": 1718682038996,
-    "modifiedTime": 1718734798286,
+    "modifiedTime": 1719168031617,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!U7TtFFdzkbVMNQ2D"

@@ -16,7 +16,8 @@
             "denomination": 0,
             "bonus": "",
             "custom": {
-              "formula": "@scaling"
+              "formula": "@scaling",
+              "enabled": true
             },
             "scaling": {
               "mode": ""
@@ -34,7 +35,11 @@
             {
               "type": "item",
               "target": "",
-              "value": "1"
+              "value": "1",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
             }
           ],
           "scale": {
@@ -82,7 +87,8 @@
             "denomination": 0,
             "bonus": "",
             "custom": {
-              "formula": "@scaling"
+              "formula": "@scaling",
+              "enabled": true
             },
             "scaling": {
               "mode": ""
@@ -100,7 +106,10 @@
             {
               "type": "item",
               "target": "",
-              "value": "1"
+              "value": "1",
+              "scaling": {
+                "mode": "amount"
+              }
             }
           ],
           "scale": {
@@ -148,7 +157,9 @@
             "type": "healing",
             "denomination": 0,
             "bonus": "",
-            "custom": ""
+            "custom": {
+              "enabled": false
+            }
           },
           "ability": ""
         },
@@ -249,7 +260,7 @@
     "systemVersion": "0.9.036",
     "coreVersion": "11.315",
     "createdTime": 1718399639980,
-    "modifiedTime": 1718754692137,
+    "modifiedTime": 1719168184818,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YluACRMApSz4ANoS"
