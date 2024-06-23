@@ -4,13 +4,13 @@
 		<fieldset>
 			<legend>{{ localize "BF.Consumption.Scaling.Label" }}</legend>
 			{{#if show.scalingRange}}
-				<input type="range" class="scaling-slider" name="scaling" min="0" max="{{ scalingData.max }}" step="1"
+				<input type="range" class="scaling-slider" name="adjustedScaling" min="1" max="{{ scalingData.max }}" step="1"
 				       value="{{ scalingData.value }}">
 			{{/if}}
 			<label>
-				<span>{{ localize "BF.Consumption.Scaling.Increase" }}</span>
+				<span>{{ localize "BF.Consumption.Scaling.Label" }}</span>
 				<input type="number" value="{{ scalingData.value }}" min="0" max="{{ scalingData.max }}"
-				       step="1" {{~#if show.scalingRange}} readonly{{else}} name="scaling"{{/if}}>
+				       step="1" {{~#if show.scalingRange}} readonly{{else}} name="adjustedScaling"{{/if}}>
 			</label>
 			<label>
 				<span>{{ localize "BF.Consumption.MaxScaling.Label" }}</span>

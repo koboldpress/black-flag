@@ -67,9 +67,9 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 							icon: `<i class="fa-solid fa-${activity.isSpell ? "magic" : "fist-raised"}"></i>`,
 							label: game.i18n.localize(activity.activationLabel),
 							callback: html => {
-								const formData = new FormDataExtended(html.querySelector("form"));
-								foundry.utils.mergeObject(config, formData.object);
-								resolve(formData.object);
+								const formData = this._getFormData(html.querySelector("form"));
+								foundry.utils.mergeObject(config, formData);
+								resolve(formData);
 							}
 						}
 						// TODO: Support custom buttons?
@@ -157,7 +157,7 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			context.scalingData.max = scale.max
 				? simplifyBonus(scale.max, this.activity.item.getRollData({ deterministic: true }))
 				: Infinity;
-			context.scalingData.value = Math.clamp(context.scaling ?? 0, 0, context.scalingData.max);
+			context.scalingData.value = Math.clamp((context.scaling ?? 0) + 1, 1, context.scalingData.max);
 		}
 	}
 
@@ -205,13 +205,29 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Retrieve the data from the dialog's form, adjusting scaling as necessary.
+	 * @param {HTMLFormElement} form - The dialog's form element.
+	 * @returns {object}
+	 */
+	static _getFormData(form) {
+		const formData = new FormDataExtended(form);
+		const data = formData.object;
+		if ("adjustedScaling" in data) {
+			data.scaling = data.adjustedScaling - 1;
+			delete data.adjustedScaling;
+		}
+		return data;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Handle re-rendering the form when inputs are changed.
 	 * @param {Event} event - The initial change event.
 	 * @protected
 	 */
 	async _onChangeInput(event) {
-		const form = event.target.form ?? event.target.closest("form");
-		const formData = new FormDataExtended(form).object;
+		const formData = this.constructor._getFormData(event.target.form ?? event.target.closest("form"));
 		formData["consume.resources"] ??= false;
 		foundry.utils.mergeObject(this.config, formData);
 		this.render();
