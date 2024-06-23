@@ -50,7 +50,8 @@
 		{{#if consumption.scaling.mode}}
 			<label class="scaling-formula">
 				<span>{{ localize "BF.Consumption.Scaling.Formula.Label" }}</span>
-				<input type="text" name="{{ prefix }}scaling.formula" value="{{ consumption.scaling.formula }}">
+				<input type="text" name="{{ prefix }}scaling.formula" value="{{ consumption.scaling.formula }}"
+				       placeholder="{{ localize 'BF.Consumption.Scaling.Formula.Automatic' }}">
 			</label>
 		{{/if}}
 	</div>
