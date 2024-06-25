@@ -7,6 +7,17 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
 
 /**
  * Configuration data for the attack activity.
+ *
+ * @property {object} type
+ * @property {string} type.value - Is this a melee or ranged attack?
+ * @property {string} type.classification - Is this a weapon or spell attack?
+ * @property {string} ability - Ability used with the attack if not automatically calculated.
+ * @property {object} attack
+ * @property {string} attack.bonus - Bonus added to the attack to hit.
+ * @property {boolean} attack.flat - Should only the bonus be used for calculating to hit?
+ * @property {object} damage
+ * @property {boolean} damage.includeBaseDamage - Should a item's base damage be included with any other damage parts?
+ * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  */
 export class AttackData extends foundry.abstract.DataModel {
 	/** @inheritDoc */

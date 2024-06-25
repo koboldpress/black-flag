@@ -8,8 +8,8 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  *
  * @property {object} template
  * @property {number} template.count - Number of templates to create.
- * @property {string} template.size - Primary template size.
  * @property {string} template.type - Type of template (e.g. sphere, cone, line)
+ * @property {string} template.size - Primary template size.
  * @property {string} template.width - Width of the template if relevant.
  * @property {string} template.height - Height of the template if relevant.
  * @property {string} template.units - Units used to measure the template.
@@ -28,8 +28,8 @@ export default class TargetField extends SchemaField {
 			template: new SchemaField(
 				{
 					count: new NumberField({ initial: 1, positive: true, integer: true }),
-					size: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Label" }),
 					type: new StringField({ label: "BF.AreaOfEffect.Type.Label" }),
+					size: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Label" }),
 					width: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Width.Label" }),
 					height: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Height.Label" }),
 					units: new StringField({ initial: "foot", label: "BF.AreaOfEffect.Units.Label" })

@@ -4,6 +4,12 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Concept items (class, background, lineage, heritage).
+ *
+ * @property {object} description
+ * @property {string} description.short - Brief description that appears in the selection dialog.
+ * @property {string} description.journal - UUID of a journal page describing this item in further detail.
+ * @property {object} identifier
+ * @property {string} identifier.value - This item's unique identifier.
  */
 export default class ConceptTemplate extends foundry.abstract.DataModel {
 

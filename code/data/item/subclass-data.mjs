@@ -11,6 +11,9 @@ const { SchemaField } = foundry.data.fields;
  * @mixes {AdvancementTemplate}
  * @mixes {ConceptTemplate}
  * @mixes {DescriptionTemplate}
+ *
+ * @property {object} identifier
+ * @property {string} identifier.class - Class with which this subclass is associated.
  */
 export default class SubclassData extends ItemDataModel.mixin(
 	AdvancementTemplate,

@@ -11,6 +11,11 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * Data definition for Currency items.
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
+ *
+ * @property {object} identifier
+ * @property {string} identifier.value - Unique identifier for this currency.
+ * @property {object} conversion
+ * @property {number} conversion.value - Rate at which this currency is converted into a standard baseline.
  */
 export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 	/** @inheritDoc */

@@ -10,6 +10,8 @@ const { ColorField } = foundry.data.fields;
  * @mixes {AdvancementTemplate}
  * @mixes {ConceptTemplate}
  * @mixes {DescriptionTemplate}
+ *
+ * @property {string} color - Color used to represent this class, used to tinting headers.
  */
 export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate, DescriptionTemplate) {
 	/** @inheritDoc */

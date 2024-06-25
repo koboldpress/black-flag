@@ -4,6 +4,9 @@ import UsesField from "../../fields/uses-field.mjs";
 
 /**
  * Data definition template for items with activities.
+ *
+ * @property {ActivityField} activities - Activities contained in this item.
+ * @property {UsesField} uses - Uses and recovery details.
  */
 export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 

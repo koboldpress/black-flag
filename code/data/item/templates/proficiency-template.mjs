@@ -5,6 +5,10 @@ const { BooleanField, SchemaField } = foundry.data.fields;
 
 /**
  * Data definition template for items with proficiency.
+ *
+ * @property {object} overrides
+ * @property {boolean} overrides.proficiency - Is the user always proficient (`true`), never proficient (`false`),
+ *                                             or should it be calculated automatically (`null`).
  */
 export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 

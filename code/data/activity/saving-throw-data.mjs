@@ -6,6 +6,13 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the saving throw activity.
+ *
+ * @property {string} ability - Ability required when rolling a saving throw.
+ * @property {object} damage
+ * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
+ * @property {object} dc
+ * @property {string} dc.ability - Ability used to calculate the DC if not automatically calculated.
+ * @property {string} dc.formula - DC formula if manually set.
  */
 export class SavingThrowData extends foundry.abstract.DataModel {
 	/** @inheritDoc */

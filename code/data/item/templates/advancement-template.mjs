@@ -3,6 +3,8 @@ import { AdvancementField } from "../../fields/advancement-field.mjs";
 
 /**
  * Data definition template for items with advancement.
+ *
+ * @property {AdvancementField} advancement - Advancement for this item.
  */
 export default class AdvancementTemplate extends foundry.abstract.DataModel {
 

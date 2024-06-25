@@ -6,6 +6,14 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data model for consumption targets.
+ *
+ * @property {string} type             Type of consumption (e.g. activity uses, item uses, hit die, spell slot).
+ * @property {string} target           Target of the consumption depending on the selected type (e.g. item's ID, hit
+ *                                     die denomination, spell slot circle).
+ * @property {string} value            Formula that determines amount consumed or recovered.
+ * @property {object} scaling
+ * @property {string} scaling.mode     Scaling mode (e.g. no scaling, scale target amount, scale spell circle).
+ * @property {string} scaling.formula  Specific scaling formula if not automatically calculated from target's value.
  */
 export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static defineSchema() {

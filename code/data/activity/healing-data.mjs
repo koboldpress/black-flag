@@ -6,7 +6,7 @@ const { StringField } = foundry.data.fields;
 /**
  * Configuration data for the Healing activity.
  * @property {string} ability - Ability used in evaluating healing formula.
- * @property {object} healing - Healing value.
+ * @property {ExtendedDamageData} healing - Healing value.
  */
 export class HealingData extends foundry.abstract.DataModel {
 	/** @inheritDoc */

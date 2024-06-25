@@ -21,6 +21,26 @@ const {
 
 /**
  * Data model for activities.
+ *
+ * @property {string} _id - Unique ID for the activity on an item.
+ * @property {string} type - Type name of the activity used to build a specific activity class.
+ * @property {string} name - Name for this activity.
+ * @property {string} img - Image that represents this activity.
+ * @property {*} system - Type-specific data.
+ * @property {ActivationField} activation
+ * @property {number} activation.primary - Is this the primary activation for this item? Mainly used to indicate what
+ *                                         activity corresponds with casting a spell.
+ * @property {object} consumption
+ * @property {ConsumptionTargetData[]} consumption.targets - Collection of consumption targets.
+ * @property {object} consumption.scaling
+ * @property {boolean} consumption.scaling.allowed - Can this non-spell activity be activated at higher levels?
+ * @property {string} consumption.scaling.max - Maximum number of scaling levels for this item.
+ * @property {DurationField} duration
+ * @property {boolean} duration.override - Should the item's duration be overridden?
+ * @property {RangeField} range
+ * @property {TargetField} target
+ * @property {boolean} target.override - Should the item's targeting data be overridden?
+ * @property {UsesField} uses
  */
 export default class BaseActivity extends foundry.abstract.DataModel {
 	/**

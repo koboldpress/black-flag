@@ -13,6 +13,24 @@ export default class UsesField extends EmbeddedDataField {
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
+/**
+ * Data for a recovery profile for an activity's uses.
+ *
+ * @typedef {object} UsesRecoveryData
+ * @property {string} period   Period at which this profile is activated.
+ * @property {string} type     Whether uses are reset to full, reset to zero, or recover a certain number of uses.
+ * @property {string} formula  Formula used to determine recovery if type is not reset.
+ */
+
+/**
+ * Data for uses on an item or activity.
+ *
+ * @property {number} spent                 Number of uses that have been spent.
+ * @property {string} min                   Formula for the minimum range of the uses.
+ * @property {string} max                   Formula for the maximum number of uses.
+ * @property {boolean} consumeQuantity      For items with quantity, should the quantity be reduced if all uses spent?
+ * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
+ */
 export class UsesData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
