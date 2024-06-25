@@ -5,15 +5,9 @@ import DocumentSheetAssociatedElement from "./document-sheet-associated-element.
  * Custom element for displaying the actions on the actor sheets.
  */
 export default class ActionsElement extends DocumentSheetAssociatedElement {
-	constructor() {
-		super();
-		this.#controller = new AbortController();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		const { signal } = this.#controller;
 
 		// Attach listeners to buttons

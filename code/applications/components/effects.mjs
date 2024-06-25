@@ -6,16 +6,10 @@ import DocumentSheetAssociatedElement from "./document-sheet-associated-element.
  * Custom element for displaying the active effects on actor or item sheets.
  */
 export default class EffectsElement extends DocumentSheetAssociatedElement {
-	constructor() {
-		super();
-		this.#controller = new AbortController();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		const { signal } = this.#controller;
 
 		for (const element of this.querySelectorAll("[data-action]")) {

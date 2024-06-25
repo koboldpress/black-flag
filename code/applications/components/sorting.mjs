@@ -6,7 +6,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
 export default class SortingElement extends AppAssociatedElement {
 	constructor() {
 		super();
-		this.#controller = new AbortController();
 		this.#tab = this.getAttribute("tab");
 	}
 
@@ -14,6 +13,7 @@ export default class SortingElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		for (const input of this.querySelectorAll('input[type="radio"]')) {
 			input.name ??= `${this.tab}-sort`;
 			if (input.value === this.sorting) input.checked = true;

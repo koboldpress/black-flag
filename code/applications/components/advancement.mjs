@@ -8,16 +8,10 @@ import DocumentSheetAssociatedElement from "./document-sheet-associated-element.
  * Custom element for displaying the advancement on an item sheet.
  */
 export default class AdvancementElement extends DocumentSheetAssociatedElement {
-	constructor() {
-		super();
-		this.#controller = new AbortController();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		const { signal } = this.#controller;
 
 		this.addEventListener("drop", this._onDrop.bind(this), { signal });

@@ -9,7 +9,6 @@ import SortingElement from "./sorting.mjs";
 export default class InventoryElement extends DocumentSheetAssociatedElement {
 	constructor() {
 		super();
-		this.#controller = new AbortController();
 		this.#tab = this.getAttribute("tab");
 	}
 
@@ -18,6 +17,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	/** @inheritDoc */
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		const { signal } = this.#controller;
 
 		this.addEventListener("drop", this._onDrop.bind(this), { signal });

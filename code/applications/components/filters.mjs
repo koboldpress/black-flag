@@ -6,7 +6,6 @@ import AppAssociatedElement from "./app-associated-element.mjs";
 export default class FiltersElement extends AppAssociatedElement {
 	constructor() {
 		super();
-		this.#controller = new AbortController();
 		this.#tab = this.getAttribute("tab");
 	}
 
@@ -14,6 +13,7 @@ export default class FiltersElement extends AppAssociatedElement {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.#controller = new AbortController();
 		this.addEventListener("change", this.#onChangeFilter.bind(this), { signal: this.#controller.signal });
 	}
 
