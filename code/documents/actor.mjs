@@ -558,10 +558,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @internal
 	 */
 	_getRestSpellSlotRecovery(config = {}, result = {}) {
-		if (!this.system.spellcasting?.circles)
-			for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
-				this.system.getRestSpellcastingRecovery?.(type, config, result);
-			}
+		if (!this.system.spellcasting?.circles) return;
+		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
+			this.system.getRestSpellcastingRecovery?.(type, config, result);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
