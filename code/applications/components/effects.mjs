@@ -1,5 +1,6 @@
 import { log } from "../../utils/_module.mjs";
 import BlackFlagContextMenu from "../context-menu.mjs";
+import DragDrop from "../drag-drop.mjs";
 import DocumentSheetAssociatedElement from "./document-sheet-associated-element.mjs";
 
 /**
@@ -11,6 +12,13 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		super.connectedCallback();
 		this.#controller = new AbortController();
 		const { signal } = this.#controller;
+
+		this.addEventListener("drop", this._onDrop.bind(this), { signal });
+
+		for (const element of this.querySelectorAll("[data-effect-id]")) {
+			element.setAttribute("draggable", true);
+			element.ondragstart = this._onDragStart.bind(this);
+		}
 
 		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
@@ -39,6 +47,13 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		}
 
 		new BlackFlagContextMenu(this, "[data-effect-id]", [], { onOpen: this._onContextMenu.bind(this) });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	disconnectedCallback() {
+		this.#controller.abort();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -229,6 +244,70 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
 		Hooks.call("blackFlag.getEffectsContext", this, effect, ui.context.menuItems);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Begin dragging an entry.
+	 * @param {DragEvent} event - Triggering drag event.
+	 */
+	_onDragStart(event) {
+		const effect = this.getEffect(event.currentTarget.dataset);
+		DragDrop.beginDragEvent(event, effect);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * An entry is dropped onto the element.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @returns {Promise}
+	 */
+	async _onDrop(event) {
+		event.preventDefault();
+		event.stopImmediatePropagation();
+
+		if (!this.isEditable) return false;
+
+		const { data } = DragDrop.getDragData(event);
+		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
+
+		try {
+			const effect = (await fromUuid(data.uuid)).toObject() ?? data.data;
+			if (!effect) return false;
+			return this.constructor.dropEffects(event, this.document, [effect]);
+		} finally {
+			DragDrop.finishDragEvent(event);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can the dragged document be dropped?
+	 * @param {object} data
+	 * @returns {boolean}
+	 */
+	_validateDrop(data) {
+		if (data.type !== "ActiveEffect") return false;
+		if (!data.uuid) return true;
+		return !data.uuid.startsWith(this.document.uuid);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle an effect dropped onto the sheet.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {BlackFlagItem} target - Document to which the advancement was dropped.
+	 * @param {BlackFlagActiveEffect[]} effectData - One or more effects dropped.
+	 * @returns {Promise}
+	 */
+	static async dropEffects(event, target, effectData) {
+		target.createEmbeddedDocuments("ActiveEffect", effectData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

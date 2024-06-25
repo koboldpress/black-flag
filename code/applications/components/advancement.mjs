@@ -173,6 +173,13 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	 * @returns {Promise|void}
 	 */
 	_onAction(target, action) {
+		const event = new CustomEvent("bf-advancement", {
+			bubbles: true,
+			cancelable: true,
+			detail: action
+		});
+		if (target.dispatchEvent(event) === false) return;
+
 		const id = target.closest("[data-advancement-id]")?.dataset.advancementId;
 		const advancement = this.advancement.get(id);
 		if (["edit", "delete", "duplicate"].includes(action) && !advancement) return;

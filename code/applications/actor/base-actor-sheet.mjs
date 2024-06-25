@@ -448,9 +448,16 @@ export default class BaseActorSheet extends ActorSheet {
 	async _onDrop(event) {
 		const { data } = DragDrop.getDragData(event);
 
-		// Forward dropped items to the inventory element
 		// TODO: Handle folders
-		if (data.type === "Item") {
+		// Forward dropped effects to the effects element
+		if (data.type === "ActiveEffect") {
+			if (Hooks.call("dropActorSheetData", this.actor, this, data) === false) return;
+			EffectsElement.dropEffects(event, this.actor, [await ActiveEffect.implementation.fromDropData(data)]);
+			return;
+		}
+
+		// Forward dropped items to the inventory element
+		else if (data.type === "Item") {
 			if (Hooks.call("dropActorSheetData", this.actor, this, data) === false) return;
 			InventoryElement.dropItems(event, this.actor, [await Item.implementation.fromDropData(data)]);
 			return;
