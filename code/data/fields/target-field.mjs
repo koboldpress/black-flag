@@ -8,6 +8,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  *
  * @property {object} template
  * @property {number} template.count - Number of templates to create.
+ * @property {boolean} template.connected - Must all created areas be connected to one another?
  * @property {string} template.type - Type of template (e.g. sphere, cone, line)
  * @property {string} template.size - Primary template size.
  * @property {string} template.width - Width of the template if relevant.
@@ -25,26 +26,21 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 export default class TargetField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
-			template: new SchemaField(
-				{
-					count: new NumberField({ initial: 1, positive: true, integer: true }),
-					type: new StringField({ label: "BF.AreaOfEffect.Type.Label" }),
-					size: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Label" }),
-					width: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Width.Label" }),
-					height: new FormulaField({ deterministic: true, label: "BF.AreaOfEffect.Size.Height.Label" }),
-					units: new StringField({ initial: "foot", label: "BF.AreaOfEffect.Units.Label" })
-				},
-				{ label: "BF.AreaOfEffect.Label" }
-			),
-			affects: new SchemaField(
-				{
-					count: new FormulaField({ deterministic: true, label: "BF.Target.Count.Label" }),
-					type: new StringField({ label: "BF.Target.Type.Label" }),
-					choice: new BooleanField(),
-					special: new StringField({ label: "BF.Target.Special.Label" })
-				},
-				{ label: "BF.Target.Label[one]" }
-			),
+			template: new SchemaField({
+				count: new NumberField({ initial: 1, positive: true, integer: true }),
+				contiguous: new BooleanField(),
+				type: new StringField(),
+				size: new FormulaField({ deterministic: true }),
+				width: new FormulaField({ deterministic: true }),
+				height: new FormulaField({ deterministic: true }),
+				units: new StringField({ initial: "foot" })
+			}),
+			affects: new SchemaField({
+				count: new FormulaField({ deterministic: true }),
+				type: new StringField(),
+				choice: new BooleanField(),
+				special: new StringField()
+			}),
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));

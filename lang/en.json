@@ -602,7 +602,6 @@
 		}
 	},
 	"Type": {
-		"Label": "Area Type",
 		"Cone": {
 			"Label[one]": "Cone",
 			"Label[other]": "Cones"
@@ -634,9 +633,6 @@
 			"Label[one]": "Square",
 			"Label[other]": "Squares"
 		}
-	},
-	"Units": {
-		"Label": "Area Units"
 	}
 },
 
@@ -2762,9 +2758,6 @@
 	"Override": {
 		"Label": "Override Targeting"
 	},
-	"Special": {
-		"Label": "Special Target"
-	},
 	"Type": {
 		"Label": "Target Type",
 		"Ally": {
@@ -2797,6 +2790,61 @@
 		"WillingCreature": {
 			"Label[one]": "Willing Creature",
 			"Label[other]": "Willing Creatures"
+		}
+	}
+},
+
+"BF.TARGET": {
+	"FIELDS": {
+		"affects": {
+			"label": "Affected Targets",
+			"choice": {
+				"label": "Choose Targets",
+				"hint": "Can the user choose which of the targets in the area they affect?"
+			},
+			"count": {
+				"label": "Target Count",
+				"hint": "Number of individual targets that can be affected."
+			},
+			"special": {
+				"label": "Special Targeting",
+				"hint": "Description of any special targeting details."
+			},
+			"type": {
+				"label": "Target Type",
+				"hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
+			}
+		},
+		"template": {
+			"label": "Area of Effect",
+			"contiguous": {
+				"label": "Contiguous Areas",
+				"hint": "Must all created areas be connected to one another?"
+			},
+			"count": {
+				"label": "Area Count",
+				"hint": "Number of distinct areas that can be targeted."
+			},
+			"height": {
+				"label": "Area Height",
+				"hint": "Height of a cylinder affected if applicable."
+			},
+			"size": {
+				"label": "Area Size",
+				"hint": "Size of the area of effect on its primary axis."
+			},
+			"type": {
+				"label": "Area Type",
+				"hint": "Type of area of effect targeted."
+			},
+			"units": {
+				"label": "Area Units",
+				"hint": "Units used to measure the area of effect sizes."
+			},
+			"width": {
+				"label": "Area Width",
+				"hint": "Width of a line affected if applicable."
+			}
 		}
 	}
 },
