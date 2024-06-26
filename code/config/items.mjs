@@ -73,6 +73,10 @@ export const featureCategories = {
 				localization: "BF.Feature.Type.DragonAncestor",
 				level: false
 			},
+			eldritchInvocation: {
+				localization: "BF.Feature.Type.EldritchInvocation",
+				level: false
+			},
 			elementalInfusion: {
 				localization: "BF.Feature.Type.ElementalInfusion"
 			},
@@ -91,6 +95,9 @@ export const featureCategories = {
 			},
 			metamagicOption: {
 				localization: "BF.Feature.Type.MetamagicOption"
+			},
+			pactBoon: {
+				localization: "BF.Feature.Type.PactBoon"
 			},
 			stunt: {
 				localization: "BF.Feature.Type.Stunt"

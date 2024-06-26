@@ -60,8 +60,8 @@ export default class FeatureSheet extends BaseItemSheet {
 				};
 			}
 
-			if (context.system.type.category === "class") {
-				context.type.displayLevel = true;
+			if (context.system.type.category === "class" && (featureType || context.system.identifier.associated)) {
+				context.type.displayLevel = featureType?.level !== false;
 				context.type.fixedLevel = featureType?.level;
 			}
 		} else if (this.document.type === "talent") {
