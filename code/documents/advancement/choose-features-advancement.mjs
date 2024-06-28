@@ -154,13 +154,14 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	 * Verify that the provided item can be used with this advancement based on the configuration.
 	 * @param {BlackFlagItem} item - Item that needs to be tested.
 	 * @param {object} config
-	 * @param {string} config.type - Type restriction on this advancement.
-	 * @param {object} config.restriction - Additional restrictions to be applied.
+	 * @param {boolean} [config.flow=false] - Is this restriction being done during the flow process?
+	 * @param {string} [config.type] - Type restriction on this advancement.
+	 * @param {object} [config.restriction] - Additional restrictions to be applied.
 	 * @param {boolean} [config.strict=true] - Should an error be thrown when an invalid type is encountered?
 	 * @returns {boolean} - Is this type valid?
 	 * @throws An error if the item is invalid and strict is `true`.
 	 */
-	_validateItemType(item, { type, restriction, strict = true } = {}) {
+	_validateItemType(item, { flow = false, type, restriction, strict = true } = {}) {
 		super._validateItemType(item, { strict });
 		type ??= this.configuration.type;
 		restriction ??= this.configuration.restriction;
@@ -191,7 +192,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		}
 
 		// Check restrictions defined by the dropped item
-		if (this.actor) {
+		if (this.actor && flow) {
 			const messages = item.system.validatePrerequisites(this.actor);
 			if (messages !== true) {
 				if (strict) {

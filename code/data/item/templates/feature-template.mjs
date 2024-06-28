@@ -1,13 +1,14 @@
-import { filter, numberFormat, Trait } from "../../../utils/_module.mjs";
+import { filter, linkForUUID, numberFormat, Trait } from "../../../utils/_module.mjs";
 import FilterField from "../../fields/filter-field.mjs";
 
-const { BooleanField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition template for Feature and Talent items.
  *
  * @property {object} restriction
  * @property {FilterField} restriction.filters - Filters limiting when this item can be selected.
+ * @property {Set<string>} restriction.items - Other items that must be present on the actor to take this feature.
  * @property {boolean} restriction.requireAll - Do all filters need to be satisfied to take this feature, or only one.
  * @property {object} type
  * @property {string} type.category - Feature or talent category for this item.
@@ -29,6 +30,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		return {
 			restriction: new SchemaField({
 				filters: new FilterField(),
+				items: new SetField(new StringField()),
 				requireAll: new BooleanField({
 					initial: true,
 					label: "BF.Prerequisite.RequireAll.Label",
@@ -114,7 +116,6 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 * @returns {string} - Prerequisite label, will contains HTML if actor is provided.
 	 */
 	createPrerequisiteLabel(actor) {
-		if ( !this.restriction.filters.length ) return "";
 		const prerequisites = [];
 
 		const validate = (f, label) => {
@@ -183,6 +184,15 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 			"BF.Prerequisite.Size.Label", { size: game.i18n.localize(CONFIG.BlackFlag.sizes[filters.creatureSize.v]?.label) }
 		)));
 
+		// Other Items
+		for ( const uuid of this.restriction.items ) {
+			const doc = fromUuidSync(uuid);
+			if ( !doc ) continue;
+			let label = linkForUUID(uuid);
+			if ( actor ) label = `${label} <i class="filter ${actor.sourcedItems.get(uuid)?.size ? "" : "in"}valid"></i>`;
+			prerequisites.push(label);
+		}
+
 		// TODO: Send out hook for custom filter handling
 
 		if ( !prerequisites.length ) return "";
@@ -200,12 +210,15 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 * @returns {true|string[]} - True if the item is valid, or a list of invalid descriptions if not.
 	 */
 	validatePrerequisites(actor) {
+		let missingItems = this.restriction.items.filter(uuid => !actor.sourcedItems.get(uuid)?.size);
+
 		let invalidFilters;
 		if ( this.restriction.requireAll ) {
 			invalidFilters = this.restriction.filters.filter(f => !filter.performCheck(actor, [f]));
-			if ( !invalidFilters.length ) return true;
+			if ( !invalidFilters.length && !missingItems.size ) return true;
 		} else {
-			if ( this.restriction.filters.some(f => filter.performCheck(actor, [f])) ) return true;
+			const atLeastOneItem = missingItems.size < this.restriction.items.size;
+			if ( this.restriction.filters.some(f => filter.performCheck(actor, [f])) || atLeastOneItem ) return true;
 			invalidFilters = this.restriction.filters;
 		}
 
@@ -273,6 +286,10 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 		if ( proficiencies.length ) messages.push(game.i18n.format("BF.Prerequisite.Proficiency.Warning", {
 			proficiency: game.i18n.getListFormatter({ style: "short" }).format(proficiencies)
+		}));
+
+		for ( const uuid of missingItems ) messages.push(game.i18n.format("BF.Prerequisite.Items.Warning", {
+			name: fromUuidSync(uuid)?.name
 		}));
 
 		return messages;

@@ -52,6 +52,8 @@ export default class PrerequisiteConfig extends DocumentSheet {
 				source: this.document.toObject().system,
 				system: this.document.system,
 				abilities: this.prepareAbilities(filters),
+				isV11: game.release.generation < 12,
+				items: Array.from(this.document.system.restriction.items).join(","),
 				levels: CONFIG.BlackFlag.levels(),
 				proficiencies: this.prepareProficiencies(filters),
 				spellcasting: this.prepareSpellcasting(filters),

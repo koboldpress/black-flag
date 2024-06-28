@@ -61,7 +61,7 @@
 					<div class="prerequisite">
 						<span>
 							{{ localize "BF.Prerequisite.Label" }}: {{#if system.restriction.label}}
-							{{~ system.restriction.label }}{{else}}{{ localize "None" }}{{/if}}
+							{{~{ system.restriction.label }}}{{else}}{{ localize "None" }}{{/if}}
 						</span>
 						{{#if editable}}
 							<a data-action="config" data-type="prerequisite">

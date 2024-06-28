@@ -132,7 +132,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		const item = await Item.implementation.fromDropData(data);
 
 		try {
-			this.advancement._validateItemType(item);
+			this.advancement._validateItemType(item, { flow: true });
 		} catch (err) {
 			return ui.notifications.error(err.message);
 		}
