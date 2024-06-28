@@ -78,11 +78,26 @@
 	<fieldset class="traits">
 		<legend>{{ localize "BF.Trait.Label[other]" }}</legend>
 		<label>
-			<span>{{ localize "BF.Prerequisite.LevelCharacter.ConfigLabel" }}</span>
-			<select name="traits.level" data-dtype="Number">
-				{{ selectOptions levels selected=traits.level blank="" }}
+			<span>
+				{{#if traits.level.class}}
+					{{ localize "BF.Prerequisite.LevelClass.ConfigLabel" }}
+				{{else}}
+					{{ localize "BF.Prerequisite.LevelCharacter.ConfigLabel" }}
+				{{/if}}
+			</span>
+			<select name="traits.level.value" data-dtype="Number">
+				{{ selectOptions levels selected=traits.level.value blank="" }}
 			</select>
 		</label>
+		{{#if traits.level.value}}
+			<label>
+				<span>{{ localize "BF.Advancement.Core.Level.Reference.Label" }}</span>
+				<select name="traits.level.class">
+					{{ selectOptions CONFIG.registration.all.class selected=traits.level.class labelAttr="name"
+				                 	blank=(localize "BF.Prerequisite.LevelCharacter.ConfigLabel") }}
+				</select>
+			</label>
+		{{/if}}
 		<label>
 			<span>{{ localize "BF.Size.Label" }}</span>
 			<select name="traits.size">

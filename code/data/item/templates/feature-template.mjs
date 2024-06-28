@@ -87,7 +87,11 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 * Should be called during the `prepareDerivedData` stage.
 	 */
 	preparePrerequisiteLabel() {
-		this.restriction.label = this.createPrerequisiteLabel();
+		const makeLabel = this.createPrerequisiteLabel.bind(this);
+		Object.defineProperty(this.restriction, "label", {
+			get() { return makeLabel(); },
+			configurable: true
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -180,6 +184,12 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		if ( filters.characterLevel ) prerequisites.push(validate(filters.characterLevel, game.i18n.format(
 			"BF.Prerequisite.LevelCharacter.Label", { level: numberFormat(filters.characterLevel.v, { ordinal: true }) }
 		)));
+		if ( filters.classLevel ) prerequisites.push(validate(filters.classLevel, game.i18n.format(
+			"BF.Prerequisite.LevelClass.Label", {
+				level: numberFormat(filters.classLevel.v, { ordinal: true }),
+				class: CONFIG.BlackFlag.registration.get("class", filters.classLevel._class)?.name ?? "—"
+			}
+		)));
 		if ( filters.creatureSize ) prerequisites.push(validate(filters.creatureSize, game.i18n.format(
 			"BF.Prerequisite.Size.Label", { size: game.i18n.localize(CONFIG.BlackFlag.sizes[filters.creatureSize.v]?.label) }
 		)));
@@ -258,6 +268,12 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 					messages.push(game.i18n.format("BF.Prerequisite.LevelCharacter.Warning", {
 						level: numberFormat(invalidFilter.v, { ordinal: true })
 					}));
+					break;
+				case "classLevel":
+					messages.push(game.i18n.format("BF.Prerequisite.LevelClass.Warning", {
+						level: numberFormat(invalidFilter.v, { ordinal: true }),
+						class: CONFIG.BlackFlag.registration.get("class", invalidFilter._class)?.name ?? "—"
+					}))
 					break;
 				case "creatureSize":
 					messages.push(game.i18n.format("BF.Prerequisite.Size.Warning", {

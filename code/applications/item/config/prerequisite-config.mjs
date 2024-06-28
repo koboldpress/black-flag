@@ -132,8 +132,15 @@ export default class PrerequisiteConfig extends DocumentSheet {
 	 * @returns {object}
 	 */
 	prepareTraits(filters) {
+		const level = {};
+		if (filters.characterLevel) {
+			level.value = filters.characterLevel.v;
+		} else if (filters.classLevel) {
+			level.class = filters.classLevel._class;
+			level.value = filters.classLevel.v;
+		}
 		return {
-			level: filters.characterLevel?.v,
+			level,
 			size: filters.creatureSize?.v
 		};
 	}
@@ -159,11 +166,12 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		const data = foundry.utils.expandObject(formData);
 		const filters = this.filters;
 
-		const updateFilter = (_id, k, v, o) => {
+		const updateFilter = (_id, k, v, o, d = {}) => {
 			const existingIdx = filters.findIndex(f => f._id === _id);
 			if (v) {
-				if (existingIdx !== -1) filters[existingIdx].v = v;
-				else filters.push({ _id, k, v, o });
+				const value = { _id, k, v, o, ...d };
+				if (existingIdx !== -1) filters[existingIdx] = value;
+				else filters.push(value);
 			} else if (existingIdx !== -1) filters.splice(existingIdx, 1);
 		};
 
@@ -226,7 +234,19 @@ export default class PrerequisiteConfig extends DocumentSheet {
 		updateFilter("spellcastingFeature", "system.spellcasting.hasSpellcastingAdvancement", data.spellcasting?.feature);
 
 		// Traits
-		updateFilter("characterLevel", "system.progression.level", data.traits?.level);
+		if (data.traits?.level?.class) {
+			updateFilter("characterLevel");
+			updateFilter(
+				"classLevel",
+				`system.progression.classes.${data.traits.level.class}.levels`,
+				data.traits?.level?.value,
+				undefined,
+				{ _class: data.traits.level.class }
+			);
+		} else {
+			updateFilter("characterLevel", "system.progression.level", data.traits?.level?.value);
+			updateFilter("classLevel");
+		}
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
 
 		super._updateObject(event, { ...formData, "system.restriction.filters": filters });
