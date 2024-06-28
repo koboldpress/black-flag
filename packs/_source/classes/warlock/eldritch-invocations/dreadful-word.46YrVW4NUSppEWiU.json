@@ -1,6 +1,6 @@
 {
   "folder": "8vwDfxwF5uvyGB0H",
-  "name": "Dreaful Word",
+  "name": "Dreadful Word",
   "type": "feature",
   "_id": "46YrVW4NUSppEWiU",
   "img": "systems/black-flag/artwork/types/feature.svg",
@@ -21,7 +21,14 @@
       }
     },
     "restriction": {
-      "filters": [],
+      "filters": [
+        {
+          "_id": "classLevel",
+          "k": "system.progression.classes.warlock.levels",
+          "v": 7,
+          "_class": "warlock"
+        }
+      ],
       "requireAll": true
     },
     "type": {
@@ -32,7 +39,7 @@
       "proficiency": null
     },
     "identifier": {
-      "value": "dreaful-word",
+      "value": "dreadful-word",
       "associated": ""
     },
     "level": {
@@ -50,7 +57,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376520089,
-    "modifiedTime": 1719376754516,
+    "modifiedTime": 1719608097555,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!46YrVW4NUSppEWiU"
