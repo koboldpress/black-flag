@@ -84,24 +84,6 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * The ability used for spellcasting.
-	 * @type {string|null}
-	 */
-	get spellcastingAbility() {
-		if (this.ability) return this.ability;
-
-		let parent = this.parent.item;
-		if (parent?.type === "subclass" && parent.isEmbedded) {
-			parent = parent.actor.system.progression?.classes[parent.system.identifier.class]?.document;
-		}
-
-		const keyAbility = parent?.system.advancement.byType("keyAbility")[0];
-		return keyAbility?.value?.selected ?? null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Summary label for this spellcasting configuration.
 	 * @type {string}
 	 */
@@ -117,6 +99,37 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 				progression: progression ? game.i18n.localize(progression) : ""
 			})
 			.trim();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The max circle available for this advancement in this class or subclass.
+	 * @type {number|null}
+	 */
+	get maxCircle() {
+		const item = this.parent.item;
+		if (!item.actor?.system.progression?.classes) return null;
+		const identifier = item.type === "class" ? item.identifier : item.system.identifier.class;
+		return this.parent.computeMaxCircle(item.actor.system.progression.classes[identifier].levels);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The ability used for spellcasting.
+	 * @type {string|null}
+	 */
+	get spellcastingAbility() {
+		if (this.ability) return this.ability;
+
+		let parent = this.parent.item;
+		if (parent?.type === "subclass" && parent.isEmbedded) {
+			parent = parent.actor.system.progression?.classes[parent.system.identifier.class]?.document;
+		}
+
+		const keyAbility = parent?.system.advancement.byType("keyAbility")[0];
+		return keyAbility?.value?.selected ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
