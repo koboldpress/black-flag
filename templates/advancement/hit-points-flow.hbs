@@ -4,14 +4,14 @@
 		{{> "blackFlag.advancement-name" }}
 		{{#if needsConfiguration}}
 			<div class="advancement-actions">
-				<button type="button" class="light-button" data-action="take-average">
+				<button type="submit" class="light-button" data-action="take-average">
 					{{ localize "BF.Advancement.HitPoints.Action.TakeAverage" }}:
 					<strong>{{ blackFlag-number advancement.average sign=true }}</strong>
 				</button>
 				<span class="or">
 					{{ localize "BF.Advancement.HitPoints.Action.or" }}
 				</span>
-				<button type="button" class="light-button" data-action="roll">
+				<button type="submit" class="light-button" data-action="roll">
 					{{ localize "BF.Roll.Action.RollSpecific" type=(localize "BF.HitDie.Label[one]") }}:
 					<strong>d{{ denomination }}</strong>
 				</button>

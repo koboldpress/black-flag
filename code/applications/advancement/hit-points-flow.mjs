@@ -4,6 +4,7 @@ import AdvancementFlow from "./advancement-flow.mjs";
  * Inline application that presents hit points selection upon level up.
  */
 export default class HitPointsFlow extends AdvancementFlow {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			template: "systems/black-flag/templates/advancement/hit-points-flow.hbs"
@@ -12,6 +13,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	getData() {
 		return foundry.utils.mergeObject(super.getData(), {
 			denomination: this.advancement.configuration.denomination,
@@ -21,6 +23,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _updateObject(event, formData) {
 		const action = event.submitter.dataset.action;
 		const level = this.advancement.relavantLevel(this.levels);
