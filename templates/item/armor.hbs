@@ -27,10 +27,10 @@
 			<section>
 				{{> "blackFlag.equipment-attunement" }}
 				<fieldset class="properties checkbox-list">
-					<legend>{{localize "BF.Property.Label[other]"}}</legend>
+					<legend>{{ localize "BF.Property.Label[other]" }}</legend>
 					{{#each properties}}
 						<label>
-							<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
+							<input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
 						</label>
 					{{/each}}
 				</fieldset>
@@ -38,55 +38,55 @@
 					<legend>{{ localize "BF.Armor.Details" }}</legend>
 					<label class="armor-value">
 						{{#if (eq system.type.category "shield")}}
-							<span>{{localize "BF.Shield.Bonus.Label"}}</span>
+							<span>{{ localize "BF.Shield.Bonus.Label" }}</span>
 							<span>+</span>
-							<input type="number" name="system.armor.value" step=1 min=0 value="{{source.armor.value}}" placeholder="2">
+							<input type="number" name="system.armor.value" step="1" min="0" value="{{ source.armor.value }}"
+							       placeholder="2">
 						{{else}}
-							<span>{{localize "BF.Armor.Value.Label"}}</span>
-							<input type="number" name="system.armor.value" step=1 min=0 value="{{source.armor.value}}">
-							<span>{{modifierHint}}</span>
+							<span>{{ localize "BF.Armor.Value.Label" }}</span>
+							<input type="number" name="system.armor.value" step="1" min="0" value="{{ source.armor.value }}">
+							<span>{{ modifierHint }}</span>
 						{{/if}}
 					</label>
 					{{#if properties.magical.selected}}
 						<label>
-							<span>
+							<span class="hint-label" data-tooltip="BF.Armor.MagicalBonus.Hint">
 								{{ localize "BF.Armor.MagicalBonus.Label" }}
-								<i class="hintIcon" data-tooltip="BF.Armor.MagicalBonus.Hint"></i>
 							</span>
 							<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
 						</label>
 					{{/if}}
 					{{#if properties.cumbersome.selected}}
 						<label class="strength-required">
-							<span>{{localize "BF.Armor.RequiredStrength.Label"}}</span>
-							<input type="number" name="system.armor.requiredStrength" step=1 min=0
-								value="{{source.armor.requiredStrength}}">
+							<span>{{ localize "BF.Armor.RequiredStrength.Label" }}</span>
+							<input type="number" name="system.armor.requiredStrength" step="1" min="0"
+							       value="{{ source.armor.requiredStrength }}">
 						</label>
 					{{/if}}
 				</fieldset>
 				{{> "blackFlag.item-activities" }}
 				<fieldset>
-					<legend>{{localize "BF.Override.Label[other]"}}</legend>
+					<legend>{{ localize "BF.Override.Label[other]" }}</legend>
 					<div class="modifier-overrides field-group">
-						<span>{{localize "BF.Armor.Modifier.Label"}}</span>
+						<span>{{ localize "BF.Armor.Modifier.Label" }}</span>
 						<label class="minimum">
-							<span>{{localize "BF.Number.Minimum"}}</span>
-							<input type="number" name="system.modifier.min" step=1 value="{{source.modifier.min}}"
-								placeholder="{{system.modifier.min}}">
+							<span>{{ localize "BF.Number.Minimum" }}</span>
+							<input type="number" name="system.modifier.min" step="1" value="{{ source.modifier.min }}"
+							       placeholder="{{ system.modifier.min }}">
 						</label>
 						<label class="maximum">
-							<span>{{localize "BF.Number.Maximum"}}</span>
-							<input type="number" name="system.modifier.max" step=1 value="{{source.modifier.max}}"
-								placeholder="{{system.modifier.max}}">
+							<span>{{ localize "BF.Number.Maximum" }}</span>
+							<input type="number" name="system.modifier.max" step="1" value="{{ source.modifier.max }}"
+							       placeholder="{{ system.modifier.max }}">
 						</label>
 					</div>
 					<label>
-						<span>{{localize "BF.Proficiency.Label[one]"}}</span>
+						<span>{{ localize "BF.Proficiency.Label[one]" }}</span>
 						<select name="system.overrides.proficiency">
 							{{#select source.overrides.proficiency}}
-								<option value="null">{{localize "BF.Proficiency.Override.Auto"}}</option>
-								<option value="true">{{localize "BF.Proficiency.Override.Always"}}</option>
-								<option value="false">{{localize "BF.Proficiency.Override.Never"}}</option>
+								<option value="null">{{ localize "BF.Proficiency.Override.Auto" }}</option>
+								<option value="true">{{ localize "BF.Proficiency.Override.Always" }}</option>
+								<option value="false">{{ localize "BF.Proficiency.Override.Never" }}</option>
 							{{/select}}
 						</select>
 					</label>

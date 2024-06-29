@@ -42,9 +42,8 @@
 		<fieldset class="items drop-area drop-target">
 			<legend>{{ localize "BF.Item.Type.Spell[other]" }}</legend>
 			<label class="full-checkbox">
-				<span>
+				<span class="hinted-label" data-tooltip="BF.Advancement.Config.AllowDrops.Hint">
 					{{ localize "BF.Advancement.Config.AllowDrops.Label" }}
-					<i class="hintIcon" data-tooltip="BF.Advancement.Config.AllowDrops.Hint"></i>
 				</span>
 				<input type="checkbox" name="configuration.allowDrops" {{ checked configuration.allowDrops }}>
 			</label>
@@ -68,9 +67,8 @@
 
 	<section class="right-column">
 		<fieldset>
-			<legend>
+			<legend class="hinted-label" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint">
 				{{ localize "BF.Advancement.ChooseFeatures.Choices.Label" }}
-				<i class="hintIcon" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint"></i>
 			</legend>
 			<ol class="level-list">
 				{{#each levels as |label level|}}

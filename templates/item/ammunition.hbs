@@ -35,9 +35,8 @@
 				<fieldset>
 					<legend>{{ localize "BF.Ammunition.Details" }}</legend>
 					<label>
-						<span>
+						<span class="hint-label" data-tooltip="BF.Ammunition.MagicalBonus.Hint">
 							{{ localize "BF.Ammunition.MagicalBonus.Label" }}
-							<i class="hintIcon" data-tooltip="BF.Ammunition.MagicalBonus.Hint"></i>
 						</span>
 						<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
 					</label>

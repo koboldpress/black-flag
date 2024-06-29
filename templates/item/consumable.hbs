@@ -26,10 +26,10 @@
 		<div class="tab" data-group="primary" data-tab="details">
 			<section>
 				<fieldset class="properties checkbox-list">
-					<legend>{{localize "BF.Property.Label[other]"}}</legend>
+					<legend>{{ localize "BF.Property.Label[other]" }}</legend>
 					{{#each properties}}
 						<label>
-							<input type="checkbox" name="system.properties.{{@key}}" {{checked selected}}> {{label}}
+							<input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}> {{ label }}
 						</label>
 					{{/each}}
 				</fieldset>

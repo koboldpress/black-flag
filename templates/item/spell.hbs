@@ -89,50 +89,50 @@
 						<span>{{ localize "BF.Spell.CastingTime.Label" }}</span>
 						{{#if system.casting.scalar}}
 							<label>
-								<span>{{localize "BF.Activation.Cost.Label"}}</span>
-								<input type="number" name="system.casting.value" value="{{source.casting.value}}" min="0" step="1">
+								<span>{{ localize "BF.Activation.Cost.Label" }}</span>
+								<input type="number" name="system.casting.value" value="{{ source.casting.value }}" min="0" step="1">
 							</label>
 						{{/if}}
 						<label>
-							<span>{{localize "BF.Activation.Type.Label"}}</span>
+							<span>{{ localize "BF.Activation.Type.Label" }}</span>
 							<select name="system.casting.type">
-								{{blackFlag-groupedSelectOptions activationOptions}}
+								{{ blackFlag-groupedSelectOptions activationOptions }}
 							</select>
 						</label>
 					</div>
 					<label>
-						<span>{{localize "BF.Activation.Condition.Label"}}</span>
-						<input type="text" name="system.casting.condition" value="{{system.casting.condition}}">
+						<span>{{ localize "BF.Activation.Condition.Label" }}</span>
+						<input type="text" name="system.casting.condition" value="{{ system.casting.condition }}">
 					</label>
 					<div class="field-group">
-						<span>{{localize "BF.Duration.Label"}}</span>
+						<span>{{ localize "BF.Duration.Label" }}</span>
 						{{#if system.duration.scalar}}
 							<label>
-								<span>{{localize "BF.Duration.Value.Label"}}</span>
-								<input type="text" name="system.duration.value" value="{{source.duration.value}}">
+								<span>{{ localize "BF.Duration.Value.Label" }}</span>
+								<input type="text" name="system.duration.value" value="{{ source.duration.value }}">
 							</label>
 							{{!-- TODO: If formula is used, add tooltip to display value at various levels --}}
 						{{/if}}
 						<label>
-							<span>{{localize "BF.Duration.Type.Label"}}</span>
+							<span>{{ localize "BF.Duration.Type.Label" }}</span>
 							<select name="system.duration.units">
-								{{blackFlag-groupedSelectOptions durationOptions}}
+								{{ blackFlag-groupedSelectOptions durationOptions }}
 							</select>
 						</label>
 					</div>
 					{{#if (eq system.duration.units "special")}}
 						<label>
-							<span>{{localize "BF.Duration.Special"}}</span>
-							<input type="text" name="system.duration.special" value="{{system.duration.special}}">
+							<span>{{ localize "BF.Duration.Special" }}</span>
+							<input type="text" name="system.duration.special" value="{{ system.duration.special }}">
 						</label>
 					{{/if}}
 					<div class="field-group">
-						<span>{{localize "BF.Spell.Tag.Label"}}</span>
+						<span>{{ localize "BF.Spell.Tag.Label" }}</span>
 						<div class="tags checkbox-list">
-							{{#each tags as |tag key|}}
+							{{#each tags}}
 								<label>
-									<input type="checkbox" name="system.tags.{{key}}" {{checked tag.selected}}>
-									{{tag.label}}
+									<input type="checkbox" name="system.tags.{{ @key }}" {{c hecked selected }}>
+									{{ label }}
 								</label>
 							{{/each}}
 						</div>
@@ -256,43 +256,45 @@
 					{{/if}}
 				</fieldset>
 				<fieldset class="components">
-					<legend>{{localize "BF.Spell.Component.Label"}}</legend>
+					<legend>{{ localize "BF.Spell.Component.Label" }}</legend>
 					<div class="checkbox-list">
-						{{#each components as |component key|}}
+						{{#each components}}
 							<label>
-								<input type="checkbox" name="system.components.required.{{key}}" {{checked component.selected}}>
-								{{component.label}}
+								<input type="checkbox" name="system.components.required.{{ @key }}" {{ checked selected }}>
+								{{ label }}
 							</label>
 						{{/each}}
 					</div>
 					{{#if components.material.selected}}
 						<label>
-							<span>{{localize "BF.Spell.Component.Material.Description.Label"}}</span>
+							<span>{{ localize "BF.Spell.Component.Material.Description.Label" }}</span>
 							<input type="text" name="system.components.material.description"
-								value="{{system.components.material.description}}">
+							       value="{{ system.components.material.description }}">
 						</label>
 						<div class="field-group">
-							<span>{{localize "BF.Spell.Component.Material.Cost.Label"}}</span>
+							<span>{{ localize "BF.Spell.Component.Material.Cost.Label" }}</span>
 							<label>
-								<span>{{localize "BF.Spell.Component.Material.Cost.Label"}}</span>
-								<input type="number" name="system.components.material.cost" value="{{system.components.material.cost}}">
+								<span>{{ localize "BF.Spell.Component.Material.Cost.Label" }}</span>
+								<input type="number" name="system.components.material.cost"
+								       value="{{ system.components.material.cost }}">
 							</label>
 							<label>
-								<span>{{localize "BF.Currency.Denomination.Label"}}</span>
+								<span>{{ localize "BF.Currency.Denomination.Label" }}</span>
 								<select name="system.components.material.denomination">
-									{{selectOptions CONFIG.currencies selected=system.components.material.denomination
-										labelAttr="abbreviation" localize=true}}
+									{{ selectOptions CONFIG.currencies selected=system.components.material.denomination
+									                 labelAttr="abbreviation" localize=true }}
 								</select>
 							</label>
 							<label>
-								<span>{{localize "BF.Spell.Component.Material.Consumed.Label"}}</span>
+								<span>{{ localize "BF.Spell.Component.Material.Consumed.Label" }}</span>
 								<input type="checkbox" name="system.components.material.consumed"
-									{{checked system.components.material.consumed}} {{disabled (not system.components.material.cost)}}>
+								       {{ checked system.components.material.consumed }}
+								       {{ disabled (not system.components.material.cost) }}>
 							</label>
 						</div>
 					{{/if}}
 				</fieldset>
-				{{> "blackFlag.item-activities"}}
+				{{> "blackFlag.item-activities" }}
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="effects">

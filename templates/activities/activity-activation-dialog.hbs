@@ -58,7 +58,7 @@
 			{{#if show.resourceConsumption}}
 				<multi-checkbox name="consume.resources">
 					{{#each resources}}
-						<option value="{{ @key }}" {{ifThen selected "selected" ""}}>{{ label }}</option>
+						<option value="{{ @key }}" {{ ifThen selected "selected" "" }}>{{ label }}</option>
 					{{/each}}
 				</multi-checkbox>
 			{{/if}}

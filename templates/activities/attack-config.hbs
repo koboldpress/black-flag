@@ -75,9 +75,8 @@
 				<legend>{{ localize "BF.Damage.Label" }}</legend>
 				{{#if showBaseDamage}}
 					<label class="full-checkbox">
-						<span>
+						<span class="hint-label" data-tooltip="BF.Activity.Damage.IncludeBaseDamage.Hint">
 							{{ localize "BF.Activity.Damage.IncludeBaseDamage.Label" }}
-							<i class="hintIcon" data-tooltip="BF.Activity.Damage.IncludeBaseDamage.Hint"></i>
 						</span>
 						<input type="checkbox" name="system.damage.includeBaseDamage" {{ checked system.damage.includeBaseDamage }}>
 					</label>

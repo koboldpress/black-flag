@@ -2,16 +2,14 @@
 	<fieldset>
 		<legend>{{ localize "BF.ArmorClass.Label" }}</legend>
 		<label>
-			<span>
+			<span class="hint-label" data-tooltip="BF.ArmorClass.Flat.Hint">
 				{{ localize "BF.ArmorClass.Flat.Label" }}
-				<i class="hintIcon" data-tooltip="BF.ArmorClass.Flat.Hint"></i>
 			</span>
 			<input type="number" name="system.attributes.ac.flat" value="{{ source.attributes.ac.flat }}">
 		</label>
 		<label>
-			<span>
+			<span class="hint-label" data-tooltip="BF.ArmorClass.Override.Hint">
 				{{ localize "BF.ArmorClass.Override.Label" }}
-				<i class="hintIcon" data-tooltip="BF.ArmorClass.Override.Hint"></i>
 			</span>
 			<input type="number" name="system.attributes.ac.override" value="{{ source.attributes.ac.override }}">
 		</label>
@@ -27,9 +25,9 @@
 		<ul class="modifiers">
 			{{#each armorFormulas}}
 				<li class="modifier">
-					<input type="checkbox" name="formulas.{{ this.id }}" {{ checked this.checked }}>
-					<input type="text" value="{{ localize this.label }}" disabled>
-					<input type="text" value="{{ this.formula }}" disabled>
+					<input type="checkbox" name="formulas.{{ id }}" {{ checked checked }}>
+					<input type="text" value="{{ localize label }}" disabled>
+					<input type="text" value="{{ formula }}" disabled>
 				</li>
 			{{/each}}
 		</ul>

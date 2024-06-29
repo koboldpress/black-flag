@@ -12,9 +12,8 @@
 	</label>
 {{/if}}
 <label>
-	<span>
+	<span class="hinted-label" data-tooltip="BF.Advancement.GrantSpells.Origin.Hint">
 		{{ localize "BF.Advancement.GrantSpells.Origin.Label" }}
-		<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Origin.Hint"></i>
 	</span>
 	<select name="configuration.spell.origin">
 		<option value=""></option>
@@ -35,9 +34,8 @@
 	</multi-select>
 </label>
 <label>
-	<span>
+	<span class="hinted-label" data-tooltip="BF.Advancement.GrantSpells.Source.Hint">
 		{{ localize "BF.Spell.Source.Label" }}
-		<i class="hintIcon" data-tooltip="BF.Advancement.GrantSpells.Source.Hint"></i>
 	</span>
 	<select name="configuration.spell.source">
 		{{ selectOptions CONFIG.spellSources.localized selected=configuration.spell.source blank="" }}

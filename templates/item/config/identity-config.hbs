@@ -3,18 +3,14 @@
 		<label>{{ localize "BF.Identity.ID" }}</label>
 		<div class="form-fields">
 			<input type="text" value="{{ document.id }}" readonly>
-			<a data-action="copy" aria-label="{{ localize 'BF.Identity.Copy' }}">
-				<i class="fa-regular fa-clipboard" inert></i>
-			</a>
+			<blackFlag-copyable value="{{ document.id }}"></blackFlag-copyable>
 		</div>
 	</div>
 	<div class="form-group">
 		<label>{{ localize "BF.Identity.UUID" }}</label>
 		<div class="form-fields">
 			<input type="text" value="{{ document.uuid }}" readonly>
-			<a data-action="copy" aria-label="{{ localize 'BF.Identity.Copy' }}">
-				<i class="fa-regular fa-clipboard" inert></i>
-			</a>
+			<blackFlag-copyable value="{{ document.uuid }}"></blackFlag-copyable>
 		</div>
 	</div>
 	{{#if displayIdentifier}}
@@ -23,9 +19,7 @@
 			<div class="form-fields">
 				<input type="text" name="system.identifier.value" value="{{ document.system.identifier.value }}"
 				       placeholder="{{ localize identifierPlaceholder }}">
-				<a data-action="copy" aria-label="{{ localize 'BF.Identity.Copy' }}">
-					<i class="fa-regular fa-clipboard" inert></i>
-				</a>
+				<blackFlag-copyable value="{{ document.identifier }}"></blackFlag-copyable>
 			</div>
 			<p class="hint">
 				{{ localize "BF.Identifier.Hint" }}

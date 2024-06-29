@@ -12,8 +12,8 @@
 						<div class="layout">
 							{{#if @root.editable}}
 								<button type="button" class="link-button" data-action="add"
-								        data-tooltip="BF.Effect.Action.Add" aria-label="{{localize 'BF.Effect.Action.Add'}}">
-									<i class="fa-solid fa-plus" aria-hidden="true"></i>
+								        data-tooltip="BF.Effect.Action.Add" aria-label="{{ localize 'BF.Effect.Action.Add' }}">
+									<i class="fa-solid fa-plus" inert></i>
 								</button>
 							{{/if}}
 						</div>
@@ -60,7 +60,7 @@
 									</button>
 								{{/if}}
 								<button type="button" class="link-button" data-context-menu
-												data-tooltip="BF.AdditionalControls" aria-label="{{localize 'BF.AdditionalControls'}}">
+												data-tooltip="BF.AdditionalControls" aria-label="{{ localize 'BF.AdditionalControls' }}">
 									<i class="fa-solid fa-ellipsis-vertical" inert></i>
 								</button>
 							</div>

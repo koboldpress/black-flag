@@ -38,35 +38,4 @@ export default class IdentifyConfig extends DocumentSheet {
 		context.identifierPlaceholder = slugify(context.document.name, { strict: true });
 		return context;
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const element of html.querySelectorAll('[data-action="copy"]')) {
-			element.addEventListener("click", this._onCopy.bind(this));
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Copy a value from a field.
-	 * @param {PointerEvent} event - Triggering click event.
-	 */
-	_onCopy(event) {
-		const field = event.target.closest(".form-fields").querySelector("input");
-		const value = field?.value || field?.placeholder;
-		if (!value) return;
-		game.clipboard.copyPlainText(value);
-		game.tooltip.activate(field, {
-			text: game.i18n.format("BF.Identity.Copied", { value }),
-			direction: "UP"
-		});
-	}
 }

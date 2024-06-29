@@ -38,9 +38,8 @@
 					<legend>{{ localize "BF.Weapon.Details" }}</legend>
 					{{#if properties.magical.selected}}
 						<label>
-							<span>
+							<span class="hint-label" data-tooltip="BF.Weapon.MagicalBonus.Hint">
 								{{ localize "BF.Weapon.MagicalBonus.Label" }}
-								<i class="hintIcon" data-tooltip="BF.Weapon.MagicalBonus.Hint"></i>
 							</span>
 							<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
 						</label>

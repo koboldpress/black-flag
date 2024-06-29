@@ -12,7 +12,7 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 			dragDrop: [{ dropSelector: ".drop-target" }],
 			dropKeyPath: "pool",
 			template: "systems/black-flag/templates/advancement/choose-features-config.hbs",
-			width: 540
+			width: 580
 		});
 	}
 

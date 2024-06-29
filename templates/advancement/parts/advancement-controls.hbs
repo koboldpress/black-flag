@@ -11,9 +11,8 @@
 
 {{#if showHint}}
 	<label>
-		<span>
+		<span class="hinted-label" data-tooltip="BF.Advancement.Core.Hint.Hint">
 			{{ localize "BF.Advancement.Core.Hint.Label" }}
-			<i class="hintIcon" data-tooltip="BF.Advancement.Core.Hint.Hint"></i>
 		</span>
 		<textarea name="hint" placeholder="{{ hintPlaceholder }}">{{ advancement.hint }}</textarea>
 	</label>
@@ -34,9 +33,8 @@
 
 {{#if showClassIdentifier}}
 	<label>
-		<span>
+		<span class="hinted-label" data-tooltip="BF.Advancement.Core.Level.Reference.Hint">
 			{{ localize "BF.Advancement.Core.Level.Reference.Label" }}
-			<i class="hintIcon" data-tooltip="BF.Advancement.Core.Level.Reference.Hint"></i>
 		</span>
 		<select name="level.classIdentifier">
 			{{#select advancement.level.classIdentifier}}
@@ -60,9 +58,8 @@
 
 {{#if showClassRestriction}}
 	<label>
-		<span>
+		<span class="hinted-label" data-tooltip="BF.Advancement.Core.ClassRestriction.Hint">
 			{{localize "BF.Advancement.Core.ClassRestriction.Label"}}
-			<i class="hintIcon" data-tooltip="BF.Advancement.Core.ClassRestriction.Hint"></i>
 		</span>
 		<select name="level.classRestriction">
 			{{#select advancement.level.classRestriction}}

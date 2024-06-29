@@ -4,6 +4,7 @@ export { default as AdvancementElement } from "./advancement.mjs";
 export { default as AppAssociatedElement } from "./app-associated-element.mjs";
 export { default as ChatTrayElement } from "./chat-tray-element.mjs";
 export { default as ConsumptionElement } from "./consumption.mjs";
+export { default as CopyableElement } from "./copyable.mjs";
 export { default as CurrencyElement } from "./currency.mjs";
 export { default as DamageListElement } from "./damage-list.mjs";
 export { default as DeathSavesElement } from "./death-saves.mjs";

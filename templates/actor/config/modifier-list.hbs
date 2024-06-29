@@ -20,7 +20,7 @@
 							                 labelAttr="label" localize=true }}
 						</select>
 						<input type="text" name="modifier.{{ index }}.note.text" value="{{ note.text }}"
-							placeholder="{{ localize 'BF.Note.Label[one]' }}" {{ disabled (ne source "manual") }}>
+						       placeholder="{{ localize 'BF.Note.Label[one]' }}" {{ disabled (ne source "manual") }}>
 					{{else}}
 						{{#if ../../section.showProficiency}}
 							<label class="proficiency">
@@ -36,7 +36,7 @@
 							<button type="button" class="link-button" data-action="modifier" data-sub-action="delete"
 							        data-tooltip="BF.Modifier.Action.Delete" aria-label="{{ localize 'BF.Modifier.Action.Delete' }}">
 								<i class="fa-solid fa-trash" inert></i>
-							</a>
+							</button>
 						{{/if}}
 						{{!-- TODO: Display source --}}
 					</div>

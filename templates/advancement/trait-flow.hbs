@@ -11,7 +11,7 @@
 				<span class="choice-name">{{ this.label }}</span>
 				{{~#if (or @root.modes.editing @root.needsConfiguration)}}
 					<button type="button" class="link-button" data-action="remove-choice" data-key="{{ this.key }}"
-					        data-tooltip="BF.Advancement.Trait.Action.RemoveChoice"
+					        data-tooltip="BF.Advancement.Trait.Action.RevertChoice"
 					        aria-label="{{ localize 'BF.Advancement.Trait.Action.RevertChoice' }}">
 						<i class="fa-solid fa-trash" inert></i>
 					</button>

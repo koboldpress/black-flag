@@ -54,6 +54,7 @@ export function registerCustomElements() {
 	window.customElements.define("blackflag-activities", components.ActivitiesElement);
 	window.customElements.define("blackflag-advancement", components.AdvancementElement);
 	window.customElements.define("blackflag-consumption", components.ConsumptionElement);
+	window.customElements.define("blackflag-copyable", components.CopyableElement);
 	window.customElements.define("blackflag-currency", components.CurrencyElement);
 	window.customElements.define("blackflag-damagelist", components.DamageListElement);
 	window.customElements.define("blackflag-deathsaves", components.DeathSavesElement);

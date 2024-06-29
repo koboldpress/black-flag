@@ -2,9 +2,8 @@
 	<fieldset>
 		<legend>{{ localize "BF.Prerequisite.Config.Details" }}</legend>
 		<label class="full-checkbox">
-			<span>
+			<span class="hint-label" data-tooltip="BF.Prerequisite.RequireAll.Hint">
 				{{ localize "BF.Prerequisite.RequireAll.Label" }}
-				<i class="hintIcon" data-tooltip="BF.Prerequisite.RequireAll.Hint"></i>
 			</span>
 			<input type="checkbox" name="system.restriction.requireAll" {{ checked system.restriction.requireAll }}>
 		</label>
@@ -94,7 +93,7 @@
 				<span>{{ localize "BF.Advancement.Core.Level.Reference.Label" }}</span>
 				<select name="traits.level.class">
 					{{ selectOptions CONFIG.registration.all.class selected=traits.level.class labelAttr="name"
-				                 	blank=(localize "BF.Prerequisite.LevelCharacter.ConfigLabel") }}
+				                   blank=(localize "BF.Prerequisite.LevelCharacter.ConfigLabel") }}
 				</select>
 			</label>
 		{{/if}}

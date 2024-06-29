@@ -2,12 +2,11 @@
 	<fieldset>
 		<legend>{{ localize "BF.Speed.Label" }}</legend>
 		<label>
-			<span>
+			<span class="hint-label" data-tooltip="BF.Movement.Base.Hint">
 				{{ localize "BF.Speed.Base.Label" }}
-				<i class="hintIcon" data-tooltip="BF.Movement.Base.Hint"></i>
 			</span>
 			<input type="number" name="base" value="{{ source.traits.movement.base }}"
-				min="0" step="0.1">
+			       min="0" step="0.1">
 		</label>
 		{{#each types}}
 			<label>

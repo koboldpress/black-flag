@@ -25,9 +25,8 @@
 			</label>
 			{{#if displayType}}
 				<label>
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellcasting.Type.Hint">
 						{{ localize "BF.Spellcasting.Type.Label" }}
-						<i class="hintIcon" data-tooltip="BF.Spellcasting.Type.Hint"></i>
 					</span>
 					<select name="configuration.type">
 						{{ selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true }}
@@ -36,9 +35,8 @@
 			{{/if}}
 			{{#if progressionOptions}}
 				<label>
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellcasting.Progression.Hint">
 						{{ localize "BF.Spellcasting.Progression.Label" }}
-						<i class="hintIcon" data-tooltip="BF.Spellcasting.Progression.Hint"></i>
 					</span>
 					<select name="configuration.progression">
 						{{ selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true }}
@@ -49,9 +47,8 @@
 		<fieldset>
 			<legend>{{ localize "BF.Advancement.Spellcasting.GainingSpells" }}</legend>
 			<label>
-				<span>
+				<span class="hinted-label" data-tooltip="BF.Spellcasting.Learning.Mode.Hint">
 					{{ localize "BF.Spellcasting.Learning.Mode.Label" }}
-					<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Mode.Hint"></i>
 				</span>
 				<select name="configuration.spells.mode">
 					{{ selectOptions CONFIG.spellLearningModes selected=configuration.spells.mode
@@ -61,9 +58,8 @@
 			</label>
 			{{#each known as |data name|}}
 				<label data-name="{{ name }}">
-					<span>
+					<span class="hinted-label" data-tooltip="{{ data.hint }}">
 						{{ localize data.label }}
-						<i class="hintIcon" data-tooltip="{{ data.hint }}"></i>
 					</span>
 					{{#if data.scaleValue}}
 						{{{ data.anchor }}}
@@ -84,16 +80,14 @@
 			{{/each}}
 			{{#if (eq configuration.spells.mode "limited")}}
 				<label>
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellcasting.Learning.Replacement.Hint">
 						{{ localize "BF.Spellcasting.Learning.Replacement.Label" }}
-						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Replacement.Hint"></i>
 					</span>
 					<input type="checkbox" name="configuration.spells.replacement" {{ checked configuration.spells.replacement }}>
 				</label>
 				<label>
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellcasting.Learning.Schools.Hint">
 						{{ localize "BF.Spellcasting.Learning.Schools.Label" }}
-						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Schools.Hint"></i>
 					</span>
 					<blackFlag-multiSelect name="configuration.spells.schools" label="{{ schoolLabel }}">
 						<datalist>
@@ -104,17 +98,15 @@
 					</blackFlag-multiSelect>
 				</label>
 				<label>
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellcasting.Learning.Special.Hint">
 						{{ localize "BF.Spellcasting.Learning.Special.Label" }}
-						<i class="hintIcon" data-tooltip="BF.Spellcasting.Learning.Special.Hint"></i>
 					</span>
 					<input type="checkbox" name="configuration.spells.special" {{ checked configuration.spells.special }}>
 				</label>
 			{{else if (eq configuration.spells.mode "spellbook")}}
 				<div class="field-group">
-					<span>
+					<span class="hinted-label" data-tooltip="BF.Spellbook.FreeSpell.Hint">
 						{{ localize "BF.Spellbook.FreeSpell.Label[other]" }}
-						<i class="hintIcon" data-tooltip="BF.Spellbook.FreeSpell.Hint"></i>
 					</span>
 					<label>
 						<span>{{ localize "BF.Spellbook.FreeSpell.FirstLevel" }}</span>

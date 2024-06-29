@@ -1,16 +1,19 @@
-<li class="effect-change flexrow" data-change-index="{{@index}}">
+<li class="effect-change flexrow" data-change-index="{{ @index }}">
 	<div class="key">
-		<input type="text" name="{{prefix}}changes.{{@index}}.key" value="{{change.key}}">
+		<input type="text" name="{{ prefix }}changes.{{ @index }}.key" value="{{ change.key }}">
 	</div>
 	<div class="mode">
-		<select name="{{prefix}}changes.{{@index}}.mode" data-dtype="Number">
-			{{selectOptions @root.modes selected=change.mode}}
+		<select name="{{ prefix }}changes.{{ @index }}.mode" data-dtype="Number">
+			{{ selectOptions @root.modes selected=change.mode }}
 		</select>
 	</div>
 	<div class="value">
-		<input type="text" name="{{prefix}}changes.{{@index}}.value" value="{{change.value}}">
+		<input type="text" name="{{ prefix }}changes.{{ @index }}.value" value="{{ change.value }}">
 	</div>
 	<div class="effect-controls">
-		<a data-action="change" data-sub-action="delete"><i class="fa-solid fa-trash"></i></a>
+		<button type="button" class="text-button" data-action="change" data-sub-action="delete"
+		        data-tooltip="BF.Effect.Action.Delete" aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
+			<i class="fa-solid fa-trash" inert></i>
+		</button>
 	</div>
 </li>

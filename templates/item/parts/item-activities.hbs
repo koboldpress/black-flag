@@ -3,12 +3,12 @@
 		<legend>{{ localize "BF.Activity.Label[other]" }}</legend>
 		<ul class="items-list activity-list configuration-list">
 			{{#each system.activities}}
-				<li class="item activity-entry" data-activity-id="{{ this.id }}">
+				<li class="item activity-entry" data-activity-id="{{ id }}">
 					<div class="item-name activity-name">
 						<figure class="icon">
-							<img src="{{ this.img }}">
+							<img src="{{ img }}">
 						</figure>
-						<h4>{{ this.name }}</h4>
+						<h4>{{ name }}</h4>
 					</div>
 					<div class="item-controls activity-controls">
 						{{#if @root.editable}}

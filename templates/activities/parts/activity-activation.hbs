@@ -29,9 +29,8 @@
 	</label>
 	{{#if activity.isSpell}}
 		<label class="full-checkbox">
-			<span>
+			<span class="hint-label" data-tooltip="BF.Activation.Primary.Hint">
 				{{ localize "BF.Activation.Primary.Label" }}
-				<i class="hintIcon" data-tooltip="BF.Activation.Primary.Hint"></i>
 			</span>
 			<input type="checkbox" name="activation.primary" {{ checked activity.activation.primary }}>
 		</label>

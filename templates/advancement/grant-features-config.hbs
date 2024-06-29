@@ -33,9 +33,8 @@
 			</table>
 			<p class="hint">{{ localize "BF.Advancement.Config.DropHint" }}</p>
 			<label class="full-checkbox">
-				<span>
+				<span class="hinted-label" data-tooltip="BF.Advancement.GrantFeatures.Enabled.Hint">
 					{{ localize "BF.Advancement.GrantFeatures.Enabled.Label" }}
-					<i class="hintIcon" data-tooltip="BF.Advancement.GrantFeatures.Enabled.Hint"></i>
 				</span>
 				<input type="checkbox" name="configuration.enabled" {{ checked configuration.enabled }}>
 			</label>

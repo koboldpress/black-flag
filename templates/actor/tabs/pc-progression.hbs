@@ -12,10 +12,10 @@
 						{{/if}}
 					</span>
 					{{#unless (eq system.progression.level CONFIG.maxLevel)}}
-						<a data-action="progression" data-sub-action="level-up">
+						<button type="button" class="link-button" data-action="progression" data-sub-action="level-up">
 							<i class="fa-solid fa-arrow-up-wide-short" inert></i>
 							{{ localize "BF.Progression.Action.LevelUp.Label" }}
-						</a>
+						</button>
 					{{/unless}}
 					{{#if displayXPBar}}<blackFlag-xpBar></blackFlag-xpBar>{{/if}}
 				</div>
@@ -54,88 +54,101 @@
 			{{#*inline ".typeControl"}}
 				{{#with (lookup system.progression type)}}
 					<figure class="icon">
-						<img src="{{this.img}}">
+						<img src="{{ img }}">
 					</figure>
 					<span>
-						<a data-action="item" data-sub-action="view" data-item-id="{{this.id}}">{{this.name}}</a>
+						<button type="button" class="link-button" data-action="item" data-sub-action="view" data-item-id="{{ id }}">
+							{{ name }}
+						</button>
 					</span>
 					{{#if @root.modes.editing}}
 						<span class="controls">
-							<a data-action="item" data-sub-action="delete" data-item-id="{{this.id}}">
-								<i class="fa-solid fa-trash"></i>
-							</a>
+							<button type="button" class="link-button" data-action="item" data-sub-action="delete"
+							        data-item-id="{{ id }}" data-tooltip="BF.Item.Action.Delete"
+							        aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
 						</span>
 					{{/if}}
 				{{else}}
 					<span>
-						<a data-action="progression" data-sub-action="select" data-type="{{type}}">
-							{{localize "BF.Action.Choose.Generic"}}
-						</a>
+						<button type="button" class="link-button" data-action="progression" data-sub-action="select"
+						        data-type="{{ type }}">
+							{{ localize "BF.Action.Choose.Generic" }}
+						</button>
 					</span>
 				{{/with}}
 			{{/inline}}
 			<fieldset class="lineage">
 				<legend>
-					{{localize "BF.Item.Type.Lineage[one]"}}
-					{{blackFlag-notificationBadge actor category="lineage" displayOrder=true}}
+					{{ localize "BF.Item.Type.Lineage[one]" }}
+					{{ blackFlag-notificationBadge actor category="lineage" displayOrder=true }}
 				</legend>
 				{{> ".typeControl" type="lineage"}}
 			</fieldset>
 			<fieldset class="heritage">
 				<legend>
-					{{localize "BF.Item.Type.Heritage[one]"}}
-					{{blackFlag-notificationBadge actor category="heritage" displayOrder=true}}
+					{{ localize "BF.Item.Type.Heritage[one]" }}
+					{{ blackFlag-notificationBadge actor category="heritage" displayOrder=true }}
 				</legend>
 				{{> ".typeControl" type="heritage"}}
 			</fieldset>
 			<fieldset class="background">
 				<legend>
-					{{localize "BF.Item.Type.Background[one]"}}
-					{{blackFlag-notificationBadge actor category="background" displayOrder=true}}
+					{{ localize "BF.Item.Type.Background[one]" }}
+					{{ blackFlag-notificationBadge actor category="background" displayOrder=true }}
 				</legend>
-				{{> ".typeControl" type="background"}}
+				{{> ".typeControl" type="background" }}
 			</fieldset>
 			{{#each system.progression.classes as |data identifier|}}
-				<fieldset class="class" data-class="{{identifier}}">
+				<fieldset class="class" data-class="{{ identifier }}">
 					<legend>
-						{{localize "BF.Item.Type.Class[one]"}}
-						{{blackFlag-notificationBadge @root.actor category="class" document=data.document displayOrder=true}}
+						{{ localize "BF.Item.Type.Class[one]" }}
+						{{ blackFlag-notificationBadge @root.actor category="class" document=data.document displayOrder=true }}
 					</legend>
 					<figure class="icon">
-						<img src="{{data.document.img}}">
+						<img src="{{ data.document.img }}">
 					</figure>
 					<span>
-						<a data-action="item" data-sub-action="view" data-item-id="{{data.document.id}}">{{data.document.name}}</a>
+						<button type="button" class="link-button" data-action="item" data-sub-action="view"
+						        data-item-id="{{data.document.id}}">
+							{{ data.document.name }}
+						</button>
 						{{#if data.subclass}}
 							<span class="subclass">
-								<a data-action="item" data-sub-action="view" data-item-id="{{data.subclass.id}}">
-									{{data.subclass.name}}
-								</a>
+								<button type="button" class="link-button" data-action="item" data-sub-action="view"
+								        data-item-id="{{ data.subclass.id }}">
+									{{ data.subclass.name }}
+								</button>
 								{{#if @root.modes.editing}}
-									<a data-action="item" data-sub-action="delete" data-item-id="{{data.subclass.id}}">
-										<i class="fa-solid fa-trash"></i>
-									</a>
+									<button type="button" class="link-button" data-action="item" data-sub-action="delete"
+									        data-item-id="{{ data.subclass.id }}" data-tooltip="BF.Item.Action.Delete"
+									        aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+										<i class="fa-solid fa-trash" inert></i>
+									</button>
 								{{/if}}
 							</span>
 						{{else if data.requiresSubclass}}
 							<span class="subclass">
-								<a data-action="progression" data-sub-action="select" data-type="subclass">
-									{{localize "BF.Action.Choose.Specific" option=(localize "BF.Item.Type.Subclass[one]")}}
-								</a>
+								<button type="button" class="link-button" data-action="progression" data-sub-action="select"
+								        data-type="subclass">
+									{{ localize "BF.Action.Choose.Specific" option=(localize "BF.Item.Type.Subclass[one]") }}
+								</button>
 							</span>
 						{{/if}}
 					</span>
-					<span class="levels">{{data.levelsLabel}}</span>
+					<span class="levels">{{ data.levelsLabel }}</span>
 				</fieldset>
 			{{else}}
-				<fieldset class="class" data-class="{{identifier}}">
+				<fieldset class="class" data-class="{{ identifier }}">
 					<legend>
-						{{localize "BF.Item.Type.Class[one]"}}
-						{{blackFlag-notificationBadge actor key="no-class" displayOrder=true}}
+						{{ localize "BF.Item.Type.Class[one]" }}
+						{{ blackFlag-notificationBadge actor key="no-class" displayOrder=true }}
 					</legend>
 					<span>
-						<a data-action="progression" data-sub-action="select" data-type="class">
-							{{localize "BF.Action.Choose.Generic"}}
+						<button type="button" class="link-button" data-action="progression" data-sub-action="select"
+						        data-type="class">
+							{{ localize "BF.Action.Choose.Generic" }}
 						</a>
 					</span>
 				</fieldset>
@@ -144,30 +157,32 @@
 	</form>
 	<section class="levels">
 		{{#each progressionLevels as |level|}}
-			<div class="level" data-level="{{level.number}}">
+			<div class="level" data-level="{{ level.number }}">
 				<h3>
 					<span class="level">
 						{{#if (eq level.number 0)}}
-							{{localize "BF.Progression.Base"}}
+							{{ localize "BF.Progression.Base" }}
 						{{else}}
-							{{localize "BF.Level.Specific" level=level.number}}
+							{{ localize "BF.Level.Specific" level=level.number }}
 						{{/if}}
 					</span>
 					<span class="class">
-						{{level.class.name}}
-						{{blackFlag-notificationBadge @root.actor category=(concat "level-" level.number)}}
+						{{ level.class.name }}
+						{{ blackFlag-notificationBadge @root.actor category=(concat "level-" level.number) }}
 					</span>
 					{{#if (and @root.modes.editing level.highestLevel)}}
 						<span class="controls">
-							<a data-action="progression" data-sub-action="level-down">
-								<i class="fa-solid fa-arrow-down-wide-short"></i>
-							</a>
+							<button type="button" class="link-button" data-action="progression" data-sub-action="level-down"
+							        data-tooltip="BF.Progression.Action.LevelDown.Label"
+							        aria-label="{{ localize 'BF.Progression.Action.LevelDown.Label' }}">
+								<i class="fa-solid fa-arrow-down-wide-short" inert></i>
+							</button>
 						</span>
 					{{/if}}
 				</h3>
 				<section class="advancement-flows advancement-list">
-					{{#each level.flows as |flow|}}
-						<template id="{{flow.id}}"></template>
+					{{#each level.flows}}
+						<template id="{{ id }}"></template>
 					{{/each}}
 				</section>
 			</div>
