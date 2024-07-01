@@ -1,5 +1,5 @@
 import { SpellcastingConfigurationData, SpellcastingValueData } from "../../data/advancement/spellcasting-data.mjs";
-import { Search } from "../../utils/_module.mjs";
+import { linkForUUID, Search } from "../../utils/_module.mjs";
 import Advancement from "./advancement.mjs";
 
 export default class SpellcastingAdvancement extends Advancement {
@@ -91,21 +91,83 @@ export default class SpellcastingAdvancement extends Advancement {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Details on how many spells of each type there are to learn for a level.
+	 * @param {AdvancementLevels} levels - Level for which to get the details.
+	 * @returns {Map<string, { learned: number, total: number }>}
+	 */
+	statsForLevel(levels) {
+		const level = this.relavantLevel(levels);
+		const isFirstLevel = level === this.level.value;
+		const stats = new Map([
+			["cantrips", {}],
+			["rituals", {}],
+			["spells", {}],
+			["special", {}],
+			["spellbook:free", {}],
+			["spellbook:paid", {}],
+			["replacement", {}],
+			["auto", {}]
+		]);
+		stats.needToLearn = false;
+
+		for (const type of ["cantrips", "rituals", "spells"]) {
+			const scale = this.configuration[type].scaleValue;
+			stats.get(type).total = (scale?.valueForLevel(level)?.value ?? 0) - (scale?.valueForLevel(level - 1)?.value ?? 0);
+			stats.get(type).learned = 0;
+			if (type === "spells" && isFirstLevel && this.configuration.spells.special) {
+				stats.get(type).total -= 1;
+				stats.get("special").total = 1;
+			}
+		}
+
+		if (this.configuration.spells.mode === "spellbook") {
+			stats.get("spellbook:free").total = isFirstLevel
+				? this.configuration.spells.spellbook.firstLevel
+				: this.configuration.spells.spellbook.otherLevels;
+		}
+
+		if (this.replacesSpellAt(level)) stats.get("replacement").total = 1;
+
+		const replacedSpells = new Set(this.value.replaced?.[level]?.map(s => s.replacement?.id));
+
+		for (const data of this._getAddedSpells(levels)) {
+			if (replacedSpells.has(data.uuid) || !stats.get(data.slot)) continue;
+			stats.get(data.slot).learned ??= 0;
+			stats.get(data.slot).learned += 1;
+		}
+
+		for (const data of stats.values()) {
+			data.total ??= 0;
+			data.learned ??= 0;
+			data.toLearn = data.total - data.learned;
+			if (data.toLearn) stats.needToLearn = true;
+		}
+
+		return stats;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		if (!flow) return this.configuration.label;
 		const level = this.relavantLevel(levels);
 		const changes = [];
+		for (const spell of this._getAddedSpells(levels)) {
+			const doc = this.actor.items.get(spell.document) ?? fromUuidSync(spell.uuid);
+			if (doc && spell.slot !== "auto") changes.push(linkForUUID(doc.uuid));
+			// TODO: Distinguish replacement spells
+		}
 		if (this.gainsSpellsAt(level)) {
 			const circle = this.computeMaxCircle(level);
 			changes.push(
-				game.i18n.format("BF.Advancement.Spellcasting.CircleSpells", {
+				`<span class="choice-name">${game.i18n.format("BF.Advancement.Spellcasting.CircleSpells", {
 					circle: CONFIG.BlackFlag.spellCircles()[circle]
-				})
+				})}`
 			);
 		}
-		// TODO: Display spells learned & replaced
-		return game.i18n.getListFormatter({ type: "unit" }).format(changes);
+		return changes.map(c => `<span class="choice-entry">${c}</span>`).join(" ");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -115,12 +177,17 @@ export default class SpellcastingAdvancement extends Advancement {
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		const level = this.relavantLevel(levels);
+		const added = this._getAddedSpells(levels) ?? [];
 
 		if (data) {
-			// TODO: Add & replace spells as necessary
-			// Any spells that aren't in the spellbook in "standard" or "always" prepared mode, add
-			// Any spells that are in the spellbook, add this class to list
-			// Any replaced spells, swap
+			await this.createSpells(data.added ?? [], { added, data });
+			return await this.actor.update(
+				{
+					[`${this.valueKeyPath}.added.${level}`]: added
+				},
+				{ render }
+			);
+			// TODO: Handle replacement
 		}
 
 		// Gain all spells of a certain circle
@@ -134,13 +201,13 @@ export default class SpellcastingAdvancement extends Advancement {
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				]
 			});
-			const added = await this.createSpells(
-				spells.filter(s => !existingSpells.has(s.uuid)).map(s => ({ uuid: s.uuid, slot: null })),
-				{ data }
+			await this.createSpells(
+				spells.filter(s => !existingSpells.has(s.uuid)).map(s => ({ uuid: s.uuid, slot: "auto" })),
+				{ added, data }
 			);
 			return await this.actor.update(
 				{
-					[`${this.valueKeyPath}.added.${this.relavantLevel(levels)}`]: added
+					[`${this.valueKeyPath}.added.${level}`]: added
 				},
 				{ render }
 			);
@@ -156,23 +223,32 @@ export default class SpellcastingAdvancement extends Advancement {
 
 		// Remove a specific selected spell
 		if (data) {
-			// TODO
+			if (data.deleteIds?.size) {
+				await this.actor.deleteEmbeddedDocuments("Item", Array.from(data.deleteIds), { render: false });
+				return await this.actor.update(
+					{
+						[`${this.valueKeyPath}.added.${level}`]: this._getAddedSpells(levels).filter(
+							a => !data.deleteIds.has(a.document)
+						)
+					},
+					{ render }
+				);
+			}
 		}
 
 		// Remove all spells for this level
 		else {
-			deleteIds = (this.value.added[level] ?? []).map(d => d.document?.id).filter(i => i);
+			deleteIds = (this.value.added?.[level] ?? []).map(d => d.document?.id).filter(i => i);
+			await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
+			return await this.actor.update(
+				{
+					[`${this.valueKeyPath}.added.-=${level}`]: null
+				},
+				{ render }
+			);
+
+			// TODO: Restore any replaced spells
 		}
-
-		// TODO: Restore any replaced spells
-
-		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
-		return await this.actor.update(
-			{
-				[`${this.valueKeyPath}.added.-=${level}`]: null
-			},
-			{ render }
-		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -188,24 +264,22 @@ export default class SpellcastingAdvancement extends Advancement {
 	 */
 	async createSpells(uuids, { added = [], data, render = false } = {}) {
 		const spells = [];
-		for (const [index, { uuid, slot }] of uuids.entries()) {
+		for (const [index, data] of uuids.entries()) {
 			const origin = { identifier: this.item.identifier };
-			if (slot?.special) origin.special = true;
-			if (slot?.type === "spellbook") origin.spellbookOrigin = "free";
-			const spellData = await this.createItemData(uuid, {
+			const spellData = await this.createItemData(data.uuid, {
 				changes: { [`flags.${game.system.id}.relationship`]: { mode: "standard", origin } },
 				data,
 				index
 			});
 			if (
-				foundry.utils.getProperty(spellData, "system.circle.base" > 0) &&
+				foundry.utils.getProperty(spellData, "system.circle.base") > 0 &&
 				!CONFIG.BlackFlag.spellLearningModes[this.configuration.spells.mode]?.prepared
 			) {
 				foundry.utils.setProperty(spellData, `flags.${game.system.id}.relationship.alwaysPrepared`, true);
 			}
 			if (!spellData) continue;
 			spells.push(spellData);
-			added.push({ document: spellData._id, uuid });
+			added.push({ document: spellData._id, ...data });
 		}
 		await this.actor.createEmbeddedDocuments("Item", spells, { keepId: true, keepRelationship: true, render });
 		return added;
@@ -250,6 +324,32 @@ export default class SpellcastingAdvancement extends Advancement {
 		}
 
 		return data.circle;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get an adjusted version of the added data for a level that takes manually deleted spells into account.
+	 * @param {AdvancementLevels} levels - Levels for which to fetch the data.
+	 * @returns {LearnedSpellData[]}
+	 */
+	_getAddedSpells(levels) {
+		const valueSource = foundry.utils.getProperty(this.actor?.toObject() ?? {}, this.valueKeyPath) ?? {};
+		const level = this.relavantLevel(levels);
+		const added = foundry.utils.deepClone(valueSource.added?.[level]);
+		if (!added) return [];
+
+		const replaced = Object.values(valueSource.replaced ?? {})
+			.flat()
+			.filter(r => r.level === level)
+			.map(r => r.original);
+
+		for (const a of added) {
+			if (replaced.includes(a.document)) a.replaced = true;
+		}
+
+		const existing = this._getExistingSpells();
+		return added.filter(a => a.replaced || existing.has(a.uuid));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

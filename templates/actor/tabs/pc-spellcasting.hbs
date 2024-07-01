@@ -140,17 +140,12 @@
 		{{/each}}
 	</table>
 
-	<div class="main-add-button">
-		<button type="button" class="light-button" data-action="manage-spells">
-			<i class="fa-solid fa-book" inert></i>
-			{{ localize "BF.Spellbook.Action.ManageSpells" }}
-			{{ blackFlag-notificationBadge actor key="spells-to-learn" }}
-		</button>
-		{{#if @root.editable}}
+	{{#if @root.editable}}
+		<div class="main-add-button">
 			<button type="button" class="light-button main-add-button" data-action="add">
 				<i class="fa-solid fa-plus inert"></i>
 				{{ localize "BF.Spell.Action.Add" }}
 			</button>
-		{{/if}}
-	</div>
+		</div>
+	{{/if}}
 </blackFlag-inventory>

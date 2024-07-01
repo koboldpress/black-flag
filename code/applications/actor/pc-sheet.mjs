@@ -3,7 +3,6 @@ import AbilityAssignmentDialog from "./ability-assignment-dialog.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import ConceptSelectionDialog from "./concept-selection-dialog.mjs";
 import LevelUpDialog from "./level-up-dialog.mjs";
-import SpellManager from "./spell-manager.mjs";
 
 export default class PCSheet extends BaseActorSheet {
 	/** @inheritDoc */
@@ -362,8 +361,6 @@ export default class PCSheet extends BaseActorSheet {
 						return new ConceptSelectionDialog(this.actor, properties.type, { classIdentifier }).render(true);
 				}
 				break;
-			case "manage-spells":
-				return new SpellManager(this.actor).render(true);
 		}
 		return super._onAction(event, dataset);
 	}

@@ -19,6 +19,8 @@ export { default as ScaleValueConfig } from "./scale-value-config.mjs";
 export { default as SizeConfig } from "./size-config.mjs";
 export { default as SizeFlow } from "./size-flow.mjs";
 export { default as SpellcastingConfig } from "./spellcasting-config.mjs";
+export { default as SpellcastingDialog } from "./spellcasting-dialog.mjs";
+export { default as SpellcastingFlow } from "./spellcasting-flow.mjs";
 export { default as SpellcastingValueConfig } from "./spellcasting-value-config.mjs";
 export { default as TraitConfig } from "./trait-config.mjs";
 export { default as TraitFlow } from "./trait-flow.mjs";

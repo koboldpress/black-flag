@@ -123,7 +123,8 @@ export const _advancementTypes = {
 		documentClass: advancement.SpellcastingAdvancement,
 		validItemTypes: new Set(["class", "subclass"]),
 		sheetClasses: {
-			config: sheets.SpellcastingConfig
+			config: sheets.SpellcastingConfig,
+			flow: sheets.SpellcastingFlow
 		}
 	},
 	spellcastingValue: {

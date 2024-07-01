@@ -1,0 +1,17 @@
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+  autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
+	<header>
+		{{> "blackFlag.advancement-name"}}
+		{{#if showDialogButton}}
+			<div class="advancement-actions">
+				<button type="submit" class="light-button" data-action="learn-spells">
+					{{ localize "BF.Advancement.Spellcasting.Action.LearnSpells" }}
+				</button>
+			</div>
+		{{/if}}
+	</header>
+
+	{{#if summary}}
+		<div class="advancement-summary">{{{ summary }}}</div>
+	{{/if}}
+</form>

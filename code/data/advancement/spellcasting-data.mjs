@@ -188,9 +188,14 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * @typedef {GrantedFeatureData} LearnedSpellData
+ * @property {string} slot - Type of slot this fills (e.g. "normal", "cantrip", "ritual", "special", "free").
+ */
+
+/**
  * Value data for the Spellcasting advancement.
  *
- * @property {Record<string, GrantedFeatureData[]>} added - Spells added at a given level.
+ * @property {Record<string, LearnedSpellData[]>} added - Spells added at a given level.
  * @property {Record<string, ReplacedFeatureData[]>} replaced - Spells replaced at a given level.
  */
 export class SpellcastingValueData extends foundry.abstract.DataModel {
@@ -200,6 +205,7 @@ export class SpellcastingValueData extends foundry.abstract.DataModel {
 				new ArrayField(
 					new SchemaField({
 						document: new LocalDocumentField(foundry.documents.BaseItem),
+						slot: new StringField(),
 						uuid: new StringField() // TODO: Replace with UUIDField when available
 					})
 				),

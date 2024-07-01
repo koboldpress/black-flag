@@ -586,30 +586,6 @@ export default class PCData extends ActorDataModel.mixin(
 				advancement.prepareWarnings(data.levels, this.parent.notifications);
 			}
 		}
-
-		// Notification for spells to learn
-		const learnedFlag = this.parent.getFlag("black-flag", "spellsLearned");
-		if (!learnedFlag?.learned) {
-			let needsToLearn = false;
-			top: for (const origin of Object.values(this.spellcasting.origins)) {
-				if (origin.spellcasting?.spells.mode === "all" && learnedFlag?.maxCircle < this.spellcasting.maxCircle) {
-					needsToLearn = true;
-					break;
-				}
-				for (const type of ["cantrips", "rituals", "spells"]) {
-					if (origin[type]?.max && origin[type].value < origin[type].max) {
-						needsToLearn = true;
-						break top;
-					}
-				}
-			}
-			if (needsToLearn)
-				this.parent.notifications.set("spells-to-learn", {
-					level: "info",
-					section: "spellcasting",
-					message: game.i18n.localize("BF.Spellbook.Notification.LearningAvailable")
-				});
-		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
