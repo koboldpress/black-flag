@@ -72,7 +72,6 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 								resolve(formData);
 							}
 						}
-						// TODO: Support custom buttons?
 					},
 					close: () => reject(null),
 					default: "use"
@@ -170,18 +169,15 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 	_prepareSpellSlotOptions() {
 		const spellcasting = this.activity.actor.system.spellcasting;
 		if (!spellcasting?.circles) return [];
-		// TODO: Adjust this when slots can also be consumed as resources
 		const minimumCircle = this.activity?.item?.system.circle?.base ?? 1;
-		const options = Object.entries(CONFIG.BlackFlag.spellCircles()).reduce((obj, [level, label]) => {
-			level = Number(level);
-			if (level < minimumCircle || level > spellcasting.maxCircle) return obj;
-			// TODO: Allow this to work with other spellcasting type
-			const data = spellcasting.circles[`circle-${level}`] ?? { max: 0 };
-			obj[level] = {
+		const options = Object.entries(spellcasting.circles).reduce((obj, [key, slot]) => {
+			if (slot.circle < minimumCircle || (slot.type === "leveled" && slot.circle > spellcasting.maxCircle)) return obj;
+			obj[key] = {
 				label: game.i18n.format("BF.Consumption.Type.SpellSlots.Available", {
-					slot: label,
-					available: numberFormat(data.value)
-				})
+					slot: slot.label,
+					available: numberFormat(slot.value)
+				}),
+				level: slot.circle
 			};
 			return obj;
 		}, {});

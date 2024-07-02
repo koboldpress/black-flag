@@ -68,13 +68,12 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		 * @function blackFlag.computeSpellcastingProgression
 		 * @memberof hookEvents
 		 */
-		const allowed = Hooks.call(
+		if ( Hooks.call(
 			`blackFlag.compute${type.capitalize()}Progression`, progression, cls, { actor, levels, spellcasting, count }
-		);
+		) === false ) return;
 
-		if ( allowed && (type === "leveled") ) {
-			this.computeLeveledProgression(progression, cls, { actor, levels, spellcasting, count });
-		}
+		if ( type === "leveled" ) this.computeLeveledProgression(progression, cls, { actor, levels, spellcasting, count });
+		else if ( type === "pact" ) this.computePactProgression(progression, cls, { actor, levels, spellcasting, count });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -91,11 +90,47 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 */
 	static computeLeveledProgression(progression, cls, { actor, levels=1, spellcasting, count=1 }) {
 		const prog = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[spellcasting.progression];
-		if ( !prog ) return;
+		if ( prog ) {
+			this._computeRoundedProgression(progression, levels, prog.divisor, count === 1 || prog.roundUp);
+			if ( spellcasting?.cantrips.formula ) progression.cantrips = true;
+		}
+	}
 
-		const rounding = (count === 1) || prog.roundUp ? Math.ceil : Math.floor;
-		progression.leveled += rounding(levels / (prog.divisor ?? 1));
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
+	 * @param {object} progression - Spellcasting progression data. *Will be mutated.*
+	 * @param {BlackFlagItem} cls - Class for whom this progression is being computed.
+	 * @param {object} config
+	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.
+	 * @param {number} [config.levels=1] - Number of levels for the class.
+	 * @param {SpellcastingConfigurationData} config.spellcasting - Spellcasting descriptive object.
+	 * @param {number} [config.count=1] - Number of classes with this type of spellcasting.
+	 */
+	static computePactProgression(progression, cls, { actor, levels=1, spellcasting, count=1 }) {
+		this._computeRoundedProgression(progression, levels, 2, count === 1);
+		progression.pact ??= {};
+		progression.pact.circle = Math.max(progression.pact.circle ?? -Infinity, spellcasting.maxCircle);
+		progression.pact.slots = Math.max(
+			progression.pact.slots ?? 0,
+			spellcasting.slots.scaleValue?.valueForLevel(levels) ?? 0
+		);
 		if ( spellcasting?.cantrips.formula ) progression.cantrips = true;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Adjust the leveled count based on a divided and rounded levels value.
+	 * @param {object} progression - Spellcasting progression data. *Will be mutated.*
+	 * @param {number} levels - Number of levels for the class.
+	 * @param {number} divisor - Amount by which to divide the levels.
+	 * @param {boolean} roundUp - Should it be rounded up rather than down?
+	 */
+	static _computeRoundedProgression(progression, levels, divisor=1, roundUp=false) {
+		const rounding = roundUp ? Math.ceil : Math.floor;
+		progression.leveled += rounding(levels / divisor);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -120,9 +155,10 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		 * @function blackFlag.prepareSpellcastingSlots
 		 * @memberof hookEvents
 		 */
-		const allowed = Hooks.call(`blackFlag.prepare${type.capitalize()}Slots`, spells, progression, { actor });
+		if ( Hooks.call(`blackFlag.prepare${type.capitalize()}Slots`, spells, progression, { actor }) === false ) return;
 
-		if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, progression, { actor });
+		if ( type === "leveled" ) this.prepareLeveledSlots(spells, progression, { actor });
+		else if ( type === "pact" ) this.preparePactSlots(spells, progression, { actor });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -152,11 +188,35 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			slot.allowOverride = true;
 			slot.maxPlaceholder = slots[level] ?? 0;
 			slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slot.maxPlaceholder;
-			Object.defineProperty(slot, "level", { value: level, enumerable: false, writable: false });
+			Object.defineProperty(slot, "type", { value: "leveled", enumerable: false, writable: false });
+			Object.defineProperty(slot, "circle", { value: level, enumerable: false, writable: false });
 			Object.defineProperty(slot, "label", {
 				value: CONFIG.BlackFlag.spellCircles(true)[level] ?? "", enumerable: false
 			});
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare pact spell slots using progression data.
+	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
+	 * @param {object} progression - Spellcasting progression data.
+	 * @param {object} config
+	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.
+	 */
+	static preparePactSlots(spells, progression, { actor }) {
+		const slot = spells.pact ??= { spent: 0 };
+		slot.allowOverride = true;
+		slot.maxPlaceholder = progression.pact.slots ?? 0;
+		slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slot.maxPlaceholder;
+		Object.defineProperty(slot, "type", { value: "pact", enumerable: false, writable: false });
+		Object.defineProperty(slot, "circle", { value: progression.pact.circle ?? 1, enumerable: false, writable: false });
+		const circle = CONFIG.BlackFlag.spellCircles(true)[slot.circle];
+		Object.defineProperty(slot, "label", {
+			value: game.i18n.format("BF.Spellcasting.Type.Pact.Section", { circle, circleLowercase: circle.toLowerCase() }),
+			enumerable: false
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

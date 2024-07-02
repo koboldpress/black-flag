@@ -314,14 +314,17 @@ export default class SpellcastingAdvancement extends Advancement {
 
 		if (data.circle) return data.circle;
 
+		const TABLE = CONFIG.BlackFlag.spellSlotTable;
+		// TODO: Round up if this is the only class
 		switch (type) {
 			case "leveled":
 				const divisor = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[progression]?.divisor ?? 1;
-				const row =
-					CONFIG.BlackFlag.spellSlotTable[
-						Math.clamp(Math.floor(level / divisor), 0, CONFIG.BlackFlag.spellSlotTable.length - 1)
-					];
-				if (row?.length) data.circle = row.length - 1;
+				const leveledRow = TABLE[Math.clamp(Math.floor(level / divisor), 0, TABLE.length - 1)];
+				if (leveledRow?.length) data.circle = leveledRow.length - 1;
+				break;
+			case "pact":
+				const pactRow = TABLE[Math.clamp(Math.ceil(level / 2), 0, TABLE.length - 1)];
+				if (pactRow?.length) data.circle = pactRow.length - 1;
 				break;
 		}
 

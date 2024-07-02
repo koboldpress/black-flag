@@ -15,6 +15,8 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
  * @property {object} rituals
  * @property {string} rituals.scale - ID of scale value that represents number of rituals known.
+ * @property {object} slots
+ * @property {string} slots.scale - ID of the scale value that represents the number of spell slots.
  * @property {object} spells
  * @property {string} spells.scale - ID of scale value that represents number of spells known.
  * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
@@ -26,6 +28,11 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
  */
 export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Spellcasting"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
@@ -36,48 +43,23 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			}),
 			ability: new StringField({ label: "BF.Spellcasting.Ability.Label" }),
 			source: new StringField({ label: "BF.Spell.Source.Label" }),
-			cantrips: new SchemaField(
-				{
-					scale: new StringField()
-				},
-				{ label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint" }
-			),
-			rituals: new SchemaField(
-				{
-					scale: new StringField()
-				},
-				{ label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint" }
-			),
-			spells: new SchemaField(
-				{
-					scale: new StringField(),
-					mode: new StringField({
-						label: "BF.Spellcasting.Learning.Mode.Label",
-						hint: "BF.Spellcasting.Learning.Mode.Hint"
-					}),
-					replacement: new BooleanField({
-						initial: true,
-						label: "BF.Spellcasting.Learning.Replacement.Label",
-						hint: "BF.Spellcasting.Learning.Replacement.Hint"
-					}),
-					schools: new SetField(new StringField(), {
-						label: "BF.Spellcasting.Learning.Schools.Label",
-						hint: "BF.Spellcasting.Learning.Schools.Hint"
-					}),
-					special: new BooleanField({
-						label: "BF.Spellcasting.Learning.Special.Label",
-						hint: "BF.Spellcasting.Learning.Special.Hint"
-					}),
-					spellbook: new SchemaField(
-						{
-							firstLevel: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel" }),
-							otherLevels: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels" })
-						},
-						{ label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint" }
-					)
-				},
-				{ label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint" }
-			)
+			cantrips: new SchemaField({ scale: new StringField() }),
+			rituals: new SchemaField({ scale: new StringField() }),
+			slots: new SchemaField({ scale: new StringField() }),
+			spells: new SchemaField({
+				scale: new StringField(),
+				mode: new StringField(),
+				replacement: new BooleanField(),
+				schools: new SetField(new StringField()),
+				special: new BooleanField(),
+				spellbook: new SchemaField(
+					{
+						firstLevel: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel" }),
+						otherLevels: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels" })
+					},
+					{ label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint" }
+				)
+			})
 		};
 	}
 
@@ -165,7 +147,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 				configurable: true,
 				enumerable: false
 			});
-			Object.defineProperty(obj, "known", {
+			Object.defineProperty(obj, identifier === "spell-slots" ? "max" : "known", {
 				get() {
 					const scaleValue = obj.scaleValue;
 					if (!scaleValue) return 0;
@@ -181,6 +163,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 
 		prepareScale(this.cantrips, "cantrips-known");
 		prepareScale(this.rituals, "rituals-known");
+		prepareScale(this.slots, "spell-slots");
 		prepareScale(this.spells, "spells-known");
 	}
 }

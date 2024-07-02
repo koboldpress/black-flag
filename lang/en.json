@@ -2555,6 +2555,7 @@
 		"Mode": {
 			"AtWill": "At Will",
 			"Innate": "Innate",
+			"Pact": "Pact",
 			"Rituals": "Rituals",
 			"Standard": "Standard"
 		}
@@ -2624,10 +2625,7 @@
 	},
 	"FreeSpell": {
 		"Label[one]": "Free Spell",
-		"Label[other]": "Free Spells",
-		"Hint": "Number of spells that can be scribed into the spellbook for free.",
-		"FirstLevel": "1st Level",
-		"OtherLevels": "Other Levels"
+		"Label[other]": "Free Spells"
 	},
 	"NoneAvailable": "No Spells Available",
 	"Notification": {
@@ -2651,10 +2649,6 @@
 		"Label": "Spell Attack Modifier",
 		"Abbreviation": "Attack"
 	},
-	"CantripsKnown": {
-		"Label": "Cantrips Known",
-		"Hint": "Number of cantrips known by the caster at any given level."
-	},
 	"Details": {
 		"Label": "Spellcasting Details"
 	},
@@ -2662,10 +2656,60 @@
 		"Label": "Spell Save DC",
 		"Abbreviation": "DC"
 	},
+	"FIELDS": {
+		"cantrips": {
+			"label": "Cantrips Known",
+			"hint": "Number of cantrips known by the caster at any given level."
+		},
+		"progression": {
+			"label": "Spellcasting Progression",
+			"hint": "Determines how many spell slots a caster has available at any given level. Generally casters who gain spellcasting at 1st level are full casters, 2nd level are half, and 3rd level are third."
+		},
+		"rituals": {
+			"label": "Rituals Known",
+			"hint": "Number of ritual spells known by the caster at any given level."
+		},
+		"slots": {
+			"label": "Pact Slots",
+			"hint": "Number of pact slots available at any given level."
+		},
+		"spells": {
+			"label": "Spells Known",
+			"hint": "Number of regular spells known by the caster at any given level.",
+			"mode": {
+				"label": "Learning Mode",
+				"hint": "In what way does the caster gain spells at various levels?"
+			},
+			"replacement": {
+				"label": "Replacement",
+				"hint": "Can this caster replace one previously known spell when they level up?"
+			},
+			"schools": {
+				"label": "Schools",
+				"hint": "Spell selection can only come from these schools if set."
+			},
+			"special": {
+				"label": "Special Slot",
+				"hint": "One of the initial spells chosen can bypass normal source or school restriction."
+			},
+			"spellbook": {
+				"label": "Free Spells",
+				"hint": "Number of spells that can be scribed into the spellbook for free.",
+				"firstLevel": {
+					"label": "1st Level"
+				},
+				"otherLevels": {
+					"label": "Other Levels"
+				}
+			}
+		},
+		"type": {
+			"label": "Spellcasting Type",
+			"hint": "Method by which a caster casts spells and the limitations on the number of slots available."
+		}
+	},
 	"Learning": {
 		"Mode": {
-			"Label": "Learning Mode",
-			"Hint": "In what way does the caster gain spells at various levels?",
 			"All": {
 				"Label": "All Spells",
 				"Hint": "Caster knows all spells from their Source of Magic."
@@ -2679,18 +2723,8 @@
 				"Hint": "Caster must scribe spells into their spellbook at a cost."
 			}
 		},
-		"Replacement": {
-			"Label": "Replacement",
-			"Hint": "Can this caster replace one previously known spell when they level up?"
-		},
 		"Schools": {
-			"Label": "Schools",
-			"Hint": "Spell selection can only come from these schools if set.",
 			"NoRestriction": "No Restriction"
-		},
-		"Special": {
-			"Label": "Special Slot",
-			"Hint": "One of the initial spells chosen can bypass normal source or school restriction."
 		}
 	},
 	"NPC": {
@@ -2704,8 +2738,6 @@
 		"Trait": "Prepared"
 	},
 	"Progression": {
-		"Label": "Spellcasting Progression",
-		"Hint": "Determines how many spell slots a caster has available at any given level. Generally casters who gain spellcasting at 1st level are full casters, 2nd level are half, and 3rd level are third.",
 		"Full": {
 			"Label": "Full"
 		},
@@ -2718,24 +2750,19 @@
 			"Trait": "Third-Caster"
 		}
 	},
-	"RitualsKnown": {
-		"Label": "Rituals Known",
-		"Hint": "Number of ritual spells known by the caster at any given level."
-	},
 	"Source": "Magic Source",
-	"SpellsKnown": {
-		"Label": "Spells Known",
-		"Hint": "Number of regular spells known by the caster at any given level."
-	},
 	"Trait": {
 		"Display": "{source} {prepared} {progression}"
 	},
 	"Type": {
-		"Label": "Spellcasting Type",
-		"Hint": "Method by which a caster casts spells and the limitations on the number of slots available.",
 		"Trait": "Caster",
 		"Leveled": {
 			"Label": "Leveled Casting"
+		},
+		"Pact": {
+			"Label": "Pact Casting",
+			"Trait": "Pact Caster",
+			"Section": "Pact Magic ({circleLowercase})"
 		}
 	},
 	"Warning": {

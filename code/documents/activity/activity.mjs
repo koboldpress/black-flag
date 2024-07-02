@@ -286,7 +286,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// Handle scaling
 		const scaleUpdate = {};
 		if (item.type === "spell") {
-			const circle = activationConfig.spell?.circle;
+			const circle = this.actor.system.spellcasting?.circles?.[activationConfig.spell?.slot]?.circle;
+			if (circle)
+				foundry.utils.setProperty(
+					messageConfig.data,
+					`flags.${game.system.id}.spellSlot`,
+					activationConfig.spell?.slot
+				);
 			if (circle && circle !== item.system.circle.base) {
 				scaleUpdate["system.circle.value"] = circle;
 				activationConfig.scaling = circle - item.system.circle.base;
@@ -500,16 +506,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		if ((config.consume === true || config.consume.spellSlot) && this.isSpell) {
-			const circle = config.spell?.circle ?? this.item.system.circle?.value ?? this.item.system.circle?.base;
-			// TODO: Support other spellcasting types
-			const circleData = this.actor.system.spellcasting?.circles[`circle-${circle}`];
-			if (circleData?.value) {
-				updates.actor[`system.spellcasting.circles.circle-${circle}.spent`] = circleData.spent + 1;
+			const slot = config.spell?.slot ?? `circle-${this.item.system.circle?.value ?? this.item.system.circle?.base}`;
+			const slotData = this.actor.system.spellcasting?.circles[slot];
+			if (slotData?.value) {
+				updates.actor[`system.spellcasting.circles.${slot}.spent`] = slotData.spent + 1;
 			} else {
 				const err = new ConsumptionError(
-					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
-						circle: CONFIG.BlackFlag.spellCircles()[circle]
-					})
+					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", { circle: slotData.label })
 				);
 				errors.push(err);
 				ui.notifications.error(err.message, { console: false });

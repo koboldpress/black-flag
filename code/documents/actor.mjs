@@ -1,5 +1,5 @@
 import SkillRollConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
+import { buildRoll, numberFormat, Trait } from "../utils/_module.mjs";
 import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -534,7 +534,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	_getRestHitPointRecovery(config = {}, result = {}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		if (!this.system.attributes?.hp || !restConfig.recoverHitPoints) return;
+		if (!this.system.attributes?.hp?.max || !restConfig.recoverHitPoints) return;
 		const hp = this.system.attributes.hp;
 		const percentage = CONFIG.BlackFlag.rest.hitPointsRecoveryPercentage;
 		const final = Math.clamp(hp.value + Math.ceil(hp.max * percentage), 0, hp.max);

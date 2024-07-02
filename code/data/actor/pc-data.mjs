@@ -493,7 +493,7 @@ export default class PCData extends ActorDataModel.mixin(
 		// TODO: Calculate spellcasting DC per-class
 
 		// Combine class spellcasting data to total progression
-		const progression = { leveled: 0 };
+		const progression = { cantrips: false, leveled: 0, pact: { circle: null, slots: 0 } };
 		const types = {};
 
 		// TODO: Determine if more sophisticated merging of spellcasting configs is needed here
@@ -524,13 +524,13 @@ export default class PCData extends ActorDataModel.mixin(
 			this.constructor.prepareSpellcastingSlots(this.spellcasting.circles, type, progression, { actor: this });
 		}
 
-		for (const circle of Object.values(this.spellcasting.circles)) {
-			circle.value = Math.clamp(circle.max - circle.spent, 0, circle.max);
-			if (Number.isFinite(circle.max)) {
-				this.spellcasting.slots.value += circle.value;
-				this.spellcasting.slots.spent += circle.spent;
-				this.spellcasting.slots.max += circle.max;
-				if (circle.max > 0 && circle.level > this.spellcasting.maxCircle) this.spellcasting.maxCircle = circle.level;
+		for (const slot of Object.values(this.spellcasting.circles)) {
+			slot.value = Math.clamp(slot.max - slot.spent, 0, slot.max);
+			if (Number.isFinite(slot.max)) {
+				this.spellcasting.slots.value += slot.value;
+				this.spellcasting.slots.spent += slot.spent;
+				this.spellcasting.slots.max += slot.max;
+				if (slot.max > 0 && slot.circle > this.spellcasting.maxCircle) this.spellcasting.maxCircle = slot.circle;
 			}
 		}
 

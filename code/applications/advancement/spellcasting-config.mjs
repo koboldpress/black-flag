@@ -20,9 +20,9 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	 * TODO: Fetch this information from the data model itself
 	 */
 	static KNOWN = Object.freeze({
-		cantrips: { label: "BF.Spellcasting.CantripsKnown.Label", hint: "BF.Spellcasting.CantripsKnown.Hint" },
-		rituals: { label: "BF.Spellcasting.RitualsKnown.Label", hint: "BF.Spellcasting.RitualsKnown.Hint" },
-		spells: { label: "BF.Spellcasting.SpellsKnown.Label", hint: "BF.Spellcasting.SpellsKnown.Hint" }
+		cantrips: { label: "BF.Spellcasting.FIELDS.cantrips.label", hint: "BF.Spellcasting.FIELDS.cantrips.hint" },
+		rituals: { label: "BF.Spellcasting.FIELDS.rituals.label", hint: "BF.Spellcasting.FIELDS.rituals.hint" },
+		spells: { label: "BF.Spellcasting.FIELDS.spells.label", hint: "BF.Spellcasting.FIELDS.spells.hint" }
 	});
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -40,23 +40,38 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	/** @inheritDoc */
 	getData(options) {
 		const context = super.getData(options);
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
 
 		context.defaultAbility = game.i18n.format("BF.Default.Specific", {
 			default: game.i18n.localize("BF.Advancement.KeyAbility.Title").toLowerCase()
 		});
 		context.displayType = Object.keys(CONFIG.BlackFlag.spellcastingTypes).length > 1;
-		context.progressionOptions = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type]?.progression;
-		context.known = Object.entries(this.constructor.KNOWN).reduce((obj, [name, localization]) => {
-			const config = this.advancement.configuration[name];
-			obj[name] = {
-				...localization,
-				anchor: config.scaleValue?.toAnchor().outerHTML,
-				scaleValue: config.scaleValue
-			};
-			return obj;
-		}, {});
-		if (context.configuration.spells.mode !== "limited") delete context.known.spells;
-		context.showClassRestriction = false;
+		context.progressionOptions = typeConfig?.progression;
+		if (context.configuration.spells.mode) {
+			context.known = Object.entries(this.constructor.KNOWN).reduce((obj, [name, localization]) => {
+				const config = this.advancement.configuration[name];
+				obj[name] = {
+					...localization,
+					anchor: config.scaleValue?.toAnchor().outerHTML,
+					scaleValue: config.scaleValue
+				};
+				return obj;
+			}, {});
+			if (context.configuration.spells.mode !== "limited") delete context.known.spells;
+		}
+		context.slots = {
+			anchor: this.advancement.configuration.slots.scaleValue?.toAnchor().outerHTML,
+			scaleValue: this.advancement.configuration.slots.scaleValue,
+			display: context.configuration.type === "pact"
+		};
+
+		context.learningModes =
+			!typeConfig || typeConfig.learningModes === false
+				? null
+				: Object.entries(CONFIG.BlackFlag.spellLearningModes).reduce((obj, [k, v]) => {
+						if (!typeConfig.learningModes || typeConfig.learningModes.has(k)) obj[k] = v;
+						return obj;
+					}, {});
 
 		const schools = this.advancement.configuration.spells.schools;
 		if (schools.size)
@@ -67,6 +82,7 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			);
 		else context.schoolLabel = game.i18n.localize("BF.Spellcasting.Learning.Schools.NoRestriction");
 
+		context.showClassRestriction = false;
 		return context;
 	}
 
@@ -97,7 +113,9 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		switch (subAction) {
 			case "create":
 				if (this.advancement.configuration[name].scaleValue) return;
-				const title = game.i18n.localize(this.constructor.KNOWN[name].label);
+				const title = game.i18n.localize(
+					name === "slots" ? "BF.Spellcasting.FIELDS.slots.label" : this.constructor.KNOWN[name].label
+				);
 				const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
 				const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
 				await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });

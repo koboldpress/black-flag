@@ -68,6 +68,25 @@ export const sheetSections = {
 			}
 		},
 		{
+			id: "pact",
+			tab: "spellcasting",
+			label: "pact",
+			filters: [
+				{ k: "type", v: "spell" },
+				{ k: "flags.black-flag.relationship.mode", v: "pact" },
+				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
+			],
+			options: { autoHide: true },
+			expand: (document, sectionData) => {
+				sectionData.circle = document.system.spellcasting.circles.pact;
+				if (sectionData.circle?.max) {
+					sectionData.label = sectionData.circle.label;
+					sectionData.options.autoHide = false;
+				}
+				return [sectionData];
+			}
+		},
+		{
 			id: "ritual",
 			tab: "spellcasting",
 			label: "BF.Spell.Preparation.Mode.Rituals",

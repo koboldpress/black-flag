@@ -640,7 +640,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		for (const config of CONFIG.BlackFlag.sheetSections[document.type] ?? []) {
 			if (tab && config.tab !== tab) continue;
 			const collection = tab ? sections : (sections[config.tab] ??= {});
-			const toAdd = config.expand ? config.expand(document, config) : [config];
+			const toAdd = config.expand ? config.expand(document, foundry.utils.deepClone(config)) : [config];
 			toAdd.forEach(c => (collection[c.id] = { ...c, items: [] }));
 		}
 

@@ -24,8 +24,8 @@
 			<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
 			<label>
 				<span>{{ localize "BF.Spell.Circle.Label" }}</span>
-				<select name="spell.circle" data-dtype="Number">
-					{{ selectOptions spell.circles selected=spell.circle labelAttr="label"}}
+				<select name="spell.slot">
+					{{ selectOptions spell.circles selected=spell.slot labelAttr="label"}}
 				</select>
 			</label>
 			{{#if show.spellConsumption}}

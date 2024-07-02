@@ -13,7 +13,8 @@ export const maxSpellCircle = 9;
  *
  * @typedef {LabeledConfiguration} SpellcastingTypeConfiguration
  * @property {string} [trait] - How this progression will be displayed in a trait list, if no progression trait set.
- * @property {{[key: string]: SpellcastingProgressionConfiguration}} [progression] - Progression modes for this type.
+ * @property {Record<string, SpellcastingProgressionConfiguration>} [progression] - Progression modes for this type.
+ * @property {Set<string>|boolean} - What learning modes can be used with this spellcasting type?
  */
 
 /**
@@ -49,6 +50,10 @@ export const spellcastingTypes = {
 				divisor: 3
 			}
 		}
+	},
+	pact: {
+		label: "BF.Spellcasting.Type.Pact.Label",
+		trait: "BF.Spellcasting.Type.Pact.Trait"
 	}
 };
 
@@ -120,6 +125,9 @@ export const spellPreparationModes = {
 	standard: {
 		label: "BF.Spell.Preparation.Mode.Standard",
 		preparable: true
+	},
+	pact: {
+		label: "BF.Spell.Preparation.Mode.Pact"
 	},
 	atWill: {
 		label: "BF.Spell.Preparation.Mode.AtWill"
