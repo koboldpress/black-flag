@@ -1,13 +1,9 @@
 .advancement-config.app form {
-	label {
+	fieldset > label {
 		align-items: stretch;
 		> span:first-child {
 			flex: 0 1 min(10em, 35%);
 			align-self: center;
-		}
-
-		+ label {
-			margin-block-start: 0.5rem;
 		}
 
 		> input:not([type="checkbox"]), > select, > multi-select {
