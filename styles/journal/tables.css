@@ -1,0 +1,55 @@
+:is(.black-flag-journal, .black-flag .description, .content-embed) {
+	table {
+		margin-block-start: 1rem;
+		border-block: 2px solid var(--bf-color-border-blue);
+		background: none;
+
+		caption {
+			color: var(--bf-text-color-blue);
+			font-weight: 200;
+			text-align: start;
+			text-transform: uppercase;
+		}
+
+		thead {
+			background: var(--bf-text-color-blue);
+			color: white;
+			text-shadow: none;
+	
+			th {
+				font-size: var(--font-size-14);
+				text-align: start;
+				text-transform: uppercase;
+			}
+		}
+
+		tbody {
+			tr:not(:last-child) {
+				border-block-end: 0.5px solid var(--bf-color-border-blue);
+			}
+			tr:nth-child(2n) {
+				background: lch(0% 0% 0deg / 0.05);
+			}
+			th {
+				text-align: start;
+			}
+		}
+
+		td, th {
+			padding-inline: 6px;
+		}
+	}
+
+	table.sectioned {
+		tbody {
+			th { text-align: start; }
+			th[colspan] {
+				font-style: italic;
+				font-weight: normal;
+			}
+			tr.indent {
+				> :is(td, th):first-child { padding-inline-start: 18px; }
+			}
+		}
+	}
+}

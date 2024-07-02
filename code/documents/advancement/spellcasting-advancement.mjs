@@ -77,8 +77,10 @@ export default class SpellcastingAdvancement extends Advancement {
 	 * @returns {boolean}
 	 */
 	replacesSpellAt(level) {
-		if (level <= this.level.value) return false;
-		return this.configuration.spells.replacement && this.configuration.spells.mode === "limited";
+		return false;
+		// TODO: Implement replacement
+		// if (level <= this.level.value) return false;
+		// return this.configuration.spells.replacement && this.configuration.spells.mode === "limited";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
