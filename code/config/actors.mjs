@@ -169,6 +169,8 @@ export const movementTags = {
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                        Resting                        */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for a rest type.
@@ -190,9 +192,10 @@ export const movementTags = {
  * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
  * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
- * @property {boolean} [recoverLeveledSpellSlots=false] - Should regular spell slots be recovered?
+ * @property {Set<string>} [recoverSpellSlotTypes] - Types of spellcasting slots that are recovered on this rest.
  * @property {string[]} [recoverPeriods] - Recovery periods as defined in `CONFIG.BlackFlag.recoveryPeriods` that
- *                                         should be applied when this rest is taken.
+ *                                         should be applied when this rest is taken. The ordering of the periods
+ *                                         determines which is applied if more that one recovery profile is found.
  */
 
 /**
@@ -206,7 +209,8 @@ export const rest = {
 			hint: "BF.Rest.Type.Short.Hint",
 			resultMessages: "BF.Rest.Result.Short",
 			dialogClass: ShortRestDialog,
-			recoverPeriods: ["shortRest"]
+			recoverPeriods: ["shortRest"],
+			recoverSpellSlotTypes: new Set(["pact"])
 		},
 		long: {
 			label: "BF.Rest.Type.Long.Label",
@@ -215,8 +219,8 @@ export const rest = {
 			dialogClass: LongRestDialog,
 			recoverHitPoints: true,
 			recoverHitDice: true,
-			recoverLeveledSpellSlots: true,
-			recoverPeriods: ["longRest", "shortRest"]
+			recoverPeriods: ["longRest", "shortRest"],
+			recoverSpellSlotTypes: new Set(["leveled", "pact"])
 		}
 	},
 	hitPointsRecoveryPercentage: 1,

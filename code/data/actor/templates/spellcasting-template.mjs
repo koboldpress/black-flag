@@ -245,31 +245,14 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		 * @function blackFlag.getRestRecovery
 		 * @memberof hookEvents
 		 */
-		const allowed = Hooks.call(`blackFlag.getRest${type.capitalize()}Recovery`, {
+		if ( Hooks.call(`blackFlag.getRest${type.capitalize()}Recovery`, {
 			actor: this.parent, type, config, result
-		});
+		}) === false ) return;
 
-		if ( allowed && (type === "leveled") ) {
-			this.getRestLeveledRecovery(config, result);
+		for ( const [key, slot] of Object.entries(this.spellcasting.slots) ) {
+			if ( slot.type !== type ) continue;
+			foundry.utils.setProperty(result, `actorUpdates.system.spellcasting.slots.${key}.spent`, 0);
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Perform any recovery of leveled spell slots for this rest.
-	 * @param {RestConfiguration} [config={}] - Configuration options for the rest.
-	 * @param {RestResult} [result={}] - Rest result being constructed.
-	 */
-	getRestLeveledRecovery(config={}, result={}) {
-		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
-		// TODO: Move this recovery configuration into the spellcasting configuration
-		if ( !restConfig.recoverLeveledSpellSlots ) return;
-		const actorUpdates = {};
-		for ( const level of Array.fromRange(this.spellcasting.maxCircle, 1) ) {
-			actorUpdates[`system.spellcasting.slots.circle-${level}.spent`] = 0;
-		}
-		foundry.utils.mergeObject(result, { actorUpdates });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

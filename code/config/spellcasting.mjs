@@ -14,7 +14,7 @@ export const maxSpellCircle = 9;
  * @typedef {LabeledConfiguration} SpellcastingTypeConfiguration
  * @property {string} [trait] - How this progression will be displayed in a trait list, if no progression trait set.
  * @property {Record<string, SpellcastingProgressionConfiguration>} [progression] - Progression modes for this type.
- * @property {Set<string>|boolean} - What learning modes can be used with this spellcasting type?
+ * @property {Set<string>|boolean} [learningModes] - What learning modes can be used with this spellcasting type?
  */
 
 /**

@@ -559,7 +559,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	_getRestSpellSlotRecovery(config = {}, result = {}) {
 		if (!this.system.spellcasting?.slots) return;
+		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
 		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
+			if (!restConfig.recoverSpellSlotTypes?.has(type)) continue;
 			this.system.getRestSpellcastingRecovery?.(type, config, result);
 		}
 	}
