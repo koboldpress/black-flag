@@ -15,12 +15,7 @@
 			<label>
 				<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
 				<select name="configuration.ability">
-					{{#select configuration.ability}}
-						<option value="">{{ defaultAbility }}</option>
-						<optgroup label="{{ localize 'BF.Ability.Label[other]' }}">
-							{{ selectOptions CONFIG.abilities.localized }}
-						</optgroup>
-					{{/select}}
+					{{ selectOptions CONFIG.abilities.localized selected=configuration.ability }}
 				</select>
 			</label>
 			{{#if displayType}}

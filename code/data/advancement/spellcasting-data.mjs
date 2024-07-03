@@ -39,7 +39,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 		return {
 			type: new StringField({ initial: "leveled" }),
 			progression: new StringField(),
-			ability: new StringField(),
+			ability: new StringField({ blank: false, initial: "intelligence" }),
 			source: new StringField(),
 			cantrips: new SchemaField({
 				scale: new StringField()

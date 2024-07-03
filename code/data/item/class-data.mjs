@@ -44,7 +44,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	 */
 	get keyAbility() {
 		const keyAbility = this.advancement.byType("keyAbility")[0];
-		return keyAbility?.value?.selected ?? null;
+		return keyAbility?.configuration.options.first();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
