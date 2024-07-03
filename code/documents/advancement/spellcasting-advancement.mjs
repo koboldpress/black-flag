@@ -1,3 +1,4 @@
+import SpellcastingTemplate from "../../data/actor/templates/spellcasting-template.mjs";
 import { SpellcastingConfigurationData, SpellcastingValueData } from "../../data/advancement/spellcasting-data.mjs";
 import { linkForUUID, Search } from "../../utils/_module.mjs";
 import Advancement from "./advancement.mjs";
@@ -89,6 +90,64 @@ export default class SpellcastingAdvancement extends Advancement {
 	configuredForLevel(levels) {
 		const level = this.relavantLevel(levels);
 		return !!this.value.added?.[level]?.length;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Generate a table with spellcasting details for this item.
+	 * @returns {object}
+	 */
+	generateSpellcastingTable() {
+		const table = { rows: [] };
+
+		/**
+		 * A hook event that fires to generate the table for custom spellcasting types.
+		 * The actual hook names include the spellcasting type (e.g. `blackFlag.buildPsionicSpellcastingTable`).
+		 * @param {object} table - Table definition being built. *Will be mutated.*
+		 * @param {Item5e} item - Class for which the spellcasting table is being built.
+		 * @param {SpellcastingConfigurationData} spellcasting - Spellcasting configuration.
+		 * @function blackFlag.buildSpellcastingTable
+		 * @memberof hookEvents
+		 */
+		if (
+			Hooks.call(`blackFlag.build${this.type.capitalize()}SpellcastingTable`, table, this.item, this.configuration) ===
+			false
+		)
+			return table;
+
+		const slots = {};
+		Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).forEach(l => (slots[`circle-${l}`] = {}));
+
+		let largestSlot;
+		for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse()) {
+			const progression = { leveled: 0 };
+			SpellcastingTemplate.computeClassProgression(progression, this.item, {
+				levels: level,
+				spellcasting: this.configuration
+			});
+			SpellcastingTemplate.prepareSpellcastingSlots(slots, "leveled", progression);
+
+			if (!largestSlot)
+				largestSlot = Object.values(slots).reduce(
+					(slot, data) => (data.max && data.circle > slot ? data.circle : slot),
+					-1
+				);
+
+			table.rows.push(
+				Array.fromRange(largestSlot, 1).map(circle => {
+					return { class: "spell-slots", content: slots[`circle-${circle}`]?.max || "&mdash;" };
+				})
+			);
+		}
+
+		// Prepare headers & columns
+		const circles = CONFIG.BlackFlag.spellCircles();
+		table.headers = [Array.fromRange(largestSlot, 1).map(circle => ({ content: circles[circle] }))];
+		table.cols = [{ class: "spellcasting", span: largestSlot }];
+		table.rows.reverse();
+
+		return table;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -315,11 +374,10 @@ export default class SpellcastingAdvancement extends Advancement {
 		if (data.circle) return data.circle;
 
 		const TABLE = CONFIG.BlackFlag.spellSlotTable;
-		// TODO: Round up if this is the only class
 		switch (type) {
 			case "leveled":
 				const divisor = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[progression]?.divisor ?? 1;
-				const leveledRow = TABLE[Math.clamp(Math.floor(level / divisor), 0, TABLE.length - 1)];
+				const leveledRow = TABLE[Math.clamp(Math.ceil(level / divisor), 0, TABLE.length - 1)];
 				if (leveledRow?.length) data.circle = leveledRow.length - 1;
 				break;
 			case "pact":

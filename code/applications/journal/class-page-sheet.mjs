@@ -194,7 +194,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 	async _getTable(item, { features, initialLevel = 1 }) {
 		const hasFeatures = !!item.system.advancement.byType("grantFeatures");
 		const scaleValues = this._getScaleValues(item, { features });
-		const spellProgression = await this._getSpellProgression(item);
+		const spellProgression = await item.system.advancement.byType("spellcasting")[0]?.generateSpellcastingTable();
 
 		const headers = [[{ content: game.i18n.localize("BF.Level.Label[one]") }]];
 		if (item.type === "class") headers[0].push({ content: game.i18n.localize("BF.Proficiency.Bonus.Abbreviation") });
@@ -291,63 +291,6 @@ export default class ClassPageSheet extends JournalPageSheet {
 				return collection;
 			}, new Collection())
 		};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Build out the spell progression data.
-	 * @param {BlackFlagItem} item - Class item belonging to this journal.
-	 * @returns {object} - Prepared spell progression table.
-	 */
-	async _getSpellProgression(item) {
-		const spellcasting = item.system.spellcasting;
-		if (!spellcasting) return null;
-
-		const table = { rows: [] };
-
-		if (spellcasting.type === "leveled") {
-			const spells = {};
-			Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).forEach(l => (spells[`circle-${l}`] = {}));
-
-			let largestSlot;
-			for (const level of Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).reverse()) {
-				const progression = { leveled: 0 };
-				SpellcastingTemplate.computeClassProgression(progression, item, { levels: level, spellcasting });
-				SpellcastingTemplate.prepareSpellcastingSlots(spells, "leveled", progression);
-
-				if (!largestSlot)
-					largestSlot = Object.values(spells).reduce(
-						(slot, data) => (data.max && data.level > slot ? data.level : slot),
-						-1
-					);
-
-				table.rows.push(
-					Array.fromRange(largestSlot, 1).map(circle => {
-						return { class: "spell-slots", content: spells[`circle-${circle}`]?.max || "&mdash;" };
-					})
-				);
-			}
-
-			// Prepare headers & columns
-			const circles = CONFIG.BlackFlag.spellCircles();
-			table.headers = [Array.fromRange(largestSlot, 1).map(circle => ({ content: circles[circle] }))];
-			table.cols = [{ class: "spellcasting", span: largestSlot }];
-			table.rows.reverse();
-		} else {
-			/**
-			 * A hook event that fires to generate the table for custom spellcasting types.
-			 * The actual hook names include the spellcasting type (e.g. `blackFlag.buildPsionicSpellcastingTable`).
-			 * @param {object} table - Table definition being built. *Will be mutated.*
-			 * @param {Item5e} item - Class for which the spellcasting table is being built.
-			 * @param {SpellcastingConfigurationData} spellcasting - Spellcasting configuration.
-			 * @function blackFlag.buildSpellcastingTable
-			 * @memberof hookEvents
-			 */
-			Hooks.callAll(`blackFlag.build${spellcasting.type.capitalize()}SpellcastingTable`, table, item, spellcasting);
-		}
-
-		return table;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
