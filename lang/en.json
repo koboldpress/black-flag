@@ -2657,6 +2657,10 @@
 		"Abbreviation": "DC"
 	},
 	"FIELDS": {
+		"ability": {
+			"label": "Spellcasting Ability",
+			"hint": "Ability used for calculating spell attack modifier and spell save DC."
+		},
 		"cantrips": {
 			"label": "Cantrips Known",
 			"hint": "Number of cantrips known by the caster at any given level."
@@ -2667,11 +2671,19 @@
 		},
 		"rituals": {
 			"label": "Rituals Known",
-			"hint": "Number of ritual spells known by the caster at any given level."
+			"hint": "Number of ritual spells known by the caster at any given level.",
+			"restricted": {
+				"label": "Restricted Source",
+				"hint": "Restrict rituals that can be learned to the main source of magic."
+			}
 		},
 		"slots": {
 			"label": "Pact Slots",
 			"hint": "Number of pact slots available at any given level."
+		},
+		"source": {
+			"label": "Magic Source",
+			"hint": "Source of magic that gives access to a certain set of spells."
 		},
 		"spells": {
 			"label": "Spells Known",

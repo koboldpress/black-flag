@@ -267,7 +267,7 @@ export default class SpellcastingAdvancement extends Advancement {
 	async createSpells(uuids, { added = [], data, render = false } = {}) {
 		const spells = [];
 		for (const [index, data] of uuids.entries()) {
-			const origin = { identifier: this.item.identifier };
+			const origin = { source: this.configuration.source, identifier: this.item.identifier };
 			const spellData = await this.createItemData(data.uuid, {
 				changes: { [`flags.${game.system.id}.relationship`]: { mode: "standard", origin } },
 				data,

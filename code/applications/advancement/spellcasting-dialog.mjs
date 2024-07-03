@@ -200,7 +200,13 @@ export default class SpellcastingDialog extends FormApplication {
 		const maxCircle = this.advancement.computeMaxCircle(this.advancement.relavantLevel(this.levels));
 
 		// Always restrict by source unless current slot is special and there are no schools set
-		if (this.currentSlot.type !== "special" || schools.size) {
+		// or the slot is ritual and ritual source isn't restricted
+		if (
+			!(
+				(this.currentSlot.type === "special" && !schools.size) ||
+				(this.currentSlot.type === "rituals" && !this.advancement.configuration.rituals.restricted)
+			)
+		) {
 			filters.push({ k: "system.source", o: "has", v: this.spellcasting.source });
 		}
 

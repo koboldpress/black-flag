@@ -80,6 +80,7 @@
 				</label>
 				</label>
 				{{#each known as |data name|}}
+					<hr>
 					<label data-name="{{ name }}">
 						<span class="hinted-label" data-tooltip="{{ data.hint }}">
 							{{ localize data.label }}
@@ -100,13 +101,23 @@
 							</button>
 						{{/if}}
 					</label>
+					{{#if (and ../configuration.rituals.scaleValue (eq name "rituals"))}}
+						<label class="full-checkbox">
+							<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.rituals.restricted.hint">
+								{{ localize "BF.Spellcasting.FIELDS.rituals.restricted.label" }}
+							</span>
+							<input type="checkbox" name="configuration.rituals.restricted"
+							       {{ checked ../configuration.rituals.restricted }}>
+						</label>
+					{{/if}}
 				{{/each}}
 				{{#if (eq configuration.spells.mode "limited")}}
-					<label>
+					<label class="full-checkbox">
 						<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.replacement.hint">
 							{{ localize "BF.Spellcasting.FIELDS.spells.replacement.label" }}
 						</span>
-						<input type="checkbox" name="configuration.spells.replacement" {{ checked configuration.spells.replacement }}>
+						<input type="checkbox" name="configuration.spells.replacement"
+						       {{ checked configuration.spells.replacement }}>
 					</label>
 					<label>
 						<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.schools.hint">
@@ -120,7 +131,7 @@
 							</datalist>
 						</blackFlag-multiSelect>
 					</label>
-					<label>
+					<label class="full-checkbox">
 						<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.spells.special.hint">
 							{{ localize "BF.Spellcasting.FIELDS.spells.special.label" }}
 						</span>

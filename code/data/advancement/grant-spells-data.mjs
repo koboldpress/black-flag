@@ -96,7 +96,7 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 				? data.ability
 				: this.ability.first();
 		if (this.origin) updates["flags.black-flag.relationship.origin.identifier"] = this.origin;
-		if (this.source) updates["flags.black-flag.relationship.source"] = this.source;
+		if (this.source) updates["flags.black-flag.relationship.origin.source"] = this.source;
 		return updates;
 	}
 
@@ -113,7 +113,7 @@ export class SpellConfigurationData extends foundry.abstract.DataModel {
 		if (this.alwaysPrepared) updates["flags.black-flag.relationship.alwaysPrepared"] = false;
 		if (this.ability.size) updates["flags.black-flag.relationship.origin.-=ability"] = null;
 		if (this.origin) updates["flags.black-flag.relationship.origin.-=identifier"] = null;
-		if (this.source) updates["flags.black-flag.relationship.-=source"] = null;
+		if (this.source) updates["flags.black-flag.relationship.origin.-=source"] = null;
 		return updates;
 	}
 }

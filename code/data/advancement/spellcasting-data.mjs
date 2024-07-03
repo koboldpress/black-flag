@@ -15,6 +15,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
  * @property {object} rituals
  * @property {string} rituals.scale - ID of scale value that represents number of rituals known.
+ * @property {boolean} rituals.restricted - Should ritual selection be restricted to a single source?
  * @property {object} slots
  * @property {string} slots.scale - ID of the scale value that represents the number of spell slots.
  * @property {object} spells
@@ -36,29 +37,30 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			type: new StringField({ initial: "leveled", label: "BF.Spellcasting.Type.Label" }),
-			progression: new StringField({
-				label: "BF.Spellcasting.Progression.Label",
-				hint: "BF.Spellcasting.Progression.Hint"
+			type: new StringField({ initial: "leveled" }),
+			progression: new StringField(),
+			ability: new StringField(),
+			source: new StringField(),
+			cantrips: new SchemaField({
+				scale: new StringField()
 			}),
-			ability: new StringField({ label: "BF.Spellcasting.Ability.Label" }),
-			source: new StringField({ label: "BF.Spell.Source.Label" }),
-			cantrips: new SchemaField({ scale: new StringField() }),
-			rituals: new SchemaField({ scale: new StringField() }),
-			slots: new SchemaField({ scale: new StringField() }),
+			rituals: new SchemaField({
+				scale: new StringField(),
+				restricted: new BooleanField({ initial: true })
+			}),
+			slots: new SchemaField({
+				scale: new StringField()
+			}),
 			spells: new SchemaField({
 				scale: new StringField(),
 				mode: new StringField(),
 				replacement: new BooleanField(),
 				schools: new SetField(new StringField()),
 				special: new BooleanField(),
-				spellbook: new SchemaField(
-					{
-						firstLevel: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.FirstLevel" }),
-						otherLevels: new NumberField({ integer: true, min: 0, label: "BF.Spellbook.FreeSpell.OtherLevels" })
-					},
-					{ label: "BF.Spellbook.FreeSpell.Label[other]", hint: "BF.Spellbook.FreeSpell.Hint" }
-				)
+				spellbook: new SchemaField({
+					firstLevel: new NumberField({ integer: true, min: 0 }),
+					otherLevels: new NumberField({ integer: true, min: 0 })
+				})
 			})
 		};
 	}
