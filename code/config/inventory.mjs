@@ -52,15 +52,15 @@ export const sheetSections = {
 					number = Number(number);
 					const cantrip = number === 0;
 					const id = cantrip ? "cantrip" : `circle-${number}`;
-					const circle = document.system.spellcasting.circles[id] ?? {};
+					const slot = document.system.spellcasting.slots[id] ?? {};
 					return foundry.utils.mergeObject(
 						sectionData,
 						{
 							id,
 							label,
 							filters: [...sectionData.filters, { k: "system.circle.base", v: number }],
-							options: { autoHide: !circle.max && !cantrip },
-							circle
+							options: { autoHide: !slot.max && !cantrip },
+							slot
 						},
 						{ inplace: false }
 					);
@@ -78,9 +78,9 @@ export const sheetSections = {
 			],
 			options: { autoHide: true },
 			expand: (document, sectionData) => {
-				sectionData.circle = document.system.spellcasting.circles.pact;
-				if (sectionData.circle?.max) {
-					sectionData.label = sectionData.circle.label;
+				sectionData.slot = document.system.spellcasting.slots.pact;
+				if (sectionData.slot?.max) {
+					sectionData.label = sectionData.slot.label;
 					sectionData.options.autoHide = false;
 				}
 				return [sectionData];

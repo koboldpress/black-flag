@@ -19,13 +19,13 @@
 		</fieldset>
 	{{/if}}
 
-	{{#if show.spellCircleSelection}}
+	{{#if show.spellSlotSelection}}
 		<fieldset>
 			<legend>{{ localize "BF.Spellcasting.Label" }}</legend>
 			<label>
 				<span>{{ localize "BF.Spell.Circle.Label" }}</span>
 				<select name="spell.slot">
-					{{ selectOptions spell.circles selected=spell.slot labelAttr="label"}}
+					{{ selectOptions spell.slots selected=spell.slot labelAttr="label"}}
 				</select>
 			</label>
 			{{#if show.spellConsumption}}
@@ -41,7 +41,7 @@
 		<fieldset class="consumption">
 			<legend>{{ localize "BF.Consumption.Label" }}</legend>
 
-			{{#if (and show.spellConsumption (not show.spellCircleSelection))}}
+			{{#if (and show.spellConsumption (not show.spellSlotSelection))}}
 				<label class="full-checkbox">
 					<span>{{ localize "BF.Consumption.Type.SpellSlots.Prompt" }}</span>
 					<input type="checkbox" name="consume.spellSlot" {{ checked consume.spellSlot }}>

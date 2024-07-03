@@ -11,27 +11,30 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			spellcasting: new SchemaField({
-				circles: new MappingField(new SchemaField({
+				slots: new MappingField(new SchemaField({
 					spent: new NumberField({nullable: false, min: 0, initial: 0, integer: true}),
 					override: new NumberField({integer: true, min: 0})
 				}))
 			})
 		};
 	}
-	
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Migrate spell rings to circles.
-	 * Added in 0.9.023
+	 * Added in 0.9.023, updated in 0.9.037
 	 * @param {object} source - Candidate source data to migrate.
 	 */
 	static migrateCircles(source) {
-		if ( "spellcasting" in source && "rings" in source.spellcasting ) {
-			source.spellcasting.circles = foundry.utils.mergeObject(
-				source.spellcasting.circles ?? {}, source.spellcasting.rings
+		if ( "spellcasting" in source ) {
+			if ( "rings" in source.spellcasting ) source.spellcasting.slots = foundry.utils.mergeObject(
+				source.spellcasting.slots ?? {}, source.spellcasting.rings
+			);
+			if ( "circles" in source.spellcasting ) source.spellcasting.slots = foundry.utils.mergeObject(
+				source.spellcasting.slots ?? {}, source.spellcasting.circles
 			);
 		}
 	}
@@ -137,7 +140,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare actor's spell slots using progression data.
-	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.slots` object within actor's data. *Will be mutated.*
 	 * @param {string} type - Type of spellcasting slots being prepared.
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} [config]
@@ -165,7 +168,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare leveled spell slots using progression data.
-	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.slots` object within actor's data. *Will be mutated.*
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} config
 	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.
@@ -200,7 +203,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare pact spell slots using progression data.
-	 * @param {object} spells - The `system.spellcasting.circles` object within actor's data. *Will be mutated.*
+	 * @param {object} spells - The `system.spellcasting.slots` object within actor's data. *Will be mutated.*
 	 * @param {object} progression - Spellcasting progression data.
 	 * @param {object} config
 	 * @param {BlackFlagActor} [config.actor] - Actor for whom the data is being prepared.
@@ -260,10 +263,11 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 */
 	getRestLeveledRecovery(config={}, result={}) {
 		const restConfig = CONFIG.BlackFlag.rest.types[config.type];
+		// TODO: Move this recovery configuration into the spellcasting configuration
 		if ( !restConfig.recoverLeveledSpellSlots ) return;
 		const actorUpdates = {};
 		for ( const level of Array.fromRange(this.spellcasting.maxCircle, 1) ) {
-			actorUpdates[`system.spellcasting.circles.circle-${level}.spent`] = 0;
+			actorUpdates[`system.spellcasting.slots.circle-${level}.spent`] = 0;
 		}
 		foundry.utils.mergeObject(result, { actorUpdates });
 	}

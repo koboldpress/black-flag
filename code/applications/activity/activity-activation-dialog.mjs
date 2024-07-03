@@ -96,7 +96,7 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 				activity: this.activity,
 				resources: this._prepareResourceOptions(),
 				spell: {
-					circles: this._prepareSpellSlotOptions()
+					slots: this._prepareSpellSlotOptions()
 				}
 			},
 			{ inplace: false }
@@ -107,12 +107,12 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			scaling: data.scalingData.max,
 			scalingRange: data.scalingData.max <= 20,
 			spellConsumption: this.activity.requiresSpellSlot,
-			spellCircleSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.circles),
+			spellSlotSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.slots),
 			resourceConsumption: !foundry.utils.isEmpty(data.resources)
 		};
 		data.show.anyConsumption =
 			data.show.actionConsumption ||
-			(data.show.spellConsumption && !data.show.spellCircleSelection) ||
+			(data.show.spellConsumption && !data.show.spellSlotSelection) ||
 			data.show.resourceConsumption;
 
 		context.content = await renderTemplate(
@@ -168,10 +168,15 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 	 */
 	_prepareSpellSlotOptions() {
 		const spellcasting = this.activity.actor.system.spellcasting;
-		if (!spellcasting?.circles) return [];
+		if (!spellcasting?.slots) return [];
 		const minimumCircle = this.activity?.item?.system.circle?.base ?? 1;
-		const options = Object.entries(spellcasting.circles).reduce((obj, [key, slot]) => {
-			if (slot.circle < minimumCircle || (slot.type === "leveled" && slot.circle > spellcasting.maxCircle)) return obj;
+		const options = Object.entries(spellcasting.slots).reduce((obj, [key, slot]) => {
+			if (
+				slot.circle < minimumCircle ||
+				(!slot.max && slot.type !== "leveled") ||
+				(slot.type === "leveled" && slot.circle > spellcasting.maxCircle)
+			)
+				return obj;
 			obj[key] = {
 				label: game.i18n.format("BF.Consumption.Type.SpellSlots.Available", {
 					slot: slot.label,

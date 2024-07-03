@@ -241,7 +241,7 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 
 		this.spellcasting.maxCircle ??= 0;
-		this.spellcasting.slots ??= { value: 0, spent: 0, max: 0 };
+		this.spellcasting.totals ??= { value: 0, spent: 0, max: 0 };
 		this.spellcasting.origins ??= {};
 		this.spellcasting.spells ??= { total: 0, cantrips: 0, rituals: 0, damaging: 0 };
 		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
@@ -489,6 +489,17 @@ export default class PCData extends ActorDataModel.mixin(
 	 * Prepare final spellcasting.
 	 */
 	prepareDerivedSpellcasting() {
+		Object.defineProperty(this.spellcasting, "circles", {
+			get() {
+				foundry.utils.logCompatibilityWarning("`spellcasting.circles` has been migrated to `spellcasting.slots`.", {
+					since: "Black Flag 0.9.034",
+					until: "Black Flag 0.9.038"
+				});
+				return this.slots;
+			},
+			enumerable: false
+		});
+
 		this.spellcasting.hasSpellcastingAdvancement = false;
 		// TODO: Calculate spellcasting DC per-class
 
@@ -521,15 +532,15 @@ export default class PCData extends ActorDataModel.mixin(
 		}
 
 		for (const type of Object.keys(CONFIG.BlackFlag.spellcastingTypes)) {
-			this.constructor.prepareSpellcastingSlots(this.spellcasting.circles, type, progression, { actor: this });
+			this.constructor.prepareSpellcastingSlots(this.spellcasting.slots, type, progression, { actor: this });
 		}
 
-		for (const slot of Object.values(this.spellcasting.circles)) {
+		for (const slot of Object.values(this.spellcasting.slots)) {
 			slot.value = Math.clamp(slot.max - slot.spent, 0, slot.max);
 			if (Number.isFinite(slot.max)) {
-				this.spellcasting.slots.value += slot.value;
-				this.spellcasting.slots.spent += slot.spent;
-				this.spellcasting.slots.max += slot.max;
+				this.spellcasting.totals.value += slot.value;
+				this.spellcasting.totals.spent += slot.spent;
+				this.spellcasting.totals.max += slot.max;
 				if (slot.max > 0 && slot.circle > this.spellcasting.maxCircle) this.spellcasting.maxCircle = slot.circle;
 			}
 		}

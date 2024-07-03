@@ -359,7 +359,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const circleNumber = circleRoll.total;
 
 		// Check to see if enough slots available at specified circle
-		const circleData = activity.actor.system.spellcasting?.circles?.[`circle-${circleNumber}`];
+		const circleData = activity.actor.system.spellcasting?.slots?.[`circle-${circleNumber}`];
 		const newSpent = (circleData?.spent ?? 0) + cost;
 		let warningMessage;
 		if (!circleData?.max) warningMessage = "BF.Consumption.Warning.MissingSpellCircle";
@@ -379,6 +379,6 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		}
 
 		if (cost < 0 && !circleData.spent) return;
-		updates.actor[`system.spellcasting.circles.circle-${circleNumber}.spent`] = Math.clamp(newSpent, 0, circleData.max);
+		updates.actor[`system.spellcasting.slots.circle-${circleNumber}.spent`] = Math.clamp(newSpent, 0, circleData.max);
 	}
 }
