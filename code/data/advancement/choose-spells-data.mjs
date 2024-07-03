@@ -18,6 +18,11 @@ const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, S
  * @property {SpellConfigurationData} spell - Configuration data for granted spells.
  */
 export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.Advancement.ChooseFeatures", "BF.Advancement.ChooseSpells"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
@@ -37,8 +42,8 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 				{ label: "DOCUMENT.Items" }
 			),
 			restriction: new SchemaField({
-				allowCantrips: new BooleanField({ label: "BF.Advancement.ChooseSpells.AllowCantrips" }),
-				allowRituals: new BooleanField({ label: "BF.Advancement.ChooseSpells.AllowRituals" }),
+				allowCantrips: new BooleanField(),
+				allowRituals: new StringField(),
 				circle: new NumberField({ initial: -1, label: "BF.Spell.Circle.Label" }),
 				source: new StringField({ label: "BF.Spell.Source.Label" })
 			}),
@@ -54,6 +59,18 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 	 */
 	get type() {
 		return "spell";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Migrations           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		// Added in 0.9.037
+		if (foundry.utils.getType(source.restriciton?.allowRituals) === "boolean") {
+			source.restriction.allowRituals = source.restriction.allowRituals ? "allow" : "";
+		}
 	}
 }
 

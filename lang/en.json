@@ -351,13 +351,27 @@
 	"ChooseSpells": {
 		"Title": "Choose Spells",
 		"Hint": "Present the player with a choice of spells that they may choose at one or more levels.",
-		"AllowCantrips": "Allow Cantrips",
-		"AllowRituals": "Allow Rituals",
+		"FIELDS": {
+			"restriction": {
+				"allowCantrips": {
+					"label": "Allow Cantrips",
+					"hint": "Can cantrips be selected when \"Any Available Circle\" is selected?"
+				},
+				"allowRituals": {
+					"label": "Rituals",
+					"hint": "Restriction on selection of rituals.",
+					"Allow": "Allow Rituals",
+					"None": "No Rituals",
+					"Only": "Only Rituals"
+				}
+			}
+		},
 		"AvailableCircle": "Any Available Circle",
 		"Warning": {
 			"NoCantrips": "No cantrips can be selected for this choice.",
 			"NoRituals": "No rituals can be selected for this choice.",
 			"OnlyCantrips": "Only cantrips can be selected for this choice.",
+			"OnlyRituals": "Only rituals can be selected for this choice.",
 			"Source": "Only {source} spells can be selected for this choice.",
 			"CircleAvailable": "Only {circle} or lower spells can be selected for this choice.",
 			"CircleSpecific": "Only {circle} spells can be selected for this choice."

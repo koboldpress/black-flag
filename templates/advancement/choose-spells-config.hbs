@@ -14,20 +14,23 @@
 					{{ selectOptions spellCircles selected=configuration.restriction.circle }}
 				</select>
 			</label>
-			{{#if (eq configuration.restriction.circle -1)}}
-				<label class="full-checkbox">
-					<span>{{ localize "BF.Advancement.ChooseSpells.AllowCantrips" }}</span>
-					<input type="checkbox" name="configuration.restriction.allowCantrips"
-								 {{ checked configuration.restriction.allowCantrips }}>
-				</label>
-			{{/if}}
 			{{#unless (eq configuration.restriction.circle 0)}}
 				<label class="full-checkbox">
-					<span>{{ localize "BF.Advancement.ChooseSpells.AllowRituals" }}</span>
-					<input type="checkbox" name="configuration.restriction.allowRituals"
-					       {{ checked configuration.restriction.allowRituals }}>
+					<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.label" }}</span>
+					<select name="configuration.restriction.allowRituals">
+						{{ selectOptions ritualModes selected=configuration.restriction.allowRituals localize=true
+						   blank=(localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.None") }}
+					</select>
 				</label>
 			{{/unless}}
+			{{#if (eq configuration.restriction.circle -1)}}
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowCantrips.label" }}</span>
+					<input type="checkbox" name="configuration.restriction.allowCantrips"
+								 {{ checked configuration.restriction.allowCantrips }}
+								 {{ disabled (eq configuration.restriction.allowRituals "only") }}>
+				</label>
+			{{/if}}
 			<label>
 				<span>{{ localize "BF.Spell.Source.Label" }}</span>
 				<select name="configuration.restriction.source">

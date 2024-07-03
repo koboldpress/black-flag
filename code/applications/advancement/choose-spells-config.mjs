@@ -24,6 +24,10 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 		}, {});
 		context.alwaysPreparable =
 			CONFIG.BlackFlag.spellPreparationModes[context.configuration.spell.mode]?.preparable ?? false;
+		context.ritualModes = {
+			allow: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Allow",
+			only: "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.Only"
+		};
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 		return context;
 	}
