@@ -249,6 +249,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 		if (!this.isEditable) return false;
 
 		const { data } = DragDrop.getDragData(event);
+		if (data.uuid?.startsWith(this.item.uuid)) return false;
 		if (!this._validateDrop(data)) return this.app._onDrop?.(event);
 
 		try {
@@ -269,8 +270,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	 */
 	_validateDrop(data) {
 		if (data.type !== "Advancement") return false;
-		if (!data.uuid) return true;
-		return !data.uuid.startsWith(this.item.uuid);
+		return !data.uuid?.startsWith(this.item.uuid);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
