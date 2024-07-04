@@ -3,19 +3,79 @@
   "name": "Hurl Through Hell",
   "type": "feature",
   "_id": "IZPE9SYK63gT1JW2",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/fire/flame-burning-skeleton-explosion.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "8R1nIE7konpuqppX": {
+        "type": "utility",
+        "_id": "8R1nIE7konpuqppX",
+        "description": "<p>When you hit a creature with an attack, you can use this feature to instantly transport the target, causing it to disappear and hurtle through a nightmare landscape.</p><p>At the end of your next turn, the target returns to the space it previously occupied or to the nearest unoccupied space.</p><p>If the target is not a Fiend, it takes [[/damage 10d10 psychic]] damage as it reels from its horrific experience.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with an attack"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>When you hit a creature with an attack, you can use this feature to instantly transport the target, causing it to disappear and hurtle through a nightmare landscape.</p><p>At the end of your next turn, the target returns to the space it previously occupied or to the nearest unoccupied space.</p><p>If the target is not a Fiend, it takes 10d10 psychic damage as it reels from its horrific experience.</p><p>Once you use this feature, you can’t use it again until you finish a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +110,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719377073668,
-    "modifiedTime": 1719377081551,
+    "modifiedTime": 1720051926916,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!IZPE9SYK63gT1JW2"

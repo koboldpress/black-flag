@@ -3,9 +3,85 @@
   "name": "Eldritch Blast",
   "type": "feature",
   "_id": "PHd9fAfpHIHOYso2",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/light/projectiles-salvo-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "1unoUYjO7MLVR5GU": {
+        "type": "attack",
+        "_id": "1unoUYjO7MLVR5GU",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "spell"
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "force"
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -13,9 +89,36 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "FUM3xoinsED1SkRh": {
+        "type": "scaleValue",
+        "_id": "FUM3xoinsED1SkRh",
+        "configuration": {
+          "type": "number",
+          "scale": {
+            "5": {
+              "value": 2
+            },
+            "9": {
+              "value": 3
+            },
+            "14": {
+              "value": 4
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "",
+        "icon": null,
+        "hint": "",
+        "identifier": ""
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>As a result of binding yourself to otherworldly powers, you can conjure a baleful magical energy. As an action, you can send a beam of crackling eldritch power toward a creature within 120 feet of you. When you do so, make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage.</p><p>Upon achieving higher levels of warlock, you can create more than one beam: two beams at 5th level, three at 9th, and four at 14th. You can direct the beams at the same or different target. You make a separate attack roll for each beam.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +153,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719375662995,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720049715755,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PHd9fAfpHIHOYso2"

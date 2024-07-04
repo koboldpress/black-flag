@@ -3,9 +3,71 @@
   "name": "Dark One’s Blessing",
   "type": "feature",
   "_id": "wILbx6Y5rMUAdu0q",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/fire/beam-strike-whip-red.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "noiFCpMwvPF2RpYi": {
+        "type": "healing",
+        "_id": "noiFCpMwvPF2RpYi",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "temp",
+            "number": null,
+            "denomination": 0,
+            "custom": {
+              "enabled": true,
+              "formula": "@prof + @progression.warlock.levels"
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you reduce a hostile creature to 0 HP or when a hostile creature within 30 feet of you is reduced to 0 HP"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +77,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>When you reduce a hostile creature to 0 HP or when a hostile creature within 30 feet of you is reduced to 0 HP, you gain temporary hit points equal to your PB + your warlock level. These hit points last until expended or until you complete a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +112,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719377051403,
-    "modifiedTime": 1719377106580,
+    "modifiedTime": 1720051688304,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wILbx6Y5rMUAdu0q"

@@ -3,7 +3,7 @@
   "name": "Pact of the Tome",
   "type": "feature",
   "_id": "Nrx1unFEjSVdNOqI",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/sundries/books/book-symbol-spiral-silver-blue.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,41 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "71MLVcWc9fALB6dg": {
+        "type": "chooseSpells",
+        "_id": "71MLVcWc9fALB6dg",
+        "configuration": {
+          "choices": {
+            "0": 3
+          },
+          "allowDrops": true,
+          "pool": [],
+          "restriction": {
+            "allowCantrips": false,
+            "circle": 0,
+            "allowRituals": "",
+            "source": ""
+          },
+          "spell": {
+            "ability": [],
+            "mode": "standard",
+            "alwaysPrepared": false,
+            "origin": "warlock",
+            "source": "wyrd"
+          }
+        },
+        "level": {
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Pact of the Tome Cantrips",
+        "icon": null,
+        "hint": "Choose three cantrips from any source spell list (they don’t have to be from the same list)."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You receive an eldritch grimoire called a Book of Shadows. You can use your Book of Shadows as a spellcasting focus for your spells. When you gain this feature, choose three cantrips from any source spell list (they don’t have to be from the same list). While the book is on your person, you can cast those cantrips. These cantrips count as Wyrd spells for you.</p><p>If your Book of Shadows is lost or destroyed, you can perform a 1-hour ceremony to create a replacement. The replacement contains any spells previously transcribed within it. This ceremony can be performed as part of a short or long rest, and it destroys the previous grimoire—if it still exists. The book is unreadable by anyone but you, and it is instantly destroyed when you die.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +82,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719375791254,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720051085262,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Nrx1unFEjSVdNOqI"

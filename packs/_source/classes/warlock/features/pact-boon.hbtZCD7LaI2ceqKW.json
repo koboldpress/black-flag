@@ -3,7 +3,7 @@
   "name": "Pact Boon",
   "type": "feature",
   "_id": "hbtZCD7LaI2ceqKW",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/unholy/silhouette-light-fire-blue.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,43 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "8uDoFRFeiRUAPvbu": {
+        "type": "chooseFeatures",
+        "_id": "8uDoFRFeiRUAPvbu",
+        "configuration": {
+          "choices": {
+            "1": 1
+          },
+          "allowDrops": false,
+          "type": "feature",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.X2iTkFkmoJW9OKk5"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.C9FG5NlEsX8IaZ9T"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.Nrx1unFEjSVdNOqI"
+            }
+          ],
+          "restriction": {
+            "category": "class",
+            "type": "pactBoon"
+          }
+        },
+        "level": {
+          "classIdentifier": "warlock"
+        },
+        "flags": {},
+        "title": "Pact Boon",
+        "icon": null,
+        "hint": "The initial pact that grants you your warlock powers is sealed with the gift of a Pact Boon. You gain one of the following boons of your choice."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>The initial pact that grants you your warlock powers is sealed with the gift of a Pact Boon. You gain one of the following boons of your choice.</p><p>@Embed[.Advancement.8uDoFRFeiRUAPvbu inline]</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +84,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719375676775,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720049815172,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hbtZCD7LaI2ceqKW"

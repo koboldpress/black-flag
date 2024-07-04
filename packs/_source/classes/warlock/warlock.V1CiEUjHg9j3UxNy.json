@@ -3,7 +3,7 @@
   "name": "Warlock",
   "type": "class",
   "_id": "V1CiEUjHg9j3UxNy",
-  "img": "systems/black-flag/artwork/types/class.svg",
+  "img": "icons/magic/symbols/ring-circle-smoke-blue.webp",
   "system": {
     "advancement": {
       "2IUnoXJkgktRrSVV": {
@@ -256,7 +256,7 @@
         "type": "spellcasting",
         "_id": "9MqQtDUaAvjPo2z6",
         "configuration": {
-          "type": "leveled",
+          "type": "pact",
           "cantrips": {
             "scale": "GuAwJn7qNUZLGVDR"
           },
@@ -274,7 +274,10 @@
           },
           "source": "wyrd",
           "ability": "charisma",
-          "progression": "half"
+          "progression": "half",
+          "slots": {
+            "scale": "KyL95oqwNiU2mHcj"
+          }
         },
         "level": {
           "value": 2
@@ -469,6 +472,28 @@
         "icon": null,
         "hint": "",
         "identifier": "invocations"
+      },
+      "KyL95oqwNiU2mHcj": {
+        "type": "spellcastingValue",
+        "title": "Pact Slots",
+        "identifier": "slots-known",
+        "_id": "KyL95oqwNiU2mHcj",
+        "configuration": {
+          "scale": {
+            "3": {
+              "value": 2
+            },
+            "13": {
+              "value": 3
+            },
+            "17": {
+              "value": 4
+            }
+          }
+        },
+        "level": {},
+        "flags": {},
+        "icon": null
       }
     },
     "description": {
@@ -495,7 +520,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719375506515,
-    "modifiedTime": 1719377518497,
+    "modifiedTime": 1720049573588,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!V1CiEUjHg9j3UxNy"

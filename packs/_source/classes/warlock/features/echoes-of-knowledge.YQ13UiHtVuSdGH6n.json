@@ -3,7 +3,7 @@
   "name": "Echoes of Knowledge",
   "type": "feature",
   "_id": "YQ13UiHtVuSdGH6n",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/skills/trades/academics-astronomy-navigation-blue.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,72 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "zaFXJ4tnDHBBPJPH": {
+        "type": "chooseSpells",
+        "_id": "zaFXJ4tnDHBBPJPH",
+        "configuration": {
+          "choices": {
+            "10": 1
+          },
+          "allowDrops": true,
+          "pool": [],
+          "restriction": {
+            "allowCantrips": false,
+            "circle": 1,
+            "allowRituals": "",
+            "source": ""
+          },
+          "spell": {
+            "ability": [],
+            "mode": "pact",
+            "alwaysPrepared": false,
+            "origin": "warlock",
+            "source": "wyrd"
+          }
+        },
+        "level": {
+          "classIdentifier": "warlock"
+        },
+        "flags": {},
+        "title": "Echoes of Knowledge, 1st Circle",
+        "icon": null,
+        "hint": ""
+      },
+      "QxjNEMTr4di857zL": {
+        "type": "chooseSpells",
+        "configuration": {
+          "choices": {
+            "10": 1
+          },
+          "allowDrops": true,
+          "pool": [],
+          "restriction": {
+            "allowCantrips": false,
+            "circle": 2,
+            "allowRituals": "",
+            "source": ""
+          },
+          "spell": {
+            "ability": [],
+            "mode": "pact",
+            "alwaysPrepared": false,
+            "origin": "warlock",
+            "source": "wyrd"
+          }
+        },
+        "level": {
+          "classIdentifier": "warlock"
+        },
+        "flags": {},
+        "title": "Echoes of Knowledge, 2nd Circle",
+        "icon": null,
+        "hint": "",
+        "_id": "QxjNEMTr4di857zL"
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You learn one 1st-circle and one 2nd-circle spell of your choice from any spell list, they count as Wyrd spells for you. The chosen spells can’t be rituals, and they don’t count against your total spells known. These spells are added to your list of Pact Spells and can be cast by expending a use of Pact Magic or by expending Wyrd spell slots as normal.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +113,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376254584,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720051186067,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YQ13UiHtVuSdGH6n"

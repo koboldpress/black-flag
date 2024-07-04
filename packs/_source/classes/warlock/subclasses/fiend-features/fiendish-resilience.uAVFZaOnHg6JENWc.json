@@ -3,9 +3,56 @@
   "name": "Fiendish Resilience",
   "type": "feature",
   "_id": "uAVFZaOnHg6JENWc",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/defensive/armor-shield-barrier-steel.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "UrygdHgQMGN5hied": {
+        "type": "utility",
+        "_id": "UrygdHgQMGN5hied",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "short",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Choose Resistance",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +62,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You can choose one damage type when you finish a short or long rest. You gain resistance to that damage type until you choose a different one with this feature.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +97,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719377069010,
-    "modifiedTime": 1719377087394,
+    "modifiedTime": 1720051804777,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!uAVFZaOnHg6JENWc"

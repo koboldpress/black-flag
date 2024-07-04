@@ -3,7 +3,7 @@
   "name": "Enhanced Boon",
   "type": "feature",
   "_id": "Zmn3xtk7xth0VkXq",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/creatures/magical/spirit-undead-horned-blue.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,43 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "tz6KXuH1PBwOgTqY": {
+        "type": "chooseFeatures",
+        "_id": "tz6KXuH1PBwOgTqY",
+        "configuration": {
+          "choices": {
+            "6": 1
+          },
+          "allowDrops": true,
+          "type": "feature",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.vVd0TArw9pBiDM9K"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.EYGh5pcaDA1OhjxG"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.CGnB8trEx1NRWWiq"
+            }
+          ],
+          "restriction": {
+            "category": "class",
+            "type": "pactBoon"
+          }
+        },
+        "level": {
+          "classIdentifier": "warlock"
+        },
+        "flags": {},
+        "title": "Enhanced Boon",
+        "icon": null,
+        "hint": "Your patron enhances your Pact Boon as a reward for your service. You gain one of the following enhancements as determined by your chosen Pact Boon. If you have more than one Pact Boon, choose which one is enhanced."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>Your patron enhances your Pact Boon as a reward for your service. You gain one of the following enhancements as determined by your chosen Pact Boon. If you have more than one Pact Boon, choose which one is enhanced.</p><p>@Embed[.Advancement.tz6KXuH1PBwOgTqY inline]</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +84,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376103956,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720050782401,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Zmn3xtk7xth0VkXq"

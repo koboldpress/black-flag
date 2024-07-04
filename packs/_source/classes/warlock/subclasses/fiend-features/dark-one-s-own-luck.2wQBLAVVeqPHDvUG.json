@@ -3,19 +3,77 @@
   "name": "Dark One’s Own Luck",
   "type": "feature",
   "_id": "2wQBLAVVeqPHDvUG",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/fire/orbs-silhouette-sun.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9xqC6kirph077x3P": {
+        "type": "utility",
+        "_id": "9xqC6kirph077x3P",
+        "description": "<p>You can call on your patron to alter fate in your favor. When you make an ability check or a save, you can use this feature to add [[/r 1d10]] to your roll.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you make an ability check or a save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Boost Check or Save",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "shortRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You can call on your patron to alter fate in your favor. When you make an ability check or a save, you can use this feature to add 1d10 to your roll.</p><p>Once you use this feature, you can’t use it again until you finish a short or long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +108,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719377063875,
-    "modifiedTime": 1719377095942,
+    "modifiedTime": 1720051772150,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!2wQBLAVVeqPHDvUG"

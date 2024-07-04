@@ -3,9 +3,56 @@
   "name": "Pact of the Chain",
   "type": "feature",
   "_id": "C9FG5NlEsX8IaZ9T",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "nJ9YwvE9Bc0bt0kt": {
+        "type": "utility",
+        "_id": "nJ9YwvE9Bc0bt0kt",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Find Familiar",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +62,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You learn a more potent version of the <em>find familiar</em> ritual and can cast it without the need for any material components. The spell doesn’t count against your number of spells known. A familiar summoned with this feature has the following differences from a standard familiar summoned by the spell:</p><ul><li><p>When you cast the spell, you can choose one of the normal familiar forms or one of the following special forms: <strong>blink dog</strong>, <strong>imp</strong>, <strong>pseudodragon</strong>, or <strong>quasit</strong>.</p></li><li><p>You can telepathically communicate or see through your familiar’s eyes as long as it is on the same plane as you, ignoring the standard 100-foot range restriction. In addition, while perceiving through your familiar’s senses, you can also speak through your familiar in your own voice, even if your familiar is normally incapable of speech.</p></li><li><p>Your familiar can attack. In combat, your familiar shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any commands, it takes the Dodge action and uses its move to avoid danger.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +97,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719375777848,
-    "modifiedTime": 1719377270269,
+    "modifiedTime": 1720049972633,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!C9FG5NlEsX8IaZ9T"
