@@ -14,6 +14,7 @@ const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, S
  * @property {boolean} restriction.allowRituals - Allow rituals to be selected.
  * @property {number} restriction.circle - Circle allowed for choosing spells or `-1` to represent any circle
  *                                         available to the character.
+ * @property {boolean} restriction.exactCircle - Does the circle need to be exact, or are lower circle spells allowed?
  * @property {string} restriction.source - Source of magic required for to select spells.
  * @property {SpellConfigurationData} spell - Configuration data for granted spells.
  */
@@ -45,6 +46,7 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 				allowCantrips: new BooleanField(),
 				allowRituals: new StringField(),
 				circle: new NumberField({ initial: -1, label: "BF.Spell.Circle.Label" }),
+				exactCircle: new BooleanField({ initial: true }),
 				source: new StringField({ label: "BF.Spell.Source.Label" })
 			}),
 			spell: new EmbeddedDataField(SpellConfigurationData)

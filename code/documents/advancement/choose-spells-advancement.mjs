@@ -145,32 +145,40 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 				this.actor.system.spellcasting?.maxCircle ??
 				1;
 
-			// Spell's circle is higher than max circle
+			// Spell's circle is higher than max circle that can be cast
 			if (item.system.circle.base > maxCircle) {
 				if (strict)
 					throw new Error(
-						game.i18n.format("BF.Advancement.ChooseSpells.Warning.CircleAvailable", { circle: circles[maxCircle] })
+						game.i18n.format("BF.Advancement.ChooseSpells.Warning.CircleMaximum", { circle: circles[maxCircle] })
 					);
-				return false;
-			}
-
-			// Spell is a cantrip and cantrips are not allowed
-			else if (!restriction.allowCantrips && item.system.circle.base === 0) {
-				if (strict) throw new Error(game.i18n.localize("BF.Advancement.ChooseSpells.Warning.NoCantrips"));
 				return false;
 			}
 		}
 
 		// Specific circle restriction
-		else if (restriction.circle !== -1 && item.system.circle.base !== restriction.circle) {
-			if (strict)
-				throw new Error(
-					game.i18n.format(
-						`BF.Advancement.ChooseSpells.Warning.${!restriction.circle ? "OnlyCantrips" : "CircleSpecific"}`,
-						{ circle: CONFIG.BlackFlag.spellCircles()[restriction.circle] }
-					)
-				);
-			return false;
+		else if (restriction.circle !== -1) {
+			// Spell's circle is not equal to the specified circle
+			if ((restriction.exactCircle || restriction.circle === 0) && item.system.circle.base !== restriction.circle) {
+				if (strict)
+					throw new Error(
+						game.i18n.format(
+							`BF.Advancement.ChooseSpells.Warning.${!restriction.circle ? "OnlyCantrips" : "CircleSpecific"}`,
+							{ circle: circles[restriction.circle] }
+						)
+					);
+				return false;
+			}
+
+			// Spell's circle is higher than specified circle
+			else if (!restriction.exactCircle && item.system.circle.base > restriction.circle) {
+				if (strict)
+					throw new Error(
+						game.i18n.format("BF.Advancement.ChooseSpells.Warning.CircleMaximum", {
+							circle: circles[restriction.circle]
+						})
+					);
+				return false;
+			}
 		}
 
 		// Check ritual restriction
@@ -182,6 +190,12 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 				if (strict) throw new Error(game.i18n.localize("BF.Advancement.ChooseSpells.Warning.NoRituals"));
 				return false;
 			}
+		}
+
+		// Check cantrip restriction
+		if (!restriction.allowCantrips && item.system.circle.base === 0 && restriction.circle !== 0) {
+			if (strict) throw new Error(game.i18n.localize("BF.Advancement.ChooseSpells.Warning.NoCantrips"));
+			return false;
 		}
 
 		// Check source restriction

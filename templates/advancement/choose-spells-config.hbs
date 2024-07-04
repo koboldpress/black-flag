@@ -14,8 +14,17 @@
 					{{ selectOptions spellCircles selected=configuration.restriction.circle }}
 				</select>
 			</label>
-			{{#unless (eq configuration.restriction.circle 0)}}
+			{{#if (gt configuration.restriction.circle 0)}}
 				<label class="full-checkbox">
+					<span class="hinted-label" data-tooltip="BF.Advancement.ChooseSpells.FIELDS.restriction.exactCircle.hint">
+						{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.exactCircle.label" }}
+					</span>
+					<input type="checkbox" name="configuration.restriction.exactCircle"
+					       {{ checked configuration.restriction.exactCircle }}>
+				</label>
+			{{/if}}
+			{{#unless (eq configuration.restriction.circle 0)}}
+				<label>
 					<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowRituals.label" }}</span>
 					<select name="configuration.restriction.allowRituals">
 						{{ selectOptions ritualModes selected=configuration.restriction.allowRituals localize=true
@@ -23,7 +32,7 @@
 					</select>
 				</label>
 			{{/unless}}
-			{{#if (eq configuration.restriction.circle -1)}}
+			{{#if (or (eq configuration.restriction.circle -1) (and (gt configuration.restriction.circle 0) (not configuration.restriction.exactCircle)))}}
 				<label class="full-checkbox">
 					<span>{{ localize "BF.Advancement.ChooseSpells.FIELDS.restriction.allowCantrips.label" }}</span>
 					<input type="checkbox" name="configuration.restriction.allowCantrips"
