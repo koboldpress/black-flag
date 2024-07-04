@@ -3,7 +3,7 @@
   "name": "Armor of Shadows",
   "type": "feature",
   "_id": "o2Sfs3fbTzyr7S8M",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/unholy/silhouette-robe-evil-glow.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,31 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "qiKW1Fq6oMsPplxw": {
+        "type": "property",
+        "_id": "qiKW1Fq6oMsPplxw",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.attributes.ac.formulas",
+              "mode": 2,
+              "value": "{ \"label\": \"Armor of Shadows\", \"formula\": \"13 + @abilities.charisma.mod\", \"armored\": false, \"shielded\": false }"
+            }
+          ]
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Armor of Shadows",
+        "icon": null,
+        "hint": ""
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>While you aren’t wearing armor or wielding a shield, your AC becomes 13 + your CHA modifier. This effect is suppressed while you are unconscious or in an area affected by an <em>antimagic field</em> spell.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +72,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376496360,
-    "modifiedTime": 1719376739730,
+    "modifiedTime": 1720063503025,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!o2Sfs3fbTzyr7S8M"

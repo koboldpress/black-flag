@@ -3,9 +3,57 @@
   "name": "One With Shadows",
   "type": "feature",
   "_id": "3I3zYn1wnMGYTbWF",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "u2kZouWHlolfW3cq": {
+        "type": "utility",
+        "_id": "u2kZouWHlolfW3cq",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "special",
+          "override": false,
+          "special": "Until you move or take an action or a reaction"
+        },
+        "range": {
+          "units": "self"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Go Invisible",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +63,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>When you are in an area of dim light, darkness, or magical darkness, you can use your action to become invisible until you move or take an action or a reaction.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -57,7 +105,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376825885,
-    "modifiedTime": 1719608144752,
+    "modifiedTime": 1720064365358,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!3I3zYn1wnMGYTbWF"

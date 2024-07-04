@@ -3,7 +3,7 @@
   "name": "Boon Savant",
   "type": "feature",
   "_id": "WyL3Nn0tPvH19aes",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/fire/elemental-fire-humanoid.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,43 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "dmiE0anWwUQ7pNzv": {
+        "type": "chooseFeatures",
+        "configuration": {
+          "choices": {
+            "0": 1
+          },
+          "allowDrops": true,
+          "type": "feature",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.vVd0TArw9pBiDM9K"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.EYGh5pcaDA1OhjxG"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.CGnB8trEx1NRWWiq"
+            }
+          ],
+          "restriction": {
+            "category": "class",
+            "type": "enhancedBoon"
+          }
+        },
+        "level": {
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Enhanced Boon",
+        "icon": null,
+        "hint": "Your second Pact Boon becomes more powerful, gaining the benefits detailed in your Enhanced Boon feature.",
+        "_id": "dmiE0anWwUQ7pNzv"
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>Your second Pact Boon becomes more powerful, gaining the benefits detailed in your Enhanced Boon feature.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -60,7 +94,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376511867,
-    "modifiedTime": 1719608248550,
+    "modifiedTime": 1720064817916,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!WyL3Nn0tPvH19aes"

@@ -7,6 +7,7 @@ const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields
  * Data definition template for Feature and Talent items.
  *
  * @property {object} restriction
+ * @property {boolean} restriction.allowMultipleTimes - Can this talent be taken more than once?
  * @property {FilterField} restriction.filters - Filters limiting when this item can be selected.
  * @property {Set<string>} restriction.items - Other items that must be present on the actor to take this feature.
  * @property {boolean} restriction.requireAll - Do all filters need to be satisfied to take this feature, or only one.
@@ -29,6 +30,10 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			restriction: new SchemaField({
+				allowMultipleTimes: new BooleanField({
+					label: "BF.Talent.AllowMultipleTimes.Label",
+					hint: "BF.Talent.AllowMultipleTimes.Hint"
+				}),
 				filters: new FilterField(),
 				items: new SetField(new StringField()),
 				requireAll: new BooleanField({

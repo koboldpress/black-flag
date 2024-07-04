@@ -5,8 +5,6 @@ import DescriptionTemplate from "./templates/description-template.mjs";
 import FeatureTemplate from "./templates/feature-template.mjs";
 import ProficiencyTemplate from "./templates/proficiency-template.mjs";
 
-const { BooleanField, SchemaField } = foundry.data.fields;
-
 /**
  * Data definition for Talent items.
  * @mixes {ActivityTemplate}
@@ -14,9 +12,6 @@ const { BooleanField, SchemaField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {FeatureTemplate}
  * @mixes {ProficiencyTemplate}
- *
- * @property {object} restriction
- * @property {boolean} restriction.allowMultipleTimes - Can this talent be taken more than once?
  */
 export default class TalentData extends ItemDataModel.mixin(
 	ActivityTemplate,
@@ -31,20 +26,6 @@ export default class TalentData extends ItemDataModel.mixin(
 			type: "talent",
 			localization: "BF.Item.Type.Talent",
 			img: "systems/black-flag/artwork/types/talent.svg"
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	static defineSchema() {
-		return this.mergeSchema(super.defineSchema(), {
-			restriction: new SchemaField({
-				allowMultipleTimes: new BooleanField({
-					label: "BF.Talent.AllowMultipleTimes.Label",
-					hint: "BF.Talent.AllowMultipleTimes.Hint"
-				})
-			})
 		});
 	}
 

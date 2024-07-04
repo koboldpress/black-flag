@@ -3,7 +3,7 @@
   "name": "Second Boon",
   "type": "feature",
   "_id": "cS9R17yuSIlvoAf8",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/creatures/slimes/slime-movement-pseudopods-blue.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,43 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "awBELdBVCRA0NULb": {
+        "type": "chooseFeatures",
+        "configuration": {
+          "choices": {
+            "0": 1
+          },
+          "allowDrops": true,
+          "type": "feature",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.X2iTkFkmoJW9OKk5"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.C9FG5NlEsX8IaZ9T"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.Nrx1unFEjSVdNOqI"
+            }
+          ],
+          "restriction": {
+            "category": "class",
+            "type": "pactBoon"
+          }
+        },
+        "level": {
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Pact Boon",
+        "icon": null,
+        "hint": "You gain the benefits of a second boon from the options described in the 1st level feature Pact Boon.",
+        "_id": "awBELdBVCRA0NULb"
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You gain the benefits of a second boon from the options described in the 1st level feature @UUID[Compendium.black-flag.classes.Item.hbtZCD7LaI2ceqKW]{Pact Boon}: Pact of the Blade, Pact of the Chain, or Pact of the Tome.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -57,7 +91,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376855794,
-    "modifiedTime": 1719608173127,
+    "modifiedTime": 1720064669089,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!cS9R17yuSIlvoAf8"

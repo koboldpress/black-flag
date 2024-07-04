@@ -3,7 +3,7 @@
   "name": "Stolen Knowledge",
   "type": "feature",
   "_id": "d0hTMRXSSdbut5d2",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/sundries/documents/document-symbol-triangle-pink.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,36 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "TPS2BT8DIYS931KR": {
+        "type": "trait",
+        "_id": "TPS2BT8DIYS931KR",
+        "configuration": {
+          "mode": "default",
+          "grants": [],
+          "choices": [
+            {
+              "count": 2,
+              "pool": [
+                "skills:*",
+                "tools:*"
+              ]
+            }
+          ],
+          "choiceMode": "inclusive"
+        },
+        "level": {
+          "value": 0,
+          "classIdentifier": ""
+        },
+        "flags": {},
+        "title": "Stolen Knowledge",
+        "icon": null,
+        "hint": "You gain proficiency in any two skills or tools of your choice (in any combination)."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You gain proficiency in any two skills or tools of your choice (in any combination).</p><p>You can take this invocation multiple times, choosing different proficiencies each time.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +77,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376868529,
-    "modifiedTime": 1719376915635,
+    "modifiedTime": 1720065101908,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!d0hTMRXSSdbut5d2"

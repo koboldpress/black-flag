@@ -3,9 +3,58 @@
   "name": "Gaze of Two Minds",
   "type": "feature",
   "_id": "bAt1gp6cPRStbKSd",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/magic/perception/orb-eye-scrying.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "8xwnRNZsJWQEk10m": {
+        "type": "utility",
+        "_id": "8xwnRNZsJWQEk10m",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch"
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "willing",
+            "count": "1",
+            "special": "Humanoid"
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +64,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You can use your action to touch a willing Humanoid and perceive through its senses until the end of your next turn. As long as the creature is on the same plane as you, you can use your action on subsequent turns to maintain this connection, extending the duration until the end of your next turn. While perceiving through the other creature’s senses, you benefit from any special senses possessed by that creature, and you are blinded and deafened to your own surroundings.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,7 +99,7 @@
     "systemVersion": "0.9.037",
     "coreVersion": "11.315",
     "createdTime": 1719376550908,
-    "modifiedTime": 1719376558009,
+    "modifiedTime": 1720064093994,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!bAt1gp6cPRStbKSd"
