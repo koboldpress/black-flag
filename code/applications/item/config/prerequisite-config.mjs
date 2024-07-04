@@ -240,11 +240,11 @@ export default class PrerequisiteConfig extends DocumentSheet {
 				"classLevel",
 				`system.progression.classes.${data.traits.level.class}.levels`,
 				data.traits?.level?.value,
-				undefined,
+				"gte",
 				{ _class: data.traits.level.class }
 			);
 		} else {
-			updateFilter("characterLevel", "system.progression.level", data.traits?.level?.value);
+			updateFilter("characterLevel", "system.progression.level", data.traits?.level?.value, "gte");
 			updateFilter("classLevel");
 		}
 		updateFilter("creatureSize", "system.traits.size", data.traits?.size);
