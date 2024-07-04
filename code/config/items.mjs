@@ -61,6 +61,11 @@ export const featureCategories = {
 		localization: "BF.Feature.Category.Class",
 		sources: ["class", "subclass"],
 		children: {
+			augmentEffect: {
+				localization: "BF.Feature.Type.AugmentEffect",
+				level: false,
+				sources: ["class", "subclass"]
+			},
 			bardicPerformance: {
 				localization: "BF.Feature.Type.BardicPerformance",
 				sources: ["class", "subclass"]

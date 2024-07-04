@@ -12,7 +12,7 @@
 		<legend>{{ localize "BF.Prerequisite.Items.Label" }}</legend>
 		<document-tags name="system.restriction.items" type="Item" value="{{ items }}">
 			{{~#if isV11}}
-				{{#each system.restriction.items}}{{{ blackFlag-linkForUuid this }}}{{/each}}
+				{{#each system.restriction.items}}{{{ blackFlag-linkForUUID this }}}{{/each}}
 				<p>{{ localize "BF.Prerequisite.Items.V11Note" }}</p>
 			{{/if~}}
 		</document-tags>
