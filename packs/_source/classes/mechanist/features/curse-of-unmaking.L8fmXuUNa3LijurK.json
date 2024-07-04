@@ -3,19 +3,90 @@
   "name": "Curse of Unmaking",
   "type": "feature",
   "_id": "L8fmXuUNa3LijurK",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/smoke-bomb-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "YShlp8RVJUNrXeb0": {
+        "type": "attack",
+        "_id": "YShlp8RVJUNrXeb0",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": "spell"
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": []
+          },
+          "ability": "intelligence"
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>As an action, you can make a melee spell attack using your augment attack modifier (see <strong>Augment Effects</strong>) against a creature or item within reach. On a successful hit, the target becomes cursed so that it is vulnerable to all damage. If the target is a creature, it can attempt a CON save against your augment save DC (see <strong>Augment Effects</strong>) each time it takes a new instance of damage, ending the curse on a success. Once you use this feature, you must finish a long rest before you can use it again.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +123,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127673684,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720131008004,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!L8fmXuUNa3LijurK"

@@ -3,19 +3,151 @@
   "name": "Shard of Creation",
   "type": "feature",
   "_id": "oy0xcT4QIyiWu1AA",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/gems/gem-rough-trapeze-yellow-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "HEPU5fOt0rtEyIwx": {
+        "type": "utility",
+        "_id": "HEPU5fOt0rtEyIwx",
+        "description": "<p>When you make an ability check while touching the shard (regardless of its current form), you can spend 1 charge to roll a [[/r @scale.mechanist.inspire]] and add the number rolled to your check result.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you make an ability check while touching the shard"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Inspire",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "X7iYUUnO0qLHL8Ae": {
+        "type": "utility",
+        "_id": "X7iYUUnO0qLHL8Ae",
+        "description": "<p>While touching the shard, you can use an action to transform it into any type of nonmagical weapon or shield or into any object of Medium size or smaller. The object appears in an unoccupied space within 10 feet of you, but the chosen space must contain a surface or liquid capable of supporting the object. If the object you create is of an appropriate size to be worn or held, you can choose for the object to appear in your hand or on your person. The total value (in gold pieces) of an object created can’t be more than 20 × your mechanist level.</p><p>A transformed shard remains in its new form until you die, use an action to return it to its original state, or use an action to transform it again. No matter what shape the shard assumes, those who handle the shard can sense something strange about its nature. The shard can’t be passed off as a typical item for purposes of buying and selling.</p>",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Transform",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "max(1, @abilities.intelligence.mod)"
     },
-    "advancement": {},
+    "advancement": {
+      "HmLo3YE5RLy6WYQO": {
+        "type": "scaleValue",
+        "_id": "HmLo3YE5RLy6WYQO",
+        "configuration": {
+          "type": "dice",
+          "scale": {
+            "1": {
+              "denomination": 6,
+              "number": 1
+            },
+            "9": {
+              "denomination": 8
+            },
+            "18": {
+              "denomination": 10
+            }
+          }
+        },
+        "level": {
+          "classIdentifier": "mechanist"
+        },
+        "flags": {},
+        "title": "Inspire Die",
+        "icon": null,
+        "hint": "",
+        "identifier": "inspire"
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You learn how to craft a shard of creation, which is a Tiny magical object with many uses that appears on your person. In its base state, the shard appears as a constantly shifting, fluid-like bundle of plasma.</p><p>The shard vanishes instantly if you are slain or if it is not in your possession for more than 24 consecutive hours. If the shard is destroyed or you lose it, you can perform a 1-hour ritual to create a replacement. This ritual can be performed as part of a short or long rest.</p><p>The shard has a number of charges equal to your INT modifier (minimum of 1), and you regain all expended charges when you finish a long rest. Charges can be spent to activate the following properties.</p><h6>Inspire</h6><p>@Embed[.Activities.HEPU5fOt0rtEyIwx inline]</p><h6>Transform</h6><p>@Embed[.Activities.X7iYUUnO0qLHL8Ae inline]</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +184,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127474778,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720130899089,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!oy0xcT4QIyiWu1AA"

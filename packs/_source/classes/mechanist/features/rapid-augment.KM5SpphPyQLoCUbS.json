@@ -3,19 +3,77 @@
   "name": "Rapid Augment",
   "type": "feature",
   "_id": "KM5SpphPyQLoCUbS",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/transmission.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "qb1o8tlzlsAPXBQy": {
+        "type": "utility",
+        "_id": "qb1o8tlzlsAPXBQy",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Augment Rapidly",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "@abilities.intelligence.mod"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>You can now use your Augment feature more rapidly. As a bonus action, you can touch an item and imbue it with a known augment effect of your choice. You remain bound by all other restrictions of the Augment feature, including number of items.</p><p>You can use your Rapid Augment feature a number of times equal to your INT modifier and regain all expended uses when you finish a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +110,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127636693,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720130650138,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!KM5SpphPyQLoCUbS"

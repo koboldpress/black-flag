@@ -3,19 +3,94 @@
   "name": "Mend the Broken",
   "type": "feature",
   "_id": "q8PDPvedS5zIwvvU",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/wire-spliced.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "jsIczNgl1ZwSIf5I": {
+        "type": "healing",
+        "_id": "jsIczNgl1ZwSIf5I",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "number": null,
+            "denomination": 0,
+            "custom": {
+              "enabled": true,
+              "formula": "5 * @progression.mechanist.levels"
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creatureObject",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>As an action, you touch a creature or item and cause it to magically regain a number of hit points equal to 5 × your mechanist level. This effect also repairs any catastrophic damage suffered by the target, such as lost limbs, missing parts, or other harm that would ordinarily be irreparable. If the item doesn’t have a hit point total, your touch restores it to working order as best it can with the pieces available. This feature can’t restore expended charges on magic items or restore magical properties to nonmagical items that were once magical. Once you use this feature, you must finish a long rest before you can use it again.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +127,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127693014,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720131143766,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!q8PDPvedS5zIwvvU"

@@ -3,19 +3,76 @@
   "name": "Full Metal",
   "type": "feature",
   "_id": "sSwXQsmFrfqLnytb",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/metal-jaws.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "kFHmndfVJKt3iFfy": {
+        "type": "utility",
+        "_id": "kFHmndfVJKt3iFfy",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1"
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Transform",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>While wearing the armor from your Mystic Metal feature, you can use a bonus action to transform it into a nigh‑impervious state for 1 minute. If you are reduced to 0 HP, you can choose for the Full Metal feature to automatically activate (no action required).</p><p>While this state is active, you are immune to bludgeoning, piercing, and slashing damage, and you have resistance to all other damage types.</p><p>Once this state is used, you can’t activate it again until you complete a long rest.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +109,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720128200602,
-    "modifiedTime": 1720128208162,
+    "modifiedTime": 1720131925386,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!sSwXQsmFrfqLnytb"

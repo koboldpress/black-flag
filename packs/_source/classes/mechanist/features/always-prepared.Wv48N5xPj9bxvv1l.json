@@ -3,9 +3,56 @@
   "name": "Always Prepared",
   "type": "feature",
   "_id": "Wv48N5xPj9bxvv1l",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/detonator-timer.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "n78SvQ04MVcX0Rii": {
+        "type": "utility",
+        "_id": "n78SvQ04MVcX0Rii",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When you would take damage from an attack"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Use an Object",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -15,7 +62,7 @@
     },
     "advancement": {},
     "description": {
-      "value": "",
+      "value": "<p>When you would take damage from an attack, you can use a reaction to take the Use an Object action.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +99,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127811662,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720131286760,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Wv48N5xPj9bxvv1l"

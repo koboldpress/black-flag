@@ -3,7 +3,7 @@
   "name": "Augment",
   "type": "feature",
   "_id": "Jsbk5t2H2s7TCed1",
-  "img": "systems/black-flag/artwork/types/feature.svg",
+  "img": "icons/commodities/tech/tube-chamber-lightning.webp",
   "system": {
     "activities": {},
     "uses": {
@@ -13,9 +13,80 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "dEpa1YjR5xrwlWnC": {
+        "type": "chooseFeatures",
+        "_id": "dEpa1YjR5xrwlWnC",
+        "configuration": {
+          "choices": {
+            "2": 2,
+            "3": 1,
+            "5": 1,
+            "7": 1,
+            "9": 1,
+            "12": 1,
+            "15": 1,
+            "18": 1
+          },
+          "allowDrops": true,
+          "type": "feature",
+          "pool": [
+            {
+              "uuid": "Compendium.black-flag.classes.Item.yoUiakYIVlo22q7J"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.wDdjlD0joAvtqDu7"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.JlTLHsum2ATtEuOs"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.FEHYQiWYxClTY0h9"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.g74T8iFulmGCYtGj"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.OvJ2eCtBqB0BgCIP"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.epjGJH9nDbQbK7GW"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.VcmMYpwFLGYQ0OVm"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.bHXBba0RljS5bKZG"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.f3HVJB8iwczpGbHO"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.YDMvY5Q6msCX7sKV"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.WR1cZLv4QvyekArQ"
+            },
+            {
+              "uuid": "Compendium.black-flag.classes.Item.9JKaKUB9EyFO931k"
+            }
+          ],
+          "restriction": {
+            "category": "class",
+            "type": "augmentEffect"
+          }
+        },
+        "level": {
+          "classIdentifier": "mechanist"
+        },
+        "flags": {},
+        "title": "Augment Effects",
+        "icon": null,
+        "hint": "You gain augment effects of your choice."
+      }
+    },
     "description": {
-      "value": "",
+      "value": "<p>You gain the ability to channel magical energy into items. To use this ability, you must spend 1 hour focusing on the item that you wish to augment while remaining in physical contact with it (which can be done as part of a short or long rest).</p><p>You gain two augment effects of your choice. Augment effect options are detailed at the end of the class description. At certain mechanist levels, you gain additional augment effects of your choice, as shown in the Augment Effects Known column of the <strong>Mechanist Progression</strong> table.</p><p>When you use this ability, choose an effect from those you know. Regardless of the effect, an augmented item is considered a magic item while the effect remains active. You can apply these effects to existing magic items, and any bonuses or features granted by an augment effect stack with any properties a magic item already possesses.</p><p>Unless specified otherwise, a chosen effect lasts indefinitely, but as an action, you can touch an item to end an ongoing effect that you created. You can have effects active on multiple items, provided you spend the required time focusing on each item individually. However, an item can only bear one effect at a time. Multiple uses of the same effect don’t stack.</p><p>The maximum number of items you can affect with this feature at one time is listed in the Augmented Items column of the <strong>Mechanist Progression</strong> table. If you try to exceed your maximum, you must choose an ongoing effect to end.</p><p>You can also augment your transformed shard of creation, provided its form meets the requirements for the chosen effect. The effect remains with the shard when it transforms as long as the new form remains compatible—if not, the effect immediately ends.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -52,7 +123,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720127501926,
-    "modifiedTime": 1720127853706,
+    "modifiedTime": 1720130400561,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Jsbk5t2H2s7TCed1"
