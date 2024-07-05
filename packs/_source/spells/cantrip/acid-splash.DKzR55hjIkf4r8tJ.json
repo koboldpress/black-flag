@@ -17,8 +17,16 @@
                 "number": 1,
                 "denomination": 6,
                 "bonus": "",
-                "custom": "",
-                "type": "acid"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "acid",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                }
               }
             ]
           },
@@ -28,12 +36,14 @@
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
           "scale": {
-            "allowed": true
+            "allowed": false,
+            "max": ""
           }
         },
         "uses": {
@@ -55,7 +65,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a glob of acid to burst over your targets.</em></p><p>Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a DEX save or take 1d6 acid damage.</p><p>This spell’s damage increases by 1d6 when you reach 5th level.</p>",
+      "value": "<p>Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a DEX save or take 1d6 acid damage.</p><p>This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -97,12 +107,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "2"
+        "count": "2",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "conjuration",
     "source": [
@@ -118,10 +130,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706914791735,
-    "modifiedTime": 1714412735269,
+    "modifiedTime": 1720200745426,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!DKzR55hjIkf4r8tJ"

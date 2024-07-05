@@ -1,28 +1,18 @@
 {
-  "name": "Animal Friendship",
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Arcane Eye",
   "type": "spell",
-  "_id": "F1s8TRosgOUvR4iv",
-  "img": "icons/creatures/reptiles/chameleon-camouflage-green-brown.webp",
+  "_id": "scoWKasjNs2nBEJ1",
+  "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
   "system": {
     "activities": {
-      "TcldVSdTjJXqKlyz": {
-        "type": "savingThrow",
-        "_id": "TcldVSdTjJXqKlyz",
+      "HfnjeTjiELjypIgv": {
+        "type": "utility",
+        "_id": "HfnjeTjiELjypIgv",
         "description": "",
-        "system": {
-          "ability": "wisdom",
-          "damage": {
-            "parts": []
-          },
-          "dc": {
-            "ability": ""
-          }
-        },
+        "system": {},
         "activation": {
-          "value": null,
-          "type": "",
-          "condition": "",
-          "primary": true
+          "value": null
         },
         "consumption": {
           "targets": [],
@@ -38,6 +28,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -48,12 +39,8 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          "recovery": []
+        }
       }
     },
     "uses": {
@@ -64,18 +51,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>This spell lets you convince an animal that you mean it no harm. Choose a Beast or creature with the Animal tag that you can see within range. It must see and hear you. If the creature’s INT is 4 (−3) or higher, the spell fails. Otherwise, the creature must succeed on a WIS save or be charmed by you for the spell’s duration. If you or one of your companions harms the target, the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can affect one additional creature for each slot above 1st.</p>",
+      "value": "<p>You create an invisible, magical eye within range that hovers in the air for the duration. You mentally receive visual information from the eye, which has normal vision and darkvision to a range of 30 feet. The eye can look in every direction.</p><p>As an action, you can move the eye up to 30 feet in any direction. There is no limit to how far away from you the eye can move, but it can’t enter another plane of existence. A solid barrier blocks the eye’s movement, but the eye can pass through an opening as small as 1 inch in diameter.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Charm a Beast for a day."
+      "short": "Floating eye to spy through."
     },
     "source": [
-      "primordial"
+      "arcane"
     ],
     "circle": {
       "value": null,
-      "base": 1
+      "base": 4
     },
     "casting": {
       "value": null,
@@ -92,14 +79,16 @@
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "a morsel of food"
+        "description": "a bit of bat fur"
       }
     },
     "duration": {
       "units": "hour",
-      "value": "24"
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
       "units": "foot",
       "value": "30",
@@ -108,21 +97,19 @@
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": "@scaling",
-        "special": ""
+        "type": ""
       }
     },
-    "school": "enchantment"
+    "school": "divination"
   },
   "effects": [],
-  "folder": "nRrXxMSYGyY4qKs3",
-  "sort": 100000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
@@ -131,9 +118,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1717965618340,
-    "modifiedTime": 1720205184231,
+    "createdTime": 1720202100601,
+    "modifiedTime": 1720205072461,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!F1s8TRosgOUvR4iv"
+  "_key": "!items!scoWKasjNs2nBEJ1"
 }

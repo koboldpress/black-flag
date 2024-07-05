@@ -1,0 +1,124 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Awaken",
+  "type": "spell",
+  "_id": "GBrUc9jRlY5C0V46",
+  "img": "icons/creatures/magical/spirit-undead-ghost-tan-teal.webp",
+  "system": {
+    "activities": {
+      "2xxub8jlI9L3eJy0": {
+        "type": "utility",
+        "_id": "2xxub8jlI9L3eJy0",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>After spending the casting time tracing magical pathways within a precious gemstone, you touch a Huge or smaller Beast or Plant. The target must have no INT or an INT of 3 (−4) or lower to be affected by this spell.</p><p>The target gains INT of 10 (+0) and the ability to speak one language you know. If the target is a Plant, it gains mobility, can move its limbs, roots, vines, creepers, and so forth, and gains senses similar to a human’s. Your GM chooses statistics appropriate for the awakened Plant, such as the statistics for the <strong>awakened shrub</strong> or the <strong>awakened tree</strong>.</p><p>The awakened Beast or Plant is charmed by you for 30 days or until you or your companions do anything harmful to it. When the charmed condition ends, the awakened creature chooses whether to remain friendly to you based on how you treated it while it was charmed.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Make a Beast or Plant sentient."
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": 8,
+      "type": "hour",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 1000,
+        "denomination": "gp",
+        "description": "an agate worth at least 1,000 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creatureObject",
+        "count": "1",
+        "special": "a Huge or smaller Beast or Plant with no INT or an INT of 3 (−4) or lower"
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720204553959,
+    "modifiedTime": 1720205219334,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!GBrUc9jRlY5C0V46"
+}

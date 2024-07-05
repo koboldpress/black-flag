@@ -1,0 +1,176 @@
+{
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Animal Shapes",
+  "type": "spell",
+  "_id": "84OHLcEReW3UsY0Q",
+  "img": "icons/creatures/abilities/wolf-heads-swirl-purple.webp",
+  "system": {
+    "activities": {
+      "vCE9bWFFX1FFH0gQ": {
+        "type": "utility",
+        "_id": "vCE9bWFFX1FFH0gQ",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Imbue Targets",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "oKhjVEDScAnopn20": {
+        "type": "utility",
+        "_id": "oKhjVEDScAnopn20",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Transform Targets",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Your magic turns others into animals. Choose any number of willing creatures that you can see within range. You transform each target into the form of a Large or smaller Beast or creature with the Animal tag with a CR 4 or lower. On subsequent turns, you can use your action to transform affected creatures into new forms.</p><p>The transformation lasts for the duration for each target or until the target drops to 0 HP or dies. You can choose a different form for each target. A target’s game statistics are replaced by the statistics of the chosen form, though the target retains its personality and INT, WIS, and CHA scores. The target assumes the hit points of its new form, and when it reverts to its normal form, it returns to the number of hit points it had before it transformed. If it reverts as a result of dropping to 0 HP, any excess damage carries over to its normal form. As long as the excess damage doesn’t reduce the creature’s normal form to 0 HP, it isn’t knocked unconscious. The creature is limited in the actions it can perform by the nature of its new form, and it can’t speak or cast spells.</p><p>The target’s gear melds into the new form. The target can’t activate, wield, or otherwise benefit from any of its equipment.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Turn allies into Beasts."
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 8
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "24"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "willing",
+        "count": "",
+        "special": "Any number of willing creatures"
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720201177829,
+    "modifiedTime": 1720205206758,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!84OHLcEReW3UsY0Q"
+}

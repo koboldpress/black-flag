@@ -11,7 +11,11 @@
         "_id": "FyBrQxb6Bqv5pBPb",
         "description": "",
         "system": {},
-        "activation": {},
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +25,15 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "duration": {
+          "override": false
+        },
+        "img": "systems/black-flag/artwork/activities/utility.svg"
       }
     },
     "uses": {
@@ -33,7 +44,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You lock a targeted object, making it difficult to bypass.</em></p><p>You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken or the spell is dispelled or suppressed. Casting knock on the object suppresses arcane lock for 10 minutes.</p><p>While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.</p>",
+      "value": "<p>You touch a closed door, window, gate, chest, or other entryway, and it becomes locked for the duration. You and the creatures you designate when you cast this spell can open the object normally. You can also set a password that, when spoken within 5 feet of the object, suppresses this spell for 1 minute. Otherwise, it is impassable until it is broken, or the spell is dispelled or suppressed. Casting <em>knock</em> on the object suppresses arcane lock for 10 minutes.</p><p>While affected by this spell, the object is more difficult to break or force open; the DC to break it or pick any locks on it increases by 10.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -77,11 +88,13 @@
       "affects": {
         "choice": false,
         "type": "object",
-        "count": "1"
+        "count": "1",
+        "special": "a closed door, window, gate, chest, or other entryway"
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
@@ -96,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706996604930,
-    "modifiedTime": 1714413691143,
+    "modifiedTime": 1720204074924,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!JVimVp4IvmQTO52h"

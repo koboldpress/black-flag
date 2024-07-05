@@ -30,10 +30,11 @@ export default class DurationField extends SchemaField {
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {
 		const obj = super.initialize(value, model, options);
+		const isSpell = this.parent.isSpell || this.parent.parent?.type === "spell";
 
 		Object.defineProperty(obj, "scalar", {
 			get() {
-				return this.units ? !!CONFIG.BlackFlag.durationOptions().get(this.units).scalar : false;
+				return this.units ? !!CONFIG.BlackFlag.durationOptions({ isSpell }).get(this.units)?.scalar : false;
 			},
 			configurable: true,
 			enumerable: false
@@ -42,13 +43,14 @@ export default class DurationField extends SchemaField {
 		Object.defineProperty(obj, "label", {
 			get() {
 				const unit = CONFIG.BlackFlag.durationOptions({
-					pluralRule: getPluralRules().select(this.value)
+					pluralRule: getPluralRules().select(this.value),
+					isSpell
 				}).get(this.units);
-				if (unit.scalar) {
+				if (unit?.scalar) {
 					if (!this.value) return null;
 					return numberFormat(this.value, { unit });
 				}
-				return unit.label;
+				return unit?.label ?? "";
 			},
 			configurable: true,
 			enumerable: false

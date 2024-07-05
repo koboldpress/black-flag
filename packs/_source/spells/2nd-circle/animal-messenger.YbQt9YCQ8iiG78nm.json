@@ -1,0 +1,128 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Animal Messenger",
+  "type": "spell",
+  "_id": "YbQt9YCQ8iiG78nm",
+  "img": "icons/creatures/birds/raptor-owl-flying-moon.webp",
+  "system": {
+    "activities": {
+      "co8uzKW8LwFsBmnP": {
+        "type": "utility",
+        "_id": "co8uzKW8LwFsBmnP",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Choose a Tiny Beast you can see within range, such as a squirrel, blue jay, or bat. Specify a location, which you must have visited, and a recipient who matches a general description, such as <q>a person dressed in the uniform of the town guard</q> or <q>a red-haired dwarf wearing a pointed hat.</q> Then speak a message of up to twenty-five words. The Beast travels for the duration of the spell toward the specified location, covering about 50 miles per 24 hours for a flying messenger or 25 miles for other animals.</p><p>When the messenger arrives, it delivers your message to the creature that you described, replicating the sound of your voice. Then the spell ends, and the Beast makes its way back to where you cast the spell. The messenger speaks only to a creature matching the description you gave. If the messenger doesn’t reach its destination before the spell ends, the message is lost, and the Beast makes its way back to where you cast this spell.</p><p>If you attempt to cast this spell again while the first casting is still active, the second casting fails.</p><p><em>At Higher Circles.</em> As you unlock higher circles, this ritual grows in potency. Once you have access to 3rd circle spell slots or higher, the duration of the spell increases by 48 hours for each circle you have slots for above 2nd.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Tiny Beast delivers a message."
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a morsel of food"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "24 + (@scaling.increase * 48)"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": "Tiny Beast"
+      }
+    },
+    "school": "enchantment"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720203231851,
+    "modifiedTime": 1720205214519,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!YbQt9YCQ8iiG78nm"
+}

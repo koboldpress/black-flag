@@ -1,0 +1,212 @@
+{
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Arcane Sword",
+  "type": "spell",
+  "_id": "fXl9we2375vQAUwq",
+  "img": "icons/weapons/swords/sword-flanged-lightning.webp",
+  "system": {
+    "activities": {
+      "jdwF7o4gxO4Wmd8P": {
+        "type": "utility",
+        "_id": "jdwF7o4gxO4Wmd8P",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Summon Sword",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "JMJ5tgiTr8KV2idg": {
+        "type": "attack",
+        "_id": "JMJ5tgiTr8KV2idg",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 10,
+                "bonus": "@mod",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "force",
+                "scaling": {
+                  "mode": ""
+                }
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creatureObject",
+            "count": "1",
+            "special": ""
+          },
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>When the sword appears, you make two melee spell attacks with the blade, each one against a target of your choice within 5 feet of the sword. On a hit, the target takes 3d10 + your spellcasting modifier force damage. Until the spell ends, you can use a bonus action on each of your turns to move the sword up to 30 feet to an unoccupied spot you can see and repeat these attacks against targets within 5 feet of the blade.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Sword fights for you."
+    },
+    "source": [
+      "arcane"
+    ],
+    "circle": {
+      "value": null,
+      "base": 7
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": 250,
+        "denomination": "gp",
+        "description": "a miniature platinum sword with a grip and pommel of copper and zinc worth 250 gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "60",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720202334753,
+    "modifiedTime": 1720205102271,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!fXl9we2375vQAUwq"
+}
