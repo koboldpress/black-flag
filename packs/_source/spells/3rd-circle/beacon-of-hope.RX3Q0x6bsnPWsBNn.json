@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A wave of positivity issues from you, bolstering the hearts, wills, and healing capabilities of nearby allies.</em></p><p>This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on WIS saves and death saves, and regains the maximum number of hit points possible from any healing.</p>",
+      "value": "<p>This spell bestows hope and vitality. Choose any number of creatures within range. For the duration, each target has advantage on WIS saves and death saves, and regains the maximum number of hit points possible from any healing.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -77,20 +77,53 @@
         "size": "30"
       },
       "affects": {
-        "choice": false,
+        "choice": true,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/holy/chalice-glowing-gold.webp",
+      "origin": "Compendium.black-flag.spells.Item.RX3Q0x6bsnPWsBNn",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Beacon of Hope",
+      "_id": "2wRZ0tZ3SptsbP6Z",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-save\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }] }, { \"k\": \"type\", \"v\": \"death-save\" }] }], \"note\": { \"rollMode\": 1, \"text\": \"Beacon of Hope grants you advantage on WIS and death saves.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "<p>Each target has advantage on WIS saves and death saves, and regains the maximum number of hit points possible from any healing.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!RX3Q0x6bsnPWsBNn.2wRZ0tZ3SptsbP6Z"
+    }
+  ],
   "sort": 1600000,
   "ownership": {
     "default": 0
@@ -98,10 +131,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932279124,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1720233945563,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RX3Q0x6bsnPWsBNn"

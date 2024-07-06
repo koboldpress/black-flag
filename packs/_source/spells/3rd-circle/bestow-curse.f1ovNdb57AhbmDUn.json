@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>With a simple touch, you inflict a creature with a weakness of your choosing.</em></p><p>You touch a creature, and that creature must succeed on a WIS save or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:</p><ul><li><p>Choose one ability score. While cursed, the target has disadvantage on ability checks and saves made with that ability score.</p></li><li><p>While cursed, the target has disadvantage on attack rolls against you.</p></li><li><p>While cursed, the target must make a WIS save at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</p></li><li><p>While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</p></li></ul><p>A remove curse spell ends this effect. At the GM’s option, you may choose an alternative curse effect, but it should be no more powerful than those described above. The GM has final say on such a curse’s effect.</p>",
+      "value": "<p>You touch a creature, and that creature must succeed on a WIS save or become cursed for the duration of the spell. When you cast this spell, choose the nature of the curse from the following options:</p><ul><li><p>Choose one ability. While cursed, the target has disadvantage on ability checks and saves made with that ability.</p></li><li><p>While cursed, the target has disadvantage on attack rolls against you.</p></li><li><p>While cursed, the target must make a WIS save at the start of each of its turns. If it fails, it wastes its action that turn doing nothing.</p></li><li><p>While the target is cursed, your attacks and spells deal an extra 1d8 necrotic damage to the target.</p></li></ul><p>A <em>remove curse</em> spell ends this effect. At the GM’s discretion, you may choose an alternative curse effect, but it should be no more powerful than those described above.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the duration becomes concentration, up to 10 minutes. If you use a spell slot of 5th circle or higher, the duration is 8 hours (no concentration). If you use a spell slot of 7th circle or higher, the duration is 24 hours (no concentration). If you use a 9th circle spell slot, the spell lasts until dispelled (no concentration).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -93,15 +93,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -112,10 +115,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932300677,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1720234013022,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!f1ovNdb57AhbmDUn"

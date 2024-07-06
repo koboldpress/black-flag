@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You curse several targets within range with bad luck and ill will in their impending struggles.</em></p><p>Up to three creatures of your choice that you can see within range must make CHA saves.</p><p>Whenever a target that fails this save makes an attack roll or a save before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or save.</p>",
+      "value": "<p>Up to three creatures of your choice that you can see within range must succeed on a CHA save or become cursed.</p><p>When a cursed target makes an attack roll or a save before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or save.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -95,19 +95,52 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "3"
+        "count": "2 + @scaling",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "enchantment",
     "source": [
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/unholy/projectiles-binary-pink.webp",
+      "origin": "Compendium.black-flag.spells.Item.HorNiol8kDK0QGIo",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Bane",
+      "_id": "Haf0C3lt2Dpfgd2x",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"-1d4\" }"
+        }
+      ],
+      "description": "<p>When a cursed target makes an attack roll or a save before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or save.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!HorNiol8kDK0QGIo.Haf0C3lt2Dpfgd2x"
+    }
+  ],
   "sort": 1900000,
   "ownership": {
     "default": 0
@@ -115,10 +148,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932052775,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1720233324474,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!HorNiol8kDK0QGIo"

@@ -1,19 +1,33 @@
 {
-  "folder": "tCxdqzClsLOnTgfE",
-  "name": "Banishment",
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Blade Barrier",
   "type": "spell",
-  "_id": "skEh2fs5eZlzAdJ1",
-  "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
+  "_id": "Tz9LE9bal3Yea6mt",
+  "img": "icons/weapons/swords/sword-broad-crystal-paired.webp",
   "system": {
     "activities": {
-      "w5iQuNeuJAMbWw41": {
+      "uwVLUtWv0O2dImh9": {
         "type": "savingThrow",
-        "_id": "w5iQuNeuJAMbWw41",
+        "_id": "uwVLUtWv0O2dImh9",
         "description": "",
         "system": {
-          "ability": "charisma",
+          "ability": "dexterity",
           "damage": {
-            "parts": []
+            "parts": [
+              {
+                "number": 6,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "slashing",
+                "scaling": {
+                  "mode": ""
+                }
+              }
+            ]
           },
           "dc": {
             "ability": ""
@@ -39,6 +53,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -65,20 +80,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a CHA save or be banished.</p><p>If the target is native to the plane of existence you’re on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you’re on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn’t return.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, you can target one additional creature for each slot above 4th.</p>",
+      "value": "<p>You create a vertical wall of whirling, razor-sharp blades made of magical energy within the spell’s range. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three‑quarters cover to creatures behind it, and its space is difficult terrain.</p><p>When a creature enters the wall’s area for the first time on a turn or starts its turn there, the creature must make a DEX save. On a failure, the creature takes 6d10 slashing damage or half as much damage on a success.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
       "short": ""
     },
     "source": [
-      "arcane",
-      "divine",
-      "wyrd"
+      "arcane"
     ],
     "circle": {
       "value": null,
-      "base": 4
+      "base": 6
     },
     "casting": {
       "value": null,
@@ -88,42 +101,44 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp",
-        "description": "an item distasteful to the target"
+        "denomination": "gp"
       }
     },
     "duration": {
       "units": "minute",
-      "value": "1"
+      "value": "10"
     },
     "tags": [
       "concentration"
     ],
     "range": {
       "units": "foot",
-      "value": "60",
+      "value": "90",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "wall",
+        "size": "100",
+        "width": "5",
+        "height": "20"
       },
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "@scaling",
+        "count": "",
         "special": ""
       }
     },
-    "school": "abjuration"
+    "school": "evocation"
   },
   "effects": [],
   "sort": 0,
@@ -135,9 +150,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1718423704833,
-    "modifiedTime": 1720235502520,
+    "createdTime": 1720234221300,
+    "modifiedTime": 1720236061692,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!skEh2fs5eZlzAdJ1"
+  "_key": "!items!Tz9LE9bal3Yea6mt"
 }

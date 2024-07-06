@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your words strike your target’s senses, temporarily disabling their sight or hearing.</em></p><p>You can blind or deafen a foe. Choose one creature that you can see within range to make a CON save. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a CON save. On a success, the spell ends.</p>",
+      "value": "<p>You can blind or deafen a foe. Choose one creature that you can see within range to make a CON save. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a CON save. On a success, it is no longer affected by the spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -90,20 +90,74 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
       "arcane",
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
+      "origin": "Compendium.black-flag.spells.Item.lrFTz4noYfSeOD7u",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Blindness",
+      "_id": "LeUnl9tNQtUC5j4n",
+      "changes": [],
+      "description": "<p>The target is either blinded for the duration. At the end of each of its turns, the target can make a CON save.</p>",
+      "transfer": true,
+      "statuses": [
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!lrFTz4noYfSeOD7u.LeUnl9tNQtUC5j4n"
+    },
+    {
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-small-teal.webp",
+      "origin": "Compendium.black-flag.spells.Item.lrFTz4noYfSeOD7u",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Deafness",
+      "changes": [],
+      "description": "<p>The target is either deafened for the duration. At the end of each of its turns, the target can make a CON save.</p>",
+      "transfer": true,
+      "statuses": [
+        "deafened"
+      ],
+      "flags": {},
+      "tint": null,
+      "_id": "AsQKoxsf3tvrB8wu",
+      "_key": "!items.effects!lrFTz4noYfSeOD7u.AsQKoxsf3tvrB8wu"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -111,10 +165,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932396414,
-    "modifiedTime": 1714413436808,
+    "modifiedTime": 1720235344646,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!lrFTz4noYfSeOD7u"
