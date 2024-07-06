@@ -44,14 +44,6 @@
 		border: 1px solid var(--bf-color-border-gray);
 		border-radius: 6px;
 
-		> * {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding-block: 0.15rem;
-			padding-inline: 0.5rem;
-		}
-
 		.label {
 			font-size: var(--font-size-13);
 			text-align: center;
@@ -60,13 +52,23 @@
 			&.light { color: var(--bf-text-color-light-label); }
 		}
 
-		button {
-			background: none;
-			border: none;
-			line-height: unset;
-
-			&:disabled {
-				opacity: 0.25;
+		&:not(.simple) {
+			> * {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding-block: 0.15rem;
+				padding-inline: 0.5rem;
+			}
+	
+			button {
+				background: none;
+				border: none;
+				line-height: unset;
+	
+				&:disabled {
+					opacity: 0.25;
+				}
 			}
 		}
 	}

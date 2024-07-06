@@ -20,6 +20,7 @@ blackFlag-multiSelect {
 	}
 
 	.dropdown-button {
+		contain: inline-size;
 		display: flex;
 		block-size: 100%;
 		inline-size: 100%;
@@ -37,6 +38,9 @@ blackFlag-multiSelect {
 
 	.label {
 		font-size: var(--font-size-12);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.icon {
