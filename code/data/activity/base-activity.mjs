@@ -202,8 +202,8 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		prepareFinalValue("duration.value", "BF.Duration.Label");
 		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
 		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
-		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width.Label");
-		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height.Label");
+		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
+		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");
 		prepareFinalValue("uses.min", "BF.Uses.Mininum.DebugName");
 		prepareFinalValue("uses.max", "BF.Uses.Maximum.DebugName");
 

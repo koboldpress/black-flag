@@ -62,9 +62,12 @@ export default class TargetField extends SchemaField {
 					width: sizes.includes("width") && (sizes.includes("length") || sizes.includes("radius")),
 					height: sizes.includes("height")
 				};
-				if (sizes.includes("radius")) aoeSizes.size = "BF.AreaOfEffect.Size.Radius.Label";
-				else if (sizes.includes("length")) aoeSizes.size = "BF.AreaOfEffect.Size.Length.Label";
-				else if (sizes.includes("width")) aoeSizes.size = "BF.AreaOfEffect.Size.Width.Label";
+				if (sizes.includes("radius")) aoeSizes.size = "BF.AreaOfEffect.Size.Radius";
+				else if (sizes.includes("length")) aoeSizes.size = "BF.AreaOfEffect.Size.Length";
+				else if (sizes.includes("width")) aoeSizes.size = "BF.AreaOfEffect.Size.Width";
+				if (sizes.includes("thickness")) aoeSizes.width = "BF.AreaOfEffect.Size.Thickness";
+				else if (aoeSizes.width) aoeSizes.width = "BF.AreaOfEffect.Size.Width";
+				if (aoeSizes.height) aoeSizes.height = "BF.AreaOfEffect.Size.Height";
 				return aoeSizes;
 			},
 			enumerable: false

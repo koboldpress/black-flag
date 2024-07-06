@@ -55,8 +55,13 @@ export const areaOfEffectTypes = {
 		icon: "systems/black-flag/artwork/interface/area/square.svg",
 		template: "rect",
 		sizes: ["width"]
+	},
+	wall: {
+		localization: "BF.AreaOfEffect.Type.Wall.Label",
+		icon: "",
+		template: "ray",
+		sizes: ["length", "thickness", "height"]
 	}
-	// TODO: Consider adding wall w/ thickness
 	// TODO: Consider adding ring w/ thickness
 	// TODO: Consider adding dome w/ height & thickness
 };
