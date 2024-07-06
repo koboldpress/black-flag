@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You understand any language you hear or read.</em></p><p>For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.</p><p>This spell doesn’t decode secret messages in a text or a glyph, such as an arcane sigil, that isn’t part of a written language.</p>",
+      "value": "<p>For the duration, you understand the literal meaning of any spoken language that you hear. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text.</p><p>This spell doesn’t decode secret messages in a text or a glyph, such as an arcane sigil, that isn’t part of a written language.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can affect one additional willing creature (besides yourself) for each slot above 1st. The creatures must be within 30 feet of you when you target them.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -77,11 +77,14 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "@scaling.increase",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "divination",
     "source": [
@@ -96,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932702351,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1720284543331,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wyKjdoHh1PVEId7q"

@@ -1,0 +1,130 @@
+{
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Control Weather",
+  "type": "spell",
+  "_id": "3OZsv5x1bOVcNFLy",
+  "img": "icons/magic/air/wind-weather-snow-gusts.webp",
+  "system": {
+    "activities": {
+      "0JS3EALHIhrZQF08": {
+        "type": "utility",
+        "_id": "0JS3EALHIhrZQF08",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell. Moving to a place where you don’t have a clear path to the sky ends the spell early.</p><p>When you cast the spell, you change the current weather conditions, which are determined by the GM based on the climate and season. You can change precipitation, temperature, and wind. It takes [[/r 1d4 * 10]]{1d4 × 10} minutes for the new conditions to take effect.</p><p>Once they do, you can change the conditions again. When the spell ends, the weather gradually returns to normal.</p><p>When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.</p><table><caption>Precipitation</caption><thead><tr><th scope=\"col\">Stage</th><th scope=\"col\">Condition</th></tr></thead><tbody><tr><th scope=\"row\">1</th><td>Clear</td></tr><tr><th scope=\"row\">2</th><td>Overcast or ground fog</td></tr><tr><th scope=\"row\">3</th><td>Rain, hail, or snow</td></tr><tr><th scope=\"row\">4</th><td>Torrential precipitation</td></tr></tbody></table><table><caption>Temperature</caption><thead><tr><th scope=\"col\">Stage</th><th scope=\"col\">Condition</th></tr></thead><tbody><tr><th scope=\"row\">1</th><td>Extreme heat</td></tr><tr><th scope=\"row\">2</th><td>Hot</td></tr><tr><th scope=\"row\">3</th><td>Warm</td></tr><tr><th scope=\"row\">4</th><td>Cool</td></tr><tr><th scope=\"row\">5</th><td>Cold</td></tr><tr><th scope=\"row\">6</th><td>Extreme cold</td></tr></tbody></table><table><caption>Wind</caption><thead><tr><th scope=\"col\">Stage</th><th scope=\"col\">Condition</th></tr></thead><tbody><tr><th scope=\"row\">1</th><td>Calm</td></tr><tr><th scope=\"row\">2</th><td>Moderate wind</td></tr><tr><th scope=\"row\">3</th><td>Strong wind</td></tr><tr><th scope=\"row\">4</th><td>Gale winds</td></tr></tbody></table>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Change weather within 5 miles."
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 8
+    },
+    "casting": {
+      "value": 10,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "burning incense and bits of earth and wood mixed in water"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "8"
+    },
+    "tags": [
+      "concentration",
+      "ritual"
+    ],
+    "range": {
+      "units": "self",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "mile",
+        "type": "radius",
+        "size": "5"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720288327498,
+    "modifiedTime": 1720289486367,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!3OZsv5x1bOVcNFLy"
+}

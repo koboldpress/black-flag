@@ -1,6 +1,6 @@
 {
   "folder": "nRrXxMSYGyY4qKs3",
-  "name": "Charm Person",
+  "name": "Charm",
   "type": "spell",
   "_id": "pw72u0bgcIKLtSBM",
   "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your entrancing words and motions gain your target’s confidence and friendship.</em></p><p>You attempt to charm a Humanoid you can see within range. It must make a WIS save, and does so with advantage if you or your companions are fighting it. If it fails the save, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
+      "value": "<p>You attempt to charm a creature that you can see within range. To be affected by this spell, the target must be able to understand at least one language, though it need not be a language you speak. The target must make a WIS save and does so with advantage if you or your companions are fighting it. On a failed save, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each circle slot above 1st. The creatures must be within 30 feet of each other when you target them. In addition, if you cast this spell using a spell slot of 4th circle or higher, targeted creatures don’t need to understand any languages to be affected.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -91,19 +91,48 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "@scaling",
+        "special": "Targets must be within 30 feet of one another"
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "enchantment",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+      "origin": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Charm",
+      "_id": "MHWYFHDDXmIygkPs",
+      "changes": [],
+      "description": "<p>The target is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
+      "transfer": false,
+      "statuses": [
+        "charmed"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!pw72u0bgcIKLtSBM.MHWYFHDDXmIygkPs"
+    }
+  ],
   "sort": 3600000,
   "ownership": {
     "default": 0
@@ -111,10 +140,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932577177,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1720284079463,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!pw72u0bgcIKLtSBM"

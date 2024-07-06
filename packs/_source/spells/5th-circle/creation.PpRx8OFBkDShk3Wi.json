@@ -1,0 +1,126 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Creation",
+  "type": "spell",
+  "_id": "PpRx8OFBkDShk3Wi",
+  "img": "icons/commodities/metal/fragments-steel-ring.webp",
+  "system": {
+    "activities": {
+      "9sxi7AHlEa3LxBnu": {
+        "type": "utility",
+        "_id": "9sxi7AHlEa3LxBnu",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You pull wisps of shadow from the Shadow Realm to create a nonliving object or vegetable matter within range: soft goods, rope, wood, or something similar. You can also use this spell to create mineral objects such as stone, crystal, or metal. The object created must be no larger than a 5-foot cube, and the object must be of a form and material that you have seen before.</p><p>The duration depends on the object’s material. If it is composed of multiple materials, use the shortest duration.</p><table><caption>Creation Materials</caption><thead><tr><th scope=\"col\">Material</th><th scope=\"col\">Duration</th></tr></thead><tbody><tr><th scope=\"row\">Vegetable matter</th><td>1 day</td></tr><tr><th scope=\"row\">Stone or crystal</th><td>12 hours</td></tr><tr><th scope=\"row\">Precious metals</th><td>1 hour</td></tr><tr><th scope=\"row\">Gems</th><td>10 minutes</td></tr><tr><th scope=\"row\">Adamantine or mithral</th><td>1 minute</td></tr></tbody></table><p>Using any material created by this spell as another spell’s material component causes that spell to fail. If you attempt to cast this spell a second time while material created by the first casting still exists, the material created by the first casting is destroyed.</p><p><em>At Higher Circles.</em> As you unlock higher circles, this ritual grows in potency. Once you have access to 6th-circle spell slots, the cube increases by 5 feet for each slot you have access to above 5th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Make an object from shadow."
+    },
+    "source": [
+      "arcane"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a tiny piece of matter of the same type of the item you plan to create"
+      }
+    },
+    "duration": {
+      "units": "special",
+      "special": "The duration depends on the object’s material"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "illusion"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720288906553,
+    "modifiedTime": 1720289439637,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!PpRx8OFBkDShk3Wi"
+}

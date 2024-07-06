@@ -1,14 +1,14 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Conjure Elemental",
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Conjure Minor Elementals",
   "type": "spell",
-  "_id": "r3D0SVvYQkzi6lE4",
-  "img": "icons/creatures/magical/spirit-mischief-fire-ice-blue.webp",
+  "_id": "CQJseAX0NMhL1cMc",
+  "img": "icons/creatures/magical/spirit-mischief-fire-blue.webp",
   "system": {
     "activities": {
-      "1LKoD8jcYopzfq04": {
+      "aTeuou4mHdJXPu1C": {
         "type": "utility",
-        "_id": "1LKoD8jcYopzfq04",
+        "_id": "aTeuou4mHdJXPu1C",
         "description": "",
         "system": {},
         "activation": {
@@ -28,6 +28,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -50,11 +51,11 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You summon an Elemental servant that appears in an unoccupied space you can see within range. Choose which Elemental appears: an air elemental, earth elemental, a fire elemental, or a water elemental. The GM has the creature’s statistics. If your GM allows it, you can use this spell to summon a different Elemental of your choice of CR 5 or lower. This spell can’t summon creatures with Legendary Actions. The creature disappears when it drops to 0 hit points or when the spell ends.</p><p>The Elemental is friendly to you and your companions for the duration. In combat, the Elemental acts on your initiative and takes its turn immediately after yours. It obeys any verbal commands that you issue to it (no action required by you). If you don’t issue any commands to the Elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can choose to summon an Elemental of a CR equal to or below the circle of the expended slot. For example, expending an 8th circle slot allows you to summon an Elemental creature of CR 8 or lower.</p>",
+      "value": "<p>You summon Elemental creatures that appear in unoccupied spaces that you can see within range. Choose one of the following options for what appears:</p><ul><li><p>One Elemental creature of CR 2 or lower</p></li><li><p>Two Elemental creatures of CR 1 or lower</p></li><li><p>Four Elemental creatures of CR 1/2 or lower</p></li></ul><p>A summoned creature disappears when it drops to 0 HP or when the spell ends.</p><p>The summoned creatures are friendly to you and your companions. The summoned creatures act on your initiative, taking their turns immediately after yours. They obey any verbal commands you give them (no action required by you). If you don’t give any commands, they defend themselves from hostile creatures but otherwise take no actions. The GM has the creatures’ statistics.</p><p><em>At Higher Circles.</em> When you cast this spell using certain higher-circle spell slots, choose one of the summoning options above, and more creatures appear: twice as many with a 6th-circle slot and three times as many with an 8th‑circle slot.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Call an Elemental to help."
+      "short": "Call Elementals to help."
     },
     "source": [
       "arcane",
@@ -62,7 +63,7 @@
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 4
     },
     "casting": {
       "value": null,
@@ -72,14 +73,12 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp",
-        "description": "burning incense for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water"
+        "denomination": "gp"
       }
     },
     "duration": {
@@ -97,6 +96,7 @@
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
@@ -117,9 +117,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1718732495214,
-    "modifiedTime": 1720289285644,
+    "createdTime": 1720285154995,
+    "modifiedTime": 1720289254267,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!r3D0SVvYQkzi6lE4"
+  "_key": "!items!CQJseAX0NMhL1cMc"
 }

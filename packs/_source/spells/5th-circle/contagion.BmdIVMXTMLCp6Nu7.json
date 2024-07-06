@@ -1,0 +1,361 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Contagion",
+  "type": "spell",
+  "_id": "BmdIVMXTMLCp6Nu7",
+  "img": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+  "system": {
+    "activities": {
+      "1P3ONAwM0qupoMnc": {
+        "type": "attack",
+        "_id": "1P3ONAwM0qupoMnc",
+        "description": "",
+        "system": {
+          "type": {},
+          "attack": {
+            "flat": false
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": []
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "KvHv8I6Dy8HxtPKm": {
+        "type": "savingThrow",
+        "_id": "KvHv8I6Dy8HxtPKm",
+        "description": "<p>At the end of each of the target’s turns, it must make a CON save. After failing three of these saves, the disease’s effects last for the duration, and the creature stops making these saves. After succeeding on three of these saves, the creature recovers from the disease and the spell ends.</p>",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "At the end of each of the target’s turns",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Make a melee spell attack against a creature within your reach. On a hit, you afflict the creature with a disease of your choice selected from the options below.</p><p>At the end of each of the target’s turns, it must make a CON save. After failing three of these saves, the disease’s effects last for the duration, and the creature stops making these saves. After succeeding on three of these saves, the creature recovers from the disease and the spell ends.</p><p>Since this spell induces a natural disease in its target, any effect that removes or suppresses a disease’s effects apply to it.</p><p><strong>Blinding Sickness.</strong> Pain grips the creature’s mind, and its eyes turn milky white. The creature has disadvantage on WIS checks and WIS saves and is blinded.</p><p><strong>Filth Fever.</strong> A raging fever sweeps through the creature’s body. The creature has disadvantage on STR checks, STR saves, and attack rolls that use STR.</p><p><strong>Flesh Rot.</strong> The creature’s flesh decays. The creature has disadvantage on CHA checks and becomes vulnerable to all damage.</p><p><strong>Mindfire.</strong> The creature’s mind becomes feverish. The creature has disadvantage on INT checks and INT saves, and the creature behaves as if under the effects of the confusion spell during combat.</p><p><strong>Seizure.</strong> The creature is overcome with shaking. The creature has disadvantage on DEX checks, DEX saves, and attack rolls that use DEX.</p><p><strong>Slimy Doom.</strong> The creature begins to bleed uncontrollably. The creature has disadvantage on CON checks and CON saves. In addition, when the creature takes damage, it is stunned until the end of its next turn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "day",
+      "value": "7"
+    },
+    "tags": [],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "necromancy"
+  },
+  "effects": [
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Blinding Sickness",
+      "_id": "fAZCKn8wySuUPFiD",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"wisdom\" }], \"note\": { \"rollMode\": -1, \"text\": \"Pain grips your’s mind, and your eyes turn milky white. You have disadvantage on WIS checks and WIS saves and area blinded.\" } }"
+        }
+      ],
+      "description": "<p>Pain grips the creature’s mind, and its eyes turn milky white. The creature has disadvantage on WIS checks and WIS saves and is blinded.</p>",
+      "transfer": false,
+      "statuses": [
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.fAZCKn8wySuUPFiD"
+    },
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Filth Fever",
+      "_id": "hRcEBwf7vyc0lt3E",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": -1, \"text\": \"A raging fever sweeps through the your body. You have disadvantage on STR checks, STR saves, and attack rolls that use STR.\" } }"
+        }
+      ],
+      "description": "<p>A raging fever sweeps through the creature’s body. The creature has disadvantage on STR checks, STR saves, and attack rolls that use STR.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.hRcEBwf7vyc0lt3E"
+    },
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Flesh Rot",
+      "_id": "J1uOVccRY061PrHb",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }], \"note\": { \"rollMode\": -1, \"text\": \"Your flesh decays. You have disadvantage on CHA checks and become vulnerable to all damage.\" } }"
+        }
+      ],
+      "description": "<p>The creature’s flesh decays. The creature has disadvantage on CHA checks and becomes vulnerable to all damage.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.J1uOVccRY061PrHb"
+    },
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Mindfire",
+      "_id": "jKwfTnFk2VQtkulb",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"intelligence\" }], \"note\": { \"rollMode\": -1, \"text\": \"Your mind becomes feverish. You have disadvantage on INT checks and INT saves, and you behave as if under the effects of the confusion spell during combat.\" } }"
+        }
+      ],
+      "description": "<p>The creature’s mind becomes feverish. The creature has disadvantage on INT checks and INT saves, and the creature behaves as if under the effects of the @UUID[Compendium.black-flag.spells.Item.Bcm0RKcg5os0dDhC]{confusion} spell during combat.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.jKwfTnFk2VQtkulb"
+    },
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Seizure",
+      "_id": "jvLh1Q36VP2rslZL",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }, { \"k\": \"ability\", \"v\": \"dexterity\" }], \"note\": { \"rollMode\": -1, \"text\": \"You are overcome with shaking. You have disadvantage on DEX checks, DEX saves, and attack rolls that use DEX.\" } }"
+        }
+      ],
+      "description": "<p>The creature is overcome with shaking. The creature has disadvantage on DEX checks, DEX saves, and attack rolls that use DEX.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.jvLh1Q36VP2rslZL"
+    },
+    {
+      "icon": "icons/skills/wounds/blood-cells-vessel-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.BmdIVMXTMLCp6Nu7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Slimy Doom",
+      "_id": "gzXgEuAwbX5qRJ1V",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"constitution\" }], \"note\": { \"rollMode\": -1, \"text\": \"You begin to bleed uncontrollably. You have disadvantage on CON checks and CON saves. In addition, when you take damage, you are stunned until the end of your next turn.\" } }"
+        }
+      ],
+      "description": "<p>The creature begins to bleed uncontrollably. The creature has disadvantage on CON checks and CON saves. In addition, when the creature takes damage, it is stunned until the end of its next turn.</p>",
+      "transfer": false,
+      "statuses": [],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!BmdIVMXTMLCp6Nu7.gzXgEuAwbX5qRJ1V"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "black-flag",
+    "systemVersion": "0.9.038",
+    "coreVersion": "11.315",
+    "createdTime": 1720285415283,
+    "modifiedTime": 1720289336671,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!BmdIVMXTMLCp6Nu7"
+}

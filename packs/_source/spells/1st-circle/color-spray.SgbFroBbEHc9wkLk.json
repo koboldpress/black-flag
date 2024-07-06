@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You shower nearby foes with blinding colors and flashing lights.</em></p><p>A dazzling array of flashing, colored light springs from your hand. Roll [[/r 6d10]]; the total is how many hit points of creatures this spell can affect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can’t see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is blinded until the spell ends. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.</p>",
+      "value": "<p>A dazzling array of flashing, colored light springs from your hand. Roll [[/r 8d10]] and total the result. This total is how many hit points of creatures this spell can affect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can’t see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is blinded until the spell ends. Subtract each creature’s current hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, roll an additional [[/r 2d10]] for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -80,18 +80,45 @@
         "choice": false,
         "type": "special",
         "count": "",
-        "special": "Up to 6d10 HP worth of creatures that can see"
+        "special": "Up to rolled HP worth of creatures that can see"
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "illusion",
     "source": [
       "arcane"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "icon": "icons/magic/light/orbs-smoke-pink.webp",
+      "origin": "Compendium.black-flag.spells.Item.SgbFroBbEHc9wkLk",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Color Spray",
+      "_id": "8mdFkri0shpjQVq0",
+      "changes": [],
+      "description": "<p>A creature affected by this spell is blinded until the spell ends.</p>",
+      "transfer": false,
+      "statuses": [
+        "blinded"
+      ],
+      "flags": {},
+      "tint": null,
+      "_key": "!items.effects!SgbFroBbEHc9wkLk.8mdFkri0shpjQVq0"
+    }
+  ],
   "sort": 2400000,
   "ownership": {
     "default": 0
@@ -99,10 +126,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932604036,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1720284344175,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SgbFroBbEHc9wkLk"

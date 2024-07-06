@@ -1,14 +1,14 @@
 {
-  "folder": "tCxdqzClsLOnTgfE",
-  "name": "Black Tentacles",
+  "folder": "V6ryz9MMBJLcGrft",
+  "name": "Call Lightning",
   "type": "spell",
-  "_id": "IXPJyBevdLlFAPCd",
-  "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
+  "_id": "HVXWvCMCtdo0xxWi",
+  "img": "icons/magic/lightning/bolts-salvo-clouds-sky.webp",
   "system": {
     "activities": {
-      "iQBM8zW3tnserEko": {
+      "jZiy6mBDXvt3FIq6": {
         "type": "savingThrow",
-        "_id": "iQBM8zW3tnserEko",
+        "_id": "jZiy6mBDXvt3FIq6",
         "description": "",
         "system": {
           "ability": "dexterity",
@@ -16,15 +16,17 @@
             "parts": [
               {
                 "number": 3,
-                "denomination": 6,
+                "denomination": 10,
                 "bonus": "",
                 "custom": {
                   "formula": "",
                   "enabled": false
                 },
-                "type": "bludgeoning",
+                "type": "lightning",
                 "scaling": {
-                  "mode": ""
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
                 }
               }
             ]
@@ -47,19 +49,28 @@
         },
         "duration": {
           "units": "instantaneous",
-          "override": false
+          "override": true
         },
-        "range": {},
+        "range": {
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot"
+            "units": "foot",
+            "type": "sphere",
+            "size": "5"
           },
           "affects": {
-            "choice": false
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
           },
-          "override": false
+          "override": true
         },
         "uses": {
           "spent": 0,
@@ -68,7 +79,7 @@
           "min": "",
           "max": ""
         },
-        "name": "",
+        "name": "Lightning Strike",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
@@ -80,18 +91,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a DEX save or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage.</p><p>A creature restrained by the tentacles can use its action to make a STR or DEX check (its choice) against your spell save DC. On a success, it frees itself.</p>",
+      "value": "<p>A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see 100 feet directly above you. The spell fails if you can’t see a point in the air where the storm cloud could appear (for example, if you are in a room that can’t accommodate the cloud).</p><p>When you cast the spell, choose a point you can see within range. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a DEX save. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one.</p><p>If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell’s damage increases by 1d10.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by 1d10 for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Tentacles bludgeon, restrain."
+      "short": "Lightning in 60-ft. radius."
     },
     "source": [
-      "wyrd"
+      "primordial"
     ],
     "circle": {
       "value": null,
-      "base": 4
+      "base": 3
     },
     "casting": {
       "value": null,
@@ -101,26 +112,24 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp",
-        "description": "a piece of tentacle from a giant octopus or a giant squid"
+        "denomination": "gp"
       }
     },
     "duration": {
       "units": "minute",
-      "value": "1"
+      "value": "10"
     },
     "tags": [
       "concentration"
     ],
     "range": {
       "units": "foot",
-      "value": "90",
+      "value": "120",
       "special": ""
     },
     "target": {
@@ -128,8 +137,9 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": "square",
-        "size": "20"
+        "type": "cylinder",
+        "size": "60",
+        "height": "10"
       },
       "affects": {
         "choice": false,
@@ -150,9 +160,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1720234081377,
-    "modifiedTime": 1720283471087,
+    "createdTime": 1720282979291,
+    "modifiedTime": 1720289516949,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!IXPJyBevdLlFAPCd"
+  "_key": "!items!HVXWvCMCtdo0xxWi"
 }

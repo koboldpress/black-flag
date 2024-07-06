@@ -1,29 +1,18 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Greater Hold",
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Create or Destroy Water",
   "type": "spell",
-  "_id": "09Sensm5KJcvLdhx",
-  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+  "_id": "JKOLGDy9N2dMsnDp",
+  "img": "icons/magic/water/wave-water-explosion.webp",
   "system": {
     "activities": {
-      "JhD3cjoHhcKtZgdH": {
-        "type": "savingThrow",
-        "_id": "JhD3cjoHhcKtZgdH",
+      "trDrmFsTTPA820rk": {
+        "type": "utility",
+        "_id": "trDrmFsTTPA820rk",
         "description": "",
-        "system": {
-          "ability": "wisdom",
-          "damage": {
-            "parts": []
-          },
-          "dc": {
-            "ability": ""
-          }
-        },
+        "system": {},
         "activation": {
-          "value": null,
-          "type": "",
-          "condition": "",
-          "primary": true
+          "value": null
         },
         "consumption": {
           "targets": [],
@@ -39,6 +28,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -49,12 +39,8 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          "recovery": []
+        }
       }
     },
     "uses": {
@@ -65,20 +51,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose any creature that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, an affected target can repeat the WIS save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+      "value": "<p>When you cast this spell, choose which of the following effects to create.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range, extinguishing exposed flames in the area.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Affect gallons of water."
     },
     "source": [
-      "arcane",
-      "divine",
-      "wyrd"
+      "primordial"
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 1
     },
     "casting": {
       "value": null,
@@ -95,35 +79,34 @@
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "a small, straight piece of iron"
+        "description": "a drop of water if creating water or a few grains of sand if destroying it"
       }
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "instantaneous"
     },
-    "tags": [
-      "concentration"
-    ],
+    "tags": [],
     "range": {
       "units": "foot",
-      "value": "90",
+      "value": "30",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "30 + (@scaling.increase * 5)"
       },
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "@scaling",
+        "count": "",
         "special": ""
       }
     },
-    "school": "enchantment"
+    "school": "transmutation"
   },
   "effects": [],
   "sort": 0,
@@ -135,9 +118,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1718423902080,
-    "modifiedTime": 1720282842346,
+    "createdTime": 1720286913702,
+    "modifiedTime": 1720289509687,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!09Sensm5KJcvLdhx"
+  "_key": "!items!JKOLGDy9N2dMsnDp"
 }

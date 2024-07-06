@@ -1,28 +1,28 @@
 {
-  "folder": "tCxdqzClsLOnTgfE",
-  "name": "Black Tentacles",
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Contact Other Plane",
   "type": "spell",
-  "_id": "IXPJyBevdLlFAPCd",
-  "img": "icons/creatures/tentacles/tentacles-octopus-black-pink.webp",
+  "_id": "IwTheJAiFWUlrTjT",
+  "img": "icons/commodities/treasure/token-silver-blue.webp",
   "system": {
     "activities": {
-      "iQBM8zW3tnserEko": {
+      "EwDGkgd66fJWoKlF": {
         "type": "savingThrow",
-        "_id": "iQBM8zW3tnserEko",
+        "_id": "EwDGkgd66fJWoKlF",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "intelligence",
           "damage": {
             "parts": [
               {
-                "number": 3,
+                "number": 6,
                 "denomination": 6,
                 "bonus": "",
                 "custom": {
                   "formula": "",
                   "enabled": false
                 },
-                "type": "bludgeoning",
+                "type": "psychic",
                 "scaling": {
                   "mode": ""
                 }
@@ -30,7 +30,8 @@
             ]
           },
           "dc": {
-            "ability": ""
+            "ability": "custom",
+            "formula": "15"
           }
         },
         "activation": {
@@ -80,35 +81,35 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in the area into difficult terrain.</p><p>When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a DEX save or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage.</p><p>A creature restrained by the tentacles can use its action to make a STR or DEX check (its choice) against your spell save DC. On a success, it frees itself.</p>",
+      "value": "<p>You mentally contact a demigod, the spirit of a long-dead sage, or some entity from another plane. Contacting this extraplanar being can strain or even break your mind. When you cast this spell, make a DC 15 INT save. On a failure, you take 6d6 psychic damage and become incapacitated until you finish a long rest. While incapacitated in this way, you can’t take actions, can’t understand what other creatures say, can’t read, and speak only in gibberish. A <em>greater restoration</em> spell cast on you ends this effect.</p><p>On a successful save, you can ask the entity up to five questions. You must ask your questions before the spell ends. The GM answers each question with one word, such as <q>yes,</q> <q>no,</q> <q>maybe,</q> <q>never,</q> <q>irrelevant,</q> or <q>unclear</q> (if the entity doesn’t know the answer to the question). If a one-word answer would be misleading, the GM might instead offer a short phrase as an answer.</p><p>If you cast the spell two or more times before finishing your next long rest, there is a cumulative 25 percent chance for each casting that you get no answer. The GM makes this roll in secret. If you receive no answer, you can’t attempt to cast this spell again until 24 hours have passed.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Tentacles bludgeon, restrain."
+      "short": "Ask an entity five questions."
     },
     "source": [
+      "arcane",
       "wyrd"
     ],
     "circle": {
       "value": null,
-      "base": 4
+      "base": 5
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 10,
+      "type": "minute",
       "condition": ""
     },
     "components": {
       "required": [
         "verbal",
-        "somatic",
         "material"
       ],
       "material": {
-        "consumed": false,
-        "cost": null,
+        "consumed": true,
+        "cost": 25,
         "denomination": "gp",
-        "description": "a piece of tentacle from a giant octopus or a giant squid"
+        "description": "incense or a sacrificial offering appropriate for the entity contacted worth 25 gp, which the spell consumes"
       }
     },
     "duration": {
@@ -116,11 +117,10 @@
       "value": "1"
     },
     "tags": [
-      "concentration"
+      "ritual"
     ],
     "range": {
-      "units": "foot",
-      "value": "90",
+      "units": "self",
       "special": ""
     },
     "target": {
@@ -128,17 +128,14 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": "square",
-        "size": "20"
+        "type": ""
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": "",
-        "special": ""
+        "type": ""
       }
     },
-    "school": "conjuration"
+    "school": "divination"
   },
   "effects": [],
   "sort": 0,
@@ -150,9 +147,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1720234081377,
-    "modifiedTime": 1720283471087,
+    "createdTime": 1720288016602,
+    "modifiedTime": 1720289434204,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!IXPJyBevdLlFAPCd"
+  "_key": "!items!IwTheJAiFWUlrTjT"
 }

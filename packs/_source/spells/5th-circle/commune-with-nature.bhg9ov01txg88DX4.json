@@ -1,14 +1,14 @@
 {
   "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Conjure Elemental",
+  "name": "Commune with Nature",
   "type": "spell",
-  "_id": "r3D0SVvYQkzi6lE4",
-  "img": "icons/creatures/magical/spirit-mischief-fire-ice-blue.webp",
+  "_id": "bhg9ov01txg88DX4",
+  "img": "icons/environment/creatures/horse-white.webp",
   "system": {
     "activities": {
-      "1LKoD8jcYopzfq04": {
+      "8UrooUodfcJoQ0pB": {
         "type": "utility",
-        "_id": "1LKoD8jcYopzfq04",
+        "_id": "8UrooUodfcJoQ0pB",
         "description": "",
         "system": {},
         "activation": {
@@ -28,6 +28,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -50,23 +51,22 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You summon an Elemental servant that appears in an unoccupied space you can see within range. Choose which Elemental appears: an air elemental, earth elemental, a fire elemental, or a water elemental. The GM has the creature’s statistics. If your GM allows it, you can use this spell to summon a different Elemental of your choice of CR 5 or lower. This spell can’t summon creatures with Legendary Actions. The creature disappears when it drops to 0 hit points or when the spell ends.</p><p>The Elemental is friendly to you and your companions for the duration. In combat, the Elemental acts on your initiative and takes its turn immediately after yours. It obeys any verbal commands that you issue to it (no action required by you). If you don’t issue any commands to the Elemental, it defends itself from hostile creatures but otherwise takes no actions.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can choose to summon an Elemental of a CR equal to or below the circle of the expended slot. For example, expending an 8th circle slot allows you to summon an Elemental creature of CR 8 or lower.</p>",
+      "value": "<p>You must be outdoors to cast this spell. When you do so, the spell gives you knowledge of the land within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn’t function where nature has been replaced by construction, such as in dungeons and towns.</p><p>You instantly know up to three facts of your choice about any of the following subjects as they relate to the area:</p><ul><li><p>Terrain and bodies of water</p></li><li><p>Prevalent plants, minerals, animals, or peoples</p></li><li><p>Powerful Celestials, Fey, Fiends, Elementals, or Undead</p></li><li><p>Influence from other planes of existence</p></li><li><p>Buildings</p></li></ul><p>For example, you could determine the location of powerful Undead in the area, the location of major sources of safe drinking water, and the location of any nearby towns.</p><p>Once you perform this ritual, you can’t do so again until 24 hours have passed.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Call an Elemental to help."
+      "short": "Get facts about surrounding area."
     },
     "source": [
-      "arcane",
-      "wyrd"
+      "primordial"
     ],
     "circle": {
       "value": null,
       "base": 5
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
@@ -79,24 +79,23 @@
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "burning incense for air, soft clay for earth, sulfur and phosphorus for fire, or water and sand for water"
+        "description": "a forked stick, a bowl of purified water, and a polished stone or bone of an animal native to where you are"
       }
     },
     "duration": {
-      "units": "hour",
-      "value": "1"
+      "units": "instantaneous"
     },
     "tags": [
-      "concentration"
+      "ritual"
     ],
     "range": {
-      "units": "foot",
-      "value": "90",
+      "units": "self",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
@@ -105,7 +104,7 @@
         "type": ""
       }
     },
-    "school": "conjuration"
+    "school": "divination"
   },
   "effects": [],
   "sort": 0,
@@ -117,9 +116,9 @@
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
-    "createdTime": 1718732495214,
-    "modifiedTime": 1720289285644,
+    "createdTime": 1720287865391,
+    "modifiedTime": 1720289543287,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!r3D0SVvYQkzi6lE4"
+  "_key": "!items!bhg9ov01txg88DX4"
 }

@@ -18,8 +18,14 @@
                 "number": 5,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "poison"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "poison",
+                "scaling": {
+                  "mode": "whole"
+                }
               }
             ]
           },
@@ -29,7 +35,8 @@
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -56,7 +63,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A toxic cloud poisons creatures caught within it.</em></p><p>You create a 20-foot-radius sphere of poisonous, yellow- green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured.</p><p>When a creature enters the spell’s area for the first time on a turn or starts its turn there, that creature must make a CON save. The creature takes 5d8 poison damage on a failed save, or half as much damage on a successful one.</p><p>Creatures are affected even if they hold their breath or don’t need to breathe.</p><p>The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
+      "value": "<p>You create a 20-foot-radius sphere of poisonous, yellow-green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured.</p><p>When a creature enters the spell’s area for the first time on a turn or starts its turn there, that creature must make a CON save. On a failure, the creature takes 5d8 poison damage or half as much damage on a success.</p><p>Creatures are affected even if they hold their breath or don’t need to breathe.</p><p>The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the damage increases by 1d8 for each slot above 5th.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -102,12 +109,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "120"
+      "value": "120",
+      "special": ""
     },
     "school": "conjuration",
     "source": [
@@ -123,10 +132,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706997580398,
-    "modifiedTime": 1717966788809,
+    "modifiedTime": 1720284194307,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SWHhgfmpmywT2kJo"

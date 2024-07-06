@@ -16,13 +16,17 @@
             "denomination": 8,
             "bonus": "@mod",
             "custom": "",
-            "number": 1
+            "number": 1,
+            "scaling": {
+              "mode": "whole"
+            }
           },
           "ability": ""
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -49,7 +53,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You touch a wounded creature and heal them.</em></p><p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.</p><p>This spell has no effect on Undead or Constructs.</p>",
+      "value": "<p>A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier.</p><p>This spell has no effect on Constructs or Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, the healing increases by 1d8 for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -91,15 +95,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "evocation",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
   "effects": [],
@@ -110,10 +117,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1706932857027,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1720287099385,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!NQvy34IRCNEJfwip"
