@@ -5,7 +5,59 @@
   "_id": "Bcm0RKcg5os0dDhC",
   "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EvzkXmdeDIhOwKjf": {
+        "type": "savingThrow",
+        "_id": "EvzkXmdeDIhOwKjf",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -35,30 +87,43 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "three nut shells"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "90",
+      "special": ""
     },
     "target": {
       "template": {
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "10 + (@scaling.increase * 5)"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "enchantment"
@@ -74,7 +139,7 @@
     "systemVersion": "0.9.038",
     "coreVersion": "11.315",
     "createdTime": 1720284831916,
-    "modifiedTime": 1720289244771,
+    "modifiedTime": 1720392521391,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Bcm0RKcg5os0dDhC"
