@@ -323,14 +323,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	prepareDerivedData() {
-		super.prepareDerivedData();
-		if (this.target.template.type) this.target.affects.type ||= "creature";
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
 	prepareFinalData() {
 		super.prepareFinalData();
 		const rollData = this.parent.getRollData({ deterministic: true });

@@ -82,58 +82,147 @@ export default class TargetField extends SchemaField {
 
 		Object.defineProperty(obj, "label", {
 			get() {
-				return this.template.label || this.affects.label || "";
+				const templateShort = TargetField.templateLabel(obj, { style: "short" });
+				if (!templateShort) return TargetField.affectsLabel(obj, { style: "combined" });
+				const templateLong = TargetField.templateLabel(obj, { style: "long" });
+				const affectsLong = TargetField.affectsLabel(obj, { style: "long" });
+				const tooltip = affectsLong ? `${templateLong}, ${affectsLong.toLowerCase()}` : templateLong;
+				return `<span class="template-label" aria-label="${tooltip}" data-tooltip="${tooltip}">${templateShort}</span>`;
 			},
 			enumerable: false
 		});
 
 		Object.defineProperty(obj.affects, "label", {
 			get() {
-				const type = CONFIG.BlackFlag.targetTypes[this.type];
-				if (!type) return game.i18n.localize("BF.Range.Type.Self.Label");
-				if (this.type === "special") {
-					let label = game.i18n.localize(type.label);
-					if (this.special) label = `<span data-tooltip="${this.special.capitalize()}">${label}*</span>`;
-					return label;
-				}
-				if (obj.template.type in CONFIG.BlackFlag.areaOfEffectTypes && !this.count) {
-					return `<span>${game.i18n.format("BF.Target.Count.EverySpecific", {
-						type: game.i18n.localize(`${type.localization}[one]`)
-					})}</span>`;
-				} else {
-					const shortKey = `BF.Target.Label[${getPluralRules().select(this.count ?? 1)}]`;
-					const longKey = type.label ?? `${type.localization}[${getPluralRules().select(this.count ?? 1)}]`;
-					const number = numberFormat(this.count ?? 1);
-					return `<span data-tooltip="${`${number} ${game.i18n.localize(longKey)}`}">${number} ${game.i18n.localize(
-						shortKey
-					)}*</span>`;
-				}
+				return TargetField.affectsLabel(obj);
 			},
 			enumerable: false
 		});
 
 		Object.defineProperty(obj.template, "label", {
 			get() {
-				if (!this.type) return "";
-				const unit = CONFIG.BlackFlag.distanceUnits[this.units];
-				let label = `<span class="number">${numberFormat(this.size, { unit, unitDisplay: "narrow" })}</span>`;
-				let tooltip = `${numberFormat(this.size)} ${game.i18n.localize(`${unit.localization}[one]`)}`;
-				const areaConfig = CONFIG.BlackFlag.areaOfEffectTypes[this.type];
-				if (areaConfig?.icon) label += ` <img class="area-icon" src="${areaConfig.icon}">`;
-				if (areaConfig?.localization) tooltip += ` ${game.i18n.localize(`${areaConfig.localization}[one]`)}`;
-				else if (areaConfig?.label) tooltip += ` ${game.i18n.localize(areaConfig.label)}`;
-				return `<span class="area-label" data-tooltip="${tooltip}">${label}</span>`;
+				return TargetField.templateLabel(obj);
 			},
 			enumerable: false
 		});
 
 		Object.defineProperty(obj.affects, "placeholder", {
 			get() {
-				return obj.template.type ? game.i18n.localize("BF.Target.Count.EveryGeneric") : 1;
+				return obj.template.type
+					? game.i18n.localize("BF.Target.Count.EveryGeneric")
+					: game.i18n.localize("BF.Target.Count.AnyGeneric");
 			},
 			enumerable: false
 		});
 
 		return obj;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Labels                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a label describing the affected targets.
+	 * @param {TargetField} data - Data from the targeting field.
+	 * @param {object} [options={}]
+	 * @param {string} [options.style="combined"] - Short, long, or combined.
+	 * @returns {string}
+	 */
+	static affectsLabel(data, { style = "combined" } = {}) {
+		const { affects, template } = data;
+		const type = CONFIG.BlackFlag.targetTypes[affects.type];
+		if (!type) return "";
+
+		let short;
+		let long;
+
+		if (affects.type === "special") {
+			short = game.i18n.localize(type.label);
+		} else if (!affects.count) {
+			const key = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "Every" : "Any";
+			const pluralRule = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "one" : "other";
+			short = long = game.i18n.format(`BF.Target.Count.${key}Specific`, {
+				type: game.i18n.localize(`${type.localization}[${pluralRule}]`),
+				typeLowercase: game.i18n.localize(`${type.localization}[${pluralRule}]`).toLowerCase()
+			});
+		} else {
+			const number = numberFormat(affects.count ?? 1);
+			short = `${number} ${game.i18n
+				.localize(`BF.Target.Label[${getPluralRules().select(affects.count ?? 1)}]`)
+				.toLowerCase()}`;
+			long = `${number} ${game.i18n
+				.localize(type.label ?? `${type.localization}[${getPluralRules().select(affects.count ?? 1)}]`)
+				.toLowerCase()}`;
+		}
+
+		if (affects.choice) {
+			long = game.i18n.format("BF.Target.Choice", { number: long ?? short });
+		}
+
+		const tooltip = long ? (affects.special ? `${long} (${affects.special})` : long) : affects.special?.capitalize();
+
+		return style === "short"
+			? short
+			: style === "long"
+				? tooltip ?? short
+				: `<span${tooltip ? ` data-tooltip="${tooltip}"` : ""}>${short}</span>`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a label describing the created template.
+	 * @param {TargetField} data - Data from the targeting field.
+	 * @param {object} [options={}]
+	 * @param {string} [options.style="combined"] - Short, long, or combined.
+	 * @returns {string}
+	 */
+	static templateLabel(data, { style = "combined" } = {}) {
+		const { template } = data;
+		const type = CONFIG.BlackFlag.areaOfEffectTypes[template.type];
+		if (!type || !template.size) return "";
+
+		let short;
+		let long;
+
+		const pluralRule = getPluralRules().select(template.count);
+		const unit = CONFIG.BlackFlag.distanceUnits[template.units];
+		const shape = type.localization
+			? game.i18n.localize(`${type.localization}[${pluralRule}]`)
+			: game.i18n.localize(type.label) ?? "";
+
+		if (type.icon) {
+			let size = numberFormat(template.size, { unit, unitDisplay: "narrow" });
+			const image = `<img class="area-icon" src="${type.icon}" alt="${shape}"></img>`;
+			short = game.i18n.format("BF.AreaOfEffect.Described", {
+				size: style === "combined" ? `<span class="number">${size}</span>` : size,
+				shape: image,
+				shapeLowercase: image
+			});
+			if (template.count > 1) {
+				short = `${numberFormat(template.count)} x ${short}`;
+			}
+		}
+
+		if (style !== "short" && short) {
+			long = game.i18n.format("BF.AreaOfEffect.Described", {
+				size: numberFormat(template.size, { unit }),
+				shape,
+				shapeLowercase: shape.toLowerCase()
+			});
+			if (template.count > 1) {
+				long = game.i18n.format("BF.AreaOfEffect.Counted", {
+					count: numberFormat(template.count, { spelledOut: true }).capitalize(),
+					sizedShape: long
+				});
+			}
+		}
+
+		return style === "short"
+			? short ?? long
+			: style === "long" || !short
+				? long
+				: `<span class="template-label" aria-label="${long}" data-tooltip="${long}">${short ?? long}</span>`;
 	}
 }

@@ -40,7 +40,9 @@ export default class SpellSheet extends BaseItemSheet {
 			chosen: context.system.duration.units,
 			isSpell: true
 		});
+		context.range = { data: context.source.range };
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
+		context.target = { data: context.source.target };
 
 		return context;
 	}
