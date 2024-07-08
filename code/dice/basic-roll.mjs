@@ -181,7 +181,7 @@ export default class BasicRoll extends Roll {
 	 */
 	static async toMessage(rolls, messageData = {}, { rollMode, create = true } = {}) {
 		for (const roll of rolls) {
-			if (!roll._evaluated) await roll.evaluate({ async: true });
+			if (!roll._evaluated) await roll.evaluate();
 		}
 
 		// Prepare chat data

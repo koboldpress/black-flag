@@ -270,7 +270,7 @@ export default class DamageRoll extends BasicRoll {
 
 	/** @inheritDoc */
 	async render({ flavor, template = this.constructor.CHAT_TEMPLATE, isPrivate = false } = {}) {
-		if (!this._evaluated) await this.evaluate({ async: true });
+		if (!this._evaluated) await this.evaluate();
 
 		const chatData = {
 			CONFIG: CONFIG.BlackFlag,

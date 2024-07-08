@@ -151,10 +151,10 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		let bonusTerm = roll.terms.find(t => t.options.luckBonus);
 		if (!bonusTerm) {
 			const operatorTerm = new OperatorTerm({ operator: "+" });
-			await operatorTerm.evaluate({ async: true });
+			await operatorTerm.evaluate();
 			roll.terms.push(operatorTerm);
 			bonusTerm = new NumericTerm({ number: 0, options: { luckBonus: true } });
-			await bonusTerm.evaluate({ async: true });
+			await bonusTerm.evaluate();
 			roll.terms.push(bonusTerm);
 		}
 		bonusTerm.number += 1;

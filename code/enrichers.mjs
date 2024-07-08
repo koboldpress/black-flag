@@ -326,8 +326,8 @@ function enrichCalculation(config, fallback, options) {
 		return null;
 	}
 
-	// TODO: Use `evaluateSync` on V12
-	roll.evaluate({ async: false });
+	if (game.release.generation < 12) roll.evaluate({ async: false });
+	else roll.evaluateSync();
 
 	const span = document.createElement("span");
 	span.classList.add("calculation-value");
@@ -713,9 +713,9 @@ async function enrichDamage(configs, label, options) {
 		if (config.average) {
 			localizationType = "Long";
 			if (config.average === true) {
-				const minRoll = Roll.create(formula).evaluate({ minimize: true, async: true });
-				const maxRoll = Roll.create(formula).evaluate({ maximize: true, async: true });
-				localizationData.average = Math.floor(((await minRoll.total) + (await maxRoll.total)) / 2);
+				const minRoll = Roll.create(formula).evaluate({ minimize: true });
+				const maxRoll = Roll.create(formula).evaluate({ maximize: true });
+				localizationData.average = Math.floor(((await minRoll).total + (await maxRoll).total) / 2);
 			} else if (Number.isNumeric(config.average)) {
 				localizationData.average = config.average;
 			} else {
