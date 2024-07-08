@@ -186,6 +186,9 @@ p:empty:has(+ .content-embed), .content-embed + p:empty {
 		&::after {
 			content: ". ";
 		}
+		&.link-button {
+			margin-inline-end: 4px;
+		}
 	}
 }
 

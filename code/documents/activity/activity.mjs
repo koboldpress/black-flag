@@ -194,6 +194,50 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbedContents(config, options) {
+		const div = document.createElement("div");
+		div.innerHTML = await TextEditor.enrichHTML(this.description, {
+			relativeTo: this,
+			secrets: false,
+			rollData: this.item.getRollData()
+		});
+		return div.children;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _createInlineEmbed(content, config, options) {
+		if (!config.values?.includes("activate") || !this.item.isEmbedded) {
+			return super._createInlineEmbed(content, config, options);
+		}
+
+		const section = document.createElement("section");
+		if (content instanceof HTMLCollection) section.append(...content);
+		else section.append(content);
+
+		let insert = section.children[0];
+		if (!insert) {
+			insert = document.createElement("p");
+			section.append(insert);
+		}
+
+		const control = document.createElement("button");
+		control.type = "button";
+		control.classList.add("inline-caption", "link-button");
+		control.dataset.action = "activate";
+		control.dataset.activityUuid = this.uuid;
+		control.innerText = config.label ?? this.name;
+		section.children[0].insertAdjacentElement("afterbegin", control);
+
+		return section;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

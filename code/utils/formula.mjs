@@ -17,7 +17,7 @@ export function replaceFormulaData(formula, data, {
 	const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
 	const missingReferences = new Set();
 
-	formula = formula.replace(dataRgx, (match, term) => {
+	formula = String(formula).replace(dataRgx, (match, term) => {
 		const value = foundry.utils.getProperty(data, term);
 		if ( value == null ) {
 			missingReferences.add(match);

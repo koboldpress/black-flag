@@ -30,6 +30,7 @@ export function registerCustomEnrichers() {
 		}
 	);
 
+	document.body.addEventListener("click", handleActivation);
 	document.body.addEventListener("click", handleRollAction);
 }
 
@@ -176,6 +177,20 @@ function _addDataset(element, dataset) {
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                     Event Handling                    */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Activate an activity.
+ * @param {Event} event - The click event triggering the action.
+ */
+async function handleActivation(event) {
+	const activity = await fromUuid(event.target.closest("[data-activity-uuid]")?.dataset.activityUuid);
+	if (activity) {
+		event.stopPropagation();
+		activity.activate();
+	}
+}
+
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
