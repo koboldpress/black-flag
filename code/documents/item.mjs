@@ -314,8 +314,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			{
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
-					type: game.release.generation < 12 ? CONST.CHAT_MESSAGE_TYPES.ORDER : undefined,
-					style: game.release.generation < 12 ? undefined : CONST.CHAT_MESSAGE_STYLES.OTHER,
+					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
 					content: await renderTemplate("systems/black-flag/templates/chat/item-card.hbs", context),
 					speaker: ChatMessage.getSpeaker({ actor: this.actor }),
 					flags: {

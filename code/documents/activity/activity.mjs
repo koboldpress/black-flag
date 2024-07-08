@@ -622,8 +622,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
 					title: "chat message",
-					type: game.release.generation < 12 ? CONST.CHAT_MESSAGE_TYPES.OTHER : undefined,
-					style: game.release.generation < 12 ? undefined : CONST.CHAT_MESSAGE_STYLES.OTHER,
+					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
 					content: await renderTemplate("systems/black-flag/templates/activities/chat/activation-card.hbs", context),
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {

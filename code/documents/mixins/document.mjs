@@ -20,61 +20,6 @@ export default Base =>
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */
-		/*        Socket Event Handlers        */
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		async _preCreate(data, options, user) {
-			let allowed = await super._preCreate(data, options, user);
-			if (allowed !== false && game.release.generation < 12)
-				allowed = await this.system._preCreate?.(data, options, user);
-			return allowed;
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		async _preUpdate(changed, options, user) {
-			let allowed = await super._preUpdate(changed, options, user);
-			if (allowed !== false && game.release.generation < 12)
-				allowed = await this.system._preUpdate?.(changed, options, user);
-			return allowed;
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		async _preDelete(options, user) {
-			let allowed = await super._preDelete(options, user);
-			if (allowed !== false && game.release.generation < 12) allowed = await this.system._preDelete?.(options, user);
-			return allowed;
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		_onCreate(data, options, userId) {
-			super._onCreate(data, options, userId);
-			if (game.release.generation < 12) this.system._onCreate?.(data, options, userId);
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		_onUpdate(changed, options, userId) {
-			super._onUpdate(changed, options, userId);
-			if (game.release.generation < 12) this.system._onUpdate?.(changed, options, userId);
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
-
-		/** @inheritDoc */
-		_onDelete(options, userId) {
-			super._onDelete(options, userId);
-			if (game.release.generation < 12) this.system._onDelete?.(options, userId);
-		}
-
-		/* <><><><> <><><><> <><><><> <><><><> */
 		/*       Importing and Exporting       */
 		/* <><><><> <><><><> <><><><> <><><><> */
 

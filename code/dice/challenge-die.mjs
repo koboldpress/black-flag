@@ -1,7 +1,7 @@
 /**
  * Primary die used when performing a challenge roll.
  */
-export default class ChallengeDie extends Die {
+export default class ChallengeDie extends foundry.dice.terms.Die {
 	constructor({ number = 1, faces = 20, ...args } = {}) {
 		super({ number, faces, ...args });
 	}

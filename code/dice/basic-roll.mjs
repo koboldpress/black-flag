@@ -188,7 +188,6 @@ export default class BasicRoll extends Roll {
 		messageData = foundry.utils.mergeObject(
 			{
 				user: game.user.id,
-				type: game.release.generation < 12 ? CONST.CHAT_MESSAGE_TYPES.ROLL : undefined,
 				sound: CONFIG.sounds.dice
 			},
 			messageData

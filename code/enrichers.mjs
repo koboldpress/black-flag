@@ -341,8 +341,7 @@ function enrichCalculation(config, fallback, options) {
 		return null;
 	}
 
-	if (game.release.generation < 12) roll.evaluate({ async: false });
-	else roll.evaluateSync();
+	roll.evaluateSync();
 
 	const span = document.createElement("span");
 	span.classList.add("calculation-value");
@@ -579,8 +578,6 @@ async function requestCheckSave(event) {
 		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
 		speaker: MessageClass.getSpeaker({ user: game.user })
 	};
-	// TODO: Remove when v11 support is dropped
-	if (game.release.generation < 12) chatData.type = CONST.CHAT_MESSAGE_TYPES.OTHER;
 	return MessageClass.create(chatData);
 }
 
@@ -821,7 +818,7 @@ async function enrichEmbed(config, label, options) {
 		if (config.uuid) break;
 		try {
 			const parsed = foundry.utils.parseUuid(value, { relative: options.relativeTo });
-			if ((game.release.generation < 12 && parsed.embedded?.length) || parsed.documentId) config.uuid = value;
+			if (parsed.documentId) config.uuid = value;
 		} catch (err) {}
 	}
 

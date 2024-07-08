@@ -60,8 +60,6 @@ Hooks.once("init", function () {
 	settings.registerSettings();
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
-
-	if (game.release.generation < 12) Math.clamp = Math.clamped;
 });
 
 Hooks.once("setup", function () {
