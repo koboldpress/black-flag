@@ -284,28 +284,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		// Handle scaling
-		const scaleUpdate = {};
-		if (item.type === "spell") {
-			const circle = this.actor.system.spellcasting?.slots?.[activationConfig.spell?.slot]?.circle;
-			if (circle)
-				foundry.utils.setProperty(
-					messageConfig.data,
-					`flags.${game.system.id}.spellSlot`,
-					activationConfig.spell?.slot
-				);
-			if (circle && circle !== item.system.circle.base) {
-				scaleUpdate["system.circle.value"] = circle;
-				activationConfig.scaling = circle - item.system.circle.base;
-			}
-		}
-		if (activationConfig.scaling) {
-			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
-			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
-			item.updateSource(scaleUpdate);
-			item.prepareData();
-			item.system.prepareFinalData?.();
-			activity = item.system.activities.get(this.id);
-		}
+		this.prepareActivationScaling(activationConfig, messageConfig, item);
+		activity = item.system.activities.get(this.id);
 
 		// Call preActivityConsumption script & hooks
 		// TODO: preActivityConsumption script
@@ -420,6 +400,43 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		return config;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine scaling values and update item clone if necessary.
+	 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+	 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the chat message.
+	 * @param {BlackFlagItem} item - Clone of the item upon which the activation is occurring.
+	 */
+	prepareActivationScaling(activationConfig, messageConfig, item) {
+		const scaleUpdate = {};
+
+		if (item.type === "spell") {
+			const circle = item.system.tags.has("ritual")
+				? this.actor.system.spellcasting?.maxCircle
+				: this.actor.system.spellcasting?.slots?.[activationConfig.spell?.slot]?.circle;
+			if (circle) {
+				foundry.utils.setProperty(
+					messageConfig.data,
+					`flags.${game.system.id}.spellSlot`,
+					activationConfig.spell?.slot
+				);
+				if (circle !== item.system.circle.base) {
+					scaleUpdate["system.circle.value"] = circle;
+					activationConfig.scaling = circle - item.system.circle.base;
+				}
+			}
+		}
+
+		if (activationConfig.scaling) {
+			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
+			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
+			item.updateSource(scaleUpdate);
+			item.prepareData();
+			item.system.prepareFinalData?.();
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

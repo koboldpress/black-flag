@@ -278,6 +278,12 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			enumerable: false
 		});
 
+		Object.defineProperty(this.circle, "toString", {
+			value: () => String(this.circle.value ?? this.circle.base),
+			configurable: true,
+			enumerable: false
+		});
+
 		Object.defineProperty(this.components, "label", {
 			get() {
 				const components = [];
