@@ -7,9 +7,8 @@
 			       min="0" max="5" step="1">
 		</label>
 		<label>
-			<span>
+			<span class="hinted-label" data-tooltip="BF.Luck.Formula.Hint">
 				{{ localize "BF.Luck.Formula.Label" }}
-				<i class="hintIcon" data-tooltip="BF.Luck.Formula.Hint"></i>
 			</span>
 			<input type="text" name="system.attributes.luck.formula" value="{{ system.attributes.luck.formula }}"
 						 placeholder="1d4" {{ disabled formulaDisabled }}>

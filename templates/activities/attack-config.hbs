@@ -46,9 +46,8 @@
 						<input type="text" name="system.attack.bonus" value="{{ source.system.attack.bonus }}">
 					</label>
 					<label>
-						<span>
+						<span class="hinted-label" data-tooltip="BF.Activity.Attack.Flat.Hint">
 							{{ localize "BF.Activity.Attack.Flat.Label" }}
-							<i class="hintIcon" data-tooltip="BF.Activity.Attack.Flat.Hint"></i>
 						</span>
 						<input type="checkbox" name="system.attack.flat" {{ checked source.system.attack.flat }}>
 					</label>
@@ -75,7 +74,7 @@
 				<legend>{{ localize "BF.Damage.Label" }}</legend>
 				{{#if showBaseDamage}}
 					<label class="full-checkbox">
-						<span class="hint-label" data-tooltip="BF.Activity.Damage.IncludeBaseDamage.Hint">
+						<span class="hinted-label" data-tooltip="BF.Activity.Damage.IncludeBaseDamage.Hint">
 							{{ localize "BF.Activity.Damage.IncludeBaseDamage.Label" }}
 						</span>
 						<input type="checkbox" name="system.damage.includeBaseDamage" {{ checked system.damage.includeBaseDamage }}>

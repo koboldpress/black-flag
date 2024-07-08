@@ -9,9 +9,8 @@
 		</label>
 		{{#if showSwarm}}
 			<label>
-				<span>
+				<span class="hinted-label" data-tooltip="BF.CreatureType.Swarm.Hint">
 					{{ localize "BF.CreatureType.Swarm.Label" }}
-					<i class="hintIcon" data-tooltip="BF.CreatureType.Swarm.Hint"></i>
 				</span>
 				<select name="type.swarm">
 					{{ selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank="" }}

@@ -19,14 +19,14 @@
 				{{#unless item.isEmbedded}}
 					<div class="category">
 						<label>
-							<span class="hint-label" data-tooltip="BF.Currency.Abbreviation.Hint">
+							<span class="hinted-label" data-tooltip="BF.Currency.Abbreviation.Hint">
 								{{ localize "BF.Currency.Abbreviation.Label" }}
 							</span>
 							<input type="text" name="system.identifier.value" value="{{ system.identifier.value }}"
 							       placeholder="{{ item.identifier }}">
 						</label>
 						<label>
-							<span class="hint-label" data-tooltip="BF.Currency.ConversionRatio.Hint">
+							<span class="hinted-label" data-tooltip="BF.Currency.ConversionRatio.Hint">
 								{{ localize "BF.Currency.ConversionRatio.Label" }}
 							</span>
 							<input type="number" name="system.conversion.value" value="{{ system.conversion.value }}"

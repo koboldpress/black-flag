@@ -18,9 +18,8 @@
 		</label>
 		{{#if item.system.isPhysical}}
 			<label class="full-checkbox">
-				<span>
+				<span class="hinted-label" data-tooltip="BF.Uses.ConsumeQuantity.Label">
 					{{ localize "BF.Uses.ConsumeQuantity.Label" }}
-					<i class="hintIcon" data-tooltip="BF.Uses.ConsumeQuantity.Label"></i>
 				</span>
 				<input type="checkbox" name="$.consumeQuantity" {{ checked derived.consumeQuantity }}>
 			</label>
