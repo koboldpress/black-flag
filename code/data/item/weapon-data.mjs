@@ -230,7 +230,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @override */
 	get versatileDamage() {
 		if (!this.properties.has("versatile") || !this.damage.denomination) return this.damage;
-		const data = foundry.utils.deepClone(this.damage);
+		const data = this.damage.toObject();
 		data.denomination = stepDenomination(data.denomination);
 		return this.constructor.schema.fields.damage.initialize(data, this);
 	}
