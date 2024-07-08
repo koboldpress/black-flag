@@ -1,0 +1,19 @@
+<div class="spell-header">
+	<p class="circle-type">
+		{{ circleType }}
+	</p>
+	<p class="casting-time">
+		<strong>{{ localize "BF.Spell.CastingTime.Label" }}</strong> {{ system.casting.embedLabel }}
+	</p>
+	<p class="range">
+		<strong>{{ localize "BF.Range.Label" }}</strong> {{ rangeLabel }}
+	</p>
+	<p class="components">
+		<strong>{{ localize "BF.Spell.Component.Label" }}</strong> {{ system.components.embedLabel }}
+	</p>
+	<p class="duration">
+		<strong>{{ localize "BF.Duration.Label" }}</strong> {{ durationLabel }}
+	</p>
+</div>
+
+{{{ enriched.description }}}

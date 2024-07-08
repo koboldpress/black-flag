@@ -269,6 +269,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	prepareBaseData() {
 		super.prepareBaseData();
+		const system = this;
 
 		Object.defineProperty(this.casting, "scalar", {
 			get() {
@@ -286,23 +287,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 		Object.defineProperty(this.components, "label", {
 			get() {
-				const components = [];
-				for (const key of this.required) {
-					const config = CONFIG.BlackFlag.spellComponents[key];
-					const data = {
-						type: "component",
-						label: game.i18n.localize(config.abbreviation),
-						tooltip: game.i18n.localize(config.label)
-					};
-					if (key === "material" && this.material.description) {
-						data.label += "*";
-						data.tooltip += ` (${this.material.description})`;
-					}
-					components.push(data);
-				}
-				return components
-					.map(({ type, label, tooltip }) => `<span class="${type}" data-tooltip="${tooltip}">${label}</span>`)
-					.join("");
+				return SpellData.componentsLabel(system);
+			},
+			configurable: true,
+			enumerable: false
+		});
+		Object.defineProperty(this.components, "embedLabel", {
+			get() {
+				return SpellData.componentsLabel(system, { style: "embed" });
 			},
 			configurable: true,
 			enumerable: false
@@ -381,7 +373,75 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Embeds                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(config, options = {}) {
+		const context = await this.parent.sheet.getData();
+
+		const localizationKey = this.circle.base === 0 ? "Cantrip" : this.tags.has("ritual") ? "Ritual" : "Standard";
+		context.circleType = game.i18n.format(`BF.Spell.CircleType.${localizationKey}`, {
+			circle: CONFIG.BlackFlag.spellCircles({ dashed: true })[this.circle.base],
+			school: CONFIG.BlackFlag.spellSchools.localized[this.school],
+			types: game.i18n
+				.getListFormatter({ style: "long" })
+				.format(Array.from(this.source).map(s => CONFIG.BlackFlag.spellSources.localized[s]))
+		});
+
+		context.rangeLabel = this.range.label;
+		if (this.range.units === "self") {
+			const templateLabel = TargetField.templateLabel(this.target, { style: "long" });
+			if (templateLabel) context.rangeLabel = `${context.rangeLabel} (${templateLabel})`;
+		}
+
+		context.durationLabel = this.tags.has("concentration")
+			? game.i18n.format("BF.Spell.Tag.Concentration.Formatted", {
+					duration: this.duration.label
+				})
+			: this.duration.label;
+
+		const section = document.createElement("section");
+		section.innerHTML = await renderTemplate("systems/black-flag/templates/item/embeds/spell-embed.hbs", context);
+		return section.children;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a label for a spell's components.
+	 * @param {SpellData} spell - System data for the spell.
+	 * @param {object} [options={}]
+	 * @param {string} [options.style="combined"] - Style of either "combined" or "embed".
+	 * @returns {string}
+	 */
+	static componentsLabel(spell, { style = "combined" } = {}) {
+		const components = [];
+		for (const key of spell.components.required) {
+			const config = CONFIG.BlackFlag.spellComponents[key];
+			const data = {
+				type: "component",
+				label: game.i18n.localize(config.abbreviation),
+				tooltip: style === "combined " ? game.i18n.localize(config.label) : game.i18n.localize(config.abbreviation)
+			};
+			if (key === "material" && spell.components.material.description) {
+				data.label += "*";
+				data.tooltip += ` (${spell.components.material.description})`;
+			}
+			components.push(data);
+		}
+
+		if (style === "combined") {
+			return components
+				.map(({ type, label, tooltip }) => `<span class="${type}" data-tooltip="${tooltip}">${label}</span>`)
+				.join("");
+		} else {
+			return game.i18n.getListFormatter({ type: "unit" }).format(components.map(c => c.tooltip));
+		}
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

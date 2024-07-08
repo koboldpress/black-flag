@@ -30,7 +30,7 @@ export default class DurationField extends SchemaField {
 	/** @inheritDoc */
 	initialize(value, model, options = {}) {
 		const obj = super.initialize(value, model, options);
-		const isSpell = this.parent.isSpell || this.parent.parent?.type === "spell";
+		const isSpell = model.isSpell || model.parent?.type === "spell";
 
 		Object.defineProperty(obj, "scalar", {
 			get() {

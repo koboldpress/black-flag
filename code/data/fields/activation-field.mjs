@@ -46,19 +46,50 @@ export default class ActivationField extends SchemaField {
 
 		Object.defineProperty(obj, "label", {
 			get() {
-				const type = CONFIG.BlackFlag.activationOptions({
-					pluralRule: getPluralRules().select(this.value ?? 1)
-				}).get(this.type);
-				let label = game.i18n.format("BF.Activation.Scalar.Label", {
-					number: numberFormat(this.value ?? 1),
-					type: type.label
-				});
-				if (this.condition) label = `<span data-tooltip="${this.condition.capitalize()}">${label}*</span>`;
-				return label;
+				return ActivationField.label(obj);
+			},
+			enumerable: false
+		});
+		Object.defineProperty(obj, "embedLabel", {
+			get() {
+				return ActivationField.label(obj, { style: "long" });
 			},
 			enumerable: false
 		});
 
 		return obj;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Labels                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create a label describing the activation.
+	 * @param {TargetField} data - Data from the activation field.
+	 * @param {object} [options={}]
+	 * @param {string} [options.style="combined"] - Long or combined.
+	 * @returns {string}
+	 */
+	static label(data, { style = "combined" } = {}) {
+		const type = CONFIG.BlackFlag.activationOptions({
+			pluralRule: getPluralRules().select(data.value ?? 1)
+		}).get(data.type);
+		let label = game.i18n.format("BF.Activation.Formatted.Scalar", {
+			number: numberFormat(data.value ?? 1),
+			type: type.label,
+			typeLowercase: type.label.toLowerCase()
+		});
+
+		if (style === "combined") {
+			return `<span${data.condition ? ` data-tooltip="${data.condition.capitalize()}"` : ""}>${label}</span>`;
+		} else if (data.condition) {
+			return game.i18n.format("BF.Activation.Formatted.Condition", {
+				activation: label,
+				condition: data.condition
+			});
+		}
+
+		return label;
 	}
 }

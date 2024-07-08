@@ -175,15 +175,17 @@ export const spellSlotTable = [
 
 /**
  * List of spell circles with localized names.
- * @param {boolean} [plural=false] - Return the plural names where relevant.
- * @param {boolean} [includeCantrip=true] - Should cantrips be included with other circles?
+ * @param {object} [options={}]
+ * @param {boolean} [options.dashed=false] - Should there be a dash between the number and word?
+ * @param {boolean} [options.plural=false] - Return the plural names where relevant.
+ * @param {boolean} [options.includeCantrip=true] - Should cantrips be included with other circles?
  * @returns {[key: number]: string]}
  */
-export function spellCircles(plural = false, includeCantrip = true) {
+export function spellCircles({ dashed = false, plural = false, includeCantrip = true } = {}) {
 	return Array.fromRange(maxSpellCircle + Number(includeCantrip), Number(!includeCantrip)).reduce((obj, l) => {
 		if (l === 0) obj[l] = game.i18n.localize(`BF.Spell.Circle.Cantrip[${plural ? "other" : "one"}]`);
 		else
-			obj[l] = game.i18n.format("BF.Spell.Circle.Level", {
+			obj[l] = game.i18n.format(`BF.Spell.Circle.Level${dashed ? "Dashed" : ""}`, {
 				number: numberFormat(l, { ordinal: true })
 			});
 		return obj;

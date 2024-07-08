@@ -180,7 +180,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			cantrips.max = Infinity;
 			Object.defineProperty(cantrips, "level", { value: 0, enumerable: false, writable: false });
 			Object.defineProperty(cantrips, "label", {
-				value: CONFIG.BlackFlag.spellCircles(true)[0] ?? "", enumerable: false
+				value: CONFIG.BlackFlag.spellCircles({ plural: true })[0] ?? "", enumerable: false
 			});
 		}
 
@@ -194,7 +194,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 			Object.defineProperty(slot, "type", { value: "leveled", enumerable: false, writable: false });
 			Object.defineProperty(slot, "circle", { value: level, enumerable: false, writable: false });
 			Object.defineProperty(slot, "label", {
-				value: CONFIG.BlackFlag.spellCircles(true)[level] ?? "", enumerable: false
+				value: CONFIG.BlackFlag.spellCircles({ plural: true })[level] ?? "", enumerable: false
 			});
 		}
 	}
@@ -215,7 +215,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 		slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slot.maxPlaceholder;
 		Object.defineProperty(slot, "type", { value: "pact", enumerable: false, writable: false });
 		Object.defineProperty(slot, "circle", { value: progression.pact.circle ?? 1, enumerable: false, writable: false });
-		const circle = CONFIG.BlackFlag.spellCircles(true)[slot.circle];
+		const circle = CONFIG.BlackFlag.spellCircles({ plural: true })[slot.circle];
 		Object.defineProperty(slot, "label", {
 			value: game.i18n.format("BF.Spellcasting.Type.Pact.Section", { circle, circleLowercase: circle.toLowerCase() }),
 			enumerable: false

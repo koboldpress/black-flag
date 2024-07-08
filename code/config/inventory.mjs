@@ -48,7 +48,7 @@ export const sheetSections = {
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {
-				return Object.entries(CONFIG.BlackFlag.spellCircles(true)).map(([number, label]) => {
+				return Object.entries(CONFIG.BlackFlag.spellCircles({ plural: true })).map(([number, label]) => {
 					number = Number(number);
 					const cantrip = number === 0;
 					const id = cantrip ? "cantrip" : `circle-${number}`;

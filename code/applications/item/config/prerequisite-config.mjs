@@ -57,7 +57,7 @@ export default class PrerequisiteConfig extends DocumentSheet {
 				levels: CONFIG.BlackFlag.levels(),
 				proficiencies: this.prepareProficiencies(filters),
 				spellcasting: this.prepareSpellcasting(filters),
-				spellCircles: CONFIG.BlackFlag.spellCircles(undefined, false),
+				spellCircles: CONFIG.BlackFlag.spellCircles({ includeCantrip: false }),
 				traits: this.prepareTraits(filters)
 			},
 			await super.getData(options)

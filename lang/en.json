@@ -125,12 +125,13 @@
 	"Cost": {
 		"Label": "Activation Cost"
 	},
+	"Formatted": {
+		"Condition": "{activation}, {condition}",
+		"Scalar": "{number} {typeLowercase}"
+	},
 	"Primary": {
 		"Label": "Primary Activation",
 		"Hint": "Is this activity part of the casting of the spell, or a subsequent action that can be taken. Only primary actions will consume a spell slot when used."
-	},
-	"Scalar": {
-		"Label": "{number} {type}"
 	},
 	"Time": {
 		"Label": "Activation Time"
@@ -2549,7 +2550,13 @@
 			"Label": "Effective Circle"
 		},
 		"Level": "{number} Circle",
+		"LevelDashed": "{number}-Circle",
 		"Maximum": "Maximum Circle"
+	},
+	"CircleType": {
+		"Cantrip": "{types} Cantrip ({school})",
+		"Ritual": "{circle} {types} Ritual ({school})",
+		"Standard": "{circle} {types} ({school})"
 	},
 	"Component": {
 		"Label": "Components",
@@ -2639,7 +2646,8 @@
 		"RuleLabel": "Spell Tag",
 		"Concentration": {
 			"Label": "Concentration",
-			"Abbreviation": "C"
+			"Abbreviation": "C",
+			"Formatted": "Concentration, up to {duration}"
 		},
 		"Ritual": {
 			"Label": "Ritual",
