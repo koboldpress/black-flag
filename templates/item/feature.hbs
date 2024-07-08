@@ -80,6 +80,16 @@
 			</section>
 		</div>
 		<div class="tab" data-group="primary" data-tab="details">
+			<fieldset>
+				<legend>{{ localize "BF.Feature.Details" }}</legend>
+				<label class="full-checkbox">
+					<span class="hinted-label" data-tooltip="BF.Prerequisite.AllowMultipleTimes.Hint">
+						{{ localize "BF.Prerequisite.AllowMultipleTimes.Label" }}
+					</span>
+					<input type="checkbox" name="system.restriction.allowMultipleTimes"
+								 {{ checked system.restriction.allowMultipleTimes }}>
+				</label>
+			</fieldset>
 			{{> "blackFlag.item-activities" }}
 		</div>
 		<div class="tab" data-group="primary" data-tab="effects">

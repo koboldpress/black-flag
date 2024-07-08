@@ -31,8 +31,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		return {
 			restriction: new SchemaField({
 				allowMultipleTimes: new BooleanField({
-					label: "BF.Talent.AllowMultipleTimes.Label",
-					hint: "BF.Talent.AllowMultipleTimes.Hint"
+					label: "BF.Prerequisite.AllowMultipleTimes.Label",
+					hint: "BF.Prerequisite.AllowMultipleTimes.Hint"
 				}),
 				filters: new FilterField(),
 				items: new SetField(new StringField()),
@@ -226,6 +226,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	 */
 	validatePrerequisites(actor) {
 		let missingItems = this.restriction.items.filter(uuid => !actor.sourcedItems.get(uuid)?.size);
+		// TODO: Validate that this item can be added more than once if one already exists
 
 		let invalidFilters;
 		if ( this.restriction.requireAll ) {
@@ -312,6 +313,8 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 		for ( const uuid of missingItems ) messages.push(game.i18n.format("BF.Prerequisite.Items.Warning", {
 			name: fromUuidSync(uuid)?.name
 		}));
+
+		// TODO: Validate that this item can be added more than once if one already exists
 
 		return messages;
 	}

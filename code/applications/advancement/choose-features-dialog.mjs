@@ -138,7 +138,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		}
 
 		if (this.advancement.selectionLimitReached(item)) {
-			return ui.notifications.warn(game.i18n.localize("BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen"));
+			return ui.notifications.error(game.i18n.localize("BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen"));
 		}
 
 		this.close({ choosen: item.uuid });

@@ -9,15 +9,16 @@
 			flex-direction: column;
 			align-items: center;
 
+			> span { flex: 0 0; }
 			input {
 				text-align: center;
 				width: 100%;
 			}
 		}
 	}
-	label {
+	fieldset:not(.ability-restrictions) > label {
 		> span:first-child {
-			flex: 0 1 min(12em, 33%);
+			flex: 0 1 max(12em, 33%);
 		}
 	}
 	multi-select {
