@@ -141,7 +141,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 0.5,
     "height": 0.5,
@@ -176,7 +181,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -186,11 +194,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -257,10 +282,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701023432932,
         "modifiedTime": 1709696865979,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.h3Km60Kh2WNvWRoY",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.NSN2UyhojWhSFveY"
     },
@@ -298,7 +325,6 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.Pvh1Vv9rYGzhycly",
           "duration": {
             "rounds": null,
@@ -330,7 +356,21 @@
           "transfer": true,
           "statuses": [],
           "flags": {},
-          "tint": null,
+          "tint": "#ffffff",
+          "_stats": {
+            "coreVersion": "12.328",
+            "systemId": null,
+            "systemVersion": null,
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
+          },
+          "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
           "_key": "!actors.items.effects!MF5NbhwjTV9b2dLB.Tl7U1kNMGhoKarVo.xsKr4hZ7kVgeQaXM"
         }
       ],
@@ -352,10 +392,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709696905232,
         "modifiedTime": 1712945478083,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.Pvh1Vv9rYGzhycly",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.Tl7U1kNMGhoKarVo"
     },
@@ -410,10 +452,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1712945439296,
         "modifiedTime": 1712945476116,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.4UQaovocUe3K1Ali",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.GDDG6941N3gPa7So"
     },
@@ -547,10 +591,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701025035557,
         "modifiedTime": 1717280798699,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.dvKPRtlfJT65QTLi"
     },
@@ -687,10 +733,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701024643661,
         "modifiedTime": 1717280802416,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.jqDqlfsNkDCUIYHZ",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.0ulZgnmV5Y2d1rKu"
     },
@@ -763,10 +811,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711503394460,
         "modifiedTime": 1712945578902,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.1IHhl4zwr49sgVQS",
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.u4HB5MNMd67nPOe3"
     },
@@ -852,10 +902,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1712945589386,
         "modifiedTime": 1712945667977,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.cB3TeOyN6azoKmEz"
     },
@@ -932,10 +984,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1712945674736,
         "modifiedTime": 1712945707758,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!MF5NbhwjTV9b2dLB.wNhzbdQaFR4VMVyf"
     }
@@ -949,10 +1003,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709696846797,
     "modifiedTime": 1717280802416,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!MF5NbhwjTV9b2dLB"
 }

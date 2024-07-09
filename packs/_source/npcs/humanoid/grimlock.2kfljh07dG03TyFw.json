@@ -146,7 +146,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 1,
     "height": 1,
@@ -181,7 +186,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -191,11 +199,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -249,10 +274,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711751036478,
         "modifiedTime": 1711751083792,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.gcicaNkQDUzA5Bgg",
+        "duplicateSource": null
       },
       "_key": "!actors.items!2kfljh07dG03TyFw.w7h4gzV7zelQqrht"
     },
@@ -307,10 +334,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709773397125,
         "modifiedTime": 1711751089557,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.vlGTuDphxCZw4xYF",
+        "duplicateSource": null
       },
       "_key": "!actors.items!2kfljh07dG03TyFw.yENihFDJERcjyWXp"
     },
@@ -362,10 +391,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711751097167,
         "modifiedTime": 1711751141486,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!2kfljh07dG03TyFw.DBj2jELaIiSx6FaI"
     },
@@ -506,10 +537,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701024046840,
         "modifiedTime": 1717279174487,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.QAPscsGRbv5l778n",
+        "duplicateSource": null
       },
       "_key": "!actors.items!2kfljh07dG03TyFw.6Iuif9cHlO5dO4CA"
     },
@@ -661,10 +694,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711751260625,
         "modifiedTime": 1711751502872,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!2kfljh07dG03TyFw.RTuxsdnPqZRSPh6g"
     }
@@ -678,10 +713,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709671730021,
     "modifiedTime": 1717279174487,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!2kfljh07dG03TyFw"
 }

@@ -99,7 +99,6 @@
   },
   "effects": [
     {
-      "icon": "icons/skills/wounds/injury-face-impact-orange.webp",
       "origin": "Compendium.black-flag.classes.Item.7wqTqzh8CYPFXqSW",
       "duration": {
         "rounds": null,
@@ -117,34 +116,53 @@
         {
           "key": "system.modifiers",
           "mode": 2,
-          "value": "{ \"type\": \"note\", \"filter\": [{\"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"type\", \"v\": \"ability-save\" }]}, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR ability checks and saves while raging.\" } }"
+          "value": "{ \"type\": \"note\", \"filter\": [{\"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"type\", \"v\": \"ability-save\" }]}, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR ability checks and saves while raging.\" } }",
+          "priority": null
         },
         {
           "key": "system.modifiers",
           "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }"
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"activity.type.value\", \"v\": \"melee\" }], \"formula\": \"@scale.barbarian.damage\" }",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "bludgeoning"
+          "value": "bludgeoning",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "piercing"
+          "value": "piercing",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "slashing"
+          "value": "slashing",
+          "priority": null
         }
       ],
       "description": "",
       "transfer": false,
       "statuses": [],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "12.328",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "img": "icons/skills/wounds/injury-face-impact-orange.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!7wqTqzh8CYPFXqSW.LkVwlaV9hQ35ooLr"
     }
   ],
@@ -156,10 +174,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1717383139458,
     "modifiedTime": 1717385001916,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!items!7wqTqzh8CYPFXqSW"
 }

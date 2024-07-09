@@ -137,7 +137,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 1,
     "height": 1,
@@ -172,7 +177,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -182,11 +190,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -251,10 +276,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701023469035,
         "modifiedTime": 1709698603082,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.wltnYOTuHz96wXq5",
+        "duplicateSource": null
       },
       "_key": "!actors.items!CHhj6Dc9MioKZUW0.A72KnvWF2jOACCRX"
     },
@@ -292,7 +319,6 @@
       },
       "effects": [
         {
-          "icon": "icons/equipment/head/hood-cloth-teal-gold.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.raUwh1bmQzeOSyoR",
           "duration": {
             "rounds": null,
@@ -324,7 +350,21 @@
           "transfer": true,
           "statuses": [],
           "flags": {},
-          "tint": null,
+          "tint": "#ffffff",
+          "_stats": {
+            "coreVersion": "12.328",
+            "systemId": null,
+            "systemVersion": null,
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
+          },
+          "img": "icons/equipment/head/hood-cloth-teal-gold.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
           "_key": "!actors.items.effects!CHhj6Dc9MioKZUW0.JcpBCydAofQzuyGg.nvvU4SkeDHQdj00v"
         }
       ],
@@ -346,10 +386,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709698638526,
         "modifiedTime": 1709698699438,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.raUwh1bmQzeOSyoR",
+        "duplicateSource": null
       },
       "_key": "!actors.items!CHhj6Dc9MioKZUW0.JcpBCydAofQzuyGg"
     },
@@ -491,10 +533,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701024042732,
         "modifiedTime": 1717281149993,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.dXe427mkeCAOtVof",
+        "duplicateSource": null
       },
       "_id": "DNiJJ4Y5tLV7sdIZ",
       "sort": 800000,
@@ -574,10 +618,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1713149373984,
         "modifiedTime": 1713149401933,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!CHhj6Dc9MioKZUW0.yWbVXAIlS36QIBom"
     }
@@ -591,10 +637,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709698590909,
     "modifiedTime": 1717281149993,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!CHhj6Dc9MioKZUW0"
 }

@@ -70,7 +70,6 @@
   },
   "effects": [
     {
-      "icon": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
       "origin": "Compendium.black-flag.classes.Item.YjSjjMJW0Nvx81KJ",
       "duration": {
         "rounds": null,
@@ -88,29 +87,47 @@
         {
           "key": "system.modifiers",
           "mode": 2,
-          "value": "{\"type\": \"bonus\", \"filter\": [{\"k\": \"type\", \"v\": \"armor-class\"}], \"formula\": \"@prof\" }"
+          "value": "{\"type\": \"bonus\", \"filter\": [{\"k\": \"type\", \"v\": \"armor-class\"}], \"formula\": \"@prof\" }",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "bludgeoning"
+          "value": "bludgeoning",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "piercing"
+          "value": "piercing",
+          "priority": null
         },
         {
           "key": "system.traits.damage.resistances.value",
           "mode": 2,
-          "value": "slashing"
+          "value": "slashing",
+          "priority": null
         }
       ],
       "description": "",
       "transfer": true,
       "statuses": [],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "12.328",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "img": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!YjSjjMJW0Nvx81KJ.dqha31WGdiIZsYOy"
     }
   ],
@@ -122,10 +139,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.026",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1700002851822,
     "modifiedTime": 1715742936184,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!items!YjSjjMJW0Nvx81KJ"
 }

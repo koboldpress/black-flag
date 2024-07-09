@@ -139,7 +139,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 2,
     "height": 2,
@@ -174,7 +179,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -184,11 +192,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 1,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -239,10 +264,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711683501085,
         "modifiedTime": 1711683565911,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.6n3SRtHVFfWdy9ZW"
     },
@@ -297,10 +324,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709774827111,
         "modifiedTime": 1711683654755,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.q6Fcwt1u5j4YntFm",
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.8Bw71UR4pclV1d1V"
     },
@@ -338,7 +367,6 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/slimes/slime-giant-face-eyes.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
           "duration": {
             "rounds": null,
@@ -406,7 +434,21 @@
           "transfer": true,
           "statuses": [],
           "flags": {},
-          "tint": null,
+          "tint": "#ffffff",
+          "_stats": {
+            "coreVersion": "12.328",
+            "systemId": null,
+            "systemVersion": null,
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
+          },
+          "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
           "_key": "!actors.items.effects!0JZiKg6CAIMLtZH8.flRbY80QEXWIgogu.TRIJesrj6nA7uktU"
         }
       ],
@@ -428,10 +470,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709611470478,
         "modifiedTime": 1711683656953,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.QInPwozfDFprThf1",
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.flRbY80QEXWIgogu"
     },
@@ -483,10 +527,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711683679657,
         "modifiedTime": 1711683714665,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.40uetyaCtfHKNG8l"
     },
@@ -599,10 +645,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711683722952,
         "modifiedTime": 1717282058410,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.BM0wnwrOQkmV3utI",
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.9HO6aVYr2bReAp65"
     },
@@ -696,10 +744,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711683836514,
         "modifiedTime": 1711683909676,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.joTLsUdIjs6iVmSA"
     },
@@ -776,10 +826,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711683934344,
         "modifiedTime": 1711684001985,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!0JZiKg6CAIMLtZH8.HvnIMns26fVKIjyS"
     }
@@ -793,10 +845,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709617254212,
     "modifiedTime": 1717282058410,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!0JZiKg6CAIMLtZH8"
 }

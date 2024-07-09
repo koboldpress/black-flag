@@ -138,7 +138,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 1,
     "height": 1,
@@ -173,7 +178,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -183,11 +191,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -254,10 +279,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.015",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701023507554,
         "modifiedTime": 1709617575177,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.fN3bw7IZzSxbkcYX",
+        "duplicateSource": null
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.TuI8RFrLOzrWKuqv"
     },
@@ -312,10 +339,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.019",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709774777178,
         "modifiedTime": 1711744058787,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.GwEfQ9adrzpzAjze",
+        "duplicateSource": null
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.OzBvF62GC0APMXkT"
     },
@@ -448,10 +477,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701024046840,
         "modifiedTime": 1717278934543,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.QAPscsGRbv5l778n",
+        "duplicateSource": null
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.RVEzk8my0DOYZUhm"
     },
@@ -584,10 +615,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1701024052999,
         "modifiedTime": 1717278990909,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.items.Item.8wAd9MmtaW1tizSN",
+        "duplicateSource": null
       },
       "_key": "!actors.items!Yu69oqsjr4GnVygA.F4gpnzTYepOOEfPV"
     }
@@ -601,10 +634,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709617491232,
     "modifiedTime": 1717278990909,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!Yu69oqsjr4GnVygA"
 }

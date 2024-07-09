@@ -112,7 +112,6 @@
   },
   "effects": [
     {
-      "icon": "icons/magic/unholy/projectiles-binary-pink.webp",
       "origin": "Compendium.black-flag.spells.Item.HorNiol8kDK0QGIo",
       "duration": {
         "rounds": null,
@@ -130,14 +129,29 @@
         {
           "key": "system.modifiers",
           "mode": 2,
-          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"-1d4\" }"
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"-1d4\" }",
+          "priority": null
         }
       ],
       "description": "<p>When a cursed target makes an attack roll or a save before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or save.</p>",
       "transfer": false,
       "statuses": [],
       "flags": {},
-      "tint": null,
+      "tint": "#ffffff",
+      "_stats": {
+        "coreVersion": "12.328",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "img": "icons/magic/unholy/projectiles-binary-pink.webp",
+      "type": "base",
+      "system": {},
+      "sort": 0,
       "_key": "!items.effects!HorNiol8kDK0QGIo.Haf0C3lt2Dpfgd2x"
     }
   ],
@@ -149,10 +163,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.038",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1706932052775,
     "modifiedTime": 1720233324474,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!items!HorNiol8kDK0QGIo"
 }

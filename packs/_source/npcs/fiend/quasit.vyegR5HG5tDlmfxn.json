@@ -140,7 +140,12 @@
       "scaleY": 1,
       "offsetX": 0,
       "offsetY": 0,
-      "rotation": 0
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
     },
     "width": 0.5,
     "height": 0.5,
@@ -175,7 +180,10 @@
       "darkness": {
         "min": 0,
         "max": 1
-      }
+      },
+      "negative": false,
+      "priority": 0,
+      "color": null
     },
     "sight": {
       "enabled": false,
@@ -185,11 +193,28 @@
       "attenuation": 0.1,
       "brightness": 0,
       "saturation": 0,
-      "contrast": 0
+      "contrast": 0,
+      "color": null
     },
     "detectionModes": [],
     "flags": {},
-    "randomImg": false
+    "randomImg": false,
+    "hexagonalShape": 0,
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    }
   },
   "items": [
     {
@@ -226,7 +251,6 @@
       },
       "effects": [
         {
-          "icon": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
           "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
           "duration": {
             "rounds": null,
@@ -276,7 +300,21 @@
           "transfer": true,
           "statuses": [],
           "flags": {},
-          "tint": null,
+          "tint": "#ffffff",
+          "_stats": {
+            "coreVersion": "12.328",
+            "systemId": null,
+            "systemVersion": null,
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null,
+            "compendiumSource": null,
+            "duplicateSource": null
+          },
+          "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
           "_key": "!actors.items.effects!vyegR5HG5tDlmfxn.l8IazwGyGtwQomzN.QEROKmLmQGbXQUxg"
         }
       ],
@@ -298,10 +336,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709611708224,
         "modifiedTime": 1711503155886,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.l8IazwGyGtwQomzN"
     },
@@ -356,10 +396,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1709773734467,
         "modifiedTime": 1711503163024,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.jS7wIZVCAi6I2VMe",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.olOgAmiHotUvSEUx"
     },
@@ -471,10 +513,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711503209924,
         "modifiedTime": 1717263920415,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.2hYUlglK9czNmHNx",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.MnL9v7YnIeGmEtx2"
     },
@@ -586,10 +630,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.9.031",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711421009581,
         "modifiedTime": 1717263925816,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.OmsfJIeLWWS4jnTd",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.qReweXyURxBiOCUq"
     },
@@ -662,10 +708,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711503394460,
         "modifiedTime": 1711504476679,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.1IHhl4zwr49sgVQS",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.2CDNiLFJxARmzpzJ"
     },
@@ -745,10 +793,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.018",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711503490478,
         "modifiedTime": 1711504026923,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.Yrb50WtUeyxgXygZ",
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.f23Ymu7MveTJFRMe"
     },
@@ -844,10 +894,12 @@
       "_stats": {
         "systemId": "black-flag",
         "systemVersion": "0.8.020",
-        "coreVersion": "11.315",
+        "coreVersion": "12.328",
         "createdTime": 1711504009898,
         "modifiedTime": 1713147507940,
-        "lastModifiedBy": "blackflag0000000"
+        "lastModifiedBy": "blackflag0000000",
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "_key": "!actors.items!vyegR5HG5tDlmfxn.pjr5hk5SCS8FJSD3"
     }
@@ -861,10 +913,11 @@
   "_stats": {
     "systemId": "black-flag",
     "systemVersion": "0.9.031",
-    "coreVersion": "11.315",
+    "coreVersion": "12.328",
     "createdTime": 1709616282254,
     "modifiedTime": 1717263925816,
-    "lastModifiedBy": "blackflag0000000"
+    "lastModifiedBy": "blackflag0000000",
+    "duplicateSource": null
   },
   "_key": "!actors!vyegR5HG5tDlmfxn"
 }
