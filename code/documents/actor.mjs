@@ -134,6 +134,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @typedef {object} DamageDescription
 	 * @property {number} value - Amount of damage.
 	 * @property {string} type - Type of damage.
+	 * @property {Set<string>} properties - Damage properties that might affect application.
+	 * @property {object} [active]
+	 * @property {number} [active.multiplier] - Final calculated multiplier.
+	 * @property {boolean} [active.modifications] - Did modification affect this description?
+	 * @property {boolean} [active.resistance] - Did resistance affect this description?
+	 * @property {boolean} [active.vulnerability] - Did vulnerability affect this description?
+	 * @property {boolean} [active.immunity] - Did immunity affect this description?
 	 * @property {BlackFlagActor|BlackFlagItem} [source] - Source of the damage.
 	 */
 
@@ -141,6 +148,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * Options for damage application.
 	 *
 	 * @typedef {object} DamageApplicationOptions
+	 * @property {boolean|Set<string>} [downgrade] - Should this actor's resistances and immunities be downgraded by one
+	 *                                               step? A set of damage types to be downgraded or `true` to downgrade
+	 *                                               all damage types.
 	 * @property {number} [multiplier=1] - Amount by which to multiply all damage (before damage resistance, etc).
 	 * @property {object|boolean} [ignore] - Set to `true` to ignore all damage modifiers. If set to an object, then
 	 *                                       values can either be `true` to indicate that the all modifications of that
@@ -150,6 +160,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @property {boolean|Set<string>} [ignore.modification] - Should this actor's damage modification be ignored?
 	 * @property {boolean|Set<string>} [ignore.resistance] - Should this actor's damage resistance be ignored?
 	 * @property {boolean|Set<string>} [ignore.vulnerability] - Should this actor's damage vulnerability be ignored?
+	 * @property {boolean} [invertHealing=true] - Automatically invert healing types to it heals, rather than damages.
+	 * @property {"damage"|"healing"} [only] - Apply only damage or healing parts. Untyped rolls will always be applied.
 	 */
 
 	/**
@@ -160,7 +172,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async applyDamage(damages, options = {}) {
 		const hp = this.system.attributes.hp;
-		const traits = this.system.traits ?? {};
 		if (!hp) return;
 
 		if (Number.isNumeric(damages)) {
@@ -168,60 +179,29 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			options.ignore ??= true;
 		}
 
-		const multiplier = options.multiplier ?? 1;
+		damages = this.calculateDamage(damages, options);
+		if (!damages) return this;
 
-		/**
-		 * A hook event that fires before damage amount is calculated for an actor.
-		 * @param {BlackFlagActor} actor - The actor being damaged.
-		 * @param {DamageDescription[]} damages - Damage descriptions.
-		 * @param {DamageApplicationOptions} options - Additional damage application options.
-		 * @returns {boolean} - Explicitly return `false` to prevent damage application.
-		 * @function blackFlag.preCalculateDamage
-		 * @memberof hookEvents
-		 */
-		if (Hooks.call("blackFlag.preCalculateDamage", this, damages, options) === false) return this;
-
-		const ignore = (category, type) => {
-			return options.ignore === true || options.ignore?.[category] === true || options.ignore?.[category]?.has?.(type);
-		};
-
-		let amount = damages.reduce((total, d) => {
-			// Ignore damage types with immunity
-			if (!ignore("immunity", d.type) && traits.damage?.immunities?.value.has(d.type)) return total;
-			// TODO: Apply overall damage resistance & vulnerability
-
-			let damageMultiplier = multiplier;
-
-			// TODO: Apply type-specific damage reduction, ensuring damage reduction doesn't cause healing by accident
-			// TODO: Apply overall damage reduction
-
-			// Apply type-specific damage resistance
-			if (!ignore("resistance", d.type) && traits.damage?.resistances?.value.has(d.type)) {
-				damageMultiplier /= 2;
-			}
-
-			// Apply type-specific damage vulnerability
-			if (!ignore("vulnerability", d.type) && traits.damage?.vulnerabilities?.value.has(d.type)) {
-				damageMultiplier *= 2;
-			}
-
-			// Multiply damage
-			let value = d.value * damageMultiplier;
-
-			return total + value;
-		}, 0);
-
-		// Round damage down
-		amount = Math.floor(amount);
+		// Round damage towards zero
+		let { amount, temp } = damages.reduce(
+			(acc, d) => {
+				if (d.type === "temp") acc.temp += d.value;
+				else acc.amount += d.value;
+				return acc;
+			},
+			{ amount: 0, temp: 0 }
+		);
+		amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
 
 		// Subtract from temp HP first & then from normal HP
 		const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-		const deltaHP = amount - deltaTemp;
+		const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
 		const updates = {
 			"system.attributes.hp.temp": hp.temp - deltaTemp,
 			"system.attributes.hp.value": hp.value - deltaHP,
 			"system.attributes.hp.damage": hp.damage + deltaHP
 		};
+		if (temp > updates["system.attributes.hp.temp"]) updates["system.attributes.hp.temp"] = temp;
 
 		/**
 		 * A hook event that fires before damage is applied to an actor.
@@ -250,22 +230,22 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		)
 			return false;
 
-		await this.update(updates, { deltaHP: -amount });
+		await this.update(updates);
 
 		/**
 		 * A hook event that fires after damage has been applied to an actor.
 		 * @param {BlackFlagActor} actor - Actor that has been damaged.
 		 * @param {number} amount - Amount of damage that has been applied.
 		 * @param {DamageApplicationOptions} options - Additional damage application options.
-		 * @function blackFlag.applyDamage
+		 * @function blackFlag.postApplyDamage
 		 * @memberof hookEvents
 		 */
-		Hooks.callAll("blackFlag.applyDamage", this, amount, options);
+		Hooks.callAll("blackFlag.postApplyDamage", this, amount, options);
 
 		return this;
 	}
 
-	/* ~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Apply temp HP to the actor, but only if it's more than the actor's current temp HP.
@@ -276,6 +256,118 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const hp = this.system.attributes.hp;
 		if (!hp) return;
 		return amount > hp.temp ? this.update({ "system.attributes.hp.temp": amount }) : this;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate the damage that will be applied to this actor.
+	 * @param {DamageDescription[]} damages - Damages to calculate.
+	 * @param {DamageApplicationOptions} [options={}] - Damage calculation options.
+	 * @returns {DamageDescription[]|false} - New damage descriptions with changes applied, or `false` if the calculation
+	 *                                        was canceled by a hook.
+	 */
+	calculateDamage(damages, options = {}) {
+		damages = foundry.utils.deepClone(damages);
+
+		/**
+		 * A hook event that fires before damage amount is calculated for an actor.
+		 * @param {BlackFlagActor} actor - The actor being damaged.
+		 * @param {DamageDescription[]} damages - Damage descriptions.
+		 * @param {DamageApplicationOptions} options - Additional damage application options.
+		 * @returns {boolean} - Explicitly return `false` to prevent damage application.
+		 * @function blackFlag.preCalculateDamage
+		 * @memberof hookEvents
+		 */
+		if (Hooks.call("blackFlag.preCalculateDamage", this, damages, options) === false) return false;
+
+		const multiplier = options.multiplier ?? 1;
+
+		const hasEffect = (category, type, properties) => {
+			if (
+				category === "resistance" &&
+				downgrade(type) &&
+				hasEffect("immunity", type, properties) &&
+				!ignore("immunity", type, true)
+			)
+				return true;
+			// TODO: Handle "all" types
+			const config =
+				this.system.traits?.damage?.[
+					{
+						immunity: "immunities",
+						resistance: "resistances",
+						vulnerable: "vulnerabilities"
+					}[category]
+				];
+			if (!config?.value.has(type)) return false;
+			// TODO: Handle properties
+			return true;
+		};
+
+		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+		const ignore = (category, type, skipDowngrade) => {
+			return (
+				options.ignore === true ||
+				options.ignore?.[category] === true ||
+				options.ignore?.[category]?.has?.(type) ||
+				(category === "immunity" && downgrade(type) && !skipDowngrade) ||
+				(category === "resistance" && downgrade(type) && !hasEffect("immunity", type))
+			);
+		};
+
+		const skipped = type => {
+			if (options.only === "damage") return type in CONFIG.BlackFlag.healingTypes;
+			if (options.only === "healing") return type in CONFIG.BlackFlag.damageTypes;
+			return false;
+		};
+
+		damages.forEach(d => {
+			d.active ??= {};
+
+			// Skip damage types with immunity
+			if (skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("immunity", d.type, d.properties))) {
+				d.value = 0;
+				d.active.multiplier = 0;
+				d.active.immunity = true;
+				return;
+			}
+
+			// TODO: Apply damage modification
+
+			let damageMultiplier = multiplier;
+
+			// Apply damage resistance
+			if (!ignore("resistance", d.type) && hasEffect("resistance", d.type, d.properties)) {
+				damageMultiplier /= 2;
+				d.active.resistance = true;
+			}
+
+			// Apply damage vulnerability
+			if (!ignore("vulnerability", d.type) && hasEffect("vulnerability", d.type, d.properties)) {
+				damageMultiplier *= 2;
+				d.active.vulnerability = true;
+			}
+
+			// Negate healing types
+			if (options.invertHealing !== false && d.type === "healing") damageMultiplier *= -1;
+
+			d.value = d.value * damageMultiplier;
+			d.active.multiplier = (d.active.multiplier ?? 1) * damageMultiplier;
+		});
+
+		/**
+		 * A hook event that fires after damage amount is calculated for an actor.
+		 * @param {BlackFlagActor} actor - The actor being damaged.
+		 * @param {DamageDescription[]} damages - Damage descriptions.
+		 * @param {DamageApplicationOptions} options - Additional damage application options.
+		 * @returns {boolean} - Explicitly return `false` to prevent damage application.
+		 * @function blackFlag.postCalculateDamage
+		 * @memberof hookEvents
+		 */
+		if (Hooks.call("blackFlag.postCalculateDamage", this, damages, options) === false) return false;
+
+		return damages;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

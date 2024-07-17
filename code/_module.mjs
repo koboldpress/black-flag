@@ -30,7 +30,7 @@ globalThis.BlackFlag = {
 };
 
 Hooks.once("init", function () {
-	utils.log(`Initiatlizing the Black Flag Roleplaying system - Version ${game.system.version}`);
+	utils.log(`Initializing the Black Flag Roleplaying system - Version ${game.system.version}`);
 
 	CONFIG.compatibility.excludePatterns.push(/filePicker/);
 	CONFIG.compatibility.excludePatterns.push(/select/);
