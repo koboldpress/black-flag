@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You sense the presence of nearby magic.</em></p><p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+      "value": "<p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -73,7 +73,8 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "radius",
+        "size": "30"
       },
       "affects": {
         "choice": false,
@@ -81,11 +82,13 @@
       }
     },
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "school": "divination",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -96,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706933051230,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721270276047,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure light as bright as day, which banishes darkness.</em></p><p>A 60-foot-radius sphere of light spreads out from a point you choose within range. The sphere is bright light and sheds dim light for an additional 60 feet.</p><p>If you choose a point on an object you are holding or one that isn’t being worn or carried, the light shines from the object and moves with it. Completely covering the affected object with an opaque object, such as a bowl or a helm, blocks the light.</p><p>If any of this spell’s area overlaps with an area of darkness created by a spell of 3rd ring or lower, the spell that created the darkness is dispelled.</p><p></p>",
+      "value": "<p>A 60-foot-radius sphere of daylight spreads out from a point you choose within range. The sphere is bright light and sheds dim light for an additional 60 feet.</p><p>If you choose a point on an object you are holding or one that isn’t being worn or carried, the light shines from the object and moves with it. Completely covering the affected object with an opaque object, such as a bowl or a helm, blocks the light.</p><p>If any of this spell’s area overlaps with an area of darkness created by a spell of 3rd circle or lower such as that created by the darkness spell, the spell that created the <em>darkness</em> is dispelled.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -76,17 +76,20 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": ""
+        "type": "",
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "evocation",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
   "effects": [],
@@ -97,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706933017381,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1721269853962,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

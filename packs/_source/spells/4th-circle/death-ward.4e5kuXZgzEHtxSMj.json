@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your target gains a measure of protection against death.</em></p><p>The first time the target of this spell would drop to 0 hit points as a result of taking damage, the target instead drops to 1 hit point, and the spell ends.</p><p>If the target is subjected to an effect that would kill it instantaneously without dealing damage, that effect is instead negated against the target, and the spell ends.</p>",
+      "value": "<p>The first time the target of this spell would drop to 0 HP as a result of taking damage, the target instead drops to 1 HP, and the spell ends.</p><p>If the target is subjected to an effect that would kill it instantaneously without dealing damage, that effect is instead negated against the target, and the spell ends.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -76,11 +76,13 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
@@ -95,10 +97,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706997646694,
-    "modifiedTime": 1717966382721,
+    "modifiedTime": 1721269877595,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

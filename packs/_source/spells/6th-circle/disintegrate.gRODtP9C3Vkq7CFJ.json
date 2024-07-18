@@ -1,0 +1,158 @@
+{
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Disintegrate",
+  "type": "spell",
+  "_id": "gRODtP9C3Vkq7CFJ",
+  "img": "icons/magic/lightning/bolt-strike-explosion-blue.webp",
+  "system": {
+    "activities": {
+      "nxqIBvWfg59yLfFi": {
+        "type": "savingThrow",
+        "_id": "nxqIBvWfg59yLfFi",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 10,
+                "denomination": 6,
+                "bonus": "40",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "force",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 3,
+                  "formula": ""
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A thin green ray springs from your pointing finger to a target that you can see within range. The target can be a creature, an object, or a creation of magical force, such as the wall created by a wall of force spell.</p><p>A creature targeted by this spell must make a DEX save. On a failed save, the target takes 10d6 + 40 force damage. If this damage reduces the target to 0 HP, it is disintegrated.</p><p>A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust. The creature can be restored to life only by means of a <em>true resurrection</em> or a <em>wish</em> spell. If the target is destroyed, any magic items it was wearing or holding drop onto the ground in a space previously occupied by the target.</p><p>This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If the target is a Huge or larger object or creation of force, this spell disintegrates a 10-foot-cube portion of it. A magic item is unaffected by this spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 7th circle or higher, the damage increases by 3d6 for each slot above 6th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Force, utter destruction at 0 HP."
+    },
+    "source": [
+      "arcane",
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 6
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a lodestone and pinch of dust"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "60",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creatureObject",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721270619154,
+    "modifiedTime": 1721272559881,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!gRODtP9C3Vkq7CFJ"
+}

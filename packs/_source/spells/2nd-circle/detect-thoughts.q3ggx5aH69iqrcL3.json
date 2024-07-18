@@ -11,7 +11,11 @@
         "_id": "42elw86VCDiqQwMy",
         "description": "",
         "system": {},
-        "activation": {},
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +25,63 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "Activate",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "J8XwWcrNIRc5xpWL": {
+        "type": "savingThrow",
+        "_id": "J8XwWcrNIRc5xpWL",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Probe Deeper",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -33,7 +92,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You reach out with your intellect, sensing the minds of others and their thoughts.</em></p><p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an INT modifier of -4 or lower or doesn't speak any language, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature— what is most on its mind in that moment. As an action, you can either shift your attention to another creature’s thoughts or attempt to probe deeper into the same creature’s mind. If you probe deeper, the target must make a WIS save. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature’s thoughts, the creature can use its action on its turn to make an INT check contested by your INT check; if it succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can’t see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can’t detect a creature with an INT modifier of −4 or less or one that doesn’t speak any language.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can’t see it, but it must still be within range.</p>",
+      "value": "<p>For the duration, you can read the thoughts of certain creatures. When you cast the spell and as your action on each turn until the spell ends, you can focus your mind on any one creature that you can see within 30 feet of you. If the creature you choose has an INT of 3 (−4) or lower or doesn’t speak any languages, the creature is unaffected.</p><p>You initially learn the surface thoughts of the creature—what is most on its mind in that moment. As an action, you can either shift your attention to another creature’s thoughts or attempt to probe deeper into the same creature’s mind. If you probe deeper, the target must make a WIS save. If it fails, you gain insight into its reasoning (if any), its emotional state, and something that looms large in its mind (such as something it worries over, loves, or hates). If it succeeds, the spell ends. Either way, the target knows that you are probing into its mind, and unless you shift your attention to another creature’s thoughts, the creature can use its action on its turn to make an INT check contested by your INT check; if the target succeeds, the spell ends.</p><p>Questions verbally directed at the target creature naturally shape the course of its thoughts, so this spell is particularly effective as part of an interrogation.</p><p>You can also use this spell to detect the presence of thinking creatures you can’t see. When you cast the spell or as your action during the duration, you can search for thoughts within 30 feet of you. The spell can penetrate barriers, but 2 feet of rock, 2 inches of any metal other than lead, or a thin sheet of lead blocks you. You can’t detect a creature with an INT of 3 (−4) or lower or one that doesn’t speak any languages.</p><p>Once you detect the presence of a creature in this way, you can read its thoughts for the rest of the duration as described above, even if you can’t see it, but it must still be within range.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -75,20 +134,25 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": ""
+        "type": "radius",
+        "size": "30"
       },
       "affects": {
-        "choice": false,
-        "type": ""
+        "choice": true,
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "foot",
-      "value": "30"
+      "units": "self",
+      "value": "",
+      "special": ""
     },
     "school": "divination",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -99,10 +163,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706933134729,
-    "modifiedTime": 1714413479360,
+    "modifiedTime": 1721270401070,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

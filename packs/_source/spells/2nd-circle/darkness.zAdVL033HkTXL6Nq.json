@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a globe of darkness that makes it impossible to see anything inside of it.</em></p><p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can’t see through this darkness, and nonmagical light won't illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn’t being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell’s area overlaps with an area of light created by a 2nd ring spell or lower, the spell that created the light is dispelled.</p>",
+      "value": "<p>Magical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can’t see through this darkness, and nonmagical light can’t illuminate it.</p><p>If the point you choose is on an object you are holding or one that isn’t being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any of this spell’s area overlaps with an area of light created by a 2nd circle spell or lower, the spell that created the light is dispelled.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -79,18 +79,20 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
+        "type": "",
         "count": "",
         "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "evocation",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -101,10 +103,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706932883787,
-    "modifiedTime": 1714413461322,
+    "modifiedTime": 1721269720107,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You sense nearby toxic creatures and substances.</em></p><p>For the duration, you can sense the presence and location of poisons, poisonous creatures, and diseases within 30 feet of you. You also identify the kind of poison, poisonous creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
+      "value": "<p>For the duration, you can sense the presence and location of poisons and diseases within 30 feet of you. This spell also detects the presence of creatures affected by an ongoing poison or disease, creatures that deal poison damage, and creatures that can infect other creatures with a disease, such as ghouls and mummies. You also identify the kind of poison, creature, or disease in each case.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -59,7 +59,7 @@
       ],
       "material": {
         "cost": null,
-        "description": "a yew leaf",
+        "description": "a dried snake rattle",
         "denomination": "pp",
         "consumed": false
       }
@@ -76,21 +76,24 @@
       "template": {
         "count": 1,
         "units": "foot",
-        "type": "radius",
+        "type": "",
         "size": "30"
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": ""
+        "type": "",
+        "count": "",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
-    "school": "abjuration",
+    "school": "divination",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
   "effects": [],
@@ -101,10 +104,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706996960018,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721272324565,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You enable your target to see in the dark.</em></p><p>You touch a willing creature to grant it the ability to see in the dark. For the duration, that creature has darkvision out to a range of 60 feet.</p>",
+      "value": "<p>You touch a willing creature to grant it the ability to see in nonmagical darkness. For the duration, that creature has darkvision to a range of 60 feet.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,15 +78,18 @@
       "affects": {
         "choice": false,
         "type": "willing",
-        "count": "1"
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
   "effects": [],
@@ -97,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
+    "systemVersion": "0.10.039",
     "coreVersion": "12.328",
     "createdTime": 1706932990346,
-    "modifiedTime": 1714413467204,
+    "modifiedTime": 1721269788379,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
