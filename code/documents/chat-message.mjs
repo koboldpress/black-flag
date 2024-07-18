@@ -53,7 +53,6 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_highlightRollResults(html) {
-		if (!this.isContentVisible) return;
 		const originatingMessage = game.messages.get(this.getFlag(game.system.id, "originatingMessage")) ?? this;
 		const displayChallenge = originatingMessage.shouldDisplayChallenge;
 		const rollResults = html.querySelectorAll(".dice-roll");
@@ -106,6 +105,17 @@ export default class BlackFlagChatMessage extends ChatMessage {
 				</div>
 			`
 			);
+		}
+
+		// TODO: Add option to make this optionally visible to players
+		if (game.user.isGM) {
+			const damageApplication = document.createElement("blackFlag-damageApplication");
+			damageApplication.damages = this.rolls.map(roll => ({
+				value: roll.total,
+				type: roll.options.damageType,
+				properties: new Set(roll.options.properties ?? [])
+			}));
+			html.querySelector(".message-content").appendChild(damageApplication);
 		}
 	}
 

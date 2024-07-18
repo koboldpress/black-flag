@@ -124,7 +124,8 @@ export default class HealingActivity extends Activity {
 					flags: {
 						"black-flag": {
 							type: "healing",
-							activity: this.uuid
+							activity: this.uuid,
+							targets: this.constructor.getTargetDescriptors()
 						}
 					}
 				}

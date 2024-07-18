@@ -257,6 +257,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 *                                      is not allowed.
 	 * @property {object} spell
 	 * @property {number} spell.circle - Spell circle to consume. Replaces `scaling` on property for spells.
+	 * @property {TargetDescriptor[]} targets - Tokens targeted during activation.
 	 */
 
 	/**
@@ -397,6 +398,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// Display the card in chat
 		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+		if (config.targets?.length) {
+			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
+		}
 		const createdMessage = await activity.createActivationMessage(messageConfig);
 
 		// Create measured templates if necessary
@@ -442,6 +446,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			const anyConsumption = Object.values(config.consume).some(v => v);
 			if (!anyConsumption) config.consume = false;
 		}
+
+		config.targets ??= this.constructor.getTargetDescriptors();
 
 		return config;
 	}
@@ -627,7 +633,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
 						core: { canPopout: true },
-						"black-flag": {
+						[game.system.id]: {
 							type: "activity",
 							step: "activation",
 							activityType: this.type,
@@ -708,5 +714,31 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (!targets.length) ui.notifications.warn("BF.Activity.Core.Warning.NoTargets", { localize: true });
 		// TODO: Alternatively fetch targeted tokens
 		return targets;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Important information on a targeted token.
+	 *
+	 * @typedef {object} TargetDescriptor
+	 * @property {string} uuid - The UUID of the target.
+	 * @property {string} img - The target's image.
+	 * @property {string} name - The target's name.
+	 * @property {number} [ac] - The target's armor class, if applicable.
+	 */
+
+	/**
+	 * Grab the targeted tokens and return relevant information on them.
+	 * @returns {TargetDescriptor[]}
+	 */
+	static getTargetDescriptors() {
+		const targets = new Map();
+		for (const token of game.user.targets) {
+			const { name } = token;
+			const { img, system, uuid } = token.actor ?? {};
+			if (uuid) targets.set(uuid, { name, img, uuid, ac: system?.attributes?.ac?.value });
+		}
+		return Array.from(targets.values());
 	}
 }

@@ -105,7 +105,8 @@ export default class DamageActivity extends Activity {
 					flags: {
 						"black-flag": {
 							type: "damage",
-							activity: this.uuid
+							activity: this.uuid,
+							targets: this.constructor.getTargetDescriptors()
 						}
 					}
 				}

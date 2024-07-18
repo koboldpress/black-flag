@@ -122,6 +122,7 @@ export default class AttackActivity extends DamageActivity {
 		// TODO: Associate ammunition with the attack
 
 		const { parts, data } = this.getAttackDetails();
+		const targets = this.constructor.getTargetDescriptors();
 
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
@@ -136,7 +137,8 @@ export default class AttackActivity extends DamageActivity {
 					),
 					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(this.modifierData, "min"), {
 						rollData: data
-					})
+					}),
+					target: targets.length === 1 ? targets[0].ac : undefined
 				}
 			}
 		].concat(config.rolls ?? []);
@@ -156,7 +158,8 @@ export default class AttackActivity extends DamageActivity {
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					"flags.black-flag.roll": {
 						type: "attack",
-						origin: this.uuid
+						origin: this.uuid,
+						targets
 					}
 				}
 			},
