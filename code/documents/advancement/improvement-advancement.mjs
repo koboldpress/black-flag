@@ -85,6 +85,15 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
+	async toEmbedContents(config, options) {
+		const p = document.createElement("p");
+		p.innerHTML = this.hint ?? "";
+		return p;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		const p1 = numberFormat(1, { sign: true });
 		const p2 = numberFormat(2, { sign: true });

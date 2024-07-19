@@ -1,4 +1,4 @@
-import BackportedEmbedMixin from "./embed.mjs";
+import EmbedMixin from "./embed.mjs";
 
 /**
  * Mixin used to share some logic between Actor & Item documents.
@@ -6,7 +6,7 @@ import BackportedEmbedMixin from "./embed.mjs";
  * @mixin
  */
 export default Base =>
-	class extends BackportedEmbedMixin(Base) {
+	class extends EmbedMixin(Base) {
 		/** @inheritDoc */
 		static getDefaultArtwork(data = {}) {
 			const dataModel = CONFIG[this.metadata.name]?.dataModels[data.type];

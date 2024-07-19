@@ -1,4 +1,4 @@
-import BackportedEmbedMixin from "./embed.mjs";
+import EmbedMixin from "./embed.mjs";
 
 /**
  * A mixin which extends a DataModel to provide a CRUD-layer similar to normal Documents.
@@ -7,7 +7,7 @@ import BackportedEmbedMixin from "./embed.mjs";
  * @mixin
  */
 export default Base =>
-	class extends BackportedEmbedMixin(Base) {
+	class extends EmbedMixin(Base) {
 		constructor(data, { parent = null, ...options } = {}) {
 			if (parent instanceof Item) parent = parent.system;
 			super(data, { parent, ...options });

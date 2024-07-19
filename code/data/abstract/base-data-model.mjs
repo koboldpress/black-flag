@@ -170,6 +170,18 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Key path to the description used for default embeds.
+	 * @type {string|null}
+	 */
+	get embeddedDescriptionKeyPath() {
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -197,7 +209,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*             Migrations              */
+	/*           Data Migrations           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
@@ -242,15 +254,17 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	/*               Embeds                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Convert this Document to some HTML display for embedding purposes.
-	 * @param {DocumentHTMLEmbedConfig} config - Configuration for embedding behavior.
-	 * @param {EnrichmentOptions} [options] - The original enrichment options for cases where the Document embed content
-	 *                                        also contains text that must be enriched.
-	 * @returns {Promise<HTMLElement|HTMLCollection|null>}
-	 */
+	/** @override */
 	async toEmbed(config, options = {}) {
-		return null;
+		const keyPath = this.embeddedDescriptionKeyPath;
+		if (!keyPath || !foundry.utils.hasProperty(this, keyPath)) return null;
+		const enriched = await TextEditor.enrichHTML(foundry.utils.getProperty(this, keyPath), {
+			...options,
+			relativeTo: this.parent
+		});
+		const container = document.createElement("div");
+		container.innerHTML = enriched;
+		return container.children;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

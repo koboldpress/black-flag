@@ -34,6 +34,13 @@ export default class ItemDataModel extends BaseDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	get embeddedDescriptionKeyPath() {
+		return "description.value";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Item type specific scaling increase.
 	 * @type {number|null}
@@ -87,23 +94,6 @@ export default class ItemDataModel extends BaseDataModel {
 	 * Final data preparation steps performed on Items after parent actor has been fully prepared.
 	 */
 	prepareFinalData() {}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	async toEmbed(config, options = {}) {
-		if (!foundry.utils.hasProperty(this, "description.value")) return null;
-		const description = foundry.utils.getProperty(this, "description.value");
-		const enriched = await TextEditor.enrichHTML(description, {
-			...options,
-			relativeTo: this.parent
-		});
-		const section = document.createElement("section");
-		section.innerHTML = enriched;
-		return section.children;
-	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */

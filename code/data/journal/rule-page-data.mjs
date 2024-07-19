@@ -31,4 +31,11 @@ export default class RuleJournalPageData extends BaseDataModel {
 			type: new StringField({ blank: false, initial: "rule", label: "BF.Rule.Type.Label" })
 		};
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(config, options = {}) {
+		return this.parent._embedTextPage(config, options);
+	}
 }

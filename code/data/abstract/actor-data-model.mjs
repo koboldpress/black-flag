@@ -30,20 +30,12 @@ export default class ActorDataModel extends BaseDataModel {
 	prepareNotifications() {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async toEmbed(config, options = {}) {
-		if (!foundry.utils.hasProperty(this, "biography.value")) return null;
-		const description = foundry.utils.getProperty(this, "biography.value");
-		const enriched = await TextEditor.enrichHTML(description, {
-			...options,
-			relativeTo: this.parent
-		});
-		const section = document.createElement("section");
-		section.innerHTML = enriched;
-		return section.children;
+	get embeddedDescriptionKeyPath() {
+		return "biography.value";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -58,4 +58,11 @@ export default class MapLocationJournalPageData extends BaseDataModel {
 		);
 		return new IconClass({ code: this.code, ...options, ...style });
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(config, options = {}) {
+		return this.parent._embedTextPage(config, options);
+	}
 }
