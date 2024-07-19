@@ -1,0 +1,305 @@
+{
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Eyebite",
+  "type": "spell",
+  "_id": "yOoinQLdJ9jWvSIh",
+  "img": "icons/magic/unholy/orb-swirling-teal.webp",
+  "system": {
+    "activities": {
+      "DVBtlRmyjzuwzyKm": {
+        "type": "utility",
+        "_id": "DVBtlRmyjzuwzyKm",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "G6wE2MzsYRViNCuT": {
+        "type": "savingThrow",
+        "_id": "G6wE2MzsYRViNCuT",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Eye Creature",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>For the spell’s duration, your eyes become an inky void imbued with dread power. One creature of your choice within 60 feet of you that you can see must succeed on a WIS save or be affected by one of the following effects of your choice for the duration. On each of your turns until the spell ends, you can use your action to target another creature but can’t target a creature again if it has succeeded on a save against this casting of <em>eyebite</em>.</p><p><strong>Asleep.</strong> The target falls unconscious. It wakes up if it takes any damage or if another creature uses its action to shake the sleeper awake.</p><p><strong>Panicked.</strong> The target is frightened of you. On each of its turns, the frightened creature must take the Dash action and move away from you by the safest and shortest available route, unless there is nowhere to move. If the target moves to a place at least 60 feet away from you where it can no longer see you, this effect ends.</p><p><strong>Sickened.</strong> The target has disadvantage on attack rolls and ability checks. At the end of each of its turns, it can make another WIS save. If it succeeds, the effect ends.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 6
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "self",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "",
+        "count": "",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Asleep",
+      "img": "icons/magic/unholy/orb-swirling-teal.webp",
+      "_id": "8br4SlLX6xayN0sb",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "<p>You fall unconscious. You wake up if you take any damage or if another creature uses its action to shake you awake.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "unconscious"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721357847386,
+        "modifiedTime": 1721357882878,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!yOoinQLdJ9jWvSIh.8br4SlLX6xayN0sb"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Panicked",
+      "img": "icons/magic/unholy/orb-swirling-teal.webp",
+      "_id": "6x2qmCxg0SxuZOb8",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "<p>You are frightened of the caster. On each of your turns, you must take the Dash action and move away from the caster by the safest and shortest available route, unless there is nowhere to move. If you move to a place at least 60 feet away from the caster where you can no longer see them, this effect ends.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "frightened"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721357847548,
+        "modifiedTime": 1721357956533,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!yOoinQLdJ9jWvSIh.6x2qmCxg0SxuZOb8"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.yOoinQLdJ9jWvSIh",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Sickened",
+      "img": "icons/magic/unholy/orb-swirling-teal.webp",
+      "_id": "FeIRtL60dUjav3Ta",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"attack\"] }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on attack rolls and ability checks.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "<p>You have disadvantage on attack rolls and ability checks. At the end of each of your turns, you can make another [[/save wisdom]] save. If you succeed, the effect ends.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721357849709,
+        "modifiedTime": 1721358051104,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!yOoinQLdJ9jWvSIh.FeIRtL60dUjav3Ta"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721357677245,
+    "modifiedTime": 1721357817502,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!yOoinQLdJ9jWvSIh"
+}

@@ -1,0 +1,387 @@
+{
+  "folder": "iJIjiGFvx6IqTXvu",
+  "name": "Enhance Ability",
+  "type": "spell",
+  "_id": "eQSukAkHZgLbOZA7",
+  "img": "icons/magic/earth/strike-fist-stone-light.webp",
+  "system": {
+    "activities": {
+      "rgTncPPGwT0DWkIA": {
+        "type": "utility",
+        "_id": "rgTncPPGwT0DWkIA",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You touch a creature and bestow one of the following effects upon it. It gains that effect until the spell ends.</p><p><strong>Bear’s Endurance.</strong> The target has advantage on CON checks and gains 2d6 temporary HP, which are lost when the spell ends.</p><p><strong>Bull’s Strength.</strong> The target has advantage on STR checks, and its carrying capacity doubles.</p><p><strong>Cat’s Grace.</strong> The target has advantage on DEX checks. It also doesn’t take damage from falling 20 feet or less if it isn’t incapacitated.</p><p><strong>Eagle’s Splendor.</strong> The target has advantage on CHA checks and saves against the charmed condition.</p><p><strong>Fox’s Cunning.</strong> The target has advantage on INT checks and checks made to Hide or otherwise avoid notice.</p><p><strong>Owl’s Wisdom.</strong> The target has advantage on WIS checks and can’t be surprised.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 2
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "fur or a feather from a beast"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "@scaling",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Bear’s Endurance",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "E1EOsUr8FrPOtPhj",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"constitution\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CON checks\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356319554,
+        "modifiedTime": 1721356448458,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.E1EOsUr8FrPOtPhj"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Bull’s Strength",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "wvyLeBKyZb2LBMzw",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR checks, and your carrying capacity doubles.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356332381,
+        "modifiedTime": 1721356525406,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.wvyLeBKyZb2LBMzw"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Cat’s Grace",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "ekJrnJV8AvbwjKn5",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on DEX checks. You also don’t take damage from falling 20 feet or less if you aren’t incapacitated.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356342411,
+        "modifiedTime": 1721356571520,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.ekJrnJV8AvbwjKn5"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Eagle’s Splendor",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "JVC16KBUV2V2VqNz",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }] }, { \"k\": \"type\", \"v\": \"ability-save\" }] }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CHA checks and saves against the charmed condition.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356349829,
+        "modifiedTime": 1721356709636,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.JVC16KBUV2V2VqNz"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Fox’s Cunning",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "foTtbXuAed8nN8VC",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on INT checks and checks made to Hide or otherwise avoid notice.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356351271,
+        "modifiedTime": 1721356782922,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.foTtbXuAed8nN8VC"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.eQSukAkHZgLbOZA7",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Owl’s Wisdom",
+      "img": "icons/magic/earth/strike-fist-stone-light.webp",
+      "_id": "E6Y7zyxPmSnTKB2G",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-check\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on WIS checks and can’t be surprised.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356351505,
+        "modifiedTime": 1721356822566,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQSukAkHZgLbOZA7.E6Y7zyxPmSnTKB2G"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721356198532,
+    "modifiedTime": 1721356316066,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!eQSukAkHZgLbOZA7"
+}

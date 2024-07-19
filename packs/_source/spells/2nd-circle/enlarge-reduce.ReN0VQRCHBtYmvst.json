@@ -81,7 +81,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You change one target’s size, dramatically shrinking or expanding its shape.</em></p><p>You cause a creature or an object you can see within range to grow larger or smaller for the duration. Choose a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a CON save. On a success, the spell has no effect. If the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.</p><p><em><strong>Enlarge.</strong></em> The target’s size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn’t enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on STR checks and STR saves. The target’s weapons also grow to match its new size. While these weapons are enlarged, the target’s attacks with them deal 1d4 extra damage.</p><p><em><strong>Reduce.</strong></em> The target’s size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on STR checks and STR saves. The target’s weapons also shrink to match its new size. While these weapons are reduced, the target’s attacks with them deal 1d4 less damage (this can’t reduce the damage below 1).</p>",
+      "value": "<p>You cause a creature or an object you can see within range to grow larger or smaller for the duration. Choose a creature or an object that is neither worn nor carried. If the target is unwilling, it can make a CON save. On a success, the spell has no effect. If the target is a creature, everything it is wearing and carrying changes size with it. Any item dropped by an affected creature returns to normal size at once.</p><p><em><strong>Enlarge.</strong></em> The target’s size doubles in all dimensions, and its weight is multiplied by eight. This growth increases its size by one category—from Medium to Large, for example. If there isn’t enough room for the target to double its size, the creature or object attains the maximum possible size in the space available. Until the spell ends, the target also has advantage on STR checks and STR saves. The target’s weapons also grow to match its new size. While these weapons are enlarged, the target’s attacks with them deal 1d4 extra damage.</p><p><em><strong>Reduce.</strong></em> The target’s size is halved in all dimensions, and its weight is reduced to one-eighth of normal. This reduction decreases its size by one category—from Medium to Small, for example. Until the spell ends, the target also has disadvantage on STR checks and STR saves. The target’s weapons also shrink to match its new size. While these weapons are reduced, the target’s attacks with them deal 1d4 less damage (this can’t reduce the damage below 1).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -128,19 +128,120 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
       "arcane"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.ReN0VQRCHBtYmvst",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Enlarge",
+      "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+      "_id": "6OuzqQKGYFmHqvgV",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR checks and STR saves while enlarged.\" } }",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"kind\", \"v\": \"attack\" }, { \"k\": \"activity.type.classification\", \"v\": \"weapon\" }], \"formula\": \"1d4\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356881344,
+        "modifiedTime": 1721357171791,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ReN0VQRCHBtYmvst.6OuzqQKGYFmHqvgV"
+    },
+    {
+      "origin": "Compendium.black-flag.spells.Item.ReN0VQRCHBtYmvst",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Reduce",
+      "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+      "_id": "kLnjy4VV0nVJJMVc",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"strength\" }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on STR checks and STR saves while reduced.\" } }",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"damage\" }, { \"k\": \"kind\", \"v\": \"attack\" }, { \"k\": \"activity.type.classification\", \"v\": \"weapon\" }], \"formula\": \"-1d4\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721356882096,
+        "modifiedTime": 1721357188687,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ReN0VQRCHBtYmvst.kLnjy4VV0nVJJMVc"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -148,10 +249,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933282379,
-    "modifiedTime": 1714413491980,
+    "modifiedTime": 1721356876039,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

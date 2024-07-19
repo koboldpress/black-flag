@@ -1,0 +1,143 @@
+{
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Earthquake",
+  "type": "spell",
+  "_id": "tBmWXvs9kbMxZrzc",
+  "img": "icons/magic/earth/barrier-stone-brown-green.webp",
+  "system": {
+    "activities": {
+      "X7w9rWx6YQKdkf1u": {
+        "type": "savingThrow",
+        "_id": "X7w9rWx6YQKdkf1u",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You create a seismic disturbance at a point on the ground that you can see within range. For the duration, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point and shakes creatures and structures in contact with the ground in that area.</p><p>The ground in the area becomes difficult terrain. Each creature on the ground that is concentrating must make a [[/save constitution]] save. On a failed save, the creature’s concentration is broken.</p><p>When you cast this spell and at the end of each turn you spend concentrating on it, each creature on the ground in the area must make a [[/save dexterity]] save. On a failed save, the creature is knocked prone.</p><p>This spell can have additional effects depending on the terrain in the area, as determined by the GM.</p><p><strong>Fissures.</strong> Fissures open throughout the spell’s area at the start of your next turn after you cast the spell. A total of [[/r 1d6]] such fissures open in locations chosen by the GM. Each is [[/r 1d10 * 10]]{1d10 × 10} feet deep, 10 feet wide, and extends from one edge of the spell’s area to the opposite side. A creature standing on a spot where a fissure opens must succeed on a [[/save dexterity]] save or fall in. A creature that successfully saves moves with the fissure’s edge as it opens. A fissure that opens beneath a structure causes it to automatically collapse (see following section).</p><p><strong>Structures.</strong> The tremor deals [[/damage 50 bludgeoning]] damage to any structure in contact with the ground in the area when you cast the spell and at the start of each of your turns until the spell ends. If a structure drops to 0 HP, it collapses and potentially damages nearby creatures. A creature within half the distance of a structure’s height must make a [[/save dexterity]] save. On a failed save, the creature takes [[/damage 5d6 bludgeoning]] damage, is knocked prone, and is buried in the rubble, requiring a [[/check strength athletics 20]] check as an action to escape. The GM can adjust the DC higher or lower, depending on the nature of the rubble. On a successful save, the creature takes half as much damage and doesn’t fall prone or become buried.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 8
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a pinch of dirt, a piece of rock, and a lump of clay"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "500",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": "radius",
+        "size": "100"
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721355690290,
+    "modifiedTime": 1721355965506,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!tBmWXvs9kbMxZrzc"
+}

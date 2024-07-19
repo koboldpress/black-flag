@@ -57,6 +57,16 @@ export default class SavingThrowActivity extends DamageActivity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get modifierData() {
+		return {
+			kind: "save",
+			...super.modifierData
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -47,19 +47,29 @@
                 "number": 3,
                 "denomination": 6,
                 "bonus": "",
-                "custom": "",
-                "type": ""
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "",
+                "scaling": {
+                  "mode": "half",
+                  "number": 1,
+                  "formula": ""
+                }
               }
             ]
           },
           "ability": "",
           "attack": {
-            "flat": false
+            "flat": false,
+            "bonus": ""
           }
         },
         "activation": {
           "type": "action",
-          "condition": ""
+          "condition": "",
+          "primary": false
         },
         "consumption": {
           "targets": [],
@@ -86,7 +96,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A blade of elemental energy appears in your hand.</em></p><p>You evoke an elemental blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. When the blade appears, you decide whether it deals acid, cold, fire, lightning, or thunder damage.</p><p>You can use your action to make a melee spell attack with the elemental blade. On a hit, the target takes 3d6 damage of the chosen type. The elemental blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p>",
+      "value": "<p>You evoke an elemental blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. When the blade first appears, you decide whether it deals acid, cold, fire, lightning, or thunder damage.</p><p>You can use your action to make a melee spell attack with the elemental blade. On a hit, the target takes 3d6 damage of the chosen type. The elemental blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by 1d6 for every two slots above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -136,7 +146,8 @@
       }
     },
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -151,10 +162,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933239660,
-    "modifiedTime": 1714413486578,
+    "modifiedTime": 1721356048267,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

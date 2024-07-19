@@ -75,6 +75,7 @@ export default class AttackActivity extends DamageActivity {
 	get modifierData() {
 		return {
 			type: "attack",
+			kind: "attack",
 			ability: this.attackAbility,
 			...super.modifierData
 		};

@@ -39,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a wide knot of weeds and vines that trip up and bind creatures caught within them.</em></p><p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the duration, these plants turn the ground in the area into difficult terrain. A creature in the area when you cast the spell must succeed on a STR save or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a STR check against your spell save DC. On a success, it frees itself. When the spell ends, the conjured plants wilt away.</p>",
+      "value": "<p>Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the duration, these plants turn the ground in the area into difficult terrain. A creature in the area when you cast the spell must succeed on a [[/save strength]] save or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a [[/check strength]] check against your spell save DC. On a success, it frees itself. When the spell ends, the conjured plants wilt away.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -85,19 +85,60 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "90"
+      "value": "90",
+      "special": ""
     },
     "school": "conjuration",
     "source": [
       "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.CM2MI0J59OeCL7I4",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Entangle",
+      "img": "icons/magic/nature/root-vine-entwined-thorns.webp",
+      "_id": "BmCXwBJvIO2xwGVZ",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "<p>You are restrained by the entangling plants until the spell ends. You can use your action to make a [[/check strength]] check against the caster's spell save DC. On a success, you free yourself.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [
+        "restrained"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721357295612,
+        "modifiedTime": 1721357366299,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!CM2MI0J59OeCL7I4.BmCXwBJvIO2xwGVZ"
+    }
+  ],
   "sort": 1500000,
   "ownership": {
     "default": 0
@@ -105,10 +146,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706997707977,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721357274862,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
