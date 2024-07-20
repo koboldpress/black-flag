@@ -31,7 +31,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 	async getData(options) {
 		const context = await super.getData(options);
 
-		context.effects = EffectsElement.prepareContext(this.item.effects);
+		context.effects = EffectsElement.prepareItemContext(this.item.effects);
 
 		// Category
 		if (context.system.validCategories?.localized)

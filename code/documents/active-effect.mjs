@@ -47,6 +47,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/*               Methods               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
 		if (this.id !== this.constructor.EXHAUSTION) return;
@@ -61,6 +62,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	apply(document, change) {
 		// Grab DataField instance for target, if not found, fallback on default Foundry implementation
 		const keyPath = change.key.replace("system.", "");
@@ -116,6 +118,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_parseOrString(raw) {
 		if (raw instanceof foundry.abstract.DataModel) return raw;
 		return super._parseOrString(raw);
@@ -125,6 +128,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	_onUpdate(data, options, userId) {
 		super._onUpdate(data, options, userId);
 		const originalLevel = foundry.utils.getProperty(options, "blackFlag.originalExhaustion");

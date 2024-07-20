@@ -1,23 +1,22 @@
-.black-flag.sheet.item :is(blackFlag-effects, .conditions) {
+.black-flag.sheet.item blackFlag-effects {
 	flex-grow: 1;
-	padding: 0.5rem;
+	padding: 4px;
 
 	header {
 		display: flex;
 		align-items: first baseline;
 		justify-content: space-between;
 
-		h2 {
+		> h2 {
 			border: none;
 		}
 	}
 
-	> ol {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
+	> ol { margin: 0; }
 
+	.header {
+		padding-inline: 12px;
+	}
 	.controls {
 		display: flex;
 		gap: 0.5rem;
@@ -25,16 +24,13 @@
 	}
 
 	.effect-name {
-		flex: 1 0 30%;
-	}
-	.effect-source {
-		flex: 0 1 25%;
+		flex: 1 1 40%;
 	}
 	.effect-duration {
-		flex: 0 1 25%;
+		flex: 1 1 20%;
 	}
 	.effect-controls {
-		flex: 0 1 15%;
+		flex: 1 1 20%;
 		display: flex;
 		justify-content: flex-end;
 	}

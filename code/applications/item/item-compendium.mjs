@@ -4,6 +4,7 @@ import BlackFlagItem from "../../documents/item.mjs";
  * Compendium with added support for item containers.
  */
 export default class BlackFlagItemCompendium extends Compendium {
+	/** @inheritDoc */
 	async _render(...args) {
 		await super._render(...args);
 		let items = this.collection;
@@ -21,6 +22,7 @@ export default class BlackFlagItemCompendium extends Compendium {
 
 	/* -------------------------------------------- */
 
+	/** @inheritDoc */
 	async _handleDroppedEntry(target, data) {
 		// Obtain the dropped Document
 		let item = await Item.fromDropData(data);

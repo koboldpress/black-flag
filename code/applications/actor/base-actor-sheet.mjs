@@ -87,7 +87,7 @@ export default class BaseActorSheet extends ActorSheet {
 		context.modes = this.modes;
 		context.editable = this.isEditable && this.modes.editing;
 
-		context.effects = EffectsElement.prepareContext(this.document.allApplicableEffects(), { displaySource: true });
+		context.effects = EffectsElement.prepareActorContext(this.document.allApplicableEffects());
 
 		await this.prepareActions(context);
 		await this.prepareItems(context);

@@ -1,6 +1,7 @@
 import BaseItemSheet from "./base-item-sheet.mjs";
 
 export default class CurrencySheet extends BaseItemSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "currency", "item", "sheet"],

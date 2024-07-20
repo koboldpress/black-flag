@@ -11,7 +11,7 @@
 			</div>
 		{{/if}}
 	</header>
-	<ol class="level-list">
+	<ol class="level-list unlist">
 		{{#each advancement as |data level|}}
 			<li class="advancement-level" data-level="{{ level }}">
 				<div class="header">
@@ -25,7 +25,7 @@
 						{{/if}}
 					</h3>
 				</div>
-				<ol class="advancement-list">
+				<ol class="advancement-list unlist">
 					{{#each data.items}}
 						<li class="advancement-entry" data-advancement-id="{{ this.id }}">
 							<div class="advancement-name">

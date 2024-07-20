@@ -219,7 +219,6 @@ export function registerHandlebarsHelpers() {
  */
 export async function registerHandlebarsPartials() {
 	const partials = [
-		"active-effect/active-effects.hbs",
 		"active-effect/active-effect-change.hbs",
 		"activities/parts/activity-activation.hbs",
 		"activities/parts/activity-consumption-part.hbs",
@@ -231,7 +230,7 @@ export async function registerHandlebarsPartials() {
 		"activities/parts/activity-uses.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",
-		"actor/tabs/actor-active-effects.hbs",
+		"actor/parts/actor-active-effects.hbs",
 		"actor/tabs/npc-biography.hbs",
 		"actor/tabs/npc-features.hbs",
 		"actor/tabs/npc-main.hbs",
@@ -249,6 +248,7 @@ export async function registerHandlebarsPartials() {
 		"item/parts/equipment-attunement.hbs",
 		"item/parts/equipment-categories.hbs",
 		"item/parts/equipment-description.hbs",
+		"item/parts/item-active-effects.hbs",
 		"item/parts/item-activities.hbs",
 		"item/parts/item-advancement.hbs",
 		"journal/journal-table.hbs",

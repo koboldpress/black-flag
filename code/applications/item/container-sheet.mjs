@@ -4,6 +4,7 @@ import DragDrop from "../drag-drop.mjs";
 import EquipmentSheet from "./equipment-sheet.mjs";
 
 export default class ContainerSheet extends EquipmentSheet {
+	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["black-flag", "container", "equipment", "item", "sheet"],
@@ -19,6 +20,7 @@ export default class ContainerSheet extends EquipmentSheet {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
 
@@ -62,6 +64,7 @@ export default class ContainerSheet extends EquipmentSheet {
 	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	async _onDrop(event) {
 		const { data } = DragDrop.getDragData(event);
 

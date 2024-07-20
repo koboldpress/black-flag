@@ -71,37 +71,16 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare the provided effects collection for display.
+	 * Prepare the provided effects collection for display on an actor sheet.
 	 * @param {Collection<BlackFlagActiveEffect>} effects
-	 * @param {object} [options={}]
-	 * @param {boolean} [options.displaySource=false] - Should the source column be displayed?
 	 * @returns {object}
 	 */
-	static prepareContext(effects, { displaySource = false } = {}) {
+	static prepareActorContext(effects) {
 		const context = {
-			temporary: {
-				label: "BF.Effect.Category.Temporary",
-				effects: [],
-				create: [],
-				displaySource
-			},
-			passive: {
-				label: "BF.Effect.Category.Passive",
-				effects: [],
-				create: [],
-				displaySource
-			},
-			inactive: {
-				label: "BF.Effect.Category.Inactive",
-				effects: [],
-				create: [],
-				displaySource
-			},
-			suppressed: {
-				label: "BF.Effect.Category.Suppressed",
-				effects: [],
-				displaySource
-			}
+			temporary: { label: "BF.Effect.Category.Temporary", effects: [] },
+			passive: { label: "BF.Effect.Category.Passive", effects: [] },
+			inactive: { label: "BF.Effect.Category.Inactive", effects: [] },
+			suppressed: { label: "BF.Effect.Category.Suppressed", effects: [] }
 		};
 
 		for (const effect of effects) {
@@ -124,6 +103,29 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			else context.passive.effects.push(data);
 		}
 		if (!context.suppressed.effects.length) delete context.suppressed;
+
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the provided effects collection for display on an item sheet.
+	 * @param {Collection<BlackFlagActiveEffect>} effects
+	 * @returns {object}
+	 */
+	static prepareItemContext(effects) {
+		const context = {
+			effects: []
+		};
+
+		for (const effect of effects) {
+			const data = {
+				...effect,
+				id: effect.id
+			};
+			context.effects.push(data);
+		}
 
 		return context;
 	}
@@ -220,6 +222,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				return this.document.createEmbeddedDocuments("ActiveEffect", [data]);
 			case "toggle":
 				return effect.update({ disabled: !effect.disabled });
+			case "transfer":
+				return effect.update({ transfer: !effect.transfer });
 			default:
 				return log(`Invalid effect action type clicked ${action}.`, { level: "warn" });
 		}

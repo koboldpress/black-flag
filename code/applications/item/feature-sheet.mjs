@@ -33,7 +33,7 @@ export default class FeatureSheet extends BaseItemSheet {
 		const context = await super.getData(options);
 
 		context.advancement = AdvancementElement.prepareContext(this.item.system.advancement);
-		context.effects = EffectsElement.prepareContext(this.item.effects);
+		context.effects = EffectsElement.prepareItemContext(this.item.effects);
 		context.type = {};
 
 		if (this.document.type === "feature") {

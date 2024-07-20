@@ -4,9 +4,7 @@
 			<tbody data-section="{{ @key }}">
 				<tr class="table-header">
 					<td class="name">{{ localize label }}</td>
-					{{#if displaySource}}
-						<th class="source" scope="col">{{ localize "BF.Effect.Source" }}</th>
-					{{/if}}
+					<th class="source" scope="col">{{ localize "BF.Effect.Source" }}</th>
 					<th class="duration" scope="col">{{ localize "BF.Effect.Duration" }}</th>
 					<td class="controls">
 						<div class="layout">
@@ -27,15 +25,13 @@
 								<span>{{ name }}</span>
 							</div>
 						</th>
-						{{#if ../displaySource}}
-							<td class="source">
-								{{ sourceName }}
-								{{#if suppressionReason}}
-									<div class="notification-badge" data-tooltip="{{ suppressionReason }}"
-									     data-notification-level="info"><i class="fa-solid fa-info" inert></i></div>
-								{{/if}}
-							</td>
-						{{/if}}
+						<td class="source">
+							{{ sourceName }}
+							{{#if suppressionReason}}
+								<div class="notification-badge" data-tooltip="{{ suppressionReason }}"
+								     data-notification-level="info"><i class="fa-solid fa-info" inert></i></div>
+							{{/if}}
+						</td>
 						<td class="duration">{{ duration.label }}</td>
 						<td class="controls">
 							<div class="layout">

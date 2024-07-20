@@ -4,6 +4,7 @@ import BlackFlagItem from "../../documents/item.mjs";
  * Items sidebar with added support for item containers.
  */
 export default class BlackFlagItemDirectory extends ItemDirectory {
+	/** @inheritDoc */
 	async _handleDroppedEntry(target, data) {
 		// Obtain the dropped Document
 		let item = await this._getDroppedEntryFromData(data);
