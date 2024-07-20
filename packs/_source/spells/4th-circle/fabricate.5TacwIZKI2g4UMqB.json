@@ -1,0 +1,142 @@
+{
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Fabricate",
+  "type": "spell",
+  "_id": "5TacwIZKI2g4UMqB",
+  "img": "icons/commodities/materials/metal-liquid.webp",
+  "system": {
+    "activities": {
+      "w4lIw40wvX7NHu4M": {
+        "type": "utility",
+        "_id": "w4lIw40wvX7NHu4M",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "description": {
+      "value": "<p>You convert raw materials into products of the same material. For example, you can fabricate a wooden bridge from a clump of trees, a rope from a patch of hemp, and clothes from flax or wool.</p><p>Choose raw materials that you can see within range. You can fabricate a Large or smaller object (contained within a 10-foot cube, or eight connected 5-foot cubes), given a sufficient quantity of raw material. If you are working with metal, stone, or another mineral substance, however, the fabricated object can be no larger than Medium (contained within a single 5-foot cube). The quality of objects made by the spell is commensurate with the quality of the raw materials.</p><p>Creatures or magic items can’t be created or transmuted by this spell. You also can’t use it to create items that ordinarily require a high degree of craftsmanship, such as jewelry, weapons, glass, or armor, unless you have proficiency with the type of artisan’s tools used to craft such objects.</p><p>Once you cast this spell, you can’t do so again until you complete a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Make items from raw materials."
+    },
+    "source": [
+      "arcane"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": 10,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "120",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721445065959,
+    "modifiedTime": 1721446128251,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!5TacwIZKI2g4UMqB"
+}

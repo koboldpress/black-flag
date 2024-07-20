@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>With an arcane phrase and a touch, you grant the power of flight.</em></p><p>You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>",
+      "value": "<p>You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p><p><em>At Higher Circles.</em> When you cast this spell using a 4th-circle spell slot or higher, you can target one additional creature for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -80,18 +80,65 @@
       "affects": {
         "choice": false,
         "type": "willing",
-        "count": "1"
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.9m3weZVFQcscp85O",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Fly",
+      "img": "icons/creatures/birds/dove-pigeon-flying-white.webp",
+      "_id": "mKgHbYahQqGnugbp",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.types.fly",
+          "mode": 4,
+          "value": "60",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721443946445,
+        "modifiedTime": 1721443986719,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!9m3weZVFQcscp85O.mKgHbYahQqGnugbp"
+    }
+  ],
   "sort": 1100000,
   "ownership": {
     "default": 0
@@ -99,10 +146,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933734625,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1721443940077,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

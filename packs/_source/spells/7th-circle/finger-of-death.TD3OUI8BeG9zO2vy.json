@@ -1,42 +1,28 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Flame Strike",
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Finger of Death",
   "type": "spell",
-  "_id": "zN7iox5s7uic3PTH",
-  "img": "icons/magic/fire/beam-jet-stream-yellow.webp",
+  "_id": "TD3OUI8BeG9zO2vy",
+  "img": "icons/magic/death/hand-withered-gray.webp",
   "system": {
     "activities": {
-      "vA1Fvg0oFBHhiW3F": {
+      "vUKKM51nAd75yHC6": {
         "type": "savingThrow",
-        "_id": "vA1Fvg0oFBHhiW3F",
+        "_id": "vUKKM51nAd75yHC6",
         "description": "",
         "system": {
-          "ability": "dexterity",
+          "ability": "constitution",
           "damage": {
             "parts": [
               {
-                "number": 4,
-                "denomination": 6,
-                "bonus": "",
+                "number": 7,
+                "denomination": 8,
+                "bonus": "30",
                 "custom": {
                   "formula": "",
                   "enabled": false
                 },
-                "type": "fire",
-                "scaling": {
-                  "mode": "whole",
-                  "number": 1
-                }
-              },
-              {
-                "number": 4,
-                "denomination": 6,
-                "bonus": "",
-                "custom": {
-                  "formula": "",
-                  "enabled": false
-                },
-                "type": "radiant",
+                "type": "necrotic",
                 "scaling": {
                   "mode": "",
                   "number": 1
@@ -49,6 +35,7 @@
           }
         },
         "activation": {
+          "value": null,
           "type": "",
           "condition": "",
           "primary": true
@@ -58,6 +45,22 @@
           "scale": {
             "allowed": false
           }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
         },
         "uses": {
           "spent": 0,
@@ -78,18 +81,20 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot above 5th.</p>",
+      "value": "<p>You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a [[/save constitution]] save. It takes [[/damage 7d8 + 30 necrotic]] damage on a failed save, or half as much damage on a success.</p><p>A Humanoid killed by this spell rises as a <strong>zombie</strong> at the start of your next turn. The zombie is permanently under your command and follows your verbal orders to the best of its ability.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "10-ft. radius column of fire, radiant."
+      "short": "Major necrotic, zombify Humanoid."
     },
     "source": [
-      "divine"
+      "arcane",
+      "divine",
+      "wyrd"
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 7
     },
     "casting": {
       "value": null,
@@ -99,56 +104,53 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp",
-        "description": "a pinch of sulfur"
+        "denomination": "gp"
       }
     },
     "duration": {
       "units": "instantaneous"
     },
     "tags": [],
-    "target": {
-      "template": {
-        "count": 1,
-        "units": "foot",
-        "type": "cylinder",
-        "size": "10",
-        "height": "40"
-      },
-      "affects": {
-        "choice": false,
-        "type": "creature",
-        "count": "",
-        "special": ""
-      }
-    },
     "range": {
       "units": "foot",
       "value": "60",
       "special": ""
     },
-    "school": "evocation"
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "necromancy"
   },
   "effects": [],
-  "sort": 700000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
     "systemId": "black-flag",
     "systemVersion": "0.10.039",
-    "coreVersion": "12.329",
-    "createdTime": 1715663328122,
-    "modifiedTime": 1721446179986,
-    "lastModifiedBy": "blackflag0000000",
-    "duplicateSource": null
+    "createdTime": 1721443221014,
+    "modifiedTime": 1721446074128,
+    "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zN7iox5s7uic3PTH"
+  "_key": "!items!TD3OUI8BeG9zO2vy"
 }

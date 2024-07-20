@@ -4,7 +4,7 @@
   "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
   "system": {
     "description": {
-      "value": "<p><em>You hurl a small ball of flame that explodes in a huge conflagration.</em></p><p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot- radius sphere centered on that point must make a DEX save. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p>",
+      "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a [[/save]] save. A target takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by 1d6 for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -40,8 +40,9 @@
     },
     "tags": [],
     "range": {
-      "value": "60",
-      "units": "foot"
+      "value": "150",
+      "units": "foot",
+      "special": ""
     },
     "school": "evocation",
     "target": {
@@ -56,7 +57,8 @@
       "affects": {
         "type": "creature",
         "count": "",
-        "choice": false
+        "choice": false,
+        "special": ""
       }
     },
     "activities": {
@@ -69,7 +71,16 @@
               {
                 "number": 8,
                 "denomination": 6,
-                "type": "fire"
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                }
               }
             ]
           },
@@ -81,7 +92,11 @@
         "name": "",
         "img": "systems/black-flag/artwork/activities/saving-throw.svg",
         "description": "",
-        "activation": {},
+        "activation": {
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -91,7 +106,9 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
         }
       }
     },
@@ -114,10 +131,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1699297018533,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1721443549021,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

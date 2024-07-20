@@ -1,42 +1,28 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Flame Strike",
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Fire Storm",
   "type": "spell",
-  "_id": "zN7iox5s7uic3PTH",
-  "img": "icons/magic/fire/beam-jet-stream-yellow.webp",
+  "_id": "NGq59gMzgyPChOYl",
+  "img": "icons/magic/fire/flame-burning-tree-bush.webp",
   "system": {
     "activities": {
-      "vA1Fvg0oFBHhiW3F": {
+      "dDcusC7bUQtU1RsA": {
         "type": "savingThrow",
-        "_id": "vA1Fvg0oFBHhiW3F",
+        "_id": "dDcusC7bUQtU1RsA",
         "description": "",
         "system": {
           "ability": "dexterity",
           "damage": {
             "parts": [
               {
-                "number": 4,
-                "denomination": 6,
+                "number": 7,
+                "denomination": 10,
                 "bonus": "",
                 "custom": {
                   "formula": "",
                   "enabled": false
                 },
                 "type": "fire",
-                "scaling": {
-                  "mode": "whole",
-                  "number": 1
-                }
-              },
-              {
-                "number": 4,
-                "denomination": 6,
-                "bonus": "",
-                "custom": {
-                  "formula": "",
-                  "enabled": false
-                },
-                "type": "radiant",
                 "scaling": {
                   "mode": "",
                   "number": 1
@@ -49,6 +35,7 @@
           }
         },
         "activation": {
+          "value": null,
           "type": "",
           "condition": "",
           "primary": true
@@ -58,6 +45,22 @@
           "scale": {
             "allowed": false
           }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
         },
         "uses": {
           "spent": 0,
@@ -78,18 +81,19 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot above 5th.</p>",
+      "value": "<p>A storm made up of sheets of roaring flame appears in a location you choose within range. The area of the storm consists of up to ten 10‑foot cubes, which you can arrange as you wish. Each cube must have at least one face adjacent to the face of another cube.</p><p>Each creature in the area must make a [[/save dexterity]] save. It takes [[/damage 7d10 fire]] damage on a failed save, or half as much damage on a successful one.</p><p>The fire damages objects in the area and ignites flammable objects that aren’t being worn or carried. If you choose, plant life in the area is unaffected by this spell.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "10-ft. radius column of fire, radiant."
+      "short": "Ten 10-ft. cubes of fire."
     },
     "source": [
-      "divine"
+      "arcane",
+      "primordial"
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 7
     },
     "casting": {
       "value": null,
@@ -99,56 +103,54 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp",
-        "description": "a pinch of sulfur"
+        "denomination": "gp"
       }
     },
     "duration": {
       "units": "instantaneous"
     },
     "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "150",
+      "special": ""
+    },
     "target": {
       "template": {
-        "count": 1,
+        "count": 10,
+        "contiguous": true,
         "units": "foot",
-        "type": "cylinder",
-        "size": "10",
-        "height": "40"
+        "type": "cube",
+        "size": "10"
       },
       "affects": {
         "choice": false,
-        "type": "creature",
+        "type": "creatureObject",
         "count": "",
         "special": ""
       }
     },
-    "range": {
-      "units": "foot",
-      "value": "60",
-      "special": ""
-    },
     "school": "evocation"
   },
   "effects": [],
-  "sort": 700000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
     "systemId": "black-flag",
     "systemVersion": "0.10.039",
-    "coreVersion": "12.329",
-    "createdTime": 1715663328122,
-    "modifiedTime": 1721446179986,
-    "lastModifiedBy": "blackflag0000000",
-    "duplicateSource": null
+    "createdTime": 1721443349770,
+    "modifiedTime": 1721446067063,
+    "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zN7iox5s7uic3PTH"
+  "_key": "!items!NGq59gMzgyPChOYl"
 }

@@ -1,0 +1,157 @@
+{
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Freezing Sphere",
+  "type": "spell",
+  "_id": "hT2RwntTpDt00UVH",
+  "img": "icons/magic/water/orb-water-bubbles.webp",
+  "system": {
+    "activities": {
+      "tLBFdvKJ2wzNoe1P": {
+        "type": "savingThrow",
+        "_id": "tLBFdvKJ2wzNoe1P",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 10,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "cold",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A frigid globe of cold energy streaks from your fingertips to a point of your choice within range, where it explodes in a 60-foot-radius sphere. Each creature within the area must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a successful one.</p><p>If the globe strikes a body of water or a liquid that is principally water (not including water-based creatures), it freezes the liquid to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice. A trapped creature can use an action to make a [[/check STR]] check against your spell save DC to break free.</p><p>You can refrain from firing the globe after completing the spell, if you wish. A small globe about the size of a sling stone, cool to the touch, appears in your hand. At any time, you, or a creature you give the globe to, can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling’s normal range). It shatters on impact, with the same effect as the normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn’t already shattered, it explodes.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 7th circle or higher, the damage increases by 1d6 for each slot above 6th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Cold sphere, use now or later."
+    },
+    "source": [
+      "arcane"
+    ],
+    "circle": {
+      "value": null,
+      "base": 6
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a small crystal sphere"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "300",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": "sphere",
+        "size": "60"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "",
+        "special": ""
+      }
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721444422792,
+    "modifiedTime": 1721446105716,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!hT2RwntTpDt00UVH"
+}

@@ -1,0 +1,213 @@
+{
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Faithful Hound",
+  "type": "spell",
+  "_id": "vvb1n0ZFgu4uBaW1",
+  "img": "icons/creatures/mammals/wolf-howl-moon-black.webp",
+  "system": {
+    "activities": {
+      "4BtW4voIXrYDBJq9": {
+        "type": "utility",
+        "_id": "4BtW4voIXrYDBJq9",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Conjure Hound",
+        "img": "systems/black-flag/artwork/activities/utility.svg"
+      },
+      "5IaOqOyUzd38yBVx": {
+        "type": "attack",
+        "_id": "5IaOqOyUzd38yBVx",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "piercing",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "At the start of each of your turns",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "5",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You conjure a phantom watchdog in an unoccupied space that you can see within range, where it remains for the duration, until you dismiss it as an action, or until you move more than 100 feet away from it.</p><p>The hound is invisible to all creatures except you and can’t be harmed. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound sees invisible creatures and can see into the Ethereal Plane. It ignores illusions.</p><p>At the start of each of your turns, the hound attempts to bite one creature within 5 feet of it that is hostile to you. The hound’s attack bonus is equal to your spellcasting ability modifier + your PB. On a hit, it deals 4d8 piercing damage.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Invisible sentry barks and bites."
+    },
+    "source": [
+      "divine",
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a tiny silver whistle, a piece of bone, and a thread"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "8"
+    },
+    "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "30",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "conjuration"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721442532887,
+    "modifiedTime": 1721446159641,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!vvb1n0ZFgu4uBaW1"
+}

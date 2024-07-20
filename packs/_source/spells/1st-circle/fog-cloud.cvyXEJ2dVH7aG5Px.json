@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a thick mist that hangs in the air, obscuring sightlines.</em></p><p>You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p>",
+      "value": "<p>You create a 20-foot-radius sphere of fog centered on a point within range. The sphere spreads around corners, and its area is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p><p><em>At Higher Circles.</em> When you cast this spell using a 2nd-circle spell slot or higher, the radius of the fog increases by 20 feet for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,17 +78,20 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": ""
+        "type": "",
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "120"
+      "value": "120",
+      "special": ""
     },
     "school": "conjuration",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
   "effects": [],
@@ -99,10 +102,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933751305,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721444030381,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

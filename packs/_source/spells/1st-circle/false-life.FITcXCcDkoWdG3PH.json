@@ -16,13 +16,19 @@
             "denomination": 4,
             "bonus": "4",
             "custom": "",
-            "number": 1
+            "number": 1,
+            "scaling": {
+              "mode": "whole",
+              "number": 0,
+              "formula": "5"
+            }
           },
           "ability": ""
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -49,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You imbue yourself with a wellspring of vitality.</em></p><p>Bolstering yourself with a necromantic facsimile of life, you gain 1d4 + 4 temporary hit points for the duration.</p>",
+      "value": "<p>You bolster yourself with a touch of the same necromantic powers used to preserve the dead. You gain 1d4 + 4 temporary hit points for the duration.</p><p><em>At Higher Circles.</em> When you cast this spell using a 2nd-circle spell slot or higher, you gain 5 additional temporary hit points for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -97,7 +103,8 @@
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
@@ -112,10 +119,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933369013,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721442799309,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

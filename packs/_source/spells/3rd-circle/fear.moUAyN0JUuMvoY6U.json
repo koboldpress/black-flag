@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You give form to your target’s worst fears. Then you show it to them.</em></p><p>You project a phantasmal image of a creature’s worst fears. Each creature in a 30-foot cone must succeed on a WIS save or drop whatever it is holding and become frightened for the duration.</p><p>While frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn’t have line of sight to you, the creature can make a WIS save. On a successful save, the spell ends for that creature.</p>",
+      "value": "<p>You project a phantasmal image of a creature’s worst fears. Each creature in a 30-foot cone must succeed on a [[/save wisdom]] save or drop whatever it is holding and become frightened of you for the duration.</p><p>While frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn’t have line of sight to you, the creature can make a WIS save, ending the effect on itself on a success.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -96,18 +96,60 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "illusion",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.moUAyN0JUuMvoY6U",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Fear",
+      "img": "icons/skills/wounds/injury-face-impact-orange.webp",
+      "_id": "OyyECU1lMQ11hG66",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "<p>While frightened by this spell, you must take the Dash action and move away from the caster by the safest available route on each of your turns, unless there is nowhere to move. If you end your turn in a location where you don’t have line of sight to the caster, you can make a WIS save, ending the effect on yourself on a success.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "frightened"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721442838724,
+        "modifiedTime": 1721442897747,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!moUAyN0JUuMvoY6U.OyyECU1lMQ11hG66"
+    }
+  ],
   "sort": 3000000,
   "ownership": {
     "default": 0
@@ -115,10 +157,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933403897,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1721442836851,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

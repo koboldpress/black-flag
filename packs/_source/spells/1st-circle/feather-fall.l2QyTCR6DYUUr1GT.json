@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You quickly turn a hard fall into a gentle descent.</em></p><p>Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
+      "value": "<p>Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -77,19 +77,59 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "5"
+        "count": "5",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.l2QyTCR6DYUUr1GT",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Feather Fall",
+      "img": "icons/magic/movement/chevrons-down-yellow.webp",
+      "_id": "G1jE64wXYzHxza8S",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721442953503,
+        "modifiedTime": 1721442965132,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!l2QyTCR6DYUUr1GT.G1jE64wXYzHxza8S"
+    }
+  ],
   "sort": 3300000,
   "ownership": {
     "default": 0
@@ -97,10 +137,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1706933434555,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721442924244,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

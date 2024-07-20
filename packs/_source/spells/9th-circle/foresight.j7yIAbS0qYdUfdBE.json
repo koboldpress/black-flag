@@ -1,0 +1,173 @@
+{
+  "folder": "QT2clUBmIk8w1YDH",
+  "name": "Foresight",
+  "type": "spell",
+  "_id": "j7yIAbS0qYdUfdBE",
+  "img": "icons/magic/perception/third-eye-blue-red.webp",
+  "system": {
+    "activities": {
+      "7qG6VYvIGRLoCT84": {
+        "type": "utility",
+        "_id": "7qG6VYvIGRLoCT84",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You touch a willing creature and bestow a limited ability to see into the immediate future. For the duration, the target can’t be surprised and has advantage on attack rolls, ability checks, and saves. In addition, other creatures have disadvantage on attack rolls against the target for the duration.</p><p>This spell immediately ends if you cast it again before its duration ends.</p><p>Once you target a creature with this spell, the same creature can’t gain the benefits of this spell until 7 days have passed.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Ally sees immediate future."
+    },
+    "source": [
+      "arcane",
+      "divine"
+    ],
+    "circle": {
+      "value": null,
+      "base": 9
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 500,
+        "denomination": "gp",
+        "description": "a gilded hourglass worth at least 500 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "8"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "willing",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "divination"
+  },
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.j7yIAbS0qYdUfdBE",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Foresight",
+      "img": "icons/magic/perception/third-eye-blue-red.webp",
+      "_id": "mwz9DqDEGc1XOeG6",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\", \"attack\"] }], \"note\": { \"rollMode\": 1, \"text\": \"You can’t be surprised and have advantage on attack rolls, ability checks, and saves. In addition, other creatures have disadvantage on attack rolls against you.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.039",
+        "createdTime": 1721445335955,
+        "modifiedTime": 1721445424711,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!j7yIAbS0qYdUfdBE.mwz9DqDEGc1XOeG6"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.039",
+    "createdTime": 1721445191061,
+    "modifiedTime": 1721446139866,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!j7yIAbS0qYdUfdBE"
+}
