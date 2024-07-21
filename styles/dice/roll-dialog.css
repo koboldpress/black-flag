@@ -1,8 +1,4 @@
-.black-flag.roll.dialog form {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-
+.black-flag.roll.dialog form, .black-flag.roll-configuration.application {
 	.formulas {
 		display: flex;
 		flex-direction: column;
@@ -19,12 +15,61 @@
 			background: rgba(255 255 255 / 0.5);
 			font-size: var(--font-size-16);
 			text-align: center;
-		
+
 			.formula-text {
 				flex-grow: 1;
 			}
 		}
 	}
+
+	.roll-notes {
+		label {
+			flex-wrap: nowrap;
+			align-items: center;
+			gap: 0.5rem;
+		}
+		p { margin: 0; }
+
+		.advantage-mode {
+			margin: 0;
+			contain: layout;
+			--icon-size: 25px;
+			block-size: var(--icon-size);
+			inline-size: var(--icon-size);
+
+			figcaption {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 25px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0;
+				padding: 0;
+				color: white;
+			}
+
+			.die-icon { --icon-size: inherit; }
+			&[data-advantage-mode="1"] .die-icon { --icon-fill: var(--die-green-color); }
+			&[data-advantage-mode="-1"] .die-icon { --icon-fill: var(--die-red-color); }
+		}
+	}
+
+	[data-application-part="buttons"] {
+		menu {
+			display: flex;
+			gap: 4px;
+			> li { flex: 1 1 33%; }
+		}
+	}
+}
+
+.black-flag.roll.dialog form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 
 	ul {
 		list-style: none;
@@ -65,43 +110,6 @@
 			li {
 				flex: 1 1 33%;
 			}
-		}
-	}
-
-	.roll-notes {
-		label {
-			flex-wrap: nowrap;
-			align-items: center;
-			gap: 0.5rem;
-		}
-		p {
-			margin: 0;
-		}
-	
-		.advantage-mode {
-			margin: 0;
-			contain: layout;
-			--icon-size: 25px;
-			block-size: var(--icon-size);
-			inline-size: var(--icon-size);
-
-			figcaption {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				height: 25px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin: 0;
-				padding: 0;
-				color: white;
-			}
-
-			.die-icon { --icon-size: inherit; }
-			&[data-advantage-mode="1"] .die-icon { --icon-fill: var(--die-green-color); }
-			&[data-advantage-mode="-1"] .die-icon { --icon-fill: var(--die-red-color); }
 		}
 	}
 }

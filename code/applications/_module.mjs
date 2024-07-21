@@ -75,6 +75,7 @@ export function registerCustomElements() {
 export { actor, components };
 export * as activity from "./activity/_module.mjs";
 export * as advancement from "./advancement/_module.mjs";
+export * as api from "./api/_module.mjs";
 export { default as BlackFlagCombatTracker } from "./combat-tracker.mjs";
 export { default as BlackFlagContextMenu } from "./context-menu.mjs";
 export { default as BlackFlagDialog } from "./dialog.mjs";

@@ -1,6 +1,9 @@
-.link-button, .unbutton, .heavy-button, .light-button {
+:is(html, .application) :is(.link-button, .unbutton, .heavy-button, .light-button) {
 	&[disabled] { cursor: default; }
-	&:hover, &:focus, &:focus-visible { box-shadow: unset; }
+	&:hover, &:focus, &:focus-visible {
+		box-shadow: unset;
+		outline: none;
+	}
 }
 
 .link-button {
@@ -33,10 +36,17 @@
 	}
 }
 
-.heavy-button, .light-button, .dialog .dialog-buttons button:is(.heavy-button, .light-button) {
+.heavy-button, .light-button,
+.dialog .dialog-buttons button:is(.heavy-button, .light-button),
+.application button:is(.heavy-button, .light-button) {
 	position: relative;
 	border: 1px solid var(--bf-color-border-blue);
 	border-radius: var(--bf-button-border-radius);
+	padding-block: 1px;
+	padding-inline: 8px;
+	font-family: var(--bf-font-primary);
+	font-size: var(--font-size-14);
+	font-weight: 550;
 
 	&::after {
 		content: "";
@@ -53,7 +63,7 @@
 	}
 }
 
-.heavy-button, .dialog .dialog-buttons button.heavy-button {
+.heavy-button, .dialog .dialog-buttons button.heavy-button, .application button.heavy-button {
 	background: var(--bf-button-background-color-regular);
 	color: var(--bf-button-text-color-regular);
 
@@ -68,7 +78,7 @@
 	}
 }
 
-.light-button, .dialog .dialog-buttons button.light-button {
+.light-button, .dialog .dialog-buttons button.light-button, .application button.light-button {
 	background: var(--bf-button-background-color-focus);
 	color: var(--bf-button-text-color-focus);
 
@@ -177,7 +187,7 @@
 	}
 }
 
-.unlist {
+.unlist, .application .unlist {
 	margin: 0;
 	padding: 0;
 	list-style: none;

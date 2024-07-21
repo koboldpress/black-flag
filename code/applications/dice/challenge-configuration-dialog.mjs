@@ -8,36 +8,45 @@ import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
 /**
  * Roll configuration dialog for Challenge Rolls.
  *
- * @param {ChallengeRollConfiguration[]} [rollConfig=[]] - Initial roll configurations.
+ * @param {ChallengeRollConfiguration} [config=[]] - Initial roll configuration.
+ * @param {BasicRollMessageConfiguration} [message={}] - Message configuration.
  * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class ChallengeRollConfigurationDialog extends BasicRollConfigurationDialog {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			rollType: CONFIG.Dice.ChallengeRoll
-		});
+	/** @override */
+	static get rollType() {
+		return CONFIG.Dice.ChallengeRoll;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	_getButtons() {
-		return {
-			advantage: { label: game.i18n.localize("BF.Roll.Action.Advantage.Label") },
-			normal: { label: game.i18n.localize("BF.Roll.Action.Normal.Label") },
-			disadvantage: { label: game.i18n.localize("BF.Roll.Action.Disadvantage.Label") }
+	/** @override */
+	_prepareButtonsContext(context, options) {
+		context.buttons = {
+			advantage: {
+				icon: '<i class="fa-solid fa-square-caret-up"></i>',
+				label: game.i18n.localize("BF.Roll.Action.Advantage.Label")
+			},
+			normal: {
+				icon: '<i class="fa-solid fa-dice"></i>',
+				label: game.i18n.localize("BF.Roll.Action.Normal.Label")
+			},
+			disadvantage: {
+				icon: '<i class="fa-solid fa-square-caret-down"></i>',
+				label: game.i18n.localize("BF.Roll.Action.Disadvantage.Label")
+			}
 		};
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options = {}) {
-		const context = super.getData(options);
-		context.rollNotes.forEach(n => {
+	_prepareNotesContext(context, options) {
+		context = super._prepareNotesContext(context, options);
+		context.notes.forEach(n => {
 			switch (n.note?.rollMode) {
 				case CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE:
 					return (n.advantageAbbreviation = "BF.Roll.Action.Advantage.Abbreviation");

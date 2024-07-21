@@ -117,7 +117,7 @@ export default class BasicRoll extends Roll {
 		if (rolls?.length && message.create !== false) {
 			if (foundry.utils.getType(message.preCreate) === "function") message.preCreate(rolls, message);
 			await this.toMessage(rolls, message.data, {
-				rollMode: message.rollMode ?? rolls.reduce(r => mode ?? r.options.rollMode)
+				rollMode: message.rollMode ?? rolls.reduce((mode, r) => mode ?? r.options.rollMode)
 			});
 		}
 

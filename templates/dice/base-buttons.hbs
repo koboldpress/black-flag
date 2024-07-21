@@ -1,0 +1,12 @@
+<nav>
+	<menu class="unlist">
+		{{#each buttons}}
+			<li>
+				<button type="submit" class="light-button" data-action="{{ @key }}">
+					{{{ icon }}}
+					{{{ label }}}
+				</button>
+			</li>
+		{{/each}}
+	</menu>
+</nav>

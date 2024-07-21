@@ -1,0 +1,16 @@
+<fieldset class="formulas">
+	<legend>{{ localize "BF.Roll.Formula.Label" }}</legend>
+	<ul class="formulas unlist">
+		{{#each rolls}}
+			<li class="formula">
+				<span class="formula-text">{{ formula }}</span>
+				{{#with (lookup (lookup @root.CONFIG.damageTypes options.damageType) "label") as |type|}}
+					<span class="damage-type">{{ localize type }}</span>
+				{{/with}}
+				{{#with (lookup (lookup @root.CONFIG.healingTypes options.damageType) "label") as |type|}}
+					<span class="damage-type">{{ localize type }}</span>
+				{{/with}}
+			</li>
+		{{/each}}
+	</ul>
+</fieldset>

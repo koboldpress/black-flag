@@ -4,39 +4,37 @@ import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.m
  * Extended roll configuration dialog that allows selecting abilities.
  */
 export default class SkillRollConfigurationDialog extends ChallengeRollConfigurationDialog {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			template: "systems/black-flag/templates/dice/skill-roll-dialog.hbs"
-		});
-	}
+	/** @override */
+	static PARTS = {
+		...super.PARTS,
+		configuration: {
+			template: "systems/black-flag/templates/dice/skill-configuration.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options = {}) {
-		return foundry.utils.mergeObject(
-			{
-				abilities: Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, ability]) => {
-					obj[key] = ability.labels.full;
-					return obj;
-				}, {}),
-				selectedAbility: this.rolls[0].data.abilityId
-			},
-			super.getData(options)
-		);
+	async _prepareConfigurationContext(context, options) {
+		await super._prepareConfigurationContext(context, options);
+		context.ability = this.rolls[0]?.data.abilityId;
+		context.chooseAbility = this.options.chooseAbility;
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_buildConfig(config, formData, index) {
+		config = super._buildConfig(config, formData, index);
+		if (!this.options.buildConfig) return config;
+
 		const { rollConfig, rollNotes } = this.options.buildConfig(this.config, config, formData, index);
-		this.options.rollNotes = rollNotes;
+		this.notes = rollNotes;
 		return rollConfig;
 	}
 }

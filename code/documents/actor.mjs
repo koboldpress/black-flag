@@ -1390,7 +1390,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const rollData = this.getRollData();
 
 		const prepareSkillConfig = (baseConfig, rollConfig, formData, index) => {
-			const abilityId = formData?.ability ?? baseConfig.ability ?? skill.ability;
+			const abilityId = formData?.get("ability") ?? baseConfig.ability ?? skill.ability;
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
@@ -1510,7 +1510,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const rollData = this.getRollData();
 
 		const prepareToolConfig = (baseConfig, rollConfig, formData, index) => {
-			const abilityId = formData?.ability ?? baseConfig.ability ?? tool.ability ?? "intelligence";
+			const abilityId = formData?.get("ability") ?? baseConfig.ability ?? tool.ability ?? "intelligence";
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
@@ -1630,7 +1630,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const rollData = this.getRollData();
 
 		const prepareVehicleConfig = (baseConfig, rollConfig, formData, index) => {
-			const abilityId = formData?.ability ?? baseConfig.ability ?? vehicle.ability ?? "dexterity";
+			const abilityId = formData?.get("ability") ?? baseConfig.ability ?? vehicle.ability ?? "dexterity";
 			const ability = this.system.abilities[abilityId];
 
 			const modifierData = [
