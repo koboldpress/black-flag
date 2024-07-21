@@ -103,7 +103,12 @@ export class ExtendedDamageData extends SimpleDamageData {
 
 		// If dice count scaling, increase the count on the first die rolled
 		if (this.scaling?.number) {
-			formula = formula.replace(/^(\d)+d/, (match, number) => `${Number(number) + this.scaling.number * increase}d`);
+			if (this.custom?.enabled) {
+				formula = formula.replace(/^(\d)+d/, (match, number) => `${Number(number) + this.scaling.number * increase}d`);
+			} else if (this.denomination) {
+				formula = `${this.number + this.scaling.number * increase}d${this.denomination}`;
+				if (this.bonus) formula = `${formula} + ${this.bonus}`;
+			}
 		}
 
 		// If custom scaling included, modify to match increase and append for formula

@@ -168,12 +168,15 @@ export default class DamageActivity extends Activity {
 				},
 				rollData
 			);
+			const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? 0);
+			if (scaledFormula) parts.unshift(scaledFormula);
+			if (!parts.length) continue;
 			rollConfig.rolls.push(
 				foundry.utils.mergeObject(
 					{
 						data,
 						modifierData,
-						parts: [damage.scaledFormula(rollConfig.scaling ?? 0), ...(parts ?? [])],
+						parts,
 						options: {
 							damageType: damage.type,
 							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
