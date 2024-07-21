@@ -1,0 +1,31 @@
+<div class="damage dice-roll">
+	<div class="dice-result">
+		<div class="dice-formula">{{ formula }}</div>
+		<div class="dice-tooltip-collapser">
+			<div class="dice-tooltip">
+				{{#each parts}}
+					<div class="tooltip-part">
+						<div class="dice">
+							<ol class="dice-rolls">
+								{{#each dice}}
+									<li class="roll {{ classes }}">{{ result }}</li>
+								{{/each}}
+								{{#if constant}}
+									<li class="constant">{{ blackFlag-signedNumber constant }}</li>
+								{{/if}}
+							</ol>
+							<div class="total">
+								{{#if config.icon}}
+									<blackFlag-icon src="{{ config.icon }}" alt="{{ localize config.label }}"></blackFlag-icon>
+								{{/if}}
+								<span class="label">{{ localize config.label }}</span>
+								<span class="value">{{ total }}</span>
+							</div>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		<div class="dice-total">{{ total }}</div>
+	</div>
+</div>

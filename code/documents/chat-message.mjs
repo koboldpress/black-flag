@@ -1,4 +1,5 @@
 import MessageLuckElement from "../applications/components/message-luck.mjs";
+import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
 
 /**
  * Extended version of ChatMessage to highlight critical damage, support luck modifications, and other system features.
@@ -40,7 +41,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (this.isRoll) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
-			this._renderDamageUI(html);
+			await this._renderDamageUI(html);
 		}
 
 		return jQuery;
@@ -91,32 +92,71 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * Display total damage and apply damage controls.
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
-	_renderDamageUI(html) {
-		if (!this.rolls.every(r => r instanceof CONFIG.Dice.DamageRoll)) return;
-		if (this.rolls.length > 1) {
-			const total = this.rolls.reduce((t, r) => t + r.total, 0);
-			html.querySelector(".message-content")?.insertAdjacentHTML(
-				"beforeend",
-				`
-				<div class="damage dice-roll">
-				  <div class="dice-result">
-					  <h4 class="dice-total damage-total">${game.i18n.localize("Total")}: ${total}</h4>
-				  </div>
-				</div>
-			`
-			);
-		}
+	async _renderDamageUI(html) {
+		const rolls = this.rolls.filter(r => r instanceof CONFIG.Dice.DamageRoll);
+		if (!rolls.length) return;
+
+		const aggregatedRolls = CONFIG.BlackFlag.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
+		const context = aggregatedRolls.reduce(
+			(obj, r) => {
+				obj.formulaParts.push(CONFIG.BlackFlag.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
+				obj.total += r.total;
+				obj.parts.push(this._splitDamageRoll(r));
+				return obj;
+			},
+			{ formulaParts: [], total: 0, parts: [] }
+		);
+		context.formula = context.formulaParts.join("").replace(/^ \+ /, "");
+		const rendered = await renderTemplate(`systems/${game.system.id}/templates/chat/damage-tooltip.hbs`, context);
+		html.querySelectorAll(".message-content .dice-roll").forEach(e => e.remove());
+		html.querySelector(".message-content").insertAdjacentHTML("afterbegin", rendered);
 
 		// TODO: Add option to make this optionally visible to players
 		if (game.user.isGM) {
 			const damageApplication = document.createElement("blackFlag-damageApplication");
-			damageApplication.damages = this.rolls.map(roll => ({
+			damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
 				value: roll.total,
 				type: roll.options.damageType,
 				properties: new Set(roll.options.properties ?? [])
 			}));
 			html.querySelector(".message-content").appendChild(damageApplication);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Split a damage roll into dice and constant components.
+	 * @param {DamageRoll} roll - Roll to split.
+	 * @returns {{ constant: number, dice: { result: string, classes: string }[], total: number, type: string }}
+	 * @protected
+	 */
+	_splitDamageRoll(roll) {
+		const data = { constant: 0, dice: [], total: roll.total, type: roll.options.damageType };
+		data.config = CONFIG.BlackFlag.damageTypes[data.type] ?? CONFIG.BlackFlag.healingTypes[data.type];
+		let hasMultiplication = false;
+		for (let i = roll.terms.length - 1; i >= 0; ) {
+			const term = roll.terms[i--];
+			if (!(term instanceof foundry.dice.terms.NumericTerm) && !(term instanceof foundry.dice.terms.DiceTerm)) continue;
+			const value = term.total;
+			if (term instanceof foundry.dice.terms.DiceTerm)
+				data.dice.push(
+					...term.results.map(r => ({
+						result: term.getResultLabel(r),
+						classes: term.getResultCSS(r).filterJoin(" ")
+					}))
+				);
+			let multiplier = 1;
+			let operator = roll.terms[i];
+			while (operator instanceof foundry.dice.terms.OperatorTerm) {
+				if (!["+", "-"].includes(operator.operator)) hasMultiplication = true;
+				if (operator.operator === "-") multiplier *= -1;
+				operator = roll.terms[--i];
+			}
+			if (term instanceof foundry.dice.terms.NumericTerm) data.constant += value * multiplier;
+		}
+		if (hasMultiplication) data.constant = null;
+		return data;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

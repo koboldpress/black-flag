@@ -19,3 +19,4 @@ export function registerDice() {
 }
 
 export { BasicRoll, ChallengeDie, ChallengeRoll, DamageRoll };
+export { default as aggregateDamageRolls } from "./aggregate-damage-rolls.mjs";

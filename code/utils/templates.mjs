@@ -1,7 +1,7 @@
 import NotificationTooltip from "../applications/notification-tooltip.mjs";
 import { linkForUUID } from "./document.mjs";
 import { makeLabel } from "./localization.mjs";
-import { numberFormat } from "./number.mjs";
+import { numberFormat, numberParts } from "./number.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                   Handlebars Helpers                  */
@@ -205,7 +205,9 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-linkForUUID": (uuid, options) => linkForUUID(uuid, options.hash),
 		"blackFlag-multiSelect": multiSelect,
 		"blackFlag-notificationBadge": notificationBadge,
-		"blackFlag-number": (number, options) => numberFormat(number, options.hash)
+		"blackFlag-number": (number, options) => numberFormat(number, options.hash),
+		"blackFlag-signedNumber": (number, options) =>
+			new Handlebars.SafeString(numberParts(number, { sign: true, ...options.hash }))
 	});
 }
 

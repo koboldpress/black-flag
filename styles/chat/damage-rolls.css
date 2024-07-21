@@ -1,4 +1,54 @@
-.chat-message .damage .damage-total {
-	font-size: var(--font-size-16);
-	font-weight: 400;
+.chat-message .damage.dice-roll {
+	.dice-rolls {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2px;
+		align-items: center;
+	}
+	.tooltip-part {
+		padding-block-start: 2px;
+		padding-block-end: 2px;
+		&:not(:last-of-type) {
+			border-block-end: 1px dashed var(--bf-color-border-gray);
+		}
+	}
+	.dice {
+		display: grid;
+		grid-template-columns: auto 45px;
+		align-items: center;
+	}
+	.total {
+		--icon-fill: rgb(0 0 0 / .15);
+		--icon-width: 30px;
+		--icon-height: 30px;
+
+		display: grid;
+		grid-template-areas: "label" "value";
+		grid-template-rows: [start] min-content auto [end];
+		align-items: center;
+		justify-content: center;
+		font-family: var(--bf-font-primary);
+
+		> * { grid-column: 1; }
+		blackFlag-icon {
+			grid-row: 1 / -1;
+			display: block;
+		}
+		.label {
+			grid-row: 1;
+			font-size: var(--font-size-10);
+			font-stretch: condensed;
+			font-weight: 400;
+			line-height: 1em;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.value {
+			grid-row: 2;
+			font-size: var(--font-size-16);
+			font-weight: 800;
+			line-height: 1em;
+			text-align: center;
+		}
+	}
 }

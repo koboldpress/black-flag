@@ -40,30 +40,22 @@ export function getNumberFormatter(options={}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
- * Format a number based on the current locale.
- * @param {number} value - A numeric value to format.
- * @param {object} [options={}]
- * @param {number} [options.decimals] - Number of decimal digits to display.
- * @param {number} [options.digits] - Number of digits before the decimal point to display.
- * @param {boolean} [options.ordinal] - Produce an ordinal version of the number.
- * @param {boolean} [options.sign] - Should the sign always be displayed?
- * @param {boolean} [options.spelledOut] - Should small numbers be spelled out?
- * @param {string} [options.unit] - What unit should be displayed?
- * @param {string} [options.unitDisplay] - Unit display style.
- * @returns {string}
+ * @typedef {NumberFormattingOptions}
+ * @param {number} decimals - Number of decimal digits to display.
+ * @param {number} digits - Number of digits before the decimal point to display.
+ * @param {boolean} ordinal - Produce an ordinal version of the number.
+ * @param {boolean} sign - Should the sign always be displayed?
+ * @param {boolean} spelledOut - Should small numbers be spelled out?
+ * @param {string} unit - What unit should be displayed?
+ * @param {string} unitDisplay - Unit display style.
  */
-export function numberFormat(value, options={}) {
-	value = Number(value);
 
-	if ( !Number.isFinite(value) ) {
-		value = "∞";
-		if ( !options.spelledOut ) return value;
-	}
-	if ( options.spelledOut ) {
-		const key = `BF.Number[${value}]`;
-		if ( game.i18n.has(key) ) return game.i18n.localize(key);
-	}
-
+/**
+ * Take number formatting options and convert them into a format usable by `Intl.NumberFormat`.
+ * @param {NumberFormattingOptions} options
+ * @returns {object}
+ */
+function _prepareFormattingOptions(options) {
 	const formatterOptions = {};
 	if ( options.sign ) formatterOptions.signDisplay = "always";
 	if ( options.decimals !== undefined ) {
@@ -80,8 +72,30 @@ export function numberFormat(value, options={}) {
 		formatterOptions.unitDisplay = options.unitDisplay;
 		options.unitFallback = false;
 	}
+	return formatterOptions;
+}
 
-	let formatted = getNumberFormatter(formatterOptions).format(value);
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Format a number based on the current locale.
+ * @param {number} value - A number for format.
+ * @param {NumberFormattingOptions} [options] - Additional formatting options.
+ * @returns {string}
+ */
+export function numberFormat(value, options={}) {
+	value = Number(value);
+
+	if ( !Number.isFinite(value) ) {
+		value = "∞";
+		if ( !options.spelledOut ) return value;
+	}
+	if ( options.spelledOut ) {
+		const key = `BF.Number[${value}]`;
+		if ( game.i18n.has(key) ) return game.i18n.localize(key);
+	}
+
+	let formatted = getNumberFormatter(_prepareFormattingOptions(options)).format(value);
 
 	if ( options.ordinal ) {
 		const rule = getPluralRules({ type: "ordinal" }).select(value);
@@ -95,4 +109,17 @@ export function numberFormat(value, options={}) {
 	}
 
 	return formatted;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Produce a number with the parts wrapped in their own spans.
+ * @param {number} value - A number for format.
+ * @param {NumberFormattingOptions} [options] - Additional formatting options.
+ * @returns {string}
+ */
+export function numberParts(value, options) {
+	const parts = getNumberFormatter(_prepareFormattingOptions(options)).formatToParts(value);
+	return parts.reduce((str, { type, value }) => `${str}<span class="${type}">${value}</span>`, "");
 }

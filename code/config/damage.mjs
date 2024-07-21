@@ -1,6 +1,14 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Should damages be displayed pre-aggregated in the chat?
+ * @type {boolean}
+ */
+export const aggregateDamageDisplay = true;
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Different ways damage can be scaled.
  * @enum {LabeledConfiguration}
  */
