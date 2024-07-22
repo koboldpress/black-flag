@@ -28,7 +28,7 @@ export class SimpleDamageData extends foundry.abstract.DataModel {
 			number: new NumberField({ min: 0, integer: true, label: "BF.Die.Number.Label" }),
 			denomination: new NumberField({ min: 0, integer: true, label: "BF.Die.Denomination.Label" }),
 			type: new StringField({ label: "BF.Damage.Type.Label" }),
-			additionalTypes: new SetField(new StringField())
+			additionalTypes: new SetField(new StringField(), { required: false })
 		};
 	}
 
