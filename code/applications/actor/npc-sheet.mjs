@@ -119,10 +119,10 @@ export default class NPCSheet extends BaseActorSheet {
 	/** @override */
 	async prepareActions(context) {
 		context.actions = Object.entries(CONFIG.BlackFlag.actionTypes.localized).reduce((obj, [key, label]) => {
-			obj[key] = { label, activities: [] };
+			obj[key] = { label, items: [] };
 			return obj;
 		}, {});
-		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), activities: [] };
+		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), items: [] };
 		context.passive = [];
 		context.spellcasting = { uses: {} };
 		for (const item of this.actor.items) {
@@ -131,25 +131,13 @@ export default class NPCSheet extends BaseActorSheet {
 				const key = !uses.max ? "atwill" : `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
 				context.spellcasting.uses[key] ??= { spells: [] };
 				context.spellcasting.uses[key].spells.push(item);
-			} else if (item.system.activities?.size) {
-				for (const activity of item.system.actions?.() ?? []) {
-					const data = {
-						activity,
-						item,
-						description: await TextEditor.enrichHTML(activity.description || item.system.description.value, {
-							secrets: false,
-							rollData: item.getRollData(),
-							async: true,
-							relativeTo: activity
-						}),
-						uses: this.prepareUsesDisplay(item, activity)
-					};
-					if (activity.actionType === "free") context.passive.push(data);
-					else if (activity.actionType in context.actions) context.actions[activity.actionType].activities.push(data);
-					else context.actions.other.activities.push(data);
-				}
-			} else if (item.type === "feature") {
-				context.passive.push({
+			} else {
+				const activities = Array.from(item.system.activities ?? []);
+				const onlyActivity = activities.length === 1 ? activities[0] : undefined;
+				const actionTypes = new Set(activities.map(a => a.actionType));
+				const firstActionType = actionTypes.first();
+				const data = {
+					activity: onlyActivity,
 					item,
 					description: await TextEditor.enrichHTML(item.system.description.value, {
 						secrets: false,
@@ -157,8 +145,12 @@ export default class NPCSheet extends BaseActorSheet {
 						async: true,
 						relativeTo: item
 					}),
-					uses: this.prepareUsesDisplay(item)
-				});
+					uses: this.prepareUsesDisplay(item, onlyActivity)
+				};
+				if (actionTypes.has("action")) context.actions.action.items.push(data);
+				else if (firstActionType === "free" || !actionTypes.size) context.passive.push(data);
+				else if (firstActionType in context.actions) context.actions[firstActionType].items.push(data);
+				else context.actions.other.items.push(data);
 			}
 		}
 
@@ -167,9 +159,8 @@ export default class NPCSheet extends BaseActorSheet {
 		// Sorting & Clearing
 		context.passive.sort((lhs, rhs) => lhs.item.sort - rhs.item.sort);
 		for (const [key, value] of Object.entries(context.actions)) {
-			if (!value.activities.length && (key !== "action" || !context.spellcasting)) delete context.actions[key];
-			else
-				context.actions[key].activities.sort((lhs, rhs) => (lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity));
+			if (!value.items.length && (key !== "action" || !context.spellcasting)) delete context.actions[key];
+			else context.actions[key].items.sort((lhs, rhs) => (lhs.item?.sort ?? Infinity) - (rhs.item?.sort ?? Infinity));
 		}
 
 		// Legendary Actions

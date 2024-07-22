@@ -213,7 +213,7 @@
 		</div>
 
 		{{#each actions}}
-			{{#if (or activities.length @root.editable)}}
+			{{#if (or items.length @root.editable)}}
 				<div class="features {{ @key }}">
 					<h2>
 						{{ label }}
@@ -234,8 +234,9 @@
 					{{#if description}}
 						<p>{{ description }}</p>
 					{{/if}}
-					{{#each activities}}
-						<div class="feature" data-item-id="{{ item.id }}" data-activity-id="{{ activity.id }}">
+					{{#each items}}
+						<div class="feature" data-item-id="{{ item.id }}"
+						     {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
 							<span class="controls">
 								{{#if @root.editable}}
 									<button type="button" class="link-button" data-action="edit"

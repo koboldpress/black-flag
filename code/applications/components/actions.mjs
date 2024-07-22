@@ -138,10 +138,12 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 		});
 		if (target.dispatchEvent(event) === false) return;
 
-		const dataset = (target.closest("[data-activity], [data-activity-id], [data-item-id]") || target).dataset;
+		const dataset = (
+			target.closest("[data-activity], [data-activity-id], [data-activity-uuid], [data-item-id]") || target
+		).dataset;
 		let activity;
 		const item = this.actor.items.get(dataset.itemId);
-		if (dataset.activity) activity = await fromUuid(dataset.activity);
+		if (dataset.activityUuid || dataset.activity) activity = await fromUuid(dataset.activityUuid ?? dataset.activity);
 		else activity = item?.system.activities?.get(dataset.activityId);
 
 		switch (action) {
