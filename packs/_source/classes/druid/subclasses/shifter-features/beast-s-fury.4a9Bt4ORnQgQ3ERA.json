@@ -26,8 +26,19 @@
                 "number": 1,
                 "denomination": 6,
                 "bonus": "@prof",
-                "custom": "",
-                "type": ""
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "variable",
+                "additionalTypes": [
+                  "bludgeoning",
+                  "piercing",
+                  "slashing"
+                ],
+                "scaling": {
+                  "number": 1
+                }
               }
             ]
           },
@@ -50,7 +61,8 @@
         },
         "range": {
           "units": "foot",
-          "value": "5"
+          "value": "5",
+          "special": ""
         },
         "target": {
           "template": {
@@ -61,7 +73,8 @@
           "affects": {
             "choice": false,
             "type": "creature",
-            "count": "1"
+            "count": "1",
+            "special": ""
           },
           "override": false
         },
@@ -117,10 +130,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.033",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.039",
+    "coreVersion": "12.329",
     "createdTime": 1717790984532,
-    "modifiedTime": 1717791778581,
+    "modifiedTime": 1721670598771,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
