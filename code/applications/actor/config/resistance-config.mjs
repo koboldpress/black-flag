@@ -27,25 +27,20 @@ export default class ResistanceConfig extends BaseConfig {
 	/** @inheritDoc */
 	async getData(options) {
 		const context = await super.getData(options);
-		const traits = context.source.traits ?? {};
-		context.damageTypes = Object.entries(CONFIG.BlackFlag.damageTypes.localized).reduce((obj, [key, label]) => {
-			obj[key] = {
-				label,
-				resistant: traits.damage.resistances?.value?.includes(key),
-				immune: traits.damage.immunities?.value?.includes(key),
-				vulnerable: traits.damage.vulnerabilities?.value?.includes(key)
-			};
-			return obj;
-		}, {});
-		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).reduce((obj, [key, label]) => {
-			obj[key] = {
-				label,
-				resistant: traits.condition.resistances?.value?.includes(key),
-				immune: traits.condition.immunities?.value?.includes(key),
-				vulnerable: traits.condition.vulnerabilities?.value?.includes(key)
-			};
-			return obj;
-		}, {});
+		const makeEntry = (key, label, type) => ({
+			key,
+			label,
+			resistant: context.source.traits?.[type]?.resistances?.value?.includes(key),
+			immune: context.source.traits?.[type]?.immunities?.value?.includes(key),
+			vulnerable: context.source.traits?.[type]?.vulnerabilities?.value?.includes(key)
+		});
+		context.damageTypes = [
+			makeEntry("all", game.i18n.localize("BF.Resistance.AllDamage"), "damage"),
+			...Object.entries(CONFIG.BlackFlag.damageTypes.localized).map(([key, label]) => makeEntry(key, label, "damage"))
+		];
+		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).map(([key, label]) =>
+			makeEntry(key, label, "condition")
+		);
 		return context;
 	}
 

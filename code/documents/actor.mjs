@@ -283,29 +283,27 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const multiplier = options.multiplier ?? 1;
 
-		const hasEffect = (category, type, properties) => {
+		const hasEffect = (category, type, properties, skipDowngrade) => {
 			if (
 				category === "resistance" &&
-				downgrade(type) &&
-				hasEffect("immunity", type, properties) &&
-				!ignore("immunity", type, true)
+				((downgrade(type) && hasEffect("immunity", type, properties, true)) ||
+					(downgrade("all") && hasEffect("immunity", "all", properties, true)))
 			)
 				return true;
-			// TODO: Handle "all" types
 			const config =
 				this.system.traits?.damage?.[
 					{
 						immunity: "immunities",
 						resistance: "resistances",
-						vulnerable: "vulnerabilities"
+						vulnerability: "vulnerabilities"
 					}[category]
 				];
-			if (!config?.value.has(type)) return false;
+			if (config?.value.has("all") && !ignore(category, "all", skipDowngrade)) return true;
+			if (!config?.value.has(type) || ignore(category, type, skipDowngrade)) return false;
 			// TODO: Handle properties
 			return true;
 		};
 
-		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
 		const ignore = (category, type, skipDowngrade) => {
 			return (
 				options.ignore === true ||
@@ -315,6 +313,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 				(category === "resistance" && downgrade(type) && !hasEffect("immunity", type))
 			);
 		};
+
+		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
 
 		const skipped = type => {
 			if (options.only === "damage") return type in CONFIG.BlackFlag.healingTypes;
@@ -326,7 +326,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			d.active ??= {};
 
 			// Skip damage types with immunity
-			if (skipped(d.type) || (!ignore("immunity", d.type) && hasEffect("immunity", d.type, d.properties))) {
+			if (skipped(d.type) || hasEffect("immunity", d.type, d.properties)) {
 				d.value = 0;
 				d.active.multiplier = 0;
 				d.active.immunity = true;
@@ -338,13 +338,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			let damageMultiplier = multiplier;
 
 			// Apply damage resistance
-			if (!ignore("resistance", d.type) && hasEffect("resistance", d.type, d.properties)) {
+			if (hasEffect("resistance", d.type, d.properties)) {
 				damageMultiplier /= 2;
 				d.active.resistance = true;
 			}
 
 			// Apply damage vulnerability
-			if (!ignore("vulnerability", d.type) && hasEffect("vulnerability", d.type, d.properties)) {
+			if (hasEffect("vulnerability", d.type, d.properties)) {
 				damageMultiplier *= 2;
 				d.active.vulnerability = true;
 			}

@@ -243,12 +243,10 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Resistances
 		const resistances = [
-			...Array.from(traits.damage.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-			),
-			...Array.from(traits.condition.resistances.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
-			)
+			...(traits.damage.resistances.value.has("all")
+				? [game.i18n.localize("BF.Resistance.AllDamage")]
+				: Array.from(traits.damage.resistances.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
+			...Array.from(traits.condition.resistances.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
 		].filter(t => t);
 		if (resistances.length || this.modes.editing)
 			context.traits.push({
@@ -260,10 +258,10 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Immunities
 		const immunities = [
-			...Array.from(traits.damage.immunities.value).map(t => game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)),
-			...Array.from(traits.condition.immunities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
-			)
+			...(traits.damage.immunities.value.has("all")
+				? [game.i18n.localize("BF.Resistance.AllDamage")]
+				: Array.from(traits.damage.immunities.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
+			...Array.from(traits.condition.immunities.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
 		].filter(t => t);
 		if (immunities.length || this.modes.editing)
 			context.traits.push({
@@ -275,12 +273,10 @@ export default class PCSheet extends BaseActorSheet {
 
 		// Vulnerabilities
 		const vulnerabilities = [
-			...Array.from(traits.damage.vulnerabilities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.damageTypes[t].label)
-			),
-			...Array.from(traits.condition.vulnerabilities.value).map(t =>
-				game.i18n.localize(CONFIG.BlackFlag.conditions[t].label)
-			)
+			...(traits.damage.vulnerabilities.value.has("all")
+				? [game.i18n.localize("BF.Resistance.AllDamage")]
+				: Array.from(traits.damage.vulnerabilities.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
+			...Array.from(traits.condition.vulnerabilities.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
 		].filter(t => t);
 		if (vulnerabilities.length || this.modes.editing)
 			context.traits.push({
