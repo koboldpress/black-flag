@@ -31,7 +31,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 		this.notes = this.options.rollNotes;
 		this.message = message;
-		this.rolls = this._buildRolls(foundry.utils.deepClone(this.config));
+		this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -145,6 +145,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
 	 * @returns {ApplicationRenderContext}
+	 * @protected
 	 */
 	_prepareButtonsContext(context, options) {
 		context.buttons = {
@@ -163,6 +164,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
 	 * @returns {ApplicationRenderContext}
+	 * @protected
 	 */
 	_prepareConfigurationContext(context, options) {
 		context.rollMode = this.message.rollMode ?? this.options.default?.rollMode;
@@ -177,6 +179,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
 	 * @returns {ApplicationRenderContext}
+	 * @protected
 	 */
 	_prepareFormulasContext(context, options) {
 		context.rolls = this.rolls;
@@ -190,6 +193,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
 	 * @returns {ApplicationRenderContext}
+	 * @protected
 	 */
 	_prepareNotesContext(context, options) {
 		context.notes = foundry.utils.deepClone(this.notes ?? []);
@@ -205,9 +209,9 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {BasicRollProcessConfiguration[]} config - Roll process configuration data.
 	 * @param {FormDataExtended} [formData] - Data provided by the configuration form.
 	 * @returns {BasicRoll[]}
-	 * @internal
+	 * @private
 	 */
-	_buildRolls(config, formData) {
+	#buildRolls(config, formData) {
 		const RollType = this.rollType;
 		return config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
 	}
@@ -259,6 +263,15 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Rebuild rolls based on an updated config and re-render the dialog.
+	 */
+	rebuild() {
+		this._onChangeForm(this.options.form, new Event("change"));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -282,8 +295,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 		const formData = new FormDataExtended(this.element);
 		if (formData.has("rollMode")) this.message.rollMode = formData.get("rollMode");
-		this.rolls = this._buildRolls(foundry.utils.deepClone(this.config), formData);
-		console.log("_onChangeForm");
+		this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config), formData);
 		this.render({ parts: ["formulas", "notes"] });
 	}
 
