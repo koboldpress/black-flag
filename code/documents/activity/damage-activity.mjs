@@ -179,6 +179,7 @@ export default class DamageActivity extends Activity {
 						parts,
 						options: {
 							damageType: damage.type,
+							damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
 							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 								rollData
 							})

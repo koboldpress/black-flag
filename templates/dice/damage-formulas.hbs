@@ -3,13 +3,23 @@
 	<ul class="formulas unlist">
 		{{#each rolls}}
 			<li class="formula">
-				<span class="formula-text">{{ formula }}</span>
-				{{#with (lookup (lookup @root.CONFIG.damageTypes options.damageType) "label") as |type|}}
-					<span class="damage-type">{{ localize type }}</span>
-				{{/with}}
-				{{#with (lookup (lookup @root.CONFIG.healingTypes options.damageType) "label") as |type|}}
-					<span class="damage-type">{{ localize type }}</span>
-				{{/with}}
+				<div class="formula-text">{{ roll.formula }}</div>
+				<div class="formula-situational">
+					<input type="text" name="roll.{{ @index }}.situational" value="{{ roll.data.situational }}"
+					       placeholder="{{ localize 'BF.Roll.Configuration.Situational' }}">
+				</div>
+				<div class="formula-damage-type">
+					{{#if damageConfig.icon}}
+						<blackFlag-icon src="{{ damageConfig.icon }}" alt="{{ localize damageConfig.label }}"></blackFlag-icon>
+					{{/if}}
+					{{#if damageTypes}}
+						<select name="roll.{{ @index }}.damageType">
+							{{ selectOptions damageTypes selected=roll.options.damageType }}
+						</select>
+					{{else}}
+						<span class="label">{{ localize damageConfig.label }}</span>
+					{{/if}}
+				</div>
 			</li>
 		{{/each}}
 	</ul>

@@ -1,6 +1,6 @@
 import FormulaField from "./formula-field.mjs";
 
-const { BooleanField, EmbeddedDataField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing damage data.
@@ -15,6 +15,11 @@ export default class DamageField extends EmbeddedDataField {
 
 /**
  * Simple version of damage data used in weapons with just the die count, denomination, and damage type.
+ *
+ * @property {number} number - Number of dice to roll.
+ * @property {number} denomination - Die denomination to roll.
+ * @property {string} type - Damage type.
+ * @property {Set<string>} additionalTypes - If damage type is "variable", damage types that can be chosen.
  */
 export class SimpleDamageData extends foundry.abstract.DataModel {
 	/** @override */
@@ -22,7 +27,8 @@ export class SimpleDamageData extends foundry.abstract.DataModel {
 		return {
 			number: new NumberField({ min: 0, integer: true, label: "BF.Die.Number.Label" }),
 			denomination: new NumberField({ min: 0, integer: true, label: "BF.Die.Denomination.Label" }),
-			type: new StringField({ label: "BF.Damage.Type.Label" })
+			type: new StringField({ label: "BF.Damage.Type.Label" }),
+			additionalTypes: new SetField(new StringField())
 		};
 	}
 
@@ -43,6 +49,15 @@ export class SimpleDamageData extends foundry.abstract.DataModel {
 
 /**
  * Extended version of damage data used in activities with support for bonuses, custom formulas, and scaling.
+ *
+ * @property {string} bonus - Bonus added to the damage.
+ * @property {object} custom
+ * @property {boolean} custom.enabled - Should the custom formula be used?
+ * @property {string} custom.formula - Custom damage formula.
+ * @property {object} scaling
+ * @property {string} scaling.mode - How the damage scales in relation with levels.
+ * @property {number} scaling.number - Number of dice to add per scaling level.
+ * @property {string} scaling.formula - Arbitrary scaling formula which will be multiplied by scaling increase.
  */
 export class ExtendedDamageData extends SimpleDamageData {
 	/** @override */

@@ -7,6 +7,7 @@
 		.formula {
 			contain: layout;
 			display: flex;
+			gap: 8px;
 			align-items: center;
 			justify-content: center;
 			margin-inline: calc(-0.5rem - 2px);
@@ -17,7 +18,36 @@
 			text-align: center;
 
 			.formula-text {
-				flex-grow: 1;
+				flex: 1 1 50%;
+			}
+			.formula-situational {
+				flex: 0 1 25%;
+				input::placeholder { opacity: 60%; }
+			}
+			.formula-damage-type {
+				flex: 0 1 25%;
+				display: grid;
+				grid-template-areas: "overlap";
+				grid-template-columns: 1fr;
+				align-items: center;
+
+				> * { grid-area: overlap; }
+				blackFlag-icon {
+					justify-self: end;
+					display: block;
+					--icon-fill: rgba(0 0 0 / 15%);
+					--icon-width: 30px;
+					--icon-height: 30px;
+				}
+				.label { text-align: start; }
+				select {
+					width: calc(100% + 11px);
+					margin-inline: -5px;
+					padding-inline: 5px;
+					border: none;
+					background: none;
+					font-size: var(--font-size-16);
+				}
 			}
 		}
 	}

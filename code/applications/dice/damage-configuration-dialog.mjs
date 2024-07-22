@@ -24,7 +24,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	_prepareButtonsContext(context, options) {
+	async _prepareButtonsContext(context, options) {
 		context.buttons = {
 			critical: {
 				icon: '<i class="fa-solid fa-bomb"></i>',
@@ -40,14 +40,39 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareFormulasContext(context, options) {
+		context = await super._prepareFormulasContext(context, options);
+		const allTypes = foundry.utils.mergeObject(CONFIG.BlackFlag.damageTypes, CONFIG.BlackFlag.healingTypes, {
+			inplace: false
+		});
+		context.rolls = context.rolls.map(({ roll }) => ({
+			roll,
+			damageConfig: allTypes[roll.options.damageType] ?? allTypes[roll.options.damageTypes?.first()],
+			damageTypes: roll.options.damageTypes
+				? Object.entries(allTypes).reduce((obj, [key, config]) => {
+						if (roll.options.damageTypes.has(key)) {
+							obj[key] = game.i18n.localize(config.label);
+						}
+						return obj;
+					}, {})
+				: null
+		}));
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	_buildConfig(config, formData, index) {
-		console.log(this.options);
-		// TODO: Rework this so each roll can have damage type selection
-		// if (formData.damageType) config.options.damageType = formData.damageType;
+		config = super._buildConfig(config, formData, index);
+
+		const damageType = formData?.get(`roll.${index}.damageType`);
+		if (damageType) config.options.damageType = damageType;
+
 		return config;
 	}
 

@@ -1403,7 +1403,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability?.mod,
 						prof: skill.proficiency.hasProficiency ? skill.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+						situational: rollConfig.data?.situational
 					},
 					rollData
 				),
@@ -1523,7 +1524,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability?.mod,
 						prof: tool.proficiency.hasProficiency ? tool.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+						situational: rollConfig.data?.situational
 					},
 					rollData
 				),
@@ -1648,7 +1650,8 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					{
 						mod: ability?.mod,
 						prof: vehicle.proficiency.hasProficiency ? vehicle.proficiency.term : null,
-						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData })
+						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
+						situational: rollConfig.data?.situational
 					},
 					rollData
 				),

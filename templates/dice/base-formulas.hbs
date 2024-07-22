@@ -3,7 +3,11 @@
 	<ul class="formulas unlist">
 		{{#each rolls}}
 			<li class="formula">
-				<span class="formula-text">{{ formula }}</span>
+				<div class="formula-text">{{ roll.formula }}</div>
+				<div class="formula-situational">
+					<input type="text" name="roll.{{ @index }}.situational" value="{{ roll.data.situational }}"
+					       placeholder="{{ localize 'BF.Roll.Configuration.Situational' }}">
+				</div>
 			</li>
 		{{/each}}
 	</ul>

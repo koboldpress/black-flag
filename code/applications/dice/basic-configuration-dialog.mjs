@@ -75,10 +75,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 	/**
 	 * Roll type to use when constructing final roll.
-	 * @type {BaseRoll}
+	 * @type {BasicRoll}
 	 */
 	static get rollType() {
-		return CONFIG.Dice.BaseRoll;
+		return CONFIG.Dice.BasicRoll;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -111,7 +111,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 	/**
 	 * Roll type to use when constructing final roll.
-	 * @type {BaseRoll}
+	 * @type {BasicRoll}
 	 */
 	get rollType() {
 		return this.options.rollType ?? this.constructor.rollType;
@@ -144,10 +144,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * Prepare the context for the buttons.
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {ApplicationRenderContext}
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	_prepareButtonsContext(context, options) {
+	async _prepareButtonsContext(context, options) {
 		context.buttons = {
 			roll: {
 				icon: '<i class="fa-solid fa-dice"></i>',
@@ -163,10 +163,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * Prepare the context for the roll configuration section.
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {ApplicationRenderContext}
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	_prepareConfigurationContext(context, options) {
+	async _prepareConfigurationContext(context, options) {
 		context.rollMode = this.message.rollMode ?? this.options.default?.rollMode;
 		context.rollModesOptions = CONFIG.Dice.rollModes;
 		return context;
@@ -178,11 +178,11 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * Prepare the context for the formulas list.
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {ApplicationRenderContext}
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	_prepareFormulasContext(context, options) {
-		context.rolls = this.rolls;
+	async _prepareFormulasContext(context, options) {
+		context.rolls = this.rolls.map(roll => ({ roll }));
 		return context;
 	}
 
@@ -192,10 +192,10 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * Prepare the context for the roll notes.
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {ApplicationRenderContext}
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	_prepareNotesContext(context, options) {
+	async _prepareNotesContext(context, options) {
 		context.notes = foundry.utils.deepClone(this.notes ?? []);
 		return context;
 	}
@@ -241,11 +241,13 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 		 */
 		Hooks.callAll("blackFlag.buildRollConfig", this, config, { formData, index });
 
-		// TODO: Handle situational bonuses on a per-formula basis
-		// if (formData.get("situational") && config.situational !== false) {
-		// 	config.parts.push("@situational");
-		// 	config.data.situational = formData.situational;
-		// }
+		const situational = formData?.get(`roll.${index}.situational`);
+		if (situational && config.situational !== false) {
+			config.parts.push("@situational");
+			config.data.situational = situational;
+		} else {
+			config.parts.findSplice(v => v === "@situational");
+		}
 
 		return config;
 	}
@@ -315,7 +317,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @param {BasicRollProcessConfiguration} [config] - Initial roll configuration.
 	 * @param {BasicRollDialogConfiguration} [dialog] - Configuration information for the dialog.
 	 * @param {BasicRollMessageConfiguration} [message] - Message configuration.
-	 * @returns {Promise<BaseRoll[]>}
+	 * @returns {Promise<BasicRoll[]>}
 	 */
 	static async configure(config = {}, dialog = {}, message = {}) {
 		return new Promise((resolve, reject) => {

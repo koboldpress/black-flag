@@ -191,6 +191,7 @@ export default class HealingActivity extends Activity {
 				parts: [healing.scaledFormula(rollConfig.scaling ?? 0), ...(parts ?? [])],
 				options: {
 					damageType: healing.type,
+					damageTypes: healing.type === "variable" ? healing.additionalTypes : undefined,
 					modifierData,
 					minimum: this.actor?.system.buildMinimum?.(
 						this.actor?.system.getModifiers?.(this.modifierData, "min", { rollData })

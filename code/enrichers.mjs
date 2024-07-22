@@ -764,6 +764,7 @@ async function rollDamage(event) {
 		event,
 		rolls: formulas.map((formula, idx) => ({ parts: [formula], options: { damageType: types[idx] } }))
 	};
+	// TODO: Handle variable damage types here
 
 	const dialogConfig = {};
 

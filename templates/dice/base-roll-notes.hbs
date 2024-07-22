@@ -1,7 +1,7 @@
-{{#if rollNotes.length}}
+{{#if notes.length}}
 	<fieldset class="roll-notes">
 		<legend>{{ localize "BF.Note.Label[other]" }}</legend>
-		{{#each rollNotes}}
+		{{#each notes}}
 			<label>
 				<figure class="advantage-mode" data-advantage-mode="{{ note.rollMode }}">
 					<blackFlag-icon class="die-icon" src="systems/black-flag/artwork/interface/dice/d20.svg"></blackFlag-icon>

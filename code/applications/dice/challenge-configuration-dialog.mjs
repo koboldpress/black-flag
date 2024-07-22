@@ -23,7 +23,7 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	_prepareButtonsContext(context, options) {
+	async _prepareButtonsContext(context, options) {
 		context.buttons = {
 			advantage: {
 				icon: '<i class="fa-solid fa-square-caret-up"></i>',
@@ -44,8 +44,8 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_prepareNotesContext(context, options) {
-		context = super._prepareNotesContext(context, options);
+	async _prepareNotesContext(context, options) {
+		context = await super._prepareNotesContext(context, options);
 		context.notes.forEach(n => {
 			switch (n.note?.rollMode) {
 				case CONFIG.Dice.ChallengeDie.MODES.ADVANTAGE:

@@ -18,7 +18,7 @@ export default class SkillRollConfigurationDialog extends ChallengeRollConfigura
 
 	/** @inheritDoc */
 	async _prepareConfigurationContext(context, options) {
-		await super._prepareConfigurationContext(context, options);
+		context = await super._prepareConfigurationContext(context, options);
 		context.ability = this.rolls[0]?.data.abilityId;
 		context.chooseAbility = this.options.chooseAbility;
 		return context;
