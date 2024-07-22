@@ -1,6 +1,6 @@
 import BaseActorSheet from "./base-actor-sheet.mjs";
 
-export default class NPCSheet extends BaseActorSheet {
+export default class LairSheet extends BaseActorSheet {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
