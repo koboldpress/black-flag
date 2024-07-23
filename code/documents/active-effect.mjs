@@ -4,6 +4,12 @@ import { numberFormat, staticID } from "../utils/_module.mjs";
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class BlackFlagActiveEffect extends ActiveEffect {
+	/** @inheritDoc */
+	static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
+		if (!("description" in effectData) && reference) effectData.description = `@Embed[${reference} inline]`;
+		return super._fromStatusEffect(statusId, effectData, options);
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -44,7 +50,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Methods               */
+	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -55,11 +61,13 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		// Change name and icon to match exhaustion level
 		let level = this.getFlag("black-flag", "level");
 		if (!Number.isFinite(level)) level = 1;
-		this.icon = `systems/black-flag/artwork/statuses/exhaustion-${level}.svg`;
+		this.img = `systems/black-flag/artwork/statuses/exhaustion-${level}.svg`;
 		this.name = game.i18n.format("BF.Condition.Exhaustion.Numbered", { level: numberFormat(level) });
 		if (level >= 6) this.statuses.add("dead");
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Effect Application          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -128,16 +136,51 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Create conditions that are applied alongside initial effect.
+	 * @returns {Promise<BlackFlagActiveEffect[]>} - Created effects.
+	 */
+	async createRiderConditions() {
+		const riders = new Set(
+			this.statuses.reduce((arr, status) => {
+				const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
+				return arr.concat(r);
+			}, [])
+		);
+
+		const created = [];
+		for (const rider of riders) {
+			const effect = await this.parent.toggleStatusEffect(rider, { active: true });
+			if (effect instanceof BlackFlagActiveEffect) created.push(effect);
+		}
+
+		return created;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onCreate(data, options, userId) {
+		await super._onCreate(data, options, userId);
+		if (userId === game.userId) {
+			if (this.active && this.parent instanceof Actor) await this.createRiderConditions();
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	_onUpdate(data, options, userId) {
 		super._onUpdate(data, options, userId);
+		const name = this.name;
+
+		// Display proper scrolling status effects for exhaustion
 		const originalLevel = foundry.utils.getProperty(options, "blackFlag.originalExhaustion");
 		const newLevel = foundry.utils.getProperty(data, "flags.black-flag.level");
 		if (this.id === this.constructor.EXHAUSTION && Number.isFinite(newLevel) && Number.isFinite(originalLevel)) {
 			if (newLevel === originalLevel) return;
-			const name = this.name;
 			if (newLevel < originalLevel)
-				game.i18n.format("BF.Condition.Exhaustion.Numbered", {
+				this.name = game.i18n.format("BF.Condition.Exhaustion.Numbered", {
 					level: numberFormat(originalLevel)
 				});
 			this._displayScrollingStatus(newLevel > originalLevel);

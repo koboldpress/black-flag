@@ -6,7 +6,9 @@ import { localizeConfig, staticID } from "../utils/_module.mjs";
  * @typedef {object} ConditionConfiguration
  * @property {string} label        Localized label for the condition.
  * @property {string} [icon]       Icon used to represent the condition on the token.
+ * @property {boolean} [pseudo]    Effect that behaves like a condition but isn't an official condition.
  * @property {string} [reference]  UUID of a journal entry with details on this condition.
+ * @property {string[]} [riders]   Additional effects that will be added alongside this condition.
  * @property {string} [special]    Set this condition as a special status effect under this name.
  */
 
@@ -15,6 +17,11 @@ import { localizeConfig, staticID } from "../utils/_module.mjs";
  * @enum {ConditionConfiguration}
  */
 export const conditions = {
+	bleeding: {
+		label: "EFFECT.BF.Bleeding",
+		icon: "systems/black-flag/artwork/statuses/bleeding.svg",
+		pseudo: true
+	},
 	blinded: {
 		label: "BF.Condition.Blinded.Label",
 		icon: "systems/black-flag/artwork/statuses/blinded.svg",
@@ -26,10 +33,20 @@ export const conditions = {
 		icon: "systems/black-flag/artwork/statuses/charmed.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.xWTun0VE6ViaNL54"
 	},
+	cursed: {
+		label: "EFFECT.BF.Cursed",
+		icon: "systems/black-flag/artwork/statuses/cursed.svg",
+		pseudo: true
+	},
 	deafened: {
 		label: "BF.Condition.Deafened.Label",
 		icon: "systems/black-flag/artwork/statuses/deafened.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.40xM2nG1zWbUdVs3"
+	},
+	diseased: {
+		label: "EFFECT.BF.Diseased",
+		icon: "systems/black-flag/artwork/statuses/diseased.svg",
+		pseudo: true
 	},
 	exhaustion: {
 		label: "BF.Condition.Exhaustion.Label",
@@ -83,6 +100,11 @@ export const conditions = {
 		icon: "systems/black-flag/artwork/statuses/restrained.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.8o60lOgPGHKz3cLi"
 	},
+	silenced: {
+		label: "EFFECT.BF.Silenced",
+		icon: "systems/black-flag/artwork/statuses/silenced.svg",
+		pseudo: true
+	},
 	stunned: {
 		label: "BF.Condition.Stunned.Label",
 		icon: "systems/black-flag/artwork/statuses/stunned.svg",
@@ -94,11 +116,17 @@ export const conditions = {
 		icon: "systems/black-flag/artwork/statuses/surprised.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.tPvSfEhj7fDkRvGj"
 	},
+	transformed: {
+		name: "EFFECT.BF.Transformed",
+		icon: "systems/black-flag/artwork/statuses/transformed.svg",
+		pseudo: true
+	},
 	unconscious: {
 		label: "BF.Condition.Unconscious.Label",
 		icon: "systems/black-flag/artwork/statuses/unconscious.svg",
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.NNYMlxVAkVNRS3zH",
-		statuses: ["incapacitated", "prone"]
+		riders: ["prone"],
+		statuses: ["incapacitated"]
 	}
 };
 localizeConfig(conditions);
@@ -111,42 +139,52 @@ localizeConfig(conditions);
  * @enum {object}
  */
 export const statusEffects = {
-	bleeding: {
-		icon: "systems/black-flag/artwork/statuses/bleeding.svg"
-	},
 	burrowing: {
 		name: "EFFECT.BF.Burrowing",
-		icon: "systems/black-flag/artwork/statuses/burrowing.svg"
+		icon: "systems/black-flag/artwork/statuses/burrowing.svg",
+		special: "BURROW"
 	},
 	concentrating: {
 		name: "EFFECT.BF.Concentrating",
-		icon: "systems/black-flag/artwork/statuses/concentrating.svg"
-	},
-	curse: {
-		icon: "systems/black-flag/artwork/statuses/cursed.svg"
+		icon: "systems/black-flag/artwork/statuses/concentrating.svg",
+		special: "CONCENTRATING"
 	},
 	dead: {
-		icon: "systems/black-flag/artwork/statuses/dead.svg"
+		icon: "systems/black-flag/artwork/statuses/dead.svg",
+		special: "DEFEATED"
 	},
-	fly: {},
-	hidden: {
-		name: "EFFECT.BF.Hidden",
-		icon: "systems/black-flag/artwork/statuses/hidden.svg"
+	dodging: {
+		name: "EFFECT.BF.Dodging",
+		icon: "systems/black-flag/artwork/statuses/dodging.svg"
+	},
+	ethereal: {
+		name: "EFFECT.BF.Ethereal",
+		icon: "systems/black-flag/artwork/statuses/ethereal.svg"
+	},
+	fly: {
+		label: "EFFECT.BF.Flying",
+		icon: "systems/black-flag/artwork/statuses/flying.svg",
+		special: "FLY"
+	},
+	hiding: {
+		name: "EFFECT.BF.Hiding",
+		icon: "systems/black-flag/artwork/statuses/hiding.svg"
+	},
+	hovering: {
+		name: "EFFECT.BF.Hovering",
+		icon: "systems/black-flag/artwork/statuses/hovering.svg"
 	},
 	marked: {
 		name: "EFFECT.BF.Marked",
 		icon: "systems/black-flag/artwork/statuses/marked.svg"
 	},
-	silence: {
-		icon: "systems/black-flag/artwork/statuses/silenced.svg"
-	},
-	sleep: {
+	sleeping: {
 		name: "EFFECT.BF.Sleeping",
 		icon: "systems/black-flag/artwork/statuses/sleeping.svg"
 	},
-	transformed: {
-		name: "EFFECT.BF.Transformed",
-		icon: "systems/black-flag/artwork/statuses/transformed.svg"
+	stable: {
+		name: "EFFECT.BF.Stable",
+		icon: "systems/black-flag/artwork/statuses/stable.svg"
 	}
 };
 
