@@ -7,6 +7,7 @@ import BlackFlagChatMessage from "./chat-message.mjs";
 import BlackFlagCombat from "./combat.mjs";
 import BlackFlagCombatant from "./combatant.mjs";
 import BlackFlagItem from "./item.mjs";
+import BlackFlagJournalEntryPage from "./journal-entry-page.mjs";
 import BlackFlagTokenDocument from "./token.mjs";
 
 /**
@@ -21,6 +22,7 @@ export function registerDocumentClasses() {
 	CONFIG.Combat.documentClass = BlackFlagCombat;
 	CONFIG.Combatant.documentClass = BlackFlagCombatant;
 	CONFIG.Item.documentClass = BlackFlagItem;
+	CONFIG.JournalEntryPage.documentClass = BlackFlagJournalEntryPage;
 	CONFIG.Token.documentClass = BlackFlagTokenDocument;
 
 	CONFIG.Activity = {
@@ -42,6 +44,7 @@ export {
 	BlackFlagChatMessage,
 	BlackFlagCombatant,
 	BlackFlagItem,
+	BlackFlagJournalEntryPage,
 	BlackFlagTokenDocument
 };
 export * as mixins from "./mixins/_module.mjs";
