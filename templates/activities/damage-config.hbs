@@ -1,0 +1,51 @@
+<form autocomplete="off">
+	<header class="sheet-header">
+		<figure class="icon">
+			<img src="{{ activity.img }}" alt="{{ default.title }}" data-edit="img">
+		</figure>
+		<h1>
+			<input type="text" name="name" value="{{ source.name }}" placeholder="{{ default.title }}">
+		</h1>
+	</header>
+
+	<nav class="sheet-navigation tabs tabs_separate" data-group="primary">
+		<a data-tab="description">{{ localize "BF.Sheet.Tab.Description" }}</a>
+		<a data-tab="details">{{ localize "BF.Sheet.Tab.Details" }}</a>
+	</nav>
+
+	<div class="sheet-body">
+		<div class="tab" data-group="primary" data-tab="description">
+			{{> "blackFlag.activity-description" }}
+		</div>
+
+		<div class="tab" data-group="primary" data-tab="details">
+			{{> "blackFlag.activity-activation" }}
+			{{> "blackFlag.activity-duration" }}
+
+			<fieldset>
+				<legend>{{ localize "BF.Damage.Label" }}</legend>
+				<label>
+					<span>{{ localize "BF.Ability.Label[one]" }}</span>
+					<select name="system.ability">
+						{{#select source.system.ability}}
+							<option value=""></option>
+							{{ selectOptions CONFIG.abilities.localized }}
+							<hr>
+							<option value="spellcasting">{{ localize "BF.Spellcasting.Label" }}</option>
+						{{/select}}
+					</select>
+				</label>
+				<label class="full-checkbox">
+					<span>{{ localize "BF.Activity.Damage.AllowCritical.Label" }}</span>
+					<input type="checkbox" name="system.damage.allowCritical" {{ checked source.system.damage.allowCritical }}>
+				</label>
+				{{> "blackFlag.activity-damage-parts" }}
+			</fieldset>
+
+			{{> "blackFlag.activity-targeting" system=activity }}
+			{{> "blackFlag.activity-uses" }}
+
+			{{!-- TODO: Overrides & Bonuses --}}
+		</div>
+	</div>
+</form>

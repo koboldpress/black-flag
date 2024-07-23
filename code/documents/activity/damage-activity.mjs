@@ -1,3 +1,4 @@
+import { DamageData } from "../../data/activity/damage-data.mjs";
 import { buildRoll, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
@@ -6,6 +7,21 @@ import Activity from "./activity.mjs";
  * @abstract
  */
 export default class DamageActivity extends Activity {
+	/** @inheritDoc */
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "damage",
+				dataModel: DamageData,
+				icon: "systems/black-flag/artwork/activities/damage.svg",
+				title: "BF.Activity.Damage.Title",
+				hint: "BF.Activity.Damage.Hint"
+			},
+			{ inplace: false }
+		)
+	);
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -25,7 +41,14 @@ export default class DamageActivity extends Activity {
 	 * @type {string|null}
 	 */
 	get damageAbility() {
-		return this.system.ability ?? null;
+		if (this.system.ability !== "spellcasting" || !this.actor) return this.system.ability ?? null;
+
+		const abilities = Object.values(this.actor.system.spellcasting?.origins ?? {}).reduce((set, o) => {
+			set.add(o.ability);
+			return set;
+		}, new Set());
+		ability = this.actor.system.selectBestAbility?.(abilities);
+		return ability ?? "intelligence";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -70,6 +93,26 @@ export default class DamageActivity extends Activity {
 	 */
 	get hasDamage() {
 		return this.system.damage?.parts?.length > 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Activation             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the context for item activation.
+	 * @returns {object}
+	 */
+	async activationChatContext() {
+		const context = await super.activationChatContext();
+		if (this.hasDamage)
+			context.buttons = {
+				damage: {
+					label: game.i18n.localize("BF.Damage.Label"),
+					dataset: { action: "roll", method: "rollDamage" }
+				}
+			};
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -190,6 +233,9 @@ export default class DamageActivity extends Activity {
 			);
 		}
 		rollConfig.rolls.concat(config.rolls ?? []);
+
+		if (this.system.damage?.allowCritical === false) rollConfig.allowCritical ??= false;
+
 		return rollConfig;
 	}
 

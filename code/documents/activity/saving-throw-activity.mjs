@@ -70,10 +70,7 @@ export default class SavingThrowActivity extends DamageActivity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Prepare the context for item activation.
-	 * @returns {object}
-	 */
+	/** @override */
 	async activationChatContext() {
 		const context = await super.activationChatContext();
 		context.buttons = {};

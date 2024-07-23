@@ -64,10 +64,7 @@ export default class HealingActivity extends Activity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Prepare the context for item activation.
-	 * @returns {object}
-	 */
+	/** @override */
 	async activationChatContext() {
 		const context = await super.activationChatContext();
 		if (this.system.healing.formula)

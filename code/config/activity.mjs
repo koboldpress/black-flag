@@ -27,6 +27,12 @@ export const _activityTypes = {
 			config: applications.AttackConfig
 		}
 	},
+	damage: {
+		documentClass: documents.DamageActivity,
+		sheetClasses: {
+			config: applications.DamageConfig
+		}
+	},
 	healing: {
 		documentClass: documents.HealingActivity,
 		sheetClasses: {
