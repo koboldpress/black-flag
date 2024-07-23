@@ -9,6 +9,7 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @property {string} labels.full - Localization key for the ability's full name.
  * @property {string} labels.abbreviation - Localization key for the ability's abbreviation.
  * @property {string} [type] - Type of ability (usually "physical" or "mental").
+ * @property {string} [reference] - UUID of a journal entry with details on this ability.
  */
 
 /**

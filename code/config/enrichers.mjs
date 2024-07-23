@@ -8,37 +8,30 @@ let _enrichmentLookup;
 Object.defineProperty(enrichment, "lookup", {
 	get() {
 		if (!_enrichmentLookup) {
-			_enrichmentLookup = {
-				abilities: foundry.utils.deepClone(abilities),
-				skills: foundry.utils.deepClone(skills),
-				tools: flattenTools()
+			const addKeys = (key, object) => {
+				_enrichmentLookup[key] = {};
+				for (const [k, v] of Object.entries(object)) {
+					_enrichmentLookup[key][slugify(k)] = _enrichmentLookup[key][slugify(v.abbreviation)] =
+						foundry.utils.mergeObject({ key: k, label: object.localized[k] }, v, { inplace: false });
+				}
 			};
-			Object.entries(_enrichmentLookup.abilities).forEach(([key, a]) => {
-				a.key = key;
-				a.label = game.i18n.localize(a.labels.full);
-				_enrichmentLookup.abilities[a.abbreviation] = a;
-			});
-			Object.entries(_enrichmentLookup.skills).forEach(([key, s]) => {
-				s.key = key;
-				s.label = game.i18n.localize(s.label);
-				_enrichmentLookup.skills[s.abbreviation] = s;
-			});
+			const addTrait = trait => {
+				_enrichmentLookup[trait] = {};
+				const choices = Trait.choices(trait);
+				for (const key of choices.set) {
+					const config = choices.get(key);
+					_enrichmentLookup[trait][slugify(key)] = { key, label: config.label };
+				}
+			};
+			const slugify = value => value?.slugify().replaceAll("-", "");
+
+			_enrichmentLookup = {};
+			addKeys("abilities", abilities);
+			addKeys("skills", skills);
+			addTrait("tools");
+			addTrait("vehicles");
 		}
 		return _enrichmentLookup;
 	},
 	enumerable: true
 });
-
-/**
- * Collapse tool config for enrichment.
- * @returns {object}
- */
-function flattenTools() {
-	const choices = Trait.choices("tools");
-	const tools = {};
-	for (const key of choices.set) {
-		const config = choices.get(key);
-		tools[key] = { key, label: config.label };
-	}
-	return tools;
-}

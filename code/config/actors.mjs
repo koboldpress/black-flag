@@ -2,51 +2,72 @@ import { LongRestDialog, ShortRestDialog } from "../applications/actor/_module.m
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Configuration data for creature types.
+ *
+ * @typedef {LabeledConfiguration} CreatureTypeConfiguration
+ * @property {string} [reference] - UUID of a journal entry with details on this creature type.
+ */
+
+/**
  * Possible creature types.
- * @enum {LabeledConfiguration}
+ * @enum {CreatureTypeConfiguration}
  */
 export const creatureTypes = {
 	aberration: {
-		localization: "BF.CreatureType.Type.Aberration"
+		localization: "BF.CreatureType.Type.Aberration",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.FdTfsFN2mEaH0dh0"
 	},
 	beast: {
-		localization: "BF.CreatureType.Type.Beast"
+		localization: "BF.CreatureType.Type.Beast",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.4CRbAERqSRQQ8rWM"
 	},
 	celestial: {
-		localization: "BF.CreatureType.Type.Celestial"
+		localization: "BF.CreatureType.Type.Celestial",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.YihanG6MWJtWuXRH"
 	},
 	construct: {
-		localization: "BF.CreatureType.Type.Construct"
+		localization: "BF.CreatureType.Type.Construct",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.bU3uHbUTyEKCvMdw"
 	},
 	dragon: {
-		localization: "BF.CreatureType.Type.Dragon"
+		localization: "BF.CreatureType.Type.Dragon",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.a3m05Htjwsr81ciO"
 	},
 	elemental: {
-		localization: "BF.CreatureType.Type.Elemental"
+		localization: "BF.CreatureType.Type.Elemental",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.KuitTyCuiyPJx7Yx"
 	},
 	fey: {
-		localization: "BF.CreatureType.Type.Fey"
+		localization: "BF.CreatureType.Type.Fey",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GUU2PMiIVdkj302g"
 	},
 	fiend: {
-		localization: "BF.CreatureType.Type.Fiend"
+		localization: "BF.CreatureType.Type.Fiend",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.SuJnNFNcErG2SWlu"
 	},
 	giant: {
-		localization: "BF.CreatureType.Type.Giant"
+		localization: "BF.CreatureType.Type.Giant",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CU2Aok5lj6Srf6p5"
 	},
 	humanoid: {
-		localization: "BF.CreatureType.Type.Humanoid"
+		localization: "BF.CreatureType.Type.Humanoid",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.q74G8dHvaT2iSKiR"
 	},
 	monstrosity: {
-		localization: "BF.CreatureType.Type.Monstrosity"
+		localization: "BF.CreatureType.Type.Monstrosity",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.UIu4g5LNxbDlh1xl"
 	},
 	ooze: {
-		localization: "BF.CreatureType.Type.Ooze"
+		localization: "BF.CreatureType.Type.Ooze",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.ADqhMsVaa0L9DF7h"
 	},
 	plant: {
-		localization: "BF.CreatureType.Type.Plant"
+		localization: "BF.CreatureType.Type.Plant",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.aIRHqfydG0iAyZuK"
 	},
 	undead: {
-		localization: "BF.CreatureType.Type.Undead"
+		localization: "BF.CreatureType.Type.Undead",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.OuEGHqtpQB57PxW7"
 	}
 };
 localizeConfig(creatureTypes);
@@ -60,13 +81,16 @@ localizeConfig(creatureTypes, { propertyName: "localizedPlural", pluralRule: "ot
  */
 export const creatureTags = {
 	animal: {
-		localization: "BF.CreatureType.Tag.Animal"
+		localization: "BF.CreatureType.Tag.Animal",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.wIVbWmvn1dq8vc68"
 	},
 	golem: {
-		localization: "BF.CreatureType.Tag.Golem"
+		localization: "BF.CreatureType.Tag.Golem",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.g8KIFr6a9FXbDVeX"
 	},
 	outsider: {
 		localization: "BF.CreatureType.Tag.Outsider",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.ynBgOpaDVZ1Ofxx4",
 		children: {
 			angel: {
 				localization: "BF.CreatureType.Tag.Angel"
@@ -81,6 +105,7 @@ export const creatureTags = {
 	},
 	shapechanger: {
 		localization: "BF.CreatureType.Tag.Shapechanger",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.lt1UiK4eCG5W4Htw",
 		children: {
 			lycanthrope: {
 				localization: "BF.CreatureType.Tag.Lycanthrope"

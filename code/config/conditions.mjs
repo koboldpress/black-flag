@@ -1,4 +1,4 @@
-import { localizeConfig } from "../utils/_module.mjs";
+import { localizeConfig, staticID } from "../utils/_module.mjs";
 
 /**
  * Configuration data for system conditions.
@@ -18,86 +18,86 @@ export const conditions = {
 	blinded: {
 		label: "BF.Condition.Blinded.Label",
 		icon: "systems/black-flag/artwork/statuses/blinded.svg",
-		reference: "",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.xJJvm0vSgfbtS5MP",
 		special: "BLIND"
 	},
 	charmed: {
 		label: "BF.Condition.Charmed.Label",
 		icon: "systems/black-flag/artwork/statuses/charmed.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.xWTun0VE6ViaNL54"
 	},
 	deafened: {
 		label: "BF.Condition.Deafened.Label",
 		icon: "systems/black-flag/artwork/statuses/deafened.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.40xM2nG1zWbUdVs3"
 	},
 	exhaustion: {
 		label: "BF.Condition.Exhaustion.Label",
 		icon: "systems/black-flag/artwork/statuses/exhaustion.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.Pk4HY4CkyTFBhFrL"
 	},
 	frightened: {
 		label: "BF.Condition.Frightened.Label",
 		icon: "systems/black-flag/artwork/statuses/frightened.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.JDnxwjUrT6foQcXs"
 	},
 	grappled: {
 		label: "BF.Condition.Grappled.Label",
 		icon: "systems/black-flag/artwork/statuses/grappled.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.MsrEhBwmMcCXQkiT"
 	},
 	incapacitated: {
 		label: "BF.Condition.Incapacitated.Label",
 		icon: "systems/black-flag/artwork/statuses/incapacitated.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.hJe9zn3JpFkD5YGY"
 	},
 	invisible: {
 		label: "BF.Condition.Invisible.Label",
 		icon: "systems/black-flag/artwork/statuses/invisible.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.J9KSv1AwJ1zod72g"
 	},
 	paralyzed: {
 		label: "BF.Condition.Paralyzed.Label",
 		icon: "systems/black-flag/artwork/statuses/paralyzed.svg",
-		reference: "",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.0G8XVDS1Vzq1ZRFL",
 		statuses: ["incapacitated"]
 	},
 	petrified: {
 		label: "BF.Condition.Petrified.Label",
 		icon: "systems/black-flag/artwork/statuses/petrified.svg",
-		reference: "",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.jedIxHKhxgKOxpCB",
 		statuses: ["incapacitated"]
 	},
 	poisoned: {
 		label: "BF.Condition.Poisoned.Label",
 		icon: "systems/black-flag/artwork/statuses/poisoned.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.6uSKn1WiqNwT8Fda"
 	},
 	prone: {
 		label: "BF.Condition.Prone.Label",
 		icon: "systems/black-flag/artwork/statuses/prone.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.pdRSRVGYPUK8Vxak"
 	},
 	restrained: {
 		label: "BF.Condition.Restrained.Label",
 		icon: "systems/black-flag/artwork/statuses/restrained.svg",
-		reference: ""
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.8o60lOgPGHKz3cLi"
 	},
 	stunned: {
 		label: "BF.Condition.Stunned.Label",
 		icon: "systems/black-flag/artwork/statuses/stunned.svg",
-		reference: "",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.QguBSALg6Xd4Vmh3",
 		statuses: ["incapacitated"]
 	},
 	surprised: {
 		label: "BF.Condition.Surprised.Label",
-		icon: "systems/black-flag/artwork/statuses/stunned.svg",
-		reference: ""
+		icon: "systems/black-flag/artwork/statuses/surprised.svg",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.tPvSfEhj7fDkRvGj"
 	},
 	unconscious: {
 		label: "BF.Condition.Unconscious.Label",
 		icon: "systems/black-flag/artwork/statuses/unconscious.svg",
-		reference: "",
+		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.NNYMlxVAkVNRS3zH",
 		statuses: ["incapacitated", "prone"]
 	}
 };
@@ -157,7 +157,7 @@ export const statusEffects = {
  */
 export function _configureStatusEffects() {
 	const addEffect = (effects, data) => {
-		effects.push(data);
+		effects.push({ _id: staticID(`bf${data.id}`), ...data });
 		if ("special" in data) CONFIG.specialStatusEffects[data.special] = data.id;
 	};
 	CONFIG.statusEffects = Object.entries(statusEffects).reduce((arr, [id, data]) => {

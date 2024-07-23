@@ -17,18 +17,18 @@ export const ruleTypes = {
 	},
 	ability: {
 		label: "BF.Ability.Label[one]",
-		references: "enrichmentLookup.abilities"
+		references: "enrichment.lookup.abilities"
 	},
 	skill: {
 		label: "BF.Skill.Label[one]",
-		references: "enrichmentLookup.skills"
+		references: "enrichment.lookup.skills"
 	},
 	areaOfEffect: {
 		label: "BF.AreaOfEffect.Label"
 	},
 	condition: {
 		label: "BF.Condition.Label[one]",
-		references: "conditionTypes"
+		references: "conditions"
 	},
 	creatureTag: {
 		label: "BF.CreatureType.Tag.RuleLabel"
@@ -40,6 +40,10 @@ export const ruleTypes = {
 	damageType: {
 		label: "BF.Damage.Type.Label",
 		references: "damageTypes"
+	},
+	healingType: {
+		label: "BF.Healing.Type.Label",
+		references: "healingTypes"
 	},
 	spellComponent: {
 		label: "BF.Spell.Component.RuleLabel"

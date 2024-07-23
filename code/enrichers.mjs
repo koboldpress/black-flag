@@ -1,5 +1,7 @@
 import { getSelectedTokens, log, simplifyBonus } from "./utils/_module.mjs";
 
+const slugify = value => value?.slugify().replaceAll("-", "");
+
 /**
  * Set up system-specific enrichers.
  */
@@ -16,6 +18,10 @@ export function registerCustomEnrichers() {
 			enricher: enrichString
 		},
 		{
+			pattern: /&(?<type>reference)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi,
+			enricher: enrichString
+		},
+		{
 			pattern: /~def\[([^\]]+)]/gi,
 			enricher: (match, options) => {
 				const dnf = document.createElement("dfn");
@@ -26,6 +32,7 @@ export function registerCustomEnrichers() {
 	);
 
 	document.body.addEventListener("click", handleActivation);
+	document.body.addEventListener("click", handleApply);
 	document.body.addEventListener("click", handleRollAction);
 }
 
@@ -58,6 +65,8 @@ async function enrichString(match, options) {
 			config._isHealing = true;
 		case "damage":
 			return enrichDamage(config, label, options);
+		case "reference":
+			return enrichReference(config, label, options);
 	}
 	return null;
 }
@@ -182,6 +191,20 @@ async function handleActivation(event) {
 		event.stopPropagation();
 		activity.activate();
 	}
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Apply a status effect.
+ * @param {Event} event - The click event triggering the action.
+ */
+async function handleApply(event) {
+	const status = event.target.closest('[data-action="apply"][data-status]')?.dataset.status;
+	const effect = CONFIG.statusEffects.find(e => e.id === status);
+	if (!effect) return;
+	event.stopPropagation();
+	for (const token of getSelectedTokens()) await token.actor?.toggleStatusEffect(status);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -828,5 +851,61 @@ function enrichLookup(config, fallback, options) {
 	span.classList.add("lookup-value");
 	if (!value) span.classList.add("not-found");
 	span.innerText = value ?? keyPath;
+	return span;
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                   Reference Enricher                  */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Enrich a reference link.
+ * @param {object} config - Configuration data.
+ * @param {string} label - Optional label to replace default text.
+ * @param {EnrichmentOptions} options - Options provided to customize text enrichment.
+ * @returns {HTMLElement|null} - An HTML link to the Journal Entry Page for the given reference.
+ */
+async function enrichReference(config, label, options) {
+	let key;
+	let source;
+	let type = Object.keys(config).find(k => k in CONFIG.BlackFlag.ruleTypes);
+	if (type) {
+		key = slugify(config[type]);
+		source = foundry.utils.getProperty(CONFIG.BlackFlag, CONFIG.BlackFlag.ruleTypes[type].references)?.[key];
+	} else if (config.values.length) {
+		key = slugify(config.values.join(""));
+		for (const [t, { references }] of Object.entries(CONFIG.BlackFlag.ruleTypes)) {
+			source = foundry.utils.getProperty(CONFIG.BlackFlag, references)?.[key];
+			if (source) {
+				type = t;
+				break;
+			}
+		}
+	}
+
+	if (!source) {
+		console.warn(`No valid rule foundry while enriching ${config._input}.`);
+		return null;
+	}
+
+	const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
+	if (!uuid) return null;
+
+	const journalPage = await fromUuid(uuid);
+	const span = document.createElement("span");
+	span.classList.add("reference-link", "roll-link-group");
+	span.append(journalPage.toAnchor({ name: label || journalPage.name }));
+
+	if (type === "condition" && config.apply !== false) {
+		const apply = document.createElement("a");
+		apply.classList.add("extra-link");
+		apply.dataset.action = "apply";
+		apply.dataset.status = key;
+		apply.dataset.tooltip = "BF.Enricher.Apply.Label";
+		apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
+		apply.innerHTML = '<i class="fa-solid fa-fw fa-reply-all fa-flip-horizonal" inert></i>';
+		span.append(apply);
+	}
+
 	return span;
 }
