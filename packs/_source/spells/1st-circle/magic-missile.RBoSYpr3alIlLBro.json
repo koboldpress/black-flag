@@ -5,7 +5,73 @@
   "_id": "RBoSYpr3alIlLBro",
   "img": "icons/magic/light/projectiles-trio-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "nJUUbPAuvzQSrcFT": {
+        "type": "damage",
+        "_id": "nJUUbPAuvzQSrcFT",
+        "description": "",
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 4,
+                "bonus": "1",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "force",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ],
+            "allowCritical": false
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/damage.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -56,12 +122,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "120"
+      "value": "120",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -76,10 +144,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.040",
+    "coreVersion": "12.329",
     "createdTime": 1706934525756,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721762535667,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
