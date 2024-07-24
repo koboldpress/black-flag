@@ -26,7 +26,7 @@ export default class ConditionsTemplate extends foundry.abstract.DataModel {
 	 * Prepare exhaustion level and condition roll notes.
 	 */
 	prepareConditions() {
-		const exhaustion = this.parent.effects.get(BlackFlagActiveEffect.EXHAUSTION);
+		const exhaustion = this.parent.effects.get(BlackFlagActiveEffect.ID.EXHAUSTION);
 		const level = exhaustion?.getFlag("black-flag", "level");
 		this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
 
@@ -61,7 +61,7 @@ export default class ConditionsTemplate extends foundry.abstract.DataModel {
 		// TODO: Perform this as part of Actor._preUpdateOperation instead when it becomes available in v12
 		const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
 		if ( !Number.isFinite(level) ) return;
-		let effect = this.parent.effects.get(BlackFlagActiveEffect.EXHAUSTION);
+		let effect = this.parent.effects.get(BlackFlagActiveEffect.ID.EXHAUSTION);
 		if ( level < 1 ) return effect?.delete();
 		else if ( effect ) {
 			const originalExhaustion = foundry.utils.getProperty(options, "blackFlag.originalExhaustion");

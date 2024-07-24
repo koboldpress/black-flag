@@ -1798,10 +1798,29 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 	/** @inheritDoc */
 	async _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
-		if (userId === game.userId && collection === "items" && !options.keepRelationship) {
-			const updates = documents.map(d => ({ _id: d.id, "flags.black-flag.relationship.enabled": true }));
-			await this.updateEmbeddedDocuments("Item", updates);
+		if (userId === game.userId && collection === "items") {
+			await this.system.updateEncumbrance?.(options);
+			if (!options.keepRelationship) {
+				const updates = documents.map(d => ({ _id: d.id, [`flags.${game.system.id}.relationship.enabled`]: true }));
+				await this.updateEmbeddedDocuments("Item", updates);
+			}
 		}
 		super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+		if (userId === game.userId && collection === "items") await this.system.updateEncumbrance?.(options);
+		super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+		if (userId === game.userId && collection === "items") await this.system.updateEncumbrance?.(options);
+		super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
 	}
 }

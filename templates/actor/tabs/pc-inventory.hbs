@@ -1,16 +1,33 @@
-{{#with system.attributes.attunement}}
-	<div class="attunement">
-		<i class="fa-solid fa-sun" data-tooltip="BF.Attunement.Label" aria-label="{{ localize 'BF.Attunement.Label' }}"></i>
-		<span class="value">{{ numberFormat value }}</span>
-		<span class="separator">&sol;</span>
-		{{#if @root.editable}}
-			<input type="number" name="system.attributes.attunement.max" class="uninput max" value="{{ max }}" min=0 step=1>
-		{{else}}
-			<span class="max">{{ numberFormat max }}</span>
-		{{/if}}
-		{{ blackFlag-notificationBadge @root.actor key="too-much-attunement" }}
-	</div>
-{{/with}}
+<div class="encumbrance-attunement">
+	{{#with system.attributes.encumbrance}}
+		<div class="encumbrance" role="meter" aria-valuemin="0" aria-valuenow="{{ percentage }}"
+		     aria-valuetext="{{ value }}" aria-valuemax="{{ max }}" style="--bar-percentage: {{ percentage }}%;
+				 --breakpoint-low: {{ stops.encumbered }}%; --breakpoint-high: {{ stops.heavilyEncumbered }}%;">
+			<div class="label">
+				<i class="fa-solid fa-weight-hanging" inert></i>
+				<span class="value">{{ value }}</span>
+				<span class="seperator">&sol;</span>
+				<span class="max">{{ max }}</span>
+			</div>
+			{{#if stops.encumbered}}<span class="breakpoint breakpoint-low" role="presentation"></span>{{/if}}
+			{{#if stops.heavilyEncumbered}}<span class="breakpoint breakpoint-high" role="presentation"></span>{{/if}}
+		</div>
+	{{/with}}
+
+	{{#with system.attributes.attunement}}
+		<div class="attunement">
+			<i class="fa-solid fa-sun" data-tooltip="BF.Attunement.Label" aria-label="{{ localize 'BF.Attunement.Label' }}"></i>
+			<span class="value">{{ numberFormat value }}</span>
+			<span class="separator">&sol;</span>
+			{{#if @root.editable}}
+				<input type="number" name="system.attributes.attunement.max" class="uninput max" value="{{ max }}" min=0 step=1>
+			{{else}}
+				<span class="max">{{ numberFormat max }}</span>
+			{{/if}}
+			{{ blackFlag-notificationBadge @root.actor key="too-much-attunement" }}
+		</div>
+	{{/with}}
+</div>
 
 {{> "blackFlag.inventory" }}
 {{> "blackFlag.currency" }}

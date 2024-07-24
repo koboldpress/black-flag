@@ -4,6 +4,35 @@ import { numberFormat, staticID } from "../utils/_module.mjs";
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class BlackFlagActiveEffect extends ActiveEffect {
+	/**
+	 * Status effect for the various conditions.
+	 * @type {Record<string, string>}
+	 */
+	static ID = {
+		ENCUMBERED: staticID("bfencumbered"),
+		EXHAUSTION: staticID("bfexhaustion")
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	// TODO: Properly make use of these fields
+	/**
+	 * Additional key paths to properties added during base data preparation that should be treated as formula fields.
+	 * @type {Set<string>}
+	 */
+	static FORMULA_FIELDS = new Set([
+		"system.attributes.encumbrance.bonuses.encumbered",
+		"system.attributes.encumbrance.bonuses.heavilyEncumbered",
+		"system.attributes.encumbrance.bonuses.maximum",
+		"system.attributes.encumbrance.bonuses.overall",
+		"system.attributes.encumbrance.multipliers.encumbered",
+		"system.attributes.encumbrance.multipliers.heavilyEncumbered",
+		"system.attributes.encumbrance.multipliers.maximum",
+		"system.attributes.encumbrance.multipliers.overall"
+	]);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
 		if (!("description" in effectData) && reference) effectData.description = `@Embed[${reference} inline]`;
@@ -12,14 +41,6 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Status effect for the exhaustion condition.
-	 * @type {string}
-	 */
-	static EXHAUSTION = staticID("bfexhaustion");
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
@@ -56,7 +77,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
-		if (this.id !== this.constructor.EXHAUSTION) return;
+		if (this.id !== this.constructor.ID.EXHAUSTION) return;
 
 		// Change name and icon to match exhaustion level
 		let level = this.getFlag("black-flag", "level");
@@ -172,18 +193,32 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/** @inheritDoc */
 	_onUpdate(data, options, userId) {
 		super._onUpdate(data, options, userId);
+		const originalLevel = foundry.utils.getProperty(options, `${game.system.id}.originalExhaustion`);
+		const newLevel = foundry.utils.getProperty(data, `flags.${game.system.id}.level`);
+		const originalEncumbrance = foundry.utils.getProperty(options, `${game.system.id}.originalEncumbrance`);
+		const newEncumbrance = data.statuses?.[0];
 		const name = this.name;
 
 		// Display proper scrolling status effects for exhaustion
-		const originalLevel = foundry.utils.getProperty(options, "blackFlag.originalExhaustion");
-		const newLevel = foundry.utils.getProperty(data, "flags.black-flag.level");
-		if (this.id === this.constructor.EXHAUSTION && Number.isFinite(newLevel) && Number.isFinite(originalLevel)) {
+		if (this.id === this.constructor.ID.EXHAUSTION && Number.isFinite(newLevel) && Number.isFinite(originalLevel)) {
 			if (newLevel === originalLevel) return;
 			if (newLevel < originalLevel)
 				this.name = game.i18n.format("BF.Condition.Exhaustion.Numbered", {
 					level: numberFormat(originalLevel)
 				});
 			this._displayScrollingStatus(newLevel > originalLevel);
+			this.name = name;
+		}
+
+		// Display proper scrolling status effects for encumbrance
+		else if (this.id === this.constructor.ID.ENCUMBERED && originalEncumbrance && newEncumbrance) {
+			if (newEncumbrance === originalEncumbrance) return;
+			const increase =
+				!originalEncumbrance ||
+				(originalEncumbrance === "encumbered" && newEncumbrance) ||
+				newEncumbrance === "exceedingCarryingCapacity";
+			if (!increase) this.name = CONFIG.BlackFlag.encumbrance.effects[originalEncumbrance].name;
+			this._displayScrollingStatus(increase);
 			this.name = name;
 		}
 	}

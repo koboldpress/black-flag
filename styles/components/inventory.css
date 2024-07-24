@@ -193,3 +193,63 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 	align-items: center;
 	gap: 3px;
 }
+
+.encumbrance[role="meter"] {
+	isolation: isolate;
+	position: relative;
+	border: 1px solid var(--bf-color-border-blue);
+	border-radius: 4px;
+	overflow: hidden;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0;
+		inset-inline-end: min(calc(100% - 5px), calc(100% - var(--bar-percentage)));
+		outline: 1px solid var(--bf-color-border-black);
+		background-color: var(--bf-color-encumbrance-bar);
+		box-shadow: 0 0 4px rgb(0 0 0 / 45%);
+		z-index: -1;
+	}
+
+	> .label {
+		position: absolute;
+		inset-block: 0;
+		align-content: center;
+		margin: 4px;
+		padding-inline: 6px;
+		font-size: var(--font-size-12);
+		font-family: var(--bf-font-primary);
+		font-weight: 600;
+		backdrop-filter: blur(10px);
+		box-shadow: 0 0 2px rgb(0 0 0 / 45%);
+
+		> i { opacity: 50%; }
+	}
+
+	.breakpoint {
+		position: absolute;
+		inset-block: 0;
+
+		&.breakpoint-low { inset-inline-start: var(--breakpoint-low); }
+		&.breakpoint-high { inset-inline-start: var(--breakpoint-high); }
+
+		&::before, &::after {
+			position: absolute;
+			inset-inline-start: -3.5px;
+			color: var(--bf-color-border-blue);
+			font-family: var(--font-awesome);
+			font-size: 12px;
+			font-weight: bold;
+		}
+		&::before {
+			content: "\f0d7";
+			inset-block-start: -5px;
+		}
+		&::after {
+			content: "\f0d8";
+			inset-block-end: -5px;
+		}
+	}
+}

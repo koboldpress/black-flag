@@ -123,10 +123,10 @@ Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
 /**
  * Configuration for system various units.
  *
- * @typedef {object} UnitConfiguration
- * @property {string} localization - Pluralizable localization key.
+ * @typedef {LocalizedConfiguration} UnitConfiguration
  * @property {string} abbreviation - Abbreviation of the unit.
  * @property {number} conversion - Multiplier used to convert between various units.
+ * @property {string} system - Measurement system with which this unit is associated (e.g. imperial or metric).
  */
 
 /**
@@ -138,13 +138,15 @@ export const distanceUnits = {
 		localization: "BF.Distance.Unit.Foot.Label",
 		abbreviation: "BF.Distance.Unit.Foot.Abbreviation",
 		formattingUnit: "foot",
-		conversion: 1
+		conversion: 1,
+		system: "imperial"
 	},
 	mile: {
 		localization: "BF.Distance.Unit.Mile.Label",
 		abbreviation: "BF.Distance.Unit.Mile.Abbreviation",
 		formattingUnit: "mile",
-		conversion: 1 / 5280
+		conversion: 1 / 5280,
+		system: "imperial"
 	}
 };
 localizeConfig(distanceUnits, { pluralRule: "other" });
@@ -205,17 +207,20 @@ export const weightUnits = {
 	pound: {
 		localization: "BF.Weight.Unit.Pound.Label",
 		abbreviation: "BF.Weight.Unit.Pound.Abbreviation",
-		conversion: 1
+		conversion: 1,
+		system: "imperial"
 	},
 	ounce: {
 		localization: "BF.Weight.Unit.Ounce.Label",
 		abbreviation: "BF.Weight.Unit.Ounce.Abbreviation",
-		conversion: 0.0625
+		conversion: 0.0625,
+		system: "imperial"
 	},
 	ton: {
 		localization: "BF.Weight.Unit.Ton.Label",
 		abbreviation: "BF.Weight.Unit.Ton.Abbreviation",
-		conversion: 2000
+		conversion: 2000,
+		system: "imperial"
 	}
 };
 localizeConfig(weightUnits, { pluralRule: "other" });

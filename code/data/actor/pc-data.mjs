@@ -8,6 +8,7 @@ import ProficiencyField from "../fields/proficiency-field.mjs";
 import { AdvancementValueField, FormulaField, LocalDocumentField, RollField, TimeField } from "../fields/_module.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
+import EncumbranceTemplate from "./templates/encumbrance-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
@@ -19,6 +20,7 @@ const { ArrayField, HTMLField, NumberField, SchemaField, SetField, StringField }
 export default class PCData extends ActorDataModel.mixin(
 	ACTemplate,
 	ConditionsTemplate,
+	EncumbranceTemplate,
 	InitiativeTemplate,
 	LanguagesTemplate,
 	ModifiersTemplate,
@@ -256,6 +258,7 @@ export default class PCData extends ActorDataModel.mixin(
 		this.spellcasting.spells.knowable ??= { cantrips: 0, rituals: 0, spells: 0 };
 
 		this.prepareBaseArmorFormulas();
+		this.prepareBaseEncumbrance();
 		this.prepareBaseModifiers();
 	}
 
@@ -340,6 +343,7 @@ export default class PCData extends ActorDataModel.mixin(
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		this.prepareConditions();
+		this.prepareDerivedEncumbrance(rollData);
 		this.prepareLanguages();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedTraits(rollData);
@@ -936,8 +940,11 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _onUpdateSpellsLearned(changed, options, userId) {
-		if (!options.blackFlag?.levelUp || game.user.id !== userId) return;
-		this.parent.setFlag("black-flag", "spellsLearned.learned", false);
+	/** @inheritDoc */
+	async _onUpdate(changed, options, userId) {
+		await super._onUpdate(data, options, userId);
+		if (userId === game.userId) {
+			await this.updateEncumbrance(options);
+		}
 	}
 }

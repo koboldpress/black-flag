@@ -1,4 +1,4 @@
-import { numberFormat } from "../../../utils/_module.mjs";
+import { convertWeight, numberFormat } from "../../../utils/_module.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -269,5 +269,18 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 			tags.set("attuned", game.i18n.localize("BF.Attunement.Type.Required"));
 		}
 		if ( this.equipped ) tags.set("equipped", game.i18n.localize("BF.Item.Equipped"));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Calculate the total weight and return it in specific units.
+	 * @param {string} units - Units in which the weight should be returned.
+	 * @returns {number|Promise<number>}
+	 */
+	totalWeightIn(units) {
+		const weight = this.totalWeight;
+		if ( weight instanceof Promise ) return weight.then(w => convertWeight(w, this.weight.units, units));
+		return convertWeight(weight, this.weight.units, units);
 	}
 }

@@ -133,6 +133,67 @@ export const deathSave = {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Encumbrance configuration data.
+ *
+ * @typedef {object} EncumbranceConfiguration
+ * @property {Record<string, object>} effects - Data used to create encumbrance-related Active Effects.
+ * @property {Record<string, Record<string, number>} threshold - Amount to multiply strength to get given capacity
+ *                                                               threshold.
+ * @property {Record<string, Record<string, number>} speedReduction - Speed reduction caused by encumbered status.
+ * @property {Record<string, Record<string, string>>} baseUnits - Base units used to calculate carrying weight.
+ */
+
+/**
+ * Configuration for various aspects of encumbrance calculation.
+ * @type {EncumbranceConfiguration}
+ */
+export const encumbrance = {
+	effects: {
+		encumbered: {
+			name: "EFFECT.BF.Encumbered",
+			icon: "systems/black-flag/artwork/statuses/encumbered.svg"
+		},
+		heavilyEncumbered: {
+			name: "EFFECT.BF.HeavilyEncumbered",
+			icon: "systems/black-flag/artwork/statuses/heavily-encumbered.svg"
+		},
+		exceedingCarryingCapacity: {
+			name: "EFFECT.BF.ExceedingCarryingCapacity",
+			icon: "systems/black-flag/artwork/statuses/exceeding-carrying-capacity.svg"
+		}
+	},
+	threshold: {
+		encumbered: {
+			imperial: 5
+		},
+		heavilyEncumbered: {
+			imperial: 10
+		},
+		maximum: {
+			imperial: 15
+		}
+	},
+	speedReduction: {
+		encumbered: {
+			imperial: 10
+		},
+		heavilyEncumbered: {
+			imperial: 20
+		},
+		exceedingCarryingCapacity: {
+			imperial: 5
+		}
+	},
+	baseUnits: {
+		default: {
+			imperial: "pound"
+		}
+	}
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration data for luck points.
  * @type {{
  *   costs: {[key: string]: number},
@@ -292,12 +353,15 @@ export const senseTags = {
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                         Sizes                         */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Configuration data for creature sizes.
  *
  * @typedef {LabeledConfiguration} SizeConfiguration
  * @property {number|{width: number, height: number}} scale - Default token scale for a creature of this size.
+ * @property {number} [capacityMultiplier] - Multiplier used to calculate carrying capacities.
  */
 
 /**
@@ -307,7 +371,8 @@ export const senseTags = {
 export const sizes = {
 	tiny: {
 		label: "BF.Size.Tiny",
-		scale: 0.5
+		scale: 0.5,
+		capacityMultiplier: 0.5
 	},
 	small: {
 		label: "BF.Size.Small",
@@ -319,18 +384,23 @@ export const sizes = {
 	},
 	large: {
 		label: "BF.Size.Large",
-		scale: 2
+		scale: 2,
+		capacityMultiplier: 2
 	},
 	huge: {
 		label: "BF.Size.Huge",
-		scale: 3
+		scale: 3,
+		capacityMultiplier: 4
 	},
 	gargantuan: {
 		label: "BF.Size.Gargantuan",
-		scale: 4
+		scale: 4,
+		capacityMultiplier: 8
 	}
 };
 
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                          XP                           */
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**

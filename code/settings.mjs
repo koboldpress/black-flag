@@ -1,6 +1,8 @@
 import { systemVersion } from "./utils/localization.mjs";
 import log from "./utils/logging.mjs";
 
+const { StringField } = foundry.data.fields;
+
 /**
  * Register custom keybindings offered by Everyday Heroes.
  */
@@ -59,6 +61,20 @@ export function registerSettings() {
 			all: "BF.Settings.ChallengeVisibility.All",
 			player: "BF.Settings.ChallengeVisibility.Player",
 			none: "BF.Settings.ChallengeVisibility.None"
+		}
+	});
+
+	game.settings.register(game.system.id, "encumbrance", {
+		name: "BF.Settings.Encumbrance.Label",
+		hint: "BF.Settings.Encumbrance.Hint",
+		scope: "world",
+		config: true,
+		default: "none",
+		type: String,
+		choices: {
+			none: "BF.Settings.Encumbrance.None",
+			normal: "BF.Settings.Encumbrance.Normal",
+			variant: "BF.Settings.Encumbrance.Variant"
 		}
 	});
 
