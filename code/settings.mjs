@@ -1,8 +1,6 @@
 import { systemVersion } from "./utils/localization.mjs";
 import log from "./utils/logging.mjs";
 
-const { StringField } = foundry.data.fields;
-
 /**
  * Register custom keybindings offered by Everyday Heroes.
  */

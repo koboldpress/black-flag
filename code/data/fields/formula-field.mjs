@@ -31,17 +31,16 @@ export default class FormulaField extends foundry.data.fields.StringField {
 	/*      Active Effect Application      */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_bfCastDelta(value) {
-		return this._cast(value).trim();
+	/** @override */
+	_castChangeDelta(delta) {
+		return this._cast(delta).trim();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_bfApplyAdd(actor, change, current, delta, changes) {
-		if (!current) {
-			changes[change.key] = delta;
-			return;
-		}
+	/** @override */
+	_applyChangeAdd(value, delta, model, change) {
+		if (!value) return delta;
 		let operator = "+";
 		if (delta.startsWith("+")) {
 			delta = delta.replace("+", "").trim();
@@ -49,44 +48,36 @@ export default class FormulaField extends foundry.data.fields.StringField {
 			delta = delta.replace("-", "").trim();
 			operator = "-";
 		}
-		changes[change.key] = `${current} ${operator} ${delta}`;
+		return `${value} ${operator} ${delta}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_bfApplyMultiply(actor, change, current, delta, changes) {
-		if (!current) {
-			changes[change.key] = delta;
-			return;
-		}
-		const terms = new Roll(current).terms;
-		if (terms.length > 1) changes[change.key] = `(${current}) * ${delta}`;
-		else changes[change.key] = `${current} * ${delta}`;
+	/** @override */
+	_applyChangeMultiply(value, delta, model, change) {
+		if (!value) return delta;
+		const terms = new Roll(value).terms;
+		if (terms.length > 1) return `(${value}) * ${delta}`;
+		return `${value} * ${delta}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_bfApplyUpgrade(actor, change, current, delta, changes) {
-		if (!current) {
-			changes[change.key] = delta;
-			return;
-		}
-		const terms = new Roll(current).terms;
-		if (terms.length === 1 && terms[0].fn === "max") {
-			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
-		} else changes[change.key] = `max(${current}, ${delta})`;
+	/** @override */
+	_applyChangeUpgrade(value, delta, model, change) {
+		if (!value) return delta;
+		const terms = new Roll(value).terms;
+		if (terms.length === 1 && terms[0].fn === "max") return value.replace(/\)$/, `, ${delta})`);
+		return `max(${value}, ${delta})`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	_bfApplyDowngrade(actor, change, current, delta, changes) {
-		if (!current) {
-			changes[change.key] = delta;
-			return;
-		}
-		const terms = new Roll(current).terms;
-		if (terms.length === 1 && terms[0].fn === "min") {
-			changes[change.key] = current.replace(/\)$/, `, ${delta})`);
-		} else changes[change.key] = `min(${current}, ${delta})`;
+	/** @override */
+	_applyChangeDowngrade(value, delta, model, change) {
+		if (!value) return delta;
+		const terms = new Roll(value).terms;
+		if (terms.length === 1 && terms[0].fn === "min") return value.replace(/\)$/, `, ${delta})`);
+		return `min(${value}, ${delta})`;
 	}
 }
