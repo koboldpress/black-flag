@@ -1,0 +1,36 @@
+.black-flag-tooltip:is(#tooltip, .locked-tooltip) {
+	border: 3px solid var(--bf-color-border-blue);
+	border-radius: 6px;
+	background: var(--bf-background-color-white);
+	color: var(--bf-text-color-black);
+
+	&.locked-tooltip {
+		outline: 1px solid var(--bf-color-border-gray);
+		outline-offset: -1.5px;
+	}
+
+	&.rule-tooltip {
+		max-width: 450px;
+		padding: 0;
+
+		header {
+			display: flex;
+			align-items: first baseline;
+			justify-content: space-between;
+			border-block-end: 1px solid var(--bf-color-border-blue);
+			padding-inline: 12px;
+			padding-block-start: 12px;
+
+			> * { margin-block-end: 4px; }
+			h2 { border: none; }
+			.type {
+				font-family: var(--bf-font-header);
+			}
+		}
+		.description {
+			padding-inline: 12px;
+			padding-block: 6px;
+			font-size: var(--font-size-14);
+		}
+	}
+}

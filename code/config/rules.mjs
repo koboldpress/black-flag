@@ -1,3 +1,5 @@
+import { localizeConfig } from "../utils/_module.mjs";
+
 /**
  * Configuration information for rule types.
  *
@@ -59,6 +61,7 @@ export const ruleTypes = {
 		label: "BF.Spell.Tag.RuleLabel"
 	}
 };
+localizeConfig(ruleTypes);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

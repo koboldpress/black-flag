@@ -100,7 +100,7 @@ export default class FeatureTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

@@ -49,7 +49,7 @@ export default class TalentData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

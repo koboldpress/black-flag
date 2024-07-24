@@ -15,6 +15,7 @@ import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as enrichers from "./enrichers.mjs";
 import * as settings from "./settings.mjs";
+import TooltipConductor from "./tooltips.mjs";
 import * as utils from "./utils/_module.mjs";
 
 globalThis.BlackFlag = {
@@ -60,6 +61,8 @@ Hooks.once("init", function () {
 	settings.registerSettings();
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
+
+	game.blackFlag.tooltipConductor = new TooltipConductor();
 });
 
 Hooks.once("setup", function () {
@@ -70,6 +73,8 @@ Hooks.once("setup", function () {
 		makeDefault: true,
 		label: "BF.Sheet.Default.Journal"
 	});
+	TooltipConductor.activateListeners();
+	game.blackFlag.tooltipConductor.observe();
 
 	// Apply custom item compendium
 	game.packs

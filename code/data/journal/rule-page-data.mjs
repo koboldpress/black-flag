@@ -35,6 +35,24 @@ export default class RuleJournalPageData extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
+	async richTooltip(enrichmentOptions = {}) {
+		const context = {
+			page: this.parent,
+			type: CONFIG.BlackFlag.ruleTypes.localized[this.type],
+			content: await TextEditor.enrichHTML(this.tooltip || this.parent.text.content, {
+				relativeTo: this.parent,
+				...enrichmentOptions
+			})
+		};
+		return {
+			content: await renderTemplate("systems/black-flag/templates/journal/rule-page-tooltip.hbs", context),
+			classes: ["black-flag", "black-flag-tooltip", "rule-tooltip"]
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	async toEmbed(config, options = {}) {
 		return this.parent._embedTextPage(config, options);
 	}

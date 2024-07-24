@@ -373,7 +373,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

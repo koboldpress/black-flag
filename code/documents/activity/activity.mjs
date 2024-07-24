@@ -194,7 +194,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

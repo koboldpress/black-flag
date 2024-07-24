@@ -45,7 +45,7 @@ export default class LairData extends ActorDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

@@ -73,7 +73,7 @@ export default class FeatureData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

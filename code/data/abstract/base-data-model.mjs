@@ -251,7 +251,18 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*               Embeds                */
+	/*          Embeds & Tooltips          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Render a rich tooltip for this document.
+	 * @param {EnrichmentOptions} [enrichmentOptions={}] - Options for text enrichment.
+	 * @returns {{ content: string, classes: string[] }|null}
+	 */
+	async richTooltip(enrichmentOptions = {}) {
+		return null;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
