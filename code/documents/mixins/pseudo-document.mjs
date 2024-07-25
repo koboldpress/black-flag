@@ -258,7 +258,7 @@ export default Base =>
 		/* <><><><> <><><><> <><><><> <><><><> */
 
 		/**
-		 * Remove unnecessary keys from the context before passing it through to the update update.
+		 * Remove unnecessary keys from the context before passing it through to the update.
 		 * @param {DocumentModificationContext} context
 		 * @returns {DocumentModificationContext}
 		 * @internal

@@ -67,9 +67,13 @@
 									{{ selectOptions @root.faces selected=data.value.denomination blank=data.placeholder.denomination }}
 								</select>
 							{{else if (eq @root.type.input "usage")}}
-								<input type="number" name="configuration.scale.{{level}}.value" step="any"
-								       value="{{ data.value.value }}" placeholder="{{data.placeholder.value}}">
-								<select name="configuration.scale.{{ level }}.per"
+								{{#if data.value.infinite }}
+									<input type="text" value="∞" disabled>
+								{{else}}
+									<input type="number" name="configuration.scale.{{level}}.value" step="any"
+									       value="{{ data.value.value }}" placeholder="{{data.placeholder.value}}">
+								{{/if}}
+								<select name="configuration.scale.{{ level }}.per" {{ disabled data.value.infinite }}
 									{{~#unless data.value.per}} class="placeholder"{{/unless}}>
 									{{ selectOptions @root.CONFIG.recoveryPeriods.localized selected=data.value.per
 									                 blank=data.placeholder.per }}

@@ -100,7 +100,7 @@ export default class BasicRoll extends Roll {
 
 		let rolls;
 		if (dialog.configure !== false) {
-			let DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
+			const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
 			rolls = await DialogClass.configure(config, dialog, message);
 		} else {
 			rolls = config.rolls?.map(config => this.create(config)) ?? [];

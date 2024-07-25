@@ -472,7 +472,8 @@
 		"Title": "Scale Value",
 		"Hint": "A single value that changes with level that is made available in roll formulas (such as a Monk's martial arts die).",
 		"Identifier": {
-			"Hint": "This scale value for the current level will be available using <strong>@scale.{parentIdentifier}.{identifier}</strong> in a formula."
+			"Hint": "This scale value for the current level will be available using <blackFlag-copyable>@scale.<wbr>{parentIdentifier}.<wbr>{identifier}</blackflag-copyable> in a formula.",
+			"DiceHint": "Parts of the dice are also available. For the number of dice (e.g. 4 of 4d6) use <blackFlag-copyable>@scale.<wbr>{parentIdentifier}.<wbr>{identifier}.<wbr>number</blackFlag-copyable>, for the denomination (e.g. 6 of 4d6) use <blackFlag-copyable>@scale.<wbr>{parentIdentifier}.<wbr>{identifier}.<wbr>denomination</blackFlag-copyable>, and for the die (e.g. d6 of 4d6) use <blackFlag-copyable>@scale.<wbr>{parentIdentifier}.<wbr>{identifier}.<wbr>die</blackFlag-copyable>."
 		},
 		"Item": {
 			"Label": "Associated Item",

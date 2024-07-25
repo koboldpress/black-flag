@@ -35,13 +35,18 @@ export default class ScaleValueConfig extends AdvancementConfig {
 		const type = types[config.type];
 		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type];
 		const emptyPlaceholder = new ScaleValueType().placeholder;
+		let identifierHint = game.i18n.format(this.advancement.metadata.identifier.hint, {
+			parentIdentifier: this.advancement.parentIdentifier,
+			identifier: this.advancement.identifier
+		});
+		if (config.type === "dice")
+			identifierHint = `${identifierHint} ${game.i18n.format("BF.Advancement.ScaleValue.Identifier.DiceHint", {
+				parentIdentifier: this.advancement.parentIdentifier,
+				identifier: this.advancement.identifier
+			})}`;
+
 		return foundry.utils.mergeObject(super.getData(), {
-			default: {
-				identifierHint: game.i18n.format(this.advancement.metadata.identifier.hint, {
-					parentIdentifier: this.advancement.parentIdentifier,
-					identifier: this.advancement.identifier
-				})
-			},
+			default: { identifierHint },
 			type: type.metadata,
 			types: Object.fromEntries(Object.entries(types).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])),
 			faces: Object.fromEntries(CONFIG.BlackFlag.scaleDiceSizes.map(die => [die, `d${die}`])),

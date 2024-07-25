@@ -1,4 +1,12 @@
 blackFlag-copyable {
 	display: inline;
 	flex: 0 0 1em !important;
+
+	text-decoration: underline;
+	text-decoration-style: dashed;
+
+	&:not(:empty) {
+		font-weight: bold;
+		button { margin-inline-start: 3px; }
+	}
 }

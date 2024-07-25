@@ -42,7 +42,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	_cleanType(value, options) {
 		if (!(typeof value === "object")) value = {};
 
@@ -53,7 +53,7 @@ export default class TypeField extends foundry.data.fields.ObjectField {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	initialize(value, model, options = {}) {
 		const cls = this.getModel(value, model);
 		if (cls) return new cls(value, { parent: model, ...options });
