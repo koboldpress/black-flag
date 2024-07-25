@@ -34,17 +34,24 @@
 					<div class="field-group">
 						<label class="period">
 							<span>{{ localize "BF.Recovery.Period.Label" }}</span>
-							<select name="$.recovery.{{ @index }}.period">
-								{{#select period}}
-									{{#each validPeriods}}
-										<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
-									{{/each}}
-									<hr>
-									<option value="recharge" {{ disabled recharge.disabled }}>
-										{{ localize "BF.Recovery.Recharge.Label" }}
-									</option>
-								{{/select}}
-							</select>
+							{{#if isScaleValue}}
+								<input type="text" name="$.recovery.{{ @index }}.period" value="{{ period }}">
+							{{else}}
+								<select name="$.recovery.{{ @index }}.period">
+									{{#select period}}
+										{{#each validPeriods}}
+											<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
+										{{/each}}
+										<hr>
+										<option value="recharge" {{ disabled recharge.disabled }}>
+											{{ localize "BF.Recovery.Recharge.Label" }}
+										</option>
+										<option value="@scale.">
+											{{ localize "BF.Advancement.ScaleValue.Title" }}
+										</option>
+									{{/select}}
+								</select>
+							{{/if}}
 						</label>
 						{{#if (eq period "recharge")}}
 							<label class="recharge">

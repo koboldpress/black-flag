@@ -40,7 +40,7 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	 * @param {object} rollData
 	 */
 	prepareFinalActivities(rollData) {
-		this.uses.prepareData();
+		this.uses.prepareData(rollData);
 
 		this.uses.min = simplifyBonus(replaceFormulaData(this.uses.min ?? "", rollData, {
 			notifications: this.parent.notifications, key: "invalid-min-uses-formula", section: "auto",

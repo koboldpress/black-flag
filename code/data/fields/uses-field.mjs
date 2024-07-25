@@ -81,8 +81,9 @@ export class UsesData extends foundry.abstract.DataModel {
 
 	/**
 	 * Prepare uses data.
+	 * @param {object} rollData
 	 */
-	prepareData() {
+	prepareData(rollData) {
 		const existingPeriods = new Set(this.recovery.map(r => r.period));
 		for (const recovery of this.recovery) {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";
@@ -113,6 +114,16 @@ export class UsesData extends foundry.abstract.DataModel {
 				configurable: true,
 				enumerable: false
 			});
+
+			Object.defineProperty(recovery, "isScaleValue", {
+				value: recovery.period.startsWith("@scale"),
+				configurable: true,
+				enumerable: false
+			});
+			if (recovery.isScaleValue) {
+				const scaleValue = foundry.utils.getProperty(rollData, recovery.period.replace("@", ""));
+				if (scaleValue?.per) recovery.period = scaleValue.per;
+			}
 		}
 	}
 

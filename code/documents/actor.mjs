@@ -100,7 +100,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 						return c;
 					})
 					.sort((lhs, rhs) => lhs.priority - rhs.priority)
-					.forEach(c => Object.assign(overrides, applier.apply(this, c)));
+					.forEach(c => {
+						// Special handling of override to avoid issue with scale values
+						if (c.mode === CONST.ACTIVE_EFFECT_MODES.OVERRIDE) {
+							foundry.utils.setProperty(this, c.key, c.value);
+							overrides[c.key] = c.value;
+						} else Object.assign(overrides, applier.apply(this, c));
+					});
 			}
 		}
 
