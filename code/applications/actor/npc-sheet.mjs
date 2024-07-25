@@ -228,12 +228,20 @@ export default class NPCSheet extends BaseActorSheet {
 			const spells = [];
 			for (const spell of value.spells.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang))) {
 				const activity = spell.system.activities.find(a => a.activation.primary) ?? spell.system.activities.contents[0];
-				const usesRemaining = uses.max
-					? ` <span class="remaining">${numberFormat(spell.system.uses.value)}</span>`
-					: "";
-				spells.push(
-					`<span class="spell"><a data-action="activate" data-item-id="${spell.id}" data-activity-id="${activity.id}">${spell.name.toLowerCase()}</a>${usesRemaining}</span>`
-				);
+				if (activity) {
+					const usesRemaining = uses.max
+						? ` <span class="remaining">${numberFormat(spell.system.uses.value)}</span>`
+						: "";
+					spells.push(
+						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}" data-activity-id="${
+							activity.id
+						}">${spell.name.toLowerCase()}</a>${usesRemaining}</span>`
+					);
+				} else {
+					spells.push(
+						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}">${spell.name.toLowerCase()}</span>`
+					);
+				}
 			}
 			sections.push(`<p>${value.label}: ${spells.join(", ")}`);
 		}

@@ -213,62 +213,60 @@
 		</div>
 
 		{{#each actions}}
-			{{#if (or items.length @root.editable)}}
-				<div class="features {{ @key }}">
-					<h2>
-						{{ label }}
-						{{#if count}}
-							<div class="action-count">
-								{{#if @root.editable}}
-									<span>{{ count.value }}</span>
-									/
-									<input type="number" name="{{ count.prefix }}.max" value="{{ count.max }}" step="1" min="0">
-								{{else}}
-									<input type="text" name="{{ count.prefix }}.value" value="{{ count.value }}">
-									/
-									<span>{{ count.max }}</span>
-								{{/if}}
-							</div>
-						{{/if}}
-					</h2>
-					{{#if description}}
-						<p>{{ description }}</p>
-					{{/if}}
-					{{#each items}}
-						<div class="feature" data-item-id="{{ item.id }}"
-						     {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
-							<span class="controls">
-								{{#if @root.editable}}
-									<button type="button" class="link-button" data-action="edit"
-									        data-tooltip="BF.Activity.Core.Action.Edit"
-													aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
-										<i class="fa-solid fa-pen-to-square" inert></i>
-									</button>
-								{{/if}}
-								<a data-action="activate">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</a>
-							</span>
-							{{{ description }}}
+			<div class="features {{ @key }}">
+				<h2>
+					{{ label }}
+					{{#if count}}
+						<div class="action-count">
+							{{#if @root.editable}}
+								<span>{{ count.value }}</span>
+								/
+								<input type="number" name="{{ count.prefix }}.max" value="{{ count.max }}" step="1" min="0">
+							{{else}}
+								<input type="text" name="{{ count.prefix }}.value" value="{{ count.value }}">
+								/
+								<span>{{ count.max }}</span>
+							{{/if}}
 						</div>
-					{{/each}}
-					{{#if (and (eq @key "action") @root.spellcasting)}}
-					{{#with @root.spellcasting}}
-						<div class="spellcasting feature">
-							<span class="controls">
-								{{#if @root.editable}}
-									<button type="button" class="link-button" data-action="config" data-type="spellcasting"
-													data-tooltip="BF.Spellcasting.Action.Configure"
-													aria-label="{{ localize 'BF.Spellcasting.Action.Configure' }}">
-										<i class="fa-solid fa-cog" inert></i>
-									</button>
-								{{/if}}
-								{{ localize "BF.Spellcasting.Label" }}.
-							</span>
-							{{{ description }}}
-						</div>
-					{{/with}}
 					{{/if}}
-				</div>
-			{{/if}}
+				</h2>
+				{{#if description}}
+					<p>{{ description }}</p>
+				{{/if}}
+				{{#each items}}
+					<div class="feature" data-item-id="{{ item.id }}"
+					     {{~#if activity}} data-activity-id="{{ activity.id }}"{{/if}}>
+						<span class="controls">
+							{{#if @root.editable}}
+								<button type="button" class="link-button" data-action="edit"
+								        data-tooltip="BF.Activity.Core.Action.Edit"
+												aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+									<i class="fa-solid fa-pen-to-square" inert></i>
+								</button>
+							{{/if}}
+							<a data-action="activate">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</a>
+						</span>
+						{{{ description }}}
+					</div>
+				{{/each}}
+				{{#if (and (eq @key "action") @root.spellcasting)}}
+				{{#with @root.spellcasting}}
+					<div class="spellcasting feature">
+						<span class="controls">
+							{{#if @root.editable}}
+								<button type="button" class="link-button" data-action="config" data-type="spellcasting"
+												data-tooltip="BF.Spellcasting.Action.Configure"
+												aria-label="{{ localize 'BF.Spellcasting.Action.Configure' }}">
+									<i class="fa-solid fa-cog" inert></i>
+								</button>
+							{{/if}}
+							{{ localize "BF.Spellcasting.Label" }}.
+						</span>
+						{{{ description }}}
+					</div>
+				{{/with}}
+				{{/if}}
+			</div>
 		{{/each}}
 	</blackFlag-actions>
 </section>
