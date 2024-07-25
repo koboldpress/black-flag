@@ -37,6 +37,7 @@
 						{{else if (eq @root.type.input "usage")}}
 							<span>Number</span>
 							<span>Period</span>
+							<span class="checkbox">&infin;</span>
 						{{/if}}
 					</label>
 				</li>
@@ -73,6 +74,8 @@
 									{{ selectOptions @root.CONFIG.recoveryPeriods.localized selected=data.value.per
 									                 blank=data.placeholder.per }}
 								</select>
+								<input class="checkbox" type="checkbox" name="configuration.scale.{{ level }}.infinite"
+								       {{ checked data.value.infinite }}>
 							{{/if}}
 						</label>
 					</li>

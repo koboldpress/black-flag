@@ -942,7 +942,7 @@ export default class PCData extends ActorDataModel.mixin(
 
 	/** @inheritDoc */
 	async _onUpdate(changed, options, userId) {
-		await super._onUpdate(data, options, userId);
+		await super._onUpdate(changed, options, userId);
 		if (userId === game.userId) {
 			await this.updateEncumbrance(options);
 		}

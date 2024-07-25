@@ -84,7 +84,7 @@ export default class ScaleValueAdvancement extends Advancement {
 
 	/** @override */
 	changes(levels) {
-		const value = this.valueForLevel(this.relavantLevel(levels));
+		const value = this.valueForLevel(this.relavantLevel(levels))?.formula;
 		return value
 			? [
 					{

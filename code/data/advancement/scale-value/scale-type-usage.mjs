@@ -1,6 +1,6 @@
 import ScaleTypeNumber from "./scale-type-number.mjs";
 
-const { NumberField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Scale value data that stores a feature's usage number.
@@ -10,7 +10,8 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 	static defineSchema() {
 		return {
 			value: new NumberField({ nullable: true, integer: true, min: 0 }),
-			per: new StringField({ blank: false, initial: "sr" })
+			per: new StringField({ blank: false, initial: "sr" }),
+			infinite: new BooleanField({ required: false })
 		};
 	}
 
@@ -43,8 +44,16 @@ export default class ScaleTypeUsage extends ScaleTypeNumber {
 
 	/** @inheritDoc */
 	get display() {
+		const value = this.infinite ? "∞" : this.value;
 		const abbr = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[this.per];
-		return [this.value, abbr].filter(v => v).join("/");
+		return [value, abbr].filter(v => v).join("/");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get formula() {
+		return this.infinite ? Infinity : super.formula;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

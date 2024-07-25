@@ -87,7 +87,7 @@ export default class TooltipConductor {
 	 * @protected
 	 */
 	async _onHoverContentLink(doc) {
-		const { content, classes } = await (doc.richTooltip?.() ?? doc.system?.richTooltip?.() ?? {});
+		const { content, classes } = (await (doc.richTooltip?.() ?? doc.system?.richTooltip?.())) ?? {};
 		if (!content) return;
 		this.tooltip.innerHTML = content;
 		if (classes?.length) this.tooltip.classList.add(...classes);
