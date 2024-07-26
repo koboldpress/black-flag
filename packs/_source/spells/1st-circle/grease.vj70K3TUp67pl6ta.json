@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a large puddle of slippery grease that is difficult to stand in.</em></p><p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.</p><p>When the grease appears, each creature standing in its area must succeed on a DEX save or fall prone. A creature that enters the area or ends its turn there must also succeed on a DEX save or fall prone.</p>",
+      "value": "<p>Slick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.</p><p>When the grease appears, each creature standing in its area must succeed on a [[/save]] save or fall prone. A creature that enters the area or ends its turn there must also succeed on a [[/save]] save or fall &amp;Reference[prone].</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -94,12 +94,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "conjuration",
     "source": [
@@ -114,10 +116,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.040",
+    "coreVersion": "12.329",
     "createdTime": 1706933970750,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1721967810234,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

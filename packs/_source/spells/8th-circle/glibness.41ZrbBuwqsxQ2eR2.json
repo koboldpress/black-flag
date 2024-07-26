@@ -1,14 +1,14 @@
 {
-  "folder": "tCxdqzClsLOnTgfE",
-  "name": "Greater Invisibility",
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Glibness",
   "type": "spell",
-  "_id": "6T8BIGQrvpiLF4CE",
-  "img": "icons/magic/control/silhouette-hold-change-blue.webp",
+  "_id": "41ZrbBuwqsxQ2eR2",
+  "img": "icons/magic/control/fear-fright-monster-purple-blue.webp",
   "system": {
     "activities": {
-      "xMhSeLqHAknWNLlY": {
+      "sDk7uWSbofLxB0pI": {
         "type": "utility",
-        "_id": "xMhSeLqHAknWNLlY",
+        "_id": "sDk7uWSbofLxB0pI",
         "description": "",
         "system": {},
         "activation": {
@@ -28,6 +28,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -50,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You or a creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person.</p>",
+      "value": "<p>Until the spell ends, when you make a CHA ability check or save, you can replace the number you roll with a 15. In addition, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -58,11 +59,11 @@
     },
     "source": [
       "arcane",
-      "wyrd"
+      "divine"
     ],
     "circle": {
       "value": null,
-      "base": 4
+      "base": 8
     },
     "casting": {
       "value": null,
@@ -71,8 +72,7 @@
     },
     "components": {
       "required": [
-        "verbal",
-        "somatic"
+        "verbal"
       ],
       "material": {
         "consumed": false,
@@ -81,19 +81,20 @@
       }
     },
     "duration": {
-      "units": "minute",
+      "units": "hour",
       "value": "1"
     },
     "tags": [
       "concentration"
     ],
     "range": {
-      "units": "touch",
+      "units": "self",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
@@ -102,11 +103,11 @@
         "type": ""
       }
     },
-    "school": "illusion"
+    "school": "transmutation"
   },
   "effects": [
     {
-      "origin": "Compendium.black-flag.spells.Item.6T8BIGQrvpiLF4CE",
+      "origin": "Compendium.black-flag.spells.Item.41ZrbBuwqsxQ2eR2",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -117,18 +118,23 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Greater Invisibility",
-      "img": "icons/magic/control/silhouette-hold-change-blue.webp",
-      "_id": "0ShGxgKcNXknjuzk",
+      "name": "Glibness",
+      "img": "icons/magic/control/fear-fright-monster-purple-blue.webp",
+      "_id": "4KLy854QcvLlmoIq",
       "type": "base",
       "system": {},
-      "changes": [],
-      "description": "<p>You become invisible until the spell ends. Anything you are wearing or carrying is invisible as long as it is on your person.</p>",
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"min\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }, { \"k\": \"ability\", \"v\": \"charisma\" }], \"formula\": \"15\" }",
+          "priority": null
+        }
+      ],
+      "description": "<p>Until the spell ends, when you make a CHA ability check or save, you can replace the number you roll with a 15. In addition, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.</p>",
       "tint": "#ffffff",
       "transfer": false,
-      "statuses": [
-        "invisible"
-      ],
+      "statuses": [],
       "sort": 0,
       "flags": {},
       "_stats": {
@@ -137,11 +143,11 @@
         "coreVersion": "12.329",
         "systemId": "black-flag",
         "systemVersion": "0.10.040",
-        "createdTime": 1721968191955,
-        "modifiedTime": 1721968228520,
+        "createdTime": 1721967335121,
+        "modifiedTime": 1721967426554,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!items.effects!6T8BIGQrvpiLF4CE.0ShGxgKcNXknjuzk"
+      "_key": "!items.effects!41ZrbBuwqsxQ2eR2.4KLy854QcvLlmoIq"
     }
   ],
   "sort": 0,
@@ -150,13 +156,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
     "systemId": "black-flag",
     "systemVersion": "0.10.040",
-    "coreVersion": "12.329",
-    "createdTime": 1718732379317,
-    "modifiedTime": 1721968233922,
-    "lastModifiedBy": "blackflag0000000",
-    "duplicateSource": null
+    "createdTime": 1721967208310,
+    "modifiedTime": 1721967644233,
+    "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!6T8BIGQrvpiLF4CE"
+  "_key": "!items!41ZrbBuwqsxQ2eR2"
 }

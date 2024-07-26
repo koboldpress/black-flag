@@ -1,14 +1,14 @@
 {
-  "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Greater Hold",
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Greater Dominate",
   "type": "spell",
-  "_id": "09Sensm5KJcvLdhx",
-  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+  "_id": "XX4X5OCH1VUZeJus",
+  "img": "icons/magic/control/debuff-chains-red.webp",
   "system": {
     "activities": {
-      "JhD3cjoHhcKtZgdH": {
+      "8N7wOWQSn0rQvCGu": {
         "type": "savingThrow",
-        "_id": "JhD3cjoHhcKtZgdH",
+        "_id": "8N7wOWQSn0rQvCGu",
         "description": "",
         "system": {
           "ability": "wisdom",
@@ -39,6 +39,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -65,7 +66,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose any creature that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, an affected target can repeat the WIS save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+      "value": "<p>You attempt to beguile any creature that you can see within range. This spell has no effect on creatures immune to the charmed condition. The target must succeed on a [[/save]] save or be &amp;Reference[charmed] by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the save.</p><p>While the creature is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as <q>attack that creature</q>, <q>run over there</q>, or <q>fetch that object</q>. If the creature completes the order and doesn’t receive further direction from you, it defends and preserves itself to the best of its ability.</p><p>You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose and doesn’t do anything that you don’t allow it to do.</p><p>During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.</p><p>Each time the target takes damage, it makes a new [[/save]] save against the spell, ending the spell on a success.</p><p><em>At Higher Circles.</em> When you cast this spell with a 9th‑circle spell slot, the duration is concentration, up to 8 hours.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -73,12 +74,11 @@
     },
     "source": [
       "arcane",
-      "divine",
       "wyrd"
     ],
     "circle": {
       "value": null,
-      "base": 5
+      "base": 8
     },
     "casting": {
       "value": null,
@@ -88,38 +88,38 @@
     "components": {
       "required": [
         "verbal",
-        "somatic",
-        "material"
+        "somatic"
       ],
       "material": {
         "consumed": false,
         "cost": null,
         "denomination": "gp",
-        "description": "a small, straight piece of iron"
+        "description": ""
       }
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "hour",
+      "value": "1 + (@scaling.increase * 7)"
     },
     "tags": [
       "concentration"
     ],
     "range": {
       "units": "foot",
-      "value": "90",
+      "value": "60",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "@scaling",
+        "count": "1",
         "special": ""
       }
     },
@@ -127,7 +127,7 @@
   },
   "effects": [
     {
-      "origin": "Compendium.black-flag.spells.Item.09Sensm5KJcvLdhx",
+      "origin": "Compendium.black-flag.spells.Item.XX4X5OCH1VUZeJus",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -138,17 +138,17 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Greater Hold",
-      "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
-      "_id": "tsOaoxMRt50UThBg",
+      "name": "Greater Dominate",
+      "img": "icons/magic/control/debuff-chains-red.webp",
+      "_id": "taMAON6HV6XtBdcL",
       "type": "base",
       "system": {},
       "changes": [],
-      "description": "<p>You are paralyzed. At the end of each of your turns, you can repeat the [[/save wisdom]] save, ending the effect on a success.</p>",
+      "description": "<p>Each time you take damage, you can make a new [[/save wisdom]] save against the spell, ending the spell on a success.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [
-        "paralyzed"
+        "charmed"
       ],
       "sort": 0,
       "flags": {},
@@ -158,11 +158,11 @@
         "coreVersion": "12.329",
         "systemId": "black-flag",
         "systemVersion": "0.10.040",
-        "createdTime": 1721968121276,
-        "modifiedTime": 1721968172125,
+        "createdTime": 1721967996902,
+        "modifiedTime": 1721968073335,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!items.effects!09Sensm5KJcvLdhx.tsOaoxMRt50UThBg"
+      "_key": "!items.effects!XX4X5OCH1VUZeJus.taMAON6HV6XtBdcL"
     }
   ],
   "sort": 0,
@@ -171,13 +171,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.329",
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
-    "createdTime": 1718423902080,
-    "modifiedTime": 1720282842346,
-    "lastModifiedBy": "blackflag0000000",
-    "duplicateSource": null
+    "systemVersion": "0.10.040",
+    "createdTime": 1721967839064,
+    "modifiedTime": 1721968087337,
+    "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!09Sensm5KJcvLdhx"
+  "_key": "!items!XX4X5OCH1VUZeJus"
 }

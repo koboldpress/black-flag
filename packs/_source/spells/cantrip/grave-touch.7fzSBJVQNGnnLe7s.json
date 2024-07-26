@@ -22,19 +22,29 @@
                 "number": 1,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "necrotic"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "necrotic",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
           "ability": "none",
           "attack": {
-            "flat": false
+            "flat": false,
+            "bonus": ""
           }
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -61,7 +71,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You create a death grip to assail your target’s life force.</em></p><p>You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can’t regain hit points until the start of your next turn. Until then, the hand clings to the target.</p><p>If you hit an Undead target, it also has disadvantage on attack rolls against you until the end of your next turn.</p><p>This spell’s damage increases by 1d8 when you reach 5th level (2d8).</p>",
+      "value": "<p>You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can’t regain hit points until the start of your next turn. Until then, the hand clings to the target.</p><p>If you hit an Undead target with this attack, it also has disadvantage on attack rolls against you until the end of your next turn.</p><p>This spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -104,16 +114,19 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "120"
+      "value": "120",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -124,10 +137,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.040",
+    "coreVersion": "12.329",
     "createdTime": 1706933890640,
-    "modifiedTime": 1714412767187,
+    "modifiedTime": 1721967740623,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

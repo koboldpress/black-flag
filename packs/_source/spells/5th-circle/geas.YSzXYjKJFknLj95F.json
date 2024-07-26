@@ -1,19 +1,35 @@
 {
   "folder": "rRg9we6fU3e9Hvu7",
-  "name": "Greater Hold",
+  "name": "Geas",
   "type": "spell",
-  "_id": "09Sensm5KJcvLdhx",
-  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+  "_id": "YSzXYjKJFknLj95F",
+  "img": "icons/tools/fasteners/chain-steel-blue.webp",
   "system": {
     "activities": {
-      "JhD3cjoHhcKtZgdH": {
+      "phLWMSILqjWCg3GF": {
         "type": "savingThrow",
-        "_id": "JhD3cjoHhcKtZgdH",
+        "_id": "phLWMSILqjWCg3GF",
         "description": "",
         "system": {
           "ability": "wisdom",
           "damage": {
-            "parts": []
+            "parts": [
+              {
+                "number": 5,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "psychic",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
           },
           "dc": {
             "ability": ""
@@ -39,6 +55,7 @@
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -65,7 +82,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose any creature that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, an affected target can repeat the WIS save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+      "value": "<p>You place a magical command on a creature that you can see within range, forcing it to carry out some service or refrain from some action or course of activity as you decide. If the creature can understand you, it must succeed on a [[/save]] save or become charmed by you for the duration. While the creature is charmed by you, it takes [[/damage]] damage each time it acts in a manner directly counter to your instructions, but no more than once each day. A creature that can’t understand you is unaffected by the spell.</p><p>You can issue any command you choose. However, should you issue a command that would result in certain death, the spell ends.</p><p>You can end the spell early by using an action to dismiss it. A <em>remove curse</em>, <em>greater restoration</em>, or <em>wish</em> spell also ends it.</p><p><em>At Higher Circles.</em> As you unlock higher circles, this ritual grows in potency. Once you have access to 7th-circle spell slots, the duration of this spell is 1 year. Once you have access to 9th-circle spell slots, the spell lasts until it is ended by one of the spells mentioned above.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -81,45 +98,45 @@
       "base": 5
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
       "required": [
         "verbal",
-        "somatic",
         "material"
       ],
       "material": {
-        "consumed": false,
-        "cost": null,
+        "consumed": true,
+        "cost": 50,
         "denomination": "gp",
-        "description": "a small, straight piece of iron"
+        "description": "a set of silver manacles worth 50 gp, which the spell consumes"
       }
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "day",
+      "value": "30"
     },
     "tags": [
-      "concentration"
+      "ritual"
     ],
     "range": {
       "units": "foot",
-      "value": "90",
+      "value": "60",
       "special": ""
     },
     "target": {
       "template": {
         "count": 1,
+        "contiguous": false,
         "units": "foot",
         "type": ""
       },
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "@scaling",
+        "count": "1",
         "special": ""
       }
     },
@@ -127,7 +144,7 @@
   },
   "effects": [
     {
-      "origin": "Compendium.black-flag.spells.Item.09Sensm5KJcvLdhx",
+      "origin": "Compendium.black-flag.spells.Item.YSzXYjKJFknLj95F",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -138,31 +155,31 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Greater Hold",
-      "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
-      "_id": "tsOaoxMRt50UThBg",
+      "name": "Geas",
+      "img": "icons/tools/fasteners/chain-steel-blue.webp",
+      "_id": "ge3zgPmueDn9aNCN",
       "type": "base",
       "system": {},
       "changes": [],
-      "description": "<p>You are paralyzed. At the end of each of your turns, you can repeat the [[/save wisdom]] save, ending the effect on a success.</p>",
+      "description": "",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [
-        "paralyzed"
+        "charmed"
       ],
       "sort": 0,
       "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.040",
-        "createdTime": 1721968121276,
-        "modifiedTime": 1721968172125,
+        "createdTime": 1721969306492,
+        "modifiedTime": 1721969330711,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!items.effects!09Sensm5KJcvLdhx.tsOaoxMRt50UThBg"
+      "_key": "!items.effects!YSzXYjKJFknLj95F.ge3zgPmueDn9aNCN"
     }
   ],
   "sort": 0,
@@ -171,13 +188,13 @@
   },
   "flags": {},
   "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
-    "createdTime": 1718423902080,
-    "modifiedTime": 1720282842346,
-    "lastModifiedBy": "blackflag0000000",
-    "duplicateSource": null
+    "systemVersion": "0.10.040",
+    "createdTime": 1721969000954,
+    "modifiedTime": 1721969222632,
+    "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!09Sensm5KJcvLdhx"
+  "_key": "!items!YSzXYjKJFknLj95F"
 }
