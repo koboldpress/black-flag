@@ -42,6 +42,7 @@ Hooks.once("init", function () {
 	CONFIG.Item.collection = data.collection.BlackFlagItems;
 	CONFIG.Item.compendiumIndexFields.push("system.container");
 	CONFIG.Note.objectClass = canvas.BlackFlagNote;
+	CONFIG.ui.chat = applications.BlackFlagChatLog;
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	CONFIG.ui.items = applications.item.BlackFlagItemDirectory;
 	applications.registerCustomElements();

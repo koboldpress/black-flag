@@ -5,6 +5,12 @@ import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
  * Extended version of ChatMessage to highlight critical damage, support luck modifications, and other system features.
  */
 export default class BlackFlagChatMessage extends ChatMessage {
+	/**
+	 * Item types representing chat trays that can open and close.
+	 * @type {string[]}
+	 */
+	static TRAY_TYPES = ["blackFlag-attackResult", "blackFlag-damageApplication"];
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -12,6 +18,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/**
 	 * The currently highlighted token from this message.
 	 * @type {BlackFlagToken|null}
+	 * @protected
 	 */
 	_highlighted = null;
 
@@ -32,6 +39,15 @@ export default class BlackFlagChatMessage extends ChatMessage {
 				return false;
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Store the state of any trays in the message.
+	 * @type {Map<string, boolean>}
+	 * @protected
+	 */
+	_trayStates;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
@@ -76,8 +92,8 @@ export default class BlackFlagChatMessage extends ChatMessage {
 				collapse = this.timestamp < Date.now() - 5 * 60 * 1000;
 				break;
 		}
-		for (const element of html.querySelectorAll("blackFlag-attackResult, blackFlag-damageApplication")) {
-			element.toggleAttribute("open", !collapse);
+		for (const element of html.querySelectorAll(this.constructor.TRAY_TYPES.join(", "))) {
+			element.toggleAttribute("open", this._trayStates?.get(element.tagName) ?? !collapse);
 		}
 	}
 
