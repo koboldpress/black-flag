@@ -52,8 +52,33 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			await this._renderAttackUI(html);
 			await this._renderDamageUI(html);
 		}
+		this._collapseTrays(html);
 
 		return jQuery;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle collapsing or expanding chat trays.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_collapseTrays(html) {
+		let collapse;
+		switch (game.settings.get(game.system.id, "collapseChatTrays")) {
+			case "always":
+				collapse = true;
+				break;
+			case "never":
+				collapse = false;
+				break;
+			case "older":
+				collapse = this.timestamp < Date.now() - 5 * 60 * 1000;
+				break;
+		}
+		for (const element of html.querySelectorAll("blackFlag-attackResult, blackFlag-damageApplication")) {
+			element.toggleAttribute("open", !collapse);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

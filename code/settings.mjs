@@ -76,6 +76,20 @@ export function registerSettings() {
 		}
 	});
 
+	game.settings.register(game.system.id, "collapseChatTrays", {
+		name: "BF.Settings.CollapseTrays.Label",
+		hint: "BF.Settings.CollapseTrays.Hint",
+		scope: "client",
+		config: true,
+		default: "older",
+		type: String,
+		choices: {
+			never: "BF.Settings.CollapseTrays.Never",
+			older: "BF.Settings.CollapseTrays.Older",
+			always: "BF.Settings.CollapseTrays.Always"
+		}
+	});
+
 	game.settings.register(game.system.id, "encumbrance", {
 		name: "BF.Settings.Encumbrance.Label",
 		hint: "BF.Settings.Encumbrance.Hint",

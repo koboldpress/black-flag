@@ -109,14 +109,4 @@ export default class AttackResultElement extends ChatTrayElement {
 
 		return li;
 	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Refresh the damage total on a list entry based on modified options.
-	 * @param {BlackFlagActor} token
-	 * @param {HTMLLiElement} entry
-	 * @param {DamageApplicationOptions} options
-	 */
-	refreshListEntry(token, entry, options) {}
 }
