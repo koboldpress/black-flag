@@ -129,7 +129,7 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		const ability = this.parent.actor?.system.abilities[this.parent.attackAbility];
+		const ability = this.parent.actor?.system.abilities?.[this.parent.attackAbility];
 		const rollData = this.parent.item.getRollData({ deterministic: true });
 		const { parts, data } = buildRoll(
 			{

@@ -243,7 +243,7 @@ export default class AttackActivity extends DamageActivity {
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
 	getAttackDetails(options = {}) {
-		const ability = this.actor?.system.abilities[this.attackAbility];
+		const ability = this.actor?.system.abilities?.[this.attackAbility];
 		const rollData = this.item.getRollData();
 		const { parts, data } = buildRoll(
 			this.system.attack.flat
