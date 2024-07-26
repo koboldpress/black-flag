@@ -1,6 +1,6 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{ localize "BF.Senses.Label" }}</legend>
+		<legend>{{ localize "BF.Sense.Label[other]" }}</legend>
 		{{#each types}}
 			<label>
 				<span>{{ label }}</span>
@@ -9,7 +9,7 @@
 		{{/each}}
 	</fieldset>
 	<fieldset>
-		<legend>{{ localize "BF.Senses.Tag.Label" }}</legend>
+		<legend>{{ localize "BF.Sense.Tag.Label" }}</legend>
 		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags" }}
 	</fieldset>
 </form>

@@ -240,13 +240,16 @@ export const itemProperties = {
 
 	// Armor
 	cumbersome: {
-		label: "BF.Armor.Property.Cumbersome"
+		label: "BF.Armor.Property.Cumbersome",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.520mFFl9c7MsE3X5"
 	},
 	naturalMaterials: {
-		label: "BF.Armor.Property.NaturalMaterials"
+		label: "BF.Armor.Property.NaturalMaterials",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.DgadUc3PINhgxqT7"
 	},
 	noisy: {
-		label: "BF.Armor.Property.Noisy"
+		label: "BF.Armor.Property.Noisy",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.fbvoFGjhh0fwqVxI"
 	},
 
 	// Container
@@ -256,31 +259,40 @@ export const itemProperties = {
 
 	// Weapon
 	ammunition: {
-		label: "BF.Weapon.Property.Ammunition"
+		label: "BF.Weapon.Property.Ammunition",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.hEqdEZpofvIVhZbV"
 	},
 	finesse: {
-		label: "BF.Weapon.Property.Finesse"
+		label: "BF.Weapon.Property.Finesse",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.Nwe1EXlZHGBrNOGD"
 	},
 	heavy: {
-		label: "BF.Weapon.Property.Heavy"
+		label: "BF.Weapon.Property.Heavy",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.06OJCIgMWhfAWfi6"
 	},
 	light: {
-		label: "BF.Weapon.Property.Light"
+		label: "BF.Weapon.Property.Light",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.AjLCb6Qp0btCuzv1"
 	},
 	loading: {
-		label: "BF.Weapon.Property.Loading"
+		label: "BF.Weapon.Property.Loading",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.6T8MmG97dLpEOv36"
 	},
 	reach: {
-		label: "BF.Weapon.Property.Reach"
+		label: "BF.Weapon.Property.Reach",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.IqJ491vX9cgfBC4a"
 	},
 	thrown: {
-		label: "BF.Weapon.Property.Thrown"
+		label: "BF.Weapon.Property.Thrown",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.nlNCYugyCLULTc55"
 	},
 	twoHanded: {
-		label: "BF.Weapon.Property.TwoHanded"
+		label: "BF.Weapon.Property.TwoHanded",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.ncge72BaBpqk68V0"
 	},
 	versatile: {
-		label: "BF.Weapon.Property.Versatile"
+		label: "BF.Weapon.Property.Versatile",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.iuDmrgxZEnH5bQF0"
 	}
 };
 localizeConfig(itemProperties);

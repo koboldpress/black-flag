@@ -16,7 +16,7 @@ export default class SensesConfig extends BaseConfig {
 
 	/** @inheritDoc */
 	get type() {
-		return game.i18n.localize("BF.Senses.Label");
+		return game.i18n.localize("BF.Sense.Label[other]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

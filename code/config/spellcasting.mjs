@@ -66,15 +66,18 @@ export const spellcastingTypes = {
 export const spellComponents = {
 	verbal: {
 		label: "BF.Spell.Component.Verbal.Label",
-		abbreviation: "BF.Spell.Component.Verbal.Abbreviation"
+		abbreviation: "BF.Spell.Component.Verbal.Abbreviation",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.W1SxhcKBlrC3j8bI"
 	},
 	somatic: {
 		label: "BF.Spell.Component.Somatic.Label",
-		abbreviation: "BF.Spell.Component.Somatic.Abbreviation"
+		abbreviation: "BF.Spell.Component.Somatic.Abbreviation",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.VO8PLFNF1WHN6exu"
 	},
 	material: {
 		label: "BF.Spell.Component.Material.Label",
-		abbreviation: "BF.Spell.Component.Material.Abbreviation"
+		abbreviation: "BF.Spell.Component.Material.Abbreviation",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.wLWe4finRmO658xK"
 	}
 };
 
@@ -200,28 +203,36 @@ export function spellCircles({ dashed = false, plural = false, includeCantrip = 
  */
 export const spellSchools = {
 	abjuration: {
-		label: "BF.Spell.School.Abjuration.Label"
+		label: "BF.Spell.School.Abjuration.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.DcoTpX7y2OtoUFrL"
 	},
 	conjuration: {
-		label: "BF.Spell.School.Conjuration.Label"
+		label: "BF.Spell.School.Conjuration.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.zDbDUgVoYHwwMdUd"
 	},
 	divination: {
-		label: "BF.Spell.School.Divination.Label"
+		label: "BF.Spell.School.Divination.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.40jPfp8PbmjhJfgS"
 	},
 	enchantment: {
-		label: "BF.Spell.School.Enchantment.Label"
+		label: "BF.Spell.School.Enchantment.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.XxEvnr7eyY4g7m7M"
 	},
 	evocation: {
-		label: "BF.Spell.School.Evocation.Label"
+		label: "BF.Spell.School.Evocation.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.kxX9JTanZWJkEzpc"
 	},
 	illusion: {
-		label: "BF.Spell.School.Illusion.Label"
+		label: "BF.Spell.School.Illusion.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.PaxaHveatHiNGdSY"
 	},
 	necromancy: {
-		label: "BF.Spell.School.Necromancy.Label"
+		label: "BF.Spell.School.Necromancy.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.cWCZy1b9fvechVL1"
 	},
 	transmutation: {
-		label: "BF.Spell.School.Transmutation.Label"
+		label: "BF.Spell.School.Transmutation.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.TQXdW6aA3LjO10Ol"
 	}
 };
 localizeConfig(spellSchools);
@@ -234,16 +245,20 @@ localizeConfig(spellSchools);
  */
 export const spellSources = {
 	arcane: {
-		label: "BF.Spell.Source.Arcane.Label"
+		label: "BF.Spell.Source.Arcane.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.SM8bmpPSa9muCW30"
 	},
 	divine: {
-		label: "BF.Spell.Source.Divine.Label"
+		label: "BF.Spell.Source.Divine.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.sq1yhbfrrTAqw5c5"
 	},
 	primordial: {
-		label: "BF.Spell.Source.Primordial.Label"
+		label: "BF.Spell.Source.Primordial.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.Egu3TijvCVrn6NxR"
 	},
 	wyrd: {
-		label: "BF.Spell.Source.Wyrd.Label"
+		label: "BF.Spell.Source.Wyrd.Label",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.n0wni0OGVRyrenVZ"
 	}
 };
 localizeConfig(spellSources);

@@ -225,16 +225,20 @@ export const movementTypes = {
 		label: "BF.Movement.Type.Walk"
 	},
 	climb: {
-		label: "BF.Movement.Type.Climb"
+		label: "BF.Movement.Type.Climb",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CdBLKsrlKHR5HvDr"
 	},
 	fly: {
-		label: "BF.Movement.Type.Fly"
+		label: "BF.Movement.Type.Fly",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CHNmwHjrIZtXEsf4"
 	},
 	swim: {
-		label: "BF.Movement.Type.Swim"
+		label: "BF.Movement.Type.Swim",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.nzj83NdxpPZQoW6Z"
 	},
 	burrow: {
-		label: "BF.Movement.Type.Burrow"
+		label: "BF.Movement.Type.Burrow",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.jzO6qMcEroDupZDD"
 	}
 };
 localizeConfig(movementTypes);
@@ -323,16 +327,20 @@ export const rest = {
  */
 export const senses = {
 	darkvision: {
-		label: "BF.Senses.Type.Darkvision"
+		label: "BF.Sense.Type.Darkvision",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.wdYu7KK3IEKJ8lte"
 	},
 	keensense: {
-		label: "BF.Senses.Type.Keensense"
+		label: "BF.Sense.Type.Keensense",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.gueujRnHAjOZxT6g"
 	},
 	tremorsense: {
-		label: "BF.Senses.Type.Tremorsense"
+		label: "BF.Sense.Type.Tremorsense",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.iGH9wAnloILFHmX8"
 	},
 	truesight: {
-		label: "BF.Senses.Type.Truesight"
+		label: "BF.Sense.Type.Truesight",
+		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.rGryrzkJD8x0LNkT"
 	}
 };
 localizeConfig(senses);
@@ -345,8 +353,8 @@ localizeConfig(senses);
  */
 export const senseTags = {
 	cantSense: {
-		label: "BF.Senses.Tag.CantSense.Label",
-		display: "BF.Senses.Tag.CantSense.Display",
+		label: "BF.Sense.Tag.CantSense.Label",
+		display: "BF.Sense.Tag.CantSense.Display",
 		type: "associated",
 		association: "keensense"
 	}
