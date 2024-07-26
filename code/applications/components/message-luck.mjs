@@ -120,7 +120,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		if (message.getFlag("core", "initiativeRoll")) return !!message.getCombatant();
 
 		// Only certain roll types can be modified by luck
-		const rollType = message.flags[game.system.id]?.roll?.type;
+		const rollType = message.flags[game.system.id]?.type;
 		return CONFIG.BlackFlag.luck.validRollTypes.has(rollType);
 	}
 
@@ -149,10 +149,10 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		// Update the roll with bonus
 		let bonusTerm = roll.terms.find(t => t.options.luckBonus);
 		if (!bonusTerm) {
-			const operatorTerm = new OperatorTerm({ operator: "+" });
+			const operatorTerm = new foundry.dice.terms.OperatorTerm({ operator: "+" });
 			await operatorTerm.evaluate();
 			roll.terms.push(operatorTerm);
-			bonusTerm = new NumericTerm({ number: 0, options: { luckBonus: true } });
+			bonusTerm = new foundry.dice.terms.NumericTerm({ number: 0, options: { luckBonus: true } });
 			await bonusTerm.evaluate();
 			roll.terms.push(bonusTerm);
 		}
