@@ -18,15 +18,6 @@ const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields
 export default class FeatureTemplate extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			category: "features"
-		};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			restriction: new SchemaField({

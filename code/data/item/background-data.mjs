@@ -15,16 +15,21 @@ export default class BackgroundData extends ItemDataModel.mixin(
 	DescriptionTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "background",
-			category: "concept",
-			localization: "BF.Item.Type.Background",
-			icon: "fa-solid fa-person-digging",
-			img: "systems/black-flag/artwork/types/background.svg",
-			accentColor: "#0000aa"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "background",
+				category: "concept",
+				localization: "BF.Item.Type.Background",
+				icon: "fa-solid fa-person-digging",
+				img: "systems/black-flag/artwork/types/background.svg",
+				accentColor: "#0000aa",
+				register: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

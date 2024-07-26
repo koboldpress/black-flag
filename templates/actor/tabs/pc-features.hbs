@@ -12,7 +12,7 @@
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
-					<tr data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
+					<tr class="item-tooltip" data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
 						<th class="name" scope="row">
 							<div class="layout">
 								<img src="{{ img }}">

@@ -12,13 +12,16 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @typedef {BaseDataMetadata} ItemDataMetadata
 	 * @property {string} [accentColor] - Accent color to use if none is specified by system data.
 	 * @property {boolean|ItemRegistrationConfig} [register] - Register all items of this type within the central list.
+	 * @property {string} [tooltipTemplate]
 	 */
 
 	/**
 	 * Metadata that describes a type.
 	 * @type {ItemDataMetadata}
 	 */
-	static metadata = {};
+	static metadata = Object.freeze({
+		tooltipTemplate: "systems/black-flag/templates/item/item-tooltip.hbs"
+	});
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
@@ -94,6 +97,43 @@ export default class ItemDataModel extends BaseDataModel {
 	 * Final data preparation steps performed on Items after parent actor has been fully prepared.
 	 */
 	prepareFinalData() {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Embeds & Tooltips          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async richTooltip(enrichmentOptions = {}) {
+		if (!this.metadata.tooltipTemplate) return null;
+		return {
+			content: await renderTemplate(this.metadata.tooltipTemplate, await this.getTooltipData(enrichmentOptions)),
+			classes: ["black-flag", "black-flag-tooltip", "item-tooltip"]
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Fetch the context used to render this item's rich tooltip.
+	 * @param {EnrichmentOptions} enrichmentOptions - Options for text enrichment.
+	 * @returns {Promise<object>}
+	 */
+	async getTooltipData(enrichmentOptions = {}) {
+		const description = foundry.utils.getProperty(this, this.embeddedDescriptionKeyPath) ?? "";
+		const rollData = this.parent.getRollData();
+		const context = {
+			item: this.parent,
+			description: await TextEditor.enrichHTML(description, {
+				rollData,
+				relativeTo: this.parent,
+				...enrichmentOptions
+			}),
+			tags: Array.from(this.chatTags.entries())
+				.map(([key, label]) => ({ key, label }))
+				.filter(t => t.label)
+		};
+		return context;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */

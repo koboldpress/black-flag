@@ -15,15 +15,20 @@ const { ColorField } = foundry.data.fields;
  */
 export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate, DescriptionTemplate) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "class",
-			category: "concept",
-			localization: "BF.Item.Type.Class",
-			icon: "fa-solid fa-landmark-dome",
-			img: "systems/black-flag/artwork/types/class.svg"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "class",
+				category: "concept",
+				localization: "BF.Item.Type.Class",
+				icon: "fa-solid fa-landmark-dome",
+				img: "systems/black-flag/artwork/types/class.svg",
+				register: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -40,15 +40,19 @@ export default class WeaponData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "weapon",
-			category: "equipment",
-			localization: "BF.Item.Type.Weapon",
-			icon: "fa-solid fa-trowel",
-			img: "systems/black-flag/artwork/types/weapon.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "weapon",
+				category: "equipment",
+				localization: "BF.Item.Type.Weapon",
+				icon: "fa-solid fa-trowel",
+				img: "systems/black-flag/artwork/types/weapon.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

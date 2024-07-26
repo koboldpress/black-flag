@@ -15,16 +15,21 @@ export default class HeritageData extends ItemDataModel.mixin(
 	DescriptionTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "heritage",
-			category: "concept",
-			localization: "BF.Item.Type.Heritage",
-			icon: "fa-solid fa-monument",
-			img: "systems/black-flag/artwork/types/heritage.svg",
-			accentColor: "#aa0000"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "heritage",
+				category: "concept",
+				localization: "BF.Item.Type.Heritage",
+				icon: "fa-solid fa-monument",
+				img: "systems/black-flag/artwork/types/heritage.svg",
+				accentColor: "#aa0000",
+				register: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

@@ -27,15 +27,19 @@ export default class ToolData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "tool",
-			category: "equipment",
-			localization: "BF.Item.Type.Tool",
-			icon: "fa-solid fa-screwdriver-wrench",
-			img: "systems/black-flag/artwork/types/tool.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "tool",
+				category: "equipment",
+				localization: "BF.Item.Type.Tool",
+				icon: "fa-solid fa-screwdriver-wrench",
+				img: "systems/black-flag/artwork/types/tool.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

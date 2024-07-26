@@ -35,15 +35,19 @@ export default class ArmorData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "armor",
-			category: "equipment",
-			localization: "BF.Item.Type.Armor",
-			icon: "fa-solid fa-shield-halved",
-			img: "systems/black-flag/artwork/types/armor.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "armor",
+				category: "equipment",
+				localization: "BF.Item.Type.Armor",
+				icon: "fa-solid fa-shield-halved",
+				img: "systems/black-flag/artwork/types/armor.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

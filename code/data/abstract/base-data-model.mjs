@@ -61,6 +61,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	static defineSchema() {
 		const schema = {};
 		for (const template of this._schemaTemplates) {

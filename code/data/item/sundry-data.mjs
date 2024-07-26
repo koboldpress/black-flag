@@ -15,15 +15,19 @@ const { SchemaField, StringField } = foundry.data.fields;
  */
 export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "sundry",
-			category: "equipment",
-			localization: "BF.Item.Type.Sundry",
-			icon: "fa-solid fa-boxes-stacked",
-			img: "systems/black-flag/artwork/types/sundry.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "sundry",
+				category: "equipment",
+				localization: "BF.Item.Type.Sundry",
+				icon: "fa-solid fa-boxes-stacked",
+				img: "systems/black-flag/artwork/types/sundry.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

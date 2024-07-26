@@ -37,19 +37,23 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "spell",
-			category: "meta",
-			localization: "BF.Item.Type.Spell",
-			icon: "fa-solid fa-wand-sparkles",
-			img: "systems/black-flag/artwork/types/spell.svg",
-			sheet: {
-				application: SpellSheet,
-				label: "BF.Sheet.Default.Spell"
-			}
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "spell",
+				category: "meta",
+				localization: "BF.Item.Type.Spell",
+				icon: "fa-solid fa-wand-sparkles",
+				img: "systems/black-flag/artwork/types/spell.svg",
+				sheet: {
+					application: SpellSheet,
+					label: "BF.Sheet.Default.Spell"
+				}
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

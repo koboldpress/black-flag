@@ -19,22 +19,26 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  */
 export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "currency",
-			category: "meta",
-			localization: "BF.Item.Type.Currency",
-			icon: "fa-solid fa-boxes-stacked",
-			img: "systems/black-flag/artwork/types/currency.svg",
-			register: {
-				cache: true
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "currency",
+				category: "meta",
+				localization: "BF.Item.Type.Currency",
+				icon: "fa-solid fa-boxes-stacked",
+				img: "systems/black-flag/artwork/types/currency.svg",
+				register: {
+					cache: true
+				},
+				sheet: {
+					application: CurrencySheet,
+					label: "BF.Sheet.Default.Currency"
+				}
 			},
-			sheet: {
-				application: CurrencySheet,
-				label: "BF.Sheet.Default.Currency"
-			}
-		};
-	}
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

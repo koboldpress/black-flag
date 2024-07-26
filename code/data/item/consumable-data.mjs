@@ -24,15 +24,19 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "consumable",
-			category: "equipment",
-			localization: "BF.Item.Type.Consumable",
-			icon: "fa-solid fa-bottle-droplet",
-			img: "systems/black-flag/artwork/types/consumable.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "consumable",
+				category: "equipment",
+				localization: "BF.Item.Type.Consumable",
+				icon: "fa-solid fa-bottle-droplet",
+				img: "systems/black-flag/artwork/types/consumable.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -24,15 +24,19 @@ export default class GearData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "gear",
-			category: "equipment",
-			localization: "BF.Item.Type.Gear",
-			icon: "fa-solid fa-wand-magic",
-			img: "systems/black-flag/artwork/types/gear.svg"
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "gear",
+				category: "equipment",
+				localization: "BF.Item.Type.Gear",
+				icon: "fa-solid fa-wand-magic",
+				img: "systems/black-flag/artwork/types/gear.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

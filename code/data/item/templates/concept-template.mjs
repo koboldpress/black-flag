@@ -14,15 +14,6 @@ const { SchemaField, StringField } = foundry.data.fields;
 export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			register: true
-		};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			description: new SchemaField({

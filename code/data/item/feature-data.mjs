@@ -30,13 +30,18 @@ export default class FeatureData extends ItemDataModel.mixin(
 	ProficiencyTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "feature",
-			localization: "BF.Item.Type.Feature",
-			img: "systems/black-flag/artwork/types/feature.svg"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "feature",
+				category: "features",
+				localization: "BF.Item.Type.Feature",
+				img: "systems/black-flag/artwork/types/feature.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

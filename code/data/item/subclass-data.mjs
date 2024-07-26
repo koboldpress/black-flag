@@ -21,15 +21,20 @@ export default class SubclassData extends ItemDataModel.mixin(
 	DescriptionTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "subclass",
-			category: "concept",
-			localization: "BF.Item.Type.Subclass",
-			icon: "fa-solid fa-landmark-flag",
-			img: "systems/black-flag/artwork/types/subclass.svg"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "subclass",
+				category: "concept",
+				localization: "BF.Item.Type.Subclass",
+				icon: "fa-solid fa-landmark-flag",
+				img: "systems/black-flag/artwork/types/subclass.svg",
+				register: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

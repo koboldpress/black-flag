@@ -239,7 +239,7 @@ export default class NPCSheet extends BaseActorSheet {
 					);
 				} else {
 					spells.push(
-						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}">${spell.name.toLowerCase()}</span>`
+						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}">${spell.name.toLowerCase()}</a></span>`
 					);
 				}
 			}

@@ -28,19 +28,23 @@ export default class ContainerData extends ItemDataModel.mixin(
 	PropertiesTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return {
-			type: "container",
-			category: "equipment",
-			localization: "BF.Item.Type.Container",
-			icon: "fa-solid fa-box-open",
-			img: "systems/black-flag/artwork/types/container.svg",
-			sheet: {
-				application: ContainerSheet,
-				label: "BF.Sheet.Default.Container"
-			}
-		};
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "container",
+				category: "equipment",
+				localization: "BF.Item.Type.Container",
+				icon: "fa-solid fa-box-open",
+				img: "systems/black-flag/artwork/types/container.svg",
+				sheet: {
+					application: ContainerSheet,
+					label: "BF.Sheet.Default.Container"
+				}
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 

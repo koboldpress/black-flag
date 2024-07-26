@@ -15,16 +15,21 @@ export default class LineageData extends ItemDataModel.mixin(
 	DescriptionTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "lineage",
-			category: "concept",
-			localization: "BF.Item.Type.Lineage",
-			icon: "fa-solid fa-globe",
-			img: "systems/black-flag/artwork/types/lineage.svg",
-			accentColor: "#00aa00"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "lineage",
+				category: "concept",
+				localization: "BF.Item.Type.Lineage",
+				icon: "fa-solid fa-globe",
+				img: "systems/black-flag/artwork/types/lineage.svg",
+				accentColor: "#00aa00",
+				register: true
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */

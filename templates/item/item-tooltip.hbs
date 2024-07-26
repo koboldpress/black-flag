@@ -1,0 +1,16 @@
+<section class="content">
+	<section class="header">
+		<img class="circular icon" src="{{ item.img }}" alt="{{ item.name }}">
+		<div class="name">
+			<span class="name">{{ item.name }}</span>
+		</div>
+	</section>
+	<section class="description">{{{ description }}}</section>
+	{{#if tags.length}}
+		<ul class="tags unlist">
+			{{#each tags}}
+				<li class="tag {{ key }}">{{{ label }}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+</section>

@@ -50,7 +50,7 @@
 	<section class="spells">
 		<ul class="unlist spell-list">
 			{{#each spells}}
-				<li {{~#if selected}} class="selected"{{/if}}>
+				<li {{~#if selected}} class="selected"{{/if}} data-spell-uuid="{{ uuid }}">
 					<label>
 						<figure class="icon"><img src="{{ img }}"></figure>
 						<div class="name">{{ name }}</div>

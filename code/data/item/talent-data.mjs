@@ -21,13 +21,18 @@ export default class TalentData extends ItemDataModel.mixin(
 	ProficiencyTemplate
 ) {
 	/** @inheritDoc */
-	static get metadata() {
-		return foundry.utils.mergeObject(super.metadata, {
-			type: "talent",
-			localization: "BF.Item.Type.Talent",
-			img: "systems/black-flag/artwork/types/talent.svg"
-		});
-	}
+	static metadata = Object.freeze(
+		foundry.utils.mergeObject(
+			super.metadata,
+			{
+				type: "talent",
+				category: "features",
+				localization: "BF.Item.Type.Talent",
+				img: "systems/black-flag/artwork/types/talent.svg"
+			},
+			{ inplace: false }
+		)
+	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */

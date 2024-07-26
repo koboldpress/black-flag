@@ -284,6 +284,11 @@ export default class SpellcastingDialog extends FormApplication {
 		const [html] = jQuery;
 
 		html.querySelector('[data-action="continue"]')?.addEventListener("click", this._onContinue.bind(this));
+		html.querySelectorAll("[data-spell-uuid]").forEach(element => {
+			element.dataset.tooltip = `<section class="loading" data-uuid="${element.dataset.spellUuid}"></section>`;
+			element.dataset.tooltipClass = "black-flag black-flag-tooltip item-tooltip";
+			element.dataset.tooltipDirection = "LEFT";
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

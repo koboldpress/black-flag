@@ -4,9 +4,66 @@
 	background: var(--bf-background-color-white);
 	color: var(--bf-text-color-black);
 
+	.loading {
+		display: block;
+		margin-block: 4px;
+		animation-name: fa-spin;
+		animation-direction: normal;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-timing-function: steps(8);
+		font-family: var(--font-awesome);
+		font-size: var(--font-size-24);
+		font-weight: bold;
+		&::before { content: "\f110"; }
+	}
+
 	&.locked-tooltip {
 		outline: 1px solid var(--bf-color-border-gray);
 		outline-offset: -1.5px;
+		z-index: calc(var(--z-index-tooltip) - 1);
+	}
+
+	&.item-tooltip {
+		.content {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+		}
+		.header {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
+
+			.icon {
+				width: 64px;
+			}
+		}
+		.description {
+			max-height: 450px;
+			overflow: hidden;
+			scrollbar-width: thin;
+			scrollbar-color: var(--bf-blue) transparent;
+			font-size: var(--font-size-13);
+			line-height: normal;
+			text-align: start;
+
+			&::-webkit-scrollbar-track {
+				box-shadow: none;
+				border-radius: 0;
+			}
+			&::-webkit-scrollbar-thumb {
+				border: none;
+				background: var(--bf-blue);
+			}
+
+			&.overflowing { mask-image: linear-gradient(to bottom, black 90%, transparent); }
+		}
+		&.locked-tooltip .description {
+			overflow-y: scroll;
+			&.overflowing { mask-image: unset; }
+		}
 	}
 
 	&.rule-tooltip {

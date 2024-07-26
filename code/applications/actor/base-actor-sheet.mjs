@@ -267,6 +267,8 @@ export default class BaseActorSheet extends ActorSheet {
 
 		NotificationTooltip.activateListeners(this.actor, html);
 
+		for (const element of html.querySelectorAll(".item-tooltip")) this._applyItemTooltip(element);
+
 		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
@@ -281,6 +283,30 @@ export default class BaseActorSheet extends ActorSheet {
 				element.addEventListener("click", this._onShowArtwork.bind(this));
 			}
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add tooltips to inventory items.
+	 * @param {HTMLElement} element - The element to get a tooltip.
+	 * @protected
+	 */
+	_applyItemTooltip(element) {
+		if ("tooltip" in element.dataset) return;
+
+		const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
+		let { uuid, effectId, itemId, parentId } = target?.dataset ?? {};
+		if (!uuid && itemId) uuid = this.actor.items.get(itemId)?.uuid;
+		else if (!uuid && effectId) {
+			const collection = parentId ? this.actor.items.get(parentId)?.effects : this.actor.effects;
+			uuid = collection.get(effectId)?.uuid;
+		}
+		if (!uuid) return;
+
+		element.dataset.tooltip = `<section class="loading" data-uuid="${uuid}"></section>`;
+		element.dataset.tooltipClass = "black-flag black-flag-tooltip item-tooltip";
+		element.dataset.tooltipDirection ??= "LEFT";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

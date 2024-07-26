@@ -126,6 +126,12 @@ export default class TooltipConductor {
 		}
 
 		game.tooltip._setAnchor(direction);
+
+		// Detect whether the item description is overflowing
+		if (tooltip.classList.contains("item-tooltip")) {
+			const description = tooltip.querySelector(".description");
+			description?.classList.toggle("overflowing", description.clientHeight < description.scrollHeight);
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
