@@ -1,12 +1,15 @@
 :is(html, .application) :is(.link-button, .unbutton, .heavy-button, .light-button) {
+	transition: none;
+
 	&[disabled] { cursor: default; }
 	&:hover, &:focus, &:focus-visible {
 		box-shadow: unset;
 		outline: none;
+		transition: none;
 	}
 }
 
-.link-button {
+.link-button, .application .link-button {
 	width: unset;
 	margin: 0;
 	padding: 0;
@@ -19,13 +22,15 @@
 
 	&:not([disabled]) {
 		&:hover, &:focus-visible {
+			background: none;
 			box-shadow: unset;
+			color: inherit;
 			text-shadow: 0 0 6px var(--bf-text-shadow-blue);
 		}
 	}
 }
 
-.unbutton {
+.unbutton, .application .unbutton {
 	border: none;
 	background: none;
 
@@ -47,7 +52,6 @@
 	font-family: var(--bf-font-primary);
 	font-size: var(--font-size-14);
 	font-weight: 550;
-	transition: none;
 
 	&::after {
 		content: "";

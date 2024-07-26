@@ -1,0 +1,67 @@
+.equipment.advancement-config {
+	ul {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	li[data-entry-id] {
+		position: relative;
+		padding: 8px;
+		background: var(--bf-background-color-half-white);
+		border: 1px solid var(--bf-color-border-gray);
+		border-radius: 4px;
+		box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+
+		&:has(.drag-bar) { padding-inline-end: 18px; }
+
+		.controls, .data, .data > label {
+			display: flex;
+			gap: 4px;
+		}
+		.controls {
+			justify-content: space-between;
+			margin-block-end: 8px;
+		}
+		.drag-bar {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			inset-block: 0;
+			inset-inline-end: 0;
+			inline-size: 16px;
+			cursor: grab;
+			color: var(--bf-text-color-blue);
+		}
+		[data-action="deleteEntry"] {
+			inline-size: 26px;
+		}
+		[name$=".count"] { flex: 0 0 3em; }
+		.item-link, .drop-area {
+			flex: 1 1 50%;
+			display: flex;
+			align-items: center;
+			padding-inline: 4px;
+			border-radius: 4px;
+		}
+		.drop-area {
+			margin: 0;
+			padding-block: 0;
+			text-align: center;
+		}
+
+		.require-proficiency {
+			flex: .66;
+			align-items: center;
+			font-size: var(--font-size-11);
+			input[type="checkbox"] {
+				--checkbox-size: 14px;
+				flex: 0 0 var(--checkbox-size);
+				width: var(--checkbox-size);
+				height: var(--checkbox-size);
+			}
+		}
+	}
+}

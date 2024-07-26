@@ -207,7 +207,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	 */
 	get typeLabel() {
 		return game.i18n
-			.format("BF.Weapon.Type.CombinedLabel", {
+			.format("BF.Weapon.Type.CombinedLabel[one]", {
 				category: CONFIG.BlackFlag.weapons.localized[this.type.category] ?? "",
 				type: CONFIG.BlackFlag.weaponTypes.localized[this.type.value] ?? ""
 			})

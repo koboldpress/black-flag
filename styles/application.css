@@ -3,7 +3,9 @@
 /* <><><><> <><><><> <><><><> <><><><> */
 
 .black-flag.application {
+	--color-scrollbar: var(--bf-blue);
 	--color-shadow-primary: var(--bf-button-shadow-blue);
+	max-height: 85vh;
 
 	input, select {
 		--input-focus-outline-color: var(--bf-button-shadow-blue);
@@ -13,5 +15,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
+		overflow-y: auto;
 	}
 }

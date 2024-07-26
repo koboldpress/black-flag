@@ -44,6 +44,13 @@ export const _advancementTypes = {
 			flow: sheets.ChooseSpellsFlow
 		}
 	},
+	equipment: {
+		documentClass: advancement.EquipmentAdvancement,
+		validItemTypes: new Set(["background", "class"]),
+		sheetClasses: {
+			config: sheets.EquipmentConfig
+		}
+	},
 	expandedTalentList: {
 		documentClass: advancement.ExpandedTalentListAdvancement,
 		validItemTypes: new Set(["subclass"]),

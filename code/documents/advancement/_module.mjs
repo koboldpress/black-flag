@@ -1,6 +1,7 @@
 export { default as Advancement } from "./advancement.mjs";
 export { default as ChooseFeaturesAdvancement } from "./choose-features-advancement.mjs";
 export { default as ChooseSpellsAdvancement } from "./choose-spells-advancement.mjs";
+export { default as EquipmentAdvancement } from "./equipment-advancement.mjs";
 export { default as ExpandedTalentListAdvancement } from "./expanded-talent-list-advancement.mjs";
 export { default as GrantFeaturesAdvancement } from "./grant-features-advancement.mjs";
 export { default as GrantSpellsAdvancement } from "./grant-spells-advancement.mjs";

@@ -17,8 +17,6 @@ export default class DragDrop {
 		if (foundry.utils.getType(data?.toDragData) === "function") {
 			doc = data;
 			data = doc.toDragData();
-		} else {
-			data = JSON.parse(data);
 		}
 		this.#currentDrag = { event, data, document: doc };
 		event.dataTransfer.setData("text/plain", JSON.stringify(data));
@@ -37,9 +35,15 @@ export default class DragDrop {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * @typedef {object} DragEventData
+	 * @property {any} data - Drag event payload.
+	 * @property {Document} [document] - Dragged document if available.
+	 */
+
+	/**
 	 * Retrieve the drag data for the provided drag operation.
 	 * @param {DragEvent} event - Drag event for which to fetch data.
-	 * @returns {{data: *, document: Document}}
+	 * @returns {DragEventPayload}
 	 */
 	static getDragData(event) {
 		const data = TextEditor.getDragEventData(event);

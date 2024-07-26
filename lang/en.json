@@ -394,6 +394,32 @@
 		"JournalDescription": "When you gain a new talent, you can select that talent from either {talentLists} talents list."
 	},
 
+	"Equipment": {
+		"Title": "Equipment",
+		"Hint": "Let players choose their equipment.",
+		"Action": {
+			"AddEntry": "Add Entry",
+			"RemoveEntry": "Remove Entry"
+		},
+		"Choice": {
+			"Armor": "Choose Armor",
+			"Tool": "Choose Tool",
+			"Weapon": "Choose Weapon"
+		},
+		"DropHint": "Drop item here to link",
+		"IfProficient": "If Proficient",
+		"Operator": {
+			"AND": "All of…",
+			"OR": "One of…"
+		},
+		"RequireProficiency": "Require Proficiency",
+		"SpecificItem": "Specific Item",
+		"Warning": {
+			"Depth": "Only three levels of depth allowed in equipment.",
+			"ItemTypeInvalid": "{type} items cannot be added to equipment."
+		}
+	},
+
 	"GrantFeatures": {
 		"Title": "Features",
 		"Hint": "Grant the character features when they reach a certain level.",
@@ -3250,7 +3276,8 @@
 	},
 	"Type": {
 		"Label": "Type",
-		"CombinedLabel": "{category} {type} Weapon",
+		"CombinedLabel[one]": "{category} {type} Weapon",
+		"CombinedLabel[other]": "{category} {type} Weapons",
 		"Melee": "Melee",
 		"Ranged": "Ranged"
 	}

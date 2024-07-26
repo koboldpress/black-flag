@@ -1,0 +1,69 @@
+<section>
+	{{> "list-level" }}
+</section>
+
+{{#*inline "list-level"}}
+	<ul class="unlist">
+		{{#each entries}}
+			<li data-entry-id="{{ id }}" data-entry-type="{{ entry.type }}" data-depth="{{ depth }}">
+				<div class="controls">
+					<select name="pool.{{ id }}.type">
+						{{#if validGroupTypes}}
+							{{ selectOptions validGroupTypes selected=entry.type localize=true }}
+							<hr>
+						{{/if}}
+						{{ selectOptions validOptionTypes selected=entry.type localize=true }}
+					</select>
+					<button type="button" class="link-button" data-action="deleteEntry"
+					        data-tooltip="BF.Advancement.Equipment.Action.RemoveEntry"
+					        aria-label="{{ localize 'BF.Advancement.Equipment.Action.RemoveEntry' }}">
+							<i class="fa-solid fa-trash fa-fw" inert></i>
+					</button>
+				</div>
+				<div class="data">
+					{{#if groupType}}
+						{{> "list-level" entries=children nested=true }}
+					{{else}}
+						{{ numberInput entry.count name=(concat "pool." id ".count") placeholder=1 step=1 min=1 }}
+						{{#if (eq entry.type "linked")}}
+							{{#if linked}}
+								<div class="item-link">
+									{{{ blackFlag-linkForUUID entry.key }}}
+								</div>
+							{{else}}
+								<div class="drop-area hint">
+									{{ localize "BF.Advancement.Equipment.DropHint" }}
+								</div>
+							{{/if}}
+							<input type="hidden" name="pool.{{ id }}.key" value="{{ entry.key }}">
+						{{else}}
+							<select name="pool.{{ id }}.key">{{log entry.blankLabel}}
+								{{ selectOptions entry.keyOptions selected=entry.key blank=entry.blankLabel }}
+							</select>
+						{{/if}}
+					{{/if}}
+					{{#if showRequireProficiency}}
+						<label class="require-proficiency">
+							<input type="checkbox" name="pool.{{ id }}.requiresProficiency"
+							       {{ checked entry.requiresProficiency }}>
+							{{ localize "BF.Advancement.Equipment.RequireProficiency" }}
+						</label>
+					{{else}}
+						<input type="hidden" name="pool.{{ id }}.requiresProficiency"
+						       value="{{ entry.requiresProficiency }}" data-dtype="Boolean">
+					{{/if}}
+				</div>
+				<div class="drag-bar"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
+				<input type="hidden" name="pool.{{ id }}._id" value="{{ entry._id }}">
+				<input type="hidden" name="pool.{{ id }}.group" value="{{ entry.group }}">
+				<input type="hidden" name="pool.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
+			</li>
+		{{/each}}
+		<li data-depth="{{ depth }}">
+			<button type="button" class="light-button" data-action="addEntry">
+				<i class="fa-solid fa-plus" inert></i>
+				{{ localize "BF.Advancement.Equipment.Action.AddEntry" }}
+			</button>
+		</li>
+	</ul>
+{{/inline}}

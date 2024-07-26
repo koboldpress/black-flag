@@ -1,0 +1,317 @@
+import BFApplication from "./application.mjs";
+import DragDrop from "../drag-drop.mjs";
+
+/**
+ * Extension of FormApplication to incorporate certain PseudoDocument-specific logic.
+ */
+export default class PseudoDocumentSheet extends BFApplication {
+	constructor(pseudoDocument, options = {}) {
+		super({ document: pseudoDocument, ...options });
+		this.#pseudoDocumentId = pseudoDocument.id;
+		this.#pseudoDocumentType = pseudoDocument.metadata.name;
+		this.#item = pseudoDocument.item;
+	}
+
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		id: "{id}",
+		classes: ["sheet"],
+		tag: "form",
+		document: null,
+		viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
+		editPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
+		actions: {
+			copyUuid: { handler: PseudoDocumentSheet.#onCopyUuid, buttons: [0, 2] }
+		},
+		dragDropHandlers: {
+			dragstart: null,
+			dragend: null,
+			dragenter: null,
+			dragleave: null,
+			dragover: null,
+			drop: null
+		},
+		dragSelectors: [],
+		form: {
+			handler: this.#onSubmitDocumentForm,
+			submitOnChange: true,
+			closeOnSubmit: false
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The ID of the pseudo document being created or edited.
+	 * @type {string}
+	 */
+	#pseudoDocumentId;
+
+	/**
+	 * Collection representing this PseudoDocument.
+	 * @type {string}
+	 */
+	#pseudoDocumentType;
+
+	/**
+	 * The PseudoDocument represented by this sheet.
+	 * @type {PseudoDocument}
+	 */
+	get document() {
+		return this.item.getEmbeddedDocument(this.#pseudoDocumentType, this.#pseudoDocumentId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this PseudoDocument sheet visible to the current User?
+	 * This is governed by the viewPermission threshold configured for the class.
+	 * @type {boolean}
+	 */
+	get isVisible() {
+		return this.item.testUserPermission(game.user, this.options.viewPermission);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this PseudoDocument sheet editable by the current User?
+	 * This is governed by the editPermission threshold configured for the class.
+	 * @type {boolean}
+	 */
+	get isEditable() {
+		if (this.item.pack) {
+			const pack = game.packs.get(this.item.pack);
+			if (pack.locked) return false;
+		}
+		return this.item.testUserPermission(game.user, this.options.editPermission);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Parent item to which this PseudoDocument belongs.
+	 * @type {BlackFlagItem}
+	 */
+	#item;
+
+	get item() {
+		return this.#item;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Initialization            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_initializeApplicationOptions(options) {
+		options = super._initializeApplicationOptions(options);
+		options.uniqueId = `${this.constructor.name}-${options.document.uuid}`;
+		return options;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		context.document = this.document;
+		context.editable = this.isEditable;
+		context.options = this.options;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _renderFrame(options) {
+		const frame = await super._renderFrame(options);
+
+		// Add form options
+		if (this.options.tag === "form") frame.autocomplete = "off";
+
+		// Add document ID copy
+		const copyLabel = game.i18n.localize("SHEETS.CopyUuid");
+		const copyId = `<button type="button" class="header-control fa-solid fa-passport" data-action="copyUuid"
+														data-tooltip="${copyLabel}" aria-label="${copyLabel}"></button>`;
+		this.window.close.insertAdjacentHTML("beforebegin", copyId);
+
+		return frame;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Life-Cycle Handlers         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_canRender(_options) {
+		if (!this.isVisible)
+			throw new Error(
+				game.i18n.format("SHEETS.DocumentSheetPrivate", {
+					type: game.i18n.localize(this.document.constructor.metadata.label)
+				})
+			);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_onFirstRender(context, options) {
+		super._onFirstRender(context, options);
+		this.document.constructor._registerApp(this.document, this);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_onRender(context, options) {
+		if (this.options.dragDropSelectors.length) {
+			const drag = this.#onDragEvent.bind(this);
+			for (const selector of this.options.dragDropSelectors) {
+				for (const element of this.element.querySelectorAll(selector)) {
+					element.setAttribute("draggable", true);
+					element.addEventListener("dragstart", drag);
+					element.addEventListener("dragend", drag);
+				}
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_onClose(_options) {
+		this.document.constructor._unregisterApp(this.document, this);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_attachFrameListeners() {
+		super._attachFrameListeners();
+
+		const drag = this.#onDragEvent.bind(this);
+		this.element.addEventListener("dragenter", drag);
+		this.element.addEventListener("dragleave", drag);
+		this.element.addEventListener("dragover", drag);
+		this.element.addEventListener("drop", drag);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle click events to copy the UUID of this document to clipboard.
+	 * @param {PointerEvent} event
+	 * @this {DocumentSheetV2}
+	 */
+	static #onCopyUuid(event) {
+		event.preventDefault(); // Don't open context menu
+		event.stopPropagation(); // Don't trigger other events
+		if (event.detail > 1) return; // Ignore repeated clicks
+		const id = event.button === 2 ? this.document.id : this.document.uuid;
+		const type = event.button === 2 ? "id" : "uuid";
+		const label = game.i18n.localize(this.document.constructor.metadata.label);
+		game.clipboard.copyPlainText(id);
+		ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Process form submission for the sheet.
+	 * @this {PseudoDocumentSheet}
+	 * @param {SubmitEvent} event - The originating form submission event.
+	 * @param {HTMLFormElement} form - The form element that was submitted.
+	 * @param {FormDataExtended} formData - Processed data for the submitted form.
+	 * @returns {Promise<void>}
+	 */
+	static async #onSubmitDocumentForm(event, form, formData) {
+		const submitData = this._prepareSubmitData(event, form, formData);
+		await this._processSubmitData(event, form, submitData);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare data used to update the PseudoDocument upon form submission.
+	 * @param {SubmitEvent} event -  The originating form submission event.
+	 * @param {HTMLFormElement} form - The form element that was submitted.
+	 * @param {FormDataExtended} formData - Processed data for the submitted form.
+	 * @returns {object} - Prepared submission data as an object.
+	 * @protected
+	 */
+	_prepareSubmitData(event, form, formData) {
+		const submitData = this._processFormData(event, form, formData);
+		// TODO: Handle validation
+		return submitData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Customize how form data is extracted into an expanded object.
+	 * @param {SubmitEvent} event - The originating form submission event.
+	 * @param {HTMLFormElement} form - The form element that was submitted.
+	 * @param {FormDataExtended} formData - Processed data for the submitted form.
+	 * @returns {object} - An expanded object of processed form data.
+	 */
+	_processFormData(event, form, formData) {
+		return foundry.utils.expandObject(formData.object);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Submit a document update based on the processed form data.
+	 * @param {SubmitEvent} event - The originating form submission event.
+	 * @param {HTMLFormElement} form - The form element that was submitted.
+	 * @param {object} submitData - Processed and validated form data to be used for a document update.
+	 * @returns {Promise<void>}
+	 * @protected
+	 */
+	async _processSubmitData(event, form, submitData) {
+		await this.document.update(submitData);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Programmatically submit the form, providing additional data to be merged with form data.
+	 * @param {object} options
+	 * @param {object} [options.updateData] - Additional data merged with processed form data
+	 * @returns {Promise<void>}
+	 */
+	async submit({ updateData } = {}) {
+		const formConfig = this.options.form;
+		if (!formConfig?.handler)
+			throw new Error(
+				`The ${this.constructor.name} PseudoDocumentSheet does not support a single top-level form element.`
+			);
+		const form = this.element;
+		const event = new Event("submit");
+		const formData = new FormDataExtended(form);
+		const submitData = this._prepareSubmitData(event, form, formData);
+		foundry.utils.mergeObject(submitData, updateData, { inplace: true });
+		await this._processSubmitData(event, form, submitData);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle a drag event.
+	 * @param {Event} event - The originating drag event.
+	 */
+	#onDragEvent(event) {
+		const handler = this.options.dragDropHandlers[event.type];
+		if (!handler) return;
+		handler.call(this, event, DragDrop);
+	}
+}
