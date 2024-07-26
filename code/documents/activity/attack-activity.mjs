@@ -153,10 +153,12 @@ export default class AttackActivity extends DamageActivity {
 					title: `${this.name}: ${this.item.actor?.name ?? ""}`,
 					flavor: this.name,
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
-					"flags.black-flag.roll": {
-						type: "attack",
-						origin: this.uuid,
-						targets
+					flags: {
+						[game.system.id]: {
+							type: "attack",
+							activity: this.uuid,
+							targets
+						}
 					}
 				}
 			},

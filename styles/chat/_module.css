@@ -105,6 +105,47 @@
 	}
 }
 
+.card-tray {
+	.targets {
+		margin-block: 4px;
+		border: 2px solid var(--bf-color-border-gray);
+		border-radius: 4px;
+		background-color: var(--bf-background-color-half-white);
+
+		.target {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 4px 6px;
+			padding-block-start: 6px;
+			padding: 4px;
+
+			&:not(:first-child) {
+				padding-block-start: 6px;
+			}
+			&:not(:last-child) {
+				border-block-end: 1px dashed var(--bf-color-border-blue);
+				padding-block-end: 6px;
+			}
+
+			.name-stacked {
+				flex: 1;
+				.subtitle {
+					display: flex;
+					gap: 4px;
+				}
+			}
+		}
+
+		> .none {
+			margin-block: 4px;
+			font-family: var(--bf-font-primary);
+			font-size: var(--font-size-12);
+			text-align: center;
+		}
+	}
+}
+
 .damage .dice-result {
 	isolation: isolate;
 	font-family: var(--bf-font-primary);

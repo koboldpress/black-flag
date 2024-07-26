@@ -1,0 +1,25 @@
+blackFlag-attackResult {
+	.card-tray .targets .target {
+		display: flex;
+		padding-inline: 8px;
+
+		&::before {
+			font-family: var(--font-awesome);
+			font-weight: bold;
+		}
+		&.hit {
+			background: var(--bf-dice-color-success-background);
+			&::before { content: "\f00c"; }
+		}
+		&.miss {
+			background: var(--bf-dice-color-failure-background);
+			&::before { content: "\f00d"; }
+		}
+
+		.name {
+			font-family: var(--bf-font-primary);
+			font-weight: 500;
+		}
+		.ac { margin-inline-start: auto; }
+	}
+}

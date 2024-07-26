@@ -146,7 +146,7 @@ export default class DamageActivity extends Activity {
 					flavor: this.name,
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
-						"black-flag": {
+						[game.system.id]: {
 							type: "damage",
 							activity: this.uuid,
 							targets: this.constructor.getTargetDescriptors()

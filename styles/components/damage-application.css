@@ -20,27 +20,7 @@ blackFlag-damageApplication {
 	}
 
 	.targets {
-		margin-block: 4px;
-		border: 2px solid var(--bf-color-border-gray);
-		border-radius: 4px;
-		background-color: var(--bf-background-color-half-white);
-
 		.target {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			gap: 4px 6px;
-			padding-block-start: 6px;
-			padding: 4px;
-
-			&:not(:first-child) {
-				padding-block-start: 6px;
-			}
-			&:not(:last-child) {
-				border-block-end: 1px dashed var(--bf-color-border-blue);
-				padding-block-end: 6px;
-			}
-
 			.icon {
 				width: 36px;
 				height: 36px;
@@ -88,13 +68,6 @@ blackFlag-damageApplication {
 				&.healing { color: var(--bf-color-application-healing); }
 				&.temp { color: var(--bf-color-application-temp); }
 			}
-		}
-
-		> .none {
-			margin-block: 4px;
-			font-family: var(--bf-font-primary);
-			font-size: var(--font-size-12);
-			text-align: center;
 		}
 
 		.damage-multipliers {

@@ -824,9 +824,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: type,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "ability-check",
-						ability: config.ability
+					flags: {
+						[game.system.id]: {
+							type: "ability-check",
+							ability: config.ability
+						}
 					}
 				}
 			},
@@ -912,9 +914,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: type,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "ability-save",
-						ability: config.ability
+					flags: {
+						[game.system.id]: {
+							type: "ability-save",
+							ability: config.ability
+						}
 					}
 				}
 			},
@@ -1016,8 +1020,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "death-save"
+					flags: {
+						[game.system.id]: {
+							type: "death-save"
+						}
 					}
 				}
 			},
@@ -1211,9 +1217,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: flavor,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "hit-die",
-						denomination: config.denomination
+					flags: {
+						[game.system.id]: {
+							type: "hit-die",
+							denomination: config.denomination
+						}
 					}
 				}
 			},
@@ -1452,9 +1460,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: type,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "skill",
-						skill: rollConfig.skill
+					flags: {
+						[game.system.id]: {
+							type: "skill",
+							skill: rollConfig.skill
+						}
 					}
 				}
 			},
@@ -1573,9 +1583,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: type,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "tool",
-						tool: rollConfig.tool
+					flags: {
+						[game.system.id]: {
+							type: "tool",
+							tool: rollConfig.tool
+						}
 					}
 				}
 			},
@@ -1699,9 +1711,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					title: `${flavor}: ${this.name}`,
 					flavor: type,
 					speaker: ChatMessage.getSpeaker({ actor: this }),
-					"flags.black-flag.roll": {
-						type: "vehicle",
-						vehicle: rollConfig.vehicle
+					flags: {
+						[game.system.id]: {
+							type: "vehicle",
+							vehicle: rollConfig.vehicle
+						}
 					}
 				}
 			},

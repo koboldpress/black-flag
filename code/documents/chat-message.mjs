@@ -10,6 +10,14 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * The currently highlighted token from this message.
+	 * @type {BlackFlagToken|null}
+	 */
+	_highlighted = null;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should roll DCs and other challenge details be displayed on this card?
 	 * @type {boolean}
 	 */
@@ -41,6 +49,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (this.isRoll) {
 			this._highlightRollResults(html);
 			this._renderLuckInterface(html);
+			await this._renderAttackUI(html);
 			await this._renderDamageUI(html);
 		}
 
@@ -55,15 +64,26 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 */
 	_highlightRollResults(html) {
 		const originatingMessage = game.messages.get(this.getFlag(game.system.id, "originatingMessage")) ?? this;
+		const displayAttackResult = game.user.isGM || game.settings.get(game.system.id, "attackVisibility") !== "none";
 		const displayChallenge = originatingMessage.shouldDisplayChallenge;
+
 		const rollResults = html.querySelectorAll(".dice-roll");
 		for (const [index, roll] of this.rolls.entries()) {
 			const result = rollResults[index];
 			if (!result) return;
-			if (roll.isCriticalSuccess) result.classList.add("critical-success");
-			else if (roll.isCriticalFailure) result.classList.add("critical-failure");
-			if (roll.isSuccess && displayChallenge) result.classList.add("success");
-			else if (roll.isFailure && displayChallenge) result.classList.add("failure");
+
+			const isAttack = this.getFlag(game.system.id, "type") === "attack";
+			const isDeathSave = this.getFlag(game.system.id, "type") === "death";
+			const showResult = isAttack ? displayAttackResult : displayChallenge;
+
+			if (isAttack && isDeathSave) {
+				if (roll.isCriticalSuccess) result.classList.add("critical-success");
+				else if (roll.isCriticalFailure) result.classList.add("critical-failure");
+			}
+			if (showResult) {
+				if (roll.isSuccess) result.classList.add("success");
+				else if (roll.isFailure) result.classList.add("failure");
+			}
 		}
 	}
 
@@ -83,6 +103,23 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			for (const button of html.querySelectorAll(".menu button:not([data-all-users]")) {
 				button.hidden = true;
 			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the to-hit tray.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	async _renderAttackUI(html) {
+		const displayAttackResult = game.user.isGM || game.settings.get(game.system.id, "attackVisibility") !== "none";
+		const roll = this.rolls.filter(r => r instanceof CONFIG.Dice.ChallengeRoll)[0];
+		const targets = this.getFlag(game.system.id, "targets");
+		if (displayAttackResult && roll && targets?.length) {
+			const attackResult = document.createElement("blackFlag-attackResult");
+			attackResult.roll = roll;
+			html.querySelector(".message-content").appendChild(attackResult);
 		}
 	}
 
@@ -199,6 +236,54 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			const activity = this.getAssociatedActivity();
 			activity?.activateChatListeners(this, html);
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle target selection and panning.
+	 * @param {PointerEvent} event - The triggering event.
+	 * @returns {Promise} - Promise that resolves once the canvas pan has completed.
+	 */
+	async onTargetMouseDown(event) {
+		event.stopPropagation();
+		const uuid = event.currentTarget.dataset.uuid;
+		const doc = fromUuidSync(uuid);
+		const token = doc instanceof Token ? doc : doc?.token?.object ?? doc?.getActiveTokens()[0];
+		if (!token || !doc.testUserPermission(game.user, "OBSERVER")) return;
+		const releaseOthers = !event.shiftKey;
+		if (token.controlled) token.release();
+		else {
+			token.control({ releaseOthers });
+			return canvas.animatePan(token.center);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle highlighting a token when a chat message is hovered over.
+	 * @param {PointerEvent} event - The triggering event.
+	 */
+	onTargetHoverIn(event) {
+		const uuid = event.currentTarget.dataset.uuid;
+		const doc = fromUuidSync(uuid);
+		const token = doc instanceof Token ? doc : doc?.token?.object ?? doc?.getActiveTokens()[0];
+		if (token && token.isVisible) {
+			if (!token.controlled) token._onHoverIn(event, { hoverOutOthers: true });
+			this._highlighted = token;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle ending the highlighting of token.
+	 * @param {PointerEvent} event - The triggering event.
+	 */
+	onTargetHoverOut(event) {
+		if (this._highlighted) this._highlighted._onHoverOut(event);
+		this._highlighted = null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

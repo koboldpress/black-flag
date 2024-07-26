@@ -48,6 +48,20 @@ export function registerKeybindings() {
 export function registerSettings() {
 	log("Registering system settings");
 
+	game.settings.register(game.system.id, "attackVisibility", {
+		name: "BF.Settings.AttackVisibility.Label",
+		hint: "BF.Settings.AttackVisibility.Hint",
+		scope: "world",
+		config: true,
+		default: "hideAC",
+		type: String,
+		choices: {
+			all: "BF.Settings.AttackVisibility.All",
+			hideAC: "BF.Settings.AttackVisibility.HideAC",
+			none: "BF.Settings.AttackVisibility.None"
+		}
+	});
+
 	game.settings.register(game.system.id, "challengeVisibility", {
 		name: "BF.Settings.ChallengeVisibility.Label",
 		hint: "BF.Settings.ChallengeVisibility.Hint",

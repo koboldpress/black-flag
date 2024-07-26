@@ -53,6 +53,7 @@ export function registerCustomElements() {
 	window.customElements.define("blackflag-actions", components.ActionsElement);
 	window.customElements.define("blackflag-activities", components.ActivitiesElement);
 	window.customElements.define("blackflag-advancement", components.AdvancementElement);
+	window.customElements.define("blackflag-attackresult", components.AttackResultElement);
 	window.customElements.define("blackflag-consumption", components.ConsumptionElement);
 	window.customElements.define("blackflag-copyable", components.CopyableElement);
 	window.customElements.define("blackflag-currency", components.CurrencyElement);

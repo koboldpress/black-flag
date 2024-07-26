@@ -228,7 +228,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
 		li.classList.add("target");
 		li.dataset.targetUuid = uuid;
 		li.innerHTML = `
-			<img class="icon circular" alt="${token.name}" src="${token.img}">
+			<img class="icon circular" alt="${token.name}" src="${token.img}" data-uuid="${token.uuid}">
 			<div class="name-stacked">
 				<span class="title">${token.name}</span>
 				${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
@@ -255,6 +255,10 @@ export default class DamageApplicationElement extends ChatTrayElement {
 
 		this.refreshListEntry(token, li, targetOptions);
 		li.addEventListener("click", this._onChangeOptions.bind(this));
+		const icon = li.querySelector("img");
+		icon.addEventListener("click", this.message.onTargetMouseDown.bind(this));
+		icon.addEventListener("pointerover", this.message.onTargetHoverIn.bind(this));
+		icon.addEventListener("pointerout", this.message.onTargetHoverOut.bind(this));
 
 		return li;
 	}

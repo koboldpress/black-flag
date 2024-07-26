@@ -119,7 +119,7 @@ export default class HealingActivity extends Activity {
 					flavor: this.name,
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
-						"black-flag": {
+						[game.system.id]: {
 							type: "healing",
 							activity: this.uuid,
 							targets: this.constructor.getTargetDescriptors()
