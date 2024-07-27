@@ -49,13 +49,16 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	async toEmbedContents(config, options) {
-		// TODO
+		const p = document.createElement("p");
+		p.innerHTML = this.summaryForLevel();
+		return p;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
+		if (this.hint) return this.hint;
 		const labels = this.configuration.pool
 			.filter(e => !e.group)
 			.map(p => p.label)

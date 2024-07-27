@@ -111,7 +111,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/** @override */
 	summaryForLevel(levels, { flow = false } = {}) {
 		const items = this.value.added?.[this.relavantLevel(levels)];
-		if (!items || !flow) return "";
+		if (!items || !flow) return this.hint ?? "";
 		return Object.values(items).reduce((html, data) => html + linkForUUID(data.uuid), "");
 	}
 

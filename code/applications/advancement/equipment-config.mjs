@@ -192,7 +192,8 @@ export default class EquipmentConfig extends AdvancementConfig {
 		const item = await Item.implementation.fromDropData(data);
 
 		// Validate that this is a equipment item
-		if (item.system.constructor.metadata?.category !== "equipment") {
+		const metadata = item.system.constructor.metadata ?? {};
+		if (metadata.category !== "equipment" && metadata.type !== "currency") {
 			ui.notifications.error(
 				game.i18n.format("BF.Advancement.Equipment.Warning.ItemTypeInvalid", {
 					type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
