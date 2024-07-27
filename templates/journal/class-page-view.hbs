@@ -39,6 +39,10 @@
 
 		{{#if (or advancement.equipment enriched.additionalEquipment)}}
 			<h{{ title.level3 }}>{{ localize "BF.JournalPage.Class.Equipment.Header" }}</h{{ title.level3 }}>
+			{{#if advancement.equipment}}
+				<p>{{ localize "BF.JournalPage.Class.Equipment.Description" }}
+				{{{ advancement.equipment }}}
+			{{/if}}
 			{{{ enriched.additionalEquipment }}}
 		{{/if}}
 

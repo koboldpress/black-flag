@@ -154,6 +154,9 @@ export default class ClassPageSheet extends JournalPageSheet {
 			skills: makeTrait("skills")
 		};
 
+		const equipment = item.system.advancement.byType("equipment")[0];
+		if (equipment) advancement.equipment = equipment.summaryForLevel();
+
 		return advancement;
 	}
 

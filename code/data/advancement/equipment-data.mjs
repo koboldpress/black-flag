@@ -133,45 +133,6 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		return this.generateLabel();
 	}
 
-	/**
-	 * Generate a human readable label, taking depth into account for OR prefixes.
-	 * @param {number} depth
-	 * @returns {string|void}
-	 */
-	generateLabel(depth = 1) {
-		let label;
-		switch (this.type) {
-			// For AND/OR, use a simple conjunction/disjunction list (e.g. "first, second, and third")
-			case "AND":
-			case "OR":
-				// TODO: Add (a), (b) before ORed entries
-				return game.i18n
-					.getListFormatter({ type: this.type === "AND" ? "conjunction" : "disjunction", style: "long" })
-					.format(this.children.map(c => c.generateLabel(depth + 1)).filter(l => l));
-
-			// For linked type, fetch the name using the index
-			case "linked":
-				const index = fromUuidSync(this.key);
-				if (index) label = index.name;
-				break;
-
-			// For category types, grab category information from config
-			default:
-				label = this.categoryLabel;
-				break;
-		}
-
-		if (!label) return;
-		if (this.count > 1) label = `${numberFormat(this.count, { spellOut: true })} ${label}`;
-		else if (this.type !== "linked") {
-			label = game.i18n.format("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
-		}
-		if (this.type === "linked" && this.requiresProficiency) {
-			label += ` (${game.i18n.localize("BF.Advancement.Equipment.IfProficient").toLowerCase()})`;
-		}
-		return label;
-	}
-
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -222,6 +183,64 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 		}
 
 		return choices;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Generate a human readable label, taking depth into account for OR prefixes.
+	 * @param {number} depth
+	 * @returns {string|void}
+	 */
+	generateLabel(depth = 1) {
+		let label;
+		switch (this.type) {
+			// For AND/OR, use a simple conjunction/disjunction list (e.g. "first, second, and third")
+			case "AND":
+			case "OR":
+				let entries = this.children.map(c => c.generateLabel(depth + 1)).filter(l => l);
+				if (this.type === "OR") entries = this.prefixOrEntries(entries, depth);
+				return game.i18n
+					.getListFormatter({ type: this.type === "AND" ? "conjunction" : "disjunction", style: "long" })
+					.format(entries);
+
+			// For linked type, fetch the name using the index
+			case "linked":
+				const index = fromUuidSync(this.key);
+				if (index) label = index.name;
+				break;
+
+			// For category types, grab category information from config
+			default:
+				label = this.categoryLabel;
+				break;
+		}
+
+		if (!label) return;
+		if (this.count > 1) label = `${numberFormat(this.count, { spellOut: true })} ${label}`;
+		else if (this.type !== "linked") {
+			label = game.i18n.format("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
+		}
+		if (this.type === "linked" && this.requiresProficiency) {
+			label += ` (${game.i18n.localize("BF.Advancement.Equipment.IfProficient").toLowerCase()})`;
+		}
+		return label;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prefix each OR entry at a certain level with a letter.
+	 * @param {string[]} entries - Entries to prefix.
+	 * @param {number} depth - Current depth of the OR entry (1 or 2).
+	 * @returns {string[]}
+	 */
+	prefixOrEntries(entries, depth) {
+		const letters = game.i18n.localize(`BF.Advancement.Equipment.Prefixes.${depth}`);
+		if (!letters) return entries;
+		return entries.map((e, idx) => `(${letters[idx]}) ${e}`);
 	}
 }
 
