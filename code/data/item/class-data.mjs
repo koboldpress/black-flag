@@ -127,7 +127,9 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 		this._createInitialAdvancement([
 			{ type: "hitPoints" },
 			{ type: "keyAbility" },
-			{ type: "trait", configuration: { choices: [{ count: 2, pool: ["skills:*"] }] } }
+			{ type: "trait", level: { classRestriction: "original", value: 1 } },
+			{ type: "trait", configuration: { choices: [{ count: 2, pool: ["skills:*"] }] } },
+			{ type: "equipment", level: { classRestriction: "original" } }
 		]);
 	}
 }

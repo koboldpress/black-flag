@@ -26,6 +26,17 @@ export default class EquipmentAdvancement extends Advancement {
 	);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Preparation Methods         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	_preCreate(data) {
+		super._preCreate(data);
+		if (foundry.utils.hasProperty(data, "level.classRestriction")) return;
+		this.updateSource({ "level.classRestriction": "original" });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Display Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
