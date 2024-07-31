@@ -23,7 +23,7 @@ import { spellCircles } from "./spellcasting.mjs";
  */
 
 /**
- * Function called to calculate consumption changes.
+ * Function called to build a list of valid consumption targets.
  *
  * @callback ConsumptionValidTargetsFunction
  * @param {Activity} activity - Activity to which the consumption belongs.

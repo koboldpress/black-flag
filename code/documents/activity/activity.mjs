@@ -19,6 +19,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {string} icon - Icon used if no user icon is specified.
 	 * @property {string} title - Title to be displayed if no user title is specified.
 	 * @property {string} hint - Description of this type shown in the activity selection dialog.
+	 * @property {object} usage
+	 * @property {string} usage.chatCard - Template used to render chat cards.
+	 * @property {typeof ActivityActivationDialog} usage.dialog - Application used for the activation dialog by default.
 	 */
 
 	/**
@@ -31,7 +34,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			{
 				icon: "",
 				title: "BF.Activity.Label[one]",
-				hint: ""
+				hint: "",
+				usage: {
+					chatCard: "systems/black-flag/templates/activities/chat/activation-card.hbs",
+					dialog: ActivityActivationDialog
+				}
 			},
 			{ inplace: false }
 		)
@@ -261,25 +268,36 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 
 	/**
-	 * Message configuration data used when creating messages.
-	 *
-	 * @typedef {object} ActivityMessageConfiguration
-	 * @property {boolean} [create=true] - Should a message be created when this roll is complete?
-	 * @property {object} [data={}] - Additional data used when creating the message.
-	 */
-
-	/**
 	 * Data for the activity activation configuration dialog.
 	 *
 	 * @typedef {object} ActivityDialogConfiguration
-	 * @property {boolean} [configure=true] - Should the activation configuration dialog be displayed?
-	 * @property {typeof ActivityActivationDialog} - [applicationClass] - Alternate activation dialog to use.
+	 * @property {boolean} configure=true - Should the activation configuration dialog be displayed?
+	 * @property {typeof ActivityActivationDialog} - applicationClass - Alternate activation dialog to use.
+	 */
+
+	/**
+	 * Message configuration data used when creating messages.
+	 *
+	 * @typedef {object} ActivityMessageConfiguration
+	 * @property {boolean} create=true - Should a message be created when this roll is complete?
+	 * @property {object} data={} - Additional data used when creating the message.
+	 * @property {string} template - Template to use for rendering the chat card.
+	 */
+
+	/**
+	 * Details of final changes performed by the activation.
+	 *
+	 * @typedef {object} ActivityActivationResults
+	 * @property {BlackFlagChatMessage|ActivityMessageConfiguration} message - The chat message created for the
+	 *                                                                         activation, or the message data if create
+	 *                                                                         was `false`.
+	 * @property {ActivationUpdates} updates - Updates to the actor & items.
 	 */
 
 	/**
 	 * Activate this activity.
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {object} dialog - Configuration info for the configuration dialog.
+	 * @param {ActivityDialogConfiguration} dialog - Configuration info for the configuration dialog.
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
@@ -288,18 +306,24 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		item.system.prepareFinalData?.();
 		let activity = item.system.activities.get(this.id);
 
-		// Prepare initial activation configuration
-		const activationConfig = activity.prepareActivationConfig(config);
+		const activationConfig = activity._prepareActivationConfig(config);
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				configure: true,
-				applicationClass: ActivityActivationDialog
+				applicationClass: this.metadata.usage.dialog
 			},
 			dialog
 		);
 
-		const messageConfig = foundry.utils.mergeObject({ create: true, data: {} }, message);
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				create: true,
+				data: {},
+				template: this.metadata.usage.chatCard
+			},
+			message
+		);
 
 		// Call preActivate script & hooks
 		// TODO: preActivate script
@@ -320,7 +344,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		// Display configuration window if necessary, wait for result
-		if (dialogConfig.configure && activity.requiresConfigurationDialog(activationConfig)) {
+		if (dialogConfig.configure && activity._requiresConfigurationDialog(activationConfig)) {
 			try {
 				await dialogConfig.applicationClass.create(activity, activationConfig, dialogConfig.options);
 			} catch (err) {
@@ -329,33 +353,70 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		// Handle scaling
-		this.prepareActivationScaling(activationConfig, messageConfig, item);
+		this._prepareActivationScaling(activationConfig, messageConfig, item);
 		activity = item.system.activities.get(this.id);
 
+		// Handle consumption
+		const updates = await activity.consume(activationConfig, messageConfig);
+		if (updates === false) return;
+		const results = { updates };
+
+		// Display the card in chat
+		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+		if (config.targets?.length) {
+			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
+		}
+		results.message = await activity.createActivationMessage(messageConfig);
+
+		// Finalize the activation
+		await activity._finalizeActivation(activationConfig, results);
+
+		// Call postActivate script & hooks
+		// TODO: postActivate script
+		/**
+		 * A hook event that fires when an activity is activated.
+		 * @function blackFlag.postActivateActivity
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity being activated.
+		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
+		 * @param {ActivityActivationResults} results - Results of the activation.
+		 */
+		Hooks.callAll("blackFlag.postActivateActivity", activity, activationConfig, results);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Consume this activity's usage.
+	 * @param {ActivityActivationConfiguration} activationConfig - Any configuration data provided manually.
+	 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the chat message.
+	 * @returns {ActivationUpdates|false}
+	 */
+	async consume(activationConfig, messageConfig) {
 		// Call preActivityConsumption script & hooks
 		// TODO: preActivityConsumption script
 		/**
 		 * A hook event that fires before an item's resource consumption is calculated.
-		 * @function @blackFlag.preActivityConsumption
+		 * @function blackFlag.preActivityConsumption
 		 * @memberof hookEvents
 		 * @param {Activity} activity - Activity being activated.
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
 		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig) === false) {
-			return;
+		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false) {
+			return false;
 		}
 
 		// Calculate what resources should be consumed
-		const updates = await activity.activationUpdates(activationConfig);
-		if (updates === false) return;
+		const updates = await this._prepareActivationUpdates(activationConfig);
+		if (updates === false) return false;
 
 		// Call activityConsumption script & hooks
 		// TODO: activityConsumption script
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated, but before an updates are performed.
-		 * @function @blackFlag.activityConsumption
+		 * @function blackFlag.activityConsumption
 		 * @memberof hookEvents
 		 * @param {Activity} activity - Activity being activated.
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
@@ -363,8 +424,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that will be applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig, updates) === false) {
-			return;
+		if (Hooks.call("blackFlag.activityConsumption", this, activationConfig, messageConfig, updates) === false) {
+			return false;
 		}
 
 		// Merge activity changes into the item updates
@@ -384,7 +445,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// TODO: postActivityConsumption script
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated and applied.
-		 * @function @blackFlag.postActivityConsumption
+		 * @function blackFlag.postActivityConsumption
 		 * @memberof hookEvents
 		 * @param {Activity} activity - Activity being activated.
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
@@ -392,33 +453,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivationUpdates} updates - Updates that have been applied to the actor and other documents.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", activity, activationConfig, messageConfig, updates) === false) {
-			return;
+		if (Hooks.call("blackFlag.postActivityConsumption", this, activationConfig, messageConfig, updates) === false) {
+			return false;
 		}
 
-		// Display the card in chat
-		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
-		if (config.targets?.length) {
-			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.targets`, config.targets);
-		}
-		const createdMessage = await activity.createActivationMessage(messageConfig);
-
-		// Create measured templates if necessary
-		// TODO
-
-		// Call postActivate script & hooks
-		// TODO: postActivate script
-		/**
-		 * A hook event that fires when an activity is activated.
-		 * @function blackFlag.postActivateActivity
-		 * @memberof hookEvents
-		 * @param {Activity} activity - Activity being activated.
-		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
-		 * @param {BlackFlagChatMessage|ActivityMessageConfiguration} message - The chat message created for the activation,
-		 *                                                                      or the message data if create was `false`.
-		 * @param {MeasuredTemplateDocument[]|null} templates - Any measured templates that were created.
-		 */
-		Hooks.callAll("blackFlag.postActivateActivity", activity, activationConfig, createdMessage, null);
+		return updates;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -427,14 +466,14 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Prepare activation configuration object with the necessary defaults based on the activity and item.
 	 * @param {ActivityActivationConfiguration} [config={}] - Any configuration data provided manually.
 	 * @returns {ActivityActivationConfiguration}
+	 * @protected
 	 */
-	prepareActivationConfig(config = {}) {
+	_prepareActivationConfig(config = {}) {
 		config = foundry.utils.deepClone(config);
 
 		if (config.consume !== false) {
 			config.consume ??= {};
 			config.consume.action ??= this.activation.type === "legendary";
-			// TODO: consume.ammunition
 			config.consume.resources ??= this.consumption.targets.length > 0;
 			config.consume.spellSlot ??= this.requiresSpellSlot;
 		}
@@ -459,8 +498,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
 	 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the chat message.
 	 * @param {BlackFlagItem} item - Clone of the item upon which the activation is occurring.
+	 * @protected
 	 */
-	prepareActivationScaling(activationConfig, messageConfig, item) {
+	_prepareActivationScaling(activationConfig, messageConfig, item) {
 		const scaleUpdate = {};
 
 		if (item.type === "spell") {
@@ -492,20 +532,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Determine if the configuration dialog is required based on the configuration options. Does not guarantee a dialog
-	 * is shown if the dialog is suppressed in the activation dialog configuration.
-	 * @param {ActivityActivationConfiguration} config
-	 * @returns {boolean}
-	 */
-	requiresConfigurationDialog(config) {
-		if (config.consume !== false) return true;
-		if (config.scaling !== false) return true;
-		return false;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Update data produced by activity activation.
 	 *
 	 * @typedef {object} ActivationUpdates
@@ -519,8 +545,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Calculate changes to actor, items, & this activity based on resource consumption.
 	 * @param {ActivityActivationConfiguration} config - Activation configuration.
 	 * @returns {ActivationUpdates}
+	 * @protected
 	 */
-	async activationUpdates(config) {
+	async _prepareActivationUpdates(config) {
 		const updates = { activity: {}, item: [], actor: {}, rolls: [] };
 		if (!config.consume) return updates;
 		const errors = [];
@@ -592,10 +619,26 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Determine if the configuration dialog is required based on the configuration options. Does not guarantee a dialog
+	 * is shown if the dialog is suppressed in the activation dialog configuration.
+	 * @param {ActivityActivationConfiguration} config
+	 * @returns {boolean}
+	 * @protected
+	 */
+	_requiresConfigurationDialog(config) {
+		if (config.consume !== false) return true;
+		if (config.scaling !== false) return true;
+		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare the context for item activation.
 	 * @returns {object}
+	 * @protected
 	 */
-	async activationChatContext() {
+	async _activationChatContext() {
 		return {
 			activity: this,
 			item: this.item,
@@ -619,17 +662,27 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Display an activation chat message for this activity.
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
-	 * @returns {Promise<ChatMessage|ActivityMessageConfiguration>}
+	 * @returns {Promise<BlackFlagChatMessage|ActivityMessageConfiguration>}
 	 */
 	async createActivationMessage(message = {}) {
-		const context = await this.activationChatContext();
+		const context = await this._activationChatContext();
+
+		/**
+		 * A hook event that fires before an activity activation card contents is rendered.
+		 * @function blackFlag.preCreateActivationMessage
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity for which the card will be created.
+		 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
+		 * @param {object} context - Context that will be used to render the message.
+		 */
+		if (Hooks.call("blackFlag.preCreateActivationMessage", this, message, context) === false) return message;
+
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
-					title: "chat message",
 					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-					content: await renderTemplate("systems/black-flag/templates/activities/chat/activation-card.hbs", context),
+					content: await renderTemplate(message.template ?? this.metadata.usage.chatCard, context),
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
 						core: { canPopout: true },
@@ -644,16 +697,41 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			},
 			message
 		);
-
-		// TODO: Call preCreateActivationMessage script & hooks
-
 		ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+
+		/**
+		 * A hook event that fires before an activity activation card is created.
+		 * @function blackFlag.createActivationMessage
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity for which the card will be created.
+		 * @param {ActivityMessageConfiguration} message - Configuration info for the created message.
+		 */
+		if (Hooks.call("blackFlag.createActivationMessage", this, messageConfig) === false) return message;
 
 		const card = messageConfig.create !== false ? await ChatMessage.create(messageConfig.data) : messageConfig;
 
-		// TODO: Call postCreateActivationMessage script & hooks
+		/**
+		 * A hook event that fires after an activity activation card is created.
+		 * @function blackFlag.postCreateActivationMessage
+		 * @memberof hookEvents
+		 * @param {Activity} activity - Activity for which the card was created.
+		 * @param {BlackFlagChatMessage} message - Created chat message.
+		 */
+		if (messageConfig.create !== false) Hooks.callAll("blackFlag.postCreateActivationMessage", this, messageConfig);
 
 		return card;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any final steps of the activation including creating measured templates.
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
+	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @protected
+	 */
+	async _finalizeActivation(config, results) {
+		// TODO: Create measured templates
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
