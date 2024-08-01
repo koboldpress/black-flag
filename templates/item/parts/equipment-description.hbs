@@ -30,6 +30,8 @@
 			</select>
 		</label>
 	</div>
-	{{ editor enriched.description target="system.description.value" button=true
-	          editable=editable engine="prosemirror" collaborate=false class="description" }}
+	<prose-mirror name="system.description.value" data-document-u-u-i-d="{{ item.uuid }}"
+	              value="{{ source.description.value }}" toggled="true" class="description">
+		{{{ enriched.description }}}
+	</prose-mirror>
 </div>

@@ -1,3 +1,9 @@
+.activity-config {
+	max-height: 85vh;
+	min-height: 320px;
+	max-width: 540px;
+	min-width: 540px;
+}
 .activity-config form {
 	display: flex;
 	flex-direction: column;
@@ -40,10 +46,11 @@
 			height: 100%;
 			.editor-container {
 				overflow-y: auto;
-				scrollbar-width: thin;
 				margin: 0;
 				.editor-content {
 					margin: 0.25rem 0.25rem 1rem 10.5px;
+					margin-inline-start: 8px;
+					padding-inline-start: 8px;
 				}
 			}
 		}

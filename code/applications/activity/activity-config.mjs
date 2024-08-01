@@ -12,9 +12,9 @@ export default class ActivityConfig extends PseudoDocumentSheet {
 			tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "details" }],
 			template: "systems/black-flag/templates/activities/activity-config.hbs",
 			width: 540,
-			height: "auto",
 			submitOnChange: true,
-			closeOnSubmit: false
+			closeOnSubmit: false,
+			resizable: true
 		});
 	}
 

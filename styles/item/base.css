@@ -6,12 +6,12 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-	
+
 		.sheet-header {
 			.icon {
 				flex: 0 0 64px;
 				margin: 0;
-	
+
 				> img {
 					width: 64px;
 					height: 64px;
@@ -21,31 +21,31 @@
 				flex-grow: 1;
 			}
 		}
-	
+
 		.sheet-body {
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-	
+
 			[data-tab] {
 				height: 100%;
-	
+
 				> section {
 					display: flex;
 					flex-direction: column;
 					gap: 0.5rem;
-	
+
 					&:first-child:last-child {
 						height: 100%;
 					}
 				}
 			}
-	
+
 			[data-tab="description"] {
 				> section {
 					gap: 0;
 				}
-	
+
 				.category {
 					display: flex;
 					gap: 0.5rem;
@@ -54,7 +54,7 @@
 					border-block: 1px groove var(--bf-color-border-blue);
 					padding-block: 4px;
 					padding-inline: 0.5rem;
-	
+
 					> label {
 						flex: 1 1 20em;
 						max-width: calc(50% - 4px);
@@ -63,7 +63,7 @@
 						font-size: var(--font-size-12);
 						font-variant: small-caps;
 						font-weight: 100;
-	
+
 						> span:first-of-type {
 							flex: 1 0 100%;
 						}
@@ -72,13 +72,13 @@
 						}
 					}
 				}
-	
+
 				.description-area {
 					flex-grow: 1;
 					display: flex;
 					gap: 1rem;
 					align-items: flex-start;
-	
+
 					.sidebar {
 						flex: 0 0 144px;
 						max-inline-size: 144px;
@@ -91,12 +91,12 @@
 						background-color: rgba(255 255 255 / 0.25);
 						box-shadow: 1px 1px 4px rgba(0 0 0 / 0.2);
 						font-size: var(--font-size-12);
-	
+
 						label {
 							display: flex;
 							gap: 0.5rem;
 							align-items: first baseline;
-	
+
 							> span:first-child { font-weight: bold; }
 							input, select {
 								height: 1.75em;
@@ -106,28 +106,23 @@
 							[name="system.rarity"] { flex-grow: 1; }
 						}
 					}
-	
-					.editor {
+
+					prose-mirror {
+						max-width: unset;
 						flex-grow: 1;
 						align-self: stretch;
-	
-						&:not(.prosemirror) {
-							margin-inline: 0.5rem;
-						}
-						&.prosemirror {
-							height: 100%;
-							max-width: unset;
-							margin-inline: -0.5rem;
-						}
+						margin-inline: -.5rem;
+
+						.editor-content { padding-inline: 12px; }
 					}
 				}
-	
+
 				.source {
 					display: flex;
 					gap: 0.5rem;
 					align-items: first baseline;
 					margin-inline-end: 1rem;
-	
+
 					> span {
 						font-size: var(--font-size-12);
 						font-variant: small-caps;
@@ -144,13 +139,13 @@
 				}
 			}
 		}
-	
+
 		[data-tab="details"] {
 			fieldset:not(.checkbox-list) {
 				display: flex;
 				flex-direction: column;
 				gap: 0.5rem;
-		
+
 				> :is(label, .field-group) {
 					> input {
 						flex-grow: 1;

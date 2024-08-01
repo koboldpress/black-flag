@@ -1,6 +1,9 @@
 <section>
-	<fieldset class="compact-editor">
+	<fieldset>
 		<legend>{{ localize "BF.Activity.Core.Description.Label" }}</legend>
-		{{ editor enriched target="description" button=true engine="prosemirror" collaborate=false }}
+		<prose-mirror name="description" data-document-u-u-i-d="{{ activity.uuid }}"
+		              value="{{ activity.description }}" collaborate="false" toggled="true">
+			{{{ enriched }}}
+		</prose-mirror>
 	</fieldset>
 </section>

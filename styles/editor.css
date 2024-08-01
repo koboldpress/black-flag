@@ -29,3 +29,33 @@
 		min-height: 50px;
 	}
 }
+
+.black-flag prose-mirror {
+	.editor-container {
+		scrollbar-width: thin;
+		scrollbar-color: var(--bf-blue) transparent;
+
+		&::-webkit-scrollbar-track {
+			box-shadow: none;
+			border-radius: 0;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border: none;
+			background: var(--bf-blue);
+		}
+	}
+	> button.toggle {
+		width: unset;
+		height: unset;
+		border: .5px solid var(--bf-color-border-blue);
+		padding: 1px 2px;
+		background: var(--bf-color-fill);
+		color: var(--bf-blue);
+		font-size: var(--font-size-12);
+		line-height: normal;
+		outline: none;
+		&:hover, &:focus { box-shadow: none; }
+		&:hover, &:focus-visible { text-shadow: 0 0 8px var(--bf-text-shadow-blue); }
+	}
+}
