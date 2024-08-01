@@ -64,7 +64,7 @@ export default class NPCSheet extends BaseActorSheet {
 	 * @returns {string}
 	 */
 	prepareUsesDisplay(item, activity) {
-		const uses = item.system.uses;
+		const uses = item.system.uses ?? {};
 		const parts = [];
 
 		if (activity?.activation.type === "legendary" && activity.activation.value > 1) {
