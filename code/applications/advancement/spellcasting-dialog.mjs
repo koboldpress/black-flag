@@ -329,14 +329,17 @@ export default class SpellcastingDialog extends FormApplication {
 	async _updateObject(event, formData) {
 		const toAdd = new Map();
 		const toRemove = new Set();
+		const visibleSlots = new Set();
 
 		for (const slot of this.slots) {
+			visibleSlots.add(slot.type);
 			if (!slot.selected) continue;
 			toAdd.set(slot.selected, slot.type);
 			// TODO: Handle replacement properly
 		}
 
 		for (const spell of this.advancement._getAddedSpells(this.levels)) {
+			if (!visibleSlots.has(spell.slot)) continue;
 			if (toAdd.get(spell.uuid) !== spell.slot) toRemove.add(spell.document);
 			else toAdd.delete(spell.uuid);
 		}
