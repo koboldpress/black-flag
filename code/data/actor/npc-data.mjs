@@ -173,6 +173,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 		this.prepareBaseArmorFormulas();
 		this.prepareBaseModifiers();
+		this.prepareBaseTraits();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

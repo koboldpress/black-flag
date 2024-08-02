@@ -260,6 +260,7 @@ export default class PCData extends ActorDataModel.mixin(
 		this.prepareBaseArmorFormulas();
 		this.prepareBaseEncumbrance();
 		this.prepareBaseModifiers();
+		this.prepareBaseTraits();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

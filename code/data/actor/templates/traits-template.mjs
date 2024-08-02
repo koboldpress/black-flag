@@ -21,7 +21,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					}),
 					tags: new SetField(new StringField())
 					// TODO: Add alternate units
-					// TODO: Overall unit multiplier
 				}, {label: "BF.Speed.Label"}),
 				senses: new SchemaField({
 					types: new MappingField(new FormulaField({deterministic: true})),
@@ -67,6 +66,15 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Prepare initial movement values.
+	 */
+	prepareBaseTraits() {
+		this.traits.movement.multiplier ??= "1";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Resolve final movement, senses, and resistances/immunities.
 	 * @param {object} rollData
 	 */
@@ -78,6 +86,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
 			.intersection(this.parent.statuses).size || (this.attributes?.exhaustion >= 5);
 		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
+		const multiplier = simplifyBonus(movement.multiplier, rollData);
 
 		// Calculate each special movement type using base speed
 		const entries = new Map();
@@ -85,7 +94,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			let speed;
 			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) speed = 0;
 			else speed = simplifyBonus(formula, rollData) * (halfMovement ? 0.5 : 1);
-			movement.types[type] = speed;
+			movement.types[type] = speed * multiplier;
 
 			const label = CONFIG.BlackFlag.movementTypes.localized[type];
 			if ( speed && label ) {

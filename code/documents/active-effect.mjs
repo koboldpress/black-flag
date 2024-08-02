@@ -28,7 +28,8 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		"system.attributes.encumbrance.multipliers.encumbered",
 		"system.attributes.encumbrance.multipliers.heavilyEncumbered",
 		"system.attributes.encumbrance.multipliers.maximum",
-		"system.attributes.encumbrance.multipliers.overall"
+		"system.attributes.encumbrance.multipliers.overall",
+		"system.traits.movement.multiplier"
 	]);
 
 	/* <><><><> <><><><> <><><><> <><><><> */
