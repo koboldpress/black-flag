@@ -111,6 +111,7 @@ export class ExtendedDamageData extends SimpleDamageData {
 				break;
 			case "half":
 				increase = Math.floor(increase * 0.5);
+				break;
 			default:
 				return formula;
 		}
