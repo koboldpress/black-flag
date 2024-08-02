@@ -1,0 +1,180 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Heroism",
+  "type": "spell",
+  "_id": "zRsCgtiBO7EuJbhb",
+  "img": "icons/magic/control/control-influence-crown-gold.webp",
+  "system": {
+    "activities": {
+      "Fk3ZMdFPUIItfrtR": {
+        "type": "healing",
+        "_id": "Fk3ZMdFPUIItfrtR",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "number": null,
+            "denomination": null,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false
+            },
+            "scaling": {
+              "number": 1
+            }
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being frightened and gains temporary hit points equal to your spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each slot above 1st.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine"
+    ],
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "willing",
+        "count": "@scaling",
+        "special": ""
+      }
+    },
+    "school": "enchantment"
+  },
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.zRsCgtiBO7EuJbhb",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Heroism",
+      "img": "icons/magic/control/control-influence-crown-gold.webp",
+      "_id": "IkCNiI4SHdElgK8n",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "frightened",
+          "priority": null
+        }
+      ],
+      "description": "<p>You are immune to being frightened and gain temporary hit points equal to the caster’s spellcasting ability modifier at the start of each of your turns.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722573280232,
+        "modifiedTime": 1722573337803,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!zRsCgtiBO7EuJbhb.IkCNiI4SHdElgK8n"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.041",
+    "createdTime": 1722569604725,
+    "modifiedTime": 1722573273121,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!zRsCgtiBO7EuJbhb"
+}

@@ -1,0 +1,129 @@
+{
+  "folder": "tCxdqzClsLOnTgfE",
+  "name": "Hallucinatory Terrain",
+  "type": "spell",
+  "_id": "r4Yc0FrcBvwvx8fF",
+  "img": "icons/environment/wilderness/cave-entrance-mountain.webp",
+  "system": {
+    "activities": {
+      "oflF38daJB7Tm2nm": {
+        "type": "utility",
+        "_id": "oflF38daJB7Tm2nm",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You make natural terrain in a 150-foot cube in range look, sound, and smell like some other sort of natural terrain. Thus, open fields or a road can be made to resemble a swamp, hill, crevasse, or some other difficult or impassable terrain. A pond can be made to seem like a grassy meadow, a precipice like a gentle slope, or a rock-strewn gully like a wide and smooth road. Manufactured structures, equipment, and creatures within the area aren’t changed in appearance.</p><p>The tactile characteristics of the terrain are unchanged, so creatures entering the area are likely to see through the illusion. If the difference isn’t obvious by touch, a creature carefully examining the illusion can attempt an [[/check INT investigation]] check against your spell save DC to disbelieve it. A creature who discerns the illusion for what it is sees it as a vague image superimposed on the terrain.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "arcane",
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 4
+    },
+    "casting": {
+      "value": 10,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a stone, a twig, and a bit of green plant"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "24"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "300",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": "cube",
+        "size": "150"
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "illusion"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.041",
+    "createdTime": 1722569848828,
+    "modifiedTime": 1722570318540,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!r4Yc0FrcBvwvx8fF"
+}

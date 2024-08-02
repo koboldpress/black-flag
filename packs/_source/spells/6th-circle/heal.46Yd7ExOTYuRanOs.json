@@ -1,0 +1,148 @@
+{
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Heal",
+  "type": "spell",
+  "_id": "46Yd7ExOTYuRanOs",
+  "img": "icons/magic/life/heart-cross-strong-flame-purple-orange.webp",
+  "system": {
+    "activities": {
+      "JCcw3Bc3vKqJ9ILC": {
+        "type": "healing",
+        "_id": "JCcw3Bc3vKqJ9ILC",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "healing",
+            "number": null,
+            "denomination": 0,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": null,
+              "mode": "whole",
+              "formula": "10"
+            },
+            "bonus": "70"
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>Choose a creature that you can see within range. A surge of positive energy washes through the creature, causing it to regain [[/healing]]{70 HP}. This spell also ends blindness, deafness, and any diseases affecting the target. This spell has no effect on Constructs or Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 7th circle or higher, the amount of healing increases by [[/healing 10]]{10 HP} for each slot above 6th.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 6
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "60",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": ""
+      }
+    },
+    "school": "necromancy"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.041",
+    "createdTime": 1722569583757,
+    "modifiedTime": 1722571792809,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!46Yd7ExOTYuRanOs"
+}

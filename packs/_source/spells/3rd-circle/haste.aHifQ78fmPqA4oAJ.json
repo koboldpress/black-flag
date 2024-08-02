@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You imbue your target with swiftness, making them hard to hit and faster to hit back.</em></p><p>Choose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on DEX saves, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
+      "value": "<p>Choose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on DEX saves, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -80,19 +80,77 @@
       "affects": {
         "choice": false,
         "type": "willing",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
       "arcane"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.aHifQ78fmPqA4oAJ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Haste",
+      "img": "icons/magic/movement/trail-streak-zigzag-teal.webp",
+      "_id": "oAjTl6k4dBu3KmfZ",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.multiplier",
+          "mode": 4,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }], \"formula\": \"2\" }",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }, { \"k\": \"ability\",  \"v\": \"dexterity\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on DEX saves.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "<p>Your speed is doubled, you gain a +2 bonus to AC, you have advantage on DEX saves, and you gain an additional action on each of your turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722571887375,
+        "modifiedTime": 1722572398856,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!aHifQ78fmPqA4oAJ.oAjTl6k4dBu3KmfZ"
+    }
+  ],
   "sort": 2200000,
   "ownership": {
     "default": 0
@@ -100,10 +158,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934086221,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1722571856151,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

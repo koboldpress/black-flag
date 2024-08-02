@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You ensorcel your target with uncontrollable laughter.</em></p><p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a WIS save or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an INT modifier of −4 or less isn’t affected.</p><p>At the end of each of its turns, and each time it takes damage, the target can make another WIS save. The target has advantage on the save if it’s triggered by damage. On a success, the spell ends.</p>",
+      "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a [[/save]] save or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an INT of 3 (−4) or lower isn’t affected by this spell.</p><p>At the end of each of its turns and each time it takes damage, the target can make another [[/save]] save, ending the spell on a success. The target has advantage on the save if it’s triggered by damage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -95,19 +95,62 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "enchantment",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.2KCL7Tsd8sqEd9g0",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Hideous Laughter",
+      "img": "icons/magic/control/fear-fright-white.webp",
+      "_id": "7wTPk8P7ycHeddkk",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "incapacitated",
+        "prone"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722573421692,
+        "modifiedTime": 1722573437387,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!2KCL7Tsd8sqEd9g0.7wTPk8P7ycHeddkk"
+    }
+  ],
   "sort": 200000,
   "ownership": {
     "default": 0
@@ -115,10 +158,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934112629,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1722573456105,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

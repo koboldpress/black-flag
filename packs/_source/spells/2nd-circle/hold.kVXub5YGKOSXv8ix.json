@@ -1,6 +1,6 @@
 {
   "folder": "iJIjiGFvx6IqTXvu",
-  "name": "Hold Person",
+  "name": "Hold",
   "type": "spell",
   "_id": "kVXub5YGKOSXv8ix",
   "img": "icons/magic/control/debuff-chains-shackle-movement-red.webp",
@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You paralyze your target where they stand.</em></p><p>Choose a Humanoid that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, the target can make another WIS save. On a success, the spell ends on the target.</p>",
+      "value": "<p>Choose a Medium or smaller creature that you can see within range. The target must succeed on a [[/save]] save or be &amp;Reference[paralyzed] for the duration. At the end of each of its turns, an affected target can repeat the [[/save]] save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd. The creatures must be within 30 feet of each other when you target them.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -95,12 +95,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "enchantment",
     "source": [
@@ -108,7 +110,46 @@
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Hold",
+      "img": "icons/magic/control/debuff-chains-shackle-movement-red.webp",
+      "_id": "7jxJgJzn0Cp5EzS8",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "<p>You are paralyzed for the duration. At the end of each of your turns, you can repeat the [[/save WIS]] save, ending the effect on a success.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "paralyzed"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722573545956,
+        "modifiedTime": 1722573583604,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!kVXub5YGKOSXv8ix.7jxJgJzn0Cp5EzS8"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -116,10 +157,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934136728,
-    "modifiedTime": 1718423967291,
+    "modifiedTime": 1722573881447,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

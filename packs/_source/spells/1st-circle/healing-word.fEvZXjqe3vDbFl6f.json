@@ -10,17 +10,22 @@
         "description": "<p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p>",
         "system": {
           "healing": {
-            "number": 2,
+            "number": 1,
             "denomination": 4,
             "bonus": "@mod",
             "custom": "",
-            "type": "healing"
+            "type": "healing",
+            "scaling": {
+              "mode": "whole",
+              "formula": ""
+            }
           },
           "ability": ""
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -36,7 +41,19 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/healing.svg"
+        "img": "systems/black-flag/artwork/activities/healing.svg",
+        "target": {
+          "override": false,
+          "affects": {
+            "type": ""
+          },
+          "template": {
+            "type": ""
+          }
+        },
+        "range": {
+          "units": ""
+        }
       }
     },
     "uses": {
@@ -47,7 +64,7 @@
       "consumeQuantity": false
     },
     "description": {
-      "value": "<p><em>You say a quick prayer that knits small wounds on a nearby target.</em></p><p>A creature of your choice that you can see within range regains hit points equal to 1d4 + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p>",
+      "value": "<p>A creature of your choice that you can see within range regains hit points equal to [[/healing]]{1d4} + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, the healing increases by [[/healing 1d4 temp]]{1d4} for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -88,12 +105,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -108,10 +127,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1703204964700,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1722572978719,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

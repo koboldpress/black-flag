@@ -1,0 +1,156 @@
+{
+  "folder": "nRrXxMSYGyY4qKs3",
+  "name": "Hellish Rebuke",
+  "type": "spell",
+  "_id": "F4Tv4rOAWNOBl6hU",
+  "img": "icons/magic/fire/flame-burning-earth-orange.webp",
+  "system": {
+    "activities": {
+      "oQFo9909Zk1BPL7P": {
+        "type": "savingThrow",
+        "_id": "oQFo9909Zk1BPL7P",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames. The creature must make a [[/save]] save. It takes [[/damage]] damage on a failed save, or half as much damage on a successful one.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, the damage increases by [[/damage 1d10 fire]]{1d10} for each slot above 1st.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "wyrd"
+    ],
+    "circle": {
+      "value": null,
+      "base": 1
+    },
+    "casting": {
+      "value": null,
+      "type": "reaction",
+      "condition": "when damaged by a creature within 60 feet of you that you can see"
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [],
+    "range": {
+      "units": "foot",
+      "value": "60",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "evocation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.041",
+    "createdTime": 1722569595993,
+    "modifiedTime": 1722573189852,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!F4Tv4rOAWNOBl6hU"
+}

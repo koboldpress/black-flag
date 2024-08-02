@@ -1,0 +1,164 @@
+{
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Heroes’s Feast",
+  "type": "spell",
+  "_id": "2FO8J8EvFvYMd1t4",
+  "img": "icons/consumables/food/plate-chicken-grilled-mushroom-brown.webp",
+  "system": {
+    "activities": {
+      "RlUGBJlxhVa1Q1Yk": {
+        "type": "healing",
+        "_id": "RlUGBJlxhVa1Q1Yk",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "max",
+            "number": 2,
+            "denomination": 10,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": 1,
+              "mode": ""
+            },
+            "bonus": ""
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/healing.svg"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "description": {
+      "value": "<p>You bring forth a great feast, including magnificent food and drink. The feast takes 1 hour to consume and disappears at the end of that time, and the beneficial effects don’t set in until this hour is over. Up to twelve other creatures can partake of the feast.</p><p>A creature that partakes of the feast gains several benefits. The creature is cured of all diseases and poison, becomes immune to poison and being frightened, and makes all WIS saves with advantage. Its hit point maximum also increases by [[/healing]]{2d10}, and it gains the same number of hit points. These benefits last for 24 hours.</p><p>You must complete a long rest before you can cast this spell again.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "circle": {
+      "value": null,
+      "base": 6
+    },
+    "casting": {
+      "value": 10,
+      "type": "minute",
+      "condition": ""
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 1000,
+        "denomination": "gp",
+        "description": "a gem-encrusted bowl worth at least 1,000 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "30",
+      "special": ""
+    },
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "12",
+        "special": ""
+      }
+    },
+    "school": "conjuration"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.041",
+    "createdTime": 1722569877344,
+    "modifiedTime": 1722570253180,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!2FO8J8EvFvYMd1t4"
+}

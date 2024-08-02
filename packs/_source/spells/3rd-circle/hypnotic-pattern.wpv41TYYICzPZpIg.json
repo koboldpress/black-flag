@@ -48,7 +48,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You create a swathe of mesmerizing colors that bewitches any creature caught looking.</em></p><p>You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a WIS save. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0.</p><p>The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.</p>",
+      "value": "<p>You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a [[/save]] save. On a failure, the creature becomes &amp;Reference[charmed] for the duration. While charmed by this spell, the creature is &amp;Reference[incapacitated] and has a speed of 0.</p><p>The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -95,19 +95,68 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "120",
+      "special": ""
     },
     "school": "illusion",
     "source": [
       "arcane"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.wpv41TYYICzPZpIg",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Hypnotic Pattern",
+      "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
+      "_id": "hNEUP0OTna7JHfvv",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.multiplier",
+          "mode": 5,
+          "value": "0",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "charmed",
+        "incapacitated"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722573812458,
+        "modifiedTime": 1722573834654,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!wpv41TYYICzPZpIg.hNEUP0OTna7JHfvv"
+    }
+  ],
   "sort": 3300000,
   "ownership": {
     "default": 0
@@ -115,10 +164,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934167852,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1722573844081,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

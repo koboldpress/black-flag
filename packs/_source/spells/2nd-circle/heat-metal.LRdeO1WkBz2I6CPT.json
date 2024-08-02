@@ -104,7 +104,7 @@
           "value": null,
           "type": "bonus",
           "condition": "",
-          "primary": true
+          "primary": false
         },
         "consumption": {
           "targets": [],
@@ -147,7 +147,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose a manufactured metal object (not a creature), such as a metal weapon or a suit of armor that lacks the Natural Materials property, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p><p>If a creature is holding or wearing the object and takes damage from it, the creature must succeed on a CON save or drop the object if it can. If it doesn’t drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the damage increases by 1d8 for each slot above 2nd.</p>",
+      "value": "<p>Choose a manufactured metal object (not a creature), such as a metal weapon or a suit of armor that lacks the Natural Materials property, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes [[/damage]] damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again.</p><p>If a creature is holding or wearing the object and takes damage from it, the creature must succeed on a [[/save]] save or drop the object if it can. If it doesn’t drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the damage increases by [[/damage 1d8 fire]]{1d8} for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -188,7 +188,8 @@
     ],
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "target": {
       "template": {
@@ -199,7 +200,8 @@
       "affects": {
         "choice": false,
         "type": "object",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "school": "transmutation"
@@ -212,10 +214,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.036",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1718732630768,
-    "modifiedTime": 1718732785313,
+    "modifiedTime": 1722573072517,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
