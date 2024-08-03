@@ -1,0 +1,18 @@
+<form id="{{ appId }}" class="advancement-entry" data-id="{{ advancement.id }}" data-type="{{ type }}"
+       autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
+	<header>
+		{{> "blackFlag.advancement-name" }}
+		{{#if needsConfiguration}}
+			<div class="advancement-actions">
+				<button type="submit" class="light-button" data-action="select-equipment"
+				        {{~#if disabled}} disabled data-tooltip="BF.Advancement.Equipment.NeedsBoth"{{/if}}>
+					{{ localize "BF.Advancement.Equipment.Action.Select" }}
+				</button>
+			</div>
+		{{/if}}
+	</header>
+
+	{{#if summary}}
+		<div class="advancement-summary">{{{ summary }}}</div>
+	{{/if}}
+</form>

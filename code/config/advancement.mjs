@@ -48,7 +48,8 @@ export const _advancementTypes = {
 		documentClass: advancement.EquipmentAdvancement,
 		validItemTypes: new Set(["background", "class"]),
 		sheetClasses: {
-			config: sheets.EquipmentConfig
+			config: sheets.EquipmentConfig,
+			flow: sheets.EquipmentFlow
 		}
 	},
 	expandedTalentList: {

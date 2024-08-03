@@ -31,6 +31,7 @@ function dataset(context, options) {
  * @param {SelectChoices} choices - Choices to format.
  * @param {object} options
  * @param {string} [options.blank] - Name for the empty option, if one should be added.
+ * @param {boolean} [options.rule] - Insert a <hr> after the empty option.
  * @returns {Handlebars.SafeString} - Formatted option list.
  */
 function groupedSelectOptions(choices, options) {
@@ -83,7 +84,10 @@ function groupedSelectOptions(choices, options) {
 
 	// Create the options
 	let html = "";
-	if ( (options.blank ?? null) !== null ) option("", options.blank ?? "");
+	if ( (options.blank ?? null) !== null ) {
+		option("", options.blank ?? "");
+		if ( options.rule ) html += "<hr>";
+	}
 	children(categories);
 	return new Handlebars.SafeString(html);
 }
@@ -202,7 +206,7 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-dataset": dataset,
 		"blackFlag-groupedSelectOptions": (choices, options) => groupedSelectOptions(choices, options.hash),
 		"blackFlag-itemContext": itemContext,
-		"blackFlag-linkForUUID": (uuid, options) => linkForUUID(uuid, options.hash),
+		"blackFlag-linkForUUID": (uuid, options) => new Handlebars.SafeString(linkForUUID(uuid, options.hash)),
 		"blackFlag-multiSelect": multiSelect,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash),

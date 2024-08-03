@@ -52,6 +52,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 *                                  the level selection control in the configuration window is hidden and the
 	 *                                  advancement should provide its own implementation of `Advancement#levels`
 	 *                                  and potentially its own level configuration interface.
+	 * @property {boolean} singleton - Only allow a single advancement of this type on an item.
 	 */
 
 	/**
@@ -71,7 +72,8 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 					hint: ""
 				},
 				configurableHint: false,
-				multiLevel: false
+				multiLevel: false,
+				singleton: false
 			},
 			{ inplace: false }
 		)
@@ -266,7 +268,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	 * @returns {boolean} - Should this be enabled as an option on the {@link AdvancementSelection} dialog?
 	 */
 	static availableForItem(item) {
-		return true;
+		return this.metadata.singleton ? !item.system.advancement.byType(this.metadata.type).length : true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

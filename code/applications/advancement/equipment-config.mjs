@@ -35,6 +35,21 @@ export default class EquipmentConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = foundry.utils.mergeObject(
+			await super._prepareContext(options),
+			{
+				showClassRestriction: false,
+				showLevelSelector: false
+			},
+			{ inplace: false }
+		);
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
 		await super._preparePartContext(partId, context, options);
 		if (partId === "equipment") await this._prepareEquipmentContext(context, options);
@@ -45,8 +60,8 @@ export default class EquipmentConfig extends AdvancementConfig {
 
 	/**
 	 * Prepare the equipment listing.
-	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext
-	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
 	 */
 	async _prepareEquipmentContext(context, options) {
 		const processEntry = async (entry, depth = 1) => {

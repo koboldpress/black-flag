@@ -60,6 +60,12 @@ import * as weapons from "./weapons.mjs";
  */
 
 /**
+ * @typedef {NestedTypeConfiguration} NestedLinkedConfiguration
+ * @property {string} [link] - Link to an item in the compendium.
+ * @property {Record<string, NestedLinkedConfiguration>} [children] - Nested children.
+ */
+
+/**
  * Configuration information for tags.
  *
  * @typedef {LabeledConfiguration} TraitTagConfiguration

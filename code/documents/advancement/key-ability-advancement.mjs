@@ -18,7 +18,8 @@ export default class KeyAbilityAdvancement extends Advancement {
 				order: 15,
 				icon: "systems/black-flag/artwork/advancement/key-ability.svg",
 				title: "BF.Advancement.KeyAbility.Title",
-				hint: "BF.Advancement.KeyAbility.Hint"
+				hint: "BF.Advancement.KeyAbility.Hint",
+				singleton: true
 			},
 			{ inplace: false }
 		)
@@ -44,14 +45,5 @@ export default class KeyAbilityAdvancement extends Advancement {
 			.filter(a => a);
 		const formatted = game.i18n.getListFormatter({ type: "conjunction", style: "short" }).format(abilities);
 		return formatted ? `${this.title}: <em>${formatted}</em>` : this.title;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Editing Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 }

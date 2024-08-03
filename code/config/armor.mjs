@@ -11,23 +11,27 @@ import { localizeConfig } from "../utils/_module.mjs";
 
 /**
  * Types of armor offered by the system.
- * @enum {NestedTypeConfiguration}
+ * @enum {NestedLinkedConfiguration}
  */
 export const armor = {
 	light: {
 		localization: "BF.Armor.Category.Light",
 		children: {
 			padded: {
-				label: "BF.Armor.Type.Padded"
+				label: "BF.Armor.Type.Padded",
+				link: "Compendium.black-flag.items.Item.28Zmdi4lQAr5L45X"
 			},
 			leather: {
-				label: "BF.Armor.Type.Leather"
+				label: "BF.Armor.Type.Leather",
+				link: "Compendium.black-flag.items.Item.h3Km60Kh2WNvWRoY"
 			},
 			studdedLeather: {
-				label: "BF.Armor.Type.StuddedLeather"
+				label: "BF.Armor.Type.StuddedLeather",
+				link: "Compendium.black-flag.items.Item.wltnYOTuHz96wXq5"
 			},
 			brigandine: {
-				label: "BF.Armor.Type.Brigandine"
+				label: "BF.Armor.Type.Brigandine",
+				link: "Compendium.black-flag.items.Item.Ignbkx9bqPp8hq90"
 			}
 		}
 	},
@@ -35,19 +39,24 @@ export const armor = {
 		localization: "BF.Armor.Category.Medium",
 		children: {
 			hide: {
-				label: "BF.Armor.Type.Hide"
+				label: "BF.Armor.Type.Hide",
+				link: "Compendium.black-flag.items.Item.fN3bw7IZzSxbkcYX"
 			},
 			chainShirt: {
-				label: "BF.Armor.Type.ChainShirt"
+				label: "BF.Armor.Type.ChainShirt",
+				link: "Compendium.black-flag.items.Item.FO53M9vYJXLrYPDs"
 			},
 			scaleMail: {
-				label: "BF.Armor.Type.ScaleMail"
+				label: "BF.Armor.Type.ScaleMail",
+				link: "Compendium.black-flag.items.Item.lpKzUaG0LmkOqTb0"
 			},
 			breastplate: {
-				label: "BF.Armor.Type.Breastplate"
+				label: "BF.Armor.Type.Breastplate",
+				link: "Compendium.black-flag.items.Item.YdpLwxf7AjDtaSke"
 			},
 			halfPlate: {
-				label: "BF.Armor.Type.HalfPlate"
+				label: "BF.Armor.Type.HalfPlate",
+				link: "Compendium.black-flag.items.Item.Hu7dZSxIN5djyyti"
 			}
 		},
 		modifier: {
@@ -58,16 +67,20 @@ export const armor = {
 		localization: "BF.Armor.Category.Heavy",
 		children: {
 			ringMail: {
-				label: "BF.Armor.Type.RingMail"
+				label: "BF.Armor.Type.RingMail",
+				link: "Compendium.black-flag.items.Item.eu0rwXeQY3hIz8dq"
 			},
 			chainMail: {
-				label: "BF.Armor.Type.ChainMail"
+				label: "BF.Armor.Type.ChainMail",
+				link: "Compendium.black-flag.items.Item.FrdsogSzdIlz9Lmo"
 			},
 			splint: {
-				label: "BF.Armor.Type.Splint"
+				label: "BF.Armor.Type.Splint",
+				link: "Compendium.black-flag.items.Item.yvfflYNjyeKZNbew"
 			},
 			plate: {
-				label: "BF.Armor.Type.Plate"
+				label: "BF.Armor.Type.Plate",
+				link: "Compendium.black-flag.items.Item.AG4f7orze4Gsj9UO"
 			}
 		},
 		modifier: {

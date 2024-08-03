@@ -7,6 +7,8 @@ export { default as ChooseFeaturesFlow } from "./choose-features-flow.mjs";
 export { default as ChooseSpellsConfig } from "./choose-spells-config.mjs";
 export { default as ChooseSpellsFlow } from "./choose-spells-flow.mjs";
 export { default as EquipmentConfig } from "./equipment-config.mjs";
+export { default as EquipmentDialog } from "./equipment-dialog.mjs";
+export { default as EquipmentFlow } from "./equipment-flow.mjs";
 export { default as GrantFeaturesConfig } from "./grant-features-config.mjs";
 export { default as GrantSpellsConfig } from "./grant-spells-config.mjs";
 export { default as GrantSpellsFlow } from "./grant-spells-flow.mjs";

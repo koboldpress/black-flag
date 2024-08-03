@@ -1,4 +1,5 @@
 import { EquipmentConfigurationData, EquipmentValueData } from "../../data/advancement/equipment-data.mjs";
+import BlackFlagItem from "../item.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -19,11 +20,21 @@ export default class EquipmentAdvancement extends Advancement {
 				icon: "systems/black-flag/artwork/advancement/equipment.svg",
 				title: "BF.Advancement.Equipment.Title",
 				hint: "BF.Advancement.Equipment.Hint",
-				configurableHint: true
+				configurableHint: true,
+				singleton: true
 			},
 			{ inplace: false }
 		)
 	);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Instance Properties         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get levels() {
+		return [this.item.type === "class" ? 1 : 0];
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Preparation Methods         */
@@ -32,8 +43,14 @@ export default class EquipmentAdvancement extends Advancement {
 	/** @override */
 	_preCreate(data) {
 		super._preCreate(data);
-		if (foundry.utils.hasProperty(data, "level.classRestriction")) return;
 		this.updateSource({ "level.classRestriction": "original" });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	prepareWarnings(levels, notifications) {
+		// TODO: Display warning about selecting equipment
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -42,7 +59,7 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	configuredForLevel(levels) {
-		// TODO
+		return !foundry.utils.isEmpty(this.value.added);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -72,13 +89,42 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
-		// TODO
+		if (initial || !data.assignments?.length) return;
+		// TODO: Handle gold alternative
+
+		const value = {
+			added: (await Promise.all(data.assignments.map(a => fromUuid(a.uuid).then(item => ({ ...a, item }))))).filter(
+				i => i
+			),
+			contained: []
+		};
+		const toCreate = [];
+		for (const addData of value.added) {
+			const itemData = await BlackFlagItem.createWithContents([addData.item]);
+			delete addData.item;
+			addData.document = itemData[0]._id;
+			toCreate.push(itemData.shift());
+			itemData.forEach(d => {
+				value.contained.push(d._id);
+				toCreate.push(d);
+			});
+		}
+
+		await this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, render });
+		return await this.actor.update({ [this.valueKeyPath]: value });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
-		// TODO
+		// TODO: Handle gold alternative
+
+		const deleteIds = [...this.value.added.map(d => d.document?.id), ...this.value.contained].filter(id =>
+			this.actor.items.has(id)
+		);
+		console.log(deleteIds);
+		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
+		return await this.actor.update({ [this.valueKeyPath]: { added: [], contained: [] } });
 	}
 }

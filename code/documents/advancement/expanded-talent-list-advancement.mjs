@@ -18,7 +18,8 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 				order: 45,
 				icon: "systems/black-flag/artwork/advancement/improvement.svg",
 				title: "BF.Advancement.ExpandedTalentList.Title",
-				hint: "BF.Advancement.ExpandedTalentList.Hint"
+				hint: "BF.Advancement.ExpandedTalentList.Hint",
+				singleton: true
 			},
 			{ inplace: false }
 		)
@@ -68,14 +69,5 @@ export default class ExpandedTalentListAdvancement extends Advancement {
 			classLowercase: classDocument.name.toLowerCase(),
 			talentLists: game.i18n.getListFormatter({ type: "disjunction", style: "short" }).format(lists)
 		})}</p>`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Editing Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 }

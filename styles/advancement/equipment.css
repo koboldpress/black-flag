@@ -65,3 +65,58 @@
 		}
 	}
 }
+
+.equipment-dialog {
+	fieldset > ul.unlist {
+		margin-inline: calc(var(--fieldset-padding) * -1);
+		> li { padding-inline: var(--fieldset-padding); }
+	}
+	fieldset ul {
+		--gap: 8px;
+		--checkbox: 18px;
+
+		display: flex;
+		gap: var(--gap);
+		li {
+			min-height: 38px;
+			display: flex;
+			align-items: center;
+			gap: var(--gap);
+			.select input {
+				width: var(--checkbox);
+				height: var(--checkbox);
+				margin: 0;
+			}
+			&:not(:has(ul)) > .select { flex: 0 0 var(--checkbox); }
+			&:has(ul) > .select:not(:has(input)) { display: none; }
+			.details { flex: 1; }
+		}
+
+		&, ul ul {
+			flex-direction: column;
+			> li {
+				background: var(--bf-background-color-half-white);
+			}
+		}
+		[data-entry-type="AND"] > .details > ul {
+			> li {
+				background: none;
+			}
+		}
+		[data-entry-type="OR"] > .details > ul {
+			flex-direction: row;
+			> li {
+				flex: 1 1 50%;
+				background: none;
+			}
+		}
+
+		.count {
+			font-size: var(--font-size-20);
+			font-family: var(--bf-font-primary);
+			&::after {
+				content: " ×";
+			}
+		}
+	}
+}

@@ -1,8 +1,8 @@
 <section>
-	{{> "list-level" }}
+	{{> ".level" }}
 </section>
 
-{{#*inline "list-level"}}
+{{#*inline ".level"}}
 	<ul class="unlist">
 		{{#each entries}}
 			<li data-entry-id="{{ id }}" data-entry-type="{{ entry.type }}" data-depth="{{ depth }}">
@@ -22,7 +22,7 @@
 				</div>
 				<div class="data">
 					{{#if groupType}}
-						{{> "list-level" entries=children nested=true }}
+						{{> ".level" entries=children nested=true }}
 					{{else}}
 						{{ numberInput entry.count name=(concat "pool." id ".count") placeholder=1 step=1 min=1 }}
 						{{#if (eq entry.type "linked")}}

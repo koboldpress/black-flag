@@ -16,7 +16,8 @@ export default class SizeAdvancement extends Advancement {
 				icon: "systems/black-flag/artwork/advancement/size.svg",
 				title: "BF.Advancement.Size.Title",
 				hint: "BF.Advancement.Size.Hint",
-				configurableHint: true
+				configurableHint: true,
+				singleton: true
 			},
 			{ inplace: false }
 		)
@@ -75,15 +76,6 @@ export default class SizeAdvancement extends Advancement {
 		if (!sizes) return this.title;
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "short", type: "disjunction" });
 		return `${this.title}: <em>${listFormatter.format(sizes)}</em>`;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Editing Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

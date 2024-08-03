@@ -1,6 +1,6 @@
+import SelectChoices from "../../documents/select-choices.mjs";
 import { getPluralRules, makeLabel, numberFormat } from "../../utils/_module.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
-import MappingField from "../fields/mapping-field.mjs";
 
 const {
 	ArrayField,
@@ -11,6 +11,7 @@ const {
 	IntegerSortField,
 	NumberField,
 	SchemaField,
+	SetField,
 	StringField
 } = foundry.data.fields;
 
@@ -186,7 +187,40 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Available options for one of the choose options types.
+	 * @type {SelectChoices|null}
+	 */
+	get options() {
+		let config = CONFIG.BlackFlag[this.constructor.CATEGORIES[this.type]?.config];
+		if (!config) return null;
+		if (!this.key) return new SelectChoices(config);
+		if (config[this.key]?.children) return new SelectChoices(config[this.key].children);
+		if (this.type !== "weapon") return null;
+
+		const [category, type] = this.key.split(".");
+		config = Object.entries(config[category]?.children ?? {}).reduce((obj, [k, v]) => {
+			if (v.type === type) obj[k] = v;
+			return obj;
+		}, {});
+		return !foundry.utils.isEmpty(config) ? new SelectChoices(config) : null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Translate the selection into a final UUID to add.
+	 * @param {string} [selection] - Selection key.
+	 * @returns {string}
+	 */
+	findSelection(selection) {
+		if (this.type === "linked") return this.key;
+		return this.options.get(selection)?.link;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -247,20 +281,32 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * @typedef {GrantedFeatureDay} GrantedEquipmentData
+ * @property {string} count - Number of items added.
+ * @property {string} part - ID of the part for which this selection was made.
+ */
+
+/**
  * Value data for the Equipment advancement.
  *
- * @property {Record<string, GrantedFeatureData>} added - Equipment item added for each entry.
+ * @property {GrantedEquipmentData[]} added - Equipment item added for each entry.
+ * @property {Set<string>} contained - Items added within containers.
+ * @property {number} gold - Amount of gold added if chosen over equipment.
  */
 export class EquipmentValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			added: new MappingField(
+			added: new ArrayField(
 				new SchemaField({
+					count: new NumberField({ min: 1, integer: true }),
 					document: new LocalDocumentField(foundry.documents.BaseItem),
+					part: new StringField(),
 					uuid: new DocumentUUIDField({ type: "Item" })
 				})
-			)
+			),
+			contained: new SetField(new StringField()),
+			gold: new NumberField({ integer: true })
 		};
 	}
 }

@@ -21,7 +21,8 @@ export default class HitPointsAdvancement extends Advancement {
 				icon: "systems/black-flag/artwork/advancement/hit-points.svg",
 				title: "BF.Advancement.HitPoints.Title",
 				hint: "BF.Advancement.HitPoints.Hint",
-				multiLevel: true
+				multiLevel: true,
+				singleton: true
 			},
 			{ inplace: false }
 		)
@@ -123,15 +124,6 @@ export default class HitPointsAdvancement extends Advancement {
 		if (value?.total) return value.total;
 		if (Number.isNumeric(value)) return Number(value);
 		return null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Editing Methods           */
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @override */
-	static availableForItem(item) {
-		return !item.system.advancement.byType(this.metadata.type).length;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
