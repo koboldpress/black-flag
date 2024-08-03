@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset {{ disabled locked }}>
 	<legend>{{ document.name }}</legend>
 	{{> ".level" }}
 </fieldset>
@@ -9,8 +9,8 @@
 			<li data-entry-id="{{ entry._id }}" data-entry-type="{{ entry.type }}">
 				<div class="select">
 					{{#if (eq ../parent.type "OR")}}
-						<input type="radio" name="selection.{{ ../parent._id }}" value="{{ entry._id }}" {{ disabled disabled }}
-									 {{~#if disabled}} data-tooltip="BF.Advancement.Equipment.Proficiency.Required"{{/if}}>
+						<input type="radio" name="selection.{{ ../parent._id }}" value="{{ entry._id }}"
+									 {{~#if disabled}} data-tooltip="BF.Advancement.Equipment.Proficiency.Required" disabled{{/if}}>
 					{{/if}}
 				</div>
 				{{#if count}}

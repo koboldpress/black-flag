@@ -59,7 +59,10 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	configuredForLevel(levels) {
-		return !foundry.utils.isEmpty(this.value.added);
+		return (
+			!foundry.utils.isEmpty(this.value.added) ||
+			this.actor.system.progression.levels[1]?.class?.system.advancement.byType("equipment")[0]?.value.wealth
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -89,42 +92,80 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	async apply(levels, data, { initial = false, render = true } = {}) {
-		if (initial || !data.assignments?.length) return;
-		// TODO: Handle gold alternative
-
-		const value = {
-			added: (await Promise.all(data.assignments.map(a => fromUuid(a.uuid).then(item => ({ ...a, item }))))).filter(
-				i => i
-			),
-			contained: []
-		};
+		let value;
 		const toCreate = [];
-		for (const addData of value.added) {
-			const itemData = await BlackFlagItem.createWithContents([addData.item]);
-			delete addData.item;
-			addData.document = itemData[0]._id;
-			toCreate.push(itemData.shift());
-			itemData.forEach(d => {
-				value.contained.push(d._id);
-				toCreate.push(d);
-			});
+		const toUpdate = [];
+
+		// Starting equipment
+		if (data?.assignments?.length) {
+			value = {
+				added: (await Promise.all(data.assignments.map(a => fromUuid(a.uuid).then(item => ({ ...a, item }))))).filter(
+					i => i
+				),
+				contained: []
+			};
+			for (const addData of value.added) {
+				const itemData = await BlackFlagItem.createWithContents([addData.item]);
+				delete addData.item;
+				const firstItem = itemData.shift();
+				addData.document = firstItem._id;
+				foundry.utils.setProperty(firstItem, "system.quantity", addData.count ?? 1);
+				toCreate.push(firstItem);
+				itemData.forEach(d => {
+					value.contained.push(d._id);
+					toCreate.push(d);
+				});
+			}
 		}
 
-		await this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, render });
-		return await this.actor.update({ [this.valueKeyPath]: value });
+		// Starting wealth
+		else if (data?.wealth) {
+			const currency = CONFIG.BlackFlag.startingWealth.currency;
+			value = { wealth: data.wealth };
+
+			// Check to see if existing currency exists to update
+			const existingItem = this.actor.items.find(i => i.type === "currency" && i.identifier === currency);
+			if (existingItem) {
+				toUpdate.push({ _id: existingItem.id, "system.quantity": existingItem.system.quantity + data.wealth });
+			}
+
+			// Otherwise add a new item
+			else {
+				const uuid = CONFIG.BlackFlag.currencies[currency]?.uuid;
+				const itemData = (await fromUuid(uuid)).toObject();
+				itemData.system.quantity = data.wealth;
+				toCreate.push(itemData);
+			}
+		}
+
+		if (value) {
+			if (toCreate.length) await this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, render });
+			if (toUpdate.length) await this.actor.updateEmbeddedDocuments("Item", toUpdate, { render });
+			return await this.actor.update({ [this.valueKeyPath]: value });
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	async reverse(levels, data, { render = true } = {}) {
-		// TODO: Handle gold alternative
-
-		const deleteIds = [...this.value.added.map(d => d.document?.id), ...this.value.contained].filter(id =>
+		const toDelete = [...this.value.added.map(d => d.document?.id), ...this.value.contained].filter(id =>
 			this.actor.items.has(id)
 		);
-		console.log(deleteIds);
-		await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
-		return await this.actor.update({ [this.valueKeyPath]: { added: [], contained: [] } });
+		const toUpdate = [];
+
+		if (this.item.type === "class" && this.value.wealth) {
+			const currency = CONFIG.BlackFlag.startingWealth.currency;
+			const existingItem = this.actor.items.find(i => i.type === "currency" && i.identifier === currency);
+			if (existingItem) {
+				const updatedQuantity = existingItem.system.quantity - this.value.wealth;
+				if (updatedQuantity <= 0) toDelete.push(existingItem.id);
+				else toUpdate.push({ _id: existingItem.id, "system.quantity": updatedQuantity });
+			}
+		}
+
+		if (toDelete.length) await this.actor.deleteEmbeddedDocuments("Item", toDelete, { render: false });
+		if (toUpdate.length) await this.actor.updateEmbeddedDocuments("Item", toUpdate, { render });
+		return await this.actor.update({ [this.valueKeyPath]: { added: [], contained: [], wealth: null } });
 	}
 }

@@ -1,3 +1,10 @@
 <div>
-	toggle between starting equipment and gold	
+	<label>
+		<input type="radio" name="mode" value="equipment" {{ checked (eq mode "equipment") }} {{ disabled locked }}>
+		<span>{{ localize "BF.Advancement.Equipment.Mode.Equipment" }}</span>
+	</label>
+	<label>
+		<input type="radio" name="mode" value="wealth" {{ checked (eq mode "wealth") }} {{ disabled locked }}>
+		<span>{{ localize "BF.Advancement.Equipment.Mode.Wealth" formula=formula }}</span>
+	</label>
 </div>

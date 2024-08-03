@@ -231,6 +231,17 @@ export const scaleDiceSizes = [2, 3, 4, 6, 8, 10, 12, 20, 100];
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Formula for determining starting wealth if taken rather than starting equipment.
+ * @type {{ formula: string, currency: string }}
+ */
+export const startingWealth = {
+	formula: "5d4 * 10",
+	currency: "gp"
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Level at which classes grant subclasses.
  * @type {number}
  */

@@ -67,13 +67,14 @@
 }
 
 .equipment-dialog {
+	--checkbox: 18px;
+	--gap: 8px;
+
 	fieldset > ul.unlist {
 		margin-inline: calc(var(--fieldset-padding) * -1);
 		> li { padding-inline: var(--fieldset-padding); }
 	}
 	fieldset ul {
-		--gap: 8px;
-		--checkbox: 18px;
 
 		display: flex;
 		gap: var(--gap);
@@ -82,11 +83,6 @@
 			display: flex;
 			align-items: center;
 			gap: var(--gap);
-			.select input {
-				width: var(--checkbox);
-				height: var(--checkbox);
-				margin: 0;
-			}
 			&:not(:has(ul)) > .select { flex: 0 0 var(--checkbox); }
 			&:has(ul) > .select:not(:has(input)) { display: none; }
 			.details { flex: 1; }
@@ -118,6 +114,22 @@
 				content: " ×";
 			}
 		}
+	}
+
+	[data-application-part="toggle"] {
+		display: flex;
+		gap: 12px;
+		> label {
+			flex: 1;
+			font-size: var(--font-size-16);
+			text-align: center;
+		}
+	}
+
+	input {
+		width: var(--checkbox);
+		height: var(--checkbox);
+		margin: 0;
 	}
 
 	input { border-radius: 8px; }

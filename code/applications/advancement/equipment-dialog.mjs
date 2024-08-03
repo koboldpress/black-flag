@@ -60,6 +60,18 @@ export default class EquipmentDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * The EquipmentAdvancement on the background & class documents.
+	 * @type {{ background: EquipmentAdvancement, class: EquipmentAdvancement }}
+	 */
+	get advancements() {
+		return Object.fromEntries(
+			Object.entries(this.documents).map(([k, v]) => [k, v?.system.advancement.byType("equipment")[0]])
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Assignments that have been made.
 	 * @type {{ background: GrantedEquipmentData[], class: GrantedEquipmentData[] }}
 	 */
@@ -67,6 +79,31 @@ export default class EquipmentDialog extends BFApplication {
 
 	get assignments() {
 		return this.#assignments;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The background & class documents offering starting equipment.
+	 * @type {{ background: BlackFlagItem, class: BlackFlagItem }}
+	 */
+	get documents() {
+		return {
+			background: this.actor.system.progression.background,
+			class: this.actor.system.progression.levels[1].class
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Total wealth granted after rolling.
+	 * @type {number}
+	 */
+	#wealth;
+
+	get wealth() {
+		return this.#wealth;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -80,33 +117,9 @@ export default class EquipmentDialog extends BFApplication {
 			case "background":
 			case "class":
 				return this._prepareSelectionContext(partId, context, options);
+			case "toggle":
+				return this._prepareToggleContext(context, options);
 		}
-		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Prepare the rendering context for the individual selection sections.
-	 * @param {string} partId - The part being rendered.
-	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
-	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
-	 * @returns {Promise<ApplicationRenderContext>} - Context data for a specific part.
-	 * @protected
-	 */
-	async _prepareSelectionContext(partId, context, options) {
-		if (partId === "class") {
-			context.document = this.actor.system.progression.levels[1].class;
-		} else {
-			context.document = this.actor.system.progression.background;
-		}
-
-		const advancement = context.document.system.advancement.byType("equipment")[0];
-		if (advancement)
-			context.entries = await Promise.all(
-				advancement.configuration.pool.filter(e => !e.group).map(e => this._prepareEquipmentEntry(e))
-			);
-
 		return context;
 	}
 
@@ -134,20 +147,65 @@ export default class EquipmentDialog extends BFApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the rendering context for the individual selection sections.
+	 * @param {string} partId - The part being rendered.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>} - Context data for a specific part.
+	 * @protected
+	 */
+	async _prepareSelectionContext(partId, context, options) {
+		context.document = this.documents[partId];
+		const advancement = this.advancements[partId];
+		context.locked = advancement.configuredForLevel();
+		if (advancement)
+			context.entries = await Promise.all(
+				advancement.configuration.pool.filter(e => !e.group).map(e => this._prepareEquipmentEntry(e))
+			);
+
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the rendering context for the mode toggle.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>} - Context data for a specific part.
+	 */
+	async _prepareToggleContext(context, options) {
+		context.formula = `${CONFIG.BlackFlag.startingWealth.formula.replace("*", "×")} ${
+			CONFIG.BlackFlag.startingWealth.currency
+		}`;
+		context.locked = this.advancements.class.configuredForLevel() || this.advancements.background.configuredForLevel();
+		context.mode = this.advancements.class.value.wealth ? "wealth" : "equipment";
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_onChangeForm(formConfig, event) {
 		super._onChangeForm(formConfig, event);
-		let li = event.target.closest("li");
-		let checkbox = li.querySelector("& > .select > input");
-		while (checkbox) {
-			checkbox.checked = true;
-			li = li.closest("ul")?.closest("li");
-			checkbox = li.querySelector("& > .select > input");
+		if (event.target.name === "mode") {
+			this.element
+				.querySelectorAll("fieldset")
+				.forEach(f => f.toggleAttribute("disabled", event.target.value === "wealth"));
+		} else {
+			let li = event.target.closest("li");
+			let checkbox = li?.querySelector("& > .select > input");
+			while (checkbox) {
+				checkbox.checked = true;
+				li = li.closest("ul")?.closest("li");
+				checkbox = li.querySelector("& > .select > input");
+			}
+			this.#refreshRequiredStates();
 		}
-		this.#refreshRequiredStates();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -195,8 +253,16 @@ export default class EquipmentDialog extends BFApplication {
 	 * @param {FormDataExtended} formData - Data from the form.
 	 */
 	static async #onSubmitForm(event, form, formData) {
-		// TODO: Handle gold alternative
-		// TODO: Handle adding only background or only class equipment
+		if (formData.get("mode") === "wealth") {
+			const rolls = await CONFIG.Dice.BasicRoll.build(
+				{ rolls: [{ parts: [CONFIG.BlackFlag.startingWealth.formula] }] },
+				{ configure: false },
+				{ data: { flavor: game.i18n.localize("BF.Advancement.Equipment.WealthRoll") } }
+			);
+			if (!rolls[0]) throw new Error("Could not roll for wealth.");
+			this.#wealth = rolls[0].total;
+			return;
+		}
 
 		this.#assignments = { background: [], class: [] };
 		const selectionNeeded = [];
@@ -223,14 +289,10 @@ export default class EquipmentDialog extends BFApplication {
 			}
 		};
 
-		const handleAdvancement = (item, type) => {
-			item.system.advancement
-				.byType("equipment")[0]
-				.configuration.pool.filter(e => !e.group)
-				.forEach(p => processPart(p, type));
-		};
-		handleAdvancement(this.actor.system.progression.levels[1].class, "class");
-		handleAdvancement(this.actor.system.progression.background, "background");
+		for (const [type, advancement] of Object.entries(this.advancements)) {
+			if (advancement.configuredForLevel()) continue;
+			advancement.configuration.pool.filter(e => !e.group).forEach(p => processPart(p, type));
+		}
 
 		if (selectionNeeded.length) {
 			throw new Error(game.i18n.localize("BF.Advancement.Equipment.Warning.ChoiceRequired"));

@@ -26,24 +26,24 @@ export default class EquipmentFlow extends AdvancementFlow {
 	/** @override */
 	async _updateObject(event, formData) {
 		if (event.submitter?.dataset.action === "select-equipment") {
-			let assignments;
+			let result;
 			try {
-				assignments = await new Promise((resolve, reject) => {
+				result = await new Promise((resolve, reject) => {
 					const dialog = new EquipmentDialog({ actor: this.actor });
-					dialog.addEventListener("close", event => resolve(dialog.assignments), { once: true });
+					dialog.addEventListener("close", event => resolve(dialog), { once: true });
 					dialog.render({ force: true });
 				});
 			} catch (err) {
 				return;
 			}
-			if (!assignments) return;
 
-			// TODO: Handle gold alternative
-			const handleAdvancement = async (item, type) => {
-				await item.system.advancement.byType("equipment")[0].apply(this.levels, { assignments: assignments[type] });
-			};
-			await handleAdvancement(this.actor.system.progression.levels[1].class, "class");
-			await handleAdvancement(this.actor.system.progression.background, "background");
+			if (result.assignments) {
+				for (const [type, advancement] of Object.entries(result.advancements)) {
+					await advancement.apply(this.levels, { assignments: result.assignments[type] });
+				}
+			} else if (result.wealth) {
+				result.advancements.class.apply(this.levels, { wealth: result.wealth });
+			}
 		}
 	}
 }

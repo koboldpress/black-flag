@@ -322,7 +322,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
  *
  * @property {GrantedEquipmentData[]} added - Equipment item added for each entry.
  * @property {Set<string>} contained - Items added within containers.
- * @property {number} gold - Amount of gold added if chosen over equipment.
+ * @property {number} wealth - Amount of wealth added if chosen over equipment.
  */
 export class EquipmentValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
@@ -337,7 +337,7 @@ export class EquipmentValueData extends foundry.abstract.DataModel {
 				})
 			),
 			contained: new SetField(new StringField()),
-			gold: new NumberField({ integer: true })
+			wealth: new NumberField({ integer: true })
 		};
 	}
 }
