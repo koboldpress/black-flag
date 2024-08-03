@@ -31,6 +31,16 @@ export default class EquipmentAdvancement extends Advancement {
 	/*         Instance Properties         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Can starting equipment be selected (e.g. does the actor have a class and a background)?
+	 * @type {boolean}
+	 */
+	get canConfigure() {
+		return this.actor.system.progression.background && this.actor.system.progression.levels[1]?.class;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	get levels() {
 		return [this.item.type === "class" ? 1 : 0];
@@ -50,7 +60,13 @@ export default class EquipmentAdvancement extends Advancement {
 
 	/** @override */
 	prepareWarnings(levels, notifications) {
-		// TODO: Display warning about selecting equipment
+		if (this.configuredForLevel(levels) || !this.canConfigure) return;
+		notifications.set(this.warningKey(levels), {
+			category: `level-${levels.character}`,
+			section: "progression",
+			level: "warn",
+			message: game.i18n.localize("BF.Advancement.Equipment.Notification")
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

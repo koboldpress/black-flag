@@ -17,7 +17,7 @@ export default class EquipmentFlow extends AdvancementFlow {
 	/** @inheritDoc */
 	getData() {
 		const context = super.getData();
-		context.disabled = !this.actor.system.progression.background || !this.actor.system.progression.levels[1]?.class;
+		context.disabled = !this.advancement.canConfigure;
 		return context;
 	}
 
