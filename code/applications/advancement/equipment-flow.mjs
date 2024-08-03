@@ -36,6 +36,7 @@ export default class EquipmentFlow extends AdvancementFlow {
 			} catch (err) {
 				return;
 			}
+			if (!assignments) return;
 
 			// TODO: Handle gold alternative
 			const handleAdvancement = async (item, type) => {

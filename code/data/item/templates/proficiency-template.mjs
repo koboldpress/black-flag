@@ -38,12 +38,7 @@ export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 	 */
 	get proficient() {
 		if ( !this.parent.isEmbedded ) return null;
-		if ( this.overrides.proficiency !== null ) return this.overrides.proficiency;
-		const actorProficiency = foundry.utils.getProperty(
-			this.parent.actor, `${Trait.actorKeyPath(this.constructor.proficiencyCategory)}.value`
-		);
-		if ( !actorProficiency ) return true;
-		return actorProficiency.has(this.type.category) || actorProficiency.has(this.type.base);
+		return this.proficientFor(this.parent.actor);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -57,5 +52,22 @@ export default class ProficiencyTemplate extends foundry.abstract.DataModel {
 			this.parent.actor?.system.attributes?.proficiency ?? 0,
 			this.proficient ? 1 : 0
 		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is the provided actor proficient with this item?
+	 * @param {BlackFlagActor} actor - Actor to check.
+	 * @returns {boolean}
+	 */
+	proficientFor(actor) {
+		if ( this.overrides.proficiency !== null ) return this.overrides.proficiency;
+		const values = Trait.actorValues(actor, this.constructor.proficiencyCategory);
+		if ( !values ) return true;
+		const check = key => (values[`${this.constructor.proficiencyCategory}:${key}`] ?? 0) > 0;
+		return check(this.type.category) || check(this.type.base) || check(`${this.type.category}:${this.type.base}`);
 	}
 }

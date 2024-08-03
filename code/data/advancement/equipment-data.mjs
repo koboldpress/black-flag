@@ -258,9 +258,40 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 			label = game.i18n.format("BF.Advancement.Trait.Choice.AnyUncounted", { type: label });
 		}
 		if (this.type === "linked" && this.requiresProficiency) {
-			label += ` (${game.i18n.localize("BF.Advancement.Equipment.IfProficient").toLowerCase()})`;
+			label += ` (${game.i18n.localize("BF.Advancement.Equipment.Proficiency.IfProficient").toLowerCase()})`;
 		}
 		return label;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Available options, disabled if proficiency is required and actor doesn't have proficiency.
+	 * @param {BlackFlagActor} actor - Actor for who the selection is being made.
+	 * @returns {SelectChoices|null}
+	 */
+	optionsWithProficiency(actor) {
+		const options = this.options;
+		const proficiencyData = actor.system.proficiencies[this.constructor.CATEGORIES[this.type]?.config];
+		if (!options || !proficiencyData || !this.requiresProficiency) return options;
+		let proficiencies;
+		if (proficiencyData.value) proficiencies = proficiencyData.value;
+		else
+			proficiencies = new Set(
+				Object.entries(proficiencyData)
+					.map(([k, v]) => (v.proficiency.multiplier > 0 ? k : null))
+					.filter(p => p)
+			);
+
+		const validate = ([key, entry]) => {
+			if (!proficiencies.has(key)) {
+				if (entry.children) Object.entries(entry.children).forEach(validate);
+				else entry.disabled = true;
+			}
+		};
+		Object.entries(options).forEach(validate);
+
+		return options;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

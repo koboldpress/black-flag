@@ -4,12 +4,13 @@
 </fieldset>
 
 {{#*inline ".level"}}
-	<ul class="unlist">
+	<ul class="equipment-list unlist">
 		{{#each entries}}
 			<li data-entry-id="{{ entry._id }}" data-entry-type="{{ entry.type }}">
 				<div class="select">
 					{{#if (eq ../parent.type "OR")}}
-						<input type="radio" name="selection.{{ ../parent._id }}" value="{{ entry._id }}">
+						<input type="radio" name="selection.{{ ../parent._id }}" value="{{ entry._id }}" {{ disabled disabled }}
+									 {{~#if disabled}} data-tooltip="BF.Advancement.Equipment.Proficiency.Required"{{/if}}>
 					{{/if}}
 				</div>
 				{{#if count}}

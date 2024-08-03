@@ -119,4 +119,10 @@
 			}
 		}
 	}
+
+	input { border-radius: 8px; }
+	:is(select, input):user-invalid {
+		outline: 2px solid rgb(255 0 0 / .5);
+		outline-offset: 1px;
+	}
 }

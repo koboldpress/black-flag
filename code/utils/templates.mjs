@@ -62,8 +62,8 @@ function groupedSelectOptions(choices, options) {
 	separateValues(foundry.utils.deepClone(choices));
 
 	// Create an option
-	const option = (name, label, chosen) => {
-		html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
+	const option = (name, label, chosen, disabled) => {
+		html += `<option value="${name}"${chosen ? " selected" : ""}${disabled ? " disabled" : ""}>${label}</option>`;
 	};
 
 	// Create an group
@@ -78,7 +78,7 @@ function groupedSelectOptions(choices, options) {
 		for ( let [name, child] of Object.entries(children) ) {
 			if ( child.children ) {
 				if ( !foundry.utils.isEmpty(child.children) ) group(child);
-			} else option(name, child.label, child.chosen ?? false);
+			} else option(name, child.label, child.chosen ?? false, child.disabled ?? false);
 		}
 	};
 
