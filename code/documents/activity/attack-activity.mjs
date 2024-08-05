@@ -1,5 +1,5 @@
 import { AttackData } from "../../data/activity/attack-data.mjs";
-import { buildRoll, numberFormat } from "../../utils/_module.mjs";
+import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
 export default class AttackActivity extends DamageActivity {
@@ -261,6 +261,6 @@ export default class AttackActivity extends DamageActivity {
 					},
 			rollData
 		);
-		return { parts, data, formula: Roll.replaceFormulaData(parts.join(" + "), data), activity: this };
+		return { parts, data, formula: simplifyFormula(Roll.replaceFormulaData(parts.join(" + "), data)), activity: this };
 	}
 }
