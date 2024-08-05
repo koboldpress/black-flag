@@ -471,9 +471,10 @@ function createRollLabel(config) {
 async function enrichCheck(config, label, options) {
 	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
-		if (value in LOOKUP.abilities) config.ability = LOOKUP.abilities[value].key;
-		else if (value in LOOKUP.skills) config.skill = LOOKUP.skills[value].key;
-		else if (value in LOOKUP.tools) config.tool = value;
+		const slug = slugify(value);
+		if (slug in LOOKUP.abilities) config.ability = LOOKUP.abilities[slug].key;
+		else if (slug in LOOKUP.skills) config.skill = LOOKUP.skills[slug].key;
+		else if (slug in LOOKUP.tools) config.tool = slug;
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
@@ -502,6 +503,7 @@ async function enrichCheck(config, label, options) {
 		log(`No ability provided while enriching check ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
+	if (abilityConfig?.key) config.ability = abilityConfig.key;
 
 	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
@@ -550,8 +552,10 @@ async function enrichCheck(config, label, options) {
  * ```
  */
 async function enrichSave(config, label, options) {
+	const LOOKUP = CONFIG.BlackFlag.enrichment.lookup;
 	for (const value of config.values) {
-		if (value in CONFIG.BlackFlag.enrichment.lookup.abilities) config.ability = value;
+		const slug = slugify(value);
+		if (slug in LOOKUP.abilities) config.ability = LOOKUP.abilities[slug].key;
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
