@@ -1,5 +1,6 @@
 import SpellSheet from "../../applications/item/spell-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
+import { replaceFormulaData, simplifyBonus } from "../../utils/_module.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivationField from "../fields/activation-field.mjs";
 import DurationField from "../fields/duration-field.mjs";
@@ -328,6 +329,27 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	prepareFinalData() {
 		super.prepareFinalData();
 		const rollData = this.parent.getRollData({ deterministic: true });
+
+		const prepareFinalValue = (keyPath, label) =>
+			foundry.utils.setProperty(
+				this,
+				keyPath,
+				simplifyBonus(
+					replaceFormulaData(foundry.utils.getProperty(this, keyPath) ?? "", rollData, {
+						notifications: this.parent.notifications,
+						key: `invalid-target-${keyPath.replaceAll(".", "-")}`,
+						section: "auto",
+						messageData: { name: this.parent.name, property: game.i18n.localize(label) }
+					})
+				)
+			);
+		prepareFinalValue("duration.value", "BF.Duration.Label");
+		prepareFinalValue("range.value", "BF.Range.Label");
+		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
+		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
+		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
+		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");
+
 		this.prepareFinalActivities(rollData);
 		this.prepareSpellStats();
 	}

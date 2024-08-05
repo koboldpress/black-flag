@@ -43,9 +43,9 @@ export default class RangeField extends SchemaField {
 				if (this.scalar) {
 					if (!this.value) return null;
 					const unit = CONFIG.BlackFlag.distanceUnits[this.units];
-					return `${numberFormat(this.value)} ${game.i18n.localize(
-						`${unit.localization}[${getPluralRules().select(this.value)}]`
-					)}`;
+					return `${numberFormat(this.value)} ${game.i18n
+						.localize(`${unit.localization}[${getPluralRules().select(this.value)}]`)
+						.toLowerCase()}`;
 				} else {
 					const type = CONFIG.BlackFlag.rangeTypes[this.units];
 					if (!type) return "";
