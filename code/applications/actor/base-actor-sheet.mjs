@@ -305,8 +305,6 @@ export default class BaseActorSheet extends ActorSheet {
 		if (!uuid) return;
 
 		element.dataset.tooltip = `<section class="loading" data-uuid="${uuid}"></section>`;
-		element.dataset.tooltipClass = "black-flag black-flag-tooltip item-tooltip";
-		element.dataset.tooltipDirection ??= "LEFT";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
