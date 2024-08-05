@@ -28,6 +28,105 @@
 	"styles": [
 		"./black-flag.css"
 	],
+	"documentTypes": {
+		"Actor": {
+			"pc": {
+				"htmlFields": [
+					"biography.allies",
+					"biography.backstory",
+					"biography.motivation"
+				]
+			},
+			"npc": {
+				"htmlFields": [
+					"biography.legendary",
+					"biography.value"
+				]
+			},
+			"lair": {
+				"htmlFields": [
+					"description.conclusion",
+					"description.lairActions",
+					"description.regionalEffects",
+					"description.value"
+				]
+			}
+		},
+		"Item": {
+			"ammunition": {
+				"htmlFields": ["description.value"]
+			},
+			"armor": {
+				"htmlFields": ["description.value"]
+			},
+			"background": {
+				"htmlFields": ["description.value"]
+			},
+			"class": {
+				"htmlFields": ["description.value"]
+			},
+			"consumable": {
+				"htmlFields": ["description.value"]
+			},
+			"container": {
+				"htmlFields": ["description.value"]
+			},
+			"currency": {
+				"htmlFields": ["description.value"]
+			},
+			"feature": {
+				"htmlFields": ["description.value"]
+			},
+			"gear": {
+				"htmlFields": ["description.value"]
+			},
+			"heritage": {
+				"htmlFields": ["description.value"]
+			},
+			"lineage": {
+				"htmlFields": ["description.value"]
+			},
+			"spell": {
+				"htmlFields": ["description.value"]
+			},
+			"subclass": {
+				"htmlFields": ["description.value"]
+			},
+			"sundry": {
+				"htmlFields": ["description.value"]
+			},
+			"talent": {
+				"htmlFields": ["description.value"]
+			},
+			"tool": {
+				"htmlFields": ["description.value"]
+			},
+			"weapon": {
+				"htmlFields": ["description.value"]
+			}
+		},
+		"JournalEntryPage": {
+			"class": {
+				"htmlFields": [
+					"description.introduction",
+					"description.additionalHitPoints",
+					"description.additionalTraits",
+					"description.additionalEquipment",
+					"description.subclassAdvancement",
+					"description.subclassSection"
+				]
+			},
+			"subclass": {
+				"htmlFields": ["description.introduction"]
+			},
+			"map": {
+				"htmlFields": []
+			},
+			"rule": {
+				"htmlFields": ["tooltip"]
+			}
+		}
+	},
 	"packs": [
 		{
 			"name": "rules",
