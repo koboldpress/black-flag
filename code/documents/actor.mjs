@@ -1400,7 +1400,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 */
 	async rollSkill(config = {}, dialog = {}, message = {}) {
 		const skill = this.system.proficiencies?.skills?.[config.skill];
-		if (!skill) return;
+		if (!skill) return this.rollAbilityCheck(config, dialog, message);
 		const rollData = this.getRollData();
 
 		const prepareSkillConfig = (baseConfig, rollConfig, formData, index) => {
