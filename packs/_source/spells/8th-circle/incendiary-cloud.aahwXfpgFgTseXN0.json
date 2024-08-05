@@ -1,28 +1,28 @@
 {
-  "folder": "nLmfKTvGyMkY7D7k",
-  "name": "Harm",
+  "folder": "hOcnChv2pRYFcFhc",
+  "name": "Incendiary Cloud",
   "type": "spell",
-  "_id": "oA6apqbpPhODO1Uc",
-  "img": "icons/skills/wounds/injury-eyes-blood-red.webp",
+  "_id": "aahwXfpgFgTseXN0",
+  "img": "icons/magic/fire/flame-burning-earth-orange.webp",
   "system": {
     "activities": {
-      "M6oNFdyn7DaBWy6a": {
+      "u85EMXPtKFkWbBIv": {
         "type": "savingThrow",
-        "_id": "M6oNFdyn7DaBWy6a",
+        "_id": "u85EMXPtKFkWbBIv",
         "description": "",
         "system": {
-          "ability": "constitution",
+          "ability": "dexterity",
           "damage": {
             "parts": [
               {
-                "number": 14,
-                "denomination": 6,
+                "number": 10,
+                "denomination": 8,
                 "bonus": "",
                 "custom": {
                   "formula": "",
                   "enabled": false
                 },
-                "type": "necrotic",
+                "type": "fire",
                 "scaling": {
                   "mode": "",
                   "number": 1
@@ -82,19 +82,18 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You unleash a virulent disease on a creature that you can see within range. The target must make a [[/save]] save. On a failure, it takes [[/damage]] damage, or half as much damage on a success. The damage can’t reduce the target’s hit points below 1. If the target fails the save, its hit point maximum is reduced for 1 hour by an amount equal to the necrotic damage it took. Any effect that removes a disease allows a creature’s hit point maximum to return to normal before that time passes.</p>",
+      "value": "<p>A swirling cloud of smoke shot through with white-hot embers appears in a 20-foot-radius sphere centered on a point within range. The cloud spreads around corners and is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it.</p><p>When the cloud appears, each creature in it must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a successful one. A creature must also make this save when it enters the spell’s area for the first time on a turn or ends its turn there.</p><p>The cloud moves 10 feet directly away from you in a direction that you choose at the start of each of your turns.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Necrotic that won’t quite kill."
+      "short": "20-ft. radius fire cloud for 1 min."
     },
     "source": [
-      "divine",
-      "wyrd"
+      "arcane"
     ],
     "circle": {
       "value": null,
-      "base": 6
+      "base": 8
     },
     "casting": {
       "value": null,
@@ -113,12 +112,15 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
       "units": "foot",
-      "value": "60",
+      "value": "150",
       "special": ""
     },
     "target": {
@@ -126,16 +128,15 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "20"
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": "1",
-        "special": ""
+        "type": ""
       }
     },
-    "school": "necromancy"
+    "school": "conjuration"
   },
   "effects": [],
   "sort": 0,
@@ -148,9 +149,9 @@
     "coreVersion": "12.330",
     "systemId": "black-flag",
     "systemVersion": "0.10.041",
-    "createdTime": 1722569575299,
-    "modifiedTime": 1722835008936,
+    "createdTime": 1722833480456,
+    "modifiedTime": 1722834919557,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!oA6apqbpPhODO1Uc"
+  "_key": "!items!aahwXfpgFgTseXN0"
 }

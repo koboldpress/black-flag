@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>With a touch, your target disappears from sight.</em></p><p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.</p>",
+      "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -77,18 +77,61 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "illusion",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.PKj2TSp0iwaPZulb",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Invisibility",
+      "img": "icons/magic/control/silhouette-hold-change-green.webp",
+      "_id": "G8BjlyUonaTl11xn",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "invisible"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.041",
+        "createdTime": 1722833842103,
+        "modifiedTime": 1722833850825,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!PKj2TSp0iwaPZulb.G8BjlyUonaTl11xn"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -96,10 +139,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934228573,
-    "modifiedTime": 1714413528144,
+    "modifiedTime": 1722833829518,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -1,29 +1,18 @@
 {
-  "folder": "hOcnChv2pRYFcFhc",
-  "name": "Holy Aura",
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Instant Summons",
   "type": "spell",
-  "_id": "6koDEx6KReF3wbs2",
-  "img": "icons/magic/light/explosion-star-glow-orange.webp",
+  "_id": "gxmBlF1lEugsv2AE",
+  "img": "icons/tools/navigation/compass-plain-blue.webp",
   "system": {
     "activities": {
-      "axDdDaVi5hDYPpi5": {
-        "type": "savingThrow",
-        "_id": "axDdDaVi5hDYPpi5",
+      "7sQkHtvcV5PiyaZ0": {
+        "type": "utility",
+        "_id": "7sQkHtvcV5PiyaZ0",
         "description": "",
-        "system": {
-          "ability": "constitution",
-          "damage": {
-            "parts": []
-          },
-          "dc": {
-            "ability": ""
-          }
-        },
+        "system": {},
         "activation": {
-          "value": null,
-          "type": "",
-          "condition": "",
-          "primary": true
+          "value": null
         },
         "consumption": {
           "targets": [],
@@ -50,12 +39,8 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          "recovery": []
+        }
       }
     },
     "uses": {
@@ -66,22 +51,22 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Divine light washes out from you and coalesces in a soft radiance in a 30-foot radius around you. Creatures of your choice in that radius when you cast this spell shed dim light in a 5-foot radius and have advantage on all saves, and other creatures have disadvantage on attack rolls against them until the spell ends. In addition, when a Fiend or an Undead hits an affected creature with a melee attack, the aura flashes with brilliant light. The attacker must succeed on a [[/save]] save or be blinded until the spell ends.</p>",
+      "value": "<p>You touch an item weighing 10 pounds or less whose longest dimension is 6 feet or less. The spell leaves an invisible mark on its surface and invisibly inscribes the name of the item on the sapphire you use as the material component. Each time you cast this spell, you must use a different sapphire.</p><p>At any time thereafter, you can use your action to speak the item’s name and crush the sapphire, destroying it. The item instantly appears in your hand regardless of physical or planar distances, and the spell ends.</p><p>If another creature is holding or carrying the item, crushing the sapphire doesn’t transport the item to you, but instead you learn who the creature possessing the item is and roughly where that creature is located at that moment.</p><p><em>Dispel magic</em> or a similar effect successfully applied to the sapphire ends this spell’s effect.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Allies light up, boost defenses."
+      "short": "Mark an item to summon later."
     },
     "source": [
-      "divine"
+      "arcane"
     ],
     "circle": {
       "value": null,
-      "base": 8
+      "base": 6
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "components": {
@@ -94,18 +79,17 @@
         "consumed": false,
         "cost": 1000,
         "denomination": "gp",
-        "description": "a tiny reliquary worth at least 1,000 gp containing a sacred relic, such as a scrap of cloth from a saint’s robe"
+        "description": "a sapphire worth 1,000 gp"
       }
     },
     "duration": {
-      "units": "minute",
-      "value": "1"
+      "units": "dispelled"
     },
     "tags": [
-      "concentration"
+      "ritual"
     ],
     "range": {
-      "units": "self",
+      "units": "touch",
       "special": ""
     },
     "target": {
@@ -117,10 +101,12 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "object",
+        "count": "1",
+        "special": ""
       }
     },
-    "school": "abjuration"
+    "school": "conjuration"
   },
   "effects": [],
   "sort": 0,
@@ -133,9 +119,9 @@
     "coreVersion": "12.330",
     "systemId": "black-flag",
     "systemVersion": "0.10.041",
-    "createdTime": 1722569613206,
-    "modifiedTime": 1722835094476,
+    "createdTime": 1722834483309,
+    "modifiedTime": 1722834950307,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!6koDEx6KReF3wbs2"
+  "_key": "!items!gxmBlF1lEugsv2AE"
 }

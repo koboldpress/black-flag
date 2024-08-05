@@ -18,15 +18,31 @@
                 "number": 2,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "bludgeoning"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               },
               {
                 "number": 4,
                 "denomination": 6,
                 "bonus": "",
-                "custom": "",
-                "type": "cold"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "cold",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
@@ -36,7 +52,8 @@
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -63,7 +80,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A torrent of hailstones deals significant damage and briefly creates difficult terrain.</em></p><p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point within range. Each creature in the cylinder must make a DEX save. A creature takes 2d8 bludgeoning damage and 4d6 cold damage on a failed save, or half damage on a successful one.</p><p>Hailstones turn the storm’s area of effect into difficult terrain until the end of your next turn.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 5th ring or higher, the bludgeoning damage increases by 1d8 for each slot beyond 4th ring.</p>",
+      "value": "<p>A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point within range. Each creature in the cylinder must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half damage on a successful one.</p><p>Hailstones turn the storm’s area of effect into difficult terrain until the end of your next turn.</p><p><em>At Higher Rings.</em> When you cast this spell using a spell slot of 5th ring or higher, the bludgeoning damage increases by [[/damage 1d8 bludgeoning]]{1d8} for each slot beyond 4th ring.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -108,12 +125,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "300"
+      "value": "300",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -129,10 +148,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706997830635,
-    "modifiedTime": 1717966382721,
+    "modifiedTime": 1722834147513,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

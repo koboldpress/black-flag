@@ -22,19 +22,29 @@
                 "number": 3,
                 "denomination": 10,
                 "bonus": "",
-                "custom": "",
-                "type": "necrotic"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "necrotic",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
           "ability": "",
           "attack": {
-            "flat": false
+            "flat": false,
+            "bonus": ""
           }
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -61,7 +71,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your pale, sickly hand threatens grievous harm upon whomever you touch.</em></p><p>Make a melee spell attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p>",
+      "value": "<p>Make a melee spell attack against a creature you can reach. On a hit, the target takes [[/damage]] damage.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, the damage increases by [[/damage 1d10 necrotic]]{1d10} for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -103,15 +113,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -122,10 +135,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.041",
+    "coreVersion": "12.330",
     "createdTime": 1706934204227,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1722833969640,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

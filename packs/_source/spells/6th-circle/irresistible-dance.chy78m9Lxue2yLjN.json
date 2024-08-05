@@ -1,31 +1,29 @@
 {
-  "folder": "nRrXxMSYGyY4qKs3",
-  "name": "Heroism",
+  "folder": "nLmfKTvGyMkY7D7k",
+  "name": "Irresistible Dance",
   "type": "spell",
-  "_id": "zRsCgtiBO7EuJbhb",
-  "img": "icons/magic/control/control-influence-crown-gold.webp",
+  "_id": "chy78m9Lxue2yLjN",
+  "img": "icons/tools/instruments/bell-brass-brown.webp",
   "system": {
     "activities": {
-      "Fk3ZMdFPUIItfrtR": {
-        "type": "healing",
-        "_id": "Fk3ZMdFPUIItfrtR",
+      "6NbHbQ4OmYIRNa7G": {
+        "type": "savingThrow",
+        "_id": "6NbHbQ4OmYIRNa7G",
         "description": "",
         "system": {
-          "healing": {
-            "type": "normal",
-            "number": null,
-            "denomination": null,
-            "additionalTypes": [],
-            "custom": {
-              "enabled": false
-            },
-            "scaling": {
-              "number": 1
-            }
+          "ability": "wisdom",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
           }
         },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -52,8 +50,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -64,18 +66,19 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to being frightened and gains temporary hit points equal to your spellcasting ability modifier at the start of each of its turns. When the spell ends, the target loses any remaining temporary hit points from this spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each slot above 1st.</p>",
+      "value": "<p>Choose one creature that you can see within range. The target begins a comic dance in place: shuffling, tapping its feet, and capering for the duration. Creatures that can’t be charmed are immune to this spell.</p><p>A dancing creature must use all its movement to dance without leaving its space and has disadvantage on DEX saves and attack rolls. While the target is affected by this spell, other creatures have advantage on attack rolls against it. As an action, a dancing creature can make a [[/save]] save to regain control of itself. On a successful save, the spell ends.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Ally is immune to fear, gains temporary HP."
+      "short": "Foe dances uncontrollably."
     },
     "source": [
-      "divine"
+      "arcane",
+      "wyrd"
     ],
     "circle": {
       "value": null,
-      "base": 1
+      "base": 6
     },
     "casting": {
       "value": null,
@@ -84,8 +87,7 @@
     },
     "components": {
       "required": [
-        "verbal",
-        "somatic"
+        "verbal"
       ],
       "material": {
         "consumed": false,
@@ -94,11 +96,15 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": "touch",
+      "units": "foot",
+      "value": "30",
       "special": ""
     },
     "target": {
@@ -110,8 +116,8 @@
       },
       "affects": {
         "choice": false,
-        "type": "willing",
-        "count": "@scaling",
+        "type": "creature",
+        "count": "1",
         "special": ""
       }
     },
@@ -119,7 +125,7 @@
   },
   "effects": [
     {
-      "origin": "Compendium.black-flag.spells.Item.zRsCgtiBO7EuJbhb",
+      "origin": "Compendium.black-flag.spells.Item.chy78m9Lxue2yLjN",
       "duration": {
         "rounds": null,
         "startTime": null,
@@ -130,20 +136,20 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Heroism",
-      "img": "icons/magic/control/control-influence-crown-gold.webp",
-      "_id": "IkCNiI4SHdElgK8n",
+      "name": "Irresistible Dance",
+      "img": "icons/tools/instruments/bell-brass-brown.webp",
+      "_id": "dypUwWNOn1jzXEcp",
       "type": "base",
       "system": {},
       "changes": [
         {
-          "key": "system.traits.condition.immunities.value",
+          "key": "system.modifiers",
           "mode": 2,
-          "value": "frightened",
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-save\", \"attack\"] }], \"note\": { \"rollMode\": -1, \"text\": \"While dancing you have disadvantage on DEX saves and attack rolls.\" } }",
           "priority": null
         }
       ],
-      "description": "<p>You are immune to being frightened and gain temporary hit points equal to the caster’s spellcasting ability modifier at the start of each of your turns.</p>",
+      "description": "<p>You must use all your movement to dance without leaving your space and have disadvantage on DEX saves and attack rolls. While you are affected by this spell, other creatures have advantage on attack rolls against you.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -155,11 +161,11 @@
         "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.041",
-        "createdTime": 1722573280232,
-        "modifiedTime": 1722573337803,
+        "createdTime": 1722833663468,
+        "modifiedTime": 1722833769347,
         "lastModifiedBy": "blackflag0000000"
       },
-      "_key": "!items.effects!zRsCgtiBO7EuJbhb.IkCNiI4SHdElgK8n"
+      "_key": "!items.effects!chy78m9Lxue2yLjN.dypUwWNOn1jzXEcp"
     }
   ],
   "sort": 0,
@@ -172,9 +178,9 @@
     "coreVersion": "12.330",
     "systemId": "black-flag",
     "systemVersion": "0.10.041",
-    "createdTime": 1722569604725,
-    "modifiedTime": 1722834983656,
+    "createdTime": 1722833511687,
+    "modifiedTime": 1722834907996,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!zRsCgtiBO7EuJbhb"
+  "_key": "!items!chy78m9Lxue2yLjN"
 }
