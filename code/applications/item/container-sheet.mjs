@@ -17,6 +17,16 @@ export default class ContainerSheet extends EquipmentSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * IDs for items on the sheet that have their descriptions expanded in-line.
+	 * @type {Set<string>}
+	 */
+	expanded = new Set();
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -31,6 +41,7 @@ export default class ContainerSheet extends EquipmentSheet {
 
 		for (const item of context.items) {
 			const ctx = (context.itemContext[item.id] ??= {});
+			if (this.expanded.has(item.id)) ctx.expanded = await item.getSummaryContext({ secrets: this.item.isOwner });
 			ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
 		}
 		context.isContainer = true;
