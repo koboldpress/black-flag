@@ -80,6 +80,9 @@ export const rangeTypes = {
 	touch: {
 		label: "BF.Range.Type.Touch.Label"
 	},
+	sight: {
+		label: "BF.Range.Type.Sight.Label"
+	},
 	special: {
 		label: "BF.Range.Type.Special.Label"
 	},
