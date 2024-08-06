@@ -1,0 +1,16 @@
+<fieldset>
+	<legend class="hinted-label" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint">
+		{{ localize "BF.Advancement.ChooseFeatures.Choices.Label" }}
+	</legend>
+	<ol class="level-list">
+		{{#each levels as |label level|}}
+			<li class="level">
+				<label>
+					<span>{{ label }}</span>
+					{{ numberInput (lookup ../configuration.choices level) placeholder="0"
+												 name=(concat "configuration.choices." level) min=1 step=1 }}
+				</label>
+			</li>
+		{{/each}}
+	</ol>
+</fieldset>

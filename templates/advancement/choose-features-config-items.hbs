@@ -1,0 +1,10 @@
+<fieldset class="items drop-area">
+	<legend>{{ localize "BF.Item.Type.Feature[other]" }}</legend>
+	<label>
+		<span class="hinted-label" data-tooltip="BF.Advancement.Config.AllowDrops.Hint">
+			{{ localize "BF.Advancement.Config.AllowDrops.Label" }}
+		</span>
+		<input type="checkbox" name="configuration.allowDrops" {{ checked configuration.allowDrops }}>
+	</label>
+	{{> "systems/black-flag/templates/advancement/parts/features-list.hbs" }}
+</fieldset>

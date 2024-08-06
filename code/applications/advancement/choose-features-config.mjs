@@ -5,28 +5,59 @@ import GrantFeaturesConfig from "./grant-features-config.mjs";
  * Configuration application for feature choices.
  */
 export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "choose-features", "two-column"],
-			dragDrop: [{ dropSelector: ".drop-target" }],
-			dropKeyPath: "pool",
-			template: "systems/black-flag/templates/advancement/choose-features-config.hbs",
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["choose-features", "two-column"],
+		position: {
 			width: 580
-		});
+		}
+	};
+
+	/** @override */
+	static PARTS = {
+		config: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
+		},
+		details: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/choose-features-config-details.hbs"
+		},
+		items: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/choose-features-config-items.hbs",
+			templates: ["systems/black-flag/templates/advancement/parts/features-list.hbs"]
+		},
+		levels: {
+			classes: ["right-column"],
+			template: "systems/black-flag/templates/advancement/parts/choice-levels.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		await super._preparePartContext(partId, context, options);
+		if (partId === "details") return await this._prepareDetailsContext(context, options);
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	getData(options = {}) {
-		const context = {
-			...super.getData(options),
-			validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
-				obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
-				return obj;
-			}, {})
-		};
+	/**
+	 * Prepare the details.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareDetailsContext(context, options) {
+		context.validTypes = this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
+			obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
+			return obj;
+		}, {});
 		const makeLabels = obj =>
 			Object.fromEntries(
 				Object.entries(obj)
@@ -47,9 +78,12 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 				categoryOptions: makeLabels(CONFIG.BlackFlag.talentCategories)
 			};
 		}
+
 		return context;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

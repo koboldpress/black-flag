@@ -5,6 +5,7 @@ import AdvancementConfig from "./advancement-config-v2.mjs";
  * Configuration application for equipment.
  */
 export default class EquipmentConfig extends AdvancementConfig {
+	/** @override */
 	static DEFAULT_OPTIONS = {
 		classes: ["equipment", "form-list"],
 		actions: {
@@ -15,12 +16,13 @@ export default class EquipmentConfig extends AdvancementConfig {
 			dragstart: EquipmentConfig.#onDragStart,
 			drop: EquipmentConfig.#onDrop
 		},
-		dragDropSelectors: [".drag-bar"],
+		dragSelectors: [".drag-bar"],
 		position: {
 			width: 480
 		}
 	};
 
+	/** @override */
 	static PARTS = {
 		config: {
 			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
@@ -62,6 +64,7 @@ export default class EquipmentConfig extends AdvancementConfig {
 	 * Prepare the equipment listing.
 	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
 	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
 	 */
 	async _prepareEquipmentContext(context, options) {
 		const processEntry = async (entry, depth = 1) => {
@@ -88,6 +91,8 @@ export default class EquipmentConfig extends AdvancementConfig {
 				.sort((lhs, rhs) => lhs.sort - rhs.sort)
 				.map(e => processEntry(e))
 		);
+
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

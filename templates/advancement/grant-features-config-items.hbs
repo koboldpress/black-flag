@@ -1,0 +1,10 @@
+<fieldset class="items drop-area">
+	<legend>{{ localize "BF.Item.Type.Feature[other]" }}</legend>
+	{{> "systems/black-flag/templates/advancement/parts/features-list.hbs" }}
+	<label class="full-checkbox">
+		<span class="hinted-label" data-tooltip="BF.Advancement.GrantFeatures.Enabled.Hint">
+			{{ localize "BF.Advancement.GrantFeatures.Enabled.Label" }}
+		</span>
+		<input type="checkbox" name="configuration.enabled" {{ checked configuration.enabled }}>
+	</label>
+</fieldset>

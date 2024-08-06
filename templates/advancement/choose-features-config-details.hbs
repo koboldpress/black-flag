@@ -1,0 +1,26 @@
+<fieldset>
+	<legend>{{ localize "BF.Advancement.ChooseFeatures.ChoiceDetails" }}</legend>
+	<label>
+		<span>{{ localize "BF.Advancement.ChooseFeatures.Type.Label" }}</span>
+		<select name="configuration.type">
+			{{ selectOptions validTypes selected=configuration.type }}
+		</select>
+	</label>
+	{{#if typeRestriction}}
+		<label>
+			<span>{{ typeRestriction.categoryLabel }}</span>
+			<select name="configuration.restriction.category">
+				{{ selectOptions typeRestriction.categoryOptions selected=configuration.restriction.category blank="—" }}
+			</select>
+		</label>
+
+		{{#if typeRestriction.typeOptions}}
+			<label>
+				<span>{{ typeRestriction.typeLabel }}</span>
+				<select name="configuration.restriction.type">
+					{{ selectOptions typeRestriction.typeOptions selected=configuration.restriction.type blank="—" }}
+				</select>
+			</label>
+		{{/if}}
+	{{/if}}
+</fieldset>

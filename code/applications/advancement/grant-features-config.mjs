@@ -1,20 +1,31 @@
-import AdvancementConfig from "./advancement-config.mjs";
+import AdvancementConfig from "./advancement-config-v2.mjs";
 
 /**
  * Configuration application for feature grants.
  */
 export default class GrantFeaturesConfig extends AdvancementConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "grant-features"],
-			dragDrop: [{ dropSelector: ".drop-target" }],
-			dropKeyPath: "pool",
-			template: "systems/black-flag/templates/advancement/grant-features-config.hbs",
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["grant-features", "form-list"],
+		dropKeyPath: "pool",
+		position: {
 			width: 420
-		});
-	}
+		}
+	};
 
+	/** @override */
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
+		},
+		items: {
+			template: "systems/black-flag/templates/advancement/grant-features-config-items.hbs",
+			templates: ["systems/black-flag/templates/advancement/parts/features-list.hbs"]
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Drag & Drop            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

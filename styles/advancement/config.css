@@ -1,4 +1,4 @@
-.advancement-config.app form {
+.advancement-config.app form, .advancement-config.application {
 	fieldset > label {
 		align-items: stretch;
 		> span:first-child {
@@ -143,6 +143,13 @@
 }
 
 .advancement-config.two-column.app form {
+	--left-column: 50%;
+	display: grid;
+	grid-template-columns: calc(var(--left-column) - 0.25rem) calc(100% - var(--left-column) - 0.25rem);
+	gap: 0.5rem;
+}
+
+.advancement-config.two-column.application .window-content {
 	--left-column: 50%;
 	display: grid;
 	grid-template-columns: calc(var(--left-column) - 0.25rem) calc(100% - var(--left-column) - 0.25rem);

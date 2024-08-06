@@ -7,8 +7,18 @@
 	--color-shadow-primary: var(--bf-button-shadow-blue);
 	max-height: 85vh;
 
+	button {
+		--button-hover-background-color: var(--bf-blue);
+		--button-hover-border-color: var(--bf-color-border-black);
+	}
 	input, select {
 		--input-focus-outline-color: var(--bf-button-shadow-blue);
+	}
+	input[type="checkbox"] {
+		--checkbox-checked-color: var(--bf-blue);
+	}
+	textarea:focus {
+		box-shadow: 0 0 6px var(--bf-button-shadow-blue);
 	}
 
 	&.form-list .window-content {

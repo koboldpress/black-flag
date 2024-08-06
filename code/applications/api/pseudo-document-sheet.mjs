@@ -25,11 +25,11 @@ export default class PseudoDocumentSheet extends BFApplication {
 		},
 		dragDropHandlers: {
 			dragstart: null,
-			dragend: null,
+			dragend: PseudoDocumentSheet.#onDragEnd,
 			dragenter: null,
 			dragleave: null,
 			dragover: null,
-			drop: null
+			drop: PseudoDocumentSheet.#onDragEnd
 		},
 		dragSelectors: [],
 		form: {
@@ -169,9 +169,9 @@ export default class PseudoDocumentSheet extends BFApplication {
 
 	/** @inheritDoc */
 	_onRender(context, options) {
-		if (this.options.dragDropSelectors.length) {
+		if (this.options.dragSelectors.length) {
 			const drag = this.#onDragEvent.bind(this);
-			for (const selector of this.options.dragDropSelectors) {
+			for (const selector of this.options.dragSelectors) {
 				for (const element of this.element.querySelectorAll(selector)) {
 					element.setAttribute("draggable", true);
 					element.addEventListener("dragstart", drag);
@@ -313,5 +313,17 @@ export default class PseudoDocumentSheet extends BFApplication {
 		const handler = this.options.dragDropHandlers[event.type];
 		if (!handler) return;
 		handler.call(this, event, DragDrop);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Finish the drag event.
+	 * @this {PseudoDocumentSheet}
+	 * @param {Event} event - Triggering event.
+	 * @param {DragDrop} dragDrop - The drag event manager.
+	 */
+	static #onDragEnd(event, dragDrop) {
+		dragDrop.finishDragEvent(event);
 	}
 }
