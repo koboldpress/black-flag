@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You enchant a weapon with magical might, improving its use in combat.</em></p><p>You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls.</p>",
+      "value": "<p>You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the bonus increases to +2. When you use a spell slot of 6th circle or higher, the bonus increases to +3.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,15 +78,18 @@
       "affects": {
         "choice": false,
         "type": "object",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -97,10 +100,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934544057,
-    "modifiedTime": 1714413561977,
+    "modifiedTime": 1722985754814,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

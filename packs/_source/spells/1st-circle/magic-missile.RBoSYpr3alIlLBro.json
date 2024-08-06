@@ -80,7 +80,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Glowing motes of force unerringly streak toward your target.</em></p><p>You create three darts that each hit a creature of your choice you can see within range. You can choose whether the darts hit the same creature, or different creatures. Each dart deals 1d4 + 1 force damage to its target.</p>",
+      "value": "<p>You create three darts that each hit a creature of your choice you can see within range. You can choose whether the darts hit the same creature or different creatures. Each dart deals [[/damage]] damage to its target.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, it creates one additional dart for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -122,7 +122,7 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1",
+        "count": "@scaling + 2",
         "special": ""
       }
     },
@@ -144,10 +144,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.040",
-    "coreVersion": "12.329",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934525756,
-    "modifiedTime": 1721762535667,
+    "modifiedTime": 1722985694675,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -5,7 +5,44 @@
   "_id": "lYor5ljOiNpJsCjh",
   "img": "icons/commodities/stone/paver-brick-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "P5ZA0oyj9eg2IrRZ": {
+        "type": "utility",
+        "_id": "P5ZA0oyj9eg2IrRZ",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You banish a creature that you can see within range into a labyrinthine demiplane. The target remains there for the duration or until it escapes the maze. The target can use its action to attempt to escape. When it does so, it makes a [[/check dc=20 INT]] check. If it succeeds, it escapes, and the spell ends. When the spell ends, the target reappears in the space it left or, if that space is occupied, in the nearest unoccupied space.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -34,7 +71,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,11 +82,16 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "target": {
       "template": {
@@ -57,7 +102,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "conjuration"
@@ -74,7 +121,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919809935,
-    "modifiedTime": 1722921460983,
+    "modifiedTime": 1722986295418,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!lYor5ljOiNpJsCjh"

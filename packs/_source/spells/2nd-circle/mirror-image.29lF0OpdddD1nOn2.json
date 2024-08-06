@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure three images of yourself that constantly shift to obscure your true position.</em></p><p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it’s impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p><p>Each time a creature targets you with an attack during the spell’s duration, roll a d20 to determine whether the attack instead targets one of your duplicates.</p><p>If you have three duplicates, you must roll a 6 or higher to change the attack’s target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p><p>A duplicate’s AC equals 10 + your DEX modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that targets it. A duplicate ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p><p>A creature is unaffected by this spell if it can’t see, if it relies on senses other than sight, such as keensense, or if it can perceive illusions as false, as with truesight.</p>",
+      "value": "<p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it’s impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p><p>Each time a creature targets you with an attack during the spell’s duration, roll a d20 to determine whether the attack instead targets one of your duplicates.</p><p>If you have three duplicates, you must roll a 6 or higher to change the attack’s target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p><p>A duplicate’s AC equals 10 + your DEX modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that specifically targeted you (and by extension, the duplicate), not area-of-effect spells such as fireball. It ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p><p>A creature’s attacks are unaffected by this spell if the creature can’t see, if it relies on senses other than sight, such as keensense, or if it can see through illusions, as with truesight.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -79,7 +79,8 @@
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "illusion",
     "source": [
@@ -94,10 +95,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934717991,
-    "modifiedTime": 1714413566895,
+    "modifiedTime": 1722987048443,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

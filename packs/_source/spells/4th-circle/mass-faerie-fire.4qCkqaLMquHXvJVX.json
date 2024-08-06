@@ -5,7 +5,59 @@
   "_id": "4qCkqaLMquHXvJVX",
   "img": "icons/magic/light/explosion-star-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "eqZSMgc1aoEwM8y4": {
+        "type": "savingThrow",
+        "_id": "eqZSMgc1aoEwM8y4",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +66,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You can place up to three 20-foot cubes each centered on a point you can see within range. Each object in a cube is outlined in blue, green, or violet light (your choice). Any creature in a cube when the spell is cast is also outlined in light if it fails a [[/save]] save. A creature in the area of more than one cube is affected only once. For the duration, each affected object and creature sheds dim light in a 10-foot radius for the duration.</p><p>Any attack roll against an affected creature or object has advantage if the attacker can see it, and the affected creature or object can’t benefit from being invisible.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -33,7 +85,9 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -41,18 +95,24 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "90",
+      "special": ""
     },
     "target": {
       "template": {
-        "count": 1,
+        "count": 3,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "cube",
+        "size": "20"
       },
       "affects": {
         "choice": false,
@@ -73,7 +133,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919651872,
-    "modifiedTime": 1722921353373,
+    "modifiedTime": 1722985945195,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!4qCkqaLMquHXvJVX"

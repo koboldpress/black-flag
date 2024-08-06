@@ -5,7 +5,44 @@
   "_id": "SDXJbySSsm9mhMfl",
   "img": "icons/commodities/stone/paver-brick-brown.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5yC6mMN18eHBEzvK": {
+        "type": "utility",
+        "_id": "5yC6mMN18eHBEzvK",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You step into a stone object or surface large enough to fully contain your body, melding yourself and all the equipment you carry with it for the duration. Using your movement, you step into the stone at a point you can touch. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.</p><p>While merged with the stone, you can’t see what occurs outside it, and any [[/check WIS Perception]] checks you make to hear sounds outside it are made with disadvantage. You remain aware of the passage of time and can cast spells on yourself while merged in the stone. You can use your movement to leave the stone where you entered it, which ends the spell. Otherwise, you can’t move.</p><p>Minor physical damage to the stone doesn’t harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals [[/damage 6d6 bludgeoning]] damage to you. The stone’s complete destruction (or transmutation into a different substance) expels you and deals [[/damage 50 bludgeoning]] damage to you. If expelled, you fall prone in an unoccupied space closest to where you first entered.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -33,7 +70,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -41,11 +81,13 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "8"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "touch",
+      "special": ""
     },
     "target": {
       "template": {
@@ -73,7 +115,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919864141,
-    "modifiedTime": 1722921408693,
+    "modifiedTime": 1722986387680,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SDXJbySSsm9mhMfl"

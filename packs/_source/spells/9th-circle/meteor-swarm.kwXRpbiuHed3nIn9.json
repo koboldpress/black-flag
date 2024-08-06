@@ -5,7 +5,90 @@
   "_id": "kwXRpbiuHed3nIn9",
   "img": "icons/magic/fire/projectile-fireball-orange-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9e72DpKCUD46nXHs": {
+        "type": "savingThrow",
+        "_id": "9e72DpKCUD46nXHs",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 20,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              },
+              {
+                "number": 20,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +97,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius sphere centered on each point you choose must make a [[/save]] save. The sphere spreads around corners. A creature takes [[/damage]] damage on a failed save, or half as much damage on a successful one. A creature in the area of more than one fiery burst is affected only once.</p><p>The spell damages objects in the area and ignites flammable objects that aren’t being worn or carried.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -34,7 +117,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -46,18 +132,23 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "mile",
+      "value": "1",
+      "special": ""
     },
     "target": {
       "template": {
-        "count": 1,
+        "count": 4,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "40"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "evocation"
@@ -74,7 +165,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919893897,
-    "modifiedTime": 1722921368606,
+    "modifiedTime": 1722986558087,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!kwXRpbiuHed3nIn9"

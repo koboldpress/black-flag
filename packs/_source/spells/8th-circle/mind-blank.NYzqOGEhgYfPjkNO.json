@@ -5,7 +5,44 @@
   "_id": "NYzqOGEhgYfPjkNO",
   "img": "icons/magic/unholy/orb-swirling-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "veIXdlgED8lZXdbI": {
+        "type": "utility",
+        "_id": "veIXdlgED8lZXdbI",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, divination spells, and the charmed condition. The spell even foils <em>wish</em> spells and spells or effects of similar power used to affect the target’s mind or to gain information about the target.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -33,7 +70,10 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -41,11 +81,13 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "24"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "touch",
+      "special": ""
     },
     "target": {
       "template": {
@@ -56,12 +98,64 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "abjuration"
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.NYzqOGEhgYfPjkNO",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Mind Blank",
+      "img": "icons/magic/unholy/orb-swirling-teal.webp",
+      "_id": "Fh8HC9GKUcP44r6G",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.damage.immunities.value",
+          "mode": 2,
+          "value": "psychic",
+          "priority": null
+        },
+        {
+          "key": "system.traits.condition.immunities.value",
+          "mode": 2,
+          "value": "charmed",
+          "priority": null
+        }
+      ],
+      "description": "<p>You are immune to psychic damage, any effect that would sense your emotions or read your thoughts, divination spells, and the charmed condition. The spell even foils <em>wish</em> spells and spells or effects of similar power used to affect the target’s mind or to gain information about the target.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1722986640859,
+        "modifiedTime": 1722986715098,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!NYzqOGEhgYfPjkNO.Fh8HC9GKUcP44r6G"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -73,7 +167,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919929792,
-    "modifiedTime": 1722921465509,
+    "modifiedTime": 1722986636857,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!NYzqOGEhgYfPjkNO"

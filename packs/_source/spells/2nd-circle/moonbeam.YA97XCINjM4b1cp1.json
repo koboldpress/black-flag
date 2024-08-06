@@ -5,7 +5,75 @@
   "_id": "YA97XCINjM4b1cp1",
   "img": "icons/magic/light/beams-strike-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5VRyWC5VLShZp0Bu": {
+        "type": "savingThrow",
+        "_id": "5VRyWC5VLShZp0Bu",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +82,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A silvery beam of pale, dim light shines down in a 5-foot‑radius, 40-foot-high cylinder centered on a point you choose within range. When a creature enters the spell’s area for the first time on a turn or starts its turn there, it is engulfed in ghostly flames that cause searing pain, and it must make a [[/save]] save. It takes [[/damage]] damage on a failed save, or half as much damage on a successful one.</p><p>A creature with the Shapechanger tag makes this save with disadvantage. If it fails, it also instantly reverts to its true form and can’t assume a different form until it leaves the spell’s light.</p><p>On each of your turns after you cast this spell, you can use an action to move the beam 60 feet in any direction.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the damage increases by [[/damage 1d10 radiant]]{1d10} for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -33,26 +101,38 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "several seeds of any moonseed plant and a piece of opalescent feldspar"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "target": {
       "template": {
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "cylinder",
+        "size": "5",
+        "height": "40"
       },
       "affects": {
         "choice": false,
@@ -73,7 +153,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722920058368,
-    "modifiedTime": 1722921401215,
+    "modifiedTime": 1722987491457,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YA97XCINjM4b1cp1"

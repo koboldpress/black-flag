@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You open a clandestine, two-way communication with your target, known only to you two.</em></p><p>You point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.</p><p>You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn’t have to follow a straight line and can travel freely around corners or through openings.</p>",
+      "value": "<p>You point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.</p><p>You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn’t have to follow a straight line and can travel freely around corners or through openings.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,16 +78,19 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "120"
+      "value": "120",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -98,10 +101,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934638710,
-    "modifiedTime": 1714412790997,
+    "modifiedTime": 1722986450745,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

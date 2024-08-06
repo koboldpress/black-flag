@@ -5,7 +5,44 @@
   "_id": "jYwNDf7tUFg5S9cc",
   "img": "icons/environment/wilderness/statue-hound-horned.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "k37to2lnqwzNH1vS": {
+        "type": "utility",
+        "_id": "k37to2lnqwzNH1vS",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You become invisible at the same time that an illusory double of you appears where you are standing. The double lasts for the duration, but the invisibility ends if you attack or cast a spell.</p><p>You can use your action to move your illusory double up to twice your speed and make it gesture, speak, and behave in whatever way you choose.</p><p>You can see through its eyes and hear through its ears as if you were located where it is. On each of your turns as a bonus action, you can switch from using its senses to using your own, or back again. While you are using its senses, you are blinded and deafened in regard to your own surroundings.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -33,7 +70,9 @@
       "condition": ""
     },
     "components": {
-      "required": [],
+      "required": [
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -41,11 +80,15 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "target": {
       "template": {
@@ -61,7 +104,46 @@
     },
     "school": "illusion"
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.jYwNDf7tUFg5S9cc",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Mislead",
+      "img": "icons/environment/wilderness/statue-hound-horned.webp",
+      "_id": "H2uFl1bV6FldoL5g",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [
+        "invisible"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1722987144512,
+        "modifiedTime": 1722987208116,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!jYwNDf7tUFg5S9cc.H2uFl1bV6FldoL5g"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -73,7 +155,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1722919963246,
-    "modifiedTime": 1722921443441,
+    "modifiedTime": 1722987140363,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!jYwNDf7tUFg5S9cc"
