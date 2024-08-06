@@ -200,10 +200,11 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		switch (action) {
 			case "add":
 				const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
+				const isItem = this.document instanceof Item;
 				return this.document.createEmbeddedDocuments("ActiveEffect", [
 					{
-						label: game.i18n.localize("BF.Effect.New"),
-						icon: this.document instanceof Item ? this.document.img : "icons/svg/aura.svg",
+						label: isItem ? this.document.name : game.i18n.localize("BF.Effect.New"),
+						icon: isItem ? this.document.img : "icons/svg/aura.svg",
 						origin: this.document.uuid,
 						duration: {
 							rounds: section === "temporary" ? 1 : undefined

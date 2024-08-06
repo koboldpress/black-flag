@@ -1,6 +1,6 @@
 import { getSelectedTokens, log, simplifyBonus } from "./utils/_module.mjs";
 
-const slugify = value => value?.slugify().replaceAll("-", "");
+const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
 /**
  * Set up system-specific enrichers.
