@@ -6,23 +6,56 @@
   "img": "icons/magic/movement/trail-streak-pink.webp",
   "system": {
     "activities": {
-      "kFfftAsXUNkCCka5": {
-        "type": "utility",
-        "_id": "kFfftAsXUNkCCka5",
+      "opwy0XHyH3PwEIf8": {
+        "type": "savingThrow",
+        "_id": "opwy0XHyH3PwEIf8",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
             "allowed": false
           }
         },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
       }
     },
     "uses": {
@@ -33,7 +66,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You cause your target to hover in the air, untethered by gravity.</em></p><p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a CON save is unaffected.</p><p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target’s altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell’s range.</p><p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
+      "value": "<p>One creature or object of your choice that you can see within range rises vertically, up to 20 feet, and remains suspended there for the duration. The spell can levitate a target that weighs up to 500 pounds. An unwilling creature that succeeds on a [[/save]] save is unaffected.</p><p>The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target’s altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can use your action to move the target, which must remain within the spell’s range.</p><p>When the spell ends, the target floats gently to the ground if it is still aloft.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -80,12 +113,14 @@
       "affects": {
         "choice": false,
         "type": "creatureObject",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "60"
+      "value": "60",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
@@ -100,10 +135,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934321542,
-    "modifiedTime": 1714413546206,
+    "modifiedTime": 1722919184470,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your touch grants a burst of fleetness to your target.</em></p><p>You touch a creature. Its speed increases by 10 feet and its jump distance is tripled until the spell ends.</p>",
+      "value": "<p>You touch a creature. Its speed increases by 10 feet and its jump distance is tripled until the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,18 +78,65 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "@scaling",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.V6dBngLQzGP0DrQt",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Longstrider",
+      "img": "icons/magic/light/beam-deflect-path-yellow.webp",
+      "_id": "QqcQh7JBSyfrHKzN",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.base",
+          "mode": 2,
+          "value": "10",
+          "priority": null
+        }
+      ],
+      "description": "<p>Your speed increases by 10 feet and your jump distance is tripled until the spell ends.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1722919365575,
+        "modifiedTime": 1722919394417,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!V6dBngLQzGP0DrQt.QqcQh7JBSyfrHKzN"
+    }
+  ],
   "sort": 2600000,
   "ownership": {
     "default": 0
@@ -97,10 +144,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934451040,
-    "modifiedTime": 1717966149772,
+    "modifiedTime": 1722919417521,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

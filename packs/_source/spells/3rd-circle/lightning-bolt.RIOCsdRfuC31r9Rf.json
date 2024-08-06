@@ -18,8 +18,16 @@
                 "number": 8,
                 "denomination": 6,
                 "bonus": "",
-                "custom": "",
-                "type": "lightning"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "lightning",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
@@ -29,7 +37,8 @@
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -56,7 +65,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You send a streaking bolt of electricity lancing out from your person.</em></p><p>A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a DEX save. A creature takes 8d6 lightning damage on a failed save, or half as much damage on a successful one.</p><p>The lightning ignites flammable objects in the area that aren’t being worn or carried.</p>",
+      "value": "<p>A stroke of lightning forming a line 100 feet long and 5 feet wide blasts out from you in a direction you choose. Each creature in the line must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a successful one.</p><p>The lightning ignites flammable objects in the area that aren’t being worn or carried./p&gt;</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by [[/damage 1d6 lightning]]{1d6} for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -102,11 +111,13 @@
       "affects": {
         "choice": false,
         "type": "creatureObject",
-        "count": ""
+        "count": "",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -121,10 +132,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934380366,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1722919310811,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
