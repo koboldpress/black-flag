@@ -5,8 +5,7 @@
 
 <label class="file">
 	<span>{{ localize "BF.Advancement.Core.Icon.Label" }}</span>
-	{{ filePicker type="image" target="icon" }}
-	<input type="text" name="icon" value="{{ source.icon }}" placeholder="{{ default.icon }}">
+	<file-picker name="icon" type="icon" value="{{ source.icon }}" placeholder="{{ default.icon }}"></file-picker>
 </label>
 
 {{#if showHint}}

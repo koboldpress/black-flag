@@ -4,23 +4,40 @@ import ScaleValueConfig from "./scale-value-config.mjs";
  * Configuration application for scale values.
  */
 export default class SpellcastingValueConfig extends ScaleValueConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "scale-value"],
-			template: "systems/black-flag/templates/advancement/spellcasting-value-config.hbs",
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["scale-value"],
+		position: {
 			width: 400
-		});
-	}
+		}
+	};
+
+	/** @override */
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/advancement/scale-value-config-details.hbs"
+		},
+		scale: {
+			template: "systems/black-flag/templates/advancement/spellcasting-value-config-scale.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.showClassRestriction = false;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareConfigContext(context, options) {
+		context = await super._prepareConfigContext(context, options);
 		context.types = null;
 		return context;
 	}

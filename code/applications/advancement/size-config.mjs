@@ -5,17 +5,27 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for sizes.
  */
 export default class SizeConfig extends AdvancementConfig {
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "size"],
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["size"]
+	};
+
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
+		},
+		size: {
 			template: "systems/black-flag/templates/advancement/size-config.hbs"
-		});
-	}
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
-	getData(options) {
-		const context = super.getData(options);
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.sizes = Object.entries(CONFIG.BlackFlag.sizes).reduce((obj, [key, config]) => {
 			obj[key] = {
 				label: config.label,
@@ -27,6 +37,8 @@ export default class SizeConfig extends AdvancementConfig {
 		return context;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	async prepareConfigurationUpdate(configuration) {

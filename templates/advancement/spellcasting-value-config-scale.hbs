@@ -1,0 +1,14 @@
+<fieldset>
+	<legend>{{ localize "BF.Level.Label[other]" }}</legend>
+	<ol class="level-list">
+		{{#each levels}}
+			<li class="level {{ @root.configuration.type }}" data-level="{{ @key }}">
+				<label>
+					<span>{{ @key }}</span>
+					<input type="number" name="configuration.scale.{{ @key }}.value" step="1"
+					       value="{{ value.value }}" placeholder="{{ placeholder.value }}">
+				</label>
+			</li>
+		{{/each}}
+	</ol>
+</fieldset>

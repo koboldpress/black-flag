@@ -1,0 +1,13 @@
+<fieldset>
+	<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
+	{{> "blackFlag.advancement-controls" }}
+	<label>
+		<span>{{ localize "BF.Advancement.Trait.Mode.Label" }}</span>
+		<select name="configuration.mode">
+			{{ selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label" localize=true }}
+		</select>
+		<p class="hint">
+			{{ localize (lookup (lookup CONFIG.traitModes configuration.mode) "hint") }}
+		</p>
+	</label>
+</fieldset>

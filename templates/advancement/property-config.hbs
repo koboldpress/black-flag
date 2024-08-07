@@ -1,45 +1,37 @@
-<form autocomplete="off">
-	<section>
-		<fieldset>
-			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
-			{{> "blackFlag.advancement-controls" }}
-		</fieldset>
-		<fieldset class="active-effect-sheet">
-			<legend>{{ localize "EFFECT.TabEffects" }}</legend>
-			<header class="effect-change effects-header flexrow">
-				<div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
-				<div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
-				<div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
-				<div class="effect-controls">
-						<button type="button" class="link-button effect-control" data-action="add"
-						        data-tooltip="BF.Effect.Action.Add" aria-label="{{ localize 'BF.Effect.Action.Add' }}">
-							<i class="fa-regular fa-square-plus" inert></i>
-						</button>
+<fieldset class="active-effect-sheet">
+	<legend>{{ localize "EFFECT.TabEffects" }}</legend>
+	<header class="effect-change effects-header flexrow">
+		<div class="key">{{ localize "EFFECT.ChangeKey" }}</div>
+		<div class="mode">{{ localize "EFFECT.ChangeMode" }}</div>
+		<div class="value">{{ localize "EFFECT.ChangeValue" }}</div>
+		<div class="effect-controls">
+				<button type="button" class="link-button effect-control" data-action="addChange"
+				        data-tooltip="BF.Effect.Action.Add" aria-label="{{ localize 'BF.Effect.Action.Add' }}">
+					<i class="fa-regular fa-square-plus" inert></i>
+				</button>
+		</div>
+	</header>
+	<ol class="changes-list">
+		{{#each configuration.changes}}
+			<li class="effect-change flexrow" data-index="{{ @index }}">
+				<div class="key">
+					<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
 				</div>
-			</header>
-			<ol class="changes-list">
-				{{#each configuration.changes}}
-					<li class="effect-change flexrow" data-index="{{ @index }}">
-						<div class="key">
-							<input type="text" name="configuration.changes.{{ @index }}.key" value="{{ key }}">
-						</div>
-						<div class="mode">
-							<select name="configuration.changes.{{ @index }}.mode" data-dtype="Number">
-								{{ selectOptions ../modes selected=mode }}
-							</select>
-						</div>
-						<div class="value">
-							<input type="text" name="configuration.changes.{{ @index }}.value" value="{{ value }}">
-						</div>
-						<div class="effect-controls">
-							<button type="button" class="link-button effect-control" data-action="delete"
-							        data-tooltip="BF.Effect.Action.Delete" aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
-								<i class="fa-solid fa-trash" inert></i>
-							</button>
-						</div>
-					</li>
-				{{/each}}
-			</ol>
-		</fieldset>
-	</section>
-</form>
+				<div class="mode">
+					<select name="configuration.changes.{{ @index }}.mode" data-dtype="Number">
+						{{ selectOptions ../modes selected=mode }}
+					</select>
+				</div>
+				<div class="value">
+					<input type="text" name="configuration.changes.{{ @index }}.value" value="{{ value }}">
+				</div>
+				<div class="effect-controls">
+					<button type="button" class="link-button effect-control" data-action="deleteChange"
+					        data-tooltip="BF.Effect.Action.Delete" aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
+						<i class="fa-solid fa-trash" inert></i>
+					</button>
+				</div>
+			</li>
+		{{/each}}
+	</ol>
+</fieldset>

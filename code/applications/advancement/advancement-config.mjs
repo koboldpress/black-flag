@@ -1,4 +1,4 @@
-import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
+import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
  * Base configuration application for advancements that can be extended by other types to implement custom
@@ -10,27 +10,26 @@ import PseudoDocumentSheet from "../pseudo-document-sheet.mjs";
  *                                              If populated, will enable default drop & delete behavior.
  */
 export default class AdvancementConfig extends PseudoDocumentSheet {
-	/**
-	 * Stored information about the current drag event.
-	 * @type {{ listener: boolean, time: number|null, payload: object|null, valid: boolean }}
-	 */
-	#dragData = { listener: false, time: null, payload: null, valid: null };
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["advancement-config"],
+		actions: {
+			deleteDropped: AdvancementConfig.#onDeleteDropped
+		},
+		dragDropHandlers: {
+			dragenter: AdvancementConfig.#onDragEnter,
+			dragleave: AdvancementConfig.#onDragLeave,
+			drop: AdvancementConfig.#onDrop
+		},
+		dropKeyPath: null,
+		position: {
+			width: 400,
+			height: "auto"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config"],
-			template: "systems/black-flag/templates/advancement/advancement-config.hbs",
-			width: 400,
-			height: "auto",
-			submitOnChange: true,
-			closeOnSubmit: false,
-			dropKeyPath: null
-		});
-	}
-
+	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -55,7 +54,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	get title() {
 		const type = game.i18n.localize(this.advancement.metadata.title);
 		return `${game.i18n.format("BF.Advancement.Config.Title", { item: this.item.name })}: ${type}`;
@@ -66,33 +65,46 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options = {}) {
+	_onFirstRender(context, options) {
+		super._onFirstRender(context, options);
+		let columns = [];
+		const created = [];
+		if (this.options.classes.includes("two-column")) columns = ["left", "right"];
+		else if (this.options.classes.includes("three-column")) columns = ["left", "center", "right"];
+		const content = this.element.querySelector(".window-content");
+		for (const column of columns) {
+			const div = document.createElement("div");
+			div.classList.add(`column-${column}`);
+			div.replaceChildren(...content.querySelectorAll(`& > .${column}-column`));
+			if (div.children.length) created.push(div);
+		}
+		created.reverse().forEach(c => content.insertAdjacentElement("afterbegin", c));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
 		const levels = [
 			[0, game.i18n.localize("BF.Advancement.Core.Level.Any.Short")],
 			...Array.fromRange(CONFIG.BlackFlag.maxLevel, 1).map(l => [l, l])
 		].slice(this.advancement.minimumLevel);
-		const context = foundry.utils.mergeObject(
-			super.getData(options),
-			{
-				configuration: this.advancement.configuration,
-				source: this.advancement.toObject(),
-				advancement: this.advancement,
-				default: {
-					title: game.i18n.localize(this.advancement.metadata.title),
-					icon: this.advancement.metadata.icon,
-					identifier: this.advancement.title.slugify({ strict: true }),
-					identifierHint: this.advancement.metadata.identifier.hint
-				},
-				levels: Object.fromEntries(levels),
-				showClassIdentifier: this.item.system.metadata?.category === "features",
-				showClassRestriction: this.item.type === "class" || !!this.advancement.level.classIdentifier,
-				showHint: this.advancement.metadata.configurableHint,
-				showIdentifier: this.advancement.metadata.identifier.configurable,
-				showLevelSelector: !this.advancement.metadata.multiLevel
-			},
-			{ inplace: false }
-		);
-		context.CONFIG = CONFIG.BlackFlag;
+		const context = await super._prepareContext(options);
+		context.configuration = this.advancement.configuration;
+		context.source = this.advancement.toObject();
+		context.advancement = this.advancement;
+		context.default = {
+			title: game.i18n.localize(this.advancement.metadata.title),
+			icon: this.advancement.metadata.icon,
+			identifier: this.advancement.title.slugify({ strict: true }),
+			identifierHint: this.advancement.metadata.identifier.hint
+		};
+		context.levels = Object.fromEntries(levels);
+		context.showClassIdentifier = this.item.system.metadata?.category === "features";
+		context.showClassRestriction = this.item.type === "class" || !!this.advancement.level.classIdentifier;
+		context.showHint = this.advancement.metadata.configurableHint;
+		context.showIdentifier = this.advancement.metadata.identifier.configurable;
+		context.showLevelSelector = !this.advancement.metadata.multiLevel;
 		return context;
 	}
 
@@ -101,29 +113,13 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		// Remove an item from the list
-		if (this.options.dropKeyPath) {
-			for (const element of html.querySelectorAll('[data-action="delete"]')) {
-				element.addEventListener("click", this._onItemDelete.bind(this));
-			}
+	async _processSubmitData(event, form, submitData) {
+		submitData.configuration ??= {};
+		submitData.configuration = await this.prepareConfigurationUpdate(submitData.configuration, submitData);
+		if (submitData.level?.classIdentifier && submitData.level?.value === 0) {
+			submitData.level.value = 1;
 		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async _updateObject(event, formData) {
-		let updates = foundry.utils.expandObject(formData);
-		updates.configuration ??= {};
-		updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
-		if (updates.level?.classIdentifier && updates.level?.value === 0) {
-			updates.level.value = 1;
-		}
-		await this.advancement.update(updates);
+		await this.advancement.update(submitData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -131,25 +127,27 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 	/**
 	 * Perform any changes to configuration data before it is saved to the advancement.
 	 * @param {object} configuration - Configuration object.
+	 * @param {object} submitData - Processed and validated form data to be used for a document update.
 	 * @returns {object} - Modified configuration.
 	 */
-	async prepareConfigurationUpdate(configuration) {
+	async prepareConfigurationUpdate(configuration, submitData) {
 		return configuration;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*      Drag & Drop for Item Pools     */
+	/*              Drag & Drop            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Handle deleting an existing Item entry from the Advancement.
+	 * @this {AdvancementConfig}
 	 * @param {Event} event - The originating click event.
+	 * @param {HTMLElement} target - The button that was clicked.
 	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
-	 * @protected
 	 */
-	async _onItemDelete(event) {
+	static async #onDeleteDropped(event, target) {
 		event.preventDefault();
-		const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
+		const uuidToDelete = target.closest("[data-item-uuid]")?.dataset.itemUuid;
 		if (!uuidToDelete) return;
 		let updates;
 		if (this.multiDrop) {
@@ -167,97 +165,96 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	_canDragDrop() {
-		return this.isEditable;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async _onDragOver(event) {
-		// TODO: Convert to _onDragEnter listener
-
+	/**
+	 * Add drag target highlight when drag enters drop area.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - Triggering event.
+	 * @param {DragDrop} dragDrop - The drag event manager.
+	 */
+	static async #onDragEnter(event, dragDrop) {
 		const dropTarget = event.target.closest(".drop-area");
 		if (!dropTarget) return;
+		dragDrop.enterDragArea(event, dropTarget);
 
-		const diff = Date.now() - this.#dragData.time;
-		this.#dragData.time = Date.now();
-
-		if (!this.#dragData.listener) {
-			dropTarget.addEventListener("dragleave", this._onDragLeave.bind(this), { once: true });
-			this.#dragData.listener = true;
-		}
-
-		const data = TextEditor.getDragEventData(event);
-		if (
-			!this.#dragData.payload ||
-			!foundry.utils.isEmpty(foundry.utils.diffObject(data, this.#dragData.payload)) ||
-			diff > 10000
-		) {
+		const { data } = dragDrop.getDragData(event);
+		let valid = true;
+		if (data?.type !== "Item") valid = false;
+		else {
 			try {
 				const item = await Item.implementation.fromDropData(data);
 				this._validateDroppedItem(event, item);
-				this.#dragData.payload = data;
-				this.#dragData.valid = true;
 			} catch (err) {
-				this.#dragData.valid = false;
+				valid = false;
 			}
 		}
-		dropTarget.classList.add(this.#dragData.valid ? "valid" : "invalid");
-		event.dataTransfer.dropEffect = this.#dragData.valid ? "copy" : "all";
+
+		dropTarget.classList.add(valid ? "valid" : "invalid");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Remove drag target highlight when drag leaves.
-	 * @param {DragEvent} event
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - Triggering event.
+	 * @param {DragDrop} dragDrop - The drag event manager.
 	 */
-	async _onDragLeave(event) {
-		this.#dragData.listener = false;
-		const dropTarget = event.target?.closest(".drop-area");
-		if (!dropTarget) return;
-		dropTarget.classList.remove("valid");
-		dropTarget.classList.remove("invalid");
+	static async #onDragLeave(event, dragDrop) {
+		dragDrop.exitDragArea(event, area => {
+			if (!area.classList.contains("drop-area")) return false;
+			area.classList.remove("valid");
+			area.classList.remove("invalid");
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	async _onDrop(event) {
-		this._onDragLeave(event);
-
+	/**
+	 * Handle dropping an entry onto the app.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - Triggering event.
+	 * @param {DragDrop} dragDrop - The drag event manager.
+	 * @returns {Promise}
+	 */
+	static async #onDrop(event, dragDrop) {
 		if (!this.options.dropKeyPath)
 			throw new Error(
 				"AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support" +
 					" drag and drop on advancement config items."
 			);
+		const dropArea = event.target.closest(".drop-area");
+		if (dropArea) {
+			dropArea.classList.remove("valid");
+			dropArea.classList.remove("invalid");
+		}
 
 		// Try to extract the data
-		const data = TextEditor.getDragEventData(event);
+		const { data } = dragDrop.getDragData(event);
 
-		if (data?.type !== "Item") return false;
-		const item = await Item.implementation.fromDropData(data);
+		if (data?.type !== "Item") return;
 
 		try {
+			const item = await Item.implementation.fromDropData(data);
 			this._validateDroppedItem(event, item);
+
+			let existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+			if (!this.multiDrop) existingItems = [{ uuid: existingItems }];
+
+			// Abort if this uuid exists already
+			if (existingItems.find(i => i.uuid === item.uuid)) {
+				ui.notifications.warn("BF.Advancement.Config.Warning.Duplicate", { localize: true });
+				return;
+			}
+			// TODO: Allow dragging to re-order entries
+
+			const newValue = this.multiDrop ? [...existingItems, { uuid: item.uuid }] : item.uuid;
+			await this.advancement.update({ [`configuration.${this.options.dropKeyPath}`]: newValue });
 		} catch (err) {
-			return ui.notifications.error(err.message);
+			ui.notifications.error(err.message);
+			return;
+		} finally {
+			dragDrop.finishDragEvent(event);
 		}
-
-		let existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-		if (!this.multiDrop) existingItems = [{ uuid: existingItems }];
-
-		// Abort if this uuid exists already
-		if (existingItems.find(i => i.uuid === item.uuid)) {
-			ui.notifications.warn("BF.Advancement.Config.Warning.Duplicate", { localize: true });
-			return null;
-		}
-		// TODO: Allow dragging to re-order entries
-
-		const newValue = this.multiDrop ? [...existingItems, { uuid: item.uuid }] : item.uuid;
-		await this.advancement.update({ [`configuration.${this.options.dropKeyPath}`]: newValue });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

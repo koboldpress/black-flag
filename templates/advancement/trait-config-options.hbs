@@ -1,0 +1,13 @@
+<fieldset class="trait-options">
+	<legend>{{ localize selectedTraitHeader }}</legend>
+	<label>
+		<span>{{ localize "BF.Trait.Type" }}</span>
+		<select name="selectedTrait">
+			{{ selectOptions validTraitTypes selected=selectedTrait localize=true }}
+		</select>
+	</label>
+
+	{{> "blackFlag.trait-list" choices=choiceOptions prefix="configuration.checked" }}
+
+</fieldset>
+

@@ -5,19 +5,27 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for key ability.
  */
 export default class KeyAbilityConfig extends AdvancementConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "key-ability"],
-			template: "systems/black-flag/templates/advancement/key-ability-config.hbs"
-		});
-	}
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["key-ability"]
+	};
 
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
+		},
+		keyAbility: {
+			template: "systems/black-flag/templates/advancement/key-ability-config.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options) {
-		const context = super.getData(options);
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
 		context.abilities = Object.entries(CONFIG.BlackFlag.abilities).reduce((obj, [key, config]) => {
 			obj[key] = {
 				label: config.labels.full,
@@ -30,6 +38,8 @@ export default class KeyAbilityConfig extends AdvancementConfig {
 		return context;
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

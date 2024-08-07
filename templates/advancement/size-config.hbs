@@ -1,23 +1,15 @@
-<form autocomplete="off">
-	<section>
-		<fieldset>
-			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
-			{{> "blackFlag.advancement-controls" }}
-		</fieldset>
-		<fieldset>
-			<legend class="hinted-label" data-tooltip="BF.Advancement.Size.Options.Hint">
-				{{ localize "BF.Advancement.Size.Options.Label" }}
-			</legend>
-			<ol class="option-list">
-				{{#each sizes}}
-					<li>
-						<label>
-							{{ localize label }}
-							<input type="checkbox" name="configuration.options.{{ @key }}" {{ checked selected }}>
-						</label>
-					</li>
-				{{/each}}
-			</ol>
-		</fieldset>
-	</section>
-</form>
+<fieldset>
+	<legend class="hinted-label" data-tooltip="BF.Advancement.Size.Options.Hint">
+		{{ localize "BF.Advancement.Size.Options.Label" }}
+	</legend>
+	<ol class="option-list">
+		{{#each sizes}}
+			<li>
+				<label>
+					{{ localize label }}
+					<input type="checkbox" name="configuration.options.{{ @key }}" {{ checked selected }}>
+				</label>
+			</li>
+		{{/each}}
+	</ol>
+</fieldset>

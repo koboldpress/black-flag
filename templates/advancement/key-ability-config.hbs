@@ -1,21 +1,13 @@
-<form autocomplete="off">
-	<section>
-		<fieldset>
-			<legend>{{ localize "BF.Advancement.Config.Details" }}</legend>
-			{{> "blackFlag.advancement-controls" }}
-		</fieldset>
-		<fieldset>
-			<legend>{{ localize "BF.Advancement.KeyAbility.Options.Label" }}</legend>
-			<ol class="option-list">
-				{{#each abilities}}
-					<li>
-						<label>
-							{{ localize label }}
-							<input type="checkbox" name="configuration.options.{{ @key }}" {{ checked keySelected }}>
-						</label>
-					</li>
-				{{/each}}
-			</ol>
-		</fieldset>
-	</section>
-</form>
+<fieldset>
+	<legend>{{ localize "BF.Advancement.KeyAbility.Options.Label" }}</legend>
+	<ol class="option-list">
+		{{#each abilities}}
+			<li>
+				<label>
+					{{ localize label }}
+					<input type="checkbox" name="configuration.options.{{ @key }}" {{ checked keySelected }}>
+				</label>
+			</li>
+		{{/each}}
+	</ol>
+</fieldset>

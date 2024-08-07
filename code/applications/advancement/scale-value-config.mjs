@@ -4,15 +4,28 @@ import AdvancementConfig from "./advancement-config.mjs";
  * Configuration application for scale values.
  */
 export default class ScaleValueConfig extends AdvancementConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "scale-value", "two-column"],
-			template: "systems/black-flag/templates/advancement/scale-value-config.hbs",
-			width: 600
-		});
-	}
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["scale-value", "two-column"],
+		position: {
+			width: 640
+		}
+	};
 
+	/** @override */
+	static PARTS = {
+		config: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/scale-value-config-details.hbs"
+		},
+		scale: {
+			classes: ["right-column"],
+			template: "systems/black-flag/templates/advancement/scale-value-config-scale.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -29,35 +42,62 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const config = this.advancement.configuration;
-		const types = CONFIG.Advancement.types.scaleValue.dataTypes;
-		const type = types[config.type];
-		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type];
-		const emptyPlaceholder = new ScaleValueType().placeholder;
+	async _preparePartContext(partId, context, options) {
+		await super._preparePartContext(partId, context, options);
+		if (partId === "config") return await this._prepareConfigContext(context, options);
+		if (partId === "scale") return await this._prepareScaleContext(context, options);
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the config section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareConfigContext(context, options) {
 		let identifierHint = game.i18n.format(this.advancement.metadata.identifier.hint, {
 			parentIdentifier: this.advancement.parentIdentifier,
 			identifier: this.advancement.identifier
 		});
-		if (config.type === "dice")
+		if (this.advancement.configuration.type === "dice") {
 			identifierHint = `${identifierHint} ${game.i18n.format("BF.Advancement.ScaleValue.Identifier.DiceHint", {
 				parentIdentifier: this.advancement.parentIdentifier,
 				identifier: this.advancement.identifier
 			})}`;
+		}
+		context.default.identifierHint = identifierHint;
+		context.types = Object.fromEntries(
+			Object.entries(CONFIG.Advancement.types.scaleValue.dataTypes).map(([key, d]) => [
+				key,
+				game.i18n.localize(d.metadata.label)
+			])
+		);
+		return context;
+	}
 
-		return foundry.utils.mergeObject(super.getData(), {
-			default: { identifierHint },
-			type: type.metadata,
-			types: Object.fromEntries(Object.entries(types).map(([key, d]) => [key, game.i18n.localize(d.metadata.label)])),
-			faces: Object.fromEntries(CONFIG.BlackFlag.scaleDiceSizes.map(die => [die, `d${die}`])),
-			levels: this.levelRange.reduce((obj, level) => {
-				obj[level] = {
-					placeholder: this.advancement.valueForLevel(level - 1)?.placeholder ?? emptyPlaceholder,
-					value: this.advancement.configuration.scale[level] ?? {}
-				};
-				return obj;
-			}, {})
-		});
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the scale section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareScaleContext(context, options) {
+		const ScaleValueType = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type];
+		context.faces = Object.fromEntries(CONFIG.BlackFlag.scaleDiceSizes.map(die => [die, `d${die}`]));
+		context.levels = this.levelRange.reduce((obj, level) => {
+			obj[level] = {
+				placeholder: this.advancement.valueForLevel(level - 1)?.placeholder ?? new ScaleValueType().placeholder,
+				value: this.advancement.configuration.scale[level] ?? {}
+			};
+			return obj;
+		}, {});
+		context.type = CONFIG.Advancement.types.scaleValue.dataTypes[this.advancement.configuration.type].metadata;
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -65,50 +105,25 @@ export default class ScaleValueConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		// this.form.querySelector(".identifier-hint-copy").addEventListener("click", this._onIdentifierHintCopy.bind(this));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Copies the full scale identifier hint to the clipboard.
-	 * @param {Event} event - The triggering click event.
-	 * @protected
-	 */
-	_onIdentifierHintCopy(event) {
-		game.clipboard.copyPlainText(`@scale.${this.item.identifier}.${this.advancement.identifier}`);
-		game.tooltip.activate(event.target, { text: game.i18n.localize("DND5E.IdentifierCopied"), direction: "UP" });
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	async _updateObject(event, formData) {
-		const updates = foundry.utils.expandObject(formData);
-		if (!("configuration.type" in formData) || updates.configuration.type === this.advancement.configuration.type) {
-			return super._updateObject(event, foundry.utils.flattenObject(updates));
-		}
+	async _processSubmitData(event, form, submitData) {
+		const type = foundry.utils.getProperty(submitData, "configuration.type");
+		if (!type || type === this.advancement.configuration.type) return super._processSubmitData(event, form, submitData);
 
 		// Perform the update with old type
-		const type = updates.configuration.type;
-		delete updates.configuration.type;
-		await super._updateObject(event, foundry.utils.flattenObject(updates));
+		delete submitData.configuration.type;
+		await super._processSubmitData(event, form, submitData);
 
 		// Transform values into new type
 		const NewType = CONFIG.Advancement.types.scaleValue.dataTypes[type];
 		for (const level of this.levelRange) {
 			const value = this.advancement.valueForLevel(level);
-			if (value) updates.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
-			else updates.configuration.scale[`-=${level}`] = null;
+			if (value) submitData.configuration.scale[level] = NewType.convertFrom(value)?.toObject();
+			else submitData.configuration.scale[`-=${level}`] = null;
 		}
-		updates.configuration.type = type;
+		submitData.configuration.type = type;
 
 		// Perform the update once more with new data
-		return super._updateObject(event, foundry.utils.flattenObject(updates));
+		return super._processSubmitData(event, form, submitData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

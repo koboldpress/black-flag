@@ -1,19 +1,33 @@
+import Advancement from "../../documents/advancement/advancement.mjs";
 import AdvancementConfig from "./advancement-config.mjs";
 
 /**
  * Configuration application for spellcasting.
  */
 export default class SpellcastingConfig extends AdvancementConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "spellcasting"],
-			template: "systems/black-flag/templates/advancement/spellcasting-config.hbs",
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["spellcasting"],
+		actions: {
+			addScale: SpellcastingConfig.#onAddScale
+		},
+		position: {
 			width: 500
-		});
-	}
+		}
+	};
 
-	/* <><><><> <><><><> <><><><> <><><><> */
+	/** @override */
+	static PARTS = {
+		config: {
+			template: "systems/black-flag/templates/advancement/advancement-controls-section.hbs"
+		},
+		details: {
+			template: "systems/black-flag/templates/advancement/spellcasting-config-details.hbs"
+		},
+		learning: {
+			template: "systems/black-flag/templates/advancement/spellcasting-config-learning.hbs"
+		}
+	};
 
 	/**
 	 * Formulas that can be configured.
@@ -26,44 +40,58 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	});
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Formula editors that should currently be displayed.
-	 * @type {Set<string>}
-	 */
-	formulaEditors;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData(options) {
-		const context = super.getData(options);
-		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
+	async _preparePartContext(partId, context, options) {
+		await super._preparePartContext(partId, context, options);
+		context.showClassRestriction = false;
+		if (partId === "details") return await this._prepareDetailsContext(context, options);
+		if (partId === "learning") return await this._prepareLearningContext(context, options);
+		return context;
+	}
 
-		context.defaultAbility = game.i18n.format("BF.Default.Specific", {
-			default: game.i18n.localize("BF.Advancement.KeyAbility.Title").toLowerCase()
-		});
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the config section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareDetailsContext(context, options) {
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
 		context.displayType = Object.keys(CONFIG.BlackFlag.spellcastingTypes).length > 1;
 		context.progressionOptions = typeConfig?.progression;
+		context.slots = {
+			scaleValue: this.advancement.configuration.slots.scaleValue,
+			display: context.configuration.type === "pact"
+		};
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the scale section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareLearningContext(context, options) {
+		const typeConfig = CONFIG.BlackFlag.spellcastingTypes[context.configuration.type];
 		if (context.configuration.spells.mode) {
 			context.known = Object.entries(this.constructor.KNOWN).reduce((obj, [name, localization]) => {
 				const config = this.advancement.configuration[name];
 				obj[name] = {
 					...localization,
-					anchor: config.scaleValue?.toAnchor().outerHTML,
 					scaleValue: config.scaleValue
 				};
 				return obj;
 			}, {});
 			if (context.configuration.spells.mode !== "limited") delete context.known.spells;
 		}
-		context.slots = {
-			anchor: this.advancement.configuration.slots.scaleValue?.toAnchor().outerHTML,
-			scaleValue: this.advancement.configuration.slots.scaleValue,
-			display: context.configuration.type === "pact"
-		};
 
 		context.learningModes =
 			!typeConfig || typeConfig.learningModes === false
@@ -82,7 +110,6 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			);
 		else context.schoolLabel = game.i18n.localize("BF.Spellcasting.Learning.Schools.NoRestriction");
 
-		context.showClassRestriction = false;
 		return context;
 	}
 
@@ -90,41 +117,22 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		// Activate formula buttons
-		for (const element of html.querySelectorAll('[data-action="known"]')) {
-			element.addEventListener("click", this._onKnownAction.bind(this));
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
-	 * Handle known scale value actions.
-	 * @param {ClickEvent} event - Triggering click event.
+	 * Handle adding a spellcasting value.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - The originating click event.
+	 * @param {HTMLElement} target - The button that was clicked.
+	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
 	 */
-	async _onKnownAction(event) {
-		const { subAction } = event.currentTarget.dataset;
-		const name = event.target.closest("[data-name]").dataset.name;
-		switch (subAction) {
-			case "create":
-				if (this.advancement.configuration[name].scaleValue) return;
-				const title = game.i18n.localize(
-					name === "slots" ? "BF.Spellcasting.FIELDS.slots.label" : this.constructor.KNOWN[name].label
-				);
-				const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
-				const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
-				await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
-				scale.sheet.render(true);
-				break;
-			case "delete":
-				await this.advancement.configuration[name].scaleValue?.deleteDialog();
-				break;
-		}
-		this.render();
+	static async #onAddScale(event, target) {
+		const name = target.closest("[data-name]").dataset.name;
+		if (this.advancement.configuration[name].scaleValue) return;
+		const title = game.i18n.localize(
+			name === "slots" ? "BF.Spellcasting.FIELDS.slots.label" : this.constructor.KNOWN[name].label
+		);
+		const scaleData = { type: "spellcastingValue", title, identifier: `${name}-known` };
+		const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
+		await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
+		scale.sheet.render({ force: true });
 	}
 }

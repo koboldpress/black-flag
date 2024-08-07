@@ -1,5 +1,5 @@
 import { EquipmentEntryData } from "../../data/advancement/equipment-data.mjs";
-import AdvancementConfig from "./advancement-config-v2.mjs";
+import AdvancementConfig from "./advancement-config.mjs";
 
 /**
  * Configuration application for equipment.

@@ -1,0 +1,13 @@
+<fieldset>
+	<legend class="hinted-label" data-tooltip="BF.Advancement.Trait.Guaranteed.Hint">
+		{{ localize "BF.Advancement.Trait.Guaranteed.Label" }}
+	</legend>
+	<ul class="selected-index-list">
+		<li>
+			<label>
+				<input type="radio" name="selectedIndex" value="-1" {{ checked (eq selectedIndex -1) }}>
+				<span>{{ grants.label }}</span>
+			</label>
+		</li>
+	</ul>
+</fieldset>

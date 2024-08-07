@@ -13,6 +13,40 @@ export default class TraitConfig extends AdvancementConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["trait", "two-column"],
+		actions: {
+			addChoice: TraitConfig.#onAddChoice,
+			deleteChoice: TraitConfig.#onDeleteChoice
+		},
+		position: {
+			width: 650
+		}
+	};
+
+	/** @override */
+	static PARTS = {
+		config: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/trait-config-details.hbs"
+		},
+		guaranteed: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/trait-config-guaranteed.hbs"
+		},
+		choices: {
+			classes: ["left-column"],
+			template: "systems/black-flag/templates/advancement/trait-config-choices.hbs"
+		},
+		options: {
+			classes: ["right-column"],
+			template: "systems/black-flag/templates/advancement/trait-config-options.hbs"
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -53,59 +87,95 @@ export default class TraitConfig extends AdvancementConfig {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "advancement-config", "two-column", "trait"],
-			template: "systems/black-flag/templates/advancement/trait-config.hbs",
-			width: 650
-		});
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
+	async _preparePartContext(partId, context, options) {
+		await super._preparePartContext(partId, context, options);
 
-		context.grants = {
-			label: Trait.localizedList(this.config.grants) || "—",
-			data: this.config.grants,
-			selected: this.selected === -1
-		};
 		context.choices = this.config.choices.map((choice, index) => ({
 			label: Trait.choiceLabel(choice, { only: true }).capitalize() || "—",
 			data: choice,
 			selected: this.selected === index
 		}));
-		const chosen = this.selected === -1 ? context.grants.data : context.choices[this.selected].data.pool;
-		context.count = context.choices[this.selected]?.data.count;
+		context.grants = {
+			label: Trait.localizedList(this.config.grants) || "—",
+			data: this.config.grants,
+			selected: this.selected === -1
+		};
 		context.selectedIndex = this.selected;
 
-		// Build list of valid options based on current mode
-		context.validTraitTypes = Object.entries(CONFIG.BlackFlag.traits).reduce((obj, [key, config]) => {
-			if (this.config.mode === "default" || (config.type === "proficiency" && config.expertise))
-				obj[key] = config.labels.title;
-			return obj;
-		}, {});
+		if (partId === "config") return await this._prepareConfigContext(context, options);
+		if (partId === "guaranteed") return await this._prepareGuaranteedContext(context, options);
+		if (partId === "choices") return await this._prepareChoicesContext(context, options);
+		if (partId === "options") return await this._prepareOptionsContext(context, options);
+		return context;
+	}
 
-		// Get information on currently selected trait and build choices list
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the config section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareConfigContext(context, options) {
 		const traitConfig = CONFIG.BlackFlag.traits[this.advancement.bestGuessTrait()];
 		if (traitConfig) {
 			context.default.title = game.i18n.localize(traitConfig.labels.title);
 			context.default.icon = traitConfig.icon;
 		}
-		context.choiceOptions = Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
-		context.selectedTraitHeader = `${CONFIG.BlackFlag.traits[this.trait].labels.localization}[other]`;
-		context.selectedTrait = this.trait;
-
 		context.hintPlaceholder = Trait.localizedList(this.config.grants, this.config.choices, {
 			choiceMode: this.config.choiceMode
 		});
+		return context;
+	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the guaranteed section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareGuaranteedContext(context, options) {
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the choices section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareChoicesContext(context, options) {
+		context.count = context.choices[this.selected]?.data.count;
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the options section.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareOptionsContext(context, options) {
+		const chosen = this.selected === -1 ? context.grants.data : context.choices[this.selected].data.pool;
+		context.choiceOptions = Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
+		context.selectedTraitHeader = `${CONFIG.BlackFlag.traits[this.trait].labels.localization}[other]`;
+		context.selectedTrait = this.trait;
+		context.validTraitTypes = Object.entries(CONFIG.BlackFlag.traits).reduce((obj, [key, config]) => {
+			if (this.config.mode === "default" || (config.type === "proficiency" && config.expertise))
+				obj[key] = config.labels.title;
+			return obj;
+		}, {});
 		return context;
 	}
 
@@ -114,16 +184,11 @@ export default class TraitConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		for (const element of html.querySelectorAll("[data-action]")) {
-			element.addEventListener("click", this._onAction.bind(this));
-		}
+	_onRender(context, options) {
+		super._onRender(context, options);
 
 		// Handle selecting & disabling category children when a category is selected
-		for (const checkbox of html.querySelectorAll(".trait-options input:checked")) {
+		for (const checkbox of this.element.querySelectorAll(".trait-options input:checked")) {
 			const toCheck = checkbox.name.endsWith("*")
 				? checkbox.closest("ol").querySelectorAll(`input:not([name="${checkbox.name}"])`)
 				: checkbox.closest("li").querySelector("ol")?.querySelectorAll("input");
@@ -134,43 +199,49 @@ export default class TraitConfig extends AdvancementConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Handle clicks to the Add and Remove buttons above the list.
-	 * @param {Event} event - Triggering click event.
+	 * Handle adding a choice to the list.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - The originating click event.
+	 * @param {HTMLElement} target - The button that was clicked.
+	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
 	 */
-	async _onAction(event) {
-		event.preventDefault();
-		switch (event.currentTarget.dataset.action) {
-			case "add-choice":
-				this.config.choices.push({ count: 1 });
-				this.selected = this.config.choices.length - 1;
-				break;
-
-			case "remove-choice":
-				const input = event.currentTarget.closest("li").querySelector("[name='selectedIndex']");
-				const selectedIndex = Number(input.value);
-				this.config.choices.splice(selectedIndex, 1);
-				if (selectedIndex <= this.selected) this.selected -= 1;
-				break;
-
-			default:
-				return;
-		}
-
-		// Fix to prevent sets in grants & choice pools being saved as `[object Set]`
-		// TOOD: Remove this when https://github.com/foundryvtt/foundryvtt/issues/7706 is resolved
+	static async #onAddChoice(event, target) {
+		this.config.choices.push({ count: 1 });
+		this.selected = this.config.choices.length - 1;
 		this.config.grants = Array.from(this.advancement.configuration.grants);
 		this.config.choices.forEach(c => {
 			if (!c.pool) return;
 			c.pool = Array.from(c.pool);
 		});
+		await this.advancement.update({ configuration: this.config });
+	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle deleting a choice to the list.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - The originating click event.
+	 * @param {HTMLElement} target - The button that was clicked.
+	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
+	 */
+	static async #onDeleteChoice(event, target) {
+		const input = target.closest("li").querySelector("[name='selectedIndex']");
+		const selectedIndex = Number(input.value);
+		this.config.choices.splice(selectedIndex, 1);
+		if (selectedIndex <= this.selected) this.selected -= 1;
+		this.config.grants = Array.from(this.advancement.configuration.grants);
+		this.config.choices.forEach(c => {
+			if (!c.pool) return;
+			c.pool = Array.from(c.pool);
+		});
 		await this.advancement.update({ configuration: this.config });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async _onChangeInput(event) {
+	async _onChangeForm(formConfig, event) {
 		// Display new set of trait choices
 		if (event.target.name === "selectedTrait") {
 			this.trait = event.target.value;
@@ -195,7 +266,7 @@ export default class TraitConfig extends AdvancementConfig {
 			if (!validTraitTypes.includes(this.trait)) this.trait = validTraitTypes[0];
 		}
 
-		super._onChangeInput(event);
+		super._onChangeForm(formConfig, event);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

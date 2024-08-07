@@ -1,0 +1,51 @@
+<fieldset>
+	<legend>{{ localize "BF.Spellcasting.Details.Label" }}</legend>
+	<label>
+		<span>{{ localize "BF.Spellcasting.Source" }}</span>
+		<select name="configuration.source">
+			{{ selectOptions CONFIG.spellSources selected=configuration.source labelAttr="label" localize=true blank="" }}
+		</select>
+	</label>
+	<label>
+		<span>{{ localize "BF.Spellcasting.Ability.Label" }}</span>
+		<select name="configuration.ability">
+			{{ selectOptions CONFIG.abilities.localized selected=configuration.ability }}
+		</select>
+	</label>
+	{{#if displayType}}
+		<label>
+			<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.type.hint">
+				{{ localize "BF.Spellcasting.FIELDS.type.label" }}
+			</span>
+			<select name="configuration.type">
+				{{ selectOptions CONFIG.spellcastingTypes selected=configuration.type labelAttr="label" localize=true }}
+			</select>
+		</label>
+	{{/if}}
+	{{#if progressionOptions}}
+		<label>
+			<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.progression.hint">
+				{{ localize "BF.Spellcasting.FIELDS.progression.label" }}
+			</span>
+			<select name="configuration.progression">
+				{{ selectOptions progressionOptions selected=configuration.progression labelAttr="label" localize=true }}
+			</select>
+		</label>
+	{{/if}}
+	{{#if slots.display}}
+		<label data-name="slots">
+			<span class="hinted-label" data-tooltip="BF.Spellcasting.FIELDS.slots.hint">
+				{{ localize "BF.Spellcasting.FIELDS.slots.label" }}
+			</span>
+			{{#if slots.scaleValue}}
+				<!-- TODO: Figure out why this links aren't working -->
+				{{ blackFlag-linkForUUID slots.scaleValue.uuid }}
+			{{else}}
+				<button class="link-button" type="button" data-action="addScale">
+					<i class="fa-solid fa-plus" inert></i>
+					{{ localize "BF.Advancement.ScaleValue.Title" }}
+				</button>
+			{{/if}}
+		</label>
+	{{/if}}
+</fieldset>
