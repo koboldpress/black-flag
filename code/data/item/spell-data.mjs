@@ -16,14 +16,10 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes {ActivitiesTemplate}
  * @mixes {DescriptionTemplate}
  *
- * @property {object} description
- * @property {string} description.short - Short sentence used to describe the spell that will appear in spell lists.
- * @property {Set<string>} source - Source of magic that grants this spell (e.g. Arcane, Divine, Primordial, or Wyrd).
- * @property {string} school - Spell school.
+ * @property {ActivationField} casting - Information on casting this spell.
  * @property {object} circle
  * @property {number} circle.value - Effective spell circle.
  * @property {number} circle.base - Base circle for this spell before any upcasting.
- * @property {ActivationField} casting - Information on casting this spell.
  * @property {object} components
  * @property {Set<string>} components.required - Components required to cast the spell.
  * @property {object} components.material
@@ -31,9 +27,13 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {boolean} components.material.consumed - Are the material components consumed in casting?
  * @property {number} components.material.cost - Cost of the material components.
  * @property {string} components.material.denomination - Currency used to measure the material component cost.
+ * @property {object} description
+ * @property {string} description.short - Short sentence used to describe the spell that will appear in spell lists.
  * @property {DurationField} duration - How long the spell lasts.
  * @property {Set<string>} tags - Additional tags that describe the spell.
  * @property {RangeField} range - Range of the spell.
+ * @property {string} school - Spell school.
+ * @property {Set<string>} source - Source of magic that grants this spell (e.g. Arcane, Divine, Primordial, or Wyrd).
  * @property {TargetField} target - Targeting information.
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate) {
@@ -61,11 +61,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			description: new SchemaField({
-				short: new StringField({ label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint" })
-			}),
-			source: new SetField(new StringField(), { label: "BF.Spell.Source.Label" }),
-			school: new StringField({ label: "BF.Spell.School.Label" }),
+			casting: new ActivationField({}, { label: "BF.Spell.CastingTime.Label" }),
 			circle: new SchemaField(
 				{
 					value: new NumberField({ label: "BF.Spell.Circle.Effective.Label" }),
@@ -73,7 +69,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 				},
 				{ label: "BF.Spell.Circle.Label" }
 			),
-			casting: new ActivationField({}, { label: "BF.Spell.CastingTime.Label" }),
 			components: new SchemaField(
 				{
 					required: new SetField(new StringField()),
@@ -89,9 +84,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 				},
 				{ label: "BF.Spell.Component.Label" }
 			),
+			description: new SchemaField({
+				short: new StringField({ label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint" })
+			}),
 			duration: new DurationField(),
 			tags: new SetField(new StringField(), { label: "BF.Spell.Tag.Label" }),
 			range: new RangeField(),
+			school: new StringField({ label: "BF.Spell.School.Label" }),
+			source: new SetField(new StringField(), { label: "BF.Spell.Source.Label" }),
 			target: new TargetField()
 		});
 	}

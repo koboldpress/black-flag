@@ -432,7 +432,8 @@ export default class BaseActorSheet extends ActorSheet {
 				if (this.options.submitOnChange) return this._onSubmit(event, { updateData: { [attr]: path } });
 			},
 			top: this.position.top + 40,
-			left: this.position.left + 10
+			left: this.position.left + 10,
+			document: this.document
 		});
 		return fp.browse();
 	}
