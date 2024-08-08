@@ -16,20 +16,26 @@
             "denomination": 8,
             "bonus": "@mod",
             "custom": "",
-            "number": 2
+            "number": 2,
+            "scaling": {
+              "mode": "whole",
+              "formula": ""
+            }
           },
           "ability": ""
         },
         "activation": {
           "value": null,
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [
             {
-              "type": "item",
-              "value": "1"
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
             }
           ],
           "scale": {
@@ -38,9 +44,14 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": [],
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
           "min": "",
-          "max": "",
+          "max": "1",
           "consumeQuantity": false
         },
         "name": "",
@@ -50,17 +61,12 @@
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [
-        {
-          "period": "longRest",
-          "type": "recoverAll"
-        }
-      ],
+      "recovery": [],
       "min": "",
-      "max": "1"
+      "max": ""
     },
     "description": {
-      "value": "<p><em>You spend ten minutes beseeching for aid to be visited upon you and your living allies.</em></p><p>Up to six creatures of your choice that you can see within range each regain hit points equal to 2d8 + your spellcasting ability modifier. This spell has no effect on Undead or Constructs.</p><p>Once you cast this spell, you can’t do so again until you complete a long rest.</p><p>As you unlock higher rings, this ritual grows in potency. Once you have access to 3rd-ring spell slots or higher, the healing increases by 1d8 for each spell ring above 3rd.</p>",
+      "value": "<p>Up to six creatures of your choice that you can see within range each regain hit points equal to [[/healing]]{2d8 + your spellcasting ability modifier}. This spell has no effect on Constructs or Undead.</p><p>Once you cast this spell, you can’t do so again until you complete a long rest.</p><p><em>At Higher Circles.</em> As you unlock higher circles, this ritual grows in potency. Once you have access to 3rd-circle spell slots or higher, the healing increases by [[/healing 1d8]]{1d8} for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -101,12 +107,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "6"
+        "count": "6",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "30"
+      "value": "30",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -121,10 +129,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706997232407,
-    "modifiedTime": 1714413783498,
+    "modifiedTime": 1723094502496,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
