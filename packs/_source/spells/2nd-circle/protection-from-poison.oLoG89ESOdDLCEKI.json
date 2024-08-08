@@ -39,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You banish poison from a creature and guard them against further contamination.</em></p><p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saves against being poisoned, and it has resistance to poison damage.</p>",
+      "value": "<p>You touch a creature. If it is poisoned, you neutralize the poison. If more than one poison afflicts the target, you neutralize one poison that you know is present, or you neutralize one at random.</p><p>For the duration, the target has advantage on saves against being poisoned, and it has resistance to poison damage.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -92,10 +92,61 @@
     },
     "school": "abjuration",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.oLoG89ESOdDLCEKI",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Protection from Poison",
+      "img": "icons/consumables/potions/potion-jug-corked-skull-poison-brown-green.webp",
+      "_id": "3XrbHXLORmVzi2sF",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "poisoned",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        }
+      ],
+      "description": "<p>You have advantage on saves against being poisoned, and you have resistance to poison damage.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723158241592,
+        "modifiedTime": 1723158318028,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!oLoG89ESOdDLCEKI.3XrbHXLORmVzi2sF"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -106,7 +157,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935069036,
-    "modifiedTime": 1723094990959,
+    "modifiedTime": 1723158227696,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -5,7 +5,75 @@
   "_id": "8ig5G6FiHj3uZ8WA",
   "img": "icons/magic/unholy/strike-body-life-soul-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "8UZFBpcFOShPyJbv": {
+        "type": "savingThrow",
+        "_id": "8UZFBpcFOShPyJbv",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "psychic",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +82,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make a [[/save]] save. On a failed save, the target becomes frightened of you for the duration. At the end of each of the target’s turns before the spell ends, the target must succeed on a [[/save]] save or take [[/damage]] damage. On a successful save, the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, the damage increases by [[/damage 1d10 psychic]]{1d10} for each slot above 4th.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +98,10 @@
       "base": 4
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -38,11 +109,16 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -57,7 +133,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "illusion"
@@ -74,7 +152,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093107147,
-    "modifiedTime": 1723095300532,
+    "modifiedTime": 1723156056707,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!8ig5G6FiHj3uZ8WA"

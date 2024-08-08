@@ -5,7 +5,109 @@
   "_id": "9C1ZtrdSaiyWefRx",
   "img": "icons/commodities/metal/barstock-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "qYivQ8VgP5R6qW1X": {
+        "type": "utility",
+        "_id": "qYivQ8VgP5R6qW1X",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "xNTkSwHVpIC5sHlJ": {
+        "type": "attack",
+        "_id": "xNTkSwHVpIC5sHlJ",
+        "description": "",
+        "system": {
+          "type": {
+            "value": "melee",
+            "classification": ""
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
+          },
+          "damage": {
+            "includeBaseDamage": true,
+            "parts": []
+          },
+          "ability": ""
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "touch",
+          "value": "",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/attack.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +116,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms, such as the city of Fandeval in the Shadow Realm, and you appear in or near that destination. If you are trying to reach Fandeval, for example, you might arrive in the Old Market Square district at the heart of the city, on the road that leads to the Sleeper’s Gate entrance, or looking at the city from across the River Styx, at the GM’s discretion.</p><p>Alternatively, if you know the sigil sequence of a teleportation circle on another plane of existence, this spell can take you to that circle. If the teleportation circle is too small to hold all the creatures you transported, they appear in the closest unoccupied spaces next to the circle.</p><p>You can use this spell to banish an unwilling creature to another plane. Choose a creature within your reach and make a melee spell attack against it. On a hit, the creature must make a [[/save]] save. On a failure, the creature is transported to a random location on the plane of existence you specify. A creature so transported must find its own way back to your current plane of existence.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,11 +132,16 @@
       "base": 7
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
-        "cost": null,
-        "denomination": "gp"
+        "cost": 250,
+        "denomination": "gp",
+        "description": "a forked, metal rod worth at least 250 gp, attuned to a particular plane of existence"
       }
     },
     "duration": {
@@ -42,7 +149,8 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "touch",
+      "special": ""
     },
     "source": [
       "divine",
@@ -57,7 +165,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "8",
+        "special": ""
       }
     },
     "school": "conjuration"
@@ -74,7 +184,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093146673,
-    "modifiedTime": 1723095132758,
+    "modifiedTime": 1723156203828,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!9C1ZtrdSaiyWefRx"

@@ -5,7 +5,57 @@
   "_id": "gEXz9UBm2Jf9wgcy",
   "img": "icons/magic/life/heart-area-circle-red-green.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "pjAFcQbZeSR1OPcs": {
+        "type": "healing",
+        "_id": "pjAFcQbZeSR1OPcs",
+        "description": "",
+        "system": {
+          "healing": {
+            "type": "normal",
+            "number": null,
+            "denomination": null,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false
+            },
+            "scaling": {
+              "number": 1
+            }
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +64,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You utter a word of power that completely heals one creature you can see within range. The creature is restored to maximum hit points. In addition, any charmed, frightened, paralyzed, or stunned conditions affecting the target immediately end. This spell has no effect on Constructs or Undead.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +80,9 @@
       "base": 9
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +94,9 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "source": [
       "divine"
@@ -56,7 +110,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "enchantment"
@@ -73,7 +129,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093275113,
-    "modifiedTime": 1723095110510,
+    "modifiedTime": 1723156659282,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gEXz9UBm2Jf9wgcy"

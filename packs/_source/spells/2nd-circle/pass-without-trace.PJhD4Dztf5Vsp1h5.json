@@ -5,7 +5,44 @@
   "_id": "PJhD4Dztf5Vsp1h5",
   "img": "icons/magic/nature/wolf-paw-glow-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EjRuE46oj5TS4JFh": {
+        "type": "utility",
+        "_id": "EjRuE46oj5TS4JFh",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A veil of shadows and silence radiates from you, masking you and your companions from detection. For the duration, each creature you choose within 30 feet of you (including you) has a +10 bonus to DEX (Stealth) checks and can’t be tracked except by magical means. A creature that receives this bonus leaves behind no tracks or other traces of its passage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -38,11 +75,15 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "primordial"
@@ -52,16 +93,63 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "radius",
+        "size": "30"
       },
       "affects": {
-        "choice": false,
-        "type": ""
+        "choice": true,
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "abjuration"
   },
-  "effects": [],
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.spells.Item.PJhD4Dztf5Vsp1h5",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Pass Without Trace",
+      "img": "icons/magic/nature/wolf-paw-glow-orange.webp",
+      "_id": "M0ZwTRWpHFQdkYMT",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }, { \"k\": \"skill\", \"v\": \"stealth\" }], \"formula\": \"10\" }",
+          "priority": null
+        }
+      ],
+      "description": "<p>You have a +10 bonus to DEX (Stealth) checks and can’t be tracked except by magical means. You leave behind no tracks or other traces of your passage.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723155659319,
+        "modifiedTime": 1723155881956,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!PJhD4Dztf5Vsp1h5.M0ZwTRWpHFQdkYMT"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -73,7 +161,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723092965520,
-    "modifiedTime": 1723095263739,
+    "modifiedTime": 1723155653069,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PJhD4Dztf5Vsp1h5"

@@ -5,7 +5,44 @@
   "_id": "gw4HPRAAA7kN5eAo",
   "img": "icons/magic/light/beam-explosion-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "NEHanobxakNRKCnM": {
+        "type": "utility",
+        "_id": "NEHanobxakNRKCnM",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A shimmering, multicolored plane of light forms a vertical, opaque wall—up to 90 feet long, 30 feet high, and 1 inch thick—centered on a point you can see within range. Alternatively, you can shape the wall into a sphere up to 30 feet in diameter centered on a point you choose within range. The wall remains in place for the duration. If you position the wall so that it passes through a space occupied by a creature, the spell fails, and your action and the spell slot are wasted.</p><p>The wall sheds bright light to a range of 100 feet and dim light for an additional 100 feet. You and creatures you designate at the time you cast the spell can pass through and remain near the wall without harm. If another creature that can see the wall moves to within 20 feet of it or starts its turn there, the creature must succeed on a [[/save CON]] save or become blinded for 1 minute.</p><p>The wall consists of seven layers, each with a different color. When a creature attempts to reach into or pass through the wall, it does so one layer at a time through all the wall’s layers. As it passes or reaches through each layer, the creature must make a [[/save DEX]] save or be affected by that layer’s properties as described below.</p><p>The wall can be destroyed, also one layer at a time, in order from red to violet, by means specific to each layer. Once a layer is destroyed, it remains so for the duration of the spell. An antimagic field has no effect on the wall.</p><p><strong>Red.</strong> The creature takes [[/damage 10d6 fire]] damage on a failed save, or half as much damage on a successful one. While this layer is in place, nonmagical ranged attacks can’t pass through the wall. The layer can be destroyed by dealing at least 25 cold damage to it.</p><p><strong>Orange.</strong> The creature takes [[/damage 10d6 acid]] damage on a failed save, or half as much damage on a successful one. While this layer is in place, magical ranged attacks can’t pass through the wall. The layer is destroyed by a strong wind.</p><p><strong>Yellow.</strong> The creature takes [[/damage 10d6 lightning]] damage on a failed save, or half as much damage on a successful one. This layer can be destroyed by dealing at least 60 force damage to it.</p><p><strong>Green.</strong> The creature takes [[/damage 10d6 poison]] damage on a failed save, or half as much damage on a successful one. A passwall spell, or another spell of equal or greater circle that can open a portal on a solid surface, destroys this layer.</p><p><strong>Blue.</strong> The creature takes [[/damage 10d6 cold]] damage on a failed save, or half as much damage on a successful one. This layer can be destroyed by dealing at least 25 fire damage to it.</p><p><strong>Indigo.</strong> On a failed save, the creature is &amp;Reference[restrained]. It must then make a [[/save CON]] save at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the &amp;Reference[petrified] condition. The successes and failures don’t need to be consecutive; keep track of both until the creature collects three of a kind. While this layer is in place, spells can’t be cast through the wall. The layer is destroyed by bright light shed by a <em>daylight</em> spell or a similar spell of equal or higher circle.</p><p><strong>Violet.</strong> On a failed save, the creature is &amp;Reference[blinded]. It must then make a [[/save WIS]] save at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of the GM’s choosing and is no longer blinded. Typically, a creature that is on a plane that isn’t its home plane is banished home, while other creatures are usually cast into the Astral or Ethereal planes. This layer is destroyed by a <em>dispel magic</em> spell or a similar spell of equal or higher circle that can end spells and magical effects.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +67,10 @@
       "base": 9
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -38,11 +78,14 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "source": [
       "arcane"
@@ -52,11 +95,16 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "wall",
+        "size": "90",
+        "width": "1",
+        "height": "30"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "abjuration"
@@ -73,7 +121,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093409125,
-    "modifiedTime": 1723095187637,
+    "modifiedTime": 1723157514194,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gw4HPRAAA7kN5eAo"

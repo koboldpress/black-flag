@@ -5,7 +5,49 @@
   "_id": "pF9MBepyk3OBodBY",
   "img": "icons/magic/unholy/hand-light-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EOZSTEqyTJwhJ3Pg": {
+        "type": "damage",
+        "_id": "EOZSTEqyTJwhJ3Pg",
+        "description": "",
+        "system": {
+          "damage": {
+            "allowCritical": false,
+            "parts": []
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +56,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You utter a word of power that can compel one creature you can see within range to die instantly. If the creature you choose has 100 HP or fewer, it dies. Otherwise, the spell has no effect.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +72,9 @@
       "base": 9
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +86,9 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -58,7 +104,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "enchantment"
@@ -75,7 +123,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093243923,
-    "modifiedTime": 1723095104486,
+    "modifiedTime": 1723156634785,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!pF9MBepyk3OBodBY"

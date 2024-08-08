@@ -5,7 +5,59 @@
   "_id": "BRigkw99tKhQLQ1j",
   "img": "icons/magic/air/air-burst-spiral-pink.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "CW3Oq7qR6TCUt55U": {
+        "type": "savingThrow",
+        "_id": "CW3Oq7qR6TCUt55U",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +66,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dazed. If the target has 150 HP or fewer, it is stunned. Otherwise, the spell has no effect. The stunned target must make a [[/save]] save at the end of each of its turns, ending the effect on itself on a success.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +82,9 @@
       "base": 8
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +96,9 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -58,7 +114,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "enchantment"
@@ -75,7 +133,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093311512,
-    "modifiedTime": 1723095122829,
+    "modifiedTime": 1723156710936,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!BRigkw99tKhQLQ1j"

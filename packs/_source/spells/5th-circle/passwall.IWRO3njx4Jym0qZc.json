@@ -5,7 +5,44 @@
   "_id": "IWRO3njx4Jym0qZc",
   "img": "icons/commodities/materials/glass-orb.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "XNuWhK5CG0CsGHq5": {
+        "type": "utility",
+        "_id": "XNuWhK5CG0CsGHq5",
+        "description": "",
+        "system": {},
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A passage appears at a point of your choice that you can see on a wooden, plaster, or stone surface (such as a wall, a ceiling, or a floor) within range, and lasts for the duration. You choose the opening’s dimensions: up to 5 feet wide, 8 feet tall, and 20 feet deep. The passage creates no instability in a structure surrounding it.</p><p>When the opening disappears, any creatures or objects still in the passage created by the spell are safely ejected to an unoccupied space nearest to the surface on which you cast the spell.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +67,27 @@
       "base": 5
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a pinch of sesame seeds"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "30",
+      "special": ""
     },
     "source": [
       "arcane"
@@ -56,7 +101,8 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "a wooden, plaster, or stone surface (such as a wall, a ceiling, or a floor)"
       }
     },
     "school": "transmutation"
@@ -73,7 +119,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093009749,
-    "modifiedTime": 1723095217420,
+    "modifiedTime": 1723155957217,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!IWRO3njx4Jym0qZc"

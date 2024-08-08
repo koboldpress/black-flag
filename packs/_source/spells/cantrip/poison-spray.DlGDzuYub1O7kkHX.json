@@ -18,8 +18,16 @@
                 "number": 1,
                 "denomination": 12,
                 "bonus": "",
-                "custom": "",
-                "type": "poison"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "poison",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
@@ -29,7 +37,8 @@
         },
         "activation": {
           "type": "",
-          "condition": ""
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -56,7 +65,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You fling a spume of poison at a nearby target.</em></p><p>You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a CON save or take 1d12 poison damage.</p><p>This spell’s damage increases by 1d12 when you reach 5th level (2d12).</p>",
+      "value": "<p>You extend your hand toward a creature you can see within range and project a puff of noxious gas from your palm. The creature must succeed on a [[/save]] save or take [[/damage]] damage.</p><p>This spell’s damage increases by 1d12 when you reach 5th level ([[/damage 2d12 poison]]{2d12}), 11th level ([[/damage 3d12 poison]]{3d12}), and 17th level ([[/damage 4d12 poison]]{4d12}).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -109,7 +118,8 @@
     },
     "school": "conjuration",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
   "effects": [],
@@ -123,7 +133,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706934799186,
-    "modifiedTime": 1723094973405,
+    "modifiedTime": 1723156552485,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -5,7 +5,59 @@
   "_id": "iztHmI1LmOrGzgsf",
   "img": "icons/magic/light/beam-strike-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "PM18k011GTxjzYEG": {
+        "type": "savingThrow",
+        "_id": "PM18k011GTxjzYEG",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {},
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +66,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a [[/save DEX]] save. For each target, roll a [[/r d8]] to determine which color ray affects it.</p><p>@Embed[Compendium.black-flag.tables.RollTable.VnHKM0LcPzoKppNa inline rollable]</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +82,10 @@
       "base": 7
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +97,8 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "arcane"
@@ -52,11 +108,14 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "cone",
+        "size": "60"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "evocation"
@@ -73,7 +132,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723093353552,
-    "modifiedTime": 1723095202828,
+    "modifiedTime": 1723157208778,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!iztHmI1LmOrGzgsf"

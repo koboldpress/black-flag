@@ -6,14 +6,18 @@
   "img": "icons/magic/fire/flame-burning-yellow-orange.webp",
   "system": {
     "activities": {
-      "j70m98geb0c7vALt": {
+      "5hwsQqlhWVb5Qb81": {
         "type": "attack",
-        "_id": "j70m98geb0c7vALt",
+        "_id": "5hwsQqlhWVb5Qb81",
         "description": "",
         "system": {
           "type": {
-            "value": "ranged",
-            "classification": "spell"
+            "value": "melee",
+            "classification": ""
+          },
+          "attack": {
+            "flat": false,
+            "bonus": ""
           },
           "damage": {
             "includeBaseDamage": true,
@@ -22,19 +26,27 @@
                 "number": 1,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "fire"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
               }
             ]
           },
-          "ability": "none",
-          "attack": {
-            "flat": false
-          }
+          "ability": ""
         },
         "activation": {
-          "type": "action",
-          "condition": ""
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -42,12 +54,36 @@
             "allowed": false
           }
         },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "30",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": true
+        },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
           "min": "",
-          "max": "",
-          "consumeQuantity": false
+          "max": ""
         },
         "name": "",
         "img": "systems/black-flag/artwork/activities/attack.svg"
@@ -61,7 +97,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You conjure a ball of handheld flame, useful as both a light source and a weapon.</em></p><p>A flickering flame appears in your hand. It remains for the duration and harms neither you nor your equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p><p>You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 fire damage.</p><p>This spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).</p>",
+      "value": "<p>A flickering flame appears in your hand. It remains for the duration and harms neither you nor your equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again.</p><p>You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes [[/damage]] damage.</p><p>This spell’s damage increases by 1d8 when you reach 5th level ([[/damage 2d8 fire]]{2d8}), 11th level ([[/damage 3d8 fire]]{3d8}), and 17th level ([[/damage 4d8 fire]]{4d8}).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -76,7 +112,7 @@
     },
     "casting": {
       "value": null,
-      "type": "bonus",
+      "type": "action",
       "condition": ""
     },
     "components": {
@@ -103,14 +139,14 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
+        "type": "",
         "count": "",
         "special": ""
       }
     },
     "range": {
-      "units": "foot",
-      "value": "30",
+      "units": "self",
+      "value": "",
       "special": ""
     },
     "school": "conjuration",
@@ -129,7 +165,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706997864135,
-    "modifiedTime": 1723094975952,
+    "modifiedTime": 1723157697020,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

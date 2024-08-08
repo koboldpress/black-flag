@@ -1,14 +1,14 @@
 {
-  "folder": "V6ryz9MMBJLcGrft",
-  "name": "Plant Growth",
+  "folder": "QT2clUBmIk8w1YDH",
+  "name": "Project Image",
   "type": "spell",
-  "_id": "dhXAUGv93c7RYXJO",
-  "img": "icons/magic/nature/root-vine-leaves-green.webp",
+  "_id": "yzSu4Feaa7RjGXb5",
+  "img": "icons/magic/sonic/explosion-shock-wave-teal.webp",
   "system": {
     "activities": {
-      "RR8TMsPA0zrd1hcg": {
+      "E928fKXpJIYsd3jf": {
         "type": "utility",
-        "_id": "RR8TMsPA0zrd1hcg",
+        "_id": "E928fKXpJIYsd3jf",
         "description": "",
         "system": {},
         "activation": {
@@ -46,19 +46,19 @@
           "min": "",
           "max": ""
         },
-        "name": "Grow Plants",
+        "name": "Create Copy",
         "img": "systems/black-flag/artwork/activities/utility.svg"
       },
-      "XIwa6WrSvb1cQmE1": {
+      "JYk4Z4l9VQPMsBhx": {
         "type": "utility",
-        "_id": "XIwa6WrSvb1cQmE1",
-        "description": "",
+        "_id": "JYk4Z4l9VQPMsBhx",
+        "description": "<p>You can see through its eyes and hear through its ears as if you were in its space. On your turn as a bonus action, you can switch from using its senses to using your own, or back again. While you are using its senses, you are blinded and deafened in regard to your own surroundings.</p>",
         "system": {},
         "activation": {
-          "value": 8,
-          "type": "hour",
+          "value": null,
+          "type": "bonus",
           "condition": "",
-          "primary": true
+          "primary": false
         },
         "consumption": {
           "targets": [],
@@ -67,22 +67,19 @@
           }
         },
         "duration": {
-          "units": "year",
-          "override": true,
-          "value": "1"
+          "units": "instantaneous",
+          "override": false
         },
         "range": {
-          "units": "foot",
-          "value": "150",
+          "units": "self",
           "special": ""
         },
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "mile",
-            "type": "radius",
-            "size": ".5"
+            "units": "foot",
+            "type": ""
           },
           "affects": {
             "choice": false,
@@ -97,7 +94,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Enrich Land",
+        "name": "Shift Senses",
         "img": "systems/black-flag/artwork/activities/utility.svg"
       }
     },
@@ -109,11 +106,11 @@
       "max": ""
     },
     "description": {
-      "value": "<p>There are two possible uses for this spell, depending on its casting time, granting either immediate or long-term benefits.</p><p>If you cast this spell using 1 action, choose a point within range. All normal plants in a 100-foot radius centered on that point become thick and overgrown. A creature moving through the area must spend 4 feet of movement for every 1 foot it moves. You can exclude one or more areas of any size within the spell’s area from being affected.</p><p>If you cast this spell over 8 hours, you enrich the land. All plants in a half-mile radius centered on a point within range become enriched for 1 year. The plants yield twice the normal amount of food when harvested.</p>",
+      "value": "<p>You create an illusory copy of yourself that lasts for the duration. The copy can appear at any location within range that you have seen before, regardless of intervening obstacles. The illusion looks and sounds like you but is intangible. If the illusion takes any damage, it disappears, and the spell ends.</p><p>You can use your action to move this illusion up to twice your speed and make it gesture, speak, and behave in whatever way you choose. It mimics your mannerisms perfectly.</p><p>You can see through its eyes and hear through its ears as if you were in its space. On your turn as a bonus action, you can switch from using its senses to using your own, or back again. While you are using its senses, you are blinded and deafened in regard to your own surroundings.</p><p>Physical interaction with the image reveals it to be an illusion because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful [[/check INT (Investigation)]] check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and any noise it makes sounds hollow to the creature.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": "Plants slow movement or grow richly."
+      "short": "Perceive through illusion of you."
     },
     "casting": {
       "value": null,
@@ -122,48 +119,52 @@
     },
     "circle": {
       "value": null,
-      "base": 3
+      "base": 7
     },
     "components": {
       "required": [
         "verbal",
-        "somatic"
+        "somatic",
+        "material"
       ],
       "material": {
         "consumed": false,
-        "cost": null,
-        "denomination": "gp"
+        "cost": 5,
+        "denomination": "gp",
+        "description": "a small replica of you made from materials worth at least 5 gp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "day",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
       "units": "foot",
-      "value": "150",
+      "value": "500",
       "special": ""
     },
     "source": [
-      "primordial"
+      "arcane"
     ],
     "target": {
       "template": {
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": "radius",
-        "size": "100"
+        "type": ""
       },
       "affects": {
         "choice": false,
         "type": ""
       }
     },
-    "school": "transmutation"
+    "school": "illusion"
   },
   "effects": [],
-  "sort": 0,
+  "sort": 100000,
   "ownership": {
     "default": 0
   },
@@ -173,9 +174,9 @@
     "coreVersion": "12.330",
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
-    "createdTime": 1723093185031,
-    "modifiedTime": 1723156395542,
+    "createdTime": 1723093502806,
+    "modifiedTime": 1723158024382,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!dhXAUGv93c7RYXJO"
+  "_key": "!items!yzSu4Feaa7RjGXb5"
 }
