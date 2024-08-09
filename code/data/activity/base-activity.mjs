@@ -72,6 +72,21 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = [
+		"BF.ACTIVITY",
+		"BF.ACTIVATION",
+		"BF.CONSUMPTION",
+		"BF.DURATION",
+		"BF.RANGE",
+		"BF.TARGET",
+		"BF.USES"
+	];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static defineSchema() {
@@ -86,37 +101,24 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			}),
 			name: new StringField({ initial: undefined }),
 			img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
-			description: new HTMLField({ label: "BF.Activity.Core.Description.Label" }),
-			system: new TypeField({
-				modelLookup: type => this.metadata.dataModel ?? null
-			}),
+			description: new HTMLField(),
+			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
-				primary: new BooleanField({
-					required: false,
-					initial: undefined,
-					label: "BF.Activation.Primary.Label",
-					hint: "BF.Activation.Primary.Hint"
+				primary: new BooleanField({ required: false, initial: undefined })
+			}),
+			consumption: new SchemaField({
+				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
+				scale: new SchemaField({
+					allowed: new BooleanField(),
+					max: new FormulaField()
 				})
 			}),
-			consumption: new SchemaField(
-				{
-					targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
-					scale: new SchemaField({
-						allowed: new BooleanField({
-							label: "BF.Consumption.AllowScaling.Label",
-							hint: "BF.Consumption.AllowScaling.Hint"
-						}),
-						max: new FormulaField({ label: "BF.Consumption.MaxScaling.Label", hint: "BF.Consumption.MaxScaling.Hint" })
-					})
-				},
-				{ label: "BF.Consumption.Label" }
-			),
 			duration: new DurationField({
-				override: new BooleanField({ label: "BF.Duration.Override.Label" })
+				override: new BooleanField()
 			}),
 			range: new RangeField(),
 			target: new TargetField({
-				override: new BooleanField({ label: "BF.Target.Override.Label" })
+				override: new BooleanField()
 			}),
 			uses: new UsesField({ consumeQuantity: false })
 		};
@@ -199,8 +201,8 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			writable: false
 		});
 
-		prepareFinalValue("duration.value", "BF.Duration.Label");
-		prepareFinalValue("target.affects.count", "BF.Target.Label[other]");
+		prepareFinalValue("duration.value", "BF.DURATION.Label");
+		prepareFinalValue("target.affects.count", "BF.TARGET.Label[other]");
 		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
 		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
 		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");

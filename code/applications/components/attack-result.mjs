@@ -47,7 +47,7 @@ export default class AttackResultElement extends ChatTrayElement {
 			div.innerHTML = `
 				<label>
 					<i class="fa-solid fa-bullseye" inert></i>
-					<span>${game.i18n.localize("BF.Target.Label[other]")}</span>
+					<span>${game.i18n.localize("BF.TARGET.Label[other]")}</span>
 					<i class="fa-solid fa-caret-down" inert></i>
 				</label>
 				<div class="collapsible-content">

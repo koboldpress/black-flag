@@ -1,0 +1,42 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	<blackFlag-consumption name="consumption">
+		<fieldset>
+			<legend>{{ localize "BF.Consumption.Label" }}</legend>
+			<ul class="configuration-list">
+				{{#each activity.consumption.targets}}
+					<li data-index="{{ @index }}">
+						{{> "systems/black-flag/templates/activity/parts/activity-consumption-part.hbs" consumption=this
+						    prefix=(concat "$.targets." @index ".") scalingAllowed=@root.activity.consumption.scale.allowed }}
+					</li>
+				{{else}}
+					{{#unless editable}}
+						<li class="add-control">{{ localize "None" }}</li>
+					{{/unless}}
+				{{/each}}
+				{{#if editable}}
+					<li class="add-control">
+						<button type="button" class="link-button" data-action="add">
+							 <i class="fa-solid fa-plus" inert></i> {{ localize "BF.Consumption.Action.Add" }}
+						</button>
+					</li>
+				{{/if}}
+			</ul>
+			<label class="full-checkbox">
+				<span class="hinted-label" data-tooltip="BF.Consumption.AllowScaling.Hint">
+					{{ localize "BF.Consumption.AllowScaling.Label" }}
+				</span>
+				<input type="checkbox" name="$.scale.allowed" {{ checked activity.consumption.scale.allowed }}>
+			</label>
+			{{#if activity.consumption.scale.allowed}}
+				<label>
+					<span class="hinted-label" data-tooltip="BF.Consumption.MaxScaling.Hint">
+						{{ localize "BF.Consumption.MaxScaling.Label" }}
+					</span>
+					<input type="text" name="$.scale.max" value="{{ activity.consumption.scale.max }}" placeholder="∞">
+				</label>
+			{{/if}}
+		</fieldset>
+	</blackFlag-consumption>
+
+	{{> "systems/black-flag/templates/shared/uses-config.hbs" name="uses" source=source.uses derived=activity.uses }}
+</section>

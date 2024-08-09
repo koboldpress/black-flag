@@ -35,14 +35,16 @@ export default class SpellSheet extends BaseItemSheet {
 			return obj;
 		}, {});
 
+		context.data = {
+			range: context.source.range,
+			target: context.source.target
+		};
 		context.activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.system.casting.type });
 		context.durationOptions = CONFIG.BlackFlag.durationOptions({
 			chosen: context.system.duration.units,
 			isSpell: true
 		});
-		context.range = { data: context.source.range };
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
-		context.target = { data: context.source.target };
 
 		return context;
 	}

@@ -1,0 +1,6 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	{{> "templates/generic/tab-navigation.hbs" tabs=tabs.activation.tabs }}
+	{{> "systems/black-flag/templates/activity/parts/activity-time.hbs" tab=tabs.activation.tabs.time }}
+	{{> "systems/black-flag/templates/activity/parts/activity-consumption.hbs" tab=tabs.activation.tabs.consumption }}
+	{{> "systems/black-flag/templates/activity/parts/activity-targeting.hbs" tab=tabs.activation.tabs.targeting }}
+</section>

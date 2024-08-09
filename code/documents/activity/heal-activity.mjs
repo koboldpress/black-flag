@@ -2,7 +2,7 @@ import { HealingData } from "../../data/activity/healing-data.mjs";
 import { buildRoll, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
-export default class HealingActivity extends Activity {
+export default class HealActivity extends Activity {
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -10,8 +10,8 @@ export default class HealingActivity extends Activity {
 				type: "healing",
 				dataModel: HealingData,
 				icon: "systems/black-flag/artwork/activities/healing.svg",
-				title: "BF.Activity.Healing.Title",
-				hint: "BF.Activity.Healing.Hint"
+				title: "BF.HEAL.Title",
+				hint: "BF.HEAL.Hint"
 			},
 			{ inplace: false }
 		)
@@ -70,7 +70,7 @@ export default class HealingActivity extends Activity {
 		if (this.system.healing.formula)
 			context.buttons = {
 				damage: {
-					label: game.i18n.localize("BF.Healing.Label"),
+					label: game.i18n.localize("BF.HEAL.Title"),
 					dataset: { action: "roll", method: "rollHealing" }
 				}
 			};

@@ -116,7 +116,7 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			data.show.resourceConsumption;
 
 		context.content = await renderTemplate(
-			"systems/black-flag/templates/activities/activity-activation-dialog.hbs",
+			"systems/black-flag/templates/activity/activity-activation-dialog.hbs",
 			data
 		);
 

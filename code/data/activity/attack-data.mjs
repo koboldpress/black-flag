@@ -20,30 +20,32 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  */
 export class AttackData extends foundry.abstract.DataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.ATTACK", "BF.DAMAGE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
 			type: new SchemaField({
-				value: new StringField({ label: "BF.Weapon.Type.Label" }),
-				classification: new StringField({ label: "BF.Attack.Classification.Label" })
+				value: new StringField(),
+				classification: new StringField()
 			}),
 			ability: new StringField(),
 			attack: new SchemaField({
-				bonus: new FormulaField({ label: "BF.Activity.Attack.Bonus.Label" }),
-				flat: new BooleanField({ label: "BF.Activity.Attack.Flat.Label", hint: "BF.Activity.Attack.Flat.Hint" })
+				bonus: new FormulaField(),
+				flat: new BooleanField()
 			}),
-			damage: new SchemaField(
-				{
-					includeBaseDamage: new BooleanField({
-						initial: true,
-						label: "BF.Activity.Attack.IncludeBaseDamage.Label",
-						hint: "BF.Activity.Attack.IncludeBaseDamage.Hint"
-					}),
-					parts: new ArrayField(new DamageField())
-					// TODO: Add conditions support to damage parts
-				},
-				{ label: "BF.Damage.Label" }
-			)
+			damage: new SchemaField({
+				includeBaseDamage: new BooleanField({ initial: true }),
+				parts: new ArrayField(new DamageField())
+				// TODO: Add conditions support to damage parts
+			})
 		};
 	}
 

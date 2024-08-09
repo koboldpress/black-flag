@@ -74,13 +74,13 @@
 					{{/if}}
 					{{#if (or (eq source.type.value "ranged") properties.thrown.selected)}}
 						<div class="range field-group">
-							<span>{{ localize "BF.Range.Label" }}</span>
+							<span>{{ localize "BF.RANGE.Label" }}</span>
 							<label>
-								<span>{{ localize "BF.Range.Short.Label" }}</span>
+								<span>{{ localize "BF.RANGE.FIELDS.range.short.label" }}</span>
 								<input type="number" name="system.range.short" step=0.1 min=0 value="{{ source.range.short }}">
 							</label>
 							<label>
-								<span>{{ localize "BF.Range.Long.Label" }}</span>
+								<span>{{ localize "BF.RANGE.FIELDS.range.long.label" }}</span>
 								<input type="number" name="system.range.long" step=0.1 min=0 value="{{ source.range.long }}">
 							</label>
 							{{!-- TODO: Range units, only if reach isn't also displayed --}}

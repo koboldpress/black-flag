@@ -16,13 +16,13 @@ const { SchemaField, StringField } = foundry.data.fields;
 export default class DurationField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
-			value: new FormulaField({ deterministic: true, label: "BF.Duration.Value.Label" }),
-			units: new StringField({ initial: "instantaneous", label: "BF.Duration.Type.Label" }),
-			special: new StringField({ label: "BF.Duration.Special" }),
+			value: new FormulaField({ deterministic: true }),
+			units: new StringField({ initial: "instantaneous" }),
+			special: new StringField(),
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, { label: "BF.Duration.Label", ...options });
+		super(fields, options);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

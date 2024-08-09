@@ -7,7 +7,7 @@ import * as documents from "../documents/activity/_module.mjs";
  * @typedef {object} ActivityTypeConfig
  * @property {typeof Activity} documentClass - Main document class that defines activity's behavior.
  * @property {object} sheetClasses
- * @property {typeof ActivityConfig} sheetClasses.config - Configuration sheet.
+ * @property {typeof ActivitySheet} sheetClasses.config - Configuration sheet.
  */
 
 /**
@@ -18,35 +18,38 @@ export const _activityTypes = {
 	base: {
 		documentClass: documents.Activity,
 		sheetClasses: {
-			config: applications.ActivityConfig
+			config: applications.ActivitySheet
 		}
 	},
 	attack: {
 		documentClass: documents.AttackActivity,
 		sheetClasses: {
-			config: applications.AttackConfig
+			config: applications.AttackSheet
 		}
 	},
 	damage: {
 		documentClass: documents.DamageActivity,
 		sheetClasses: {
-			config: applications.DamageConfig
+			config: applications.DamageSheet
 		}
 	},
 	healing: {
-		documentClass: documents.HealingActivity,
+		documentClass: documents.HealActivity,
 		sheetClasses: {
-			config: applications.HealingConfig
+			config: applications.HealSheet
 		}
 	},
 	savingThrow: {
-		documentClass: documents.SavingThrowActivity,
+		documentClass: documents.SaveActivity,
 		sheetClasses: {
-			config: applications.SavingThrowConfig
+			config: applications.SaveSheet
 		}
 	},
 	utility: {
-		documentClass: documents.UtilityActivity
+		documentClass: documents.UtilityActivity,
+		sheetClasses: {
+			config: applications.UtilitySheet
+		}
 	}
 };
 

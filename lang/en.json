@@ -106,38 +106,37 @@
 	}
 },
 
-"BF.Activation": {
+"BF.ACTIVATION": {
 	"Label": "Activation",
-	"Category": {
-		"Monster": {
-			"Label": "Monster Actions"
-		},
-		"Rest": {
-			"Label": "Resting"
-		},
-		"Standard": {
-			"Label": "Standard Actions"
+	"FIELDS": {
+		"activation": {
+			"label": "Activation",
+			"condition": {
+				"label": "Activation Condition"
+			},
+			"primary": {
+				"label": "Primary Activation",
+				"hint": "Is this activity part of the casting of the spell, or a subsequent action that can be taken. Only primary actions will consume a spell slot when used."
+			},
+			"type": {
+				"label": "Activation Type"
+			},
+			"value": {
+				"label": "Activation Cost"
+			}
 		}
 	},
-	"Condition": {
-		"Label": "Activation Condition"
-	},
-	"Cost": {
-		"Label": "Activation Cost"
+	"Category": {
+		"Monster": "Monster Actions",
+		"Rest": "Resting",
+		"Standard": "Standard Actions"
 	},
 	"Formatted": {
 		"Condition": "{activation}, {condition}",
 		"Scalar": "{number} {typeLowercase}"
 	},
-	"Primary": {
-		"Label": "Primary Activation",
-		"Hint": "Is this activity part of the casting of the spell, or a subsequent action that can be taken. Only primary actions will consume a spell slot when used."
-	},
-	"Time": {
-		"Label": "Activation Time"
-	},
+	"Time": "Activation Time",
 	"Type": {
-		"Label": "Activation Type",
 		"Action[one]": "Action",
 		"Action[other]": "Actions",
 		"BonusAction[one]": "Bonus Action",
@@ -160,25 +159,35 @@
 	}
 },
 
+"BF.ACTIVITY": {
+	"Label[one]": "Activity",
+	"Label[other]": "Activities",
+	"FIELDS": {
+		"description": {
+			"label": "Description"
+		},
+		"img": {
+			"label": "Activity Icon"
+		},
+		"name": {
+			"label": "Activity Name"
+		}
+	},
+	"SECTION": {
+		"Activation": "Activation",
+		"Consumption": "Consumption",
+		"Effect": "Effect",
+		"Identity": "Identity",
+		"Target": "Target",
+		"Time": "Time"
+	}
+},
+
 "BF.Activity": {
 	"Label[one]": "Activity",
 	"Label[other]": "Activities",
 	"Activation": {
 		"Title": "Activation Configuration"
-	},
-	"Attack": {
-		"Title": "Attack",
-		"Hint": "Make an attack and roll damage.",
-		"Bonus": {
-			"Label": "Attack Bonus"
-		},
-		"Flat": {
-			"Label": "Flat",
-			"Hint": "Don’t add ability or proficiency to attack roll."
-		},
-		"Section": {
-			"Details": "Attack Details"
-		}
 	},
 	"Core": {
 		"Action": {
@@ -191,41 +200,12 @@
 			"Use": "Use",
 			"View": "View Activity"
 		},
-		"Description": {
-			"Label": "Description"
-		},
 		"Warning": {
 			"NoTargets": "You must have one or more tokens controlled or an assigned character."
 		}
 	},
 	"Config": {
 		"Title": "Configure {item} Activity"
-	},
-	"Damage": {
-		"Title": "Damage",
-		"Hint": "Impose damage directly.",
-		"Action": {
-			"Add": "Add Damage Type",
-			"Delete": "Delete Damage Type"
-		},
-		"AllowCritical" :{
-			"Label": "Allow Critical"
-		},
-		"IncludeBaseDamage": {
-			"Label": "Include Base Damage",
-			"Hint": "Include the weapon's base damage along with any additional damage parts defined in the activity."
-		}
-	},
-	"Healing": {
-		"Title": "Healing",
-		"Hint": "Provide some healing."
-	},
-	"SavingThrow": {
-		"Title": "Saving Throw",
-		"Hint": "Force a saving throw and roll damage.",
-		"Challenge": "Challenge",
-		"OpposedAbility.Label": "Opposed Ability",
-		"Versus": "vs."
 	},
 	"Selection": {
 		"Title": "Select Activity",
@@ -803,10 +783,34 @@
 	}
 },
 
-"BF.Attack": {
+"BF.ATTACK": {
 	"Label": "Attack",
-	"Classification": {
-		"Label": "Classification"
+	"Hint": "Make an attack and roll damage.",
+	"FIELDS": {
+		"ability": {
+			"label": "Attack Ability"
+		},
+		"attack": {
+			"label": "Attack Details",
+			"bonus": {
+				"label": "Attack Bonus"
+			},
+			"flat": {
+				"label": "Flat",
+				"hint": "Don’t add ability or proficiency to attack roll."
+			}
+		},
+		"damage": {
+			"label": "Attack Damage"
+		},
+		"type": {
+			"classification": {
+				"label": "Attack Classification"
+			},
+			"value": {
+				"label": "Attack Type"
+			}
+		}
 	}
 },
 
@@ -1150,8 +1154,28 @@
 	"Display": "{value} {denomination}"
 },
 
+"BF.DAMAGE": {
+	"Title": "Damage",
+	"Hint": "Impose damage directly.",
+	"FIELDS": {
+		"damage": {
+			"label": "Damage",
+			"allowCritical": {
+				"label": "Allow Critical"
+			},
+			"includeBaseDamage": {
+				"label": "Include Base Damage",
+				"hint": "Include the weapon's base damage along with any additional damage parts defined in the activity."
+			}
+		}
+	},
+	"Action": {
+		"Add": "Add Damage Type",
+		"Delete": "Delete Damage Type"
+	}
+},
+
 "BF.Damage": {
-	"Label": "Damage",
 	"AdditionalTypes": {
 		"Label": "Damage Types",
 		"Hint": "Damage types that can be chosen when rolling damage."
@@ -1265,18 +1289,6 @@
 	}
 },
 
-"BF.DifficultyClass": {
-	"Label": "Difficulty Class",
-	"Abbreviation": "DC",
-	"Ability": {
-		"Label": "DC Ability"
-	},
-	"Formula": {
-		"Label": "DC Formula",
-		"Default": "8 + Ability + Proficiency"
-	}
-},
-
 "BF.Distance": {
 	"Label": "Distance",
 	"Unit": {
@@ -1294,27 +1306,35 @@
 	}
 },
 
-"BF.Duration": {
+"BF.DURATION": {
 	"Label": "Duration",
-	"Instantaneous": "Instantaneous",
-	"Override": {
-		"Label": "Override Duration"
-	},
-	"Permanent": "Permanent",
-	"Special": "Special Duration",
-	"Type": {
-		"Label": "Duration Type",
-		"Permanent": {
-			"Label": "Permanent"
-		},
-		"Special": {
-			"Label": "Special"
+	"FIELDS": {
+		"duration": {
+			"override": {
+				"label": "Override Duration"
+			},
+			"special": {
+				"label": "Special Duration"
+			},
+			"units": {
+				"label": "Duration Type"
+			},
+			"value": {
+				"label": "Duration Value"
+			}
 		}
 	},
-	"UntilDispelled": "Until Dispelled",
-	"UntilDispelledTriggered": "Until Dispelled or Triggered",
+	"Type": {
+		"Label": "Duration Type",
+		"Permanent": "Permanent",
+		"Special": "Special"
+	},
 	"Value": {
-		"Label": "Duration Value"
+		"Instantaneous": "Instantaneous",
+		"Permanent": "Permanent",
+		"Special": "Special",
+		"UntilDispelled": "Until Dispelled",
+		"UntilDispelledTriggered": "Until Dispelled or Triggered"
 	}
 },
 
@@ -1523,6 +1543,16 @@
 },
 
 "BF.Global": "Global",
+
+"BF.HEAL": {
+	"Title": "Heal",
+	"Hint": "Provide some healing.",
+	"FIELDS": {
+		"healing": {
+			"label": "Healing"
+		}
+	}
+},
 
 "BF.Healing": {
 	"Label": "Healing",
@@ -2206,16 +2236,30 @@
 	}
 },
 
-"BF.Range": {
+"BF.RANGE": {
 	"Label": "Range",
-	"Long": {
-		"Label": "Long"
-	},
-	"Short": {
-		"Label": "Short"
-	},
-	"Special": {
-		"Label": "Special Range"
+	"FIELDS": {
+		"range": {
+			"label": "Range",
+			"long": {
+				"label": "Long"
+			},
+			"reach": {
+				"label": "Reach"
+			},
+			"short": {
+				"label": "Short"
+			},
+			"special": {
+				"label": "Special Range"
+			},
+			"units": {
+				"label": "Range Type"
+			},
+			"value": {
+				"label": "Range Value"
+			}
+		}
 	},
 	"Type": {
 		"Any": {
@@ -2233,12 +2277,6 @@
 		"Touch": {
 			"Label": "Touch"
 		}
-	},
-	"Unit": {
-		"Label": "Range Units"
-	},
-	"Value": {
-		"Label": "Range Value"
 	}
 },
 
@@ -2395,6 +2433,31 @@
 		"Label": "Rule Type",
 		"Rule": "Rule"
 	}
+},
+
+"BF.SAVE": {
+	"Title": "Save",
+	"Hint": "Force a saving throw and roll damage.",
+	"FIELDS": {
+		"ability": {
+			"label": "Opposed Ability"
+		},
+		"dc": {
+			"label": "Difficulty Class",
+			"ability": {
+				"label": "DC Calculation"
+			},
+			"formula": {
+				"label": "DC Formula",
+				"Default": "8 + @mod + @prof"
+			}
+		},
+		"damage": {
+			"label": "Save Damage"
+		}
+	},
+	"Challenge": "Challenge",
+	"Versus": "vs."
 },
 
 "BF.SavingThrow": {
@@ -2946,9 +3009,66 @@
 	"Details": "Talent Details"
 },
 
-"BF.Target": {
+"BF.TARGET": {
 	"Label[one]": "Target",
 	"Label[other]": "Targets",
+	"FIELDS": {
+		"target": {
+			"affects": {
+				"label": "Affected Targets",
+				"choice": {
+					"label": "Choose Targets",
+					"hint": "Can the user choose which of the targets in the area they affect?"
+				},
+				"count": {
+					"label": "Target Count",
+					"hint": "Number of individual targets that can be affected."
+				},
+				"special": {
+					"label": "Special Targeting",
+					"hint": "Description of any special targeting details."
+				},
+				"type": {
+					"label": "Target Type",
+					"hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
+				}
+			},
+			"override": {
+				"label": "Override Targeting"
+			},
+			"template": {
+				"label": "Area of Effect",
+				"contiguous": {
+					"label": "Contiguous Areas",
+					"hint": "Must all created areas be connected to one another?"
+				},
+				"count": {
+					"label": "Area Count",
+					"hint": "Number of distinct areas that can be targeted."
+				},
+				"height": {
+					"label": "Area Height",
+					"hint": "Height of a cylinder affected if applicable."
+				},
+				"size": {
+					"label": "Area Size",
+					"hint": "Size of the area of effect on its primary axis."
+				},
+				"type": {
+					"label": "Area Type",
+					"hint": "Type of area of effect targeted."
+				},
+				"units": {
+					"label": "Area Units",
+					"hint": "Units used to measure the area of effect sizes."
+				},
+				"width": {
+					"label": "Area Width",
+					"hint": "Width of a line affected if applicable."
+				}
+			}
+		}
+	},
 	"Choice": "{number} of your choice",
 	"Count": {
 		"Label": "Target Count",
@@ -2957,9 +3077,6 @@
 		"Counted": "{number} {typeLowercase}",
 		"EveryGeneric": "Every",
 		"EverySpecific": "Every {typeLowercase}"
-	},
-	"Override": {
-		"Label": "Override Targeting"
 	},
 	"Type": {
 		"Label": "Target Type",
@@ -2993,61 +3110,6 @@
 		"WillingCreature": {
 			"Label[one]": "Willing Creature",
 			"Label[other]": "Willing Creatures"
-		}
-	}
-},
-
-"BF.TARGET": {
-	"FIELDS": {
-		"affects": {
-			"label": "Affected Targets",
-			"choice": {
-				"label": "Choose Targets",
-				"hint": "Can the user choose which of the targets in the area they affect?"
-			},
-			"count": {
-				"label": "Target Count",
-				"hint": "Number of individual targets that can be affected."
-			},
-			"special": {
-				"label": "Special Targeting",
-				"hint": "Description of any special targeting details."
-			},
-			"type": {
-				"label": "Target Type",
-				"hint": "Type of targets that can be affected (e.g. creatures, objects, spaces)."
-			}
-		},
-		"template": {
-			"label": "Area of Effect",
-			"contiguous": {
-				"label": "Contiguous Areas",
-				"hint": "Must all created areas be connected to one another?"
-			},
-			"count": {
-				"label": "Area Count",
-				"hint": "Number of distinct areas that can be targeted."
-			},
-			"height": {
-				"label": "Area Height",
-				"hint": "Height of a cylinder affected if applicable."
-			},
-			"size": {
-				"label": "Area Size",
-				"hint": "Size of the area of effect on its primary axis."
-			},
-			"type": {
-				"label": "Area Type",
-				"hint": "Type of area of effect targeted."
-			},
-			"units": {
-				"label": "Area Units",
-				"hint": "Units used to measure the area of effect sizes."
-			},
-			"width": {
-				"label": "Area Width",
-				"hint": "Width of a line affected if applicable."
-			}
 		}
 	}
 },

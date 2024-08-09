@@ -22,7 +22,7 @@ export default class RangeField extends SchemaField {
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, { label: "BF.Range.Label", ...options });
+		super(fields, { label: "BF.RANGE.Label", ...options });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

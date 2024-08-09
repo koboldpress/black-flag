@@ -122,7 +122,7 @@ export default class BaseActorSheet extends ActorSheet {
 			obj[key] = { label, activities: [] };
 			return obj;
 		}, {});
-		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), activities: [] };
+		context.actions.other = { label: game.i18n.localize("BF.ACTIVATION.Type.Other"), activities: [] };
 		for (const item of this.actor.items) {
 			if (!item.system.displayActions) continue;
 			for (const activity of item.system.actions?.() ?? []) {

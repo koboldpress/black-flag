@@ -1,0 +1,9 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	{{#if activity.target.canOverride}}
+		{{ formField fields.target.fields.override value=activity.target.override }}
+	{{/if}}
+
+	{{> "systems/black-flag/templates/shared/parts/activity-range.hbs" range=activity.range }}
+	{{> "systems/black-flag/templates/shared/parts/activity-affects.hbs" target=activity.target }}
+	{{> "systems/black-flag/templates/shared/parts/activity-template.hbs" target=activity.target }}
+</section>

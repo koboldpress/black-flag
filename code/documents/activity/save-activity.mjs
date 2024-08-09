@@ -2,7 +2,7 @@ import { SavingThrowData } from "../../data/activity/saving-throw-data.mjs";
 import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
-export default class SavingThrowActivity extends DamageActivity {
+export default class SaveActivity extends DamageActivity {
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -10,8 +10,8 @@ export default class SavingThrowActivity extends DamageActivity {
 				type: "savingThrow",
 				dataModel: SavingThrowData,
 				icon: "systems/black-flag/artwork/activities/saving-throw.svg",
-				title: "BF.Activity.SavingThrow.Title",
-				hint: "BF.Activity.SavingThrow.Hint"
+				title: "BF.SAVE.Title",
+				hint: "BF.SAVE.Hint"
 			},
 			{ inplace: false }
 		)

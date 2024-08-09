@@ -79,15 +79,12 @@ export default class WeaponData extends ItemDataModel.mixin(
 				label: "BF.Weapon.MagicalBonus.Label",
 				hint: "BF.Weapon.MagicalBonus.Hint"
 			}),
-			range: new SchemaField(
-				{
-					short: new NumberField({ min: 0, step: 0.1, label: "BF.Range.Short.Label" }),
-					long: new NumberField({ min: 0, step: 0.1, label: "BF.Range.Long.Label" }),
-					reach: new NumberField({ min: 0, step: 0.1, label: "BF.Reach.Label" }),
-					units: new StringField()
-				},
-				{ label: "BF.Range.Label" }
-			)
+			range: new SchemaField({
+				short: new NumberField({ min: 0, step: 0.1 }),
+				long: new NumberField({ min: 0, step: 0.1 }),
+				reach: new NumberField({ min: 0, step: 0.1 }),
+				units: new StringField()
+			})
 
 			// Attack ability override
 			// Damage ability override

@@ -1,0 +1,31 @@
+<fieldset {{ disabled disabled.target }}>
+	<legend>{{ localize "BF.RANGE.FIELDS.range.label" }}</legend>
+	<div class="range field-group">
+		<span>{{ localize "BF.RANGE.Label" }}</span>
+		{{#if range.scalar}}
+			<label>
+				<span>{{ localize "BF.RANGE.FIELDS.range.value.label" }}</span>
+				<input type="text" name="{{ prefix }}range.value" value="{{ data.range.value }}">
+			</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.RANGE.FIELDS.range.units.label" }}</span>
+			<select name="{{ prefix }}range.units">
+				{{#select data.range.units}}
+					<option value=""></option>
+					<hr>
+					{{ selectOptions CONFIG.rangeTypes labelAttr="label" localize=true }}
+					<optgroup label="{{ localize 'BF.Distance.Label' }}">
+						{{ selectOptions CONFIG.distanceUnits.localized }}
+					</optgroup>
+				{{/select}}
+			</select>
+		</label>
+	</div>
+	{{#if range.units}}
+		<label>
+			<span>{{ localize "BF.RANGE.FIELDS.range.special.label" }}</span>
+			<input type="text" name="{{ prefix }}range.special" value="{{ data.range.special }}">
+		</label>
+	{{/if}}
+</fieldset>

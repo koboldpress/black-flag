@@ -11,8 +11,8 @@ export default class AttackActivity extends DamageActivity {
 				type: "attack",
 				dataModel: AttackData,
 				icon: "systems/black-flag/artwork/activities/attack.svg",
-				title: "BF.Activity.Attack.Title",
-				hint: "BF.Activity.Attack.Hint"
+				title: "BF.ATTACK.Label",
+				hint: "BF.ATTACK.Hint"
 			},
 			{ inplace: false }
 		)

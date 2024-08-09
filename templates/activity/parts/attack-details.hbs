@@ -1,0 +1,31 @@
+<fieldset>
+	<legend>{{ localize "BF.ATTACK.Label" }}</legend>
+	<label>
+		<span>{{ localize "BF.ATTACK.FIELDS.ability.label" }}</span>
+		<select name="system.ability">
+			{{#select source.system.ability}}
+				{{#if labels.defaultAbility}}
+					<option value="">{{ labels.defaultAbility }}</option>
+					<hr>
+				{{/if}}
+				<option value="none">{{ localize "None" }}</option>
+				<optgroup label="{{ localize 'BF.Ability.Label[other]' }}">
+					{{ selectOptions CONFIG.abilities.localized }}
+				</optgroup>
+			{{/select}}
+		</select>
+	</label>
+	<div class="field-group">
+		<span>{{ localize "BF.ATTACK.FIELDS.attack.bonus.label" }}</span>
+		<label>
+			<span>{{ localize "BF.Formula.Label" }}</span>
+			<input type="text" name="system.attack.bonus" value="{{ source.system.attack.bonus }}">
+		</label>
+		<label>
+			<span class="hinted-label" data-tooltip="BF.ATTACK.FIELDS.attack.flat.hint">
+				{{ localize "BF.ATTACK.FIELDS.attack.flat.label" }}
+			</span>
+			<input type="checkbox" name="system.attack.flat" {{ checked source.system.attack.flat }}>
+		</label>
+	</div>
+</fieldset>

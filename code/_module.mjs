@@ -83,6 +83,10 @@ Hooks.once("setup", function () {
 		.forEach(p => (p.applicationClass = applications.item.BlackFlagItemCompendium));
 });
 
+Hooks.once("i18nInit", function () {
+	Object.values(CONFIG.Activity.types).forEach(c => c.documentClass.localize());
+});
+
 Hooks.once("ready", function () {
 	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();

@@ -1,19 +1,24 @@
 import { DamageField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
 
-const { StringField } = foundry.data.fields;
-
 /**
  * Configuration data for the Healing activity.
- * @property {string} ability - Ability used in evaluating healing formula.
  * @property {ExtendedDamageData} healing - Healing value.
  */
 export class HealingData extends foundry.abstract.DataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.HEAL"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			ability: new StringField(),
-			healing: new DamageField({ initial: { type: "normal" }, label: "BF.Healing.Label" })
+			healing: new DamageField({ initial: { type: "normal" } })
 		};
 	}
 

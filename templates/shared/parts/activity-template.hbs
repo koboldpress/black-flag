@@ -1,0 +1,55 @@
+<fieldset {{ disabled disabled.target }}>
+	<legend>{{ localize "BF.TARGET.FIELDS.target.template.label" }}</legend>
+	<div class="field-group">
+		<span>{{ localize "BF.TARGET.FIELDS.target.template.label" }}</span>
+		{{#if data.target.template.type}}
+			<label>
+				<span>{{ localize "BF.TARGET.FIELDS.target.template.count.label" }}</span>
+				<input type="number" name="{{ prefix }}target.template.count" value="{{ data.target.template.count }}"
+							 min="1" step="1" placeholder="1">
+			</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.TARGET.FIELDS.target.template.type.label" }}</span>
+			<select name="{{ prefix }}target.template.type">
+				{{ selectOptions CONFIG.areaOfEffectTypes.localized selected=data.target.template.type blank="" }}
+			</select>
+		</label>
+	</div>
+	{{#with target.aoeSizes as |aoeSizes|}}
+		<div class="field-group">
+			<span>{{ localize "BF.TARGET.FIELDS.target.template.size.label" }}</span>
+			<label>
+				<span>{{ localize aoeSizes.size }}</span>
+				<input type="text" name="{{ ../prefix }}target.template.size" value="{{ ../data.target.template.size }}">
+			</label>
+			{{#if aoeSizes.width}}
+				<label>
+					<span>{{ localize aoeSizes.width }}</span>
+					<input type="text" name="{{ ../prefix }}target.template.width" value="{{ ../data.target.template.width }}">
+				</label>
+			{{/if}}
+			{{#if aoeSizes.height}}
+				<label>
+					<span>{{ localize aoeSizes.height }}</span>
+					<input type="text" name="{{ ../prefix }}target.template.height" value="{{ ../data.target.template.height }}">
+				</label>
+			{{/if}}
+			<label>
+				<span>{{ localize "BF.TARGET.FIELDS.target.template.units.label" }}</span>
+				<select name="{{ prefix }}target.template.units">
+					{{ selectOptions ../CONFIG.distanceUnits.localized selected=../data.target.template.units }}
+				</select>
+			</label>
+		</div>
+	{{/with}}
+	{{#if (and data.target.template.type (gt data.target.template.count 1))}}
+		<label class="full-checkbox">
+			<span class="hinted-label" data-tooltip="BF.TARGET.FIELDS.target.template.contiguous.hint">
+				{{ localize "BF.TARGET.FIELDS.target.template.contiguous.label" }}
+			</span>
+			<input type="checkbox" name="{{ prefix }}target.template.contiguous"
+						 {{ checked data.target.template.contiguous }}>
+		</label>
+	{{/if}}
+</fieldset>

@@ -109,8 +109,8 @@ export default class TargetField extends SchemaField {
 		Object.defineProperty(obj.affects, "placeholder", {
 			get() {
 				return obj.template.type
-					? game.i18n.localize("BF.Target.Count.EveryGeneric")
-					: game.i18n.localize("BF.Target.Count.AnyGeneric");
+					? game.i18n.localize("BF.TARGET.Count.EveryGeneric")
+					: game.i18n.localize("BF.TARGET.Count.AnyGeneric");
 			},
 			enumerable: false
 		});
@@ -142,14 +142,14 @@ export default class TargetField extends SchemaField {
 		} else if (!affects.count) {
 			const key = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "Every" : "Any";
 			const pluralRule = template.type in CONFIG.BlackFlag.areaOfEffectTypes ? "one" : "other";
-			short = long = game.i18n.format(`BF.Target.Count.${key}Specific`, {
+			short = long = game.i18n.format(`BF.TARGET.Count.${key}Specific`, {
 				type: game.i18n.localize(`${type.localization}[${pluralRule}]`),
 				typeLowercase: game.i18n.localize(`${type.localization}[${pluralRule}]`).toLowerCase()
 			});
 		} else {
 			const number = numberFormat(affects.count ?? 1);
 			short = `${number} ${game.i18n
-				.localize(`BF.Target.Label[${getPluralRules().select(affects.count ?? 1)}]`)
+				.localize(`BF.TARGET.Label[${getPluralRules().select(affects.count ?? 1)}]`)
 				.toLowerCase()}`;
 			long = `${number} ${game.i18n
 				.localize(type.label ?? `${type.localization}[${getPluralRules().select(affects.count ?? 1)}]`)
@@ -157,7 +157,7 @@ export default class TargetField extends SchemaField {
 		}
 
 		if (affects.choice) {
-			long = game.i18n.format("BF.Target.Choice", { number: long ?? short });
+			long = game.i18n.format("BF.TARGET.Choice", { number: long ?? short });
 		}
 
 		const tooltip = long ? (affects.special ? `${long} (${affects.special})` : long) : affects.special?.capitalize();

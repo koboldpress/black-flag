@@ -226,14 +226,6 @@ export function registerHandlebarsHelpers() {
 export async function registerHandlebarsPartials() {
 	const partials = [
 		"active-effect/active-effect-change.hbs",
-		"activities/parts/activity-activation.hbs",
-		"activities/parts/activity-consumption-part.hbs",
-		"activities/parts/activity-damage-part.hbs",
-		"activities/parts/activity-damage-parts.hbs",
-		"activities/parts/activity-description.hbs",
-		"activities/parts/activity-duration.hbs",
-		"activities/parts/activity-targeting.hbs",
-		"activities/parts/activity-uses.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",
 		"actor/parts/actor-active-effects.hbs",
@@ -261,6 +253,9 @@ export async function registerHandlebarsPartials() {
 		"shared/inventory.hbs",
 		"shared/trait-list.hbs",
 		"shared/uses-config.hbs",
+		"shared/parts/activity-affects.hbs",
+		"shared/parts/activity-range.hbs",
+		"shared/parts/activity-template.hbs",
 		"shared/parts/document-source.hbs",
 		"shared/parts/inventory-controls.hbs",
 		"shared/parts/inventory-summary.hbs"

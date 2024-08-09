@@ -1,0 +1,11 @@
+<fieldset>
+		<legend>{{ localize "BF.HEAL.FIELDS.healing.label" }}</legend>
+		<blackFlag-damageList name="system.healing" single>
+			<ul class="configuration-list">
+				<li>
+					{{> "systems/black-flag/templates/activity/parts/damage-part.hbs"
+					    damage=source.system.healing prefix="$." types=CONFIG.healingTypes.localized }}
+				</li>
+			</ul>
+		</blackFlag-damageList>
+</fieldset>

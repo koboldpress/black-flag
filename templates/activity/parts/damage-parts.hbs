@@ -2,7 +2,7 @@
 	<ul class="configuration-list">
 		{{#each source.system.damage.parts}}
 			<li data-index="{{ @index }}">
-				{{> "blackFlag.activity-damage-part" damage=this prefix=(concat "$." @index ".")
+				{{> "systems/black-flag/templates/activity/parts/damage-part.hbs" damage=this prefix=(concat "$." @index ".")
 				    types=@root.CONFIG.damageTypes.localized }}
 			</li>
 		{{else}}
@@ -13,7 +13,7 @@
 		{{#if editable}}
 			<li class="add-control">
 				<button type="button" class="link-button" data-action="add">
-					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Activity.Damage.Action.Add" }}
+					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.DAMAGE.Action.Add" }}
 				</button>
 			</li>
 		{{/if}}

@@ -91,32 +91,32 @@
 						<span>{{ localize "BF.Spell.CastingTime.Label" }}</span>
 						{{#if system.casting.scalar}}
 							<label>
-								<span>{{ localize "BF.Activation.Cost.Label" }}</span>
+								<span>{{ localize "BF.ACTIVATION.FIELDS.activation.value.label" }}</span>
 								<input type="number" name="system.casting.value" value="{{ source.casting.value }}" min="0" step="1">
 							</label>
 						{{/if}}
 						<label>
-							<span>{{ localize "BF.Activation.Type.Label" }}</span>
+							<span>{{ localize "BF.ACTIVATION.FIELDS.activation.type.label" }}</span>
 							<select name="system.casting.type">
 								{{ blackFlag-groupedSelectOptions activationOptions }}
 							</select>
 						</label>
 					</div>
 					<label>
-						<span>{{ localize "BF.Activation.Condition.Label" }}</span>
+						<span>{{ localize "BF.ACTIVATION.FIELDS.activation.condition.label" }}</span>
 						<input type="text" name="system.casting.condition" value="{{ system.casting.condition }}">
 					</label>
 					<div class="field-group">
-						<span>{{ localize "BF.Duration.Label" }}</span>
+						<span>{{ localize "BF.DURATION.Label" }}</span>
 						{{#if system.duration.scalar}}
 							<label>
-								<span>{{ localize "BF.Duration.Value.Label" }}</span>
+								<span>{{ localize "BF.DURATION.FIELDS.duration.value.label" }}</span>
 								<input type="text" name="system.duration.value" value="{{ source.duration.value }}">
 							</label>
 							{{!-- TODO: If formula is used, add tooltip to display value at various levels --}}
 						{{/if}}
 						<label>
-							<span>{{ localize "BF.Duration.Type.Label" }}</span>
+							<span>{{ localize "BF.DURATION.FIELDS.duration.units.label" }}</span>
 							<select name="system.duration.units">
 								{{ blackFlag-groupedSelectOptions durationOptions }}
 							</select>
@@ -140,7 +140,9 @@
 						</div>
 					</div>
 				</fieldset>
-				{{> "blackFlag.activity-targeting" prefix="system." }}
+				{{> "blackFlag.activity-range" range=system.range prefix="system." }}
+				{{> "blackFlag.activity-affects" target=system.target prefix="system." }}
+				{{> "blackFlag.activity-template" target=system.target prefix="system." }}
 				<fieldset class="components">
 					<legend>{{ localize "BF.Spell.Component.Label" }}</legend>
 					<div class="checkbox-list">

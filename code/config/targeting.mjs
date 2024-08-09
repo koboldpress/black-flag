@@ -75,19 +75,19 @@ localizeConfig(areaOfEffectTypes);
  */
 export const rangeTypes = {
 	self: {
-		label: "BF.Range.Type.Self.Label"
+		label: "BF.RANGE.Type.Self.Label"
 	},
 	touch: {
-		label: "BF.Range.Type.Touch.Label"
+		label: "BF.RANGE.Type.Touch.Label"
 	},
 	sight: {
-		label: "BF.Range.Type.Sight.Label"
+		label: "BF.RANGE.Type.Sight.Label"
 	},
 	special: {
-		label: "BF.Range.Type.Special.Label"
+		label: "BF.RANGE.Type.Special.Label"
 	},
 	any: {
-		label: "BF.Range.Type.Any.Label"
+		label: "BF.RANGE.Type.Any.Label"
 	}
 };
 
@@ -99,28 +99,28 @@ export const rangeTypes = {
  */
 export const targetTypes = {
 	creature: {
-		localization: "BF.Target.Type.Creature.Label"
+		localization: "BF.TARGET.Type.Creature.Label"
 	},
 	ally: {
-		localization: "BF.Target.Type.Ally.Label"
+		localization: "BF.TARGET.Type.Ally.Label"
 	},
 	enemy: {
-		localization: "BF.Target.Type.Enemy.Label"
+		localization: "BF.TARGET.Type.Enemy.Label"
 	},
 	willing: {
-		localization: "BF.Target.Type.WillingCreature.Label"
+		localization: "BF.TARGET.Type.WillingCreature.Label"
 	},
 	creatureObject: {
-		localization: "BF.Target.Type.CreatureObject.Label"
+		localization: "BF.TARGET.Type.CreatureObject.Label"
 	},
 	object: {
-		localization: "BF.Target.Type.Object.Label"
+		localization: "BF.TARGET.Type.Object.Label"
 	},
 	objectNotWorn: {
-		localization: "BF.Target.Type.ObjectNotWorn.Label"
+		localization: "BF.TARGET.Type.ObjectNotWorn.Label"
 	},
 	special: {
-		label: "BF.Target.Type.Special.Label"
+		label: "BF.TARGET.Type.Special.Label"
 	}
 };
 localizeConfig(targetTypes, { sort: false });

@@ -15,13 +15,13 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
 export default class ActivationField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
-			value: new NumberField({ min: 0, integer: true, label: "BF.Activation.Cost.Label" }),
-			type: new StringField({ label: "BF.Activation.Type.Label" }),
-			condition: new StringField({ label: "BF.Activation.Condition.Label" }),
+			value: new NumberField({ min: 0, integer: true }),
+			type: new StringField(),
+			condition: new StringField(),
 			...fields
 		};
 		Object.entries(fields).forEach(([k, v]) => (!v ? delete fields[k] : null));
-		super(fields, { label: "BF.Activation.Label", ...options });
+		super(fields, options);
 	}
 
 	/* -------------------------------------------- */
@@ -75,7 +75,7 @@ export default class ActivationField extends SchemaField {
 		const type = CONFIG.BlackFlag.activationOptions({
 			pluralRule: getPluralRules().select(data.value ?? 1)
 		}).get(data.type);
-		let label = game.i18n.format("BF.Activation.Formatted.Scalar", {
+		let label = game.i18n.format("BF.ACTIVATION.Formatted.Scalar", {
 			number: numberFormat(data.value ?? 1),
 			type: type.label,
 			typeLowercase: type.label.toLowerCase()
@@ -84,7 +84,7 @@ export default class ActivationField extends SchemaField {
 		if (style === "combined") {
 			return `<span${data.condition ? ` data-tooltip="${data.condition.capitalize()}"` : ""}>${label}</span>`;
 		} else if (data.condition) {
-			return game.i18n.format("BF.Activation.Formatted.Condition", {
+			return game.i18n.format("BF.ACTIVATION.Formatted.Condition", {
 				activation: label,
 				condition: data.condition
 			});

@@ -310,7 +310,7 @@ async function rollAttack(event) {
 
 	const dialogConfig = {};
 
-	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.Attack.Label") });
+	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.ATTACK.Label") });
 	const messageConfig = {
 		data: {
 			flavor: title,

@@ -8,42 +8,42 @@ import { timeUnits } from "./units.mjs";
  */
 export const actionTypes = {
 	standard: {
-		label: "BF.Activation.Category.Standard.Label",
+		label: "BF.ACTIVATION.Category.Standard",
 		children: {
 			action: {
-				localization: "BF.Activation.Type.Action"
+				localization: "BF.ACTIVATION.Type.Action"
 			},
 			bonus: {
-				localization: "BF.Activation.Type.BonusAction"
+				localization: "BF.ACTIVATION.Type.BonusAction"
 			},
 			reaction: {
-				localization: "BF.Activation.Type.Reaction"
+				localization: "BF.ACTIVATION.Type.Reaction"
 			},
 			free: {
-				localization: "BF.Activation.Type.FreeAction"
+				localization: "BF.ACTIVATION.Type.FreeAction"
 			}
 		}
 	},
 	monster: {
-		label: "BF.Activation.Category.Monster.Label",
+		label: "BF.ACTIVATION.Category.Monster",
 		children: {
 			lair: {
-				localization: "BF.Activation.Type.Lair"
+				localization: "BF.ACTIVATION.Type.Lair"
 			},
 			legendary: {
-				localization: "BF.Activation.Type.Legendary",
+				localization: "BF.ACTIVATION.Type.Legendary",
 				scalar: true
 			}
 		}
 	},
 	rest: {
-		label: "BF.Activation.Category.Rest.Label",
+		label: "BF.ACTIVATION.Category.Rest",
 		children: {
 			short: {
-				label: "BF.Activation.Type.ShortRest"
+				label: "BF.ACTIVATION.Type.ShortRest"
 			},
 			long: {
-				label: "BF.Activation.Type.LongRest"
+				label: "BF.ACTIVATION.Type.LongRest"
 			}
 		}
 	}
@@ -78,29 +78,29 @@ export function activationOptions({ categories, chosen, pluralRule } = {}) {
  */
 export const durations = {
 	perm: {
-		label: "BF.Duration.Type.Permanent.Label",
+		label: "BF.DURATION.Type.Permanent",
 		children: {
 			dispelled: {
-				label: "BF.Duration.UntilDispelled",
+				label: "BF.DURATION.Value.UntilDispelled",
 				spellOnly: true
 			},
 			triggered: {
-				label: "BF.Duration.UntilDispelledTriggered",
+				label: "BF.DURATION.Value.UntilDispelledTriggered",
 				spellOnly: true
 			},
 			permanent: {
-				label: "BF.Duration.Permanent"
+				label: "BF.DURATION.Value.Permanent"
 			}
 		}
 	},
 	special: {
-		label: "BF.Duration.Type.Special.Label",
+		label: "BF.DURATION.Type.Special",
 		children: {
 			instantaneous: {
-				label: "BF.Duration.Instantaneous"
+				label: "BF.DURATION.Value.Instantaneous"
 			},
 			special: {
-				label: "BF.Duration.Special"
+				label: "BF.DURATION.Value.Special"
 			}
 		}
 	}

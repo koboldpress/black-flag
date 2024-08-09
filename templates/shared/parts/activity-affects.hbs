@@ -1,0 +1,33 @@
+<fieldset {{ disabled disabled.target }}>
+	<legend>{{ localize "BF.TARGET.FIELDS.target.affects.label" }}</legend>
+	<div class="field-group">
+		<span>{{ localize "BF.TARGET.Label[one]" }}</span>
+		{{#if target.affects.scalar}}
+			<label>
+				<span>{{ localize "BF.TARGET.FIELDS.target.affects.count.label" }}</span>
+				<input type="text" name="{{ prefix }}target.affects.count" value="{{ data.target.affects.count }}"
+							 placeholder="{{ target.affects.placeholder }}">
+			</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.TARGET.FIELDS.target.affects.type.label" }}</span>
+			<select name="{{ prefix }}target.affects.type">
+				{{ selectOptions CONFIG.targetTypes.localized selected=data.target.affects.type blank="" }}
+			</select>
+		</label>
+	</div>
+	{{#if target.affects.type}}
+		<label>
+			<span>{{ localize "BF.TARGET.FIELDS.target.affects.special.label" }}</span>
+			<input type="text" name="{{ prefix }}target.affects.special" value="{{ data.target.affects.special }}">
+		</label>
+	{{/if}}
+	{{#if (and target.affects.type data.target.template.type)}}
+		<label class="full-checkbox">
+			<span class="hinted-label" data-tooltip="BF.TARGET.FIELDS.target.affects.choice.hint">
+				{{ localize "BF.TARGET.FIELDS.target.affects.choice.label" }}
+			</span>
+			<input type="checkbox" name="{{ prefix }}target.affects.choice" {{ checked data.target.affects.choice }}>
+		</label>
+	{{/if}}
+</fieldset>

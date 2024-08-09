@@ -36,13 +36,36 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				title: "BF.Activity.Label[one]",
 				hint: "",
 				usage: {
-					chatCard: "systems/black-flag/templates/activities/chat/activation-card.hbs",
+					chatCard: "systems/black-flag/templates/activity/chat/activation-card.hbs",
 					dialog: ActivityActivationDialog
 				}
 			},
 			{ inplace: false }
 		)
 	);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform the pre-localization of this data model.
+	 */
+	static localize() {
+		Localization.localizeDataModel(this);
+		if (this.metadata.dataModel) Localization.localizeDataModel(this.metadata.dataModel);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+	 * on `Localization` is private.
+	 * @param {SchemaField} schema
+	 * @param {string[]} prefixes
+	 * @internal
+	 */
+	static _localizeSchema(schema, prefixes) {
+		Localization.localizeDataModel({ schema }, { prefixes });
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -557,8 +580,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			const legendary = this.actor.system.attributes?.legendary;
 			if (legendary) {
 				let errMessage;
-				if (legendary.value === 0) errMessage = "BF.Activation.Warning.NoActions";
-				else if (count > legendary.value) errMessage = "BF.Activation.Warning.NotEnoughActions";
+				if (legendary.value === 0) errMessage = "BF.ACTIVATION.Warning.NoActions";
+				else if (count > legendary.value) errMessage = "BF.ACTIVATION.Warning.NotEnoughActions";
 				if (!errMessage) {
 					updates.actor["system.attributes.legendary.spent"] = legendary.spent + count;
 				} else {

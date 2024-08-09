@@ -3,7 +3,9 @@
  */
 export default class AppAssociatedElement extends HTMLElement {
 	connectedCallback() {
-		this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+		this.#app =
+			ui.windows[this.closest(".app")?.dataset.appid] ??
+			foundry.applications.instances.get(this.closest(".application")?.id);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -15,27 +15,24 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} dc.formula - DC formula if manually set.
  */
 export class SavingThrowData extends foundry.abstract.DataModel {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SAVE", "BF.DAMAGE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			ability: new StringField({
-				initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0],
-				label: "BF.Activity.SavingThrow.OpposedAbility.Label"
-			}),
-			damage: new SchemaField(
-				{
-					parts: new ArrayField(new DamageField())
-				},
-				{ label: "BF.Damage.Label" }
-			),
-			// TODO: Add conditions that can be imposed
-			dc: new SchemaField(
-				{
-					ability: new StringField({ label: "BF.DifficultyClass.Ability.Label" }),
-					formula: new FormulaField({ deterministic: true, label: "BF.DifficultyClass.Formula.Label" })
-				},
-				{ label: "BF.DifficultyClass.Label" }
-			)
+			ability: new StringField({ initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0] }),
+			damage: new SchemaField({ parts: new ArrayField(new DamageField()) }),
+			dc: new SchemaField({
+				ability: new StringField(),
+				formula: new FormulaField({ deterministic: true })
+			})
 		};
 	}
 

@@ -122,7 +122,7 @@ export default class NPCSheet extends BaseActorSheet {
 			obj[key] = { label, items: [] };
 			return obj;
 		}, {});
-		context.actions.other = { label: game.i18n.localize("BF.Activation.Type.Other"), items: [] };
+		context.actions.other = { label: game.i18n.localize("BF.ACTIVATION.Type.Other"), items: [] };
 		context.passive = [];
 		context.spellcasting = { uses: {} };
 		for (const item of this.actor.items) {

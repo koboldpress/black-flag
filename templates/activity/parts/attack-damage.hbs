@@ -1,0 +1,12 @@
+<fieldset>
+	<legend>{{ localize "BF.DAMAGE.FIELDS.damage.label" }}</legend>
+	{{#if showBaseDamage}}
+		<label class="full-checkbox">
+			<span class="hinted-label" data-tooltip="BF.DAMAGE.IncludeBaseDamage.Hint">
+				{{ localize "BF.DAMAGE.IncludeBaseDamage.Label" }}
+			</span>
+			<input type="checkbox" name="system.damage.includeBaseDamage" {{ checked system.damage.includeBaseDamage }}>
+		</label>
+	{{/if}}
+	{{> "systems/black-flag/templates/activity/parts/damage-parts.hbs" }}
+</fieldset>
