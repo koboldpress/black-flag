@@ -2,6 +2,7 @@ import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
 import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivity from "./base-activity.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
 
@@ -18,6 +19,7 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * @property {object} damage
  * @property {boolean} damage.includeBaseDamage - Should a item's base damage be included with any other damage parts?
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
+ * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
 export class AttackData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -45,7 +47,8 @@ export class AttackData extends foundry.abstract.DataModel {
 				includeBaseDamage: new BooleanField({ initial: true }),
 				parts: new ArrayField(new DamageField())
 				// TODO: Add conditions support to damage parts
-			})
+			}),
+			effects: new ArrayField(new AppliedEffectField())
 		};
 	}
 

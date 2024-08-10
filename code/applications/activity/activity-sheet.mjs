@@ -8,11 +8,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	static DEFAULT_OPTIONS = {
 		classes: ["activity"],
 		window: {
-			icon: "fa-solid fa-gauge"
+			icon: "fa-solid fa-gauge",
+			resizable: true
+		},
+		actions: {
+			addEffect: ActivitySheet.#addEffect,
+			deleteEffect: ActivitySheet.#deleteEffect
 		},
 		position: {
-			width: 540,
-			height: "auto"
+			width: 600
 		}
 	};
 
@@ -51,7 +55,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	 * Key paths to the parts of the submit data stored in arrays that will need special handling on submission.
 	 * @type {string[]}
 	 */
-	static CLEAN_ARRAYS = ["consumption.targets", "damage.parts"];
+	static CLEAN_ARRAYS = ["consumption.targets", "damage.parts", "system.effects"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -169,19 +173,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Prepare a specific damage part if present in the activity data.
-	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @param {object} part -  Damage part context being prepared.
-	 * @returns {object}
-	 * @protected
-	 */
-	_prepareDamagePartContext(context, part) {
-		return part;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Prepare rendering context for the effect tab.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
 	 * @returns {ApplicationRenderContext}
@@ -189,6 +180,27 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	 */
 	async _prepareEffectContext(context) {
 		context.tab = context.tabs.effect;
+
+		if (context.activity.system.effects) {
+			const appliedEffects = new Set(context.activity.system.effects?.map(e => e._id) ?? []);
+			context.allEffects = this.item.effects.map(effect => ({
+				value: effect.id,
+				label: effect.name,
+				selected: appliedEffects.has(effect.id)
+			}));
+			context.appliedEffects = context.activity.system.effects.map((data, index) => {
+				const effect = {
+					data,
+					effect: data.effect,
+					fields: this.activity.system.schema.fields.effects.element.fields,
+					prefix: `system.effects.${index}.`,
+					source: context.source.system.effects[index] ?? data,
+					additionalSettings: null
+				};
+				return this._prepareAppliedEffectContext(context, effect);
+			});
+		}
+
 		return context;
 	}
 
@@ -285,12 +297,70 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Handle creating a new active effect and adding it to the applied effects list.
+	 * @this {ActivitySheet}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #addEffect(event, target) {
+		if (!this.activity.system.effects) return;
+		const effectData = this._addEffectData();
+		const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData]);
+		this.activity.update({ "system.effects": [...this.activity.toObject().system.effects, { _id: created.id }] });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * The data for a newly created applied effect.
+	 * @returns {object}
+	 * @protected
+	 */
+	_addEffectData() {
+		return {
+			name: this.item.name,
+			img: this.item.img,
+			origin: this.item.uuid,
+			transfer: false
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle deleting an active effect and removing it from the applied effects list.
+	 * @this {ActivitySheet}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #deleteEffect(event, target) {
+		if (!this.activity.system.effects) return;
+		const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+		const result = await this.item.effects.get(effectId)?.deleteDialog();
+		if (result instanceof ActiveEffect) {
+			const effects = this.activity.toObject().system.effects.filter(e => e._id !== effectId);
+			this.activity.update({ "system.effects": effects });
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	_processFormData(event, form, formData) {
 		const submitData = super._processFormData(event, form, formData);
 		for (const keyPath of this.constructor.CLEAN_ARRAYS) {
 			const data = foundry.utils.getProperty(submitData, keyPath);
 			if (data) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
+		}
+		if (foundry.utils.hasProperty(submitData, "appliedEffects")) {
+			const effects = submitData.effects ?? this.activity.toObject().system.effects;
+			submitData.system ??= {};
+			submitData.system.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
+			for (const _id of submitData.appliedEffects) {
+				if (submitData.system.effects.find(e => e._id === _id)) continue;
+				submitData.system.effects.push({ _id });
+			}
 		}
 		return submitData;
 	}

@@ -5,3 +5,4 @@ export { default as ConsumptionTargetData } from "./consumption-target-data.mjs"
 export * from "./damage-data.mjs";
 export * from "./healing-data.mjs";
 export * from "./saving-throw-data.mjs";
+export * from "./utility-data.mjs";

@@ -1,8 +1,12 @@
 import { DamageField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
+
+const { ArrayField } = foundry.data.fields;
 
 /**
  * Configuration data for the Healing activity.
+ * @property {EffectApplicationData[]} effects - Effects to be applied.
  * @property {ExtendedDamageData} healing - Healing value.
  */
 export class HealingData extends foundry.abstract.DataModel {
@@ -18,6 +22,7 @@ export class HealingData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
+			effects: new ArrayField(new AppliedEffectField()),
 			healing: new DamageField({ initial: { type: "normal" } })
 		};
 	}

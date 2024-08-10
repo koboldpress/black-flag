@@ -1,69 +1,26 @@
-.activity-config {
-	max-height: 85vh;
-	min-height: 320px;
-	max-width: 540px;
-	min-width: 540px;
+.activity.sheet.application {
+	prose-mirror {
+		max-width: unset;
+		min-height: 300px;
+		margin-inline: -10px;
+		.editor-content { margin-inline: 10px; }
+		button.toggle { right: 12px; }
+	}
 }
 .activity-config form {
-	display: flex;
-	flex-direction: column;
 
-	header {
-		display: flex;
-		gap: 1rem;
-		align-items: center;
-
-		figure {
-			margin: 0;
-			
-			img {
-				width: 64px;
-				height: 64px;
-			}
-		}
-
-		h1 {
-			flex-grow: 1;
-			margin: 0;
-			border: none;
-			line-height: 48px;
-
-			input {
-				height: 100%;
-			}
-		}
-	}
-
-	.sheet-body, .sheet-body [data-tab], .sheet-body [data-tab] > section {
-		flex-grow: 1;
-		height: 100%;
-	}
 
 	[data-tab="description"] {
 		.editor {
 			min-height: 150px;
 			overflow-y: visible;
 			height: 100%;
-			.editor-container {
-				overflow-y: auto;
-				margin: 0;
-				.editor-content {
-					margin: 0.25rem 0.25rem 1rem 10.5px;
-					margin-inline-start: 8px;
-					padding-inline-start: 8px;
-				}
-			}
 		}
 
 		fieldset {
 			height: 100%;
 
 			&:has(.editor.prosemirror) {
-				padding-block: 0;
-				padding-inline: 0;
-				legend {
-					margin-inline: 0.75rem;
-				}
 			}
 		}
 	}

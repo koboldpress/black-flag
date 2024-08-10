@@ -17,6 +17,7 @@ export default class HealSheet extends ActivitySheet {
 		effect: {
 			template: "systems/black-flag/templates/activity/heal-effect.hbs",
 			templates: [
+				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
 				"systems/black-flag/templates/activity/parts/damage-part.hbs",
 				"systems/black-flag/templates/activity/parts/heal-healing.hbs"
 			]

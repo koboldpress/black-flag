@@ -38,6 +38,7 @@ const {
  * @property {DurationField} duration
  * @property {boolean} duration.override - Should the item's duration be overridden?
  * @property {RangeField} range
+ * @property {boolean} range.override - Should the item's range be overridden?
  * @property {TargetField} target
  * @property {boolean} target.override - Should the item's targeting data be overridden?
  * @property {UsesField} uses
@@ -116,7 +117,9 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			duration: new DurationField({
 				override: new BooleanField()
 			}),
-			range: new RangeField(),
+			range: new RangeField({
+				override: new BooleanField()
+			}),
 			target: new TargetField({
 				override: new BooleanField()
 			}),
@@ -169,30 +172,9 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		this.setProperty("activation.type", "system.casting.type");
 		this.setProperty("activation.condition", "system.casting.condition");
 
-		Object.defineProperty(this.duration, "canOverride", {
-			value: !!this.item.system.duration,
-			configurable: true,
-			enumerable: false
-		});
-		if (this.duration.canOverride && !this.duration.override) {
-			for (const [key, value] of Object.entries(this.item.system.duration)) {
-				foundry.utils.setProperty(this, `duration.${key}`, value);
-			}
-		}
-
-		Object.defineProperty(this.target, "canOverride", {
-			value: !!this.item.system.range && !!this.item.system.target,
-			configurable: true,
-			enumerable: false
-		});
-		if (this.target.canOverride && !this.target.override) {
-			for (const keyPath of ["range", "target.template", "target.affects"]) {
-				const obj = foundry.utils.getProperty(this.item.system, keyPath) ?? {};
-				for (const [key, value] of Object.entries(obj)) {
-					foundry.utils.setProperty(this, `${keyPath}.${key}`, value);
-				}
-			}
-		}
+		this._setOverride("duration");
+		this._setOverride("range");
+		this._setOverride("target");
 
 		Object.defineProperty(this, "_inferredSource", {
 			value: this.toObject(false),
@@ -242,6 +224,26 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		}
 
 		this.system.prepareFinalData?.();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add an `canOverride` property to the provided object and, if `override` is `false`, replace the data on the
+	 * activity with data from the item.
+	 * @param {string} keyPath - Path of the property to set on the activity.
+	 * @internal
+	 */
+	_setOverride(keyPath) {
+		const obj = foundry.utils.getProperty(this, keyPath);
+		Object.defineProperty(obj, "canOverride", {
+			value: foundry.utils.hasProperty(this.item.system, keyPath),
+			configurable: true,
+			enumerable: false
+		});
+		if (obj.canOverride && !obj.override) {
+			foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,6 +1,7 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
 import { DamageField, FormulaField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
+import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
@@ -13,6 +14,7 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
  * @property {object} dc
  * @property {string} dc.ability - Ability used to calculate the DC if not automatically calculated.
  * @property {string} dc.formula - DC formula if manually set.
+ * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
 export class SavingThrowData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -32,7 +34,8 @@ export class SavingThrowData extends foundry.abstract.DataModel {
 			dc: new SchemaField({
 				ability: new StringField(),
 				formula: new FormulaField({ deterministic: true })
-			})
+			}),
+			effects: new ArrayField(new AppliedEffectField())
 		};
 	}
 

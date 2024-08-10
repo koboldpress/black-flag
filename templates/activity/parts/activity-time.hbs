@@ -39,10 +39,7 @@
 	</fieldset>
 
 	{{#if activity.duration.canOverride}}
-		<label class="full-checkbox">
-			<span>{{ localize "BF.DURATION.FIELDS.duration.override.label" }}</span>
-			<input type="checkbox" name="duration.override" {{ checked activity.duration.override }}>
-		</label>
+		{{ formField fields.duration.fields.override value=activity.duration.override }}
 	{{/if}}
 
 	<fieldset class="duration" {{ disabled disabled.duration }}>

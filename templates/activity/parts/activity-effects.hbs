@@ -1,0 +1,36 @@
+<fieldset>
+	<legend>{{ localize "BF.ACTIVITY.FIELDS.effects.label" }}</legend>
+	<multi-select name="appliedEffects">
+		{{ selectOptions allEffects }}
+	</multi-select>
+	<ul class="configuration-list effects-list">
+		{{#each appliedEffects}}
+			<li data-index="{{ @index }}" data-effect-id="{{ effect.id }}" data-expand-id="effects.{{ effect.id }}">
+				{{> ".effect" }}
+			</li>
+		{{/each}}
+		{{#if editable}}
+			<li class="add-control">
+				<button type="button" class="link-button" data-action="addEffect">
+					 <i class="fa-solid fa-plus" inert></i> {{ localize "BF.Effect.Action.Add" }}
+				</button>
+			</li>
+		{{/if}}
+	</ul>
+</fieldset>
+
+{{#*inline ".effect"}}
+<div class="field-group">
+	{{{ blackFlag-linkForUUID effect.uuid }}}
+</div>
+
+<div class="controls">
+	{{#if @root.editable}}
+		<button type="button" class="link-button" data-action="deleteEffect"
+		        data-tooltip="BF.Effect.Action.Delete"
+		        aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
+			<i class="fa-solid fa-trash" inert></i>
+		</button>
+	{{/if}}
+</div>
+{{/inline}}

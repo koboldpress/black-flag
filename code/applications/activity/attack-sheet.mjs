@@ -21,6 +21,7 @@ export default class AttackSheet extends ActivitySheet {
 		effect: {
 			template: "systems/black-flag/templates/activity/attack-effect.hbs",
 			templates: [
+				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
 				"systems/black-flag/templates/activity/parts/attack-damage.hbs",
 				"systems/black-flag/templates/activity/parts/attack-details.hbs",
 				"systems/black-flag/templates/activity/parts/damage-part.hbs",

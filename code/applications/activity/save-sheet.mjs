@@ -17,6 +17,7 @@ export default class SaveSheet extends ActivitySheet {
 		effect: {
 			template: "systems/black-flag/templates/activity/save-effect.hbs",
 			templates: [
+				"systems/black-flag/templates/activity/parts/activity-effects.hbs",
 				"systems/black-flag/templates/activity/parts/damage-part.hbs",
 				"systems/black-flag/templates/activity/parts/damage-parts.hbs",
 				"systems/black-flag/templates/activity/parts/save-damage.hbs",

@@ -1,3 +1,4 @@
+import { UtilityData } from "../../data/activity/utility-data.mjs";
 import Activity from "./activity.mjs";
 
 export default class UtilityActivity extends Activity {
@@ -6,6 +7,7 @@ export default class UtilityActivity extends Activity {
 			super.metadata,
 			{
 				type: "utility",
+				dataModel: UtilityData,
 				icon: "systems/black-flag/artwork/activities/utility.svg",
 				title: "BF.Activity.Utility.Title",
 				hint: "BF.Activity.Utility.Hint"
