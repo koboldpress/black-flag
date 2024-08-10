@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your touch immediately breaks any curses that bind a target.</em></p><p>At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner’s attunement to the object so it can be removed or discarded.</p>",
+      "value": "<p>At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner’s attunement to the object so it can be removed or discarded.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -75,15 +75,18 @@
       "affects": {
         "choice": false,
         "type": "creatureObject",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -94,10 +97,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706935159474,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1723266462323,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -1,0 +1,143 @@
+{
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Resurrection",
+  "type": "spell",
+  "_id": "QTwPwjGDjfkktR1d",
+  "img": "icons/magic/death/skull-humanoid-white-blue.webp",
+  "system": {
+    "activities": {
+      "6utqoLzTlKTqX3je": {
+        "type": "healing",
+        "_id": "6utqoLzTlKTqX3je",
+        "description": "",
+        "system": {
+          "effects": [],
+          "healing": {
+            "type": "normal",
+            "number": null,
+            "denomination": null,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false
+            },
+            "scaling": {
+              "number": 1
+            }
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You touch a dead creature that has been dead for no more than a century, that didn’t die of old age, and that isn’t Undead. If its soul is free and willing, the target returns to life with all its hit points.</p><p>This spell neutralizes any poisons and cures normal diseases afflicting the creature when it died. It doesn’t, however, remove magical diseases, curses, and the like; if such effects aren’t removed prior to casting the spell, they afflict the target on its return to life.</p><p>This spell closes all mortal wounds and restores any missing body parts.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saves, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p><p>Casting this spell to restore life to a creature that has been dead for one year or longer taxes you greatly. Until you finish a long rest, you can’t cast spells again, and you have disadvantage on all attack rolls, ability checks, and saves.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Resurrect 100 years dead."
+    },
+    "casting": {
+      "value": 1,
+      "type": "hour",
+      "condition": ""
+    },
+    "circle": {
+      "value": null,
+      "base": 7
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 1000,
+        "denomination": "gp",
+        "description": "a diamond worth at least 1,000 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "source": [
+      "divine"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "necromancy"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.042",
+    "createdTime": 1723264726523,
+    "modifiedTime": 1723265217848,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!QTwPwjGDjfkktR1d"
+}

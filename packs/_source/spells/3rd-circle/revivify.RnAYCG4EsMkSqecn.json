@@ -14,10 +14,21 @@
           "healing": {
             "type": "healing",
             "number": null,
-            "denomination": null
+            "denomination": 0,
+            "bonus": "1",
+            "custom": {
+              "formula": ""
+            },
+            "scaling": {
+              "mode": ""
+            }
           }
         },
-        "activation": {},
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -27,8 +38,11 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": ""
       }
     },
     "uses": {
@@ -39,7 +53,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You restore a recently slain creature from death to life.</em></p><p>You touch a creature that has died within the last minute. That creature returns to life with 1 hit point. This spell can’t return to life a creature that has died of old age, nor can it restore any missing body parts.</p>",
+      "value": "<p>You touch a creature that has died within the last minute. That creature returns to life with [[/healing 1]]. This spell can’t return to life a creature that has died of old age, nor can it restore any missing body parts.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -83,15 +97,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
-      "divine"
+      "divine",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -102,10 +119,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706935204516,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1723267050079,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

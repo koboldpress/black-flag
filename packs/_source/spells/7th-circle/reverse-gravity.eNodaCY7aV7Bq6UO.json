@@ -1,0 +1,149 @@
+{
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Reverse Gravity",
+  "type": "spell",
+  "_id": "eNodaCY7aV7Bq6UO",
+  "img": "icons/magic/time/arrows-circling-pink.webp",
+  "system": {
+    "activities": {
+      "Ns28QYyN7iE5pqzW": {
+        "type": "savingThrow",
+        "_id": "Ns28QYyN7iE5pqzW",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": []
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>This spell reverses gravity in a 50-foot-radius, 100-foot‑high cylinder centered on a point within range. All creatures and objects that aren’t somehow anchored to the ground in the area fall upward and reach the top of the area when you cast this spell. A creature can make a [[/save]] save to grab onto a fixed object it can reach, thus avoiding the fall.</p><p>If some solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it just as they would during a normal downward fall. If an object or creature reaches the top of the area without striking anything, it remains there, oscillating slightly, for the duration.</p><p>At the end of the duration, affected objects and creatures fall back down.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Down is up in 50-ft. radius."
+    },
+    "casting": {
+      "value": null,
+      "type": "action",
+      "condition": ""
+    },
+    "circle": {
+      "value": null,
+      "base": 7
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a lodestone and iron filings"
+      }
+    },
+    "duration": {
+      "units": "minute",
+      "value": "1"
+    },
+    "tags": [
+      "concentration"
+    ],
+    "range": {
+      "units": "foot",
+      "value": "100",
+      "special": ""
+    },
+    "source": [
+      "arcane",
+      "primordial"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": "cylinder",
+        "size": "50",
+        "height": "100"
+      },
+      "affects": {
+        "choice": false,
+        "type": "creatureObject",
+        "count": "",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.042",
+    "createdTime": 1723264464347,
+    "modifiedTime": 1723267007949,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!eNodaCY7aV7Bq6UO"
+}

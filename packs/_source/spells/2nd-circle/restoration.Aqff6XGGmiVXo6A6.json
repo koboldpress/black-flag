@@ -1,6 +1,6 @@
 {
   "folder": "iJIjiGFvx6IqTXvu",
-  "name": "Lesser Restoration",
+  "name": "Restoration",
   "type": "spell",
   "_id": "Aqff6XGGmiVXo6A6",
   "img": "icons/magic/life/ankh-shadow-green.webp",
@@ -39,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your blessed touch cures a variety of lesser ailments and conditions suffered by a singular creature.</em></p><p>You touch a creature and can end either one disease or one condition afflicting it. The condition can be blinded, deafened, paralyzed, or poisoned.</p>",
+      "value": "<p>You touch a creature and can end one disease or one condition afflicting it. The condition can be &amp;Reference[blinded], &amp;Reference[deafened], &amp;Reference[paralyzed], or &amp;Reference[poisoned].</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -81,15 +81,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
   "effects": [],
@@ -100,10 +103,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706934302069,
-    "modifiedTime": 1714413737670,
+    "modifiedTime": 1723266850830,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -1,0 +1,143 @@
+{
+  "folder": "rRg9we6fU3e9Hvu7",
+  "name": "Raise Dead",
+  "type": "spell",
+  "_id": "ouNMLJDujgys94qk",
+  "img": "icons/magic/death/undead-skeleton-deformed-red.webp",
+  "system": {
+    "activities": {
+      "xlXz2mxeWGnAfGZR": {
+        "type": "healing",
+        "_id": "xlXz2mxeWGnAfGZR",
+        "description": "",
+        "system": {
+          "effects": [],
+          "healing": {
+            "type": "normal",
+            "number": null,
+            "denomination": null,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false
+            },
+            "scaling": {
+              "number": 1
+            }
+          }
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You return a dead creature you touch to life, provided that it has been dead no longer than 10 days. If the creature’s soul is both willing and at liberty to rejoin the body, the creature returns to life with 1 HP.</p><p>This spell also neutralizes any poisons and cures nonmagical diseases that affected the creature at the time it died. This spell doesn’t, however, remove magical diseases, curses, or similar effects; if these aren’t first removed prior to casting the spell, they take effect when the creature returns to life. The spell can’t return an Undead creature to life. This spell closes all mortal wounds, but it doesn’t restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.</p><p>Coming back from the dead is an ordeal. The target takes a −4 penalty to all attack rolls, saves, and ability checks. Every time the target finishes a long rest, the penalty is reduced by 1 until it disappears.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Resurrect 10 days dead."
+    },
+    "casting": {
+      "value": 1,
+      "type": "hour",
+      "condition": ""
+    },
+    "circle": {
+      "value": null,
+      "base": 5
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": true,
+        "cost": 500,
+        "denomination": "gp",
+        "description": "a diamond worth at least 500 gp, which the spell consumes"
+      }
+    },
+    "duration": {
+      "units": "instantaneous"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "source": [
+      "divine"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "necromancy"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.042",
+    "createdTime": 1723264547534,
+    "modifiedTime": 1723265701134,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ouNMLJDujgys94qk"
+}

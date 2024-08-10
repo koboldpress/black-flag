@@ -8,8 +8,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	static DEFAULT_OPTIONS = {
 		classes: ["activity"],
 		window: {
-			icon: "fa-solid fa-gauge",
-			resizable: true
+			icon: "fa-solid fa-gauge"
 		},
 		actions: {
 			addEffect: ActivitySheet.#addEffect,
@@ -193,6 +192,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 					data,
 					effect: data.effect,
 					fields: this.activity.system.schema.fields.effects.element.fields,
+					link: data.effect.toAnchor().outerHTML,
 					prefix: `system.effects.${index}.`,
 					source: context.source.system.effects[index] ?? data,
 					additionalSettings: null

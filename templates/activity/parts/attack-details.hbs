@@ -4,8 +4,8 @@
 		<span>{{ localize "BF.ATTACK.FIELDS.ability.label" }}</span>
 		<select name="system.ability">
 			{{#select source.system.ability}}
-				{{#if labels.defaultAbility}}
-					<option value="">{{ labels.defaultAbility }}</option>
+				{{#if defaultAbility}}
+					<option value="">{{ defaultAbility }}</option>
 					<hr>
 				{{/if}}
 				<option value="none">{{ localize "None" }}</option>

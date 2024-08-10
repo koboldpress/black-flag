@@ -1,0 +1,165 @@
+{
+  "folder": "QKeIWHAJ8KWrCHiJ",
+  "name": "Regenerate",
+  "type": "spell",
+  "_id": "xh1UQL21umN4ZRsE",
+  "img": "icons/magic/unholy/hand-marked-pink.webp",
+  "system": {
+    "activities": {
+      "lqObreu3WP3VghSz": {
+        "type": "healing",
+        "_id": "lqObreu3WP3VghSz",
+        "description": "",
+        "system": {
+          "effects": [],
+          "healing": {
+            "type": "healing",
+            "number": 4,
+            "denomination": 8,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": 1,
+              "mode": ""
+            },
+            "bonus": "15"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "description": {
+      "value": "<p>You touch a creature and stimulate its natural healing ability. The target regains [[/healing 4d8 + 15]]{4d8 + 15 hit points}. For the duration of the spell, the target regains 1 HP at the start of each of its turns (10 HP each minute).</p><p>The target’s severed body members (fingers, legs, tails, and so on), if any, are restored after 2 minutes. If you have the severed part and hold it to the stump, the spell instantaneously causes the limb to knit to the stump.</p><p>Once you cast this spell, you can’t do so again until you complete a long rest.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      },
+      "short": "Heal creature slowly, completely."
+    },
+    "casting": {
+      "value": 1,
+      "type": "minute",
+      "condition": ""
+    },
+    "circle": {
+      "value": null,
+      "base": 7
+    },
+    "components": {
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "material": {
+        "consumed": false,
+        "cost": null,
+        "denomination": "gp",
+        "description": "a prayer wheel or an intact sleeve of snakeskin and holy water"
+      }
+    },
+    "duration": {
+      "units": "hour",
+      "value": "1"
+    },
+    "tags": [
+      "ritual"
+    ],
+    "range": {
+      "units": "touch",
+      "special": ""
+    },
+    "source": [
+      "divine",
+      "primordial"
+    ],
+    "target": {
+      "template": {
+        "count": 1,
+        "contiguous": false,
+        "units": "foot",
+        "type": ""
+      },
+      "affects": {
+        "choice": false,
+        "type": "creature",
+        "count": "1",
+        "special": ""
+      }
+    },
+    "school": "transmutation"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.330",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.042",
+    "createdTime": 1723264592630,
+    "modifiedTime": 1723265397013,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!xh1UQL21umN4ZRsE"
+}

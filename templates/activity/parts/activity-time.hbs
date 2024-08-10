@@ -14,8 +14,8 @@
 				<span>{{ localize "BF.ACTIVATION.FIELDS.activation.type.label" }}</span>
 				<select name="activation.type">
 					{{#select source.activation.type}}
-						{{#if labels.defaultActivation}}
-							<option value="">{{ labels.defaultActivation }}</option>
+						{{#if defaultActivation}}
+							<option value="">{{ defaultActivation }}</option>
 							<hr>
 						{{/if}}
 						{{ blackFlag-groupedSelectOptions activation.options }}

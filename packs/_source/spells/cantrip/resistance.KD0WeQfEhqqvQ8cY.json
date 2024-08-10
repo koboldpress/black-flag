@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "sBvsqMSp5qV3oauU",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "EPO9cHqZj34yjp8n"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You grant the target increased capacity to withstand harmful effects.</em></p><p>You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one save of its choice. It can roll the die before or after making the save. The spell then ends.</p>",
+      "value": "<p>You touch one willing creature. Once before the spell ends, the target can roll a [[/r d4]] and add the number rolled to one save of its choice. It can roll the die before or after making the save. The spell then ends.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -80,18 +86,58 @@
       "affects": {
         "choice": false,
         "type": "willing",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "abjuration",
     "source": [
-      "divine"
+      "divine",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Resistance",
+      "img": "icons/magic/defensive/shield-barrier-glowing-triangle-teal-purple.webp",
+      "origin": "Compendium.black-flag.spells.Item.KD0WeQfEhqqvQ8cY",
+      "transfer": false,
+      "_id": "EPO9cHqZj34yjp8n",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once before the spells ends, you can roll a [[/r 1d4]] and add the number rolled to one save of your choice. You can roll the die before or after making the save. The spell then ends.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723266725629,
+        "modifiedTime": 1723266774121,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!KD0WeQfEhqqvQ8cY.EPO9cHqZj34yjp8n"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -99,10 +145,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706935181987,
-    "modifiedTime": 1714412867652,
+    "modifiedTime": 1723266725658,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

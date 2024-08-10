@@ -12,8 +12,8 @@
 				<span>{{ localize "BF.SAVE.FIELDS.dc.ability.label" }}</span>
 				<select name="system.dc.ability">
 					{{#select system.dc.ability}}
-						{{#if labels.defaultAbility}}
-							<option value="">{{ labels.defaultAbility }}</option>
+						{{#if defaultAbility}}
+							<option value="">{{ defaultAbility }}</option>
 							<hr>
 						{{/if}}
 						<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
