@@ -88,7 +88,7 @@ export default class DragDrop {
 	 */
 	static getDragData(event) {
 		const data = TextEditor.getDragEventData(event);
-		if (!foundry.utils.isEmpty(data)) return { area: this.#currentDrag.area, data };
+		if (!foundry.utils.isEmpty(data)) return { area: this.#currentDrag?.area, data };
 		if (this.#currentDrag?.data)
 			return {
 				area: this.#currentDrag.area,
