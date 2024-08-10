@@ -11,9 +11,9 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  *
+ * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {object} type
  * @property {string} type.category - Ammunition category as defined in `CONFIG.BlackFlag.ammunition`.
- * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
  */
 export default class AmmunitionData extends ItemDataModel.mixin(
 	DescriptionTemplate,
@@ -40,13 +40,13 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			type: new SchemaField({
-				category: new StringField({ label: "BF.Equipment.Category.Label" })
-			}),
 			magicalBonus: new NumberField({
 				integer: true,
 				label: "BF.Ammunition.MagicalBonus.Label",
 				hint: "BF.Ammunition.MagicalBonus.Hint"
+			}),
+			type: new SchemaField({
+				category: new StringField({ label: "BF.Equipment.Category.Label" })
 			})
 		});
 	}

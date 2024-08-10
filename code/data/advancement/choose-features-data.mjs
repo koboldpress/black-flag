@@ -5,31 +5,26 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
 /**
  * Configuration data for the Choose Features advancement.
  *
- * @property {Record<number, number>} choices - Choices presented at each level.
  * @property {boolean} allowDrops - Allow player to drop items not in the pool.
- * @property {string} type - General item type to support (e.g. feature or talent).
+ * @property {Record<number, number>} choices - Choices presented at each level.
  * @property {FeatureGrantConfiguration[]} pool - Items to present as choices.
  * @property {object} restriction
  * @property {string} restriction.category - Category of allowed items (e.g. class or race).
  * @property {string} restriction.type - Subtype of allowed items (e.g. martialTalent or channelDivinity).
+ * @property {string} type - General item type to support (e.g. feature or talent).
  */
 export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
-				label: "BF.Advancement.ChooseFeatures.Choices.Label",
-				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
-			}),
 			allowDrops: new BooleanField({
 				initial: true,
 				label: "BF.Advancement.Config.AllowDrops.Label",
 				hint: "BF.Advancement.Config.AllowDrops.Hint"
 			}),
-			type: new StringField({
-				blank: false,
-				initial: "feature",
-				label: "BF.Advancement.ChooseFeatures.Type.Label"
+			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
+				label: "BF.Advancement.ChooseFeatures.Choices.Label",
+				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
 			}),
 			pool: new ArrayField(
 				new SchemaField({
@@ -40,6 +35,11 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 			restriction: new SchemaField({
 				category: new StringField({ label: "BF.Feature.Category.Label" }),
 				type: new StringField({ label: "BF.Feature.Type.Label" })
+			}),
+			type: new StringField({
+				blank: false,
+				initial: "feature",
+				label: "BF.Advancement.ChooseFeatures.Type.Label"
 			})
 		};
 	}

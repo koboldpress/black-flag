@@ -5,11 +5,11 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 const { ArrayField } = foundry.data.fields;
 
 /**
- * Configuration data for the Healing activity.
+ * Configuration data for the Heal activity.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  * @property {ExtendedDamageData} healing - Healing value.
  */
-export class HealingData extends foundry.abstract.DataModel {
+export class HealData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */

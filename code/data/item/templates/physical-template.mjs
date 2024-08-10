@@ -101,7 +101,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	get equipped() {
 		if ( !this.parent.actor ) return false;
 		if ( !this.equippable || this.parent.actor?.type !== "pc" ) return true;
-		return this.parent.getFlag("black-flag", "relationship.equipped") === true;
+		return this.parent.getFlag(game.system.id, "relationship.equipped") === true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -122,7 +122,7 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	 */
 	get magicAvailable() {
 		const attunement = this.attunement.value !== "required" || this.parent.actor?.type !== "pc"
-			|| this.parent.getFlag("black-flag", "relationship.attuned") === true;
+			|| this.parent.getFlag(game.system.id, "relationship.attuned") === true;
 		const property = !this.properties || ("magical" in this.validProperties && this.properties.has("magical"));
 		return attunement && property;
 	}

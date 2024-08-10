@@ -1,4 +1,4 @@
-import { HealingData } from "../../data/activity/healing-data.mjs";
+import { HealData } from "../../data/activity/heal-data.mjs";
 import { buildRoll, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
@@ -7,9 +7,9 @@ export default class HealActivity extends Activity {
 		foundry.utils.mergeObject(
 			super.metadata,
 			{
-				type: "healing",
-				dataModel: HealingData,
-				icon: "systems/black-flag/artwork/activities/healing.svg",
+				type: "heal",
+				dataModel: HealData,
+				icon: "systems/black-flag/artwork/activities/heal.svg",
 				title: "BF.HEAL.Title",
 				hint: "BF.HEAL.Hint"
 			},

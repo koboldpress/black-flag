@@ -33,13 +33,13 @@ export const _activityTypes = {
 			config: applications.DamageSheet
 		}
 	},
-	healing: {
+	heal: {
 		documentClass: documents.HealActivity,
 		sheetClasses: {
 			config: applications.HealSheet
 		}
 	},
-	savingThrow: {
+	save: {
 		documentClass: documents.SaveActivity,
 		sheetClasses: {
 			config: applications.SaveSheet

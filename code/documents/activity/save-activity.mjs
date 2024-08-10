@@ -1,4 +1,4 @@
-import { SavingThrowData } from "../../data/activity/saving-throw-data.mjs";
+import { SaveData } from "../../data/activity/save-data.mjs";
 import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import DamageActivity from "./damage-activity.mjs";
 
@@ -7,9 +7,9 @@ export default class SaveActivity extends DamageActivity {
 		foundry.utils.mergeObject(
 			super.metadata,
 			{
-				type: "savingThrow",
-				dataModel: SavingThrowData,
-				icon: "systems/black-flag/artwork/activities/saving-throw.svg",
+				type: "save",
+				dataModel: SaveData,
+				icon: "systems/black-flag/artwork/activities/save.svg",
 				title: "BF.SAVE.Title",
 				hint: "BF.SAVE.Hint"
 			},

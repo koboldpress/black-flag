@@ -9,9 +9,6 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
 /**
  * Configuration data for the attack activity.
  *
- * @property {object} type
- * @property {string} type.value - Is this a melee or ranged attack?
- * @property {string} type.classification - Is this a weapon or spell attack?
  * @property {string} ability - Ability used with the attack if not automatically calculated.
  * @property {object} attack
  * @property {string} attack.bonus - Bonus added to the attack to hit.
@@ -20,6 +17,9 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * @property {boolean} damage.includeBaseDamage - Should a item's base damage be included with any other damage parts?
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
+ * @property {object} type
+ * @property {string} type.value - Is this a melee or ranged attack?
+ * @property {string} type.classification - Is this a weapon or spell attack?
  */
 export class AttackData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -34,10 +34,6 @@ export class AttackData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			type: new SchemaField({
-				value: new StringField(),
-				classification: new StringField()
-			}),
 			ability: new StringField(),
 			attack: new SchemaField({
 				bonus: new FormulaField(),
@@ -48,7 +44,11 @@ export class AttackData extends foundry.abstract.DataModel {
 				parts: new ArrayField(new DamageField())
 				// TODO: Add conditions support to damage parts
 			}),
-			effects: new ArrayField(new AppliedEffectField())
+			effects: new ArrayField(new AppliedEffectField()),
+			type: new SchemaField({
+				value: new StringField(),
+				classification: new StringField()
+			})
 		};
 	}
 

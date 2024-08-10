@@ -12,10 +12,10 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  *
- * @property {object} identifier
- * @property {string} identifier.value - Unique identifier for this currency.
  * @property {object} conversion
  * @property {number} conversion.value - Rate at which this currency is converted into a standard baseline.
+ * @property {object} identifier
+ * @property {string} identifier.value - Unique identifier for this currency.
  */
 export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
 	/** @inheritDoc */
@@ -45,17 +45,6 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			price: false,
-			weight: new SchemaField(
-				{
-					value: new NumberField({ initial: 0.32 }),
-					units: new StringField({ initial: "ounce" })
-				},
-				{ label: "BF.Weight.Label" }
-			),
-			identifier: new SchemaField({
-				value: new IdentifierField()
-			}),
 			conversion: new SchemaField({
 				value: new NumberField({
 					initial: 1,
@@ -63,7 +52,18 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 					label: "BF.Currency.ConversionRatio.Label",
 					hint: "BF.Currency.ConversionRatio.Hint"
 				})
-			})
+			}),
+			identifier: new SchemaField({
+				value: new IdentifierField()
+			}),
+			price: false,
+			weight: new SchemaField(
+				{
+					value: new NumberField({ initial: 0.32 }),
+					units: new StringField({ initial: "ounce" })
+				},
+				{ label: "BF.Weight.Label" }
+			)
 		});
 	}
 

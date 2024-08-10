@@ -207,9 +207,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Preparation Methods         */
+	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareData() {
 		this.name = this.name || game.i18n.localize(this.constructor.metadata.title);
 		this.img = this.img || this.constructor.metadata.icon;
@@ -218,6 +219,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
 	prepareFinalData() {
 		super.prepareFinalData();
 		this.system.prepareFinalData?.();

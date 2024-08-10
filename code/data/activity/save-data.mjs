@@ -6,7 +6,7 @@ import AppliedEffectField from "./fields/applied-effect-field.mjs";
 const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Configuration data for the saving throw activity.
+ * Configuration data for the save activity.
  *
  * @property {string} ability - Ability required when rolling a saving throw.
  * @property {object} damage
@@ -16,7 +16,7 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} dc.formula - DC formula if manually set.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
-export class SavingThrowData extends foundry.abstract.DataModel {
+export class SaveData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */

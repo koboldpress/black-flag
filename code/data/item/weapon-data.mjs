@@ -17,20 +17,20 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {ProficiencyTemplate}
  * @mixes {PropertiesTemplate}
  *
- * @property {object} type
- * @property {string} type.value - Is this a melee or a ranged weapon?
- * @property {string} type.category - Weapon category as defined in `CONFIG.BlackFlag.weapons`.
- * @property {string} type.base - Specific weapon type defined as a child of its category.
- * @property {Set<string>} options - Weapon options that can be used with this weapon.
  * @property {object} ammunition
  * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
  * @property {DamageField} damage - Base weapon damage.
  * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
+ * @property {Set<string>} options - Weapon options that can be used with this weapon.
  * @property {object} range
  * @property {number} range.short - Short range of the weapon.
  * @property {number} range.long - Long range of the weapon.
  * @property {number} range.reach - Additional reach of the weapon beyond the wielder's normal reach.
  * @property {string} range.units - Units used to measure range and reach.
+ * @property {object} type
+ * @property {string} type.value - Is this a melee or a ranged weapon?
+ * @property {string} type.category - Weapon category as defined in `CONFIG.BlackFlag.weapons`.
+ * @property {string} type.base - Specific weapon type defined as a child of its category.
  */
 export default class WeaponData extends ItemDataModel.mixin(
 	ActivitiesTemplate,
@@ -59,14 +59,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			type: new SchemaField({
-				value: new StringField({ initial: "melee", label: "BF.Weapon.Type.Label" }),
-				category: new StringField({ label: "BF.Equipment.Category.Label" }),
-				base: new StringField({ label: "BF.Equipment.Base.Label" })
-			}),
-			options: new SetField(new StringField(), {
-				label: "BF.Weapon.Option.Label[other]"
-			}),
 			ammunition: new SchemaField(
 				{
 					type: new StringField({ label: "BF.Ammunition.Type.Label" })
@@ -79,11 +71,19 @@ export default class WeaponData extends ItemDataModel.mixin(
 				label: "BF.Weapon.MagicalBonus.Label",
 				hint: "BF.Weapon.MagicalBonus.Hint"
 			}),
+			options: new SetField(new StringField(), {
+				label: "BF.Weapon.Option.Label[other]"
+			}),
 			range: new SchemaField({
 				short: new NumberField({ min: 0, step: 0.1 }),
 				long: new NumberField({ min: 0, step: 0.1 }),
 				reach: new NumberField({ min: 0, step: 0.1 }),
 				units: new StringField()
+			}),
+			type: new SchemaField({
+				value: new StringField({ initial: "melee", label: "BF.Weapon.Type.Label" }),
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
 
 			// Attack ability override

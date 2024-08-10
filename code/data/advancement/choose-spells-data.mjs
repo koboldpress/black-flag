@@ -6,8 +6,8 @@ const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, S
 /**
  * Configuration data for the Choose Spells advancement.
  *
- * @property {Record<number, number>} choices - Choices presented at each level.
  * @property {boolean} allowDrops - Allow player to drop spells not in the pool.
+ * @property {Record<number, number>} choices - Choices presented at each level.
  * @property {FeatureGrantConfiguration[]} pool - Spells to present as choices.
  * @property {object} restriction
  * @property {boolean} restriction.allowCantrips - Allow cantrips to be selected if "Any Circle" is set.
@@ -27,14 +27,14 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
-				label: "BF.Advancement.ChooseFeatures.Choices.Label",
-				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
-			}),
 			allowDrops: new BooleanField({
 				initial: true,
 				label: "BF.Advancement.Config.AllowDrops.Label",
 				hint: "BF.Advancement.Config.AllowDrops.Hint"
+			}),
+			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
+				label: "BF.Advancement.ChooseFeatures.Choices.Label",
+				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
 			}),
 			pool: new ArrayField(
 				new SchemaField({

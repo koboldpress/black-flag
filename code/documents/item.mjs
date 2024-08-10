@@ -115,6 +115,21 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static fromSource(data, options = {}) {
+		const activities = foundry.utils.getProperty(data, "system.activities");
+		if (activities)
+			Object.values(activities).forEach(data => {
+				if (data.type === "healing") data.type = "heal";
+				else if (data.type === "savingThrow") data.type = "save";
+			});
+		return super.fromSource(data, options);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

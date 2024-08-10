@@ -16,9 +16,6 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  *
- * @property {object} type
- * @property {string} type.category - Armor category as defined in `CONFIG.BlackFlag.armor`.
- * @property {string} type.base - Specific armor type defined as a child of its category.
  * @property {object} armor
  * @property {number} armor.value - Base armor class offered by this item.
  * @property {number} armor.requiredStrength - Strength score required to wear this armor.
@@ -26,6 +23,9 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @property {object} modifier
  * @property {number} modifier.min - Minimum amount of modifier ability (usually DEX) that is contributed to AC.
  * @property {number} modifier.max - Maximum amount of modifier ability (usually DEX) that is contributed to AC.
+ * @property {object} type
+ * @property {string} type.category - Armor category as defined in `CONFIG.BlackFlag.armor`.
+ * @property {string} type.base - Specific armor type defined as a child of its category.
  */
 export default class ArmorData extends ItemDataModel.mixin(
 	ActivitiesTemplate,
@@ -54,10 +54,6 @@ export default class ArmorData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			type: new SchemaField({
-				category: new StringField({ label: "BF.Equipment.Category.Label" }),
-				base: new StringField({ label: "BF.Equipment.Base.Label" })
-			}),
 			armor: new SchemaField({
 				value: new NumberField({ min: 0, integer: true, label: "BF.Armor.Value.Label" }),
 				requiredStrength: new NumberField({
@@ -84,6 +80,10 @@ export default class ArmorData extends ItemDataModel.mixin(
 					integer: true,
 					label: "BF.Armor.Modifier.Maximum.Label"
 				})
+			}),
+			type: new SchemaField({
+				category: new StringField({ label: "BF.Equipment.Category.Label" }),
+				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
 		});
 	}

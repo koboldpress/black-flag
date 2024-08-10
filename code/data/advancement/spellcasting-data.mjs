@@ -7,17 +7,16 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
 /**
  * Configuration data for the Spellcasting advancement.
  *
- * @property {string} type - General spellcasting type (e.g. "leveled", "pact").
- * @property {string} progression - Specific progression within selected type (e.g. "full", "half", "third").
  * @property {string} ability - Spellcasting ability if not class's key ability.
- * @property {string} source - Source of magic used by spellcasting (e.g. "arcane", "divine").
  * @property {object} cantrips
  * @property {string} cantrips.scale - ID of scale value that represents number of cantrips known.
+ * @property {string} progression - Specific progression within selected type (e.g. "full", "half", "third").
  * @property {object} rituals
  * @property {string} rituals.scale - ID of scale value that represents number of rituals known.
  * @property {boolean} rituals.restricted - Should ritual selection be restricted to a single source?
  * @property {object} slots
  * @property {string} slots.scale - ID of the scale value that represents the number of spell slots.
+ * @property {string} source - Source of magic used by spellcasting (e.g. "arcane", "divine").
  * @property {object} spells
  * @property {string} spells.scale - ID of scale value that represents number of spells known.
  * @property {string} spells.mode - Method of learning spells (e.g. "all", "limited", "spellbook").
@@ -27,6 +26,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {object} spells.spellbook
  * @property {number} spells.spellbook.firstLevel - Number of free spells written in spellbook at level one.
  * @property {number} spells.spellbook.otherLevels - Number of free spells for spellbook at subsequent levels.
+ * @property {string} type - General spellcasting type (e.g. "leveled", "pact").
  */
 export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/** @override */
@@ -37,13 +37,11 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			type: new StringField({ initial: "leveled" }),
-			progression: new StringField(),
 			ability: new StringField({ blank: false, initial: "intelligence" }),
-			source: new StringField(),
 			cantrips: new SchemaField({
 				scale: new StringField()
 			}),
+			progression: new StringField(),
 			rituals: new SchemaField({
 				scale: new StringField(),
 				restricted: new BooleanField({ initial: true })
@@ -51,6 +49,7 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 			slots: new SchemaField({
 				scale: new StringField()
 			}),
+			source: new StringField(),
 			spells: new SchemaField({
 				scale: new StringField(),
 				mode: new StringField(),
@@ -61,7 +60,8 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 					firstLevel: new NumberField({ integer: true, min: 0 }),
 					otherLevels: new NumberField({ integer: true, min: 0 })
 				})
-			})
+			}),
+			type: new StringField({ initial: "leveled" })
 		};
 	}
 
