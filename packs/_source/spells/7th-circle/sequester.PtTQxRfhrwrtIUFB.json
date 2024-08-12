@@ -5,7 +5,48 @@
   "_id": "PtTQxRfhrwrtIUFB",
   "img": "icons/tools/cooking/can.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "OS3eqWZQGxLrBBRT": {
+        "type": "utility",
+        "_id": "OS3eqWZQGxLrBBRT",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>By means of this spell, a willing creature or an object can be hidden away, safe from detection for the duration. When you cast the spell and touch the target, it becomes invisible and can’t be targeted by divination spells or perceived through scrying sensors created by divination spells.</p><p>If the target is a creature, it falls into a state of suspended animation. Time ceases to flow for it, and it doesn’t grow older.</p><p>You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include <q>after 1,000 years</q> or <q>when the tarrasque awakens.</q> This spell also ends if the target takes any damage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,11 +71,16 @@
       "base": 7
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
-        "consumed": false,
-        "cost": null,
-        "denomination": "gp"
+        "consumed": true,
+        "cost": 5000,
+        "denomination": "gp",
+        "description": "a powder composed of gemstone dust worth at least 5,000 gp, which the spell consumes"
       }
     },
     "duration": {
@@ -42,7 +88,8 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "touch",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -57,7 +104,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creatureObject",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "transmutation"
@@ -74,7 +123,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723267391707,
-    "modifiedTime": 1723269813064,
+    "modifiedTime": 1723436810686,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PtTQxRfhrwrtIUFB"

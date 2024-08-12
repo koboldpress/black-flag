@@ -18,8 +18,16 @@
                 "number": 3,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "thunder"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "thunder",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
@@ -28,8 +36,9 @@
           }
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -45,7 +54,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -56,7 +65,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A point you can see bursts with a cacophony of sound.</em></p><p>A sudden loud ringing noise, painfully intense, erupts from a point of your choice within range. Each creature in a 10-foot-radius sphere centered on that point must make a CON save. A creature takes 3d8 thunder damage on a failed save, or half as much damage on a successful one. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on this save.</p><p>A nonmagical object that isn’t being worn or carried also takes the damage if it’s in the spell’s area.</p>",
+      "value": "<p>A sudden loud ringing noise, painfully intense, erupts from a point of your choice within range. Each creature in a 10-foot-radius sphere centered on that point must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a successful one. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on this save.</p><p>A nonmagical object that isn’t being worn or carried also takes the damage if it’s in the spell’s area.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the damage increases by [[/damage 1d8 thunder]]{1d8} for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -126,7 +135,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935423941,
-    "modifiedTime": 1723269663106,
+    "modifiedTime": 1723437016728,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

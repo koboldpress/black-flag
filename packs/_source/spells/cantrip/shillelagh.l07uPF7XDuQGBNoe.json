@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You briefly imbue a wooden weapon with primordial power.</em></p><p>The wood of a club or quarterstaff you are holding is imbued with nature’s power. For the duration, you can use your spellcasting ability instead of STR for the attack and damage rolls of melee attacks using that weapon, and the weapon’s damage die becomes a d8. The weapon also becomes magical, if it isn’t already. The spell ends if you cast it again or if you let go of the weapon.</p>",
+      "value": "<p>The wood of a club or quarterstaff you are holding is imbued with nature’s power. For the duration, you can use your spellcasting ability instead of STR for the attack and damage rolls of melee attacks using that weapon, and the weapon’s damage die becomes a d8. The weapon also becomes magical if it isn’t already. As part of the same action used to cast this spell, you can make a single melee attack with the shillelagh, provided a creature is within the weapon’s range.</p><p>The spell ends if you cast it again or if you let go of the weapon.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -78,11 +78,13 @@
       "affects": {
         "choice": false,
         "type": "object",
-        "count": ""
+        "count": "",
+        "special": "club or quarterstaff made of wood"
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "transmutation",
     "source": [
@@ -97,10 +99,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706997899543,
-    "modifiedTime": 1714412908037,
+    "modifiedTime": 1723437243479,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

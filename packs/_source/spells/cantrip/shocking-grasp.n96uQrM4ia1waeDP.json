@@ -22,19 +22,30 @@
                 "number": 1,
                 "denomination": 8,
                 "bonus": "",
-                "custom": "",
-                "type": "lightning"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "lightning",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
               }
             ]
           },
-          "ability": "none",
+          "ability": "",
           "attack": {
-            "flat": false
+            "flat": false,
+            "bonus": ""
           }
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -50,7 +61,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/attack.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -61,7 +72,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You touch a target within range before discharging a jolt of heart-stopping lightning.</em></p><p>Lightning springs from your hand to deliver a shock to a creature you try to touch. Make a melee spell attack against the target. You have advantage on the attack roll if the target is wearing armor made of metal. On a hit, the target takes 1d8 lightning damage, and it can’t take reactions until the start of its next turn.</p><p>The spell’s damage increases by 1d8 when you reach 5th level (2d8).</p>",
+      "value": "<p>Lightning springs from your hand to deliver a shock to a creature you touch. Make a melee spell attack against the target. You have advantage on the attack roll if the target is wearing metal armor or armor that lacks the Natural Materials property. On a hit, the target takes [[/damage]] damage, and it can’t take reactions until the start of its next turn.</p><p>The spell’s damage increases by 1d8 when you reach 5th level ([[/damage 2d8 lightning]]{2d8}), 11th level ([[/damage 3d8 lightning]]{3d8}), and 17th level ([[/damage 4d8 lightning]]{4d8}).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -103,15 +114,18 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "school": "evocation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
   "effects": [],
@@ -122,10 +136,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706935480956,
-    "modifiedTime": 1714412825135,
+    "modifiedTime": 1723437321067,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

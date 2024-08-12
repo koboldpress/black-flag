@@ -6,23 +6,72 @@
   "img": "icons/magic/nature/trap-spikes-thorns-green.webp",
   "system": {
     "activities": {
-      "EdmLdiMZ0GC02tYl": {
-        "type": "utility",
-        "_id": "EdmLdiMZ0GC02tYl",
+      "nmQt6MAFPMmfkOvC": {
+        "type": "damage",
+        "_id": "nmQt6MAFPMmfkOvC",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "damage": {
+            "allowCritical": false,
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 4,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "piercing",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
             "allowed": false
           }
         },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
         "uses": {
           "spent": 0,
+          "consumeQuantity": false,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -33,7 +82,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A patch of ground sprouts piercing thorns and difficult terrain that looks natural.</em></p><p>The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes 2d4 piercing damage for every 5 feet it travels.</p><p>The transformation of the ground is camouflaged to look natural. Any creature that can’t see the area at the time the spell is cast must make a WIS (Perception) check against your spell save DC to recognize the terrain as hazardous before entering it.</p>",
+      "value": "<p>The ground in a 20-foot radius centered on a point within range twists and sprouts hard spikes and thorns. The area becomes difficult terrain for the duration. When a creature moves into or within the area, it takes [[/damage]] damage for every 5 feet it travels.</p><p>The transformation of the ground is camouflaged to look natural. Any creature that can’t see the area at the time the spell is cast must make a [[/check WIS (Perception) dc=@spellcasting.dc]] check against your spell save DC to recognize the terrain as hazardous before entering it.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -106,7 +155,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706997972095,
-    "modifiedTime": 1723269666923,
+    "modifiedTime": 1723438289399,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

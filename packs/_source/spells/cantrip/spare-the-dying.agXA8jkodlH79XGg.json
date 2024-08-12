@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You rescue a dying creature from their impending death.</em></p><p>You touch a living creature that has 0 hit points. The creature becomes stable. This spell has no effect on Undead or Constructs.</p>",
+      "value": "<p>You touch a living creature that has 0 HP. The creature becomes stable. This spell has no effect on Constructs or Undead.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -75,12 +75,14 @@
       "affects": {
         "choice": false,
         "type": "creature",
-        "count": "1"
+        "count": "1",
+        "special": ""
       }
     },
     "range": {
       "units": "foot",
-      "value": "10"
+      "value": "10",
+      "special": ""
     },
     "school": "necromancy",
     "source": [
@@ -95,10 +97,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.023",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706935619922,
-    "modifiedTime": 1714412853632,
+    "modifiedTime": 1723438039992,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "80cQFC2Aw5Ye3RYg",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "ANlpZ2E9uTYynCxh"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You temporarily improve your sight, gaining the ability to see invisible and ethereal things.</em></p><p>For the duration, you see invisible creatures and objects as if they were visible, and you can see into the Ethereal Plane. Ethereal creatures and objects appear ghostly and translucent.</p>",
+      "value": "<p>For the duration, you see invisible creatures and objects as if they were visible, and you can see into the Ethereal Plane. Ethereal creatures and objects appear ghostly and translucent.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -86,10 +92,49 @@
     },
     "school": "divination",
     "source": [
-      "arcane"
+      "arcane",
+      "divine",
+      "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "See Invisibility",
+      "img": "icons/magic/perception/eye-slit-pink.webp",
+      "origin": "Compendium.black-flag.spells.Item.3MMJmBI63gipqU9b",
+      "transfer": false,
+      "_id": "ANlpZ2E9uTYynCxh",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You see invisible creatures and objects as if they were visible, and you can see into the Ethereal Plane. Ethereal creatures and objects appear ghostly and translucent.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723436100194,
+        "modifiedTime": 1723436133685,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!3MMJmBI63gipqU9b.ANlpZ2E9uTYynCxh"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -100,7 +145,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935362988,
-    "modifiedTime": 1723269661966,
+    "modifiedTime": 1723436100223,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

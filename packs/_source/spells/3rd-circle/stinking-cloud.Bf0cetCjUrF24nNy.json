@@ -20,8 +20,9 @@
           }
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -37,7 +38,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -48,7 +49,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You create a heavy cloud that sickens whomever is caught within it.</em></p><p>You create a 20-foot-radius sphere of yellow, nauseating gas centered on a point within range. The cloud spreads around corners, and its area is heavily obscured. The cloud lingers in the air for the duration.</p><p>Each creature that is completely within the cloud at the start of its turn must make a CON save against poison. On a failed save, the creature spends its action that turn retching and reeling. Creatures that don’t need to breathe or are immune to poison automatically succeed on this save.</p><p>A moderate wind (at least 10 miles per hour) disperses the cloud after 4 rounds. A strong wind (at least 20 miles per hour) disperses it after 1 round.</p>",
+      "value": "<p>You create a 20-foot-radius sphere of yellow, nauseating gas centered on a point within range. The cloud spreads around corners, and its area is heavily obscured. The cloud lingers in the air for the duration.</p><p>Each creature that is completely within the cloud at the start of its turn must make a [[/save]] save against poison. On a failed save, the creature spends its action that turn retching and reeling. Creatures that don’t need to breathe or are immune to poison automatically succeed on this save.</p><p>A moderate wind (at least 10 miles per hour) disperses the cloud after 4 rounds. A strong wind (at least 20 miles per hour) disperses it after 1 round.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -107,7 +108,8 @@
     },
     "school": "conjuration",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -121,7 +123,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935731989,
-    "modifiedTime": 1723269690930,
+    "modifiedTime": 1723438550670,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

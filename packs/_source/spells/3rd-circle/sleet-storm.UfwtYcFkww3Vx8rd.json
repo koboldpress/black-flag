@@ -6,24 +6,15 @@
   "img": "icons/magic/water/projectile-icecicles-salvo.webp",
   "system": {
     "activities": {
-      "gp63YRcjMcJkeAZY": {
-        "type": "savingThrow",
-        "_id": "gp63YRcjMcJkeAZY",
+      "WqWGJHe0uzOlngc8": {
+        "type": "utility",
+        "_id": "WqWGJHe0uzOlngc8",
         "description": "",
         "system": {
-          "ability": "dexterity",
-          "damage": {
-            "parts": []
-          },
-          "dc": {
-            "ability": ""
-          }
+          "effects": []
         },
         "activation": {
-          "value": null,
-          "type": "",
-          "condition": "",
-          "primary": true
+          "value": null
         },
         "consumption": {
           "targets": [],
@@ -35,10 +26,13 @@
           "units": "instantaneous",
           "override": false
         },
-        "range": {},
+        "range": {
+          "override": false
+        },
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot"
           },
           "affects": {
@@ -49,12 +43,8 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [],
-          "min": "",
-          "max": ""
-        },
-        "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+          "recovery": []
+        }
       }
     },
     "uses": {
@@ -65,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames are doused.</p><p>The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell’s area for the first time on a turn or starts its turn there, it must make a DEX save. On a failed save, it falls prone.</p><p>If a creature is concentrating in the spell’s area, the creature must make a successful CON save against your spell save DC or lose concentration.</p>",
+      "value": "<p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall cylinder with a 40-foot radius centered on a point you choose within range. The area is heavily obscured, and exposed flames are doused.</p><p>The ground in the area is covered with slick ice, making it difficult terrain. When a creature enters the spell’s area for the first time on a turn or starts its turn there, it must make a [[/save DEX dc=@spellcasting.dc]] save. On a failed save, it falls prone.</p><p>If a creature is concentrating in the spell’s area, the creature must make a successful [[/save CON dc=@spellcasting.dc]] save against your spell save DC or lose concentration.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -118,7 +108,7 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
+        "type": "",
         "count": "",
         "special": ""
       }
@@ -136,7 +126,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1718732235366,
-    "modifiedTime": 1723269914979,
+    "modifiedTime": 1723437657479,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

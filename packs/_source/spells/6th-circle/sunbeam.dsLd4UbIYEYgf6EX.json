@@ -5,7 +5,78 @@
   "_id": "dsLd4UbIYEYgf6EX",
   "img": "icons/magic/light/beam-strike-village-yellow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "aVBf0iFFjqb3vb67": {
+        "type": "save",
+        "_id": "aVBf0iFFjqb3vb67",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 6,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +85,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Each creature in the line must make a [[/save]] save. On a failure, a creature takes [[/damage]] damage and is blinded until your next turn. On a success, it takes half as much damage and isn’t blinded by this spell. Undead have disadvantage on this save.</p><p>You can create a new line of radiance as your action on each turn until the spell ends.</p><p>For the duration, a mote of brilliant radiance shines in your hand. It sheds bright light in a 30-foot radius and dim light for an additional 30 feet. This light is sunlight.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +101,28 @@
       "base": 6
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a magnifying glass"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "divine",
@@ -53,7 +133,9 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "line",
+        "size": "60",
+        "width": "5"
       },
       "affects": {
         "choice": false,
@@ -74,7 +156,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723267719952,
-    "modifiedTime": 1723269864899,
+    "modifiedTime": 1723438996017,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!dsLd4UbIYEYgf6EX"

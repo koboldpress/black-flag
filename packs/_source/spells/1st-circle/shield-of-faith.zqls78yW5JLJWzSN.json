@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "PXE9dTCHBk2sfxB5",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "xXzRhx3r7mHEkblB"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>An aegis springs up around your target, protecting them from physical harm.</em></p><p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
+      "value": "<p>A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -94,7 +100,51 @@
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Shield of Faith",
+      "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
+      "origin": "Compendium.black-flag.spells.Item.zqls78yW5JLJWzSN",
+      "transfer": false,
+      "_id": "xXzRhx3r7mHEkblB",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }], \"formula\": \"5\" }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>A shimmering field appears and you, granting you a +2 bonus to AC for the duration.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723437146572,
+        "modifiedTime": 1723437179548,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!zqls78yW5JLJWzSN.xXzRhx3r7mHEkblB"
+    }
+  ],
   "sort": 4100000,
   "ownership": {
     "default": 0
@@ -105,7 +155,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935460334,
-    "modifiedTime": 1723269655629,
+    "modifiedTime": 1723437193114,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

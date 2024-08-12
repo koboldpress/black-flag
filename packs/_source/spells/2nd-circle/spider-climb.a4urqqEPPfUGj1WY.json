@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "3rxIobVVf7k9YgVE",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "C4BwWXR63vTS2iSn"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>You grant the ability to walk up walls, ceilings, and vertical objects.</em></p><p>Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and upside down along ceilings, while leaving its hands free. The target also gains a climbing speed equal to its walking speed.</p>",
+      "value": "<p>Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and upside down along ceilings while leaving its hands free. The target also gains a climbing speed equal to its walking speed.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -90,10 +96,55 @@
     },
     "school": "transmutation",
     "source": [
-      "arcane"
+      "arcane",
+      "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Spider Climb",
+      "img": "icons/creatures/invertebrates/spider-striped-web-red.webp",
+      "origin": "Compendium.black-flag.spells.Item.a4urqqEPPfUGj1WY",
+      "transfer": false,
+      "_id": "C4BwWXR63vTS2iSn",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.types.climb",
+          "mode": 4,
+          "value": "@base",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723438186920,
+        "modifiedTime": 1723438207864,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!a4urqqEPPfUGj1WY.C4BwWXR63vTS2iSn"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -104,7 +155,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935666134,
-    "modifiedTime": 1723269665711,
+    "modifiedTime": 1723438186956,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

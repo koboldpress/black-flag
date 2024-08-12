@@ -4,7 +4,7 @@
   "img": "icons/magic/defensive/barrier-shield-dome-deflect-blue.webp",
   "system": {
     "description": {
-      "value": "<p><em>You create a ward at the last moment, protecting yourself from all but the stoutest of strikes.</em></p><p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from <em>magic missile</em>.</p>",
+      "value": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from darts created by the <em>magic missile</em> spell.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -59,11 +59,18 @@
       "ZIk7yqNgy6EC4lzb": {
         "type": "utility",
         "_id": "ZIk7yqNgy6EC4lzb",
-        "description": "<p>An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from <em>magic missile</em>.</p>",
-        "system": {},
+        "description": "",
+        "system": {
+          "effects": [
+            {
+              "_id": "EuxJSl6nqUf0YiJy"
+            }
+          ]
+        },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -79,7 +86,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -93,7 +100,51 @@
       "arcane"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Shield",
+      "img": "icons/magic/defensive/barrier-shield-dome-deflect-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.MibJGjLMmuyrSzUZ",
+      "transfer": false,
+      "_id": "EuxJSl6nqUf0YiJy",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"armor-class\" }], \"formula\": \"5\" }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723437069635,
+        "modifiedTime": 1723437118765,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!MibJGjLMmuyrSzUZ.EuxJSl6nqUf0YiJy"
+    }
+  ],
   "folder": "nRrXxMSYGyY4qKs3",
   "ownership": {
     "default": 0
@@ -104,7 +155,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1699211483460,
-    "modifiedTime": 1723269654208,
+    "modifiedTime": 1723437069664,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

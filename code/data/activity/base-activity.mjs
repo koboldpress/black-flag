@@ -101,7 +101,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				validationError: `must be the same as the Activity type name ${this.typeName}`
 			}),
 			name: new StringField({ initial: undefined }),
-			img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
+			img: new FilePathField({ blank: true, initial: undefined, categories: ["IMAGE"] }),
 			description: new HTMLField(),
 			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
