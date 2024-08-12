@@ -212,7 +212,7 @@ export default class PCSheet extends BaseActorSheet {
 		if (senses || this.modes.editing)
 			context.traits.push({
 				key: "senses",
-				label: "BF.Sense.Label[other]",
+				label: "BF.SENSES.Label[other]",
 				value: senses || none,
 				config: "senses"
 			});

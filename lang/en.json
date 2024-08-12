@@ -2038,10 +2038,33 @@
 	}
 },
 
-"BF.Movement": {
+"BF.MOVEMENT": {
 	"Label": "Movement",
+	"FIELDS": {
+		"traits": {
+			"movement": {
+				"label": "Speed",
+				"base": {
+					"label": "Base Speed",
+					"hint": "Base movement speed that can be used in formulas for deriving other speeds using the <blackFlag-copyable>@base</blackFlag-copyable> property."
+				},
+				"custom": {
+					"label": "Custom Speed"
+				},
+				"tags": {
+					"label": "Movement Tags"
+				},
+				"units": {
+					"label": "Speed Units"
+				}
+			}
+		}
+	},
+	"Action": {
+		"AddCustom": "Add Custom Speed",
+		"DeleteCustom": "Delete Custom Speed"
+	},
 	"Tag": {
-		"Label": "Movement Tags",
 		"Hover": {
 			"Label": "Hover",
 			"Display": "hover"
@@ -2473,14 +2496,33 @@
 	"LabelShort[other]": "Saves"
 },
 
-"BF.Sense": {
+"BF.SENSES": {
 	"Label[one]": "Sense",
 	"Label[other]": "Senses",
+	"FIELDS": {
+		"traits": {
+			"senses": {
+				"custom": {
+					"label": "Custom Senses"
+				},
+				"tags": {
+					"label": "Sense Tags"
+				},
+				"types": {
+					"label": "Sense Types"
+				},
+				"units": {
+					"label": "Sense Units"
+				}
+			}
+		}
+	},
 	"Action": {
-		"Configure": "Configure Senses"
+		"AddCustom": "Add Custom",
+		"Configure": "Configure Senses",
+		"DeleteCustom": "Delete Custom"
 	},
 	"Tag": {
-		"Label": "Sense Tags",
 		"CantSense": {
 			"Label": "Can’t Sense Beyond Radius",
 			"Display": "can’t sense beyond this radius"
@@ -2691,10 +2733,6 @@
 	"Label": "Speed",
 	"Action": {
 		"Configure": "Configure Speed"
-	},
-	"Base": {
-		"Label": "Base Speed",
-		"Hint": "Base movement speed that can be used in formulas for deriving other speeds using the @base property."
 	}
 },	
 

@@ -1,9 +1,9 @@
 <form autocomplete="off">
 	<fieldset>
-		<legend>{{ localize "BF.Speed.Label" }}</legend>
+		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.label" }}</legend>
 		<label>
-			<span class="hinted-label" data-tooltip="BF.Movement.Base.Hint">
-				{{ localize "BF.Speed.Base.Label" }}
+			<span class="hinted-label" data-tooltip="BF.MOVEMENT.FIELDS.traits.movement.base.hint">
+				{{ localize "BF.MOVEMENT.FIELDS.traits.movement.base.label" }}
 			</span>
 			<input type="number" name="base" value="{{ source.traits.movement.base }}"
 			       min="0" step="0.1">
@@ -14,9 +14,39 @@
 				<input type="text" name="types.{{ @key }}" value="{{ value }}" placeholder="{{ placeholder }}">
 			</label>
 		{{/each}}
+		<label>
+			<span>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.units.label" }}</span>
+			<select name="units">
+				{{ selectOptions CONFIG.distanceUnits.localized selected=source.traits.movement.units }}
+			</select>
+		</label>
 	</fieldset>
 	<fieldset>
-		<legend>{{ localize "BF.Movement.Tag.Label" }}</legend>
+		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.tags.label" }}</legend>
 		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags" }}
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.custom.label" }}</legend>
+		<ul class="configuration-list">
+			{{#each custom}}
+				<li>
+					<div class="item-name full-width">
+						<input type="text" name="custom.{{ @index }}" value="{{ this }}">
+					</div>
+					<div class="item-controls">
+						<button class="link-button" type="button" data-action="delete" data-index="{{ @index }}"
+										data-tooltip="BF.MOVEMENT.Action.DeleteCustom"
+										aria-label="{{ localize 'BF.MOVEMENT.Action.DeleteCustom' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</div>
+				</li>
+			{{/each}}
+			<li class="add-control">
+				<button class="link-button" type="button" data-action="add">
+					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.MOVEMENT.Action.AddCustom" }}
+				</button>
+			</li>
+		</ul>
 	</fieldset>
 </form>

@@ -8,5 +8,9 @@ blackFlag-copyable {
 	&:not(:empty) {
 		font-weight: bold;
 		button > i { margin-inline-start: 3px; }
+		:where(#tooltip, .locked-tooltip) & {
+			font-weight: normal;
+			button > i { font-size: var(--font-size-12); }
+		}
 	}
 }

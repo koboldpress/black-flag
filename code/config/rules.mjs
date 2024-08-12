@@ -49,7 +49,7 @@ export const ruleTypes = {
 		references: "healingTypes"
 	},
 	movementType: {
-		label: "BF.Movement.Type.Label",
+		label: "BF.MOVEMENT.Type.Label",
 		reference: "movementTypes"
 	},
 	property: {

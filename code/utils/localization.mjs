@@ -49,7 +49,7 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
 	if ( appendedTags.length ) label += ` (${game.i18n.getListFormatter({ style: "short" }).format(appendedTags)})`;
 
 	formatters.forEach(f => label = game.i18n.format(f, { entries: label }));
-	return game.i18n.getListFormatter({ type: "unit" }).format([label, ...extras]);
+	return game.i18n.getListFormatter({ type: "unit" }).format([label, ...extras].filter(l => l));
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

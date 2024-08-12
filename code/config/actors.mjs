@@ -222,22 +222,22 @@ export const luck = {
  */
 export const movementTypes = {
 	walk: {
-		label: "BF.Movement.Type.Walk"
+		label: "BF.MOVEMENT.Type.Walk"
 	},
 	climb: {
-		label: "BF.Movement.Type.Climb",
+		label: "BF.MOVEMENT.Type.Climb",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CdBLKsrlKHR5HvDr"
 	},
 	fly: {
-		label: "BF.Movement.Type.Fly",
+		label: "BF.MOVEMENT.Type.Fly",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.CHNmwHjrIZtXEsf4"
 	},
 	swim: {
-		label: "BF.Movement.Type.Swim",
+		label: "BF.MOVEMENT.Type.Swim",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.nzj83NdxpPZQoW6Z"
 	},
 	burrow: {
-		label: "BF.Movement.Type.Burrow",
+		label: "BF.MOVEMENT.Type.Burrow",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.jzO6qMcEroDupZDD"
 	}
 };
@@ -251,8 +251,8 @@ localizeConfig(movementTypes);
  */
 export const movementTags = {
 	hover: {
-		label: "BF.Movement.Tag.Hover.Label",
-		display: "BF.Movement.Tag.Hover.Display",
+		label: "BF.MOVEMENT.Tag.Hover.Label",
+		display: "BF.MOVEMENT.Tag.Hover.Display",
 		type: "associated",
 		association: "fly"
 	}
@@ -327,19 +327,19 @@ export const rest = {
  */
 export const senses = {
 	darkvision: {
-		label: "BF.Sense.Type.Darkvision",
+		label: "BF.SENSES.Type.Darkvision",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.wdYu7KK3IEKJ8lte"
 	},
 	keensense: {
-		label: "BF.Sense.Type.Keensense",
+		label: "BF.SENSES.Type.Keensense",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.gueujRnHAjOZxT6g"
 	},
 	tremorsense: {
-		label: "BF.Sense.Type.Tremorsense",
+		label: "BF.SENSES.Type.Tremorsense",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.iGH9wAnloILFHmX8"
 	},
 	truesight: {
-		label: "BF.Sense.Type.Truesight",
+		label: "BF.SENSES.Type.Truesight",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.rGryrzkJD8x0LNkT"
 	}
 };
@@ -353,8 +353,8 @@ localizeConfig(senses);
  */
 export const senseTags = {
 	cantSense: {
-		label: "BF.Sense.Tag.CantSense.Label",
-		display: "BF.Sense.Tag.CantSense.Display",
+		label: "BF.SENSES.Tag.CantSense.Label",
+		display: "BF.SENSES.Tag.CantSense.Display",
 		type: "associated",
 		association: "keensense"
 	}

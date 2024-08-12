@@ -12,51 +12,52 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			traits: new SchemaField({
-				movement: new SchemaField({
-					base: new NumberField({
-						nullable: false, initial: 30, min: 0, step: 0.1, label: "BF.Speed.Base.Label", hint: "BF.Speed.Base.Hint"
-					}),
-					types: new MappingField(new FormulaField({deterministic: true}), {
-						initial: { walk: "@base" }
-					}),
-					tags: new SetField(new StringField())
-					// TODO: Add alternate units
-				}, {label: "BF.Speed.Label"}),
-				senses: new SchemaField({
-					types: new MappingField(new FormulaField({deterministic: true})),
-					tags: new SetField(new StringField())
-				}, {label: "BF.Sense.Label[other]"}),
-				size: new StringField({ label: "BF.Size.Label" }),
 				condition: new SchemaField({
-					resistances: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField())
-					}, {label: "BF.Resistance.Label"}),
 					immunities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())
 					}, {label: "BF.Immunity.Label"}),
+					resistances: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField())
+					}, {label: "BF.Resistance.Label"}),
 					vulnerabilities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())
 					}, {label: "BF.Vulnerability.Label"})
 				}),
 				damage: new SchemaField({
-					resistances: new SchemaField({
-						value: new SetField(new StringField()),
-						custom: new ArrayField(new StringField()),
-						bypasses: new SetField(new StringField())
-					}, {label: "BF.Resistance.Label"}),
 					immunities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField()),
 						bypasses: new SetField(new StringField())
 					}, {label: "BF.Immunity.Label"}),
+					resistances: new SchemaField({
+						value: new SetField(new StringField()),
+						custom: new ArrayField(new StringField()),
+						bypasses: new SetField(new StringField())
+					}, {label: "BF.Resistance.Label"}),
 					vulnerabilities: new SchemaField({
 						value: new SetField(new StringField()),
 						custom: new ArrayField(new StringField())
 					}, {label: "BF.Vulnerability.Label"})
-				})
+				}),
+				movement: new SchemaField({
+					base: new NumberField({ nullable: false, initial: 30, min: 0, step: 0.1 }),
+					custom: new ArrayField(new StringField()),
+					tags: new SetField(new StringField()),
+					types: new MappingField(new FormulaField({ deterministic: true }), {
+						initial: { walk: "@base" }
+					}),
+					units: new StringField({ initial: "foot" })
+				}),
+				senses: new SchemaField({
+					custom: new ArrayField(new StringField()),
+					types: new MappingField(new FormulaField({ deterministic: true })),
+					tags: new SetField(new StringField()),
+					units: new StringField({ initial: "foot" })
+				}),
+				size: new StringField({ label: "BF.Size.Label" })
 			}, {label: "BF.Trait.Label[other]"})
 		};
 	}
@@ -98,8 +99,8 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 
 			const label = CONFIG.BlackFlag.movementTypes.localized[type];
 			if ( speed && label ) {
-				if ( type === "walk" ) entries.set(type, numberFormat(speed, { unit: "foot" }));
-				else entries.set(type, `${label.toLowerCase()} ${numberFormat(speed, { unit: "foot" })}`);
+				if ( type === "walk" ) entries.set(type, numberFormat(speed, { unit: movement.units }));
+				else entries.set(type, `${label.toLowerCase()} ${numberFormat(speed, { unit: movement.units })}`);
 			}
 		}
 
@@ -110,9 +111,12 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			.map(([type, speed]) => {
 				const config = CONFIG.BlackFlag.movementTypes[type];
 				const label = config ? game.i18n.localize(config.label) : type;
-				return `${label} ${numberFormat(speed, { unit: "foot" })}`;
+				return `${label} ${numberFormat(speed, { unit: movement.units })}`;
 			});
-		movement.label = formatTaggedList({ entries, tags: movement.tags, tagDefinitions: CONFIG.BlackFlag.movementTags });
+		movement.labels.push(...movement.custom);
+		movement.label = formatTaggedList({
+			entries, extras: movement.custom, tags: movement.tags, tagDefinitions: CONFIG.BlackFlag.movementTags
+		});
 
 		// Calculate each special sense type
 		const senses = this.traits.senses;
@@ -121,10 +125,10 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 			const range = simplifyBonus(formula, rollData);
 			senses.types[type] = range;
 			const label = CONFIG.BlackFlag.senses.localized[type];
-			if ( range && label ) senseEntries.set(type, `${label} ${numberFormat(range, { unit: "foot" })}`);
+			if ( range && label ) senseEntries.set(type, `${label} ${numberFormat(range, { unit: senses.units })}`);
 		}
 		senses.label = formatTaggedList({
-			entries: senseEntries, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags
+			entries: senseEntries, extras: senses.custom, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags
 		});
 
 		// Adjust resistances && immunities based on status effects
