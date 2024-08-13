@@ -5,7 +5,52 @@
   "_id": "aC9CHr55a0J0bLti",
   "img": "icons/magic/control/energy-stream-link-spiral-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "EdDAtBi2GPlg1JWk": {
+        "type": "utility",
+        "_id": "EdDAtBi2GPlg1JWk",
+        "description": "",
+        "system": {
+          "effects": [
+            {
+              "_id": "UK3sgn58rgmrbvMl"
+            }
+          ]
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +59,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You forge a telepathic link among up to eight willing creatures of your choice within range, psychically linking each creature to all the others for the duration. Creatures with an INT of 3 (−4) or lower aren’t affected by this spell. Until the spell ends, the targets can communicate telepathically through the bond whether or not they have a common language. The communication is possible over any distance, though it can’t extend to other planes of existence.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +75,27 @@
       "base": 5
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "pieces of eggshell from two different kinds of creatures"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "30",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -57,12 +110,51 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "8",
+        "special": ""
       }
     },
     "school": "divination"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Telepathic Bond",
+      "img": "icons/magic/control/energy-stream-link-spiral-orange.webp",
+      "origin": "Compendium.black-flag.spells.Item.aC9CHr55a0J0bLti",
+      "transfer": false,
+      "_id": "UK3sgn58rgmrbvMl",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You and the other targets can communicate telepathically through the bond whether or not you have a common language. The communication is possible over any distance, though it can’t extend to other planes of existence.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723576821868,
+        "modifiedTime": 1723576874813,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!aC9CHr55a0J0bLti.UK3sgn58rgmrbvMl"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -74,7 +166,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527652781,
-    "modifiedTime": 1723575144213,
+    "modifiedTime": 1723576821899,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!aC9CHr55a0J0bLti"

@@ -5,7 +5,48 @@
   "_id": "5uv8CU71uGhpoixs",
   "img": "icons/commodities/flowers/dandelion-pod-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "9MitzaKG7nOQ99xE": {
+        "type": "utility",
+        "_id": "9MitzaKG7nOQ99xE",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>This spell creates a magical link between a Large or larger nonmagical plant within range and another plant, at any distance, on the same plane of existence. Creatures of the Plant type can’t be targeted by this spell. You must have seen or touched the destination plant at least once before. For the duration, any creature can step into the target plant and exit from the destination plant by using 5 feet of movement.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +71,10 @@
       "base": 6
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -38,11 +82,14 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "10",
+      "special": ""
     },
     "source": [
       "primordial"
@@ -56,7 +103,8 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "special",
+        "special": "Large or larger nonmagical plant"
       }
     },
     "school": "conjuration"
@@ -73,7 +121,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527808239,
-    "modifiedTime": 1723575374181,
+    "modifiedTime": 1723577848412,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!5uv8CU71uGhpoixs"

@@ -5,7 +5,48 @@
   "_id": "3bbgz2s12IBTQuwV",
   "img": "icons/environment/wilderness/tree-ash.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "mbe0byBxLtibg3wV": {
+        "type": "utility",
+        "_id": "mbe0byBxLtibg3wV",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You gain the ability to enter a tree and move from inside it to inside another tree of the same kind within 500 feet. Both trees must be living and at least the same size as you. You must use 5 feet of movement to enter a tree. You instantly know the location of all other trees of the same kind within 500 feet and, as part of the move used to enter the tree, can either pass into one of those trees or step out of the tree you’re in. You appear in a space of your choice within 5 feet of the destination tree using another 5 feet of movement. If you have no movement left, you appear within 5 feet of the tree you entered.</p><p>You can use this transportation ability once per round for the duration. You must end each turn outside a tree.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +71,10 @@
       "base": 5
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -38,11 +82,15 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "primordial"
@@ -73,7 +121,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527852004,
-    "modifiedTime": 1723575380629,
+    "modifiedTime": 1723577909911,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!3bbgz2s12IBTQuwV"

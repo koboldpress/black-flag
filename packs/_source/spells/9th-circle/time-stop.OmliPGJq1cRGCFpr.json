@@ -5,7 +5,48 @@
   "_id": "OmliPGJq1cRGCFpr",
   "img": "icons/magic/time/hourglass-tilted-glowing-gold.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "WexiILNqO58EjTdM": {
+        "type": "utility",
+        "_id": "WexiILNqO58EjTdM",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You briefly stop the flow of time for everyone but yourself. No time passes for other creatures while you take [[/r 1d4 + 1]] turns in a row, during which you can use actions and move as normal.</p><p>This spell ends if one of the actions you use during this period, or any effects that you create during this period, affects a creature other than you or an object being worn or carried by someone other than you. In addition, the spell ends if you move to a place more than 1,000 feet from the location where you cast it.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +71,9 @@
       "base": 9
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +85,8 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "arcane"
@@ -73,7 +117,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527714349,
-    "modifiedTime": 1723575208141,
+    "modifiedTime": 1723577483576,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!OmliPGJq1cRGCFpr"

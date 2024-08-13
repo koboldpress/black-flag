@@ -5,7 +5,48 @@
   "_id": "MQr5t9SciOTiewmF",
   "img": "icons/commodities/biological/wing-insect-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "5DWHSPOEuCe3rgQ9": {
+        "type": "utility",
+        "_id": "5DWHSPOEuCe3rgQ9",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You transform your body to grant yourself benefits of monstrous forms. When you cast this spell, choose one of the listed transformations that your form first assumes. While the spell is active, you can use a bonus action to exchange your current transformation for a different option you haven’t already used during this casting of the spell. Once you assume your third form, you can’t shift into a different listed form for the duration, but you can use a bonus action to end the spell early and assume your original form. The spell also ends early if you are incapacitated or if you die.</p><p><strong>Wings.</strong> You sprout wings from your shoulders and gain a flying speed of 60 feet. The wings can be batlike or feathered.</p><p><strong>Breath Weapon.</strong> You gain a breath weapon of one of these types of your choice: acid, cold, fire, lightning, or poison. While active, you can use an action to unleash your breath weapon in a 15-foot line that is 5 feet wide. Each creature in the line must make a [[/save DEX]] save, taking [[/damage 8d8]] damage of the chosen type on a failure, or half as much damage on a success. You can use the breath weapon up to three times, and it expires after the third use.</p><p><strong>Limbs.</strong> Two appendages resembling tentacles, insectoid legs, pincers, or something similar sprout from your body (they don’t replace your existing limbs). When they first appear, choose if these appendages deal bludgeoning, piercing, or slashing damage. While active, you can use an action to make a melee weapon attack with each appendage (two attacks total) against a target or targets within 10 feet of you. You are considered proficient with the use of the appendages as weapons, and you use your spellcasting modifier to calculate your bonus to hit with them. On a successful hit, an appendage deals [[/damage 2d12 + @mod]]{2d12 + your spellcasting modifier} damage of the chosen type.</p><p><strong>Radiating Light.</strong> You emit light in a 10-foot radius. The light can come from a halo, ghostly flames, your eyes, or a similar source you choose. When it first appears, you choose whether the light deals necrotic, fire, or radiant damage. A creature other than you that enters the light for the first time on its turn or starts its turn in the light must make a [[/save CON]] save, taking [[/damage 2d10]] damage of the chosen type on a failure or half as much damage on a success. A creature can take this damage only once per turn.</p><p><strong>Regeneration.</strong> While this feature is active, you can choose to recover [[/healing 10]] at the start of your turn. You can use this ability up to three times, and it expires after the third use.</p><p><strong>Overwhelming Might.</strong> When you hit a target with a weapon attack, the target takes the attack’s standard damage plus an extra [[/damage 2d8 force]] damage and must succeed on a [[/save STR]] save or be knocked prone.</p><p><strong>Frightening Presence.</strong> As an action, choose any number of creatures within 30 feet of you that can see you. Each creature must succeed on a [[/save WIS]] save or become frightened of you for 1 minute. A creature frightened in this way can repeat the save at the end of each of its turns, ending the effect on itself on a success. If a creature’s save is successful or the effect ends for it, the creature is immune to this feature for the next 24 hours. You can use this ability up to three times, and it expires after the third use.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +71,26 @@
       "base": 7
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
-        "cost": null,
-        "denomination": "gp"
+        "cost": 50,
+        "denomination": "gp",
+        "description": "flesh from a Fiend, a feather from a Celestial, or a scale from a Dragon worth 50 gp"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "self",
+      "special": ""
     },
     "source": [
       "primordial"
@@ -73,7 +121,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527752911,
-    "modifiedTime": 1723575366850,
+    "modifiedTime": 1723577782181,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!MQr5t9SciOTiewmF"

@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "vcc77QAUAMG157nu",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "J5bJOelOTfIZqQcI"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Your target gains the ability to speak and listen with universal understanding.</em></p><p>This spell grants the creature you touch the ability to understand any spoken language it hears. Moreover, when the target speaks, any creature that knows at least one language and can hear the target understands what it says.</p>",
+      "value": "<p>This spell grants the creature you touch the ability to understand any spoken language it hears. Moreover, when the target speaks, any creature that knows at least one language and can hear the target understands what it says.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -92,7 +98,51 @@
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tongues",
+      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "origin": "Compendium.black-flag.spells.Item.DC1j3Ur40T2ltktm",
+      "transfer": false,
+      "_id": "J5bJOelOTfIZqQcI",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.proficiencies.languages.custom",
+          "mode": 2,
+          "value": "Any spoken language",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You have the ability to understand any spoken language you hear. Moreover, when you speak, any creature that knows at least one language and can hear you understands what you say.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723577517269,
+        "modifiedTime": 1723577601050,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!DC1j3Ur40T2ltktm.J5bJOelOTfIZqQcI"
+    }
+  ],
   "sort": 1400000,
   "ownership": {
     "default": 0
@@ -103,7 +153,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935900181,
-    "modifiedTime": 1723575108722,
+    "modifiedTime": 1723577517298,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
