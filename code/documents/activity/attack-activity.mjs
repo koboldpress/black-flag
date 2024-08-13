@@ -140,12 +140,15 @@ export default class AttackActivity extends DamageActivity {
 			}
 		].concat(config.rolls ?? []);
 
-		const dialogConfig = foundry.utils.mergeObject({
-			options: {
-				rollNotes: this.actor?.system.getModifiers?.(this.modifierData, "note"),
-				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
-			}
-		});
+		const dialogConfig = foundry.utils.mergeObject(
+			{
+				options: {
+					rollNotes: this.actor?.system.getModifiers?.(this.modifierData, "note"),
+					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+				}
+			},
+			dialog
+		);
 
 		const messageConfig = foundry.utils.mergeObject(
 			{
