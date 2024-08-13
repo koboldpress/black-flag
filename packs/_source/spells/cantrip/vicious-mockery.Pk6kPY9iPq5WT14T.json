@@ -5,7 +5,83 @@
   "_id": "Pk6kPY9iPq5WT14T",
   "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "QSA3ebabrGrvu9dh": {
+        "type": "save",
+        "_id": "QSA3ebabrGrvu9dh",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 4,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "psychic",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": [
+            {
+              "_id": "bzUPm7xsCzBGBzTz"
+            }
+          ]
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +90,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a [[/save]] save or take [[/damage]] damage and have disadvantage on the next attack roll it makes before the end of its next turn.</p><p>This spell’s damage increases by 1d4 when you reach 5th level ([[/damage 2d4 psychic]]{2d4}), 11th level ([[/damage 4d4 psychic]]{3d4}), and 17th level ([[/damage 4d4 psychic]]{4d4}).</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +106,9 @@
       "base": 0
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +120,9 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "60",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -57,12 +137,58 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "enchantment"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Vicious Mockery",
+      "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
+      "origin": "Compendium.black-flag.spells.Item.Pk6kPY9iPq5WT14T",
+      "transfer": false,
+      "_id": "bzUPm7xsCzBGBzTz",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on the next attack roll you make before the end of your next turn.\" } }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723578531939,
+        "modifiedTime": 1723578612347,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Pk6kPY9iPq5WT14T.bzUPm7xsCzBGBzTz"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -74,7 +200,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528022203,
-    "modifiedTime": 1723575052651,
+    "modifiedTime": 1723578531983,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Pk6kPY9iPq5WT14T"

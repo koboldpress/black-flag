@@ -88,8 +88,8 @@ export default class AttackActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async activationChatContext() {
-		const context = await super.activationChatContext();
+	async _activationChatContext() {
+		const context = await super._activationChatContext();
 		context.buttons = {
 			attack: {
 				label: game.i18n.localize("BF.Activity.Attack.Title"),
@@ -186,10 +186,11 @@ export default class AttackActivity extends DamageActivity {
 		 * A hook event that fires after an attack has been rolled.
 		 * @function blackFlag.postRollAttack
 		 * @memberof hookEvents
-		 * @param {Activity} activity - Activity performing the attack.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {object} [data]
+		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollAttack", this, rolls);
+		Hooks.callAll("blackFlag.postRollAttack", rolls, { activity: this });
 
 		return rolls;
 	}

@@ -65,8 +65,8 @@ export default class HealActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async activationChatContext() {
-		const context = await super.activationChatContext();
+	async _activationChatContext() {
+		const context = await super._activationChatContext();
 		if (this.system.healing.formula)
 			context.buttons = {
 				damage: {
@@ -104,6 +104,7 @@ export default class HealActivity extends Activity {
 	async rollHealing(config = {}, dialog = {}, message = {}) {
 		const rollData = this.item.getRollData();
 		const rollConfig = this.createHealingConfig(config, rollData);
+		rollConfig.origin = this;
 
 		const dialogConfig = foundry.utils.mergeObject({
 			options: {
@@ -137,7 +138,6 @@ export default class HealActivity extends Activity {
 		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
 		if (Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig, this) === false) return;
@@ -150,9 +150,10 @@ export default class HealActivity extends Activity {
 		 * @function blackFlag.postRollHealing
 		 * @memberof hookEvents
 		 * @param {DamageRoll[]} rolls - The resulting rolls.
-		 * @param {Activity} [activity] - Activity for which the roll was performed.
+		 * @param {object} [data]
+		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollHealing", rolls, this);
+		Hooks.callAll("blackFlag.postRollHealing", rolls, { activity: this });
 
 		return rolls;
 	}

@@ -71,8 +71,8 @@ export default class SaveActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	async activationChatContext() {
-		const context = await super.activationChatContext();
+	async _activationChatContext() {
+		const context = await super._activationChatContext();
 		context.buttons = {};
 		if (this.hasDamage)
 			context.buttons.damage = {

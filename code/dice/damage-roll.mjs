@@ -32,12 +32,13 @@ import BasicRoll from "./basic-roll.mjs";
  */
 
 /**
- * Options that describe a challenge roll.
+ * Options that describe a damage roll.
  *
  * @typedef {BasicRollOptions} DamageRollOptions
  * @property {boolean} [isCritical] - Should critical damage by calculated for this roll?
  * @property {CriticalDamageConfiguration} [critical] - Critical configuration for this roll.
- * @property {string} [type] - Type of damage represented.
+ * @property {string} [damageType] - Type of damage represented.
+ * @property {string[]} [damageTypes] - List of damage types selectable in the configuration app.
  */
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

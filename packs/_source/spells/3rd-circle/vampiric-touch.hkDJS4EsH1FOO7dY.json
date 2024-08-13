@@ -22,19 +22,29 @@
                 "number": 3,
                 "denomination": 6,
                 "bonus": "",
-                "custom": "",
-                "type": "necrotic"
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "necrotic",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
               }
             ]
           },
           "ability": "",
           "attack": {
-            "flat": false
+            "flat": false,
+            "bonus": ""
           }
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -61,7 +71,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>Necromantic power coalesces around your hand. You can feed off your victims with a touch.</em></p><p>The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against a creature within your reach. On a hit, the target takes 3d6 necrotic damage, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action.</p>",
+      "value": "<p>The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against a creature within your reach. On a hit, the target takes [[/damage]] damage, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by [[/damage 1d6 necrotic]]{1d6} for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -114,7 +124,9 @@
     },
     "school": "necromancy",
     "source": [
-      "arcane"
+      "arcane",
+      "divine",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -128,7 +140,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706935996928,
-    "modifiedTime": 1723575105421,
+    "modifiedTime": 1723578395544,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

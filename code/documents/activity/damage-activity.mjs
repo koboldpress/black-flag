@@ -103,8 +103,8 @@ export default class DamageActivity extends Activity {
 	 * Prepare the context for item activation.
 	 * @returns {object}
 	 */
-	async activationChatContext() {
-		const context = await super.activationChatContext();
+	async _activationChatContext() {
+		const context = await super._activationChatContext();
 		if (this.hasDamage)
 			context.buttons = {
 				damage: {
@@ -164,10 +164,9 @@ export default class DamageActivity extends Activity {
 		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
 		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
-		 * @param {Activity} [activity] - Activity performing the roll.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if (Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig, this) === false) return;
+		if (Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
 		if (!rolls) return;
@@ -177,9 +176,10 @@ export default class DamageActivity extends Activity {
 		 * @function blackFlag.postRollDamage
 		 * @memberof hookEvents
 		 * @param {DamageRoll[]} rolls - The resulting rolls.
-		 * @param {Activity} [activity] - Activity for which the roll was performed.
+		 * @param {object} [data]
+		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollDamage", rolls, this);
+		Hooks.callAll("blackFlag.postRollDamage", rolls, { activity: this });
 
 		return rolls;
 	}
