@@ -13,8 +13,9 @@
         "system": {},
         "activation": {
           "value": null,
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -30,7 +31,7 @@
           "consumeQuantity": false
         },
         "name": "Create Servant",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": ""
       },
       "a7etV7JTHTS7SmDv": {
         "type": "utility",
@@ -40,7 +41,8 @@
         "activation": {
           "value": null,
           "type": "bonus",
-          "condition": ""
+          "condition": "",
+          "primary": false
         },
         "consumption": {
           "targets": [],
@@ -56,7 +58,7 @@
           "consumeQuantity": false
         },
         "name": "Command Servant",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -67,7 +69,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>An invisible servant of meager resources carries out a variety of low-skill tasks at your command.</em></p><p>This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, a STR modifier of −4, and it can’t attack. If it drops to 0 hit points, the spell ends.</p><p>Once on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends. If you cast this spell again while a servant created by the first casting is still active, the servant created from the first casting is immediately destroyed.</p>",
+      "value": "<p>This spell creates an invisible, mindless, shapeless force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 HP, a STR of 3 (−4), and it can’t attack. If it drops to 0 HP, the spell ends.</p><p>Once on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.</p><p>If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.</p><p>If you cast this spell again while a servant created by the first casting is still active, the servant created from the first casting is immediately destroyed.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -123,7 +125,8 @@
     },
     "school": "conjuration",
     "source": [
-      "arcane"
+      "arcane",
+      "wyrd"
     ]
   },
   "effects": [],
@@ -134,10 +137,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706997301813,
-    "modifiedTime": 1720204332491,
+    "modifiedTime": 1723575646861,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

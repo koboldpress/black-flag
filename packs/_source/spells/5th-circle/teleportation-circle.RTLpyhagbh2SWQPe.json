@@ -5,7 +5,48 @@
   "_id": "RTLpyhagbh2SWQPe",
   "img": "icons/magic/symbols/runes-star-pentagon-orange-purple.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "dF7Zy82uwgiqS0Fj": {
+        "type": "utility",
+        "_id": "dF7Zy82uwgiqS0Fj",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,15 +55,15 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>As you cast the spell, you draw a 10-foot-diameter circle on the ground inscribed with sigils that link your location to a permanent teleportation circle of your choice whose sigil sequence you know and that is on the same plane of existence as you. A shimmering portal opens within the circle you drew and remains open until the end of your next turn. Any creature that enters the portal instantly appears within 5 feet of the destination circle or in the nearest unoccupied space if that space is occupied.</p><p>Many major temples, guilds, and other important places have permanent teleportation circles inscribed somewhere within their confines. Each such circle includes a unique sigil sequence—a string of magical runes arranged in a particular pattern. When you first gain the ability to cast this spell, you learn the sigil sequences for two destinations on the Material Plane, determined by the GM. You can learn additional sigil sequences during your adventures. You can commit a new sigil sequence to memory after studying it for 1 minute.</p><p>You can create a permanent <em>teleportation circle</em> by casting this spell in the same location every day for one year. You need not use the circle to teleport when you cast the spell in this way.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Teleport to fixed locations."
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 1,
+      "type": "minute",
       "condition": ""
     },
     "circle": {
@@ -30,21 +71,28 @@
       "base": 5
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "material"
+      ],
       "material": {
-        "consumed": false,
-        "cost": null,
-        "denomination": "gp"
+        "consumed": true,
+        "cost": 50,
+        "denomination": "gp",
+        "description": "rare chalks and inks infused with precious gems worth 50 gp, which the spell consumes"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "round",
+      "value": "1"
     },
     "tags": [
       "ritual"
     ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "10",
+      "special": ""
     },
     "source": [
       "arcane"
@@ -54,7 +102,8 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "",
+        "size": ""
       },
       "affects": {
         "choice": false,
@@ -75,7 +124,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527425758,
-    "modifiedTime": 1723527487922,
+    "modifiedTime": 1723575243867,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!RTLpyhagbh2SWQPe"

@@ -33,7 +33,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p><em>A protective dome springs up around you, a refuge for you and those close to you.</em></p><p>A 10-foot-radius immobile dome of force springs into existence around and above you and remains stationary for the duration. The spell ends if you leave its area.</p><p>Nine creatures of Medium size or smaller can fit inside the dome with you. The spell fails if its area includes a larger creature or more than nine creatures. Creatures and objects within the dome when you cast this spell can move through it freely. All other creatures and objects are barred from passing through it. Spells and other magical effects can’t extend through the dome or be cast through it. The atmosphere inside the space is comfortable and dry, regardless of the weather outside.</p><p>Until the spell ends, you can command the interior to become dimly lit or dark. The dome is opaque from the outside, of any color you choose, but it is transparent from the inside.</p>",
+      "value": "<p>A 10-foot-radius, immobile dome of force springs into existence around and above you and remains stationary for the duration. The spell ends if you leave its area.</p><p>Nine creatures of Medium size or smaller can fit inside the dome with you. The spell fails if its area includes a larger creature or more than nine creatures. Creatures and objects within the dome when you cast this spell can move through it freely. All other creatures and objects are barred from passing through it. Spells and other magical effects can’t extend through the dome or be cast through it. The atmosphere inside the space is comfortable and dry, regardless of the weather outside.</p><p>Until the spell ends, you can command the interior to become dimly lit or dark. The dome is an opaque color of your choice from the outside, but it is transparent from the inside.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -47,7 +47,7 @@
       "base": 3
     },
     "casting": {
-      "value": 1,
+      "value": 10,
       "type": "minute",
       "condition": ""
     },
@@ -80,12 +80,14 @@
       },
       "affects": {
         "choice": false,
-        "type": "creature",
-        "count": ""
+        "type": "",
+        "count": "",
+        "special": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "school": "evocation",
     "source": [
@@ -100,10 +102,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706997256443,
-    "modifiedTime": 1717966256249,
+    "modifiedTime": 1723575469600,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

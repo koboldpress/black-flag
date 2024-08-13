@@ -5,7 +5,52 @@
   "_id": "saVflOr3xsvwHSX4",
   "img": "icons/magic/water/water-iceberg-bubbles.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "oBJFYhaeuOB2v4es": {
+        "type": "utility",
+        "_id": "oBJFYhaeuOB2v4es",
+        "description": "",
+        "system": {
+          "effects": [
+            {
+              "_id": "L3poaOx692IKs76M"
+            }
+          ]
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,15 +59,15 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>This spell grants the ability to move across any liquid surface—water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures you can see within range gain this ability for the duration.</p><p>If you target a creature submerged in a liquid, the spell carries the target to the surface of the liquid at a rate of 60 feet per round.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Allies can walk on liquids."
     },
     "casting": {
-      "value": null,
-      "type": "action",
+      "value": 10,
+      "type": "minute",
       "condition": ""
     },
     "circle": {
@@ -30,21 +75,29 @@
       "base": 3
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a piece of cork"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "hour",
+      "value": "1"
     },
     "tags": [
       "ritual"
     ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "30",
+      "special": ""
     },
     "source": [
       "primordial"
@@ -58,12 +111,51 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "10",
+        "special": ""
       }
     },
     "school": "transmutation"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Water Walk",
+      "img": "icons/magic/water/water-iceberg-bubbles.webp",
+      "origin": "Compendium.black-flag.spells.Item.saVflOr3xsvwHSX4",
+      "transfer": false,
+      "_id": "L3poaOx692IKs76M",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You have the ability to move across any liquid surface—water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat).</p><p>If you are submerged in a liquid, the spell carries you to the surface of the liquid at a rate of 60 feet per round.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723575704808,
+        "modifiedTime": 1723575768698,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!saVflOr3xsvwHSX4.L3poaOx692IKs76M"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -75,7 +167,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723527539102,
-    "modifiedTime": 1723527572027,
+    "modifiedTime": 1723575704848,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!saVflOr3xsvwHSX4"
