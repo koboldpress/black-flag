@@ -5,7 +5,78 @@
   "_id": "KuyNDfe9VgdDbcbr",
   "img": "icons/magic/control/fear-fright-mask-orange.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "lnzSfPeqTaltFgXV": {
+        "type": "save",
+        "_id": "lnzSfPeqTaltFgXV",
+        "description": "",
+        "system": {
+          "ability": "wisdom",
+          "damage": {
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "psychic",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +85,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>Drawing on the deepest fears of a group of creatures, you create illusory creatures in their minds visible only to them. Each creature in a 30-foot-radius sphere centered on a point of your choice within range must make a [[/save]] save. On a failed save, a creature becomes frightened of you for the duration. The illusion calls on the creature’s deepest fears, manifesting its worst nightmares as an implacable threat. At the end of each of the frightened creature’s turns, it must succeed on a [[/save]] save or take [[/damage]] damage. On a successful save, the spell ends for that creature.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +101,10 @@
       "base": 9
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -38,11 +112,16 @@
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -53,11 +132,14 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "30"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "illusion"
@@ -74,7 +156,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528280799,
-    "modifiedTime": 1723575191951,
+    "modifiedTime": 1723604038308,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!KuyNDfe9VgdDbcbr"

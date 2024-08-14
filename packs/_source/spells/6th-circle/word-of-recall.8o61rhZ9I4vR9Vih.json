@@ -5,7 +5,48 @@
   "_id": "8o61rhZ9I4vR9Vih",
   "img": "icons/sundries/scrolls/scroll-symbol-triangle-tan.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "gj3cT9MK2AeNgiFW": {
+        "type": "utility",
+        "_id": "gj3cT9MK2AeNgiFW",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You and up to five willing creatures within 5 feet of you instantly teleport to a previously designated sanctuary. You and creatures that teleport with you appear in an unoccupied space nearest to the spot you designated when you prepared your sanctuary. If you cast this spell without first preparing a sanctuary, the spell has no effect.</p><p>You must designate a sanctuary by casting this spell within a location, such as a temple, dedicated to or strongly linked to your deity. If you attempt to cast the spell in this manner in an area that isn’t dedicated to your deity, the spell has no effect.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,7 +71,9 @@
       "base": 6
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
@@ -42,7 +85,9 @@
     },
     "tags": [],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "5",
+      "special": ""
     },
     "source": [
       "divine"
@@ -56,7 +101,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "willing",
+        "count": "5",
+        "special": ""
       }
     },
     "school": "conjuration"
@@ -73,7 +120,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528417182,
-    "modifiedTime": 1723575290639,
+    "modifiedTime": 1723604504758,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!8o61rhZ9I4vR9Vih"

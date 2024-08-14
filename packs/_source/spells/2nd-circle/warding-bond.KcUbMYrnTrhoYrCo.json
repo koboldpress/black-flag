@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "yTEQ2eKhhQnuYJKM",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "lE4WRASYPsebLlgQ"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -91,7 +97,51 @@
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Warding Bond",
+      "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-blue.webp",
+      "origin": "Compendium.black-flag.spells.Item.KcUbMYrnTrhoYrCo",
+      "transfer": false,
+      "_id": "lE4WRASYPsebLlgQ",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"armor-class\", \"ability-save\"] }], \"formula\": \"1\" }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain a +1 bonus to your AC and saves, and have resistance to all damage.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723603621668,
+        "modifiedTime": 1723603751338,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!KcUbMYrnTrhoYrCo.lE4WRASYPsebLlgQ"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -102,7 +152,7 @@
     "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706936077595,
-    "modifiedTime": 1723575274319,
+    "modifiedTime": 1723603621696,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

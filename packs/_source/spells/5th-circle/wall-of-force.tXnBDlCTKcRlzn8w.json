@@ -5,7 +5,48 @@
   "_id": "tXnBDlCTKcRlzn8w",
   "img": "icons/magic/light/beam-strike-orange-gold.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "sHKZR3gGsKbjXRnB": {
+        "type": "utility",
+        "_id": "sHKZR3gGsKbjXRnB",
+        "description": "",
+        "system": {
+          "effects": []
+        },
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +55,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>An invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick. It lasts for the duration. If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (your choice).</p><p>Nothing can physically pass through the wall. It is immune to all damage and can’t be dispelled by the <em>dispel magic</em> spell. However, a <em>disintegrate</em> spell destroys the wall instantly. The wall also extends into the Ethereal Plane, blocking ethereal travel through the wall.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +71,29 @@
       "base": 5
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a pinch of powder made by crushing a clear gemstone"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -53,7 +104,10 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "10",
+        "width": "",
+        "height": ""
       },
       "affects": {
         "choice": false,
@@ -74,7 +128,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528095889,
-    "modifiedTime": 1723575137871,
+    "modifiedTime": 1723603179737,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!tXnBDlCTKcRlzn8w"

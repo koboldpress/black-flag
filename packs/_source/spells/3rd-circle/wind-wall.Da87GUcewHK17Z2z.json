@@ -5,7 +5,78 @@
   "_id": "Da87GUcewHK17Z2z",
   "img": "icons/magic/air/fog-gas-smoke-dense-white.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "mMNct7BrxtCMRBGh": {
+        "type": "save",
+        "_id": "mMNct7BrxtCMRBGh",
+        "description": "",
+        "system": {
+          "ability": "strength",
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +85,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>A wall of strong wind rises from the ground at a point you choose within range. You can make the wall up to 50 feet long, 15 feet high, and 1 foot thick. You can shape the wall in any way you choose so long as it makes one continuous path along the ground. The wall lasts for the duration.</p><p>When the wall appears, each creature within its area must make a [[/save]] save. A creature takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p>The strong wind keeps fog, smoke, and other gasses at bay. Small or smaller flying creatures or objects can’t pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and automatically miss. (Boulders hurled by giants or siege engines, and similar projectiles, are unaffected.) Creatures in gaseous form can’t pass through it.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +101,29 @@
       "base": 3
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a tiny fan and a feather"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "1"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -53,7 +134,10 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "wall",
+        "size": "50",
+        "width": "1",
+        "height": "15"
       },
       "affects": {
         "choice": false,
@@ -74,7 +158,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528347796,
-    "modifiedTime": 1723575090684,
+    "modifiedTime": 1723604268892,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Da87GUcewHK17Z2z"

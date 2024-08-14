@@ -5,7 +5,79 @@
   "_id": "YPGkXeYo7agJzHLx",
   "img": "icons/magic/water/barrier-ice-wall-snow.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "Cd9mkrXq6lN0jydR": {
+        "type": "save",
+        "_id": "Cd9mkrXq6lN0jydR",
+        "description": "",
+        "system": {
+          "ability": "dexterity",
+          "damage": {
+            "parts": [
+              {
+                "number": 10,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "cold",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 2,
+                  "formula": ""
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "dc": {
+            "ability": ""
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -14,7 +86,7 @@
       "max": ""
     },
     "description": {
-      "value": "",
+      "value": "<p>You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a sphere with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.</p><p>If the wall cuts through a creature’s space when it appears, the creature within its area is pushed to one side of the wall (your choice) and must make a [[/save]] save. On a failure, the creature takes [[/damage]] damage or half as much damage on a success.</p><p>The wall is an object that can be damaged and thus breached. It has AC 12 and 30 HP per 10-foot section, and it is vulnerable to fire damage. Reducing a 10-foot section of wall to 0 HP destroys it and leaves behind a sheet of frigid air in the space the wall occupied. A creature moving through the sheet of frigid air for the first time on a turn must make a [[/save CON dc=@spellcasting.dc]] save. That creature takes [[/damage 5d6 cold]] damage on a failed save, or half as much damage on a successful one.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 7th circle or higher, the damage the wall deals when it appears increases by [[/damage 2d6 cold]]{2d6}, and the damage from passing through the sheet of frigid air increases by [[/damage 1d6 cold]]{1d6}, for each slot above 6th.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -30,19 +102,29 @@
       "base": 6
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "a small piece of quartz"
       }
     },
     "duration": {
-      "units": "instantaneous"
+      "units": "minute",
+      "value": "10"
     },
-    "tags": [],
+    "tags": [
+      "concentration"
+    ],
     "range": {
-      "units": ""
+      "units": "foot",
+      "value": "120",
+      "special": ""
     },
     "source": [
       "arcane",
@@ -53,11 +135,14 @@
         "count": 1,
         "contiguous": false,
         "units": "foot",
-        "type": ""
+        "type": "sphere",
+        "size": "10"
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "",
+        "special": ""
       }
     },
     "school": "evocation"
@@ -74,7 +159,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723528129184,
-    "modifiedTime": 1723575159143,
+    "modifiedTime": 1723603340696,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YPGkXeYo7agJzHLx"
