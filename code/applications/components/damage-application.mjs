@@ -125,7 +125,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
 			div.innerHTML = `
 				<label>
 					<i class="fa-solid fa-heart-crack" inert></i>
-					<span>${game.i18n.localize("BF.Damage.Application.Label")}</span>
+					<span>${game.i18n.localize("BF.DAMAGE.Application.Label")}</span>
 					<i class="fa-solid fa-caret-down" inert></i>
 				</label>
 				<div class="collapsible-content">
@@ -141,7 +141,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
 						<ul class="targets unlist"></ul>
 						<button class="apply-damage light-button" type="button" data-action="applyDamage">
 							<i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
-							${game.i18n.localize("BF.Damage.Application.Action.Apply")}
+							${game.i18n.localize("BF.DAMAGE.Application.Action.Apply")}
 						</button>
 					</div>
 				</div>
@@ -313,11 +313,11 @@ export default class DamageApplicationElement extends ChatTrayElement {
 		if (options.ignore?.[change]?.has(type)) mode = "ignore";
 		else if (change === "immunity" && options.downgrade?.has(type)) mode = "downgrade";
 
-		let label = game.i18n.format(`BF.Damage.Application.Change.${change.capitalize()}`, {
+		let label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, {
 			type: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type]
 		});
-		if (mode === "ignore") label = game.i18n.format("BF.Damage.Application.Ignoring", { source: label });
-		if (mode === "downgrade") label = game.i18n.format("BF.Damage.Application.Downgrading", { source: label });
+		if (mode === "ignore") label = game.i18n.format("BF.DAMAGE.Application.Ignoring", { source: label });
+		if (mode === "downgrade") label = game.i18n.format("BF.DAMAGE.Application.Downgrading", { source: label });
 
 		return { label, pressed: mode === "active" ? "false" : mode === "ignore" ? "true" : "mixed" };
 	}

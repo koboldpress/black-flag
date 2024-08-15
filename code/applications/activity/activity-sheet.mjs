@@ -96,21 +96,23 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			inferred: this.activity._inferredSource,
 			source: this.activity.toObject(),
 			system: this.activity.system,
+			systemFields: this.activity.system.schema.fields,
 			tabs: this._getTabs()
 		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	async _preparePartContext(partId, context) {
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
 		switch (partId) {
 			case "activation":
-				return this._prepareActivationContext(context);
+				return this._prepareActivationContext(context, options);
 			case "effect":
-				return this._prepareEffectContext(context);
+				return this._prepareEffectContext(context, options);
 			case "identity":
-				return this._prepareIdentityContext(context);
+				return this._prepareIdentityContext(context, options);
 		}
 		return context;
 	}
@@ -120,10 +122,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/**
 	 * Prepare rendering context for the activation tab.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	async _prepareActivationContext(context) {
+	async _prepareActivationContext(context, options) {
 		context.tab = context.tabs.activation;
 
 		context.data = {};
@@ -174,10 +177,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/**
 	 * Prepare rendering context for the effect tab.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	async _prepareEffectContext(context) {
+	async _prepareEffectContext(context, options) {
 		context.tab = context.tabs.effect;
 
 		if (context.activity.system.effects) {
@@ -209,10 +213,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	/**
 	 * Prepare rendering context for the identity tab.
 	 * @param {ApplicationRenderContext} context - Context being prepared.
-	 * @returns {ApplicationRenderContext}
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
 	 * @protected
 	 */
-	async _prepareIdentityContext(context) {
+	async _prepareIdentityContext(context, options) {
 		context.tab = context.tabs.identity;
 		context.description = await TextEditor.enrichHTML(context.source.description ?? "", {
 			relativeTo: this.activity,

@@ -244,7 +244,7 @@ export default class DamageRoll extends BasicRoll {
 			this.terms.push(
 				new foundry.dice.terms.NumericTerm(
 					{ number: bonus },
-					{ flavor: game.i18n.localize("BF.Damage.Critical.Maximize") }
+					{ flavor: game.i18n.localize("BF.DAMAGE.Critical.Maximize") }
 				)
 			);
 		}

@@ -108,7 +108,7 @@ export default class DamageActivity extends Activity {
 		if (this.hasDamage)
 			context.buttons = {
 				damage: {
-					label: game.i18n.localize("BF.Damage.Label"),
+					label: game.i18n.localize("BF.DAMAGE.Label"),
 					dataset: { action: "roll", method: "rollDamage" }
 				}
 			};

@@ -1,6 +1,6 @@
 <blackFlag-activities>
 	<fieldset>
-		<legend>{{ localize "BF.Activity.Label[other]" }}</legend>
+		<legend>{{ localize "BF.ACTIVITY.Label[other]" }}</legend>
 		<ul class="items-list activity-list configuration-list">
 			{{#each system.activities}}
 				<li class="item activity-entry" data-activity-id="{{ id }}">
@@ -13,19 +13,19 @@
 					<div class="item-controls activity-controls">
 						{{#if @root.editable}}
 							<button type="button" class="link-button" data-action="edit"
-							        data-tooltip="BF.Activity.Core.Action.Edit"
-											aria-label="{{ localize 'BF.Activity.Core.Action.Edit' }}">
+							        data-tooltip="BF.ACTIVITY.Core.Action.Edit"
+											aria-label="{{ localize 'BF.ACTIVITY.Core.Action.Edit' }}">
 								<i class="fa-solid fa-edit" inert></i>
 							</button>
 							<button type="button" class="link-button" data-action="delete"
-							        data-tooltip="BF.Activity.Core.Action.Delete"
-							        aria-label="{{ localize 'BF.Activity.Core.Action.Delete' }}">
+							        data-tooltip="BF.ACTIVITY.Core.Action.Delete"
+							        aria-label="{{ localize 'BF.ACTIVITY.Core.Action.Delete' }}">
 								<i class="fa-solid fa-trash" inert></i>
 							</button>
 						{{else}}
 							<button type="button" class="link-button" data-action="view"
-							        data-tooltip="BF.Activity.Core.Action.View"
-							        aria-label="{{ localize 'BF.Activity.Core.Action.View' }}">
+							        data-tooltip="BF.ACTIVITY.Core.Action.View"
+							        aria-label="{{ localize 'BF.ACTIVITY.Core.Action.View' }}">
 								<i class="fa-solid fa-eye" inert></i>
 							</button>
 						{{/if}}
@@ -41,7 +41,7 @@
 			{{#if editable}}
 				<li class="add-control">
 					<button type="button" class="link-button" data-action="add">
-						<i class="fa-solid fa-plus" inert></i> {{ localize "BF.Activity.Core.Action.Create" }}
+						<i class="fa-solid fa-plus" inert></i> {{ localize "BF.ACTIVITY.Core.Action.Create" }}
 					</button>
 				</li>
 			{{/if}}

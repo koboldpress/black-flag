@@ -22,7 +22,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			target: new StringField({ label: "BF.Consumption.Target.Label" }),
 			value: new FormulaField({ initial: "1", label: "BF.Consumption.Amount.Label" }),
 			scaling: new SchemaField({
-				mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
+				mode: new StringField({ label: "BF.DAMAGE.Scaling.Mode.Label" }),
 				formula: new FormulaField()
 			})
 		};

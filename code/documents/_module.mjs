@@ -50,4 +50,5 @@ export {
 export * as mixins from "./mixins/_module.mjs";
 export { default as NotificationsCollection } from "./notifications.mjs";
 export { default as Proficiency } from "./proficiency.mjs";
+export { default as Scaling } from "./scaling.mjs";
 export { default as SelectChoices } from "./select-choices.mjs";

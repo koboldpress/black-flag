@@ -45,7 +45,7 @@
 						</label>
 					{{/if}}
 					<div class="damage field-group">
-						<span>{{ localize "BF.Damage.Label" }}</span>
+						<span>{{ localize "BF.DAMAGE.Label" }}</span>
 						<label class="die-count">
 							<span>{{ localize "BF.Die.Number.Label" }}</span>
 							<input type="number" name="system.damage.number" step=1 min=1 value="{{ source.damage.number }}">
@@ -57,7 +57,7 @@
 							</select>
 						</label>
 						<label>
-							<span>{{ localize "BF.Damage.Type.Label" }}</span>
+							<span>{{ localize "BF.DAMAGE.Type.Label" }}</span>
 							<select name="system.damage.type">
 								{{ selectOptions CONFIG.damageTypes selected=source.damage.type
 								                 labelAttr="label" localize=true sort=true blank="" }}

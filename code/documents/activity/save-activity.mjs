@@ -76,7 +76,7 @@ export default class SaveActivity extends DamageActivity {
 		context.buttons = {};
 		if (this.hasDamage)
 			context.buttons.damage = {
-				label: game.i18n.localize("BF.Damage.Label"),
+				label: game.i18n.localize("BF.DAMAGE.Label"),
 				dataset: { action: "roll", method: "rollDamage" }
 			};
 		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability] ?? "";

@@ -33,7 +33,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			super.metadata,
 			{
 				icon: "",
-				title: "BF.Activity.Label[one]",
+				title: "BF.ACTIVITY.Label[one]",
 				hint: "",
 				usage: {
 					chatCard: "systems/black-flag/templates/activity/chat/activation-card.hbs",
@@ -86,7 +86,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {string}
 	 */
 	get activationLabel() {
-		return `BF.Activity.Core.Action.${this.isSpell ? "Cast" : "Use"}`;
+		return `BF.ACTIVITY.Core.Action.${this.isSpell ? "Cast" : "Use"}`;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -145,6 +145,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	get effectColumn() {
 		return "";
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create the data added to messages flags.
+	 * @type {object}
+	 */
+	get messageFlags() {
+		return {
+			activity: { type: this.type, id: this.id, uuid: this.uuid },
+			item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -712,10 +725,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 					flags: {
 						core: { canPopout: true },
 						[game.system.id]: {
+							...this.messageFlags,
 							type: "activity",
-							step: "activation",
-							activityType: this.type,
-							activityUuid: this.uuid
+							step: "activation"
 						}
 					}
 				}
@@ -814,7 +826,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	getActionTargets() {
 		let targets = canvas.tokens.controlled.filter(t => t.actor);
 		if (!targets.length && game.user.character) targets = game.user.character.getActiveTokens();
-		if (!targets.length) ui.notifications.warn("BF.Activity.Core.Warning.NoTargets", { localize: true });
+		if (!targets.length) ui.notifications.warn("BF.ACTIVITY.Core.Warning.NoTargets", { localize: true });
 		// TODO: Alternatively fetch targeted tokens
 		return targets;
 	}

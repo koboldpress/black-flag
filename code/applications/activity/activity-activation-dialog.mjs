@@ -59,7 +59,7 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 				activity,
 				config,
 				{
-					title: `${activity.item.name}: ${game.i18n.localize("BF.Activity.Activation.Title")}`,
+					title: `${activity.item.name}: ${game.i18n.localize("BF.ACTIVITY.Activation.Title")}`,
 					content: null,
 					buttons: {
 						use: {

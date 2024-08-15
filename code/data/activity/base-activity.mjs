@@ -57,7 +57,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	static metadata = Object.freeze({
 		name: "Activity",
 		collection: "activities",
-		label: "BF.Activity.Label[one]",
+		label: "BF.ACTIVITY.Label[one]",
 		type: "base"
 	});
 

@@ -7,7 +7,7 @@ const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, Str
  */
 export default class DamageField extends EmbeddedDataField {
 	constructor({ simple = false, ...options } = {}) {
-		super(simple ? SimpleDamageData : ExtendedDamageData, { label: "BF.Damage.Label", ...options });
+		super(simple ? SimpleDamageData : ExtendedDamageData, { label: "BF.DAMAGE.Label", ...options });
 	}
 }
 
@@ -27,7 +27,7 @@ export class SimpleDamageData extends foundry.abstract.DataModel {
 		return {
 			number: new NumberField({ min: 0, integer: true, label: "BF.Die.Number.Label" }),
 			denomination: new NumberField({ min: 0, integer: true, label: "BF.Die.Denomination.Label" }),
-			type: new StringField({ label: "BF.Damage.Type.Label" }),
+			type: new StringField({ label: "BF.DAMAGE.Type.Label" }),
 			additionalTypes: new SetField(new StringField(), { required: false })
 		};
 	}
@@ -64,7 +64,7 @@ export class ExtendedDamageData extends SimpleDamageData {
 	static defineSchema() {
 		return {
 			...super.defineSchema(),
-			bonus: new FormulaField({ label: "BF.Damage.Bonus.Label" }),
+			bonus: new FormulaField({ label: "BF.DAMAGE.Bonus.Label" }),
 			custom: new SchemaField(
 				{
 					enabled: new BooleanField(),
@@ -75,8 +75,8 @@ export class ExtendedDamageData extends SimpleDamageData {
 			),
 			scaling: new SchemaField(
 				{
-					mode: new StringField({ label: "BF.Damage.Scaling.Mode.Label" }),
-					number: new NumberField({ initial: 1, min: 0, integer: true, label: "BF.Damage.Scaling.Dice.Label" }),
+					mode: new StringField({ label: "BF.DAMAGE.Scaling.Mode.Label" }),
+					number: new NumberField({ initial: 1, min: 0, integer: true, label: "BF.DAMAGE.Scaling.Dice.Label" }),
 					formula: new FormulaField()
 				},
 				{ required: false }

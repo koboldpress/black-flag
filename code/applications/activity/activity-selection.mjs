@@ -7,9 +7,9 @@ export default class ActivitySelection extends PseudoDocumentSelection {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
-			title: "BF.Activity.Selection.Title",
+			title: "BF.ACTIVITY.Selection.Title",
 			type: "Activity",
-			errorMessage: "BF.Activity.Selection.Error"
+			errorMessage: "BF.ACTIVITY.Selection.Error"
 		});
 	}
 
@@ -36,7 +36,7 @@ export default class ActivitySelection extends PseudoDocumentSelection {
 			};
 		}
 		context.types = BlackFlag.utils.sortObjectEntries(context.types, { sortKey: "label" });
-		context.buttonLabel = game.i18n.localize("BF.Activity.Core.Action.Create");
+		context.buttonLabel = game.i18n.localize("BF.ACTIVITY.Core.Action.Create");
 		return context;
 	}
 }

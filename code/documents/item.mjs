@@ -2,6 +2,7 @@ import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { slugify } from "../utils/text.mjs";
 import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
+import Scaling from "./scaling.mjs";
 
 export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -251,12 +252,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 			rollData.mod = rollData.abilities[abilityKey]?.mod ?? 0;
 		}
 
-		const scaling = this.scaling;
-		rollData.scaling = { value: scaling + 1, increase: scaling };
-		Object.defineProperty(rollData.scaling, "toString", {
-			value: () => rollData.scaling.value,
-			enumerable: true
-		});
+		rollData.scaling = new Scaling(this.scaling);
 
 		return rollData;
 	}

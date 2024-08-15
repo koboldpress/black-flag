@@ -273,10 +273,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @param {HTMLElement} html - Chat message HTML.
 	 */
 	_activateActivityListeners(html) {
-		if (this.getFlag(game.system.id, "type") === "activity") {
-			const activity = this.getAssociatedActivity();
-			activity?.activateChatListeners(this, html);
-		}
+		this.getAssociatedActivity()?.activateChatListeners(this, html);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -336,7 +333,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @returns {Activity|void}
 	 */
 	getAssociatedActivity() {
-		return fromUuidSync(this.getFlag(game.system.id, "activityUuid"));
+		return fromUuidSync(this.getFlag(game.system.id, "activity.uuid"));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

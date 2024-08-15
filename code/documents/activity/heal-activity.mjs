@@ -121,8 +121,8 @@ export default class HealActivity extends Activity {
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
 						[game.system.id]: {
+							...this.messageFlags,
 							type: "healing",
-							activity: this.uuid,
 							targets: this.constructor.getTargetDescriptors()
 						}
 					}
@@ -140,7 +140,7 @@ export default class HealActivity extends Activity {
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
 		 */
-		if (Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig, this) === false) return;
+		if (Hooks.call("blackFlag.preRollHealing", rollConfig, dialogConfig, messageConfig) === false) return;
 
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
 		if (!rolls) return;

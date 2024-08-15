@@ -41,7 +41,7 @@ export const ruleTypes = {
 		references: "creatureTypes"
 	},
 	damageType: {
-		label: "BF.Damage.Type.Label",
+		label: "BF.DAMAGE.Type.Label",
 		references: "damageTypes"
 	},
 	healingType: {
@@ -57,7 +57,7 @@ export const ruleTypes = {
 		references: "itemProperties"
 	},
 	sense: {
-		label: "BF.Senses.Label[one]",
+		label: "BF.SENSES.Label[one]",
 		reference: "senses"
 	},
 	spellComponent: {

@@ -795,7 +795,7 @@ async function rollDamage(event) {
 
 	const dialogConfig = {};
 
-	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.Damage.Label") });
+	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.DAMAGE.Label") });
 	const messageConfig = {
 		data: {
 			flavor: title,

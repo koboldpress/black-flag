@@ -11,7 +11,7 @@
 	</label>
 	<span class="plus">+</span>
 	<label class="bonus">
-		<span>{{ localize "BF.Damage.Bonus.Label" }}</span>
+		<span>{{ localize "BF.DAMAGE.Bonus.Label" }}</span>
 		<input type="text" name="{{ prefix }}bonus" value="{{ damage.bonus }}">
 	</label>
 	<label class="custom">
@@ -19,12 +19,12 @@
 		<input type="text" name="{{ prefix }}custom.formula" value="{{ damage.custom.formula }}">
 	</label>
 	<label class="type">
-		<span>{{ localize "BF.Damage.Type.Label" }}</span>
+		<span>{{ localize "BF.DAMAGE.Type.Label" }}</span>
 		<select name="{{ prefix }}type">
 			{{ selectOptions types selected=damage.type blank="" }}
 			<hr>
 			<option value="variable" {{ifThen (eq damage.type "variable") " selected" ""}}>
-				{{ localize "BF.Damage.Type.Variable" }}
+				{{ localize "BF.DAMAGE.Type.Variable" }}
 			</option>
 		</select>
 	</label>
@@ -48,8 +48,8 @@
 {{#if (eq damage.type "variable")}}
 	<div class="damage-types field-group">
 		<label>
-			<span class="hinted-label" data-tooltip="BF.Damage.AdditionalTypes.Hint">
-				{{ localize "BF.Damage.AdditionalTypes.Label" }}
+			<span class="hinted-label" data-tooltip="BF.DAMAGE.AdditionalTypes.Hint">
+				{{ localize "BF.DAMAGE.AdditionalTypes.Label" }}
 			</span>
 			<multi-select name="{{ prefix }}additionalTypes">
 				{{ selectOptions types selected=damage.additionalTypes }}
@@ -61,19 +61,19 @@
 {{#if @root.activity.allowDamageScaling}}
 	<div class="damage-scaling field-group">
 		<label class="scaling-mode">
-			<span>{{ localize "BF.Damage.Scaling.Mode.Label" }}</span>
+			<span>{{ localize "BF.DAMAGE.Scaling.Mode.Label" }}</span>
 			<select name="{{ prefix }}scaling.mode">
 				{{ selectOptions @root.CONFIG.damageScalingModes selected=damage.scaling.mode labelAttr="label" localize=true
-			                 	blank=(localize "BF.Damage.Scaling.Mode.None") }}
+			                 	blank=(localize "BF.DAMAGE.Scaling.Mode.None") }}
 			</select>
 		</label>
 		{{#if damage.scaling.mode}}
 			<label class="scaling-number">
-				<span>{{ localize "BF.Damage.Scaling.Dice.Label" }}</span>
+				<span>{{ localize "BF.DAMAGE.Scaling.Dice.Label" }}</span>
 				<input type="number" name="{{ prefix }}scaling.number" value="{{ damage.scaling.number }}" min="0" step="1">
 			</label>
 			<label class="scaling-formula">
-				<span>{{ localize "BF.Damage.Scaling.Formula.Label" }}</span>
+				<span>{{ localize "BF.DAMAGE.Scaling.Formula.Label" }}</span>
 				<input type="text" name="{{ prefix }}scaling.formula" value="{{ damage.scaling.formula }}">
 			</label>
 		{{/if}}
