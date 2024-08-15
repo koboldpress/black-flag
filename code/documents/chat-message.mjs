@@ -358,19 +358,19 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @returns {BlackFlagItem|void}
 	 */
 	getAssociatedItem() {
-		const item = fromUuidSync(this.getFlag(game.system.id, "itemUuid"));
+		const item = fromUuidSync(this.getFlag(game.system.id, "item.uuid"));
 		if (item) return item;
 
-		const activity = fromUuidSync(this.getFlag(game.system.id, "activityUuid"));
+		const activity = fromUuidSync(this.getFlag(game.system.id, "activity.uuid"));
 		if (activity) return activity.item;
 
 		const actor = this.getAssociatedActor();
 		if (!actor) return;
 
-		const storedData = this.getFlag(game.system.id, "itemData");
+		const storedData = this.getFlag(game.system.id, "item.data");
 		return storedData
 			? new Item.implementation(storedData, { parent: actor })
-			: actor.items.get(this.getFlag(game.system.id, "itemId"));
+			: actor.items.get(this.getFlag(game.system.id, "item.id"));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

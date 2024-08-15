@@ -92,7 +92,7 @@ export default class AttackActivity extends DamageActivity {
 		const context = await super._activationChatContext();
 		context.buttons = {
 			attack: {
-				label: game.i18n.localize("BF.ACTIVITY.Attack.Title"),
+				label: game.i18n.localize("BF.ATTACK.Label"),
 				dataset: { action: "roll", method: "rollAttack" }
 			}
 		};
