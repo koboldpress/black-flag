@@ -4,7 +4,7 @@
   "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
   "system": {
     "description": {
-      "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a [[/save]] save. A target takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by 1d6 for each slot above 3rd.</p>",
+      "value": "<p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a [[/save]] save. A target takes [[/damage]] damage on a failed save, or half as much damage on a success.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 4th circle or higher, the damage increases by [[/damage 1d6 fire]]{1d6} for each slot above 3rd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -79,8 +79,10 @@
                 "type": "fire",
                 "scaling": {
                   "mode": "whole",
-                  "number": 1
-                }
+                  "number": 1,
+                  "formula": ""
+                },
+                "additionalTypes": []
               }
             ]
           },
@@ -90,10 +92,10 @@
           "ability": "dexterity"
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+        "img": "",
         "description": "",
         "activation": {
-          "type": "",
+          "type": "action",
           "condition": "",
           "primary": true
         },
@@ -131,10 +133,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
-    "coreVersion": "12.329",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1699297018533,
-    "modifiedTime": 1721443549021,
+    "modifiedTime": 1723698482394,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

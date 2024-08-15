@@ -17,11 +17,17 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "7wTPk8P7ycHeddkk"
+            }
+          ]
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -37,7 +43,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -48,7 +54,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a [[/save]] save or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an INT of 3 (−4) or lower isn’t affected by this spell.</p><p>At the end of each of its turns and each time it takes damage, the target can make another [[/save]] save, ending the spell on a success. The target has advantage on the save if it’s triggered by damage.</p>",
+      "value": "<p>A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a [[/save]] save or fall prone, becoming &amp;Reference[incapacitated] and unable to stand up for the duration. A creature with an INT of 3 (−4) or lower isn’t affected by this spell.</p><p>At the end of each of its turns and each time it takes damage, the target can make another [[/save]] save, ending the spell on a success. The target has advantage on the save if it’s triggered by damage.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -129,7 +135,7 @@
       "type": "base",
       "system": {},
       "changes": [],
-      "description": "",
+      "description": "<p>You are &amp;Reference[incapacitated] and are unable to stand up for the duration.</p><p>At the end of each of your turns and each time you take damage, you can make another [[/save WIS]], ending the spell on a success. You have advantage on the save if it’s triggered by damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [
@@ -145,7 +151,7 @@
         "systemId": "black-flag",
         "systemVersion": "0.10.041",
         "createdTime": 1722573421692,
-        "modifiedTime": 1722573437387,
+        "modifiedTime": 1723605996984,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!2KCL7Tsd8sqEd9g0.7wTPk8P7ycHeddkk"
@@ -158,10 +164,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.041",
+    "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706934112629,
-    "modifiedTime": 1722573456105,
+    "modifiedTime": 1723605946248,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

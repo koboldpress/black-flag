@@ -3,15 +3,29 @@
   "name": "Barkskin",
   "type": "spell",
   "_id": "SdIMnQDBbxLsMocU",
-  "img": "icons/magic/defensive/armor-stone-skin.webp",
+  "img": "icons/magic/nature/hand-weapon-wood-bark-brown.webp",
   "system": {
     "activities": {
       "az4kmqcxdsQWro48": {
         "type": "utility",
         "_id": "az4kmqcxdsQWro48",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "2Kx8EqI9lH8PnBIj"
+            }
+          ]
+        },
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +35,12 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -106,7 +124,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "New Effect",
+      "name": "Barkskin",
       "_id": "2Kx8EqI9lH8PnBIj",
       "changes": [
         {
@@ -122,12 +140,12 @@
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "12.328",
+        "coreVersion": "12.330",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1723697329786,
+        "lastModifiedBy": "blackflag0000000",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -145,10 +163,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706997517394,
-    "modifiedTime": 1720233625527,
+    "modifiedTime": 1723697279481,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

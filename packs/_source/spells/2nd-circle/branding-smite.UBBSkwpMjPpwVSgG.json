@@ -6,13 +6,38 @@
   "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-purple.webp",
   "system": {
     "activities": {
-      "p1IwVxdNRwfRnzdc": {
-        "type": "utility",
-        "_id": "p1IwVxdNRwfRnzdc",
+      "mLR9MqLHjis8hPuP": {
+        "type": "damage",
+        "_id": "mLR9MqLHjis8hPuP",
         "description": "",
-        "system": {},
+        "system": {
+          "damage": {
+            "allowCritical": true,
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "scaling": {
+                  "mode": "whole",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "effects": []
+        },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -24,7 +49,9 @@
           "units": "instantaneous",
           "override": false
         },
-        "range": {},
+        "range": {
+          "override": false
+        },
         "target": {
           "template": {
             "count": 1,
@@ -39,8 +66,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -51,7 +82,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>The next time you hit a creature with a weapon attack before this spell ends, the weapon gleams with astral radiance as you strike. The attack deals an extra 2d6 radiant damage to the target, which becomes visible if it’s invisible, and the target sheds dim light in a 5-foot radius and can’t become invisible until the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the extra damage increases by 1d6 for each slot above 2nd.</p>",
+      "value": "<p>The next time you hit a creature with a weapon attack before this spell ends, the weapon gleams with astral radiance as you strike. The attack deals an extra [[/damage]] damage to the target, which becomes visible if it’s invisible, and the target sheds dim light in a 5-foot radius and can’t become invisible until the spell ends.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, the extra damage increases by [[/damage 1d6 radiant]]{1d6} for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -112,10 +143,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1720235584357,
-    "modifiedTime": 1720283451722,
+    "modifiedTime": 1723697481145,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

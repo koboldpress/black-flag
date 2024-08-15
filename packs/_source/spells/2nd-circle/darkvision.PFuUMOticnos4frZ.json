@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "KJ0dTRMpDupUnKWL",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "y9JKAWmbZpTS8Boa"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -92,7 +98,51 @@
       "primordial"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Darkvision",
+      "img": "icons/magic/perception/eye-slit-red-orange.webp",
+      "origin": "Compendium.black-flag.spells.Item.PFuUMOticnos4frZ",
+      "transfer": false,
+      "_id": "y9JKAWmbZpTS8Boa",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.senses.types.darkvision",
+          "mode": 4,
+          "value": "60",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You have darkvision to a range of 60 feet.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723697625322,
+        "modifiedTime": 1723697653944,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!PFuUMOticnos4frZ.y9JKAWmbZpTS8Boa"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -100,10 +150,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706932990346,
-    "modifiedTime": 1721269788379,
+    "modifiedTime": 1723697625353,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

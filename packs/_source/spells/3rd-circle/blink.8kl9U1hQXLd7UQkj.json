@@ -10,8 +10,17 @@
         "type": "utility",
         "_id": "DfHaizX9UfXUJcZl",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "roll": {
+            "name": "Blink Rol",
+            "formula": "1d20"
+          }
+        },
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +30,12 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -96,10 +109,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706932367143,
-    "modifiedTime": 1720235461592,
+    "modifiedTime": 1723698233211,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

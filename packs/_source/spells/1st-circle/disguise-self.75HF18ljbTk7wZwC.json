@@ -10,7 +10,13 @@
         "type": "utility",
         "_id": "9L38wHUgrZhHW8W5",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "Dwm0CIwWcOqfYvsO"
+            }
+          ]
+        },
         "activation": {},
         "consumption": {
           "targets": [],
@@ -33,7 +39,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can’t change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an INT (Investigation) check against your spell save DC.</p>",
+      "value": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can’t change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing or would feel your head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>To discern that you are disguised, a creature can use its action to inspect your appearance and must succeed on an [[/check INT (Investigation) dc=@spellcasting.dc]] check against your spell save DC.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -88,7 +94,44 @@
       "wyrd"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Disguise Self",
+      "img": "icons/equipment/head/mask-horned-brown.webp",
+      "origin": "Compendium.black-flag.spells.Item.75HF18ljbTk7wZwC",
+      "transfer": false,
+      "_id": "Dwm0CIwWcOqfYvsO",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You make yourself—including your clothing, armor, weapons, and other belongings on your person—look different until the spell ends or until you use your action to dismiss it. You can seem 1 foot shorter or taller and can appear thin, fat, or in between. You can’t change your body type, so you must adopt a form that has the same basic arrangement of limbs. Otherwise, the extent of the illusion is up to you.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723605535265,
+        "modifiedTime": 1723605549348,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!75HF18ljbTk7wZwC.Dwm0CIwWcOqfYvsO"
+    }
+  ],
   "sort": 1100000,
   "ownership": {
     "default": 0
@@ -96,10 +139,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706933172957,
-    "modifiedTime": 1721270596038,
+    "modifiedTime": 1723605535293,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

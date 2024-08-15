@@ -10,8 +10,22 @@
         "type": "utility",
         "_id": "6kTeruRv8McbMAoQ",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "G8BjlyUonaTl11xn"
+            }
+          ]
+        },
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +35,12 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -33,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
+      "value": "<p>A creature you touch becomes &amp;Reference[invisible] until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person. The spell ends for a target that attacks or casts a spell.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 3rd circle or higher, you can target one additional creature for each slot above 2nd.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -139,10 +157,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.041",
+    "systemVersion": "0.10.042",
     "coreVersion": "12.330",
     "createdTime": 1706934228573,
-    "modifiedTime": 1722833829518,
+    "modifiedTime": 1723698056533,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

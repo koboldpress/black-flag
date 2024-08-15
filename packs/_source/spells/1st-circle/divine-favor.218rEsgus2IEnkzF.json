@@ -6,13 +6,22 @@
   "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
   "system": {
     "activities": {
-      "UK9ElPmz8SRTtiUd": {
+      "HKLgVupJ2JfuUe02": {
         "type": "utility",
-        "_id": "UK9ElPmz8SRTtiUd",
+        "_id": "HKLgVupJ2JfuUe02",
         "description": "",
-        "system": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "aG9uzYdJ2Ogj8xo5"
+            }
+          ]
+        },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -24,7 +33,9 @@
           "units": "instantaneous",
           "override": false
         },
-        "range": {},
+        "range": {
+          "override": false
+        },
         "target": {
           "template": {
             "count": 1,
@@ -39,8 +50,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -131,7 +146,7 @@
           "priority": null
         }
       ],
-      "description": "<p>Your weapon attacks deal an extra 1d4 radiant damage on a hit.</p>",
+      "description": "<p>Your weapon attacks deal an extra [[/damage 1d4 radiant]] damage on a hit.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -140,11 +155,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.328",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721271074583,
-        "modifiedTime": 1721271156360,
+        "modifiedTime": 1723605614826,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!218rEsgus2IEnkzF.aG9uzYdJ2Ogj8xo5"
@@ -157,11 +172,11 @@
   "flags": {},
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "12.328",
+    "coreVersion": "12.330",
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
+    "systemVersion": "0.10.042",
     "createdTime": 1721270969979,
-    "modifiedTime": 1721272615458,
+    "modifiedTime": 1723605627037,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!218rEsgus2IEnkzF"

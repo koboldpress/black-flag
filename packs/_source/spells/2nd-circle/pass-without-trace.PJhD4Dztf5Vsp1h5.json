@@ -10,9 +10,22 @@
         "type": "utility",
         "_id": "EjRuE46oj5TS4JFh",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "M0ZwTRWpHFQdkYMT"
+            }
+          ]
+        },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -39,8 +52,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -67,11 +84,16 @@
       "base": 2
     },
     "components": {
-      "required": [],
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
       "material": {
         "consumed": false,
         "cost": null,
-        "denomination": "gp"
+        "denomination": "gp",
+        "description": "ashes from a burned leaf of mistletoe and sprig of spruce"
       }
     },
     "duration": {
@@ -161,7 +183,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.042",
     "createdTime": 1723092965520,
-    "modifiedTime": 1723155653069,
+    "modifiedTime": 1723698131442,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PJhD4Dztf5Vsp1h5"

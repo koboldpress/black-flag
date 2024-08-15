@@ -10,8 +10,22 @@
         "type": "utility",
         "_id": "KrSs0acL9coT9jGm",
         "description": "",
-        "system": {},
-        "activation": {},
+        "system": {
+          "effects": [
+            {
+              "_id": "8mdFkri0shpjQVq0"
+            }
+          ],
+          "roll": {
+            "name": "Hit Points",
+            "formula": "8d10 + (@scaling.increase * 2)d10"
+          }
+        },
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "primary": true
+        },
         "consumption": {
           "targets": [],
           "scale": {
@@ -21,8 +35,12 @@
         "uses": {
           "spent": 0,
           "recovery": [],
-          "consumeQuantity": false
-        }
+          "consumeQuantity": false,
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -33,7 +51,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>A dazzling array of flashing, colored light springs from your hand. Roll [[/r 8d10]] and total the result. This total is how many hit points of creatures this spell can affect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can’t see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is blinded until the spell ends. Subtract each creature’s current hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, roll an additional [[/r 2d10]] for each slot above 1st.</p>",
+      "value": "<p>A dazzling array of flashing, colored light springs from your hand. Roll [[/r 8d10]] and total the result. This total is how many hit points of creatures this spell can affect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can’t see).</p><p>Starting with the creature that has the lowest current hit points, each creature affected by this spell is &amp;Reference[blinded] until the spell ends. Subtract each creature’s current hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, roll an additional [[/r 2d10]] for each slot above 1st.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -108,7 +126,7 @@
       "name": "Color Spray",
       "_id": "8mdFkri0shpjQVq0",
       "changes": [],
-      "description": "<p>A creature affected by this spell is blinded until the spell ends.</p>",
+      "description": "<p>You are blinded until the spell ends.</p>",
       "transfer": false,
       "statuses": [
         "blinded"
@@ -116,12 +134,12 @@
       "flags": {},
       "tint": "#ffffff",
       "_stats": {
-        "coreVersion": "12.328",
+        "coreVersion": "12.330",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1723605284989,
+        "lastModifiedBy": "blackflag0000000",
         "compendiumSource": null,
         "duplicateSource": null
       },
@@ -139,10 +157,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706932604036,
-    "modifiedTime": 1720284344175,
+    "modifiedTime": 1723693892892,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

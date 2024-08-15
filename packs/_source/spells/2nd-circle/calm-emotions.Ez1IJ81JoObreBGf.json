@@ -17,11 +17,20 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "kGDxj0TEY0vwhTuB"
+            },
+            {
+              "_id": "Fh7TnyIuaAT6LX0H"
+            }
+          ]
         },
         "activation": {
-          "type": "",
-          "condition": ""
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -37,7 +46,7 @@
           "consumeQuantity": false
         },
         "name": "",
-        "img": "systems/black-flag/artwork/activities/saving-throw.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -48,7 +57,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You attempt to suppress strong emotions in a group of people. Each Humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a CHA save; a creature can choose to fail this save if it wishes. If a creature fails its save, choose one of the following effects.</p><ul><li><p><strong>Suppression.</strong> You can suppress any effect causing a target to be charmed or frightened. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p></li><li><p><strong>Indifference.</strong> Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the GM rules otherwise.</p></li></ul>",
+      "value": "<p>You attempt to suppress strong emotions in a group of people. Each Humanoid in a 20-foot-radius sphere centered on a point you choose within range must make a [[/save]] save; a creature can choose to fail this save if it wishes. If a creature fails its save, choose one of the following effects.</p><ul><li><p><strong>Suppression.</strong> You can suppress any effect causing a target to be &amp;Reference[charmed] or &amp;Reference[frightened]. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p></li><li><p><strong>Indifference.</strong> Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the GM rules otherwise.</p></li></ul>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -92,7 +101,7 @@
         "size": "20"
       },
       "affects": {
-        "choice": false,
+        "choice": true,
         "type": "creature",
         "count": "",
         "special": ""
@@ -108,7 +117,80 @@
       "divine"
     ]
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Suppression",
+      "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp",
+      "origin": "Compendium.black-flag.spells.Item.Ez1IJ81JoObreBGf",
+      "transfer": false,
+      "_id": "kGDxj0TEY0vwhTuB",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You can suppress any effect causing a target to be &amp;Reference[charmed] or &amp;Reference[frightened]. When this spell ends, any suppressed effect resumes, provided that its duration has not expired in the meantime.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723697535094,
+        "modifiedTime": 1723697572321,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Ez1IJ81JoObreBGf.kGDxj0TEY0vwhTuB"
+    },
+    {
+      "name": "Indifference",
+      "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp",
+      "origin": "Compendium.black-flag.spells.Item.Ez1IJ81JoObreBGf",
+      "transfer": false,
+      "_id": "Fh7TnyIuaAT6LX0H",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Alternatively, you can make a target indifferent about creatures of your choice that it is hostile toward. This indifference ends if the target is attacked or harmed by a spell or if it witnesses any of its friends being harmed. When the spell ends, the creature becomes hostile again, unless the GM rules otherwise.</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723697579924,
+        "modifiedTime": 1723697594647,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Ez1IJ81JoObreBGf.Fh7TnyIuaAT6LX0H"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -116,10 +198,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1706932513288,
-    "modifiedTime": 1720283534374,
+    "modifiedTime": 1723697579962,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

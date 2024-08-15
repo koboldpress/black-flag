@@ -9,8 +9,15 @@
       "PJUxGBkmzzWebRfV": {
         "type": "utility",
         "_id": "PJUxGBkmzzWebRfV",
-        "description": "<p>Once within the next 10 minutes, the creature can roll [[/r @scale.bard.inspiration]] and add the number rolled to one ability check, attack roll, or save that it makes. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time.</p>",
-        "system": {},
+        "description": "",
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": "@scale.bard.inspiration",
+            "visible": false
+          },
+          "effects": []
+        },
         "activation": {
           "value": null,
           "type": "bonus",
@@ -20,7 +27,9 @@
           "targets": [
             {
               "type": "item",
-              "value": "1"
+              "target": "",
+              "value": "1",
+              "scaling": {}
             }
           ],
           "scale": {
@@ -34,7 +43,8 @@
         },
         "range": {
           "units": "foot",
-          "value": "60"
+          "value": "60",
+          "special": ""
         },
         "target": {
           "template": {
@@ -45,7 +55,8 @@
           "affects": {
             "choice": false,
             "type": "creature",
-            "count": "1"
+            "count": "1",
+            "special": ""
           },
           "override": false
         },
@@ -57,7 +68,7 @@
           "max": ""
         },
         "name": "Grant Inspiration",
-        "img": "systems/black-flag/artwork/activities/utility.svg"
+        "img": ""
       }
     },
     "uses": {
@@ -165,10 +176,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.040",
-    "coreVersion": "12.329",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1717558627916,
-    "modifiedTime": 1721949696602,
+    "modifiedTime": 1723692402548,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
