@@ -17,11 +17,16 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "tsOaoxMRt50UThBg"
+            }
+          ]
         },
         "activation": {
           "value": null,
-          "type": "",
+          "type": "action",
           "condition": "",
           "primary": true
         },
@@ -65,11 +70,11 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose any creature that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, an affected target can repeat the WIS save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
+      "value": "<p>Choose any creature that you can see within range. The target must succeed on a [[/save]] save or be &amp;Reference[paralyzed] for the duration. At the end of each of its turns, an affected target can repeat the [[/save]] save, ending the effect on itself on a success. This spell has no effect on Undead.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 6th circle or higher, you can target one additional creature for each slot above 5th. The creatures must be within 30 feet of each other when you target them.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Paralyze any creature."
     },
     "source": [
       "arcane",
@@ -144,7 +149,7 @@
       "type": "base",
       "system": {},
       "changes": [],
-      "description": "<p>You are paralyzed. At the end of each of your turns, you can repeat the [[/save wisdom]] save, ending the effect on a success.</p>",
+      "description": "<p>You are paralyzed. At the end of each of your turns, you can repeat the [[/save WIS]] save, ending the effect on a success.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [
@@ -155,11 +160,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.040",
         "createdTime": 1721968121276,
-        "modifiedTime": 1721968172125,
+        "modifiedTime": 1723779649945,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!09Sensm5KJcvLdhx.tsOaoxMRt50UThBg"
@@ -172,10 +177,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1718423902080,
-    "modifiedTime": 1720282842346,
+    "modifiedTime": 1723779643394,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

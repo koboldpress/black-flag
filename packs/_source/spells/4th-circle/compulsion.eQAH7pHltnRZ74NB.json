@@ -17,7 +17,12 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "8AfltqfkkRwj6vnJ"
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -56,6 +61,59 @@
         },
         "name": "",
         "img": ""
+      },
+      "X0XnYH7fFQZqaipL": {
+        "type": "utility",
+        "_id": "X0XnYH7fFQZqaipL",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": "",
+          "primary": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Designate Direction",
+        "img": ""
       }
     },
     "uses": {
@@ -66,7 +124,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Creatures of your choice that you can see within range and that can hear you must make a WIS save. A target automatically succeeds on this save if it can’t be charmed. On a failed save, a target is affected by this spell. Until the spell ends, you can use a bonus action on each of your turns to designate a direction that is horizontal to you. Each affected target must use as much of its movement as possible to move in that direction on its next turn. It can take its action before it moves. After moving in this way, it can make another WIS save to try to end the effect. A target isn’t compelled to move into an obviously deadly hazard, such as a fire or pit, but it will provoke opportunity attacks to move in the designated direction.</p>",
+      "value": "<p>Creatures of your choice that you can see within range and that can hear you must make a [[/save]] save. A target automatically succeeds on this save if it can’t be charmed. On a failed save, a target is affected by this spell. Until the spell ends, you can use a bonus action on each of your turns to designate a direction that is horizontal to you. Each affected target must use as much of its movement as possible to move in that direction on its next turn. It can take its action before it moves. After moving in this way, it can make another [[/save]] save to try to end the effect. A target isn’t compelled to move into an obviously deadly hazard, such as a fire or pit, but it will provoke opportunity attacks to move in the designated direction.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -125,7 +183,44 @@
     },
     "school": "enchantment"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Compulsion",
+      "img": "icons/magic/control/fear-fright-monster-grin-red-orange.webp",
+      "origin": "Compendium.black-flag.spells.Item.eQAH7pHltnRZ74NB",
+      "transfer": false,
+      "_id": "8AfltqfkkRwj6vnJ",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723778347205,
+        "modifiedTime": 1723778347205,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!eQAH7pHltnRZ74NB.8AfltqfkkRwj6vnJ"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -133,10 +228,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1720284566180,
-    "modifiedTime": 1720289238032,
+    "modifiedTime": 1723778347230,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

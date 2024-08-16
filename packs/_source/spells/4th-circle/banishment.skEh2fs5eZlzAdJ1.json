@@ -17,7 +17,12 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "qk7dxYqdhR2jV6kR"
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -65,7 +70,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a CHA save or be banished.</p><p>If the target is native to the plane of existence you’re on, you banish the target to a harmless demiplane. While there, the target is incapacitated. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you’re on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn’t return.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, you can target one additional creature for each slot above 4th.</p>",
+      "value": "<p>You attempt to send one creature that you can see within range to another plane of existence. The target must succeed on a [[/save]] save or be banished.</p><p>If the target is native to the plane of existence you’re on, you banish the target to a harmless demiplane. While there, the target is &amp;Reference[incapacitated]. The target remains there until the spell ends, at which point the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.</p><p>If the target is native to a different plane of existence than the one you’re on, the target is banished with a faint popping noise, returning to its home plane. If the spell ends before 1 minute has passed, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied. Otherwise, the target doesn’t return.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, you can target one additional creature for each slot above 4th.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -125,7 +130,46 @@
     },
     "school": "abjuration"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Banishment",
+      "img": "icons/magic/control/encase-creature-humanoid-hold.webp",
+      "origin": "Compendium.black-flag.spells.Item.skEh2fs5eZlzAdJ1",
+      "transfer": false,
+      "_id": "qk7dxYqdhR2jV6kR",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [
+        "incapacitated"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723778131780,
+        "modifiedTime": 1723778148766,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!skEh2fs5eZlzAdJ1.qk7dxYqdhR2jV6kR"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -133,10 +177,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1718423704833,
-    "modifiedTime": 1720283413950,
+    "modifiedTime": 1723778239439,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

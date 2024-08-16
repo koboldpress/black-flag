@@ -10,9 +10,34 @@
         "type": "utility",
         "_id": "4b4S0Dr88StfgZG9",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "bFiXp7xYaPkuFgIk"
+            },
+            {
+              "_id": "ODtmEzdWcDAhg0XS"
+            },
+            {
+              "_id": "OMv3vou2Z36mf4bG"
+            },
+            {
+              "_id": "JNld9UoLhWRGEAM4"
+            },
+            {
+              "_id": "IgTRFh9FUi1c1ydF"
+            }
+          ]
+        },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -38,8 +63,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -50,11 +79,11 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Elemental energy wreathes your body for the duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it. When the shield first appears, you decide whether it is made of acid, cold, fire, lightning, or thunder energy.</p><p>The shield grants you resistance to the damage of your chosen elemental type.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes 2d8 damage of the chosen type.</p>",
+      "value": "<p>Elemental energy wreathes your body for the duration, shedding bright light in a 10-foot radius and dim light for an additional 10 feet. You can end the spell early by using an action to dismiss it. When the shield first appears, you decide whether it is made of acid, cold, fire, lightning, or thunder energy.</p><p>The shield grants you resistance to the damage of your chosen elemental type.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8]] damage of the chosen type.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Resist an element, deal it when hit."
     },
     "source": [
       "arcane"
@@ -116,7 +145,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Elemental Shield: Acid",
+      "name": "Acid Shield",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
       "_id": "bFiXp7xYaPkuFgIk",
       "type": "base",
@@ -129,7 +158,7 @@
           "priority": null
         }
       ],
-      "description": "<p>The shield grants you resistance to acid damage.</p>",
+      "description": "<p>The shield grants you resistance to acid damage.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8 acid]] damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -138,11 +167,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356064960,
-        "modifiedTime": 1721356134618,
+        "modifiedTime": 1723778697061,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!GXpD8HiVyZvH2hsB.bFiXp7xYaPkuFgIk"
@@ -159,7 +188,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Elemental Shield: Cold",
+      "name": "Cold Shield",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
       "type": "base",
       "system": {},
@@ -171,7 +200,7 @@
           "priority": null
         }
       ],
-      "description": "<p>The shield grants you resistance to cold damage.</p>",
+      "description": "<p>The shield grants you resistance to cold damage.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8 cold]] damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -180,11 +209,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356119949,
-        "modifiedTime": 1721356144570,
+        "modifiedTime": 1723778700429,
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "ODtmEzdWcDAhg0XS",
@@ -202,7 +231,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Elemental Shield: Fire",
+      "name": "Fire Shield",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
       "type": "base",
       "system": {},
@@ -214,7 +243,7 @@
           "priority": null
         }
       ],
-      "description": "<p>The shield grants you resistance to fire damage.</p>",
+      "description": "<p>The shield grants you resistance to fire damage.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8 fire]] damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -223,11 +252,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356122211,
-        "modifiedTime": 1721356152624,
+        "modifiedTime": 1723778703510,
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "OMv3vou2Z36mf4bG",
@@ -245,7 +274,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Elemental Shield: Lightning",
+      "name": "Lightning Shield",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
       "type": "base",
       "system": {},
@@ -257,7 +286,7 @@
           "priority": null
         }
       ],
-      "description": "<p>The shield grants you resistance to lightning damage.</p>",
+      "description": "<p>The shield grants you resistance to lightning damage.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8 lightning]] damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -266,11 +295,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356123681,
-        "modifiedTime": 1721356164108,
+        "modifiedTime": 1723778690088,
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "JNld9UoLhWRGEAM4",
@@ -288,7 +317,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "Elemental Shield: Thunder",
+      "name": "Thunder Shield",
       "img": "icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp",
       "type": "base",
       "system": {},
@@ -300,7 +329,7 @@
           "priority": null
         }
       ],
-      "description": "<p>The shield grants you resistance to thunder damage.</p>",
+      "description": "<p>The shield grants you resistance to thunder damage.</p><p>In addition, when a creature within 5 feet of you hits you with a melee attack, the shield erupts with energy. The attacker takes [[/damage 2d8 thunder]] damage.</p>",
       "tint": "#ffffff",
       "transfer": false,
       "statuses": [],
@@ -309,11 +338,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.329",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721356125184,
-        "modifiedTime": 1721356173849,
+        "modifiedTime": 1723778714873,
         "lastModifiedBy": "blackflag0000000"
       },
       "_id": "IgTRFh9FUi1c1ydF",
@@ -327,10 +356,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
-    "coreVersion": "12.329",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1718731975511,
-    "modifiedTime": 1721356184767,
+    "modifiedTime": 1723778622529,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

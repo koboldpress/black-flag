@@ -17,7 +17,12 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "abBn47L9LbIUHbxD"
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -66,7 +71,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>This spell assaults and twists creatures’ minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a WIS save when you cast this spell or be affected by it.</p><p>An affected target can’t take reactions and must roll a d10 at the start of each of its turns to determine its behavior for that turn.</p><p>At the end of each of its turns, an affected target can make a WIS save, ending the effect on itself on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, the radius of the sphere increases by 5 feet for each slot above 4th.</p><p>@Embed[Compendium.black-flag.tables.RollTable.9jJuPmkPOrFBfzu8 caption=false]</p>",
+      "value": "<p>This spell assaults and twists creatures’ minds, spawning delusions and provoking uncontrolled action. Each creature in a 10-foot-radius sphere centered on a point you choose within range must succeed on a [[/save]] save when you cast this spell or be affected by it.</p><p>An affected target can’t take reactions and must roll a [[/r d10]] at the start of each of its turns to determine its behavior for that turn.</p><p>At the end of each of its turns, an affected target can make a [[/save]] save, ending the effect on itself on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 5th circle or higher, the radius of the sphere increases by 5 feet for each slot above 4th.</p><p>@Embed[Compendium.black-flag.tables.RollTable.9jJuPmkPOrFBfzu8 inline rollable]</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -128,7 +133,44 @@
     },
     "school": "enchantment"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Confusion",
+      "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+      "origin": "Compendium.black-flag.spells.Item.Bcm0RKcg5os0dDhC",
+      "transfer": false,
+      "_id": "abBn47L9LbIUHbxD",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You can’t take reactions and must roll a [[/r d10]] at the start of each of your turns to determine your behavior for that turn.</p><p>@Embed[Compendium.black-flag.tables.RollTable.9jJuPmkPOrFBfzu8 inline rollable]</p>",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.042",
+        "createdTime": 1723778391789,
+        "modifiedTime": 1723778430946,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Bcm0RKcg5os0dDhC.abBn47L9LbIUHbxD"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -136,10 +178,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.038",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1720284831916,
-    "modifiedTime": 1720392521391,
+    "modifiedTime": 1723778391818,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

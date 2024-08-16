@@ -10,9 +10,22 @@
         "type": "utility",
         "_id": "xMhSeLqHAknWNLlY",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          },
+          "effects": [
+            {
+              "_id": "0ShGxgKcNXknjuzk"
+            }
+          ]
+        },
         "activation": {
-          "value": null
+          "value": null,
+          "type": "action",
+          "condition": "",
+          "primary": true
         },
         "consumption": {
           "targets": [],
@@ -38,8 +51,12 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
@@ -50,11 +67,11 @@
       "max": ""
     },
     "description": {
-      "value": "<p>You or a creature you touch becomes invisible until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person.</p>",
+      "value": "<p>You or a creature you touch becomes &amp;Reference[invisible] until the spell ends. Anything the target is wearing or carrying is invisible as long as it is on the target’s person.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
-      "short": ""
+      "short": "Better invisibility."
     },
     "source": [
       "arcane",
@@ -99,7 +116,9 @@
       },
       "affects": {
         "choice": false,
-        "type": ""
+        "type": "creature",
+        "count": "1",
+        "special": ""
       }
     },
     "school": "illusion"
@@ -151,10 +170,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.040",
-    "coreVersion": "12.329",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1718732379317,
-    "modifiedTime": 1721968233922,
+    "modifiedTime": 1723778901497,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

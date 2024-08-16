@@ -16,11 +16,16 @@
           },
           "dc": {
             "ability": ""
-          }
+          },
+          "effects": [
+            {
+              "_id": "FV56RH5g8ZaugTf3"
+            }
+          ]
         },
         "activation": {
           "value": null,
-          "type": "",
+          "type": "action",
           "condition": "",
           "primary": true
         },
@@ -64,7 +69,7 @@
       "max": ""
     },
     "description": {
-      "value": "<p>Choose a Medium or smaller creature that you can see within range. This spell has no effect on creatures immune to the charmed condition. The target must succeed on a WIS save or be charmed by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the save.</p><p>While the creature is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as <q>attack that creature,</q> <q>run over there,</q> or <q>fetch that object.</q> If the creature completes the order and doesn’t receive further direction from you, it defends and preserves itself to the best of its ability.</p><p>You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose and doesn’t do anything that you don’t allow it to do.</p><p>During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.</p><p>Each time the target takes damage, it makes a new WIS save against the spell, ending the spell on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a 6th‑circle spell slot, the duration is concentration, up to 10 minutes. When you use a 7th-circle spell slot, the duration is concentration, up to 1 hour. When you use a spell slot of 8th circle or higher, the duration is concentration, up to 8 hours.</p>",
+      "value": "<p>Choose a Medium or smaller creature that you can see within range. This spell has no effect on creatures immune to the charmed condition. The target must succeed on a [[/save]] save or be &amp;Reference[charmed] by you for the duration. If you or creatures that are friendly to you are fighting it, it has advantage on the save.</p><p>While the creature is charmed, you have a telepathic link with it as long as the two of you are on the same plane of existence. You can use this telepathic link to issue commands to the creature while you are conscious (no action required), which it does its best to obey. You can specify a simple and general course of action, such as <q>attack that creature,</q> <q>run over there,</q> or <q>fetch that object.</q> If the creature completes the order and doesn’t receive further direction from you, it defends and preserves itself to the best of its ability.</p><p>You can use your action to take total and precise control of the target. Until the end of your next turn, the creature takes only the actions you choose and doesn’t do anything that you don’t allow it to do.</p><p>During this time, you can also cause the creature to use a reaction, but this requires you to use your own reaction as well.</p><p>Each time the target takes damage, it makes a new WIS save against the spell, ending the spell on a success.</p><p><em>At Higher Circles.</em> When you cast this spell using a 6th‑circle spell slot, the duration is concentration, up to 10 minutes. When you use a 7th-circle spell slot, the duration is concentration, up to 1 hour. When you use a spell slot of 8th circle or higher, the duration is concentration, up to 8 hours.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       },
@@ -134,7 +139,7 @@
         "startTurn": null
       },
       "disabled": false,
-      "name": "New Effect",
+      "name": "Dominate",
       "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
       "_id": "FV56RH5g8ZaugTf3",
       "type": "base",
@@ -143,17 +148,19 @@
       "description": "",
       "tint": "#ffffff",
       "transfer": true,
-      "statuses": [],
+      "statuses": [
+        "charmed"
+      ],
       "sort": 0,
       "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.328",
+        "coreVersion": "12.330",
         "systemId": "black-flag",
         "systemVersion": "0.10.039",
         "createdTime": 1721271396165,
-        "modifiedTime": 1721271396165,
+        "modifiedTime": 1723779548434,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!5mipsDCRlAEIpZXs.FV56RH5g8ZaugTf3"
@@ -167,10 +174,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.039",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.042",
+    "coreVersion": "12.330",
     "createdTime": 1717965633630,
-    "modifiedTime": 1721272568945,
+    "modifiedTime": 1723779532031,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
