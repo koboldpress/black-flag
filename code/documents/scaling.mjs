@@ -9,7 +9,7 @@ export default class Scaling {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*  Properties                         */
+	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

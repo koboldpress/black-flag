@@ -613,10 +613,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
-		if (config.consume === true || config.consume.ammunition) {
-			// TODO: Let `WeaponData` to handle this
-		}
-
 		if (config.consume === true || config.consume.resources) {
 			for (const target of this.consumption.targets) {
 				if (

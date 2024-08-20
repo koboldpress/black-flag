@@ -251,6 +251,7 @@ export default class PCData extends ActorDataModel.mixin(
 			if (!ability.base) this.progression.abilities.assignmentComplete = false;
 		}
 
+		this.spellcasting.dc ??= 0;
 		this.spellcasting.maxCircle ??= 0;
 		this.spellcasting.totals ??= { value: 0, spent: 0, max: 0 };
 		this.spellcasting.origins ??= {};
@@ -515,7 +516,6 @@ export default class PCData extends ActorDataModel.mixin(
 		});
 
 		this.spellcasting.hasSpellcastingAdvancement = false;
-		// TODO: Calculate spellcasting DC per-class
 
 		// Combine class spellcasting data to total progression
 		const progression = { cantrips: false, leveled: 0, pact: { circle: null, slots: 0 } };

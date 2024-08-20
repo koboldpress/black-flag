@@ -222,7 +222,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
+	/** @inheritDoc */
 	get scaling() {
 		return (
 			super.scaling ??
@@ -490,6 +490,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 			case "prepared":
 				return this.prepared;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	getRollData(options = {}) {
+		const rollData = super.getRollData(options);
+		rollData.spellcasting = {
+			...(rollData.spellcasting ?? {}),
+			dc: this.parent.actor?.system.abilities?.[this.ability]?.dc
+		};
+		return rollData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

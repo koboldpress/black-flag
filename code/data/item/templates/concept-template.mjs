@@ -87,6 +87,7 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 		// Spell Save DC
 		origin.dc = 8 + proficiency + abilityMod;
+		parent.actor.system.spellcasting.dc = Math.max(parent.actor.system.spellcasting.dc ?? -Infinity, origin.dc);
 		// TODO: Add global/spell DC bonuses
 
 		// Knowable cantrips/rituals/spells

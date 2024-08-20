@@ -135,7 +135,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
 
 		if (scaling) {
-			// If a scaling formula is provided, multiply it an add to the end of the initial formula
+			// If a scaling formula is provided, multiply it and add to the end of the initial formula
 			if (this.scaling.formula) {
 				const scalingRoll = new Roll(this.scaling.formula, rollData);
 				scalingRoll.alter(scaling, undefined, { multiplyNumeric: true });
@@ -191,15 +191,14 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
 	async consumeActivity(activity, config, updates) {
-		const result =
-			(await this._usesConsumption(config, {
-				uses: activity.uses,
-				type: game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
-					itemName: activity.item.name,
-					activityName: activity.name
-				}),
-				rolls: updates.rolls
-			})) ?? {};
+		const result = await this._usesConsumption(config, {
+			uses: activity.uses,
+			type: game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
+				itemName: activity.item.name,
+				activityName: activity.name
+			}),
+			rolls: updates.rolls
+		});
 		if (result) updates.activity["uses.spent"] = result.spent;
 	}
 
@@ -228,7 +227,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 		const itemIndex = updates.item.findIndex(i => i._id === item.id);
 		if (itemIndex === -1) updates.item.push({ _id: item.id, ...update });
-		else foundry.utils.mergeObject(updates.item[itemIndex]["system.uses.spent"], update);
+		else foundry.utils.mergeObject(updates.item[itemIndex], update);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -358,7 +357,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 		if (!circleRoll.isDeterministic) updates.rolls.push(circleRoll);
 		const circleNumber = circleRoll.total;
 
-		// Check to see if enough slots available at specified circle
+		// Check to see if enough slots are available at specified circle
 		const circleData = activity.actor.system.spellcasting?.slots?.[`circle-${circleNumber}`];
 		const newSpent = (circleData?.spent ?? 0) + cost;
 		let warningMessage;

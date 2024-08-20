@@ -147,8 +147,7 @@ export default class ItemDataModel extends BaseDataModel {
 	 * @returns {object}
 	 */
 	getRollData(options = {}) {
-		if (!this.parent.actor) return {};
-		const rollData = { ...this.parent.actor.getRollData(options), item: { ...this } };
+		const rollData = { ...(this.parent.actor?.getRollData(options) ?? {}), item: { ...this } };
 		return rollData;
 	}
 
