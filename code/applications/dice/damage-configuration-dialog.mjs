@@ -35,7 +35,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 				label: game.i18n.localize("BF.Roll.Action.Normal.Label")
 			}
 		};
-		if (this.config.allowCritical === false) delete context.buttons.critical;
+		if (this.config.critical?.allow === false) delete context.buttons.critical;
 		return context;
 	}
 

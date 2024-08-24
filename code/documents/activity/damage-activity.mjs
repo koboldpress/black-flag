@@ -70,7 +70,6 @@ export default class DamageActivity extends Activity {
 		rollConfig.critical ??= {};
 		rollConfig.critical.allow ??= this.system.damage.critical.allow;
 		rollConfig.critical.bonusDamage ??= this.system.damage.critical.bonus;
-		// if (this.system.damage?.allowCritical === false) rollConfig.allowCritical ??= false;
 
 		return rollConfig;
 	}

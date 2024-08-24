@@ -1,8 +1,10 @@
 <fieldset>
 	<legend>{{ localize "BF.DAMAGE.FIELDS.damage.label" }}</legend>
-	<label class="full-checkbox">
-		<span>{{ localize "BF.DAMAGE.FIELDS.damage.allowCritical.label" }}</span>
-		<input type="checkbox" name="system.damage.allowCritical" {{ checked source.system.damage.allowCritical }}>
-	</label>
+	{{ formField systemFields.damage.fields.critical.fields.allow name="system.damage.critical.allow"
+	             value=source.system.damage.critical.allow }}
+	{{#if system.damage.critical.allow }}
+		{{ formField systemFields.damage.fields.critical.fields.bonus name="system.damage.critical.bonus"
+		             value=source.system.damage.critical.bonus }}
+	{{/if}}
 	{{> "systems/black-flag/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>
