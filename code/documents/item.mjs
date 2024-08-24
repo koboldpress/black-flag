@@ -116,6 +116,18 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Data Initialization         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	clone(data = {}, options = {}) {
+		if (options.save) return super.clone(data, options);
+		const item = super.clone(data, options);
+		if (item.parent) item.system.prepareFinalData?.();
+		return item;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

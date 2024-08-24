@@ -16,7 +16,12 @@ export default class DamageActivity extends Activity {
 				dataModel: DamageData,
 				icon: "systems/black-flag/artwork/activities/damage.svg",
 				title: "BF.DAMAGE.Label",
-				hint: "BF.DAMAGE.Hint"
+				hint: "BF.DAMAGE.Hint",
+				usage: {
+					actions: {
+						rollDamage: DamageActivity.#rollDamage
+					}
+				}
 			},
 			{ inplace: false }
 		)
@@ -99,20 +104,18 @@ export default class DamageActivity extends Activity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Prepare the context for item activation.
-	 * @returns {object}
-	 */
-	async _activationChatContext() {
-		const context = await super._activationChatContext();
+	/** @inheritDoc */
+	_activationChatButtons() {
+		const buttons = [];
 		if (this.hasDamage)
-			context.buttons = {
-				damage: {
-					label: game.i18n.localize("BF.DAMAGE.Label"),
-					dataset: { action: "roll", method: "rollDamage" }
+			buttons.push({
+				label: game.i18n.localize("BF.DAMAGE.Label"),
+				icon: '<i class="fa-solid fa-burst" inert></i>',
+				dataset: {
+					action: "rollDamage"
 				}
-			};
-		return context;
+			});
+		return buttons.concat(super._activationChatButtons());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -182,6 +185,21 @@ export default class DamageActivity extends Activity {
 		Hooks.callAll("blackFlag.postRollDamage", rolls, { activity: this });
 
 		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle performing a damage roll.
+	 * @this {DamageActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static #rollDamage(event, target, message) {
+		this.rollDamage({ event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

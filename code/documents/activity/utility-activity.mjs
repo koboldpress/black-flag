@@ -10,7 +10,12 @@ export default class UtilityActivity extends Activity {
 				dataModel: UtilityData,
 				icon: "systems/black-flag/artwork/activities/utility.svg",
 				title: "BF.UTILITY.Title",
-				hint: "BF.UTILITY.Hint"
+				hint: "BF.UTILITY.Hint",
+				usage: {
+					actions: {
+						rollFormula: UtilityActivity.#rollFormula
+					}
+				}
 			},
 			{ inplace: false }
 		)
@@ -20,21 +25,19 @@ export default class UtilityActivity extends Activity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	async _activationChatContext() {
-		const context = await super._activationChatContext();
+	/** @inheritDoc */
+	_activationChatButtons() {
+		const buttons = [];
 		if (this.system.roll.formula)
-			context.buttons = {
-				damage: {
-					label: this.system.roll.name || game.i18n.localize("BF.Roll.Action.RollGeneric"),
-					dataset: {
-						action: "roll",
-						method: "rollFormula",
-						visibility: this.system.roll.visible ? "all" : undefined
-					}
+			buttons.push({
+				label: this.system.roll.name || game.i18n.localize("BF.Roll.Action.RollGeneric"),
+				icon: '<i class="fa-solid fa-dice" inert></i>',
+				dataset: {
+					action: "rollFormula",
+					visibility: this.system.roll.visible ? "all" : undefined
 				}
-			};
-		return context;
+			});
+		return buttons.concat(super._activationChatButtons());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -110,5 +113,20 @@ export default class UtilityActivity extends Activity {
 		Hooks.callAll("blackFlag.postRollFormula", rolls, { activity: this });
 
 		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle rolling the formula attached to this utility.
+	 * @this {UtilityActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static #rollFormula(event, target, message) {
+		this.rollFormula({ event });
 	}
 }

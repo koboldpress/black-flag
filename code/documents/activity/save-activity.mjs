@@ -11,7 +11,13 @@ export default class SaveActivity extends DamageActivity {
 				dataModel: SaveData,
 				icon: "systems/black-flag/artwork/activities/save.svg",
 				title: "BF.SAVE.Title",
-				hint: "BF.SAVE.Hint"
+				hint: "BF.SAVE.Hint",
+				usage: {
+					actions: {
+						rollDamage: SaveActivity.#rollDamage,
+						rollSave: SaveActivity.#rollSave
+					}
+				}
 			},
 			{ inplace: false }
 		)
@@ -70,25 +76,33 @@ export default class SaveActivity extends DamageActivity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	async _activationChatContext() {
-		const context = await super._activationChatContext();
-		context.buttons = {};
-		if (this.hasDamage)
-			context.buttons.damage = {
-				label: game.i18n.localize("BF.DAMAGE.Label"),
-				dataset: { action: "roll", method: "rollDamage" }
-			};
+	/** @inheritDoc */
+	_activationChatButtons() {
 		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability] ?? "";
 		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.dc.final, check: ability });
-		context.buttons.savingThrow = {
-			label: `
+		const buttons = [
+			{
+				label: `
 				<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
 				<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
 			`,
-			dataset: { action: "roll", allUsers: "", method: "rollSavingThrow" }
-		};
-		return context;
+				dataset: {
+					dc: this.system.dc.final,
+					ability: this.system.ability,
+					action: "rollSave",
+					visibility: "all"
+				}
+			}
+		];
+		if (this.hasDamage)
+			buttons.push({
+				label: game.i18n.localize("BF.DAMAGE.Label"),
+				icon: '<i class="fa-solid fa-burst" inert></i>',
+				dataset: {
+					action: "rollDamage"
+				}
+			});
+		return buttons.concat(super._activationChatButtons());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -113,25 +127,40 @@ export default class SaveActivity extends DamageActivity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*                Rolls                */
+	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Roll a saving throw.
-	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {BasicRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
-	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
-	 * @returns {Promise<ChallengeRoll[]|void>}
+	 * Handle performing a damage roll.
+	 * @this {SaveActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
-	async rollSavingThrow(config = {}, dialog = {}, message = {}) {
-		// Pass on DC and rolling ability to `rollAbilitySave` on any selected actors/tokens
-		for (const target of this.getActionTargets()) {
-			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: target.document });
-			await target.actor.rollAbilitySave(
+	static #rollDamage(event, target, message) {
+		this.rollDamage({ event });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle performing an saving throw.
+	 * @this {SaveActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static async #rollSave(event, target, message) {
+		const targets = this.getActionTargets();
+		if (!targets.length) return; // TODO: Display UI warning here
+		const dc = parseInt(target.dataset.dc);
+		for (const token of targets) {
+			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
+			await token.actor.rollAbilitySave(
 				{
-					ability: this.system.ability,
+					ability: target.dataset.ability ?? this.system.ability,
 					event,
-					target: this.system.dc.final
+					target: Number.isFinite(dc) ? dc : this.system.dc.final
 				},
 				{
 					data: { speaker }

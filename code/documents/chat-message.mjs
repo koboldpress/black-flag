@@ -138,12 +138,11 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (this.shouldDisplayChallenge) html.dataset.displayChallenge = "";
 
 		const actor = game.actors.get(this.speaker.actor);
-		if (game.user.isGM || actor?.isOwner || this.user.id === game.user.id) {
-			// TODO: Optionally hide any controls
-		} else {
-			for (const button of html.querySelectorAll(".menu button:not([data-all-users]")) {
-				button.hidden = true;
-			}
+		const isCreator = game.user.isGM || actor?.isOwner || this.author.id === game.user.id;
+		for (const button of html.querySelectorAll(".menu button")) {
+			if (this.getAssociatedActivity()?.shouldHideChatButton(button, this)) button.hidden = true;
+			if (button.dataset.visibility === "all") continue;
+			if ((button.dataset.visibility === "gm" && !game.user.isGM) || !isCreator) button.hidden = true;
 		}
 	}
 

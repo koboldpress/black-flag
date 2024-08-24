@@ -11,7 +11,12 @@ export default class HealActivity extends Activity {
 				dataModel: HealData,
 				icon: "systems/black-flag/artwork/activities/heal.svg",
 				title: "BF.HEAL.Title",
-				hint: "BF.HEAL.Hint"
+				hint: "BF.HEAL.Hint",
+				usage: {
+					actions: {
+						rollHealing: HealActivity.#rollHealing
+					}
+				}
 			},
 			{ inplace: false }
 		)
@@ -64,17 +69,18 @@ export default class HealActivity extends Activity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	async _activationChatContext() {
-		const context = await super._activationChatContext();
-		if (this.system.healing.formula)
-			context.buttons = {
-				damage: {
-					label: game.i18n.localize("BF.HEAL.Title"),
-					dataset: { action: "roll", method: "rollHealing" }
+	/** @inheritDoc */
+	_activationChatButtons() {
+		const buttons = [];
+		if (this.system.healing?.formula)
+			buttons.push({
+				label: game.i18n.localize("BF.HEAL.Title"),
+				icon: null, // TODO: Figure out healing icon
+				dataset: {
+					action: "rollHealing"
 				}
-			};
-		return context;
+			});
+		return buttons.concat(super._activationChatButtons());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -156,6 +162,21 @@ export default class HealActivity extends Activity {
 		Hooks.callAll("blackFlag.postRollHealing", rolls, { activity: this });
 
 		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle performing a healing roll.
+	 * @this {HealActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static #rollHealing(event, target, message) {
+		this.rollHealing({ event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

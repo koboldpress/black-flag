@@ -20,6 +20,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {string} title - Title to be displayed if no user title is specified.
 	 * @property {string} hint - Description of this type shown in the activity selection dialog.
 	 * @property {object} usage
+	 * @property {Record<string, Function>} usage.actions - Actions that can be triggered from the chat card.
 	 * @property {string} usage.chatCard - Template used to render chat cards.
 	 * @property {typeof ActivityActivationDialog} usage.dialog - Application used for the activation dialog by default.
 	 */
@@ -36,6 +37,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				title: "BF.ACTIVITY.Label[one]",
 				hint: "",
 				usage: {
+					actions: {},
 					chatCard: "systems/black-flag/templates/activity/chat/activation-card.hbs",
 					dialog: ActivityActivationDialog
 				}
@@ -163,29 +165,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Contents of the uses column in action table.
-	 * @type {string}
-	 */
-	get usesColumn() {
-		const uses = document.createElement("div");
-		uses.classList.add("layout");
-		if (this.consumption.targets.find(t => t.type === "item")) {
-			const itemUses = this.item.system.uses;
-			if (itemUses.max) {
-				uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
-			} else if (itemUses.consumeQuantity && this.item.system.isPhysical) {
-				uses.innerHTML += `<span>${numberFormat(this.item.system.quantity)}</span>`;
-			}
-		}
-		if (this.consumption.targets.find(t => t.type === "activity")) {
-			uses.innerHTML += `<span>${numberFormat(this.uses.value)} / ${numberFormat(this.uses.max)}</span>`;
-		}
-		return uses.outerHTML;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Is this activity on a spell item, or something else?
 	 * @type {boolean}
 	 */
@@ -217,6 +196,29 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	get requiresSpellSlot() {
 		if (!this.isSpell || !this.actor?.system.spellcasting?.slots) return false;
 		return this.item.system.requiresSpellSlot && this.activation.primary;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Contents of the uses column in action table.
+	 * @type {string}
+	 */
+	get usesColumn() {
+		const uses = document.createElement("div");
+		uses.classList.add("layout");
+		if (this.consumption.targets.find(t => t.type === "item")) {
+			const itemUses = this.item.system.uses;
+			if (itemUses.max) {
+				uses.innerHTML += `<span>${numberFormat(itemUses.value)} / ${numberFormat(itemUses.max)}</span>`;
+			} else if (itemUses.consumeQuantity && this.item.system.isPhysical) {
+				uses.innerHTML += `<span>${numberFormat(this.item.system.quantity)}</span>`;
+			}
+		}
+		if (this.consumption.targets.find(t => t.type === "activity")) {
+			uses.innerHTML += `<span>${numberFormat(this.uses.value)} / ${numberFormat(this.uses.max)}</span>`;
+		}
+		return uses.outerHTML;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -339,9 +341,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || !this.item.isOwner) return;
+
 		let item = this.item.clone({}, { keepId: true });
-		item.prepareData();
-		item.system.prepareFinalData?.();
 		let activity = item.system.activities.get(this.id);
 
 		const activationConfig = activity._prepareActivationConfig(config);
@@ -357,14 +359,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				create: true,
-				data: {},
+				data: {
+					flags: {
+						[game.system.id]: {
+							...this.messageFlags,
+							messageType: "activation"
+						}
+					}
+				},
 				template: this.metadata.usage.chatCard
 			},
 			message
 		);
 
-		// Call preActivate script & hooks
-		// TODO: preActivate script
 		/**
 		 * A hook event that fires before an activity activation is configured.
 		 * @function blackFlag.preActivateActivity
@@ -375,11 +382,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityDialogConfiguration} dialogConfig - Configuration data for the activity activation dialog.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (
-			Hooks.call("blackFlag.preActivateActivity", activity, activationConfig, messageConfig, dialogConfig) === false
-		) {
+		if (Hooks.call("blackFlag.preActivateActivity", activity, activationConfig, messageConfig, dialogConfig) === false)
 			return;
-		}
 
 		// Display configuration window if necessary, wait for result
 		if (dialogConfig.configure && activity._requiresConfigurationDialog(activationConfig)) {
@@ -399,6 +403,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (updates === false) return;
 		const results = { updates };
 
+		// TODO: Create activated effect/track concentration
+
 		// Display the card in chat
 		messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
 		if (config.targets?.length) {
@@ -409,8 +415,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// Finalize the activation
 		await activity._finalizeActivation(activationConfig, results);
 
-		// Call postActivate script & hooks
-		// TODO: postActivate script
 		/**
 		 * A hook event that fires when an activity is activated.
 		 * @function blackFlag.postActivateActivity
@@ -431,8 +435,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {ActivationUpdates|false}
 	 */
 	async consume(activationConfig, messageConfig) {
-		// Call preActivityConsumption script & hooks
-		// TODO: preActivityConsumption script
 		/**
 		 * A hook event that fires before an item's resource consumption is calculated.
 		 * @function blackFlag.preActivityConsumption
@@ -442,16 +444,12 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false) {
-			return false;
-		}
+		if (Hooks.call("blackFlag.preActivityConsumption", this, activationConfig, messageConfig) === false) return false;
 
 		// Calculate what resources should be consumed
 		const updates = await this._prepareActivationUpdates(activationConfig);
 		if (updates === false) return false;
 
-		// Call activityConsumption script & hooks
-		// TODO: activityConsumption script
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated, but before an updates are performed.
 		 * @function blackFlag.activityConsumption
@@ -479,8 +477,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (!foundry.utils.isEmpty(updates.actor)) await this.actor.update(updates.actor);
 		if (!foundry.utils.isEmpty(updates.item)) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
-		// Call postConsumeUses script & hooks
-		// TODO: postActivityConsumption script
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated and applied.
 		 * @function blackFlag.postActivityConsumption
@@ -509,14 +505,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	_prepareActivationConfig(config = {}) {
 		config = foundry.utils.deepClone(config);
 
+		// TODO: Create measured template
+
 		if (config.consume !== false) {
 			config.consume ??= {};
 			config.consume.action ??= this.activation.type === "legendary";
 			config.consume.resources ??= this.consumption.targets.length > 0;
 			config.consume.spellSlot ??= this.requiresSpellSlot;
 		}
-		if (!this.canScale) config.scaling = false;
-		else config.scaling ??= 0;
+
+		if (this.canScale) config.scaling ??= 0;
+		else config.scaling = false;
 
 		// If all entries within `config.consume` are `false`, replace object with `false`
 		if (config.consume !== false) {
@@ -525,6 +524,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		config.targets ??= this.constructor.getTargetDescriptors();
+
+		// TODO: Begin concentration
 
 		return config;
 	}
@@ -562,7 +563,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
 			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
 			item.updateSource(scaleUpdate);
-			item.prepareData();
 			item.system.prepareFinalData?.();
 		}
 	}
@@ -574,15 +574,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 *
 	 * @typedef {object} ActivationUpdates
 	 * @property {object} activity - Updates applied to activity that performed the activation.
-	 * @property {object[]} item - Updates applied to items on the actor that performed the activation.
 	 * @property {object} actor - Updates applied to the actor that performed the activation.
+	 * @property {object[]} item - Updates applied to items on the actor that performed the activation.
 	 * @property {Roll[]} rolls - Any rolls performed as part of the activation.
 	 */
 
 	/**
 	 * Calculate changes to actor, items, & this activity based on resource consumption.
 	 * @param {ActivityActivationConfiguration} config - Activation configuration.
-	 * @returns {ActivationUpdates}
+	 * @returns {ActivationUpdates|false}
 	 * @protected
 	 */
 	async _prepareActivationUpdates(config) {
@@ -647,6 +647,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
+		// TODO: Validate concentration
+
 		return errors.length ? false : updates;
 	}
 
@@ -673,12 +675,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @protected
 	 */
 	async _activationChatContext() {
+		const buttons = this._activationChatButtons();
 		return {
 			activity: this,
 			item: this.item,
 			actor: this.item.actor,
 			token: this.item.actor?.token,
-			buttons: {},
+			buttons: buttons.length ? buttons : null,
 			tags: Array.from(this.chatTags.entries())
 				.map(([key, label]) => ({ key, label }))
 				.filter(t => t.label),
@@ -689,6 +692,37 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				async: true
 			})
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * @typedef {object} ActivityActivationChatButton
+	 * @property {string} label    Label to display on the button.
+	 * @property {string} icon     Icon to display on the button.
+	 * @property {string} classes  Classes for the button.
+	 * @property {object} dataset  Data attributes attached to the button.
+	 */
+
+	/**
+	 * Create the buttons that will be displayed in chat.
+	 * @returns {ActivityActivationChatButton[]}
+	 * @protected
+	 */
+	_activationChatButtons() {
+		return [];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether the provided button in a chat message should be visible.
+	 * @param {HTMLButtonElement} button - The button to check.
+	 * @param {BlackFlagChatMessage} message - Chat message containing the button.
+	 * @returns {boolean}
+	 */
+	shouldHideChatButton(button, message) {
+		return false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -715,16 +749,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			{
 				rollMode: game.settings.get("core", "rollMode"),
 				data: {
-					style: CONST.CHAT_MESSAGE_STYLES.OTHER,
 					content: await renderTemplate(message.template ?? this.metadata.usage.chatCard, context),
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
-						core: { canPopout: true },
-						[game.system.id]: {
-							...this.messageFlags,
-							type: "activity",
-							step: "activation"
-						}
+						core: { canPopout: true }
 					}
 				}
 			},
@@ -777,20 +805,21 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {HTMLElement} html - Element in the chat log.
 	 */
 	activateChatListeners(message, html) {
-		for (const element of html.querySelectorAll("[data-action]")) {
-			element.addEventListener("click", event => this._onChatAction(event, message));
-		}
+		html.addEventListener("click", event => {
+			const target = event.target.closest("[data-action]");
+			if (target) this.#onChatAction(event, target, message);
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Handle an action activated on an activity's chat message.
+	 * Handle an action activated from an activity's chat message.
 	 * @param {PointerEvent} event - Triggering click event.
-	 * @param {ChatMessage} message - Message associated with the activation.
-	 * @returns {Promise}
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
-	async _onChatAction(event, message) {
+	async #onChatAction(event, target, message) {
 		const scaling = message.getFlag(game.system.id, "scaling") ?? 0;
 		let item = this.item;
 		if (scaling) {
@@ -802,14 +831,30 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 		const activity = item.system.activities.get(this.id);
 
-		const { action, ...properties } = event.target.dataset;
-		switch (action) {
-			case "roll":
-				const method = properties.method;
-				if (foundry.utils.getType(activity[method]) !== "function") return;
-				return activity[method]();
+		const action = target.dataset.action;
+		const handler = this.metadata.usage?.actions?.[action];
+		target.disabled = true;
+		try {
+			if (handler) await handler.call(activity, event, target, message);
+			else await activity._onChatAction(event, target, message);
+		} catch (err) {
+			Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
+		} finally {
+			target.disabled = false;
 		}
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle an action activated from an activity's chat message. Action handlers in metadata are called first.
+	 * This method is only called for actions which have no defined handler.
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 * @protected
+	 */
+	async _onChatAction(event, target, message) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */

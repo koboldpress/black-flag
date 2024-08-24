@@ -12,7 +12,13 @@ export default class AttackActivity extends DamageActivity {
 				dataModel: AttackData,
 				icon: "systems/black-flag/artwork/activities/attack.svg",
 				title: "BF.ATTACK.Label",
-				hint: "BF.ATTACK.Hint"
+				hint: "BF.ATTACK.Hint",
+				usage: {
+					actions: {
+						rollAttack: AttackActivity.#rollAttack,
+						rollDamage: AttackActivity.#rollDamage
+					}
+				}
 			},
 			{ inplace: false }
 		)
@@ -77,21 +83,25 @@ export default class AttackActivity extends DamageActivity {
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	async _activationChatContext() {
-		const context = await super._activationChatContext();
-		context.buttons = {
-			attack: {
+	/** @inheritDoc */
+	_activationChatButtons() {
+		const buttons = [
+			{
 				label: game.i18n.localize("BF.ATTACK.Label"),
-				dataset: { action: "roll", method: "rollAttack" }
+				icon: "", // TODO: Figure out attack icon
+				dataset: {
+					action: "rollAttack"
+				}
 			}
-		};
-		if (this.hasDamage)
-			context.buttons.damage = {
-				label: game.i18n.localize("BF.DAMAGE.Label"),
-				dataset: { action: "roll", method: "rollDamage" }
-			};
-		return context;
+		];
+		// if (this.hasDamage) buttons.push({
+		// 	label: game.i18n.localize("BF.DAMAGE.Label"),
+		// 	icon: '<i class="fa-solid fa-burst" inert></i>',
+		// 	dataset: {
+		// 		action: "rollDamage"
+		// 	}
+		// });
+		return buttons.concat(super._activationChatButtons());
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -188,6 +198,34 @@ export default class AttackActivity extends DamageActivity {
 		Hooks.callAll("blackFlag.postRollAttack", rolls, { activity: this });
 
 		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Event Handlers           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle performing an attack roll.
+	 * @this {AttackActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static #rollAttack(event, target, message) {
+		this.rollAttack({ event });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle performing a damage roll.
+	 * @this {AttackActivity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 */
+	static #rollDamage(event, target, message) {
+		this.rollDamage({ event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

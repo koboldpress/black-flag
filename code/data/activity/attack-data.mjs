@@ -22,7 +22,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @property {object} damage.critical
  * @property {string} damage.critical.bonus - Extra damage applied when a critical is rolled, added to the base damage
  *                                            or the first damage part.
- * @property {boolean} damage.includeBaseDamage - Should a item's base damage be included with any other damage parts?
+ * @property {boolean} damage.includeBase - Should a item's base damage be included with any other damage parts?
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
