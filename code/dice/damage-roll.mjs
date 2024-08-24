@@ -7,7 +7,6 @@ import BasicRoll from "./basic-roll.mjs";
  *
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls - Configuration data for individual rolls.
- * @property {boolean} [allowCritical=true] - Should critical damage be allowed?
  * @property {CriticalDamageConfiguration} [critical] - Critical configuration for all rolls.
  * @property {number} [scaling=0] - Scale increase above base damage.
  */
@@ -23,6 +22,7 @@ import BasicRoll from "./basic-roll.mjs";
  * Critical effects configuration data.
  *
  * @typedef {object} CriticalDamageConfiguration
+ * @property {boolean} [allow=true] - Should critical damage be allowed?
  * @property {number} [multiplier=2] - Amount by which to multiply critical damage.
  * @property {number} [bonusDice=0] - Additional dice added to first term when calculating critical damage.
  * @property {string} [bonusDamage] - Additional, unmodified, damage formula added when calculating a critical.

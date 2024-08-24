@@ -20,8 +20,8 @@
 	<ul class="menu">
 		{{#each buttons}}
 			<li>
-				<button type="button" class="light-button" name="{{ @key }}" {{ blackFlag-dataset dataset }}>
-					{{{ label }}}
+				<button type="button" class="light-button" {{ blackFlag-dataset dataset }}>
+					{{{ icon }}} <span>{{{ label }}}</span>
 				</button>
 			</li>
 		{{/each}}

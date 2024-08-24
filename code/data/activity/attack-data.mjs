@@ -68,33 +68,11 @@ export class AttackData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Ability used to make attack rolls for this activity.
-	 * @type {string|null}
-	 */
-	get attackAbility() {
-		if (this.attack.ability === "none") return null;
-		if (this.attack.ability) return this.attack.ability;
-		if (this.parent.item.system.ability) return this.parent.item.system.ability;
-		const availableAbilities = this.availableAbilities;
-		const abilities = this.parent.actor?.system.abilities ?? {};
-		return availableAbilities.reduce(
-			(largest, ability) =>
-				(abilities[ability]?.adjustedMod ?? abilities[ability]?.mod ?? -Infinity) >
-				(abilities[largest]?.adjustedMod ?? abilities[largest]?.mod ?? -Infinity)
-					? ability
-					: largest,
-			availableAbilities.first()
-		);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Proficiency to include with the attack roll.
 	 * @type {Proficiency|null}
 	 */
 	get attackProficiency() {
-		const ability = this.parent.actor?.system.abilities?.[this.attackAbility];
+		const ability = this.parent.actor?.system.abilities?.[this.parent.ability];
 		if (ability?.proficient === true) return null;
 		return this.parent.item.system.proficiency?.hasProficiency ? this.parent.item.system.proficiency ?? null : null;
 	}
@@ -182,22 +160,15 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		const ability = this.parent.actor?.system.abilities?.[this.attackAbility];
-		const rollData = this.parent.getRollData({ deterministic: true });
-		const { parts, data } = buildRoll(
-			{
-				mod: ability?.mod,
-				prof: this.attackProficiency?.flat,
-				bonus: this.parent.actor?.system.buildBonus?.(
-					this.parent.actor?.system.getModifiers?.(this.parent.modifierData),
-					{ rollData }
-				),
-				magic: this.parent.item.system.attackMagicalBonus
-			},
-			rollData
-		);
+		if (this.damage.includeBase && this.parent.item.system.damage?.formula) {
+			// TODO: Move base damage to `damage.base`
+			const basePart = this.parent.item.system.damage.clone();
+			basePart.base = true;
+			this.damage.parts.unshift(basePart);
+		}
+
 		Object.defineProperty(this, "toHit", {
-			value: simplifyBonus(parts.join(" + "), data),
+			value: this.parent.getAttackDetails().formula,
 			configurable: true,
 			enumerable: false
 		});

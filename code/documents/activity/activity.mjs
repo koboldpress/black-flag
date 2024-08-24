@@ -1,7 +1,7 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
-import { numberFormat } from "../../utils/_module.mjs";
+import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -74,6 +74,23 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * The primary ability for this activity that will be available as `@mod` in roll data.
+	 * @type {string|null}
+	 */
+	get ability() {
+		if (this.isSpell) {
+			const abilities = Object.values(this.actor.system.spellcasting?.origins ?? {}).reduce((set, o) => {
+				set.add(o.ability);
+				return set;
+			}, new Set());
+			return this.actor.system.selectBestAbility?.(abilities) ?? null;
+		}
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * The action type that is used to activate this activity.
 	 * @type {string}
 	 */
@@ -89,6 +106,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	get activationLabel() {
 		return `BF.ACTIVITY.Core.Action.${this.isSpell ? "Cast" : "Use"}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
+	 * @type {boolean}
+	 */
+	get allowDamageScaling() {
+		return this.isSpell || this.consumption.scale.allowed;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -132,6 +159,28 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Description used in chat message flavor for messages created with `rollDamage`.
+	 * @type {string}
+	 */
+	get damageFlavor() {
+		return game.i18n.localize("BF.DAMAGE.Label");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Damage modifier with any adjustments applied.
+	 * @type {number}
+	 */
+	get damageModifier() {
+		const ability = this.actor?.system.abilities?.[this.ability];
+		if (!ability) return 0;
+		return ability?.adjustedMod ?? ability?.mod;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Should this activity be displayed as an action on the character sheet?
 	 * @type {boolean}
 	 */
@@ -146,7 +195,41 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {string}
 	 */
 	get effectColumn() {
-		return "";
+		if (!this.hasDamage) return "";
+		const layout = document.createElement("div");
+		layout.classList.add("layout");
+		const rollConfig = this.getDamageConfig();
+		for (const roll of rollConfig.rolls) {
+			let formula = roll.parts.join(" + ");
+			formula = Roll.defaultImplementation.replaceFormulaData(formula, roll.data);
+			formula = simplifyFormula(formula);
+			if (formula) {
+				const damageType = CONFIG.BlackFlag.damageTypes[roll.options.damageType];
+				layout.innerHTML += `<span class="damage">${formula} ${game.i18n.localize(damageType?.label ?? "")}</span>`;
+			}
+		}
+		return layout.outerHTML;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Are any damage parts actually configured for this activity?
+	 * @type {boolean}
+	 */
+	get hasDamage() {
+		return this.system.damage?.parts?.length > 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this activity on a spell item, or something else?
+	 * @type {boolean}
+	 */
+	get isSpell() {
+		// TODO: Potentially allow custom module types to be considered spells
+		return this.item.type === "spell";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -160,17 +243,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			activity: { type: this.type, id: this.id, uuid: this.uuid },
 			item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
 		};
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Is this activity on a spell item, or something else?
-	 * @type {boolean}
-	 */
-	get isSpell() {
-		// TODO: Potentially allow custom module types to be considered spells
-		return this.item.type === "spell";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -796,6 +868,74 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*                Rolls                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform a damage roll.
+	 * @param {Partial<DamageRollProcessConfiguration>} [config] - Configuration information for the roll.
+	 * @param {Partial<BasicRollDialogConfiguration>} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {Partial<BasicRollMessageConfiguration>} [message] - Configuration data that guides roll message creation.
+	 * @returns {Promise<DamageRoll[]|void>}
+	 */
+	async rollDamage(config = {}, dialog = {}, message = {}) {
+		const rollConfig = this.getDamageConfig(config);
+		rollConfig.origin = this;
+
+		const allModifiers = rollConfig.rolls?.map(c => c.modifierData) ?? [];
+		const dialogConfig = foundry.utils.mergeObject({
+			options: {
+				rollNotes: this.actor?.system.getModifiers?.(allModifiers, "note"),
+				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
+			}
+		});
+
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				data: {
+					flags: {
+						[game.system.id]: {
+							...this.messageFlags,
+							messageType: "roll",
+							roll: { type: "damage" },
+							targets: this.constructor.getTargetDescriptors()
+						}
+					},
+					flavor: `${this.name} - ${this.damageFlavor}`,
+					speaker: ChatMessage.getSpeaker({ actor: this.item.actor })
+				}
+			},
+			message
+		);
+
+		/**
+		 * A hook event that fires before damage is rolled.
+		 * @function blackFlag.preRollDamage
+		 * @memberof hookEvents
+		 * @param {DamageRollProcessConfiguration} config - Configuration data for the pending roll.
+		 * @param {BasicRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
+		 * @returns {boolean} - Explicitly return false to prevent the roll from being performed.
+		 */
+		if (Hooks.call("blackFlag.preRollDamage", rollConfig, dialogConfig, messageConfig) === false) return;
+
+		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
+		if (!rolls) return;
+
+		/**
+		 * A hook event that fires after damage has been rolled.
+		 * @function blackFlag.postRollDamage
+		 * @memberof hookEvents
+		 * @param {DamageRoll[]} rolls - The resulting rolls.
+		 * @param {object} [data]
+		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
+		 */
+		Hooks.callAll("blackFlag.postRollDamage", rolls, { activity: this });
+
+		return rolls;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -875,12 +1015,81 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Get the roll parts used to create the damage rolls.
+	 * @param {Partial<DamageRollProcessConfiguration>} [config={}]
+	 * @returns {DamageRollProcessConfiguration}
+	 */
+	getDamageConfig(config = {}) {
+		if (!this.system.damage?.parts) return foundry.utils.mergeObject({ rolls: [] }, config);
+
+		const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
+		const rollData = this.getRollData();
+		rollConfig.rolls = this.system.damage.parts
+			.map(d => this._processDamagePart(d, rollConfig, rollData))
+			.filter(d => d.parts.length)
+			.concat(config.rolls ?? []);
+
+		return rollConfig;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Damage formulas and activity.
+	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @returns {{ activity: Activity, rolls: DamageRollConfiguration[] }|null}
+	 */
+	getDamageDetails(options = {}) {
+		return {
+			activity: this,
+			rolls: this.getDamageConfig({ mode: options.versatile ? "versatile" : null }).rolls
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Process a single damage part into a roll configuration.
+	 * @param {DamageData} damage - Damage to prepare for the roll.
+	 * @param {Partial<DamageRollProcessConfiguration>} rollConfig - Roll configuration being built.
+	 * @param {object} rollData - Roll data to populate with damage data.
+	 * @param {object} modifierData - Extra data to be included in the modifier data.
+	 * @returns {DamageRollConfiguration}
+	 * @protected
+	 */
+	_processDamagePart(damage, rollConfig, rollData, modifierData = {}) {
+		modifierData = foundry.utils.mergeObject({ ...this.modifierData, type: "damage", damage }, modifierData);
+		const { parts, data } = buildRoll(
+			{
+				bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData })
+			},
+			rollData
+		);
+		const scaledFormula = damage.scaledFormula(rollData.scaling);
+		if (scaledFormula) parts.unshift(scaledFormula);
+
+		return {
+			data,
+			modifierData,
+			parts,
+			options: {
+				damageType: damage.type,
+				damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
+				minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), { rollData })
+			}
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Retrieve the roll data for this activity.
 	 * @param {object} [options={}]
 	 * @returns {object}
 	 */
 	getRollData(options = {}) {
 		const rollData = this.item.getRollData(options);
+		rollData.mode = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
 		return rollData;
 	}
 

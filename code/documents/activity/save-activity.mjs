@@ -1,8 +1,8 @@
 import { SaveData } from "../../data/activity/save-data.mjs";
 import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
-import DamageActivity from "./damage-activity.mjs";
+import Activity from "./activity.mjs";
 
-export default class SaveActivity extends DamageActivity {
+export default class SaveActivity extends Activity {
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -174,9 +174,13 @@ export default class SaveActivity extends DamageActivity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	createDamageConfigs(config, rollData) {
-		config = foundry.utils.mergeObject({ allowCritical: false }, config);
-		return super.createDamageConfigs(config, rollData);
+	getDamageConfig(config = {}) {
+		const rollConfig = super.getDamageConfig(config);
+
+		rollConfig.critical ??= {};
+		rollConfig.critical.allow ??= false;
+
+		return rollConfig;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

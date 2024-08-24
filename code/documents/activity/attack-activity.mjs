@@ -1,8 +1,8 @@
 import { AttackData } from "../../data/activity/attack-data.mjs";
 import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
-import DamageActivity from "./damage-activity.mjs";
+import Activity from "./activity.mjs";
 
-export default class AttackActivity extends DamageActivity {
+export default class AttackActivity extends Activity {
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -28,16 +28,35 @@ export default class AttackActivity extends DamageActivity {
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	get ability() {
+		if (this.system.attack.ability === "none") return null;
+		if (this.system.attack.ability) return this.system.attack.ability;
+		if (this.item.system.ability) return this.item.system.ability;
+		const availableAbilities = this.system.availableAbilities;
+		const abilities = this.actor?.system.abilities ?? {};
+		return availableAbilities.reduce(
+			(largest, ability) =>
+				(abilities[ability]?.adjustedMod ?? abilities[ability]?.mod ?? -Infinity) >
+				(abilities[largest]?.adjustedMod ?? abilities[largest]?.mod ?? -Infinity)
+					? ability
+					: largest,
+			availableAbilities.first()
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Ability used to make attack rolls for this activity.
 	 * @type {string|null}
 	 */
 	get attackAbility() {
 		foundry.utils.logCompatibilityWarning(
-			"The `attackAbility` property on `AttackActivity` has been moved to `system.attackAbility`",
+			"The `attackAbility` property on `AttackActivity` has been moved to `ability`",
 			{ since: "Black Flag 0.10.042", until: "Black Flag 0.10.047" }
 		);
-		return this.system.attackAbility;
+		return this.system.ability;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -55,13 +74,6 @@ export default class AttackActivity extends DamageActivity {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
-	get damageAbility() {
-		return this.system.attackAbility;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @inheritDoc */
 	get hasDamage() {
 		return super.hasDamage || (this.system.damage.includeBase && !!this.item.system.damage?.formula);
@@ -74,7 +86,7 @@ export default class AttackActivity extends DamageActivity {
 		return {
 			type: "attack",
 			kind: "attack",
-			ability: this.system.attackAbility,
+			ability: this.ability,
 			...super.modifierData
 		};
 	}
@@ -94,13 +106,14 @@ export default class AttackActivity extends DamageActivity {
 				}
 			}
 		];
-		// if (this.hasDamage) buttons.push({
-		// 	label: game.i18n.localize("BF.DAMAGE.Label"),
-		// 	icon: '<i class="fa-solid fa-burst" inert></i>',
-		// 	dataset: {
-		// 		action: "rollDamage"
-		// 	}
-		// });
+		if (this.hasDamage)
+			buttons.push({
+				label: game.i18n.localize("BF.DAMAGE.Label"),
+				icon: '<i class="fa-solid fa-burst" inert></i>',
+				dataset: {
+					action: "rollDamage"
+				}
+			});
 		return buttons.concat(super._activationChatButtons());
 	}
 
@@ -232,58 +245,13 @@ export default class AttackActivity extends DamageActivity {
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	createDamageConfigs(config, rollData) {
-		const rollConfig = super.createDamageConfigs(config, rollData);
-		rollConfig.rolls ??= [];
-		if (this.system.damage.includeBase && this.item.system.damage) {
-			const damage = (rollConfig.versatile ? this.item.system.versatileDamage : null) ?? this.item.system.damage;
-			const modifierData = { ...this.modifierData, type: "damage", damage, baseDamage: true };
-			const { parts, data } = buildRoll(
-				{
-					mod: this.damageModifier,
-					bonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(modifierData), { rollData }),
-					magic: this.item.system.damageMagicalBonus
-				},
-				rollData
-			);
-			rollConfig.rolls.unshift(
-				foundry.utils.mergeObject(
-					{
-						data,
-						modifierData,
-						parts: [damage.formula, ...(parts ?? [])],
-						options: {
-							critical: {
-								bonusDamage: this.system.damage.critical.bonus,
-								bonusDice: this.actor?.system.mergeModifiers?.(
-									this.actor?.system.getModifiers?.(modifierData, "critical-dice"),
-									{ deterministic: true, rollData }
-								)
-							},
-							damageType: damage.type,
-							damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
-							minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
-								rollData: rollData
-							})
-						}
-					},
-					config
-				)
-			);
-		}
-		return rollConfig;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Attack details for this activity.
 	 * @param {object} [options={}] - Additional options that might affect fetched data.
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
 	getAttackDetails(options = {}) {
-		const ability = this.actor?.system.abilities?.[this.system.attackAbility];
+		const ability = this.actor?.system.abilities?.[this.ability];
 		const rollData = this.item.getRollData();
 		const { parts, data } = buildRoll(
 			this.system.attack.flat
@@ -299,6 +267,76 @@ export default class AttackActivity extends DamageActivity {
 					},
 			rollData
 		);
-		return { parts, data, formula: simplifyFormula(Roll.replaceFormulaData(parts.join(" + "), data)), activity: this };
+		return {
+			activity: this,
+			data,
+			formula: simplifyFormula(Roll.replaceFormulaData(parts.join(" + "), data), { deterministic: true }),
+			parts
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * @typedef {AttackDamageRollProcessConfiguration} [config={}]
+	 * @property {BlackFlagItem} ammunition                               Ammunition used with the attack.
+	 * @property {"oneHanded"|"twoHanded"|"offhand"|"thrown"} attackMode  Attack mode.
+	 */
+
+	/**
+	 * Get the roll parts used to create the damage rolls.
+	 * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
+	 * @returns {AttackDamageRollProcessConfiguration}
+	 */
+	getDamageConfig(config = {}) {
+		const rollConfig = super.getDamageConfig(config);
+
+		// TODO: Handle ammunition
+
+		if (this.system.damage.critical.bonus) {
+			rollConfig.critical ??= {};
+			rollConfig.critical.bonusDamage ??= this.system.damage.critical.bonus;
+		}
+
+		return rollConfig;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_processDamagePart(damage, rollConfig, rollData) {
+		if (!damage.base) super._processDamagePart(damage, rollConfig, rollData);
+
+		// Swap base damage for versatile if two-handed attack is made on versatile weapon
+		if (this.item.system.properties?.has("versatile") && rollConfig.attackMode === "twoHanded") {
+			damage = this.item.system.versatileDamage ?? damage;
+		}
+
+		const roll = super._processDamagePart(damage, rollConfig, rollData, { baseDamage: true });
+		roll.base = true;
+
+		if (this.item.type === "weapon") {
+			// Remove `@mod` from off-hand attacks unless it is negative
+			if (rollConfig.attackMode === "offHand" && roll.data.mode >= 0) roll.parts.findSplice("@mod");
+
+			// Add magical bonus
+			if (this.item.system.damageMagicalBonus) {
+				roll.data.magic = this.item.system.damageMagicalBonus;
+				roll.parts.push("@magic");
+			}
+
+			// TODO: Add ammunition bonus
+		}
+
+		foundry.utils.setProperty(
+			roll,
+			"options.critical.bonusDice",
+			this.actor?.system.mergeModifiers?.(this.actor?.system.getModifiers?.(roll.modifierData, "critical-dice"), {
+				deterministic: true,
+				rollData
+			})
+		);
+
+		return roll;
 	}
 }
