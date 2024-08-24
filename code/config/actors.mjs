@@ -280,12 +280,12 @@ export const movementTags = {
  *                                     with optional "Full", "HitDice", & "HitPoints" variants depending
  *                                     on what resources can be recovered.
  * @property {typeof BaseRestDialog} dialogClass - Dialog used when performing the rest.
- * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {boolean} [recoverHitDice=false] - Should hit dice be recovered?
- * @property {Set<string>} [recoverSpellSlotTypes] - Types of spellcasting slots that are recovered on this rest.
+ * @property {boolean} [recoverHitPoints=false] - Should hit points be recovered?
  * @property {string[]} [recoverPeriods] - Recovery periods as defined in `CONFIG.BlackFlag.recoveryPeriods` that
  *                                         should be applied when this rest is taken. The ordering of the periods
  *                                         determines which is applied if more that one recovery profile is found.
+ * @property {Set<string>} [recoverSpellSlotTypes] - Types of spellcasting slots that are recovered on this rest.
  */
 
 /**

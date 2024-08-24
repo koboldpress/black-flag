@@ -27,19 +27,11 @@ export default class AttackActivity extends DamageActivity {
 	 * @type {string|null}
 	 */
 	get attackAbility() {
-		if (this.system.ability === "none") return null;
-		if (this.system.ability) return this.system.ability;
-		if (this.item.system.ability) return this.item.system.ability;
-		const availableAbilities = this.system.availableAbilities;
-		const abilities = this.actor?.system.abilities ?? {};
-		return availableAbilities.reduce(
-			(largest, ability) =>
-				(abilities[ability]?.adjustedMod ?? abilities[ability]?.mod ?? -Infinity) >
-				(abilities[largest]?.adjustedMod ?? abilities[largest]?.mod ?? -Infinity)
-					? ability
-					: largest,
-			availableAbilities.first()
+		foundry.utils.logCompatibilityWarning(
+			"The `attackAbility` property on `AttackActivity` has been moved to `system.attackAbility`",
+			{ since: "Black Flag 0.10.042", until: "Black Flag 0.10.047" }
 		);
+		return this.system.attackAbility;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -59,14 +51,14 @@ export default class AttackActivity extends DamageActivity {
 
 	/** @override */
 	get damageAbility() {
-		return this.attackAbility;
+		return this.system.attackAbility;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	get hasDamage() {
-		return super.hasDamage || (this.system.damage.includeBaseDamage && !!this.item.system.damage?.formula);
+		return super.hasDamage || (this.system.damage.includeBase && !!this.item.system.damage?.formula);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -76,12 +68,10 @@ export default class AttackActivity extends DamageActivity {
 		return {
 			type: "attack",
 			kind: "attack",
-			ability: this.attackAbility,
+			ability: this.system.attackAbility,
 			...super.modifierData
 		};
 	}
-
-	// TODO: Prepare proper title like "Melee Weapon Attack"
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
@@ -121,6 +111,14 @@ export default class AttackActivity extends DamageActivity {
 		const { parts, data } = this.getAttackDetails();
 		const targets = this.constructor.getTargetDescriptors();
 
+		const threshold = Math.min(
+			this.actor?.system.mergeModifiers?.(this.actor?.system.getModifiers?.(this.modifierData, "critical-threshold"), {
+				mode: "smallest",
+				rollData: data
+			}) ?? Infinity,
+			this.system.attack.critical.threshold ?? Infinity
+		);
+
 		const rollConfig = foundry.utils.deepClone(config);
 		rollConfig.origin = this;
 		rollConfig.rolls = [
@@ -128,10 +126,7 @@ export default class AttackActivity extends DamageActivity {
 				parts,
 				data,
 				options: {
-					criticalSuccess: this.actor?.system.mergeModifiers?.(
-						this.actor?.system.getModifiers?.(this.modifierData, "critical-threshold"),
-						{ mode: "smallest", rollData: data }
-					),
+					criticalSuccess: Number.isFinite(threshold) ? threshold : undefined,
 					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(this.modifierData, "min"), {
 						rollData: data
 					}),
@@ -203,7 +198,7 @@ export default class AttackActivity extends DamageActivity {
 	createDamageConfigs(config, rollData) {
 		const rollConfig = super.createDamageConfigs(config, rollData);
 		rollConfig.rolls ??= [];
-		if (this.system.damage.includeBaseDamage && this.item.system.damage) {
+		if (this.system.damage.includeBase && this.item.system.damage) {
 			const damage = (rollConfig.versatile ? this.item.system.versatileDamage : null) ?? this.item.system.damage;
 			const modifierData = { ...this.modifierData, type: "damage", damage, baseDamage: true };
 			const { parts, data } = buildRoll(
@@ -222,6 +217,7 @@ export default class AttackActivity extends DamageActivity {
 						parts: [damage.formula, ...(parts ?? [])],
 						options: {
 							critical: {
+								bonusDamage: this.system.damage.critical.bonus,
 								bonusDice: this.actor?.system.mergeModifiers?.(
 									this.actor?.system.getModifiers?.(modifierData, "critical-dice"),
 									{ deterministic: true, rollData }
@@ -249,7 +245,7 @@ export default class AttackActivity extends DamageActivity {
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
 	getAttackDetails(options = {}) {
-		const ability = this.actor?.system.abilities?.[this.attackAbility];
+		const ability = this.actor?.system.abilities?.[this.system.attackAbility];
 		const rollData = this.item.getRollData();
 		const { parts, data } = buildRoll(
 			this.system.attack.flat

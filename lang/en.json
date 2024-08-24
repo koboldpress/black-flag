@@ -781,28 +781,52 @@
 	"Label": "Attack",
 	"Hint": "Make an attack and roll damage.",
 	"FIELDS": {
-		"ability": {
-			"label": "Attack Ability"
-		},
 		"attack": {
 			"label": "Attack Details",
+			"ability": {
+				"label": "Attack Ability",
+				"hint": "Ability used to make the attack and determine damage. Available using @mod in formulas."
+			},
 			"bonus": {
-				"label": "Attack Bonus"
+				"label": "To Hit Bonus",
+				"hint": "Bonuse added to the to hit roll for the attack."
+			},
+			"critical": {
+				"threshold": {
+					"label": "Critical Threshold",
+					"hint": "Minimum value on the attack die needed to roll a critical hit."
+				}
 			},
 			"flat": {
-				"label": "Flat",
+				"label": "Flat To Hit",
 				"hint": "Don’t add ability or proficiency to attack roll."
+			},
+			"type": {
+				"classification": {
+					"label": "Attack Classification",
+					"hint": "Is this a melee or ranged attack?"
+				},
+				"value": {
+					"label": "Attack Type",
+					"hint": "Does this attack come from a weapon or a spell?"
+				}
 			}
 		},
 		"damage": {
-			"label": "Attack Damage"
-		},
-		"type": {
-			"classification": {
-				"label": "Attack Classification"
+			"label": "Attack Damage",
+			"critical": {
+				"bonus": {
+					"label": "Extra Critical Damage",
+					"hint": "Extra damage applied when a critical is rolled, added to the base damage or first damage part."
+				}
 			},
-			"value": {
-				"label": "Attack Type"
+			"includeBase": {
+				"label": "Include Base Damage",
+				"hint": "Include the item's base damage along with any additional damage parts defined in the activity."
+			},
+			"parts": {
+				"label": "Damage Parts",
+				"hint": "Individual damage parts to include with the roll."
 			}
 		}
 	}
@@ -1156,10 +1180,6 @@
 			"label": "Damage",
 			"allowCritical": {
 				"label": "Allow Critical"
-			},
-			"includeBaseDamage": {
-				"label": "Include Base Damage",
-				"hint": "Include the weapon's base damage along with any additional damage parts defined in the activity."
 			}
 		}
 	},

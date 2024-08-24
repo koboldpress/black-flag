@@ -85,14 +85,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 				category: new StringField({ label: "BF.Equipment.Category.Label" }),
 				base: new StringField({ label: "BF.Equipment.Base.Label" })
 			})
-
-			// Attack ability override
-			// Damage ability override
-			// Critical threshold override
-			// Attack bonus
-			// Damage bonus
-			// Critical damage bonus
-			// Critical dice bonus
 		});
 	}
 

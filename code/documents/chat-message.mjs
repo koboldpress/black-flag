@@ -117,7 +117,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			const isDeathSave = this.getFlag(game.system.id, "type") === "death";
 			const showResult = isAttack ? displayAttackResult : displayChallenge;
 
-			if (isAttack && isDeathSave) {
+			if (isAttack || isDeathSave) {
 				if (roll.isCriticalSuccess) result.classList.add("critical-success");
 				else if (roll.isCriticalFailure) result.classList.add("critical-failure");
 			}

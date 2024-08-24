@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>{{ localize "BF.ATTACK.Label" }}</legend>
 	<label>
-		<span>{{ localize "BF.ATTACK.FIELDS.ability.label" }}</span>
+		<span>{{ localize "BF.ATTACK.FIELDS.attack.ability.label" }}</span>
 		<select name="system.ability">
 			{{#select source.system.ability}}
 				{{#if defaultAbility}}
@@ -28,4 +28,6 @@
 			<input type="checkbox" name="system.attack.flat" {{ checked source.system.attack.flat }}>
 		</label>
 	</div>
+	{{ formField systemFields.attack.fields.critical.fields.threshold name="system.attack.critical.threshold"
+	   value=source.system.attack.critical.threshold }}
 </fieldset>

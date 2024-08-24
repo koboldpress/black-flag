@@ -830,6 +830,18 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Retrieve the roll data for this activity.
+	 * @param {object} [options={}]
+	 * @returns {object}
+	 */
+	getRollData(options = {}) {
+		const rollData = this.item.getRollData(options);
+		return rollData;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Important information on a targeted token.
 	 *
 	 * @typedef {object} TargetDescriptor
