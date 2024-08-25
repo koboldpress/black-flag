@@ -28,6 +28,16 @@ export default class ItemDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Modes that can be used when making an attack with this item.
+	 * @type {FormSelectOption[]}
+	 */
+	get attackModes() {
+		return [];
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Tags that should be displayed in chat.
 	 * @type {Map<string, string>}
 	 */

@@ -44,6 +44,19 @@ export class SimpleDamageData extends foundry.abstract.DataModel {
 	get formula() {
 		return this.number && this.denomination ? `${this.number}d${this.denomination}` : "";
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Scale the damage by a certain amount using its built-in scaling configuration.
+	 * @param {number|Scaling} increase - Number of steps above base damage to scale.
+	 * @returns {string}
+	 */
+	scaledFormula(increase) {
+		return this.formula;
+	}
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -100,11 +113,7 @@ export class ExtendedDamageData extends SimpleDamageData {
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Scale the damage by a certain amount using its built-in scaling configuration.
-	 * @param {number|Scaling} increase - Number of steps above base damage to scale.
-	 * @returns {string}
-	 */
+	/** @inheritDoc */
 	scaledFormula(increase) {
 		if (increase instanceof Scaling) increase = increase.increase;
 

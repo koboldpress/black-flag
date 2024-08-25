@@ -305,14 +305,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	prepareFinalData() {
-		super.prepareFinalData();
-		this.system.prepareFinalData?.();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*          Embeds & Tooltips          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -1089,7 +1081,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	getRollData(options = {}) {
 		const rollData = this.item.getRollData(options);
-		rollData.mode = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
+		rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
 		return rollData;
 	}
 

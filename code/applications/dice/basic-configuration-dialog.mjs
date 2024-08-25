@@ -8,30 +8,23 @@ import BFApplication from "../api/application.mjs";
  * @property {number} default.rollMode - The roll mode that is selected by default.
  * @property {typeof BasicRoll} rollType - Roll type to use when constructing final roll.
  * @property {Modifier[]} rollNotes - Notes to display with the roll.
- * @property {*} resolve - Method to call when resolving successfully.
- * @property {*} reject - Method to call when the dialog is closed or process fails.
  */
 
 /**
  * Roll configuration dialog.
  *
- * @param {BasicRollProcessConfiguration} [config=[]] - Initial roll configurations.
+ * @param {BasicRollProcessConfiguration} [config={}] - Initial roll configurations.
  * @param {BasicRollMessageConfiguration} [message={}] - Message configuration.
  * @param {BasicRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class BasicRollConfigurationDialog extends BFApplication {
-	constructor(config = [], message = {}, options = {}) {
+	constructor(config = {}, message = {}, options = {}) {
 		super(options);
 
-		/**
-		 * Roll configurations.
-		 * @type {BasicRollProcessConfiguration[]}
-		 */
-		Object.defineProperty(this, "config", { value: config, writable: false, enumerable: true });
-
+		this.#config = config;
+		this.#message = message;
 		this.notes = this.options.rollNotes;
-		this.message = message;
-		this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config));
+		this.#buildRolls(foundry.utils.deepClone(this.#config));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -86,6 +79,30 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Roll configuration.
+	 * @type {BasicRollProcessConfiguration}
+	 */
+	#config;
+
+	get config() {
+		return this.#config;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Configuration information for the roll message.
+	 * @type {BasicRollMessageConfiguration}
+	 */
+	#message;
+
+	get message() {
+		return this.#message;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Roll notes.
 	 * @type {Modifier[]|void}
 	 */
@@ -94,18 +111,14 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Configuration information for the roll message.
-	 * @type {BasicRollMessageConfiguration}
-	 */
-	message;
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * The rolls being configured.
 	 * @type {BasicRoll[]}
 	 */
-	rolls;
+	#rolls;
+
+	get rolls() {
+		return this.#rolls;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -119,6 +132,18 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		const context = await super._prepareContext(options);
+		context.config = this.config;
+		context.message = this.message;
+		context.notes = this.notes;
+		context.options = this.options;
+		return context;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -150,7 +175,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	async _prepareButtonsContext(context, options) {
 		context.buttons = {
 			roll: {
-				icon: '<i class="fa-solid fa-dice"></i>',
+				icon: '<i class="fa-solid fa-dice" inert></i>',
 				label: game.i18n.localize("BF.Roll.Action.RollGeneric")
 			}
 		};
@@ -208,12 +233,11 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * Build a roll from the provided config.
 	 * @param {BasicRollProcessConfiguration[]} config - Roll process configuration data.
 	 * @param {FormDataExtended} [formData] - Data provided by the configuration form.
-	 * @returns {BasicRoll[]}
-	 * @private
 	 */
 	#buildRolls(config, formData) {
 		const RollType = this.rollType;
-		return config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
+		this.#rolls =
+			config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -285,8 +309,19 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @private
 	 */
 	static async #handleFormSubmission(event, form, formData) {
-		const rolls = this._finalizeRolls(event.submitter?.dataset?.action);
-		await this.close({ [game.system.id]: { rolls } });
+		this.#rolls = this._finalizeRolls(event.submitter?.dataset?.action);
+		await this.close({ [game.system.id]: { submitted: true } });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle changes to form data.
+	 * @param {FormDataExtended} formData - Data from the dialog.
+	 * @protected
+	 */
+	_handleFormChanges(formData) {
+		if (formData.has("rollMode")) this.message.rollMode = formData.get("rollMode");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -296,8 +331,8 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 		super._onChangeForm(formConfig, event);
 
 		const formData = new FormDataExtended(this.element);
-		if (formData.has("rollMode")) this.message.rollMode = formData.get("rollMode");
-		this.rolls = this.#buildRolls(foundry.utils.deepClone(this.config), formData);
+		this._handleFormChanges(formData);
+		this.#buildRolls(foundry.utils.deepClone(this.config), formData);
 		this.render({ parts: ["formulas", "notes"] });
 	}
 
@@ -305,7 +340,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 
 	/** @override */
 	_onClose(options = {}) {
-		this.options.resolve?.(options[game.system.id]?.rolls ?? []);
+		if (!options[game.system.id]?.submitted) this.#rolls = [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -321,7 +356,9 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 */
 	static async configure(config = {}, dialog = {}, message = {}) {
 		return new Promise((resolve, reject) => {
-			new this(config, message, { ...(dialog.options ?? {}), resolve, reject }).render(true);
+			const app = new this(config, message, dialog.options);
+			app.addEventListener("close", () => resolve(app.rolls), { once: true });
+			app.render({ force: true });
 		});
 	}
 }

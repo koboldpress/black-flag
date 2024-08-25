@@ -50,6 +50,16 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	_trayStates;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareData() {
+		super.prepareData();
+		BlackFlag.registry.messages.track(this);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -277,6 +287,14 @@ export default class BlackFlagChatMessage extends ChatMessage {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	_onDelete(options, userId) {
+		super._onDelete(options, userId);
+		BlackFlag.registry.messages.untrack(this);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Handle target selection and panning.
 	 * @param {PointerEvent} event - The triggering event.
@@ -370,6 +388,17 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		return storedData
 			? new Item.implementation(storedData, { parent: actor })
 			: actor.items.get(this.getFlag(game.system.id, "item.id"));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get a list of all chat messages containing rolls that originated from this message.
+	 * @param {string} [type] - Type of rolls to get. If empty, all roll types will be fetched.
+	 * @returns {BlackFlagChatMessage[]}
+	 */
+	getAssociatedRolls(type) {
+		return BlackFlag.registry.messages.messages(this.id, type);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

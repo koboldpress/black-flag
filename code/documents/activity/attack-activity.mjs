@@ -1,3 +1,4 @@
+import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import { AttackData } from "../../data/activity/attack-data.mjs";
 import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
@@ -122,9 +123,19 @@ export default class AttackActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * @typedef {ChallengeRollProcessConfiguration} AttackRollProcessConfiguration
+	 * @property {string} attackMode - Method used for the attack (e.g. "oneHanded", "twoHanded", "offhand", "thrown").
+	 */
+
+	/**
+	 * @typedef {ChallengeRollDialogConfiguration} AttackRollDialogConfiguration
+	 * @property {AttackRollConfigurationDialogOptions} [options] - Configuration options.
+	 */
+
+	/**
 	 * Roll an attack.
-	 * @param {ChallengeRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {AttackRollProcessConfiguration} [config] - Configuration information for the roll.
+	 * @param {AttackRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
 	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
@@ -160,7 +171,9 @@ export default class AttackActivity extends Activity {
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{
+				applicationClass: AttackRollConfigurationDialog,
 				options: {
+					attackModes: this.item.system.attackModes,
 					rollNotes: this.actor?.system.getModifiers?.(this.modifierData, "note"),
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 				}
@@ -176,11 +189,21 @@ export default class AttackActivity extends Activity {
 					speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
 					flags: {
 						[game.system.id]: {
-							type: "attack",
-							activity: this.uuid,
+							...this.messageFlags,
+							messageType: "roll",
+							roll: { type: "attack" },
 							targets
 						}
 					}
+				},
+				preCreate: (rolls, config, message) => {
+					let attackMode = config.attackMode;
+					const modes = this.item.system.attackModes;
+					if (modes.length && !attackMode) attackMode = modes[0].value;
+					if (attackMode) {
+						foundry.utils.setProperty(message, `data.flags.${game.system.id}.roll.attackMode`, attackMode);
+					}
+					// TODO: Set message flavor based on mode
 				}
 			},
 			message
@@ -190,8 +213,8 @@ export default class AttackActivity extends Activity {
 		 * A hook event that fires before an attack is rolled.
 		 * @function blackFlag.preRollAttack
 		 * @memberof hookEvents
-		 * @param {ChallengeRollProcessConfiguration} config - Configuration data for the pending roll.
-		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {AttackRollProcessConfiguration} config - Configuration data for the pending roll.
+		 * @param {AttackRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */
@@ -238,7 +261,12 @@ export default class AttackActivity extends Activity {
 	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
 	static #rollDamage(event, target, message) {
-		this.rollDamage({ event });
+		const lastAttack = message.getAssociatedRolls("attack").pop();
+		const attackMode = lastAttack?.getFlag(game.system.id, "roll.attackMode");
+
+		// TODO: Fetch ammunition used with last attack roll
+
+		this.rollDamage({ attackMode, event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -316,8 +344,8 @@ export default class AttackActivity extends Activity {
 		roll.base = true;
 
 		if (this.item.type === "weapon") {
-			// Remove `@mod` from off-hand attacks unless it is negative
-			if (rollConfig.attackMode === "offHand" && roll.data.mode >= 0) roll.parts.findSplice("@mod");
+			// Add `@mod` unless it is an off-hand attack with a positive modifier
+			if (!["offhand", "thrownOffhand"].includes(rollConfig.attackMode) || roll.data.mode < 0) roll.parts.push("@mod");
 
 			// Add magical bonus
 			if (this.item.system.damageMagicalBonus) {

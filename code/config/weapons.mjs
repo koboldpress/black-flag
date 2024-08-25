@@ -1,6 +1,31 @@
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * Modes that can be used when attacking.
+ * @typedef {LabeledConfiguration}
+ */
+export const attackModes = {
+	oneHanded: {
+		label: "BF.ATTACK.Mode.OneHanded"
+	},
+	twoHanded: {
+		label: "BF.ATTACK.Mode.TwoHanded"
+	},
+	offhand: {
+		label: "BF.ATTACK.Mode.Offhand"
+	},
+	thrown: {
+		label: "BF.ATTACK.Mode.Thrown"
+	},
+	thrownOffhand: {
+		label: "BF.ATTACK.Mode.ThrownOffhand"
+	}
+};
+localizeConfig(attackModes, { sort: false });
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Types of weapons offered by the system.
  * @enum {NestedLinkedConfiguration}
  */

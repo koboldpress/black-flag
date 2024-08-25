@@ -14,6 +14,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as enrichers from "./enrichers.mjs";
+import { default as registry } from "./registry.mjs";
 import * as settings from "./settings.mjs";
 import TooltipConductor from "./tooltips.mjs";
 import * as utils from "./utils/_module.mjs";
@@ -26,6 +27,7 @@ globalThis.BlackFlag = {
 	documents,
 	enrichers,
 	modules: {},
+	registry,
 	settings,
 	utils
 };
@@ -95,4 +97,4 @@ Hooks.once("ready", function () {
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));
 Hooks.on("renderJournalPageSheet", applications.journal.BlackFlagJournalSheet.onRenderJournalPageSheet);
 
-export { applications, config, data, documents, settings, utils };
+export { applications, config, data, dice, documents, enrichers, registry, settings, utils };

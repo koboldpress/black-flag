@@ -8,7 +8,7 @@ import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
 /**
  * Roll configuration dialog for Challenge Rolls.
  *
- * @param {ChallengeRollConfiguration} [config=[]] - Initial roll configuration.
+ * @param {ChallengeRollProcessConfiguration} [config={}] - Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}] - Message configuration.
  * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */

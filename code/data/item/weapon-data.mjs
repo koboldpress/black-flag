@@ -107,6 +107,52 @@ export default class WeaponData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	get attackModes() {
+		const modes = [];
+
+		// All weapons except thrown ranged weapons, which will just display the "Thrown" mode
+		if (!(this.properties.has("thrown") && this.type.value === "ranged")) {
+			// Weapons without the "Two-Handed" property or with the "Versatile" property will have One-Handed attack
+			if (this.properties.has("versatile") || !this.properties.has("twoHanded"))
+				modes.push({
+					value: "oneHanded",
+					label: CONFIG.BlackFlag.attackModes.localized.oneHanded
+				});
+
+			// Weapons with the "Two-Handed" property or with the "Versatile" property will have Two-Handed attack
+			if (this.properties.has("versatile") || this.properties.has("twoHanded"))
+				modes.push({
+					value: "twoHanded",
+					label: CONFIG.BlackFlag.attackModes.localized.twoHanded
+				});
+		}
+
+		// Weapons with the "Light" property will have Offhand attack
+		if (this.properties.has("light"))
+			modes.push({
+				value: "offhand",
+				label: CONFIG.BlackFlag.attackModes.localized.offhand
+			});
+
+		// Weapons with the "Thrown" property will have the Thrown attack
+		if (this.properties.has("thrown")) {
+			if (modes.length) modes.push({ rule: true });
+			modes.push({ value: "thrown", label: CONFIG.BlackFlag.attackModes.localized.thrown });
+
+			// Weapons with the "Thrown" & "Light" properties will have a Thrown Offhand attack
+			if (this.properties.has("light"))
+				modes.push({
+					value: "thrownOffhand",
+					label: CONFIG.BlackFlag.attackModes.localized.thrownOffhand
+				});
+		}
+
+		return modes;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Abilities that could potentially be used with this weapon.
 	 * @type {Set<string>}

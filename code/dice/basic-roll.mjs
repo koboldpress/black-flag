@@ -44,9 +44,9 @@ import BasicRollConfigurationDialog from "../applications/dice/basic-configurati
  *
  * @typedef {object} BasicRollMessageConfiguration
  * @property {boolean} [create=true] - Should a message be created when this roll is complete?
- * @property {string} [rollMode] - The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
- * @property {PreCreateRollMessageCallback} [preCreate] - Message configuration callback.
  * @property {object} [data={}] - Additional data used when creating the message.
+ * @property {PreCreateRollMessageCallback} [preCreate] - Message configuration callback.
+ * @property {string} [rollMode] - The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
  */
 
 /**
@@ -54,6 +54,7 @@ import BasicRollConfigurationDialog from "../applications/dice/basic-configurati
  *
  * @callback PreCreateRollMessageCallback
  * @param {BasicRoll[]} rolls - Rolls that have been executed.
+ * @param {BasicRollProcessConfiguration} config - Roll process configuration information.
  * @param {BasicRollMessageConfiguration} message - Message configuration information.
  */
 
@@ -115,7 +116,7 @@ export default class BasicRoll extends Roll {
 		if (messageId) foundry.utils.setProperty(message, "data.flags.black-flag.originatingMessage", messageId);
 
 		if (rolls?.length && message.create !== false) {
-			if (foundry.utils.getType(message.preCreate) === "function") message.preCreate(rolls, message);
+			if (foundry.utils.getType(message.preCreate) === "function") message.preCreate(rolls, config, message);
 			await this.toMessage(rolls, message.data, {
 				rollMode: message.rollMode ?? rolls.reduce((mode, r) => mode ?? r.options.rollMode)
 			});
