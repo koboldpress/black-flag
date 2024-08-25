@@ -86,6 +86,12 @@ export function localizeConfig(config, { propertyName="localized", ...options }=
 		},
 		enumerable: false
 	});
+	Object.defineProperty(config, `${propertyName}Options`, {
+		get() {
+			return Object.entries(this[propertyName]).map(([value, label]) => ({ value, label }));
+		},
+		enumerable: false
+	});
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

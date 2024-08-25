@@ -13,13 +13,22 @@ import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.m
  * @param {AttackRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class AttackRollConfigurationDialog extends ChallengeRollConfigurationDialog {
-	/** @override */
-	static PARTS = {
-		...super.PARTS,
-		configuration: {
-			template: "systems/black-flag/templates/dice/attack-configuration.hbs"
-		}
-	};
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareConfigurationContext(context, options) {
+		context = await super._prepareConfigurationContext(context, options);
+		if (this.options.attackModes)
+			context.fields.unshift({
+				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.ATTACK.Mode.Label") }),
+				name: "attackMode",
+				value: this.config.attackMode,
+				options: this.options.attackModes
+			});
+		return context;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */

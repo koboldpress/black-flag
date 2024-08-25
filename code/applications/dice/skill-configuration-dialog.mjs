@@ -4,23 +4,20 @@ import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.m
  * Extended roll configuration dialog that allows selecting abilities.
  */
 export default class SkillRollConfigurationDialog extends ChallengeRollConfigurationDialog {
-	/** @override */
-	static PARTS = {
-		...super.PARTS,
-		configuration: {
-			template: "systems/black-flag/templates/dice/skill-configuration.hbs"
-		}
-	};
-
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*         Context Preparation         */
+	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	async _prepareConfigurationContext(context, options) {
 		context = await super._prepareConfigurationContext(context, options);
-		context.ability = this.rolls[0]?.data.abilityId;
-		context.chooseAbility = this.options.chooseAbility;
+		if (this.options.chooseAbility)
+			context.fields.unshift({
+				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.Ability.Label[one]") }),
+				name: "ability",
+				value: this.rolls[0]?.data.abilityId,
+				options: CONFIG.BlackFlag.abilities.localizedOptions
+			});
 		return context;
 	}
 
