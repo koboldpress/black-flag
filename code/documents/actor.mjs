@@ -1384,18 +1384,21 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Configuration information for a skill roll.
-	 *
 	 * @typedef {ChallengeRollProcessConfiguration} SkillRollProcessConfiguration
 	 * @property {string} skill - The skill to roll.
 	 * @property {string} [ability] - The ability to be rolled with the skill.
 	 */
 
 	/**
+	 * @typedef {ChallengeRollDialogConfiguration} SkillRollDialogConfiguration
+	 * @property {SkillRollConfigurationDialogOptions} [options] - Configuration options.
+	 */
+
+	/**
 	 * Roll a skill check.
-	 * @param {SkillRollProcessConfiguration} [config] - Configuration information for the roll.
-	 * @param {ChallengeRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
-	 * @param {BasicRollMessageConfiguration} [message] - Configuration data that guides roll message creation.
+	 * @param {Partial<SkillRollProcessConfiguration>} [config] - Configuration information for the roll.
+	 * @param {Partial<SkillRollDialogConfiguration>} [dialog] - Presentation data for the roll configuration dialog.
+	 * @param {Partial<BasicRollMessageConfiguration>} [message] - Configuration data that guides roll message creation.
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollSkill(config = {}, dialog = {}, message = {}) {
@@ -1476,7 +1479,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * @function blackFlag.preRollSkill
 		 * @memberof hookEvents
 		 * @param {SkillRollProcessConfiguration} config - Configuration data for the pending roll.
-		 * @param {ChallengeRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
+		 * @param {SkillRollDialogConfiguration} dialog - Presentation data for the roll configuration dialog.
 		 * @param {BasicRollMessageConfiguration} message - Configuration data for the roll's message.
 		 * @returns {boolean} - Explicitly return `false` to prevent the roll.
 		 */

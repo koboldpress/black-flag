@@ -113,7 +113,7 @@ export default class BasicRoll extends Roll {
 
 		message = foundry.utils.expandObject(message);
 		const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
-		if (messageId) foundry.utils.setProperty(message, "data.flags.black-flag.originatingMessage", messageId);
+		if (messageId) foundry.utils.setProperty(message, `data.flags.${game.system.id}.originatingMessage`, messageId);
 
 		if (rolls?.length && message.create !== false) {
 			if (foundry.utils.getType(message.preCreate) === "function") message.preCreate(rolls, config, message);

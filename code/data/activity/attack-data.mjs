@@ -1,4 +1,3 @@
-import { buildRoll, simplifyBonus } from "../../utils/_module.mjs";
 import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivity from "./base-activity.mjs";
@@ -160,9 +159,8 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		if (this.damage.includeBase && this.parent.item.system.damage?.formula) {
-			// TODO: Move base damage to `damage.base`
-			const basePart = this.parent.item.system.damage.clone();
+		if (this.damage.includeBase && this.parent.item.system.damage?.base?.formula) {
+			const basePart = this.parent.item.system.damage.base.clone();
 			basePart.base = true;
 			this.damage.parts.unshift(basePart);
 		}

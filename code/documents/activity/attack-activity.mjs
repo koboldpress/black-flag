@@ -77,7 +77,7 @@ export default class AttackActivity extends Activity {
 
 	/** @inheritDoc */
 	get hasDamage() {
-		return super.hasDamage || (this.system.damage.includeBase && !!this.item.system.damage?.formula);
+		return super.hasDamage || (this.system.damage.includeBase && !!this.item.system.damage?.base?.formula);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -133,6 +133,13 @@ export default class AttackActivity extends Activity {
 	 */
 
 	/**
+	 * @typedef {object} AmmunitionUpdate
+	 * @property {string} id        ID of the ammunition item to update.
+	 * @property {boolean} destroy  Will the ammunition item be deleted?
+	 * @property {number} quantity  New quantity after the ammunition is spent.
+	 */
+
+	/**
 	 * Roll an attack.
 	 * @param {AttackRollProcessConfiguration} [config] - Configuration information for the roll.
 	 * @param {AttackRollDialogConfiguration} [dialog] - Presentation data for the roll configuration dialog.
@@ -140,41 +147,75 @@ export default class AttackActivity extends Activity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config = {}, dialog = {}, message = {}) {
-		// TODO: Associate ammunition with the attack
-
-		const { parts, data } = this.getAttackDetails();
 		const targets = this.constructor.getTargetDescriptors();
 
-		const threshold = Math.min(
-			this.actor?.system.mergeModifiers?.(this.actor?.system.getModifiers?.(this.modifierData, "critical-threshold"), {
-				mode: "smallest",
-				rollData: data
-			}) ?? Infinity,
-			this.system.attack.critical.threshold ?? Infinity
-		);
+		let ammunitionOptions;
+		if (this.item.system.properties?.has("ammunition") && this.actor)
+			ammunitionOptions = this.actor.items
+				.filter(
+					i =>
+						i.type === "ammunition" &&
+						(!this.item.system.ammunition?.type || i.system.type.category === this.item.system.ammunition?.type)
+				)
+				.map(i => ({
+					value: i.id,
+					label: `${i.name} (${numberFormat(i.system.quantity)})`,
+					disabled: !i.system.quantity
+				}))
+				.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
 
-		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.origin = this;
-		rollConfig.rolls = [
-			{
-				parts,
+		const prepareAttackRoll = (process, rollConfig, formData, index) => {
+			const { parts, data } = this.getAttackDetails(process);
+
+			const modifierData = foundry.utils.mergeObject(this.modifierData, {
+				attackMode: process.attackMode
+			});
+
+			const threshold = Math.min(
+				this.actor?.system.mergeModifiers?.(this.actor?.system.getModifiers?.(modifierData, "critical-threshold"), {
+					mode: "smallest",
+					rollData: data
+				}) ?? Infinity,
+				this.system.attack.critical.threshold ?? Infinity
+			);
+
+			foundry.utils.mergeObject(rollConfig, {
 				data,
+				parts,
 				options: {
+					// TODO: Fetch recently used attack mode
 					criticalSuccess: Number.isFinite(threshold) ? threshold : undefined,
-					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(this.modifierData, "min"), {
+					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 						rollData: data
 					}),
 					target: targets.length === 1 ? targets[0].ac : undefined
 				}
-			}
-		].concat(config.rolls ?? []);
+			});
+
+			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
+		};
+
+		const rollConfig = foundry.utils.mergeObject(
+			{
+				// TODO: Fetch recently used ammunition options
+				ammunition: config.ammunition !== false && ammunitionOptions ? ammunitionOptions[0].value : undefined,
+				// TODO: Fetch recently used attack mode
+				attackMode: this.item.system.attackModes[0]?.value
+			},
+			config
+		);
+		const { rollConfig: roll, rollNotes } = prepareAttackRoll(rollConfig, {});
+		rollConfig.origin = this;
+		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{
 				applicationClass: AttackRollConfigurationDialog,
 				options: {
+					ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : undefined,
 					attackModes: this.item.system.attackModes,
-					rollNotes: this.actor?.system.getModifiers?.(this.modifierData, "note"),
+					buildConfig: prepareAttackRoll,
+					rollNotes,
 					title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })
 				}
 			},
@@ -202,8 +243,15 @@ export default class AttackActivity extends Activity {
 					if (modes.length && !attackMode) attackMode = modes[0].value;
 					if (attackMode) {
 						foundry.utils.setProperty(message, `data.flags.${game.system.id}.roll.attackMode`, attackMode);
+						if (attackMode in CONFIG.BlackFlag.attackModes)
+							message.data.flavor = `${message.data.flavor} (${CONFIG.BlackFlag.attackModes.localized[
+								attackMode
+							].toLowerCase()})`;
 					}
-					// TODO: Set message flavor based on mode
+					rollConfig.ammunition = config.ammunition;
+					if (config.ammunition) {
+						foundry.utils.setProperty(message, `data.flags.${game.system.id}.roll.ammunition`, config.ammunition);
+					}
 				}
 			},
 			message
@@ -222,6 +270,26 @@ export default class AttackActivity extends Activity {
 
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 		if (!rolls?.length) return;
+
+		const ammo = this.actor?.items.get(rollConfig.ammunition);
+		let ammoUpdate = null;
+		if (ammo) ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+
+		/**
+		 * A hook event that fires after an attack has been rolled, but before ammunition is updated.
+		 * @function blackFlag.rollAttack
+		 * @memberof hookEvents
+		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {object} [data]
+		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
+		 * @param {AmmunitionUpdate|null} [data.ammoUpdate] - Any updates related to ammo consumption for the attack.
+		 */
+		Hooks.callAll("blackFlag.rollAttack", rolls, { activity: this, ammoUpdate });
+
+		if (ammoUpdate)
+			await this.actor?.updateEmbeddedDocuments("Item", [
+				{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }
+			]);
 
 		/**
 		 * A hook event that fires after an attack has been rolled.
@@ -264,9 +332,12 @@ export default class AttackActivity extends Activity {
 		const lastAttack = message.getAssociatedRolls("attack").pop();
 		const attackMode = lastAttack?.getFlag(game.system.id, "roll.attackMode");
 
-		// TODO: Fetch ammunition used with last attack roll
+		// Fetch ammunition used with last attack roll
+		let ammunition;
+		const actor = lastAttack?.getAssociatedActor();
+		if (actor) ammunition = actor.items.get(lastAttack.getFlag(game.system.id, "roll.ammunition"));
 
-		this.rollDamage({ attackMode, event });
+		this.rollDamage({ ammunition, attackMode, event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -275,11 +346,12 @@ export default class AttackActivity extends Activity {
 
 	/**
 	 * Attack details for this activity.
-	 * @param {object} [options={}] - Additional options that might affect fetched data.
+	 * @param {Partial<AttackRollProcessConfiguration>} [config={}] - Attack roll configuration.
 	 * @returns {{parts: string[], data: object, formula: string, activity: Activity}|null}
 	 */
-	getAttackDetails(options = {}) {
+	getAttackDetails(config = {}) {
 		const ability = this.actor?.system.abilities?.[this.ability];
+		const ammunition = this.actor?.items.get(config.ammunition);
 		const rollData = this.item.getRollData();
 		const { parts, data } = buildRoll(
 			this.system.attack.flat
@@ -288,7 +360,8 @@ export default class AttackActivity extends Activity {
 						mod: ability?.mod,
 						prof: this.system.attackProficiency?.term,
 						bonus: this.system.attack.bonus,
-						magic: this.item.system.attackMagicalBonus,
+						weaponMagic: this.item.system.attackMagicalBonus,
+						ammoMagic: ammunition?.system.attackMagicalBonus,
 						actorBonus: this.actor?.system.buildBonus?.(this.actor?.system.getModifiers?.(this.modifierData), {
 							rollData
 						})
@@ -319,7 +392,30 @@ export default class AttackActivity extends Activity {
 	getDamageConfig(config = {}) {
 		const rollConfig = super.getDamageConfig(config);
 
-		// TODO: Handle ammunition
+		// Handle ammunition
+		const ammo = config.ammunition?.system;
+		if (ammo) {
+			// TODO: Set magical property on damage parts once supported
+
+			// Add the ammunition's damage
+			if (ammo.damage.base.formula) {
+				const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
+				const damage = ammo.damage.base.clone();
+				const rollData = this.getRollData();
+
+				// If mode is "replace" and base part is present, replace the base part
+				if (ammo.damage.replace && basePartIndex !== -1) {
+					damage.base = true;
+					rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData));
+				}
+
+				// Otherwise stick the ammo damage after base part (or as first part)
+				else {
+					damage.ammo = true;
+					rollConfig.rolls.splice(basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData));
+				}
+			}
+		}
 
 		if (this.system.damage.critical.bonus) {
 			rollConfig.critical ??= {};
@@ -349,11 +445,16 @@ export default class AttackActivity extends Activity {
 
 			// Add magical bonus
 			if (this.item.system.damageMagicalBonus) {
-				roll.data.magic = this.item.system.damageMagicalBonus;
-				roll.parts.push("@magic");
+				roll.data.weaponMagic = this.item.system.damageMagicalBonus;
+				roll.parts.push("@weaponMagic");
 			}
 
-			// TODO: Add ammunition bonus
+			// Add ammunition bonus
+			const ammo = rollConfig.ammunition?.system;
+			if (ammo?.damageMagicalBonus) {
+				roll.data.ammoMagic = ammo.damageMagicalBonus;
+				roll.parts.push("@ammoMagic");
+			}
 		}
 
 		foundry.utils.setProperty(

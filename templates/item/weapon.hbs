@@ -48,25 +48,26 @@
 						<span>{{ localize "BF.DAMAGE.Label" }}</span>
 						<label class="die-count">
 							<span>{{ localize "BF.Die.Number.Label" }}</span>
-							<input type="number" name="system.damage.number" step=1 min=1 value="{{ source.damage.number }}">
+							<input type="number" name="system.damage.base.number" value="{{ source.damage.base.number }}"
+							       step=1 min=1>
 						</label>
 						<label class="die-denomination">
 							<span>{{ localize "BF.Die.Denomination.Label" }}</span>
-							<select name="system.damage.denomination">
-								{{ selectOptions CONFIG.dieSteps.labeled selected=source.damage.denomination blank="" }}
+							<select name="system.damage.base.denomination">
+								{{ selectOptions CONFIG.dieSteps.labeled selected=source.damage.base.denomination blank="" }}
 							</select>
 						</label>
 						<label>
 							<span>{{ localize "BF.DAMAGE.Type.Label" }}</span>
-							<select name="system.damage.type">
-								{{ selectOptions CONFIG.damageTypes selected=source.damage.type
+							<select name="system.damage.base.type">
+								{{ selectOptions CONFIG.damageTypes selected=source.damage.base.type
 								                 labelAttr="label" localize=true sort=true blank="" }}
 							</select>
 						</label>
 					</div>
 					{{#if properties.ammunition.selected}}
 						<label class="ammunition-type">
-							<span>{{ localize "BF.Ammunition.Type.Label" }}</span>
+							<span>{{ localize "BF.AMMUNITION.Type.Label" }}</span>
 							<select name="system.ammunition.type">
 								{{ selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank="" }}
 							</select>

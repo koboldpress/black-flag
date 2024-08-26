@@ -196,8 +196,8 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 			{
 				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.Roll.Mode.Label") }),
 				name: "rollMode",
-				value: this.message.rollMode ?? this.options.default?.rollMode,
-				options: Object.entries(CONFIG.Dice.rollModes).map(([value, l]) => ({ value, label: game.i18n.localize(l) }))
+				options: Object.entries(CONFIG.Dice.rollModes).map(([value, l]) => ({ value, label: game.i18n.localize(l) })),
+				value: this.message.rollMode ?? this.options.default?.rollMode
 			}
 		];
 		return context;
@@ -315,6 +315,7 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	 * @private
 	 */
 	static async #handleFormSubmission(event, form, formData) {
+		this._handleFormChanges(formData);
 		this.#rolls = this._finalizeRolls(event.submitter?.dataset?.action);
 		await this.close({ [game.system.id]: { submitted: true } });
 	}

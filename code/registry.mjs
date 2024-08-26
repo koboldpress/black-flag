@@ -18,11 +18,11 @@ class MessageRegistry {
 	 * @param {string} [type] - Type of roll messages to fetch.
 	 * @returns {BlackFlagChatMessage[]}
 	 */
-	static messages(origin, type) {
+	static get(origin, type) {
 		const originMap = MessageRegistry.#messages.get(origin);
 		if (!originMap) return [];
 		let ids;
-		if (type) ids = Array.from(originMap.get(type)) ?? [];
+		if (type) ids = Array.from(originMap.get(type) ?? []);
 		else
 			ids = Array.from(originMap.values())
 				.map(v => Array.from(v))

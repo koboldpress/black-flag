@@ -6,16 +6,16 @@ import { localizeConfig } from "../utils/_module.mjs";
  */
 export const ammunition = {
 	arrow: {
-		localization: "BF.Ammunition.Type.Arrow"
+		localization: "BF.AMMUNITION.Type.Arrow"
 	},
 	blowgunNeedle: {
-		localization: "BF.Ammunition.Type.BlowgunNeedle"
+		localization: "BF.AMMUNITION.Type.BlowgunNeedle"
 	},
 	crossbowBolt: {
-		localization: "BF.Ammunition.Type.CrossbowBolt"
+		localization: "BF.AMMUNITION.Type.CrossbowBolt"
 	},
 	slingBullet: {
-		localization: "BF.Ammunition.Type.SlingBullet"
+		localization: "BF.AMMUNITION.Type.SlingBullet"
 	}
 };
 localizeConfig(ammunition);

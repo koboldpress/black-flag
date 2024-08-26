@@ -28,6 +28,16 @@ export default class ItemDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Magical bonus to attacks.
+	 * @returns {number|null}
+	 */
+	get attackMagicalBonus() {
+		return null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Modes that can be used when making an attack with this item.
 	 * @type {FormSelectOption[]}
 	 */
@@ -43,6 +53,16 @@ export default class ItemDataModel extends BaseDataModel {
 	 */
 	get chatTags() {
 		return this.parent.chatTags;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Magical bonus to damage.
+	 * @returns {number|null}
+	 */
+	get damageMagicalBonus() {
+		return this.attackMagicalBonus;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

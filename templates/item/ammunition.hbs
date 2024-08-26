@@ -31,17 +31,44 @@
 					</label>
 				{{/each}}
 			</fieldset>
-			{{#if properties.magical.selected}}
-				<fieldset>
-					<legend>{{ localize "BF.Ammunition.Details" }}</legend>
+			<fieldset>
+				<legend>{{ localize "BF.AMMUNITION.Details" }}</legend>
+				{{#if properties.magical.selected}}
 					<label>
-						<span class="hinted-label" data-tooltip="BF.Ammunition.MagicalBonus.Hint">
-							{{ localize "BF.Ammunition.MagicalBonus.Label" }}
+						<span class="hinted-label" data-tooltip="BF.AMMUNITION.FIELDS.magicalBonus.hint">
+							{{ localize "BF.AMMUNITION.FIELDS.magicalBonus.label" }}
 						</span>
 						<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
 					</label>
-				</fieldset>
-			{{/if}}
+				{{/if}}
+				<label class="full-checkbox">
+					<span class="hinted-label" data-tooltip="BF.AMMUNITION.FIELDS.damage.replace.hint">
+						{{ localize "BF.AMMUNITION.FIELDS.damage.replace.label" }}
+					</span>
+					<input type="checkbox" name="system.damage.replace" {{ checked system.damage.replace }}>
+				</label>
+				<div class="damage field-group">
+					<span>{{ localize "BF.DAMAGE.Label" }}</span>
+					<label class="die-count">
+						<span>{{ localize "BF.Die.Number.Label" }}</span>
+						<input type="number" name="system.damage.base.number" value="{{ source.damage.base.number }}"
+									 step=1 min=1>
+					</label>
+					<label class="die-denomination">
+						<span>{{ localize "BF.Die.Denomination.Label" }}</span>
+						<select name="system.damage.base.denomination">
+							{{ selectOptions CONFIG.dieSteps.labeled selected=source.damage.base.denomination blank="" }}
+						</select>
+					</label>
+					<label>
+						<span>{{ localize "BF.DAMAGE.Type.Label" }}</span>
+						<select name="system.damage.base.type">
+							{{ selectOptions CONFIG.damageTypes selected=source.damage.base.type
+															 labelAttr="label" localize=true sort=true blank="" }}
+						</select>
+					</label>
+				</div>
+			</fieldset>
 		</div>
 	</div>
 

@@ -19,7 +19,8 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  *
  * @property {object} ammunition
  * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
- * @property {DamageField} damage - Base weapon damage.
+ * @property {object} damage
+ * @property {DamageField} damage.base - Base weapon damage.
  * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {Set<string>} options - Weapon options that can be used with this weapon.
  * @property {object} range
@@ -39,6 +40,15 @@ export default class WeaponData extends ItemDataModel.mixin(
 	ProficiencyTemplate,
 	PropertiesTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.WEAPON"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -61,11 +71,13 @@ export default class WeaponData extends ItemDataModel.mixin(
 		return this.mergeSchema(super.defineSchema(), {
 			ammunition: new SchemaField(
 				{
-					type: new StringField({ label: "BF.Ammunition.Type.Label" })
+					type: new StringField({ label: "BF.AMMUNITION.Type.Label" })
 				},
 				{ label: "BF.Item.Type.Ammunition[one]" }
 			),
-			damage: new DamageField({ simple: true }),
+			damage: new SchemaField({
+				base: new DamageField({ simple: true })
+			}),
 			magicalBonus: new NumberField({
 				integer: true,
 				label: "BF.Weapon.MagicalBonus.Label",
@@ -179,16 +191,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Magical bonus to damage.
-	 * @returns {number|null}
-	 */
-	get damageMagicalBonus() {
-		return this.magicAvailable ? this.magicalBonus : null;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Label for the range with units.
 	 * @type {string}
 	 */
@@ -275,11 +277,31 @@ export default class WeaponData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		// Added in 0.10.042
+		if ("damage" in source) {
+			if ("number" in source.damage) foundry.utils.setProperty(source, "damage.base.number", source.damage.number);
+			if ("denomination" in source.damage) {
+				foundry.utils.setProperty(source, "damage.base.denomination", source.damage.denomination);
+			}
+			if ("type" in source.damage) foundry.utils.setProperty(source, "damage.base.type", source.damage.type);
+			if ("additionalTypes" in source.damage) {
+				foundry.utils.setProperty(source, "damage.base.additionalTypes", source.damage.additionalTypes);
+			}
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	prepareBaseData() {
+		this.applyShims();
 		super.prepareBaseData();
 
 		Object.defineProperty(this.type, "classification", {
@@ -325,5 +347,48 @@ export default class WeaponData extends ItemDataModel.mixin(
 	_preCreateActivities(data, options, user) {
 		if (data._id || foundry.utils.hasProperty(data, "system.activities")) return;
 		this._createInitialActivities([{ type: "attack" }]);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*                Shims                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add shims for removed properties.
+	 */
+	applyShims() {
+		const log = () =>
+			foundry.utils.logCompatibilityWarning("The `damage` data on `WeaponData` has been moved to `damage.base`", {
+				since: "Black Flag 0.10.042",
+				until: "Black Flag 0.10.047"
+			});
+		Object.defineProperty(this.damage, "number", {
+			get() {
+				log();
+				return this.damage.base.number;
+			},
+			configurable: true
+		});
+		Object.defineProperty(this.damage, "denomination", {
+			get() {
+				log();
+				return this.damage.base.denomination;
+			},
+			configurable: true
+		});
+		Object.defineProperty(this.damage, "type", {
+			get() {
+				log();
+				return this.damage.base.type;
+			},
+			configurable: true
+		});
+		Object.defineProperty(this.damage, "additionalTypes", {
+			get() {
+				log();
+				return this.damage.base.additionalTypes;
+			},
+			configurable: true
+		});
 	}
 }

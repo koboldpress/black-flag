@@ -398,7 +398,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * @returns {BlackFlagChatMessage[]}
 	 */
 	getAssociatedRolls(type) {
-		return BlackFlag.registry.messages.messages(this.id, type);
+		return BlackFlag.registry.messages.get(this.id, type);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,9 +1,10 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
+import { DamageField } from "../fields/_module.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
 
-const { NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Ammunition items.
@@ -11,6 +12,10 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
  *
+ * @property {object} damage
+ * @property {DamageField} damage.base - Base ammunition damage.
+ * @property {boolean} damage.replace - Does this ammunition's base damage replace the weapon's base damage
+ *                                      rather than supplement it?
  * @property {number} magicalBonus - Magical bonus added to attack & damage rolls.
  * @property {object} type
  * @property {string} type.category - Ammunition category as defined in `CONFIG.BlackFlag.ammunition`.
@@ -20,6 +25,15 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	PhysicalTemplate,
 	PropertiesTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.AMMUNITION"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -40,10 +54,14 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
+			damage: new SchemaField({
+				base: new DamageField(),
+				replace: new BooleanField()
+			}),
 			magicalBonus: new NumberField({
 				integer: true,
-				label: "BF.Ammunition.MagicalBonus.Label",
-				hint: "BF.Ammunition.MagicalBonus.Hint"
+				label: "BF.AMMUNITION.MagicalBonus.Label",
+				hint: "BF.AMMUNITION.MagicalBonus.Hint"
 			}),
 			type: new SchemaField({
 				category: new StringField({ label: "BF.Equipment.Category.Label" })
@@ -53,6 +71,13 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get attackMagicalBonus() {
+		return this.magicAvailable ? this.magicalBonus : null;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
