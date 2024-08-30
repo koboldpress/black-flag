@@ -6,7 +6,8 @@ const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.
  * Data definition template for Physical items.
  *
  * @property {object} attunement
- * @property {string} attunement.type - Type of attunement (none, required, optional).
+ * @property {string} attunement.requirement - Other conditions of attunement.
+ * @property {string} attunement.value - Type of attunement (none, required, optional).
  * @property {string} container - Container within which this item resides.
  * @property {object} price
  * @property {number} price.value - Base price for this item.
@@ -23,7 +24,8 @@ export default class PhysicalTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			attunement: new SchemaField({
-				value: new StringField({label: "BF.Attunement.Type.Label"})
+				requirement: new StringField({ label: "BF.Attunement.Requirement.Label" }),
+				value: new StringField({ label: "BF.Attunement.Type.Label" })
 			}, {label: "BF.Attunement.Label"}),
 			container: new ForeignDocumentField(foundry.documents.BaseItem, {
 				idOnly: true, label: "BF.Item.Type.Container[one]"

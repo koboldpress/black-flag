@@ -105,7 +105,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
-		context = await super._preparePartContext(partId, context, options);
+		context = { ...(await super._preparePartContext(partId, context, options)) };
 		switch (partId) {
 			case "activation":
 				return this._prepareActivationContext(context, options);

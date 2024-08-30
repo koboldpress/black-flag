@@ -10,4 +10,10 @@
 			{{/select}}
 		</select>
 	</label>
+	{{#if system.attunement.value}}
+		<label>
+			<span>{{ localize "BF.Attunement.Requirement" }}</span>
+			<input type="text" name="system.attunement.requirement" value="{{ system.attunement.requirement }}">
+		</label>
+	{{/if}}
 </fieldset>
