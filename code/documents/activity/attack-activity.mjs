@@ -38,10 +38,7 @@ export default class AttackActivity extends Activity {
 		const abilities = this.actor?.system.abilities ?? {};
 		return availableAbilities.reduce(
 			(largest, ability) =>
-				(abilities[ability]?.adjustedMod ?? abilities[ability]?.mod ?? -Infinity) >
-				(abilities[largest]?.adjustedMod ?? abilities[largest]?.mod ?? -Infinity)
-					? ability
-					: largest,
+				(abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
 			availableAbilities.first()
 		);
 	}

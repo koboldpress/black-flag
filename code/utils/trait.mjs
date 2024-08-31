@@ -26,7 +26,7 @@ export function actorKeyPath(trait) {
  * Get the current trait values for the provided actor.
  * @param {BlackFlagActor} actor
  * @param {string} trait - Trait as defined in `CONFIG.BlackFlag.traits`.
- * @returns {{key: string]: number}}
+ * @returns {Record<string, number>}
  */
 export function actorValues(actor, trait) {
 	const keyPath = actorKeyPath(trait);
