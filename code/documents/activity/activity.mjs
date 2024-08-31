@@ -1,7 +1,7 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
-import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
+import { areKeysPressed, buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -364,6 +364,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 *                                                  consumption or provide a list of consumption type keys defined
 	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
 	 * @property {boolean} consume.spellSlot - Control whether spell consumes a spell slot.
+	 * @property {Event} [event] - Triggering event.
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
 	 *                                      is not allowed.
 	 * @property {object} spell
@@ -414,7 +415,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		const dialogConfig = foundry.utils.mergeObject(
 			{
-				configure: true,
 				applicationClass: this.metadata.usage.dialog
 			},
 			dialog
@@ -435,6 +435,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			},
 			message
 		);
+
+		this._applyKeybindings(activationConfig, dialogConfig, messageConfig);
 
 		/**
 		 * A hook event that fires before an activity activation is configured.
@@ -556,6 +558,21 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		return updates;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Apply any keybindings that might affect activation process.
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {ActivityDialogConfiguration} dialog - Configuration info for the configuration dialog.
+	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
+	 */
+	_applyKeybindings(config, dialog, message) {
+		dialog.configure ??=
+			!areKeysPressed(config.event, "skipDialogNormal") &&
+			!areKeysPressed(config.event, "skipDialogAdvantage") &&
+			!areKeysPressed(config.event, "skipDialogDisadvantage");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

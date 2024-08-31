@@ -12,11 +12,15 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 
 		// Attach listeners to buttons
 		for (const button of this.querySelectorAll("[data-action]")) {
+			const handler = event => {
+				event.stopImmediatePropagation();
+				this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
+			};
+			button.addEventListener("click", handler, { signal });
 			button.addEventListener(
-				"click",
+				"contextmenu",
 				event => {
-					event.stopImmediatePropagation();
-					this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+					if (event.ctrlKey) handler(event);
 				},
 				{ signal }
 			);
@@ -128,15 +132,17 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 	 * Handle clicking an action.
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
+	 * @param {object} [options={}]
+	 * @param {Event} [options.event] - Triggering event.
 	 * @returns {Promise}
 	 */
-	async _onAction(target, action) {
-		const event = new CustomEvent("bf-actions", {
+	async _onAction(target, action, { event } = {}) {
+		const actionEvent = new CustomEvent("bf-actions", {
 			bubbles: true,
 			cancelable: true,
 			detail: action
 		});
-		if (target.dispatchEvent(event) === false) return;
+		if (target.dispatchEvent(actionEvent) === false) return;
 
 		const dataset = (
 			target.closest("[data-activity], [data-activity-id], [data-activity-uuid], [data-item-id]") || target
@@ -148,7 +154,7 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 
 		switch (action) {
 			case "activate":
-				if (activity) return activity.activate();
+				if (activity) return activity.activate({ event });
 				if (item) return item.postToChat();
 				break;
 			case "delete":
@@ -168,7 +174,7 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 				break;
 		}
 
-		return this.app._onAction?.(event, dataset);
+		return this.app._onAction?.(event ?? actionEvent, dataset);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
