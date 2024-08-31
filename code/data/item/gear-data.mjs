@@ -86,6 +86,7 @@ export default class GearData extends ItemDataModel.mixin(
 		super.prepareDerivedData();
 		this.prepareDescription();
 		this.preparePhysicalLabels();
+		this.type.label = CONFIG.BlackFlag.gearCategories.localized[this.type.category] ?? "";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
