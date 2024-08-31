@@ -50,7 +50,7 @@
 
 			{{#if show.actionConsumption}}
 				<label class="full-checkbox">
-					<span>{{ localize "BF.Consumption.Type.PromptGeneric" type=activity.activation.label }}</span>
+					<span>{{{ localize "BF.Consumption.Type.PromptGeneric" type=activity.activation.label }}}</span>
 					<input type="checkbox" name="consume.action" {{ checked consume.action }}>
 				</label>
 			{{/if}}
@@ -58,7 +58,7 @@
 			{{#if show.resourceConsumption}}
 				<multi-checkbox name="consume.resources">
 					{{#each resources}}
-						<option value="{{ @key }}" {{ ifThen selected "selected" "" }}>{{ label }}</option>
+						<option value="{{ @key }}" {{ ifThen selected "selected" "" }}>{{{ label }}}</option>
 					{{/each}}
 				</multi-checkbox>
 			{{/if}}
