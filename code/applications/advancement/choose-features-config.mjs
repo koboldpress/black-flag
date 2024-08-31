@@ -92,10 +92,9 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 
 		// Ensure items are still valid if type restriction has changed
 		const pool = [];
-		for (const data of configuration.pool ?? this.advancement.configuration.pool) {
-			const uuid = data.uuid;
+		for (const data of configuration.pool ? Object.values(configuration.pool) : this.advancement.configuration.pool) {
 			if (
-				this.advancement._validateItemType(await fromUuid(uuid), {
+				this.advancement._validateItemType(await fromUuid(data.uuid), {
 					type: configuration.type,
 					restriction: configuration.restriction ?? {},
 					strict: false
