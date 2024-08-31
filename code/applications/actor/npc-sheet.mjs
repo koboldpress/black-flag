@@ -131,7 +131,7 @@ export default class NPCSheet extends BaseActorSheet {
 				const key = !uses.max ? "atwill" : `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
 				context.spellcasting.uses[key] ??= { spells: [] };
 				context.spellcasting.uses[key].spells.push(item);
-			} else {
+			} else if (item.type !== "armor") {
 				const activities = Array.from(item.system.activities ?? []);
 				const onlyActivity = activities.length === 1 ? activities[0] : undefined;
 				const actionTypes = new Set(activities.map(a => a.actionType));
