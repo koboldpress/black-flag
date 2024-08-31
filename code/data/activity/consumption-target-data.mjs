@@ -99,11 +99,16 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * Resolve the spell circle to consume, taking scaling into account.
 	 * @param {object} [options={}]
 	 * @param {ActivityActivationConfiguration} [options.config={}] - Configuration info for the activation.
-	 * @param {boolean} [options.evaluate=true] - Should the circle roll be evaluated?
-	 * @returns {Promise<BasicRoll>}
+	 * @param {BasicRoll[]} [options.rolls] - Rolls performed as part of the activation.
+	 * @returns {number}
 	 */
-	async resolveCircle({ config = {}, ...options } = {}) {
-		return this._resolveScaledRoll(this.target, this.scaling.mode === "circle" ? config.scaling ?? 0 : 0, options);
+	resolveCircle({ config = {}, ...options } = {}) {
+		const roll = this._resolveScaledRoll(this.target, this.scaling.mode === "circle" ? config.scaling ?? 0 : 0, {
+			...options,
+			evaluate: false
+		});
+		roll.evaluateSync();
+		return roll.total;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -113,9 +118,10 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {object} [options={}]
 	 * @param {ActivityActivationConfiguration} [options.config={}] - Configuration info for the activation.
 	 * @param {boolean} [options.evaluate=true] - Should the cost roll be evaluated?
-	 * @returns {Promise<BasicRoll>}
+	 * @param {BasicRoll[]} [options.rolls] - Rolls performed as part of the activation.
+	 * @returns {Promise<BasicRoll>|BasicRoll}
 	 */
-	async resolveCost({ config = {}, ...options } = {}) {
+	resolveCost({ config = {}, ...options } = {}) {
 		return this._resolveScaledRoll(this.value, this.scaling.mode === "amount" ? config.scaling ?? 0 : 0, options);
 	}
 
@@ -127,10 +133,11 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {number} scaling - Amount to scale the formula.
 	 * @param {object} [options={}]
 	 * @param {boolean} [options.evaluate=true] - Should the roll be evaluated?
-	 * @returns {Promise<BasicRoll>}
+	 * @param {BasicRoll[]} [options.rolls] - Rolls performed as part of the activation.
+	 * @returns {Promise<BasicRoll>|BasicRoll}
 	 * @internal
 	 */
-	async _resolveScaledRoll(formula, scaling, { evaluate = true } = {}) {
+	_resolveScaledRoll(formula, scaling, { evaluate = true, rolls } = {}) {
 		const rollData = this.parent.item.getRollData();
 		const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
 
@@ -139,14 +146,14 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			if (this.scaling.formula) {
 				const scalingRoll = new Roll(this.scaling.formula, rollData);
 				scalingRoll.alter(scaling, undefined, { multiplyNumeric: true });
-				roll.terms.push(new OperatorTerm({ operator: "+" }), ...scalingRoll.terms);
+				roll.terms.push(new foundry.dice.terms.OperatorTerm({ operator: "+" }), ...scalingRoll.terms);
 			}
 
 			// Otherwise increase the number of dice and the numeric term for each scaling step
 			else {
 				roll.terms = roll.terms.map(term => {
-					if (term instanceof DiceTerm) return term.alter(undefined, scaling);
-					else if (term instanceof NumericTerm) term.number += scaling;
+					if (term instanceof foundry.dice.terms.DiceTerm) return term.alter(undefined, scaling);
+					else if (term instanceof foundry.dice.terms.NumericTerm) term.number += scaling;
 					return term;
 				});
 			}
@@ -154,7 +161,12 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 			roll.resetFormula();
 		}
 
-		if (evaluate) await roll.evaluate();
+		if (evaluate)
+			return roll.evaluate().then(roll => {
+				if (rolls && !roll.isDeterministic) rolls.push(roll);
+				return roll;
+			});
+		if (rolls && !roll.isDeterministic) rolls.push(roll);
 		return roll;
 	}
 
@@ -244,9 +256,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @internal
 	 */
 	async _usesConsumption(config, { uses, type, rolls, quantity }) {
-		const costRoll = await this.resolveCost({ config });
-		if (!costRoll.isDeterministic) updates.rolls.push(costRoll);
-		const cost = costRoll.total;
+		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
 
 		let availableUses = uses.value;
 		const canConsumeQuantity = uses.consumeQuantity && quantity && cost > 0;
@@ -285,9 +295,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
 	async consumeHitDice(activity, config, updates) {
-		const costRoll = await this.resolveCost({ config });
-		if (!costRoll.isDeterministic) updates.rolls.push(costRoll);
-		const cost = costRoll.total;
+		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
 
 		const actor = activity.actor;
 		const availableDenominations = Object.entries(actor.system.attributes.hd.d);
@@ -349,13 +357,12 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {ActivationUpdates} updates - Updates to be performed.
 	 */
 	async consumeSpellSlots(activity, config, updates) {
-		const costRoll = await this.resolveCost({ config });
-		if (!costRoll.isDeterministic) updates.rolls.push(costRoll);
-		const cost = costRoll.total;
-
-		const circleRoll = await this.resolveCircle({ config });
-		if (!circleRoll.isDeterministic) updates.rolls.push(circleRoll);
-		const circleNumber = circleRoll.total;
+		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
+		const circleNumber = Math.clamp(
+			this.resolveCircle({ config, rolls: updates.rolls }),
+			1,
+			CONFIG.BlackFlag.maxSpellCircle
+		);
 
 		// Check to see if enough slots are available at specified circle
 		const circleData = activity.actor.system.spellcasting?.slots?.[`circle-${circleNumber}`];

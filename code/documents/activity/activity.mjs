@@ -721,7 +721,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				updates.actor[`system.spellcasting.slots.${slot}.spent`] = slotData.spent + 1;
 			} else {
 				const err = new ConsumptionError(
-					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", { circle: slotData.label })
+					game.i18n.format("BF.Spellcasting.Warning.NoLeveledSlot", {
+						circle: slotData.label,
+						circleLowercase: slotData.label?.toLowerCase()
+					})
 				);
 				errors.push(err);
 				ui.notifications.error(err.message, { console: false });
