@@ -251,7 +251,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 
 		for ( const [key, slot] of Object.entries(this.spellcasting.slots) ) {
 			if ( slot.type !== type ) continue;
-			foundry.utils.setProperty(result, `actorUpdates.system.spellcasting.slots.${key}.spent`, 0);
+			result.actorUpdates[`system.spellcasting.slots.${key}.spent`] = 0;
 		}
 	}
 
