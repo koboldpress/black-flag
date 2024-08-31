@@ -78,8 +78,9 @@ export default class DamageRoll extends BasicRoll {
 	 */
 	static applyKeybindings(config, dialog, message) {
 		const keys = {
-			normal: areKeysPressed(config.event, "damageRollNormal"),
-			critical: areKeysPressed(config.event, "damageRollCritical")
+			normal:
+				areKeysPressed(config.event, "skipDialogNormal") || areKeysPressed(config.event, "skipDialogDisadvantage"),
+			critical: areKeysPressed(config.event, "skipDialogAdvantage")
 		};
 
 		// Should the roll configuration dialog be displayed?

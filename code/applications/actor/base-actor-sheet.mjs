@@ -271,6 +271,9 @@ export default class BaseActorSheet extends ActorSheet {
 
 		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
+			element.addEventListener("contextmenu", event => {
+				if (event.ctrlKey) this._onAction(event);
+			});
 		}
 
 		// Hit Points

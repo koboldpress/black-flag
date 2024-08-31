@@ -6,14 +6,18 @@
  */
 export function areKeysPressed(event, action) {
 	if ( !event ) return false;
-	const activeModifiers = {
-		[KeyboardManager.MODIFIER_KEYS.CONTROL]: event.ctrlKey || event.metaKey,
-		[KeyboardManager.MODIFIER_KEYS.SHIFT]: event.shiftKey,
-		[KeyboardManager.MODIFIER_KEYS.ALT]: event.altKey
-	};
+	const activeModifiers = {};
+	const addModifiers = (key, pressed) => {
+		activeModifiers[key] = pressed;
+		KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+	}
+	addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
+	addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
+	addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
 	return game.keybindings.get(game.system.id, action).some(b => {
-		if ( !game.keyboard.downKeys.has(b.key) ) return false;
-		return b.modifiers.every(m => activeModifiers[m]);
+		if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
+		if ( b.modifiers.length ) return false;
+		return activeModifiers[b.key];
 	});
 }
 

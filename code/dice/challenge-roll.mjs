@@ -100,9 +100,9 @@ export default class ChallengeRoll extends BasicRoll {
 	 */
 	static applyKeybindings(config, dialog, message) {
 		const keys = {
-			normal: areKeysPressed(config.event, "challengeRollNormal"),
-			advantage: areKeysPressed(config.event, "challengeRollAdvantage"),
-			disadvantage: areKeysPressed(config.event, "challengeRollDisadvantage")
+			normal: areKeysPressed(config.event, "skipDialogNormal"),
+			advantage: areKeysPressed(config.event, "skipDialogAdvantage"),
+			disadvantage: areKeysPressed(config.event, "skipDialogDisadvantage")
 		};
 
 		// Should the roll configuration dialog be displayed?

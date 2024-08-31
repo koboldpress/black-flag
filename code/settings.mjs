@@ -7,36 +7,19 @@ import log from "./utils/logging.mjs";
 export function registerKeybindings() {
 	log("Registering keybindings");
 
-	game.keybindings.register(game.system.id, "challengeRollNormal", {
-		name: "BF.Keybinding.ChallengeRoll.Normal.Label",
+	game.keybindings.register(game.system.id, "skipDialogNormal", {
+		name: "BF.Keybinding.SkipDialog.Normal",
 		editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }]
 	});
 
-	game.keybindings.register(game.system.id, "challengeRollAdvantage", {
-		name: "BF.Keybinding.ChallengeRoll.Advantage.Label",
+	game.keybindings.register(game.system.id, "skipDialogAdvantage", {
+		name: "BF.Keybinding.SkipDialog.Advantage",
 		editable: [{ key: "AltLeft" }, { key: "AltRight" }]
 	});
 
-	game.keybindings.register(game.system.id, "challengeRollDisadvantage", {
-		name: "BF.Keybinding.ChallengeRoll.Disadvantage.Label",
-		editable: [{ key: "CtrlLeft" }, { key: "CtrlRight" }, { key: "OSLeft" }, { key: "OSRight" }]
-	});
-
-	game.keybindings.register(game.system.id, "damageRollNormal", {
-		name: "BF.Keybinding.DamageRoll.Normal.Label",
-		editable: [
-			{ key: "ShiftLeft" },
-			{ key: "ShiftRight" },
-			{ key: "CtrlLeft" },
-			{ key: "CtrlRight" },
-			{ key: "OSLeft" },
-			{ key: "OSRight" }
-		]
-	});
-
-	game.keybindings.register(game.system.id, "damageRollCritical", {
-		name: "BF.Keybinding.DamageRoll.Critical.Label",
-		editable: [{ key: "AltLeft" }, { key: "AltRight" }]
+	game.keybindings.register(game.system.id, "skipDialogDisadvantage", {
+		name: "BF.Keybinding.SkipDialog.Disadvantage",
+		editable: [{ key: "CtrlLeft" }, { key: "CtrlRight" }, { key: "OsLeft" }, { key: "OsRight" }]
 	});
 }
 
