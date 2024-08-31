@@ -1054,7 +1054,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	getDamageDetails(options = {}) {
 		return {
 			activity: this,
-			rolls: this.getDamageConfig({ mode: options.versatile ? "versatile" : null }).rolls
+			rolls: this.getDamageConfig({ attackMode: options.attackMode ?? (options.versatile ? "versatile" : null) }).rolls
 		};
 	}
 
