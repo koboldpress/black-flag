@@ -70,7 +70,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	 * Prepare initial movement values.
 	 */
 	prepareBaseTraits() {
-		this.traits.movement.bonus ??= "";
 		this.traits.movement.multiplier ??= "1";
 	}
 

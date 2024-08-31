@@ -10,7 +10,7 @@ export function registerCustomEnrichers() {
 	CONFIG.TextEditor.enrichers.push(
 		{
 			pattern:
-				/\[\[\/(?<type>attack|check|damage|healing|save|skill|tool)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
+				/\[\[\/(?<type>attack|check|damage|healing|save|skill|tool|vehicle)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
 			enricher: enrichString
 		},
 		{
@@ -56,6 +56,7 @@ async function enrichString(match, options) {
 		case "check":
 		case "skill":
 		case "tool":
+		case "vehicle":
 			return enrichCheck(config, label, options);
 		case "lookup":
 			return enrichLookup(config, label, options);
@@ -226,6 +227,7 @@ function handleRollAction(event) {
 		case "ability-save":
 		case "skill":
 		case "tool":
+		case "vehicle":
 			return rollCheckSave(event);
 		case "attack":
 			return rollAttack(event);
@@ -378,6 +380,7 @@ function createRollLabel(config) {
 	const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[config.ability]?.toUpperCase();
 	const skill = CONFIG.BlackFlag.skills.localized[config.skill];
 	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool]?.label;
+	const vehicle = CONFIG.BlackFlag.enrichment.lookup.vehicles[config.vehicle]?.label;
 	const longSuffix = config.format === "long" ? "Long" : "Short";
 	const showDC = config.dc && !config.hideDC;
 
@@ -386,8 +389,9 @@ function createRollLabel(config) {
 		case "ability-check":
 		case "skill":
 		case "tool":
-			if (ability && (skill || tool)) {
-				label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool });
+		case "vehicle":
+			if (ability && (skill || tool || vehicle)) {
+				label = game.i18n.format("BF.Enricher.Check.Specific", { ability, type: skill ?? tool ?? vehicle });
 			} else {
 				label = ability;
 			}
@@ -475,6 +479,7 @@ async function enrichCheck(config, label, options) {
 		if (slug in LOOKUP.abilities) config.ability = LOOKUP.abilities[slug].key;
 		else if (slug in LOOKUP.skills) config.skill = LOOKUP.skills[slug].key;
 		else if (slug in LOOKUP.tools) config.tool = slug;
+		else if (slug in LOOKUP.vehicles) config.vehicle = slug;
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
@@ -495,6 +500,12 @@ async function enrichCheck(config, label, options) {
 		invalid = true;
 	}
 
+	const vehicleConfig = CONFIG.BlackFlag.enrichment.lookup.vehicles[config.vehicle];
+	if (config.vehicle && !vehicleConfig) {
+		log(`Vehicle ${config.vehicle} not found while enriching ${config._input}.`, { level: "warn" });
+		invalid = true;
+	}
+
 	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
 	if (config.ability && !abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
@@ -509,7 +520,7 @@ async function enrichCheck(config, label, options) {
 
 	if (invalid) return null;
 
-	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : "ability-check";
+	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check";
 	label ??= createRollLabel(config);
 	if (config.passive) return createPassiveTag(label, config);
 	return createRequestLink(label, config);
