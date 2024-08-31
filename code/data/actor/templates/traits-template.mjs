@@ -70,6 +70,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	 * Prepare initial movement values.
 	 */
 	prepareBaseTraits() {
+		this.traits.movement.bonus ??= "";
 		this.traits.movement.multiplier ??= "1";
 	}
 
@@ -89,13 +90,23 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
 		const multiplier = simplifyBonus(movement.multiplier, rollData);
 
+		const modifierData = {
+			type: "movement",
+			armored: !!this.attributes?.ac?.equippedArmor,
+			shielded: !!this.attributes?.ac?.equippedShield
+		};
+
 		// Calculate each special movement type using base speed
 		const entries = new Map();
 		for ( const [type, formula] of Object.entries(movement.types) ) {
 			let speed;
 			if ( (this.parent.statuses.has("prone") && (type !== "walk")) || noMovement ) speed = 0;
-			else speed = simplifyBonus(formula, rollData) * (halfMovement ? 0.5 : 1);
-			movement.types[type] = speed * multiplier;
+			else speed = simplifyBonus(formula, rollData);
+			if ( speed > 0 ) speed += this.buildBonus(
+				this.getModifiers({ ...modifierData, movementType: type }),
+				{ deterministic: true, rollData }
+			);
+			movement.types[type] = speed * multiplier * (halfMovement ? 0.5 : 1);
 
 			const label = CONFIG.BlackFlag.movementTypes.localized[type];
 			if ( speed && label ) {
