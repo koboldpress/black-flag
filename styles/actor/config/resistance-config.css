@@ -1,11 +1,12 @@
-.black-flag.resistance.config.app {
-	form {
+.black-flag.resistance.config-sheet {
+	.window-content {
 		display: grid;
-		grid-template-columns: max-content max-content;
+		grid-template-columns: max-content max-content max-content;
 		grid-template-rows: max-content max-content;
+		gap: 12px;
 
-		> .conditions {
-			grid-column: 2;
+		[data-application-part="conditions"] {
+			grid-column: 3;
 			grid-row: 1 / -1;
 		}
 	}
@@ -21,8 +22,15 @@
 			padding-inline: 3px;
 			text-align: center;
 		}
+		th {
+			font-variant: small-caps;
+		}
 		tr, col {
 			transition: background 100ms ease;
+		}
+		input[type="checkbox"] {
+			margin-block: 0;
+			margin-inline: 6px;
 		}
 	}
 }

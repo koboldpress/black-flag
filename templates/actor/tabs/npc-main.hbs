@@ -81,7 +81,7 @@
 				<span>{{ stealthLabel }}</span>
 			{{/if}}
 		</label>
-		{{#if traits.vulnerable}}
+		{{#if traits.vulnerabilities}}
 			<label>
 				<span>
 					{{#if modes.editing}}
@@ -93,10 +93,10 @@
 					{{/if}}
 					{{ localize "BF.Vulnerability.Short" }}
 				</span>
-				<span>{{{ traits.vulnerable }}}</span>
+				<span>{{{ traits.vulnerabilities }}}</span>
 			</label>
 		{{/if}}
-		{{#if traits.resist}}
+		{{#if traits.resistances}}
 			<label>
 				<span>
 					{{#if modes.editing}}
@@ -108,10 +108,10 @@
 					{{/if}}
 					{{ localize "BF.Resistance.Short" }}
 				</span>
-				<span>{{{ traits.resist }}}</span>
+				<span>{{{ traits.resistances }}}</span>
 			</label>
 		{{/if}}
-		{{#if traits.immune}}
+		{{#if traits.immunities}}
 			<label>
 				<span>
 					{{#if modes.editing}}
@@ -123,7 +123,7 @@
 					{{/if}}
 					{{ localize "BF.Immunity.Short" }}
 				</span>
-				<span>{{{ traits.immune }}}</span>
+				<span>{{{ traits.immunities }}}</span>
 			</label>
 		{{/if}}
 		<label>

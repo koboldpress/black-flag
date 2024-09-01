@@ -361,7 +361,7 @@ export default class BaseActorSheet extends ActorSheet {
 					case "proficiency":
 						return new ProficiencyConfig(this.actor).render(true);
 					case "resistance":
-						return new ResistanceConfig(this.actor).render(true);
+						return new ResistanceConfig({ document: this.actor }).render({ force: true });
 					case "senses":
 						return new SensesConfig(this.actor).render(true);
 					case "skill":

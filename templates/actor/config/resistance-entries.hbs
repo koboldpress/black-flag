@@ -1,0 +1,29 @@
+<fieldset>
+	<legend>{{ localize header }}</legend>
+	<table class="fieldset-table">
+		<colgroup>
+			<col class="headers">
+			<col class="res">
+			<col class="imm">
+			<col class="vul">
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col">{{ localize name }}</th>
+				<th scope="col">{{ localize "BF.Resistance.Abbreviation" }}</th>
+				<th scope="col">{{ localize "BF.Immunity.Abbreviation" }}</th>
+				<th scope="col">{{ localize "BF.Vulnerability.Abbreviation" }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each entries}}
+				<tr>
+					<th scope="row">{{ label }}</th>
+					<td><input type="checkbox" name="{{ prefix }}.resistances.{{ key }}" {{ checked resistant }}></td>
+					<td><input type="checkbox" name="{{ prefix }}.immunities.{{ key }}" {{ checked immune }}></td>
+					<td><input type="checkbox" name="{{ prefix }}.vulnerabilities.{{ key }}" {{ checked vulnerable }}></td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</fieldset>

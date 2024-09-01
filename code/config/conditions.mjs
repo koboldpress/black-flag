@@ -117,7 +117,7 @@ export const conditions = {
 		reference: "Compendium.black-flag.rules.JournalEntry.yTCk697FqUQ0qzL3.JournalEntryPage.tPvSfEhj7fDkRvGj"
 	},
 	transformed: {
-		name: "EFFECT.BF.Transformed",
+		label: "EFFECT.BF.Transformed",
 		icon: "systems/black-flag/artwork/statuses/transformed.svg",
 		pseudo: true
 	},

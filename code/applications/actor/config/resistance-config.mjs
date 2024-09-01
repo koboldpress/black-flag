@@ -1,47 +1,84 @@
 import { filteredKeys } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
-export default class ResistanceConfig extends BaseConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "resistance"],
-			template: "systems/black-flag/templates/actor/config/resistance-config.hbs",
-			width: "auto"
-		});
-	}
+/**
+ * Configuration application for condition & damage resistances, immunities, and vulnerabilities.
+ */
+export default class ResistanceConfig extends BaseConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["resistance"],
+		window: {
+			title: "BF.Resistance.Config"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*             Properties              */
-	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	get type() {
-		return game.i18n.localize("BF.Resistance.Config");
-	}
+	/** @override */
+	static PARTS = {
+		damageAll: {
+			template: "systems/black-flag/templates/actor/config/resistance-entries.hbs"
+		},
+		damageNonmagical: {
+			template: "systems/black-flag/templates/actor/config/resistance-entries.hbs"
+		},
+		conditions: {
+			template: "systems/black-flag/templates/actor/config/resistance-entries.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		const makeEntry = (key, label, type) => ({
-			key,
-			label,
-			resistant: context.source.traits?.[type]?.resistances?.value?.includes(key),
-			immune: context.source.traits?.[type]?.immunities?.value?.includes(key),
-			vulnerable: context.source.traits?.[type]?.vulnerabilities?.value?.includes(key)
-		});
-		context.damageTypes = [
-			makeEntry("all", game.i18n.localize("BF.Resistance.AllDamage"), "damage"),
-			...Object.entries(CONFIG.BlackFlag.damageTypes.localized).map(([key, label]) => makeEntry(key, label, "damage"))
-		];
-		context.conditions = Object.entries(CONFIG.BlackFlag.conditions.localized).map(([key, label]) =>
-			makeEntry(key, label, "condition")
-		);
+	async _preparePartContext(partId, context, options) {
+		context = { ...(await super._preparePartContext(partId, context, options)) };
+		let all = false;
+		switch (partId) {
+			case "conditions":
+				context.header = "BF.Condition.Label[other]";
+				context.name = "BF.Condition.Label[one]";
+				context.entries = Object.entries(CONFIG.BlackFlag.conditions.localized).map(([key, label]) =>
+					this._prepareEntry(key, "condition", label)
+				);
+				break;
+			case "damageAll":
+				all = true;
+			case "damageNonmagical":
+				context.header = all ? "BF.DAMAGE.Source.All" : "BF.DAMAGE.Source.Nonmagical";
+				context.name = "BF.DAMAGE.Label";
+				const options = { section: all ? "value" : "nonmagical" };
+				context.entries = [
+					this._prepareEntry("all", "damage", game.i18n.localize("BF.Resistance.AllDamage"), options),
+					...Object.entries(CONFIG.BlackFlag.damageTypes.localized).map(([key, label]) =>
+						this._prepareEntry(key, "damage", label, options)
+					)
+				];
+		}
 		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a single entry in the resistances list.
+	 * @param {string} key - Key for the entry.
+	 * @param {"condition"|"damage"} type - Type of resistance being prepared.
+	 * @param {string} label - Display label for the entry.
+	 * @param {object} [options={}]
+	 * @param {string} [options.section="value"] - Key of the set for which to get the values.
+	 * @returns {object}
+	 */
+	_prepareEntry(key, type, label, { section = "value" } = {}) {
+		return {
+			label,
+			prefix: `system.traits.${type}`,
+			key: `${section}.${key}`,
+			resistant: this.document._source.system.traits?.[type]?.resistances?.[section]?.includes(key),
+			immune: this.document._source.system.traits?.[type]?.immunities?.[section]?.includes(key),
+			vulnerable: this.document._source.system.traits?.[type]?.vulnerabilities?.[section]?.includes(key)
+		};
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -49,19 +86,17 @@ export default class ResistanceConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_updateObject(event, formData) {
-		const updates = foundry.utils.expandObject(formData);
-		foundry.utils.setProperty(updates, "condition.resistances.value", filteredKeys(updates.cr.value));
-		foundry.utils.setProperty(updates, "condition.immunities.value", filteredKeys(updates.ci.value));
-		foundry.utils.setProperty(updates, "condition.vulnerabilities.value", filteredKeys(updates.cv.value));
-		foundry.utils.setProperty(updates, "damage.resistances.value", filteredKeys(updates.dr.value));
-		foundry.utils.setProperty(updates, "damage.immunities.value", filteredKeys(updates.di.value));
-		foundry.utils.setProperty(updates, "damage.vulnerabilities.value", filteredKeys(updates.dv.value));
-		delete updates.cr;
-		delete updates.ci;
-		delete updates.dr;
-		delete updates.di;
-		delete updates.dv;
-		this.document.update({ "system.traits": updates });
+	_processFormData(event, form, formData) {
+		formData = super._processFormData(event, form, formData);
+		for (const type of ["damage", "condition"]) {
+			for (const kind of ["resistances", "immunities", "vulnerabilities"]) {
+				for (const section of ["value", "nonmagical"]) {
+					if (type !== "damage" && section === "nonmagical") continue;
+					const path = `system.traits.${type}.${kind}.${section}`;
+					foundry.utils.setProperty(formData, path, filteredKeys(foundry.utils.getProperty(formData, path)));
+				}
+			}
+		}
+		return formData;
 	}
 }

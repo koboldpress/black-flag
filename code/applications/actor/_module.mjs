@@ -6,6 +6,8 @@ export { default as LevelUpDialog } from "./level-up-dialog.mjs";
 export { default as NPCSheet } from "./npc-sheet.mjs";
 export { default as PCSheet } from "./pc-sheet.mjs";
 
+export { default as BasicConfigSheet } from "./api/base-config-sheet.mjs";
+
 export { default as AbilityConfig } from "./config/ability-config.mjs";
 export { default as ArmorClassConfig } from "./config/armor-class-config.mjs";
 export { default as BaseConfig } from "./config/base-config.mjs";

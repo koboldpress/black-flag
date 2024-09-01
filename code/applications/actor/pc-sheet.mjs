@@ -241,50 +241,20 @@ export default class PCSheet extends BaseActorSheet {
 			config: "proficiency"
 		});
 
-		// Resistances
-		const resistances = [
-			...(traits.damage.resistances.value.has("all")
-				? [game.i18n.localize("BF.Resistance.AllDamage")]
-				: Array.from(traits.damage.resistances.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
-			...Array.from(traits.condition.resistances.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
-		].filter(t => t);
-		if (resistances.length || this.modes.editing)
+		const prepareResistance = (key, label) => {
+			const traits = context.system.traits;
+			const value = [traits.damage[key].label, traits.condition[key].label].filter(t => t).join(" | ");
+			if (!value && !this.modes.editing) return;
 			context.traits.push({
-				key: "resistances",
-				label: "resistances",
-				value: game.i18n.getListFormatter({ style: "short" }).format(resistances) || none,
+				key,
+				label,
+				value: value || game.i18n.localize("None"),
 				config: "resistance"
 			});
-
-		// Immunities
-		const immunities = [
-			...(traits.damage.immunities.value.has("all")
-				? [game.i18n.localize("BF.Resistance.AllDamage")]
-				: Array.from(traits.damage.immunities.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
-			...Array.from(traits.condition.immunities.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
-		].filter(t => t);
-		if (immunities.length || this.modes.editing)
-			context.traits.push({
-				key: "immunities",
-				label: "immunities",
-				value: game.i18n.getListFormatter({ style: "short" }).format(immunities) || none,
-				config: "resistance"
-			});
-
-		// Vulnerabilities
-		const vulnerabilities = [
-			...(traits.damage.vulnerabilities.value.has("all")
-				? [game.i18n.localize("BF.Resistance.AllDamage")]
-				: Array.from(traits.damage.vulnerabilities.value).map(t => CONFIG.BlackFlag.damageTypes.localized[t])),
-			...Array.from(traits.condition.vulnerabilities.value).map(t => CONFIG.BlackFlag.conditions.localized[t])
-		].filter(t => t);
-		if (vulnerabilities.length || this.modes.editing)
-			context.traits.push({
-				key: "vulnerabilities",
-				label: "vulnerabilities",
-				value: game.i18n.getListFormatter({ style: "short" }).format(vulnerabilities) || none,
-				config: "resistance"
-			});
+		};
+		prepareResistance("resistances", game.i18n.localize("BF.Resistance.Label"));
+		prepareResistance("immunities", game.i18n.localize("BF.Immunity.Label"));
+		prepareResistance("vulnerabilities", game.i18n.localize("BF.Vulnerability.Label"));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

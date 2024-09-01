@@ -2,6 +2,8 @@ export { default as LairData } from "./lair-data.mjs";
 export { default as NPCData } from "./npc-data.mjs";
 export { default as PCData } from "./pc-data.mjs";
 
+export { default as ResistancesField } from "./fields/resistances-field.mjs";
+
 export { default as ACTemplate } from "./templates/ac-template.mjs";
 export { default as ConditionsTemplate } from "./templates/conditions-template.mjs";
 export { default as EncumbranceTemplate } from "./templates/encumbrance-template.mjs";

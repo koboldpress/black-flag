@@ -264,10 +264,13 @@ export default class NPCSheet extends BaseActorSheet {
 		// Search through active effects for any that apply to traits
 		const validKeyPaths = new Set([
 			"system.traits.damage.resistances.value",
+			"system.traits.damage.resistances.nonmagical",
 			"system.traits.condition.resistances.value",
 			"system.traits.damage.immunities.value",
+			"system.traits.damage.immunities.nonmagical",
 			"system.traits.condition.immunities.value",
 			"system.traits.damage.vulnerabilties.value",
+			"system.traits.damage.vulnerabilties.nonmagical",
 			"system.traits.condition.vulnerabilities.value"
 		]);
 		const associatedEffects = [];
@@ -283,36 +286,30 @@ export default class NPCSheet extends BaseActorSheet {
 			if (Object.values(data).length > 1) associatedEffects.push(data);
 		}
 
-		const formatter = game.i18n.getListFormatter({ type: "unit" });
-		const createSection = (data, config) => formatter.format(data.map(d => config[d]).filter(f => f));
-		const createTrait = name => {
-			const sections = [];
-			const damages = foundry.utils.getProperty(context.source, `traits.damage.${name}.value`);
-			if (damages?.length) sections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized).toLowerCase());
-			const conditions = foundry.utils.getProperty(context.source, `traits.condition.${name}.value`);
-			if (conditions?.length)
-				sections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized).toLowerCase());
+		for (const name of ["resistances", "immunities", "vulnerabilities"]) {
+			const damage = { ...foundry.utils.getProperty(context.source, `traits.damage.${name}`) };
+			damage.value = new Set(damage.value ?? []);
+			damage.nonmagical = new Set(damage.nonmagical ?? []);
+			const condition = { ...foundry.utils.getProperty(context.source, `traits.condition.${name}`) };
+			condition.value = new Set(condition.value ?? []);
+			this.actor.system.cleanLabelResistances(condition, damage);
+			const sections = [damage.label.toLowerCase(), condition.label.toLowerCase()].filter(t => t);
 
 			for (const effect of associatedEffects) {
-				const effectSections = [];
-				const damages = effect[`system.traits.damage.${name}.value`];
-				if (damages?.length) effectSections.push(createSection(damages, CONFIG.BlackFlag.damageTypes.localized));
-				const conditions = effect[`system.traits.condition.${name}.value`];
-				if (conditions?.length) effectSections.push(createSection(conditions, CONFIG.BlackFlag.conditions.localized));
+				const damage = {
+					value: new Set(effect[`system.traits.damage.${name}.value`] ?? []),
+					nonmagical: new Set(effect[`system.traits.damage.${name}.nonmagical`] ?? [])
+				};
+				const condition = { value: new Set(effect[`system.traits.condition.${name}.value`] ?? []) };
+				this.actor.system.cleanLabelResistances(condition, damage);
+				const effectSections = [damage.label.toLowerCase(), condition.label.toLowerCase()].filter(t => t);
 				if (effectSections.length) {
 					sections.push(`<span data-tooltip="${effectSections.join(" | ")}">${effect.effect.name}</span>`);
 				}
 			}
 
-			return sections.join(" | ");
-		};
-
-		const resistances = createTrait("resistances");
-		if (resistances || this.modes.editing) context.traits.resist = resistances || none;
-		const immunities = createTrait("immunities");
-		if (immunities || this.modes.editing) context.traits.immune = immunities || none;
-		const vulnerabilities = createTrait("vulnerabilities");
-		if (vulnerabilities || this.modes.editing) context.traits.vulnerable = vulnerabilities || none;
+			if (sections.length || this.modes.editing) context.traits[name] = sections.join(" | ") || none;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
