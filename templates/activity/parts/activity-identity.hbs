@@ -2,6 +2,7 @@
 	<legend>{{ localize "BF.ACTIVITY.Label[one]" }}</legend>
 	{{ formField fields.name value=source.name placeholder=placeholder.name }}
 	{{ formField fields.img value=source.img placeholder=placeholder.img }}
+	{{#unless activity.inheritMagical}}{{ formField fields.magical value=source.magical }}{{/unless}}
 	<hr>
 	<prose-mirror name="description" data-document-u-u-i-d="{{ activity.uuid }}"
 								value="{{ activity.description }}" collaborate="false" toggled="true">

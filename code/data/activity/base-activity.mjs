@@ -122,11 +122,24 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			range: new RangeField({
 				override: new BooleanField()
 			}),
+			magical: new BooleanField(),
 			target: new TargetField({
 				override: new BooleanField()
 			}),
 			uses: new UsesField({ consumeQuantity: false })
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*             Properties              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Should the magical status of this activity be inherited from its containing item?
+	 * @type {boolean}
+	 */
+	get inheritMagical() {
+		return this.isSpell || "magical" in (this.item.system.validProperties ?? {});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -224,6 +237,8 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				}
 			}
 		}
+
+		if (this.inheritMagical) this.magical = this.isSpell || this.item.system.properties.has("magical");
 
 		this.system.prepareFinalData?.();
 	}

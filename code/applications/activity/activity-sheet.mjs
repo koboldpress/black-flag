@@ -60,7 +60,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
 	/** @override */
 	tabGroups = {
-		sheet: "effect",
+		sheet: "identity",
 		activation: "time"
 	};
 
