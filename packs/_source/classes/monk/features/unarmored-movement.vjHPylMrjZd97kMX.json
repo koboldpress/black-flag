@@ -13,7 +13,30 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "EbMmvkElxwYKcb0c": {
+        "type": "property",
+        "_id": "EbMmvkElxwYKcb0c",
+        "configuration": {
+          "changes": [
+            {
+              "key": "system.modifiers",
+              "mode": 2,
+              "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"movement\" }, { \"k\": \"armored\", \"v\": false }, { \"k\": \"shielded\", \"v\": false }], \"formula\": \"@scale.monk.movement\" }",
+              "priority": null
+            }
+          ]
+        },
+        "level": {
+          "value": 2,
+          "classIdentifier": "monk"
+        },
+        "icon": null,
+        "flags": {},
+        "title": "Unarmored Movement",
+        "hint": "Your speed increases by 10 feet while you aren’t wearing armor or wielding a shield."
+      }
+    },
     "description": {
       "value": "<p>Your speed increases by 10 feet while you aren’t wearing armor or wielding a shield. This bonus increases when you reach certain monk levels, as shown in the <strong>Monk Progression</strong> table.</p>",
       "source": {
@@ -47,10 +70,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.034",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.043",
+    "coreVersion": "12.331",
     "createdTime": 1717970129845,
-    "modifiedTime": 1718040655520,
+    "modifiedTime": 1725243824773,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
