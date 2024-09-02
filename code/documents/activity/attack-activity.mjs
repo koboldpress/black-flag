@@ -145,6 +145,7 @@ export default class AttackActivity extends Activity {
 	 */
 	async rollAttack(config = {}, dialog = {}, message = {}) {
 		const targets = this.constructor.getTargetDescriptors();
+		const flagKey = `relationship.last.${this.id}`;
 
 		let ammunitionOptions;
 		if (this.item.system.properties?.has("ammunition") && this.actor)
@@ -180,7 +181,6 @@ export default class AttackActivity extends Activity {
 				data,
 				parts,
 				options: {
-					// TODO: Fetch recently used attack mode
 					criticalSuccess: Number.isFinite(threshold) ? threshold : undefined,
 					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 						rollData: data
@@ -192,12 +192,13 @@ export default class AttackActivity extends Activity {
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
 
+		const useAmmo = config.ammunition !== false && ammunitionOptions;
 		const rollConfig = foundry.utils.mergeObject(
 			{
-				// TODO: Fetch recently used ammunition options
-				ammunition: config.ammunition !== false && ammunitionOptions ? ammunitionOptions[0].value : undefined,
-				// TODO: Fetch recently used attack mode
-				attackMode: this.item.system.attackModes[0]?.value
+				ammunition: useAmmo
+					? this.item.getFlag(game.system.id, `${flagKey}.ammunition`) ?? ammunitionOptions[0].value
+					: undefined,
+				attackMode: this.item.getFlag(game.system.id, `${flagKey}.attackMode`) ?? this.item.system.attackModes[0]?.value
 			},
 			config
 		);
@@ -239,6 +240,7 @@ export default class AttackActivity extends Activity {
 					const modes = this.item.system.attackModes;
 					if (modes.length && !attackMode) attackMode = modes[0].value;
 					if (attackMode) {
+						rollConfig.attackMode = attackMode;
 						foundry.utils.setProperty(message, `data.flags.${game.system.id}.roll.attackMode`, attackMode);
 						if (attackMode in CONFIG.BlackFlag.attackModes)
 							message.data.flavor = `${message.data.flavor} (${CONFIG.BlackFlag.attackModes.localized[
@@ -268,9 +270,15 @@ export default class AttackActivity extends Activity {
 		const rolls = await CONFIG.Dice.ChallengeRoll.build(rollConfig, dialogConfig, messageConfig);
 		if (!rolls?.length) return;
 
+		const flags = {};
 		const ammo = this.actor?.items.get(rollConfig.ammunition);
 		let ammoUpdate = null;
-		if (ammo) ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+		if (ammo) {
+			ammoUpdate = { id: ammo.id, quantity: Math.max(0, ammo.system.quantity - 1) };
+			flags.ammunition = ammo.id;
+		}
+		if (rollConfig.attackMode) flags.attackMode = rollConfig.attackMode;
+		if (!foundry.utils.isEmpty(flags)) await this.item.setFlag(game.system.id, flagKey, flags);
 
 		/**
 		 * A hook event that fires after an attack has been rolled, but before ammunition is updated.
@@ -403,13 +411,15 @@ export default class AttackActivity extends Activity {
 				// If mode is "replace" and base part is present, replace the base part
 				if (ammo.damage.replace && basePartIndex !== -1) {
 					damage.base = true;
-					rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData));
+					const index = basePartIndex;
+					rollConfig.rolls.splice(index, 1, this._processDamagePart(damage, config, rollData, { index }));
 				}
 
 				// Otherwise stick the ammo damage after base part (or as first part)
 				else {
 					damage.ammo = true;
-					rollConfig.rolls.splice(basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData));
+					const index = basePartIndex + 1;
+					rollConfig.rolls.splice(index, 0, this._processDamagePart(damage, rollConfig, rollData, { index }));
 				}
 			}
 		}
@@ -425,15 +435,18 @@ export default class AttackActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	_processDamagePart(damage, rollConfig, rollData) {
-		if (!damage.base) super._processDamagePart(damage, rollConfig, rollData);
+	_processDamagePart(damage, rollConfig, rollData, { modifierData = {}, ...config } = {}) {
+		if (!damage.base) super._processDamagePart(damage, rollConfig, rollData, { ...config, modifierData });
 
 		// Swap base damage for versatile if two-handed attack is made on versatile weapon
 		if (this.item.system.properties?.has("versatile") && rollConfig.attackMode === "twoHanded") {
 			damage = this.item.system.versatileDamage ?? damage;
 		}
 
-		const roll = super._processDamagePart(damage, rollConfig, rollData, { baseDamage: true });
+		const roll = super._processDamagePart(damage, rollConfig, rollData, {
+			...config,
+			modifierData: { ...modifierData, baseDamage: true }
+		});
 		roll.base = true;
 
 		if (this.item.type === "weapon") {

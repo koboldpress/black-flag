@@ -934,6 +934,14 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
 		if (!rolls) return;
 
+		const lastDamageTypes = rolls.reduce((obj, roll, index) => {
+			obj[index] = roll.options.damageType;
+			return obj;
+		}, {});
+		if (!foundry.utils.isEmpty(lastDamageTypes)) {
+			await this.item.setFlag(game.system.id, `relationship.last.${this.id}.damageType`, lastDamageTypes);
+		}
+
 		/**
 		 * A hook event that fires after damage has been rolled.
 		 * @function blackFlag.postRollDamage
@@ -1037,7 +1045,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
 		const rollData = this.getRollData();
 		rollConfig.rolls = this.system.damage.parts
-			.map(d => this._processDamagePart(d, rollConfig, rollData))
+			.map((d, index) => this._processDamagePart(d, rollConfig, rollData, { index }))
 			.filter(d => d.parts.length)
 			.concat(config.rolls ?? []);
 
@@ -1065,11 +1073,13 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {DamageData} damage - Damage to prepare for the roll.
 	 * @param {Partial<DamageRollProcessConfiguration>} rollConfig - Roll configuration being built.
 	 * @param {object} rollData - Roll data to populate with damage data.
-	 * @param {object} modifierData - Extra data to be included in the modifier data.
+	 * @param {object} [config={}]
+	 * @param {object} [config.modifierData={}] - Extra data to be included in the modifier data.
+	 * @param {number} [config.index=0] - Index of the damage part being prepared.
 	 * @returns {DamageRollConfiguration}
 	 * @protected
 	 */
-	_processDamagePart(damage, rollConfig, rollData, modifierData = {}) {
+	_processDamagePart(damage, rollConfig, rollData, { modifierData = {}, index = 0 } = {}) {
 		modifierData = foundry.utils.mergeObject({ ...this.modifierData, type: "damage", damage }, modifierData);
 		const { parts, data } = buildRoll(
 			{
@@ -1085,7 +1095,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			modifierData,
 			parts,
 			options: {
-				damageType: damage.type,
+				damageType:
+					damage.type === "variable"
+						? this.item.getFlag(game.system.id, `relationship.last.${this.id}.damageType.${index}`)
+						: damage.type,
 				damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
 				minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), { rollData })
 			}

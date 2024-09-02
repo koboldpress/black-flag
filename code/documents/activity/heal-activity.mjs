@@ -81,9 +81,9 @@ export default class HealActivity extends Activity {
 
 		const rollConfig = foundry.utils.mergeObject({ critical: { allow: false }, scaling: 0 }, config);
 		const rollData = this.getRollData();
-		rollConfig.rolls = [this._processDamagePart(this.system.healing, rollConfig, rollData, { type: "healing" })].concat(
-			config.rolls ?? []
-		);
+		rollConfig.rolls = [
+			this._processDamagePart(this.system.healing, rollConfig, rollData, { modifierData: { type: "healing" } })
+		].concat(config.rolls ?? []);
 
 		return rollConfig;
 	}
