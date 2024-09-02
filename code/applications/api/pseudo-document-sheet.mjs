@@ -163,6 +163,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 	_onFirstRender(context, options) {
 		super._onFirstRender(context, options);
 		this.document.constructor._registerApp(this.document, this);
+		this.item.apps[this.id] = this;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -186,6 +187,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 	/** @override */
 	_onClose(_options) {
 		this.document.constructor._unregisterApp(this.document, this);
+		delete this.item?.apps[this.id];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -36,6 +36,7 @@ const {
  * @property {boolean} consumption.scaling.allowed - Can this non-spell activity be activated at higher levels?
  * @property {string} consumption.scaling.max - Maximum number of scaling levels for this item.
  * @property {DurationField} duration
+ * @property {boolean} duration.concentration - Does this activity require concentration?
  * @property {boolean} duration.override - Should the item's duration be overridden?
  * @property {RangeField} range
  * @property {boolean} range.override - Should the item's range be overridden?
@@ -115,6 +116,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				})
 			}),
 			duration: new DurationField({
+				concentration: new BooleanField(),
 				override: new BooleanField()
 			}),
 			range: new RangeField({

@@ -115,14 +115,6 @@ export default class ItemDataModel extends BaseDataModel {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	prepareDerivedData() {
-		super.prepareDerivedData();
-		if (this.shouldPrepareFinalData) this.prepareFinalData();
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/**
 	 * Final data preparation steps performed on Items after parent actor has been fully prepared.
 	 */

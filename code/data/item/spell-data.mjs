@@ -326,6 +326,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.duration.concentration = this.tags.has("concentration");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	prepareFinalData() {
 		super.prepareFinalData();
 		const rollData = this.parent.getRollData({ deterministic: true });

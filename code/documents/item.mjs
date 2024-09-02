@@ -150,6 +150,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	prepareData() {
 		this.notifications = new NotificationsCollection();
 		super.prepareData();
+		if (this.system.shouldPrepareFinalData) this.system.prepareFinalData();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
