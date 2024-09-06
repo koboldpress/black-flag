@@ -436,7 +436,7 @@ export default class AttackActivity extends Activity {
 
 	/** @inheritDoc */
 	_processDamagePart(damage, rollConfig, rollData, { modifierData = {}, ...config } = {}) {
-		if (!damage.base) super._processDamagePart(damage, rollConfig, rollData, { ...config, modifierData });
+		if (!damage.base) return super._processDamagePart(damage, rollConfig, rollData, { ...config, modifierData });
 
 		// Swap base damage for versatile if two-handed attack is made on versatile weapon
 		if (this.item.system.properties?.has("versatile") && rollConfig.attackMode === "twoHanded") {

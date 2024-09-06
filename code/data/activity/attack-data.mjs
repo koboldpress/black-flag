@@ -162,6 +162,7 @@ export class AttackData extends foundry.abstract.DataModel {
 		if (this.damage.includeBase && this.parent.item.system.damage?.base?.formula) {
 			const basePart = this.parent.item.system.damage.base.clone();
 			basePart.base = true;
+			basePart.locked = true;
 			this.damage.parts.unshift(basePart);
 		}
 
