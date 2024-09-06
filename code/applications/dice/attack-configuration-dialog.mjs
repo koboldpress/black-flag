@@ -29,7 +29,7 @@ export default class AttackRollConfigurationDialog extends ChallengeRollConfigur
 				options: this.options.attackModes,
 				value: this.config.attackMode
 			});
-		if (this.options.ammunitionOptions)
+		if (this.options.ammunitionOptions?.length)
 			context.fields.unshift({
 				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.Item.Type.Ammunition[one]") }),
 				name: "ammunition",
