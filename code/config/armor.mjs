@@ -89,10 +89,11 @@ export const armor = {
 		}
 	},
 	shield: {
-		localization: "BF.Armor.Category.Shield"
+		localization: "BF.Armor.Category.Shield",
+		link: "Compendium.black-flag.items.Item.eLqVG90tzGjKbWCp"
 	}
 };
-localizeConfig(armor, { sort: false });
+localizeConfig(armor, { flatten: true, sort: false });
 localizeConfig(armor.light.children);
 localizeConfig(armor.medium.children);
 localizeConfig(armor.heavy.children);

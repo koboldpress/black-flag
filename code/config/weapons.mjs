@@ -232,7 +232,8 @@ export const weapons = {
 		}
 	}
 };
-localizeConfig(weapons, { sort: false });
+localizeConfig(weapons, { flatten: true });
+localizeConfig(weapons, { sort: false, propertyName: "localizedCategories" });
 localizeConfig(weapons.simple.children);
 localizeConfig(weapons.martial.children);
 

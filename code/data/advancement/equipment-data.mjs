@@ -173,7 +173,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 
 		// Special handling for weapons
 		if (this.type === "weapon") {
-			for (const [categoryKey, category] of Object.entries(CONFIG.BlackFlag.weapons.localized)) {
+			for (const [categoryKey, category] of Object.entries(CONFIG.BlackFlag.weapons.localizedCategories)) {
 				for (const [typeKey, type] of Object.entries(CONFIG.BlackFlag.weaponTypes.localized)) {
 					choices[`${categoryKey}.${typeKey}`] = game.i18n.format(`BF.Weapon.Type.CombinedLabel[${pluralRule}]`, {
 						category,
