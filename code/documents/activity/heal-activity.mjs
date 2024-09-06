@@ -96,6 +96,6 @@ export default class HealActivity extends Activity {
 	 * @returns {{rolls: DamageRollConfiguration[], activity: Activity}|null}
 	 */
 	getDamageDetails(options = {}) {
-		return { rolls: this.createHealingConfig().rolls, activity: this };
+		return { rolls: this.getDamageConfig().rolls, activity: this };
 	}
 }
