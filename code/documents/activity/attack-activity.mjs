@@ -192,7 +192,7 @@ export default class AttackActivity extends Activity {
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
 
-		const useAmmo = config.ammunition !== false && ammunitionOptions;
+		const useAmmo = config.ammunition !== false && ammunitionOptions?.length;
 		const rollConfig = foundry.utils.mergeObject(
 			{
 				ammunition: useAmmo
