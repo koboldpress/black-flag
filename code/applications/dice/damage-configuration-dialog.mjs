@@ -66,7 +66,7 @@ export default class DamageRollConfigurationDialog extends BasicRollConfiguratio
 	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
+	/** @inheritDoc */
 	_buildConfig(config, formData, index) {
 		config = super._buildConfig(config, formData, index);
 

@@ -47,7 +47,7 @@ import BasicRoll from "./basic-roll.mjs";
  * Roll used for damage with helpers for calculating critical damage.
  * @param {string} formula - The formula used to construct the roll.
  * @param {object} data - The roll data used to resolve the formula.
- * @param {DamageRollOptions} options - Additional options that describe the challenge roll.
+ * @param {DamageRollOptions} options - Additional options that describe the damage roll.
  */
 export default class DamageRoll extends BasicRoll {
 	constructor(formula, data, options = {}) {
