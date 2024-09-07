@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Arrow-Catching Shield",
   "type": "armor",
-  "img": "icons/equipment/shield/buckler-wooden-boss.webp",
+  "img": "icons/equipment/shield/buckler-boss-iron-wood-brown.webp",
   "system": {
     "overrides": {
       "proficiency": null
@@ -25,7 +25,9 @@
     "type": {
       "category": "shield"
     },
-    "properties": [],
+    "properties": [
+      "magical"
+    ],
     "armor": {
       "value": null,
       "requiredStrength": null
@@ -46,7 +48,65 @@
       "consumeQuantity": false,
       "recovery": []
     },
-    "activities": {},
+    "activities": {
+      "LCkajaAQ7yfMP14g": {
+        "type": "utility",
+        "_id": "LCkajaAQ7yfMP14g",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When an attacker makes a ranged atttack against a target within 5 feet of you"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Catch Arrows",
+        "img": ""
+      }
+    },
     "container": null,
     "magicalBonus": null
   },
@@ -60,9 +120,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.044",
     "createdTime": 1725588932684,
-    "modifiedTime": 1725588933869,
+    "modifiedTime": 1725739009217,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "T7Ctafo5JglrX3Tu",
