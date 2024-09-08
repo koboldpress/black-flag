@@ -892,7 +892,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async rollDamage(config = {}, dialog = {}, message = {}) {
 		const rollConfig = this.getDamageConfig(config);
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 
 		const allModifiers = rollConfig.rolls?.map(c => c.modifierData) ?? [];
 		const dialogConfig = foundry.utils.mergeObject({
@@ -948,9 +948,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @memberof hookEvents
 		 * @param {DamageRoll[]} rolls - The resulting rolls.
 		 * @param {object} [data]
-		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
+		 * @param {Activity} [data.subject] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollDamage", rolls, { activity: this });
+		Hooks.callAll("blackFlag.postRollDamage", rolls, { subject: this });
 
 		return rolls;
 	}
@@ -1100,6 +1100,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						? this.item.getFlag(game.system.id, `relationship.last.${this.id}.damageType.${index}`)
 						: damage.type,
 				damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
+				magical: this.magical,
 				minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), { rollData })
 			}
 		};

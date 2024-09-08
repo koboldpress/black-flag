@@ -140,7 +140,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @typedef {object} DamageDescription
 	 * @property {number} value - Amount of damage.
 	 * @property {string} type - Type of damage.
-	 * @property {Set<string>} properties - Damage properties that might affect application.
+	 * @property {boolean} magical - Is the damage magical?
 	 * @property {object} [active]
 	 * @property {number} [active.multiplier] - Final calculated multiplier.
 	 * @property {boolean} [active.modifications] - Did modification affect this description?
@@ -289,11 +289,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const multiplier = options.multiplier ?? 1;
 
-		const hasEffect = (category, type, properties, skipDowngrade) => {
+		const hasEffect = (category, type, magical, skipDowngrade) => {
 			if (
 				category === "resistance" &&
-				((downgrade(type) && hasEffect("immunity", type, properties, true)) ||
-					(downgrade("all") && hasEffect("immunity", "all", properties, true)))
+				((downgrade(type) && hasEffect("immunity", type, magical, true)) ||
+					(downgrade("all") && hasEffect("immunity", "all", magical, true)))
 			)
 				return true;
 			const config =
@@ -305,9 +305,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					}[category]
 				];
 			if (config?.value.has("all") && !ignore(category, "all", skipDowngrade)) return true;
-			if (!config?.value.has(type) || ignore(category, type, skipDowngrade)) return false;
-			// TODO: Handle properties
-			return true;
+			if (ignore(category, type, skipDowngrade)) return false;
+			if (config?.value.has(type)) return true;
+			if (config?.nonmagical.has(type) && !magical) return true;
+			return false;
 		};
 
 		const ignore = (category, type, skipDowngrade) => {
@@ -332,7 +333,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			d.active ??= {};
 
 			// Skip damage types with immunity
-			if (skipped(d.type) || hasEffect("immunity", d.type, d.properties)) {
+			if (skipped(d.type) || hasEffect("immunity", d.type, d.magical)) {
 				d.value = 0;
 				d.active.multiplier = 0;
 				d.active.immunity = true;
@@ -344,13 +345,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			let damageMultiplier = multiplier;
 
 			// Apply damage resistance
-			if (hasEffect("resistance", d.type, d.properties)) {
+			if (hasEffect("resistance", d.type, d.magical)) {
 				damageMultiplier /= 2;
 				d.active.resistance = true;
 			}
 
 			// Apply damage vulnerability
-			if (hasEffect("vulnerability", d.type, d.properties)) {
+			if (hasEffect("vulnerability", d.type, d.magical)) {
 				damageMultiplier *= 2;
 				d.active.vulnerability = true;
 			}
@@ -786,7 +787,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const rollData = this.getRollData();
 
 		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [
 			{
 				...buildRoll(
@@ -876,7 +877,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		const rollData = this.getRollData();
 
 		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [
 			{
 				...buildRoll(
@@ -986,7 +987,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			},
 			config
 		);
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [
 			{
 				...buildRoll(
@@ -1437,7 +1438,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const rollConfig = foundry.utils.deepClone(config);
 		const { rollConfig: roll, rollNotes } = prepareSkillConfig(rollConfig, {});
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Skill.Action.CheckSpecific", {
@@ -1560,7 +1561,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const rollConfig = foundry.utils.deepClone(config);
 		const { rollConfig: roll, rollNotes } = prepareToolConfig(rollConfig, {});
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Tool.Action.CheckSpecific", {
@@ -1688,7 +1689,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const rollConfig = foundry.utils.deepClone(config);
 		const { rollConfig: roll, rollNotes } = prepareVehicleConfig(rollConfig, {});
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const type = game.i18n.format("BF.Vehicle.Action.CheckSpecific", {

@@ -710,12 +710,14 @@ async function enrichDamage(configs, label, options) {
 	for (const c of configs) {
 		const formulaParts = [];
 		if (c.average) config.average = c.average;
+		if (c.magical) config.magical = true;
 		if (c.mode) config.attackMode = c.mode;
 		if (c.formula) formulaParts.push(c.formula);
 		for (const value of c.values) {
 			if (value in CONFIG.BlackFlag.damageTypes) c.type = value;
 			else if (value in CONFIG.BlackFlag.healingTypes) c.type = value;
 			else if (value === "average") config.average = true;
+			else if (value === "magical") config.magical = true;
 			else if (value === "versatile") config.attackMode ??= "twoHanded";
 			else formulaParts.push(value);
 		}
@@ -790,8 +792,9 @@ async function enrichDamage(configs, label, options) {
  */
 async function rollDamage(event) {
 	const target = event.target.closest("[data-roll-action]");
-	let { formulas, types, activity: activityUuid, attackMode } = target.dataset;
+	let { formulas, types, activity: activityUuid, attackMode, magical } = target.dataset;
 	formulas = JSON.parse(formulas);
+	magical = magical === "true";
 	types = JSON.parse(types);
 
 	if (activityUuid) {
@@ -802,7 +805,7 @@ async function rollDamage(event) {
 	const rollConfig = {
 		attackMode,
 		event,
-		rolls: formulas.map((formula, idx) => ({ parts: [formula], options: { damageType: types[idx] } }))
+		rolls: formulas.map((formula, idx) => ({ parts: [formula], options: { damageType: types[idx], magical } }))
 	};
 	// TODO: Handle variable damage types here
 

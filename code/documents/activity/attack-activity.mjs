@@ -203,7 +203,7 @@ export default class AttackActivity extends Activity {
 			config
 		);
 		const { rollConfig: roll, rollNotes } = prepareAttackRoll(rollConfig, {});
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
 		const dialogConfig = foundry.utils.mergeObject(
@@ -286,10 +286,10 @@ export default class AttackActivity extends Activity {
 		 * @memberof hookEvents
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {object} [data]
-		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
 		 * @param {AmmunitionUpdate|null} [data.ammoUpdate] - Any updates related to ammo consumption for the attack.
+		 * @param {Activity} [data.subject] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.rollAttack", rolls, { activity: this, ammoUpdate });
+		Hooks.callAll("blackFlag.rollAttack", rolls, { ammoUpdate, subject: this });
 
 		if (ammoUpdate)
 			await this.actor?.updateEmbeddedDocuments("Item", [
@@ -302,9 +302,9 @@ export default class AttackActivity extends Activity {
 		 * @memberof hookEvents
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
 		 * @param {object} [data]
-		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
+		 * @param {Activity} [data.subject] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollAttack", rolls, { activity: this });
+		Hooks.callAll("blackFlag.postRollAttack", rolls, { subject: this });
 
 		return rolls;
 	}

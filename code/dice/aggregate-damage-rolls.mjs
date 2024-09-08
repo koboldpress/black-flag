@@ -6,19 +6,18 @@
  * @returns {DamageRoll[]}
  */
 export default function aggregateDamageRolls(rolls, { respectProperties } = {}) {
-	const makeHash = (type, properties = []) =>
-		[type, ...(respectProperties ? Array.from(properties).sort() : [])].join();
+	const makeHash = (type, magical) => [type, ...(respectProperties ? [String(magical)] : [])].join();
 
 	// Split rolls into new sets of terms based on damage type & properties
 	const types = new Map();
 	for (const roll of rolls) {
 		if (!roll._evaluated) throw new Error("Only evaluated rolls can be aggregated.");
 		for (const chunk of chunkTerms(roll.terms, roll.options.damageType)) {
-			const key = makeHash(chunk.type, roll.options.properties);
-			if (!types.has(key)) types.set(key, { type: chunk.type, properties: new Set(), terms: [] });
+			const key = makeHash(chunk.type, roll.options.magical);
+			if (!types.has(key)) types.set(key, { type: chunk.type, terms: [] });
 			const data = types.get(key);
 			data.terms.push(new foundry.dice.terms.OperatorTerm({ operator: chunk.negative ? "-" : "+" }), ...chunk.terms);
-			if (roll.options.properties) data.properties = data.properties.union(new Set(roll.options.properties));
+			data.magical = roll.options.magical;
 		}
 	}
 
@@ -29,7 +28,7 @@ export default function aggregateDamageRolls(rolls, { respectProperties } = {}) 
 		roll.terms = type.terms;
 		roll._total = roll._evaluateTotal();
 		roll._evaluated = true;
-		roll.options = { damageType: type.type, properties: Array.from(type.properties) };
+		roll.options = { damageType: type.type, magical: type.magical };
 		roll.resetFormula();
 		newRolls.push(roll);
 	}

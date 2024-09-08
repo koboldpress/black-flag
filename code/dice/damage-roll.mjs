@@ -39,6 +39,7 @@ import BasicRoll from "./basic-roll.mjs";
  * @property {CriticalDamageConfiguration} [critical] - Critical configuration for this roll.
  * @property {string} [damageType] - Type of damage represented.
  * @property {string[]} [damageTypes] - List of damage types selectable in the configuration app.
+ * @property {boolean} [magical] - Is this damage considered magical?
  */
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

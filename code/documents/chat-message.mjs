@@ -202,9 +202,9 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (game.user.isGM) {
 			const damageApplication = document.createElement("blackFlag-damageApplication");
 			damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-				value: roll.total,
+				magical: roll.options.magical === true,
 				type: roll.options.damageType,
-				properties: new Set(roll.options.properties ?? [])
+				value: roll.total
 			}));
 			html.querySelector(".message-content").appendChild(damageApplication);
 		}

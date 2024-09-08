@@ -58,7 +58,7 @@ export default class UtilityActivity extends Activity {
 		}
 
 		const rollConfig = foundry.utils.deepClone(config);
-		rollConfig.origin = this;
+		rollConfig.subject = this;
 		rollConfig.rolls = [{ parts: [this.system.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
 		const dialogConfig = foundry.utils.mergeObject({
@@ -108,9 +108,9 @@ export default class UtilityActivity extends Activity {
 		 * @memberof hookEvents
 		 * @param {BasicRoll[]} rolls - The resulting rolls.
 		 * @param {object} [data]
-		 * @param {Activity} [data.activity] - Activity for which the roll was performed.
+		 * @param {Activity} [data.subject] - Activity for which the roll was performed.
 		 */
-		Hooks.callAll("blackFlag.postRollFormula", rolls, { activity: this });
+		Hooks.callAll("blackFlag.postRollFormula", rolls, { subject: this });
 
 		return rolls;
 	}
