@@ -365,14 +365,18 @@ export default Base =>
 		 */
 		static async deleteDocuments(ids, context = {}) {
 			if (!context.parent) throw new Error("Cannot delete pseudo documents without a parent.");
+			const closing = [];
 			const { updates, documents } = ids.reduce(
 				({ updates, documents }, id) => {
-					documents.push(context.parent.getEmbeddedDocument(this.documentName, id));
+					const doc = context.parent.getEmbeddedDocument(this.documentName, id);
+					closing.push(Promise.allSettled(doc.constructor._apps.get(doc.uuid)?.map(a => a.close()) ?? []));
+					documents.push(doc);
 					updates[`system.${this.collectionName}.-=${id}`] = null;
 					return { updates, documents };
 				},
 				{ updates: {}, documents: [] }
 			);
+			await Promise.allSettled(closing);
 			await context.parent.update(updates, this._clearedDocumentModificationContext(context));
 			return documents;
 		}

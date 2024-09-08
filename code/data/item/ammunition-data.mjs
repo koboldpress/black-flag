@@ -1,5 +1,6 @@
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
+import ActivitiesTemplate from "./templates/activities-template.mjs";
 import DescriptionTemplate from "./templates/description-template.mjs";
 import PhysicalTemplate from "./templates/physical-template.mjs";
 import PropertiesTemplate from "./templates/properties-template.mjs";
@@ -8,6 +9,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 
 /**
  * Data definition for Ammunition items.
+ * @mixes {ActivitiesTemplate}
  * @mixes {DescriptionTemplate}
  * @mixes {PhysicalTemplate}
  * @mixes {PropertiesTemplate}
@@ -21,6 +23,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {string} type.category - Ammunition category as defined in `CONFIG.BlackFlag.ammunition`.
  */
 export default class AmmunitionData extends ItemDataModel.mixin(
+	ActivitiesTemplate,
 	DescriptionTemplate,
 	PhysicalTemplate,
 	PropertiesTemplate
@@ -102,5 +105,14 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 	prepareDerivedData() {
 		super.prepareDerivedData();
 		this.preparePhysicalLabels();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareFinalData() {
+		super.prepareFinalData();
+		const rollData = this.parent.getRollData({ deterministic: true });
+		this.prepareFinalActivities(rollData);
 	}
 }

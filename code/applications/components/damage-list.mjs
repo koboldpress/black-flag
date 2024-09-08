@@ -13,8 +13,8 @@ export default class DamageListElement extends FormAssociatedElement {
 			this._toggleState(null, !!damageCollection?.custom?.enabled);
 		} else {
 			for (const li of this.querySelectorAll("[data-index]")) {
-				const damage = damageCollection?.[li.dataset.index];
-				this._toggleState(li.dataset.index, !!damage?.custom?.enabled);
+				const selected = li.querySelector('[name$=".custom.enabled"]');
+				this._toggleState(li.dataset.index, selected?.value === "true");
 			}
 		}
 

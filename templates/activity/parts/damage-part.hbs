@@ -1,58 +1,56 @@
 <div class="damage field-group">
 	<label class="die-count">
 		<span>{{ localize "BF.Die.Number.Label" }}</span>
-		<input type="number" name="{{ prefix }}number" step=1 min=1 value="{{ damage.number }}">
+		<input type="number" name="{{ prefix }}number" step=1 min=1 value="{{ data.number }}">
 	</label>
 	<label class="die-denomination">
 		<span>{{ localize "BF.Die.Denomination.Label" }}</span>
 		<select name="{{ prefix }}denomination">
-			{{ selectOptions @root.CONFIG.dieSteps.labeled selected=damage.denomination blank="" }}
+			{{ selectOptions @root.denominationOptions selected=data.denomination }}
 		</select>
 	</label>
 	<span class="plus">+</span>
 	<label class="bonus">
 		<span>{{ localize "BF.DAMAGE.Bonus.Label" }}</span>
-		<input type="text" name="{{ prefix }}bonus" value="{{ damage.bonus }}">
+		<input type="text" name="{{ prefix }}bonus" value="{{ data.bonus }}">
 	</label>
 	<label class="custom">
 		<span>{{ localize "BF.Formula.Custom.Label" }}</span>
-		<input type="text" name="{{ prefix }}custom.formula" value="{{ damage.custom.formula }}">
+		<input type="text" name="{{ prefix }}custom.formula" value="{{ data.custom.formula }}">
 	</label>
 	<label class="type">
 		<span>{{ localize "BF.DAMAGE.Type.Label" }}</span>
 		<select name="{{ prefix }}type">
-			{{ selectOptions types selected=damage.type blank="" }}
-			<hr>
-			<option value="variable" {{ifThen (eq damage.type "variable") " selected" ""}}>
-				{{ localize "BF.DAMAGE.Type.Variable" }}
-			</option>
+			{{ selectOptions typeOptions selected=data.type }}
 		</select>
 	</label>
 </div>
 
-<div class="controls">
-	{{#if @root.editable}}
-		<button type="button" class="link-button" data-action="customize"
-						data-tooltip="BF.Formula.Action.Customize"
-						aria-label="{{ localize 'BF.Formula.Action.Customize' }}">
-			<i class="fa-solid fa-superscript" inert></i>
-		</button>
-		<button type="button" class="link-button" data-action="delete"
-						data-tooltip="BF.DAMAGE.Action.Delete"
-						aria-label="{{ localize 'BF.DAMAGE.Action.Delete' }}">
-			<i class="fa-solid fa-trash" inert></i>
-		</button>
-	{{/if}}
-</div>
+{{#unless data.locked}}
+	<div class="controls">
+		{{#if @root.editable}}
+			<button type="button" class="link-button" data-action="customize"
+							data-tooltip="BF.Formula.Action.Customize"
+							aria-label="{{ localize 'BF.Formula.Action.Customize' }}">
+				<i class="fa-solid fa-superscript" inert></i>
+			</button>
+			<button type="button" class="link-button" data-action="delete"
+							data-tooltip="BF.DAMAGE.Action.Delete"
+							aria-label="{{ localize 'BF.DAMAGE.Action.Delete' }}">
+				<i class="fa-solid fa-trash" inert></i>
+			</button>
+		{{/if}}
+	</div>
+{{/unless}}
 
-{{#if (eq damage.type "variable")}}
+{{#if (eq data.type "variable")}}
 	<div class="damage-types field-group">
 		<label>
 			<span class="hinted-label" data-tooltip="BF.DAMAGE.AdditionalTypes.Hint">
 				{{ localize "BF.DAMAGE.AdditionalTypes.Label" }}
 			</span>
 			<multi-select name="{{ prefix }}additionalTypes">
-				{{ selectOptions types selected=damage.additionalTypes }}
+				{{ selectOptions variableTypeOptions }}
 			</multi-select>
 		</label>
 	</div>
@@ -63,20 +61,19 @@
 		<label class="scaling-mode">
 			<span>{{ localize "BF.DAMAGE.Scaling.Mode.Label" }}</span>
 			<select name="{{ prefix }}scaling.mode">
-				{{ selectOptions @root.CONFIG.damageScalingModes selected=damage.scaling.mode labelAttr="label" localize=true
-			                 	blank=(localize "BF.DAMAGE.Scaling.Mode.None") }}
+				{{ selectOptions scalingOptions selected=data.scaling.mode }}
 			</select>
 		</label>
-		{{#if damage.scaling.mode}}
+		{{#if data.scaling.mode}}
 			<label class="scaling-number">
 				<span>{{ localize "BF.DAMAGE.Scaling.Dice.Label" }}</span>
-				<input type="number" name="{{ prefix }}scaling.number" value="{{ damage.scaling.number }}" min="0" step="1">
+				<input type="number" name="{{ prefix }}scaling.number" value="{{ data.scaling.number }}" min="0" step="1">
 			</label>
 			<label class="scaling-formula">
 				<span>{{ localize "BF.DAMAGE.Scaling.Formula.Label" }}</span>
-				<input type="text" name="{{ prefix }}scaling.formula" value="{{ damage.scaling.formula }}">
+				<input type="text" name="{{ prefix }}scaling.formula" value="{{ data.scaling.formula }}">
 			</label>
 		{{/if}}
 	</div>
 {{/if}}
-<input type="hidden" name="{{ prefix }}custom.enabled" value="{{ damage.custom.enabled }}" data-dtype="Boolean">
+<input type="hidden" name="{{ prefix }}custom.enabled" value="{{ data.custom.enabled }}" data-dtype="Boolean">

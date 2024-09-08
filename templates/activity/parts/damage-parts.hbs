@@ -1,9 +1,10 @@
 <blackFlag-damageList name="system.damage.parts">
 	<ul class="configuration-list">
-		{{#each source.system.damage.parts}}
-			<li data-index="{{ @index }}">
-				{{> "systems/black-flag/templates/activity/parts/damage-part.hbs" damage=this prefix=(concat "$." @index ".")
-				    types=@root.CONFIG.damageTypes.localized }}
+		{{#each damageParts}}
+			<li data-index="{{ index }}">
+				<fieldset class="unfieldset" {{ disabled data.locked }}>
+					{{> "systems/black-flag/templates/activity/parts/damage-part.hbs" }}
+				</fieldset>
 			</li>
 		{{else}}
 			{{#unless editable}}

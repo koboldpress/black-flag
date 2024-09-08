@@ -154,7 +154,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 					})
 				: null
 		};
-		context.showBaseDamage = Object.hasOwn(this.item.system, "damage");
 
 		return context;
 	}
@@ -170,6 +169,19 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 	 */
 	_prepareAppliedEffectContext(context, effect) {
 		return effect;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare a specific damage part if present in the activity data.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {object} part - Damage part context being prepared.
+	 * @returns {object}
+	 * @protected
+	 */
+	_prepareDamagePartContext(context, part) {
+		return part;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -204,6 +216,50 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 				return this._prepareAppliedEffectContext(context, effect);
 			});
 		}
+
+		context.denominationOptions = [
+			{ value: "", label: "" },
+			...CONFIG.BlackFlag.dieSteps.map(value => ({ value, label: `d${value}` }))
+		];
+		const damageTypes = Object.entries(CONFIG.BlackFlag.damageTypes.localized).map(([value, label]) => ({
+			value,
+			label
+		}));
+		if (context.activity.system.damage?.parts) {
+			const scalingOptions = [
+				{ value: "", label: game.i18n.localize("BF.DAMAGE.Scaling.Mode.None") },
+				...Object.entries(CONFIG.BlackFlag.damageScalingModes).map(([value, config]) => ({
+					value,
+					label: game.i18n.localize(config.label)
+				}))
+			];
+			let indexOffset = 0;
+			context.damageParts = context.activity.system.damage.parts.map((data, index) => {
+				if (data.base) indexOffset--;
+				const part = {
+					data,
+					fields: this.activity.system.schema.fields.damage.fields.parts.element.fields,
+					index: index + indexOffset,
+					prefix: `$.${index + indexOffset}.`,
+					source: context.source.system.damage.parts[index + indexOffset] ?? data,
+					canScale: this.activity.canScaleDamage,
+					scalingOptions,
+					typeOptions: [
+						{ value: "", label: "" },
+						...damageTypes,
+						{ rule: true },
+						{ value: "variable", label: game.i18n.localize("BF.DAMAGE.Type.Variable") }
+					],
+					variableTypeOptions: damageTypes.map(({ value, label }) => ({
+						value,
+						label,
+						selected: data.additionalTypes.has(value)
+					}))
+				};
+				return this._prepareDamagePartContext(context, part);
+			});
+		}
+		context.showBaseDamage = Object.hasOwn(this.item.system, "damage");
 
 		return context;
 	}
