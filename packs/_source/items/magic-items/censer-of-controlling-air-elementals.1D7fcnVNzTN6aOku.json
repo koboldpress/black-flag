@@ -11,18 +11,87 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound. While incense is burning in this censer, you can use an action to speak the censer’s command word and summon an air elemental, as if you had cast the conjure elemental spell. The censer can’t be used this way again until the next dawn.</p>",
+      "value": "<p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound. While incense is burning in this censer, you can use an action to speak the censer’s command word and summon an <strong>air elemental</strong>, as if you had cast the <em>conjure elemental</em> spell. The censer can’t be used this way again until the next dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "PwU1TM79WbvoOTjh": {
+        "type": "utility",
+        "_id": "PwU1TM79WbvoOTjh",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Conjure Elemental",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -30,13 +99,15 @@
     "container": null,
     "quantity": 1,
     "weight": {
-      "value": 0,
+      "value": 1,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "1D7fcnVNzTN6aOku",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/containers/kitchenware/goblet-clay-gold-yellow.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
@@ -48,9 +119,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983669169,
-    "modifiedTime": 1724983670201,
+    "modifiedTime": 1725903896538,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!1D7fcnVNzTN6aOku"

@@ -15,7 +15,7 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this belt, your STR score changes to 27 by the belt. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
+      "value": "<p>While wearing this belt, your STR score changes to 27. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
       "source": {
         "fallback": ""
       }
@@ -34,11 +34,57 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "wkD5XdewiBh9rBi2",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/equipment/waist/belt-buckle-spiral-blue.webp",
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.items.Item.wkD5XdewiBh9rBi2",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Belt of Cloud Giant Strength",
+      "img": "icons/equipment/waist/belt-buckle-spiral-blue.webp",
+      "_id": "MXtgQfFckOb4MXtX",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.abilities.strength.value",
+          "mode": 4,
+          "value": "27",
+          "priority": null
+        }
+      ],
+      "description": "<p>While wearing this belt, your STR score changes to 27. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.045",
+        "createdTime": 1725901361861,
+        "modifiedTime": 1725901375814,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!wkD5XdewiBh9rBi2.MXtgQfFckOb4MXtX"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -49,9 +95,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983161774,
-    "modifiedTime": 1724983172002,
+    "modifiedTime": 1725901499851,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!wkD5XdewiBh9rBi2"

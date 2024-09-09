@@ -11,18 +11,87 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This hollow metal tube measures about 1 foot long and weighs 1 pound. You can strike it as an action, pointing it at an object within 120 feet of you that can be opened, such as a door, lid, or lock. The chime issues a clear tone, and one lock or latch on the object opens unless the sound can’t reach the object. If no locks or latches remain, the object itself opens.</p>\n<p>The chime can be used ten times. After the tenth time, it cracks and becomes useless.</p>",
+      "value": "<p>This hollow metal tube measures about 1 foot long and weighs 1 pound. You can strike it as an action, pointing it at an object within 120 feet of you that can be opened, such as a door, lid, or lock. The chime issues a clear tone, and one lock or latch on the object opens unless the sound can’t reach the object. If no locks or latches remain, the object itself opens.</p>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<p>The chime can be used ten times. After the tenth time, it cracks and becomes useless.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "KjNo2Mg0id8HlKRe": {
+        "type": "utility",
+        "_id": "KjNo2Mg0id8HlKRe",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "object",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Ring Chime",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "10"
     },
     "attunement": {
       "value": ""
@@ -33,10 +102,12 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "tA37Uk0PB3QuhN5M",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/tech/pipe-cylinder.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
@@ -48,9 +119,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983678815,
-    "modifiedTime": 1724983679723,
+    "modifiedTime": 1725904062360,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!tA37Uk0PB3QuhN5M"

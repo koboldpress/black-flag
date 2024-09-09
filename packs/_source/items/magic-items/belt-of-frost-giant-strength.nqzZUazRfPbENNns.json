@@ -15,7 +15,7 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this belt, your STR score changes to 23 by the belt. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
+      "value": "<p>While wearing this belt, your STR score changes to 23. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
       "source": {
         "fallback": ""
       }
@@ -34,11 +34,57 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "nqzZUazRfPbENNns",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/equipment/waist/belt-buckle-horn-blue.webp",
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.items.Item.nqzZUazRfPbENNns",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Belt of Frost Giant Strength",
+      "img": "icons/equipment/waist/belt-buckle-horn-blue.webp",
+      "_id": "L2yAlsHTeI367YOI",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.abilities.strength.value",
+          "mode": 4,
+          "value": "23",
+          "priority": null
+        }
+      ],
+      "description": "<p>While wearing this belt, your STR score changes to 23. If your STR is already equal to or greater than the belt’s score, the item has no effect on you.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.045",
+        "createdTime": 1725901310956,
+        "modifiedTime": 1725901318251,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!nqzZUazRfPbENNns.L2yAlsHTeI367YOI"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -49,9 +95,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983138306,
-    "modifiedTime": 1724983172818,
+    "modifiedTime": 1725901505817,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!nqzZUazRfPbENNns"

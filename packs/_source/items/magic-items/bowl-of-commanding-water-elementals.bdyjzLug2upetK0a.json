@@ -11,18 +11,87 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons. While this bowl is filled with water, you can use an action to speak the bowl’s command word and summon a water elemental, as if you had cast the conjure elemental spell. The bowl can’t be used this way again until the next dawn.</p>",
+      "value": "<p>This bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons. While this bowl is filled with water, you can use an action to speak the bowl’s command word and summon a <strong>water elemental</strong>, as if you had cast the <em>conjure elemental</em> spell. The bowl can’t be used this way again until the next dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "ikZgS8GbUHXc2DSr": {
+        "type": "utility",
+        "_id": "ikZgS8GbUHXc2DSr",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Conjure Elemental",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -30,13 +99,15 @@
     "container": null,
     "quantity": 1,
     "weight": {
-      "value": 0,
+      "value": 3,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "bdyjzLug2upetK0a",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/materials/bowl-liquid-white.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
@@ -48,9 +119,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983513113,
-    "modifiedTime": 1724983514254,
+    "modifiedTime": 1725902989577,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!bdyjzLug2upetK0a"

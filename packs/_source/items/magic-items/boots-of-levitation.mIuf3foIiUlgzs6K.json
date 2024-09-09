@@ -15,12 +15,70 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While you wear these boots, you can use an action to cast the levitate spell from them on yourself.</p>",
+      "value": "<p>While you wear these boots, you can use an action to cast the <em>levitate</em> spell from them on yourself.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "11JQnpxODYNWBOun": {
+        "type": "utility",
+        "_id": "11JQnpxODYNWBOun",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Levitate",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -34,10 +92,12 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "mIuf3foIiUlgzs6K",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/feet/shoes-collared-leather-blue.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
@@ -49,9 +109,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724983455287,
-    "modifiedTime": 1724983487263,
+    "modifiedTime": 1725901602759,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!mIuf3foIiUlgzs6K"
