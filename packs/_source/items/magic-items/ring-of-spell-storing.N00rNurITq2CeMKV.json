@@ -12,17 +12,22 @@
       "denomination": "gp"
     },
     "attunement": {
-      "value": "required"
+      "value": "required",
+      "requirement": ""
     },
     "description": {
-      "value": "<p>This ring stores spells cast into it, holding them until the attuned wearer uses them. The ring can store up to 5 circles’ worth of spells at a time. When found, it contains [[/r 1d6 - 1]] circles of stored spells chosen by the GM.</p>\n<p>Any creature can cast a spell of 1st through 5th circle into the ring by touching the ring as the spell is cast. The spell has no effect, other than to be stored in the ring. If the ring can’t hold the spell, the spell is expended without effect. The circle of the spell slot used to cast the spell determines how much space it uses.</p>\n<p>While wearing this ring, you can cast any spell stored in it. The spell uses the slot circle, spell save DC, spell attack bonus, and spellcasting ability of the original caster, but is otherwise treated as if you cast the spell. A spell cast from the ring is no longer stored in it, freeing up space.</p>",
-      "source": {}
+      "value": "<p>This ring stores spells cast into it, holding them until the attuned wearer uses them. The ring can store up to 5 circles’ worth of spells at a time. When found, it contains [[/r 1d6 - 1]] circles of stored spells chosen by the GM.</p>\n\t\t\t\t\t\t\t\t<p>Any creature can cast a spell of 1st through 5th circle into the ring by touching the ring as the spell is cast. The spell has no effect, other than to be stored in the ring. If the ring can’t hold the spell, the spell is expended without effect. The circle of the spell slot used to cast the spell determines how much space it uses.</p>\n\t\t\t\t\t\t\t\t<p>While wearing this ring, you can cast any spell stored in it. The spell uses the slot circle, spell save DC, spell attack bonus, and spellcasting ability of the original caster, but is otherwise treated as if you cast the spell. A spell cast from the ring is no longer stored in it, freeing up space.</p>",
+      "source": {
+        "fallback": ""
+      }
     },
     "activities": {},
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": []
+      "recovery": [],
+      "min": "",
+      "max": ""
     },
     "container": null,
     "quantity": 1,
@@ -30,7 +35,9 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "N00rNurITq2CeMKV",
   "img": "systems/black-flag/artwork/types/gear.svg",
@@ -45,9 +52,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724987363002,
-    "modifiedTime": 1724987363002,
+    "modifiedTime": 1725904721026,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!N00rNurITq2CeMKV"

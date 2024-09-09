@@ -12,17 +12,22 @@
       "denomination": "gp"
     },
     "attunement": {
-      "value": "required"
+      "value": "required",
+      "requirement": ""
     },
     "description": {
       "value": "<p>This ring has 3 charges and regains [[/r 1d3]] expended charges daily at dawn. While wearing the ring, you can use an action to expend 1 to 3 of its charges to make a ranged spell attack against one creature or object that isn’t being carried within 60 feet of you. The ring produces a spectral ram’s head and makes its attack roll with a +7 bonus. On a hit, for each charge you spend, the target takes [[/damage 2d10 force]] and is pushed 5 feet away from you.</p>",
-      "source": {}
+      "source": {
+        "fallback": ""
+      }
     },
     "activities": {},
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": []
+      "recovery": [],
+      "min": "",
+      "max": ""
     },
     "container": null,
     "quantity": 1,
@@ -30,7 +35,9 @@
       "value": 0,
       "units": "pound"
     },
-    "properties": []
+    "properties": [
+      "magical"
+    ]
   },
   "_id": "YRMGzSz2NvQAVl7H",
   "img": "systems/black-flag/artwork/types/gear.svg",
@@ -45,9 +52,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.042",
+    "systemVersion": "0.10.045",
     "createdTime": 1724987382405,
-    "modifiedTime": 1724987382405,
+    "modifiedTime": 1725904709808,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YRMGzSz2NvQAVl7H"
