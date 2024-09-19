@@ -722,11 +722,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		};
 
 		const chatData = {
-			user: game.user.id,
-			speaker: { actor: this, alias: this.name },
+			content: game.i18n.format(localizationString, localizationData),
+			flags: {
+				[game.system.id]: { messageType: "rest" }
+			},
 			flavor: game.i18n.localize(restConfig.label),
 			rolls: result.rolls,
-			content: game.i18n.format(localizationString, localizationData)
+			speaker: { actor: this, alias: this.name },
+			user: game.user.id
 		};
 		ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
 		return ChatMessage.create(chatData);
@@ -827,8 +830,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "ability-check",
-							ability: config.ability
+							messageType: "roll",
+							roll: {
+								ability: config.ability,
+								type: "ability-check"
+							}
 						}
 					}
 				}
@@ -853,11 +859,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after an ability check has been rolled.
 		 * @function blackFlag.postRollAbilityCheck
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
+		 * @param {object} data
+		 * @param {string} data.ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
 		 */
-		if (rolls?.length) Hooks.callAll("blackFlag.postRollAbilityCheck", this, rolls, config.ability);
+		if (rolls?.length)
+			Hooks.callAll("blackFlag.postRollAbilityCheck", rolls, { ability: config.ability, subject: this });
 
 		return rolls;
 	}
@@ -917,8 +925,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "ability-save",
-							ability: config.ability
+							messageType: "roll",
+							roll: {
+								ability: config.ability,
+								type: "ability-save"
+							}
 						}
 					}
 				}
@@ -943,11 +954,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after an ability save has been rolled.
 		 * @function blackFlag.postRollAbilitySave
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
+		 * @param {object} data
+		 * @param {string} data.ability - ID of the ability that was rolled as defined in `CONFIG.BlackFlag.abilities`.
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
 		 */
-		if (rolls?.length) Hooks.callAll("blackFlag.postRollAbilitySave", this, rolls, config.ability);
+		if (rolls?.length)
+			Hooks.callAll("blackFlag.postRollAbilitySave", rolls, { ability: config.ability, subject: this });
 
 		return rolls;
 	}
@@ -1023,7 +1036,10 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "death-save"
+							messageType: "roll",
+							roll: {
+								type: "death-save"
+							}
 						}
 					}
 				}
@@ -1046,7 +1062,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (!rolls?.length) return;
 		const roll = rolls[0];
 
-		const details = {};
+		const details = { subject: this };
 
 		// Save success
 		if (roll.total >= (roll.options.target ?? CONFIG.BlackFlag.deathSave.target)) {
@@ -1099,13 +1115,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * updates have been performed.
 		 * @function blackFlag.rollDeathSave
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the death saving throw has been rolled.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {object} details
-		 * @param {object} details.updates - Updates that will be applied to the actor as a result of this save.
-		 * @param {string} details.chatString - Localizable string displayed in the create chat message. If not set,
+		 * @param {object} data
+		 * @param {string} data.chatString - Localizable string displayed in the create chat message. If not set,
 		 *                                      then no chat message will be displayed.
-		 * @param {number} details.count - Number of rolls succeeded or failed to result in this message.
+		 * @param {number} data.count - Number of rolls succeeded or failed to result in this message.
+		 * @param {object} data.updates - Updates that will be applied to the actor as a result of this save.
+		 * @param {BlackFlagActor} data.subject - Actor for which the death saving throw has been rolled.
 		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
 		 */
 		if (Hooks.call("blackFlag.rollDeathSave", this, rolls, details) === false) return roll;
@@ -1132,10 +1148,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after a death saving throw has been rolled and the actor has been updated.
 		 * @function blackFlag.postRollDeathSave
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the death saving throw has been rolled.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
+		 * @param {object} data
+		 * @param {BlackFlagActor} data.subject - Actor for which the death saving throw has been rolled.
 		 */
-		Hooks.callAll("blackFlag.postRollDeathSave", this, rolls);
+		Hooks.callAll("blackFlag.postRollDeathSave", rolls, { subject: this });
 
 		return rolls;
 	}
@@ -1220,8 +1237,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "hit-die",
-							denomination: config.denomination
+							messageType: "roll",
+							roll: {
+								denomination: config.denomination,
+								type: "hit-die"
+							}
 						}
 					}
 				}
@@ -1257,14 +1277,25 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
 		 * @function blackFlag.rollHitDie
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {BasicRoll[]} rolls - The resulting rolls.
-		 * @param {object} updates - Updates that will be applied to the actor.
+		 * @param {object} data
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
+		 * @param {object} data.updates - Updates that will be applied to the actor.
 		 * @returns {boolean} - Explicitly return `false` to prevent updates from being performed.
 		 */
-		if (Hooks.call("blackFlag.rollHitDie", this, rolls, updates) === false) return rolls;
+		if (Hooks.call("blackFlag.rollHitDie", rolls, { subject: this, updates }) === false) return rolls;
 
 		if (!foundry.utils.isEmpty(updates)) await this.update(updates);
+
+		/**
+		 * A hook event that fires after a hit die has been rolled for an Actor and updates have been performed.
+		 * @function blackFlag.postRollHitDie
+		 * @memberof hookEvents
+		 * @param {BasicRoll[]} rolls - The resulting rolls.
+		 * @param {object} data
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
+		 */
+		Hooks.callAll("blackFlag.postRollHitDie", rolls, { subject: this });
 
 		return rolls;
 	}
@@ -1466,8 +1497,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "skill",
-							skill: rollConfig.skill
+							messageType: "roll",
+							roll: {
+								skill: rollConfig.skill,
+								type: "skill"
+							}
 						}
 					}
 				}
@@ -1492,11 +1526,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after a skill check has been rolled.
 		 * @function blackFlag.postRollSkill
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.skills`.
+		 * @param {object} data
+		 * @param {string} data.skill - ID of the skill that was rolled as defined in `CONFIG.BlackFlag.skills`.
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
 		 */
-		if (rolls?.length) Hooks.callAll("blackFlag.postRollSkill", this, rolls, config.skill);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollSkill", rolls, { skill: config.skill, subject: this });
 
 		return rolls;
 	}
@@ -1589,8 +1624,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "tool",
-							tool: rollConfig.tool
+							messageType: "roll",
+							roll: {
+								tool: rollConfig.tool,
+								type: "tool"
+							}
 						}
 					}
 				}
@@ -1615,11 +1653,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after a tool check has been rolled.
 		 * @function blackFlag.postRollTool
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} tool - ID of the tool that was rolled as defined in `CONFIG.BlackFlag.tools`.
+		 * @param {object} data
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
+		 * @param {string} data.tool - ID of the tool that was rolled as defined in `CONFIG.BlackFlag.tools`.
 		 */
-		if (rolls?.length) Hooks.callAll("blackFlag.postRollTool", this, rolls, config.tool);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollTool", rolls, { subject: this, tool: config.tool });
 
 		return rolls;
 	}
@@ -1717,8 +1756,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					speaker: ChatMessage.getSpeaker({ actor: this }),
 					flags: {
 						[game.system.id]: {
-							type: "vehicle",
-							vehicle: rollConfig.vehicle
+							messageType: "roll",
+							roll: {
+								type: "vehicle",
+								vehicle: rollConfig.vehicle
+							}
 						}
 					}
 				}
@@ -1743,11 +1785,11 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		 * A hook event that fires after a vehicle check has been rolled.
 		 * @function blackFlag.postRollVehicle
 		 * @memberof hookEvents
-		 * @param {BlackFlagActor} actor - Actor for which the roll has been performed.
 		 * @param {ChallengeRoll[]} rolls - The resulting rolls.
-		 * @param {string} vehicle - ID of the vehicle category that was rolled as defined in `CONFIG.BlackFlag.vehicles`.
+		 * @param {BlackFlagActor} data.subject - Actor for which the roll has been performed.
+		 * @param {string} data.vehicle - ID of the vehicle type that was rolled as defined in `CONFIG.BlackFlag.vehicles`.
 		 */
-		if (rolls?.length) Hooks.callAll("blackFlag.postRollVehicle", this, rolls, config.vehicle);
+		if (rolls?.length) Hooks.callAll("blackFlag.postRollVehicle", rolls, { subject: this, vehicle: config.vehicle });
 
 		return rolls;
 	}

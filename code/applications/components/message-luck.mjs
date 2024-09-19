@@ -101,8 +101,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 	 */
 	static shouldDisplayLuckInterface(message) {
 		// Grab the actor who performed the roll
-		// TODO: Adjust this logic to work fully with unlinked tokens
-		const actor = game.actors.get(message.speaker.actor);
+		const actor = message.getAssociatedActor();
 
 		// Must have rolls to apply luck
 		if (!message.rolls?.length) return false;
@@ -120,7 +119,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 		if (message.getFlag("core", "initiativeRoll")) return !!message.getCombatant();
 
 		// Only certain roll types can be modified by luck
-		const rollType = message.flags[game.system.id]?.type;
+		const rollType = message.getFlag(game.system.id, "roll.type");
 		return CONFIG.BlackFlag.luck.validRollTypes.has(rollType);
 	}
 
