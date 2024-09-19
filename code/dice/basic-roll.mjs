@@ -80,9 +80,10 @@ export default class BasicRoll extends Roll {
 	/**
 	 * Create a roll instance from the provided config.
 	 * @param {BasicRollConfiguration} config - Roll configuration data.
+	 * @param {BasicRollProcessConfiguration} [process={}] - Process configuration data.
 	 * @returns {BasicRoll}
 	 */
-	static create(config) {
+	static fromConfig(config, process = {}) {
 		const formula = (config.parts ?? []).join(" + ");
 		return new this(formula, config.data, config.options);
 	}
@@ -100,16 +101,14 @@ export default class BasicRoll extends Roll {
 		this.applyKeybindings(config, dialog, message);
 
 		let rolls;
-		if (dialog.configure !== false) {
+		if (dialog.configure === false) {
+			rolls = config.rolls?.map(c => this.fromConfig(c, config)) ?? [];
+		} else {
 			const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
 			rolls = await DialogClass.configure(config, dialog, message);
-		} else {
-			rolls = config.rolls?.map(config => this.create(config)) ?? [];
 		}
 
-		for (const roll of rolls) {
-			await roll.evaluate();
-		}
+		for (const roll of rolls) await roll.evaluate();
 
 		message = foundry.utils.expandObject(message);
 		const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;

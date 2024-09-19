@@ -243,7 +243,9 @@ export default class BasicRollConfigurationDialog extends BFApplication {
 	#buildRolls(config, formData) {
 		const RollType = this.rollType;
 		this.#rolls =
-			config.rolls?.map((config, index) => RollType.create(this._buildConfig(config, formData, index))) ?? [];
+			config.rolls?.map((config, index) =>
+				RollType.fromConfig(this._buildConfig(config, formData, index), this.config)
+			) ?? [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

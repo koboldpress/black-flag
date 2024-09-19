@@ -62,12 +62,8 @@ export default class ChallengeRoll extends BasicRoll {
 	/*         Static Construction         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Create a roll instance from the provided config.
-	 * @param {ChallengeRollConfiguration} config - Roll configuration data.
-	 * @returns {ChallengeRoll[]}
-	 */
-	static create(config) {
+	/** @override */
+	static fromConfig(config, process = {}) {
 		const formula = [new CONFIG.Dice.ChallengeDie().formula].concat(config.parts ?? []).join(" + ");
 		return new this(formula, config.data, config.options);
 	}
@@ -109,7 +105,7 @@ export default class ChallengeRoll extends BasicRoll {
 		dialog.configure ??= !Object.values(keys).some(k => k);
 
 		// Determine advantage mode
-		for (const roll of config.rolls) {
+		for (const roll of config.rolls ?? []) {
 			roll.options ??= {};
 			const advantage = roll.options.advantage || keys.advantage;
 			const disadvantage = roll.options.disadvantage || keys.disadvantage;

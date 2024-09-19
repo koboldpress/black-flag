@@ -1,16 +1,11 @@
 import BasicRollConfigurationDialog from "./basic-configuration-dialog.mjs";
 
 /**
- * @typedef {BasicRollConfigurationDialogOptions} ChallengeRollConfigurationDialogOptions
- * @property {boolean} [chooseAbility=false] - Should the ability selector be shown?
- */
-
-/**
  * Roll configuration dialog for Challenge Rolls.
  *
  * @param {ChallengeRollProcessConfiguration} [config={}] - Initial roll configuration.
  * @param {BasicRollMessageConfiguration} [message={}] - Message configuration.
- * @param {ChallengeRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
+ * @param {BasicRollConfigurationDialogOptions} [options={}] - Dialog rendering options.
  */
 export default class ChallengeRollConfigurationDialog extends BasicRollConfigurationDialog {
 	/** @override */
@@ -63,7 +58,7 @@ export default class ChallengeRollConfigurationDialog extends BasicRollConfigura
 	/*            Roll Handling            */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
+	/** @override */
 	_finalizeRolls(action) {
 		const rolls = [];
 		for (const roll of this.rolls) {

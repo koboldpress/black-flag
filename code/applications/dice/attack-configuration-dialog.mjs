@@ -1,7 +1,7 @@
 import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.mjs";
 
 /**
- * @typedef {ChallengeRollConfigurationDialogOptions} AttackRollConfigurationDialogOptions
+ * @typedef {BasicRollConfigurationDialogOptions} AttackRollConfigurationDialogOptions
  * @property {FormSelectOption[]} ammunitionOptions - Ammunition that can be used with the attack.
  * @property {FormSelectOption[]} attackModes - Options for the attack mode.
  * @property {Function} buildConfig - Method for re-building roll after configuration changes.

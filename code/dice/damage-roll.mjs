@@ -71,6 +71,26 @@ export default class DamageRoll extends BasicRoll {
 	/*         Static Construction         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @inheritDoc */
+	static fromConfig(config, process = {}) {
+		const roll = super.fromConfig(config, process);
+		if (process.critical) roll.configureRoll({ critical: process.critical });
+		return roll;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static async build(config = {}, dialog = {}, message = {}) {
+		config.critical ??= {};
+		config.critical.maximizeDamage ??= game.settings.get(game.system.id, "criticalMaximizeDamage");
+		config.critical.multiplyDice ??= game.settings.get(game.system.id, "criticalMultiplyDice");
+		config.critical.multiplyNumeric ??= game.settings.get(game.system.id, "criticalMultiplyNumeric");
+		return super.build(config, dialog, message);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Determines whether the roll should be fast forwarded and what the default critical mode should be.
 	 * @param {DamageRollProcessConfiguration} config - Roll configuration data.
@@ -91,10 +111,6 @@ export default class DamageRoll extends BasicRoll {
 		for (const roll of config.rolls) {
 			roll.options ??= {};
 			roll.options.isCritical = !!roll.options.isCritical || keys.critical;
-			roll.options.critical ??= {};
-			roll.options.critical.maximizeDamage ??= game.settings.get("black-flag", "criticalMaximizeDamage");
-			roll.options.critical.multiplyDice ??= game.settings.get("black-flag", "criticalMultiplyDice");
-			roll.options.critical.multiplyNumeric ??= game.settings.get("black-flag", "criticalMultiplyNumeric");
 		}
 	}
 

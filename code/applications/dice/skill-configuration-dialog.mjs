@@ -1,7 +1,7 @@
 import ChallengeRollConfigurationDialog from "./challenge-configuration-dialog.mjs";
 
 /**
- * @typedef {ChallengeRollConfigurationDialogOptions} SkillRollConfigurationDialogOptions
+ * @typedef {BasicRollConfigurationDialogOptions} SkillRollConfigurationDialogOptions
  * @property {boolean} chooseAbility - Should the ability be selectable?
  */
 
