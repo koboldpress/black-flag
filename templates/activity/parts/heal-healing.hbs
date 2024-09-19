@@ -3,8 +3,10 @@
 		<blackFlag-damageList name="system.healing" single>
 			<ul class="configuration-list">
 				<li>
-					{{> "systems/black-flag/templates/activity/parts/damage-part.hbs"
-					    damage=source.system.healing prefix="$." types=CONFIG.healingTypes.localized }}
+					<fieldset class="unfieldset">
+						{{> "systems/black-flag/templates/activity/parts/damage-part.hbs"
+					    	data=source.system.healing prefix="$." typeOptions=CONFIG.healingTypes.localized }}
+					</fieldset>
 				</li>
 			</ul>
 		</blackFlag-damageList>
