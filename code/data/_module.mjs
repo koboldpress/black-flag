@@ -4,7 +4,7 @@ import log from "../utils/logging.mjs";
 /**
  * Register the provided data models with Foundry using metadata.
  * @param {typeof Document} documentType - Document type to which these models will be registered.
- * @param {{[key: string]: SystemDataModel}} [models] - Models to register grouped by type name.
+ * @param {Record<string, SystemDataModel>} [models] - Models to register grouped by type name.
  * @returns {void}
  */
 export function registerDataModels(documentType, models) {
@@ -37,6 +37,7 @@ export function registerDataModels(documentType, models) {
 }
 
 export * as abstract from "./abstract/_module.mjs";
+export * as activeEffect from "./active-effect/_module.mjs";
 export * as activity from "./activity/_module.mjs";
 export * as actor from "./actor/_module.mjs";
 export * as advancement from "./advancement/_module.mjs";

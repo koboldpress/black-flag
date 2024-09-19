@@ -34,6 +34,14 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Is this actor currently preparing embedded documents?
+	 * @type {boolean}
+	 */
+	_embeddedPreparation = false;
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Collection of notifications that should be displayed on the actor sheet.
 	 */
 	notifications = this.notifications;
@@ -63,7 +71,19 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	/** @inheritDoc */
 	prepareEmbeddedDocuments() {
 		this.sourcedItems = new Map();
+		this._embeddedPreparation = true;
 		super.prepareEmbeddedDocuments();
+		this._embeddedPreparation = false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	*allApplicableEffects() {
+		for (const effect of super.allApplicableEffects()) {
+			if (effect.type === "enchantment") continue;
+			yield effect;
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

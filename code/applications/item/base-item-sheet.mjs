@@ -32,6 +32,7 @@ export default class BaseItemSheet extends ItemSheet {
 
 		context.CONFIG = CONFIG.BlackFlag;
 		context.flags = this.document.flags;
+		context.name = this.document._source.name;
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
 

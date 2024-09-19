@@ -46,7 +46,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 		}
 
 		// Base
-		const category = context.system.validCategories?.[context.system.type.category];
+		const category = context.system.validCategories?.[context.source.type.category];
 		if (category?.children)
 			context.baseItems = {
 				options: sortObjectEntries(
@@ -54,7 +54,7 @@ export default class EquipmentSheet extends BaseItemSheet {
 						if (
 							!foundry.utils.hasProperty(this.item, "system.type.value") ||
 							!config.type ||
-							config.type === this.item.system.type.value
+							config.type === context.source.type.value
 						)
 							obj[key] = makeLabel(config);
 						return obj;
@@ -64,12 +64,12 @@ export default class EquipmentSheet extends BaseItemSheet {
 			};
 
 		context.options = Object.entries(context.system.validOptions ?? {}).reduce((obj, [k, o]) => {
-			obj[k] = { label: game.i18n.localize(o.label), selected: context.system.options.has(k) };
+			obj[k] = { label: game.i18n.localize(o.label), selected: context.source.options.includes(k) };
 			return obj;
 		}, {});
 
 		context.properties = Object.entries(context.system.validProperties ?? {}).reduce((obj, [k, label]) => {
-			obj[k] = { label, selected: context.system.properties.has(k) };
+			obj[k] = { label, selected: context.source.properties.includes(k) };
 			return obj;
 		}, {});
 

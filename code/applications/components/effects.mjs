@@ -116,7 +116,18 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 */
 	static prepareItemContext(effects) {
 		const context = {
-			effects: []
+			base: {
+				id: "base",
+				label: "BF.Effect.Label[other]",
+				effects: [],
+				show: { duration: true, source: false, transfer: true }
+			},
+			enchantment: {
+				id: "enchantment",
+				label: "BF.Effect.Type.Enchantment[other]",
+				effects: [],
+				show: { duration: false, source: true, transfer: false }
+			}
 		};
 
 		for (const effect of effects) {
@@ -124,7 +135,8 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				...effect,
 				id: effect.id
 			};
-			context.effects.push(data);
+			if (effect.type === "enchantment") context.enchantment.effects.push(data);
+			else context.base.effects.push(data);
 		}
 
 		return context;
@@ -199,19 +211,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 
 		switch (action) {
 			case "add":
-				const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
-				const isItem = this.document instanceof Item;
-				return this.document.createEmbeddedDocuments("ActiveEffect", [
-					{
-						label: isItem ? this.document.name : game.i18n.localize("BF.Effect.New"),
-						icon: isItem ? this.document.img : "icons/svg/aura.svg",
-						origin: this.document.uuid,
-						duration: {
-							rounds: section === "temporary" ? 1 : undefined
-						},
-						disabled: section === "inactive"
-					}
-				]);
+				return this._onAddEffect(target);
 			case "edit":
 			case "view":
 				return effect.sheet.render(true);
@@ -228,6 +228,31 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 			default:
 				return log(`Invalid effect action type clicked ${action}.`, { level: "warn" });
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle creating a new effect within a certain section.
+	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
+	 * @protected
+	 */
+	_onAddEffect(target) {
+		const section = event.target.closest("[data-section-id]")?.dataset.sectionId;
+		const isEnchantment = section === "enchantment";
+		const isItem = this.document instanceof Item;
+		this.document.createEmbeddedDocuments("ActiveEffect", [
+			{
+				type: isEnchantment ? "enchantment" : "base",
+				name: isItem ? this.document.name : game.i18n.localize("BF.Effect.New"),
+				icon: isItem ? this.document.img : "icons/svg/aura.svg",
+				origin: isEnchantment ? undefined : this.document.uuid,
+				duration: {
+					rounds: section === "temporary" ? 1 : undefined
+				},
+				disabled: section === "inactive"
+			}
+		]);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

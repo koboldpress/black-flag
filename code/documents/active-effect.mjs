@@ -46,7 +46,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/** @override */
 	get isSuppressed() {
-		if (!this.parent?.isEmbedded) return false;
+		if (!this.parent?.isEmbedded || this.type === "enchantment") return false;
 		return this.suppressionReasons.length > 0;
 	}
 

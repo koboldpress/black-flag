@@ -122,8 +122,12 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/** @inheritDoc */
 	clone(data = {}, options = {}) {
 		if (options.save) return super.clone(data, options);
+		if (this.parent) this.parent._embeddedPreparation = true;
 		const item = super.clone(data, options);
-		if (item.parent) item.system.prepareFinalData?.();
+		if (item.parent) {
+			item.parent._embeddedPreparation = false;
+			item.system.prepareFinalData?.();
+		}
 		return item;
 	}
 
@@ -163,6 +167,54 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				e.prepareData();
 			}
 		}
+		if (!this.actor || this.actor._embeddedPreparation) this.applyActiveEffects();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Get all ActiveEffects that may apply to this Item.
+	 * @yields {BlackFlagActiveEffect}
+	 * @returns {Generator<BlackFlagActiveEffect, void, void>}
+	 */
+	*allApplicableEffects() {
+		for (const effect of this.effects) {
+			if (effect.type === "enchantment") yield effect;
+		}
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Apply any transformation to the Item data which are caused by enchantment Effects.
+	 */
+	applyActiveEffects() {
+		const overrides = {};
+
+		// Organize non-disabled effects by their application priority
+		const changes = [];
+		for (const effect of this.allApplicableEffects()) {
+			if (!effect.active) continue;
+			changes.push(
+				...effect.changes.map(change => {
+					const c = foundry.utils.deepClone(change);
+					c.effect = effect;
+					c.priority ??= c.mode * 10;
+					return c;
+				})
+			);
+		}
+		changes.sort((a, b) => a.priority - b.priority);
+
+		// Apply all changes
+		for (const change of changes) {
+			if (!change.key) continue;
+			const changes = change.effect.apply(this, change);
+			Object.assign(overrides, changes);
+		}
+
+		// Expand the set of final overrides
+		this.overrides = foundry.utils.expandObject(overrides);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

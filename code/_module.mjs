@@ -52,6 +52,7 @@ Hooks.once("init", function () {
 	config._configureStatusEffects();
 	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();
+	data.registerDataModels(ActiveEffect, { enchantment: data.activeEffect.EnchantmentData });
 	data.registerDataModels(Actor);
 	data.registerDataModels(Item);
 	data.registerDataModels(JournalEntryPage);

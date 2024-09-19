@@ -1,0 +1,79 @@
+<section data-section-id="{{ section.id }}">
+	<header>
+		<h2>{{ localize section.label }}</h2>
+		{{#if @root.editable}}
+			<div class="controls">
+				<button type="button" class="link-button" data-action="add"
+				        data-tooltip="BF.Effect.Action.Add" aria-label="{{ localize 'BF.Effect.Action.Add' }}">
+					<i class="fa-solid fa-plus" inert></i>
+				</button>
+			</div>
+		{{/if}}
+	</header>
+
+	<ol class="items-list effects-lists unlist">
+		<li class="item-category effect-category" data-section-id="{{ section.id }}">
+			<div class="header">
+				<h3 class="effect-name">{{ localize "Name" }}</h3>
+				{{#if section.show.duration}}
+					<div class="effect-duration">{{ localize "BF.Effect.Duration" }}</div>
+				{{/if}}
+				{{#if section.show.source}}
+					<div class="effect-source">{{ localize "BF.Effect.Source" }}</div>
+				{{/if}}
+				<div class="effect-controls"></div>
+			</div>
+	
+			<ol class="item-list effect-list">
+				{{#each section.effects}}
+					<li class="item effect-entry" data-effect-id="{{ id }}">
+						<div class="item-name effect-name">
+							<figure class="icon">
+								<img class="item-image" src="{{ img }}">
+							</figure>
+							<h4>{{ name }}</h4>
+						</div>
+						{{#if ../section.show.duration}}
+							<div class="effect-duration">{{ duration.label }}</div>
+						{{/if}}
+						{{#if ../section.show.source}}
+							<div class="effect-source">{{ source }}</div>
+						{{/if}}
+						<div class="item-controls effect-controls">
+							<button class="link-button" type="button" data-action="toggle" {{ disabled (not @root.editable) }}
+							        data-tooltip="BF.Effect.Action.{{ifThen disabled 'Enable' 'Disable'}}"
+							        aria-label="{{ localize 'BF.Effect.Enabled' }}"
+							        aria-pressed="{{ ifThen disabled 'false' 'true' }}">
+								<i class="fa-solid fa-toggle-{{ifThen disabled 'off' 'on'}}" inert></i>
+							</button>
+							{{#if ../section.show.transfer}}
+								<button class="link-button" type="button" data-action="transfer" {{ disabled (not @root.editable) }}
+								        data-tooltip="BF.Effect.Action.{{ ifThen transfer 'DontTransfer' 'Transfer' }}"
+								        aria-label="{{ localize 'BF.Effect.Transferred' }}"
+								        aria-pressed="{{ ifThen transfer 'true' 'false' }}">
+									<i class="{{ ifThen transfer 'fa-solid fa-square-arrow-up-right' 'fa-regular fa-square' }}" inert></i>
+								</button>
+							{{/if}}
+							{{#if @root.editable}}
+								<button class="link-button" type="button" data-action="edit"
+								        data-tooltip="BF.Effect.Action.Edit" aria-label="{{ localize 'BF.Effect.Action.Edit' }}">
+									<i class="fa-solid fa-edit" inert></i>
+								</button>
+								<button class="link-button" type="button" data-action="delete"
+								        data-tooltip="BF.Effect.Action.Delete"
+								        aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
+									<i class="fa-solid fa-trash" inert></i>
+								</button>
+							{{else}}
+								<button class="link-button" type="button" data-action="view"
+								        data-tooltip="BF.Effect.Action.View" aria-label="{{ localize 'BF.Effect.Action.View' }}">
+									<i class="fa-solid fa-eye" inert></i>
+								</button>
+							{{/if}}
+						</div>
+					</li>
+				{{/each}}
+			</ol>
+		</li>
+	</ol>
+</section>
