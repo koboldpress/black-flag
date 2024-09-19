@@ -26,12 +26,12 @@ export default class SpellSheet extends BaseItemSheet {
 		context.effects = EffectsElement.prepareItemContext(this.item.effects);
 
 		context.components = Object.entries(CONFIG.BlackFlag.spellComponents).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: context.system.components.required.has(k) };
+			obj[k] = { label: game.i18n.localize(p.label), selected: context.source.components.required.includes(k) };
 			return obj;
 		}, {});
 
 		context.tags = Object.entries(CONFIG.BlackFlag.spellTags).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: context.system.tags.has(k) };
+			obj[k] = { label: game.i18n.localize(p.label), selected: context.source.tags.includes(k) };
 			return obj;
 		}, {});
 
@@ -39,9 +39,9 @@ export default class SpellSheet extends BaseItemSheet {
 			range: context.source.range,
 			target: context.source.target
 		};
-		context.activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.system.casting.type });
+		context.activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.source.casting.type });
 		context.durationOptions = CONFIG.BlackFlag.durationOptions({
-			chosen: context.system.duration.units,
+			chosen: context.source.duration.units,
 			isSpell: true
 		});
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();

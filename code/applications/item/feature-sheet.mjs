@@ -39,16 +39,16 @@ export default class FeatureSheet extends BaseItemSheet {
 		if (this.document.type === "feature") {
 			context.type.categories = CONFIG.BlackFlag.featureCategories.localized;
 
-			const featureCategory = CONFIG.BlackFlag.featureCategories[context.system.type.category];
-			const id = new Set([context.system.identifier.associated]);
+			const featureCategory = CONFIG.BlackFlag.featureCategories[context.source.type.category];
+			const id = new Set([context.source.identifier.associated]);
 			if (featureCategory?.sources)
 				context.type.categorySources = CONFIG.BlackFlag.registration.groupedOptions(featureCategory.sources, id);
-			const featureType = featureCategory?.children?.[context.system.type.value];
+			const featureType = featureCategory?.children?.[context.source.type.value];
 			if (featureType?.sources)
 				context.type.typeSources = CONFIG.BlackFlag.registration.groupedOptions(featureType.sources, id);
 
 			if (
-				(featureCategory && ["class", "lineage", "heritage"].includes(context.system.type.category)) ||
+				(featureCategory && ["class", "lineage", "heritage"].includes(context.source.type.category)) ||
 				featureCategory?.children
 			) {
 				context.type.types = {
@@ -56,11 +56,11 @@ export default class FeatureSheet extends BaseItemSheet {
 						type: game.i18n.localize(`${featureCategory.localization}[one]`)
 					}),
 					options: featureCategory?.children?.localized ?? null,
-					selected: context.system.type.value || context.system.identifier.associated
+					selected: context.source.type.value || context.source.identifier.associated
 				};
 			}
 
-			if (context.system.type.category === "class" && (featureType || context.system.identifier.associated)) {
+			if (context.source.type.category === "class" && (featureType || context.source.identifier.associated)) {
 				context.type.displayLevel = featureType?.level !== false;
 				context.type.fixedLevel = featureType?.level;
 			}
