@@ -197,24 +197,27 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		context.tab = context.tabs.effect;
 
 		if (context.activity.system.effects) {
-			const appliedEffects = new Set(context.activity.system.effects?.map(e => e._id) ?? []);
+			const appliedEffects = new Set(context.activity.system.effects?.map(e => e?._id) ?? []);
 			context.allEffects = this.item.effects.map(effect => ({
 				value: effect.id,
 				label: effect.name,
 				selected: appliedEffects.has(effect.id)
 			}));
-			context.appliedEffects = context.activity.system.effects.map((data, index) => {
-				const effect = {
-					data,
-					effect: data.effect,
-					fields: this.activity.system.schema.fields.effects.element.fields,
-					link: data.effect.toAnchor().outerHTML,
-					prefix: `system.effects.${index}.`,
-					source: context.source.system.effects[index] ?? data,
-					additionalSettings: null
-				};
-				return this._prepareAppliedEffectContext(context, effect);
-			});
+			context.appliedEffects = context.activity.system.effects
+				.map((data, index) => {
+					if (!data.effect) return null;
+					const effect = {
+						data,
+						effect: data.effect,
+						fields: this.activity.system.schema.fields.effects.element.fields,
+						link: data.effect.toAnchor().outerHTML,
+						prefix: `system.effects.${index}.`,
+						source: context.source.system.effects[index] ?? data,
+						additionalSettings: null
+					};
+					return this._prepareAppliedEffectContext(context, effect);
+				})
+				.filter(_ => _);
 		}
 
 		context.denominationOptions = [
