@@ -15,18 +15,88 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this cloak, you have advantage on DEX (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak’s edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.</p>\n\t\t\t\t\t\t\t\t<p>While wearing the cloak in an area of dim light or darkness, you can use your action to cast polymorph on yourself, transforming into a bat. While you are in the form of the bat, you retain your INT, WIS, and CHA scores. The cloak can’t be used this way again until the next dusk.</p>",
+      "value": "<p>While wearing this cloak, you have advantage on DEX (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak’s edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.</p><p>While wearing the cloak in an area of dim light or darkness, you can use your action to cast <em>polymorph</em> on yourself, transforming into a bat. While you are in the form of the <strong>bat</strong>, you retain your INT, WIS, and CHA scores. The cloak can’t be used this way again until the next dusk.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "FBnKUoZPdFTJXuBQ": {
+        "type": "utility",
+        "_id": "FBnKUoZPdFTJXuBQ",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self"
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Polymorph into Bat",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "container": null,
     "quantity": 1,
@@ -39,8 +109,52 @@
     ]
   },
   "_id": "7nYnegP8YbE9lEXW",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/equipment/back/cloak-layered-tattered-purple.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Cloak of the Bat",
+      "origin": "Compendium.black-flag.items.Item.7nYnegP8YbE9lEXW",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/back/cloak-layered-tattered-purple.webp",
+      "_id": "A6CIJJIbl8d7FtGt",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"dexterity\" }, { \"k\": \"skill\", \"v\": \"stealth\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on DEX (Stealth) checks.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "<p>While wearing this cloak, you have advantage on DEX (Stealth) checks.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726799650348,
+        "modifiedTime": 1726799695582,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!7nYnegP8YbE9lEXW.A6CIJJIbl8d7FtGt"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -51,9 +165,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.046",
     "createdTime": 1724983764866,
-    "modifiedTime": 1725904231584,
+    "modifiedTime": 1726799745302,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!7nYnegP8YbE9lEXW"

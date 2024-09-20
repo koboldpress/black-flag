@@ -15,18 +15,82 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p>\n\t\t\t\t\t\t\t\t<p>• You have resistance to poison damage.</p>\n\t\t\t\t\t\t\t\t<p>• You have a climbing speed equal to your walking speed.</p>\n\t\t\t\t\t\t\t\t<p>• You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p>\n\t\t\t\t\t\t\t\t<p>• You can’t be caught in webs of any sort and can move through webs as if they were difficult terrain.</p>\n\t\t\t\t\t\t\t\t<p>• You can use an action to cast the web spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can’t be used again until the next dawn.</p>",
+      "value": "<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p><ul><li><p>You have resistance to poison damage.</p></li><li><p>You have a climbing speed equal to your walking speed.</p></li><li><p>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p></li><li><p>You can’t be caught in webs of any sort and can move through webs as if they were difficult terrain.</p></li><li><p>You can use an action to cast the <em>web</em> spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can’t be used again until the next dawn.</p></li></ul>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "lGetq6PztoChr0tC": {
+        "type": "utility",
+        "_id": "lGetq6PztoChr0tC",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Cast Web",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "container": null,
     "quantity": 1,
@@ -39,8 +103,58 @@
     ]
   },
   "_id": "ugWH1CTAVyK78jq0",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/equipment/back/cloak-collared-blue-iron.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Cloak of Arachnida",
+      "origin": "Compendium.black-flag.items.Item.ugWH1CTAVyK78jq0",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/back/cloak-collared-blue-iron.webp",
+      "_id": "GLjIBKrfO1J8ubhI",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        },
+        {
+          "key": "system.traits.movement.types.climb",
+          "mode": 4,
+          "value": "@base",
+          "priority": null
+        }
+      ],
+      "description": "<p>While wearing this cloak, you have resistance to poison damage, a climbing speed equal to your walking speed, and can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726799144409,
+        "modifiedTime": 1726799303924,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ugWH1CTAVyK78jq0.GLjIBKrfO1J8ubhI"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -51,9 +165,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.046",
     "createdTime": 1724983714446,
-    "modifiedTime": 1725904239613,
+    "modifiedTime": 1726799340330,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ugWH1CTAVyK78jq0"

@@ -15,18 +15,728 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This cube is about 1 inch across. Each face has a distinct marking that can be pressed. The cube starts with 36 charges.</p>\n\t\t\t\t\t\t\t\t<p>You can use an action to press one of the cube’s faces, expending a number of charges based on the chosen face, as shown in the Cube of Force Faces table. Each face has a different effect. If the cube has insufficient charges remaining, nothing happens.</p>\n\t\t\t\t\t\t\t\t<p>Otherwise, a barrier of invisible force springs into existence, forming a cube 15 feet on a side. The barrier is centered on you, moves with you, and lasts for 1 minute, until you use an action to press the cube’s sixth face, or the cube runs out of charges.</p>\n\t\t\t\t\t\t\t\t<p>You can change the barrier’s effect by pressing a different cube face and expending the requisite number of charges, resetting the duration. When you press a different face, the current face effect ends.</p>\n\t\t\t\t\t\t\t\t<p>If your movement causes the barrier to come into contact with a solid object that can’t pass through the cube, you can’t move any closer to that object as long as the barrier remains.</p>\n\t\t\t\t\t\t\t\t<p>TABLE</p>\n\t\t\t\t\t\t\t\t<p>The cube loses charges when the barrier is targeted by certain spells or comes into contact with certain spell or magic item effects, as shown on the Cube of Force Charge Loss table.</p>\n\t\t\t\t\t\t\t\t<p>TABLE</p>\n\t\t\t\t\t\t\t\t<p>The cube regains 1d20 expended charges daily at dawn.</p>",
+      "value": "<p>This cube is about 1 inch across. Each face has a distinct marking that can be pressed. The <em>cube</em> starts with 36 charges.</p><p>You can use an action to press one of the <em>cube’s</em> faces, expending a number of charges based on the chosen face, as shown in the <strong>Cube of Force Faces</strong> table. Each face has a different effect. If the cube has insufficient charges remaining, nothing happens.</p><p>Otherwise, a barrier of invisible force springs into existence, forming a cube 15 feet on a side. The barrier is centered on you, moves with you, and lasts for 1 minute, until you use an action to press the <em>cube’s</em> sixth face, or the cube runs out of charges.</p><p>You can change the barrier’s effect by pressing a different cube face and expending the requisite number of charges, resetting the duration. When you press a different face, the current face effect ends.</p><p>If your movement causes the barrier to come into contact with a solid object that can’t pass through the cube, you can’t move any closer to that object as long as the barrier remains.</p><table><caption>Cube of Force Faces</caption><thead><tr><th scope=\"col\">Face</th><th scope=\"col\">Charges</th><th scope=\"col\">Effect</th></tr></thead><tbody><tr><th scope=\"row\">1</th><td>1</td><td>Gases, wind, and fog can’t pass through the barrier.</td></tr><tr><th scope=\"row\">2</th><td>2</td><td>Nonliving matter can’t pass through the barrier. Walls, floors, and ceilings can pass through at your discretion.</td></tr><tr><th scope=\"row\">3</th><td>3</td><td>Living matter can’t pass through the barrier.</td></tr><tr><th scope=\"row\">4</th><td>4</td><td>Spell effects can’t pass through the barrier.</td></tr><tr><th scope=\"row\">5</th><td>5</td><td>Nothing can pass through the barrier. Walls, floors, and ceilings can pass through at your discretion.</td></tr><tr><th scope=\"row\">6</th><td>0</td><td>The barrier deactivates.</td></tr></tbody></table><p>The cube loses charges when the barrier is targeted by certain spells or comes into contact with certain spell or magic item effects, as shown on the <strong>Cube of Force Charge Loss</strong> table.</p><table><caption>Cube of Force Charge Loss</caption><thead><tr><th scope=\"col\">Spell or Item</th><th scope=\"col\">Charges Lost</th></tr></thead><tbody><tr><th scope=\"row\">Disintegrate</th><td>[[/r 1d12]]</td></tr><tr><th scope=\"row\">Horn of blasting</th><td>[[/r 1d10]]</td></tr><tr><th scope=\"row\">Passwall</th><td>[[/r 1d6]]</td></tr><tr><th scope=\"row\">Prismatic spray</th><td>[[/r 1d20]]</td></tr><tr><th scope=\"row\">Wall of fire</th><td>[[/r 1d4]]</td></tr></tbody></table><p>The <em>cube</em> regains [[/r 1d20]] expended charges daily at dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "I0VApKAnIvBcU6zx": {
+        "type": "utility",
+        "_id": "I0VApKAnIvBcU6zx",
+        "description": "<p>Gases, wind, and fog can’t pass through the barrier.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 1",
+        "img": ""
+      },
+      "ZWmBMFUqSGvzg9rp": {
+        "type": "utility",
+        "_id": "ZWmBMFUqSGvzg9rp",
+        "description": "<p>Nonliving matter can’t pass through the barrier. Walls, floors, and ceilings can pass through at your discretion.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "2",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 2",
+        "img": ""
+      },
+      "a5I1oJ2qdq4HX5mp": {
+        "type": "utility",
+        "_id": "a5I1oJ2qdq4HX5mp",
+        "description": "<p>Living matter can’t pass through the barrier.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "3",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 3",
+        "img": ""
+      },
+      "yksQMqhjosxsJL5f": {
+        "type": "utility",
+        "description": "<p>Spell effects can’t pass through the barrier.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "4",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 4",
+        "img": "",
+        "_id": "yksQMqhjosxsJL5f"
+      },
+      "za6hxCP0jWs4uUM2": {
+        "type": "utility",
+        "description": "<p>Nothing can pass through the barrier. Walls, floors, and ceilings can pass through at your discretion.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "5",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 5",
+        "img": "",
+        "_id": "za6hxCP0jWs4uUM2"
+      },
+      "vSk2kgCRWF5a9wRS": {
+        "type": "utility",
+        "description": "<p>The barrier deactivates.</p>",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false,
+          "value": ""
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Press Face 6",
+        "img": "",
+        "_id": "vSk2kgCRWF5a9wRS"
+      },
+      "IPCTGlGzt0YXjff2": {
+        "type": "utility",
+        "_id": "IPCTGlGzt0YXjff2",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When the barrier is targeted by Disintegrate"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1d12",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Remove Disintegrate Charges",
+        "img": ""
+      },
+      "ojcsIpRFnz8pwtod": {
+        "type": "utility",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When the barrier is targeted by a Horn of Blasting"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1d10",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Remove Horn of Blasting Charges",
+        "img": "",
+        "_id": "ojcsIpRFnz8pwtod"
+      },
+      "5ZlLuX87IMGHIN4Y": {
+        "type": "utility",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When the barrier is targeted by Passwall"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1d6",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Remove Passwall Charges",
+        "img": "",
+        "_id": "5ZlLuX87IMGHIN4Y"
+      },
+      "sq8IJMhM3X5dcPwS": {
+        "type": "utility",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When the barrier is targeted by Prismatic Spray"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1d20",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Remove Prismatic Spray Charges",
+        "img": "",
+        "_id": "sq8IJMhM3X5dcPwS"
+      },
+      "K1VA6CUNZePNN23a": {
+        "type": "utility",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When the barrier is targeted by Wall of Fire"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1d4",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Remove Wall of Fire Charges",
+        "img": "",
+        "_id": "K1VA6CUNZePNN23a"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d20"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "36"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +749,7 @@
     ]
   },
   "_id": "mRxrTm0f5lLNwvTY",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/sundries/gaming/dice-runed-brown.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
@@ -51,9 +761,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.046",
     "createdTime": 1724983820384,
-    "modifiedTime": 1725904219842,
+    "modifiedTime": 1726800480690,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!mRxrTm0f5lLNwvTY"

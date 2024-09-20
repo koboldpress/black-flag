@@ -39,8 +39,131 @@
     }
   },
   "_id": "unAJhBXeHhM40KDg",
-  "img": "systems/black-flag/artwork/types/feature.svg",
-  "effects": [],
+  "img": "icons/weapons/axes/axe-double-white-red.webp",
+  "effects": [
+    {
+      "type": "enchantment",
+      "name": "Berserker Axe",
+      "origin": null,
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/weapons/axes/axe-double-white-red.webp",
+      "_id": "wn6rg0O4IIgrE5O1",
+      "system": {},
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "Berserker {}",
+          "priority": null
+        },
+        {
+          "key": "system.description.value",
+          "mode": 2,
+          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. In addition, while you are attuned to this weapon, your hit point maximum increases by 1 for each level you have attained.</p> <p><em><strong>Curse.</strong></em> This axe is cursed, and becoming attuned to it extends the curse to you. As long as you remain cursed, you are unwilling to part with the axe, keeping it within reach at all times. You also have disadvantage on attack rolls with weapons other than this one, unless no foe is within 60 feet of you that you can see or hear.</p> <p>When a hostile creature damages you while the axe is in your possession, you must succeed on a [[/save 15 WIS]] or go berserk. While berserk, you must use your action each round to attack the creature nearest to you with the axe. If you can make extra attacks as part of the Attack action, you use those extra attacks, moving to attack the next nearest creature after you fell your current target. If you have multiple possible targets, you attack one at random. You are berserk until you start your turn with no creatures within 60 feet of you that you can see or hear.</p>",
+          "priority": null
+        },
+        {
+          "key": "system.price.value",
+          "mode": 5,
+          "value": "5000",
+          "priority": null
+        },
+        {
+          "key": "system.price.denomination",
+          "mode": 5,
+          "value": "gp",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "magical",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 2,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.attunement.value",
+          "mode": 5,
+          "value": "required",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726798580036,
+        "modifiedTime": 1726798692457,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!unAJhBXeHhM40KDg.wn6rg0O4IIgrE5O1"
+    },
+    {
+      "type": "base",
+      "name": "Berserker Hit Points",
+      "origin": "Compendium.black-flag.items.Item.unAJhBXeHhM40KDg",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/weapons/axes/axe-double-white-red.webp",
+      "_id": "LQfBElvXOaWGraHs",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.attributes.hp.bonuses.level",
+          "mode": 2,
+          "value": "1",
+          "priority": null
+        }
+      ],
+      "description": "<p>While you are attuned to this weapon, your hit point maximum increases by 1 for each level you have attained.</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726798688520,
+        "modifiedTime": 1726798746228,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!unAJhBXeHhM40KDg.LQfBElvXOaWGraHs"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -53,7 +176,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.046",
     "createdTime": 1726789062315,
-    "modifiedTime": 1726789076633,
+    "modifiedTime": 1726798641534,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!unAJhBXeHhM40KDg"

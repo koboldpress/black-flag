@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Dagger of Venom",
   "type": "weapon",
-  "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+  "img": "icons/weapons/daggers/dagger-double-skull-pink.webp",
   "system": {
     "activities": {
       "G0M1CaGJdPQD6pBg": {
@@ -58,6 +58,93 @@
           "consumeQuantity": false,
           "recovery": []
         }
+      },
+      "PgngX2sLN7JglfCl": {
+        "type": "save",
+        "_id": "PgngX2sLN7JglfCl",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "poison",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "15"
+          },
+          "effects": [
+            {
+              "_id": "Him7rMnWcxyKNUMV"
+            }
+          ]
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Poison",
+        "img": ""
       }
     },
     "overrides": {
@@ -73,7 +160,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p>\n\t\t\t\t\t\t\t\t<p>You can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [[/save 15 CON]] or take [[/damage 2d10 poison]] and become poisoned for 1 minute. The dagger can’t be used this way again until the next dawn.</p>",
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p><p>You can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [[/save 15 CON]] or take [[/damage 2d10 poison]] and become poisoned for 1 minute. The dagger can’t be used this way again until the next dawn.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -108,7 +195,7 @@
     },
     "uses": {
       "min": "",
-      "max": "",
+      "max": "1",
       "spent": 0,
       "consumeQuantity": false,
       "recovery": []
@@ -118,9 +205,48 @@
       "value": ""
     },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 1
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dagger of Venom",
+      "img": "icons/weapons/daggers/dagger-double-skull-pink.webp",
+      "origin": "Compendium.black-flag.items.Item.YdXhDY18JC5QEPFC",
+      "transfer": false,
+      "_id": "Him7rMnWcxyKNUMV",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You are poisoned for 1 minute.</p>",
+      "tint": "#ffffff",
+      "statuses": [
+        "poisoned"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726800548541,
+        "modifiedTime": 1726800566983,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!YdXhDY18JC5QEPFC.Him7rMnWcxyKNUMV"
+    }
+  ],
   "sort": 100000,
   "ownership": {
     "default": 0
@@ -130,9 +256,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.046",
     "createdTime": 1725589007806,
-    "modifiedTime": 1725904217699,
+    "modifiedTime": 1726800592257,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "YdXhDY18JC5QEPFC",
