@@ -13,13 +13,4 @@ export default function applyEffectApplicationPatches() {
 	foundry.data.fields.FilePathField._bfSupportedModes = [];
 	foundry.data.fields.NumberField._bfSupportedModes = ALL;
 	foundry.data.fields.StringField._bfSupportedModes = [MODES.ADD];
-
-	foundry.data.fields.SetField.prototype._applyChangeAdd = function (value, delta, model, change) {
-		for (const element of delta) {
-			const negative = element.replace(/^\s*-\s*/, "");
-			if (negative !== element) value.delete(negative);
-			else value.add(element);
-		}
-		return value;
-	};
 }

@@ -1,5 +1,8 @@
 import FormulaField from "../data/fields/formula-field.mjs";
+import MappingField from "../data/fields/mapping-field.mjs";
 import { numberFormat, staticID } from "../utils/_module.mjs";
+
+const { SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -104,6 +107,58 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		}
 
 		return super.apply(document, change);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static applyField(model, change, field) {
+		field ??= model.schema.getField(change.key);
+		change = foundry.utils.deepClone(change);
+		const current = foundry.utils.getProperty(model, change.key);
+		const modes = CONST.ACTIVE_EFFECT_MODES;
+
+		// Replace value when using string interpolation syntax
+		if (field instanceof StringField && change.mode === modes.OVERRIDE && change.value.includes("{}")) {
+			change.value = change.value.replace("{}", current ?? "");
+		}
+
+		// If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
+		if (current === null && [modes.UPGRADE, modes.DOWNGRADE].includes(change.mode)) change.mode = modes.OVERRIDE;
+
+		// Handle removing entries from sets
+		if (field instanceof SetField && change.mode === modes.ADD && foundry.utils.getType(current) === "Set") {
+			for (const value of field._castChangeDelta(change.value)) {
+				const neg = value.replace(/^\s*-\s*/, "");
+				if (neg !== value) current.delete(neg);
+				else current.add(value);
+			}
+			return current;
+		}
+
+		// If attempting to apply active effect to empty MappingField entry, create it
+		if (current === undefined && change.key.startsWith("system.")) {
+			let keyPath = change.key;
+			let mappingField = field;
+			while (!(mappingField instanceof MappingField) && mappingField) {
+				if (mappingField.name) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
+				mappingField = mappingField.parent;
+			}
+			if (mappingField && foundry.utils.getProperty(model, keyPath) === undefined) {
+				const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
+				foundry.utils.setProperty(model, keyPath, created);
+			}
+		}
+
+		return super.applyField(model, change, field);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_applyUpgrade(actor, change, current, delta, changes) {
+		if (current === null) return this._applyOverride(actor, change, current, delta, changes);
+		return super._applyUpgrade(actor, change, current, delta, changes);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
