@@ -246,6 +246,8 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		const { data } = DragDrop.getDragData(event);
 		if (!this._validateDrop(data)) return false;
 
+		if (data.uuid?.startsWith(this.item.uuid)) return this._onSortActivity(event, data);
+
 		try {
 			const activity = (await fromUuid(data.uuid)).toObject() ?? data.data;
 			if (!activity) return false;
@@ -260,13 +262,34 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Handle sorting activities relative to one another.
+	 * @param {DragEvent} event - Triggering drop event.
+	 * @param {DragEventPayload} data - Drag event data.
+	 * @returns {Promise}
+	 */
+	async _onSortActivity(event, data) {
+		const dragActivity = await fromUuid(data.uuid);
+		const dropRow = event.target.closest("[data-activity-id]");
+		const dropActivity = this.activities.get(dropRow?.dataset.activityId);
+		if (!dragActivity || !dropActivity || dragActivity === dropActivity) return;
+		const siblings = this.activities.contents.filter(a => a.id !== dragActivity.id);
+		const sortUpdates = SortingHelpers.performIntegerSort(dragActivity, { target: dropActivity, siblings });
+		const updateData = {};
+		for (const update of sortUpdates) {
+			updateData[`system.activities.${update.target.id}.sort`] = update.update.sort;
+		}
+		if (!foundry.utils.isEmpty(updateData)) this.item.update(updateData);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Can the dragged document be dropped?
 	 * @param {object} data
 	 * @returns {boolean}
 	 */
 	_validateDrop(data) {
 		if (data.type !== "Activity") return false;
-		if (!data.uuid) return true;
-		return !data.uuid.startsWith(this.item.uuid);
+		return true;
 	}
 }

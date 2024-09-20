@@ -50,7 +50,10 @@ export class ActivityCollection extends Collection {
 	constructor(model, entries) {
 		super();
 		this.#model = model;
-		for (const [id, entry] of Object.entries(entries)) {
+		const activities = Object.entries(entries).sort(
+			(lhs, rhs) => (lhs[1].sort ?? Infinity) - (rhs[1].sort ?? Infinity)
+		);
+		for (const [id, entry] of activities) {
 			if (!(entry instanceof BaseActivity)) continue;
 			this.set(id, entry);
 			this.#types[entry.type] ??= [];

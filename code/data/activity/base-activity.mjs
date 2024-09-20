@@ -15,6 +15,7 @@ const {
 	EmbeddedDataField,
 	FilePathField,
 	HTMLField,
+	IntegerSortField,
 	SchemaField,
 	StringField
 } = foundry.data.fields;
@@ -26,6 +27,8 @@ const {
  * @property {string} type - Type name of the activity used to build a specific activity class.
  * @property {string} name - Name for this activity.
  * @property {string} img - Image that represents this activity.
+ * @property {string} description - Activity's description.
+ * @property {number} sort - Sorting order for the activity.
  * @property {*} system - Type-specific data.
  * @property {ActivationField} activation
  * @property {number} activation.primary - Is this the primary activation for this item? Mainly used to indicate what
@@ -104,6 +107,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			name: new StringField({ initial: undefined }),
 			img: new FilePathField({ blank: true, initial: undefined, categories: ["IMAGE"] }),
 			description: new HTMLField(),
+			sort: new IntegerSortField(),
 			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
 				primary: new BooleanField({ required: false, initial: undefined })
