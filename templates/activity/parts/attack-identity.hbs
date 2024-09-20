@@ -3,14 +3,14 @@
 	<div class="field-group">
 		<label>
 			<span>{{ localize "BF.ATTACK.FIELDS.attack.type.value.label" }}</span>
-			<select name="system.type.value">
+			<select name="system.attack.type.value">
 				{{ selectOptions CONFIG.weaponTypes selected=source.system.attack.type.value blank=defaultType
 												 labelAttr="label" localize=true }}
 			</select>
 		</label>
 		<label>
 			<span>{{ localize "BF.ATTACK.FIELDS.attack.type.classification.label" }}</span>
-			<select name="system.type.classification">
+			<select name="system.attack.type.classification">
 				{{ selectOptions CONFIG.attackTypes selected=source.system.attack.type.classification
 												 blank=defaultClassification localize=true }}
 			</select>
