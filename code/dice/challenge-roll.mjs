@@ -65,6 +65,7 @@ export default class ChallengeRoll extends BasicRoll {
 	/** @override */
 	static fromConfig(config, process = {}) {
 		const formula = [new CONFIG.Dice.ChallengeDie().formula].concat(config.parts ?? []).join(" + ");
+		config.options.target ??= process.target;
 		return new this(formula, config.data, config.options);
 	}
 

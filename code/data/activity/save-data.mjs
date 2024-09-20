@@ -1,4 +1,5 @@
 import { simplifyBonus } from "../../utils/_module.mjs";
+import ActivityDataModel from "../abstract/activity-data-model.mjs";
 import { DamageField, FormulaField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
@@ -16,7 +17,7 @@ const { ArrayField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} dc.formula - DC formula if manually set.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
-export class SaveData extends foundry.abstract.DataModel {
+export class SaveData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -29,13 +30,15 @@ export class SaveData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			ability: new StringField({ initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0] }),
 			damage: new SchemaField({ parts: new ArrayField(new DamageField()) }),
-			dc: new SchemaField({
-				ability: new StringField(),
-				formula: new FormulaField({ deterministic: true })
-			}),
-			effects: new ArrayField(new AppliedEffectField())
+			effects: new ArrayField(new AppliedEffectField()),
+			save: new SchemaField({
+				ability: new StringField({ initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0] }),
+				dc: new SchemaField({
+					ability: new StringField(),
+					formula: new FormulaField({ deterministic: true })
+				})
+			})
 		};
 	}
 
@@ -48,7 +51,7 @@ export class SaveData extends foundry.abstract.DataModel {
 	 * @type {string|null}
 	 */
 	get defaultAbility() {
-		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
+		if (this.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
 		return null;
 	}
 
@@ -58,8 +61,16 @@ export class SaveData extends foundry.abstract.DataModel {
 
 	/** @override */
 	static migrateData(source) {
+		// Added in ???
 		if (foundry.utils.getType(source.damage?.parts) === "Array") {
 			source.damage.parts.forEach(p => BaseActivity._migrateCustomDamageFormula(p));
+		}
+
+		// Added in 0.10.046
+		if ("ability" in source) foundry.utils.setProperty(source, "save.ability", source.ability);
+		if ("dc" in source) {
+			if ("value" in source.dc) foundry.utils.setProperty(source, "save.dc.ability", source.dc.ability);
+			if ("formula" in source.dc) foundry.utils.setProperty(source, "attack.dc.formula", source.dc.formula);
 		}
 	}
 
@@ -69,24 +80,38 @@ export class SaveData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareData() {
-		if (!this.parent.isSpell && !this.dc.ability) this.dc.ability = "custom";
+		this.applyShims();
+		if (!this.isSpell && !this.save.dc.ability) this.save.dc.ability = "custom";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		let dc;
-		const rollData = this.parent.item.getRollData({ deterministic: true });
-		if (this.dc.ability === "custom") dc = simplifyBonus(this.dc.formula, rollData);
-		else if (this.parent.actor?.system.spellcasting?.dc && !this.dc.ability) {
-			dc = this.parent.actor.system.spellcasting.dc;
-		} else dc = rollData.abilities?.[this.parent.dcAbility]?.dc;
-		if (dc)
-			Object.defineProperty(this.dc, "final", {
-				value: dc,
-				configurable: true,
-				enumerable: false
-			});
+		const rollData = this.getRollData({ deterministic: true });
+		if (this.save.dc.ability === "custom") this.save.dc.final = simplifyBonus(this.save.dc.formula, rollData);
+		else if (this.actor?.system.spellcasting?.dc && !this.save.dc.ability) {
+			this.save.dc.final = this.actor.system.spellcasting.dc;
+		} else this.save.dc.final = rollData.abilities?.[this.parent.dcAbility]?.dc;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*                Shims                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add shims for removed properties.
+	 */
+	applyShims() {
+		Object.defineProperty(this, "dc", {
+			get() {
+				foundry.utils.logCompatibilityWarning("The `dc` properties on `SaveData` has been moved to `save.dc`", {
+					since: "Black Flag 0.10.046",
+					until: "Black Flag 0.10.051"
+				});
+				return this.save.dc;
+			},
+			configurable: true
+		});
 	}
 }

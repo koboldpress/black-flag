@@ -27,6 +27,12 @@ export const _activityTypes = {
 			config: applications.AttackSheet
 		}
 	},
+	check: {
+		documentClass: documents.CheckActivity,
+		sheetClasses: {
+			config: applications.CheckSheet
+		}
+	},
 	damage: {
 		documentClass: documents.DamageActivity,
 		sheetClasses: {

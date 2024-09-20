@@ -7,6 +7,7 @@ import BasicRollConfigurationDialog from "../applications/dice/basic-configurati
  * @property {BasicRollConfiguration[]} rolls - Configuration data for individual rolls.
  * @property {Event} [event] - Event that triggered the rolling process.
  * @property {Document|PseudoDocument} [origin] - Source of the roll.
+ * @property {number} [target] - Default target value for all rolls.
  */
 
 /**
@@ -85,6 +86,7 @@ export default class BasicRoll extends Roll {
 	 */
 	static fromConfig(config, process = {}) {
 		const formula = (config.parts ?? []).join(" + ");
+		config.options.target ??= process.target;
 		return new this(formula, config.data, config.options);
 	}
 

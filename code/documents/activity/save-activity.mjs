@@ -32,11 +32,11 @@ export default class SaveActivity extends Activity {
 	 * @type {string}
 	 */
 	get challengeColumn() {
-		if (!this.system.dc.final) return "";
+		if (!this.system.save.dc.final) return "";
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
-		layout.innerHTML = `<span class="dc">${numberFormat(this.system.dc.final)}</span>`;
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability];
+		layout.innerHTML = `<span class="dc">${numberFormat(this.system.save.dc.final)}</span>`;
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.save.ability];
 		layout.innerHTML += `<span class="ability">${ability}</span>`;
 		return layout.outerHTML;
 	}
@@ -48,11 +48,13 @@ export default class SaveActivity extends Activity {
 	 * @type {string|null}
 	 */
 	get dcAbility() {
-		if (this.system.dc.ability === "custom") return null;
-		if (this.system.dc.ability && this.system.dc.ability !== "spellcasting") return this.system.dc.ability;
+		if (this.system.save.dc.ability === "custom") return null;
+		if (this.system.save.dc.ability && this.system.save.dc.ability !== "spellcasting") {
+			return this.system.save.dc.ability;
+		}
 
 		let ability = this.item.system.ability;
-		if (!ability && this.actor && (this.isSpell || this.system.dc.ability === "spellcasting")) {
+		if (!ability && this.actor && (this.isSpell || this.system.save.dc.ability === "spellcasting")) {
 			const abilities = Object.values(this.actor.system.spellcasting?.origins ?? {}).reduce((set, o) => {
 				set.add(o.ability);
 				return set;
@@ -79,7 +81,7 @@ export default class SaveActivity extends Activity {
 	/** @inheritDoc */
 	_activationChatButtons() {
 		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability] ?? "";
-		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.dc.final, check: ability });
+		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
 		const buttons = [
 			{
 				label: `
@@ -87,8 +89,8 @@ export default class SaveActivity extends Activity {
 				<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
 			`,
 				dataset: {
-					dc: this.system.dc.final,
-					ability: this.system.ability,
+					dc: this.system.save.dc.final,
+					ability: this.system.save.ability,
 					action: "rollSave",
 					visibility: "all"
 				}
@@ -116,8 +118,8 @@ export default class SaveActivity extends Activity {
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				"data.flags.black-flag.save": {
-					ability: this.system.ability,
-					dc: this.system.dc.final
+					ability: this.system.save.ability,
+					dc: this.system.save.dc.final
 				}
 			},
 			message
@@ -158,9 +160,9 @@ export default class SaveActivity extends Activity {
 			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
 			await token.actor.rollAbilitySave(
 				{
-					ability: target.dataset.ability ?? this.system.ability,
+					ability: target.dataset.ability ?? this.system.save.ability,
 					event,
-					target: Number.isFinite(dc) ? dc : this.system.dc.final
+					target: Number.isFinite(dc) ? dc : this.system.save.dc.final
 				},
 				{
 					data: { speaker }
@@ -194,7 +196,8 @@ export default class SaveActivity extends Activity {
 		const rollData = this.item.getRollData({ deterministic: true });
 		const ability = rollData.abilities?.[this.dcAbility];
 		if (ability) rollData.mod = ability.mod;
-		const dc = this.system.dc.ability === "custom" ? simplifyBonus(this.system.dc.formula, rollData) : ability?.dc;
-		return { ability: this.system.ability, dc, activity: this };
+		const dc =
+			this.system.save.dc.ability === "custom" ? simplifyBonus(this.system.save.dc.formula, rollData) : ability?.dc;
+		return { ability: this.system.save.ability, dc, activity: this };
 	}
 }

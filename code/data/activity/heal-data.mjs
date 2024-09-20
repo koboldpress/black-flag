@@ -1,3 +1,4 @@
+import ActivityDataModel from "../abstract/activity-data-model.mjs";
 import { DamageField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
@@ -9,7 +10,7 @@ const { ArrayField } = foundry.data.fields;
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  * @property {ExtendedDamageData} healing - Healing value.
  */
-export class HealData extends foundry.abstract.DataModel {
+export class HealData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -36,7 +37,7 @@ export class HealData extends foundry.abstract.DataModel {
 	 * @type {string|null}
 	 */
 	get defaultAbility() {
-		if (this.parent.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
+		if (this.isSpell) return game.i18n.localize("BF.Spellcasting.Label");
 		return null;
 	}
 

@@ -887,9 +887,39 @@
 	"Label[other]": "Bonuses"
 },
 
-"BF.Check": {
+"BF.CHECK": {
+	"Title": "Check",
+	"Hint": "Make one or more ability checks with optional proficiency.",
 	"Label[one]": "Check",
-	"Label[other]": "Checks"
+	"Label[other]": "Checks",
+	"FIELDS": {
+		"check": {
+			"label": "Check Details",
+			"ability": {
+				"label": "Check Ability",
+				"hint": "Ability to use when making the check."
+			},
+			"associated": {
+				"label": "Associated Proficiency",
+				"hint": "Present ability checks using proficiency and bonuses with these skills, tools, or vehicles."
+			},
+			"dc": {
+				"label": "Difficulty Class",
+				"calculation": {
+					"label": "DC Calculation",
+					"hint": "Method or ability used to calculate the difficulty class."
+				},
+				"formula": {
+					"label": "DC Formula",
+					"hint": "Custom formula or flat value for defining the check DC."
+				}
+			},
+			"visible": {
+				"label": "Visible to All",
+				"hint": "Should the rolling buttons be visible to all players?"
+			}
+		}
+	}
 },
 
 "BF.ChallengeRating": {
@@ -1595,6 +1625,9 @@
 	},
 	"Custom": {
 		"Label": "Custom Formula"
+	},
+	"Default": {
+		"DC": "8 + Modifier + Proficiency"
 	},
 	"Warning": {
 		"MissingReference": "The {property} formula within {name} has references to missing data: {references}"
@@ -2533,21 +2566,23 @@
 	"Title": "Save",
 	"Hint": "Force a saving throw and roll damage.",
 	"FIELDS": {
-		"ability": {
-			"label": "Opposed Ability"
-		},
-		"dc": {
-			"label": "Difficulty Class",
-			"ability": {
-				"label": "DC Calculation"
-			},
-			"formula": {
-				"label": "DC Formula",
-				"Default": "8 + @mod + @prof"
-			}
-		},
 		"damage": {
 			"label": "Save Damage"
+		},
+		"save": {
+			"label": "Save Details",
+			"ability": {
+				"label": "Opposed Ability"
+			},
+			"dc": {
+				"label": "Difficulty Class",
+				"ability": {
+					"label": "DC Calculation"
+				},
+				"formula": {
+					"label": "DC Formula"
+				}
+			}
 		}
 	},
 	"Challenge": "Challenge",

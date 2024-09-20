@@ -1,3 +1,4 @@
+import ActivityDataModel from "../abstract/activity-data-model.mjs";
 import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
@@ -14,7 +15,7 @@ const { ArrayField, BooleanField, SchemaField } = foundry.data.fields;
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
-export class DamageData extends foundry.abstract.DataModel {
+export class DamageData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */

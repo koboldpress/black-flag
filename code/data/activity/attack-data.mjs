@@ -1,3 +1,4 @@
+import ActivityDataModel from "../abstract/activity-data-model.mjs";
 import DamageField from "../fields/damage-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivity from "./base-activity.mjs";
@@ -25,7 +26,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
  */
-export class AttackData extends foundry.abstract.DataModel {
+export class AttackData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -71,9 +72,9 @@ export class AttackData extends foundry.abstract.DataModel {
 	 * @type {Proficiency|null}
 	 */
 	get attackProficiency() {
-		const ability = this.parent.actor?.system.abilities?.[this.parent.ability];
+		const ability = this.actor?.system.abilities?.[this.ability];
 		if (ability?.proficient === true) return null;
-		return this.parent.item.system.proficiency?.hasProficiency ? this.parent.item.system.proficiency ?? null : null;
+		return this.item.system.proficiency?.hasProficiency ? this.item.system.proficiency ?? null : null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -83,18 +84,18 @@ export class AttackData extends foundry.abstract.DataModel {
 	 * @type {Set<string>}
 	 */
 	get availableAbilities() {
-		if (this.parent.item.system.availableAbilities) return this.parent.item.system.availableAbilities;
+		if (this.item.system.availableAbilities) return this.item.system.availableAbilities;
 		if (this.attack.type.classification === "spell")
 			return new Set(
 				[
-					this.parent.actor?.system.spellcasting?.ability,
-					...Object.values(this.parent.actor?.system.spellcasting?.origins ?? {}).map(o => o.ability)
+					this.actor?.system.spellcasting?.ability,
+					...Object.values(this.actor?.system.spellcasting?.origins ?? {}).map(o => o.ability)
 				].filter(a => a)
 			);
 
 		const melee = CONFIG.BlackFlag.defaultAbilities.meleeAttack;
 		const ranged = CONFIG.BlackFlag.defaultAbilities.rangedAttack;
-		if (this.parent.actor?.type === "npc") return new Set([melee, ranged]);
+		if (this.actor?.type === "npc") return new Set([melee, ranged]);
 		return new Set([this.attack.type.value === "ranged" ? ranged : melee]);
 	}
 
@@ -159,8 +160,8 @@ export class AttackData extends foundry.abstract.DataModel {
 
 	/** @inheritDoc */
 	prepareFinalData() {
-		if (this.damage.includeBase && this.parent.item.system.damage?.base?.formula) {
-			const basePart = this.parent.item.system.damage.base.clone();
+		if (this.damage.includeBase && this.item.system.damage?.base?.formula) {
+			const basePart = this.item.system.damage.base.clone();
 			basePart.base = true;
 			basePart.locked = true;
 			this.damage.parts.unshift(basePart);
@@ -181,16 +182,6 @@ export class AttackData extends foundry.abstract.DataModel {
 	 * Add shims for removed properties.
 	 */
 	applyShims() {
-		Object.defineProperty(this, "ability", {
-			get() {
-				foundry.utils.logCompatibilityWarning(
-					"The `ability` property on `AttackData` has been moved to `attack.ability`",
-					{ since: "Black Flag 0.10.042", until: "Black Flag 0.10.047" }
-				);
-				return this.attack.ability;
-			},
-			configurable: true
-		});
 		Object.defineProperty(this, "type", {
 			get() {
 				foundry.utils.logCompatibilityWarning("The `type` properties on `AttackData` has been moved to `attack.type`", {

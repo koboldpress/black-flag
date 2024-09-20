@@ -78,14 +78,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {string|null}
 	 */
 	get ability() {
-		if (this.isSpell) {
-			const abilities = Object.values(this.actor.system.spellcasting?.origins ?? {}).reduce((set, o) => {
-				set.add(o.ability);
-				return set;
-			}, new Set());
-			return this.actor.system.selectBestAbility?.(abilities) ?? null;
-		}
-		return null;
+		return this.system.ability ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -228,8 +221,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get isSpell() {
-		// TODO: Potentially allow custom module types to be considered spells
-		return this.item.type === "spell";
+		return this.system.isSpell;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

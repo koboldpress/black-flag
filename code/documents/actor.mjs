@@ -822,8 +822,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 					rollData
 				),
 				options: {
-					minimum: this.system.buildMinimum?.(ability.check.modifiers.minimum, { rollData }),
-					target: config.target
+					minimum: this.system.buildMinimum?.(ability.check.modifiers.minimum, { rollData })
 				}
 			}
 		].concat(config.rolls ?? []);

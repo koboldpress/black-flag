@@ -1,3 +1,4 @@
+import ActivityDataModel from "../abstract/activity-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
@@ -12,7 +13,7 @@ const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fiel
  * @property {boolean} roll.prompt - Should the roll configuration dialog be displayed?
  * @property {boolean} roll.visible - Should the rolling button be visible to all players?
  */
-export class UtilityData extends foundry.abstract.DataModel {
+export class UtilityData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*         Model Configuration         */
 	/* <><><><> <><><><> <><><><> <><><><> */

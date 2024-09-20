@@ -2,33 +2,33 @@
 		<legend>{{ localize "BF.SAVE.Challenge" }}</legend>
 		<div class="field-group">
 			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.ability.label" }}</span>
-				<select name="system.ability">
-					{{ selectOptions CONFIG.abilities.localized selected=system.ability }}
+				<span>{{ localize "BF.SAVE.FIELDS.save.ability.label" }}</span>
+				<select name="system.save.ability">
+					{{ selectOptions CONFIG.abilities.localized selected=system.save.ability }}
 				</select>
 			</label>
 			<span class="vs">{{ localize "BF.SAVE.Versus" }}</span>
 			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.dc.ability.label" }}</span>
-				<select name="system.dc.ability">
-					{{#select system.dc.ability}}
+				<span>{{ localize "BF.SAVE.FIELDS.save.dc.ability.label" }}</span>
+				<select name="system.save.dc.ability">
+					{{#select system.save.dc.ability}}
 						{{#if defaultAbility}}
 							<option value="">{{ defaultAbility }}</option>
 							<hr>
 						{{/if}}
 						<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
 						<option value="spellcasting">{{ localize "BF.Spellcasting.Label" }}</option>
-						<optgroup label="{{ localize 'BF.SAVE.FIELDS.dc.formula.Default' }}">
+						<optgroup label="{{ localize 'BF.SAVE.FIELDS.save.dc.formula.Default' }}">
 							{{ selectOptions CONFIG.abilities.localized }}
 						</optgroup>
 					{{/select}}
 				</select>
 			</label>
 		</div>
-		{{#if (eq system.dc.ability "custom")}}
+		{{#if (eq system.save.dc.ability "custom")}}
 			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.dc.formula.label" }}</span>
-				<input type="text" name="system.dc.formula" value="{{ system.dc.formula }}">
+				<span>{{ localize "BF.SAVE.FIELDS.save.dc.formula.label" }}</span>
+				<input type="text" name="system.save.dc.formula" value="{{ system.save.dc.formula }}">
 			</label>
 		{{/if}}
 </fieldset>
