@@ -105,21 +105,21 @@ export default class ToolConfig extends BaseConfig {
 			{
 				category: "check",
 				type: "bonus",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				global,
 				modifiers: checkModifiers.filter(m => m.type === "bonus")
 			},
 			{
 				category: "check",
 				type: "min",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				global,
 				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
 				category: "check",
 				type: "note",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				global,
 				modifiers: checkModifiers.filter(m => m.type === "note")
 			}

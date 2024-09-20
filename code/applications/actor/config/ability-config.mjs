@@ -85,7 +85,7 @@ export default class AbilityConfig extends BaseConfig {
 			{
 				category: "check",
 				type: "bonus",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				global,
 				showProficiency: true,
 				modifiers: checkModifiers.filter(m => m.type === "bonus")
@@ -93,14 +93,14 @@ export default class AbilityConfig extends BaseConfig {
 			{
 				category: "check",
 				type: "min",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				showProficiency: true,
 				modifiers: checkModifiers.filter(m => m.type === "min")
 			},
 			{
 				category: "check",
 				type: "note",
-				label: "BF.Check.Label[one]",
+				label: "BF.CHECK.Label[one]",
 				modifiers: checkModifiers.filter(m => m.type === "note")
 			},
 			{
