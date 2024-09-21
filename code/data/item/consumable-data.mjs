@@ -23,6 +23,15 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	PhysicalTemplate,
 	PropertiesTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -75,6 +84,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePhysicalLabels();
 	}
 

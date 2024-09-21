@@ -3,6 +3,7 @@ import { numberFormat } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
+import IdentityConfig from "../identity-config.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -253,10 +254,18 @@ export default class BaseActorSheet extends ActorSheet {
 	_getHeaderButtons() {
 		let buttons = super._getHeaderButtons();
 		if (this.options.editable && (game.user.isGM || this.actor.isOwner)) {
-			const closeIndex = buttons.findIndex(btn => btn.label === "Sheet");
+			// Identity / Source button
+			buttons.unshift({
+				label: game.i18n.localize("BF.Identity.Label"),
+				class: "identity-config",
+				icon: "fa-solid fa-id-card",
+				onclick: async ev => new IdentityConfig({ document: this.actor }).render({ force: true })
+			});
+
+			// Editing Mode toggle
 			const getLabel = () => (this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked");
 			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""} fa-fw`;
-			buttons.splice(closeIndex, 0, {
+			buttons.unshift({
 				label: getLabel(),
 				class: "toggle-editing-mode",
 				icon: getIcon(),

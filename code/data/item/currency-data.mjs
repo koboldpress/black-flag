@@ -18,6 +18,15 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} identifier.value - Unique identifier for this currency.
  */
 export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -103,6 +112,7 @@ export default class CurrencyData extends ItemDataModel.mixin(DescriptionTemplat
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePhysicalLabels();
 	}
 }

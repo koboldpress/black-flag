@@ -3,13 +3,13 @@ import Proficiency from "../../documents/proficiency.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
-import SourceField from "../fields/source-field.mjs";
 import ACTemplate from "./templates/ac-template.mjs";
 import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
+import SourceTemplate from "./templates/source-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
 const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -29,6 +29,7 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
  * @mixes {InitiativeTemplate}
  * @mixes {LanguagesTemplate}
  * @mixes {ModifiersTemplate}
+ * @mixes {SourceTemplate}
  * @mixes {TraitsTemplate}
  *
  * @property {Record<string, NPCAbilityData} abilities - NPC's ability modifiers.
@@ -45,7 +46,6 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
  * @property {object} biography
  * @property {string} biography.value - Biography on the creature.
  * @property {string} biography.legendary - Override of the legendary actions description.
- * @property {SourceField} biography.source - Source of the creature's stat block.
  * @property {object} spellcasting
  * @property {string} spellcasting.ability - Ability used for spellcasting.
  * @property {number} spellcasting.dc - Spell save DC if not auto-calculated.
@@ -58,8 +58,18 @@ export default class NPCData extends ActorDataModel.mixin(
 	InitiativeTemplate,
 	LanguagesTemplate,
 	ModifiersTemplate,
+	SourceTemplate,
 	TraitsTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = {
 		type: "npc",
@@ -112,8 +122,7 @@ export default class NPCData extends ActorDataModel.mixin(
 			}),
 			biography: new SchemaField({
 				value: new HTMLField(),
-				legendary: new HTMLField(),
-				source: new SourceField()
+				legendary: new HTMLField()
 			}),
 			spellcasting: new SchemaField({
 				ability: new StringField({ initial: "intelligence" }),
@@ -146,12 +155,19 @@ export default class NPCData extends ActorDataModel.mixin(
 
 	/**
 	 * Migrate source data to an object.
-	 * Added in 0.9.031
 	 * @param {object} source - The candidate source data from which the model will be constructed.
 	 */
 	static migrateSource(source) {
+		// Added 0.9.031
 		if (foundry.utils.getType(source.biography?.source) === "string") {
-			source.biography.source = { fallback: source.biography.source };
+			source.description ??= {};
+			source.description.source = { fallback: source.biography.source };
+		}
+
+		// Added 0.10.046
+		else if (foundry.utils.getType(source.biography?.source) === "Object") {
+			source.description ??= {};
+			source.description.source = foundry.utils.mergeObject(source.description.source ?? {}, source.biography.source);
 		}
 	}
 
@@ -202,6 +218,7 @@ export default class NPCData extends ActorDataModel.mixin(
 
 		this.prepareConditions();
 		this.prepareLanguages();
+		this.prepareSource();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedTraits(rollData);
 

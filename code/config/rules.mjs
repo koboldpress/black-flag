@@ -160,3 +160,11 @@ export const rules = {
 	instantaneous: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.c2dif2p9wEdC7A1e",
 	concentration: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.9qY7qeHNuDQzCxQh"
 };
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Source books that can be displayed in the source listing.
+ * @enum {string}
+ */
+export const sourceBooks = {};

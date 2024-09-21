@@ -37,6 +37,15 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {TargetField} target - Targeting information.
  */
 export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, DescriptionTemplate) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -328,6 +337,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.duration.concentration = this.tags.has("concentration");
 	}
 

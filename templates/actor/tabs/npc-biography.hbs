@@ -23,8 +23,9 @@
 						engine="prosemirror" collaborate=false }}
 
 	<label class="source">
-		<span>{{ localize "BF.Source.Label" }}</span>
-		<input type="text" name="system.biography.source.fallback" value="{{ system.biography.source.fallback }}"
-		       {{ disabled (not editable) }}>
+		<span class="hinted-label" data-tooltip="BF.SOURCE.FIELDS.description.source.book.hint">
+			{{ localize "BF.SOURCE.Label" }}
+		</span>
+		<span>{{ system.description.source.label }}</span>
 	</label>
 </section>

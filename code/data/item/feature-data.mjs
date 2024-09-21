@@ -29,6 +29,15 @@ export default class FeatureData extends ItemDataModel.mixin(
 	FeatureTemplate,
 	ProficiencyTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -65,6 +74,7 @@ export default class FeatureData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePrerequisiteLabel();
 	}
 

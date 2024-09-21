@@ -20,6 +20,15 @@ export default class SubclassData extends ItemDataModel.mixin(
 	ConceptTemplate,
 	DescriptionTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -100,6 +109,7 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareFinalData() {
 		super.prepareFinalData();
+		this.prepareDescription();
 		this.prepareSpellcastingSource();
 	}
 

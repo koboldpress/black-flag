@@ -34,6 +34,15 @@ export default class ArmorData extends ItemDataModel.mixin(
 	PhysicalTemplate,
 	PropertiesTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -159,6 +168,7 @@ export default class ArmorData extends ItemDataModel.mixin(
 	prepareDerivedData() {
 		super.prepareDerivedData();
 
+		this.prepareDescription();
 		this.prepareEquippedArmor();
 		this.preparePhysicalLabels();
 

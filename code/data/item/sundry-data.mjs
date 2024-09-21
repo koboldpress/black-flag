@@ -14,6 +14,15 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @property {string} type.base - Specific sundry type defined as a child of its category.
  */
 export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate, PhysicalTemplate) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -66,6 +75,7 @@ export default class SundryData extends ItemDataModel.mixin(DescriptionTemplate,
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePhysicalLabels();
 	}
 }

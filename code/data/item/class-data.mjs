@@ -14,6 +14,15 @@ const { ColorField } = foundry.data.fields;
  * @property {string} color - Color used to represent this class, used to tinting headers.
  */
 export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, ConceptTemplate, DescriptionTemplate) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -92,6 +101,7 @@ export default class ClassData extends ItemDataModel.mixin(AdvancementTemplate, 
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 
 		this.labels ??= {};
 

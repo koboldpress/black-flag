@@ -1,5 +1,5 @@
 import DragDrop from "../drag-drop.mjs";
-import IdentityConfig from "./config/identity-config.mjs";
+import IdentityConfig from "../identity-config.mjs";
 
 /**
  * Sheet upon which all other item sheets are based.
@@ -60,7 +60,7 @@ export default class BaseItemSheet extends ItemSheet {
 				label: game.i18n.localize("BF.Identity.Label"),
 				class: "identity-config",
 				icon: "fa-solid fa-id-card",
-				onclick: async ev => new IdentityConfig(this.item).render(true)
+				onclick: async ev => new IdentityConfig({ document: this.item }).render({ force: true })
 			});
 		return buttons;
 	}

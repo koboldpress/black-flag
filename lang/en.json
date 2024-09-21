@@ -3133,12 +3133,31 @@
 	}
 },
 
-"BF.Source": {
+"BF.SOURCE": {
 	"Label": "Source",
-	"Hint": "Source book or module where this item originated.",
-	"Book": "Source Book",
-	"Fallback": "Source Name",
-	"Page": "Source Page"
+	"FIELDS": {
+		"description": {
+			"source": {
+				"label": "Source",
+				"book": {
+					"label": "Source Book",
+					"hint": "Source book or module where this item originated."
+				},
+				"fallback": {
+					"label": "Custom Label"
+				},
+				"page": {
+					"label": "Source Page"
+				}
+			}
+		}
+	},
+	"Compendium": "Compendium Link",
+	"Config": "Configure Source",
+	"Display": {
+		"Full": "{book} {page}",
+		"Page": "pg. {page}"
+	}
 },
 
 "BF.Subclass": {

@@ -14,12 +14,7 @@
 		</div>
 	{{/if}}
 	<div class="source">
-		{{#if edit}}
-			<input type="text" name="system.description.source.fallback" value="{{ system.description.source.fallback }}"
-			       placeholder="{{ localize 'BF.Source.Label' }}" aria-label="{{ localize 'BF.Source.Label' }}">
-		{{else}}
-			{{ system.description.source.label }}
-		{{/if}}
+		{{ system.description.source.label }}
 	</div>
 	<div class="banner-mask" inert></div>
 </figure>

@@ -45,7 +45,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
-	static LOCALIZATION_PREFIXES = ["BF.WEAPON"];
+	static LOCALIZATION_PREFIXES = ["BF.WEAPON", "BF.SOURCE"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -315,6 +315,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePhysicalLabels();
 	}
 

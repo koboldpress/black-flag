@@ -27,6 +27,15 @@ export default class ContainerData extends ItemDataModel.mixin(
 	PhysicalTemplate,
 	PropertiesTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -221,6 +230,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	prepareDerivedData() {
 		super.prepareDerivedData();
+		this.prepareDescription();
 		this.preparePhysicalLabels();
 		this.type ??= {};
 		this.type.label = game.i18n.localize("BF.Item.Gear.Category.WondrousItem");

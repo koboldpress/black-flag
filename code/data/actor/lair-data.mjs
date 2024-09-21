@@ -1,21 +1,30 @@
 import LairSheet from "../../applications/actor/lair-sheet.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
-import SourceField from "../fields/source-field.mjs";
+import SourceTemplate from "./templates/source-template.mjs";
 
 const { HTMLField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
  * Data model for Lair actors.
+ * @mixes {SourceTemplate}
  *
  * @property {object} description
  * @property {string} description.value - Main description of this lair.
  * @property {string} description.lairActions - Introduction to the lair actions section.
  * @property {string} description.regionalEffects - Introduction to the regional effects section.
  * @property {string} description.conclusion - Conclusion of the regional effects section.
- * @property {SourceField} description.source - Source of the lair's stat block.
  * @property {number} initiative - Fixed initiative value where lair actions can be triggered.
  */
-export default class LairData extends ActorDataModel {
+export default class LairData extends ActorDataModel.mixin(SourceTemplate) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = {
 		type: "lair",
@@ -37,11 +46,20 @@ export default class LairData extends ActorDataModel {
 				value: new HTMLField(),
 				lairActions: new HTMLField(),
 				regionalEffects: new HTMLField(),
-				conclusion: new HTMLField(),
-				source: new SourceField()
+				conclusion: new HTMLField()
 			}),
 			initiative: new NumberField({ initial: 20 })
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.prepareSource();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

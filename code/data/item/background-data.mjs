@@ -14,6 +14,15 @@ export default class BackgroundData extends ItemDataModel.mixin(
 	ConceptTemplate,
 	DescriptionTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.SOURCE"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -30,6 +39,16 @@ export default class BackgroundData extends ItemDataModel.mixin(
 			{ inplace: false }
 		)
 	);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Data Preparation          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		this.prepareDescription();
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
