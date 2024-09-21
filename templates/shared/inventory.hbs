@@ -28,7 +28,7 @@
 							<div class="layout">
 								<img src="{{ img }}" alt="{{ name }}">
 								<button type="button" class="link-button" data-action="expand">
-									{{name}}
+									<span>{{ name }}</span>
 									<i class="fa-solid fa-caret-down" inert></i>
 								</button>
 								{{ blackFlag-notificationBadge @root.document document=this }}
@@ -82,7 +82,7 @@
 					</tr>
 					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
 						<td colspan="7">
-							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
+							{{> "blackFlag.inventory-collapsible" item=this ctx=ctx}}
 						</td>
 					</tr>
 				{{/blackFlag-itemContext}}

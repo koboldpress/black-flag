@@ -15,7 +15,7 @@
 						<th class="name" scope="row">
 							<div class="layout">
 								<button type="button" class="link-button" data-action="expand">
-									{{ name }}
+									<span>{{ name }}</span>
 									<i class="fa-solid fa-caret-down" inert></i>
 								</button>
 								{{ blackFlag-notificationBadge @root.actor document=this }}
@@ -47,7 +47,7 @@
 					</tr>
 					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
 						<td colspan="3">
-							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
+							{{> "blackFlag.inventory-collapsible" item=this ctx=ctx}}
 						</td>
 					</tr>
 				{{/each}}

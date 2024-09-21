@@ -23,4 +23,21 @@ export default class HealSheet extends ActivitySheet {
 			]
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*              Rendering              */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _prepareEffectContext(context) {
+		context = await super._prepareEffectContext(context);
+		context.scalingOptions = [
+			{ value: "", label: game.i18n.localize("BF.DAMAGE.Scaling.Mode.None") },
+			...Object.entries(CONFIG.BlackFlag.damageScalingModes).map(([value, config]) => ({
+				value,
+				label: game.i18n.localize(config.label)
+			}))
+		];
+		return context;
+	}
 }

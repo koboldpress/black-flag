@@ -65,7 +65,9 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			);
 		}
 
-		new BlackFlagContextMenu(this, "[data-item-id]", [], { onOpen: this._onContextMenu.bind(this) });
+		new BlackFlagContextMenu(this, "[data-item-id], [data-activity-id]", [], {
+			onOpen: this._onContextMenu.bind(this)
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -127,40 +129,74 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	/**
 	 * Get the set of ContextMenu options which should be applied to inventory entries.
 	 * @param {BlackFlagItem} item - The item for which the context menu is being activated.
+	 * @param {Activity} [activity] - Activity for which the context menu is being activated.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
 	 * @protected
 	 */
-	_getContextMenuOptions(item) {
+	_getContextMenuOptions(item, activity) {
 		const type = item.type === "spell" ? "Spell" : item.system.isPhysical ? "Item" : "Feature";
 		return [
 			{
+				name: "BF.ACTIVITY.Core.Action.View",
+				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
+				condition: li => activity && !this.isEditable,
+				callback: li => this._onAction(li[0], "viewActivity"),
+				group: "activity"
+			},
+			{
+				name: "BF.ACTIVITY.Core.Action.Activate",
+				icon: '<i class="fa-solid fa-power-off fa-fw" inert></i>',
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "activate"),
+				group: "activity"
+			},
+			{
+				name: "BF.ACTIVITY.Core.Action.Edit",
+				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "editActivity"),
+				group: "activity"
+			},
+			{
+				name: "BF.ACTIVITY.Core.Action.Delete",
+				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
+				condition: li => activity && this.isEditable,
+				callback: li => this._onAction(li[0], "deleteActivity"),
+				group: "activity"
+			},
+			{
 				name: "BF.Item.Action.Post",
 				icon: '<i class="fa-solid fa-envelope fa-fw" inert></i>',
-				callback: li => this._onAction(li[0], "post")
+				callback: li => this._onAction(li[0], "post"),
+				group: "item"
 			},
 			{
 				name: `BF.${type}.Action.View`,
 				icon: '<i class="fa-solid fa-eye fa-fw" inert></i>',
 				condition: li => !this.isEditable,
-				callback: li => this._onAction(li[0], "view")
+				callback: li => this._onAction(li[0], "view"),
+				group: "item"
 			},
 			{
 				name: `BF.${type}.Action.Edit`,
 				icon: '<i class="fa-solid fa-edit fa-fw" inert></i>',
 				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "edit")
+				callback: li => this._onAction(li[0], "edit"),
+				group: "item"
 			},
 			{
 				name: `BF.${type}.Action.Duplicate`,
 				icon: '<i class="fa-solid fa-copy fa-fw" inert></i>',
 				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "duplicate")
+				callback: li => this._onAction(li[0], "duplicate"),
+				group: "item"
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
 				condition: li => this.isEditable,
-				callback: li => this._onAction(li[0], "delete")
+				callback: li => this._onAction(li[0], "delete"),
+				group: "item"
 			},
 			{
 				name: `BF.Feature.Action.${item.enabled ? "Disable" : "Enable"}`,
@@ -196,10 +232,12 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	 * Handle one of the actions from the buttons or context menu.
 	 * @param {HTMLElement} target - Button or context menu entry that triggered this action.
 	 * @param {string} action - Action being triggered.
+	 * @param {object} [options={}]
+	 * @param {Event} [options.originalEvent] - Original triggering event.
 	 * @returns {Promise}
 	 * @protected
 	 */
-	async _onAction(target, action) {
+	async _onAction(target, action, { originalEvent } = {}) {
 		const event = new CustomEvent("bf-inventory", {
 			bubbles: true,
 			cancelable: true,
@@ -210,6 +248,8 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		const dataset = (target.closest("[data-item-id]") || target)?.dataset ?? {};
 		const item = await this.getItem(dataset.itemId);
 		if (action !== "add" && !item) return this.app._onAction?.(event, dataset);
+		const activityId = (target.closest("[data-activity-id]") || target)?.dataset?.activityId;
+		const activity = item.system.activities?.get(activityId);
 
 		switch (action) {
 			case "add":
@@ -218,10 +258,15 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				return this._onAdjustment(item, target);
 			case "attune":
 				return item.setFlag("black-flag", "relationship.attuned", !item.system.attuned);
+			case "deleteActivity":
+				if (activity) return activity.deleteDialog();
 			case "delete":
 				return item.deleteDialog();
 			case "duplicate":
 				return item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name }) }, { save: true });
+			case "editActivity":
+			case "viewActivity":
+				if (activity) return activity.sheet.render({ force: true });
 			case "edit":
 			case "view":
 				return item.sheet.render(true);
@@ -231,6 +276,8 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				return item.setFlag("black-flag", "relationship.equipped", !item.system.equipped);
 			case "expand":
 				return this._onExpand(item, target);
+			case "activate":
+				if (activity) return activity.activate({ event: originalEvent });
 			case "post":
 				return item.postToChat();
 			case "prepare":
@@ -344,17 +391,23 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	_onContextMenu(element) {
 		const item = this.getItem(element.closest("[data-item-id]")?.dataset.itemId);
 		// Parts of ContextMenu doesn't play well with promises, so don't show menus for containers in packs
-		if (!item || item instanceof Promise) return;
-		ui.context.menuItems = this._getContextMenuOptions(item);
+		if (!item || item instanceof Promise) {
+			ui.context.menuItems = [];
+			return;
+		}
+		const activity = item.system.activities?.get(element.closest("[data-activity-id]")?.dataset.activityId);
+		ui.context.menuItems = this._getContextMenuOptions(item, activity);
+
 		/**
 		 * A hook event that fires when the context menu for an inventory list is constructed.
 		 * @function blackFlag.getInventoryContext
 		 * @memberof hookEvents
 		 * @param {InventoryElement} html - The HTML element to which the context options are attached.
 		 * @param {BlackFlagItem} item - The item for which the context options are being prepared.
+		 * @param {Activity} [activity] - The activity for which the context options are being prepared.
 		 * @param {ContextMenuEntry[]} entryOptions - The context menu entries.
 		 */
-		Hooks.call("blackFlag.getInventoryContext", this, item, ui.context.menuItems);
+		Hooks.call("blackFlag.getInventoryContext", this, item, activity, ui.context.menuItems);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -381,7 +434,9 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 					"systems/black-flag/templates/shared/parts/inventory-summary.hbs",
 					await item.getSummaryContext({ sections: this.document.isOwner })
 				);
-				expanded.querySelector("td").innerHTML = summary;
+				const div = document.createElement("div");
+				div.innerHTML = summary;
+				expanded.querySelector("td .wrapper").append(div.querySelector(".item-summary"));
 			}
 			this.app.expanded.add(item.id);
 			requestAnimationFrame(() => {

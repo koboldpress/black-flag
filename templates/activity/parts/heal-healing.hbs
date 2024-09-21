@@ -4,7 +4,7 @@
 			<ul class="configuration-list">
 				<li>
 					<fieldset class="unfieldset">
-						{{> "systems/black-flag/templates/activity/parts/damage-part.hbs"
+						{{> "systems/black-flag/templates/activity/parts/damage-part.hbs" scalingOptions=scalingOptions
 					    	data=source.system.healing prefix="$." typeOptions=CONFIG.healingTypes.localized }}
 					</fieldset>
 				</li>

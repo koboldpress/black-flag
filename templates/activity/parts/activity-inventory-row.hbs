@@ -1,0 +1,12 @@
+<div class="activity-row" data-activity-id="{{ _id }}">
+	<div class="name layout">
+		{{#if svgImg}}
+			<blackFlag-icon src="{{ img }}" alt="{{ name }}"></blackFlag-icon>
+		{{else}}
+			<img src="{{ img }}" alt="{{ name }}">
+		{{/if}}
+		<button class="link-button" type="button" data-action="activate">
+			<span>{{ name }}</span>
+		</button>
+	</div>
+</div>

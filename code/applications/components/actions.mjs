@@ -164,7 +164,7 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 				break;
 			case "edit":
 			case "view":
-				if (activity) return activity.sheet.render(true);
+				if (activity) return activity.sheet.render({ force: true });
 			case "editItem":
 			case "viewItem":
 				if (item) return item.sheet.render(true);

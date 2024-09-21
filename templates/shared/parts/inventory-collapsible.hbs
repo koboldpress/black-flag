@@ -1,0 +1,12 @@
+<div class="collapsible-content" data-item-id="{{ item.id }}">
+	<div class="wrapper">
+		{{#if ctx.activities.length}}
+			<div class="activities">
+				{{#each ctx.activities}}
+					{{> "blackFlag.activity-inventory-row" }}
+				{{/each}}
+			</div>
+		{{/if}}
+		{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
+	</div>
+</div>

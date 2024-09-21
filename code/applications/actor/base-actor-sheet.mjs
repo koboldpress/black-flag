@@ -114,6 +114,21 @@ export default class BaseActorSheet extends ActorSheet {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Prepare activity context within the inventory list.
+	 * @param {Activity} activity - Activity to prepare.
+	 * @returns {object}
+	 */
+	prepareActivity(activity) {
+		let { _id, name, img } = activity;
+		// TODO: Uses / Activation / Range / Target / Traits (for spells)
+		// TODO: Uses / Traits (for inventory)
+		// TODO: Uses (for features)
+		return { _id, name, img, svgImg: img.endsWith(".svg") };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare actions for display.
 	 * @param {object} context - Context object for rendering the sheet. **Will be mutated.**
 	 */
@@ -173,6 +188,8 @@ export default class BaseActorSheet extends ActorSheet {
 		});
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/**
 	 * Prepare context data for a specific item.
 	 * @param {BlackFlagItem} item - Item being prepared.
@@ -180,6 +197,8 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @param {object} section - Sheet section within which this item will be displayed.
 	 */
 	async prepareItem(item, context, section) {
+		context.activities = item.system.activities?.map(this.prepareActivity.bind(this));
+
 		context.buttons ??= [];
 		context.dataset ??= {};
 		if ((item.system.activities?.size || item.transferredEffects.length) && section.tab === "features")

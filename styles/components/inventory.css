@@ -28,12 +28,6 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 					position: relative;
 					padding-inline: 0.25rem;
 					font-size: var(--font-size-13);
-
-					> div.layout {
-						display: flex;
-						align-items: center;
-						gap: 0.5rem;
-					}
 				}
 				:is(td, th):not(:first-child, :last-child)::after {
 					content: "";
@@ -94,11 +88,23 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 				}
 
 				.name {
+					--icon-size: var(--inventory-image-size);
+					img, blackflag-icon {
+						display: block;
+						flex: 0 0 var(--inventory-image-size);
+					}
 					img {
 						width: var(--inventory-image-size);
 						height: var(--inventory-image-size);
 						border: none;
 						background-color: black;
+					}
+					button {
+						flex: 1 1 100%;
+						display: flex;
+						align-items: center;
+						align-self: stretch;
+						gap: 4px;
 					}
 				}
 				.components {
@@ -115,8 +121,48 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 
 				&[data-expand-for] {
 					td { padding: 0; }
+
+					.activities {
+						--activity-border-color: rgb(0 0 0 / .25);
+						--inventory-image-size: 20px;
+						position: relative;
+						border-block-end: 1px solid var(--activity-border-color);
+						&::before, &::after {
+							content: "";
+							position: absolute;
+							inset-block: 0;
+							inline-size: 1px;
+							background: linear-gradient(to bottom, rgb(0 0 0 / 0), var(--activity-border-color));
+						}
+						&::before { inset-inline-start: 0; }
+						&::after { inset-inline-end: 0; }
+					}
+					.activity-row {
+						position: relative;
+						padding-inline-start: 18px;
+						&::before {
+							content: "";
+							position: absolute;
+							inset-block-start: 0;
+							inset-block-end: 50%;
+							inset-inline-start: 8px;
+							inline-size: 8px;
+							border: 1px dotted black;
+							border-inline-end-width: 0;
+							border-block-start-width: 0;
+						}
+						.name {
+							padding: 0.25rem;
+						}
+					}
 				}
 			}
+		}
+
+		div.layout {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
 		}
 	}
 
