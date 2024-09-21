@@ -1,0 +1,16 @@
+<section>
+	<menu class="unlist">
+		{{#each activities}}
+			<li>
+				<button type="button" class="light-button" data-action="choose" data-activity-id="{{ id }}">
+					{{#if svgImg}}
+						<blackFlag-icon src="{{ img }}" alt="{{ name }}"></blackFlag-icon>
+					{{else}}
+						<img src="{{ img }}" alt="{{ name }}">
+					{{/if}}
+					<span class="name">{{ name }}</span>
+				</button>
+			</li>
+		{{/each}}
+	</menu>	
+</section>

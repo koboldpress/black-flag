@@ -227,6 +227,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Data used to display the activity in the inventory or activity selection lists.
+	 * @type {object}
+	 */
+	get listContext() {
+		// TODO: Uses / Activation / Range / Target / Traits (for spells)
+		// TODO: Uses / Traits (for inventory)
+		// TODO: Uses (for features)
+		return { id: this.id, name: this.name, img: this.img, svgImg: this.img.endsWith(".svg") };
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Create the data added to messages flags.
 	 * @type {object}
 	 */

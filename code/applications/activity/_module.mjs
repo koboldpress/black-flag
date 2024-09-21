@@ -7,4 +7,5 @@ export { default as SaveSheet } from "./save-sheet.mjs";
 export { default as UtilitySheet } from "./utility-sheet.mjs";
 
 export { default as ActivityActivationDialog } from "./activity-activation-dialog.mjs";
+export { default as ActivityChoiceDialog } from "./activity-choice-dialog.mjs";
 export { default as ActivitySelection } from "./activity-selection.mjs";

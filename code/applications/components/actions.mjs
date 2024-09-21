@@ -155,8 +155,8 @@ export default class ActionsElement extends DocumentSheetAssociatedElement {
 		switch (action) {
 			case "activate":
 				if (activity) return activity.activate({ event });
-				if (item) return item.postToChat();
-				break;
+			case "activateItem":
+				return item?.activate({ event });
 			case "delete":
 				if (activity) return activity.deleteDialog();
 			case "deleteItem":

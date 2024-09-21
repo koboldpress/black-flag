@@ -11,8 +11,9 @@
 					<td class="controls"></td>
 				</tr>
 				{{#each section.items}}
-					<tr class="item-tooltip" data-item-id="{{ id }}">
-						<th class="name" scope="row">
+				{{#blackFlag-itemContext this as |ctx|}}
+					<tr data-item-id="{{ id }}">
+						<th class="name item-tooltip" scope="row">
 							<div class="layout">
 								<button type="button" class="link-button" data-action="expand">
 									<span>{{ name }}</span>
@@ -50,6 +51,7 @@
 							{{> "blackFlag.inventory-collapsible" item=this ctx=ctx}}
 						</td>
 					</tr>
+				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>
 		{{/each}}

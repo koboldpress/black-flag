@@ -119,11 +119,7 @@ export default class BaseActorSheet extends ActorSheet {
 	 * @returns {object}
 	 */
 	prepareActivity(activity) {
-		let { _id, name, img } = activity;
-		// TODO: Uses / Activation / Range / Target / Traits (for spells)
-		// TODO: Uses / Traits (for inventory)
-		// TODO: Uses (for features)
-		return { _id, name, img, svgImg: img.endsWith(".svg") };
+		return activity.listContext;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

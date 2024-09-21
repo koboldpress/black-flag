@@ -1,3 +1,4 @@
+import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { slugify } from "../utils/text.mjs";
 import DocumentMixin from "./mixins/document.mjs";
@@ -222,6 +223,28 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Activate this item, posting to chat if no activities are set, triggering the only activity if only one is present,
+	 * and displaying an activity choice dialog if more than one is available.
+	 * @param {Partial<ActivityActivationConfiguration>} [config={}] - Configuration info for the activation.
+	 * @param {Partial<ActivityDialogConfiguration>} [dialog={}] - Configuration info for the configuration dialog.
+	 * @param {Partial<ActivityMessageConfiguration>} [message={}] - Configuration info for the chat message created.
+	 */
+	async activate(config = {}, dialog = {}, message = {}) {
+		if (this.system.activities?.size && !this.pack) {
+			let activity = this.system.activities.contents[0];
+			// TODO: Handle proper skip-dialog keybindings
+			if (this.system.activities.size > 1 && !config.event?.shiftKey) {
+				activity = await ActivityChoiceDialog.create(this);
+			}
+			activity?.activate(config, dialog, message);
+		} else if (this.actor) {
+			this.postToChat(message);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Get advancement for this item.
 	 * @param {number|AdvancementLevels} levels - Level for which to get the advancement.
 	 * @yields {Advancement}
@@ -365,7 +388,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 
 	/**
 	 * Post this item's description to chat.
-	 * @param {object} message - Configuration info for the created message.
+	 * @param {Partial<ActivityMessageConfiguration>} [message={}] - Configuration info for the chat message created.
 	 * @returns {Promise<ChatMessage>}
 	 */
 	async postToChat(message = {}) {

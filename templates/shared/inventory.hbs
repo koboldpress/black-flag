@@ -23,8 +23,8 @@
 				</tr>
 				{{#each section.items}}
 				{{#blackFlag-itemContext this as |ctx|}}
-					<tr class="item-tooltip" data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
-						<th class="name" scope="row">
+					<tr data-item-id="{{ id }}" {{ blackFlag-dataset ctx.dataset }}>
+						<th class="name item-tooltip" scope="row">
 							<div class="layout">
 								<img src="{{ img }}" alt="{{ name }}">
 								<button type="button" class="link-button" data-action="expand">
