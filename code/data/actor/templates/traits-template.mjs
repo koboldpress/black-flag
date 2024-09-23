@@ -108,7 +108,9 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		const modifierData = {
 			type: "movement",
 			armored: !!this.attributes?.ac?.equippedArmor,
-			shielded: !!this.attributes?.ac?.equippedShield
+			armor: this.attributes?.ac?.equippedArmor?.system,
+			shielded: !!this.attributes?.ac?.equippedShield,
+			shield: this.attributes?.ac?.equippedShield?.system
 		};
 
 		// Calculate each special movement type using base speed

@@ -90,7 +90,13 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 
 		const rollData = this.parent.getRollData({ deterministic: true });
 		rollData.attributes.ac = ac;
-		const acData = { type: "armor-class", armored: !!ac.equippedArmor, shielded: !!ac.equippedShield };
+		const acData = {
+			type: "armor-class",
+			armored: !!ac.equippedArmor,
+			armor: ac.equippedArmor?.system,
+			shielded: !!ac.equippedShield,
+			shield: ac.equippedShield?.system
+		};
 
 		// Filter formulas to only ones that match current armor settings
 		const validFormulas = ac.formulas.filter(formula => {
