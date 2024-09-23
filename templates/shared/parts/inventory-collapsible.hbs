@@ -1,12 +1,16 @@
-<div class="collapsible-content" data-item-id="{{ item.id }}">
-	<div class="wrapper">
-		{{#if ctx.activities.length}}
-			<div class="activities">
-				{{#each ctx.activities}}
-					{{> "blackFlag.activity-inventory-row" }}
-				{{/each}}
+<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ item.id }}">
+	<td colspan="{{ columns }}">
+		<div class="collapsible-content">
+			<div class="wrapper">
+				<table class="activities" data-item-id="{{ item.id }}">
+					{{#each ctx.activities}}
+						{{> "blackFlag.activity-inventory-row" }}
+					{{/each}}
+				</table>
+				{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
 			</div>
-		{{/if}}
-		{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
-	</div>
-</div>
+		</div>
+	</td>
+</tr>
+
+

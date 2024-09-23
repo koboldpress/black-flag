@@ -1,12 +1,37 @@
-<div class="activity-row" data-activity-id="{{ id }}">
-	<div class="name layout">
-		{{#if svgImg}}
-			<blackFlag-icon src="{{ img }}" alt="{{ name }}"></blackFlag-icon>
-		{{else}}
-			<img src="{{ img }}" alt="{{ name }}">
-		{{/if}}
-		<button class="link-button" type="button" data-action="activate">
-			<span>{{ name }}</span>
-		</button>
-	</div>
-</div>
+<tr class="activity-row" data-activity-id="{{ id }}">
+	<td class="name">
+			<div class="layout">
+			{{#if svgImg}}
+				<blackFlag-icon src="{{ img }}" alt="{{ name }}"></blackFlag-icon>
+			{{else}}
+				<img src="{{ img }}" alt="{{ name }}">
+			{{/if}}
+			<button class="link-button" type="button" data-action="activate">
+				<span>{{ name }}</span>
+			</button>
+		</div>
+	</td>
+	<td class="controls">
+		<div class="layout">
+			{{#if @root.editable}}
+				<button type="button" class="link-button" data-action="editActivity"
+			        	data-tooltip="BF.ACTIVITY.Core.Action.Edit"
+			        	aria-label="{{ localize 'BF.ACTIVITY.Core.Action.Edit' }}">
+					<i class="fa-solid fa-edit" inert></i>
+				</button>
+				<button type="button" class="link-button" data-action="deleteActivity"
+			        	data-tooltip="BF.ACTIVITY.Core.Action.Delete"
+			        	aria-label="{{ localize 'BF.ACTIVITY.Core.Action.Delete' }}">
+					<i class="fa-solid fa-trash" inert></i>
+				</button>
+			{{else}}
+				
+			{{/if}}
+			<button type="button" class="link-button" data-context-menu
+							data-tooltip="BF.AdditionalControls"
+							aria-label="{{ localize 'BF.AdditionalControls' }}">
+				<i class="fa-solid fa-ellipsis-vertical" inert></i>
+			</button>
+		</div>
+	</td>
+</tr>

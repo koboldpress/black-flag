@@ -48,11 +48,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
-						<td colspan="3">
-							{{> "blackFlag.inventory-collapsible" item=this ctx=ctx}}
-						</td>
-					</tr>
+					{{> "blackFlag.inventory-collapsible" item=this ctx=ctx columns=3}}
 				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>
@@ -97,11 +93,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr class="collapsible {{#unless ctx.expanded}}collapsed{{/unless}}" data-expand-for="{{ id }}">
-						<td colspan="2">
-							{{#if ctx.expanded}}{{> "blackFlag.inventory-summary" ctx.expanded }}{{/if}}
-						</td>
-					</tr>
+					{{> "blackFlag.inventory-collapsible" item=this ctx=ctx columns=2}}
 				{{/blackFlag-itemContext}}
 				{{/each}}
 			</tbody>

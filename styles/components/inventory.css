@@ -3,24 +3,9 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 	display: block;
 	container: inventory / inline-size;
 
-	> table {
+	table {
 		border: none;
 		background: none;
-
-		> thead {
-			border: none;
-			background: none;
-			color: var(--color-text-dark-1);
-			text-shadow: none;
-
-			tr:has(blackFlag-filters) {
-				th {
-					padding: 0;
-					padding-inline: 4px;
-					padding-block-end: 2px;
-				}
-			}
-		}
 
 		> tbody {
 			tr {
@@ -40,40 +25,7 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 				}
 			}
 
-			> tr:first-child {
-				position: relative;
-				border: 2px inset color-mix(in oklab, var(--bf-color-border-blue), white 40%);
-				background-color: var(--bf-background-color-half-white);
-				font-family: var(--bf-font-header);
-				font-weight: 600;
-
-				&::after {
-					content: "";
-					position: absolute;
-					inset: 3px;
-					border: 1px solid var(--bf-color-border-gray);
-					box-shadow: 0px 0px 3px rgb(0 0 0 / 0.25);
-					z-index: 0;
-				}
-
-				> tr, > td {
-					font-size: var(--font-size-14);
-
-					@media (resolution: 2x) {
-						font-size: var(--font-size-13);
-					}
-				}
-
-				> * {
-					z-index: 1;
-				}
-				.name {
-					padding-inline-start: 0.5rem;
-					font-variant: small-caps;
-				}
-			}
-
-			> tr:not(:first-child) {
+			> tr {
 				--background-gradient-color: transparent;
 				--background-base-color: transparent;
 
@@ -118,44 +70,7 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 				[data-action="expand"] .fa-caret-down { opacity: .7; }
 				&:has(+ [data-expand-for]) [data-action="expand"] .fa-caret-down { transition: transform 250ms ease; }
 				&:has(+ [data-expand-for].collapsed) [data-action="expand"] .fa-caret-down { transform: rotate(-90deg); }
-
-				&[data-expand-for] {
-					td { padding: 0; }
-
-					.activities {
-						--activity-border-color: rgb(0 0 0 / .25);
-						--inventory-image-size: 20px;
-						position: relative;
-						border-block-end: 1px solid var(--activity-border-color);
-						&::before, &::after {
-							content: "";
-							position: absolute;
-							inset-block: 0;
-							inline-size: 1px;
-							background: linear-gradient(to bottom, rgb(0 0 0 / 0), var(--activity-border-color));
-						}
-						&::before { inset-inline-start: 0; }
-						&::after { inset-inline-end: 0; }
-					}
-					.activity-row {
-						position: relative;
-						padding-inline-start: 18px;
-						&::before {
-							content: "";
-							position: absolute;
-							inset-block-start: 0;
-							inset-block-end: 50%;
-							inset-inline-start: 8px;
-							inline-size: 8px;
-							border: 1px dotted black;
-							border-inline-end-width: 0;
-							border-block-start-width: 0;
-						}
-						.name {
-							padding: 0.25rem;
-						}
-					}
-				}
+				&[data-expand-for] > td { padding: 0; }
 			}
 		}
 
@@ -163,6 +78,95 @@ blackFlag-inventory, blackFlag-currency, blackFlag-effects {
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
+		}
+	}
+
+	> table {
+		> thead {
+			border: none;
+			background: none;
+			color: var(--color-text-dark-1);
+			text-shadow: none;
+
+			tr:has(blackFlag-filters) {
+				th {
+					padding: 0;
+					padding-inline: 4px;
+					padding-block-end: 2px;
+				}
+			}
+		}
+		> tbody {
+			> tr:first-child {
+				position: relative;
+				border: 2px inset color-mix(in oklab, var(--bf-color-border-blue), white 40%);
+				background-color: var(--bf-background-color-half-white);
+				font-family: var(--bf-font-header);
+				font-weight: 600;
+
+				&::after {
+					content: "";
+					position: absolute;
+					inset: 3px;
+					border: 1px solid var(--bf-color-border-gray);
+					box-shadow: 0px 0px 3px rgb(0 0 0 / 0.25);
+					z-index: 0;
+				}
+
+				> tr, > td {
+					font-size: var(--font-size-14);
+
+					@media (resolution: 2x) {
+						font-size: var(--font-size-13);
+					}
+				}
+
+				> * {
+					z-index: 1;
+				}
+				.name {
+					padding-inline-start: 0.5rem;
+					font-variant: small-caps;
+				}
+			}
+		}
+	}
+
+	table.activities {
+		--activity-border-color: rgb(0 0 0 / .25);
+		--inventory-image-size: 20px;
+		position: relative;
+		margin: 0;
+		border-block-end: 1px solid var(--activity-border-color);
+
+		&::before, &::after {
+			content: "";
+			position: absolute;
+			inset-block: 0;
+			inline-size: 1px;
+			background: linear-gradient(to bottom, rgb(0 0 0 / 0), var(--activity-border-color));
+		}
+		&::before { inset-inline-start: 0; }
+		&::after { inset-inline-end: 0; }
+
+		.activity-row {
+			position: relative;
+			padding-inline-start: 18px;
+			&::before {
+				content: "";
+				position: absolute;
+				inset-block-start: 0;
+				inset-block-end: 50%;
+				inset-inline-start: 8px;
+				inline-size: 8px;
+				border: 1px dotted black;
+				border-inline-end-width: 0;
+				border-block-start-width: 0;
+			}
+			.name {
+				padding: .25rem;
+				padding-inline-start: calc(18px + .25rem);
+			}
 		}
 	}
 

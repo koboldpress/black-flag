@@ -51,7 +51,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 				"click",
 				event => {
 					event.stopPropagation();
-					event.currentTarget.closest("[data-item-id]").dispatchEvent(
+					event.currentTarget.closest("[data-activity-id], [data-item-id]").dispatchEvent(
 						new PointerEvent("contextmenu", {
 							view: window,
 							bubbles: true,
