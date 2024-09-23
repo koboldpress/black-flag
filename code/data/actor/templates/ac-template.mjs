@@ -88,7 +88,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 		ac.armor = ac.equippedArmor?.system.armor.value ?? 0;
 		ac.flat ??= 10;
 
-		const rollData = this.parent.getRollData({deterministic: true});
+		const rollData = this.parent.getRollData({ deterministic: true });
 		rollData.attributes.ac = ac;
 		const acData = { type: "armor-class", armored: !!ac.equippedArmor, shielded: !!ac.equippedShield };
 
@@ -125,8 +125,9 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 
 		ac.modifiers = this.getModifiers(acData);
 		ac.bonus = this.buildBonus(ac.modifiers, { deterministic: true, rollData });
+		ac.min = this.buildMinimum(this.getModifiers(acData, "min"), { rollData });
 
 		if ( ac.override ) ac.value = ac.override;
-		else ac.value = ac.base + ac.shield + ac.bonus + ac.cover;
+		else ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
 	}
 }
