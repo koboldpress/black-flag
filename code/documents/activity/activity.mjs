@@ -1,4 +1,5 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
+import AbilityTemplate from "../../canvas/ability-template.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import ConsumptionError from "../../data/activity/consumption-error.mjs";
 import { areKeysPressed, buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
@@ -37,7 +38,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				title: "BF.ACTIVITY.Label[one]",
 				hint: "",
 				usage: {
-					actions: {},
+					actions: {
+						placeTemplate: Activity.#placeTemplate
+					},
 					chatCard: "systems/black-flag/templates/activity/chat/activation-card.hbs",
 					dialog: ActivityActivationDialog
 				}
@@ -361,6 +364,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Configuration data for an activity's activation.
 	 *
 	 * @typedef {object} ActivityActivationConfiguration
+	 * @property {object|false} create
+	 * @property {boolean} create.measuredTemplate - Should measured templates defined by activity be created?
 	 * @property {boolean|object} consume - Consumption configuration, set to `false` to prevent all consumption.
 	 * @property {boolean} consume.action - Control whether a part of the action economy is used during activation.
 	 * @property {boolean|BlackFlagItem} consume.ammunition - Control whether ammunition is consumed by a weapon or
@@ -401,6 +406,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {BlackFlagChatMessage|ActivityMessageConfiguration} message - The chat message created for the
 	 *                                                                         activation, or the message data if create
 	 *                                                                         was `false`.
+	 * @property {MeasuredTemplateDocument[]} templates - Created measured templates.
 	 * @property {ActivationUpdates} updates - Updates to the actor & items.
 	 */
 
@@ -472,7 +478,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		// Handle consumption
 		const updates = await activity.consume(activationConfig, messageConfig);
 		if (updates === false) return;
-		const results = { updates };
+		const results = { templates: [], updates };
 
 		// TODO: Create activated effect/track concentration
 
@@ -591,7 +597,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	_prepareActivationConfig(config = {}) {
 		config = foundry.utils.deepClone(config);
 
-		// TODO: Create measured template
+		if (config.create !== false) {
+			config.create ??= {};
+			config.create.measuredTemplate ??= !!this.target.template.type;
+		}
 
 		if (config.consume !== false) {
 			config.consume ??= {};
@@ -751,9 +760,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @protected
 	 */
 	_requiresConfigurationDialog(config) {
-		if (config.consume !== false) return true;
-		if (config.scaling !== false) return true;
-		return false;
+		const checkObject = obj => foundry.utils.getType(obj) === "Object" && Object.values(obj).some(v => v);
+		return checkObject(config.create) || checkObject(config.consume) || config.scaling !== false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -799,7 +807,18 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @protected
 	 */
 	_activationChatButtons() {
-		return [];
+		const buttons = [];
+
+		if (this.target?.template?.type)
+			buttons.push({
+				label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate"),
+				icon: '<i class="fa-solid fa-bullseye" inert></i>',
+				dataset: {
+					action: "placeTemplate"
+				}
+			});
+
+		return buttons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -811,6 +830,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {boolean}
 	 */
 	shouldHideChatButton(button, message) {
+		switch (button.dataset.action) {
+			case "placeTemplate":
+				return !game.user.can("TEMPLATE_CREATE") || !game.canvas.scene;
+		}
 		return false;
 	}
 
@@ -881,7 +904,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @protected
 	 */
 	async _finalizeActivation(config, results) {
-		// TODO: Create measured templates
+		results.templates = config.create?.measuredTemplate ? await Activity.#placeTemplate.call(this) : [];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1020,6 +1043,33 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @protected
 	 */
 	async _onChatAction(event, target, message) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle placing measured templates into the scene.
+	 * @this {Activity}
+	 * @param {PointerEvent} event - Triggering click event.
+	 * @param {HTMLElement} target - The capturing HTML element which defined a [data-action].
+	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
+	 * @returns {Promise<MeasuredTemplateDocument[]>}
+	 */
+	static async #placeTemplate(event, target, message) {
+		const templates = [];
+		try {
+			for (const template of AbilityTemplate.fromActivity(this)) {
+				const result = await template.drawPreview();
+				if (result) templates.push(result);
+			}
+		} catch (err) {
+			Hooks.onError("Activity#placeTemplate", err, {
+				msg: game.i18n.localize("BF.TARGET.Warning.PlaceTemplate"),
+				log: "error",
+				notify: "error"
+			});
+		}
+		return templates;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */

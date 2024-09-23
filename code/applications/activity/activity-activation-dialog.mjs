@@ -1,6 +1,8 @@
 import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import BlackFlagDialog from "../dialog.mjs";
 
+const { BooleanField } = foundry.data.fields;
+
 /**
  * Application to handled configuring the activation of an activity.
  */
@@ -102,8 +104,15 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 			{ inplace: false }
 		);
 		this._prepareScaling(data);
+		if (this.activity.target?.template?.type)
+			data.template = {
+				field: new BooleanField({ label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate") }),
+				name: "create.measuredTemplate",
+				value: this.config.create?.measuredTemplate
+			};
 		data.show = {
 			actionConsumption: this.activity.activation.type === "legendary",
+			creation: !!data.template,
 			scaling: data.scalingData.max,
 			scalingRange: data.scalingData.max <= 20,
 			spellConsumption: this.activity.requiresSpellSlot,

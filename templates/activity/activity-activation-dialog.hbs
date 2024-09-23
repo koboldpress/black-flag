@@ -66,4 +66,13 @@
 		</fieldset>
 	{{/if}}
 
+	{{#if show.creation}}
+		<fieldset>
+			<legend>{{ localize "BF.ACTIVATION.SECTION.Creation" }}</legend>
+			{{#if template}}
+				{{ formField template.field name=template.name value=template.value }}
+			{{/if}}
+		</fieldset>
+	{{/if}}
+
 </form>
