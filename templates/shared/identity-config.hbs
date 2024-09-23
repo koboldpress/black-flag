@@ -34,7 +34,16 @@
 		<fieldset>
 			<legend>{{ localize "BF.SOURCE.Label" }}</legend>
 			{{#if source}}
-				{{ formField source.fields.book value=source.source.book placeholder=source.data.bookPlaceholder }}
+				<div class="form-group">
+					<label>{{ localize "BF.SOURCE.FIELDS.description.source.book.label" }}</label>
+					<div class="form-fields">
+						<input type="text" name="system.description.source.book" value="{{ source.data.book }}"
+						       list="{{ partId }}-books" placeholder="{{ source.data.bookPlaceholder }}">
+						<datalist id="{{ partId }}-books">
+							{{ selectOptions CONFIG.sourceBooks }}
+						</datalist>
+					</div>
+				</div>
 				{{ formField source.fields.page value=source.source.page }}
 				{{ formField source.fields.fallback value=source.source.fallback }}
 			{{/if}}

@@ -1,6 +1,6 @@
-/* -------------------------------------------- */
-/*  Message Rolls                               */
-/* -------------------------------------------- */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                     Message Rolls                     */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 class MessageRegistry {
 	/**
@@ -10,7 +10,7 @@ class MessageRegistry {
 	 */
 	static #messages = new Map();
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Fetch roll messages for an origin message, in chronological order.
@@ -33,7 +33,7 @@ class MessageRegistry {
 			.sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Add a new roll message to the registry.
@@ -49,7 +49,7 @@ class MessageRegistry {
 		originMap.get(type).add(message.id);
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Remove a roll message to the registry.

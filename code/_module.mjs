@@ -14,6 +14,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as enrichers from "./enrichers.mjs";
+import registerModuleData from "./module-registration.mjs";
 import { default as registry } from "./registry.mjs";
 import * as settings from "./settings.mjs";
 import TooltipConductor from "./tooltips.mjs";
@@ -65,6 +66,8 @@ Hooks.once("init", function () {
 	settings.registerSettings();
 	utils.registerHandlebarsHelpers();
 	utils.registerHandlebarsPartials();
+
+	registerModuleData();
 
 	game.blackFlag.tooltipConductor = new TooltipConductor();
 });
