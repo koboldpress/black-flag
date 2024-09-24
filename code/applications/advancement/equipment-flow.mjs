@@ -14,15 +14,6 @@ export default class EquipmentFlow extends AdvancementFlow {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
-		context.disabled = !this.advancement.canConfigure;
-		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
 	/** @override */
 	async _updateObject(event, formData) {
 		if (event.submitter?.dataset.action === "select-equipment") {
@@ -39,10 +30,10 @@ export default class EquipmentFlow extends AdvancementFlow {
 
 			if (result.assignments) {
 				for (const [type, advancement] of Object.entries(result.advancements)) {
-					await advancement.apply(this.levels, { assignments: result.assignments[type] });
+					await advancement?.apply(this.levels, { assignments: result.assignments[type] });
 				}
 			} else if (result.wealth) {
-				result.advancements.class.apply(this.levels, { wealth: result.wealth });
+				result.advancements.class?.apply(this.levels, { wealth: result.wealth });
 			}
 		}
 	}

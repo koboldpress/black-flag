@@ -90,7 +90,7 @@ export default class EquipmentDialog extends BFApplication {
 	get documents() {
 		return {
 			background: this.actor.system.progression.background,
-			class: this.actor.system.progression.levels[1].class
+			class: this.actor.system.progression.levels[1]?.class
 		};
 	}
 
@@ -158,6 +158,9 @@ export default class EquipmentDialog extends BFApplication {
 	 */
 	async _prepareSelectionContext(partId, context, options) {
 		context.document = this.documents[partId];
+		context.documentType = game.i18n.localize(CONFIG.Item.typeLabels[partId]).toLowerCase();
+		if (!context.document) return context;
+
 		const advancement = this.advancements[partId];
 		context.locked = advancement.configuredForLevel();
 		if (advancement)
@@ -180,8 +183,9 @@ export default class EquipmentDialog extends BFApplication {
 		context.formula = `${CONFIG.BlackFlag.startingWealth.formula.replace("*", "×")} ${
 			CONFIG.BlackFlag.startingWealth.currency
 		}`;
-		context.locked = this.advancements.class.configuredForLevel() || this.advancements.background.configuredForLevel();
-		context.mode = this.advancements.class.value.wealth ? "wealth" : "equipment";
+		context.locked =
+			this.advancements.class?.configuredForLevel() || this.advancements.background?.configuredForLevel();
+		context.mode = this.advancements.class?.value.wealth ? "wealth" : "equipment";
 		return context;
 	}
 
@@ -254,6 +258,7 @@ export default class EquipmentDialog extends BFApplication {
 	 */
 	static async #onSubmitForm(event, form, formData) {
 		if (formData.get("mode") === "wealth") {
+			if (!this.documents.class) throw new Error(game.i18n.localize("BF.Advancement.Equipment.Warning.NoClass"));
 			const rolls = await CONFIG.Dice.BasicRoll.build(
 				{ rolls: [{ parts: [CONFIG.BlackFlag.startingWealth.formula] }] },
 				{ configure: false },
@@ -290,7 +295,7 @@ export default class EquipmentDialog extends BFApplication {
 		};
 
 		for (const [type, advancement] of Object.entries(this.advancements)) {
-			if (advancement.configuredForLevel()) continue;
+			if (!advancement || advancement.configuredForLevel()) continue;
 			advancement.configuration.pool.filter(e => !e.group).forEach(p => processPart(p, type));
 		}
 

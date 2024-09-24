@@ -116,6 +116,15 @@
 		}
 	}
 
+	fieldset:has(.no-document) {
+		padding-block: 12px;
+
+		.no-document {
+			font-family: var(--bf-font-primary);
+			text-align: center;
+		}
+	}
+
 	[data-application-part="toggle"] {
 		display: flex;
 		gap: 12px;

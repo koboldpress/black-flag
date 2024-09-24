@@ -86,6 +86,7 @@ export default class BasicRoll extends Roll {
 	 */
 	static fromConfig(config, process = {}) {
 		const formula = (config.parts ?? []).join(" + ");
+		config.options ??= {};
 		config.options.target ??= process.target;
 		return new this(formula, config.data, config.options);
 	}

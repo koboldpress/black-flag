@@ -23,4 +23,11 @@ export default Base =>
 			context.CONFIG = CONFIG.BlackFlag;
 			return context;
 		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
+		async _preparePartContext(partId, context, options) {
+			return { ...(await super._preparePartContext(partId, context, options)) };
+		}
 	};
