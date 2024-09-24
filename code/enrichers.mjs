@@ -732,11 +732,11 @@ async function enrichDamage(configs, label, options) {
 	if (!config.formulas.length) {
 		const damageDetails = options.relativeTo?.getDamageDetails?.(config);
 		for (const r of damageDetails?.rolls ?? []) {
-			// TODO: Simplify formula as must as possible for display
 			const formula = Roll.defaultImplementation.replaceFormulaData(r.parts.join(" + "), r.data, { missing: "0" });
 			if (formula) {
 				config.formulas.push(formula);
-				config.types.push(r.options.damageType);
+				if (r.options.damageTypes?.size) config.types.push(Array.from(r.options.damageTypes).join("|"));
+				else config.types.push(r.options.damageType);
 			}
 		}
 		config.activity = damageDetails?.activity?.uuid;
@@ -749,10 +749,13 @@ async function enrichDamage(configs, label, options) {
 	const parts = [];
 	for (const [idx, formula] of config.formulas.entries()) {
 		const type = config.types[idx];
-		const typeConfig = CONFIG.BlackFlag.damageTypes[type] ?? CONFIG.BlackFlag.healingTypes[type];
+		const types = type
+			?.split("|")
+			.map(t => CONFIG.BlackFlag.damageTypes.localized[t] ?? CONFIG.BlackFlag.healingTypes.localized[t])
+			.filter(_ => _);
 		const localizationData = {
 			formula: createRollLink(formula, {}, { tag: "span" }).outerHTML,
-			type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
+			type: game.i18n.getListFormatter({ type: "disjunction" }).format(types).toLowerCase()
 		};
 
 		let localizationType = "Short";
@@ -805,9 +808,14 @@ async function rollDamage(event) {
 	const rollConfig = {
 		attackMode,
 		event,
-		rolls: formulas.map((formula, idx) => ({ parts: [formula], options: { damageType: types[idx], magical } }))
+		rolls: formulas.map((formula, idx) => {
+			const damageTypes = new Set(types[idx]?.split("|") ?? []);
+			return {
+				parts: [formula],
+				options: { damageType: damageTypes?.first(), damageTypes, magical }
+			};
+		})
 	};
-	// TODO: Handle variable damage types here
 
 	const dialogConfig = {};
 

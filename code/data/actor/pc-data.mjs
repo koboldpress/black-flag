@@ -471,18 +471,12 @@ export default class PCData extends ActorDataModel.mixin(
 				if (trait === "skills") {
 					data.modifiers.passive = this.getModifiers({ type: "skill-passive", ability: data.ability, skill: key });
 					data.passive = 10 + data.mod + this.buildBonus(data.modifiers.passive, { deterministic: true, rollData });
-					Object.defineProperty(data, "labels", {
-						value: {
-							name: config.label,
-							ability: ability?.labels.abbreviation
-						},
-						enumerable: false
-					});
+					data.labels = {
+						name: config.label,
+						ability: ability?.labels.abbreviation
+					};
 				} else {
-					Object.defineProperty(data, "label", {
-						value: !config ? "" : config.label ?? `${config.localization}[other]`,
-						enumerable: false
-					});
+					data.label = !config ? "" : config.label ?? `${config.localization}[other]`;
 				}
 			}
 		}
