@@ -9,7 +9,7 @@ export default class DamageSheet extends ActivitySheet {
 		classes: ["damage-activity"]
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	static PARTS = {

@@ -9,7 +9,7 @@ export default class SaveSheet extends ActivitySheet {
 		classes: ["save-activity"]
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	static PARTS = {

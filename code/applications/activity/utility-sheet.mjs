@@ -9,7 +9,7 @@ export default class UtilitySheet extends ActivitySheet {
 		classes: ["utility-activity"]
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	static PARTS = {

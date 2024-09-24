@@ -151,6 +151,13 @@ export default class PCData extends ActorDataModel.mixin(
 					value: new SetField(new StringField()),
 					custom: new ArrayField(new StringField())
 				}),
+				base: new SchemaField({
+					checks: new ProficiencyField(),
+					saves: new ProficiencyField(),
+					skills: new ProficiencyField(),
+					tools: new ProficiencyField(),
+					vehicles: new ProficiencyField()
+				}),
 				skills: new MappingField(
 					new SchemaField({
 						proficiency: new ProficiencyField({ rounding: false })
@@ -164,7 +171,6 @@ export default class PCData extends ActorDataModel.mixin(
 				tools: new MappingField(
 					new SchemaField({
 						proficiency: new ProficiencyField({ rounding: false }, { initial: { multiplier: 1 } })
-						// Default ability
 					}),
 					{ label: "BF.Tool.Label[other]" }
 				),
@@ -385,11 +391,16 @@ export default class PCData extends ActorDataModel.mixin(
 			ability.valid = !!ability.value;
 			ability.mod = ability.valid ? Math.floor((ability.value - 10) / 2) : 0;
 
-			ability.check.proficiency = new Proficiency(this.attributes.proficiency, 0, "down");
+			const base = this.proficiencies.base;
+			ability.check.proficiency = new Proficiency(
+				this.attributes.proficiency,
+				base.checks.multiplier ?? 0,
+				base.checks.rounding ?? "down"
+			);
 			ability.save.proficiency = new Proficiency(
 				this.attributes.proficiency,
-				ability.save.proficiency.multiplier,
-				"down"
+				Math.max(base.saves.multiplier, ability.save.proficiency.multiplier),
+				base.saves.rounding ?? "down"
 			);
 
 			const checkData = { type: "ability-check", ability: key, proficiency: ability.check.proficiency.multiplier };
@@ -433,7 +444,12 @@ export default class PCData extends ActorDataModel.mixin(
 
 				data.ability = config?.ability;
 
-				data.proficiency = new Proficiency(this.attributes.proficiency, data.proficiency.multiplier, "down");
+				const base = this.proficiencies.base;
+				data.proficiency = new Proficiency(
+					this.attributes.proficiency,
+					Math.max(base.checks.multiplier, base[trait].multiplier, data.proficiency.multiplier),
+					[base.checks.rounding, base[trait].rounding].includes("up") ? "up" : "down"
+				);
 
 				const checkData = [
 					{ type: "ability-check", ability: data.ability, proficiency: data.proficiency.multiplier },

@@ -9,7 +9,7 @@ export default class CheckSheet extends ActivitySheet {
 		classes: ["check-activity"]
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	static PARTS = {

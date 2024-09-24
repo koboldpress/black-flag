@@ -9,7 +9,7 @@ export default class HealSheet extends ActivitySheet {
 		classes: ["heal-activity"]
 	};
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	static PARTS = {
