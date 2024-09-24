@@ -123,8 +123,8 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			const result = rollResults[index];
 			if (!result) return;
 
-			const isAttack = this.getFlag(game.system.id, "type") === "attack";
-			const isDeathSave = this.getFlag(game.system.id, "type") === "death";
+			const isAttack = this.getFlag(game.system.id, "roll.type") === "attack";
+			const isDeathSave = this.getFlag(game.system.id, "roll.type") === "death";
 			const showResult = isAttack ? displayAttackResult : displayChallenge;
 
 			if (isAttack || isDeathSave) {

@@ -181,13 +181,13 @@ export default class AttackActivity extends Activity {
 				data,
 				parts,
 				options: {
-					criticalSuccess: Number.isFinite(threshold) ? threshold : undefined,
 					minimum: this.actor?.system.buildMinimum?.(this.actor?.system.getModifiers?.(modifierData, "min"), {
 						rollData: data
-					}),
-					target: targets.length === 1 ? targets[0].ac : undefined
+					})
 				}
 			});
+			if (Number.isFinite(threshold)) rollConfig.options.criticalSuccess = threshold;
+			if (targets.length === 1) rollConfig.options.target = targets[0].ac;
 
 			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
 		};
