@@ -159,9 +159,9 @@ export default class EquipmentDialog extends BFApplication {
 	async _prepareSelectionContext(partId, context, options) {
 		context.document = this.documents[partId];
 		context.documentType = game.i18n.localize(CONFIG.Item.typeLabels[partId]).toLowerCase();
-		if (!context.document) return context;
-
 		const advancement = this.advancements[partId];
+		if (!context.document || !advancement) return context;
+
 		context.locked = advancement.configuredForLevel();
 		if (advancement)
 			context.entries = await Promise.all(

@@ -1,7 +1,9 @@
 <fieldset {{ disabled locked }}>
-	{{#if document}}
+	{{#if (and document entries)}}
 		<legend>{{ document.name }}</legend>
 		{{> ".level" }}
+	{{else if document}}
+		<p class="no-document">{{ localize "BF.Advancement.Equipment.Warning.NoAdvancement" }}</p>
 	{{else}}
 		<p class="no-document">{{ localize "BF.Advancement.Equipment.Warning.NoDocument" type=documentType }}</p>
 	{{/if}}
