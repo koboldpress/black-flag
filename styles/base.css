@@ -63,6 +63,7 @@
 		border-radius: calc(var(--bf-button-border-radius) - var(--bf-button-inset));
 	}
 
+	&:disabled { color: var(--text-color); }
 	&:not([disabled]) {
 		&:hover, &:focus-visible {
 			box-shadow: 0 0 7px var(--bf-button-shadow-blue);
