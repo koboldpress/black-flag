@@ -256,7 +256,7 @@ export default class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @internal
 	 */
 	async _usesConsumption(config, { uses, type, rolls, quantity }) {
-		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
+		const cost = (await this.resolveCost({ config, rolls })).total;
 
 		let availableUses = uses.value;
 		const canConsumeQuantity = uses.consumeQuantity && quantity && cost > 0;
