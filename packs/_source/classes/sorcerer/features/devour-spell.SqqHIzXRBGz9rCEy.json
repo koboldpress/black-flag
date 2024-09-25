@@ -6,11 +6,23 @@
   "img": "icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp",
   "system": {
     "activities": {
-      "GREvD95tcdmFnxpQ": {
-        "type": "utility",
-        "_id": "GREvD95tcdmFnxpQ",
+      "5eNmtqkRdR5WARIU": {
+        "type": "check",
+        "_id": "5eNmtqkRdR5WARIU",
         "description": "",
-        "system": {},
+        "sort": 0,
+        "system": {
+          "check": {
+            "associated": [],
+            "dc": {
+              "calculation": "",
+              "formula": ""
+            },
+            "visible": false,
+            "ability": "charisma"
+          },
+          "effects": []
+        },
         "activation": {
           "value": null,
           "type": "reaction",
@@ -20,7 +32,9 @@
           "targets": [
             {
               "type": "item",
-              "value": "1"
+              "target": "",
+              "value": "1",
+              "scaling": {}
             }
           ],
           "scale": {
@@ -29,14 +43,18 @@
         },
         "duration": {
           "units": "instantaneous",
+          "concentration": false,
           "override": false
         },
         "range": {
+          "override": false,
           "units": ""
         },
+        "magical": false,
         "target": {
           "template": {
             "count": 1,
+            "contiguous": false,
             "units": "foot",
             "type": ""
           },
@@ -55,6 +73,74 @@
         },
         "name": "Resist Spell",
         "img": ""
+      },
+      "yWuf5ZquFIEJzaJN": {
+        "type": "check",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "check": {
+            "associated": [],
+            "dc": {
+              "calculation": "",
+              "formula": ""
+            },
+            "visible": false,
+            "ability": "charisma"
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a creature you can see targets you with a spell"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "4",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Resist Spell (sorcery points)",
+        "img": "",
+        "_id": "yWuf5ZquFIEJzaJN"
       }
     },
     "uses": {
@@ -103,10 +189,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.036",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.046",
+    "coreVersion": "12.331",
     "createdTime": 1718682139574,
-    "modifiedTime": 1718735238983,
+    "modifiedTime": 1727217685452,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

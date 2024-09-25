@@ -10,7 +10,12 @@
         "type": "utility",
         "_id": "C4iA3lXbCk20UHNH",
         "description": "",
-        "system": {},
+        "system": {
+          "roll": {
+            "name": "",
+            "formula": ""
+          }
+        },
         "activation": {
           "value": null,
           "type": "reaction",
@@ -20,7 +25,9 @@
           "targets": [
             {
               "type": "item",
-              "value": "1"
+              "target": "",
+              "value": "1",
+              "scaling": {}
             }
           ],
           "scale": {
@@ -33,7 +40,8 @@
         },
         "range": {
           "units": "foot",
-          "value": "120"
+          "value": "120",
+          "special": ""
         },
         "target": {
           "template": {
@@ -54,8 +62,75 @@
           "min": "",
           "max": ""
         },
-        "name": "",
+        "name": "Affect Another",
         "img": ""
+      },
+      "GJJ7NDl9VVMHvZr9": {
+        "type": "utility",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "formula": "",
+            "name": "",
+            "prompt": false,
+            "visible": false
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a spell or magical effect affects you"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "Compendium.black-flag.classes.Item.U7TtFFdzkbVMNQ2D",
+              "value": "10",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "override": false,
+          "concentration": false
+        },
+        "range": {
+          "units": "foot",
+          "value": "120",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Affect Another (sorcery points)",
+        "img": "",
+        "sort": 0,
+        "magical": false,
+        "_id": "GJJ7NDl9VVMHvZr9"
       }
     },
     "uses": {
@@ -104,10 +179,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.036",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.046",
+    "coreVersion": "12.331",
     "createdTime": 1718682153239,
-    "modifiedTime": 1718685324276,
+    "modifiedTime": 1727217735282,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
