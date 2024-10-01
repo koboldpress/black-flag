@@ -1474,7 +1474,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
 						situational: rollConfig.data?.situational
 					},
-					rollData
+					{ ...rollData }
 				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
@@ -1601,7 +1601,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
 						situational: rollConfig.data?.situational
 					},
-					rollData
+					{ ...rollData }
 				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),
@@ -1733,7 +1733,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 						bonus: this.system.buildBonus?.(this.system.getModifiers?.(modifierData), { rollData }),
 						situational: rollConfig.data?.situational
 					},
-					rollData
+					{ ...rollData }
 				),
 				options: {
 					minimum: this.system.buildMinimum?.(this.system.getModifiers?.(modifierData, "min"), { rollData }),

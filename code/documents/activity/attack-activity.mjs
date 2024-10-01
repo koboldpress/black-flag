@@ -164,6 +164,10 @@ export default class AttackActivity extends Activity {
 
 		const prepareAttackRoll = (process, rollConfig, formData, index) => {
 			const { parts, data } = this.getAttackDetails(process);
+			if (rollConfig.data?.situational) {
+				parts.push("@situational");
+				data.situational = rollConfig.data.situational;
+			}
 
 			const modifierData = foundry.utils.mergeObject(this.modifierData, {
 				attackMode: process.attackMode
