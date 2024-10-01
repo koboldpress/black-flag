@@ -80,7 +80,7 @@ export default class SaveActivity extends Activity {
 
 	/** @inheritDoc */
 	_activationChatButtons() {
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.ability] ?? "";
+		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.save.ability] ?? "";
 		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
 		const buttons = [
 			{
