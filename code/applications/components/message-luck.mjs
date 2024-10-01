@@ -236,7 +236,7 @@ export default class MessageLuckElement extends MessageAssociatedElement {
 
 		// Update the roll with a re-rolled value (somehow)
 		result.active = true;
-		die.reroll(`r1=${result.result}`);
+		await die.reroll(`r1=${result.result}`);
 		const rerolledDie = results.find(r => r.rerolled);
 		if (rerolledDie) rerolledDie.luckReroll = true;
 		// TODO: Play dice rolling sound?
