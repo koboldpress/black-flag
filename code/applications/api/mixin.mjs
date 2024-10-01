@@ -30,4 +30,31 @@ export default Base =>
 		async _preparePartContext(partId, context, options) {
 			return { ...(await super._preparePartContext(partId, context, options)) };
 		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Disable form fields that aren't marked with the `interface-only` class.
+		 */
+		_disableFields() {
+			const selector = `.window-content :is(${[
+				"INPUT",
+				"SELECT",
+				"TEXTAREA",
+				"BUTTON",
+				"BLACKFLAG-MULTISELECT",
+				"COLOR-PICKER",
+				"DOCUMENT-TAGS",
+				"FILE-PICKER",
+				"HUE-SLIDER",
+				"MULTI-SELECT",
+				"PROSE-MIRROR",
+				"RANGE-PICKER",
+				"STRING-TAGS"
+			].join(", ")}):not(.interface-only)`;
+			for (const element of this.element.querySelectorAll(selector)) {
+				if (element.tagName === "TEXTAREA") element.readOnly = true;
+				else element.disabled = true;
+			}
+		}
 	};

@@ -188,7 +188,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 				return AdvancementSelection.createDialog(this.item);
 			case "edit":
 			case "view":
-				return advancement.sheet.render(true);
+				return advancement.sheet.render({ force: true });
 			case "delete":
 				return advancement.deleteDialog();
 			case "duplicate":

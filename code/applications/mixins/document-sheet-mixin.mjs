@@ -41,7 +41,7 @@ export default function DocumentSheetMixin(Base) {
 					onclick: async ev => new IdentityConfig({ document: this.document }).render({ force: true })
 				});
 			}
-			if (this.isEditable) {
+			if (this.isEditable && this.options.editable !== false) {
 				// Editing Mode toggle
 				const getLabel = () => (this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked");
 				const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""} fa-fw`;

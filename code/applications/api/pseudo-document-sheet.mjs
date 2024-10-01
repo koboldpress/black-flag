@@ -180,6 +180,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 				}
 			}
 		}
+		if (!this.isEditable) this._disableFields();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

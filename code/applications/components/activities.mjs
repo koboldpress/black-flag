@@ -139,7 +139,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 				return ActivitySelection.createDialog(this.item);
 			case "edit":
 			case "view":
-				return activity.sheet.render(true);
+				return activity.sheet.render({ force: true });
 			case "delete":
 				return activity.deleteDialog();
 			case "duplicate":
