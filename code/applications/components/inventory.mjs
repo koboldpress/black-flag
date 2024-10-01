@@ -249,7 +249,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		const item = await this.getItem(dataset.itemId);
 		if (action !== "add" && !item) return this.app._onAction?.(event, dataset);
 		const activityId = (target.closest("[data-activity-id]") || target)?.dataset?.activityId;
-		const activity = item.system.activities?.get(activityId);
+		const activity = item?.system.activities?.get(activityId);
 
 		switch (action) {
 			case "add":

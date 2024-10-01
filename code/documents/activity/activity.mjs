@@ -599,7 +599,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		if (config.create !== false) {
 			config.create ??= {};
-			config.create.measuredTemplate ??= !!this.target.template.type;
+			config.create.measuredTemplate ??= this.target.template.type && this.target.prompt;
 		}
 
 		if (config.consume !== false) {

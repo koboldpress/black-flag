@@ -62,7 +62,7 @@ export default class UtilityActivity extends Activity {
 		rollConfig.rolls = [{ parts: [this.system.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
 
 		const dialogConfig = foundry.utils.mergeObject({
-			configure: true,
+			configure: this.system.roll.prompt,
 			options: {
 				rollNotes: this.actor?.system.getModifiers?.(rollConfig.modifierData, "note"),
 				title: game.i18n.format("BF.Roll.Configuration.LabelSpecific", { type: this.name })

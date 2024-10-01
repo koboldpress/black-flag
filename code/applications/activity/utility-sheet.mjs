@@ -14,6 +14,10 @@ export default class UtilitySheet extends ActivitySheet {
 	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
+		identity: {
+			template: "systems/black-flag/templates/activity/utility-identity.hbs",
+			templates: super.PARTS.identity.templates
+		},
 		effect: {
 			template: "systems/black-flag/templates/activity/utility-effect.hbs",
 			templates: ["systems/black-flag/templates/activity/parts/activity-effects.hbs"]

@@ -44,6 +44,7 @@ const {
  * @property {RangeField} range
  * @property {boolean} range.override - Should the item's range be overridden?
  * @property {TargetField} target
+ * @property {boolean} target.prompt - Should template placement be checked by default?
  * @property {boolean} target.override - Should the item's targeting data be overridden?
  * @property {UsesField} uses
  */
@@ -128,6 +129,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			}),
 			magical: new BooleanField(),
 			target: new TargetField({
+				prompt: new BooleanField({ initial: true }),
 				override: new BooleanField()
 			}),
 			uses: new UsesField({ consumeQuantity: false })
