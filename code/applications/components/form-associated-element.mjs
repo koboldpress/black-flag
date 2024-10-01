@@ -73,6 +73,20 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Is this element disabled?
+	 * @type {boolean}
+	 */
+	get disabled() {
+		return this.hasAttribute("disabled");
+	}
+
+	set disabled(value) {
+		this.toggleAttribute("disabled", value);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -95,7 +109,7 @@ export default class FormAssociatedElement extends AppAssociatedElement {
 		Array.from(this.children).forEach(c => form.insertAdjacentElement("beforeend", c));
 		const formData = new FormDataExtended(form);
 		Array.from(form.children).forEach(c => this.insertAdjacentElement("beforeend", c));
-		let object = foundry.utils.expandObject(formData.object).$;
+		let object = foundry.utils.expandObject(formData.object).$ ?? {};
 		object = this._mutateFormData(object) ?? object;
 		return object;
 	}

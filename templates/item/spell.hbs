@@ -43,10 +43,7 @@
 					</label>
 				</div>
 				<div class="description-area">
-					<prose-mirror name="system.description.value" data-document-u-u-i-d="{{ item.uuid }}"
-					              value="{{ source.description.value }}" toggled="true" class="description">
-						{{{ enriched.description }}}
-					</prose-mirror>
+					{{> "blackFlag.item-description" }}
 				</div>
 				{{> "blackFlag.document-source" }}
 			</section>

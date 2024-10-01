@@ -168,7 +168,8 @@
 	background: none;
 	border: 1px solid transparent;
 
-	&:hover, &:focus { box-shadow: 0 0 4px var(--bf-color-border-light-blue); }
+	&:hover:not(:disabled), &:focus { box-shadow: 0 0 4px var(--bf-color-border-light-blue); }
+	&:hover:disabled { border: 1px solid transparent; }
 	&:focus { border-color: var(--bf-blue); }
 }
 

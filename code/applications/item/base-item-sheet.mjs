@@ -32,9 +32,9 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 
 		context.CONFIG = CONFIG.BlackFlag;
 		context.flags = this.document.flags;
-		context.name = this.document._source.name;
+		context.name = this.modes.editing ? this.document._source.name : this.document.name;
 		context.system = this.document.system;
-		context.source = this.document.toObject().system;
+		context.source = this.modes.editing ? this.document.toObject().system : context.system;
 
 		const enrichmentContext = {
 			relativeTo: this.item,
@@ -77,6 +77,8 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 		for (const element of html.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", this._onAction.bind(this));
 		}
+
+		if (this.form && this.isEditable && !this.modes.editing) this._disableFields(this.form);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -84,9 +86,8 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 	/** @inheritDoc */
 	_disableFields(form) {
 		super._disableFields(form);
-		for (const button of form.querySelectorAll('[data-action="view"]')) {
-			button.disabled = false;
-		}
+		form.querySelectorAll("blackflag-multiselect").forEach(e => (e.disabled = true));
+		form.querySelectorAll('[data-action="view"], .interface-only').forEach(b => (b.disabled = false));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

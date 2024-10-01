@@ -41,8 +41,8 @@
 									{{ localize "BF.Advancement.Core.ClassRestriction.Multiclass" }}
 								{{/if}}
 							</div>
-							{{#if @root.editable}}
-								<div class="advancement-controls">
+							<div class="advancement-controls">
+								{{#if @root.editable}}
 									<button type="button" class="link-button" data-action="edit"
 									        data-tooltip="BF.Advancement.Core.Action.Edit"
 									        aria-label="{{ localize 'BF.Advancement.Core.Action.Edit' }}">
@@ -53,8 +53,14 @@
 									        aria-label="{{ localize 'BF.Advancement.Core.Action.Delete' }}">
 										<i class="fas fa-trash" inert></i>
 									</button>
-								</div>
-							{{/if}}
+								{{else}}
+									<button type="button" class="link-button interface-only" data-action="view"
+													data-tooltip="BF.Advancement.Core.Action.View"
+													aria-label="{{ localize 'BF.Advancement.Core.Action.View' }}">
+										<i class="fa-solid fa-eye" inert></i>
+									</button>
+								{{/if}}
+							</div>
 							{{#if this.summary}}
 								<div class="advancement-summary">{{{ this.summary }}}</div>
 							{{/if}}

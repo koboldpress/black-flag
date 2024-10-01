@@ -250,6 +250,7 @@ export async function registerHandlebarsPartials() {
 		"item/parts/item-active-effects-section.hbs",
 		"item/parts/item-activities.hbs",
 		"item/parts/item-advancement.hbs",
+		"item/parts/item-description.hbs",
 		"journal/journal-table.hbs",
 		"shared/currency.hbs",
 		"shared/inventory.hbs",

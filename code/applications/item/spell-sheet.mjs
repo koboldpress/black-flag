@@ -25,13 +25,15 @@ export default class SpellSheet extends BaseItemSheet {
 
 		context.effects = EffectsElement.prepareItemContext(this.item.effects);
 
+		const has = (data, key) => data.includes?.(key) ?? data.has?.(key);
+
 		context.components = Object.entries(CONFIG.BlackFlag.spellComponents).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: context.source.components.required.includes(k) };
+			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.components.required, k) };
 			return obj;
 		}, {});
 
 		context.tags = Object.entries(CONFIG.BlackFlag.spellTags).reduce((obj, [k, p]) => {
-			obj[k] = { label: game.i18n.localize(p.label), selected: context.source.tags.includes(k) };
+			obj[k] = { label: game.i18n.localize(p.label), selected: has(context.source.tags, k) };
 			return obj;
 		}, {});
 

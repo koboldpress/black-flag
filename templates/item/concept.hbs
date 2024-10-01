@@ -14,14 +14,7 @@
 				{{> "blackFlag.item-advancement" }}
 			</div>
 			<div class="tab" data-tab="description" data-group="primary">
-				{{#if editable}}
-					<prose-mirror name="system.description.value" data-document-u-u-i-d="{{ item.uuid }}"
-					              value="{{ source.description.value }}" class="description" {{#unless editable}}disabled{{/unless}}>
-						{{{ enriched.description }}}
-					</prose-mirror>
-				{{else}}
-					<div class="description">{{{ enriched.description }}}</div>
-				{{/if}}
+				{{> "blackFlag.item-description" }}
 			</div>
 		</div>
 	</section>
