@@ -1,10 +1,10 @@
 import DragDrop from "../drag-drop.mjs";
-import IdentityConfig from "../identity-config.mjs";
+import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 
 /**
  * Sheet upon which all other item sheets are based.
  */
-export default class BaseItemSheet extends ItemSheet {
+export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 	/** @inheritDoc */
 	static get defaultOptions() {
 		return foundry.utils.mergeObject(super.defaultOptions, {
@@ -48,21 +48,6 @@ export default class BaseItemSheet extends ItemSheet {
 		}, {});
 
 		return context;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_getHeaderButtons() {
-		let buttons = super._getHeaderButtons();
-		if (this.options.editable && (game.user.isGM || this.item.isOwner))
-			buttons.unshift({
-				label: game.i18n.localize("BF.Identity.Label"),
-				class: "identity-config",
-				icon: "fa-solid fa-id-card",
-				onclick: async ev => new IdentityConfig({ document: this.item }).render({ force: true })
-			});
-		return buttons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

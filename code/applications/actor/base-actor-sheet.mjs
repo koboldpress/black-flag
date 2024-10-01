@@ -5,6 +5,7 @@ import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
 import IdentityConfig from "../identity-config.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
+import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
@@ -21,7 +22,7 @@ import TypeConfig from "./config/type-config.mjs";
 /**
  * Sheet class containing implementation shared across all actor types.
  */
-export default class BaseActorSheet extends ActorSheet {
+export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 	/**
 	 * Fields that will be enriched during data preparation.
 	 * @type {object}
@@ -48,10 +49,7 @@ export default class BaseActorSheet extends ActorSheet {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Sheet modes that can be active.
-	 * @type {Record<string, boolean>}
-	 */
+	/** @override */
 	modes = {
 		conditionAdd: false,
 		editing: false
@@ -84,9 +82,6 @@ export default class BaseActorSheet extends ActorSheet {
 		context.CONFIG = CONFIG.BlackFlag;
 		context.system = this.document.system;
 		context.source = this.document.toObject().system;
-
-		context.modes = this.modes;
-		context.editable = this.isEditable && this.modes.editing;
 
 		context.effects = EffectsElement.prepareActorContext(this.document.allApplicableEffects());
 
@@ -246,38 +241,6 @@ export default class BaseActorSheet extends ActorSheet {
 		}
 
 		return jQuery;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_getHeaderButtons() {
-		let buttons = super._getHeaderButtons();
-		if (this.options.editable && (game.user.isGM || this.actor.isOwner)) {
-			// Identity / Source button
-			buttons.unshift({
-				label: game.i18n.localize("BF.Identity.Label"),
-				class: "identity-config",
-				icon: "fa-solid fa-id-card",
-				onclick: async ev => new IdentityConfig({ document: this.actor }).render({ force: true })
-			});
-
-			// Editing Mode toggle
-			const getLabel = () => (this.modes.editing ? "BF.EditingMode.Editable" : "BF.EditingMode.Locked");
-			const getIcon = () => `fa-solid fa-lock${this.modes.editing ? "-open" : ""} fa-fw`;
-			buttons.unshift({
-				label: getLabel(),
-				class: "toggle-editing-mode",
-				icon: getIcon(),
-				onclick: async ev => {
-					this.modes.editing = !this.modes.editing;
-					ev.currentTarget.innerHTML = `<i class="${getIcon()}"></i> <span>${game.i18n.localize(getLabel())}</span>`;
-					await this.submit();
-					this.render();
-				}
-			});
-		}
-		return buttons;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
