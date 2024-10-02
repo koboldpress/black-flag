@@ -1,0 +1,266 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Dagger of Venom",
+  "type": "weapon",
+  "img": "icons/weapons/daggers/dagger-double-skull-pink.webp",
+  "system": {
+    "activities": {
+      "G0M1CaGJdPQD6pBg": {
+        "type": "attack",
+        "_id": "G0M1CaGJdPQD6pBg",
+        "system": {
+          "damage": {
+            "parts": [],
+            "critical": {},
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {}
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "PgngX2sLN7JglfCl": {
+        "type": "save",
+        "_id": "PgngX2sLN7JglfCl",
+        "description": "",
+        "system": {
+          "ability": "constitution",
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "poison",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "dc": {
+            "ability": "custom",
+            "formula": "15"
+          },
+          "effects": [
+            {
+              "_id": "Him7rMnWcxyKNUMV"
+            }
+          ]
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Poison",
+        "img": ""
+      }
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 8000,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 1,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p><p>You can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [[/save 15 CON]] or take [[/damage 2d10 poison]] and become poisoned for 1 minute. The dagger can’t be used this way again until the next dawn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "melee",
+      "category": "simple",
+      "base": "dagger"
+    },
+    "options": [
+      "pinningShot"
+    ],
+    "properties": [
+      "finesse",
+      "light",
+      "magical",
+      "thrown"
+    ],
+    "ammunition": {},
+    "damage": {
+      "base": {
+        "number": 1,
+        "denomination": 4,
+        "type": "piercing",
+        "additionalTypes": []
+      }
+    },
+    "range": {
+      "short": 20,
+      "long": 60,
+      "reach": null
+    },
+    "uses": {
+      "min": "",
+      "max": "1",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "magicalBonus": 1
+  },
+  "effects": [
+    {
+      "name": "Dagger of Venom",
+      "img": "icons/weapons/daggers/dagger-double-skull-pink.webp",
+      "origin": "Compendium.black-flag.items.Item.YdXhDY18JC5QEPFC",
+      "transfer": false,
+      "_id": "Him7rMnWcxyKNUMV",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You are poisoned for 1 minute.</p>",
+      "tint": "#ffffff",
+      "statuses": [
+        "poisoned"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.046",
+        "createdTime": 1726800548541,
+        "modifiedTime": 1726800566983,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!YdXhDY18JC5QEPFC.Him7rMnWcxyKNUMV"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.046",
+    "createdTime": 1725589007806,
+    "modifiedTime": 1726800592257,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "YdXhDY18JC5QEPFC",
+  "_key": "!items!YdXhDY18JC5QEPFC"
+}

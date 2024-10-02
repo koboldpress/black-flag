@@ -1,0 +1,128 @@
+{
+  "type": "gear",
+  "name": "Cape of the Mountebank",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 60000,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This cape smells faintly of brimstone. While wearing it, you can use it to cast the <em>dimension door</em> spell as an action. This property of the cape can’t be used again until the next dawn.</p><p>When you disappear, you leave behind a cloud of smoke, and you appear in a cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "ONgGUd4CJjeAyZda": {
+        "type": "utility",
+        "_id": "ONgGUd4CJjeAyZda",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Dimension Door",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "ChTYpv1gAAjNY8dQ",
+  "img": "icons/equipment/back/cloak-collared-red-gold.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.045",
+    "createdTime": 1724983619752,
+    "modifiedTime": 1725903186575,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ChTYpv1gAAjNY8dQ"
+}

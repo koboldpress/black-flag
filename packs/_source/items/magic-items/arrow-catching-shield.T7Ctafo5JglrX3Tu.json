@@ -1,0 +1,130 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Arrow-Catching Shield",
+  "type": "armor",
+  "img": "icons/equipment/shield/buckler-boss-iron-wood-brown.webp",
+  "system": {
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 8000,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 6,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>You gain a +2 bonus to AC against ranged attacks while you wield this shield. This bonus is in addition to the shield’s normal bonus to AC. In addition, when an attacker makes a ranged attack against a target within 5 feet of you, you can use your reaction to become the target of the attack instead.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "category": "shield"
+    },
+    "properties": [
+      "magical"
+    ],
+    "armor": {
+      "value": null,
+      "requiredStrength": null
+    },
+    "modifier": {
+      "min": null,
+      "max": null
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "uses": {
+      "min": "",
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
+    },
+    "activities": {
+      "LCkajaAQ7yfMP14g": {
+        "type": "utility",
+        "_id": "LCkajaAQ7yfMP14g",
+        "description": "",
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When an attacker makes a ranged atttack against a target within 5 feet of you"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Catch Arrows",
+        "img": ""
+      }
+    },
+    "container": null,
+    "magicalBonus": null
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.044",
+    "createdTime": 1725588932684,
+    "modifiedTime": 1725739009217,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "T7Ctafo5JglrX3Tu",
+  "_key": "!items!T7Ctafo5JglrX3Tu"
+}

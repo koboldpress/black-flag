@@ -1,0 +1,171 @@
+{
+  "type": "gear",
+  "name": "Belt of Dwarvenkind",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 8000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>While wearing this belt, you gain the following benefits:</p><ul><li><p>Your CON score increases by 2, to a maximum of 20.</p></li><li><p>You have advantage on CHA (Persuasion) checks made to interact with dwarves.</p></li></ul><p>In addition, while attuned to the belt, you have a 50 percent chance each day at dawn of growing a full beard if you’re capable of growing one, or a visibly thicker beard if you already have one.</p><p>If you aren’t a dwarf, you gain the following additional benefits while wearing the belt:</p><ul><li><p>You have advantage on saves against poison, and you have resistance to poison damage.</p></li><li><p>You have darkvision to a range of 60 feet.</p></li><li><p>You can speak, read, and write Dwarvish.</p></li></ul>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "xiIbHTzSlcksN1NZ",
+  "img": "icons/equipment/waist/belt-buckle-ornate-steel.webp",
+  "effects": [
+    {
+      "origin": "Compendium.black-flag.items.Item.xiIbHTzSlcksN1NZ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "name": "Belt of Dwarvenkind",
+      "img": "icons/equipment/waist/belt-buckle-ornate-steel.webp",
+      "_id": "u7KHWBqVW01gP3mg",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.abilities.constitution.value",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"charisma\" }, { \"k\": \"skill\", \"v\": \"persuasion\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on CHA (Persuasion) checks made to interact with dwarves.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.044",
+        "createdTime": 1725740351036,
+        "modifiedTime": 1725740606998,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!xiIbHTzSlcksN1NZ.u7KHWBqVW01gP3mg"
+    },
+    {
+      "origin": "Compendium.black-flag.items.Item.xiIbHTzSlcksN1NZ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "name": "Belt of Dwarvenkind (non-Dwarf)",
+      "img": "icons/equipment/waist/belt-buckle-ornate-steel.webp",
+      "_id": "YlwI6ie7vAzVhba9",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.condition.resistances.value",
+          "mode": 2,
+          "value": "poisoned",
+          "priority": null
+        },
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        },
+        {
+          "key": "system.traits.senses.types.darkvision",
+          "mode": 4,
+          "value": "60",
+          "priority": null
+        },
+        {
+          "key": "system.proficiencies.languages.value",
+          "mode": 2,
+          "value": "dwarvish",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.044",
+        "createdTime": 1725740352069,
+        "modifiedTime": 1725740451911,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!xiIbHTzSlcksN1NZ.YlwI6ie7vAzVhba9"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.045",
+    "createdTime": 1724983024363,
+    "modifiedTime": 1725901501940,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!xiIbHTzSlcksN1NZ"
+}
