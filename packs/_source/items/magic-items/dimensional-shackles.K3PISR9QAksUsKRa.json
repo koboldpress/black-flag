@@ -11,12 +11,142 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>You can use an action to place these shackles on an incapacitated creature. The shackles adjust to fit a creature of Small to Large size. In addition to serving as mundane manacles, the shackles prevent a creature bound by them from using any method of extradimensional movement, including teleportation or travel to a different plane of existence. They don’t prevent the creature from passing through an interdimensional portal.</p>\n\t\t\t\t\t\t\t\t<p>You and any creature you designate when you use the shackles can use an action to remove them. Once every 30 days, the bound creature can make a [[/check 30 STR (Athletics)]]. On a success, the creature breaks free and destroys the shackles.</p>",
+      "value": "<p>You can use an action to place these shackles on an incapacitated creature. The shackles adjust to fit a creature of Small to Large size. In addition to serving as mundane manacles, the shackles prevent a creature bound by them from using any method of extradimensional movement, including teleportation or travel to a different plane of existence. They don’t prevent the creature from passing through an interdimensional portal.</p><p>You and any creature you designate when you use the shackles can use an action to remove them. Once every 30 days, the bound creature can make a [[/check 30 STR (Athletics)]]. On a success, the creature breaks free and destroys the shackles.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "m4B0WsqITMdAcMy6": {
+        "type": "utility",
+        "_id": "m4B0WsqITMdAcMy6",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "KxtCGnrfcOGnByz0"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Shackle",
+        "img": ""
+      },
+      "5WfTYO0EB9HVQDNJ": {
+        "type": "check",
+        "_id": "5WfTYO0EB9HVQDNJ",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "check": {
+            "associated": [
+              "athletics"
+            ],
+            "dc": {
+              "calculation": "",
+              "formula": "30"
+            },
+            "visible": true,
+            "ability": "strength"
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Attempt Escape",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -38,8 +168,47 @@
     ]
   },
   "_id": "K3PISR9QAksUsKRa",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
+  "effects": [
+    {
+      "name": "Shackled",
+      "img": "icons/magic/control/debuff-chains-shackles-movement-blue.webp",
+      "origin": "Compendium.black-flag.items.Item.K3PISR9QAksUsKRa",
+      "transfer": false,
+      "_id": "KxtCGnrfcOGnByz0",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>In addition to serving as mundane manacles, the shackles prevent a creature bound by them from using any method of extradimensional movement, including teleportation or travel to a different plane of existence. They don’t prevent the creature from passing through an interdimensional portal.</p>",
+      "tint": "#ffffff",
+      "statuses": [
+        "restrained"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.047",
+        "createdTime": 1727900496699,
+        "modifiedTime": 1727900529341,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!K3PISR9QAksUsKRa.KxtCGnrfcOGnByz0"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 0,
   "ownership": {
@@ -50,9 +219,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724983909978,
-    "modifiedTime": 1725904210247,
+    "modifiedTime": 1727900575075,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!K3PISR9QAksUsKRa"

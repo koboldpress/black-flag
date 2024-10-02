@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Demon Armor",
   "type": "armor",
-  "img": "icons/equipment/chest/breastplate-sculpted-green.webp",
+  "img": "icons/equipment/chest/breastplate-layered-leather-green.webp",
   "system": {
     "overrides": {
       "proficiency": null
@@ -17,7 +17,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>While wearing this armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor’s clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of [[/r 1d8]].</p>\n\t\t\t\t\t\t\t\t<p>Curse. Once you don this cursed armor, you can’t doff it unless you are targeted by a remove curse spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saves against their spells and special abilities.</p>",
+      "value": "<p>While wearing this armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor’s clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of [[/r 1d8]].</p><p>Curse. Once you don this cursed armor, you can’t doff it unless you are targeted by a remove curse spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saves against their spells and special abilities.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -51,11 +51,152 @@
       "consumeQuantity": false,
       "recovery": []
     },
-    "activities": {},
+    "activities": {
+      "cohkd7pbBlG7RAoI": {
+        "type": "attack",
+        "_id": "cohkd7pbBlG7RAoI",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {
+              "value": "melee",
+              "classification": "weapon"
+            },
+            "ability": "",
+            "bonus": "1"
+          },
+          "damage": {
+            "critical": {
+              "bonus": ""
+            },
+            "includeBase": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 8,
+                "bonus": "@mod + 1",
+                "custom": {
+                  "formula": "1 + @abilities.str.mod + 1",
+                  "enabled": false
+                },
+                "type": "slashing",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "touch",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creatureObject",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Claw Attack",
+        "img": ""
+      }
+    },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 1
   },
-  "effects": [],
+  "effects": [
+    {
+      "type": "base",
+      "name": "Demon Armor",
+      "origin": "Compendium.black-flag.items.Item.AlSGfu22g9NBIbzk",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/chest/breastplate-layered-leather-green.webp",
+      "_id": "OZ1NxntpsS5iuZRm",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.proficiencies.languages.value",
+          "mode": 2,
+          "value": "abyssal",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"note\": { \"rollMode\": -1, \"text\": \"You have disadvantage on attack rolls against demons and on saves against their spells and special abilities.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.047",
+        "createdTime": 1727900134241,
+        "modifiedTime": 1727900303353,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!AlSGfu22g9NBIbzk.OZ1NxntpsS5iuZRm"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -65,9 +206,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1725589059018,
-    "modifiedTime": 1725904212428,
+    "modifiedTime": 1727900217240,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "AlSGfu22g9NBIbzk",

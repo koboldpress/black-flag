@@ -17,7 +17,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>Dragon scale mail is made of the scales of a red dragon. Sometimes dragons collect their cast-off scales and gift them. Other times, hunters skin and preserve the hide of a dead dragon. In either case, dragon scale mail is highly valued.</p>\n\t\t\t\t\t\t\t\t<p>While wearing this armor, you gain a +1 bonus to AC, you have advantage on saves against the Frightful Presence and breath weapons of dragons, and you have resistance to fire damage.</p>\n\t\t\t\t\t\t\t\t<p>In addition, you can focus your senses as an action to magically discern the distance and direction to the closest red dragon within 30 miles of you. This special action can’t be used again until the next dawn.</p>",
+      "value": "<p>Dragon scale mail is made of the scales of a red dragon. Sometimes dragons collect their cast-off scales and gift them. Other times, hunters skin and preserve the hide of a dead dragon. In either case, dragon scale mail is highly valued.</p><p>While wearing this armor, you gain a +1 bonus to AC, you have advantage on saves against the Frightful Presence and breath weapons of dragons, and you have resistance to fire damage.</p><p>In addition, you can focus your senses as an action to magically discern the distance and direction to the closest red dragon within 30 miles of you. This special action can’t be used again until the next dawn.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -50,11 +50,134 @@
       "consumeQuantity": false,
       "recovery": []
     },
-    "activities": {},
+    "activities": {
+      "XscGIAQNfAFNzYaB": {
+        "type": "utility",
+        "description": "<p>You can focus your senses as an action to magically discern the distance and direction to the closest dragon within 30 miles of you that is of the same type as the armor.</p>",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "value": "30",
+          "units": "mile",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Sense Dragons",
+        "img": "",
+        "_id": "XscGIAQNfAFNzYaB"
+      }
+    },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 1
   },
-  "effects": [],
+  "effects": [
+    {
+      "type": "base",
+      "name": "Dragon Scale Mail (Red)",
+      "origin": "Compendium.black-flag.items.Item.2ECiCbKc64dBvOnv",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/chest/breastplate-rivited-red.webp",
+      "_id": "vKWzOe7xhdHSFUaU",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "fire",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against the Frightful Presence and breath weapons of dragons.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.047",
+        "createdTime": 1727900837021,
+        "modifiedTime": 1727900916733,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!35Trfn0h1AVt1Gut.vKWzOe7xhdHSFUaU"
+    }
+  ],
   "sort": 500000,
   "ownership": {
     "default": 0
@@ -64,9 +187,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1725589268383,
-    "modifiedTime": 1725904192429,
+    "modifiedTime": 1727900812969,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "35Trfn0h1AVt1Gut",
