@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label>{{ localize "BF.SOURCE.FIELDS.description.source.book.label" }}</label>
 					<div class="form-fields">
-						<input type="text" name="system.description.source.book" value="{{ source.data.book }}"
+						<input type="text" name="system.description.source.book" value="{{ source.source.book }}"
 						       list="{{ partId }}-books" placeholder="{{ source.data.bookPlaceholder }}">
 						<datalist id="{{ partId }}-books">
 							{{ selectOptions CONFIG.sourceBooks }}

@@ -193,7 +193,7 @@ export default class AttackActivity extends Activity {
 			if (Number.isFinite(threshold)) rollConfig.options.criticalSuccess = threshold;
 			if (targets.length === 1) rollConfig.options.target = targets[0].ac;
 
-			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
+			return { rollConfig, rollNotes: this.actor?.system.getModifiers?.(modifierData, "note") };
 		};
 
 		const useAmmo = config.ammunition !== false && ammunitionOptions?.length;

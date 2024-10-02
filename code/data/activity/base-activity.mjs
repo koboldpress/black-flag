@@ -43,6 +43,7 @@ const {
  * @property {boolean} duration.override - Should the item's duration be overridden?
  * @property {RangeField} range
  * @property {boolean} range.override - Should the item's range be overridden?
+ * @property {boolean} magical - Is this considered a magical effect?
  * @property {TargetField} target
  * @property {boolean} target.prompt - Should template placement be checked by default?
  * @property {boolean} target.override - Should the item's targeting data be overridden?
