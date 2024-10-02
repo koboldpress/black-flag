@@ -366,7 +366,7 @@ export default class AttackActivity extends Activity {
 			this.system.attack.flat
 				? { toHit: this.system.attack.bonus }
 				: {
-						mod: ability?.mod,
+						mod: ability?.adjustedMod ?? ability?.mod,
 						prof: this.system.attackProficiency?.term,
 						bonus: this.system.attack.bonus,
 						weaponMagic: this.item.system.attackMagicalBonus,
