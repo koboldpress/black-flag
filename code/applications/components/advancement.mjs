@@ -327,7 +327,9 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 			const advancement = target.system.advancement.byLevel(level).find(a => a.type === "grantFeatures");
 			if (advancement) {
 				const pool = advancement.toObject().configuration.pool;
-				pool.push(...uuids.map(uuid => ({ uuid })));
+				for (const uuid of uuids) {
+					if (!pool.find(e => e.uuid === uuid)) pool.push({ uuid });
+				}
 				advancementUpdates.push({ _id: advancement.id, "configuration.pool": pool });
 			} else {
 				advancementToCreate.push({
