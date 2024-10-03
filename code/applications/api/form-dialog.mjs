@@ -50,7 +50,7 @@ export default class BFFormDialog extends BlackFlagApplication {
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Prepare rendering context for the content section.
@@ -63,7 +63,7 @@ export default class BFFormDialog extends BlackFlagApplication {
 		return context;
 	}
 
-	/* -------------------------------------------- */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Prepare rendering context for the footer.

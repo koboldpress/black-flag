@@ -107,16 +107,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
-	 * @type {boolean}
-	 */
-	get allowDamageScaling() {
-		return this.isSpell || this.consumption.scale.allowed;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
 	 * Is scaling possible with this activity?
 	 * @type {boolean}
 	 */
@@ -132,7 +122,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Can this activity's damage be scaled?
+	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
 	 * @type {boolean}
 	 */
 	get canScaleDamage() {
