@@ -107,7 +107,7 @@ export default class FeatureSheet extends BaseItemSheet {
 		const update = foundry.utils.expandObject(formData);
 
 		// Figure out where to save the value of Feature Type
-		if (this.document.type === "feature") {
+		if (this.document.type === "feature" && foundry.utils.hasProperty(update, "system.type.category")) {
 			const category = foundry.utils.getProperty(update, "system.type.category");
 			const type = foundry.utils.getProperty(update, "system.type.value");
 			let identifier = foundry.utils.getProperty(update, "system.identifier.associated");
