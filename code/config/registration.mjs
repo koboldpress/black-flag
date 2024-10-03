@@ -185,7 +185,7 @@ async function _registerItemType(type, indexes) {
 
 	indexes = await (indexes ?? _indexCompendiums());
 	const registerItem = (item, uuidPrefix) => {
-		const identifier = item.system?.identifier?.value ?? slugify(item.name, { strict: true });
+		const identifier = item.system?.identifier?.value || slugify(item.name, { strict: true });
 		registrations[identifier] ??= { sources: [] };
 		registrations[identifier].name = item.name;
 		registrations[identifier].img = item.img;
