@@ -2,32 +2,17 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
-		margin-block-end: 8px;
+		gap: 8px;
 	}
-	multi-checkbox {
-		display: flex;
-		flex-wrap: wrap;
-		.checkbox {
-			flex: 1 0 100%;
-			height: inherit;
-			font-size: inherit;
-			font-variant: small-caps;
+	.scaling-fields {
+		.separator, .max {
+			flex: 0;
+			padding-inline: 3px;
 			font-weight: bold;
-			line-height: inherit;
 		}
-		input[type="checkbox"] {
-			width: 20px;
-			height: 20px;
-			margin-block: 3px;
-			margin-inline-start: auto;
-			margin-inline-end: 5px;
-			order: 2;
-		}
-	}
-	.consumption {
-		> label > span:first-child {
-			flex: 1 0 var(--bf-form-label-width);
+		.separator {
+			color: var(--bf-text-color-blue);
+			opacity: .6;
 		}
 	}
 }

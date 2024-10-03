@@ -121,9 +121,22 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @type {boolean}
 	 */
 	get canScale() {
-		if (!this.consumption.scale.allowed) return false;
-		if (!this.isSpell) return true;
-		return this.requiresSpellSlot;
+		return (
+			this.consumption.scale.allowed ||
+			(this.isSpell &&
+				this.item.system.circle.base > 0 &&
+				CONFIG.BlackFlag.spellPreparationModes[this.item.getFlag(game.system.id, "relationship.mode")]?.scalable)
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can this activity's damage be scaled?
+	 * @type {boolean}
+	 */
+	get canScaleDamage() {
+		return this.consumption.scale.allowed || this.isSpell;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -273,9 +286,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Does activating this activity consume a spell slot?
 	 * @type {boolean}
 	 */
-	get requiresSpellSlot() {
+	get spellSlotConsumption() {
+		return this.spellSlotScaling && this.item.system.requiresSpellSlot && this.activation.primary;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can a spell slot be selected when activating this activity?
+	 * @type {boolean}
+	 */
+	get spellSlotScaling() {
 		if (!this.isSpell || !this.actor?.system.spellcasting?.slots) return false;
-		return this.item.system.requiresSpellSlot && this.activation.primary;
+		return this.canScale;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -606,7 +629,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			config.consume ??= {};
 			config.consume.action ??= this.activation.type === "legendary";
 			config.consume.resources ??= this.consumption.targets.length > 0;
-			config.consume.spellSlot ??= this.requiresSpellSlot;
+			config.consume.spellSlot ??= this.spellSlotConsumption;
 		}
 
 		if (this.canScale) config.scaling ??= 0;

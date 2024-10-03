@@ -1,0 +1,17 @@
+<section>
+		{{~#if hasConsumption}}
+		{{> "blackFlag.activity-activation-notes" }}
+		<fieldset>
+				<legend>{{ localize "BF.ACTIVATION.SECTION.Consumption" }}</legend>
+				{{#each fields}}
+				<div class="form-group">
+						<label>{{{ field.label }}}</label>
+						<div class="form-fields">
+								{{ formInput field name=name value=value input=input }}
+						</div>
+						{{#if field.hint}}<p class="hint">{{{ field.hint }}}</p>{{/if}}
+				</div>
+				{{/each}}
+		</fieldset>
+		{{/if~}}
+</section>

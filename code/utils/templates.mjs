@@ -226,6 +226,7 @@ export function registerHandlebarsHelpers() {
 export async function registerHandlebarsPartials() {
 	const partials = [
 		"active-effect/active-effect-change.hbs",
+		"activity/parts/activity-activation-notes.hbs",
 		"activity/parts/activity-inventory-row.hbs",
 		"actor/config/modifier-list.hbs",
 		"actor/pc-actions.hbs",

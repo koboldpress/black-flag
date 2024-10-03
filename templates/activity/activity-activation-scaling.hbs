@@ -1,0 +1,26 @@
+<section>
+	{{~#if hasScaling}}
+	{{> "blackFlag.activity-activation-notes" }}
+	<fieldset>
+			<legend>{{ localize "BF.ACTIVATION.SECTION.Scaling" }}</legend>
+			{{#if spellSlots}}
+			{{ formField spellSlots.field name=spellSlots.name value=spellSlots.value options=spellSlots.options }}
+			{{/if}}
+			{{#if scaling}}
+			<div class="form-group scaling-fields">
+					<label>{{ localize "BF.Consumption.Scaling.Label" }}</label>
+					<div class="form-fields">
+							{{#if scaling.showRange}}
+							<range-picker name="{{ scaling.name }}" value="{{ scaling.value }}" min="1" max="{{ scaling.max }}"
+														step="1"></range-picker>
+							{{else}}
+							{{ formInput scaling.field name=scaling.name value=scaling.value }}
+							{{/if}}
+							<span class="separator">/</span>
+							<span class="max">{{ blackFlag-number scaling.max }}</span>
+					</div>
+			</div>
+			{{/if}}
+	</fieldset>
+	{{/if~}}
+</section>

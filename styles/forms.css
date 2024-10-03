@@ -1,10 +1,13 @@
-fieldset {
+fieldset, .standard-form fieldset {
 	--fieldset-padding: 10px;
 
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	border: 2px solid var(--bf-color-border-blue);
+	border-radius: 0;
+	padding-block-start: 5px;
+	padding-block-end: 9px;
 	padding-inline: var(--fieldset-padding);
 
 	legend {
@@ -102,6 +105,7 @@ fieldset {
 	> label {
 		font-variant: small-caps;
 		font-weight: bold;
+		line-height: 1.25em;
 	}
 }
 
@@ -166,5 +170,37 @@ select:disabled {
 			box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 			cursor: pointer;
 		}
+	}
+}
+
+.black-flag range-picker input[type="range"] {
+	--range-thumb-background-color: var(--bf-blue);
+	--range-thumb-border-color: var(--bf-color-border-black);
+	--range-track-border-color: var(--bf-color-border-black);
+
+	&:focus-visible {
+		&::-moz-range-track { box-shadow: 0 0 6px var(--bf-button-shadow-blue); }
+		&::-webkit-slider-runnable-track { box-shadow: 0 0 6px var(--bf-button-shadow-blue); }
+	}
+
+	&::-moz-range-thumb {
+		border-radius: 100%;
+		box-shadow: 0 0 3px rgb(0 0 0 / 45%);
+		transition: all 250ms ease;
+	}
+	&::-webkit-slider-thumb {
+		border-radius: 100%;
+		box-shadow: 0 0 3px rgb(0 0 0 / 45%);
+		transition: all 250ms ease;
+	}
+	&::-moz-range-track {
+		border: 1px solid var(--range-track-border-color);
+		box-shadow: none;
+		transition: all 250ms ease;
+	}
+	&::-webkit-slider-runnable-track {
+		border: 1px solid var(--range-track-border-color);
+		box-shadow: none;
+		transition: all 250ms ease;
 	}
 }
