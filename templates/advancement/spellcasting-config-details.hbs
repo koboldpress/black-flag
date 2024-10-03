@@ -38,8 +38,7 @@
 				{{ localize "BF.Spellcasting.FIELDS.slots.label" }}
 			</span>
 			{{#if slots.scaleValue}}
-				<!-- TODO: Figure out why this links aren't working -->
-				{{ blackFlag-linkForUUID slots.scaleValue.uuid }}
+				{{{ slots.anchor }}}
 			{{else}}
 				<button class="link-button" type="button" data-action="addScale">
 					<i class="fa-solid fa-plus" inert></i>

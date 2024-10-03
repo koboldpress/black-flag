@@ -1,4 +1,3 @@
-import Advancement from "../../documents/advancement/advancement.mjs";
 import AdvancementConfig from "./advancement-config.mjs";
 
 /**
@@ -9,12 +8,15 @@ export default class SpellcastingConfig extends AdvancementConfig {
 	static DEFAULT_OPTIONS = {
 		classes: ["spellcasting"],
 		actions: {
-			addScale: SpellcastingConfig.#onAddScale
+			addScale: SpellcastingConfig.#onAddScale,
+			openScale: SpellcastingConfig.#onOpenScale
 		},
 		position: {
 			width: 500
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static PARTS = {
@@ -28,6 +30,8 @@ export default class SpellcastingConfig extends AdvancementConfig {
 			template: "systems/black-flag/templates/advancement/spellcasting-config-learning.hbs"
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
 	 * Formulas that can be configured.
@@ -84,8 +88,11 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		if (context.configuration.spells.mode) {
 			context.known = Object.entries(this.constructor.KNOWN).reduce((obj, [name, localization]) => {
 				const config = this.advancement.configuration[name];
+				const anchor = config.scaleValue?.toAnchor();
+				if (anchor) anchor.dataset.action = "openScale";
 				obj[name] = {
 					...localization,
+					anchor: anchor?.outerHTML,
 					scaleValue: config.scaleValue
 				};
 				return obj;
@@ -134,5 +141,19 @@ export default class SpellcastingConfig extends AdvancementConfig {
 		const [scale] = await this.item.createEmbeddedDocuments("Advancement", [scaleData]);
 		await this.advancement.update({ [`configuration.${name}.scale`]: scale.id });
 		scale.sheet.render({ force: true });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle opening a spellcasting value sheet.
+	 * @this {AdvancementConfig}
+	 * @param {Event} event - The originating click event.
+	 * @param {HTMLElement} target - The button that was clicked.
+	 * @returns {Promise<BlackFlagItem>} - The updated parent Item after the application re-renders.
+	 */
+	static async #onOpenScale(event, target) {
+		const advancement = await fromUuid(target.dataset.uuid);
+		advancement?.sheet.render({ force: true });
 	}
 }

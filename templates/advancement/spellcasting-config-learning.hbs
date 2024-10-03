@@ -19,8 +19,7 @@
 						{{ localize data.label }}
 					</span>
 					{{#if data.scaleValue}}
-						<!-- TODO: Figure out why this links aren't working -->
-						{{ blackFlag-linkForUUID data.scaleValue.uuid }}
+						{{{ data.anchor }}}
 					{{else}}
 						<button class="link-button" type="button" data-action="addScale">
 							<i class="fa-solid fa-plus" inert></i>
@@ -73,12 +72,12 @@
 					<label>
 						<span>{{ localize "BF.Spellcasting.FIELDS.spells.spellbook.firstLevel.label" }}</span>
 						<input type="number" name="configuration.spells.spellbook.firstLevel"
-					       	value="{{ configuration.spells.spellbook.firstLevel }}" min=0 step=1>
+					         value="{{ configuration.spells.spellbook.firstLevel }}" min=0 step=1>
 					</label>
 					<label>
 						<span>{{ localize "BF.Spellcasting.FIELDS.spells.spellbook.otherLevels.label" }}</span>
 						<input type="number" name="configuration.spells.spellbook.otherLevels"
-								 	value="{{ configuration.spells.spellbook.otherLevels }}" min=0 step=1>
+						       value="{{ configuration.spells.spellbook.otherLevels }}" min=0 step=1>
 					</label>
 				</div>
 			{{/if}}
