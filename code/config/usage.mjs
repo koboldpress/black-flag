@@ -40,8 +40,8 @@ import { localizeConfig } from "../utils/_module.mjs";
  */
 export const consumptionTypes = {
 	activity: {
-		label: "BF.Consumption.Type.ActivityUses.Label",
-		prompt: "BF.Consumption.Type.ActivityUses.Prompt",
+		label: "BF.CONSUMPTION.Type.ActivityUses.Label",
+		prompt: "BF.CONSUMPTION.Type.ActivityUses.Prompt",
 		consume: ConsumptionTargetData.consumeActivityUses,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsActivityUses,
 		scalingModes: {
@@ -51,8 +51,8 @@ export const consumptionTypes = {
 		}
 	},
 	item: {
-		label: "BF.Consumption.Type.ItemUses.Label",
-		prompt: "BF.Consumption.Type.ItemUses.Prompt",
+		label: "BF.CONSUMPTION.Type.ItemUses.Label",
+		prompt: "BF.CONSUMPTION.Type.ItemUses.Prompt",
 		consume: ConsumptionTargetData.consumeItemUses,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
 		scalingModes: {
@@ -64,8 +64,8 @@ export const consumptionTypes = {
 		validTargets: ConsumptionTargetData.validItemUsesTargets
 	},
 	hitDice: {
-		label: "BF.Consumption.Type.HitDice.Label",
-		prompt: "BF.Consumption.Type.HitDice.Prompt",
+		label: "BF.CONSUMPTION.Type.HitDice.Label",
+		prompt: "BF.CONSUMPTION.Type.HitDice.Prompt",
 		consume: ConsumptionTargetData.consumeHitDice,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsHitDice,
 		scalingModes: {
@@ -76,8 +76,8 @@ export const consumptionTypes = {
 		validTargets: ConsumptionTargetData.validHitDiceTargets
 	},
 	spellSlots: {
-		label: "BF.Consumption.Type.SpellSlots.Label",
-		prompt: "BF.Consumption.Type.SpellSlots.Prompt",
+		label: "BF.CONSUMPTION.Type.SpellSlots.Label",
+		prompt: "BF.CONSUMPTION.Type.SpellSlots.Prompt",
 		consume: ConsumptionTargetData.consumeSpellSlots,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsSpellSlots,
 		scalingModes: {

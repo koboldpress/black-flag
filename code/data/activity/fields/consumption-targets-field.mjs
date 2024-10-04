@@ -1,4 +1,4 @@
-import { numberFormat } from "../../../utils/_module.mjs";
+import { getPluralRules, numberFormat, simplifyBonus, simplifyFormula } from "../../../utils/_module.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
@@ -28,7 +28,7 @@ export default class ConsumptionTargetsField extends ArrayField {
 export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
-			type: new StringField({ label: "BF.Consumption.Type.Label" }),
+			type: new StringField({ label: "BF.CONSUMPTION.Type.Label" }),
 			target: new StringField({ label: "BF.Consumption.Target.Label" }),
 			value: new FormulaField({ initial: "1", label: "BF.Consumption.Amount.Label" }),
 			scaling: new SchemaField({
@@ -160,7 +160,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static async consumeActivityUses(config, updates) {
 		const result = await this._usesConsumption(config, {
 			uses: this.activity.uses,
-			type: game.i18n.format("BF.Consumption.Type.ActivityUses.Warning", {
+			type: game.i18n.format("BF.CONSUMPTION.Type.ActivityUses.Warning", {
 				itemName: this.item.name,
 				activityName: this.activity.name
 			}),
@@ -187,14 +187,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			const denom = this.actor.system.attributes.hd.d[this.target];
 
 			let warningMessage;
-			if (!denom) warningMessage = "BF.Consumption.Warning.MissingHitDice";
-			else if (denom.available === 0 && cost > 0) warningMessage = "BF.Consumption.Warning.None";
-			else if (denom.available < cost) warningMessage = "BF.Consumption.Warning.NotEnough";
+			if (!denom) warningMessage = "BF.CONSUMPTION.Warning.MissingHitDice";
+			else if (denom.available === 0 && cost > 0) warningMessage = "BF.CONSUMPTION.Warning.None";
+			else if (denom.available < cost) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 			if (warningMessage) {
 				const denomination = `d${this.target}`;
 				throw new ConsumptionError(
 					game.i18n.format(warningMessage, {
-						type: game.i18n.format("BF.Consumption.Type.HitDice.Warning", { denomination }),
+						type: game.i18n.format("BF.CONSUMPTION.Type.HitDice.Warning", { denomination }),
 						denomination,
 						cost: numberFormat(cost, { spelledOut: true }),
 						available: numberFormat(denom?.value, { spelledOut: true })
@@ -219,7 +219,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		}
 		if (remaining > 0) {
 			const available = Object.values(this.actor.system.attributes.hd.d).reduce((sum, d) => sum + d.available, 0);
-			const warningMessage = `BF.Consumption.Warning.${available > 0 ? "NotEnough" : "None"}`;
+			const warningMessage = `BF.CONSUMPTION.Warning.${available > 0 ? "NotEnough" : "None"}`;
 			throw new ConsumptionError(
 				game.i18n.format(warningMessage, {
 					type: game.i18n.localize("BF.HitDie.Label[other]").toLowerCase(),
@@ -245,7 +245,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const result = await this._usesConsumption(config, {
 			uses: item.system.uses,
 			quantity: item.system.quantity ?? 1,
-			type: game.i18n.format("BF.Consumption.Type.ItemUses.Warning", { name: item.name }),
+			type: game.i18n.format("BF.CONSUMPTION.Type.ItemUses.Warning", { name: item.name }),
 			rolls: updates.rolls
 		});
 		if (!result) return;
@@ -278,12 +278,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const circleData = this.actor.system.spellcasting?.slots?.[`circle-${circleNumber}`];
 		const newSpent = (circleData?.spent ?? 0) + cost;
 		let warningMessage;
-		if (!circleData?.max) warningMessage = "BF.Consumption.Warning.MissingSpellCircle";
-		else if (cost > 0 && !circleData.value) warningMessage = "BF.Consumption.Warning.None";
-		else if (newSpent > circleData.max) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if (!circleData?.max) warningMessage = "BF.CONSUMPTION.Warning.MissingSpellCircle";
+		else if (cost > 0 && !circleData.value) warningMessage = "BF.CONSUMPTION.Warning.None";
+		else if (newSpent > circleData.max) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 		if (warningMessage) {
 			const circle = CONFIG.BlackFlag.spellCircles()[circleNumber].toLowerCase();
-			const type = game.i18n.format("BF.Consumption.Type.SpellSlots.Warning", { circle });
+			const type = game.i18n.format("BF.CONSUMPTION.Type.SpellSlots.Warning", { circle });
 			throw new ConsumptionError(
 				game.i18n.format(warningMessage, {
 					type,
@@ -315,12 +315,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 		const cost = (await this.resolveCost({ config, rolls })).total;
 
 		let availableUses = uses.value;
+		const maxUses = uses.max || 1;
 		const canConsumeQuantity = uses.consumeQuantity && quantity && cost > 0;
-		if (canConsumeQuantity) availableUses += quantity * (uses.max || 1);
+		if (canConsumeQuantity) availableUses += quantity * maxUses;
 
 		let warningMessage;
-		if (cost > 0 && !availableUses) warningMessage = "BF.Consumption.Warning.None";
-		else if (cost > availableUses) warningMessage = "BF.Consumption.Warning.NotEnough";
+		if (cost > 0 && !availableUses) warningMessage = "BF.CONSUMPTION.Warning.None";
+		else if (cost > availableUses) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
 		if (warningMessage)
 			throw new ConsumptionError(
 				game.i18n.format(warningMessage, {
@@ -335,8 +336,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 		let remainingCost = cost - uses.value;
 		let deltaQuantity = 1;
-		while (remainingCost > uses.max) {
-			remainingCost -= uses.max;
+		while (remainingCost > maxUses) {
+			remainingCost -= maxUses;
 			deltaQuantity += 1;
 		}
 		return { spent: remainingCost, quantity: quantity - deltaQuantity };
@@ -345,6 +346,154 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*          Consumption Labels         */
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Create label and hint text indicating how much of this resource will be consumed/recovered.
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
+	getConsumptionLabels(config, consumed) {
+		const typeConfig = CONFIG.BlackFlag.consumptionTypes[this.type];
+		if (!typeConfig?.consumptionLabels) return "";
+		return typeConfig.consumptionLabels.call(this, config, consumed);
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Create hint text indicating how much of this resource will be consumed/recovered.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
+	static consumptionLabelsActivityUses(config, consumed) {
+		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
+		const uses = this.activity.uses;
+		const usesPluralRule = getPluralRules().select(uses.value);
+		return {
+			label: game.i18n.localize(`BF.CONSUMPTION.Type.ActivityUses.Prompt${increaseKey}`),
+			hint: game.i18n.format(`BF.CONSUMPTION.Type.ActivityUses.PromptHint${increaseKey}`, {
+				cost,
+				use: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
+				available: numberFormat(uses.value),
+				availableUse: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${usesPluralRule}`)
+			}),
+			warn: simplifiedCost > uses.value
+		};
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Create hint text indicating how much of this resource will be consumed/recovered.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
+	static consumptionLabelsHitDice(config, consumed) {
+		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
+		let denomination;
+		if (this.target === "smallest") denomination = game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Smallest");
+		else if (this.target === "largest") denomination = game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Largest");
+		else denomination = `d${this.target}`;
+		const available =
+			(["smallest", "largest"].includes(this.target)
+				? this.actor.system.attributes?.hd?.available
+				: this.actor.system.attributes?.hd?.d[this.target]?.available) ?? 0;
+		return {
+			label: game.i18n.localize(`BF.CONSUMPTION.Type.HitDice.Prompt${increaseKey}`),
+			hint: game.i18n.format(`BF.CONSUMPTION.Type.HitDice.PromptHint${increaseKey}`, {
+				cost,
+				denomination: denomination.toLowerCase(),
+				die: game.i18n.localize(`BF.CONSUMPTION.Type.HitDie.${pluralRule}`),
+				available: numberFormat(available)
+			}),
+			warn: simplifiedCost > available
+		};
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Create hint text indicating how much of this resource will be consumed/recovered.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
+	static consumptionLabelsItemUses(config, consumed) {
+		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
+		const item = this.actor.items.get(this.target);
+		const itemName = item ? item.name : game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem").toLowerCase();
+		const uses = (item ?? this.item).system.uses;
+		const usesPluralRule = getPluralRules().select(uses.value);
+
+		let totalUses = uses.value;
+		if (uses.consumeQuantity) {
+			const quantity = (item ?? this.item).system.quantity ?? 1;
+			totalUses += quantity * (uses.max || 1);
+		}
+
+		return {
+			label: game.i18n.localize(`BF.CONSUMPTION.Type.ItemUses.Prompt${increaseKey}`),
+			hint: game.i18n.format(`BF.CONSUMPTION.Type.ItemUses.PromptHint${increaseKey}`, {
+				cost,
+				use: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${pluralRule}`),
+				available: numberFormat(totalUses),
+				availableUse: game.i18n.localize(`BF.CONSUMPTION.Type.Use.${usesPluralRule}`),
+				item: item ? `<em>${itemName}</em>` : itemName
+			}),
+			warn: simplifiedCost > totalUses
+		};
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Create hint text indicating how much of this resource will be consumed/recovered.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
+	static consumptionLabelsSpellSlots(config, consumed) {
+		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
+		const number = Math.clamp(this.resolveCircle({ config }), 1, CONFIG.BlackFlag.maxSpellCircle);
+		const level = CONFIG.BlackFlag.spellCircles()[number].toLowerCase();
+		const available = this.actor.system.spellcasting?.slots?.[`circle-${number}`]?.value ?? 0;
+		return {
+			label: game.i18n.localize(`BF.CONSUMPTION.Type.SpellSlots.Prompt${increaseKey}`),
+			hint: game.i18n.format(`BF.CONSUMPTION.Type.SpellSlots.PromptHint${increaseKey}`, {
+				cost,
+				slot: game.i18n.format(`BF.CONSUMPTION.Type.SpellSlot.${pluralRule}`, { level }),
+				available: numberFormat(available)
+			}),
+			warn: simplifiedCost > available
+		};
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Resolve the cost for the consumption hint.
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @returns {{ cost: string, simplifiedCost: number, increaseKey: string, pluralRule: string }}
+	 * @internal
+	 */
+	_resolveHintCost(config) {
+		const costRoll = this.resolveCost({ config, evaluate: false });
+		let cost = costRoll.isDeterministic ? String(costRoll.evaluateSync().total) : simplifyFormula(costRoll.formula);
+		const simplifiedCost = simplifyBonus(cost);
+		const isNegative = cost.startsWith("-");
+		if (isNegative) cost = cost.replace("-", "");
+		let pluralRule;
+		if (costRoll.isDeterministic) pluralRule = new Intl.PluralRules(game.i18n.lang).select(Number(cost));
+		else pluralRule = "other";
+		return { cost, simplifiedCost, increaseKey: isNegative ? "Increase" : "Decrease", pluralRule };
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Valid Targets            */
@@ -357,9 +506,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static validHitDiceTargets() {
 		return [
-			{ value: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest") },
+			{ value: "smallest", label: game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Smallest") },
 			...CONFIG.BlackFlag.hitDieSizes.map(d => ({ value: d, label: `d${d}` })),
-			{ value: "largest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Largest") }
+			{ value: "largest", label: game.i18n.localize("BF.CONSUMPTION.Type.HitDice.Largest") }
 		];
 	}
 
@@ -382,16 +531,20 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			) {
 				const period = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[uses.recovery[0].period];
 				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { max: numberFormat(uses.max), period });
-			} else label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Charges", { value: numberFormat(uses.value) });
+			} else {
+				const type = game.i18n.localize(
+					`BF.CONSUMPTION.Uses.Available.Charges[${getPluralRules().select(uses.value)}]`
+				);
+				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Limited", { value: numberFormat(uses.value), type });
+			}
 			return `${name} (${label})`;
 		};
-		return [
-			{ value: "", label: makeLabel(game.i18n.localize("BF.Consumption.Type.ItemUses.ThisItem"), this.item) },
-			{ rule: true },
-			...(this.actor?.items ?? [])
-				.filter(i => i.system.uses?.max && i !== this.item)
-				.map(i => ({ value: i.id, label: makeLabel(i.name, i) }))
+		const options = [
+			{ value: "", label: makeLabel(game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem"), this.item) }
 		];
+		const items = (this.actor?.items ?? []).filter(i => i.system.uses?.max && i !== this.item);
+		if (items.length) options.push({ rule: true }, ...items.map(i => ({ value: i.id, label: makeLabel(i.name, i) })));
+		return options;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

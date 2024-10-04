@@ -230,7 +230,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 						this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
 							level: "error",
 							section: "auto",
-							message: game.i18n.format("BF.Consumption.Warning.MissingItem", { activity: this.name })
+							message: game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
 						});
 				}
 			}

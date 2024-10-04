@@ -176,7 +176,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 
 		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot"))
 			context.fields.push({
-				field: new BooleanField({ label: game.i18n.localize("BF.Consumption.Type.SpellSlots.Prompt") }),
+				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.Prompt") }),
 				name: "consume.spellSlot",
 				value: this.config.consume?.spellSlot
 			});
@@ -184,7 +184,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if (this.activity.activation.type === "legendary" && this._shouldDisplay("consume.action"))
 			context.fields.push({
 				field: new BooleanField({
-					label: game.i18n.format("BF.Consumption.Type.PromptGeneric", { type: this.activity.activation.label })
+					label: game.i18n.format("BF.CONSUMPTION.Type.PromptGeneric", { type: this.activity.activation.label })
 					// TODO: Display legendary action count as hint
 				}),
 				name: "consume.action",
@@ -194,13 +194,16 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if (this._shouldDisplay("consume.resources")) {
 			const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
 			for (const [index, target] of this.activity.consumption.targets.entries()) {
-				const label = game.i18n.localize(CONFIG.BlackFlag.consumptionTypes[target.type]?.prompt ?? target.type);
+				const value =
+					(isArray && this.config.consume.resources.includes(index)) ||
+					(!isArray && this.config.consume?.resources !== false && this.config.consume !== false);
+				const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
+				if (notes?.length) context.notes.push(...notes);
 				context.fields.push({
-					field: new BooleanField({ label } /*target.getConsumptionLabels(this.config)*/),
+					field: new BooleanField({ label, hint }),
 					name: `consume.resources.${index}`,
-					value:
-						(isArray && this.config.consume.resources.includes(index)) ||
-						(!isArray && this.config.consume?.resources !== false && this.config.consume !== false)
+					value,
+					warn: value ? warn : false
 				});
 			}
 		}
@@ -285,7 +288,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 						(slot.type === "leveled" && slot.circle > maximumCircle)
 					)
 						return null;
-					const label = game.i18n.format("BF.Consumption.Type.SpellSlots.Available", {
+					const label = game.i18n.format("BF.CONSUMPTION.Type.SpellSlots.Available", {
 						slot: slot.label,
 						available: numberFormat(slot.value)
 					});

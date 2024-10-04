@@ -15,4 +15,41 @@
 			opacity: .6;
 		}
 	}
+	i.warning { color: var(--bf-color-text-warning); }
+	[data-application-part="consumption"] .form-group > label { flex: 4; }
+	.note {
+		--note-color: var(--bf-color-border-blue);
+		position: relative;
+		margin-block-end: 0;
+		margin-inline: 2px;
+		border: 1px solid var(--note-color);
+		border-radius: 4px;
+		padding-block: 8px;
+		padding-inline-start: 14px;
+		padding-inline-end: 10px;
+		background: color-mix(in oklab, var(--note-color), transparent 90%);
+		font-size: var(--font-size-13);
+
+		&::before {
+			--marker-size: 14px;
+			position: absolute;
+			width: var(--marker-size);
+			height: var(--marker-size);
+			border-radius: 100%;
+			inset-block: calc(50% - var(--marker-size) / 2);
+			inset-inline-start: calc(-1 * var(--marker-size) / 2);
+			align-content: center;
+			background: var(--note-color);
+			color: white;
+			font-family: var(--font-awesome);
+			font-size: calc(var(--marker-size) * .75);
+			font-weight: bold;
+			text-align: center;
+		}
+		&.info::before { content: "\f129"; }
+		&.warn {
+			--note-color: var(--bf-color-text-warning);
+			&::before { content: "\21"; }
+		}
+	}
 }
