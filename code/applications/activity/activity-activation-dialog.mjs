@@ -176,7 +176,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 
 		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot"))
 			context.fields.push({
-				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.Prompt") }),
+				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.PromptDecrease") }),
 				name: "consume.spellSlot",
 				value: this.config.consume?.spellSlot
 			});
@@ -280,6 +280,8 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			const maximumCircle = spellcasting.maxCircle;
 
 			let spellSlotValue = spellcasting.slots[this.config.spell?.slot]?.value ? this.config.spell.slot : null;
+			const consumeSlot = this.config.consume === true || this.config.consume?.spellSlot;
+			if (!consumeSlot) spellSlotValue = this.config.spell?.slot;
 			const spellSlotOptions = Object.entries(spellcasting.slots)
 				.map(([value, slot]) => {
 					if (
@@ -292,7 +294,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 						slot: slot.label,
 						available: numberFormat(slot.value)
 					});
-					const disabled = slot.value === 0 && this.config.consume?.spellSlot;
+					const disabled = slot.value === 0 && consumeSlot;
 					if (!disabled && !spellSlotValue) spellSlotValue = value;
 					return { value, label, disabled, selected: spellSlotValue === value };
 				})
@@ -309,7 +311,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			if (!spellSlotOptions.some(o => !o.disabled))
 				context.notes.push({
 					type: "warn",
-					message: game.i18n.format("BF.ACTIVITY.Activation.Warning.NoSlotsLeft", {
+					message: game.i18n.format("BF.ACTIVATION.Warning.NoSlotsLeft", {
 						name: this.item.name
 					})
 				});
@@ -389,8 +391,8 @@ export default class ActivityActivationDialog extends BFFormDialog {
 	_prepareSubmitData(event, formData) {
 		const submitData = foundry.utils.expandObject(formData.object);
 		if (foundry.utils.hasProperty(submitData, "spell.slot")) {
-			const level = this.actor.system.spells?.[submitData.spell.slot]?.level ?? 0;
-			submitData.scaling = Math.max(0, level - this.item.system.level);
+			const circle = this.actor.system.spellcasting?.slots?.[submitData.spell.slot]?.circle ?? 0;
+			submitData.scaling = Math.max(0, circle - this.item.system.circle.base);
 		} else if ("scalingValue" in submitData) {
 			submitData.scaling = submitData.scalingValue - 1;
 			delete submitData.scalingValue;
