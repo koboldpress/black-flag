@@ -14,7 +14,7 @@
 			<span>{{ localize "BF.Consumption.Target.Label" }}</span>
 			{{#with consumption.validTargets as |targets|}}
 				<select name="{{ ../prefix }}target">
-					{{ selectOptions targets selected=../consumption.target nameAttr="key" labelAttr="label" }}
+					{{ selectOptions targets selected=../consumption.target }}
 				</select>
 			{{else}}
 				<input type="text" name="{{ prefix }}target" value="{{ consumption.target }}"

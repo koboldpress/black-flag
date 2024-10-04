@@ -1,7 +1,7 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
-import ConsumptionError from "../../data/activity/consumption-error.mjs";
+import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { areKeysPressed, buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
@@ -383,9 +383,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {boolean} consume.action - Control whether a part of the action economy is used during activation.
 	 * @property {boolean|BlackFlagItem} consume.ammunition - Control whether ammunition is consumed by a weapon or
 	 *                                                        provide an ammunition item to consume.
-	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
-	 *                                                  consumption or provide a list of consumption type keys defined
-	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
+	 * @property {boolean|number[]} consume.resources - Set to `true` or `false` to enable or disable all resource
+	 *                                                  consumption or provide a list of consumption indexes to only
+	 *                                                  enable those types.
 	 * @property {boolean} consume.spellSlot - Control whether spell consumes a spell slot.
 	 * @property {Event} [event] - Triggering event.
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
@@ -722,21 +722,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		if (config.consume === true || config.consume.resources) {
-			for (const target of this.consumption.targets) {
-				if (
-					foundry.utils.getType(config.consume.resources) === "Array" &&
-					!config.consume.resources.includes(target.type)
-				)
-					continue;
+			const indexes =
+				config.consume === true || config.consume.resources === true
+					? this.consumption.targets.keys()
+					: config.consume.resources;
+			for (const index of indexes) {
+				const target = this.consumption.targets[index];
 				try {
-					await target.prepareConsumptionUpdates(this, config, updates);
+					await target.consume(config, updates);
 				} catch (err) {
-					if (err instanceof ConsumptionError) {
-						errors.push(err);
-						ui.notifications.error(err.message, { console: false });
-					} else {
-						throw err;
-					}
+					if (err instanceof ConsumptionError) errors.push(err);
+					else throw err;
 				}
 			}
 		}
@@ -760,6 +756,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// TODO: Validate concentration
 
+		errors.forEach(err => ui.notifications.error(err.message, { console: false }));
 		return errors.length ? false : updates;
 	}
 

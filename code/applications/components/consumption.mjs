@@ -1,4 +1,4 @@
-import ConsumptionTargetData from "../../data/activity/consumption-target-data.mjs";
+import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
 import FormAssociatedElement from "./form-associated-element.mjs";
 
 /**

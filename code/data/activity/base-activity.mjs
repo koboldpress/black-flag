@@ -6,19 +6,10 @@ import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 import UsesField from "../fields/uses-field.mjs";
-import ConsumptionTargetData from "./consumption-target-data.mjs";
+import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
-const {
-	ArrayField,
-	BooleanField,
-	DocumentIdField,
-	EmbeddedDataField,
-	FilePathField,
-	HTMLField,
-	IntegerSortField,
-	SchemaField,
-	StringField
-} = foundry.data.fields;
+const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortField, SchemaField, StringField } =
+	foundry.data.fields;
 
 /**
  * Data model for activities.
@@ -115,7 +106,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				primary: new BooleanField({ required: false, initial: undefined })
 			}),
 			consumption: new SchemaField({
-				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
+				targets: new ConsumptionTargetsField(),
 				scale: new SchemaField({
 					allowed: new BooleanField(),
 					max: new FormulaField()
