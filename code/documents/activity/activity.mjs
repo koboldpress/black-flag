@@ -789,6 +789,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			actor: this.item.actor,
 			token: this.item.actor?.token,
 			buttons: buttons.length ? buttons : null,
+			subtitle: this.name,
 			tags: Array.from(this.chatTags.entries())
 				.map(([key, label]) => ({ key, label }))
 				.filter(t => t.label),
@@ -856,6 +857,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	async createActivationMessage(message = {}) {
 		const context = await this._activationChatContext();
+		await this.item.system.prepareActivationChatContext?.(context);
 
 		/**
 		 * A hook event that fires before an activity activation card contents is rendered.

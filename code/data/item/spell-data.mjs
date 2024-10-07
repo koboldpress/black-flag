@@ -524,6 +524,15 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
+	async prepareActivationChatContext(context) {
+		const rollData = context.activity.getRollData();
+		const spellCircle = CONFIG.BlackFlag.spellCircles()[rollData.item.circle.value || rollData.item.circle.base];
+		if (spellCircle) context.subtitle = `${spellCircle} • ${context.subtitle}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	_validConsumptionTypes(types) {
 		return types.filter(t => t.key !== "spellSlots");
