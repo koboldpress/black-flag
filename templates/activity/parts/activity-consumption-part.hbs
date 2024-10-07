@@ -43,8 +43,7 @@
 		<label>
 			<span>{{ localize "BF.Consumption.Scaling.Mode.Label" }}</span>
 			<select name="{{ prefix }}scaling.mode">
-				{{ selectOptions consumption.scalingModes selected=consumption.scaling.mode localize=true
-												 blank=(localize "BF.Consumption.Scaling.Mode.None") }}
+				{{ selectOptions consumption.scalingModes selected=consumption.scaling.mode }}
 			</select>
 		</label>
 		{{#if consumption.scaling.mode}}

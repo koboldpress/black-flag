@@ -1,4 +1,40 @@
 /**
+ * Configure list of attributes that can be consumed on an actor.
+ * @internal
+ */
+export function _configureConsumableAttributes() {
+	const shared = [
+		"attributes.ac.flat",
+		"attributes.exhaustion",
+		"attributes.hp.value",
+		"attributes.hp.temp",
+		...Object.keys(CONFIG.BlackFlag.movementTypes).map(key => `traits.movement.types.${key}`),
+		...Object.keys(CONFIG.BlackFlag.senses).map(key => `traits.senses.types.${key}`)
+	];
+
+	CONFIG.BlackFlag.consumableResources = {
+		pc: [
+			// TODO: Consumable ability scores?
+			...shared,
+			"attributes.death.success",
+			"attributes.death.failure",
+			"attributes.luck.value",
+			"progression.xp.value",
+			...Array.fromRange(CONFIG.BlackFlag.maxSpellCircle, 1).map(c => `spellcasting.slots.circle-${c}.value`),
+			"spellcasting.slots.pact.value"
+		].sort(),
+		npc: [
+			...shared,
+			// TODO: Allow targeting `attributes.legendary.value` instead
+			"attributes.legendary.spent"
+		].sort(),
+		lair: []
+	};
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configure lists of attributes to display in the token HUD and combat tracker.
  * @internal
  */

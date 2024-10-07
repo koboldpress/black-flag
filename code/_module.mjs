@@ -82,6 +82,7 @@ Hooks.once("setup", function () {
 		label: "BF.Sheet.Default.Journal"
 	});
 
+	config._configureConsumableAttributes();
 	config._configureTrackableAttributes();
 
 	// Handle rich tooltips

@@ -1034,6 +1034,14 @@
 			"PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
 			"Warning": "uses on {itemName}'s activity {activityName}"
 		},
+		"Attribute": {
+			"Label": "Attribute",
+			"PromptDecrease": "Consume Attribute?",
+			"PromptIncrease": "Restore Attribute?",
+			"PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+			"PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+			"Warning": "{attribute} amount"
+		},
 		"ItemUses": {
 			"Label": "Item's Uses",
 			"PromptDecrease": "Consume Item Use?",
@@ -1076,9 +1084,10 @@
 		}
 	},
 	"Warning": {
+		"MissingAttribute": "Attribute {attribute} configured to be consumed by {activity} activity on {item} could not be found.",
 		"MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
 		"MissingItem": "Item configured to be consumed by {activity} activity not found.",
-		"MissingSpellRing": "No {ring} slots available.",
+		"MissingSpellCircle": "No {circle} slots available.",
 		"None": "No {type} available to spend, {cost} required.",
 		"NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
 	},
