@@ -53,7 +53,7 @@ export default class ConceptSheet extends BaseItemSheet {
 		const { action } = event.currentTarget.dataset;
 		switch (action) {
 			case "journal-link":
-				return await this.document.update({ "system.description.journal": "" });
+				return await this.submit({ updateData: { "system.description.journal": "" } });
 		}
 		return super._onAction(event);
 	}
@@ -76,7 +76,7 @@ export default class ConceptSheet extends BaseItemSheet {
 				return AdvancementElement.dropItems(event, this.item, [item]);
 			case "JournalEntry":
 			case "JournalEntryPage":
-				if (data.uuid) return await this.document.update({ "system.description.journal": data.uuid });
+				if (data.uuid) return await this.submit({ updateData: { "system.description.journal": data.uuid } });
 		}
 
 		return super._onDrop(event);

@@ -329,6 +329,9 @@ export default class PCData extends ActorDataModel.mixin(
 
 		// Hit Dice
 		const hd = this.attributes.hd;
+		hd.available ??= 0;
+		hd.spent ??= 0;
+		hd.max ??= 0;
 		for (const data of Object.values(this.progression.levels)) {
 			const cls = data.class;
 			const hpAdvancement = cls.system.advancement.byType("hitPoints")[0];
@@ -336,10 +339,13 @@ export default class PCData extends ActorDataModel.mixin(
 			const denom = (hd.d[hpAdvancement.configuration.denomination] ??= { spent: 0 });
 			denom.max ??= 0;
 			denom.max += 1;
+			hd.max += 1;
 		}
 		for (const [key, denom] of Object.entries(hd.d)) {
 			if (denom.max) denom.available = denom.max - denom.spent;
 			else delete hd.d[key];
+			hd.available += hd.d[key]?.available ?? 0;
+			hd.spent += hd.d[key]?.spent ?? 0;
 		}
 	}
 

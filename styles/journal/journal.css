@@ -18,7 +18,7 @@
 	}
 }
 
-:is(.black-flag-journal .journal-entry-content, .editor, .black-flag-tooltip .description) {
+:is(.black-flag-journal .journal-entry-content, .editor, .black-flag .description, .black-flag-tooltip .description) {
 	h1 {
 		border: none;
 		color: var(--bf-text-color-blue);
@@ -90,6 +90,10 @@
 		padding-inline: 4px;
 		color: var(--bf-blue);
 		font-style: normal;
+	}
+
+	p.centered {
+		text-align: center;
 	}
 
 	h4.magic-item {

@@ -3,7 +3,7 @@
 		<label>
 			<span>{{ localize "BF.Equipment.Category.Label" }}</span>
 			<select name="system.type.category">
-				{{ selectOptions categories.options selected=system.type.category blank=categories.blank }}
+				{{ selectOptions categories.options selected=source.type.category blank=categories.blank }}
 			</select>
 		</label>
 	{{/if}}
@@ -11,7 +11,7 @@
 		<label>
 			<span>{{ localize "BF.Equipment.Type.Label" }}</span>
 			<select name="system.type.value">
-				{{ selectOptions types.options selected=system.type.value blank=types.blank }}
+				{{ selectOptions types.options selected=source.type.value blank=types.blank }}
 			</select>
 		</label>
 	{{/if}}
@@ -19,7 +19,7 @@
 		<label>
 			<span>{{ localize "BF.Equipment.Base.Label" }}</span>
 			<select name="system.type.base">
-				{{ selectOptions baseItems.options selected=system.type.base blank=baseItems.blank }}
+				{{ selectOptions baseItems.options selected=source.type.base blank=baseItems.blank }}
 			</select>
 		</label>
 	{{/if}}

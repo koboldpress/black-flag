@@ -1,0 +1,11 @@
+<section>
+	{{~#if hasCreation}}
+		<fieldset>
+				<legend>{{ localize "BF.ACTIVATION.SECTION.Creation" }}</legend>
+				{{#if template}}
+						{{ formField template.field name=template.name value=template.value }}
+				{{/if}}
+		</fieldset>
+		{{> "blackFlag.activity-activation-notes" }}
+	{{/if~}}
+</section>

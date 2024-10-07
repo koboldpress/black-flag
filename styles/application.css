@@ -3,9 +3,12 @@
 /* <><><><> <><><><> <><><><> <><><><> */
 
 .black-flag.application {
+	--color-fieldset-border: var(--bf-blue);
 	--color-scrollbar: var(--bf-blue);
 	--color-shadow-primary: var(--bf-button-shadow-blue);
 	max-height: 85vh;
+	margin: 0;
+	padding: 0;
 
 	button {
 		--button-hover-background-color: var(--bf-blue);
@@ -22,7 +25,10 @@
 		box-shadow: 0 0 6px var(--bf-button-shadow-blue);
 	}
 
-	.window-content { overflow-y: auto; }
+	.window-content {
+		overflow-y: auto;
+		> section:empty { display: none; }
+	}
 	&.form-list .window-content {
 		display: flex;
 		flex-direction: column;

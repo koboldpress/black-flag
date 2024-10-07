@@ -3,17 +3,17 @@
 	<label>
 		<span>{{ localize "BF.Attunement.Type.Label" }}</span>
 		<select name="system.attunement.value">
-			{{#select system.attunement.value}}
+			{{#select source.attunement.value}}
 				<option value="">{{ localize "BF.Attunement.Type.None" }}</option>
 				<option value="optional">{{ localize "BF.Attunement.Type.Optional" }}</option>
 				<option value="required">{{ localize "BF.Attunement.Type.Required" }}</option>
 			{{/select}}
 		</select>
 	</label>
-	{{#if system.attunement.value}}
+	{{#if source.attunement.value}}
 		<label>
 			<span>{{ localize "BF.Attunement.Requirement" }}</span>
-			<input type="text" name="system.attunement.requirement" value="{{ system.attunement.requirement }}">
+			<input type="text" name="system.attunement.requirement" value="{{ source.attunement.requirement }}">
 		</label>
 	{{/if}}
 </fieldset>

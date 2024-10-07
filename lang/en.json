@@ -127,7 +127,9 @@
 		}
 	},
 	"SECTION": {
-		"Creation": "Creation"
+		"Consumption": "Consumption",
+		"Creation": "Creation",
+		"Scaling": "Scaling"
 	},
 	"Category": {
 		"Monster": "Monster Actions",
@@ -158,6 +160,7 @@
 	},
 	"Warning": {
 		"NoActions": "No {type} are available, but activating this requires at least {required}.",
+		"NoSlotsLeft": "No slots left to cast this spell.",
 		"NotEnoughActions": "Not enough {type} to activate, {required} required by only {available} available."
 	}
 },
@@ -1016,6 +1019,79 @@
 	"Title": "{type} Configuration"
 },
 
+"BF.CONSUMPTION": {
+	"FIELDS": {
+		
+	},
+	"Type": {
+		"Label": "Type",
+		"PromptGeneric": "Consume {type}",
+		"ActivityUses": {
+			"Label": "Activity's Uses",
+			"PromptDecrease": "Consume Activity Use?",
+			"PromptIncrease": "Restore Activity Use?",
+			"PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of this activity ({available} {availableUse} available).",
+			"PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
+			"Warning": "uses on {itemName}'s activity {activityName}"
+		},
+		"ItemUses": {
+			"Label": "Item's Uses",
+			"PromptDecrease": "Consume Item Use?",
+			"PromptIncrease": "Restore Item Use?",
+			"PromptHintDecrease": "Spend <strong>{cost}</strong> {use} of {item} ({available} {availableUse} available).",
+			"PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of {item}.",
+			"ThisItem": "This Item",
+			"Warning": "uses on {name}"
+		},
+		"HitDice": {
+			"Label": "Hit Dice",
+			"Largest": "Largest Available",
+			"PromptDecrease": "Consume Hit Die?",
+			"PromptIncrease": "Restore Hit Die?",
+			"PromptHintDecrease": "Spend <strong>{cost}</strong> {denomination} {die} ({available} remaining).",
+			"PromptHintIncrease": "Recover <strong>{cost}</strong> {denomination} {die}.",
+			"Smallest": "Smallest Available",
+			"Warning": "{denomination} hit dice"
+		},
+		"HitDie": {
+			"one": "hit die",
+			"other": "hit dice"
+		},
+		"SpellSlot": {
+			"one": "{level} slot",
+			"other": "{level} slots"
+		},
+		"SpellSlots": {
+			"Label": "Spell Slots",
+			"Available": "{slot} ({available} available)",
+			"PromptDecrease": "Consume Spell Slot?",
+			"PromptIncrease": "Restore Spell Slot?",
+			"PromptHintDecrease": "Spend <strong>{cost}</strong> {slot} ({available} remaining).",
+			"PromptHintIncrease": "Recover <strong>{cost}</strong> {slot}.",
+			"Warning": "{circle} slots"
+		},
+		"Use": {
+			"one": "use",
+			"other": "uses"
+		}
+	},
+	"Warning": {
+		"MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
+		"MissingItem": "Item configured to be consumed by {activity} activity not found.",
+		"MissingSpellRing": "No {ring} slots available.",
+		"None": "No {type} available to spend, {cost} required.",
+		"NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
+	},
+	"Uses": {
+		"Available": {
+			"Charges[one]": "Charge",
+			"Charges[other]": "Charges",
+			"Limited": "{value} {type}",
+			"Period": "{value} per {period}"
+		}
+	}
+},
+
 "BF.Consumption": {
 	"Label": "Resource Consumption",
 	"Action": {
@@ -1052,41 +1128,6 @@
 	},
 	"Target": {
 		"Label": "Target"
-	},
-	"Type": {
-		"Label": "Type",
-		"PromptGeneric": "Consume {type}",
-		"ActivityUses": {
-			"Label": "Activity's Uses",
-			"Prompt": "Consume Activity Use",
-			"Warning": "uses on {itemName}'s activity {activityName}"
-		},
-		"ItemUses": {
-			"Label": "Item's Uses",
-			"Prompt": "Consume Item Use",
-			"ThisItem": "This Item",
-			"Warning": "uses on {name}"
-		},
-		"HitDice": {
-			"Label": "Hit Dice",
-			"Largest": "Largest Available",
-			"Prompt": "Consume Hit Die",
-			"Smallest": "Smallest Available",
-			"Warning": "{denomination} hit dice"
-		},
-		"SpellSlots": {
-			"Label": "Spell Slots",
-			"Available": "{slot} ({available} available)",
-			"Prompt": "Consume Spell Slot",
-			"Warning": "{ring} slots"
-		}
-	},
-	"Warning": {
-		"MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
-		"MissingItem": "Item configured to be consumed by {activity} activity not found.",
-		"MissingSpellRing": "No {ring} slots available.",
-		"None": "No {type} available to spend, {cost} required.",
-		"NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
 	}
 },
 

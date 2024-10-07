@@ -6,19 +6,10 @@ import RangeField from "../fields/range-field.mjs";
 import TargetField from "../fields/target-field.mjs";
 import TypeField from "../fields/type-field.mjs";
 import UsesField from "../fields/uses-field.mjs";
-import ConsumptionTargetData from "./consumption-target-data.mjs";
+import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
-const {
-	ArrayField,
-	BooleanField,
-	DocumentIdField,
-	EmbeddedDataField,
-	FilePathField,
-	HTMLField,
-	IntegerSortField,
-	SchemaField,
-	StringField
-} = foundry.data.fields;
+const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortField, SchemaField, StringField } =
+	foundry.data.fields;
 
 /**
  * Data model for activities.
@@ -43,6 +34,7 @@ const {
  * @property {boolean} duration.override - Should the item's duration be overridden?
  * @property {RangeField} range
  * @property {boolean} range.override - Should the item's range be overridden?
+ * @property {boolean} magical - Is this considered a magical effect?
  * @property {TargetField} target
  * @property {boolean} target.prompt - Should template placement be checked by default?
  * @property {boolean} target.override - Should the item's targeting data be overridden?
@@ -114,7 +106,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 				primary: new BooleanField({ required: false, initial: undefined })
 			}),
 			consumption: new SchemaField({
-				targets: new ArrayField(new EmbeddedDataField(ConsumptionTargetData)),
+				targets: new ConsumptionTargetsField(),
 				scale: new SchemaField({
 					allowed: new BooleanField(),
 					max: new FormulaField()
@@ -238,7 +230,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 						this.item.notifications.set(`activity-${this.id}-missing-consumption-${target.target}`, {
 							level: "error",
 							section: "auto",
-							message: game.i18n.format("BF.Consumption.Warning.MissingItem", { activity: this.name })
+							message: game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", { activity: this.name })
 						});
 				}
 			}

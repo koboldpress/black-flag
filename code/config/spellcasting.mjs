@@ -118,6 +118,7 @@ export const spellLearningModes = {
  *
  * @typedef {LabeledConfiguration} SpellPreparationConfiguration
  * @property {boolean} [preparable] - Can this spell be prepared?
+ * @property {boolean} [scalable] - Can spells with this mode be scaled?
  */
 
 /**
@@ -127,10 +128,12 @@ export const spellLearningModes = {
 export const spellPreparationModes = {
 	standard: {
 		label: "BF.Spell.Preparation.Mode.Standard",
-		preparable: true
+		preparable: true,
+		scalable: true
 	},
 	pact: {
-		label: "BF.Spell.Preparation.Mode.Pact"
+		label: "BF.Spell.Preparation.Mode.Pact",
+		scalable: true
 	},
 	atWill: {
 		label: "BF.Spell.Preparation.Mode.AtWill"

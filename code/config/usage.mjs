@@ -1,33 +1,37 @@
+import { ConsumptionTargetData } from "../data/activity/fields/consumption-targets-field.mjs";
 import { localizeConfig } from "../utils/_module.mjs";
-import { hitDieSizes } from "./advancement.mjs";
-import { spellCircles } from "./spellcasting.mjs";
 
 /**
  * Configuration information for activity consumption types.
  *
  * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
- * @property {ConsumptionConsumeFunction|string} consume - Function used to calculate updates upon consumption.
+ * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
+ * @property {ConsumptionLabelsFunction} consumptionLabels      Function used to generate a hint of consumption amount.
  * @property {LabeledConfiguration} [scalingModes] - Consumption parts that can be scaled.
  * @property {boolean} [targetRequiresEmbedded] - Display text input rather than limited options when not embedded.
  * @property {ConsumptionValidTargetsFunction} [validTargets] - Function used to build list of targets for this type.
  */
 
 /**
- * Function called to calculate consumption changes. Should throw an error if consumption is not possible.
- *
  * @callback ConsumptionConsumeFunction
- * @param {Activity} activity - Activity being activated.
- * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
- * @param {ConsumptionTargetData} target - Configuration info for this consumption target.
- * @param {ActivationUpdates} updates - Updates to be performed.
+ * @this {ConsumptionTargetData}
+ * @param {ActivityUseConfiguration} config - Configuration data for the activity usage.
+ * @param {ActivityUsageUpdates} updates - Updates to be performed.
+ * @throws ConsumptionError
  */
 
 /**
- * Function called to build a list of valid consumption targets.
- *
+ * @callback ConsumptionLabelsFunction
+ * @this {ConsumptionTargetData}
+ * @param {ActivityUseConfiguration} config - Configuration data for the activity usage.
+ * @param {boolean} consumed - Is this consumption currently set to be consumed?
+ * @returns {ConsumptionLabels}
+ */
+
+/**
  * @callback ConsumptionValidTargetsFunction
- * @param {Activity} activity - Activity to which the consumption belongs.
- * @returns {{key: string, label: string}[]} - Valid targets.
+ * @this {ConsumptionTargetData}
+ * @returns {FormSelectOption[]} - Valid targets.
  */
 
 /**
@@ -36,9 +40,10 @@ import { spellCircles } from "./spellcasting.mjs";
  */
 export const consumptionTypes = {
 	activity: {
-		label: "BF.Consumption.Type.ActivityUses.Label",
-		prompt: "BF.Consumption.Type.ActivityUses.Prompt",
-		consume: "consumeActivity",
+		label: "BF.CONSUMPTION.Type.ActivityUses.Label",
+		prompt: "BF.CONSUMPTION.Type.ActivityUses.Prompt",
+		consume: ConsumptionTargetData.consumeActivityUses,
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsActivityUses,
 		scalingModes: {
 			amount: {
 				label: "BF.Consumption.Scaling.Mode.Amount"
@@ -46,41 +51,35 @@ export const consumptionTypes = {
 		}
 	},
 	item: {
-		label: "BF.Consumption.Type.ItemUses.Label",
-		prompt: "BF.Consumption.Type.ItemUses.Prompt",
-		consume: "consumeItem",
+		label: "BF.CONSUMPTION.Type.ItemUses.Label",
+		prompt: "BF.CONSUMPTION.Type.ItemUses.Prompt",
+		consume: ConsumptionTargetData.consumeItemUses,
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
 		scalingModes: {
 			amount: {
 				label: "BF.Consumption.Scaling.Mode.Amount"
 			}
 		},
 		targetRequiresEmbedded: true,
-		validTargets: activity => {
-			const otherItems = activity.item.actor?.items
-				.filter(i => (i.system.uses?.min || i.system.uses?.max) && i !== activity.item)
-				.map(i => ({ key: i.id, label: i.name }));
-			return [{ key: "", label: game.i18n.localize("BF.Consumption.Type.ItemUses.ThisItem") }, ...(otherItems ?? [])];
-		}
+		validTargets: ConsumptionTargetData.validItemUsesTargets
 	},
 	hitDice: {
-		label: "BF.Consumption.Type.HitDice.Label",
-		prompt: "BF.Consumption.Type.HitDice.Prompt",
-		consume: "consumeHitDice",
+		label: "BF.CONSUMPTION.Type.HitDice.Label",
+		prompt: "BF.CONSUMPTION.Type.HitDice.Prompt",
+		consume: ConsumptionTargetData.consumeHitDice,
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsHitDice,
 		scalingModes: {
 			amount: {
 				label: "BF.Consumption.Scaling.Mode.Amount"
 			}
 		},
-		validTargets: activity => [
-			{ key: "smallest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Smallest") },
-			...hitDieSizes.map(d => ({ key: d, label: `d${d}` })),
-			{ key: "largest", label: game.i18n.localize("BF.Consumption.Type.HitDice.Largest") }
-		]
+		validTargets: ConsumptionTargetData.validHitDiceTargets
 	},
 	spellSlots: {
-		label: "BF.Consumption.Type.SpellSlots.Label",
-		prompt: "BF.Consumption.Type.SpellSlots.Prompt",
-		consume: "consumeSpellSlots",
+		label: "BF.CONSUMPTION.Type.SpellSlots.Label",
+		prompt: "BF.CONSUMPTION.Type.SpellSlots.Prompt",
+		consume: ConsumptionTargetData.consumeSpellSlots,
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsSpellSlots,
 		scalingModes: {
 			amount: {
 				label: "BF.Consumption.Scaling.Mode.Amount"
@@ -89,11 +88,7 @@ export const consumptionTypes = {
 				label: "BF.Consumption.Scaling.Mode.Circle"
 			}
 		},
-		validTargets: activity => {
-			const circles = spellCircles();
-			delete circles[0];
-			return Object.entries(circles).map(([key, label]) => ({ key, label }));
-		}
+		validTargets: ConsumptionTargetData.validSpellSlotsTargets
 	}
 };
 

@@ -1,133 +1,214 @@
-import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
-import BlackFlagDialog from "../dialog.mjs";
+import { filteredKeys, numberFormat, simplifyBonus } from "../../utils/_module.mjs";
+import BFFormDialog from "../api/form-dialog.mjs";
 
-const { BooleanField } = foundry.data.fields;
+const { BooleanField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Application to handled configuring the activation of an activity.
  */
-export default class ActivityActivationDialog extends BlackFlagDialog {
-	constructor(activity, config = {}, data = {}, options = {}) {
-		super(data, options);
-		this.options.classes.push("black-flag", "activity-activation");
-		this.activity = activity;
-		this.config = config;
+export default class ActivityActivationDialog extends BFFormDialog {
+	constructor(options = {}) {
+		super(options);
+
+		this.#activityId = options.activity.id;
+		this.#item = options.activity.item;
+		this.#config = options.config;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			submitOnChange: true,
-			jQuery: false
-		});
-	}
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["activity-activation"],
+		actions: {
+			use: ActivityActivationDialog.#onUse
+		},
+		activity: null,
+		button: {
+			icon: null,
+			label: null
+		},
+		config: null,
+		display: {
+			all: true
+		},
+		form: {
+			handler: ActivityActivationDialog.#onSubmitForm,
+			submitOnChange: true
+		},
+		position: {
+			width: 460
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		scaling: {
+			template: "systems/black-flag/templates/activity/activity-activation-scaling.hbs"
+		},
+		consumption: {
+			template: "systems/black-flag/templates/activity/activity-activation-consumption.hbs"
+		},
+		creation: {
+			template: "systems/black-flag/templates/activity/activity-activation-creation.hbs"
+		},
+		footer: {
+			template: "templates/generic/form-footer.hbs"
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Properties             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * The activity being activated.
+	 * ID of the activity being activated.
 	 * @type {Activity}
 	 */
-	activity;
+	#activityId;
+
+	/**
+	 * Activity being activated.
+	 * @type {Activity}
+	 */
+	get activity() {
+		return this.item.system.activities.get(this.#activityId);
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Configuration data for the activation.
+	 * Actor using this activity.
+	 * @type {BlackFlagActor}
+	 */
+	get actor() {
+		return this.item.actor;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Activity activation configuration data.
 	 * @type {ActivityActivationConfiguration}
 	 */
-	config;
+	#config;
+
+	get config() {
+		return this.#config;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Item that contains the activity.
+	 * @type {BlackFlagItem}
+	 */
+	#item;
+
+	get item() {
+		return this.#item;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	get title() {
+		return `${this.item.name}: ${this.activity.name}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Was the use button clicked?
+	 * @type {boolean}
+	 */
+	#used = false;
+
+	get used() {
+		return this.#used;
+	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/**
-	 * Display the activity activation dialog.
-	 * @param {Activity} activity - Activity to activate.
-	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
-	 * @returns {Promise<object|null>} - Form data object with the results of the activation.
-	 * @throws error if activity couldn't be activated.
-	 */
-	static async create(activity, config) {
-		if (!activity.item.isOwned) throw new Error("Cannot activate an activity that is not owned.");
+	/** @inheritDoc */
+	async _prepareContext(options) {
+		if ("scaling" in this.config) this.#item = this.#item.clone({ "flags.black-flag.scaling": this.config.scaling });
+		return {
+			...(await super._prepareContext(options)),
+			activity: this.activity
+		};
+	}
 
-		return new Promise((resolve, reject) => {
-			const dialog = new this(
-				activity,
-				config,
-				{
-					title: `${activity.item.name}: ${game.i18n.localize("BF.ACTIVITY.Activation.Title")}`,
-					content: null,
-					buttons: {
-						use: {
-							cssClass: "light-button",
-							icon: `<i class="fa-solid fa-${activity.isSpell ? "magic" : "fist-raised"}"></i>`,
-							label: game.i18n.localize(activity.activationLabel),
-							callback: html => {
-								const formData = this._getFormData(html.querySelector("form"));
-								foundry.utils.mergeObject(config, formData);
-								resolve(formData);
-							}
-						}
-					},
-					close: () => reject(null),
-					default: "use"
-				},
-				{ jQuery: false }
-			);
-			dialog.render(true);
-		});
+	/* -------------------------------------------- */
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+		switch (partId) {
+			case "consumption":
+				return this._prepareConsumptionContext(context, options);
+			case "creation":
+				return this._prepareCreationContext(context, options);
+			case "footer":
+				return this._prepareFooterContext(context, options);
+			case "scaling":
+				return this._prepareScalingContext(context, options);
+		}
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	async getData(options = {}) {
-		const context = await super.getData(options);
+	/**
+	 * Prepare rendering context for the consumption section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
+	 */
+	async _prepareConsumptionContext(context, options) {
+		context.fields = [];
+		context.notes = [];
 
-		// TODO: Calculate resource consumption based on initial configuration
+		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot"))
+			context.fields.push({
+				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.PromptDecrease") }),
+				name: "consume.spellSlot",
+				value: this.config.consume?.spellSlot
+			});
 
-		const data = foundry.utils.mergeObject(
-			foundry.utils.deepClone(this.config),
-			{
-				activity: this.activity,
-				resources: this._prepareResourceOptions(),
-				spell: {
-					slots: this._prepareSpellSlotOptions()
-				}
-			},
-			{ inplace: false }
-		);
-		this._prepareScaling(data);
-		if (this.activity.target?.template?.type)
-			data.template = {
-				field: new BooleanField({ label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate") }),
-				name: "create.measuredTemplate",
-				value: this.config.create?.measuredTemplate
-			};
-		data.show = {
-			actionConsumption: this.activity.activation.type === "legendary",
-			creation: !!data.template,
-			scaling: data.scalingData.max,
-			scalingRange: data.scalingData.max <= 20,
-			spellConsumption: this.activity.requiresSpellSlot,
-			spellSlotSelection: this.activity.isSpell && !foundry.utils.isEmpty(data.spell.slots),
-			resourceConsumption: !foundry.utils.isEmpty(data.resources)
-		};
-		data.show.anyConsumption =
-			data.show.actionConsumption ||
-			(data.show.spellConsumption && !data.show.spellSlotSelection) ||
-			data.show.resourceConsumption;
+		if (this.activity.activation.type === "legendary" && this._shouldDisplay("consume.action"))
+			context.fields.push({
+				field: new BooleanField({
+					label: game.i18n.format("BF.CONSUMPTION.Type.PromptGeneric", { type: this.activity.activation.label })
+					// TODO: Display legendary action count as hint
+				}),
+				name: "consume.action",
+				value: this.config.consume?.action
+			});
 
-		context.content = await renderTemplate(
-			"systems/black-flag/templates/activity/activity-activation-dialog.hbs",
-			data
-		);
+		if (this._shouldDisplay("consume.resources")) {
+			const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
+			for (const [index, target] of this.activity.consumption.targets.entries()) {
+				const value =
+					(isArray && this.config.consume.resources.includes(index)) ||
+					(!isArray && this.config.consume?.resources !== false && this.config.consume !== false);
+				const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
+				if (notes?.length) context.notes.push(...notes);
+				context.fields.push({
+					field: new BooleanField({ label, hint }),
+					name: `consume.resources.${index}`,
+					value,
+					warn: value ? warn : false
+				});
+			}
+		}
+
+		context.hasConsumption = context.fields.length;
 
 		return context;
 	}
@@ -135,111 +216,227 @@ export default class ActivityActivationDialog extends BlackFlagDialog {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Create possible resources that will be consumed by this item.
-	 * @returns {object}
+	 * Prepare rendering context for the creation section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	_prepareResourceOptions() {
-		const types = {};
-		for (const target of this.activity.consumption.targets) {
-			const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
-			types[target.type] = {
-				label: game.i18n.localize(CONFIG.BlackFlag.consumptionTypes[target.type]?.prompt ?? target.type),
-				selected:
-					(isArray && this.config.consume.resources.includes(target.type)) ||
-					(!isArray && this.config.consume?.resources !== false && this.config.consume !== false)
+	async _prepareCreationContext(context, options) {
+		context.hasCreation = false;
+		if (this.activity.target?.template?.type && this._shouldDisplay("create.measuredTemplate")) {
+			context.hasCreation = true;
+			context.template = {
+				field: new BooleanField({ label: game.i18n.localize("BF.TARGET.Action.PlaceTemplate") }),
+				name: "create.measuredTemplate",
+				value: this.config.create?.measuredTemplate
 			};
 		}
-		return types;
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Create scaling range and value.
-	 * @param {object} context - Context data being prepared.
+	 * Prepare rendering context for the footer.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	_prepareScaling(context) {
-		context.scalingData ??= {};
-		const scale = this.activity.consumption.scale;
-		if (context.scaling !== false && scale.allowed && !this.activity.isSpell) {
-			context.scalingData.max = scale.max
-				? simplifyBonus(scale.max, this.activity.item.getRollData({ deterministic: true }))
-				: Infinity;
-			context.scalingData.value = Math.clamp((context.scaling ?? 0) + 1, 1, context.scalingData.max);
-		}
+	async _prepareFooterContext(context, options) {
+		context.buttons = [
+			{
+				action: "use",
+				cssClass: "heavy-button",
+				icon: this.options.button.icon ?? `fa-solid fa-${this.activity.isSpell ? "magic" : "fist-raised"}`,
+				label: this.options.button.label ?? this.activity.activationLabel,
+				type: "button"
+			}
+		];
+		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Create possible spells slots that can be used to cast a spell.
-	 * @returns {object[]}
+	 * Prepare rendering context for the scaling section.
+	 * @param {ApplicationRenderContext} context - Context being prepared.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 * @protected
 	 */
-	_prepareSpellSlotOptions() {
-		const spellcasting = this.activity.actor.system.spellcasting;
-		if (!spellcasting?.slots) return [];
-		const minimumCircle = this.activity?.item?.system.circle?.base ?? 1;
-		const options = Object.entries(spellcasting.slots).reduce((obj, [key, slot]) => {
-			if (
-				slot.circle < minimumCircle ||
-				(!slot.max && slot.type !== "leveled") ||
-				(slot.type === "leveled" && slot.circle > spellcasting.maxCircle)
-			)
-				return obj;
-			obj[key] = {
-				label: game.i18n.format("BF.Consumption.Type.SpellSlots.Available", {
-					slot: slot.label,
-					available: numberFormat(slot.value)
-				}),
-				level: slot.circle
+	async _prepareScalingContext(context, options) {
+		context.hasScaling = true;
+		context.notes = [];
+		if (!this._shouldDisplay("scaling")) {
+			context.hasScaling = false;
+			return context;
+		}
+
+		if (this.activity.spellSlotScaling && this.config.scaling !== false) {
+			const spellcasting = this.actor.system.spellcasting;
+			const minimumCircle = this.item.system.circle.base ?? 1;
+			const maximumCircle = spellcasting.maxCircle;
+
+			let spellSlotValue = spellcasting.slots[this.config.spell?.slot]?.value ? this.config.spell.slot : null;
+			const consumeSlot = this.config.consume === true || this.config.consume?.spellSlot;
+			if (!consumeSlot) spellSlotValue = this.config.spell?.slot;
+			const spellSlotOptions = Object.entries(spellcasting.slots)
+				.map(([value, slot]) => {
+					if (
+						slot.circle < minimumCircle ||
+						(!slot.max && slot.type !== "leveled") ||
+						(slot.type === "leveled" && slot.circle > maximumCircle)
+					)
+						return null;
+					const label = game.i18n.format("BF.CONSUMPTION.Type.SpellSlots.Available", {
+						slot: slot.label,
+						available: numberFormat(slot.value)
+					});
+					const disabled = slot.value === 0 && consumeSlot;
+					if (!disabled && !spellSlotValue) spellSlotValue = value;
+					return { value, label, disabled, selected: spellSlotValue === value };
+				})
+				.filter(o => o);
+
+			if (spellSlotOptions)
+				context.spellSlots = {
+					field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
+					name: "spell.slot",
+					value: spellSlotValue,
+					options: spellSlotOptions
+				};
+
+			if (!spellSlotOptions.some(o => !o.disabled))
+				context.notes.push({
+					type: "warn",
+					message: game.i18n.format("BF.ACTIVATION.Warning.NoSlotsLeft", {
+						name: this.item.name
+					})
+				});
+		} else if (this.activity.consumption.scale.allowed && this.config.scaling !== false) {
+			const scale = this.activity.consumption.scale;
+			const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
+			context.scaling = {
+				field: new NumberField({ min: 1, max: Math.max(1, max), label: game.i18n.localize("DND5E.ScalingValue") }),
+				name: "scalingValue",
+				// Config stores the scaling increase, but scaling value (increase + 1) is easier to understand in the UI
+				value: Math.clamp((this.config.scaling ?? 0) + 1, 1, max),
+				max,
+				showRange: max <= 20
 			};
-			return obj;
-		}, {});
-		return options;
+		} else {
+			context.hasScaling = false;
+		}
+
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether a particular element should be displayed based on the `display` options.
+	 * @param {string} section - Key path describing the section to be displayed.
+	 * @returns {boolean}
+	 */
+	_shouldDisplay(section) {
+		const display = this.options.display;
+		if (foundry.utils.hasProperty(display, section)) return foundry.utils.getProperty(display, section);
+		const [group] = section.split(".");
+		if (group !== section && group in display) return display[group];
+		return this.options.display.all ?? true;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const [html] = jQuery;
-
-		for (const field of html.querySelectorAll("input, select, textarea, multi-select, multi-checkbox")) {
-			field.addEventListener("change", this._onChangeInput.bind(this));
-		}
+	/**
+	 * Handle form submission.
+	 * @this {ActivityActivationDialog}
+	 * @param {SubmitEvent} event - Triggering submit event.
+	 * @param {HTMLFormElement} form - The form that was submitted.
+	 * @param {FormDataExtended} formData - Data from the submitted form.
+	 */
+	static async #onSubmitForm(event, form, formData) {
+		const submitData = this._prepareSubmitData(event, formData);
+		await this._processSubmitData(event, submitData);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Retrieve the data from the dialog's form, adjusting scaling as necessary.
-	 * @param {HTMLFormElement} form - The dialog's form element.
+	 * Handle clicking the use button.
+	 * @this {ActivityActivationDialog}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static async #onUse(event, target) {
+		const formData = new FormDataExtended(this.element.querySelector("form"));
+		const submitData = this._prepareSubmitData(event, formData);
+		foundry.utils.mergeObject(this.#config, submitData);
+		this.#used = true;
+		this.close();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any pre-processing of the form data to prepare it for updating.
+	 * @param {SubmitEvent} event - Triggering submit event.
+	 * @param {FormDataExtended} formData - Data from the submitted form.
 	 * @returns {object}
 	 */
-	static _getFormData(form) {
-		const formData = new FormDataExtended(form);
-		const data = formData.object;
-		if ("adjustedScaling" in data) {
-			data.scaling = data.adjustedScaling - 1;
-			delete data.adjustedScaling;
+	_prepareSubmitData(event, formData) {
+		const submitData = foundry.utils.expandObject(formData.object);
+		if (foundry.utils.hasProperty(submitData, "spell.slot")) {
+			const circle = this.actor.system.spellcasting?.slots?.[submitData.spell.slot]?.circle ?? 0;
+			submitData.scaling = Math.max(0, circle - this.item.system.circle.base);
+		} else if ("scalingValue" in submitData) {
+			submitData.scaling = submitData.scalingValue - 1;
+			delete submitData.scalingValue;
 		}
-		return data;
+		if (foundry.utils.getType(submitData.consume?.resources) === "Object") {
+			submitData.consume.resources = filteredKeys(submitData.consume.resources).map(i => Number(i));
+		}
+		return submitData;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Handle re-rendering the form when inputs are changed.
-	 * @param {Event} event - The initial change event.
-	 * @protected
+	 * Handle updating the usage configuration based on processed submit data.
+	 * @param {SubmitEvent} event - Triggering submit event.
+	 * @param {object} submitData - Prepared object for updating.
 	 */
-	async _onChangeInput(event) {
-		const formData = this.constructor._getFormData(event.target.form ?? event.target.closest("form"));
-		formData["consume.resources"] ??= false;
-		foundry.utils.mergeObject(this.config, formData);
+	async _processSubmitData(event, submitData) {
+		foundry.utils.mergeObject(this.#config, submitData);
 		this.render();
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Factory Methods           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Display the activity activation dialog.
+	 * @param {Activity} activity - Activity to activate.
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
+	 * @param {object} options - Additional options for the application.
+	 * @returns {Promise<ActivityActivationConfiguration>} - Final configuration object if activated.
+	 * @throws error if activity couldn't be activated.
+	 */
+	static async create(activity, config, options) {
+		if (!activity.item.isOwned) throw new Error("Cannot activate an activity that is not owned.");
+
+		return new Promise((resolve, reject) => {
+			const dialog = new this({ activity, config, ...options });
+			dialog.addEventListener("close", event => {
+				if (dialog.used) resolve(dialog.config);
+				else reject();
+			});
+			dialog.render({ force: true });
+		});
 	}
 }

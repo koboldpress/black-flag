@@ -193,7 +193,7 @@ export default class AttackActivity extends Activity {
 			if (Number.isFinite(threshold)) rollConfig.options.criticalSuccess = threshold;
 			if (targets.length === 1) rollConfig.options.target = targets[0].ac;
 
-			return { rollConfig, rollNotes: this.system.getModifiers?.(modifierData, "note") };
+			return { rollConfig, rollNotes: this.actor?.system.getModifiers?.(modifierData, "note") };
 		};
 
 		const useAmmo = config.ammunition !== false && ammunitionOptions?.length;
@@ -366,7 +366,7 @@ export default class AttackActivity extends Activity {
 			this.system.attack.flat
 				? { toHit: this.system.attack.bonus }
 				: {
-						mod: ability?.mod,
+						mod: ability?.adjustedMod ?? ability?.mod,
 						prof: this.system.attackProficiency?.term,
 						bonus: this.system.attack.bonus,
 						weaponMagic: this.item.system.attackMagicalBonus,

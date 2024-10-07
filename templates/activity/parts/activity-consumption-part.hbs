@@ -1,6 +1,6 @@
 <div class="consumption field-group">
 	<label class="type">
-		<span>{{ localize "BF.Consumption.Type.Label" }}</span>
+		<span>{{ localize "BF.CONSUMPTION.Type.Label" }}</span>
 		<select name="{{ prefix }}type">
 			{{#select consumption.type}}
 				{{#each consumption.validTypes}}
@@ -14,11 +14,11 @@
 			<span>{{ localize "BF.Consumption.Target.Label" }}</span>
 			{{#with consumption.validTargets as |targets|}}
 				<select name="{{ ../prefix }}target">
-					{{ selectOptions targets selected=../consumption.target nameAttr="key" labelAttr="label" }}
+					{{ selectOptions targets selected=../consumption.target }}
 				</select>
 			{{else}}
 				<input type="text" name="{{ prefix }}target" value="{{ consumption.target }}"
-							 placeholder="{{ localize 'BF.Consumption.Type.ItemUses.ThisItem' }}">
+							 placeholder="{{ localize 'BF.CONSUMPTION.Type.ItemUses.ThisItem' }}">
 			{{/with}}
 		</label>
 	{{/if}}

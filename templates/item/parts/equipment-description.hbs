@@ -3,7 +3,7 @@
 		<label class="rarity">
 			<span>{{ localize "BF.Rarity.Label" }}</span>
 			<select class="uninput" name="system.rarity">
-				{{ selectOptions CONFIG.rarities selected=system.rarity blank=(localize "BF.Rarity.Level.Mundane")
+				{{ selectOptions CONFIG.rarities selected=source.rarity blank=(localize "BF.Rarity.Level.Mundane")
 				                 labelAttr="label" localize="true" }}
 			</select>
 		</label>

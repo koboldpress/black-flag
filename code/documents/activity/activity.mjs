@@ -1,7 +1,7 @@
 import ActivityActivationDialog from "../../applications/activity/activity-activation-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
-import ConsumptionError from "../../data/activity/consumption-error.mjs";
+import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { areKeysPressed, buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
@@ -107,23 +107,26 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
+	 * Is scaling possible with this activity?
 	 * @type {boolean}
 	 */
-	get allowDamageScaling() {
-		return this.isSpell || this.consumption.scale.allowed;
+	get canScale() {
+		return (
+			this.consumption.scale.allowed ||
+			(this.isSpell &&
+				this.item.system.circle.base > 0 &&
+				CONFIG.BlackFlag.spellPreparationModes[this.item.getFlag(game.system.id, "relationship.mode")]?.scalable)
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Is scaling possible with this activity?
+	 * Can damage be scaled for this activity? Requires either "Allow Scaling" to be checked or to be on a spell.
 	 * @type {boolean}
 	 */
-	get canScale() {
-		if (!this.consumption.scale.allowed) return false;
-		if (!this.isSpell) return true;
-		return this.requiresSpellSlot;
+	get canScaleDamage() {
+		return this.consumption.scale.allowed || this.isSpell;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -273,9 +276,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * Does activating this activity consume a spell slot?
 	 * @type {boolean}
 	 */
-	get requiresSpellSlot() {
+	get spellSlotConsumption() {
+		return this.spellSlotScaling && this.item.system.requiresSpellSlot && this.activation.primary;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Can a spell slot be selected when activating this activity?
+	 * @type {boolean}
+	 */
+	get spellSlotScaling() {
 		if (!this.isSpell || !this.actor?.system.spellcasting?.slots) return false;
-		return this.item.system.requiresSpellSlot && this.activation.primary;
+		return this.canScale;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -370,9 +383,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {boolean} consume.action - Control whether a part of the action economy is used during activation.
 	 * @property {boolean|BlackFlagItem} consume.ammunition - Control whether ammunition is consumed by a weapon or
 	 *                                                        provide an ammunition item to consume.
-	 * @property {boolean|string[]} consume.resources - Set to `true` or `false` to enable or disable all resource
-	 *                                                  consumption or provide a list of consumption type keys defined
-	 *                                                  in `CONFIG.BlackFlag.consumptionTypes` to only enable those types.
+	 * @property {boolean|number[]} consume.resources - Set to `true` or `false` to enable or disable all resource
+	 *                                                  consumption or provide a list of consumption indexes to only
+	 *                                                  enable those types.
 	 * @property {boolean} consume.spellSlot - Control whether spell consumes a spell slot.
 	 * @property {Event} [event] - Triggering event.
 	 * @property {boolean|number} scaling - Number of steps above baseline to scale this activation, or `false` if scaling
@@ -606,7 +619,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			config.consume ??= {};
 			config.consume.action ??= this.activation.type === "legendary";
 			config.consume.resources ??= this.consumption.targets.length > 0;
-			config.consume.spellSlot ??= this.requiresSpellSlot;
+			config.consume.spellSlot ??= this.spellSlotConsumption;
 		}
 
 		if (this.canScale) config.scaling ??= 0;
@@ -709,21 +722,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		if (config.consume === true || config.consume.resources) {
-			for (const target of this.consumption.targets) {
-				if (
-					foundry.utils.getType(config.consume.resources) === "Array" &&
-					!config.consume.resources.includes(target.type)
-				)
-					continue;
+			const indexes =
+				config.consume === true || config.consume.resources === true
+					? this.consumption.targets.keys()
+					: config.consume.resources;
+			for (const index of indexes) {
+				const target = this.consumption.targets[index];
 				try {
-					await target.prepareConsumptionUpdates(this, config, updates);
+					await target.consume(config, updates);
 				} catch (err) {
-					if (err instanceof ConsumptionError) {
-						errors.push(err);
-						ui.notifications.error(err.message, { console: false });
-					} else {
-						throw err;
-					}
+					if (err instanceof ConsumptionError) errors.push(err);
+					else throw err;
 				}
 			}
 		}
@@ -747,6 +756,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// TODO: Validate concentration
 
+		errors.forEach(err => ui.notifications.error(err.message, { console: false }));
 		return errors.length ? false : updates;
 	}
 

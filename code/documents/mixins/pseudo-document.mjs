@@ -523,7 +523,7 @@ export default Base =>
 					uuid: this.uuid,
 					id: this.id,
 					type: this.documentName,
-					pack: this.pack,
+					pack: this.item.pack,
 					tooltip: documentName
 				},
 				dataset
