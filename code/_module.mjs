@@ -73,6 +73,7 @@ Hooks.once("init", function () {
 });
 
 Hooks.once("setup", function () {
+	// Register Sheets
 	applications.registerSheets(Actor);
 	applications.registerSheets(Item);
 	applications.registerSheets(JournalEntryPage);
@@ -80,6 +81,10 @@ Hooks.once("setup", function () {
 		makeDefault: true,
 		label: "BF.Sheet.Default.Journal"
 	});
+
+	config._configureTrackableAttributes();
+
+	// Handle rich tooltips
 	TooltipConductor.activateListeners();
 	game.blackFlag.tooltipConductor.observe();
 

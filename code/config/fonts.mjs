@@ -1,5 +1,6 @@
 /**
  * Register the system fonts with Foundry.
+ * @internal
  */
 export function _configureFonts() {
 	Object.assign(CONFIG.fontDefinitions, {
