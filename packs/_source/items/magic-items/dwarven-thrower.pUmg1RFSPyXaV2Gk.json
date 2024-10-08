@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Dwarven Thrower",
   "type": "weapon",
-  "img": "icons/weapons/hammers/hammer-war-rounding.webp",
+  "img": "icons/weapons/hammers/hammer-double-sledge-engraved.webp",
   "system": {
     "activities": {
       "KfpxGFDy6XeQnwcz": {
@@ -58,6 +58,188 @@
           "consumeQuantity": false,
           "recovery": []
         }
+      },
+      "I1Fcq7MMZTDxZES2": {
+        "type": "attack",
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ],
+            "critical": {
+              "bonus": ""
+            },
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {
+              "value": "ranged",
+              "classification": ""
+            },
+            "ability": "",
+            "bonus": ""
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "sort": 0,
+        "_id": "I1Fcq7MMZTDxZES2",
+        "name": "Throw",
+        "img": ""
+      },
+      "kW8U5JNme9aN2yeB": {
+        "type": "attack",
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ],
+            "critical": {
+              "bonus": ""
+            },
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {
+              "value": "ranged",
+              "classification": ""
+            },
+            "ability": "",
+            "bonus": ""
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "value": "60",
+          "units": "foot",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "count": "1",
+            "type": "creature",
+            "special": ""
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "sort": 0,
+        "name": "Throw vs. Giant",
+        "img": "",
+        "_id": "kW8U5JNme9aN2yeB"
       }
     },
     "overrides": {
@@ -89,6 +271,7 @@
     ],
     "properties": [
       "magical",
+      "thrown",
       "versatile"
     ],
     "ammunition": {},
@@ -101,8 +284,8 @@
       }
     },
     "range": {
-      "short": null,
-      "long": null,
+      "short": 20,
+      "long": 60,
       "reach": null
     },
     "uses": {
@@ -118,10 +301,10 @@
       "requirement": "by a Dwarf"
     },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 3
   },
   "effects": [],
-  "sort": 600000,
+  "sort": 24900000,
   "ownership": {
     "default": 0
   },
@@ -130,9 +313,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1725589342539,
-    "modifiedTime": 1725904174673,
+    "modifiedTime": 1728426556234,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "pUmg1RFSPyXaV2Gk",

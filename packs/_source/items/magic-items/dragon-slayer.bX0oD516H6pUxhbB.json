@@ -3,7 +3,7 @@
   "name": "Dragon Slayer",
   "system": {
     "description": {
-      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p><p>When you hit a dragon with this weapon, the target takes an extra [[/r 3d6]] damage of the weapon’s type. For the purpose of this weapon, <q>dragon</q> refers to any creature with the Dragon type, including dragon turtles and wyverns.</p><section class=\"secret\" id=\"secret-xlJxed76pEhVOZdg\"><p><strong>Foundry Note</strong></p><p><em>Weapon (Any Sword), Rare, 8,000 gp</em></p><p>Create the final magic item by selection the appropriate mundane item and dragging an enchantment from the <q>Advancement &amp; Effects</q> tab to that item.</p></section>",
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p><p>When you hit a dragon with this weapon, the target takes an extra [[/damage 3d6]] damage of the weapon’s type. For the purpose of this weapon, <q>dragon</q> refers to any creature with the Dragon type, including dragon turtles and wyverns.</p><section class=\"secret\" id=\"secret-xlJxed76pEhVOZdg\"><p><strong>Foundry Note</strong></p><p><em>Weapon (Any Sword), Rare, 8,000 gp</em></p><p>Create the final magic item by selection the appropriate mundane item and dragging an enchantment from the <q>Advancement &amp; Effects</q> tab to that item.</p></section>",
       "source": {
         "fallback": ""
       }
@@ -39,10 +39,90 @@
     }
   },
   "_id": "bX0oD516H6pUxhbB",
-  "img": "systems/black-flag/artwork/types/feature.svg",
-  "effects": [],
+  "img": "icons/weapons/swords/sword-guard-serrated.webp",
+  "effects": [
+    {
+      "type": "enchantment",
+      "name": "Dragon Slayer",
+      "origin": null,
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/weapons/swords/sword-guard-serrated.webp",
+      "_id": "lmVEeMdJGtHgaXpD",
+      "system": {},
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "Dragon Slayer {}",
+          "priority": null
+        },
+        {
+          "key": "system.price.value",
+          "mode": 5,
+          "value": "8000",
+          "priority": null
+        },
+        {
+          "key": "system.price.denomination",
+          "mode": 5,
+          "value": "gp",
+          "priority": null
+        },
+        {
+          "key": "system.rarity",
+          "mode": 5,
+          "value": "rare",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "magical",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 2,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.description.value",
+          "mode": 2,
+          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p> <p>When you hit a dragon with this weapon, the target takes an extra [[/damage 3d6]] damage of the weapon’s type. For the purpose of this weapon, <q>dragon</q> refers to any creature with the Dragon type, including dragon turtles and wyverns.</p>",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.048",
+        "createdTime": 1728425293646,
+        "modifiedTime": 1728425462855,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!bX0oD516H6pUxhbB.lmVEeMdJGtHgaXpD"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 0,
+  "sort": 13300000,
   "ownership": {
     "default": 0
   },
@@ -51,9 +131,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.048",
     "createdTime": 1726788113707,
-    "modifiedTime": 1726788241592,
+    "modifiedTime": 1728426556234,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!bX0oD516H6pUxhbB"

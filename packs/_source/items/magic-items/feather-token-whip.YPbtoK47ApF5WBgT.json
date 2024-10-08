@@ -11,18 +11,178 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This Tiny object looks like a feather. You can use an action to throw this token to a point within 10 feet of you. The token disappears, and a floating whip takes its place. You can then use a bonus action to make a melee spell attack against a creature within 10 feet of the whip, with an attack bonus of +9. On a hit, the target takes [[/damage 1d6 + 5 force]].</p>\n\t\t\t\t\t\t\t\t<p>As a bonus action on your turn, you can direct the whip to fly up to 20 feet and repeat the attack against a creature within 10 feet of it. The whip disappears after 1 hour, when you use an action to dismiss it, or when you are incapacitated or die.</p>",
+      "value": "<p>This Tiny object looks like a feather. You can use an action to throw this token to a point within 10 feet of you. The token disappears, and a floating whip takes its place. You can then use a bonus action to make a melee spell attack against a creature within 10 feet of the whip, with an attack bonus of +9. On a hit, the target takes [[/damage 1d6 + 5 force]].</p><p>As a bonus action on your turn, you can direct the whip to fly up to 20 feet and repeat the attack against a creature within 10 feet of it. The whip disappears after 1 hour, when you use an action to dismiss it, or when you are incapacitated or die.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "QzAyVbsjFxMIISbP": {
+        "type": "utility",
+        "_id": "QzAyVbsjFxMIISbP",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "10",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Throw Token",
+        "img": ""
+      },
+      "ARMdzR0h6KngDXAf": {
+        "type": "attack",
+        "_id": "ARMdzR0h6KngDXAf",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": true,
+            "type": {
+              "value": "melee",
+              "classification": "spell"
+            },
+            "ability": "none",
+            "bonus": "9"
+          },
+          "damage": {
+            "critical": {
+              "bonus": ""
+            },
+            "includeBase": true,
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 6,
+                "bonus": "5",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "force",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "10",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Move & Attack",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -38,10 +198,10 @@
     ]
   },
   "_id": "YPbtoK47ApF5WBgT",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/materials/feather-colored-blue.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 0,
+  "sort": 11600000,
   "ownership": {
     "default": 0
   },
@@ -50,9 +210,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724984354404,
-    "modifiedTime": 1725904344806,
+    "modifiedTime": 1728427406820,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!YPbtoK47ApF5WBgT"

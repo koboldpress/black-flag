@@ -11,18 +11,91 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>A figurine of wondrous power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the figurine doesn’t become a creature.</p>\n\t\t\t\t\t\t\t\t<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n\t\t\t\t\t\t\t\t<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 HP or if you use an action to speak the command word again while touching it. When the creature reverts to a figurine, its property can’t be used again until a certain amount of time has passed, as specified in the figurine’s description.</p>\n\t\t\t\t\t\t\t\t<p>These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a lion for up to 1 hour. Once a lion has been used, it can’t be used again until 7 days have passed.</p>",
+      "value": "<p>A figurine of wondrous power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the figurine doesn’t become a creature.</p><p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p><p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 HP or if you use an action to speak the command word again while touching it. When the creature reverts to a figurine, its property can’t be used again until a certain amount of time has passed, as specified in the figurine’s description.</p><hr /><p>These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a <strong>lion</strong> for up to 1 hour. Once a lion has been used, it can’t be used again until 7 days have passed.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "gacMxXydjZXqi9SE": {
+        "type": "utility",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount"
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "2"
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "value": "60",
+          "units": "foot",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Summon Creature",
+        "img": "",
+        "_id": "gacMxXydjZXqi9SE"
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "2"
     },
     "attunement": {
       "value": ""
@@ -38,10 +111,10 @@
     ]
   },
   "_id": "yYBw3tCjUj8dJwUH",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 0,
+  "sort": 21600000,
   "ownership": {
     "default": 0
   },
@@ -50,9 +123,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724984648742,
-    "modifiedTime": 1725904334684,
+    "modifiedTime": 1728427889843,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!yYBw3tCjUj8dJwUH"

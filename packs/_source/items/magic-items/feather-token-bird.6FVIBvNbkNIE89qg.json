@@ -11,12 +11,72 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This Tiny object looks like a feather. You can use an action to toss the token 5 feet into the air. The token disappears and an enormous, multicolored bird takes its place. The bird has the statistics of a roc, but it obeys your simple commands and can’t attack. It can carry up to 500 pounds while flying at a speed of 16 miles an hour or 1,000 pounds at half that speed (to a maximum of 144 miles per day, with a one-hour rest for every 3 hours of flying). The bird doesn't need to check for exhaustion, but it disappears after flying its maximum distance for a day or if it drops to 0 HP. You can dismiss the bird as an action.</p>",
+      "value": "<p>This Tiny object looks like a feather. You can use an action to toss the token 5 feet into the air. The token disappears and an enormous, multicolored bird takes its place. The bird has the statistics of a <strong>roc</strong>, but it obeys your simple commands and can’t attack. It can carry up to 500 pounds while flying at a speed of 16 miles an hour or 1,000 pounds at half that speed (to a maximum of 144 miles per day, with a one-hour rest for every 3 hours of flying). The bird doesn't need to check for exhaustion, but it disappears after flying its maximum distance for a day or if it drops to 0 HP. You can dismiss the bird as an action.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "WWPtNLiodWegv96Q": {
+        "type": "utility",
+        "_id": "WWPtNLiodWegv96Q",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Toss Token",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -38,10 +98,10 @@
     ]
   },
   "_id": "6FVIBvNbkNIE89qg",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/materials/feather-yellow.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 0,
+  "sort": 2300000,
   "ownership": {
     "default": 0
   },
@@ -50,9 +110,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724984225944,
-    "modifiedTime": 1725904351909,
+    "modifiedTime": 1728427134793,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6FVIBvNbkNIE89qg"

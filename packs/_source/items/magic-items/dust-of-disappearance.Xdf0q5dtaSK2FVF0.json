@@ -11,18 +11,90 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>Found in a small packet, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for 2d4 minutes. The duration is the same for all subjects, and the dust is consumed when its magic takes effect. If a creature affected by the dust attacks or casts a spell, the invisibility ends for that creature.</p>",
+      "value": "<p>Found in a small packet, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for [[/r 2d4]] minutes. The duration is the same for all subjects, and the dust is consumed when its magic takes effect. If a creature affected by the dust attacks or casts a spell, the invisibility ends for that creature.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "Pl9RIeOjm7Vqr1mP": {
+        "type": "utility",
+        "_id": "Pl9RIeOjm7Vqr1mP",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "special",
+          "concentration": false,
+          "override": false,
+          "value": "",
+          "special": "2d4 minutes"
+        },
+        "range": {
+          "override": false,
+          "units": "self"
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "radius",
+            "size": "10"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creatureObject",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Throw Dust",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -38,10 +110,10 @@
     ]
   },
   "_id": "Xdf0q5dtaSK2FVF0",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/magic/water/bubbles-air-water-light.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 0,
+  "sort": 11100000,
   "ownership": {
     "default": 0
   },
@@ -50,9 +122,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724983922732,
-    "modifiedTime": 1725904184079,
+    "modifiedTime": 1728426556234,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Xdf0q5dtaSK2FVF0"
