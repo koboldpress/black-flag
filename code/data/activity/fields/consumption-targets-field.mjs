@@ -1,4 +1,10 @@
-import { getPluralRules, numberFormat, simplifyBonus, simplifyFormula } from "../../../utils/_module.mjs";
+import {
+	getAttributeOption,
+	getPluralRules,
+	numberFormat,
+	simplifyBonus,
+	simplifyFormula
+} from "../../../utils/_module.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
@@ -74,7 +80,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 	/**
 	 * Method of scaling this consumption.
-	 * @type {FormOption[]|null}
+	 * @type {FormSelectOption[]|null}
 	 */
 	get scalingModes() {
 		if (CONFIG.BlackFlag.consumptionTypes[this.type]?.scalingModes === false) return null;
@@ -184,12 +190,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	static async consumeAttribute(config, updates) {
 		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
 		const keyPath = `system.${this.target}`;
+		const attribute = getAttributeOption(this.target)?.label ?? this.target;
 
 		if (!foundry.utils.hasProperty(this.actor, keyPath))
 			throw new ConsumptionError(
 				game.i18n.format("BF.CONSUMPTION.Warning.MissingAttribute", {
 					activity: this.activity.name,
-					attribute: this.target,
+					attribute,
 					item: this.item.name
 				})
 			);
@@ -203,7 +210,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 				game.i18n.format(warningMessage, {
 					available: numberFormat(current),
 					cost: numberFormat(cost),
-					type: game.i18n.format("BF.CONSUMPTION.Type.Attribute.Warning", { attribute: this.target })
+					type: game.i18n.format("BF.CONSUMPTION.Type.Attribute.Warning", { attribute })
 				})
 			);
 
@@ -450,7 +457,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			label: game.i18n.localize(`BF.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
 			hint: game.i18n.format(`BF.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`, {
 				cost,
-				attribute: this.target, // TODO: Replace with human readable label
+				attribute: getAttributeOption(this.target)?.label ?? this.target,
 				current: numberFormat(current)
 			}),
 			warn: simplifiedCost > current
@@ -579,11 +586,14 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static validAttributeTargets() {
 		if (!this.actor) return [];
-		return (CONFIG.BlackFlag.consumableResources[this.actor.type] ?? []).map(attr => {
-			// TODO: Group into logical sections
-			// TODO: Create human readable label
-			return { value: attr, label: attr };
-		});
+		return (CONFIG.BlackFlag.consumableResources[this.actor.type] ?? [])
+			.map(a => getAttributeOption(a))
+			.sort((lhs, rhs) => {
+				if (lhs.group === rhs.group) return lhs.label.localeCompare(rhs.label, game.i18n.lang);
+				const lhsKey = lhs.group || lhs.label;
+				const rhsKey = rhs.group || rhs.label;
+				return lhsKey.localeCompare(rhsKey, game.i18n.lang);
+			});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
