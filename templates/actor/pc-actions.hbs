@@ -11,10 +11,12 @@
 					</th>
 				</tr>
 				{{#each activities}}
-					<tr data-activity="{{ activity.uuid }}" data-activity-id="{{ activity.id }}" data-item-id="{{ item.id }}"
-					    {{~#if dataset}} {{ blackFlag-dataset dataset }}{{/if}}>
+					<tr {{~#if activity}} data-activity="{{ activity.uuid }}" data-activity-id="{{ activity.id }}"{{/if}}
+					    {{~#if item }} data-item-id="{{ item.id }}"{{/if}}>
 						<td class="control">
-							<button type="button" class="heavy-button" data-action="activate"
+							<button type="button" class="heavy-button"
+							        {{~#if dataset}} {{ blackFlag-dataset dataset }}{{/if}}
+											{{~#unless dataset.action}} data-action="activate"{{/unless}}
 							        {{~#if activationTooltip}} data-tooltip="{{ activationTooltip }}"{{/if}}>
 								{{ localize label }}
 							</button>

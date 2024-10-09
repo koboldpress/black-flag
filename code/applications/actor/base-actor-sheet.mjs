@@ -3,7 +3,6 @@ import { numberFormat } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
-import IdentityConfig from "../identity-config.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
