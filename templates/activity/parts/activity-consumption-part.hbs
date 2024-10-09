@@ -2,11 +2,7 @@
 	<label class="type">
 		<span>{{ localize "BF.CONSUMPTION.Type.Label" }}</span>
 		<select name="{{ prefix }}type">
-			{{#select consumption.type}}
-				{{#each consumption.validTypes}}
-					<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
-				{{/each}}
-			{{/select}}
+			{{ selectOptions @root.consumptionTypeOptions selected=consumption.type}}
 		</select>
 	</label>
 	{{#if consumption.showTargets}}

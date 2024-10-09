@@ -315,6 +315,18 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Consumption targets that can be use for this activity.
+	 * @type {Set<string>}
+	 */
+	get validConsumptionTypes() {
+		const types = new Set(Object.keys(CONFIG.BlackFlag.consumptionTypes));
+		if (this.isSpell) types.delete("spellSlots");
+		return types;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

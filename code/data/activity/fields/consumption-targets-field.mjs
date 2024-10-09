@@ -108,7 +108,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 	/**
 	 * List of valid targets within the current context.
-	 * @type {{key: string, label: string}[]|null}
+	 * @type {FormSelectOption[]|null}
 	 */
 	get validTargets() {
 		return this.constructor.getValidTargets(this.type, this.parent);
@@ -118,29 +118,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * List of valid targets for a specific type.
 	 * @param {string} type - Consumption type.
 	 * @param {Activity} activity - Activity that contains the target.
-	 * @returns {{key: string, label: string}[]|null}
+	 * @returns {FormSelectOption[]|null}
 	 */
 	static getValidTargets(type, activity) {
 		const config = CONFIG.BlackFlag.consumptionTypes[type];
 		if (!config?.validTargets || (!activity.item?.isEmbedded && config.targetRequiresEmbedded === true)) return null;
 		return config.validTargets.call(activity);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Determine which consumption types can be selected.
-	 * @type {{key: string, label: string, disabled: boolean}[]}
-	 */
-	get validTypes() {
-		const existingTypes = new Set(this.parent.consumption.targets.map(t => t.type));
-		return this.parent.item.system._validConsumptionTypes(
-			Object.entries(CONFIG.BlackFlag.consumptionTypes).map(([key, config]) => ({
-				key,
-				label: config.label,
-				disabled: existingTypes.has(key) && this.type !== key
-			}))
-		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -629,7 +612,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 				uses.recovery[0].period !== "recharge"
 			) {
 				const period = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[uses.recovery[0].period];
-				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { max: numberFormat(uses.max), period });
+				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { value: numberFormat(uses.max), period });
 			} else {
 				const type = game.i18n.localize(
 					`BF.CONSUMPTION.Uses.Available.Charges[${getPluralRules().select(uses.value)}]`
