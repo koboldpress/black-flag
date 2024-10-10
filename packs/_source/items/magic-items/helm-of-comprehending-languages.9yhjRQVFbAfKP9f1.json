@@ -11,12 +11,72 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>While wearing this helm, you can use an action to cast the comprehend languages spell from it.</p>",
+      "value": "<p>While wearing this helm, you can use an action to cast the <em>comprehend languages</em> spell from it.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "gg7JcvGSZKIqpo1p": {
+        "type": "utility",
+        "_id": "gg7JcvGSZKIqpo1p",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Comprehend Languages",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -38,7 +98,7 @@
     ]
   },
   "_id": "9yhjRQVFbAfKP9f1",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/head/helm-spangen-ridged.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 4100000,
@@ -50,9 +110,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724985773144,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728595024231,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!9yhjRQVFbAfKP9f1"

@@ -3,12 +3,148 @@
   "name": "Luck Blade",
   "system": {
     "description": {
-      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While carried, you also gain a +1 bonus to saves.</p><p><em><strong>Luck.</strong></em> While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p><p><em><strong>Wish.</strong></em> The sword has [[/r 1d4 - 1]] charges. While holding it, you can use an action to expend 1 charge and cast the wish spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p><section class=\"secret\" id=\"secret-oh6BKZdtDUYJPPrd\"><p><strong>Foundry Note</strong></p><p><em>Weapon (Any Sword), Legendary, Priceless (Requires Attunement)</em></p><p>Create the final magic item by selection the appropriate mundane item and dragging an enchantment from the <q>Advancement &amp; Effects</q> tab to that item.</p></section>",
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While carried, you also gain a +1 bonus to saves.</p><p><em><strong>Luck.</strong></em> While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p><p><em><strong>Wish.</strong></em> The sword has [[/r 1d4 - 1]] charges. While holding it, you can use an action to expend 1 charge and cast the <em>wish</em> spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p><section class=\"secret\" id=\"secret-oh6BKZdtDUYJPPrd\"><p><strong>Foundry Note</strong></p><p><em>Weapon (Any Sword), Legendary, Priceless (Requires Attunement)</em></p><p>Create the final magic item by selection the appropriate mundane item and dragging an enchantment from the <q>Advancement &amp; Effects</q> tab to that item.</p></section>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "v8xdaIDtVG8krQyj": {
+        "type": "utility",
+        "_id": "v8xdaIDtVG8krQyj",
+        "description": "<p>While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p>",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self"
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Luck",
+        "img": ""
+      },
+      "FPxI0isW4tIFxXwa": {
+        "type": "utility",
+        "_id": "FPxI0isW4tIFxXwa",
+        "description": "<p>The sword has [[/r 1d4 − 1]] charges. While holding it, you can use an action to expend 1 charge and cast the <em>wish</em> spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p>",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": "3"
+        },
+        "name": "Wish",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -39,8 +175,125 @@
     }
   },
   "_id": "ZY4Xw2hZD4dN8uHQ",
-  "img": "systems/black-flag/artwork/types/feature.svg",
-  "effects": [],
+  "img": "icons/weapons/swords/greatsword-flamberge.webp",
+  "effects": [
+    {
+      "type": "enchantment",
+      "name": "Luck Blade",
+      "origin": null,
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/weapons/swords/greatsword-flamberge.webp",
+      "_id": "QCOgBxM1vZ5Af4sU",
+      "system": {},
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "Luck Blade {}",
+          "priority": null
+        },
+        {
+          "key": "system.attunement.value",
+          "mode": 5,
+          "value": "required",
+          "priority": null
+        },
+        {
+          "key": "system.rarity",
+          "mode": 5,
+          "value": "legendary",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "magical",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.description.value",
+          "mode": 2,
+          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. While carried, you also gain a +1 bonus to saves.</p> <p><em><strong>Luck.</strong></em> While you carry this sword, you can call on its luck (no action required) to reroll one attack roll, ability check, or save you dislike. You must use the second roll. This property can’t be used again until the next dawn.</p> <p><em><strong>Wish.</strong></em> The sword has [[/r 1d4 - 1]] charges. While holding it, you can use an action to expend 1 charge and cast the wish spell from it. This property can’t be used again until the next dawn and never recharges. The sword loses this property if it has no charges.</p>",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.048",
+        "createdTime": 1728592967479,
+        "modifiedTime": 1728593035316,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ZY4Xw2hZD4dN8uHQ.QCOgBxM1vZ5Af4sU"
+    },
+    {
+      "type": "base",
+      "name": "Luck Blade",
+      "origin": "Compendium.black-flag.items.Item.ZY4Xw2hZD4dN8uHQ",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/weapons/swords/greatsword-flamberge.webp",
+      "_id": "FFW4oWL8fWaCKwPf",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"formula\": \"1\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.048",
+        "createdTime": 1728593037230,
+        "modifiedTime": 1728593093806,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ZY4Xw2hZD4dN8uHQ.FFW4oWL8fWaCKwPf"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 12200000,
   "ownership": {
@@ -51,9 +304,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.048",
     "createdTime": 1726788463904,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728593241606,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ZY4Xw2hZD4dN8uHQ"

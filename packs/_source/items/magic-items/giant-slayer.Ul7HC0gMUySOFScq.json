@@ -8,7 +8,86 @@
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "mPAasKgz1LMeT90k": {
+        "type": "save",
+        "_id": "mPAasKgz1LMeT90k",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": "strength",
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "When you hit a creature with the Giant type"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Giant Save",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -39,8 +118,88 @@
     }
   },
   "_id": "Ul7HC0gMUySOFScq",
-  "img": "systems/black-flag/artwork/types/feature.svg",
-  "effects": [],
+  "img": "icons/weapons/swords/sword-ringed-engraved.webp",
+  "effects": [
+    {
+      "type": "enchantment",
+      "name": "Giant Slayer",
+      "origin": null,
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/weapons/swords/sword-ringed-engraved.webp",
+      "_id": "bY3MXWiuucLdmCmd",
+      "system": {},
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "Giant Slayer {}",
+          "priority": null
+        },
+        {
+          "key": "system.price.value",
+          "mode": 2,
+          "value": "1500",
+          "priority": null
+        },
+        {
+          "key": "system.price.denomination",
+          "mode": 5,
+          "value": "gp",
+          "priority": null
+        },
+        {
+          "key": "system.rarity",
+          "mode": 5,
+          "value": "rare",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "magical",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "1",
+          "priority": null
+        },
+        {
+          "key": "system.description.value",
+          "mode": 2,
+          "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon.</p> <p>When you use it to hit a creature with the Giant type, the creature takes an extra [[/r 2d6]] damage of the weapon’s type and must succeed on a [[/save 15 STR]] or fall prone.</p>",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.048",
+        "createdTime": 1728592490990,
+        "modifiedTime": 1728592557216,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Ul7HC0gMUySOFScq.bY3MXWiuucLdmCmd"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 10700000,
   "ownership": {
@@ -51,9 +210,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.048",
     "createdTime": 1726788319699,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728592639078,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Ul7HC0gMUySOFScq"

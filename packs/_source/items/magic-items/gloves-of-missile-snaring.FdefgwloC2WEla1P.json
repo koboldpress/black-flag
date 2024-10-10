@@ -20,7 +20,67 @@
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "2HHTU2MqSqxDSk6G": {
+        "type": "utility",
+        "_id": "2HHTU2MqSqxDSk6G",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "Reduce Damage",
+            "formula": "1d10 + @abilities.dexterity.mod"
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": "When a ranged weapon attack hits you"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Catch Missile",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -39,7 +99,7 @@
     ]
   },
   "_id": "FdefgwloC2WEla1P",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/hand/glove-tooled-leather-blue.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 5700000,
@@ -51,9 +111,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724985187360,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728594362396,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!FdefgwloC2WEla1P"

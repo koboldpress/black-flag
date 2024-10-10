@@ -15,18 +15,90 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the teleport spell from it. The helm regains [[/r 1d3]] expended charges daily at dawn.</p>",
+      "value": "<p>This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the <em>teleport</em> spell from it. The helm regains [[/r 1d3]] expended charges daily at dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "7gqPGbZ1I45I8aea": {
+        "type": "utility",
+        "_id": "7gqPGbZ1I45I8aea",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Teleport",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "3"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +111,7 @@
     ]
   },
   "_id": "yzmREEKVprIF8Y5a",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/head/helm-norman-horned-gold.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 21900000,
@@ -51,9 +123,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724985796974,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728595192303,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!yzmREEKVprIF8Y5a"

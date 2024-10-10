@@ -11,18 +11,90 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This scaly, clawed flute has a musky smell, and it releases a predatory, screeching roar with reptilian overtones when blown. You must have proficiency with instruments (woodwinds) to use this flute. You can use an action to play the flute and conjure dinosaurs. This works like the conjure animals spell, except the animals you conjure must be dinosaurs or Medium or larger lizards. The dinosaurs remain for 1 hour, until they die, or until you dismiss them as a bonus action. The flute can’t be used to conjure dinosaurs again until the next dawn.</p>",
+      "value": "<p>This scaly, clawed flute has a musky smell, and it releases a predatory, screeching roar with reptilian overtones when blown. You must have proficiency with instruments (woodwinds) to use this flute. You can use an action to play the flute and conjure dinosaurs. This works like the <em>conjure animals</em> spell, except the animals you conjure must be <strong>dinosaurs</strong> or Medium or larger lizards. The dinosaurs remain for 1 hour, until they die, or until you dismiss them as a bonus action. The flute can’t be used to conjure dinosaurs again until the next dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "XcWv9GlJNPQJ7NP8": {
+        "type": "utility",
+        "_id": "XcWv9GlJNPQJ7NP8",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Play Flute",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -38,7 +110,7 @@
     ]
   },
   "_id": "SklVBUNVWzDTvhFX",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/tools/instruments/flute-simple-wood.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 9700000,
@@ -50,9 +122,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724984834160,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728593815828,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!SklVBUNVWzDTvhFX"

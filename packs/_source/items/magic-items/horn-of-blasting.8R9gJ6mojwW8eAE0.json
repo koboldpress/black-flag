@@ -11,12 +11,94 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>You can use an action to speak the horn’s command word and then blow the horn, which emits a thunderous blast in a 30-foot cone that is audible to 600 feet. Each creature in the cone must make a [[/save 15 CON]]. On a failed save, a creature takes [[/damage 5d6 thunder]] and is deafened for 1 minute. On a successful save, a creature takes half as much damage and isn’t deafened. Creatures and objects made of glass or crystal have disadvantage on the saves and take [[/damage 10d6 thunder]] instead of [[/r 5d6]].</p>\n\t\t\t\t\t\t\t\t<p>Each use of the horn’s magic has a 20 percent chance of causing the horn to explode. The explosion deals [[/damage 10d6 fire]] to the blower and destroys the horn.</p>",
+      "value": "<p>You can use an action to speak the horn’s command word and then blow the horn, which emits a thunderous blast in a 30-foot cone that is audible to 600 feet. Each creature in the cone must make a [[/save 15 CON]]. On a failed save, a creature takes [[/damage 5d6 thunder]] and is &amp;Reference[deafened] for 1 minute. On a successful save, a creature takes half as much damage and isn’t deafened. Creatures and objects made of glass or crystal have disadvantage on the saves and take [[/damage 10d6 thunder]] instead of [[/r 5d6]].</p><p>Each use of the horn’s magic has a 20 percent chance of causing the horn to explode. The explosion deals [[/damage 10d6 fire]] to the blower and destroys the horn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "kZw0Uoi8V1d2IlxW": {
+        "type": "save",
+        "_id": "kZw0Uoi8V1d2IlxW",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "thunder",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": "constitution",
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "cone",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Blow the Horn",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -38,7 +120,7 @@
     ]
   },
   "_id": "8R9gJ6mojwW8eAE0",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/tools/instruments/flute-simple-wood.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 3300000,
@@ -50,9 +132,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.048",
     "createdTime": 1724985821800,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1728595332515,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!8R9gJ6mojwW8eAE0"
