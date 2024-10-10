@@ -70,7 +70,7 @@ export class DamageData extends ActivityDataModel {
 	 * Add shims for removed properties.
 	 */
 	applyShims() {
-		Object.defineProperty(this, "ability", {
+		Object.defineProperty(this.damage, "allowCritical", {
 			get() {
 				foundry.utils.logCompatibilityWarning(
 					"The `damage.allowCritical` property on `DamageData` has been moved to `damage.critical.allow`",

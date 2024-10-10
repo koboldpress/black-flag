@@ -357,6 +357,7 @@ export default class PCData extends ActorDataModel.mixin(
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		this.prepareConditions();
+		this.prepareDerivedArmorFormulas();
 		this.prepareDerivedEncumbrance(rollData);
 		this.prepareLanguages();
 		this.prepareDerivedModifiers();

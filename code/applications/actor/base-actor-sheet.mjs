@@ -335,7 +335,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "ability":
 						return new AbilityConfig(properties.key, this.actor).render(true);
 					case "armor-class":
-						return new ArmorClassConfig(this.actor).render(true);
+						return new ArmorClassConfig({ document: this.actor }).render({ force: true });
 					case "initiative":
 						return new InitiativeConfig(this.actor).render(true);
 					case "language":

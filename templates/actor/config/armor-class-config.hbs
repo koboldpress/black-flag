@@ -1,39 +1,68 @@
-<form autocomplete="off">
+<section class="flexcol">
 	<fieldset>
 		<legend>{{ localize "BF.ArmorClass.Label" }}</legend>
 		<label>
 			<span class="hinted-label" data-tooltip="BF.ArmorClass.Flat.Hint">
 				{{ localize "BF.ArmorClass.Flat.Label" }}
 			</span>
-			<input type="number" name="system.attributes.ac.flat" value="{{ source.attributes.ac.flat }}">
+			<input type="number" name="system.attributes.ac.flat" value="{{ system.source.attributes.ac.flat }}">
 		</label>
 		<label>
 			<span class="hinted-label" data-tooltip="BF.ArmorClass.Override.Hint">
 				{{ localize "BF.ArmorClass.Override.Label" }}
 			</span>
-			<input type="number" name="system.attributes.ac.override" value="{{ source.attributes.ac.override }}">
+			<input type="number" name="system.attributes.ac.override" value="{{ system.source.attributes.ac.override }}">
 		</label>
 		<label>
 			<span>{{ localize "BF.ArmorClass.CustomLabel" }}</span>
-			<input type="text" name="system.attributes.ac.customLabel" value="{{ source.attributes.ac.customLabel }}"
-			       placeholder="{{ system.attributes.ac.defaultLabel }}">
+			<input type="text" name="system.attributes.ac.customLabel" value="{{ system.source.attributes.ac.customLabel }}"
+			       placeholder="{{ system.data.attributes.ac.defaultLabel }}">
 		</label>
 	</fieldset>
-	
+
 	<fieldset class="modifier-list">
-		<legend>{{ localize "BF.ArmorClass.Formula.DefaultLabel[other]" }}</legend>
+		<legend>{{ localize "BF.ArmorClass.Formula.Label[other]" }}</legend>
 		<ul class="modifiers">
 			{{#each armorFormulas}}
 				<li class="modifier">
-					<input type="checkbox" name="formulas.{{ id }}" {{ checked checked }}>
-					<input type="text" value="{{ localize label }}" disabled>
-					<input type="text" value="{{ formula }}" disabled>
+					<input type="checkbox" name="{{ keyPath }}.{{ id }}" {{ checked checked }} {{ disabled disabled.checkbox }}>
+					<input type="text" value="{{ localize label }}" {{ disabled disabled.input }}>
+					<input type="text" value="{{ formula }}" {{ disabled disabled.input }}>
 				</li>
 			{{/each}}
 		</ul>
 	</fieldset>
 
 	{{#each modifierSections}}
-		{{> "blackFlag.modifier-list" section=this }}
+		{{> "blackFlag.modifier-list-v2" section=this }}
 	{{/each}}
-</form>
+
+	{{#if equipped}}
+		<fieldset class="equipped">
+			<legend>{{ localize "BF.Armor.Equipped" }}</legend>
+			<div class="header">
+				<div class="armorValue">
+					<i class="fa-solid fa-shield" data-tooltip="BF.Armor.Value.Label"
+					   aria-label="{{ localize 'BF.Armor.Value.Label' }}"></i>
+				</div>
+				<div class="magicalBonus">
+					<i class="fa-solid fa-wand-sparkles" data-tooltip="BF.Armor.MagicalBonus.Label"
+					   aria-label="{{ localize 'BF.Armor.MagicalBonus.Label' }}"></i>
+				</div>
+			</div>
+			{{#if equipped.armor}}{{> ".equipped" equipped.armor }}{{/if}}
+			{{#if equipped.shield}}{{> ".equipped" equipped.shield }}{{/if}}
+		</fieldset>
+	{{/if}}
+</section>
+
+{{#*inline ".equipped"}}
+<div class="form-group">
+	<div class="name">
+		<img src="{{ img }}" class="icon" alt="{{ name }}">
+		{{{ anchor }}}
+	</div>
+	<span class="armorValue">{{ value }}</span>
+	<span class="magicalBonus">{{ magicalBonus }}</span>
+</div>
+{{/inline}}
