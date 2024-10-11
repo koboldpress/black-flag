@@ -55,6 +55,8 @@
 			{{{ description }}}
 		{{/each}}
 
+		{{{ enriched.conclusion }}}
+
 		{{#if (or enriched.subclassSection subclasses)}}
 			<h{{ title.level1 }}>{{ localize "BF.JournalPage.Class.Subclass.Header" class=linked.name }}</h{{ title.level1 }}>
 			{{{ enriched.subclassSection }}}

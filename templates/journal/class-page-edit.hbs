@@ -30,6 +30,15 @@
 			</button>
 		</label>
 		<label>
+			<span class="hinted-label" data-tooltip="BF.JournalPage.Class.Conclusion.Hint">
+				{{ localize "BF.JournalPage.Class.Conclusion.Label" }}
+			</span>
+			<button type="button" class="heavy-button" data-action="launch-text-editor"
+							data-target="system.description.conclusion">
+				<i class="fa-solid fa-edit" inert></i> {{ localize "BF.JournalPage.Edit" }}
+			</button>
+		</label>
+		<label>
 			<span>{{ localize "BF.JournalPage.Class.HeadingLevel.Label" }}</span>
 			<select name="system.headingLevel">
 				{{ selectOptions internalHeadingLevels selected=system.headingLevel

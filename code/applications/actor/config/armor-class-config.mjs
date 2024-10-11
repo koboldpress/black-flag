@@ -1,6 +1,9 @@
 import { filteredKeys, numberFormat } from "../../../utils/_module.mjs";
 import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
+/**
+ * Configuration application for AC formulas, bonuses, and other values.
+ */
 export default class ArmorClassConfig extends BaseConfigSheet {
 	/** @override */
 	static DEFAULT_OPTIONS = {
