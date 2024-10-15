@@ -63,13 +63,13 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		const reasons = [];
 		if (!this.parent) return reasons;
 		if (this.parent.getFlag(game.system.id, "relationship.enabled") === false) {
-			reasons.push("BF.Effect.SuppressionReason.Disabled");
+			reasons.push("BF.EFFECT.SuppressionReason.Disabled");
 		}
 		if (this.parent.system.equippable && !this.parent.system.equipped) {
-			reasons.push("BF.Effect.SuppressionReason.NotEquipped");
+			reasons.push("BF.EFFECT.SuppressionReason.NotEquipped");
 		}
 		if (this.parent.system.attunement?.value === "required" && !this.parent.system.attuned) {
-			reasons.push("BF.Effect.SuppressionReason.NotAttuned");
+			reasons.push("BF.EFFECT.SuppressionReason.NotAttuned");
 		}
 		return reasons;
 	}

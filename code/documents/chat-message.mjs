@@ -9,7 +9,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 	 * Item types representing chat trays that can open and close.
 	 * @type {string[]}
 	 */
-	static TRAY_TYPES = ["blackFlag-attackResult", "blackFlag-damageApplication"];
+	static TRAY_TYPES = ["blackFlag-attackResult", "blackFlag-damageApplication", "blackFlag-effectApplication"];
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
@@ -78,6 +78,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 			await this._renderAttackUI(html);
 			await this._renderDamageUI(html);
 		}
+		this._renderEffectUI(html);
 		this._collapseTrays(html);
 
 		return jQuery;
@@ -244,6 +245,25 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		}
 		if (hasMultiplication) data.constant = null;
 		return data;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Add the effect application UI to a message.
+	 * @param {HTMLElement} html - Chat message HTML.
+	 */
+	_renderEffectUI(html) {
+		if (this.getFlag(game.system.id, "messageType") !== "activation") return;
+		const item = this.getAssociatedItem();
+		const effects = this.getFlag(game.system.id, "activation.effects")
+			?.map(id => item?.effects.get(id))
+			.filter(e => e && game.user.isGM); // TODO: Allow effects tray to be visible to players
+		if (!effects.length) return;
+
+		const effectApplication = document.createElement("blackFlag-effectApplication");
+		effectApplication.effects = effects;
+		html.querySelector(".message-content").appendChild(effectApplication);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

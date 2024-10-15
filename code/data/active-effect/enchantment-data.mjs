@@ -19,7 +19,7 @@ export default class EchantmentData extends BaseDataModel {
 			super.metadata,
 			{
 				type: "enchantment",
-				localization: "BF.Effect.Type.Enchantment"
+				localization: "BF.EFFECT.Type.Enchantment"
 			},
 			{ inplace: false }
 		)

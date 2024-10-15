@@ -1,4 +1,4 @@
-import { getSelectedTokens, log, simplifyBonus } from "./utils/_module.mjs";
+import { getSelectedTokens, getTargetDescriptors, log, simplifyBonus } from "./utils/_module.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
@@ -319,7 +319,8 @@ async function rollAttack(event) {
 					messageType: "roll",
 					roll: {
 						type: "attack"
-					}
+					},
+					targets: getTargetDescriptors()
 				}
 			},
 			flavor: game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.ATTACK.Label") }),
@@ -830,7 +831,15 @@ async function rollDamage(event) {
 			flavor: title,
 			title,
 			speaker: ChatMessage.implementation.getSpeaker(),
-			"flags.black-flag.roll.type": "damage"
+			flags: {
+				[game.system.id]: {
+					messageType: "roll",
+					roll: {
+						type: "damage"
+					},
+					targets: getTargetDescriptors()
+				}
+			}
 		}
 	};
 

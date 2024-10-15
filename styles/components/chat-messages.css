@@ -1,4 +1,4 @@
-blackFlag-damageApplication {
+blackFlag-damageApplication, blackFlag-effectApplication {
 	.target-source-control {
 		&:not([hidden]) { display: flex; }
 		justify-content: space-evenly;
@@ -19,22 +19,26 @@ blackFlag-damageApplication {
 		}
 	}
 
+	:is(.effects, .targets) :is(.effect, .target) {
+		.icon {
+			width: 36px;
+			height: 36px;
+			box-shadow: 0 0 4px rgb(0 0 0 / .15);
+		}
+
+		.name-stacked {
+			flex: 1;
+			.subtitle {
+				display: flex;
+				gap: 4px;
+			}
+		}
+	}
+}
+
+blackFlag-damageApplication {
 	.targets {
 		.target {
-			.icon {
-				width: 36px;
-				height: 36px;
-				box-shadow: 0 0 4px rgb(0 0 0 / .15);
-			}
-	
-			.name-stacked {
-				flex: 1;
-				.subtitle {
-					display: flex;
-					gap: 4px;
-				}
-			}
-
 			.change-source {
 				width: 13px;
 				height: 13px;
@@ -126,5 +130,19 @@ blackFlag-damageApplication {
 
 	.apply-damage {
 		width: calc(100% - 2px);
+	}
+}
+
+blackFlag-effectApplication {
+	.effects .effect {
+		> button {
+			width: 28px;
+			height: 28px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0 0 0 4px;
+			font-size: var(--font-size-12);
+		}
 	}
 }

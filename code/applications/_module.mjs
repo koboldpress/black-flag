@@ -60,6 +60,7 @@ export function registerCustomElements() {
 	window.customElements.define("blackflag-damageapplication", components.DamageApplicationElement);
 	window.customElements.define("blackflag-damagelist", components.DamageListElement);
 	window.customElements.define("blackflag-deathsaves", components.DeathSavesElement);
+	window.customElements.define("blackflag-effectapplication", components.EffectApplicationElement);
 	window.customElements.define("blackflag-effects", components.EffectsElement);
 	window.customElements.define("blackflag-filter", components.FilterElement);
 	window.customElements.define("blackflag-filters", components.FiltersElement);

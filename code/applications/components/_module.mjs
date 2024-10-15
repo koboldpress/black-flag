@@ -11,6 +11,7 @@ export { default as DamageApplicationElement } from "./damage-application.mjs";
 export { default as DamageListElement } from "./damage-list.mjs";
 export { default as DeathSavesElement } from "./death-saves.mjs";
 export { default as DocumentSheetAssociatedElement } from "./document-sheet-associated-element.mjs";
+export { default as EffectApplicationElement } from "./effect-application.mjs";
 export { default as EffectsElement } from "./effects.mjs";
 export { default as FilterElement } from "./filter.mjs";
 export { default as FiltersElement } from "./filters.mjs";

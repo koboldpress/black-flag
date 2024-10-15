@@ -2,7 +2,13 @@ import ActivityActivationDialog from "../../applications/activity/activity-activ
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import BaseActivity from "../../data/activity/base-activity.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { areKeysPressed, buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
+import {
+	areKeysPressed,
+	buildRoll,
+	getTargetDescriptors,
+	numberFormat,
+	simplifyFormula
+} from "../../utils/_module.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -252,7 +258,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	get messageFlags() {
 		return {
 			activity: { type: this.type, id: this.id, uuid: this.uuid },
-			item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+			item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid },
+			targets: getTargetDescriptors()
 		};
 	}
 
@@ -463,7 +470,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 					flags: {
 						[game.system.id]: {
 							...this.messageFlags,
-							messageType: "activation"
+							messageType: "activation",
+							activation: {
+								effects: this.system.applicableEffects?.map(e => e.id)
+							}
 						}
 					}
 				},
@@ -643,7 +653,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			if (!anyConsumption) config.consume = false;
 		}
 
-		config.targets ??= this.constructor.getTargetDescriptors();
+		config.targets ??= getTargetDescriptors();
 
 		// TODO: Begin concentration
 
@@ -679,7 +689,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
-		if (activationConfig.scaling) {
+		if (activationConfig.scaling !== undefined) {
 			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
 			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
 			item.updateSource(scaleUpdate);
@@ -961,8 +971,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						[game.system.id]: {
 							...this.messageFlags,
 							messageType: "roll",
-							roll: { type: "damage" },
-							targets: this.constructor.getTargetDescriptors()
+							roll: { type: "damage" }
 						}
 					},
 					flavor: `${this.name} - ${this.damageFlavor}`,
@@ -1197,31 +1206,5 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const ability = this.actor?.system.abilities?.[this.ability] ?? {};
 		rollData.mod = ability.adjustedMod ?? ability.mod ?? 0;
 		return rollData;
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Important information on a targeted token.
-	 *
-	 * @typedef {object} TargetDescriptor
-	 * @property {string} uuid - The UUID of the target.
-	 * @property {string} img - The target's image.
-	 * @property {string} name - The target's name.
-	 * @property {number} [ac] - The target's armor class, if applicable.
-	 */
-
-	/**
-	 * Grab the targeted tokens and return relevant information on them.
-	 * @returns {TargetDescriptor[]}
-	 */
-	static getTargetDescriptors() {
-		const targets = new Map();
-		for (const token of game.user.targets) {
-			const { name } = token;
-			const { img, system, uuid } = token.actor ?? {};
-			if (uuid) targets.set(uuid, { name, img, uuid, ac: system?.attributes?.ac?.value });
-		}
-		return Array.from(targets.values());
 	}
 }

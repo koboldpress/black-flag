@@ -37,6 +37,16 @@ export default class ActivityDataModel extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Effects that can be applied from this activity.
+	 * @type {BlackFlagActiveEffect[]|null}
+	 */
+	get applicableEffects() {
+		return this.effects?.map(e => e.effect).filter(e => e) ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Is this activity on a spell item, or something else?
 	 * @type {boolean}
 	 */
