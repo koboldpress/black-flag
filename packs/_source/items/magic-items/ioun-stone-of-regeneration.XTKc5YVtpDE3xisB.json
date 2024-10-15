@@ -1,59 +1,58 @@
 {
   "type": "gear",
-  "name": "Ioun Stone of Greater Absorption",
+  "name": "Ioun Stone of Regeneration",
   "system": {
     "type": {
       "category": "wondrousItem"
     },
     "rarity": "legendary",
-    "price": {
-      "value": 75000,
-      "denomination": "gp"
-    },
     "attunement": {
       "value": "required",
       "requirement": ""
     },
-    "description": {
-      "value": "<p>While this marbled lavender and green ellipsoid orbits your head, you can use your reaction to cancel a spell of 8th circle or lower cast by a creature you can see and targeting only you.</p><p>Once the stone has canceled 50 circles worth of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose circle is higher than the number of spell rings the stone has left, the stone can’t cancel it.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.f4AgDaCgKtvuDpSq inline]</p></aside>",
-      "source": {
-        "fallback": ""
-      }
+    "price": {
+      "value": 50000,
+      "denomination": "gp"
     },
+    "description": {
+      "value": "<p>You regain 15 HP at the end of each hour this pearly white spindle orbits your head, provided that you have at least 1 HP.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.f4AgDaCgKtvuDpSq inline]</p></aside>",
+      "source": {}
+    },
+    "properties": [
+      "magical"
+    ],
     "activities": {
-      "MaavikzzSKk6s8Fy": {
-        "type": "utility",
-        "_id": "MaavikzzSKk6s8Fy",
+      "bhtuez2wPAOnllv8": {
+        "type": "heal",
+        "_id": "bhtuez2wPAOnllv8",
         "description": "",
         "sort": 0,
         "system": {
           "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "healing": {
+            "type": "healing",
+            "number": null,
+            "denomination": 0,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": true,
+              "formula": "15"
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
           }
         },
         "activation": {
           "value": null,
-          "type": "reaction",
-          "condition": ""
+          "type": "free",
+          "condition": "At the end of each hour while you have at least 1 HP"
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "item",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "amount"
-              }
-            }
-          ],
+          "targets": [],
           "scale": {
-            "allowed": true,
-            "max": "8"
+            "allowed": false
           }
         },
         "duration": {
@@ -63,7 +62,8 @@
         },
         "range": {
           "override": false,
-          "units": ""
+          "units": "self",
+          "special": ""
         },
         "magical": false,
         "target": {
@@ -87,7 +87,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Cancel Spell",
+        "name": "Regenerate",
         "img": ""
       }
     },
@@ -96,23 +96,20 @@
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": "50"
+      "max": ""
     },
     "container": null,
     "quantity": 1,
     "weight": {
       "value": 0,
       "units": "pound"
-    },
-    "properties": [
-      "magical"
-    ]
+    }
   },
-  "_id": "DsgGlHvfnYlbXZv5",
-  "img": "icons/commodities/stone/ore-pile-green.webp",
+  "_id": "XTKc5YVtpDE3xisB",
+  "img": "icons/commodities/stone/rock-chunk-pumice-white.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
-  "sort": 5300000,
+  "sort": 0,
   "ownership": {
     "default": 0
   },
@@ -122,9 +119,9 @@
     "coreVersion": "12.331",
     "systemId": "black-flag",
     "systemVersion": "0.10.047",
-    "createdTime": 1724986192620,
-    "modifiedTime": 1729031615396,
+    "createdTime": 1729031669392,
+    "modifiedTime": 1729031715050,
     "lastModifiedBy": "blackflag0000000"
   },
-  "_key": "!items!DsgGlHvfnYlbXZv5"
+  "_key": "!items!XTKc5YVtpDE3xisB"
 }

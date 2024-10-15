@@ -15,18 +15,88 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>When you use an action to toss one of these stones into the air, the stone orbits your head at a distance of [[/r 1d3]] feet and confers a benefit to you. Thereafter, another creature must use an action to grasp or net the stone to separate it from you, either by making a successful attack roll against AC 24 or a successful [[/check 24 DEX (Acrobatics)]]. You can use an action to seize and stow the stone, ending its effect.</p>\n\t\t\t\t\t\t\t\t<p>A stone has AC 24, 10 HP, and resistance to all damage. It is considered an object that is also a carried item while it orbits your head.</p>\n\t\t\t\t\t\t\t\t<p>While this pale lavender ellipsoid orbits your head, you can use your reaction to cancel a spell of 4th circle or lower cast by a creature you can see and targeting only you.</p>\n\t\t\t\t\t\t\t\t<p>Once the stone has canceled 20 circles worth of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose circle is higher than the number of spell rings the stone has left, the stone can’t cancel it.</p>",
+      "value": "<p>While this pale lavender ellipsoid orbits your head, you can use your reaction to cancel a spell of 4th circle or lower cast by a creature you can see and targeting only you.</p><p>Once the stone has canceled 20 circles worth of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose circle is higher than the number of spell rings the stone has left, the stone can’t cancel it.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.f4AgDaCgKtvuDpSq inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "CgpUEjPAwlLNvIMR": {
+        "type": "utility",
+        "_id": "CgpUEjPAwlLNvIMR",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "reaction",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount"
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "4"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Cancel Spell",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "20"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +109,7 @@
     ]
   },
   "_id": "iyYoOP2OCDrfzo4p",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/commodities/gems/gem-rough-ball-purple.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 15900000,
@@ -51,9 +121,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724986110946,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729031113136,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!iyYoOP2OCDrfzo4p"

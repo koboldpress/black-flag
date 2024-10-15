@@ -11,18 +11,232 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This rusty iron sphere measures 3 inches in diameter and weighs 1 pound. You can use an action to speak the command word and throw the sphere at a Huge or smaller creature you can see within 60 feet of you. As the sphere moves through the air, it opens into a tangle of metal bands.</p>\n\t\t\t\t\t\t\t\t<p>Make a ranged attack roll with an attack bonus equal to your DEX modifier plus your proficiency bonus. On a hit, the target is restrained until you take a bonus action to speak the command word to release it. Doing so, or missing with the attack, causes the bands to contract and become a sphere once more.</p>\n\t\t\t\t\t\t\t\t<p>A creature, including the one restrained, can use an action to make a [[/check 20 STR]] to break the iron bands. On a success, the item is destroyed, and the restrained creature is freed. If the check fails, any further attempts made by that creature automatically fail until 24 hours have elapsed.</p>\n\t\t\t\t\t\t\t\t<p>Once the bands are used, they can’t be used again until the next dawn.</p>",
+      "value": "<p>This rusty iron sphere measures 3 inches in diameter and weighs 1 pound. You can use an action to speak the command word and throw the sphere at a Huge or smaller creature you can see within 60 feet of you. As the sphere moves through the air, it opens into a tangle of metal bands.</p><p>Make a ranged attack roll with an attack bonus equal to your DEX modifier plus your proficiency bonus. On a hit, the target is restrained until you take a bonus action to speak the command word to release it. Doing so, or missing with the attack, causes the bands to contract and become a sphere once more.</p><p>A creature, including the one restrained, can use an action to make a [[/check 20 STR]] to break the iron bands. On a success, the item is destroyed, and the restrained creature is freed. If the check fails, any further attempts made by that creature automatically fail until 24 hours have elapsed.</p><p>Once the bands are used, they can’t be used again until the next dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "PbyS6NkxXFn7i1GA": {
+        "type": "attack",
+        "_id": "PbyS6NkxXFn7i1GA",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {
+              "value": "ranged",
+              "classification": "weapon"
+            },
+            "ability": "dexterity",
+            "bonus": ""
+          },
+          "damage": {
+            "critical": {
+              "bonus": ""
+            },
+            "includeBase": true,
+            "parts": []
+          },
+          "effects": [
+            {
+              "_id": "9ZsrZnwYfx6ARj0w"
+            }
+          ]
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Throw Bands",
+        "img": ""
+      },
+      "4w3r0zCr4AXcuatR": {
+        "type": "utility",
+        "_id": "4w3r0zCr4AXcuatR",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Release Bands",
+        "img": ""
+      },
+      "ye9lggCx3Pe7gqeR": {
+        "type": "check",
+        "_id": "ye9lggCx3Pe7gqeR",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "check": {
+            "associated": [],
+            "dc": {
+              "calculation": "",
+              "formula": "20"
+            },
+            "visible": true,
+            "ability": "strength"
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Attempt to Escape",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -38,8 +252,45 @@
     ]
   },
   "_id": "aZXg4ZSFbMKLIcE3",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/commodities/metal/clasp-steel-braid.webp",
+  "effects": [
+    {
+      "name": "Iron Bands of Binding",
+      "img": "icons/commodities/metal/clasp-steel-braid.webp",
+      "origin": "Compendium.black-flag.items.Item.aZXg4ZSFbMKLIcE3",
+      "transfer": false,
+      "_id": "9ZsrZnwYfx6ARj0w",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.047",
+        "createdTime": 1729031795698,
+        "modifiedTime": 1729031795698,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!aZXg4ZSFbMKLIcE3.9ZsrZnwYfx6ARj0w"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 12800000,
   "ownership": {
@@ -50,9 +301,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.047",
     "createdTime": 1724986321639,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729031869702,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!aZXg4ZSFbMKLIcE3"
