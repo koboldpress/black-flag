@@ -1,4 +1,3 @@
-import SpellcastingTemplate from "../../data/actor/templates/spellcasting-template.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { linkForUUID, log, numberFormat, Trait } from "../../utils/_module.mjs";
 import JournalEditor from "./journal-editor.mjs";
@@ -280,7 +279,7 @@ export default class ClassPageSheet extends JournalPageSheet {
 
 	/**
 	 * Sort scale values into ones displayed in their own column versus ones grouped with features.
-	 * @param {Item5e} item - Class or subclass item being prepared.
+	 * @param {BlackFlagItem} item - Class or subclass item being prepared.
 	 * @param {object} options
 	 * @param {Collection<BlackFlagItem>} options.features - Pre-fetched feature items.
 	 * @returns {{column: ScaleValueAdvancement[], grouped: Collection<ScaleValueAdvancement[]>}}

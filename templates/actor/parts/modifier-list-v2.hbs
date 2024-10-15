@@ -1,0 +1,52 @@
+<fieldset class="modifier-list" data-modifier-category="{{ section.category }}" data-modifier-type="{{ section.type }}">
+{{#with (lookup (lookup @root.CONFIG.modifierTypes section.type) "localization") as |localization|}}
+	<legend>
+	{{#with (localize "BF.Modifier.Specific" type=(localize ../section.label)
+	        modifier=(localize (concat localization "[other]"))) as |label|}}
+		{{#if ../../section.global}}
+			{{ localize "BF.Modifier.Global" type=label }}
+		{{else}}
+			{{ label }}
+		{{/if}}
+	{{/with}}
+	</legend>
+	{{#if ../section.modifiers.length}}
+		<ul class="modifiers">
+			{{#each ../section.modifiers}}
+				<li class="modifier" data-index="{{ index }}">
+					{{#if (eq this.type "note")}}
+						<select class="roll-mode" name="modifier.{{ index }}.note.rollMode">
+							{{ selectOptions @root.CONFIG.challengeRollModes selected=note.rollMode nameAttr="value"
+							                 labelAttr="label" localize=true }}
+						</select>
+						<input type="text" name="modifier.{{ index }}.note.text" value="{{ note.text }}"
+						       placeholder="{{ localize 'BF.Note.Label[one]' }}" {{ disabled (ne source "manual") }}>
+					{{else}}
+						{{#if ../../section.showProficiency}}
+							<label class="proficiency">
+								<span>{{ localize "BF.Modifier.Proficiency.Label" }}</span>
+								<input type="checkbox" name="modifier.{{ index }}.requireProficiency" {{ checked requireProficiency }}>
+							</label>
+						{{/if}}
+						<input type="text" name="modifier.{{ index }}.formula" value="{{ formula }}"
+						       placeholder="{{ localize 'BF.Roll.Formula.Label' }}" {{ disabled (ne source "manual") }}>
+					{{/if}}
+					<div class="modifier-controls">
+						{{#if (eq source "manual")}}
+							<button type="button" class="link-button" data-action="deleteModifier"
+							        data-tooltip="BF.Modifier.Action.Delete" aria-label="{{ localize 'BF.Modifier.Action.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
+						{{/if}}
+						{{!-- TODO: Display source --}}
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+	<button type="button" class="link-button" data-action="addModifier">
+		<i class="fa-solid fa-plus" inert></i>
+		{{ localize "BF.Action.Add.Specific" type=(localize (concat localization "[one]")) }}
+	</button>
+{{/with}}
+</fieldset>

@@ -77,7 +77,6 @@ export default class UtilityActivity extends Activity {
 					flags: {
 						[game.system.id]: {
 							...this.messageFlags,
-							targets: this.constructor.getTargetDescriptors(),
 							type: "roll",
 							roll: { type: "roll" }
 						}

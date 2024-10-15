@@ -13,6 +13,7 @@ const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.d
  * @property {string} description.additionalHitPoints - Additional text displayed beneath the hit points section.
  * @property {string} description.additionalTraits - Additional text displayed beneath the traits section.
  * @property {string} description.additionalEquipment - Additional text displayed beneath the equipment section.
+ * @property {string} description.conclusion - Text added after features, but before subclasses.
  * @property {string} description.subclassAdvancement - Subclass description as it appears in the features list.
  * @property {string} description.subclassSection - Subclass description as it appears before the list of subclasses.
  * @property {Set<string>} subclasses - UUIDs of subclasses to display on the class page.
@@ -39,10 +40,6 @@ export default class ClassJournalPageData extends BaseDataModel {
 			// TODO: Replace with UUIDField when possible
 			headingLevel: new NumberField({ initial: 3 }),
 			description: new SchemaField({
-				introduction: new HTMLField({
-					label: "BF.JournalPage.Class.Introduction.Label",
-					hint: "BF.JournalPage.Class.Introduction.Hint"
-				}),
 				additionalHitPoints: new HTMLField({
 					label: "BF.HitPoint.Label[other]",
 					hint: "BF.JournalPage.Class.HitPoints.Hint"
@@ -54,6 +51,14 @@ export default class ClassJournalPageData extends BaseDataModel {
 				additionalEquipment: new HTMLField({
 					label: "BF.JournalPage.Class.Equipment.Header",
 					hint: "BF.JournalPage.Class.Equipment.Hint"
+				}),
+				conclusion: new HTMLField({
+					label: "BF.JournalPage.Class.Conclusion.Label",
+					hint: "BF.JournalPage.Class.Conclusion.Hint"
+				}),
+				introduction: new HTMLField({
+					label: "BF.JournalPage.Class.Introduction.Label",
+					hint: "BF.JournalPage.Class.Introduction.Hint"
 				}),
 				subclassAdvancement: new HTMLField({
 					label: "BF.JournalPage.Class.Subclass.AdvancementDescription.Label",

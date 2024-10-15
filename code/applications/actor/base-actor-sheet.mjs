@@ -3,7 +3,6 @@ import { numberFormat } from "../../utils/_module.mjs";
 import EffectsElement from "../components/effects.mjs";
 import InventoryElement from "../components/inventory.mjs";
 import DragDrop from "../drag-drop.mjs";
-import IdentityConfig from "../identity-config.mjs";
 import NotificationTooltip from "../notification-tooltip.mjs";
 import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
@@ -336,7 +335,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "ability":
 						return new AbilityConfig(properties.key, this.actor).render(true);
 					case "armor-class":
-						return new ArmorClassConfig(this.actor).render(true);
+						return new ArmorClassConfig({ document: this.actor }).render({ force: true });
 					case "initiative":
 						return new InitiativeConfig(this.actor).render(true);
 					case "language":

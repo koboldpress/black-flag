@@ -46,7 +46,7 @@ export default class PCData extends ActorDataModel.mixin(
 		return this.mergeSchema(super.defineSchema(), {
 			abilities: new MappingField(
 				new SchemaField({
-					base: new NumberField({ min: 0, integer: true, label: "BF.Ability.Base.Label" }),
+					base: new NumberField({ min: 0, integer: true, label: "BF.Ability.Score.Base" }),
 					max: new NumberField({ min: 0, initial: 20, integer: true }),
 					save: new SchemaField({
 						proficiency: new ProficiencyField({ rounding: false })
@@ -357,6 +357,7 @@ export default class PCData extends ActorDataModel.mixin(
 		const rollData = this.parent.getRollData({ deterministic: true });
 
 		this.prepareConditions();
+		this.prepareDerivedArmorFormulas();
 		this.prepareDerivedEncumbrance(rollData);
 		this.prepareLanguages();
 		this.prepareDerivedModifiers();

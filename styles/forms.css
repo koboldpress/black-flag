@@ -52,6 +52,15 @@ fieldset, .standard-form fieldset {
 			width: unset;
 		}
 	}
+
+	> .header {
+		display: flex;
+		margin-inline: calc(var(--fieldset-padding) * -1);
+		padding-block: 3px 2px;
+		padding-inline: 10px;
+		background: var(--bf-color-border-blue);
+		color: var(--bf-text-color-white);
+	}
 }
 
 .checkbox-list {

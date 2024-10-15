@@ -1,0 +1,24 @@
+.black-flag.armor-class.config-sheet {
+	.equipped {
+		display: grid;
+		grid-template-columns: [name] 4fr [armorValue] 1fr [magicalBonus] 1fr;
+
+		.header, .form-group {
+			display: grid;
+			grid-column: 1 / -1;
+			grid-template-columns: subgrid;
+		}
+		.name {
+			grid-column: name;
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			.icon {
+				width: 32px;
+				height: 32px;
+			}
+		}
+		.armorValue { grid-column: armorValue; }
+		.magicalBonus { grid-column: magicalBonus; }
+	}
+}

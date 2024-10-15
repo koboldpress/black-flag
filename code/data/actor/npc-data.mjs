@@ -219,6 +219,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		this.prepareConditions();
 		this.prepareLanguages();
 		this.prepareSource();
+		this.prepareDerivedArmorFormulas();
 		this.prepareDerivedModifiers();
 		this.prepareDerivedTraits(rollData);
 

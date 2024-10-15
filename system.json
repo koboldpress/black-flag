@@ -2,7 +2,7 @@
 	"id": "black-flag",
 	"title": "Black Flag Roleplaying",
 	"description": "The official implementation of the Black Flag Roleplaying system, a 5E-compatible game system developed by Kobold Press, within Foundry Virtual Tabletop.",
-	"version": "0.10.047",
+	"version": "0.10.049",
 	"compatibility": {
 		"minimum": "12.331",
 		"verified": "12"
@@ -111,16 +111,20 @@
 		"JournalEntryPage": {
 			"class": {
 				"htmlFields": [
-					"description.introduction",
 					"description.additionalHitPoints",
 					"description.additionalTraits",
 					"description.additionalEquipment",
+					"description.conclusion",
+					"description.introduction",
 					"description.subclassAdvancement",
 					"description.subclassSection"
 				]
 			},
 			"subclass": {
-				"htmlFields": ["description.introduction"]
+				"htmlFields": [
+					"description.conclusion",
+					"description.introduction"
+				]
 			},
 			"map": {
 				"htmlFields": []

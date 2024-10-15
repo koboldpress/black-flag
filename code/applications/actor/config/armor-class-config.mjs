@@ -1,21 +1,33 @@
-import { filteredKeys } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import { filteredKeys, numberFormat } from "../../../utils/_module.mjs";
+import BaseConfigSheet from "../api/base-config-sheet.mjs";
 
-export default class ArmorClassConfig extends BaseConfig {
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "armor-class"],
+/**
+ * Configuration application for AC formulas, bonuses, and other values.
+ */
+export default class ArmorClassConfig extends BaseConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["armor-class"],
+		position: {
+			width: 500
+		}
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		config: {
 			template: "systems/black-flag/templates/actor/config/armor-class-config.hbs"
-		});
-	}
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	get type() {
+	/** @override */
+	get title() {
 		return game.i18n.localize("BF.ArmorClass.Label");
 	}
 
@@ -23,18 +35,42 @@ export default class ArmorClassConfig extends BaseConfig {
 	/*         Context Preparation         */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async getData(options) {
-		const context = await super.getData(options);
-		context.armorFormulas = Object.entries(CONFIG.BlackFlag.armorFormulas).map(([id, config]) => ({
-			id,
-			...config,
-			checked: this.document.system.attributes.ac.baseFormulas.has(id)
+	/** @inheritDoc */
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+
+		context.armorFormulas = context.system.data.attributes.ac.formulas.map(data => ({
+			...data,
+			checked: data.enabled !== false,
+			disabled: {
+				checkbox: data.type !== "base",
+				input: true
+			},
+			keyPath: "baseFormulas"
 		}));
+
+		context.equipped = {};
+		for (const key of ["armor", "shield"]) {
+			const item = context.system.data.attributes.ac[`equipped${key.capitalize()}`];
+			if (item)
+				context.equipped[key] = {
+					anchor: item.toAnchor().outerHTML,
+					img: item.img,
+					magicalBonus: numberFormat(item.system.properties.has("magical") ? item.system.magicalBonus : 0, {
+						signDisplay: "always"
+					}),
+					name: item.name,
+					value: numberFormat(item.system.armor.value, { signDisplay: key === "shield" ? "always" : "auto" })
+				};
+		}
+		if (foundry.utils.isEmpty(context.equipped)) delete context.equipped;
+
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	prepareModifiers() {
 		return [
 			{
@@ -50,6 +86,7 @@ export default class ArmorClassConfig extends BaseConfig {
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/** @override */
 	_getModifierData(category, type) {
 		const data = { type, filter: [{ k: "type", v: "armor-class" }] };
 		return data;
@@ -57,14 +94,15 @@ export default class ArmorClassConfig extends BaseConfig {
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	async _updateObject(event, formData) {
-		const data = foundry.utils.expandObject(formData);
+	/** @inheritDoc */
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
 
-		if (data.formulas) {
-			data["system.attributes.ac.baseFormulas"] = filteredKeys(data.formulas);
-			delete data.formulas;
-			formData = foundry.utils.flattenObject(data);
+		if (submitData.baseFormulas) {
+			foundry.utils.setProperty(submitData, "system.attributes.ac.baseFormulas", filteredKeys(submitData.baseFormulas));
+			delete submitData.baseFormulas;
 		}
-		super._updateObject(event, formData);
+
+		return submitData;
 	}
 }

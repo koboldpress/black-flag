@@ -8,8 +8,6 @@ export default class ConsumptionElement extends FormAssociatedElement {
 	connectedCallback() {
 		super.connectedCallback();
 
-		if (!this.validTypes.length) this.querySelector(".add-control").remove();
-
 		for (const element of this.querySelectorAll("[data-action]")) {
 			element.addEventListener("click", event => {
 				event.stopImmediatePropagation();
@@ -51,17 +49,6 @@ export default class ConsumptionElement extends FormAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Determine which consumption types are still available for creation.
-	 * @type {string[]}
-	 */
-	get validTypes() {
-		const existingTypes = new Set(foundry.utils.getProperty(this.activity.toObject(), this.#keyPath).map(t => t.type));
-		return Object.keys(CONFIG.BlackFlag.consumptionTypes).filter(t => !existingTypes.has(t));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
 	/*            Event Handlers           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -85,11 +72,15 @@ export default class ConsumptionElement extends FormAssociatedElement {
 		if (action !== "add" && !index) return;
 		switch (action) {
 			case "add":
-				const validTypes = this.validTypes;
-				if (!validTypes.length) return;
+				const types = this.activity.validConsumptionTypes;
+				const filteredTypes = types.difference(
+					new Set(foundry.utils.getProperty(this.activity.toObject(), this.#keyPath).map(t => t.type))
+				);
+				const type = filteredTypes.first() ?? types.first();
+				if (!type) return;
 				typesCollection.push({
-					type: validTypes[0],
-					target: ConsumptionTargetData.getValidTargets(validTypes[0], this.activity)?.[0]?.key
+					type,
+					target: ConsumptionTargetData.getValidTargets(type, this.activity)?.[0]?.value
 				});
 				break;
 			case "delete":

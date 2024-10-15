@@ -77,10 +77,10 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	 */
 	static prepareActorContext(effects) {
 		const context = {
-			temporary: { label: "BF.Effect.Category.Temporary", effects: [] },
-			passive: { label: "BF.Effect.Category.Passive", effects: [] },
-			inactive: { label: "BF.Effect.Category.Inactive", effects: [] },
-			suppressed: { label: "BF.Effect.Category.Suppressed", effects: [] }
+			temporary: { label: "BF.EFFECT.Category.Temporary", effects: [] },
+			passive: { label: "BF.EFFECT.Category.Passive", effects: [] },
+			inactive: { label: "BF.EFFECT.Category.Inactive", effects: [] },
+			suppressed: { label: "BF.EFFECT.Category.Suppressed", effects: [] }
 		};
 
 		for (const effect of effects) {
@@ -91,7 +91,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 				parentId: effect.target === effect.parent ? null : effect.parent.id
 			};
 			if (effect.isSuppressed) {
-				data.suppressionReason = game.i18n.format("BF.Effect.SuppressionReason.Description", {
+				data.suppressionReason = game.i18n.format("BF.EFFECT.SuppressionReason.Description", {
 					item: effect.parent.name,
 					reasons: game.i18n
 						.getListFormatter({ style: "short" })
@@ -118,13 +118,13 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		const context = {
 			base: {
 				id: "base",
-				label: "BF.Effect.Label[other]",
+				label: "BF.EFFECT.Label[other]",
 				effects: [],
 				show: { duration: true, source: false, transfer: true }
 			},
 			enchantment: {
 				id: "enchantment",
-				label: "BF.Effect.Type.Enchantment[other]",
+				label: "BF.EFFECT.Type.Enchantment[other]",
 				effects: [],
 				show: { duration: false, source: true, transfer: false }
 			}
@@ -155,32 +155,32 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	_getContextMenuOptions(effect) {
 		return [
 			{
-				name: "BF.Effect.Action.View",
+				name: "BF.EFFECT.Action.View",
 				icon: "<i class='fa-solid fa-eye fa-fw'></i>",
 				condition: li => !this.isEditable,
 				callback: li => this._onAction(li[0], "view")
 			},
 			{
-				name: "BF.Effect.Action.Edit",
+				name: "BF.EFFECT.Action.Edit",
 				icon: "<i class='fa-solid fa-edit fa-fw'></i>",
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "edit")
 			},
 			{
-				name: "BF.Effect.Action.Duplicate",
+				name: "BF.EFFECT.Action.Duplicate",
 				icon: "<i class='fa-solid fa-copy fa-fw'></i>",
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "duplicate")
 			},
 			{
-				name: "BF.Effect.Action.Delete",
+				name: "BF.EFFECT.Action.Delete",
 				icon: "<i class='fa-solid fa-trash fa-fw'></i>",
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "delete"),
 				group: "destructive"
 			},
 			{
-				name: `BF.Effect.Action.${effect.disabled ? "Enable" : "Disable"}`,
+				name: `BF.EFFECT.Action.${effect.disabled ? "Enable" : "Disable"}`,
 				icon: `<i class='fa-solid fa-${effect.disabled ? "check" : "times"} fa-fw'></i>`,
 				condition: li => this.isEditable,
 				callback: li => this._onAction(li[0], "toggle"),
@@ -244,7 +244,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 		this.document.createEmbeddedDocuments("ActiveEffect", [
 			{
 				type: isEnchantment ? "enchantment" : "base",
-				name: isItem ? this.document.name : game.i18n.localize("BF.Effect.New"),
+				name: isItem ? this.document.name : game.i18n.localize("BF.EFFECT.New"),
 				icon: isItem ? this.document.img : "icons/svg/aura.svg",
 				origin: isEnchantment ? undefined : this.document.uuid,
 				duration: {

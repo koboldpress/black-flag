@@ -192,6 +192,7 @@ export const statusEffects = {
 
 /**
  * Configure system status effects.
+ * @internal
  */
 export function _configureStatusEffects() {
 	const addEffect = (effects, data) => {

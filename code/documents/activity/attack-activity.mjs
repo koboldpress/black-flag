@@ -1,6 +1,6 @@
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import { AttackData } from "../../data/activity/attack-data.mjs";
-import { buildRoll, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
+import { buildRoll, getTargetDescriptors, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
 export default class AttackActivity extends Activity {
@@ -144,7 +144,7 @@ export default class AttackActivity extends Activity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config = {}, dialog = {}, message = {}) {
-		const targets = this.constructor.getTargetDescriptors();
+		const targets = getTargetDescriptors();
 		const flagKey = `relationship.last.${this.id}`;
 
 		let ammunitionOptions;

@@ -4,13 +4,13 @@
 			<tbody data-section="{{ @key }}">
 				<tr class="table-header">
 					<td class="name">{{ localize label }}</td>
-					<th class="source" scope="col">{{ localize "BF.Effect.Source" }}</th>
-					<th class="duration" scope="col">{{ localize "BF.Effect.Duration" }}</th>
+					<th class="source" scope="col">{{ localize "BF.EFFECT.Source" }}</th>
+					<th class="duration" scope="col">{{ localize "BF.EFFECT.Duration" }}</th>
 					<td class="controls">
 						<div class="layout">
 							{{#if @root.editable}}
 								<button type="button" class="link-button" data-action="add"
-								        data-tooltip="BF.Effect.Action.Add" aria-label="{{ localize 'BF.Effect.Action.Add' }}">
+								        data-tooltip="BF.EFFECT.Action.Add" aria-label="{{ localize 'BF.EFFECT.Action.Add' }}">
 									<i class="fa-solid fa-plus" inert></i>
 								</button>
 							{{/if}}
@@ -37,21 +37,21 @@
 							<div class="layout">
 								{{#if @root.editable}}
 									<button type="button" class="link-button" data-action="edit"
-													data-tooltip="BF.Effect.Action.Edit" aria-label="{{ localize 'BF.Effect.Action.Edit' }}">
+													data-tooltip="BF.EFFECT.Action.Edit" aria-label="{{ localize 'BF.EFFECT.Action.Edit' }}">
 										<i class="fa-solid fa-edit" inert></i>
 									</button>
 									<button type="button" class="link-button" data-action="delete"
-													data-tooltip="BF.Effect.Action.Delete" aria-label="{{ localize 'BF.Effect.Action.Delete' }}">
+													data-tooltip="BF.EFFECT.Action.Delete" aria-label="{{ localize 'BF.EFFECT.Action.Delete' }}">
 										<i class="fa-solid fa-trash" inert></i>
 									</button>
 								{{else}}
 									<button type="button" class="link-button" data-action="view"
-													data-tooltip="BF.Effect.Action.View" aria-label="{{ localize 'BF.Effect.Action.View' }}">
+													data-tooltip="BF.EFFECT.Action.View" aria-label="{{ localize 'BF.EFFECT.Action.View' }}">
 										<i class="fa-solid fa-eye" inert></i>
 									</button>
 									<button type="button" class="link-button" data-action="toggle"
-												  data-tooltip="BF.Effect.Action.{{ ifThen disabled 'Enable' 'Disable' }}"
-									        aria-label="{{ localize (concat "BF.Effect.Action." (ifThen disabled 'Enable' 'Disable')) }}">
+												  data-tooltip="BF.EFFECT.Action.{{ ifThen disabled 'Enable' 'Disable' }}"
+									        aria-label="{{ localize (concat "BF.EFFECT.Action." (ifThen disabled 'Enable' 'Disable')) }}">
 										<i class="fa-solid fa-{{ifThen disabled 'check' 'times'}}" inert></i>
 									</button>
 								{{/if}}

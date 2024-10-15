@@ -55,6 +55,88 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Cached options for attributes.
+ * @type {Map<string, FormSelectOptions>}
+ */
+const _attributeOptionCache = new Map();
+
+/**
+ * Create a human readable label for the provided attribute key, if possible.
+ * @param {string} attribute - Attribute key path to localize.
+ * @param {object} [options={}]
+ * @param {BlackFlagActor} [options.actor] - Optional actor to assist with lookups.
+ * @returns {FormSelectOption}
+ */
+export function getAttributeOption(attribute, { actor }={}) {
+	if ( _attributeOptionCache.has(attribute) ) return _attributeOptionCache.get(attribute);
+
+	const cache = (label, group) => {
+		const option = { value: attribute, label: label ?? attribute };
+		if ( group ) option.group = group;
+		_attributeOptionCache.set(attribute, option);
+		return foundry.utils.deepClone(option);
+	};
+
+	switch (attribute) {
+		case "attributes.ac.flat":
+		case "attributes.ac.value": return cache(game.i18n.localize("BF.ArmorClass.Label"));
+		case "attributes.cr": return cache(game.i18n.localize("BF.ChallengeRating.Label"));
+		case "attributes.death.failure": return cache(game.i18n.localize("BF.Death.Failure.Label"));
+		case "attributes.death.success": return cache(game.i18n.localize("BF.Death.Success.Label"));
+		case "attributes.exhaustion": return cache(game.i18n.localize("BF.Condition.Exhaustion.Level"));
+		case "attributes.hp.temp": return cache(game.i18n.localize("BF.HitPoint.Temp.LabelLong"));
+		case "attributes.hp":
+		case "attributes.hp.value": return cache(game.i18n.localize("BF.HitPoint.Label[other]"));
+		case "initiative":
+		case "attributes.initiative.mod": return cache(game.i18n.localize("BF.Initiative.Label"));
+		case "attributes.legendary.spent":
+		case "attributes.legendary.value": return cache(game.i18n.localize("BF.ACTIVATION.Type.Legendary[other]"));
+		case "attributes.luck.value": return cache(game.i18n.localize("BF.Luck.Label"));
+		case "attributes.perception": return cache(game.i18n.localize("BF.Skill.Perception.Label"));
+		case "attributes.stealth": return cache(game.i18n.localize("BF.Skill.Stealth.Label"));
+		case "progression.xp":
+		case "progression.xp.value": return cache(game.i18n.localize("BF.ExperiencePoints.Label"));
+		case "spellcasting.dc": return cache(game.i18n.localize("BF.Spellcasting.DC.Label"));
+	}
+
+	if ( attribute.startsWith("abilities.") ) return cache(
+		CONFIG.BlackFlag.abilities.localized[attribute], game.i18n.localize("BF.Ability.Score.Label[other]")
+	);
+
+	if ( attribute.startsWith("proficiencies.skills.") ) {
+		const key = attribute.replace("proficiencies.skills.", "").replace(".passive", "");
+		const skill = CONFIG.BlackFlag.skills.localized[key];
+		return cache(skill, game.i18n.localize("BF.Skill.Passive.Label"));
+	}
+
+	if ( attribute.startsWith("spellcasting.slots.") ) {
+		let slot;
+		if ( attribute.startsWith("spellcasting.slots.pact") ) {
+			slot = game.i18n.localize("BF.Spellcasting.Type.Pact.Slots");
+		} else {
+			const circle = attribute.match(/spellcasting\.slots\.circle-(\d+)(?:\.|$)/)?.[1];
+			if ( circle ) slot = CONFIG.BlackFlag.spellCircles()[Number(circle)];
+		}
+		if ( !slot && actor ) slot = foundry.utils.getProperty(actor.system, attribute)?.label;
+		return cache(slot, game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.Label"));
+	}
+
+	if ( attribute.startsWith("traits.movement.types.") ) return cache(
+		CONFIG.BlackFlag.movementTypes.localized[attribute.replace("traits.movement.types.", "")],
+		game.i18n.localize("BF.Speed.Label")
+	);
+
+	if ( attribute.startsWith("traits.senses.types.") ) return cache(
+		CONFIG.BlackFlag.senses.localized[attribute.replace("traits.senses.types.", "")],
+		game.i18n.localize("BF.SENSES.Label[other]")
+	);
+
+	return { value: attribute, label: attribute };
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Cached store of Intl.ListFormat instances.
  * @type {{[key: string]: Intl.PluralRules}}
  */

@@ -1,8 +1,4 @@
-.black-flag.config.app form {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-
+.black-flag.config.app form, .black-flag.config-sheet {
 	h2 {
 		margin: 0;
 		border: 0;
@@ -67,5 +63,17 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
+}
+
+.black-flag.config.app form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.black-flag.config-sheet {
+	.window-content > section:is(.flexcol, .flexrow) {
+		gap: 8px;
 	}
 }

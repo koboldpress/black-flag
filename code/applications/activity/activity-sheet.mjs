@@ -138,11 +138,16 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.source.activation.type });
 		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
-
 		context.activation = {
 			options: activationOptions,
 			scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
 		};
+
+		context.consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({
+			value,
+			label: game.i18n.localize(CONFIG.BlackFlag.consumptionTypes[value].label)
+		}));
+
 		context.durationOptions = CONFIG.BlackFlag.durationOptions({
 			chosen: this.activity.duration.units,
 			isSpell: this.activity.isSpell

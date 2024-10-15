@@ -5,6 +5,7 @@ import * as actors from "./actors.mjs";
 import * as advancement from "./advancement.mjs";
 import * as ammunition from "./ammunition.mjs";
 import * as armor from "./armor.mjs";
+import * as attributes from "./attributes.mjs";
 import * as canvas from "./canvas.mjs";
 import * as conditions from "./conditions.mjs";
 import * as containers from "./containers.mjs";
@@ -85,6 +86,7 @@ export default {
 	...advancement,
 	...ammunition,
 	...armor,
+	...attributes,
 	...canvas,
 	...conditions,
 	...containers,

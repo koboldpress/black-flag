@@ -1,4 +1,10 @@
-import { getPluralRules, numberFormat, simplifyBonus, simplifyFormula } from "../../../utils/_module.mjs";
+import {
+	getAttributeOption,
+	getPluralRules,
+	numberFormat,
+	simplifyBonus,
+	simplifyFormula
+} from "../../../utils/_module.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
 const { ArrayField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
@@ -74,14 +80,18 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 	/**
 	 * Method of scaling this consumption.
-	 * @type {Record<string, string>|null}
+	 * @type {FormSelectOption[]|null}
 	 */
 	get scalingModes() {
-		if (!CONFIG.BlackFlag.consumptionTypes[this.type]?.scalingModes) return null;
-		return Object.entries(CONFIG.BlackFlag.consumptionTypes[this.type].scalingModes).reduce((obj, [k, { label }]) => {
-			obj[k] = label;
-			return obj;
-		}, {});
+		if (CONFIG.BlackFlag.consumptionTypes[this.type]?.scalingModes === false) return null;
+		return [
+			{ value: "", label: game.i18n.localize("BF.Consumption.Scaling.Mode.None") },
+			{ value: "amount", label: game.i18n.localize("BF.Consumption.Scaling.Mode.Amount") },
+			...Object.entries(CONFIG.BlackFlag.consumptionTypes[this.type].scalingModes ?? {}).map(([value, config]) => ({
+				value,
+				label: game.i18n.localize(config.label)
+			}))
+		];
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -98,7 +108,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 	/**
 	 * List of valid targets within the current context.
-	 * @type {{key: string, label: string}[]|null}
+	 * @type {FormSelectOption[]|null}
 	 */
 	get validTargets() {
 		return this.constructor.getValidTargets(this.type, this.parent);
@@ -108,29 +118,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * List of valid targets for a specific type.
 	 * @param {string} type - Consumption type.
 	 * @param {Activity} activity - Activity that contains the target.
-	 * @returns {{key: string, label: string}[]|null}
+	 * @returns {FormSelectOption[]|null}
 	 */
 	static getValidTargets(type, activity) {
 		const config = CONFIG.BlackFlag.consumptionTypes[type];
 		if (!config?.validTargets || (!activity.item?.isEmbedded && config.targetRequiresEmbedded === true)) return null;
 		return config.validTargets.call(activity);
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Determine which consumption types can be selected.
-	 * @type {{key: string, label: string, disabled: boolean}[]}
-	 */
-	get validTypes() {
-		const existingTypes = new Set(this.parent.consumption.targets.map(t => t.type));
-		return this.parent.item.system._validConsumptionTypes(
-			Object.entries(CONFIG.BlackFlag.consumptionTypes).map(([key, config]) => ({
-				key,
-				label: config.label,
-				disabled: existingTypes.has(key) && this.type !== key
-			}))
-		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -172,6 +165,44 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Prepare updates for attribute consumption.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
+	 * @param {ActivationUpdates} updates - Updates to be performed.
+	 */
+	static async consumeAttribute(config, updates) {
+		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
+		const keyPath = `system.${this.target}`;
+		const attribute = getAttributeOption(this.target)?.label ?? this.target;
+
+		if (!foundry.utils.hasProperty(this.actor, keyPath))
+			throw new ConsumptionError(
+				game.i18n.format("BF.CONSUMPTION.Warning.MissingAttribute", {
+					activity: this.activity.name,
+					attribute,
+					item: this.item.name
+				})
+			);
+		const current = foundry.utils.getProperty(this.actor, keyPath);
+
+		let warningMessage;
+		if (cost > 0 && !current) warningMessage = "BF.CONSUMPTION.Warning.None";
+		else if (current < cost) warningMessage = "BF.CONSUMPTION.Warning.NotEnough";
+		if (warningMessage)
+			throw new ConsumptionError(
+				game.i18n.format(warningMessage, {
+					available: numberFormat(current),
+					cost: numberFormat(cost),
+					type: game.i18n.format("BF.CONSUMPTION.Type.Attribute.Warning", { attribute })
+				})
+			);
+
+		updates.actor[keyPath] = current - cost;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Prepare updates for hit dice consumption.
 	 * @this {ConsumptionTargetData}
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
@@ -179,6 +210,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static async consumeHitDice(config, updates) {
 		const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
+
+		if (!this.actor.system.attributes?.hd)
+			throw new ConsumptionError(game.i18n.format("BF.CONSUMPTION.Warning.MissingHitDice", { denomination: "" }));
 
 		const availableDenominations = Object.entries(this.actor.system.attributes.hd.d);
 		if (this.target === "smallest") availableDenominations.sort((lhs, rhs) => lhs[0] - rhs[0]);
@@ -240,7 +274,13 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 */
 	static async consumeItemUses(config, updates) {
 		const item = this.target ? this.actor.items.get(this.target) : this.item;
-		if (!item) throw new Error("item not found");
+		if (!item)
+			throw new ConsumptionError(
+				game.i18n.format("BF.CONSUMPTION.Warning.MissingItem", {
+					activity: this.activity.name,
+					item: this.item.name
+				})
+			);
 
 		const result = await this._usesConsumption(config, {
 			uses: item.system.uses,
@@ -393,6 +433,29 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
 	 * @returns {ConsumptionLabels}
 	 */
+	static consumptionLabelsAttribute(config, consumed) {
+		const { cost, simplifiedCost, increaseKey } = this._resolveHintCost(config);
+		const current = foundry.utils.getProperty(this.actor.system, this.target);
+		return {
+			label: game.i18n.localize(`BF.CONSUMPTION.Type.Attribute.Prompt${increaseKey}`),
+			hint: game.i18n.format(`BF.CONSUMPTION.Type.Attribute.PromptHint${increaseKey}`, {
+				cost,
+				attribute: getAttributeOption(this.target)?.label ?? this.target,
+				current: numberFormat(current)
+			}),
+			warn: simplifiedCost > current
+		};
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Create hint text indicating how much of this resource will be consumed/recovered.
+	 * @this {ConsumptionTargetData}
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activity usage.
+	 * @param {boolean} consumed - Is this consumption currently set to be consumed?
+	 * @returns {ConsumptionLabels}
+	 */
 	static consumptionLabelsHitDice(config, consumed) {
 		const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
 		let denomination;
@@ -500,6 +563,25 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Generate a list of targets for the "Attribute" consumption type.
+	 * @this {ConsumptionTargetData}
+	 * @returns {FormSelectOption[]}
+	 */
+	static validAttributeTargets() {
+		if (!this.actor) return [];
+		return (CONFIG.BlackFlag.consumableResources[this.actor.type] ?? [])
+			.map(a => getAttributeOption(a))
+			.sort((lhs, rhs) => {
+				if (lhs.group === rhs.group) return lhs.label.localeCompare(rhs.label, game.i18n.lang);
+				const lhsKey = lhs.group || lhs.label;
+				const rhsKey = rhs.group || rhs.label;
+				return lhsKey.localeCompare(rhsKey, game.i18n.lang);
+			});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Generate a list of targets for the "Hit Dice" consumption type.
 	 * @this {ConsumptionTargetData}
 	 * @returns {FormSelectOption[]}
@@ -530,7 +612,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 				uses.recovery[0].period !== "recharge"
 			) {
 				const period = CONFIG.BlackFlag.recoveryPeriods.localizedAbbreviations[uses.recovery[0].period];
-				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { max: numberFormat(uses.max), period });
+				label = game.i18n.format("BF.CONSUMPTION.Uses.Available.Period", { value: numberFormat(uses.max), period });
 			} else {
 				const type = game.i18n.localize(
 					`BF.CONSUMPTION.Uses.Available.Charges[${getPluralRules().select(uses.value)}]`

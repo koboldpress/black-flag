@@ -16,6 +16,11 @@
 	"Base": {
 		"Label": "Base Score"
 	},
+	"Score": {
+		"Label[one]": "Ability Score",
+		"Label[other]": "Ability Scores",
+		"Base": "Base Score"
+	},
 	"Charisma": {
 		"Label": "Charisma",
 		"Abbreviation": "CHA"
@@ -720,6 +725,7 @@
 		"Shield[other]": "Shields"
 	},
 	"Details": "Armor Details",
+	"Equipped": "Equipped Armor",
 	"MagicalBonus": {
 		"Label": "Magical Bonus",
 		"Hint": "Magical bonus added to armor class."
@@ -964,6 +970,7 @@
 	},
 	"Exhaustion": {
 		"Label": "Exhaustion",
+		"Level": "Exhaustion Level",
 		"Numbered": "Exhaustion {level}",
 		"NoteAbilityChecks": "A creature with one level of exhaustion has disadvantage on ability checks.",
 		"NoteAttackRollsSaves": "A creature with three levels of exhaustion has disadvantage on attack rolls and saves."
@@ -1034,6 +1041,14 @@
 			"PromptHintIncrease": "Recover <strong>{cost}</strong> {use} of this activity.",
 			"Warning": "uses on {itemName}'s activity {activityName}"
 		},
+		"Attribute": {
+			"Label": "Attribute",
+			"PromptDecrease": "Consume Attribute?",
+			"PromptIncrease": "Restore Attribute?",
+			"PromptHintDecrease": "Decrease <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+			"PromptHintIncrease": "Increase <code>{attribute}</code> by <strong>{cost}</strong> (currently {current}).",
+			"Warning": "{attribute} amount"
+		},
 		"ItemUses": {
 			"Label": "Item's Uses",
 			"PromptDecrease": "Consume Item Use?",
@@ -1076,9 +1091,10 @@
 		}
 	},
 	"Warning": {
+		"MissingAttribute": "Attribute {attribute} configured to be consumed by {activity} activity on {item} could not be found.",
 		"MissingHitDice": "Actor does not have a class with a {denomination} hit die.",
 		"MissingItem": "Item configured to be consumed by {activity} activity not found.",
-		"MissingSpellRing": "No {ring} slots available.",
+		"MissingSpellCircle": "No {circle} slots available.",
 		"None": "No {type} available to spend, {cost} required.",
 		"NotEnough": "Not enough {type} available to spend, {cost} required and only {available} available."
 	},
@@ -1124,7 +1140,8 @@
 			"Amount": "Scale Amount",
 			"Circle": "Scale Spell Circle",
 			"None": "No Scaling"
-		}
+		},
+		"Value": "Scaling Value"
 	},
 	"Target": {
 		"Label": "Target"
@@ -1469,11 +1486,12 @@
 	"Locked": "Locked"
 },
 
-"BF.Effect": {
+"BF.EFFECT": {
 	"Label[one]": "Active Effect",
 	"Label[other]": "Active Effects",
 	"Action": {
 		"Add": "Add Effect",
+		"ApplyTokens": "Apply Effect to Tokens",
 		"Delete": "Delete Effect",
 		"Disable": "Disable Effect",
 		"Duplicate": "Duplicate Effect",
@@ -1482,6 +1500,12 @@
 		"Transfer": "Transfer Effect",
 		"DontTransfer": "Don’t Transfer Effect",
 		"View": "View Effect"
+	},
+	"Application": {
+		"Label": "Effects",
+		"Warning": {
+			"NotOwner": "Effects cannot be applied to tokens you don't own."
+		}
 	},
 	"Category": {
 		"Inactive": "Inactive",
@@ -1957,6 +1981,10 @@
 		"Action": {
 			"Remove": "Remove Class"
 		},
+		"Conclusion": {
+			"Label": "Conclusion",
+			"Hint": "Text added after features, but before subclasses."
+		},
 		"DisplayAdvancement": "Display on Class Table",
 		"Equipment": {
 			"Header": "Starting Equipment",
@@ -2011,6 +2039,10 @@
 	"Subclass": {
 		"Action": {
 			"Remove": "Remove Subclass"
+		},
+		"Conclusion": {
+			"Label": "Conclusion",
+			"Hint": "Text added at the end of the page."
 		},
 		"Introduction": {
 			"Hint": "Primary description of the subclass that will appear first."
@@ -2820,6 +2852,7 @@
 		"CheckSpecific": "{skill} Check"
 	},
 	"Passive": {
+		"Label": "Passive Skills",
 		"LabelGeneric": "Passive",
 		"LabelSpecific": "Passive {skill}"
 	},
@@ -3175,7 +3208,8 @@
 		"Pact": {
 			"Label": "Pact Casting",
 			"Trait": "Pact Caster",
-			"Section": "Pact Magic ({circleLowercase})"
+			"Section": "Pact Magic ({circleLowercase})",
+			"Slots": "Pact Slots"
 		}
 	},
 	"Warning": {

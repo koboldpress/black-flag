@@ -9,6 +9,7 @@ const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields
  * @property {string} item - UUID of the referenced subclass item.
  * @property {number} headingLevel - Override the level of included headers.
  * @property {object} description
+ * @property {string} description.conclusion - Text added after features, but before subclasses.
  * @property {string} description.introduction - Introductory description for the subclass.
  */
 export default class SubclassJournalPageData extends BaseDataModel {
@@ -33,6 +34,10 @@ export default class SubclassJournalPageData extends BaseDataModel {
 			// TODO: Replace with UUIDField when possible
 			headingLevel: new NumberField({ initial: 4 }),
 			description: new SchemaField({
+				conclusion: new HTMLField({
+					label: "BF.JournalPage.Class.Conclusion.Label",
+					hint: "BF.JournalPage.Class.Conclusion.Hint"
+				}),
 				introduction: new HTMLField({
 					label: "BF.JournalPage.Class.Introduction.Label",
 					hint: "BF.JournalPage.Subclass.Introduction.Hint"

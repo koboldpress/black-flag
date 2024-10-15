@@ -2,6 +2,14 @@ import { ConsumptionTargetData } from "../data/activity/fields/consumption-targe
 import { localizeConfig } from "../utils/_module.mjs";
 
 /**
+ * List of attribute key paths that can be consumed by Actor type. Auto-populated during the setup stage.
+ * @enum {string[]}
+ */
+export const consumableResources = [];
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Configuration information for activity consumption types.
  *
  * @typedef {LabeledConfiguration} ConsumptionTypeConfiguration
@@ -43,36 +51,28 @@ export const consumptionTypes = {
 		label: "BF.CONSUMPTION.Type.ActivityUses.Label",
 		prompt: "BF.CONSUMPTION.Type.ActivityUses.Prompt",
 		consume: ConsumptionTargetData.consumeActivityUses,
-		consumptionLabels: ConsumptionTargetData.consumptionLabelsActivityUses,
-		scalingModes: {
-			amount: {
-				label: "BF.Consumption.Scaling.Mode.Amount"
-			}
-		}
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsActivityUses
 	},
 	item: {
 		label: "BF.CONSUMPTION.Type.ItemUses.Label",
 		prompt: "BF.CONSUMPTION.Type.ItemUses.Prompt",
 		consume: ConsumptionTargetData.consumeItemUses,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsItemUses,
-		scalingModes: {
-			amount: {
-				label: "BF.Consumption.Scaling.Mode.Amount"
-			}
-		},
 		targetRequiresEmbedded: true,
 		validTargets: ConsumptionTargetData.validItemUsesTargets
+	},
+	attribute: {
+		label: "BF.CONSUMPTION.Type.Attribute.Label",
+		prompt: "BF.CONSUMPTION.Type.Attribute.Prompt",
+		consume: ConsumptionTargetData.consumeAttribute,
+		consumptionLabels: ConsumptionTargetData.consumptionLabelsAttribute,
+		validTargets: ConsumptionTargetData.validAttributeTargets
 	},
 	hitDice: {
 		label: "BF.CONSUMPTION.Type.HitDice.Label",
 		prompt: "BF.CONSUMPTION.Type.HitDice.Prompt",
 		consume: ConsumptionTargetData.consumeHitDice,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsHitDice,
-		scalingModes: {
-			amount: {
-				label: "BF.Consumption.Scaling.Mode.Amount"
-			}
-		},
 		validTargets: ConsumptionTargetData.validHitDiceTargets
 	},
 	spellSlots: {
@@ -81,9 +81,6 @@ export const consumptionTypes = {
 		consume: ConsumptionTargetData.consumeSpellSlots,
 		consumptionLabels: ConsumptionTargetData.consumptionLabelsSpellSlots,
 		scalingModes: {
-			amount: {
-				label: "BF.Consumption.Scaling.Mode.Amount"
-			},
 			circle: {
 				label: "BF.Consumption.Scaling.Mode.Circle"
 			}

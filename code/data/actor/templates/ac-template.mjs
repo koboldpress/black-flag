@@ -15,12 +15,12 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 					baseFormulas: new SetField(new StringField(), {
 						initial: ["unarmored", "armored"]
 					}, { label: "BF.ArmorClass.Formula.DefaultLabel[other]" }),
-					customLabel: new StringField({label: "BF.ArmorClass.CustomLabel"}),
+					customLabel: new StringField({ label: "BF.ArmorClass.CustomLabel" }),
 					formulas: new ArrayField(new SchemaField({
 						label: new StringField(),
-						formula: new FormulaField({deterministic: true}),
-						armored: new BooleanField({nullable: true, initial: null}),
-						shielded: new BooleanField({nullable: true, initial: null})
+						formula: new FormulaField({ deterministic: true }),
+						armored: new BooleanField({ nullable: true, initial: null }),
+						shielded: new BooleanField({ nullable: true, initial: null })
 					}), { label: "BF.ArmorClass.Formula.Label[other]" }),
 					flat: new NumberField({
 						min: 0, integer: true, label: "BF.ArmorClass.Flat.Label", hint: "BF.ArmorClass.Flat.Hint"
@@ -42,13 +42,16 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 	 */
 	prepareBaseArmorFormulas() {
 		const ac = this.attributes.ac;
-		for ( const baseFormula of ac.baseFormulas ) {
-			const data = CONFIG.BlackFlag.armorFormulas[baseFormula];
-			if ( data ) ac.formulas.push(foundry.utils.mergeObject(data, {
-				id: baseFormula
-			}, {inplace: false}));
-		}
 		ac.cover = 0;
+		for ( const [id, data] of Object.entries(CONFIG.BlackFlag.armorFormulas) ) {
+			ac.formulas.push(foundry.utils.mergeObject(data, {
+				enabled: ac.baseFormulas.has(id),
+				id,
+				label: game.i18n.localize(data.label),
+				type: "base"
+			}, {inplace: false}))
+		}
+
 		Object.defineProperty(ac, "defaultLabel", {
 			get() {
 				const label = [];
@@ -65,6 +68,18 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 			},
 			configurable: true
 		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Mark final armor formulas to indicate ones from active effects.
+	 */
+	prepareDerivedArmorFormulas() {
+		for ( const formula of this.attributes.ac.formulas ) {
+			if ( !formula.type ) formula.type = "effect";
+			// TODO: Attribute each non-manual formula to a source (e.g. effect or advancement)
+		}
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -100,6 +115,7 @@ export default class ACTemplate extends foundry.abstract.DataModel {
 
 		// Filter formulas to only ones that match current armor settings
 		const validFormulas = ac.formulas.filter(formula => {
+			if ( formula.enabled === false ) return false;
 			if ( (typeof formula.armored === "boolean") && (formula.armored !== !!acData.armored) ) return false;
 			if ( (typeof formula.shielded === "boolean") && (formula.shielded !== !!acData.shielded) ) return false;
 			return true;

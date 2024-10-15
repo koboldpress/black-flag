@@ -174,6 +174,14 @@ export default class ItemDataModel extends BaseDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any type-specific preparation on the activity activation chat context.
+	 * @param {object} context - Rendering context being prepared.
+	 */
+	async prepareActivationChatContext(context) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*        Socket Event Handlers        */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

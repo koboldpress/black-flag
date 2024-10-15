@@ -106,7 +106,7 @@ export default class SpellcastingAdvancement extends Advancement {
 		 * A hook event that fires to generate the table for custom spellcasting types.
 		 * The actual hook names include the spellcasting type (e.g. `blackFlag.buildPsionicSpellcastingTable`).
 		 * @param {object} table - Table definition being built. *Will be mutated.*
-		 * @param {Item5e} item - Class for which the spellcasting table is being built.
+		 * @param {BlackFlagItem} item - Class for which the spellcasting table is being built.
 		 * @param {SpellcastingConfigurationData} spellcasting - Spellcasting configuration.
 		 * @function blackFlag.buildSpellcastingTable
 		 * @memberof hookEvents

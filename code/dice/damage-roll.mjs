@@ -203,7 +203,7 @@ export default class DamageRoll extends BasicRoll {
 	 *                                                              superseded by the the roll's configuration.
 	 */
 	configureRoll({ critical = {} } = {}) {
-		foundry.utils.mergeObject(critical, this.options.critical ?? {});
+		critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
 
 		let bonus = 0;
 		const multiplier = critical.multiplier ?? 2;
