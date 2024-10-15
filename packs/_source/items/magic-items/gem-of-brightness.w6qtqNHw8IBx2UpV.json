@@ -1,0 +1,315 @@
+{
+  "type": "gear",
+  "name": "Gem of Brightness",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 200,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This prism has 50 charges. While you are holding it, you can use an action to speak one of three command words to cause one of the following effects:</p><ul><li><p>The first command word causes the gem to shed bright light in a 30-foot radius and dim light for an additional 30 feet. This effect doesn’t expend a charge. It lasts until you use a bonus action to repeat the command word or until you use another function of the gem.</p></li><li><p>The second command word expends 1 charge and causes the gem to fire a brilliant beam of light at one creature you can see within 60 feet of you. The creature must succeed on a [[/save 15 CON]] or become blinded for 1 minute. The creature can repeat the save at the end of each of its turns, ending the effect on itself on a success.</p></li><li><p>The third command word expends 5 charges and causes the gem to flare with blinding light in a 30-foot cone originating from it. Each creature in the cone must succeed on a [[/save 15 CON]] or become blinded for 1 minute.</p></li></ul><p>When all of the gem’s charges are expended, the gem becomes a nonmagical jewel worth 50 gp.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "INNHEB9AdWfO8y9G": {
+        "type": "utility",
+        "_id": "INNHEB9AdWfO8y9G",
+        "description": "<p>The first command word causes the gem to shed bright light in a 30-foot radius and dim light for an additional 30 feet. This effect doesn’t expend a charge. It lasts until you use a bonus action to repeat the command word or until you use another function of the gem.</p>",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Bright Light",
+        "img": ""
+      },
+      "vXetbVaidfoPsQbk": {
+        "type": "save",
+        "_id": "vXetbVaidfoPsQbk",
+        "description": "<p>The second command word expends 1 charge and causes the gem to fire a brilliant beam of light at one creature you can see within 60 feet of you. The creature must succeed on a [[/save DC 15 CON]] save or become &Reference[blinded] for 1 minute. The creature can repeat the save at the end of each of its turns, ending the effect on itself on a success.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [
+            {
+              "_id": "AjMYI61owZ5G4PtX"
+            }
+          ],
+          "save": {
+            "ability": "constitution",
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Brilliant Beam",
+        "img": ""
+      },
+      "Ki6vYOaevvkUSjZ3": {
+        "type": "save",
+        "description": "<p>The third command word expends 5 charges and causes the gem to flare with blinding light in a 30-foot cone originating from it. Each creature in the cone must succeed on a [[/save DC 15 CON]] save or become blinded for 1 minute.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [
+            {
+              "_id": "AjMYI61owZ5G4PtX"
+            }
+          ],
+          "save": {
+            "ability": "constitution",
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "5",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "value": "",
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "cone",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "count": "",
+            "type": "creature",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Flare of Light",
+        "img": "",
+        "_id": "Ki6vYOaevvkUSjZ3"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": "50"
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "w6qtqNHw8IBx2UpV",
+  "img": "icons/commodities/gems/gem-faceted-diamond-pink-gold.webp",
+  "effects": [
+    {
+      "name": "Blinded",
+      "img": "icons/commodities/gems/gem-faceted-diamond-pink-gold.webp",
+      "origin": "Compendium.black-flag.items.Item.w6qtqNHw8IBx2UpV",
+      "transfer": false,
+      "_id": "AjMYI61owZ5G4PtX",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.048",
+        "createdTime": 1728594084235,
+        "modifiedTime": 1728594110672,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!w6qtqNHw8IBx2UpV.AjMYI61owZ5G4PtX"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 20900000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.048",
+    "createdTime": 1724985110343,
+    "modifiedTime": 1728594172142,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!w6qtqNHw8IBx2UpV"
+}

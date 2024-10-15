@@ -1,0 +1,215 @@
+{
+  "type": "gear",
+  "name": "Dust of Dryness",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 250,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This small packet contains [[/r 1d6 + 4]] pinches of dust. You can use an action to sprinkle a pinch of it over water. The dust turns a cube of water 15 feet on a side into one marble-sized pellet, which floats or rests near where the dust was sprinkled. The pellet’s weight is negligible.</p><p>A creature can use an action to smash the pellet against a hard surface, causing the pellet to shatter and release the water the dust absorbed. Doing so ends that pellet’s magic.</p><p>An elemental composed mostly of water that is exposed to a pinch of the dust must make a [[/save]], taking [[/damage 10d6 necrotic]] on a failed save, or half as much damage on a successful one.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "h21TPW8CHJ5wPnz2": {
+        "type": "utility",
+        "_id": "h21TPW8CHJ5wPnz2",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "cube",
+            "size": "15"
+          },
+          "affects": {
+            "choice": false,
+            "type": "special",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Sprinkle in Water",
+        "img": ""
+      },
+      "w9ar4Qc8S53bowCl": {
+        "type": "save",
+        "_id": "w9ar4Qc8S53bowCl",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 10,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "necrotic",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": "constitution",
+            "dc": {
+              "ability": "custom",
+              "formula": "13"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": "elemental composed mostly of water"
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Sprinkle on Elemental",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "G35FWXcIcmWq7ixo",
+  "img": "icons/magic/air/air-wave-gust-smoke-yellow.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 5800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.048",
+    "createdTime": 1724983942262,
+    "modifiedTime": 1728426556234,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!G35FWXcIcmWq7ixo"
+}

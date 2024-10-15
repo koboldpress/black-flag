@@ -1,0 +1,127 @@
+{
+  "type": "gear",
+  "name": "Ioun Stone of Regeneration",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "legendary",
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "price": {
+      "value": 50000,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>You regain 15 HP at the end of each hour this pearly white spindle orbits your head, provided that you have at least 1 HP.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.f4AgDaCgKtvuDpSq inline]</p></aside>",
+      "source": {}
+    },
+    "properties": [
+      "magical"
+    ],
+    "activities": {
+      "bhtuez2wPAOnllv8": {
+        "type": "heal",
+        "_id": "bhtuez2wPAOnllv8",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "healing": {
+            "type": "healing",
+            "number": null,
+            "denomination": 0,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": true,
+              "formula": "15"
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "free",
+          "condition": "At the end of each hour while you have at least 1 HP"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Regenerate",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    }
+  },
+  "_id": "XTKc5YVtpDE3xisB",
+  "img": "icons/commodities/stone/rock-chunk-pumice-white.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.047",
+    "createdTime": 1729031669392,
+    "modifiedTime": 1729031715050,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!XTKc5YVtpDE3xisB"
+}

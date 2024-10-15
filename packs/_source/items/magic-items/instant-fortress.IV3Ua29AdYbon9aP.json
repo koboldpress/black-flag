@@ -1,0 +1,138 @@
+{
+  "type": "gear",
+  "name": "Instant Fortress",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 16000,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>You can use an action to place this 1-inch metal cube on the ground and speak its command word. The cube rapidly grows into a fortress that remains until you use an action to dismiss it, which works only if the fortress is empty.</p><p>The fortress is a square tower, 20 feet on a side and 30 feet high, with arrow slits on all sides and a battlement atop it. Its interior is divided into two floors, with a ladder running along one wall to connect them. The ladder ends at a trapdoor leading to the roof. When activated, the tower has a small door on the side facing you. The door opens only at your command, which you can speak as a bonus action. It is immune to the <em>knock</em> spell and similar magic, such as that of a <em>chime of opening</em>.</p><p>Each creature in the area where the fortress appears must make a [[/save]], taking [[/damage]] on a failed save, or half as much damage on a successful one. In either case, the creature is pushed to an unoccupied space outside but next to the fortress. Objects in the area that aren’t being worn or carried take this damage and are pushed automatically.</p><p>The tower is made of adamantine, and its magic prevents it from being tipped over. The roof, the door, and the walls each have 100 HP, immunity to damage from nonmagical weapons excluding siege weapons, and resistance to all other damage. Only a <em>wish</em> spell can repair the fortress. Each casting of <em>wish</em> causes the roof, the door, or one wall to regain 50 HP.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "NaJhhq0KgVKd2cva": {
+        "type": "save",
+        "_id": "NaJhhq0KgVKd2cva",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 10,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": "dexterity",
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Expand/Collapse",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "IV3Ua29AdYbon9aP",
+  "img": "icons/commodities/treasure/token-engraved-blue.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 6400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.047",
+    "createdTime": 1724985860754,
+    "modifiedTime": 1729030757311,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!IV3Ua29AdYbon9aP"
+}

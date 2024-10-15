@@ -1,0 +1,190 @@
+{
+  "type": "gear",
+  "name": "Helm of Telepathy",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 3000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>While wearing this helm, you can use an action to cast the <em>detect thoughts</em> spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply—using a bonus action to do so—while your focus on it continues.</p><p>While focusing on a creature with <em>detect thoughts</em>, you can use an action to cast the <em>suggestion</em> spell (save DC 13) from the helm on that creature. You don’t need to concentrate to maintain <em>suggestion</em> for the duration of the spell, but it ends if the <em>detect thoughts</em> spell ends. Once used, the <em>suggestion</em> property can’t be used again until the next dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "zudrD8EHdPaIfmqx": {
+        "type": "utility",
+        "_id": "zudrD8EHdPaIfmqx",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Detect Thoughts",
+        "img": ""
+      },
+      "9ce3soubmWcma4Ug": {
+        "type": "utility",
+        "_id": "9ce3soubmWcma4Ug",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "type": "action",
+          "condition": "While focusing on a creature with detect thoughts"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Suggestion",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": "0"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "0s028cZHyuiZqn1p",
+  "img": "icons/equipment/head/helm-spangen.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.048",
+    "createdTime": 1724985789403,
+    "modifiedTime": 1728595143299,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!0s028cZHyuiZqn1p"
+}
