@@ -1,4 +1,5 @@
 import { HitPointsConfigurationData, HitPointsValueData } from "../../data/advancement/hit-points-data.mjs";
+import { simplifyBonus } from "../../utils/_module.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -139,7 +140,7 @@ export default class HitPointsAdvancement extends Advancement {
 	_getApplicableValue(value) {
 		const abilityId = CONFIG.BlackFlag.defaultAbilities.hitPoints || "constitution";
 		value = Math.max(value + (this.actor.system.abilities[abilityId]?.mod ?? 0), 1);
-		// value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
+		value += simplifyBonus(this.actor.system.attributes.hp.bonuses.level, this.actor.getRollData());
 		return value;
 	}
 

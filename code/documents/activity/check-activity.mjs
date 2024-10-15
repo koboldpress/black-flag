@@ -1,5 +1,4 @@
 import { CheckData } from "../../data/activity/check-data.mjs";
-import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
 export default class CheckActivity extends Activity {

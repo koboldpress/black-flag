@@ -1,4 +1,3 @@
-import SpellcastingTemplate from "../../data/actor/templates/spellcasting-template.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
 import { linkForUUID, log, numberFormat, Trait } from "../../utils/_module.mjs";
 import JournalEditor from "./journal-editor.mjs";
