@@ -70,6 +70,7 @@
 	}
 
 	aside {
+		margin-block-end: 12px;
 		border-block: 3px solid black;
 		padding-block: 0.5em;
 		padding-inline: 1em;
@@ -81,6 +82,7 @@
 			font-size: var(--font-size-16);
 			text-transform: uppercase;
 		}
+		&:has(.left, .right) { display: flow-root; }
 	}
 
 	blockquote {
@@ -90,6 +92,10 @@
 		padding-inline: 4px;
 		color: var(--bf-blue);
 		font-style: normal;
+	}
+
+	strong {
+		&.blue { color: var(--bf-text-color-blue); }
 	}
 
 	p.centered {
@@ -145,6 +151,7 @@
 		object-fit: scale-down;
 		object-position: center;
 	}
+	.center { margin-inline: auto; }
 	.left { float: left; }
 	.right { float: right; }
 	.size-100 { width: 100px; }

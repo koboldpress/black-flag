@@ -7,10 +7,10 @@ const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", ""
  */
 export function registerCustomEnrichers() {
 	log("Registering custom enrichers");
+	const stringNames = ["attack", "check", "damage", "healing", "save", "skill", "tool", "vehicle"];
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern:
-				/\[\[\/(?<type>attack|check|damage|healing|save|skill|tool|vehicle)(?<config> [^\]]+)?]](?:{(?<label>[^}]+)})?/gi,
+			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
 			enricher: enrichString
 		},
 		{
@@ -312,13 +312,18 @@ async function rollAttack(event) {
 
 	const dialogConfig = {};
 
-	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.ATTACK.Label") });
 	const messageConfig = {
 		data: {
-			flavor: title,
-			title,
-			speaker: ChatMessage.implementation.getSpeaker(),
-			"flags.black-flag.roll.type": "attack"
+			flags: {
+				[game.system.id]: {
+					messageType: "roll",
+					roll: {
+						type: "attack"
+					}
+				}
+			},
+			flavor: game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.ATTACK.Label") }),
+			speaker: ChatMessage.implementation.getSpeaker()
 		}
 	};
 
