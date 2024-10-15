@@ -319,7 +319,11 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			const scale = this.activity.consumption.scale;
 			const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
 			context.scaling = {
-				field: new NumberField({ min: 1, max: Math.max(1, max), label: game.i18n.localize("DND5E.ScalingValue") }),
+				field: new NumberField({
+					min: 1,
+					max: Math.max(1, max),
+					label: game.i18n.localize("BF.Consumption.Scaling.Value")
+				}),
 				name: "scalingValue",
 				// Config stores the scaling increase, but scaling value (increase + 1) is easier to understand in the UI
 				value: Math.clamp((this.config.scaling ?? 0) + 1, 1, max),
