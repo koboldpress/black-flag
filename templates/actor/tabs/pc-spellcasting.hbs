@@ -56,7 +56,12 @@
 					<td class="name">{{ localize section.label }}</td>
 					<td class="slots">
 						<div class="layout">
-							<span class="value">{{ blackFlag-number section.slot.value }}</span>
+							{{#if (and (not @root.modes.editing) section.slot.allowOverride)}}
+								<input type="number" class="value uninput" name="system.spellcasting.slots.{{ @key }}.value"
+								       value="{{ section.slot.value }}">
+							{{else}}
+								<span class="value">{{ blackFlag-number section.slot.value }}</span>
+							{{/if}}
 							<span class="separator">/</span>
 							{{#if (and @root.editable section.slot.allowOverride)}}
 								<input type="number" class="max uninput" name="system.spellcasting.slots.{{ @key }}.override"

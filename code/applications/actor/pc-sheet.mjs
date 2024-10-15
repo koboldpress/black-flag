@@ -347,6 +347,18 @@ export default class PCSheet extends BaseActorSheet {
 			}
 		}
 
+		// Intercept updates to available spell slots
+		const slotUpdates = foundry.utils.getProperty(updates, "system.spellcasting.slots");
+		if (slotUpdates) {
+			const slots = this.actor.system.spellcasting.slots;
+			for (const [slot, update] of Object.entries(slotUpdates)) {
+				if ("value" in update) {
+					const value = slots[slot];
+					foundry.utils.setProperty(updates, `system.spellcasting.slots.${slot}.spent`, value.max - update.value);
+				}
+			}
+		}
+
 		return super._updateObject(event, foundry.utils.flattenObject(updates));
 	}
 
