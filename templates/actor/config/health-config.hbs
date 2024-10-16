@@ -56,9 +56,24 @@
 		{{ formField hp.fields.temp value=hp.source.temp }}
 	</fieldset>
 
-	<fieldset>
+	<fieldset class="hit-dice">
 		<legend>{{ localize "BF.HitDie.Label[other]" }}</legend>
-
+		{{#each hd.types}}
+			<div class="form-group">
+				<label>{{ label }}</label>
+				<div class="form-fields">
+					{{ formInput ../hd.typeFields.spent value=data.available name=(concat keyPath "available") }}
+					<span class="separator">/</span>
+					<span class="max">{{ blackFlag-number data.max }}</span>
+					<button type="button" class="light-button" data-action="rollHitDie" data-denomination="{{ denomination }}"
+									{{ disabled (eq data.available 0) }}>
+						<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d{{ denomination }}.svg"
+														class="die-icon blue" inert></blackFlag-icon>
+						<span>{{ localize "BF.Roll.Action.RollGeneric" }}</span>
+					</button>
+				</div>
+			</div>
+		{{/each}}
 	</fieldset>
 </section>
 

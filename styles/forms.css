@@ -118,6 +118,12 @@ fieldset, .standard-form fieldset {
 		font-weight: bold;
 		line-height: 1.25em;
 	}
+	.form-fields {
+		.separator { flex: 0; }
+		> button {
+			line-height: var(--form-field-height);
+		}
+	}
 }
 
 .drop-area {

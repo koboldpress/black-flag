@@ -43,11 +43,6 @@ export default class HealthConfig extends BaseConfigSheet {
 			fields: context.system.fields.attributes.fields.hp.fields,
 			source: context.system.source.attributes.hp
 		};
-		context.hd = {
-			data: context.system.data.attributes.hd,
-			fields: context.system.fields.attributes.fields.hd.fields,
-			source: context.system.source.attributes.hp
-		};
 
 		// Display positive ability modifier as its own row, but if negative merge into classes totals
 		const ability = CONFIG.BlackFlag.abilities.localized[CONFIG.BlackFlag.defaultAbilities.hitPoints];
@@ -74,16 +69,43 @@ export default class HealthConfig extends BaseConfigSheet {
 					.map(e => ({ ...e, anchor: e.document.toAnchor().outerHTML })))
 		);
 
+		// Create level multiplier HTML
 		context.levels = this.document.system.progression?.level ?? 0;
 		context.levelMultiplier = `
 			<span class="multiplier"><span class="times">&times;</span> ${numberFormat(context.levels)}</span>
 		`;
+
+		context.hd = {
+			data: context.system.data.attributes.hd,
+			fields: context.system.fields.attributes.fields.hd.fields,
+			source: context.system.source.attributes.hp
+		};
+		context.hd.types = Object.entries(context.hd.data.d).map(([denomination, data]) => ({
+			data,
+			denomination,
+			keyPath: `system.attributes.hd.d.${denomination}.`,
+			label: `d${denomination}`
+		}));
+		context.hd.typeFields = context.hd.fields.d.model.fields;
 
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Form Submission           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
+		for (const [denomination, data] of Object.entries(submitData.system?.attributes?.hd?.d ?? {})) {
+			if (!("available" in data)) continue;
+			data.spent = this.document.system.attributes.hd.d[denomination].max - data.available;
+			delete data.available;
+		}
+		return submitData;
+	}
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

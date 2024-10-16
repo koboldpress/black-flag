@@ -10,9 +10,15 @@
 	--die-green-color: color-mix(in oklab, var(--bf-dice-color-critical-success), black 20%);
 	--die-red-color: color-mix(in oklab, var(--bf-dice-color-critical-failure), black 20%);
 
-	--icon-fill: lch(0%, 0%, 0deg);
+	--icon-fill: currentcolor;
 	&.blue { --icon-fill: var(--die-blue-color); }
 	&.green { --icon-fill: var(--die-green-color); }
 	&.red { --icon-fill: var(--die-red-color); }
 	&.white { --icon-fill: lch(100%, 0%, 0deg); }
+}
+
+.light-button:not([disabled]):is(:hover, :focus-visible), .heavy-button:not(:hover, :focus-visible) {
+	.die-icon {
+		--icon-fill: white;
+	}
 }
