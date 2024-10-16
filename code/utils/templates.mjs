@@ -210,6 +210,8 @@ export function registerHandlebarsHelpers() {
 		"blackFlag-multiSelect": multiSelect,
 		"blackFlag-notificationBadge": notificationBadge,
 		"blackFlag-number": (number, options) => numberFormat(number, options.hash),
+		"blackFlag-numberParts": (number, options) =>
+			new Handlebars.SafeString(numberParts(number, options.hash)),
 		"blackFlag-signedNumber": (number, options) =>
 			new Handlebars.SafeString(numberParts(number, { sign: true, ...options.hash }))
 	});

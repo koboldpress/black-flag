@@ -6,7 +6,7 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
 export default class BaseConfigSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
 	/** @override */
 	static DEFAULT_OPTIONS = {
-		classes: ["black-flag", "config-sheet"],
+		classes: ["black-flag", "config-sheet", "standard-form"],
 		sheetConfig: false,
 		actions: {
 			addModifier: BaseConfigSheet.#addModifier,

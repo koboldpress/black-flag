@@ -27,6 +27,15 @@ export default class PCData extends ActorDataModel.mixin(
 	SpellcastingTemplate,
 	TraitsTemplate
 ) {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static LOCALIZATION_PREFIXES = ["BF.PC"];
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static metadata = {
 		type: "pc",
@@ -52,19 +61,12 @@ export default class PCData extends ActorDataModel.mixin(
 						proficiency: new ProficiencyField({ rounding: false })
 					})
 				}),
-				{
-					initialKeys: CONFIG.BlackFlag.abilities,
-					prepareKeys: true,
-					label: "BF.Ability.Label[other]"
-				}
+				{ initialKeys: CONFIG.BlackFlag.abilities, prepareKeys: true }
 			),
 			attributes: new SchemaField({
-				attunement: new SchemaField(
-					{
-						max: new NumberField({ initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" })
-					},
-					{ label: "BF.Attunement.Label" }
-				),
+				attunement: new SchemaField({
+					max: new NumberField({ initial: 3, min: 0, integer: true, label: "BF.Attunement.Max.Label" })
+				}),
 				death: new SchemaField({
 					status: new StringField({ initial: "alive", blank: false }),
 					success: new NumberField({
@@ -96,44 +98,33 @@ export default class PCData extends ActorDataModel.mixin(
 						})
 					})
 				}),
-				hd: new SchemaField(
-					{
-						d: new MappingField(
-							new SchemaField({
-								spent: new NumberField({ min: 0, integer: true })
-							})
-						)
-						// Recovery percentage
-					},
-					{ label: "BF.HitDie.Label[other]" }
-				),
-				hp: new SchemaField(
-					{
-						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
-						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
-						// Temp max
-						bonuses: new SchemaField({
-							level: new FormulaField({ deterministic: true }),
-							overall: new FormulaField({ deterministic: true })
+				hd: new SchemaField({
+					d: new MappingField(
+						new SchemaField({
+							spent: new NumberField({ min: 0, integer: true })
 						})
-						// Multiplier
-					},
-					{ label: "BF.HitPoint.Label[other]" }
-				),
-				initiative: new SchemaField(
-					{
-						ability: new StringField({ label: "BF.Initiative.Ability.Label" }),
-						proficiency: new ProficiencyField()
-					},
-					{ label: "BF.Initiative.Label" }
-				),
-				luck: new SchemaField(
-					{
-						value: new NumberField({ min: 0, max: 5, integer: true }),
-						formula: new FormulaField({ label: "BF.Luck.Formula" })
-					},
-					{ label: "BF.Luck.Label" }
-				)
+					)
+					// Recovery percentage
+				}),
+				hp: new SchemaField({
+					bonuses: new SchemaField({
+						level: new FormulaField({ deterministic: true }),
+						overall: new FormulaField({ deterministic: true })
+					}),
+					override: new NumberField({ integer: true }),
+					temp: new NumberField({ min: 0, integer: true }),
+					value: new NumberField({ min: 0, integer: true })
+					// Temp max
+					// Multiplier
+				}),
+				initiative: new SchemaField({
+					ability: new StringField({ label: "BF.Initiative.Ability.Label" }),
+					proficiency: new ProficiencyField()
+				}),
+				luck: new SchemaField({
+					value: new NumberField({ min: 0, max: 5, integer: true }),
+					formula: new FormulaField({ label: "BF.Luck.Formula" })
+				})
 			}),
 			biography: new SchemaField({
 				age: new StringField(),
@@ -185,47 +176,44 @@ export default class PCData extends ActorDataModel.mixin(
 					custom: new ArrayField(new StringField())
 				})
 			}),
-			progression: new SchemaField(
-				{
-					abilities: new SchemaField({
-						method: new StringField(),
-						rolls: new ArrayField(new RollField({ nullable: true })),
-						assignments: new MappingField(new NumberField({ min: 0, integer: true })),
-						bonuses: new MappingField(new NumberField({ integer: true }))
+			progression: new SchemaField({
+				abilities: new SchemaField({
+					method: new StringField(),
+					rolls: new ArrayField(new RollField({ nullable: true })),
+					assignments: new MappingField(new NumberField({ min: 0, integer: true })),
+					bonuses: new MappingField(new NumberField({ integer: true }))
+				}),
+				advancement: new AdvancementValueField(),
+				background: new LocalDocumentField(foundry.documents.BaseItem),
+				heritage: new LocalDocumentField(foundry.documents.BaseItem),
+				lineage: new LocalDocumentField(foundry.documents.BaseItem),
+				levels: new MappingField(
+					new SchemaField({
+						class: new LocalDocumentField(foundry.documents.BaseItem),
+						time: new TimeField()
 					}),
-					advancement: new AdvancementValueField(),
-					background: new LocalDocumentField(foundry.documents.BaseItem),
-					heritage: new LocalDocumentField(foundry.documents.BaseItem),
-					lineage: new LocalDocumentField(foundry.documents.BaseItem),
-					levels: new MappingField(
-						new SchemaField({
-							class: new LocalDocumentField(foundry.documents.BaseItem),
-							time: new TimeField()
+					{ label: "BF.Level.Label[other]" }
+				),
+				xp: new SchemaField(
+					{
+						value: new NumberField({
+							nullable: false,
+							initial: 0,
+							min: 0,
+							integer: true,
+							label: "BF.ExperiencePoints.Current.Label"
 						}),
-						{ label: "BF.Level.Label[other]" }
-					),
-					xp: new SchemaField(
-						{
-							value: new NumberField({
-								nullable: false,
-								initial: 0,
-								min: 0,
-								integer: true,
-								label: "BF.ExperiencePoints.Current.Label"
-							}),
-							log: new ArrayField(
-								new SchemaField({
-									amount: new NumberField({ nullable: false, initial: 0, min: 0, integer: true }),
-									time: new TimeField(),
-									source: new StringField()
-								})
-							)
-						},
-						{ label: "BF.ExperiencePoints.Label" }
-					)
-				},
-				{ label: "BF.Progression.Label" }
-			),
+						log: new ArrayField(
+							new SchemaField({
+								amount: new NumberField({ nullable: false, initial: 0, min: 0, integer: true }),
+								time: new TimeField(),
+								source: new StringField()
+							})
+						)
+					},
+					{ label: "BF.ExperiencePoints.Label" }
+				)
+			}),
 			traits: new SchemaField({
 				type: new CreatureTypeField({ swarm: false })
 			})
@@ -496,20 +484,25 @@ export default class PCData extends ActorDataModel.mixin(
 	 * @param {object} rollData
 	 */
 	prepareDerivedHitPoints(rollData) {
-		const hpAdvancements = Object.values(this.progression.classes)
-			.map(c => c.document?.system.advancement.byType("hitPoints")[0])
-			.filter(a => a);
-		const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
-		if (!hpAdvancement) return;
-
 		const hp = this.attributes.hp;
-		const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
 
-		const base = hpAdvancements.reduce((total, a) => total + a.getAdjustedTotal(ability?.mod ?? 0), 0);
-		const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.progression.level;
-		const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+		if (hp.override) hp.max = hp.override;
+		else {
+			const hpAdvancements = Object.values(this.progression.classes)
+				.map(c => c.document?.system.advancement.byType("hitPoints")[0])
+				.filter(a => a);
+			const hpAdvancement = this.progression.levels[1]?.class?.system.advancement.byType("hitPoints")[0];
+			if (!hpAdvancement) return;
 
-		hp.max = base + levelBonus + overallBonus;
+			const ability = this.abilities[CONFIG.BlackFlag.defaultAbilities.hitPoints];
+
+			const base = hpAdvancements.reduce((total, a) => total + a.getAdjustedTotal(ability?.mod ?? 0), 0);
+			const levelBonus = simplifyBonus(hp.bonuses.level, rollData) * this.progression.level;
+			const overallBonus = simplifyBonus(hp.bonuses.overall, rollData);
+
+			hp.max = base + levelBonus + overallBonus;
+		}
+
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
 		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;

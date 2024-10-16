@@ -11,6 +11,7 @@ export { default as BasicConfigSheet } from "./api/base-config-sheet.mjs";
 export { default as AbilityConfig } from "./config/ability-config.mjs";
 export { default as ArmorClassConfig } from "./config/armor-class-config.mjs";
 export { default as BaseConfig } from "./config/base-config.mjs";
+export { default as HealthConfig } from "./config/health-config.mjs";
 export { default as InitiativeConfig } from "./config/initiative-config.mjs";
 export { default as LanguageConfig } from "./config/language-config.mjs";
 export { default as LuckConfig } from "./config/luck-config.mjs";
