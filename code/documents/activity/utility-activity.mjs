@@ -1,7 +1,15 @@
 import { UtilityData } from "../../data/activity/utility-data.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for arbitrary rolls and everything else.
+ */
 export default class UtilityActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,

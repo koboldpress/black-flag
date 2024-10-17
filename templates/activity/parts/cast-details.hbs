@@ -1,0 +1,19 @@
+<fieldset>
+	<legend>{{ localize "BF.CAST.FIELDS.spell.label" }}</legend>
+	{{#if circleOptions}}
+		{{ formField spell.fields.circle name="system.spell.circle" value=spell.data.circle options=circleOptions
+		             rootId=partId }}
+	{{/if}}
+	{{ formField spell.fields.properties name="system.spell.properties" value=spell.data.properties
+	             options=propertyOptions rootId=partId }}
+	{{#with spell.fields.challenge.fields as |fields|}}
+		{{ formField fields.override name="system.spell.challenge.override" value=../spell.data.challenge.override
+		             rootId=../partId }}
+		{{#if ../spell.data.challenge.override}}
+			{{ formField fields.attack name="system.spell.challenge.attack" value=../spell.data.challenge.attack
+			             rootId=../partId }}
+			{{ formField fields.save name="system.spell.challenge.save" value=../spell.data.challenge.save
+			             rootId=../partId }}
+		{{/if}}
+	{{/with}}
+</fieldset>

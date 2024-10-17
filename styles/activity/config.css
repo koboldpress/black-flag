@@ -8,8 +8,6 @@
 	}
 }
 .activity-config form {
-
-
 	[data-tab="description"] {
 		.editor {
 			min-height: 150px;
@@ -23,5 +21,22 @@
 	.vs {
 		padding-block-start: 1em;
 		align-self: center;
+	}
+}
+
+.cast-activity.sheet {
+	.spell-link {
+		.item-entry {
+			.name {
+				display: flex;
+				gap: 8px;
+				align-items: center;
+				.icon {
+					width: 32px;
+					height: 32px;
+				}
+			}
+			.controls { flex: 0; }
+		}
 	}
 }

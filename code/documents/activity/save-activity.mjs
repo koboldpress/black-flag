@@ -2,7 +2,15 @@ import { SaveData } from "../../data/activity/save-data.mjs";
 import { numberFormat, simplifyBonus } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for making saving throws and rolling damage.
+ */
 export default class SaveActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,

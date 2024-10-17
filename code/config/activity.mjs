@@ -27,6 +27,12 @@ export const _activityTypes = {
 			config: applications.AttackSheet
 		}
 	},
+	cast: {
+		documentClass: documents.CastActivity,
+		sheetClasses: {
+			config: applications.CastSheet
+		}
+	},
 	check: {
 		documentClass: documents.CheckActivity,
 		sheetClasses: {

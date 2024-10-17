@@ -3,7 +3,14 @@ import { AttackData } from "../../data/activity/attack-data.mjs";
 import { buildRoll, getTargetDescriptors, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for rolling attacks and damage.
+ */
 export default class AttackActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(

@@ -108,7 +108,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 	/** @inheritDoc */
 	_initializeApplicationOptions(options) {
 		options = super._initializeApplicationOptions(options);
-		options.uniqueId = `${this.constructor.name}-${options.document.uuid}`;
+		options.uniqueId = CSS.escape(`${this.constructor.name}-${options.document.uuid}`);
 		return options;
 	}
 

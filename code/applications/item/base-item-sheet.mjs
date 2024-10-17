@@ -114,6 +114,12 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 			return advancementElement?._onDrop(event);
 		}
 
+		const isSpell = data.type === "Item" && fromUuidSync(data.uuid, { strict: false })?.type === "spell";
+		if (data.type === "Activity" || isSpell) {
+			const activitiesElement = this.element[0].querySelector("blackFlag-activities");
+			return activitiesElement?._onDrop(event);
+		}
+
 		super._onDrop(event);
 	}
 }

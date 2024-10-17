@@ -903,6 +903,47 @@
 	"Label[other]": "Bonuses"
 },
 
+"BF.CAST": {
+	"Title": "Cast",
+	"Hint": "Cast a customized version of a spell.",
+	"FIELDS": {
+		"spell": {
+			"label": "Casting Details",
+			"challenge": {
+				"attack": {
+					"label": "Attack Bonus",
+					"hint": "Flat to hit bonus in place of the spell's normal attack bonus."
+				},
+				"save": {
+					"label": "Save DC",
+					"hint": "Flat DC to use in place of the spell's normal save DC."
+				},
+				"override": {
+					"label": "Override Values",
+					"hint": "Override the spell's normal attack bonus & DC when casting."
+				}
+			},
+			"circle": {
+				"label": "Casting Circle",
+				"hint": "Base circle to cast the spell, if different than the spell's circle."
+			},
+			"properties": {
+				"label": "Ignored Properties",
+				"hint": "Spell components & tags to ignore while casting."
+			},
+			"uuid": {
+				"label": "Spell to Cast"
+			}
+		}
+	},
+	"SECTIONS": {
+		"Spell": "Spell"
+	},
+	"Action": {
+		"RemoveSpell": "Remove Spell"
+	}
+},
+
 "BF.CHECK": {
 	"Title": "Check",
 	"Hint": "Make one or more ability checks with optional proficiency.",

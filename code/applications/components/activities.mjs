@@ -249,11 +249,24 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 		if (data.uuid?.startsWith(this.item.uuid)) return this._onSortActivity(event, data);
 
 		try {
-			const activity = (await fromUuid(data.uuid)).toObject() ?? data.data;
-			if (!activity) return false;
+			const doc = (await fromUuid(data.uuid)).toObject() ?? data.data;
+			if (!doc) return false;
 
-			delete activity._id;
-			this.item.createEmbeddedDocuments("Activity", [activity]);
+			// Drop an activity
+			if (data.type === "Activity") {
+				delete doc._id;
+				await this.item.createEmbeddedDocuments("Activity", [doc]);
+			}
+
+			// Create a Cast activity if spell is dropped
+			else if (data.type === "Item" && doc.type === "spell") {
+				await this.item.createEmbeddedDocuments("Activity", [
+					{
+						type: "cast",
+						system: { spell: { uuid: data.uuid } }
+					}
+				]);
+			}
 		} finally {
 			DragDrop.finishDragEvent(event);
 		}
@@ -289,7 +302,8 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	 * @returns {boolean}
 	 */
 	_validateDrop(data) {
-		if (data.type !== "Activity") return false;
-		return true;
+		if (data.type === "Activity") return true;
+		if (data.type === "Item") return true;
+		return false;
 	}
 }
