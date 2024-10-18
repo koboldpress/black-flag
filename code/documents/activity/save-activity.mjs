@@ -44,8 +44,13 @@ export default class SaveActivity extends Activity {
 		const layout = document.createElement("div");
 		layout.classList.add("layout");
 		layout.innerHTML = `<span class="dc">${numberFormat(this.system.save.dc.final)}</span>`;
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.save.ability];
-		layout.innerHTML += `<span class="ability">${ability}</span>`;
+		const abilities = Array.from(this.system.save.ability).map(
+			k => CONFIG.BlackFlag.abilities.localizedAbbreviations[k]
+		);
+		if (abilities.length)
+			layout.innerHTML += `<span class="ability">${game.i18n
+				.getListFormatter({ style: "narrow" })
+				.format(abilities)}</span>`;
 		return layout.outerHTML;
 	}
 
@@ -88,22 +93,27 @@ export default class SaveActivity extends Activity {
 
 	/** @inheritDoc */
 	_activationChatButtons() {
-		const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[this.system.save.ability] ?? "";
-		const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
-		const buttons = [
-			{
+		const buttons = [];
+
+		const makeButton = abilityId => {
+			const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[abilityId] ?? "";
+			const dc = game.i18n.format("BF.Enricher.DC.Phrase", { dc: this.system.save.dc.final, check: ability });
+			buttons.push({
 				label: `
-				<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
-				<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
-			`,
+					<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
+					<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
+				`,
 				dataset: {
 					dc: this.system.save.dc.final,
-					ability: this.system.save.ability,
+					ability: abilityId,
 					action: "rollSave",
 					visibility: "all"
 				}
-			}
-		];
+			});
+		};
+		this.system.save.ability.forEach(a => makeButton(a));
+		if (!this.system.save.ability.size) makeButton();
+
 		if (this.hasDamage)
 			buttons.push({
 				label: game.i18n.localize("BF.DAMAGE.Label"),
@@ -112,6 +122,7 @@ export default class SaveActivity extends Activity {
 					action: "rollDamage"
 				}
 			});
+
 		return buttons.concat(super._activationChatButtons());
 	}
 
@@ -126,7 +137,6 @@ export default class SaveActivity extends Activity {
 		const messageConfig = foundry.utils.mergeObject(
 			{
 				"data.flags.black-flag.save": {
-					ability: this.system.save.ability,
 					dc: this.system.save.dc.final
 				}
 			},
@@ -168,7 +178,7 @@ export default class SaveActivity extends Activity {
 			const speaker = ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document });
 			await token.actor.rollAbilitySave(
 				{
-					ability: target.dataset.ability ?? this.system.save.ability,
+					ability: target.dataset.ability ?? this.system.save.ability.first(),
 					event,
 					target: Number.isFinite(dc) ? dc : this.system.save.dc.final
 				},

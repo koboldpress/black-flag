@@ -576,9 +576,11 @@ async function enrichSave(config, label, options) {
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
+
 	if (!config.ability) {
 		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
-		config.ability = ability;
+		// TODO: Update to support multiple abilities
+		config.ability = foundry.utils.getType(ability) === "Set" ? ability.first() : ability;
 		config.dc ??= dc;
 		if (activity) config.activity = activity.uuid;
 	}

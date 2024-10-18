@@ -4,18 +4,19 @@ import { DamageField, FormulaField } from "../fields/_module.mjs";
 import BaseActivity from "./base-activity.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 
-const { ArrayField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the save activity.
  *
- * @property {string} ability - Ability required when rolling a saving throw.
  * @property {object} damage
  * @property {ExtendedDamageData[]} damage.parts - Parts of damage to include.
- * @property {object} dc
- * @property {string} dc.ability - Ability used to calculate the DC if not automatically calculated.
- * @property {string} dc.formula - DC formula if manually set.
  * @property {EffectApplicationData[]} effects - Effects to be applied.
+ * @property {object} save
+ * @property {string} save.ability - Abilities required when rolling a saving throw.
+ * @property {object} save.dc
+ * @property {string} save.dc.ability - Ability used to calculate the DC if not automatically calculated.
+ * @property {string} save.dc.formula - DC formula if manually set.
  */
 export class SaveData extends ActivityDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -33,7 +34,7 @@ export class SaveData extends ActivityDataModel {
 			damage: new SchemaField({ parts: new ArrayField(new DamageField()) }),
 			effects: new ArrayField(new AppliedEffectField()),
 			save: new SchemaField({
-				ability: new StringField({ initial: () => Object.keys(CONFIG.BlackFlag.abilities)[0] }),
+				ability: new SetField(new StringField()),
 				dc: new SchemaField({
 					ability: new StringField(),
 					formula: new FormulaField({ deterministic: true })
@@ -71,6 +72,12 @@ export class SaveData extends ActivityDataModel {
 		if ("dc" in source) {
 			if ("value" in source.dc) foundry.utils.setProperty(source, "save.dc.ability", source.dc.ability);
 			if ("formula" in source.dc) foundry.utils.setProperty(source, "save.dc.formula", source.dc.formula);
+		}
+
+		// Added in 0.10.049
+		if (foundry.utils.getType(source.save?.ability) === "string") {
+			if (source.save.ability) source.save.ability = [source.save.ability];
+			else source.save.ability = [];
 		}
 	}
 
