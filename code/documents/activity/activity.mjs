@@ -535,7 +535,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
 		 * @param {ActivityActivationResults} results - Results of the activation.
 		 */
-		Hooks.callAll("blackFlag.postActivateActivity", activity, activationConfig, results);
+		if (Hooks.call("blackFlag.postActivateActivity", activity, activationConfig, results) === false) return;
+
+		// Trigger any primary action provided by this activity
+		activity._triggerSubsequentActions(activationConfig, results);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -940,6 +943,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	async _finalizeActivation(config, results) {
 		results.templates = config.create?.measuredTemplate ? await Activity.#placeTemplate.call(this) : [];
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Trigger a primary activation action defined by the activity (such as opening the attack dialog for attack rolls).
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
+	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @protected
+	 */
+	async _triggerSubsequentActions(config, results) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */

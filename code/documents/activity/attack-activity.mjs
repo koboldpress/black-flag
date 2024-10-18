@@ -123,6 +123,13 @@ export default class AttackActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _triggerSubsequentActions(config, results) {
+		this.rollAttack({ event: config.event });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
