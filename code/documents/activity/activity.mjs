@@ -6,6 +6,7 @@ import {
 	areKeysPressed,
 	buildRoll,
 	getTargetDescriptors,
+	localizeSchema,
 	numberFormat,
 	simplifyFormula
 } from "../../utils/_module.mjs";
@@ -62,7 +63,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	static localize() {
 		Localization.localizeDataModel(this);
-		if (this.metadata.dataModel) Localization.localizeDataModel(this.metadata.dataModel);
+		if (this.metadata.dataModel) this.metadata.dataModel.localize();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -75,7 +76,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @internal
 	 */
 	static _localizeSchema(schema, prefixes) {
-		Localization.localizeDataModel({ schema }, { prefixes });
+		localizeSchema(schema, prefixes);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

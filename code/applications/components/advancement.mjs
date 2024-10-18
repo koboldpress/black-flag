@@ -222,7 +222,7 @@ export default class AdvancementElement extends DocumentSheetAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

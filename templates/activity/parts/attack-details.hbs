@@ -28,6 +28,6 @@
 			<input type="checkbox" name="system.attack.flat" {{ checked source.system.attack.flat }}>
 		</label>
 	</div>
-	{{ formField systemFields.attack.fields.critical.fields.threshold name="system.attack.critical.threshold"
-	   value=source.system.attack.critical.threshold }}
+	{{ formField systemFields.attack.fields.critical.fields.threshold value=source.system.attack.critical.threshold
+	             rootId=partId }}
 </fieldset>

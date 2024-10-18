@@ -21,7 +21,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 		viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
 		editPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
 		actions: {
-			copyUuid: { handler: PseudoDocumentSheet.#onCopyUuid, buttons: [0, 2] }
+			copyUuid: { handler: PseudoDocumentSheet.#onCopyUuid, buttons: [0, 2] },
+			toggleCollapsed: PseudoDocumentSheet.#toggleCollapsed
 		},
 		dragDropHandlers: {
 			dragstart: null,
@@ -61,6 +62,18 @@ export default class PseudoDocumentSheet extends BFApplication {
 	 */
 	get document() {
 		return this.item.getEmbeddedDocument(this.#pseudoDocumentType, this.#pseudoDocumentId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Expanded states for additional settings sections.
+	 * @type {Map<string, boolean>}
+	 */
+	#expandedSections = new Map();
+
+	get expandedSections() {
+		return this.#expandedSections;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -170,6 +183,8 @@ export default class PseudoDocumentSheet extends BFApplication {
 
 	/** @inheritDoc */
 	_onRender(context, options) {
+		super._onRender(context, options);
+
 		if (this.options.dragSelectors.length) {
 			const drag = this.#onDragEvent.bind(this);
 			for (const selector of this.options.dragSelectors) {
@@ -179,6 +194,11 @@ export default class PseudoDocumentSheet extends BFApplication {
 					element.addEventListener("dragend", drag);
 				}
 			}
+		}
+		for (const element of this.element.querySelectorAll("[data-expand-id]")) {
+			element
+				.querySelector(".collapsible")
+				?.classList.toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
 		}
 		if (!this.isEditable) this._disableFields();
 	}
@@ -210,10 +230,12 @@ export default class PseudoDocumentSheet extends BFApplication {
 
 	/**
 	 * Handle click events to copy the UUID of this document to clipboard.
-	 * @param {PointerEvent} event
+	 * @this {PseudoDocumentSheet}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
 	 * @this {DocumentSheetV2}
 	 */
-	static #onCopyUuid(event) {
+	static #onCopyUuid(event, target) {
 		event.preventDefault(); // Don't open context menu
 		event.stopPropagation(); // Don't trigger other events
 		if (event.detail > 1) return; // Ignore repeated clicks
@@ -224,6 +246,25 @@ export default class PseudoDocumentSheet extends BFApplication {
 		ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", { label, type, id }));
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle toggling the collapsed state of an additional settings section.
+	 * @this {PseudoDocumentSheet}
+	 * @param {Event} event - Triggering click event.
+	 * @param {HTMLElement} target - Button that was clicked.
+	 */
+	static #toggleCollapsed(event, target) {
+		if (event.target.closest(".collapsible-content")) return;
+		target.classList.toggle("collapsed");
+		this.#expandedSections.set(
+			target.closest("[data-expand-id]")?.dataset.expandId,
+			!target.classList.contains("collapsed")
+		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Form Submission           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
@@ -305,7 +346,7 @@ export default class PseudoDocumentSheet extends BFApplication {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

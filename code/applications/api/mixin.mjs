@@ -70,4 +70,30 @@ export default Base =>
 				else element.disabled = true;
 			}
 		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*         Life-Cycle Handlers         */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
+		_onRender(context, options) {
+			super._onRender(context, options);
+
+			// Allow multi-select tags to be removed when the whole tag is clicked.
+			this.element.querySelectorAll("multi-select").forEach(select => {
+				if (select.disabled) return;
+				select.querySelectorAll(".tag").forEach(tag => {
+					tag.classList.add("remove");
+					tag.querySelector(":scope > span")?.classList.add("remove");
+				});
+			});
+
+			// Add special styling for label-top hints.
+			this.element.querySelectorAll(".label-top > p.hint").forEach(hint => {
+				const label = hint.parentElement.querySelector(":scope > label");
+				if (!label) return;
+				label.classList.add("hinted-label");
+				label.dataset.tooltip = hint.innerHTML;
+			});
+		}
 	};

@@ -1,6 +1,6 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 	{{#if activity.activation.canOverride}}
-		{{ formField fields.activation.fields.override value=activity.activation.override }}
+		{{ formField fields.activation.fields.override value=activity.activation.override rootId=partId }}
 	{{/if}}
 
 	<fieldset class="activation" {{ disabled disabled.activation }}>
@@ -33,7 +33,7 @@
 	</fieldset>
 
 	{{#if activity.duration.canOverride}}
-		{{ formField fields.duration.fields.override value=activity.duration.override }}
+		{{ formField fields.duration.fields.override value=activity.duration.override rootId=partId }}
 	{{/if}}
 
 	<fieldset class="duration" {{ disabled disabled.duration }}>
@@ -59,6 +59,6 @@
 				<input type="text" name="duration.special" value="{{ data.duration.special }}">
 			</label>
 		{{/if}}
-		{{ formField fields.duration.fields.concentration value=data.duration.concentration }}
+		{{ formField fields.duration.fields.concentration value=data.duration.concentration rootId=partId }}
 	</fieldset>
 </section>

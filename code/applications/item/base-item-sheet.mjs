@@ -100,7 +100,7 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 	async _onAction(event) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

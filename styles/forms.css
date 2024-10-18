@@ -124,6 +124,27 @@ fieldset, .standard-form fieldset {
 			line-height: var(--form-field-height);
 		}
 	}
+	&.label-top {
+		--label-height: 10px;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 3px;
+
+		> * { flex: unset; }
+		> label {
+			block-size: var(--label-height);
+			font-size: var(--font-size-11);
+			font-variant: small-caps;
+			line-height: var(--label-height);
+			text-transform: none;
+		}
+		> .hinted-label {
+			text-underline-offset: 1px;
+		}
+		> p.hint {
+			display: none;
+		}
+	}
 }
 
 .drop-area {

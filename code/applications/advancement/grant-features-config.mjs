@@ -25,7 +25,7 @@ export default class GrantFeaturesConfig extends AdvancementConfig {
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

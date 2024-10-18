@@ -277,7 +277,7 @@ export default class EffectsElement extends DocumentSheetAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

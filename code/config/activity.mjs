@@ -57,6 +57,12 @@ export const _activityTypes = {
 			config: applications.SaveSheet
 		}
 	},
+	summon: {
+		documentClass: documents.SummonActivity,
+		sheetClasses: {
+			config: applications.SummonSheet
+		}
+	},
 	utility: {
 		documentClass: documents.UtilityActivity,
 		sheetClasses: {

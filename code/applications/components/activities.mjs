@@ -171,7 +171,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

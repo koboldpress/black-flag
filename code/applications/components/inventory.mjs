@@ -447,7 +447,7 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

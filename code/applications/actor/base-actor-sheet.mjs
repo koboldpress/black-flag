@@ -458,7 +458,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

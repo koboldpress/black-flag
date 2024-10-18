@@ -1,0 +1,25 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	<fieldset>
+		<legend>{{ localize "BF.SUMMON.CreatureChanges.Label" }}</legend>
+		<div class="form-group">
+			<p class="hint">{{ localize "BF.SUMMON.CreatureChanges.Hint" }}</p>
+		</div>
+		{{ formField systemFields.match.fields.proficiency value=source.system.match.proficiency }}
+		{{ formField systemFields.bonuses.fields.ac value=source.system.bonuses.ac }}
+		{{ formField systemFields.bonuses.fields.hp value=source.system.bonuses.hp }}
+		{{ formField systemFields.creatureSizes value=source.system.creatureSizes options=creatureSizeOptions }}
+		{{ formField systemFields.creatureTypes value=source.system.creatureTypes options=creatureTypeOptions }}
+	</fieldset>
+	<fieldset>
+		<legend>{{ localize "BF.SUMMON.ItemChanges.Label" }}</legend>
+		<div class="form-group">
+			<p class="hint">{{ localize "BF.SUMMON.ItemChanges.Hint" }}</p>
+		</div>
+		{{ formField systemFields.match.fields.attacks value=source.system.match.attacks }}
+		{{ formField systemFields.match.fields.saves value=source.system.match.saves }}
+		{{ formField systemFields.bonuses.fields.attackDamage value=source.system.bonuses.attackDamage }}
+		{{ formField systemFields.bonuses.fields.saveDamage value=source.system.bonuses.saveDamage }}
+		{{ formField systemFields.bonuses.fields.healing value=source.system.bonuses.healing }}
+	</fieldset>
+	{{> "systems/black-flag/templates/activity/parts/activity-effects.hbs" }}
+</section>

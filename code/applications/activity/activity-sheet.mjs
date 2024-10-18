@@ -213,6 +213,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 					if (!data.effect) return null;
 					const effect = {
 						data,
+						collapsed: this.expandedSections.get(`effect.${data._id}`) ? "" : "collapsed",
 						effect: data.effect,
 						fields: this.activity.system.schema.fields.effects.element.fields,
 						link: data.effect.toAnchor().outerHTML,
@@ -413,6 +414,8 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		}
 	}
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Form Submission           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
