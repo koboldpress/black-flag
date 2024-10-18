@@ -68,10 +68,12 @@ export class SaveData extends ActivityDataModel {
 		}
 
 		// Added in 0.10.046
-		if ("ability" in source) foundry.utils.setProperty(source, "save.ability", source.ability);
-		if ("dc" in source) {
-			if ("value" in source.dc) foundry.utils.setProperty(source, "save.dc.ability", source.dc.ability);
-			if ("formula" in source.dc) foundry.utils.setProperty(source, "save.dc.formula", source.dc.formula);
+		if (!("save" in source)) {
+			if ("ability" in source) foundry.utils.setProperty(source, "save.ability", source.ability);
+			if ("dc" in source) {
+				if ("value" in source.dc) foundry.utils.setProperty(source, "save.dc.ability", source.dc.ability);
+				if ("formula" in source.dc) foundry.utils.setProperty(source, "save.dc.formula", source.dc.formula);
+			}
 		}
 
 		// Added in 0.10.049
