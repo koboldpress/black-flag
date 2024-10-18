@@ -450,7 +450,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
-		if (!this.item.isEmbedded || !this.item.isOwner) return;
+		if (!this.item.isEmbedded || !this.item.isOwner || this.item.pack) return;
 
 		let item = this.item.clone({}, { keepId: true });
 		let activity = item.system.activities.get(this.id);
@@ -967,6 +967,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollDamage(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
+
 		const rollConfig = this.getDamageConfig(config);
 		rollConfig.subject = this;
 

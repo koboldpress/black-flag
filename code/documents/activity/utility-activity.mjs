@@ -60,6 +60,7 @@ export default class UtilityActivity extends Activity {
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollFormula(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
 		if (!this.system.roll.formula) {
 			console.warn(`No formula defined for the activity ${this.name} on ${this.item.name} (${this.uuid}).`);
 			return;

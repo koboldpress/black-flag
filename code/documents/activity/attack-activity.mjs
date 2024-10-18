@@ -158,6 +158,8 @@ export default class AttackActivity extends Activity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
+
 		const targets = getTargetDescriptors();
 		const flagKey = `relationship.last.${this.id}`;
 
