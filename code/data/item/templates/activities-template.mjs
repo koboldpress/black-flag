@@ -31,6 +31,26 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Migrate the "override" checkbox on spells.
+	 * Added in 0.10.049
+	 * @param {object} source - Candidate source data to migrate.
+	 */
+	static _migrateActivityActivationOverride(source) {
+		if ( (source.type !== "spell") || foundry.utils.isEmpty(source.system?.activities)
+			|| !source.system.casting?.type ) return;
+		for ( const activity of Object.values(source.system.activities) ) {
+			if ( !activity.activation || ("override" in activity.activation) ) continue;
+			if ( activity.activation.type !== source.system.casting.type
+				|| activity.activation.value !== source.system.casting.value
+				|| activity.activation.condition !== source.system.casting.condition ) activity.activation.override = true;
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

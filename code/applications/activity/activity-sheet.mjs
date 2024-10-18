@@ -131,16 +131,16 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 
 		context.data = {};
 		context.disabled = {};
-		for (const field of ["duration", "range", "target"]) {
+		for (const field of ["activation", "duration", "range", "target"]) {
 			context.data[field] = this.activity[field].override ? context.source[field] : context.inferred[field];
 			context.disabled[field] = this.activity[field].canOverride && !this.activity[field].override;
 		}
 
-		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.source.activation.type });
+		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.data.activation.type });
 		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
 		context.activation = {
 			options: activationOptions,
-			scalar: activationOptions.get(this.activity.activation.type)?.scalar ?? false
+			scalar: activationOptions.get(context.data.activation.type)?.scalar ?? false
 		};
 
 		context.consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({

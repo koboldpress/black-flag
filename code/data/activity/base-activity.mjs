@@ -22,6 +22,7 @@ const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortFiel
  * @property {number} sort - Sorting order for the activity.
  * @property {*} system - Type-specific data.
  * @property {ActivationField} activation
+ * @property {boolean} activation.override - Should the item's activation be overridden?
  * @property {number} activation.primary - Is this the primary activation for this item? Mainly used to indicate what
  *                                         activity corresponds with casting a spell.
  * @property {object} consumption
@@ -103,6 +104,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			sort: new IntegerSortField(),
 			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
+				override: new BooleanField(),
 				primary: new BooleanField({ required: false, initial: undefined })
 			}),
 			consumption: new SchemaField({
@@ -185,6 +187,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		this.setProperty("activation.type", "system.casting.type");
 		this.setProperty("activation.condition", "system.casting.condition");
 
+		this._setOverride("activation", "casting");
 		this._setOverride("duration");
 		this._setOverride("range");
 		this._setOverride("target");
@@ -246,18 +249,19 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 	/**
 	 * Add an `canOverride` property to the provided object and, if `override` is `false`, replace the data on the
 	 * activity with data from the item.
-	 * @param {string} keyPath - Path of the property to set on the activity.
+	 * @param {string} activityKeyPath - Path of the property to set on the activity.
+	 * @param {string} [itemKeyPath] - Optional item key path, if different than actor key path.
 	 * @internal
 	 */
-	_setOverride(keyPath) {
-		const obj = foundry.utils.getProperty(this, keyPath);
+	_setOverride(activityKeyPath, itemKeyPath) {
+		const obj = foundry.utils.getProperty(this, activityKeyPath);
 		Object.defineProperty(obj, "canOverride", {
-			value: foundry.utils.hasProperty(this.item.system, keyPath),
+			value: foundry.utils.hasProperty(this.item.system, itemKeyPath ?? activityKeyPath),
 			configurable: true,
 			enumerable: false
 		});
 		if (obj.canOverride && !obj.override) {
-			foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, keyPath));
+			foundry.utils.mergeObject(obj, foundry.utils.getProperty(this.item.system, itemKeyPath ?? activityKeyPath));
 		}
 	}
 
