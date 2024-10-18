@@ -10,7 +10,7 @@ export function registerCustomEnrichers() {
 	const stringNames = ["attack", "check", "damage", "healing", "save", "skill", "tool", "vehicle"];
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
+			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
 			enricher: enrichString
 		},
 		{
