@@ -11,36 +11,37 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This cape smells faintly of brimstone. While wearing it, you can use it to cast the <em>dimension door</em> spell as an action. This property of the cape can’t be used again until the next dawn.</p><p>When you disappear, you leave behind a cloud of smoke, and you appear in a cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke.</p>",
+      "value": "<p>This cape smells faintly of brimstone. While wearing it, you can use it to cast the <em>@UUID[Compendium.black-flag.spells.Item.a79cPbF5G33jiDBa]{dimension door}</em> spell as an action. This property of the cape can’t be used again until the next dawn.</p><p>When you disappear, you leave behind a cloud of smoke, and you appear in a cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke.</p>",
       "source": {}
     },
     "activities": {
-      "ONgGUd4CJjeAyZda": {
-        "type": "utility",
-        "_id": "ONgGUd4CJjeAyZda",
-        "description": "",
+      "KFXyCuIrWSVCiXPI": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.a79cPbF5G33jiDBa",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 4,
+            "properties": [
+              "verbal"
+            ]
           }
         },
+        "_id": "KFXyCuIrWSVCiXPI",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
+          "override": false,
           "type": "action",
           "condition": ""
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "item",
-              "value": "1",
-              "scaling": {}
-            }
-          ],
+          "targets": [],
           "scale": {
             "allowed": false
           }
@@ -51,21 +52,19 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
@@ -75,7 +74,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Dimension Door",
+        "name": "",
         "img": ""
       }
     },
@@ -117,9 +116,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1724983619752,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729530337952,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ChTYpv1gAAjNY8dQ"

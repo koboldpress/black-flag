@@ -15,36 +15,37 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p><ul><li><p>You have resistance to poison damage.</p></li><li><p>You have a climbing speed equal to your walking speed.</p></li><li><p>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p></li><li><p>You can’t be caught in webs of any sort and can move through webs as if they were difficult terrain.</p></li><li><p>You can use an action to cast the <em>web</em> spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can’t be used again until the next dawn.</p></li></ul>",
+      "value": "<p>This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:</p><ul><li><p>You have resistance to poison damage.</p></li><li><p>You have a climbing speed equal to your walking speed.</p></li><li><p>You can move up, down, and across vertical surfaces and upside down along ceilings, while leaving your hands free.</p></li><li><p>You can’t be caught in webs of any sort and can move through webs as if they were difficult terrain.</p></li><li><p>You can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.HNAOZepYj1Cmtfje]{web}</em> spell (save DC 13). The web created by the spell fills twice its normal area. Once used, this property of the cloak can’t be used again until the next dawn.</p></li></ul>",
       "source": {}
     },
     "activities": {
-      "lGetq6PztoChr0tC": {
-        "type": "utility",
-        "_id": "lGetq6PztoChr0tC",
-        "description": "",
+      "CTXDitdcQpxRlOQZ": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.HNAOZepYj1Cmtfje",
+            "challenge": {
+              "attack": null,
+              "save": 13,
+              "override": true
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
           }
         },
+        "_id": "CTXDitdcQpxRlOQZ",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "item",
-              "value": "1",
-              "scaling": {}
-            }
-          ],
+          "targets": [],
           "scale": {
             "allowed": false
           }
@@ -55,21 +56,19 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
@@ -79,7 +78,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Cast Web",
+        "name": "",
         "img": ""
       }
     },
@@ -163,9 +162,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.049",
     "createdTime": 1724983714446,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729530434500,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!ugWH1CTAVyK78jq0"

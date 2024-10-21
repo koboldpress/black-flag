@@ -15,30 +15,35 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this hat, you can use an action to cast the <em>disguise self</em> spell from it. The spell ends if the hat is removed.</p>",
+      "value": "<p>While wearing this hat, you can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.75HF18ljbTk7wZwC]{disguise self}</em> spell from it. The spell ends if the hat is removed.</p>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
-      "ksKbZLiCxwkxrhrp": {
-        "type": "utility",
-        "_id": "ksKbZLiCxwkxrhrp",
-        "description": "",
-        "sort": 0,
+      "hxseul0DehtW4IjQ": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.75HF18ljbTk7wZwC",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic"
+            ]
           }
         },
+        "_id": "hxseul0DehtW4IjQ",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
           "targets": [],
@@ -52,20 +57,17 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
           "prompt": true,
           "override": false
@@ -77,7 +79,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Disguise Self",
+        "name": "",
         "img": ""
       }
     },
@@ -111,9 +113,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.048",
+    "systemVersion": "0.10.049",
     "createdTime": 1724985714036,
-    "modifiedTime": 1728594658798,
+    "modifiedTime": 1729531053215,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Uc3VCWbtORUjMeEa"

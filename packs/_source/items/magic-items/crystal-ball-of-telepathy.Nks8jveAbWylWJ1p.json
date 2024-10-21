@@ -4,7 +4,129 @@
   "type": "gear",
   "img": "icons/tools/laboratory/alembic-glass-ball-blue.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "o7DhmB8jRRNddut9": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.GRLnRMB9C9gU2PHq",
+            "challenge": {
+              "attack": null,
+              "save": 17,
+              "override": true
+            },
+            "circle": 5,
+            "properties": []
+          }
+        },
+        "_id": "o7DhmB8jRRNddut9",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "em6DlHHNfalwGJf6": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ",
+            "challenge": {
+              "attack": null,
+              "save": 17,
+              "override": true
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "material",
+              "concentration"
+            ]
+          }
+        },
+        "_id": "em6DlHHNfalwGJf6",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "special",
+          "concentration": false,
+          "override": true,
+          "special": "While the Scrying spell is active"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -27,7 +149,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>The typical crystal ball is a very rare magic item about 6 inches in diameter. While touching it, you can cast the <em>scrying</em> spell (save DC 17) with it.</p><p>While scrying with the crystal ball, you can communicate telepathically with creatures you can see within 30 feet of the spell’s sensor. You can also use an action to cast the @UUID[Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ]{suggestion} spell (save DC 17) through the sensor on one of those creatures. You don’t need to concentrate to maintain suggestion for the duration of the spell, but it ends if scrying ends. The suggestion power of the crystal ball can’t be used again until the next dawn.</p>",
+      "value": "<p>The typical crystal ball is a very rare magic item about 6 inches in diameter. While touching it, you can cast the <em>@UUID[Compendium.black-flag.spells.Item.GRLnRMB9C9gU2PHq]{scrying}</em> spell (save DC 17) with it.</p><p>While scrying with the crystal ball, you can communicate telepathically with creatures you can see within 30 feet of the spell’s sensor. You can also use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ]{suggestion}</em> spell (save DC 17) through the sensor on one of those creatures. You don’t need to concentrate to maintain suggestion for the duration of the spell, but it ends if scrying ends. The suggestion power of the crystal ball can’t be used again until the next dawn.</p>",
       "source": {}
     },
     "type": {
@@ -45,10 +167,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "coreVersion": "12.331",
     "createdTime": 1707267181116,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729530678245,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
