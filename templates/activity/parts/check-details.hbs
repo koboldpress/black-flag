@@ -1,18 +1,18 @@
 <fieldset>
 		<legend>{{ localize "BF.CHECK.FIELDS.check.label" }}</legend>
-		{{ formField systemFields.check.fields.associated name="system.check.associated"
-		             value=source.system.check.associated options=associatedOptions }}
-		{{ formField systemFields.check.fields.ability name="system.check.ability" value=source.system.check.ability
-		             options=abilityOptions }}
+		{{ formField systemFields.check.fields.associated value=source.system.check.associated options=associatedOptions
+		             rootId=partId }}
+		{{ formField systemFields.check.fields.ability value=source.system.check.ability options=abilityOptions
+		             rootId=partId }}
 		{{#with systemFields.check.fields.dc.fields as |fields|}}
-			{{ formField fields.calculation name="system.check.dc.calculation" value=../source.system.check.dc.calculation
-			             options=../calculationOptions }}
+			{{ formField fields.calculation value=../source.system.check.dc.calculation options=../calculationOptions
+			             rootId=partId }}
 			{{#if (not ../source.system.check.dc.calculation)}}
-				{{ formField fields.formula name="system.check.dc.formula" value=../source.system.check.dc.formula }}
+				{{ formField fields.formula value=../source.system.check.dc.formula rootId=partId }}
 			{{else}}
-				{{ formField fields.formula value=(localize "BF.Formula.Default.DC") disabled=true }}
+				{{ formField fields.formula value=(localize "BF.Formula.Default.DC") disabled=true rootId=partId }}
 				<input type="hidden" name="check.dc.formula" value="{{ ../source.system.check.dc.formula }}">
 			{{/if}}
 		{{/with}}
-		{{ formField systemFields.check.fields.visible name="system.check.visible" value=source.system.check.visible }}
+		{{ formField systemFields.check.fields.visible value=source.system.check.visible rootId=partId }}
 </fieldset>

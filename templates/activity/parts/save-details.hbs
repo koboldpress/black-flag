@@ -1,34 +1,15 @@
 <fieldset>
 		<legend>{{ localize "BF.SAVE.Challenge" }}</legend>
-		<div class="field-group">
-			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.save.ability.label" }}</span>
-				<select name="system.save.ability">
-					{{ selectOptions CONFIG.abilities.localized selected=system.save.ability }}
-				</select>
-			</label>
-			<span class="vs">{{ localize "BF.SAVE.Versus" }}</span>
-			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.save.dc.ability.label" }}</span>
-				<select name="system.save.dc.ability">
-					{{#select system.save.dc.ability}}
-						{{#if defaultAbility}}
-							<option value="">{{ defaultAbility }}</option>
-							<hr>
-						{{/if}}
-						<option value="custom">{{ localize "BF.Formula.Custom.Label" }}</option>
-						<option value="spellcasting">{{ localize "BF.Spellcasting.Label" }}</option>
-						<optgroup label="{{ localize 'BF.Formula.Default.DC' }}">
-							{{ selectOptions CONFIG.abilities.localized }}
-						</optgroup>
-					{{/select}}
-				</select>
-			</label>
-		</div>
-		{{#if (eq system.save.dc.ability "custom")}}
-			<label>
-				<span>{{ localize "BF.SAVE.FIELDS.save.dc.formula.label" }}</span>
-				<input type="text" name="system.save.dc.formula" value="{{ system.save.dc.formula }}">
-			</label>
+		{{ formField systemFields.save.fields.ability value=source.system.save.ability
+		             options=CONFIG.abilities.localizedOptions rootId=partId }}
+		{{ formField systemFields.save.fields.dc.fields.ability value=source.system.save.dc.ability options=abilityOptions
+		             rootId=partId }}
+		{{#if (eq source.system.save.dc.ability "custom")}}
+			{{ formField systemFields.save.fields.dc.fields.formula value=source.system.save.dc.formula
+			             rootId=partId }}
+		{{else}}
+			{{ formField systemFields.save.fields.dc.fields.formula name="" value=(localize "BF.Formula.Default.DC")
+			             disabled=true rootId=partId }}
+			<input type="hidden" name="system.save.dc.formula" value="{{ source.system.save.dc.formula }}">
 		{{/if}}
 </fieldset>

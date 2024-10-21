@@ -93,6 +93,8 @@ export default class ArmorClassConfig extends BaseConfigSheet {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*           Form Submission           */
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
 	_processFormData(event, form, formData) {

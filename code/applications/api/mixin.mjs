@@ -14,6 +14,19 @@ export default Base =>
 		};
 
 		/* <><><><> <><><><> <><><><> <><><><> */
+		/*           Initialization            */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
+		_initializeApplicationOptions(options) {
+			const applicationOptions = super._initializeApplicationOptions(options);
+			// Fix focus bug caused by the use of UUIDs in application IDs
+			// TODO: Remove once https://github.com/foundryvtt/foundryvtt/issues/11742 is fixed
+			applicationOptions.uniqueId = CSS.escape(applicationOptions.uniqueId);
+			return applicationOptions;
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
 		/*              Rendering              */
 		/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -56,5 +69,31 @@ export default Base =>
 				if (element.tagName === "TEXTAREA") element.readOnly = true;
 				else element.disabled = true;
 			}
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*         Life-Cycle Handlers         */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/** @inheritDoc */
+		_onRender(context, options) {
+			super._onRender(context, options);
+
+			// Allow multi-select tags to be removed when the whole tag is clicked.
+			this.element.querySelectorAll("multi-select").forEach(select => {
+				if (select.disabled) return;
+				select.querySelectorAll(".tag").forEach(tag => {
+					tag.classList.add("remove");
+					tag.querySelector(":scope > span")?.classList.add("remove");
+				});
+			});
+
+			// Add special styling for label-top hints.
+			this.element.querySelectorAll(".label-top > p.hint").forEach(hint => {
+				const label = hint.parentElement.querySelector(":scope > label");
+				if (!label) return;
+				label.classList.add("hinted-label");
+				label.dataset.tooltip = hint.innerHTML;
+			});
 		}
 	};

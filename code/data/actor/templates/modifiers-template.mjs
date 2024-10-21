@@ -84,7 +84,7 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	 * @param {object} [options.rollData={}] - Roll data to use when simplifying.
 	 * @returns {string|number|null}
 	 */
-	mergeModifiers(modifiers, { deterministic=true, mode="additive", rollData={} }={}) {
+	mergeModifiers(modifiers=[], { deterministic=true, mode="additive", rollData={} }={}) {
 		if ( mode !== "additive" || deterministic ) modifiers = modifiers.map(m => simplifyBonus(m.formula, rollData));
 		if ( mode === "additive" ) {
 			if ( deterministic ) return modifiers.reduce((t, m) => t + m, 0);

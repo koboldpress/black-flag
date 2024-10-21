@@ -176,6 +176,18 @@ export function localizeConfig(config, { propertyName="localized", ...options }=
 	});
 }
 
+/* <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+ * on `Localization` is private.
+ * @param {SchemaField} schema
+ * @param {string[]} prefixes
+ */
+export function localizeSchema(schema, prefixes) {
+	Localization.localizeDataModel({ schema }, { prefixes });
+}
+
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**

@@ -1,7 +1,15 @@
 import { HealData } from "../../data/activity/heal-data.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for performing healing.
+ */
 export default class HealActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -54,6 +62,13 @@ export default class HealActivity extends Activity {
 				}
 			});
 		return buttons.concat(super._activationChatButtons());
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _triggerSubsequentActions(config, results) {
+		this.rollDamage({ event: config.event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -1,0 +1,90 @@
+<section class="flexcol">
+	<div class="final-value">{{ blackFlag-number hp.data.value }} / {{ blackFlag-number hp.data.max }}</div>
+	<fieldset>
+		<legend>{{ localize "BF.HitPoint.Max.LabelLong" }}</legend>
+
+		{{!-- Overall Bonus --}}
+		{{#with hp.fields.bonuses.fields.overall as |field|}}
+			{{ formField field value=../hp.source.bonuses.overall }}
+			{{> ".effects" effects=../effects.overall }}
+		{{/with}}
+
+		{{!-- Class HP --}}
+		{{#each classes}}
+			<div class="form-group">
+				<label>{{{ anchor }}}</label>
+				<div class="form-fields">
+					{{ blackFlag-signedNumber total }}
+				</div>
+			</div>
+		{{/each}}
+
+		{{!-- Constitution Mod --}}
+		{{#if ability}}
+			<div class="form-group">
+				<label>{{ ability.label }}</label>
+				<div class="form-fields">
+					{{ blackFlag-signedNumber ability.mod }}
+					{{{ @root.levelMultiplier }}}
+				</div>
+			</div>
+		{{/if}}
+
+		{{!-- Per-level Bonus --}}
+		{{#with hp.fields.bonuses.fields.level as |field|}}
+			<div class="form-group">
+				<label>{{ field.label }}</label>
+				<div class="form-fields">
+					<span class="plusSign">+</span>
+					{{ formInput field value=../hp.source.bonuses.level }}
+					{{{ @root.levelMultiplier }}}
+				</div>
+			</div>
+			{{> ".effects" effects=../effects.level multiplier=@root.levelMultiplier }}
+		{{/with}}
+
+		<hr>
+
+		{{!-- Maximum Override --}}
+		{{ formField hp.fields.override value=hp.source.override }}
+
+	</fieldset>
+
+	<fieldset>
+		<legend>{{ localize "BF.HitPoint.Current.LabelLong" }}</legend>
+		{{ formField hp.fields.value value=hp.source.value }}
+		{{ formField hp.fields.temp value=hp.source.temp }}
+	</fieldset>
+
+	<fieldset class="hit-dice">
+		<legend>{{ localize "BF.HitDie.Label[other]" }}</legend>
+		{{#each hd.types}}
+			<div class="form-group">
+				<label>{{ label }}</label>
+				<div class="form-fields">
+					{{ formInput ../hd.typeFields.spent value=data.available name=(concat keyPath "available") }}
+					<span class="separator">/</span>
+					<span class="max">{{ blackFlag-number data.max }}</span>
+					<button type="button" class="light-button" data-action="rollHitDie" data-denomination="{{ denomination }}"
+									{{ disabled (eq data.available 0) }}>
+						<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d{{ denomination }}.svg"
+														class="die-icon blue" inert></blackFlag-icon>
+						<span>{{ localize "BF.Roll.Action.RollGeneric" }}</span>
+					</button>
+				</div>
+			</div>
+		{{/each}}
+	</fieldset>
+</section>
+
+{{#*inline ".effects"}}
+	{{#each effects}}
+		<div class="form-group">
+			<label>{{{ anchor }}}</label>
+			<div class="form-fields">
+				{{ blackFlag-signedNumber value }}
+				{{{ ../multiplier }}}
+			</div>
+		</div>
+	{{/each}}
+{{/inline}}

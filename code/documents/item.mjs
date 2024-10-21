@@ -1,4 +1,5 @@
 import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
+import ActivitiesTemplate from "../data/item/templates/activities-template.mjs";
 import PhysicalTemplate from "../data/item/templates/physical-template.mjs";
 import { slugify } from "../utils/text.mjs";
 import DocumentMixin from "./mixins/document.mjs";
@@ -145,6 +146,15 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				else if (data.type === "savingThrow") data.type = "save";
 			});
 		return super._initializeSource(data, options);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		source = super.migrateData(source);
+		ActivitiesTemplate._migrateActivityActivationOverride?.(source);
+		return source;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

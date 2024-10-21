@@ -10,7 +10,7 @@ export function registerCustomEnrichers() {
 	const stringNames = ["attack", "check", "damage", "healing", "save", "skill", "tool", "vehicle"];
 	CONFIG.TextEditor.enrichers.push(
 		{
-			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
+			pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
 			enricher: enrichString
 		},
 		{
@@ -385,8 +385,8 @@ function enrichCalculation(config, fallback, options) {
 function createRollLabel(config) {
 	const ability = CONFIG.BlackFlag.abilities.localizedAbbreviations[config.ability]?.toUpperCase();
 	const skill = CONFIG.BlackFlag.skills.localized[config.skill];
-	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool]?.label;
-	const vehicle = CONFIG.BlackFlag.enrichment.lookup.vehicles[config.vehicle]?.label;
+	const tool = CONFIG.BlackFlag.enrichment.lookup.tools[slugify(config.tool)]?.label;
+	const vehicle = CONFIG.BlackFlag.enrichment.lookup.vehicles[slugify(config.vehicle)]?.label;
 	const longSuffix = config.format === "long" ? "Long" : "Short";
 	const showDC = config.dc && !config.hideDC;
 
@@ -492,7 +492,7 @@ async function enrichCheck(config, label, options) {
 
 	let invalid = false;
 
-	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[config.skill];
+	const skillConfig = CONFIG.BlackFlag.enrichment.lookup.skills[slugify(config.skill)];
 	if (config.skill && !skillConfig) {
 		log(`Skill ${config.skill} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
@@ -500,19 +500,19 @@ async function enrichCheck(config, label, options) {
 		config.ability = skillConfig.ability;
 	}
 
-	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[config.tool];
+	const toolConfig = CONFIG.BlackFlag.enrichment.lookup.tools[slugify(config.tool)];
 	if (config.tool && !toolConfig) {
 		log(`Tool ${config.tool} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
-	const vehicleConfig = CONFIG.BlackFlag.enrichment.lookup.vehicles[config.vehicle];
+	const vehicleConfig = CONFIG.BlackFlag.enrichment.lookup.vehicles[slugify(config.vehicle)];
 	if (config.vehicle && !vehicleConfig) {
 		log(`Vehicle ${config.vehicle} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
 	}
 
-	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
+	let abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[slugify(config.ability)];
 	if (config.ability && !abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		invalid = true;
@@ -576,14 +576,16 @@ async function enrichSave(config, label, options) {
 		else if (Number.isNumeric(value)) config.dc = Number(value);
 		else config[value] = true;
 	}
+
 	if (!config.ability) {
 		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
-		config.ability = ability;
+		// TODO: Update to support multiple abilities
+		config.ability = foundry.utils.getType(ability) === "Set" ? ability.first() : ability;
 		config.dc ??= dc;
 		if (activity) config.activity = activity.uuid;
 	}
 
-	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[config.ability];
+	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[slugify(config.ability)];
 	if (!abilityConfig) {
 		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
 		return null;

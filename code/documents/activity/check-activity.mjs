@@ -2,6 +2,11 @@ import { CheckData } from "../../data/activity/check-data.mjs";
 import Activity from "./activity.mjs";
 
 export default class CheckActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,

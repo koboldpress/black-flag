@@ -3,7 +3,14 @@ import { AttackData } from "../../data/activity/attack-data.mjs";
 import { buildRoll, getTargetDescriptors, numberFormat, simplifyFormula } from "../../utils/_module.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for rolling attacks and damage.
+ */
 export default class AttackActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -116,6 +123,13 @@ export default class AttackActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _triggerSubsequentActions(config, results) {
+		this.rollAttack({ event: config.event });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -144,6 +158,8 @@ export default class AttackActivity extends Activity {
 	 * @returns {Promise<ChallengeRoll[]|void>}
 	 */
 	async rollAttack(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
+
 		const targets = getTargetDescriptors();
 		const flagKey = `relationship.last.${this.id}`;
 

@@ -25,3 +25,19 @@
 		&.active { display: grid; }
 	}
 }
+
+.black-flag.config-sheet {
+	.final-value {
+		font-family: var(--bf-font-header);
+		font-size: var(--font-size-32);
+		text-align: center;
+	}
+	.form-group {
+		.plusSign, .minusSign {
+			flex: 0 0 1.5em;
+			font-size: var(--font-size-16);
+			text-align: center;
+		}
+		.integer { padding-inline-start: 4px; }
+	}
+}

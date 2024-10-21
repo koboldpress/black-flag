@@ -1,0 +1,19 @@
+<fieldset class="spell-link">
+	<legend>{{ localize "BF.Item.Type.Spell[one]" }}</legend>
+	{{#if spell.document}}
+		<div class="form-group item-entry">
+			<div class="name">
+				<img class="icon circular" src="{{ spell.document.img }}" alt="{{ spell.document.name }}">
+				{{{ spell.contentLink }}}
+			</div>
+			<div class="controls">
+				<button type="button" class="link-button" data-action="removeSpell"
+				        data-tooltip="BF.CAST.Action.RemoveSpell" aria-label="{{ localize 'BF.CAST.Action.RemoveSpell' }}">
+					<i class="fa-solid fa-trash" inert"></i>
+				</button>
+			</div>
+		</div>
+	{{else}}
+		{{ formInput spell.fields.uuid value=spell.data.uuid }}
+	{{/if}}
+</fieldset>

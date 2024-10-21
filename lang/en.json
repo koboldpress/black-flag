@@ -119,6 +119,9 @@
 			"condition": {
 				"label": "Activation Condition"
 			},
+			"override": {
+				"label": "Override Activation"
+			},
 			"primary": {
 				"label": "Primary Activation",
 				"hint": "Is this activity part of the casting of the spell, or a subsequent action that can be taken. Only primary actions will consume a spell slot when used."
@@ -901,6 +904,47 @@
 "BF.Bonus": {
 	"Label[one]": "Bonus",
 	"Label[other]": "Bonuses"
+},
+
+"BF.CAST": {
+	"Title": "Cast",
+	"Hint": "Cast a customized version of a spell.",
+	"FIELDS": {
+		"spell": {
+			"label": "Casting Details",
+			"challenge": {
+				"attack": {
+					"label": "Attack Bonus",
+					"hint": "Flat to hit bonus in place of the spell's normal attack bonus."
+				},
+				"save": {
+					"label": "Save DC",
+					"hint": "Flat DC to use in place of the spell's normal save DC."
+				},
+				"override": {
+					"label": "Override Values",
+					"hint": "Override the spell's normal attack bonus & DC when casting."
+				}
+			},
+			"circle": {
+				"label": "Casting Circle",
+				"hint": "Base circle to cast the spell, if different than the spell's circle."
+			},
+			"properties": {
+				"label": "Ignored Properties",
+				"hint": "Spell components & tags to ignore while casting."
+			},
+			"uuid": {
+				"label": "Spell to Cast"
+			}
+		}
+	},
+	"SECTIONS": {
+		"Spell": "Spell"
+	},
+	"Action": {
+		"RemoveSpell": "Remove Spell"
+	}
 },
 
 "BF.CHECK": {
@@ -1728,6 +1772,10 @@
 	}
 },
 
+"BF.Health": {
+	"Label": "Health"
+},
+
 "BF.HitDie": {
 	"Label[one]": "Hit Die",
 	"Label[other]": "Hit Dice",
@@ -2292,6 +2340,67 @@
 	"Label[other]": "Overrides"
 },
 
+"BF.PC": {
+	"FIELDS": {
+		"abilities": {
+			"label": "Abilities"
+		},
+		"attributes": {
+			"label": "Attributes",
+			"attunement": {
+				"label": "Attunemenet"
+			},
+			"death": {
+				"label": "Death Saves"
+			},
+			"hd": {
+				"label": "Hit Dice"
+			},
+			"hp": {
+				"label": "Hit Points",
+				"bonuses": {
+					"label": "Bonuses",
+					"level": {
+						"label": "Per-Level Bonus"
+					},
+					"overall": {
+						"label": "Overall Bonus",
+						"hint": ""
+					}
+				},
+				"override": {
+					"label": "Override",
+					"hint": "Override automatically calculated hit points, ignoring any HP from classes, bonuses, and ability modifier."
+				},
+				"temp": {
+					"label": "Temporary HP"
+				},
+				"value": {
+					"label": "Current HP"
+				}
+			},
+			"initiative": {
+				"label": "Initiative"
+			},
+			"luck": {
+				"label": "Luck"
+			}
+		},
+		"biography": {
+			"label": "Biography"
+		},
+		"proficiencies": {
+			"label": "Proficiencies"
+		},
+		"progression": {
+			"label": "Progression"
+		},
+		"traits": {
+			"label": "Traits"
+		}
+	}
+},
+
 "BF.Prerequisite": {
 	"Label": "Prerequisite",
 	"Ability": {
@@ -2654,7 +2763,8 @@
 		"save": {
 			"label": "Save Details",
 			"ability": {
-				"label": "Opposed Ability"
+				"label": "Opposed Abilities",
+				"hint": "Abilities that may be rolled to attempt to save."
 			},
 			"dc": {
 				"label": "Difficulty Class",
@@ -3249,6 +3359,155 @@
 	"Warning": {
 		"ExistingSubclass": "{class} already has the subclass {subclass}. Another cannot be added.",
 		"MissingClass": "Character does not have any levels of {class} to take this subclass."
+	}
+},
+
+"BF.SUMMON": {
+	"Title": "Summon",
+	"Hint": "Summon a creature onto the scene.",
+	"FIELDS": {
+		"bonuses": {
+			"ac": {
+				"label": "Bonus Armor Class",
+				"hint": "Bonus to the Armor Class set on the summoned creature added to what is specified in their statblock."
+			},
+			"attackDamage": {
+				"label": "Bonus Attack Damage",
+				"hint": "Additional damage done by the creature's attacks."
+			},
+			"healing": {
+				"label": "Bonus Healing",
+				"hint": "Additional healing provided by healing abilities."
+			},
+			"hp": {
+				"label": "Bonus Hit Points",
+				"hint": "Additional hit points added to the creature on top of what is specified in their statblock."
+			},
+			"saveDamage": {
+				"label": "Bonus Save Damage",
+				"hint": "Additional damage done by the creature's abilities that require saving throws."
+			}
+		},
+		"creatureSizes": {
+			"label": "Creature Sizes",
+			"hint": "Summoned creature and token will be changed to this size. If more than one size is selected, then the player will be able to choose from these sizes when summoning."
+		},
+		"creatureTypes": {
+			"label": "Creature Types",
+			"hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
+		},
+		"match": {
+			"attacks": {
+				"label": "Match Attacks",
+				"hint": "Modify to hit values on the summoned creature's attacks to match that of the summoner."
+			},
+			"proficiency": {
+				"label": "Match Proficiency",
+				"hint": "Modify the summoned creature's proficiency to match that of the summoner."
+			},
+			"saves": {
+				"label": "Match Saves",
+				"hint": "Modify saving throw DCs on the summoned creature's abilities to match that of the summoner."
+			}
+		},
+		"profiles": {
+			"label": "Summons Profiles",
+			"FIELDS": {
+				"circle": {
+					"label": "Circle Limit",
+					"hint": "Range of circles required to use this profile.",
+					"max": {
+						"label": "Maximum Circle"
+					},
+					"min": {
+						"label": "Minimum Circle"
+					}
+				},
+				"count": {
+					"label": "Count"
+				},
+				"cr": {
+					"label": "Challenge Rating",
+					"abbr": "CR",
+					"hint": "Maximum CR of the summoned creature."
+				},
+				"level": {
+					"label": "Level Limit",
+					"hint": "Range of levels required to use this profile.",
+					"max": {
+						"label": "Maximum Level"
+					},
+					"min": {
+						"label": "Minimum Level"
+					}
+				},
+				"name": {
+					"label": "Display Name",
+					"hint": "Name of the profile displayed in the usage dialog."
+				},
+				"types": {
+					"label": "Creature Types",
+					"hint": "List of creature types from which the summoned creature can be selected."
+				},
+				"uuid": {
+					"label": "Linked Creature"
+				}
+			}
+		},
+		"summon": {
+			"label": "Summoning Details",
+			"identifier": {
+				"label": "Class Identifier",
+				"hint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
+			},
+			"mode": {
+				"label": "Mode",
+				"hint": "Sets how the creatures that are to be summoned are specified.",
+				"CR": "By Challenge Rating & Type",
+				"Direct": "By Direct Link"
+			},
+			"prompt": {
+				"label": "Summon Prompt",
+				"hint": "Should the player be prompted to place the summons? Players will still be able to summon from the chat card if prompt is disabled."
+			}
+		}
+	},
+	"SECTIONS": {
+		"Changes": "Changes",
+		"Profiles": "Profiles",
+		"Summoning": "Summoning"
+	},
+	"Action": {
+		"Place": "Place Summons",
+		"Summon": "Summon",
+		"View": "View Summon"
+	},
+	"CreatureChanges": {
+		"Label": "Creature Changes",
+		"Hint": "Changes that will be made to the creature being summoned. Any @ references used in the following formulas will be based on the summoner's stats. Summoned creatures' stats can be referenced using @summon (e.g. @summon.attributes.hd.max to reference the creature's hit dice count)."
+	},
+	"ItemChanges": {
+		"Label": "Item Changes",
+		"Hint": "Changes made to items on the summoned creature."
+	},
+	"Profile": {
+		"Label": "Summons Profile",
+		"Action": {
+			"Create": "Create Profile",
+			"Delete": "Delete Profile"
+		},
+		"ChallengeRatingLabel": "Challenge Rating of {cr} or lower",
+		"DropHint": "Drop creature here",
+		"Empty": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile.",
+		"EmptyDrop": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile or drop a creature to summon here."
+	},
+	"Warning": {
+		"CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
+		"CRV11": "Summoning based on creature challenge rating only works in Foundry V12 or higher.",
+		"NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
+		"NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
+		"NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
+		"Wildcard": "You must have 'Use File Browser' permissions to summon creatures with wildcard artwork."
 	}
 },
 

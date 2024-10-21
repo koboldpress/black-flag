@@ -27,6 +27,12 @@ export const _activityTypes = {
 			config: applications.AttackSheet
 		}
 	},
+	cast: {
+		documentClass: documents.CastActivity,
+		sheetClasses: {
+			config: applications.CastSheet
+		}
+	},
 	check: {
 		documentClass: documents.CheckActivity,
 		sheetClasses: {
@@ -49,6 +55,12 @@ export const _activityTypes = {
 		documentClass: documents.SaveActivity,
 		sheetClasses: {
 			config: applications.SaveSheet
+		}
+	},
+	summon: {
+		documentClass: documents.SummonActivity,
+		sheetClasses: {
+			config: applications.SummonSheet
 		}
 	},
 	utility: {

@@ -33,10 +33,22 @@ export default class SaveSheet extends ActivitySheet {
 	/** @inheritDoc */
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
+		const group = game.i18n.localize("BF.Formula.Default.DC");
+		context.abilityOptions = [
+			{ value: "custom", label: game.i18n.localize("BF.Formula.Custom.Label") },
+			{ value: "spellcasting", label: game.i18n.localize("BF.Spellcasting.Label") },
+			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({ ...o, group }))
+		];
 		const defaultAbility = this.activity.system.defaultAbility;
-		context.defaultAbility = defaultAbility
-			? game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
-			: null;
+		if (defaultAbility) {
+			context.abilityOptions.unshift(
+				{
+					value: "",
+					label: game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
+				},
+				{ rule: true }
+			);
+		}
 		return context;
 	}
 }

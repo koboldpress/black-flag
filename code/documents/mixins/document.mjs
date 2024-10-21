@@ -1,3 +1,4 @@
+import { simplifyBonus } from "../../utils/_module.mjs";
 import EmbedMixin from "./embed.mjs";
 
 /**
@@ -7,6 +8,10 @@ import EmbedMixin from "./embed.mjs";
  */
 export default Base =>
 	class extends EmbedMixin(Base) {
+		/* <><><><> <><><><> <><><><> <><><><> */
+		/*               Helpers               */
+		/* <><><><> <><><><> <><><><> <><><><> */
+
 		/** @inheritDoc */
 		static getDefaultArtwork(data = {}) {
 			const dataModel = CONFIG[this.metadata.name]?.dataModels[data.type];
@@ -17,6 +22,42 @@ export default Base =>
 					src: dataModel?.metadata.img ?? texture?.src ?? img
 				}
 			};
+		}
+
+		/* <><><><> <><><><> <><><><> <><><><> */
+
+		/**
+		 * Description for a single part of a property attribution.
+		 * @typedef {object} AttributionDescription
+		 * @property {BlackFlagActiveEffect} document - Active effect document.
+		 * @property {string} label - Descriptive label that will be displayed. If the label is in the form
+		 *                            of an @ property, the system will try to turn it into a human-readable label.
+		 * @property {number} mode - Application mode for this step as defined in
+		 *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
+		 * @property {number} value - Value of this step.
+		 */
+
+		/**
+		 * Break down all of the Active Effects affecting a given target property.
+		 * @param {string} keyPath - The data property being targeted.
+		 * @returns {AttributionDescription[]} - Any active effects that modify that property.
+		 * @protected
+		 */
+		activeEffectAttributions(keyPath) {
+			const rollData = this.getRollData({ deterministic: true });
+			const attributions = [];
+			for (const e of this.allApplicableEffects()) {
+				let source = e.sourceName;
+				if (!e.origin || e.origin === this.uuid) source = e.name;
+				if (!source || e.disabled || e.isSuppressed) continue;
+				const value = e.changes.reduce((n, change) => {
+					if (change.key !== keyPath) return n;
+					if (change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD) return n;
+					return n + simplifyBonus(change.value, rollData);
+				}, 0);
+				if (value) attributions.push({ document: e, value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+			}
+			return attributions;
 		}
 
 		/* <><><><> <><><><> <><><><> <><><><> */

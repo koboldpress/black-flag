@@ -25,6 +25,14 @@ export default class NPCSheet extends BaseActorSheet {
 	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Item types that will be displayed with full descriptions on the main tab of the NPC sheet.
+	 * @type {Set<string>}
+	 */
+	static mainItemTypes = new Set(["feature", "weapon"]);
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Rendering              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -131,7 +139,7 @@ export default class NPCSheet extends BaseActorSheet {
 				const key = !uses.max ? "atwill" : `${uses.max}-${uses.recovery[0]?.period ?? ""}`;
 				context.spellcasting.uses[key] ??= { spells: [] };
 				context.spellcasting.uses[key].spells.push(item);
-			} else if (item.type !== "armor") {
+			} else if (this.constructor.mainItemTypes.has(item.type)) {
 				const activities = Array.from(item.system.activities ?? []);
 				const onlyActivity = activities.length === 1 ? activities[0] : undefined;
 				const actionTypes = new Set(activities.map(a => a.actionType));
@@ -227,21 +235,12 @@ export default class NPCSheet extends BaseActorSheet {
 			}
 			const spells = [];
 			for (const spell of value.spells.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name, game.i18n.lang))) {
-				const activity = spell.system.activities.find(a => a.activation.primary) ?? spell.system.activities.contents[0];
-				if (activity) {
-					const usesRemaining = uses.max
-						? ` <span class="remaining">${numberFormat(spell.system.uses.value)}</span>`
-						: "";
-					spells.push(
-						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}" data-activity-id="${
-							activity.id
-						}">${spell.name.toLowerCase()}</a>${usesRemaining}</span>`
-					);
-				} else {
-					spells.push(
-						`<span class="spell"><a data-action="activate" data-item-id="${spell.id}">${spell.name.toLowerCase()}</a></span>`
-					);
-				}
+				const usesRemaining = uses.max
+					? ` <span class="remaining">${numberFormat(spell.system.uses.value)}</span>`
+					: "";
+				spells.push(
+					`<span class="spell"><a data-action="activate" data-item-id="${spell.id}">${spell.name.toLowerCase()}</a>${usesRemaining}</span>`
+				);
 			}
 			sections.push(`<p>${value.label}: ${spells.join(", ")}`);
 		}

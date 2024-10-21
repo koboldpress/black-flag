@@ -35,6 +35,14 @@
 					<input type="text" name="$.scale.max" value="{{ activity.consumption.scale.max }}" placeholder="∞">
 				</label>
 			{{/if}}
+			{{#if activity.isSpell}}
+				<label class="full-checkbox">
+					<span class="hinted-label" data-tooltip="BF.ACTIVATION.FIELDS.activation.primary.hint">
+						{{ localize "BF.ACTIVATION.FIELDS.activation.primary.label" }}
+					</span>
+					<input type="checkbox" name="activation.primary" {{ checked data.activation.primary }}>
+				</label>
+			{{/if}}
 		</fieldset>
 	</blackFlag-consumption>
 

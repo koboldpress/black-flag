@@ -1,7 +1,7 @@
 <fieldset>
 	<legend>{{ localize "BF.ACTIVITY.Label[one]" }}</legend>
-	{{ formField fields.name value=source.name placeholder=placeholder.name }}
-	{{ formField fields.img value=source.img placeholder=placeholder.img }}
+	{{ formField fields.name value=source.name placeholder=placeholder.name rootId=partId }}
+	{{ formField fields.img value=source.img placeholder=placeholder.img rootId=partId }}
 	{{#unless activity.inheritMagical}}{{ formField fields.magical value=source.magical }}{{/unless}}
 	<hr>
 	<prose-mirror name="description" data-document-u-u-i-d="{{ activity.uuid }}"

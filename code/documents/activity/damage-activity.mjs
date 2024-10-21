@@ -2,10 +2,13 @@ import { DamageData } from "../../data/activity/damage-data.mjs";
 import Activity from "./activity.mjs";
 
 /**
- * Extension of standard activity for one that includes damage rolls.
- * @abstract
+ * Activity for rolling damage.
  */
 export default class DamageActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
@@ -42,6 +45,13 @@ export default class DamageActivity extends Activity {
 				}
 			});
 		return buttons.concat(super._activationChatButtons());
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async _triggerSubsequentActions(config, results) {
+		this.rollDamage({ event: config.event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

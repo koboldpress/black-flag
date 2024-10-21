@@ -7,6 +7,7 @@ import NotificationTooltip from "../notification-tooltip.mjs";
 import DocumentSheetMixin from "../mixins/document-sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
+import HealthConfig from "./config/health-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
 import LanguageConfig from "./config/language-config.mjs";
 import LuckConfig from "./config/luck-config.mjs";
@@ -336,6 +337,8 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 						return new AbilityConfig(properties.key, this.actor).render(true);
 					case "armor-class":
 						return new ArmorClassConfig({ document: this.actor }).render({ force: true });
+					case "health":
+						return new HealthConfig({ document: this.actor }).render({ force: true });
 					case "initiative":
 						return new InitiativeConfig(this.actor).render(true);
 					case "language":
@@ -455,7 +458,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */

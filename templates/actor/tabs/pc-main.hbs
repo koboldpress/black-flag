@@ -198,7 +198,16 @@
 	</fieldset>
 
 	<fieldset class="hit-points">
-		<legend>{{ localize "BF.HitPoint.Label[other]" }}</legend>
+		<legend>
+			{{ localize "BF.HitPoint.Label[other]" }}
+			{{#if editable}}
+				<button type="button" class="link-button" data-action="config" data-type="health"
+								data-tooltip="{{ localize 'BF.Action.Configure.Specific' type=(localize 'BF.Health.Label') }}"
+								aria-label="{{ localize 'BF.Action.Configure.Specific' type=(localize 'BF.Health.Label') }}">
+					<i class="fa-solid fa-cog" inert></i>
+				</button>
+			{{/if}}
+		</legend>
 		<div class="main-hit-points stat-block">
 			<label class="current-hit-points">
 				<span class="light label">{{ localize "BF.HitPoint.Current.LabelShort" }}</span>

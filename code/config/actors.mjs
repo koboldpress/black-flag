@@ -406,6 +406,7 @@ export const sizes = {
 		capacityMultiplier: 8
 	}
 };
+localizeConfig(sizes, { sort: false });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 /*                          XP                           */

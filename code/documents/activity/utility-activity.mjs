@@ -1,7 +1,15 @@
 import { UtilityData } from "../../data/activity/utility-data.mjs";
 import Activity from "./activity.mjs";
 
+/**
+ * Activity for arbitrary rolls and everything else.
+ */
 export default class UtilityActivity extends Activity {
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*         Model Configuration         */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
 	static metadata = Object.freeze(
 		foundry.utils.mergeObject(
 			super.metadata,
@@ -52,6 +60,7 @@ export default class UtilityActivity extends Activity {
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollFormula(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
 		if (!this.system.roll.formula) {
 			console.warn(`No formula defined for the activity ${this.name} on ${this.item.name} (${this.uuid}).`);
 			return;

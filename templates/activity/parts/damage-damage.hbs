@@ -1,10 +1,10 @@
 <fieldset>
 	<legend>{{ localize "BF.DAMAGE.FIELDS.damage.label" }}</legend>
-	{{ formField systemFields.damage.fields.critical.fields.allow name="system.damage.critical.allow"
-	             value=source.system.damage.critical.allow }}
+	{{ formField systemFields.damage.fields.critical.fields.allow value=source.system.damage.critical.allow
+	             rootId=partId }}
 	{{#if system.damage.critical.allow }}
-		{{ formField systemFields.damage.fields.critical.fields.bonus name="system.damage.critical.bonus"
-		             value=source.system.damage.critical.bonus }}
+		{{ formField systemFields.damage.fields.critical.fields.bonus value=source.system.damage.critical.bonus
+		             rootId=partId }}
 	{{/if}}
 	{{> "systems/black-flag/templates/activity/parts/damage-parts.hbs" }}
 </fieldset>

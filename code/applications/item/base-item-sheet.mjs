@@ -100,7 +100,7 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 	async _onAction(event) {}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*              Drag & Drop            */
+	/*             Drag & Drop             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
@@ -112,6 +112,12 @@ export default class BaseItemSheet extends DocumentSheetMixin(ItemSheet) {
 		if (data.type === "Advancement") {
 			const advancementElement = this.element[0].querySelector("blackFlag-advancement");
 			return advancementElement?._onDrop(event);
+		}
+
+		const isSpell = data.type === "Item" && fromUuidSync(data.uuid, { strict: false })?.type === "spell";
+		if (data.type === "Activity" || isSpell) {
+			const activitiesElement = this.element[0].querySelector("blackFlag-activities");
+			return activitiesElement?._onDrop(event);
 		}
 
 		super._onDrop(event);

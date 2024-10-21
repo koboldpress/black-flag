@@ -6,6 +6,7 @@ import {
 	areKeysPressed,
 	buildRoll,
 	getTargetDescriptors,
+	localizeSchema,
 	numberFormat,
 	simplifyFormula
 } from "../../utils/_module.mjs";
@@ -62,7 +63,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	static localize() {
 		Localization.localizeDataModel(this);
-		if (this.metadata.dataModel) Localization.localizeDataModel(this.metadata.dataModel);
+		if (this.metadata.dataModel) this.metadata.dataModel.localize();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -75,7 +76,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @internal
 	 */
 	static _localizeSchema(schema, prefixes) {
-		Localization.localizeDataModel({ schema }, { prefixes });
+		localizeSchema(schema, prefixes);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -449,7 +450,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
-		if (!this.item.isEmbedded || !this.item.isOwner) return;
+		if (!this.item.isEmbedded || !this.item.isOwner || this.item.pack) return;
 
 		let item = this.item.clone({}, { keepId: true });
 		let activity = item.system.activities.get(this.id);
@@ -535,7 +536,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
 		 * @param {ActivityActivationResults} results - Results of the activation.
 		 */
-		Hooks.callAll("blackFlag.postActivateActivity", activity, activationConfig, results);
+		if (Hooks.call("blackFlag.postActivateActivity", activity, activationConfig, results) === false) return;
+
+		// Trigger any primary action provided by this activity
+		activity._triggerSubsequentActions(activationConfig, results);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -942,6 +946,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Trigger a primary activation action defined by the activity (such as opening the attack dialog for attack rolls).
+	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
+	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @protected
+	 */
+	async _triggerSubsequentActions(config, results) {}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*                Rolls                */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -953,6 +967,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @returns {Promise<DamageRoll[]|void>}
 	 */
 	async rollDamage(config = {}, dialog = {}, message = {}) {
+		if (!this.item.isEmbedded || this.item.pack) return;
+
 		const rollConfig = this.getDamageConfig(config);
 		rollConfig.subject = this;
 
