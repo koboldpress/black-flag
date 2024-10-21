@@ -16,13 +16,98 @@
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "qCuZRB2plVaFpSaQ": {
+        "type": "save",
+        "_id": "qCuZRB2plVaFpSaQ",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "wisdom"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self",
+          "value": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "radius",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "3"
     },
     "attunement": {
       "value": ""
@@ -38,7 +123,7 @@
     ]
   },
   "_id": "41gFtjyHIzBCpAYn",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/tools/instruments/flute-simple-wood.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 1800000,
@@ -50,9 +135,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1724986862700,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729533477699,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!41gFtjyHIzBCpAYn"

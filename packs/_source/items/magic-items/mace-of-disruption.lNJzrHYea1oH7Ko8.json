@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Mace of Disruption",
   "type": "weapon",
-  "img": "icons/weapons/maces/mace-flanged-steel.webp",
+  "img": "icons/weapons/maces/shortmace-ornate-gold.webp",
   "system": {
     "activities": {
       "hMAOkEB5pPj7cktP": {
@@ -58,6 +58,86 @@
           "consumeQuantity": false,
           "recovery": []
         }
+      },
+      "EvjglFI0IhZYl1N5": {
+        "type": "save",
+        "_id": "EvjglFI0IhZYl1N5",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "wisdom"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When you hit a Fiend or Undead"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "overrides": {
@@ -73,7 +153,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>When you hit a Fiend or Undead with this magic weapon, the target takes an extra [[/damage 2d6 radiant]]. If the target has 25 HP or fewer after taking this damage, it must succeed on a [[/save 15 WIS]] or be destroyed. On a successful save, the creature becomes frightened of you until the end of your next turn.</p>\n\t\t\t\t\t\t\t\t<p>While you hold this weapon, it sheds bright light in a 20- foot radius and dim light for an additional 20 feet.</p>",
+      "value": "<p>When you hit a Fiend or Undead with this magic weapon, the target takes an extra [[/damage 2d6 radiant]]. If the target has 25 HP or fewer after taking this damage, it must succeed on a [[/save 15 WIS]] or be destroyed. On a successful save, the creature becomes &amp;Reference[frightened] of you until the end of your next turn.</p><p>While you hold this weapon, it sheds bright light in a 20- foot radius and dim light for an additional 20 feet.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -128,9 +208,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1725589496161,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729531595869,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "lNJzrHYea1oH7Ko8",

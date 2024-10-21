@@ -15,18 +15,531 @@
       "requirement": "by a Cleric, Druid, or Paladin"
     },
     "description": {
-      "value": "<p>This necklace has [[/r 1d4 + 2]] magic beads made from aquamarine, black pearl, or topaz. It also has nonmagical beads made from stones such as amber, bloodstone, citrine, coral, jade, pearl, or quartz. If a magic bead is removed from the necklace, that bead loses its magic.</p>\n\t\t\t\t\t\t\t\t<p>Six types of magic beads exist. The GM decides the type of each bead on the necklace or determines it randomly. A necklace can have more than one bead of the same type. To use one, you must be wearing the necklace. Each bead contains a spell that you can cast from it as a bonus action (using your spell save DC if necessary). Once a bead’s spell is cast, that bead can’t be used again until the next dawn.</p>\n\t\t\t\t\t\t\t\t<p>TABLE</p>",
+      "value": "<p>This necklace has [[/r 1d4 + 2]] magic beads made from aquamarine, black pearl, or topaz. It also has nonmagical beads made from stones such as amber, bloodstone, citrine, coral, jade, pearl, or quartz. If a magic bead is removed from the necklace, that bead loses its magic.</p><p>Six types of magic beads exist. The GM decides the type of each bead on the necklace or determines it randomly. A necklace can have more than one bead of the same type. To use one, you must be wearing the necklace. Each bead contains a spell that you can cast from it as a bonus action (using your spell save DC if necessary). Once a bead’s spell is cast, that bead can’t be used again until the next dawn.</p><p>@Embed[Compendium.black-flag.rules.JournalEntry.PBo9j135EucIDliX.JournalEntryPage.rDMWnsy2GdAxQElp inline]</p><section class=\"secret\" id=\"secret-yFWjLEjcRP9wp3qQ\"><p><strong>Foundry Note</strong></p><p>Each bead tracks its quantity using the uses on the activity except the Bead of Curing, which tracks it using the item uses. Adjust the various maximum uses to match the beads found and remove an unnecessary activities.</p></section>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "DCe3G64Z78L1bBnN": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "DCe3G64Z78L1bBnN",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Bead of Blessing",
+        "img": ""
+      },
+      "gVruHqCzeoy3M7Hb": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic"
+            ]
+          }
+        },
+        "_id": "gVruHqCzeoy3M7Hb",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Bead of Curing (cure wounds)",
+        "img": ""
+      },
+      "TcRxJ9ORpvKbhh7Y": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.Aqff6XGGmiVXo6A6",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic"
+            ]
+          }
+        },
+        "_id": "TcRxJ9ORpvKbhh7Y",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Bead of Curing (restoration)",
+        "img": ""
+      },
+      "Ae8GplXW3m4GoFpX": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.ZTVg00JolCuPkOOX",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "Ae8GplXW3m4GoFpX",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Bead of Favor",
+        "img": ""
+      },
+      "BMIJeAvSXM3qBtKu": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.UBBSkwpMjPpwVSgG",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 2,
+            "properties": [
+              "verbal"
+            ]
+          }
+        },
+        "_id": "BMIJeAvSXM3qBtKu",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Bead of Smiting",
+        "img": ""
+      },
+      "Anu8D7nvuczoXwBt": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.ylqb7VpJ1snRNs7o",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 6,
+            "properties": [
+              "verbal",
+              "somatic"
+            ]
+          }
+        },
+        "_id": "Anu8D7nvuczoXwBt",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Bead of Summons",
+        "img": ""
+      },
+      "t7XRjB1w4SQVwLO2": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.eXevf5sdtGjBdgQG",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 6,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "t7XRjB1w4SQVwLO2",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": true,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Bead of Wind Walking",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +552,7 @@
     ]
   },
   "_id": "6qcYjUaQHBX052Ge",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/neck/necklace-runed-white-red.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 2600000,
@@ -51,9 +564,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1724986806420,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729533030420,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6qcYjUaQHBX052Ge"

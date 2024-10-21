@@ -1,0 +1,131 @@
+{
+  "type": "consumable",
+  "name": "Oil of Etherealness",
+  "system": {
+    "type": {
+      "category": "potion"
+    },
+    "rarity": "rare",
+    "attunement": {},
+    "price": {
+      "value": 2500,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>Beads of this cloudy gray oil form on the outside of its container and quickly evaporate. The oil can cover a Medium or smaller creature, along with the equipment it’s wearing and carrying (one additional vial is required for each size category above Medium). Applying the oil takes 10 minutes. The affected creature then gains the effect of the <em>@UUID[Compendium.black-flag.spells.Item.oTs4HWDpPWNNEdqv]{etherealness}</em> spell for 1 hour.</p>",
+      "source": {}
+    },
+    "properties": [
+      "magical"
+    ],
+    "activities": {
+      "dsF1uwiXudXXQtE0": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.oTs4HWDpPWNNEdqv",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 7,
+            "properties": [
+              "verbal",
+              "somatic"
+            ]
+          }
+        },
+        "_id": "dsF1uwiXudXXQtE0",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": 10,
+          "override": true,
+          "type": "minute",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": true,
+          "value": "1"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    }
+  },
+  "_id": "AgZ8SU7yLFSOGsFb",
+  "img": "icons/consumables/potions/potion-bottle-corked-white.webp",
+  "effects": [],
+  "folder": "NJ7MOfSV86dZsbEi",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729533727842,
+    "modifiedTime": 1729533847749,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!AgZ8SU7yLFSOGsFb"
+}
