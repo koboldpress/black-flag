@@ -258,7 +258,7 @@ export const sheetSections = {
 			id: "equipment",
 			tab: "features",
 			label: "BF.Item.Category.Equipment.Label",
-			filters: [{ k: "type", o: "in", v: ["ammunition", "armor", "weapon"] }]
+			filters: [{ k: "type", o: "in", v: ["ammunition", "armor", "gear", "tool", "weapon"] }]
 		},
 		{
 			id: "spells",
@@ -271,7 +271,7 @@ export const sheetSections = {
 			id: "sundries",
 			tab: "features",
 			label: "BF.Item.Type.Sundry[other]",
-			filters: [{ k: "type", v: "sundry" }],
+			filters: [{ k: "type", o: "in", v: ["consumable", "sundry"] }],
 			options: { autoHide: true }
 		}
 	],
