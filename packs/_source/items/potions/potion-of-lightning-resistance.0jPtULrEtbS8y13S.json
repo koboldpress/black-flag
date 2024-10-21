@@ -16,13 +16,87 @@
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "xTtqSJURnH5JkXQt": {
+        "type": "utility",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "YfCui52D8Ian2qV1"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": "",
+        "_id": "xTtqSJURnH5JkXQt"
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {},
     "container": null,
@@ -36,8 +110,52 @@
     ]
   },
   "_id": "0jPtULrEtbS8y13S",
-  "img": "systems/black-flag/artwork/types/consumable.svg",
-  "effects": [],
+  "img": "icons/consumables/potions/bottle-round-corked-yellow.webp",
+  "effects": [
+    {
+      "name": "Lightning Resistance",
+      "img": "icons/consumables/potions/bottle-round-corked-yellow.webp",
+      "origin": "Compendium.black-flag.items.Item.0jPtULrEtbS8y13S",
+      "transfer": false,
+      "_id": "YfCui52D8Ian2qV1",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "lightning",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729539892440,
+        "modifiedTime": 1729539984796,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!0jPtULrEtbS8y13S.YfCui52D8Ian2qV1"
+    }
+  ],
   "folder": "NJ7MOfSV86dZsbEi",
   "sort": 0,
   "ownership": {
@@ -48,9 +166,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1725073749669,
-    "modifiedTime": 1725904880294,
+    "modifiedTime": 1729541244325,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0jPtULrEtbS8y13S"

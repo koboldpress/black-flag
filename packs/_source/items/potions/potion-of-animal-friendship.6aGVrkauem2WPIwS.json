@@ -11,18 +11,150 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>When you drink this potion, animals tend to be friendly to you for 1 hour. For the duration, you can use an action to cast the animal friendship spell (save DC 13) at any time. Agitating this muddy liquid brings little bits into view: a fish scale, a hummingbird tongue, a cat claw, or a squirrel hair.</p>",
+      "value": "<p>When you drink this potion, animals tend to be friendly to you for 1 hour. For the duration, you can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.F1s8TRosgOUvR4iv]{animal friendship}</em> spell (save DC 13) at any time. Agitating this muddy liquid brings little bits into view: a fish scale, a hummingbird tongue, a cat claw, or a squirrel hair.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "0z1gLeo9Oe6OyP8S": {
+        "type": "utility",
+        "_id": "0z1gLeo9Oe6OyP8S",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": ""
+      },
+      "RNKNMGieLkijIZd9": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.F1s8TRosgOUvR4iv",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "RNKNMGieLkijIZd9",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {},
     "container": null,
@@ -36,7 +168,7 @@
     ]
   },
   "_id": "6aGVrkauem2WPIwS",
-  "img": "systems/black-flag/artwork/types/consumable.svg",
+  "img": "icons/consumables/potions/potion-bottle-corked-labeled-green.webp",
   "effects": [],
   "folder": "NJ7MOfSV86dZsbEi",
   "sort": 0,
@@ -48,9 +180,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1725073361240,
-    "modifiedTime": 1725904837665,
+    "modifiedTime": 1729540512934,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!6aGVrkauem2WPIwS"

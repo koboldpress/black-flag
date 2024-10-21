@@ -11,18 +11,99 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>For 1 hour after drinking it, you gain 10 temporary HP that last for 1 hour. For the same duration, you are under the effect of the bless spell (no concentration required). This blue potion bubbles and steams as if boiling.</p>",
+      "value": "<p>For 1 hour after drinking it, you gain 10 temporary HP that last for 1 hour. For the same duration, you are under the effect of the <em>@UUID[Compendium.black-flag.spells.Item.Gnxh5w9pE08ZGF9S]{bless}</em> spell (no concentration required). This blue potion bubbles and steams as if boiling.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "aehLCwTo1tUbXali": {
+        "type": "heal",
+        "_id": "aehLCwTo1tUbXali",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "HRFpdMBFVTeYjIS5"
+            }
+          ],
+          "healing": {
+            "type": "temp",
+            "number": null,
+            "denomination": 0,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": "10"
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {},
     "container": null,
@@ -36,8 +117,52 @@
     ]
   },
   "_id": "cA0WjduYTgzkXSbn",
-  "img": "systems/black-flag/artwork/types/consumable.svg",
-  "effects": [],
+  "img": "icons/consumables/potions/potion-flask-stopped-labeled-yellow.webp",
+  "effects": [
+    {
+      "name": "Heroism",
+      "img": "icons/consumables/potions/potion-flask-stopped-labeled-yellow.webp",
+      "origin": "Compendium.black-flag.items.Item.cA0WjduYTgzkXSbn",
+      "transfer": false,
+      "_id": "HRFpdMBFVTeYjIS5",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"attack\", \"ability-save\"] }], \"formula\": \"1d4\" }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729540763170,
+        "modifiedTime": 1729540786579,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!cA0WjduYTgzkXSbn.HRFpdMBFVTeYjIS5"
+    }
+  ],
   "folder": "NJ7MOfSV86dZsbEi",
   "sort": 0,
   "ownership": {
@@ -48,9 +173,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1725073676700,
-    "modifiedTime": 1725904874144,
+    "modifiedTime": 1729540763203,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!cA0WjduYTgzkXSbn"

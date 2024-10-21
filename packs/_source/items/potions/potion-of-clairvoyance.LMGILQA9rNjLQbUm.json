@@ -11,18 +11,88 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>When you drink this potion, you gain the effect of the clairvoyance spell. An eyeball bobs in this yellowish liquid but vanishes when the potion is opened.</p>",
+      "value": "<p>When you drink this potion, you gain the effect of the <em>@UUID[Compendium.black-flag.spells.Item.0DXCIjbQmk9UFSzp]{clairvoyance}</em> spell. An eyeball bobs in this yellowish liquid but vanishes when the potion is opened.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "hszX2kHVn4GBOq4j": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.0DXCIjbQmk9UFSzp",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 3,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "hszX2kHVn4GBOq4j",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {},
     "container": null,
@@ -36,7 +106,7 @@
     ]
   },
   "_id": "LMGILQA9rNjLQbUm",
-  "img": "systems/black-flag/artwork/types/consumable.svg",
+  "img": "icons/consumables/potions/bottle-bulb-corked-purple.webp",
   "effects": [],
   "folder": "NJ7MOfSV86dZsbEi",
   "sort": 0,
@@ -48,9 +118,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.049",
     "createdTime": 1725073366579,
-    "modifiedTime": 1725904839650,
+    "modifiedTime": 1729540947191,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!LMGILQA9rNjLQbUm"
