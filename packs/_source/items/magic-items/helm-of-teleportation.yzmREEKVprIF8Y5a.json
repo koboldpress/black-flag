@@ -15,35 +15,40 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the <em>teleport</em> spell from it. The helm regains [[/r 1d3]] expended charges daily at dawn.</p>",
+      "value": "<p>This helm has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the <em>@UUID[Compendium.black-flag.spells.Item.NJKjBBmBG98Lo2XY]{teleport}</em> spell from it. The helm regains [[/r 1d3]] expended charges daily at dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
-      "7gqPGbZ1I45I8aea": {
-        "type": "utility",
-        "_id": "7gqPGbZ1I45I8aea",
-        "description": "",
-        "sort": 0,
+      "od6yh5az9Ny5BGlv": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.NJKjBBmBG98Lo2XY",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 7,
+            "properties": [
+              "verbal"
+            ]
           }
         },
+        "_id": "od6yh5az9Ny5BGlv",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
           "targets": [
             {
               "type": "item",
+              "target": "",
               "value": "1",
               "scaling": {}
             }
@@ -58,20 +63,17 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
           "prompt": true,
           "override": false
@@ -83,7 +85,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Teleport",
+        "name": "",
         "img": ""
       }
     },
@@ -123,9 +125,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.048",
+    "systemVersion": "0.10.049",
     "createdTime": 1724985796974,
-    "modifiedTime": 1728595192303,
+    "modifiedTime": 1729531233523,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!yzmREEKVprIF8Y5a"

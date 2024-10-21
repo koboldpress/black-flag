@@ -1,0 +1,264 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Mace of Terror",
+  "type": "weapon",
+  "img": "icons/weapons/maces/mace-spiked-skull.webp",
+  "system": {
+    "activities": {
+      "hMAOkEB5pPj7cktP": {
+        "type": "attack",
+        "_id": "hMAOkEB5pPj7cktP",
+        "system": {
+          "damage": {
+            "parts": [],
+            "critical": {},
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {}
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "oWuT3APntL2xaguq": {
+        "type": "save",
+        "_id": "oWuT3APntL2xaguq",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [
+            {
+              "_id": "18of135Bzh1eh94I"
+            }
+          ],
+          "save": {
+            "ability": [
+              "wisdom"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "radius",
+            "size": "30"
+          },
+          "affects": {
+            "choice": true,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Wave of Terror",
+        "img": ""
+      }
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 8800,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 4,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>This magic weapon has 3 charges. While holding it, you can use an action and expend 1 charge to release a wave of terror. Each creature of your choice in a 30-foot radius extending from you must succeed on a [[/save 15 WIS]] or become &amp;Reference[frightened] of you for 1 minute. While it is frightened in this way, a creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If it has nowhere it can move, the creature can use the Dodge action. At the end of each of its turns, a creature can repeat the save, ending the effect on itself on a success.</p><p>The mace regains [[/r 1d3]] expended charges daily at dawn.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "melee",
+      "category": "simple",
+      "base": "mace"
+    },
+    "options": [
+      "bash"
+    ],
+    "properties": [
+      "magical"
+    ],
+    "ammunition": {},
+    "damage": {
+      "base": {
+        "number": 1,
+        "denomination": 6,
+        "type": "bludgeoning",
+        "additionalTypes": []
+      }
+    },
+    "range": {
+      "short": null,
+      "long": null,
+      "reach": null
+    },
+    "uses": {
+      "min": "",
+      "max": "3",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ]
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "container": null,
+    "magicalBonus": null
+  },
+  "effects": [
+    {
+      "name": "Terror",
+      "img": "icons/weapons/maces/mace-spiked-skull.webp",
+      "origin": "Compendium.black-flag.items.Item.UExRGtRYgOkGWThh",
+      "transfer": false,
+      "_id": "18of135Bzh1eh94I",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>While you are frightened in this way, you must spend your turns trying to move as far away from the attacker as it can, and you can’t willingly move to a space within 30 feet of the attack. You also can’t take reactions. For its action, you can use only the Dash action or try to escape from an effect that prevents you from moving. If you have nowhere you can move, you can use the Dodge action. At the end of each of your turns, you can repeat the save, ending the effect on yourself on a success.</p>",
+      "tint": "#ffffff",
+      "statuses": [
+        "frightened"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729531792767,
+        "modifiedTime": 1729531883045,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!UExRGtRYgOkGWThh.18of135Bzh1eh94I"
+    }
+  ],
+  "sort": 25200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725589519193,
+    "modifiedTime": 1729531884916,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "UExRGtRYgOkGWThh",
+  "_key": "!items!UExRGtRYgOkGWThh"
+}

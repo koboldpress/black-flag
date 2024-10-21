@@ -1,0 +1,218 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Oathbow",
+  "type": "weapon",
+  "img": "icons/weapons/bows/bow-ornamental-carved-brown.webp",
+  "system": {
+    "activities": {
+      "tXPhBhx5J0ZqMA3X": {
+        "type": "attack",
+        "_id": "tXPhBhx5J0ZqMA3X",
+        "system": {
+          "damage": {
+            "parts": [],
+            "critical": {},
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {}
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "8hoqEqErjl70NWFd": {
+        "type": "damage",
+        "_id": "8hoqEqErjl70NWFd",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": true
+            },
+            "parts": [
+              {
+                "number": 3,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "piercing",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When you hit your sworn enemy"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Swron Enemy Damage",
+        "img": ""
+      }
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 16000,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 2,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>When you nock an arrow on this bow, it whispers in Elvish, <q>Swift defeat to my enemies.</q> When you use this weapon to make a ranged attack, you can, as a command phrase, say, <q>Swift death to you who have wronged me.</q> The target of your attack becomes your sworn enemy until it dies or until dawn seven days later. You can have only one such sworn enemy at a time. When your sworn enemy dies, you can choose a new one after the next dawn.</p><p>When you make a ranged attack roll with this weapon against your sworn enemy, you have advantage on the roll. In addition, your target gains no benefit from cover, other than total cover, and you suffer no disadvantage due to long range. If the attack hits, your sworn enemy takes an extra [[/damage 3d6 piercing]].</p><p>While your sworn enemy lives, you have disadvantage on attack rolls with all other weapons.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "ranged",
+      "category": "martial",
+      "base": "longbow"
+    },
+    "options": [
+      "pinningShot",
+      "ricochetShot"
+    ],
+    "properties": [
+      "ammunition",
+      "heavy",
+      "magical",
+      "twoHanded"
+    ],
+    "ammunition": {
+      "type": "arrow"
+    },
+    "damage": {
+      "base": {
+        "number": 1,
+        "denomination": 8,
+        "type": "piercing",
+        "additionalTypes": []
+      }
+    },
+    "range": {
+      "short": 150,
+      "long": 600,
+      "reach": null
+    },
+    "uses": {
+      "min": "",
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
+    },
+    "rarity": "veryRare",
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "container": null,
+    "magicalBonus": null
+  },
+  "effects": [],
+  "sort": 22600000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725589564629,
+    "modifiedTime": 1729533134099,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "pvKD343tdgXif3Ck",
+  "_key": "!items!pvKD343tdgXif3Ck"
+}

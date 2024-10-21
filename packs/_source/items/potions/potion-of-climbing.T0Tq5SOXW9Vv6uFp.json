@@ -1,0 +1,181 @@
+{
+  "type": "consumable",
+  "name": "Potion of Climbing",
+  "system": {
+    "type": {
+      "category": "potion"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 100,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>When you drink this potion, you gain a climbing speed equal to your walking speed for 1 hour. During this time, you have advantage on STR (Athletics) checks you make to climb. The potion is separated into brown, silver, and gray layers resembling bands of stone.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "82LffLmSRjLDs4D8": {
+        "type": "utility",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "SDAfSmD84UybC2IZ"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": "",
+        "_id": "82LffLmSRjLDs4D8"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {},
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "T0Tq5SOXW9Vv6uFp",
+  "img": "icons/consumables/potions/potion-flask-corked-tied-necklace-teal.webp",
+  "effects": [
+    {
+      "name": "Climbing",
+      "img": "icons/consumables/potions/potion-flask-corked-tied-necklace-teal.webp",
+      "origin": "Compendium.black-flag.items.Item.T0Tq5SOXW9Vv6uFp",
+      "transfer": false,
+      "_id": "SDAfSmD84UybC2IZ",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.types.climb",
+          "mode": 4,
+          "value": "@base",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"strength\" }, { \"k\": \"skill\", \"v\": \"athletics\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on STR (Athletics) checks you make to climb.\" } }",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729541085556,
+        "modifiedTime": 1729541146531,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!T0Tq5SOXW9Vv6uFp.SDAfSmD84UybC2IZ"
+    }
+  ],
+  "folder": "NJ7MOfSV86dZsbEi",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725073390099,
+    "modifiedTime": 1729541085593,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!T0Tq5SOXW9Vv6uFp"
+}

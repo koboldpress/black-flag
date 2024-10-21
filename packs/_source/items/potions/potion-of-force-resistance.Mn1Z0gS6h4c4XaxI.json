@@ -1,0 +1,175 @@
+{
+  "type": "consumable",
+  "name": "Potion of Force Resistance",
+  "system": {
+    "type": {
+      "category": "potion"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 10,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>When you drink this potion, you gain resistance to force damage for 1 hour.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "D1eroiGwL3l8az8Q": {
+        "type": "utility",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "BYVvyOmam6dI5iV3"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": "",
+        "_id": "D1eroiGwL3l8az8Q"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {},
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "Mn1Z0gS6h4c4XaxI",
+  "img": "icons/consumables/potions/potion-flask-corked-yellow.webp",
+  "effects": [
+    {
+      "name": "Force Resistance",
+      "img": "icons/consumables/potions/potion-flask-corked-yellow.webp",
+      "origin": "Compendium.black-flag.items.Item.Mn1Z0gS6h4c4XaxI",
+      "transfer": false,
+      "_id": "BYVvyOmam6dI5iV3",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.damage.resistances.value",
+          "mode": 2,
+          "value": "force",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729539876037,
+        "modifiedTime": 1729539996851,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Mn1Z0gS6h4c4XaxI.BYVvyOmam6dI5iV3"
+    }
+  ],
+  "folder": "NJ7MOfSV86dZsbEi",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725073740421,
+    "modifiedTime": 1729541221615,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!Mn1Z0gS6h4c4XaxI"
+}

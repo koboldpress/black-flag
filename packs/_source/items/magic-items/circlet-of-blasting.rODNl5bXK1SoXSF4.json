@@ -11,61 +11,38 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>While wearing this circlet, you can use an action to cast the <em>scorching ray</em> spell with it. When you make the spell’s attacks, you do so with an attack bonus of +5. The circlet can’t be used this way again until the next dawn.</p>",
+      "value": "<p>While wearing this circlet, you can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.zcPLl539wJ5MflKO]{scorching ray}</em> spell with it. When you make the spell’s attacks, you do so with an attack bonus of +5. The circlet can’t be used this way again until the next dawn.</p>",
       "source": {}
     },
     "activities": {
-      "l13wkYzTqmzveI1U": {
-        "type": "attack",
-        "_id": "l13wkYzTqmzveI1U",
-        "description": "",
+      "GEXEPaqPCytJ2kl3": {
+        "type": "cast",
         "system": {
-          "attack": {
-            "critical": {
-              "threshold": null
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.zcPLl539wJ5MflKO",
+            "challenge": {
+              "attack": 5,
+              "save": null,
+              "override": true
             },
-            "flat": true,
-            "type": {
-              "value": "ranged",
-              "classification": "spell"
-            },
-            "ability": "",
-            "bonus": "5"
-          },
-          "damage": {
-            "critical": {
-              "bonus": ""
-            },
-            "includeBase": true,
-            "parts": [
-              {
-                "number": 2,
-                "denomination": 6,
-                "bonus": "",
-                "custom": {
-                  "formula": "",
-                  "enabled": false
-                },
-                "type": "fire",
-                "additionalTypes": [],
-                "scaling": {
-                  "number": 1
-                }
-              }
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic"
             ]
-          },
-          "effects": []
+          }
         },
+        "_id": "GEXEPaqPCytJ2kl3",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
           "targets": [
             {
               "type": "item",
-              "target": "",
               "value": "1",
               "scaling": {}
             }
@@ -80,25 +57,19 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": "foot",
-          "value": "120",
-          "special": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": "creatureObject",
-            "count": "3",
-            "special": ""
+            "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
@@ -108,7 +79,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Scorching Ray",
+        "name": "",
         "img": ""
       }
     },
@@ -150,9 +121,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.049",
     "createdTime": 1724983688214,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729530405252,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!rODNl5bXK1SoXSF4"

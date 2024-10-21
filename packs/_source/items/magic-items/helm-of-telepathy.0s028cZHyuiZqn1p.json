@@ -15,30 +15,36 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this helm, you can use an action to cast the <em>detect thoughts</em> spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply—using a bonus action to do so—while your focus on it continues.</p><p>While focusing on a creature with <em>detect thoughts</em>, you can use an action to cast the <em>suggestion</em> spell (save DC 13) from the helm on that creature. You don’t need to concentrate to maintain <em>suggestion</em> for the duration of the spell, but it ends if the <em>detect thoughts</em> spell ends. Once used, the <em>suggestion</em> property can’t be used again until the next dawn.</p>",
+      "value": "<p>While wearing this helm, you can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.q3ggx5aH69iqrcL3]{detect thoughts}</em> spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply—using a bonus action to do so—while your focus on it continues.</p><p>While focusing on a creature with <em>detect thoughts</em>, you can use an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ]{suggestion}</em> spell (save DC 13) from the helm on that creature. You don’t need to concentrate to maintain <em>suggestion</em> for the duration of the spell, but it ends if the <em>detect thoughts</em> spell ends. Once used, the <em>suggestion</em> property can’t be used again until the next dawn.</p>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
-      "zudrD8EHdPaIfmqx": {
-        "type": "utility",
-        "_id": "zudrD8EHdPaIfmqx",
-        "description": "",
-        "sort": 0,
+      "i8UblfWCzrxX2W0D": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.q3ggx5aH69iqrcL3",
+            "challenge": {
+              "attack": null,
+              "save": 13,
+              "override": true
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
           }
         },
+        "_id": "i8UblfWCzrxX2W0D",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
           "targets": [],
@@ -52,20 +58,17 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
           "prompt": true,
           "override": false
@@ -77,60 +80,60 @@
           "min": "",
           "max": ""
         },
-        "name": "Detect Thoughts",
+        "name": "",
         "img": ""
       },
-      "9ce3soubmWcma4Ug": {
-        "type": "utility",
-        "_id": "9ce3soubmWcma4Ug",
-        "description": "",
-        "sort": 0,
+      "eHhuWatZLPhjt4pG": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ",
+            "challenge": {
+              "attack": null,
+              "save": 13,
+              "override": true
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "material",
+              "concentration"
+            ]
           }
         },
+        "_id": "eHhuWatZLPhjt4pG",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
+          "override": true,
           "type": "action",
-          "condition": "While focusing on a creature with detect thoughts"
+          "condition": "When focusing on a creature with detect thoughts"
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "activity",
-              "value": "1",
-              "scaling": {}
-            }
-          ],
+          "targets": [],
           "scale": {
             "allowed": false
           }
         },
         "duration": {
-          "units": "instantaneous",
+          "units": "special",
           "concentration": false,
-          "override": false
+          "override": true,
+          "special": "While detect thoughts is active"
         },
         "range": {
-          "override": false,
-          "units": ""
+          "override": false
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
           "prompt": true,
           "override": false
@@ -138,16 +141,11 @@
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": [
-            {
-              "period": "longRest",
-              "type": "recoverAll"
-            }
-          ],
+          "recovery": [],
           "min": "",
-          "max": "1"
+          "max": ""
         },
-        "name": "Suggestion",
+        "name": "",
         "img": ""
       }
     },
@@ -181,9 +179,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.048",
+    "systemVersion": "0.10.049",
     "createdTime": 1724985789403,
-    "modifiedTime": 1728595143299,
+    "modifiedTime": 1729531204115,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!0s028cZHyuiZqn1p"

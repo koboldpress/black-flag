@@ -1,0 +1,182 @@
+{
+  "type": "consumable",
+  "name": "Oil of Sharpness",
+  "system": {
+    "type": {
+      "category": "potion"
+    },
+    "rarity": "veryRare",
+    "attunement": {},
+    "price": {
+      "value": 1500,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This clear, gelatinous oil sparkles with tiny, ultrathin silver shards. The oil can coat one slashing or piercing weapon or up to 5 pieces of slashing or piercing ammunition. Applying the oil takes 1 minute. For 1 hour, the coated item is magical and has a +3 bonus to attack and damage rolls.</p>",
+      "source": {}
+    },
+    "properties": [
+      "magical"
+    ],
+    "activities": {
+      "0Se6YbVhRdFRymSZ": {
+        "type": "utility",
+        "_id": "0Se6YbVhRdFRymSZ",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": 1,
+          "override": false,
+          "type": "minute",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "object",
+            "count": "5",
+            "special": "Slashing or piercing ammunition"
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Apply Oil",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    }
+  },
+  "_id": "gRjXG2ATSF7lmbwe",
+  "img": "icons/consumables/potions/potion-tube-corked-labeled-cyan.webp",
+  "effects": [
+    {
+      "type": "enchantment",
+      "name": "Sharpness",
+      "origin": null,
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/consumables/potions/potion-tube-corked-labeled-cyan.webp",
+      "_id": "5Ogi6nGJYhFLQcXZ",
+      "system": {},
+      "changes": [
+        {
+          "key": "name",
+          "mode": 5,
+          "value": "Sharp {}",
+          "priority": null
+        },
+        {
+          "key": "system.properties",
+          "mode": 2,
+          "value": "magical",
+          "priority": null
+        },
+        {
+          "key": "system.magicalBonus",
+          "mode": 5,
+          "value": "3",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729533871831,
+        "modifiedTime": 1729533910489,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!gRjXG2ATSF7lmbwe.5Ogi6nGJYhFLQcXZ"
+    }
+  ],
+  "folder": "NJ7MOfSV86dZsbEi",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729533738183,
+    "modifiedTime": 1729533965023,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!gRjXG2ATSF7lmbwe"
+}

@@ -1,0 +1,187 @@
+{
+  "type": "consumable",
+  "name": "Potion of Due Notice",
+  "system": {
+    "type": {
+      "category": "potion"
+    },
+    "rarity": "common",
+    "price": {
+      "value": 50,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>When you drink this potion, double your PB for the purpose of calculating your passive Insight, Investigation, and Perception scores for 1 hour. If you don't have proficiency in any of these skills, you gain proficiency in them for the duration of the potion. This potion’s liquid has a bright green effervescence.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "PFc6V5W99dRJKl0g": {
+        "type": "utility",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "mvgwLlsz0ZTlbcGI"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "formula": "",
+            "name": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Drink",
+        "img": "",
+        "_id": "PFc6V5W99dRJKl0g"
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": true,
+      "recovery": [],
+      "min": "",
+      "max": "1"
+    },
+    "attunement": {},
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "nkkkCkzkiwzjWle9",
+  "img": "icons/consumables/potions/bottle-circular-corked-labeled-green.webp",
+  "effects": [
+    {
+      "name": "Due Notice",
+      "img": "icons/consumables/potions/bottle-circular-corked-labeled-green.webp",
+      "origin": "Compendium.black-flag.items.Item.nkkkCkzkiwzjWle9",
+      "transfer": false,
+      "_id": "mvgwLlsz0ZTlbcGI",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.proficiencies.skills.insight.proficiency.multiplier",
+          "mode": 4,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.proficiencies.skills.investigation.proficiency.multiplier",
+          "mode": 4,
+          "value": "2",
+          "priority": null
+        },
+        {
+          "key": "system.proficiencies.skills.perception.proficiency.multiplier",
+          "mode": 4,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": 1729541013046,
+        "modifiedTime": 1729541048585,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!nkkkCkzkiwzjWle9.mvgwLlsz0ZTlbcGI"
+    }
+  ],
+  "folder": "NJ7MOfSV86dZsbEi",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725073403768,
+    "modifiedTime": 1729541013077,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!nkkkCkzkiwzjWle9"
+}

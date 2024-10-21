@@ -5,13 +5,160 @@
   "_id": "Dk7bbui7SPYF5bPr",
   "img": "icons/consumables/potions/bottle-bulb-empty-glass.webp",
   "system": {
-    "activities": {},
+    "activities": {
+      "e6AENtoyOEYYkPp8": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.ebGqTLYBFxSDf3g7",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 4,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "e6AENtoyOEYYkPp8",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": 10,
+          "override": true,
+          "type": "minute",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": true,
+          "value": "8"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "YURvfAg75IAL9ZeN": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.vj70K3TUp67pl6ta",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "YURvfAg75IAL9ZeN",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": true,
+          "value": "8"
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {},
     "container": null,
@@ -31,7 +178,10 @@
     "type": {
       "category": "potion"
     },
-    "rarity": "uncommon"
+    "rarity": "uncommon",
+    "properties": [
+      "magical"
+    ]
   },
   "effects": [],
   "sort": 0,
@@ -41,10 +191,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.8.011",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1707356417084,
-    "modifiedTime": 1707357202610,
+    "modifiedTime": 1729533681398,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

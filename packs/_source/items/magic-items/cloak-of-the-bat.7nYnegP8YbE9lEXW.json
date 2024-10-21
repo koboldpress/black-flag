@@ -15,27 +15,30 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this cloak, you have advantage on DEX (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak’s edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.</p><p>While wearing the cloak in an area of dim light or darkness, you can use your action to cast <em>polymorph</em> on yourself, transforming into a bat. While you are in the form of the <strong>bat</strong>, you retain your INT, WIS, and CHA scores. The cloak can’t be used this way again until the next dusk.</p>",
+      "value": "<p>While wearing this cloak, you have advantage on DEX (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak’s edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.</p><p>While wearing the cloak in an area of dim light or darkness, you can use your action to cast <em>@UUID[Compendium.black-flag.spells.Item.izAYjuiXEYPJat3R]{polymorph}</em> on yourself, transforming into a bat. While you are in the form of the <strong>bat</strong>, you retain your INT, WIS, and CHA scores. The cloak can’t be used this way again until the next dusk.</p>",
       "source": {}
     },
     "activities": {
-      "FBnKUoZPdFTJXuBQ": {
-        "type": "utility",
-        "_id": "FBnKUoZPdFTJXuBQ",
-        "description": "",
+      "tx0OMVs7vurUTxRp": {
+        "type": "cast",
         "system": {
-          "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.izAYjuiXEYPJat3R",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 4,
+            "properties": []
           }
         },
+        "_id": "tx0OMVs7vurUTxRp",
+        "description": "",
+        "sort": 0,
         "activation": {
           "value": null,
-          "type": "action",
-          "condition": ""
+          "override": false
         },
         "consumption": {
           "targets": [
@@ -56,21 +59,21 @@
           "override": false
         },
         "range": {
-          "override": false,
-          "units": "self"
+          "override": true,
+          "units": "self",
+          "special": ""
         },
         "magical": false,
         "target": {
           "template": {
             "count": 1,
             "contiguous": false,
-            "units": "foot",
-            "type": ""
+            "units": "foot"
           },
           "affects": {
-            "choice": false,
-            "type": ""
+            "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
@@ -80,7 +83,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Polymorph into Bat",
+        "name": "Transform into Bat",
         "img": ""
       }
     },
@@ -163,9 +166,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.046",
+    "systemVersion": "0.10.049",
     "createdTime": 1724983764866,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729530488880,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!7nYnegP8YbE9lEXW"

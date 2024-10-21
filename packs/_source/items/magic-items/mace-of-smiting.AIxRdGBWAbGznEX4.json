@@ -1,0 +1,285 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Mace of Smiting",
+  "type": "weapon",
+  "img": "icons/weapons/maces/mace-studded-steel.webp",
+  "system": {
+    "activities": {
+      "hMAOkEB5pPj7cktP": {
+        "type": "attack",
+        "_id": "hMAOkEB5pPj7cktP",
+        "system": {
+          "damage": {
+            "parts": [],
+            "critical": {},
+            "includeBase": true
+          },
+          "attack": {
+            "critical": {
+              "threshold": null
+            },
+            "flat": false,
+            "type": {}
+          },
+          "effects": []
+        },
+        "description": "",
+        "activation": {
+          "value": null
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        }
+      },
+      "kdyJRqoY9cdQphXP": {
+        "type": "damage",
+        "_id": "kdyJRqoY9cdQphXP",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Natural 20 Damage",
+        "img": ""
+      },
+      "mrqCPsmDx02JuHPt": {
+        "type": "damage",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 4,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "bludgeoning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Natural 20 Damage (vs Construct)",
+        "img": "",
+        "_id": "mrqCPsmDx02JuHPt"
+      }
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 8000,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 4,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>You gain a +1 bonus to attack and damage rolls made with this magic weapon. The bonus increases to +3 when you use the mace to attack a Construct.</p><p>When you roll a 20 on an attack roll with this weapon, the target takes an extra [[/damage 2d6 bludgeoning]], or [[/damage 4d6 bludgeoning]] if it’s a Construct. If a Construct has 25 HP or fewer after taking this damage, it is destroyed.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "melee",
+      "category": "simple",
+      "base": "mace"
+    },
+    "options": [
+      "bash"
+    ],
+    "properties": [
+      "magical"
+    ],
+    "ammunition": {},
+    "damage": {
+      "base": {
+        "number": 1,
+        "denomination": 6,
+        "type": "bludgeoning",
+        "additionalTypes": []
+      }
+    },
+    "range": {
+      "short": null,
+      "long": null,
+      "reach": null
+    },
+    "uses": {
+      "min": "",
+      "max": "",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": []
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "magicalBonus": 1
+  },
+  "effects": [],
+  "sort": 25100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1725589509928,
+    "modifiedTime": 1729531677392,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "AIxRdGBWAbGznEX4",
+  "_key": "!items!AIxRdGBWAbGznEX4"
+}

@@ -1,0 +1,183 @@
+{
+  "type": "gear",
+  "name": "Portable Hole",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 30000,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This fine black cloth, soft as silk, is folded up to the dimensions of a handkerchief. It unfolds into a circular sheet 6 feet in diameter.</p><p>You can use an action to unfold a portable hole and place it on or against a solid surface, whereupon the portable hole creates an extradimensional hole 10 feet deep. The cylindrical space within the hole exists on a different plane, so it can’t be used to create open passages. Any creature inside an open <em>portable hole</em> can exit the hole by climbing out of it.</p><p>You can use an action to close a <em>portable hole</em> by taking hold of the edges of the cloth and folding it up. Folding the cloth closes the hole, and any creatures or objects within remain in the extradimensional space. No matter what’s in it, the <em>hole</em> weighs next to nothing.</p><p>If the <em>hole</em> is folded up, a creature within the <em>hole’s</em> extradimensional space can use an action to make a [[/check 10 STR]]. On a successful check, the creature forces its way out and appears within 5 feet of the <em>portable hole</em> or the creature carrying it. A breathing creature within a closed <em>portable hole</em> can survive for up to 10 minutes, after which time it begins to suffocate.</p><p>Placing a <em>portable hole</em> inside an extradimensional space created by a <em>bag of holding</em>, <em>handy haversack</em>, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it and deposited in a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "tFcBUzNwNhs4KnUr": {
+        "type": "utility",
+        "_id": "tFcBUzNwNhs4KnUr",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Unfold/Close",
+        "img": ""
+      },
+      "02gA4R7G7XZy3UkM": {
+        "type": "check",
+        "_id": "02gA4R7G7XZy3UkM",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "check": {
+            "associated": [],
+            "dc": {
+              "calculation": "",
+              "formula": "10"
+            },
+            "visible": true,
+            "ability": "strength"
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Attempt Escape",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "9I817pXVkjdAqAdU",
+  "img": "icons/commodities/cloth/cloth-roll-worn-blue.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 3500000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1724986890790,
+    "modifiedTime": 1729533577255,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!9I817pXVkjdAqAdU"
+}

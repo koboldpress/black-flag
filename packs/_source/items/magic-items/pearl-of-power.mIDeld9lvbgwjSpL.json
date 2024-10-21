@@ -1,0 +1,144 @@
+{
+  "type": "gear",
+  "name": "Pearl of Power",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 500,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Spellcaster"
+    },
+    "description": {
+      "value": "<p>While this pearl is on your person, you can use an action to speak its command word and regain one expended spell slot. If the expended slot was of 4th circle or higher, the new slot is 3rd circle. Once you use the pearl, it can’t be used again until the next dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "Cu7xNroNMDgkRgK9": {
+        "type": "utility",
+        "_id": "Cu7xNroNMDgkRgK9",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": ""
+              }
+            },
+            {
+              "type": "spellSlots",
+              "target": "1",
+              "value": "-1",
+              "scaling": {
+                "mode": "circle"
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "3"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Recover Slot",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "mIDeld9lvbgwjSpL",
+  "img": "icons/commodities/gems/pearl-natural.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 16900000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1724986821441,
+    "modifiedTime": 1729533207989,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!mIDeld9lvbgwjSpL"
+}
