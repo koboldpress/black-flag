@@ -61,6 +61,10 @@ export const featureCategories = {
 		localization: "BF.Feature.Category.Class",
 		sources: ["class", "subclass"],
 		children: {
+			animalFocus: {
+				localization: "BF.Feature.Type.AnimalFocus",
+				level: false
+			},
 			augmentEffect: {
 				localization: "BF.Feature.Type.AugmentEffect",
 				level: false,
@@ -89,6 +93,10 @@ export const featureCategories = {
 			elementalInfusion: {
 				localization: "BF.Feature.Type.ElementalInfusion"
 			},
+			empoweredRage: {
+				localization: "BF.Feature.Type.EmpoweredRage",
+				level: false
+			},
 			epicBoon: {
 				localization: "BF.Feature.Type.EpicBoon",
 				level: 20,
@@ -107,6 +115,10 @@ export const featureCategories = {
 			},
 			pactBoon: {
 				localization: "BF.Feature.Type.PactBoon",
+				level: false
+			},
+			primalAspect: {
+				localization: "BF.Feature.Type.PrimalAspect",
 				level: false
 			},
 			stunt: {

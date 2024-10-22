@@ -80,6 +80,8 @@ export const spellComponents = {
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.wLWe4finRmO658xK"
 	}
 };
+localizeConfig(spellComponents, { sort: false });
+localizeConfig(spellComponents, { labelKeyPath: "abbreviation", propertyName: "localizedAbbreviations", sort: false });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

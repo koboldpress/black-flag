@@ -7,7 +7,7 @@ const { NumberField, SchemaField, StringField } = foundry.data.fields;
  *
  * @property {string} value - Activation value.
  * @property {string} units - Units used to measure the activation.
- * @property {string} special - Condition required to trigger activation.
+ * @property {string} condition - Condition required to trigger activation.
  *
  * @param {object} [fields={}] - Additional fields to add or, if value is `false`, default fields to remove.
  * @param {object} [options={}] - Additional options in addition to the default label.
@@ -75,6 +75,8 @@ export default class ActivationField extends SchemaField {
 		const type = CONFIG.BlackFlag.activationOptions({
 			pluralRule: getPluralRules().select(data.value ?? 1)
 		}).get(data.type);
+		if (!type) return "";
+
 		let label = game.i18n.format("BF.ACTIVATION.Formatted.Scalar", {
 			number: numberFormat(data.value ?? 1),
 			type: type.label,

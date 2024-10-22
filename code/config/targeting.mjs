@@ -14,6 +14,12 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @enum {AreaOfEffectConfiguration}
  */
 export const areaOfEffectTypes = {
+	circle: {
+		localization: "BF.AreaOfEffect.Type.Circle.Label",
+		icon: "systems/black-flag/artwork/interface/area/circle.svg",
+		template: "circle",
+		sizes: ["radius"]
+	},
 	cone: {
 		localization: "BF.AreaOfEffect.Type.Cone.Label",
 		icon: "systems/black-flag/artwork/interface/area/cone.svg",
@@ -58,7 +64,7 @@ export const areaOfEffectTypes = {
 	},
 	wall: {
 		localization: "BF.AreaOfEffect.Type.Wall.Label",
-		icon: "",
+		icon: "systems/black-flag/artwork/interface/area/wall.svg",
 		template: "ray",
 		sizes: ["length", "thickness", "height"]
 	}

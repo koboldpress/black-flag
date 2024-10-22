@@ -80,6 +80,10 @@ export const durations = {
 	perm: {
 		label: "BF.DURATION.Type.Permanent",
 		children: {
+			destroyed: {
+				label: "BF.DURATION.Value.UntilDestroyedDispelled",
+				spellOnly: true
+			},
 			dispelled: {
 				label: "BF.DURATION.Value.UntilDispelled",
 				spellOnly: true
