@@ -16,12 +16,82 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While wearing this ring, you regain [[/r 1d6]] HP every 10 minutes, provided that you have at least 1 HP. If you lose a body part, the ring causes the missing part to regrow and return to full functionality after [[/r 1d6 + 1]] days if you have at least 1 HP the whole time.</p>",
+      "value": "<p>While wearing this ring, you regain [[/healing 1d6]] every 10 minutes, provided that you have at least 1 HP. If you lose a body part, the ring causes the missing part to regrow and return to full functionality after [[/r 1d6 + 1]] days if you have at least 1 HP the whole time.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "aaIywc8TdsOzpWHr": {
+        "type": "heal",
+        "_id": "aaIywc8TdsOzpWHr",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "healing": {
+            "type": "healing",
+            "number": 1,
+            "denomination": 6,
+            "additionalTypes": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "number": 1
+            },
+            "bonus": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "Every 10 minutes"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
@@ -40,7 +110,7 @@
     ]
   },
   "_id": "IKIZy8p5MP1ob7Lk",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/equipment/finger/ring-band-studded-silver.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 6200000,
@@ -52,9 +122,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1724987031546,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729891044884,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!IKIZy8p5MP1ob7Lk"
