@@ -98,6 +98,8 @@
 		&.blue { color: var(--bf-text-color-blue); }
 	}
 
+	ol.alpha { list-style-type: lower-alpha; }
+
 	p.centered {
 		text-align: center;
 	}
@@ -154,11 +156,16 @@
 	.center { margin-inline: auto; }
 	.left { float: left; }
 	.right { float: right; }
-	.size-100 { width: 100px; }
-	.size-200 { width: 200px; }
-	.size-300 { width: 300px; }
-	.size-400 { width: 400px; }
-	.size-500 { width: 500px; }
+	.size-100 { max-width: 100px; }
+	.size-150 { max-width: 150px; }
+	.size-200 { max-width: 200px; }
+	.size-250 { max-width: 250px; }
+	.size-300 { max-width: 300px; }
+	.size-350 { max-width: 350px; }
+	.size-400 { max-width: 400px; }
+	.size-450 { max-width: 450px; }
+	.size-500 { max-width: 500px; }
+	.flip > img, img.flip { transform: scaleX(-100%); }
 }
 
 .black-flag, .black-flag-journal {
