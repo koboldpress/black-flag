@@ -243,6 +243,7 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 	 * @returns {Promise}
 	 */
 	async _onDrop(event) {
+		event.stopImmediatePropagation();
 		const { data } = DragDrop.getDragData(event);
 		if (!this._validateDrop(data)) return false;
 
@@ -260,12 +261,13 @@ export default class ActivitiesElement extends DocumentSheetAssociatedElement {
 
 			// Create a Cast activity if spell is dropped
 			else if (data.type === "Item" && doc.type === "spell") {
-				await this.item.createEmbeddedDocuments("Activity", [
+				const created = await this.item.createEmbeddedDocuments("Activity", [
 					{
 						type: "cast",
 						system: { spell: { uuid: data.uuid } }
 					}
 				]);
+				created[0]?.sheet.render({ force: true });
 			}
 		} finally {
 			DragDrop.finishDragEvent(event);

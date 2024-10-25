@@ -34,7 +34,7 @@ export class CastData extends ActivityDataModel {
 					override: new BooleanField()
 				}),
 				circle: new NumberField(),
-				properties: new SetField(new StringField()),
+				properties: new SetField(new StringField(), { initial: ["verbal", "somatic", "material"] }),
 				uuid: new DocumentUUIDField()
 			})
 		};
