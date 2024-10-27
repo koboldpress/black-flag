@@ -15,7 +15,7 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits:</p>\n\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li><p>You can see in all directions, and you have advantage on WIS (Perception) checks that rely on sight.</p></li>\n\t\t\t\t\t\t\t\t<li><p>You have darkvision to a range of 120 feet.</p></li>\n\t\t\t\t\t\t\t\t<li><p>You can see invisible creatures and objects, as well as see into the Ethereal Plane, to a range of 120 feet.</p></li>\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\t<p>The eyes on the robe can’t be closed or averted. Although you can close or avert your own eyes, you are never considered to be doing so while wearing this robe.</p>\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<p>A light spell cast on the robe or a daylight spell cast within 5 feet of the robe causes you to be blinded for 1 minute. At the end of each of your turns, you can make a CON save (DC 11 for light or DC 15 for daylight), ending the blindness on a success.</p>",
+      "value": "<p>This robe is adorned with eyelike patterns. While you wear the robe, you gain the following benefits:</p><ul><li><p>You can see in all directions, and you have advantage on WIS (Perception) checks that rely on sight.</p></li><li><p>You have darkvision to a range of 120 feet.</p></li><li><p>You can see invisible creatures and objects, as well as see into the Ethereal Plane, to a range of 120 feet.</p></li></ul><p>The eyes on the robe can’t be closed or averted. Although you can close or avert your own eyes, you are never considered to be doing so while wearing this robe.</p><p>A <em>light</em> spell cast on the robe or a <em>daylight</em> spell cast within 5 feet of the robe causes you to be blinded for 1 minute. At the end of each of your turns, you can make a CON save ([[/save CON 11]]{DC 11} for <em>light</em> or [[/save CON 15]]{DC 15} for <em>daylight</em>), ending the blindness on a success.</p>",
       "source": {
         "fallback": ""
       }
@@ -39,8 +39,58 @@
     ]
   },
   "_id": "AnIWL7PHp60CXsml",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/equipment/head/hood-red.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Eyes",
+      "origin": "Compendium.black-flag.items.Item.AnIWL7PHp60CXsml",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/head/hood-red.webp",
+      "_id": "KRrVJAU59spU0ABc",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"skill-check\" }, { \"k\": \"ability\", \"v\": \"wisdom\" }, { \"k\": \"skill\", \"v\": \"perception\" }], \"note\": { \"rollMode\": 1, \"text\": \"You can see in all directions, and you have advantage on WIS (Perception) checks that rely on sight.\" } }",
+          "priority": null
+        },
+        {
+          "key": "system.traits.senses.types.darkvision",
+          "mode": 4,
+          "value": "120",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1729892455721,
+        "modifiedTime": 1729892525197,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!AnIWL7PHp60CXsml.KRrVJAU59spU0ABc"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 4500000,
   "ownership": {
@@ -51,9 +101,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725070997860,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1729892559489,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!AnIWL7PHp60CXsml"
