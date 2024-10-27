@@ -46,6 +46,19 @@ export default class SpellSheet extends BaseItemSheet {
 			chosen: context.source.duration.units,
 			isSpell: true
 		});
+		context.originOptions = [
+			{ value: "", label: "" },
+			...Object.entries(CONFIG.BlackFlag.registration.list("class")).map(([value, data]) => ({
+				value,
+				label: data.name,
+				group: game.i18n.localize("BF.Item.Type.Class[other]")
+			})),
+			...Object.entries(CONFIG.BlackFlag.registration.list("subclass")).map(([value, data]) => ({
+				value,
+				label: data.name,
+				group: game.i18n.localize("BF.Item.Type.Subclass[other]")
+			}))
+		];
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 
 		return context;

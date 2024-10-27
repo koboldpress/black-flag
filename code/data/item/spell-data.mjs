@@ -119,6 +119,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 
+	/**
+	 * Class with which this spell is associated, if any.
+	 * @type {BlackFlagItem|null}
+	 */
+	get associatedClass() {
+		const doc =
+			this.parent.actor?.system.spellcasting?.origins?.[
+				this.parent.getFlag("black-flag", "relationship.origin.identifier")
+			]?.document;
+		if (!doc) return null;
+		return (doc.type === "class" ? doc : doc.system.class) ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @inheritDoc */
 	get chatTags() {
 		const tags = this.parent.chatTags;

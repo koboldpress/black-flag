@@ -1,4 +1,4 @@
-import { filter, simplifyBonus } from "../../../utils/_module.mjs";
+import { filter, log, simplifyBonus } from "../../../utils/_module.mjs";
 import ModifierField from "../../fields/modifier-field.mjs";
 
 /**
@@ -133,6 +133,7 @@ export default class ModifiersTemplate extends foundry.abstract.DataModel {
 	 */
 	getModifiers(data, type="bonus") {
 		if ( foundry.utils.getType(data) !== "Array" ) data = [data];
+		if ( CONFIG.BlackFlag.debug.modifiers ) log("Fetching Modifiers:", { extras: foundry.utils.deepClone(data) });
 		return this.modifiers.filter(modifier => {
 			if ( modifier.type !== type ) return false;
 			return data.some(d => filter.performCheck(d, modifier.filter));

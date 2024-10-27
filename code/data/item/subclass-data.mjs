@@ -61,12 +61,21 @@ export default class SubclassData extends ItemDataModel.mixin(
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Class with which this subclass is associated. Only available if embedded.
+	 * @type {BlackFlagItem|null}
+	 */
+	get class() {
+		return this.parent.actor?.system.progression?.classes?.[this.identifier.class]?.document ?? null;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Fetch the color from parent class if available.
 	 * @type {string|void}
 	 */
 	get color() {
-		const parentClass = this.parent.actor?.system.progression?.classes?.[this.identifier.class]?.document;
-		return parentClass?.system.color;
+		return this.class?.system.color;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -76,7 +85,7 @@ export default class SubclassData extends ItemDataModel.mixin(
 	 * @type {string|null}
 	 */
 	get keyAbility() {
-		return this.parent?.actor?.system.progression?.classes?.[this.identifier.class]?.system.keyAbility ?? null;
+		return this.class?.system.keyAbility ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
