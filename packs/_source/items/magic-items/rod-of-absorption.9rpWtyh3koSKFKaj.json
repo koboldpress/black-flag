@@ -15,18 +15,179 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While holding this rod, you can use your reaction to absorb a spell that targets only you. The absorbed spell’s effect is canceled, and the spell’s energy—not the spell itself—is stored in the rod. The energy has the same circle as the spell when it was cast. The rod can absorb and store up to 50 circles’ worth of energy over the course of its existence. Once the rod absorbs 50 circles’ worth of spell slots, it can’t absorb more. If you are targeted by a spell that the rod can’t store, the rod has no effect on that spell.</p>\n\t\t\t\t\t\t\t\t<p>When you become attuned to the rod, you know how many circles’ worth of spell energy the rod has absorbed over the course of its existence, and how many circles it currently has stored.</p>\n\t\t\t\t\t\t\t\t<p>If you are a spellcaster holding the rod, you can convert energy stored in it into spell slots to cast spells you have prepared or know. You can create spell slots only of a circle equal to or lower than your own spell slots, up to a maximum of 5th circle. You use the stored rings in place of your slots, but otherwise cast the spell as normal. For example, you can use 3 circles stored in the rod as a 3rd- circle spell slot.</p>\n\t\t\t\t\t\t\t\t<p>A newly found rod of absorption has [[/r 1d10]] circles of spell energy stored in it already. A rod that can no longer absorb spell energy and has no energy remaining becomes nonmagical.</p>",
+      "value": "<p>While holding this rod, you can use your reaction to absorb a spell that targets only you. The absorbed spell’s effect is canceled, and the spell’s energy—not the spell itself—is stored in the rod. The energy has the same circle as the spell when it was cast. The rod can absorb and store up to 50 circles’ worth of energy over the course of its existence. Once the rod absorbs 50 circles’ worth of spell slots, it can’t absorb more. If you are targeted by a spell that the rod can’t store, the rod has no effect on that spell.</p><p>When you become attuned to the rod, you know how many circles’ worth of spell energy the rod has absorbed over the course of its existence, and how many circles it currently has stored.</p><p>If you are a spellcaster holding the rod, you can convert energy stored in it into spell slots to cast spells you have prepared or know. You can create spell slots only of a circle equal to or lower than your own spell slots, up to a maximum of 5th circle. You use the stored rings in place of your slots, but otherwise cast the spell as normal. For example, you can use 3 circles stored in the rod as a 3rd- circle spell slot.</p><p>A newly found <em>rod of absorption</em> has [[/r 1d10]] circles of spell energy stored in it already. A rod that can no longer absorb spell energy and has no energy remaining becomes nonmagical.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "N5z6SzbhLGFN9zPv": {
+        "type": "utility",
+        "_id": "N5z6SzbhLGFN9zPv",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "reaction",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            },
+            {
+              "type": "item",
+              "target": "",
+              "value": "-1",
+              "scaling": {
+                "mode": "amount",
+                "formula": "-1"
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "9"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": "50"
+        },
+        "name": "Absorb Spell",
+        "img": ""
+      },
+      "w7w3IDW21tFMAJIE": {
+        "type": "utility",
+        "_id": "w7w3IDW21tFMAJIE",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            },
+            {
+              "type": "spellSlots",
+              "target": "1",
+              "value": "-1",
+              "scaling": {
+                "mode": "circle",
+                "formula": ""
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "5"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Convert to Circle",
+        "img": ""
+      }
+    },
     "uses": {
-      "spent": 0,
+      "spent": 50,
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "50"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +200,7 @@
     ]
   },
   "_id": "9rpWtyh3koSKFKaj",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/weapons/wands/wand-carved-fire.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 4000000,
@@ -51,9 +212,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725071137254,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730069716343,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!9rpWtyh3koSKFKaj"

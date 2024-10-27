@@ -70,6 +70,12 @@
           "mode": 2,
           "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against spells and other magical effects.\" } }",
           "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"spellcasting-dc\" }, { \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }] }] }], \"formula\": 2 }",
+          "priority": null
         }
       ],
       "description": "",
@@ -85,7 +91,7 @@
         "systemId": "black-flag",
         "systemVersion": "0.10.050",
         "createdTime": 1729892808385,
-        "modifiedTime": 1729893105348,
+        "modifiedTime": 1730068538702,
         "lastModifiedBy": "blackflag0000000"
       },
       "_key": "!items.effects!k5sqbKphamEI3KnY.jBDiSrbQZiVkLOHy"
