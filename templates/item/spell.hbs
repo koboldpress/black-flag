@@ -73,6 +73,12 @@
 						  	                 blank=(localize "BF.Default.Specific" default=system.defaultAbility) }}
 							</select>
 						</label>
+						<label>
+							<span>{{ localize "BF.Spellcasting.Origin" }}</span>
+							<select name="flags.black-flag.relationship.origin.identifier">
+								{{ selectOptions originOptions selected=flags.black-flag.relationship.origin.identifier }}
+							</select>
+						</label>
 					</fieldset>
 				{{/if}}
 				<fieldset>

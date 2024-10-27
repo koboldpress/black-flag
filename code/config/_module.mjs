@@ -10,6 +10,7 @@ import * as canvas from "./canvas.mjs";
 import * as conditions from "./conditions.mjs";
 import * as containers from "./containers.mjs";
 import * as damage from "./damage.mjs";
+import * as debug from "./debug.mjs";
 import * as dice from "./dice.mjs";
 import * as documents from "./documents.mjs";
 import * as enrichers from "./enrichers.mjs";
@@ -91,6 +92,7 @@ export default {
 	...conditions,
 	...containers,
 	...damage,
+	...debug,
 	...dice,
 	...documents,
 	...enrichers,

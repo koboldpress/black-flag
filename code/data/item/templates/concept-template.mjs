@@ -63,6 +63,8 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 		if ( !this.parent.actor || !spellcasting ) return;
 		const spellcastingOrigins = parent.actor.system.spellcasting.origins ??= {};
 		const origin = spellcastingOrigins[parent.identifier] ??= {};
+		const identifier = parent.type === "class" ? parent.identifier : parent.system.identifier.class;
+		const rollData = this.parent.getRollData({ deterministic: true });
 
 		Object.defineProperty(origin, "document", {
 			get() { return parent; },
@@ -77,18 +79,25 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 
 		// Spellcasting Ability
 		origin.ability = spellcasting.spellcastingAbility;
-		const abilityMod = parent.actor.system.abilities[origin.ability]?.mod ?? 0;
+		const ability = parent.actor.system.abilities[origin.ability];
 		const proficiency = parent.actor.system.attributes.proficiency ?? 0;
 
 		// Spell Attack Modifier
-		origin.attack = proficiency + abilityMod;
-		// TODO: Add global/spell attack bonuses
-		// TODO: Split into melee & ranged spell attack modifiers?
+		origin.attack = proficiency + (ability?.mod ?? 0);
+		origin.attack += this.parent.actor.system.buildBonus?.(
+			this.parent.actor.system.getModifiers(foundry.utils.expandObject({
+				type: "attack", class: identifier, "activity.attack.type.classification": "spell"
+			})),
+			{ deterministic: true, rollData }
+		) ?? 0;
 
 		// Spell Save DC
-		origin.dc = 8 + proficiency + abilityMod;
+		origin.dc = ability?.dc ?? (8 + proficiency);
+		origin.dc += this.parent.actor.system.buildBonus?.(
+			this.parent.actor.system.getModifiers({ type: "spellcasting-dc", class: identifier }),
+			{ deterministic: true, rollData }
+		) ?? 0;
 		parent.actor.system.spellcasting.dc = Math.max(parent.actor.system.spellcasting.dc ?? -Infinity, origin.dc);
-		// TODO: Add global/spell DC bonuses
 
 		// Knowable cantrips/rituals/spells
 		parent.actor.system.spellcasting.spells ??= {};
