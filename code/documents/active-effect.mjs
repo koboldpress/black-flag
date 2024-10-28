@@ -61,7 +61,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 */
 	get suppressionReasons() {
 		const reasons = [];
-		if (this.parent?.type !== "pc") return reasons;
+		if (this.parent.parent?.type !== "pc") return reasons;
 		if (this.parent.getFlag(game.system.id, "relationship.enabled") === false) {
 			reasons.push("BF.EFFECT.SuppressionReason.Disabled");
 		}
@@ -96,17 +96,47 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	apply(document, change) {
+	apply(doc, change) {
 		// Properly handle formulas that don't exist as part of the data model
 		if (this.constructor.FORMULA_FIELDS.has(change.key)) {
-			const value = foundry.utils.getProperty(document, change.key) ?? null;
+			const value = foundry.utils.getProperty(doc, change.key) ?? null;
 			const field = new FormulaField({ deterministic: true });
 			const update = field.applyChange(value, null, change);
-			foundry.utils.setProperty(document, change.key, update);
+			foundry.utils.setProperty(doc, change.key, update);
 			return { [change.key]: update };
 		}
 
-		return super.apply(document, change);
+		// Handle activity-targeted changes
+		if ((change.key.startsWith("activity.") || change.key.startsWith("system.activities.")) && doc instanceof Item) {
+			return this.applyActivity(doc, change);
+		}
+
+		return super.apply(doc, change);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Apply a change to activities on this item.
+	 * @param {BlackFlagItem} item - The Item to whom this change should be applied.
+	 * @param {EffectChangeData} change - The change data being applied.
+	 * @returns {Record<string, *>} - An object of property paths and their updated values.
+	 */
+	applyActivity(item, change) {
+		const changes = {};
+		const apply = (activity, keyPath) => {
+			const c = this.apply(activity, { ...change, key: keyPath.join(".") });
+			Object.entries(c).forEach(([k, v]) => (changes[`system.activities.${activity.id}.${k}`] = v));
+		};
+		if (change.key.startsWith("system.activities.")) {
+			const [, , id, ...keyPath] = change.key.split(".");
+			const activity = item.system.activities?.get(id);
+			if (activity) apply(activity, keyPath);
+		} else {
+			const [, type, ...keyPath] = change.key.split(".");
+			item.system.activities?.byType(type)?.forEach(activity => apply(activity, keyPath));
+		}
+		return changes;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

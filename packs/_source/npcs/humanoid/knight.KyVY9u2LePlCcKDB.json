@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 3,
       "hp": {
@@ -56,11 +55,15 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {},
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "medium",
       "condition": {
@@ -84,16 +87,17 @@
         "resistances": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "immunities": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "vulnerabilities": {
           "value": [],
-          "custom": []
+          "custom": [],
+          "nonmagical": []
         }
       },
       "type": {
@@ -101,38 +105,51 @@
         "tags": [
           "anyLineage"
         ],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       },
       "dexterity": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "constitution": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       },
       "intelligence": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "wisdom": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "charisma": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       }
     },
     "biography": {
       "value": "",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Knight",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -155,9 +172,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -188,7 +205,7 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
+      "enabled": true,
       "range": 0,
       "angle": 360,
       "visionMode": "basic",
@@ -211,7 +228,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -262,7 +279,14 @@
           "value": ""
         },
         "container": null,
-        "rarity": ""
+        "rarity": "",
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 0,
@@ -303,10 +327,18 @@
             "type": "utility",
             "_id": "QBGhlfUjtsOe77xJ",
             "description": "<p>Each friendly creature that starts its turn within 15 feet of the knight has advantage on the first attack roll it makes before this presence ends.</p>",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "free",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -322,16 +354,46 @@
               "max": ""
             },
             "name": "Empowering Presence",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           },
           "KDAHyR7aZtlvHZs2": {
             "type": "utility",
             "_id": "KDAHyR7aZtlvHZs2",
             "description": "<p>Hostile creatures have disadvantage on attack rolls against friendly creatures within 5 feet of the knight.</p>",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "free",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -347,16 +409,46 @@
               "max": ""
             },
             "name": "Protective Presence",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           },
           "pdhMtwSHef1kLMTD": {
             "type": "utility",
             "_id": "pdhMtwSHef1kLMTD",
             "description": "<p>Each friendly creature within 15 feet of the knight is resistant to the charmed and frightened conditions.</p>",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "free",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -372,7 +464,29 @@
               "max": ""
             },
             "name": "Unwavering Presence",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -389,10 +503,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "iQPLJYyqSRVPlnR9",
@@ -433,8 +553,17 @@
             "type": "utility",
             "_id": "fttXbxb6LMihJiZG",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -445,6 +574,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -462,13 +613,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -511,24 +668,27 @@
             "type": "attack",
             "_id": "TUtt6WZgu28Jb0VO",
             "system": {
-              "type": {
-                "value": "",
-                "classification": ""
-              },
               "damage": {
-                "includeBaseDamage": true,
-                "parts": []
+                "parts": [],
+                "critical": {},
+                "includeBase": true
               },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
               },
-              "ability": ""
+              "effects": []
             },
             "description": "",
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -547,15 +707,29 @@
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "overrides": {
@@ -589,9 +763,12 @@
         ],
         "ammunition": {},
         "damage": {
-          "number": 2,
-          "denomination": 6,
-          "type": "slashing"
+          "base": {
+            "number": 2,
+            "denomination": 6,
+            "type": "slashing",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": null,
@@ -609,7 +786,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 0,
@@ -650,24 +828,27 @@
             "type": "attack",
             "_id": "prpu4fvX8tbM3Wed",
             "system": {
-              "type": {
-                "value": "",
-                "classification": ""
-              },
               "damage": {
-                "includeBaseDamage": true,
-                "parts": []
+                "parts": [],
+                "critical": {},
+                "includeBase": true
               },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
               },
-              "ability": ""
+              "effects": []
             },
             "description": "",
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -686,15 +867,29 @@
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "overrides": {
@@ -732,9 +927,12 @@
           "type": "crossbowBolt"
         },
         "damage": {
-          "number": 1,
-          "denomination": 10,
-          "type": "piercing"
+          "base": {
+            "number": 1,
+            "denomination": 10,
+            "type": "piercing",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": 100,
@@ -752,7 +950,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 0,
@@ -790,22 +989,28 @@
         },
         "activities": {
           "c6c5KVlviiuljPy2": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "c6c5KVlviiuljPy2",
             "description": "",
             "system": {
-              "ability": "charisma",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "13"
-              }
+              "save": {
+                "ability": [
+                  "charisma"
+                ],
+                "dc": {
+                  "formula": "13"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "bonus",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -821,7 +1026,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -838,10 +1065,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "PUDguEi7uc3nB7F6",
@@ -880,10 +1113,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709698904645,
-    "modifiedTime": 1717281657715,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

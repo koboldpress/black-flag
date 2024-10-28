@@ -939,7 +939,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Perform any final steps of the activation including creating measured templates.
 	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
-	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @param {ActivityActivationResults} results - Final details on the activation.
 	 * @protected
 	 */
 	async _finalizeActivation(config, results) {
@@ -951,7 +951,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Trigger a primary activation action defined by the activity (such as opening the attack dialog for attack rolls).
 	 * @param {ActivityActivationConfiguration} config - Configuration data for the activation.
-	 * @param {ActivityUsageResults} results - Final details on the activation.
+	 * @param {ActivityActivationResults} results - Final details on the activation.
 	 * @protected
 	 */
 	async _triggerSubsequentActions(config, results) {}

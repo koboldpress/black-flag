@@ -705,7 +705,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 			else {
 				roll.terms = roll.terms.map(term => {
 					if (term instanceof foundry.dice.terms.DiceTerm) return term.alter(undefined, scaling);
-					else if (term instanceof foundry.dice.terms.NumericTerm) term.number += scaling;
+					else if (term instanceof foundry.dice.terms.NumericTerm) term.number += term.number >= 0 ? scaling : -scaling;
 					return term;
 				});
 			}

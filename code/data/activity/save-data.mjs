@@ -100,7 +100,11 @@ export class SaveData extends ActivityDataModel {
 		const rollData = this.getRollData({ deterministic: true });
 		if (this.save.dc.ability === "custom") this.save.dc.final = simplifyBonus(this.save.dc.formula, rollData);
 		else if (this.actor?.system.spellcasting?.dc && !this.save.dc.ability) {
-			this.save.dc.final = this.actor.system.spellcasting.dc;
+			if (this.isSpell && this.item.system.associatedClass) {
+				this.save.dc.final = this.actor.system.spellcasting.origins[this.item.system.associatedClass.identifier]?.dc;
+			} else {
+				this.save.dc.final = this.actor.system.spellcasting.dc;
+			}
 		} else this.save.dc.final = rollData.abilities?.[this.parent.dcAbility]?.dc;
 	}
 

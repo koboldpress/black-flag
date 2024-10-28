@@ -55,6 +55,16 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	sourcedItems = this.sourcedItems;
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Creatures summoned by this actor.
+	 * @type {BlackFlagActor[]}
+	 */
+	get summonedCreatures() {
+		return BlackFlag.registry.summons.creatures(this);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -74,6 +84,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		this._embeddedPreparation = true;
 		super.prepareEmbeddedDocuments();
 		this._embeddedPreparation = false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	prepareDerivedData() {
+		super.prepareDerivedData();
+		const origin = this.getFlag(game.system.id, "summon.origin");
+		if (origin && this.token?.id) BlackFlag.registry.summons.track(origin.split(".Item.")[0], this.uuid);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1898,6 +1917,15 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	async _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
 		if (userId === game.userId && collection === "items") await this.system.updateEncumbrance?.(options);
 		super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	_onDelete(options, userId) {
+		super._onDelete(options, userId);
+		const origin = this.getFlag(game.system.id, "summon.origin");
+		if (origin) BlackFlag.registry.summons.untrack(origin.split(".Item.")[0], this.uuid);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

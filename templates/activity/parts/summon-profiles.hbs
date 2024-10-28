@@ -4,7 +4,10 @@
 			<span>{{ localize "BF.SUMMON.FIELDS.profiles.label" }}</span>
 		</legend>
 		{{#with systemFields.summon.fields as |fields|}}
+			{{!--
+			<!-- TODO: Unhide this option once a compendium browser is implemented -->
 			{{ formField fields.mode value=../source.system.summon.mode options=../profileModes }}
+			--}}
 			{{#unless @root.activity.isSpell}}
 				{{ formField fields.identifier value=../source.system.summon.identifier }}
 			{{/unless}}

@@ -259,7 +259,7 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		const effects = this.getFlag(game.system.id, "activation.effects")
 			?.map(id => item?.effects.get(id))
 			.filter(e => e && game.user.isGM); // TODO: Allow effects tray to be visible to players
-		if (!effects.length) return;
+		if (!effects?.length) return;
 
 		const effectApplication = document.createElement("blackFlag-effectApplication");
 		effectApplication.effects = effects;
