@@ -146,10 +146,9 @@ export class SummonData extends ActivityDataModel {
 	 * @type {BlackFlagActor[]}
 	 */
 	get summonedCreatures() {
-		return [];
-		// TODO: Implement summons registry
-		// if ( !this.actor ) return [];
-		// return BlackFlag.registry.summons.creatures(this.actor)
-		// 	.filter(i => i?.getFlag(game.system.id, "summon.origin") === this.uuid);
+		if (!this.actor) return [];
+		return BlackFlag.registry.summons
+			.creatures(this.actor)
+			.filter(i => i?.getFlag(game.system.id, "summon.origin") === this.uuid);
 	}
 }
