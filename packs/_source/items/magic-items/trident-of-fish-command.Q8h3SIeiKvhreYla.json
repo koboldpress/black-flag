@@ -57,17 +57,89 @@
           "recovery": []
         },
         "magical": false
+      },
+      "Reuy0SDuyorFoItU": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.5mipsDCRlAEIpZXs",
+            "challenge": {
+              "attack": null,
+              "save": 15,
+              "override": true
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "Reuy0SDuyorFoItU",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": "Beast that has an innate swimming speed"
+          },
+          "prompt": true,
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "3"
     },
     "description": {
-      "value": "<p>This trident is a magic weapon. It has 3 charges and regains [[/r 1d3]] expended charges daily at dawn. While you carry it, you can use an action and expend 1 charge to cast dominate (save DC 15) from it on a Beast that has an innate swimming speed.</p>",
+      "value": "<p>This trident is a magic weapon. It has 3 charges and regains [[/r 1d3]] expended charges daily at dawn. While you carry it, you can use an action and expend 1 charge to cast <em>@UUID[Compendium.black-flag.spells.Item.5mipsDCRlAEIpZXs]{dominate}</em> (save DC 15) from it on a Beast that has an innate swimming speed.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -130,9 +202,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725590782142,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730158272611,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "Q8h3SIeiKvhreYla",
