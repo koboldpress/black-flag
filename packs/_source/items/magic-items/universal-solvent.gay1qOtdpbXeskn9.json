@@ -11,18 +11,85 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This tube holds milky liquid with a strong alcohol smell. You can use an action to pour its contents onto a surface within reach. The liquid instantly dissolves up to 1 square foot of adhesive it touches, including sovereign glue.</p>",
+      "value": "<p>This tube holds milky liquid with a strong alcohol smell. You can use an action to pour its contents onto a surface within reach. The liquid instantly dissolves up to 1 square foot of adhesive it touches, including <em>sovereign glue</em>.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "WX5BzeFrwW832NY6": {
+        "type": "utility",
+        "_id": "WX5BzeFrwW832NY6",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Apply",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
-      "consumeQuantity": false,
+      "consumeQuantity": true,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "1"
     },
     "attunement": {
       "value": ""
@@ -38,7 +105,7 @@
     ]
   },
   "_id": "gay1qOtdpbXeskn9",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/consumables/potions/potion-bottle-corked-white.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 15300000,
@@ -50,9 +117,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725071390652,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730154535093,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!gay1qOtdpbXeskn9"

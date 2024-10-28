@@ -15,18 +15,94 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>This wand has 7 charges. While holding it, you can use an action and expend 1 charge to speak its command word. For the next minute, you know the direction of the nearest creature hostile to you within 60 feet, but not its distance from you. The wand can sense the presence of hostile creatures that are ethereal, invisible, disguised, or hidden, as well as those in plain sight. The effect ends if you stop holding the wand.</p>\n\t\t\t\t\t\t\t\t<p>The wand regains [[/r 1d6 + 1]] expended charges daily at dawn. If you expend the wand’s last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>",
+      "value": "<p>This wand has 7 charges. While holding it, you can use an action and expend 1 charge to speak its command word. For the next minute, you know the direction of the nearest creature hostile to you within 60 feet, but not its distance from you. The wand can sense the presence of hostile creatures that are ethereal, invisible, disguised, or hidden, as well as those in plain sight. The effect ends if you stop holding the wand.</p><p>The wand regains [[/r 1d6 + 1]] expended charges daily at dawn. If you expend the wand’s last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>",
       "source": {
         "fallback": ""
       }
     },
-    "activities": {},
+    "activities": {
+      "6vH0Tq8rJolzL6Qx": {
+        "type": "utility",
+        "_id": "6vH0Tq8rJolzL6Qx",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Activate",
+        "img": ""
+      }
+    },
     "uses": {
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": [],
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6 + 1"
+        }
+      ],
       "min": "",
-      "max": ""
+      "max": "7"
     },
     "container": null,
     "quantity": 1,
@@ -39,7 +115,7 @@
     ]
   },
   "_id": "3qZHI2tquYQxqZw6",
-  "img": "systems/black-flag/artwork/types/gear.svg",
+  "img": "icons/weapons/wands/wand-simple-eye.webp",
   "effects": [],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 1700000,
@@ -51,9 +127,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725071438134,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730155087529,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!3qZHI2tquYQxqZw6"

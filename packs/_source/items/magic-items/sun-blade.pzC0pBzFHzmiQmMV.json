@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Sun Blade",
   "type": "weapon",
-  "img": "icons/weapons/swords/sword-guard-engraved.webp",
+  "img": "icons/commodities/treasure/sceptre-jeweled-gold.webp",
   "system": {
     "activities": {
       "gN3E8nFP8vb9DUz0": {
@@ -57,7 +57,141 @@
           "spent": 0,
           "consumeQuantity": false,
           "recovery": []
-        }
+        },
+        "sort": 100000
+      },
+      "uvEplFhKw541xQlS": {
+        "type": "utility",
+        "_id": "uvEplFhKw541xQlS",
+        "description": "",
+        "sort": 300000,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "bonus",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Ignite Blade",
+        "img": ""
+      },
+      "qO3vIFRcSHIDJYSA": {
+        "type": "damage",
+        "_id": "qO3vIFRcSHIDJYSA",
+        "description": "",
+        "sort": 200000,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 1,
+                "denomination": 8,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "radiant",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Damage vs. Undead",
+        "img": ""
       }
     },
     "overrides": {
@@ -73,7 +207,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>This item appears to be a longsword hilt. While grasping the hilt, you can use a bonus action to cause a blade of pure radiance to spring into existence, or make the blade disappear. While the blade exists, this magic longsword has the Finesse property. If you are proficient with shortswords or longswords, you are proficient with a sun blade. You gain a +2 bonus to attack and damage rolls made with this weapon, which deals radiant damage instead of slashing damage. When you hit an Undead with it, the target takes an extra [[/damage 1d8 radiant]].</p>\n\t\t\t\t\t\t\t\t<p>The sword’s luminous blade emits bright light in a 15‑foot radius and dim light for an additional 15 feet. The light is sunlight. While the blade persists, you can use an action to expand or reduce its radius of bright and dim light by 5 feet each, to a maximum of 30 feet each or a minimum of 10 feet each.</p>",
+      "value": "<p>This item appears to be a longsword hilt. While grasping the hilt, you can use a bonus action to cause a blade of pure radiance to spring into existence, or make the blade disappear. While the blade exists, this magic longsword has the Finesse property. If you are proficient with shortswords or longswords, you are proficient with a <em>sun blade</em>. You gain a +2 bonus to attack and damage rolls made with this weapon, which deals radiant damage instead of slashing damage. When you hit an Undead with it, the target takes an extra [[/damage 1d8 radiant]].</p><p>The sword’s luminous blade emits bright light in a 15‑foot radius and dim light for an additional 15 feet. The light is sunlight. While the blade persists, you can use an action to expand or reduce its radius of bright and dim light by 5 feet each, to a maximum of 30 feet each or a minimum of 10 feet each.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -88,6 +222,7 @@
       "hamstring"
     ],
     "properties": [
+      "finesse",
       "magical",
       "versatile"
     ],
@@ -96,7 +231,7 @@
       "base": {
         "number": 1,
         "denomination": 8,
-        "type": "slashing",
+        "type": "radiant",
         "additionalTypes": []
       }
     },
@@ -118,7 +253,7 @@
       "requirement": ""
     },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 2
   },
   "effects": [],
   "sort": 25400000,
@@ -130,9 +265,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725590769146,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730154407838,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "pzC0pBzFHzmiQmMV",

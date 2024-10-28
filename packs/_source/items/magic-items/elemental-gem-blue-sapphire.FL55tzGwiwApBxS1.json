@@ -11,28 +11,52 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This gem contains a mote of elemental energy. When you use an action to break the gem, a <strong>air elemental</strong> is summoned as if you had cast the <em>@UUID[Compendium.black-flag.spells.Item.r3D0SVvYQkzi6lE4]{conjure elemental}</em> spell, and the gem’s magic is lost.</p>",
+      "value": "<p>This gem contains a mote of elemental energy. When you use an action to break the gem, a <strong>@UUID[Compendium.black-flag.npcs.Actor.xovBE0pXygwryVLa]{air elemental}</strong> is summoned as if you had cast the <em>@UUID[Compendium.black-flag.spells.Item.r3D0SVvYQkzi6lE4]{conjure elemental}</em> spell, and the gem’s magic is lost.</p>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
-      "FF6JF5ZIMkLex8WN": {
-        "type": "utility",
-        "_id": "FF6JF5ZIMkLex8WN",
+      "dolyrJfx6u4ATI78": {
+        "type": "summon",
+        "_id": "dolyrJfx6u4ATI78",
         "description": "",
         "sort": 0,
         "system": {
+          "bonuses": {
+            "ac": "",
+            "hp": "",
+            "attackDamage": "",
+            "saveDamage": "",
+            "healing": ""
+          },
+          "creatureSizes": [],
+          "creatureTypes": [],
           "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "formula": "",
-            "name": ""
+          "match": {
+            "attacks": false,
+            "proficiency": false,
+            "saves": false
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.xovBE0pXygwryVLa",
+              "_id": "GOXj8ncpo83mFWS4",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ],
+          "summon": {
+            "prompt": true,
+            "identifier": ""
           }
         },
         "activation": {
           "value": null,
+          "override": false,
           "type": "action",
           "condition": ""
         },
@@ -40,6 +64,7 @@
           "targets": [
             {
               "type": "item",
+              "target": "",
               "value": "1",
               "scaling": {}
             }
@@ -49,13 +74,16 @@
           }
         },
         "duration": {
-          "units": "instantaneous",
+          "units": "hour",
           "concentration": false,
-          "override": false
+          "override": false,
+          "value": "1"
         },
         "range": {
           "override": false,
-          "units": ""
+          "units": "foot",
+          "value": "90",
+          "special": ""
         },
         "magical": false,
         "target": {
@@ -114,9 +142,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1728426556013,
-    "modifiedTime": 1729530736756,
+    "modifiedTime": 1730154237481,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "FL55tzGwiwApBxS1",

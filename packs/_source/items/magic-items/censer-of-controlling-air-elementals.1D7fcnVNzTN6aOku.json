@@ -11,25 +11,50 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound. While incense is burning in this censer, you can use an action to speak the censer’s command word and summon an <strong>air elemental</strong>, as if you had cast the <em>@UUID[Compendium.black-flag.spells.Item.r3D0SVvYQkzi6lE4]{conjure elemental}</em> spell. The censer can’t be used this way again until the next dawn.</p>",
+      "value": "<p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound. While incense is burning in this censer, you can use an action to speak the censer’s command word and summon an <strong>@UUID[Compendium.black-flag.npcs.Actor.xovBE0pXygwryVLa]{air elemental}</strong>, as if you had cast the <em>@UUID[Compendium.black-flag.spells.Item.r3D0SVvYQkzi6lE4]{conjure elemental}</em> spell. The censer can’t be used this way again until the next dawn.</p>",
       "source": {}
     },
     "activities": {
-      "PwU1TM79WbvoOTjh": {
-        "type": "utility",
-        "_id": "PwU1TM79WbvoOTjh",
+      "Gj98eiWLFYrraSaR": {
+        "type": "summon",
+        "_id": "Gj98eiWLFYrraSaR",
         "description": "",
+        "sort": 0,
         "system": {
+          "bonuses": {
+            "ac": "",
+            "hp": "",
+            "attackDamage": "",
+            "saveDamage": "",
+            "healing": ""
+          },
+          "creatureSizes": [],
+          "creatureTypes": [],
           "effects": [],
-          "roll": {
-            "prompt": false,
-            "visible": false,
-            "name": "",
-            "formula": ""
+          "match": {
+            "attacks": false,
+            "proficiency": false,
+            "saves": false
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.xovBE0pXygwryVLa",
+              "_id": "tDKKfNeStyQrjMN3",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ],
+          "summon": {
+            "prompt": true,
+            "identifier": ""
           }
         },
         "activation": {
           "value": null,
+          "override": false,
           "type": "action",
           "condition": ""
         },
@@ -37,6 +62,7 @@
           "targets": [
             {
               "type": "item",
+              "target": "",
               "value": "1",
               "scaling": {}
             }
@@ -46,13 +72,16 @@
           }
         },
         "duration": {
-          "units": "instantaneous",
-          "concentration": false,
-          "override": false
+          "units": "hour",
+          "concentration": true,
+          "override": false,
+          "value": "1"
         },
         "range": {
           "override": false,
-          "units": ""
+          "units": "foot",
+          "value": "90",
+          "special": ""
         },
         "magical": false,
         "target": {
@@ -66,6 +95,7 @@
             "choice": false,
             "type": ""
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
@@ -75,7 +105,7 @@
           "min": "",
           "max": ""
         },
-        "name": "Conjure Elemental",
+        "name": "",
         "img": ""
       }
     },
@@ -117,9 +147,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724983669169,
-    "modifiedTime": 1729530356444,
+    "modifiedTime": 1730154089532,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!1D7fcnVNzTN6aOku"

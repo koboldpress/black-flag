@@ -15,7 +15,7 @@
       "requirement": ""
     },
     "description": {
-      "value": "<p>While you wear these boots, you have a flying speed equal to your walking speed. You can use the boots to fly for up to 4 hours, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration. If you are flying when the duration expires, you descend at a rate of 30 feet per round until you land.</p>\n\t\t\t\t\t\t\t\t<p>The boots regain 2 hours of flying capability for every 12 hours they aren’t in use.</p>",
+      "value": "<p>While you wear these boots, you have a flying speed equal to your walking speed. You can use the boots to fly for up to 4 hours, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration. If you are flying when the duration expires, you descend at a rate of 30 feet per round until you land.</p><p>The boots regain 2 hours of flying capability for every 12 hours they aren’t in use.</p>",
       "source": {
         "fallback": ""
       }
@@ -26,7 +26,7 @@
       "consumeQuantity": false,
       "recovery": [],
       "min": "",
-      "max": ""
+      "max": "240"
     },
     "container": null,
     "quantity": 1,
@@ -39,8 +39,52 @@
     ]
   },
   "_id": "15fE9lhT2QOtZNy1",
-  "img": "systems/black-flag/artwork/types/gear.svg",
-  "effects": [],
+  "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Winged Boots",
+      "origin": "Compendium.black-flag.items.Item.15fE9lhT2QOtZNy1",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": true,
+      "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+      "_id": "FJBWMN1IQ3jfrOyq",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.movement.types.fly",
+          "mode": 4,
+          "value": "@base",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730155805377,
+        "modifiedTime": 1730155862080,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!15fE9lhT2QOtZNy1.FJBWMN1IQ3jfrOyq"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 500000,
   "ownership": {
@@ -51,9 +95,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725071689248,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730155856518,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!15fE9lhT2QOtZNy1"
