@@ -33,6 +33,7 @@ export const consumableCategories = {
 	}
 };
 localizeConfig(consumableCategories);
+localizeConfig(consumableCategories.poison.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

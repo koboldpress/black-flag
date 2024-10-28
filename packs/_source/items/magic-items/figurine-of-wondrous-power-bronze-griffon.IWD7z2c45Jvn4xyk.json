@@ -11,14 +11,14 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This bronze statuette is of a griffon rampant. It can become a <strong>griffon</strong> for up to 6 hours. Once it reverts, it can’t be used again until 5 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>This bronze statuette is of a griffon rampant. It can become a <strong>@UUID[Compendium.black-flag.npcs.Actor.b6WyT2uZ2s0hH5EQ]{griffon}</strong> for up to 6 hours. Once it reverts, it can’t be used again until 5 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "pGiexbFQ0XVzD0Kg": {
-        "type": "utility",
+        "type": "summon",
         "description": "",
         "sort": 0,
         "system": {
@@ -28,7 +28,18 @@
             "visible": false,
             "formula": "",
             "name": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.b6WyT2uZ2s0hH5EQ",
+              "_id": "txWEEkHTRI8zOJr9",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -120,9 +131,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984558384,
-    "modifiedTime": 1729530889617,
+    "modifiedTime": 1730157739717,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!IWD7z2c45Jvn4xyk"

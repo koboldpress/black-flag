@@ -1,0 +1,363 @@
+{
+  "type": "gear",
+  "name": "Ring of Shooting Stars",
+  "system": {
+    "type": {
+      "category": "clothing",
+      "base": "ring"
+    },
+    "rarity": "veryRare",
+    "price": {
+      "value": 33000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "Outdoors at Night"
+    },
+    "description": {
+      "value": "<p>While wearing this ring in dim light or darkness, as an action you can cast dancing lights and light from it. For its other properties, the ring has 6 charges.</p><p><em><strong>Faerie Fire.</strong></em> You can expend 1 charge as an action to cast <em>@UUID[Compendium.black-flag.spells.Item.6dvUhdyeuOtRySf9]{faerie fire}</em> from the ring.</p><p><em><strong>Ball Lightning.</strong></em> You can expend 2 charges as an action to create one to four 3-foot-diameter spheres of lightning. The more spheres you create, the less power each sphere has.</p><p>Each sphere appears in an unoccupied space you can see within 120 feet of you. The spheres last as long as you concentrate (as if concentrating on a spell), up to 1 minute. Each sphere sheds dim light in a 30-foot radius. As a bonus action, you can move each sphere up to 30 feet, but no farther than 120 feet away from you. When a creature other than you comes within 5 feet of a sphere, the sphere discharges lightning at that creature and disappears. That creature must make a [[/save 15 DEX]]. On a failed save, the creature takes lightning damage based on the number of spheres you created.</p><p>@Embed[Compendium.black-flag.rules.JournalEntry.PBo9j135EucIDliX.JournalEntryPage.Cnttuvo9mkg9K3jX inline]</p><p><em><strong>Shooting Stars.</strong></em> You can expend 1 to 3 charges as an action. For every charge you expend, you launch a glowing mote of light from the ring at a point you can see within 60 feet of you. Each creature within a 15-foot cube originating from that point is showered in sparks and must make a [[/save 15 DEX]], taking [[/damage 5d4 fire]] on a failed save or half as much damage on a successful one.</p><p>The ring regains [[/r 1d6]] expended charges daily at dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "ecvgJVX4Kf4St3V5": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.6dvUhdyeuOtRySf9",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "ecvgJVX4Kf4St3V5",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "SWSxRQ0ekxmtr6cC": {
+        "type": "summon",
+        "_id": "SWSxRQ0ekxmtr6cC",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "bonuses": {
+            "ac": "",
+            "hp": "",
+            "attackDamage": "",
+            "saveDamage": "",
+            "healing": ""
+          },
+          "creatureSizes": [],
+          "creatureTypes": [],
+          "effects": [],
+          "match": {
+            "attacks": false,
+            "proficiency": false,
+            "saves": false
+          },
+          "profiles": [
+            {
+              "count": "1",
+              "name": "",
+              "_id": "Oc0Ed7GXhuUhp7O6",
+              "uuid": "",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            },
+            {
+              "count": "2",
+              "name": "",
+              "_id": "0XAu211wPWK0MXFo",
+              "uuid": "",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            },
+            {
+              "count": "3",
+              "name": "",
+              "_id": "Sib1zWA3gfu9NLzb",
+              "uuid": "",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            },
+            {
+              "count": "4",
+              "name": "",
+              "_id": "S6CGB24LZCE9Dsi8",
+              "uuid": "",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ],
+          "summon": {
+            "prompt": true,
+            "mode": "",
+            "identifier": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false,
+            "max": ""
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Ball Lightning",
+        "img": ""
+      },
+      "OVo2afY3sgUQHmnO": {
+        "type": "save",
+        "_id": "OVo2afY3sgUQHmnO",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 5,
+                "denomination": 4,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "fire",
+                "scaling": {
+                  "mode": "",
+                  "number": 1
+                },
+                "additionalTypes": []
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "dexterity"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "3"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "cube",
+            "size": "15"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Shooting Stars",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6"
+        }
+      ],
+      "min": "",
+      "max": "6"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "0fiFgsIggDcP5BlH",
+  "img": "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1724987340256,
+    "modifiedTime": 1729891387546,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!0fiFgsIggDcP5BlH"
+}

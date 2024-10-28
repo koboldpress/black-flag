@@ -1,0 +1,104 @@
+{
+  "type": "gear",
+  "name": "Wand of the War Mage, +2",
+  "system": {
+    "type": {
+      "category": "wand"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 5000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Spellcaster"
+    },
+    "description": {
+      "value": "<p>While holding this wand, you gain a +2 bonus to spell attack rolls. In addition, you ignore half cover when making a spell attack.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "pa8pPq4xdmzrlYF1",
+  "img": "icons/weapons/wands/wand-gem-teal.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "War Mage, +2",
+      "origin": "Compendium.black-flag.items.Item.pa8pPq4xdmzrlYF1",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/weapons/wands/wand-gem-teal.webp",
+      "_id": "gKmwfThyfgBVHiGO",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }], \"formula\": \"2\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730154873623,
+        "modifiedTime": 1730154927911,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!pa8pPq4xdmzrlYF1.gKmwfThyfgBVHiGO"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 18200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.045",
+    "createdTime": 1725071599353,
+    "modifiedTime": 1730154663860,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!pa8pPq4xdmzrlYF1"
+}

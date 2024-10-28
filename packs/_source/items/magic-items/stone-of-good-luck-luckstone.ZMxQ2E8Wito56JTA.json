@@ -1,0 +1,104 @@
+{
+  "type": "gear",
+  "name": "Stone of Good Luck (Luckstone)",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 2000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>While carrying this polished agate, you gain a +1 bonus to ability checks and saves.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "ZMxQ2E8Wito56JTA",
+  "img": "icons/commodities/gems/gem-rough-rectangle-red.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Good Luck",
+      "origin": "Compendium.black-flag.items.Item.ZMxQ2E8Wito56JTA",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/commodities/gems/gem-rough-rectangle-red.webp",
+      "_id": "A4Vl9MRCGSvwdgQJ",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"o\": \"in\", \"v\": [\"ability-check\", \"ability-save\"] }], \"formula\": \"1\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730154255258,
+        "modifiedTime": 1730154300046,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ZMxQ2E8Wito56JTA.A4Vl9MRCGSvwdgQJ"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 12100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.045",
+    "createdTime": 1725071380139,
+    "modifiedTime": 1730153849071,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ZMxQ2E8Wito56JTA"
+}

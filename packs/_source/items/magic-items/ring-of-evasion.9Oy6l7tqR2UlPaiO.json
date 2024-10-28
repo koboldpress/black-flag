@@ -1,0 +1,134 @@
+{
+  "type": "gear",
+  "name": "Ring of Evasion",
+  "system": {
+    "type": {
+      "category": "clothing",
+      "base": "ring"
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "price": {
+      "value": 4400,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This ring has 3 charges and regains [[/r 1d3]] expended charges daily at dawn. When you fail a DEX save while wearing it, you can use your reaction to expend 1 charge to succeed on that save instead.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "a7itUHRNynIX8ltn": {
+        "type": "utility",
+        "_id": "a7itUHRNynIX8ltn",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "reaction",
+          "condition": "When you fail a DEX save"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Succeed on Save",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ],
+      "min": "",
+      "max": "3"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "9Oy6l7tqR2UlPaiO",
+  "img": "icons/equipment/finger/ring-eye-silver-green.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 3700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1724986976430,
+    "modifiedTime": 1729890782616,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!9Oy6l7tqR2UlPaiO"
+}

@@ -1,0 +1,240 @@
+{
+  "type": "gear",
+  "name": "Robe of Stars",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "veryRare",
+    "price": {
+      "value": 50500,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>This black or dark blue robe is embroidered with small white or silver stars. You gain a +1 bonus to saves while you wear it.</p><p>Six stars, located on the robe’s upper front portion, are particularly large. While wearing this robe, you can use an action to pull off one of the stars and use it to cast <em>@UUID[Compendium.black-flag.spells.Item.RBoSYpr3alIlLBro]{magic missile}</em> as a 5th-ring spell. Daily at dusk, [[/r 1d6]] removed stars reappear on the robe.</p><p>While you wear the robe, you can use an action to enter the Astral Plane along with everything you are wearing and carrying. You remain there until you use an action to return to the plane you were on. You reappear in the last space you occupied, or if that space is occupied, the nearest unoccupied space.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "wBQ62Lo5HMhyeOnH": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.RBoSYpr3alIlLBro",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "wBQ62Lo5HMhyeOnH",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "QAsbVS1iKY4lz9W1": {
+        "type": "utility",
+        "_id": "QAsbVS1iKY4lz9W1",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Enter/Leave Astral Plane",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6"
+        }
+      ],
+      "min": "",
+      "max": "6"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "YcWR4ZegFo5I6Pv5",
+  "img": "icons/equipment/back/cloak-plain-blue.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "Starry Protection",
+      "origin": "Compendium.black-flag.items.Item.YcWR4ZegFo5I6Pv5",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/back/cloak-plain-blue.webp",
+      "_id": "oEHpI0bqM14aW8gC",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"formula\": \"1\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1729892716821,
+        "modifiedTime": 1729892731071,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!YcWR4ZegFo5I6Pv5.oEHpI0bqM14aW8gC"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 11800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071042604,
+    "modifiedTime": 1729892780720,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!YcWR4ZegFo5I6Pv5"
+}

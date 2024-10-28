@@ -11,14 +11,14 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This serpentine statuette of an owl can become a <strong>giant owl</strong> for up to 8 hours. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence. Once it has been used, it can’t be used again until 2 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>This serpentine statuette of an owl can become a <strong>@UUID[Compendium.black-flag.npcs.Actor.vYLiHfYOHm9CXs9I]{giant owl}</strong> for up to 8 hours. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence. Once it has been used, it can’t be used again until 2 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "y5RLagSFx1eAlnfk": {
-        "type": "utility",
+        "type": "summon",
         "description": "",
         "sort": 0,
         "system": {
@@ -28,7 +28,18 @@
             "visible": false,
             "formula": "",
             "name": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.vYLiHfYOHm9CXs9I",
+              "_id": "VXkkJzpeHpSUCeD7",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -120,9 +131,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984805325,
-    "modifiedTime": 1729530948705,
+    "modifiedTime": 1730157541259,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Pwev1q7IJiK66MlF"

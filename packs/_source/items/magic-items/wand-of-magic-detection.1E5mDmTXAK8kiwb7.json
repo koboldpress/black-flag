@@ -1,0 +1,134 @@
+{
+  "type": "gear",
+  "name": "Wand of Magic Detection",
+  "system": {
+    "type": {
+      "category": "wand"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 1000,
+      "denomination": "gp"
+    },
+    "description": {
+      "value": "<p>This wand has 3 charges. While holding it, you can expend 1 charge as an action to cast the <em>@UUID[Compendium.black-flag.spells.Item.jhMAM81keoyqBzsy]{detect magic}</em> spell from it. The wand regains [[/r 1d3]] expended charges daily at dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "XZl8jIiCzBHeGU3h": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.jhMAM81keoyqBzsy",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "XZl8jIiCzBHeGU3h",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ],
+      "min": "",
+      "max": "3"
+    },
+    "attunement": {
+      "value": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "1E5mDmTXAK8kiwb7",
+  "img": "icons/weapons/wands/wand-gem-purple.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071476683,
+    "modifiedTime": 1730155044246,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!1E5mDmTXAK8kiwb7"
+}

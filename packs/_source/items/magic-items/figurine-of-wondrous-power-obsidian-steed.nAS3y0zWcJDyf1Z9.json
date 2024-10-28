@@ -11,14 +11,14 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This polished obsidian horse can become a <strong>nightmare</strong> for up to 24 hours. The nightmare fights only to defend itself. Once it has been used, it can’t be used again until 5 days have passed.</p><p>Each time you use it, the figurine has a 10 percent chance to ignore your orders, including a command to revert to figurine form. If you mount the nightmare while it is ignoring your orders, you and the nightmare are instantly transported to a random location on the Ethereal Plane, where the nightmare reverts to figurine form.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>This polished obsidian horse can become a <strong>@UUID[Compendium.black-flag.npcs.Actor.Ud4a8hMgKHtjSSde]{nightmare}</strong> for up to 24 hours. The nightmare fights only to defend itself. Once it has been used, it can’t be used again until 5 days have passed.</p><p>Each time you use it, the figurine has a 10 percent chance to ignore your orders, including a command to revert to figurine form. If you mount the nightmare while it is ignoring your orders, you and the nightmare are instantly transported to a random location on the Ethereal Plane, where the nightmare reverts to figurine form.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "5oSZWOdc8YHzD9Eq": {
-        "type": "utility",
+        "type": "summon",
         "description": "",
         "sort": 0,
         "system": {
@@ -28,7 +28,18 @@
             "visible": false,
             "formula": "",
             "name": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.Ud4a8hMgKHtjSSde",
+              "_id": "Nm6TtsLXneWPtDUb",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -120,9 +131,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984766330,
-    "modifiedTime": 1729530937857,
+    "modifiedTime": 1730157669482,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!nAS3y0zWcJDyf1Z9"

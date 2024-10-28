@@ -1,0 +1,104 @@
+{
+  "type": "gear",
+  "name": "Wand of the War Mage, +3",
+  "system": {
+    "type": {
+      "category": "wand"
+    },
+    "rarity": "uncommon",
+    "price": {
+      "value": 15000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Spellcaster"
+    },
+    "description": {
+      "value": "<p>While holding this wand, you gain a +3 bonus to spell attack rolls. In addition, you ignore half cover when making a spell attack.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "qgQKX30vWDlCYw3O",
+  "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "War Mage, +3",
+      "origin": "Compendium.black-flag.items.Item.qgQKX30vWDlCYw3O",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
+      "_id": "QEv2e5wBQ7VsIEwk",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }], \"formula\": \"3\" }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730154886519,
+        "modifiedTime": 1730154923249,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!qgQKX30vWDlCYw3O.QEv2e5wBQ7VsIEwk"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 18700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.045",
+    "createdTime": 1725071606948,
+    "modifiedTime": 1730154671662,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!qgQKX30vWDlCYw3O"
+}

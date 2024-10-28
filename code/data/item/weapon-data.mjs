@@ -317,6 +317,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 		super.prepareDerivedData();
 		this.prepareDescription();
 		this.preparePhysicalLabels();
+
+		const type = CONFIG.BlackFlag.weapons.localized[this.type.base ?? this.type.category];
+		if (type) this.type.label = `${game.i18n.localize("BF.Weapon.Label[one]")} (${type})`;
+		else this.type.label = game.i18n.localize("BF.Weapon.Label[one]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

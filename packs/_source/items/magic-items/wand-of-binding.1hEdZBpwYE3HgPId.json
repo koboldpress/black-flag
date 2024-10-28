@@ -1,0 +1,271 @@
+{
+  "type": "gear",
+  "name": "Wand of Binding",
+  "system": {
+    "type": {
+      "category": "wand"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 10900,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Spellcaster"
+    },
+    "description": {
+      "value": "<p>This wand has 7 charges and regains [[/r 1d6 + 1]] expended charges daily at dawn. If you expend the wand’s last charge, roll a d20. On a 1, it crumbles into ashes and is destroyed. The wand has the following additional properties:</p><p><em><strong>Spells.</strong></em> While holding the wand, you can use an action to expend some of its charges to cast one of the following spells (save DC 17): <em>@UUID[Compendium.black-flag.spells.Item.09Sensm5KJcvLdhx]{greater hold}</em> (5 charges) or <em>@UUID[Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix]{hold}</em> (2 charges).</p><p><em><strong>Assisted Escape.</strong></em> While holding the wand, you can use your reaction to expend 1 charge and gain advantage on a save you make to avoid being paralyzed or restrained, or you can expend 1 charge and gain advantage on any check you make to escape a grapple.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "dSugAlKUMXGhKtFx": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.09Sensm5KJcvLdhx",
+            "challenge": {
+              "attack": null,
+              "save": 17,
+              "override": true
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "dSugAlKUMXGhKtFx",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "5",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "hXzonO50I3A9QkdG": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.kVXub5YGKOSXv8ix",
+            "challenge": {
+              "attack": null,
+              "save": 17,
+              "override": true
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "hXzonO50I3A9QkdG",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "2",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "kyDIlTndE0RJ1nHy": {
+        "type": "utility",
+        "_id": "kyDIlTndE0RJ1nHy",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "reaction",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Assisted Escape",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6 + 1"
+        }
+      ],
+      "min": "",
+      "max": "7"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "1hEdZBpwYE3HgPId",
+  "img": "icons/weapons/wands/wand-gem-green.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 1000000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071425894,
+    "modifiedTime": 1730155253728,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!1hEdZBpwYE3HgPId"
+}

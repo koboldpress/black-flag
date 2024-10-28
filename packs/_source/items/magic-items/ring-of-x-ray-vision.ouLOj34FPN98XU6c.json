@@ -1,0 +1,232 @@
+{
+  "type": "gear",
+  "name": "Ring of X-Ray Vision",
+  "system": {
+    "type": {
+      "category": "clothing",
+      "base": "ring"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 2000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>While wearing this ring, you can use an action to speak its command word. When you do so, you can see into and through solid matter for 1 minute. This vision has a radius of 30 feet. To you, solid objects within that radius appear transparent and don’t prevent light from passing through them. The vision can penetrate 1 foot of stone, 1 inch of common metal, or up to 3 feet of wood or dirt. Thicker substances block the vision, as does a thin sheet of lead.</p><p>When you use the ring again before taking a long rest, you must succeed on a [[/save 15 CON]] or gain one level of exhaustion.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "uAzJLAcLKzJOsuK5": {
+        "type": "utility",
+        "_id": "uAzJLAcLKzJOsuK5",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [
+            {
+              "_id": "qs7vc5f1yxDDG838"
+            }
+          ],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "1"
+        },
+        "range": {
+          "override": false,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Activate",
+        "img": ""
+      },
+      "lRPr5wDodWxFc7Wr": {
+        "type": "save",
+        "_id": "lRPr5wDodWxFc7Wr",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "constitution"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When used more than once per long rest"
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "ouLOj34FPN98XU6c",
+  "img": "icons/equipment/finger/ring-eye-silver-green.webp",
+  "effects": [
+    {
+      "name": "X-Ray Vision",
+      "img": "icons/equipment/finger/ring-eye-silver-green.webp",
+      "origin": "Compendium.black-flag.items.Item.ouLOj34FPN98XU6c",
+      "transfer": false,
+      "_id": "qs7vc5f1yxDDG838",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1729891717875,
+        "modifiedTime": 1729891721650,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!ouLOj34FPN98XU6c.qs7vc5f1yxDDG838"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 18000000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1724987410662,
+    "modifiedTime": 1729891757329,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!ouLOj34FPN98XU6c"
+}

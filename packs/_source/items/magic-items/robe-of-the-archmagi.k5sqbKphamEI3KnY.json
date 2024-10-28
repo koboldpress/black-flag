@@ -1,0 +1,116 @@
+{
+  "type": "gear",
+  "name": "Robe of the Archmagi",
+  "system": {
+    "type": {
+      "category": "wondrousItem"
+    },
+    "rarity": "legendary",
+    "price": {
+      "value": 100000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Sorcerer, Warlock, or Wizard"
+    },
+    "description": {
+      "value": "<p>This elegant garment is made from exquisite cloth of white, gray, or black and adorned with silvery runes. You gain these benefits while wearing the robe:</p><ul><li><p>If you aren’t wearing armor, your base AC is 15 + your DEX modifier.</p></li><li><p>You have advantage on saves against spells and other magical effects.</p></li><li><p>Your spell save DC and spell attack bonus each increase by 2.</p></li></ul>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {},
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "k5sqbKphamEI3KnY",
+  "img": "icons/equipment/back/cloak-plain-white.webp",
+  "effects": [
+    {
+      "type": "base",
+      "name": "The Archmagi",
+      "origin": "Compendium.black-flag.items.Item.k5sqbKphamEI3KnY",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/back/cloak-plain-white.webp",
+      "_id": "jBDiSrbQZiVkLOHy",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.attributes.ac.formulas",
+          "mode": 2,
+          "value": "{ \"label\": \"Robe of the Archmagi\", \"formula\": \"15 + @abilities.dexterity.mod\", \"armored\": false }",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against spells and other magical effects.\" } }",
+          "priority": null
+        },
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"bonus\", \"filter\": [{ \"o\": \"OR\", \"v\": [{ \"k\": \"type\", \"v\": \"spellcasting-dc\" }, { \"o\": \"AND\", \"v\": [{ \"k\": \"type\", \"v\": \"attack\" }, { \"k\": \"activity.attack.type.classification\", \"v\": \"spell\" }] }] }], \"formula\": 2 }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1729892808385,
+        "modifiedTime": 1730068538702,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!k5sqbKphamEI3KnY.jBDiSrbQZiVkLOHy"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 16000000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071115999,
+    "modifiedTime": 1729893107433,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!k5sqbKphamEI3KnY"
+}

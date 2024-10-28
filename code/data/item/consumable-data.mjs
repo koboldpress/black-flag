@@ -86,6 +86,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 		super.prepareDerivedData();
 		this.prepareDescription();
 		this.preparePhysicalLabels();
+		this.type.label = CONFIG.BlackFlag.consumableCategories.localized[this.type.category] ?? "";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

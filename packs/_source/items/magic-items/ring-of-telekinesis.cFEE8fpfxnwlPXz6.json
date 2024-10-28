@@ -1,0 +1,128 @@
+{
+  "type": "gear",
+  "name": "Ring of Telekinesis",
+  "system": {
+    "type": {
+      "category": "clothing",
+      "base": "ring"
+    },
+    "rarity": "veryRare",
+    "price": {
+      "value": 36500,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>While wearing this ring, you can cast the <em>@UUID[Compendium.black-flag.spells.Item.jlDdoNUWTP3Gc1rX]{telekinesis}</em> spell, but you can target only objects that aren’t being worn or carried.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "3jMROAahcU0YaedC": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.jlDdoNUWTP3Gc1rX",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "3jMROAahcU0YaedC",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "object",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": true
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [],
+      "min": "",
+      "max": ""
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "cFEE8fpfxnwlPXz6",
+  "img": "icons/equipment/finger/ring-inlay-red.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 13700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1724987377244,
+    "modifiedTime": 1729891525738,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!cFEE8fpfxnwlPXz6"
+}

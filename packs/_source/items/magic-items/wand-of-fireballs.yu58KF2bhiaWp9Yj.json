@@ -1,0 +1,140 @@
+{
+  "type": "gear",
+  "name": "Wand of Fireballs",
+  "system": {
+    "type": {
+      "category": "wand"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 10000,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Spellcaster"
+    },
+    "description": {
+      "value": "<p>This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the fireball spell (save DC 15) from it. For 1 charge, you cast the 3rd‑circle version of the spell. You can increase the spell slot circle by one for each additional charge you expend.</p><p>The wand regains [[/r 1d6 + 1]] expended charges daily at dawn. If you expend the wand’s last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "nTMDBZWdX173yZgm": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.VYvD59yJYefhAwOI",
+            "challenge": {
+              "attack": null,
+              "save": 15,
+              "override": true
+            },
+            "circle": 3,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "nTMDBZWdX173yZgm",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": ""
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6 + 1"
+        }
+      ],
+      "min": "",
+      "max": "7"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "yu58KF2bhiaWp9Yj",
+  "img": "icons/weapons/staves/staff-obsidian.webp",
+  "effects": [],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 21700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071451080,
+    "modifiedTime": 1730154985042,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!yu58KF2bhiaWp9Yj"
+}

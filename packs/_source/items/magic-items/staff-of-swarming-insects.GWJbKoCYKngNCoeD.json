@@ -1,0 +1,299 @@
+{
+  "folder": "PNS3OPopAxnlSN4O",
+  "name": "Staff of Swarming Insects",
+  "type": "weapon",
+  "_id": "GWJbKoCYKngNCoeD",
+  "img": "icons/weapons/staves/staff-spiked.webp",
+  "system": {
+    "activities": {
+      "N8VVXIacb9r98Ad3": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.7irCOXrPAuMjPYJH",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 4,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "N8VVXIacb9r98Ad3",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "4",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "7rMJ99sDrA6Zuqyu": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.lGmxkutPlXsgyzRd",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "7rMJ99sDrA6Zuqyu",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "5",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "OcmFLSjeR3E90qVS": {
+        "type": "utility",
+        "_id": "OcmFLSjeR3E90qVS",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "effects": [],
+          "roll": {
+            "prompt": false,
+            "visible": false,
+            "name": "",
+            "formula": ""
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "concentration": false,
+          "override": false,
+          "value": "10"
+        },
+        "range": {
+          "override": true,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "radius",
+            "size": "30"
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Insect Cloud",
+        "img": ""
+      }
+    },
+    "overrides": {
+      "proficiency": null
+    },
+    "price": {
+      "value": 15300,
+      "denomination": "gp"
+    },
+    "quantity": 1,
+    "weight": {
+      "value": 4,
+      "units": "pound"
+    },
+    "description": {
+      "value": "<p>This staff has 10 charges and regains [[/r 1d6 + 4]] expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses. The staff has the following additional properties:</p><p><em><strong>Spells.</strong></em> While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: <em>@UUID[Compendium.black-flag.spells.Item.7irCOXrPAuMjPYJH]{giant insect}</em> (4 charges) or <em>@UUID[Compendium.black-flag.spells.Item.lGmxkutPlXsgyzRd]{insect plague}</em> (5 charges).</p><p><em><strong>Insect Cloud.</strong></em> While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30‑foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect.</p>",
+      "source": {
+        "fallback": "Black Flag Reference Document"
+      }
+    },
+    "type": {
+      "value": "melee",
+      "category": "simple",
+      "base": "quarterstaff"
+    },
+    "options": [
+      "bash"
+    ],
+    "properties": [
+      "magical",
+      "versatile"
+    ],
+    "ammunition": {},
+    "damage": {
+      "base": {
+        "number": 1,
+        "denomination": 6,
+        "type": "bludgeoning",
+        "additionalTypes": []
+      }
+    },
+    "range": {
+      "short": null,
+      "long": null,
+      "reach": null
+    },
+    "uses": {
+      "min": "",
+      "max": "10",
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6 + 4"
+        }
+      ]
+    },
+    "rarity": "rare",
+    "attunement": {
+      "value": "required",
+      "requirement": "by a Bard, Cleric, Druid, Sorcerer,Warlock, or Wizard"
+    },
+    "container": null,
+    "magicalBonus": null
+  },
+  "effects": [],
+  "sort": 23000000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725590585223,
+    "modifiedTime": 1730074983097,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!GWJbKoCYKngNCoeD"
+}

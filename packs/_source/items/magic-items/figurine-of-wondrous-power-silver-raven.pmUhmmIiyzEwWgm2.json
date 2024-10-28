@@ -11,14 +11,14 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This silver statuette of a <strong>raven</strong> can become a raven for up to 12 hours. While in raven form, the figurine allows you to cast the <em>@UUID[Compendium.black-flag.spells.Item.YbQt9YCQ8iiG78nm]{animal messenger}</em> spell on it as an action. Once it has been used, it can’t be used again until 2 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>This silver statuette of a <strong>@UUID[Compendium.black-flag.npcs.Actor.ofeQtVfgvGIk6L0e]{raven}</strong> can become a raven for up to 12 hours. While in raven form, the figurine allows you to cast the <em>@UUID[Compendium.black-flag.spells.Item.YbQt9YCQ8iiG78nm]{animal messenger}</em> spell on it as an action. Once it has been used, it can’t be used again until 2 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "KgmwCp0zyd6Xr7BB": {
-        "type": "utility",
+        "type": "summon",
         "_id": "KgmwCp0zyd6Xr7BB",
         "description": "",
         "sort": 0,
@@ -29,7 +29,18 @@
             "visible": false,
             "name": "",
             "formula": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.ofeQtVfgvGIk6L0e",
+              "_id": "pWYszO5OnIxr6B1M",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -182,9 +193,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984820748,
-    "modifiedTime": 1729530985505,
+    "modifiedTime": 1730157527591,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!pmUhmmIiyzEwWgm2"

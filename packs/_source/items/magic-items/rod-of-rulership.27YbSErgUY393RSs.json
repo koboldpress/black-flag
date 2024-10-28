@@ -1,0 +1,187 @@
+{
+  "type": "gear",
+  "name": "Rod of Rulership",
+  "system": {
+    "type": {
+      "category": "rod"
+    },
+    "rarity": "rare",
+    "price": {
+      "value": 11500,
+      "denomination": "gp"
+    },
+    "attunement": {
+      "value": "required",
+      "requirement": ""
+    },
+    "description": {
+      "value": "<p>You can use an action to present the rod and command obedience from each creature of your choice that you can see within 120 feet of you. Each target must succeed on a [[/save 15 WIS]] or be charmed by you for 8 hours. While charmed in this way, the creature regards you as its trusted leader. If harmed by you or your companions, or commanded to do something contrary to its nature, a target ceases to be charmed in this way.</p><p>The rod can’t be used again until the next dawn.</p>",
+      "source": {
+        "fallback": ""
+      }
+    },
+    "activities": {
+      "ZSGCxvMd4ry6QH1M": {
+        "type": "save",
+        "_id": "ZSGCxvMd4ry6QH1M",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [
+            {
+              "_id": "gT3EaZ61mmvyP1va"
+            }
+          ],
+          "save": {
+            "ability": [
+              "wisdom"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "concentration": false,
+          "override": false,
+          "value": "8"
+        },
+        "range": {
+          "override": false,
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      }
+    },
+    "uses": {
+      "spent": 0,
+      "consumeQuantity": false,
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "recoverAll"
+        }
+      ],
+      "min": "",
+      "max": "1"
+    },
+    "container": null,
+    "quantity": 1,
+    "weight": {
+      "value": 0,
+      "units": "pound"
+    },
+    "properties": [
+      "magical"
+    ]
+  },
+  "_id": "27YbSErgUY393RSs",
+  "img": "icons/weapons/staves/staff-ornate-orb-steel-red.webp",
+  "effects": [
+    {
+      "name": "Ruled",
+      "img": "icons/weapons/staves/staff-ornate-orb-steel-red.webp",
+      "origin": "Compendium.black-flag.items.Item.27YbSErgUY393RSs",
+      "transfer": false,
+      "_id": "gT3EaZ61mmvyP1va",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [
+        "charmed"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730068972612,
+        "modifiedTime": 1730068983639,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!27YbSErgUY393RSs.gT3EaZ61mmvyP1va"
+    }
+  ],
+  "folder": "PNS3OPopAxnlSN4O",
+  "sort": 1300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.050",
+    "createdTime": 1725071190006,
+    "modifiedTime": 1730068972654,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!items!27YbSErgUY393RSs"
+}

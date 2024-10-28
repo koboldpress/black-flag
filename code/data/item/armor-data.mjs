@@ -172,6 +172,10 @@ export default class ArmorData extends ItemDataModel.mixin(
 		this.prepareEquippedArmor();
 		this.preparePhysicalLabels();
 
+		const type = CONFIG.BlackFlag.armor.localized[this.type.base ?? this.type.category];
+		if (type) this.type.label = `${game.i18n.localize("BF.Armor.Label[one]")} (${type})`;
+		else this.type.label = game.i18n.localize("BF.Armor.Label[one]");
+
 		if (!this.armor.value && this.type.category === "shield") this.armor.value = 2;
 		if (this.magicAvailable && this.magicalBonus) this.armor.value += this.magicalBonus;
 
