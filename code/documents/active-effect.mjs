@@ -61,7 +61,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 */
 	get suppressionReasons() {
 		const reasons = [];
-		if (this.parent?.type !== "pc") return reasons;
+		if (this.parent.parent?.type !== "pc") return reasons;
 		if (this.parent.getFlag(game.system.id, "relationship.enabled") === false) {
 			reasons.push("BF.EFFECT.SuppressionReason.Disabled");
 		}
