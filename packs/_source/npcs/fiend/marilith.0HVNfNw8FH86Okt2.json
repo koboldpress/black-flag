@@ -1,0 +1,1964 @@
+{
+  "folder": "Fm2a800RpGPvFKEJ",
+  "name": "Marilith",
+  "type": "npc",
+  "_id": "0HVNfNw8FH86Okt2",
+  "img": "systems/black-flag/artwork/tokens/demon-marilith.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 18,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 16,
+      "hp": {
+        "value": 217,
+        "max": 217,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 18,
+      "stealth": 15
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "abyssal"
+        ],
+        "communication": {
+          "telepathy": {
+            "range": 120,
+            "units": "foot"
+          }
+        },
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 40,
+        "types": {
+          "walk": "@base",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": "120"
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "large",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": [
+            "bludgeoning",
+            "piercing",
+            "slashing"
+          ]
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "fiend",
+        "tags": [
+          "demon"
+        ],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 9,
+        "proficient": true
+      },
+      "dexterity": {
+        "mod": 5,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 10,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": 4,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": 8,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 10,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "BFRD",
+        "book": "",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Marilith",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 2,
+    "height": 2,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/demon-marilith.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [
+      {
+        "id": "seeAll",
+        "range": 120,
+        "enabled": true
+      }
+    ],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Demonic Resilience",
+      "type": "feature",
+      "_id": "w5KleyTu337LaoOI",
+      "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "demonic-resilience"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Demonic Resilience",
+          "_id": "QEROKmLmQGbXQUxg",
+          "changes": [
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "cold",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "fire",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "lightning",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!0HVNfNw8FH86Okt2.w5KleyTu337LaoOI.QEROKmLmQGbXQUxg"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yEnzD1P6so8fuqeg",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.w5KleyTu337LaoOI"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]'s weapon attacks are magical. When the [[lookup @name lowercase]] hits with any weapon, the weapon deals an extra 2d6 fire damage (included in the attack).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Flaming Weapons",
+      "type": "feature",
+      "_id": "FUHmULfQRj6aKneV",
+      "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-red.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.NH8C1sivi4HgLHL8",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.FUHmULfQRj6aKneV"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "yfUXZ2LyXIhc09vj",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "magic-resistance",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 2500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.yfUXZ2LyXIhc09vj"
+    },
+    {
+      "folder": "gFeMgDslgGsEJoke",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] gets up to five extra reactions, but these extra reactions can be used only for Parry.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Reactive",
+      "type": "feature",
+      "_id": "nFEEJFGnq52zokNG",
+      "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
+      "effects": [],
+      "sort": 2600000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.nFEEJFGnq52zokNG"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "l8tkkYYQYBr451DV",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The marilith makes two Dagger attacks, two Mace attacks, and two Longsword attacks. It can replace two Dagger attacks with a Tail attack.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.l8tkkYYQYBr451DV"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Dagger",
+      "type": "weapon",
+      "_id": "LHqa6D9jQ9pGGEEt",
+      "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "magical",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.LHqa6D9jQ9pGGEEt"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Mace",
+      "type": "weapon",
+      "_id": "NC96GmQ6iCmHAseC",
+      "img": "icons/weapons/maces/mace-flanged-steel.webp",
+      "system": {
+        "activities": {
+          "hMAOkEB5pPj7cktP": {
+            "type": "attack",
+            "_id": "hMAOkEB5pPj7cktP",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "mace"
+        },
+        "options": [
+          "bash"
+        ],
+        "properties": [],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "type": "bludgeoning",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 1500000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.XOrCLbriQXUoLCTL",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.NC96GmQ6iCmHAseC"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Longsword",
+      "type": "weapon",
+      "_id": "msdvSFndBJlZ8tmy",
+      "img": "icons/weapons/swords/sword-guard-engraved.webp",
+      "system": {
+        "activities": {
+          "gN3E8nFP8vb9DUz0": {
+            "type": "attack",
+            "_id": "gN3E8nFP8vb9DUz0",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": "",
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "One-Handed Attack",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          },
+          "JM8xyrgiWv2gcRfp": {
+            "type": "attack",
+            "_id": "JM8xyrgiWv2gcRfp",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "attack": {
+                "critical": {
+                  "threshold": null
+                },
+                "flat": false,
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": "",
+                "bonus": ""
+              },
+              "damage": {
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": false,
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 10,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "slashing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  },
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Two-Handed Attack",
+            "img": ""
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 15,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage, or [[/damage versatile average]] damage if used with two hands.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "longsword"
+        },
+        "options": [
+          "disarm",
+          "hamstring"
+        ],
+        "properties": [
+          "magical",
+          "versatile"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 2,
+            "denomination": 8,
+            "type": "slashing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 2100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.ym1owWiMSNOcZNdO",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.msdvSFndBJlZ8tmy"
+    },
+    {
+      "name": "Tail",
+      "type": "feature",
+      "_id": "u6bq6mUMsDFqatoz",
+      "img": "icons/creatures/abilities/tail-swipe-green.webp",
+      "system": {
+        "activities": {
+          "nK9DHZRtdth4i7Kf": {
+            "type": "attack",
+            "_id": "nK9DHZRtdth4i7Kf",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": 10,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "bludgeoning",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  },
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "bonus": "",
+                "flat": false,
+                "ability": "strength",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "action",
+              "condition": "",
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": "creature",
+                "count": "1",
+                "choice": false,
+                "special": ""
+              },
+              "template": {
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "override": false,
+              "prompt": true
+            },
+            "range": {
+              "units": "foot",
+              "value": "10",
+              "special": "",
+              "override": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "magical": true,
+            "sort": 0
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 10 ft., one creature. <em>Hit:</em> [[/damage average]] damage. If the target is Medium or smaller, it is &amp;Reference[grappled]{grappled} (escape DC 17). Until this grapple ends, the target is &amp;Reference[restrained]{restrained}, the marilith can automatically hit the target with its Tail, and the marilith can’t make Tail attacks against other targets.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "tail"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.JHrpq8E18S7rIjQU",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 2200000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.u6bq6mUMsDFqatoz"
+    },
+    {
+      "folder": "gFeMgDslgGsEJoke",
+      "system": {
+        "activities": {
+          "JsKLtng37e1DnQ30": {
+            "type": "utility",
+            "_id": "JsKLtng37e1DnQ30",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The marilith shouts one of the following commands at up to two friendly creatures it can see within 30 feet of it:</p><ul><li><p><strong>March!</strong> Each target can use a reaction to move up to half its speed in a direction of the marilith’s choice. This movement is unaffected by difficult terrain and doesn’t provoke opportunity attacks.</p></li><li><p><strong>Protect Yourself!</strong> Each target gains the marilith’s Parry reaction until the start of the marilith’s next turn.</p></li><li><p><strong>Remember Your Training!</strong> Each target has advantage on the next weapon attack roll it makes before the start of the marilith’s next turn.</p></li></ul>",
+          "source": {
+            "fallback": "Black Flag Reference Dolcument"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Marilith Tactics",
+      "type": "feature",
+      "_id": "Y4h44JMa8VucKb0a",
+      "img": "icons/magic/control/control-influence-rally-purple.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.Y4h44JMa8VucKb0a"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {
+          "slaTJQUap4n38aRJ": {
+            "type": "utility",
+            "_id": "slaTJQUap4n38aRJ",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "value": "60",
+              "units": "foot",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically teleports, along with any equipment it is wearing or carrying, up to 60 feet to an unoccupied space it can see.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Teleport",
+      "type": "feature",
+      "_id": "O6NBn2C8iBz5Rjka",
+      "img": "icons/magic/control/silhouette-hold-beam-blue.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.CklVCNGwkQRpnNIj",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.O6NBn2C8iBz5Rjka"
+    },
+    {
+      "name": "Parry",
+      "type": "feature",
+      "_id": "deL9kiU4j4MPll6V",
+      "img": "icons/skills/melee/swords-parry-block-blue.webp",
+      "system": {
+        "activities": {
+          "CfWxC5GuvGjE81vn": {
+            "type": "utility",
+            "_id": "CfWxC5GuvGjE81vn",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "type": "reaction",
+              "condition": "",
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] adds 5 to its AC against one melee attack that would hit it. To do so, the [[lookup @name lowercase]] must see the attacker and be wielding a melee weapon.</p><p><em>Note: An Active Effect is available in the Effects tab of the character sheet to enable the AC bonus.</em></p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "parry"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "origin": "Actor.rjTvRRXk5fYm7I2A.Item.deL9kiU4j4MPll6V",
+          "duration": {
+            "rounds": null,
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": true,
+          "name": "Parry",
+          "img": "icons/skills/melee/swords-parry-block-blue.webp",
+          "_id": "sz9u6fJBoVqaGYv5",
+          "type": "base",
+          "system": {},
+          "changes": [
+            {
+              "key": "system.attributes.ac.override",
+              "mode": 5,
+              "value": "23",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "_key": "!actors.items.effects!0HVNfNw8FH86Okt2.deL9kiU4j4MPll6V.sz9u6fJBoVqaGYv5"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.kJjgWkohKGXUr4Fk",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!0HVNfNw8FH86Okt2.deL9kiU4j4MPll6V"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!0HVNfNw8FH86Okt2"
+}

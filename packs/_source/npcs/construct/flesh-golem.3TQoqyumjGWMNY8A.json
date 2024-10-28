@@ -1,0 +1,1414 @@
+{
+  "folder": "eGbBUI0gCQf7V1CE",
+  "name": "Flesh Golem",
+  "type": "npc",
+  "_id": "3TQoqyumjGWMNY8A",
+  "img": "systems/black-flag/artwork/tokens/golem-flesh.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [],
+        "formulas": [],
+        "flat": 9,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 5,
+      "hp": {
+        "value": 129,
+        "max": 129,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 13,
+      "stealth": 9
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [],
+        "communication": {},
+        "custom": [
+          "understands the languages of its creator but can’t speak"
+        ],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "medium",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [
+            "lightning"
+          ],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "construct",
+        "tags": [
+          "golem"
+        ],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 4,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": -1,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 4,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": -2,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": null,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": -3,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "",
+        "book": "BFRD",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Flesh Golem",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/golem-flesh.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "folder": "gmw1kgW3iSacifqt",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>If the [[lookup @name lowercase]] takes fire damage, it loses its immunity to the frightened condition and has disadvantage on attack rolls and ability checks until the end of its next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Aversion of Fire",
+      "type": "feature",
+      "_id": "MGO5k8xZ2McmegPm",
+      "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
+      "effects": [],
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.MGO5k8xZ2McmegPm"
+    },
+    {
+      "folder": "gmw1kgW3iSacifqt",
+      "system": {
+        "activities": {
+          "DlpFUwJOhX3NST0I": {
+            "type": "check",
+            "_id": "DlpFUwJOhX3NST0I",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "check": {
+                "associated": [
+                  "persuasion"
+                ],
+                "dc": {
+                  "calculation": "",
+                  "formula": "15"
+                },
+                "visible": true,
+                "ability": ""
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "free",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false,
+              "units": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When the golem starts its turn, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its HP.</p><p>The golem’s creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a [[/check persuasion 15 format=long]]. If the check succeeds, the golem ceases being berserk. If the golem takes damage while still at 55 HP or fewer, the golem might go berserk again.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Berserk (55 HP or Fewer)",
+      "type": "feature",
+      "_id": "hvUuDLbYjfmJMwnF",
+      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "effects": [],
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.hvUuDLbYjfmJMwnF"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] doesn’t require air, food, drink, or sleep.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Construct Nature",
+      "type": "feature",
+      "_id": "WeSBmd8Eyon2koDR",
+      "img": "icons/commodities/tech/cog-gold.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gCywSogmFrzBXUYK",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 206250,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.WeSBmd8Eyon2koDR"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p> The golem is immune to any spell or effect that would alter its form.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Immutable Form",
+      "type": "feature",
+      "_id": "xefbuD0oIJESEdwY",
+      "img": "icons/magic/unholy/hand-grasping-green.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.UXyMElme60ndaGYZ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 350000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.xefbuD0oIJESEdwY"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Whenever the [[lookup @name lowercase]] is subjected to lighting damage, it takes no damage and instead regains a number of HP equal to the lightning damage dealt.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Lightning Absorption",
+      "type": "feature",
+      "_id": "VGRieqUwLGBT7wbn",
+      "img": "icons/magic/lightning/fist-unarmed-strike-blue-green.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.rYtsftuWIe0GxtfY",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 8400000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.VGRieqUwLGBT7wbn"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "T1kjZzJ1h2C0g20H",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "magic-resistance",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 8500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.T1kjZzJ1h2C0g20H"
+    },
+    {
+      "name": "Magic Weapons",
+      "type": "feature",
+      "_id": "p50riwg6qp720JTP",
+      "img": "icons/weapons/swords/sword-runed-glowing.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]]’s weapon attacks are magical.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "magic-weapons",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GZfR1oNDKJ9IdTtS",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 8600000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.p50riwg6qp720JTP"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "nowHkhVAs0KPNnuJ",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The golem makes two Slam attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7700000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.nowHkhVAs0KPNnuJ"
+    },
+    {
+      "name": "Slam",
+      "type": "feature",
+      "_id": "lXT8lsnxDu5ACV8o",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "system": {
+        "activities": {
+          "149J8Tnc5Lw1oX7W": {
+            "type": "attack",
+            "_id": "149J8Tnc5Lw1oX7W",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": 8,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "bludgeoning",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "bonus": "",
+                "flat": false,
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "action",
+              "condition": "",
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": "creatureObject",
+                "count": "1",
+                "choice": false,
+                "special": ""
+              },
+              "template": {
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "override": false,
+              "prompt": true
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "magical": true,
+            "sort": 0
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "slam"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.RXzBRDACuZetQZur",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7800000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.lXT8lsnxDu5ACV8o"
+    },
+    {
+      "folder": "gmw1kgW3iSacifqt",
+      "system": {
+        "activities": {
+          "Xf2bUMk4HkHzRKac": {
+            "type": "save",
+            "_id": "Xf2bUMk4HkHzRKac",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 9,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "psychic",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ]
+              },
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "15"
+                },
+                "ability": [
+                  "wisdom"
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "target": "",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "self",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": "radius",
+                "size": "15"
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/save.svg",
+            "magical": true,
+            "sort": 0
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "recharge",
+              "formula": "5",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The golem releases a wave of emotional anguish from its core. Each creature within 15 feet of the golem must make a [[/save format=long]]. On a failure, a creature takes [[/damage average]] damage and is &amp;Reference[incapacitated]{incapacitated} until the end of its next turn, as its mind fills with memories of its greatest failures. On a success, a creature takes half the damage and isn’t incapacitated.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Creator’s Anguish",
+      "type": "feature",
+      "_id": "5klCbNEWb4ERqwY9",
+      "img": "icons/creatures/abilities/mouth-teeth-human.webp",
+      "effects": [],
+      "sort": 7900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.5klCbNEWb4ERqwY9"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is immune to poison damage and to bludgeoning, piercing, and slashing damage from nonmagical attacks. In addition, it is immune to exhaustion and to the charmed, frightened, paralyzed, petrified, and poisoned conditions.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Flesh Golem Resilience",
+      "type": "feature",
+      "_id": "MPZVV63gOfgL8A9A",
+      "img": "icons/magic/unholy/hand-grasping-green.webp",
+      "effects": [
+        {
+          "origin": "Actor.Dbpd9MMe1OaMZmTf.Item.5gB8Tx82ZNuhecfu",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Flesh Golem Resilience",
+          "img": "icons/magic/unholy/hand-grasping-green.webp",
+          "_id": "jplzOjuIy5e20vMw",
+          "type": "base",
+          "system": {},
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "psychic",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "bludgeoning",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "piercing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "slashing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "paralyzed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "petrified",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.bypasses",
+              "mode": 2,
+              "value": "magical",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "_key": "!actors.items.effects!3TQoqyumjGWMNY8A.MPZVV63gOfgL8A9A.jplzOjuIy5e20vMw"
+        }
+      ],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.CMb21L7M5wSvoFz7",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 212500,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!3TQoqyumjGWMNY8A.MPZVV63gOfgL8A9A"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!3TQoqyumjGWMNY8A"
+}

@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 0,
       "hp": {
@@ -56,11 +55,15 @@
           "swim": "",
           "burrow": ""
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {},
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "tiny",
       "condition": {
@@ -81,60 +84,74 @@
         "resistances": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "immunities": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "vulnerabilities": {
           "value": [],
-          "custom": []
+          "custom": [],
+          "nonmagical": []
         }
       },
       "type": {
         "value": "beast",
         "tags": [],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": -4
+        "mod": -4,
+        "proficient": false
       },
       "dexterity": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       },
       "constitution": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       },
       "intelligence": {
-        "mod": -4
+        "mod": -4,
+        "proficient": false
       },
       "wisdom": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "charisma": {
-        "mod": -2
+        "mod": -2,
+        "proficient": false
       }
     },
     "biography": {
       "value": "",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Raven",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
     "texture": {
       "src": "systems/black-flag/artwork/tokens/raven.webp",
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.5,
+      "scaleY": 0.5,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
@@ -144,15 +161,15 @@
       "tint": "#ffffff",
       "alphaThreshold": 0.75
     },
-    "width": 0.5,
-    "height": 0.5,
+    "width": 1,
+    "height": 1,
     "lockRotation": false,
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -183,7 +200,7 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
+      "enabled": true,
       "range": 0,
       "angle": 360,
       "visionMode": "basic",
@@ -206,7 +223,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -236,10 +253,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "JXQSHT5XvfH6FTeN",
@@ -291,10 +314,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "WSMYQLKSySIY51j7",
@@ -336,31 +365,45 @@
             "_id": "2R0pp9F44evzbtoT",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
               },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": null,
-                    "denomination": "",
+                    "denomination": 0,
                     "bonus": "1",
-                    "custom": "",
-                    "type": "piercing"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": ""
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -372,21 +415,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -403,13 +461,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -449,10 +513,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709698189363,
-    "modifiedTime": 1717281002640,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

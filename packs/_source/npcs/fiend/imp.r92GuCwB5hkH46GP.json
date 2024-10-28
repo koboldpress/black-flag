@@ -1,0 +1,1192 @@
+{
+  "folder": "Fm2a800RpGPvFKEJ",
+  "name": "Imp",
+  "type": "npc",
+  "_id": "r92GuCwB5hkH46GP",
+  "img": "systems/black-flag/artwork/tokens/devil-imp.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [],
+        "formulas": [],
+        "flat": 13,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 1,
+      "hp": {
+        "value": 31,
+        "max": 31,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 11,
+      "stealth": 15
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common",
+          "infernal"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 20,
+        "types": {
+          "walk": "@base",
+          "climb": "",
+          "fly": "40",
+          "swim": "",
+          "burrow": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "120",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "tiny",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "fiend",
+        "tags": [
+          "devil"
+        ],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": -2,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": 3,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 1,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": null,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": 1,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 4,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "BFRD",
+        "book": "",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Imp",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/devil-imp.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": -0.6,
+      "scaleY": 0.6,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 120,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Magical darkness doesn’t impede the [[lookup @name lowercase]]'s darkvision.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Devil’s Sight",
+      "type": "feature",
+      "img": "icons/magic/perception/eye-slit-red-orange.webp",
+      "effects": [],
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.qaTYdbDMm8oAcpZT",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_id": "VakPuVNCIXyvHTZB",
+      "sort": 2950000,
+      "_key": "!actors.items!r92GuCwB5hkH46GP.VakPuVNCIXyvHTZB"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "kaMR9ybu7sbxC8UE",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "magic-resistance",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 5900000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.kaMR9ybu7sbxC8UE"
+    },
+    {
+      "name": "Slam (Beast Form Only)",
+      "type": "feature",
+      "_id": "L6tsgM9o2Kq0QZsB",
+      "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
+      "system": {
+        "activities": {
+          "149J8Tnc5Lw1oX7W": {
+            "type": "attack",
+            "_id": "149J8Tnc5Lw1oX7W",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "variable",
+                    "additionalTypes": [
+                      "bludgeoning",
+                      "piercing",
+                      "slashing"
+                    ],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "attack": {
+                "bonus": "",
+                "flat": false,
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "action",
+              "condition": "",
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "target": {
+              "affects": {
+                "type": "creatureObject",
+                "count": "1",
+                "choice": false,
+                "special": ""
+              },
+              "template": {
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "override": false,
+              "prompt": true
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one target. <em>Hit:</em> [[/damage average]] bludgeoning, piercing, or slashing damage (based on the type of damage dealt by the Beast form’s primary attack, such as Bite).</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "slam"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.RXzBRDACuZetQZur",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 2900000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.L6tsgM9o2Kq0QZsB"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {
+          "0BgMR6xOla38XHLe": {
+            "type": "attack",
+            "_id": "0BgMR6xOla38XHLe",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "dexterity",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": 4,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          },
+          "2Ka27AISxAJUnAe6": {
+            "type": "save",
+            "_id": "2Ka27AISxAJUnAe6",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ]
+              },
+              "effects": [],
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {
+                  "ability": "custom",
+                  "formula": "12"
+                }
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false,
+              "units": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "CON Save",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack</em>: [[/attack]], reach 5 ft., one target. <em>Hit</em>: [[/damage average]], and the target must make a [[/save con 12 format=long]], taking [[/damage 3d6 poison average]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Sting (True Form Only)",
+      "type": "feature",
+      "_id": "hKyh7zWOMFFoVMGf",
+      "img": "icons/commodities/biological/stinger-insect-grey.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.1m9GJ9Hmn4L8liS9",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 3000000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.hKyh7zWOMFFoVMGf"
+    },
+    {
+      "name": "Invisibility (True Form Only)",
+      "type": "feature",
+      "_id": "pKsGbcsalUKO1Btv",
+      "img": "icons/creatures/magical/spirit-fear-energy-pink.webp",
+      "system": {
+        "activities": {
+          "nwNhUHGQlOCPrFCi": {
+            "type": "utility",
+            "_id": "nwNhUHGQlOCPrFCi",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically turns invisible until it attacks or uses Change Shape, or until its concentration ends (as if concentrating on a spell). Any equipment the [[lookup @name lowercase]] wears or carries is invisible with it.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "invisibility",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 3100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.1IHhl4zwr49sgVQS",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.pKsGbcsalUKO1Btv"
+    },
+    {
+      "name": "Change Shape",
+      "type": "feature",
+      "_id": "PpQj5NKc1FqZ1E8C",
+      "img": "icons/creatures/magical/construct-stone-earth-gray.webp",
+      "system": {
+        "activities": {
+          "O0mN7LJgbaFFLn3b": {
+            "type": "utility",
+            "_id": "O0mN7LJgbaFFLn3b",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "type": "bonus",
+              "condition": "",
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] magically transforms into a Medium or smaller Beast that has a CR no higher than its own or back into its true form, which is a Fiend. Without wings, it loses its flying speed. Its statistics, other than its size and speed, are the same in each form. Any equipment it is wearing or carrying transforms with it. It reverts to its true form if it dies.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "change-shape",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 4900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.Yrb50WtUeyxgXygZ",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.PpQj5NKc1FqZ1E8C"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to cold damage and to bludgeoning, piercing, and slashing damage from nonmagical attacks. In addition, it is immune to fire damage and poison damage and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Devilish Resilience",
+      "type": "feature",
+      "_id": "Y4vPfYcyEBRLPyfW",
+      "img": "icons/creatures/unholy/demon-winged-cyclops-drooling.webp",
+      "effects": [
+        {
+          "origin": "Actor.jvgfL1KwSHTsigT2.Item.CSwXCoodfS8QUJCq",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Devilish Resilience",
+          "img": "icons/creatures/unholy/demon-winged-cyclops-drooling.webp",
+          "_id": "uJ6N3XWMfDKvX9cK",
+          "type": "base",
+          "system": {},
+          "changes": [
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "cold",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "fire",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "bludgeoning",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "piercing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "slashing",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.bypasses",
+              "mode": 2,
+              "value": "magical",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "_key": "!actors.items.effects!r92GuCwB5hkH46GP.Y4vPfYcyEBRLPyfW.uJ6N3XWMfDKvX9cK"
+        }
+      ],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.x1nZb854NRe24wtG",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!r92GuCwB5hkH46GP.Y4vPfYcyEBRLPyfW"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!r92GuCwB5hkH46GP"
+}

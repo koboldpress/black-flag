@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 0.5,
       "hp": {
@@ -56,7 +55,9 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {
@@ -65,7 +66,9 @@
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "large",
       "type": {
@@ -73,7 +76,8 @@
         "tags": [
           "animal"
         ],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       },
       "condition": {
         "immunities": {
@@ -81,55 +85,73 @@
           "custom": []
         },
         "resistances": {
-          "value": []
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
         }
       },
       "damage": {
         "resistances": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "immunities": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "vulnerabilities": {
           "value": [],
-          "custom": []
+          "custom": [],
+          "nonmagical": []
         }
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       },
       "dexterity": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "constitution": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "intelligence": {
-        "mod": -2
+        "mod": -2,
+        "proficient": false
       },
       "wisdom": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "charisma": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       }
     },
     "biography": {
       "value": "<p><em>A canine as large as a horse bears down, its oily muzzle caked in blood and saliva. Its thick, heavy shoulders and massive neck sway side to side, and with each step, its long, mangy tail drags along behind it.</em></p><p>An enormous creature resembling a wolf, worgs are nightmarish hunters with a taste for humanoid flesh. They willingly stalk inhospitable terrain in their endless hunt for their next meal, roaming snow fields, volcanic barrens, even stony badlands. Known to collect grisly bounties and to coat their bodies with fetid remains, worgs are more ferocious than any natural beast.</p><p><strong>Warren Dweller.</strong> Worgs often shelter in warrens, tunnels, and caves in which they can travel quickly to prey and away from predators. Such places are fetid, vile places full of half-eaten corpses that the worg seems to have gorged itself on without consequence.</p><p><strong>Willing Mounts.</strong> While many beasts of burden must be trained to hold a rider, worgs tend to willingly carry goblins, who share a great number of similarities to the worg, and use the smaller creatures to find more bountiful humanoid prey. Possessing surprising intelligence, worgs have learned to speak Goblin as well as their own guttural language. On rare occasions, worgs have even learned to speak and understand Common or Elvish.</p>",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Worg",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -152,9 +174,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -185,13 +207,13 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
-      "range": 0,
+      "enabled": true,
+      "range": 60,
       "angle": 360,
-      "visionMode": "basic",
-      "attenuation": 0.1,
+      "visionMode": "darkvision",
+      "attenuation": 0,
       "brightness": 0,
-      "saturation": 0,
+      "saturation": -1,
       "contrast": 0,
       "color": null
     },
@@ -208,7 +230,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -224,29 +246,36 @@
       "system": {
         "activities": {
           "FpQCZmIyHumpG1fH": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "FpQCZmIyHumpG1fH",
             "description": "",
             "system": {
-              "ability": "charisma",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "13"
-              }
+              "save": {
+                "ability": [
+                  "charisma"
+                ],
+                "dc": {
+                  "formula": "13"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "bonus",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
                   "target": "",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -257,10 +286,33 @@
               "spent": 1,
               "recovery": [],
               "min": "0",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -282,13 +334,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -337,13 +395,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -395,13 +459,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [
@@ -494,31 +564,45 @@
             "_id": "sO4yBxIaNViWhQt2",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "piercing"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "",
               "attack": {
                 "bonus": "",
-                "flat": false
-              }
+                "flat": false,
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -530,21 +614,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -561,13 +660,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -607,10 +712,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1706473281478,
-    "modifiedTime": 1717280879659,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

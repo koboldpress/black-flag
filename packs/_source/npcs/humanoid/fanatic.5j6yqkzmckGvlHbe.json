@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 2,
       "hp": {
@@ -54,11 +53,15 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {},
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "medium",
       "condition": {
@@ -79,16 +82,17 @@
         "resistances": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "immunities": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "vulnerabilities": {
           "value": [],
-          "custom": []
+          "custom": [],
+          "nonmagical": []
         }
       },
       "type": {
@@ -96,42 +100,51 @@
         "tags": [
           "anyLineage"
         ],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "dexterity": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       },
       "constitution": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "intelligence": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "wisdom": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       },
       "charisma": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       }
     },
     "biography": {
       "value": "",
-      "lair": "",
       "legendary": ""
     },
     "spellcasting": {
       "ability": "wisdom",
       "dc": 13
+    },
+    "description": {
+      "source": {}
     }
   },
   "prototypeToken": {
     "name": "Fanatic",
-    "displayName": 0,
+    "displayName": 30,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -154,9 +167,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -187,7 +200,7 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
+      "enabled": true,
       "range": 0,
       "angle": 360,
       "visionMode": "basic",
@@ -210,7 +223,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -239,13 +252,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [
@@ -366,7 +385,14 @@
           "value": ""
         },
         "container": null,
-        "rarity": ""
+        "rarity": "",
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "magicalBonus": null
       },
       "effects": [],
       "sort": -150000,
@@ -406,8 +432,17 @@
             "type": "utility",
             "_id": "fttXbxb6LMihJiZG",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -418,6 +453,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -435,13 +492,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -483,32 +546,48 @@
             "type": "attack",
             "_id": "G0M1CaGJdPQD6pBg",
             "system": {
-              "type": {
-                "value": "",
-                "classification": ""
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": ""
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
               },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": ""
               },
-              "ability": ""
+              "effects": []
             },
             "description": "",
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -523,19 +602,107 @@
               "min": "",
               "max": ""
             },
-            "name": "",
+            "name": "Initial Attack",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
+          },
+          "6QvjisMcybwGW208": {
+            "type": "damage",
+            "_id": "6QvjisMcybwGW208",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "damage": {
+                "critical": {
+                  "allow": false
+                },
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": 4,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "slashing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "Additional Damage",
+            "img": ""
           }
         },
         "overrides": {
@@ -569,9 +736,12 @@
         ],
         "ammunition": {},
         "damage": {
-          "number": 1,
-          "denomination": 4,
-          "type": "piercing"
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "piercing",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": 20,
@@ -589,7 +759,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "ownership": {
@@ -632,31 +803,45 @@
             "_id": "Ab9eFCXuCLV3sXqG",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "spell"
-              },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "ability": "wisdom",
+                "type": {
+                  "value": "melee",
+                  "classification": "spell"
+                },
+                "critical": {
+                  "threshold": null
+                }
               },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": ""
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "wisdom"
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -675,15 +860,29 @@
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -700,10 +899,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "mJdl6olsbDWgN4aQ",
@@ -742,29 +947,36 @@
         },
         "activities": {
           "5s5AslKQAW9L95Q3": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "5s5AslKQAW9L95Q3",
             "description": "",
             "system": {
-              "ability": "charisma",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "13"
-              }
+              "save": {
+                "ability": [
+                  "charisma"
+                ],
+                "dc": {
+                  "formula": "13"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "bonus",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
                   "target": "",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -779,7 +991,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -788,7 +1022,8 @@
           "recovery": [
             {
               "period": "recharge",
-              "formula": "5"
+              "formula": "5",
+              "type": "recoverAll"
             }
           ],
           "min": "",
@@ -801,10 +1036,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "A5wL2nPVo9Zf3ElD",
@@ -846,8 +1087,17 @@
             "type": "utility",
             "_id": "UOLgsuCw2cAeQumo",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -858,6 +1108,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -871,13 +1143,6 @@
         "description": {
           "value": "<p><em>You cause bright light to spring forth from whatever you touch.</em></p><p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a DEX save to avoid the spell.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 0
         },
         "casting": {
           "value": null,
@@ -906,7 +1171,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -917,11 +1183,15 @@
         "range": {
           "units": "touch"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "school": "evocation",
+        "source": [
           "arcane",
           "divine"
-        ],
-        "school": "evocation"
+        ]
       },
       "effects": [],
       "sort": 0,
@@ -962,8 +1232,17 @@
             "type": "utility",
             "_id": "rNt7sRMZNWBMsRrb",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -974,6 +1253,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -987,13 +1288,6 @@
         "description": {
           "value": "<p><em>You display divine power through a bevy of parlor tricks and small miracles.</em></p><p>You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range:</p><ul><li><p>Your voice booms up to three times as loud as normal for 1 minute.</p></li><li><p>You cause flames to flicker, brighten, dim, or change color for 1 minute.</p></li><li><p>You cause harmless tremors in the ground for 1 minute.</p></li><li><p>You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.</p></li><li><p>You instantaneously cause an unlocked door or window to fly open or slam shut.</p></li><li><p>You alter the appearance of your eyes for 1 minute.</p></li></ul><p>If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 0
         },
         "casting": {
           "value": null,
@@ -1019,7 +1313,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1030,10 +1325,14 @@
           "units": "foot",
           "value": "30"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "school": "transmutation",
+        "source": [
           "divine"
-        ],
-        "school": "transmutation"
+        ]
       },
       "effects": [],
       "sort": 0,
@@ -1071,28 +1370,34 @@
       "system": {
         "activities": {
           "WS8mWzsF2Xd3NaNC": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "WS8mWzsF2Xd3NaNC",
             "description": "",
             "system": {
-              "ability": "wisdom",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": ""
-              }
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
             },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1107,7 +1412,29 @@
               "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1125,13 +1452,6 @@
         "description": {
           "value": "<p><em>You empower your spoken word with divine authority that few can resist.</em></p><p>You speak a one-word command to a creature you can see within range. The target must succeed on a WIS save or follow the command on its next turn. The spell has no effect if the target is Undead, if it doesn’t understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the GM determines how the target behaves. If the target can’t follow your command, the spell ends.</p><p><em><strong>Approach.</strong></em> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><em><strong>Drop.</strong></em> The target drops whatever it is holding and then ends its turn.</p><p><em><strong>Flee.</strong></em> The target spends its turn moving away from you by the fastest available means.</p><p><em><strong>Grovel.</strong></em> The target falls prone and then ends its turn.</p><p><em><strong>Halt.</strong></em> The target doesn’t move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 1
         },
         "casting": {
           "value": null,
@@ -1156,7 +1476,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1168,10 +1489,14 @@
           "units": "foot",
           "value": "60"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "school": "enchantment",
+        "source": [
           "divine"
-        ],
-        "school": "enchantment"
+        ]
       },
       "effects": [],
       "sort": 0,
@@ -1213,38 +1538,53 @@
             "_id": "MxF5SXNWeicQLVph",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": ""
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 3,
-                    "denomination": "10",
+                    "denomination": 10,
                     "bonus": "",
-                    "custom": "",
-                    "type": "necrotic"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "necrotic",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "",
               "attack": {
                 "flat": false,
-                "bonus": ""
-              }
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": ""
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1259,7 +1599,29 @@
               "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1277,13 +1639,6 @@
         "description": {
           "value": "<p><em>Your pale, sickly hand threatens grievous harm upon whomever you touch.</em></p><p>Make a melee spell attack against a creature you can reach. On a hit, the target takes 3d10 necrotic damage.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 1
         },
         "casting": {
           "value": null,
@@ -1309,7 +1664,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1320,10 +1676,14 @@
         "range": {
           "units": "touch"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "school": "necromancy",
+        "source": [
           "divine"
-        ],
-        "school": "necromancy"
+        ]
       },
       "effects": [],
       "sort": 0,
@@ -1361,28 +1721,34 @@
       "system": {
         "activities": {
           "DK1nMKfROcpCTpp3": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "DK1nMKfROcpCTpp3",
             "description": "",
             "system": {
-              "ability": "wisdom",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": ""
-              }
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
             },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1397,7 +1763,29 @@
               "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1415,13 +1803,6 @@
         "description": {
           "value": "<p><em>You paralyze your target where they stand.</em></p><p>Choose a Humanoid that you can see within range. The target must succeed on a WIS save or be paralyzed for the duration. At the end of each of its turns, the target can make another WIS save. On a success, the spell ends on the target.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 2
         },
         "casting": {
           "value": null,
@@ -1452,7 +1833,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1464,11 +1846,15 @@
           "units": "foot",
           "value": "60"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 2
+        },
+        "school": "enchantment",
+        "source": [
           "arcane",
           "divine"
-        ],
-        "school": "enchantment"
+        ]
       },
       "effects": [],
       "sort": 0,
@@ -1506,10 +1892,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709698728390,
-    "modifiedTime": 1717281181099,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

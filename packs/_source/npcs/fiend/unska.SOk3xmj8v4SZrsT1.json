@@ -1,0 +1,1173 @@
+{
+  "folder": "Fm2a800RpGPvFKEJ",
+  "name": "Unska",
+  "type": "npc",
+  "_id": "SOk3xmj8v4SZrsT1",
+  "img": "systems/black-flag/artwork/tokens/demon-unska.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 17,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 5,
+      "hp": {
+        "value": 88,
+        "max": 88,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 10,
+      "stealth": 12
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common",
+          "abyssal"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 20,
+        "types": {
+          "walk": "@base",
+          "climb": "20",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "medium",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [
+            "charmed",
+            "frightened"
+          ],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "fiend",
+        "tags": [
+          "demon"
+        ],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 3,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": 2,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 2,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": -1,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": null,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 2,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "BFRD",
+        "book": "",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Unska",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/demon-unska.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Demonic Resilience",
+      "type": "feature",
+      "_id": "P13IPHetsPMdn6G5",
+      "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to cold, fire, and lightning damage. In addition, it is immune to poison damage and to the poisoned condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "demonic-resilience"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.30zXkRqsI6WEowjf",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Demonic Resilience",
+          "_id": "QEROKmLmQGbXQUxg",
+          "changes": [
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "cold",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "fire",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.resistances.value",
+              "mode": 2,
+              "value": "lightning",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/creatures/unholy/demon-fire-horned-winged-roar.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!SOk3xmj8v4SZrsT1.P13IPHetsPMdn6G5.QEROKmLmQGbXQUxg"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.yEnzD1P6so8fuqeg",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.P13IPHetsPMdn6G5"
+    },
+    {
+      "name": "Magic Resistance",
+      "type": "feature",
+      "_id": "UkskL3k0PmZ5DEbz",
+      "img": "icons/magic/defensive/barrier-shield-dome-pink.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on saving throws against spells and other magical effects.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "magic-resistance",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.GoznMPBy0gqwoh8Q",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 2500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.UkskL3k0PmZ5DEbz"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "QN4i8JMofRlSnunD",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p> The unska makes two Claw attacks and one Tongue attack, or it makes three Ink Blast attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.QN4i8JMofRlSnunD"
+    },
+    {
+      "folder": "gFeMgDslgGsEJoke",
+      "system": {
+        "activities": {
+          "yOmk0OQcfp929ih7": {
+            "type": "attack",
+            "_id": "yOmk0OQcfp929ih7",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 8,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "10",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          },
+          "P9ptpK76AOroHqhQ": {
+            "type": "save",
+            "_id": "P9ptpK76AOroHqhQ",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "effects": [],
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {
+                  "ability": "custom",
+                  "formula": "14"
+                }
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false,
+              "units": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "CON Save",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack</em>: [[/attack]], reach 10 ft., one target. <em>Hit</em>: [[/damage average]] damage. The target must succeed on a [[/save con 14 format=long]], or its HP maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if its HP maximum is reduced to 0.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Tongue",
+      "type": "feature",
+      "_id": "D0JqVMiLoZsDqXG5",
+      "img": "icons/commodities/biological/tongue-pink.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.D0JqVMiLoZsDqXG5"
+    },
+    {
+      "folder": "gFeMgDslgGsEJoke",
+      "system": {
+        "activities": {
+          "eGK642p7SWLg60lm": {
+            "type": "attack",
+            "_id": "eGK642p7SWLg60lm",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "charisma",
+                "type": {
+                  "value": "ranged",
+                  "classification": "spell"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": 6,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "60",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          },
+          "9KJsY3Ab5NF1RP5l": {
+            "type": "save",
+            "_id": "9KJsY3Ab5NF1RP5l",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "effects": [],
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {
+                  "ability": "custom",
+                  "formula": "14"
+                }
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false,
+              "units": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "CON Save",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack</em>: [[/attack]], range 60 ft., one target. <em>Hit</em>: [[/damage average]] damage, and the target must succeed on a [[/save con 14 format=long]] or have disadvantage on the next save it makes against the unska’s Whirl of Ink before the start of the unska’s next turn.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Doicument"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Ink Blast",
+      "type": "feature",
+      "_id": "eKryrNguq4Q4Ir0c",
+      "img": "icons/magic/unholy/projectile-bolts-salvo-pink.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.eKryrNguq4Q4Ir0c"
+    },
+    {
+      "folder": "gFeMgDslgGsEJoke",
+      "system": {
+        "activities": {
+          "svjB9AE6HtFg1pmw": {
+            "type": "save",
+            "_id": "svjB9AE6HtFg1pmw",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "effects": [],
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "14"
+                },
+                "ability": [
+                  "wisdom"
+                ]
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "turn",
+              "concentration": false,
+              "override": false,
+              "value": "1"
+            },
+            "range": {
+              "override": false,
+              "units": "foot",
+              "value": "30",
+              "special": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "",
+            "sort": 0
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Tattoos leap off the unska’s body and latch onto a creature the unska can see within 30 feet of it. The target must succeed on a [[/save format=long]] or be &amp;Reference[charmed]{charmed}, disoriented, or &amp;Reference[frightened]{frightened} (the unska’s choice) until the end of its next turn. When a disoriented creature moves, it moves in a random direction.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Whirl of Ink",
+      "type": "feature",
+      "_id": "nMIAIpcz2L8yDOtl",
+      "img": "icons/magic/unholy/energy-smoke-pink.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!SOk3xmj8v4SZrsT1.nMIAIpcz2L8yDOtl"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!SOk3xmj8v4SZrsT1"
+}

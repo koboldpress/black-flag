@@ -1,0 +1,1364 @@
+{
+  "folder": "V0kGTSPAwPozSTUq",
+  "name": "Medusa",
+  "type": "npc",
+  "_id": "6KZkDgmaA18V8VQa",
+  "img": "systems/black-flag/artwork/tokens/medusa.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 15,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 6,
+      "hp": {
+        "value": 112,
+        "max": 112,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 14,
+      "stealth": 15
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "medium",
+      "condition": {
+        "resistances": {
+          "value": [
+            "petrified"
+          ],
+          "custom": []
+        },
+        "immunities": {
+          "value": [
+            "poisoned"
+          ],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [
+            "poison"
+          ],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "monstrosity",
+        "tags": [],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": null,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": 4,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 3,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": 2,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": 1,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 6,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "",
+        "book": "BFRD",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Medusa",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/medusa.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": -1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Monstrosity Resilience",
+      "type": "feature",
+      "_id": "VAl12KuwJlnsH9l7",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "monstrosity-resilience"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Monstrosity Resilience",
+          "_id": "jxagd3hzp2UTp7Wl",
+          "changes": [
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!6KZkDgmaA18V8VQa.VAl12KuwJlnsH9l7.jxagd3hzp2UTp7Wl"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.5eDnfMruW8QT67Zf",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": -100000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.VAl12KuwJlnsH9l7"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {
+          "EHEZXetBlfZ8WAP3": {
+            "type": "save",
+            "_id": "EHEZXetBlfZ8WAP3",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "14"
+                },
+                "ability": [
+                  "constitution"
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "free",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "30",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/save.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature that can see the medusa’s eyes starts its turn within 30 feet of the medusa, the medusa can force it to make a [[/save format=long]] if the medusa isn’t incapacitated and can see the creature. If the save fails by 5 or more, the creature is instantly &amp;Reference[petrified]{petrified}. Otherwise, a creature that fails the save begins to turn to stone and is &amp;Reference[restrained]{restrained}. The restrained creature must repeat the save at the end of its next turn, becoming petrified on a failure or ending the effect on itself on a success. The petrification lasts until the creature is freed by the @UUID[Compendium.black-flag.spells.Item.ZTVg00JolCuPkOOX]{greater restoration} spell or other magic.</p><p>Unless surprised, a creature can avert its eyes to avoid the save at the start of its turn. If the creature does so, it can’t see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.</p><p>If the medusa sees itself reflected on a polished surface within 30 feet of it and in an area of bright light, the medusa, due to its curse, is affected by its own gaze. A medusa isn’t resistant to its own gaze.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Petrifying Gaze",
+      "type": "feature",
+      "_id": "fn4dWE2eBpjX0ASg",
+      "img": "icons/magic/earth/strike-fist-stone-gray.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.fn4dWE2eBpjX0ASg"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The medusa can communicate with snakes as if they shared a language, and snakes can’t be petrified by the medusa’s Petrifying Gaze.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Snake Friend",
+      "type": "feature",
+      "_id": "t7u4v1qgjy4R78UR",
+      "img": "icons/creatures/reptiles/snake-fangs-bite-green-yellow.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.t7u4v1qgjy4R78UR"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "5wxyCaasKUGjzsX3",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The medusa makes one Snake Hair attack and two Shortsword attacks, or it makes three Longbow attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7700000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.5wxyCaasKUGjzsX3"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {
+          "5tZmkMRTJo08f9jc": {
+            "type": "attack",
+            "_id": "5tZmkMRTJo08f9jc",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 1,
+                    "denomination": 4,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  },
+                  {
+                    "number": 4,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "10",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack</em>: [[/attack]], reach 10 ft., one target. <em>Hit</em>: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Snake Hair",
+      "type": "feature",
+      "_id": "36Nz3FruEW73IcBP",
+      "img": "icons/creatures/reptiles/snake-fangs-bite-green.webp",
+      "effects": [],
+      "sort": 7800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.36Nz3FruEW73IcBP"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Shortsword",
+      "type": "weapon",
+      "_id": "kF2A8UNFP2PUvyhx",
+      "img": "icons/weapons/swords/shortsword-guard-brass.webp",
+      "system": {
+        "activities": {
+          "zdvnhG3M5w0njnjn": {
+            "type": "attack",
+            "_id": "zdvnhG3M5w0njnjn",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "shortsword"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 7900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.kF2A8UNFP2PUvyhx"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Longbow",
+      "type": "weapon",
+      "_id": "2VvGd7cdaJxewc3d",
+      "img": "icons/weapons/bows/longbow-recurve-leather-red.webp",
+      "system": {
+        "activities": {
+          "tXPhBhx5J0ZqMA3X": {
+            "type": "attack",
+            "_id": "tXPhBhx5J0ZqMA3X",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 2,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "martial",
+          "base": "longbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "heavy",
+          "twoHanded"
+        ],
+        "ammunition": {
+          "type": "arrow"
+        },
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 8,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": 150,
+          "long": 600,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 8000000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.IpWwpPrnKuwHQpVw",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.2VvGd7cdaJxewc3d"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {
+          "PPnTsNFRk3CHFjT1": {
+            "type": "save",
+            "_id": "PPnTsNFRk3CHFjT1",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "14"
+                },
+                "ability": [
+                  "wisdom"
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "reaction",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/save.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the medusa can see targets it with an attack, the medusa’s snakes can suddenly rise and hiss at the attacker. The attacker must succeed on a [[/save format=long]] or fail the attack roll.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Interruptive Hiss",
+      "type": "feature",
+      "_id": "YAeeizPeGVls9Ph9",
+      "img": "icons/creatures/reptiles/snake-poised-white.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!6KZkDgmaA18V8VQa.YAeeizPeGVls9Ph9"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!6KZkDgmaA18V8VQa"
+}

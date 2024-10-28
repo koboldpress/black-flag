@@ -1,0 +1,1184 @@
+{
+  "folder": "V0kGTSPAwPozSTUq",
+  "name": "Kobold Swiftblade",
+  "type": "npc",
+  "_id": "WPrjdve77A9SA94h",
+  "img": "systems/black-flag/artwork/tokens/kobold-swiftblade.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": null,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 3,
+      "hp": {
+        "value": 80,
+        "max": 80,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 12,
+      "stealth": 16
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common",
+          "draconic"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base",
+          "climb": "15",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "small",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "humanoid",
+        "tags": [],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": -1,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": 6,
+        "proficient": true
+      },
+      "constitution": {
+        "mod": null,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": 1,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": 2,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": null,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "",
+        "book": "BFRD",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Kobold Swiftblade",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/kobold-swiftblade.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "folder": "9Er7AXgwcIA7EnGb",
+      "name": "Leather Armor",
+      "type": "armor",
+      "_id": "zxsIN6YelWxlXSp6",
+      "img": "icons/equipment/chest/breastplate-layered-leather-brown.webp",
+      "system": {
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 10,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 10,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p>The breastplate and shoulder protectors of this armor are made of leather that has been stiffened by being boiled in oil. The rest of the armor is made of softer and more flexible materials.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "category": "light",
+          "base": "leather"
+        },
+        "properties": [
+          "naturalMaterials"
+        ],
+        "armor": {
+          "value": 11,
+          "requiredStrength": null
+        },
+        "modifier": {
+          "min": null,
+          "max": null
+        },
+        "attunement": {
+          "value": ""
+        },
+        "rarity": "",
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "activities": {},
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.h3Km60Kh2WNvWRoY",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.zxsIN6YelWxlXSp6"
+    },
+    {
+      "name": "Sunlight Sensitivity",
+      "type": "feature",
+      "_id": "ya2LpBbo63KyKRpv",
+      "img": "icons/magic/light/explosion-glow-spiral-yellow.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>While in sunlight, the [[lookup @name lowercase]] has disadvantage on attack rolls, and its Perception is [[calc @attributes.perception - 5]] when perceiving by sight.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "sunlight-sensitivity"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.hzFrJFfPPIv20rWe",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 50000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.ya2LpBbo63KyKRpv"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "O0tTeMIawbTOhsYm",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The kobold swiftblade makes two Scimitar or Hand Crossbow attacks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7700000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.O0tTeMIawbTOhsYm"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Scimitar",
+      "type": "weapon",
+      "_id": "y1PB5O4XqvLxuYzq",
+      "img": "icons/weapons/swords/scimitar-worn-blue.webp",
+      "system": {
+        "activities": {
+          "gL32bKLiV4SNKBpk": {
+            "type": "attack",
+            "_id": "gL32bKLiV4SNKBpk",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 25,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "martial",
+          "base": "scimitar"
+        },
+        "options": [
+          "disarm"
+        ],
+        "properties": [
+          "finesse",
+          "light"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "type": "slashing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 7800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.MwYjehTr9oJlHb1Z",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.y1PB5O4XqvLxuYzq"
+    },
+    {
+      "folder": "QeYWxC06p1u8TuWG",
+      "name": "Hand Crossbow",
+      "type": "weapon",
+      "_id": "neCt2kkkBjOAszeD",
+      "img": "icons/weapons/crossbows/handcrossbow-black.webp",
+      "system": {
+        "activities": {
+          "9OkeK0fDnNqnMEev": {
+            "type": "attack",
+            "_id": "9OkeK0fDnNqnMEev",
+            "system": {
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 6,
+                    "bonus": "",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 75,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "ranged",
+          "category": "martial",
+          "base": "handCrossbow"
+        },
+        "options": [
+          "pinningShot",
+          "ricochetShot"
+        ],
+        "properties": [
+          "ammunition",
+          "light",
+          "loading"
+        ],
+        "ammunition": {
+          "type": "crossbowBolt"
+        },
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": 30,
+          "long": 120,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 7900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.b126bs62p8TQIYZ8",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.neCt2kkkBjOAszeD"
+    },
+    {
+      "folder": "H5FyqDzF3aYJ9br4",
+      "system": {
+        "activities": {
+          "FYH0qgE7BwN8p7OC": {
+            "type": "utility",
+            "_id": "FYH0qgE7BwN8p7OC",
+            "description": "",
+            "system": {
+              "roll": {
+                "name": "",
+                "formula": "",
+                "prompt": false,
+                "visible": false
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "15",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The swiftblade moves up to 15 feet without provoking opportunity attacks, and if it moves into a lightly or heavily obscured area, it takes the &amp;Reference[Hide]{Hide} action, using its Stealth value as the result of the check. If the swiftblade is aware of traps in the area, it can choose if this movement triggers any of them.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Hidden Scurry",
+      "type": "feature",
+      "_id": "i8GNqzm1xJv5QL77",
+      "img": "icons/skills/movement/ball-spinning-blue.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.i8GNqzm1xJv5QL77"
+    },
+    {
+      "name": "Pack Tactics",
+      "type": "feature",
+      "_id": "pozg6NSlSKBqQ1Oh",
+      "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+      "system": {
+        "activities": {
+          "zpKgDPDejpFLckNx": {
+            "type": "utility",
+            "_id": "zpKgDPDejpFLckNx",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false,
+                "formula": "",
+                "name": ""
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "free",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false,
+              "value": "",
+              "units": "self",
+              "special": ""
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": "radius",
+                "size": "5"
+              },
+              "affects": {
+                "choice": false,
+                "count": "",
+                "type": "ally",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "",
+            "sort": 0
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] has advantage on attack rolls against a creature if at least one of its allies is within 5 feet of the target and the ally isn’t incapacitated.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "pack-tactics",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "name": "Pack Tactics",
+          "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+          "origin": "Actor.W4vQapOttm43LoJU.Item.lbnxXjJzInLDI2jK",
+          "transfer": false,
+          "_id": "92TsKDrOHNotDTY8",
+          "type": "base",
+          "system": {},
+          "changes": [],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "statuses": [],
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "_key": "!actors.items.effects!WPrjdve77A9SA94h.pozg6NSlSKBqQ1Oh.92TsKDrOHNotDTY8"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "core": {
+          "sourceId": "Compendium.black-flag.npcfeatures.Item.ivOwfLQnIrKPW3bv"
+        },
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.ivOwfLQnIrKPW3bv",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": -50000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!WPrjdve77A9SA94h.pozg6NSlSKBqQ1Oh"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!WPrjdve77A9SA94h"
+}

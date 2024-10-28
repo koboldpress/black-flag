@@ -1,0 +1,900 @@
+{
+  "folder": "HmKzvYpRYsWN47yG",
+  "name": "Merfolk",
+  "type": "npc",
+  "_id": "a7dzJIh3xbXeEz21",
+  "img": "systems/black-flag/artwork/tokens/merfolk.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 12,
+        "override": null,
+        "customLabel": "coral armor"
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 0.125,
+      "hp": {
+        "value": 9,
+        "max": 9,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 12,
+      "stealth": 12
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common",
+          "aquan"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 10,
+        "types": {
+          "walk": "@base",
+          "climb": "",
+          "fly": "",
+          "swim": "40",
+          "burrow": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "medium",
+      "condition": {
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "humanoid",
+        "tags": [],
+        "custom": []
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 1,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": null,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 1,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": null,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": null,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 1,
+        "proficient": false
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
+    },
+    "description": {
+      "source": {
+        "fallback": "",
+        "book": "BFRD",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Merfolk",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/merfolk.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Amphibious",
+      "type": "feature",
+      "_id": "NY86dANbRkKxrtbX",
+      "img": "icons/creatures/amphibians/treefrog-underneath-teal.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] can breathe air and water.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "amphibious",
+          "associated": ""
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.RIs2Tj0lPhYJNcJ3",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 6500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!a7dzJIh3xbXeEz21.NY86dANbRkKxrtbX"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Coral Spear",
+      "type": "weapon",
+      "_id": "rOtIIRrG4nadvcgI",
+      "img": "icons/weapons/polearms/spear-simple-engraved.webp",
+      "system": {
+        "activities": {
+          "TjDtj5w8nZlmCBg0": {
+            "type": "attack",
+            "_id": "TjDtj5w8nZlmCBg0",
+            "system": {
+              "damage": {
+                "parts": [],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": []
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 1,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 3,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]], one target. <em>Hit:</em> [[/damage average]] damage, or [[/damage versatile average]] damage if used with two hands.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "spear"
+        },
+        "options": [
+          "pull",
+          "trip"
+        ],
+        "properties": [
+          "reach",
+          "versatile"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": null,
+          "long": null,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 1800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.eG0Vk1Kr8peAAYhW",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!a7dzJIh3xbXeEz21.rOtIIRrG4nadvcgI"
+    },
+    {
+      "folder": "H5FyqDzF3aYJ9br4",
+      "system": {
+        "container": null,
+        "activities": {
+          "iXk3ZeBXqRRAMI7A": {
+            "type": "attack",
+            "_id": "iXk3ZeBXqRRAMI7A",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "strength",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "damage": {
+                "parts": [],
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>Ranged Weapon Attack</em>: [[/attack]], range [[lookup @labels.range]]., one target. <em>Hit</em>: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "attunement": {
+          "value": ""
+        },
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "type": {
+          "value": "ranged",
+          "category": ""
+        },
+        "options": [],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "slashing",
+            "additionalTypes": []
+          }
+        },
+        "magicalBonus": null,
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "rarity": ""
+      },
+      "name": "Sharpened Shell",
+      "type": "weapon",
+      "_id": "2CrXVZhB3Tiu8aNh",
+      "img": "icons/commodities/biological/shell-plain-white.webp",
+      "effects": [],
+      "sort": 1900000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!a7dzJIh3xbXeEz21.2CrXVZhB3Tiu8aNh"
+    },
+    {
+      "folder": "H5FyqDzF3aYJ9br4",
+      "system": {
+        "activities": {
+          "bm1Z1w8mjKZL2d2J": {
+            "type": "utility",
+            "_id": "bm1Z1w8mjKZL2d2J",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] takes the &amp;Reference[Dash] or &amp;Reference[Disengage] action.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Nimble Rush",
+      "type": "feature",
+      "_id": "0C5EVF1C7TBODF3k",
+      "img": "icons/skills/movement/figure-running-gray.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!a7dzJIh3xbXeEz21.0C5EVF1C7TBODF3k"
+    },
+    {
+      "folder": "H5FyqDzF3aYJ9br4",
+      "system": {
+        "activities": {
+          "81hkKvpO5TjrrCml": {
+            "type": "save",
+            "_id": "81hkKvpO5TjrrCml",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "11"
+                },
+                "ability": [
+                  "dexterity"
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "reaction",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "5",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/save.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>When a creature the merfolk can see hits it with a melee attack while within 5 feet of it, the merfolk can twist its body to scrape the attacker’s arm or similar attacking appendage across the rough coral of its armor. The attacker must succeed on a [[/save format=long]] or have disadvantage on the next attack roll it makes before the end of its next turn, as its attacking appendage hurts from the abrasion.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Coral Scrape",
+      "type": "feature",
+      "_id": "HU5shMqoc7QtAbfE",
+      "img": "icons/commodities/biological/shell-ridged-green.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!a7dzJIh3xbXeEz21.HU5shMqoc7QtAbfE"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!a7dzJIh3xbXeEz21"
+}

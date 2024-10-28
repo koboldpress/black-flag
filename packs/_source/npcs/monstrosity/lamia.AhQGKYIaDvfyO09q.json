@@ -1,0 +1,2404 @@
+{
+  "folder": "ACk8ILSUrBQafNpa",
+  "name": "Lamia",
+  "type": "npc",
+  "_id": "AhQGKYIaDvfyO09q",
+  "img": "systems/black-flag/artwork/tokens/lamia.webp",
+  "system": {
+    "attributes": {
+      "ac": {
+        "baseFormulas": [
+          "unarmored",
+          "armored",
+          "natural"
+        ],
+        "formulas": [],
+        "flat": 13,
+        "override": null,
+        "customLabel": ""
+      },
+      "exhaustion": 0,
+      "initiative": {
+        "proficiency": {
+          "multiplier": 0,
+          "rounding": "down"
+        }
+      },
+      "cr": 4,
+      "hp": {
+        "value": 95,
+        "max": 95,
+        "temp": null
+      },
+      "legendary": {
+        "spent": 0,
+        "max": null
+      },
+      "perception": 12,
+      "stealth": 13
+    },
+    "proficiencies": {
+      "languages": {
+        "value": [
+          "common",
+          "abyssal"
+        ],
+        "communication": {},
+        "custom": [],
+        "tags": []
+      }
+    },
+    "modifiers": [],
+    "traits": {
+      "movement": {
+        "base": 30,
+        "types": {
+          "walk": "@base"
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "senses": {
+        "types": {
+          "darkvision": "60",
+          "keensense": "",
+          "tremorsense": "",
+          "truesight": ""
+        },
+        "tags": [],
+        "custom": [],
+        "units": "foot"
+      },
+      "size": "large",
+      "condition": {
+        "resistances": {
+          "value": [
+            "charmed"
+          ],
+          "custom": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
+      "type": {
+        "value": "monstrosity",
+        "tags": [],
+        "custom": [],
+        "swarm": ""
+      }
+    },
+    "abilities": {
+      "strength": {
+        "mod": 3,
+        "proficient": false
+      },
+      "dexterity": {
+        "mod": 1,
+        "proficient": false
+      },
+      "constitution": {
+        "mod": 2,
+        "proficient": false
+      },
+      "intelligence": {
+        "mod": 2,
+        "proficient": false
+      },
+      "wisdom": {
+        "mod": 2,
+        "proficient": false
+      },
+      "charisma": {
+        "mod": 5,
+        "proficient": true
+      }
+    },
+    "biography": {
+      "value": "",
+      "legendary": ""
+    },
+    "spellcasting": {
+      "ability": "charisma",
+      "dc": 13
+    },
+    "description": {
+      "source": {
+        "fallback": "",
+        "book": "BFRD",
+        "page": ""
+      }
+    }
+  },
+  "prototypeToken": {
+    "name": "Lamia",
+    "displayName": 20,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 2,
+    "height": 2,
+    "texture": {
+      "src": "systems/black-flag/artwork/tokens/lamia.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 20,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 60,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0,
+      "brightness": 0,
+      "saturation": -1,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 0,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>Difficult terrain composed of sand, mud, or rock doesn’t cost the [[lookup @name lowercase]] extra movement. In addition, the [[lookup @name lowercase]] leaves no tracks or other traces of its passage when moving through sandy, muddy, or rocky terrain.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Badlands Strider",
+      "type": "feature",
+      "_id": "slFOzqvb6fxG0zbe",
+      "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.slFOzqvb6fxG0zbe"
+    },
+    {
+      "name": "Monstrosity Resilience",
+      "type": "feature",
+      "_id": "aJsZQeFr99t0w8Vu",
+      "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+      "system": {
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] is resistant to exhaustion and to the frightened condition.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "value": "monstrosity-resilience"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters"
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.XalovXeLAaACbyqk",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Monstrosity Resilience",
+          "_id": "jxagd3hzp2UTp7Wl",
+          "changes": [
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.resistances.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/creatures/magical/spirit-undead-winged-ghost.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!AhQGKYIaDvfyO09q.aJsZQeFr99t0w8Vu.jxagd3hzp2UTp7Wl"
+        }
+      ],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.5eDnfMruW8QT67Zf",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 4500000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.aJsZQeFr99t0w8Vu"
+    },
+    {
+      "name": "Multiattack",
+      "type": "feature",
+      "_id": "o00T2ifMLKm1JoI9",
+      "img": "icons/skills/melee/strike-slashes-orange.webp",
+      "system": {
+        "activities": {
+          "fttXbxb6LMihJiZG": {
+            "type": "utility",
+            "_id": "fttXbxb6LMihJiZG",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The lamia makes two Hooves attacks and one Dagger attack, or it makes three Arcane Bolt attacks. It can replace one attack with a use of Spellcasting.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "identifier": {
+          "associated": "",
+          "value": "multiattack"
+        },
+        "restriction": {
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "level": {
+          "value": null
+        },
+        "overrides": {
+          "proficiency": null
+        }
+      },
+      "effects": [],
+      "folder": null,
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.gOY84E2CGZ1cauwF",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7700000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.o00T2ifMLKm1JoI9"
+    },
+    {
+      "folder": "tVD5DakH2RhE9Ig5",
+      "name": "Dagger",
+      "type": "weapon",
+      "_id": "PSLFKNB8MMiNbj32",
+      "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+      "system": {
+        "activities": {
+          "G0M1CaGJdPQD6pBg": {
+            "type": "attack",
+            "_id": "G0M1CaGJdPQD6pBg",
+            "system": {
+              "damage": {
+                "parts": [],
+                "critical": {},
+                "includeBase": true
+              },
+              "attack": {
+                "flat": false,
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
+            },
+            "description": "",
+            "activation": {
+              "value": null,
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": []
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "pound"
+        },
+        "description": {
+          "value": "<p><em>Melee or Ranged Weapon Attack:</em> [[/attack]], reach [[lookup @labels.reach]] or range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "type": {
+          "value": "melee",
+          "category": "simple",
+          "base": "dagger"
+        },
+        "options": [
+          "pinningShot"
+        ],
+        "properties": [
+          "finesse",
+          "light",
+          "thrown"
+        ],
+        "ammunition": {},
+        "damage": {
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "piercing",
+            "additionalTypes": []
+          }
+        },
+        "range": {
+          "short": 20,
+          "long": 60,
+          "reach": null
+        },
+        "uses": {
+          "min": "",
+          "max": "",
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": []
+        },
+        "rarity": "",
+        "attunement": {
+          "value": ""
+        },
+        "container": null,
+        "magicalBonus": null
+      },
+      "effects": [],
+      "sort": 7800000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.PSLFKNB8MMiNbj32"
+    },
+    {
+      "folder": null,
+      "system": {
+        "activities": {
+          "fFwQcapwNHa5fOsg": {
+            "type": "attack",
+            "_id": "fFwQcapwNHa5fOsg",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 10,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "value": "5",
+              "units": "foot",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "count": "1",
+                "type": "creature",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Melee Weapon Attack</em>: [[/attack]], reach 5 ft., one target. <em>Hit</em>: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Hooves",
+      "type": "feature",
+      "_id": "0QPgklqJNqt8Mj4x",
+      "img": "icons/commodities/bones/hooves-cloven-brown.webp",
+      "effects": [],
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.kp-tov-monster-vault.kp-tov-mv-npc-features.Item.ZIm20cCuTFtXthhI",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "sort": 7900000,
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.0QPgklqJNqt8Mj4x"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {
+          "EiyQH8yOPuQSysYx": {
+            "type": "attack",
+            "_id": "EiyQH8yOPuQSysYx",
+            "description": "",
+            "system": {
+              "attack": {
+                "flat": false,
+                "bonus": "",
+                "ability": "charisma",
+                "type": {
+                  "value": "ranged",
+                  "classification": "spell"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "damage": {
+                "parts": [
+                  {
+                    "number": 2,
+                    "denomination": 8,
+                    "bonus": "@mod",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "force",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ],
+                "includeBase": true,
+                "critical": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "action",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "60",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/attack.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p><em>Ranged Spell Attack</em>: [[/attack]], range 60 ft., one target. <em>Hit</em>: [[/damage average]] damage.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Arcane Bolt",
+      "type": "feature",
+      "_id": "kAI6PU4CAnFInoXo",
+      "img": "icons/magic/light/projectile-smoke-blue-light.webp",
+      "effects": [],
+      "sort": 8000000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.kAI6PU4CAnFInoXo"
+    },
+    {
+      "folder": "JZx0iWdyx9l2NCaM",
+      "name": "Minor Illusion",
+      "type": "spell",
+      "_id": "KdvFqDYScZyxP18M",
+      "img": "icons/magic/light/explosion-star-glow-blue.webp",
+      "system": {
+        "activities": {
+          "fVwdI9oPeaMJTkfg": {
+            "type": "utility",
+            "_id": "fVwdI9oPeaMJTkfg",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>A gesture manifests an illusion of a sound or image of your design.</em></p><p>You create a sound or an image of an object within range that lasts for the duration. The illusion also ends if you dismiss it as an action or cast this spell again.</p><p>If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else’s voice, a lion’s roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration, or you can make discrete sounds at different times before the spell ends.</p><p>If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot cube. The image can’t create sound, light, smell, or any other sensory effect.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it.</p><p>If a creature uses its action to examine the sound or image, the creature can determine that it is an illusion with a successful INT (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the illusion becomes faint to the creature.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Small illusory sound or image."
+        },
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a bit of fleece",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "school": "illusion",
+        "source": [
+          "arcane"
+        ]
+      },
+      "effects": [],
+      "sort": 100000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.AR6lGdaHEnUy6Em6",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.KdvFqDYScZyxP18M"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Silent Image",
+      "type": "spell",
+      "_id": "9ZhpMaLjdsZLW2TX",
+      "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
+      "system": {
+        "activities": {
+          "X1C56RSBtoBBMeN6": {
+            "type": "utility",
+            "_id": "X1C56RSBtoBBMeN6",
+            "description": "<p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn’t accompanied by sound, smell, or other sensory effects.</p>",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "value": null,
+              "override": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "Create Image",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          },
+          "lVSlfCOrctPi0AU7": {
+            "type": "utility",
+            "_id": "lVSlfCOrctPi0AU7",
+            "description": "<p>You cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking.</p>",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "value": null,
+              "override": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false,
+                "max": ""
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "Move Image",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You create and control a convincing visual illusion.</em></p><p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn’t accompanied by sound, smell, or other sensory effects.</p><p>You can use your action to cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful INT (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Make a small visual illusion."
+        },
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a bit of fleece",
+            "denomination": "pp",
+            "consumed": false
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "60"
+        },
+        "school": "illusion",
+        "source": [
+          "arcane"
+        ]
+      },
+      "effects": [],
+      "sort": 200000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.BVnq6NQ0bfaGchBC",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.9ZhpMaLjdsZLW2TX"
+    },
+    {
+      "folder": "iJIjiGFvx6IqTXvu",
+      "name": "Suggestion",
+      "type": "spell",
+      "_id": "lZ2cRyvGbIfXvkq9",
+      "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
+      "system": {
+        "activities": {
+          "NXHo4t0aLzuDR29S": {
+            "type": "save",
+            "_id": "NXHo4t0aLzuDR29S",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "value": null,
+              "override": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "description": {
+          "value": "<p><em>You lace your honeyed words with an undercurrent of compulsion.</em></p><p>You suggest a course of activity (limited to a sentence or two) and magically influence a creature you can see within range that can hear and understand you. Creatures that can’t be charmed are immune to this effect. The suggestion must be worded in such a manner as to make the course of action sound reasonable. Asking the creature to stab itself, throw itself onto a spear, immolate itself, or do some other obviously harmful act ends the spell.</p><p>The target must make a WIS save. On a failed save, it pursues the course of action you described to the best of its ability. The suggested course of action can continue for the entire duration. If the suggested activity can be completed in a shorter time, the spell ends when the subject finishes what it was asked to do.</p><p>You can also specify conditions that will trigger a special activity during the duration. For example, you might suggest that a knight give her warhorse to the first beggar she meets. If the condition isn’t met before the spell expires, the activity isn’t performed.</p><p>If you or any of your companions damage the target, the spell ends.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Creature obeys your order."
+        },
+        "circle": {
+          "value": null,
+          "base": 2
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a snake’s tongue and either a bit of honeycomb or a drop of sweet oil",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "8"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30"
+        },
+        "school": "enchantment",
+        "source": [
+          "arcane"
+        ]
+      },
+      "effects": [],
+      "sort": 300000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.iw5BfQdWrDssHFWZ",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.lZ2cRyvGbIfXvkq9"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Charm",
+      "type": "spell",
+      "_id": "0UOh9U5kSz5A9kgX",
+      "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+      "system": {
+        "activities": {
+          "AE52hCKYJykBq4Ne": {
+            "type": "save",
+            "_id": "AE52hCKYJykBq4Ne",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "value": null,
+              "primary": true,
+              "override": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p>You attempt to charm a creature that you can see within range. To be affected by this spell, the target must be able to understand at least one language, though it need not be a language you speak. The target must make a WIS save and does so with advantage if you or your companions are fighting it. On a failed save, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can target one additional creature for each circle slot above 1st. The creatures must be within 30 feet of each other when you target them. In addition, if you cast this spell using a spell slot of 4th circle or higher, targeted creatures don’t need to understand any languages to be affected.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Compel creature to trust you."
+        },
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "hour",
+          "value": "1"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "@scaling",
+            "special": "Targets must be within 30 feet of one another"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "30",
+          "special": ""
+        },
+        "school": "enchantment",
+        "source": [
+          "arcane",
+          "wyrd"
+        ]
+      },
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
+          "duration": {
+            "rounds": null,
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Charm",
+          "_id": "MHWYFHDDXmIygkPs",
+          "changes": [],
+          "description": "<p>The target is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you.</p>",
+          "transfer": false,
+          "statuses": [
+            "charmed"
+          ],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "0.10.049",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/magic/control/debuff-energy-hold-blue-yellow.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!AhQGKYIaDvfyO09q.0UOh9U5kSz5A9kgX.MHWYFHDDXmIygkPs"
+        }
+      ],
+      "sort": 350000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "mode": "standard",
+            "origin": {
+              "ability": ""
+            },
+            "alwaysPrepared": false
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.pw72u0bgcIKLtSBM",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.0UOh9U5kSz5A9kgX"
+    },
+    {
+      "folder": "nRrXxMSYGyY4qKs3",
+      "name": "Command",
+      "type": "spell",
+      "_id": "VuvWiPPMDJ98aJIx",
+      "img": "icons/magic/control/control-influence-puppet.webp",
+      "system": {
+        "activities": {
+          "WS8mWzsF2Xd3NaNC": {
+            "type": "save",
+            "_id": "WS8mWzsF2Xd3NaNC",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "type": "",
+              "condition": "",
+              "value": null,
+              "primary": true,
+              "override": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "min": "",
+              "max": "",
+              "consumeQuantity": false
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a WIS save or follow the command at the start of its next turn. The spell has no effect if the target is Undead, if it doesn’t understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the GM determines how the target behaves. If the target can’t follow your command, the spell ends.</p><p><em><strong>Approach.</strong></em> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><em><strong>Drop.</strong></em> The target drops whatever it is holding and then ends its turn.</p><p><em><strong>Flee.</strong></em> The target spends its turn moving away from you by the fastest available means.</p><p><em><strong>Grovel.</strong></em> The target falls prone and then ends its turn.</p><p><em><strong>Halt.</strong></em> The target doesn’t move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><em>At Higher Circles.</em> When you cast this spell using a spell slot of 2nd circle or higher, you can affect one additional creature for each slot above 1st. The creatures must be within 30 feet of each other when you target them.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Creature obeys one-word order."
+        },
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal"
+          ],
+          "material": {
+            "cost": null,
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "instantaneous"
+        },
+        "tags": [],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "@scaling",
+            "special": "Targets must be withing 30 feet of each other"
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "60",
+          "special": ""
+        },
+        "school": "enchantment",
+        "source": [
+          "divine",
+          "wyrd"
+        ]
+      },
+      "effects": [],
+      "sort": 375000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "mode": "standard",
+            "origin": {
+              "ability": ""
+            },
+            "alwaysPrepared": false
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.lkBDXbx2O78UA8gz",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.VuvWiPPMDJ98aJIx"
+    },
+    {
+      "folder": "V6ryz9MMBJLcGrft",
+      "name": "Major Image",
+      "type": "spell",
+      "_id": "DufRqwrIOTR3LvrN",
+      "img": "icons/magic/light/explosion-star-glow-blue.webp",
+      "system": {
+        "activities": {
+          "hokrOjC6DEhMlyNk": {
+            "type": "utility",
+            "_id": "hokrOjC6DEhMlyNk",
+            "description": "",
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "type": "",
+              "condition": "",
+              "primary": true,
+              "override": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "consumeQuantity": false,
+              "min": "",
+              "max": ""
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/utility.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "3"
+        },
+        "description": {
+          "value": "<p><em>You conjure a convincing, intricate illusion that functions at your mental command.</em></p><p>You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot cube. The image appears at a spot that you can see within range and lasts for the duration. It seems completely real, including sounds, smells, and temperature appropriate to the thing depicted. You can’t create sufficient heat or cold to cause damage, a sound loud enough to deal thunder damage or deafen a creature, or a smell that might sicken a creature (like a troglodyte’s stench).</p><p>As long as you are within range of the illusion, you can use your action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example.</p><p>Physical interaction with the image reveals it to be an illusion, because things can pass through it. A creature that uses its action to examine the image can determine that it is an illusion with a successful INT (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Make a complex illusion."
+        },
+        "circle": {
+          "value": null,
+          "base": 3
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic",
+            "material"
+          ],
+          "material": {
+            "cost": null,
+            "description": "a bit of fleece",
+            "consumed": false,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "10"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "target": {
+          "template": {
+            "count": 1,
+            "units": "foot",
+            "type": "",
+            "contiguous": false
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          }
+        },
+        "range": {
+          "units": "foot",
+          "value": "120",
+          "special": ""
+        },
+        "school": "illusion",
+        "source": [
+          "arcane"
+        ]
+      },
+      "effects": [],
+      "sort": 387500,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "mode": "standard",
+            "origin": {
+              "ability": ""
+            },
+            "alwaysPrepared": false
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.hDdvHqQgCRbmFltS",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.DufRqwrIOTR3LvrN"
+    },
+    {
+      "folder": "tCxdqzClsLOnTgfE",
+      "name": "Compulsion",
+      "type": "spell",
+      "_id": "tlhRP1NsegVFKsaZ",
+      "img": "icons/magic/control/fear-fright-monster-grin-red-orange.webp",
+      "system": {
+        "activities": {
+          "mJCz0FSKaCTLA7Gc": {
+            "type": "save",
+            "_id": "mJCz0FSKaCTLA7Gc",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "",
+              "condition": "",
+              "primary": true,
+              "override": true
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "item",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "override": false,
+              "concentration": false
+            },
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/saving-throw.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "description": {
+          "value": "<p>Creatures of your choice that you can see within range and that can hear you must make a WIS save. A target automatically succeeds on this save if it can’t be charmed. On a failed save, a target is affected by this spell. Until the spell ends, you can use a bonus action on each of your turns to designate a direction that is horizontal to you. Each affected target must use as much of its movement as possible to move in that direction on its next turn. It can take its action before it moves. After moving in this way, it can make another WIS save to try to end the effect. A target isn’t compelled to move into an obviously deadly hazard, such as a fire or pit, but it will provoke opportunity attacks to move in the designated direction.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          },
+          "short": "Charm foes to move as you will."
+        },
+        "source": [
+          "arcane",
+          "divine",
+          "wyrd"
+        ],
+        "circle": {
+          "value": null,
+          "base": 4
+        },
+        "casting": {
+          "value": null,
+          "type": "action",
+          "condition": ""
+        },
+        "components": {
+          "required": [
+            "verbal",
+            "somatic"
+          ],
+          "material": {
+            "consumed": false,
+            "cost": null,
+            "denomination": "gp"
+          }
+        },
+        "duration": {
+          "units": "minute",
+          "value": "1"
+        },
+        "tags": [
+          "concentration"
+        ],
+        "range": {
+          "units": "foot",
+          "value": "30",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          }
+        },
+        "school": "enchantment"
+      },
+      "effects": [],
+      "sort": 400000,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "mode": "standard",
+            "origin": {
+              "ability": ""
+            },
+            "alwaysPrepared": false
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.spells.Item.eQAH7pHltnRZ74NB",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.tlhRP1NsegVFKsaZ"
+    },
+    {
+      "folder": "kI8un5JW79PwQw7O",
+      "system": {
+        "activities": {
+          "tmU7EvbSbwcvLuxI": {
+            "type": "save",
+            "_id": "tmU7EvbSbwcvLuxI",
+            "description": "",
+            "system": {
+              "damage": {
+                "parts": []
+              },
+              "save": {
+                "dc": {
+                  "ability": "custom",
+                  "formula": "13"
+                },
+                "ability": [
+                  "charisma"
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "type": "bonus",
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "hour",
+              "override": false,
+              "value": "1",
+              "concentration": false
+            },
+            "range": {
+              "units": "foot",
+              "value": "30",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": "creature",
+                "count": "1",
+                "special": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "min": "",
+              "max": ""
+            },
+            "name": "",
+            "img": "systems/black-flag/artwork/activities/save.svg",
+            "sort": 0,
+            "magical": false
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "value": "<p>The [[lookup @name lowercase]] gazes at one creature it can see within 30 feet of it. The target must succeed on a [[/save format=long]] or be &amp;Reference[charmed]{charmed} until the end of its next turn and cursed for 1 hour. While cursed, the target has disadvantage on WIS saves and on all ability checks.</p>",
+          "source": {
+            "fallback": "Black Flag Reference Document"
+          }
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "monsters",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "identifier": {
+          "value": "item",
+          "associated": ""
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Intoxicating Gaze",
+      "type": "feature",
+      "_id": "2fbSTRkeZi2i5cfc",
+      "img": "icons/magic/perception/eye-ringed-green.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.049",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!AhQGKYIaDvfyO09q.2fbSTRkeZi2i5cfc"
+    }
+  ],
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "0.10.049",
+    "createdTime": 1729607939811,
+    "modifiedTime": 1729607939811,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!actors!AhQGKYIaDvfyO09q"
+}

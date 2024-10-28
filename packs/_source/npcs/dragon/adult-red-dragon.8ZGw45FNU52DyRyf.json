@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 17,
       "hp": {
@@ -59,7 +58,9 @@
           "fly": "@base * 2",
           "burrow": ""
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {
@@ -68,7 +69,9 @@
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "huge",
       "condition": {
@@ -79,30 +82,36 @@
         "immunities": {
           "value": [],
           "custom": []
-        }
-      },
-      "damage": {
-        "resistances": {
-          "value": [],
-          "custom": [],
-          "bypasses": []
-        },
-        "immunities": {
-          "value": [
-            "fire"
-          ],
-          "custom": [],
-          "bypasses": []
         },
         "vulnerabilities": {
           "value": [],
           "custom": []
         }
       },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [
+            "fire"
+          ],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
       "type": {
         "value": "dragon",
         "tags": [],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
@@ -111,17 +120,20 @@
         "proficient": false
       },
       "dexterity": {
-        "mod": 6
+        "mod": 6,
+        "proficient": false
       },
       "constitution": {
         "mod": 13,
         "proficient": true
       },
       "intelligence": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       },
       "wisdom": {
-        "mod": 7
+        "mod": 7,
+        "proficient": false
       },
       "charisma": {
         "mod": 11,
@@ -130,13 +142,19 @@
     },
     "biography": {
       "value": "<p><em>The mighty red dragons are one of the most feared varieties of dragons. Powerful, intelligent, and cunning, their attacks rend armor, and their flaming breath devastates anyone foolish enough to stand against them. Older red dragons develop additional attacks and even the ability to cast spells.</em></p><p><strong>Avaricious and Territorial.</strong> Most dragons maintain hoards of gold, treasure, and magical items, but the greed of the red dragons is as legendary as their fire. They amass vast troves of wealth, preferring quantity over quality, and display trophies and skulls of slain foes prominently. Red dragons prefer to lair in volcanic caverns within mountains or subterranean areas of extreme heat. They surround their hoard chambers with twisting tunnels full of traps and guardians provided by the lesser creatures forced to serve them. Red dragons brook no incursions into their territory, which can stretch for miles around their lairs, and react to any perceived trespass with fury and fire.</p><p><strong>Dominating Pride.</strong> Red dragons truly believe they are the mightiest of all dragons and superior to all other creatures. They are quick to boast of their own greatness and happy to demonstrate their supremacy by fang or fire. This pride makes them tyrannical, and many red dragons delight in forcing tribute or service from lesser creatures.</p><p><strong>Incendiary Rage.</strong> The magical core of fire at the heart of every red dragon both generates their incinerating breath and makes them quick to anger. They take offense at even slight provocation, flying into devastating rages that last until their fury is vented.</p>",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Adult Red Dragon",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -159,9 +177,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -192,17 +210,23 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
-      "range": 0,
+      "enabled": true,
+      "range": 120,
       "angle": 360,
-      "visionMode": "basic",
-      "attenuation": 0.1,
+      "visionMode": "darkvision",
+      "attenuation": 0,
       "brightness": 0,
-      "saturation": 0,
+      "saturation": -1,
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [],
+    "detectionModes": [
+      {
+        "id": "senseAll",
+        "range": 60,
+        "enabled": true
+      }
+    ],
     "flags": {},
     "randomImg": false,
     "hexagonalShape": 0,
@@ -215,7 +239,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -244,13 +268,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -292,16 +322,25 @@
             "type": "utility",
             "_id": "vQo9lDmsSAr4mXuB",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "free",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -312,10 +351,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -337,13 +399,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -385,8 +453,17 @@
             "type": "utility",
             "_id": "fttXbxb6LMihJiZG",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -395,7 +472,30 @@
             },
             "uses": {
               "spent": 0,
-              "recovery": []
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -413,13 +513,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -462,38 +568,59 @@
             "_id": "sO4yBxIaNViWhQt2",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "10",
+                    "denomination": 10,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "piercing"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   },
                   {
                     "number": 2,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": "fire"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "",
               "attack": {
                 "bonus": "",
-                "flat": false
-              }
+                "flat": false,
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -505,21 +632,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -536,13 +678,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -585,31 +733,45 @@
             "_id": "7KCgObvuVi38DMgx",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "slashing"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "slashing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "",
               "attack": {
                 "bonus": "",
-                "flat": false
-              }
+                "flat": false,
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -621,21 +783,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -652,13 +829,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -701,30 +884,45 @@
             "_id": "nK9DHZRtdth4i7Kf",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "bludgeoning"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "bludgeoning",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "",
               "attack": {
-                "bonus": ""
-              }
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                },
+                "flat": false
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -736,21 +934,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -767,13 +980,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -812,22 +1031,28 @@
       "system": {
         "activities": {
           "4kliYp0YRPMXmUXX": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "4kliYp0YRPMXmUXX",
             "description": "",
             "system": {
-              "ability": "wisdom",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "19"
-              }
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {
+                  "formula": "19"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -839,10 +1064,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -859,13 +1107,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -904,36 +1158,50 @@
       "system": {
         "activities": {
           "BuyeZ8VFzGNVrqs3": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "BuyeZ8VFzGNVrqs3",
             "description": "",
             "system": {
-              "ability": "dexterity",
               "damage": {
                 "parts": [
                   {
                     "number": 18,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": "fire"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "21"
-              }
+              "save": {
+                "ability": [
+                  "dexterity"
+                ],
+                "dc": {
+                  "formula": "21"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -944,10 +1212,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -956,7 +1247,8 @@
           "recovery": [
             {
               "period": "recharge",
-              "formula": "5"
+              "formula": "5",
+              "type": "recoverAll"
             }
           ],
           "min": "",
@@ -969,13 +1261,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -1017,11 +1315,18 @@
             "type": "utility",
             "_id": "LbimYNyRpokzxB6T",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "legendary",
               "condition": "",
-              "value": 1
+              "value": 1,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -1033,10 +1338,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1053,13 +1381,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -1101,11 +1435,18 @@
             "type": "utility",
             "_id": "NIxSHjXg1z8ZLZYC",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "value": 1,
               "type": "legendary",
-              "condition": ""
+              "condition": "",
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -1117,10 +1458,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1137,13 +1501,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -1182,23 +1552,28 @@
       "system": {
         "activities": {
           "GwjZFe6SshmK8K5Z": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "GwjZFe6SshmK8K5Z",
             "description": "",
             "system": {
-              "ability": "charisma",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "19"
-              }
+              "save": {
+                "ability": [
+                  "charisma"
+                ],
+                "dc": {
+                  "formula": "19"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "value": 2,
               "type": "legendary",
-              "condition": ""
+              "condition": "",
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -1210,10 +1585,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1230,13 +1628,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -1275,31 +1679,43 @@
       "system": {
         "activities": {
           "8g8yw6SVinCWjSZc": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "8g8yw6SVinCWjSZc",
             "description": "",
             "system": {
-              "ability": "dexterity",
               "damage": {
                 "parts": [
                   {
                     "number": 2,
                     "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": "bludgeoning"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "bludgeoning",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "22"
-              }
+              "save": {
+                "ability": [
+                  "dexterity"
+                ],
+                "dc": {
+                  "formula": "22"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "value": 2,
               "type": "legendary",
-              "condition": ""
+              "condition": "",
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -1311,10 +1727,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1331,13 +1770,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -1377,10 +1822,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709616912548,
-    "modifiedTime": 1717264326687,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

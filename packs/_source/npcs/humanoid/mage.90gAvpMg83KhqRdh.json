@@ -22,8 +22,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 6,
       "hp": {
@@ -55,11 +54,15 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {},
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "medium",
       "condition": {
@@ -80,16 +83,17 @@
         "resistances": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "immunities": {
           "value": [],
           "custom": [],
-          "bypasses": []
+          "nonmagical": []
         },
         "vulnerabilities": {
           "value": [],
-          "custom": []
+          "custom": [],
+          "nonmagical": []
         }
       },
       "type": {
@@ -97,39 +101,51 @@
         "tags": [
           "anyLineage"
         ],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       },
       "dexterity": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       },
       "constitution": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       },
       "intelligence": {
         "mod": 7,
         "proficient": true
       },
       "wisdom": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "charisma": {
-        "mod": null
+        "mod": null,
+        "proficient": false
       }
     },
     "biography": {
       "value": "",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Mage",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -152,9 +168,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -185,7 +201,7 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
+      "enabled": true,
       "range": 0,
       "angle": 360,
       "visionMode": "basic",
@@ -208,7 +224,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -238,10 +254,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "iydkzy2kc1yl7QbL",
@@ -292,13 +314,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -340,8 +368,17 @@
             "type": "utility",
             "_id": "fttXbxb6LMihJiZG",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -352,6 +389,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -369,13 +428,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -418,32 +483,41 @@
             "type": "attack",
             "_id": "G0M1CaGJdPQD6pBg",
             "system": {
-              "type": {
-                "value": "",
-                "classification": ""
-              },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 3,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": "force"
+                    "custom": {
+                      "enabled": false
+                    },
+                    "type": "force",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "critical": {},
+                "includeBase": true
               },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
               },
-              "ability": ""
+              "effects": []
             },
             "description": "",
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -459,7 +533,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "overrides": {
@@ -493,9 +589,12 @@
         ],
         "ammunition": {},
         "damage": {
-          "number": 1,
-          "denomination": 4,
-          "type": "piercing"
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "piercing",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": 20,
@@ -513,7 +612,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 200000,
@@ -555,31 +655,45 @@
             "_id": "gOV6dNcdce4Ra4pF",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "spell"
-              },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "spell"
+                },
+                "critical": {
+                  "threshold": null
+                }
               },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 3,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "fire"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": ""
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -599,16 +713,30 @@
             "target": {
               "affects": {
                 "type": "creatureObject",
-                "count": "1"
+                "count": "1",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
               "units": "foot",
-              "value": "120"
-            }
+              "value": "120",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -625,10 +753,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "4K56K7tIEwoF0ETE",
@@ -670,8 +804,17 @@
             "type": "utility",
             "_id": "h33XEMOhLhK4mR5Y",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -682,6 +825,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -695,13 +860,6 @@
         "description": {
           "value": "<p><em>You sense the presence of nearby magic.</em></p><p>For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.</p><p>The spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 1
         },
         "casting": {
           "value": null,
@@ -730,7 +888,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -740,10 +899,14 @@
         "range": {
           "units": ""
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "school": "divination",
+        "source": [
           "arcane"
-        ],
-        "school": "divination"
+        ]
       },
       "effects": [],
       "sort": 400000,
@@ -784,8 +947,17 @@
             "type": "utility",
             "_id": "UOLgsuCw2cAeQumo",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -796,6 +968,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -809,13 +1003,6 @@
         "description": {
           "value": "<p><em>You cause bright light to spring forth from whatever you touch.</em></p><p>You touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.</p><p>If you target an object held or worn by a hostile creature, that creature must succeed on a DEX save to avoid the spell.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 0
         },
         "casting": {
           "value": null,
@@ -844,7 +1031,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -855,11 +1043,15 @@
         "range": {
           "units": "touch"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "school": "evocation",
+        "source": [
           "arcane",
           "divine"
-        ],
-        "school": "evocation"
+        ]
       },
       "effects": [],
       "sort": 500000,
@@ -900,8 +1092,17 @@
             "type": "utility",
             "_id": "i2GqtsBwRFWw6nNj",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -912,6 +1113,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -925,13 +1148,6 @@
         "description": {
           "value": "<p><em>You conjure a ghostly hand which you control as an extension of your reach.</em></p><p>A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.</p><p>You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.</p><p>The hand can’t attack, activate magic items, or carry more than 10 pounds.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 0
         },
         "casting": {
           "value": null,
@@ -958,7 +1174,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -969,10 +1186,14 @@
           "units": "foot",
           "value": "30"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "school": "conjuration",
+        "source": [
           "arcane"
-        ],
-        "school": "conjuration"
+        ]
       },
       "effects": [],
       "sort": 600000,
@@ -1013,8 +1234,17 @@
             "type": "utility",
             "_id": "4wfPfvEyy74K7I2i",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": true
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -1025,6 +1255,28 @@
               "spent": 0,
               "recovery": [],
               "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -1038,13 +1290,6 @@
         "description": {
           "value": "<p><em>You tap rudimentary magic to create a variety of helpful or irksome effects around you.</em></p><p>This spell is a minor trick that novice spellcasters use for practice. You create one of the following magical effects within range:</p><ul><li><p>You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.</p></li><li><p>You instantaneously light or snuff out a candle, a torch, or a small campfire.</p></li><li><p>You instantaneously clean or soil an object no larger than 1 cubic foot.</p></li><li><p>You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.</p></li><li><p>You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.</p></li><li><p>You create a nonmagical trinket or an illusory image that can fit in your hand and that lasts until the end of your next turn.</p></li></ul><p>If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 0
         },
         "casting": {
           "value": null,
@@ -1071,7 +1316,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1082,10 +1328,14 @@
           "units": "foot",
           "value": "10"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 0
+        },
+        "school": "transmutation",
+        "source": [
           "arcane"
-        ],
-        "school": "transmutation"
+        ]
       },
       "effects": [],
       "sort": 700000,
@@ -1126,17 +1376,26 @@
             "type": "utility",
             "_id": "8QpTMARs3wYLMcOw",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1151,7 +1410,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1169,13 +1450,6 @@
         "description": {
           "value": "<p><em>With an arcane phrase and a touch, you grant the power of flight.</em></p><p>You touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 3
         },
         "casting": {
           "value": null,
@@ -1206,7 +1480,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1217,10 +1492,14 @@
         "range": {
           "units": "touch"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 3
+        },
+        "school": "transmutation",
+        "source": [
           "arcane"
-        ],
-        "school": "transmutation"
+        ]
       },
       "effects": [],
       "sort": 800000,
@@ -1261,17 +1540,26 @@
             "type": "utility",
             "_id": "Ac5PsZM9ZPjhylvo",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1286,7 +1574,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1304,13 +1614,6 @@
         "description": {
           "value": "<p><em>At a touch, you weave invisible defenses around your target.</em></p><p>You touch a willing creature who isn’t wearing armor, and a protective magical force surrounds it until the spell ends. The target’s base AC becomes 13 + its DEX modifier. The spell ends if the target dons armor or if you dismiss the spell as an action.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 1
         },
         "casting": {
           "value": null,
@@ -1339,7 +1642,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1350,10 +1654,14 @@
         "range": {
           "units": "touch"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 1
+        },
+        "school": "abjuration",
+        "source": [
           "arcane"
-        ],
-        "school": "abjuration"
+        ]
       },
       "effects": [],
       "sort": 900000,
@@ -1394,17 +1702,26 @@
             "type": "utility",
             "_id": "1A9Ss33O082vrVKj",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1419,7 +1736,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1437,13 +1776,6 @@
         "description": {
           "value": "<p><em>You conjure three images of yourself that constantly shift to obscure your true position.</em></p><p>Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it’s impossible to track which image is real. You can use your action to dismiss the illusory duplicates.</p><p>Each time a creature targets you with an attack during the spell’s duration, roll a d20 to determine whether the attack instead targets one of your duplicates.</p><p>If you have three duplicates, you must roll a 6 or higher to change the attack’s target to a duplicate. With two duplicates, you must roll an 8 or higher. With one duplicate, you must roll an 11 or higher.</p><p>A duplicate’s AC equals 10 + your DEX modifier. If an attack hits a duplicate, the duplicate is destroyed. A duplicate can be destroyed only by an attack that targets it. A duplicate ignores all other damage and effects. The spell ends when all three duplicates are destroyed.</p><p>A creature is unaffected by this spell if it can’t see, if it relies on senses other than sight, such as keensense, or if it can perceive illusions as false, as with truesight.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 2
         },
         "casting": {
           "value": null,
@@ -1470,7 +1802,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1480,10 +1813,14 @@
         "range": {
           "units": "self"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 2
+        },
+        "school": "illusion",
+        "source": [
           "arcane"
-        ],
-        "school": "illusion"
+        ]
       },
       "effects": [],
       "sort": 1000000,
@@ -1521,13 +1858,6 @@
           "value": "<p><em>You hurl a small ball of flame that explodes in a huge conflagration.</em></p><p>A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot- radius sphere centered on that point must make a DEX save. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one.</p><p>The fire spreads around corners. It ignites flammable objects in the area that aren’t being worn or carried.</p>",
           "source": {}
         },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 3
-        },
         "casting": {
           "value": null,
           "type": "action",
@@ -1554,9 +1884,10 @@
           "value": "60",
           "units": "foot"
         },
-        "circle": [
-          "arcane"
-        ],
+        "circle": {
+          "value": null,
+          "base": 3
+        },
         "school": "evocation",
         "target": {
           "template": {
@@ -1565,7 +1896,8 @@
             "width": "",
             "height": "",
             "count": 1,
-            "units": "foot"
+            "units": "foot",
+            "contiguous": false
           },
           "affects": {
             "type": "",
@@ -1575,24 +1907,34 @@
         },
         "activities": {
           "QW8NIPm6S3PFZ1is": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "QW8NIPm6S3PFZ1is",
             "system": {
               "damage": {
                 "parts": [
                   {
                     "number": 8,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "",
-                    "custom": "",
-                    "type": "fire"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "fire",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": ""
+              "save": {
+                "ability": [
+                  "dexterity"
+                ],
+                "dc": {}
               },
-              "ability": "dexterity"
+              "effects": []
             },
             "name": "",
             "img": "",
@@ -1600,13 +1942,16 @@
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1619,6 +1964,28 @@
               "consumeQuantity": false,
               "min": "",
               "max": ""
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -1633,7 +2000,10 @@
               "type": "recoverAll"
             }
           ]
-        }
+        },
+        "source": [
+          "arcane"
+        ]
       },
       "effects": [],
       "folder": "V6ryz9MMBJLcGrft",
@@ -1676,17 +2046,26 @@
             "type": "utility",
             "_id": "xD6JcH2ENhnN0xzM",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1701,7 +2080,29 @@
               "max": ""
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1719,13 +2120,6 @@
         "description": {
           "value": "<p><em>You imbue your target with swiftness, making them hard to hit and faster to hit back.</em></p><p>Choose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on DEX saves, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.</p><p>When the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 3
         },
         "casting": {
           "value": null,
@@ -1756,7 +2150,8 @@
           "template": {
             "count": 1,
             "units": "foot",
-            "type": ""
+            "type": "",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1768,10 +2163,14 @@
           "units": "foot",
           "value": "30"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 3
+        },
+        "school": "transmutation",
+        "source": [
           "arcane"
-        ],
-        "school": "transmutation"
+        ]
       },
       "effects": [],
       "sort": 1200000,
@@ -1809,28 +2208,34 @@
       "system": {
         "activities": {
           "9rNj8nFcUMialmy3": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "9rNj8nFcUMialmy3",
             "description": "",
             "system": {
-              "ability": "wisdom",
               "damage": {
                 "parts": []
               },
-              "dc": {
-                "ability": ""
-              }
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {}
+              },
+              "effects": []
             },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1845,7 +2250,29 @@
               "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1863,13 +2290,6 @@
         "description": {
           "value": "<p><em>You magically lengthen time around your targets, reducing their reaction time.</em></p><p>You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a WIS save or be affected by this spell for the duration.</p><p>An affected target’s speed is halved, it takes a −2 penalty to AC and DEX saves, and it can’t use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.</p><p>If the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell. If it can’t, the spell is wasted.</p><p>A creature affected by this spell makes another WIS save at the end of its turn. On a successful save, the effect ends for it.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 3
         },
         "casting": {
           "value": null,
@@ -1901,7 +2321,8 @@
             "count": 1,
             "units": "foot",
             "type": "cube",
-            "size": "40"
+            "size": "40",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -1913,10 +2334,14 @@
           "units": "foot",
           "value": "120"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 3
+        },
+        "school": "transmutation",
+        "source": [
           "arcane"
-        ],
-        "school": "transmutation"
+        ]
       },
       "effects": [],
       "sort": 1300000,
@@ -1954,36 +2379,49 @@
       "system": {
         "activities": {
           "9YKfkRMqEnkk1Suz": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "9YKfkRMqEnkk1Suz",
             "description": "",
             "system": {
-              "ability": "constitution",
               "damage": {
                 "parts": [
                   {
                     "number": 8,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "",
-                    "custom": "",
-                    "type": "cold"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "cold",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": ""
-              }
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {}
+              },
+              "effects": []
             },
             "activation": {
               "type": "",
               "condition": "",
-              "primary": true
+              "primary": true,
+              "value": null,
+              "override": true
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -1998,7 +2436,29 @@
               "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -2016,13 +2476,6 @@
         "description": {
           "value": "<p><em>A cone of biting cold air deals significant cold damage to everyone in it.</em></p><p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a CON save. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><em><strong>At Higher Rings.</strong></em> When you cast this spell using a spell slot of 6th ring or higher, the damage increases by 1d8 for each slot beyond 5th ring.</p>",
           "source": {}
-        },
-        "type": {
-          "value": "standard"
-        },
-        "ring": {
-          "value": null,
-          "base": 5
         },
         "casting": {
           "value": null,
@@ -2051,7 +2504,8 @@
             "count": 1,
             "units": "foot",
             "type": "cone",
-            "size": "60"
+            "size": "60",
+            "contiguous": false
           },
           "affects": {
             "choice": false,
@@ -2062,10 +2516,14 @@
         "range": {
           "units": "self"
         },
-        "circle": [
+        "circle": {
+          "value": null,
+          "base": 5
+        },
+        "school": "evocation",
+        "source": [
           "arcane"
-        ],
-        "school": "evocation"
+        ]
       },
       "effects": [],
       "sort": 1400000,
@@ -2103,10 +2561,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709698992433,
-    "modifiedTime": 1717281790589,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

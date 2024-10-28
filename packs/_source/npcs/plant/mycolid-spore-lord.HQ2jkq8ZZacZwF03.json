@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 3,
       "hp": {
@@ -44,7 +43,8 @@
         ],
         "communication": {
           "telepathy": {
-            "range": 60
+            "range": 60,
+            "units": "foot"
           }
         },
         "custom": [
@@ -62,7 +62,9 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {
@@ -73,7 +75,9 @@
         },
         "tags": [
           "cantSense"
-        ]
+        ],
+        "custom": [],
+        "units": "foot"
       },
       "size": "medium",
       "condition": {
@@ -84,68 +88,86 @@
         "immunities": {
           "value": [],
           "custom": []
-        }
-      },
-      "damage": {
-        "resistances": {
-          "value": [],
-          "custom": [],
-          "bypasses": []
-        },
-        "immunities": {
-          "value": [
-            "poison"
-          ],
-          "custom": [],
-          "bypasses": []
         },
         "vulnerabilities": {
           "value": [],
           "custom": []
         }
       },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [
+            "poison"
+          ],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
       "type": {
         "value": "plant",
         "tags": [],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": 3
+        "mod": 3,
+        "proficient": false
       },
       "dexterity": {
-        "mod": 2
+        "mod": 2,
+        "proficient": false
       },
       "constitution": {
-        "mod": 1
+        "mod": 1,
+        "proficient": false
       },
       "intelligence": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       },
       "wisdom": {
-        "mod": 4
+        "mod": 4,
+        "proficient": false
       },
       "charisma": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       }
     },
     "biography": {
       "value": "<p><em>This small living fungus has the white fibrous stalk and soft, spongy head of a mushroom. Beneath its wide, bell-shaped cap, humanoid arms clutch ramshackle gardening instruments and crude weapons, while flat leg-stalks move the plant-creature toward any potential threats.</em></p><p>Mycolids sprout in areas infused with unnatural magical energy, such as the fetid bog of a black dragon, the cavernous ruins of the underworld, or the shady glade blessed by an archfey or druid. Regardless of region or climate, commoner myconids spend most of their lives cultivating a huge variety of mushrooms into a single unbroken chain of interconnected growth.</p><p><strong>Community First.</strong> They thrive in harsh environments without thought for shelter, culture, art, or history, and instead pour every moment of their relatively short lives into expanding the colony. Few creatures attack the peaceful fungal folk, but those that do find their woody bodies, soft, springy heads, and immunity to pain difficult to overcome. When a colony is threatened, every commoner mycolid fights to the death to protect the collective.</p><p><strong>Highly Toxic.</strong> Though commoner mycolids are safe to handle, creatures foolish enough to eat one may succumb to their potent toxins. In extreme situations, mycolids may let themselves be eaten to kill massive or dangerous creatures and add fertilizer to the colony. Mycolids spores are a powerful defense mechanism as well, and older mycolids have more powerful spores. Even newborn commoner mycolid spores can addle the mind of most beasts.</p><p><strong>Shared Memory.</strong> Each mycolid is a clone of a single progenitor called a spore lord. A family of like mycolids, the spawn of an individual spore lord, is called a “ring,” and each ring shares a collective pool of memories and consciousness connected to a mycelial network. As such, mycolids remember their own births as though they tended to their younger selves personally and can recall every birth and death since the ring began. Though all members of a ring look identical, no two rings are exactly alike. Separate rings cannot share thoughts or memories, but all mycolids can communicate telepathically over short distances.</p><p><strong>Spore Lord.</strong> When a safe area of rich, damp fertilizer can be secured, a commoner mycolid may undergo a rapid change into a more powerful form capable of using its spores to create a near-endless supply of identical offspring. This form, called a spore lord, does not rule over other mycolids. But while commoners tend to the health of mushrooms and mycolid sprouts, spore lords protect the colony from threats and supply it with a stream of clones. A single spore lord might create dozens or hundreds of clones of itself in its lifetime, and a dozen spore lords from different colonies may amass in a single fertile location without conflict.</p><p><strong>Magic Channelers.</strong> Upon transformation, a spore lord is made larger, stronger, and smarter by the primal magic that spawned it. Spore lords instinctively know how to manipulate the environment through cultivation and magic.</p><p><strong>Communal Knowledge.</strong> All members of a spore lord’s ring share its memories, but commoners lack the capacity to understand how and why the spore lord is different, though they recognize it. Only when separated from the colony can a commoner reach such an understanding, usually moments before it changes into a spore lord itself.</p>",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Mycolid Spore Lord",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
     "texture": {
       "src": "systems/black-flag/artwork/tokens/mycolid-spore-lord.webp",
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.7,
+      "scaleY": 0.7,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
@@ -161,9 +183,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -194,7 +216,7 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
+      "enabled": true,
       "range": 0,
       "angle": 360,
       "visionMode": "basic",
@@ -204,7 +226,13 @@
       "contrast": 0,
       "color": null
     },
-    "detectionModes": [],
+    "detectionModes": [
+      {
+        "id": "senseAll",
+        "range": 120,
+        "enabled": true
+      }
+    ],
     "flags": {},
     "randomImg": false,
     "hexagonalShape": 0,
@@ -217,7 +245,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -233,30 +261,43 @@
       "system": {
         "activities": {
           "QamjerE7YjsOEvAs": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "QamjerE7YjsOEvAs",
             "description": "",
             "system": {
-              "ability": "constitution",
               "damage": {
                 "parts": [
                   {
                     "number": 2,
                     "denomination": 4,
                     "bonus": "",
-                    "custom": "",
-                    "type": "poison"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "13"
-              }
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {
+                  "formula": "13"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "free",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -268,10 +309,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -288,13 +352,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -346,13 +416,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -404,13 +480,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [
@@ -514,8 +596,17 @@
             "type": "utility",
             "_id": "fttXbxb6LMihJiZG",
             "description": "",
-            "system": {},
-            "activation": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -524,7 +615,30 @@
             },
             "uses": {
               "spent": 0,
-              "recovery": []
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -542,13 +656,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -592,38 +712,59 @@
             "_id": "TAfp0MhPPYVrnpdn",
             "description": "",
             "system": {
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "ability": "",
+                "type": {
+                  "value": "melee",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
               },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 1,
-                    "denomination": "6",
+                    "denomination": 6,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "bludgeoning"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "bludgeoning",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   },
                   {
                     "number": 2,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "",
-                    "custom": "",
-                    "type": "poison"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": ""
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -635,21 +776,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -666,10 +822,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "mxMgPZX9mx6GEIqD",
@@ -712,31 +874,45 @@
             "_id": "e9LEMnU0JBO37QRO",
             "description": "",
             "system": {
-              "type": {
-                "value": "ranged",
-                "classification": "weapon"
-              },
               "attack": {
                 "flat": false,
-                "bonus": ""
+                "bonus": "",
+                "ability": "dexterity",
+                "type": {
+                  "value": "ranged",
+                  "classification": "weapon"
+                },
+                "critical": {
+                  "threshold": null
+                }
               },
               "damage": {
-                "includeBaseDamage": true,
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "@mod",
-                    "custom": "",
-                    "type": "poison"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
-                ]
+                ],
+                "includeBase": true,
+                "critical": {}
               },
-              "ability": "dexterity"
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -748,21 +924,36 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
             "img": "",
             "target": {
               "affects": {
-                "type": ""
+                "type": "",
+                "choice": false
               },
               "template": {
-                "type": ""
-              }
+                "type": "",
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "prompt": true,
+              "override": false
             },
             "range": {
-              "units": ""
-            }
+              "units": "",
+              "override": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "magical": false
           }
         },
         "uses": {
@@ -779,10 +970,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "WNojEeXC3HjLnY2V",
@@ -821,36 +1018,50 @@
         },
         "activities": {
           "Kw2vkYv156JoyGDp": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "Kw2vkYv156JoyGDp",
             "description": "",
             "system": {
-              "ability": "constitution",
               "damage": {
                 "parts": [
                   {
                     "number": 3,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "",
-                    "custom": "",
-                    "type": "poison"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "14"
-              }
+              "save": {
+                "ability": [
+                  "constitution"
+                ],
+                "dc": {
+                  "formula": "14"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -861,10 +1072,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -873,7 +1107,8 @@
           "recovery": [
             {
               "period": "recharge",
-              "formula": "5"
+              "formula": "5",
+              "type": "recoverAll"
             }
           ],
           "min": "",
@@ -886,10 +1121,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "TZcfTb9gy0fTa9CF",
@@ -928,36 +1169,50 @@
         },
         "activities": {
           "4egCjus9QDyZwA42": {
-            "type": "savingThrow",
+            "type": "save",
             "_id": "4egCjus9QDyZwA42",
             "description": "",
             "system": {
-              "ability": "wisdom",
               "damage": {
                 "parts": [
                   {
                     "number": 2,
-                    "denomination": "8",
+                    "denomination": 8,
                     "bonus": "",
-                    "custom": "",
-                    "type": "poison"
+                    "custom": {
+                      "enabled": false,
+                      "formula": ""
+                    },
+                    "type": "poison",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
                   }
                 ]
               },
-              "dc": {
-                "ability": "custom",
-                "formula": "14"
-              }
+              "save": {
+                "ability": [
+                  "wisdom"
+                ],
+                "dc": {
+                  "formula": "14"
+                }
+              },
+              "effects": []
             },
             "activation": {
               "type": "action",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [
                 {
                   "type": "item",
-                  "value": "1"
+                  "value": "1",
+                  "scaling": {}
                 }
               ],
               "scale": {
@@ -968,10 +1223,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -980,7 +1258,8 @@
           "recovery": [
             {
               "period": "recharge",
-              "formula": "5"
+              "formula": "5",
+              "type": "recoverAll"
             }
           ],
           "min": "",
@@ -993,10 +1272,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "4QmPsVTqD0JNrVVF",
@@ -1035,7 +1320,7 @@
         },
         "activities": {
           "WEyQjNipoubk7HgH": {
-            "type": "healing",
+            "type": "heal",
             "_id": "WEyQjNipoubk7HgH",
             "description": "",
             "system": {
@@ -1044,13 +1329,22 @@
                 "number": 2,
                 "denomination": 4,
                 "bonus": "",
-                "custom": ""
+                "custom": {
+                  "enabled": false,
+                  "formula": ""
+                },
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
               },
-              "ability": ""
+              "effects": []
             },
             "activation": {
               "type": "bonus",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -1062,10 +1356,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -1082,10 +1399,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "vOAzf2auwWxcoPsq",
@@ -1127,10 +1450,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709616033860,
-    "modifiedTime": 1717280414495,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

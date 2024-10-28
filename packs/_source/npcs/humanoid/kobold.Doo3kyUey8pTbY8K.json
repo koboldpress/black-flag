@@ -21,8 +21,7 @@
         "proficiency": {
           "multiplier": 0,
           "rounding": "down"
-        },
-        "lair": null
+        }
       },
       "cr": 0.125,
       "hp": {
@@ -55,7 +54,9 @@
         "types": {
           "walk": "@base"
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "senses": {
         "types": {
@@ -64,7 +65,9 @@
           "tremorsense": "",
           "truesight": ""
         },
-        "tags": []
+        "tags": [],
+        "custom": [],
+        "units": "foot"
       },
       "size": "small",
       "condition": {
@@ -75,60 +78,77 @@
         "immunities": {
           "value": [],
           "custom": []
-        }
-      },
-      "damage": {
-        "resistances": {
-          "value": [],
-          "custom": [],
-          "bypasses": []
-        },
-        "immunities": {
-          "value": [],
-          "custom": [],
-          "bypasses": []
         },
         "vulnerabilities": {
           "value": [],
           "custom": []
         }
       },
+      "damage": {
+        "resistances": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "immunities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": [],
+          "nonmagical": []
+        }
+      },
       "type": {
         "value": "humanoid",
         "tags": [],
-        "swarm": ""
+        "swarm": "",
+        "custom": []
       }
     },
     "abilities": {
       "strength": {
-        "mod": -2
+        "mod": -2,
+        "proficient": false
       },
       "dexterity": {
         "mod": 4,
         "proficient": true
       },
       "constitution": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       },
       "intelligence": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       },
       "wisdom": {
-        "mod": -2
+        "mod": -2,
+        "proficient": false
       },
       "charisma": {
-        "mod": -1
+        "mod": -1,
+        "proficient": false
       }
     },
     "biography": {
       "value": "<p><em>They skulk out of the shadows: short, draconic humanoids covered with scales ranging in hue from rust to inky black. They have red eyes and reptilian tails, and though only the size of gnomes, they hold their weapons with easy familiarity.</em></p><p>Kobolds are diligent, hardworking creatures who view life through a practical lens. They instinctively conform to the wishes of anyone stronger than themselves rather than risk confrontation. Kobolds can be found in dark forests, deep underground, and in the heart of urban centers.</p><p><strong>Clever Miners.</strong> Skilled miners and inordinately clever with mechanical devices, kobolds routinely surround their warrens with traps, deadfalls, and camouflage.</p><p><strong>Collective Community.</strong> Kobolds share a strong communal instinct, knowing that only by acting together can they hope to defeat threats against them. When kobolds travel with other lineages, they extend this spirit to their companions.</p><p><strong>Talented Witches and Alchemists.</strong> Kobolds collect items thrown away by dwarves, humans, and others and use them in strange brews and potions.</p>",
-      "lair": "",
       "legendary": ""
+    },
+    "description": {
+      "source": {}
+    },
+    "spellcasting": {
+      "ability": "intelligence",
+      "dc": null
     }
   },
   "prototypeToken": {
     "name": "Kobold",
-    "displayName": 0,
+    "displayName": 20,
     "actorLink": false,
     "appendNumber": false,
     "prependAdjective": false,
@@ -151,9 +171,9 @@
     "rotation": 0,
     "alpha": 1,
     "disposition": -1,
-    "displayBars": 0,
+    "displayBars": 20,
     "bar1": {
-      "attribute": null
+      "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": null
@@ -184,13 +204,13 @@
       "color": null
     },
     "sight": {
-      "enabled": false,
-      "range": 0,
+      "enabled": true,
+      "range": 60,
       "angle": 360,
-      "visionMode": "basic",
-      "attenuation": 0.1,
+      "visionMode": "darkvision",
+      "attenuation": 0,
       "brightness": 0,
-      "saturation": 0,
+      "saturation": -1,
       "contrast": 0,
       "color": null
     },
@@ -207,7 +227,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -236,13 +256,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -294,13 +320,19 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "type": {
           "category": "monsters"
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "effects": [],
@@ -343,17 +375,25 @@
             "type": "attack",
             "_id": "G0M1CaGJdPQD6pBg",
             "system": {
-              "type": {},
               "damage": {
-                "includeBaseDamage": true,
-                "parts": []
+                "parts": [],
+                "critical": {},
+                "includeBase": true
               },
               "attack": {
-                "flat": false
-              }
+                "flat": false,
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
             },
             "description": "",
-            "activation": {},
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -362,7 +402,30 @@
             },
             "uses": {
               "spent": 0,
-              "recovery": []
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -397,9 +460,12 @@
         ],
         "ammunition": {},
         "damage": {
-          "number": 1,
-          "denomination": 4,
-          "type": "piercing"
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "piercing",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": 20,
@@ -417,7 +483,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 0,
@@ -458,17 +525,25 @@
             "type": "attack",
             "_id": "9QsRNwbor00owRNx",
             "system": {
-              "type": {},
               "damage": {
-                "includeBaseDamage": true,
-                "parts": []
+                "parts": [],
+                "critical": {},
+                "includeBase": true
               },
               "attack": {
-                "flat": false
-              }
+                "flat": false,
+                "critical": {
+                  "threshold": null
+                },
+                "type": {}
+              },
+              "effects": []
             },
             "description": "",
-            "activation": {},
+            "activation": {
+              "value": null,
+              "override": false
+            },
             "consumption": {
               "targets": [],
               "scale": {
@@ -477,7 +552,30 @@
             },
             "uses": {
               "spent": 0,
-              "recovery": []
+              "recovery": [],
+              "consumeQuantity": false
+            },
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
             }
           }
         },
@@ -512,9 +610,12 @@
           "type": "slingBullet"
         },
         "damage": {
-          "number": 1,
-          "denomination": 4,
-          "type": "bludgeoning"
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "type": "bludgeoning",
+            "additionalTypes": []
+          }
         },
         "range": {
           "short": 30,
@@ -532,7 +633,8 @@
         "attunement": {
           "value": ""
         },
-        "container": null
+        "container": null,
+        "magicalBonus": null
       },
       "effects": [],
       "sort": 0,
@@ -573,10 +675,18 @@
             "type": "utility",
             "_id": "hcOjUmEc1x350CD9",
             "description": "",
-            "system": {},
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
             "activation": {
               "type": "bonus",
-              "condition": ""
+              "condition": "",
+              "value": null,
+              "override": false
             },
             "consumption": {
               "targets": [],
@@ -588,10 +698,33 @@
               "spent": 0,
               "recovery": [],
               "min": "",
-              "max": ""
+              "max": "",
+              "consumeQuantity": false
             },
             "name": "",
-            "img": ""
+            "img": "",
+            "sort": 0,
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "count": 1,
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            }
           }
         },
         "uses": {
@@ -610,10 +743,16 @@
         },
         "identifier": {},
         "restriction": {
-          "filters": []
+          "filters": [],
+          "allowMultipleTimes": false,
+          "items": [],
+          "requireAll": true
         },
         "level": {
           "value": null
+        },
+        "overrides": {
+          "proficiency": null
         }
       },
       "_id": "iQ3iQGa34zRAzDXc",
@@ -652,10 +791,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.031",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.049",
+    "coreVersion": "12.331",
     "createdTime": 1709615698832,
-    "modifiedTime": 1717280269038,
+    "modifiedTime": 1729607937641,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },
