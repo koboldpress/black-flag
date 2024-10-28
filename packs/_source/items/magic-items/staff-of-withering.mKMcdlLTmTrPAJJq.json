@@ -3,7 +3,7 @@
   "name": "Staff of Withering",
   "type": "weapon",
   "_id": "mKMcdlLTmTrPAJJq",
-  "img": "icons/weapons/staves/staff-simple-gold.webp",
+  "img": "icons/weapons/staves/staff-animal-skull-bull.webp",
   "system": {
     "activities": {
       "V7hf5rFYTsnR1xrQ": {
@@ -59,6 +59,93 @@
           "consumeQuantity": false,
           "recovery": []
         }
+      },
+      "IkjDGHEYZDXc4R3x": {
+        "type": "save",
+        "_id": "IkjDGHEYZDXc4R3x",
+        "description": "",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 10,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "necrotic",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "constitution"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "15"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "As part of the Attack action with the staff"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "Wither",
+        "img": ""
       }
     },
     "overrides": {
@@ -74,7 +161,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>This staff has 3 charges and regains [[/r 1d3]] expended charges daily at dawn.</p>\n\t\t\t\t<p>The staff can be wielded as a magic quarterstaff. On a hit, it deals damage as a normal quarterstaff, and you can expend 1 charge as part of your Attack action to deal an extra [[/damage 2d10 necrotic]] to the target. In addition, the target must succeed on a [[/save 15 CON]] or have disadvantage for 1 hour on any ability check or save that uses STR or CON.</p>",
+      "value": "<p>This staff has 3 charges and regains [[/r 1d3]] expended charges daily at dawn.</p><p>The staff can be wielded as a magic quarterstaff. On a hit, it deals damage as a normal quarterstaff, and you can expend 1 charge as part of your Attack action to deal an extra [[/damage 2d10 necrotic]] to the target. In addition, the target must succeed on a [[/save 15 CON]] or have disadvantage for 1 hour on any ability check or save that uses STR or CON.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -107,10 +194,16 @@
     },
     "uses": {
       "min": "",
-      "max": "",
+      "max": "3",
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": []
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d3"
+        }
+      ]
     },
     "rarity": "rare",
     "attunement": {
@@ -130,9 +223,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725590715035,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730073384290,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!mKMcdlLTmTrPAJJq"

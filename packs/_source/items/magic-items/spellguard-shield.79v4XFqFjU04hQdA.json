@@ -2,7 +2,7 @@
   "folder": "PNS3OPopAxnlSN4O",
   "name": "Spellguard Shield",
   "type": "armor",
-  "img": "icons/equipment/shield/buckler-wooden-boss.webp",
+  "img": "icons/equipment/shield/kite-wooden-sigil-purple.webp",
   "system": {
     "overrides": {
       "proficiency": null
@@ -52,7 +52,51 @@
     "container": null,
     "magicalBonus": null
   },
-  "effects": [],
+  "effects": [
+    {
+      "type": "base",
+      "name": "Spellguard",
+      "origin": "Compendium.black-flag.items.Item.79v4XFqFjU04hQdA",
+      "duration": {
+        "rounds": null,
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "disabled": false,
+      "img": "icons/equipment/shield/kite-wooden-sigil-purple.webp",
+      "_id": "v6FlUvpdllZUWsoV",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.modifiers",
+          "mode": 2,
+          "value": "{ \"type\": \"note\", \"filter\": [{ \"k\": \"type\", \"v\": \"ability-save\" }], \"note\": { \"rollMode\": 1, \"text\": \"You have advantage on saves against spells and other magical effects.\" } }",
+          "priority": null
+        }
+      ],
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730072626915,
+        "modifiedTime": 1730072687618,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!79v4XFqFjU04hQdA.v6FlUvpdllZUWsoV"
+    }
+  ],
   "sort": 2700000,
   "ownership": {
     "default": 0
@@ -64,7 +108,7 @@
     "systemId": "black-flag",
     "systemVersion": "0.10.045",
     "createdTime": 1725589643277,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730072618834,
     "lastModifiedBy": "blackflag0000000"
   },
   "_id": "79v4XFqFjU04hQdA",

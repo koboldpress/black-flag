@@ -3,33 +3,115 @@
   "name": "Staff of Healing",
   "type": "weapon",
   "_id": "PjBvjotZHu2W9ibg",
-  "img": "icons/weapons/staves/staff-simple-gold.webp",
+  "img": "icons/weapons/staves/staff-ornate-cross.webp",
   "system": {
     "activities": {
-      "V7hf5rFYTsnR1xrQ": {
-        "type": "attack",
-        "_id": "V7hf5rFYTsnR1xrQ",
+      "d06RQNmZjW0MuIza": {
+        "type": "cast",
         "system": {
-          "damage": {
-            "parts": [],
-            "critical": {},
-            "includeBase": true
-          },
-          "attack": {
-            "critical": {
-              "threshold": null
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
             },
-            "flat": false,
-            "type": {}
-          },
-          "effects": []
+            "circle": 1,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
         },
+        "_id": "d06RQNmZjW0MuIza",
         "description": "",
+        "sort": 0,
         "activation": {
-          "value": null
+          "value": null,
+          "override": false
         },
         "consumption": {
-          "targets": [],
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "1",
+              "scaling": {
+                "mode": "amount"
+              }
+            }
+          ],
+          "scale": {
+            "allowed": true,
+            "max": "4"
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "7OCIxSaOK3yopBOD": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.Aqff6XGGmiVXo6A6",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 2,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "7OCIxSaOK3yopBOD",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "2",
+              "scaling": {}
+            }
+          ],
           "scale": {
             "allowed": false
           }
@@ -52,13 +134,87 @@
           "affects": {
             "choice": false
           },
+          "prompt": true,
           "override": false
         },
         "uses": {
           "spent": 0,
           "consumeQuantity": false,
-          "recovery": []
-        }
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
+      },
+      "PgbKA1oLb3Px53vu": {
+        "type": "cast",
+        "system": {
+          "spell": {
+            "uuid": "Compendium.black-flag.spells.Item.qGHh25GoYwwQ13NO",
+            "challenge": {
+              "attack": null,
+              "save": null,
+              "override": false
+            },
+            "circle": 5,
+            "properties": [
+              "verbal",
+              "somatic",
+              "material"
+            ]
+          }
+        },
+        "_id": "PgbKA1oLb3Px53vu",
+        "description": "",
+        "sort": 0,
+        "activation": {
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "item",
+              "target": "",
+              "value": "5",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": false
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot"
+          },
+          "affects": {
+            "choice": false
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "min": "",
+          "max": ""
+        },
+        "name": "",
+        "img": ""
       }
     },
     "overrides": {
@@ -74,7 +230,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: cure wounds (1 charge per spell circle, up to 4th), restoration (2 charges), or mass cure wounds (5 charges).</p>\n\t\t\t\t<p>The staff regains [[/r 1d6 + 4]] expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
+      "value": "<p>This staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: <em>@UUID[Compendium.black-flag.spells.Item.NQvy34IRCNEJfwip]{cure wounds}</em> (1 charge per spell circle, up to 4th), <em>@UUID[Compendium.black-flag.spells.Item.Aqff6XGGmiVXo6A6]{restoration}</em> (2 charges), or <em>@UUID[Compendium.black-flag.spells.Item.qGHh25GoYwwQ13NO]{mass cure wounds}</em> (5 charges).</p><p>The staff regains [[/r 1d6 + 4]] expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -107,10 +263,16 @@
     },
     "uses": {
       "min": "",
-      "max": "",
+      "max": "10",
       "spent": 0,
       "consumeQuantity": false,
-      "recovery": []
+      "recovery": [
+        {
+          "period": "longRest",
+          "type": "formula",
+          "formula": "1d6 + 4"
+        }
+      ]
     },
     "rarity": "rare",
     "attunement": {
@@ -130,9 +292,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725590502567,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730075312110,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!PjBvjotZHu2W9ibg"

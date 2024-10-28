@@ -3,7 +3,7 @@
   "name": "Staff of Thunder and Lightning",
   "type": "weapon",
   "_id": "hvytChfqLSsTg5Vz",
-  "img": "icons/weapons/staves/staff-simple-gold.webp",
+  "img": "icons/weapons/staves/staff-ornate-teal.webp",
   "system": {
     "activities": {
       "V7hf5rFYTsnR1xrQ": {
@@ -59,6 +59,463 @@
           "consumeQuantity": false,
           "recovery": []
         }
+      },
+      "LIrRBK5OYyEzzNFc": {
+        "type": "damage",
+        "_id": "LIrRBK5OYyEzzNFc",
+        "description": "<p>When you hit with a melee attack using the staff, you can choose (no action required) to deal an extra [[/damage]] to the target.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "critical": {
+              "allow": false
+            },
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "lightning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": []
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When you hit with a melee attack using the staff"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "touch",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Lightning",
+        "img": ""
+      },
+      "KwEuhJ1EVx8qObCR": {
+        "type": "save",
+        "_id": "KwEuhJ1EVx8qObCR",
+        "description": "<p>When you hit with a melee attack using the staff, you can choose (no action required) for the staff to emit a crack of thunder, audible to 300 feet. The target you hit must succeed on a [[/save]] or become &Reference[stunned] until the end of your next turn.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": []
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "constitution"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "17"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When you hit with a melee attack using the staff"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "touch",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Thunder",
+        "img": ""
+      },
+      "atyIMH7klQQCpnNA": {
+        "type": "save",
+        "_id": "atyIMH7klQQCpnNA",
+        "description": "<p>You can use an action to cause a bolt of lightning to leap from the staff ’s tip in a line that is 5 feet wide and 120 feet long. Each creature in that line must make a [[/save]], taking [[/damage]] on a failed save, or half as much damage on a successful one.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 9,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "lightning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "dexterity"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "17"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "line",
+            "size": "120",
+            "width": "5"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Lightning Strike",
+        "img": ""
+      },
+      "ds7Wrp9DH2iLOWcB": {
+        "type": "save",
+        "_id": "ds7Wrp9DH2iLOWcB",
+        "description": "<p>You can use an action to cause the staff to issue a deafening thunderclap, audible to 600 feet. Each creature within 60 feet of you (not including you) must make a [[/save]]. On a failed save, a creature takes [[/damage]] and is &Reference[deafened] for 1 minute. On a successful save, it takes half damage and isn’t deafened.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "thunder",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "constitution"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": "17"
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "action",
+          "condition": ""
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "self",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": "radius",
+            "size": "60"
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Thunderclap",
+        "img": ""
+      },
+      "nbPPyY6AmM3nqdul": {
+        "type": "save",
+        "_id": "nbPPyY6AmM3nqdul",
+        "description": "<p>You can use an action to use the Lightning Strike and Thunderclap properties at the same time. Doing so doesn’t expend the daily use of those properties, only the use of this one.</p>",
+        "sort": 0,
+        "system": {
+          "damage": {
+            "parts": [
+              {
+                "number": 2,
+                "denomination": 6,
+                "bonus": "",
+                "custom": {
+                  "formula": "",
+                  "enabled": false
+                },
+                "type": "lightning",
+                "additionalTypes": [],
+                "scaling": {
+                  "number": 1
+                }
+              }
+            ]
+          },
+          "effects": [],
+          "save": {
+            "ability": [
+              "constitution"
+            ],
+            "dc": {
+              "ability": "custom",
+              "formula": ""
+            }
+          }
+        },
+        "activation": {
+          "value": null,
+          "override": false,
+          "type": "free",
+          "condition": "When you hit with a melee attack using the staff"
+        },
+        "consumption": {
+          "targets": [
+            {
+              "type": "activity",
+              "value": "1",
+              "scaling": {}
+            }
+          ],
+          "scale": {
+            "allowed": false
+          }
+        },
+        "duration": {
+          "units": "instantaneous",
+          "concentration": false,
+          "override": false
+        },
+        "range": {
+          "override": true,
+          "units": "touch",
+          "special": ""
+        },
+        "magical": false,
+        "target": {
+          "template": {
+            "count": 1,
+            "contiguous": false,
+            "units": "foot",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": "creature",
+            "count": "1",
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [
+            {
+              "period": "longRest",
+              "type": "recoverAll"
+            }
+          ],
+          "min": "",
+          "max": "1"
+        },
+        "name": "Thunder and Lightning",
+        "img": ""
       }
     },
     "overrides": {
@@ -74,7 +531,7 @@
       "units": "pound"
     },
     "description": {
-      "value": "<p>This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. The staff has the following additional properties:</p>\n\t\t\t\t<p>Lightning. When you hit with a melee attack using the staff, you can choose (no action required) to deal an extra [[/damage 2d6 lightning]] to the target.</p>\n\t\t\t\t<p>Thunder. When you hit with a melee attack using the staff, you can choose (no action required) for the staff to emit a crack of thunder, audible to 300 feet. The target you hit must succeed on a [[/save 17 CON]] or become stunned until the end of your next turn.</p>\n\t\t\t\t<p>Lightning Strike. You can use an action to cause a bolt of lightning to leap from the staff ’s tip in a line that is 5 feet wide and 120 feet long. Each creature in that line must make a [[/save 17 DEX]], taking [[/damage 9d6 lightning]] on a failed save, or half as much damage on a successful one.</p>\n\t\t\t\t<p>Thunderclap. You can use an action to cause the staff to issue a deafening thunderclap, audible to 600 feet. Each creature within 60 feet of you (not including you) must make a [[/save 17 CON]]. On a failed save, a creature takes [[/damage 2d6 thunder]] and is deafened for 1 minute. On a successful save, it takes half damage and isn’t deafened.</p>\n\t\t\t\t<p>Thunder and Lightning. You can use an action to use the Lightning Strike and Thunderclap properties at the same time. Doing so doesn’t expend the daily use of those properties, only the use of this one.</p>\n\t\t\t\t<p>When one of these properties is used, it can’t be used again until the next dawn.</p>",
+      "value": "<p>This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. The staff has the following additional properties:</p><p>@Embed[.Activity.LIrRBK5OYyEzzNFc inline activate]{Lightning}</p><p>@Embed[.Activity.KwEuhJ1EVx8qObCR inline activate]{Thunder}</p><p>@Embed[.Activity.atyIMH7klQQCpnNA inline activate]{Lightning Strike}</p><p>@Embed[.Activity.ds7Wrp9DH2iLOWcB inline activate]{Thunderclap}</p><p>@Embed[.Activity.nbPPyY6AmM3nqdul inline activate]{Lightning and Thunder}</p><p>When one of these properties is used, it can’t be used again until the next dawn.</p>",
       "source": {
         "fallback": "Black Flag Reference Document"
       }
@@ -118,7 +575,7 @@
       "requirement": ""
     },
     "container": null,
-    "magicalBonus": null
+    "magicalBonus": 2
   },
   "effects": [],
   "sort": 23400000,
@@ -130,9 +587,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.045",
+    "systemVersion": "0.10.050",
     "createdTime": 1725590702136,
-    "modifiedTime": 1728426556234,
+    "modifiedTime": 1730073924753,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!hvytChfqLSsTg5Vz"
