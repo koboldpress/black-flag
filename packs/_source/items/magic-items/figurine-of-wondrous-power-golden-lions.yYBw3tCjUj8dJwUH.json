@@ -11,14 +11,14 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a <strong>lion</strong> for up to 1 hour. Once a lion has been used, it can’t be used again until 7 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a <strong>@UUID[Compendium.black-flag.npcs.Actor.PIz6OxdTiqdlix0y]{lion}</strong> for up to 1 hour. Once a lion has been used, it can’t be used again until 7 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "gacMxXydjZXqi9SE": {
-        "type": "utility",
+        "type": "summon",
         "description": "",
         "sort": 0,
         "system": {
@@ -28,7 +28,18 @@
             "visible": false,
             "formula": "",
             "name": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.PIz6OxdTiqdlix0y",
+              "_id": "4MctAnEEBfVRh1K4",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -123,9 +134,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984648742,
-    "modifiedTime": 1729530911864,
+    "modifiedTime": 1730157731677,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!yYBw3tCjUj8dJwUH"

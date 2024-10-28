@@ -11,24 +11,39 @@
       "denomination": "gp"
     },
     "description": {
-      "value": "<p>This onyx statuette of a dog can become a <strong>mastiff</strong> for up to 6 hours. The mastiff has an INT score of 8 and can speak Common. It also has darkvision to a range of 60 feet and can see invisible creatures and objects within that range. Once it has been used, it can’t be used again until 7 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
+      "value": "<p>This onyx statuette of a dog can become a <strong>@UUID[Compendium.black-flag.npcs.Actor.ck0kqumkVqWznctK]{mastiff}</strong> for up to 6 hours. The mastiff has an INT score of 8 and can speak Common. It also has darkvision to a range of 60 feet and can see invisible creatures and objects within that range. Once it has been used, it can’t be used again until 7 days have passed.</p><aside><p>@Embed[Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.GgrjFmYmZW7aexLc inline]</p></aside>",
       "source": {
         "fallback": ""
       }
     },
     "activities": {
       "dhhHG5sB1KVas4lv": {
-        "type": "utility",
+        "type": "summon",
         "description": "",
         "sort": 0,
         "system": {
-          "effects": [],
+          "effects": [
+            {
+              "_id": "o5TuESR5zO9nNs1v"
+            }
+          ],
           "roll": {
             "prompt": false,
             "visible": false,
             "formula": "",
             "name": ""
-          }
+          },
+          "profiles": [
+            {
+              "uuid": "Compendium.black-flag.npcs.Actor.ck0kqumkVqWznctK",
+              "_id": "QCIs7hKlFWrs7JuS",
+              "level": {
+                "min": null,
+                "max": null
+              },
+              "types": []
+            }
+          ]
         },
         "activation": {
           "value": null,
@@ -109,7 +124,57 @@
   },
   "_id": "Mg2e8l9C5zoR6ii7",
   "img": "icons/sundries/misc/pet-collar-red.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Onyx Dog",
+      "img": "icons/sundries/misc/pet-collar-red.webp",
+      "origin": "Compendium.black-flag.items.Item.Mg2e8l9C5zoR6ii7",
+      "transfer": false,
+      "_id": "o5TuESR5zO9nNs1v",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.abilities.intelligence.mod",
+          "mode": 4,
+          "value": "-1",
+          "priority": null
+        },
+        {
+          "key": "system.proficiencies.languages.value",
+          "mode": 2,
+          "value": "common",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "0.10.050",
+        "createdTime": 1730157564149,
+        "modifiedTime": 1730157623981,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!items.effects!Mg2e8l9C5zoR6ii7.o5TuESR5zO9nNs1v"
+    }
+  ],
   "folder": "PNS3OPopAxnlSN4O",
   "sort": 8100000,
   "ownership": {
@@ -120,9 +185,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "black-flag",
-    "systemVersion": "0.10.049",
+    "systemVersion": "0.10.050",
     "createdTime": 1724984784929,
-    "modifiedTime": 1729530944109,
+    "modifiedTime": 1730157564181,
     "lastModifiedBy": "blackflag0000000"
   },
   "_key": "!items!Mg2e8l9C5zoR6ii7"
