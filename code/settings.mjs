@@ -149,6 +149,15 @@ export function registerSettings() {
 		type: Boolean
 	});
 
+	game.settings.register(game.system.id, "allowSummoning", {
+		name: "BF.Settings.Summoning.Label",
+		hint: "BF.Settings.Summoning.Hint",
+		scope: "world",
+		config: true,
+		default: true,
+		type: Boolean
+	});
+
 	game.settings.register(game.system.id, "criticalMaximizeDamage", {
 		name: "BF.Settings.CriticalMaximizeDamage.Label",
 		hint: "BF.Settings.CriticalMaximizeDamage.Hint",

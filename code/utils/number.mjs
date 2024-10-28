@@ -40,6 +40,18 @@ export function getNumberFormatter(options={}) {
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Format a challenge rating into a fraction if less than one.
+ * @param {number|null} value
+ * @returns {string}
+ */
+export function formatCR(value) {
+	if ( value === null ) return "—";
+	return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? numberFormat(value);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * @typedef {NumberFormattingOptions}
  * @param {number} decimals - Number of decimal digits to display.
  * @param {number} digits - Number of digits before the decimal point to display.

@@ -107,7 +107,9 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		}
 
 		// Handle activity-targeted changes
-		if (change.key.startsWith("activity.") && doc instanceof Item) return this.applyActivity(doc, change);
+		if ((change.key.startsWith("activity.") || change.key.startsWith("system.activities.")) && doc instanceof Item) {
+			return this.applyActivity(doc, change);
+		}
 
 		return super.apply(doc, change);
 	}
@@ -121,11 +123,18 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 * @returns {Record<string, *>} - An object of property paths and their updated values.
 	 */
 	applyActivity(item, change) {
-		const [, type, ...keyPath] = change.key.split(".");
 		const changes = {};
-		for (const activity of item.system.activities?.byType(type) ?? []) {
+		const apply = (activity, keyPath) => {
 			const c = this.apply(activity, { ...change, key: keyPath.join(".") });
 			Object.entries(c).forEach(([k, v]) => (changes[`system.activities.${activity.id}.${k}`] = v));
+		};
+		if (change.key.startsWith("system.activities.")) {
+			const [, , id, ...keyPath] = change.key.split(".");
+			const activity = item.system.activities?.get(id);
+			if (activity) apply(activity, keyPath);
+		} else {
+			const [, type, ...keyPath] = change.key.split(".");
+			item.system.activities?.byType(type)?.forEach(activity => apply(activity, keyPath));
 		}
 		return changes;
 	}

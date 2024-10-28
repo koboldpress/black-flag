@@ -47,6 +47,16 @@ export default class HealActivity extends Activity {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	get modifierData() {
+		return {
+			kind: "heal",
+			...super.modifierData
+		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*              Activation             */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

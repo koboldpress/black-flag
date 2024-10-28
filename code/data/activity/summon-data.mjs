@@ -110,4 +110,46 @@ export class SummonData extends ActivityDataModel {
 	get applicableEffects() {
 		return null;
 	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Summons that can be performed based on character or class level or spell circle.
+	 * @type {SummonsProfile[]}
+	 */
+	get availableProfiles() {
+		const level = this.relevantLevel;
+		return this.profiles.filter(e => (e.level.min ?? -Infinity) <= level && level <= (e.level.max ?? Infinity));
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine the level used to determine profile limits, based on the spell circle for spells or either the
+	 * character or class level, depending on whether `classIdentifier` is set.
+	 * @type {number}
+	 */
+	get relevantLevel() {
+		const keyPath =
+			this.item.type === "spell" && this.item.system.circle.base > 0
+				? "item.circle.base"
+				: this.summon.identifier
+					? `progression.classes.${this.summon.identifier}.levels`
+					: "details.level";
+		return foundry.utils.getProperty(this.getRollData(), keyPath) ?? 0;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Creatures summoned by this activity.
+	 * @type {BlackFlagActor[]}
+	 */
+	get summonedCreatures() {
+		return [];
+		// TODO: Implement summons registry
+		// if ( !this.actor ) return [];
+		// return BlackFlag.registry.summons.creatures(this.actor)
+		// 	.filter(i => i?.getFlag(game.system.id, "summon.origin") === this.uuid);
+	}
 }
