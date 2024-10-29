@@ -496,7 +496,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
 		let totalUses = uses.value;
 		if (uses.consumeQuantity) {
-			const quantity = (item ?? this.item).system.quantity ?? 1;
+			let quantity = (item ?? this.item).system.quantity ?? 1;
+			if (uses.value) quantity -= 1;
 			totalUses += quantity * (uses.max || 1);
 		}
 
