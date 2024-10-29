@@ -84,6 +84,9 @@ export class UsesData extends foundry.abstract.DataModel {
 	 * @param {object} rollData
 	 */
 	prepareData(rollData) {
+		// TODO: Remove once `min` field is fully removed
+		this.min = "0";
+
 		const existingPeriods = new Set(this.recovery.map(r => r.period));
 		for (const recovery of this.recovery) {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";

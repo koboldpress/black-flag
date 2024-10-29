@@ -1,17 +1,10 @@
 <blackFlag-uses name="{{ name }}">
 	<fieldset>
 		<legend>{{ localize "BF.Uses.Label" }}</legend>
-		<div class="field-group">
-			<span>{{ localize "BF.Uses.Limits.Label" }}</span>
-			<label>
-				<span>{{ localize "BF.Uses.Minimum.Label" }}</span>
-				<input type="text" name="$.min" value="{{ source.min }}" placeholder="0">
-			</label>
-			<label>
-				<span>{{ localize "BF.Uses.Maximum.Label" }}</span>
-				<input type="text" name="$.max" value="{{ source.max }}" placeholder="0">
-			</label>
-		</div>
+		<label>
+			<span>{{ localize "BF.Uses.Maximum.Label" }}</span>
+			<input type="text" name="$.max" value="{{ source.max }}" placeholder="0">
+		</label>
 		<label>
 			<span>{{ localize "BF.Uses.Spent.Label" }}</span>
 			<input type="number" name="$.spent" value="{{ derived.spent }}">
