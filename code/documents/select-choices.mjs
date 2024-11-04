@@ -107,6 +107,42 @@ export default class SelectChoices {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * This object represented as a flat list of form options.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.allOptions=false] - When a selectable category is found, also display all children.
+	 * @param {string} [options.parentLabel] - Category label prefix.
+	 * @param {string} [options.selected] - Entry to mark as selected.
+	 * @returns {FormSelectOption[]}
+	 */
+	formOptions({ allOptions = false, parentLabel, selected } = {}) {
+		const options = [];
+		for (const [value, data] of Object.entries(this)) {
+			const label = makeLabel(data);
+			const option = {
+				value,
+				label,
+				group: parentLabel,
+				selected: selected !== undefined ? value === selected : data.chosen,
+				disabled: data.disabled ?? false
+			};
+			if (!data.children || (data.selectableCategory && !allOptions)) options.push(option);
+			else {
+				const newParentLabel = parentLabel ? `${parentLabel} - ${label}` : label;
+				if (data.selectableCategory)
+					options.push({
+						...option,
+						label: game.i18n.format("BF.Trait.All", { category: label }),
+						group: newParentLabel
+					});
+				if (data.children) options.push(...data.children.formOptions({ parentLabel: newParentLabel, selected }));
+			}
+		}
+		return options;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Localize all the entries using either a localization key or label.
 	 * @param {object} [options={}]
 	 * @param {string} [options.pluralRule="one"] - Pluralization rule to use for all entries.

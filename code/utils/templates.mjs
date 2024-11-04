@@ -1,6 +1,6 @@
 import NotificationTooltip from "../applications/notification-tooltip.mjs";
+import SelectChoices from "../documents/select-choices.mjs";
 import { linkForUUID } from "./document.mjs";
-import { makeLabel } from "./localization.mjs";
 import { numberFormat, numberParts } from "./number.mjs";
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -35,61 +35,13 @@ function dataset(context, options) {
  * @returns {Handlebars.SafeString} - Formatted option list.
  */
 function groupedSelectOptions(choices, options) {
-	const categories = {};
-	const separateValues = (object, category) => {
-		for ( const [key, value] of Object.entries(object) ) {
-			value.label = makeLabel(value);
-			if ( !value.children || value.selectableCategory ) {
-				const childValue = foundry.utils.deepClone(value);
-				delete childValue.children;
-				if ( category ) {
-					categories[category].children ??= {};
-					categories[category].children[key] = childValue;
-				} else {
-					categories[key] = childValue;
-				}
-			}
-			if ( value.children ) {
-				categories[key] = foundry.utils.deepClone(value);
-				const children = categories[key].children;
-				categories[key].children = {};
-				const parentLabel = categories[category]?.label;
-				if ( parentLabel ) categories[key].label = `${parentLabel} - ${categories[key].label}`;
-				separateValues(children, key);
-			}
-		}
-	};
-	separateValues(foundry.utils.deepClone(choices));
-
-	// Create an option
-	const option = (name, label, chosen, disabled) => {
-		html += `<option value="${name}"${chosen ? " selected" : ""}${disabled ? " disabled" : ""}>${label}</option>`;
-	};
-
-	// Create an group
-	const group = category => {
-		html += `<optgroup label="${category.label}">`;
-		children(category.children);
-		html += "</optgroup>";
-	};
-
-	// Add children
-	const children = children => {
-		for ( let [name, child] of Object.entries(children) ) {
-			if ( child.children ) {
-				if ( !foundry.utils.isEmpty(child.children) ) group(child);
-			} else option(name, child.label, child.chosen ?? false, child.disabled ?? false);
-		}
-	};
-
-	// Create the options
-	let html = "";
-	if ( (options.blank ?? null) !== null ) {
-		option("", options.blank ?? "");
-		if ( options.rule ) html += "<hr>";
+	if ( !(choices instanceof SelectChoices) ) choices = new SelectChoices(choices);
+	const formOptions = choices.formOptions({ ...options });
+	if ( options.blank !== undefined ) {
+		formOptions.unshift({ value: "", label: options.blank ?? "" });
+		if ( options.rule ) formOptions.unshift({ rule: true });
 	}
-	children(categories);
-	return new Handlebars.SafeString(html);
+	return HandlebarsHelpers.selectOptions(formOptions, { hash: {} });
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

@@ -16,13 +16,7 @@
 			<label>
 				<span>{{ localize "BF.ACTIVATION.FIELDS.activation.type.label" }}</span>
 				<select name="activation.type">
-					{{#select data.activation.type}}
-						{{#if defaultActivation}}
-							<option value="">{{ defaultActivation }}</option>
-							<hr>
-						{{/if}}
-						{{ blackFlag-groupedSelectOptions activation.options }}
-					{{/select}}
+					{{ selectOptions activation.options selected=data.activation.type }}
 				</select>
 			</label>
 		</div>

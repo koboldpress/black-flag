@@ -139,9 +139,14 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 		const activationOptions = CONFIG.BlackFlag.activationOptions({ chosen: context.data.activation.type });
 		const defaultActivation = activationOptions.get(this.item.system.casting?.type)?.label;
 		context.activation = {
-			options: activationOptions,
+			options: activationOptions.formOptions(),
 			scalar: activationOptions.get(context.data.activation.type)?.scalar ?? false
 		};
+		if (defaultActivation)
+			context.activation.options.unshift(
+				{ value: "", label: game.i18n.format("BF.Default.Specific", { default: defaultActivation.toLowerCase() }) },
+				{ rule: true }
+			);
 
 		context.consumptionTypeOptions = Array.from(this.activity.validConsumptionTypes).map(value => ({
 			value,
@@ -152,13 +157,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 			chosen: this.activity.duration.units,
 			isSpell: this.activity.isSpell
 		});
-		context.labels = {
-			defaultActivation: defaultActivation
-				? game.i18n.format("BF.Default.Specific", {
-						default: defaultActivation.toLowerCase()
-					})
-				: null
-		};
 
 		context.rangeOptions = [
 			{ value: "", label: "" },
