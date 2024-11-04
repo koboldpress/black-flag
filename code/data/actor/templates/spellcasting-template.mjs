@@ -20,7 +20,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Migrations           */
+	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**

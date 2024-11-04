@@ -28,7 +28,7 @@ export class SpellcastingValueConfigurationData extends ScaleValueConfigurationD
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Migrations           */
+	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

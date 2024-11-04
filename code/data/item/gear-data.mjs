@@ -78,6 +78,24 @@ export default class GearData extends ItemDataModel.mixin(
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	static migrateData(source) {
+		super.migrateData(source);
+
+		// Added in 0.10.051
+		if (source.type?.category === "focus") {
+			source.type.category = "adventuringGear";
+			source.type.base = "focus";
+		} else if (source.type?.category === "clothing") {
+			source.type.category =
+				source.properties?.includes("magical") || source.rarity ? "wondrousItem" : "adventuringGear";
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

@@ -169,48 +169,44 @@ localizeConfig(featureCategories.monsters.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
+const clothingTypes = {
+	amulet: {
+		localization: "BF.Item.Clothing.Type.Amulet"
+	},
+	belt: {
+		localization: "BF.Item.Clothing.Type.Belt"
+	},
+	boots: {
+		localization: "BF.Item.Clothing.Type.Boots"
+	},
+	cloak: {
+		localization: "BF.Item.Clothing.Type.Cloak"
+	},
+	glasses: {
+		localization: "BF.Item.Clothing.Type.Glasses"
+	},
+	gloves: {
+		localization: "BF.Item.Clothing.Type.Gloves"
+	},
+	helm: {
+		localization: "BF.Item.Clothing.Type.Helm"
+	},
+	ring: {
+		localization: "BF.Item.Clothing.Type.Ring"
+	}
+};
+
 /**
  * Categories of gear items.
  * @enum {NestedTypeConfiguration}
  */
 export const gearCategories = {
 	adventuringGear: {
-		localization: "BF.Item.Gear.Category.AdventuringGear"
-	},
-	clothing: {
-		localization: "BF.Item.Gear.Category.Clothing",
+		localization: "BF.Item.Gear.Category.AdventuringGear",
 		children: {
-			amulet: {
-				localization: "BF.Item.Clothing.Type.Amulet"
-			},
-			belt: {
-				localization: "BF.Item.Clothing.Type.Belt"
-			},
-			cloak: {
-				localization: "BF.Item.Clothing.Type.Cloak"
-			},
-			helm: {
-				localization: "BF.Item.Clothing.Type.Helm"
-			},
-			ring: {
-				localization: "BF.Item.Clothing.Type.Ring"
-			}
-		}
-	},
-	focus: {
-		localization: "BF.Item.Gear.Category.Focus",
-		children: {
-			arcaneFocus: {
-				localization: "BF.Item.Focus.Type.ArcaneFocus"
-			},
-			holySymbol: {
-				localization: "BF.Item.Focus.Type.HolySymbol"
-			},
-			primordialFocus: {
-				localization: "BF.Item.Focus.Type.PrimordialFocus"
-			},
-			wyrdFocus: {
-				localization: "BF.Item.Focus.Type.WyrdFocus"
+			...clothingTypes,
+			focus: {
+				localization: "BF.Item.Gear.Category.Focus"
 			}
 		}
 	},
@@ -221,12 +217,13 @@ export const gearCategories = {
 		localization: "BF.Item.Gear.Category.Wand"
 	},
 	wondrousItem: {
-		localization: "BF.Item.Gear.Category.WondrousItem"
+		localization: "BF.Item.Gear.Category.WondrousItem",
+		children: { ...clothingTypes }
 	}
 };
 localizeConfig(gearCategories);
-localizeConfig(gearCategories.clothing.children);
-localizeConfig(gearCategories.focus.children);
+localizeConfig(gearCategories.adventuringGear.children);
+localizeConfig(gearCategories.wondrousItem.children);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

@@ -210,7 +210,7 @@ export default class BaseDataModel extends foundry.abstract.TypeDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Migrations           */
+	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

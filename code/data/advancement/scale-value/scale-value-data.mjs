@@ -19,7 +19,7 @@ export default class ScaleValueConfigurationData extends foundry.abstract.DataMo
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Migrations           */
+	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

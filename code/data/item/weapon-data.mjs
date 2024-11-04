@@ -280,8 +280,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
-	/** @override */
+	/** @inheritDoc */
 	static migrateData(source) {
+		super.migrateData(source);
+
 		// Added in 0.10.042
 		if ("damage" in source) {
 			if ("number" in source.damage) foundry.utils.setProperty(source, "damage.base.number", source.damage.number);

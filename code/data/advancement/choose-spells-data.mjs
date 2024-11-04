@@ -64,7 +64,7 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*           Data Migrations           */
+	/*            Data Migration           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */

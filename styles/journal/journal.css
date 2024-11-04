@@ -166,6 +166,21 @@
 	.size-450 { max-width: 450px; }
 	.size-500 { max-width: 500px; }
 	.flip > img, img.flip { transform: scaleX(-100%); }
+
+	.image-grid {
+		display: grid;
+		gap: 10px;
+		align-items: center;
+		grid-template-columns: repeat(auto-fill, minmax(var(--grid-column-size), auto));
+		&.image-grid-50 { --grid-column-size: 50px; }
+		&.image-grid-75 { --grid-column-size: 75px; }
+		&.image-grid-100 { --grid-column-size: 100px; }
+		&.image-grid-150 { --grid-column-size: 150px; }
+		&.image-grid-200 { --grid-column-size: 200px; }
+		&.image-grid-250 { --grid-column-size: 250px; }
+		&.image-grid-300 { --grid-column-size: 300px; }
+		.image-grid__double { grid-column: span 2; }
+	}
 }
 
 .black-flag, .black-flag-journal {
