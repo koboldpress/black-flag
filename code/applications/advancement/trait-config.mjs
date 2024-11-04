@@ -26,6 +26,8 @@ export default class TraitConfig extends AdvancementConfig {
 		}
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static PARTS = {
 		config: {
@@ -155,6 +157,10 @@ export default class TraitConfig extends AdvancementConfig {
 	 */
 	async _prepareChoicesContext(context, options) {
 		context.count = context.choices[this.selected]?.data.count;
+		context.choiceModeOptions = [
+			{ value: "inclusive", label: game.i18n.localize("BF.Advancement.Trait.Choice.Mode.Inclusive.Label") },
+			{ value: "exclusive", label: game.i18n.localize("BF.Advancement.Trait.Choice.Mode.Exclusive.Label") }
+		];
 		return context;
 	}
 

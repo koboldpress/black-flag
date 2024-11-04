@@ -160,6 +160,16 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 				: null
 		};
 
+		context.rangeOptions = [
+			{ value: "", label: "" },
+			{ rule: true },
+			...CONFIG.BlackFlag.rangeTypes.localizedOptions,
+			...CONFIG.BlackFlag.distanceUnits.localizedOptions.map(o => ({
+				...o,
+				group: game.i18n.localize("BF.Distance.Label")
+			}))
+		];
+
 		return context;
 	}
 

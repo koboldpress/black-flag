@@ -31,18 +31,7 @@
 								<input type="text" name="$.recovery.{{ @index }}.period" value="{{ period }}">
 							{{else}}
 								<select name="$.recovery.{{ @index }}.period">
-									{{#select period}}
-										{{#each validPeriods}}
-											<option value="{{ key }}" {{ disabled disabled }}>{{ localize label }}</option>
-										{{/each}}
-										<hr>
-										<option value="recharge" {{ disabled recharge.disabled }}>
-											{{ localize "BF.Recovery.Recharge.Label" }}
-										</option>
-										<option value="@scale.">
-											{{ localize "BF.Advancement.ScaleValue.Title" }}
-										</option>
-									{{/select}}
+									{{ selectOptions periodOptions selected=period }}
 								</select>
 							{{/if}}
 						</label>

@@ -59,6 +59,15 @@ export default class SpellSheet extends BaseItemSheet {
 				group: game.i18n.localize("BF.Item.Type.Subclass[other]")
 			}))
 		];
+		context.rangeOptions = [
+			{ value: "", label: "" },
+			{ rule: true },
+			...CONFIG.BlackFlag.rangeTypes.localizedOptions,
+			...CONFIG.BlackFlag.distanceUnits.localizedOptions.map(o => ({
+				...o,
+				group: game.i18n.localize("BF.Distance.Label")
+			}))
+		];
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 
 		return context;

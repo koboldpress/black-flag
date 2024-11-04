@@ -98,7 +98,9 @@ export default Base =>
 
 			// Render the document creation form
 			const html = await renderTemplate("systems/black-flag/templates/shared/document-create.hbs", {
-				folders,
+				folders: folders
+					? [{ value: "", label: "" }, ...folders.map(({ id, name }) => ({ value: id, label: name }))]
+					: null,
 				name: data.name || game.i18n.format("DOCUMENT.New", { type: label }),
 				folder: data.folder,
 				hasFolders: folders.length >= 1,

@@ -1,20 +1,7 @@
 <fieldset>
 	<legend>{{ localize "BF.ATTACK.Label" }}</legend>
-	<label>
-		<span>{{ localize "BF.ATTACK.FIELDS.attack.ability.label" }}</span>
-		<select name="system.attack.ability">
-			{{#select source.system.attack.ability}}
-				{{#if defaultAbility}}
-					<option value="">{{ defaultAbility }}</option>
-					<hr>
-				{{/if}}
-				<option value="none">{{ localize "None" }}</option>
-				<optgroup label="{{ localize 'BF.Ability.Label[other]' }}">
-					{{ selectOptions CONFIG.abilities.localized }}
-				</optgroup>
-			{{/select}}
-		</select>
-	</label>
+	{{ formGroup systemFields.attack.fields.ability value=source.system.attack.ability options=abilityOptions
+	             rootId=partId }}
 	<div class="field-group">
 		<span>{{ localize "BF.ATTACK.FIELDS.attack.bonus.label" }}</span>
 		<label>

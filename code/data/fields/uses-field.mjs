@@ -92,11 +92,27 @@ export class UsesData extends foundry.abstract.DataModel {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";
 			Object.defineProperty(recovery, "validPeriods", {
 				get() {
-					return Object.entries(CONFIG.BlackFlag.recoveryPeriods).map(([key, config]) => ({
-						key,
-						label: config.label,
-						disabled: existingPeriods.has(key) && this.period !== key
+					return Object.entries(CONFIG.BlackFlag.recoveryPeriods.localized).map(([value, label]) => ({
+						value,
+						label,
+						disabled: existingPeriods.has(value) && this.period !== value
 					}));
+				},
+				configurable: true,
+				enumerable: false
+			});
+			Object.defineProperty(recovery, "periodOptions", {
+				get() {
+					return [
+						...this.validPeriods,
+						{ rule: true },
+						{
+							value: "recharge",
+							label: game.i18n.localize("BF.Recovery.Recharge.Label"),
+							disabled: this.recharge.disabled
+						},
+						{ value: "@scale.", label: game.i18n.localize("BF.Advancement.ScaleValue.Title") }
+					];
 				},
 				configurable: true,
 				enumerable: false

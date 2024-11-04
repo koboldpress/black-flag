@@ -11,14 +11,7 @@
 		<label>
 			<span>{{ localize "BF.RANGE.FIELDS.range.units.label" }}</span>
 			<select name="{{ prefix }}range.units">
-				{{#select data.range.units}}
-					<option value=""></option>
-					<hr>
-					{{ selectOptions CONFIG.rangeTypes labelAttr="label" localize=true }}
-					<optgroup label="{{ localize 'BF.Distance.Label' }}">
-						{{ selectOptions CONFIG.distanceUnits.localized }}
-					</optgroup>
-				{{/select}}
+				{{ selectOptions rangeOptions selected=data.range.units }}
 			</select>
 		</label>
 	</div>

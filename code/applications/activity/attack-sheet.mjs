@@ -37,10 +37,22 @@ export default class AttackSheet extends ActivitySheet {
 	/** @inheritDoc */
 	async _prepareEffectContext(context) {
 		context = await super._prepareEffectContext(context);
+		context.abilityOptions = [
+			{ value: "none", label: game.i18n.localize("None") },
+			...CONFIG.BlackFlag.abilities.localizedOptions.map(o => ({
+				...o,
+				group: game.i18n.localize("BF.Ability.Label[other]")
+			}))
+		];
 		const defaultAbility = this.activity.system.defaultAbility;
-		context.defaultAbility = defaultAbility
-			? game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
-			: null;
+		if (defaultAbility)
+			context.abilityOptions.unshift(
+				{
+					value: "",
+					label: game.i18n.format("BF.Default.Specific", { default: game.i18n.localize(defaultAbility).toLowerCase() })
+				},
+				{ rule: true }
+			);
 		return context;
 	}
 

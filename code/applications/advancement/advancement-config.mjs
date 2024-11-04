@@ -105,6 +105,21 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		context.showHint = this.advancement.metadata.configurableHint;
 		context.showIdentifier = this.advancement.metadata.identifier.configurable;
 		context.showLevelSelector = !this.advancement.metadata.multiLevel;
+
+		context.classIdentifierOptions = [
+			{ value: "", label: game.i18n.localize("BF.Level.Overall") },
+			...Object.entries(CONFIG.BlackFlag.registration.all.class).map(([value, { name }]) => ({
+				value,
+				label: name,
+				group: game.i18n.localize("BF.Level.Class")
+			}))
+		];
+		context.classRestrictionOptions = [
+			{ value: "", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.None") },
+			{ value: "original", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.Original") },
+			{ value: "multiclass", label: game.i18n.localize("BF.Advancement.Core.ClassRestriction.Multiclass") }
+		];
+
 		return context;
 	}
 

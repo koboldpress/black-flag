@@ -96,6 +96,7 @@ export const rangeTypes = {
 		label: "BF.RANGE.Type.Any.Label"
 	}
 };
+localizeConfig(rangeTypes);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

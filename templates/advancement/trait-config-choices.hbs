@@ -5,10 +5,7 @@
 	<label>
 		<span>{{ localize "BF.Advancement.Trait.Choice.Mode.Label" }}</span>
 		<select name="configuration.choiceMode">
-			{{#select configuration.choiceMode}}
-				<option value="inclusive">{{ localize "BF.Advancement.Trait.Choice.Mode.Inclusive.Label" }}</option>
-				<option value="exclusive">{{ localize "BF.Advancement.Trait.Choice.Mode.Exclusive.Label" }}</option>
-			{{/select}}
+			{{ selectOptions choiceModeOptions selected=configuration.choiceMode }}
 		</select>
 		<p class="hint">
 			{{#if (eq configuration.choiceMode "inclusive")}}

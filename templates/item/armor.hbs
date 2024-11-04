@@ -83,11 +83,7 @@
 					<label>
 						<span>{{ localize "BF.Proficiency.Label[one]" }}</span>
 						<select name="system.overrides.proficiency">
-							{{#select source.overrides.proficiency}}
-								<option value="null">{{ localize "BF.Proficiency.Override.Auto" }}</option>
-								<option value="true">{{ localize "BF.Proficiency.Override.Always" }}</option>
-								<option value="false">{{ localize "BF.Proficiency.Override.Never" }}</option>
-							{{/select}}
+							{{ selectOptions proficiencyOptions selected=source.overrides.proficiency }}
 						</select>
 					</label>
 				</fieldset>
