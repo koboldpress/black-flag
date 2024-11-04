@@ -14,7 +14,7 @@
 				</select>
 			{{else}}
 				<input type="text" name="{{ prefix }}target" value="{{ consumption.target }}"
-							 placeholder="{{ localize 'BF.CONSUMPTION.Type.ItemUses.ThisItem' }}">
+							 placeholder="{{ consumption.placeholder }}">
 			{{/with}}
 		</label>
 	{{/if}}

@@ -79,6 +79,17 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Placeholder for the target field.
+	 * @type {string|null}
+	 */
+	get placeholder() {
+		if (this.type !== "item") return null;
+		return game.i18n.localize("BF.CONSUMPTION.Type.ItemUses.ThisItem");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Method of scaling this consumption.
 	 * @type {FormSelectOption[]|null}
 	 */
