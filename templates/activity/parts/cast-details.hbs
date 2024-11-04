@@ -3,6 +3,7 @@
 	{{#if circleOptions}}
 		{{ formField spell.fields.circle value=spell.data.circle options=circleOptions rootId=partId }}
 	{{/if}}
+	{{ formField spell.fields.ability value=spell.data.ability options=abilityOptions rootId=partId }}
 	{{ formField spell.fields.properties value=spell.data.properties options=propertyOptions rootId=partId }}
 	{{#with spell.fields.challenge.fields as |fields|}}
 		{{ formField fields.override value=../spell.data.challenge.override rootId=../partId }}

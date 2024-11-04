@@ -61,6 +61,12 @@ export default class CastSheet extends ActivitySheet {
 			}
 		}
 
+		context.abilityOptions = [
+			{ value: "", label: game.i18n.localize("BF.Default.Generic") },
+			{ rule: true },
+			...CONFIG.BlackFlag.abilities.localizedOptions
+		];
+
 		context.propertyOptions = [
 			...Object.entries(CONFIG.BlackFlag.spellComponents).map(([value, { label }]) => ({
 				value,
