@@ -2,7 +2,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { numberFormat, staticID } from "../utils/_module.mjs";
 
-const { SetField, StringField } = foundry.data.fields;
+const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -107,7 +107,7 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 		}
 
 		// Handle activity-targeted changes
-		if ((change.key.startsWith("activity.") || change.key.startsWith("system.activities.")) && doc instanceof Item) {
+		if ((change.key.startsWith("activities[") || change.key.startsWith("system.activities.")) && doc instanceof Item) {
 			return this.applyActivity(doc, change);
 		}
 
@@ -124,17 +124,17 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	 */
 	applyActivity(item, change) {
 		const changes = {};
-		const apply = (activity, keyPath) => {
-			const c = this.apply(activity, { ...change, key: keyPath.join(".") });
+		const apply = (activity, key) => {
+			const c = this.apply(activity, { ...change, key });
 			Object.entries(c).forEach(([k, v]) => (changes[`system.activities.${activity.id}.${k}`] = v));
 		};
 		if (change.key.startsWith("system.activities.")) {
 			const [, , id, ...keyPath] = change.key.split(".");
 			const activity = item.system.activities?.get(id);
-			if (activity) apply(activity, keyPath);
+			if (activity) apply(activity, keyPath.join("."));
 		} else {
-			const [, type, ...keyPath] = change.key.split(".");
-			item.system.activities?.byType(type)?.forEach(activity => apply(activity, keyPath));
+			const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
+			item.system.activities?.byType(type)?.forEach(activity => apply(activity, key));
 		}
 		return changes;
 	}
@@ -178,6 +178,11 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 				const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
 				foundry.utils.setProperty(model, keyPath, created);
 			}
+		}
+
+		// Parse any JSON provided when targeting an object
+		if (field instanceof ObjectField || field instanceof SchemaField) {
+			change = { ...change, value: this.prototype._parseOrString(change.value) };
 		}
 
 		return super.applyField(model, change, field);

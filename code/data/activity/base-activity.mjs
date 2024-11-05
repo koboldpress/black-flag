@@ -27,9 +27,9 @@ const { BooleanField, DocumentIdField, FilePathField, HTMLField, IntegerSortFiel
  *                                         activity corresponds with casting a spell.
  * @property {object} consumption
  * @property {ConsumptionTargetData[]} consumption.targets - Collection of consumption targets.
- * @property {object} consumption.scaling
- * @property {boolean} consumption.scaling.allowed - Can this non-spell activity be activated at higher levels?
- * @property {string} consumption.scaling.max - Maximum number of scaling levels for this item.
+ * @property {object} consumption.scale
+ * @property {boolean} consumption.scale.allowed - Can this non-spell activity be activated at higher levels?
+ * @property {string} consumption.scale.max - Maximum number of scaling levels for this item.
  * @property {DurationField} duration
  * @property {boolean} duration.concentration - Does this activity require concentration?
  * @property {boolean} duration.override - Should the item's duration be overridden?

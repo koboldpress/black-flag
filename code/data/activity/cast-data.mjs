@@ -13,6 +13,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, Str
  * @property {boolean} spell.challenge.override - Use custom attack bonus & DC rather than creature's.
  * @property {number} spell.circle - Base circle at which to cast the spell.
  * @property {Set<string>} spell.properties - Spell components & tags to ignore while casting.
+ * @property {boolean} spell.spellbook - Should this spell be listed in the character's spellbook?
  * @property {string} spell.uuid - UUID of the spell to cast.
  */
 export class CastData extends ActivityDataModel {
@@ -37,6 +38,7 @@ export class CastData extends ActivityDataModel {
 				}),
 				circle: new NumberField(),
 				properties: new SetField(new StringField(), { initial: ["verbal", "somatic", "material"] }),
+				spellbook: new BooleanField({ initial: true }),
 				uuid: new DocumentUUIDField()
 			})
 		};

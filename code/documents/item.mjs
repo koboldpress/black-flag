@@ -485,6 +485,38 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onCreate(data, options, userId) {
+		super._onCreate(data, options, userId);
+		await this.system.onCreateActivities?.(data, options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _preUpdate(changed, options, user) {
+		if ((await super._preUpdate(changed, options, user)) === false) return false;
+		await this.system.preUpdateActivities?.(changed, options, user);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onUpdate(changed, options, userId) {
+		super._onUpdate(changed, options, userId);
+		await this.system.onUpdateActivities?.(changed, options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onDelete(options, userId) {
+		super._onDelete(options, userId);
+		await this.system.onDeleteActivities?.(options, userId);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Factory Methods           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 

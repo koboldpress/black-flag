@@ -426,7 +426,7 @@ export default class SummonActivity extends Activity {
 			// Match attacks
 			if (this.system.match.attacks && item.system.activities?.byType("attack")?.length) {
 				changes.push({
-					key: "activity.attack.system.attack.flat",
+					key: "activities[attack].system.attack.flat",
 					mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
 					value: true
 				});
@@ -458,12 +458,12 @@ export default class SummonActivity extends Activity {
 					8;
 				changes.push(
 					{
-						key: "activity.save.system.save.dc.ability",
+						key: "activities[save].system.save.dc.ability",
 						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
 						value: "custom"
 					},
 					{
-						key: "activity.save.system.save.dc.formula",
+						key: "activities[save].system.save.dc.formula",
 						mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
 						value: dc
 					}

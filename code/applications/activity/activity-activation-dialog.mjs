@@ -139,7 +139,8 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		if ("scaling" in this.config) this.#item = this.#item.clone({ "flags.black-flag.scaling": this.config.scaling });
 		return {
 			...(await super._prepareContext(options)),
-			activity: this.activity
+			activity: this.activity,
+			linkedActivity: this.config.cause ? this.activity.getLinkedActivity(this.config.cause.activity) : null
 		};
 	}
 
@@ -174,7 +175,7 @@ export default class ActivityActivationDialog extends BFFormDialog {
 		context.fields = [];
 		context.notes = [];
 
-		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot"))
+		if (this.activity.spellSlotConsumption && this._shouldDisplay("consume.spellSlot") && !this.config.cause)
 			context.fields.push({
 				field: new BooleanField({ label: game.i18n.localize("BF.CONSUMPTION.Type.SpellSlots.PromptDecrease") }),
 				name: "consume.spellSlot",
@@ -192,20 +193,24 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			});
 
 		if (this._shouldDisplay("consume.resources")) {
-			const isArray = foundry.utils.getType(this.config.consume?.resources) === "Array";
-			for (const [index, target] of this.activity.consumption.targets.entries()) {
-				const value =
-					(isArray && this.config.consume.resources.includes(index)) ||
-					(!isArray && this.config.consume?.resources !== false && this.config.consume !== false);
-				const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
-				if (notes?.length) context.notes.push(...notes);
-				context.fields.push({
-					field: new BooleanField({ label, hint }),
-					name: `consume.resources.${index}`,
-					value,
-					warn: value ? warn : false
-				});
-			}
+			const addResources = (targets, keyPath) => {
+				const consume = foundry.utils.getProperty(this.config, keyPath);
+				const isArray = foundry.utils.getType(consume) === "Array";
+				for (const [index, target] of targets.entries()) {
+					const value =
+						(isArray && consume.includes(index)) || (!isArray && consume !== false && this.config.consume !== false);
+					const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
+					if (notes?.length) context.notes.push(...notes);
+					context.fields.push({
+						field: new BooleanField({ label, hint }),
+						name: `${keyPath}.${index}`,
+						value,
+						warn: value ? warn : false
+					});
+				}
+			};
+			addResources(this.activity.consumption.targets, "consume.resources");
+			if (context.linkedActivity) addResources(context.linkedActivity.consumption.targets, "cause.resources");
 		}
 
 		context.hasConsumption = context.fields.length;
@@ -274,13 +279,33 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			return context;
 		}
 
-		if (this.activity.spellSlotScaling && this.config.scaling !== false) {
+		const scale = (context.linkedActivity ?? this.activity).consumption.scale;
+		const rollData = (context.linkedActivity ?? this.activity).getRollData({ deterministic: true });
+
+		if (this.activity.spellSlotScaling && context.linkedActivity && this.config.scaling !== false) {
+			const max = simplifyBonus(scale.max, rollData);
+			const minimumCircle = context.linkedActivity.system.spell?.circle ?? this.item.system.circle.base ?? 1;
+			const maximumCircle = scale.allowed ? (scale.max ? minimumLevel + max - 1 : Infinity) : minimumLevel;
+			const spellSlotOptions = Object.entries(CONFIG.BlackFlag.spellCircles())
+				.map(([circle, label]) => {
+					if (Number(circle) < minimumCircle || Number(circle) > maximumCircle) return null;
+					return { value: `circle-${circle}`, label };
+				})
+				.filter(_ => _);
+			context.spellSlots = {
+				field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
+				name: "spell.slot",
+				value: this.config.spell?.slot,
+				options: spellSlotOptions
+			};
+		} else if (this.activity.spellSlotScaling && this.config.scaling !== false) {
 			const spellcasting = this.actor.system.spellcasting;
 			const minimumCircle = this.item.system.circle.base ?? 1;
 			const maximumCircle = spellcasting.maxCircle;
 
-			let spellSlotValue = spellcasting.slots[this.config.spell?.slot]?.value ? this.config.spell.slot : null;
 			const consumeSlot = this.config.consume === true || this.config.consume?.spellSlot;
+			let spellSlotValue =
+				spellcasting.slots[this.config.spell?.slot]?.value || !consumeSlot ? this.config.spell.slot : null;
 			if (!consumeSlot) spellSlotValue = this.config.spell?.slot;
 			const spellSlotOptions = Object.entries(spellcasting.slots)
 				.map(([value, slot]) => {
@@ -298,15 +323,14 @@ export default class ActivityActivationDialog extends BFFormDialog {
 					if (!disabled && !spellSlotValue) spellSlotValue = value;
 					return { value, label, disabled, selected: spellSlotValue === value };
 				})
-				.filter(o => o);
+				.filter(_ => _);
 
-			if (spellSlotOptions)
-				context.spellSlots = {
-					field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
-					name: "spell.slot",
-					value: spellSlotValue,
-					options: spellSlotOptions
-				};
+			context.spellSlots = {
+				field: new StringField({ label: game.i18n.localize("BF.Spell.Circle.Label") }),
+				name: "spell.slot",
+				value: spellSlotValue,
+				options: spellSlotOptions
+			};
 
 			if (!spellSlotOptions.some(o => !o.disabled))
 				context.notes.push({
@@ -315,9 +339,8 @@ export default class ActivityActivationDialog extends BFFormDialog {
 						name: this.item.name
 					})
 				});
-		} else if (this.activity.consumption.scale.allowed && this.config.scaling !== false) {
-			const scale = this.activity.consumption.scale;
-			const max = scale.max ? simplifyBonus(scale.max, this.activity.getRollData({ deterministic: true })) : Infinity;
+		} else if (scale.allowed && this.config.scaling !== false) {
+			const max = scale.max ? simplifyBonus(scale.max, rollData) : Infinity;
 			context.scaling = {
 				field: new NumberField({
 					min: 1,
@@ -401,8 +424,10 @@ export default class ActivityActivationDialog extends BFFormDialog {
 			submitData.scaling = submitData.scalingValue - 1;
 			delete submitData.scalingValue;
 		}
-		if (foundry.utils.getType(submitData.consume?.resources) === "Object") {
-			submitData.consume.resources = filteredKeys(submitData.consume.resources).map(i => Number(i));
+		for (const key of ["consume", "cause"]) {
+			if (foundry.utils.getType(submitData[key]?.resources) === "Object") {
+				submitData[key].resources = filteredKeys(submitData[key].resources).map(i => Number(i));
+			}
 		}
 		return submitData;
 	}

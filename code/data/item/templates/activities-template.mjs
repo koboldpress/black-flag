@@ -1,3 +1,4 @@
+import CastActivity from "../../../documents/activity/cast-activity.mjs";
 import { numberFormat, replaceFormulaData, simplifyBonus } from "../../../utils/_module.mjs";
 import { ActivityField } from "../../fields/activity-field.mjs";
 import UsesField from "../../fields/uses-field.mjs";
@@ -85,6 +86,96 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 		for ( const activity of this.activities ) {
 			activity.prepareFinalData();
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*        Socket Event Handlers        */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Perform any necessary actions when an item with activities is created.
+	 * @param {object} data - The initial data object provided to the document creation request.
+	 * @param {object} options - Additional options which modify the update request.
+	 * @param {string} userId - The id of the User requesting the document update.
+	 */
+	async onCreateActivities(data, options, userId) {
+		if ( (userId !== game.user.id) || !this.parent.isEmbedded ) return;
+
+		// If item has any Cast activities, create locally cached copies of the spells
+		const spells = (await Promise.all(
+			this.activities.byType("cast").map(a => !a.cachedSpell && a.getCachedSpellData())
+		)).filter(_ => _);
+		if ( spells.length ) this.parent.actor.createEmbeddedDocuments("Item", spells);
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Prepare any item or actor changes based on activity changes.
+	 * @param {object} changed - The differential data that is changed relative to the document's prior values.
+	 * @param {object} options - Additional options which modify the update request.
+	 * @param {User} user - The User requesting the document update.
+	 */
+	async preUpdateActivities(changed, options, user) {
+		if ( !foundry.utils.hasProperty(changed, "system.activities") || !this.parent.isEmbedded ) return;
+
+		// Track changes to cached spells on cast activities
+		const removed = Object.entries(changed.system?.activities ?? {}).map(([key, data]) => {
+			if ( key.startsWith("-=") ) {
+				const id = key.replace("-=", "");
+				return this.activities.get(id).cachedSpell?.id;
+			} else if ( foundry.utils.hasProperty(data, "system.spell.uuid") ) {
+				return this.activities.get(key)?.cachedSpell?.id;
+			}
+			return null;
+		}).filter(_ => _);
+		if ( removed.length ) foundry.utils.setProperty(options, "blackFlag.removedCachedItems", removed);
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Perform any additional updates when an item with activities is updated.
+	 * @param {object} changed - The differential data that is changed relative to the document's prior values.
+	 * @param {object} options - Additional options which modify the update request.
+	 * @param {string} userId - The id of the User requesting the document update.
+	 */
+	async onUpdateActivities(changed, options, userId) {
+		if ( (userId !== game.user.id) || !this.parent.isEmbedded
+			|| !foundry.utils.hasProperty(changed, "system.activities") ) return;
+
+		// If any Cast activities were removed, or their spells changed, remove old cached spells
+		if ( options.blackFlag?.removedCachedItems ) {
+			await this.parent.actor.deleteEmbeddedDocuments("Item", options.blackFlag.removedCachedItems);
+		}
+
+		// Create any new cached spells & update existing ones as necessary
+		const cachedInserts = [];
+		for ( const id of Object.keys(changed.system.activities) ) {
+			const activity = this.activities.get(id);
+			if ( !(activity instanceof CastActivity) ) continue;
+			const existingSpell = activity.cachedSpell;
+			if ( existingSpell ) {
+				const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
+				await enchantment.update({ changes: activity.getSpellChanges() });
+			} else cachedInserts.push(await activity.getCachedSpellData());
+		}
+		if ( cachedInserts.length ) await this.parent.actor.createEmbeddedDocuments("Item", cachedInserts);
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Perform any necessary cleanup when an item with activities is deleted.
+	 * @param {object} options - Additional options which modify the deletion request.
+	 * @param {string} userId - The id of the User requesting the document update.
+	 */
+	onDeleteActivities(options, userId) {
+		if ( (userId !== game.user.id) || !this.parent.isEmbedded ) return;
+
+		// If item has any Cast activities, clean up any cached spells
+		const spellIds = this.activities.byType("cast").map(a => a.cachedSpell?.id).filter(_ => _);
+		if ( spellIds.length ) this.parent.actor.deleteEmbeddedDocuments("Item", spellIds);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

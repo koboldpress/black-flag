@@ -122,7 +122,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			this.consumption.scale.allowed ||
 			(this.isSpell &&
 				this.item.system.circle.base > 0 &&
-				CONFIG.BlackFlag.spellPreparationModes[this.item.getFlag(game.system.id, "relationship.mode")]?.scalable)
+				(CONFIG.BlackFlag.spellPreparationModes[this.item.getFlag(game.system.id, "relationship.mode")]?.scalable ??
+					true))
 		);
 	}
 
@@ -282,6 +283,16 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Relative UUID for this activity on an actor.
+	 * @type {string}
+	 */
+	get relativeUUID() {
+		return `.Item.${this.item.id}.Activity.${this.id}`;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Does activating this activity consume a spell slot?
 	 * @type {boolean}
 	 */
@@ -414,23 +425,29 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @property {object} spell
 	 * @property {number} spell.circle - Spell circle to consume. Replaces `scaling` on property for spells.
 	 * @property {TargetDescriptor[]} targets - Tokens targeted during activation.
+	 * @property {object} [cause]
+	 * @property {string} [cause.activity] - Relative UUID to the activity that caused this one to be activated.
+	 *                                       Activity must be on the same actor as this one.
+	 * @property {boolean|number[]} [cause.resources] - Control resource consumption on linked activity.
 	 */
 
 	/**
 	 * Data for the activity activation configuration dialog.
 	 *
 	 * @typedef {object} ActivityDialogConfiguration
-	 * @property {boolean} configure=true - Should the activation configuration dialog be displayed?
-	 * @property {typeof ActivityActivationDialog} - applicationClass - Alternate activation dialog to use.
+	 * @property {boolean} [configure=true] - Should the activation configuration dialog be displayed?
+	 * @property {typeof ActivityActivationDialog} [applicationClass] - Alternate activation dialog to use.
+	 * @property {object} [options] - Options passed through to the dialog.
 	 */
 
 	/**
 	 * Message configuration data used when creating messages.
 	 *
 	 * @typedef {object} ActivityMessageConfiguration
-	 * @property {boolean} create=true - Should a message be created when this roll is complete?
-	 * @property {object} data={} - Additional data used when creating the message.
-	 * @property {string} template - Template to use for rendering the chat card.
+	 * @property {boolean} [create=true] - Should a message be created when this roll is complete?
+	 * @property {object} [data={}] - Additional data used when creating the message.
+	 * @property {boolean} [hasConsumption] - Was consumption available during activation?
+	 * @property {string} [template] - Template to use for rendering the chat card.
 	 */
 
 	/**
@@ -446,9 +463,10 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 	/**
 	 * Activate this activity.
-	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
-	 * @param {ActivityDialogConfiguration} dialog - Configuration info for the configuration dialog.
-	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
+	 * @param {Partial<ActivityActivationConfiguration>} config - Configuration info for the activation.
+	 * @param {Partial<ActivityDialogConfiguration>} dialog - Configuration info for the configuration dialog.
+	 * @param {Partial<ActivityMessageConfiguration>} message - Configuration info for the chat message created.
+	 * @returns {ActivityActivationResults}
 	 */
 	async activate(config = {}, dialog = {}, message = {}) {
 		if (!this.item.isEmbedded || !this.item.isOwner || this.item.pack) return;
@@ -479,6 +497,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						}
 					}
 				},
+				hasConsumption: activationConfig.hasConsumption,
 				template: this.metadata.usage.chatCard
 			},
 			message
@@ -492,11 +511,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		 * @memberof hookEvents
 		 * @param {Activity} activity - Activity being activated.
 		 * @param {ActivityActivationConfiguration} activationConfig - Configuration data for the activation.
-		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @param {ActivityDialogConfiguration} dialogConfig - Configuration data for the activity activation dialog.
+		 * @param {ActivityMessageConfiguration} messageConfig - Configuration data for the activity message to be created.
 		 * @returns {boolean} - Explicitly return `false` to prevent activity from being activated.
 		 */
-		if (Hooks.call("blackFlag.preActivateActivity", activity, activationConfig, messageConfig, dialogConfig) === false)
+		if (Hooks.call("blackFlag.preActivateActivity", activity, activationConfig, dialogConfig, messageConfig) === false)
 			return;
 
 		// Display configuration window if necessary, wait for result
@@ -541,6 +560,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// Trigger any primary action provided by this activity
 		activity._triggerSubsequentActions(activationConfig, results);
+
+		return results;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -590,9 +611,15 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			else updates.item[itemIndex][keyPath] = activityUpdates;
 		}
 
-		// Update documents with consumption
-		if (!foundry.utils.isEmpty(updates.actor)) await this.actor.update(updates.actor);
-		if (!foundry.utils.isEmpty(updates.item)) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+		const consumed = await this.#applyActivationUpdates(updates);
+		if (!foundry.utils.isEmpty(consumed))
+			foundry.utils.setProperty(messageConfig, `data.flags.${game.system.id}.activation.consumed`, consumed);
+		if (activationConfig.cause?.activity)
+			foundry.utils.setProperty(
+				messageConfig,
+				`data.flags.${game.system.id}.activation.cause`,
+				activationConfig.cause.activity
+			);
 
 		/**
 		 * A hook event that fires after an item's resource consumption is calculated and applied.
@@ -618,12 +645,75 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @param {ActivityActivationConfiguration} config - Configuration info for the activation.
 	 * @param {ActivityDialogConfiguration} dialog - Configuration info for the configuration dialog.
 	 * @param {ActivityMessageConfiguration} message - Configuration info for the chat message created.
+	 * @protected
 	 */
 	_applyKeybindings(config, dialog, message) {
 		dialog.configure ??=
 			!areKeysPressed(config.event, "skipDialogNormal") &&
 			!areKeysPressed(config.event, "skipDialogAdvantage") &&
 			!areKeysPressed(config.event, "skipDialogDisadvantage");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * @typedef ActivityConsumptionDescriptor
+	 * @property {{ keyPath: string, delta: number }[]} actor - Changes for the actor.
+	 * @property {string[]} created - IDs of items created by the process.
+	 * @property {object[]} deleted - Data for items deleted by the process.
+	 * @property {Record<string, { keyPath: string, delta: number }[]>} item - Changes for each item grouped by ID.
+	 */
+
+	/**
+	 * Merge activity updates into the appropriate item updates and apply.
+	 * @param {ActivationUpdates} updates
+	 * @returns {ActivityConsumptionDescriptor}  Information on consumption performed to store in message flag.
+	 */
+	async #applyActivationUpdates(updates) {
+		this._mergeActivityUpdates(updates);
+
+		// Ensure no existing items are created again & no non-existent items try to be deleted
+		updates.create = updates.create?.filter(i => !this.actor.items.has(i));
+		updates.delete = updates.delete?.filter(i => this.actor.items.has(i));
+
+		// Create the consumed flag
+		const getDeltas = (document, updates) => {
+			updates = foundry.utils.flattenObject(updates);
+			return Object.entries(updates)
+				.map(([keyPath, value]) => {
+					let currentValue;
+					if (keyPath.startsWith("system.activities")) {
+						const [id, ...kp] = keyPath.slice(18).split(".");
+						currentValue = foundry.utils.getProperty(document.system.activities?.get(id) ?? {}, kp.join("."));
+					} else currentValue = foundry.utils.getProperty(document, keyPath);
+					const delta = value - currentValue;
+					if (delta && !Number.isNaN(delta)) return { keyPath, delta };
+					return null;
+				})
+				.filter(_ => _);
+		};
+		const consumed = {
+			actor: getDeltas(this.actor, updates.actor),
+			item: updates.item.reduce((obj, { _id, ...changes }) => {
+				const deltas = getDeltas(this.actor.items.get(_id), changes);
+				if (deltas.length) obj[_id] = deltas;
+				return obj;
+			}, {})
+		};
+		if (foundry.utils.isEmpty(consumed.actor)) delete consumed.actor;
+		if (foundry.utils.isEmpty(consumed.item)) delete consumed.item;
+		if (updates.create?.length) consumed.created = updates.create;
+		if (updates.delete?.length) consumed.deleted = updates.delete.map(i => this.actor.items.get(i).toObject());
+
+		// Update documents with consumption
+		if (!foundry.utils.isEmpty(updates.actor)) await this.actor.update(updates.actor);
+		if (!foundry.utils.isEmpty(updates.create)) {
+			await this.actor.createEmbeddedDocuments("Item", updates.create, { keepId: true });
+		}
+		if (!foundry.utils.isEmpty(updates.delete)) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
+		if (!foundry.utils.isEmpty(updates.item)) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+
+		return consumed;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -636,6 +726,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	_prepareActivationConfig(config = {}) {
 		config = foundry.utils.deepClone(config);
+		const linked = this.getLinkedActivity(config.cause?.activity);
 
 		if (config.create !== false) {
 			config.create ??= {};
@@ -643,24 +734,42 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		}
 
 		if (config.consume !== false) {
+			const hasActionConsumption = this.activation.type === "legendary";
+			const hasResourceConsumption = this.consumption.targets.length > 0;
+			const hasLinkedConsumption = linked?.consumption.targets.length > 0;
+			const hasSpellSlotConsumption = this.spellSlotConsumption;
 			config.consume ??= {};
-			config.consume.action ??= this.activation.type === "legendary";
-			config.consume.resources ??= this.consumption.targets.length > 0;
-			config.consume.spellSlot ??= this.spellSlotConsumption;
+			config.consume.action ??= hasActionConsumption;
+			config.consume.resources ??= hasResourceConsumption;
+			config.consume.spellSlot ??= !linked && hasSpellSlotConsumption;
+			config.hasConsumption =
+				hasActionConsumption || hasResourceConsumption || hasLinkedConsumption || (!linked && hasSpellSlotConsumption);
 		}
 
-		if (this.canScale) config.scaling ??= 0;
+		const canScale = linked ? linked.consumption.scale.allowed : this.canScale;
+		const linkedDelta = (linked?.system.spell?.circle ?? Infinity) - (this.item.system.circle?.base ?? Infinity);
+		if (canScale) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
 		else config.scaling = false;
 
-		// If all entries within `config.consume` are `false`, replace object with `false`
-		if (config.consume !== false) {
-			const anyConsumption = Object.values(config.consume).some(v => v);
-			if (!anyConsumption) config.consume = false;
+		if (this.spellSlotScaling) {
+			const mode = this.item.getFlag(game.system.id, "relationship.mode");
+			config.spell ??= {};
+			config.spell.slot ??= linked?.system.spell?.circle
+				? `circle-${linked.system.spell.circle}`
+				: mode in this.actor.system.spellcasting.slots
+					? mode
+					: `circle-${this.item.system.circle.base}`;
 		}
 
 		config.targets ??= getTargetDescriptors();
 
 		// TODO: Begin concentration
+
+		if (linked) {
+			config.cause ??= {};
+			config.cause.activity ??= linked.relativeUUID;
+			config.cause.resources ??= linked.consumption.targets.length > 0;
+		}
 
 		return config;
 	}
@@ -697,7 +806,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		if (activationConfig.scaling !== undefined) {
 			scaleUpdate[`flags.${game.system.id}.scaling`] = activationConfig.scaling;
 			foundry.utils.setProperty(messageConfig.data, `flags.${game.system.id}.scaling`, activationConfig.scaling);
+			item.actor._embeddedPreparation = true;
 			item.updateSource(scaleUpdate);
+			item.actor._embeddedPreparation = false;
 			item.system.prepareFinalData?.();
 		}
 	}
@@ -710,6 +821,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 * @typedef {object} ActivationUpdates
 	 * @property {object} activity - Updates applied to activity that performed the activation.
 	 * @property {object} actor - Updates applied to the actor that performed the activation.
+	 * @property {object[]} create - Full data for Items to create (with IDs maintained).
+	 * @property {string[]} delete - IDs of items to be deleted from the actor.
 	 * @property {object[]} item - Updates applied to items on the actor that performed the activation.
 	 * @property {Roll[]} rolls - Any rolls performed as part of the activation.
 	 */
@@ -717,14 +830,17 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/**
 	 * Calculate changes to actor, items, & this activity based on resource consumption.
 	 * @param {ActivityActivationConfiguration} config - Activation configuration.
-	 * @returns {ActivationUpdates|false}
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.returnErrors=false] - Return array of errors, rather than displaying them.
+	 * @returns {ActivationUpdates|ConsumptionError[]|false}
 	 * @protected
 	 */
-	async _prepareActivationUpdates(config) {
-		const updates = { activity: {}, item: [], actor: {}, rolls: [] };
+	async _prepareActivationUpdates(config, { returnErrors = false } = {}) {
+		const updates = { activity: {}, actor: {}, create: [], delete: [], item: [], rolls: [] };
 		if (!config.consume) return updates;
 		const errors = [];
 
+		// Handle action economy
 		if ((config.consume === true || config.consume.action) && this.activation.type === "legendary") {
 			const count = this.activation.value ?? 1;
 			const legendary = this.actor.system.attributes?.legendary;
@@ -748,6 +864,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
+		// Handle consumption targets
 		if (config.consume === true || config.consume.resources) {
 			const indexes =
 				config.consume === true || config.consume.resources === true
@@ -764,7 +881,41 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			}
 		}
 
-		if ((config.consume === true || config.consume.spellSlot) && this.isSpell) {
+		// Handle consumption on a linked activity
+		if (config.cause) {
+			const linkedActivity = this.getLinkedActivity(config.cause.activity);
+			if (linkedActivity) {
+				const consume = {
+					resources:
+						config.consume === true || config.cause?.resources === true
+							? linkedActivity.consumption.targets.keys()
+							: config.cause?.resources,
+					spellSlot: false
+				};
+				const activationConfig = foundry.utils.mergeObject(config, { consume, cause: false }, { inplace: false });
+				const results = await linkedActivity._prepareActivationUpdates(activationConfig, { returnErrors: true });
+				if (foundry.utils.getType(results) === "Object") {
+					linkedActivity._mergeActivityUpdates(results);
+					foundry.utils.mergeObject(updates.actor, results.actor);
+					updates.create.push(...results.create);
+					updates.delete.push(...results.delete);
+					updates.item.push(...results.item);
+					updates.rolls.push(...results.rolls);
+					// Mark this item for deletion if it is linked to a cast activity that will be deleted
+					if (
+						updates.delete.includes(linkedActivity.item.id) &&
+						this.item.getFlag(game.system.id, "cachedFor") === linkedActivity.relativeUUID
+					) {
+						updates.delete.push(this.item.id);
+					}
+				} else if (results?.length) {
+					errors.push(...results);
+				}
+			}
+		}
+
+		// Handle spell slot consumption
+		else if ((config.consume === true || config.consume.spellSlot) && this.isSpell) {
 			const slot = config.spell?.slot ?? `circle-${this.item.system.circle?.value ?? this.item.system.circle?.base}`;
 			const slotData = this.actor.system.spellcasting?.slots[slot];
 			if (slotData?.value) {
@@ -783,8 +934,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 
 		// TODO: Validate concentration
 
-		errors.forEach(err => ui.notifications.error(err.message, { console: false }));
-		return errors.length ? false : updates;
+		if (!returnErrors) errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+		return errors.length ? (returnErrors ? errors : false) : updates;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -798,7 +949,11 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	_requiresConfigurationDialog(config) {
 		const checkObject = obj => foundry.utils.getType(obj) === "Object" && Object.values(obj).some(v => v);
-		return checkObject(config.create) || checkObject(config.consume) || config.scaling !== false;
+		return (
+			checkObject(config.create) ||
+			((checkObject(config.consume) || config.cause?.resources === true) && config.hasConsumption) ||
+			config.scaling !== false
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -1214,6 +1369,19 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Retrieve a linked activity based on the provided relative UUID, or the stored `cachedFor` value.
+	 * @param {string} relativeUUID - Relative UUID for an activity on this actor.
+	 * @returns {Activity|null}
+	 */
+	getLinkedActivity(relativeUUID) {
+		if (!this.actor) return null;
+		relativeUUID ??= this.item.getFlag(game.system.id, "cachedFor");
+		return fromUuidSync(relativeUUID, { relative: this.actor, strict: false });
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Retrieve the roll data for this activity.
 	 * @param {object} [options={}]
 	 * @returns {object}
@@ -1223,5 +1391,21 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 		const ability = this.actor?.system.abilities?.[this.ability] ?? {};
 		rollData.mod = ability.adjustedMod ?? ability.mod ?? 0;
 		return rollData;
+	}
+
+	/* -------------------------------------------- */
+
+	/**
+	 * Merge the activity updates into this activity's item updates.
+	 * @param {ActivationUpdates} updates
+	 * @internal
+	 */
+	_mergeActivityUpdates(updates) {
+		if (foundry.utils.isEmpty(updates.activity)) return;
+		const itemIndex = updates.item.findIndex(i => i._id === this.item.id);
+		const keyPath = `system.activities.${this.id}`;
+		const activityUpdates = foundry.utils.expandObject(updates.activity);
+		if (itemIndex === -1) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
+		else updates.item[itemIndex][keyPath] = activityUpdates;
 	}
 }
