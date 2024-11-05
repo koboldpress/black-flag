@@ -64,11 +64,13 @@
 									        aria-label="{{ localize 'BF.Item.Action.Edit' }}">
 										<i class="fa-solid fa-edit" inert></i>
 									</button>
-									<button type="button" class="link-button" data-action="delete"
-									        data-tooltip="BF.Item.Action.Delete"
-									        aria-label="{{ localize 'BF.Item.Action.Delete' }}">
-										<i class="fa-solid fa-trash" inert></i>
-									</button>
+									{{#if ctx.canDelete}}
+										<button type="button" class="link-button" data-action="delete"
+									          data-tooltip="BF.Item.Action.Delete"
+									          aria-label="{{ localize 'BF.Item.Action.Delete' }}">
+											<i class="fa-solid fa-trash" inert></i>
+										</button>
+									{{/if}}
 								{{else}}
 								{{> "blackFlag.inventory-controls" buttons=ctx.buttons }}
 								{{/if}}

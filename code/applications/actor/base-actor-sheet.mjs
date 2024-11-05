@@ -206,6 +206,9 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 
 		if (this.expanded.has(item.id)) context.expanded = await item.getSummaryContext({ secrets: this.actor.isOwner });
 
+		context.canDelete = section.options?.canDelete !== false;
+		context.canDuplicate = section.options?.canDuplicate !== false;
+
 		const totalWeight = await item.system.totalWeight;
 		context.weight = totalWeight ? numberFormat(totalWeight.toNearest(0.1), { unit: item.system.weight.units }) : "—";
 	}

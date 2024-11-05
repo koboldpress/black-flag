@@ -130,10 +130,11 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 	 * Get the set of ContextMenu options which should be applied to inventory entries.
 	 * @param {BlackFlagItem} item - The item for which the context menu is being activated.
 	 * @param {Activity} [activity] - Activity for which the context menu is being activated.
+	 * @param {SheetSectionConfiguration} [section] - Configuration data for the section to which the item belongs.
 	 * @returns {ContextMenuEntry[]} - Context menu entries.
 	 * @protected
 	 */
-	_getContextMenuOptions(item, activity) {
+	_getContextMenuOptions(item, activity, section) {
 		const type = item.type === "spell" ? "Spell" : item.system.isPhysical ? "Item" : "Feature";
 		return [
 			{
@@ -187,14 +188,14 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			{
 				name: `BF.${type}.Action.Duplicate`,
 				icon: '<i class="fa-solid fa-copy fa-fw" inert></i>',
-				condition: li => this.isEditable,
+				condition: li => this.isEditable && section?.options?.canDuplicate !== false,
 				callback: li => this._onAction(li[0], "duplicate"),
 				group: "item"
 			},
 			{
 				name: `BF.${type}.Action.Delete`,
 				icon: '<i class="fa-solid fa-trash fa-fw destructive" inert></i>',
-				condition: li => this.isEditable,
+				condition: li => this.isEditable && section?.options?.canDelete !== false,
 				callback: li => this._onAction(li[0], "delete"),
 				group: "item"
 			},
@@ -396,7 +397,8 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 			return;
 		}
 		const activity = item.system.activities?.get(element.closest("[data-activity-id]")?.dataset.activityId);
-		ui.context.menuItems = this._getContextMenuOptions(item, activity);
+		const section = this.getSectionConfiguration(element.closest("[data-section]")?.dataset.section);
+		ui.context.menuItems = this._getContextMenuOptions(item, activity, section);
 
 		/**
 		 * A hook event that fires when the context menu for an inventory list is constructed.

@@ -13,6 +13,8 @@
  * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
+ * @property {boolean} [options.canDelete=true] - Should the delete control be exposed to the user?
+ * @property {boolean} [options.canDuplicate=true] - Should the duplicate control be exposed to the user?
  * @property {string} [options.sorting] - Force a specific sorting mode on this section.
  */
 
@@ -140,7 +142,7 @@ export const sheetSections = {
 				{ o: "NOT", v: { k: "flags.black-flag.cachedFor", v: undefined } }
 			],
 			checkVisibility: item => item.system.linkedActivity?.displayInSpellbook ?? false,
-			options: { autoHide: true }
+			options: { autoHide: true, canDelete: false, canDuplicate: false }
 		},
 		{
 			id: "weapons",
