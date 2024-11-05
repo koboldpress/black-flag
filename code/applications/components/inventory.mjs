@@ -729,7 +729,10 @@ export default class InventoryElement extends DocumentSheetAssociatedElement {
 		const sorting = document.flags["black-flag"]?.sheet?.sorting ?? {};
 		for (const [tab, data] of Object.entries(sections)) {
 			for (const [key, section] of Object.entries(data)) {
-				section.items = FiltersElement.filter(section.items, filters[tab]);
+				section.items = FiltersElement.filter(section.items, {
+					checkVisibility: section.checkVisibility,
+					filters: filters[tab]
+				});
 				section.items = SortingElement.sort(section.items, section.options?.sorting ?? sorting[tab]);
 				if (hide && section.options?.autoHide && !section.items.length) delete data[key];
 			}

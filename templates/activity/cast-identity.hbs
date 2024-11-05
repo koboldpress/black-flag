@@ -1,3 +1,7 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 	{{> "systems/black-flag/templates/activity/parts/activity-identity.hbs" }}
+	<fieldset>
+		<legend>{{ localize "BF.ACTIVITY.SECTION.Behavior" }}</legend>
+		{{ formField systemFields.spell.fields.spellbook value=source.system.spell.spellbook rootId=partId }}
+	</fieldset>
 </section>

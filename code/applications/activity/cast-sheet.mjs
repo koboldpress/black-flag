@@ -101,7 +101,7 @@ export default class CastSheet extends ActivitySheet {
 	/** @inheritDoc */
 	_getTabs() {
 		const tabs = super._getTabs();
-		tabs.effect.label = "BF.CAST.SECTIONS.Spell";
+		tabs.effect.label = "BF.CAST.SECTION.Spell";
 		tabs.effect.icon = "fa-solid fa-wand-sparkles";
 		return tabs;
 	}

@@ -70,6 +70,8 @@ export default class SpellSheet extends BaseItemSheet {
 		];
 		context.spellCircles = CONFIG.BlackFlag.spellCircles();
 
+		context.showConfiguration = this.item.isEmbedded && !this.item.getFlag(game.system.id, "cachedFor");
+
 		return context;
 	}
 

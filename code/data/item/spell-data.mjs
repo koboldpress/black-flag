@@ -168,7 +168,21 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 
 	/** @inheritDoc */
 	get displayActions() {
+		const linked = this.linkedActivity;
+		if (linked) return false;
 		return this.prepared;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Retrieve a linked activity that granted this spell using the stored `cachedFor` value.
+	 * @returns {Activity|null}
+	 */
+	get linkedActivity() {
+		const relative = this.parent.actor;
+		if (!relative) return null;
+		return fromUuidSync(this.parent.getFlag(game.system.id, "cachedFor"), { relative, strict: false }) ?? null;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

@@ -89,13 +89,16 @@ export default class FiltersElement extends AppAssociatedElement {
 	/**
 	 * Filter items within a section according to a set of filters.
 	 * @param {BlackFlagItem[]} items - List of items to filter.
-	 * @param {{[key: string]: number}} [filters={}] - Filters to apply.
+	 * @param {object} [options={}]
+	 * @param {CheckVisibilityCallback} [options.checkVisibility] - Additional section-specific visibility check.
+	 * @param {Record<string, number>} [options.filters={}] - Filters to apply.
 	 * @returns {BlackFlagItem[]} - Filtered items.
 	 */
-	static filter(items, filters = {}) {
-		if (foundry.utils.isEmpty(filters)) return items;
+	static filter(items, { checkVisibility, filters = {} } = {}) {
+		if (!checkVisibility && foundry.utils.isEmpty(filters)) return items;
 		return items.filter(item => {
-			for (const [filter, value] of Object.entries(filters)) {
+			if (checkVisibility?.(item) === false) return false;
+			for (const [filter, value] of Object.entries(filters ?? {})) {
 				if (value === 0) continue;
 				const matches = item.system.evaluateFilter?.(filter);
 				if ((value === 1 && matches === false) || (value === -1 && matches === true)) return false;

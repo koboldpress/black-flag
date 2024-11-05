@@ -9,6 +9,7 @@
  * @property {FilterDescription[]} filters - Set of filters to determine which items should appear in this section.
  * @property {ExpandSheetSectionCallback} expand - Callback used to expand a single section into multiple based on data
  *                                                 in the document instance.
+ * @property {CheckVisibilityCallback} [checkVisibility] - Callback used to determine whether an item should be visible.
  * @property {object[]} [create] - Data used when creating items within this section, with an optional `label`.
  * @property {object} [options]
  * @property {boolean} [options.autoHide=false] - Should this section be hidden unless it has items?
@@ -22,6 +23,15 @@
  * @param {BlackFlagActor|BlackFlagItem} document - Document whose sheet is being rendered.
  * @param {object} sectionData - Existing data for the section being expanded.
  * @returns {object[]} - Sections that should replace the expanded section.
+ */
+
+/**
+ * Method that determines whether a specific item should be visible after being sorted into a section.
+ *
+ * @callback CheckVisibilityCallback
+ * @param {object} sectionData - Data on the section.
+ * @param {BlackFlagItem} item - Item for which visibility should be checked.
+ * @returns {boolean}
  */
 
 const currencySection = () => ({
@@ -45,6 +55,7 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "spell" },
 				{ k: "flags.black-flag.relationship.mode", o: "in", v: ["standard", undefined] },
+				{ k: "flags.black-flag.cachedFor", v: undefined },
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			expand: (document, sectionData) => {
@@ -74,6 +85,7 @@ export const sheetSections = {
 			filters: [
 				{ k: "type", v: "spell" },
 				{ k: "flags.black-flag.relationship.mode", v: "pact" },
+				{ k: "flags.black-flag.cachedFor", v: undefined },
 				{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 			],
 			options: { autoHide: true },
@@ -92,7 +104,8 @@ export const sheetSections = {
 			label: "BF.Spell.Preparation.Mode.Rituals",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "system.tags", o: "has", v: "ritual" }
+				{ k: "system.tags", o: "has", v: "ritual" },
+				{ k: "flags.black-flag.cachedFor", v: undefined }
 			],
 			options: { autoHide: true }
 		},
@@ -102,7 +115,8 @@ export const sheetSections = {
 			label: "BF.Spell.Preparation.Mode.AtWill",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "flags.black-flag.relationship.mode", v: "atWill" }
+				{ k: "flags.black-flag.relationship.mode", v: "atWill" },
+				{ k: "flags.black-flag.cachedFor", v: undefined }
 			],
 			options: { autoHide: true }
 		},
@@ -112,8 +126,20 @@ export const sheetSections = {
 			label: "BF.Spell.Preparation.Mode.Innate",
 			filters: [
 				{ k: "type", v: "spell" },
-				{ k: "flags.black-flag.relationship.mode", v: "innate" }
+				{ k: "flags.black-flag.relationship.mode", v: "innate" },
+				{ k: "flags.black-flag.cachedFor", v: undefined }
 			],
+			options: { autoHide: true }
+		},
+		{
+			id: "item-spells",
+			tab: "spellcasting",
+			label: "BF.CAST.SECTION.Spellbook",
+			filters: [
+				{ k: "type", v: "spell" },
+				{ o: "NOT", v: { k: "flags.black-flag.cachedFor", v: undefined } }
+			],
+			checkVisibility: item => item.system.linkedActivity?.displayInSpellbook ?? false,
 			options: { autoHide: true }
 		},
 		{
