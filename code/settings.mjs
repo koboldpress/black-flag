@@ -203,7 +203,7 @@ export function renderSettingsSidebar(html) {
 		<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
 		<ul class="links">
 			<li>
-				<a href="https://github.com/koboldpress/black-flag/releases/latest" target="_blank">
+				<a href="https://koboldpress.github.io/black-flag-docs/" target="_blank">
 				  ${game.i18n.localize("BF.Link.Notes")}
 				</a>
 			</li>

@@ -1,5 +1,4 @@
-import SpellListJournalPageData from "../../data/journal/spell-list-page-data.mjs";
-import { linkForUUID, sortObjectEntries } from "../../utils/_module.mjs";
+import { linkForUUID } from "../../utils/_module.mjs";
 
 /**
  * Journal entry page the displays a list of spells.
@@ -50,7 +49,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 			if (context.enriched[key] === "<p></p>") context.enriched[key] = "";
 		}
 
-		context.groupingOptions = Object.entries(SpellListJournalPageData.GROUPING_MODES).map(([value, label]) => ({
+		context.groupingOptions = Object.entries(this.document.system.constructor.GROUPING_MODES).map(([value, label]) => ({
 			value,
 			label: game.i18n.localize(label)
 		}));
