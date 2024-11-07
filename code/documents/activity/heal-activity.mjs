@@ -78,7 +78,11 @@ export default class HealActivity extends Activity {
 
 	/** @override */
 	async _triggerSubsequentActions(config, results) {
-		this.rollDamage({ event: config.event });
+		this.rollDamage(
+			{ event: config.event },
+			{},
+			{ data: { "flags.black-flag.originatingMessage": results.message?.id } }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

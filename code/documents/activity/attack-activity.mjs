@@ -126,7 +126,11 @@ export default class AttackActivity extends Activity {
 
 	/** @override */
 	async _triggerSubsequentActions(config, results) {
-		this.rollAttack({ event: config.event });
+		this.rollAttack(
+			{ event: config.event },
+			{},
+			{ data: { "flags.black-flag.originatingMessage": results.message?.id } }
+		);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -425,7 +429,7 @@ export default class AttackActivity extends Activity {
 			// Add the ammunition's damage
 			if (ammo.damage.base.formula) {
 				const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-				const damage = ammo.damage.base.clone();
+				const damage = ammo.damage.base.clone(ammo.damage.base);
 				const rollData = this.getRollData();
 
 				// If mode is "replace" and base part is present, replace the base part
