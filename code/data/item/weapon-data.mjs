@@ -272,6 +272,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	get versatileDamage() {
 		if (!this.properties.has("versatile") || !this.damage.base.denomination) return this.damage.base;
 		return this.damage.base.clone({
+			...this.damage.base,
 			denomination: stepDenomination(this.damage.base.denomination)
 		});
 	}

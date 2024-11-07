@@ -94,7 +94,7 @@
 		font-style: normal;
 	}
 
-	strong {
+	strong, em {
 		&.blue { color: var(--bf-text-color-blue); }
 	}
 
@@ -102,6 +102,13 @@
 
 	p.centered {
 		text-align: center;
+	}
+
+	h4.solid {
+		padding-inline: 6px;
+		background: var(--bf-text-color-blue);
+		color: var(--bf-text-color-white);
+		font-size: var(--font-size-14);
 	}
 
 	h4.magic-item {
@@ -181,6 +188,8 @@
 		&.image-grid-300 { --grid-column-size: 300px; }
 		.image-grid__double { grid-column: span 2; }
 	}
+
+	.indent { margin-inline-start: 16px; }
 }
 
 .black-flag, .black-flag-journal {
