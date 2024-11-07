@@ -9,6 +9,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 	static get defaultOptions() {
 		const options = foundry.utils.mergeObject(super.defaultOptions, {
 			dragDrop: [{ dropSelector: "form" }],
+			scrollY: [".right.spell-list"],
 			submitOnChange: true,
 			width: 700,
 			grouping: null
@@ -80,7 +81,10 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 			}
 			section.spells.push(data);
 		}
-		if (context.grouping === "school") context.sections = sortObjectEntries(context.sections, "header");
+		context.sections = Object.values(context.sections);
+		if (context.grouping === "school") {
+			context.sections = context.sections.sort((lhs, rhs) => lhs.header.localeCompare(rhs.header, game.i18n.lang));
+		}
 
 		return context;
 	}
