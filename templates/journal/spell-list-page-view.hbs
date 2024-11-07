@@ -1,0 +1,34 @@
+<div class="journal-page-content">
+	{{#if data.title.show}}
+		<header>
+			<h{{ title.level1 }}>{{ data.name }}</h{{ title.level1 }}>
+		</header>
+	{{/if}}
+
+	<label class="grouping">
+		{{ localize "BF.SPELLLIST.Grouping.Label" }}
+		<select name="grouping">
+			{{ selectOptions groupingOptions selected=grouping }}
+		</select>
+	</label>
+
+	{{{ enriched.introduction }}}
+
+	{{#each sections}}
+		<h5 class="spell-list">{{ header }}</h5>
+		{{> ".spells"}}
+	{{else}}
+		<h5 class="spell-list">{{ localize "BF.SPELLLIST.FIELDS.spells.label" }}</h5>
+		{{> ".spells"}}
+	{{/each}}
+
+	{{{ enriched.conclusion }}}
+</div>
+
+{{#*inline ".spells"}}
+	<ul class="spells">
+		{{#each spells}}
+			<li><em>{{{ anchor }}}</em> ({{ school }}) {{ spell.system.description.short }}</li>
+		{{/each}}
+	</ul>
+{{/inline}}

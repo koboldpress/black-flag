@@ -68,7 +68,8 @@ export const _documentCategories = {
 				journalTypes.ClassJournalPageData,
 				journalTypes.SubclassJournalPageData,
 				journalTypes.MapLocationJournalPageData,
-				journalTypes.RuleJournalPageData
+				journalTypes.RuleJournalPageData,
+				journalTypes.SpellListJournalPageData
 			]
 		}
 	}

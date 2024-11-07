@@ -1,0 +1,48 @@
+<form class="{{ cssClass }}" autocomplete="off">
+	<div class="left flexcol">
+		{{> journalEntryPageHeader }}
+
+		{{ formField fields.grouping value=system.grouping options=groupingOptions }}
+
+		<div class="form-group">
+			<label>{{ localize "BF.SPELLLIST.FIELDS.description.introduction.label" }}</label>
+		</div>
+
+		<prose-mirror name="system.description.introduction" data-document-u-u-i-d="{{ document.uuid }}"
+									value="{{ system.description.introduction }}" class="description">
+			{{{ enriched.introduction }}}
+		</prose-mirror>
+
+		<div class="form-group">
+			<label>{{ localize "BF.SPELLLIST.FIELDS.description.conclusion.label" }}</label>
+		</div>
+	
+		<prose-mirror name="system.description.conclusion" data-document-u-u-i-d="{{ document.uuid }}"
+									value="{{ system.description.conclusion }}" class="description">
+			{{{ enriched.conclusion }}}
+		</prose-mirror>
+	</div>
+
+	<div class="right spell-list">
+		<h3 class="flexrow">
+			{{ localize "BF.SPELLLIST.FIELDS.spells.label" }}
+		</h3>
+		<ol class="items-list">
+			{{#each spells}}
+				<li class="item flexrow" data-item-uuid="{{ spell.uuid }}">
+					<div class="item-name">{{{ anchor }}}</div>
+					<div class="item-controls flexrow">
+						<button type="button" class="link-button" data-action="delete" data-tooltop="BF.SPELLLIST.Action.Delete"
+						        aria-label="{{ localize 'BF.SPELLLIST.Action.Delete' }}">
+							<i class="fa-solid fa-trash" inert></i>
+						</button>
+					</div>
+				</li>
+			{{else}}
+				<li class="drop-area hint">
+					{{ localize "BF.SPELLLIST.DropHint" }}
+				</li>
+			{{/each}}
+		</ol>
+	</div>
+</form>

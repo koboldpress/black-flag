@@ -1,0 +1,41 @@
+.journal-entry-page.spells:not(.sheet) {
+	.grouping {
+		font-size: var(--font-size-12);
+		select {
+			block-size: 1.75em;
+			margin-inline-start: 4px;
+		}
+	}
+
+	ul.spells {
+		padding-inline-start: 0;
+		list-style: none;
+		li {
+			padding-block-end: 2px;
+			.content-link > i { display: none; }
+		}
+	}
+}
+
+.journal-entry-page.sheet.spell-list {
+	min-block-size: 450px;
+	min-inline-size: 550px;
+
+	form {
+		display: grid;
+		grid-template-columns: auto 250px;
+		overflow: hidden;
+
+		> .right { overflow-y: auto; }
+		h3 { margin-block-start: 1rem; }
+		.editor { margin-inline-end: .5rem; }
+
+		.items-list {
+			margin-block-end: 1em;
+			margin-inline-end: 10px;
+			padding-inline-start: 0;
+			list-style: none;
+			.item-controls { flex: 0; }
+		}
+	}
+}
