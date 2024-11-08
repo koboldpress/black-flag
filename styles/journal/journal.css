@@ -64,9 +64,12 @@
 		font-weight: 400;
 	}
 
-	:is(h1, h2, h3, h4, h5, h6):not(:first-child) {
-		margin-block-start: 1rem;
-		margin-block-end: 0;
+	:is(h1, h2, h3, h4, h5, h6) {
+		&:not(:first-child) {
+			margin-block-start: 1rem;
+			margin-block-end: 0;
+		}
+		> .content-link i { display: none; }
 	}
 
 	aside {
@@ -193,6 +196,7 @@
 		&.image-grid-200 { --grid-column-size: 200px; }
 		&.image-grid-250 { --grid-column-size: 250px; }
 		&.image-grid-300 { --grid-column-size: 300px; }
+		&.align-top { align-items: start; }
 		.image-grid__double { grid-column: span 2; }
 	}
 

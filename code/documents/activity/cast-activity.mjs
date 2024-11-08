@@ -53,7 +53,7 @@ export default class CastActivity extends Activity {
 	 * @type {boolean}
 	 */
 	get displayInSpellbook() {
-		return this.item.system.magicAvailable && this.system.spell.spellbook;
+		return this.item.system.magicAvailable !== false && this.system.spell.spellbook;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

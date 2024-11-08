@@ -105,7 +105,7 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 			system: new TypeField({ modelLookup: type => this.metadata.dataModel ?? null }),
 			activation: new ActivationField({
 				override: new BooleanField(),
-				primary: new BooleanField({ required: false, initial: undefined })
+				primary: new BooleanField({ required: false, initial: true })
 			}),
 			consumption: new SchemaField({
 				targets: new ConsumptionTargetsField(),
