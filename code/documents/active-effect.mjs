@@ -97,6 +97,12 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 
 	/** @inheritDoc */
 	apply(doc, change) {
+		// Handle special actor flags
+		if (change.key.startsWith("flags.black-flag.")) {
+			const config = CONFIG.BlackFlag.actorFlags[change.key.replace("flags.black-flag.", "")];
+			if (config?.actorTypes.has(doc.type)) return this.constructor.applyField(doc, change, config.field);
+		}
+
 		// Properly handle formulas that don't exist as part of the data model
 		if (this.constructor.FORMULA_FIELDS.has(change.key)) {
 			const value = foundry.utils.getProperty(doc, change.key) ?? null;

@@ -13,7 +13,52 @@
       "min": "",
       "max": ""
     },
-    "advancement": {},
+    "advancement": {
+      "IHReYrn7VRdfH3S0": {
+        "type": "chooseFeatures",
+        "_id": "IHReYrn7VRdfH3S0",
+        "configuration": {
+          "allowDrops": true,
+          "choices": {
+            "10": 1
+          },
+          "pool": [],
+          "restriction": {
+            "category": ""
+          },
+          "type": "talent"
+        },
+        "level": {
+          "classIdentifier": ""
+        },
+        "icon": null,
+        "flags": {},
+        "title": "Talent",
+        "hint": "Immediately gain one talent of your choice from any talent list (that you meet the prerequisites for)."
+      },
+      "xJooi5X35tDi3uG8": {
+        "type": "property",
+        "_id": "xJooi5X35tDi3uG8",
+        "configuration": {
+          "changes": [
+            {
+              "key": "flags.black-flag.unrestrictedTalents",
+              "mode": 5,
+              "value": "true",
+              "priority": null
+            }
+          ]
+        },
+        "level": {
+          "value": 10,
+          "classIdentifier": "rogue"
+        },
+        "icon": null,
+        "flags": {},
+        "title": "Jack of All Trades",
+        "hint": "When you gain a new talent, you can choose it from any talent list."
+      }
+    },
     "description": {
       "value": "<p>When you gain a new talent, you can choose it from any talent list. Immediately gain one talent of your choice (that you meet the prerequisites for) when you gain this feature.</p>",
       "source": {}
@@ -41,10 +86,10 @@
   "flags": {},
   "_stats": {
     "systemId": "black-flag",
-    "systemVersion": "0.9.026",
-    "coreVersion": "12.328",
+    "systemVersion": "0.10.051",
+    "coreVersion": "12.331",
     "createdTime": 1715739833600,
-    "modifiedTime": 1715740458733,
+    "modifiedTime": 1731106748194,
     "lastModifiedBy": "blackflag0000000",
     "duplicateSource": null
   },

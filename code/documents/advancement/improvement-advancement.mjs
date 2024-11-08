@@ -238,14 +238,19 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 	 * @returns {BlackFlagItem[]}
 	 */
 	async choices() {
-		const subclass = this.actor.system.progression.classes[this.item.identifier].subclass;
-		const expandedTalentList = subclass?.system.advancement.byType("expandedTalentList")[0];
-		const filter = {
-			k: "system.type.category",
-			o: "in",
-			v: new Set([...this.configuration.talentList, ...(expandedTalentList?.configuration.talentList ?? [])])
-		};
-		return ((await Search.compendiums(Item, { type: "talent", filters: [filter], index: false })) ?? []).filter(
+		let filters;
+		if (!this.actor.getFlag(game.system.id, "unrestrictedTalents")) {
+			const subclass = this.actor.system.progression.classes[this.item.identifier].subclass;
+			const expandedTalentList = subclass?.system.advancement.byType("expandedTalentList")[0];
+			filters = [
+				{
+					k: "system.type.category",
+					o: "in",
+					v: new Set([...this.configuration.talentList, ...(expandedTalentList?.configuration.talentList ?? [])])
+				}
+			];
+		}
+		return ((await Search.compendiums(Item, { type: "talent", filters, index: false })) ?? []).filter(
 			i => i.system.restriction?.allowMultipleTimes || !this.actor?.sourcedItems.get(i.uuid)?.size
 		);
 	}

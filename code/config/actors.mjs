@@ -452,3 +452,27 @@ export const xpForCR = [
 	135000, // CR 29
 	155000 // CR 30
 ];
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+/*                         Flags                         */
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * @typedef {ActorFlagConfiguration}
+ * @property {Set<string>} actorTypes - Types of actors to which this flag can be applied.
+ * @property {DataField} field - Foundry data field that controls the data format.
+ */
+
+/**
+ * Special actor flags.
+ * @enum {ActorFlagConfiguration}
+ */
+export const actorFlags = {
+	unrestrictedTalents: {
+		actorTypes: new Set(["pc"]),
+		field: new foundry.data.fields.BooleanField({
+			label: "BF.FLAG.UnrestrictedTalents.label",
+			hint: "BF.FLAG.UnrestrictedTalents.hint"
+		})
+	}
+};
