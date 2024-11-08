@@ -119,7 +119,7 @@ function createPassiveTag(label, dataset) {
 
 /**
  * Create a rollable link with a request section for GMs.
- * @param {string} label - Label to display
+ * @param {HTMLElement|string} label - Label to display
  * @param {object} dataset - Data that will be added to the link for the rolling method.
  * @returns {HTMLElement}
  */
@@ -127,7 +127,8 @@ function createRequestLink(label, dataset) {
 	const span = document.createElement("span");
 	span.classList.add("roll-link-group");
 	_addDataset(span, dataset);
-	span.insertAdjacentElement("afterbegin", createRollLink(label));
+	if (label instanceof HTMLElement) span.insertAdjacentElement("afterbegin", label);
+	else span.insertAdjacentHTML("afterbegin", label);
 
 	// Add chat request link for GMs
 	if (game.user.isGM) {
@@ -409,7 +410,7 @@ function createRollLabel(config) {
 			}
 			break;
 		case "ability-save":
-			label = (ability ?? config.ability).toUpperCase();
+			label = (ability || config.ability)?.toUpperCase?.() ?? "";
 			if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
 			label = game.i18n.format(`BF.Enricher.Save.${longSuffix}`, { save: label });
 			break;
@@ -529,7 +530,7 @@ async function enrichCheck(config, label, options) {
 	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check";
 	label ??= createRollLabel(config);
 	if (config.passive) return createPassiveTag(label, config);
-	return createRequestLink(label, config);
+	return createRequestLink(createRollLink(label), config);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -577,24 +578,35 @@ async function enrichSave(config, label, options) {
 		else config[value] = true;
 	}
 
+	if (foundry.utils.getType(config.ability) === "string") config.ability = [config.ability];
 	if (!config.ability) {
 		const { ability, dc, activity } = options.relativeTo?.getSaveDetails?.(config) ?? {};
-		// TODO: Update to support multiple abilities
-		config.ability = foundry.utils.getType(ability) === "Set" ? ability.first() : ability;
+		config.ability = foundry.utils.getType(ability) === "Set" ? Array.from(ability) : [ability];
 		config.dc ??= dc;
 		if (activity) config.activity = activity.uuid;
 	}
 
-	const abilityConfig = CONFIG.BlackFlag.enrichment.lookup.abilities[slugify(config.ability)];
-	if (!abilityConfig) {
-		log(`Ability ${config.ability} not found while enriching ${config._input}.`, { level: "warn" });
-		return null;
-	}
+	config.ability = config.ability?.map(a => slugify(a)).filter(a => a in CONFIG.BlackFlag.enrichment.lookup.abilities);
+	if (!config.ability.length) config.ability.push("");
 
 	if (config.dc && !Number.isNumeric(config.dc)) config.dc = simplifyBonus(config.dc, options.rollData ?? {});
 
 	config.rollAction = "ability-save";
-	return createRequestLink(label || createRollLabel(config), config);
+	if (label) label = createRollLink(label);
+	if (!label && config.ability?.length < 2) label = createRollLink(createRollLabel(config));
+	else {
+		const abilities = config.ability.map(
+			ability =>
+				createRollLink(CONFIG.BlackFlag.abilities.localizedAbbreviations[ability].toUpperCase(), { ...config, ability })
+					.outerHTML
+		);
+		label = game.i18n.getListFormatter({ type: "disjunction" }).format(abilities);
+		const showDC = config.dc && !config.hideDC;
+		if (showDC) label = game.i18n.format("BF.Enricher.DC.Phrase", { dc: config.dc, check: label });
+		label = game.i18n.format(`BF.Enricher.Save.${config.format === "long" ? "Long" : "Short"}`, { save: label });
+	}
+
+	return createRequestLink(label, config);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -606,14 +618,28 @@ async function enrichSave(config, label, options) {
  */
 async function requestCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
+	const buttons = [];
+
+	const abilities = JSON.parse(target.dataset.ability);
+	if (abilities?.length)
+		abilities.forEach(ability =>
+			buttons.push({
+				visibleLabel: createRollLabel({ ...target.dataset, ability, format: "long", icon: true }),
+				hiddenLabel: createRollLabel({ ...target.dataset, ability, format: "long", icon: true, hideDC: true }),
+				dataset: { ...target.dataset, ability, action: "rollRequest" }
+			})
+		);
+	else
+		buttons.push({
+			visibleLabel: createRollLabel({ ...target.dataset, format: "long", icon: true }),
+			hiddenLabel: createRollLabel({ ...target.dataset, format: "long", icon: true, hideDC: true }),
+			dataset: { ...target.dataset, action: "rollRequest" }
+		});
+
 	const MessageClass = getDocumentClass("ChatMessage");
 	const chatData = {
 		user: game.user.id,
-		content: await renderTemplate("systems/black-flag/templates/chat/request-card.hbs", {
-			buttonLabel: createRollLabel({ ...target.dataset, format: "long", icon: true }),
-			hiddenLabel: createRollLabel({ ...target.dataset, format: "long", icon: true, hideDC: true }),
-			dataset: { ...target.dataset, action: "rollRequest" }
-		}),
+		content: await renderTemplate("systems/black-flag/templates/chat/request-card.hbs", { buttons }),
 		flavor: game.i18n.localize("BF.Enricher.Request.Title"),
 		speaker: MessageClass.getSpeaker({ user: game.user })
 	};
@@ -629,12 +655,6 @@ async function requestCheckSave(event) {
  */
 async function rollCheckSave(event) {
 	const target = event.target.closest("[data-roll-action]");
-	const { activity: activityUuid } = target.dataset;
-
-	if (activityUuid) {
-		const activity = await fromUuid(activityUuid);
-		if (activity) return activity.rollSavingThrow();
-	}
 
 	target.disabled = true;
 	try {
