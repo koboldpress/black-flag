@@ -9,9 +9,11 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 	static DEFAULT_OPTIONS = {
 		classes: ["choose-features", "two-column"],
 		position: {
-			width: 580
+			width: 640
 		}
 	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
 	static PARTS = {
@@ -40,8 +42,9 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
-		await super._preparePartContext(partId, context, options);
+		context = { ...(await super._preparePartContext(partId, context, options)) };
 		if (partId === "details") return await this._prepareDetailsContext(context, options);
+		if (partId === "levels") return await this._prepareLevelsContext(context, options);
 		return context;
 	}
 
@@ -79,6 +82,22 @@ export default class ChooseFeaturesConfig extends GrantFeaturesConfig {
 			};
 		}
 
+		return context;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Prepare the levels list.
+	 * @param {ApplicationRenderContext} context - Shared context provided by _prepareContext.
+	 * @param {HandlebarsRenderOptions} options - Options which configure application rendering behavior.
+	 * @returns {Promise<ApplicationRenderContext>}
+	 */
+	async _prepareLevelsContext(context, options) {
+		context.choices = Object.entries(context.levels).reduce((obj, [level, label]) => {
+			obj[level] = { label, ...this.advancement.configuration.choices[level] };
+			return obj;
+		}, {});
 		return context;
 	}
 

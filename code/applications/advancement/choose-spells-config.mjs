@@ -13,6 +13,8 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 		}
 	};
 
+	/* <><><><> <><><><> <><><><> <><><><> */
+
 	/** @override */
 	static PARTS = {
 		config: {
@@ -44,7 +46,7 @@ export default class ChooseSpellsConfig extends ChooseFeaturesConfig {
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context, options) {
-		await super._preparePartContext(partId, context, options);
+		context = { ...(await super._preparePartContext(partId, context, options)) };
 		if (partId === "spellConfig") return await GrantSpellsConfig._prepareSpellConfigContext(context, options);
 		if (partId === "restrictions") return await this._prepareRestrictionsContext(context, options);
 		return context;

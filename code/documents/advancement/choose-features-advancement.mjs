@@ -81,7 +81,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	 * @returns {number}
 	 */
 	choicesRequired(level) {
-		return (this.configuration.choices[level] ?? 0) - (this.value.added?.[level]?.length ?? 0);
+		return (this.configuration.choices[level]?.count ?? 0) - (this.value.added?.[level]?.length ?? 0);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -95,13 +95,12 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 
 	/** @override */
 	titleForLevel(levels, { flow = false } = {}) {
-		const choiceCount = this.configuration.choices[this.relavantLevel(levels)];
-		if (!choiceCount) return this.title;
-		return `${this.title} <span class="choice-count">(${game.i18n
-			.format("BF.Advancement.ChooseFeatures.Choose", {
-				number: choiceCount
-			})
-			.toLowerCase()})</span>`;
+		const data = this.configuration.choices[this.relavantLevel(levels)] ?? {};
+		let tag;
+		if (data.count) tag = game.i18n.format("BF.Advancement.ChooseFeatures.Choose", { number: data.count });
+		else if (data.replacement) tag = game.i18n.localize("BF.Advancement.ChooseFeatures.Replacement.Title");
+		else return this.title;
+		return `${this.title} <span class="choice-count">(${tag.toLowerCase()})</span>`;
 		// TODO: Use type & restriction to auto-generate title
 		// Then display as "Choose _" in advancement list and "_ (choose 1)" in flow
 	}

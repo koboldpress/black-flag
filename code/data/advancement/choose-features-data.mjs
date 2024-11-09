@@ -1,12 +1,20 @@
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * Configuration data for choice levels.
+ *
+ * @typedef {object} ChoiceLevelConfiguration
+ * @property {number} count         Number of items a player can select at this level.
+ * @property {boolean} replacement  Can a player replace previous selections at this level?
+ */
 
 /**
  * Configuration data for the Choose Features advancement.
  *
  * @property {boolean} allowDrops - Allow player to drop items not in the pool.
- * @property {Record<number, number>} choices - Choices presented at each level.
+ * @property {Record<number, ChoiceLevelConfiguration>} choices - Choices presented at each level.
  * @property {FeatureGrantConfiguration[]} pool - Items to present as choices.
  * @property {object} restriction
  * @property {string} restriction.category - Category of allowed items (e.g. class or race).
@@ -17,31 +25,33 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			allowDrops: new BooleanField({
-				initial: true,
-				label: "BF.Advancement.Config.AllowDrops.Label",
-				hint: "BF.Advancement.Config.AllowDrops.Hint"
-			}),
-			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
-				label: "BF.Advancement.ChooseFeatures.Choices.Label",
-				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
-			}),
-			pool: new ArrayField(
+			allowDrops: new BooleanField({ initial: true }),
+			choices: new MappingField(
 				new SchemaField({
-					uuid: new StringField({ blank: false, nullable: false })
-				}),
-				{ label: "DOCUMENT.Items" }
+					count: new NumberField({ min: 1, integer: true }),
+					replacement: new BooleanField()
+				})
 			),
+			pool: new ArrayField(new SchemaField({ uuid: new StringField({ blank: false, nullable: false }) })),
 			restriction: new SchemaField({
-				category: new StringField({ label: "BF.Feature.Category.Label" }),
-				type: new StringField({ label: "BF.Feature.Type.Label" })
+				category: new StringField(),
+				type: new StringField()
 			}),
-			type: new StringField({
-				blank: false,
-				initial: "feature",
-				label: "BF.Advancement.ChooseFeatures.Type.Label"
-			})
+			type: new StringField({ blank: false, initial: "feature" })
 		};
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*            Data Migration           */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static migrateData(source) {
+		// Added in 0.10.051
+		if ("choices" in source)
+			Object.entries(source.choices).forEach(([k, c]) => {
+				if (foundry.utils.getType(c) === "number") source.choices[k] = { count: c };
+			});
 	}
 }
 
@@ -60,6 +70,7 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
  * Value data for the Choose Features advancement.
  *
  * @property {Record<number, GrantedFeatureData[]>} added - Features chosen at each level.
+ * @property {Record<number, ReplacedFeatureData>} replaced - Information on items replaced at each level.
  */
 export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
@@ -73,6 +84,13 @@ export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
 					})
 				),
 				{ required: false, initial: undefined }
+			),
+			replaced: new MappingField(
+				new SchemaField({
+					level: new NumberField({ integer: true, min: 0 }),
+					original: new DocumentIdField(),
+					replacement: new DocumentIdField()
+				})
 			)
 		};
 	}

@@ -2,15 +2,30 @@
 	<legend class="hinted-label" data-tooltip="BF.Advancement.ChooseFeatures.Choices.Hint">
 		{{ localize "BF.Advancement.ChooseFeatures.Choices.Label" }}
 	</legend>
-	<ol class="level-list">
-		{{#each levels as |label level|}}
-			<li class="level">
-				<label>
-					<span>{{ label }}</span>
-					{{ numberInput (lookup ../configuration.choices level) placeholder="0"
-												 name=(concat "configuration.choices." level) min=1 step=1 }}
-				</label>
-			</li>
-		{{/each}}
-	</ol>
+	<table class="fieldset-table">
+		<thead>
+			<tr>
+				<th class="level">{{ localize "BF.Level.Abbreviation" }}</th>
+				<th class="choices" id="{{ partId }}-choices">{{ localize "BF.Advancement.ChooseFeatures.Choices.Label" }}</th>
+				<th class="replacement" id="{{ partId }}-replacement">
+					<i class="fa-solid fa-shuffle" data-tooltip="BF.Advancement.ChooseFeatures.Replacement.Allow"
+					   aria-label="{{ localize 'BF.Advancement.ChooseFeatures.Replacement.Allow' }}"></i>
+				</th>
+		</thead>
+		<tbody>
+			{{#each choices}}
+				<tr>
+					<td>{{ label }}</td>
+					<td>
+						<input type="number" name="configuration.choices.{{ @key }}.count" value="{{ count }}" placeholder="0"
+									 min="1" step="1" aria-labelledby="{{ ../partId }}-choices">
+					</td>
+					<td>
+						<input type="checkbox" name="configuration.choices.{{ @key }}.replacement" {{ checked replacement }}
+									 aria-labelledby="{{ ../partId }}-replacement">
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </fieldset>

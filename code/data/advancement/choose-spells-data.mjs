@@ -1,13 +1,14 @@
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 import { SpellConfigurationData } from "./grant-spells-data.mjs";
 
-const { ArrayField, BooleanField, EmbeddedDataField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, NumberField, SchemaField, StringField } =
+	foundry.data.fields;
 
 /**
  * Configuration data for the Choose Spells advancement.
  *
  * @property {boolean} allowDrops - Allow player to drop spells not in the pool.
- * @property {Record<number, number>} choices - Choices presented at each level.
+ * @property {Record<number, ChoiceLevelConfiguration>} choices - Choices presented at each level.
  * @property {FeatureGrantConfiguration[]} pool - Spells to present as choices.
  * @property {object} restriction
  * @property {boolean} restriction.allowCantrips - Allow cantrips to be selected if "Any Circle" is set.
@@ -27,27 +28,20 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
 	static defineSchema() {
 		return {
-			allowDrops: new BooleanField({
-				initial: true,
-				label: "BF.Advancement.Config.AllowDrops.Label",
-				hint: "BF.Advancement.Config.AllowDrops.Hint"
-			}),
-			choices: new MappingField(new NumberField({ min: 1, integer: true }), {
-				label: "BF.Advancement.ChooseFeatures.Choices.Label",
-				hint: "BF.Advancement.ChooseFeatures.Choices.Hint"
-			}),
-			pool: new ArrayField(
+			allowDrops: new BooleanField({ initial: true }),
+			choices: new MappingField(
 				new SchemaField({
-					uuid: new StringField({ blank: false, nullable: false })
-				}),
-				{ label: "DOCUMENT.Items" }
+					count: new NumberField({ min: 1, integer: true }),
+					replacement: new BooleanField()
+				})
 			),
+			pool: new ArrayField(new SchemaField({ uuid: new StringField({ blank: false, nullable: false }) })),
 			restriction: new SchemaField({
 				allowCantrips: new BooleanField(),
 				allowRituals: new StringField(),
-				circle: new NumberField({ initial: -1, label: "BF.Spell.Circle.Label" }),
+				circle: new NumberField({ initial: -1 }),
 				exactCircle: new BooleanField({ initial: true }),
-				source: new StringField({ label: "BF.Spell.Source.Label" })
+				source: new StringField()
 			}),
 			spell: new EmbeddedDataField(SpellConfigurationData)
 		};
@@ -73,6 +67,12 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 		if (foundry.utils.getType(source.restriciton?.allowRituals) === "boolean") {
 			source.restriction.allowRituals = source.restriction.allowRituals ? "allow" : "";
 		}
+
+		// Added in 0.10.051
+		if ("choices" in source)
+			Object.entries(source.choices).forEach(([k, c]) => {
+				if (foundry.utils.getType(c) === "number") source.choices[k] = { count: c };
+			});
 	}
 }
 
@@ -83,6 +83,7 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
  *
  * @property {string} ability - Ability to assign if applicable.
  * @property {Record<number, GrantedSpellData[]>} added - Spells chosen at each level.
+ * @property {Record<number, ReplacedFeatureData>} replaced - Information on items replaced at each level.
  */
 export class ChooseSpellsValueData extends foundry.abstract.DataModel {
 	/** @inheritDoc */
@@ -98,6 +99,13 @@ export class ChooseSpellsValueData extends foundry.abstract.DataModel {
 					})
 				),
 				{ required: false, initial: undefined }
+			),
+			replaced: new MappingField(
+				new SchemaField({
+					level: new NumberField({ integer: true, min: 0 }),
+					original: new DocumentIdField(),
+					replacement: new DocumentIdField()
+				})
 			)
 		};
 	}

@@ -234,7 +234,7 @@ img.icon, figure.icon {
 .fieldset-table, .application .fieldset-table {
 	inline-size: unset;
 	margin-block: 0;
-	margin-inline: -0.5rem;
+	margin-inline: calc(var(--fieldset-padding, .5rem) * -1);
 	border: none;
 	border-radius: 0;
 	background: none;
