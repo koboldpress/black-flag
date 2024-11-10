@@ -112,6 +112,7 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 		const items = this.value.added?.[this.relavantLevel(levels)];
 		if (!items || !flow) return this.hint ?? "";
 		return Object.values(items).reduce((html, data) => html + linkForUUID(data.uuid), "");
+		// TODO: Cross out replaced features
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -129,9 +130,31 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	async apply(levels, data, { initial = false, render = true } = {}) {
 		if (initial || !data?.choices?.length) return;
 		const level = this.relavantLevel(levels);
+
 		const existing = foundry.utils.getProperty(this.value._source, this.storagePath(level)) ?? [];
 		const added = await this.createItems(data.choices, { added: existing });
-		return await this.actor.update({ [`${this.valueKeyPath}.${this.storagePath(level)}`]: added }, { render });
+		const valueData = { [`${this.valueKeyPath}.${this.storagePath(level)}`]: added };
+
+		if (!this.configuration.choices[level]?.replacement) data.replaces = null;
+		const original = this.actor.items.get(data.replaces);
+		if (added.length && original) {
+			const replacedLevel = Object.entries(this.value.added)
+				.reverse()
+				.reduce((level, [l, added]) => {
+					if (added.find(a => a.document === original) && Number(l) > level) return Number(l);
+					return level;
+				}, -Infinity);
+			if (Number.isFinite(replacedLevel)) {
+				await this.actor.deleteEmbeddedDocuments("Item", [data.replaces], { render: false });
+				valueData[`${this.valueKeyPath}.replaced.${level}`] = {
+					level: replacedLevel,
+					original: original.id,
+					replacement: added[0].document
+				};
+			}
+		}
+
+		return await this.actor.update(valueData, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -139,10 +162,22 @@ export default class ChooseFeaturesAdvancement extends GrantFeaturesAdvancement 
 	/** @inheritDoc */
 	async reverse(levels, data, { render = true } = {}) {
 		if (!data) return super.reverse(levels);
-		const keyPath = this.storagePath(this.relavantLevel(levels));
+		const level = this.relavantLevel(levels);
+
+		const keyPath = this.storagePath(level);
 		const addedCollection = foundry.utils.getProperty(this.value._source, keyPath).filter(a => a.document !== data);
 		await this.actor.deleteEmbeddedDocuments("Item", [data], { render: false });
-		return await this.actor.update({ [`${this.valueKeyPath}.${keyPath}`]: addedCollection }, { render });
+		const valueData = { [`${this.valueKeyPath}.${keyPath}`]: addedCollection };
+
+		const replaced = this.value.replaced[level];
+		const uuid = this.value._source.added?.[replaced?.level]?.find(d => d.document === replaced.original)?.uuid;
+		if (uuid) {
+			const itemData = await this.createItemData(uuid, { data, id: replaced.original });
+			await this.actor.createEmbeddedDocuments("Item", [itemData], { keepId: true, render: false });
+			valueData[`${this.valueKeyPath}.replaced.-=${level}`] = null;
+		}
+
+		return await this.actor.update(valueData, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

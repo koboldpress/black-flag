@@ -359,7 +359,6 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 						_id: id,
 						folder: null,
 						sort,
-						// TODO: Set proper sort order rather than just removing it
 						"flags.black-flag.sourceId": uuid,
 						"flags.black-flag.advancementOrigin": advancementOrigin,
 						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin

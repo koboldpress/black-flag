@@ -15,10 +15,21 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
+	async getData() {
+		const context = await super.getData();
 		const level = this.advancement.relavantLevel(this.levels);
-		context.chosen = (this.advancement.value.added?.[level] ?? []).map(a => a.document);
+		const config = this.advancement.configuration.choices[level];
+		context.chosen = [];
+		for (const data of this.advancement.value.added?.[level] ?? []) {
+			const doc = data.document ?? (await fromUuid(data.uuid));
+			context.chosen.push({
+				anchor: doc.toAnchor().outerHTML,
+				id: doc.id,
+				replaced: !data.document,
+				showDelete: (context.modes?.editing || context.needsConfiguration) && !!data.document
+			});
+		}
+		context.replacementAvailable = config?.replacement && !this.advancement.value.replaced?.[level];
 		return context;
 	}
 
@@ -41,17 +52,23 @@ export default class ChooseFeaturesFlow extends AdvancementFlow {
 
 	/** @override */
 	async _updateObject(event, formData) {
-		if (event.submitter?.dataset.action === "select-choice") {
+		const isReplacement = event.submitter?.dataset.action === "replace-choice";
+		if (event.submitter?.dataset.action === "select-choice" || isReplacement) {
 			let choice;
+			let replaces;
 			try {
-				const promise = new Promise((resolve, reject) => {
-					new ChooseFeaturesDialog(this, { resolve, reject }).render(true);
-				});
-				choice = await promise;
+				({ choice, replaces } = await new Promise((resolve, reject) => {
+					new ChooseFeaturesDialog(this, {
+						isReplacement,
+						level: this.advancement.relavantLevel(this.levels),
+						resolve,
+						reject
+					}).render(true);
+				}));
 			} catch (err) {
 				return;
 			}
-			return this.advancement.apply(this.levels, { choices: [choice] });
+			return this.advancement.apply(this.levels, { choices: [choice], replaces });
 		}
 	}
 }

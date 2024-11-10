@@ -2,9 +2,9 @@
  * Dialog that presents a list of features from which to choose.
  */
 export default class ChooseFeaturesDialog extends FormApplication {
-	constructor(advancementFlow, responses, options = {}) {
+	constructor(advancementFlow, { resolve, reject, ...options } = {}) {
 		super(advancementFlow, options);
-		this.responses = responses;
+		this.responses = { resolve, reject };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -24,7 +24,9 @@ export default class ChooseFeaturesDialog extends FormApplication {
 			dragDrop: [{ dropSelector: ".drop-target" }],
 			template: "systems/black-flag/templates/advancement/choose-features-dialog.hbs",
 			width: "auto",
-			height: "auto"
+			height: "auto",
+			isReplacement: false,
+			level: null
 		});
 	}
 
@@ -55,7 +57,9 @@ export default class ChooseFeaturesDialog extends FormApplication {
 			if (type) type = `${type}[one]`;
 		}
 		if (!type) type = CONFIG.Item.typeLabels[configType];
-		return game.i18n.format("BF.ConceptSelection.Title", { type: game.i18n.localize(type) });
+		return game.i18n.format(`BF.ConceptSelection.${this.options.isReplacement ? "Replace" : ""}Title`, {
+			type: game.i18n.localize(type)
+		});
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -73,6 +77,18 @@ export default class ChooseFeaturesDialog extends FormApplication {
 			context.dropLabel = game.i18n.format("BF.Advancement.ChooseFeatures.Drop", {
 				type: game.i18n.localize(`BF.Item.Type.${this.advancement.configuration.type.capitalize()}[one]`).toLowerCase()
 			});
+		if (this.options.isReplacement) {
+			context.replacements = [];
+			for (const level of Array.fromRange(this.options.level - 1, 1)) {
+				const data = this.advancement.value.added[level];
+				if (!data?.length) continue;
+				const replaced = Object.values(this.advancement.value.replaced ?? {}).filter(r => r.level === level);
+				for (const added of data) {
+					if (!added.document || replaced.find(r => r.original === added.id)) continue;
+					context.replacements.push({ value: added.document.id, label: added.document.name });
+				}
+			}
+		}
 		return context;
 	}
 
@@ -107,9 +123,21 @@ export default class ChooseFeaturesDialog extends FormApplication {
 		for (const element of html.querySelectorAll("button.choose")) {
 			element.addEventListener("click", event => {
 				event.preventDefault();
-				this.close({ choosen: event.target.closest("[data-uuid]").dataset.uuid });
+				this.handleChoice(event.target.closest("[data-uuid]").dataset.uuid);
 			});
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Handle choosing a specific option.
+	 * @param {string} uuid - UUID of the choice made.
+	 */
+	async handleChoice(uuid) {
+		let replaces;
+		if (this.options.isReplacement) replaces = this.element[0].querySelector('[name="replaces"]').value;
+		this.close({ response: { choice: uuid, replaces } });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -117,7 +145,7 @@ export default class ChooseFeaturesDialog extends FormApplication {
 	/** @inheritDoc */
 	async close(options = {}) {
 		await super.close(options);
-		if (options.choosen) this.responses.resolve(options.choosen);
+		if (options.response) this.responses.resolve(options.response);
 		else this.responses.reject();
 	}
 
@@ -141,6 +169,6 @@ export default class ChooseFeaturesDialog extends FormApplication {
 			return ui.notifications.error(game.i18n.localize("BF.Advancement.ChooseFeatures.Warning.PreviouslyChosen"));
 		}
 
-		this.close({ choosen: item.uuid });
+		this.handleChoice(item.uuid);
 	}
 }

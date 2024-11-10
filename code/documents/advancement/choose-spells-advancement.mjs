@@ -73,18 +73,43 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 			else addUuids.add(uuid);
 		}
 		const added = [
-			...(await this.createItems(addUuids, { added: existing, data })),
+			...(await this.createItems(Array.from(addUuids), { added: existing, data })),
 			...(await GrantSpellsAdvancement.prototype.updateItems.call(this, updateIds, { data }))
 		];
-		return await this.actor.update(
-			{
-				[this.valueKeyPath]: {
-					ability: data.ability,
-					[this.storagePath(level)]: added
-				}
-			},
-			{ render }
-		);
+		const valueData = { [this.valueKeyPath]: { ability: data.ability, [this.storagePath(level)]: added } };
+
+		if (!this.configuration.choices[level]?.replacement) data.replaces = null;
+		const original = this.actor.items.get(data.replaces);
+		if (added.length && original) {
+			const replacedLevel = Object.entries(this.value.added)
+				.reverse()
+				.reduce((level, [l, added]) => {
+					if (added.find(a => a.document === original) && Number(l) > level) return Number(l);
+					return level;
+				}, -Infinity);
+			if (Number.isFinite(replacedLevel)) {
+				const entry = this.value._source.added[replacedLevel];
+				if (entry.modified)
+					await this.actor.updateEmbeddedDocuments(
+						"Item",
+						[
+							{
+								_id: data.replaces,
+								...this.configuration.spell.getReverseChanges(original, data)
+							}
+						],
+						{ render: false }
+					);
+				else await this.actor.deleteEmbeddedDocuments("Item", [data.replaces], { render: false });
+				valueData[`${this.valueKeyPath}.replaced.${level}`] = {
+					level: replacedLevel,
+					original: original.id,
+					replacement: added[0].document
+				};
+			}
+		}
+
+		return await this.actor.update(valueData, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -92,23 +117,44 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 	/** @inheritDoc */
 	async reverse(levels, data, { render = true } = {}) {
 		if (!data) return GrantSpellsAdvancement.prototype.reverse.call(this, levels);
-		const keyPath = this.storagePath(this.relavantLevel(levels));
+		const level = this.relavantLevel(levels);
+
+		const keyPath = this.storagePath(level);
 		let addedCollection = foundry.utils.getProperty(this.value._source, keyPath);
 		const entry = addedCollection.find(a => a.document === data);
 		addedCollection = addedCollection.filter(a => a.document !== data);
 		if (entry.modified) {
 			await this.actor.updateEmbeddedDocuments(
 				"Item",
-				{
-					_id: data,
-					...this.configuration.spell.getReverseChanges(entry.document, data)
-				},
+				[
+					{
+						_id: data,
+						...this.configuration.spell.getReverseChanges(entry.document, data)
+					}
+				],
 				{ render: false }
 			);
 		} else {
 			await this.actor.deleteEmbeddedDocuments("Item", [data], { render: false });
 		}
-		return await this.actor.update({ [`${this.valueKeyPath}.${keyPath}`]: addedCollection }, { render });
+		const valueData = { [`${this.valueKeyPath}.${keyPath}`]: addedCollection };
+
+		const replaced = this.value.replaced[level];
+		const replacedEntry = this.value._source.added?.[replaced?.level]?.find(d => d.document === replaced.original);
+		if (replacedEntry) {
+			const existing = this.actor.items.get(replacedEntry.document);
+			if (existing) {
+				await GrantSpellsAdvancement.prototype.updateItems.call(this, [replacedEntry.document], {
+					data: { ability: this.value.ability }
+				});
+			} else {
+				const itemData = await this.createItemData(replacedEntry.uuid, { data, id: replaced.original });
+				await this.actor.createEmbeddedDocuments("Item", [itemData], { keepId: true, render: false });
+			}
+			valueData[`${this.valueKeyPath}.replaced.-=${level}`] = null;
+		}
+
+		return await this.actor.update(valueData, { render });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

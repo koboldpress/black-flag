@@ -1,4 +1,17 @@
 <form autocomplete="off" class="drop-target">
+	{{#if replacements.length}}
+		<section class="replacement">
+			<div class="form-group">
+				<label>{{ localize "BF.Advancement.ChooseFeatures.Replacement.Label" }}</label>
+				<div class="form-fields">
+					<select name="replaces">
+						{{ selectOptions replacements }}
+					</select>
+				</div>
+			</div>
+		</section>
+		<hr>
+	{{/if}}
 	{{#if advancement.hint}}
 		<p>{{ advancement.hint }}</p>
 	{{/if}}
@@ -6,7 +19,7 @@
 		<section class="option" data-uuid="{{ document.uuid }}">
 			<div class="info">
 				<header>
-					<h1 class="name">{{ document.name }}</h1>
+					<h1 class="name">{{ document.name }}</h1><!-- TODO: Shouldn't be an H1 -->
 					<div class="source">{{ system.description.source.label }}</div>
 				</header>
 				<div class="description">

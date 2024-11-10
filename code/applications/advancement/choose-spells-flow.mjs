@@ -15,8 +15,8 @@ export default class ChooseSpellsFlow extends ChooseFeaturesFlow {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	getData() {
-		const context = super.getData();
+	async getData() {
+		const context = await super.getData();
 		context.abilities = Array.from(this.advancement.configuration.spell.ability).reduce((obj, key) => {
 			obj[key] = CONFIG.BlackFlag.abilities.localized[key];
 			return obj;
