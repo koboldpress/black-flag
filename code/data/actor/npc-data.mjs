@@ -109,7 +109,8 @@ export default class NPCData extends ActorDataModel.mixin(
 					{
 						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
 						max: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
-						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" })
+						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
+						tempMax: new NumberField({ min: 0, integer: true })
 					},
 					{ label: "BF.HitPoint.Label[other]" }
 				),
@@ -229,6 +230,8 @@ export default class NPCData extends ActorDataModel.mixin(
 		const hp = this.attributes.hp;
 		hp.max ??= 0;
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
+		hp.baseMax = hp.max;
+		hp.max += hp.tempMax ?? 0;
 		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 
@@ -315,7 +318,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	async _preUpdateHP(changed, options, user) {
 		const changedMaxHP = foundry.utils.getProperty(changed, "system.attributes.hp.max");
 		if (changedMaxHP !== undefined) {
-			const maxHPDelta = changedMaxHP - this.attributes.hp.max;
+			const maxHPDelta = changedMaxHP - this.attributes.hp.baseMax;
 			foundry.utils.setProperty(changed, "system.attributes.hp.value", this.attributes.hp.value + maxHPDelta);
 		}
 	}

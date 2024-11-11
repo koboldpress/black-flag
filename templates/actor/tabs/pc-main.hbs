@@ -216,7 +216,7 @@
 			<div class="separator"></div>
 			<label class="max-hit-points">
 				<span class="light label">{{ localize "BF.HitPoint.Max.LabelShort" }}</span>
-				<span class="value">{{ system.attributes.hp.max }}</span>
+				<span class="value">{{ ifThen editable system.attributes.hp.baseMax system.attributes.hp.max }}</span>
 			</label>
 		</div>
 		{{#unless (and (not system.attributes.hp.value) system.attributes.hp.max)}}
@@ -225,6 +225,14 @@
 					<span class="light label">{{ localize "BF.HitPoint.Temp.LabelShort" }}</span>
 					<input class="value" type="text" name="system.attributes.hp.temp" value="{{ system.attributes.hp.temp }}">
 				</label>
+				{{#if editable}}
+					<div class="separator"></div>
+					<label class="temp-max-hit-points">
+						<span class="light label">{{ localize "BF.HitPoint.TempMax.LabelShort" }}</span>
+						<input class="value" type="text" name="system.attributes.hp.tempMax"
+						       value="{{ source.attributes.hp.tempMax }}">
+					</label>
+				{{/if}}
 			</div>
 		{{else}}
 			<div class="death-saves stat-block simple">

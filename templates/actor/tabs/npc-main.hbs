@@ -34,11 +34,11 @@
 			<span>{{ localize "BF.HitPoint.Label[other]" }}</span>
 			{{#if modes.editing}}
 				<span>{{ system.attributes.hp.value }}</span>
-				/
+				<span class="separator">/</span>
 				<input type="number" name="system.attributes.hp.max" value="{{ source.attributes.hp.max }}" step="1" min="0">
 			{{else}}
 				<input type="text" name="system.attributes.hp.value" value="{{ system.attributes.hp.value }}">
-				/
+				<span class="separator">/</span>
 				<span>{{ system.attributes.hp.max }}</span>
 			{{/if}}
 		</label>

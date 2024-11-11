@@ -113,8 +113,8 @@ export default class PCData extends ActorDataModel.mixin(
 					}),
 					override: new NumberField({ integer: true }),
 					temp: new NumberField({ min: 0, integer: true }),
+					tempMax: new NumberField({ min: 0, integer: true }),
 					value: new NumberField({ min: 0, integer: true })
-					// Temp max
 					// Multiplier
 				}),
 				initiative: new SchemaField({
@@ -502,8 +502,10 @@ export default class PCData extends ActorDataModel.mixin(
 
 			hp.max = base + levelBonus + overallBonus;
 		}
-
 		if (this.attributes.exhaustion >= 4) hp.max = Math.floor(hp.max * 0.5);
+
+		hp.baseMax = hp.max;
+		hp.max += hp.tempMax ?? 0;
 		hp.value = Math.clamp(hp.value, 0, hp.max);
 		hp.damage = hp.max - hp.value;
 	}
