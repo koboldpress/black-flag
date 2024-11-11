@@ -57,6 +57,7 @@ export function formatCR(value) {
  * @param {number} digits - Number of digits before the decimal point to display.
  * @param {boolean} ordinal - Produce an ordinal version of the number.
  * @param {boolean} sign - Should the sign always be displayed?
+ * @param {string} [signDisplay] - Override more specific sign display option.
  * @param {boolean} spelledOut - Should small numbers be spelled out?
  * @param {string} unit - What unit should be displayed?
  * @param {string} unitDisplay - Unit display style.
@@ -69,7 +70,8 @@ export function formatCR(value) {
  */
 function _prepareFormattingOptions(options) {
 	const formatterOptions = {};
-	if ( options.sign ) formatterOptions.signDisplay = "always";
+	if ( options.signDisplay ) formatterOptions.signDisplay = options.signDisplay;
+	else if ( options.sign ) formatterOptions.signDisplay = "always";
 	if ( options.decimals !== undefined ) {
 		formatterOptions.minimumFractionDigits = options.decimals;
 		formatterOptions.maximumFractionDigits = options.decimals;

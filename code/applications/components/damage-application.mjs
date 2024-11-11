@@ -103,7 +103,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
 		// Calculate damage to apply
 		const targetOptions = this.getTargetOptions(uuid);
-		const { temp, total, active } = this.calculateDamage(actor, targetOptions);
+		const { temp, tempMax, total, active } = this.calculateDamage(actor, targetOptions);
 
 		const types = [];
 		for (const [change, values] of Object.entries(active)) {
@@ -142,6 +142,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			<div class="calculated temp" data-tooltip="BF.HitPoint.Temp.LabelLong">
 				${temp}
 			</div>
+			<div class="calculated temp-max" data-tooltip="BF.HitPoint.TempMax.LabelLong">
+				${tempMax}
+			</div>
 			<menu class="damage-multipliers unlist"></menu>
 		`;
 
@@ -179,10 +182,12 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 		const types = ["resistance", "vulnerability", "immunity"];
 
 		let temp = 0;
+		let tempMax = 0;
 		let total = 0;
 		let active = { modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set() };
 		for (const damage of damages) {
 			if (damage.type === "temp") temp += damage.value;
+			if (damage.type === "max") tempMax += damage.rollType === "healing" ? -1 * damage.value : damage.value;
 			else total += damage.value;
 			types.forEach(t => {
 				if (damage.active[t]) active[t].add(damage.type);
@@ -199,7 +204,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			active.immunity = active.immunity.union(options.downgrade);
 		}
 
-		return { temp, total, active };
+		return { temp, tempMax, total, active };
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -234,15 +239,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 	 * @param {DamageApplicationOptions} options
 	 */
 	refreshListEntry(token, entry, options) {
-		const { temp, total } = this.calculateDamage(token, options);
+		const { temp, tempMax, total } = this.calculateDamage(token, options);
 		const calculatedDamage = entry.querySelector(".calculated.damage");
 		calculatedDamage.innerText = numberFormat(-total, { signDisplay: "exceptZero" });
 		calculatedDamage.classList.toggle("healing", total < 0);
-		calculatedDamage.dataset.tooltip = `BF.${total < 0 ? "Healing" : "Damage"}.Label`;
-		calculatedDamage.hidden = !total && !!temp;
+		calculatedDamage.dataset.tooltip = `BF.${total < 0 ? "Healing" : "DAMAGE"}.Label`;
+		calculatedDamage.hidden = !total && !!temp && !!tempMax;
 		const calculatedTemp = entry.querySelector(".calculated.temp");
-		calculatedTemp.innerText = temp;
+		calculatedTemp.innerText = numberFormat(-temp, { sign: true });
 		calculatedTemp.hidden = !temp;
+		const calculatedTempMax = entry.querySelector(".calculated.temp-max");
+		calculatedTempMax.innerText = numberFormat(-tempMax, { sign: true });
+		calculatedTempMax.classList.toggle("healing", tempMax < 0);
+		calculatedTempMax.hidden = !tempMax;
 
 		const pressedMultiplier = entry.querySelector('.multiplier-button[aria-pressed="true"]');
 		if (Number(pressedMultiplier?.dataset.multiplier) !== options.multiplier) {

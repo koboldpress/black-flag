@@ -228,21 +228,24 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (!damages) return this;
 
 		// Round damage towards zero
-		let { amount, temp } = damages.reduce(
+		let { amount, temp, tempMax } = damages.reduce(
 			(acc, d) => {
 				if (d.type === "temp") acc.temp += d.value;
+				else if (d.type === "max") acc.tempMax += d.rollType === "healing" ? -1 * d.value : d.value;
 				else acc.amount += d.value;
 				return acc;
 			},
-			{ amount: 0, temp: 0 }
+			{ amount: 0, temp: 0, tempMax: 0 }
 		);
 		amount = amount > 0 ? Math.floor(amount) : Math.ceil(amount);
+		if (tempMax < 0) amount += tempMax;
 
 		// Subtract from temp HP first & then from normal HP
 		const deltaTemp = amount > 0 ? Math.min(hp.temp, amount) : 0;
-		const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage, hp.value);
+		const deltaHP = Math.clamp(amount - deltaTemp, -hp.damage + tempMax, hp.value - tempMax);
 		const updates = {
 			"system.attributes.hp.temp": hp.temp - deltaTemp,
+			"system.attributes.hp.tempMax": hp.tempMax - tempMax,
 			"system.attributes.hp.value": hp.value - deltaHP,
 			"system.attributes.hp.damage": hp.damage + deltaHP
 		};

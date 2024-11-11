@@ -42,6 +42,13 @@ export default class HealActivity extends Activity {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @override */
+	get damageFlavor() {
+		return game.i18n.localize("BF.Healing.Label");
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
 	get hasDamage() {
 		return this.system.healing?.formula;
 	}
@@ -81,7 +88,12 @@ export default class HealActivity extends Activity {
 		this.rollDamage(
 			{ event: config.event },
 			{},
-			{ data: { "flags.black-flag.originatingMessage": results.message?.id } }
+			{
+				[`data.flags.${game.system.id}`]: {
+					originatingMessage: results.message?.id,
+					roll: { type: "healing" }
+				}
+			}
 		);
 	}
 
@@ -97,7 +109,7 @@ export default class HealActivity extends Activity {
 	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
 	static #rollHealing(event, target, message) {
-		this.rollDamage({ event });
+		this.rollDamage({ event }, {}, { [`data.flags.${game.system.id}.roll.type`]: "healing" });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
