@@ -110,7 +110,7 @@ export default class NPCData extends ActorDataModel.mixin(
 						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
 						max: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Max.LabelLong" }),
 						temp: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Temp.LabelLong" }),
-						tempMax: new NumberField({ min: 0, integer: true })
+						tempMax: new NumberField({ integer: true })
 					},
 					{ label: "BF.HitPoint.Label[other]" }
 				),

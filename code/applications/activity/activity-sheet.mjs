@@ -265,6 +265,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
 						{ value: "", label: "" },
 						...damageTypes,
 						{ rule: true },
+						{ value: "max", label: game.i18n.localize("BF.DAMAGE.Type.Max") },
 						{ value: "variable", label: game.i18n.localize("BF.DAMAGE.Type.Variable") }
 					],
 					variableTypeOptions: damageTypes.map(({ value, label }) => ({

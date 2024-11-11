@@ -113,7 +113,7 @@ export default class PCData extends ActorDataModel.mixin(
 					}),
 					override: new NumberField({ integer: true }),
 					temp: new NumberField({ min: 0, integer: true }),
-					tempMax: new NumberField({ min: 0, integer: true }),
+					tempMax: new NumberField({ integer: true }),
 					value: new NumberField({ min: 0, integer: true })
 					// Multiplier
 				}),
