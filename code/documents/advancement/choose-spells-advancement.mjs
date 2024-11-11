@@ -176,6 +176,7 @@ export default class ChooseSpellsAdvancement extends ChooseFeaturesAdvancement {
 	_validateItemType(item, { type, restriction, strict = true } = {}) {
 		GrantFeaturesAdvancement.prototype._validateItemType.call(this, item, { strict });
 		restriction ??= this.configuration.restriction;
+		restriction.circle = Number(restriction.circle);
 
 		// No specific circle restriction, check max circle for class/character
 		const circles = CONFIG.BlackFlag.spellCircles();
