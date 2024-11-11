@@ -258,7 +258,7 @@ export default class SpellcastingAdvancement extends Advancement {
 			const spells = await Search.compendiums(Item, {
 				type: "spell",
 				filters: [
-					{ k: "system.source", o: "has", v: "divine" },
+					{ k: "system.source", o: "has", v: this.configuration.source },
 					{ k: "system.circle.base", v: this.computeMaxCircle(level) },
 					{ o: "NOT", v: { k: "system.tags", o: "has", v: "ritual" } }
 				]
