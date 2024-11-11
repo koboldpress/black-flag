@@ -281,6 +281,7 @@ export const spellTags = {
 	},
 	ritual: {
 		label: "BF.Spell.Tag.Ritual.Label",
-		abbreviation: "BF.Spell.Ritual.Ritual.Abbreviation"
+		abbreviation: "BF.Spell.Tag.Ritual.Abbreviation"
 	}
 };
+localizeConfig(spellTags);

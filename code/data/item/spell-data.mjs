@@ -277,16 +277,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 	/** @inheritDoc */
 	get traits() {
 		const traits = [
-			// TODO: Source?
-			// TODO: School?
-			// TODO: Duration
-			// TODO: Components
-			// TODO: Range
-			// TODO: Area of effect
-			// TODO: Targets
+			this.associatedClass?.name,
+			CONFIG.BlackFlag.spellSchools.localized[this.school],
+			this.duration.units !== "instantaneous" ? this.duration.label : null,
+			...this.tags.map(t => CONFIG.BlackFlag.spellTags.localized[t])
 		];
 		const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "unit" });
-		return listFormatter.format(traits.filter(t => t).map(t => game.i18n.localize(t)));
+		return listFormatter.format(traits.filter(_ => _).map(t => game.i18n.localize(t)));
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
