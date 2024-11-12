@@ -196,11 +196,11 @@ export default class SpellcastingAdvancement extends Advancement {
 			stats.get(data.slot).learned += 1;
 		}
 
-		for (const data of stats.values()) {
+		for (const [type, data] of stats.entries()) {
 			data.total ??= 0;
 			data.learned ??= 0;
 			data.toLearn = Math.max(data.total - data.learned, 0);
-			if (data.toLearn) stats.needToLearn = true;
+			if (data.toLearn && type !== "replacement") stats.needToLearn = true;
 		}
 
 		return stats;

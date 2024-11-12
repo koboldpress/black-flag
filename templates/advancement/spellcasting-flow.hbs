@@ -2,10 +2,17 @@
   autocomplete="off" {{~#if accentColor}} style="--bf-item-color: {{ accentColor }};"{{/if}}>
 	<header>
 		{{> "blackFlag.advancement-name"}}
-		{{#if showDialogButton}}
+		{{#if showLearnSpells}}
 			<div class="advancement-actions">
 				<button type="submit" class="light-button" data-action="learn-spells">
 					{{ localize "BF.Advancement.Spellcasting.Action.LearnSpells" }}
+				</button>
+			</div>
+		{{else if showReplacement}}
+			<div class="advancement-actions">
+				<button type="submit" class="link-button" data-action="learn-spells">
+					<i class="fa-solid fa-shuffle" inert></i>
+					{{ localize "BF.Advancement.Spellcasting.Action.ReplaceSpell" }}
 				</button>
 			</div>
 		{{/if}}

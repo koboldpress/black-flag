@@ -20,7 +20,9 @@ export default class SpellcastingFlow extends AdvancementFlow {
 		const level = this.advancement.relavantLevel(this.levels);
 		const stats = this.advancement.statsForLevel(this.levels);
 		const validLevel = this.advancement.learnsSpellsAt(level) || this.advancement.replacesSpellAt(level);
-		context.showDialogButton = (validLevel && context.modes.editing) || stats.needToLearn;
+		context.showLearnSpells = (validLevel && context.modes.editing) || stats.needToLearn;
+		context.showReplacement =
+			!context.showLearnSpells && this.advancement.replacesSpellAt(level) && stats.get("replacement").toLearn;
 		return context;
 	}
 
@@ -29,11 +31,6 @@ export default class SpellcastingFlow extends AdvancementFlow {
 	/** @override */
 	async _updateObject(event, formData) {
 		const action = event.submitter.dataset.action;
-
-		if (action === "learn-spells") {
-			new SpellcastingDialog(this.advancement, this.levels).render(true);
-		} else {
-			// TODO: Deletion
-		}
+		if (action === "learn-spells") new SpellcastingDialog(this.advancement, this.levels).render(true);
 	}
 }
