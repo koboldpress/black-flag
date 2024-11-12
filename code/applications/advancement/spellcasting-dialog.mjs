@@ -16,18 +16,21 @@ export default class SpellcastingDialog extends FormApplication {
 		const stats = this.advancement.statsForLevel(levels);
 
 		const spellsBySlot = {};
-		const replacedSpells = new Set(this.advancement.value.replaced?.[level]?.map(s => s.replacement?.id));
 		for (const spell of this.advancement._getAddedSpells(this.levels)) {
-			const slot = replacedSpells.has(spell.document?.id) ? "replacement" : spell.slot;
-			spellsBySlot[slot] ??= [];
-			spellsBySlot[slot].push(spell.uuid);
+			spellsBySlot[spell.slot] ??= [];
+			spellsBySlot[spell.slot].push(spell.uuid);
 			this.existingSpells.delete(spell.uuid);
 		}
 
 		for (const [type, data] of stats) {
-			// TODO: Handle replacements
-			if (type === "replacement") continue;
-			this.slots.push(...Array.fromRange(data.total).map((s, i) => ({ type, selected: spellsBySlot[type]?.shift() })));
+			let total = data.total;
+			if (type === "replacement" && this.advancement.replacesSpellAt(level)) {
+				const replacedData = this.advancement.value.replaced?.[level];
+				const replaces = this.getReplacesSlot(replacedData?.level, replacedData?.original);
+				this.slots.push({ type, selected: spellsBySlot[type]?.shift(), replaces });
+			} else {
+				this.slots.push(...Array.fromRange(total).map((s, i) => ({ type, selected: spellsBySlot[type]?.shift() })));
+			}
 		}
 
 		// Begin fetching spells to display
@@ -64,6 +67,7 @@ export default class SpellcastingDialog extends FormApplication {
 	 */
 	static TYPE_LABELS = {
 		cantrips: "BF.Spell.Circle.Cantrip[one]",
+		replacement: "BF.Advancement.Spellcasting.Replacement.Slot",
 		rituals: "BF.Spell.Tag.Ritual.Label",
 		special: "BF.Item.Type.Spell[one]",
 		spells: "BF.Item.Type.Spell[one]",
@@ -127,6 +131,15 @@ export default class SpellcastingDialog extends FormApplication {
 	 * @property {string} type - Type of spell that can be added to the slot.
 	 * @property {string} selected - UUID for selected spell.
 	 * @property {string} [name] - Name to display for this slot.
+	 * @property {ReplacedSlotData} [replaces] - Data for the spell being replaced.
+	 */
+
+	/**
+	 * @typedef {object} ReplacedSlotData
+	 * @property {string} id - ID of the spell being replaced.
+	 * @property {number} level - Level of the spell that was replaced.
+	 * @property {string} type - Type of spell that can be added to the slot.
+	 * @property {string} uuid - UUID for selected spell.
 	 */
 
 	/**
@@ -160,9 +173,13 @@ export default class SpellcastingDialog extends FormApplication {
 	async getData(options = {}) {
 		const context = await super.getData(options);
 		if (!this.currentSlot) return context;
+		const level = this.advancement.relavantLevel(this.levels);
 
-		const filters = this.prepareFilters();
-		context.restrictions = this.prepareRestrictions(filters);
+		let type = this.currentSlot.type;
+		if (this.currentSlot.type === "replacement") type = this.currentSlot.replaces?.type ?? null;
+
+		const filters = this.prepareFilters(type);
+		if (filters) context.restrictions = this.prepareRestrictions(filters);
 
 		const otherSelected = new Set();
 		context.slots = this.slots.map((slot, index) => {
@@ -170,20 +187,49 @@ export default class SpellcastingDialog extends FormApplication {
 			return {
 				...slot,
 				name: slot.name ?? this.constructor.TYPE_LABELS[slot.type],
-				number: index + 1,
+				number: slot.type === "replacement" ? "?" : index + 1,
 				selected: index === this.selectedSlot,
 				spell: slot.selected ? fromUuidSync(slot.selected) : null
 			};
 		});
 
-		context.spells = (await this.allSpells).filter(
-			s => !this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters)
-		);
+		const replacedUuid = this.currentSlot.replaces?.uuid;
+		context.spells = filters
+			? (await this.allSpells).filter(
+					s => !this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters) && s.uuid !== replacedUuid
+				)
+			: [];
 		context.spells = context.spells.map(spell => ({
 			...spell,
 			disabled: this.currentSlot?.selected !== spell.uuid && otherSelected.has(spell.uuid),
 			selected: this.currentSlot?.selected === spell.uuid
 		}));
+
+		// All spells selected for this class at lower levels that haven't already been replaced
+		if (this.currentSlot.type === "replacement") {
+			const validSlots = new Set(["replacement", "spells", "special"]);
+			const previousSpells = new Set();
+			const replacedData = this.advancement.value.replaced?.[level];
+			for (const level of Array.fromRange(this.advancement.relavantLevel(this.levels) - 1, 1)) {
+				for (const data of this.advancement.value._source.added?.[level] ?? []) {
+					if (!validSlots.has(data.slot)) continue;
+					let spell = this.actor.items.get(data.document);
+					if (!spell && data.document === replacedData?.original) spell = fromUuidSync(data.uuid);
+					if (spell) previousSpells.add({ id: data.document, level, name: spell.name });
+				}
+			}
+			context.replacementOptions = [
+				{ value: "", label: game.i18n.localize("BF.Advancement.Spellcasting.Replacement.None") },
+				{ rule: true },
+				...Array.from(previousSpells)
+					.map(({ id, level, name: label }) => ({
+						value: `${level}.${id}`,
+						label,
+						selected: id === this.currentSlot.replaces?.id
+					}))
+					.sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
+			];
+		}
 
 		return context;
 	}
@@ -192,9 +238,10 @@ export default class SpellcastingDialog extends FormApplication {
 
 	/**
 	 * Prepare the filters for spells in the current slot.
+	 * @param {string} type - Type of slot being prepared.
 	 * @returns {FilterDescription[]|void}
 	 */
-	prepareFilters() {
+	prepareFilters(type) {
 		const filters = [];
 		const schools = this.spellcasting.spells.schools;
 		const maxCircle = this.advancement.computeMaxCircle(this.advancement.relavantLevel(this.levels));
@@ -203,14 +250,14 @@ export default class SpellcastingDialog extends FormApplication {
 		// or the slot is ritual and ritual source isn't restricted
 		if (
 			!(
-				(this.currentSlot.type === "special" && !schools.size) ||
-				(this.currentSlot.type === "rituals" && !this.advancement.configuration.rituals.restricted)
+				(type === "special" && !schools.size) ||
+				(type === "rituals" && !this.advancement.configuration.rituals.restricted)
 			)
 		) {
 			filters.push({ k: "system.source", o: "has", v: this.spellcasting.source });
 		}
 
-		switch (this.currentSlot.type) {
+		switch (type) {
 			case "cantrips":
 				// Cantrips are always circle 0
 				filters.push({ k: "system.circle.base", v: 0 });
@@ -314,6 +361,16 @@ export default class SpellcastingDialog extends FormApplication {
 		super._onChangeInput(event);
 
 		switch (event.target.name) {
+			case "replaces":
+				if (this.currentSlot.type !== "replacement") return;
+				if (event.target.value) {
+					const [level, id] = event.target.value.split(".") ?? [];
+					this.currentSlot.replaces = this.getReplacesSlot(Number(level), id);
+				} else {
+					this.currentSlot.replaces = null;
+					this.currentSlot.selected = null;
+				}
+				return this.render();
 			case "selected-slot":
 				this.selectedSlot = Number(event.target.value);
 				return this.render();
@@ -329,26 +386,44 @@ export default class SpellcastingDialog extends FormApplication {
 	async _updateObject(event, formData) {
 		const toAdd = new Map();
 		const toRemove = new Set();
+		let replacement;
 		const visibleSlots = new Set();
 
 		for (const slot of this.slots) {
 			visibleSlots.add(slot.type);
 			if (!slot.selected) continue;
-			toAdd.set(slot.selected, slot.type);
-			// TODO: Handle replacement properly
+			if (slot.type === "replacement") replacement = { original: slot.replaces, replacement: slot.selected };
+			else toAdd.set(slot.selected, slot.type);
 		}
 
 		for (const spell of this.advancement._getAddedSpells(this.levels)) {
-			if (!visibleSlots.has(spell.slot)) continue;
-			if (toAdd.get(spell.uuid) !== spell.slot) toRemove.add(spell.document);
-			else toAdd.delete(spell.uuid);
+			if (!visibleSlots.has(spell.slot) || spell.slot === "replacement") continue;
+			if (toAdd.get(spell.uuid) === spell.slot) toAdd.delete(spell.uuid);
+			else toRemove.add(spell.document);
 		}
 
 		if (toRemove.size) await this.advancement.reverse(this.levels, { deleteIds: toRemove });
 
-		if (toAdd.size)
+		if (toAdd.size || replacement)
 			await this.advancement.apply(this.levels, {
-				added: Array.from(toAdd.entries()).map(([uuid, slot]) => ({ uuid, slot }))
+				added: Array.from(toAdd.entries()).map(([uuid, slot]) => ({ uuid, slot })),
+				replacement
 			});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*               Helpers               */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Fetch the necessary slot data for a spell to be replaced.
+	 * @param {number} [level] - Level of the spell being replaced.
+	 * @param {string} [id] - ID of the spell being replaced.
+	 * @returns {SpellSlotData|null}
+	 */
+	getReplacesSlot(level, id) {
+		const addedData = this.advancement.value._source.added?.[level]?.find(a => a.document === id);
+		const replacedSlot = this.advancement.value._source.replaced?.[level]?.slot;
+		return addedData ? { id, level, type: replacedSlot ?? addedData.slot, uuid: addedData.uuid } : null;
 	}
 }

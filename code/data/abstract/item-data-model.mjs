@@ -93,6 +93,16 @@ export default class ItemDataModel extends BaseDataModel {
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Compendium source.
+	 * @type {string}
+	 */
+	get _compendiumSource() {
+		return this.parent.flags[game.system.id]?.sourceId ?? this.parent._stats.compendiumSource;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
@@ -100,10 +110,7 @@ export default class ItemDataModel extends BaseDataModel {
 	prepareBaseData() {
 		super.prepareBaseData();
 		if (this.parent.isEmbedded) {
-			const sourceId =
-				this.parent.flags["black-flag"]?.sourceId ??
-				this.parent._stats.compendiumSource ??
-				this.parent.flags.core?.sourceId;
+			const sourceId = this._compendiumSource;
 			if (sourceId) {
 				if (!this.parent.actor.sourcedItems?.has(sourceId)) {
 					this.parent.actor.sourcedItems?.set(sourceId, new Set());

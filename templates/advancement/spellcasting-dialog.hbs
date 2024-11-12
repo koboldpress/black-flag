@@ -1,6 +1,6 @@
 <form class="sheet-container" autocomplete="off">
 	<section class="slots">
-		<h3>{{ localize "BF.Spellbook.Slots.New" }}</h3>
+		<h3>{{ localize "BF.Spellbook.Slots.Label" }}</h3>
 		<ul class="unlist spell-list news-slots">
 			{{#each slots}}
 				<li {{~#if selected}} class="selected"{{/if}}>
@@ -21,6 +21,16 @@
 		</ul>
 	</section>
 	<div class="restrictions">
+		{{#if replacementOptions}}
+			<div class="replacement">
+				<div class="form-group">
+					<label>{{ localize "BF.Advancement.Spellcasting.Replacement.Label" }}</label>
+					<select name="replaces">
+						{{ selectOptions replacementOptions }}
+					</select>
+				</div>
+			</div>
+		{{/if}}
 		{{#if restrictions.source}}
 			<div class="restriction">
 				<strong>{{ localize "BF.Spell.Source.Label" }}</strong>: {{ restrictions.source }}

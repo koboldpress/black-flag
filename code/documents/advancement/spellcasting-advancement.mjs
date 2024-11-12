@@ -79,10 +79,8 @@ export default class SpellcastingAdvancement extends Advancement {
 	 * @returns {boolean}
 	 */
 	replacesSpellAt(level) {
-		return false;
-		// TODO: Implement replacement
-		// if (level <= this.level.value) return false;
-		// return this.configuration.spells.replacement && this.configuration.spells.mode === "limited";
+		if (level <= this.level.value) return false;
+		return this.configuration.spells.replacement && this.configuration.spells.mode === "limited";
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -190,11 +188,10 @@ export default class SpellcastingAdvancement extends Advancement {
 		}
 
 		if (this.replacesSpellAt(level)) stats.get("replacement").total = 1;
-
-		const replacedSpells = new Set(this.value.replaced?.[level]?.map(s => s.replacement?.id));
+		const replacedSpell = this.value.replaced?.[level]?.id;
 
 		for (const data of this._getAddedSpells(levels)) {
-			if (replacedSpells.has(data.uuid) || !stats.get(data.slot)) continue;
+			if (replacedSpell === data.document || !stats.get(data.slot)) continue;
 			stats.get(data.slot).learned ??= 0;
 			stats.get(data.slot).learned += 1;
 		}
@@ -202,7 +199,7 @@ export default class SpellcastingAdvancement extends Advancement {
 		for (const data of stats.values()) {
 			data.total ??= 0;
 			data.learned ??= 0;
-			data.toLearn = data.total - data.learned;
+			data.toLearn = Math.max(data.total - data.learned, 0);
 			if (data.toLearn) stats.needToLearn = true;
 		}
 
@@ -218,18 +215,21 @@ export default class SpellcastingAdvancement extends Advancement {
 		const changes = [];
 		for (const spell of this._getAddedSpells(levels)) {
 			const doc = this.actor.items.get(spell.document) ?? fromUuidSync(spell.uuid);
-			if (doc && spell.slot !== "auto") changes.push(linkForUUID(doc.uuid));
-			// TODO: Distinguish replacement spells
+			if (doc && spell.slot !== "auto")
+				changes.push({
+					link: linkForUUID(doc.uuid),
+					replaced: doc.id !== spell.document
+				});
 		}
 		if (this.gainsSpellsAt(level)) {
 			const circle = this.computeMaxCircle(level);
-			changes.push(
-				`<span class="choice-name">${game.i18n.format("BF.Advancement.Spellcasting.CircleSpells", {
+			changes.push({
+				link: `<span class="choice-name">${game.i18n.format("BF.Advancement.Spellcasting.CircleSpells", {
 					circle: CONFIG.BlackFlag.spellCircles()[circle]
 				})}`
-			);
+			});
 		}
-		return changes.map(c => `<span class="choice-entry">${c}</span>`).join(" ");
+		return changes.map(c => `<span class="choice-entry${c.replaced ? " replaced" : ""}">${c.link}</span>`).join(" ");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -242,14 +242,56 @@ export default class SpellcastingAdvancement extends Advancement {
 		const added = this._getAddedSpells(levels) ?? [];
 
 		if (data) {
-			await this.createSpells(data.added ?? [], { added, data });
-			return await this.actor.update(
-				{
-					[`${this.valueKeyPath}.added.${level}`]: added
-				},
-				{ render }
-			);
-			// TODO: Handle replacement
+			const valueData = {};
+			const toRemove = [];
+
+			const existingReplacement = this.value.replaced?.[level];
+			const replacedSlot = this.value._source.added?.[
+				data.replacement?.original?.level ?? existingReplacement?.level
+			]?.find(a => a.document === data.replacement?.original?.id ?? existingReplacement?.original);
+			let replacementKeyPath;
+			if (replacedSlot) {
+				data.added ??= [];
+
+				// If replaced spell has changed, restore previously replaced spell and remove the newly replaced spell
+				if (data.replacement?.original?.id !== existingReplacement?.original) {
+					if (existingReplacement?.original) toAdd.push(replacedSlot);
+					if (data.replacement?.original?.id) toRemove.push(data.replacement.original.id);
+				}
+
+				// If replacement spell has changed, remove the old one and add the new one using the replaced slot type
+				const existingSource = this.actor.items.get(existingReplacement?.replacement)?.system._compendiumSource;
+				if (data.replacement?.replacement !== existingSource) {
+					data.added.push({ uuid: data.replacement.replacement, slot: "replacement" });
+					if (existingReplacement?.replacement) {
+						toRemove.push(existingReplacement.replacement);
+						added.findSplice(a => a.document === existingReplacement.replacement);
+					}
+				}
+
+				if (data.replacement) {
+					replacementKeyPath = `${this.valueKeyPath}.replaced.${level}`;
+					const originalReplacedSlot =
+						this.value._source.replaced?.[data.replacement?.original?.level ?? existingReplacement?.level]?.slot;
+					valueData[replacementKeyPath] = {
+						level: data.replacement?.original?.level ?? existingReplacement?.level,
+						original: replacedSlot.document,
+						slot: originalReplacedSlot ?? replacedSlot.slot
+					};
+				} else {
+					valueData[`${this.valueKeyPath}.replaced.-=${level}`] = null;
+				}
+			}
+
+			if (toRemove.length) await this.actor.deleteEmbeddedDocuments("Item", toRemove, { render: false });
+			if (data.added?.length) {
+				await this.createSpells(data.added ?? [], { added, data });
+				valueData[`${this.valueKeyPath}.added.${level}`] = added;
+				if (replacementKeyPath) {
+					valueData[replacementKeyPath].replacement = added.find(a => a.slot === "replacement")?.document;
+				}
+			}
+			return await this.actor.update(valueData, { render });
 		}
 
 		// Gain all spells of a certain circle
@@ -300,16 +342,19 @@ export default class SpellcastingAdvancement extends Advancement {
 
 		// Remove all spells for this level
 		else {
+			const r = this.value.replaced?.[level];
+			const replacedSlot = this.value._source.added?.[r?.level]?.find(a => a.document === r?.original);
+			if (replacedSlot) await this.createSpells([replacedSlot], { data });
+
 			deleteIds = (this.value.added?.[level] ?? []).map(d => d.document?.id).filter(i => i);
 			await this.actor.deleteEmbeddedDocuments("Item", deleteIds, { render: false });
 			return await this.actor.update(
 				{
-					[`${this.valueKeyPath}.added.-=${level}`]: null
+					[`${this.valueKeyPath}.added.-=${level}`]: null,
+					[`${this.valueKeyPath}.replaced.-=${level}`]: null
 				},
 				{ render }
 			);
-
-			// TODO: Restore any replaced spells
 		}
 	}
 
@@ -317,20 +362,21 @@ export default class SpellcastingAdvancement extends Advancement {
 
 	/**
 	 * Apply the appropriate changes to the spells before adding them to the sheet.
-	 * @param {string[]} uuids - UUIDs of spells to create.
+	 * @param {Partial<LearnedSpellData>[]} toAdd - UUIDs of spells to create.
 	 * @param {object} [options={}]
 	 * @param {object[]} [options.added=[]] - Existing granted spells.
 	 * @param {object} [options.data] - Data from the advancement process.
 	 * @param {boolean} [options.render=false] - Should the update re-render the actor?
 	 * @returns {object[]} - Array of data for storing in value.
 	 */
-	async createSpells(uuids, { added = [], data, render = false } = {}) {
+	async createSpells(toAdd, { added = [], data, render = false } = {}) {
 		const spells = [];
-		for (const [index, data] of uuids.entries()) {
+		for (const [index, toAddData] of toAdd.entries()) {
 			const origin = { source: this.configuration.source, identifier: this.item.identifier };
-			const spellData = await this.createItemData(data.uuid, {
+			const spellData = await this.createItemData(toAddData.uuid, {
 				changes: { [`flags.${game.system.id}.relationship`]: { mode: "standard", origin } },
 				data,
+				id: toAddData.document,
 				index
 			});
 			if (
@@ -341,7 +387,7 @@ export default class SpellcastingAdvancement extends Advancement {
 			}
 			if (!spellData) continue;
 			spells.push(spellData);
-			added.push({ document: spellData._id, ...data });
+			added.push({ ...toAddData, document: spellData._id });
 		}
 		await this.actor.createEmbeddedDocuments("Item", spells, { keepId: true, keepRelationship: true, render });
 		return added;
@@ -432,7 +478,6 @@ export default class SpellcastingAdvancement extends Advancement {
 			if (!["standard", undefined].includes(mode)) continue;
 			const sourceId =
 				foundry.utils.getProperty(spell, "_stats.compendiumSource") ??
-				foundry.utils.getProperty(spell, "flags.core.sourceId") ??
 				foundry.utils.getProperty(spell, "flags.black-flag.sourceId");
 			existingSpells.add(sourceId);
 		}

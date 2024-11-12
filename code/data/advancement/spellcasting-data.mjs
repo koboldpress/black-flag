@@ -2,7 +2,8 @@ import { simplifyBonus } from "../../utils/_module.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, SetField, StringField } =
+	foundry.data.fields;
 
 /**
  * Configuration data for the Spellcasting advancement.
@@ -178,10 +179,15 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
  */
 
 /**
+ * @typedef {ReplacedFeatureData} ReplacedSpellData
+ * @property {string} slot - Type of slot replaced.
+ */
+
+/**
  * Value data for the Spellcasting advancement.
  *
  * @property {Record<string, LearnedSpellData[]>} added - Spells added at a given level.
- * @property {Record<string, ReplacedFeatureData[]>} replaced - Spells replaced at a given level.
+ * @property {Record<string, ReplacedFeatureData>} replaced - Spells replaced at a given level.
  */
 export class SpellcastingValueData extends foundry.abstract.DataModel {
 	static defineSchema() {
@@ -197,13 +203,12 @@ export class SpellcastingValueData extends foundry.abstract.DataModel {
 				{ required: false, initial: undefined }
 			),
 			replaced: new MappingField(
-				new ArrayField(
-					new SchemaField({
-						level: new NumberField({ integer: true, min: 0 }),
-						original: new LocalDocumentField(foundry.documents.BaseItem),
-						replacement: new LocalDocumentField(foundry.documents.BaseItem)
-					})
-				)
+				new SchemaField({
+					level: new NumberField({ integer: true, min: 0 }),
+					original: new DocumentIdField(),
+					replacement: new DocumentIdField(),
+					slot: new StringField()
+				})
 			)
 		};
 	}
