@@ -361,7 +361,8 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 						sort,
 						"flags.black-flag.sourceId": uuid,
 						"flags.black-flag.advancementOrigin": advancementOrigin,
-						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin
+						"flags.black-flag.ultimateOrigin": this.item.getFlag("black-flag", "ultimateOrigin") ?? advancementOrigin,
+						"_stats.compendiumSource": uuid
 					},
 					changes
 				),
