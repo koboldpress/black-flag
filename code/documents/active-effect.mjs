@@ -199,7 +199,19 @@ export default class BlackFlagActiveEffect extends ActiveEffect {
 	/** @inheritDoc */
 	_applyUpgrade(actor, change, current, delta, changes) {
 		if (current === null) return this._applyOverride(actor, change, current, delta, changes);
-		return super._applyUpgrade(actor, change, current, delta, changes);
+		// TODO: Apply fix for this core issue: https://github.com/foundryvtt/foundryvtt/issues/11527
+		// Can be removed and replaced with super._applyUpgrade(actor, change, current, delta, changes);
+		// when the system goes V13-only
+		let update;
+		const ct = foundry.utils.getType(current);
+		switch (ct) {
+			case "boolean":
+			case "number":
+				if (change.mode === CONST.ACTIVE_EFFECT_MODES.UPGRADE && delta > current) update = delta;
+				else if (change.mode === CONST.ACTIVE_EFFECT_MODES.DOWNGRADE && delta < current) update = delta;
+				break;
+		}
+		if (update !== undefined) changes[change.key] = update;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
