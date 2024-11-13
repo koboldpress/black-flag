@@ -91,7 +91,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 		].slice(this.advancement.minimumLevel);
 		const context = await super._prepareContext(options);
 		context.configuration = this.advancement.configuration;
-		context.source = this.advancement.toObject();
+		context.source = this.advancement._source;
 		context.advancement = this.advancement;
 		context.default = {
 			title: game.i18n.localize(this.advancement.metadata.title),
