@@ -41,7 +41,17 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 		context.fields = this.document.system.schema.fields;
 		context.system = context.document.system;
 
-		context.title = Object.fromEntries(Array.fromRange(4, 1).map(n => [`level${n}`, context.data.title.level + n - 1]));
+		context.title = Object.fromEntries(
+			Array.fromRange(4, 1).map(n => [
+				`level${n}`,
+				context.data.system.headingLevel || context.data.title.level + n - 1
+			])
+		);
+
+		context.headingLevelOptions = Array.fromRange(6, 1).map(level => ({
+			value: level,
+			label: game.i18n.format("JOURNALENTRYPAGE.Level", { level })
+		}));
 
 		context.enriched = {};
 		for (const key of ["conclusion", "introduction"]) {

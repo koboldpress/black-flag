@@ -1,16 +1,17 @@
 import SpellListPageSheet from "../../applications/journal/spell-list-page-sheet.mjs";
 import BaseDataModel from "../abstract/base-data-model.mjs";
 
-const { HTMLField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data model for spell list data.
  *
  * @property {object} description
- * @property {string} description.conclusion    Description to display after spell list.
- * @property {string} description.introduction  Description to display before spell list.
- * @property {string} grouping                  Default grouping mode.
- * @property {Set<string>} spells               UUIDs of spells to display.
+ * @property {string} description.conclusion - Description to display after spell list.
+ * @property {string} description.introduction - Description to display before spell list.
+ * @property {string} grouping - Default grouping mode.
+ * @property {number} headingLevel - Override the level of included headers.
+ * @property {Set<string>} spells - UUIDs of spells to display.
  */
 export default class SpellListJournalPageData extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -44,6 +45,7 @@ export default class SpellListJournalPageData extends BaseDataModel {
 				introduction: new HTMLField({ textSearch: true })
 			}),
 			grouping: new StringField({ initial: "circle", choices: this.GROUPING_MODES }),
+			headingLevel: new NumberField({ initial: 3 }),
 			spells: new SetField(new StringField())
 		};
 	}

@@ -86,10 +86,13 @@ Hooks.once("setup", function () {
 	TooltipConductor.activateListeners();
 	game.blackFlag.tooltipConductor.observe();
 
-	// Apply custom item compendium
-	game.packs
-		.filter(p => p.metadata.type === "Item")
-		.forEach(p => (p.applicationClass = applications.item.BlackFlagItemCompendium));
+	// Apply custom compendium types
+	for (const pack of game.packs) {
+		if (pack.metadata.type === "Item") pack.applicationClass = applications.item.BlackFlagItemCompendium;
+		else if (pack.metadata.flags?.display === "table-of-contents") {
+			pack.applicationClass = applications.journal.TableOfContentsCompendium;
+		}
+	}
 });
 
 Hooks.once("i18nInit", function () {

@@ -45,7 +45,7 @@ export const ruleTypes = {
 		references: "damageTypes"
 	},
 	healingType: {
-		label: "BF.HEAL.Type.Label",
+		label: "BF.Healing.Type.Label",
 		references: "healingTypes"
 	},
 	movementType: {

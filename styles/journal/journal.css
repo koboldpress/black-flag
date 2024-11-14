@@ -201,6 +201,29 @@
 	}
 
 	.indent { margin-inline-start: 16px; }
+
+	dl {
+		margin-inline-start: 1em;
+		:is(dt, dd) {
+			display: inline;
+			> p {
+				margin-block: 0;
+				&:first-child { display: contents; }
+			}
+		}
+		dt { margin-inline-start: -1em; }
+		dd:not(:has(p + p)):has(+ dt)::after {
+			content: "\A";
+			white-space: pre;
+		}
+	}
+	dl.credits {
+		dt {
+			color: var(--bf-text-color-blue);
+			font-variant: small-caps;
+		}
+		a { color: var(--bf-text-color-blue); }
+	}
 }
 
 .black-flag, .black-flag-journal {
