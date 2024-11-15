@@ -133,8 +133,14 @@ export default class WelcomeDialog extends BFApplication {
 	 */
 	async _prepareMainContext(context, options) {
 		context.tab = context.tabs.main;
-		context.message = game.i18n.localize("BF.WELCOME.Message");
-		context.message = context.message.replace(
+		context.message = `
+			${game.i18n.localize("BF.WELCOME.Message.Introduction")}
+			<ul>
+			  <li>${game.i18n.localize("BF.WELCOME.Message.Documentation")}</li>
+				<li>${game.i18n.localize("BF.WELCOME.Message.Content")}</li>
+				<li>${game.i18n.localize("BF.WELCOME.Message.Bugs")}</li>
+			</ul>
+		`.replace(
 			/<documentation-link>(?<content>[^<]+)<\/documentation-link>/i,
 			`
 			<button type="button" class="link-button" data-action="openDocumentation">
