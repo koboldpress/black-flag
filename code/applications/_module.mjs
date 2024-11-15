@@ -88,3 +88,4 @@ export { default as IdentityConfig } from "./identity-config.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
 export { default as NotificationTooltip } from "./notification-tooltip.mjs";
+export { default as WelcomeDialog } from "./welcome-dialog.mjs";

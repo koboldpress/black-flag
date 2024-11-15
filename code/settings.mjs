@@ -1,3 +1,4 @@
+import WelcomeDialog from "./applications/welcome-dialog.mjs";
 import { systemVersion } from "./utils/localization.mjs";
 import log from "./utils/logging.mjs";
 
@@ -184,6 +185,13 @@ export function registerSettings() {
 		default: false,
 		type: Boolean
 	});
+
+	game.settings.register(game.system.id, "_firstRun", {
+		scope: "world",
+		config: false,
+		default: true,
+		type: Boolean
+	});
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
@@ -230,4 +238,12 @@ export function renderSettingsSidebar(html) {
 	`;
 	if (pip) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
 	heading.insertAdjacentElement("afterend", badge);
+
+	const welcomeLink = document.createElement("button");
+	welcomeLink.dataset.action = "welcome";
+	welcomeLink.innerHTML = `<i class="fa-solid fa-flag-checkered"></i> ${game.i18n.localize("BF.WELCOME.Button")}`;
+	welcomeLink.addEventListener("click", () => new WelcomeDialog().render({ force: true }));
+	const div = document.createElement("div");
+	div.append(welcomeLink);
+	badge.insertAdjacentElement("afterend", div);
 }

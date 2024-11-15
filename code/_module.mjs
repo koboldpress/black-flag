@@ -102,6 +102,11 @@ Hooks.once("i18nInit", function () {
 Hooks.once("ready", function () {
 	applications.NotificationTooltip.activateListeners();
 	config.registration.registerItemTypes();
+
+	if (game.user.isGM && game.settings.get(game.system.id, "_firstRun")) {
+		const welcome = new applications.WelcomeDialog();
+		welcome.render({ force: true });
+	}
 });
 
 Hooks.on("renderSettings", (app, jQuery, options) => settings.renderSettingsSidebar(jQuery[0]));

@@ -1,0 +1,32 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+	{{#if modules}}
+		{{> ".section" id="core" title="BF.WELCOME.SECTION.Core" }}
+		{{> ".section" id="adventures" title="BF.WELCOME.SECTION.Adventures" }}
+	{{/if}}
+</section>
+
+{{#*inline ".section"}}
+<div class="modules" data-section="{{ id }}">
+	<h3>{{ localize title }}</h3>
+	<ul class="unlist">
+		{{#each (lookup modules id)}}
+			<li data-module="{{ id }}">
+				<img class="key-art" src="{{ img }}" alt="{{ name }}">
+				<h4 class="title"><a href="https://foundryvtt.com/packages/{{ id }}">{{ name }}</a></h4>
+				<div class="description">{{{ description }}}</div>
+				<div class="status">
+					{{#if installed}}
+						<label for="{{ @root.partId }}-{{ id }}">
+							{{ localize "BF.WELCOME.Module.Enabled" }}
+						</label>
+						<input type="checkbox" name="{{ id }}" id="{{ @root.partId }}-{{ id }}" {{ checked enabled }}
+						       {{ disabled @root.disabled }}>
+					{{else}}
+						<span class="not-installed">{{ localize "BF.WELCOME.Module.NotInstalled" }}</span>
+					{{/if}}
+				</div>
+			</li>
+		{{/each}}
+	</ul>
+</div>
+{{/inline}}
