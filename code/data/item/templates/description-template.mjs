@@ -1,3 +1,4 @@
+import IdentifierField from "../../fields/identifier-field.mjs";
 import SourceField from "../../fields/source-field.mjs";
 
 const { HTMLField, SchemaField } = foundry.data.fields;
@@ -8,6 +9,8 @@ const { HTMLField, SchemaField } = foundry.data.fields;
  * @property {object} description
  * @property {SourceData} description.source - The item's source.
  * @property {string} description.value - Main description for the item.
+ * @property {object} identifier
+ * @property {string} identifier.value - This item's unique identifier.
  */
 export default class DescriptionTemplate extends foundry.abstract.DataModel {
 
@@ -17,6 +20,9 @@ export default class DescriptionTemplate extends foundry.abstract.DataModel {
 			description: new SchemaField({
 				source: new SourceField(),
 				value: new HTMLField({ label: "BF.Item.Description.Label", hint: "BF.Item.Description.Hint" })
+			}),
+			identifier: new SchemaField({
+				value: new IdentifierField()
 			})
 		};
 	}
@@ -35,7 +41,7 @@ export default class DescriptionTemplate extends foundry.abstract.DataModel {
 			source.description.source = { fallback: source.description.source };
 		}
 	}
-	
+
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*           Data Preparation          */
 	/* <><><><> <><><><> <><><><> <><><><> */

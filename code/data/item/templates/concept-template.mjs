@@ -1,5 +1,3 @@
-import IdentifierField from "../../fields/identifier-field.mjs";
-
 const { SchemaField, StringField } = foundry.data.fields;
 
 /**
@@ -8,8 +6,6 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @property {object} description
  * @property {string} description.short - Brief description that appears in the selection dialog.
  * @property {string} description.journal - UUID of a journal page describing this item in further detail.
- * @property {object} identifier
- * @property {string} identifier.value - This item's unique identifier.
  */
 export default class ConceptTemplate extends foundry.abstract.DataModel {
 
@@ -19,9 +15,6 @@ export default class ConceptTemplate extends foundry.abstract.DataModel {
 			description: new SchemaField({
 				short: new StringField({label: "BF.Item.Description.ShortLabel", hint: "BF.Item.Description.ShortHint"}),
 				journal: new StringField({label: "BF.Item.Journal.Label", hint: "BF.Item.Journal.Hint"})
-			}),
-			identifier: new SchemaField({
-				value: new IdentifierField()
 			})
 		};
 	}

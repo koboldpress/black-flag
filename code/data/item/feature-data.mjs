@@ -17,7 +17,6 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @mixes {ProficiencyTemplate}
  *
  * @property {object} identifier
- * @property {string} identifier.value - Identifier for this item.
  * @property {string} identifier.associated - Identifier of a concept item this feature is associated with.
  * @property {object} level
  * @property {number} level.value - Class or character level at which this feature is available.
@@ -58,7 +57,6 @@ export default class FeatureData extends ItemDataModel.mixin(
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
 			identifier: new SchemaField({
-				value: new IdentifierField(),
 				associated: new IdentifierField()
 			}),
 			level: new SchemaField({
