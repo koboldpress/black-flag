@@ -22,7 +22,7 @@ export default class AttackRollConfigurationDialog extends ChallengeRollConfigur
 	/** @inheritDoc */
 	async _prepareConfigurationContext(context, options) {
 		context = await super._prepareConfigurationContext(context, options);
-		if (this.options.attackModes)
+		if (this.options.attackModes?.length)
 			context.fields.unshift({
 				field: new foundry.data.fields.StringField({ label: game.i18n.localize("BF.ATTACK.Mode.Label") }),
 				name: "attackMode",
