@@ -65,7 +65,10 @@ export default class CheckActivity extends Activity {
 					<span class="hidden-dc">${wrap(label)}</span>
 				`
 					: wrap(label),
-				// TODO: Icons
+				icon:
+					checkType === "tool"
+						? '<i class="fa-solid fa-hammer" inert></i>'
+						: '<i class="blackFlag-icon" data-src="systems/black-flag/artwork/activities/check.svg" inert></i>',
 				dataset
 			});
 		};

@@ -70,14 +70,16 @@ export default class HealActivity extends Activity {
 	/** @inheritDoc */
 	_activationChatButtons() {
 		const buttons = [];
-		if (this.system.healing?.formula)
+		if (this.system.healing?.formula) {
+			const config = CONFIG.BlackFlag.healingTypes[this.system.healing.type];
 			buttons.push({
 				label: game.i18n.localize("BF.HEAL.Title"),
-				icon: null, // TODO: Figure out healing icon
+				icon: config?.icon ? `<i class="blackFlag-icon" data-src="${config.icon}" inert></i>` : null,
 				dataset: {
 					action: "rollHealing"
 				}
 			});
+		}
 		return buttons.concat(super._activationChatButtons());
 	}
 

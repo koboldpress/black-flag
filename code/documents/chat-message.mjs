@@ -69,6 +69,13 @@ export default class BlackFlagChatMessage extends ChatMessage {
 		if (!this.isContentVisible) return jQuery;
 		const html = jQuery[0];
 
+		for (const element of html.querySelectorAll(".blackFlag-icon")) {
+			const icon = document.createElement("blackFlag-icon");
+			if (element.inert) icon.setAttribute("inert", "");
+			icon.src = element.dataset.src;
+			element.replaceWith(icon);
+		}
+
 		this._renderHeader(html);
 		this._renderButtons(html);
 		this._activateActivityListeners(html);

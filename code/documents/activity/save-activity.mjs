@@ -103,6 +103,7 @@ export default class SaveActivity extends Activity {
 					<span class="visible-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: dc })}</span>
 					<span class="hidden-dc">${game.i18n.format("BF.Enricher.Save.Long", { save: ability })}</span>
 				`,
+				icon: '<i class="fa-solid fa-shield-heart" inert></i>',
 				dataset: {
 					dc: this.system.save.dc.final,
 					ability: abilityId,

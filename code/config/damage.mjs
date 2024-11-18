@@ -137,7 +137,8 @@ export const healingTypes = {
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.PGW1FFQySj1EF5SV"
 	},
 	max: {
-		label: "BF.Healing.Type.Maximum"
+		label: "BF.Healing.Type.Maximum",
+		icon: "systems/black-flag/artwork/healing/max.svg"
 	}
 };
 localizeConfig(healingTypes, { sort: false });

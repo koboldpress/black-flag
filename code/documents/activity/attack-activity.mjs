@@ -105,7 +105,7 @@ export default class AttackActivity extends Activity {
 		const buttons = [
 			{
 				label: game.i18n.localize("BF.ATTACK.Label"),
-				icon: "", // TODO: Figure out attack icon
+				icon: '<i class="blackFlag-icon" data-src="systems/black-flag/artwork/traits/weapons.svg" inert></i>',
 				dataset: {
 					action: "rollAttack"
 				}
