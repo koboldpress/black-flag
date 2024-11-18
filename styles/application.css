@@ -41,3 +41,14 @@
 		.hint { font-size: var(--font-size-12); }
 	}
 }
+
+.theme-dark .black-flag.application {
+	--bf-color-border-blue: color-mix(in oklab, var(--bf-blue), #89d3ff 25%);
+
+	.hint {
+		color: var(--color-text-light-secondary);
+	}
+	textarea {
+		background: var(--color-cool-4);
+	}
+}
