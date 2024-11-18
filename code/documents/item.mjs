@@ -85,8 +85,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	/** @inheritDoc */
 	get identifier() {
 		if (this.system.identifier?.value) return this.system.identifier.value;
-		const identifier = this.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-		return identifier.slugify({ strict: true });
+		return slugify(identifier, { strict: true });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -147,8 +146,7 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 				else if (data.type === "savingThrow") data.type = "save";
 			});
 		if (!data.system?.identifier?.value) {
-			const identifier = data.name.replaceAll(/(\w+)([\\|/])(\w+)/g, "$1-$3");
-			foundry.utils.setProperty(data, "system.identifier.value", identifier.slugify({ strict: true }));
+			foundry.utils.setProperty(data, "system.identifier.value", slugify(data.name, { strict: true }));
 		}
 		return super._initializeSource(data, options);
 	}
@@ -159,7 +157,6 @@ export default class BlackFlagItem extends DocumentMixin(Item) {
 	static migrateData(source) {
 		source = super.migrateData(source);
 		ActivitiesTemplate._migrateActivityActivationOverride?.(source);
-
 		return source;
 	}
 

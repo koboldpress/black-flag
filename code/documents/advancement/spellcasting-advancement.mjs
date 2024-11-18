@@ -466,10 +466,12 @@ export default class SpellcastingAdvancement extends Advancement {
 
 	/**
 	 * Determine what spells are already on the sheet in standard preparation mode.
+	 * @param {object} [options={}]
+	 * @param {boolean} [options.identifiers=false] - Return spell identifiers, rather than UUIDs.
 	 * @returns {Set<string>} - Set of spell UUIDs that already exist.
 	 * @internal
 	 */
-	_getExistingSpells() {
+	_getExistingSpells({ identifiers = false } = {}) {
 		const existingSpells = new Set();
 		if (!this.actor) return existingSpells;
 		for (const spell of this.actor.items) {
@@ -479,7 +481,7 @@ export default class SpellcastingAdvancement extends Advancement {
 			const sourceId =
 				foundry.utils.getProperty(spell, "_stats.compendiumSource") ??
 				foundry.utils.getProperty(spell, "flags.black-flag.sourceId");
-			existingSpells.add(sourceId);
+			existingSpells.add(identifiers ? spell.identifier : sourceId);
 		}
 		return existingSpells;
 	}

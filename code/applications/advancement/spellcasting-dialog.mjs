@@ -9,7 +9,7 @@ export default class SpellcastingDialog extends FormApplication {
 
 		this.advancement = advancement;
 		this.levels = levels;
-		this.existingSpells = this.advancement._getExistingSpells();
+		this.existingSpells = this.advancement._getExistingSpells({ identifiers: true });
 
 		this.slots = [];
 		const level = this.advancement.relavantLevel(levels);
@@ -19,7 +19,7 @@ export default class SpellcastingDialog extends FormApplication {
 		for (const spell of this.advancement._getAddedSpells(this.levels)) {
 			spellsBySlot[spell.slot] ??= [];
 			spellsBySlot[spell.slot].push(spell.uuid);
-			this.existingSpells.delete(spell.uuid);
+			this.existingSpells.delete(this.actor.items.get(spell.document)?.identifier);
 		}
 
 		for (const [type, data] of stats) {
@@ -194,9 +194,14 @@ export default class SpellcastingDialog extends FormApplication {
 		});
 
 		const replacedUuid = this.currentSlot.replaces?.uuid;
+		console.log(this.existingSpells);
 		context.spells = filters
 			? (await this.allSpells).filter(
-					s => !this.existingSpells.has(s.uuid) && filters && filter.performCheck(s, filters) && s.uuid !== replacedUuid
+					s =>
+						!this.existingSpells.has(s.system.identifier.value) &&
+						filters &&
+						filter.performCheck(s, filters) &&
+						s.uuid !== replacedUuid
 				)
 			: [];
 		context.spells = context.spells.map(spell => ({
