@@ -94,7 +94,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	static computeLeveledProgression(progression, cls, { actor, levels=1, spellcasting, count=1 }) {
 		const prog = CONFIG.BlackFlag.spellcastingTypes.leveled.progression[spellcasting.progression];
 		if ( prog ) {
-			this._computeRoundedProgression(progression, levels, prog.divisor, count === 1 || prog.roundUp);
+			this._computeRoundedProgression(progression, levels, prog.divisor, prog.roundUp);
 			if ( spellcasting?.cantrips.formula ) progression.cantrips = true;
 		}
 	}
