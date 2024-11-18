@@ -1,5 +1,7 @@
-nav.tabs.tabs_separate {
+nav.tabs.tabs-separate {
 	--tab-gap: 6px;
+	--tab-background-active: transparent;
+	--tab-background-hover: color-mix(in oklab, var(--bf-blue), transparent 80%);
 	--tab-border-radius: 8px;
 
 	margin-block-start: 6px;
@@ -23,11 +25,12 @@ nav.tabs.tabs_separate {
 		text-align: center;
 	}
 	a.active {
+		background: var(--tab-background-active);
 		border-color: var(--bf-color-border-blue);
 		border-block-end-color: transparent;
 	}
 	a:hover, a:focus-visible {
-		background-color: color-mix(in oklab, var(--bf-blue), transparent 80%);
+		background: var(--tab-background-hover);
 		text-shadow: none;
 	}
 	a::after, a::before {

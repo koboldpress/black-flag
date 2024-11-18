@@ -1,4 +1,5 @@
 .black-flag.item.sheet:not(.concept) {
+	--item-background: var(--bf-background-color-half-white);
 	min-width: 475px;
 	min-height: 375px;
 
@@ -22,10 +23,17 @@
 			}
 		}
 
+		nav.tabs.tabs-separate {
+			--tab-background-active: var(--item-background);
+		}
+
 		.sheet-body {
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
+			margin: -8px;
+			padding: 8px;
+			background: var(--item-background);
 
 			[data-tab] {
 				height: 100%;
