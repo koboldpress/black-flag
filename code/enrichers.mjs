@@ -734,7 +734,7 @@ async function rollCheckSave(event) {
  * ```
  */
 async function enrichDamage(configs, label, options) {
-	const config = { rollAction: "damage", formulas: [], types: [] };
+	const config = { rollAction: "damage", formulas: [], types: [], rollType: configs._isHealing ? "healing" : "damage" };
 	for (const c of configs) {
 		const formulaParts = [];
 		if (c.average) config.average = c.average;
@@ -823,7 +823,7 @@ async function enrichDamage(configs, label, options) {
  */
 async function rollDamage(event) {
 	const target = event.target.closest("[data-roll-action]");
-	let { formulas, types, activity: activityUuid, attackMode, magical } = target.dataset;
+	let { formulas, types, activity: activityUuid, attackMode, magical, rollType } = target.dataset;
 	formulas = JSON.parse(formulas);
 	magical = magical === "true";
 	types = JSON.parse(types);
@@ -847,7 +847,9 @@ async function rollDamage(event) {
 
 	const dialogConfig = {};
 
-	const title = game.i18n.format("BF.Roll.Type.Label", { type: game.i18n.localize("BF.DAMAGE.Label") });
+	const title = game.i18n.format("BF.Roll.Type.Label", {
+		type: game.i18n.localize(rollType === "healing" ? "BF.Healing.Label" : "BF.DAMAGE.Label")
+	});
 	const messageConfig = {
 		data: {
 			flavor: title,
@@ -857,7 +859,7 @@ async function rollDamage(event) {
 				[game.system.id]: {
 					messageType: "roll",
 					roll: {
-						type: "damage"
+						type: rollType ?? "damage"
 					},
 					targets: getTargetDescriptors()
 				}

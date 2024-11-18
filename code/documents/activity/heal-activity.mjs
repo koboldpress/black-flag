@@ -90,13 +90,23 @@ export default class HealActivity extends Activity {
 		this.rollDamage(
 			{ event: config.event },
 			{},
-			{
-				[`data.flags.${game.system.id}`]: {
-					originatingMessage: results.message?.id,
-					roll: { type: "healing" }
-				}
-			}
+			{ [`data.flags.${game.system.id}.originatingMessage`]: results.message?.id }
 		);
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*                Rolls                */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async rollDamage(config = {}, dialog = {}, message = {}) {
+		const messageConfig = foundry.utils.mergeObject(
+			{
+				[`data.flags.${game.system.id}.roll.type`]: "healing"
+			},
+			message
+		);
+		return super.rollDamage(config, dialog, messageConfig);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -111,7 +121,7 @@ export default class HealActivity extends Activity {
 	 * @param {BlackFlagChatMessage} message - Message associated with the activation.
 	 */
 	static #rollHealing(event, target, message) {
-		this.rollDamage({ event }, {}, { [`data.flags.${game.system.id}.roll.type`]: "healing" });
+		this.rollDamage({ event });
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
