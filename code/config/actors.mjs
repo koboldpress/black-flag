@@ -266,7 +266,7 @@ export const movementTags = {
  * Configuration data for a rest type.
  *
  * @typedef {object} RestConfiguration
- * @property {{[key: string]: RestTypeConfiguration}} types - Rest types supported.
+ * @property {Record<string, RestTypeConfiguration>} types - Rest types supported.
  * @property {number} hitPointsRecoveryPercentage - Percentage of hit points recovered during a rest.
  * @property {number} hitDiceRecoveryPercentage - Percentage of hit dice recovered during a rest.
  */

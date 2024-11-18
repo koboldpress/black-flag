@@ -63,19 +63,15 @@ export default class ActivitiesTemplate extends foundry.abstract.DataModel {
 	prepareFinalActivities(rollData) {
 		this.uses.prepareData(rollData);
 
-		this.uses.min = simplifyBonus(replaceFormulaData(this.uses.min ?? "", rollData, {
-			notifications: this.parent.notifications, key: "invalid-min-uses-formula", section: "auto",
-			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Minimum.DebugName") }
-		}));
 		this.uses.max = simplifyBonus(replaceFormulaData(this.uses.max ?? "", rollData, {
 			notifications: this.parent.notifications, key: "invalid-max-uses-formula", section: "auto",
 			messageData: { name: this.parent.name, property: game.i18n.localize("BF.Uses.Maximum.DebugName") }
 		}));
-		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
+		// TODO: Add ability to have uses increase without clamping to max
+		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
 
 		Object.defineProperty(this.uses, "label", {
 			get() {
-				if ( this.min ) return numberFormat(this.value);
 				if ( this.max ) return `${numberFormat(this.value)} / ${numberFormat(this.max)}`;
 				return "";
 			},

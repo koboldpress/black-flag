@@ -26,7 +26,6 @@ export default class UsesField extends EmbeddedDataField {
  * Data for uses on an item or activity.
  *
  * @property {number} spent                 Number of uses that have been spent.
- * @property {string} min                   Formula for the minimum range of the uses.
  * @property {string} max                   Formula for the maximum number of uses.
  * @property {boolean} consumeQuantity      For items with quantity, should the quantity be reduced if all uses spent?
  * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
@@ -36,7 +35,6 @@ export class UsesData extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			spent: new NumberField({ initial: 0, integer: true, label: "BF.Uses.Spent.Label" }),
-			min: new FormulaField({ deterministic: true, label: "BF.Uses.Minimum.Label" }),
 			max: new FormulaField({ deterministic: true, label: "BF.Uses.Maximum.Label" }),
 			consumeQuantity: new BooleanField({
 				label: "BF.Uses.ConsumeQuantity.Label",
@@ -62,7 +60,7 @@ export class UsesData extends foundry.abstract.DataModel {
 	 * @type {boolean}
 	 */
 	get hasUses() {
-		return !!this.min || !!this.max;
+		return !!this._source.max || !!this.max;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
@@ -84,9 +82,6 @@ export class UsesData extends foundry.abstract.DataModel {
 	 * @param {object} rollData
 	 */
 	prepareData(rollData) {
-		// TODO: Remove once `min` field is fully removed
-		this.min = "0";
-
 		const existingPeriods = new Set(this.recovery.map(r => r.period));
 		for (const recovery of this.recovery) {
 			if (recovery.period === "recharge") recovery.type = "recoverAll";
@@ -174,11 +169,11 @@ export class UsesData extends foundry.abstract.DataModel {
 		}
 
 		if (recoveryProfile.type === "recoverAll") updates.spent = 0;
-		else if (recoveryProfile.type === "loseAll") updates.spent = this.max ? this.max : -this.min;
+		else if (recoveryProfile.type === "loseAll") updates.spent = this.max ? this.max : 0;
 		else if (recoveryProfile.formula) {
 			const roll = new CONFIG.Dice.BasicRoll(recoveryProfile.formula, rollData);
 			await roll.evaluate();
-			updates.spent = Math.clamp(this.spent - roll.total, 0, this.max - this.min);
+			updates.spent = Math.clamp(this.spent - roll.total, 0, this.max);
 			if (!roll.isDeterministic) rolls.push(roll);
 		}
 

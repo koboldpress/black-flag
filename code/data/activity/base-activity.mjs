@@ -204,16 +204,15 @@ export default class BaseActivity extends foundry.abstract.DataModel {
 		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
 		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
 		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");
-		prepareFinalValue("uses.min", "BF.Uses.Mininum.DebugName");
 		prepareFinalValue("uses.max", "BF.Uses.Maximum.DebugName");
 
 		this.activation.type ??= "action";
 		this.activation.primary ??= true;
 
-		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, this.uses.min, this.uses.max);
+		// TODO: Add ability to have uses increase without clamping to max
+		this.uses.value = Math.clamp(this.uses.max - this.uses.spent, 0, this.uses.max);
 		Object.defineProperty(this.uses, "label", {
 			get() {
-				if (this.min) return numberFormat(this.value);
 				if (this.max) return `${numberFormat(this.value)} / ${numberFormat(this.max)}`;
 				return "";
 			},
