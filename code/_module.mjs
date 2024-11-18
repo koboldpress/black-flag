@@ -45,6 +45,7 @@ Hooks.once("init", function () {
 	CONFIG.ui.chat = applications.BlackFlagChatLog;
 	CONFIG.ui.combat = applications.BlackFlagCombatTracker;
 	CONFIG.ui.items = applications.item.BlackFlagItemDirectory;
+	CONFIG.time.roundTime = 6;
 	applications.registerCustomElements();
 	config._configureFonts();
 	config._configureStatusEffects();
