@@ -19,6 +19,7 @@ import * as inventory from "./inventory.mjs";
 import * as items from "./items.mjs";
 import * as modifiers from "./modifiers.mjs";
 import * as notifications from "./notifications.mjs";
+import * as redirects from "./redirects.mjs";
 import * as registration from "./registration.mjs";
 import * as rules from "./rules.mjs";
 import * as skills from "./skills.mjs";
@@ -101,6 +102,7 @@ export default {
 	...inventory,
 	...modifiers,
 	...notifications,
+	...redirects,
 	registration,
 	...rules,
 	...skills,

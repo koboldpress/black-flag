@@ -48,6 +48,7 @@ Hooks.once("init", function () {
 	CONFIG.time.roundTime = 6;
 	applications.registerCustomElements();
 	config._configureFonts();
+	config._configureRedirects();
 	config._configureStatusEffects();
 	config.registration.setupHooks();
 	data.fields.applyEffectApplicationPatches();
