@@ -112,7 +112,7 @@ export default class SpellcastingTemplate extends foundry.abstract.DataModel {
 	 * @param {number} [config.count=1] - Number of classes with this type of spellcasting.
 	 */
 	static computePactProgression(progression, cls, { actor, levels=1, spellcasting, count=1 }) {
-		this._computeRoundedProgression(progression, levels, 2, count === 1);
+		this._computeRoundedProgression(progression, levels, 2);
 		progression.pact ??= {};
 		progression.pact.circle = Math.max(progression.pact.circle ?? -Infinity, spellcasting.maxCircle);
 		progression.pact.slots = Math.max(
