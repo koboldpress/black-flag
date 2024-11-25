@@ -109,7 +109,7 @@ export default class ItemDataModel extends BaseDataModel {
 	/** @inheritDoc */
 	prepareBaseData() {
 		super.prepareBaseData();
-		if (this.parent.isEmbedded) {
+		if (this.parent.isEmbedded && this.parent.actor.items.has(this.parent.id)) {
 			const sourceId = this._compendiumSource;
 			if (sourceId) {
 				if (!this.parent.actor.sourcedItems?.has(sourceId)) {

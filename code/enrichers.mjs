@@ -527,6 +527,7 @@ async function enrichCheck(config, label, options) {
 
 	if (invalid) return null;
 
+	config.ability = [config.ability];
 	config.rollAction = config.skill ? "skill" : config.tool ? "tool" : config.vehicle ? "vehicle" : "ability-check";
 	label ??= createRollLabel(config);
 	if (config.passive) return createPassiveTag(label, config);
