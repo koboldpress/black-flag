@@ -209,7 +209,7 @@ export const luck = {
 	},
 	max: 5,
 	rerollFormula: "1d4",
-	validRollTypes: new Set(["ability-check", "ability-save", "attack", "skill"])
+	validRollTypes: new Set(["ability-check", "ability-save", "attack", "death-save", "skill"])
 };
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
