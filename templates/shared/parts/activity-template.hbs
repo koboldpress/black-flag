@@ -5,8 +5,8 @@
 		{{#if data.target.template.type}}
 			<label>
 				<span>{{ localize "BF.TARGET.FIELDS.target.template.count.label" }}</span>
-				<input type="number" name="{{ prefix }}target.template.count" value="{{ data.target.template.count }}"
-							 min="1" step="1" placeholder="1">
+				<input type="text" name="{{ prefix }}target.template.count" value="{{ data.target.template.count }}"
+							 placeholder="1">
 			</label>
 		{{/if}}
 		<label>
@@ -43,7 +43,7 @@
 			</label>
 		</div>
 	{{/with}}
-	{{#if (and data.target.template.type (gt data.target.template.count 1))}}
+	{{#if (and data.target.template.type data.target.template.count)}}
 		<label class="full-checkbox">
 			<span class="hinted-label" data-tooltip="BF.TARGET.FIELDS.target.template.contiguous.hint">
 				{{ localize "BF.TARGET.FIELDS.target.template.contiguous.label" }}

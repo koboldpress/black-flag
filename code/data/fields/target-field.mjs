@@ -1,13 +1,13 @@
 import { getPluralRules, numberFormat } from "../../utils/_module.mjs";
 import FormulaField from "./formula-field.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing information about an item or activity's targeting.
  *
  * @property {object} template
- * @property {number} template.count - Number of templates to create.
+ * @property {string} template.count - Number of templates to create.
  * @property {boolean} template.connected - Must all created areas be connected to one another?
  * @property {string} template.type - Type of template (e.g. sphere, cone, line)
  * @property {string} template.size - Primary template size.
@@ -27,7 +27,7 @@ export default class TargetField extends SchemaField {
 	constructor(fields = {}, options = {}) {
 		fields = {
 			template: new SchemaField({
-				count: new NumberField({ initial: 1, positive: true, integer: true }),
+				count: new FormulaField({ deterministic: true }),
 				contiguous: new BooleanField(),
 				type: new StringField(),
 				size: new FormulaField({ deterministic: true }),

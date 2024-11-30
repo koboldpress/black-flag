@@ -390,6 +390,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, D
 		prepareFinalValue("duration.value", "BF.DURATION.Label");
 		prepareFinalValue("range.value", "BF.RANGE.Label");
 		prepareFinalValue("target.affects.count", "BF.TARGET.Label[other]");
+		prepareFinalValue("target.template.count", "BF.TARGET.FIELDS.template.count.label");
 		prepareFinalValue("target.template.size", "BF.AreaOfEffect.Size.Label");
 		prepareFinalValue("target.template.width", "BF.AreaOfEffect.Size.Width");
 		prepareFinalValue("target.template.height", "BF.AreaOfEffect.Size.Height");
