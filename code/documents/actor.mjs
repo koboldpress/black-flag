@@ -182,11 +182,17 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 	 * @property {boolean} magical - Is the damage magical?
 	 * @property {object} [active]
 	 * @property {number} [active.multiplier] - Final calculated multiplier.
-	 * @property {boolean} [active.modifications] - Did modification affect this description?
-	 * @property {boolean} [active.resistance] - Did resistance affect this description?
-	 * @property {boolean} [active.vulnerability] - Did vulnerability affect this description?
-	 * @property {boolean} [active.immunity] - Did immunity affect this description?
+	 * @property {DamageAffectDescription} [active.all] - How did resistances/etc. to all damage affect the total.
+	 * @property {DamageAffectDescription} [active.type] - How did resistances/etc. to this damage type affect the total.
 	 * @property {BlackFlagActor|BlackFlagItem} [source] - Source of the damage.
+	 */
+
+	/**
+	 * @typedef {object} DamageAffectDescription
+	 * @property {boolean} [modifications] - Did modification affect this description?
+	 * @property {boolean} [resistance] - Did resistance affect this description?
+	 * @property {boolean} [vulnerability] - Did vulnerability affect this description?
+	 * @property {boolean} [immunity] - Did immunity affect this description?
 	 */
 
 	/**
@@ -331,40 +337,6 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 
 		const multiplier = options.multiplier ?? 1;
 
-		const hasEffect = (category, type, magical, skipDowngrade) => {
-			if (
-				category === "resistance" &&
-				((downgrade(type) && hasEffect("immunity", type, magical, true)) ||
-					(downgrade("all") && hasEffect("immunity", "all", magical, true)))
-			)
-				return true;
-			const config =
-				this.system.traits?.damage?.[
-					{
-						immunity: "immunities",
-						resistance: "resistances",
-						vulnerability: "vulnerabilities"
-					}[category]
-				];
-			if (config?.value.has("all") && !ignore(category, "all", skipDowngrade)) return true;
-			if (ignore(category, type, skipDowngrade)) return false;
-			if (config?.value.has(type)) return true;
-			if (config?.nonmagical.has(type) && !magical) return true;
-			return false;
-		};
-
-		const ignore = (category, type, skipDowngrade) => {
-			return (
-				options.ignore === true ||
-				options.ignore?.[category] === true ||
-				options.ignore?.[category]?.has?.(type) ||
-				(category === "immunity" && downgrade(type) && !skipDowngrade) ||
-				(category === "resistance" && downgrade(type) && !hasEffect("immunity", type))
-			);
-		};
-
-		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
-
 		const skipped = type => {
 			if (options.only === "damage") return type in CONFIG.BlackFlag.healingTypes;
 			if (options.only === "healing") return type in CONFIG.BlackFlag.damageTypes;
@@ -375,10 +347,9 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			d.active ??= {};
 
 			// Skip damage types with immunity
-			if (skipped(d.type) || hasEffect("immunity", d.type, d.magical)) {
+			if (skipped(d.type) || this.#changeHasEffect("immunity", d, { options })) {
 				d.value = 0;
 				d.active.multiplier = 0;
-				d.active.immunity = true;
 				return;
 			}
 
@@ -387,15 +358,13 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			let damageMultiplier = multiplier;
 
 			// Apply damage resistance
-			if (hasEffect("resistance", d.type, d.magical)) {
+			if (this.#changeHasEffect("resistance", d, { options })) {
 				damageMultiplier /= 2;
-				d.active.resistance = true;
 			}
 
 			// Apply damage vulnerability
-			if (hasEffect("vulnerability", d.type, d.magical)) {
+			if (this.#changeHasEffect("vulnerability", d, { options })) {
 				damageMultiplier *= 2;
-				d.active.vulnerability = true;
 			}
 
 			// Negate healing types
@@ -417,6 +386,94 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		if (Hooks.call("blackFlag.postCalculateDamage", this, damages, options) === false) return false;
 
 		return damages;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether a specific type of change to a damage value will have an effect.
+	 * @param {string} category - What type of change should be considered (e.g. resistance, vulnerability, etc.).
+	 * @param {DamageDescription|string} damage - Damage description to consider or a specific type.
+	 * @param {object} [options={}]
+	 * @param {DamageApplicationOptions} [options.options={}] - Damage application options.
+	 * @param {boolean} [options.skipDowngrade=false] - Should downgrades be skipped?
+	 * @returns {boolean}
+	 */
+	#changeHasEffect(category, damage, { options = {}, skipDowngrade = false } = {}) {
+		const config =
+			this.system.traits?.damage?.[
+				{
+					immunity: "immunities",
+					resistance: "resistances",
+					vulnerability: "vulnerabilities"
+				}[category]
+			];
+		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+		const setActive = type => {
+			if (damage.active) {
+				damage.active[type] ??= {};
+				damage.active[type][category] = true;
+			}
+			return true;
+		};
+		const type = foundry.utils.getType(damage) === "string" ? damage : damage.type;
+
+		// If category is resistance, check for downgraded immunities
+		if (category === "resistance") {
+			if (downgrade("all") && this.#changeHasEffect("immunity", "all", { skipDowngrade: true })) {
+				return setActive("all");
+			}
+			if (downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true })) {
+				return setActive("type");
+			}
+		}
+
+		// If all damage resistance is present and not ignored
+		if (
+			!this.#changeIsIgnored(category, "all", { options, skipDowngrade }) &&
+			(config?.value.has("all") || (config?.nonmagical.has("all") && !magical))
+		) {
+			return setActive("all");
+		}
+
+		// If specific type damage resistance is present and not ignored
+		if (
+			!this.#changeIsIgnored(category, type, { options, skipDowngrade }) &&
+			(config?.value.has(type) || (config?.nonmagical.has(type) && !magical))
+		) {
+			return setActive("type");
+		}
+
+		return false;
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
+	 * Determine whether a specific damage change type should be ignored.
+	 * @param {string} category - What type of change should be considered (e.g. resistance, vulnerability, etc.).
+	 * @param {string} type - Specific damage type to consider.
+	 * @param {object} [options={}]
+	 * @param {DamageApplicationOptions} [options.options={}] - Damage application options.
+	 * @param {boolean} [options.skipDowngrade=false] - Should downgrades not be taken into account?
+	 * @returns {boolean}
+	 */
+	#changeIsIgnored(category, type, { options = {}, skipDowngrade = false } = {}) {
+		const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+
+		// All categories are ignored
+		if (options.ignore === true) return true;
+
+		// Specific category is ignored, or specific category has this type in its ignore list
+		if (options.ignore?.[category] === true || options.ignore?.[category]?.has?.(type)) return true;
+
+		// When downgrading, always ignore immunities unless `skipDowngrade` option is set
+		if (category === "immunity" && downgrade(type) && !skipDowngrade) return true;
+
+		// When downgrading, resistances should be decided by whether immunity is applied
+		if (category === "resistance" && downgrade(type) && !this.#changeHasEffect("immunity", type)) return true;
+
+		return false;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

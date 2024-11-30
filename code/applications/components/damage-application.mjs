@@ -108,10 +108,13 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 		const types = [];
 		for (const [change, values] of Object.entries(active)) {
 			for (const type of values) {
-				const config = CONFIG.BlackFlag.damageTypes[type] ?? CONFIG.BlackFlag.healingTypes[type];
-				if (!config) continue;
-				const data = { type, change, icon: config.icon };
-				types.push(data);
+				if (type === "all") {
+					types.push({ type, change, icon: "systems/black-flag/artwork/damage/all.svg" });
+				} else {
+					const config = CONFIG.BlackFlag.damageTypes[type] ?? CONFIG.BlackFlag.healingTypes[type];
+					if (!config) continue;
+					types.push({ type, change, icon: config.icon });
+				}
 			}
 		}
 		const changeSources = types.reduce((acc, { type, change, icon }) => {
@@ -190,7 +193,8 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			if (damage.type === "max") tempMax += damage.rollType === "healing" ? -1 * damage.value : damage.value;
 			else total += damage.value;
 			types.forEach(t => {
-				if (damage.active[t]) active[t].add(damage.type);
+				if (damage.active.all?.[t]) active[t].add("all");
+				if (damage.active.type?.[t]) active[t].add(damage.type);
 			});
 		}
 		temp = Math.floor(Math.max(0, temp));
@@ -221,9 +225,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 		if (options.ignore?.[change]?.has(type)) mode = "ignore";
 		else if (change === "immunity" && options.downgrade?.has(type)) mode = "downgrade";
 
-		let label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, {
-			type: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type]
-		});
+		const typeLabel =
+			type === "all"
+				? game.i18n.localize("BF.Resistance.AllDamage")
+				: CONFIG.BlackFlag.damageTypes.localized[type] ?? CONFIG.BlackFlag.healingTypes.localized[type];
+		let label = game.i18n.format(`BF.DAMAGE.Application.Change.${change.capitalize()}`, { type: typeLabel });
 		if (mode === "ignore") label = game.i18n.format("BF.DAMAGE.Application.Ignoring", { source: label });
 		if (mode === "downgrade") label = game.i18n.format("BF.DAMAGE.Application.Downgrading", { source: label });
 
