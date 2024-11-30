@@ -234,7 +234,7 @@ export default class WelcomeDialog extends BFApplication {
 	 * @param {HTMLElement} target - Button that was clicked.
 	 */
 	static async #openDocumentation(event, target) {
-		new FrameViewer("http://koboldpress.github.io/black-flag-docs/", {
+		new FrameViewer("https://koboldpress.github.io/black-flag-docs/", {
 			classes: ["black-flag", "documentation"],
 			title: "BF.WELCOME.Documentation"
 		}).render(true);
