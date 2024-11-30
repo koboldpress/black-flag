@@ -378,17 +378,23 @@ export default class NPCSheet extends BaseActorSheet {
 		const data = super._getSubmitData(updateData);
 
 		// TODO: Convert to custom NumberField
-		let cr = data["system.attributes.cr"];
-		cr =
-			{
-				"1/8": 0.125,
-				"⅛": 0.125,
-				"1/4": 0.25,
-				"¼": 0.25,
-				"1/2": 0.5,
-				"½": 0.5
-			}[cr] ?? parseFloat(cr);
-		if (Number.isNumeric(cr)) data["system.attributes.cr"] = cr;
+		if ("system.attributes.cr" in data) {
+			let cr = data["system.attributes.cr"];
+			cr =
+				{
+					"": null,
+					"-": null,
+					"1/8": 0.125,
+					"⅛": 0.125,
+					"1/4": 0.25,
+					"¼": 0.25,
+					"1/2": 0.5,
+					"½": 0.5
+				}[cr] ?? parseFloat(cr);
+			if (Number.isNaN(cr)) cr = null;
+			else if (cr > 1) cr = parseInt(cr);
+			data["system.attributes.cr"] = cr;
+		}
 
 		if ("system.attributes.legendary.value" in data)
 			data["system.attributes.legendary.spent"] =

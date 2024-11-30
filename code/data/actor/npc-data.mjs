@@ -104,7 +104,7 @@ export default class NPCData extends ActorDataModel.mixin(
 						initial: ["unarmored", "armored", "natural"]
 					})
 				}),
-				cr: new NumberField({ nullable: false, min: 0, initial: 0, label: "BF.ChallengeRating.Label" }),
+				cr: new NumberField({ nullable: true, min: 0, initial: 0, label: "BF.ChallengeRating.Label" }),
 				hp: new SchemaField(
 					{
 						value: new NumberField({ min: 0, integer: true, label: "BF.HitPoint.Current.LabelLong" }),
@@ -145,6 +145,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	 * @type {number}
 	 */
 	get xpValue() {
+		if (this.attributes.cr === null) return 0;
 		const index =
 			this.attributes.cr >= 1 ? this.attributes.cr + 3 : { 0: 0, 0.125: 1, 0.25: 2, 0.5: 3 }[this.attributes.cr];
 		return CONFIG.BlackFlag.xpForCR[index] ?? 0;
