@@ -135,9 +135,6 @@ export default class AbilityTemplate extends MeasuredTemplate {
 		this.layer.activate();
 		this.layer.preview.addChild(this);
 
-		// Hide the sheet that originated the preview
-		this.actorSheet?.minimize();
-
 		// Activate interactivity
 		return this.activatePreviewListeners(initialLayer);
 	}
@@ -186,7 +183,6 @@ export default class AbilityTemplate extends MeasuredTemplate {
 			this.#hoveredToken = null;
 		}
 		this.#initialLayer.activate();
-		await this.actorSheet?.maximize();
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

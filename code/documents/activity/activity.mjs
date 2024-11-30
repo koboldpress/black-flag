@@ -1260,6 +1260,9 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 	 */
 	static async #placeTemplate(event, target, message) {
 		const templates = [];
+		const minimized = !this.actor?.sheet._minimized;
+		await this.actor?.sheet?.minimize();
+
 		try {
 			for (const template of AbilityTemplate.fromActivity(this)) {
 				const result = await template.drawPreview();
@@ -1271,6 +1274,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 				log: "error",
 				notify: "error"
 			});
+		} finally {
+			if (minimized) this.actor?.sheet?.maximize();
 		}
 		return templates;
 	}
