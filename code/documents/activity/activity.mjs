@@ -1170,7 +1170,7 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			obj[index] = roll.options.damageType;
 			return obj;
 		}, {});
-		if (!foundry.utils.isEmpty(lastDamageTypes)) {
+		if (!foundry.utils.isEmpty(lastDamageTypes) && this.actor.items.has(this.item.id)) {
 			await this.item.setFlag(game.system.id, `relationship.last.${this.id}.damageType`, lastDamageTypes);
 		}
 
@@ -1361,7 +1361,8 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 			options: {
 				damageType:
 					damage.type === "variable"
-						? this.item.getFlag(game.system.id, `relationship.last.${this.id}.damageType.${index}`)
+						? this.item.getFlag(game.system.id, `relationship.last.${this.id}.damageType.${index}`) ??
+							damage.additionalTypes?.first()
 						: damage.type,
 				damageTypes: damage.type === "variable" ? damage.additionalTypes : undefined,
 				magical: this.magical,

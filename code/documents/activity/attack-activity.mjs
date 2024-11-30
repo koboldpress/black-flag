@@ -302,7 +302,9 @@ export default class AttackActivity extends Activity {
 			flags.ammunition = ammo.id;
 		}
 		if (rollConfig.attackMode) flags.attackMode = rollConfig.attackMode;
-		if (!foundry.utils.isEmpty(flags)) await this.item.setFlag(game.system.id, flagKey, flags);
+		if (!foundry.utils.isEmpty(flags) && this.actor.items.has(this.item.id)) {
+			await this.item.setFlag(game.system.id, flagKey, flags);
+		}
 
 		/**
 		 * A hook event that fires after an attack has been rolled, but before ammunition is updated.
