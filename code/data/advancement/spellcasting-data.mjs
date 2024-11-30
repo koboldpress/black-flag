@@ -40,19 +40,19 @@ export class SpellcastingConfigurationData extends foundry.abstract.DataModel {
 		return {
 			ability: new StringField({ blank: false, initial: "intelligence" }),
 			cantrips: new SchemaField({
-				scale: new StringField()
+				scale: new DocumentIdField()
 			}),
 			progression: new StringField(),
 			rituals: new SchemaField({
-				scale: new StringField(),
+				scale: new DocumentIdField(),
 				restricted: new BooleanField({ initial: true })
 			}),
 			slots: new SchemaField({
-				scale: new StringField()
+				scale: new DocumentIdField()
 			}),
 			source: new StringField(),
 			spells: new SchemaField({
-				scale: new StringField(),
+				scale: new DocumentIdField(),
 				mode: new StringField(),
 				replacement: new BooleanField(),
 				schools: new SetField(new StringField()),

@@ -2,7 +2,8 @@ import LocalDocumentField from "../fields/local-document-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import { GrantFeaturesConfigurationData } from "./grant-features-data.mjs";
 
-const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentUUIDField, EmbeddedDataField, SchemaField, SetField, StringField } =
+	foundry.data.fields;
 
 /**
  * Configuration data for the Grant Spells advancement.
@@ -43,7 +44,7 @@ export class GrantSpellsValueData extends foundry.abstract.DataModel {
 				new SchemaField({
 					document: new LocalDocumentField(foundry.documents.BaseItem),
 					modified: new BooleanField(),
-					uuid: new StringField() // TODO: Replace with UUIDField when available
+					uuid: new DocumentUUIDField()
 				}),
 				{ required: false, initial: undefined }
 			)

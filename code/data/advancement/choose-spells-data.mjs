@@ -1,8 +1,16 @@
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 import { SpellConfigurationData } from "./grant-spells-data.mjs";
 
-const { ArrayField, BooleanField, DocumentIdField, EmbeddedDataField, NumberField, SchemaField, StringField } =
-	foundry.data.fields;
+const {
+	ArrayField,
+	BooleanField,
+	DocumentIdField,
+	DocumentUUIDField,
+	EmbeddedDataField,
+	NumberField,
+	SchemaField,
+	StringField
+} = foundry.data.fields;
 
 /**
  * Configuration data for the Choose Spells advancement.
@@ -35,7 +43,7 @@ export class ChooseSpellsConfigurationData extends foundry.abstract.DataModel {
 					replacement: new BooleanField()
 				})
 			),
-			pool: new ArrayField(new SchemaField({ uuid: new StringField({ blank: false, nullable: false }) })),
+			pool: new ArrayField(new SchemaField({ uuid: new DocumentUUIDField() })),
 			restriction: new SchemaField({
 				allowCantrips: new BooleanField(),
 				allowRituals: new StringField(),
@@ -95,7 +103,7 @@ export class ChooseSpellsValueData extends foundry.abstract.DataModel {
 					new SchemaField({
 						document: new LocalDocumentField(foundry.documents.BaseItem),
 						modified: new BooleanField(),
-						uuid: new StringField() // TODO: Replace with UUIDField when available
+						uuid: new DocumentUUIDField()
 					})
 				),
 				{ required: false, initial: undefined }

@@ -1,6 +1,7 @@
 import { LocalDocumentField, MappingField } from "../fields/_module.mjs";
 
-const { ArrayField, BooleanField, DocumentIdField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, NumberField, SchemaField, StringField } =
+	foundry.data.fields;
 
 /**
  * Configuration data for choice levels.
@@ -32,7 +33,7 @@ export class ChooseFeaturesConfigurationData extends foundry.abstract.DataModel 
 					replacement: new BooleanField()
 				})
 			),
-			pool: new ArrayField(new SchemaField({ uuid: new StringField({ blank: false, nullable: false }) })),
+			pool: new ArrayField(new SchemaField({ uuid: new DocumentUUIDField() })),
 			restriction: new SchemaField({
 				category: new StringField(),
 				type: new StringField()
@@ -80,7 +81,7 @@ export class ChooseFeaturesValueData extends foundry.abstract.DataModel {
 				new ArrayField(
 					new SchemaField({
 						document: new LocalDocumentField(foundry.documents.BaseItem),
-						uuid: new StringField() // TODO: Replace with UUIDField when available
+						uuid: new DocumentUUIDField()
 					})
 				),
 				{ required: false, initial: undefined }

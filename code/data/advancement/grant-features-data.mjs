@@ -1,6 +1,6 @@
 import { LocalDocumentField } from "../fields/_module.mjs";
 
-const { ArrayField, BooleanField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, DocumentUUIDField, SchemaField } = foundry.data.fields;
 
 /**
  * Configuration data for an individual item entry in grant features.
@@ -22,7 +22,7 @@ export class GrantFeaturesConfigurationData extends foundry.abstract.DataModel {
 			enabled: new BooleanField({ initial: true }),
 			pool: new ArrayField(
 				new SchemaField({
-					uuid: new StringField({ blank: false, nullable: false }) // TODO: Replace with UUIDField when available
+					uuid: new DocumentUUIDField()
 				}),
 				{ label: "DOCUMENT.Items" }
 			)
@@ -52,7 +52,7 @@ export class GrantFeaturesValueData extends foundry.abstract.DataModel {
 			added: new ArrayField(
 				new SchemaField({
 					document: new LocalDocumentField(foundry.documents.BaseItem),
-					uuid: new StringField() // TODO: Replace with UUIDField when available
+					uuid: new DocumentUUIDField()
 				}),
 				{ required: false, initial: undefined }
 			)

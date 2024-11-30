@@ -1,6 +1,6 @@
 import { LocalDocumentField } from "../fields/_module.mjs";
 
-const { SchemaField, SetField, StringField } = foundry.data.fields;
+const { DocumentUUIDField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Configuration data for the Improvement advancement.
@@ -50,7 +50,7 @@ export class ImprovementValueData extends foundry.abstract.DataModel {
 			talent: new SchemaField(
 				{
 					document: new LocalDocumentField(foundry.documents.BaseItem),
-					uuid: new StringField() // TODO: Replace with UUIDField when available
+					uuid: new DocumentUUIDField()
 				},
 				{ required: false, initial: undefined }
 			)
