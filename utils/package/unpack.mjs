@@ -55,7 +55,7 @@ export default async function unpackDB(packName, entryName, options={}, config={
 		});
 
 		await extractPack(packInfo.path, dest, {
-			log: true, documentType: packInfo.type, transformEntry: entry => {
+			clean: true, log: true, documentType: packInfo.type, transformEntry: entry => {
 				if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
 				cleanPackEntry(entry, { userId: config.project?.userId });
 			}, transformName: entry => {
