@@ -859,7 +859,6 @@ export default class Activity extends PseudoDocumentMixin(BaseActivity) {
 						})
 					);
 					errors.push(err);
-					ui.notifications.error(err.message, { console: false });
 				}
 			}
 		}

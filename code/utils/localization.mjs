@@ -18,7 +18,7 @@ export function formatTaggedList({ entries=new Map(), extras=[], tags=[], tagDef
 	for ( const tag of tags ) {
 		const config = tagDefinitions[tag];
 		const localized = game.i18n.localize(config?.display ?? tag);
-		switch ( config.type ) {
+		switch ( config?.type ) {
 			case "appendedTags":
 				appendedTags.push(localized);
 			case "associated":
