@@ -1,0 +1,111 @@
+<div class="statblock npc">
+	<h4 class="title">
+		<span class="name">{{ actor.name }}</span>
+		<span class="cr">{{ localize "BF.ChallengeRating.Abbreviation" }} {{ cr }}</span>
+	</h4>
+	<div class="type">
+		<span>{{ labels.sizeAndType }}</span>
+	</div>
+	<div class="stats">
+		<dl>
+			<div>
+				<dt>{{ localize "BF.ArmorClass.Label" }}</dt>
+				<dd>{{ system.attributes.ac.value }}</dd>
+				{{#with system.attributes.ac.label}}
+					<dd>({{ this }})</dd>
+				{{/with}}
+			</div>
+			<div>
+				<dt>{{ localize "BF.HitPoint.Label[other]" }}</dt>
+				<dd>{{ system.attributes.hp.max }}</dd>
+			</div>
+			<div>
+				<dt>{{ localize "BF.Speed.Label" }}</dt>
+				<dd>{{ traits.speed }}</dd>
+			</div>
+			<div class="half-width">
+				<dt>{{ localize "BF.Skill.Perception.Label" }}</dt>
+				<dd>{{ blackFlag-number system.attributes.perception }}</dd>
+			</div>
+			<div class="half-width">
+				<dt>{{ localize "BF.Skill.Stealth.Label" }}</dt>
+				<dd>{{ stealthLabel }}</dd>
+			</div>
+			{{#if traits.vulnerabilities}}
+				<div>
+					<dt>{{ localize "BF.Vulnerability.Short" }}</dt>
+					<dd>{{{ traits.vulnerabilities }}}</dd>
+				</div>
+			{{/if}}
+			{{#if traits.resistances}}
+				<div>
+					<dt>{{ localize "BF.Resistance.Short" }}</dt>
+					<dd>{{{ traits.resistances }}}</dd>
+				</div>
+			{{/if}}
+			{{#if traits.immunities}}
+				<div>
+					<dt>{{ localize "BF.Immunity.Short" }}</dt>
+					<dd>{{{ traits.immunities }}}</dd>
+				</div>
+			{{/if}}
+			<div>
+				<dt>{{ localize "BF.SENSES.Label[other]" }}</dt>
+				<dd>{{ traits.senses }}</dd>
+			</div>
+			<div>
+				<dt>{{ localize "BF.Language.Label[other]" }}</dt>
+				<dd>{{ traits.languages }}</dd>
+			</div>
+		</dl>
+	</div>
+	<div class="abilities">
+		{{#each system.abilities}}
+			<div class="ability">
+				<span class="name">{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
+				<span class="mod">{{ blackFlag-number mod sign=true }}</span>
+			</div>
+		{{/each}}
+	</div>
+	<div class="actions">
+		<div class="features passive">
+			{{#each passive}}
+				<div class="feature">
+					<span class="controls">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</span>
+					{{{ description }}}
+				</div>
+			{{/each}}
+		</div>
+		{{#each actions}}
+			<div class="features {{ @key }}">
+				<h5>
+					{{ label }}
+					{{#if count}}
+						<div class="action-count">
+							<span>{{ count.max }}</span>
+						</div>
+					{{/if}}
+				</h5>
+				{{#if description}}
+					<p>{{ description }}</p>
+				{{/if}}
+				{{#each items}}
+					<div class="feature">
+						<span class="controls">{{ item.name }}{{#if uses}} ({{ uses }}){{/if}}.</span>
+						{{{ description }}}
+					</div>
+				{{/each}}
+				{{#if (and (eq @key "action") @root.spellcasting)}}
+				{{#with @root.spellcasting}}
+					<div class="spellcasting feature">
+						<span class="controls">
+							{{ localize "BF.Spellcasting.Label" }}.
+						</span>
+						{{{ description }}}
+					</div>
+				{{/with}}
+				{{/if}}
+			</div>
+		{{/each}}
+	</div>
+</div>

@@ -1,4 +1,4 @@
-.black-flag.npc.sheet .sheet-body [data-tab="main"] {
+.black-flag.npc.sheet .sheet-body [data-tab="main"], :is(.black-flag, .black-flag-journal) .statblock.npc {
 	label {
 		display: flex;
 		gap: 0.25em;
@@ -91,7 +91,7 @@
 		border-block: 2px solid var(--bf-color-border-blue);
 		padding-block: 3px;
 
-		> [data-ability] {
+		> [data-ability], > .ability {
 			grid-row: 1 / -1;
 			display: grid;
 			grid-template-rows: subgrid;
@@ -104,7 +104,7 @@
 				text-align: center;
 				text-transform: uppercase;
 			}
-			> span, > input {
+			> span, > input, .mod {
 				grid-row: 2;
 				width: 100%;
 				text-align: center;
@@ -134,7 +134,7 @@
 	}
 
 	.features {
-		h2 {
+		h2, h5 {
 			display: flex;
 			align-items: center;
 			margin-block-start: 14px;

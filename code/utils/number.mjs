@@ -42,11 +42,14 @@ export function getNumberFormatter(options={}) {
 /**
  * Format a challenge rating into a fraction if less than one.
  * @param {number|null} value
+ * @param {object} [options={}]
+ * @param {boolean} [options.narrow=true] - Use narrow fractions (e.g. ⅛) rather than wide ones (e.g. 1/8).
  * @returns {string}
  */
-export function formatCR(value) {
+export function formatCR(value, { narrow=true }={}) {
 	if ( value === null ) return "—";
-	return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? numberFormat(value);
+	const fractions = narrow ? { 0.125: "⅛", 0.25: "¼", 0.5: "½" } : { 0.125: "1/8", 0.25: "1/4", 0.5: "1/2" };
+	return fractions[value] ?? numberFormat(value);
 }
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */

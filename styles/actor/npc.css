@@ -155,3 +155,53 @@
 		}
 	}
 }
+
+:is(.black-flag, .black-flag-journal) {
+	.statblock.npc {
+		--statblock-column-width: 400px;
+		--end-border-radius: 18px;
+
+		max-width: var(--statblock-column-width);
+
+		.type { margin-block: 0; }
+		.stats dl {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 0;
+	
+			> div {
+				flex: 1 0 100%;
+				&.half-width { flex: 1 0 50%; }
+			}
+			div > :is(dt, dd) {
+				display: inline;
+				margin: 0;
+				line-height: 1.3;
+			}
+		}
+
+		h4.title {
+			border-start-end-radius: var(--end-border-radius);
+			border-end-end-radius: var(--end-border-radius);
+			padding-inline-start: 6px;
+			padding-inline-end: 12px;
+			background: var(--bf-text-color-blue);
+			color: var(--bf-text-color-white);
+			font-size: var(--font-size-16);
+			text-transform: none;
+			display: flex;
+			justify-content: space-between;
+		}
+		.actions {
+			h5 { margin-block-end: 6px; }
+			a, button {
+				display: contents;
+				cursor: inherit;
+				pointer-events: none;
+				:is(.fas, .far, .fa-solid, .fa-regular) { display: none; }
+			}
+			.roll-link { text-decoration: none; }
+			.extra-link { display: none; }
+		}
+	}
+}

@@ -1,5 +1,6 @@
 import NPCSheet from "../../applications/actor/npc-sheet.mjs";
 import Proficiency from "../../documents/proficiency.mjs";
+import { formatCR } from "../../utils/_module.mjs";
 import ActorDataModel from "../abstract/actor-data-model.mjs";
 import CreatureTypeField from "../fields/creature-type-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
@@ -310,6 +311,24 @@ export default class NPCData extends ActorDataModel.mixin(
 			ability.save.mod = ability.mod + ability.save.proficiency.flat + ability.save.bonus;
 			ability.dc = 8 + ability.mod + this.attributes.proficiency;
 		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+	/*          Embeds & Tooltips          */
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	async toEmbed(config, options = {}) {
+		for (const value of config.values) {
+			if (value === "statblock") config.statblock = true;
+		}
+		if (!config.statblock) return super.toEmbed(config, options);
+
+		const context = await this.parent.sheet.getData();
+		context.cr = formatCR(context.system.attributes.cr, { narrow: false });
+		const section = document.createElement("section");
+		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/npc-embed.hbs", context);
+		return section.children;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
