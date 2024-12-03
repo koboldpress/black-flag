@@ -1,5 +1,5 @@
 import SkillRollConfigurationDialog from "../applications/dice/skill-configuration-dialog.mjs";
-import { buildRoll, numberFormat, Trait } from "../utils/_module.mjs";
+import { buildRoll, log, numberFormat, Trait } from "../utils/_module.mjs";
 import DocumentMixin from "./mixins/document.mjs";
 import NotificationsCollection from "./notifications.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -128,6 +128,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 			{ character: 0, class: 0 },
 			...Object.values(this.system.progression?.levels ?? {}).map(l => l.levels)
 		];
+		const applied = new Map();
 		for (const level of levels) {
 			for (const advancement of this.advancementForLevel(level.character)) {
 				advancement
@@ -145,9 +146,12 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 							foundry.utils.setProperty(this, c.key, c.value);
 							overrides[c.key] = c.value;
 						} else Object.assign(overrides, applier.apply(this, c));
+						if (!applied.has(level)) applied.set(level, []);
+						applied.get(level).push(c);
 					});
 			}
 		}
+		if (CONFIG.BlackFlag.debug.advancementChanges && applied.size) log("Appling Advancement:", { extras: applied });
 
 		this.advancementOverrides = foundry.utils.expandObject(overrides);
 	}
