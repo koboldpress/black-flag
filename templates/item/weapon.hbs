@@ -35,11 +35,11 @@
 					{{/each}}
 				</fieldset>
 				<fieldset>
-					<legend>{{ localize "BF.Weapon.Details" }}</legend>
+					<legend>{{ localize "BF.WEAPON.Details" }}</legend>
 					{{#if properties.magical.selected}}
 						<label>
-							<span class="hinted-label" data-tooltip="BF.Weapon.MagicalBonus.Hint">
-								{{ localize "BF.Weapon.MagicalBonus.Label" }}
+							<span class="hinted-label" data-tooltip="BF.WEAPON.FIELDS.magicalBonus.hint">
+								{{ localize "BF.WEAPON.FIELDS.magicalBonus.label" }}
 							</span>
 							<input type="number" name="system.magicalBonus" value="{{ source.magicalBonus }}" step="1" min="0">
 						</label>
@@ -67,10 +67,17 @@
 					</div>
 					{{#if properties.ammunition.selected}}
 						<label class="ammunition-type">
-							<span>{{ localize "BF.AMMUNITION.Type.Label" }}</span>
+							<span>{{ localize "BF.WEAPON.FIELDS.ammunition.type.label" }}</span>
 							<select name="system.ammunition.type">
 								{{ selectOptions CONFIG.ammunition.localized selected=source.ammunition.type blank="" }}
 							</select>
+						</label>
+					{{/if}}
+					{{#if properties.magazine.selected}}
+						<label>
+							<span>{{ localize "BF.WEAPON.FIELDS.ammunition.capacity.label" }}</span>
+							<input type="number" name="system.ammunition.capacity" value="{{ source.ammunition.capacity }}"
+							       step=1 min=1>
 						</label>
 					{{/if}}
 					{{#if (or (eq source.type.value "ranged") properties.thrown.selected)}}
@@ -97,7 +104,7 @@
 					{{/if}}
 				</fieldset>
 				<fieldset class="options checkbox-list">
-					<legend>{{ localize "BF.Weapon.Option.Label[other]" }}</legend>
+					<legend>{{ localize "BF.WEAPON.Option.Label[other]" }}</legend>
 					{{#each options}}
 						<label>
 							<input type="checkbox" name="system.options.{{ @key }}" {{ checked selected }}>

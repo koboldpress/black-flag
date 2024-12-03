@@ -69,23 +69,15 @@ export default class WeaponData extends ItemDataModel.mixin(
 	/** @inheritDoc */
 	static defineSchema() {
 		return this.mergeSchema(super.defineSchema(), {
-			ammunition: new SchemaField(
-				{
-					type: new StringField({ label: "BF.AMMUNITION.Type.Label" })
-				},
-				{ label: "BF.Item.Type.Ammunition[one]" }
-			),
+			ammunition: new SchemaField({
+				capacity: new NumberField(),
+				type: new StringField()
+			}),
 			damage: new SchemaField({
 				base: new DamageField({ simple: true })
 			}),
-			magicalBonus: new NumberField({
-				integer: true,
-				label: "BF.Weapon.MagicalBonus.Label",
-				hint: "BF.Weapon.MagicalBonus.Hint"
-			}),
-			options: new SetField(new StringField(), {
-				label: "BF.Weapon.Option.Label[other]"
-			}),
+			magicalBonus: new NumberField({ integer: true }),
+			options: new SetField(new StringField()),
 			range: new SchemaField({
 				short: new NumberField({ min: 0, step: 0.1 }),
 				long: new NumberField({ min: 0, step: 0.1 }),
@@ -93,9 +85,9 @@ export default class WeaponData extends ItemDataModel.mixin(
 				units: new StringField()
 			}),
 			type: new SchemaField({
-				value: new StringField({ initial: "melee", label: "BF.Weapon.Type.Label" }),
-				category: new StringField({ label: "BF.Equipment.Category.Label" }),
-				base: new StringField({ label: "BF.Equipment.Base.Label" })
+				value: new StringField({ initial: "melee" }),
+				category: new StringField(),
+				base: new StringField()
 			})
 		});
 	}
@@ -244,7 +236,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 	 */
 	get typeLabel() {
 		return game.i18n
-			.format("BF.Weapon.Type.CombinedLabel[one]", {
+			.format("BF.WEAPON.Type.CombinedLabel[one]", {
 				category: CONFIG.BlackFlag.weapons.localized[this.type.category] ?? "",
 				type: CONFIG.BlackFlag.weaponTypes.localized[this.type.value] ?? ""
 			})
@@ -322,8 +314,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		const type = CONFIG.BlackFlag.weapons.localized[this.type.base ?? this.type.category];
-		if (type) this.type.label = `${game.i18n.localize("BF.Weapon.Label[one]")} (${type})`;
-		else this.type.label = game.i18n.localize("BF.Weapon.Label[one]");
+		if (type) this.type.label = `${game.i18n.localize("BF.WEAPON.Label[one]")} (${type})`;
+		else this.type.label = game.i18n.localize("BF.WEAPON.Label[one]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

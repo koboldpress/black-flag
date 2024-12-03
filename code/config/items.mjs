@@ -236,6 +236,12 @@ export const gearProperties = ["magical"];
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * @typedef {LabeledConfiguration} ItemPropertyConfiguration
+ * @property {string} [reference] - Reference to a rules journal entry page describing this property.
+ * @property {string} [rules] - Rules setting category that allows these options to be toggled by GM.
+ */
+
+/**
  * Properties that can be applied to weapons.
  * @enum {LabeledConfiguration}
  */
@@ -269,39 +275,47 @@ export const itemProperties = {
 
 	// Weapon
 	ammunition: {
-		label: "BF.Weapon.Property.Ammunition",
+		label: "BF.WEAPON.Property.Ammunition",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.hEqdEZpofvIVhZbV"
 	},
 	finesse: {
-		label: "BF.Weapon.Property.Finesse",
+		label: "BF.WEAPON.Property.Finesse",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.Nwe1EXlZHGBrNOGD"
 	},
+	gunpowder: {
+		label: "BF.WEAPON.Property.Gunpowder",
+		rules: "firearms"
+	},
 	heavy: {
-		label: "BF.Weapon.Property.Heavy",
+		label: "BF.WEAPON.Property.Heavy",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.06OJCIgMWhfAWfi6"
 	},
 	light: {
-		label: "BF.Weapon.Property.Light",
+		label: "BF.WEAPON.Property.Light",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.AjLCb6Qp0btCuzv1"
 	},
 	loading: {
-		label: "BF.Weapon.Property.Loading",
+		label: "BF.WEAPON.Property.Loading",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.6T8MmG97dLpEOv36"
 	},
+	magazine: {
+		label: "BF.WEAPON.Property.Magazine",
+		rules: "firearms"
+	},
 	reach: {
-		label: "BF.Weapon.Property.Reach",
+		label: "BF.WEAPON.Property.Reach",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.IqJ491vX9cgfBC4a"
 	},
 	thrown: {
-		label: "BF.Weapon.Property.Thrown",
+		label: "BF.WEAPON.Property.Thrown",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.nlNCYugyCLULTc55"
 	},
 	twoHanded: {
-		label: "BF.Weapon.Property.TwoHanded",
+		label: "BF.WEAPON.Property.TwoHanded",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.ncge72BaBpqk68V0"
 	},
 	versatile: {
-		label: "BF.Weapon.Property.Versatile",
+		label: "BF.WEAPON.Property.Versatile",
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.iuDmrgxZEnH5bQF0"
 	}
 };

@@ -670,6 +670,8 @@
 		"BlowgunNeedle[other]": "Blowgun Needles",
 		"CrossbowBolt[one]": "Crossbow Bolt",
 		"CrossbowBolt[other]": "Crossbow Bolts",
+		"PaperCartridge[one]": "Paper Cartridge",
+		"PaperCartridge[other]": "Paper Cartridges",
 		"SlingBullet[one]": "Sling Bullet",
 		"SlingBullet[other]": "Sling Bullets"
 	}
@@ -3929,12 +3931,12 @@
 	}
 },
 
-"BF.Weapon": {
-	"Label[one]": "Weapon",
-	"Label[other]": "Weapons",
+"BF.WEAPON": {
 	"Base": {
+		"Arquebus": "Arquebus",
 		"Battleaxe": "Battleaxe",
 		"Blowgun": "Blowgun",
+		"Blunderbuss": "Blunderbuss",
 		"Club": "Club",
 		"CrossbowHand": "Crossbow, Hand",
 		"CrossbowHeavy": "Crossbow, Heavy",
@@ -3956,9 +3958,12 @@
 		"Mace": "Mace",
 		"Maul": "Maul",
 		"Morningstar": "Morningstar",
+		"Musket": "Musket",
 		"Pike": "Pike",
+		"Pistol": "Pistol",
 		"Quarterstaff": "Quarterstaff",
 		"Rapier": "Rapier",
+		"RevolvingMusket": "Revolving Musket",
 		"Scimitar": "Scimitar",
 		"Scythe": "Scythe",
 		"Shortbow": "Shortbow",
@@ -3980,6 +3985,44 @@
 		"Martial[other]": "Martial Weapons"
 	},
 	"Details": "Weapon Details",
+	"FIELDS": {
+		"ammunition": {
+			"label": "Ammunition",
+			"capacity": {
+				"label": "Magazine Capacity"
+			},
+			"type": {
+				"label": "Ammunition Type"
+			}
+		},
+		"damage": {
+			"label": "Damage"
+		},
+		"magicalBonus": {
+			"hint": "Magical bonus added to attack and damage.",
+			"label": "Magical Bonus"
+		},
+		"options": {
+			"label": "Weapon Options"
+		},
+		"range": {
+			"label": "Range",
+			"long": {
+				"label": "Long Range"
+			},
+			"reach": {
+				"label": "Reach"
+			},
+			"short": {
+				"label": "Short Range"
+			},
+			"units": {
+				"label": "Range Units"
+			}
+		}
+	},
+	"Label[one]": "Weapon",
+	"Label[other]": "Weapons",
 	"MagicalBonus": {
 		"Label": "Magical Bonus",
 		"Hint": "Magical bonus added to attack and damage."
@@ -3990,6 +4033,7 @@
 		"Bash": "Bash",
 		"Disarm": "Disarm",
 		"Hamstring": "Hamstring",
+		"HarmlessFusillade": "Harmless Fusillade",
 		"PinningShot": "Pinning Shot",
 		"Pull": "Pull",
 		"RicochetShot": "Ricochet Shot",
@@ -3998,9 +4042,11 @@
 	"Property": {
 		"Ammunition": "Ammunition",
 		"Finesse": "Finesse",
+		"Gunpowder": "Gunpowder",
 		"Heavy": "Heavy",
 		"Light": "Light",
 		"Loading": "Loading",
+		"Magazine": "Magazine",
 		"Reach": "Reach",
 		"Thrown": "Thrown",
 		"TwoHanded": "Two-Handed",

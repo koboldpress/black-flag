@@ -20,7 +20,7 @@ export default class ProficiencyConfig extends BaseConfig {
 	get type() {
 		return game.i18n
 			.getListFormatter()
-			.format([game.i18n.localize("BF.Armor.Label[one]"), game.i18n.localize("BF.Weapon.Label[one]")]);
+			.format([game.i18n.localize("BF.Armor.Label[one]"), game.i18n.localize("BF.WEAPON.Label[one]")]);
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

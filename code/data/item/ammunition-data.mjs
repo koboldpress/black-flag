@@ -61,13 +61,9 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 				base: new DamageField(),
 				replace: new BooleanField()
 			}),
-			magicalBonus: new NumberField({
-				integer: true,
-				label: "BF.AMMUNITION.MagicalBonus.Label",
-				hint: "BF.AMMUNITION.MagicalBonus.Hint"
-			}),
+			magicalBonus: new NumberField({ integer: true }),
 			type: new SchemaField({
-				category: new StringField({ label: "BF.Equipment.Category.Label" })
+				category: new StringField()
 			})
 		});
 	}
@@ -108,8 +104,8 @@ export default class AmmunitionData extends ItemDataModel.mixin(
 		this.preparePhysicalLabels();
 
 		const type = CONFIG.BlackFlag.ammunition.localized[this.type.category];
-		if (type) this.type.label = `${game.i18n.localize("BF.Weapon.Label[one]")} (${type})`;
-		else this.type.label = game.i18n.localize("BF.Weapon.Label[one]");
+		if (type) this.type.label = `${game.i18n.localize("BF.WEAPON.Label[one]")} (${type})`;
+		else this.type.label = game.i18n.localize("BF.WEAPON.Label[one]");
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

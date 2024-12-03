@@ -236,7 +236,7 @@ export default class PCSheet extends BaseActorSheet {
 		// Weapons
 		context.traits.push({
 			key: "weapons",
-			label: "BF.Weapon.Label[other]",
+			label: "BF.WEAPON.Label[other]",
 			value: Trait.localizedList(proficiencies.weapons.value, [], { style: "short", trait: "weapons" }) || none,
 			config: "proficiency"
 		});

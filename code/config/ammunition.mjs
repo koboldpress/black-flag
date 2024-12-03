@@ -2,7 +2,7 @@ import { localizeConfig } from "../utils/_module.mjs";
 
 /**
  * Types of ammunition offered by the system.
- * @enum {NestedTypeConfiguration}
+ * @enum {NestedLinkedConfiguration}
  */
 export const ammunition = {
 	arrow: {
@@ -16,6 +16,10 @@ export const ammunition = {
 	crossbowBolt: {
 		localization: "BF.AMMUNITION.Type.CrossbowBolt",
 		link: "Compendium.black-flag.items.Item.cUcIM6yesvDT51kY"
+	},
+	paperCartridge: {
+		localization: "BF.AMMUNITION.Type.PaperCartridge",
+		rules: "firearms"
 	},
 	slingBullet: {
 		localization: "BF.AMMUNITION.Type.SlingBullet",

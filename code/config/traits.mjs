@@ -35,8 +35,8 @@ export const traits = {
 	},
 	weapons: {
 		labels: {
-			title: "BF.Weapon.Label[other]",
-			localization: "BF.Weapon.Label"
+			title: "BF.WEAPON.Label[other]",
+			localization: "BF.WEAPON.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/weapons.svg",
 		type: "proficiency",

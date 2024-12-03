@@ -65,6 +65,7 @@ import * as weapons from "./weapons.mjs";
 /**
  * @typedef {NestedTypeConfiguration} NestedLinkedConfiguration
  * @property {string} [link] - Link to an item in the compendium.
+ * @property {string} [rules] - Rules setting category that allows these options to be toggled by GM.
  * @property {Record<string, NestedLinkedConfiguration>} [children] - Nested children.
  */
 

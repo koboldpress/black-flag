@@ -31,203 +31,228 @@ localizeConfig(attackModes, { sort: false });
  */
 export const weapons = {
 	simple: {
-		label: "BF.Weapon.Category.Simple",
-		localization: "BF.Weapon.Category.Simple",
+		label: "BF.WEAPON.Category.Simple",
+		localization: "BF.WEAPON.Category.Simple",
 		children: {
 			// Simple Melee
 			club: {
-				label: "BF.Weapon.Base.Club",
+				label: "BF.WEAPON.Base.Club",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.WhFDR7nOBaBhhwmp"
 			},
 			dagger: {
-				label: "BF.Weapon.Base.Dagger",
+				label: "BF.WEAPON.Base.Dagger",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.3bEIZYDB4eMayC6k"
 			},
 			greatclub: {
-				label: "BF.Weapon.Base.Greatclub",
+				label: "BF.WEAPON.Base.Greatclub",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.QAPscsGRbv5l778n"
 			},
 			handaxe: {
-				label: "BF.Weapon.Base.Handaxe",
+				label: "BF.WEAPON.Base.Handaxe",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.y6xWtgpXkPkn8cqO"
 			},
 			javelin: {
-				label: "BF.Weapon.Base.Javelin",
+				label: "BF.WEAPON.Base.Javelin",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.8wAd9MmtaW1tizSN"
 			},
 			lightHammer: {
-				label: "BF.Weapon.Base.LightHammer",
+				label: "BF.WEAPON.Base.LightHammer",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.JBfKqjO5hbNcX6zN"
 			},
 			mace: {
-				label: "BF.Weapon.Base.Mace",
+				label: "BF.WEAPON.Base.Mace",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.XOrCLbriQXUoLCTL"
 			},
 			quarterstaff: {
-				label: "BF.Weapon.Base.Quarterstaff",
+				label: "BF.WEAPON.Base.Quarterstaff",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.B5J4heAlwqhvzXKW"
 			},
 			sickle: {
-				label: "BF.Weapon.Base.Sickle",
+				label: "BF.WEAPON.Base.Sickle",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.MLfeXpp9ZSPKrB7w"
 			},
 			spear: {
-				label: "BF.Weapon.Base.Spear",
+				label: "BF.WEAPON.Base.Spear",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.eG0Vk1Kr8peAAYhW"
 			},
 			// Simple Ranged
 			lightCrossbow: {
-				label: "BF.Weapon.Base.CrossbowLight",
+				label: "BF.WEAPON.Base.CrossbowLight",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.Zu15sMMg2KvxhA3e"
 			},
 			dart: {
-				label: "BF.Weapon.Base.Dart",
+				label: "BF.WEAPON.Base.Dart",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.14pCY7bJYfjnSZqB"
 			},
+			pistol: {
+				label: "BF.WEAPON.Base.Pistol",
+				type: "ranged",
+				rules: "firearms"
+			},
 			shortbow: {
-				label: "BF.Weapon.Base.Shortbow",
+				label: "BF.WEAPON.Base.Shortbow",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.Zu15sMMg2KvxhA3e"
 			},
 			sling: {
-				label: "BF.Weapon.Base.Sling",
+				label: "BF.WEAPON.Base.Sling",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.QoMwONkjb7knNonO"
 			}
 		}
 	},
 	martial: {
-		label: "BF.Weapon.Category.Martial",
-		localization: "BF.Weapon.Category.Martial",
+		label: "BF.WEAPON.Category.Martial",
+		localization: "BF.WEAPON.Category.Martial",
 		children: {
 			// Martial Melee
 			battleaxe: {
-				label: "BF.Weapon.Base.Battleaxe",
+				label: "BF.WEAPON.Base.Battleaxe",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.bDVnEZSy0tcZg0js"
 			},
 			flail: {
-				label: "BF.Weapon.Base.Flail",
+				label: "BF.WEAPON.Base.Flail",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.eEVYQ21cIi97CRl1"
 			},
 			glaive: {
-				label: "BF.Weapon.Base.Glaive",
+				label: "BF.WEAPON.Base.Glaive",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.caf9G1uCz7agcoym"
 			},
 			greataxe: {
-				label: "BF.Weapon.Base.Greataxe",
+				label: "BF.WEAPON.Base.Greataxe",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.9EAkaGqWPK0qFoDq"
 			},
 			greatsword: {
-				label: "BF.Weapon.Base.Greatsword",
+				label: "BF.WEAPON.Base.Greatsword",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.LG9czlXCwzBSmWR4"
 			},
 			halberd: {
-				label: "BF.Weapon.Base.Halberd",
+				label: "BF.WEAPON.Base.Halberd",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.PV6JskvwVJ9BVvQb"
 			},
 			lance: {
-				label: "BF.Weapon.Base.Lance",
+				label: "BF.WEAPON.Base.Lance",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.vDPNvqRkuKnzAbvR"
 			},
 			longsword: {
-				label: "BF.Weapon.Base.Longsword",
+				label: "BF.WEAPON.Base.Longsword",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.ym1owWiMSNOcZNdO"
 			},
 			maul: {
-				label: "BF.Weapon.Base.Maul",
+				label: "BF.WEAPON.Base.Maul",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.WWJHSzi0T466vB3o"
 			},
 			morningstar: {
-				label: "BF.Weapon.Base.Morningstar",
+				label: "BF.WEAPON.Base.Morningstar",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.zWBmus194O0RLxeU"
 			},
 			pike: {
-				label: "BF.Weapon.Base.Pike",
+				label: "BF.WEAPON.Base.Pike",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.ib6aTaDTjlnG3m54"
 			},
 			rapier: {
-				label: "BF.Weapon.Base.Rapier",
+				label: "BF.WEAPON.Base.Rapier",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.pcyyBxMi5naeXbSt"
 			},
 			scimitar: {
-				label: "BF.Weapon.Base.Scimitar",
+				label: "BF.WEAPON.Base.Scimitar",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.MwYjehTr9oJlHb1Z"
 			},
 			scythe: {
-				label: "BF.Weapon.Base.Scythe",
+				label: "BF.WEAPON.Base.Scythe",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.4diYN02TlcURqvK3"
 			},
 			shortsword: {
-				label: "BF.Weapon.Base.Shortsword",
+				label: "BF.WEAPON.Base.Shortsword",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.C9nwbmL7uTX8t8nr"
 			},
 			trident: {
-				label: "BF.Weapon.Base.Trident",
+				label: "BF.WEAPON.Base.Trident",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.KOE2ZOUMtbY0OkS9"
 			},
 			warPick: {
-				label: "BF.Weapon.Base.WarPick",
+				label: "BF.WEAPON.Base.WarPick",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.EcuWrcnF6FY79arQ"
 			},
 			warhammer: {
-				label: "BF.Weapon.Base.Warhammer",
+				label: "BF.WEAPON.Base.Warhammer",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.E7IJC52xWk7Utk4p"
 			},
 			whip: {
-				label: "BF.Weapon.Base.Whip",
+				label: "BF.WEAPON.Base.Whip",
 				type: "melee",
 				link: "Compendium.black-flag.items.Item.teX6pEUhupO8LBTu"
 			},
 			// Martial Ranged
+			arquebus: {
+				label: "BF.WEAPON.Base.Arquebus",
+				type: "ranged",
+				rules: "firearms"
+			},
 			blowgun: {
-				label: "BF.Weapon.Base.Blowgun",
+				label: "BF.WEAPON.Base.Blowgun",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.5jfXHBmPqbspahJk"
 			},
+			blunderbuss: {
+				label: "BF.WEAPON.Base.Blunderbuss",
+				type: "ranged",
+				rules: "firearms"
+			},
 			handCrossbow: {
-				label: "BF.Weapon.Base.CrossbowHand",
+				label: "BF.WEAPON.Base.CrossbowHand",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.b126bs62p8TQIYZ8"
 			},
 			heavyCrossbow: {
-				label: "BF.Weapon.Base.CrossbowHeavy",
+				label: "BF.WEAPON.Base.CrossbowHeavy",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.Z8Wz5qUi16C36QQd"
 			},
 			longbow: {
-				label: "BF.Weapon.Base.Longbow",
+				label: "BF.WEAPON.Base.Longbow",
 				type: "ranged",
 				link: "Compendium.black-flag.items.Item.IpWwpPrnKuwHQpVw"
+			},
+			musket: {
+				label: "BF.WEAPON.Base.Musket",
+				type: "ranged",
+				rules: "firearms"
+			},
+			revolvingMusket: {
+				label: "BF.WEAPON.Base.RevolvingMusket",
+				type: "ranged",
+				rules: "firearms"
 			}
 		}
 	}
@@ -240,30 +265,39 @@ localizeConfig(weapons.martial.children);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * @typedef {LabeledConfiguration} WeaponOptionConfiguration
+ * @property {string} [rules] - Rules setting category that allows these options to be toggled by GM.
+ */
+
+/**
  * Alternate actions that can be taken with weapons.
  * @enum {LabeledConfiguration}
  */
 export const weaponOptions = {
 	bash: {
-		label: "BF.Weapon.Option.Bash"
+		label: "BF.WEAPON.Option.Bash"
 	},
 	disarm: {
-		label: "BF.Weapon.Option.Disarm"
+		label: "BF.WEAPON.Option.Disarm"
 	},
 	hamstring: {
-		label: "BF.Weapon.Option.Hamstring"
+		label: "BF.WEAPON.Option.Hamstring"
+	},
+	harmlessFusillade: {
+		label: "BF.WEAPON.Option.HarmlessFusillade",
+		rules: "firearms"
 	},
 	pinningShot: {
-		label: "BF.Weapon.Option.PinningShot"
+		label: "BF.WEAPON.Option.PinningShot"
 	},
 	pull: {
-		label: "BF.Weapon.Option.Pull"
+		label: "BF.WEAPON.Option.Pull"
 	},
 	ricochetShot: {
-		label: "BF.Weapon.Option.RicochetShot"
+		label: "BF.WEAPON.Option.RicochetShot"
 	},
 	trip: {
-		label: "BF.Weapon.Option.Trip"
+		label: "BF.WEAPON.Option.Trip"
 	}
 };
 
@@ -276,9 +310,11 @@ export const weaponOptions = {
 export const weaponProperties = [
 	"ammunition",
 	"finesse",
+	"gunpowder",
 	"heavy",
 	"light",
 	"loading",
+	"magazine",
 	"magical",
 	"special",
 	"reach",
@@ -295,10 +331,10 @@ export const weaponProperties = [
  */
 export const weaponTypes = {
 	melee: {
-		label: "BF.Weapon.Type.Melee"
+		label: "BF.WEAPON.Type.Melee"
 	},
 	ranged: {
-		label: "BF.Weapon.Type.Ranged"
+		label: "BF.WEAPON.Type.Ranged"
 	}
 };
 localizeConfig(weaponTypes, { sort: false });
