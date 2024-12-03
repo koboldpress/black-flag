@@ -1,6 +1,6 @@
 <div class="statblock npc">
 	<h4 class="title">
-		<span class="name">{{ actor.name }}</span>
+		<span class="name">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</span>
 		<span class="cr">{{ localize "BF.ChallengeRating.Abbreviation" }} {{ cr }}</span>
 	</h4>
 	<div class="type">

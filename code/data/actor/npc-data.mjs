@@ -326,6 +326,11 @@ export default class NPCData extends ActorDataModel.mixin(
 
 		const context = await this.parent.sheet.getData();
 		context.cr = formatCR(context.system.attributes.cr, { narrow: false });
+		context.name = config.label || this.parent.name;
+		if (config.cite === true) {
+			context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
+			config.cite = false;
+		}
 		const section = document.createElement("section");
 		section.innerHTML = await renderTemplate("systems/black-flag/templates/actor/embeds/npc-embed.hbs", context);
 		return section.children;
