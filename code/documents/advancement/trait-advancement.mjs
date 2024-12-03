@@ -109,10 +109,11 @@ export default class TraitAdvancement extends Advancement {
 					mode: CONST.ACTIVE_EFFECT_MODES.ADD,
 					value: key.split(":").pop()
 				});
-			} else if (this.configuration.mode !== "expertise" || existingValue !== 0) {
+			} else {
 				changes.push({
 					key: keyPath,
 					mode: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
+					priority: Object.keys(CONFIG.BlackFlag.traitModes).findIndex(k => k === this.configuration.mode) * 10,
 					value:
 						this.configuration.mode === "default" || (this.configuration.mode === "upgrade" && existingValue === 0)
 							? 1
