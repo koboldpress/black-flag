@@ -202,8 +202,8 @@ export default class ImprovementAdvancement extends GrantFeaturesAdvancement {
 			else if (!this.value.ability?.two) data.ability.two = ability;
 		}
 
-		if (data.talent) {
-			const added = await this.createItems([data.talent]);
+		if (data.talent?.choice) {
+			const added = await this.createItems([data.talent.choice]);
 			if (added[0]) data.talent = added[0];
 			else delete data.talent;
 		}
