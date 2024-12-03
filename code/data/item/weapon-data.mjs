@@ -18,6 +18,7 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes {PropertiesTemplate}
  *
  * @property {object} ammunition
+ * @property {number} ammunition.capacity - Number of shots that can be held in a weapon with the magazine property.
  * @property {string} ammunition.type - Category of ammunition that can be used with this weapon.
  * @property {object} damage
  * @property {DamageField} damage.base - Base weapon damage.

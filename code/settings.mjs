@@ -1,4 +1,6 @@
+import RulesSettingConfig from "./applications/settings/rules-settings-config.mjs";
 import WelcomeDialog from "./applications/welcome-dialog.mjs";
+import RulesSetting from "./data/settings/rules-setting.mjs";
 import { systemVersion } from "./utils/localization.mjs";
 import log from "./utils/logging.mjs";
 
@@ -31,6 +33,26 @@ export function registerKeybindings() {
  */
 export function registerSettings() {
 	log("Registering system settings");
+
+	// Optional rules
+	game.settings.registerMenu(game.system.id, "rulesConfiguration", {
+		name: "BF.Settings.Rules.Name",
+		label: "BF.Settings.Rules.Label",
+		hint: "BF.Settings.Rules.Hint",
+		icon: "fas fa-chess-rook",
+		type: RulesSettingConfig,
+		restricted: true
+	});
+
+	game.settings.register(game.system.id, "rulesConfiguration", {
+		scope: "world",
+		config: false,
+		type: RulesSetting,
+		default: {
+			firearms: false
+		},
+		requiresReload: true
+	});
 
 	game.settings.register(game.system.id, "attackVisibility", {
 		name: "BF.Settings.AttackVisibility.Label",
@@ -246,4 +268,20 @@ export function renderSettingsSidebar(html) {
 	const div = document.createElement("div");
 	div.append(welcomeLink);
 	badge.insertAdjacentElement("afterend", div);
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Make adjustments to configuration data based on selected optional rules.
+ */
+export function _configureOptionalRules() {
+	const rules = game.settings.get(game.system.id, "rulesConfiguration");
+	const adjustNested = obj => {
+		for (const [key, value] of Object.entries(obj)) {
+			if ("rules" in value && rules[value.rules] !== true && !rules.required[value.rules]) delete obj[key];
+			else if ("children" in value) adjustNested(value.children);
+		}
+	};
+	["ammunition", "itemProperties", "weaponOptions", "weapons"].forEach(c => adjustNested(CONFIG.BlackFlag[c]));
 }

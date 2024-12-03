@@ -216,6 +216,7 @@ export async function registerHandlebarsPartials() {
 		"shared/parts/activity-range.hbs",
 		"shared/parts/activity-template.hbs",
 		"shared/parts/document-source.hbs",
+		"shared/parts/fieldlist.hbs",
 		"shared/parts/inventory-collapsible.hbs",
 		"shared/parts/inventory-controls.hbs",
 		"shared/parts/inventory-summary.hbs"

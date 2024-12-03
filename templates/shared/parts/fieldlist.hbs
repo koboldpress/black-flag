@@ -1,0 +1,6 @@
+{{#each this}}
+	{{#if field}}
+		{{ formField field name=name value=value input=input options=options label=label hint=hint localize=localize
+		                   disabled=disabled rootId=@root.partId }}
+	{{/if}}
+{{/each}}

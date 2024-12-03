@@ -1,3 +1,4 @@
+import RulesSetting from "./data/settings/rules-setting.mjs";
 import { log } from "./utils/_module.mjs";
 
 /**
@@ -23,7 +24,7 @@ export default function registerModuleData() {
 	console.groupEnd();
 }
 
-const methods = [registerSourceBooks];
+const methods = [registerSourceBooks, registerRequiredRules];
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
@@ -36,4 +37,19 @@ function registerSourceBooks(manifest) {
 	if (!manifest.flags[game.system.id]?.sourceBooks) return;
 	Object.assign(CONFIG.BlackFlag.sourceBooks, manifest.flags[game.system.id].sourceBooks);
 	return "source books";
+}
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Register optional rules required by a module from `flags.black-flag.requireRules`.
+ * @param {Module|System|World} manifest - Manifest from which to register data.
+ * @returns {string|void} - Description of the data registered.
+ */
+function registerRequiredRules(manifest) {
+	if (!manifest.flags[game.system.id]?.requiredRules?.length) return;
+	for (const rule of manifest.flags[game.system.id].requiredRules) {
+		RulesSetting.addRequiredRule(rule, manifest);
+	}
+	return "required rules";
 }

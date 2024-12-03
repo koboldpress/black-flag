@@ -83,6 +83,7 @@ Hooks.once("setup", function () {
 
 	config._configureConsumableAttributes();
 	config._configureTrackableAttributes();
+	settings._configureOptionalRules();
 
 	// Handle rich tooltips
 	TooltipConductor.activateListeners();
