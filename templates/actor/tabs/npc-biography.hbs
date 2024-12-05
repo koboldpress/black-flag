@@ -2,30 +2,29 @@
 	<div class="artwork">
 		<figure class="icon">
 			<figcaption>{{ localize "BF.Actor.Artwork.Portrait" }}</figcaption>
-			<img class="profile" src="{{ actor.img }}" title="{{ actor.name }}"
-					 {{~#if modes.editing}} data-edit="img"{{/if}}>
+			<img class="profile" src="{{ @root.actor.img }}" title="{{ @root.actor.name }}"
+					 {{~#if @root.editable}} data-edit="img"{{/if}}>
 		</figure>
-		{{#if showTokenArtwork}}
+		{{#if @root.showTokenArtwork}}
 			<figure class="icon">
 				<figcaption>{{ localize "BF.Actor.Artwork.Token" }}</figcaption>
-				{{#if actor.isToken}}
-					<img class="profile" src="{{ actor.token.texture.src }}" title="{{ actor.name }}"
-							 {{~#if modes.editing}} data-edit="token.texture.src"{{/if}}>
+				{{#if @root.actor.isToken}}
+					<img class="profile" src="{{ @root.actor.token.texture.src }}" title="{{ @root.actor.name }}"
+							 {{~#if @root.editable}} data-edit="token.texture.src"{{/if}}>
 				{{else}}
-					<img class="profile" src="{{ actor.prototypeToken.texture.src }}" title="{{ actor.name }}"
-							 {{~#if modes.editing}} data-edit="prototypeToken.texture.src"{{/if}}>
+					<img class="profile" src="{{ @root.actor.prototypeToken.texture.src }}" title="{{ @root.actor.name }}"
+							 {{~#if @root.editable}} data-edit="prototypeToken.texture.src"{{/if}}>
 				{{/if}}
 			</figure>
 		{{/if}}
 	</div>
 
-	{{ editor enriched.biography target="system.biography.value" button=false editable=modes.editing
-						engine="prosemirror" collaborate=false }}
+	{{ editor enriched target=keyPath button=false editable=@root.editable engine="prosemirror" collaborate=false }}
 
 	<label class="source">
 		<span class="hinted-label" data-tooltip="BF.SOURCE.FIELDS.description.source.book.hint">
 			{{ localize "BF.SOURCE.Label" }}
 		</span>
-		<span>{{ system.description.source.label }}</span>
+		<span>{{ @root.system.description.source.label }}</span>
 	</label>
 </section>

@@ -40,7 +40,7 @@
 			{{> "blackFlag.currency" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="biography">
-			{{> "blackFlag.npc-biography" }}
+			{{> "blackFlag.npc-biography" enriched=enriched.biography keyPath="system.biography.value" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="effects">
 			{{> "blackFlag.actor-active-effects" }}
