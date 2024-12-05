@@ -178,8 +178,7 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 
 		// Cargo capacity
 		this.attributes.cargo.label = formatNumber(this.attributes.cargo.max ?? 0, {
-			unit: this.attributes.cargo.units,
-			unitDisplay: "long"
+			unit: this.attributes.cargo.units
 		});
 		// TODO: Fix this once weight units are fully localized
 		if (this.attributes.cargo.units === "ton") {

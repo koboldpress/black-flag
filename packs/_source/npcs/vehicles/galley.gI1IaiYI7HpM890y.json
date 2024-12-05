@@ -1,0 +1,928 @@
+{
+  "name": "Galley",
+  "type": "vehicle",
+  "img": "systems/black-flag/artwork/types/vehicle.svg",
+  "system": {
+    "modifiers": [],
+    "traits": {
+      "condition": {
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "immunities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        }
+      },
+      "dimensions": {
+        "length": 130,
+        "width": 20,
+        "units": "foot"
+      },
+      "size": "gargantuan",
+      "type": {
+        "value": "water"
+      },
+      "movement": {
+        "types": {
+          "walk": "35",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "custom": [],
+        "tags": [],
+        "units": "foot"
+      },
+      "pace": {
+        "types": {
+          "walk": "4",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "units": "mph"
+      }
+    },
+    "description": {
+      "source": {},
+      "value": "<p>Galleys are massive vessels ideal for transporting cargo and used by merchants to carry trade goods. These weighty vessels are equipped with sails, but frequently rely on dozens of crew members rowing below decks for propulsion. Since galleys carry stores of cargo, they’re almost always equipped with weaponry and defended by squadrons of hired swords.</p>",
+      "actions": "On its turn, the galley can take two actions, choosing from the options below (it can take the same action multiple times). It can take only one action if it has fewer than 40 crew. It can’t move or take actions if it has fewer than 3 crew."
+    },
+    "abilities": {
+      "strength": {
+        "mod": 7
+      },
+      "dexterity": {
+        "mod": -3
+      },
+      "constitution": {
+        "mod": 5
+      },
+      "intelligence": {
+        "mod": null
+      },
+      "wisdom": {
+        "mod": null
+      },
+      "charisma": {
+        "mod": null
+      }
+    },
+    "attributes": {
+      "ac": {
+        "threshold": 20,
+        "value": 15
+      },
+      "cargo": {
+        "max": 150,
+        "units": "ton"
+      },
+      "crew": {
+        "required": 80
+      },
+      "hp": {
+        "value": 400,
+        "max": 500,
+        "temp": 0,
+        "tempMax": 0
+      },
+      "passengers": {
+        "max": 40
+      }
+    },
+    "initiative": 4
+  },
+  "prototypeToken": {
+    "name": "Vehicle",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/types/vehicle.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "system": {
+        "identifier": {
+          "value": "sails",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>While in initiative, the [[lookup @name lowercase]]’s speed is reduced to 15 ft. when sailing against the wind. While sailing with the wind, its speed becomes [[calc @traits.movement.types.walk+15]] feet.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Sails",
+      "type": "feature",
+      "_id": "vLkYbn10HmgQOr2y",
+      "img": "icons/commodities/cloth/cloth-scraps-plain.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": null,
+        "modifiedTime": 1733434971553,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!gI1IaiYI7HpM890y.vLkYbn10HmgQOr2y"
+    },
+    {
+      "system": {
+        "container": null,
+        "identifier": {
+          "value": "fire-ballista"
+        },
+        "activities": {
+          "ztxg3aKJbsjIJKR2": {
+            "type": "attack",
+            "_id": "ztxg3aKJbsjIJKR2",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "attack": {
+                "critical": {
+                  "threshold": null
+                },
+                "flat": false,
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": "strength",
+                "bonus": ""
+              },
+              "damage": {
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true,
+                "parts": []
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true,
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "max": ""
+            },
+            "name": "",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "description": {
+          "source": {
+            "book": "",
+            "page": "",
+            "fallback": ""
+          },
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>"
+        },
+        "attunement": {
+          "value": ""
+        },
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "ammunition": {
+          "capacity": null
+        },
+        "damage": {
+          "base": {
+            "number": 3,
+            "denomination": 10,
+            "additionalTypes": [],
+            "type": "piercing"
+          }
+        },
+        "magicalBonus": null,
+        "options": [],
+        "range": {
+          "short": 120,
+          "long": 480,
+          "reach": null
+        },
+        "type": {
+          "value": "ranged",
+          "category": ""
+        },
+        "rarity": ""
+      },
+      "name": "Fire Ballista",
+      "type": "weapon",
+      "_id": "ke10WX1mOdO3kFI1",
+      "img": "icons/weapons/artillery/ballista-wood-green.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "last": {
+              "ztxg3aKJbsjIJKR2": {
+                "attackMode": "oneHanded",
+                "damageType": {
+                  "0": "piercing"
+                }
+              }
+            }
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": null,
+        "modifiedTime": 1733435311873,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!gI1IaiYI7HpM890y.ke10WX1mOdO3kFI1"
+    },
+    {
+      "system": {
+        "container": null,
+        "identifier": {
+          "value": "fire-mangonels"
+        },
+        "activities": {
+          "CSpyoBFhDx9TukTp": {
+            "type": "attack",
+            "_id": "CSpyoBFhDx9TukTp",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "attack": {
+                "critical": {
+                  "threshold": null
+                },
+                "flat": false,
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": "strength",
+                "bonus": ""
+              },
+              "damage": {
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": true,
+                "parts": []
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true,
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "max": ""
+            },
+            "name": "",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "description": {
+          "source": {},
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]] (can’t hit targets within 60 feet), one target. <em>Hit:</em> [[/damage average]] damage.</p>"
+        },
+        "attunement": {
+          "value": ""
+        },
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "ammunition": {
+          "capacity": null
+        },
+        "damage": {
+          "base": {
+            "number": 5,
+            "denomination": 10,
+            "additionalTypes": [],
+            "type": "bludgeoning"
+          }
+        },
+        "magicalBonus": null,
+        "options": [],
+        "range": {
+          "short": 200,
+          "long": 800,
+          "reach": null
+        },
+        "type": {
+          "value": "ranged",
+          "category": ""
+        },
+        "rarity": ""
+      },
+      "name": "Fire Mangonels",
+      "type": "weapon",
+      "_id": "b16lUW7skIHN9KuN",
+      "img": "icons/weapons/artillery/catapult-simple.webp",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true,
+            "last": {
+              "CSpyoBFhDx9TukTp": {
+                "damageType": {
+                  "0": "bludgeoning"
+                },
+                "attackMode": "oneHanded"
+              }
+            }
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": null,
+        "modifiedTime": 1733435243658,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!gI1IaiYI7HpM890y.b16lUW7skIHN9KuN"
+    },
+    {
+      "system": {
+        "identifier": {
+          "value": "row",
+          "associated": ""
+        },
+        "activities": {
+          "7z52XidYH6PyD7Ov": {
+            "type": "utility",
+            "_id": "7z52XidYH6PyD7Ov",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The galley takes the Dash action.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Row",
+      "type": "feature",
+      "_id": "fB1hRynB3WlsU56D",
+      "img": "systems/black-flag/artwork/types/feature.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!gI1IaiYI7HpM890y.fB1hRynB3WlsU56D"
+    },
+    {
+      "name": "Vehicle Resilience",
+      "type": "feature",
+      "system": {
+        "identifier": {
+          "value": "vehicle-resilience",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name]] is immune to poison and psychic damage, and the following conditions: blinded, charmed, deafened, exhaustion, frightened, incapacitated, paralyzed, petrified, poisoned, prone, stunned, and unconscious.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "mbQGM1KjMK1zifnZ",
+      "img": "icons/environment/settlement/wagon.webp",
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Vehicle Resilience",
+          "_id": "0B6GT0HRHM04q0fP",
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "psychic",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "blinded",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "deafened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "incapacitated",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "paralyzed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "petrified",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "prone",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "stunned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "unconcious",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "1.1.055",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/environment/settlement/wagon.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!gI1IaiYI7HpM890y.mbQGM1KjMK1zifnZ.0B6GT0HRHM04q0fP"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.4mrsMh1wkqybueGe",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!gI1IaiYI7HpM890y.mbQGM1KjMK1zifnZ"
+    }
+  ],
+  "effects": [],
+  "folder": "SjIIitpQ2SwKbgfg",
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "1.1.055",
+    "createdTime": 1733434575007,
+    "modifiedTime": 1733435961168,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_id": "gI1IaiYI7HpM890y",
+  "sort": 200000,
+  "_key": "!actors!gI1IaiYI7HpM890y"
+}

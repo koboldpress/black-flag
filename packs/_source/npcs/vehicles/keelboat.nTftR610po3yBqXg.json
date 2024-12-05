@@ -1,0 +1,769 @@
+{
+  "folder": "SjIIitpQ2SwKbgfg",
+  "name": "Keelboat",
+  "type": "vehicle",
+  "_id": "nTftR610po3yBqXg",
+  "img": "systems/black-flag/artwork/types/vehicle.svg",
+  "system": {
+    "modifiers": [],
+    "traits": {
+      "condition": {
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "immunities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        }
+      },
+      "dimensions": {
+        "length": 60,
+        "width": 20,
+        "units": "foot"
+      },
+      "size": "gargantuan",
+      "movement": {
+        "custom": [],
+        "tags": [],
+        "types": {
+          "walk": "25",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "units": "foot"
+      },
+      "pace": {
+        "types": {
+          "walk": "3",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "units": "mph"
+      },
+      "type": {
+        "value": "water"
+      }
+    },
+    "description": {
+      "source": {},
+      "value": "<p>Keelboats are small sailing vessels that operate with minimal crew. Keelboats are good for day trips or transporting small amounts of cargo or passengers. The keelboat stat block included here is outfitted with a ballista, but less expensive keelboats without weaponry are commonly available for purchase.</p>",
+      "actions": "On its turn, the keelboat can take one action, choosing from the options below. It can’t take any actions if it has fewer than 2 crew."
+    },
+    "abilities": {
+      "strength": {
+        "mod": 3
+      },
+      "dexterity": {
+        "mod": -2
+      },
+      "constitution": {
+        "mod": 1
+      },
+      "intelligence": {
+        "mod": null
+      },
+      "wisdom": {
+        "mod": null
+      },
+      "charisma": {
+        "mod": null
+      }
+    },
+    "attributes": {
+      "ac": {
+        "threshold": 10,
+        "value": 15
+      },
+      "cargo": {
+        "max": 1000,
+        "units": "pound"
+      },
+      "crew": {
+        "required": 3
+      },
+      "hp": {
+        "value": 100,
+        "max": 100,
+        "temp": null,
+        "tempMax": null
+      },
+      "passengers": {
+        "max": 4
+      }
+    },
+    "initiative": 7
+  },
+  "prototypeToken": {
+    "name": "Keelboat",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/types/vehicle.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Vehicle Resilience",
+      "type": "feature",
+      "system": {
+        "identifier": {
+          "value": "vehicle-resilience",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name]] is immune to poison and psychic damage, and the following conditions: blinded, charmed, deafened, exhaustion, frightened, incapacitated, paralyzed, petrified, poisoned, prone, stunned, and unconscious.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "img": "icons/environment/settlement/wagon.webp",
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Vehicle Resilience",
+          "_id": "0B6GT0HRHM04q0fP",
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "psychic",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "blinded",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "deafened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "incapacitated",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "paralyzed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "petrified",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "prone",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "stunned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "unconcious",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "1.1.055",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/environment/settlement/wagon.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!nTftR610po3yBqXg.NZbWbNIVEfm5HHOO.0B6GT0HRHM04q0fP"
+        }
+      ],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.4mrsMh1wkqybueGe",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733434791886,
+        "modifiedTime": 1733434791895,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "NZbWbNIVEfm5HHOO",
+      "sort": 0,
+      "_key": "!actors.items!nTftR610po3yBqXg.NZbWbNIVEfm5HHOO"
+    },
+    {
+      "system": {
+        "identifier": {
+          "value": "sails",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>While in initiative, the [[lookup @name lowercase]]’s speed is reduced to 15 ft. when sailing against the wind. While sailing with the wind, its speed becomes 50 feet.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Sails",
+      "type": "feature",
+      "img": "icons/commodities/cloth/cloth-scraps-plain.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.WQLqmKKPyDT9mOaD",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733434993359,
+        "modifiedTime": 1733435018193,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "CNetHwbL8fpy2ZXi",
+      "sort": 0,
+      "_key": "!actors.items!nTftR610po3yBqXg.CNetHwbL8fpy2ZXi"
+    },
+    {
+      "system": {
+        "container": null,
+        "identifier": {
+          "value": "fire-ballista"
+        },
+        "activities": {
+          "ztxg3aKJbsjIJKR2": {
+            "type": "attack",
+            "_id": "ztxg3aKJbsjIJKR2",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "attack": {
+                "critical": {
+                  "threshold": null
+                },
+                "flat": false,
+                "type": {
+                  "value": "",
+                  "classification": ""
+                },
+                "ability": "strength",
+                "bonus": "3"
+              },
+              "damage": {
+                "critical": {
+                  "bonus": ""
+                },
+                "includeBase": false,
+                "parts": [
+                  {
+                    "number": 3,
+                    "denomination": 10,
+                    "bonus": "6",
+                    "custom": {
+                      "formula": "",
+                      "enabled": false
+                    },
+                    "type": "piercing",
+                    "additionalTypes": [],
+                    "scaling": {
+                      "number": 1
+                    }
+                  }
+                ]
+              },
+              "effects": []
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true,
+              "type": "action",
+              "condition": ""
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": [],
+              "max": ""
+            },
+            "name": "",
+            "img": ""
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "description": {
+          "source": {
+            "book": "",
+            "fallback": "",
+            "page": ""
+          },
+          "value": "<p><em>Ranged Weapon Attack:</em> [[/attack]], range [[lookup @labels.range]], one target. <em>Hit:</em> [[/damage average]] damage.</p>"
+        },
+        "attunement": {
+          "value": ""
+        },
+        "price": {
+          "value": 0,
+          "denomination": "gp"
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 0,
+          "units": "pound"
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "properties": [],
+        "ammunition": {
+          "capacity": null
+        },
+        "damage": {
+          "base": {
+            "number": 3,
+            "denomination": 10,
+            "additionalTypes": [],
+            "type": "piercing"
+          }
+        },
+        "magicalBonus": null,
+        "options": [],
+        "range": {
+          "short": 120,
+          "long": 480,
+          "reach": null
+        },
+        "type": {
+          "value": "ranged",
+          "category": ""
+        },
+        "rarity": ""
+      },
+      "name": "Fire Ballista",
+      "type": "weapon",
+      "img": "icons/weapons/artillery/ballista-wood-green.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.8He9Tf64YFEATWd5",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435329027,
+        "modifiedTime": 1733435359870,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "mL2Q5ADlG11QsQVt",
+      "sort": 0,
+      "_key": "!actors.items!nTftR610po3yBqXg.mL2Q5ADlG11QsQVt"
+    },
+    {
+      "system": {
+        "identifier": {
+          "value": "row",
+          "associated": ""
+        },
+        "activities": {
+          "7z52XidYH6PyD7Ov": {
+            "type": "utility",
+            "_id": "7z52XidYH6PyD7Ov",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name lowercase]] takes the Dash action.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Row",
+      "type": "feature",
+      "img": "icons/magic/water/wave-water-teal.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.aex3DaR0KYtAmxMN",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435372413,
+        "modifiedTime": 1733435372426,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "p1swPQB5AFY8O3tI",
+      "sort": 0,
+      "_key": "!actors.items!nTftR610po3yBqXg.p1swPQB5AFY8O3tI"
+    }
+  ],
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "1.1.055",
+    "createdTime": 1733434791847,
+    "modifiedTime": 1733435961168,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!nTftR610po3yBqXg"
+}

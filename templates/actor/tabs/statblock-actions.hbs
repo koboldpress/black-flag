@@ -43,7 +43,7 @@
 			</h2>
 			{{#if (or description (and @root.editable descriptionKeyPath))}}
 				{{#if (and @root.editable descriptionKeyPath)}}
-					<textarea name="{{ descriptionKeyPath }}">{{ description }}</textarea>
+					<textarea name="{{ descriptionKeyPath }}">{{~ description ~}}</textarea>
 				{{else}}
 					<p>{{ description }}</p>
 				{{/if}}

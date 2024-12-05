@@ -261,6 +261,13 @@ export const movementTags = {
 		display: "BF.MOVEMENT.Tag.Hover.Display",
 		type: "associated",
 		association: "fly"
+	},
+	maneuverable: {
+		label: "BF.MOVEMENT.Tag.Maneuverable.Label",
+		display: "BF.MOVEMENT.Tag.Maneuverable.Display",
+		type: "associated",
+		association: "walk",
+		validTypes: new Set(["vehicle"])
 	}
 };
 

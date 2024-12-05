@@ -1,0 +1,700 @@
+{
+  "folder": "SjIIitpQ2SwKbgfg",
+  "name": "Rowboat",
+  "type": "vehicle",
+  "_id": "ASbQIzWQ1D4lMnqM",
+  "img": "systems/black-flag/artwork/types/vehicle.svg",
+  "system": {
+    "modifiers": [],
+    "traits": {
+      "condition": {
+        "immunities": {
+          "value": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "custom": []
+        }
+      },
+      "damage": {
+        "immunities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "resistances": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        },
+        "vulnerabilities": {
+          "value": [],
+          "nonmagical": [],
+          "custom": []
+        }
+      },
+      "dimensions": {
+        "length": 10,
+        "width": 5,
+        "units": "foot"
+      },
+      "size": "large",
+      "movement": {
+        "custom": [],
+        "tags": [],
+        "types": {
+          "walk": "15",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "units": "foot"
+      },
+      "pace": {
+        "types": {
+          "walk": "3",
+          "climb": "",
+          "fly": "",
+          "swim": "",
+          "burrow": ""
+        },
+        "units": "mph"
+      },
+      "type": {
+        "value": "water"
+      }
+    },
+    "description": {
+      "source": {},
+      "value": "<p>Rowboats are powered by rowing and current. They can’t be rowed against any significant current, but they can be pulled upstream by draft animals on the shore. A rowboat weighs 100 pounds for portage purposes.</p>",
+      "actions": ""
+    },
+    "abilities": {
+      "strength": {
+        "mod": 0
+      },
+      "dexterity": {
+        "mod": -1
+      },
+      "constitution": {
+        "mod": 0
+      },
+      "intelligence": {
+        "mod": null
+      },
+      "wisdom": {
+        "mod": null
+      },
+      "charisma": {
+        "mod": null
+      }
+    },
+    "attributes": {
+      "ac": {
+        "threshold": 0,
+        "value": 11
+      },
+      "cargo": {
+        "max": 500,
+        "units": "pound"
+      },
+      "crew": {
+        "required": 2
+      },
+      "hp": {
+        "value": 50,
+        "max": 50,
+        "temp": null,
+        "tempMax": null
+      },
+      "passengers": {
+        "max": 2
+      }
+    },
+    "initiative": 8
+  },
+  "prototypeToken": {
+    "name": "Rowboat",
+    "displayName": 0,
+    "actorLink": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/black-flag/artwork/types/vehicle.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "hexagonalShape": 0,
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "flags": {},
+    "randomImg": false
+  },
+  "items": [
+    {
+      "name": "Vehicle Resilience",
+      "type": "feature",
+      "system": {
+        "identifier": {
+          "value": "vehicle-resilience",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name]] is immune to poison and psychic damage, and the following conditions: blinded, charmed, deafened, exhaustion, frightened, incapacitated, paralyzed, petrified, poisoned, prone, stunned, and unconscious.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "img": "icons/environment/settlement/wagon.webp",
+      "effects": [
+        {
+          "origin": "Compendium.black-flag.npcfeatures.Item.dHvL2Fik9NneYaUg",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "name": "Vehicle Resilience",
+          "_id": "0B6GT0HRHM04q0fP",
+          "changes": [
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "poison",
+              "priority": null
+            },
+            {
+              "key": "system.traits.damage.immunities.value",
+              "mode": 2,
+              "value": "psychic",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "blinded",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "charmed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "deafened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "exhaustion",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "frightened",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "incapacitated",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "paralyzed",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "petrified",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "poisoned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "prone",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "stunned",
+              "priority": null
+            },
+            {
+              "key": "system.traits.condition.immunities.value",
+              "mode": 2,
+              "value": "unconcious",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "transfer": true,
+          "statuses": [],
+          "flags": {},
+          "tint": "#ffffff",
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "1.1.055",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "img": "icons/environment/settlement/wagon.webp",
+          "type": "base",
+          "system": {},
+          "sort": 0,
+          "_key": "!actors.items.effects!ASbQIzWQ1D4lMnqM.1inCk4gUrPTiE5n4.0B6GT0HRHM04q0fP"
+        }
+      ],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.4mrsMh1wkqybueGe",
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435440204,
+        "modifiedTime": 1733435440224,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "1inCk4gUrPTiE5n4",
+      "sort": 0,
+      "_key": "!actors.items!ASbQIzWQ1D4lMnqM.1inCk4gUrPTiE5n4"
+    },
+    {
+      "folder": "SjIIitpQ2SwKbgfg",
+      "system": {
+        "identifier": {
+          "value": "lightweight",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>If the [[lookup @name lowercase]] is going downstream, add the speed of the current (typically 3 miles per hour) to its speed. The [[lookup @name lowercase]]’s speed is 0 ft. while traveling against any significant current.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Lightweight",
+      "type": "feature",
+      "_id": "VaPrEkoVnKgmCqpS",
+      "img": "icons/commodities/wood/bark-brown.webp",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435492780,
+        "modifiedTime": 1733435540073,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ASbQIzWQ1D4lMnqM.VaPrEkoVnKgmCqpS"
+    },
+    {
+      "system": {
+        "identifier": {
+          "value": "row",
+          "associated": ""
+        },
+        "activities": {
+          "7z52XidYH6PyD7Ov": {
+            "type": "utility",
+            "_id": "7z52XidYH6PyD7Ov",
+            "description": "",
+            "sort": 0,
+            "system": {
+              "effects": [],
+              "roll": {
+                "prompt": false,
+                "visible": false
+              }
+            },
+            "activation": {
+              "value": null,
+              "override": false,
+              "primary": true
+            },
+            "consumption": {
+              "targets": [],
+              "scale": {
+                "allowed": false
+              }
+            },
+            "duration": {
+              "units": "instantaneous",
+              "concentration": false,
+              "override": false
+            },
+            "range": {
+              "override": false
+            },
+            "magical": false,
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "foot"
+              },
+              "affects": {
+                "choice": false
+              },
+              "prompt": true,
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "consumeQuantity": false,
+              "recovery": []
+            }
+          }
+        },
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name lowercase]] takes the Dash action.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "name": "Row Hard",
+      "type": "feature",
+      "img": "icons/magic/water/wave-water-teal.webp",
+      "effects": [],
+      "folder": null,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.aex3DaR0KYtAmxMN",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435646674,
+        "modifiedTime": 1733435653642,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_id": "n5xCftpPgOJU6o0d",
+      "sort": 0,
+      "_key": "!actors.items!ASbQIzWQ1D4lMnqM.n5xCftpPgOJU6o0d"
+    },
+    {
+      "name": "Maneuverable",
+      "type": "feature",
+      "system": {
+        "identifier": {
+          "value": "maneuverable",
+          "associated": ""
+        },
+        "activities": {},
+        "uses": {
+          "spent": 0,
+          "consumeQuantity": false,
+          "recovery": [],
+          "max": ""
+        },
+        "advancement": {},
+        "description": {
+          "source": {},
+          "value": "<p>The [[lookup @name lowercase]] can move up to its speed and make one 90-degree turn.</p>"
+        },
+        "restriction": {
+          "allowMultipleTimes": false,
+          "filters": [],
+          "items": [],
+          "requireAll": true
+        },
+        "type": {
+          "category": "vehicle",
+          "value": ""
+        },
+        "overrides": {
+          "proficiency": null
+        },
+        "level": {
+          "value": null
+        }
+      },
+      "_id": "Z569NoPjIXGChyct",
+      "img": "icons/skills/movement/arrow-down-pink.webp",
+      "effects": [
+        {
+          "type": "base",
+          "name": "Maneuverable",
+          "origin": "Compendium.black-flag.npcfeatures.Item.VgVWo073DYpavk6d",
+          "duration": {
+            "rounds": null,
+            "startTime": 0,
+            "seconds": null,
+            "combat": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "disabled": false,
+          "img": "icons/skills/movement/arrow-down-pink.webp",
+          "_id": "TBjGqZeJ7sip50SU",
+          "system": {},
+          "changes": [
+            {
+              "key": "system.traits.movement.tags",
+              "mode": 2,
+              "value": "maneuverable",
+              "priority": null
+            }
+          ],
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "black-flag",
+            "systemVersion": "1.1.055",
+            "createdTime": null,
+            "modifiedTime": null,
+            "lastModifiedBy": null
+          },
+          "_key": "!actors.items.effects!ASbQIzWQ1D4lMnqM.Z569NoPjIXGChyct.TBjGqZeJ7sip50SU"
+        }
+      ],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "black-flag": {
+          "relationship": {
+            "enabled": true
+          }
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.black-flag.npcfeatures.Item.VgVWo073DYpavk6d",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "black-flag",
+        "systemVersion": "1.1.055",
+        "createdTime": 1733435850919,
+        "modifiedTime": 1733435850935,
+        "lastModifiedBy": "blackflag0000000"
+      },
+      "_key": "!actors.items!ASbQIzWQ1D4lMnqM.Z569NoPjIXGChyct"
+    }
+  ],
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "black-flag",
+    "systemVersion": "1.1.055",
+    "createdTime": 1733435440163,
+    "modifiedTime": 1733435961168,
+    "lastModifiedBy": "blackflag0000000"
+  },
+  "_key": "!actors!ASbQIzWQ1D4lMnqM"
+}
