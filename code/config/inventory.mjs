@@ -321,6 +321,28 @@ export const sheetSections = {
 			]
 		}
 	],
+	vehicle: [
+		currencySection(),
+		{
+			id: "features",
+			tab: "features",
+			label: "BF.Item.Category.Feature.Label",
+			filters: [{ k: "type", o: "in", v: ["feature"] }]
+		},
+		{
+			id: "equipment",
+			tab: "features",
+			label: "BF.Item.Category.Equipment.Label",
+			filters: [{ k: "type", o: "in", v: ["ammunition", "weapon"] }]
+		},
+		{
+			id: "cargo",
+			tab: "features",
+			label: "BF.VEHICLE.FIELDS.attributes.cargo.label",
+			filters: [{ k: "type", o: "in", v: ["armor", "consumable", "gear", "sundry", "tool"] }],
+			options: { autoHide: true }
+		}
+	],
 	container: [
 		currencySection(),
 		{

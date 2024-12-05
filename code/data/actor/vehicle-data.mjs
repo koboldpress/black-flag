@@ -314,6 +314,27 @@ export default class NPCData extends ActorDataModel.mixin(ModifiersTemplate, Res
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _preCreate(data, options, user) {
+		if ((await super._preCreate(data, options, user)) === false) return false;
+		if (!data._id && !data.items?.length) {
+			foundry.utils.setProperty(options, `${game.system.id}.createResilience`, true);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @inheritDoc */
+	async _onCreate(data, options, userId) {
+		super._onCreate(data, options, userId);
+		if (userId === game.user.id && options[game.system.id]?.createResilience) {
+			const resilience = await fromUuid("Compendium.black-flag.npcfeatures.Item.4mrsMh1wkqybueGe");
+			if (resilience) await this.parent.createEmbeddedDocuments("Item", [game.items.fromCompendium(resilience)]);
+		}
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
 	/*               Helpers               */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
