@@ -90,9 +90,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 			li.classList.add("effect");
 			li.dataset.id = effect.id;
 			li.innerHTML = `
-				<img class="icon" alt="${effect.name}" src="${effect.img}">
+				<img class="icon">
 				<div class="name-stacked">
-					<span class="title">${effect.name}</span>
+					<span class="title"></span>
 					<span class="subtitle">${effect.duration.label}</span>
 				</div>
 				<button class="apply-effect light-button" type="button" data-action="applyEffect"
@@ -101,6 +101,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 					<i class="fas fa-reply-all fa-flip-horizontal" inert></i>
 				</button>
 			`;
+			Object.assign(li.querySelector(".icon"), { alt: effect.name, src: effect.img });
+			li.querySelector(".title").innerText(effect.name);
 			this.effectsList.append(li);
 			li.addEventListener("click", this._onApplyEffect.bind(this));
 		}
@@ -120,14 +122,16 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 		li.classList.add("target");
 		li.dataset.targetUuid = uuid;
 		li.innerHTML = `
-			<img class="icon circular" alt="${name}" src="${actor.img}" data-uuid="${actor.uuid}">
+			<img class="icon circular" data-uuid="${actor.uuid}">
 			<div class="name-stacked">
-				<span class="title">${name}</span>
+				<span class="title"></span>
 			</div>
 			<div class="checkbox">
 				<input type="checkbox" name="${uuid}"${checked}${disabled}></input>
 			</div>
 		`;
+		Object.assign(li.querySelector(".icon"), { alt: name, src: actor.img });
+		li.querySelector(".title").innerText(name);
 
 		return li;
 	}

@@ -217,7 +217,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
 	/** @override */
 	async toEmbedContents(config, options) {
 		const p = document.createElement("p");
-		p.innerHTML = this.hint ?? "";
+		p.innerText = this.hint ?? "";
 		return p;
 	}
 

@@ -94,7 +94,8 @@ export default class AttackResultElement extends ChatTrayElement {
 		const li = document.createElement("li");
 		li.classList.add("target", isHit ? "hit" : "miss");
 		li.dataset.uuid = target.uuid;
-		li.innerHTML = `<div class="name">${target.name}</div>`;
+		li.innerHTML = '<div class="name"></div>';
+		li.querySelector("div.name").innerText = target.name;
 		if (game.user.isGM || game.settings.get(game.system.id, "attackVisibility") !== "hideAC")
 			li.innerHTML += `
 			<div class="ac">

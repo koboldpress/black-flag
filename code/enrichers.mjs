@@ -159,7 +159,8 @@ function createRollLink(label, dataset = {}, { classes = "roll-link", tag = "a" 
 	const link = document.createElement(tag);
 	link.className = classes;
 	_addDataset(link, dataset);
-	link.innerHTML = `<i class="fa-solid fa-dice-d20" inert></i> ${label}`;
+	link.innerHTML = '<i class="fa-solid fa-dice-d20" inert></i>';
+	link.append(label);
 	return link;
 }
 

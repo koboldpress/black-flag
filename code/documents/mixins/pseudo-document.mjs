@@ -546,7 +546,8 @@ export default Base =>
 			for (const [k, v] of Object.entries(dataset)) {
 				if (v !== null) a.dataset[k] = v;
 			}
-			a.innerHTML = `<i class="${anchorIcon}"></i>${name ?? this.name ?? this.title}`;
+			a.innerHTML = `<i class="${anchorIcon}"></i>`;
+			a.append(name ?? this.name ?? this.title);
 			return a;
 		}
 

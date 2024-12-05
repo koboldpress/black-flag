@@ -134,9 +134,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 		li.classList.add("target");
 		li.dataset.targetUuid = uuid;
 		li.innerHTML = `
-			<img class="icon circular" alt="${actor.name}" src="${actor.img}" data-uuid="${actor.uuid}">
+			<img class="icon circular" data-uuid="${actor.uuid}">
 			<div class="name-stacked">
-				<span class="title">${name}</span>
+				<span class="title"></span>
 				${changeSources ? `<span class="subtitle">${changeSources}</span>` : ""}
 			</div>
 			<div class="calculated damage">
@@ -150,6 +150,8 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 			</div>
 			<menu class="damage-multipliers unlist"></menu>
 		`;
+		Object.assign(li.querySelector(".icon"), { alt: name, src: actor.img });
+		li.querySelector(".title").innerText(name);
 
 		const menu = li.querySelector("menu");
 		for (const [value, display] of MULTIPLIERS) {
