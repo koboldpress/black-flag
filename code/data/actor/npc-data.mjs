@@ -9,6 +9,7 @@ import ConditionsTemplate from "./templates/conditions-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
+import ResistancesTemplate from "./templates/resistances-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import SourceTemplate from "./templates/source-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
@@ -30,6 +31,7 @@ const { BooleanField, HTMLField, NumberField, SchemaField, SetField, StringField
  * @mixes {InitiativeTemplate}
  * @mixes {LanguagesTemplate}
  * @mixes {ModifiersTemplate}
+ * @mixes {ResistancesTemplate}
  * @mixes {SourceTemplate}
  * @mixes {TraitsTemplate}
  *
@@ -59,6 +61,7 @@ export default class NPCData extends ActorDataModel.mixin(
 	InitiativeTemplate,
 	LanguagesTemplate,
 	ModifiersTemplate,
+	ResistancesTemplate,
 	SourceTemplate,
 	TraitsTemplate
 ) {
@@ -224,6 +227,7 @@ export default class NPCData extends ActorDataModel.mixin(
 		this.prepareSource();
 		this.prepareDerivedArmorFormulas();
 		this.prepareDerivedModifiers();
+		this.prepareDerivedResistances();
 		this.prepareDerivedTraits(rollData);
 
 		this.prepareDerivedAbilities(rollData);

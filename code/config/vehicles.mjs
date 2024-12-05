@@ -5,11 +5,15 @@ import { localizeConfig } from "../utils/_module.mjs";
  * @enum {NestedTypeConfiguration}
  */
 export const vehicles = {
+	air: {
+		localization: "BF.VEHICLE.Category.Air"
+	},
 	land: {
-		localization: "BF.Vehicle.Category.Land"
+		localization: "BF.VEHICLE.Category.Land"
 	},
 	water: {
-		localization: "BF.Vehicle.Category.Water"
+		localization: "BF.VEHICLE.Category.Water"
 	}
 };
-localizeConfig(vehicles, { pluralRule: "other" });
+localizeConfig(vehicles);
+localizeConfig(vehicles, { pluralRule: "other", propertyName: "localizedPlural" });

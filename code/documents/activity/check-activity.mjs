@@ -37,7 +37,7 @@ export default class CheckActivity extends Activity {
 
 		const SKILLS = CONFIG.BlackFlag.skills.localized;
 		const TOOLS = CONFIG.BlackFlag.tools.localized;
-		const VEHICLES = CONFIG.BlackFlag.vehicles.localized;
+		const VEHICLES = CONFIG.BlackFlag.vehicles.localizedPlural;
 
 		const createButton = (abilityKey, associated) => {
 			const ability = CONFIG.BlackFlag.abilities.localized[abilityKey];

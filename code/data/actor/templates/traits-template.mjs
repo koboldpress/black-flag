@@ -1,34 +1,13 @@
 import { formatTaggedList, numberFormat, simplifyBonus } from "../../../utils/_module.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
-import ResistancesField from "../fields/resistances-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
-
-/**
- * @typedef {object} ConditionResistanceData
- * @property {Set<string>} value - Resistances regardless of source.
- * @property {Set<string>} nonmagical - Resistances to non-magical sources.
- * @property {string[]} custom - Special resistance information.
- */
-
-/**
- * @typedef {ConditionResistanceData} DamageResistanceData
- * @property {Set<string>} nonmagical - Resistances to non-magical sources.
- */
 
 /**
  * Data definition template for PC & NPC traits.
  *
  * @property {object} traits
- * @property {object} traits.condition
- * @property {ConditionResistanceData} traits.condition.immunities - Condition immunities.
- * @property {ConditionResistanceData} traits.condition.resistances - Condition resistances.
- * @property {ConditionResistanceData} traits.condition.vulnerabilities - Condition vulnerabilities.
- * @property {object} traits.damage
- * @property {DamageResistanceData} traits.damage.immunities - Damage immunities.
- * @property {DamageResistanceData} traits.damage.resistances - Damage resistances.
- * @property {DamageResistanceData} traits.damage.vulnerabilities - Damage vulnerabilities.
  * @property {object} traits.movement
  * @property {number} traits.movement.base - Base movement value made available to specific types as `@base`.
  * @property {string[]} traits.movement.custom - Special movement information.
@@ -48,16 +27,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	static defineSchema() {
 		return {
 			traits: new SchemaField({
-				condition: new SchemaField({
-					immunities: new ResistancesField({ nonmagical: false }, { label: "BF.Immunity.Label" }),
-					resistances: new ResistancesField({ nonmagical: false }, { label: "BF.Resistance.Label" }),
-					vulnerabilities: new ResistancesField({ nonmagical: false }, { label: "BF.Vulnerability.Label" })
-				}),
-				damage: new SchemaField({
-					immunities: new ResistancesField({}, { label: "BF.Immunity.Label" }),
-					resistances: new ResistancesField({}, { label: "BF.Resistance.Label" }),
-					vulnerabilities: new ResistancesField({}, { label: "BF.Vulnerability.Label" })
-				}),
 				movement: new SchemaField({
 					base: new NumberField({ nullable: false, initial: 30, min: 0, step: 0.1 }),
 					custom: new ArrayField(new StringField()),
@@ -65,7 +34,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 					types: new MappingField(new FormulaField({ deterministic: true }), {
 						initial: { walk: "@base" }
 					}),
-					units: new StringField({ initial: "foot" })
+					units: new StringField({ initial: "foot", label: "BF.MOVEMENT.FIELDS.traits.movement.units.label" })
 				}),
 				senses: new SchemaField({
 					custom: new ArrayField(new StringField()),
@@ -92,7 +61,7 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
-	 * Resolve final movement, senses, and resistances/immunities.
+	 * Resolve final movement and senses.
 	 * @param {object} rollData
 	 */
 	prepareDerivedTraits(rollData) {
@@ -100,13 +69,13 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		rollData.base = movement.base;
 
 		// Determine how movement should be changed by status effects
-		const noMovement = new Set(["grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"])
-			.intersection(this.parent.statuses).size || (this.attributes?.exhaustion >= 5);
-		const halfMovement = this.parent.statuses.has("prone") || (this.attributes.exhaustion >= 2);
+		const noMovement = this.hasConditionEffect("noMovement");
+		const halfMovement = this.hasConditionEffect("halfMovement");
 		const multiplier = simplifyBonus(movement.multiplier, rollData);
 
 		const modifierData = {
 			type: "movement",
+			actor: this,
 			armored: !!this.attributes?.ac?.equippedArmor,
 			armor: this.attributes?.ac?.equippedArmor?.system,
 			shielded: !!this.attributes?.ac?.equippedShield,
@@ -158,55 +127,6 @@ export default class TraitsTemplate extends foundry.abstract.DataModel {
 		senses.label = formatTaggedList({
 			entries: senseEntries, extras: senses.custom, tags: senses.tags, tagDefinitions: CONFIG.BlackFlag.senseTags
 		});
-
-		// Adjust resistances & immunities based on status effects
-		if ( this.parent.statuses.has("petrified") ) {
-			// TODO: Add option to control whether these are applied
-			this.traits.condition.immunities.value.add("poisoned");
-			this.traits.damage.resistances.value.push("all");
-			this.traits.damage.immunities.value.add("poison");
-		}
-
-		// Clean up damage resistances, immunities, and vulnerabilities
-		// If all damage is set for a section, remove all other types
-		// Remove any resistances from non-magical sources that are also in all sources
-		["resistances", "immunities", "vulnerabilities"].forEach(k => this.cleanLabelResistances(
-			this.traits.condition[k], this.traits.damage[k]
-		));
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/**
-	 * Clean and create labels for resistance, immunity, and vulnerability sets.
-	 * @param {ConditionResistanceData} condition - Condition data.
-	 * @param {DamageResistanceData} damage - Damage data.
-	 */
-	cleanLabelResistances(condition, damage) {
-		if ( damage.value.has("all") ) {
-			damage.value.clear();
-			damage.nonmagical.clear();
-			damage.value.add("all");
-		} else if ( damage.nonmagical.has("all") ) {
-			damage.nonmagical.clear();
-			damage.nonmagical.add("all");
-		} else {
-			damage.value.forEach(v => damage.nonmagical.delete(v));
-		}
-
-		const makeDamageLabel = (source, formatter) => formatter.format(
-			Array.from(source).map(t => t === "all" ?
-				game.i18n.localize("BF.Resistance.AllDamage") :
-				CONFIG.BlackFlag.damageTypes.localized[t]).filter(t => t)
-		);
-		const nonmagical = makeDamageLabel(damage.nonmagical, game.i18n.getListFormatter({ style: "long" }));
-		damage.label = [
-			makeDamageLabel(damage.value, game.i18n.getListFormatter({ type: "unit" })),
-			nonmagical ? game.i18n.format("BF.Resistance.Nonmagical", { type: nonmagical }) : null
-		].filter(t => t).join("; ");
-
-		condition.label = game.i18n.getListFormatter({ type: "unit" })
-			.format(Array.from(condition.value).map(t => CONFIG.BlackFlag.conditions.localized[t]).filter(t => t))
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */

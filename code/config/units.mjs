@@ -126,7 +126,12 @@ Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
  * @typedef {LocalizedConfiguration} UnitConfiguration
  * @property {string} abbreviation - Abbreviation of the unit.
  * @property {number} conversion - Multiplier used to convert between various units.
- * @property {string} system - Measurement system with which this unit is associated (e.g. imperial or metric).
+ * @property {string} [counted] - Localization path for counted plural forms. Only necessary if non-supported unit or
+ *                                using a non-standard name for a supported unit.
+ * @property {string} [formattingUnit] - Unit formatting value as supported by javascript's internationalization system:
+ *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. only
+ *                                       required if the formatting name doesn't match the unit key.
+ * @property {string} [system] - Measurement system with which this unit is associated (e.g. imperial or metric).
  */
 
 /**
@@ -135,29 +140,47 @@ Hooks.on("blackFlag.registrationDeleted", function (identifier, item) {
  */
 export const distanceUnits = {
 	foot: {
-		localization: "BF.Distance.Unit.Foot.Label",
-		abbreviation: "BF.Distance.Unit.Foot.Abbreviation",
-		formattingUnit: "foot",
+		label: "BF.UNITS.DISTANCE.Foot.Label",
+		abbreviation: "BF.UNITS.DISTANCE.Foot.Abbreviation",
 		conversion: 1,
+		formattingUnit: "foot",
 		system: "imperial"
 	},
 	mile: {
-		localization: "BF.Distance.Unit.Mile.Label",
-		abbreviation: "BF.Distance.Unit.Mile.Abbreviation",
-		formattingUnit: "mile",
+		label: "BF.UNITS.DISTANCE.Mile.Label",
+		abbreviation: "BF.UNITS.DISTANCE.Mile.Abbreviation",
 		conversion: 1 / 5280,
+		formattingUnit: "mile",
 		system: "imperial"
 	}
 };
-localizeConfig(distanceUnits, { pluralRule: "other" });
+localizeConfig(distanceUnits);
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
+ * Units used to measure travel pace. Note that the formatting units here will automatically be appended with
+ * the appropriate time period (e.g. `mile-per-hour` and `mile-per-day`) before being displayed.
+ * @enum {UnitConfiguration}
+ */
+export const paceUnits = {
+	mph: {
+		label: "BF.UNITS.PACE.MilePerHour.Label",
+		abbreviation: "BF.UNITS.PACE.MilePerHour.Abbreviation",
+		formattingUnit: "mile",
+		conversion: 1,
+		system: "imperial"
+	}
+};
+localizeConfig(paceUnits);
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
  * Time periods usable by the system, split into combat periods and otherwise.
  * @type {{
- *   combat: {[key: string]: LabeledConfiguration},
- *   clock: {[key: string]: LabeledConfiguration}
+ *   combat: {Record<string, LabeledConfiguration>},
+ *   clock: {Record<string, UnitConfiguration>}
  * }}
  */
 export const timeUnits = {
@@ -179,19 +202,24 @@ export const timeUnits = {
 		label: "BF.Time.Category.Time.Label",
 		children: {
 			minute: {
-				localization: "BF.Time.Unit.Minute.Label"
+				localization: "BF.Time.Unit.Minute.Label",
+				conversion: 1
 			},
 			hour: {
-				localization: "BF.Time.Unit.Hour.Label"
+				localization: "BF.Time.Unit.Hour.Label",
+				conversion: 60
 			},
 			day: {
-				localization: "BF.Time.Unit.Day.Label"
+				localization: "BF.Time.Unit.Day.Label",
+				conversion: 1_440
 			},
 			month: {
-				localization: "BF.Time.Unit.Month.Label"
+				localization: "BF.Time.Unit.Month.Label",
+				conversion: 43_200
 			},
 			year: {
-				localization: "BF.Time.Unit.Year.Label"
+				localization: "BF.Time.Unit.Year.Label",
+				conversion: 525_600
 			}
 		}
 	}
@@ -205,22 +233,22 @@ export const timeUnits = {
  */
 export const weightUnits = {
 	pound: {
-		localization: "BF.Weight.Unit.Pound.Label",
-		abbreviation: "BF.Weight.Unit.Pound.Abbreviation",
+		label: "BF.UNITS.WEIGHT.Pound.Label",
+		abbreviation: "BF.UNITS.WEIGHT.Pound.Abbreviation",
 		conversion: 1,
 		system: "imperial"
 	},
 	ounce: {
-		localization: "BF.Weight.Unit.Ounce.Label",
-		abbreviation: "BF.Weight.Unit.Ounce.Abbreviation",
+		label: "BF.UNITS.WEIGHT.Ounce.Label",
+		abbreviation: "BF.UNITS.WEIGHT.Ounce.Abbreviation",
 		conversion: 0.0625,
 		system: "imperial"
 	},
 	ton: {
-		localization: "BF.Weight.Unit.Ton.Label",
-		abbreviation: "BF.Weight.Unit.Ton.Abbreviation",
-		conversion: 2000,
+		label: "BF.UNITS.WEIGHT.Ton.Label",
+		abbreviation: "BF.UNITS.WEIGHT.Ton.Abbreviation",
+		conversion: 2_000,
 		system: "imperial"
 	}
 };
-localizeConfig(weightUnits, { pluralRule: "other" });
+localizeConfig(weightUnits);

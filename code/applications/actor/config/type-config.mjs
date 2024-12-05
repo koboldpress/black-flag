@@ -1,22 +1,35 @@
 import SelectChoices from "../../../documents/select-choices.mjs";
 import { filteredKeys } from "../../../utils/_module.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseCustomConfigSheet from "./base-custom-config-sheet.mjs";
 
-export default class TypeConfig extends BaseConfig {
-	/** @inheritDoc */
-	static get defaultOptions() {
-		return foundry.utils.mergeObject(super.defaultOptions, {
-			classes: ["black-flag", "config", "type"],
+/**
+ * Configuration application for an actor's type & size.
+ */
+export default class TypeConfig extends BaseCustomConfigSheet {
+	/** @override */
+	static DEFAULT_OPTIONS = {
+		classes: ["type"],
+		position: {
+			width: 500
+		},
+		customKeyPath: "system.traits.type.custom"
+	};
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/** @override */
+	static PARTS = {
+		config: {
 			template: "systems/black-flag/templates/actor/config/type-config.hbs"
-		});
-	}
+		}
+	};
 
 	/* <><><><> <><><><> <><><><> <><><><> */
 	/*             Properties              */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	get type() {
+	get title() {
 		return game.i18n.localize("BF.CreatureType.Label");
 	}
 
@@ -25,55 +38,37 @@ export default class TypeConfig extends BaseConfig {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	async getData(options) {
-		const context = await super.getData(options);
-		const type = context.source.traits.type ?? {};
+	async _preparePartContext(partId, context, options) {
+		context = await super._preparePartContext(partId, context, options);
+
+		const type = context.system.source.traits?.type ?? {};
 		context.custom = type.custom;
-		context.showSwarm = Object.hasOwn(this.document.system.traits.type, "swarm");
+		context.showDimensions = Object.hasOwn(this.document.system.traits, "dimensions");
+		context.showSwarm = Object.hasOwn(this.document.system.traits.type ?? {}, "swarm");
+		context.showTags = Object.hasOwn(this.document.system.traits.type ?? {}, "tags");
 		context.tagOptions = new SelectChoices(CONFIG.BlackFlag.creatureTags, new Set(type.tags)).localize().sort();
+
+		context.type = {
+			data: context.system.source.traits.type,
+			fields: context.system.fields.traits.fields.type.fields,
+			options:
+				this.document.type === "vehicle"
+					? CONFIG.BlackFlag.vehicles.localizedOptions
+					: CONFIG.BlackFlag.creatureTypes.localizedOptions
+		};
+
 		return context;
 	}
 
 	/* <><><><> <><><><> <><><><> <><><><> */
-	/*            Event Handlers           */
+	/*           Form Submission           */
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/** @inheritDoc */
-	activateListeners(jQuery) {
-		super.activateListeners(jQuery);
-		const html = jQuery[0];
-
-		html
-			.querySelector('[data-action="add"]')
-			.addEventListener("click", event => this.submit({ updateData: { newCustom: true } }));
-
-		for (const control of html.querySelectorAll('[data-action="delete"]')) {
-			control.addEventListener("click", event =>
-				this.submit({ updateData: { deleteCustom: Number(event.currentTarget.dataset.index) } })
-			);
-		}
-	}
-
-	/* <><><><> <><><><> <><><><> <><><><> */
-
-	/** @inheritDoc */
-	_getSubmitData(...args) {
-		const data = foundry.utils.expandObject(super._getSubmitData(...args));
-		data.type ??= {};
-		data.type.tags = filteredKeys(data.type?.tags ?? {});
-
-		const custom = Array.from(Object.values(data.custom ?? {}));
-		if (data.deleteCustom !== undefined) custom.splice(data.deleteCustom, 1);
-		if (data.newCustom) custom.push("");
-
-		return {
-			"system.traits": {
-				size: data.size,
-				type: {
-					...data.type,
-					custom
-				}
-			}
-		};
+	_processFormData(event, form, formData) {
+		const submitData = super._processFormData(event, form, formData);
+		if (!submitData.system.traits.type) foundry.utils.setProperty(submitData, "system.traits.type", {});
+		submitData.system.traits.type.tags = filteredKeys(submitData.system.traits.type.tags ?? {});
+		return submitData;
 	}
 }

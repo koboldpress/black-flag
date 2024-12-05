@@ -128,6 +128,16 @@ export function numberFormat(value, options={}) {
 	return formatted;
 }
 
+/**
+ * Format a number based on the current locale.
+ * @param {number} value - A number for format.
+ * @param {NumberFormattingOptions} [options] - Additional formatting options.
+ * @returns {string}
+ */
+export function formatNumber(value, options) {
+	return numberFormat(value, options);
+}
+
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**

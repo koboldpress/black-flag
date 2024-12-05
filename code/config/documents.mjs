@@ -9,12 +9,16 @@ import * as journalTypes from "../data/journal/_module.mjs";
 export const _documentCategories = {
 	Actor: {
 		person: {
-			label: "BF.Actor.Category.Person.Label",
+			label: "BF.Actor.Category.Person",
 			types: [actorTypes.PCData, actorTypes.NPCData]
 		},
 		place: {
-			label: "BF.Actor.Category.Place.Label",
+			label: "BF.Actor.Category.Place",
 			types: [actorTypes.LairData]
+		},
+		thing: {
+			label: "BF.Actor.Category.Thing",
+			types: [actorTypes.VehicleData]
 		}
 	},
 	Item: {

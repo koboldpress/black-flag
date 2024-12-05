@@ -1832,7 +1832,7 @@ export default class BlackFlagActor extends DocumentMixin(Actor) {
 		rollConfig.subject = this;
 		rollConfig.rolls = [roll].concat(config.rolls ?? []);
 
-		const type = game.i18n.format("BF.Vehicle.Action.CheckSpecific", {
+		const type = game.i18n.format("BF.VEHICLE.Action.CheckSpecific", {
 			vehicle: game.i18n.localize(vehicle.label)
 		});
 		const dialogConfig = foundry.utils.mergeObject(

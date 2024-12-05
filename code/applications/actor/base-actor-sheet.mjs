@@ -349,7 +349,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "luck":
 						return new LuckConfig(this.actor).render(true);
 					case "movement":
-						return new MovementConfig(this.actor).render(true);
+						return new MovementConfig({ document: this.actor }).render({ force: true });
 					case "proficiency":
 						return new ProficiencyConfig(this.actor).render(true);
 					case "resistance":
@@ -361,7 +361,7 @@ export default class BaseActorSheet extends DocumentSheetMixin(ActorSheet) {
 					case "tool":
 						return new ToolConfig(properties.key, this.actor).render(true);
 					case "type":
-						return new TypeConfig(this.actor).render(true);
+						return new TypeConfig({ document: this.actor }).render({ force: true });
 					case "vehicle":
 						return new ToolConfig(properties.key, this.actor, { trait: "vehicles" }).render(true);
 				}

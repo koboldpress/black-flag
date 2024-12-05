@@ -48,9 +48,9 @@ export default class CheckSheet extends ActivitySheet {
 				...o,
 				group: game.i18n.localize("BF.Tool.Label[other]")
 			})),
-			...CONFIG.BlackFlag.vehicles.localizedOptions.map(o => ({
+			...CONFIG.BlackFlag.vehicles.localizedPluralOptions.map(o => ({
 				...o,
-				group: game.i18n.localize("BF.Vehicle.Label[other]")
+				group: game.i18n.localize("BF.VEHICLE.Label[other]")
 			}))
 		];
 

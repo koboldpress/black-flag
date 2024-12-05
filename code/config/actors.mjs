@@ -241,7 +241,7 @@ export const movementTypes = {
 		reference: "Compendium.black-flag.rules.JournalEntry.zHvTHITijHvb07FK.JournalEntryPage.jzO6qMcEroDupZDD"
 	}
 };
-localizeConfig(movementTypes);
+localizeConfig(movementTypes, { sort: false });
 
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 

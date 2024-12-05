@@ -144,10 +144,10 @@
 
 	<fieldset class="vehicles">
 		<legend>
-			{{ localize "BF.Vehicle.Label[other]" }}
+			{{ localize "BF.VEHICLE.Label[other]" }}
 			{{#if editable}}
 			{{#with (localize 'BF.Action.Configure.Specific' type=(localize 'BF.Proficiency.LabelSpecific[other]'
-			        type=(localize 'BF.Vehicle.Label[one]'))) as |label| }}
+			        type=(localize 'BF.VEHICLE.Label[one]'))) as |label| }}
 				<button type="button" class="link-button" data-action="config" data-type="vehicle"
 				        data-tooltip="{{ label }}" aria-label="{{ label }}">
 					<i class="fa-solid fa-cog" inert></i>

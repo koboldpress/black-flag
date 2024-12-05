@@ -43,6 +43,24 @@ export default class ActorDataModel extends BaseDataModel {
 	/* <><><><> <><><><> <><><><> <><><><> */
 
 	/**
+	 * Is this actor under the effect of this property from some status or due to its level of exhaustion?
+	 * @param {string} key - A key in `CONFIG.BlackFlag.conditionEffects`.
+	 * @returns {boolean} - Whether the actor is affected.
+	 */
+	hasConditionEffect(key) {
+		const props = CONFIG.BlackFlag.conditionEffects[key] ?? new Set();
+		const level = this.attributes?.exhaustion ?? null;
+		const imms = this.traits?.condition?.immunities?.value ?? new Set();
+		const applyExhaustion = level !== null && !imms.has("exhaustion");
+		return props.some(k => {
+			const l = Number(k.split("-").pop());
+			return (this.parent.statuses.has(k) && !imms.has(k)) || (applyExhaustion && Number.isInteger(l) && level >= l);
+		});
+	}
+
+	/* <><><><> <><><><> <><><><> <><><><> */
+
+	/**
 	 * Determine the ability with the highest modifier from the provided list, or from all abilities.
 	 * @param {string[]|Set<string>} [from] - Set of abilities to select from.
 	 * @returns {string} - Ability with the highest modifier.

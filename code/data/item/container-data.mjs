@@ -66,14 +66,14 @@ export default class ContainerData extends ItemDataModel.mixin(
 					volume: new SchemaField(
 						{
 							value: new NumberField({ min: 0, label: "BF.Volume.Label" }),
-							units: new StringField({ initial: "foot", label: "BF.Volume.Unit.Label" })
+							units: new StringField({ initial: "foot", label: "BF.UNITS.VOLUME.Label" })
 						},
 						{ label: "BF.Container.Capacity.Volume.Label" }
 					),
 					weight: new SchemaField(
 						{
 							value: new NumberField({ min: 0, label: "BF.Weight.Label" }),
-							units: new StringField({ initial: "pound", label: "BF.Weight.Unit.Label" })
+							units: new StringField({ initial: "pound", label: "BF.UNITS.WEIGHT.Label" })
 						},
 						{ label: "BF.Container.Capacity.Weight.Label" }
 					)

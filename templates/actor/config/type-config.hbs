@@ -1,55 +1,64 @@
-<form autocomplete="off">
+<section>
 	<fieldset>
 		<legend>{{ localize "BF.CreatureSizeAndType.Label" }}</legend>
-		<label>
-			<span>{{ localize "BF.Size.Label" }}</span>
-			<select name="size">
-				{{ selectOptions CONFIG.sizes selected=source.traits.size labelAttr="label" localize=true blank="" }}
-			</select>
-		</label>
+		{{ formField system.fields.traits.fields.size value=system.data.traits.size options=CONFIG.sizes.localizedOptions
+		             blank="" localize=true rootId=partId }}
 		{{#if showSwarm}}
 			<label>
 				<span class="hinted-label" data-tooltip="BF.CreatureType.Swarm.Hint">
 					{{ localize "BF.CreatureType.Swarm.Label" }}
 				</span>
-				<select name="type.swarm">
-					{{ selectOptions CONFIG.sizes selected=source.traits.type.swarm labelAttr="label" localize=true blank="" }}
-				</select>
+				{{ formInput type.fields.swarm value=type.data.swarm options=CONFIG.sizes.localizedOptions blank=""
+				             localize=true rootId=partId }}
 			</label>
 		{{/if}}
-		<label>
-			<span>{{ localize "BF.CreatureType.Label" }}</span>
-			<select name="type.value">
-				{{ selectOptions CONFIG.creatureTypes.localized selected=source.traits.type.value blank="" }}
-			</select>
-		</label>
+		{{ formField type.fields.value value=type.data.value options=type.options blank="" localize=true rootId=partId }}
+		{{#if showDimensions}}
+			<div class="form-group">
+				<label>{{ localize "BF.VEHICLE.FIELDS.traits.dimensions.label" }}</label>
+				<div class="form-fields split-fields">
+					{{#with system.fields.traits.fields.dimensions.fields as |fields| }}
+					{{ formField fields.length value=../system.data.traits.dimensions.length classes="label-top"
+					             rootId=../partId }}
+					{{ formField fields.width value=../system.data.traits.dimensions.width classes="label-top"
+					             rootId=../partId }}
+					{{ formField fields.units value=../system.data.traits.dimensions.units classes="label-top"
+					             options=../CONFIG.distanceUnits.localizedOptions rootId=../partId }}
+					{{/with}}
+				</div>
+			</div>
+		{{/if}}
 	</fieldset>
-	<fieldset>
-		<legend>{{ localize "BF.CreatureType.Tag.Label" }}</legend>
-		{{> "blackFlag.trait-list" choices=tagOptions prefix="type.tags" }}
-	</fieldset>
-	<fieldset>
-		<legend>{{ localize "BF.CreatureType.Custom.Label" }}</legend>
-		<ul class="configuration-list">
-			{{#each custom}}
-				<li>
-					<div class="item-name activity-name">
-						<input type="text" name="custom.{{ @index }}" value="{{ this }}">
-					</div>
-					<div class="item-controls">
-						<button class="link-button" type="button" data-action="delete" data-index="{{ @index }}"
-						        data-tooltip="BF.CreatureType.Custom.Delete"
-										aria-label="{{ localize 'BF.CreatureType.Custom.Delete' }}">
-							<i class="fa-solid fa-trash" inert></i>
-						</button>
-					</div>
+
+	{{#if showTags}}
+		<fieldset>
+			<legend>{{ localize "BF.CreatureType.Tag.Label" }}</legend>
+			{{> "blackFlag.trait-list" choices=tagOptions prefix="system.traits.type.tags" }}
+		</fieldset>
+
+		<fieldset>
+			<legend>{{ localize "BF.CreatureType.Custom.Label" }}</legend>
+			<ul class="configuration-list">
+				{{#each custom}}
+					<li>
+						<div class="item-name activity-name">
+							<input type="text" name="custom.{{ @index }}" value="{{ this }}">
+						</div>
+						<div class="item-controls">
+							<button class="link-button" type="button" data-action="deleteCustom" data-index="{{ @index }}"
+											data-tooltip="BF.CreatureType.Custom.Delete"
+											aria-label="{{ localize 'BF.CreatureType.Custom.Delete' }}">
+								<i class="fa-solid fa-trash" inert></i>
+							</button>
+						</div>
+					</li>
+				{{/each}}
+				<li class="add-control">
+					<button class="link-button" type="button" data-action="addCustom">
+						<i class="fa-solid fa-plus" inert></i> {{ localize "BF.CreatureType.Custom.Add" }}
+					</button>
 				</li>
-			{{/each}}
-			<li class="add-control">
-				<button class="link-button" type="button" data-action="add">
-					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.CreatureType.Custom.Add" }}
-				</button>
-			</li>
-		</ul>
-	</fieldset>
-</form>
+			</ul>
+		</fieldset>
+	{{/if}}
+</section>

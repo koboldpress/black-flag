@@ -16,5 +16,6 @@ export function isValidIdentifier(identifier) {
  */
 export function isValidUnit(unit) {
 	if ( foundry.utils.getType(unit) === "Object" ) unit = unit.formattingUnit;
+	if ( unit.includes("-per-") ) return unit.split("-per-").every(u => isValidUnit(u));
 	return Intl.supportedValuesOf("unit").includes(unit);
 }

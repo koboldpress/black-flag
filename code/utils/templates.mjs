@@ -195,6 +195,8 @@ export async function registerHandlebarsPartials() {
 		"actor/tabs/pc-main.hbs",
 		"actor/tabs/pc-progression.hbs",
 		"actor/tabs/pc-spellcasting.hbs",
+		"actor/tabs/statblock-actions.hbs",
+		"actor/tabs/vehicle-main.hbs",
 		"advancement/parts/advancement-controls.hbs",
 		"advancement/parts/advancement-name.hbs",
 		"advancement/parts/advancement-spell-configuration.hbs",

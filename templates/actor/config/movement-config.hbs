@@ -1,40 +1,52 @@
-<form autocomplete="off">
+<section>
+
 	<fieldset>
 		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.label" }}</legend>
-		<label>
-			<span class="hinted-label" data-tooltip="BF.MOVEMENT.FIELDS.traits.movement.base.hint">
-				{{ localize "BF.MOVEMENT.FIELDS.traits.movement.base.label" }}
-			</span>
-			<input type="number" name="base" value="{{ source.traits.movement.base }}"
-			       min="0" step="0.1">
-		</label>
+		{{#if showBase}}
+			<label>
+				<span class="hinted-label" data-tooltip="BF.MOVEMENT.FIELDS.traits.movement.base.hint">
+					{{ localize "BF.MOVEMENT.FIELDS.traits.movement.base.label" }}
+				</span>
+				{{ formInput movement.fields.base value=movement.data.base localize=true rootId=partId }}
+			</label>
+		{{/if}}
 		{{#each types}}
 			<label>
 				<span>{{ label }}</span>
-				<input type="text" name="types.{{ @key }}" value="{{ value }}" placeholder="{{ placeholder }}">
+				<input type="text" name="system.traits.movement.types.{{ @key }}" value="{{ value }}"
+				       placeholder="{{ placeholder }}">
 			</label>
 		{{/each}}
-		<label>
-			<span>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.units.label" }}</span>
-			<select name="units">
-				{{ selectOptions CONFIG.distanceUnits.localized selected=source.traits.movement.units }}
-			</select>
-		</label>
+		{{ formField movement.fields.units value=movement.data.units options=CONFIG.distanceUnits.localizedOptions
+		             localize=true partId=rootId }}
 	</fieldset>
+
+	{{#if pace}}
+		<fieldset>
+			<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.pace.label" }}</legend>
+			{{#each pace.types}}
+				{{ formField field name=name value=value label=label rootId=@root.partId }}
+			{{/each}}
+			{{ formField pace.fields.units value=pace.data.units options=CONFIG.paceUnits.localizedOptions
+			             localize=true partId=rootId }}
+		</fieldset>
+	{{/if}}
+
 	<fieldset>
 		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.tags.label" }}</legend>
 		{{> "blackFlag.trait-list" choices=tagOptions prefix="tags" }}
 	</fieldset>
+
 	<fieldset>
 		<legend>{{ localize "BF.MOVEMENT.FIELDS.traits.movement.custom.label" }}</legend>
 		<ul class="configuration-list">
-			{{#each custom}}
+			{{#each movement.data.custom}}
 				<li>
 					<div class="item-name full-width">
 						<input type="text" name="custom.{{ @index }}" value="{{ this }}">
 					</div>
 					<div class="item-controls">
-						<button class="link-button" type="button" data-action="delete" data-index="{{ @index }}"
+						<button class="link-button" type="button" data-action="deleteCustom" data-index="{{ @index }}"
 										data-tooltip="BF.MOVEMENT.Action.DeleteCustom"
 										aria-label="{{ localize 'BF.MOVEMENT.Action.DeleteCustom' }}">
 							<i class="fa-solid fa-trash" inert></i>
@@ -43,10 +55,11 @@
 				</li>
 			{{/each}}
 			<li class="add-control">
-				<button class="link-button" type="button" data-action="add">
+				<button class="link-button" type="button" data-action="addCustom">
 					<i class="fa-solid fa-plus" inert></i> {{ localize "BF.MOVEMENT.Action.AddCustom" }}
 				</button>
 			</li>
 		</ul>
 	</fieldset>
-</form>
+
+</section>

@@ -4,12 +4,6 @@
 			<input name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize 'Name' }}"
 			       form="{{ appID }}-main-form" {{ disabled (not modes.editing) }}>
 		</h1>
-		<label data-tooltip="{{ localize 'BF.ExperiencePoints.LabelSpecific' value=system.xpValue }}<br>
-			     {{ blackFlag-number system.attributes.proficiency sign=true }}"
-		       data-tooltip-direction="RIGHT">
-			<span>{{ localize "BF.ChallengeRating.Abbreviation" }}</span>
-			<input type="text" name="system.attributes.cr" value="{{ cr }}" {{disabled (not modes.editing)}}>
-		</label>
 	</header>
 
 	<nav class="sheet-navigation tabs" data-group="primary">
@@ -22,7 +16,7 @@
 			{{ blackFlag-notificationBadge actor section="features" }}
 		</a>
 		<a data-tab="biography">
-			{{ localize "BF.Sheet.Tab.Biography" }}
+			{{ localize "BF.Sheet.Tab.Description" }}
 			{{ blackFlag-notificationBadge actor section="biography" }}
 		</a>
 		<a data-tab="effects">
@@ -33,7 +27,7 @@
 
 	<div class="sheet-body">
 		<div class="tab flex-tab statblock-tab" data-group="primary" data-tab="main">
-			{{> "blackFlag.npc-main" }}
+			{{> "blackFlag.vehicle-main" }}
 		</div>
 		<div class="tab flex-tab" data-group="primary" data-tab="features">
 			{{> "blackFlag.npc-features" }}

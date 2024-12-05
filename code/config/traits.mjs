@@ -54,8 +54,8 @@ export const traits = {
 	},
 	vehicles: {
 		labels: {
-			title: "BF.Vehicle.Label[other]",
-			localization: "BF.Vehicle.Label"
+			title: "BF.VEHICLE.Label[other]",
+			localization: "BF.VEHICLE.Label"
 		},
 		icon: "systems/black-flag/artwork/traits/vehicles.svg",
 		type: "proficiency",

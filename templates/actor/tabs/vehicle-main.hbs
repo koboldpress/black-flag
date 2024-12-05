@@ -1,0 +1,176 @@
+<section>
+	<div class="type">
+		{{#if modes.editing}}
+			<button type="button" class="link-button" data-action="config" data-type="type"
+							data-tooltip="BF.Size.Action.Configure"
+							aria-label="{{ localize 'BF.Size.Action.Configure' }}">
+				<i class="fa-solid fa-cog" inert></i>
+			</button>
+		{{/if}}
+		<span>{{ labels.sizeAndType }}</span>
+	</div>
+
+	<div class="stats">
+		{{#if editable}}
+			<label class="stats__narrow">
+				<span>{{ localize "BF.ArmorClass.Label" }}</span>
+				<input type="number" name="system.attributes.ac.value" value="{{ source.attributes.ac.value }}">
+			</label>
+			<label class="stats__narrow">
+				<span>{{ localize "BF.DAMAGE.Threshold" }}</span>
+				<input type="number" name="system.attributes.ac.threshold" value="{{ source.attributes.ac.threshold }}">
+			</label>
+		{{else}}
+		<label>
+			<span>
+				{{ localize "BF.ArmorClass.Label" }}
+			</span>
+			<span>
+				{{ localize "BF.VEHICLE.ArmorClassThreshold"
+				            ac=(blackFlag-number system.attributes.ac.value)
+										threshold=(blackFlag-number system.attributes.ac.threshold) }}
+			</span>
+		</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.HitPoint.Label[other]" }}</span>
+			{{#if modes.editing}}
+				<span>{{ system.attributes.hp.value }}</span>
+				<span class="separator">/</span>
+				<input type="number" name="system.attributes.hp.max" value="{{ source.attributes.hp.max }}" step="1" min="0">
+			{{else}}
+				<input type="text" name="system.attributes.hp.value" value="{{ system.attributes.hp.value }}">
+				<span class="separator">/</span>
+				<span>{{ system.attributes.hp.max }}</span>
+			{{/if}}
+		</label>
+		<label>
+			<span>
+				{{#if modes.editing}}
+					<button type="button" class="link-button" data-action="config" data-type="movement"
+									data-tooltip="BF.Speed.Action.Configure"
+									aria-label="{{ localize 'BF.Speed.Action.Configure' }}">
+						<i class="fa-solid fa-cog" inert></i>
+					</button>
+				{{/if}}
+				{{ localize "BF.Speed.Label" }}
+			</span>
+			<span>{{ traits.speed }}</span>
+		</label>
+		{{#if traits.vulnerabilities}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+										data-tooltip="BF.Resistance.Action.Configure"
+										aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+							<i class="fa-solid fa-cog" inert></i>
+						</button>
+					{{/if}}
+					{{ localize "BF.Vulnerability.Short" }}
+				</span>
+				<span>{{{ traits.vulnerabilities }}}</span>
+			</label>
+		{{/if}}
+		{{#if traits.resistances}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+										data-tooltip="BF.Resistance.Action.Configure"
+										aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+							<i class="fa-solid fa-cog" inert></i>
+						</button>
+					{{/if}}
+					{{ localize "BF.Resistance.Short" }}
+				</span>
+				<span>{{{ traits.resistances }}}</span>
+			</label>
+		{{/if}}
+		{{#if traits.immunities}}
+			<label>
+				<span>
+					{{#if modes.editing}}
+						<button type="button" class="link-button" data-action="config" data-type="resistance"
+										data-tooltip="BF.Resistance.Action.Configure"
+										aria-label="{{ localize 'BF.Resistance.Action.Configure' }}">
+							<i class="fa-solid fa-cog" inert></i>
+						</button>
+					{{/if}}
+					{{ localize "BF.Immunity.Short" }}
+				</span>
+				<span>{{{ traits.immunities }}}</span>
+			</label>
+		{{/if}}
+		<label>
+			<span>{{ localize "BF.Initiative.Label" }}</span>
+			{{#if editable}}
+				<input type="number" name="system.initiative" value="{{ source.initiative }}">
+			{{else}}
+				<button type="button" class="link-button modifier-roll" data-action="roll" data-sub-action="initiative">
+					<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
+					{{ blackFlag-number system.initiative sign=true }}
+				</button>
+			{{/if}}
+		</label>
+		<label class="stats__narrow">
+			<span>
+				{{ localize "BF.VEHICLE.FIELDS.attributes.crew.label" }}
+			</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.attributes.crew.required" value="{{ source.attributes.crew.required }}">
+			{{else}}
+				<span>{{ blackFlag-number system.attributes.crew.required }}</span>
+			{{/if}}
+		</label>
+		<label class="stats__narrow">
+			<span>
+				{{ localize "BF.VEHICLE.FIELDS.attributes.passengers.label" }}
+			</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.attributes.passengers.max" value="{{ source.attributes.passengers.max }}">
+			{{else}}
+				<span>{{ blackFlag-number system.attributes.passengers.max }}</span>
+			{{/if}}
+		</label>
+		<label>
+			<span>
+				{{ localize "BF.VEHICLE.FIELDS.attributes.cargo.max.label" }}
+			</span>
+			{{#if modes.editing}}
+				<input type="number" name="system.attributes.cargo.max" value="{{ source.attributes.cargo.max }}">
+				<select name="system.attributes.cargo.units">
+					{{ selectOptions CONFIG.weightUnits.localizedOptions selected=source.attributes.cargo.units }}
+				</select>
+			{{else}}
+				<span>{{ system.attributes.cargo.label }}</span>
+			{{/if}}
+		</label>
+	</div>
+	
+	<div class="abilities">
+		{{#each system.abilities}}
+			<div data-ability="{{ @key }}">
+				<label class="name" for="{{ @root.appID }}-ability-{{ @key }}">
+					{{ lookup @root.CONFIG.abilities.localizedAbbreviations @key }}</span>
+				</label>
+				{{#if @root.editable}}
+					<input id="{{ @root.appID }}-ability-{{ @key }}" type="number" name="system.abilities.{{ @key }}.mod"
+								 value="{{ _source.mod }}" placeholder="0" step="1">
+				{{else if valid}}
+					<span id="{{ @root.appID }}-ability-{{ @key }}">
+						<button class="link-button modifier-roll" type="button" data-action="roll" data-sub-action="ability-check"
+										data-ability="{{ @key }}">
+							<blackFlag-icon src="systems/black-flag/artwork/interface/dice/d20.svg" inert></blackFlag-icon>
+							{{ blackFlag-number mod sign=true }}
+						</button>
+					</span>
+				{{else}}
+					<span>&mdash;</span>
+				{{/if}}
+			</div>
+		{{/each}}
+	</div>
+
+	{{> "blackFlag.statblock-actions" }}
+</section>

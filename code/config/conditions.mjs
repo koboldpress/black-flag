@@ -134,6 +134,21 @@ localizeConfig(conditions);
 /* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
 
 /**
+ * Various effects of conditions and which conditions apply it. Either keys for the conditions,
+ * and with a number appended for a level of exhaustion.
+ * @enum {Set<string>}
+ */
+export const conditionEffects = {
+	noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
+	halfMovement: new Set(["exhaustion-2"]),
+	crawl: new Set(["prone", "exceedingCarryingCapacity"]),
+	petrification: new Set(["petrified"]),
+	halfHealth: new Set(["exhaustion-4"])
+};
+
+/* <><><><> <><><><> <><><><> <><><><> <><><><> <><><><> */
+
+/**
  * Extra status effects not specified in `conditions`. If the ID matches a core-provided effect, then this
  * data will be merged into the core data.
  * @enum {object}

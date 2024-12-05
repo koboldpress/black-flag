@@ -160,6 +160,9 @@ export const featureCategories = {
 	},
 	talent: {
 		localization: "BF.Feature.Category.Talent"
+	},
+	vehicle: {
+		localization: "BF.Feature.Category.Vehicle"
 	}
 };
 localizeConfig(featureCategories, { sort: false });

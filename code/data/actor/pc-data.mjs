@@ -12,6 +12,7 @@ import EncumbranceTemplate from "./templates/encumbrance-template.mjs";
 import InitiativeTemplate from "./templates/initiative-template.mjs";
 import LanguagesTemplate from "./templates/languages-template.mjs";
 import ModifiersTemplate from "./templates/modifiers-template.mjs";
+import ResistancesTemplate from "./templates/resistances-template.mjs";
 import SpellcastingTemplate from "./templates/spellcasting-template.mjs";
 import TraitsTemplate from "./templates/traits-template.mjs";
 
@@ -24,6 +25,7 @@ export default class PCData extends ActorDataModel.mixin(
 	InitiativeTemplate,
 	LanguagesTemplate,
 	ModifiersTemplate,
+	ResistancesTemplate,
 	SpellcastingTemplate,
 	TraitsTemplate
 ) {
@@ -169,7 +171,7 @@ export default class PCData extends ActorDataModel.mixin(
 					new SchemaField({
 						proficiency: new ProficiencyField({ rounding: false }, { initial: { multiplier: 1 } })
 					}),
-					{ label: "BF.Vehicle.Label[other]" }
+					{ label: "BF.VEHICLE.Label[other]" }
 				),
 				weapons: new SchemaField({
 					value: new SetField(new StringField()),
@@ -349,6 +351,7 @@ export default class PCData extends ActorDataModel.mixin(
 		this.prepareDerivedEncumbrance(rollData);
 		this.prepareLanguages();
 		this.prepareDerivedModifiers();
+		this.prepareDerivedResistances();
 		this.prepareDerivedTraits(rollData);
 
 		this.prepareDerivedAbilities(rollData);

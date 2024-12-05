@@ -237,12 +237,9 @@
 		"Token": "Token"
 	},
 	"Category": {
-		"Person": {
-			"Label": "Person"
-		},
-		"Place": {
-			"Label": "Place"
-		}
+		"Person": "Person",
+		"Place": "Place",
+		"Thing": "Thing"
 	},
 	"Type": {
 		"Lair[one]": "Lair",
@@ -250,7 +247,9 @@
 		"NPC[one]": "Non-Player Character",
 		"NPC[other]": "Non-Player Characters",
 		"PC[one]": "Player Character",
-		"PC[other]": "Player Characters"
+		"PC[other]": "Player Characters",
+		"Vehicle[one]": "Vehicle",
+		"Vehicle[other]": "Vehicles"
 	}
 },
 
@@ -1429,6 +1428,7 @@
 		"All": "All Sources",
 		"Nonmagical": "Nonmagical Sources"
 	},
+	"Threshold": "Damage Threshold",
 	"Type": {
 		"Label": "Damage Type",
 		"Acid": "Acid",
@@ -1506,20 +1506,7 @@
 },
 
 "BF.Distance": {
-	"Label": "Distance",
-	"Unit": {
-		"Label": "Distance Units",
-		"Foot": {
-			"Label[one]": "Foot",
-			"Label[other]": "Feet",
-			"Abbreviation": "ft"
-		},
-		"Mile": {
-			"Label[one]": "Mile",
-			"Label[other]": "Miles",
-			"Abbreviation": "mi"
-		}
-	}
+	"Label": "Distance"
 },
 
 "BF.DURATION": {
@@ -1705,7 +1692,9 @@
 		"Subclass[one]": "Subclass Feature",
 		"Subclass[other]": "Subclass Features",
 		"Talent[one]": "Talent Option",
-		"Talent[other]": "Talent Options"
+		"Talent[other]": "Talent Options",
+		"Vehicle[one]": "Vehicle Feature",
+		"Vehicle[other]": "Vehicle Features"
 	},
 	"Enabled": "Enabled",
 	"Details": "Feature Details",
@@ -2343,6 +2332,12 @@
 				},
 				"units": {
 					"label": "Speed Units"
+				}
+			},
+			"pace": {
+				"label": "Travel Pace",
+				"units": {
+					"label": "Pace Units"
 				}
 			}
 		}
@@ -2989,7 +2984,8 @@
 		"Map": "Black Flag Map Location Journal Page Sheet",
 		"NPC": "Black Flag NPC Sheet",
 		"PC": "Black Flag PC Sheet",
-		"Rule": "Black Flag Rule Journal Page Sheet"
+		"Rule": "Black Flag Rule Journal Page Sheet",
+		"Vehicle": "Black Flag Vehicle Sheet"
 	},
 	"Sorting": {
 		"Mode": {
@@ -3852,6 +3848,49 @@
 	"Type": "Type"
 },
 
+"BF.UNITS": {
+	"DISTANCE": {
+		"Label": "Distance Units",
+		"Foot": {
+			"Label": "Feet",
+			"Abbreviation": "ft"
+		},
+		"Mile": {
+			"Label": "Miles",
+			"Abbreviation": "mi"
+		}
+	},
+	"PACE": {
+		"Label": "Travel Pace Units",
+		"MilePerHour": {
+			"Label": "Miles Per Hour",
+			"Abbreviation": "mph"
+		}
+	},
+	"VOLUME": {
+		"Label": "Volume Units",
+		"CubicFeet": {
+			"Label": "Cubic Feet",
+			"Abbreviation": "ft^3"
+		}
+	},
+	"WEIGHT": {
+		"Label": "Weight Units",
+		"Ounce": {
+			"Label": "Ounces",
+			"Abbreviation": "oz"
+		},
+		"Pound": {
+			"Label": "Pounds",
+			"Abbreviation": "lb"
+		},
+		"Ton": {
+			"Label": "Tons",
+			"Abbreviation": "tn"
+		}
+	}
+},
+
 "BF.Uses": {
 	"Label": "Limited Uses",
 	"Short": "Uses",
@@ -3901,19 +3940,71 @@
 	}
 },
 
-"BF.Vehicle": {
+"BF.VEHICLE": {
 	"Label[one]": "Vehicle",
 	"Label[other]": "Vehicles",
 	"Action": {
 		"CheckGeneric": "Vehicle Check",
 		"CheckSpecific": "{vehicle} Check"
 	},
+	"ArmorClassThreshold": "{ac} (damage threshold {threshold})",
 	"Category": {
+		"Air[one]": "Air Vehicle",
+		"Air[other]": "Air Vehicles",
 		"Land[one]": "Land Vehicle",
 		"Land[other]": "Land Vehicles",
 		"Water[one]": "Water Vehicle",
 		"Water[other]": "Water Vehicles"
 	},
+	"Dimensions": "{length} by {width}",
+	"FIELDS": {
+		"attributes": {
+			"cargo": {
+				"label": "Cargo",
+				"max": {
+					"label": "Cargo Capacity"
+				},
+				"units": {
+					"label": "Cargo Units"
+				}
+			},
+			"crew": {
+				"label": "Crew",
+				"required": {
+					"label": "Required Crew"
+				}
+			},
+			"passengers": {
+				"label": "Passengers",
+				"max": {
+					"label": "Passenger Capacity"
+				}
+			}
+		},
+		"traits": {
+			"dimensions": {
+				"label": "Dimensions",
+				"length": {
+					"label": "Length"
+				},
+				"units": {
+					"label": "Units"
+				},
+				"width": {
+					"label": "Width"
+				}
+			},
+			"size": {
+				"label": "Size"
+			},
+			"type": {
+				"value": {
+					"label": "Vehicle Type"
+				}
+			}
+		}
+	},
+	"FormattedPace": "{speed}, {perHour} ({perDay})",
 	"Listed": "Listed Vehicles"
 },
 
@@ -3931,15 +4022,7 @@
 },
 
 "BF.Volume": {
-	"Label": "Volume",
-	"Unit": {
-		"Label": "Volume Units",
-		"CubicFeet": {
-			"Label[one]": "Cubic Foot",
-			"Label[other]": "Cubic Feet",
-			"Abbreviation": "ft^3"
-		}
-	}
+	"Label": "Volume"
 },
 
 "BF.WEAPON": {
@@ -4073,25 +4156,7 @@
 },
 
 "BF.Weight": {
-	"Label": "Weight",
-	"Unit": {
-		"Label": "Weight Units",
-		"Pound": {
-			"Label[one]": "Pound",
-			"Label[other]": "Pounds",
-			"Abbreviation": "lb"
-		},
-		"Ounce": {
-			"Label[one]": "Ounce",
-			"Label[other]": "Ounces",
-			"Abbreviation": "oz"
-		},
-		"Ton": {
-			"Label[one]": "Ton",
-			"Label[other]": "Tons",
-			"Abbreviation": "tn"
-		}
-	}
+	"Label": "Weight"
 },
 
 "BF.WELCOME": {
